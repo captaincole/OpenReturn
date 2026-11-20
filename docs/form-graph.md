@@ -60,6 +60,48 @@ The golden suite ran 25 scenarios.
 | Form 8283 | Federal 2025 | 0 | 117 | 0 | 0 | 0 | 117 | 0 | 0 |
 | Form 8801 | Federal 2025 | 0 | 57 | 0 | 0 | 0 | 57 | 0 | 0 |
 | Form 8814 | Federal 2025 | 0 | 24 | 0 | 0 | 0 | 24 | 0 | 0 |
+| Schedule F | Federal 2025 | 0 | 89 | 0 | 0 | 0 | 89 | 0 | 0 |
+| Form 461 | Federal 2025 | 0 | 16 | 0 | 0 | 0 | 16 | 0 | 0 |
+| Form 965-A | Federal 2025 | 0 | 391 | 0 | 0 | 0 | 391 | 0 | 0 |
+| Form 2106 | Federal 2025 | 0 | 82 | 0 | 0 | 0 | 82 | 0 | 0 |
+| Form 2555 | Federal 2025 | 0 | 160 | 0 | 0 | 0 | 160 | 0 | 0 |
+| Form 3800 | Federal 2025 | 0 | 1635 | 0 | 0 | 0 | 1635 | 0 | 0 |
+| Form 3903 | Federal 2025 | 0 | 10 | 0 | 0 | 0 | 10 | 0 | 0 |
+| Form 4136 | Federal 2025 | 0 | 276 | 0 | 0 | 0 | 276 | 0 | 0 |
+| Form 4137 | Federal 2025 | 0 | 33 | 0 | 0 | 0 | 33 | 0 | 0 |
+| Form 4255 | Federal 2025 | 0 | 483 | 0 | 0 | 0 | 483 | 0 | 0 |
+| Form 4563 | Federal 2025 | 0 | 45 | 0 | 0 | 0 | 45 | 0 | 0 |
+| Form 4797 | Federal 2025 | 0 | 182 | 0 | 0 | 0 | 182 | 0 | 0 |
+| Form 4835 | Federal 2025 | 0 | 62 | 0 | 0 | 0 | 62 | 0 | 0 |
+| Form 4970 | Federal 2025 | 0 | 63 | 0 | 0 | 0 | 63 | 0 | 0 |
+| Form 4972 | Federal 2025 | 0 | 58 | 0 | 0 | 0 | 58 | 0 | 0 |
+| Form 5329 | Federal 2025 | 0 | 75 | 0 | 0 | 0 | 75 | 0 | 0 |
+| Form 5471 | Federal 2025 | 0 | 436 | 0 | 0 | 0 | 436 | 0 | 0 |
+| Form 6198 | Federal 2025 | 0 | 34 | 0 | 0 | 0 | 34 | 0 | 0 |
+| Form 6252 | Federal 2025 | 0 | 49 | 0 | 0 | 0 | 49 | 0 | 0 |
+| Form 8396 | Federal 2025 | 0 | 26 | 0 | 0 | 0 | 26 | 0 | 0 |
+| Form 8611 | Federal 2025 | 0 | 37 | 0 | 0 | 0 | 37 | 0 | 0 |
+| Form 8615 | Federal 2025 | 0 | 32 | 0 | 0 | 0 | 32 | 0 | 0 |
+| Form 8621 | Federal 2025 | 0 | 151 | 0 | 0 | 0 | 151 | 0 | 0 |
+| Form 8697 | Federal 2025 | 0 | 98 | 0 | 0 | 0 | 98 | 0 | 0 |
+| Form 8815 | Federal 2025 | 0 | 39 | 0 | 0 | 0 | 39 | 0 | 0 |
+| Form 8828 | Federal 2025 | 0 | 33 | 0 | 0 | 0 | 33 | 0 | 0 |
+| Form 8834 | Federal 2025 | 0 | 11 | 0 | 0 | 0 | 11 | 0 | 0 |
+| Form 8839 | Federal 2025 | 0 | 100 | 0 | 0 | 0 | 100 | 0 | 0 |
+| Form 8853 | Federal 2025 | 0 | 38 | 0 | 0 | 0 | 38 | 0 | 0 |
+| Form 8859 | Federal 2025 | 0 | 9 | 0 | 0 | 0 | 9 | 0 | 0 |
+| Form 8863 | Federal 2025 | 0 | 77 | 0 | 0 | 0 | 77 | 0 | 0 |
+| Form 8880 | Federal 2025 | 0 | 23 | 0 | 0 | 0 | 23 | 0 | 0 |
+| Form 8888 | Federal 2025 | 0 | 19 | 0 | 0 | 0 | 19 | 0 | 0 |
+| Form 8911 | Federal 2025 | 0 | 15 | 0 | 0 | 0 | 15 | 0 | 0 |
+| Form 8912 | Federal 2025 | 0 | 218 | 0 | 0 | 0 | 218 | 0 | 0 |
+| Form 8915-F | Federal 2025 | 0 | 95 | 0 | 0 | 0 | 95 | 0 | 0 |
+| Form 8919 | Federal 2025 | 0 | 39 | 0 | 0 | 0 | 39 | 0 | 0 |
+| Form 8933 | Federal 2025 | 0 | 141 | 0 | 0 | 0 | 141 | 0 | 0 |
+| Form 8936 | Federal 2025 | 0 | 31 | 0 | 0 | 0 | 31 | 0 | 0 |
+| Form 8938 | Federal 2025 | 0 | 131 | 0 | 0 | 0 | 131 | 0 | 0 |
+| Form 8978 | Federal 2025 | 0 | 91 | 0 | 0 | 0 | 91 | 0 | 0 |
+| Form 8992 | Federal 2025 | 0 | 14 | 0 | 0 | 0 | 14 | 0 | 0 |
 | Schedule D (540) | California 2025 | 1 | 125 | 0 | 0 | 0 | 125 | 0 | 0 |
 | FTB 3885A | California 2025 | 1 | 65 | 14 | 0 | 51 | 0 | 0 | 0 |
 | Schedule CA (540) | California 2025 | 10 | 253 | 98 | 0 | 20 | 135 | 5 | 3 |
@@ -646,6 +688,342 @@ For each form: the fields that are not verified and that other fields read, by t
 
 24 more not checked, each of which feeds fewer fields.
 
+### Schedule F
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 89 verified, 89 not checked
+
+89 more not checked, each of which feeds fewer fields.
+
+### Form 461
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 16 verified, 16 not checked
+
+16 more not checked, each of which feeds fewer fields.
+
+### Form 965-A
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 391 verified, 391 not checked
+
+391 more not checked, each of which feeds fewer fields.
+
+### Form 2106
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 82 verified, 82 not checked
+
+82 more not checked, each of which feeds fewer fields.
+
+### Form 2555
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 160 verified, 160 not checked
+
+160 more not checked, each of which feeds fewer fields.
+
+### Form 3800
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 1635 verified, 1635 not checked
+
+1635 more not checked, each of which feeds fewer fields.
+
+### Form 3903
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 10 verified, 10 not checked
+
+10 more not checked, each of which feeds fewer fields.
+
+### Form 4136
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 276 verified, 276 not checked
+
+276 more not checked, each of which feeds fewer fields.
+
+### Form 4137
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 33 verified, 33 not checked
+
+33 more not checked, each of which feeds fewer fields.
+
+### Form 4255
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 483 verified, 483 not checked
+
+483 more not checked, each of which feeds fewer fields.
+
+### Form 4563
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 45 verified, 45 not checked
+
+45 more not checked, each of which feeds fewer fields.
+
+### Form 4797
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 182 verified, 182 not checked
+
+182 more not checked, each of which feeds fewer fields.
+
+### Form 4835
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 62 verified, 62 not checked
+
+62 more not checked, each of which feeds fewer fields.
+
+### Form 4970
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 63 verified, 63 not checked
+
+63 more not checked, each of which feeds fewer fields.
+
+### Form 4972
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 58 verified, 58 not checked
+
+58 more not checked, each of which feeds fewer fields.
+
+### Form 5329
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 75 verified, 75 not checked
+
+75 more not checked, each of which feeds fewer fields.
+
+### Form 5471
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 436 verified, 436 not checked
+
+436 more not checked, each of which feeds fewer fields.
+
+### Form 6198
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 34 verified, 34 not checked
+
+34 more not checked, each of which feeds fewer fields.
+
+### Form 6252
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 49 verified, 49 not checked
+
+49 more not checked, each of which feeds fewer fields.
+
+### Form 8396
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 26 verified, 26 not checked
+
+26 more not checked, each of which feeds fewer fields.
+
+### Form 8611
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 37 verified, 37 not checked
+
+37 more not checked, each of which feeds fewer fields.
+
+### Form 8615
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 32 verified, 32 not checked
+
+32 more not checked, each of which feeds fewer fields.
+
+### Form 8621
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 151 verified, 151 not checked
+
+151 more not checked, each of which feeds fewer fields.
+
+### Form 8697
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 98 verified, 98 not checked
+
+98 more not checked, each of which feeds fewer fields.
+
+### Form 8815
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 39 verified, 39 not checked
+
+39 more not checked, each of which feeds fewer fields.
+
+### Form 8828
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 33 verified, 33 not checked
+
+33 more not checked, each of which feeds fewer fields.
+
+### Form 8834
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 11 verified, 11 not checked
+
+11 more not checked, each of which feeds fewer fields.
+
+### Form 8839
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 100 verified, 100 not checked
+
+100 more not checked, each of which feeds fewer fields.
+
+### Form 8853
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 38 verified, 38 not checked
+
+38 more not checked, each of which feeds fewer fields.
+
+### Form 8859
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 9 verified, 9 not checked
+
+9 more not checked, each of which feeds fewer fields.
+
+### Form 8863
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 77 verified, 77 not checked
+
+77 more not checked, each of which feeds fewer fields.
+
+### Form 8880
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 23 verified, 23 not checked
+
+23 more not checked, each of which feeds fewer fields.
+
+### Form 8888
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 19 verified, 19 not checked
+
+19 more not checked, each of which feeds fewer fields.
+
+### Form 8911
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 15 verified, 15 not checked
+
+15 more not checked, each of which feeds fewer fields.
+
+### Form 8912
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 218 verified, 218 not checked
+
+218 more not checked, each of which feeds fewer fields.
+
+### Form 8915-F
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 95 verified, 95 not checked
+
+95 more not checked, each of which feeds fewer fields.
+
+### Form 8919
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 39 verified, 39 not checked
+
+39 more not checked, each of which feeds fewer fields.
+
+### Form 8933
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 141 verified, 141 not checked
+
+141 more not checked, each of which feeds fewer fields.
+
+### Form 8936
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 31 verified, 31 not checked
+
+31 more not checked, each of which feeds fewer fields.
+
+### Form 8938
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 131 verified, 131 not checked
+
+131 more not checked, each of which feeds fewer fields.
+
+### Form 8978
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 91 verified, 91 not checked
+
+91 more not checked, each of which feeds fewer fields.
+
+### Form 8992
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 14 verified, 14 not checked
+
+14 more not checked, each of which feeds fewer fields.
+
 ### Schedule D (540)
 
 - Reads: none
@@ -965,56 +1343,56 @@ A blank field names the form that it waits for, in its label or its reason. Each
 
 | Form | About | Jurisdiction | Fields that wait | Fields they feed | Forms that wait |
 | --- | --- | --- | --- | --- | --- |
-| Schedule F | Profit or loss from farming | Federal 2025 | 15 | 459 | FTB 3801, Schedule 1, Schedule 1-A, Schedule CA (540), Schedule SE |
-| Form 8919 | Social security and Medicare tax on wages with no withholding | Federal 2025 | 8 | 452 | Form 1040, Form 8959, Schedule 2, Schedule CA (540), Schedule CA (540NR), Schedule SE |
-| Form 4797 | Sales of business property | Federal 2025 | 8 | 442 | Form 4684, Schedule 1, Schedule CA (540), Schedule D |
-| Form 6252 | Installment sale income | Federal 2025 | 1 | 438 | Schedule D |
-| Form 4137 | Social security and Medicare tax on tips not reported | Federal 2025 | 4 | 431 | Form 8959, Schedule 1-A, Schedule 2, Schedule SE |
-| Form 8839 | Adoption credit and employer adoption benefits | Federal 2025 | 5 | 420 | Form 1040, Schedule 3, Schedule CA (540), Schedule CA (540NR) |
-| Form 8853 | Archer MSAs and long-term care insurance contracts | Federal 2025 | 13 | 417 | FTB 3805P, Form 8889, Schedule 1, Schedule 2, Schedule CA (540), Schedule CA (540NR) |
-| Form 2555 | Foreign earned income exclusion | Federal 2025 | 12 | 412 | Form 8801, Schedule 1, Schedule 1-A, Schedule 8812, Schedule CA (540), Schedule CA (540NR) |
-| Form 4835 | Farm rental income and expenses | Federal 2025 | 2 | 410 | Schedule E |
-| Form 8815 | Exclusion of interest from savings bonds | Federal 2025 | 1 | 408 | Schedule B |
-| Form 461 | Limit on business losses | Federal 2025 | 2 | 406 | Schedule 1, Schedule CA (540) |
-| Form 5471 | Information return for certain foreign corporations | Federal 2025 | 1 | 406 | Schedule 1 |
-| Form 8992 | Global intangible low-taxed income | Federal 2025 | 1 | 406 | Schedule 1 |
-| Form 8915-F | Qualified disaster retirement plan distributions | Federal 2025 | 1 | 405 | Form 8606 |
-| Form 2106 | Employee business expenses | Federal 2025 | 4 | 402 | Schedule 1, Schedule CA (540), Schedule CA (540NR) |
-| Form 3903 | Moving expenses | Federal 2025 | 2 | 402 | Schedule 1 |
-| Form 4563 | Exclusion of income for residents of American Samoa | Federal 2025 | 2 | 203 | Schedule 1-A, Schedule 8812 |
-| Form 6198 | At-risk limits | Federal 2025 | 1 | 82 | Form 6251 |
-| Form 4255 | Recapture of credits | Federal 2025 | 12 | 52 | Schedule 2 |
-| Form 8936 | Clean vehicle credits | Federal 2025 | 4 | 50 | Schedule 2, Schedule 3 |
-| Form 8911 | Alternative fuel vehicle refueling property credit | Federal 2025 | 3 | 50 | Schedule 2, Schedule 3 |
-| Form 8933 | Carbon oxide sequestration credit | Federal 2025 | 2 | 50 | Schedule 2 |
-| Form 8978 | Partner's additional reporting year tax | Federal 2025 | 3 | 46 | Schedule 2, Schedule 3 |
-| Form 8863 | Education credits | Federal 2025 | 2 | 36 | Form 1040, Schedule 3 |
-| Form 8880 | Credit for retirement savings contributions | Federal 2025 | 1 | 36 | Schedule 3 |
-| Form 8396 | Mortgage interest credit | Federal 2025 | 1 | 34 | Schedule 3 |
-| Form 8859 | District of Columbia first-time homebuyer credit carryforward | Federal 2025 | 1 | 34 | Schedule 3 |
-| Form 3800 | General business credit | Federal 2025 | 2 | 9 | Schedule 3 |
-| Form 8834 | Qualified electric vehicle credit | Federal 2025 | 1 | 9 | Schedule 3 |
-| Form 8912 | Credit to holders of tax credit bonds | Federal 2025 | 1 | 9 | Schedule 3 |
-| Form 8621 | Passive foreign investment company shareholder | Federal 2025 | 2 | 7 | Schedule 2 |
-| Form 4970 | Tax on an accumulation distribution of a trust | Federal 2025 | 1 | 7 | Schedule 2 |
-| Form 8697 | Interest under the look-back method | Federal 2025 | 1 | 7 | Schedule 2 |
-| Form 8828 | Recapture of the federal mortgage subsidy | Federal 2025 | 1 | 7 | Schedule 2 |
-| Form 5329 | Additional taxes on retirement plans and other accounts | Federal 2025 | 2 | 6 | Schedule 2 |
-| Form 8611 | Recapture of the low-income housing credit | Federal 2025 | 1 | 6 | Schedule 2 |
-| Form 965-A | Net tax on deferred foreign income, paid in installments | Federal 2025 | 1 | 0 | Schedule 2 |
-| Form 4136 | Credit for federal tax paid on fuels | Federal 2025 | 1 | 0 | Schedule 3 |
-| Form 4972 | Tax on lump-sum distributions | Federal 2025 | 1 | 0 | Form 1040 |
-| Form 8888 | Split of the refund between accounts | Federal 2025 | 1 | 0 | Form 1040 |
+| Form 3468 | Investment credit | Federal 2025 | 227 | 0 | Form 3800, Form 4255 |
+| Form 8835 | Renewable electricity production credit | Federal 2025 | 57 | 0 | Form 3800, Form 4255 |
+| Form 7213 | Nuclear power production credit | Federal 2025 | 52 | 0 | Form 3800, Form 4255 |
+| Form 5884-A | Employee retention credit for employers affected by qualified disasters | Federal 2025 | 45 | 0 | Form 3800 |
+| Form 8881 | Credit for small employer pension plan startup costs and auto-enrollment | Federal 2025 | 45 | 0 | Form 3800 |
+| Form 7210 | Clean hydrogen production credit | Federal 2025 | 40 | 0 | Form 3800, Form 4255 |
+| Form 7211 | Clean electricity production credit | Federal 2025 | 40 | 0 | Form 3800, Form 4255 |
+| Form 7218 | Clean fuel production credit | Federal 2025 | 40 | 0 | Form 3800, Form 4255 |
+| Form 7207 | Advanced manufacturing production credit | Federal 2025 | 34 | 0 | Form 3800, Form 4255 |
+| Form 8864 | Biodiesel, renewable diesel, or sustainable aviation fuels credit | Federal 2025 | 32 | 0 | Form 3800 |
+| Form 6765 | Credit for increasing research activities | Federal 2025 | 30 | 0 | Form 3800 |
+| Form 8586 | Low-income housing credit | Federal 2025 | 25 | 0 | Form 3800, Form 8611 |
+| Form 5884 | Work opportunity credit | Federal 2025 | 24 | 0 | Form 3800 |
+| Form 6478 | Biofuel producer credit | Federal 2025 | 24 | 0 | Form 3800 |
+| Form 8846 | Credit for employer social security and Medicare taxes paid on certain employee tips | Federal 2025 | 24 | 0 | Form 3800 |
+| Form 8900 | Qualified railroad track maintenance credit | Federal 2025 | 24 | 0 | Form 3800 |
+| Form 8908 | Energy efficient home credit | Federal 2025 | 17 | 0 | Form 3800, Form 4255 |
+| Form 8820 | Orphan drug credit | Federal 2025 | 15 | 0 | Form 3800 |
+| Form 8826 | Disabled access credit | Federal 2025 | 15 | 0 | Form 3800 |
+| Form 8830 | Enhanced oil recovery credit | Federal 2025 | 15 | 0 | Form 3800 |
+| Form 8844 | Empowerment zone employment credit | Federal 2025 | 15 | 0 | Form 3800 |
+| Form 8874 | New markets credit | Federal 2025 | 15 | 0 | Form 3800 |
+| Form 8882 | Credit for employer-provided childcare facilities and services | Federal 2025 | 15 | 0 | Form 3800 |
+| Form 8896 | Low sulfur diesel fuel production credit | Federal 2025 | 15 | 0 | Form 3800 |
+| Form 8904 | Credit for oil and gas production from marginal wells | Federal 2025 | 15 | 0 | Form 3800 |
+| Form 8906 | Distilled spirits credit | Federal 2025 | 15 | 0 | Form 3800 |
+| Form 8932 | Credit for employer differential wage payments | Federal 2025 | 15 | 0 | Form 3800 |
+| Form 8941 | Credit for small employer health insurance premiums | Federal 2025 | 15 | 0 | Form 3800 |
+| Form 8994 | Employer credit for paid family and medical leave | Federal 2025 | 15 | 0 | Form 3800 |
+| Schedule J | Income averaging for farmers and fishermen | Federal 2025 | 10 | 0 | Form 4970, FTB 5870A, Form 8615 |
+| Form 5884-B | New hire retention credit | Federal 2025 | 9 | 0 | Form 3800 |
+| Form 8845 | Indian employment credit | Federal 2025 | 9 | 0 | Form 3800 |
+| Form 8847 | Credit for contributions to selected community development corporations | Federal 2025 | 9 | 0 | Form 3800 |
+| Form 8861 | Welfare-to-work credit | Federal 2025 | 9 | 0 | Form 3800 |
+| Form 8884 | New York Liberty Zone business employee credit | Federal 2025 | 9 | 0 | Form 3800 |
+| Form 8907 | Nonconventional source fuel credit | Federal 2025 | 9 | 0 | Form 3800 |
+| Form 8909 | Energy efficient appliance credit | Federal 2025 | 9 | 0 | Form 3800 |
+| Form 8910 | Alternative motor vehicle credit | Federal 2025 | 9 | 0 | Form 3800 |
+| Form 8923 | Mine rescue team training credit | Federal 2025 | 9 | 0 | Form 3800 |
+| Form 8931 | Agricultural chemicals security credit | Federal 2025 | 9 | 0 | Form 3800 |
+| Form 8942 | Qualifying therapeutic discovery project credit | Federal 2025 | 9 | 0 | Form 3800 |
+| Form 8609-A | Annual statement for the low-income housing credit | Federal 2025 | 4 | 0 | Form 8611 |
+| Form 7205 | Energy efficient commercial buildings deduction | Federal 2025 | 3 | 0 | Form 4255 |
+| Form 8824 | Like-kind exchanges | Federal 2025 | 2 | 0 | Form 4797 |
 
 ### Names not classified
 
 A form name in a blank field that no list has. Add it to `missingForms.ts`: as a form the engine lacks, or as a name that is not a form on the return.
 
-- Form 1098 (3 fields)
-- Form 1098-C (4 fields)
-- Form 1099-R (3 fields)
-- Schedule I (3 fields)
-- Schedule J (3 fields)
+Every form name in a blank field is on a list.
 
 ## Loops
 

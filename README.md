@@ -109,7 +109,7 @@ The form engine computes the return. The table shows how much of each form it ha
 <!-- coverage-table:start -->
 | Jurisdiction | Forms | Fields supported | Tested |
 | --- | --- | --- | --- |
-| Federal 2025 | 37 | **56%** (1,749 of 3,146) | 81.6% |
+| Federal 2025 | 79 | **20%** (1,749 of 8,793) | 81.1% |
 | California 2025 | 32 | **14%** (489 of 3,413) | 79.4% |
 <!-- coverage-table:end -->
 

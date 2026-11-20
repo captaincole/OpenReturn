@@ -1,0 +1,141 @@
+{
+  "formId": "form-8911",
+  "fieldCount": 15,
+  "entries": [
+    {
+      "fieldId": "form-8911.0.header.a_number_of_refueling_properties",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+          "text": "2,637"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8911.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "T-QWEXJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8911.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-XT419"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8911.0.line.1_business_credit_from_schedule_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+          "text": "5,157"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8911.0.line.10_personal_use_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "3,270"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8911.0.line.2_credit_from_partnerships_s_corporations",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+          "text": "3,444"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8911.0.line.3_business_investment_use_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+          "text": "7,533"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8911.0.line.4_personal_credit_from_schedule_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+          "text": "4,858"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8911.0.line.5_regular_tax_before_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+          "text": "5,452"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8911.0.line.6a_foreign_tax_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+          "text": "7,345"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8911.0.line.6b_certain_allowable_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "2,168"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8911.0.line.6c_total_credits_reducing_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "5,954"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8911.0.line.7_net_regular_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "5,881"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8911.0.line.8_tentative_minimum_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "5,047"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8911.0.line.9_net_tax_less_minimum_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "9,515"
+        }
+      ]
+    }
+  ]
+}

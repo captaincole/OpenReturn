@@ -1,0 +1,744 @@
+{
+  "formId": "form-2106",
+  "fieldCount": 82,
+  "entries": [
+    {
+      "fieldId": "form-2106.0.header.occupation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "T-ZDAAS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.0.header.ssn_first_3_digits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+          "text": "797"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.0.header.ssn_last_4_digits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+          "text": "6392"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.0.header.ssn_middle_2_digits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+          "text": "64"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-AES6V"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.0.line.1_vehicle_expense_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Step1[0].Line1[0].f1_06[0]",
+          "text": "6,876"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.0.line.10_total_employee_business_expenses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "7,549"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.0.line.2_parking_tolls_transportation_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Step1[0].Line2[0].f1_08[0]",
+          "text": "2,470"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.0.line.3_travel_expense_overnight_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Step1[0].Line3[0].f1_10[0]",
+          "text": "5,955"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.0.line.4_other_business_expenses_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Step1[0].Line4[0].f1_12[0]",
+          "text": "1,230"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.0.line.5_meals_expenses_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Step1[0].Line5[0].f1_16[0]",
+          "text": "7,120"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.0.line.6_total_expenses_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Step1[0].Line6[0].f1_17[0]",
+          "text": "5,845"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.0.line.6_total_expenses_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Step1[0].Line6[0].f1_18[0]",
+          "text": "2,534"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.0.line.7_employer_reimbursements_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Step2[0].Line7[0].f1_19[0]",
+          "text": "6,397"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.0.line.7_employer_reimbursements_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Step2[0].Line7[0].f1_20[0]",
+          "text": "2,252"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.0.line.8_expenses_less_reimbursements_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Step3[0].Line8[0].f1_21[0]",
+          "text": "3,376"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.0.line.8_expenses_less_reimbursements_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Step3[0].Line8[0].f1_22[0]",
+          "text": "2,661"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.0.line.9_deductible_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Step3[0].Line9[0].f1_23[0]",
+          "text": "8,581"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.0.line.9_deductible_amount_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Step3[0].Line9[0].f1_24[0]",
+          "text": "3,951"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.11_date_placed_in_service_day_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line11[0].ColA[0].f2_02[0]",
+          "text": "20"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.11_date_placed_in_service_day_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line11[0].ColB[0].f2_05[0]",
+          "text": "65"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.11_date_placed_in_service_month_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line11[0].ColA[0].f2_01[0]",
+          "text": "50"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.11_date_placed_in_service_month_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line11[0].ColB[0].f2_04[0]",
+          "text": "51"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.11_date_placed_in_service_year_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line11[0].ColA[0].f2_03[0]",
+          "text": "7287"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.11_date_placed_in_service_year_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line11[0].ColB[0].f2_06[0]",
+          "text": "6167"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.12_total_miles_driven_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line12[0].f2_07[0]",
+          "text": "2,787"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.12_total_miles_driven_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line12[0].f2_08[0]",
+          "text": "3,677"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.13_business_miles_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line13[0].f2_09[0]",
+          "text": "1,269"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.13_business_miles_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line13[0].f2_10[0]",
+          "text": "2,730"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.14_percent_business_use_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line14[0].f2_11[0]",
+          "text": "T-19GZW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.14_percent_business_use_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line14[0].f2_12[0]",
+          "text": "T-1BXI7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.15_daily_commuting_distance_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line15[0].f2_13[0]",
+          "text": "7,159"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.15_daily_commuting_distance_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line15[0].f2_14[0]",
+          "text": "2,809"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.16_commuting_miles_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line16[0].f2_15[0]",
+          "text": "4,343"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.16_commuting_miles_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line16[0].f2_16[0]",
+          "text": "3,312"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.17_other_miles_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line17[0].f2_17[0]",
+          "text": "9,786"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.17_other_miles_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line17[0].f2_18[0]",
+          "text": "4,672"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.18_available_personal_use_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.18_available_personal_use_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.19_another_vehicle_personal_use_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.19_another_vehicle_personal_use_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.20_evidence_support_deduction_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.20_evidence_support_deduction_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.21_evidence_written_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.21_evidence_written_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.22_standard_mileage_rate_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+          "text": "2,995"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.23_gasoline_oil_repairs_insurance_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Row23[0].ColA[0].f2_20[0]",
+          "text": "5,778"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.23_gasoline_oil_repairs_insurance_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Row23[0].ColB[0].f2_21[0]",
+          "text": "2,114"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.24a_vehicle_rentals_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line24a[0].ColA[0].f2_22[0]",
+          "text": "8,235"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.24a_vehicle_rentals_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line24a[0].ColB[0].f2_23[0]",
+          "text": "6,782"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.24b_inclusion_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line24b[0].ColA[0].f2_24[0]",
+          "text": "2,234"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.24b_inclusion_amount_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line24b[0].ColB[0].f2_25[0]",
+          "text": "5,288"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.24c_net_vehicle_rentals_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line24c[0].ColA[0].f2_26[0]",
+          "text": "6,635"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.24c_net_vehicle_rentals_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line24c[0].ColB[0].f2_27[0]",
+          "text": "2,226"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.25_employer_provided_vehicle_value_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line25[0].ColA[0].f2_28[0]",
+          "text": "5,040"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.25_employer_provided_vehicle_value_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line25[0].ColB[0].f2_29[0]",
+          "text": "4,228"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.26_total_actual_expenses_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line26[0].ColA[0].f2_30[0]",
+          "text": "8,316"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.26_total_actual_expenses_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line26[0].ColB[0].f2_31[0]",
+          "text": "1,819"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.27_business_share_expenses_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line27[0].ColA[0].f2_32[0]",
+          "text": "3,509"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.27_business_share_expenses_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line27[0].ColB[0].f2_33[0]",
+          "text": "4,696"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.28_depreciation_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line28[0].ColA[0].f2_34[0]",
+          "text": "8,238"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.28_depreciation_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line28[0].ColB[0].f2_35[0]",
+          "text": "5,941"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.29_total_vehicle_expenses_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line29[0].ColA[0].f2_36[0]",
+          "text": "2,186"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.29_total_vehicle_expenses_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line29[0].ColB[0].f2_37[0]",
+          "text": "3,377"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.30_cost_or_other_basis_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line30[0].ColA[0].f2_38[0]",
+          "text": "9,698"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.30_cost_or_other_basis_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line30[0].ColB[0].f2_39[0]",
+          "text": "3,196"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.31_section_179_special_allowance_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line31[0].ColA[0].f2_40[0]",
+          "text": "8,312"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.31_section_179_special_allowance_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line31[0].ColB[0].f2_41[0]",
+          "text": "9,233"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.32_business_basis_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line32[0].ColA[0].f2_42[0]",
+          "text": "2,907"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.32_business_basis_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line32[0].ColB[0].f2_43[0]",
+          "text": "5,685"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.33_depreciation_method_percentage_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line33[0].ColA[0].f2_44[0]",
+          "text": "T-152JC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.33_depreciation_method_percentage_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line33[0].ColB[0].f2_45[0]",
+          "text": "T-1ASY8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.34_depreciation_before_limit_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line34[0].ColA[0].f2_46[0]",
+          "text": "1,751"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.34_depreciation_before_limit_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line34[0].ColB[0].f2_47[0]",
+          "text": "9,136"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.35_total_depreciation_section_179_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line35[0].ColA[0].f2_48[0]",
+          "text": "9,671"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.35_total_depreciation_section_179_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line35[0].ColB[0].f2_49[0]",
+          "text": "7,959"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.36_applicable_limit_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line36[0].ColA[0].f2_50[0]",
+          "text": "8,351"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.36_applicable_limit_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line36[0].ColB[0].f2_51[0]",
+          "text": "4,380"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.37_business_share_limit_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line37[0].ColA[0].f2_52[0]",
+          "text": "9,549"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.37_business_share_limit_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line37[0].ColB[0].f2_53[0]",
+          "text": "9,344"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.38_allowed_depreciation_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line38[0].ColA[0].f2_54[0]",
+          "text": "3,311"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2106.1.line.38_allowed_depreciation_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line38[0].ColB[0].f2_55[0]",
+          "text": "2,784"
+        }
+      ]
+    }
+  ]
+}

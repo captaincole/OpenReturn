@@ -1,0 +1,2292 @@
+{
+  "form": {
+    "formId": "form-8621",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 8621, Information Return by a Shareholder of a Passive Foreign Investment Company or Qualified Electing Fund"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8621.0.header.shareholder_name",
+      "label": "Name of shareholder",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].NameAddress[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 684.008
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 332.2,
+        "y": 684.008
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_tax_year_calendar_year",
+      "label": "Shareholder tax year: calendar year 20__",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].NameAddress[0].ShareholderTaxYear[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 460.8,
+        "y": 674.009
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_street_address",
+      "label": "Number and street. If a P.O. box, see instructions.",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].NameAddress[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 660.007
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_room_suite",
+      "label": "Room or suite no.",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].NameAddress[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 259.2,
+        "y": 660.007
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_tax_year_begin_month_day",
+      "label": "Shareholder tax year: other tax year beginning (month and day)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].NameAddress[0].ShareholderTaxYear[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 374.4,
+        "y": 660.51
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_tax_year_begin_year",
+      "label": "Shareholder tax year: other tax year beginning, year 20__",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].NameAddress[0].ShareholderTaxYear[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 432.201,
+        "y": 660.51
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_tax_year_end_month_day",
+      "label": "Shareholder tax year: other tax year ending (month and day)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].NameAddress[0].ShareholderTaxYear[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 660.51
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_tax_year_end_year",
+      "label": "Shareholder tax year: other tax year ending, year 20__",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].NameAddress[0].ShareholderTaxYear[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 547.2,
+        "y": 660.51
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_city",
+      "label": "City or town",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].NameAddress[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 636.006
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_state_province",
+      "label": "State or province",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].NameAddress[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 259.2,
+        "y": 636.006
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_country",
+      "label": "Country",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].NameAddress[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 374.4,
+        "y": 636.006
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_zip_postal_code",
+      "label": "ZIP or foreign postal code",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].NameAddress[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 636.006
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_type_individual",
+      "label": "Check type of shareholder filing the return: Individual",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 194.4,
+        "y": 625.51
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_type_corporation",
+      "label": "Check type of shareholder filing the return: Corporation",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 252,
+        "y": 625.51
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_type_partnership",
+      "label": "Check type of shareholder filing the return: Partnership",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[2]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 625.51
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_type_s_corporation",
+      "label": "Check type of shareholder filing the return: S Corporation",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[3]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 625.51
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_type_nongrantor_trust",
+      "label": "Check type of shareholder filing the return: Nongrantor Trust",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[4]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 625.51
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_type_estate",
+      "label": "Check type of shareholder filing the return: Estate",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[5]",
+      "position": {
+        "page": 0,
+        "x": 532.8,
+        "y": 625.51
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.excepted_specified_foreign_assets",
+      "label": "Check if any Excepted Specified Foreign Financial Assets are reported on this form",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 566,
+        "y": 614.008
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.qualifying_insurance_corporation_election",
+      "label": "Qualifying Insurance Corporation Election — I, a shareholder of stock of a foreign corporation, elect to treat such stock as the stock of a Qualifying Insurance Corporation under the alternative facts and circumstances test within the meaning of section 1297(f)(2)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 566,
+        "y": 591.01
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.pfic_name",
+      "label": "Name of foreign corporation, passive foreign investment company (PFIC), or qualified electing fund (QEF)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].NameAddress2[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 564.006
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.pfic_ein",
+      "label": "Employer identification number (if any)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 361,
+        "y": 564.006
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8621.0.header.pfic_reference_id_number",
+      "label": "Reference ID number",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 361,
+        "y": 540.008
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.pfic_tax_year_calendar_year",
+      "label": "Tax year of foreign corporation, PFIC, or QEF: calendar year 20__",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TaxYearOfPFIC[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 564,
+        "y": 529.509
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8621.0.header.pfic_tax_year_begin_month_day",
+      "label": "Tax year of foreign corporation, PFIC, or QEF: other tax year beginning (month and day)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TaxYearOfPFIC[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 451.954,
+        "y": 516.51
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.pfic_tax_year_begin_year",
+      "label": "Tax year of foreign corporation, PFIC, or QEF: other tax year beginning, year 20__",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TaxYearOfPFIC[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 562.241,
+        "y": 516.51
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8621.0.header.pfic_address",
+      "label": "Address (Enter number, street, city or town, and country.)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].NameAddress2[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 504.008
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8621.0.header.pfic_tax_year_end_month_day",
+      "label": "Tax year of foreign corporation, PFIC, or QEF: other tax year ending (month and day)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TaxYearOfPFIC[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 402.627,
+        "y": 504.508
+      }
+    },
+    {
+      "fieldId": "form-8621.0.header.pfic_tax_year_end_year",
+      "label": "Tax year of foreign corporation, PFIC, or QEF: other tax year ending, year 20__",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TaxYearOfPFIC[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 518.4,
+        "y": 504.508
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8621.0.line.1_share_class_description",
+      "label": "Line 1 — Description of each class of shares held by the shareholder",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 280.8,
+        "y": 468.008
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.1_shares_jointly_owned_spouse",
+      "label": "Line 1 — Check if shares jointly owned with spouse",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 457.509
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.2_date_shares_acquired",
+      "label": "Line 2 — Date shares acquired during the tax year, if applicable",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 262.959,
+        "y": 432.008
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.3_shares_held_year_end",
+      "label": "Line 3 — Number of shares held at the end of the tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 242.894,
+        "y": 408.01
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.4a_share_value_0_to_50000",
+      "label": "Line 4(a) — Value of shares held at the end of the tax year: $0–50,000",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 79.2,
+        "y": 373.51
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.4b_share_value_50001_to_100000",
+      "label": "Line 4(b) — Value of shares held at the end of the tax year: $50,001–100,000",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[1]",
+      "position": {
+        "page": 0,
+        "x": 151.2,
+        "y": 373.51
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.4c_share_value_100001_to_150000",
+      "label": "Line 4(c) — Value of shares held at the end of the tax year: $100,001–150,000",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[2]",
+      "position": {
+        "page": 0,
+        "x": 244.8,
+        "y": 373.51
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.4d_share_value_150001_to_200000",
+      "label": "Line 4(d) — Value of shares held at the end of the tax year: $150,001–200,000",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[3]",
+      "position": {
+        "page": 0,
+        "x": 345.6,
+        "y": 373.51
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.4e_share_value_over_200000",
+      "label": "Line 4(e) — Value of shares held at the end of the tax year: if more than $200,000, list value",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 199.2,
+        "y": 360.008
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.5a_section_1291_box",
+      "label": "Line 5(a) — Type of PFIC: Section 1291",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 79.2,
+        "y": 313.509
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.5a_section_1291_amount",
+      "label": "Line 5(a) — Section 1291: amount of any excess distribution or gain treated as an excess distribution",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 152,
+        "y": 312.009
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.5b_section_1293_box",
+      "label": "Line 5(b) — Type of PFIC: Section 1293 (Qualified Electing Fund)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 79.2,
+        "y": 301.51
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.5b_section_1293_amount",
+      "label": "Line 5(b) — Section 1293 (Qualified Electing Fund): amount of inclusion",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 245.6,
+        "y": 300.01
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.5c_section_1296_box",
+      "label": "Line 5(c) — Type of PFIC: Section 1296 (Mark to Market)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 79.2,
+        "y": 290.008
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.5c_section_1296_amount",
+      "label": "Line 5(c) — Section 1296 (Mark to Market): amount of inclusion or deduction",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 216.8,
+        "y": 288.008
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.election_a_treat_pfic_as_qef",
+      "label": "Election A — Election To Treat the PFIC as a QEF. I, a shareholder of a PFIC, elect to treat the PFIC as a QEF.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 52.399,
+        "y": 265.51
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.election_b_extend_time_payment",
+      "label": "Election B — Election To Extend Time For Payment of Tax. I, a shareholder of a QEF, elect to extend the time for payment of tax on the undistributed earnings and profits of the QEF until this election is terminated.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 52.399,
+        "y": 251.007
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.election_c_mark_to_market",
+      "label": "Election C — Election To Mark-to-Market PFIC Stock. I, a shareholder of a PFIC, elect to mark-to-market the PFIC stock that is marketable within the meaning of section 1296(e).",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 52.399,
+        "y": 205.509
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.election_d_deemed_sale",
+      "label": "Election D — Deemed Sale Election. I, a shareholder on the first day of a PFIC's first tax year as a QEF, elect to recognize gain on the deemed sale of my interest in the PFIC.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 52.399,
+        "y": 181.508
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.election_e_deemed_dividend",
+      "label": "Election E — Deemed Dividend Election. I, a shareholder on the first day of a PFIC's first tax year as a QEF that is a controlled foreign corporation (CFC), elect to treat an amount equal to my share of the post-1986 earnings and profits of the CFC as an excess distribution.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 52.399,
+        "y": 157.51
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.election_f_gain_deemed_sale_pfic",
+      "label": "Election F — Election To Recognize Gain on Deemed Sale of PFIC. I, a shareholder of a former PFIC or a PFIC to which section 1297(d) applies, elect to treat as an excess distribution the gain recognized on the deemed sale of my interest in the PFIC on the last day of its last tax year as a PFIC under section 1297(a).",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 52.399,
+        "y": 127.508
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.election_g_deemed_dividend_1297e_pfic",
+      "label": "Election G — Deemed Dividend Election With Respect to a Section 1297(e) PFIC. I, a shareholder of a section 1297(e) PFIC, within the meaning of Regulations section 1.1297-3(a), elect to make a deemed dividend election with respect to the section 1297(e) PFIC.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 52.399,
+        "y": 98.259
+      }
+    },
+    {
+      "fieldId": "form-8621.0.line.election_h_deemed_dividend_former_pfic",
+      "label": "Election H — Deemed Dividend Election With Respect to a Former PFIC. I, a shareholder of a former PFIC, within the meaning of Regulations section 1.1298-3(a), elect to make a deemed dividend election with respect to the former PFIC.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 52.399,
+        "y": 62.509
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.6a_qef_ordinary_earnings_share",
+      "label": "Line 6a — Enter your pro rata share of the ordinary earnings of the QEF",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 708.009
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.6b_ordinary_earnings_section_951_portion",
+      "label": "Line 6b — Enter the portion of line 6a that is included in income under section 951 or that may be excluded under section 1293(g)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 684.008
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.6c_qef_ordinary_income",
+      "label": "Line 6c — Subtract line 6b from line 6a. Enter this amount on your tax return as ordinary income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 672.009
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.7a_qef_net_capital_gain_share",
+      "label": "Line 7a — Enter your pro rata share of the total net capital gain of the QEF",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 660.01
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.7b_capital_gain_section_951_portion",
+      "label": "Line 7b — Enter the portion of line 7a that is included in income under section 951 or that may be excluded under section 1293(g)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 636.009
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.7c_qef_net_long_term_gain",
+      "label": "Line 7c — Subtract line 7b from line 7a. This amount is a net long-term capital gain",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 612.008
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.8a_total_qef_income",
+      "label": "Line 8a — Add lines 6c and 7c",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 588.01
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.8b_qef_distributions",
+      "label": "Line 8b — Enter the total amount of cash and the fair market value of other property distributed or deemed distributed to you during the tax year of the QEF",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 564.009
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.8c_income_from_shares_disposed",
+      "label": "Line 8c — Enter the portion of line 8a not already included in line 8b that is attributable to shares in the QEF that you disposed of, pledged, or otherwise transferred during the tax year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 540.008
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.8d_distributions_and_dispositions_total",
+      "label": "Line 8d — Add lines 8b and 8c",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 528.009
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.8e_undistributed_qef_earnings",
+      "label": "Line 8e — Subtract line 8d from line 8a, and enter the difference (if zero or less, enter amount in brackets)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 516.01
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.9a_total_tax",
+      "label": "Line 9a — Enter the total tax for the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 480.01
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.9b_total_tax_without_line_8e",
+      "label": "Line 9b — Enter the total tax for the tax year determined without regard to the amount entered on line 8e",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 456.009
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.9c_deferred_tax_election_b",
+      "label": "Line 9c — Subtract line 9b from line 9a. This is the deferred tax, the time for payment of which is extended by making Election B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 432.008
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.10a_pfic_stock_fmv_year_end",
+      "label": "Line 10a — Enter the fair market value of your PFIC stock at the end of the tax year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 408.01
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.10b_adjusted_basis_year_end",
+      "label": "Line 10b — Enter your adjusted basis in the stock at the end of the tax year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 396.008
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.10c_mark_to_market_gain_loss",
+      "label": "Line 10c — Subtract line 10b from line 10a. If a gain, do not complete lines 11 and 12. Include this amount as ordinary income on your tax return. If a loss, go to line 11",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 372.01
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.11_unreversed_inclusions",
+      "label": "Line 11 — Enter any unreversed inclusions (as defined in section 1296(d))",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 360.008
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.12_mark_to_market_ordinary_loss",
+      "label": "Line 12 — Enter the loss from line 10c, but only to the extent of unreversed inclusions on line 11. Include this amount as an ordinary loss on your tax return",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 336.01
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.13a_stock_fmv_at_disposition",
+      "label": "Line 13a — If you sold or otherwise disposed of any section 1296 stock during the tax year: Enter the fair market value of the stock on the date of sale or disposition",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 312.009
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.13b_adjusted_basis_at_disposition",
+      "label": "Line 13b — Enter the adjusted basis of the stock on the date of sale or disposition",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 300.01
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.13c_disposition_gain_loss",
+      "label": "Line 13c — Subtract line 13b from line 13a. If a gain, do not complete line 14. Include this amount as ordinary income on your tax return. If a loss, go to line 14",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 276.009
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.14a_unreversed_inclusions_at_disposition",
+      "label": "Line 14a — Enter any unreversed inclusions (as defined in section 1296(d))",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 264.01
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.14b_disposition_ordinary_loss",
+      "label": "Line 14b — Enter the loss from line 13c, but only to the extent of unreversed inclusions on line 14a. Include this amount as an ordinary loss on your tax return",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 228.01
+      }
+    },
+    {
+      "fieldId": "form-8621.1.line.14c_disposition_loss_over_inclusions",
+      "label": "Line 14c — Enter the amount by which the loss on line 13c exceeds unreversed inclusions on line 14a",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 192.01
+      }
+    },
+    {
+      "fieldId": "form-8621.2.line.part5_currency_code",
+      "label": "Part V — Enter the three-letter currency code",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_1[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 708.009
+      }
+    },
+    {
+      "fieldId": "form-8621.2.line.15a_total_distributions_current_year",
+      "label": "Line 15a — Enter your total distributions from the section 1291 fund during the current tax year with respect to the applicable stock",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_2[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 684.008
+      }
+    },
+    {
+      "fieldId": "form-8621.2.line.15b_total_distributions_preceding_3_years",
+      "label": "Line 15b — Enter the total distributions (reduced by the portions of such distributions that were excess distributions but not included in income under section 1291(a)(1)(B)) made by the fund with respect to the applicable stock for each of the 3 years preceding the current tax year (or if shorter, the portion of the shareholder's holding period before the current tax year)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_3[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 636.009
+      }
+    },
+    {
+      "fieldId": "form-8621.2.line.15c_average_preceding_distributions",
+      "label": "Line 15c — Divide line 15b by 3.0",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_4[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 624.01
+      }
+    },
+    {
+      "fieldId": "form-8621.2.line.15d_125_percent_of_average",
+      "label": "Line 15d — Multiply line 15c by 125% (1.25)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_5[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 612.008
+      }
+    },
+    {
+      "fieldId": "form-8621.2.line.15e1_excess_distribution",
+      "label": "Line 15e(1) — Subtract line 15d from line 15a. This amount, if more than zero, is the excess distribution with respect to the applicable stock",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_6[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 552.01
+      }
+    },
+    {
+      "fieldId": "form-8621.2.line.15e2_excess_distribution_us_dollars",
+      "label": "Line 15e(2) — If the amount on line 15e(1) is in a foreign currency, convert to U.S. dollars and enter here. If line 15e(1) is in U.S. dollars, enter that amount here",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_7[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 528.009
+      }
+    },
+    {
+      "fieldId": "form-8621.2.line.15f_gain_or_loss_disposition",
+      "label": "Line 15f — Enter gain or loss from the disposition of stock of a section 1291 fund or former section 1291 fund",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_8[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 504.008
+      }
+    },
+    {
+      "fieldId": "form-8621.2.line.16b_current_year_and_pre_pfic_amounts",
+      "label": "Line 16b — Enter the total of the amounts determined in line 16a that are allocable to the current tax year and tax years before the foreign corporation became a PFIC (pre-PFIC years)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_9[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 432.008
+      }
+    },
+    {
+      "fieldId": "form-8621.2.line.16c_aggregate_increases_in_tax",
+      "label": "Line 16c — Enter the aggregate increases in tax (before credits) for each tax year in your holding period (other than the current tax year and pre-PFIC years)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_10[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 408.01
+      }
+    },
+    {
+      "fieldId": "form-8621.2.line.16d_foreign_tax_credit",
+      "label": "Line 16d — Foreign tax credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_11[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 396.008
+      }
+    },
+    {
+      "fieldId": "form-8621.2.line.16e_additional_tax",
+      "label": "Line 16e — Subtract line 16d from line 16c",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_12[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 384.009
+      }
+    },
+    {
+      "fieldId": "form-8621.2.line.16f_interest_on_tax_increases",
+      "label": "Line 16f — Determine interest on each net increase in tax determined on line 16e using the rates and methods of section 6621. Enter the aggregate amount of interest here",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_13[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 360.008
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.17_tax_year_outstanding_election_col_i",
+      "label": "Line 17 — Tax year of outstanding election, column (i)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row2[0].f4_1[0]",
+      "position": {
+        "page": 3,
+        "x": 180,
+        "y": 636.009
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.17_tax_year_outstanding_election_col_ii",
+      "label": "Line 17 — Tax year of outstanding election, column (ii)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row2[0].f4_2[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 636.009
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.17_tax_year_outstanding_election_col_iii",
+      "label": "Line 17 — Tax year of outstanding election, column (iii)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row2[0].f4_3[0]",
+      "position": {
+        "page": 3,
+        "x": 309.6,
+        "y": 636.009
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.17_tax_year_outstanding_election_col_iv",
+      "label": "Line 17 — Tax year of outstanding election, column (iv)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row2[0].f4_4[0]",
+      "position": {
+        "page": 3,
+        "x": 374.4,
+        "y": 636.009
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.17_tax_year_outstanding_election_col_v",
+      "label": "Line 17 — Tax year of outstanding election, column (v)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row2[0].f4_5[0]",
+      "position": {
+        "page": 3,
+        "x": 439.2,
+        "y": 636.009
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.17_tax_year_outstanding_election_col_vi",
+      "label": "Line 17 — Tax year of outstanding election, column (vi)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row2[0].f4_6[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 636.009
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.18_undistributed_earnings_col_i",
+      "label": "Line 18 — Undistributed earnings to which the election relates, column (i)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row3[0].f4_7[0]",
+      "position": {
+        "page": 3,
+        "x": 180,
+        "y": 612.008
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.18_undistributed_earnings_col_ii",
+      "label": "Line 18 — Undistributed earnings to which the election relates, column (ii)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row3[0].f4_8[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 612.008
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.18_undistributed_earnings_col_iii",
+      "label": "Line 18 — Undistributed earnings to which the election relates, column (iii)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row3[0].f4_9[0]",
+      "position": {
+        "page": 3,
+        "x": 309.6,
+        "y": 612.008
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.18_undistributed_earnings_col_iv",
+      "label": "Line 18 — Undistributed earnings to which the election relates, column (iv)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row3[0].f4_10[0]",
+      "position": {
+        "page": 3,
+        "x": 374.4,
+        "y": 612.008
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.18_undistributed_earnings_col_v",
+      "label": "Line 18 — Undistributed earnings to which the election relates, column (v)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row3[0].f4_11[0]",
+      "position": {
+        "page": 3,
+        "x": 439.2,
+        "y": 612.008
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.18_undistributed_earnings_col_vi",
+      "label": "Line 18 — Undistributed earnings to which the election relates, column (vi)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row3[0].f4_12[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 612.008
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.19_deferred_tax_col_i",
+      "label": "Line 19 — Deferred tax, column (i)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row4[0].f4_13[0]",
+      "position": {
+        "page": 3,
+        "x": 180,
+        "y": 600.009
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.19_deferred_tax_col_ii",
+      "label": "Line 19 — Deferred tax, column (ii)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row4[0].f4_14[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 600.009
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.19_deferred_tax_col_iii",
+      "label": "Line 19 — Deferred tax, column (iii)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row4[0].f4_15[0]",
+      "position": {
+        "page": 3,
+        "x": 309.6,
+        "y": 600.009
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.19_deferred_tax_col_iv",
+      "label": "Line 19 — Deferred tax, column (iv)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row4[0].f4_16[0]",
+      "position": {
+        "page": 3,
+        "x": 374.4,
+        "y": 600.009
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.19_deferred_tax_col_v",
+      "label": "Line 19 — Deferred tax, column (v)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row4[0].f4_17[0]",
+      "position": {
+        "page": 3,
+        "x": 439.2,
+        "y": 600.009
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.19_deferred_tax_col_vi",
+      "label": "Line 19 — Deferred tax, column (vi)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row4[0].f4_18[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 600.009
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.20_interest_accrued_deferred_tax_col_i",
+      "label": "Line 20 — Interest accrued on deferred tax (line 19) as of the filing date, column (i)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row5[0].f4_19[0]",
+      "position": {
+        "page": 3,
+        "x": 180,
+        "y": 576.008
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.20_interest_accrued_deferred_tax_col_ii",
+      "label": "Line 20 — Interest accrued on deferred tax (line 19) as of the filing date, column (ii)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row5[0].f4_20[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 576.008
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.20_interest_accrued_deferred_tax_col_iii",
+      "label": "Line 20 — Interest accrued on deferred tax (line 19) as of the filing date, column (iii)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row5[0].f4_21[0]",
+      "position": {
+        "page": 3,
+        "x": 309.6,
+        "y": 576.008
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.20_interest_accrued_deferred_tax_col_iv",
+      "label": "Line 20 — Interest accrued on deferred tax (line 19) as of the filing date, column (iv)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row5[0].f4_22[0]",
+      "position": {
+        "page": 3,
+        "x": 374.4,
+        "y": 576.008
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.20_interest_accrued_deferred_tax_col_v",
+      "label": "Line 20 — Interest accrued on deferred tax (line 19) as of the filing date, column (v)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row5[0].f4_23[0]",
+      "position": {
+        "page": 3,
+        "x": 439.2,
+        "y": 576.008
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.20_interest_accrued_deferred_tax_col_vi",
+      "label": "Line 20 — Interest accrued on deferred tax (line 19) as of the filing date, column (vi)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row5[0].f4_24[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 576.008
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.21_event_terminating_election_col_i",
+      "label": "Line 21 — Event terminating election, column (i)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row2[0].f4_25[0]",
+      "position": {
+        "page": 3,
+        "x": 180,
+        "y": 516.01
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.21_event_terminating_election_col_ii",
+      "label": "Line 21 — Event terminating election, column (ii)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row2[0].f4_26[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 516.01
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.21_event_terminating_election_col_iii",
+      "label": "Line 21 — Event terminating election, column (iii)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row2[0].f4_27[0]",
+      "position": {
+        "page": 3,
+        "x": 309.6,
+        "y": 516.01
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.21_event_terminating_election_col_iv",
+      "label": "Line 21 — Event terminating election, column (iv)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row2[0].f4_28[0]",
+      "position": {
+        "page": 3,
+        "x": 374.4,
+        "y": 516.01
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.21_event_terminating_election_col_v",
+      "label": "Line 21 — Event terminating election, column (v)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row2[0].f4_29[0]",
+      "position": {
+        "page": 3,
+        "x": 439.2,
+        "y": 516.01
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.21_event_terminating_election_col_vi",
+      "label": "Line 21 — Event terminating election, column (vi)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row2[0].f4_30[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 516.01
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.22_earnings_distributed_col_i",
+      "label": "Line 22 — Earnings distributed or deemed distributed during the tax year, column (i)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row3[0].f4_31[0]",
+      "position": {
+        "page": 3,
+        "x": 180,
+        "y": 480.01
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.22_earnings_distributed_col_ii",
+      "label": "Line 22 — Earnings distributed or deemed distributed during the tax year, column (ii)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row3[0].f4_32[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 480.01
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.22_earnings_distributed_col_iii",
+      "label": "Line 22 — Earnings distributed or deemed distributed during the tax year, column (iii)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row3[0].f4_33[0]",
+      "position": {
+        "page": 3,
+        "x": 309.6,
+        "y": 480.01
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.22_earnings_distributed_col_iv",
+      "label": "Line 22 — Earnings distributed or deemed distributed during the tax year, column (iv)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row3[0].f4_34[0]",
+      "position": {
+        "page": 3,
+        "x": 374.4,
+        "y": 480.01
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.22_earnings_distributed_col_v",
+      "label": "Line 22 — Earnings distributed or deemed distributed during the tax year, column (v)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row3[0].f4_35[0]",
+      "position": {
+        "page": 3,
+        "x": 439.2,
+        "y": 480.01
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.22_earnings_distributed_col_vi",
+      "label": "Line 22 — Earnings distributed or deemed distributed during the tax year, column (vi)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row3[0].f4_36[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 480.01
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.23_deferred_tax_due_col_i",
+      "label": "Line 23 — Deferred tax due with this return, column (i)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row4[0].f4_37[0]",
+      "position": {
+        "page": 3,
+        "x": 180,
+        "y": 456.009
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.23_deferred_tax_due_col_ii",
+      "label": "Line 23 — Deferred tax due with this return, column (ii)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row4[0].f4_38[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 456.009
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.23_deferred_tax_due_col_iii",
+      "label": "Line 23 — Deferred tax due with this return, column (iii)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row4[0].f4_39[0]",
+      "position": {
+        "page": 3,
+        "x": 309.6,
+        "y": 456.009
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.23_deferred_tax_due_col_iv",
+      "label": "Line 23 — Deferred tax due with this return, column (iv)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row4[0].f4_40[0]",
+      "position": {
+        "page": 3,
+        "x": 374.4,
+        "y": 456.009
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.23_deferred_tax_due_col_v",
+      "label": "Line 23 — Deferred tax due with this return, column (v)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row4[0].f4_41[0]",
+      "position": {
+        "page": 3,
+        "x": 439.2,
+        "y": 456.009
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.23_deferred_tax_due_col_vi",
+      "label": "Line 23 — Deferred tax due with this return, column (vi)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row4[0].f4_42[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 456.009
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.24_accrued_interest_due_col_i",
+      "label": "Line 24 — Accrued interest due with this return, column (i)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row5[0].f4_43[0]",
+      "position": {
+        "page": 3,
+        "x": 180,
+        "y": 432.008
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.24_accrued_interest_due_col_ii",
+      "label": "Line 24 — Accrued interest due with this return, column (ii)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row5[0].f4_44[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 432.008
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.24_accrued_interest_due_col_iii",
+      "label": "Line 24 — Accrued interest due with this return, column (iii)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row5[0].f4_45[0]",
+      "position": {
+        "page": 3,
+        "x": 309.6,
+        "y": 432.008
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.24_accrued_interest_due_col_iv",
+      "label": "Line 24 — Accrued interest due with this return, column (iv)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row5[0].f4_46[0]",
+      "position": {
+        "page": 3,
+        "x": 374.4,
+        "y": 432.008
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.24_accrued_interest_due_col_v",
+      "label": "Line 24 — Accrued interest due with this return, column (v)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row5[0].f4_47[0]",
+      "position": {
+        "page": 3,
+        "x": 439.2,
+        "y": 432.008
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.24_accrued_interest_due_col_vi",
+      "label": "Line 24 — Accrued interest due with this return, column (vi)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row5[0].f4_48[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 432.008
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.25_deferred_tax_outstanding_col_i",
+      "label": "Line 25 — Deferred tax outstanding after partial termination of election. Subtract line 23 from line 19, column (i)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row2[0].f4_49[0]",
+      "position": {
+        "page": 3,
+        "x": 180,
+        "y": 336.007
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.25_deferred_tax_outstanding_col_ii",
+      "label": "Line 25 — Deferred tax outstanding after partial termination of election. Subtract line 23 from line 19, column (ii)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row2[0].f4_50[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 336.007
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.25_deferred_tax_outstanding_col_iii",
+      "label": "Line 25 — Deferred tax outstanding after partial termination of election. Subtract line 23 from line 19, column (iii)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row2[0].f4_51[0]",
+      "position": {
+        "page": 3,
+        "x": 309.6,
+        "y": 336.007
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.25_deferred_tax_outstanding_col_iv",
+      "label": "Line 25 — Deferred tax outstanding after partial termination of election. Subtract line 23 from line 19, column (iv)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row2[0].f4_52[0]",
+      "position": {
+        "page": 3,
+        "x": 374.4,
+        "y": 336.007
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.25_deferred_tax_outstanding_col_v",
+      "label": "Line 25 — Deferred tax outstanding after partial termination of election. Subtract line 23 from line 19, column (v)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row2[0].f4_53[0]",
+      "position": {
+        "page": 3,
+        "x": 439.2,
+        "y": 336.007
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.25_deferred_tax_outstanding_col_vi",
+      "label": "Line 25 — Deferred tax outstanding after partial termination of election. Subtract line 23 from line 19, column (vi)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row2[0].f4_54[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 336.007
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.26_interest_accrued_after_termination_col_i",
+      "label": "Line 26 — Interest accrued after partial termination of election. Subtract line 24 from line 20, column (i)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row3[0].f4_55[0]",
+      "position": {
+        "page": 3,
+        "x": 180,
+        "y": 300.007
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.26_interest_accrued_after_termination_col_ii",
+      "label": "Line 26 — Interest accrued after partial termination of election. Subtract line 24 from line 20, column (ii)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row3[0].f4_56[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 300.007
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.26_interest_accrued_after_termination_col_iii",
+      "label": "Line 26 — Interest accrued after partial termination of election. Subtract line 24 from line 20, column (iii)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row3[0].f4_57[0]",
+      "position": {
+        "page": 3,
+        "x": 309.6,
+        "y": 300.007
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.26_interest_accrued_after_termination_col_iv",
+      "label": "Line 26 — Interest accrued after partial termination of election. Subtract line 24 from line 20, column (iv)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row3[0].f4_58[0]",
+      "position": {
+        "page": 3,
+        "x": 374.4,
+        "y": 300.007
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.26_interest_accrued_after_termination_col_v",
+      "label": "Line 26 — Interest accrued after partial termination of election. Subtract line 24 from line 20, column (v)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row3[0].f4_59[0]",
+      "position": {
+        "page": 3,
+        "x": 439.2,
+        "y": 300.007
+      }
+    },
+    {
+      "fieldId": "form-8621.3.line.26_interest_accrued_after_termination_col_vi",
+      "label": "Line 26 — Interest accrued after partial termination of election. Subtract line 24 from line 20, column (vi)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row3[0].f4_60[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 300.007
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8621/blank.pdf",
+    "ingestedAt": "2026-11-20T15:33:52.830Z",
+    "totalFields": 151,
+    "skipped": 0,
+    "catalogEntries": 151
+  }
+}

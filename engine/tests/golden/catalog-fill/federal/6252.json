@@ -1,0 +1,447 @@
+{
+  "formId": "form-6252",
+  "fieldCount": 49,
+  "entries": [
+    {
+      "fieldId": "form-6252.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-1UQLS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-QRPXR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.1_description_of_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-1F3HK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.10_adjusted_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "5,773"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.11_commissions_expenses_of_sale",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "5,800"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.12_income_recapture_form_4797",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "6,531"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.13_basis_expenses_recapture_total",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "4,547"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.14_price_less_line_13",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "9,949"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.15_excluded_gain_main_home",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "6,913"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.16_gross_profit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "6,728"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.17_liabilities_over_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "4,458"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.18_contract_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "5,290"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.19_gross_profit_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "T-1WV17"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.20_year_of_sale_line_17",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "6,638"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.21_payments_received_during_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "6,863"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.22_total_payments_this_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "5,597"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.23_payments_received_prior_years",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "6,616"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.24_installment_sale_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "4,397"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.25_ordinary_income_recapture",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+          "text": "8,635"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.26_income_less_recapture",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+          "text": "2,538"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.27_related_party_row1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+          "text": "T-102WY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.27_related_party_row2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+          "text": "T-1GVVJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.28_related_party_resold_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.28_related_party_resold_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.29a_date_of_disposition",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.29a_second_disposition_after_2_years",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.29b_stock_sold_to_issuer",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.29c_involuntary_conversion",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.29d_after_death_of_party",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[3]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.29e_no_tax_avoidance_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[4]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.2a_date_acquired",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.2b_date_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.3_sold_to_related_party_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.3_sold_to_related_party_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.30_related_party_selling_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+          "text": "5,859"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.31_contract_price_first_sale",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+          "text": "8,962"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.32_smaller_of_30_or_31",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+          "text": "1,543"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.33_total_payments_received",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+          "text": "9,133"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.34_line_32_less_payments",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_35[0]",
+          "text": "4,100"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.35_related_party_sale_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_36[0]",
+          "text": "8,953"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.36_ordinary_income_recapture",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_37[0]",
+          "text": "8,037"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.37_income_less_recapture",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_38[0]",
+          "text": "4,173"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.4_selling_price_determinable_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.4_selling_price_determinable_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.5_selling_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "1,579"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.6_liabilities_buyer_assumed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "9,687"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.7_price_less_liabilities",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "6,428"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.8_cost_or_other_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "4,896"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6252.0.line.9_depreciation_allowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "6,586"
+        }
+      ]
+    }
+  ]
+}

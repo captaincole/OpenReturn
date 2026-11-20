@@ -1,0 +1,1145 @@
+{
+  "form": {
+    "formId": "form-5329",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 5329, Additional Taxes on Qualified Plans (Including IRAs) and Other Tax-Favored Accounts"
+  },
+  "fields": [
+    {
+      "fieldId": "form-5329.0.header.taxpayer_name",
+      "label": "Name of individual subject to additional tax",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-5329.0.header.ssn",
+      "label": "Your social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 475.2,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-5329.0.header.amended_return",
+      "label": "If this is an amended return, check here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 565,
+        "y": 662.968
+      }
+    },
+    {
+      "fieldId": "form-5329.0.header.home_address",
+      "label": "Home address (number and street), or P.O. box if mail is not delivered to your home",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 152.2,
+        "y": 659.967
+      }
+    },
+    {
+      "fieldId": "form-5329.0.header.apt_no",
+      "label": "Apt. no.",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 659.967
+      }
+    },
+    {
+      "fieldId": "form-5329.0.header.city_state_zip",
+      "label": "City, town or post office, state, and ZIP code",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 152.2,
+        "y": 635.966
+      }
+    },
+    {
+      "fieldId": "form-5329.0.header.foreign_country_name",
+      "label": "Foreign country name",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 152.2,
+        "y": 611.968
+      }
+    },
+    {
+      "fieldId": "form-5329.0.header.foreign_province_state_county",
+      "label": "Foreign province/state/county",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 310.6,
+        "y": 611.968
+      }
+    },
+    {
+      "fieldId": "form-5329.0.header.foreign_postal_code",
+      "label": "Foreign postal code",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 475.2,
+        "y": 611.968
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.1_early_distributions_in_income",
+      "label": "Line 1 — Early distributions includible in income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.2_exception_number",
+      "label": "Line 2 — Enter the appropriate exception number from the instructions",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 503.968
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.2_early_distributions_not_subject",
+      "label": "Line 2 — Early distributions included on line 1 that are not subject to the additional tax",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 503.968
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.3_amount_subject_to_tax",
+      "label": "Line 3 — Amount subject to additional tax. Subtract line 2 from line 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.4_additional_tax_early_distributions",
+      "label": "Line 4 — Additional tax. Enter 10% (0.10) of line 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.5_education_able_distributions",
+      "label": "Line 5 — Distributions included in income from a Coverdell ESA, a QTP, or an ABLE account",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.6_education_able_not_subject",
+      "label": "Line 6 — Distributions included on line 5 that are not subject to the additional tax",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 395.968
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.7_education_able_amount_subject",
+      "label": "Line 7 — Amount subject to additional tax. Subtract line 6 from line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.8_additional_tax_education_able",
+      "label": "Line 8 — Additional tax. Enter 10% (0.10) of line 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.9_traditional_ira_prior_excess",
+      "label": "Line 9 — Enter your excess contributions from line 16 of your 2024 Form 5329",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.10_traditional_ira_contribution_shortfall",
+      "label": "Line 10 — If your traditional IRA contributions for 2025 are less than your maximum allowable contribution, see instructions. Otherwise, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.11_traditional_ira_distributions_in_income",
+      "label": "Line 11 — 2025 traditional IRA distributions included in income",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.12_traditional_ira_prior_excess_distributions",
+      "label": "Line 12 — 2025 distributions of prior year excess contributions to traditional IRAs",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.13_traditional_ira_add_lines_10_12",
+      "label": "Line 13 — Add lines 10, 11, and 12",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.14_traditional_ira_prior_year_excess",
+      "label": "Line 14 — Prior year excess contributions. Subtract line 13 from line 9. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.15_traditional_ira_excess_2025",
+      "label": "Line 15 — Excess contributions for 2025",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.16_traditional_ira_total_excess",
+      "label": "Line 16 — Total excess contributions. Add lines 14 and 15",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.17_additional_tax_traditional_ira",
+      "label": "Line 17 — Additional tax. Enter 6% (0.06) of the smaller of line 16 or the value of your traditional IRAs on December 31, 2025 (including 2025 contributions made in 2026)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 191.97
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.18_roth_ira_prior_excess",
+      "label": "Line 18 — Enter your excess contributions from line 24 of your 2024 Form 5329",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 143.968
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.19_roth_ira_contribution_shortfall",
+      "label": "Line 19 — If your Roth IRA contributions for 2025 are less than your maximum allowable contribution, see instructions. Otherwise, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 119.97
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.20_roth_ira_distributions",
+      "label": "Line 20 — 2025 distributions from your Roth IRAs",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 107.968
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.21_roth_ira_add_lines_19_20",
+      "label": "Line 21 — Add lines 19 and 20",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 95.969
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.22_roth_ira_prior_year_excess",
+      "label": "Line 22 — Prior year excess contributions. Subtract line 21 from line 18. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 83.97
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.23_roth_ira_excess_2025",
+      "label": "Line 23 — Excess contributions for 2025",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 71.968
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.24_roth_ira_total_excess",
+      "label": "Line 24 — Total excess contributions. Add lines 22 and 23",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 59.969
+      }
+    },
+    {
+      "fieldId": "form-5329.0.line.25_additional_tax_roth_ira",
+      "label": "Line 25 — Additional tax. Enter 6% (0.06) of the smaller of line 24 or the value of your Roth IRAs on December 31, 2025 (including 2025 contributions made in 2026)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 35.968
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.26_coverdell_prior_excess_contributions",
+      "label": "Line 26 — Enter the excess contributions from line 32 of your 2024 Form 5329",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 707.969
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.27_coverdell_contributions_under_maximum",
+      "label": "Line 27 — If the contributions to your Coverdell ESAs for 2025 were less than the maximum allowable contribution, see instructions. Otherwise, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.28_coverdell_distributions",
+      "label": "Line 28 — 2025 distributions from your Coverdell ESAs",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 671.969
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.29_coverdell_add_lines_27_28",
+      "label": "Line 29 — Add lines 27 and 28",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.30_coverdell_prior_year_excess",
+      "label": "Line 30 — Prior year excess contributions. Subtract line 29 from line 26. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 647.968
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.31_coverdell_excess_contributions_2025",
+      "label": "Line 31 — Excess contributions for 2025",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 635.969
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.32_coverdell_total_excess_contributions",
+      "label": "Line 32 — Total excess contributions. Add lines 30 and 31",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.33_coverdell_additional_tax",
+      "label": "Line 33 — Additional tax. Enter 6% (0.06) of the smaller of line 32 or the value of your Coverdell ESAs on December 31, 2025 (including 2025 contributions made in 2026)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 599.969
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.34_archer_msa_prior_excess_contributions",
+      "label": "Line 34 — Enter the excess contributions from line 40 of your 2024 Form 5329",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.35_archer_msa_contributions_under_maximum",
+      "label": "Line 35 — If the contributions to your Archer MSAs for 2025 are less than the maximum allowable contribution, see instructions. Otherwise, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.36_archer_msa_distributions",
+      "label": "Line 36 — 2025 distributions from your Archer MSAs from Form 8853, line 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.37_archer_msa_add_lines_35_36",
+      "label": "Line 37 — Add lines 35 and 36",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.38_archer_msa_prior_year_excess",
+      "label": "Line 38 — Prior year excess contributions. Subtract line 37 from line 34. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 503.968
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.39_archer_msa_excess_contributions_2025",
+      "label": "Line 39 — Excess contributions for 2025",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.40_archer_msa_total_excess_contributions",
+      "label": "Line 40 — Total excess contributions. Add lines 38 and 39",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.41_archer_msa_additional_tax",
+      "label": "Line 41 — Additional tax. Enter 6% (0.06) of the smaller of line 40 or the value of your Archer MSAs on December 31, 2025 (including 2025 contributions made in 2026)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.42_hsa_prior_excess_contributions",
+      "label": "Line 42 — Enter the excess contributions from line 48 of your 2024 Form 5329",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 395.968
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.43_hsa_contributions_under_maximum",
+      "label": "Line 43 — If the contributions to your HSAs for 2025 are less than the maximum allowable contribution, see instructions. Otherwise, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.44_hsa_distributions",
+      "label": "Line 44 — 2025 distributions from your HSAs from Form 8889, line 16",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 359.968
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.45_hsa_add_lines_43_44",
+      "label": "Line 45 — Add lines 43 and 44",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 347.969
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.46_hsa_prior_year_excess",
+      "label": "Line 46 — Prior year excess contributions. Subtract line 45 from line 42. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 335.97
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.47_hsa_excess_contributions_2025",
+      "label": "Line 47 — Excess contributions for 2025",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.48_hsa_total_excess_contributions",
+      "label": "Line 48 — Total excess contributions. Add lines 46 and 47",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.49_hsa_additional_tax",
+      "label": "Line 49 — Additional tax. Enter 6% (0.06) of the smaller of line 48 or the value of your HSAs on December 31, 2025 (including 2025 contributions made in 2026)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.50_able_excess_contributions_2025",
+      "label": "Line 50 — Excess contributions for 2025",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-5329.1.line.51_able_additional_tax",
+      "label": "Line 51 — Additional tax. Enter 6% (0.06) of the smaller of line 50 or the value of your ABLE account on December 31, 2025",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "form-5329.2.line.52a_minimum_required_distribution_corrected",
+      "label": "Line 52a — Minimum required distribution for 2025 from all qualified plans for which you received a distribution of the full amount of the excess accumulation during the correction window",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_1[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 695.97
+      }
+    },
+    {
+      "fieldId": "form-5329.2.line.52b_minimum_required_distribution_other",
+      "label": "Line 52b — Minimum required distribution for 2025 from all other plans",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_2[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-5329.2.line.53a_amount_distributed_corrected",
+      "label": "Line 53a — Amount distributed to you during 2025 from all qualified plans for which you received a distribution of the full amount of the excess accumulation during the correction window",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_3[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-5329.2.line.53b_amount_distributed_other",
+      "label": "Line 53b — Amount distributed to you during 2025 from all other plans",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_4[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 647.968
+      }
+    },
+    {
+      "fieldId": "form-5329.2.line.54a_tax_10_percent_corrected",
+      "label": "Line 54a — Subtract line 53a from line 52a and multiply the result by 10% (0.10). If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_5[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 635.969
+      }
+    },
+    {
+      "fieldId": "form-5329.2.line.54b_tax_25_percent_other",
+      "label": "Line 54b — Subtract line 53b from line 52b and multiply the result by 25% (0.25). If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_6[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-5329.2.line.55_excess_accumulation_additional_tax",
+      "label": "Line 55 — Add lines 54a and 54b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_7[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 599.969
+      }
+    },
+    {
+      "fieldId": "form-5329.2.signing.preparer_self_employed",
+      "label": "Check if self-employed",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_1[0]",
+      "position": {
+        "page": 2,
+        "x": 481.2,
+        "y": 539.967
+      }
+    },
+    {
+      "fieldId": "form-5329.2.signing.preparer_name",
+      "label": "Print/Type preparer's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_8[0]",
+      "position": {
+        "page": 2,
+        "x": 87.4,
+        "y": 527.966
+      }
+    },
+    {
+      "fieldId": "form-5329.2.signing.preparer_ptin",
+      "label": "PTIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_9[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 527.966
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-5329.2.signing.firm_name",
+      "label": "Firm's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_10[0]",
+      "position": {
+        "page": 2,
+        "x": 134.466,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-5329.2.signing.firm_ein",
+      "label": "Firm's EIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_11[0]",
+      "position": {
+        "page": 2,
+        "x": 475.2,
+        "y": 515.97
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-5329.2.signing.firm_address",
+      "label": "Firm's address",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_12[0]",
+      "position": {
+        "page": 2,
+        "x": 144,
+        "y": 503.968
+      }
+    },
+    {
+      "fieldId": "form-5329.2.signing.firm_phone",
+      "label": "Phone no.",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "phone",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_13[0]",
+      "position": {
+        "page": 2,
+        "x": 475.2,
+        "y": 503.968
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/5329/blank.pdf",
+    "ingestedAt": "2026-11-20T15:33:47.355Z",
+    "totalFields": 75,
+    "skipped": 0,
+    "catalogEntries": 75
+  }
+}

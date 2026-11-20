@@ -1,0 +1,4254 @@
+{
+  "form": {
+    "formId": "form-4136",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 4136, Credit for Federal Tax Paid on Fuels"
+  },
+  "fields": [
+    {
+      "fieldId": "form-4136.0.header.taxpayer_name",
+      "label": "Name (as shown on your income tax return)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-4136.0.header.taxpayer_identification_number",
+      "label": "Taxpayer identification number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 460.8,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-4136.0.header.a_qualifying_business_activity_yes",
+      "label": "(A) Do you have a qualifying business or business activity with qualifying usage of qualifying fuels eligible for the fuel tax credit? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 505.968
+      }
+    },
+    {
+      "fieldId": "form-4136.0.header.a_qualifying_business_activity_no",
+      "label": "(A) Do you have a qualifying business or business activity with qualifying usage of qualifying fuels eligible for the fuel tax credit? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 100.8,
+        "y": 505.968
+      }
+    },
+    {
+      "fieldId": "form-4136.0.header.b_number_of_business_activities",
+      "label": "(B) If \"Yes,\" how many different business activities do you have that qualify for this credit?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-4136.0.header.c_business_name",
+      "label": "(C) Business name (if applicable)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 185.608,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-4136.0.header.d_business_ein",
+      "label": "(D) EIN (if applicable)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 505.678,
+        "y": 443.97
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-4136.0.header.e_principal_business_activity_code",
+      "label": "(E) Principal Business Activity Code",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 198.426,
+        "y": 431.968
+      }
+    },
+    {
+      "fieldId": "form-4136.0.header.f_i_equipment_make",
+      "label": "(F)(i) Equipment for which most of the fuel was used for this business: Make",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 90.738,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-4136.0.header.f_ii_equipment_model",
+      "label": "(F)(ii) Equipment for which most of the fuel was used for this business: Model",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 360.698,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-4136.0.header.f_iii_equipment_type",
+      "label": "(F)(iii) Equipment for which most of the fuel was used for this business: Type of equipment",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 145.126,
+        "y": 395.968
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.1a_gasoline_off_highway_business_col_c",
+      "label": "Line 1a — Nontaxable use of gasoline, off-highway business use: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1a[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 324,
+        "y": 317.97
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.1b_gasoline_farm_use_col_c",
+      "label": "Line 1b — Nontaxable use of gasoline, use on a farm for farming purposes: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1b[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 324,
+        "y": 305.971
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.1c_gasoline_other_nontaxable_use_col_a",
+      "label": "Line 1c — Nontaxable use of gasoline, other nontaxable use: (a) Type of use",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1c[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 252,
+        "y": 293.972
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.1c_gasoline_other_nontaxable_use_col_c",
+      "label": "Line 1c — Nontaxable use of gasoline, other nontaxable use: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1c[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 324,
+        "y": 293.972
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.1c_gasoline_other_nontaxable_use_col_d",
+      "label": "Lines 1a through 1c — Nontaxable use of gasoline: (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1c[0].ColD[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 293.972
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.1c_gasoline_other_nontaxable_use_col_d_cents",
+      "label": "Lines 1a through 1c — Nontaxable use of gasoline: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1c[0].ColD[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 293.972
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.0.line.1c_gasoline_other_nontaxable_use_col_e",
+      "label": "Lines 1a through 1c — Nontaxable use of gasoline: (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1c[0].ColE[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 481.2,
+        "y": 293.972
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.1c_gasoline_other_nontaxable_use_col_e_cents",
+      "label": "Lines 1a through 1c — Nontaxable use of gasoline: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1c[0].ColE[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 532.8,
+        "y": 293.972
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.0.line.1d_gasoline_exported_col_c",
+      "label": "Line 1d — Nontaxable use of gasoline, exported: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1d[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 324,
+        "y": 281.973
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.1d_gasoline_exported_col_d",
+      "label": "Line 1d — Nontaxable use of gasoline, exported: (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1d[0].ColD[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 396,
+        "y": 281.973
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.1d_gasoline_exported_col_d_cents",
+      "label": "Line 1d — Nontaxable use of gasoline, exported: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1d[0].ColD[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 281.973
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.0.line.1d_gasoline_exported_col_e",
+      "label": "Line 1d — Nontaxable use of gasoline, exported: (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1d[0].ColE[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 475.2,
+        "y": 281.973
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.1d_gasoline_exported_col_e_cents",
+      "label": "Line 1d — Nontaxable use of gasoline, exported: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1d[0].ColE[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 532.8,
+        "y": 281.973
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.0.line.2a_aviation_gasoline_commercial_aviation_col_c",
+      "label": "Line 2a — Nontaxable use of aviation gasoline, use in commercial aviation (other than foreign trade): (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2a[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 324,
+        "y": 251.937
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.2a_aviation_gasoline_commercial_aviation_col_d",
+      "label": "Line 2a — Nontaxable use of aviation gasoline, use in commercial aviation (other than foreign trade): (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2a[0].ColD[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 251.971
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.2a_aviation_gasoline_commercial_aviation_col_d_cents",
+      "label": "Line 2a — Nontaxable use of aviation gasoline, use in commercial aviation (other than foreign trade): (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2a[0].ColD[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 251.971
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.0.line.2a_aviation_gasoline_commercial_aviation_col_e",
+      "label": "Line 2a — Nontaxable use of aviation gasoline, use in commercial aviation (other than foreign trade): (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2a[0].ColE[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 251.971
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.2a_aviation_gasoline_commercial_aviation_col_e_cents",
+      "label": "Line 2a — Nontaxable use of aviation gasoline, use in commercial aviation (other than foreign trade): (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2a[0].ColE[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 532.8,
+        "y": 251.971
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.0.line.2b_aviation_gasoline_other_nontaxable_use_col_a",
+      "label": "Line 2b — Nontaxable use of aviation gasoline, other nontaxable use: (a) Type of use",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2b[0].f1_40[0]",
+      "position": {
+        "page": 0,
+        "x": 252,
+        "y": 239.938
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.2b_aviation_gasoline_other_nontaxable_use_col_c",
+      "label": "Line 2b — Nontaxable use of aviation gasoline, other nontaxable use: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2b[0].f1_42[0]",
+      "position": {
+        "page": 0,
+        "x": 324,
+        "y": 239.938
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.2b_aviation_gasoline_other_nontaxable_use_col_d",
+      "label": "Line 2b — Nontaxable use of aviation gasoline, other nontaxable use: (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2b[0].ColD[0].f1_43[0]",
+      "position": {
+        "page": 0,
+        "x": 396,
+        "y": 239.938
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.2b_aviation_gasoline_other_nontaxable_use_col_d_cents",
+      "label": "Line 2b — Nontaxable use of aviation gasoline, other nontaxable use: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2b[0].ColD[0].f1_44[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 239.938
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.0.line.2b_aviation_gasoline_other_nontaxable_use_col_e",
+      "label": "Line 2b — Nontaxable use of aviation gasoline, other nontaxable use: (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2b[0].ColE[0].f1_45[0]",
+      "position": {
+        "page": 0,
+        "x": 475.2,
+        "y": 239.938
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.2b_aviation_gasoline_other_nontaxable_use_col_e_cents",
+      "label": "Line 2b — Nontaxable use of aviation gasoline, other nontaxable use: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2b[0].ColE[0].f1_46[0]",
+      "position": {
+        "page": 0,
+        "x": 532.8,
+        "y": 239.938
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.0.line.2c_aviation_gasoline_exported_col_c",
+      "label": "Line 2c — Nontaxable use of aviation gasoline, exported: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2c[0].f1_50[0]",
+      "position": {
+        "page": 0,
+        "x": 324,
+        "y": 227.939
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.2c_aviation_gasoline_exported_col_d",
+      "label": "Line 2c — Nontaxable use of aviation gasoline, exported: (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2c[0].ColD[0].f1_51[0]",
+      "position": {
+        "page": 0,
+        "x": 396,
+        "y": 227.939
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.2c_aviation_gasoline_exported_col_d_cents",
+      "label": "Line 2c — Nontaxable use of aviation gasoline, exported: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2c[0].ColD[0].f1_52[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 227.939
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.0.line.2c_aviation_gasoline_exported_col_e",
+      "label": "Line 2c — Nontaxable use of aviation gasoline, exported: (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2c[0].ColE[0].f1_53[0]",
+      "position": {
+        "page": 0,
+        "x": 475.2,
+        "y": 227.939
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.2c_aviation_gasoline_exported_col_e_cents",
+      "label": "Line 2c — Nontaxable use of aviation gasoline, exported: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2c[0].ColE[0].f1_54[0]",
+      "position": {
+        "page": 0,
+        "x": 532.8,
+        "y": 227.939
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.0.line.2d_aviation_gasoline_lust_foreign_trade_col_c",
+      "label": "Line 2d — LUST tax on aviation fuels used in foreign trade: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2d[0].f1_58[0]",
+      "position": {
+        "page": 0,
+        "x": 324,
+        "y": 215.906
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.2d_aviation_gasoline_lust_foreign_trade_col_d",
+      "label": "Line 2d — LUST tax on aviation fuels used in foreign trade: (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2d[0].ColD[0].f1_59[0]",
+      "position": {
+        "page": 0,
+        "x": 396,
+        "y": 215.94
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.2d_aviation_gasoline_lust_foreign_trade_col_d_cents",
+      "label": "Line 2d — LUST tax on aviation fuels used in foreign trade: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2d[0].ColD[0].f1_60[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 215.94
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.0.line.2d_aviation_gasoline_lust_foreign_trade_col_e",
+      "label": "Line 2d — LUST tax on aviation fuels used in foreign trade: (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2d[0].ColE[0].f1_61[0]",
+      "position": {
+        "page": 0,
+        "x": 475.2,
+        "y": 215.94
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.2d_aviation_gasoline_lust_foreign_trade_col_e_cents",
+      "label": "Line 2d — LUST tax on aviation fuels used in foreign trade: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2d[0].ColE[0].f1_62[0]",
+      "position": {
+        "page": 0,
+        "x": 532.8,
+        "y": 215.94
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.0.line.3_undyed_diesel_dye_exception",
+      "label": "Line 3 — Exception. If any of the diesel fuel included in this claim did contain visible evidence of dye, attach an explanation and check here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 568,
+        "y": 176.22
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.3a_undyed_diesel_nontaxable_use_col_a",
+      "label": "Line 3a — Nontaxable use of undyed diesel fuel, nontaxable use: (a) Type of use",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3a[0].f1_64[0]",
+      "position": {
+        "page": 0,
+        "x": 252,
+        "y": 125.968
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.3a_undyed_diesel_nontaxable_use_col_c",
+      "label": "Line 3a — Nontaxable use of undyed diesel fuel, nontaxable use: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3a[0].f1_66[0]",
+      "position": {
+        "page": 0,
+        "x": 324,
+        "y": 125.968
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.3b_undyed_diesel_farm_use_col_c",
+      "label": "Line 3b — Nontaxable use of undyed diesel fuel, use on a farm for farming purposes: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3b[0].f1_69[0]",
+      "position": {
+        "page": 0,
+        "x": 324,
+        "y": 113.969
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.3b_undyed_diesel_farm_use_col_d",
+      "label": "Lines 3a and 3b — Nontaxable use of undyed diesel fuel: (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3b[0].ColD[0].f1_70[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 113.969
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.3b_undyed_diesel_farm_use_col_d_cents",
+      "label": "Lines 3a and 3b — Nontaxable use of undyed diesel fuel: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3b[0].ColD[0].f1_71[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 113.969
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.0.line.3b_undyed_diesel_farm_use_col_e",
+      "label": "Lines 3a and 3b — Nontaxable use of undyed diesel fuel: (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3b[0].ColE[0].f1_72[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 113.969
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.3b_undyed_diesel_farm_use_col_e_cents",
+      "label": "Lines 3a and 3b — Nontaxable use of undyed diesel fuel: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3b[0].ColE[0].f1_73[0]",
+      "position": {
+        "page": 0,
+        "x": 532.8,
+        "y": 113.969
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.0.line.3c_undyed_diesel_trains_col_c",
+      "label": "Line 3c — Nontaxable use of undyed diesel fuel, use in trains: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3c[0].f1_77[0]",
+      "position": {
+        "page": 0,
+        "x": 324,
+        "y": 101.97
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.3c_undyed_diesel_trains_col_d",
+      "label": "Line 3c — Nontaxable use of undyed diesel fuel, use in trains: (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3c[0].ColD[0].f1_78[0]",
+      "position": {
+        "page": 0,
+        "x": 396,
+        "y": 101.97
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.3c_undyed_diesel_trains_col_d_cents",
+      "label": "Line 3c — Nontaxable use of undyed diesel fuel, use in trains: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3c[0].ColD[0].f1_79[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 101.97
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.0.line.3c_undyed_diesel_trains_col_e",
+      "label": "Line 3c — Nontaxable use of undyed diesel fuel, use in trains: (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3c[0].ColE[0].f1_80[0]",
+      "position": {
+        "page": 0,
+        "x": 475.2,
+        "y": 101.97
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.3c_undyed_diesel_trains_col_e_cents",
+      "label": "Line 3c — Nontaxable use of undyed diesel fuel, use in trains: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3c[0].ColE[0].f1_81[0]",
+      "position": {
+        "page": 0,
+        "x": 532.8,
+        "y": 101.97
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.0.line.3d_undyed_diesel_intercity_local_buses_col_c",
+      "label": "Line 3d — Nontaxable use of undyed diesel fuel, use in certain intercity and local buses: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3d[0].f1_85[0]",
+      "position": {
+        "page": 0,
+        "x": 324,
+        "y": 77.969
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.3d_undyed_diesel_intercity_local_buses_col_d",
+      "label": "Line 3d — Nontaxable use of undyed diesel fuel, use in certain intercity and local buses: (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3d[0].ColD[0].f1_86[0]",
+      "position": {
+        "page": 0,
+        "x": 396,
+        "y": 77.966
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.3d_undyed_diesel_intercity_local_buses_col_d_cents",
+      "label": "Line 3d — Nontaxable use of undyed diesel fuel, use in certain intercity and local buses: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3d[0].ColD[0].f1_87[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 77.966
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.0.line.3d_undyed_diesel_intercity_local_buses_col_e",
+      "label": "Line 3d — Nontaxable use of undyed diesel fuel, use in certain intercity and local buses: (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3d[0].ColE[0].f1_88[0]",
+      "position": {
+        "page": 0,
+        "x": 475.2,
+        "y": 77.966
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.3d_undyed_diesel_intercity_local_buses_col_e_cents",
+      "label": "Line 3d — Nontaxable use of undyed diesel fuel, use in certain intercity and local buses: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3d[0].ColE[0].f1_89[0]",
+      "position": {
+        "page": 0,
+        "x": 532.8,
+        "y": 77.966
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.0.line.3e_undyed_diesel_exported_col_c",
+      "label": "Line 3e — Nontaxable use of undyed diesel fuel, exported: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3e[0].f1_93[0]",
+      "position": {
+        "page": 0,
+        "x": 324,
+        "y": 65.97
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.3e_undyed_diesel_exported_col_d",
+      "label": "Line 3e — Nontaxable use of undyed diesel fuel, exported: (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3e[0].ColD[0].f1_94[0]",
+      "position": {
+        "page": 0,
+        "x": 396,
+        "y": 65.97
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.3e_undyed_diesel_exported_col_d_cents",
+      "label": "Line 3e — Nontaxable use of undyed diesel fuel, exported: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3e[0].ColD[0].f1_95[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 65.97
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.0.line.3e_undyed_diesel_exported_col_e",
+      "label": "Line 3e — Nontaxable use of undyed diesel fuel, exported: (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3e[0].ColE[0].f1_96[0]",
+      "position": {
+        "page": 0,
+        "x": 475.2,
+        "y": 65.97
+      }
+    },
+    {
+      "fieldId": "form-4136.0.line.3e_undyed_diesel_exported_col_e_cents",
+      "label": "Line 3e — Nontaxable use of undyed diesel fuel, exported: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3e[0].ColE[0].f1_97[0]",
+      "position": {
+        "page": 0,
+        "x": 532.8,
+        "y": 65.97
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.4_kerosene_dye_exception",
+      "label": "Line 4 — Exception. If any of the kerosene included in this claim did contain visible evidence of dye, attach an explanation and check here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 568,
+        "y": 692.219
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4a_nontaxable_use_244_col_a",
+      "label": "Line 4a — Nontaxable use taxed at $.244: (a) Type of use",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4a[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 641.97
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4a_nontaxable_use_244_col_c",
+      "label": "Line 4a — Nontaxable use taxed at $.244: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4a[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 324,
+        "y": 641.97
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4b_farm_use_col_c",
+      "label": "Line 4b — Use on a farm for farming purposes: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4b[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 324,
+        "y": 629.971
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4b_farm_use_col_d",
+      "label": "Lines 4a and 4b — Nontaxable use taxed at $.244 and use on a farm for farming purposes: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4b[0].ColD[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 629.971
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4b_farm_use_col_d_cents",
+      "label": "Lines 4a and 4b — Nontaxable use taxed at $.244 and use on a farm for farming purposes: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4b[0].ColD[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 453.6,
+        "y": 629.971
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.4b_farm_use_col_e",
+      "label": "Lines 4a and 4b — Nontaxable use taxed at $.244 and use on a farm for farming purposes: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4b[0].ColE[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 629.971
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4b_farm_use_col_e_cents",
+      "label": "Lines 4a and 4b — Nontaxable use taxed at $.244 and use on a farm for farming purposes: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4b[0].ColE[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 532.8,
+        "y": 629.971
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.4c_intercity_local_buses_col_c",
+      "label": "Line 4c — Use in certain intercity and local buses: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4c[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 324,
+        "y": 605.97
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4c_intercity_local_buses_col_d",
+      "label": "Line 4c — Use in certain intercity and local buses: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4c[0].ColD[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 605.97
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4c_intercity_local_buses_col_d_cents",
+      "label": "Line 4c — Use in certain intercity and local buses: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4c[0].ColD[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 453.6,
+        "y": 605.97
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.4c_intercity_local_buses_col_e",
+      "label": "Line 4c — Use in certain intercity and local buses: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4c[0].ColE[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 605.97
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4c_intercity_local_buses_col_e_cents",
+      "label": "Line 4c — Use in certain intercity and local buses: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4c[0].ColE[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 532.8,
+        "y": 605.97
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.4d_exported_col_c",
+      "label": "Line 4d — Exported: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4d[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 324,
+        "y": 593.971
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4d_exported_col_d",
+      "label": "Line 4d — Exported: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4d[0].ColD[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 593.968
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4d_exported_col_d_cents",
+      "label": "Line 4d — Exported: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4d[0].ColD[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 453.6,
+        "y": 593.968
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.4d_exported_col_e",
+      "label": "Line 4d — Exported: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4d[0].ColE[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 593.968
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4d_exported_col_e_cents",
+      "label": "Line 4d — Exported: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4d[0].ColE[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 532.8,
+        "y": 593.968
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.4e_nontaxable_use_044_col_a",
+      "label": "Line 4e — Nontaxable use taxed at $.044: (a) Type of use",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4e[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 581.972
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4e_nontaxable_use_044_col_c",
+      "label": "Line 4e — Nontaxable use taxed at $.044: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4e[0].f2_30[0]",
+      "position": {
+        "page": 1,
+        "x": 324,
+        "y": 581.972
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4e_nontaxable_use_044_col_d",
+      "label": "Line 4e — Nontaxable use taxed at $.044: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4e[0].ColD[0].f2_31[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 581.972
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4e_nontaxable_use_044_col_d_cents",
+      "label": "Line 4e — Nontaxable use taxed at $.044: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4e[0].ColD[0].f2_32[0]",
+      "position": {
+        "page": 1,
+        "x": 453.6,
+        "y": 581.972
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.4e_nontaxable_use_044_col_e",
+      "label": "Line 4e — Nontaxable use taxed at $.044: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4e[0].ColE[0].f2_33[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 581.972
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4e_nontaxable_use_044_col_e_cents",
+      "label": "Line 4e — Nontaxable use taxed at $.044: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4e[0].ColE[0].f2_34[0]",
+      "position": {
+        "page": 1,
+        "x": 532.8,
+        "y": 581.972
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.4f_nontaxable_use_219_col_a",
+      "label": "Line 4f — Nontaxable use taxed at $.219: (a) Type of use",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4f[0].f2_36[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 569.973
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4f_nontaxable_use_219_col_c",
+      "label": "Line 4f — Nontaxable use taxed at $.219: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4f[0].f2_38[0]",
+      "position": {
+        "page": 1,
+        "x": 324,
+        "y": 569.973
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4f_nontaxable_use_219_col_d",
+      "label": "Line 4f — Nontaxable use taxed at $.219: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4f[0].ColD[0].f2_39[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 569.973
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4f_nontaxable_use_219_col_d_cents",
+      "label": "Line 4f — Nontaxable use taxed at $.219: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4f[0].ColD[0].f2_40[0]",
+      "position": {
+        "page": 1,
+        "x": 453.6,
+        "y": 569.973
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.4f_nontaxable_use_219_col_e",
+      "label": "Line 4f — Nontaxable use taxed at $.219: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4f[0].ColE[0].f2_41[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 569.973
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.4f_nontaxable_use_219_col_e_cents",
+      "label": "Line 4f — Nontaxable use taxed at $.219: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4f[0].ColE[0].f2_42[0]",
+      "position": {
+        "page": 1,
+        "x": 532.8,
+        "y": 569.973
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.5a_commercial_aviation_244_col_c",
+      "label": "Line 5a — Kerosene used in commercial aviation (other than foreign trade) taxed at $.244: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5a[0].f2_46[0]",
+      "position": {
+        "page": 1,
+        "x": 324,
+        "y": 491.966
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.5a_commercial_aviation_244_col_d",
+      "label": "Line 5a — Kerosene used in commercial aviation (other than foreign trade) taxed at $.244: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5a[0].ColD[0].f2_47[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 491.966
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.5a_commercial_aviation_244_col_d_cents",
+      "label": "Line 5a — Kerosene used in commercial aviation (other than foreign trade) taxed at $.244: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5a[0].ColD[0].f2_48[0]",
+      "position": {
+        "page": 1,
+        "x": 453.6,
+        "y": 491.966
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.5a_commercial_aviation_244_col_e",
+      "label": "Line 5a — Kerosene used in commercial aviation (other than foreign trade) taxed at $.244: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5a[0].ColE[0].f2_49[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 491.966
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.5a_commercial_aviation_244_col_e_cents",
+      "label": "Line 5a — Kerosene used in commercial aviation (other than foreign trade) taxed at $.244: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5a[0].ColE[0].f2_50[0]",
+      "position": {
+        "page": 1,
+        "x": 532.8,
+        "y": 491.966
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.5b_commercial_aviation_219_col_c",
+      "label": "Line 5b — Kerosene used in commercial aviation (other than foreign trade) taxed at $.219: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5b[0].f2_54[0]",
+      "position": {
+        "page": 1,
+        "x": 324,
+        "y": 467.965
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.5b_commercial_aviation_219_col_d",
+      "label": "Line 5b — Kerosene used in commercial aviation (other than foreign trade) taxed at $.219: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5b[0].ColD[0].f2_55[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 467.965
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.5b_commercial_aviation_219_col_d_cents",
+      "label": "Line 5b — Kerosene used in commercial aviation (other than foreign trade) taxed at $.219: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5b[0].ColD[0].f2_56[0]",
+      "position": {
+        "page": 1,
+        "x": 453.6,
+        "y": 467.965
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.5b_commercial_aviation_219_col_e",
+      "label": "Line 5b — Kerosene used in commercial aviation (other than foreign trade) taxed at $.219: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5b[0].ColE[0].f2_57[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 467.965
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.5b_commercial_aviation_219_col_e_cents",
+      "label": "Line 5b — Kerosene used in commercial aviation (other than foreign trade) taxed at $.219: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5b[0].ColE[0].f2_58[0]",
+      "position": {
+        "page": 1,
+        "x": 532.8,
+        "y": 467.965
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.5c_nontaxable_use_244_col_a",
+      "label": "Line 5c — Nontaxable use (other than use by state or local government) taxed at $.244: (a) Type of use",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5c[0].f2_60[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 443.964
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.5c_nontaxable_use_244_col_c",
+      "label": "Line 5c — Nontaxable use (other than use by state or local government) taxed at $.244: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5c[0].f2_62[0]",
+      "position": {
+        "page": 1,
+        "x": 324,
+        "y": 443.964
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.5c_nontaxable_use_244_col_d",
+      "label": "Line 5c — Nontaxable use (other than use by state or local government) taxed at $.244: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5c[0].ColD[0].f2_63[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 443.964
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.5c_nontaxable_use_244_col_d_cents",
+      "label": "Line 5c — Nontaxable use (other than use by state or local government) taxed at $.244: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5c[0].ColD[0].f2_64[0]",
+      "position": {
+        "page": 1,
+        "x": 453.6,
+        "y": 443.964
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.5c_nontaxable_use_244_col_e",
+      "label": "Line 5c — Nontaxable use (other than use by state or local government) taxed at $.244: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5c[0].ColE[0].f2_65[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 443.964
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.5c_nontaxable_use_244_col_e_cents",
+      "label": "Line 5c — Nontaxable use (other than use by state or local government) taxed at $.244: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5c[0].ColE[0].f2_66[0]",
+      "position": {
+        "page": 1,
+        "x": 532.8,
+        "y": 443.964
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.5d_nontaxable_use_219_col_a",
+      "label": "Line 5d — Nontaxable use (other than use by state or local government) taxed at $.219: (a) Type of use",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5d[0].f2_68[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 419.963
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.5d_nontaxable_use_219_col_c",
+      "label": "Line 5d — Nontaxable use (other than use by state or local government) taxed at $.219: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5d[0].f2_70[0]",
+      "position": {
+        "page": 1,
+        "x": 324,
+        "y": 419.963
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.5d_nontaxable_use_219_col_d",
+      "label": "Line 5d — Nontaxable use (other than use by state or local government) taxed at $.219: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5d[0].ColD[0].f2_71[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 419.963
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.5d_nontaxable_use_219_col_d_cents",
+      "label": "Line 5d — Nontaxable use (other than use by state or local government) taxed at $.219: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5d[0].ColD[0].f2_72[0]",
+      "position": {
+        "page": 1,
+        "x": 453.6,
+        "y": 419.963
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.5d_nontaxable_use_219_col_e",
+      "label": "Line 5d — Nontaxable use (other than use by state or local government) taxed at $.219: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5d[0].ColE[0].f2_73[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 419.963
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.5d_nontaxable_use_219_col_e_cents",
+      "label": "Line 5d — Nontaxable use (other than use by state or local government) taxed at $.219: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5d[0].ColE[0].f2_74[0]",
+      "position": {
+        "page": 1,
+        "x": 532.8,
+        "y": 419.963
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.5e_lust_tax_foreign_trade_col_c",
+      "label": "Line 5e — LUST tax on aviation fuels used in foreign trade: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5e[0].f2_78[0]",
+      "position": {
+        "page": 1,
+        "x": 324,
+        "y": 407.964
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.5e_lust_tax_foreign_trade_col_d",
+      "label": "Line 5e — LUST tax on aviation fuels used in foreign trade: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5e[0].ColD[0].f2_79[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 407.964
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.5e_lust_tax_foreign_trade_col_d_cents",
+      "label": "Line 5e — LUST tax on aviation fuels used in foreign trade: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5e[0].ColD[0].f2_80[0]",
+      "position": {
+        "page": 1,
+        "x": 453.6,
+        "y": 407.964
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.5e_lust_tax_foreign_trade_col_e",
+      "label": "Line 5e — LUST tax on aviation fuels used in foreign trade: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5e[0].ColE[0].f2_81[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 407.964
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.5e_lust_tax_foreign_trade_col_e_cents",
+      "label": "Line 5e — LUST tax on aviation fuels used in foreign trade: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5e[0].ColE[0].f2_82[0]",
+      "position": {
+        "page": 1,
+        "x": 532.8,
+        "y": 407.964
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.6_diesel_vendor_registration_no",
+      "label": "Line 6 — Sales by Registered Ultimate Vendors of Undyed Diesel Fuel: Registration No.",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_84[0]",
+      "position": {
+        "page": 1,
+        "x": 460.4,
+        "y": 394.967
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.6_diesel_dye_exception",
+      "label": "Line 6 — Exception. If any of the diesel fuel included in this claim did contain visible evidence of dye, attach an explanation and check here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 568,
+        "y": 332.219
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.6a_state_local_government_col_c",
+      "label": "Line 6a — Use by a state or local government: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6a[0].f2_86[0]",
+      "position": {
+        "page": 1,
+        "x": 324,
+        "y": 281.97
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.6a_state_local_government_col_d",
+      "label": "Line 6a — Use by a state or local government: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6a[0].ColD[0].f2_87[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 281.97
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.6a_state_local_government_col_d_cents",
+      "label": "Line 6a — Use by a state or local government: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6a[0].ColD[0].f2_88[0]",
+      "position": {
+        "page": 1,
+        "x": 453.6,
+        "y": 281.97
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.6a_state_local_government_col_e",
+      "label": "Line 6a — Use by a state or local government: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6a[0].ColE[0].f2_89[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 281.97
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.6a_state_local_government_col_e_cents",
+      "label": "Line 6a — Use by a state or local government: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6a[0].ColE[0].f2_90[0]",
+      "position": {
+        "page": 1,
+        "x": 532.8,
+        "y": 281.97
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.6b_intercity_local_buses_col_c",
+      "label": "Line 6b — Use in certain intercity and local buses: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6b[0].f2_93[0]",
+      "position": {
+        "page": 1,
+        "x": 324,
+        "y": 269.971
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.6b_intercity_local_buses_col_d",
+      "label": "Line 6b — Use in certain intercity and local buses: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6b[0].ColD[0].f2_94[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 269.971
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.6b_intercity_local_buses_col_d_cents",
+      "label": "Line 6b — Use in certain intercity and local buses: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6b[0].ColD[0].f2_95[0]",
+      "position": {
+        "page": 1,
+        "x": 453.6,
+        "y": 269.971
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.6b_intercity_local_buses_col_e",
+      "label": "Line 6b — Use in certain intercity and local buses: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6b[0].ColE[0].f2_96[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 269.971
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.6b_intercity_local_buses_col_e_cents",
+      "label": "Line 6b — Use in certain intercity and local buses: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6b[0].ColE[0].f2_97[0]",
+      "position": {
+        "page": 1,
+        "x": 532.8,
+        "y": 269.971
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.7_kerosene_vendor_registration_no",
+      "label": "Line 7 — Sales by Registered Ultimate Vendors of Undyed Kerosene (Other Than Kerosene for Use in Aviation): Registration No.",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_99[0]",
+      "position": {
+        "page": 1,
+        "x": 460.4,
+        "y": 245.967
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.7_kerosene_dye_exception",
+      "label": "Line 7 — Exception. If any of the kerosene included in this claim did contain visible evidence of dye, attach an explanation and check here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 568,
+        "y": 188.219
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.7a_state_local_government_col_c",
+      "label": "Line 7a — Use by a state or local government: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7a[0].f2_101[0]",
+      "position": {
+        "page": 1,
+        "x": 324,
+        "y": 137.97
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.7b_blocked_pump_col_c",
+      "label": "Line 7b — Sales from a blocked pump: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7b[0].f2_103[0]",
+      "position": {
+        "page": 1,
+        "x": 324,
+        "y": 125.971
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.7b_blocked_pump_col_d",
+      "label": "Lines 7a and 7b — Use by a state or local government and sales from a blocked pump: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7b[0].ColD[0].f2_104[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 125.971
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.7b_blocked_pump_col_d_cents",
+      "label": "Lines 7a and 7b — Use by a state or local government and sales from a blocked pump: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7b[0].ColD[0].f2_105[0]",
+      "position": {
+        "page": 1,
+        "x": 453.6,
+        "y": 125.971
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.7b_blocked_pump_col_e",
+      "label": "Lines 7a and 7b — Use by a state or local government and sales from a blocked pump: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7b[0].ColE[0].f2_106[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 125.971
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.7b_blocked_pump_col_e_cents",
+      "label": "Lines 7a and 7b — Use by a state or local government and sales from a blocked pump: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7b[0].ColE[0].f2_107[0]",
+      "position": {
+        "page": 1,
+        "x": 532.8,
+        "y": 125.971
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.7c_intercity_local_buses_col_c",
+      "label": "Line 7c — Use in certain intercity and local buses: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7c[0].f2_110[0]",
+      "position": {
+        "page": 1,
+        "x": 324,
+        "y": 113.972
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.7c_intercity_local_buses_col_d",
+      "label": "Line 7c — Use in certain intercity and local buses: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7c[0].ColD[0].f2_111[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 113.972
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.7c_intercity_local_buses_col_d_cents",
+      "label": "Line 7c — Use in certain intercity and local buses: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7c[0].ColD[0].f2_112[0]",
+      "position": {
+        "page": 1,
+        "x": 453.6,
+        "y": 113.972
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.1.line.7c_intercity_local_buses_col_e",
+      "label": "Line 7c — Use in certain intercity and local buses: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7c[0].ColE[0].f2_113[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 113.972
+      }
+    },
+    {
+      "fieldId": "form-4136.1.line.7c_intercity_local_buses_col_e_cents",
+      "label": "Line 7c — Use in certain intercity and local buses: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7c[0].ColE[0].f2_114[0]",
+      "position": {
+        "page": 1,
+        "x": 532.8,
+        "y": 113.972
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.8_registration_number",
+      "label": "Line 8 — Sales by Registered Ultimate Vendors of Kerosene for Use in Aviation: Registration No.",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_1[0]",
+      "position": {
+        "page": 2,
+        "x": 453.6,
+        "y": 718.967
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8a_commercial_aviation_219_col_c",
+      "label": "Line 8a — Use in commercial aviation (other than foreign trade) taxed at $.219: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8a[0].f3_4[0]",
+      "position": {
+        "page": 2,
+        "x": 324,
+        "y": 593.968
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8a_commercial_aviation_219_col_d",
+      "label": "Line 8a — Use in commercial aviation (other than foreign trade) taxed at $.219: (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8a[0].ColD[0].f3_5[0]",
+      "position": {
+        "page": 2,
+        "x": 403.2,
+        "y": 593.968
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8a_commercial_aviation_219_col_d_cents",
+      "label": "Line 8a — Use in commercial aviation (other than foreign trade) taxed at $.219: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8a[0].ColD[0].f3_6[0]",
+      "position": {
+        "page": 2,
+        "x": 453.6,
+        "y": 593.968
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.8a_commercial_aviation_219_col_e",
+      "label": "Line 8a — Use in commercial aviation (other than foreign trade) taxed at $.219: (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8a[0].ColE[0].f3_7[0]",
+      "position": {
+        "page": 2,
+        "x": 482.4,
+        "y": 593.968
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8a_commercial_aviation_219_col_e_cents",
+      "label": "Line 8a — Use in commercial aviation (other than foreign trade) taxed at $.219: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8a[0].ColE[0].f3_8[0]",
+      "position": {
+        "page": 2,
+        "x": 532.8,
+        "y": 593.968
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.8b_commercial_aviation_244_col_c",
+      "label": "Line 8b — Use in commercial aviation (other than foreign trade) taxed at $.244: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8b[0].f3_12[0]",
+      "position": {
+        "page": 2,
+        "x": 324,
+        "y": 569.967
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8b_commercial_aviation_244_col_d",
+      "label": "Line 8b — Use in commercial aviation (other than foreign trade) taxed at $.244: (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8b[0].ColD[0].f3_13[0]",
+      "position": {
+        "page": 2,
+        "x": 396,
+        "y": 569.967
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8b_commercial_aviation_244_col_d_cents",
+      "label": "Line 8b — Use in commercial aviation (other than foreign trade) taxed at $.244: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8b[0].ColD[0].f3_14[0]",
+      "position": {
+        "page": 2,
+        "x": 453.6,
+        "y": 569.967
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.8b_commercial_aviation_244_col_e",
+      "label": "Line 8b — Use in commercial aviation (other than foreign trade) taxed at $.244: (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8b[0].ColE[0].f3_15[0]",
+      "position": {
+        "page": 2,
+        "x": 475.2,
+        "y": 569.967
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8b_commercial_aviation_244_col_e_cents",
+      "label": "Line 8b — Use in commercial aviation (other than foreign trade) taxed at $.244: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8b[0].ColE[0].f3_16[0]",
+      "position": {
+        "page": 2,
+        "x": 532.8,
+        "y": 569.967
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.8c_nonexempt_noncommercial_aviation_col_c",
+      "label": "Line 8c — Nonexempt use in noncommercial aviation: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8c[0].f3_20[0]",
+      "position": {
+        "page": 2,
+        "x": 324,
+        "y": 557.968
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8c_nonexempt_noncommercial_aviation_col_d",
+      "label": "Line 8c — Nonexempt use in noncommercial aviation: (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8c[0].ColD[0].f3_21[0]",
+      "position": {
+        "page": 2,
+        "x": 396,
+        "y": 557.968
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8c_nonexempt_noncommercial_aviation_col_d_cents",
+      "label": "Line 8c — Nonexempt use in noncommercial aviation: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8c[0].ColD[0].f3_22[0]",
+      "position": {
+        "page": 2,
+        "x": 453.6,
+        "y": 557.968
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.8c_nonexempt_noncommercial_aviation_col_e",
+      "label": "Line 8c — Nonexempt use in noncommercial aviation: (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8c[0].ColE[0].f3_23[0]",
+      "position": {
+        "page": 2,
+        "x": 475.2,
+        "y": 557.968
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8c_nonexempt_noncommercial_aviation_col_e_cents",
+      "label": "Line 8c — Nonexempt use in noncommercial aviation: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8c[0].ColE[0].f3_24[0]",
+      "position": {
+        "page": 2,
+        "x": 532.8,
+        "y": 557.968
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.8d_other_nontaxable_244_col_a",
+      "label": "Line 8d — Other nontaxable uses taxed at $.244: (a) Type of use",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8d[0].f3_26[0]",
+      "position": {
+        "page": 2,
+        "x": 252,
+        "y": 545.969
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8d_other_nontaxable_244_col_c",
+      "label": "Line 8d — Other nontaxable uses taxed at $.244: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8d[0].f3_28[0]",
+      "position": {
+        "page": 2,
+        "x": 324,
+        "y": 545.969
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8d_other_nontaxable_244_col_d",
+      "label": "Line 8d — Other nontaxable uses taxed at $.244: (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8d[0].ColD[0].f3_29[0]",
+      "position": {
+        "page": 2,
+        "x": 396,
+        "y": 545.969
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8d_other_nontaxable_244_col_d_cents",
+      "label": "Line 8d — Other nontaxable uses taxed at $.244: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8d[0].ColD[0].f3_30[0]",
+      "position": {
+        "page": 2,
+        "x": 453.6,
+        "y": 545.969
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.8d_other_nontaxable_244_col_e",
+      "label": "Line 8d — Other nontaxable uses taxed at $.244: (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8d[0].ColE[0].f3_31[0]",
+      "position": {
+        "page": 2,
+        "x": 475.2,
+        "y": 545.969
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8d_other_nontaxable_244_col_e_cents",
+      "label": "Line 8d — Other nontaxable uses taxed at $.244: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8d[0].ColE[0].f3_32[0]",
+      "position": {
+        "page": 2,
+        "x": 532.8,
+        "y": 545.969
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.8e_other_nontaxable_219_col_a",
+      "label": "Line 8e — Other nontaxable uses taxed at $.219: (a) Type of use",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8e[0].f3_34[0]",
+      "position": {
+        "page": 2,
+        "x": 252,
+        "y": 533.97
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8e_other_nontaxable_219_col_c",
+      "label": "Line 8e — Other nontaxable uses taxed at $.219: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8e[0].f3_36[0]",
+      "position": {
+        "page": 2,
+        "x": 324,
+        "y": 533.97
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8e_other_nontaxable_219_col_d",
+      "label": "Line 8e — Other nontaxable uses taxed at $.219: (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8e[0].ColD[0].f3_37[0]",
+      "position": {
+        "page": 2,
+        "x": 396,
+        "y": 533.97
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8e_other_nontaxable_219_col_d_cents",
+      "label": "Line 8e — Other nontaxable uses taxed at $.219: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8e[0].ColD[0].f3_38[0]",
+      "position": {
+        "page": 2,
+        "x": 453.6,
+        "y": 533.97
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.8e_other_nontaxable_219_col_e",
+      "label": "Line 8e — Other nontaxable uses taxed at $.219: (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8e[0].ColE[0].f3_39[0]",
+      "position": {
+        "page": 2,
+        "x": 475.2,
+        "y": 533.97
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8e_other_nontaxable_219_col_e_cents",
+      "label": "Line 8e — Other nontaxable uses taxed at $.219: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8e[0].ColE[0].f3_40[0]",
+      "position": {
+        "page": 2,
+        "x": 532.8,
+        "y": 533.97
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.8f_lust_tax_foreign_trade_col_c",
+      "label": "Line 8f — LUST tax on aviation fuels used in foreign trade: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8f[0].f3_44[0]",
+      "position": {
+        "page": 2,
+        "x": 324,
+        "y": 521.971
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8f_lust_tax_foreign_trade_col_d",
+      "label": "Line 8f — LUST tax on aviation fuels used in foreign trade: (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8f[0].ColD[0].f3_45[0]",
+      "position": {
+        "page": 2,
+        "x": 396,
+        "y": 521.971
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8f_lust_tax_foreign_trade_col_d_cents",
+      "label": "Line 8f — LUST tax on aviation fuels used in foreign trade: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8f[0].ColD[0].f3_46[0]",
+      "position": {
+        "page": 2,
+        "x": 453.6,
+        "y": 521.971
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.8f_lust_tax_foreign_trade_col_e",
+      "label": "Line 8f — LUST tax on aviation fuels used in foreign trade: (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8f[0].ColE[0].f3_47[0]",
+      "position": {
+        "page": 2,
+        "x": 475.2,
+        "y": 521.971
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.8f_lust_tax_foreign_trade_col_e_cents",
+      "label": "Line 8f — LUST tax on aviation fuels used in foreign trade: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8f[0].ColE[0].f3_48[0]",
+      "position": {
+        "page": 2,
+        "x": 532.8,
+        "y": 521.971
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.11a_lpg_col_a",
+      "label": "Line 11a — Liquefied petroleum gas (LPG): (a) Type of use",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11a[0].f3_79[0]",
+      "position": {
+        "page": 2,
+        "x": 252,
+        "y": 305.971
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11a_lpg_col_c",
+      "label": "Line 11a — Liquefied petroleum gas (LPG): (c) Gallons, or gasoline or diesel gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11a[0].f3_81[0]",
+      "position": {
+        "page": 2,
+        "x": 324,
+        "y": 305.971
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11a_lpg_col_d",
+      "label": "Line 11a — Liquefied petroleum gas (LPG): (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11a[0].ColD[0].f3_82[0]",
+      "position": {
+        "page": 2,
+        "x": 403.2,
+        "y": 305.971
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11a_lpg_col_d_cents",
+      "label": "Line 11a — Liquefied petroleum gas (LPG): (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11a[0].ColD[0].f3_83[0]",
+      "position": {
+        "page": 2,
+        "x": 453.6,
+        "y": 305.971
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.11a_lpg_col_e",
+      "label": "Line 11a — Liquefied petroleum gas (LPG): (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11a[0].ColE[0].f3_84[0]",
+      "position": {
+        "page": 2,
+        "x": 482.4,
+        "y": 305.971
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11a_lpg_col_e_cents",
+      "label": "Line 11a — Liquefied petroleum gas (LPG): (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11a[0].ColE[0].f3_85[0]",
+      "position": {
+        "page": 2,
+        "x": 532.8,
+        "y": 305.971
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.11b_p_series_fuels_col_a",
+      "label": "Line 11b — \"P Series\" fuels: (a) Type of use",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11b[0].f3_87[0]",
+      "position": {
+        "page": 2,
+        "x": 252,
+        "y": 293.972
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11b_p_series_fuels_col_c",
+      "label": "Line 11b — \"P Series\" fuels: (c) Gallons, or gasoline or diesel gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11b[0].f3_89[0]",
+      "position": {
+        "page": 2,
+        "x": 324,
+        "y": 293.972
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11b_p_series_fuels_col_d",
+      "label": "Line 11b — \"P Series\" fuels: (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11b[0].ColD[0].f3_90[0]",
+      "position": {
+        "page": 2,
+        "x": 396,
+        "y": 293.972
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11b_p_series_fuels_col_d_cents",
+      "label": "Line 11b — \"P Series\" fuels: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11b[0].ColD[0].f3_91[0]",
+      "position": {
+        "page": 2,
+        "x": 453.6,
+        "y": 293.972
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.11b_p_series_fuels_col_e",
+      "label": "Line 11b — \"P Series\" fuels: (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11b[0].ColE[0].f3_92[0]",
+      "position": {
+        "page": 2,
+        "x": 475.2,
+        "y": 293.972
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11b_p_series_fuels_col_e_cents",
+      "label": "Line 11b — \"P Series\" fuels: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11b[0].ColE[0].f3_93[0]",
+      "position": {
+        "page": 2,
+        "x": 532.8,
+        "y": 293.972
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.11c_cng_col_a",
+      "label": "Line 11c — Compressed natural gas (CNG): (a) Type of use",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11c[0].f3_95[0]",
+      "position": {
+        "page": 2,
+        "x": 252,
+        "y": 281.973
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11c_cng_col_c",
+      "label": "Line 11c — Compressed natural gas (CNG): (c) Gallons, or gasoline or diesel gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11c[0].f3_97[0]",
+      "position": {
+        "page": 2,
+        "x": 324,
+        "y": 281.973
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11c_cng_col_d",
+      "label": "Line 11c — Compressed natural gas (CNG): (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11c[0].ColD[0].f3_98[0]",
+      "position": {
+        "page": 2,
+        "x": 396,
+        "y": 281.973
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11c_cng_col_d_cents",
+      "label": "Line 11c — Compressed natural gas (CNG): (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11c[0].ColD[0].f3_99[0]",
+      "position": {
+        "page": 2,
+        "x": 453.6,
+        "y": 281.973
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.11c_cng_col_e",
+      "label": "Line 11c — Compressed natural gas (CNG): (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11c[0].ColE[0].f3_100[0]",
+      "position": {
+        "page": 2,
+        "x": 475.2,
+        "y": 281.973
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11c_cng_col_e_cents",
+      "label": "Line 11c — Compressed natural gas (CNG): (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11c[0].ColE[0].f3_101[0]",
+      "position": {
+        "page": 2,
+        "x": 532.8,
+        "y": 281.973
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.11d_liquefied_hydrogen_col_a",
+      "label": "Line 11d — Liquefied hydrogen: (a) Type of use",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11d[0].f3_103[0]",
+      "position": {
+        "page": 2,
+        "x": 252,
+        "y": 269.974
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11d_liquefied_hydrogen_col_c",
+      "label": "Line 11d — Liquefied hydrogen: (c) Gallons, or gasoline or diesel gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11d[0].f3_105[0]",
+      "position": {
+        "page": 2,
+        "x": 324,
+        "y": 269.974
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11d_liquefied_hydrogen_col_d",
+      "label": "Line 11d — Liquefied hydrogen: (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11d[0].ColD[0].f3_106[0]",
+      "position": {
+        "page": 2,
+        "x": 396,
+        "y": 269.974
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11d_liquefied_hydrogen_col_d_cents",
+      "label": "Line 11d — Liquefied hydrogen: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11d[0].ColD[0].f3_107[0]",
+      "position": {
+        "page": 2,
+        "x": 453.6,
+        "y": 269.974
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.11d_liquefied_hydrogen_col_e",
+      "label": "Line 11d — Liquefied hydrogen: (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11d[0].ColE[0].f3_108[0]",
+      "position": {
+        "page": 2,
+        "x": 475.2,
+        "y": 269.974
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11d_liquefied_hydrogen_col_e_cents",
+      "label": "Line 11d — Liquefied hydrogen: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11d[0].ColE[0].f3_109[0]",
+      "position": {
+        "page": 2,
+        "x": 532.8,
+        "y": 269.974
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.11e_fischer_tropsch_coal_col_a",
+      "label": "Line 11e — Fischer-Tropsch process liquid fuel from coal (including peat): (a) Type of use",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11e[0].f3_111[0]",
+      "position": {
+        "page": 2,
+        "x": 252,
+        "y": 245.973
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11e_fischer_tropsch_coal_col_c",
+      "label": "Line 11e — Fischer-Tropsch process liquid fuel from coal (including peat): (c) Gallons, or gasoline or diesel gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11e[0].f3_113[0]",
+      "position": {
+        "page": 2,
+        "x": 324,
+        "y": 245.973
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11e_fischer_tropsch_coal_col_d",
+      "label": "Line 11e — Fischer-Tropsch process liquid fuel from coal (including peat): (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11e[0].ColD[0].f3_114[0]",
+      "position": {
+        "page": 2,
+        "x": 396,
+        "y": 245.973
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11e_fischer_tropsch_coal_col_d_cents",
+      "label": "Line 11e — Fischer-Tropsch process liquid fuel from coal (including peat): (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11e[0].ColD[0].f3_115[0]",
+      "position": {
+        "page": 2,
+        "x": 453.6,
+        "y": 245.973
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.11e_fischer_tropsch_coal_col_e",
+      "label": "Line 11e — Fischer-Tropsch process liquid fuel from coal (including peat): (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11e[0].ColE[0].f3_116[0]",
+      "position": {
+        "page": 2,
+        "x": 475.2,
+        "y": 245.973
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11e_fischer_tropsch_coal_col_e_cents",
+      "label": "Line 11e — Fischer-Tropsch process liquid fuel from coal (including peat): (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11e[0].ColE[0].f3_117[0]",
+      "position": {
+        "page": 2,
+        "x": 532.8,
+        "y": 245.973
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.11f_biomass_liquid_fuel_col_a",
+      "label": "Line 11f — Liquid fuel derived from biomass: (a) Type of use",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11f[0].f3_119[0]",
+      "position": {
+        "page": 2,
+        "x": 252,
+        "y": 233.974
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11f_biomass_liquid_fuel_col_c",
+      "label": "Line 11f — Liquid fuel derived from biomass: (c) Gallons, or gasoline or diesel gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11f[0].f3_121[0]",
+      "position": {
+        "page": 2,
+        "x": 324,
+        "y": 233.974
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11f_biomass_liquid_fuel_col_d",
+      "label": "Line 11f — Liquid fuel derived from biomass: (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11f[0].ColD[0].f3_122[0]",
+      "position": {
+        "page": 2,
+        "x": 396,
+        "y": 233.974
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11f_biomass_liquid_fuel_col_d_cents",
+      "label": "Line 11f — Liquid fuel derived from biomass: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11f[0].ColD[0].f3_123[0]",
+      "position": {
+        "page": 2,
+        "x": 453.6,
+        "y": 233.974
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.11f_biomass_liquid_fuel_col_e",
+      "label": "Line 11f — Liquid fuel derived from biomass: (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11f[0].ColE[0].f3_124[0]",
+      "position": {
+        "page": 2,
+        "x": 475.2,
+        "y": 233.974
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11f_biomass_liquid_fuel_col_e_cents",
+      "label": "Line 11f — Liquid fuel derived from biomass: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11f[0].ColE[0].f3_125[0]",
+      "position": {
+        "page": 2,
+        "x": 532.8,
+        "y": 233.974
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.11g_lng_col_a",
+      "label": "Line 11g — Liquefied natural gas (LNG): (a) Type of use",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11g[0].f3_127[0]",
+      "position": {
+        "page": 2,
+        "x": 252,
+        "y": 221.975
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11g_lng_col_c",
+      "label": "Line 11g — Liquefied natural gas (LNG): (c) Gallons, or gasoline or diesel gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11g[0].f3_129[0]",
+      "position": {
+        "page": 2,
+        "x": 324,
+        "y": 221.975
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11g_lng_col_d",
+      "label": "Line 11g — Liquefied natural gas (LNG): (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11g[0].ColD[0].f3_130[0]",
+      "position": {
+        "page": 2,
+        "x": 396,
+        "y": 221.975
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11g_lng_col_d_cents",
+      "label": "Line 11g — Liquefied natural gas (LNG): (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11g[0].ColD[0].f3_131[0]",
+      "position": {
+        "page": 2,
+        "x": 453.6,
+        "y": 221.975
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.11g_lng_col_e",
+      "label": "Line 11g — Liquefied natural gas (LNG): (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11g[0].ColE[0].f3_132[0]",
+      "position": {
+        "page": 2,
+        "x": 475.2,
+        "y": 221.975
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11g_lng_col_e_cents",
+      "label": "Line 11g — Liquefied natural gas (LNG): (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11g[0].ColE[0].f3_133[0]",
+      "position": {
+        "page": 2,
+        "x": 532.8,
+        "y": 221.975
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.11h_biomass_liquefied_gas_col_a",
+      "label": "Line 11h — Liquefied gas derived from biomass: (a) Type of use",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11h[0].f3_135[0]",
+      "position": {
+        "page": 2,
+        "x": 252,
+        "y": 209.976
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11h_biomass_liquefied_gas_col_c",
+      "label": "Line 11h — Liquefied gas derived from biomass: (c) Gallons, or gasoline or diesel gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11h[0].f3_137[0]",
+      "position": {
+        "page": 2,
+        "x": 324,
+        "y": 209.976
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11h_biomass_liquefied_gas_col_d",
+      "label": "Line 11h — Liquefied gas derived from biomass: (d) Actual fuel cost from your records",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11h[0].ColD[0].f3_138[0]",
+      "position": {
+        "page": 2,
+        "x": 396,
+        "y": 209.976
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11h_biomass_liquefied_gas_col_d_cents",
+      "label": "Line 11h — Liquefied gas derived from biomass: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11h[0].ColD[0].f3_139[0]",
+      "position": {
+        "page": 2,
+        "x": 453.6,
+        "y": 209.976
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.2.line.11h_biomass_liquefied_gas_col_e",
+      "label": "Line 11h — Liquefied gas derived from biomass: (e) Amount of credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11h[0].ColE[0].f3_140[0]",
+      "position": {
+        "page": 2,
+        "x": 475.2,
+        "y": 209.976
+      }
+    },
+    {
+      "fieldId": "form-4136.2.line.11h_biomass_liquefied_gas_col_e_cents",
+      "label": "Line 11h — Liquefied gas derived from biomass: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11h[0].ColE[0].f3_141[0]",
+      "position": {
+        "page": 2,
+        "x": 532.8,
+        "y": 209.976
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.3.line.13_registration_no",
+      "label": "Line 13 — Registered Credit Card Issuers: Registration No.",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_64[0]",
+      "position": {
+        "page": 3,
+        "x": 460.4,
+        "y": 544.968
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-4136.3.line.13a_diesel_state_local_government_col_c",
+      "label": "Line 13a — Diesel fuel sold for the exclusive use of a state or local government: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13a[0].f4_66[0]",
+      "position": {
+        "page": 3,
+        "x": 324,
+        "y": 455.966
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.13a_diesel_state_local_government_col_d",
+      "label": "Line 13a — Diesel fuel sold for the exclusive use of a state or local government: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13a[0].ColD[0].f4_67[0]",
+      "position": {
+        "page": 3,
+        "x": 403.2,
+        "y": 455.966
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.13a_diesel_state_local_government_col_d_cents",
+      "label": "Line 13a — Diesel fuel sold for the exclusive use of a state or local government: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13a[0].ColD[0].f4_68[0]",
+      "position": {
+        "page": 3,
+        "x": 453.6,
+        "y": 455.966
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.3.line.13a_diesel_state_local_government_col_e",
+      "label": "Line 13a — Diesel fuel sold for the exclusive use of a state or local government: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13a[0].ColE[0].f4_69[0]",
+      "position": {
+        "page": 3,
+        "x": 482.4,
+        "y": 455.966
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.13a_diesel_state_local_government_col_e_cents",
+      "label": "Line 13a — Diesel fuel sold for the exclusive use of a state or local government: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13a[0].ColE[0].f4_70[0]",
+      "position": {
+        "page": 3,
+        "x": 532.8,
+        "y": 455.966
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.3.line.13b_kerosene_state_local_government_col_c",
+      "label": "Line 13b — Kerosene sold for the exclusive use of a state or local government: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13b[0].f4_73[0]",
+      "position": {
+        "page": 3,
+        "x": 324,
+        "y": 431.965
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.13b_kerosene_state_local_government_col_d",
+      "label": "Line 13b — Kerosene sold for the exclusive use of a state or local government: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13b[0].ColD[0].f4_74[0]",
+      "position": {
+        "page": 3,
+        "x": 396,
+        "y": 431.965
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.13b_kerosene_state_local_government_col_d_cents",
+      "label": "Line 13b — Kerosene sold for the exclusive use of a state or local government: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13b[0].ColD[0].f4_75[0]",
+      "position": {
+        "page": 3,
+        "x": 453.6,
+        "y": 431.965
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.3.line.13b_kerosene_state_local_government_col_e",
+      "label": "Line 13b — Kerosene sold for the exclusive use of a state or local government: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13b[0].ColE[0].f4_76[0]",
+      "position": {
+        "page": 3,
+        "x": 475.2,
+        "y": 431.965
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.13b_kerosene_state_local_government_col_e_cents",
+      "label": "Line 13b — Kerosene sold for the exclusive use of a state or local government: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13b[0].ColE[0].f4_77[0]",
+      "position": {
+        "page": 3,
+        "x": 532.8,
+        "y": 431.965
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.3.line.13c_aviation_kerosene_state_local_government_col_c",
+      "label": "Line 13c — Kerosene for use in aviation sold for the exclusive use of a state or local government taxed at $.219: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13c[0].f4_80[0]",
+      "position": {
+        "page": 3,
+        "x": 324,
+        "y": 407.964
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.13c_aviation_kerosene_state_local_government_col_d",
+      "label": "Line 13c — Kerosene for use in aviation sold for the exclusive use of a state or local government taxed at $.219: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13c[0].ColD[0].f4_81[0]",
+      "position": {
+        "page": 3,
+        "x": 396,
+        "y": 407.964
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.13c_aviation_kerosene_state_local_government_col_d_cents",
+      "label": "Line 13c — Kerosene for use in aviation sold for the exclusive use of a state or local government taxed at $.219: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13c[0].ColD[0].f4_82[0]",
+      "position": {
+        "page": 3,
+        "x": 453.6,
+        "y": 407.964
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.3.line.13c_aviation_kerosene_state_local_government_col_e",
+      "label": "Line 13c — Kerosene for use in aviation sold for the exclusive use of a state or local government taxed at $.219: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13c[0].ColE[0].f4_83[0]",
+      "position": {
+        "page": 3,
+        "x": 475.2,
+        "y": 407.964
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.13c_aviation_kerosene_state_local_government_col_e_cents",
+      "label": "Line 13c — Kerosene for use in aviation sold for the exclusive use of a state or local government taxed at $.219: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13c[0].ColE[0].f4_84[0]",
+      "position": {
+        "page": 3,
+        "x": 532.8,
+        "y": 407.964
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.3.line.14a_nontaxable_use_col_a",
+      "label": "Line 14a — Nontaxable use of a diesel-water fuel emulsion: (a) Type of use",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14a[0].f4_86[0]",
+      "position": {
+        "page": 3,
+        "x": 252,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.14a_nontaxable_use_col_c",
+      "label": "Line 14a — Nontaxable use of a diesel-water fuel emulsion: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14a[0].f4_88[0]",
+      "position": {
+        "page": 3,
+        "x": 324,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.14a_nontaxable_use_col_d",
+      "label": "Line 14a — Nontaxable use of a diesel-water fuel emulsion: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14a[0].ColD[0].f4_89[0]",
+      "position": {
+        "page": 3,
+        "x": 403.2,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.14a_nontaxable_use_col_d_cents",
+      "label": "Line 14a — Nontaxable use of a diesel-water fuel emulsion: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14a[0].ColD[0].f4_90[0]",
+      "position": {
+        "page": 3,
+        "x": 453.6,
+        "y": 323.968
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.3.line.14a_nontaxable_use_col_e",
+      "label": "Line 14a — Nontaxable use of a diesel-water fuel emulsion: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14a[0].ColE[0].f4_91[0]",
+      "position": {
+        "page": 3,
+        "x": 482.4,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.14a_nontaxable_use_col_e_cents",
+      "label": "Line 14a — Nontaxable use of a diesel-water fuel emulsion: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14a[0].ColE[0].f4_92[0]",
+      "position": {
+        "page": 3,
+        "x": 532.8,
+        "y": 323.968
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.3.line.14b_exported_col_c",
+      "label": "Line 14b — Exported diesel-water fuel emulsion: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14b[0].f4_96[0]",
+      "position": {
+        "page": 3,
+        "x": 324,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.14b_exported_col_d",
+      "label": "Line 14b — Exported diesel-water fuel emulsion: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14b[0].ColD[0].f4_97[0]",
+      "position": {
+        "page": 3,
+        "x": 396,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.14b_exported_col_d_cents",
+      "label": "Line 14b — Exported diesel-water fuel emulsion: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14b[0].ColD[0].f4_98[0]",
+      "position": {
+        "page": 3,
+        "x": 453.6,
+        "y": 311.969
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.3.line.14b_exported_col_e",
+      "label": "Line 14b — Exported diesel-water fuel emulsion: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14b[0].ColE[0].f4_99[0]",
+      "position": {
+        "page": 3,
+        "x": 475.2,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.14b_exported_col_e_cents",
+      "label": "Line 14b — Exported diesel-water fuel emulsion: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14b[0].ColE[0].f4_100[0]",
+      "position": {
+        "page": 3,
+        "x": 532.8,
+        "y": 311.969
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.3.line.15_registration_no",
+      "label": "Line 15 — Diesel-Water Fuel Emulsion Blending: Registration No.",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_102[0]",
+      "position": {
+        "page": 3,
+        "x": 460.4,
+        "y": 298.969
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-4136.3.line.15a_blender_credit_col_c",
+      "label": "Line 15a — Blender credit: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line15[0].Line15a[0].f4_104[0]",
+      "position": {
+        "page": 3,
+        "x": 324,
+        "y": 245.97
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.15a_blender_credit_col_d",
+      "label": "Line 15a — Blender credit: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line15[0].Line15a[0].ColD[0].f4_105[0]",
+      "position": {
+        "page": 3,
+        "x": 403.2,
+        "y": 245.97
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.15a_blender_credit_col_d_cents",
+      "label": "Line 15a — Blender credit: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line15[0].Line15a[0].ColD[0].f4_106[0]",
+      "position": {
+        "page": 3,
+        "x": 453.6,
+        "y": 245.97
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.3.line.15a_blender_credit_col_e",
+      "label": "Line 15a — Blender credit: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line15[0].Line15a[0].ColE[0].f4_107[0]",
+      "position": {
+        "page": 3,
+        "x": 482.4,
+        "y": 245.97
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.15a_blender_credit_col_e_cents",
+      "label": "Line 15a — Blender credit: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line15[0].Line15a[0].ColE[0].f4_108[0]",
+      "position": {
+        "page": 3,
+        "x": 532.8,
+        "y": 245.97
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.3.line.16a_exported_dyed_diesel_blendstocks_col_c",
+      "label": "Line 16a — Exported dyed diesel fuel and exported gasoline blendstocks taxed at $.001: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16a[0].f4_111[0]",
+      "position": {
+        "page": 3,
+        "x": 324,
+        "y": 167.966
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.16a_exported_dyed_diesel_blendstocks_col_d",
+      "label": "Line 16a — Exported dyed diesel fuel and exported gasoline blendstocks taxed at $.001: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16a[0].ColD[0].f4_112[0]",
+      "position": {
+        "page": 3,
+        "x": 403.2,
+        "y": 167.966
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.16a_exported_dyed_diesel_blendstocks_col_d_cents",
+      "label": "Line 16a — Exported dyed diesel fuel and exported gasoline blendstocks taxed at $.001: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16a[0].ColD[0].f4_113[0]",
+      "position": {
+        "page": 3,
+        "x": 453.6,
+        "y": 167.966
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.3.line.16a_exported_dyed_diesel_blendstocks_col_e",
+      "label": "Line 16a — Exported dyed diesel fuel and exported gasoline blendstocks taxed at $.001: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16a[0].ColE[0].f4_114[0]",
+      "position": {
+        "page": 3,
+        "x": 482.4,
+        "y": 167.966
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.16a_exported_dyed_diesel_blendstocks_col_e_cents",
+      "label": "Line 16a — Exported dyed diesel fuel and exported gasoline blendstocks taxed at $.001: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16a[0].ColE[0].f4_115[0]",
+      "position": {
+        "page": 3,
+        "x": 532.8,
+        "y": 167.966
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.3.line.16b_exported_dyed_kerosene_col_c",
+      "label": "Line 16b — Exported dyed kerosene: (c) Qualified gallons",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16b[0].f4_118[0]",
+      "position": {
+        "page": 3,
+        "x": 324,
+        "y": 155.967
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.16b_exported_dyed_kerosene_col_d",
+      "label": "Line 16b — Exported dyed kerosene: (d) Actual fuel cost from your records (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16b[0].ColD[0].f4_119[0]",
+      "position": {
+        "page": 3,
+        "x": 396,
+        "y": 155.967
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.16b_exported_dyed_kerosene_col_d_cents",
+      "label": "Line 16b — Exported dyed kerosene: (d) Actual fuel cost from your records (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16b[0].ColD[0].f4_120[0]",
+      "position": {
+        "page": 3,
+        "x": 453.6,
+        "y": 155.967
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.3.line.16b_exported_dyed_kerosene_col_e",
+      "label": "Line 16b — Exported dyed kerosene: (e) Amount of credit (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16b[0].ColE[0].f4_121[0]",
+      "position": {
+        "page": 3,
+        "x": 475.2,
+        "y": 155.967
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.16b_exported_dyed_kerosene_col_e_cents",
+      "label": "Line 16b — Exported dyed kerosene: (e) Amount of credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16b[0].ColE[0].f4_122[0]",
+      "position": {
+        "page": 3,
+        "x": 532.8,
+        "y": 155.967
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-4136.3.line.17_total_income_tax_credit",
+      "label": "Line 17 — Total income tax credit claimed. Add lines 1 through 16, column (e) (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_124[0]",
+      "position": {
+        "page": 3,
+        "x": 452.4,
+        "y": 107.968
+      }
+    },
+    {
+      "fieldId": "form-4136.3.line.17_total_income_tax_credit_cents",
+      "label": "Line 17 — Total income tax credit claimed. Add lines 1 through 16, column (e) (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_125[0]",
+      "position": {
+        "page": 3,
+        "x": 518.4,
+        "y": 107.968
+      },
+      "maxLength": 3
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/4136/blank.pdf",
+    "ingestedAt": "2026-11-20T15:33:41.320Z",
+    "totalFields": 276,
+    "skipped": 0,
+    "catalogEntries": 276
+  }
+}

@@ -1,0 +1,825 @@
+{
+  "formId": "form-8978",
+  "fieldCount": 91,
+  "entries": [
+    {
+      "fieldId": "form-8978.0.header.partner_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-10A25"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.header.partner_tax_id_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "T-EYYAI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.header.source_aar_filing",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c2_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.header.source_bba_audit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_day_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].a[0].f1_04[0]",
+          "text": "16"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_day_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].b[0].f1_07[0]",
+          "text": "14"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_day_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].c[0].f1_10[0]",
+          "text": "07"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_day_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].d[0].f1_13[0]",
+          "text": "28"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_month_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].a[0].f1_03[0]",
+          "text": "10"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_month_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].b[0].f1_06[0]",
+          "text": "84"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_month_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].c[0].f1_09[0]",
+          "text": "92"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_month_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].d[0].f1_12[0]",
+          "text": "38"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_year_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].a[0].f1_05[0]",
+          "text": "40"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_year_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].b[0].f1_08[0]",
+          "text": "25"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_year_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].c[0].f1_11[0]",
+          "text": "53"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_year_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].d[0].f1_14[0]",
+          "text": "32"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.10_corrected_credits_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row10[0].f1_63[0]",
+          "text": "9,473"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.10_corrected_credits_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row10[0].f1_64[0]",
+          "text": "2,832"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.10_corrected_credits_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row10[0].f1_65[0]",
+          "text": "6,904"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.10_corrected_credits_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row10[0].f1_66[0]",
+          "text": "7,204"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.11_total_corrected_tax_liability_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row11[0].f1_67[0]",
+          "text": "7,867"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.11_total_corrected_tax_liability_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row11[0].f1_68[0]",
+          "text": "7,651"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.11_total_corrected_tax_liability_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row11[0].f1_69[0]",
+          "text": "9,494"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.11_total_corrected_tax_liability_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row11[0].f1_70[0]",
+          "text": "5,145"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.12_total_income_tax_original_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row12[0].f1_71[0]",
+          "text": "2,354"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.12_total_income_tax_original_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row12[0].f1_72[0]",
+          "text": "4,413"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.12_total_income_tax_original_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row12[0].f1_73[0]",
+          "text": "8,775"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.12_total_income_tax_original_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row12[0].f1_74[0]",
+          "text": "8,359"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.13_increase_decrease_to_tax_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row13[0].f1_75[0]",
+          "text": "8,582"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.13_increase_decrease_to_tax_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row13[0].f1_76[0]",
+          "text": "1,962"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.13_increase_decrease_to_tax_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row13[0].f1_77[0]",
+          "text": "9,218"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.13_increase_decrease_to_tax_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row13[0].f1_78[0]",
+          "text": "7,655"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.14_total_increase_decrease_reporting_year_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_79[0]",
+          "text": "4,842"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.15_penalties_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartII[0].Row15[0].f1_80[0]",
+          "text": "2,639"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.15_penalties_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartII[0].Row15[0].f1_81[0]",
+          "text": "3,236"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.15_penalties_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartII[0].Row15[0].f1_82[0]",
+          "text": "3,014"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.15_penalties_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartII[0].Row15[0].f1_83[0]",
+          "text": "2,996"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.16_total_penalties",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_84[0]",
+          "text": "4,525"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.17_interest_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartIII[0].Row17[0].f1_85[0]",
+          "text": "3,530"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.17_interest_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartIII[0].Row17[0].f1_86[0]",
+          "text": "2,401"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.17_interest_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartIII[0].Row17[0].f1_87[0]",
+          "text": "4,988"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.17_interest_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartIII[0].Row17[0].f1_88[0]",
+          "text": "4,195"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.18_total_interest",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_89[0]",
+          "text": "4,433"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.1a_total_income_original_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row1a[0].f1_15[0]",
+          "text": "3,389"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.1a_total_income_original_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row1a[0].f1_16[0]",
+          "text": "7,131"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.1a_total_income_original_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row1a[0].f1_17[0]",
+          "text": "5,037"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.1a_total_income_original_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row1a[0].f1_18[0]",
+          "text": "2,148"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.1b_adjustments_to_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row1b[0].f1_19[0]",
+          "text": "7,278"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.1b_adjustments_to_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row1b[0].f1_20[0]",
+          "text": "2,824"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.1b_adjustments_to_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row1b[0].f1_21[0]",
+          "text": "1,079"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.1b_adjustments_to_income_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row1b[0].f1_22[0]",
+          "text": "3,500"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.2_corrected_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row2[0].f1_23[0]",
+          "text": "4,209"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.2_corrected_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row2[0].f1_24[0]",
+          "text": "2,303"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.2_corrected_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row2[0].f1_25[0]",
+          "text": "8,886"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.2_corrected_income_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row2[0].f1_26[0]",
+          "text": "5,167"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.3a_total_deductions_original_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row3a[0].f1_27[0]",
+          "text": "7,451"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.3a_total_deductions_original_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row3a[0].f1_28[0]",
+          "text": "9,281"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.3a_total_deductions_original_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row3a[0].f1_29[0]",
+          "text": "8,136"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.3a_total_deductions_original_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row3a[0].f1_30[0]",
+          "text": "1,429"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.3b_adjustments_to_deductions_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row3b[0].f1_31[0]",
+          "text": "6,629"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.3b_adjustments_to_deductions_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row3b[0].f1_32[0]",
+          "text": "9,444"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.3b_adjustments_to_deductions_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row3b[0].f1_33[0]",
+          "text": "5,590"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.3b_adjustments_to_deductions_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row3b[0].f1_34[0]",
+          "text": "5,098"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.4_corrected_deductions_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row4[0].f1_35[0]",
+          "text": "6,765"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.4_corrected_deductions_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row4[0].f1_36[0]",
+          "text": "8,588"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.4_corrected_deductions_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row4[0].f1_37[0]",
+          "text": "7,645"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.4_corrected_deductions_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row4[0].f1_38[0]",
+          "text": "9,641"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.5_corrected_taxable_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row5[0].f1_39[0]",
+          "text": "6,216"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.5_corrected_taxable_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row5[0].f1_40[0]",
+          "text": "1,839"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.5_corrected_taxable_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row5[0].f1_41[0]",
+          "text": "2,234"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.5_corrected_taxable_income_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row5[0].f1_42[0]",
+          "text": "8,548"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.6_income_tax_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row6[0].f1_43[0]",
+          "text": "6,264"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.6_income_tax_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row6[0].f1_44[0]",
+          "text": "9,131"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.6_income_tax_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row6[0].f1_45[0]",
+          "text": "7,342"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.6_income_tax_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row6[0].f1_46[0]",
+          "text": "9,172"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.7_alternative_minimum_tax_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row7[0].f1_47[0]",
+          "text": "7,748"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.7_alternative_minimum_tax_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row7[0].f1_48[0]",
+          "text": "6,006"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.7_alternative_minimum_tax_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row7[0].f1_49[0]",
+          "text": "2,159"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.7_alternative_minimum_tax_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row7[0].f1_50[0]",
+          "text": "9,041"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.8_total_corrected_income_tax_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row8[0].f1_51[0]",
+          "text": "2,509"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.8_total_corrected_income_tax_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row8[0].f1_52[0]",
+          "text": "4,455"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.8_total_corrected_income_tax_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row8[0].f1_53[0]",
+          "text": "1,057"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.8_total_corrected_income_tax_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row8[0].f1_54[0]",
+          "text": "8,920"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.9a_total_credits_original_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row9a[0].f1_55[0]",
+          "text": "4,952"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.9a_total_credits_original_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row9a[0].f1_56[0]",
+          "text": "8,161"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.9a_total_credits_original_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row9a[0].f1_57[0]",
+          "text": "2,776"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.9a_total_credits_original_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row9a[0].f1_58[0]",
+          "text": "1,099"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.9b_adjustments_to_credits_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row9b[0].f1_59[0]",
+          "text": "4,884"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.9b_adjustments_to_credits_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row9b[0].f1_60[0]",
+          "text": "8,163"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.9b_adjustments_to_credits_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row9b[0].f1_61[0]",
+          "text": "8,754"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8978.0.line.9b_adjustments_to_credits_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row9b[0].f1_62[0]",
+          "text": "1,296"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,177 @@
+{
+  "formId": "form-8888",
+  "fieldCount": 19,
+  "entries": [
+    {
+      "fieldId": "form-8888.0.header.calendar_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].PgHeader[0].CalendarYear[0].f1_1[0]",
+          "text": "86"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8888.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8888.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-1UCKG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8888.0.line.1a_first_account_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "7,482"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8888.0.line.1b_first_account_routing_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line1bCombfield[0].f1_5[0]",
+          "text": "T-T4WGD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8888.0.line.1c_first_account_checking",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8888.0.line.1c_first_account_savings",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8888.0.line.1d_first_account_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line1dCombfield[0].f1_6[0]",
+          "text": "T-700CM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8888.0.line.2a_second_account_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "1,358"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8888.0.line.2b_second_account_routing_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line2bCombfield[0].f1_8[0]",
+          "text": "T-O9ERI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8888.0.line.2c_second_account_checking",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8888.0.line.2c_second_account_savings",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8888.0.line.2d_second_account_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line2dCombfield[0].f1_9[0]",
+          "text": "T-GUHAN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8888.0.line.3a_third_account_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "9,747"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8888.0.line.3b_third_account_routing_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line3bCombfield[0].f1_11[0]",
+          "text": "T-Q9C3V"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8888.0.line.3c_third_account_checking",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8888.0.line.3c_third_account_savings",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8888.0.line.3d_third_account_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line3dCombfield[0].f1_12[0]",
+          "text": "T-13QU3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8888.0.line.5_total_allocation_refund",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "9,032"
+        }
+      ]
+    }
+  ]
+}

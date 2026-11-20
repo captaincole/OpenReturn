@@ -1,0 +1,1395 @@
+{
+  "form": {
+    "formId": "form-8978",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 8978, Partner's Additional Reporting Year Tax"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8978.0.header.partner_name",
+      "label": "Name of partner(s)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8978.0.header.partner_tax_id_number",
+      "label": "Partner tax ID number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8978.0.header.source_bba_audit",
+      "label": "Source of review year adjustments: BBA Audit",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c2_1[0]",
+      "position": {
+        "page": 0,
+        "x": 187.2,
+        "y": 673.969
+      }
+    },
+    {
+      "fieldId": "form-8978.0.header.source_aar_filing",
+      "label": "Source of review year adjustments: AAR Filing",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c2_2[0]",
+      "position": {
+        "page": 0,
+        "x": 259.2,
+        "y": 673.969
+      }
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_month_col_a",
+      "label": "Column (a) — Tax Year Ended: month",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].a[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 292,
+        "y": 624.967
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_day_col_a",
+      "label": "Column (a) — Tax Year Ended: day",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].a[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 313.2,
+        "y": 624.967
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_year_col_a",
+      "label": "Column (a) — Tax Year Ended: year (last two digits, after 20)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].a[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 345.6,
+        "y": 624.967
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_month_col_b",
+      "label": "Column (b) — Tax Year Ended: month",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].b[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 364,
+        "y": 624.967
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_day_col_b",
+      "label": "Column (b) — Tax Year Ended: day",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].b[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 385.2,
+        "y": 624.967
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_year_col_b",
+      "label": "Column (b) — Tax Year Ended: year (last two digits, after 20)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].b[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 624.967
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_month_col_c",
+      "label": "Column (c) — Tax Year Ended: month",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].c[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 436,
+        "y": 624.967
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_day_col_c",
+      "label": "Column (c) — Tax Year Ended: day",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].c[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 457.2,
+        "y": 624.967
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_year_col_c",
+      "label": "Column (c) — Tax Year Ended: year (last two digits, after 20)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].c[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 624.967
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_month_col_d",
+      "label": "Column (d) — Tax Year Ended: month",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].d[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 508,
+        "y": 624.967
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_day_col_d",
+      "label": "Column (d) — Tax Year Ended: day",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].d[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 529.2,
+        "y": 624.967
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8978.0.header.tax_year_ended_year_col_d",
+      "label": "Column (d) — Tax Year Ended: year (last two digits, after 20)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Header[0].d[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 561.6,
+        "y": 624.967
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8978.0.line.1a_total_income_original_col_a",
+      "label": "Line 1a, column (a) — Total income per original return or as previously adjusted",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row1a[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 599.966
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.1a_total_income_original_col_b",
+      "label": "Line 1a, column (b) — Total income per original return or as previously adjusted",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row1a[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 599.966
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.1a_total_income_original_col_c",
+      "label": "Line 1a, column (c) — Total income per original return or as previously adjusted",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row1a[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 599.966
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.1a_total_income_original_col_d",
+      "label": "Line 1a, column (d) — Total income per original return or as previously adjusted",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row1a[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 599.966
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.1b_adjustments_to_income_col_a",
+      "label": "Line 1b, column (a) — Adjustments to income from Schedule A (Form 8978), line 2, columns (a) through (d)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row1b[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 575.965
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.1b_adjustments_to_income_col_b",
+      "label": "Line 1b, column (b) — Adjustments to income from Schedule A (Form 8978), line 2, columns (a) through (d)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row1b[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 575.965
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.1b_adjustments_to_income_col_c",
+      "label": "Line 1b, column (c) — Adjustments to income from Schedule A (Form 8978), line 2, columns (a) through (d)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row1b[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 575.965
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.1b_adjustments_to_income_col_d",
+      "label": "Line 1b, column (d) — Adjustments to income from Schedule A (Form 8978), line 2, columns (a) through (d)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row1b[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 575.965
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.2_corrected_income_col_a",
+      "label": "Line 2, column (a) — Combine lines 1a and 1b and enter the corrected income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row2[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 551.964
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.2_corrected_income_col_b",
+      "label": "Line 2, column (b) — Combine lines 1a and 1b and enter the corrected income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row2[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 551.964
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.2_corrected_income_col_c",
+      "label": "Line 2, column (c) — Combine lines 1a and 1b and enter the corrected income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row2[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 551.964
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.2_corrected_income_col_d",
+      "label": "Line 2, column (d) — Combine lines 1a and 1b and enter the corrected income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row2[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 551.964
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.3a_total_deductions_original_col_a",
+      "label": "Line 3a, column (a) — Total deductions per original return or as previously adjusted",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row3a[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 527.963
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.3a_total_deductions_original_col_b",
+      "label": "Line 3a, column (b) — Total deductions per original return or as previously adjusted",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row3a[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 527.963
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.3a_total_deductions_original_col_c",
+      "label": "Line 3a, column (c) — Total deductions per original return or as previously adjusted",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row3a[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 527.963
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.3a_total_deductions_original_col_d",
+      "label": "Line 3a, column (d) — Total deductions per original return or as previously adjusted",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row3a[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 527.963
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.3b_adjustments_to_deductions_col_a",
+      "label": "Line 3b, column (a) — Adjustments to deductions from Schedule A (Form 8978), line 4, columns (a) through (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row3b[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 503.962
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.3b_adjustments_to_deductions_col_b",
+      "label": "Line 3b, column (b) — Adjustments to deductions from Schedule A (Form 8978), line 4, columns (a) through (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row3b[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 503.962
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.3b_adjustments_to_deductions_col_c",
+      "label": "Line 3b, column (c) — Adjustments to deductions from Schedule A (Form 8978), line 4, columns (a) through (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row3b[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 503.962
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.3b_adjustments_to_deductions_col_d",
+      "label": "Line 3b, column (d) — Adjustments to deductions from Schedule A (Form 8978), line 4, columns (a) through (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row3b[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 503.962
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.4_corrected_deductions_col_a",
+      "label": "Line 4, column (a) — Combine lines 3a and 3b and enter the corrected deductions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row4[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 479.961
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.4_corrected_deductions_col_b",
+      "label": "Line 4, column (b) — Combine lines 3a and 3b and enter the corrected deductions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row4[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 479.961
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.4_corrected_deductions_col_c",
+      "label": "Line 4, column (c) — Combine lines 3a and 3b and enter the corrected deductions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row4[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 479.961
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.4_corrected_deductions_col_d",
+      "label": "Line 4, column (d) — Combine lines 3a and 3b and enter the corrected deductions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row4[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 479.961
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.5_corrected_taxable_income_col_a",
+      "label": "Line 5, column (a) — Corrected taxable income. Subtract line 4 from line 2",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row5[0].f1_39[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 455.96
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.5_corrected_taxable_income_col_b",
+      "label": "Line 5, column (b) — Corrected taxable income. Subtract line 4 from line 2",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row5[0].f1_40[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 455.96
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.5_corrected_taxable_income_col_c",
+      "label": "Line 5, column (c) — Corrected taxable income. Subtract line 4 from line 2",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row5[0].f1_41[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 455.96
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.5_corrected_taxable_income_col_d",
+      "label": "Line 5, column (d) — Corrected taxable income. Subtract line 4 from line 2",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row5[0].f1_42[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 455.96
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.6_income_tax_col_a",
+      "label": "Line 6, column (a) — Income tax on line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row6[0].f1_43[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 431.959
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.6_income_tax_col_b",
+      "label": "Line 6, column (b) — Income tax on line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row6[0].f1_44[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 431.959
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.6_income_tax_col_c",
+      "label": "Line 6, column (c) — Income tax on line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row6[0].f1_45[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 431.959
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.6_income_tax_col_d",
+      "label": "Line 6, column (d) — Income tax on line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row6[0].f1_46[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 431.959
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.7_alternative_minimum_tax_col_a",
+      "label": "Line 7, column (a) — Alternative minimum tax on line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row7[0].f1_47[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 407.958
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.7_alternative_minimum_tax_col_b",
+      "label": "Line 7, column (b) — Alternative minimum tax on line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row7[0].f1_48[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 407.958
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.7_alternative_minimum_tax_col_c",
+      "label": "Line 7, column (c) — Alternative minimum tax on line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row7[0].f1_49[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 407.958
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.7_alternative_minimum_tax_col_d",
+      "label": "Line 7, column (d) — Alternative minimum tax on line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row7[0].f1_50[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 407.958
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.8_total_corrected_income_tax_col_a",
+      "label": "Line 8, column (a) — Total corrected income tax. Add lines 6 and 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row8[0].f1_51[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 383.957
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.8_total_corrected_income_tax_col_b",
+      "label": "Line 8, column (b) — Total corrected income tax. Add lines 6 and 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row8[0].f1_52[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 383.957
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.8_total_corrected_income_tax_col_c",
+      "label": "Line 8, column (c) — Total corrected income tax. Add lines 6 and 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row8[0].f1_53[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 383.957
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.8_total_corrected_income_tax_col_d",
+      "label": "Line 8, column (d) — Total corrected income tax. Add lines 6 and 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row8[0].f1_54[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 383.957
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.9a_total_credits_original_col_a",
+      "label": "Line 9a, column (a) — Total credits per original return or as previously adjusted",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row9a[0].f1_55[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 359.956
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.9a_total_credits_original_col_b",
+      "label": "Line 9a, column (b) — Total credits per original return or as previously adjusted",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row9a[0].f1_56[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 359.956
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.9a_total_credits_original_col_c",
+      "label": "Line 9a, column (c) — Total credits per original return or as previously adjusted",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row9a[0].f1_57[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 359.956
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.9a_total_credits_original_col_d",
+      "label": "Line 9a, column (d) — Total credits per original return or as previously adjusted",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row9a[0].f1_58[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 359.956
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.9b_adjustments_to_credits_col_a",
+      "label": "Line 9b, column (a) — Adjustments to credits from Schedule A (Form 8978), line 6, columns (a) through (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row9b[0].f1_59[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 335.955
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.9b_adjustments_to_credits_col_b",
+      "label": "Line 9b, column (b) — Adjustments to credits from Schedule A (Form 8978), line 6, columns (a) through (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row9b[0].f1_60[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 335.955
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.9b_adjustments_to_credits_col_c",
+      "label": "Line 9b, column (c) — Adjustments to credits from Schedule A (Form 8978), line 6, columns (a) through (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row9b[0].f1_61[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 335.955
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.9b_adjustments_to_credits_col_d",
+      "label": "Line 9b, column (d) — Adjustments to credits from Schedule A (Form 8978), line 6, columns (a) through (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row9b[0].f1_62[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 335.955
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.10_corrected_credits_col_a",
+      "label": "Line 10, column (a) — Combine lines 9a and 9b and enter the corrected credits",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row10[0].f1_63[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 311.954
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.10_corrected_credits_col_b",
+      "label": "Line 10, column (b) — Combine lines 9a and 9b and enter the corrected credits",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row10[0].f1_64[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 311.954
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.10_corrected_credits_col_c",
+      "label": "Line 10, column (c) — Combine lines 9a and 9b and enter the corrected credits",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row10[0].f1_65[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 311.954
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.10_corrected_credits_col_d",
+      "label": "Line 10, column (d) — Combine lines 9a and 9b and enter the corrected credits",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row10[0].f1_66[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 311.954
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.11_total_corrected_tax_liability_col_a",
+      "label": "Line 11, column (a) — Total corrected income tax liability. Subtract line 10 from line 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row11[0].f1_67[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 287.953
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.11_total_corrected_tax_liability_col_b",
+      "label": "Line 11, column (b) — Total corrected income tax liability. Subtract line 10 from line 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row11[0].f1_68[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 287.953
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.11_total_corrected_tax_liability_col_c",
+      "label": "Line 11, column (c) — Total corrected income tax liability. Subtract line 10 from line 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row11[0].f1_69[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 287.953
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.11_total_corrected_tax_liability_col_d",
+      "label": "Line 11, column (d) — Total corrected income tax liability. Subtract line 10 from line 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row11[0].f1_70[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 287.953
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.12_total_income_tax_original_col_a",
+      "label": "Line 12, column (a) — Total income tax shown on original return or as previously adjusted",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row12[0].f1_71[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 263.952
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.12_total_income_tax_original_col_b",
+      "label": "Line 12, column (b) — Total income tax shown on original return or as previously adjusted",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row12[0].f1_72[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 263.952
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.12_total_income_tax_original_col_c",
+      "label": "Line 12, column (c) — Total income tax shown on original return or as previously adjusted",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row12[0].f1_73[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 263.952
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.12_total_income_tax_original_col_d",
+      "label": "Line 12, column (d) — Total income tax shown on original return or as previously adjusted",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row12[0].f1_74[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 263.952
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.13_increase_decrease_to_tax_col_a",
+      "label": "Line 13, column (a) — Increase/Decrease to tax. Subtract line 12 from line 11, columns (a) through (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row13[0].f1_75[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 239.951
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.13_increase_decrease_to_tax_col_b",
+      "label": "Line 13, column (b) — Increase/Decrease to tax. Subtract line 12 from line 11, columns (a) through (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row13[0].f1_76[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 239.951
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.13_increase_decrease_to_tax_col_c",
+      "label": "Line 13, column (c) — Increase/Decrease to tax. Subtract line 12 from line 11, columns (a) through (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row13[0].f1_77[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 239.951
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.13_increase_decrease_to_tax_col_d",
+      "label": "Line 13, column (d) — Increase/Decrease to tax. Subtract line 12 from line 11, columns (a) through (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].Row13[0].f1_78[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 239.951
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.14_total_increase_decrease_reporting_year_tax",
+      "label": "Line 14 — Total increase/decrease to reporting year tax. Add line 13, columns (a) through (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_79[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.15_penalties_col_a",
+      "label": "Line 15, column (a) — Penalties",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartII[0].Row15[0].f1_80[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.15_penalties_col_b",
+      "label": "Line 15, column (b) — Penalties",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartII[0].Row15[0].f1_81[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.15_penalties_col_c",
+      "label": "Line 15, column (c) — Penalties",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartII[0].Row15[0].f1_82[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.15_penalties_col_d",
+      "label": "Line 15, column (d) — Penalties",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartII[0].Row15[0].f1_83[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.16_total_penalties",
+      "label": "Line 16 — Total penalties. Add line 15, columns (a) through (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_84[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 155.967
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.17_interest_col_a",
+      "label": "Line 17, column (a) — Interest",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartIII[0].Row17[0].f1_85[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 119.967
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.17_interest_col_b",
+      "label": "Line 17, column (b) — Interest",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartIII[0].Row17[0].f1_86[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 119.967
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.17_interest_col_c",
+      "label": "Line 17, column (c) — Interest",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartIII[0].Row17[0].f1_87[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 119.967
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.17_interest_col_d",
+      "label": "Line 17, column (d) — Interest",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartIII[0].Row17[0].f1_88[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 119.967
+      }
+    },
+    {
+      "fieldId": "form-8978.0.line.18_total_interest",
+      "label": "Line 18 — Total interest. Add line 17, columns (a) through (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_89[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 95.966
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8978/blank.pdf",
+    "ingestedAt": "2026-11-20T15:34:06.312Z",
+    "totalFields": 91,
+    "skipped": 0,
+    "catalogEntries": 91
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "form": {
+    "formId": "form-8859",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 8859, Carryforward of the District of Columbia First-Time Homebuyer Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8859.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8859.0.header.ssn",
+      "label": "Your social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 460.8,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8859.0.line.1_credit_carryforward_from_2024",
+      "label": "Line 1 — Credit carryforward from 2024. Enter the amount from line 4 of your 2024 Form 8859",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 665.968
+      }
+    },
+    {
+      "fieldId": "form-8859.0.line.2_tax_liability_limitation",
+      "label": "Line 2 — Limitation based on tax liability. Enter the amount from the Tax Liability Limit Worksheet in the instructions below",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 641.97
+      }
+    },
+    {
+      "fieldId": "form-8859.0.line.3_current_year_credit",
+      "label": "Line 3 — Current year credit. Enter the smaller of line 1 or line 2 here",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 617.969
+      }
+    },
+    {
+      "fieldId": "form-8859.0.line.4_credit_carryforward_to_2026",
+      "label": "Line 4 — Credit carryforward to 2026. Subtract line 3 from line 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 605.97
+      }
+    },
+    {
+      "fieldId": "form-8859.0.worksheet.1_tax_liability_before_credits",
+      "label": "Tax Liability Limit Worksheet, line 1 — Enter the tax liability before the application of credits from your 2025 income tax return (Form 1040, 1040-SR, or 1040-NR, line 18)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Col1[0].Line1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 223.2,
+        "y": 284.968
+      }
+    },
+    {
+      "fieldId": "form-8859.0.worksheet.2_total_other_credits",
+      "label": "Tax Liability Limit Worksheet, line 2 — Enter the total of the following credit(s)/adjustment(s) if you are taking the credit(s)/adjustment(s) on your 2025 income tax return",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Col2[0].Line2[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 198.967
+      }
+    },
+    {
+      "fieldId": "form-8859.0.worksheet.3_tax_liability_limit",
+      "label": "Tax Liability Limit Worksheet, line 3 — Subtract line 2 from line 1. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Col2[0].Line3[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 152.968
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8859/blank.pdf",
+    "ingestedAt": "2026-11-20T15:33:58.287Z",
+    "totalFields": 9,
+    "skipped": 0,
+    "catalogEntries": 9
+  }
+}

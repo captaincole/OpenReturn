@@ -1,0 +1,3930 @@
+{
+  "formId": "form-5471",
+  "fieldCount": 436,
+  "entries": [
+    {
+      "fieldId": "form-5471.0.header.a_identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "T-33N0O"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.accounting_period_beginning",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].PgHeader[0].f1_1[0]",
+          "text": "T-1IJF6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.accounting_period_beginning_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].PgHeader[0].f1_2[0]",
+          "text": "74"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.accounting_period_ending",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].PgHeader[0].f1_3[0]",
+          "text": "T-1W1K9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.accounting_period_ending_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].PgHeader[0].f1_4[0]",
+          "text": "90"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.b_category_1a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.b_category_1b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.b_category_1c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.b_category_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.b_category_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.b_category_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.b_category_5a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.b_category_5b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.b_category_5c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_9[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.c_voting_stock_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "T-14TRU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.d_final_form_5471",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_10[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.e_excepted_foreign_financial_assets",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_11[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.f_alternative_information",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_12[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.filer_city",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Address[0].f1_8[0]",
+          "text": "T-VKHVJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.filer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Address[0].f1_5[0]",
+          "text": "T-1H5M7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.filer_room_suite",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Address[0].f1_7[0]",
+          "text": "T-1DZ9B"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.filer_state",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Address[0].f1_9[0]",
+          "text": "54"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.filer_street_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Address[0].f1_6[0]",
+          "text": "T-JJ3JK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.filer_tax_year_beginning",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "T-1FBTL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.filer_tax_year_beginning_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "33"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.filer_tax_year_ending",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "T-1SXCM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.filer_tax_year_ending_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "74"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.filer_zip",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Address[0].f1_10[0]",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.g_alternative_information_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "T-1SWV0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row1_address_col_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row1[0].f1_19[0]",
+          "text": "T-15QFY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row1_director_col_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row1[0].c1_15[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row1_identifying_number_col_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row1[0].f1_20[0]",
+          "text": "T-U7A48"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row1_name_col_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row1[0].f1_18[0]",
+          "text": "T-GSC2M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row1_officer_col_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row1[0].c1_14[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row1_shareholder_col_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row1[0].c1_13[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row2_address_col_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row2[0].f1_22[0]",
+          "text": "T-16UHV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row2_director_col_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row2[0].c1_18[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row2_identifying_number_col_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row2[0].f1_23[0]",
+          "text": "T-1JRO0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row2_name_col_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row2[0].f1_21[0]",
+          "text": "T-12J2A"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row2_officer_col_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row2[0].c1_17[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row2_shareholder_col_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row2[0].c1_16[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row3_address_col_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row3[0].f1_25[0]",
+          "text": "T-1YTVG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row3_director_col_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row3[0].c1_21[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row3_identifying_number_col_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row3[0].f1_26[0]",
+          "text": "T-1FU9M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row3_name_col_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row3[0].f1_24[0]",
+          "text": "T-76KNY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row3_officer_col_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row3[0].c1_20[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row3_shareholder_col_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row3[0].c1_19[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row4_address_col_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row4[0].f1_28[0]",
+          "text": "T-14F5W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row4_director_col_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row4[0].c1_24[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row4_identifying_number_col_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row4[0].f1_29[0]",
+          "text": "T-117LS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row4_name_col_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row4[0].f1_27[0]",
+          "text": "T-GNJ5O"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row4_officer_col_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row4[0].c1_23[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.header.h_row4_shareholder_col_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_LineF[0].Row4[0].c1_22[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.line.1a_foreign_corporation_name_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+          "text": "T-1D57I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.line.1b1_foreign_corporation_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+          "text": "T-181W3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.line.1b2_reference_id_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+          "text": "T-BZ2WS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.line.1b3_previous_reference_id_numbers",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+          "text": "T-EWIJR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.line.1c_country_of_incorporation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+          "text": "T-ZAQ94"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.line.1d_date_of_incorporation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_35[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.line.1e_principal_place_of_business",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_36[0]",
+          "text": "T-1WJLF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.line.1f_principal_business_activity_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_37[0]",
+          "text": "T-13YFK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.line.1g_principal_business_activity",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_38[0]",
+          "text": "T-1CWX3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.line.1h_functional_currency_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_39[0]",
+          "text": "T-1N9Z2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.line.2a_us_branch_office_or_agent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_40[0]",
+          "text": "T-1HGIJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.line.2b_i_us_taxable_income_or_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_41[0]",
+          "text": "2,976"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.line.2b_ii_us_income_tax_paid",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_42[0]",
+          "text": "8,663"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.line.2c_statutory_or_resident_agent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_43[0]",
+          "text": "T-15ROY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.line.2d_custodian_of_books_and_records",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_44[0]",
+          "text": "T-119HI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.schedule_a.row1_shares_beginning_col_b_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SchA[0].Row1[0].f1_46[0]",
+          "text": "1,247"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.schedule_a.row1_shares_end_col_b_ii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SchA[0].Row1[0].f1_47[0]",
+          "text": "6,247"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.schedule_a.row1_stock_class_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SchA[0].Row1[0].f1_45[0]",
+          "text": "T-1BXV3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.schedule_a.row2_shares_beginning_col_b_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SchA[0].Row2[0].f1_49[0]",
+          "text": "3,549"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.schedule_a.row2_shares_end_col_b_ii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SchA[0].Row2[0].f1_50[0]",
+          "text": "4,508"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.schedule_a.row2_stock_class_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SchA[0].Row2[0].f1_48[0]",
+          "text": "T-1FDTB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.schedule_a.row3_shares_beginning_col_b_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SchA[0].Row3[0].f1_53[0]",
+          "text": "3,641"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.schedule_a.row3_shares_end_col_b_ii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SchA[0].Row3[0].f1_54[0]",
+          "text": "3,787"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.schedule_a.row3_stock_class_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SchA[0].Row3[0].f1_52[0]",
+          "text": "T-SI4SU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.schedule_a.row4_shares_beginning_col_b_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SchA[0].Row4[0].f1_56[0]",
+          "text": "8,647"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.schedule_a.row4_shares_end_col_b_ii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SchA[0].Row4[0].f1_57[0]",
+          "text": "8,966"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.0.schedule_a.row4_stock_class_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SchA[0].Row4[0].f1_55[0]",
+          "text": "T-1HHBI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row1_shareholder_class1_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row1[0].Row1b[0].f2_2[0]",
+          "text": "T-1GZAO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row1_shareholder_class1_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row1[0].Row1c[0].f2_6[0]",
+          "text": "9,881"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row1_shareholder_class1_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row1[0].Row1d[0].f2_10[0]",
+          "text": "7,128"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row1_shareholder_class2_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row1[0].Row1b[0].f2_3[0]",
+          "text": "T-L9SWF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row1_shareholder_class2_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row1[0].Row1c[0].f2_7[0]",
+          "text": "4,642"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row1_shareholder_class2_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row1[0].Row1d[0].f2_11[0]",
+          "text": "3,473"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row1_shareholder_class3_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row1[0].Row1b[0].f2_4[0]",
+          "text": "T-1TU8X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row1_shareholder_class3_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row1[0].Row1c[0].f2_8[0]",
+          "text": "1,501"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row1_shareholder_class3_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row1[0].Row1d[0].f2_12[0]",
+          "text": "8,966"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row1_shareholder_class4_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row1[0].Row1b[0].f2_5[0]",
+          "text": "T-GGDVI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row1_shareholder_class4_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row1[0].Row1c[0].f2_9[0]",
+          "text": "6,331"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row1_shareholder_class4_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row1[0].Row1d[0].f2_13[0]",
+          "text": "3,240"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row1_shareholder_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row1[0].f2_1[0]",
+          "text": "T-15YK8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row1_shareholder_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row1[0].f2_14[0]",
+          "text": "T-152RI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row2_shareholder_class1_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row2[0].Row2b[0].f2_16[0]",
+          "text": "T-1YSO0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row2_shareholder_class1_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row2[0].Row2c[0].f2_21[0]",
+          "text": "6,205"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row2_shareholder_class1_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row2[0].Row2d[0].f2_25[0]",
+          "text": "7,081"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row2_shareholder_class2_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row2[0].Row2b[0].f2_17[0]",
+          "text": "T-M79IH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row2_shareholder_class2_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row2[0].Row2c[0].f2_22[0]",
+          "text": "1,778"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row2_shareholder_class2_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row2[0].Row2d[0].f2_26[0]",
+          "text": "9,382"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row2_shareholder_class3_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row2[0].Row2b[0].f2_18[0]",
+          "text": "T-13XOJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row2_shareholder_class3_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row2[0].Row2c[0].f2_23[0]",
+          "text": "9,049"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row2_shareholder_class3_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row2[0].Row2d[0].f2_27[0]",
+          "text": "9,388"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row2_shareholder_class4_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row2[0].Row2b[0].f2_19[0]",
+          "text": "T-10FEF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row2_shareholder_class4_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row2[0].Row2c[0].f2_24[0]",
+          "text": "8,847"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row2_shareholder_class4_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row2[0].Row2d[0].f2_28[0]",
+          "text": "7,718"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row2_shareholder_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row2[0].f2_15[0]",
+          "text": "T-F9Z3C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row2_shareholder_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row2[0].f2_29[0]",
+          "text": "T-10WZA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row3_shareholder_class1_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row3[0].Row3b[0].f2_31[0]",
+          "text": "T-5Y49W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row3_shareholder_class1_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row3[0].Row3c[0].f2_35[0]",
+          "text": "7,284"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row3_shareholder_class1_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row3[0].Row3d[0].f2_39[0]",
+          "text": "8,415"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row3_shareholder_class2_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row3[0].Row3b[0].f2_32[0]",
+          "text": "T-1H6CI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row3_shareholder_class2_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row3[0].Row3c[0].f2_36[0]",
+          "text": "1,671"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row3_shareholder_class2_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row3[0].Row3d[0].f2_40[0]",
+          "text": "5,712"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row3_shareholder_class3_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row3[0].Row3b[0].f2_33[0]",
+          "text": "T-KXL9P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row3_shareholder_class3_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row3[0].Row3c[0].f2_37[0]",
+          "text": "3,485"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row3_shareholder_class3_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row3[0].Row3d[0].f2_41[0]",
+          "text": "3,711"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row3_shareholder_class4_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row3[0].Row3b[0].f2_34[0]",
+          "text": "T-1P1RT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row3_shareholder_class4_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row3[0].Row3c[0].f2_38[0]",
+          "text": "9,701"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row3_shareholder_class4_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row3[0].Row3d[0].f2_42[0]",
+          "text": "5,971"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row3_shareholder_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row3[0].f2_30[0]",
+          "text": "T-YAHVL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row3_shareholder_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row3[0].f2_43[0]",
+          "text": "T-N2ZR8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row4_shareholder_class1_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row4[0].Row4b[0].f2_45[0]",
+          "text": "T-127MA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row4_shareholder_class1_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row4[0].Row4c[0].f2_49[0]",
+          "text": "4,173"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row4_shareholder_class1_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row4[0].Row4d[0].f2_53[0]",
+          "text": "7,666"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row4_shareholder_class2_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row4[0].Row4b[0].f2_46[0]",
+          "text": "T-X46SQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row4_shareholder_class2_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row4[0].Row4c[0].f2_50[0]",
+          "text": "6,152"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row4_shareholder_class2_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row4[0].Row4d[0].f2_54[0]",
+          "text": "7,906"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row4_shareholder_class3_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row4[0].Row4b[0].f2_47[0]",
+          "text": "T-12H02"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row4_shareholder_class3_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row4[0].Row4c[0].f2_51[0]",
+          "text": "7,005"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row4_shareholder_class3_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row4[0].Row4d[0].f2_55[0]",
+          "text": "6,825"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row4_shareholder_class4_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row4[0].Row4b[0].f2_48[0]",
+          "text": "T-K3892"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row4_shareholder_class4_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row4[0].Row4c[0].f2_52[0]",
+          "text": "1,143"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row4_shareholder_class4_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row4[0].Row4d[0].f2_56[0]",
+          "text": "2,800"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row4_shareholder_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row4[0].f2_44[0]",
+          "text": "T-C0XG1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row4_shareholder_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row4[0].f2_57[0]",
+          "text": "T-1BKXK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row5_shareholder_class1_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row5[0].Row5b[0].f2_59[0]",
+          "text": "T-1TX8U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row5_shareholder_class1_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row5[0].Row5c[0].f2_63[0]",
+          "text": "9,506"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row5_shareholder_class1_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row5[0].Row5d[0].f2_67[0]",
+          "text": "2,109"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row5_shareholder_class2_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row5[0].Row5b[0].f2_60[0]",
+          "text": "T-1GP6K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row5_shareholder_class2_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row5[0].Row5c[0].f2_64[0]",
+          "text": "5,972"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row5_shareholder_class2_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row5[0].Row5d[0].f2_68[0]",
+          "text": "5,628"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row5_shareholder_class3_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row5[0].Row5b[0].f2_61[0]",
+          "text": "T-1VU3Z"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row5_shareholder_class3_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row5[0].Row5c[0].f2_65[0]",
+          "text": "7,675"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row5_shareholder_class3_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row5[0].Row5d[0].f2_69[0]",
+          "text": "9,464"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row5_shareholder_class4_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row5[0].Row5b[0].f2_62[0]",
+          "text": "T-KYO3W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row5_shareholder_class4_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row5[0].Row5c[0].f2_66[0]",
+          "text": "6,036"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row5_shareholder_class4_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row5[0].Row5d[0].f2_70[0]",
+          "text": "6,233"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row5_shareholder_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row5[0].f2_58[0]",
+          "text": "T-10096"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part1.row5_shareholder_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartI[0].Row5[0].f2_71[0]",
+          "text": "T-1VHZU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row1_shareholder_class1_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row1[0].Row1b[0].f2_73[0]",
+          "text": "T-14X7A"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row1_shareholder_class1_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row1[0].Row1c[0].f2_77[0]",
+          "text": "4,518"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row1_shareholder_class1_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row1[0].Row1d[0].f2_81[0]",
+          "text": "4,363"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row1_shareholder_class2_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row1[0].Row1b[0].f2_74[0]",
+          "text": "T-2MAJO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row1_shareholder_class2_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row1[0].Row1c[0].f2_78[0]",
+          "text": "1,253"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row1_shareholder_class2_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row1[0].Row1d[0].f2_82[0]",
+          "text": "2,000"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row1_shareholder_class3_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row1[0].Row1b[0].f2_75[0]",
+          "text": "T-14LSU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row1_shareholder_class3_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row1[0].Row1c[0].f2_79[0]",
+          "text": "3,517"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row1_shareholder_class3_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row1[0].Row1d[0].f2_83[0]",
+          "text": "2,397"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row1_shareholder_class4_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row1[0].Row1b[0].f2_76[0]",
+          "text": "T-I5UJY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row1_shareholder_class4_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row1[0].Row1c[0].f2_80[0]",
+          "text": "9,292"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row1_shareholder_class4_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row1[0].Row1d[0].f2_84[0]",
+          "text": "4,898"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row1_shareholder_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row1[0].f2_72[0]",
+          "text": "T-XZD5J"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row2_shareholder_class1_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row2[0].Row2b[0].f2_86[0]",
+          "text": "T-PV963"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row2_shareholder_class1_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row2[0].Row2c[0].f2_90[0]",
+          "text": "9,382"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row2_shareholder_class1_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row2[0].Row2d[0].f2_94[0]",
+          "text": "8,281"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row2_shareholder_class2_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row2[0].Row2b[0].f2_87[0]",
+          "text": "T-PA634"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row2_shareholder_class2_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row2[0].Row2c[0].f2_91[0]",
+          "text": "3,185"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row2_shareholder_class2_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row2[0].Row2d[0].f2_95[0]",
+          "text": "5,868"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row2_shareholder_class3_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row2[0].Row2b[0].f2_88[0]",
+          "text": "T-W97GF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row2_shareholder_class3_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row2[0].Row2c[0].f2_92[0]",
+          "text": "3,487"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row2_shareholder_class3_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row2[0].Row2d[0].f2_96[0]",
+          "text": "2,465"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row2_shareholder_class4_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row2[0].Row2b[0].f2_89[0]",
+          "text": "T-N7LFP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row2_shareholder_class4_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row2[0].Row2c[0].f2_93[0]",
+          "text": "6,836"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row2_shareholder_class4_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row2[0].Row2d[0].f2_97[0]",
+          "text": "7,549"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row2_shareholder_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row2[0].f2_85[0]",
+          "text": "T-QLTE4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row3_shareholder_class1_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row3[0].Row3b[0].f2_99[0]",
+          "text": "T-BGSJ6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row3_shareholder_class1_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row3[0].Row3c[0].f2_103[0]",
+          "text": "4,560"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row3_shareholder_class1_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row3[0].Row3d[0].f2_107[0]",
+          "text": "4,437"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row3_shareholder_class2_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row3[0].Row3b[0].f2_100[0]",
+          "text": "T-RFXNW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row3_shareholder_class2_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row3[0].Row3c[0].f2_104[0]",
+          "text": "2,693"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row3_shareholder_class2_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row3[0].Row3d[0].f2_108[0]",
+          "text": "5,172"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row3_shareholder_class3_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row3[0].Row3b[0].f2_101[0]",
+          "text": "T-1DQC6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row3_shareholder_class3_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row3[0].Row3c[0].f2_105[0]",
+          "text": "9,381"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row3_shareholder_class3_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row3[0].Row3d[0].f2_109[0]",
+          "text": "7,402"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row3_shareholder_class4_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row3[0].Row3b[0].f2_102[0]",
+          "text": "T-1RXZJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row3_shareholder_class4_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row3[0].Row3c[0].f2_106[0]",
+          "text": "1,131"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row3_shareholder_class4_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row3[0].Row3d[0].f2_110[0]",
+          "text": "2,339"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row3_shareholder_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row3[0].f2_98[0]",
+          "text": "T-1RW7U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row4_shareholder_class1_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row4[0].Row4b[0].f2_112[0]",
+          "text": "T-1IVCV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row4_shareholder_class1_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row4[0].Row4c[0].f2_116[0]",
+          "text": "2,450"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row4_shareholder_class1_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row4[0].Row4d[0].f2_120[0]",
+          "text": "8,271"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row4_shareholder_class2_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row4[0].Row4b[0].f2_113[0]",
+          "text": "T-1MGXB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row4_shareholder_class2_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row4[0].Row4c[0].f2_117[0]",
+          "text": "8,763"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row4_shareholder_class2_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row4[0].Row4d[0].f2_121[0]",
+          "text": "7,655"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row4_shareholder_class3_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row4[0].Row4b[0].f2_114[0]",
+          "text": "T-AO53L"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row4_shareholder_class3_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row4[0].Row4c[0].f2_118[0]",
+          "text": "3,248"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row4_shareholder_class3_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row4[0].Row4d[0].f2_122[0]",
+          "text": "8,257"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row4_shareholder_class4_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row4[0].Row4b[0].f2_115[0]",
+          "text": "T-1PCY7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row4_shareholder_class4_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row4[0].Row4c[0].f2_119[0]",
+          "text": "3,739"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row4_shareholder_class4_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row4[0].Row4d[0].f2_123[0]",
+          "text": "3,413"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row4_shareholder_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row4[0].f2_111[0]",
+          "text": "T-9ZVDV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row5_shareholder_class1_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row5[0].Row5b[0].f2_125[0]",
+          "text": "T-TBB22"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row5_shareholder_class1_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row5[0].Row5c[0].f2_129[0]",
+          "text": "4,080"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row5_shareholder_class1_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row5[0].Row5d[0].f2_133[0]",
+          "text": "6,432"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row5_shareholder_class2_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row5[0].Row5b[0].f2_126[0]",
+          "text": "T-1D2PB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row5_shareholder_class2_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row5[0].Row5c[0].f2_130[0]",
+          "text": "8,991"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row5_shareholder_class2_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row5[0].Row5d[0].f2_134[0]",
+          "text": "5,432"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row5_shareholder_class3_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row5[0].Row5b[0].f2_127[0]",
+          "text": "T-HYWMJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row5_shareholder_class3_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row5[0].Row5c[0].f2_131[0]",
+          "text": "7,842"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row5_shareholder_class3_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row5[0].Row5d[0].f2_135[0]",
+          "text": "5,848"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row5_shareholder_class4_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row5[0].Row5b[0].f2_128[0]",
+          "text": "T-1M7GV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row5_shareholder_class4_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row5[0].Row5c[0].f2_132[0]",
+          "text": "3,332"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row5_shareholder_class4_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row5[0].Row5d[0].f2_136[0]",
+          "text": "8,499"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.1.sch_b_part2.row5_shareholder_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SchB_PartII[0].Row5[0].f2_124[0]",
+          "text": "T-UJX1C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.10_total_income_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row10[0].f3_27[0]",
+          "text": "7,266"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.10_total_income_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row10[0].f3_28[0]",
+          "text": "8,239"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.11_compensation_not_deducted_elsewhere_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row11[0].f3_29[0]",
+          "text": "2,930"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.11_compensation_not_deducted_elsewhere_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row11[0].f3_30[0]",
+          "text": "7,680"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.12a_rents_expense_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row12a[0].f3_31[0]",
+          "text": "5,334"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.12a_rents_expense_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row12a[0].f3_32[0]",
+          "text": "9,117"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.12b_royalties_license_fees_expense_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row12b[0].f3_33[0]",
+          "text": "5,404"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.12b_royalties_license_fees_expense_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row12b[0].f3_34[0]",
+          "text": "2,673"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.13_interest_expense_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row13[0].f3_35[0]",
+          "text": "9,699"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.13_interest_expense_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row13[0].f3_36[0]",
+          "text": "2,331"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.14_depreciation_not_deducted_elsewhere_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row14[0].f3_37[0]",
+          "text": "1,823"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.14_depreciation_not_deducted_elsewhere_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row14[0].f3_38[0]",
+          "text": "9,209"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.15_depletion_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row15[0].f3_39[0]",
+          "text": "2,268"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.15_depletion_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row15[0].f3_40[0]",
+          "text": "7,709"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.16_taxes_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row16[0].f3_41[0]",
+          "text": "5,054"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.16_taxes_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row16[0].f3_42[0]",
+          "text": "7,451"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.17_other_deductions_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row17[0].f3_43[0]",
+          "text": "9,427"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.17_other_deductions_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row17[0].f3_44[0]",
+          "text": "3,795"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.18_total_deductions_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row18[0].f3_45[0]",
+          "text": "7,660"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.18_total_deductions_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row18[0].f3_46[0]",
+          "text": "8,603"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.19_net_income_before_unusual_items_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row19[0].f3_47[0]",
+          "text": "1,774"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.19_net_income_before_unusual_items_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row19[0].f3_48[0]",
+          "text": "5,981"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.1a_gross_receipts_sales_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row1a[0].f3_1[0]",
+          "text": "3,018"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.1a_gross_receipts_sales_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row1a[0].f3_2[0]",
+          "text": "5,808"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.1b_returns_allowances_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row1b[0].f3_3[0]",
+          "text": "4,165"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.1b_returns_allowances_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row1b[0].f3_4[0]",
+          "text": "7,681"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.1c_net_receipts_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row1c[0].f3_5[0]",
+          "text": "2,906"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.1c_net_receipts_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row1c[0].f3_6[0]",
+          "text": "4,224"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.2_cost_of_goods_sold_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row2[0].f3_7[0]",
+          "text": "8,355"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.2_cost_of_goods_sold_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row2[0].f3_8[0]",
+          "text": "2,595"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.20_unusual_infrequent_items_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row20[0].f3_49[0]",
+          "text": "8,231"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.20_unusual_infrequent_items_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row20[0].f3_50[0]",
+          "text": "8,025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.21a_income_tax_expense_current_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row21a[0].f3_51[0]",
+          "text": "9,216"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.21a_income_tax_expense_current_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row21a[0].f3_52[0]",
+          "text": "6,206"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.21b_income_tax_expense_deferred_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row21b[0].f3_53[0]",
+          "text": "3,827"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.21b_income_tax_expense_deferred_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row21b[0].f3_54[0]",
+          "text": "9,758"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.22_net_income_per_books_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row22[0].f3_55[0]",
+          "text": "4,189"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.22_net_income_per_books_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row22[0].f3_56[0]",
+          "text": "7,012"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.23a_currency_translation_adjustments_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row23a[0].f3_57[0]",
+          "text": "1,770"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.23a_currency_translation_adjustments_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row23a[0].f3_58[0]",
+          "text": "8,779"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.23b_other_comprehensive_income_other_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row23b[0].f3_59[0]",
+          "text": "7,873"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.23b_other_comprehensive_income_other_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row23b[0].f3_60[0]",
+          "text": "2,633"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.23c_income_tax_expense_oci_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row23c[0].f3_61[0]",
+          "text": "1,449"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.23c_income_tax_expense_oci_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row23c[0].f3_62[0]",
+          "text": "2,049"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.24_other_comprehensive_income_net_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row24[0].f3_63[0]",
+          "text": "3,231"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.24_other_comprehensive_income_net_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row24[0].f3_64[0]",
+          "text": "3,065"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.3_gross_profit_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row3[0].f3_9[0]",
+          "text": "4,825"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.3_gross_profit_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row3[0].f3_10[0]",
+          "text": "9,299"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.4_dividends_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row4[0].f3_11[0]",
+          "text": "3,678"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.4_dividends_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row4[0].f3_12[0]",
+          "text": "1,988"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.5_interest_income_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row5[0].f3_13[0]",
+          "text": "2,235"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.5_interest_income_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row5[0].f3_14[0]",
+          "text": "1,119"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.6a_gross_rents_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row6a[0].f3_15[0]",
+          "text": "2,690"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.6a_gross_rents_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row6a[0].f3_16[0]",
+          "text": "7,868"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.6b_gross_royalties_license_fees_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row6b[0].f3_17[0]",
+          "text": "1,342"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.6b_gross_royalties_license_fees_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row6b[0].f3_18[0]",
+          "text": "4,666"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.7_net_gain_capital_assets_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row7[0].f3_19[0]",
+          "text": "6,841"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.7_net_gain_capital_assets_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row7[0].f3_20[0]",
+          "text": "8,900"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.8a_currency_gain_unrealized_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row8a[0].f3_21[0]",
+          "text": "3,562"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.8a_currency_gain_unrealized_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row8a[0].f3_22[0]",
+          "text": "4,227"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.8b_currency_gain_realized_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row8b[0].f3_23[0]",
+          "text": "1,517"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.8b_currency_gain_realized_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row8b[0].f3_24[0]",
+          "text": "1,616"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.9_other_income_functional_currency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row9[0].f3_25[0]",
+          "text": "8,483"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.2.schedule_c.9_other_income_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_SchC[0].Row9[0].f3_26[0]",
+          "text": "8,318"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.1_cash_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row1[0].f4_1[0]",
+          "text": "8,800"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.1_cash_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row1[0].f4_2[0]",
+          "text": "8,029"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.10a_depletable_assets_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row10a[0].f4_23[0]",
+          "text": "6,389"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.10a_depletable_assets_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row10a[0].f4_24[0]",
+          "text": "7,212"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.10b_accumulated_depletion_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row10b[0].f4_25[0]",
+          "text": "8,501"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.10b_accumulated_depletion_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row10b[0].f4_26[0]",
+          "text": "1,261"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.11_land_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row11[0].f4_27[0]",
+          "text": "7,855"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.11_land_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row11[0].f4_28[0]",
+          "text": "3,340"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.12a_goodwill_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row12a[0].f4_29[0]",
+          "text": "5,610"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.12a_goodwill_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row12a[0].f4_30[0]",
+          "text": "2,816"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.12b_organization_costs_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row12b[0].f4_31[0]",
+          "text": "8,608"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.12b_organization_costs_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row12b[0].f4_32[0]",
+          "text": "3,130"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.12c_patents_trademarks_other_intangibles_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row12c[0].f4_33[0]",
+          "text": "9,570"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.12c_patents_trademarks_other_intangibles_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row12c[0].f4_34[0]",
+          "text": "1,054"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.12d_accumulated_amortization_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row12d[0].f4_35[0]",
+          "text": "7,780"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.12d_accumulated_amortization_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row12d[0].f4_36[0]",
+          "text": "9,652"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.13_other_assets_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row13[0].f4_37[0]",
+          "text": "7,672"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.13_other_assets_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row13[0].f4_38[0]",
+          "text": "4,634"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.14_total_assets_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row14[0].f4_39[0]",
+          "text": "7,336"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.14_total_assets_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row14[0].f4_40[0]",
+          "text": "9,211"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.15_accounts_payable_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row15[0].f4_41[0]",
+          "text": "2,683"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.15_accounts_payable_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row15[0].f4_42[0]",
+          "text": "1,916"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.16_other_current_liabilities_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row16[0].f4_43[0]",
+          "text": "2,976"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.16_other_current_liabilities_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row16[0].f4_44[0]",
+          "text": "7,043"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.17_derivatives_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row17[0].f4_45[0]",
+          "text": "4,568"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.17_derivatives_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row17[0].f4_46[0]",
+          "text": "5,631"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.18_loans_from_shareholders_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row18[0].f4_47[0]",
+          "text": "7,736"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.18_loans_from_shareholders_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row18[0].f4_48[0]",
+          "text": "5,004"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.19_other_liabilities_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row19[0].f4_49[0]",
+          "text": "1,474"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.19_other_liabilities_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row19[0].f4_50[0]",
+          "text": "9,567"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.20a_preferred_stock_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row20a[0].f4_51[0]",
+          "text": "4,595"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.20a_preferred_stock_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row20a[0].f4_52[0]",
+          "text": "8,376"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.20b_common_stock_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row20b[0].f4_53[0]",
+          "text": "7,919"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.20b_common_stock_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row20b[0].f4_54[0]",
+          "text": "9,134"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.21_paid_in_capital_surplus_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row21[0].f4_55[0]",
+          "text": "3,808"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.21_paid_in_capital_surplus_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row21[0].f4_56[0]",
+          "text": "5,653"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.22_retained_earnings_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row22[0].f4_57[0]",
+          "text": "1,591"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.22_retained_earnings_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row22[0].f4_58[0]",
+          "text": "7,444"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.23_cost_of_treasury_stock_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row23[0].f4_59[0]",
+          "text": "1,837"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.23_cost_of_treasury_stock_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row23[0].f4_60[0]",
+          "text": "4,406"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.24_total_liabilities_shareholders_equity_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row24[0].f4_61[0]",
+          "text": "7,378"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.24_total_liabilities_shareholders_equity_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Liabilities[0].Row24[0].f4_62[0]",
+          "text": "5,279"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.2a_trade_notes_accounts_receivable_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row2a[0].f4_3[0]",
+          "text": "4,001"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.2a_trade_notes_accounts_receivable_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row2a[0].f4_4[0]",
+          "text": "3,389"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.2b_allowance_bad_debts_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row2b[0].f4_5[0]",
+          "text": "9,161"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.2b_allowance_bad_debts_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row2b[0].f4_6[0]",
+          "text": "1,332"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.3_derivatives_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row3[0].f4_7[0]",
+          "text": "9,511"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.3_derivatives_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row3[0].f4_8[0]",
+          "text": "9,422"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.4_inventories_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row4[0].f4_9[0]",
+          "text": "3,162"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.4_inventories_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row4[0].f4_10[0]",
+          "text": "6,685"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.5_other_current_assets_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row5[0].f4_11[0]",
+          "text": "6,315"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.5_other_current_assets_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row5[0].f4_12[0]",
+          "text": "8,362"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.6_loans_to_shareholders_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row6[0].f4_13[0]",
+          "text": "9,876"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.6_loans_to_shareholders_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row6[0].f4_14[0]",
+          "text": "9,089"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.7_investment_in_subsidiaries_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row7[0].f4_15[0]",
+          "text": "8,703"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.7_investment_in_subsidiaries_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row7[0].f4_16[0]",
+          "text": "4,857"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.8_other_investments_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row8[0].f4_17[0]",
+          "text": "2,378"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.8_other_investments_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row8[0].f4_18[0]",
+          "text": "3,390"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.9a_buildings_depreciable_assets_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row9a[0].f4_19[0]",
+          "text": "8,856"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.9a_buildings_depreciable_assets_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row9a[0].f4_20[0]",
+          "text": "6,837"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.9b_accumulated_depreciation_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row9b[0].f4_21[0]",
+          "text": "1,694"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_f.9b_accumulated_depreciation_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SchF_Assets[0].Row9b[0].f4_22[0]",
+          "text": "5,071"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_g.1_owned_foreign_partnership_interest_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].TagCorrectingSubform[0].c4_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_g.1_owned_foreign_partnership_interest_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].TagCorrectingSubform[0].c4_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_g.2_owned_interest_in_trust_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].c4_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_g.2_owned_interest_in_trust_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].c4_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_g.3a_owned_disregarded_entities_or_branches_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].c4_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_g.3a_owned_disregarded_entities_or_branches_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].c4_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_g.3b_number_forms_8964_tra_attached",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_63[0]",
+          "text": "8,144"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_g.3b_qualified_business_units_different_currency_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].c4_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_g.3b_qualified_business_units_different_currency_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].c4_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_g.4a_base_erosion_payment_or_benefit_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].c4_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_g.4a_base_erosion_payment_or_benefit_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].c4_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_g.4b_total_base_erosion_payments",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_64[0]",
+          "text": "4,008"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.3.schedule_g.4c_total_base_erosion_tax_benefits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_65[0]",
+          "text": "8,318"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.10_expatriated_foreign_subsidiary_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.10_expatriated_foreign_subsidiary_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.11_reportable_transaction_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_7[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.11_reportable_transaction_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.12_foreign_tax_disqualified_901m_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_8[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.12_foreign_tax_disqualified_901m_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.13_foreign_taxes_section_909_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_9[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.13_foreign_taxes_section_909_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_9[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.14_instruction_questions_codes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].ifyesenter[0]",
+          "text": "T-TI8R9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.14_instruction_questions_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_10[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.14_instruction_questions_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_10[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.15_interest_expense_disallowed_163j_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_6[0]",
+          "text": "9,785"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.15_interest_expense_disallowed_163j_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_11[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.15_interest_expense_disallowed_163j_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_11[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.16_interest_expense_carried_forward_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_8[0]",
+          "text": "6,796"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.16_interest_expense_carried_forward_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_12[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.16_interest_expense_carried_forward_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_12[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.17a_extraordinary_reduction_245a_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_13[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.17a_extraordinary_reduction_245a_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_13[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.17b_close_tax_year_election_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_14[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.17b_close_tax_year_election_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_14[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.18a_loan_within_safe_haven_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_15[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.18a_loan_within_safe_haven_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_15[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.18b_loan_outside_safe_haven_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_16[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.18b_loan_outside_safe_haven_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_16[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.19a_covered_debt_instrument_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_17[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.19a_covered_debt_instrument_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_17[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.5a_interest_royalty_267a_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].TagCorrectionSubform[0].c5_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.5a_interest_royalty_267a_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].TagCorrectionSubform[0].c5_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.5b_disallowed_deductions_267a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_1[0]",
+          "text": "9,126"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.6a_fdii_deduction_claimed_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.6a_fdii_deduction_claimed_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.6b_fddei_general_property_receipts",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_2[0]",
+          "text": "7,261"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.6c_fddei_intangible_property_receipts",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_3[0]",
+          "text": "3,781"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.6d_fddei_services_receipts",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_4[0]",
+          "text": "8,385"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.7_cost_sharing_arrangement_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.7_cost_sharing_arrangement_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.8_triangular_reorganization_stock_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.8_triangular_reorganization_stock_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.9a_intangible_property_367d_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.9a_intangible_property_367d_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].c5_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.4.schedule_g.9b_earnings_profits_reduction_367d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_5[0]",
+          "text": "3,879"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_g.19b_1_transaction_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].TagCorrectingSubform[0].f6_1[0]",
+          "text": "5,956"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_g.19b_2_related_party_indebtedness",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].TagCorrectingSubform[0].f6_2[0]",
+          "text": "6,977"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_g.20a_top_up_tax_paid_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].c6_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_g.20a_top_up_tax_paid_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].c6_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_g.20b_1_income_inclusion_rule_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_3[0]",
+          "text": "4,259"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_g.20b_2_qdmtt_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_4[0]",
+          "text": "7,006"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_g.20b_3_utpr_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_5[0]",
+          "text": "1,136"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_g.21a_section_304_transaction_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].c6_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_g.21a_section_304_transaction_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].c6_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_g.21b_1_change_previously_taxed_ep",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_6[0]",
+          "text": "6,170"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_g.21b_2_change_other_ep",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_7[0]",
+          "text": "8,666"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.1a_section_964e4_dividend_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_10[0]",
+          "text": "9,656"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.1b_section_245a_hybrid_dividends",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_11[0]",
+          "text": "5,090"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.1c_tiered_extraordinary_disposition",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_12[0]",
+          "text": "8,270"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.1d_tiered_extraordinary_reduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_13[0]",
+          "text": "7,241"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.1e_foreign_personal_holding_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_14[0]",
+          "text": "9,908"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.1f_foreign_base_sales_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_15[0]",
+          "text": "1,454"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.1g_foreign_base_services_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_16[0]",
+          "text": "7,289"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.1h_other_subpart_f_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_17[0]",
+          "text": "3,450"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.2_earnings_invested_us_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_18[0]",
+          "text": "9,770"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.4_factoring_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_20[0]",
+          "text": "6,107"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.5a_section_245a_eligible_dividends",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_21[0]",
+          "text": "7,445"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.5b_extraordinary_disposition_amounts",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_22[0]",
+          "text": "9,865"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.5c_extraordinary_reduction_amounts",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_23[0]",
+          "text": "8,343"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.5d_section_245a_e_dividends",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_24[0]",
+          "text": "8,683"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.5e_other_dividends",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_25[0]",
+          "text": "6,795"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.6_exchange_gain_loss_ptep",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_26[0]",
+          "text": "1,224"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.7a_income_blocked_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].c6_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.7a_income_blocked_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].c6_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.7b_income_unblocked_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].c6_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.7b_income_unblocked_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].c6_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.8a_ed_account_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].c6_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.8a_ed_account_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].c6_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.8b_shareholder_ed_balance_beginning",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_27[0]",
+          "text": "9,891"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.8b_shareholder_ed_balance_end",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_28[0]",
+          "text": "9,489"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.8c_aggregate_ed_balance_beginning",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_29[0]",
+          "text": "1,794"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.8c_aggregate_ed_balance_end",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_30[0]",
+          "text": "9,493"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.9_hybrid_deduction_accounts_sum",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_31[0]",
+          "text": "1,611"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.us_shareholder_identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_9[0]",
+          "text": "T-5WE2T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5471.5.schedule_i.us_shareholder_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_8[0]",
+          "text": "T-QIVYJ"
+        }
+      ]
+    }
+  ]
+}

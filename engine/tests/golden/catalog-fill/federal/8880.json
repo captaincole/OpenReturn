@@ -1,0 +1,213 @@
+{
+  "formId": "form-8880",
+  "fieldCount": 23,
+  "entries": [
+    {
+      "fieldId": "form-8880.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-YGL1D"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.0.line.1_ira_able_contributions_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Ln1-6[0].BodyRow1[0].f1_3[0]",
+          "text": "5,488"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.0.line.1_ira_able_contributions_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Ln1-6[0].BodyRow1[0].f1_4[0]",
+          "text": "1,797"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.0.line.10_line_7_times_line_9",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "5,255"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.0.line.11_tax_liability_limitation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "8,511"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.0.line.12_retirement_savings_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "9,689"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.0.line.2_elective_deferrals_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Ln1-6[0].BodyRow2[0].f1_5[0]",
+          "text": "8,219"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.0.line.2_elective_deferrals_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Ln1-6[0].BodyRow2[0].f1_6[0]",
+          "text": "3,907"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.0.line.3_total_contributions_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Ln1-6[0].BodyRow3[0].f1_7[0]",
+          "text": "7,376"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.0.line.3_total_contributions_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Ln1-6[0].BodyRow3[0].f1_8[0]",
+          "text": "5,951"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.0.line.4_certain_distributions_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Ln1-6[0].BodyRow4[0].f1_9[0]",
+          "text": "7,502"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.0.line.4_certain_distributions_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Ln1-6[0].BodyRow4[0].f1_10[0]",
+          "text": "7,798"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.0.line.5_contributions_less_distributions_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Ln1-6[0].BodyRow5[0].f1_11[0]",
+          "text": "2,284"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.0.line.5_contributions_less_distributions_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Ln1-6[0].BodyRow5[0].f1_12[0]",
+          "text": "9,126"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.0.line.6_smaller_of_line_5_or_2000_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Ln1-6[0].BodyRow6[0].f1_13[0]",
+          "text": "6,238"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.0.line.6_smaller_of_line_5_or_2000_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Ln1-6[0].BodyRow6[0].f1_14[0]",
+          "text": "3,839"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.0.line.7_total_line_6",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "6,676"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.0.line.8_adjusted_gross_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "8,438"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.0.line.9_applicable_decimal_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.1.credit_limit_worksheet.1_form_1040_line_18",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Col2[0].Pg2Worksheet[0].f2_1[0]",
+          "text": "6,859"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.1.credit_limit_worksheet.2_schedule_3_credits_total",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Col2[0].Pg2Worksheet[0].f2_2[0]",
+          "text": "8,717"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8880.1.credit_limit_worksheet.3_credit_limit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Col2[0].Pg2Worksheet[0].f2_3[0]",
+          "text": "3,832"
+        }
+      ]
+    }
+  ]
+}

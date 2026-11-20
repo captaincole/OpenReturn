@@ -1,0 +1,105 @@
+{
+  "formId": "form-8834",
+  "fieldCount": 11,
+  "entries": [
+    {
+      "fieldId": "form-8834.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-VRVX8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8834.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-MZKJS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8834.0.line.1_passive_activity_credits_allowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "8,274"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8834.0.line.2_regular_tax_before_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "6,450"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8834.0.line.3a_foreign_tax_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "3,624"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8834.0.line.3b_certain_allowable_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "1,638"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8834.0.line.3c_total_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "9,163"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8834.0.line.4_net_regular_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "5,194"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8834.0.line.5_tentative_minimum_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "3,491"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8834.0.line.6_net_tax_less_minimum_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "9,863"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8834.0.line.7_qualified_electric_vehicle_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "4,343"
+        }
+      ]
+    }
+  ]
+}

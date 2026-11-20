@@ -1,0 +1,1507 @@
+{
+  "form": {
+    "formId": "form-8697",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 8697, Interest Computation Under the Look-Back Method for Completed Long-Term Contracts"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8697.0.header.filing_year_beginning",
+      "label": "For the filing year beginning",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 144,
+        "y": 696.002
+      }
+    },
+    {
+      "fieldId": "form-8697.0.header.filing_year_ending",
+      "label": "For the filing year ending",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 696.002
+      }
+    },
+    {
+      "fieldId": "form-8697.0.header.name",
+      "label": "Name",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].NameAndAddress[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 671.998
+      }
+    },
+    {
+      "fieldId": "form-8697.0.header.a_identifying_number",
+      "label": "A — Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 671.998
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8697.0.header.street_address",
+      "label": "Number, street, and apt., room, or suite no.",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].NameAndAddress[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 648
+      }
+    },
+    {
+      "fieldId": "form-8697.0.header.b_taxpayer_type_corporation",
+      "label": "B — Type of taxpayer: Corporation",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].ReadOrder[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 439.2,
+        "y": 650
+      }
+    },
+    {
+      "fieldId": "form-8697.0.header.b_taxpayer_type_s_corporation",
+      "label": "B — Type of taxpayer: S corporation",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 511.2,
+        "y": 650
+      }
+    },
+    {
+      "fieldId": "form-8697.0.header.b_taxpayer_type_individual",
+      "label": "B — Type of taxpayer: Individual",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].ReadOrder[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 439.2,
+        "y": 638.001
+      }
+    },
+    {
+      "fieldId": "form-8697.0.header.b_taxpayer_type_partnership",
+      "label": "B — Type of taxpayer: Partnership",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 511.2,
+        "y": 638.001
+      }
+    },
+    {
+      "fieldId": "form-8697.0.header.city_or_town",
+      "label": "City or town",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].NameAndAddress[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 623.999
+      }
+    },
+    {
+      "fieldId": "form-8697.0.header.state_or_province",
+      "label": "State or province",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].NameAndAddress[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 188.2,
+        "y": 623.999
+      }
+    },
+    {
+      "fieldId": "form-8697.0.header.zip_or_postal_code",
+      "label": "ZIP or foreign postal code",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].NameAndAddress[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 623.999
+      }
+    },
+    {
+      "fieldId": "form-8697.0.header.b_taxpayer_type_estate_or_trust",
+      "label": "B — Type of taxpayer: Estate or trust",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].ReadOrder[0].c1_1[2]",
+      "position": {
+        "page": 0,
+        "x": 439.2,
+        "y": 626.002
+      }
+    },
+    {
+      "fieldId": "form-8697.0.header.c_pass_through_entity_name",
+      "label": "C — Name of pass-through entity that holds the long-term contracts",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 50.4,
+        "y": 576
+      }
+    },
+    {
+      "fieldId": "form-8697.0.header.c_pass_through_entity_ein",
+      "label": "C — Employer identification number of pass-through entity",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 576
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8697.0.part1.year_ended_month_filing_year",
+      "label": "Part I — Filing year: year ended, month (mo.)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].HeaderRow[0].FilingYear[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 295.2,
+        "y": 504
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8697.0.part1.year_ended_year_filing_year",
+      "label": "Part I — Filing year: year ended, year (yr.)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].HeaderRow[0].FilingYear[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 331.2,
+        "y": 504
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8697.0.part1.year_ended_month_col_a",
+      "label": "Part I — Redetermination years, column (a): year ended, month (mo.)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].HeaderRow[0].RedeterminationA[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 367.2,
+        "y": 504
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8697.0.part1.year_ended_year_col_a",
+      "label": "Part I — Redetermination years, column (a): year ended, year (yr.)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].HeaderRow[0].RedeterminationA[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 504
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8697.0.part1.year_ended_month_col_b",
+      "label": "Part I — Redetermination years, column (b): year ended, month (mo.)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].HeaderRow[0].RedeterminationB[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 439.2,
+        "y": 504
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8697.0.part1.year_ended_year_col_b",
+      "label": "Part I — Redetermination years, column (b): year ended, year (yr.)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].HeaderRow[0].RedeterminationB[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 475.2,
+        "y": 504
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8697.0.part1.1_prior_year_taxable_income_filing_year",
+      "label": "Line 1 — Taxable income or loss for the prior years shown on tax return (or as previously adjusted) before net operating loss or capital loss carrybacks — Filing year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 280.8,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.1_prior_year_taxable_income_col_a",
+      "label": "Line 1 — Taxable income or loss for the prior years shown on tax return (or as previously adjusted) before net operating loss or capital loss carrybacks — column (a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 352.8,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.1_prior_year_taxable_income_col_b",
+      "label": "Line 1 — Taxable income or loss for the prior years shown on tax return (or as previously adjusted) before net operating loss or capital loss carrybacks — column (b)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.2_adjustment_to_income_filing_year",
+      "label": "Line 2 — Adjustment to income to reflect the difference between: (a) the amount of income required to be allocated for post-February 1986 contracts completed or adjusted during the tax year based on the actual contract price and costs, and (b) the amount of income reported for such contracts based on estimated contract price and costs — Filing year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line2[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 280.8,
+        "y": 360
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.2_adjustment_to_income_col_a",
+      "label": "Line 2 — Adjustment to income to reflect the difference between: (a) the amount of income required to be allocated for post-February 1986 contracts completed or adjusted during the tax year based on the actual contract price and costs, and (b) the amount of income reported for such contracts based on estimated contract price and costs — column (a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line2[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 352.8,
+        "y": 360
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.2_adjustment_to_income_col_b",
+      "label": "Line 2 — Adjustment to income to reflect the difference between: (a) the amount of income required to be allocated for post-February 1986 contracts completed or adjusted during the tax year based on the actual contract price and costs, and (b) the amount of income reported for such contracts based on estimated contract price and costs — column (b)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line2[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 360
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.2_adjustment_to_income_col_c",
+      "label": "Line 2 — Adjustment to income to reflect the difference between: (a) the amount of income required to be allocated for post-February 1986 contracts completed or adjusted during the tax year based on the actual contract price and costs, and (b) the amount of income reported for such contracts based on estimated contract price and costs — column (c) Totals",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line2[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 360
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.3_adjusted_taxable_income_filing_year",
+      "label": "Line 3 — Adjusted taxable income for look-back purposes. Combine lines 1 and 2 — Filing year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line3[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 280.8,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.3_adjusted_taxable_income_col_a",
+      "label": "Line 3 — Adjusted taxable income for look-back purposes. Combine lines 1 and 2 — column (a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line3[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 352.8,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.3_adjusted_taxable_income_col_b",
+      "label": "Line 3 — Adjusted taxable income for look-back purposes. Combine lines 1 and 2 — column (b)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line3[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.4_tax_on_line_3_filing_year",
+      "label": "Line 4 — Income tax liability on line 3 amount using tax rates in effect for the prior years — Filing year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line4[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 280.8,
+        "y": 299.999
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.4_tax_on_line_3_col_a",
+      "label": "Line 4 — Income tax liability on line 3 amount using tax rates in effect for the prior years — column (a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line4[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 352.8,
+        "y": 299.999
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.4_tax_on_line_3_col_b",
+      "label": "Line 4 — Income tax liability on line 3 amount using tax rates in effect for the prior years — column (b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line4[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 299.999
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.5_tax_shown_on_return_col_a",
+      "label": "Line 5 — Income tax liability shown on return (or as previously adjusted) for the prior years — column (a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line5[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 352.8,
+        "y": 239.998
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.5_tax_shown_on_return_col_b",
+      "label": "Line 5 — Income tax liability shown on return (or as previously adjusted) for the prior years — column (b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line5[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 239.998
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.6_increase_or_decrease_in_tax_col_a",
+      "label": "Line 6 — Increase or decrease in tax for the prior years on which interest is due (or is to be refunded). Subtract line 5 from line 4 — column (a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line6[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 352.8,
+        "y": 204.001
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.6_increase_or_decrease_in_tax_col_b",
+      "label": "Line 6 — Increase or decrease in tax for the prior years on which interest is due (or is to be refunded). Subtract line 5 from line 4 — column (b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line6[0].f1_39[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 204.001
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.7_interest_due_on_increase_col_a",
+      "label": "Line 7 — Interest due on increase, if any, shown on line 6 — column (a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line7[0].f1_42[0]",
+      "position": {
+        "page": 0,
+        "x": 352.8,
+        "y": 180
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.7_interest_due_on_increase_col_b",
+      "label": "Line 7 — Interest due on increase, if any, shown on line 6 — column (b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line7[0].f1_43[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 180
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.7_interest_due_on_increase_col_c",
+      "label": "Line 7 — Interest due on increase, if any, shown on line 6 — column (c) Totals",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line7[0].f1_44[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 180
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.8_interest_refunded_on_decrease_col_a",
+      "label": "Line 8 — Interest to be refunded on decrease, if any, shown on line 6 — column (a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line8[0].f1_46[0]",
+      "position": {
+        "page": 0,
+        "x": 352.8,
+        "y": 155.999
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.8_interest_refunded_on_decrease_col_b",
+      "label": "Line 8 — Interest to be refunded on decrease, if any, shown on line 6 — column (b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line8[0].f1_47[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 155.999
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.8_interest_refunded_on_decrease_col_c",
+      "label": "Line 8 — Interest to be refunded on decrease, if any, shown on line 6 — column (c) Totals",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line8[0].f1_48[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 155.999
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.9a_net_interest_refunded",
+      "label": "Line 9a — Net interest to be refunded to you. If line 8, column (c), is greater than line 7, column (c), enter the excess",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_49[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 132.001
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.9b_routing_number",
+      "label": "Line 9b — Routing number",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].RoutingNo[0].f1_50[0]",
+      "position": {
+        "page": 0,
+        "x": 144,
+        "y": 120.002
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-8697.0.part1.9c_account_type_checking",
+      "label": "Line 9c — Type: Checking",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 334.2,
+        "y": 121.502
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.9c_account_type_savings",
+      "label": "Line 9c — Type: Savings",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+      "position": {
+        "page": 0,
+        "x": 391.8,
+        "y": 121.502
+      }
+    },
+    {
+      "fieldId": "form-8697.0.part1.9d_account_number",
+      "label": "Line 9d — Account number",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].AccountNo[0].f1_51[0]",
+      "position": {
+        "page": 0,
+        "x": 144,
+        "y": 102.002
+      },
+      "maxLength": 17
+    },
+    {
+      "fieldId": "form-8697.0.part1.10_net_interest_owed",
+      "label": "Line 10 — Net interest you owe. If line 7, column (c), is greater than line 8, column (c), enter the excess",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_52[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 72
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.year_ended_month_col_a",
+      "label": "(a) Year ended — month (date of each prior year to which interest computation relates)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].HeaderRow[0].DateA[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 295.2,
+        "y": 672.001
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8697.1.part2.year_ended_year_col_a",
+      "label": "(a) Year ended — year (date of each prior year to which interest computation relates)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].HeaderRow[0].DateA[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 331.2,
+        "y": 672.001
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8697.1.part2.year_ended_month_col_b",
+      "label": "(b) Year ended — month (date of each prior year to which interest computation relates)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].HeaderRow[0].DateB[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 672.001
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8697.1.part2.year_ended_year_col_b",
+      "label": "(b) Year ended — year (date of each prior year to which interest computation relates)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].HeaderRow[0].DateB[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 672.001
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8697.1.part2.year_ended_month_col_c",
+      "label": "(c) Year ended — month (date of each prior year to which interest computation relates)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].HeaderRow[0].DateC[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 439.2,
+        "y": 672.001
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8697.1.part2.year_ended_year_col_c",
+      "label": "(c) Year ended — year (date of each prior year to which interest computation relates)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].HeaderRow[0].DateC[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 672.001
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8697.1.part2.1_regular_taxable_income_adjustment_col_a",
+      "label": "Line 1 — Adjustment to regular taxable income to reflect the difference between: (a) the amount of such income required to be allocated for post-February 1986 contracts completed or adjusted during the tax year based on actual contract price and costs, and (b) the amount of such income reported for such contracts based on estimated contract price and costs — column (a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line1[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 280.8,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.1_regular_taxable_income_adjustment_col_b",
+      "label": "Line 1 — Adjustment to regular taxable income to reflect the difference between: (a) the amount of such income required to be allocated for post-February 1986 contracts completed or adjusted during the tax year based on actual contract price and costs, and (b) the amount of such income reported for such contracts based on estimated contract price and costs — column (b)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line1[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 352.8,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.1_regular_taxable_income_adjustment_col_c",
+      "label": "Line 1 — Adjustment to regular taxable income to reflect the difference between: (a) the amount of such income required to be allocated for post-February 1986 contracts completed or adjusted during the tax year based on actual contract price and costs, and (b) the amount of such income reported for such contracts based on estimated contract price and costs — column (c)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line1[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 424.8,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.2_regular_tax_increase_decrease_col_a",
+      "label": "Line 2 — Regular tax increase or decrease for prior years. Multiply line 1 in each column by the applicable regular tax rate — column (a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 280.8,
+        "y": 587.999
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.2_regular_tax_increase_decrease_col_b",
+      "label": "Line 2 — Regular tax increase or decrease for prior years. Multiply line 1 in each column by the applicable regular tax rate — column (b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 352.8,
+        "y": 587.999
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.2_regular_tax_increase_decrease_col_c",
+      "label": "Line 2 — Regular tax increase or decrease for prior years. Multiply line 1 in each column by the applicable regular tax rate — column (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line2[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 424.8,
+        "y": 587.999
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.3_amti_adjustment_col_a",
+      "label": "Line 3 — Adjustment to alternative minimum taxable income (AMTI) to reflect the difference between: (a) AMTI required to be allocated for post-February 1986 contracts completed or adjusted during the tax year based on actual contract price and costs, and (b) AMTI reported for such contracts based on estimated contract price and costs — column (a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line3[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 280.8,
+        "y": 491.998
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.3_amti_adjustment_col_b",
+      "label": "Line 3 — Adjustment to alternative minimum taxable income (AMTI) to reflect the difference between: (a) AMTI required to be allocated for post-February 1986 contracts completed or adjusted during the tax year based on actual contract price and costs, and (b) AMTI reported for such contracts based on estimated contract price and costs — column (b)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line3[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 352.8,
+        "y": 491.998
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.3_amti_adjustment_col_c",
+      "label": "Line 3 — Adjustment to alternative minimum taxable income (AMTI) to reflect the difference between: (a) AMTI required to be allocated for post-February 1986 contracts completed or adjusted during the tax year based on actual contract price and costs, and (b) AMTI reported for such contracts based on estimated contract price and costs — column (c)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line3[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 424.8,
+        "y": 491.998
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.4_amt_increase_decrease_col_a",
+      "label": "Line 4 — Alternative minimum tax (AMT) increase or decrease for prior years. Multiply line 3 in each column by the applicable AMT rate — column (a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line4[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 280.8,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.4_amt_increase_decrease_col_b",
+      "label": "Line 4 — Alternative minimum tax (AMT) increase or decrease for prior years. Multiply line 3 in each column by the applicable AMT rate — column (b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line4[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 352.8,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.4_amt_increase_decrease_col_c",
+      "label": "Line 4 — Alternative minimum tax (AMT) increase or decrease for prior years. Multiply line 3 in each column by the applicable AMT rate — column (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line4[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 424.8,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.5_larger_of_line_2_or_4_col_a",
+      "label": "Line 5 — Enter the larger of line 2 or line 4 — column (a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line5[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 280.8,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.5_larger_of_line_2_or_4_col_b",
+      "label": "Line 5 — Enter the larger of line 2 or line 4 — column (b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line5[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 352.8,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.5_larger_of_line_2_or_4_col_c",
+      "label": "Line 5 — Enter the larger of line 2 or line 4 — column (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line5[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 424.8,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.6_overpayment_ceiling_col_a",
+      "label": "Line 6 — Overpayment ceiling. For each column in which line 5 is a negative number, enter your total tax liability for the prior year, as adjusted for past applications of the look-back method and after net operating loss, capital loss, net section 1256 contracts loss, and credit carryovers and carrybacks to that year — column (a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line6[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 280.8,
+        "y": 335.999
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.6_overpayment_ceiling_col_b",
+      "label": "Line 6 — Overpayment ceiling. For each column in which line 5 is a negative number, enter your total tax liability for the prior year, as adjusted for past applications of the look-back method and after net operating loss, capital loss, net section 1256 contracts loss, and credit carryovers and carrybacks to that year — column (b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line6[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 352.8,
+        "y": 335.999
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.6_overpayment_ceiling_col_c",
+      "label": "Line 6 — Overpayment ceiling. For each column in which line 5 is a negative number, enter your total tax liability for the prior year, as adjusted for past applications of the look-back method and after net operating loss, capital loss, net section 1256 contracts loss, and credit carryovers and carrybacks to that year — column (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line6[0].f2_29[0]",
+      "position": {
+        "page": 1,
+        "x": 424.8,
+        "y": 335.999
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.7_tax_increase_decrease_prior_years_col_a",
+      "label": "Line 7 — Increase or decrease in tax for the prior years on which interest is due (or is to be refunded). Enter the smaller of line 5 or line 6 — column (a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line7[0].f2_31[0]",
+      "position": {
+        "page": 1,
+        "x": 280.8,
+        "y": 288
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.7_tax_increase_decrease_prior_years_col_b",
+      "label": "Line 7 — Increase or decrease in tax for the prior years on which interest is due (or is to be refunded). Enter the smaller of line 5 or line 6 — column (b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line7[0].f2_32[0]",
+      "position": {
+        "page": 1,
+        "x": 352.8,
+        "y": 288
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.7_tax_increase_decrease_prior_years_col_c",
+      "label": "Line 7 — Increase or decrease in tax for the prior years on which interest is due (or is to be refunded). Enter the smaller of line 5 or line 6 — column (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line7[0].f2_33[0]",
+      "position": {
+        "page": 1,
+        "x": 424.8,
+        "y": 288
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.8_interest_due_on_increase_col_a",
+      "label": "Line 8 — Interest due on increase, if any, shown on line 7 — column (a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line8[0].f2_35[0]",
+      "position": {
+        "page": 1,
+        "x": 280.8,
+        "y": 263.999
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.8_interest_due_on_increase_col_b",
+      "label": "Line 8 — Interest due on increase, if any, shown on line 7 — column (b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line8[0].f2_36[0]",
+      "position": {
+        "page": 1,
+        "x": 352.8,
+        "y": 263.999
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.8_interest_due_on_increase_col_c",
+      "label": "Line 8 — Interest due on increase, if any, shown on line 7 — column (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line8[0].f2_37[0]",
+      "position": {
+        "page": 1,
+        "x": 424.8,
+        "y": 263.999
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.8_interest_due_on_increase_col_d",
+      "label": "Line 8 — Interest due on increase, if any, shown on line 7 — column (d) Totals (add columns (a), (b), and (c))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line8[0].f2_38[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 263.999
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.9_interest_refunded_on_decrease_col_a",
+      "label": "Line 9 — Interest to be refunded on decrease, if any, shown on line 7 — column (a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line9[0].f2_39[0]",
+      "position": {
+        "page": 1,
+        "x": 280.8,
+        "y": 239.998
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.9_interest_refunded_on_decrease_col_b",
+      "label": "Line 9 — Interest to be refunded on decrease, if any, shown on line 7 — column (b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line9[0].f2_40[0]",
+      "position": {
+        "page": 1,
+        "x": 352.8,
+        "y": 239.998
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.9_interest_refunded_on_decrease_col_c",
+      "label": "Line 9 — Interest to be refunded on decrease, if any, shown on line 7 — column (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line9[0].f2_41[0]",
+      "position": {
+        "page": 1,
+        "x": 424.8,
+        "y": 239.998
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.9_interest_refunded_on_decrease_col_d",
+      "label": "Line 9 — Interest to be refunded on decrease, if any, shown on line 7 — column (d) Totals (add columns (a), (b), and (c))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line9[0].f2_42[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 239.998
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.10a_net_interest_refunded",
+      "label": "Line 10a — Net interest to be refunded to you. If line 9, column (d), is greater than line 8, column (d), enter the excess",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_43[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 216
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.10b_routing_number",
+      "label": "Line 10b — Routing number",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].RoutingNo[0].f2_44[0]",
+      "position": {
+        "page": 1,
+        "x": 144,
+        "y": 204.001
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-8697.1.part2.10c_account_type_checking",
+      "label": "Line 10c — Type: Checking",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 334.2,
+        "y": 205.501
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.10c_account_type_savings",
+      "label": "Line 10c — Type: Savings",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[1]",
+      "position": {
+        "page": 1,
+        "x": 391.8,
+        "y": 205.501
+      }
+    },
+    {
+      "fieldId": "form-8697.1.part2.10d_account_number",
+      "label": "Line 10d — Account number",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].AccountNo[0].f2_45[0]",
+      "position": {
+        "page": 1,
+        "x": 144,
+        "y": 186.001
+      },
+      "maxLength": 17
+    },
+    {
+      "fieldId": "form-8697.1.part2.11_net_interest_owed",
+      "label": "Line 11 — Net interest you owe. If line 8, column (d), exceeds line 9, column (d), enter the excess",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_46[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 156.002
+      }
+    },
+    {
+      "fieldId": "form-8697.1.signing.preparer_self_employed",
+      "label": "Check if self-employed",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 473.398,
+        "y": 73
+      }
+    },
+    {
+      "fieldId": "form-8697.1.signing.preparer_name",
+      "label": "Preparer's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_47[0]",
+      "position": {
+        "page": 1,
+        "x": 87.4,
+        "y": 59.998
+      }
+    },
+    {
+      "fieldId": "form-8697.1.signing.preparer_ptin",
+      "label": "PTIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_48[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 59.998
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8697.1.signing.firm_name",
+      "label": "Firm's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_49[0]",
+      "position": {
+        "page": 1,
+        "x": 144,
+        "y": 48.002
+      }
+    },
+    {
+      "fieldId": "form-8697.1.signing.firm_ein",
+      "label": "Firm's EIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_51[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 48.002
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8697.1.signing.firm_address",
+      "label": "Firm's address",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_50[0]",
+      "position": {
+        "page": 1,
+        "x": 144,
+        "y": 36
+      }
+    },
+    {
+      "fieldId": "form-8697.1.signing.firm_phone",
+      "label": "Phone no.",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "phone",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_52[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 36
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8697/blank.pdf",
+    "ingestedAt": "2026-11-20T15:33:53.585Z",
+    "totalFields": 98,
+    "skipped": 0,
+    "catalogEntries": 98
+  }
+}

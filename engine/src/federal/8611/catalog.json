@@ -1,0 +1,573 @@
+{
+  "form": {
+    "formId": "form-8611",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 8611, Recapture of Low-Income Housing Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8611.0.header.a_taxpayer_name",
+      "label": "A — Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8611.0.header.b_identifying_number",
+      "label": "B — Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 461.8,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8611.0.header.c_building_address",
+      "label": "C — Address of building (as shown on Form 8609)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 647.968
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8611.0.header.d_building_identification_number",
+      "label": "D — Building identification number (BIN)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 353.8,
+        "y": 647.968
+      }
+    },
+    {
+      "fieldId": "form-8611.0.header.e_date_placed_in_service",
+      "label": "E — Date placed in service (from Form 8609)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 461.8,
+        "y": 647.968
+      }
+    },
+    {
+      "fieldId": "form-8611.0.header.f1_bond_issuer_name",
+      "label": "F(1) — If building is financed in whole or part with tax-exempt bonds: Issuer's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].LineF_ReadOrder[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 611.968
+      }
+    },
+    {
+      "fieldId": "form-8611.0.header.f2_bond_date_of_issue",
+      "label": "F(2) — If building is financed in whole or part with tax-exempt bonds: Date of issue",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 461.8,
+        "y": 611.968
+      }
+    },
+    {
+      "fieldId": "form-8611.0.header.f3_bond_name_of_issue",
+      "label": "F(3) — If building is financed in whole or part with tax-exempt bonds: Name of issue",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 587.967
+      }
+    },
+    {
+      "fieldId": "form-8611.0.header.f4_bond_cusip_number",
+      "label": "F(4) — If building is financed in whole or part with tax-exempt bonds: CUSIP number",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 461.8,
+        "y": 587.967
+      }
+    },
+    {
+      "fieldId": "form-8611.0.line.1_total_credits_prior_years",
+      "label": "Line 1 — Enter total credits reported on Form 8586 in prior years for this building",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-8611.0.line.2_credits_additions_qualified_basis",
+      "label": "Line 2 — Credits included on line 1 attributable to additions to qualified basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-8611.0.line.3_credits_subject_to_recapture",
+      "label": "Line 3 — Credits subject to recapture. Subtract line 2 from line 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-8611.0.line.4_credit_recapture_percentage_whole",
+      "label": "Line 4 — Credit recapture percentage (digits before the decimal point)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 467.968
+      }
+    },
+    {
+      "fieldId": "form-8611.0.line.4_credit_recapture_percentage_decimal",
+      "label": "Line 4 — Credit recapture percentage (digits after the decimal point)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 547.2,
+        "y": 467.968
+      }
+    },
+    {
+      "fieldId": "form-8611.0.line.5_accelerated_portion_of_credit",
+      "label": "Line 5 — Accelerated portion of credit. Multiply line 3 by line 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-8611.0.line.6_percentage_decrease_qualified_basis_whole",
+      "label": "Line 6 — Percentage decrease in qualified basis. Express as a decimal amount carried out to at least 3 places (digits before the decimal point)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-8611.0.line.6_percentage_decrease_qualified_basis_decimal",
+      "label": "Line 6 — Percentage decrease in qualified basis. Express as a decimal amount carried out to at least 3 places (digits after the decimal point)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 547.2,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-8611.0.line.7_accelerated_portion_recaptured",
+      "label": "Line 7 — Amount of accelerated portion recaptured. Multiply line 5 by line 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 359.968
+      }
+    },
+    {
+      "fieldId": "form-8611.0.line.8_recapture_from_flow_through_entity",
+      "label": "Line 8 — Enter recapture amount from flow-through entity",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 335.97
+      }
+    },
+    {
+      "fieldId": "form-8611.0.line.9_unused_portion_accelerated_amount",
+      "label": "Line 9 — Enter the unused portion of the accelerated amount from line 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-8611.0.line.10_net_recapture",
+      "label": "Line 10 — Net recapture. Subtract line 9 from line 7 or line 8. If less than zero, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "form-8611.0.line.11_interest_on_line_10_recapture",
+      "label": "Line 11 — Enter interest on the line 10 recapture amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "form-8611.0.line.12_total_amount_subject_to_recapture",
+      "label": "Line 12 — Total amount subject to recapture. Add lines 10 and 11",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-8611.0.line.13_unused_credits_this_building",
+      "label": "Line 13 — Unused credits attributable to this building reduced by the accelerated portion included on line 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "form-8611.0.line.14_recapture_tax",
+      "label": "Line 14 — Recapture tax. Subtract line 13 from line 12. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-8611.0.line.15_carryforward_low_income_housing_credit",
+      "label": "Line 15 — Carryforward of the low-income housing credit attributable to this building. Subtract line 12 from line 13. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 155.97
+      }
+    },
+    {
+      "fieldId": "form-8611.0.line.16_interest_on_line_7_recapture",
+      "label": "Line 16 — Enter interest on the line 7 recapture amount (only section 42(j)(5) partnerships)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 107.968
+      }
+    },
+    {
+      "fieldId": "form-8611.0.line.17_total_recapture",
+      "label": "Line 17 — Total recapture. Add lines 7 and 16 (only section 42(j)(5) partnerships)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 83.97
+      }
+    },
+    {
+      "fieldId": "form-8611.1.line2_worksheet.a_form_8609a_line_10",
+      "label": "Line 2 Worksheet, line a — Enter the amount from line 10 of Form 8609-A (or predecessor, Schedule A (Form 8609))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 203.969
+      }
+    },
+    {
+      "fieldId": "form-8611.1.line2_worksheet.b_line_a_times_2",
+      "label": "Line 2 Worksheet, line b — Multiply a by 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 191.97
+      }
+    },
+    {
+      "fieldId": "form-8611.1.line2_worksheet.c_form_8609a_line_11",
+      "label": "Line 2 Worksheet, line c — Enter the amount from line 11 of Form 8609-A (or predecessor, Schedule A (Form 8609))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-8611.1.line2_worksheet.d_line_b_minus_c",
+      "label": "Line 2 Worksheet, line d — Subtract c from b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "form-8611.1.line2_worksheet.e_line_14_decimal_amount",
+      "label": "Line 2 Worksheet, line e — Enter decimal amount figured in step 1 of the instructions for line 14 of Form 8609-A. If line 14 does not apply to you, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 143.968
+      }
+    },
+    {
+      "fieldId": "form-8611.1.line2_worksheet.f_line_d_times_e",
+      "label": "Line 2 Worksheet, line f — Multiply d by e",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 131.969
+      }
+    },
+    {
+      "fieldId": "form-8611.1.line2_worksheet.g_line_d_minus_f",
+      "label": "Line 2 Worksheet, line g — Subtract f from d",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 119.97
+      }
+    },
+    {
+      "fieldId": "form-8611.1.line2_worksheet.h_line_16_divided_by_line_15",
+      "label": "Line 2 Worksheet, line h — Divide line 16 by line 15 of Form 8609-A. Enter the result here",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 107.968
+      }
+    },
+    {
+      "fieldId": "form-8611.1.line2_worksheet.i_line_g_times_h",
+      "label": "Line 2 Worksheet, line i — Multiply g by h. Enter this amount on line 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 83.97
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8611/blank.pdf",
+    "ingestedAt": "2026-11-20T15:33:51.445Z",
+    "totalFields": 37,
+    "skipped": 0,
+    "catalogEntries": 37
+  }
+}

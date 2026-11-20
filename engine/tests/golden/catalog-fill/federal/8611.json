@@ -1,0 +1,339 @@
+{
+  "formId": "form-8611",
+  "fieldCount": 37,
+  "entries": [
+    {
+      "fieldId": "form-8611.0.header.a_taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-1WLAQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.header.b_identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-1RYU4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.header.c_building_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-AB7RJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.header.d_building_identification_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "T-11J8N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.header.e_date_placed_in_service",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.header.f1_bond_issuer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].LineF_ReadOrder[0].f1_6[0]",
+          "text": "T-72BYL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.header.f2_bond_date_of_issue",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.header.f3_bond_name_of_issue",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "T-1TYVM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.header.f4_bond_cusip_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "T-RF0HB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.line.1_total_credits_prior_years",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "9,857"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.line.10_net_recapture",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "2,898"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.line.11_interest_on_line_10_recapture",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "5,451"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.line.12_total_amount_subject_to_recapture",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "4,766"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.line.13_unused_credits_this_building",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "7,114"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.line.14_recapture_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "8,574"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.line.15_carryforward_low_income_housing_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+          "text": "3,686"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.line.16_interest_on_line_7_recapture",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+          "text": "6,274"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.line.17_total_recapture",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+          "text": "6,354"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.line.2_credits_additions_qualified_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "6,950"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.line.3_credits_subject_to_recapture",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "4,074"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.line.4_credit_recapture_percentage_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "T-LLLEC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.line.4_credit_recapture_percentage_whole",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "T-1VLKL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.line.5_accelerated_portion_of_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "3,941"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.line.6_percentage_decrease_qualified_basis_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "T-226I0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.line.6_percentage_decrease_qualified_basis_whole",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "T-9ESI2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.line.7_accelerated_portion_recaptured",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "3,863"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.line.8_recapture_from_flow_through_entity",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "3,013"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.0.line.9_unused_portion_accelerated_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "4,262"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.1.line2_worksheet.a_form_8609a_line_10",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+          "text": "8,725"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.1.line2_worksheet.b_line_a_times_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+          "text": "6,153"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.1.line2_worksheet.c_form_8609a_line_11",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+          "text": "5,571"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.1.line2_worksheet.d_line_b_minus_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+          "text": "8,810"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.1.line2_worksheet.e_line_14_decimal_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+          "text": "T-1EP1D"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.1.line2_worksheet.f_line_d_times_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+          "text": "5,032"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.1.line2_worksheet.g_line_d_minus_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+          "text": "2,544"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.1.line2_worksheet.h_line_16_divided_by_line_15",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+          "text": "T-XBMMP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8611.1.line2_worksheet.i_line_g_times_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+          "text": "2,505"
+        }
+      ]
+    }
+  ]
+}

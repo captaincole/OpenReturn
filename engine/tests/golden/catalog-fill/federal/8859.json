@@ -1,0 +1,87 @@
+{
+  "formId": "form-8859",
+  "fieldCount": 9,
+  "entries": [
+    {
+      "fieldId": "form-8859.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8859.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-9S0QH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8859.0.line.1_credit_carryforward_from_2024",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "9,359"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8859.0.line.2_tax_liability_limitation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "8,528"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8859.0.line.3_current_year_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "5,834"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8859.0.line.4_credit_carryforward_to_2026",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "6,845"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8859.0.worksheet.1_tax_liability_before_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Col1[0].Line1[0].f1_7[0]",
+          "text": "7,034"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8859.0.worksheet.2_total_other_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Col2[0].Line2[0].f1_8[0]",
+          "text": "7,638"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8859.0.worksheet.3_tax_liability_limit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Col2[0].Line3[0].f1_9[0]",
+          "text": "8,405"
+        }
+      ]
+    }
+  ]
+}

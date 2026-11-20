@@ -1,0 +1,312 @@
+{
+  "formId": "form-6198",
+  "fieldCount": 34,
+  "entries": [
+    {
+      "fieldId": "form-6198.0.header.activity_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-YS8Y5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-1OF4U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-9LW6Q"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.1_ordinary_income_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "8,402"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.10a_subtract_line_9_from_8",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "1,253"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.10b_simplified_amount_at_risk",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "6,677"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.11_investment_at_effective_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "8,959"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.12_increases_at_effective_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "2,913"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.13_add_lines_11_12",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "8,480"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.14_decreases_at_effective_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "3,842"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.15_amount_at_risk",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "3,162"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.15a_at_effective_date_checkbox",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.15b_from_prior_year_checkbox",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.16_increases_since",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "5,701"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.16a_increases_since_effective_date_checkbox",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.16b_increases_since_prior_year_end_checkbox",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.17_add_lines_15_16",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "2,268"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.18_decreases_since",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "7,435"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.18a_decreases_since_effective_date_checkbox",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.18b_decreases_since_prior_year_end_checkbox",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.19a_subtract_line_18_from_17",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "6,208"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.19b_detailed_amount_at_risk",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+          "text": "6,396"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.20_amount_at_risk",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+          "text": "7,253"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.21_deductible_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+          "text": "2,567"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.2a_gain_loss_schedule_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "4,462"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.2b_gain_loss_form_4797",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "2,128"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.2c_gain_loss_other_form",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "6,702"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.3_other_income_gains_k1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "9,169"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.4_other_deductions_losses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "7,698"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.5_current_year_profit_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "3,103"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.6_adjusted_basis_first_day",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "7,627"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.7_increases_for_tax_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "1,658"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.8_add_lines_6_7",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "1,599"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6198.0.line.9_decreases_for_tax_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "9,891"
+        }
+      ]
+    }
+  ]
+}
