@@ -1,6 +1,6 @@
 /*
  * Values match engine/tests/scenarios/tcb-ca-005/{facts,decisions}.ts. The
- * return's conversation gets her answers and seven documents; the Form 1098
+ * return's conversation gets her answers and eight documents; the Form 1098
  * goes to the deductions conversation, which asks for it.
  */
 
@@ -21,7 +21,7 @@ export const OPENING: Turn = {
     "mailing address is the same. Our niece Jessica Davies (SSN 900-45-6788, born 08/12/2014, " +
     "a U.S. citizen) lived with us all year. We had health coverage all 12 months, owe no " +
     "use tax, and had no crypto and no foreign accounts. Refund any overpayment. I will " +
-    "upload seven tax documents, one in each message. I will do our deductions in the " +
+    "upload eight tax documents, one in each message. I will do our deductions in the " +
     "Deductions tab, so please do not ask about them here.",
 };
 
@@ -37,6 +37,10 @@ export const RETURN_DOCUMENTS: Turn[] = [
     text: "Here is my spouse's 1099-R from ADP Services.",
   },
   { file: doc("08-ssa-1099.pdf"), text: "Here is my SSA-1099." },
+  {
+    file: doc("09-employers-name-3921.pdf"),
+    text: "Here is my Form 3921. I exercised stock options and still hold all the shares.",
+  },
 ];
 
 const RETURN_ANSWERS: Array<[RegExp, string]> = [
@@ -51,7 +55,10 @@ const RETURN_ANSWERS: Array<[RegExp, string]> = [
   [/resident|move|moved|part-year/i, "We were full-year California residents in Los Angeles."],
   [/mailing|address/i, "Our mailing address is 1111 Grove Park Rd, where we live."],
   [/refund|2026 estimated|apply/i, "Refund the full federal and California overpayments."],
-  [/stock option|incentive|3921/i, "We exercised incentive stock options: a $275,000 spread."],
+  [
+    /stock option|incentive|3921|still h[eo]ld/i,
+    "I exercised incentive stock options in 2025 and still held all the shares at year end.",
+  ],
   [/shares|quantity/i, "The 1099-B does not show the number of shares, and I do not know it."],
   [/\bhsa\b|health savings/i, "We have no HSA."],
   [/last year's|prior.year|2024/i, "I do not have last year's return at hand."],

@@ -12,6 +12,7 @@ import {
   makeDependentFactKey,
   makeDividendFactKey,
   makeInterestFactKey,
+  makeIsoExerciseFactKey,
   makeRetirementDistributionFactKey,
   makeSocialSecurityFactKey,
   makeTradeFactKey,
@@ -350,6 +351,20 @@ export const tcbCa005Facts: TaxFactRow[] = [
     1151,
     `${ANSWERS}: f8960.stateIncTax.`,
   ),
-  /* f6251.stockOption: the incentive stock option spread (Schedule P (540) and Form 6251). */
-  fact("other", AMT_KEYS.isoExerciseSpread, 275000, `${ANSWERS}: f6251.stockOption.`),
+  /*
+   * f6251.stockOption: the incentive stock option spread ($275,000; Schedule P
+   * (540) and Form 6251). The Form 3921 carries it, and the shares were not sold.
+   */
+  fact(
+    "other",
+    makeIsoExerciseFactKey("employers-name", "2025-06-16"),
+    madisonIsoExercise,
+    "Form 3921 from Employers Name (docs/09-employers-name-3921.pdf).",
+  ),
+  fact(
+    "other",
+    AMT_KEYS.isoSharesHeldAtYearEnd,
+    true,
+    `${ANSWERS}: f6251.stockOption is an adjustment, so the shares were held at year end.`,
+  ),
 ];

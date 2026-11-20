@@ -2,6 +2,7 @@
 
 import { lookupPreferentialBrackets } from "../../data/preferentialBrackets.js";
 import { defineForm, type FormAccessor } from "../../defineForm.js";
+import { ISO_SOLD_IN_YEAR_UNSUPPORTED } from "../../isoSpread.js";
 import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
 import { SSN, type FilingStatus } from "../../values.js";
@@ -243,6 +244,7 @@ export function register(): void {
        * The fact is the spread on stock not sold by year end: a same-year sale needs no adjustment.
        */
       "0.line.2i_incentive_stock_options": (_, info) => {
+        if (info.isoSharesSoldInYear) return unsupported(ISO_SOLD_IN_YEAR_UNSUPPORTED);
         const spread = roundDollars(info.isoExerciseSpread);
         return spread !== undefined && spread > 0 ? spread : undefined;
       },

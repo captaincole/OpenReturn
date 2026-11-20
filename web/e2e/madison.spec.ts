@@ -55,7 +55,7 @@ test("Madison: her documents, then the Deductions tab to its close", async ({ pa
   test.setTimeout(150 * 60_000);
   await plumbing("setup page creates the owner", () => createOwner(page, OWNER));
   const filingPath = await plumbing("start a filing", () => startFiling(page));
-  await plumbing("the return's seven uploads are sent and stored", () => runReturn(page));
+  await plumbing("the return's eight uploads are sent and stored", () => runReturn(page));
   check("documents read match the PDFs", "model", documentProblems());
 
   const view = await runDeductions(page, filingPath);

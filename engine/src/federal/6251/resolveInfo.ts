@@ -4,6 +4,7 @@ import {
   isDividendFactKey,
   isInterestFactKey,
 } from "../../facts/index.js";
+import { resolveIsoSpread } from "../../isoSpread.js";
 import { sum } from "../../money.js";
 import {
   missingInputs,
@@ -22,18 +23,18 @@ import type { Form6251FilingInfo } from "./filingInfo.js";
  * (8911) are claimed, or when lines 2c through 3 are negative and line 7 would be
  * more than line 10 without them. KNOWN GAP: lines 7 and 10 need the evaluated
  * return, which the resolver cannot see. The rule sees only the incentive stock
- * option spread, the one AMT adjustment the engine models: a spread above 0 files
- * the form. A filer who owes AMT for another reason still needs the explicit
- * decision.
+ * option exercise, the one AMT adjustment the engine models: a spread above 0, or
+ * a Form 3921 on file, files the form. A filer who owes AMT for another reason
+ * still needs the explicit decision.
  */
 export function resolve6251Info(inputs: ResolverInputs): Form6251FilingInfo {
-  const isoExerciseSpread = num(inputs, AMT_KEYS.isoExerciseSpread);
+  const iso = resolveIsoSpread(inputs);
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_6251",
     fallbacks: [
       {
-        rule: `fallback: an ISO spread of $${isoExerciseSpread ?? 0} (files when above $0)`,
-        value: (isoExerciseSpread ?? 0) > 0,
+        rule: `fallback: an ISO spread of $${iso.spread ?? 0} (files when above $0, or with a Form 3921 on file)`,
+        value: iso.hasExercise,
         triggeredByFactKeys: [AMT_KEYS.isoExerciseSpread],
       },
     ],
@@ -54,21 +55,24 @@ export function resolve6251Info(inputs: ResolverInputs): Form6251FilingInfo {
     /*
      * Line 2a needs the choice only when Schedule A files, as 1040 line 12e does.
      * Line 2c needs last year's AMT carryover only when there was a regular one.
-     * Line 2i needs the ISO spread: no document carries it, and 0 is an answer.
+     * Line 2i needs the ISO spread (0 is an answer), or what its Form 3921 waits for.
      */
     missingInputs: {
-      "form-6251": missingInputs({
-        ...(filesScheduleA ? { "decisions.itemize_vs_standard": itemizesDeductions } : {}),
-        ...(needsAmtCarryover
-          ? { [INVESTMENT_INTEREST_KEYS.amtDisallowedCarryover]: amtDisallowedInterestCarryover }
-          : {}),
-        [AMT_KEYS.isoExerciseSpread]: isoExerciseSpread,
-      }),
+      "form-6251": [
+        ...missingInputs({
+          ...(filesScheduleA ? { "decisions.itemize_vs_standard": itemizesDeductions } : {}),
+          ...(needsAmtCarryover
+            ? { [INVESTMENT_INTEREST_KEYS.amtDisallowedCarryover]: amtDisallowedInterestCarryover }
+            : {}),
+        }),
+        ...iso.missing,
+      ],
     },
     itemizesDeductions,
     amtDisallowedInterestCarryover,
     privateActivityBondInterest: privateActivityBondInterest(inputs),
-    isoExerciseSpread,
+    isoExerciseSpread: iso.spread,
+    isoSharesSoldInYear: iso.soldInYear,
   };
 }
 

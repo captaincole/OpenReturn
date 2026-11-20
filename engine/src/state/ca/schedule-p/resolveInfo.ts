@@ -1,4 +1,5 @@
 import { AMT_KEYS, INVESTMENT_INTEREST_KEYS } from "../../../facts/index.js";
+import { resolveIsoSpread } from "../../../isoSpread.js";
 import {
   missingInputs,
   num,
@@ -22,7 +23,7 @@ import type { SchedulePFilingInfo } from "./filingInfo.js";
  * exemption never exceeds the regular tax, and Part III credits are not modeled.
  */
 export function resolveSchedulePInfo(inputs: ResolverInputs): SchedulePFilingInfo {
-  const isoExerciseSpread = num(inputs, AMT_KEYS.isoExerciseSpread);
+  const iso = resolveIsoSpread(inputs);
   const caCarryover = num(inputs, INVESTMENT_INTEREST_KEYS.caDisallowedCarryover);
   const caAmtDisallowedInterestCarryover = num(
     inputs,
@@ -34,8 +35,8 @@ export function resolveSchedulePInfo(inputs: ResolverInputs): SchedulePFilingInf
     explicitKey: "decisions.scope.must_file_schedule_p",
     fallbacks: [
       {
-        rule: `fallback: Form 540 files (${files540}) with an ISO spread of $${isoExerciseSpread ?? 0} or itemized deductions (${itemizes})`,
-        value: files540 && ((isoExerciseSpread ?? 0) > 0 || itemizes),
+        rule: `fallback: Form 540 files (${files540}) with an ISO exercise on record (${iso.hasExercise}, spread $${iso.spread ?? 0}) or itemized deductions (${itemizes})`,
+        value: files540 && (iso.hasExercise || itemizes),
         triggeredByFactKeys: [AMT_KEYS.isoExerciseSpread],
         triggeredByDecisionKeys: [
           "decisions.scope.must_file_ca_540",
@@ -47,16 +48,23 @@ export function resolveSchedulePInfo(inputs: ResolverInputs): SchedulePFilingInf
   const files = resolution.value === true;
   return {
     mustFile: { "schedule-p": resolution },
-    /* Line 7 needs last year's AMT carryover only when there was a regular one. */
+    /*
+     * Line 7 needs last year's AMT carryover only when there was a regular one.
+     * Line 10 needs what a recorded exercise waits for. An unstated spread is not
+     * asked here: Form 6251 asks it.
+     */
     missingInputs: {
-      "schedule-p":
-        files && (caCarryover ?? 0) > 0
+      "schedule-p": [
+        ...(files && (caCarryover ?? 0) > 0
           ? missingInputs({
               [INVESTMENT_INTEREST_KEYS.caAmtDisallowedCarryover]: caAmtDisallowedInterestCarryover,
             })
-          : [],
+          : []),
+        ...(iso.hasExercise ? iso.missing : []),
+      ],
     },
-    isoExerciseSpread,
+    isoExerciseSpread: iso.spread,
+    isoSharesSoldInYear: iso.soldInYear,
     caAmtDisallowedInterestCarryover,
   };
 }

@@ -2,7 +2,9 @@
 
 import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
 import { defineForm, type BindingFn, type FormAccessor } from "../../../defineForm.js";
+import { ISO_SOLD_IN_YEAR_UNSUPPORTED } from "../../../isoSpread.js";
 import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../../money.js";
+import { unsupported } from "../../../types.js";
 import type { FilingStatus } from "../../../values.js";
 import type { SchedulePFilingInfo } from "./filingInfo.js";
 import { partIIICreditRows } from "./partIII.js";
@@ -164,7 +166,10 @@ const partI: Bindings = {
    * stock not sold in the year (ca-540-sched-p-inst-2025::sec::line-9-adjusted-gain-or-loss::b02,
    * the run-in "Line 10" heading; same-year sale needs no adjustment, …::b03).
    */
-  "0.line.10_iso_cqso": (_, info) => positiveOrBlank(numberOrBlank(info.isoExerciseSpread)),
+  "0.line.10_iso_cqso": (_, info) =>
+    info.isoSharesSoldInYear
+      ? unsupported(ISO_SOLD_IN_YEAR_UNSUPPORTED)
+      : positiveOrBlank(numberOrBlank(info.isoExerciseSpread)),
   // "Enter the total on line 13" (ca-540-sched-p-inst-2025::sec::line-13-other-adjustments-and-preferences::b01).
   "0.line.13_other_adjustments_total": (form) =>
     sumOrBlank(

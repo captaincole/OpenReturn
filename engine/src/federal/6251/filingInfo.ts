@@ -14,6 +14,8 @@ export interface Form6251FilingInfo
   amtDisallowedInterestCarryover?: number;
   /** Line 2g: 1099-INT box 9 plus 1099-DIV box 13; undefined with neither form. */
   privateActivityBondInterest?: number;
-  /** Line 2i: the incentive stock option spread (amt.iso_exercise_spread); undefined while unstated. */
+  /** Line 2i: the incentive stock option spread (the Forms 3921, else amt.iso_exercise_spread); undefined while unstated. */
   isoExerciseSpread?: number;
+  /** Forms 3921 are on file and the shares were sold in the year of exercise: line 2i is not handled. */
+  isoSharesSoldInYear?: boolean;
 }

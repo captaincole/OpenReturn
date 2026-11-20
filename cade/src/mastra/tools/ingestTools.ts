@@ -9,6 +9,7 @@ import { ingest1099K } from "./ingest1099K";
 import { ingest1099Nec } from "./ingest1099Nec";
 import { ingest1099R } from "./ingest1099R";
 import { ingest1099SA } from "./ingest1099SA";
+import { ingest3921 } from "./ingest3921";
 import { ingestEnergyInvoice } from "./ingestEnergyInvoice";
 import { ingestHouseholdW2 } from "./ingestHouseholdW2";
 import { ingestSsa1099 } from "./ingestSsa1099";
@@ -36,6 +37,7 @@ export const ingestTools = {
   ingest1099Nec,
   ingest1099G,
   ingest1095A,
+  ingest3921,
   recordBusiness,
   recordDependent,
   recordRental,
