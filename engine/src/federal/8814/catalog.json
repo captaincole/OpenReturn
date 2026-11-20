@@ -1,0 +1,381 @@
+{
+  "form": {
+    "formId": "form-8814",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 8814 — Parents' Election To Report Child's Interest and Dividends"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8814.0.header.taxpayer_name",
+      "label": "Name(s) shown on your return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8814.0.header.ssn",
+      "label": "Your social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 447.4,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8814.0.header.a_child_name",
+      "label": "A — Child's name (first, initial, and last)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 623.967
+      }
+    },
+    {
+      "fieldId": "form-8814.0.header.b_child_ssn",
+      "label": "B — Child's social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 447.4,
+        "y": 623.967
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8814.0.header.c_more_than_one_form_8814",
+      "label": "C — If more than one Form 8814 is attached, check here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 565.6,
+        "y": 606.967
+      }
+    },
+    {
+      "fieldId": "form-8814.0.line.1a_child_taxable_interest",
+      "label": "Line 1a — Enter your child's taxable interest",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 551.97
+      }
+    },
+    {
+      "fieldId": "form-8814.0.line.1b_child_tax_exempt_interest",
+      "label": "Line 1b — Enter your child's tax-exempt interest. Do not include this amount on line 1a",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-8814.0.line.2a_child_ordinary_dividends",
+      "label": "Line 2a — Enter your child's ordinary dividends, including any Alaska Permanent Fund dividends",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-8814.0.line.2b_child_qualified_dividends",
+      "label": "Line 2b — Enter your child's qualified dividends included on line 2a",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 503.968
+      }
+    },
+    {
+      "fieldId": "form-8814.0.line.3_child_capital_gain_distributions",
+      "label": "Line 3 — Enter your child's capital gain distributions",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-8814.0.line.4_total_interest_dividends",
+      "label": "Line 4 — Add lines 1a, 2a, and 3",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-8814.0.line.6_amount_over_base",
+      "label": "Line 6 — Subtract line 5 from line 4",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-8814.0.line.7_qualified_dividends_ratio_whole",
+      "label": "Line 7 — Divide line 2b by line 4. Enter the result as a decimal (rounded to at least three places) — digits before the decimal point",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 371.97
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8814.0.line.7_qualified_dividends_ratio_decimal",
+      "label": "Line 7 — Divide line 2b by line 4. Enter the result as a decimal (rounded to at least three places) — digits after the decimal point",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 459.6,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-8814.0.line.8_capital_gain_ratio_whole",
+      "label": "Line 8 — Divide line 3 by line 4. Enter the result as a decimal (rounded to at least three places) — digits before the decimal point",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 347.969
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8814.0.line.8_capital_gain_ratio_decimal",
+      "label": "Line 8 — Divide line 3 by line 4. Enter the result as a decimal (rounded to at least three places) — digits after the decimal point",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 459.6,
+        "y": 347.969
+      }
+    },
+    {
+      "fieldId": "form-8814.0.line.9_qualified_dividends_to_report",
+      "label": "Line 9 — Multiply line 6 by line 7",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-8814.0.line.10_capital_gain_to_report",
+      "label": "Line 10 — Multiply line 6 by line 8",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "form-8814.0.line.11_add_lines_9_10",
+      "label": "Line 11 — Add lines 9 and 10",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "form-8814.0.line.12_other_income_schedule_1",
+      "label": "Line 12 — Subtract line 11 from line 6. Include this amount in the total on Schedule 1 (Form 1040), line 8z",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-8814.0.line.14_amount_over_not_taxed",
+      "label": "Line 14 — Subtract line 13 from line 4. If the result is zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 203.969
+      }
+    },
+    {
+      "fieldId": "form-8814.0.line.15_line_14_less_than_1350_no",
+      "label": "Line 15 — Is the amount on line 14 less than $1,350? No. Enter $135 here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line15_ReadOrder[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 181.968
+      }
+    },
+    {
+      "fieldId": "form-8814.0.line.15_tax",
+      "label": "Line 15 — Tax",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-8814.0.line.15_line_14_less_than_1350_yes",
+      "label": "Line 15 — Is the amount on line 14 less than $1,350? Yes. Multiply line 14 by 10% (0.10)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line15_ReadOrder[0].c1_2[1]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 169.969
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8814/blank.pdf",
+    "ingestedAt": "2026-11-20T05:26:39.453Z",
+    "totalFields": 24,
+    "skipped": 0,
+    "catalogEntries": 24
+  }
+}

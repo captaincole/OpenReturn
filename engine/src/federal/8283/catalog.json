@@ -1,0 +1,1790 @@
+{
+  "form": {
+    "formId": "form-8283",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 8283 — Noncash Charitable Contributions"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8283.0.header.taxpayer_name",
+      "label": "Name(s) shown on your income tax return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8283.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 460.8,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8283.0.header.original_entity_name",
+      "label": "Name — Entity name from the tax return where the noncash charitable contribution was originally reported, if different from above",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 647.968
+      }
+    },
+    {
+      "fieldId": "form-8283.0.header.original_entity_identifying_number",
+      "label": "Identifying number — Entity identifying number from the tax return where the noncash charitable contribution was originally reported, if different from above",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 647.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8283.0.header.family_pass_through_entity",
+      "label": "Check this box if a family pass-through entity made the non-cash charitable contribution",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 564,
+        "y": 637.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_b_vehicle",
+      "label": "Line 1, Row A — (b) If donated property is a vehicle, check the box",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1A[0].ColB[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 312.798,
+        "y": 517.97
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_a_donee_name_address",
+      "label": "Line 1, Row A — (a) Name and address of the donee organization",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1A[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 58.35,
+        "y": 503.968
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_b_vehicle_identification_number",
+      "label": "Line 1, Row A — (b) Vehicle identification number (unless Form 1098-C is attached)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1A[0].ColB[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 503.971
+      },
+      "maxLength": 17
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_c_property_description",
+      "label": "Line 1, Row A — (c) Description and condition of donated property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1A[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 403.95,
+        "y": 503.968
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_b_vehicle",
+      "label": "Line 1, Row B — (b) If donated property is a vehicle, check the box",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1B[0].ColB[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 312.798,
+        "y": 493.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_a_donee_name_address",
+      "label": "Line 1, Row B — (a) Name and address of the donee organization",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1B[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 58.35,
+        "y": 479.967
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_b_vehicle_identification_number",
+      "label": "Line 1, Row B — (b) Vehicle identification number (unless Form 1098-C is attached)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1B[0].ColB[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 479.97
+      },
+      "maxLength": 17
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_c_property_description",
+      "label": "Line 1, Row B — (c) Description and condition of donated property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1B[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 403.95,
+        "y": 479.967
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_b_vehicle",
+      "label": "Line 1, Row C — (b) If donated property is a vehicle, check the box",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1C[0].ColB[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 312.798,
+        "y": 469.968
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_a_donee_name_address",
+      "label": "Line 1, Row C — (a) Name and address of the donee organization",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1C[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 58.35,
+        "y": 455.966
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_b_vehicle_identification_number",
+      "label": "Line 1, Row C — (b) Vehicle identification number (unless Form 1098-C is attached)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1C[0].ColB[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 455.972
+      },
+      "maxLength": 17
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_c_property_description",
+      "label": "Line 1, Row C — (c) Description and condition of donated property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1C[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 403.95,
+        "y": 455.966
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_b_vehicle",
+      "label": "Line 1, Row D — (b) If donated property is a vehicle, check the box",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1D[0].ColB[0].c1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 312.798,
+        "y": 445.967
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_a_donee_name_address",
+      "label": "Line 1, Row D — (a) Name and address of the donee organization",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1D[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 58.35,
+        "y": 431.965
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_b_vehicle_identification_number",
+      "label": "Line 1, Row D — (b) Vehicle identification number (unless Form 1098-C is attached)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1D[0].ColB[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 431.971
+      },
+      "maxLength": 17
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_c_property_description",
+      "label": "Line 1, Row D — (c) Description and condition of donated property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1D[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 403.95,
+        "y": 431.965
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_d_contribution_date",
+      "label": "Line 1, Row A — (d) Date of the contribution",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1A[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 58.35,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_e_date_acquired",
+      "label": "Line 1, Row A — (e) Date acquired by donor (mo., yr.)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1A[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 123.15,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_f_how_acquired",
+      "label": "Line 1, Row A — (f) How acquired by donor",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1A[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 188.2,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_g_cost_basis",
+      "label": "Line 1, Row A — (g) Donor's cost or adjusted basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1A[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 280.8,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_h_fair_market_value",
+      "label": "Line 1, Row A — (h) Fair market value",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1A[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 352.8,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_i_valuation_method",
+      "label": "Line 1, Row A — (i) Method used to determine the fair market value",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1A[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 425.8,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_d_contribution_date",
+      "label": "Line 1, Row B — (d) Date of the contribution",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1B[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 58.35,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_e_date_acquired",
+      "label": "Line 1, Row B — (e) Date acquired by donor (mo., yr.)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1B[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 123.15,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_f_how_acquired",
+      "label": "Line 1, Row B — (f) How acquired by donor",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1B[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 188.2,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_g_cost_basis",
+      "label": "Line 1, Row B — (g) Donor's cost or adjusted basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1B[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 280.8,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_h_fair_market_value",
+      "label": "Line 1, Row B — (h) Fair market value",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1B[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 352.8,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_i_valuation_method",
+      "label": "Line 1, Row B — (i) Method used to determine the fair market value",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1B[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 425.8,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_d_contribution_date",
+      "label": "Line 1, Row C — (d) Date of the contribution",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1C[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 58.35,
+        "y": 359.971
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_e_date_acquired",
+      "label": "Line 1, Row C — (e) Date acquired by donor (mo., yr.)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1C[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 123.15,
+        "y": 359.971
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_f_how_acquired",
+      "label": "Line 1, Row C — (f) How acquired by donor",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1C[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 188.2,
+        "y": 359.971
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_g_cost_basis",
+      "label": "Line 1, Row C — (g) Donor's cost or adjusted basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1C[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 280.8,
+        "y": 359.971
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_h_fair_market_value",
+      "label": "Line 1, Row C — (h) Fair market value",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1C[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 352.8,
+        "y": 359.971
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_i_valuation_method",
+      "label": "Line 1, Row C — (i) Method used to determine the fair market value",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1C[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 425.8,
+        "y": 359.971
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_d_contribution_date",
+      "label": "Line 1, Row D — (d) Date of the contribution",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1D[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 58.35,
+        "y": 347.972
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_e_date_acquired",
+      "label": "Line 1, Row D — (e) Date acquired by donor (mo., yr.)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1D[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 123.15,
+        "y": 347.972
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_f_how_acquired",
+      "label": "Line 1, Row D — (f) How acquired by donor",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1D[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 188.2,
+        "y": 347.972
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_g_cost_basis",
+      "label": "Line 1, Row D — (g) Donor's cost or adjusted basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1D[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 280.8,
+        "y": 347.972
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_h_fair_market_value",
+      "label": "Line 1, Row D — (h) Fair market value",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1D[0].f1_39[0]",
+      "position": {
+        "page": 0,
+        "x": 352.8,
+        "y": 347.972
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_i_valuation_method",
+      "label": "Line 1, Row D — (i) Method used to determine the fair market value",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1D[0].f1_40[0]",
+      "position": {
+        "page": 0,
+        "x": 425.8,
+        "y": 347.972
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.2a_art_20000_or_more",
+      "label": "Line 2a — Art (contribution of $20,000 or more)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page1[0].Lines2a-c[0].c1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 79.2,
+        "y": 253.968
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.2d_other_real_estate",
+      "label": "Line 2d — Other real estate",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page1[0].Lines2d-h[0].c1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 280.8,
+        "y": 253.968
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.2i_vehicles",
+      "label": "Line 2i — Vehicles",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page1[0].Lines2i-l[0].c1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 253.968
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.2b_qualified_conservation_contribution",
+      "label": "Line 2b — Qualified conservation contribution",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page1[0].Lines2a-c[0].c1_6[1]",
+      "position": {
+        "page": 0,
+        "x": 79.2,
+        "y": 241.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.2e_equipment",
+      "label": "Line 2e — Equipment",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page1[0].Lines2d-h[0].c1_6[1]",
+      "position": {
+        "page": 0,
+        "x": 280.8,
+        "y": 241.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.2j_clothing_household_items",
+      "label": "Line 2j — Clothing and household items",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page1[0].Lines2i-l[0].c1_6[1]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 241.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.2b1_certified_historic_structure",
+      "label": "Line 2b(1) — Certified historic structure",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page1[0].Lines2a-c[0].c1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 93.6,
+        "y": 229.97
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.2f_securities",
+      "label": "Line 2f — Securities",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page1[0].Lines2d-h[0].c1_6[2]",
+      "position": {
+        "page": 0,
+        "x": 280.8,
+        "y": 229.97
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.2k_digital_assets",
+      "label": "Line 2k — Digital assets",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page1[0].Lines2i-l[0].c1_6[2]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 229.97
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.2b1_nps_number",
+      "label": "Line 2b(1) — Certified historic structure: NPS #",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Lines2a-c[0].f1_41[0]",
+      "position": {
+        "page": 0,
+        "x": 122.4,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.2g_collectibles",
+      "label": "Line 2g — Collectibles",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page1[0].Lines2d-h[0].c1_6[3]",
+      "position": {
+        "page": 0,
+        "x": 280.8,
+        "y": 217.968
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.2l_other",
+      "label": "Line 2l — Other",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page1[0].Lines2i-l[0].c1_6[3]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 217.968
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.2c_art_less_than_20000",
+      "label": "Line 2c — Art (contribution of less than $20,000)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page1[0].Lines2a-c[0].c1_6[2]",
+      "position": {
+        "page": 0,
+        "x": 79.2,
+        "y": 205.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.2h_intellectual_property",
+      "label": "Line 2h — Intellectual property",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page1[0].Lines2d-h[0].c1_6[4]",
+      "position": {
+        "page": 0,
+        "x": 280.8,
+        "y": 205.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_a_col_a_property_description",
+      "label": "Line 3, Row A — (a) Description of donated property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsA-C[0].Row3A[0].f1_42[0]",
+      "position": {
+        "page": 0,
+        "x": 58.6,
+        "y": 161.968
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_a_col_b_physical_condition",
+      "label": "Line 3, Row A — (b) If any tangible personal property or real property was donated, give a brief summary of the overall physical condition of the property at the time of the gift",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsA-C[0].Row3A[0].f1_43[0]",
+      "position": {
+        "page": 0,
+        "x": 260.2,
+        "y": 161.968
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_a_col_c_appraised_value",
+      "label": "Line 3, Row A — (c) Appraised fair market value",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsA-C[0].Row3A[0].f1_44[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 161.968
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_b_col_a_property_description",
+      "label": "Line 3, Row B — (a) Description of donated property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsA-C[0].Line3B[0].f1_45[0]",
+      "position": {
+        "page": 0,
+        "x": 58.6,
+        "y": 149.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_b_col_b_physical_condition",
+      "label": "Line 3, Row B — (b) If any tangible personal property or real property was donated, give a brief summary of the overall physical condition of the property at the time of the gift",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsA-C[0].Line3B[0].f1_46[0]",
+      "position": {
+        "page": 0,
+        "x": 260.2,
+        "y": 149.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_b_col_c_appraised_value",
+      "label": "Line 3, Row B — (c) Appraised fair market value",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsA-C[0].Line3B[0].f1_47[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 149.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_c_col_a_property_description",
+      "label": "Line 3, Row C — (a) Description of donated property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsA-C[0].Line3C[0].f1_48[0]",
+      "position": {
+        "page": 0,
+        "x": 58.6,
+        "y": 137.97
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_c_col_b_physical_condition",
+      "label": "Line 3, Row C — (b) If any tangible personal property or real property was donated, give a brief summary of the overall physical condition of the property at the time of the gift",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsA-C[0].Line3C[0].f1_49[0]",
+      "position": {
+        "page": 0,
+        "x": 260.2,
+        "y": 137.97
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_c_col_c_appraised_value",
+      "label": "Line 3, Row C — (c) Appraised fair market value",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsA-C[0].Line3C[0].f1_50[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 137.97
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_a_col_d_date_acquired",
+      "label": "Line 3, Row A — (d) Date acquired by donor (mo., yr.)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3A[0].f1_51[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 77.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_a_col_e_how_acquired",
+      "label": "Line 3, Row A — (e) How acquired by donor",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3A[0].f1_52[0]",
+      "position": {
+        "page": 0,
+        "x": 130.6,
+        "y": 77.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_a_col_f_cost_basis",
+      "label": "Line 3, Row A — (f) Donor's cost or adjusted basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3A[0].f1_53[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 77.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_a_col_g_bargain_sale_amount",
+      "label": "Line 3, Row A — (g) For bargain sales, enter amount received",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3A[0].f1_54[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 77.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_a_col_h_conservation_relevant_basis",
+      "label": "Line 3, Row A — (h) Qualified conservation contribution relevant basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3A[0].f1_55[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 77.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_a_col_i_deduction_claimed",
+      "label": "Line 3, Row A — (i) Amount claimed as a deduction",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3A[0].f1_56[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 77.969
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_b_col_d_date_acquired",
+      "label": "Line 3, Row B — (d) Date acquired by donor (mo., yr.)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3B[0].f1_57[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 65.97
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_b_col_e_how_acquired",
+      "label": "Line 3, Row B — (e) How acquired by donor",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3B[0].f1_58[0]",
+      "position": {
+        "page": 0,
+        "x": 130.6,
+        "y": 65.97
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_b_col_f_cost_basis",
+      "label": "Line 3, Row B — (f) Donor's cost or adjusted basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3B[0].f1_59[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 65.97
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_b_col_g_bargain_sale_amount",
+      "label": "Line 3, Row B — (g) For bargain sales, enter amount received",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3B[0].f1_60[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 65.97
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_b_col_h_conservation_relevant_basis",
+      "label": "Line 3, Row B — (h) Qualified conservation contribution relevant basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3B[0].f1_61[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 65.97
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_b_col_i_deduction_claimed",
+      "label": "Line 3, Row B — (i) Amount claimed as a deduction",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3B[0].f1_62[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 65.97
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_c_col_d_date_acquired",
+      "label": "Line 3, Row C — (d) Date acquired by donor (mo., yr.)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3C[0].f1_63[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 53.971
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_c_col_e_how_acquired",
+      "label": "Line 3, Row C — (e) How acquired by donor",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3C[0].f1_64[0]",
+      "position": {
+        "page": 0,
+        "x": 130.6,
+        "y": 53.971
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_c_col_f_cost_basis",
+      "label": "Line 3, Row C — (f) Donor's cost or adjusted basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3C[0].f1_65[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 53.971
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_c_col_g_bargain_sale_amount",
+      "label": "Line 3, Row C — (g) For bargain sales, enter amount received",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3C[0].f1_66[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 53.971
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_c_col_h_conservation_relevant_basis",
+      "label": "Line 3, Row C — (h) Qualified conservation contribution relevant basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3C[0].f1_67[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 53.971
+      }
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_c_col_i_deduction_claimed",
+      "label": "Line 3, Row C — (i) Amount claimed as a deduction",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3C[0].f1_68[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 53.971
+      }
+    },
+    {
+      "fieldId": "form-8283.1.header.taxpayer_name",
+      "label": "Name(s) shown on your income tax return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 719.968
+      }
+    },
+    {
+      "fieldId": "form-8283.1.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 460.8,
+        "y": 719.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8283.1.line.4a_partial_interest_property_letter",
+      "label": "Line 4a — Enter the letter from Section B, Part I that identifies the property for which you gave less than an entire interest",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 511.2,
+        "y": 665.968
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8283.1.line.4b_1_deduction_this_tax_year",
+      "label": "Line 4b(1) — Total amount claimed as a deduction for the property listed in Section B, Part I: For this tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 499.2,
+        "y": 641.97
+      }
+    },
+    {
+      "fieldId": "form-8283.1.line.4b_2_deduction_prior_tax_years",
+      "label": "Line 4b(2) — Total amount claimed as a deduction for the property listed in Section B, Part I: For any prior tax years",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 499.2,
+        "y": 629.968
+      }
+    },
+    {
+      "fieldId": "form-8283.1.line.4c_prior_year_donee_name",
+      "label": "Line 4c — Name and address of each organization to which any such contribution was made in a prior year: Name of charitable organization (donee)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 581.966
+      }
+    },
+    {
+      "fieldId": "form-8283.1.line.4c_prior_year_donee_address",
+      "label": "Line 4c — Name and address of each organization to which any such contribution was made in a prior year: Address (number, street, and room or suite no.)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 557.968
+      }
+    },
+    {
+      "fieldId": "form-8283.1.line.4c_prior_year_donee_city_state_zip",
+      "label": "Line 4c — Name and address of each organization to which any such contribution was made in a prior year: City or town, state, and ZIP code",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 332.2,
+        "y": 557.968
+      }
+    },
+    {
+      "fieldId": "form-8283.1.line.4d_tangible_property_location",
+      "label": "Line 4d — For tangible property, enter the place where the property is located or kept",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 545.969
+      }
+    },
+    {
+      "fieldId": "form-8283.1.line.4e_person_with_possession",
+      "label": "Line 4e — Name of any person, other than the donee organization, having actual possession of the property",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 460.8,
+        "y": 533.97
+      }
+    },
+    {
+      "fieldId": "form-8283.1.line.4e_person_with_possession_continued",
+      "label": "Line 4e — Name of any person, other than the donee organization, having actual possession of the property (continued)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 521.968
+      }
+    },
+    {
+      "fieldId": "form-8283.1.line.5a_restriction_on_donee_use_yes",
+      "label": "Line 5a — Is there a restriction, either temporary or permanent, on the donee's right to use or dispose of the donated property? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page2[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 538.1,
+        "y": 498.47
+      }
+    },
+    {
+      "fieldId": "form-8283.1.line.5a_restriction_on_donee_use_no",
+      "label": "Line 5a — Is there a restriction, either temporary or permanent, on the donee's right to use or dispose of the donated property? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page2[0].c2_1[1]",
+      "position": {
+        "page": 1,
+        "x": 559.7,
+        "y": 498.47
+      }
+    },
+    {
+      "fieldId": "form-8283.1.line.5b_rights_given_to_others_yes",
+      "label": "Line 5b — Did you give to anyone (other than the donee organization or another organization participating with the donee organization in cooperative fundraising) the right to the income from the donated property or to the possession of the property, including the right to vote donated securities, to acquire the property by purchase or otherwise, or to designate the person having such income, possession, or right to acquire? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page2[0].c2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 538.1,
+        "y": 456.469
+      }
+    },
+    {
+      "fieldId": "form-8283.1.line.5b_rights_given_to_others_no",
+      "label": "Line 5b — Did you give to anyone (other than the donee organization or another organization participating with the donee organization in cooperative fundraising) the right to the income from the donated property or to the possession of the property, including the right to vote donated securities, to acquire the property by purchase or otherwise, or to designate the person having such income, possession, or right to acquire? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page2[0].c2_2[1]",
+      "position": {
+        "page": 1,
+        "x": 559.7,
+        "y": 456.469
+      }
+    },
+    {
+      "fieldId": "form-8283.1.line.5c_restriction_particular_use_yes",
+      "label": "Line 5c — Is there a restriction limiting the donated property for a particular use? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page2[0].c2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 538.1,
+        "y": 444.47
+      }
+    },
+    {
+      "fieldId": "form-8283.1.line.5c_restriction_particular_use_no",
+      "label": "Line 5c — Is there a restriction limiting the donated property for a particular use? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page2[0].c2_3[1]",
+      "position": {
+        "page": 1,
+        "x": 559.7,
+        "y": 444.47
+      }
+    },
+    {
+      "fieldId": "form-8283.1.part3.items_appraised_500_or_less",
+      "label": "Part III — Taxpayer (Donor) Statement: Enter identifying letter from Section B, Part I and describe the specific item with an appraised value of not more than $500 (per item)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8283.1.part4.appraiser_name",
+      "label": "Part IV — Declaration of Appraiser: Appraiser name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 129.6,
+        "y": 233.968
+      }
+    },
+    {
+      "fieldId": "form-8283.1.part4.appraiser_title",
+      "label": "Part IV — Declaration of Appraiser: Title",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 374.4,
+        "y": 233.968
+      }
+    },
+    {
+      "fieldId": "form-8283.1.part4.appraiser_business_address",
+      "label": "Part IV — Declaration of Appraiser: Business address (including room or suite no.)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 209.967
+      }
+    },
+    {
+      "fieldId": "form-8283.1.part4.appraiser_identifying_number",
+      "label": "Part IV — Declaration of Appraiser: Identifying number",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 460.8,
+        "y": 209.967
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8283.1.part4.appraiser_city_state_zip",
+      "label": "Part IV — Declaration of Appraiser: City or town, state, and ZIP code",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 185.966
+      }
+    },
+    {
+      "fieldId": "form-8283.1.part5.date_property_received",
+      "label": "Part V — Donee Acknowledgment: Date the organization received the donated property as described in Section B, Part I",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 324,
+        "y": 149.969
+      }
+    },
+    {
+      "fieldId": "form-8283.1.part5.unrelated_use_yes",
+      "label": "Part V — Does the organization intend to use the property for an unrelated use? Yes",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page2[0].c2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 511.2,
+        "y": 109.968
+      }
+    },
+    {
+      "fieldId": "form-8283.1.part5.unrelated_use_no",
+      "label": "Part V — Does the organization intend to use the property for an unrelated use? No",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Form8283[0].Page2[0].c2_4[1]",
+      "position": {
+        "page": 1,
+        "x": 547.2,
+        "y": 109.968
+      }
+    },
+    {
+      "fieldId": "form-8283.1.part5.donee_name",
+      "label": "Part V — Donee Acknowledgment: Name of charitable organization (donee)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 83.967
+      }
+    },
+    {
+      "fieldId": "form-8283.1.part5.donee_ein",
+      "label": "Part V — Donee Acknowledgment: Employer identification number",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 83.967
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8283.1.part5.donee_address",
+      "label": "Part V — Donee Acknowledgment: Address (number, street, and room or suite no.)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 59.966
+      }
+    },
+    {
+      "fieldId": "form-8283.1.part5.donee_city_state_zip",
+      "label": "Part V — Donee Acknowledgment: City or town, state, and ZIP code",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 317.8,
+        "y": 59.966
+      }
+    },
+    {
+      "fieldId": "form-8283.1.part5.donee_authorized_signer_title",
+      "label": "Part V — Donee Acknowledgment: Title (of authorized signer)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Form8283[0].Page2[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 317.8,
+        "y": 35.968
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8283/blank.pdf",
+    "ingestedAt": "2026-11-20T05:26:57.750Z",
+    "totalFields": 117,
+    "skipped": 0,
+    "catalogEntries": 117
+  }
+}

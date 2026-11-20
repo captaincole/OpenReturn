@@ -1,0 +1,231 @@
+{
+  "formId": "schedule-s",
+  "fieldCount": 25,
+  "entries": [
+    {
+      "fieldId": "schedule-s.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1002",
+          "text": "123-45-6789"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1001",
+          "text": "T-WA5M9"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.line.1_total_double_taxed_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1012",
+          "text": "1,987"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.line.1_total_double_taxed_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1013",
+          "text": "7,438"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.line.10_other_state_income_ratio",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1023",
+          "text": "T-LXBFB"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.line.11_other_state_tax_on_double_taxed_income",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1024",
+          "text": "7,662"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.line.12_other_state_tax_credit",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1025",
+          "text": "2,097"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.line.2_california_tax_liability",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1014",
+          "text": "4,429"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.line.3_double_taxed_income_california",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1015",
+          "text": "5,926"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.line.4_california_adjusted_gross_income",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1016",
+          "text": "1,467"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.line.5_california_income_ratio",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1017",
+          "text": "T-16O2L"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.line.6_california_tax_on_double_taxed_income",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1018",
+          "text": "6,939"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.line.7_other_state_abbreviation",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1019",
+          "text": "45"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.line.7_tax_paid_to_other_state",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1020",
+          "text": "6,556"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.line.8_double_taxed_income_other_state",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1021",
+          "text": "2,690"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.line.9_other_state_adjusted_gross_income",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1022",
+          "text": "3,016"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.part1.row1_income_item_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1003",
+          "text": "T-1DSIT"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.part1.row1_taxable_by_california_col_b",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1004",
+          "text": "9,879"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.part1.row1_taxable_by_other_state_col_c",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1005",
+          "text": "9,130"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.part1.row2_income_item_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1006",
+          "text": "T-KA2HF"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.part1.row2_taxable_by_california_col_b",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1007",
+          "text": "6,802"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.part1.row2_taxable_by_other_state_col_c",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1008",
+          "text": "2,791"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.part1.row3_income_item_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1009",
+          "text": "T-EY0T1"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.part1.row3_taxable_by_california_col_b",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1010",
+          "text": "7,788"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-s.0.part1.row3_taxable_by_other_state_col_c",
+      "widgets": [
+        {
+          "widgetName": "540 Shedule S Form 1011",
+          "text": "4,158"
+        }
+      ]
+    }
+  ]
+}

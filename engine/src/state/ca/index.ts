@@ -5,25 +5,37 @@
 
 import { fixtureFileSchema } from "../../catalog.js";
 import { makeFormSpec, type FormSpec } from "../../formSpec.js";
+import { register as registerForm3510 } from "./3510/bindings.js";
 import { register as registerForm3514 } from "./3514/bindings.js";
 import { register as registerForm3526 } from "./3526/bindings.js";
 import { register as registerForm3532 } from "./3532/bindings.js";
+import { register as registerForm3801 } from "./3801/bindings.js";
+import { register as registerForm3803 } from "./3803/bindings.js";
 import { register as registerForm3805p } from "./3805p/bindings.js";
 import { register as registerForm3885A } from "./3885a/bindings.js";
 import { register as registerForm540 } from "./540/bindings.js";
+import { register as registerForm540NR } from "./540nr/bindings.js";
 import { register as registerForm5805 } from "./5805/bindings.js";
+import { register as registerScheduleCa540NR } from "./schedule-ca-540nr/bindings.js";
 import { register as registerScheduleCa } from "./schedule-ca/bindings.js";
 import { register as registerScheduleP } from "./schedule-p/bindings.js";
+import { register as registerScheduleS } from "./schedule-s/bindings.js";
 
+import form3510CatalogJson from "./3510/catalog.json";
 import form3514CatalogJson from "./3514/catalog.json";
 import form3526CatalogJson from "./3526/catalog.json";
 import form3532CatalogJson from "./3532/catalog.json";
+import form3801CatalogJson from "./3801/catalog.json";
+import form3803CatalogJson from "./3803/catalog.json";
 import form3805pCatalogJson from "./3805p/catalog.json";
 import form3885aCatalogJson from "./3885a/catalog.json";
 import form540CatalogJson from "./540/catalog.json";
+import form540NRCatalogJson from "./540nr/catalog.json";
 import form5805CatalogJson from "./5805/catalog.json";
+import scheduleCa540NRCatalogJson from "./schedule-ca-540nr/catalog.json";
 import scheduleCaCatalogJson from "./schedule-ca/catalog.json";
 import schedulePCatalogJson from "./schedule-p/catalog.json";
+import scheduleSCatalogJson from "./schedule-s/catalog.json";
 
 export const CA_CATALOGS = [
   fixtureFileSchema.parse(scheduleCaCatalogJson),
@@ -35,6 +47,12 @@ export const CA_CATALOGS = [
   fixtureFileSchema.parse(form3885aCatalogJson),
   fixtureFileSchema.parse(form3532CatalogJson),
   fixtureFileSchema.parse(form3514CatalogJson),
+  fixtureFileSchema.parse(form540NRCatalogJson),
+  fixtureFileSchema.parse(scheduleCa540NRCatalogJson),
+  fixtureFileSchema.parse(scheduleSCatalogJson),
+  fixtureFileSchema.parse(form3801CatalogJson),
+  fixtureFileSchema.parse(form3510CatalogJson),
+  fixtureFileSchema.parse(form3803CatalogJson),
 ];
 
 export const CA_FORMS: FormSpec[] = [
@@ -114,5 +132,48 @@ export const CA_FORMS: FormSpec[] = [
     displayName: "FTB 3532",
     relativeDir: "state/ca/3532",
     register: registerForm3532,
+  }),
+  /* Wired with no rules yet: every field is blank, and only a must-file decision turns the form on. */
+  makeFormSpec({
+    formId: "form-540nr",
+    shortId: "540nr",
+    displayName: "Form 540NR",
+    relativeDir: "state/ca/540nr",
+    register: registerForm540NR,
+  }),
+  makeFormSpec({
+    formId: "schedule-ca-540nr",
+    shortId: "schedule-ca-540nr",
+    displayName: "Schedule CA (540NR)",
+    relativeDir: "state/ca/schedule-ca-540nr",
+    register: registerScheduleCa540NR,
+  }),
+  makeFormSpec({
+    formId: "schedule-s",
+    shortId: "schedule-s",
+    displayName: "Schedule S",
+    relativeDir: "state/ca/schedule-s",
+    register: registerScheduleS,
+  }),
+  makeFormSpec({
+    formId: "form-3801",
+    shortId: "3801",
+    displayName: "FTB 3801",
+    relativeDir: "state/ca/3801",
+    register: registerForm3801,
+  }),
+  makeFormSpec({
+    formId: "form-3510",
+    shortId: "3510",
+    displayName: "FTB 3510",
+    relativeDir: "state/ca/3510",
+    register: registerForm3510,
+  }),
+  makeFormSpec({
+    formId: "form-3803",
+    shortId: "3803",
+    displayName: "FTB 3803",
+    relativeDir: "state/ca/3803",
+    register: registerForm3803,
   }),
 ];

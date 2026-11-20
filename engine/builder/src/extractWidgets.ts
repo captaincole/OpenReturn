@@ -60,6 +60,15 @@ export interface ExtractedWidgets {
 
 type FieldShape = Omit<WidgetField, "tuLabel">;
 
+/* An FTB label can hold a carriage return in the middle of a sentence; a catalog label is one line. */
+function onOneLine(label: string): string {
+  return label
+    .split("\r")
+    .map((part) => part.trim())
+    .filter((part) => part.length > 0)
+    .join(" ");
+}
+
 interface PageWidget {
   pdfWidgetId: number; // the overlay badge number
   annot: any;
@@ -100,7 +109,7 @@ function collectPageWidgets(annots: any[], pageIdx: number, out: CollectedWidget
 
     const alt = annot.alternativeText;
     if (!out.tuLabels.has(fieldName) && typeof alt === "string" && alt.trim().length > 0) {
-      out.tuLabels.set(fieldName, alt.trim());
+      out.tuLabels.set(fieldName, onOneLine(alt));
     }
 
     rawWidgets.push({ annot: annot, rect });

@@ -13,8 +13,8 @@ describe("sectionOf", () => {
     expect(sectionOf("form-0000")).toEqual({ section: "other", rank: 0 });
   });
 
-  it("has a section for each form of the engine but Form 3532", () => {
+  it("has a section for each form of the engine but Form 3532 and Form 540NR", () => {
     const other = FORMS.filter((spec) => sectionOf(spec.formId).section === "other");
-    expect(other.map((spec) => spec.formId)).toEqual(["form-3532"]);
+    expect(other.map((spec) => spec.formId)).toEqual(["form-3532", "form-540nr"]);
   });
 });

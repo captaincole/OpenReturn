@@ -7,14 +7,19 @@
 import { fixtureFileSchema } from "../catalog.js";
 import { makeFormSpec, type FormSpec } from "../formSpec.js";
 import { register as registerForm1040 } from "./1040/bindings.js";
+import { register as registerForm1116 } from "./1116/bindings.js";
+import { register as registerForm2210 } from "./2210/bindings.js";
 import { register as registerForm2441 } from "./2441/bindings.js";
 import { register as registerForm4562 } from "./4562/bindings.js";
 import { register as registerForm4684 } from "./4684/bindings.js";
 import { register as registerForm4952 } from "./4952/bindings.js";
 import { register as registerForm5695 } from "./5695/bindings.js";
 import { register as registerForm6251 } from "./6251/bindings.js";
+import { register as registerForm8283 } from "./8283/bindings.js";
 import { register as registerForm8582 } from "./8582/bindings.js";
 import { register as registerForm8606 } from "./8606/bindings.js";
+import { register as registerForm8801 } from "./8801/bindings.js";
+import { register as registerForm8814 } from "./8814/bindings.js";
 import { register as registerForm8829 } from "./8829/bindings.js";
 import { register as registerForm8889 } from "./8889/bindings.js";
 import { register as registerForm8949 } from "./8949/bindings.js";
@@ -41,14 +46,19 @@ import { register as registerScheduleSE } from "./schedule-se/bindings.js";
 
 /* Rollup inlines the JSON at build time; the process does not read it from disk. */
 import form1040CatalogJson from "./1040/catalog.json";
+import form1116CatalogJson from "./1116/catalog.json";
+import form2210CatalogJson from "./2210/catalog.json";
 import form2441CatalogJson from "./2441/catalog.json";
 import form4562CatalogJson from "./4562/catalog.json";
 import form4684CatalogJson from "./4684/catalog.json";
 import form4952CatalogJson from "./4952/catalog.json";
 import form5695CatalogJson from "./5695/catalog.json";
 import form6251CatalogJson from "./6251/catalog.json";
+import form8283CatalogJson from "./8283/catalog.json";
 import form8582CatalogJson from "./8582/catalog.json";
 import form8606CatalogJson from "./8606/catalog.json";
+import form8801CatalogJson from "./8801/catalog.json";
+import form8814CatalogJson from "./8814/catalog.json";
 import form8829CatalogJson from "./8829/catalog.json";
 import form8889CatalogJson from "./8889/catalog.json";
 import form8949CatalogJson from "./8949/catalog.json";
@@ -107,6 +117,11 @@ export const FEDERAL_CATALOGS = [
   fixtureFileSchema.parse(form4684CatalogJson),
   fixtureFileSchema.parse(scheduleEICCatalogJson),
   fixtureFileSchema.parse(form1040CatalogJson),
+  fixtureFileSchema.parse(form1116CatalogJson),
+  fixtureFileSchema.parse(form2210CatalogJson),
+  fixtureFileSchema.parse(form8283CatalogJson),
+  fixtureFileSchema.parse(form8801CatalogJson),
+  fixtureFileSchema.parse(form8814CatalogJson),
 ];
 
 export const FEDERAL_FORMS: FormSpec[] = [
@@ -359,5 +374,41 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Schedule EIC",
     relativeDir: "federal/schedule-eic",
     register: registerScheduleEIC,
+  }),
+  /* Wired with no rules yet: every field is blank, and only a must-file decision turns the form on. */
+  makeFormSpec({
+    formId: "form-1116",
+    shortId: "1116",
+    displayName: "Form 1116",
+    relativeDir: "federal/1116",
+    register: registerForm1116,
+  }),
+  makeFormSpec({
+    formId: "form-2210",
+    shortId: "2210",
+    displayName: "Form 2210",
+    relativeDir: "federal/2210",
+    register: registerForm2210,
+  }),
+  makeFormSpec({
+    formId: "form-8283",
+    shortId: "8283",
+    displayName: "Form 8283",
+    relativeDir: "federal/8283",
+    register: registerForm8283,
+  }),
+  makeFormSpec({
+    formId: "form-8801",
+    shortId: "8801",
+    displayName: "Form 8801",
+    relativeDir: "federal/8801",
+    register: registerForm8801,
+  }),
+  makeFormSpec({
+    formId: "form-8814",
+    shortId: "8814",
+    displayName: "Form 8814",
+    relativeDir: "federal/8814",
+    register: registerForm8814,
   }),
 ];

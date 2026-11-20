@@ -55,6 +55,11 @@ The golden suite ran 25 scenarios.
 | Form 8962 | Federal 2025 | 1 | 141 | 20 | 0 | 121 | 0 | 1 | 1 |
 | Form 4684 | Federal 2025 | 1 | 162 | 23 | 0 | 39 | 100 | 1 | 1 |
 | Schedule EIC | Federal 2025 | 5 | 38 | 32 | 0 | 6 | 0 | 3 | 0 |
+| Form 1116 | Federal 2025 | 0 | 118 | 0 | 0 | 0 | 118 | 0 | 0 |
+| Form 2210 | Federal 2025 | 0 | 167 | 0 | 0 | 0 | 167 | 0 | 0 |
+| Form 8283 | Federal 2025 | 0 | 117 | 0 | 0 | 0 | 117 | 0 | 0 |
+| Form 8801 | Federal 2025 | 0 | 57 | 0 | 0 | 0 | 57 | 0 | 0 |
+| Form 8814 | Federal 2025 | 0 | 24 | 0 | 0 | 0 | 24 | 0 | 0 |
 | Schedule D (540) | California 2025 | 1 | 125 | 0 | 0 | 0 | 125 | 0 | 0 |
 | FTB 3885A | California 2025 | 1 | 65 | 14 | 0 | 51 | 0 | 0 | 0 |
 | Schedule CA (540) | California 2025 | 10 | 253 | 98 | 0 | 20 | 135 | 5 | 3 |
@@ -65,6 +70,12 @@ The golden suite ran 25 scenarios.
 | Schedule P (540) | California 2025 | 3 | 131 | 21 | 0 | 5 | 105 | 3 | 1 |
 | FTB 5805 | California 2025 | 1 | 111 | 55 | 0 | 0 | 56 | 1 | 1 |
 | FTB 3532 | California 2025 | 2 | 16 | 10 | 0 | 6 | 0 | 0 | 0 |
+| Form 540NR | California 2025 | 0 | 169 | 0 | 0 | 0 | 169 | 0 | 0 |
+| Schedule CA (540NR) | California 2025 | 0 | 415 | 0 | 0 | 0 | 415 | 0 | 0 |
+| Schedule S | California 2025 | 0 | 25 | 0 | 0 | 0 | 25 | 0 | 0 |
+| FTB 3801 | California 2025 | 0 | 337 | 0 | 0 | 0 | 337 | 0 | 0 |
+| FTB 3510 | California 2025 | 0 | 40 | 0 | 0 | 0 | 40 | 0 | 0 |
+| FTB 3803 | California 2025 | 0 | 15 | 0 | 0 | 0 | 15 | 0 | 0 |
 
 ## By form
 
@@ -579,6 +590,46 @@ For each form: the fields that are not verified and that other fields read, by t
 
 6 more not checked, each of which feeds fewer fields.
 
+### Form 1116
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 118 verified, 118 not checked
+
+118 more not checked, each of which feeds fewer fields.
+
+### Form 2210
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 167 verified, 167 not checked
+
+167 more not checked, each of which feeds fewer fields.
+
+### Form 8283
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 117 verified, 117 not checked
+
+117 more not checked, each of which feeds fewer fields.
+
+### Form 8801
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 57 verified, 57 not checked
+
+57 more not checked, each of which feeds fewer fields.
+
+### Form 8814
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 24 verified, 24 not checked
+
+24 more not checked, each of which feeds fewer fields.
+
 ### Schedule D (540)
 
 - Reads: none
@@ -716,50 +767,93 @@ For each form: the fields that are not verified and that other fields read, by t
 
 6 more not checked, each of which feeds fewer fields.
 
+### Form 540NR
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 169 verified, 169 not checked
+
+169 more not checked, each of which feeds fewer fields.
+
+### Schedule CA (540NR)
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 415 verified, 415 not checked
+
+415 more not checked, each of which feeds fewer fields.
+
+### Schedule S
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 25 verified, 25 not checked
+
+25 more not checked, each of which feeds fewer fields.
+
+### FTB 3801
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 337 verified, 337 not checked
+
+337 more not checked, each of which feeds fewer fields.
+
+### FTB 3510
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 40 verified, 40 not checked
+
+40 more not checked, each of which feeds fewer fields.
+
+### FTB 3803
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 15 verified, 15 not checked
+
+15 more not checked, each of which feeds fewer fields.
+
 ## Forms the engine lacks
 
 A blank field names the form that it waits for, in its label or its reason. Each form here is on the list in `engine/scripts/formGraph/missingForms.ts`. **Fields that wait** is the count of blank fields that name the form. **Fields they feed** is the count of other fields that read those blank fields, directly or through other fields. The About column is a short description, not the form's official title.
 
 | Form | About | Jurisdiction | Fields that wait | Fields they feed | Forms that wait |
 | --- | --- | --- | --- | --- | --- |
-| Schedule F | Profit or loss from farming | Federal 2025 | 8 | 459 | Schedule 1, Schedule 1-A, Schedule CA (540), Schedule SE |
-| Form 8919 | Social security and Medicare tax on wages with no withholding | Federal 2025 | 7 | 452 | Form 1040, Form 8959, Schedule 2, Schedule CA (540), Schedule SE |
+| Schedule F | Profit or loss from farming | Federal 2025 | 15 | 459 | FTB 3801, Schedule 1, Schedule 1-A, Schedule CA (540), Schedule SE |
+| Form 8919 | Social security and Medicare tax on wages with no withholding | Federal 2025 | 8 | 452 | Form 1040, Form 8959, Schedule 2, Schedule CA (540), Schedule CA (540NR), Schedule SE |
 | Form 4797 | Sales of business property | Federal 2025 | 8 | 442 | Form 4684, Schedule 1, Schedule CA (540), Schedule D |
 | Form 6252 | Installment sale income | Federal 2025 | 1 | 438 | Schedule D |
 | Form 4137 | Social security and Medicare tax on tips not reported | Federal 2025 | 4 | 431 | Form 8959, Schedule 1-A, Schedule 2, Schedule SE |
-| Form 8839 | Adoption credit and employer adoption benefits | Federal 2025 | 4 | 420 | Form 1040, Schedule 3, Schedule CA (540) |
-| Form 8853 | Archer MSAs and long-term care insurance contracts | Federal 2025 | 12 | 417 | FTB 3805P, Form 8889, Schedule 1, Schedule 2, Schedule CA (540) |
-| Form 2555 | Foreign earned income exclusion | Federal 2025 | 9 | 412 | Schedule 1, Schedule 1-A, Schedule 8812, Schedule CA (540) |
+| Form 8839 | Adoption credit and employer adoption benefits | Federal 2025 | 5 | 420 | Form 1040, Schedule 3, Schedule CA (540), Schedule CA (540NR) |
+| Form 8853 | Archer MSAs and long-term care insurance contracts | Federal 2025 | 13 | 417 | FTB 3805P, Form 8889, Schedule 1, Schedule 2, Schedule CA (540), Schedule CA (540NR) |
+| Form 2555 | Foreign earned income exclusion | Federal 2025 | 12 | 412 | Form 8801, Schedule 1, Schedule 1-A, Schedule 8812, Schedule CA (540), Schedule CA (540NR) |
 | Form 4835 | Farm rental income and expenses | Federal 2025 | 2 | 410 | Schedule E |
 | Form 8815 | Exclusion of interest from savings bonds | Federal 2025 | 1 | 408 | Schedule B |
 | Form 461 | Limit on business losses | Federal 2025 | 2 | 406 | Schedule 1, Schedule CA (540) |
 | Form 5471 | Information return for certain foreign corporations | Federal 2025 | 1 | 406 | Schedule 1 |
 | Form 8992 | Global intangible low-taxed income | Federal 2025 | 1 | 406 | Schedule 1 |
 | Form 8915-F | Qualified disaster retirement plan distributions | Federal 2025 | 1 | 405 | Form 8606 |
-| Form 2106 | Employee business expenses | Federal 2025 | 3 | 402 | Schedule 1, Schedule CA (540) |
+| Form 2106 | Employee business expenses | Federal 2025 | 4 | 402 | Schedule 1, Schedule CA (540), Schedule CA (540NR) |
 | Form 3903 | Moving expenses | Federal 2025 | 2 | 402 | Schedule 1 |
 | Form 4563 | Exclusion of income for residents of American Samoa | Federal 2025 | 2 | 203 | Schedule 1-A, Schedule 8812 |
 | Form 6198 | At-risk limits | Federal 2025 | 1 | 82 | Form 6251 |
 | Form 4255 | Recapture of credits | Federal 2025 | 12 | 52 | Schedule 2 |
 | Form 8936 | Clean vehicle credits | Federal 2025 | 4 | 50 | Schedule 2, Schedule 3 |
 | Form 8911 | Alternative fuel vehicle refueling property credit | Federal 2025 | 3 | 50 | Schedule 2, Schedule 3 |
-| Form 1116 | Foreign tax credit | Federal 2025 | 2 | 50 | Form 6251, Schedule 3 |
 | Form 8933 | Carbon oxide sequestration credit | Federal 2025 | 2 | 50 | Schedule 2 |
-| FTB 3801 | California passive activity loss limits | California 2025 | 3 | 49 | Schedule CA (540), Schedule P (540) |
 | FTB 3461 | California limit on business losses | California 2025 | 3 | 47 | Schedule CA (540) |
 | Form 8978 | Partner's additional reporting year tax | Federal 2025 | 3 | 46 | Schedule 2, Schedule 3 |
 | Form 8863 | Education credits | Federal 2025 | 2 | 36 | Form 1040, Schedule 3 |
 | Form 8880 | Credit for retirement savings contributions | Federal 2025 | 1 | 36 | Schedule 3 |
 | Form 8396 | Mortgage interest credit | Federal 2025 | 1 | 34 | Schedule 3 |
 | Form 8859 | District of Columbia first-time homebuyer credit carryforward | Federal 2025 | 1 | 34 | Schedule 3 |
-| FTB 3805V | California net operating loss | California 2025 | 4 | 30 | Schedule CA (540), Schedule P (540) |
-| FTB 3805Z | California enterprise zone deduction and credit | California 2025 | 1 | 30 | Schedule CA (540) |
-| Schedule G-1 | California tax on lump-sum distributions | California 2025 | 2 | 20 | Form 540 |
-| FTB 5870A | California tax on an accumulation distribution of a trust | California 2025 | 2 | 20 | Form 540 |
-| FTB 3803 | California parents' election to report a child's interest and dividends | California 2025 | 5 | 12 | Form 540, FTB 5805 |
-| Form 540NR | California return of a nonresident or part-year resident | California 2025 | 8 | 11 | FTB 3805P, FTB 5805 |
+| FTB 3805V | California net operating loss | California 2025 | 6 | 30 | Schedule CA (540), Schedule CA (540NR), Schedule P (540) |
+| FTB 3805Z | California enterprise zone deduction and credit | California 2025 | 2 | 30 | Schedule CA (540), Schedule CA (540NR) |
+| Schedule G-1 | California tax on lump-sum distributions | California 2025 | 3 | 20 | Form 540, Form 540NR |
+| FTB 5870A | California tax on an accumulation distribution of a trust | California 2025 | 3 | 20 | Form 540, Form 540NR |
 | Form 3800 | General business credit | Federal 2025 | 2 | 9 | Schedule 3 |
-| Form 8801 | Credit for prior year minimum tax | Federal 2025 | 1 | 9 | Schedule 3 |
 | Form 8834 | Qualified electric vehicle credit | Federal 2025 | 1 | 9 | Schedule 3 |
 | Form 8912 | Credit to holders of tax credit bonds | Federal 2025 | 1 | 9 | Schedule 3 |
 | FTB 3541 | California motion picture and television production credit | California 2025 | 1 | 9 | Form 540 |
@@ -770,27 +864,27 @@ A blank field names the form that it waits for, in its label or its reason. Each
 | FTB 3853 | California health coverage exemptions and penalty | California 2025 | 1 | 7 | Form 540 |
 | Form 5329 | Additional taxes on retirement plans and other accounts | Federal 2025 | 2 | 6 | Schedule 2 |
 | Form 8611 | Recapture of the low-income housing credit | Federal 2025 | 1 | 6 | Schedule 2 |
-| FTB 3913 | California moving expense deduction | California 2025 | 2 | 2 | Schedule CA (540) |
-| FTB 3506 | California child and dependent care expenses credit | California 2025 | 4 | 1 | Form 540, Schedule P (540) |
-| FTB 3510 | California credit for prior year alternative minimum tax | California 2025 | 4 | 1 | Schedule P (540) |
+| FTB 3913 | California moving expense deduction | California 2025 | 3 | 2 | Schedule CA (540), Schedule CA (540NR) |
+| FTB 3506 | California child and dependent care expenses credit | California 2025 | 5 | 1 | Form 540, Form 540NR, Schedule P (540) |
 | FTB 3507 | California prison inmate labor credit | California 2025 | 3 | 1 | Schedule P (540) |
-| Form 2210 | Penalty for underpayment of estimated tax | Federal 2025 | 1 | 1 | Form 1040 |
-| Form 8814 | Parents' election to report a child's interest and dividends | Federal 2025 | 5 | 0 | Form 1040 |
 | FTB 3804-CR | California pass-through entity elective tax credit | California 2025 | 4 | 0 | Schedule P (540) |
-| Schedule S | Credit for tax paid to another state | California 2025 | 3 | 0 | Schedule P (540) |
+| FTB 3800 | California tax for certain children with unearned income | California 2025 | 2 | 0 | Form 540, Form 540NR |
+| FTB 5805F | California underpayment of estimated tax by farmers and fishermen | California 2025 | 2 | 0 | Form 540, Form 540NR |
 | Form 965-A | Net tax on deferred foreign income, paid in installments | Federal 2025 | 1 | 0 | Schedule 2 |
 | Form 4136 | Credit for federal tax paid on fuels | Federal 2025 | 1 | 0 | Schedule 3 |
 | Form 4972 | Tax on lump-sum distributions | Federal 2025 | 1 | 0 | Form 1040 |
 | Form 8888 | Split of the refund between accounts | Federal 2025 | 1 | 0 | Form 1040 |
 | Schedule X | Explanation of an amended California return | California 2025 | 1 | 0 | Form 540 |
-| FTB 3800 | California tax for certain children with unearned income | California 2025 | 1 | 0 | Form 540 |
-| FTB 5805F | California underpayment of estimated tax by farmers and fishermen | California 2025 | 1 | 0 | Form 540 |
 
 ### Names not classified
 
 A form name in a blank field that no list has. Add it to `missingForms.ts`: as a form the engine lacks, or as a name that is not a form on the return.
 
-Every form name in a blank field is on a list.
+- FTB 3807 (1 fields)
+- FTB 3809 (1 fields)
+- Form 1098 (3 fields)
+- Form 1098-C (4 fields)
+- Schedule I (3 fields)
 
 ## Loops
 

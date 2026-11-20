@@ -1,0 +1,366 @@
+{
+  "formId": "form-3510",
+  "fieldCount": 40,
+  "entries": [
+    {
+      "fieldId": "form-3510.0.header.ssn_itin_fein",
+      "widgets": [
+        {
+          "widgetName": "S S N, I T I N, or F E I N (9 digits)",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on tax return",
+          "text": "T-T6KUB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.1_prior_year_schedule_p_amounts",
+      "widgets": [
+        {
+          "widgetName": "Part I, Section A, Line 1. Combine the amounts from your 2024 Schedule P (540 or 540NR), Part I, line 15 through line 18, and enter the result here. Schedule P (541) filers, see instructions",
+          "text": "2,321"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.10_line_4_minus_line_9",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Subtract line 9 from line 4. If zero or less, enter 0 here and on line 13. See instructions",
+          "text": "8,991"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.11_tentative_minimum_tax_exclusions",
+      "widgets": [
+        {
+          "widgetName": "Line 11. Enter tentative minimum tax on exclusions. Multiply line 10 by 7.00%. 2024 540NR filers, go to Section B",
+          "text": "8,239"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.12_regular_tax_before_credits",
+      "widgets": [
+        {
+          "widgetName": "Line 12. Regular tax before credits. Enter the amount from your 2024 Schedule P (540), Part II, line 25; or Schedule P (541), Part III, line 9",
+          "text": "6,477"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.13_net_amt_on_exclusions",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Net A M T on exclusions. Subtract line 12 from line 11. If zero or less, enter 0. Enter the result here and go to Part II",
+          "text": "2,583"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.14_amount_from_line_4",
+      "widgets": [
+        {
+          "widgetName": "Part I, Section B, Line 14. Enter the amount from line 4",
+          "text": "9,756"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.15_schedule_p_540nr_line_35",
+      "widgets": [
+        {
+          "widgetName": "Line 15. Enter the amount from your 2024 Schedule P (540NR), Part II, line 35",
+          "text": "4,390"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.16_total_amt_agi_exclusions",
+      "widgets": [
+        {
+          "widgetName": "Line 16. Total A M T adjusted gross income on exclusions. Add line 14 and line 15",
+          "text": "1,854"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.17_schedule_p_540nr_line_28",
+      "widgets": [
+        {
+          "widgetName": "Line 17. Enter the amount from your 2024 Schedule P (540NR), Part II, line 28",
+          "text": "9,450"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.18_ca_exclusion_adjustments_preferences",
+      "widgets": [
+        {
+          "widgetName": "Line 18. Enter any adjustments and preferences treated as an exclusion. See instructions",
+          "text": "2,213"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.2_exclusion_adjustments_preferences",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Enter any adjustments and tax preference items treated as exclusions. See instructions",
+          "text": "8,312"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.20_ca_amt_agi_exclusions",
+      "widgets": [
+        {
+          "widgetName": "Line 20. California A M T adjusted gross income on exclusions. Combine line 17 and line 18. Enter the result here. If you did not itemize deductions, enter the result here and on line 23. Skip line 21 and line 22 and go to line 24",
+          "text": "5,804"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.21_amt_itemized_deduction_percentage",
+      "widgets": [
+        {
+          "widgetName": "Line 21. A M T itemized deduction percentage on exclusions. Divide line 20 by line 16. Do not enter more than 1.0000",
+          "text": "TK4PU5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.22_prorated_amt_itemized_deductions",
+      "widgets": [
+        {
+          "widgetName": "Line 22. Prorated A M T itemized deductions on exclusions. Multiply line 15 by line 21",
+          "text": "6,301"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.23_ca_amti_on_exclusions",
+      "widgets": [
+        {
+          "widgetName": "Line 23. C A alternative minimum taxable income on exclusions. Subtract line 22 from line 20",
+          "text": "5,791"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.24_ca_amt_rate_exclusions",
+      "widgets": [
+        {
+          "widgetName": "Line 24 C A A M T rate on exclusions. Divide line 11 by line 4. Do not enter more than 1.0000",
+          "text": "T126P8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.25_ca_tentative_minimum_tax_exclusions",
+      "widgets": [
+        {
+          "widgetName": "Line 25. C A tentative minimum tax on exclusions. Multiply line 23 by line 24",
+          "text": "4,650"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.26_regular_tax_540nr",
+      "widgets": [
+        {
+          "widgetName": "Line 26. Regular tax. Enter the amount from 2024 Schedule P (540NR), Part II, line 44",
+          "text": "1,488"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.27_net_amt_on_exclusions_540nr",
+      "widgets": [
+        {
+          "widgetName": "Line 27. Net A M T on exclusions. Subtract line 26 from line 25. If less than zero, enter 0",
+          "text": "2,277"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.28_prior_year_amt",
+      "widgets": [
+        {
+          "widgetName": "Part II, line 28. Enter the A M T from your 2024 Schedule P (540), Part II, line 26; Schedule P (540NR), Part II, line 45; or Schedule P (541), Part III, line 10. See instructions",
+          "text": "1,497"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.29_net_amt_on_exclusions",
+      "widgets": [
+        {
+          "widgetName": "Line 29. Net A M T on exclusions. Enter the amount from line 13. Form 540NR filers: enter the amount from Section B, line 27",
+          "text": "2,868"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.3_amt_credit_nol_deduction",
+      "widgets": [
+        {
+          "widgetName": "Line 3. A M T credit net operating loss deduction. See instructions",
+          "text": "7,823"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.30_adjusted_net_amt",
+      "widgets": [
+        {
+          "widgetName": "Line 30. Adjusted net A M T. Subtract line 29 from line 28. If less than zero, enter as a negative amount",
+          "text": "6,465"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.31_amt_credit_carryover_from_2024",
+      "widgets": [
+        {
+          "widgetName": "Line 31. Enter any carryover of unused A M T credit from 2024. See instructions",
+          "text": "8,477"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.32_combine_lines_30_and_31",
+      "widgets": [
+        {
+          "widgetName": "Line 32. Combine line 30 and line 31. See instructions",
+          "text": "5,246"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.33_current_year_regular_tax",
+      "widgets": [
+        {
+          "widgetName": "Line 33. Enter your 2025 regular tax from: Form 540, line 31; Form 540NR, line 37; or Form 541, line 21a",
+          "text": "5,685"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.34_exemption_other_allowable_credits",
+      "widgets": [
+        {
+          "widgetName": "Line 34. Exemption and other allowable credits. See instructions",
+          "text": "9,403"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.35_regular_tax_less_credits",
+      "widgets": [
+        {
+          "widgetName": "Line 35. Subtract line 34 from line 33",
+          "text": "6,082"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.36_current_year_tentative_minimum_tax",
+      "widgets": [
+        {
+          "widgetName": "Line 36. Enter your 2025 tentative minimum tax. See instructions",
+          "text": "1,123"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.37_line_35_minus_line_36",
+      "widgets": [
+        {
+          "widgetName": "Line 37. Subtract line 36 from line 35. If zero or less, enter 0",
+          "text": "3,865"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.38_prior_year_amt_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 38. Prior year A M T credit. Enter the smaller of line 32 or line 37 here and in column (b) of your 2025 Schedule P (540), Part III, line 10; Schedule P (540NR), Part III, line 10; or Schedule P (541), Part IV, line 9",
+          "text": "6,790"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.39_amt_credit_carryover_to_2026",
+      "widgets": [
+        {
+          "widgetName": "Line 39. Subtract line 38 from line 32. This is the amount of your A M T credit carryover to 2026",
+          "text": "8,479"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.4_combine_lines_1_through_3",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Combine line 1 through line 3. If zero or less, enter 0 here and on line 13; see instructions. If you were married/R D P filing separately for 2024 and this amount is more than $465,231, see instructions",
+          "text": "3,908"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.5_exemption_worksheet_line_1",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Enter the amount from your 2024 Schedule P (540 or 540NR) Instructions for line 22 Exemption Worksheet, line 1. Schedule P (541) filers: enter $60,029",
+          "text": "8,523"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.6_exemption_worksheet_line_3",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Enter the amount from your 2024 Schedule P (540 or 540NR) Instructions for line 22 Exemption Worksheet, line 3. Schedule P (541) filers: enter $225,115",
+          "text": "1,751"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.7_line_4_minus_line_6",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Subtract line 6 from line 4. If zero or less, enter 0 here and on line 8, then go to line 9. Otherwise, go to line 8",
+          "text": "5,471"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.8_exemption_phaseout_amount",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Multiply line 7 by 25%",
+          "text": "7,450"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3510.0.line.9_exemption_after_phaseout",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Subtract line 8 from line 5. If zero or less, enter 0 here. If completing for a certain child under age 24, see instructions",
+          "text": "9,817"
+        }
+      ]
+    }
+  ]
+}
