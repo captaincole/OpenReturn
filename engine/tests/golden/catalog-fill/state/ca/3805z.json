@@ -1,0 +1,492 @@
+{
+  "formId": "form-3805z",
+  "fieldCount": 54,
+  "entries": [
+    {
+      "fieldId": "form-3805z.0.header.a_entity_type",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1004 RB",
+          "text": "Individual."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.header.b_ez_business_name",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1005",
+          "text": "T-11WRU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.header.c_ez_business_address",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1006",
+          "text": "T-CNMG8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.header.d_enterprise_zone_name",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1007",
+          "text": "T-MGXWW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.header.e_principal_business_activity_code",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1008",
+          "text": "T1BXLB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.header.f_total_employees_in_ez",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1009",
+          "text": "9,199"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.header.g_gross_annual_receipts",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1010",
+          "text": "4,479"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.header.h_total_asset_value",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1011",
+          "text": "8,594"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.header.identification_number",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1002",
+          "text": "T-5LJM2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.header.identification_number_type",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1001 RB",
+          "text": "Social Security Number or Individual Taxpayer Identification Number."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.header.sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1003",
+          "text": "T-1MHV1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1000",
+          "text": "T-1VUS8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.line.1a_hiring_credit_carryover",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1012",
+          "text": "4,919"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.line.1b_sales_use_tax_credit_carryover",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1013",
+          "text": "3,052"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.line.1c_total_credit_carryover",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1014",
+          "text": "4,305"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.line.1d_credit_elected_refundable",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1015",
+          "text": "6,541"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.line.2_average_apportionment_percentage",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1016",
+          "text": "T-1GK26"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.line.3a_ez_nol_carryover_prior_years",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1017",
+          "text": "9,708"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.line.3b_ez_nol_deduction_current_year",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1018",
+          "text": "8,607"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.line.3c_ez_nol_carryover_future_years",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_1019",
+          "text": "6,317"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.1_trade_or_business_income",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2001",
+          "text": "7,424"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.10_hiring_credit_col_b",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2023",
+          "text": "3,499"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.10_hiring_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2024",
+          "text": "9,734"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.10_hiring_credit_col_d",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2025",
+          "text": "4,252"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.11_sales_use_tax_credit_col_b",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2026",
+          "text": "7,615"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.11_sales_use_tax_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2027",
+          "text": "3,999"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.11_sales_use_tax_credit_col_d",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2028",
+          "text": "6,313"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.12_hiring_credit_col_b",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2029",
+          "text": "6,098"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.12_hiring_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2030",
+          "text": "4,493"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.12_hiring_credit_col_d",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2031",
+          "text": "2,335"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.13_sales_use_tax_credit_col_b",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2032",
+          "text": "7,694"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.13_sales_use_tax_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2033",
+          "text": "1,610"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.13_sales_use_tax_credit_col_d",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2034",
+          "text": "5,600"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.2_average_apportionment_percentage",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2002",
+          "text": "T-1TZ1O"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.3_apportioned_business_income",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2003",
+          "text": "9,426"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.4_ez_nol_deduction",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2004",
+          "text": "7,290"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.5_ez_taxable_income",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2005",
+          "text": "8,916"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.6a_tax_on_ez_income",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2006",
+          "text": "9,264"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.6b_tax_from_return",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2007",
+          "text": "9,369"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.7_ez_income_limitation",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2008",
+          "text": "4,813"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.8_hiring_credit_row_a_col_e",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2009",
+          "text": "3,000"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.8_hiring_credit_row_a_col_f",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2010",
+          "text": "3,105"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.8_hiring_credit_row_b_col_b",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2011",
+          "text": "5,227"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.8_hiring_credit_row_b_col_c",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2012",
+          "text": "1,764"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.8_hiring_credit_row_b_col_d",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2013",
+          "text": "9,551"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.8_hiring_credit_row_b_col_e",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2014",
+          "text": "9,646"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.8_hiring_credit_row_b_col_g",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2015",
+          "text": "5,502"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.9_sales_use_tax_credit_row_a_col_e",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2016",
+          "text": "3,868"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.9_sales_use_tax_credit_row_a_col_f",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2017",
+          "text": "6,257"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.9_sales_use_tax_credit_row_b_col_b",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2018",
+          "text": "5,954"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.9_sales_use_tax_credit_row_b_col_c",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2019",
+          "text": "7,111"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.9_sales_use_tax_credit_row_b_col_d",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2020",
+          "text": "5,641"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.9_sales_use_tax_credit_row_b_col_e",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2021",
+          "text": "1,846"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.1.line.9_sales_use_tax_credit_row_b_col_g",
+      "widgets": [
+        {
+          "widgetName": "3805Z_Form_2022",
+          "text": "8,501"
+        }
+      ]
+    }
+  ]
+}

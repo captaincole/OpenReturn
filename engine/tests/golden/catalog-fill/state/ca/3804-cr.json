@@ -1,0 +1,357 @@
+{
+  "formId": "form-3804-cr",
+  "fieldCount": 39,
+  "entries": [
+    {
+      "fieldId": "form-3804-cr.0.header.id_number_type",
+      "widgets": [
+        {
+          "widgetName": "Select Entity type",
+          "text": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N)."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.header.name_on_return",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on your California tax return (S M L L C s see instructions)",
+          "text": "T-1IUMT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.header.ssn_itin_or_fein",
+      "widgets": [
+        {
+          "widgetName": "S S N or I T I N, F E I N (9 digits)",
+          "text": "T-1M071"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1a_electing_pte_col_a",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line 1a. (a) Electing qualified pass-through entity (P T E) name",
+          "text": "T-CKBT4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1a_electing_pte_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (b) Entity identification number",
+          "text": "T-DF0MW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1a_electing_pte_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (c) P T E elective tax credit(s)",
+          "text": "4,232"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1b_electing_pte_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (a) Electing qualified pass-through entity (P T E) name",
+          "text": "T-NCCB0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1b_electing_pte_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (b) Entity identification number",
+          "text": "T-A83P5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1b_electing_pte_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (c) P T E elective tax credit(s)",
+          "text": "6,371"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1c_electing_pte_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (a) Electing qualified pass-through entity (P T E) name",
+          "text": "T-3Y9ZY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1c_electing_pte_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (b) Entity identification number",
+          "text": "T-1EBD7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1c_electing_pte_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (c) P T E elective tax credit(s)",
+          "text": "8,962"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1d_electing_pte_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (a) Electing qualified pass-through entity (P T E) name",
+          "text": "T-10HO6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1d_electing_pte_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (b) Entity identification number",
+          "text": "T-1IAGH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1d_electing_pte_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (c) P T E elective tax credit(s)",
+          "text": "9,579"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1e_electing_pte_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (a) Electing qualified pass-through entity (P T E) name",
+          "text": "T-1RXWT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1e_electing_pte_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (b) Entity identification number",
+          "text": "T-158CL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1e_electing_pte_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (c) P T E elective tax credit(s)",
+          "text": "7,884"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1f_electing_pte_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1f. (a) Electing qualified pass-through entity (P T E) name",
+          "text": "T-1YJQZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1f_electing_pte_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1f. (b) Entity identification number",
+          "text": "T-197XP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1f_electing_pte_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1f. (c) P T E elective tax credit(s)",
+          "text": "8,612"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1g_electing_pte_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1g. (a) Electing qualified pass-through entity (P T E) name",
+          "text": "T-1Q9BE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1g_electing_pte_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1g. (b) Entity identification number",
+          "text": "T-1Q3LV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1g_electing_pte_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1g. (c) P T E elective tax credit(s)",
+          "text": "6,038"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1h_electing_pte_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1h. (a) Electing qualified pass-through entity (P T E) name",
+          "text": "T-GD3XK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1h_electing_pte_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1h. (b) Entity identification number",
+          "text": "T-UXA2A"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1h_electing_pte_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1h. (c) P T E elective tax credit(s)",
+          "text": "5,459"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1i_electing_pte_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1i. (a) Electing qualified pass-through entity (P T E) name",
+          "text": "T-BC88K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1i_electing_pte_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1i. (b) Entity identification number",
+          "text": "T-TE6N6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1i_electing_pte_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1i. (c) P T E elective tax credit(s)",
+          "text": "6,752"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1j_electing_pte_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1j. (a) Electing qualified pass-through entity (P T E) name",
+          "text": "T-RM98J"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1j_electing_pte_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1j. (b) Entity identification number",
+          "text": "T-TT1PD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1j_electing_pte_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1j. (c) P T E elective tax credit(s)",
+          "text": "2,804"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.2_total_pte_elective_tax_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Total P T E elective tax credit amount. Add the amounts in column (c) and enter total here",
+          "text": "8,659"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part2.1_total_credit_from_ptes",
+      "widgets": [
+        {
+          "widgetName": "Part II, Line 1. Total credit from electing qualified P T E s. See instructions",
+          "text": "3,980"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part2.2_credit_carryover_prior_year",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Credit carryover from prior year",
+          "text": "8,417"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part2.3_total_available_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Total available credit. Add line 1 and line 2",
+          "text": "2,002"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part2.4_credit_claimed_current_year",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Enter the amount of the credit claimed on the current year tax return. See instructions",
+          "text": "8,301"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.part2.5_credit_carryover_future_years",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Credit carryover to future years. Subtract line 4 from line 3",
+          "text": "9,171"
+        }
+      ]
+    }
+  ]
+}

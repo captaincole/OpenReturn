@@ -18,8 +18,8 @@ The golden suite ran 25 scenarios. A jurisdiction's code is its forms and the co
 | Jurisdiction | Forms | Fields supported | Branches | Lines |
 | --- | --- | --- | --- | --- |
 | Federal 2025 | 79 | 1,749 of 8,793 (20%) | 81.1% (5,760 of 7,103) | 97.2% (18,332 of 18,865) |
-| California 2025 | 16 | 489 of 2,009 (24%) | 79.8% (1,460 of 1,829) | 97.7% (5,758 of 5,895) |
-| All | 95 | 2,238 of 10,802 (21%) | 80.8% (7,228 of 8,942) | 97.3% (24,103 of 24,773) |
+| California 2025 | 32 | 489 of 3,413 (14%) | 79.4% (1,673 of 2,108) | 97.4% (6,379 of 6,549) |
+| All | 111 | 2,238 of 12,206 (18%) | 80.7% (7,441 of 9,221) | 97.2% (24,724 of 25,427) |
 
 ## By form
 
@@ -120,7 +120,23 @@ The golden suite ran 25 scenarios. A jurisdiction's code is its forms and the co
 | FTB 3801 | California 2025 | 0 | 0 of 337 (0%) | 76.5% | 92.9% |
 | FTB 3510 | California 2025 | 0 | 0 of 40 (0%) | 76.5% | 93.5% |
 | FTB 3803 | California 2025 | 0 | 0 of 15 (0%) | 76.5% | 92.9% |
-| Code that forms share | — | — | — | 79.0% | 99.5% |
+| Schedule G-1 | California 2025 | 0 | 0 of 30 (0%) | 76.5% | 92.3% |
+| Schedule X | California 2025 | 0 | 0 of 28 (0%) | 76.5% | 92.3% |
+| FTB 3461 | California 2025 | 0 | 0 of 19 (0%) | 76.5% | 92.3% |
+| FTB 3506 | California 2025 | 0 | 0 of 95 (0%) | 76.5% | 92.3% |
+| FTB 3507 | California 2025 | 0 | 0 of 13 (0%) | 76.5% | 92.3% |
+| FTB 3541 | California 2025 | 0 | 0 of 68 (0%) | 76.5% | 92.3% |
+| FTB 3800 | California 2025 | 0 | 0 of 24 (0%) | 76.5% | 92.3% |
+| FTB 3804-CR | California 2025 | 0 | 0 of 39 (0%) | 76.5% | 92.3% |
+| FTB 3805V | California 2025 | 0 | 0 of 222 (0%) | 76.5% | 92.3% |
+| FTB 3805Z | California 2025 | 0 | 0 of 54 (0%) | 76.5% | 92.3% |
+| FTB 3807 | California 2025 | 0 | 0 of 54 (0%) | 76.5% | 92.3% |
+| FTB 3809 | California 2025 | 0 | 0 of 55 (0%) | 76.5% | 92.3% |
+| FTB 3853 | California 2025 | 0 | 0 of 448 (0%) | 76.5% | 92.3% |
+| FTB 3913 | California 2025 | 0 | 0 of 9 (0%) | 76.5% | 92.3% |
+| FTB 5805F | California 2025 | 0 | 0 of 21 (0%) | 76.5% | 92.3% |
+| FTB 5870A | California 2025 | 0 | 0 of 225 (0%) | 76.5% | 92.3% |
+| Code that forms share | — | — | — | 78.8% | 99.5% |
 
 For the lines and paths that did not run, run `npm run coverage`. It prints one row for each file with the line numbers, and writes a page for each file to `engine/coverage/index.html`.
 

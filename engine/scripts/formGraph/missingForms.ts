@@ -27,19 +27,6 @@ const federal = (name: string, section: Section, about: string): MissingForm => 
   jurisdiction: "federal",
 });
 
-const california = (
-  name: string,
-  section: Section,
-  about: string,
-  aliases?: string[],
-): MissingForm => ({
-  name,
-  section,
-  about,
-  jurisdiction: "state/ca",
-  aliases,
-});
-
 export const MISSING_FORMS: MissingForm[] = [
   /* Named by a field of a form that has no rules yet. Most are the sources of the general business credit (Form 3800). */
   federal("Schedule J", "tax", "Income averaging for farmers and fishermen"),
@@ -106,24 +93,6 @@ export const MISSING_FORMS: MissingForm[] = [
   federal("Form 8941", "credits", "Credit for small employer health insurance premiums"),
   federal("Form 8942", "credits", "Qualifying therapeutic discovery project credit"),
   federal("Form 8994", "credits", "Employer credit for paid family and medical leave"),
-  california("Schedule G-1", "tax", "California tax on lump-sum distributions"),
-  california("Schedule X", "other", "Explanation of an amended California return"),
-  california("FTB 3461", "income", "California limit on business losses"),
-  california("FTB 3506", "credits", "California child and dependent care expenses credit"),
-  california("FTB 3507", "credits", "California prison inmate labor credit"),
-  california("FTB 3541", "credits", "California motion picture and television production credit"),
-  california("FTB 3800", "tax", "California tax for certain children with unearned income"),
-  california("FTB 3804-CR", "credits", "California pass-through entity elective tax credit"),
-  california("FTB 3805V", "income", "California net operating loss", ["Form 3805V"]),
-  california("FTB 3805Z", "credits", "California enterprise zone deduction and credit"),
-  california("FTB 3853", "tax", "California health coverage exemptions and penalty"),
-  california("FTB 3913", "income", "California moving expense deduction"),
-  california(
-    "FTB 5805F",
-    "payments",
-    "California underpayment of estimated tax by farmers and fishermen",
-  ),
-  california("FTB 5870A", "tax", "California tax on an accumulation distribution of a trust"),
 ];
 
 /*
@@ -152,6 +121,16 @@ export const NOT_RETURN_FORMS: string[] = [
   "Form 1066",
   "Form 1120-S",
   "Form 541",
+  "Form 100",
+  "Form 100S",
+  "Form 100W",
+  "Form 100X",
+  "Form 109",
+  "FTB 3544",
+  "Schedule Z",
+  /* The FTB label text for a form the engine has: "Form 540N R" and "Form 3805V". */
+  "Form 540N",
+  "Form 3805V",
   "Form 114",
   "Form 4029",
   "Form 4361",

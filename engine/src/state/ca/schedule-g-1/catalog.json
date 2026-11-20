@@ -1,0 +1,551 @@
+{
+  "form": {
+    "formId": "schedule-g-1",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "Schedule G-1, Tax on Lump-Sum Distributions"
+  },
+  "fields": [
+    {
+      "fieldId": "schedule-g-1.0.header.name",
+      "label": "Name(s) as shown on tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on tax return",
+      "position": {
+        "page": 0,
+        "x": 35.6945,
+        "y": 684.84
+      }
+    },
+    {
+      "fieldId": "schedule-g-1.0.header.ssn_itin_or_fein",
+      "label": "S S N, I T I N, or F E I N (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "S S N, I T I N, or F E I N (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 415.385,
+        "y": 684.84
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.1_entire_balance_distribution",
+      "label": "Line 1 — Was this a distribution of a plan participant's entire balance from all of an employer's qualified plans of one kind (pension, profit-sharing, or stock bonus)?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Part I, Line 1. Was this a distribution of a plan participant's entire balance from all of an employer's qualified plans of one kind (pension, profit-sharing, or stock bonus)? If \"No,\" do not use this form",
+      "position": {
+        "page": 0,
+        "x": 520.277,
+        "y": 630.741
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.2_rolled_over_distribution",
+      "label": "Line 2 — Did you roll over any part of the distribution?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 2. Did you roll over any part of the distribution? If \"Yes,\" do not use this form",
+      "position": {
+        "page": 0,
+        "x": 520.277,
+        "y": 615.643
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.3_beneficiary_of_participant",
+      "label": "Line 3 — Was this distribution paid to you as a beneficiary of a plan participant who was born before January 2, 1936?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 3. Was this distribution paid to you as a beneficiary of a plan participant who was born before January 2, 1936?",
+      "position": {
+        "page": 0,
+        "x": 520.277,
+        "y": 600.721
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.4_participant_five_years",
+      "label": "Line 4 — Were you (a) a plan participant who received this distribution, (b) born before January 2, 1936, and (c) a participant in the plan for at least 5 years before the year of distribution?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 4. Were you (a) a plan participant who received this distribution, (b) born before January 2, 1936, and (c) a participant in the plan for at least 5 years before the year of distribution?",
+      "position": {
+        "page": 0,
+        "x": 520.277,
+        "y": 573.698
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.5_used_schedule_g1_prior_year",
+      "label": "Line 5 — Did you use Schedule G-1 in a prior year for any distribution received after 1986 for the same plan participant, including yourself, for whom the 2025 distribution was made?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 5. Did you use Schedule G-1 in a prior year for any distribution received after 1986 for the same plan participant, including yourself, for whom the 2025 distribution was made? If \"Yes,\" do not use this form",
+      "position": {
+        "page": 0,
+        "x": 520.223,
+        "y": 531.659
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.6_capital_gain_1099r_box_3",
+      "label": "Part II, Line 6. Capital gain from federal Form 1099-R, box 3. If you are taking the death benefit exclusion, see instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, Line 6. Capital gain from federal Form 1099-R, box 3. If you are taking the death benefit exclusion, see instructions",
+      "position": {
+        "page": 0,
+        "x": 485.525,
+        "y": 488.297
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.7_capital_gain_election_tax",
+      "label": "Line 7. Multiply line 6 by 5.5% (.055) and enter here. If you elect to use Part III, go to line 8. Otherwise, enter the amount from line 7 on Form 540, line 34; Form 540NR, line 41; or Form 541, line 21b.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Multiply line 6 by 5.5% (.055) and enter here. If you elect to use Part III, go to line 8. Otherwise, enter the amount from line 7 on Form 540, line 34; Form 540NR, line 41; or Form 541, line 21b",
+      "position": {
+        "page": 0,
+        "x": 485.65,
+        "y": 461.283
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.8_ordinary_income_1099r_box_2a",
+      "label": "Part III, Line 8. If you completed Part II, enter the amount from federal Form 1099-R, box 2a minus box 3. If you did not complete Part II, enter the amount from federal Form 1099-R, box 2a. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part III, Line 8. If you completed Part II, enter the amount from federal Form 1099-R, box 2a minus box 3. If you did not complete Part II, enter the amount from federal Form 1099-R, box 2a. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.977,
+        "y": 409.122
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.9_death_benefit_exclusion",
+      "label": "Line 9. Death benefit exclusion for a beneficiary of a plan participant who died before August 21, 1996. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Death benefit exclusion for a beneficiary of a plan participant who died before August 21, 1996. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.977,
+        "y": 394.129
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.10_total_taxable_amount",
+      "label": "Line 10. Total taxable amount. Subtract line 9 from line 8.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Total taxable amount. Subtract line 9 from line 8",
+      "position": {
+        "page": 0,
+        "x": 485.977,
+        "y": 379.126
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.11_actuarial_value_of_annuity",
+      "label": "Line 11. Current actuarial value of annuity, if applicable, from federal Form 1099-R, box 8. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. Current actuarial value of annuity, if applicable, from federal Form 1099-R, box 8. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.977,
+        "y": 364.134
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.12_adjusted_total_taxable_amount",
+      "label": "Line 12. Adjusted total taxable amount. Add line 10 and line 11. If this amount is $70,000 or more, skip line 13 through line 16, and enter this amount on line 17.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. Adjusted total taxable amount. Add line 10 and line 11. If this amount is $70,000 or more, skip line 13 through line 16, and enter this amount on line 17",
+      "position": {
+        "page": 0,
+        "x": 485.977,
+        "y": 337.12
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.13_half_of_line_12",
+      "label": "Line 13. Multiply line 12 by 50% (.50), but do not enter more than $10,000.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Multiply line 12 by 50% (.50), but do not enter more than $10,000",
+      "position": {
+        "page": 0,
+        "x": 386.998,
+        "y": 322.147
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.14_line_12_over_20000",
+      "label": "Line 14. Subtract $20,000 from line 12 and enter the difference. If the result is zero or less, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. Subtract $20,000 from line 12 and enter the difference. If the result is zero or less, enter 0",
+      "position": {
+        "page": 0,
+        "x": 294.005,
+        "y": 295.135
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.15_twenty_percent_of_line_14",
+      "label": "Line 15. Multiply line 14 by 20% (.20).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Multiply line 14 by 20% (.20)",
+      "position": {
+        "page": 0,
+        "x": 386.991,
+        "y": 280.117
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.16_minimum_distribution_allowance",
+      "label": "Line 16. Minimum distribution allowance. Subtract line 15 from line 13.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. Minimum distribution allowance. Subtract line 15 from line 13",
+      "position": {
+        "page": 0,
+        "x": 485.991,
+        "y": 265.113
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.17_amount_after_allowance",
+      "label": "Line 17. Subtract line 16 from line 12.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. Subtract line 16 from line 12",
+      "position": {
+        "page": 0,
+        "x": 485.991,
+        "y": 250.132
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.18_ten_percent_of_line_17",
+      "label": "Line 18. Multiply line 17 by 10% (.10).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. Multiply line 17 by 10% (.10)",
+      "position": {
+        "page": 0,
+        "x": 485.991,
+        "y": 235.14
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.19_tax_on_line_18",
+      "label": "Line 19. Tax on amount on line 18. Use the Tax Rate Schedule in the instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. Tax on amount on line 18. Use the Tax Rate Schedule in the instructions",
+      "position": {
+        "page": 0,
+        "x": 485.991,
+        "y": 220.129
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.20_ten_times_line_19",
+      "label": "Line 20. Multiply line 19 by ten (10). If line 11 is blank, skip line 21 through line 26 and enter this amount on line 27. Otherwise, continue to line 21.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. Multiply line 19 by ten (10). If line 11 is blank, skip line 21 through line 26 and enter this amount on line 27. Otherwise, continue to line 21",
+      "position": {
+        "page": 0,
+        "x": 485.991,
+        "y": 193.129
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.21_annuity_ratio",
+      "label": "Line 21. Divide line 11 by line 12 (rounded to at least three places). See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 21. Divide line 11 by line 12 (rounded to at least three places). See instructions",
+      "position": {
+        "page": 0,
+        "x": 492.055,
+        "y": 178.414
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.22_allowance_for_annuity",
+      "label": "Line 22. Multiply line 16 by the decimal amount on line 21.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22. Multiply line 16 by the decimal amount on line 21",
+      "position": {
+        "page": 0,
+        "x": 485.933,
+        "y": 163.134
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.23_annuity_after_allowance",
+      "label": "Line 23. Subtract line 22 from line 11.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. Subtract line 22 from line 11",
+      "position": {
+        "page": 0,
+        "x": 485.933,
+        "y": 148.128
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.24_ten_percent_of_line_23",
+      "label": "Line 24. Multiply line 23 by 10% (.10).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Multiply line 23 by 10% (.10)",
+      "position": {
+        "page": 0,
+        "x": 485.933,
+        "y": 133.132
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.25_tax_on_line_24",
+      "label": "Line 25. Tax on amount on line 24. Use the Tax Rate Schedule in the instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25. Tax on amount on line 24. Use the Tax Rate Schedule in the instructions",
+      "position": {
+        "page": 0,
+        "x": 485.933,
+        "y": 118.118
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.26_ten_times_line_25",
+      "label": "Line 26. Multiply line 25 by ten (10).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 26. Multiply line 25 by ten (10)",
+      "position": {
+        "page": 0,
+        "x": 485.933,
+        "y": 103.121
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.27_ten_year_averaging_tax",
+      "label": "Line 27. Subtract line 26 from line 20.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 27. Subtract line 26 from line 20",
+      "position": {
+        "page": 0,
+        "x": 485.933,
+        "y": 88.1399
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-g-1.0.line.28_tax_on_lump_sum_distribution",
+      "label": "Line 28. Tax on lump-sum distribution. Add Part II, line 7 and Part III, line 27. Enter here and on Form 540, line 34; Form 540NR, line 41; or Form 541, line 21b. Multiple recipients, see instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 28. Tax on lump-sum distribution. Add Part II, line 7 and Part III, line 27. Enter here and on Form 540, line 34; Form 540NR, line 41; or Form 541, line 21b. Multiple recipients, see instructions",
+      "position": {
+        "page": 0,
+        "x": 485.933,
+        "y": 61.1451
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/schedule-g-1/blank.pdf",
+    "ingestedAt": "2026-11-20T15:43:35.635Z",
+    "totalFields": 30,
+    "skipped": 0,
+    "catalogEntries": 30
+  }
+}

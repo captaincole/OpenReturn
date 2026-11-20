@@ -1,0 +1,501 @@
+{
+  "formId": "form-3809",
+  "fieldCount": 55,
+  "entries": [
+    {
+      "fieldId": "form-3809.0.header.a_entity_type",
+      "widgets": [
+        {
+          "widgetName": "Line A. Check the appropriate box for your entity type",
+          "text": "Individual."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.header.b_tta_business_name",
+      "widgets": [
+        {
+          "widgetName": "Line B. Enter the name of the Targeted Tax Area (T T A) business",
+          "text": "T-1GIJD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.header.c_tta_business_address",
+      "widgets": [
+        {
+          "widgetName": "Line C. Enter the address (actual location) where the T T A business is conducted",
+          "text": "T-1PXAY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.header.d_tta_specific_area_name",
+      "widgets": [
+        {
+          "widgetName": "Line D. Enter the name of the specific area of the T T A in which the business and/or investment activity is located",
+          "text": "T-B6FG2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.header.e_principal_business_activity_code",
+      "widgets": [
+        {
+          "widgetName": "Line E. Enter the six-digit Principal Business Activity code of the T T A Business",
+          "text": "TNT3WU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.header.f_total_employees_in_tta",
+      "widgets": [
+        {
+          "widgetName": "Line F. Total number of employees in the T T A",
+          "text": "7,606"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.header.g_gross_annual_receipts",
+      "widgets": [
+        {
+          "widgetName": "Line G. Gross annual receipts of the business",
+          "text": "1,723"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.header.h_total_asset_value",
+      "widgets": [
+        {
+          "widgetName": "Line H. Total asset value of the business",
+          "text": "7,595"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.header.id_number",
+      "widgets": [
+        {
+          "widgetName": "S S N or I T I N, C A Corporation number, F E I N (12 digits)",
+          "text": "T-SAQI8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.header.id_number_type",
+      "widgets": [
+        {
+          "widgetName": "Select Entity type",
+          "text": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N)."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.header.name_shown_on_return",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on your California tax return",
+          "text": "T-19X4K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.header.sic_code",
+      "widgets": [
+        {
+          "widgetName": "Qualified taxpayer's S I C code. See instructions",
+          "text": "3460"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.header.sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "California Secretary of State (S O S) file number (12 digits)",
+          "text": "T-1DXD5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.line.1a_hiring_credit_carryover",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line 1a. Hiring credit carryover from Schedule Z, line 8A, column (f) or line 10, column (c)",
+          "text": "4,631"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.line.1b_sales_use_tax_credit_carryover",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. Sales or use tax credit carryover from Schedule Z, line 9A, column (f) or line 11, column (c)",
+          "text": "3,720"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.line.1c_total_credit_carryover",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. Add line 1a and line 1b",
+          "text": "6,463"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.line.1d_credit_elected_refundable",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. Credit amount to be elected as refundable in future years. See instructions",
+          "text": "6,297"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.line.2_average_apportionment_percentage",
+      "widgets": [
+        {
+          "widgetName": "Part II, Line 2. Enter the average apportionment percentage of your business that is in the former T T A from Worksheet I, Section A, line 4. If your operation is wholly within the former T T A, the average apportionment percentage is 100% (1.00)",
+          "text": "T-1J7LT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.line.3a_nol_carryover_prior_years",
+      "widgets": [
+        {
+          "widgetName": "Part III, Line 3a. Enter the total N O L carryover from prior years from Worksheet II, line 9, column (b)",
+          "text": "9,536"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.line.3b_nol_deduction_current_year",
+      "widgets": [
+        {
+          "widgetName": "Line 3b. Enter the total N O L deduction used in the current year from Worksheet II, line 9, column (c). Enter this amount on Schedule C A (540), Part I, Section B, line 9b3, column B; Schedule C A (540NR), Part II, Section B, line 9b3, column B; Form 100, line 20; Form 100W, line 20; Form 100S, line 18; or Form 109, line 6",
+          "text": "8,711"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.0.line.3c_nol_carryover_future_years",
+      "widgets": [
+        {
+          "widgetName": "Line 3c. Enter the T T A N O L carryover to future years from Worksheet II, line 9, column (e)",
+          "text": "6,755"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.1_trade_or_business_income",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line 1. Trade or business income. Individuals: Enter the amount from Worksheet I, Section B, line 14, column (c) on this line and on line 3 (skip line 2). See instructions. Corporations which file a combined report, enter the taxpayer's business income apportioned to California (see instructions for form FTB 3809, Part II)",
+          "text": "6,122"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.10_hiring_credit_carryover_col_b",
+      "widgets": [
+        {
+          "widgetName": "Part III, Line 10. Hiring credit carryover, (b) Total prior year carryover",
+          "text": "6,293"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.10_hiring_credit_carryover_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Hiring credit carryover, (c) Credit carryover used this year by S corporation",
+          "text": "1,048"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.10_hiring_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Hiring credit carryover, (d) Carryover column (b) minus column (c)",
+          "text": "7,959"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.11_sales_use_tax_credit_carryover_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 11. Sales or use tax credit carryover, (b) Total prior year carryover",
+          "text": "2,224"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.11_sales_use_tax_credit_carryover_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 11. Sales or use tax credit carryover, (c) Credit carryover used this year by S corporation",
+          "text": "6,509"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.11_sales_use_tax_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 11. Sales or use tax credit carryover, (d) Carryover column (b) minus column (c)",
+          "text": "3,873"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.12_hiring_credit_carryover_col_b",
+      "widgets": [
+        {
+          "widgetName": "Part IV, Line 12. Hiring credit carryover, (b) Total prior year carryover",
+          "text": "8,085"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.12_hiring_credit_carryover_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 12. Hiring credit carryover, (c) Total credit assigned from form FTB 3544, Part A, column (g)",
+          "text": "7,311"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.12_hiring_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 12. Hiring credit carryover, (d) Total credit carryover column (b) minus column (c)",
+          "text": "1,621"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.13_sales_use_tax_credit_carryover_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Sales or use tax credit carryover, (b) Total prior year carryover",
+          "text": "6,634"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.13_sales_use_tax_credit_carryover_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Sales or use tax credit carryover, (c) Total credit assigned from form FTB 3544, Part A, column (g)",
+          "text": "5,866"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.13_sales_use_tax_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Sales or use tax credit carryover, (d) Total credit carryover column (b) minus column (c)",
+          "text": "7,050"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.2_average_apportionment_percentage",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Corporations: Enter the average apportionment percentage from Worksheet I, Section A, line 4. See instructions",
+          "text": "T-JKHSR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.3_apportioned_business_income",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Multiply line 1 by line 2",
+          "text": "2,454"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.4_tta_nol_deduction",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Enter the T T A N O L deduction from Worksheet II, line 9, column (c)",
+          "text": "9,633"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.5_tta_taxable_income",
+      "widgets": [
+        {
+          "widgetName": "Line 5. T T A taxable income. Subtract line 4 from line 3",
+          "text": "7,415"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.6a_tax_on_tta_income",
+      "widgets": [
+        {
+          "widgetName": "Line 6a. Compute the amount of tax due using the amount on line 5. See instructions",
+          "text": "5,562"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.6b_tax_from_return",
+      "widgets": [
+        {
+          "widgetName": "Line 6b. Enter the amount of tax from Form 540, line 35; Form 540NR, line 42; Form 541, line 21; Form 100, line 23; Form 100W, line 23; Form 100S, line 21; or Form 109, line 10. Corporations and S corporations, see instructions",
+          "text": "5,413"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.7_tta_business_income_limitation",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Enter the smaller of line 6a or line 6b. This is the limitation based on the T T A business income. Go to Part II, Part III, or Part IV. See instructions",
+          "text": "4,458"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.8a_hiring_credit_carryover_col_e",
+      "widgets": [
+        {
+          "widgetName": "Part II, Line 8A. Hiring credit carryover, (e) Limitation based on T T A business income",
+          "text": "1,195"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.8a_hiring_credit_carryover_col_f",
+      "widgets": [
+        {
+          "widgetName": "Line 8A. Hiring credit carryover, (f) Credit carryover used on Schedule P can never be greater than column (d) or column (e)",
+          "text": "8,656"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.8b_hiring_credit_carryover_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 8B. Hiring credit carryover, (b) Total prior year carryover",
+          "text": "6,202"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.8b_hiring_credit_carryover_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 8B. Hiring credit carryover, (c) Total credit assigned from form FTB 3544, Part A, column (g)",
+          "text": "2,951"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.8b_hiring_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 8B. Hiring credit carryover, (d) Total credit column (b) minus column (c)",
+          "text": "7,069"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.8b_hiring_credit_carryover_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 8B. Hiring credit carryover, (e) Limitation based on T T A business income",
+          "text": "8,497"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.8b_hiring_credit_carryover_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 8B. Hiring credit carryover, (g) Total credit carryover column (d) minus column (e)",
+          "text": "9,008"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.9a_sales_use_tax_credit_carryover_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 9A. Sales or use tax credit carryover, (e) Limitation based on T T A business income",
+          "text": "1,177"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.9a_sales_use_tax_credit_carryover_col_f",
+      "widgets": [
+        {
+          "widgetName": "Line 9A. Sales or use tax credit carryover, (f) Credit carryover used on Schedule P can never be greater than column (d) or column (e)",
+          "text": "7,300"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.9b_sales_use_tax_credit_carryover_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 9B. Sales or use tax credit carryover, (b) Total prior year carryover",
+          "text": "8,476"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.9b_sales_use_tax_credit_carryover_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 9B. Sales or use tax credit carryover, (c) Total credit assigned from form FTB 3544, Part A, column (g)",
+          "text": "6,159"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.9b_sales_use_tax_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 9B. Sales or use tax credit carryover, (d) Total credit column (b) minus column (c)",
+          "text": "4,533"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.9b_sales_use_tax_credit_carryover_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 9B. Sales or use tax credit carryover, (e) Limitation based on T T A business income",
+          "text": "7,985"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3809.1.line.9b_sales_use_tax_credit_carryover_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 9B. Sales or use tax credit carryover, (g) Total credit carryover column (d) minus column (e)",
+          "text": "3,069"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "form": {
+    "formId": "form-3913",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "FTB 3913, Moving Expense Deduction"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3913.0.header.names_on_return",
+      "label": "Name(s) as shown on tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on tax return",
+      "position": {
+        "page": 0,
+        "x": 35.9982,
+        "y": 682.576
+      }
+    },
+    {
+      "fieldId": "form-3913.0.header.ssn_or_itin",
+      "label": "Your S S N or I T I N (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Your S S N or I T I N (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 442.905,
+        "y": 682.605
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3913.0.header.military_member",
+      "label": "Before you begin: Are you a military member?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Are you a military member?",
+      "position": {
+        "page": 0,
+        "x": 36.4465,
+        "y": 657.45
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes. See Members of the Armed Forces section in the instructions before you continue on to line 1 below.",
+          "label": "Yes. See Members of the Armed Forces section in the instructions before you continue on to line 1 below."
+        },
+        {
+          "value": "no",
+          "radioOption": "No. See the Distance Test and Time Test in the instructions under Non-military Members section to find out if you can deduct your moving expenses.",
+          "label": "No. See the Distance Test and Time Test in the instructions under Non-military Members section to find out if you can deduct your moving expenses."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3913.0.line.1_transportation_storage_household_goods",
+      "label": "Line 1. Transportation and storage of household goods and personal effects. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. Transportation and storage of household goods and personal effects. See instructions",
+      "position": {
+        "page": 0,
+        "x": 458.776,
+        "y": 609.496
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3913.0.line.2_travel_and_lodging",
+      "label": "Line 2. Travel (including lodging) from your old home to your new home. Do not include the cost of meals. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Travel (including lodging) from your old home to your new home. Do not include the cost of meals. See instructions",
+      "position": {
+        "page": 0,
+        "x": 458.793,
+        "y": 585.025
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3913.0.line.3_total_moving_expenses",
+      "label": "Line 3. Add line 1 and line 2",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Add line 1 and line 2",
+      "position": {
+        "page": 0,
+        "x": 458.793,
+        "y": 561.025
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3913.0.line.4_employer_paid_not_in_wages",
+      "label": "Line 4. Enter the total amount your employer or the government paid you for the expenses listed on line 1 and line 2 that is not included in box 1 of your federal Form W-2 (wages). See instructions",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Enter the total amount your employer or the government paid you for the expenses listed on line 1 and line 2 that is not included in box 1 of your federal Form W-2 (wages). See instructions",
+      "position": {
+        "page": 0,
+        "x": 458.801,
+        "y": 536.561
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3913.0.line.5_line_3_more_than_line_4",
+      "label": "Line 5 — Is line 3 more than line 4?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 5. Is line 3 more than line 4?",
+      "position": {
+        "page": 0,
+        "x": 54.3759,
+        "y": 511.135
+      },
+      "options": [
+        {
+          "value": "no",
+          "radioOption": "No. You cannot deduct your moving expenses. If line 3 is less than line 4, subtract line 3 from line 4 and include the result on Schedule C A (540), Part I, Section A, line 1h, column C or Schedule C A (540NR), Part II, Section A, line 1h, column C. If you checked the Yes box above for military member, you have no California adjustment. Do not enter the result on Schedule C A. See instructions.",
+          "label": "No. You cannot deduct your moving expenses."
+        },
+        {
+          "value": "yes",
+          "radioOption": "Yes. Subtract line 4 from line 3. Enter the result here and on Schedule C A (540), Part I, line 14, column C or Schedule C A (540NR), Part II, line 14, column C. This is your moving expense deduction. If you checked the Yes box above for military member, you have no California adjustment. Do not enter the result on Schedule C A. See instructions.",
+          "label": "Yes. Subtract line 4 from line 3. This is your moving expense deduction."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3913.0.line.5_moving_expense_deduction",
+      "label": "Line 5. Is line 3 more than line 4?.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Is line 3 more than line 4?_1",
+      "position": {
+        "page": 0,
+        "x": 458.76,
+        "y": 427.345
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3913/blank.pdf",
+    "ingestedAt": "2026-11-20T15:50:51.761Z",
+    "totalFields": 9,
+    "skipped": 0,
+    "catalogEntries": 9
+  }
+}

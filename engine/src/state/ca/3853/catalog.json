@@ -1,0 +1,7099 @@
+{
+  "form": {
+    "formId": "form-3853",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "FTB 3853, Health Coverage Exemptions and Individual Shared Responsibility Penalty"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3853.0.header.name",
+      "label": "Name or names as shown on your California tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1001",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 682
+      }
+    },
+    {
+      "fieldId": "form-3853.0.header.ssn_or_itin",
+      "label": "Social security number or Individual Taxpayer Identification Number.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1002",
+      "position": {
+        "page": 0,
+        "x": 408.6,
+        "y": 682
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-3853.0.part1.1_first_name",
+      "label": "Part 1. Applicable Household Members. Line 1. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1003",
+      "position": {
+        "page": 0,
+        "x": 64.92,
+        "y": 628.8
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.1_middle_initial",
+      "label": "Line 1. Middle initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1004",
+      "position": {
+        "page": 0,
+        "x": 236.8,
+        "y": 628.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.0.part1.1_ssn",
+      "label": "Line 1. Social security number (SSN).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1006",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 628.8
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-3853.0.part1.1_date_of_birth",
+      "label": "Line 1. Date of birth. Enter two digit month / two digit day / four digit year.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1007",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 628.8
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3853.0.part1.1_modified_agi",
+      "label": "Line 1. Modified Adjusted Gross Income. (AGI)",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1008",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 628.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3853.0.part1.1_last_name",
+      "label": "Line 1. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1005",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 605.4
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.1_ecn_1",
+      "label": "Line 1. Exemption Certificate Number (ECN) 1.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1009",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 605.2
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.1_ecn_2",
+      "label": "Line 1. ECN 2.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1010",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 605.2
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.1_ecn_3",
+      "label": "Line 1. ECN 3.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1011",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 605.2
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.2_first_name",
+      "label": "Line 2. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1012",
+      "position": {
+        "page": 0,
+        "x": 64.92,
+        "y": 583.2
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.2_middle_initial",
+      "label": "Line 2. Middle initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1013",
+      "position": {
+        "page": 0,
+        "x": 236.8,
+        "y": 583.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.0.part1.2_ssn",
+      "label": "Line 2. SSN",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1015",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 582.6
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-3853.0.part1.2_date_of_birth",
+      "label": "Line 2. Date of birth. Enter two digit month / two digit day / four digit year.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1016",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 582.6
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3853.0.part1.2_modified_agi",
+      "label": "Line 2. Modified AGI",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1017",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 582.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3853.0.part1.2_last_name",
+      "label": "Line 2. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1014",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 559.8
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.2_ecn_1",
+      "label": "Line 2. ECN 1 .",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1018",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 559.8
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.2_ecn_2",
+      "label": "Line 2. ECN 2 .",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1019",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 559.8
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.2_ecn_3",
+      "label": "Line 2. ECN 3 .",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1020",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 559.8
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.3_first_name",
+      "label": "Line 3. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1021",
+      "position": {
+        "page": 0,
+        "x": 65.2473,
+        "y": 536.92
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.3_middle_initial",
+      "label": "Line 3. Middle initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1022",
+      "position": {
+        "page": 0,
+        "x": 236.8,
+        "y": 536.92
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.0.part1.3_ssn",
+      "label": "Line 3. SSN",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1024",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 536.92
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-3853.0.part1.3_date_of_birth",
+      "label": "Line 3. Date of birth. Enter two digit month / two digit day / four digit year.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1025",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 536.92
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3853.0.part1.3_modified_agi",
+      "label": "Line 3. Modified AGI",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1026",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 536.92
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3853.0.part1.3_last_name",
+      "label": "Line 3. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1023",
+      "position": {
+        "page": 0,
+        "x": 64.4727,
+        "y": 513.52
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.3_ecn_1",
+      "label": "Line 3. ECN 1.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1027",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 513.52
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.3_ecn_2",
+      "label": "Line 3. ECN 2.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1028",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 513
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.3_ecn_3",
+      "label": "Line 3. ECN 3.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1029",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 513.52
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.4_first_name",
+      "label": "Line 4. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1030",
+      "position": {
+        "page": 0,
+        "x": 64.92,
+        "y": 491.32
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.4_middle_initial",
+      "label": "Line 4. Middle initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1031",
+      "position": {
+        "page": 0,
+        "x": 236.8,
+        "y": 491.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.0.part1.4_ssn",
+      "label": "Line 4. SSN",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1033",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 491.32
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-3853.0.part1.4_date_of_birth",
+      "label": "Line 4. Date of birth. Enter two digit month / two digit day / four digit year.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1034",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 491.32
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3853.0.part1.4_modified_agi",
+      "label": "Line 4. Modified AGI",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1035",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 491.32
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3853.0.part1.4_last_name",
+      "label": "Line 4. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1032",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 467.92
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.4_ecn_1",
+      "label": "Line 4. ECN 1.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1036",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 467.92
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.4_ecn_2",
+      "label": "Line 4. ECN 2.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1037",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 467.92
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.4_ecn_3",
+      "label": "Line 4. ECN 3.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1038",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 467.92
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.5_first_name",
+      "label": "Line 5. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1039",
+      "position": {
+        "page": 0,
+        "x": 64.92,
+        "y": 444.6
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.5_middle_initial",
+      "label": "Line 5. Middle initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1040",
+      "position": {
+        "page": 0,
+        "x": 236.8,
+        "y": 444.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.0.part1.5_ssn",
+      "label": "Line 5. SSN",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1042",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 444.6
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-3853.0.part1.5_date_of_birth",
+      "label": "Line 5. Date of birth. Enter two digit month / two digit day / four digit year.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1043",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 444.6
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3853.0.part1.5_modified_agi",
+      "label": "Line 5. Modified AGI",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1044",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 444.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3853.0.part1.5_last_name",
+      "label": "Line 5. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1041",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 421.2
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.5_ecn_1",
+      "label": "Line 5. ECN 1.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1045",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 421.8
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.5_ecn_2",
+      "label": "Line 5. ECN 2.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1046",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 421.2
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.5_ecn_3",
+      "label": "Line 5. ECN 3.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1047",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 421.2
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.6_first_name",
+      "label": "Line 6. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1048",
+      "position": {
+        "page": 0,
+        "x": 64.92,
+        "y": 399
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.6_middle_initial",
+      "label": "Line 6. Middle initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1049",
+      "position": {
+        "page": 0,
+        "x": 236.8,
+        "y": 399
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.0.part1.6_ssn",
+      "label": "Line 6. SSN",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1051",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 399
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-3853.0.part1.6_date_of_birth",
+      "label": "Line 6. Date of birth. Enter two digit month / two digit day / four digit year.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1052",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 399
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3853.0.part1.6_modified_agi",
+      "label": "Line 6. Modified AGI",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1053",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 399
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3853.0.part1.6_last_name",
+      "label": "Line 6. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1050",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 375.6
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.6_ecn_1",
+      "label": "Line 6. ECN 1.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1054",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 375.6
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.6_ecn_2",
+      "label": "Line 6. ECN 2.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1055",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 375.6
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.6_ecn_3",
+      "label": "Line 6. ECN 3.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1056",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 375.6
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.7_first_name",
+      "label": "Line 7. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1057",
+      "position": {
+        "page": 0,
+        "x": 64.92,
+        "y": 352.72
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.7_middle_initial",
+      "label": "Line 7. Middle initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1058",
+      "position": {
+        "page": 0,
+        "x": 236.8,
+        "y": 353.047
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.0.part1.7_ssn",
+      "label": "Line 7. SSN",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1060",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 352.72
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-3853.0.part1.7_date_of_birth",
+      "label": "Line 7. Date of birth. Enter two digit month / two digit day / four digit year.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1061",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 352.72
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3853.0.part1.7_modified_agi",
+      "label": "Line 7. Modified AGI",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1062",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 352.72
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3853.0.part1.7_last_name",
+      "label": "Line 7. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1059",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 329.32
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.7_ecn_1",
+      "label": "Line 7. ECN 1.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1063",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 329.32
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.7_ecn_2",
+      "label": "Line 7. ECN 2.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1064",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 329.32
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.7_ecn_3",
+      "label": "Line 7. ECN 3.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1065",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 329.32
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.8_first_name",
+      "label": "Line 8. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1066",
+      "position": {
+        "page": 0,
+        "x": 64.92,
+        "y": 307.12
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.8_middle_initial",
+      "label": "Line 8. Middle initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1067",
+      "position": {
+        "page": 0,
+        "x": 236.8,
+        "y": 307.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.0.part1.8_ssn",
+      "label": "Line 8. SSN",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1069",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 307.12
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-3853.0.part1.8_date_of_birth",
+      "label": "Line 8. Date of birth. Enter two digit month / two digit day / four digit year.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1070",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 307.12
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3853.0.part1.8_modified_agi",
+      "label": "Line 8. Modified AGI",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1071",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 307.12
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3853.0.part1.8_last_name",
+      "label": "Line 8. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1068",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 283.72
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.8_ecn_1",
+      "label": "Line 8. ECN 1.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1072",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 283.72
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.8_ecn_2",
+      "label": "Line 8. ECN 2.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1073",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 283.72
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.8_ecn_3",
+      "label": "Line 8. ECN 3.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1074",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 283.72
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.9_first_name",
+      "label": "Line 9. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1075",
+      "position": {
+        "page": 0,
+        "x": 64.92,
+        "y": 260.64
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.9_middle_initial",
+      "label": "Line 9. Middle initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1076",
+      "position": {
+        "page": 0,
+        "x": 236.8,
+        "y": 260.64
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.0.part1.9_ssn",
+      "label": "Line 9. SSN",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1078",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 260.64
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-3853.0.part1.9_date_of_birth",
+      "label": "Line 9. Date of birth. Enter two digit month / two digit day / four digit year.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1079",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 260.64
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3853.0.part1.9_modified_agi",
+      "label": "Line 9. Modified AGI",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1080",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 260.64
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3853.0.part1.9_last_name",
+      "label": "Line 9. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1077",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 237.24
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.9_ecn_1",
+      "label": "Line 9. ECN 1.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1081",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 237.24
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.9_ecn_2",
+      "label": "Line 9. ECN 2.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1082",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 237.24
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.9_ecn_3",
+      "label": "Line 9. ECN 3.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1083",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 237.24
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.10_first_name",
+      "label": "Line 10. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1084",
+      "position": {
+        "page": 0,
+        "x": 64.92,
+        "y": 215.04
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.10_middle_initial",
+      "label": "Line 10. Middle initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1085",
+      "position": {
+        "page": 0,
+        "x": 236.8,
+        "y": 215.04
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.0.part1.10_ssn",
+      "label": "Line 10. SSN",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1087",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 215.04
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-3853.0.part1.10_date_of_birth",
+      "label": "Line 10. Date of birth. Enter two digit month / two digit day / four digit year.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1088",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 215.04
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3853.0.part1.10_modified_agi",
+      "label": "Line 10. Modified AGI",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1089",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 215.04
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3853.0.part1.10_last_name",
+      "label": "Line 10. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1086",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 191.64
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.10_ecn_1",
+      "label": "Line 10. ECN 1.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1090",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 191.64
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.10_ecn_2",
+      "label": "Line 10. ECN 2.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1091",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 191.64
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.10_ecn_3",
+      "label": "Line 10. ECN 3.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1092",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 191.64
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.11_first_name",
+      "label": "Line 11. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1093",
+      "position": {
+        "page": 0,
+        "x": 64.92,
+        "y": 168.76
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.11_middle_initial",
+      "label": "Line 11. Middle initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1094",
+      "position": {
+        "page": 0,
+        "x": 236.8,
+        "y": 168.76
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.0.part1.11_ssn",
+      "label": "Line 11. SSN",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1096",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 168.76
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-3853.0.part1.11_date_of_birth",
+      "label": "Line 11. Date of birth. Enter two digit month / two digit day / four digit year.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1097",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 168.76
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3853.0.part1.11_modified_agi",
+      "label": "Line 11. Modified AGI",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1098",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 168.76
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3853.0.part1.11_last_name",
+      "label": "Line 11. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1095",
+      "position": {
+        "page": 0,
+        "x": 65.1273,
+        "y": 145.033
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.11_ecn_1",
+      "label": "Line 11. ECN 1.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1099",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 145.36
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.11_ecn_2",
+      "label": "Line 11. ECN 2.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1100",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 145.36
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.11_ecn_3",
+      "label": "Line 11. ECN 3.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1101",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 145.36
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.12_first_name",
+      "label": "Line 12. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1102",
+      "position": {
+        "page": 0,
+        "x": 64.92,
+        "y": 123.16
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.12_middle_initial",
+      "label": "Line 12. Middle initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1103",
+      "position": {
+        "page": 0,
+        "x": 236.8,
+        "y": 123.16
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.0.part1.12_ssn",
+      "label": "Line 12. SSN",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1105",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 123.16
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-3853.0.part1.12_date_of_birth",
+      "label": "Line 12. Date of birth. Enter two digit month / two digit day / four digit year.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1106",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 123.16
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3853.0.part1.12_modified_agi",
+      "label": "Line 12. Modified AGI",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1107",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 123.16
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3853.0.part1.12_last_name",
+      "label": "Line 12. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1104",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 99.76
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.12_ecn_1",
+      "label": "Line 12. ECN 1.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1108",
+      "position": {
+        "page": 0,
+        "x": 271.2,
+        "y": 100.2
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.12_ecn_2",
+      "label": "Line 12. ECN 2.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1109",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 99.76
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part1.12_ecn_3",
+      "label": "Line 12. ECN 3.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 1110",
+      "position": {
+        "page": 0,
+        "x": 484.8,
+        "y": 99.76
+      }
+    },
+    {
+      "fieldId": "form-3853.0.part2.1_income_below_filing_threshold",
+      "label": "Part 2. Coverage Exemption Claimed on Your Tax Return for Your Household. Line 1 . If you are claiming a coverage exemption because your applicable household income or gross income is below the filing threshold, check the box here. See instructions.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "3853 Form 1111 CB",
+      "position": {
+        "page": 0,
+        "x": 568.08,
+        "y": 65
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_first_name",
+      "label": "Part 3. Coverage and Exemptions Claimed on Your Tax Return for Individuals. Line 1. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2003",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 635
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_middle_initial",
+      "label": "Line 1. Middle Initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2004",
+      "position": {
+        "page": 1,
+        "x": 189.6,
+        "y": 635
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_first_code_jan",
+      "label": "Line 1. Column (b). January. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2007",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 635
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_first_code_feb",
+      "label": "Line 1. Column (c). February. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2009",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 635
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_first_code_mar",
+      "label": "Line 1. Column (d). March. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2011",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 635
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_first_code_apr",
+      "label": "Line 1. Column (e). April. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2013",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 635
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_first_code_may",
+      "label": "Line 1. Column (f). May. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2015",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 635
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_first_code_jun",
+      "label": "Line 1. Column (g). June. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2017",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 635
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_first_code_jul",
+      "label": "Line 1. Column (h). July. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2019",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 635
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_first_code_aug",
+      "label": "Line 1. Column (i). August. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2021",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 635
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_first_code_sep",
+      "label": "Line 1. Column (j). September. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2023",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 635
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_first_code_oct",
+      "label": "Line 1. Column (k). October. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2025",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 635
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_first_code_nov",
+      "label": "Line 1. Column (l). November. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2027",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 635
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_first_code_dec",
+      "label": "Line 1. Column (m). December. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2029",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 635
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_last_name",
+      "label": "Line 1. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2005",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 612.2
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_full_year_code",
+      "label": "Line 1. Column (a). Full-year. Enter Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2006",
+      "position": {
+        "page": 1,
+        "x": 213,
+        "y": 612
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_second_code_jan",
+      "label": "Line 1. Column (b). January. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2008",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 612.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_second_code_feb",
+      "label": "Line 1. Column (c). February. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2010",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 612.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_second_code_mar",
+      "label": "Line 1. Column (d). March. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2012",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 612.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_second_code_apr",
+      "label": "Line 1. Column (e). April. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2014",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 612.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_second_code_may",
+      "label": "Line 1. Column (f). May. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2016",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 612.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_second_code_jun",
+      "label": "Line 1. Column (g). June. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2018",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 612.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_second_code_jul",
+      "label": "Line 1. Column (h). July. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2020",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 612.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_second_code_aug",
+      "label": "Line 1. Column (i). August. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2022",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 612.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_second_code_sep",
+      "label": "Line 1. Column (j). September. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2024",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 612.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_second_code_oct",
+      "label": "Line 1. Column (k). October. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2026",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 612.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_second_code_nov",
+      "label": "Line 1. Column (l). November. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2028",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 612.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.1_second_code_dec",
+      "label": "Line 1 . Column (m). December. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2030",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 612.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_first_name",
+      "label": "Line 2. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2031",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 590.6
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_middle_initial",
+      "label": "Line 2. Middle Initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2032",
+      "position": {
+        "page": 1,
+        "x": 189.6,
+        "y": 590.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_first_code_jan",
+      "label": "Line 2. Column (b). January. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2035",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 590.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_first_code_feb",
+      "label": "Line 2. Column (c). February. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2037",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 590.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_first_code_mar",
+      "label": "Line 2. Column (d). March. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2039",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 590.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_first_code_apr",
+      "label": "Line 2. Column (e). April. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2041",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 590.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_first_code_may",
+      "label": "Line 2. Column (f). May. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2043",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 590.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_first_code_jun",
+      "label": "Line 2. Column (g). June. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2045",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 590.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_first_code_jul",
+      "label": "Line 2. Column (h). July. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2047",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 590.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_first_code_aug",
+      "label": "Line 2. Column (i). August. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2049",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 590.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_first_code_sep",
+      "label": "Line 2. Column (j). September. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2051",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 590.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_first_code_oct",
+      "label": "Line 2. Column (k). October. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2053",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 590.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_first_code_nov",
+      "label": "Line 2. Column (l). November. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2055",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 590.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_first_code_dec",
+      "label": "Line 2. Column (m). December. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2057",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 590.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_last_name",
+      "label": "Line 2. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2033",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 567.8
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_full_year_code",
+      "label": "Line 2. Column (a). Full-year. Enter Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2034",
+      "position": {
+        "page": 1,
+        "x": 213,
+        "y": 567.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_second_code_jan",
+      "label": "Line 2. Column (b). January. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2036",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 568.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_second_code_feb",
+      "label": "Line 2. Column (c). February. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2038",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 568.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_second_code_mar",
+      "label": "Line 2. Column (d). March. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2040",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 568.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_second_code_apr",
+      "label": "Line 2. Column (e). April. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2042",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 568.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_second_code_may",
+      "label": "Line 2. Column (f). May. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2044",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 568.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_second_code_jun",
+      "label": "Line 2. Column (g). June. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2046",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 568.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_second_code_jul",
+      "label": "Line 2. Column (h). July. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2048",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 568.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_second_code_aug",
+      "label": "Line 2. Column (i). August. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2050",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 568.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_second_code_sep",
+      "label": "Line 2. Column (j). September. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2052",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 568.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_second_code_oct",
+      "label": "Line 2. Column (k). October. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2054",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 568.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_second_code_nov",
+      "label": "Line 2. Column (l). November. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2056",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 568.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.2_second_code_dec",
+      "label": "Line 2. Column (m). December. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2058",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 568.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_first_name",
+      "label": "Line 3. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2059",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 545.72
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_middle_initial",
+      "label": "Line 3. Middle Initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2060",
+      "position": {
+        "page": 1,
+        "x": 189.6,
+        "y": 545.72
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_first_code_jan",
+      "label": "Line 3. Column (b). January. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2063",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 545.72
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_first_code_feb",
+      "label": "Line 3. Column (c). February. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2065",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 545.72
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_first_code_mar",
+      "label": "Line 3. Column (d). March. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2067",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 545.72
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_first_code_apr",
+      "label": "Line 3. Column (e). April. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2069",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 545.72
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_first_code_may",
+      "label": "Line 3. Column (f). May. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2071",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 545.72
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_first_code_jun",
+      "label": "Line 3. Column (g). June. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2073",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 545.72
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_first_code_jul",
+      "label": "Line 3. Column (h). July. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2075",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 545.72
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_first_code_aug",
+      "label": "Line 3. Column (i). August. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2077",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 545.72
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_first_code_sep",
+      "label": "Line 3. Column (j). September. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2079",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 545.72
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_first_code_oct",
+      "label": "Line 3. Column (k). October. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2081",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 545.72
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_first_code_nov",
+      "label": "Line 3. Column (l). November. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2083",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 545.72
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_first_code_dec",
+      "label": "Line 3. Column (m). December. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2085",
+      "position": {
+        "page": 1,
+        "x": 557.2,
+        "y": 546
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_last_name",
+      "label": "Line 3. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2061",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 522.92
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_full_year_code",
+      "label": "Line 3. Column (a). Full-year. Enter Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2062",
+      "position": {
+        "page": 1,
+        "x": 213,
+        "y": 522.72
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_second_code_jan",
+      "label": "Line 3. Column (b). January. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2064",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 523.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_second_code_feb",
+      "label": "Line 3. Column (c). February. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2066",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 523.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_second_code_mar",
+      "label": "Line 3. Column (d). March. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2068",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 523.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_second_code_apr",
+      "label": "Line 3. Column (e). April. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2070",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 523.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_second_code_may",
+      "label": "Line 3. Column (f). May. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2072",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 523.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_second_code_jun",
+      "label": "Line 3. Column (g). June. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2074",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 523.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_second_code_jul",
+      "label": "Line 3. Column (h). July. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2076",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 523.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_second_code_aug",
+      "label": "Line 3. Column (i). August. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2078",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 523.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_second_code_sep",
+      "label": "Line 3. Column (j). September. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2080",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 523.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_second_code_oct",
+      "label": "Line 3. Column (k). October. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2082",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 523.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_second_code_nov",
+      "label": "Line 3. Column (l). November. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2084",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 523.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.3_second_code_dec",
+      "label": "Line 3. Column (m). December. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2086",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 523.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_first_name",
+      "label": "Line 4. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2087",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 501.32
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_middle_initial",
+      "label": "Line 4. Middle Initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2088",
+      "position": {
+        "page": 1,
+        "x": 189.6,
+        "y": 501.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_first_code_jan",
+      "label": "Line 4. Column (b). January. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2091",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 501.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_first_code_feb",
+      "label": "Line 4. Column (c). February. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2093",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 501.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_first_code_mar",
+      "label": "Line 4. Column (d). March. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2095",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 501.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_first_code_apr",
+      "label": "Line 4. Column (e). April. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2097",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 501.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_first_code_may",
+      "label": "Line 4. Column (f). May. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2099",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 501.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_first_code_jun",
+      "label": "Line 4. Column (g). June. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2101",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 501.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_first_code_jul",
+      "label": "Line 4. Column (h). July. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2103",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 501.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_first_code_aug",
+      "label": "Line 4. Column (i). August. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2105",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 501.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_first_code_sep",
+      "label": "Line 4. Column (j). September. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2107",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 501.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_first_code_oct",
+      "label": "Line 4. Column (k). October. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2109",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 501.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_first_code_nov",
+      "label": "Line 4. Column (l). November. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2111",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 501.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_first_code_dec",
+      "label": "Line 4. Column (m). December. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2113",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 501.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_last_name",
+      "label": "Line 4. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2089",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 478.52
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_full_year_code",
+      "label": "Line 4. Column (a). Full-year. Enter Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2090",
+      "position": {
+        "page": 1,
+        "x": 213,
+        "y": 478.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_second_code_jan",
+      "label": "Line 4. Column (b). January. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2092",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 479.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_second_code_feb",
+      "label": "Line 4. Column (c). February. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2094",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 479.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_second_code_mar",
+      "label": "Line 4. Column (d). March. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2096",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 479.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_second_code_apr",
+      "label": "Line 4. Column (e). April. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2098",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 479.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_second_code_may",
+      "label": "Line 4. Column (f). May. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2100",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 479.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_second_code_jun",
+      "label": "Line 4. Column (g). June. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2102",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 479.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_second_code_jul",
+      "label": "Line 4. Column (h). July. Enter  second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2104",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 479.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_second_code_aug",
+      "label": "Line 4. Column (i). August. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2106",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 479.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_second_code_sep",
+      "label": "Line 4. Column (j). September. Enter  second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2108",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 479.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_second_code_oct",
+      "label": "Line 4. Column (k). October. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2110",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 479.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_second_code_nov",
+      "label": "Line 4. Column (l). November. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2112",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 479.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.4_second_code_dec",
+      "label": "Line 4. Column (m). December. Enter  second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2114",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 479.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_first_name",
+      "label": "Line 5. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2115",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 456.8
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_middle_initial",
+      "label": "Line 5. Middle Initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2116",
+      "position": {
+        "page": 1,
+        "x": 189.6,
+        "y": 456.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_first_code_jan",
+      "label": "Line 5. Column (b). January. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2119",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 456.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_first_code_feb",
+      "label": "Line 5. Column (c). February. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2121",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 456.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_first_code_mar",
+      "label": "Line 5. Column (d). March. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2123",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 456.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_first_code_apr",
+      "label": "Line 5. Column (e). April. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2125",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 456.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_first_code_may",
+      "label": "Line 5. Column (f). May. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2127",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 456.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_first_code_jun",
+      "label": "Line 5. Column (g). June. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2129",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 456.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_first_code_jul",
+      "label": "Line 5. Column (h). July. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2131",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 456.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_first_code_aug",
+      "label": "Line 5. Column (i). August. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2133",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 456.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_first_code_sep",
+      "label": "Line 5. Column (j). September. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2135",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 456.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_first_code_oct",
+      "label": "Line 5. Column (k). October. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2137",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 456.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_first_code_nov",
+      "label": "Line 5. Column (l). November. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2139",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 456.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_first_code_dec",
+      "label": "Line 5. Column (m). December. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2141",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 456.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_last_name",
+      "label": "Line 5. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2117",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 434
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_full_year_code",
+      "label": "Line 5. Column (a). Full-year. Enter Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2118",
+      "position": {
+        "page": 1,
+        "x": 213,
+        "y": 433.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_second_code_jan",
+      "label": "Line 5. Column (b). January. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2120",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 434.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_second_code_feb",
+      "label": "Line 5. Column (c). February. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2122",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 434.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_second_code_mar",
+      "label": "Line 5. Column (d). March. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2124",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 434.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_second_code_apr",
+      "label": "Line 5. Column (e). April. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2126",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 434.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_second_code_may",
+      "label": "Line 5. Column (f). May. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2128",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 434.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_second_code_jun",
+      "label": "Line 5. Column (g). June. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2130",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 434.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_second_code_jul",
+      "label": "Line 5. Column (h). July. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2132",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 434.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_second_code_aug",
+      "label": "Line 5. Column (i). August. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2134",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 434.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_second_code_sep",
+      "label": "Line 5. Column (j). September. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2136",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 434.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_second_code_oct",
+      "label": "Line 5. Column (k). October. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2138",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 434.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_second_code_nov",
+      "label": "Line 5. Column (l). November. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2140",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 434.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.5_second_code_dec",
+      "label": "Line 5. Column (m). December. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2142",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 434.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_first_name",
+      "label": "Line 6. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2143",
+      "position": {
+        "page": 1,
+        "x": 60,
+        "y": 412.4
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_middle_initial",
+      "label": "Line 6. Middle Initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2144",
+      "position": {
+        "page": 1,
+        "x": 189.6,
+        "y": 412.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_first_code_jan",
+      "label": "Line 6. Column (b). January. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2147",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 412.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_first_code_feb",
+      "label": "Line 6. Column (c). February. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2149",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 412.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_first_code_mar",
+      "label": "Line 6. Column (d). March. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2151",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 412.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_first_code_apr",
+      "label": "Line 6. Column (e). April. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2153",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 412.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_first_code_may",
+      "label": "Line 6. Column (f). May. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2155",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 412.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_first_code_jun",
+      "label": "Line 6. Column (g). June. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2157",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 412.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_first_code_jul",
+      "label": "Line 6. Column (h). July. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2159",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 412.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_first_code_aug",
+      "label": "Line 6. Column (i). August. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2161",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 412.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_first_code_sep",
+      "label": "Line 6. Column (j). September. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2163",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 412.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_first_code_oct",
+      "label": "Line 6. Column (k). October. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2165",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 412.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_first_code_nov",
+      "label": "Line 6. Column (l). November. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2167",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 412.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_first_code_dec",
+      "label": "Line 6. Column (m). December. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2169",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 412.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_last_name",
+      "label": "Line 6. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2145",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 389.6
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_full_year_code",
+      "label": "Line 6. Column (a). Full-year. Enter Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2146",
+      "position": {
+        "page": 1,
+        "x": 213,
+        "y": 389.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_second_code_jan",
+      "label": "Line 6. Column (b). January. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2148",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 390.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_second_code_feb",
+      "label": "Line 6. Column (c). February. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2150",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 390.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_second_code_mar",
+      "label": "Line 6. Column (d). March. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2152",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 390.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_second_code_apr",
+      "label": "Line 6. Column (e). April. Enter  second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2154",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 390.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_second_code_may",
+      "label": "Line 6. Column (f). May. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2156",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 390.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_second_code_jun",
+      "label": "Line 6. Column (g). June. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2158",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 390.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_second_code_jul",
+      "label": "Line 6. Column (h). July. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2160",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 390.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_second_code_aug",
+      "label": "Line 6. Column (i). August. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2162",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 390.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_second_code_sep",
+      "label": "Line 6. Column (j). September. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2164",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 390.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_second_code_oct",
+      "label": "Line 6. Column (k). October. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2166",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 390.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_second_code_nov",
+      "label": "Line 6. Column (l). November. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2168",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 390.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.6_second_code_dec",
+      "label": "Line 6. Column (m). December. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2170",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 390.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_first_name",
+      "label": "Line 7. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2171",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 367.52
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_middle_initial",
+      "label": "Line 7. Middle Initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2172",
+      "position": {
+        "page": 1,
+        "x": 189.6,
+        "y": 367.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_first_code_jan",
+      "label": "Line 7. Column (b). January. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2175",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 367.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_first_code_feb",
+      "label": "Line 7. Column (c). February. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2177",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 367.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_first_code_mar",
+      "label": "Line 7. Column (d). March. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2179",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 367.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_first_code_apr",
+      "label": "Line 7. Column (e). April. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2181",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 367.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_first_code_may",
+      "label": "Line 7. Column (f). May. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2183",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 367.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_first_code_jun",
+      "label": "Line 7. Column (g). June. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2185",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 367.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_first_code_jul",
+      "label": "Line 7. Column (h). July. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2187",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 367.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_first_code_aug",
+      "label": "Line 7. Column (i). August. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2189",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 367.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_first_code_sep",
+      "label": "Line 7. Column (j). September. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2191",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 367.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_first_code_oct",
+      "label": "Line 7. Column (k). October. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2193",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 367.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_first_code_nov",
+      "label": "Line 7. Column (l). November. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2195",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 367.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_first_code_dec",
+      "label": "Line 7. Column (m). December. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2197",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 367.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_last_name",
+      "label": "Line 7. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2173",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 344.72
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_full_year_code",
+      "label": "Line 7. Column (a). Full-year. Enter Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2174",
+      "position": {
+        "page": 1,
+        "x": 213,
+        "y": 344.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_second_code_jan",
+      "label": "Line 7. Column (b). January. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2176",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 345.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_second_code_feb",
+      "label": "Line 7. Column (c). February. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2178",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 345.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_second_code_mar",
+      "label": "Line 7. Column (d). March. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2180",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 345.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_second_code_apr",
+      "label": "Line 7. Column (e). April. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2182",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 345.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_second_code_may",
+      "label": "Line 7. Column (f). May. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2184",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 345.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_second_code_jun",
+      "label": "Line 7. Column (g). June. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2186",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 345.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_second_code_jul",
+      "label": "Line 7. Column (h). July. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2188",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 345.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_second_code_aug",
+      "label": "Line 7. Column (i). August. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2190",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 345.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_second_code_sep",
+      "label": "Line 7. Column (j). September. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2192",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 345.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_second_code_oct",
+      "label": "Line 7. Column (k). October. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2194",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 345.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_second_code_nov",
+      "label": "Line 7. Column (l). November. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2196",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 345.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.7_second_code_dec",
+      "label": "Line 7. Column (m). December. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2198",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 345.32
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_first_name",
+      "label": "Line 8 . First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2199",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 323.12
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_middle_initial",
+      "label": "Line 8. Middle Initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2200",
+      "position": {
+        "page": 1,
+        "x": 189.6,
+        "y": 323.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_first_code_jan",
+      "label": "Line 8. Column (b). January. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2203",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 323.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_first_code_feb",
+      "label": "Line 8. Column (c). February. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2205",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 323.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_first_code_mar",
+      "label": "Line 8. Column (d). March. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2207",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 323.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_first_code_apr",
+      "label": "Line 8. Column (e). April. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2209",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 323.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_first_code_may",
+      "label": "Line 8. Column (f). May. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2211",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 323.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_first_code_jun",
+      "label": "Line 8. Column (g). June. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2213",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 323.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_first_code_jul",
+      "label": "Line 8. Column (h). July. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2215",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 323.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_first_code_aug",
+      "label": "Line 8. Column (i). August. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2217",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 323.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_first_code_sep",
+      "label": "Line 8. Column (j). September. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2219",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 323.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_first_code_oct",
+      "label": "Line 8. Column (k). October. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2221",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 323.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_first_code_nov",
+      "label": "Line 8. Column (l). November. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2223",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 323.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_first_code_dec",
+      "label": "Line 8. Column (m). December. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2225",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 323.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_last_name",
+      "label": "Line 8. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2201",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 300.32
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_full_year_code",
+      "label": "Line 8. Column (a). Full-year. Enter Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2202",
+      "position": {
+        "page": 1,
+        "x": 213,
+        "y": 300.12
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_second_code_jan",
+      "label": "Line 8. Column (b). January. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2204",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 300.92
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_second_code_feb",
+      "label": "Line 8. Column (c). February. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2206",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 300.92
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_second_code_mar",
+      "label": "Line 8. Column (d). March. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2208",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 300.92
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_second_code_apr",
+      "label": "Line 8. Column (e). April. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2210",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 300.92
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_second_code_may",
+      "label": "Line 8. Column (f). May. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2212",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 300.92
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_second_code_jun",
+      "label": "Line 8. Column (g). June. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2214",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 300.92
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_second_code_jul",
+      "label": "Line 8. Column (h). July. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2216",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 300.92
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_second_code_aug",
+      "label": "Line 8. Column (i). August. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2218",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 300.92
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_second_code_sep",
+      "label": "Line 8. Column (j). September. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2220",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 300.92
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_second_code_oct",
+      "label": "Line 8. Column (k). October. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2222",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 300.92
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_second_code_nov",
+      "label": "Line 8. Column (l). November. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2224",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 300.92
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.8_second_code_dec",
+      "label": "Line 8. Column (m). December. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2226",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 300.92
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_first_name",
+      "label": "Line 9. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2227",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 278.8
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_middle_initial",
+      "label": "Line 9. Middle Initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2228",
+      "position": {
+        "page": 1,
+        "x": 189.6,
+        "y": 278.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_first_code_jan",
+      "label": "Line 9. Column (b). January. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2231",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 278.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_first_code_feb",
+      "label": "Line 9. Column (c). February. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2233",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 278.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_first_code_mar",
+      "label": "Line 9. Column (d). March. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2235",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 278.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_first_code_apr",
+      "label": "Line 9. Column (e). April. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2237",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 278.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_first_code_may",
+      "label": "Line 9. Column (f). May. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2239",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 278.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_first_code_jun",
+      "label": "Line 9. Column (g). June. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2241",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 278.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_first_code_jul",
+      "label": "Line 9. Column (h). July. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2243",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 278.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_first_code_aug",
+      "label": "Line 9. Column (i). August. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2245",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 278.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_first_code_sep",
+      "label": "Line 9. Column (j). September. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2247",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 278.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_first_code_oct",
+      "label": "Line 9. Column (k). October. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2249",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 278.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_first_code_nov",
+      "label": "Line 9. Column (l). November. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2251",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 278.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_first_code_dec",
+      "label": "Line 9. Column (m). December. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2253",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 278.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_last_name",
+      "label": "Line 9. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2229",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 256
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_full_year_code",
+      "label": "Line 9. Column (a). Full-year. Enter Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2230",
+      "position": {
+        "page": 1,
+        "x": 213,
+        "y": 255.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_second_code_jan",
+      "label": "Line 9. Column (b). January. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2232",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 256.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_second_code_feb",
+      "label": "Line 9. Column (c). February. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2234",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 256.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_second_code_mar",
+      "label": "Line 9. Column (d). March. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2236",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 256.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_second_code_apr",
+      "label": "Line 9. Column (e). April. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2238",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 256.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_second_code_may",
+      "label": "Line 9. Column (f). May. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2240",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 256.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_second_code_jun",
+      "label": "Line 9. Column (g). June. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2242",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 256.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_second_code_jul",
+      "label": "Line 9. Column (h). July. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2244",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 256.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_second_code_aug",
+      "label": "Line 9. Column (i). August. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2246",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 256.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_second_code_sep",
+      "label": "Line 9. Column (j). September. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2248",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 256.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_second_code_oct",
+      "label": "Line 9. Column (k). October. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2250",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 256.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_second_code_nov",
+      "label": "Line 9. Column (l). November. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2252",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 256.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.9_second_code_dec",
+      "label": "Line 9. Column (m). December. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2254",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 256.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_first_name",
+      "label": "Line 10. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2255",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 234.2
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_middle_initial",
+      "label": "Line 10. Middle Initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2256",
+      "position": {
+        "page": 1,
+        "x": 189.6,
+        "y": 234.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_first_code_jan",
+      "label": "Line 10. Column (b). January. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2259",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 234.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_first_code_feb",
+      "label": "Line 10. Column (c). February. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2261",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 234.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_first_code_mar",
+      "label": "Line 10. Column (d). March. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2263",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 234.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_first_code_apr",
+      "label": "Line 10 . Column (e). April. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2265",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 234.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_first_code_may",
+      "label": "Line 10. Column (f). May. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2267",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 234.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_first_code_jun",
+      "label": "Line 10. Column (g). June. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2269",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 234.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_first_code_jul",
+      "label": "Line 10. Column (h). July. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2271",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 234.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_first_code_aug",
+      "label": "Line 10. Column (i). August. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2273",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 234.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_first_code_sep",
+      "label": "Line 10. Column (j). September. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2275",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 234.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_first_code_oct",
+      "label": "Line 10. Column (k). October. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2277",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 234.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_first_code_nov",
+      "label": "Line 10. Column (l). November. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2279",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 234.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_first_code_dec",
+      "label": "Line 10. Column (m). December. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2281",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 234.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_last_name",
+      "label": "Line 10. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2257",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 212
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_full_year_code",
+      "label": "Line 10. Column (a). Full-year. Enter Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2258",
+      "position": {
+        "page": 1,
+        "x": 213,
+        "y": 211.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_second_code_jan",
+      "label": "Line 10. Column (b). January. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2260",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 212
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_second_code_feb",
+      "label": "Line 10. Column (c). February. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2262",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 212
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_second_code_mar",
+      "label": "Line 10. Column (d). March. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2264",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 212
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_second_code_apr",
+      "label": "Line 10. Column (e). April. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2266",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 212
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_second_code_may",
+      "label": "Line 10. Column (f). May. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2268",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 212
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_second_code_jun",
+      "label": "Line 10. Column (g). June. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2270",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 212
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_second_code_jul",
+      "label": "Line 10. Column (h). July. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2272",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 212
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_second_code_aug",
+      "label": "Line 10. Column (i). August. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2274",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 212
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_second_code_sep",
+      "label": "Line 10. Column (j). September. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2276",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 212
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_second_code_oct",
+      "label": "Line 10. Column (k). October. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2278",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 212
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_second_code_nov",
+      "label": "Line 10. Column (l). November. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2280",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 212
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.10_second_code_dec",
+      "label": "Line 10. Column (m). December. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2282",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 212
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_first_name",
+      "label": "Line 11. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2283",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 189.8
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_middle_initial",
+      "label": "Line 11. Middle Initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2284",
+      "position": {
+        "page": 1,
+        "x": 189.6,
+        "y": 189.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_first_code_jan",
+      "label": "Line 11. Column (b). January. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2287",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 189.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_first_code_feb",
+      "label": "Line 11. Column (c). February. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2289",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 189.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_first_code_mar",
+      "label": "Line 11. Column (d). March. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2291",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 189.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_first_code_apr",
+      "label": "Line 11. Column (e). April. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2293",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 189.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_first_code_may",
+      "label": "Line 11. Column (f). May. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2295",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 189.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_first_code_jun",
+      "label": "Line 11. Column (g). June. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2297",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 189.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_first_code_jul",
+      "label": "Line 11. Column (h). July. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2299",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 189.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_first_code_aug",
+      "label": "Line 11. Column (i). August. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2301",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 189.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_first_code_sep",
+      "label": "Line 11. Column (j). September. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2303",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 189.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_first_code_oct",
+      "label": "Line 11. Column (k). October. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2305",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 189.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_first_code_nov",
+      "label": "Line 11. Column (l). November. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2307",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 189.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_first_code_dec",
+      "label": "Line 11. Column (m). December. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2309",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 189.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_last_name",
+      "label": "Line 11. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2285",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 167.6
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_full_year_code",
+      "label": "Line 11. Column (a). Full-year. Enter Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2286",
+      "position": {
+        "page": 1,
+        "x": 213,
+        "y": 166.8
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_second_code_jan",
+      "label": "Line 11. Column (b). January. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2288",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 167.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_second_code_feb",
+      "label": "Line 11. Column (c). February. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2290",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 167.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_second_code_mar",
+      "label": "Line 11. Column (d). March. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2292",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 167.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_second_code_apr",
+      "label": "Line 11. Column (e). April. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2294",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 167.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_second_code_may",
+      "label": "Line 11. Column (f). May. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2296",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 167.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_second_code_jun",
+      "label": "Line 11. Column (g). June. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2298",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 167.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_second_code_jul",
+      "label": "Line 11. Column (h). July. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2300",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 167.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_second_code_aug",
+      "label": "Line 11. Column (i). August. Enter  second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2302",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 167.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_second_code_sep",
+      "label": "Line 11. Column (j). September. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2304",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 167.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_second_code_oct",
+      "label": "Line 11. Column (k). October. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2306",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 167.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_second_code_nov",
+      "label": "Line 11. Column (l). November. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2308",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 167.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.11_second_code_dec",
+      "label": "Line 11. Column (m). December. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2310",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 167.6
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_first_name",
+      "label": "Line 12. First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2311",
+      "position": {
+        "page": 1,
+        "x": 61.2,
+        "y": 145.4
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_middle_initial",
+      "label": "Line 12. Middle Initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2312",
+      "position": {
+        "page": 1,
+        "x": 189.6,
+        "y": 145.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_first_code_jan",
+      "label": "Line 12. Column (b). January. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2315",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 145.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_first_code_feb",
+      "label": "Line 12. Column (c). February. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2317",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 145.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_first_code_mar",
+      "label": "Line 12. Column (d). March. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2319",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 145.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_first_code_apr",
+      "label": "Line 12. Column (e). April. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2321",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 145.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_first_code_may",
+      "label": "Line 12. Column (f). May. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2323",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 145.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_first_code_jun",
+      "label": "Line 12. Column (g). June. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2325",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 145.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_first_code_jul",
+      "label": "Line 12. Column (h). July. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2327",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 145.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_first_code_aug",
+      "label": "Line 12. Column (i). August. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2329",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 145.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_first_code_sep",
+      "label": "Line 12. Column (j). September. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2331",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 145.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_first_code_oct",
+      "label": "Line 12. Column (k). October. Enter first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2333",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 145.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_first_code_nov",
+      "label": "Line 12. Column (l). November. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2335",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 145.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_first_code_dec",
+      "label": "Line 12. Column (m). December. Enter  first Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2337",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 145.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_last_name",
+      "label": "Line 12. Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2313",
+      "position": {
+        "page": 1,
+        "x": 62.4,
+        "y": 123.6
+      }
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_full_year_code",
+      "label": "Line 12. Column (a). Full-year. Enter Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2314",
+      "position": {
+        "page": 1,
+        "x": 213,
+        "y": 122.4
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_second_code_jan",
+      "label": "Line 12. Column (b). January. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2316",
+      "position": {
+        "page": 1,
+        "x": 249,
+        "y": 123.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_second_code_feb",
+      "label": "Line 12. Column (c). February. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2318",
+      "position": {
+        "page": 1,
+        "x": 277.2,
+        "y": 123.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_second_code_mar",
+      "label": "Line 12. Column (d). March. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2320",
+      "position": {
+        "page": 1,
+        "x": 305.4,
+        "y": 123.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_second_code_apr",
+      "label": "Line 12. Column (e). April. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2322",
+      "position": {
+        "page": 1,
+        "x": 333.6,
+        "y": 123.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_second_code_may",
+      "label": "Line 12. Column (f). May. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2324",
+      "position": {
+        "page": 1,
+        "x": 361.2,
+        "y": 123.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_second_code_jun",
+      "label": "Line 12. Column (g). June. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2326",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 123.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_second_code_jul",
+      "label": "Line 12. Column (h). July. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2328",
+      "position": {
+        "page": 1,
+        "x": 417,
+        "y": 123.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_second_code_aug",
+      "label": "Line 12. Column (i). August. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2330",
+      "position": {
+        "page": 1,
+        "x": 445.2,
+        "y": 123.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_second_code_sep",
+      "label": "Line 12. Column (j). September. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2332",
+      "position": {
+        "page": 1,
+        "x": 473.4,
+        "y": 123.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_second_code_oct",
+      "label": "Line 12. Column (k). October. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2334",
+      "position": {
+        "page": 1,
+        "x": 501,
+        "y": 123.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_second_code_nov",
+      "label": "Line 12. Column (l). November. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2336",
+      "position": {
+        "page": 1,
+        "x": 529.2,
+        "y": 123.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part3.12_second_code_dec",
+      "label": "Line 12. Column (m). December. Enter second Code.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2338",
+      "position": {
+        "page": 1,
+        "x": 557,
+        "y": 123.2
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3853.1.part4.1_shared_responsibility_penalty",
+      "label": "Part 4. Individual Shared Responsibility Penalty. Line 1 . Your Individual Shared Responsibility Penalty. Enter on Form 540, line 92; Form 540NR, line 91; or Form 540 2EZ, line 27 . See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3853 Form 2339",
+      "position": {
+        "page": 1,
+        "x": 483.6,
+        "y": 88.52
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3853/blank.pdf",
+    "ingestedAt": "2026-11-20T15:43:44.419Z",
+    "totalFields": 448,
+    "skipped": 0,
+    "catalogEntries": 448
+  }
+}

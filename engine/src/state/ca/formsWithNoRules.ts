@@ -1,0 +1,78 @@
+/*
+ * The California forms that have a catalog and no rules yet. Each has a FilingInfo
+ * type with no slots and a resolver that reads only its must-file decision, so
+ * they are joined here and filingInfo.ts takes them as one.
+ */
+
+import type { BaseFilingInfo } from "../../filingInfo.js";
+import type { ResolverInputs } from "../../resolverInputs.js";
+import type { Form3461FilingInfo } from "./3461/filingInfo.js";
+import { resolve3461Info } from "./3461/resolveInfo.js";
+import type { Form3506FilingInfo } from "./3506/filingInfo.js";
+import { resolve3506Info } from "./3506/resolveInfo.js";
+import type { Form3507FilingInfo } from "./3507/filingInfo.js";
+import { resolve3507Info } from "./3507/resolveInfo.js";
+import type { Form3541FilingInfo } from "./3541/filingInfo.js";
+import { resolve3541Info } from "./3541/resolveInfo.js";
+import type { Form3800CaFilingInfo } from "./3800-ca/filingInfo.js";
+import { resolve3800CaInfo } from "./3800-ca/resolveInfo.js";
+import type { Form3804CRFilingInfo } from "./3804-cr/filingInfo.js";
+import { resolve3804CRInfo } from "./3804-cr/resolveInfo.js";
+import type { Form3805VFilingInfo } from "./3805v/filingInfo.js";
+import { resolve3805VInfo } from "./3805v/resolveInfo.js";
+import type { Form3805ZFilingInfo } from "./3805z/filingInfo.js";
+import { resolve3805ZInfo } from "./3805z/resolveInfo.js";
+import type { Form3807FilingInfo } from "./3807/filingInfo.js";
+import { resolve3807Info } from "./3807/resolveInfo.js";
+import type { Form3809FilingInfo } from "./3809/filingInfo.js";
+import { resolve3809Info } from "./3809/resolveInfo.js";
+import type { Form3853FilingInfo } from "./3853/filingInfo.js";
+import { resolve3853Info } from "./3853/resolveInfo.js";
+import type { Form3913FilingInfo } from "./3913/filingInfo.js";
+import { resolve3913Info } from "./3913/resolveInfo.js";
+import type { Form5805FFilingInfo } from "./5805f/filingInfo.js";
+import { resolve5805FInfo } from "./5805f/resolveInfo.js";
+import type { Form5870AFilingInfo } from "./5870a/filingInfo.js";
+import { resolve5870AInfo } from "./5870a/resolveInfo.js";
+import type { ScheduleG1FilingInfo } from "./schedule-g-1/filingInfo.js";
+import { resolveScheduleG1Info } from "./schedule-g-1/resolveInfo.js";
+import type { ScheduleXFilingInfo } from "./schedule-x/filingInfo.js";
+import { resolveScheduleXInfo } from "./schedule-x/resolveInfo.js";
+
+export type CaliforniaFormsWithNoRulesFilingInfo = ScheduleG1FilingInfo &
+  ScheduleXFilingInfo &
+  Form3461FilingInfo &
+  Form3506FilingInfo &
+  Form3507FilingInfo &
+  Form3541FilingInfo &
+  Form3800CaFilingInfo &
+  Form3804CRFilingInfo &
+  Form3805VFilingInfo &
+  Form3805ZFilingInfo &
+  Form3807FilingInfo &
+  Form3809FilingInfo &
+  Form3853FilingInfo &
+  Form3913FilingInfo &
+  Form5805FFilingInfo &
+  Form5870AFilingInfo;
+
+export const CALIFORNIA_FORMS_WITH_NO_RULES_RESOLVERS: ReadonlyArray<
+  (inputs: ResolverInputs) => BaseFilingInfo
+> = [
+  resolveScheduleG1Info,
+  resolveScheduleXInfo,
+  resolve3461Info,
+  resolve3506Info,
+  resolve3507Info,
+  resolve3541Info,
+  resolve3800CaInfo,
+  resolve3804CRInfo,
+  resolve3805VInfo,
+  resolve3805ZInfo,
+  resolve3807Info,
+  resolve3809Info,
+  resolve3853Info,
+  resolve3913Info,
+  resolve5805FInfo,
+  resolve5870AInfo,
+];

@@ -1,0 +1,618 @@
+{
+  "formId": "form-3541",
+  "fieldCount": 68,
+  "entries": [
+    {
+      "fieldId": "form-3541.0.header.credit_owner_id_number",
+      "widgets": [
+        {
+          "widgetName": "Owner of credit, C A Corporation number, F E I N (12 digits)",
+          "text": "T-1981F"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.header.credit_owner_id_type",
+      "widgets": [
+        {
+          "widgetName": "Owner of credit, Select Entity type",
+          "text": "C A Corporation number."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.header.credit_owner_name",
+      "widgets": [
+        {
+          "widgetName": "Name of owner of credit",
+          "text": "T-1SE6P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.header.credit_owner_sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "Owner of credit, C A Secretary of State (S O S) file number (12 digits)",
+          "text": "T-QLO8I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.header.name_on_return",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on your California tax return",
+          "text": "T-17UC2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.header.new_credit",
+      "widgets": [
+        {
+          "widgetName": "New California Motion Picture and Television Production Credit. Check this box for certificate number(s) 5000-6999",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.header.original_credit",
+      "widgets": [
+        {
+          "widgetName": "Original California Motion Picture and Television Production Credit. Check this box for certificate number(s) 1000-4999",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.header.program_3_0_credit",
+      "widgets": [
+        {
+          "widgetName": "Program 3.0 California Motion Picture and Television Production Credit. Check this box for certificate number(s) 7000-7999",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.header.program_4_0_credit",
+      "widgets": [
+        {
+          "widgetName": "Program 4.0 California Motion Picture and Television Production Credit. Check this box for certificate number(s) 8200 and higher",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.header.refundable_program_4_0_election",
+      "widgets": [
+        {
+          "widgetName": "Refundable Program 4.0 Election. Check this box if making the irrevocable election for program 4.0 credit, that exceeds tax, to be refundable. Attach this completed form with the taxpayer's original timely filed return",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.header.sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "C A Secretary of State (SOS) file number (12 digits)",
+          "text": "T-S1F2H"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.header.soundstage_filming_credit",
+      "widgets": [
+        {
+          "widgetName": "Soundstage Filming Tax Credit. Check this box for certificate number(s) 8000-8199",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.header.taxpayer_id_number",
+      "widgets": [
+        {
+          "widgetName": "S S N or I T I N, C A Corporation number, F E I N (12 digits)",
+          "text": "T-1ROJF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.header.taxpayer_id_type",
+      "widgets": [
+        {
+          "widgetName": "Select Entity type",
+          "text": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N)."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.line.1_current_year_generated_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 1. Current year generated credit. See instructions",
+          "text": "3,986"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.line.10_total_credit_sold_assigned_applied",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Total credit sold, assigned, passed through, or applied against sales and use taxes. Add line 6 through line 9",
+          "text": "1,351"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.line.11_total_available_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 11. Total available credit. Subtract line 10 from any entry made on line 1, line 2, line 3, line 4a, or line 5a",
+          "text": "3,462"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.line.2_credit_from_passthrough_entities",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Credit received from pass-through entities (Schedule K-1). See instructions",
+          "text": "8,745"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.line.3_credit_purchased_from_entities",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Credit purchased from other entities. See instructions",
+          "text": "6,684"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.line.4a_credit_from_affiliated_corporations",
+      "widgets": [
+        {
+          "widgetName": "Line 4a. Credit received from affiliated corporations. See instructions",
+          "text": "1,684"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.line.4b_assignor_name",
+      "widgets": [
+        {
+          "widgetName": "Line 4b. Assignor name",
+          "text": "T-120RG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.line.4c_assignor_id_number",
+      "widgets": [
+        {
+          "widgetName": "Line 4c. Assignor C A corporation no., F E I N, or C A S O S no",
+          "text": "T-L4AI9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.line.5a_credit_carryover_prior_year",
+      "widgets": [
+        {
+          "widgetName": "Line 5a. Credit carryover from prior year",
+          "text": "7,037"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.line.5b_assignable_credit_carryover",
+      "widgets": [
+        {
+          "widgetName": "Line 5b. Assignable credit carryover from prior year. See instructions",
+          "text": "5,354"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.line.6_credit_sold_to_entities",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Credit sold to other entities. See instructions",
+          "text": "4,033"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.line.7_credit_assigned_to_affiliates",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Credit assigned to affiliated corporations from Part III, line 19, column (c). See instructions",
+          "text": "5,979"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.line.8_credit_passed_through_k1",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Credit passed through on Schedule K-1. See instructions",
+          "text": "1,197"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.line.9_credit_applied_sales_use_tax",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Credit applied against sales and use taxes. See instructions",
+          "text": "7,468"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.line.a_year_certificate_issued",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line A. Year certificate issued",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.line.b_credit_certificate_number",
+      "widgets": [
+        {
+          "widgetName": "Line B. Credit certificate number",
+          "text": "T-HOJ7S"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.line.c_copyright_registration_number",
+      "widgets": [
+        {
+          "widgetName": "Line C. Copyright registration number",
+          "text": "T-1SWFC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.12a_credit_claimed",
+      "widgets": [
+        {
+          "widgetName": "Part II, Line 12a. Credit claimed. Enter the amount of the nonrefundable credit claimed on the current year tax return. (Do not include any assigned credit claimed on form FTB 3544, Part B.)",
+          "text": "8,007"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.12b_total_credit_assigned",
+      "widgets": [
+        {
+          "widgetName": "Line 12b. Total credit assigned. Enter the total amount from form FTB 3544, Part A, column (g). If you are not a corporation, enter 0",
+          "text": "2,681"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.12c_credit_elected_refundable_future",
+      "widgets": [
+        {
+          "widgetName": "Line 12c. Credit amount to be elected as refundable in future years. See instructions",
+          "text": "4,456"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.12d_program_4_credit_elected_refundable",
+      "widgets": [
+        {
+          "widgetName": "Line 12d. Total available program 4.0 credit elected as refundable. Enter the amount from Part IV, line 22",
+          "text": "8,243"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.13_credit_carryover_future_years",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Credit carryover available for future years. Add lines 12a, 12b, 12c, and 12d, subtract the result from line 11",
+          "text": "6,897"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.14_total_credit_available_assignment",
+      "widgets": [
+        {
+          "widgetName": "Part III, Line 14. Total credit available for assignment, before applying tax liability limit. Add line 1, line 2, and line 5b from Part I",
+          "text": "3,676"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.15_tax",
+      "widgets": [
+        {
+          "widgetName": "Line 15. Tax. If you are claiming program 3.0, soundstage filming, or program 4.0 credit, enter 0. See instructions",
+          "text": "9,942"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.16_credit_available_affiliated_corporations",
+      "widgets": [
+        {
+          "widgetName": "Line 16. Credit available for assigning to affiliated corporations. Subtract line 15 from line 14, enter the result here and on line 17, column (d). If the result is '0' or less, enter '0'. See instructions",
+          "text": "4,511"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.17_credit_available_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 17. (d) Credit available for assignment",
+          "text": "2,816"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row1_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (a) Assignee name (1):",
+          "text": "T-1MS7S"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row1_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (b) Assignee C A corporation number, F E I N, or C A S O S number (12 digits) (1)",
+          "text": "T-11DLY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row1_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (c) Amount of credit assigned (1)",
+          "text": "1,529"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row1_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (d) Credit available for assignment (1)",
+          "text": "6,981"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row2_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (a) Assignee name (2):",
+          "text": "T-1DFG1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row2_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (b) Assignee C A corporation number, F E I N, or C A S O S number (12 digits) (2)",
+          "text": "T-1BGMD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row2_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (c) Amount of credit assigned (2)",
+          "text": "9,714"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row2_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (d) Credit available for assignment (2)",
+          "text": "8,376"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row3_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (a) Assignee name (3):",
+          "text": "T-1AII6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row3_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (b) Assignee C A corporation number, F E I N, or C A S O S number (12 digits) (3)",
+          "text": "T-1EMQ9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row3_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (c) Amount of credit assigned (3)",
+          "text": "6,564"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row3_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (d) Credit available for assignment (3)",
+          "text": "5,208"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row4_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (a) Assignee name (4):",
+          "text": "T-EYODV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row4_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (b) Assignee C A corporation number, F E I N, or C A S O S number (12 digits) (4)",
+          "text": "T-D1F3C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row4_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (c) Amount of credit assigned (4)",
+          "text": "4,882"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row4_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (d) Credit available for assignment (4)",
+          "text": "5,454"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row5_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (a) Assignee name (5):",
+          "text": "T-5H5YI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row5_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (b) Assignee C A corporation number, F E I N, or C A S O S number (12 digits) (5)",
+          "text": "T-12D2F"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row5_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (c) Amount of credit assigned (5)",
+          "text": "6,424"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row5_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (d) Credit available for assignment (5)",
+          "text": "9,088"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.19_total_credit_assigned_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 19. Total credit assigned. Add the amounts in column (c). Enter the total here and on Part I, line 7, (c) Amount of credit assigned",
+          "text": "9,649"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.20_program_4_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "Part IV, Line 20. 2025 Program 4.0 credit amount. Enter the amount from Part I, line 1, 2, or 4a",
+          "text": "1,196"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.21_ca_income_tax_liability",
+      "widgets": [
+        {
+          "widgetName": "Line 21. Enter your California income tax liability for the purpose of the program 4.0 refundable credit calculation. See instructions",
+          "text": "5,840"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.22_available_credit_elected_refundable",
+      "widgets": [
+        {
+          "widgetName": "Line 22. Available 2025 program 4.0 credit that can be elected as refundable. Subtract line 21 from line 20. Enter on Part II, line 12d. If zero or less, stop. You do not qualify to elect a refundable credit",
+          "text": "2,072"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.23_total_refundable_amount",
+      "widgets": [
+        {
+          "widgetName": "Line 23. Multiply line 22 by 90%. This is your total refundable amount",
+          "text": "3,109"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.24_annual_refundable_amount",
+      "widgets": [
+        {
+          "widgetName": "Line 24. Multiply line 23 by 20%. This is your annual refundable amount available for each year of your refundable period. See instructions",
+          "text": "8,741"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.25_refundable_credits_claimed",
+      "widgets": [
+        {
+          "widgetName": "Line 25. Refundable program 4.0 credits claimed in 2025. Enter the credit amount on Form 540 line 74; Form 540NR line 84: Form 541 line 33; Form 100 line 35; Form 100W line 35; Form 100X line 27; or Form 109 line 18. This amount may be less than the amount on line 24 if your credit is limited by the $5,000,000 credit limitation. See instructions",
+          "text": "4,210"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.1.line.26_refundable_credit_carryover",
+      "widgets": [
+        {
+          "widgetName": "Line 26. Refundable credit carryover. Subtract line 25 from line 24. See instructions",
+          "text": "7,949"
+        }
+      ]
+    }
+  ]
+}
