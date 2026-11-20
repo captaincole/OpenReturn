@@ -124,6 +124,8 @@ npm run test:unit    # engine + canon + agent unit tests, then the web app's (we
 npm run typecheck    # tsc over engine + builder + canon + agent
 npm run coverage     # golden suite under c8; rewrites docs/coverage.md (fields supported, branches, lines, by form)
                      # and the README "Form support" table (by jurisdiction and tax year)
+npm run form-graph   # runs the scenarios; rewrites docs/form-graph.md and .json (which form reads which form,
+                     # and the fields that no scenario has checked)
 npm run e2e          # Playwright E2E through the UI + real model (stop dev:all first; see web/e2e/README.md)
 npm run e2e:madison  # the same for Madison: her documents, then the Deductions tab to its close
 npm run e2e:access   # an instance behind Cloudflare Access: two guests, the notice, separate data; no model
