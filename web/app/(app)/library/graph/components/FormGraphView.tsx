@@ -160,13 +160,16 @@ function FormCard(props: {
   box: Box;
   selected: boolean;
   dimmed: boolean;
+  /* Where a selected form goes when it is selected again: the graph with no form selected. */
+  clearHref: string;
   onActive: (formId: string | null) => void;
 }) {
   const { node, x, y } = props.box;
   const formId = node.form.formId;
   return (
     <Link
-      href={cardHref(node)}
+      href={props.selected ? props.clearHref : cardHref(node)}
+      aria-current={props.selected ? "true" : undefined}
       scroll={false}
       aria-label={cardLabel(node)}
       onMouseEnter={() => props.onActive(formId)}
@@ -329,6 +332,7 @@ export function FormGraphView(props: {
   missing: GraphMissingForm[];
   outside?: GraphOutside;
   selected?: string;
+  clearHref: string;
 }) {
   const [hovered, setHovered] = useState<string | null>(null);
   const placed = useMemo(
@@ -381,6 +385,7 @@ export function FormGraphView(props: {
               key={idOf(box)}
               box={box}
               selected={idOf(box) === props.selected}
+              clearHref={props.clearHref}
               dimmed={active !== null && idOf(box) !== active && !near.has(idOf(box))}
               onActive={setHovered}
             />

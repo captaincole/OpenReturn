@@ -115,6 +115,7 @@ function JurisdictionSection(props: {
             }
           }
           selected={selected}
+          clearHref={viewHref(part.jurisdiction)}
         />
       </div>
     </div>
