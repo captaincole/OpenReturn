@@ -1,0 +1,873 @@
+{
+  "form": {
+    "formId": "form-8801",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 8801 — Credit for Prior Year Minimum Tax"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8801.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-8801.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 684
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8801.0.line.1_prior_year_form_6251_lines_1_2e",
+      "label": "Line 1 — Combine lines 1 and 2e of your 2024 Form 6251",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 648
+      }
+    },
+    {
+      "fieldId": "form-8801.0.line.2_exclusion_item_adjustments_preferences",
+      "label": "Line 2 — Enter adjustments and preferences treated as exclusion items",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "form-8801.0.line.3_minimum_tax_credit_nol_deduction",
+      "label": "Line 3 — Minimum tax credit net operating loss deduction",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 508,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "form-8801.0.line.4_combine_lines_1_2_3",
+      "label": "Line 4 — Combine lines 1, 2, and 3. If zero or less, enter -0- here and on line 15 and go to Part II",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 564.001
+      }
+    },
+    {
+      "fieldId": "form-8801.0.line.5_exemption_amount",
+      "label": "Line 5 — Enter: $133,300 if married filing jointly or qualifying surviving spouse for 2024; $85,700 if single or head of household for 2024; or $66,650 if married filing separately for 2024. Estates and trusts, enter $29,900",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "form-8801.0.line.6_exemption_phaseout_threshold",
+      "label": "Line 6 — Enter: $1,218,700 if married filing jointly or qualifying surviving spouse for 2024; $609,350 if single, head of household, or married filing separately for 2024. Estates and trusts, enter $99,700",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 480.002
+      }
+    },
+    {
+      "fieldId": "form-8801.0.line.7_amount_over_phaseout_threshold",
+      "label": "Line 7 — Subtract line 6 from line 4. If zero or less, enter -0- here and on line 8 and go to line 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8801.0.line.8_exemption_reduction",
+      "label": "Line 8 — Multiply line 7 by 25% (0.25)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "form-8801.0.line.9_reduced_exemption",
+      "label": "Line 9 — Subtract line 8 from line 5. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "form-8801.0.line.10_amount_after_exemption",
+      "label": "Line 10 — Subtract line 9 from line 4. If zero or less, enter -0- here and on line 15 and go to Part II",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 372.002
+      }
+    },
+    {
+      "fieldId": "form-8801.0.line.11_tax_on_line_10",
+      "label": "Line 11 — If for 2024 you filed Form 2555, see instructions for the amount to enter. If for 2024 you reported capital gain distributions, qualified dividends, or a gain on both lines 15 and 16 of Schedule D (Form 1040), complete Part III of Form 8801 and enter the amount from line 55 here. All others: If line 10 is $232,600 or less ($116,300 or less if married filing separately for 2024), multiply line 10 by 26% (0.26). Otherwise, multiply line 10 by 28% (0.28) and subtract $4,652 ($2,326 if married filing separately for 2024) from the result",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8801.0.line.12_minimum_tax_foreign_tax_credit",
+      "label": "Line 12 — Minimum tax foreign tax credit on exclusion items",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 228.002
+      }
+    },
+    {
+      "fieldId": "form-8801.0.line.13_tentative_minimum_tax_exclusion_items",
+      "label": "Line 13 — Tentative minimum tax on exclusion items. Subtract line 12 from line 11",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 204.001
+      }
+    },
+    {
+      "fieldId": "form-8801.0.line.14_prior_year_form_6251_line_10",
+      "label": "Line 14 — Enter the amount from your 2024 Form 6251, line 10, or 2024 Schedule I (Form 1041), line 53",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 180
+      }
+    },
+    {
+      "fieldId": "form-8801.0.line.15_net_minimum_tax_exclusion_items",
+      "label": "Line 15 — Net minimum tax on exclusion items. Subtract line 14 from line 13. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 156.002
+      }
+    },
+    {
+      "fieldId": "form-8801.1.line.16_prior_year_tentative_minimum_tax_base",
+      "label": "Line 16 — Enter the amount from your 2024 Form 6251, line 11, or 2024 Schedule I (Form 1041), line 54",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 708.001
+      }
+    },
+    {
+      "fieldId": "form-8801.1.line.17_amount_from_line_15",
+      "label": "Line 17 — Enter the amount from line 15",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-8801.1.line.18_line_16_minus_line_17",
+      "label": "Line 18 — Subtract line 17 from line 16. If less than zero, enter as a negative amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 660.002
+      }
+    },
+    {
+      "fieldId": "form-8801.1.line.19_prior_year_credit_carryforward",
+      "label": "Line 19 — 2024 credit carryforward. Enter the amount from your 2024 Form 8801, line 26",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "form-8801.1.line.20_unallowed_electric_vehicle_credit",
+      "label": "Line 20 — Enter your 2024 unallowed qualified electric vehicle credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "form-8801.1.line.21_combine_lines_18_through_20",
+      "label": "Line 21 — Combine lines 18 through 20. If zero or less, stop here and see the instructions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "form-8801.1.line.22_regular_tax_minus_credits",
+      "label": "Line 22 — Enter your 2025 regular income tax liability minus allowable credits",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 564.001
+      }
+    },
+    {
+      "fieldId": "form-8801.1.line.23_current_year_tentative_minimum_tax",
+      "label": "Line 23 — Enter the amount from your 2025 Form 6251, line 9, or 2025 Schedule I (Form 1041), line 52",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 540
+      }
+    },
+    {
+      "fieldId": "form-8801.1.line.24_line_22_minus_line_23",
+      "label": "Line 24 — Subtract line 23 from line 22. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "form-8801.1.line.25_minimum_tax_credit",
+      "label": "Line 25 — Minimum tax credit. Enter the smaller of line 21 or line 24",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 480.002
+      }
+    },
+    {
+      "fieldId": "form-8801.1.line.26_credit_carryforward_next_year",
+      "label": "Line 26 — Credit carryforward to 2026. Subtract line 25 from line 21",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-8801.2.line.27_amount_from_line_10",
+      "label": "Line 27 — Enter the amount from Form 8801, line 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_1[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 660.002
+      }
+    },
+    {
+      "fieldId": "form-8801.2.line.28_qualified_dividends_worksheet_amount",
+      "label": "Line 28 — Enter the amount from line 4 of your 2024 Qualified Dividends and Capital Gain Tax Worksheet, the amount from line 13 of your 2024 Schedule D Tax Worksheet, or the amount from line 26 of the 2024 Schedule D (Form 1041), whichever applies (as refigured for the AMT, if necessary)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_2[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "form-8801.2.line.29_unrecaptured_section_1250_gain",
+      "label": "Line 29 — Enter the amount from line 19 of your 2024 Schedule D (Form 1040), or line 18b, column (2), of the 2024 Schedule D (Form 1041)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_3[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 552.002
+      }
+    },
+    {
+      "fieldId": "form-8801.2.line.30_smaller_of_sum_or_worksheet",
+      "label": "Line 30 — Add lines 28 and 29, and enter the smaller of that result or the amount from line 10 of your 2024 Schedule D Tax Worksheet",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_4[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-8801.2.line.31_smaller_of_line_27_or_30",
+      "label": "Line 31 — Enter the smaller of line 27 or line 30",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_5[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "form-8801.2.line.32_subtract_line_31_from_27",
+      "label": "Line 32 — Subtract line 31 from line 27",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_6[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 504
+      }
+    },
+    {
+      "fieldId": "form-8801.2.line.33_tax_at_26_or_28_percent",
+      "label": "Line 33 — If line 32 is $232,600 or less ($116,300 or less if married filing separately for 2024), multiply line 32 by 26% (0.26). Otherwise, multiply line 32 by 28% (0.28) and subtract $4,652 ($2,326 if married filing separately for 2024) from the result",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_7[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8801.2.line.34_zero_percent_rate_threshold",
+      "label": "Line 34 — Enter: $94,050 if married filing jointly or qualifying surviving spouse for 2024, $47,025 if single or married filing separately for 2024, $63,000 if head of household for 2024, or $3,150 for an estate or trust",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_8[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "form-8801.2.line.35_ordinary_taxable_income",
+      "label": "Line 35 — Enter the amount from line 5 of your 2024 Qualified Dividends and Capital Gain Tax Worksheet, the amount from line 14 of your 2024 Schedule D Tax Worksheet, or the amount from line 27 of the 2024 Schedule D (Form 1041), whichever applies",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_9[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 348.001
+      }
+    },
+    {
+      "fieldId": "form-8801.2.line.36_subtract_line_35_from_34",
+      "label": "Line 36 — Subtract line 35 from line 34. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_10[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-8801.2.line.37_smaller_of_line_27_or_28",
+      "label": "Line 37 — Enter the smaller of line 27 or line 28",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_11[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-8801.2.line.38_smaller_of_line_36_or_37",
+      "label": "Line 38 — Enter the smaller of line 36 or line 37",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_12[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-8801.2.line.39_subtract_line_38_from_37",
+      "label": "Line 39 — Subtract line 38 from line 37",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_13[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8801.2.line.40_fifteen_percent_rate_threshold",
+      "label": "Line 40 — Enter: $518,900 if single for 2024, $291,850 if married filing separately for 2024, $583,750 if married filing jointly or qualifying surviving spouse for 2024, $551,350 if head of household for 2024, or $15,450 for an estate or trust",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_14[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 252
+      }
+    },
+    {
+      "fieldId": "form-8801.2.line.41_amount_from_line_36",
+      "label": "Line 41 — Enter the amount from line 36",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_15[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 216
+      }
+    },
+    {
+      "fieldId": "form-8801.2.line.42_worksheet_ordinary_income_amount",
+      "label": "Line 42 — Form 1040, 1040-SR, or 1040-NR filers, enter the amount from line 5 of your 2024 Qualified Dividends and Capital Gain Tax Worksheet or the amount from line 21 of your 2024 Schedule D Tax Worksheet, whichever applies",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_16[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 144
+      }
+    },
+    {
+      "fieldId": "form-8801.3.line.43_add_lines_41_42",
+      "label": "Line 43 — Add lines 41 and 42",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_1[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 708.001
+      }
+    },
+    {
+      "fieldId": "form-8801.3.line.44_line_40_minus_43",
+      "label": "Line 44 — Subtract line 43 from line 40. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_2[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 696.002
+      }
+    },
+    {
+      "fieldId": "form-8801.3.line.45_smaller_of_39_or_44",
+      "label": "Line 45 — Enter the smaller of line 39 or line 44",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_3[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-8801.3.line.46_tax_at_15_percent",
+      "label": "Line 46 — Multiply line 45 by 15% (0.15)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_4[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 672.001
+      }
+    },
+    {
+      "fieldId": "form-8801.3.line.47_add_lines_38_45",
+      "label": "Line 47 — Add lines 38 and 45",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_5[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 660.002
+      }
+    },
+    {
+      "fieldId": "form-8801.3.line.48_line_37_minus_47",
+      "label": "Line 48 — Subtract line 47 from line 37",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_6[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "form-8801.3.line.49_tax_at_20_percent",
+      "label": "Line 49 — Multiply line 48 by 20% (0.20)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_7[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "form-8801.3.line.50_add_lines_32_47_48",
+      "label": "Line 50 — Add lines 32, 47, and 48",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_8[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "form-8801.3.line.51_line_27_minus_50",
+      "label": "Line 51 — Subtract line 50 from line 27",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_9[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 576
+      }
+    },
+    {
+      "fieldId": "form-8801.3.line.52_tax_at_25_percent",
+      "label": "Line 52 — Multiply line 51 by 25% (0.25)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_10[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 564.001
+      }
+    },
+    {
+      "fieldId": "form-8801.3.line.53_add_lines_33_46_49_52",
+      "label": "Line 53 — Add lines 33, 46, 49, and 52",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_11[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 552.002
+      }
+    },
+    {
+      "fieldId": "form-8801.3.line.54_tax_at_amt_rates",
+      "label": "Line 54 — If line 27 is $232,600 or less ($116,300 or less if married filing separately for 2024), multiply line 27 by 26% (0.26). Otherwise, multiply line 27 by 28% (0.28) and subtract $4,652 ($2,326 if married filing separately for 2024) from the result",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_12[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "form-8801.3.line.55_smaller_of_53_or_54",
+      "label": "Line 55 — Enter the smaller of line 53 or line 54 here and on line 11",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_13[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 480.002
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8801/blank.pdf",
+    "ingestedAt": "2026-11-20T05:26:38.738Z",
+    "totalFields": 57,
+    "skipped": 0,
+    "catalogEntries": 57
+  }
+}

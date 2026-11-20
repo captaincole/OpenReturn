@@ -1,0 +1,3741 @@
+{
+  "formId": "schedule-ca-540nr",
+  "fieldCount": 415,
+  "entries": [
+    {
+      "fieldId": "schedule-ca-540nr.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1000",
+          "text": "T-107FD"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1001",
+          "text": "123-45-6789"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1a_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1028",
+          "text": "9,697"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1a_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1030",
+          "text": "3,343"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1a_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1026",
+          "text": "8,720"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1a_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1027",
+          "text": "3,910"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1a_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1029",
+          "text": "6,064"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1b_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1033",
+          "text": "6,693"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1b_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1035",
+          "text": "8,746"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1b_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1031",
+          "text": "1,067"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1b_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1032",
+          "text": "8,557"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1b_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1034",
+          "text": "7,971"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1c_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1038",
+          "text": "1,809"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1c_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1040",
+          "text": "7,686"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1c_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1036",
+          "text": "1,155"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1c_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1037",
+          "text": "1,518"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1c_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1039",
+          "text": "9,996"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1d_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1043",
+          "text": "5,703"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1d_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1045",
+          "text": "1,965"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1d_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1041",
+          "text": "5,294"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1d_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1042",
+          "text": "8,737"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1d_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1044",
+          "text": "1,451"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1e_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1048",
+          "text": "5,151"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1e_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1050",
+          "text": "4,078"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1e_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1046",
+          "text": "7,353"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1e_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1047",
+          "text": "9,116"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1e_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1049",
+          "text": "5,570"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1f_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1053",
+          "text": "1,750"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1f_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1055",
+          "text": "6,807"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1f_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1051",
+          "text": "3,278"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1f_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1052",
+          "text": "9,856"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1f_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1054",
+          "text": "1,743"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1g_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1058",
+          "text": "6,874"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1g_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1060",
+          "text": "7,045"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1g_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1056",
+          "text": "1,725"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1g_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1057",
+          "text": "1,239"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1g_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1059",
+          "text": "2,160"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1h_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1063",
+          "text": "2,979"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1h_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1065",
+          "text": "2,291"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1h_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1061",
+          "text": "5,894"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1h_income_type",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1060B",
+          "text": "T-469V0"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1h_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1062",
+          "text": "2,696"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1h_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1064",
+          "text": "4,671"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1i_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1066",
+          "text": "1,089"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1i_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1068",
+          "text": "8,303"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1i_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1067",
+          "text": "9,656"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1z_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1071",
+          "text": "5,601"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1z_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1073",
+          "text": "1,843"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1z_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1069",
+          "text": "5,679"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1z_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1070",
+          "text": "4,383"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.1z_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1072",
+          "text": "7,995"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.2a_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1074",
+          "text": "8,111"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.2b_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1077",
+          "text": "9,076"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.2b_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1079",
+          "text": "8,060"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.2b_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1075",
+          "text": "9,746"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.2b_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1076",
+          "text": "9,077"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.2b_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1078",
+          "text": "4,081"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.3a_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1080",
+          "text": "5,534"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.3b_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1083",
+          "text": "4,323"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.3b_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1085",
+          "text": "3,527"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.3b_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1081",
+          "text": "7,214"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.3b_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1082",
+          "text": "7,903"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.3b_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1084",
+          "text": "4,953"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.4a_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1086",
+          "text": "8,259"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.4b_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1089",
+          "text": "2,110"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.4b_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1091",
+          "text": "2,860"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.4b_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1087",
+          "text": "7,093"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.4b_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1088",
+          "text": "4,715"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.4b_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1090",
+          "text": "2,559"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.5a_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1092",
+          "text": "1,347"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.5b_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1095",
+          "text": "4,169"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.5b_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1097",
+          "text": "1,284"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.5b_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1093",
+          "text": "5,109"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.5b_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1094",
+          "text": "2,132"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.5b_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1096",
+          "text": "6,723"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.6a_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1098",
+          "text": "1,886"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.6b_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1099",
+          "text": "9,952"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.6b_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1100",
+          "text": "3,508"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.7a_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1103",
+          "text": "4,921"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.7a_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1105",
+          "text": "3,536"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.7a_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1101",
+          "text": "1,101"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.7a_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1102",
+          "text": "3,223"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.7a_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1104",
+          "text": "6,322"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.b1_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1106",
+          "text": "6,137"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.b1_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1107",
+          "text": "4,681"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.b2a_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1110",
+          "text": "8,425"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.b2a_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1112",
+          "text": "3,675"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.b2a_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1108",
+          "text": "3,600"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.b2a_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1111",
+          "text": "5,939"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.line.b2b_divorce_date",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1112b",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.1a_residency_myself",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1002 RB",
+          "text": "During 2025: My California (CA) Residency (Check one). Myself. Nonresident"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.1b_residency_spouse",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1003 RB",
+          "text": "During 2025: My California (CA) Residency (Check one). Spouse. Nonresident"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.2a_domiciled_state_spouse",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1005",
+          "text": "50"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.2a_domiciled_state_yourself",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1004",
+          "text": "73"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.2b_military_stationed_state_spouse",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1007",
+          "text": "40"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.2b_military_stationed_state_yourself",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1006",
+          "text": "17"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.3_became_resident_move_date_spouse",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1011",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.3_became_resident_move_date_yourself",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1009",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.3_became_resident_prior_state_spouse",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1010",
+          "text": "79"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.3_became_resident_prior_state_yourself",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1008",
+          "text": "55"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.4_became_nonresident_move_date_spouse",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1015",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.4_became_nonresident_move_date_yourself",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1013",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.4_became_nonresident_new_state_spouse",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1014",
+          "text": "37"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.4_became_nonresident_new_state_yourself",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1012",
+          "text": "69"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.5_nonresident_entire_year_state_spouse",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1017",
+          "text": "79"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.5_nonresident_entire_year_state_yourself",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1016",
+          "text": "43"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.6_days_in_ca_spouse",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1019",
+          "text": "880"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.6_days_in_ca_yourself",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1018",
+          "text": "223"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.7_owned_ca_home_spouse",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1021",
+          "text": "7"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.7_owned_ca_home_yourself",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1020",
+          "text": "0"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.8_prior_ca_resident_begin_date_spouse",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1024",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.8_prior_ca_resident_begin_date_yourself",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1022",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.8_prior_ca_resident_end_date_spouse",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1025",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.0.part1.8_prior_ca_resident_end_date_yourself",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 1023",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b3_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2003",
+          "text": "7,171"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b3_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2005",
+          "text": "3,858"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b3_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2001",
+          "text": "9,342"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b3_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2002",
+          "text": "9,433"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b3_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2004",
+          "text": "1,226"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b4_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2008",
+          "text": "8,434"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b4_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2010",
+          "text": "2,802"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b4_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2006",
+          "text": "2,110"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b4_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2007",
+          "text": "7,510"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b4_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2009",
+          "text": "8,102"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b5_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2013",
+          "text": "6,724"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b5_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2015",
+          "text": "3,552"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b5_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2011",
+          "text": "1,794"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b5_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2012",
+          "text": "5,425"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b5_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2014",
+          "text": "5,115"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b6_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2018",
+          "text": "9,604"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b6_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2020",
+          "text": "5,477"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b6_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2016",
+          "text": "4,368"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b6_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2017",
+          "text": "8,306"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b6_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2019",
+          "text": "2,969"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b7_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2021",
+          "text": "7,729"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b7_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2022",
+          "text": "5,532"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8a_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2024",
+          "text": "8,344"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8a_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2023",
+          "text": "8,803"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8b_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2028",
+          "text": "5,955"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8b_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2025",
+          "text": "1,797"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8b_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2026",
+          "text": "6,942"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8b_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2027",
+          "text": "2,506"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8c_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2031",
+          "text": "1,501"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8c_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2033",
+          "text": "8,055"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8c_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2029",
+          "text": "3,751"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8c_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2030",
+          "text": "6,577"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8c_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2032",
+          "text": "3,495"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8d_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2035",
+          "text": "3,692"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8d_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2034",
+          "text": "9,247"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8e_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2037",
+          "text": "1,778"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8e_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2039",
+          "text": "5,012"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8e_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2036",
+          "text": "4,299"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8e_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2038",
+          "text": "5,791"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8f_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2040",
+          "text": "4,323"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8f_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2041",
+          "text": "5,292"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8g_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2044",
+          "text": "6,775"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8g_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2042",
+          "text": "1,422"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8g_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2043",
+          "text": "1,289"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8h_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2047",
+          "text": "6,776"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8h_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2045",
+          "text": "2,376"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8h_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2046",
+          "text": "9,113"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8i_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2050",
+          "text": "9,219"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8i_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2048",
+          "text": "2,159"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8i_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2049",
+          "text": "6,548"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8j_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2053",
+          "text": "1,706"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8j_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2051",
+          "text": "2,045"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8j_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2052",
+          "text": "8,427"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8k_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2055",
+          "text": "1,464"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8k_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2057",
+          "text": "8,543"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8k_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2054",
+          "text": "6,932"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8k_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2056",
+          "text": "2,671"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8l_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2060",
+          "text": "7,954"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8l_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2058",
+          "text": "9,852"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8l_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2059",
+          "text": "4,903"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8m_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2063",
+          "text": "9,168"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8m_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2061",
+          "text": "9,597"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8m_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2062",
+          "text": "9,541"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8n_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2064",
+          "text": "7,309"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8n_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2065",
+          "text": "4,095"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8o_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2066",
+          "text": "4,109"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8o_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2067",
+          "text": "5,712"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8p_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2070",
+          "text": "8,725"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8p_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2072",
+          "text": "4,222"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8p_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2068",
+          "text": "6,486"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8p_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2069",
+          "text": "6,056"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8p_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2071",
+          "text": "7,573"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8q_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2075",
+          "text": "6,729"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8q_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2073",
+          "text": "4,270"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8q_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2074",
+          "text": "5,899"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8r_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2078",
+          "text": "7,265"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8r_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2076",
+          "text": "4,322"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8r_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2077",
+          "text": "1,451"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8s_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2081",
+          "text": "3,723"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8s_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2079",
+          "text": "9,435"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8s_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2080",
+          "text": "6,606"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8t_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2084",
+          "text": "4,595"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8t_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2082",
+          "text": "3,620"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8t_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2083",
+          "text": "8,161"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8u_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2087",
+          "text": "7,529"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8u_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2085",
+          "text": "6,232"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8u_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2086",
+          "text": "9,002"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8v_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2090",
+          "text": "3,123"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8v_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2092",
+          "text": "4,782"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8v_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2088",
+          "text": "4,237"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8v_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2089",
+          "text": "1,422"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8v_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2091",
+          "text": "8,359"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8z_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2096",
+          "text": "4,222"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8z_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2098",
+          "text": "4,027"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8z_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2094",
+          "text": "1,716"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8z_income_type",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2093",
+          "text": "T-167Q5"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8z_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2095",
+          "text": "5,766"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b8z_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2097",
+          "text": "6,424"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b9a_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2101",
+          "text": "6,623"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b9a_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2103",
+          "text": "4,017"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b9a_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2099",
+          "text": "3,788"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b9a_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2100",
+          "text": "8,328"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.1.line.b9a_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 2102",
+          "text": "7,120"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.b10_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3012",
+          "text": "8,527"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.b10_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3014",
+          "text": "3,983"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.b10_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3010",
+          "text": "5,118"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.b10_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3011",
+          "text": "9,282"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.b10_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3013",
+          "text": "2,832"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.b9b1_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3003",
+          "text": "9,821"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.b9b1_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3001",
+          "text": "7,542"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.b9b1_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3002",
+          "text": "8,073"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.b9b2_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3006",
+          "text": "9,850"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.b9b2_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3004",
+          "text": "8,403"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.b9b2_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3005",
+          "text": "8,141"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.b9b3_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3009",
+          "text": "5,359"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.b9b3_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3007",
+          "text": "1,485"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.b9b3_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3008",
+          "text": "2,688"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c11_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3015",
+          "text": "5,546"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c11_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3016",
+          "text": "2,782"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c12_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3019",
+          "text": "8,133"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c12_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3021",
+          "text": "7,176"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c12_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3017",
+          "text": "3,054"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c12_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3018",
+          "text": "9,099"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c12_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3020",
+          "text": "2,412"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c13_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3022",
+          "text": "5,929"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c13_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3023",
+          "text": "5,455"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c14_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3025",
+          "text": "8,135"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c14_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3027",
+          "text": "6,586"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c14_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3024",
+          "text": "2,999"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c14_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3026",
+          "text": "7,548"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c15_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3031",
+          "text": "5,655"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c15_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3028",
+          "text": "3,183"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c15_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3029",
+          "text": "8,914"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c15_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3030",
+          "text": "3,963"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c16_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3034",
+          "text": "7,645"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c16_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3032",
+          "text": "5,595"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c16_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3033",
+          "text": "5,919"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c17_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3038",
+          "text": "1,676"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c17_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3035",
+          "text": "5,154"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c17_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3036",
+          "text": "9,377"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c17_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3037",
+          "text": "1,159"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c18_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3041",
+          "text": "4,232"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c18_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3039",
+          "text": "7,566"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c18_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3040",
+          "text": "4,524"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c19a_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3043",
+          "text": "6,259"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c19a_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3045",
+          "text": "4,245"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c19a_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3042",
+          "text": "5,084"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c19a_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3044",
+          "text": "5,126"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c19b_recipient_last_name",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3049",
+          "text": "T-1J0ZT"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c19b_recipient_ssn_first3",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3046",
+          "text": "310"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c19b_recipient_ssn_last4",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3048",
+          "text": "2103"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c19b_recipient_ssn_middle2",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3047",
+          "text": "43"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c19c_divorce_date",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3049B",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c20_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3052",
+          "text": "2,388"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c20_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3054",
+          "text": "5,349"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c20_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3050",
+          "text": "3,515"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c20_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3051",
+          "text": "4,070"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c20_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3053",
+          "text": "5,707"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c21_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3056",
+          "text": "7,582"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c21_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3058",
+          "text": "8,567"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c21_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3055",
+          "text": "7,540"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c21_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3057",
+          "text": "2,289"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c23_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3062",
+          "text": "8,535"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c23_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3060",
+          "text": "2,983"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c23_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3061",
+          "text": "5,268"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24a_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3065",
+          "text": "1,938"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24a_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3063",
+          "text": "8,187"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24a_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3064",
+          "text": "2,258"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24b_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3068",
+          "text": "7,481"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24b_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3070",
+          "text": "2,639"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24b_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3066",
+          "text": "4,144"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24b_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3067",
+          "text": "9,990"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24b_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3069",
+          "text": "1,448"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24c_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3071",
+          "text": "5,065"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24c_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3072",
+          "text": "7,476"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24d_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3076",
+          "text": "8,380"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24d_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3073",
+          "text": "3,216"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24d_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3074",
+          "text": "7,418"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24d_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3075",
+          "text": "5,190"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24e_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3079",
+          "text": "8,938"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24e_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3077",
+          "text": "6,965"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24e_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3078",
+          "text": "4,508"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24f_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3082",
+          "text": "9,886"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24f_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3084",
+          "text": "1,564"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24f_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3080",
+          "text": "2,171"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24f_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3081",
+          "text": "6,103"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24f_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3083",
+          "text": "7,897"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24g_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3087",
+          "text": "4,803"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24g_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3089",
+          "text": "9,049"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24g_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3085",
+          "text": "7,212"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24g_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3086",
+          "text": "8,949"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24g_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3088",
+          "text": "4,432"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24h_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3092",
+          "text": "2,275"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24h_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3090",
+          "text": "7,901"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.2.line.c24h_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 3091",
+          "text": "4,927"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c24i_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4001",
+          "text": "6,879"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c24i_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4002",
+          "text": "2,869"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c24j_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4003",
+          "text": "8,926"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c24j_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4004",
+          "text": "5,923"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c24k_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4007",
+          "text": "3,634"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c24k_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4005",
+          "text": "1,384"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c24k_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4006",
+          "text": "4,086"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c24z_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4011",
+          "text": "5,646"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c24z_adjustment_type",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4008",
+          "text": "T-1SMZ4"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c24z_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4013",
+          "text": "2,830"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c24z_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4009",
+          "text": "8,115"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c24z_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4010",
+          "text": "7,973"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c24z_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4012",
+          "text": "4,903"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c25_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4016",
+          "text": "2,204"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c25_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4018",
+          "text": "2,235"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c25_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4014",
+          "text": "4,502"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c25_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4015",
+          "text": "9,599"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c25_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4017",
+          "text": "3,145"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c26_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4021",
+          "text": "5,809"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c26_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4023",
+          "text": "6,185"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c26_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4019",
+          "text": "7,399"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c26_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4020",
+          "text": "7,440"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c26_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4022",
+          "text": "4,434"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c27_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4026",
+          "text": "4,040"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c27_ca_amounts",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4028",
+          "text": "4,636"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c27_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4024",
+          "text": "2,433"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c27_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4025",
+          "text": "1,351"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.line.c27_total_ca_law",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4027",
+          "text": "5,395"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.1_medical_dental_expenses",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4030",
+          "text": "8,183"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.10_interest_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4065",
+          "text": "1,072"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.10_interest_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4063",
+          "text": "8,540"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.10_interest_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4064",
+          "text": "5,295"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.11_charity_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4068",
+          "text": "2,895"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.11_charity_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4066",
+          "text": "3,832"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.11_charity_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4067",
+          "text": "6,246"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.12_charity_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4071",
+          "text": "1,446"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.12_charity_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4069",
+          "text": "8,032"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.12_charity_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4070",
+          "text": "4,171"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.13_charity_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4074",
+          "text": "9,064"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.13_charity_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4072",
+          "text": "1,776"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.13_charity_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4073",
+          "text": "7,010"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.14_charity_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4077",
+          "text": "2,467"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.14_charity_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4075",
+          "text": "4,342"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.14_charity_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4076",
+          "text": "6,628"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.2_federal_agi_line11b",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4031",
+          "text": "9,697"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.3_medical_agi_threshold",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4032",
+          "text": "7,568"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.4_medical_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4034",
+          "text": "3,794"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.4_medical_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4033",
+          "text": "2,039"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.5a_taxes_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4035",
+          "text": "6,926"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.5a_taxes_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4036",
+          "text": "3,470"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.5b_taxes_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4037",
+          "text": "1,315"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.5c_taxes_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4038",
+          "text": "1,729"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.5d_taxes_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4039",
+          "text": "8,653"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.5e_taxes_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4042",
+          "text": "3,670"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.5e_taxes_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4040",
+          "text": "6,544"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.5e_taxes_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4041",
+          "text": "2,854"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.6_taxes_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4046",
+          "text": "1,111"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.6_taxes_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4044",
+          "text": "8,944"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.6_taxes_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4045",
+          "text": "5,456"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.6_taxes_type",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4043",
+          "text": "T-1JJJD"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.7_taxes_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4049",
+          "text": "6,947"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.7_taxes_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4047",
+          "text": "6,080"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.7_taxes_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4048",
+          "text": "4,645"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.8a_interest_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4051",
+          "text": "3,550"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.8a_interest_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4050",
+          "text": "2,320"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.8b_interest_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4053",
+          "text": "9,576"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.8b_interest_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4052",
+          "text": "5,232"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.8c_interest_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4055",
+          "text": "8,489"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.8c_interest_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4054",
+          "text": "7,633"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.8e_interest_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4059",
+          "text": "4,560"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.8e_interest_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4057",
+          "text": "9,332"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.8e_interest_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4058",
+          "text": "9,648"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.9_interest_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4062",
+          "text": "2,329"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.9_interest_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4060",
+          "text": "8,837"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.9_interest_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4061",
+          "text": "1,963"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.3.part3.itemize_ca_not_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 4029 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.15_casualty_theft_loss_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5003",
+          "text": "6,657"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.15_casualty_theft_loss_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5001",
+          "text": "8,181"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.15_casualty_theft_loss_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5002",
+          "text": "8,449"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.16_other_itemized_deductions_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5006",
+          "text": "5,429"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.16_other_itemized_deductions_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5004",
+          "text": "5,968"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.16_other_itemized_deductions_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5005",
+          "text": "3,682"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.17_itemized_subtotal_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5009",
+          "text": "9,680"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.17_itemized_subtotal_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5007",
+          "text": "1,993"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.17_itemized_subtotal_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5008",
+          "text": "4,693"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.18_itemized_total_combined",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5010",
+          "text": "9,812"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.19_unreimbursed_employee_expenses",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5011",
+          "text": "7,663"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.20_tax_preparation_fees",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5012",
+          "text": "3,846"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.21_other_expenses_amount",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5014",
+          "text": "5,192"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.21_other_expenses_type",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5013",
+          "text": "T-1FFK0"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.22_job_expenses_total",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5015",
+          "text": "5,777"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.23_federal_agi",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5016",
+          "text": "2,671"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.24_two_percent_of_agi",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5017",
+          "text": "2,251"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.25_job_expenses_net",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5018",
+          "text": "9,340"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.26_total_itemized_deductions",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5019",
+          "text": "6,742"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.27_other_adjustments_amount",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5021",
+          "text": "7,372"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.27_other_adjustments_type",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5020",
+          "text": "T-ENNCI"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.28_itemized_after_adjustments",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5022",
+          "text": "1,024"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.29_itemized_after_agi_limit",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5023",
+          "text": "9,392"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part3.30_itemized_or_standard_deduction",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5024",
+          "text": "2,933"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part4.1_california_agi",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5025",
+          "text": "7,103"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part4.2_deductions_from_line_30",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5026",
+          "text": "7,503"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part4.3_deduction_percentage_decimal_digits",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5028",
+          "text": "1239"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part4.3_deduction_percentage_whole_digit",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5027",
+          "text": "7"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part4.4_california_deductions_prorated",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5029",
+          "text": "4,641"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-ca-540nr.4.part4.5_california_taxable_income",
+      "widgets": [
+        {
+          "widgetName": "540NR CA - 5030",
+          "text": "2,427"
+        }
+      ]
+    }
+  ]
+}

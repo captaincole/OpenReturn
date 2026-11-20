@@ -1,0 +1,5286 @@
+{
+  "form": {
+    "formId": "form-3801",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "FTB 3801 — Passive Activity Loss Limitations"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3801.0.header.taxpayer_name",
+      "label": "Name(s) as shown on tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_1001",
+      "position": {
+        "page": 0,
+        "x": 35.4,
+        "y": 679.6
+      }
+    },
+    {
+      "fieldId": "form-3801.0.header.ssn",
+      "label": "Social Security Number, Individual Taxpayer Identification Number, Federal Employer Identification Number, or California corporation number.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_1002",
+      "position": {
+        "page": 0,
+        "x": 443.2,
+        "y": 679.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.0.line.1a_rental_real_estate_net_income",
+      "label": "Part one. 2025 Passive Activity Loss. Rental Real Estate Activities with Active Participation. Line 1 a. Activities with net income from Part four, column (a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_1003",
+      "position": {
+        "page": 0,
+        "x": 352.8,
+        "y": 598.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.0.line.1b_rental_real_estate_net_loss",
+      "label": "Line 1 b. Activities with net loss from Part four, column (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_1004",
+      "position": {
+        "page": 0,
+        "x": 359.28,
+        "y": 575.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.0.line.1c_rental_real_estate_prior_unallowed_losses",
+      "label": "Line 1 c. Prior year unallowed losses from Part four, column (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_1005",
+      "position": {
+        "page": 0,
+        "x": 359.28,
+        "y": 551.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.0.line.1d_rental_real_estate_combined",
+      "label": "Line 1 d. Combine line 1 a, line 1 b, and line 1 c.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_1006",
+      "position": {
+        "page": 0,
+        "x": 475.7,
+        "y": 527.3
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.0.line.2a_other_passive_net_income",
+      "label": "All Other Passive Activities. Line 2 a. Activities with net income from Part five, column (a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_1007",
+      "position": {
+        "page": 0,
+        "x": 352.8,
+        "y": 490.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.0.line.2b_other_passive_net_loss",
+      "label": "Line 2 b. Activities with net loss from Part five, column (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_1008",
+      "position": {
+        "page": 0,
+        "x": 359.28,
+        "y": 466.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.0.line.2c_other_passive_prior_unallowed_losses",
+      "label": "Line 2 c. Prior year unallowed losses from Part five, column (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_1009",
+      "position": {
+        "page": 0,
+        "x": 359.28,
+        "y": 442.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.0.line.2d_other_passive_combined",
+      "label": "Line 2 d. Combine line 2 a, line 2 b, and line 2 c.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_1010",
+      "position": {
+        "page": 0,
+        "x": 475.75,
+        "y": 418.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.0.line.3_total_passive_income_or_loss",
+      "label": "Line 3. Combine line 1 d and line 2 d. If the result is net income or zero, see the instructions for line 3. If line 3 and line 1 d are losses, go to line 4. Otherwise, enter zero on line 9 and go to line 10. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_1011",
+      "position": {
+        "page": 0,
+        "x": 475.75,
+        "y": 395
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.0.line.4_smaller_of_1d_or_3_loss",
+      "label": "Part two. Special Allowance for Rental Real Estate Activities with Active Participation. Line 4. Enter the smaller of losses from line 1 d or line 3.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_1012",
+      "position": {
+        "page": 0,
+        "x": 475.75,
+        "y": 333.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.0.line.5_special_allowance_income_limit",
+      "label": "Line 5. Enter $150,000. If married/Registered Domestic Partner filing a separate tax return, see instructions.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_1013",
+      "position": {
+        "page": 0,
+        "x": 353.05,
+        "y": 309.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.0.line.6_federal_modified_agi",
+      "label": "Line 6. Enter federal modified adjusted gross income, but not less than zero. See instructions. If line 6 is greater than or equal to line 5, skip line 7 and line 8, enter zero on line 9, and then go to line 10. Otherwise, go to line 7.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_1014",
+      "position": {
+        "page": 0,
+        "x": 353.05,
+        "y": 262.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.0.line.7_limit_minus_modified_agi",
+      "label": "Line 7. Subtract line 6 from line 5.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_1015",
+      "position": {
+        "page": 0,
+        "x": 353.05,
+        "y": 237.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.0.line.8_half_of_line_7",
+      "label": "Line 8. Multiply line 7 by 50% (.50). Do not enter more than $25,000.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_1016",
+      "position": {
+        "page": 0,
+        "x": 475.75,
+        "y": 213.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.0.line.9_special_allowance",
+      "label": "Line 9. Enter the smaller of line 4 or line 8.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_1017",
+      "position": {
+        "page": 0,
+        "x": 475.75,
+        "y": 189.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.0.line.10_passive_income_total",
+      "label": "Part three. Total Losses Allowed. Line 10. Add the income, if any, from line 1 a and line 2 a and enter the total.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_1018",
+      "position": {
+        "page": 0,
+        "x": 475.75,
+        "y": 141.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.0.line.11_total_losses_allowed",
+      "label": "Line 11. Total losses allowed from all passive activities for 2025. Add line 9 and line 10. See the instructions on Page 2 to find out how to report the losses on your tax return.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_1019",
+      "position": {
+        "page": 0,
+        "x": 475.75,
+        "y": 117.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row1_activity_description_col_a",
+      "label": "California Passive Activity Worksheet. Row 1. Column (a). Passive Activity. Enter a description of the activity.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2001",
+      "position": {
+        "page": 1,
+        "x": 36.06,
+        "y": 624.74
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row1_federal_schedule_col_b",
+      "label": "Row 1. Column (b). Federal Schedule. Enter the name of the federal form or schedule on which you reported the activity.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2002",
+      "position": {
+        "page": 1,
+        "x": 125.85,
+        "y": 624.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row1_california_schedule_col_c",
+      "label": "Row 1. Column (c). California Schedule. Enter the name of the California form or schedule, if any, used to calculate the California adjustment.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2003",
+      "position": {
+        "page": 1,
+        "x": 215.46,
+        "y": 624.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row1_federal_amount_col_d",
+      "label": "Row 1. Column (d) Federal Amount. Enter your current year federal net income (loss) before application of the P A L rules.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2004",
+      "position": {
+        "page": 1,
+        "x": 305.04,
+        "y": 624.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row1_california_adjustment_col_e",
+      "label": "Row 1. Column (e). California Adjustment. Enter any adjustment resulting from differences in federal and California law.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2005",
+      "position": {
+        "page": 1,
+        "x": 394.64,
+        "y": 624.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row1_california_amount_col_f",
+      "label": "Row 1. Column (f). California Amount. Combine column (d) and column (e).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2006",
+      "position": {
+        "page": 1,
+        "x": 484.5,
+        "y": 624.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row2_activity_description_col_a",
+      "label": "Row 2. Column (a). Passive Activity. Enter a description of the activity.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2007",
+      "position": {
+        "page": 1,
+        "x": 36.06,
+        "y": 613.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row2_federal_schedule_col_b",
+      "label": "Row 2. Column (b). Federal Schedule. Enter the name of the federal form or schedule on which you reported the activity.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2008",
+      "position": {
+        "page": 1,
+        "x": 125.85,
+        "y": 613.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row2_california_schedule_col_c",
+      "label": "Row 2. Column (c). California Schedule. Enter the name of the California form or schedule, if any, used to calculate the California adjustment.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2009",
+      "position": {
+        "page": 1,
+        "x": 215.46,
+        "y": 613.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row2_federal_amount_col_d",
+      "label": "Row 2. Column (d) Federal Amount. Enter your current year federal net income (loss) before application of the P A L rules.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2010",
+      "position": {
+        "page": 1,
+        "x": 305.04,
+        "y": 613.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row2_california_adjustment_col_e",
+      "label": "Row 2. Column (e). California Adjustment. Enter any adjustment resulting from differences in federal and California law.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2011",
+      "position": {
+        "page": 1,
+        "x": 394.64,
+        "y": 613.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row2_california_amount_col_f",
+      "label": "Row 2. Column (f). California Amount. Combine column (d) and column (e).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2012",
+      "position": {
+        "page": 1,
+        "x": 484.5,
+        "y": 613.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row3_activity_description_col_a",
+      "label": "Row 3. Column (a). Passive Activity. Enter a description of the activity.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2013",
+      "position": {
+        "page": 1,
+        "x": 36.06,
+        "y": 602.69
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row3_federal_schedule_col_b",
+      "label": "Row 3. Column (b). Federal Schedule. Enter the name of the federal form or schedule on which you reported the activity.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2014",
+      "position": {
+        "page": 1,
+        "x": 125.85,
+        "y": 602.69
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row3_california_schedule_col_c",
+      "label": "Row 3. Column (c). California Schedule. Enter the name of the California form or schedule, if any, used to calculate the California adjustment.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2015",
+      "position": {
+        "page": 1,
+        "x": 215.46,
+        "y": 602.69
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row3_federal_amount_col_d",
+      "label": "Row 3. Column (d) Federal Amount. Enter your current year federal net income (loss) before application of the P A L rules.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2016",
+      "position": {
+        "page": 1,
+        "x": 305.04,
+        "y": 602.69
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row3_california_adjustment_col_e",
+      "label": "Row 3. Column (e). California Adjustment. Enter any adjustment resulting from differences in federal and California law.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2017",
+      "position": {
+        "page": 1,
+        "x": 394.64,
+        "y": 602.96
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row3_california_amount_col_f",
+      "label": "Row 3. Column (f). California Amount. Combine column (d) and column (e).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2018",
+      "position": {
+        "page": 1,
+        "x": 484.5,
+        "y": 602.69
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row4_activity_description_col_a",
+      "label": "Row 4. Column (a). Passive Activity. Enter a description of the activity.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2019",
+      "position": {
+        "page": 1,
+        "x": 36.06,
+        "y": 591.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row4_federal_schedule_col_b",
+      "label": "Row 4. Column (b). Federal Schedule. Enter the name of the federal form or schedule on which you reported the activity.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2020",
+      "position": {
+        "page": 1,
+        "x": 125.85,
+        "y": 591.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row4_california_schedule_col_c",
+      "label": "Row 4. Column (c). California Schedule. Enter the name of the California form or schedule, if any, used to calculate the California adjustment.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2021",
+      "position": {
+        "page": 1,
+        "x": 215.46,
+        "y": 591.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row4_federal_amount_col_d",
+      "label": "Row 4. Column (d) Federal Amount. Enter your current year federal net income (loss) before application of the P A L rules.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2022",
+      "position": {
+        "page": 1,
+        "x": 305.04,
+        "y": 591.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row4_california_adjustment_col_e",
+      "label": "Row 4. Column (e). California Adjustment. Enter any adjustment resulting from differences in federal and California law.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2023",
+      "position": {
+        "page": 1,
+        "x": 394.64,
+        "y": 591.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row4_california_amount_col_f",
+      "label": "Row 4. Column (f). California Amount. Combine column (d) and column (e).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2024",
+      "position": {
+        "page": 1,
+        "x": 484.5,
+        "y": 591.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row5_activity_description_col_a",
+      "label": "Row 5. Column (a). Passive Activity. Enter a description of the activity.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2025",
+      "position": {
+        "page": 1,
+        "x": 36.06,
+        "y": 580.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row5_federal_schedule_col_b",
+      "label": "Row 5. Column (b). Federal Schedule. Enter the name of the federal form or schedule on which you reported the activity.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2026",
+      "position": {
+        "page": 1,
+        "x": 125.85,
+        "y": 580.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row5_california_schedule_col_c",
+      "label": "Row 5. Column (c). California Schedule. Enter the name of the California form or schedule, if any, used to calculate the California adjustment.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2027",
+      "position": {
+        "page": 1,
+        "x": 215.46,
+        "y": 580.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row5_federal_amount_col_d",
+      "label": "Row 5. Column (d) Federal Amount. Enter your current year federal net income (loss) before application of the P A L rules.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2028",
+      "position": {
+        "page": 1,
+        "x": 305.04,
+        "y": 580.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row5_california_adjustment_col_e",
+      "label": "Row 5. Column (e). California Adjustment. Enter any adjustment resulting from differences in federal and California law.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2029",
+      "position": {
+        "page": 1,
+        "x": 394.64,
+        "y": 580.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row5_california_amount_col_f",
+      "label": "Row 5. Column (f). California Amount. Combine column (d) and column (e).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2030",
+      "position": {
+        "page": 1,
+        "x": 484.5,
+        "y": 580.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row6_activity_description_col_a",
+      "label": "Row 6. Column (a). Passive Activity. Enter a description of the activity.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2031",
+      "position": {
+        "page": 1,
+        "x": 36.06,
+        "y": 569.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row6_federal_schedule_col_b",
+      "label": "Row 6. Column (b). Federal Schedule. Enter the name of the federal form or schedule on which you reported the activity.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2032",
+      "position": {
+        "page": 1,
+        "x": 125.85,
+        "y": 569.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row6_california_schedule_col_c",
+      "label": "Row 6. Column (c). California Schedule. Enter the name of the California form or schedule, if any, used to calculate the California adjustment.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2033",
+      "position": {
+        "page": 1,
+        "x": 215.46,
+        "y": 569.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row6_federal_amount_col_d",
+      "label": "Row 6. Column (d) Federal Amount. Enter your current year federal net income (loss) before application of the P A L rules.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2034",
+      "position": {
+        "page": 1,
+        "x": 305.04,
+        "y": 569.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row6_california_adjustment_col_e",
+      "label": "Row 6. Column (e). California Adjustment. Enter any adjustment resulting from differences in federal and California law.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2035",
+      "position": {
+        "page": 1,
+        "x": 394.64,
+        "y": 569.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row6_california_amount_col_f",
+      "label": "Row 6. Column (f). California Amount. Combine column (d) and column (e).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2036",
+      "position": {
+        "page": 1,
+        "x": 484.5,
+        "y": 569.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row7_activity_description_col_a",
+      "label": "Row 7. Column (a). Passive Activity. Enter a description of the activity.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2037",
+      "position": {
+        "page": 1,
+        "x": 36.06,
+        "y": 558.71
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row7_federal_schedule_col_b",
+      "label": "Row 7. Column (b). Federal Schedule. Enter the name of the federal form or schedule on which you reported the activity.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2038",
+      "position": {
+        "page": 1,
+        "x": 125.85,
+        "y": 558.71
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row7_california_schedule_col_c",
+      "label": "Row 7. Column (c). California Schedule. Enter the name of the California form or schedule, if any, used to calculate the California adjustment.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2039",
+      "position": {
+        "page": 1,
+        "x": 215.46,
+        "y": 558.71
+      }
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row7_federal_amount_col_d",
+      "label": "Row 7. Column (d) Federal Amount. Enter your current year federal net income (loss) before application of the P A L rules.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2040",
+      "position": {
+        "page": 1,
+        "x": 305.04,
+        "y": 558.71
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row7_california_adjustment_col_e",
+      "label": "Row 7. Column (e). California Adjustment. Enter any adjustment resulting from differences in federal and California law.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2041",
+      "position": {
+        "page": 1,
+        "x": 394.64,
+        "y": 558.71
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row7_california_amount_col_f",
+      "label": "Row 7. Column (f). California Amount. Combine column (d) and column (e).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2042",
+      "position": {
+        "page": 1,
+        "x": 484.5,
+        "y": 558.71
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row1_activity_description_col_a",
+      "label": "California Adjustment Worksheets. Row 1. Column (a). Schedule C Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2043",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 425.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row1_passive_or_nonpassive_col_b",
+      "label": "Row 1. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2044",
+      "position": {
+        "page": 1,
+        "x": 126.12,
+        "y": 425.865
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row1_california_amount_col_c",
+      "label": "Row 1. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2045",
+      "position": {
+        "page": 1,
+        "x": 216.364,
+        "y": 425.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row1_federal_amount_col_d",
+      "label": "Row 1. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2046",
+      "position": {
+        "page": 1,
+        "x": 306.24,
+        "y": 425.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row2_activity_description_col_a",
+      "label": "Row 2. Column (a). Schedule C Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2047",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 414.71
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row2_passive_or_nonpassive_col_b",
+      "label": "Row 2. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2048",
+      "position": {
+        "page": 1,
+        "x": 126.12,
+        "y": 414.71
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row2_california_amount_col_c",
+      "label": "Row 2. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2049",
+      "position": {
+        "page": 1,
+        "x": 216.364,
+        "y": 414.71
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row2_federal_amount_col_d",
+      "label": "Row 2. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2050",
+      "position": {
+        "page": 1,
+        "x": 306.24,
+        "y": 414.71
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row3_activity_description_col_a",
+      "label": "Row 3. Column (a). Schedule C Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2051",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 403.61
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row3_passive_or_nonpassive_col_b",
+      "label": "Row 3. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2052",
+      "position": {
+        "page": 1,
+        "x": 126.12,
+        "y": 403.61
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row3_california_amount_col_c",
+      "label": "Row 3. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2053",
+      "position": {
+        "page": 1,
+        "x": 216.364,
+        "y": 403.61
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row3_federal_amount_col_d",
+      "label": "Row 3. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2054",
+      "position": {
+        "page": 1,
+        "x": 306.24,
+        "y": 403.61
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row4_activity_description_col_a",
+      "label": "Row 4. Column (a). Schedule C Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2055",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 392.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row4_passive_or_nonpassive_col_b",
+      "label": "Row 4. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2056",
+      "position": {
+        "page": 1,
+        "x": 126.12,
+        "y": 392.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row4_california_amount_col_c",
+      "label": "Row 4. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2057",
+      "position": {
+        "page": 1,
+        "x": 216.364,
+        "y": 392.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row4_federal_amount_col_d",
+      "label": "Row 4. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2058",
+      "position": {
+        "page": 1,
+        "x": 306.24,
+        "y": 392.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row5_activity_description_col_a",
+      "label": "Row 5. Column (a). Schedule C Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2059",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 381.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row5_passive_or_nonpassive_col_b",
+      "label": "Row 5. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2060",
+      "position": {
+        "page": 1,
+        "x": 126.12,
+        "y": 381.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row5_california_amount_col_c",
+      "label": "Row 5. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2061",
+      "position": {
+        "page": 1,
+        "x": 216.364,
+        "y": 381.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row5_federal_amount_col_d",
+      "label": "Row 5. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2062",
+      "position": {
+        "page": 1,
+        "x": 306.24,
+        "y": 381.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row6_activity_description_col_a",
+      "label": "Row 6. Column (a). Schedule C Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2063",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 370.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row6_passive_or_nonpassive_col_b",
+      "label": "Row 6. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2064",
+      "position": {
+        "page": 1,
+        "x": 126.12,
+        "y": 370.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row6_california_amount_col_c",
+      "label": "Row 6. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2065",
+      "position": {
+        "page": 1,
+        "x": 216.364,
+        "y": 370.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row6_federal_amount_col_d",
+      "label": "Row 6. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2066",
+      "position": {
+        "page": 1,
+        "x": 306.24,
+        "y": 370.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row7_activity_description_col_a",
+      "label": "Row 7. Column (a). Schedule C Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2067",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 359.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row7_passive_or_nonpassive_col_b",
+      "label": "Row 7. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2068",
+      "position": {
+        "page": 1,
+        "x": 126.12,
+        "y": 359.73
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row7_california_amount_col_c",
+      "label": "Row 7. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2069",
+      "position": {
+        "page": 1,
+        "x": 216.364,
+        "y": 359.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row7_federal_amount_col_d",
+      "label": "Row 7. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2070",
+      "position": {
+        "page": 1,
+        "x": 306.24,
+        "y": 359.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.1c_schedule_c_total_california_amount",
+      "label": "Row 8. Total. Column (c). California Amount. Line 1(c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2071",
+      "position": {
+        "page": 1,
+        "x": 233.874,
+        "y": 347.76
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.1d_schedule_c_total_federal_amount",
+      "label": "Row 8. Total. Column (d). Federal Amount. Line 1(d).*",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2072",
+      "position": {
+        "page": 1,
+        "x": 337.296,
+        "y": 347.76
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.1e_schedule_c_california_adjustment",
+      "label": "Row 8. Total. Column (e). California Adjustment. Line 1 (e). If the amount is positive, transfer the amount to Schedule C A (540), Part one or Schedule C A (540 N R), Part two, Section B, line 3, column C. If the amount is negative, transfer the amount to Schedule C A (540), Part one or Schedule C A (540 N R), Part two, Section B, (as a positive amount) line 3, column B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2073",
+      "position": {
+        "page": 1,
+        "x": 416.28,
+        "y": 347.76
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row1_activity_description_col_a",
+      "label": "Row 1. Column (a). Schedule E Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2074",
+      "position": {
+        "page": 1,
+        "x": 35.685,
+        "y": 306
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row1_passive_or_nonpassive_col_b",
+      "label": "Row 1. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2075",
+      "position": {
+        "page": 1,
+        "x": 125.835,
+        "y": 306
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row1_california_amount_col_c",
+      "label": "Row 1. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2076",
+      "position": {
+        "page": 1,
+        "x": 215.985,
+        "y": 306
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row1_federal_amount_col_d",
+      "label": "Row 1. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2077",
+      "position": {
+        "page": 1,
+        "x": 305.925,
+        "y": 306
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row2_activity_description_col_a",
+      "label": "Row 2. Column (a). Schedule E Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2078",
+      "position": {
+        "page": 1,
+        "x": 35.685,
+        "y": 294.98
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row2_passive_or_nonpassive_col_b",
+      "label": "Row 2. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2079",
+      "position": {
+        "page": 1,
+        "x": 125.835,
+        "y": 294.98
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row2_california_amount_col_c",
+      "label": "Row 2. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2080",
+      "position": {
+        "page": 1,
+        "x": 215.985,
+        "y": 294.98
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row2_federal_amount_col_d",
+      "label": "Row 2. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2081",
+      "position": {
+        "page": 1,
+        "x": 305.925,
+        "y": 294.98
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row3_activity_description_col_a",
+      "label": "Row 3. Column (a). Schedule E Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2082",
+      "position": {
+        "page": 1,
+        "x": 35.685,
+        "y": 284
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row3_passive_or_nonpassive_col_b",
+      "label": "Row 3. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2083",
+      "position": {
+        "page": 1,
+        "x": 125.835,
+        "y": 284
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row3_california_amount_col_c",
+      "label": "Row 3. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2084",
+      "position": {
+        "page": 1,
+        "x": 215.985,
+        "y": 284
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row3_federal_amount_col_d",
+      "label": "Row 3. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2085",
+      "position": {
+        "page": 1,
+        "x": 305.925,
+        "y": 284
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row4_activity_description_col_a",
+      "label": "Row 4. Column (a). Schedule E Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2086",
+      "position": {
+        "page": 1,
+        "x": 35.685,
+        "y": 273
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row4_passive_or_nonpassive_col_b",
+      "label": "Row 4. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2087",
+      "position": {
+        "page": 1,
+        "x": 125.835,
+        "y": 273
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row4_california_amount_col_c",
+      "label": "Row 4. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2088",
+      "position": {
+        "page": 1,
+        "x": 215.985,
+        "y": 273
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row4_federal_amount_col_d",
+      "label": "Row 4. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2089",
+      "position": {
+        "page": 1,
+        "x": 305.925,
+        "y": 273
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row5_activity_description_col_a",
+      "label": "Row 5. Column (a). Schedule E Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2090",
+      "position": {
+        "page": 1,
+        "x": 35.685,
+        "y": 261.98
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row5_passive_or_nonpassive_col_b",
+      "label": "Row 5. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2091",
+      "position": {
+        "page": 1,
+        "x": 125.835,
+        "y": 261.98
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row5_california_amount_col_c",
+      "label": "Row 5. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2092",
+      "position": {
+        "page": 1,
+        "x": 215.985,
+        "y": 261.98
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row5_federal_amount_col_d",
+      "label": "Row 5. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2093",
+      "position": {
+        "page": 1,
+        "x": 305.925,
+        "y": 261.98
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row6_activity_description_col_a",
+      "label": "Row 6. Column (a). Schedule E Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2094",
+      "position": {
+        "page": 1,
+        "x": 35.685,
+        "y": 251
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row6_passive_or_nonpassive_col_b",
+      "label": "Row 6. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2095",
+      "position": {
+        "page": 1,
+        "x": 125.835,
+        "y": 251
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row6_california_amount_col_c",
+      "label": "Row 6. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2096",
+      "position": {
+        "page": 1,
+        "x": 215.985,
+        "y": 251
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row6_federal_amount_col_d",
+      "label": "Row 6. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2097",
+      "position": {
+        "page": 1,
+        "x": 305.925,
+        "y": 251
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row7_activity_description_col_a",
+      "label": "Row 7. Column (a). Schedule E Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2098",
+      "position": {
+        "page": 1,
+        "x": 35.685,
+        "y": 240.08
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row7_passive_or_nonpassive_col_b",
+      "label": "Row 7. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2099",
+      "position": {
+        "page": 1,
+        "x": 125.835,
+        "y": 240.08
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row7_california_amount_col_c",
+      "label": "Row 7. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2100",
+      "position": {
+        "page": 1,
+        "x": 215.985,
+        "y": 240.08
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row7_federal_amount_col_d",
+      "label": "Row 7. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2101",
+      "position": {
+        "page": 1,
+        "x": 305.925,
+        "y": 240.08
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.2c_schedule_e_total_california_amount",
+      "label": "Row 8. Total. Column (c). California Amount. Line 2(c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2102",
+      "position": {
+        "page": 1,
+        "x": 234.2,
+        "y": 227.772
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.2d_schedule_e_total_federal_amount",
+      "label": "Row 8. Total. Column (d). Federal Amount. Line 2(d).**",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2103",
+      "position": {
+        "page": 1,
+        "x": 332.16,
+        "y": 227.77
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.2e_schedule_e_california_adjustment",
+      "label": "Row 8. Total. Column (e). California Adjustment. Line 2 (e). If the amount is positive, transfer the amount to Schedule C A (540), Part one or Schedule C A (540 N R), Part two, Section B, line 5, column C. If the amount is negative, transfer the amount to Schedule C A (540), Part one or Schedule C A (540 N R), Part two, Section B, (as a positive amount) line 5, column B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2104",
+      "position": {
+        "page": 1,
+        "x": 416.28,
+        "y": 227.77
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row1_activity_description_col_a",
+      "label": "Row 1. Column (a). Schedule F Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2105",
+      "position": {
+        "page": 1,
+        "x": 35.685,
+        "y": 186
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row1_passive_or_nonpassive_col_b",
+      "label": "Row 1. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2106",
+      "position": {
+        "page": 1,
+        "x": 125.753,
+        "y": 185.96
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row1_california_amount_col_c",
+      "label": "Row 1. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2107",
+      "position": {
+        "page": 1,
+        "x": 216.133,
+        "y": 186.109
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row1_federal_amount_col_d",
+      "label": "Row 1. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2108",
+      "position": {
+        "page": 1,
+        "x": 306.394,
+        "y": 186.109
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row2_activity_description_col_a",
+      "label": "Row 2. Column (a). Schedule F Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2109",
+      "position": {
+        "page": 1,
+        "x": 35.685,
+        "y": 174.98
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row2_passive_or_nonpassive_col_b",
+      "label": "Row 2. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2110",
+      "position": {
+        "page": 1,
+        "x": 125.753,
+        "y": 174.94
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row2_california_amount_col_c",
+      "label": "Row 2. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2111",
+      "position": {
+        "page": 1,
+        "x": 216.133,
+        "y": 175.089
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row2_federal_amount_col_d",
+      "label": "Row 2. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2112",
+      "position": {
+        "page": 1,
+        "x": 306.394,
+        "y": 174.98
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row3_activity_description_col_a",
+      "label": "Row 3. Column (a). Schedule F Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2113",
+      "position": {
+        "page": 1,
+        "x": 35.685,
+        "y": 164
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row3_passive_or_nonpassive_col_b",
+      "label": "Row 3. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2114",
+      "position": {
+        "page": 1,
+        "x": 125.753,
+        "y": 163.96
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row3_california_amount_col_c",
+      "label": "Row 3. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2115",
+      "position": {
+        "page": 1,
+        "x": 216.133,
+        "y": 164.109
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row3_federal_amount_col_d",
+      "label": "Row 3. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2116",
+      "position": {
+        "page": 1,
+        "x": 306.394,
+        "y": 164
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row4_activity_description_col_a",
+      "label": "Row 4. Column (a). Schedule F Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2117",
+      "position": {
+        "page": 1,
+        "x": 35.685,
+        "y": 153
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row4_passive_or_nonpassive_col_b",
+      "label": "Row 4. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2118",
+      "position": {
+        "page": 1,
+        "x": 125.753,
+        "y": 152.96
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row4_california_amount_col_c",
+      "label": "Row 4. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2119",
+      "position": {
+        "page": 1,
+        "x": 216.133,
+        "y": 153.109
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row4_federal_amount_col_d",
+      "label": "Row 4. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2120",
+      "position": {
+        "page": 1,
+        "x": 306.394,
+        "y": 153
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row5_activity_description_col_a",
+      "label": "Row 5. Column (a). Schedule F Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2121",
+      "position": {
+        "page": 1,
+        "x": 35.685,
+        "y": 141.98
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row5_passive_or_nonpassive_col_b",
+      "label": "Row 5. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2122",
+      "position": {
+        "page": 1,
+        "x": 125.753,
+        "y": 141.94
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row5_california_amount_col_c",
+      "label": "Row 5. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2123",
+      "position": {
+        "page": 1,
+        "x": 215.738,
+        "y": 142.089
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row5_federal_amount_col_d",
+      "label": "Row 5. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2124",
+      "position": {
+        "page": 1,
+        "x": 306.394,
+        "y": 141.98
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row6_activity_description_col_a",
+      "label": "Row 6. Column (a). Schedule F Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2125",
+      "position": {
+        "page": 1,
+        "x": 35.685,
+        "y": 131
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row6_passive_or_nonpassive_col_b",
+      "label": "Row 6. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2126",
+      "position": {
+        "page": 1,
+        "x": 125.753,
+        "y": 130.96
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row6_california_amount_col_c",
+      "label": "Row 6. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2127",
+      "position": {
+        "page": 1,
+        "x": 215.738,
+        "y": 131.109
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row6_federal_amount_col_d",
+      "label": "Row 6. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2128",
+      "position": {
+        "page": 1,
+        "x": 306.394,
+        "y": 131
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row7_activity_description_col_a",
+      "label": "Row 7. Column (a). Schedule F Activities.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2129",
+      "position": {
+        "page": 1,
+        "x": 35.685,
+        "y": 120.08
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row7_passive_or_nonpassive_col_b",
+      "label": "Row 7. Column (b). Passive or Nonpassive.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2130",
+      "position": {
+        "page": 1,
+        "x": 125.753,
+        "y": 120.04
+      }
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row7_california_amount_col_c",
+      "label": "Row 7. Column (c). California Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2131",
+      "position": {
+        "page": 1,
+        "x": 215.738,
+        "y": 120.189
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row7_federal_amount_col_d",
+      "label": "Row 7. Column (d). Federal Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2132",
+      "position": {
+        "page": 1,
+        "x": 306.394,
+        "y": 120.08
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.3c_schedule_f_total_california_amount",
+      "label": "Row 8. Total. Column (c). California Amount. Line 3(c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2133",
+      "position": {
+        "page": 1,
+        "x": 233.952,
+        "y": 107.771
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.3d_schedule_f_total_federal_amount",
+      "label": "Row 8. Total. Column (d). Federal Amount. Line 3(d).***",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2134",
+      "position": {
+        "page": 1,
+        "x": 337,
+        "y": 107.77
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.3e_schedule_f_california_adjustment",
+      "label": "Row 8. Total. Column (e). California Adjustment. Line 3 (e). If the amount is positive, transfer the amount to Schedule C A (540), Part one or Schedule C A (540 N R), Part two, Section B, line 6, column C. If the amount is negative, transfer the amount to Schedule C A (540), Part one or Schedule C A (540 N R), Part two, Section B, (as a positive amount) line 6, column B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_2135",
+      "position": {
+        "page": 1,
+        "x": 416.28,
+        "y": 107.77
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row1_activity_name",
+      "label": "Part four. Row 1. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3001",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 638.792
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part4.row1_col_a_net_income",
+      "label": "Row 1. Current year. Column (a). Net income (line 1 a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3002",
+      "position": {
+        "page": 2,
+        "x": 196.32,
+        "y": 638.792
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row1_col_b_net_loss",
+      "label": "Row 1. Current year. Column (b). Net loss (line 1 b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3003",
+      "position": {
+        "page": 2,
+        "x": 272.4,
+        "y": 638.792
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row1_col_c_prior_unallowed_loss",
+      "label": "Row 1. Prior year. Column (c). Unallowed loss (line 1 c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3004",
+      "position": {
+        "page": 2,
+        "x": 348.36,
+        "y": 638.792
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row1_col_d_overall_gain",
+      "label": "Row 1. Overall gain or loss. Column (d). Gain.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3005",
+      "position": {
+        "page": 2,
+        "x": 424.32,
+        "y": 638.792
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row1_col_e_overall_loss",
+      "label": "Row 1. Overall gain or loss. Column (e). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3006",
+      "position": {
+        "page": 2,
+        "x": 500.16,
+        "y": 638.792
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row2_activity_name",
+      "label": "Row 2. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3007",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 627.75
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part4.row2_col_a_net_income",
+      "label": "Row 2. Current year. Column (a). Net income (line 1 a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3008",
+      "position": {
+        "page": 2,
+        "x": 196.32,
+        "y": 627.75
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row2_col_b_net_loss",
+      "label": "Row 2. Current year. Column (b). Net loss (line 1 b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3009",
+      "position": {
+        "page": 2,
+        "x": 272.4,
+        "y": 627.75
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row2_col_c_prior_unallowed_loss",
+      "label": "Row 2. Prior year. Column (c). Unallowed loss (line 1 c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3010",
+      "position": {
+        "page": 2,
+        "x": 348.36,
+        "y": 627.75
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row2_col_d_overall_gain",
+      "label": "Row 2. Overall gain or loss. Column (d). Gain.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3011",
+      "position": {
+        "page": 2,
+        "x": 424.32,
+        "y": 627.75
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row2_col_e_overall_loss",
+      "label": "Row 2. Overall gain or loss. Column (e). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3012",
+      "position": {
+        "page": 2,
+        "x": 500.16,
+        "y": 627.75
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row3_activity_name",
+      "label": "Row 3. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3013",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 616.73
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part4.row3_col_a_net_income",
+      "label": "Row 3. Current year. Column (a). Net income (line 1 a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3014",
+      "position": {
+        "page": 2,
+        "x": 196.32,
+        "y": 616.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row3_col_b_net_loss",
+      "label": "Row 3. Current year. Column (b). Net loss (line 1 b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3015",
+      "position": {
+        "page": 2,
+        "x": 272.4,
+        "y": 616.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row3_col_c_prior_unallowed_loss",
+      "label": "Row 3. Prior year. Column (c). Unallowed loss (line 1 c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3016",
+      "position": {
+        "page": 2,
+        "x": 348.36,
+        "y": 616.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row3_col_d_overall_gain",
+      "label": "Row 3. Overall gain or loss. Column (d). Gain.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3017",
+      "position": {
+        "page": 2,
+        "x": 424.32,
+        "y": 616.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row3_col_e_overall_loss",
+      "label": "Row 3. Overall gain or loss. Column (e). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3018",
+      "position": {
+        "page": 2,
+        "x": 500.16,
+        "y": 616.73
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row4_activity_name",
+      "label": "Row 4. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3019",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 605.75
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part4.row4_col_a_net_income",
+      "label": "Row 4. Current year. Column (a). Net income (line 1 a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3020",
+      "position": {
+        "page": 2,
+        "x": 196.32,
+        "y": 605.75
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row4_col_b_net_loss",
+      "label": "Row 4. Current year. Column (b). Net loss (line 1 b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3021",
+      "position": {
+        "page": 2,
+        "x": 272.4,
+        "y": 605.75
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row4_col_c_prior_unallowed_loss",
+      "label": "Row 4. Prior year. Column (c). Unallowed loss (line 1 c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3022",
+      "position": {
+        "page": 2,
+        "x": 348.36,
+        "y": 605.75
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row4_col_d_overall_gain",
+      "label": "Row 4. Overall gain or loss. Column (d). Gain.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3023",
+      "position": {
+        "page": 2,
+        "x": 424.32,
+        "y": 605.75
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row4_col_e_overall_loss",
+      "label": "Row 4. Overall gain or loss. Column (e). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3024",
+      "position": {
+        "page": 2,
+        "x": 500.16,
+        "y": 605.75
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row5_activity_name",
+      "label": "Row 5. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3025",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 594.77
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part4.row5_col_a_net_income",
+      "label": "Row 5. Current year. Column (a). Net income (line 1 a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3026",
+      "position": {
+        "page": 2,
+        "x": 196.32,
+        "y": 594.68
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row5_col_b_net_loss",
+      "label": "Row 5. Current year. Column (b). Net loss (line 1 b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3027",
+      "position": {
+        "page": 2,
+        "x": 272.4,
+        "y": 594.77
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row5_col_c_prior_unallowed_loss",
+      "label": "Row 5. Prior year. Column (c). Unallowed loss (line 1 c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3028",
+      "position": {
+        "page": 2,
+        "x": 348.36,
+        "y": 594.77
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row5_col_d_overall_gain",
+      "label": "Row 5. Overall gain or loss. Column (d). Gain.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3029",
+      "position": {
+        "page": 2,
+        "x": 424.32,
+        "y": 594.77
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.row5_col_e_overall_loss",
+      "label": "Row 5. Overall gain or loss. Column (e). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3030",
+      "position": {
+        "page": 2,
+        "x": 500.064,
+        "y": 594.77
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.total_col_a_net_income",
+      "label": "Row 6. Total. Enter on Part one, line 1 a, line 1 b, and line 1 c. Current year. Column (a). Net income (line 1 a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3031",
+      "position": {
+        "page": 2,
+        "x": 196.32,
+        "y": 572.592
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.total_col_b_net_loss",
+      "label": "Row 6. Total. Enter on Part one, line 1a, line 1 b, and line 1 c. Current year. Column (b). Net loss (line 1 b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3032",
+      "position": {
+        "page": 2,
+        "x": 272.4,
+        "y": 572.592
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part4.total_col_c_prior_unallowed_loss",
+      "label": "Row 6. Total. Enter on Part one, line 1 a, line 1 b, and line 1 c. Prior year. Column (c). Unallowed loss (line 1 c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3033",
+      "position": {
+        "page": 2,
+        "x": 348.36,
+        "y": 572.592
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row1_activity_name",
+      "label": "Part five. Row 1. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3034",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 506.39
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part5.row1_col_a_net_income",
+      "label": "Row 1. Current year. Column (a). Net income (line 2 a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3035",
+      "position": {
+        "page": 2,
+        "x": 196.32,
+        "y": 506.39
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row1_col_b_net_loss",
+      "label": "Row 1. Current year. Column (b). Net loss (line 2 b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3036",
+      "position": {
+        "page": 2,
+        "x": 272.4,
+        "y": 506.39
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row1_col_c_prior_unallowed_loss",
+      "label": "Row 1. Prior year. Column (c). Unallowed loss (line 2 c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3037",
+      "position": {
+        "page": 2,
+        "x": 348.36,
+        "y": 506.39
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row1_col_d_overall_gain",
+      "label": "Row 1. Overall gain or loss. Column (d). Gain.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3038",
+      "position": {
+        "page": 2,
+        "x": 424.32,
+        "y": 506.39
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row1_col_e_overall_loss",
+      "label": "Row 1. Overall gain or loss. Column (e). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3039",
+      "position": {
+        "page": 2,
+        "x": 500.064,
+        "y": 506.39
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row2_activity_name",
+      "label": "Row 2. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3040",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 495.348
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part5.row2_col_a_net_income",
+      "label": "Row 2. Current year. Column (a). Net income (line 2 a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3041",
+      "position": {
+        "page": 2,
+        "x": 196.32,
+        "y": 495.348
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row2_col_b_net_loss",
+      "label": "Row 2. Current year. Column (b). Net loss (line 2 b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3042",
+      "position": {
+        "page": 2,
+        "x": 272.4,
+        "y": 495.348
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row2_col_c_prior_unallowed_loss",
+      "label": "Row 2. Prior year. Column (c). Unallowed loss (line 2 c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3043",
+      "position": {
+        "page": 2,
+        "x": 348.36,
+        "y": 495.348
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row2_col_d_overall_gain",
+      "label": "Row 2. Overall gain or loss. Column (d). Gain.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3044",
+      "position": {
+        "page": 2,
+        "x": 424.32,
+        "y": 495.348
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row2_col_e_overall_loss",
+      "label": "Row 2. Overall gain or loss. Column (e). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3045",
+      "position": {
+        "page": 2,
+        "x": 500.064,
+        "y": 495.348
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row3_activity_name",
+      "label": "Row 3. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3046",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 484.418
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part5.row3_col_a_net_income",
+      "label": "Row 3. Current year. Column (a). Net income (line 2 a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3047",
+      "position": {
+        "page": 2,
+        "x": 196.32,
+        "y": 484.418
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row3_col_b_net_loss",
+      "label": "Row 3. Current year. Column (b). Net loss (line 2 b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3048",
+      "position": {
+        "page": 2,
+        "x": 272.4,
+        "y": 484.418
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row3_col_c_prior_unallowed_loss",
+      "label": "Row 3. Prior year. Column (c). Unallowed loss (line 2 c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3049",
+      "position": {
+        "page": 2,
+        "x": 348.36,
+        "y": 484.418
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row3_col_d_overall_gain",
+      "label": "Row 3. Overall gain or loss. Column (d). Gain.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3050",
+      "position": {
+        "page": 2,
+        "x": 424.32,
+        "y": 484.418
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row3_col_e_overall_loss",
+      "label": "Row 3. Overall gain or loss. Column (e). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3051",
+      "position": {
+        "page": 2,
+        "x": 500.064,
+        "y": 484.418
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row4_activity_name",
+      "label": "Row 4. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3052",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 473.438
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part5.row4_col_a_net_income",
+      "label": "Row 4. Current year. Column (a). Net income (line 2 a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3053",
+      "position": {
+        "page": 2,
+        "x": 196.32,
+        "y": 473.438
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row4_col_b_net_loss",
+      "label": "Row 4. Current year. Column (b). Net loss (line 2 b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3054",
+      "position": {
+        "page": 2,
+        "x": 272.4,
+        "y": 473.438
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row4_col_c_prior_unallowed_loss",
+      "label": "Row 4. Prior year. Column (c). Unallowed loss (line 2 c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3055",
+      "position": {
+        "page": 2,
+        "x": 348.36,
+        "y": 473.438
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row4_col_d_overall_gain",
+      "label": "Row 4. Overall gain or loss. Column (d). Gain.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3056",
+      "position": {
+        "page": 2,
+        "x": 424.32,
+        "y": 473.438
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row4_col_e_overall_loss",
+      "label": "Row 4. Overall gain or loss. Column (e). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3057",
+      "position": {
+        "page": 2,
+        "x": 500.064,
+        "y": 473.438
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row5_activity_name",
+      "label": "Row 5. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3058",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 462.458
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part5.row5_col_a_net_income",
+      "label": "Row 5. Current year. Column (a). Net income (line 2 a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3059",
+      "position": {
+        "page": 2,
+        "x": 196.32,
+        "y": 462.458
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row5_col_b_net_loss",
+      "label": "Row 5. Current year. Column (b). Net loss (line 2 b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3060",
+      "position": {
+        "page": 2,
+        "x": 272.4,
+        "y": 462.458
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row5_col_c_prior_unallowed_loss",
+      "label": "Row 5. Prior year. Column (c). Unallowed loss (line 2 c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3061",
+      "position": {
+        "page": 2,
+        "x": 348.36,
+        "y": 462.458
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row5_col_d_overall_gain",
+      "label": "Row 5. Overall gain or loss. Column (d). Gain.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3062",
+      "position": {
+        "page": 2,
+        "x": 424.32,
+        "y": 462.458
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.row5_col_e_overall_loss",
+      "label": "Row 5. Overall gain or loss. Column (e). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3063",
+      "position": {
+        "page": 2,
+        "x": 500.064,
+        "y": 462.458
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.total_col_a_net_income",
+      "label": "Row 6. Total. Enter on Part one, line 2 a, line 2 b, and line 2 c. Current year. Column (a). Net income (line 2 a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3064",
+      "position": {
+        "page": 2,
+        "x": 196.32,
+        "y": 440.214
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.total_col_b_net_loss",
+      "label": "Row 6. Total. Enter on Part one, line 2 a, line 2 b, and line 2 c. Current year. Column (b). Net loss (line 2 b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3065",
+      "position": {
+        "page": 2,
+        "x": 272.4,
+        "y": 440.304
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part5.total_col_c_prior_unallowed_loss",
+      "label": "Row 6. Total. Enter on Part one, line 2 a, line 2 b, and line 2 c. Prior year. Column (c). Unallowed loss (line 2 c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3066",
+      "position": {
+        "page": 2,
+        "x": 348.36,
+        "y": 440.304
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part6.row1_activity_name",
+      "label": "Part six. Row 1. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3067",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 387.05
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part6.row1_form_or_schedule",
+      "label": "Row 1. Form or schedule to be reported on.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3068",
+      "position": {
+        "page": 2,
+        "x": 196.32,
+        "y": 387.05
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part6.row1_col_a_loss",
+      "label": "Row 1. Column (a). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3069",
+      "position": {
+        "page": 2,
+        "x": 272.4,
+        "y": 387.05
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part6.row1_col_b_ratio",
+      "label": "Row 1. Column (b). Ratio.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3070",
+      "position": {
+        "page": 2,
+        "x": 348.36,
+        "y": 387.05
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part6.row1_col_c_special_allowance",
+      "label": "Row 1. Column (c). Special allowance.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3071",
+      "position": {
+        "page": 2,
+        "x": 424.32,
+        "y": 387.05
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part6.row1_col_d_loss_less_allowance",
+      "label": "Row 1. Column (d). Subtract column (c) from column (a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3072",
+      "position": {
+        "page": 2,
+        "x": 500.064,
+        "y": 387.05
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part6.row2_activity_name",
+      "label": "Row 2. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3073",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 376.008
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part6.row2_form_or_schedule",
+      "label": "Row 2. Form or schedule to be reported on.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3074",
+      "position": {
+        "page": 2,
+        "x": 196.32,
+        "y": 376.008
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part6.row2_col_a_loss",
+      "label": "Row 2. Column (a). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3075",
+      "position": {
+        "page": 2,
+        "x": 272.4,
+        "y": 376.008
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part6.row2_col_b_ratio",
+      "label": "Row 2. Column (b). Ratio.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3076",
+      "position": {
+        "page": 2,
+        "x": 348.36,
+        "y": 376.008
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part6.row2_col_c_special_allowance",
+      "label": "Row 2. Column (c). Special allowance.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3077",
+      "position": {
+        "page": 2,
+        "x": 424.32,
+        "y": 376.008
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part6.row2_col_d_loss_less_allowance",
+      "label": "Row 2. Column (d). Subtract column (c) from column (a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3078",
+      "position": {
+        "page": 2,
+        "x": 500.064,
+        "y": 376.008
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part6.row3_activity_name",
+      "label": "Row 3. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3079",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 365.078
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part6.row3_form_or_schedule",
+      "label": "Row 3. Form or schedule to be reported on.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3080",
+      "position": {
+        "page": 2,
+        "x": 196.32,
+        "y": 365.078
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part6.row3_col_a_loss",
+      "label": "Row 3. Column (a). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3081",
+      "position": {
+        "page": 2,
+        "x": 272.4,
+        "y": 365.078
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part6.row3_col_b_ratio",
+      "label": "Row 3. Column (b). Ratio.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3082",
+      "position": {
+        "page": 2,
+        "x": 348.36,
+        "y": 365.078
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part6.row3_col_c_special_allowance",
+      "label": "Row 3. Column (c). Special allowance.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3083",
+      "position": {
+        "page": 2,
+        "x": 424.32,
+        "y": 365.078
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part6.row3_col_d_loss_less_allowance",
+      "label": "Row 3. Column (d). Subtract column (c) from column (a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3084",
+      "position": {
+        "page": 2,
+        "x": 500.064,
+        "y": 365.078
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part6.row4_activity_name",
+      "label": "Row 4. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3085",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 354.098
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part6.row4_form_or_schedule",
+      "label": "Row 4. Form or schedule to be reported on.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3086",
+      "position": {
+        "page": 2,
+        "x": 196.32,
+        "y": 354.098
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part6.row4_col_a_loss",
+      "label": "Row 4. Column (a). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3087",
+      "position": {
+        "page": 2,
+        "x": 272.4,
+        "y": 354.098
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part6.row4_col_b_ratio",
+      "label": "Row 4. Column (b). Ratio.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3088",
+      "position": {
+        "page": 2,
+        "x": 348.36,
+        "y": 354.098
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part6.row4_col_c_special_allowance",
+      "label": "Row 4. Column (c). Special allowance.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3089",
+      "position": {
+        "page": 2,
+        "x": 424.32,
+        "y": 354.098
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part6.row4_col_d_loss_less_allowance",
+      "label": "Row 4. Column (d). Subtract column (c) from column (a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3090",
+      "position": {
+        "page": 2,
+        "x": 500.064,
+        "y": 354.098
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part6.row5_activity_name",
+      "label": "Row 5. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3091",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 343.118
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part6.row5_form_or_schedule",
+      "label": "Row 5. Form or schedule to be reported on.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3092",
+      "position": {
+        "page": 2,
+        "x": 196.32,
+        "y": 343.118
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part6.row5_col_a_loss",
+      "label": "Row 5. Column (a). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3093",
+      "position": {
+        "page": 2,
+        "x": 272.4,
+        "y": 343.118
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part6.row5_col_b_ratio",
+      "label": "Row 5. Column (b). Ratio.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3094",
+      "position": {
+        "page": 2,
+        "x": 348.36,
+        "y": 343.118
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part6.row5_col_c_special_allowance",
+      "label": "Row 5. Column (c). Special allowance.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3095",
+      "position": {
+        "page": 2,
+        "x": 424.32,
+        "y": 343.118
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part6.row5_col_d_loss_less_allowance",
+      "label": "Row 5. Column (d). Subtract column (c) from column (a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3096",
+      "position": {
+        "page": 2,
+        "x": 500.064,
+        "y": 343.118
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part6.total_col_a_loss",
+      "label": "Row 6. Total. Column (a). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3097",
+      "position": {
+        "page": 2,
+        "x": 272.4,
+        "y": 321.128
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part6.total_col_c_special_allowance",
+      "label": "Row 6. Total. Column (c). Special allowance.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3099",
+      "position": {
+        "page": 2,
+        "x": 424.32,
+        "y": 321.128
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part6.total_col_d_loss_less_allowance",
+      "label": "Row 6. Total. Column (d). Subtract column (c) from column (a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3100",
+      "position": {
+        "page": 2,
+        "x": 500.064,
+        "y": 321.128
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part7.row1_activity_name",
+      "label": "Part seven. Allocation of Unallowed Losses. Row 1. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3101",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 275.12
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part7.row1_form_or_schedule",
+      "label": "Row 1. Form or schedule to be reported on.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3102",
+      "position": {
+        "page": 2,
+        "x": 216.5,
+        "y": 275.12
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part7.row1_col_a_loss",
+      "label": "Row 1. Column (a). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3103",
+      "position": {
+        "page": 2,
+        "x": 306.5,
+        "y": 275.12
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part7.row1_col_b_ratio",
+      "label": "Row 1. Column (b). Ratio.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3104",
+      "position": {
+        "page": 2,
+        "x": 396.58,
+        "y": 275.12
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part7.row1_col_c_unallowed_loss",
+      "label": "Row 1. Column (c). Unallowed loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3105",
+      "position": {
+        "page": 2,
+        "x": 486.275,
+        "y": 275.12
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part7.row2_activity_name",
+      "label": "Row 2. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3106",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 264.08
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part7.row2_form_or_schedule",
+      "label": "Row 2. Form or schedule to be reported on.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3107",
+      "position": {
+        "page": 2,
+        "x": 216.5,
+        "y": 264.08
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part7.row2_col_a_loss",
+      "label": "Row 2. Column (a). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3108",
+      "position": {
+        "page": 2,
+        "x": 306.5,
+        "y": 264.08
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part7.row2_col_b_ratio",
+      "label": "Row 2. Column (b). Ratio.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3109",
+      "position": {
+        "page": 2,
+        "x": 396.58,
+        "y": 264.08
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part7.row2_col_c_unallowed_loss",
+      "label": "Row 2. Column (c). Unallowed loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3110",
+      "position": {
+        "page": 2,
+        "x": 486.275,
+        "y": 264.08
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part7.row3_activity_name",
+      "label": "Row 3. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3111",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 253
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part7.row3_form_or_schedule",
+      "label": "Row 3. Form or schedule to be reported on.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3112",
+      "position": {
+        "page": 2,
+        "x": 216.5,
+        "y": 253
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part7.row3_col_a_loss",
+      "label": "Row 3. Column (a). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3113",
+      "position": {
+        "page": 2,
+        "x": 306.5,
+        "y": 253
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part7.row3_col_b_ratio",
+      "label": "Row 3. Column (b). Ratio.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3114",
+      "position": {
+        "page": 2,
+        "x": 396.58,
+        "y": 253
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part7.row3_col_c_unallowed_loss",
+      "label": "Row 3. Column (c). Unallowed loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3115",
+      "position": {
+        "page": 2,
+        "x": 486.275,
+        "y": 253
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part7.row4_activity_name",
+      "label": "Row 4. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3116",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 242.12
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part7.row4_form_or_schedule",
+      "label": "Row 4. Form or schedule to be reported on.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3117",
+      "position": {
+        "page": 2,
+        "x": 216.5,
+        "y": 242.12
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part7.row4_col_a_loss",
+      "label": "Row 4. Column (a). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3118",
+      "position": {
+        "page": 2,
+        "x": 306.5,
+        "y": 242.12
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part7.row4_col_b_ratio",
+      "label": "Row 4. Column (b). Ratio.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3119",
+      "position": {
+        "page": 2,
+        "x": 396.58,
+        "y": 242.12
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part7.row4_col_c_unallowed_loss",
+      "label": "Row 4. Column (c). Unallowed loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3120",
+      "position": {
+        "page": 2,
+        "x": 486.275,
+        "y": 242.12
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part7.row5_activity_name",
+      "label": "Row 5. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3121",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 231.08
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part7.row5_form_or_schedule",
+      "label": "Row 5. Form or schedule to be reported on.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3122",
+      "position": {
+        "page": 2,
+        "x": 216.5,
+        "y": 231.08
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part7.row5_col_a_loss",
+      "label": "Row 5. Column (a). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3123",
+      "position": {
+        "page": 2,
+        "x": 306.5,
+        "y": 231.08
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part7.row5_col_b_ratio",
+      "label": "Row 5. Column (b). Ratio.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3124",
+      "position": {
+        "page": 2,
+        "x": 396.58,
+        "y": 231.08
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part7.row5_col_c_unallowed_loss",
+      "label": "Row 5. Column (c). Unallowed loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3125",
+      "position": {
+        "page": 2,
+        "x": 486.275,
+        "y": 231.08
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part7.row6_activity_name",
+      "label": "Row 6. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3126",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 220.1
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part7.row6_form_or_schedule",
+      "label": "Row 6. Form or schedule to be reported on.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3127",
+      "position": {
+        "page": 2,
+        "x": 216.5,
+        "y": 220.1
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part7.row6_col_a_loss",
+      "label": "Row 6. Column (a). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3128",
+      "position": {
+        "page": 2,
+        "x": 306.5,
+        "y": 220.1
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part7.row6_col_b_ratio",
+      "label": "Row 6. Column (b). Ratio.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3129",
+      "position": {
+        "page": 2,
+        "x": 396.58,
+        "y": 220.1
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part7.row6_col_c_unallowed_loss",
+      "label": "Row 6. Column (c). Unallowed loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3130",
+      "position": {
+        "page": 2,
+        "x": 486.275,
+        "y": 220.1
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part7.total_col_a_loss",
+      "label": "Row 7. Total. Column (a). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3131",
+      "position": {
+        "page": 2,
+        "x": 306.5,
+        "y": 198.08
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part7.total_col_c_unallowed_loss",
+      "label": "Row 7. Total. Column (c). Unallowed loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3133",
+      "position": {
+        "page": 2,
+        "x": 486.275,
+        "y": 198.08
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part8.row1_activity_name",
+      "label": "Part eight. Allowed Losses. Row 1. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3134",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 152.72
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part8.row1_form_or_schedule",
+      "label": "Row 1. Form or schedule to be reported on.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3135",
+      "position": {
+        "page": 2,
+        "x": 216.5,
+        "y": 152.72
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part8.row1_col_a_loss",
+      "label": "Row 1. Column (a). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3136",
+      "position": {
+        "page": 2,
+        "x": 306.5,
+        "y": 152.72
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part8.row1_col_b_unallowed_loss",
+      "label": "Row 1. Column (b). Unallowed loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3137",
+      "position": {
+        "page": 2,
+        "x": 396.58,
+        "y": 152.72
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part8.row1_col_c_allowed_loss",
+      "label": "Row 1. Column (c). Allowed loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3138",
+      "position": {
+        "page": 2,
+        "x": 486.275,
+        "y": 152.72
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part8.row2_activity_name",
+      "label": "Row 2. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3139",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 141.8
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part8.row2_form_or_schedule",
+      "label": "Row 2. Form or schedule to be reported on.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3140",
+      "position": {
+        "page": 2,
+        "x": 216.5,
+        "y": 141.8
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part8.row2_col_a_loss",
+      "label": "Row 2. Column (a). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3141",
+      "position": {
+        "page": 2,
+        "x": 306.5,
+        "y": 141.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part8.row2_col_b_unallowed_loss",
+      "label": "Row 2. Column (b). Unallowed loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3142",
+      "position": {
+        "page": 2,
+        "x": 396.58,
+        "y": 141.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part8.row2_col_c_allowed_loss",
+      "label": "Row 2. Column (c). Allowed loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3143",
+      "position": {
+        "page": 2,
+        "x": 486.275,
+        "y": 141.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part8.row3_activity_name",
+      "label": "Row 3. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3144",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 130.75
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part8.row3_form_or_schedule",
+      "label": "Row 3. Form or schedule to be reported on.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3145",
+      "position": {
+        "page": 2,
+        "x": 216.5,
+        "y": 130.75
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part8.row3_col_a_loss",
+      "label": "Row 3. Column (a). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3146",
+      "position": {
+        "page": 2,
+        "x": 306.5,
+        "y": 130.75
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part8.row3_col_b_unallowed_loss",
+      "label": "Row 3. Column (b). Unallowed loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3147",
+      "position": {
+        "page": 2,
+        "x": 396.58,
+        "y": 130.75
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part8.row3_col_c_allowed_loss",
+      "label": "Row 3. Column (c). Allowed loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3148",
+      "position": {
+        "page": 2,
+        "x": 486.275,
+        "y": 130.75
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part8.row4_activity_name",
+      "label": "Row 4. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3149",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 119.87
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part8.row4_form_or_schedule",
+      "label": "Row 4. Form or schedule to be reported on.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3150",
+      "position": {
+        "page": 2,
+        "x": 216.5,
+        "y": 119.87
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part8.row4_col_a_loss",
+      "label": "Row 4. Column (a). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3151",
+      "position": {
+        "page": 2,
+        "x": 306.5,
+        "y": 119.87
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part8.row4_col_b_unallowed_loss",
+      "label": "Row 4. Column (b). Unallowed loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3152",
+      "position": {
+        "page": 2,
+        "x": 396.58,
+        "y": 119.87
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part8.row4_col_c_allowed_loss",
+      "label": "Row 4. Column (c). Allowed loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3153",
+      "position": {
+        "page": 2,
+        "x": 486.275,
+        "y": 119.87
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part8.row5_activity_name",
+      "label": "Row 5. Name of activity.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3154",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 108.83
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part8.row5_form_or_schedule",
+      "label": "Row 5. Form or schedule to be reported on.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3155",
+      "position": {
+        "page": 2,
+        "x": 216.5,
+        "y": 108.83
+      }
+    },
+    {
+      "fieldId": "form-3801.2.part8.row5_col_a_loss",
+      "label": "Row 5. Column (a). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3156",
+      "position": {
+        "page": 2,
+        "x": 306.5,
+        "y": 108.83
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part8.row5_col_b_unallowed_loss",
+      "label": "Row 5. Column (b). Unallowed loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3157",
+      "position": {
+        "page": 2,
+        "x": 396.58,
+        "y": 108.83
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part8.row5_col_c_allowed_loss",
+      "label": "Row 5. Column (c). Allowed loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3158",
+      "position": {
+        "page": 2,
+        "x": 486.275,
+        "y": 108.83
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part8.total_col_a_loss",
+      "label": "Row 6. Total. Column (a). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3159",
+      "position": {
+        "page": 2,
+        "x": 306.5,
+        "y": 86.91
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part8.total_col_b_unallowed_loss",
+      "label": "Row 6. Total. Column (b). Unallowed loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3160",
+      "position": {
+        "page": 2,
+        "x": 396.58,
+        "y": 86.91
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.2.part8.total_col_c_allowed_loss",
+      "label": "Row 6. Total. Column (c). Allowed loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_3161",
+      "position": {
+        "page": 2,
+        "x": 486.275,
+        "y": 86.91
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.3.part9.row1_form_or_schedule",
+      "label": "Part nine. Name of activity. Form or schedule to be reported on: Form or schedule 1. Enter form or schedule number.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4002",
+      "position": {
+        "page": 3,
+        "x": 112.8,
+        "y": 647.6
+      }
+    },
+    {
+      "fieldId": "form-3801.3.part9.row1_1a_net_loss_plus_prior_unallowed_col_a",
+      "label": "Line 1 a. Net loss plus prior year unallowed loss from form or schedule. Column (a).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4003",
+      "position": {
+        "page": 3,
+        "x": 238.11,
+        "y": 620.76
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.3.part9.row1_1b_net_income_col_a",
+      "label": "Line 1 b. Net income from form or schedule. Column (a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4004",
+      "position": {
+        "page": 3,
+        "x": 238.02,
+        "y": 593.88
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.3.part9.row1_1c_loss_less_income_col_b",
+      "label": "Line 1 c. Subtract line 1 b from line 1 a. If zero or less, enter zero. Column (b).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4005",
+      "position": {
+        "page": 3,
+        "x": 305.22,
+        "y": 557.64
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.3.part9.row1_1c_ratio_col_c",
+      "label": "Line 1 c. Subtract line 1 b from line 1 a. If zero or less, enter zero. Column (c). Ratio.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4006",
+      "position": {
+        "page": 3,
+        "x": 373.11,
+        "y": 557.64
+      }
+    },
+    {
+      "fieldId": "form-3801.3.part9.row1_1c_unallowed_loss_col_d",
+      "label": "Line 1 c. Subtract line 1 b from line 1 a. If zero or less, enter zero. Column (d). Unallowed loss.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4007",
+      "position": {
+        "page": 3,
+        "x": 440.91,
+        "y": 557.64
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.3.part9.row1_1c_allowed_loss_col_e",
+      "label": "Line 1 c. Subtract line 1 b from line 1 a. If zero or less, enter zero. Column (e). Allowed loss.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4008",
+      "position": {
+        "page": 3,
+        "x": 508.59,
+        "y": 557.64
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.3.part9.row2_form_or_schedule",
+      "label": "Form or schedule to be reported on: Form or schedule 2. Enter form or schedule number.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4009",
+      "position": {
+        "page": 3,
+        "x": 112.8,
+        "y": 530.76
+      }
+    },
+    {
+      "fieldId": "form-3801.3.part9.row2_1a_net_loss_plus_prior_unallowed_col_a",
+      "label": "Line 1 a. Net loss plus prior year unallowed loss from form or schedule. Column (a).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4010",
+      "position": {
+        "page": 3,
+        "x": 238.02,
+        "y": 504
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.3.part9.row2_1b_net_income_col_a",
+      "label": "Line 1 b. Net income from form or schedule. Column (a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4011",
+      "position": {
+        "page": 3,
+        "x": 237.84,
+        "y": 476.76
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.3.part9.row2_1c_loss_less_income_col_b",
+      "label": "Line 1 c. Subtract line 1 b from line 1 a. If zero or less, enter zero. Column (b).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4012",
+      "position": {
+        "page": 3,
+        "x": 305.4,
+        "y": 440.76
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.3.part9.row2_1c_ratio_col_c",
+      "label": "Line 1 c. Subtract line 1 b from line 1 a. If zero or less, enter zero. Column (c). Ratio.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4013",
+      "position": {
+        "page": 3,
+        "x": 373.11,
+        "y": 440.76
+      }
+    },
+    {
+      "fieldId": "form-3801.3.part9.row2_1c_unallowed_loss_col_d",
+      "label": "Line 1 c. Subtract line 1 b from line 1 a. If zero or less, enter zero. Column (d). Unallowed loss.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4014",
+      "position": {
+        "page": 3,
+        "x": 440.91,
+        "y": 440.76
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.3.part9.row2_1c_allowed_loss_col_e",
+      "label": "Line 1 c. Subtract line 1 b from line 1 a. If zero or less, enter zero. Column (e). Allowed loss.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4015",
+      "position": {
+        "page": 3,
+        "x": 508.59,
+        "y": 440.76
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.3.part9.row3_form_or_schedule",
+      "label": "Form or schedule to be reported on: Form or schedule 3. Enter form or schedule number.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4016",
+      "position": {
+        "page": 3,
+        "x": 112.8,
+        "y": 413.64
+      }
+    },
+    {
+      "fieldId": "form-3801.3.part9.row3_1a_net_loss_plus_prior_unallowed_col_a",
+      "label": "Line 1 a. Net loss plus prior year unallowed loss from form or schedule. Column (a).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4017",
+      "position": {
+        "page": 3,
+        "x": 238.02,
+        "y": 387
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.3.part9.row3_1b_net_income_col_a",
+      "label": "Line 1 b. Net income from form or schedule. Column (a).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4018",
+      "position": {
+        "page": 3,
+        "x": 238.02,
+        "y": 359.64
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.3.part9.row3_1c_loss_less_income_col_b",
+      "label": "Line 1 c. Subtract line 1 b from line 1 a. If zero or less, enter zero. Column (b).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4019",
+      "position": {
+        "page": 3,
+        "x": 305.73,
+        "y": 324
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.3.part9.row3_1c_ratio_col_c",
+      "label": "Line 1 c. Subtract line 1 b from line 1 a. If zero or less, enter zero. Column (c). Ratio.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4020",
+      "position": {
+        "page": 3,
+        "x": 373.11,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-3801.3.part9.row3_1c_unallowed_loss_col_d",
+      "label": "Line 1 c. Subtract line 1 b from line 1 a. If zero or less, enter zero. Column (d). Unallowed loss.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4021",
+      "position": {
+        "page": 3,
+        "x": 440.91,
+        "y": 324
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.3.part9.row3_1c_allowed_loss_col_e",
+      "label": "Line 1 c. Subtract line 1 b from line 1 a. If zero or less, enter zero. Column (e). Allowed loss.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4022",
+      "position": {
+        "page": 3,
+        "x": 508.59,
+        "y": 324
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.3.part9.total_col_b",
+      "label": "Total. Column (b). Forms or schedules 1 through 3.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4023",
+      "position": {
+        "page": 3,
+        "x": 305.73,
+        "y": 287.64
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.3.part9.total_unallowed_loss_col_d",
+      "label": "Total. Column (d). Unallowed loss. Forms or schedules 1 through 3.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4025",
+      "position": {
+        "page": 3,
+        "x": 440.91,
+        "y": 287.64
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801.3.part9.total_allowed_loss_col_e",
+      "label": "Total. Column (e). Allowed loss. Forms or schedules 1 through 3.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3801_4026",
+      "position": {
+        "page": 3,
+        "x": 508.59,
+        "y": 287.64
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3801/blank.pdf",
+    "ingestedAt": "2026-11-20T05:27:58.703Z",
+    "totalFields": 337,
+    "skipped": 0,
+    "catalogEntries": 337
+  }
+}

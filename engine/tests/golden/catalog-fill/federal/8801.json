@@ -1,0 +1,519 @@
+{
+  "formId": "form-8801",
+  "fieldCount": 57,
+  "entries": [
+    {
+      "fieldId": "form-8801.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-1EETF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.0.line.1_prior_year_form_6251_lines_1_2e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "4,577"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.0.line.10_amount_after_exemption",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "4,272"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.0.line.11_tax_on_line_10",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "2,607"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.0.line.12_minimum_tax_foreign_tax_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "3,867"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.0.line.13_tentative_minimum_tax_exclusion_items",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "2,411"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.0.line.14_prior_year_form_6251_line_10",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "2,033"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.0.line.15_net_minimum_tax_exclusion_items",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "7,540"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.0.line.2_exclusion_item_adjustments_preferences",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "5,635"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.0.line.3_minimum_tax_credit_nol_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "6,771"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.0.line.4_combine_lines_1_2_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "5,755"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.0.line.5_exemption_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "7,625"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.0.line.6_exemption_phaseout_threshold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "5,181"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.0.line.7_amount_over_phaseout_threshold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "4,275"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.0.line.8_exemption_reduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "8,183"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.0.line.9_reduced_exemption",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "4,806"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.1.line.16_prior_year_tentative_minimum_tax_base",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+          "text": "9,015"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.1.line.17_amount_from_line_15",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+          "text": "1,638"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.1.line.18_line_16_minus_line_17",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+          "text": "6,556"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.1.line.19_prior_year_credit_carryforward",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+          "text": "6,310"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.1.line.20_unallowed_electric_vehicle_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+          "text": "8,175"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.1.line.21_combine_lines_18_through_20",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+          "text": "7,563"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.1.line.22_regular_tax_minus_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+          "text": "3,185"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.1.line.23_current_year_tentative_minimum_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+          "text": "5,161"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.1.line.24_line_22_minus_line_23",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+          "text": "7,550"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.1.line.25_minimum_tax_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+          "text": "8,816"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.1.line.26_credit_carryforward_next_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+          "text": "3,417"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.2.line.27_amount_from_line_10",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_1[0]",
+          "text": "6,042"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.2.line.28_qualified_dividends_worksheet_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_2[0]",
+          "text": "5,867"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.2.line.29_unrecaptured_section_1250_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_3[0]",
+          "text": "9,850"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.2.line.30_smaller_of_sum_or_worksheet",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_4[0]",
+          "text": "9,171"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.2.line.31_smaller_of_line_27_or_30",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_5[0]",
+          "text": "2,328"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.2.line.32_subtract_line_31_from_27",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_6[0]",
+          "text": "9,980"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.2.line.33_tax_at_26_or_28_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_7[0]",
+          "text": "4,475"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.2.line.34_zero_percent_rate_threshold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_8[0]",
+          "text": "5,069"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.2.line.35_ordinary_taxable_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_9[0]",
+          "text": "4,838"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.2.line.36_subtract_line_35_from_34",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_10[0]",
+          "text": "7,888"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.2.line.37_smaller_of_line_27_or_28",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_11[0]",
+          "text": "8,512"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.2.line.38_smaller_of_line_36_or_37",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_12[0]",
+          "text": "3,858"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.2.line.39_subtract_line_38_from_37",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_13[0]",
+          "text": "9,811"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.2.line.40_fifteen_percent_rate_threshold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_14[0]",
+          "text": "1,136"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.2.line.41_amount_from_line_36",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_15[0]",
+          "text": "4,193"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.2.line.42_worksheet_ordinary_income_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_16[0]",
+          "text": "1,652"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.3.line.43_add_lines_41_42",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_1[0]",
+          "text": "5,898"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.3.line.44_line_40_minus_43",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_2[0]",
+          "text": "4,235"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.3.line.45_smaller_of_39_or_44",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_3[0]",
+          "text": "9,966"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.3.line.46_tax_at_15_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_4[0]",
+          "text": "1,822"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.3.line.47_add_lines_38_45",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_5[0]",
+          "text": "9,284"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.3.line.48_line_37_minus_47",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_6[0]",
+          "text": "1,973"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.3.line.49_tax_at_20_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_7[0]",
+          "text": "3,957"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.3.line.50_add_lines_32_47_48",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_8[0]",
+          "text": "6,700"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.3.line.51_line_27_minus_50",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_9[0]",
+          "text": "3,914"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.3.line.52_tax_at_25_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_10[0]",
+          "text": "9,564"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.3.line.53_add_lines_33_46_49_52",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_11[0]",
+          "text": "4,174"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.3.line.54_tax_at_amt_rates",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_12[0]",
+          "text": "1,278"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8801.3.line.55_smaller_of_53_or_54",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_13[0]",
+          "text": "5,418"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,656 @@
+{
+  "form": {
+    "formId": "form-3510",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "FTB 3510 — Credit for Prior Year Alternative Minimum Tax"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3510.0.header.taxpayer_name",
+      "label": "Name(s) as shown on tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on tax return",
+      "position": {
+        "page": 0,
+        "x": 35.9777,
+        "y": 682.604
+      }
+    },
+    {
+      "fieldId": "form-3510.0.header.ssn_itin_fein",
+      "label": "S S N, I T I N, or F E I N (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "S S N, I T I N, or F E I N (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 442.93,
+        "y": 682.573
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3510.0.line.1_prior_year_schedule_p_amounts",
+      "label": "Part I, Section A, Line 1. Combine the amounts from your 2024 Schedule P (540 or 540NR), Part I, line 15 through line 18, and enter the result here. Schedule P (541) filers, see instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Section A, Line 1. Combine the amounts from your 2024 Schedule P (540 or 540NR), Part I, line 15 through line 18, and enter the result here. Schedule P (541) filers, see instructions",
+      "position": {
+        "page": 0,
+        "x": 465.982,
+        "y": 634.897
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.2_exclusion_adjustments_preferences",
+      "label": "Line 2. Enter any adjustments and tax preference items treated as exclusions. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Enter any adjustments and tax preference items treated as exclusions. See instructions",
+      "position": {
+        "page": 0,
+        "x": 465.982,
+        "y": 622.871
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.3_amt_credit_nol_deduction",
+      "label": "Line 3. A M T credit net operating loss deduction. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. A M T credit net operating loss deduction. See instructions",
+      "position": {
+        "page": 0,
+        "x": 471.767,
+        "y": 610.895
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.4_combine_lines_1_through_3",
+      "label": "Line 4. Combine line 1 through line 3. If zero or less, enter 0 here and on line 13; see instructions. If you were married/R D P filing separately for 2024 and this amount is more than $465,231, see instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Combine line 1 through line 3. If zero or less, enter 0 here and on line 13; see instructions. If you were married/R D P filing separately for 2024 and this amount is more than $465,231, see instructions",
+      "position": {
+        "page": 0,
+        "x": 465.987,
+        "y": 586.886
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.5_exemption_worksheet_line_1",
+      "label": "Line 5. Enter the amount from your 2024 Schedule P (540 or 540NR) Instructions for line 22 Exemption Worksheet, line 1. Schedule P (541) filers: enter $60,029.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Enter the amount from your 2024 Schedule P (540 or 540NR) Instructions for line 22 Exemption Worksheet, line 1. Schedule P (541) filers: enter $60,029",
+      "position": {
+        "page": 0,
+        "x": 465.995,
+        "y": 562.887
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.6_exemption_worksheet_line_3",
+      "label": "Line 6. Enter the amount from your 2024 Schedule P (540 or 540NR) Instructions for line 22 Exemption Worksheet, line 3. Schedule P (541) filers: enter $225,115.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Enter the amount from your 2024 Schedule P (540 or 540NR) Instructions for line 22 Exemption Worksheet, line 3. Schedule P (541) filers: enter $225,115",
+      "position": {
+        "page": 0,
+        "x": 465.985,
+        "y": 538.889
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.7_line_4_minus_line_6",
+      "label": "Line 7. Subtract line 6 from line 4. If zero or less, enter 0 here and on line 8, then go to line 9. Otherwise, go to line 8.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Subtract line 6 from line 4. If zero or less, enter 0 here and on line 8, then go to line 9. Otherwise, go to line 8",
+      "position": {
+        "page": 0,
+        "x": 466.005,
+        "y": 526.889
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.8_exemption_phaseout_amount",
+      "label": "Line 8. Multiply line 7 by 25%.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Multiply line 7 by 25%",
+      "position": {
+        "page": 0,
+        "x": 465.993,
+        "y": 514.881
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.9_exemption_after_phaseout",
+      "label": "Line 9. Subtract line 8 from line 5. If zero or less, enter 0 here. If completing for a certain child under age 24, see instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Subtract line 8 from line 5. If zero or less, enter 0 here. If completing for a certain child under age 24, see instructions",
+      "position": {
+        "page": 0,
+        "x": 465.995,
+        "y": 502.889
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.10_line_4_minus_line_9",
+      "label": "Line 10. Subtract line 9 from line 4. If zero or less, enter 0 here and on line 13. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Subtract line 9 from line 4. If zero or less, enter 0 here and on line 13. See instructions",
+      "position": {
+        "page": 0,
+        "x": 465.995,
+        "y": 490.879
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.11_tentative_minimum_tax_exclusions",
+      "label": "Line 11. Enter tentative minimum tax on exclusions. Multiply line 10 by 7.00%. 2024 540NR filers, go to Section B.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. Enter tentative minimum tax on exclusions. Multiply line 10 by 7.00%. 2024 540NR filers, go to Section B",
+      "position": {
+        "page": 0,
+        "x": 465.985,
+        "y": 478.879
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.12_regular_tax_before_credits",
+      "label": "Line 12. Regular tax before credits. Enter the amount from your 2024 Schedule P (540), Part II, line 25; or Schedule P (541), Part III, line 9.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. Regular tax before credits. Enter the amount from your 2024 Schedule P (540), Part II, line 25; or Schedule P (541), Part III, line 9",
+      "position": {
+        "page": 0,
+        "x": 465.985,
+        "y": 454.9
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.13_net_amt_on_exclusions",
+      "label": "Line 13. Net A M T on exclusions. Subtract line 12 from line 11. If zero or less, enter 0. Enter the result here and go to Part II.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Net A M T on exclusions. Subtract line 12 from line 11. If zero or less, enter 0. Enter the result here and go to Part II",
+      "position": {
+        "page": 0,
+        "x": 465.985,
+        "y": 442.999
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.14_amount_from_line_4",
+      "label": "Part I, Section B, Line 14. Enter the amount from line 4.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Section B, Line 14. Enter the amount from line 4",
+      "position": {
+        "page": 0,
+        "x": 465.733,
+        "y": 418.874
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.15_schedule_p_540nr_line_35",
+      "label": "Line 15. Enter the amount from your 2024 Schedule P (540NR), Part II, line 35.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Enter the amount from your 2024 Schedule P (540NR), Part II, line 35",
+      "position": {
+        "page": 0,
+        "x": 465.75,
+        "y": 406.896
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.16_total_amt_agi_exclusions",
+      "label": "Line 16. Total A M T adjusted gross income on exclusions. Add line 14 and line 15.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. Total A M T adjusted gross income on exclusions. Add line 14 and line 15",
+      "position": {
+        "page": 0,
+        "x": 465.75,
+        "y": 394.902
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.17_schedule_p_540nr_line_28",
+      "label": "Line 17. Enter the amount from your 2024 Schedule P (540NR), Part II, line 28.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. Enter the amount from your 2024 Schedule P (540NR), Part II, line 28",
+      "position": {
+        "page": 0,
+        "x": 465.75,
+        "y": 382.886
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.18_ca_exclusion_adjustments_preferences",
+      "label": "Line 18. Enter any adjustments and preferences treated as an exclusion. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. Enter any adjustments and preferences treated as an exclusion. See instructions",
+      "position": {
+        "page": 0,
+        "x": 465.75,
+        "y": 370.886
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.20_ca_amt_agi_exclusions",
+      "label": "Line 20. California A M T adjusted gross income on exclusions. Combine line 17 and line 18. Enter the result here. If you did not itemize deductions, enter the result here and on line 23. Skip line 21 and line 22 and go to line 24.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. California A M T adjusted gross income on exclusions. Combine line 17 and line 18. Enter the result here. If you did not itemize deductions, enter the result here and on line 23. Skip line 21 and line 22 and go to line 24",
+      "position": {
+        "page": 0,
+        "x": 465.745,
+        "y": 346.874
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.21_amt_itemized_deduction_percentage",
+      "label": "Line 21. A M T itemized deduction percentage on exclusions. Divide line 20 by line 16. Do not enter more than 1.0000.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 21. A M T itemized deduction percentage on exclusions. Divide line 20 by line 16. Do not enter more than 1.0000",
+      "position": {
+        "page": 0,
+        "x": 465.744,
+        "y": 335.898
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-3510.0.line.22_prorated_amt_itemized_deductions",
+      "label": "Line 22. Prorated A M T itemized deductions on exclusions. Multiply line 15 by line 21.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22. Prorated A M T itemized deductions on exclusions. Multiply line 15 by line 21",
+      "position": {
+        "page": 0,
+        "x": 465.736,
+        "y": 322.886
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.23_ca_amti_on_exclusions",
+      "label": "Line 23. C A alternative minimum taxable income on exclusions. Subtract line 22 from line 20.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. C A alternative minimum taxable income on exclusions. Subtract line 22 from line 20",
+      "position": {
+        "page": 0,
+        "x": 465.736,
+        "y": 310.91
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.24_ca_amt_rate_exclusions",
+      "label": "Line 24 C A A M T rate on exclusions. Divide line 11 by line 4. Do not enter more than 1.0000.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24 C A A M T rate on exclusions. Divide line 11 by line 4. Do not enter more than 1.0000",
+      "position": {
+        "page": 0,
+        "x": 465.731,
+        "y": 300.438
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-3510.0.line.25_ca_tentative_minimum_tax_exclusions",
+      "label": "Line 25. C A tentative minimum tax on exclusions. Multiply line 23 by line 24.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25. C A tentative minimum tax on exclusions. Multiply line 23 by line 24",
+      "position": {
+        "page": 0,
+        "x": 465.743,
+        "y": 286.886
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.26_regular_tax_540nr",
+      "label": "Line 26. Regular tax. Enter the amount from 2024 Schedule P (540NR), Part II, line 44.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 26. Regular tax. Enter the amount from 2024 Schedule P (540NR), Part II, line 44",
+      "position": {
+        "page": 0,
+        "x": 465.736,
+        "y": 274.895
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.27_net_amt_on_exclusions_540nr",
+      "label": "Line 27. Net A M T on exclusions. Subtract line 26 from line 25. If less than zero, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 27. Net A M T on exclusions. Subtract line 26 from line 25. If less than zero, enter 0",
+      "position": {
+        "page": 0,
+        "x": 465.736,
+        "y": 262.503
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.28_prior_year_amt",
+      "label": "Part II, line 28. Enter the A M T from your 2024 Schedule P (540), Part II, line 26; Schedule P (540NR), Part II, line 45; or Schedule P (541), Part III, line 10. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, line 28. Enter the A M T from your 2024 Schedule P (540), Part II, line 26; Schedule P (540NR), Part II, line 45; or Schedule P (541), Part III, line 10. See instructions",
+      "position": {
+        "page": 0,
+        "x": 465.736,
+        "y": 226.893
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.29_net_amt_on_exclusions",
+      "label": "Line 29. Net A M T on exclusions. Enter the amount from line 13. Form 540NR filers: enter the amount from Section B, line 27.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29. Net A M T on exclusions. Enter the amount from line 13. Form 540NR filers: enter the amount from Section B, line 27",
+      "position": {
+        "page": 0,
+        "x": 465.736,
+        "y": 214.907
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.30_adjusted_net_amt",
+      "label": "Line 30. Adjusted net A M T. Subtract line 29 from line 28. If less than zero, enter as a negative amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 30. Adjusted net A M T. Subtract line 29 from line 28. If less than zero, enter as a negative amount",
+      "position": {
+        "page": 0,
+        "x": 465.75,
+        "y": 202.896
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.31_amt_credit_carryover_from_2024",
+      "label": "Line 31. Enter any carryover of unused A M T credit from 2024. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 31. Enter any carryover of unused A M T credit from 2024. See instructions",
+      "position": {
+        "page": 0,
+        "x": 465.73,
+        "y": 190.906
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.32_combine_lines_30_and_31",
+      "label": "Line 32. Combine line 30 and line 31. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 32. Combine line 30 and line 31. See instructions",
+      "position": {
+        "page": 0,
+        "x": 465.76,
+        "y": 179.895
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.33_current_year_regular_tax",
+      "label": "Line 33. Enter your 2025 regular tax from: Form 540, line 31; Form 540NR, line 37; or Form 541, line 21a.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 33. Enter your 2025 regular tax from: Form 540, line 31; Form 540NR, line 37; or Form 541, line 21a",
+      "position": {
+        "page": 0,
+        "x": 345.502,
+        "y": 154.889
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.34_exemption_other_allowable_credits",
+      "label": "Line 34. Exemption and other allowable credits. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 34. Exemption and other allowable credits. See instructions",
+      "position": {
+        "page": 0,
+        "x": 345.513,
+        "y": 142.886
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.35_regular_tax_less_credits",
+      "label": "Line 35. Subtract line 34 from line 33.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 35. Subtract line 34 from line 33",
+      "position": {
+        "page": 0,
+        "x": 465.736,
+        "y": 130.895
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.36_current_year_tentative_minimum_tax",
+      "label": "Line 36. Enter your 2025 tentative minimum tax. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 36. Enter your 2025 tentative minimum tax. See instructions",
+      "position": {
+        "page": 0,
+        "x": 465.729,
+        "y": 118.895
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.37_line_35_minus_line_36",
+      "label": "Line 37. Subtract line 36 from line 35. If zero or less, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 37. Subtract line 36 from line 35. If zero or less, enter 0",
+      "position": {
+        "page": 0,
+        "x": 465.744,
+        "y": 106.901
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.38_prior_year_amt_credit",
+      "label": "Line 38. Prior year A M T credit. Enter the smaller of line 32 or line 37 here and in column (b) of your 2025 Schedule P (540), Part III, line 10; Schedule P (540NR), Part III, line 10; or Schedule P (541), Part IV, line 9.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 38. Prior year A M T credit. Enter the smaller of line 32 or line 37 here and in column (b) of your 2025 Schedule P (540), Part III, line 10; Schedule P (540NR), Part III, line 10; or Schedule P (541), Part IV, line 9",
+      "position": {
+        "page": 0,
+        "x": 465.736,
+        "y": 82.8801
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3510.0.line.39_amt_credit_carryover_to_2026",
+      "label": "Line 39. Subtract line 38 from line 32. This is the amount of your A M T credit carryover to 2026.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 39. Subtract line 38 from line 32. This is the amount of your A M T credit carryover to 2026",
+      "position": {
+        "page": 0,
+        "x": 465.736,
+        "y": 67.8652
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3510/blank.pdf",
+    "ingestedAt": "2026-11-20T05:27:13.880Z",
+    "totalFields": 40,
+    "skipped": 0,
+    "catalogEntries": 40
+  }
+}

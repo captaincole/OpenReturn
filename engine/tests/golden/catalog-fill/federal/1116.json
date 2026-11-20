@@ -1,0 +1,1068 @@
+{
+  "formId": "form-1116",
+  "fieldCount": 118,
+  "entries": [
+    {
+      "fieldId": "form-1116.0.header.a_section_951a_category_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].LineA-B_ReadOrder[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.header.b_foreign_branch_category_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].LineA-B_ReadOrder[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.header.c_passive_category_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].LineC-D_ReadOrder[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.header.d_general_category_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].LineC-D_ReadOrder[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.header.e_section_901j_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].LineE-F_ReadOrder[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.header.f_income_resourced_by_treaty",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].LineE-F_ReadOrder[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.header.g_lump_sum_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.header.h_resident_of_country",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+          "text": "T-JIYTN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-1EU0X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.1a_gross_foreign_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_LinesI-1a[0].Line1a[0].ColA[0].f1_10[0]",
+          "text": "4,161"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.1a_gross_foreign_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_LinesI-1a[0].Line1a[0].ColB[0].f1_11[0]",
+          "text": "4,186"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.1a_gross_foreign_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_LinesI-1a[0].Line1a[0].ColC[0].f1_12[0]",
+          "text": "9,819"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.1a_gross_foreign_income_total",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "5,923"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.1a_gross_income_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_LinesI-1a[0].Line1a[0].Line1a_Text[0].f1_07[0]",
+          "text": "T-OI6NO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.1b_compensation_alternative_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line1b_ReadOrder[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.2_expenses_definitely_related_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line2[0].f1_14[0]",
+          "text": "5,715"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.2_expenses_definitely_related_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line2[0].f1_15[0]",
+          "text": "4,481"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.2_expenses_definitely_related_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line2[0].f1_16[0]",
+          "text": "1,135"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3a_itemized_or_standard_deduction_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3a[0].f1_17[0]",
+          "text": "3,352"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3a_itemized_or_standard_deduction_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3a[0].f1_18[0]",
+          "text": "8,521"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3a_itemized_or_standard_deduction_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3a[0].f1_19[0]",
+          "text": "8,431"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3b_other_deductions_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3b[0].f1_20[0]",
+          "text": "4,603"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3b_other_deductions_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3b[0].f1_21[0]",
+          "text": "5,365"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3b_other_deductions_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3b[0].f1_22[0]",
+          "text": "6,224"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3c_add_lines_3a_3b_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3c[0].f1_23[0]",
+          "text": "6,615"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3c_add_lines_3a_3b_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3c[0].f1_24[0]",
+          "text": "3,020"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3c_add_lines_3a_3b_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3c[0].f1_25[0]",
+          "text": "6,690"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3d_gross_foreign_source_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3d[0].f1_26[0]",
+          "text": "2,608"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3d_gross_foreign_source_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3d[0].f1_27[0]",
+          "text": "3,740"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3d_gross_foreign_source_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3d[0].f1_28[0]",
+          "text": "5,395"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3e_gross_income_all_sources_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3e[0].f1_29[0]",
+          "text": "3,454"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3e_gross_income_all_sources_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3e[0].f1_30[0]",
+          "text": "7,116"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3e_gross_income_all_sources_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3e[0].f1_31[0]",
+          "text": "1,030"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3f_divide_3d_by_3e_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3f[0].f1_32[0]",
+          "text": "T-HX781"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3f_divide_3d_by_3e_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3f[0].f1_33[0]",
+          "text": "T-N96S0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3f_divide_3d_by_3e_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3f[0].f1_34[0]",
+          "text": "T-3FYEI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3g_multiply_3c_by_3f_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3g[0].f1_35[0]",
+          "text": "5,155"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3g_multiply_3c_by_3f_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3g[0].f1_36[0]",
+          "text": "8,615"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.3g_multiply_3c_by_3f_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3g[0].f1_37[0]",
+          "text": "7,211"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.4a_home_mortgage_interest_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line4a[0].f1_38[0]",
+          "text": "4,738"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.4a_home_mortgage_interest_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line4a[0].f1_39[0]",
+          "text": "5,625"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.4a_home_mortgage_interest_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line4a[0].f1_40[0]",
+          "text": "9,241"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.4b_other_interest_expense_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line4b[0].f1_41[0]",
+          "text": "2,991"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.4b_other_interest_expense_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line4b[0].f1_42[0]",
+          "text": "3,213"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.4b_other_interest_expense_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line4b[0].f1_43[0]",
+          "text": "8,234"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.5_losses_from_foreign_sources_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line5[0].f1_44[0]",
+          "text": "8,470"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.5_losses_from_foreign_sources_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line5[0].f1_45[0]",
+          "text": "8,042"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.5_losses_from_foreign_sources_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line5[0].f1_46[0]",
+          "text": "7,318"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.6_total_deductions_and_losses_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line6[0].f1_47[0]",
+          "text": "4,850"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.6_total_deductions_and_losses_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line6[0].f1_48[0]",
+          "text": "1,355"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.6_total_deductions_and_losses_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line6[0].f1_49[0]",
+          "text": "8,613"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.6_total_deductions_and_losses_total",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_50[0]",
+          "text": "3,255"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.7_net_foreign_source_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_51[0]",
+          "text": "9,908"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.8_total_foreign_taxes_paid",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_82[0]",
+          "text": "6,228"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.i_foreign_country_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_LinesI-1a[0].Rowi[0].f1_04[0]",
+          "text": "T-1R84S"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.i_foreign_country_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_LinesI-1a[0].Rowi[0].f1_05[0]",
+          "text": "T-170AQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.i_foreign_country_name_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_LinesI-1a[0].Rowi[0].f1_06[0]",
+          "text": "T-17NUB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.j_credit_claimed_taxes_paid",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Part2[0].ActiveHeaderElements[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.k_credit_claimed_taxes_accrued",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Part2[0].ActiveHeaderElements[0].c1_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_date_paid_or_accrued_col_l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_52[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_foreign_currency_other_taxes_col_p",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_56[0]",
+          "text": "4,657"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_foreign_currency_withheld_dividends_col_m",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_53[0]",
+          "text": "6,928"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_foreign_currency_withheld_interest_col_o",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_55[0]",
+          "text": "4,964"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_foreign_currency_withheld_rents_royalties_col_n",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_54[0]",
+          "text": "6,608"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_total_foreign_taxes_col_u",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_61[0]",
+          "text": "9,237"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_usd_other_taxes_col_t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_60[0]",
+          "text": "4,783"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_usd_withheld_dividends_col_q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_57[0]",
+          "text": "4,373"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_usd_withheld_interest_col_s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_59[0]",
+          "text": "5,177"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_usd_withheld_rents_royalties_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_58[0]",
+          "text": "9,796"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_date_paid_or_accrued_col_l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_62[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_foreign_currency_other_taxes_col_p",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_66[0]",
+          "text": "6,786"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_foreign_currency_withheld_dividends_col_m",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_63[0]",
+          "text": "9,621"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_foreign_currency_withheld_interest_col_o",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_65[0]",
+          "text": "5,104"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_foreign_currency_withheld_rents_royalties_col_n",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_64[0]",
+          "text": "9,738"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_total_foreign_taxes_col_u",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_71[0]",
+          "text": "4,749"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_usd_other_taxes_col_t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_70[0]",
+          "text": "8,434"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_usd_withheld_dividends_col_q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_67[0]",
+          "text": "6,561"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_usd_withheld_interest_col_s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_69[0]",
+          "text": "5,209"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_usd_withheld_rents_royalties_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_68[0]",
+          "text": "9,114"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_date_paid_or_accrued_col_l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_72[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_foreign_currency_other_taxes_col_p",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_76[0]",
+          "text": "9,197"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_foreign_currency_withheld_dividends_col_m",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_73[0]",
+          "text": "4,312"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_foreign_currency_withheld_interest_col_o",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_75[0]",
+          "text": "7,100"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_foreign_currency_withheld_rents_royalties_col_n",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_74[0]",
+          "text": "4,507"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_total_foreign_taxes_col_u",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_81[0]",
+          "text": "1,728"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_usd_other_taxes_col_t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_80[0]",
+          "text": "5,667"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_usd_withheld_dividends_col_q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_77[0]",
+          "text": "8,158"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_usd_withheld_interest_col_s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_79[0]",
+          "text": "3,640"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_usd_withheld_rents_royalties_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_78[0]",
+          "text": "4,299"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.10_carryover_carryback_foreign_taxes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_02[0]",
+          "text": "7,778"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.10_no_schedule_b_checkbox",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line10_ReadOrder[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.11_add_lines_9_10",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+          "text": "6,634"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.12_reduction_in_foreign_taxes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_04[0]",
+          "text": "6,270"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.13_taxes_reclassified_high_tax_kickout",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_05[0]",
+          "text": "4,724"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.14_foreign_taxes_available_for_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_06[0]",
+          "text": "3,161"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.15_foreign_taxable_income_from_line_7",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line15_ReadOrder[0].f2_07[0]",
+          "text": "9,025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.16_adjustments_to_line_15",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_08[0]",
+          "text": "7,363"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.17_net_foreign_source_taxable_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_09[0]",
+          "text": "2,956"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.18_taxable_income_all_sources",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+          "text": "6,116"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.19_foreign_income_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+          "text": "T-1GZSF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.20_tax_before_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+          "text": "2,755"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.21_maximum_amount_of_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+          "text": "3,339"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.22_increase_in_limitation_960c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+          "text": "4,625"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.23_add_lines_21_22",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+          "text": "6,713"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.24_smaller_of_line_14_or_23",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+          "text": "6,225"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.25_credit_section_951a_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+          "text": "1,500"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.26_credit_foreign_branch_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+          "text": "2,988"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.27_credit_passive_category_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+          "text": "7,263"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.28_credit_general_category_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+          "text": "3,259"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.29_credit_section_901j_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+          "text": "6,268"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.30_credit_income_resourced_by_treaty",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+          "text": "1,172"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.31_credit_lump_sum_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+          "text": "8,710"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.32_add_lines_25_through_31",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+          "text": "5,715"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.33_smaller_of_line_20_or_32",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+          "text": "6,026"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.34_reduction_international_boycott",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_26[0]",
+          "text": "9,849"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.35_foreign_tax_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_27[0]",
+          "text": "8,562"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-1116.1.line.9_foreign_taxes_from_line_8",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line9_ReadOrder[0].f2_01[0]",
+          "text": "9,151"
+        }
+      ]
+    }
+  ]
+}

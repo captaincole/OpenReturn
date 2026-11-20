@@ -1,0 +1,3039 @@
+{
+  "formId": "form-3801",
+  "fieldCount": 337,
+  "entries": [
+    {
+      "fieldId": "form-3801.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "3801_1002",
+          "text": "123-45-6789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "3801_1001",
+          "text": "T-PFQ65"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.0.line.10_passive_income_total",
+      "widgets": [
+        {
+          "widgetName": "3801_1018",
+          "text": "2,454"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.0.line.11_total_losses_allowed",
+      "widgets": [
+        {
+          "widgetName": "3801_1019",
+          "text": "2,742"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.0.line.1a_rental_real_estate_net_income",
+      "widgets": [
+        {
+          "widgetName": "3801_1003",
+          "text": "9,333"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.0.line.1b_rental_real_estate_net_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_1004",
+          "text": "9,006"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.0.line.1c_rental_real_estate_prior_unallowed_losses",
+      "widgets": [
+        {
+          "widgetName": "3801_1005",
+          "text": "9,831"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.0.line.1d_rental_real_estate_combined",
+      "widgets": [
+        {
+          "widgetName": "3801_1006",
+          "text": "1,938"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.0.line.2a_other_passive_net_income",
+      "widgets": [
+        {
+          "widgetName": "3801_1007",
+          "text": "3,834"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.0.line.2b_other_passive_net_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_1008",
+          "text": "8,006"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.0.line.2c_other_passive_prior_unallowed_losses",
+      "widgets": [
+        {
+          "widgetName": "3801_1009",
+          "text": "2,551"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.0.line.2d_other_passive_combined",
+      "widgets": [
+        {
+          "widgetName": "3801_1010",
+          "text": "5,031"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.0.line.3_total_passive_income_or_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_1011",
+          "text": "4,256"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.0.line.4_smaller_of_1d_or_3_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_1012",
+          "text": "1,425"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.0.line.5_special_allowance_income_limit",
+      "widgets": [
+        {
+          "widgetName": "3801_1013",
+          "text": "6,165"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.0.line.6_federal_modified_agi",
+      "widgets": [
+        {
+          "widgetName": "3801_1014",
+          "text": "4,116"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.0.line.7_limit_minus_modified_agi",
+      "widgets": [
+        {
+          "widgetName": "3801_1015",
+          "text": "3,949"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.0.line.8_half_of_line_7",
+      "widgets": [
+        {
+          "widgetName": "3801_1016",
+          "text": "8,135"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.0.line.9_special_allowance",
+      "widgets": [
+        {
+          "widgetName": "3801_1017",
+          "text": "1,046"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.1c_schedule_c_total_california_amount",
+      "widgets": [
+        {
+          "widgetName": "3801_2071",
+          "text": "1,963"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.1d_schedule_c_total_federal_amount",
+      "widgets": [
+        {
+          "widgetName": "3801_2072",
+          "text": "7,935"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.1e_schedule_c_california_adjustment",
+      "widgets": [
+        {
+          "widgetName": "3801_2073",
+          "text": "7,882"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.2c_schedule_e_total_california_amount",
+      "widgets": [
+        {
+          "widgetName": "3801_2102",
+          "text": "5,511"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.2d_schedule_e_total_federal_amount",
+      "widgets": [
+        {
+          "widgetName": "3801_2103",
+          "text": "5,551"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.2e_schedule_e_california_adjustment",
+      "widgets": [
+        {
+          "widgetName": "3801_2104",
+          "text": "4,728"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.3c_schedule_f_total_california_amount",
+      "widgets": [
+        {
+          "widgetName": "3801_2133",
+          "text": "5,247"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.3d_schedule_f_total_federal_amount",
+      "widgets": [
+        {
+          "widgetName": "3801_2134",
+          "text": "2,071"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.3e_schedule_f_california_adjustment",
+      "widgets": [
+        {
+          "widgetName": "3801_2135",
+          "text": "3,763"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row1_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2043",
+          "text": "T-JYK7G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row1_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2045",
+          "text": "3,641"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row1_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2046",
+          "text": "2,763"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row1_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2044",
+          "text": "T-UX5JZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row2_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2047",
+          "text": "T-CQ6KD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row2_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2049",
+          "text": "5,136"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row2_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2050",
+          "text": "7,180"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row2_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2048",
+          "text": "T-XNN95"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row3_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2051",
+          "text": "T-1S8T4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row3_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2053",
+          "text": "3,772"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row3_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2054",
+          "text": "7,944"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row3_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2052",
+          "text": "T-NZS6R"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row4_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2055",
+          "text": "T-SAYVT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row4_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2057",
+          "text": "5,231"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row4_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2058",
+          "text": "3,521"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row4_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2056",
+          "text": "T-S4ETW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row5_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2059",
+          "text": "T-126KC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row5_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2061",
+          "text": "4,268"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row5_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2062",
+          "text": "8,638"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row5_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2060",
+          "text": "T-LIH4H"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row6_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2063",
+          "text": "T-1R4H9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row6_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2065",
+          "text": "9,964"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row6_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2066",
+          "text": "6,870"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row6_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2064",
+          "text": "T-6112N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row7_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2067",
+          "text": "T-HQW0B"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row7_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2069",
+          "text": "6,546"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row7_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2070",
+          "text": "5,268"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_c_row7_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2068",
+          "text": "T-IFWPT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row1_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2074",
+          "text": "T-DNMVT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row1_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2076",
+          "text": "4,876"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row1_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2077",
+          "text": "5,033"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row1_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2075",
+          "text": "T-1A0XM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row2_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2078",
+          "text": "T-1HU1U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row2_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2080",
+          "text": "3,810"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row2_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2081",
+          "text": "1,605"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row2_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2079",
+          "text": "T-GDQK7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row3_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2082",
+          "text": "T-1F6IX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row3_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2084",
+          "text": "2,181"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row3_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2085",
+          "text": "9,104"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row3_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2083",
+          "text": "T-OLNYU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row4_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2086",
+          "text": "T-MXXDD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row4_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2088",
+          "text": "2,391"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row4_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2089",
+          "text": "6,016"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row4_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2087",
+          "text": "T-IJREI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row5_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2090",
+          "text": "T-8D1GQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row5_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2092",
+          "text": "8,808"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row5_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2093",
+          "text": "9,819"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row5_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2091",
+          "text": "T-QGUOK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row6_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2094",
+          "text": "T-3ZX4G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row6_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2096",
+          "text": "2,894"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row6_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2097",
+          "text": "6,629"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row6_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2095",
+          "text": "T-1XGUY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row7_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2098",
+          "text": "T-KW33Z"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row7_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2100",
+          "text": "8,753"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row7_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2101",
+          "text": "7,840"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_e_row7_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2099",
+          "text": "T-1U0ZJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row1_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2105",
+          "text": "T-1KDP5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row1_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2107",
+          "text": "7,588"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row1_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2108",
+          "text": "6,352"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row1_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2106",
+          "text": "T-O0RNC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row2_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2109",
+          "text": "T-1VU07"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row2_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2111",
+          "text": "1,036"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row2_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2112",
+          "text": "5,469"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row2_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2110",
+          "text": "T-1FF18"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row3_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2113",
+          "text": "T-P1YR2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row3_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2115",
+          "text": "3,522"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row3_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2116",
+          "text": "8,146"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row3_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2114",
+          "text": "T-D2GRI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row4_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2117",
+          "text": "T-L6ZBL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row4_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2119",
+          "text": "1,508"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row4_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2120",
+          "text": "6,865"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row4_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2118",
+          "text": "T-177MN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row5_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2121",
+          "text": "T-DMEN7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row5_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2123",
+          "text": "4,257"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row5_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2124",
+          "text": "7,231"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row5_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2122",
+          "text": "T-UT3PF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row6_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2125",
+          "text": "T-AWNE5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row6_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2127",
+          "text": "6,126"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row6_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2128",
+          "text": "2,743"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row6_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2126",
+          "text": "T-T0WNP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row7_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2129",
+          "text": "T-1L7IG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row7_california_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2131",
+          "text": "3,970"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row7_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2132",
+          "text": "6,656"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.adjustment_worksheet.schedule_f_row7_passive_or_nonpassive_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2130",
+          "text": "T-1XLKP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row1_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2001",
+          "text": "T-1F5LF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row1_california_adjustment_col_e",
+      "widgets": [
+        {
+          "widgetName": "3801_2005",
+          "text": "3,725"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row1_california_amount_col_f",
+      "widgets": [
+        {
+          "widgetName": "3801_2006",
+          "text": "9,940"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row1_california_schedule_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2003",
+          "text": "T-1RAG1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row1_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2004",
+          "text": "2,819"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row1_federal_schedule_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2002",
+          "text": "T-1N15J"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row2_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2007",
+          "text": "T-GAO7U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row2_california_adjustment_col_e",
+      "widgets": [
+        {
+          "widgetName": "3801_2011",
+          "text": "5,104"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row2_california_amount_col_f",
+      "widgets": [
+        {
+          "widgetName": "3801_2012",
+          "text": "8,249"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row2_california_schedule_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2009",
+          "text": "T-11I30"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row2_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2010",
+          "text": "3,223"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row2_federal_schedule_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2008",
+          "text": "T-1AW2A"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row3_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2013",
+          "text": "T-9WGB7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row3_california_adjustment_col_e",
+      "widgets": [
+        {
+          "widgetName": "3801_2017",
+          "text": "1,660"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row3_california_amount_col_f",
+      "widgets": [
+        {
+          "widgetName": "3801_2018",
+          "text": "3,888"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row3_california_schedule_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2015",
+          "text": "T-SN0O8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row3_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2016",
+          "text": "5,045"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row3_federal_schedule_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2014",
+          "text": "T-BCBG9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row4_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2019",
+          "text": "T-1GFU1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row4_california_adjustment_col_e",
+      "widgets": [
+        {
+          "widgetName": "3801_2023",
+          "text": "1,019"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row4_california_amount_col_f",
+      "widgets": [
+        {
+          "widgetName": "3801_2024",
+          "text": "5,029"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row4_california_schedule_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2021",
+          "text": "T-SAUL6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row4_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2022",
+          "text": "8,135"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row4_federal_schedule_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2020",
+          "text": "T-14X2U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row5_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2025",
+          "text": "T-1EE8Q"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row5_california_adjustment_col_e",
+      "widgets": [
+        {
+          "widgetName": "3801_2029",
+          "text": "7,782"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row5_california_amount_col_f",
+      "widgets": [
+        {
+          "widgetName": "3801_2030",
+          "text": "9,489"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row5_california_schedule_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2027",
+          "text": "T-1AODF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row5_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2028",
+          "text": "4,570"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row5_federal_schedule_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2026",
+          "text": "T-B07PO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row6_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2031",
+          "text": "T-1AHEX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row6_california_adjustment_col_e",
+      "widgets": [
+        {
+          "widgetName": "3801_2035",
+          "text": "1,591"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row6_california_amount_col_f",
+      "widgets": [
+        {
+          "widgetName": "3801_2036",
+          "text": "4,383"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row6_california_schedule_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2033",
+          "text": "T-ZH4B2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row6_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2034",
+          "text": "6,850"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row6_federal_schedule_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2032",
+          "text": "T-32H3Y"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row7_activity_description_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_2037",
+          "text": "T-CN57N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row7_california_adjustment_col_e",
+      "widgets": [
+        {
+          "widgetName": "3801_2041",
+          "text": "3,262"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row7_california_amount_col_f",
+      "widgets": [
+        {
+          "widgetName": "3801_2042",
+          "text": "1,124"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row7_california_schedule_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_2039",
+          "text": "T-NCM72"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row7_federal_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_2040",
+          "text": "7,867"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.1.passive_worksheet.row7_federal_schedule_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_2038",
+          "text": "T-1S60Q"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row1_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3001",
+          "text": "T-7F5G5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row1_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "3801_3002",
+          "text": "5,524"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row1_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3003",
+          "text": "9,337"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row1_col_c_prior_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3004",
+          "text": "9,307"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row1_col_d_overall_gain",
+      "widgets": [
+        {
+          "widgetName": "3801_3005",
+          "text": "4,921"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row1_col_e_overall_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3006",
+          "text": "5,062"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row2_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3007",
+          "text": "T-9WBY3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row2_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "3801_3008",
+          "text": "9,671"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row2_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3009",
+          "text": "7,617"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row2_col_c_prior_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3010",
+          "text": "8,147"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row2_col_d_overall_gain",
+      "widgets": [
+        {
+          "widgetName": "3801_3011",
+          "text": "7,480"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row2_col_e_overall_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3012",
+          "text": "6,247"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row3_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3013",
+          "text": "T-1AN54"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row3_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "3801_3014",
+          "text": "7,447"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row3_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3015",
+          "text": "1,572"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row3_col_c_prior_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3016",
+          "text": "9,185"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row3_col_d_overall_gain",
+      "widgets": [
+        {
+          "widgetName": "3801_3017",
+          "text": "4,107"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row3_col_e_overall_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3018",
+          "text": "5,531"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row4_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3019",
+          "text": "T-6GXC8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row4_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "3801_3020",
+          "text": "3,437"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row4_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3021",
+          "text": "5,682"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row4_col_c_prior_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3022",
+          "text": "2,496"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row4_col_d_overall_gain",
+      "widgets": [
+        {
+          "widgetName": "3801_3023",
+          "text": "8,441"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row4_col_e_overall_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3024",
+          "text": "1,819"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row5_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3025",
+          "text": "T-1XA3U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row5_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "3801_3026",
+          "text": "3,566"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row5_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3027",
+          "text": "8,800"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row5_col_c_prior_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3028",
+          "text": "1,953"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row5_col_d_overall_gain",
+      "widgets": [
+        {
+          "widgetName": "3801_3029",
+          "text": "1,440"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.row5_col_e_overall_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3030",
+          "text": "2,335"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.total_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "3801_3031",
+          "text": "2,467"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.total_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3032",
+          "text": "6,384"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part4.total_col_c_prior_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3033",
+          "text": "1,997"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row1_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3034",
+          "text": "T-TY5S5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row1_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "3801_3035",
+          "text": "6,674"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row1_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3036",
+          "text": "3,139"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row1_col_c_prior_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3037",
+          "text": "7,144"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row1_col_d_overall_gain",
+      "widgets": [
+        {
+          "widgetName": "3801_3038",
+          "text": "4,470"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row1_col_e_overall_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3039",
+          "text": "2,199"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row2_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3040",
+          "text": "T-1NOXX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row2_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "3801_3041",
+          "text": "6,241"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row2_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3042",
+          "text": "4,413"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row2_col_c_prior_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3043",
+          "text": "5,303"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row2_col_d_overall_gain",
+      "widgets": [
+        {
+          "widgetName": "3801_3044",
+          "text": "4,102"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row2_col_e_overall_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3045",
+          "text": "1,738"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row3_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3046",
+          "text": "T-1Y3B1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row3_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "3801_3047",
+          "text": "2,700"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row3_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3048",
+          "text": "9,929"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row3_col_c_prior_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3049",
+          "text": "1,286"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row3_col_d_overall_gain",
+      "widgets": [
+        {
+          "widgetName": "3801_3050",
+          "text": "4,424"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row3_col_e_overall_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3051",
+          "text": "7,646"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row4_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3052",
+          "text": "T-7KRID"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row4_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "3801_3053",
+          "text": "6,812"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row4_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3054",
+          "text": "2,805"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row4_col_c_prior_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3055",
+          "text": "5,606"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row4_col_d_overall_gain",
+      "widgets": [
+        {
+          "widgetName": "3801_3056",
+          "text": "6,240"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row4_col_e_overall_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3057",
+          "text": "5,836"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row5_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3058",
+          "text": "T-15UKD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row5_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "3801_3059",
+          "text": "9,469"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row5_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3060",
+          "text": "7,304"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row5_col_c_prior_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3061",
+          "text": "9,387"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row5_col_d_overall_gain",
+      "widgets": [
+        {
+          "widgetName": "3801_3062",
+          "text": "1,024"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.row5_col_e_overall_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3063",
+          "text": "8,859"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.total_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "3801_3064",
+          "text": "8,570"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.total_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3065",
+          "text": "5,626"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part5.total_col_c_prior_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3066",
+          "text": "5,633"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row1_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3067",
+          "text": "T-B4QE3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row1_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3069",
+          "text": "8,754"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row1_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "3801_3070",
+          "text": "T-1EUA1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row1_col_c_special_allowance",
+      "widgets": [
+        {
+          "widgetName": "3801_3071",
+          "text": "6,554"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row1_col_d_loss_less_allowance",
+      "widgets": [
+        {
+          "widgetName": "3801_3072",
+          "text": "1,285"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row1_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "3801_3068",
+          "text": "T-M5H1V"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row2_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3073",
+          "text": "T-1T53M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row2_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3075",
+          "text": "5,151"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row2_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "3801_3076",
+          "text": "T-FXP8N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row2_col_c_special_allowance",
+      "widgets": [
+        {
+          "widgetName": "3801_3077",
+          "text": "5,042"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row2_col_d_loss_less_allowance",
+      "widgets": [
+        {
+          "widgetName": "3801_3078",
+          "text": "5,100"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row2_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "3801_3074",
+          "text": "T-60VBX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row3_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3079",
+          "text": "T-OTORW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row3_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3081",
+          "text": "8,898"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row3_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "3801_3082",
+          "text": "T-TY1B3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row3_col_c_special_allowance",
+      "widgets": [
+        {
+          "widgetName": "3801_3083",
+          "text": "2,529"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row3_col_d_loss_less_allowance",
+      "widgets": [
+        {
+          "widgetName": "3801_3084",
+          "text": "8,565"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row3_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "3801_3080",
+          "text": "T-7GMGC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row4_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3085",
+          "text": "T-PFLQK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row4_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3087",
+          "text": "7,301"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row4_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "3801_3088",
+          "text": "T-WCFLS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row4_col_c_special_allowance",
+      "widgets": [
+        {
+          "widgetName": "3801_3089",
+          "text": "5,495"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row4_col_d_loss_less_allowance",
+      "widgets": [
+        {
+          "widgetName": "3801_3090",
+          "text": "3,961"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row4_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "3801_3086",
+          "text": "T-1R5FD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row5_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3091",
+          "text": "T-1M86F"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row5_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3093",
+          "text": "1,278"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row5_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "3801_3094",
+          "text": "T-EI53R"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row5_col_c_special_allowance",
+      "widgets": [
+        {
+          "widgetName": "3801_3095",
+          "text": "4,626"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row5_col_d_loss_less_allowance",
+      "widgets": [
+        {
+          "widgetName": "3801_3096",
+          "text": "3,865"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.row5_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "3801_3092",
+          "text": "T-196GN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.total_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3097",
+          "text": "7,221"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.total_col_c_special_allowance",
+      "widgets": [
+        {
+          "widgetName": "3801_3099",
+          "text": "4,006"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part6.total_col_d_loss_less_allowance",
+      "widgets": [
+        {
+          "widgetName": "3801_3100",
+          "text": "8,631"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row1_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3101",
+          "text": "T-1KB8U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row1_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3103",
+          "text": "4,446"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row1_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "3801_3104",
+          "text": "T-1VKAT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row1_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3105",
+          "text": "6,742"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row1_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "3801_3102",
+          "text": "T-6MLEW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row2_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3106",
+          "text": "T-14N4F"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row2_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3108",
+          "text": "2,583"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row2_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "3801_3109",
+          "text": "T-1FHXK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row2_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3110",
+          "text": "7,059"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row2_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "3801_3107",
+          "text": "T-1FAXG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row3_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3111",
+          "text": "T-1NBZG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row3_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3113",
+          "text": "7,593"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row3_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "3801_3114",
+          "text": "T-H7J69"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row3_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3115",
+          "text": "6,775"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row3_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "3801_3112",
+          "text": "T-1FOZN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row4_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3116",
+          "text": "T-1C4MG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row4_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3118",
+          "text": "4,533"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row4_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "3801_3119",
+          "text": "T-1GPE3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row4_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3120",
+          "text": "3,336"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row4_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "3801_3117",
+          "text": "T-X46KA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row5_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3121",
+          "text": "T-1EEPZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row5_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3123",
+          "text": "4,889"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row5_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "3801_3124",
+          "text": "T-1A7OX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row5_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3125",
+          "text": "9,708"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row5_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "3801_3122",
+          "text": "T-OZRAC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row6_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3126",
+          "text": "T-1H6JR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row6_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3128",
+          "text": "7,683"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row6_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "3801_3129",
+          "text": "T-17LQG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row6_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3130",
+          "text": "6,426"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.row6_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "3801_3127",
+          "text": "T-HS2RY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.total_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3131",
+          "text": "5,839"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part7.total_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3133",
+          "text": "3,086"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row1_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3134",
+          "text": "T-1LM57"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row1_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3136",
+          "text": "3,370"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row1_col_b_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3137",
+          "text": "6,493"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row1_col_c_allowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3138",
+          "text": "4,537"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row1_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "3801_3135",
+          "text": "T-ND8A6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row2_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3139",
+          "text": "T-K65YP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row2_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3141",
+          "text": "2,182"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row2_col_b_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3142",
+          "text": "5,862"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row2_col_c_allowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3143",
+          "text": "2,138"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row2_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "3801_3140",
+          "text": "T-8D7TN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row3_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3144",
+          "text": "T-18527"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row3_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3146",
+          "text": "6,392"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row3_col_b_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3147",
+          "text": "2,988"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row3_col_c_allowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3148",
+          "text": "3,580"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row3_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "3801_3145",
+          "text": "T-VQPW9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row4_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3149",
+          "text": "T-3ML6C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row4_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3151",
+          "text": "1,235"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row4_col_b_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3152",
+          "text": "8,408"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row4_col_c_allowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3153",
+          "text": "8,544"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row4_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "3801_3150",
+          "text": "T-IYI4Y"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row5_activity_name",
+      "widgets": [
+        {
+          "widgetName": "3801_3154",
+          "text": "T-OMFKZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row5_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3156",
+          "text": "1,054"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row5_col_b_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3157",
+          "text": "4,894"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row5_col_c_allowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3158",
+          "text": "1,328"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.row5_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "3801_3155",
+          "text": "T-1U1D0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.total_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3159",
+          "text": "8,930"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.total_col_b_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3160",
+          "text": "8,527"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.2.part8.total_col_c_allowed_loss",
+      "widgets": [
+        {
+          "widgetName": "3801_3161",
+          "text": "3,913"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row1_1a_net_loss_plus_prior_unallowed_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_4003",
+          "text": "6,585"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row1_1b_net_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_4004",
+          "text": "9,719"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row1_1c_allowed_loss_col_e",
+      "widgets": [
+        {
+          "widgetName": "3801_4008",
+          "text": "1,643"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row1_1c_loss_less_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_4005",
+          "text": "8,001"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row1_1c_ratio_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_4006",
+          "text": "T-1XSUZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row1_1c_unallowed_loss_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_4007",
+          "text": "9,880"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row1_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "3801_4002",
+          "text": "T-1A0P6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row2_1a_net_loss_plus_prior_unallowed_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_4010",
+          "text": "6,137"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row2_1b_net_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_4011",
+          "text": "9,102"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row2_1c_allowed_loss_col_e",
+      "widgets": [
+        {
+          "widgetName": "3801_4015",
+          "text": "9,963"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row2_1c_loss_less_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_4012",
+          "text": "8,012"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row2_1c_ratio_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_4013",
+          "text": "T-3O43H"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row2_1c_unallowed_loss_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_4014",
+          "text": "6,635"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row2_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "3801_4009",
+          "text": "T-YI388"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row3_1a_net_loss_plus_prior_unallowed_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_4017",
+          "text": "7,374"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row3_1b_net_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "3801_4018",
+          "text": "8,669"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row3_1c_allowed_loss_col_e",
+      "widgets": [
+        {
+          "widgetName": "3801_4022",
+          "text": "6,401"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row3_1c_loss_less_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_4019",
+          "text": "2,376"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row3_1c_ratio_col_c",
+      "widgets": [
+        {
+          "widgetName": "3801_4020",
+          "text": "T-MDFOD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row3_1c_unallowed_loss_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_4021",
+          "text": "5,764"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.row3_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "3801_4016",
+          "text": "T-8U5KL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.total_allowed_loss_col_e",
+      "widgets": [
+        {
+          "widgetName": "3801_4026",
+          "text": "6,044"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.total_col_b",
+      "widgets": [
+        {
+          "widgetName": "3801_4023",
+          "text": "6,330"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801.3.part9.total_unallowed_loss_col_d",
+      "widgets": [
+        {
+          "widgetName": "3801_4025",
+          "text": "9,343"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1527 @@
+{
+  "formId": "form-540nr",
+  "fieldCount": 169,
+  "entries": [
+    {
+      "fieldId": "form-540nr.0.header.additional_information",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1013",
+          "text": "T-1MW8O"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.apartment",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1016",
+          "text": "T-1JPXT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.ca_filing_status_differs_from_federal",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1028 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.city",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1018",
+          "text": "T-1EH5D"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.date_of_birth",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1024",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.filing_status",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1029 RB",
+          "text": "Line 1 . Single."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.first_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1003",
+          "text": "T-4A3PU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.fiscal_year_end_month",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1002",
+          "text": "52"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.foreign_country_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1021",
+          "text": "T-17YPO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.foreign_postal_code",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1023",
+          "text": "T-5OIRS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.foreign_province_state_county",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1022",
+          "text": "T-168EB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.home_address",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1015",
+          "text": "T-W3ZIR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.is_amended_return",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1001 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.last_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1005",
+          "text": "T-DS2IF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.mfs_spouse_rdp_full_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1030",
+          "text": "T-9C2EU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.middle_initial",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1004",
+          "text": "8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.principal_business_activity_code",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1014",
+          "text": "T35HFW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.prior_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1026",
+          "text": "T-UVIUD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.private_mailbox",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1017",
+          "text": "T-HA0O5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.qualifying_surviving_spouse_see_instructions",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1032",
+          "text": "T-1H5R7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.spouse_date_of_birth",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1025",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.spouse_first_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1008",
+          "text": "T-LMJAK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.spouse_last_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1010",
+          "text": "T-FQSUB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.spouse_middle_initial",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1009",
+          "text": "7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.spouse_prior_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1027",
+          "text": "T-1X6OL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.spouse_rdp_year_of_death",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1031",
+          "text": "4298"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.spouse_ssn",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1012",
+          "text": "123-45-6789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.spouse_suffix",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1011",
+          "text": "8233"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1007",
+          "text": "123-45-6789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.state",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1019",
+          "text": "21"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.suffix",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1006",
+          "text": "9584"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.header.zip",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1020",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.10_dependent_1_first_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1040",
+          "text": "T-18SKZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.10_dependent_1_last_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1041",
+          "text": "T-12ZYD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.10_dependent_1_relationship",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1043",
+          "text": "T-6D0H6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.10_dependent_1_ssn",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1042",
+          "text": "123-45-6789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.10_dependent_2_first_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1044",
+          "text": "T-11H03"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.10_dependent_2_last_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1045",
+          "text": "T-1YMTZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.10_dependent_2_relationship",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1047",
+          "text": "T-1KY7X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.10_dependent_2_ssn",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1046",
+          "text": "123-45-6789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.10_dependent_3_first_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1048",
+          "text": "T-H9PIR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.10_dependent_3_last_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1049",
+          "text": "T-1M5L5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.10_dependent_3_relationship",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1051",
+          "text": "T-4E3EB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.10_dependent_3_ssn",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1050",
+          "text": "123-45-6789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.10_dependent_exemption_amount",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1053",
+          "text": "1,148"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.10_dependent_exemption_count",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1052",
+          "text": "97"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.6_claimed_as_dependent",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1033 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.7_personal_exemption_amount",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1035",
+          "text": "8,075"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.7_personal_exemption_count",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1034",
+          "text": "3,343"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.8_blind_exemption_amount",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1037",
+          "text": "9,821"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.8_blind_exemption_count",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1036",
+          "text": "0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.9_senior_exemption_amount",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1039",
+          "text": "9,161"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.0.line.9_senior_exemption_count",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_1038",
+          "text": "3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2001",
+          "text": "T-ZPG8A"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.header.taxpayer_ssn",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2002",
+          "text": "123-45-6789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.11_total_exemption_amount",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2003",
+          "text": "6,559"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.12_state_wages",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2004",
+          "text": "4,792"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.13_federal_agi",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2005",
+          "text": "4,936"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.14_ca_adjustments_subtractions",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2006",
+          "text": "5,062"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.15_agi_before_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2007",
+          "text": "7,625"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.16_ca_adjustments_additions",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2008",
+          "text": "5,306"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.17_agi_all_sources",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2009",
+          "text": "6,961"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.18_deductions",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2010",
+          "text": "3,098"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.19_total_taxable_income",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2011",
+          "text": "9,570"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.31_tax_amount",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2016",
+          "text": "4,691"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.31_tax_from_ftb_3800",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2014 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.31_tax_from_ftb_3803",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2015 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.31_tax_from_rate_schedule",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2013 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.31_tax_from_tax_table",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2012 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.32_ca_agi",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2017",
+          "text": "2,212"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.35_ca_taxable_income",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2018",
+          "text": "5,231"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.36_ca_tax_rate_decimal_digits",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2020",
+          "text": "4463"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.36_ca_tax_rate_whole_digit",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2019",
+          "text": "2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.37_ca_tax_before_exemption_credits",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2021",
+          "text": "3,772"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.38_exemption_credit_percentage_decimal_digits",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2023",
+          "text": "8098"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.38_exemption_credit_percentage_whole_digit",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2022",
+          "text": "0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.39_ca_prorated_exemption_credits",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2024",
+          "text": "6,916"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.40_ca_regular_tax_before_credits",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2025",
+          "text": "2,905"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.41_tax_amount",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2028",
+          "text": "6,013"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.41_tax_from_ftb_5870a",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2027 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.41_tax_from_schedule_g1",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2026 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.42_tax_before_special_credits",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2029",
+          "text": "3,481"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.50_child_dependent_care_credit",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2030",
+          "text": "3,593"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.51_joint_custody_hoh_credit",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2031",
+          "text": "7,501"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.52_dependent_parent_credit",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2032",
+          "text": "8,167"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.53_senior_hoh_credit",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2033",
+          "text": "1,002"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.54_credit_percentage_decimal_digits",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2035",
+          "text": "3924"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.54_credit_percentage_whole_digit",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2034",
+          "text": "3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.1.line.55_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_2036",
+          "text": "2,433"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.101_overpaid_tax",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3027",
+          "text": "6,523"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.102_applied_to_2026_estimated_tax",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3028",
+          "text": "8,368"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.103_overpaid_tax_available",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3029",
+          "text": "6,220"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.58_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3003",
+          "text": "8,641"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.58_credit_code",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3002",
+          "text": "131"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.58_credit_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3001",
+          "text": "T-1102U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.59_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3006",
+          "text": "4,245"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.59_credit_code",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3005",
+          "text": "712"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.59_credit_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3004",
+          "text": "T-1XFHV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.60_schedule_p_credits",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3007",
+          "text": "1,385"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.61_renters_credit",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3008",
+          "text": "7,314"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.62_total_credits",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3009",
+          "text": "6,542"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.63_tax_after_credits",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3010",
+          "text": "8,352"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.71_alternative_minimum_tax",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3011",
+          "text": "9,913"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.72_behavioral_health_services_tax",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3012",
+          "text": "9,455"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.73_other_taxes_credit_recapture",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3013",
+          "text": "8,154"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.74_total_tax",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3014",
+          "text": "7,472"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.81_ca_income_tax_withheld",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3015",
+          "text": "2,982"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.82_ca_estimated_tax_payments",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3016",
+          "text": "1,533"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.83_withholding_592b_593",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3017",
+          "text": "6,592"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.84_motion_picture_production_credit",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3018",
+          "text": "1,383"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.85_eitc",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3019",
+          "text": "1,266"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.86_young_child_tax_credit",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3020",
+          "text": "2,303"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.87_foster_youth_tax_credit",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3021",
+          "text": "7,853"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.88_total_payments",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3022",
+          "text": "5,273"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.91_full_year_health_coverage",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3023 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.91_isr_penalty",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3024",
+          "text": "7,321"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.92_payments_after_isr_penalty",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3025",
+          "text": "3,214"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.2.line.93_isr_penalty_balance",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_3026",
+          "text": "9,166"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.104_tax_due",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4003",
+          "text": "4,725"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.120_total_contributions",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4022",
+          "text": "9,718"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.contrib_400_ca_seniors_special_fund",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4004",
+          "text": "3,226"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.contrib_401_alzheimers_fund",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4005",
+          "text": "1,698"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.contrib_403_rare_endangered_species_fund",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4006",
+          "text": "3,081"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.contrib_405_breast_cancer_research_fund",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4007",
+          "text": "9,323"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.contrib_406_firefighters_memorial_fund",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4008",
+          "text": "8,375"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.contrib_407_emergency_food_for_families_fund",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4009",
+          "text": "2,053"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.contrib_408_peace_officer_memorial_fund",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4010",
+          "text": "2,172"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.contrib_413_ca_cancer_research_fund",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4011",
+          "text": "3,418"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.contrib_422_school_supplies_homeless_children_fund",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4012",
+          "text": "2,309"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.contrib_423_state_parks_protection_fund",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4013",
+          "text": "2,573"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.contrib_424_protect_our_coast_and_oceans_fund",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4014",
+          "text": "9,343"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.contrib_431_prevention_animal_homelessness_fund",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4015",
+          "text": "5,253"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.contrib_438_senior_citizen_advocacy_fund",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4016",
+          "text": "3,560"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.contrib_439_native_ca_wildlife_rehabilitation_fund",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4017",
+          "text": "3,705"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.contrib_445_mental_health_crisis_prevention_fund",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4018",
+          "text": "5,688"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.contrib_447_ca_als_research_network_fund",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4019",
+          "text": "5,823"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.contrib_448_ca_pediatric_cancer_research_fund",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4020",
+          "text": "6,256"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.3.line.contrib_449_parkinsons_disease_research_fund",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_4021",
+          "text": "8,450"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.4.line.121_amount_you_owe",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_5001",
+          "text": "9,693"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.4.line.122_interest_and_late_penalties",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_5002",
+          "text": "5,583"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.4.line.123_ftb_5805_attached",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_5003 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.4.line.123_ftb_5805f_attached",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_5004 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.4.line.123_underpayment_estimated_tax",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_5005",
+          "text": "5,816"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.4.line.124_total_amount_due",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_5006",
+          "text": "2,094"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.4.line.125_refund_or_no_amount_due",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_5007",
+          "text": "7,558"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.4.line.126_account_number",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_5011",
+          "text": "T-11PMQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.4.line.126_account_type_checking",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_5010A CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.4.line.126_account_type_savings",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_5010B CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.4.line.126_direct_deposit_amount",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_5008",
+          "text": "5,813"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.4.line.126_routing_number",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_5009",
+          "text": "T-UHKH2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.4.line.127_secondary_account_number",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_5015",
+          "text": "T-1LJ65"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.4.line.127_secondary_account_type_checking",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_5014A CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.4.line.127_secondary_account_type_savings",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_5014B CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.4.line.127_secondary_direct_deposit_amount",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_5012",
+          "text": "1,554"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.4.line.127_secondary_routing_number",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_5013",
+          "text": "T-O928W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.4.signing.voter_registration_info_request",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_5016 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.4.signing.wants_health_care_coverage_info",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_5017 RB",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.5.signing.date_signed",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_6001",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.5.signing.preparer_firm_address",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_6006",
+          "text": "T-1DQSE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.5.signing.preparer_firm_ein",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_6007",
+          "text": "T-SNU0B"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.5.signing.preparer_firm_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_6004",
+          "text": "T-ZV7LO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.5.signing.preparer_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_6003b",
+          "text": "T-1NJH4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.5.signing.preparer_phone",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_6003c",
+          "text": "5551234567"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.5.signing.preparer_ptin",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_6005",
+          "text": "T-9GAOF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.5.signing.taxpayer_email",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_6002",
+          "text": "t-jw4ee@example.com"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.5.signing.taxpayer_phone",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_6003",
+          "text": "5551234567"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.5.signing.third_party_designee_authorized",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_6008 RB",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.5.signing.third_party_designee_name",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_6009",
+          "text": "T-LI1F2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540nr.5.signing.third_party_designee_phone",
+      "widgets": [
+        {
+          "widgetName": "540NR_form_6010",
+          "text": "5551234567"
+        }
+      ]
+    }
+  ]
+}

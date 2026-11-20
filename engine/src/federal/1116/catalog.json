@@ -1,0 +1,1792 @@
+{
+  "form": {
+    "formId": "form-1116",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 1116 — Foreign Tax Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-1116.0.header.taxpayer_name",
+      "label": "Name",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-1116.0.header.identifying_number",
+      "label": "Identifying number as shown on page 1 of your tax return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 389.8,
+        "y": 684
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-1116.0.header.a_section_951a_category_income",
+      "label": "a Section 951A category income",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].LineA-B_ReadOrder[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 43.2,
+        "y": 651
+      }
+    },
+    {
+      "fieldId": "form-1116.0.header.c_passive_category_income",
+      "label": "c Passive category income",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].LineC-D_ReadOrder[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 194.4,
+        "y": 651
+      }
+    },
+    {
+      "fieldId": "form-1116.0.header.e_section_901j_income",
+      "label": "e Section 901(j) income",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].LineE-F_ReadOrder[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 324,
+        "y": 651
+      }
+    },
+    {
+      "fieldId": "form-1116.0.header.g_lump_sum_distributions",
+      "label": "g Lump-sum distributions",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 475.2,
+        "y": 651
+      }
+    },
+    {
+      "fieldId": "form-1116.0.header.b_foreign_branch_category_income",
+      "label": "b Foreign branch category income",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].LineA-B_ReadOrder[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 43.2,
+        "y": 639.001
+      }
+    },
+    {
+      "fieldId": "form-1116.0.header.d_general_category_income",
+      "label": "d General category income",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].LineC-D_ReadOrder[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 194.4,
+        "y": 639.001
+      }
+    },
+    {
+      "fieldId": "form-1116.0.header.f_income_resourced_by_treaty",
+      "label": "f Certain income re-sourced by treaty",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].LineE-F_ReadOrder[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 324,
+        "y": 639.001
+      }
+    },
+    {
+      "fieldId": "form-1116.0.header.h_resident_of_country",
+      "label": "h Resident of (name of country)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 166,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.i_foreign_country_name_col_a",
+      "label": "Line i — Enter the name of the foreign country or U.S. territory, column A",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_LinesI-1a[0].Rowi[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 267.4,
+        "y": 540
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-1116.0.line.i_foreign_country_name_col_b",
+      "label": "Line i — Enter the name of the foreign country or U.S. territory, column B",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_LinesI-1a[0].Rowi[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 339.4,
+        "y": 540
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-1116.0.line.i_foreign_country_name_col_c",
+      "label": "Line i — Enter the name of the foreign country or U.S. territory, column C",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_LinesI-1a[0].Rowi[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 411.4,
+        "y": 540
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-1116.0.line.1a_gross_income_description",
+      "label": "Line 1a — Gross income from sources within country shown above and of the type checked above (description)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_LinesI-1a[0].Line1a[0].Line1a_Text[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 479.999
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-1116.0.line.1a_gross_foreign_income_col_a",
+      "label": "Line 1a — Gross income from sources within country shown above and of the type checked above, column A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_LinesI-1a[0].Line1a[0].ColA[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 266.4,
+        "y": 480.002
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.1a_gross_foreign_income_col_b",
+      "label": "Line 1a — Gross income from sources within country shown above and of the type checked above, column B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_LinesI-1a[0].Line1a[0].ColB[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 480.002
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.1a_gross_foreign_income_col_c",
+      "label": "Line 1a — Gross income from sources within country shown above and of the type checked above, column C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_LinesI-1a[0].Line1a[0].ColC[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 480.002
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.1a_gross_foreign_income_total",
+      "label": "Line 1a — Gross income from sources within country shown above and of the type checked above, Total (add cols. A, B, and C)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 480.002
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.1b_compensation_alternative_basis",
+      "label": "Line 1b — Check if line 1a is compensation for personal services as an employee, your total compensation from all sources is $250,000 or more, and you used an alternative basis to determine its source",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line1b_ReadOrder[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 251.2,
+        "y": 428.002
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.2_expenses_definitely_related_col_a",
+      "label": "Line 2 — Expenses definitely related to the income on line 1a (attach statement), column A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line2[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 266.4,
+        "y": 389.999
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.2_expenses_definitely_related_col_b",
+      "label": "Line 2 — Expenses definitely related to the income on line 1a (attach statement), column B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line2[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 389.999
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.2_expenses_definitely_related_col_c",
+      "label": "Line 2 — Expenses definitely related to the income on line 1a (attach statement), column C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line2[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 389.999
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3a_itemized_or_standard_deduction_col_a",
+      "label": "Line 3a — Certain itemized deductions or standard deduction, column A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3a[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 266.4,
+        "y": 341.997
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3a_itemized_or_standard_deduction_col_b",
+      "label": "Line 3a — Certain itemized deductions or standard deduction, column B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3a[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 341.997
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3a_itemized_or_standard_deduction_col_c",
+      "label": "Line 3a — Certain itemized deductions or standard deduction, column C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3a[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 341.997
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3b_other_deductions_col_a",
+      "label": "Line 3b — Other deductions (attach statement), column A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3b[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 266.4,
+        "y": 329.998
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3b_other_deductions_col_b",
+      "label": "Line 3b — Other deductions (attach statement), column B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3b[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 329.998
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3b_other_deductions_col_c",
+      "label": "Line 3b — Other deductions (attach statement), column C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3b[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 329.998
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3c_add_lines_3a_3b_col_a",
+      "label": "Line 3c — Add lines 3a and 3b, column A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3c[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 266.4,
+        "y": 317.999
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3c_add_lines_3a_3b_col_b",
+      "label": "Line 3c — Add lines 3a and 3b, column B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3c[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 317.999
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3c_add_lines_3a_3b_col_c",
+      "label": "Line 3c — Add lines 3a and 3b, column C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3c[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 317.999
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3d_gross_foreign_source_income_col_a",
+      "label": "Line 3d — Gross foreign source income, column A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3d[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 266.4,
+        "y": 306
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3d_gross_foreign_source_income_col_b",
+      "label": "Line 3d — Gross foreign source income, column B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3d[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 306
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3d_gross_foreign_source_income_col_c",
+      "label": "Line 3d — Gross foreign source income, column C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3d[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 306
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3e_gross_income_all_sources_col_a",
+      "label": "Line 3e — Gross income from all sources, column A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3e[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 266.4,
+        "y": 294.001
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3e_gross_income_all_sources_col_b",
+      "label": "Line 3e — Gross income from all sources, column B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3e[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 294.001
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3e_gross_income_all_sources_col_c",
+      "label": "Line 3e — Gross income from all sources, column C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3e[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 294.001
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3f_divide_3d_by_3e_col_a",
+      "label": "Line 3f — Divide line 3d by line 3e, column A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3f[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 266.4,
+        "y": 282.002
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3f_divide_3d_by_3e_col_b",
+      "label": "Line 3f — Divide line 3d by line 3e, column B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3f[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 282.002
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3f_divide_3d_by_3e_col_c",
+      "label": "Line 3f — Divide line 3d by line 3e, column C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3f[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 282.002
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3g_multiply_3c_by_3f_col_a",
+      "label": "Line 3g — Multiply line 3c by line 3f, column A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3g[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 266.4,
+        "y": 270.003
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3g_multiply_3c_by_3f_col_b",
+      "label": "Line 3g — Multiply line 3c by line 3f, column B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3g[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 270.003
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.3g_multiply_3c_by_3f_col_c",
+      "label": "Line 3g — Multiply line 3c by line 3f, column C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line3g[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 270.003
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.4a_home_mortgage_interest_col_a",
+      "label": "Line 4a — Pro rata share of interest expense: Home mortgage interest, column A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line4a[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 266.4,
+        "y": 234.003
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.4a_home_mortgage_interest_col_b",
+      "label": "Line 4a — Pro rata share of interest expense: Home mortgage interest, column B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line4a[0].f1_39[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 234.003
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.4a_home_mortgage_interest_col_c",
+      "label": "Line 4a — Pro rata share of interest expense: Home mortgage interest, column C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line4a[0].f1_40[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 234.003
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.4b_other_interest_expense_col_a",
+      "label": "Line 4b — Pro rata share of interest expense: Other interest expense, column A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line4b[0].f1_41[0]",
+      "position": {
+        "page": 0,
+        "x": 266.4,
+        "y": 222.004
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.4b_other_interest_expense_col_b",
+      "label": "Line 4b — Pro rata share of interest expense: Other interest expense, column B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line4b[0].f1_42[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 222.004
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.4b_other_interest_expense_col_c",
+      "label": "Line 4b — Pro rata share of interest expense: Other interest expense, column C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line4b[0].f1_43[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 222.004
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.5_losses_from_foreign_sources_col_a",
+      "label": "Line 5 — Losses from foreign sources, column A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line5[0].f1_44[0]",
+      "position": {
+        "page": 0,
+        "x": 266.4,
+        "y": 210.005
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.5_losses_from_foreign_sources_col_b",
+      "label": "Line 5 — Losses from foreign sources, column B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line5[0].f1_45[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 210.005
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.5_losses_from_foreign_sources_col_c",
+      "label": "Line 5 — Losses from foreign sources, column C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line5[0].f1_46[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 210.005
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.6_total_deductions_and_losses_col_a",
+      "label": "Line 6 — Add lines 2, 3g, 4a, 4b, and 5, column A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line6[0].f1_47[0]",
+      "position": {
+        "page": 0,
+        "x": 266.4,
+        "y": 198.006
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.6_total_deductions_and_losses_col_b",
+      "label": "Line 6 — Add lines 2, 3g, 4a, 4b, and 5, column B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line6[0].f1_48[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 198.006
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.6_total_deductions_and_losses_col_c",
+      "label": "Line 6 — Add lines 2, 3g, 4a, 4b, and 5, column C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1_Lines2-6[0].Line6[0].f1_49[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 198.006
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.6_total_deductions_and_losses_total",
+      "label": "Line 6 — Add lines 2, 3g, 4a, 4b, and 5, Total (add cols. A, B, and C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_50[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 198
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.7_net_foreign_source_income",
+      "label": "Line 7 — Subtract line 6 from line 1a",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_51[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 186.001
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.j_credit_claimed_taxes_paid",
+      "label": "(j) Credit is claimed for taxes (you must check one): Paid",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2[0].ActiveHeaderElements[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 73.999,
+        "y": 139.999
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.k_credit_claimed_taxes_accrued",
+      "label": "(k) Credit is claimed for taxes (you must check one): Accrued",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2[0].ActiveHeaderElements[0].c1_3[1]",
+      "position": {
+        "page": 0,
+        "x": 73.999,
+        "y": 128
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_date_paid_or_accrued_col_l",
+      "label": "Country A — (l) Date paid or accrued",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_52[0]",
+      "position": {
+        "page": 0,
+        "x": 50.4,
+        "y": 90.003
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_foreign_currency_withheld_dividends_col_m",
+      "label": "Country A — In foreign currency, taxes withheld at source on: (m) Dividends",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_53[0]",
+      "position": {
+        "page": 0,
+        "x": 122.4,
+        "y": 90.003
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_foreign_currency_withheld_rents_royalties_col_n",
+      "label": "Country A — In foreign currency, taxes withheld at source on: (n) Rents and royalties",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_54[0]",
+      "position": {
+        "page": 0,
+        "x": 172.8,
+        "y": 90.003
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_foreign_currency_withheld_interest_col_o",
+      "label": "Country A — In foreign currency, taxes withheld at source on: (o) Interest",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_55[0]",
+      "position": {
+        "page": 0,
+        "x": 223.2,
+        "y": 90.003
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_foreign_currency_other_taxes_col_p",
+      "label": "Country A — In foreign currency, (p) Other foreign taxes paid or accrued",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_56[0]",
+      "position": {
+        "page": 0,
+        "x": 273.6,
+        "y": 90.003
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_usd_withheld_dividends_col_q",
+      "label": "Country A — In U.S. dollars, taxes withheld at source on: (q) Dividends",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_57[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 90.003
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_usd_withheld_rents_royalties_col_r",
+      "label": "Country A — In U.S. dollars, taxes withheld at source on: (r) Rents and royalties",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_58[0]",
+      "position": {
+        "page": 0,
+        "x": 367.2,
+        "y": 90.003
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_usd_withheld_interest_col_s",
+      "label": "Country A — In U.S. dollars, taxes withheld at source on: (s) Interest",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_59[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 90.003
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_usd_other_taxes_col_t",
+      "label": "Country A — In U.S. dollars, (t) Other foreign taxes paid or accrued",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_60[0]",
+      "position": {
+        "page": 0,
+        "x": 460.8,
+        "y": 90.003
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_a_total_foreign_taxes_col_u",
+      "label": "Country A — (u) Total foreign taxes paid or accrued (add cols. (q) through (t))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowA[0].f1_61[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 90.003
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_date_paid_or_accrued_col_l",
+      "label": "Country B — (l) Date paid or accrued",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_62[0]",
+      "position": {
+        "page": 0,
+        "x": 50.4,
+        "y": 78.004
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_foreign_currency_withheld_dividends_col_m",
+      "label": "Country B — In foreign currency, taxes withheld at source on: (m) Dividends",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_63[0]",
+      "position": {
+        "page": 0,
+        "x": 122.4,
+        "y": 78.004
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_foreign_currency_withheld_rents_royalties_col_n",
+      "label": "Country B — In foreign currency, taxes withheld at source on: (n) Rents and royalties",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_64[0]",
+      "position": {
+        "page": 0,
+        "x": 172.8,
+        "y": 78.004
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_foreign_currency_withheld_interest_col_o",
+      "label": "Country B — In foreign currency, taxes withheld at source on: (o) Interest",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_65[0]",
+      "position": {
+        "page": 0,
+        "x": 223.2,
+        "y": 78.004
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_foreign_currency_other_taxes_col_p",
+      "label": "Country B — In foreign currency, (p) Other foreign taxes paid or accrued",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_66[0]",
+      "position": {
+        "page": 0,
+        "x": 273.6,
+        "y": 78.004
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_usd_withheld_dividends_col_q",
+      "label": "Country B — In U.S. dollars, taxes withheld at source on: (q) Dividends",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_67[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 78.004
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_usd_withheld_rents_royalties_col_r",
+      "label": "Country B — In U.S. dollars, taxes withheld at source on: (r) Rents and royalties",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_68[0]",
+      "position": {
+        "page": 0,
+        "x": 367.2,
+        "y": 78.004
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_usd_withheld_interest_col_s",
+      "label": "Country B — In U.S. dollars, taxes withheld at source on: (s) Interest",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_69[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 78.004
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_usd_other_taxes_col_t",
+      "label": "Country B — In U.S. dollars, (t) Other foreign taxes paid or accrued",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_70[0]",
+      "position": {
+        "page": 0,
+        "x": 460.8,
+        "y": 78.004
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_b_total_foreign_taxes_col_u",
+      "label": "Country B — (u) Total foreign taxes paid or accrued (add cols. (q) through (t))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowB[0].f1_71[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 78.004
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_date_paid_or_accrued_col_l",
+      "label": "Country C — (l) Date paid or accrued",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_72[0]",
+      "position": {
+        "page": 0,
+        "x": 50.4,
+        "y": 66.005
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_foreign_currency_withheld_dividends_col_m",
+      "label": "Country C — In foreign currency, taxes withheld at source on: (m) Dividends",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_73[0]",
+      "position": {
+        "page": 0,
+        "x": 122.4,
+        "y": 66.005
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_foreign_currency_withheld_rents_royalties_col_n",
+      "label": "Country C — In foreign currency, taxes withheld at source on: (n) Rents and royalties",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_74[0]",
+      "position": {
+        "page": 0,
+        "x": 172.8,
+        "y": 66.005
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_foreign_currency_withheld_interest_col_o",
+      "label": "Country C — In foreign currency, taxes withheld at source on: (o) Interest",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_75[0]",
+      "position": {
+        "page": 0,
+        "x": 223.2,
+        "y": 66.005
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_foreign_currency_other_taxes_col_p",
+      "label": "Country C — In foreign currency, (p) Other foreign taxes paid or accrued",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_76[0]",
+      "position": {
+        "page": 0,
+        "x": 273.6,
+        "y": 66.005
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_usd_withheld_dividends_col_q",
+      "label": "Country C — In U.S. dollars, taxes withheld at source on: (q) Dividends",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_77[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 66.005
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_usd_withheld_rents_royalties_col_r",
+      "label": "Country C — In U.S. dollars, taxes withheld at source on: (r) Rents and royalties",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_78[0]",
+      "position": {
+        "page": 0,
+        "x": 367.2,
+        "y": 66.005
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_usd_withheld_interest_col_s",
+      "label": "Country C — In U.S. dollars, taxes withheld at source on: (s) Interest",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_79[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 66.005
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_usd_other_taxes_col_t",
+      "label": "Country C — In U.S. dollars, (t) Other foreign taxes paid or accrued",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_80[0]",
+      "position": {
+        "page": 0,
+        "x": 460.8,
+        "y": 66.005
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.row_c_total_foreign_taxes_col_u",
+      "label": "Country C — (u) Total foreign taxes paid or accrued (add cols. (q) through (t))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part2[0].RowC[0].f1_81[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 66.005
+      }
+    },
+    {
+      "fieldId": "form-1116.0.line.8_total_foreign_taxes_paid",
+      "label": "Line 8 — Add lines A through C, column (u)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_82[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 54
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.9_foreign_taxes_from_line_8",
+      "label": "Line 9 — Enter the amount from line 8. These are your total foreign taxes paid or accrued for the category of income checked above Part I",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line9_ReadOrder[0].f2_01[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 708.001
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.10_no_schedule_b_checkbox",
+      "label": "Line 10 — If you enter an amount on line 10 and you don't need to attach Schedule B, check here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line10_ReadOrder[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 342.8,
+        "y": 668
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.10_carryover_carryback_foreign_taxes",
+      "label": "Line 10 — Enter the sum of any carryover of foreign taxes (from Schedule B, line 3, column (xiv)) plus any carrybacks to the current tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_02[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 666
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.11_add_lines_9_10",
+      "label": "Line 11 — Add lines 9 and 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 630
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.12_reduction_in_foreign_taxes",
+      "label": "Line 12 — Reduction in foreign taxes",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_04[0]",
+      "position": {
+        "page": 1,
+        "x": 385.6,
+        "y": 618.001
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.13_taxes_reclassified_high_tax_kickout",
+      "label": "Line 13 — Taxes reclassified under high tax kickout",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_05[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 606.002
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.14_foreign_taxes_available_for_credit",
+      "label": "Line 14 — Combine lines 11, 12, and 13. This is the total amount of foreign taxes available for credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_06[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 594
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.15_foreign_taxable_income_from_line_7",
+      "label": "Line 15 — Enter the amount from line 7. This is your taxable income or (loss) from sources outside the United States (before adjustments) for the category of income checked above Part I",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line15_ReadOrder[0].f2_07[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 558
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.16_adjustments_to_line_15",
+      "label": "Line 16 — Adjustments to line 15",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_08[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 546.001
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.17_net_foreign_source_taxable_income",
+      "label": "Line 17 — Combine the amounts on lines 15 and 16. This is your net foreign source taxable income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_09[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 510.001
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.18_taxable_income_all_sources",
+      "label": "Line 18 — Individuals: Enter the sum of (i) Form 1040, 1040-SR, or 1040-NR, line 11b, minus Form 1040, 1040-SR, or 1040-NR, line 14, and (ii) Schedule 1-A (Form 1040), line 37. Estates and trusts: Enter your taxable income without the deduction for your exemption",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 462.002
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.19_foreign_income_ratio",
+      "label": "Line 19 — Divide line 17 by line 18. If line 17 is more than line 18, enter \"1\"",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 426.002
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.20_tax_before_credits",
+      "label": "Line 20 — Individuals: Enter the total of Form 1040, 1040-SR, or 1040-NR, line 16, and Schedule 2 (Form 1040), line 1z",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 402.001
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.21_maximum_amount_of_credit",
+      "label": "Line 21 — Multiply line 20 by line 19 (maximum amount of credit)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 366.001
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.22_increase_in_limitation_960c",
+      "label": "Line 22 — Increase in limitation (section 960(c))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 354.002
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.23_add_lines_21_22",
+      "label": "Line 23 — Add lines 21 and 22",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 342
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.24_smaller_of_line_14_or_23",
+      "label": "Line 24 — Enter the smaller of line 14 or line 23",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 330.001
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.25_credit_section_951a_income",
+      "label": "Line 25 — Credit for taxes on section 951A category income",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 294.001
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.26_credit_foreign_branch_income",
+      "label": "Line 26 — Credit for taxes on foreign branch category income",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 282.002
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.27_credit_passive_category_income",
+      "label": "Line 27 — Credit for taxes on passive category income",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 270
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.28_credit_general_category_income",
+      "label": "Line 28 — Credit for taxes on general category income",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 258.001
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.29_credit_section_901j_income",
+      "label": "Line 29 — Credit for taxes on section 901(j) income",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 246.002
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.30_credit_income_resourced_by_treaty",
+      "label": "Line 30 — Credit for taxes on certain income re-sourced by treaty",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 234
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.31_credit_lump_sum_distributions",
+      "label": "Line 31 — Credit for taxes on lump-sum distributions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 222.001
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.32_add_lines_25_through_31",
+      "label": "Line 32 — Add lines 25 through 31",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 210.002
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.33_smaller_of_line_20_or_32",
+      "label": "Line 33 — Enter the smaller of line 20 or line 32",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 198
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.34_reduction_international_boycott",
+      "label": "Line 34 — Reduction of credit for international boycott operations",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 186.001
+      }
+    },
+    {
+      "fieldId": "form-1116.1.line.35_foreign_tax_credit",
+      "label": "Line 35 — Subtract line 34 from line 33. This is your foreign tax credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 162
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/1116/blank.pdf",
+    "ingestedAt": "2026-11-20T05:26:57.050Z",
+    "totalFields": 118,
+    "skipped": 0,
+    "catalogEntries": 118
+  }
+}

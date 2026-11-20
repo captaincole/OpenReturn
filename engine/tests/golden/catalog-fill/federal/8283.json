@@ -1,0 +1,1059 @@
+{
+  "formId": "form-8283",
+  "fieldCount": 117,
+  "entries": [
+    {
+      "fieldId": "form-8283.0.header.family_pass_through_entity",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.header.original_entity_identifying_number",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].f1_4[0]",
+          "text": "T-8V5W9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.header.original_entity_name",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].f1_3[0]",
+          "text": "T-172G9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].f1_1[0]",
+          "text": "T-16AUG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_a_donee_name_address",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1A[0].f1_5[0]",
+          "text": "T-ZAXIL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_b_vehicle",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1A[0].ColB[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_b_vehicle_identification_number",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1A[0].ColB[0].f1_6[0]",
+          "text": "T-1DDPJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_c_property_description",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1A[0].f1_7[0]",
+          "text": "T-Q23KP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_d_contribution_date",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1A[0].f1_17[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_e_date_acquired",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1A[0].f1_18[0]",
+          "text": "T-OWKNA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_f_how_acquired",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1A[0].f1_19[0]",
+          "text": "T-PAW6B"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_g_cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1A[0].f1_20[0]",
+          "text": "7,883"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_h_fair_market_value",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1A[0].f1_21[0]",
+          "text": "8,809"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_a_col_i_valuation_method",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1A[0].f1_22[0]",
+          "text": "T-1RPAK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_a_donee_name_address",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1B[0].f1_8[0]",
+          "text": "T-ICIT7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_b_vehicle",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1B[0].ColB[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_b_vehicle_identification_number",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1B[0].ColB[0].f1_9[0]",
+          "text": "T-129RI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_c_property_description",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1B[0].f1_10[0]",
+          "text": "T-R1SLU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_d_contribution_date",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1B[0].f1_23[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_e_date_acquired",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1B[0].f1_24[0]",
+          "text": "T-Y9UA0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_f_how_acquired",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1B[0].f1_25[0]",
+          "text": "T-P27G3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_g_cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1B[0].f1_26[0]",
+          "text": "5,190"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_h_fair_market_value",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1B[0].f1_27[0]",
+          "text": "5,903"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_b_col_i_valuation_method",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1B[0].f1_28[0]",
+          "text": "T-19U41"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_a_donee_name_address",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1C[0].f1_11[0]",
+          "text": "T-WKE1U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_b_vehicle",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1C[0].ColB[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_b_vehicle_identification_number",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1C[0].ColB[0].f1_12[0]",
+          "text": "T-1CXB9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_c_property_description",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1C[0].f1_13[0]",
+          "text": "T-7X2KJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_d_contribution_date",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1C[0].f1_29[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_e_date_acquired",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1C[0].f1_30[0]",
+          "text": "T-1I3HB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_f_how_acquired",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1C[0].f1_31[0]",
+          "text": "T-AY1YB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_g_cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1C[0].f1_32[0]",
+          "text": "4,832"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_h_fair_market_value",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1C[0].f1_33[0]",
+          "text": "8,969"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_c_col_i_valuation_method",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1C[0].f1_34[0]",
+          "text": "T-QRNDC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_a_donee_name_address",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1D[0].f1_14[0]",
+          "text": "T-1PWXA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_b_vehicle",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1D[0].ColB[0].c1_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_b_vehicle_identification_number",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1D[0].ColB[0].f1_15[0]",
+          "text": "T-IU1UL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_c_property_description",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsA-C[0].Row1D[0].f1_16[0]",
+          "text": "T-XOG5X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_d_contribution_date",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1D[0].f1_35[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_e_date_acquired",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1D[0].f1_36[0]",
+          "text": "T-1NPM0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_f_how_acquired",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1D[0].f1_37[0]",
+          "text": "T-AO2QK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_g_cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1D[0].f1_38[0]",
+          "text": "5,817"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_h_fair_market_value",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1D[0].f1_39[0]",
+          "text": "3,095"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.1_row_d_col_i_valuation_method",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line1_ColsD-I[0].Row1D[0].f1_40[0]",
+          "text": "T-6FXJH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.2a_art_20000_or_more",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Lines2a-c[0].c1_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.2b_qualified_conservation_contribution",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Lines2a-c[0].c1_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.2b1_certified_historic_structure",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Lines2a-c[0].c1_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.2b1_nps_number",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Lines2a-c[0].f1_41[0]",
+          "text": "T-18XPX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.2c_art_less_than_20000",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Lines2a-c[0].c1_6[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.2d_other_real_estate",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Lines2d-h[0].c1_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.2e_equipment",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Lines2d-h[0].c1_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.2f_securities",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Lines2d-h[0].c1_6[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.2g_collectibles",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Lines2d-h[0].c1_6[3]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.2h_intellectual_property",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Lines2d-h[0].c1_6[4]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.2i_vehicles",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Lines2i-l[0].c1_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.2j_clothing_household_items",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Lines2i-l[0].c1_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.2k_digital_assets",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Lines2i-l[0].c1_6[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.2l_other",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Lines2i-l[0].c1_6[3]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_a_col_a_property_description",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsA-C[0].Row3A[0].f1_42[0]",
+          "text": "T-1LKPH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_a_col_b_physical_condition",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsA-C[0].Row3A[0].f1_43[0]",
+          "text": "T-1SPSP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_a_col_c_appraised_value",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsA-C[0].Row3A[0].f1_44[0]",
+          "text": "8,734"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_a_col_d_date_acquired",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3A[0].f1_51[0]",
+          "text": "T-B3V4B"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_a_col_e_how_acquired",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3A[0].f1_52[0]",
+          "text": "T-6PHBZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_a_col_f_cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3A[0].f1_53[0]",
+          "text": "8,455"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_a_col_g_bargain_sale_amount",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3A[0].f1_54[0]",
+          "text": "5,833"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_a_col_h_conservation_relevant_basis",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3A[0].f1_55[0]",
+          "text": "8,778"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_a_col_i_deduction_claimed",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3A[0].f1_56[0]",
+          "text": "4,012"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_b_col_a_property_description",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsA-C[0].Line3B[0].f1_45[0]",
+          "text": "T-H8IVS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_b_col_b_physical_condition",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsA-C[0].Line3B[0].f1_46[0]",
+          "text": "T-1BINC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_b_col_c_appraised_value",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsA-C[0].Line3B[0].f1_47[0]",
+          "text": "5,457"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_b_col_d_date_acquired",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3B[0].f1_57[0]",
+          "text": "T-1XFX3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_b_col_e_how_acquired",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3B[0].f1_58[0]",
+          "text": "T-3SL5Z"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_b_col_f_cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3B[0].f1_59[0]",
+          "text": "6,963"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_b_col_g_bargain_sale_amount",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3B[0].f1_60[0]",
+          "text": "2,906"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_b_col_h_conservation_relevant_basis",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3B[0].f1_61[0]",
+          "text": "6,653"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_b_col_i_deduction_claimed",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3B[0].f1_62[0]",
+          "text": "2,245"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_c_col_a_property_description",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsA-C[0].Line3C[0].f1_48[0]",
+          "text": "T-1W0W9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_c_col_b_physical_condition",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsA-C[0].Line3C[0].f1_49[0]",
+          "text": "T-18VZH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_c_col_c_appraised_value",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsA-C[0].Line3C[0].f1_50[0]",
+          "text": "6,647"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_c_col_d_date_acquired",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3C[0].f1_63[0]",
+          "text": "T-1C2LJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_c_col_e_how_acquired",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3C[0].f1_64[0]",
+          "text": "T-X07XD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_c_col_f_cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3C[0].f1_65[0]",
+          "text": "6,801"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_c_col_g_bargain_sale_amount",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3C[0].f1_66[0]",
+          "text": "6,846"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_c_col_h_conservation_relevant_basis",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3C[0].f1_67[0]",
+          "text": "1,813"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.0.line.3_row_c_col_i_deduction_claimed",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page1[0].Table_Line3_ColsD-I[0].Row3C[0].f1_68[0]",
+          "text": "1,813"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_1[0]",
+          "text": "T-1MOLJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.line.4a_partial_interest_property_letter",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_3[0]",
+          "text": "6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.line.4b_1_deduction_this_tax_year",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_4[0]",
+          "text": "6,529"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.line.4b_2_deduction_prior_tax_years",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_5[0]",
+          "text": "8,225"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.line.4c_prior_year_donee_address",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_7[0]",
+          "text": "T-1OJ4O"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.line.4c_prior_year_donee_city_state_zip",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_8[0]",
+          "text": "T-EGMU4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.line.4c_prior_year_donee_name",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_6[0]",
+          "text": "T-DHTCE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.line.4d_tangible_property_location",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_9[0]",
+          "text": "T-1N035"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.line.4e_person_with_possession",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_10[0]",
+          "text": "T-1T5UW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.line.4e_person_with_possession_continued",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_11[0]",
+          "text": "T-X0W4S"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.line.5a_restriction_on_donee_use_no",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].c2_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.line.5a_restriction_on_donee_use_yes",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.line.5b_rights_given_to_others_no",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].c2_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.line.5b_rights_given_to_others_yes",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].c2_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.line.5c_restriction_particular_use_no",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].c2_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.line.5c_restriction_particular_use_yes",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].c2_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.part3.items_appraised_500_or_less",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_12[0]",
+          "text": "T-E045L"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.part4.appraiser_business_address",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_15[0]",
+          "text": "T-3HDEZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.part4.appraiser_city_state_zip",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_17[0]",
+          "text": "T-1NADB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.part4.appraiser_identifying_number",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_16[0]",
+          "text": "T-94NXU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.part4.appraiser_name",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_13[0]",
+          "text": "T-9KLCB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.part4.appraiser_title",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_14[0]",
+          "text": "T-19PAQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.part5.date_property_received",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_18[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.part5.donee_address",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_21[0]",
+          "text": "T-1S1TE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.part5.donee_authorized_signer_title",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_23[0]",
+          "text": "T-1NM6I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.part5.donee_city_state_zip",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_22[0]",
+          "text": "T-OMZ5V"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.part5.donee_ein",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_20[0]",
+          "text": "T-1SW7U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.part5.donee_name",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].f2_19[0]",
+          "text": "T-POHCW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.part5.unrelated_use_no",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].c2_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8283.1.part5.unrelated_use_yes",
+      "widgets": [
+        {
+          "widgetName": "Form8283[0].Page2[0].c2_4[0]",
+          "checked": true
+        }
+      ]
+    }
+  ]
+}

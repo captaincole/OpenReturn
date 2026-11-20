@@ -1,0 +1,222 @@
+{
+  "formId": "form-8814",
+  "fieldCount": 24,
+  "entries": [
+    {
+      "fieldId": "form-8814.0.header.a_child_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+          "text": "T-19FL2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.header.b_child_ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.header.c_more_than_one_form_8814",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-1OHIA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.line.10_capital_gain_to_report",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "2,889"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.line.11_add_lines_9_10",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "3,366"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.line.12_other_income_schedule_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "2,428"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.line.14_amount_over_not_taxed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "5,716"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.line.15_line_14_less_than_1350_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line15_ReadOrder[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.line.15_line_14_less_than_1350_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line15_ReadOrder[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.line.15_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "2,452"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.line.1a_child_taxable_interest",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+          "text": "2,115"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.line.1b_child_tax_exempt_interest",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+          "text": "2,017"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.line.2a_child_ordinary_dividends",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+          "text": "5,852"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.line.2b_child_qualified_dividends",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+          "text": "2,443"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.line.3_child_capital_gain_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+          "text": "8,474"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.line.4_total_interest_dividends",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "1,126"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.line.6_amount_over_base",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "9,404"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.line.7_qualified_dividends_ratio_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "T-1BCNO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.line.7_qualified_dividends_ratio_whole",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "187"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.line.8_capital_gain_ratio_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "T-1XVQP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.line.8_capital_gain_ratio_whole",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "184"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8814.0.line.9_qualified_dividends_to_report",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "2,663"
+        }
+      ]
+    }
+  ]
+}
