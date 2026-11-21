@@ -1,3 +1,5 @@
+import { scenarioFolder } from "../scenarios/index.js";
+
 const FORM_SHORT_NAME: Record<string, string> = {
   "form-1040": "1040",
   "form-540": "CA540",
@@ -23,4 +25,4 @@ export function scenarioPdfName(
 }
 
 export const lockedGoldenPath = (scenario: string, formId: string): string =>
-  `tests/scenarios/${scenario}/docs/${scenarioPdfName(scenario, formId, "Golden")}`;
+  `tests/scenarios/${scenarioFolder(scenario)}/docs/${scenarioPdfName(scenario, formId, "Golden")}`;
