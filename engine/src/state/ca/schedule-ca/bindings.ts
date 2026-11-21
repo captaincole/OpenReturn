@@ -6,6 +6,7 @@ import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../../
 import { unsupported } from "../../../types.js";
 import { answerLines } from "./answerLines.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
+import { form8853Bindings } from "./form8853.js";
 import { partIIUnsupported } from "./increasedStandard.js";
 import { CA_MISC_FLOOR_RATE, caItemizedLine29 } from "./itemizedWorksheet.js";
 import { mortgageCreditBindings } from "./mortgageCredit.js";
@@ -130,7 +131,7 @@ function adjustmentsTotalFederal(form: FormAccessor<ScheduleCa>) {
   const federal = numberOrBlank(form["schedule-1.1.line.26"]);
   if (sum(total) === sum(federal)) return total;
   return unsupported(
-    "Schedule 1 line 26 holds an adjustment that Section C does not copy yet (only lines 11, 13, 15, 18 and 21 are copied).",
+    "Schedule 1 line 26 holds an adjustment that Section C does not copy yet (only lines 11, 13, 15, 18, 21 and 23 are copied).",
   );
 }
 
@@ -139,6 +140,7 @@ export function register(): void {
     bindings: waitsWithIncreasedStandard({
       ...sectionCBindings,
       ...mortgageCreditBindings,
+      ...form8853Bindings,
       /*
        * MANUAL EDIT: CA does not conform to HSAs. Employer contributions
        * (W-2 box 12 code W) are CA wages: line 1a col C, carried to line 27.
@@ -667,10 +669,8 @@ export function register(): void {
         "Foreign earned income exclusion from federal Form 2555 line 45. No foreign income scenario or Form 2555 fact ingestion path exists. CA does not allow the federal foreign earned income exclusion, so this amount also requires a column C addition on line 8d.",
       "1.line.b8d_additions":
         "Column C additions for foreign earned income exclusion (Form 2555) — CA does not conform for certain combat-zone contractors, but no fact/decision ingestion path exists for Form 2555 scenarios yet.",
-      "1.line.b8e_federal":
-        "Income from federal Form 8853 (Archer MSAs and Long-Term Care Insurance Contracts) — no fact ingestion path for Form 8853 data exists yet.",
       "1.line.b8e_additions":
-        "Column C additions for Form 8853 income — no fact ingestion path for Form 8853 scenarios yet.",
+        "Column C adds an Archer MSA rolled over to an HSA (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b02); no fact splits Form 8853 line 6b between rollovers to an HSA and other amounts.",
       "1.line.b8g_federal":
         "Alaska Permanent Fund dividends — niche income type specific to Alaska residents; no fact ingestion path exists.",
       "1.line.b8j_federal":
@@ -741,8 +741,6 @@ export function register(): void {
         "CA subtraction adjustment to IRA deduction (line 20 col B) — requires knowledge of CA vs. federal IRA deductibility differences and no fact ingestion path exists yet.",
       "2.line.c20_additions":
         "CA addition adjustment to IRA deduction (line 20 col C) — requires knowledge of CA vs. federal IRA deductibility differences and no fact ingestion path exists yet.",
-      "2.line.c23_federal":
-        "Archer MSA deduction (federal Schedule 1 line 23, from Form 8853) — no Archer MSA fact ingestion path exists; uncommon scenario not yet modeled.",
       "3.line.c24b_federal":
         "Deductible expenses for personal-property rental (Schedule 1 line 24b) — no personal-property-rental expense fact ingestion path exists yet.",
       "3.line.c24b_subtractions":

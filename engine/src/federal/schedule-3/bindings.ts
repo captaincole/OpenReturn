@@ -3,6 +3,7 @@ import { numberOrBlank, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { mortgageCreditGap } from "../8396/creditGap.js";
+import { creditGap, LINE_12_ID } from "../8880/credit.js";
 import type { Schedule3FilingInfo } from "./filingInfo.js";
 import type { Schedule3 } from "./types.js";
 
@@ -29,6 +30,12 @@ export function register(): void {
         if (gap !== undefined) return unsupported(gap);
         return numberOrBlank(form["form-8396.0.line.9_current_year_mortgage_interest_credit"]);
       },
+      /*
+       * MANUAL EDIT: Form 8880 line 12 ("here and on Schedule 3 (Form 1040), line 4",
+       * irs-8880-form-2025::sec::omb-no-1545-0074::b03). Blank when no credit; a gap
+       * in Form 8880 stays a gap here.
+       */
+      "0.line.4": (form, info) => numberOrBlank(form[LINE_12_ID]) ?? creditGap(form, info),
       "0.line.5b": (form) => {
         const value = form["form-5695.3.line.32"];
         return typeof value === "number" ? value : undefined;
@@ -72,7 +79,6 @@ export function register(): void {
     unsupported: {
       "0.line.1": "Foreign tax credit (Form 1116): no scenario has foreign tax paid yet.",
       "0.line.3": "Education credits (Form 8863): no scenario yet.",
-      "0.line.4": "Retirement savings contributions credit (Form 8880): no scenario yet.",
       "0.line.5a": "Residential clean energy credit (Form 5695 Part I) is not modeled.",
       "0.line.6a": NO_SCENARIO,
       "0.line.6b": NO_SCENARIO,

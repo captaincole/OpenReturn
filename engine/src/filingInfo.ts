@@ -18,6 +18,8 @@ import type { Form4684FilingInfo } from "./federal/4684/filingInfo.js";
 import { resolve4684Info } from "./federal/4684/resolveInfo.js";
 import type { Form4952FilingInfo } from "./federal/4952/filingInfo.js";
 import { resolve4952Info } from "./federal/4952/resolveInfo.js";
+import type { Form5329FilingInfo } from "./federal/5329/filingInfo.js";
+import { resolve5329Info } from "./federal/5329/resolveInfo.js";
 import type { Form5695FilingInfo } from "./federal/5695/filingInfo.js";
 import { resolve5695Info } from "./federal/5695/resolveInfo.js";
 import type { Form6251FilingInfo } from "./federal/6251/filingInfo.js";
@@ -38,6 +40,10 @@ import type { Form8814FilingInfo } from "./federal/8814/filingInfo.js";
 import { resolve8814Info } from "./federal/8814/resolveInfo.js";
 import type { Form8829FilingInfo } from "./federal/8829/filingInfo.js";
 import { resolve8829Info } from "./federal/8829/resolveInfo.js";
+import type { Form8853FilingInfo } from "./federal/8853/filingInfo.js";
+import { resolve8853Info } from "./federal/8853/resolveInfo.js";
+import type { Form8880FilingInfo } from "./federal/8880/filingInfo.js";
+import { resolve8880Info } from "./federal/8880/resolveInfo.js";
 import type { Form8889FilingInfo } from "./federal/8889/filingInfo.js";
 import { resolve8889Info } from "./federal/8889/resolveInfo.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
@@ -209,6 +215,7 @@ export type FilingInfo = BaseFilingInfo &
   Schedule2FilingInfo &
   Schedule3FilingInfo &
   ScheduleHFilingInfo &
+  Form5329FilingInfo &
   Form5695FilingInfo &
   Form6251FilingInfo &
   ScheduleEFilingInfo &
@@ -229,6 +236,8 @@ export type FilingInfo = BaseFilingInfo &
   Form8814FilingInfo &
   Form6781FilingInfo &
   Form8396FilingInfo &
+  Form8853FilingInfo &
+  Form8880FilingInfo &
   FederalFormsWithNoRulesFilingInfo &
   Form540NRFilingInfo &
   ScheduleCa540NRFilingInfo &
@@ -267,6 +276,7 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolveSchedule2Info,
   resolveSchedule3Info,
   resolveScheduleHInfo,
+  resolve5329Info,
   resolve5695Info,
   resolveScheduleAInfo,
   resolveScheduleBInfo,
@@ -291,6 +301,8 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve8814Info,
   resolve6781Info,
   resolve8396Info,
+  resolve8853Info,
+  resolve8880Info,
   ...FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
   resolve540NRInfo,
   resolveScheduleCa540NRInfo,

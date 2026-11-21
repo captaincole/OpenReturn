@@ -26,6 +26,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "an excess contribution by the due date; blank otherwise",
   ],
   [
+    /^hsa\.archer_msa\.distributions_rolled_over$/,
+    "Form 8853 line 6b, recorded only when the user rolled an Archer MSA distribution over or " +
+      "took out an excess contribution by the due date; blank otherwise",
+  ],
+  [
     /^decisions\.scope\.must_file_schedule_a$/,
     "close-deductions records it when California itemizes and federal takes the standard " +
       "deduction (cade deductions/closing.ts); absent, Schedule A follows decisions.itemize_vs_standard",
@@ -130,6 +135,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^(state_local_tax\.other_taxes(_description)?|other_itemized\.impairment_related_work_expenses)$/,
     "an answer Cade records only when the user paid other taxes or has impairment-related work " +
       "expenses (Schedule A lines 6 and 16)",
+  ],
+  [
+    /^retirement\.early_distribution_exception\.[^.]+\.[^.]+$/,
+    "an answer Cade records only when the user states an exception for an early distribution; " +
+      "absent, the 1099-R's code 1 stands and no part is excluded (Form 5329 line 2)",
   ],
   [
     /^prior_year\.ca_tax$/,

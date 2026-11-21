@@ -9,6 +9,7 @@ import { SSN, type FilingStatus } from "../../values.js";
 import { computeQdcg, type QdcgBreakdown } from "../../worksheets/qdcg.js";
 import { standardDeduction } from "../1040/deductions.js";
 import { qdcgInputsFromReturn } from "../1040/qdcgInputs.js";
+import { withForm8814 } from "../8814/totals.js";
 import type { Form6251FilingInfo } from "./filingInfo.js";
 import type { Form6251 } from "./types.js";
 
@@ -232,11 +233,18 @@ export function register(): void {
       },
       /*
        * MANUAL EDIT: irs-6251-inst-2025::sec::line-2g-interest-from-private-activity-bonds::b01–b02.
-       * 1099-INT box 9 plus 1099-DIV box 13. KNOWN GAP: no fact holds a deduction
-       * allocable to that interest, so nothing reduces it; Form 8814 is not modeled.
+       * 1099-INT box 9 plus 1099-DIV box 13, and the private activity bond part of
+       * each Form 8814 line 1b (::b02). KNOWN GAP: no fact holds a deduction
+       * allocable to that interest, so nothing reduces it.
        */
       "0.line.2g_private_activity_bond_interest": (_, info) => {
-        const interest = roundDollars(info.privateActivityBondInterest);
+        const childInterest = withForm8814(
+          info.form8814Totals,
+          0,
+          (figured) => figured.privateActivityBondInterest,
+        );
+        if (typeof childInterest !== "number") return childInterest;
+        const interest = roundDollars(sum(info.privateActivityBondInterest, childInterest));
         return interest !== undefined && interest > 0 ? interest : undefined;
       },
       /*
