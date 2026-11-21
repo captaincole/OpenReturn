@@ -669,6 +669,10 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 5329",
     relativeDir: "federal/5329",
     register: registerForm5329,
+    copies: {
+      count: (info) => info?.form5329Filers?.length ?? 1,
+      select: (info, index) => info && { ...info, form5329CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-5471",
