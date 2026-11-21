@@ -53,9 +53,18 @@ describe("resolve8814Info", () => {
       [dependent("fred", { dob: "06/15/2019" }), income("fred", FRED_INCOME)],
       false,
     );
-    expect(info.mustFile?.["form-8814"]?.value).toBe(false);
+    /* A child has income and the parents have not chosen: the return waits for the decision. */
+    expect(info.mustFile?.["form-8814"]?.value).toBeUndefined();
     expect(info.form8814Children).toBeUndefined();
     expect(info.form8814Totals).toBeUndefined();
+    const declined = resolve8814Info(
+      makeResolverInputs({
+        facts: [dependent("fred", { dob: "06/15/2019" }), income("fred", FRED_INCOME)],
+        decisions: [{ ...ELECTION, decision: false }],
+      }),
+    );
+    expect(declined.mustFile?.["form-8814"]?.value).toBe(false);
+    expect(resolve([], false).mustFile?.["form-8814"]?.value).toBe(false);
   });
 
   it("figures Fred's form and the totals other forms read", () => {

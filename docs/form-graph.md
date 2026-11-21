@@ -25,7 +25,7 @@ The golden suite ran 25 scenarios.
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Form 8949 | Federal 2025 | Yes | 7 | 200 | 121 | 0 | 33 | 46 | 0 | 0 |
 | Schedule D | Federal 2025 | Yes | 8 | 53 | 26 | 0 | 6 | 21 | 1 | 6 |
-| Form 1040 | Federal 2025 | Yes | 25 | 199 | 106 | 1 | 16 | 76 | 17 | 21 |
+| Form 1040 | Federal 2025 | Yes | 25 | 199 | 106 | 1 | 11 | 81 | 17 | 21 |
 | Schedule A | Federal 2025 | Yes | 9 | 32 | 27 | 0 | 3 | 2 | 4 | 5 |
 | Schedule B | Federal 2025 | Yes | 7 | 72 | 13 | 0 | 54 | 5 | 0 | 1 |
 | Form 4562 | Federal 2025 | Yes | 1 | 240 | 19 | 0 | 69 | 152 | 0 | 0 |
@@ -47,7 +47,7 @@ The golden suite ran 25 scenarios.
 | Form 4952 | Federal 2025 | Yes | 5 | 17 | 17 | 0 | 0 | 0 | 2 | 4 |
 | Schedule 8812 | Federal 2025 | Yes | 11 | 40 | 35 | 0 | 2 | 3 | 7 | 1 |
 | Form 8959 | Federal 2025 | Yes | 8 | 26 | 19 | 0 | 3 | 4 | 1 | 3 |
-| Form 8960 | Federal 2025 | Yes | 10 | 38 | 20 | 0 | 1 | 17 | 4 | 1 |
+| Form 8960 | Federal 2025 | Yes | 10 | 38 | 20 | 0 | 0 | 18 | 4 | 1 |
 | Form 8995-A | Federal 2025 | Yes | 3 | 94 | 54 | 0 | 27 | 13 | 4 | 1 |
 | Form 8995 | Federal 2025 | Yes | 7 | 33 | 26 | 0 | 5 | 2 | 4 | 1 |
 | Form 6251 | Federal 2025 | Yes | 3 | 62 | 38 | 0 | 7 | 17 | 7 | 1 |
@@ -59,7 +59,7 @@ The golden suite ran 25 scenarios.
 | Form 2210 | Federal 2025 | Yes | 0 | 167 | 0 | 0 | 0 | 167 | 0 | 0 |
 | Form 8283 | Federal 2025 | Yes | 0 | 117 | 0 | 0 | 0 | 117 | 0 | 0 |
 | Form 8801 | Federal 2025 | Yes | 0 | 57 | 0 | 0 | 0 | 57 | 0 | 0 |
-| Form 8814 | Federal 2025 | Yes | 0 | 24 | 0 | 0 | 24 | 0 | 0 | 0 |
+| Form 8814 | Federal 2025 | Yes | 0 | 24 | 0 | 0 | 0 | 24 | 0 | 0 |
 | Schedule F | Federal 2025 |  | 0 | 89 | 0 | 0 | 0 | 89 | 0 | 0 |
 | Form 461 | Federal 2025 | Yes | 0 | 16 | 0 | 0 | 0 | 16 | 0 | 0 |
 | Form 965-A | Federal 2025 |  | 0 | 391 | 0 | 0 | 0 | 391 | 0 | 0 |
@@ -550,7 +550,7 @@ For each form: the fields that are not verified and that other fields read, by t
 | `0.line.9c` | Line 9c — Miscellaneous investment expenses (see instructions) | unsupported | 12 | none |
 | `0.line.3` | Line 3 — Annuities (see instructions) | unsupported | 11 | none |
 | `0.line.6` | Line 6 — Adjustments to investment income for certain CFCs and PFICs (see instructions) | unsupported | 11 | none |
-| `0.line.7` | Line 7 — Other modifications to investment income (see instructions) | not run | 11 | none |
+| `0.line.7` | Line 7 — Other modifications to investment income (see instructions) | unsupported | 11 | none |
 
 12 more not checked, each of which feeds fewer fields.
 
