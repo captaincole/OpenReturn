@@ -2,12 +2,35 @@
 
 import { defineForm } from "../../defineForm.js";
 import { sum } from "../../money.js";
+import { unsupported, type Unsupported } from "../../types.js";
+import { earlyDistributionTax } from "../5329/lines.js";
 import type { Schedule2FilingInfo } from "./filingInfo.js";
 import type { Schedule2 } from "./types.js";
 
 /* Blank, not 0, when every line is blank, as on the paper form. */
 const total = (...values: unknown[]): number | undefined =>
   values.every((value) => value === undefined) ? undefined : sum(...values);
+
+const OTHER_PARTS_OF_5329 =
+  "Form 5329 files by decision, but only its Part I (early distributions) is figured; Parts II–IX have no facts.";
+
+/*
+ * MANUAL EDIT: line 8 takes Form 5329 line 4 of each person, the combined tax
+ * on a joint return (irs-5329-inst-2025::sec::specific-instructions::b01). With
+ * no Form 5329 (code 1 alone), it is "the taxable amount of the distribution
+ * by 10%", the same amount (irs-1040-inst-2025::sec::line-8::b01–b02). Blank
+ * with no early distribution, and while a person's answers wait.
+ */
+function line8(info: Schedule2FilingInfo): number | Unsupported | undefined {
+  const people = info.earlyDistributionPeople ?? [];
+  const gap = people.find((person) => person.gap !== undefined)?.gap;
+  if (gap !== undefined) return unsupported(gap);
+  if (people.length === 0)
+    return info.mustFile?.["form-5329"]?.value === true
+      ? unsupported(OTHER_PARTS_OF_5329)
+      : undefined;
+  return earlyDistributionTax(people);
+}
 
 export function register(): void {
   defineForm<Schedule2, Schedule2FilingInfo>("schedule-2", {
@@ -46,6 +69,10 @@ export function register(): void {
       "0.line.11_additional_medicare_tax": (form) =>
         total(form["form-8959.0.line.18_total_additional_medicare_tax"]),
       "0.line.12_net_investment_income_tax": (form) => total(form["form-8960.0.line.17"]),
+      "0.line.8_additional_tax_iras_tax_favored_accounts": (_, info) => line8(info),
+      // irs-1040-inst-2025::sec::line-8::b02: "check the box on line 8 to indicate that you don't have to file Form 5329".
+      "0.line.8_ira_tax_favored_accounts_not_required": (_, info) =>
+        info.earlyDistributionTaxWithoutForm === true ? true : undefined,
       "1.line.17c_additional_tax_hsa_distributions": (form) =>
         total(form["form-8889.0.line.17b_additional_20pct_tax"]),
       "1.line.17d_additional_tax_hsa_ineligible_individual": (form) =>
@@ -130,10 +157,6 @@ export function register(): void {
         "Form 4137 (unreported tips) not ingested; no unreported-tip scenario yet.",
       "0.line.6_uncollected_ss_medicare_tax_wages":
         "Form 8919 (uncollected SS/Medicare on wages) not ingested; no misclassified-worker scenario yet.",
-      "0.line.8_ira_tax_favored_accounts_not_required":
-        "No Form 5329 / early-distribution additional-tax scenario or decision modeled yet.",
-      "0.line.8_additional_tax_iras_tax_favored_accounts":
-        "Form 5329 not ingested; no early-distribution/excess-contribution penalty scenario yet",
       "0.line.13_uncollected_ss_medicare_rrta_tax_w2":
         "W-2 box 12 codes A/B/M/N are not exposed as summable fields; no uncollected-tip-tax scenario yet",
       "0.line.14_interest_tax_installment_residential_lots":
