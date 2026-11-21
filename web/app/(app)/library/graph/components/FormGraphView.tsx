@@ -22,6 +22,8 @@ import { STATE_FILL, StateDot } from "./StateBar";
 export interface GraphForm {
   formId: string;
   displayName: string;
+  /* The page with this form selected. */
+  href: string;
   /* The part of the return that the form belongs to, and its place in that part. */
   section: string;
   rank: number;
@@ -37,6 +39,7 @@ export interface GraphMissingForm {
   displayName: string;
   section: string;
   about: string;
+  href: string;
   waitingCount: number;
   feeds: number;
   /* The forms with a field that waits for it. */
@@ -136,10 +139,7 @@ function cardLabel(node: Node): string {
   return `${name}: the ${formCount(node.form.formCount)} of ${node.form.jurisdiction}`;
 }
 
-const cardHref = (node: Node): string =>
-  node.kind === "outside"
-    ? node.form.href
-    : `/library/graph?form=${encodeURIComponent(node.form.formId)}`;
+const cardHref = (node: Node): string => node.form.href;
 
 /* The box of another return has round ends, so its text starts further in. */
 const textLeft = (node: Node): number => (node.kind === "outside" ? 16 : BAR.inset);

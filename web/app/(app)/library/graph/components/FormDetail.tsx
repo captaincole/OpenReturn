@@ -1,5 +1,6 @@
 import {
   STATE_LABELS,
+  graphHref,
   shortFieldId,
   type FieldNode,
   type FormGraph,
@@ -9,9 +10,6 @@ import {
 import Link from "next/link";
 import { Section } from "../../../components/Section";
 import { StateBar, StateCountsLine, StateDot } from "./StateBar";
-
-export const formHref = (formId: string): string =>
-  `/library/graph?form=${encodeURIComponent(formId)}`;
 
 /* The engine's forms and the forms it lacks, by id. */
 function formNames(graph: FormGraph): Map<string, string> {
@@ -29,6 +27,7 @@ function FormChips(props: {
   title: string;
   chips: FormChip[];
   dashed?: boolean;
+  tier1: boolean;
 }) {
   const names = formNames(props.graph);
   return (
@@ -41,7 +40,7 @@ function FormChips(props: {
           {props.chips.map((chip) => (
             <li key={chip.formId}>
               <Link
-                href={formHref(chip.formId)}
+                href={graphHref({ form: chip.formId, tier1: props.tier1 })}
                 scroll={false}
                 className={`inline-flex items-baseline gap-1.5 rounded-lg border px-2.5 py-1 text-[13px] text-ink-primary transition-colors hover:border-border-strong ${
                   props.dashed ? "border-dashed border-border" : "border-border-subtle"
@@ -63,6 +62,7 @@ function FieldRows(props: {
   withReason: boolean;
   /* Given when the rows are of more than one form: each row names its form. */
   formNames?: Map<string, string>;
+  tier1: boolean;
 }) {
   return (
     <div className="card overflow-x-auto">
@@ -82,7 +82,11 @@ function FieldRows(props: {
                 <div className="text-ink-primary">{field.label}</div>
                 <div className="mt-0.5 text-[11px] text-ink-muted">
                   {props.formNames && (
-                    <Link href={formHref(field.formId)} scroll={false} className="hover:underline">
+                    <Link
+                      href={graphHref({ form: field.formId, tier1: props.tier1 })}
+                      scroll={false}
+                      className="hover:underline"
+                    >
                       {props.formNames.get(field.formId)}
                     </Link>
                   )}
@@ -121,7 +125,17 @@ function waitsFor(graph: FormGraph, formId: string): FormChip[] {
   );
 }
 
-export function FormDetail({ graph, form }: { graph: FormGraph; form: FormNode }) {
+/* The mark on a form that our target user needs. */
+function Tier1Mark() {
+  return (
+    <span className="rounded-md border border-border-subtle px-1.5 py-0.5 text-[11px] text-ink-secondary">
+      Tier 1
+    </span>
+  );
+}
+
+export function FormDetail(props: { graph: FormGraph; form: FormNode; tier1: boolean }) {
+  const { graph, form, tier1 } = props;
   const fields = graph.fields.filter((field) => field.formId === form.formId);
   const open = fields.filter((field) => field.state !== "verified").sort(byFeeds);
   const verified = fields.filter((field) => field.state === "verified").sort(byFeeds);
@@ -137,7 +151,10 @@ export function FormDetail({ graph, form }: { graph: FormGraph; form: FormNode }
     <div id="form-detail" className="scroll-mt-6 space-y-8">
       <div className="card space-y-5 p-5">
         <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h2 className="font-serif text-2xl text-ink-primary">{form.displayName}</h2>
+          <h2 className="flex items-center gap-2.5 font-serif text-2xl text-ink-primary">
+            {form.displayName}
+            {form.tier1 && <Tier1Mark />}
+          </h2>
           <span className="text-[12px] text-ink-muted">
             {form.jurisdiction} · {form.fieldCount} fields · {scenarios}{" "}
             {scenarios === 1 ? "scenario" : "scenarios"}
@@ -148,13 +165,14 @@ export function FormDetail({ graph, form }: { graph: FormGraph; form: FormNode }
           <StateCountsLine states={form.states} />
         </div>
         <div className="grid gap-5 sm:grid-cols-3">
-          <FormChips graph={graph} title="Reads (fields read)" chips={reads} />
-          <FormChips graph={graph} title="Feeds (fields read)" chips={feeds} />
+          <FormChips graph={graph} title="Reads (fields read)" chips={reads} tier1={tier1} />
+          <FormChips graph={graph} title="Feeds (fields read)" chips={feeds} tier1={tier1} />
           <FormChips
             graph={graph}
             title="Waits for (blank fields)"
             chips={waitsFor(graph, form.formId)}
             dashed
+            tier1={tier1}
           />
         </div>
       </div>
@@ -170,7 +188,7 @@ export function FormDetail({ graph, form }: { graph: FormGraph; form: FormNode }
         {open.length === 0 ? (
           <p className="text-[14px] text-ink-secondary">Every field of this form is verified.</p>
         ) : (
-          <FieldRows fields={open} withReason />
+          <FieldRows fields={open} withReason tier1={tier1} />
         )}
       </Section>
 
@@ -180,7 +198,7 @@ export function FormDetail({ graph, form }: { graph: FormGraph; form: FormNode }
             Show the {verified.length} verified fields
           </summary>
           <div className="mt-4">
-            <FieldRows fields={verified} withReason={false} />
+            <FieldRows fields={verified} withReason={false} tier1={tier1} />
           </div>
         </details>
       )}
@@ -188,7 +206,12 @@ export function FormDetail({ graph, form }: { graph: FormGraph; form: FormNode }
   );
 }
 
-export function MissingFormDetail({ graph, form }: { graph: FormGraph; form: MissingFormNode }) {
+export function MissingFormDetail(props: {
+  graph: FormGraph;
+  form: MissingFormNode;
+  tier1: boolean;
+}) {
+  const { graph, form, tier1 } = props;
   const waiting = graph.fields
     .filter((field) => field.needsForms?.includes(form.formId))
     .sort(byFeeds);
@@ -197,7 +220,10 @@ export function MissingFormDetail({ graph, form }: { graph: FormGraph; form: Mis
     <div id="form-detail" className="scroll-mt-6 space-y-8">
       <div className="card space-y-4 border-dashed p-5">
         <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h2 className="font-serif text-2xl text-ink-primary">{form.displayName}</h2>
+          <h2 className="flex items-center gap-2.5 font-serif text-2xl text-ink-primary">
+            {form.displayName}
+            {form.tier1 && <Tier1Mark />}
+          </h2>
           <span className="text-[12px] text-ink-muted">
             {form.jurisdiction} · the engine lacks this form
           </span>
@@ -215,6 +241,7 @@ export function MissingFormDetail({ graph, form }: { graph: FormGraph; form: Mis
             formId: group.formId,
             fields: group.fieldIds.length,
           }))}
+          tier1={tier1}
         />
       </div>
 
@@ -222,20 +249,22 @@ export function MissingFormDetail({ graph, form }: { graph: FormGraph; form: Mis
         title="Fields that wait for it"
         right={<span className="text-[12px] text-ink-muted">the most fed first</span>}
       >
-        <FieldRows fields={waiting} withReason formNames={formNames(graph)} />
+        <FieldRows fields={waiting} withReason formNames={formNames(graph)} tier1={tier1} />
       </Section>
     </div>
   );
 }
 
-export function MissingFormsTable({ graph }: { graph: FormGraph }) {
+/* With the tier 1 filter on, the table has only the tier 1 forms. */
+export function MissingFormsTable({ graph, tier1 }: { graph: FormGraph; tier1: boolean }) {
   const names = formNames(graph);
+  const missing = graph.missing.filter((form) => !tier1 || form.tier1);
   return (
     <Section
       title="Forms the engine lacks"
       right={
         <span className="text-[12px] text-ink-muted">
-          {graph.missing.length} forms, by the fields they would open
+          {missing.length} {tier1 ? "tier 1 forms" : "forms"}, by the fields they would open
         </span>
       }
     >
@@ -250,11 +279,11 @@ export function MissingFormsTable({ graph }: { graph: FormGraph }) {
             </tr>
           </thead>
           <tbody className="divide-y divide-border-subtle">
-            {graph.missing.map((form) => (
+            {missing.map((form) => (
               <tr key={form.formId} className="align-top">
                 <td className="px-4 py-2.5">
                   <Link
-                    href={`${formHref(form.formId)}#form-detail`}
+                    href={`${graphHref({ form: form.formId, tier1 })}#form-detail`}
                     className="text-ink-primary hover:text-accent"
                   >
                     {form.displayName}

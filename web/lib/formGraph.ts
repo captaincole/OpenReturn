@@ -31,6 +31,8 @@ export interface FormNode {
   /* The part of the return that the form belongs to, and its place in that part. */
   section: string;
   rank: number;
+  /* A form that our target user needs. */
+  tier1: boolean;
   scenarios: string[];
   fieldCount: number;
   states: StateCounts;
@@ -58,13 +60,14 @@ export interface FieldNode {
   needsForms?: string[];
 }
 
-/* A form that the engine lacks, with the blank fields that name it. */
+/* A form that the engine lacks, with the blank fields that name it. A tier 1 form can have none. */
 export interface MissingFormNode {
   formId: string;
   displayName: string;
   about: string;
   jurisdiction: string;
   section: string;
+  tier1: boolean;
   waiting: Array<{ formId: string; fieldIds: string[] }>;
   waitingCount: number;
   feeds: number;
@@ -115,11 +118,28 @@ export interface JurisdictionGraph {
   links: Link[];
   /* Given when a form here reads, or feeds, a form of another return. */
   outside?: OutsideForms;
-  /* The forms of this jurisdiction that the engine lacks and that a form here waits for. */
+  /* The forms of this jurisdiction that the engine lacks: a form here waits for it, or it is tier 1. */
   missing: MissingFormNode[];
 }
 
 export const isFederal = (jurisdiction: string): boolean => jurisdiction.startsWith("Federal");
+
+/* What the Form graph page shows: a jurisdiction's graph, a selected form, all forms or tier 1 only. */
+export interface GraphAddress {
+  /* A jurisdiction id, for example "california-2025". */
+  view?: string;
+  form?: string;
+  tier1?: boolean;
+}
+
+export function graphHref(address: GraphAddress): string {
+  const query = new URLSearchParams();
+  if (address.view) query.set("view", address.view);
+  if (address.form) query.set("form", address.form);
+  if (address.tier1) query.set("tier", "1");
+  const text = query.toString();
+  return text === "" ? "/library/graph" : `/library/graph?${text}`;
+}
 
 /* "California 2025" is "california-2025": the id of the jurisdiction's section on the page. */
 export const jurisdictionId = (jurisdiction: string): string =>
@@ -172,7 +192,8 @@ function jurisdictionGraph(
       : undefined,
     missing: graph.missing.filter(
       (form) =>
-        form.jurisdiction === jurisdiction && form.waiting.some((group) => inside(group.formId)),
+        form.jurisdiction === jurisdiction &&
+        (form.tier1 || form.waiting.some((group) => inside(group.formId))),
     ),
   };
 }
@@ -185,4 +206,30 @@ export function splitByJurisdiction(
   return [...names.filter(isFederal), ...names.filter((name) => !isFederal(name))].map((name) =>
     jurisdictionGraph(graph, name),
   );
+}
+
+/*
+ * The tier 1 part of a jurisdiction's graph: the forms that our target user needs,
+ * the links between them, and the tier 1 forms that the engine lacks. A missing
+ * form keeps only the waiting forms that are still drawn.
+ */
+export function tier1Only(part: JurisdictionGraph): JurisdictionGraph {
+  const forms = part.forms.filter((form) => form.tier1);
+  const drawn = [...forms.map((form) => form.formId), OUTSIDE_ID];
+  const links = part.links.filter(
+    (link) => drawn.includes(link.source) && drawn.includes(link.reader),
+  );
+  const linked = links.some((link) => link.source === OUTSIDE_ID || link.reader === OUTSIDE_ID);
+  return {
+    jurisdiction: part.jurisdiction,
+    forms,
+    links,
+    outside: linked ? part.outside : undefined,
+    missing: part.missing
+      .filter((form) => form.tier1)
+      .map((form) => ({
+        ...form,
+        waiting: form.waiting.filter((group) => drawn.includes(group.formId)),
+      })),
+  };
 }

@@ -24,6 +24,8 @@ export interface FormInput {
   /* The part of the return that the form belongs to, and its place in that part. */
   section: string;
   rank: number;
+  /* A form that our target user needs (scripts/formLists). */
+  tier1: boolean;
   fields: Array<{
     fieldId: string;
     label: string;
@@ -56,6 +58,7 @@ export interface MissingFormInput {
   about: string;
   jurisdiction: string;
   section: string;
+  tier1: boolean;
   names: string[];
 }
 
@@ -77,6 +80,7 @@ export interface FormNode {
   /* The part of the return that the form belongs to, and its place in that part. */
   section: string;
   rank: number;
+  tier1: boolean;
   scenarios: string[];
   fieldCount: number;
   states: StateCounts;
@@ -115,13 +119,17 @@ export interface FieldNode {
   needsForms?: string[];
 }
 
-/* A form that the engine lacks. Its weight is the fields that wait for it and the fields they feed. */
+/*
+ * A form that the engine lacks: one that a blank field names, or a tier 1 form.
+ * Its weight is the fields that wait for it and the fields they feed.
+ */
 export interface MissingFormNode {
   formId: string;
   displayName: string;
   about: string;
   jurisdiction: string;
   section: string;
+  tier1: boolean;
   /* The blank fields that name it, by their form. */
   waiting: Array<{ formId: string; fieldIds: string[] }>;
   waitingCount: number;
@@ -302,6 +310,7 @@ function buildMissing(
       about: form.about,
       jurisdiction: form.jurisdiction,
       section: form.section,
+      tier1: form.tier1,
       waiting: sorted(waiting.map((field) => field.formId)).map((formId) => ({
         formId,
         fieldIds: waiting.filter((field) => field.formId === formId).map((field) => field.fieldId),
@@ -310,8 +319,9 @@ function buildMissing(
       feeds: [...fed].filter((fieldId) => !waitingIds.has(fieldId)).length,
     };
   });
+  /* A tier 1 form stays in the graph when no blank field names it yet. */
   return nodes
-    .filter((node) => node.waitingCount > 0)
+    .filter((node) => node.waitingCount > 0 || node.tier1)
     .sort((left, right) => right.feeds - left.feeds || right.waitingCount - left.waitingCount);
 }
 
@@ -348,6 +358,7 @@ function buildForms(input: GraphInput, fields: FieldNode[], edges: FormEdge[]): 
       jurisdiction: form.jurisdiction,
       section: form.section,
       rank: form.rank,
+      tier1: form.tier1,
       scenarios: input.runs
         .filter((run) => run.formIds.includes(form.formId))
         .map((run) => run.name)

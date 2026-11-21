@@ -36,11 +36,11 @@ const notChecked = (form: FormNode): number =>
 function summaryTable(graph: FormGraph): string {
   const rows = graph.forms.map(
     (form) =>
-      `| ${form.displayName} | ${form.jurisdiction} | ${form.scenarios.length} | ${form.fieldCount} | ${form.states.verified} | ${form.states.locked} | ${form.states.not_run} | ${form.states.unsupported} | ${form.reads.length} | ${form.feeds.length} |`,
+      `| ${form.displayName} | ${form.jurisdiction} | ${form.tier1 ? "Yes" : ""} | ${form.scenarios.length} | ${form.fieldCount} | ${form.states.verified} | ${form.states.locked} | ${form.states.not_run} | ${form.states.unsupported} | ${form.reads.length} | ${form.feeds.length} |`,
   );
   return [
-    "| Form | Jurisdiction | Scenarios | Fields | Verified | Locked | Not run | Unsupported | Reads forms | Feeds forms |",
-    "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+    "| Form | Jurisdiction | Tier 1 | Scenarios | Fields | Verified | Locked | Not run | Unsupported | Reads forms | Feeds forms |",
+    "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ...rows,
   ].join("\n");
 }
@@ -94,14 +94,14 @@ function missingSection(graph: FormGraph): string {
   if (graph.missing.length === 0) return "No blank field names a form that the engine lacks.";
   const rows = graph.missing.map(
     (form) =>
-      `| ${form.displayName} | ${form.about} | ${form.jurisdiction} | ${form.waitingCount} | ${form.feeds} | ${namesOf(
+      `| ${form.displayName} | ${form.about} | ${form.jurisdiction} | ${form.tier1 ? "Yes" : ""} | ${form.waitingCount} | ${form.feeds} | ${namesOf(
         graph,
         form.waiting.map((group) => group.formId),
       )} |`,
   );
   return [
-    "| Form | About | Jurisdiction | Fields that wait | Fields they feed | Forms that wait |",
-    "| --- | --- | --- | --- | --- | --- |",
+    "| Form | About | Jurisdiction | Tier 1 | Fields that wait | Fields they feed | Forms that wait |",
+    "| --- | --- | --- | --- | --- | --- | --- |",
     ...rows,
   ].join("\n");
 }
@@ -127,7 +127,7 @@ export function renderFormGraph(graph: FormGraph): string {
     "For each form: the fields that are not verified and that other fields read, by the count of fields they feed.",
     ...graph.forms.map((form) => formSection(graph, form)),
     "## Forms the engine lacks",
-    "A blank field names the form that it waits for, in its label or its reason. Each form here is on the list in `engine/scripts/formGraph/missingForms.ts`. **Fields that wait** is the count of blank fields that name the form. **Fields they feed** is the count of other fields that read those blank fields, directly or through other fields. The About column is a short description, not the form's official title.",
+    "A blank field names the form that it waits for, in its label or its reason. Each form here is on the list in `engine/scripts/formGraph/missingForms.ts`: a form that a blank field names, or a tier 1 form. A tier 1 form is one that our target user needs; [Forms for an individual return](individual-forms.md) has the full list. **Fields that wait** is the count of blank fields that name the form. **Fields they feed** is the count of other fields that read those blank fields, directly or through other fields. The About column is a short description, not the form's official title.",
     missingSection(graph),
     "### Names not classified",
     "A form name in a blank field that no list has. Add it to `missingForms.ts`: as a form the engine lacks, or as a name that is not a form on the return.",

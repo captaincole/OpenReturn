@@ -3,7 +3,6 @@ import {
   formsOnNoList,
   renderFormListPage,
   summarizeFormList,
-  type FormList,
 } from "../../../scripts/coverage/formLists.js";
 import { replaceBetween, updateReadme } from "../../../scripts/coverage/readme.js";
 import {
@@ -13,6 +12,7 @@ import {
   type FileCoverage,
   type FormInput,
 } from "../../../scripts/coverage/report.js";
+import type { FormList } from "../../../scripts/formLists/index.js";
 
 const file = (
   linesCovered: number,

@@ -23,6 +23,7 @@ const INPUT: GraphInput = {
       jurisdiction: "Federal 2025",
       section: "income",
       rank: 0,
+      tier1: false,
       fields: [field("form-a.line.1"), field("form-a.line.2"), field("form-a.line.3")],
     },
     {
@@ -31,6 +32,7 @@ const INPUT: GraphInput = {
       jurisdiction: "Federal 2025",
       section: "income",
       rank: 0,
+      tier1: false,
       fields: [
         field("schedule-b.line.8"),
         field("schedule-b.line.9", "unsupported"),
@@ -150,6 +152,7 @@ describe("the forms the engine lacks", () => {
         jurisdiction: "Federal 2025",
         section: "income",
         rank: 0,
+        tier1: false,
         fields: [
           blank("schedule-3.line.1", "Foreign tax credit. Attach Form 1116 if required"),
           blank("schedule-3.line.3", "Education credits from Form 8863, line 19"),
@@ -174,6 +177,7 @@ describe("the forms the engine lacks", () => {
         about: "Foreign tax credit",
         jurisdiction: "Federal 2025",
         section: "credits",
+        tier1: false,
         names: ["Form 1116"],
       },
       {
@@ -182,14 +186,24 @@ describe("the forms the engine lacks", () => {
         about: "A shorter number",
         jurisdiction: "Federal 2025",
         section: "credits",
+        tier1: false,
         names: ["Form 111"],
+      },
+      {
+        formId: "form-7203",
+        displayName: "Form 7203",
+        about: "Basis limits",
+        jurisdiction: "Federal 2025",
+        section: "income",
+        tier1: true,
+        names: ["Form 7203"],
       },
     ],
     otherNames: ["Schedule K-1"],
   };
   const graph = buildFormGraph(input);
 
-  it("makes a node for a form that a blank field names, with the fields that wait", () => {
+  it("makes a node for a form that a blank field names, and for a tier 1 form that none names", () => {
     expect(graph.missing).toEqual([
       {
         formId: "form-1116",
@@ -197,9 +211,21 @@ describe("the forms the engine lacks", () => {
         about: "Foreign tax credit",
         jurisdiction: "Federal 2025",
         section: "credits",
+        tier1: false,
         waiting: [{ formId: "schedule-3", fieldIds: ["schedule-3.line.1"] }],
         waitingCount: 1,
         feeds: 1,
+      },
+      {
+        formId: "form-7203",
+        displayName: "Form 7203",
+        about: "Basis limits",
+        jurisdiction: "Federal 2025",
+        section: "income",
+        tier1: true,
+        waiting: [],
+        waitingCount: 0,
+        feeds: 0,
       },
     ]);
     expect(graph.fields[0].needsForms).toEqual(["form-1116"]);
@@ -215,8 +241,9 @@ describe("the forms the engine lacks", () => {
   it("puts both in the report", () => {
     const text = renderFormGraph(graph);
     expect(text).toContain(
-      "| Form 1116 | Foreign tax credit | Federal 2025 | 1 | 1 | Schedule 3 |",
+      "| Form 1116 | Foreign tax credit | Federal 2025 |  | 1 | 1 | Schedule 3 |",
     );
+    expect(text).toContain("| Form 7203 | Basis limits | Federal 2025 | Yes | 0 | 0 | none |");
     expect(text).toContain("- Form 8863 (1 fields)");
   });
 });
@@ -224,7 +251,7 @@ describe("the forms the engine lacks", () => {
 describe("renderFormGraph", () => {
   it("lists a form's open fields that other fields read, most fed first", () => {
     const text = renderFormGraph(buildFormGraph(INPUT));
-    expect(text).toContain("| Schedule B | Federal 2025 | 1 | 3 | 0 | 0 | 1 | 2 | 0 | 1 |");
+    expect(text).toContain("| Schedule B | Federal 2025 |  | 1 | 3 | 0 | 0 | 1 | 2 | 0 | 1 |");
     expect(text).toContain("| `line.9` | Label of schedule-b.line.9 | unsupported | 2 | Form A |");
     expect(text).toContain("- Reads: Schedule B");
   });
