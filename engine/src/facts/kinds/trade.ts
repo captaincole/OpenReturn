@@ -76,6 +76,22 @@ export function isReportedBasisFact(fact: TaxFactRow): boolean {
   return fact.category === REPORTED_BASIS_CATEGORY && fact.key.endsWith(".reported_basis");
 }
 
+/*
+ * Schedule D (540) column (c): the California basis of one sale, where it differs
+ * from the federal basis (ca-540-sched-d-inst-2025::sec::line-1::b02). A number in
+ * dollars, category capital_gains, keyed next to its trade; absent means the
+ * California basis is the federal basis.
+ */
+const CALIFORNIA_BASIS_SUFFIX = ".california_basis";
+
+export function californiaBasisKeyOf(tradeFactKey: string): string {
+  return `${tradeFactKey}${CALIFORNIA_BASIS_SUFFIX}`;
+}
+
+export function makeCaliforniaBasisFactKey(accountSlug: string, tradeId: string): string {
+  return californiaBasisKeyOf(makeTradeFactKey(accountSlug, tradeId));
+}
+
 /* Form 8949 column (a) wants the number of shares. When box 1a prints none, the taxpayer states it. */
 export function makeStatedQuantityFactKey(accountSlug: string, tradeId: string): string {
   return `${makeTradeFactKey(accountSlug, tradeId)}.quantity`;

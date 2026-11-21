@@ -36,6 +36,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "(last year's return is not read, #79); Schedule D files with it",
   ],
   [
+    /^capital_gains\.ca_loss_carryover$/,
+    "a prior-year answer Cade records when the California carryover differs from the federal " +
+      "one; Schedule D (540) files with it, and asks for it when it files and a federal carryover exists",
+  ],
+  [
     /^decisions\.scope\.must_file_8995(_a)?$/,
     "override; the QBI form follows the taxable income upper bound (federal/qbi/whichForm.ts)",
   ],

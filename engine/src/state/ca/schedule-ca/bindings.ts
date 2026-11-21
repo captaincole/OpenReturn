@@ -56,6 +56,31 @@ function line27Total(line10: unknown, line26: unknown): number | undefined {
   return sum(income) - sum(adjustments);
 }
 
+/* MANUAL EDIT: line 7a columns B and C with no Schedule D (540), as before it had rules. */
+const LINE_7A_SUBTRACTIONS_GAP =
+  "CA vs. federal capital gain adjustments (e.g. differences in depreciation recapture, installment sale basis, or CA-only exclusions) require Schedule D CA-specific computations or FTB 3885A data we have not ingested yet.";
+const LINE_7A_ADDITIONS_GAP =
+  "CA vs. federal capital gain additions (e.g. CA-only gain recognition differences) require Schedule D CA-specific computations we have not ingested yet.";
+
+/*
+ * MANUAL EDIT: line 7a column B takes Schedule D (540) line 12a and column C
+ * line 12b (ca-540-sched-d-inst-2025::sec::line-12a::b01, ::line-12b::b01;
+ * ca-540-sched-ca-inst-2025::sec::line-7a-capital-gain-or-loss::b01). With no
+ * Schedule D (540), the column stays unsupported: the engine finds no
+ * California difference, but it models only some of them.
+ */
+function scheduleDCaAdjustment(
+  form: FormAccessor<ScheduleCa>,
+  info: ScheduleCaFilingInfo,
+  line: "12a" | "12b",
+  noScheduleD: string,
+) {
+  if (info.mustFile?.["schedule-d-ca"]?.value !== true) return unsupported(noScheduleD);
+  const gap = info.scheduleDCaFigures?.gap;
+  if (gap !== undefined) return unsupported(gap);
+  return numberOrBlank(form[`schedule-d-ca.3.line.${line}`]);
+}
+
 /* Line 9a col B: lines 8a through 8z, column B. */
 const OTHER_INCOME_SUBTRACTIONS = [
   "1.line.b8b_subtractions",
@@ -267,6 +292,10 @@ export function register(): void {
         ),
       "0.line.3b_federal": (form) => sum(form["form-1040.line.3b"]),
       "0.line.7a_federal": (form) => sum(form["form-1040.line.7a"]),
+      "0.line.7a_subtractions": (form, info) =>
+        scheduleDCaAdjustment(form, info, "12a", LINE_7A_SUBTRACTIONS_GAP),
+      "0.line.7a_additions": (form, info) =>
+        scheduleDCaAdjustment(form, info, "12b", LINE_7A_ADDITIONS_GAP),
       "2.line.b10_federal": (form) =>
         sum(
           form["0.line.1z_federal"],
@@ -602,10 +631,6 @@ export function register(): void {
         "CA pension/annuity subtraction adjustments (Tier 2 railroad retirement benefits, pre-1987 three-year rule) require RRB-1099-R and specialized pension scenario data not yet ingested.",
       "0.line.5b_additions":
         "CA pension/annuity addition adjustments (pre-1987 three-year rule elections where CA uses different tax treatment) require specialized pension facts not yet modeled. No worked scenario exists.",
-      "0.line.7a_subtractions":
-        "CA vs. federal capital gain adjustments (e.g. differences in depreciation recapture, installment sale basis, or CA-only exclusions) require Schedule D CA-specific computations or FTB 3885A data we have not ingested yet.",
-      "0.line.7a_additions":
-        "CA vs. federal capital gain additions (e.g. CA-only gain recognition differences) require Schedule D CA-specific computations we have not ingested yet.",
       "0.line.b1_federal":
         "Federal Schedule 1 (Form 1040) line 1 (taxable state/local tax refunds) is not exposed as an individual fieldId in the ingested form-1040 catalog — only the Schedule 1 total (line 10) flows into form-1040 line 8. No individual Schedule 1 line facts are ingested yet.",
       "0.line.b1_subtractions":
