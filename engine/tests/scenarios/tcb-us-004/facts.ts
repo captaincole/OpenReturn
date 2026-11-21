@@ -11,6 +11,7 @@ import {
   makeDependentFactKey,
   makeDividendFactKey,
   makeInterestFactKey,
+  makeNoncashGiftFactKey,
   makeSocialSecurityFactKey,
   makeTradeFactKey,
   makeW2FactKey,
@@ -24,6 +25,7 @@ import {
 } from "../../../src/facts/index.js";
 import type { TaxFactRow } from "../../../src/facts/rows.js";
 import { identityFact } from "../../helpers/fixtureBuilders.js";
+import { TCB_US_004_GIFTS } from "./gifts.js";
 
 export const TCB_US_004_USER_ID = "tcb-us-004-integration";
 export const TCB_US_004_TAX_YEAR = 2025;
@@ -265,7 +267,16 @@ export const tcbUs004Facts: TaxFactRow[] = [
     "charitable",
     "charitable.noncash",
     5000,
-    `${ANSWERS}: scha_gft.nonCash50 (the 11 f8283list items' FMVs add to the same 5,000).`,
+    `${ANSWERS}: scha_gft.nonCash50. Not read: the 11 gift facts below give line 12 (their FMVs add to the same 5,000).`,
+  ),
+  /* f8283list: one fact per noncash gift (gifts.ts); Form 8283 lists them in three copies. */
+  ...TCB_US_004_GIFTS.map(({ slug, gift }, index) =>
+    fact(
+      "charitable",
+      makeNoncashGiftFactKey(slug),
+      gift,
+      `${ANSWERS}: f8283list[${index}]; the text as the key prints it.`,
+    ),
   ),
   fact(
     "medical",

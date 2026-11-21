@@ -11,3 +11,13 @@ export const CAPITAL_LOSS_CARRYOVER_KEYS = {
   /* Worksheet line 13: Schedule D line 14. */
   longTerm: "capital_gains.long_term_loss_carryover",
 } as const;
+
+/*
+ * California capital loss carryover from 2024 (Schedule D (540) line 6), one
+ * positive amount: California taxes short and long term gains alike, so the
+ * form has one carryover line. Cade records it only when it differs from the
+ * federal carryover, or when Schedule D (540) files for another difference
+ * (ca-540-sched-d-inst-2025::sec::line-6-california-capital-loss-carryover-from-2024::b01).
+ * It is not in CAPITAL_LOSS_CARRYOVER_KEYS: it does not file the federal Schedule D.
+ */
+export const CA_CAPITAL_LOSS_CARRYOVER_KEY = "capital_gains.ca_loss_carryover";

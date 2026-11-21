@@ -19,13 +19,13 @@ A form also depends on another form when both use the same input (Schedule D and
 
 ## Summary
 
-The golden suite ran 25 scenarios.
+The golden suite ran 27 scenarios.
 
 | Form | Jurisdiction | Tier 1 | Scenarios | Fields | Verified | Locked | Not run | Unsupported | Reads forms | Feeds forms |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Form 8949 | Federal 2025 | Yes | 7 | 200 | 121 | 0 | 33 | 46 | 0 | 0 |
-| Schedule D | Federal 2025 | Yes | 8 | 53 | 26 | 0 | 6 | 21 | 1 | 6 |
-| Form 1040 | Federal 2025 | Yes | 25 | 199 | 106 | 1 | 11 | 81 | 17 | 21 |
+| Form 8949 | Federal 2025 | Yes | 8 | 200 | 121 | 0 | 33 | 46 | 0 | 0 |
+| Schedule D | Federal 2025 | Yes | 10 | 53 | 26 | 2 | 6 | 19 | 2 | 6 |
+| Form 1040 | Federal 2025 | Yes | 27 | 199 | 106 | 1 | 11 | 81 | 17 | 22 |
 | Schedule A | Federal 2025 | Yes | 9 | 32 | 27 | 0 | 3 | 2 | 4 | 5 |
 | Schedule B | Federal 2025 | Yes | 7 | 72 | 13 | 0 | 54 | 5 | 0 | 1 |
 | Form 4562 | Federal 2025 | Yes | 1 | 240 | 19 | 0 | 69 | 152 | 0 | 0 |
@@ -55,9 +55,9 @@ The golden suite ran 25 scenarios.
 | Form 8962 | Federal 2025 |  | 1 | 141 | 20 | 0 | 121 | 0 | 1 | 1 |
 | Form 4684 | Federal 2025 |  | 1 | 162 | 23 | 0 | 39 | 100 | 1 | 1 |
 | Schedule EIC | Federal 2025 |  | 5 | 38 | 32 | 0 | 6 | 0 | 3 | 0 |
+| Form 8283 | Federal 2025 | Yes | 1 | 117 | 35 | 0 | 9 | 73 | 0 | 0 |
 | Form 1116 | Federal 2025 | Yes | 0 | 118 | 0 | 0 | 0 | 118 | 0 | 0 |
 | Form 2210 | Federal 2025 | Yes | 0 | 167 | 0 | 0 | 0 | 167 | 0 | 0 |
-| Form 8283 | Federal 2025 | Yes | 0 | 117 | 0 | 0 | 0 | 117 | 0 | 0 |
 | Form 8801 | Federal 2025 | Yes | 0 | 57 | 0 | 0 | 0 | 57 | 0 | 0 |
 | Form 8814 | Federal 2025 | Yes | 0 | 24 | 0 | 0 | 0 | 24 | 0 | 0 |
 | Schedule F | Federal 2025 |  | 0 | 89 | 0 | 0 | 0 | 89 | 0 | 0 |
@@ -102,17 +102,17 @@ The golden suite ran 25 scenarios.
 | Form 8938 | Federal 2025 | Yes | 0 | 131 | 0 | 0 | 0 | 131 | 0 | 0 |
 | Form 8978 | Federal 2025 |  | 0 | 91 | 0 | 0 | 0 | 91 | 0 | 0 |
 | Form 8992 | Federal 2025 |  | 0 | 14 | 0 | 0 | 0 | 14 | 0 | 0 |
-| Form 6781 | Federal 2025 | Yes | 0 | 71 | 0 | 0 | 0 | 71 | 0 | 0 |
+| Form 6781 | Federal 2025 | Yes | 1 | 71 | 0 | 13 | 6 | 52 | 0 | 1 |
 | Form 7203 | Federal 2025 | Yes | 0 | 187 | 0 | 0 | 0 | 187 | 0 | 0 |
 | Form 8582-CR | Federal 2025 | Yes | 0 | 52 | 0 | 0 | 0 | 52 | 0 | 0 |
 | Form 8824 | Federal 2025 | Yes | 0 | 63 | 0 | 0 | 0 | 63 | 0 | 0 |
-| Schedule D (540) | California 2025 | Yes | 1 | 125 | 0 | 0 | 0 | 125 | 0 | 0 |
+| Schedule D (540) | California 2025 | Yes | 1 | 125 | 0 | 23 | 102 | 0 | 1 | 1 |
 | FTB 3885A | California 2025 | Yes | 1 | 65 | 14 | 0 | 51 | 0 | 0 | 0 |
-| Schedule CA (540) | California 2025 | Yes | 10 | 253 | 98 | 0 | 20 | 135 | 5 | 3 |
+| Schedule CA (540) | California 2025 | Yes | 11 | 253 | 98 | 1 | 21 | 133 | 6 | 3 |
 | FTB 3526 | California 2025 | Yes | 2 | 17 | 17 | 0 | 0 | 0 | 5 | 2 |
 | FTB 3805P | California 2025 | Yes | 2 | 27 | 11 | 0 | 2 | 14 | 0 | 1 |
 | FTB 3514 | California 2025 |  | 4 | 94 | 51 | 0 | 43 | 0 | 2 | 0 |
-| Form 540 | California 2025 | Yes | 14 | 169 | 79 | 0 | 6 | 84 | 6 | 2 |
+| Form 540 | California 2025 | Yes | 15 | 169 | 79 | 0 | 6 | 84 | 6 | 2 |
 | Schedule P (540) | California 2025 | Yes | 3 | 131 | 21 | 0 | 5 | 105 | 3 | 1 |
 | FTB 5805 | California 2025 | Yes | 1 | 111 | 55 | 0 | 0 | 56 | 1 | 1 |
 | FTB 3532 | California 2025 |  | 2 | 16 | 10 | 0 | 6 | 0 | 0 | 0 |
@@ -172,29 +172,29 @@ For each form: the fields that are not verified and that other fields read, by t
 
 ### Schedule D
 
-- Reads: Form 1040
+- Reads: Form 1040, Form 6781
 - Feeds: Form 1040, FTB 3526, Form 4952, Form 6251, Form 8995-A, Form 8995
 - Fields: 26 of 53 verified, 27 not checked
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.1b_adjustments` | Line 1b — Adjustments to gain or loss from Form(s) 8949, Part I, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box A or Box G checked | unsupported | 439 | none |
-| `0.line.2_adjustments` | Line 2 — Adjustments to gain or loss from Form(s) 8949, Part I, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box B or Box H checked | unsupported | 439 | none |
-| `0.line.3_proceeds` | Line 3 — Proceeds (sales price) — Totals for all transactions reported on Form(s) 8949 with Box C or Box I checked | not run | 439 | none |
-| `0.line.8b_adjustments` | Line 8b — Adjustments to gain or loss from Form(s) 8949, Part II, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box D or Box J checked | unsupported | 439 | none |
-| `0.line.9_adjustments` | Line 9 — Adjustments to gain or loss from Form(s) 8949, Part II, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box E or Box K checked | unsupported | 439 | none |
-| `0.line.10_proceeds` | Line 10 — Proceeds (sales price) — Totals for all transactions reported on Form(s) 8949 with Box F or Box L checked | not run | 439 | none |
-| `0.line.1a_gain_loss` | Line 1a — Gain or (loss) — Totals for all short-term transactions reported on Form 1099-B or Form 1099-DA for which basis was reported to the IRS and for which you have no adjustments | unsupported | 438 | none |
-| `0.line.3_gain_loss` | Line 3 — Gain or (loss) — Totals for all transactions reported on Form(s) 8949 with Box C or Box I checked | not run | 438 | none |
-| `0.line.4_short_term_gain_other_forms` | Line 4 — Short-term gain from Form 6252 and short-term gain or (loss) from Forms 4684, 6781, and 8824 | unsupported | 438 | none |
-| `0.line.5_net_short_term_passthrough` | Line 5 — Net short-term gain or (loss) from partnerships, S corporations, estates, and trusts from Schedule(s) K-1 | unsupported | 438 | none |
+| `0.line.1b_adjustments` | Line 1b — Adjustments to gain or loss from Form(s) 8949, Part I, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box A or Box G checked | unsupported | 446 | none |
+| `0.line.2_adjustments` | Line 2 — Adjustments to gain or loss from Form(s) 8949, Part I, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box B or Box H checked | unsupported | 446 | none |
+| `0.line.3_proceeds` | Line 3 — Proceeds (sales price) — Totals for all transactions reported on Form(s) 8949 with Box C or Box I checked | not run | 446 | none |
+| `0.line.8b_adjustments` | Line 8b — Adjustments to gain or loss from Form(s) 8949, Part II, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box D or Box J checked | unsupported | 446 | none |
+| `0.line.9_adjustments` | Line 9 — Adjustments to gain or loss from Form(s) 8949, Part II, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box E or Box K checked | unsupported | 446 | none |
+| `0.line.10_proceeds` | Line 10 — Proceeds (sales price) — Totals for all transactions reported on Form(s) 8949 with Box F or Box L checked | not run | 446 | none |
+| `0.line.1a_gain_loss` | Line 1a — Gain or (loss) — Totals for all short-term transactions reported on Form 1099-B or Form 1099-DA for which basis was reported to the IRS and for which you have no adjustments | unsupported | 445 | none |
+| `0.line.3_gain_loss` | Line 3 — Gain or (loss) — Totals for all transactions reported on Form(s) 8949 with Box C or Box I checked | not run | 445 | none |
+| `0.line.4_short_term_gain_other_forms` | Line 4 — Short-term gain from Form 6252 and short-term gain or (loss) from Forms 4684, 6781, and 8824 | locked | 445 | none |
+| `0.line.5_net_short_term_passthrough` | Line 5 — Net short-term gain or (loss) from partnerships, S corporations, estates, and trusts from Schedule(s) K-1 | unsupported | 445 | none |
 
 17 more not checked, each of which feeds fewer fields.
 
 ### Form 1040
 
 - Reads: Form 2441, Form 4952, Form 8606, Form 8959, Form 8995, Form 8995-A, Schedule 1, Schedule 1-A, Schedule 2, Schedule 3, Schedule 8812, Schedule A, Schedule B, Schedule D, Schedule E, Schedule H, Schedule SE
-- Feeds: Form 2441, FTB 3514, FTB 3526, Form 4684, Form 4952, Form 540, Form 5695, Form 6251, Form 8960, Form 8962, Schedule C (Form 8995-A), Form 8995-A, Form 8995, Schedule 1-A, Schedule 1, Schedule 8812, Schedule A, Schedule CA (540), Schedule D, Schedule EIC, Schedule R
+- Feeds: Form 2441, FTB 3514, FTB 3526, Form 4684, Form 4952, Form 540, Form 5695, Form 6251, Form 8960, Form 8962, Schedule C (Form 8995-A), Form 8995-A, Form 8995, Schedule 1-A, Schedule 1, Schedule 8812, Schedule A, Schedule CA (540), Schedule D (540), Schedule D, Schedule EIC, Schedule R
 - Fields: 106 of 199 verified, 93 not checked
 
 | Field | Label | State | Feeds | Read by forms |
@@ -658,6 +658,14 @@ For each form: the fields that are not verified and that other fields read, by t
 
 6 more not checked, each of which feeds fewer fields.
 
+### Form 8283
+
+- Reads: none
+- Feeds: none
+- Fields: 35 of 117 verified, 82 not checked
+
+82 more not checked, each of which feeds fewer fields.
+
 ### Form 1116
 
 - Reads: none
@@ -673,14 +681,6 @@ For each form: the fields that are not verified and that other fields read, by t
 - Fields: 0 of 167 verified, 167 not checked
 
 167 more not checked, each of which feeds fewer fields.
-
-### Form 8283
-
-- Reads: none
-- Feeds: none
-- Fields: 0 of 117 verified, 117 not checked
-
-117 more not checked, each of which feeds fewer fields.
 
 ### Form 8801
 
@@ -1037,10 +1037,15 @@ For each form: the fields that are not verified and that other fields read, by t
 ### Form 6781
 
 - Reads: none
-- Feeds: none
+- Feeds: Schedule D
 - Fields: 0 of 71 verified, 71 not checked
 
-71 more not checked, each of which feeds fewer fields.
+| Field | Label | State | Feeds | Read by forms |
+| --- | --- | --- | --- | --- |
+| `0.line.8_short_term_capital_gain_loss` | Line 8 — Short-term capital gain or (loss). Multiply line 7 by 40% (0.40) | locked | 446 | Schedule D |
+| `0.line.9_long_term_capital_gain_loss` | Line 9 — Long-term capital gain or (loss). Multiply line 7 by 60% (0.60) | locked | 446 | Schedule D |
+
+69 more not checked, each of which feeds fewer fields.
 
 ### Form 7203
 
@@ -1068,11 +1073,17 @@ For each form: the fields that are not verified and that other fields read, by t
 
 ### Schedule D (540)
 
-- Reads: none
-- Feeds: none
+- Reads: Form 1040
+- Feeds: Schedule CA (540)
 - Fields: 0 of 125 verified, 125 not checked
 
-125 more not checked, each of which feeds fewer fields.
+| Field | Label | State | Feeds | Read by forms |
+| --- | --- | --- | --- | --- |
+| `3.line.10` | Line 10 . Enter the gain or (loss) from federal Form 1040 or 1040-SR, line 7a. | locked | 52 | none |
+| `3.line.12a` | Line 12 a . If line 10 is more than line 11, enter the difference here and on Schedule CA (540), Part I, Section A, line 7a, column B. | locked | 47 | Schedule CA (540) |
+| `3.line.12b` | Line 12 b . If line 10 is less than line 11, enter the difference here and on Schedule CA (540), Part I, Section A, line 7a, column C. | not run | 47 | Schedule CA (540) |
+
+122 more not checked, each of which feeds fewer fields.
 
 ### FTB 3885A
 
@@ -1084,7 +1095,7 @@ For each form: the fields that are not verified and that other fields read, by t
 
 ### Schedule CA (540)
 
-- Reads: Form 1040, FTB 3526, Form 8889, Schedule 1, Schedule A
+- Reads: Form 1040, FTB 3526, Form 8889, Schedule 1, Schedule A, Schedule D (540)
 - Feeds: FTB 3526, Form 540, Schedule P (540)
 - Fields: 98 of 253 verified, 155 not checked
 
