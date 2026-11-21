@@ -43,6 +43,7 @@ export * from "./kinds/priorYear.js";
 export * from "./kinds/rental.js";
 export * from "./kinds/retirementDistribution.js";
 export * from "./kinds/rothIra.js";
+export * from "./kinds/saversCredit.js";
 export * from "./kinds/section1256.js";
 export * from "./kinds/socialSecurity.js";
 export * from "./kinds/spouse.js";

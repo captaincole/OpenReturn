@@ -34,6 +34,15 @@ export function bornBeforeJan2_1971(dob: string | undefined): boolean | undefine
   return bornBeforeJan2Of(dob, 1971);
 }
 
+/*
+ * Form 8880's Caution: a person born after January 1, 2008 cannot take the
+ * saver's credit (irs-8880-form-2025::sec::who-can-take-this-credit::b01).
+ * Tax year 2025 only.
+ */
+export function bornBeforeJan2_2008(dob: string | undefined): boolean | undefined {
+  return bornBeforeJan2Of(dob, 2008);
+}
+
 /* One date as a number that sorts by date: 1965-07-01 is 19650701. */
 const dateNumber = (year: number, month: number, day: number) => year * 10000 + month * 100 + day;
 
