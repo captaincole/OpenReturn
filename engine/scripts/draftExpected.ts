@@ -13,6 +13,7 @@ import { parseArgs } from "node:util";
 import { evaluateScenario } from "../src/index.js";
 import { catalog } from "../src/registry.js";
 import { decisionsWithPreparerStyle } from "../tests/helpers/preparer.js";
+import { scenarioFolder } from "../tests/scenarios/index.js";
 import type { ExpectedResults, Scenario } from "../tests/types.js";
 
 function draftedFields(scenario: Scenario): Record<string, Record<string, number>> {
@@ -111,7 +112,7 @@ async function main(): Promise<void> {
   const { values } = parseArgs({ options: { scenario: { type: "string" } } });
   const name = values.scenario;
   if (!name) throw new Error("usage: tsx scripts/draftExpected.ts --scenario=<name>");
-  const dir = resolve(process.cwd(), "tests/scenarios", name);
+  const dir = resolve(process.cwd(), "tests/scenarios", scenarioFolder(name));
   const index = (await import(resolve(dir, "index.ts"))) as Record<string, Scenario>;
   const expected = (await import(resolve(dir, "expected.ts"))) as Record<string, unknown>;
   const scenario = index[`${name}Scenario`];
