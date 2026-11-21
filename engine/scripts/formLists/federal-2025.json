@@ -128,41 +128,50 @@
     },
     {
       "name": "Form 1040NR",
-      "title": "U.S. Nonresident Alien Income Tax Return"
+      "title": "U.S. Nonresident Alien Income Tax Return",
+      "kind": "other"
     },
     {
       "name": "Form 1040NR Schedule A",
-      "title": "Itemized Deductions"
+      "title": "Itemized Deductions",
+      "kind": "other"
     },
     {
       "name": "Form 1040NR Schedule NEC",
-      "title": "Tax on Income Not Effectively Connected With a U.S. Trade or Business"
+      "title": "Tax on Income Not Effectively Connected With a U.S. Trade or Business",
+      "kind": "other"
     },
     {
       "name": "Form 1040NR Schedule OI",
-      "title": "Other Information"
+      "title": "Other Information",
+      "kind": "other"
     },
     {
       "name": "Form 1040NR Schedule P",
-      "title": "Foreign Partner's Interests in Certain Partnerships Transferred During Tax Year"
+      "title": "Foreign Partner's Interests in Certain Partnerships Transferred During Tax Year",
+      "kind": "other"
     },
     {
       "name": "Form 1040SS",
-      "title": "U.S. Self-Employment Tax Return (Including the Additional Child Tax Credit for Bona Fide Residents of Puerto Rico)"
+      "title": "U.S. Self-Employment Tax Return (Including the Additional Child Tax Credit for Bona Fide Residents of Puerto Rico)",
+      "kind": "other"
     },
     {
       "name": "Form 1040X",
       "title": "Amended U.S. Individual Income Tax Return",
+      "kind": "other",
       "maxPerReturn": "1"
     },
     {
       "name": "Form 1041 Schedule K1",
       "title": "Beneficiary's Share of Income, Deductions, Credits, etc.",
+      "kind": "document",
       "maxPerReturn": "unbounded"
     },
     {
       "name": "Form 1042S",
-      "title": "Foreign Person's U.S. Source Income Subject to Withholding"
+      "title": "Foreign Person's U.S. Source Income Subject to Withholding",
+      "kind": "document"
     },
     {
       "name": "Form 1065 Schedule D",
@@ -172,6 +181,7 @@
     {
       "name": "Form 1099R",
       "title": "Distributions From Pensions, Annuities, Retirement or Profit-Sharing Plans, IRAs, Insurance Contracts, etc.",
+      "kind": "document",
       "maxPerReturn": "unbounded"
     },
     {
@@ -251,11 +261,13 @@
     },
     {
       "name": "Form 2350",
-      "title": "(no title in IRS listing)"
+      "title": "(no title in IRS listing)",
+      "kind": "other"
     },
     {
       "name": "Form 2439",
       "title": "Notice to Shareholder of Undistributed Long-Term Capital Gains",
+      "kind": "document",
       "maxPerReturn": "unbounded"
     },
     {
@@ -358,7 +370,8 @@
     },
     {
       "name": "Form 4868",
-      "title": "(no title in IRS listing)"
+      "title": "(no title in IRS listing)",
+      "kind": "other"
     },
     {
       "name": "Form 4952",
@@ -381,7 +394,8 @@
     },
     {
       "name": "Form 499W2PR",
-      "title": "Form 499 W2PR"
+      "title": "Form 499 W2PR",
+      "kind": "document"
     },
     {
       "name": "Form 5074",
@@ -453,7 +467,8 @@
     },
     {
       "name": "Form 56",
-      "title": "(no title in IRS listing)"
+      "title": "(no title in IRS listing)",
+      "kind": "other"
     },
     {
       "name": "Form 5695",
@@ -601,7 +616,8 @@
     },
     {
       "name": "Form 8288A",
-      "title": "Statement of Withholding on Dispositions by Foreign Persons of U.S. Real Property Interests"
+      "title": "Statement of Withholding on Dispositions by Foreign Persons of U.S. Real Property Interests",
+      "kind": "document"
     },
     {
       "name": "Form 8332",
@@ -694,7 +710,8 @@
     },
     {
       "name": "Form 8805",
-      "title": "Foreign Partner's Information Statement of Section 1446 Withholding tax"
+      "title": "Foreign Partner's Information Statement of Section 1446 Withholding tax",
+      "kind": "document"
     },
     {
       "name": "Form 8814",
@@ -859,16 +876,19 @@
     {
       "name": "Form 8865 Schedule K1",
       "title": "Partner's Share of Income, Credits, Deductions, etc.",
+      "kind": "document",
       "maxPerReturn": "unbounded"
     },
     {
       "name": "Form 8865 Schedule K2",
       "title": "Partners' Distributive Share Items - International",
+      "kind": "document",
       "maxPerReturn": "unbounded"
     },
     {
       "name": "Form 8865 Schedule K3",
       "title": "Partner's Share of Income, Deductions, Credits, etc. - International",
+      "kind": "document",
       "maxPerReturn": "unbounded"
     },
     {
@@ -1180,6 +1200,7 @@
     {
       "name": "Form 9465",
       "title": "Installment Agreement Request",
+      "kind": "other",
       "maxPerReturn": "1"
     },
     {
@@ -1206,11 +1227,13 @@
     {
       "name": "Form RRB1042S",
       "title": "Statement for Nonresident Alien Recipients of Payments by the Railroad Retirement Board",
+      "kind": "document",
       "maxPerReturn": "unbounded"
     },
     {
       "name": "Form SSA1042S",
       "title": "Social Security Benefit Statement",
+      "kind": "document",
       "maxPerReturn": "unbounded"
     },
     {
@@ -1221,24 +1244,29 @@
     {
       "name": "Form W2",
       "title": "Wage and Tax Statement (Info Copy Only)",
+      "kind": "document",
       "maxPerReturn": "50"
     },
     {
       "name": "Form W2AS",
-      "title": "American Samoa Wage and Tax Statement (Info Copy Only)"
+      "title": "American Samoa Wage and Tax Statement (Info Copy Only)",
+      "kind": "document"
     },
     {
       "name": "Form W2G",
       "title": "Certain Gambling Winnings (Info Copy Only)",
+      "kind": "document",
       "maxPerReturn": "unbounded"
     },
     {
       "name": "Form W2GU",
-      "title": "Guam Wage and Tax Statement (Info Copy Only)"
+      "title": "Guam Wage and Tax Statement (Info Copy Only)",
+      "kind": "document"
     },
     {
       "name": "Form W2VI",
-      "title": "U.S. Virgin Islands Wage and Tax Statement (Info Copy Only)"
+      "title": "U.S. Virgin Islands Wage and Tax Statement (Info Copy Only)",
+      "kind": "document"
     }
   ]
 }

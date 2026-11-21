@@ -13,7 +13,7 @@ import { FORMS, registerAllForms } from "../../src/registry.js";
 import { catalogPath, catalogTaxYear } from "../../tests/helpers/formPaths.js";
 import { loadScenarios } from "../../tests/scenarios/index.js";
 import type { Scenario } from "../../tests/types.js";
-import { FORM_LISTS } from "../formLists/index.js";
+import { FORM_LISTS, INPUT_DOCUMENTS } from "../formLists/index.js";
 import {
   formsOnNoList,
   renderFormListPage,
@@ -95,9 +95,14 @@ async function main() {
   );
   await writeFile(
     README_PATH,
-    updateReadme(await readFile(README_PATH, "utf8"), report.jurisdictions, formLists),
+    updateReadme(
+      await readFile(README_PATH, "utf8"),
+      report.jurisdictions,
+      formLists,
+      INPUT_DOCUMENTS,
+    ),
   );
-  await writeFile(FORM_LIST_PAGE_PATH, renderFormListPage(formLists, date));
+  await writeFile(FORM_LIST_PAGE_PATH, renderFormListPage(formLists, INPUT_DOCUMENTS, date));
   console.log(
     `Wrote ${relative(process.cwd(), REPORT_PATH)} and ${relative(process.cwd(), README_PATH)}`,
   );

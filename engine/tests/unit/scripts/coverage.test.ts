@@ -148,9 +148,15 @@ const FEDERAL_LIST: FormList = {
     { name: "Form 8995", title: "Simplified", maxPerReturn: "1", short: "8995", tier1: true },
     { name: "Form 8995A", short: "8995-a" },
     { name: "Form 8582CR", tier1: true },
-    { name: "Form W2", maxPerReturn: "50" },
+    { name: "Form W2", kind: "document", maxPerReturn: "50" },
+    { name: "Form 4868", kind: "other" },
   ],
 };
+
+const DOCUMENTS = [
+  { name: "Form W-2", title: "Wage and Tax Statement", ingestTool: "ingest-w2-structured" },
+  { name: "Form 1099-B", title: "Proceeds", ingestTool: "ingest-1099-b" },
+];
 
 const CALIFORNIA_LIST: FormList = {
   ...FEDERAL_LIST,
@@ -168,10 +174,15 @@ describe("summarizeFormList", () => {
   it("counts the forms the engine has, and the forms with one or more supported fields", () => {
     expect(FORM_LISTS[0]).toMatchObject({
       name: "Federal 2025",
-      states: ["rules", "rules", "not_in_engine", "not_in_engine"],
-      all: { total: 4, inEngine: 2, withRules: 2 },
+      states: ["rules", "rules", "not_in_engine", "document", "other"],
+      all: { total: 3, inEngine: 2, withRules: 2 },
       tier1: { total: 2, inEngine: 1, withRules: 1 },
     });
+  });
+
+  it("leaves a document, another return and a request out of the counts", () => {
+    expect(FORM_LISTS[0].all.total).toBe(3);
+    expect(FEDERAL_LIST.forms).toHaveLength(5);
   });
 
   it("counts a form with a field list and no supported field as a form with no rules", () => {
@@ -191,19 +202,28 @@ describe("summarizeFormList", () => {
 });
 
 describe("renderFormListPage", () => {
-  const page = renderFormListPage(FORM_LISTS, "2026-01-02");
+  const page = renderFormListPage(FORM_LISTS, DOCUMENTS, "2026-01-02");
 
   it("writes one row for each form of a list, with its state", () => {
     expect(page).toContain("| Form 8995 | Simplified | Yes | Rules | 1 |");
     expect(page).toContain("| Form 8582CR |  | Yes | Not in the engine |  |");
     expect(page).toContain("| Schedule D (540) |  | Yes | No rules yet |  |");
+    expect(page).toContain("| Form W2 |  |  | Not a form: a document | 50 |");
+    expect(page).toContain("| Form 4868 |  |  | Not a form: another return or a request |  |");
   });
 
   it("names the source and the counts of each list", () => {
     expect(page).toContain(
       "Source: [Accepted forms](https://example.test/list), IRS, dated 2025-11-18.",
     );
-    expect(page).toContain("The engine has 2 of 4 forms, and 2 have rules.");
+    expect(page).toContain(
+      "The list has 5 rows, and 3 are forms and schedules to compute. The engine has 2 of them, and 2 have rules.",
+    );
+  });
+
+  it("lists the input documents that Cade reads", () => {
+    expect(page).toContain("Cade reads 2 kinds of input document.");
+    expect(page).toContain("| Form 1099-B | Proceeds |");
   });
 });
 
@@ -219,7 +239,12 @@ describe("updateReadme", () => {
     "<!-- form-list-table:end -->",
     "after",
   ].join("\n");
-  const text = updateReadme(README, buildCoverageReport(FILES, FORMS).jurisdictions, FORM_LISTS);
+  const text = updateReadme(
+    README,
+    buildCoverageReport(FILES, FORMS).jurisdictions,
+    FORM_LISTS,
+    DOCUMENTS,
+  );
 
   it("writes the table, and keeps the marker lines and the text around them", () => {
     expect(text).toContain(
@@ -243,12 +268,14 @@ describe("updateReadme", () => {
         "<!-- form-list-table:start -->",
         "| Forms | Federal 2025 | California 2025 |",
         "| --- | --- | --- |",
-        "| Forms an individual return can hold | 4 | 2 |",
+        "| Forms and schedules for an individual return | 3 | 2 |",
         "| In the engine | 2 | 2 |",
         "| With rules | 2 | 1 |",
         "| Tier 1 forms | 2 | 2 |",
         "| Tier 1 in the engine | 1 | 2 |",
         "| Tier 1 with rules | 1 | 1 |",
+        "",
+        "Cade reads 2 kinds of input document, such as Form W-2 and Form 1099-B.",
         "<!-- form-list-table:end -->",
         "after",
       ].join("\n"),
@@ -256,9 +283,9 @@ describe("updateReadme", () => {
   });
 
   it("writes the same text on a second run", () => {
-    expect(updateReadme(text, buildCoverageReport(FILES, FORMS).jurisdictions, FORM_LISTS)).toBe(
-      text,
-    );
+    expect(
+      updateReadme(text, buildCoverageReport(FILES, FORMS).jurisdictions, FORM_LISTS, DOCUMENTS),
+    ).toBe(text);
   });
 
   it("fails when the README has lost a marker", () => {

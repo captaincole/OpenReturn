@@ -1,5 +1,6 @@
 /* Pure: the jurisdiction rows in, the generated table of the root README out. */
 
+import type { InputDocument } from "../formLists/index.js";
 import { renderReadmeFormLists, type FormListSummary } from "./formLists.js";
 import { percent, table, wholeNumber, type JurisdictionRow } from "./report.js";
 
@@ -49,7 +50,12 @@ export function updateReadme(
   readme: string,
   jurisdictions: JurisdictionRow[],
   formLists: FormListSummary[],
+  documents: InputDocument[],
 ): string {
   const withCoverage = replaceBetween(readme, TABLE_MARKERS, renderReadmeTable(jurisdictions));
-  return replaceBetween(withCoverage, FORM_LIST_MARKERS, renderReadmeFormLists(formLists));
+  return replaceBetween(
+    withCoverage,
+    FORM_LIST_MARKERS,
+    renderReadmeFormLists(formLists, documents),
+  );
 }

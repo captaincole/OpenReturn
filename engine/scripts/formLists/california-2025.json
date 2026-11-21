@@ -28,11 +28,13 @@
     {
       "name": "Form 592-B",
       "title": "Resident and Nonresident Withholding Tax Statement",
+      "kind": "document",
       "maxPerReturn": "unbounded"
     },
     {
       "name": "Form 593",
       "title": "Real Estate Withholding Statement",
+      "kind": "document",
       "maxPerReturn": "unbounded"
     },
     {
@@ -311,6 +313,7 @@
     {
       "name": "Form W-2",
       "title": "Wage and Tax Statement",
+      "kind": "document",
       "maxPerReturn": "50"
     },
     {
