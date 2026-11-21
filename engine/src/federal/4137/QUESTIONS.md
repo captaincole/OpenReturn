@@ -7,6 +7,7 @@ Each item is a place where the form and its instructions do not settle a rule. T
 - Source: line 2 says "Add the amounts from line 1, column (c)" (irs-4137-form-2025::sec::omb-no-1545-0074::b01). The 1040 instructions say to keep cents while adding and round only the total.
 - Default: each row prints in whole dollars, and line 2 adds the printed rows (as Form 6781 does).
 - Changes dollars: yes, by $1 at most per row, and only when a tip record has cents.
+- Blind fill (2026-11-21) read it the other way: "include cents when adding the amounts and round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01), so line 2 keeps the rows' cents. In its cases (4, 9, 12, 15) both readings give the same line 2. Two rows of $100.50 would differ: 202 (engine) against 201.
 
 ## 2. Column (d) when only W-2 box 8 is known
 
@@ -49,6 +50,24 @@ Each item is a place where the form and its instructions do not settle a rule. T
 - Source: Schedule 1-A line 4b takes tips from Form 4137 for the 2025 deduction for qualified tips.
 - Default: not changed here. Schedule 1-A Part II stays unsupported: no fact says which tips are qualified (a listed tipped occupation). A tipped filer who qualifies gets no deduction from the engine.
 - Changes dollars: yes, for a filer in a listed occupation. Follow-up work.
+
+## 9. Line 4 from rounded lines 2 and 3
+
+- Source: line 4 is "Subtract line 3 from line 2" (irs-4137-form-2025::sec::omb-no-1545-0074::b01). The instructions do not say whether line 4 uses the rounded lines or the cents.
+- Default: line 4 subtracts the rounded lines 2 and 3 (the repo rule: a line that is arithmetic on other lines uses their rounded values). The blind fill made the same choice.
+- Changes dollars: yes, by $1 at most, when both lines have cents (100.50 − 50.40: 101 − 50 = 51, against 50.10 → 50).
+
+## 10. Noncash tips on line 1c only
+
+- Source: line 1c includes "the value of any noncash tips you received, such as tickets, passes" (irs-1040-inst-2025::sec::line-1c::b01). Schedule 2 line 5 says "Don't include the value of any noncash tips, such as tickets or passes. You don't pay social security and Medicare taxes or RRTA tax on these noncash tips" (irs-1040-inst-2025::sec::line-5-2::b01).
+- Default: noncash tips go on 1040 line 1c and not on Form 4137, so line 1c can be more than line 4. The blind fill made the same choice (case 9: line 4 340, line 1c 580).
+- Changes dollars: yes, for a filer with noncash tips, if read the other way.
+
+## Second opinions
+
+- Blind fill (2026-11-21): 15 cases, lines 2 through 13 and 1040 line 1c. Every value matches the engine, blank against 0 included. The blind doubts are items 1, 2, 5, 6, 9 and 10.
+- PolicyEngine-US 2.152.15 (commit b274cac): it does not model Form 4137. `unreported_payroll_tax` ("Unreported payroll taxes from Form 4137 or 8919") is a bare input with no formula, so it cannot check lines 1 through 13. Its constants agree with line 7 and lines 11 and 12: the 2025 social security cap is 176,100 (`payroll/social_security/cap.yaml`), the employee rates are 0.062 and 0.0145 (`payroll/social_security/rate/employee.yaml`, `payroll/medicare/rate/employee.yaml`). Its `tip_income_deduction` models the qualified tips deduction that item 8 leaves unsupported.
+- No other reference implementation is named in the repo, so none was compared.
 
 ## Confidence by field group
 
