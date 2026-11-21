@@ -28,6 +28,7 @@ Each item is a place where the form and its instructions do not settle a rule. T
 - Source: "distributions made after the date that the account holder ... Turns age 65" (`::exceptions-to-the-additional-20-tax::b01`).
 - Doubt: whether the IRS rule "you reach an age the day before your birthday" applies.
 - Default: it applies. A January 1, 1960 birthday reaches 65 on December 31, 2024, so every 2025 distribution is excepted.
+- Blind fill doubt: Example 3 says the tax "does apply to the distributions made on or before the date you turned age 65" (`::exceptions-to-the-additional-20-tax::b02`). Read with the birthday as that date, a distribution on January 1, 2025 is not excepted. A 1099-SA has no date, so the engine cannot see it.
 - Changes dollars: yes, for that one birthday.
 
 ## 5. Line 13b: excepted part of line 12
@@ -66,13 +67,27 @@ Each item is a place where the form and its instructions do not settle a rule. T
 
 - Source: "If you have more than one LTC period, you must separately calculate the taxable amount ... on separate Sections C" (`::line-18::b01`).
 - Default: the engine takes one period (`medical.ltc.period_days`) and prints one Section C. The answer cannot say there were two.
-- Changes dollars: yes, when the rate changed during the year (Method 2).
+- Blind fill doubts: the taxpayer picks Method 1 (contract period: "if the insurance company computes your benefits on a daily basis, your LTC period is 1 day", `::method-1-contract-period::b01`) or Method 2 (same payment rate, `::method-2-equal-payment-rate::b01`). The answer does not say which, and the day count can differ. Accelerated death benefits paid per diem count in the same period only when their rate does not change the period.
+- Changes dollars: yes, when the rate changed during the year (Method 2), or when the two methods give different day counts.
+
+## 12. Line 4: self-employment compensation
+
+- Source: "Compensation also includes net earnings from self-employment ... This is your income from self-employment minus expenses (including the deductible part of self-employment tax)" (`::line-4::b01`).
+- Doubt: the engine takes line 4 as a stated amount (`hsa.archer_msa.compensation`). A taxpayer can state net earnings before the deductible part of self-employment tax.
+- Default: the stated amount, as given. The question Cade asks must name the deduction.
+- Changes dollars: yes, only when line 4 is the smallest of lines 2–4.
 
 ## 11. Excess employer contributions
 
 - Source: "If the excess wasn't included in income on Form W-2, you must report it as 'Other income'" (`::excess-employer-contributions::b01`).
 - Default: not modeled. No Form 8853 line holds it, and no fact says whether box 1 included it. Excess contributions you make go to Form 5329, which has no rules yet.
 - Changes dollars: yes, when an employer contributed more than the limit.
+
+## Second opinions
+
+- Blind fill (15 cases, blank form and instructions only): every amount matches. One line differs as blank against 0: line 9b when line 8 is 0 (engine blank, blind 0). No dollar changes.
+- PolicyEngine-US 2.152.15 (commit b274cacc): it does not model Form 8853. It has no Archer MSA deduction, MSA distributions or LTC per diem limitation; its only long-term care rule is the premium limit for Schedule A. Nothing to compare.
+- IRS Direct File tax logic: no checkout in the repo. Not compared.
 
 ## Confidence by field group
 
