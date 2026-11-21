@@ -1,5 +1,5 @@
 /*
- * wren — LOCKED expected values, drafted from the engine's
+ * linnea — LOCKED expected values, drafted from the engine's
  * output on 2026-11-21 (scripts/draftExpected.ts).
  *
  * UNVERIFIED: no CPA return or filed-return check stands behind these
@@ -73,7 +73,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "form-8396.1.line8_worksheet.3_credit_limit": 1727,
     },
     renderedText: {
-      "form-8396.0.header.taxpayer_name": "Wren Castellano",
+      "form-8396.0.header.taxpayer_name": "Linnea Castellano",
       "form-8396.0.header.ssn": "400-00-8396",
       "form-8396.0.header.certificate_issuer_name": "Gulf Coast Housing Finance Authority",
       "form-8396.0.header.certificate_number": "GCHFA-MCC-21-0417",
@@ -167,7 +167,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
   },
 };
 
-export function wrenExpected(formId: string): ExpectedResults {
+export function linneaExpected(formId: string): ExpectedResults {
   const expected = EXPECTED[formId] ?? {};
   return {
     engineFields: expected.engineFields ?? {},

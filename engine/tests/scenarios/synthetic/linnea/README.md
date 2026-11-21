@@ -1,6 +1,6 @@
-# wren — a made-up holder of a Mortgage Credit Certificate (synthetic)
+# linnea — a made-up holder of a Mortgage Credit Certificate (synthetic)
 
-Wren Castellano is single and lives in Tampa, Florida. Every name and amount here is made up. There is no outside source and no answer key: the expected values are the engine's output, checked by hand against the form instructions, then locked (`verification: "unverified"`).
+Linnea Castellano is single and lives in Tampa, Florida. Every name and amount here is made up. There is no outside source and no answer key: the expected values are the engine's output, checked by hand against the form instructions, then locked (`verification: "unverified"`).
 
 She has one W-2 and one Form 1098. A county housing agency issued her a Mortgage Credit Certificate (MCC) at a 25% credit rate. Her 2024 Form 8396 carried credit forward from 2022, 2023 and 2024. She also put insulation in her attic (Form 5695 Part II). She itemizes. The return is federal only: Florida has no income tax.
 

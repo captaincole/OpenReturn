@@ -2,7 +2,7 @@
  * Form 8396 on a whole return: who files, what it asks, the lines it fills on
  * Schedule 3, Schedule A, Schedule 8812 and Schedule CA (540), the cases the
  * engine leaves to a person, and "no facts, nothing changes". The synthetic
- * wren scenario is the base.
+ * linnea scenario is the base.
  */
 
 import { describe, expect, it } from "vitest";
@@ -15,7 +15,7 @@ import {
 import type { AIDecisionRow, TaxFactRow } from "../../../../src/facts/rows.js";
 import { evaluateScenario, pendingInputs } from "../../../../src/index.js";
 import { decisionRow } from "../../../helpers/fixtureBuilders.js";
-import { wrenScenario as base } from "../../../scenarios/synthetic/wren/index.js";
+import { linneaScenario as base } from "../../../scenarios/synthetic/linnea/index.js";
 
 const isCreditFact = (fact: TaxFactRow) =>
   fact.key === MORTGAGE_CREDIT_KEYS.certificate ||
@@ -229,7 +229,11 @@ describe("Form 8396 with a qualifying child under 17 (Credit Limit Worksheet B)"
    * line 9 = 2,087 − (1,575 + 360) = 152.
    */
   it("three children: lines 7 to 11 of Worksheet B, and line 9 is what is left", () => {
-    const children = [child, childFact("wren-jr", "400-00-8398"), childFact("ivy", "400-00-8399")];
+    const children = [
+      child,
+      childFact("linnea-jr", "400-00-8398"),
+      childFact("ivy", "400-00-8399"),
+    ];
     const run = evaluate([...base.facts, ...children, ...noEic]);
     expect(run.value("form-8396", LINE_9)).toBe(152);
     expect(run.value("schedule-8812", "0.line.14_child_tax_credit_and_other_dependents")).toBe(

@@ -16,15 +16,15 @@ import {
 import type { TaxFactRow } from "../../../../src/facts/rows.js";
 import { identityFact } from "../../../helpers/fixtureBuilders.js";
 
-export const WREN_USER_ID = "wren-integration";
-export const WREN_TAX_YEAR = 2025;
+export const LINNEA_USER_ID = "linnea-integration";
+export const LINNEA_TAX_YEAR = 2025;
 
 const CREATED_AT = "2026-11-21T00:00:00Z";
 
 const fact = (category: string, key: string, value: unknown, sourceNote: string): TaxFactRow => ({
   id: `f-${key}`,
-  userId: WREN_USER_ID,
-  taxYear: WREN_TAX_YEAR,
+  userId: LINNEA_USER_ID,
+  taxYear: LINNEA_TAX_YEAR,
   category,
   key,
   value,
@@ -32,8 +32,8 @@ const fact = (category: string, key: string, value: unknown, sourceNote: string)
   createdAt: CREATED_AT,
 });
 
-export const WREN = {
-  firstName: "Wren",
+export const LINNEA = {
+  firstName: "Linnea",
   lastName: "Castellano",
   ssn: "400-00-8396",
   street: "418 Mangrove Bend Lane",
@@ -42,7 +42,7 @@ export const WREN = {
   zip: "33612",
 };
 
-const address = { line1: WREN.street, city: WREN.city, state: WREN.state, zip: WREN.zip };
+const address = { line1: LINNEA.street, city: LINNEA.city, state: LINNEA.state, zip: LINNEA.zip };
 
 // W-2 from Harborview Dental Group (made up).
 const w2: W2FactValue = {
@@ -50,7 +50,7 @@ const w2: W2FactValue = {
   employerName: "Harborview Dental Group PA",
   employerEin: "00-0008396",
   employerAddress: { line1: "77 Bayshore Court", city: "Tampa", state: "FL", zip: "33606" },
-  employee: { firstName: WREN.firstName, lastName: WREN.lastName, ssn: WREN.ssn, address },
+  employee: { firstName: LINNEA.firstName, lastName: LINNEA.lastName, ssn: LINNEA.ssn, address },
   box1: 36000,
   box2: 2400,
   box3: 36000,
@@ -83,20 +83,20 @@ const insulation: EnergyInvoiceFactValue = {
 };
 
 const idFact = (suffix: string, value: string) =>
-  identityFact({ userId: WREN_USER_ID, taxYear: WREN_TAX_YEAR, suffix, value });
+  identityFact({ userId: LINNEA_USER_ID, taxYear: LINNEA_TAX_YEAR, suffix, value });
 
 const fromCertificate = "Mortgage Credit Certificate from Gulf Coast Housing Finance Authority";
 const fromLastYear = "2024 Form 8396 (verbal, 2026-11-21)";
 
-export const wrenFacts: TaxFactRow[] = [
-  idFact("name.first", WREN.firstName),
-  idFact("name.last", WREN.lastName),
-  idFact("ssn", WREN.ssn),
+export const linneaFacts: TaxFactRow[] = [
+  idFact("name.first", LINNEA.firstName),
+  idFact("name.last", LINNEA.lastName),
+  idFact("ssn", LINNEA.ssn),
   idFact("dob", "03/02/1991"),
-  idFact("address.street", WREN.street),
-  idFact("address.city", WREN.city),
-  idFact("address.state", WREN.state),
-  idFact("address.zip", WREN.zip),
+  idFact("address.street", LINNEA.street),
+  idFact("address.city", LINNEA.city),
+  idFact("address.state", LINNEA.state),
+  idFact("address.zip", LINNEA.zip),
   idFact("occupation", "Dental hygienist"),
   idFact("phone", "813-555-0142"),
   fact("wages", makeW2FactKey("harborview-dental"), w2, "W-2 from Harborview Dental Group."),
