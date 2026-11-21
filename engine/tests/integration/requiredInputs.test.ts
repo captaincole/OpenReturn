@@ -68,6 +68,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "whether one exists is Cade's question",
   ],
   [
+    /^adoption\.child\.[^.]+$/,
+    "each fact is a whole child the taxpayer adopted or tried to adopt (Form 8839 line 1); " +
+      "whether one exists is Cade's question",
+  ],
+  [
     /^gambling\.losses$/,
     "an answer Cade records only when the user reports gambling losses (Schedule A line 16)",
   ],

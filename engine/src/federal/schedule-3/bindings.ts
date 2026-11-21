@@ -1,6 +1,8 @@
 import { defineForm } from "../../defineForm.js";
 import { numberOrBlank, sum } from "../../money.js";
+import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
+import { line6cFrom8839 } from "../8839/receivers.js";
 import type { Schedule3FilingInfo } from "./filingInfo.js";
 import type { Schedule3 } from "./types.js";
 
@@ -18,6 +20,11 @@ export function register(): void {
       "0.line.2": (form) => numberOrBlank(form["form-2441.0.line.11_dependent_care_credit"]),
       // MANUAL EDIT: Schedule R line 22 ("Also enter this amount on Schedule 3 (Form 1040), line 6d").
       "0.line.6d": (form) => numberOrBlank(form["schedule-r.1.line.22_credit"]),
+      // MANUAL EDIT: Form 8839 line 18 ("here and on Schedule 3 (Form 1040), line 6c"); no 8839, the old reason.
+      "0.line.6c": (form, info) => {
+        const received = line6cFrom8839(form, info);
+        return received === undefined ? unsupported(NO_SCENARIO) : received.value;
+      },
       "0.line.5b": (form) => {
         const value = form["form-5695.3.line.32"];
         return typeof value === "number" ? value : undefined;
@@ -65,7 +72,6 @@ export function register(): void {
       "0.line.5a": "Residential clean energy credit (Form 5695 Part I) is not modeled.",
       "0.line.6a": NO_SCENARIO,
       "0.line.6b": NO_SCENARIO,
-      "0.line.6c": NO_SCENARIO,
       "0.line.6e": "Reserved for future use.",
       "0.line.6f": NO_SCENARIO,
       "0.line.6g": NO_SCENARIO,

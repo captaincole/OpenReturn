@@ -2,6 +2,7 @@
 
 export * from "./kinds/activitiesOnReturn.js";
 export * from "./kinds/adjustments.js";
+export * from "./kinds/adoption.js";
 export * from "./kinds/alternativeMinimumTax.js";
 export * from "./kinds/blindness.js";
 export * from "./kinds/business.js";
