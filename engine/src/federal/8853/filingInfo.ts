@@ -18,4 +18,6 @@ export interface Form8853FilingInfo extends BaseFilingInfo {
   form8853MsaHolders?: ReadonlyArray<"taxpayer" | "spouse">;
   /* The part of line 8 subject to the additional tax (line 9b over 20%), for FTB 3805P line 10b. */
   form8853ArcherSubjectToTax?: number;
+  /* Part I is only the spouse's Archer MSA, self-only all year: Form 8889 line 4 leaves it out. */
+  form8853ArcherSpouseSelfOnly?: boolean;
 }

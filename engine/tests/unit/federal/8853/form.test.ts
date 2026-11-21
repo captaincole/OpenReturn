@@ -59,6 +59,12 @@ const w2 = (box12: W2FactValue["box12"]) =>
     ...(base.facts.find((fact) => fact.category === "wages")!.value as W2FactValue),
     box12,
   });
+const spouseW2 = (box12: W2FactValue["box12"]) =>
+  row("wages", makeW2FactKey("spouse-clinic"), {
+    ...(base.facts.find((fact) => fact.category === "wages")!.value as W2FactValue),
+    owner: "spouse",
+    box12,
+  });
 const wagesNoCodeR = base.facts.find((fact) => fact.category === "wages")!;
 
 const decision = (key: string, value: unknown): AIDecisionRow =>
@@ -250,6 +256,32 @@ describe("Form 8853 cases the engine does not model", () => {
     expect(run.field(FORM, "1.line.26_taxable_payments")).toMatchObject({ unsupported: true });
   });
 
+  it("self-only plans, the spouse's employer funds the spouse's MSA: two statements, not -0-", () => {
+    const run = evaluate([
+      wagesNoCodeR,
+      spouseW2([{ code: "R", amount: 1500 }]),
+      answer(ARCHER_MSA_KEYS.coverage, [
+        { months: 12, coverage: "self-only", annualDeductible: 3600, owner: "taxpayer" },
+      ]),
+      answer(ARCHER_MSA_KEYS.ownContributions, 2000),
+      answer(ARCHER_MSA_KEYS.compensation, 60000),
+    ]);
+    expect(run.field(FORM, "0.line.5_archer_msa_deduction")).toMatchObject({ unsupported: true });
+    expect(run.reason(FORM, "0.line.5_archer_msa_deduction")).toContain("Both spouses");
+  });
+
+  it("family coverage, the spouse's employer contributes: line 5 is -0- (neither deducts)", () => {
+    const run = evaluate([
+      wagesNoCodeR,
+      spouseW2([{ code: "R", amount: 1500 }]),
+      answer(ARCHER_MSA_KEYS.coverage, [
+        { months: 12, coverage: "family", annualDeductible: 6000, owner: "taxpayer" },
+      ]),
+      answer(ARCHER_MSA_KEYS.ownContributions, 2000),
+    ]);
+    expect(run.value(FORM, "0.line.5_archer_msa_deduction")).toBe(0);
+  });
+
   it("two insureds need two Sections C", () => {
     const run = evaluate([wagesNoCodeR, ltc("a", {}), ltc("b", { insuredSsn: "400-00-9999" })]);
     expect(run.field(FORM, "1.header.more_than_one_section_c")).toMatchObject({
@@ -301,6 +333,27 @@ describe("Form 8889 line 4 takes Form 8853 lines 1 and 2", () => {
       row("hsa", "hsa.coverage_type", "self-only"),
     ]);
     expect(run.value("form-8889", "0.line.4_archer_msa_contributions")).toBe(1000);
+  });
+
+  const spouseArcher = (hsaCoverage: string) => [
+    wagesNoCodeR,
+    answer(ARCHER_MSA_KEYS.coverage, [
+      { months: 12, coverage: "self-only", annualDeductible: 3600, owner: "spouse" },
+    ]),
+    answer(ARCHER_MSA_KEYS.ownContributions, 2000),
+    answer(ARCHER_MSA_KEYS.compensation, 50000),
+    row("hsa", "hsa.coverage_type", hsaCoverage),
+  ];
+
+  it("the spouse's self-only Archer MSA leaves a self-only HSA's limit alone (pub 969 b06)", () => {
+    const run = evaluate(spouseArcher("self-only"));
+    expect(run.value(FORM, "0.line.2_archer_msa_contributions")).toBe(2000);
+    expect(run.value("form-8889", "0.line.4_archer_msa_contributions")).toBe(0);
+  });
+
+  it("with family HSA coverage the spouse's Archer MSA counts (the 8889 line 4 text)", () => {
+    const run = evaluate(spouseArcher("family"));
+    expect(run.value("form-8889", "0.line.4_archer_msa_contributions")).toBe(2000);
   });
 });
 

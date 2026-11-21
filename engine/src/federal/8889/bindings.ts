@@ -3,7 +3,7 @@
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
-import { files8853, form8853Total } from "../8853/results.js";
+import { archerSpouseSelfOnly, files8853, form8853Total } from "../8853/results.js";
 import type { Form8889FilingInfo } from "./filingInfo.js";
 import type { Form8889 } from "./types.js";
 
@@ -51,16 +51,19 @@ export function register(): void {
       },
       /*
        * MANUAL EDIT: line 4 = "Amount you and your employer contributed to your Archer MSAs
-       * for 2025 from Form 8853, lines 1 and 2" (the 8889 form). Line 1 already counts the
-       * spouse's employer contributions (irs-8853-inst-2025::sec::line-1::b01).
+       * for 2025 from Form 8853, lines 1 and 2", and the spouse's Archer MSAs only "If you or
+       * your spouse had family coverage under an HDHP" (the 8889 form;
+       * irs-pub-969-2025::sec::limit-on-contributions::b06). This form is the taxpayer's, so
+       * the spouse's self-only Archer MSA with a self-only HSA reduces nothing.
        */
-      "0.line.4_archer_msa_contributions": (_, info) =>
-        files8853(info)
-          ? form8853Total(info, [
-              "0.line.1_employer_contributions",
-              "0.line.2_archer_msa_contributions",
-            ])
-          : unsupported(NO_FORM_8853),
+      "0.line.4_archer_msa_contributions": (_, info) => {
+        if (!files8853(info)) return unsupported(NO_FORM_8853);
+        if (archerSpouseSelfOnly(info) && info.hsaCoverageType === "self-only") return 0;
+        return form8853Total(info, [
+          "0.line.1_employer_contributions",
+          "0.line.2_archer_msa_contributions",
+        ]);
+      },
       "0.line.14a_total_distributions": (_, info) => roundDollars(info.hsaDistributionsTotal),
       // MANUAL EDIT: the stated rollover and timely excess withdrawal (irs-8889-inst-2025::sec::line-14b::b01).
       "0.line.14b_distributions_rolled_over": (_, info) =>

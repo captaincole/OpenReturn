@@ -13,6 +13,10 @@ import type { Form8853 } from "./types.js";
 export const files8853 = (info: Form8853FilingInfo): boolean =>
   info.mustFile?.["form-8853"]?.value === true;
 
+/* Part I holds only the spouse's self-only Archer MSA (Form 8889 line 4 leaves it out). */
+export const archerSpouseSelfOnly = (info: Form8853FilingInfo): boolean =>
+  info.form8853ArcherSpouseSelfOnly === true;
+
 const isUnsupported = (value: unknown): value is Unsupported =>
   typeof value === "object" && value !== null && (value as Unsupported).unsupported === true;
 

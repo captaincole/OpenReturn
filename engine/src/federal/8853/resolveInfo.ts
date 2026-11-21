@@ -91,5 +91,6 @@ export function resolve8853Info(inputs: ResolverInputs): Form8853FilingInfo {
     form8853Policyholder: longTermCare.policyholder,
     form8853MsaHolders: [...new Set([...archerMsa.holders, ...medicareMsa.holders])],
     form8853ArcherSubjectToTax: archerMsa.subjectToTax,
+    form8853ArcherSpouseSelfOnly: archerMsa.spouseSelfOnly,
   };
 }

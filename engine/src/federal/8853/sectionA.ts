@@ -46,6 +46,8 @@ export interface SectionResult {
   expected?: Array<keyof Form8853Lines>;
   /* Line 9b's base: the part of line 8 that meets no exception. */
   subjectToTax?: number;
+  /* Part I is only the spouse's self-only Archer MSA, which leaves the taxpayer's HSA limit alone. */
+  spouseSelfOnly?: boolean;
 }
 
 /* W-2 box 12 code R: employer contributions to an Archer MSA (irs-8853-inst-2025::sec::line-1::b01). */
@@ -82,9 +84,23 @@ const BOTH_SPOUSES =
 const BAD_MONTHS =
   "The Archer MSA coverage periods count more than 12 months, or a negative month, so the Line 3 chart cannot be figured.";
 
-function coverageGap(periods: ReadonlyArray<ArcherMsaCoveragePeriod>): string | undefined {
+const hasFamily = (periods: ReadonlyArray<ArcherMsaCoveragePeriod>) =>
+  periods.some((period) => period.coverage === "family");
+
+/*
+ * Both spouses with self-only plans, one of them funded by an employer, is
+ * the two-statement case too: the employer bars only its own employee's
+ * deduction (irs-8853-inst-2025::sec::employer-contributions-to-an-archer-msa::b01).
+ * With family coverage an employer contribution bars both, so line 5 is -0-.
+ */
+function coverageGap(
+  periods: ReadonlyArray<ArcherMsaCoveragePeriod>,
+  employerHolders: ReadonlyArray<AccountHolder>,
+): string | undefined {
   const owners = new Set(periods.map((period) => period.owner ?? "taxpayer"));
   if (owners.size > 1) return BOTH_SPOUSES;
+  const otherSpouseFunded = employerHolders.some((holder) => !owners.has(holder));
+  if (otherSpouseFunded && !hasFamily(periods)) return BOTH_SPOUSES;
   const months = periods.map((period) => period.months);
   if (months.some((count) => count < 0) || sum(...months) > MONTHS_IN_YEAR) return BAD_MONTHS;
   return undefined;
@@ -93,7 +109,7 @@ function coverageGap(periods: ReadonlyArray<ArcherMsaCoveragePeriod>): string | 
 /* Married filing separately with family coverage: one-half of 75% unless the spouses agree otherwise. */
 function familyShare(inputs: ResolverInputs, periods: ReadonlyArray<ArcherMsaCoveragePeriod>) {
   const separate = filingStatusOf(inputs) === "married_filing_separately";
-  if (!separate || !periods.some((period) => period.coverage === "family")) return undefined;
+  if (!separate || !hasFamily(periods)) return undefined;
   return numberAnswer(inputs.facts, ARCHER_MSA_KEYS.familyLimitShare) ?? MFS_FAMILY_DEFAULT_SHARE;
 }
 
@@ -108,7 +124,7 @@ function partILines(inputs: ResolverInputs): SectionResult {
     ...employer.holders,
     ...(periods ?? []).map((period) => period.owner ?? "taxpayer"),
   ];
-  const gap = periods === undefined ? undefined : coverageGap(periods);
+  const gap = periods === undefined ? undefined : coverageGap(periods, employer.holders);
   if (gap !== undefined) {
     const lines = Object.fromEntries(PART_I_FIELDS.map((field) => [field, unsupported(gap)]));
     return { lines, required: {}, holders };
@@ -138,6 +154,10 @@ function partILines(inputs: ResolverInputs): SectionResult {
         : { [ARCHER_MSA_KEYS.coverage]: periods, [ARCHER_MSA_KEYS.compensation]: compensation }),
     },
     holders,
+    spouseSelfOnly:
+      periods !== undefined &&
+      !hasFamily(periods) &&
+      holders.every((holder) => holder === "spouse"),
   };
 }
 
@@ -247,5 +267,6 @@ export function sectionA(
     holders: [...one.holders, ...two.holders],
     expected: [...(one.expected ?? []), ...(two.expected ?? [])],
     subjectToTax: two.subjectToTax,
+    spouseSelfOnly: one.spouseSelfOnly,
   };
 }
