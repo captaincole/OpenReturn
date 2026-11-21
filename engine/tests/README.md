@@ -11,7 +11,7 @@ are in `cade/tests/`; the corpus tests are in `canon/tests/`.
 | `unit/` | One module, its own small inputs. The same folders as `src/` and `scripts/`. | `npm run test:unit` |
 | `integration/` | The whole engine over every scenario. | `npm run test:integration` |
 | `golden/` | Every scenario and catalog, against locked values and PDFs. | `npm test` |
-| `scenarios/` | The scenario data. Each folder with an `index.ts` is a scenario; `scenarios/index.ts` finds them. | — |
+| `scenarios/` | The scenario data. Each folder with an `index.ts` is a scenario; `scenarios/index.ts` finds them. `scenarios/synthetic/` holds the taxpayers we made up with no outside source (its README). | — |
 | `helpers/` | Shared assertion, fixture, and golden-PDF code. | — |
 
 The pre-commit hook runs all three. All are offline: no network, no AI.
