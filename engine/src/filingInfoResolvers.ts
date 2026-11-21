@@ -6,6 +6,7 @@ import {
   CA_PAYMENT_KEYS,
   NET_INVESTMENT_INCOME_KEYS,
   SPOUSE_KEYS,
+  getSection1256Facts,
   isDividendFactKey,
   isInterestFactKey,
 } from "./facts/index.js";
@@ -220,14 +221,17 @@ export function resolve8949Info(inputs: ResolverInputs): Form8949FilingInfo {
 }
 
 /*
- * Also fires for capital-gain distributions without 8949, and for a capital loss
+ * Also fires for capital-gain distributions without 8949, for a capital loss
  * carried over from last year: Schedule D lines 6 and 14 take it
- * (irs-1040sd-inst-2025::sec::capital-loss-carryover-worksheet-lines-6-and-14::b02).
+ * (irs-1040sd-inst-2025::sec::capital-loss-carryover-worksheet-lines-6-and-14::b02),
+ * and for a section 1256 contract: Form 6781 lines 8 and 9 go on lines 4 and 11
+ * (irs-6781-form-2025::sec::line-8::b01, line-9::b01).
  */
 export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInfo {
   const carryoverKeys = Object.values(CAPITAL_LOSS_CARRYOVER_KEYS).filter(
     (key) => (num(inputs, key) ?? 0) > 0,
   );
+  const section1256Keys = getSection1256Facts(inputs.facts).map((fact) => fact.key);
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_d",
     fallbacks: [
@@ -236,6 +240,11 @@ export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInf
         rule: "fallback: a capital loss carryover from last year",
         value: carryoverKeys.length > 0,
         triggeredByFactKeys: carryoverKeys,
+      },
+      {
+        rule: "fallback: a section 1256 contract (Form 6781 Part I)",
+        value: section1256Keys.length > 0,
+        triggeredByFactKeys: section1256Keys,
       },
     ],
   });
