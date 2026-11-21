@@ -17,6 +17,11 @@ describe("roundToPlaces", () => {
     expect(roundToPlaces(0.4115, 3)).toBe(0.412);
     expect(roundToPlaces(1, 3)).toBe(1);
   });
+
+  it("does not round twice: 0.4774951 is 0.477, not 0.478", () => {
+    expect(roundToPlaces(2684 / 5621, 3)).toBe(0.477);
+    expect(roundToPlaces(0.4775, 3)).toBe(0.478);
+  });
 });
 
 describe("roundDollars", () => {
