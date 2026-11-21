@@ -33,6 +33,7 @@ export * from "./kinds/marketplaceCoverage.js";
 export * from "./kinds/miscIncome.js";
 export * from "./kinds/mortgage.js";
 export * from "./kinds/netInvestmentIncome.js";
+export * from "./kinds/noncashGifts.js";
 export * from "./kinds/nonemployeeCompensation.js";
 export * from "./kinds/otherIncome.js";
 export * from "./kinds/paymentTransactions.js";
