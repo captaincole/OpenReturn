@@ -11,6 +11,7 @@ export * from "./kinds/caMiscellaneousDeductions.js";
 export * from "./kinds/caPayments.js";
 export * from "./kinds/capitalLossCarryover.js";
 export * from "./kinds/casualty.js";
+export * from "./kinds/childInvestmentIncome.js";
 export * from "./kinds/dependentCare.js";
 export * from "./kinds/dependents.js";
 export * from "./kinds/depreciation.js";

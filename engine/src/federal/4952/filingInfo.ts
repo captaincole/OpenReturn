@@ -1,6 +1,9 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
+import type { Form8814FilingInfo } from "../8814/filingInfo.js";
 
-export interface Form4952FilingInfo extends BaseFilingInfo {
+/* Line 4a also reads Form 8814's totals. */
+export interface Form4952FilingInfo
+  extends BaseFilingInfo, Pick<Form8814FilingInfo, "form8814Totals"> {
   /** Line 1. */
   investmentInterestPaid?: number;
   /** Who Must File's exception: the interest is deducted on Schedule A line 9 without the form. */

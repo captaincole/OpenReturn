@@ -3,6 +3,7 @@
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
 import type { Form8949Box } from "../../facts/index.js";
 import { numberOrBlank, roundDollars, sum } from "../../money.js";
+import { withForm8814 } from "../8814/totals.js";
 import type { ScheduleDFilingInfo } from "./filingInfo.js";
 import { allowableLoss } from "./lines.js";
 import type { ScheduleD } from "./types.js";
@@ -131,9 +132,16 @@ export function register(): void {
         ) - sum(form["0.line.14_long_term_loss_carryover"]),
       "1.line.16_combined_gain_loss": (form) =>
         sum(form["0.line.7_net_short_term_gain_loss"], form["0.line.15_net_long_term_gain_loss"]),
-      // MANUAL EDIT: routed to the FilingInfo slot (sum of 1099-DIV box 2a).
+      /*
+       * MANUAL EDIT: routed to the FilingInfo slot (sum of 1099-DIV box 2a), plus
+       * each Form 8814 line 10 (irs-8814-inst-2025::sec::line-10::b01, ::line-3::b06).
+       */
       "0.line.13_capital_gain_distributions": (_, info) =>
-        roundDollars(info.capitalGainDistributions),
+        withForm8814(
+          info.form8814Totals,
+          roundDollars(info.capitalGainDistributions),
+          (figured) => figured.line10,
+        ),
       // MANUAL EDIT: a loss on line 16, limited to $3,000 ($1,500 MFS), as a positive amount.
       "1.line.21_allowable_loss": (form, info) =>
         allowableLoss(form["1.line.16_combined_gain_loss"], info.filingStatus),

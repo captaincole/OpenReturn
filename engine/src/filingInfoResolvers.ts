@@ -10,6 +10,7 @@ import {
   isInterestFactKey,
 } from "./facts/index.js";
 import { resolve6251Info } from "./federal/6251/resolveInfo.js";
+import { figuredForm8814, form8814Totals } from "./federal/8814/totals.js";
 import { planForm8949Copies, totalsByBox } from "./federal/8949/copyPlan.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
 import { resolve8959Info } from "./federal/8959/resolveInfo.js";
@@ -345,7 +346,18 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
   const interestPayers = payerAmounts(inputs, isInterestFactKey, (value) =>
     sum(value.box1, value.box3),
   );
-  const dividendPayers = payerAmounts(inputs, isDividendFactKey, (value) => sum(value.box1a));
+  /*
+   * irs-8814-inst-2025::sec::line-9::b01: each Form 8814 line 9 is a line 5 row
+   * named "Form 8814", and Schedule B files when it plus the parents' dividends
+   * is more than $1,500. A child's foreign account (Part III, ::b07) has no fact.
+   */
+  const form8814Rows = (figuredForm8814(form8814Totals(inputs))?.line9ByChild ?? [])
+    .filter((line9) => line9 > 0)
+    .map((line9) => ({ payerName: "Form 8814", amount: line9 }));
+  const dividendPayers = [
+    ...payerAmounts(inputs, isDividendFactKey, (value) => sum(value.box1a)),
+    ...form8814Rows,
+  ];
   const hasForeignFinancialAccount = boolDecision(
     inputs,
     "decisions.scope.has_foreign_financial_account",

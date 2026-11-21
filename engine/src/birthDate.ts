@@ -1,7 +1,10 @@
 /* Age tests on a date of birth, as the 2025 forms word them. */
 
-/* Born before January 2 of the given year: a January 1 birthday counts as the day before. */
-function bornBeforeJan2Of(dob: string | undefined, cutoffYear: number): boolean | undefined {
+/*
+ * Born before January 2 of the given year: a January 1 birthday counts as the
+ * day before. Undefined when the date of birth is missing or unreadable.
+ */
+export function bornBeforeJan2Of(dob: string | undefined, cutoffYear: number): boolean | undefined {
   const us = dob?.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
   const iso = dob?.match(/^(\d{4})-(\d{2})-(\d{2})$/);
   const ymd = us ? [us[3], us[1], us[2]] : iso ? [iso[1], iso[2], iso[3]] : undefined;
