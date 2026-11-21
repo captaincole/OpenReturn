@@ -68,6 +68,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "Cade's question",
   ],
   [
+    /^mortgage\.credit_certificate$/,
+    "the whole Mortgage Credit Certificate (Form 8396); whether the filer holds one is Cade's " +
+      "question. Form 8396 asks for it when a carryforward files the form without it",
+  ],
+  [
     /^dependent_care\.(provider|qualifying_person)\.[^.]+$/,
     "each fact is a whole care provider or qualifying person (Form 2441 lines 1 and 2); " +
       "whether one exists is Cade's question",

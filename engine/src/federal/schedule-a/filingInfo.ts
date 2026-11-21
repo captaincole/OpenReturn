@@ -34,7 +34,7 @@ export interface ScheduleAFilingInfo
   /** Line 5c. */
   personalPropertyTaxes?: number;
 
-  /** Line 8a: Form 1098 box 1. Only one 1098 is supported. */
+  /** Line 8a: Form 1098 box 1, less Form 8396 line 3. Only one 1098 is supported. */
   mortgageInterestForm1098?: number;
   /**
    * The 1098 interest is stated but line 8a cannot print it yet: the principal is
@@ -42,6 +42,11 @@ export interface ScheduleAFilingInfo
    * limit needs is missing. Lines 8e, 10 and 17 wait with it.
    */
   mortgageInterestWaits?: boolean;
+  /**
+   * Why line 8a cannot take off Form 8396 line 3 (an engine gap): line 3 is
+   * unsupported, or more than the Form 1098 interest.
+   */
+  mortgageCreditGap?: string;
 
   /** Line 8b. */
   mortgageInterestNotForm1098?: number;

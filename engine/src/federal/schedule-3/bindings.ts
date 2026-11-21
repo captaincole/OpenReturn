@@ -1,6 +1,8 @@
 import { defineForm } from "../../defineForm.js";
 import { numberOrBlank, sum } from "../../money.js";
+import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
+import { mortgageCreditGap } from "../8396/creditGap.js";
 import { creditGap, LINE_12_ID } from "../8880/credit.js";
 import type { Schedule3FilingInfo } from "./filingInfo.js";
 import type { Schedule3 } from "./types.js";
@@ -19,6 +21,15 @@ export function register(): void {
       "0.line.2": (form) => numberOrBlank(form["form-2441.0.line.11_dependent_care_credit"]),
       // MANUAL EDIT: Schedule R line 22 ("Also enter this amount on Schedule 3 (Form 1040), line 6d").
       "0.line.6d": (form) => numberOrBlank(form["schedule-r.1.line.22_credit"]),
+      /*
+       * MANUAL EDIT: Form 8396 line 9 ("Also include this amount on Schedule 3 (Form 1040), line 6g").
+       * When line 9 is an engine gap, so is this line, with the same reason.
+       */
+      "0.line.6g": (form, info) => {
+        const gap = mortgageCreditGap(form, info);
+        if (gap !== undefined) return unsupported(gap);
+        return numberOrBlank(form["form-8396.0.line.9_current_year_mortgage_interest_credit"]);
+      },
       /*
        * MANUAL EDIT: Form 8880 line 12 ("here and on Schedule 3 (Form 1040), line 4",
        * irs-8880-form-2025::sec::omb-no-1545-0074::b03). Blank when no credit; a gap
@@ -74,7 +85,6 @@ export function register(): void {
       "0.line.6c": NO_SCENARIO,
       "0.line.6e": "Reserved for future use.",
       "0.line.6f": NO_SCENARIO,
-      "0.line.6g": NO_SCENARIO,
       "0.line.6h": NO_SCENARIO,
       "0.line.6i": NO_SCENARIO,
       "0.line.6j": NO_SCENARIO,

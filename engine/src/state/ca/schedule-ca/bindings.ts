@@ -9,6 +9,7 @@ import type { ScheduleCaFilingInfo } from "./filingInfo.js";
 import { form8853Bindings } from "./form8853.js";
 import { partIIUnsupported } from "./increasedStandard.js";
 import { CA_MISC_FLOOR_RATE, caItemizedLine29 } from "./itemizedWorksheet.js";
+import { mortgageCreditBindings } from "./mortgageCredit.js";
 import { sectionCBindings } from "./sectionC.js";
 import type { ScheduleCa } from "./types.js";
 
@@ -138,6 +139,7 @@ export function register(): void {
   defineForm<ScheduleCa, ScheduleCaFilingInfo>("schedule-ca", {
     bindings: waitsWithIncreasedStandard({
       ...sectionCBindings,
+      ...mortgageCreditBindings,
       ...form8853Bindings,
       /*
        * MANUAL EDIT: CA does not conform to HSAs. Employer contributions
@@ -779,16 +781,12 @@ export function register(): void {
         "Line 6 col B (foreign income taxes, generation-skipping transfer tax) needs Schedule A line 6 detail, which has no data path.",
       "4.page2.taxes_6_additions":
         "Line 6 col C (foreign property taxes) has no fact kind or decision.",
-      "4.page2.interest_8a_additions":
-        "Line 8a col C (the interest the federal $750,000 limit disallowed, home equity interest, the mortgage interest credit) needs the Pub. 936 average-balance worksheet and California's $1,000,000 limit; the engine knows only the 1098's January 1 principal.",
       "4.page2.interest_8b_additions":
         "Line 8b col C needs the federal limit on non-1098 mortgage interest (Pub. 936); not modeled.",
       "4.page2.interest_8c_additions":
         "Line 8c col C needs the federal limit on non-1098 points (Pub. 936); not modeled.",
       "4.page2.interest_8e_subtractions":
         "Line 8e col B has no column B rows on lines 8a–8c, and the instructions name no subtraction for line 8.",
-      "4.page2.interest_8e_additions":
-        "Line 8e col C totals lines 8a–8c col C; every upstream row is unsupported.",
       "5.page2.charity_11_subtractions":
         "Line 11 col B (the CA 50%-of-AGI contribution limit, College Access Tax Credit) needs the contribution limitation worksheet with CA percentages; not modeled.",
       "5.page2.charity_11_additions": "The instructions name no column C adjustment for line 11.",
