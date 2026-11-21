@@ -17,15 +17,15 @@ import {
 import type { TaxFactRow } from "../../../../src/facts/rows.js";
 import { identityFact } from "../../../helpers/fixtureBuilders.js";
 
-export const WREN_USER_ID = "wren-integration";
-export const WREN_TAX_YEAR = 2025;
+export const ISOLDE_USER_ID = "isolde-integration";
+export const ISOLDE_TAX_YEAR = 2025;
 
 const CREATED_AT = "2026-11-21T00:00:00Z";
 
 const fact = (category: string, key: string, value: unknown, sourceNote: string): TaxFactRow => ({
   id: `f-${key}`,
-  userId: WREN_USER_ID,
-  taxYear: WREN_TAX_YEAR,
+  userId: ISOLDE_USER_ID,
+  taxYear: ISOLDE_TAX_YEAR,
   category,
   key,
   value,
@@ -34,7 +34,7 @@ const fact = (category: string, key: string, value: unknown, sourceNote: string)
 });
 
 export const HOUSEHOLD = {
-  taxpayer: { firstName: "Wren", lastName: "Albescu", ssn: "400-00-8839" },
+  taxpayer: { firstName: "Isolde", lastName: "Albescu", ssn: "400-00-8839" },
   spouse: { firstName: "Tobiah", lastName: "Albescu", ssn: "400-00-8840" },
   street: "1717 Cypress Creek Lane",
   city: "Houston",
@@ -49,8 +49,8 @@ const address = {
   zip: HOUSEHOLD.zip,
 };
 
-/* Wren's W-2 (made up): box 12 code T, adoption benefits, is not in box 1 but is in boxes 3 and 5. */
-const wrenW2: W2FactValue = {
+/* Isolde's W-2 (made up): box 12 code T, adoption benefits, is not in box 1 but is in boxes 3 and 5. */
+const isoldeW2: W2FactValue = {
   owner: "taxpayer",
   employerName: "Larkspur Biomedical Inc",
   employerEin: "00-0008839",
@@ -131,11 +131,11 @@ const rowan: AdoptionChildFactValue = {
 };
 
 const idFact = (suffix: string, value: string) =>
-  identityFact({ userId: WREN_USER_ID, taxYear: WREN_TAX_YEAR, suffix, value });
+  identityFact({ userId: ISOLDE_USER_ID, taxYear: ISOLDE_TAX_YEAR, suffix, value });
 
 const ANSWERS = "Stated in conversation, 2026-11-21 (made up)";
 
-export const wrenFacts: TaxFactRow[] = [
+export const isoldeFacts: TaxFactRow[] = [
   idFact("name.first", HOUSEHOLD.taxpayer.firstName),
   idFact("name.last", HOUSEHOLD.taxpayer.lastName),
   idFact("ssn", HOUSEHOLD.taxpayer.ssn),
@@ -150,7 +150,7 @@ export const wrenFacts: TaxFactRow[] = [
   fact("identity", SPOUSE_KEYS.lastName, HOUSEHOLD.spouse.lastName, "W-2 from Gulf Arc."),
   fact("identity", SPOUSE_KEYS.ssn, HOUSEHOLD.spouse.ssn, "W-2 from Gulf Arc."),
   fact("identity", SPOUSE_KEYS.dob, "11/19/1982", ANSWERS),
-  fact("wages", makeW2FactKey("larkspur-biomedical"), wrenW2, "W-2 from Larkspur Biomedical."),
+  fact("wages", makeW2FactKey("larkspur-biomedical"), isoldeW2, "W-2 from Larkspur Biomedical."),
   fact("wages", makeW2FactKey("gulf-arc"), tobiahW2, "W-2 from Gulf Arc Engineering."),
   fact(
     "investment_income",

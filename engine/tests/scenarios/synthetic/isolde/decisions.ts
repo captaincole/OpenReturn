@@ -2,12 +2,12 @@
 
 import type { AIDecisionRow } from "../../../../src/facts/rows.js";
 import { decisionRow } from "../../../helpers/fixtureBuilders.js";
-import { WREN_TAX_YEAR, WREN_USER_ID } from "./facts.js";
+import { ISOLDE_TAX_YEAR, ISOLDE_USER_ID } from "./facts.js";
 
 const dec = (key: string, decision: unknown, rationale: string) =>
-  decisionRow({ userId: WREN_USER_ID, taxYear: WREN_TAX_YEAR, key, decision, rationale });
+  decisionRow({ userId: ISOLDE_USER_ID, taxYear: ISOLDE_TAX_YEAR, key, decision, rationale });
 
-export const wrenDecisions: AIDecisionRow[] = [
+export const isoldeDecisions: AIDecisionRow[] = [
   dec("decisions.scope.must_file_federal", true, "Gross income is over the MFJ threshold."),
   dec("decisions.scope.filing_status", "married_filing_jointly", "Married at the end of 2025."),
   dec("decisions.scope.has_digital_assets", false, "No digital asset activity."),

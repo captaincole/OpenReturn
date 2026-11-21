@@ -1,5 +1,5 @@
 /*
- * wren — LOCKED expected values, drafted from the engine's
+ * isolde — LOCKED expected values, drafted from the engine's
  * output on 2026-11-21 (scripts/draftExpected.ts).
  *
  * UNVERIFIED: no CPA return or filed-return check stands behind these
@@ -130,7 +130,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "form-8839.1.line.29_excluded_benefits_child_3": 0,
     },
     renderedText: {
-      "form-8839.0.header.taxpayer_name": "Wren Albescu & Tobiah Albescu",
+      "form-8839.0.header.taxpayer_name": "Isolde Albescu & Tobiah Albescu",
       "form-8839.0.header.ssn": "400-00-8839",
       "form-8839.0.line.1_row1_col_a_first": "Juniper",
       "form-8839.0.line.1_row1_col_b": "2017",
@@ -266,7 +266,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
   },
 };
 
-export function wrenExpected(formId: string): ExpectedResults {
+export function isoldeExpected(formId: string): ExpectedResults {
   const expected = EXPECTED[formId] ?? {};
   return {
     engineFields: expected.engineFields ?? {},

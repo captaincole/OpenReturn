@@ -1,8 +1,8 @@
-# wren — a made-up couple adopting three children (synthetic)
+# isolde — a made-up couple adopting three children (synthetic)
 
-Wren and Tobiah Albescu are married, file jointly, and live in Houston, Texas. Every name and amount here is made up. There is no outside source and no answer key: the expected values are the engine's output, checked by hand against the form instructions, then locked (`verification: "unverified"`).
+Isolde and Tobiah Albescu are married, file jointly, and live in Houston, Texas. Every name and amount here is made up. There is no outside source and no answer key: the expected values are the engine's output, checked by hand against the form instructions, then locked (`verification: "unverified"`).
 
-They have two W-2s and a 1099-INT. Wren's employer has an adoption assistance program and paid $15,500 of benefits (W-2 box 12 code T). They take the standard deduction. The return is federal only: Texas has no income tax.
+They have two W-2s and a 1099-INT. Isolde's employer has an adoption assistance program and paid $15,500 of benefits (W-2 box 12 code T). They take the standard deduction. The return is federal only: Texas has no income tax.
 
 They adopt or try to adopt three children:
 
@@ -20,7 +20,7 @@ Forms that file: Form 1040, Schedule B, Schedule 2, Schedule 3, Form 8839, Form 
 
 | Input | Amounts |
 | --- | --- |
-| W-2, Larkspur Biomedical (Wren) | box 1 $168,000, box 2 $31,000, box 5 $183,500, box 12 code T $15,500 |
+| W-2, Larkspur Biomedical (Isolde) | box 1 $168,000, box 2 $31,000, box 5 $183,500, box 12 code T $15,500 |
 | W-2, Gulf Arc Engineering (Tobiah) | box 1 $64,000, box 2 $7,200 |
 | 1099-INT, Bayou Treasury Direct Savings | box 1 $34,000 |
 | Juniper | special needs, final 2025; paid 2025 $1,800; prior form lines 3 + 6 = 0, lines 20 + 24 = $2,000; 2025 benefits $3,000 |

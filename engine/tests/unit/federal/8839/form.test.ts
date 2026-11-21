@@ -1,7 +1,7 @@
 /*
  * Form 8839 on a whole return: who files, the answers it asks for, its gaps,
  * and the lines that take its results (Form 1040 lines 1f and 30, Schedule 3
- * line 6c). The synthetic wren scenario is the base.
+ * line 6c). The synthetic isolde scenario is the base.
  */
 
 import { describe, expect, it } from "vitest";
@@ -20,7 +20,7 @@ import {
 } from "../../../../src/federal/8839/results.js";
 import { evaluateScenario, pendingInputs } from "../../../../src/index.js";
 import { decisionRow } from "../../../helpers/fixtureBuilders.js";
-import { wrenScenario as base } from "../../../scenarios/synthetic/wren/index.js";
+import { isoldeScenario as base } from "../../../scenarios/synthetic/isolde/index.js";
 
 const isAdoption = (fact: TaxFactRow) => fact.key.startsWith("adoption.");
 const W2_KEY = makeW2FactKey("larkspur-biomedical");
@@ -268,7 +268,7 @@ describe("gaps", () => {
   });
 });
 
-describe("the receiving lines (the wren scenario)", () => {
+describe("the receiving lines (the isolde scenario)", () => {
   const run = evaluate(base.facts);
   it("1040 line 1f is 8839 line 31; line 30 is line 13; Schedule 3 line 6c is line 18", () => {
     expect(run.value("form-1040", "line.1f")).toBe(
@@ -287,7 +287,7 @@ describe("the receiving lines (the wren scenario)", () => {
     ));
 });
 
-describe("Worksheet B on a whole return (wren plus a daughter under 17)", () => {
+describe("Worksheet B on a whole return (isolde plus a daughter under 17)", () => {
   const daughter = row(makeDependentFactKey("hazel"), {
     firstName: "Hazel",
     lastName: "Albescu",
