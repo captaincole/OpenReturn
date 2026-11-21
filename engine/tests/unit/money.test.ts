@@ -1,5 +1,23 @@
 import { describe, expect, it } from "vitest";
-import { atLeast, formatDollars, roundDollars, stepsOf, sum, wholePart } from "../../src/money.js";
+import {
+  atLeast,
+  formatDollars,
+  roundDollars,
+  roundToPlaces,
+  stepsOf,
+  sum,
+  wholePart,
+} from "../../src/money.js";
+
+describe("roundToPlaces", () => {
+  it("rounds a ratio to three places, the half up (Form 8814 lines 7 and 8)", () => {
+    expect(roundToPlaces(2190 / 2800, 3)).toBe(0.782);
+    expect(roundToPlaces(610 / 2800, 3)).toBe(0.218);
+    expect(roundToPlaces(1150 / 2800, 3)).toBe(0.411);
+    expect(roundToPlaces(0.4115, 3)).toBe(0.412);
+    expect(roundToPlaces(1, 3)).toBe(1);
+  });
+});
 
 describe("roundDollars", () => {
   it("drops under 50 cents and raises 50–99 cents (IRS rule)", () => {

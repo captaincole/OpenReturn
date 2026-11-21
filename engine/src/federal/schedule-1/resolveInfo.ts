@@ -9,6 +9,7 @@ import {
 } from "../../facts/index.js";
 import { sum, sumOrBlank } from "../../money.js";
 import { filingStatusOf, num, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import { figuredForm8814, form8814Totals } from "../8814/totals.js";
 import { resolve8889Info } from "../8889/resolveInfo.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
@@ -70,6 +71,8 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
   const savingsPenalty = earlyWithdrawalPenalty(inputs);
   const studentLoan = resolveStudentLoanInterest(inputs);
   const studentLoanInterest = studentLoan.info.studentLoanInterestPaid;
+  // irs-8814-inst-2025::sec::line-12::b01: every Form 8814 line 12 goes on line 8z.
+  const form8814Line12 = figuredForm8814(form8814Totals(inputs))?.line12 ?? 0;
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_1",
     fallbacks: [
@@ -89,6 +92,10 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
           (educatorExpenses ?? 0) > 0 ||
           (savingsPenalty ?? 0) > 0 ||
           (studentLoanInterest ?? 0) > 0,
+      },
+      {
+        rule: `fallback: Form 8814 line 12 $${form8814Line12} on line 8z`,
+        value: form8814Line12 !== 0,
       },
     ],
   });

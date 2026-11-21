@@ -45,6 +45,16 @@ export function roundDollars(value: number | undefined): number | undefined {
   return Math.sign(value) * Math.floor(cents + 0.5);
 }
 
+/*
+ * A ratio a form enters "as a decimal (rounded to at least three places)" (Form
+ * 8814 lines 7 and 8): rounded to `places` decimals by roundDollars' rule, on
+ * the ratio scaled up, so 0.4115 gives 0.412.
+ */
+export function roundToPlaces(value: number, places: number): number {
+  const scale = 10 ** places;
+  return roundDollars(value * scale) / scale;
+}
+
 // "Each $step or part of $step": a part step counts, so this rounds up by rule.
 export function stepsOf(amount: number, step: number): number {
   return Math.ceil(amount / step);
