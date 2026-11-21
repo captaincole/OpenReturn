@@ -9,7 +9,7 @@ choice changes a dollar amount.
 - Source: "Enter the result as a decimal (rounded to at least three places)" (the blank form, lines 9 and 27).
 - Block: the blank form; irs-8839-inst-2025::sec::general-instructions::b04 gives the income table.
 - Default: three places, nearest. So MAGI from $259,191 to $259,209 gives 0.000, and MAGI from $299,170 to $299,189 gives 1.000. The table says those incomes "reduce" the credit, not leave it or remove it.
-- Changes dollars: yes, by less than $9 per child at the two ends.
+- Changes dollars: yes, at any income in the phase-out range, by up to $8.64 per child (0.0005 × $17,280). The blind fill chose three places too. With the exact ratio, its cases move: MAGI $270,000 (ratio 0.27025) line 10 4,666 → 4,670; MAGI $285,000 (0.64525) 11,146 → 11,150; MAGI $264,207 with line 6 $12,346 (0.125425) 1,543 → 1,548.
 
 ## 2. Lines 3 and 20: one Yes/No pair for three children
 
@@ -73,6 +73,18 @@ choice changes a dollar amount.
 | More than three children | more-than-three-eligible-children::b01 | The columns of a second form are not printed; the totals count every child. |
 
 The Puerto Rico exclusion has no fact: a filer with it gets a line 7 that is too low. Cade should not record an adoption for such a filer yet.
+
+## 11. Line 5 with cents: round the line or keep cents to line 11a
+
+- Source: "If you have to add two or more amounts to figure the amount to enter on a line, include cents when adding the amounts and round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01).
+- Default: line 5 adds the expenses with cents and rounds the total ($12,345.67 → $12,346). Lines 6, 10 and 11a then use the rounded lines. The text settles it; the blind fill made the same choice.
+- Changes dollars: yes, by $1 at most. Keeping cents to line 11a ($12,345.67 − $1,543.21 = $10,802.46) gives $10,802 instead of $10,803.
+
+## Second opinions
+
+- **PolicyEngine-US 2.152.15** (commit b274cacc, 2026-11-21): it does not model the adoption credit or the exclusion. `parameters/gov/irs/credits/non_refundable.yaml` has only a comment "Adoption expense credit" in its list, and `credits/ctc_tax_liability_limit/subsequent_credits.yaml` says the adoption credit belongs on Schedule 8812 Credit Limit Worksheet B but "is not modeled". That matches item 10 (Worksheet B unsupported). No constant or formula to compare.
+- **IRS Direct File**: the repo names no checkout of its tax logic, so no comparison.
+- **Blind fill** (14 cases, 178 lines): no difference from the engine, in dollars or in blank against 0.
 
 ## Confidence by field group
 
