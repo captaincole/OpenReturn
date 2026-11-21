@@ -156,14 +156,17 @@ export function resolve3805pInfo(inputs: ResolverInputs): Form3805pFilingInfo {
   const simpleIraAmount = rows
     .filter((row) => row.distribution.box7.includes(SIMPLE_IRA_CODE))
     .map((row) => rowTaxable(row.distribution));
+  /* The form goes with a California return: none on a federal-only return (as FTB 3532). */
+  const files540 = inputs.decisionByKey.get("decisions.scope.must_file_ca_540") === true;
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_3805p",
     fallbacks: [
       {
-        rule: `fallback: ${rows.length} early distribution(s) with no exception code, $${amount ?? "?"} included in income`,
+        rule: `fallback: Form 540 files (${files540}), ${rows.length} early distribution(s) with no exception code, $${amount ?? "?"} included in income`,
         /* A full rollover leaves nothing in income: no form (::b02). Unknown amounts keep the form, and wait. */
-        value: rows.length > 0 && (amount === undefined || amount > 0),
+        value: files540 && rows.length > 0 && (amount === undefined || amount > 0),
         triggeredByFactKeys: rows.map((row) => row.key),
+        triggeredByDecisionKeys: ["decisions.scope.must_file_ca_540"],
       },
     ],
   });

@@ -36,7 +36,7 @@ The golden suite ran 25 scenarios.
 | Schedule E | Federal 2025 | Yes | 3 | 176 | 40 | 0 | 55 | 81 | 1 | 7 |
 | Schedule 1 | Federal 2025 | Yes | 14 | 72 | 35 | 0 | 0 | 37 | 4 | 10 |
 | Schedule 1-A | Federal 2025 | Yes | 3 | 54 | 13 | 0 | 1 | 40 | 1 | 2 |
-| Schedule 2 | Federal 2025 | Yes | 13 | 62 | 11 | 1 | 4 | 46 | 7 | 3 |
+| Schedule 2 | Federal 2025 | Yes | 13 | 62 | 9 | 1 | 4 | 48 | 7 | 3 |
 | Schedule 3 | Federal 2025 | Yes | 4 | 37 | 6 | 1 | 0 | 30 | 3 | 6 |
 | Form 2441 | Federal 2025 | Yes | 2 | 72 | 53 | 0 | 19 | 0 | 4 | 2 |
 | Schedule R | Federal 2025 |  | 2 | 27 | 18 | 0 | 9 | 0 | 2 | 1 |
@@ -75,7 +75,7 @@ The golden suite ran 25 scenarios.
 | Form 4835 | Federal 2025 |  | 0 | 62 | 0 | 0 | 0 | 62 | 0 | 0 |
 | Form 4970 | Federal 2025 |  | 0 | 63 | 0 | 0 | 0 | 63 | 0 | 0 |
 | Form 4972 | Federal 2025 |  | 0 | 58 | 0 | 0 | 0 | 58 | 0 | 0 |
-| Form 5329 | Federal 2025 | Yes | 0 | 75 | 0 | 0 | 8 | 67 | 0 | 0 |
+| Form 5329 | Federal 2025 | Yes | 0 | 75 | 0 | 0 | 0 | 75 | 0 | 0 |
 | Form 5471 | Federal 2025 |  | 0 | 436 | 0 | 0 | 0 | 436 | 0 | 0 |
 | Form 6198 | Federal 2025 | Yes | 0 | 34 | 0 | 0 | 0 | 34 | 0 | 0 |
 | Form 6252 | Federal 2025 | Yes | 0 | 49 | 0 | 0 | 0 | 49 | 0 | 0 |
@@ -365,7 +365,7 @@ For each form: the fields that are not verified and that other fields read, by t
 
 - Reads: Form 6251, Form 8889, Form 8959, Form 8960, Form 8962, Schedule H, Schedule SE
 - Feeds: Form 1040, Form 6251, Schedule 8812
-- Fields: 11 of 62 verified, 51 not checked
+- Fields: 9 of 62 verified, 53 not checked
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
@@ -380,7 +380,7 @@ For each form: the fields that are not verified and that other fields read, by t
 | `0.line.13_uncollected_ss_medicare_rrta_tax_w2` | Line 13 — Uncollected social security and Medicare or RRTA tax on tips or group-term life insurance from Form W-2, box 12 | unsupported | 14 | Schedule 8812 |
 | `1.line.17a_recapture_other_credits_amount` | Line 17a — Recapture of other credits amount | unsupported | 7 | none |
 
-41 more not checked, each of which feeds fewer fields.
+43 more not checked, each of which feeds fewer fields.
 
 ### Schedule 3
 

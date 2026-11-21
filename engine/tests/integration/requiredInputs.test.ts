@@ -117,6 +117,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "expenses (Schedule A lines 6 and 16)",
   ],
   [
+    /^retirement\.early_distribution_exception\.[^.]+\.[^.]+$/,
+    "an answer Cade records only when the user states an exception for an early distribution; " +
+      "absent, the 1099-R's code 1 stands and no part is excluded (Form 5329 line 2)",
+  ],
+  [
     /^prior_year\.ca_tax$/,
     "KNOWN GAP: decides whether FTB 5805 files. Needed only when the CA balance due is " +
       "$500 or more, which the resolver cannot see before evaluation.",
