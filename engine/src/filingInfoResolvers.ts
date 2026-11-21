@@ -11,6 +11,7 @@ import {
   isInterestFactKey,
 } from "./facts/index.js";
 import { resolve6251Info } from "./federal/6251/resolveInfo.js";
+import { filesForm8815, savingsBondExclusionScope } from "./federal/8815/resolveInfo.js";
 import { planForm8949Copies, totalsByBox } from "./federal/8949/copyPlan.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
 import { resolve8959Info } from "./federal/8959/resolveInfo.js";
@@ -367,6 +368,7 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
   const rounding = inputs.decisionByKey.get("decisions.rounding.schedule_b");
   const interest = sum(...interestPayers.map((interestPayer) => interestPayer.amount));
   const dividends = sum(...dividendPayers.map((dividendPayer) => dividendPayer.amount));
+  const bondExclusion = savingsBondExclusionScope(inputs);
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_b",
     fallbacks: [
@@ -378,6 +380,12 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
           hasForeignFinancialAccount === true ||
           hasForeignTrust === true,
       },
+      // Line 3 takes Form 8815 line 14 (irs-8815-form-2025::sec::omb-no-1545-0074::b03).
+      {
+        rule: "fallback: Form 8815 files (the savings bond interest exclusion, line 3)",
+        value: filesForm8815(bondExclusion),
+        triggeredByFactKeys: bondExclusion.resolution.derivation?.triggeredByFactKeys ?? [],
+      },
     ],
   });
   return {
@@ -388,6 +396,7 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
     dividendPayers,
     hasForeignFinancialAccount,
     hasForeignTrust,
+    savingsBondExclusionGap: bondExclusion.exclusion.line9Gap,
   };
 }
 

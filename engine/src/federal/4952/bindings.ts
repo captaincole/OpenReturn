@@ -1,7 +1,7 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
 import { defineForm } from "../../defineForm.js";
-import { atLeast, roundDollars, sum } from "../../money.js";
+import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
 import { SSN } from "../../values.js";
 import type { Form4952FilingInfo } from "./filingInfo.js";
 import { netCapitalGainFromDispositions, netGainFromDispositions } from "./lines.js";
@@ -29,8 +29,16 @@ export function register(): void {
        * MANUAL EDIT: Part II. Line 4a is interest (1099-INT box 1) plus ordinary
        * dividends (1099-DIV box 1a); annuities, royalties and K-1 investment
        * income have no fact kind yet. Net gain from dispositions goes on 4d.
+       * Interest excluded on Form 8815 (Schedule B line 3) is not gross income
+       * (irs-4952-form-2025::sec::part-ii-net-investment-income::b01), so it comes out.
        */
-      "0.line.4a_gross_investment_income": (_, info) => roundDollars(info.grossInvestmentIncome),
+      "0.line.4a_gross_investment_income": (form, info) => {
+        const gross = roundDollars(info.grossInvestmentIncome);
+        const excluded = numberOrBlank(
+          form["schedule-b.0.line.3_excludable_savings_bond_interest"],
+        );
+        return gross === undefined || excluded === undefined ? gross : gross - excluded;
+      },
       "0.line.4b_qualified_dividends": (_, info) => roundDollars(info.qualifiedDividends),
       "0.line.4c_income_less_qualified_dividends": (form) => {
         const line4a = form["0.line.4a_gross_investment_income"];

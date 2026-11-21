@@ -5,7 +5,8 @@
  */
 
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
-import { roundDollars, sum } from "../../money.js";
+import { numberOrBlank, roundDollars, sum } from "../../money.js";
+import { unsupported } from "../../types.js";
 import type { PayerAmount, ScheduleBFilingInfo, ScheduleBRounding } from "./filingInfo.js";
 import type { ScheduleB } from "./types.js";
 
@@ -53,6 +54,15 @@ export function register(): void {
     "0.header.ssn": (_, info) => info.taxpayerSSN,
     ...payerRows("1", INTEREST_ROWS, (info) => info.interestPayers),
     "0.line.2_total_interest": (_, info) => payerTotal(info.interestPayers, info.rounding),
+    /*
+     * MANUAL EDIT: line 3 is Form 8815 line 14 (irs-8815-form-2025::sec::omb-no-1545-0074::b03);
+     * blank when Form 8815 does not file, or stops before line 14.
+     */
+    "0.line.3_excludable_savings_bond_interest": (form, info) => {
+      if (info.mustFile?.["form-8815"]?.value !== true) return undefined;
+      if (info.savingsBondExclusionGap) return unsupported(info.savingsBondExclusionGap);
+      return numberOrBlank(form["form-8815.0.line.14_excludable_bond_interest"]);
+    },
     "0.line.4_taxable_interest": (form) => {
       const total = form["0.line.2_total_interest"];
       return typeof total === "number"
@@ -70,8 +80,6 @@ export function register(): void {
   defineForm<ScheduleB, ScheduleBFilingInfo>("schedule-b", {
     bindings: bindings as Bindings,
     unsupported: {
-      "0.line.3_excludable_savings_bond_interest":
-        "Form 8815 (education savings bond exclusion) is not modeled; no scenario yet.",
       "0.line.7a_fincen_114_required_yes":
         "FinCEN 114 question applies only after a foreign-account Yes; no foreign-account scenario yet.",
       "0.line.7a_fincen_114_required_no":

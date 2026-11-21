@@ -16,6 +16,7 @@ export * from "./kinds/dependents.js";
 export * from "./kinds/depreciation.js";
 export * from "./kinds/dividends.js";
 export * from "./kinds/earnedIncomeCredit.js";
+export * from "./kinds/educationSavingsBonds.js";
 export * from "./kinds/educatorExpenses.js";
 export * from "./kinds/elderlyOrDisabledCredit.js";
 export * from "./kinds/gamblingWinnings.js";
