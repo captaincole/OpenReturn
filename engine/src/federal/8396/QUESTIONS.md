@@ -12,13 +12,14 @@ Each item is a place where the form and its instructions do not settle a rule. E
 ## 2. The allocation fraction for a loan larger than the certified indebtedness
 
 - Source: "If the loan amount on your MCC is less than your total mortgage loan, you must allocate the interest … See Pub. 530" (`specific-instructions::b01`). Pub. 530 uses certified indebtedness over the original loan amount (`irs-pub-530-2025::sec::figuring-the-credit::b01`).
-- Default: the Pub. 530 fraction, rounded once on line 1.
-- Changes dollars: no (a published example).
+- Default: the Pub. 530 fraction, rounded once on line 1. Line 3 multiplies the rounded line 1, as with any line the form defines from another line. A blind fill rounded the same way; in its case both orders gave the same line 3.
+- Changes dollars: no (a published example); the order of rounding can move line 3 by $1 at most.
 
 ## 3. A co-owner's share of the $2,000 limit
 
 - Source: "the $2,000 limit must be allocated to each owner in proportion to the interest held" (`line-3::b01`).
 - Default: `ownershipShare` (0 to 1) divides the limit. Absent means the filer holds the whole interest. Line 1's `interestPaid` is already the filer's share; the engine does not check it against the ownership share.
+- "Your share of the interest paid" (`specific-instructions::b01`) is the interest the filer paid, not the ownership share of the total: the Pub. 530 example multiplies "the mortgage interest you paid this year ($5,400)" (`irs-pub-530-2025::sec::dividing-the-credit::b01`).
 - Changes dollars: yes, when a co-owner exists and the share is wrong or missing.
 
 ## 4. Credit Limit Worksheet B (a qualifying child under 17)
@@ -50,7 +51,7 @@ Each item is a place where the form and its instructions do not settle a rule. E
 ## 8. A reissued certificate
 
 - Source: "multiply the interest that was scheduled to be paid on your original mortgage by the certificate rate on your original MCC. The result may limit your line 3" (`refinanced-mortgage::b01`).
-- Default: the fact states that original-certificate credit; line 3 is the smaller amount. Different rates in the year of refinancing need an attached statement (`refinanced-mortgage::b02`): lines 1 to 3 are unsupported.
+- Default: the fact states that original-certificate credit; line 3 is the smaller amount. Line 1 stays the interest paid, because the rule limits line 3. Different rates in the year of refinancing need an attached statement (`refinanced-mortgage::b02`): lines 1 to 3 are unsupported.
 - Changes dollars: yes, when the stated original credit is wrong.
 
 ## 9. A rate outside 10% to 50%
@@ -82,6 +83,18 @@ Each item is a place where the form and its instructions do not settle a rule. E
 
 - Lines 4 to 6 print blank when there is no carryforward. Part II prints blank when line 9 equals line 7 ("Complete only if line 9 is less than line 7"). Schedule 3 files whenever Form 8396 files, even when line 9 is 0.
 - Changes dollars: no.
+
+## Blind check
+
+A preparer filled 14 cases by hand from the blank form and instructions only. The fill matched the engine on every line, blank lines included. Its doubts are items 2, 3, 8 and 13, and two that the text settles:
+
+- A rate of exactly 20% has no $2,000 limit: the limit applies when the rate "is more than 20%" (`line-3::b01`).
+- The adoption credit (Schedule 3 line 6c) is not on worksheet line 2, which lists "Form 1040 or 1040-SR, line 19; Schedule 3 (Form 1040), lines 1 through 4, 6d, 6f, 6l, and 6m; and Form 5695, line 32" (`line-8-credit-limit-worksheet::b01`).
+
+## Second opinions
+
+- PolicyEngine-US 2.152.15 (commit b274cacc): it does not model Form 8396. Its list of nonrefundable credits in order (`parameters/gov/irs/credits/non_refundable.yaml`) has only a comment, "Adoption expense credit, home mortgage credit", after the child tax credit. The credits it lists before that comment are the credits on worksheet line 2: Schedule 3 lines 1 to 4, 6d, 6f and 6m, Form 5695 Part II and Form 1040 line 19. That agrees with the engine's line 2 and with leaving out the adoption credit. Nothing to compare for the rate, the $2,000 limit, the allocation or Part II.
+- IRS Direct File (IRS-Public/direct-file): a code search finds no Form 8396 or mortgage interest credit. Nothing to compare.
 
 ## Confidence by field group
 
