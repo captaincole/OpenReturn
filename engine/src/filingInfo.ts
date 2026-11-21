@@ -121,6 +121,8 @@ import {
 import type { ScheduleCa540NRFilingInfo } from "./state/ca/schedule-ca-540nr/filingInfo.js";
 import { resolveScheduleCa540NRInfo } from "./state/ca/schedule-ca-540nr/resolveInfo.js";
 import type { ScheduleCaFilingInfo } from "./state/ca/schedule-ca/filingInfo.js";
+import type { ScheduleDCaFilingInfo } from "./state/ca/schedule-d-ca/filingInfo.js";
+import { resolveScheduleDCaInfo } from "./state/ca/schedule-d-ca/resolveInfo.js";
 import type { SchedulePFilingInfo } from "./state/ca/schedule-p/filingInfo.js";
 import { resolveSchedulePInfo } from "./state/ca/schedule-p/resolveInfo.js";
 import type { ScheduleSFilingInfo } from "./state/ca/schedule-s/filingInfo.js";
@@ -217,6 +219,7 @@ export type FilingInfo = BaseFilingInfo &
   Form4562FilingInfo &
   Form8829FilingInfo &
   Form3885AFilingInfo &
+  ScheduleDCaFilingInfo &
   Form1116FilingInfo &
   Form2210FilingInfo &
   Form8283FilingInfo &
@@ -277,6 +280,7 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve4562Info,
   resolve8829Info,
   resolve3885AInfo,
+  resolveScheduleDCaInfo,
   resolve1116Info,
   resolve2210Info,
   resolve8283Info,
