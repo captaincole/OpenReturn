@@ -22,6 +22,8 @@ import type { Form5695FilingInfo } from "./federal/5695/filingInfo.js";
 import { resolve5695Info } from "./federal/5695/resolveInfo.js";
 import type { Form6251FilingInfo } from "./federal/6251/filingInfo.js";
 import { resolve6251Info } from "./federal/6251/resolveInfo.js";
+import type { Form6781FilingInfo } from "./federal/6781/filingInfo.js";
+import { resolve6781Info } from "./federal/6781/resolveInfo.js";
 import type { Form8283FilingInfo } from "./federal/8283/filingInfo.js";
 import { resolve8283Info } from "./federal/8283/resolveInfo.js";
 import type { Form8582FilingInfo } from "./federal/8582/filingInfo.js";
@@ -119,6 +121,8 @@ import {
 import type { ScheduleCa540NRFilingInfo } from "./state/ca/schedule-ca-540nr/filingInfo.js";
 import { resolveScheduleCa540NRInfo } from "./state/ca/schedule-ca-540nr/resolveInfo.js";
 import type { ScheduleCaFilingInfo } from "./state/ca/schedule-ca/filingInfo.js";
+import type { ScheduleDCaFilingInfo } from "./state/ca/schedule-d-ca/filingInfo.js";
+import { resolveScheduleDCaInfo } from "./state/ca/schedule-d-ca/resolveInfo.js";
 import type { SchedulePFilingInfo } from "./state/ca/schedule-p/filingInfo.js";
 import { resolveSchedulePInfo } from "./state/ca/schedule-p/resolveInfo.js";
 import type { ScheduleSFilingInfo } from "./state/ca/schedule-s/filingInfo.js";
@@ -215,11 +219,13 @@ export type FilingInfo = BaseFilingInfo &
   Form4562FilingInfo &
   Form8829FilingInfo &
   Form3885AFilingInfo &
+  ScheduleDCaFilingInfo &
   Form1116FilingInfo &
   Form2210FilingInfo &
   Form8283FilingInfo &
   Form8801FilingInfo &
   Form8814FilingInfo &
+  Form6781FilingInfo &
   FederalFormsWithNoRulesFilingInfo &
   Form540NRFilingInfo &
   ScheduleCa540NRFilingInfo &
@@ -274,11 +280,13 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve4562Info,
   resolve8829Info,
   resolve3885AInfo,
+  resolveScheduleDCaInfo,
   resolve1116Info,
   resolve2210Info,
   resolve8283Info,
   resolve8801Info,
   resolve8814Info,
+  resolve6781Info,
   ...FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
   resolve540NRInfo,
   resolveScheduleCa540NRInfo,

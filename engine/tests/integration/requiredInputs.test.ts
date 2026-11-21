@@ -36,6 +36,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "(last year's return is not read, #79); Schedule D files with it",
   ],
   [
+    /^capital_gains\.ca_loss_carryover$/,
+    "a prior-year answer Cade records when the California carryover differs from the federal " +
+      "one; Schedule D (540) files with it, and asks for it when it files and a federal carryover exists",
+  ],
+  [
     /^decisions\.scope\.must_file_8995(_a)?$/,
     "override; the QBI form follows the taxable income upper bound (federal/qbi/whichForm.ts)",
   ],
@@ -51,6 +56,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
   [
     /^casualty\.[^.]+$/,
     "each fact is a whole casualty event (Form 4684); whether one happened is Cade's question",
+  ],
+  [
+    /^charitable\.noncash_gift\.[^.]+$/,
+    "each fact is a whole noncash gift (Form 8283, Schedule A line 12); whether one was given is " +
+      "Cade's question",
   ],
   [
     /^dependent_care\.(provider|qualifying_person)\.[^.]+$/,

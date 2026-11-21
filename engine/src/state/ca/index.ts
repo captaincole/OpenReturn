@@ -37,6 +37,7 @@ import { register as registerScheduleCa540NR } from "./schedule-ca-540nr/binding
 import { register as registerScheduleCa } from "./schedule-ca/bindings.js";
 import { register as registerScheduleD1 } from "./schedule-d-1/bindings.js";
 import { register as registerScheduleD540NR } from "./schedule-d-540nr/bindings.js";
+import { register as registerScheduleDCa } from "./schedule-d-ca/bindings.js";
 import { register as registerScheduleG1 } from "./schedule-g-1/bindings.js";
 import { register as registerScheduleP540NR } from "./schedule-p-540nr/bindings.js";
 import { register as registerScheduleP } from "./schedule-p/bindings.js";
@@ -75,6 +76,7 @@ import scheduleCa540NRCatalogJson from "./schedule-ca-540nr/catalog.json";
 import scheduleCaCatalogJson from "./schedule-ca/catalog.json";
 import scheduleD1CatalogJson from "./schedule-d-1/catalog.json";
 import scheduleD540NRCatalogJson from "./schedule-d-540nr/catalog.json";
+import scheduleDCaCatalogJson from "./schedule-d-ca/catalog.json";
 import scheduleG1CatalogJson from "./schedule-g-1/catalog.json";
 import scheduleP540NRCatalogJson from "./schedule-p-540nr/catalog.json";
 import schedulePCatalogJson from "./schedule-p/catalog.json";
@@ -82,6 +84,7 @@ import scheduleSCatalogJson from "./schedule-s/catalog.json";
 import scheduleXCatalogJson from "./schedule-x/catalog.json";
 
 export const CA_CATALOGS = [
+  fixtureFileSchema.parse(scheduleDCaCatalogJson),
   fixtureFileSchema.parse(scheduleCaCatalogJson),
   fixtureFileSchema.parse(form540CatalogJson),
   fixtureFileSchema.parse(form5805CatalogJson),
@@ -122,12 +125,13 @@ export const CA_CATALOGS = [
 ];
 
 export const CA_FORMS: FormSpec[] = [
-  /* Catalog-only: no bindings yet. */
+  /* Schedule D (540) feeds Schedule CA line 7a columns B and C. */
   makeFormSpec({
     formId: "schedule-d-ca",
     shortId: "schedule-d-ca",
     displayName: "Schedule D (540)",
     relativeDir: "state/ca/schedule-d-ca",
+    register: registerScheduleDCa,
   }),
   /* FTB 3885A (one per activity) feeds Schedule CA lines 3 and 5. */
   makeFormSpec({

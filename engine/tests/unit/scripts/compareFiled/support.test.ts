@@ -15,9 +15,7 @@ const RESOLVERS = [
   ...globSync("src/**/resolveInfo.ts"),
 ];
 
-const MODELED = new Set(
-  jordanScenario.forms.map((form) => form.formId).filter((id) => id !== "schedule-d-ca"),
-);
+const MODELED = new Set(jordanScenario.forms.map((form) => form.formId));
 
 describe("checkSupport", () => {
   it("passes jordan", () => {

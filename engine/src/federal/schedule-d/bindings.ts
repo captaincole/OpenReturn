@@ -3,6 +3,7 @@
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
 import type { Form8949Box } from "../../facts/index.js";
 import { numberOrBlank, roundDollars, sum } from "../../money.js";
+import { unsupported, type Unsupported } from "../../types.js";
 import { withForm8814 } from "../8814/totals.js";
 import type { ScheduleDFilingInfo } from "./filingInfo.js";
 import { allowableLoss } from "./lines.js";
@@ -78,6 +79,43 @@ function qualifiedDividendsAnswer(form: FormAccessor<ScheduleD>): boolean | unde
   return (numberOrBlank(form["form-1040.line.3a"]) ?? 0) > 0;
 }
 
+/*
+ * MANUAL EDIT: lines 4 and 11 take Form 6781 Part I lines 8 and 9
+ * (irs-6781-form-2025::sec::line-8::b01, line-9::b01; no QOF deferral is modeled).
+ * Without Form 6781 each line keeps the reason it had before Form 6781 had rules.
+ * The other forms each line names have no Schedule D amount in the engine: while
+ * one files, the line stays unsupported.
+ */
+const OTHER_FORMS = {
+  line4: {
+    form6781Field: "form-6781.0.line.8_short_term_capital_gain_loss",
+    forms: ["form-4684", "form-6252", "form-8824"],
+    without6781:
+      "Requires data from Forms 6252, 4684, 6781, and 8824 — none of these forms are ingested in the current engine. No installment-sale, casualty/theft, straddle, or like-kind-exchange scenarios have been built yet.",
+  },
+  line11: {
+    form6781Field: "form-6781.0.line.9_long_term_capital_gain_loss",
+    forms: ["form-4684", "form-4797", "form-6252", "form-8824"],
+    without6781:
+      "Requires gain figures from Form 4797 Part I, Forms 2439, 6252, 4684, 6781, and 8824 — none of these forms are ingested or have fact categories in the current inventory.",
+  },
+} as const;
+
+function otherFormsLine(
+  form: FormAccessor<ScheduleD>,
+  info: ScheduleDFilingInfo,
+  line: (typeof OTHER_FORMS)[keyof typeof OTHER_FORMS],
+): number | Unsupported | undefined {
+  if (info.mustFile?.["form-6781"]?.value !== true) return unsupported(line.without6781);
+  const filing = line.forms.filter((formId) => info.mustFile?.[formId]?.value === true);
+  if (filing.length > 0) {
+    return unsupported(
+      `Form 6781 files, but the engine has no Schedule D amount from ${filing.join(", ")}, which this line also takes.`,
+    );
+  }
+  return numberOrBlank(form[line.form6781Field]);
+}
+
 export function register(): void {
   defineForm<ScheduleD, ScheduleDFilingInfo>("schedule-d", {
     bindings: {
@@ -130,6 +168,10 @@ export function register(): void {
           form["0.line.12_net_long_term_passthrough"],
           form["0.line.13_capital_gain_distributions"],
         ) - sum(form["0.line.14_long_term_loss_carryover"]),
+      "0.line.4_short_term_gain_other_forms": (form, info) =>
+        otherFormsLine(form, info, OTHER_FORMS.line4),
+      "0.line.11_long_term_gain_other_forms": (form, info) =>
+        otherFormsLine(form, info, OTHER_FORMS.line11),
       "1.line.16_combined_gain_loss": (form) =>
         sum(form["0.line.7_net_short_term_gain_loss"], form["0.line.15_net_long_term_gain_loss"]),
       /*
@@ -171,8 +213,6 @@ export function register(): void {
         "Requires summing column (g) adjustments only for Form 8949 Part I transactions with Box B or H checked; engine lacks per-box-type filtered aggregation.",
       "0.line.3_adjustments":
         "Requires summing column (g) adjustments only for Form 8949 Part I transactions with Box C or I checked; engine lacks per-box-type filtered aggregation.",
-      "0.line.4_short_term_gain_other_forms":
-        "Requires data from Forms 6252, 4684, 6781, and 8824 — none of these forms are ingested in the current engine. No installment-sale, casualty/theft, straddle, or like-kind-exchange scenarios have been built yet.",
       "0.line.5_net_short_term_passthrough":
         "K-1 passthrough income/loss from partnerships, S-corps, estates, and trusts — no K-1 fact ingestion path built yet. Bind when K-1 scenario is modeled.",
       "0.line.8a_proceeds":
@@ -183,8 +223,6 @@ export function register(): void {
         "Form 8949 Part II has only one aggregate totals row with no per-box (E/K) breakdown. The engine cannot isolate adjustments for box E or box K transactions until 8949 ingests per-box totals.",
       "0.line.10_adjustments":
         "Form 8949 Part II has only one aggregate totals row with no per-box (F/L) breakdown. The engine cannot isolate adjustments for box F or box L transactions until 8949 ingests per-box totals.",
-      "0.line.11_long_term_gain_other_forms":
-        "Requires gain figures from Form 4797 Part I, Forms 2439, 6252, 4684, 6781, and 8824 — none of these forms are ingested or have fact categories in the current inventory.",
       "0.line.12_net_long_term_passthrough":
         "Requires Schedule K-1 data from partnerships, S corporations, estates, and trusts — no K-1 fact category or ingestion path exists in the current inventory.",
       "1.line.17_both_gains_no":

@@ -4,6 +4,7 @@ import {
   businessesOnReturn,
   getGamblingWinningsFacts,
   getGovernmentPaymentsFacts,
+  getSection1256Facts,
   isDividendFactKey,
   isHsaDistributionFactKey,
   isInterestFactKey,
@@ -21,6 +22,7 @@ import {
   sumW2Box,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { line1Row } from "../6781/lines.js";
 import { form8814IncomeUpperBound } from "../8814/children.js";
 import { netReceipts, tentativeProfit } from "../schedule-c/lines.js";
 
@@ -51,6 +53,10 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
       sum(trade.proceeds, -(basis ?? 0), trade.adjustmentAmount),
     ),
   );
+  // Form 6781 Part I reaches line 7a through Schedule D lines 4 and 11.
+  const section1256Gain = sum(
+    ...getSection1256Facts(inputs.facts).map((fact) => line1Row(fact).amount),
+  );
   return sum(
     sumW2Box(inputs, "box1"),
     sumInvestmentBox(inputs, "box1", isInterestFactKey),
@@ -58,6 +64,7 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
     sumInvestmentBox(inputs, "box1a", isDividendFactKey),
     sumInvestmentBox(inputs, "box2a", isDividendFactKey),
     atLeast(0, tradeGain),
+    atLeast(0, section1256Gain),
     ...businesses.map(({ value }) =>
       atLeast(0, tentativeProfit(value) ?? sum(netReceipts(value), value.otherIncome)),
     ),
@@ -83,8 +90,9 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
  * Line 4b: every Schedule C business has line G "Yes", so its income is nonpassive.
  * Who Must File asks for investment income: an interest, dividend or sale fact
  * (category investment_income), a capital loss carried over from last year
- * (it reaches line 5a through 1040 line 7a), a child's income on Form 8814, or a
- * business without line G "Yes" (passive).
+ * (it reaches line 5a through 1040 line 7a), a child's income on Form 8814, a
+ * section 1256 contract (Form 6781, the same way), or a business without line G
+ * "Yes" (passive).
  * This gate is stricter than who-must-file::b01, which states the MAGI test
  * alone: without investment income the tax is $0, and the gate keeps a $0
  * Form 8960 off high-wage returns. A person decides whether to drop it.
@@ -108,6 +116,7 @@ export function investmentSignals(
     inputs.facts.some((fact) => fact.category === "investment_income") ||
     form8814IncomeUpperBound(inputs) > 0 ||
     carryover ||
+    getSection1256Facts(inputs.facts).length > 0 ||
     (businesses.length > 0 && !scheduleCNonpassive);
   return { scheduleCNonpassive, hasInvestment };
 }
