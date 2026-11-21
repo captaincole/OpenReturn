@@ -13,13 +13,11 @@ import { FORMS, registerAllForms } from "../../src/registry.js";
 import { catalogPath, catalogTaxYear } from "../../tests/helpers/formPaths.js";
 import { loadScenarios } from "../../tests/scenarios/index.js";
 import type { Scenario } from "../../tests/types.js";
-import californiaForms from "../formLists/california-2025.json";
-import federalForms from "../formLists/federal-2025.json";
+import { FORM_LISTS } from "../formLists/index.js";
 import {
   formsOnNoList,
   renderFormListPage,
   summarizeFormList,
-  type FormList,
   type FormListSummary,
 } from "./formLists.js";
 import { updateReadme } from "./readme.js";
@@ -35,7 +33,6 @@ const SUMMARY_PATH = resolve(ENGINE_ROOT, "coverage/coverage-summary.json");
 const REPORT_PATH = resolve(ENGINE_ROOT, "../docs/coverage.md");
 const README_PATH = resolve(ENGINE_ROOT, "../README.md");
 const FORM_LIST_PAGE_PATH = resolve(ENGINE_ROOT, "../docs/individual-forms.md");
-const FORM_LISTS: FormList[] = [federalForms, californiaForms];
 
 function formListSummaries(engineForms: FormInput[]): FormListSummary[] {
   const unlisted = formsOnNoList(FORM_LISTS, engineForms);

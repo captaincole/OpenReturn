@@ -15,6 +15,7 @@ import { catalogPath, catalogTaxYear } from "../../tests/helpers/formPaths.js";
 import { loadScenarios } from "../../tests/scenarios/index.js";
 import type { Scenario } from "../../tests/types.js";
 import { jurisdictionOf } from "../coverage/report.js";
+import { FORM_LISTS, formNameKey, tier1Folders, tier1Lacking } from "../formLists/index.js";
 import {
   buildFormGraph,
   type CodeRead,
@@ -32,11 +33,13 @@ const REPORT_PATH = resolve(ENGINE_ROOT, "../docs/form-graph.md");
 const JSON_PATH = resolve(ENGINE_ROOT, "../web/data/form-graph.json");
 
 function formInputs(catalog: Catalog): FormInput[] {
+  const tier1 = tier1Folders(FORM_LISTS);
   return FORMS.map((spec) => ({
     formId: spec.formId,
     displayName: spec.displayName,
     jurisdiction: jurisdictionOf(spec.relativeDir, catalogTaxYear(spec)).name,
     ...sectionOf(spec.formId),
+    tier1: tier1.includes(spec.relativeDir),
     fields: catalog.getFields(spec.formId).map((field) => ({
       fieldId: field.fieldId,
       label: field.label,
@@ -91,14 +94,30 @@ function missingFormInputs(forms: FormInput[]): MissingFormInput[] {
   return MISSING_FORMS.map((form) => {
     const formId = missingFormId(form);
     if (have.has(formId)) throw new Error(`missingForms.ts lists ${form.name}: the engine has it.`);
+    const tier1Keys = tier1Lacking(FORM_LISTS, form.jurisdiction).map((listed) =>
+      formNameKey(listed.name),
+    );
     return {
       formId,
       displayName: form.name,
       about: form.about,
       jurisdiction: jurisdictionOf(form.jurisdiction, taxYear).name,
       section: form.section,
+      tier1: tier1Keys.includes(formNameKey(form.name)),
       names: namesOf(form),
     };
+  });
+}
+
+/* A tier 1 form that the engine lacks must be a node, so missingForms.ts must list it. */
+function tier1FormsNotListed(): string[] {
+  return FORM_LISTS.flatMap((list) => {
+    const listed = MISSING_FORMS.filter((form) => form.jurisdiction === list.jurisdiction).map(
+      (form) => formNameKey(form.name),
+    );
+    return tier1Lacking(FORM_LISTS, list.jurisdiction)
+      .filter((form) => !listed.includes(formNameKey(form.name)))
+      .map((form) => form.name);
   });
 }
 
@@ -119,6 +138,10 @@ function graphJson(graph: FormGraph): string {
 
 async function main() {
   registerAllForms();
+  const notListed = tier1FormsNotListed();
+  if (notListed.length > 0) {
+    throw new Error(`Add these tier 1 forms to missingForms.ts: ${notListed.join(", ")}.`);
+  }
   /* Each form's own catalog.json: a form with no code yet is not in the engine's built catalog. */
   const catalog = await loadFromFixtures(FORMS.map(catalogPath));
   const forms = formInputs(catalog);

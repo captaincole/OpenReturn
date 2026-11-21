@@ -2,33 +2,11 @@
  * Pure: the IRS and FTB lists of the forms that an individual return can hold, and
  * the engine's forms, in; the README table and docs/individual-forms.md out.
  *
- * The lists are in scripts/formLists. The names, titles and maximums are the
- * publisher's. `short` (the form's folder in the engine) and `tier1` (a form that
- * our target user needs) are ours, kept by hand.
+ * The lists are in scripts/formLists.
  */
 
+import type { FormList, ListedForm } from "../formLists/index.js";
 import { jurisdictionOf, table, type FormInput } from "./report.js";
-
-export interface ListedForm {
-  name: string;
-  title?: string;
-  /* The most copies of the form on one return, as the publisher writes it. */
-  maxPerReturn?: string;
-  short?: string;
-  tier1?: boolean;
-}
-
-export interface FormList {
-  list: string;
-  publisher: string;
-  taxYear: number;
-  sourceUrl: string;
-  /* The date on the publisher's list. */
-  sourceDate: string;
-  /* The folder under engine/src: "federal" or "state/ca". */
-  jurisdiction: string;
-  forms: ListedForm[];
-}
 
 export type FormState = "rules" | "no_rules" | "not_in_engine";
 

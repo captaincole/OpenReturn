@@ -5,8 +5,10 @@ import {
   STATE_LABELS,
   STATE_MEANINGS,
   addStates,
+  graphHref,
   jurisdictionId,
   splitByJurisdiction,
+  tier1Only,
   type FormGraph,
   type JurisdictionGraph,
 } from "@/lib/formGraph";
@@ -23,11 +25,12 @@ import { StateBar, StateDot } from "./components/StateBar";
 /* `npm run form-graph` writes the file; lib/formGraph.ts mirrors its shape. */
 const graph = graphData as unknown as FormGraph;
 
-const viewHref = (jurisdiction: string): string =>
-  `/library/graph?view=${jurisdictionId(jurisdiction)}`;
+const viewHref = (jurisdiction: string, tier1: boolean): string =>
+  graphHref({ view: jurisdictionId(jurisdiction), tier1 });
 
 /* The switch between the graphs: federal, or a state. */
-function JurisdictionToggle({ parts, shown }: { parts: JurisdictionGraph[]; shown: string }) {
+function JurisdictionToggle(props: { parts: JurisdictionGraph[]; shown: string; tier1: boolean }) {
+  const { parts, shown } = props;
   return (
     <nav
       aria-label="The forms to draw"
@@ -36,7 +39,7 @@ function JurisdictionToggle({ parts, shown }: { parts: JurisdictionGraph[]; show
       {parts.map((part) => (
         <Link
           key={part.jurisdiction}
-          href={viewHref(part.jurisdiction)}
+          href={viewHref(part.jurisdiction, props.tier1)}
           scroll={false}
           aria-current={part.jurisdiction === shown ? "page" : undefined}
           className={cn(
@@ -47,6 +50,38 @@ function JurisdictionToggle({ parts, shown }: { parts: JurisdictionGraph[]; show
           )}
         >
           {part.jurisdiction}
+        </Link>
+      ))}
+    </nav>
+  );
+}
+
+const TIER_CHOICES = [
+  { tier1: false, label: "All forms" },
+  { tier1: true, label: "Tier 1" },
+];
+
+/* The switch between every form and the forms that our target user needs. */
+function TierToggle({ jurisdiction, tier1 }: { jurisdiction: string; tier1: boolean }) {
+  return (
+    <nav
+      aria-label="All forms, or tier 1 only"
+      className="inline-flex rounded-lg border border-border-subtle p-0.5"
+    >
+      {TIER_CHOICES.map((choice) => (
+        <Link
+          key={choice.label}
+          href={viewHref(jurisdiction, choice.tier1)}
+          scroll={false}
+          aria-current={choice.tier1 === tier1 ? "page" : undefined}
+          className={cn(
+            "rounded-md px-3 py-1 text-[13px] transition-colors",
+            choice.tier1 === tier1
+              ? "bg-bg-panel text-ink-primary"
+              : "text-ink-secondary hover:text-ink-primary",
+          )}
+        >
+          {choice.label}
         </Link>
       ))}
     </nav>
@@ -74,16 +109,23 @@ function JurisdictionSection(props: {
   parts: JurisdictionGraph[];
   part: JurisdictionGraph;
   selected?: string;
+  tier1: boolean;
 }) {
-  const { part, selected } = props;
+  const { selected, tier1 } = props;
+  const part = tier1 ? tier1Only(props.part) : props.part;
   const { missing } = part;
-  const lacks = missing.length > 0 ? ` · ${missing.length} forms the engine lacks` : "";
+  const kind = tier1 ? "tier 1 forms" : "forms";
+  const lacks = missing.length > 0 ? ` · ${missing.length} ${kind} the engine lacks` : "";
   return (
     <div id="form-graph" className="scroll-mt-6 space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <JurisdictionToggle parts={props.parts} shown={part.jurisdiction} />
+        <div className="flex flex-wrap items-center gap-3">
+          <JurisdictionToggle parts={props.parts} shown={part.jurisdiction} tier1={tier1} />
+          <TierToggle jurisdiction={part.jurisdiction} tier1={tier1} />
+        </div>
         <span className="text-[12px] text-ink-muted">
-          {part.forms.length} forms{lacks}
+          {part.forms.length} {kind}
+          {lacks}
         </span>
       </div>
       <div>
@@ -91,6 +133,7 @@ function JurisdictionSection(props: {
           forms={part.forms.map((form) => ({
             formId: form.formId,
             displayName: form.displayName,
+            href: graphHref({ form: form.formId, tier1 }),
             section: form.section,
             rank: form.rank,
             fieldCount: form.fieldCount,
@@ -104,6 +147,7 @@ function JurisdictionSection(props: {
             displayName: form.displayName,
             section: form.section,
             about: form.about,
+            href: graphHref({ form: form.formId, tier1 }),
             waitingCount: form.waitingCount,
             feeds: form.feeds,
             waitingForms: form.waiting.map((group) => group.formId),
@@ -111,11 +155,11 @@ function JurisdictionSection(props: {
           outside={
             part.outside && {
               ...part.outside,
-              href: viewHref(part.outside.jurisdiction),
+              href: viewHref(part.outside.jurisdiction, tier1),
             }
           }
           selected={selected}
-          clearHref={viewHref(part.jurisdiction)}
+          clearHref={viewHref(part.jurisdiction, tier1)}
         />
       </div>
     </div>
@@ -148,12 +192,16 @@ function Totals() {
 export default async function FormGraphPage({
   searchParams,
 }: {
-  searchParams: Promise<{ form?: string | string[]; view?: string | string[] }>;
+  searchParams: Promise<{
+    form?: string | string[];
+    view?: string | string[];
+    tier?: string | string[];
+  }>;
 }) {
   const session = await getUserSession();
   if (!session) redirect("/login");
   const profile = deriveProfile(session);
-  const { form: formParam, view } = await searchParams;
+  const { form: formParam, view, tier } = await searchParams;
   const selected = graph.forms.find((form) => form.formId === formParam);
   const selectedMissing = graph.missing.find((form) => form.formId === formParam);
   const parts = splitByJurisdiction(graph);
@@ -163,6 +211,8 @@ export default async function FormGraphPage({
     typeof view === "string" ? view : undefined,
   );
   const selectedId = selected?.formId ?? selectedMissing?.formId;
+  /* A selected form that is not tier 1 shows in the graph of all forms. */
+  const tier1 = tier === "1" && ((selected ?? selectedMissing)?.tier1 ?? true);
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-bg-base text-ink-primary">
@@ -182,10 +232,12 @@ export default async function FormGraphPage({
           </header>
           <Totals />
           <Legend />
-          <JurisdictionSection parts={parts} part={part} selected={selectedId} />
-          {selected && <FormDetail graph={graph} form={selected} />}
-          {selectedMissing && <MissingFormDetail graph={graph} form={selectedMissing} />}
-          <MissingFormsTable graph={graph} />
+          <JurisdictionSection parts={parts} part={part} selected={selectedId} tier1={tier1} />
+          {selected && <FormDetail graph={graph} form={selected} tier1={tier1} />}
+          {selectedMissing && (
+            <MissingFormDetail graph={graph} form={selectedMissing} tier1={tier1} />
+          )}
+          <MissingFormsTable graph={graph} tier1={tier1} />
         </div>
       </main>
     </div>

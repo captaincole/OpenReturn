@@ -21,119 +21,119 @@ A form also depends on another form when both use the same input (Schedule D and
 
 The golden suite ran 25 scenarios.
 
-| Form | Jurisdiction | Scenarios | Fields | Verified | Locked | Not run | Unsupported | Reads forms | Feeds forms |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Form 8949 | Federal 2025 | 7 | 200 | 121 | 0 | 33 | 46 | 0 | 0 |
-| Schedule D | Federal 2025 | 8 | 53 | 26 | 0 | 6 | 21 | 1 | 6 |
-| Form 1040 | Federal 2025 | 25 | 199 | 106 | 1 | 11 | 81 | 17 | 21 |
-| Schedule A | Federal 2025 | 9 | 32 | 27 | 0 | 3 | 2 | 4 | 5 |
-| Schedule B | Federal 2025 | 7 | 72 | 13 | 0 | 54 | 5 | 0 | 1 |
-| Form 4562 | Federal 2025 | 1 | 240 | 19 | 0 | 69 | 152 | 0 | 0 |
-| Form 8829 | Federal 2025 | 1 | 58 | 23 | 0 | 28 | 7 | 0 | 0 |
-| Schedule C | Federal 2025 | 8 | 105 | 58 | 0 | 29 | 18 | 0 | 1 |
-| Schedule SE | Federal 2025 | 7 | 25 | 14 | 0 | 0 | 11 | 0 | 11 |
-| Form 8582 | Federal 2025 | 2 | 198 | 31 | 0 | 142 | 25 | 2 | 1 |
-| Schedule E | Federal 2025 | 3 | 176 | 40 | 0 | 55 | 81 | 1 | 7 |
-| Schedule 1 | Federal 2025 | 14 | 72 | 35 | 0 | 0 | 37 | 4 | 10 |
-| Schedule 1-A | Federal 2025 | 3 | 54 | 13 | 0 | 1 | 40 | 1 | 2 |
-| Schedule 2 | Federal 2025 | 13 | 62 | 9 | 1 | 4 | 48 | 7 | 3 |
-| Schedule 3 | Federal 2025 | 4 | 37 | 6 | 1 | 0 | 30 | 3 | 6 |
-| Form 2441 | Federal 2025 | 2 | 72 | 53 | 0 | 19 | 0 | 4 | 2 |
-| Schedule R | Federal 2025 | 2 | 27 | 18 | 0 | 9 | 0 | 2 | 1 |
-| Schedule H | Federal 2025 | 1 | 72 | 0 | 15 | 4 | 53 | 0 | 2 |
-| Form 5695 | Federal 2025 | 1 | 167 | 0 | 54 | 37 | 76 | 2 | 1 |
-| Form 8606 | Federal 2025 | 2 | 45 | 26 | 0 | 4 | 15 | 2 | 1 |
-| Form 8889 | Federal 2025 | 3 | 27 | 18 | 0 | 1 | 8 | 0 | 3 |
-| Form 4952 | Federal 2025 | 5 | 17 | 17 | 0 | 0 | 0 | 2 | 4 |
-| Schedule 8812 | Federal 2025 | 11 | 40 | 35 | 0 | 2 | 3 | 7 | 1 |
-| Form 8959 | Federal 2025 | 8 | 26 | 19 | 0 | 3 | 4 | 1 | 3 |
-| Form 8960 | Federal 2025 | 10 | 38 | 20 | 0 | 0 | 18 | 4 | 1 |
-| Form 8995-A | Federal 2025 | 3 | 94 | 54 | 0 | 27 | 13 | 4 | 1 |
-| Form 8995 | Federal 2025 | 7 | 33 | 26 | 0 | 5 | 2 | 4 | 1 |
-| Form 6251 | Federal 2025 | 3 | 62 | 38 | 0 | 7 | 17 | 7 | 1 |
-| Schedule C (Form 8995-A) | Federal 2025 | 1 | 19 | 13 | 0 | 5 | 1 | 3 | 1 |
-| Form 8962 | Federal 2025 | 1 | 141 | 20 | 0 | 121 | 0 | 1 | 1 |
-| Form 4684 | Federal 2025 | 1 | 162 | 23 | 0 | 39 | 100 | 1 | 1 |
-| Schedule EIC | Federal 2025 | 5 | 38 | 32 | 0 | 6 | 0 | 3 | 0 |
-| Form 1116 | Federal 2025 | 0 | 118 | 0 | 0 | 0 | 118 | 0 | 0 |
-| Form 2210 | Federal 2025 | 0 | 167 | 0 | 0 | 0 | 167 | 0 | 0 |
-| Form 8283 | Federal 2025 | 0 | 117 | 0 | 0 | 0 | 117 | 0 | 0 |
-| Form 8801 | Federal 2025 | 0 | 57 | 0 | 0 | 0 | 57 | 0 | 0 |
-| Form 8814 | Federal 2025 | 0 | 24 | 0 | 0 | 0 | 24 | 0 | 0 |
-| Schedule F | Federal 2025 | 0 | 89 | 0 | 0 | 0 | 89 | 0 | 0 |
-| Form 461 | Federal 2025 | 0 | 16 | 0 | 0 | 0 | 16 | 0 | 0 |
-| Form 965-A | Federal 2025 | 0 | 391 | 0 | 0 | 0 | 391 | 0 | 0 |
-| Form 2106 | Federal 2025 | 0 | 82 | 0 | 0 | 0 | 82 | 0 | 0 |
-| Form 2555 | Federal 2025 | 0 | 160 | 0 | 0 | 0 | 160 | 0 | 0 |
-| Form 3800 | Federal 2025 | 0 | 1635 | 0 | 0 | 0 | 1635 | 0 | 0 |
-| Form 3903 | Federal 2025 | 0 | 10 | 0 | 0 | 0 | 10 | 0 | 0 |
-| Form 4136 | Federal 2025 | 0 | 276 | 0 | 0 | 0 | 276 | 0 | 0 |
-| Form 4137 | Federal 2025 | 0 | 33 | 0 | 0 | 0 | 33 | 0 | 0 |
-| Form 4255 | Federal 2025 | 0 | 483 | 0 | 0 | 0 | 483 | 0 | 0 |
-| Form 4563 | Federal 2025 | 0 | 45 | 0 | 0 | 0 | 45 | 0 | 0 |
-| Form 4797 | Federal 2025 | 0 | 182 | 0 | 0 | 0 | 182 | 0 | 0 |
-| Form 4835 | Federal 2025 | 0 | 62 | 0 | 0 | 0 | 62 | 0 | 0 |
-| Form 4970 | Federal 2025 | 0 | 63 | 0 | 0 | 0 | 63 | 0 | 0 |
-| Form 4972 | Federal 2025 | 0 | 58 | 0 | 0 | 0 | 58 | 0 | 0 |
-| Form 5329 | Federal 2025 | 0 | 75 | 0 | 0 | 0 | 75 | 0 | 0 |
-| Form 5471 | Federal 2025 | 0 | 436 | 0 | 0 | 0 | 436 | 0 | 0 |
-| Form 6198 | Federal 2025 | 0 | 34 | 0 | 0 | 0 | 34 | 0 | 0 |
-| Form 6252 | Federal 2025 | 0 | 49 | 0 | 0 | 0 | 49 | 0 | 0 |
-| Form 8396 | Federal 2025 | 0 | 26 | 0 | 0 | 0 | 26 | 0 | 0 |
-| Form 8611 | Federal 2025 | 0 | 37 | 0 | 0 | 0 | 37 | 0 | 0 |
-| Form 8615 | Federal 2025 | 0 | 32 | 0 | 0 | 0 | 32 | 0 | 0 |
-| Form 8621 | Federal 2025 | 0 | 151 | 0 | 0 | 0 | 151 | 0 | 0 |
-| Form 8697 | Federal 2025 | 0 | 98 | 0 | 0 | 0 | 98 | 0 | 0 |
-| Form 8815 | Federal 2025 | 0 | 39 | 0 | 0 | 0 | 39 | 0 | 0 |
-| Form 8828 | Federal 2025 | 0 | 33 | 0 | 0 | 0 | 33 | 0 | 0 |
-| Form 8834 | Federal 2025 | 0 | 11 | 0 | 0 | 0 | 11 | 0 | 0 |
-| Form 8839 | Federal 2025 | 0 | 100 | 0 | 0 | 0 | 100 | 0 | 0 |
-| Form 8853 | Federal 2025 | 0 | 38 | 0 | 0 | 0 | 38 | 0 | 0 |
-| Form 8859 | Federal 2025 | 0 | 9 | 0 | 0 | 0 | 9 | 0 | 0 |
-| Form 8863 | Federal 2025 | 0 | 77 | 0 | 0 | 0 | 77 | 0 | 0 |
-| Form 8880 | Federal 2025 | 0 | 23 | 0 | 0 | 0 | 23 | 0 | 0 |
-| Form 8888 | Federal 2025 | 0 | 19 | 0 | 0 | 0 | 19 | 0 | 0 |
-| Form 8911 | Federal 2025 | 0 | 15 | 0 | 0 | 0 | 15 | 0 | 0 |
-| Form 8912 | Federal 2025 | 0 | 218 | 0 | 0 | 0 | 218 | 0 | 0 |
-| Form 8915-F | Federal 2025 | 0 | 95 | 0 | 0 | 0 | 95 | 0 | 0 |
-| Form 8919 | Federal 2025 | 0 | 39 | 0 | 0 | 0 | 39 | 0 | 0 |
-| Form 8933 | Federal 2025 | 0 | 141 | 0 | 0 | 0 | 141 | 0 | 0 |
-| Form 8936 | Federal 2025 | 0 | 31 | 0 | 0 | 0 | 31 | 0 | 0 |
-| Form 8938 | Federal 2025 | 0 | 131 | 0 | 0 | 0 | 131 | 0 | 0 |
-| Form 8978 | Federal 2025 | 0 | 91 | 0 | 0 | 0 | 91 | 0 | 0 |
-| Form 8992 | Federal 2025 | 0 | 14 | 0 | 0 | 0 | 14 | 0 | 0 |
-| Schedule D (540) | California 2025 | 1 | 125 | 0 | 0 | 0 | 125 | 0 | 0 |
-| FTB 3885A | California 2025 | 1 | 65 | 14 | 0 | 51 | 0 | 0 | 0 |
-| Schedule CA (540) | California 2025 | 10 | 253 | 98 | 0 | 20 | 135 | 5 | 3 |
-| FTB 3526 | California 2025 | 2 | 17 | 17 | 0 | 0 | 0 | 5 | 2 |
-| FTB 3805P | California 2025 | 2 | 27 | 11 | 0 | 2 | 14 | 0 | 1 |
-| FTB 3514 | California 2025 | 4 | 94 | 51 | 0 | 43 | 0 | 2 | 0 |
-| Form 540 | California 2025 | 14 | 169 | 79 | 0 | 6 | 84 | 6 | 2 |
-| Schedule P (540) | California 2025 | 3 | 131 | 21 | 0 | 5 | 105 | 3 | 1 |
-| FTB 5805 | California 2025 | 1 | 111 | 55 | 0 | 0 | 56 | 1 | 1 |
-| FTB 3532 | California 2025 | 2 | 16 | 10 | 0 | 6 | 0 | 0 | 0 |
-| Form 540NR | California 2025 | 0 | 169 | 0 | 0 | 0 | 169 | 0 | 0 |
-| Schedule CA (540NR) | California 2025 | 0 | 415 | 0 | 0 | 0 | 415 | 0 | 0 |
-| Schedule S | California 2025 | 0 | 25 | 0 | 0 | 0 | 25 | 0 | 0 |
-| FTB 3801 | California 2025 | 0 | 337 | 0 | 0 | 0 | 337 | 0 | 0 |
-| FTB 3510 | California 2025 | 0 | 40 | 0 | 0 | 0 | 40 | 0 | 0 |
-| FTB 3803 | California 2025 | 0 | 15 | 0 | 0 | 0 | 15 | 0 | 0 |
-| Schedule G-1 | California 2025 | 0 | 30 | 0 | 0 | 0 | 30 | 0 | 0 |
-| Schedule X | California 2025 | 0 | 28 | 0 | 0 | 0 | 28 | 0 | 0 |
-| FTB 3461 | California 2025 | 0 | 19 | 0 | 0 | 0 | 19 | 0 | 0 |
-| FTB 3506 | California 2025 | 0 | 95 | 0 | 0 | 0 | 95 | 0 | 0 |
-| FTB 3507 | California 2025 | 0 | 13 | 0 | 0 | 0 | 13 | 0 | 0 |
-| FTB 3541 | California 2025 | 0 | 68 | 0 | 0 | 0 | 68 | 0 | 0 |
-| FTB 3800 | California 2025 | 0 | 24 | 0 | 0 | 0 | 24 | 0 | 0 |
-| FTB 3804-CR | California 2025 | 0 | 39 | 0 | 0 | 0 | 39 | 0 | 0 |
-| FTB 3805V | California 2025 | 0 | 222 | 0 | 0 | 0 | 222 | 0 | 0 |
-| FTB 3805Z | California 2025 | 0 | 54 | 0 | 0 | 0 | 54 | 0 | 0 |
-| FTB 3807 | California 2025 | 0 | 54 | 0 | 0 | 0 | 54 | 0 | 0 |
-| FTB 3809 | California 2025 | 0 | 55 | 0 | 0 | 0 | 55 | 0 | 0 |
-| FTB 3853 | California 2025 | 0 | 448 | 0 | 0 | 0 | 448 | 0 | 0 |
-| FTB 3913 | California 2025 | 0 | 9 | 0 | 0 | 0 | 9 | 0 | 0 |
-| FTB 5805F | California 2025 | 0 | 21 | 0 | 0 | 0 | 21 | 0 | 0 |
-| FTB 5870A | California 2025 | 0 | 225 | 0 | 0 | 0 | 225 | 0 | 0 |
+| Form | Jurisdiction | Tier 1 | Scenarios | Fields | Verified | Locked | Not run | Unsupported | Reads forms | Feeds forms |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Form 8949 | Federal 2025 | Yes | 7 | 200 | 121 | 0 | 33 | 46 | 0 | 0 |
+| Schedule D | Federal 2025 | Yes | 8 | 53 | 26 | 0 | 6 | 21 | 1 | 6 |
+| Form 1040 | Federal 2025 | Yes | 25 | 199 | 106 | 1 | 11 | 81 | 17 | 21 |
+| Schedule A | Federal 2025 | Yes | 9 | 32 | 27 | 0 | 3 | 2 | 4 | 5 |
+| Schedule B | Federal 2025 | Yes | 7 | 72 | 13 | 0 | 54 | 5 | 0 | 1 |
+| Form 4562 | Federal 2025 | Yes | 1 | 240 | 19 | 0 | 69 | 152 | 0 | 0 |
+| Form 8829 | Federal 2025 |  | 1 | 58 | 23 | 0 | 28 | 7 | 0 | 0 |
+| Schedule C | Federal 2025 | Yes | 8 | 105 | 58 | 0 | 29 | 18 | 0 | 1 |
+| Schedule SE | Federal 2025 | Yes | 7 | 25 | 14 | 0 | 0 | 11 | 0 | 11 |
+| Form 8582 | Federal 2025 | Yes | 2 | 198 | 31 | 0 | 142 | 25 | 2 | 1 |
+| Schedule E | Federal 2025 | Yes | 3 | 176 | 40 | 0 | 55 | 81 | 1 | 7 |
+| Schedule 1 | Federal 2025 | Yes | 14 | 72 | 35 | 0 | 0 | 37 | 4 | 10 |
+| Schedule 1-A | Federal 2025 | Yes | 3 | 54 | 13 | 0 | 1 | 40 | 1 | 2 |
+| Schedule 2 | Federal 2025 | Yes | 13 | 62 | 9 | 1 | 4 | 48 | 7 | 3 |
+| Schedule 3 | Federal 2025 | Yes | 4 | 37 | 6 | 1 | 0 | 30 | 3 | 6 |
+| Form 2441 | Federal 2025 | Yes | 2 | 72 | 53 | 0 | 19 | 0 | 4 | 2 |
+| Schedule R | Federal 2025 |  | 2 | 27 | 18 | 0 | 9 | 0 | 2 | 1 |
+| Schedule H | Federal 2025 | Yes | 1 | 72 | 0 | 15 | 4 | 53 | 0 | 2 |
+| Form 5695 | Federal 2025 | Yes | 1 | 167 | 0 | 54 | 37 | 76 | 2 | 1 |
+| Form 8606 | Federal 2025 | Yes | 2 | 45 | 26 | 0 | 4 | 15 | 2 | 1 |
+| Form 8889 | Federal 2025 | Yes | 3 | 27 | 18 | 0 | 1 | 8 | 0 | 3 |
+| Form 4952 | Federal 2025 | Yes | 5 | 17 | 17 | 0 | 0 | 0 | 2 | 4 |
+| Schedule 8812 | Federal 2025 | Yes | 11 | 40 | 35 | 0 | 2 | 3 | 7 | 1 |
+| Form 8959 | Federal 2025 | Yes | 8 | 26 | 19 | 0 | 3 | 4 | 1 | 3 |
+| Form 8960 | Federal 2025 | Yes | 10 | 38 | 20 | 0 | 0 | 18 | 4 | 1 |
+| Form 8995-A | Federal 2025 | Yes | 3 | 94 | 54 | 0 | 27 | 13 | 4 | 1 |
+| Form 8995 | Federal 2025 | Yes | 7 | 33 | 26 | 0 | 5 | 2 | 4 | 1 |
+| Form 6251 | Federal 2025 | Yes | 3 | 62 | 38 | 0 | 7 | 17 | 7 | 1 |
+| Schedule C (Form 8995-A) | Federal 2025 |  | 1 | 19 | 13 | 0 | 5 | 1 | 3 | 1 |
+| Form 8962 | Federal 2025 |  | 1 | 141 | 20 | 0 | 121 | 0 | 1 | 1 |
+| Form 4684 | Federal 2025 |  | 1 | 162 | 23 | 0 | 39 | 100 | 1 | 1 |
+| Schedule EIC | Federal 2025 |  | 5 | 38 | 32 | 0 | 6 | 0 | 3 | 0 |
+| Form 1116 | Federal 2025 | Yes | 0 | 118 | 0 | 0 | 0 | 118 | 0 | 0 |
+| Form 2210 | Federal 2025 | Yes | 0 | 167 | 0 | 0 | 0 | 167 | 0 | 0 |
+| Form 8283 | Federal 2025 | Yes | 0 | 117 | 0 | 0 | 0 | 117 | 0 | 0 |
+| Form 8801 | Federal 2025 | Yes | 0 | 57 | 0 | 0 | 0 | 57 | 0 | 0 |
+| Form 8814 | Federal 2025 | Yes | 0 | 24 | 0 | 0 | 0 | 24 | 0 | 0 |
+| Schedule F | Federal 2025 |  | 0 | 89 | 0 | 0 | 0 | 89 | 0 | 0 |
+| Form 461 | Federal 2025 | Yes | 0 | 16 | 0 | 0 | 0 | 16 | 0 | 0 |
+| Form 965-A | Federal 2025 |  | 0 | 391 | 0 | 0 | 0 | 391 | 0 | 0 |
+| Form 2106 | Federal 2025 |  | 0 | 82 | 0 | 0 | 0 | 82 | 0 | 0 |
+| Form 2555 | Federal 2025 |  | 0 | 160 | 0 | 0 | 0 | 160 | 0 | 0 |
+| Form 3800 | Federal 2025 | Yes | 0 | 1635 | 0 | 0 | 0 | 1635 | 0 | 0 |
+| Form 3903 | Federal 2025 |  | 0 | 10 | 0 | 0 | 0 | 10 | 0 | 0 |
+| Form 4136 | Federal 2025 |  | 0 | 276 | 0 | 0 | 0 | 276 | 0 | 0 |
+| Form 4137 | Federal 2025 |  | 0 | 33 | 0 | 0 | 0 | 33 | 0 | 0 |
+| Form 4255 | Federal 2025 |  | 0 | 483 | 0 | 0 | 0 | 483 | 0 | 0 |
+| Form 4563 | Federal 2025 |  | 0 | 45 | 0 | 0 | 0 | 45 | 0 | 0 |
+| Form 4797 | Federal 2025 | Yes | 0 | 182 | 0 | 0 | 0 | 182 | 0 | 0 |
+| Form 4835 | Federal 2025 |  | 0 | 62 | 0 | 0 | 0 | 62 | 0 | 0 |
+| Form 4970 | Federal 2025 |  | 0 | 63 | 0 | 0 | 0 | 63 | 0 | 0 |
+| Form 4972 | Federal 2025 |  | 0 | 58 | 0 | 0 | 0 | 58 | 0 | 0 |
+| Form 5329 | Federal 2025 | Yes | 0 | 75 | 0 | 0 | 0 | 75 | 0 | 0 |
+| Form 5471 | Federal 2025 |  | 0 | 436 | 0 | 0 | 0 | 436 | 0 | 0 |
+| Form 6198 | Federal 2025 | Yes | 0 | 34 | 0 | 0 | 0 | 34 | 0 | 0 |
+| Form 6252 | Federal 2025 | Yes | 0 | 49 | 0 | 0 | 0 | 49 | 0 | 0 |
+| Form 8396 | Federal 2025 |  | 0 | 26 | 0 | 0 | 0 | 26 | 0 | 0 |
+| Form 8611 | Federal 2025 |  | 0 | 37 | 0 | 0 | 0 | 37 | 0 | 0 |
+| Form 8615 | Federal 2025 |  | 0 | 32 | 0 | 0 | 0 | 32 | 0 | 0 |
+| Form 8621 | Federal 2025 | Yes | 0 | 151 | 0 | 0 | 0 | 151 | 0 | 0 |
+| Form 8697 | Federal 2025 |  | 0 | 98 | 0 | 0 | 0 | 98 | 0 | 0 |
+| Form 8815 | Federal 2025 |  | 0 | 39 | 0 | 0 | 0 | 39 | 0 | 0 |
+| Form 8828 | Federal 2025 |  | 0 | 33 | 0 | 0 | 0 | 33 | 0 | 0 |
+| Form 8834 | Federal 2025 |  | 0 | 11 | 0 | 0 | 0 | 11 | 0 | 0 |
+| Form 8839 | Federal 2025 |  | 0 | 100 | 0 | 0 | 0 | 100 | 0 | 0 |
+| Form 8853 | Federal 2025 |  | 0 | 38 | 0 | 0 | 0 | 38 | 0 | 0 |
+| Form 8859 | Federal 2025 |  | 0 | 9 | 0 | 0 | 0 | 9 | 0 | 0 |
+| Form 8863 | Federal 2025 |  | 0 | 77 | 0 | 0 | 0 | 77 | 0 | 0 |
+| Form 8880 | Federal 2025 |  | 0 | 23 | 0 | 0 | 0 | 23 | 0 | 0 |
+| Form 8888 | Federal 2025 |  | 0 | 19 | 0 | 0 | 0 | 19 | 0 | 0 |
+| Form 8911 | Federal 2025 |  | 0 | 15 | 0 | 0 | 0 | 15 | 0 | 0 |
+| Form 8912 | Federal 2025 |  | 0 | 218 | 0 | 0 | 0 | 218 | 0 | 0 |
+| Form 8915-F | Federal 2025 |  | 0 | 95 | 0 | 0 | 0 | 95 | 0 | 0 |
+| Form 8919 | Federal 2025 |  | 0 | 39 | 0 | 0 | 0 | 39 | 0 | 0 |
+| Form 8933 | Federal 2025 |  | 0 | 141 | 0 | 0 | 0 | 141 | 0 | 0 |
+| Form 8936 | Federal 2025 |  | 0 | 31 | 0 | 0 | 0 | 31 | 0 | 0 |
+| Form 8938 | Federal 2025 | Yes | 0 | 131 | 0 | 0 | 0 | 131 | 0 | 0 |
+| Form 8978 | Federal 2025 |  | 0 | 91 | 0 | 0 | 0 | 91 | 0 | 0 |
+| Form 8992 | Federal 2025 |  | 0 | 14 | 0 | 0 | 0 | 14 | 0 | 0 |
+| Schedule D (540) | California 2025 | Yes | 1 | 125 | 0 | 0 | 0 | 125 | 0 | 0 |
+| FTB 3885A | California 2025 | Yes | 1 | 65 | 14 | 0 | 51 | 0 | 0 | 0 |
+| Schedule CA (540) | California 2025 | Yes | 10 | 253 | 98 | 0 | 20 | 135 | 5 | 3 |
+| FTB 3526 | California 2025 | Yes | 2 | 17 | 17 | 0 | 0 | 0 | 5 | 2 |
+| FTB 3805P | California 2025 | Yes | 2 | 27 | 11 | 0 | 2 | 14 | 0 | 1 |
+| FTB 3514 | California 2025 |  | 4 | 94 | 51 | 0 | 43 | 0 | 2 | 0 |
+| Form 540 | California 2025 | Yes | 14 | 169 | 79 | 0 | 6 | 84 | 6 | 2 |
+| Schedule P (540) | California 2025 | Yes | 3 | 131 | 21 | 0 | 5 | 105 | 3 | 1 |
+| FTB 5805 | California 2025 | Yes | 1 | 111 | 55 | 0 | 0 | 56 | 1 | 1 |
+| FTB 3532 | California 2025 |  | 2 | 16 | 10 | 0 | 6 | 0 | 0 | 0 |
+| Form 540NR | California 2025 | Yes | 0 | 169 | 0 | 0 | 0 | 169 | 0 | 0 |
+| Schedule CA (540NR) | California 2025 | Yes | 0 | 415 | 0 | 0 | 0 | 415 | 0 | 0 |
+| Schedule S | California 2025 | Yes | 0 | 25 | 0 | 0 | 0 | 25 | 0 | 0 |
+| FTB 3801 | California 2025 | Yes | 0 | 337 | 0 | 0 | 0 | 337 | 0 | 0 |
+| FTB 3510 | California 2025 | Yes | 0 | 40 | 0 | 0 | 0 | 40 | 0 | 0 |
+| FTB 3803 | California 2025 | Yes | 0 | 15 | 0 | 0 | 0 | 15 | 0 | 0 |
+| Schedule G-1 | California 2025 |  | 0 | 30 | 0 | 0 | 0 | 30 | 0 | 0 |
+| Schedule X | California 2025 |  | 0 | 28 | 0 | 0 | 0 | 28 | 0 | 0 |
+| FTB 3461 | California 2025 | Yes | 0 | 19 | 0 | 0 | 0 | 19 | 0 | 0 |
+| FTB 3506 | California 2025 |  | 0 | 95 | 0 | 0 | 0 | 95 | 0 | 0 |
+| FTB 3507 | California 2025 |  | 0 | 13 | 0 | 0 | 0 | 13 | 0 | 0 |
+| FTB 3541 | California 2025 |  | 0 | 68 | 0 | 0 | 0 | 68 | 0 | 0 |
+| FTB 3800 | California 2025 |  | 0 | 24 | 0 | 0 | 0 | 24 | 0 | 0 |
+| FTB 3804-CR | California 2025 | Yes | 0 | 39 | 0 | 0 | 0 | 39 | 0 | 0 |
+| FTB 3805V | California 2025 |  | 0 | 222 | 0 | 0 | 0 | 222 | 0 | 0 |
+| FTB 3805Z | California 2025 |  | 0 | 54 | 0 | 0 | 0 | 54 | 0 | 0 |
+| FTB 3807 | California 2025 |  | 0 | 54 | 0 | 0 | 0 | 54 | 0 | 0 |
+| FTB 3809 | California 2025 |  | 0 | 55 | 0 | 0 | 0 | 55 | 0 | 0 |
+| FTB 3853 | California 2025 |  | 0 | 448 | 0 | 0 | 0 | 448 | 0 | 0 |
+| FTB 3913 | California 2025 |  | 0 | 9 | 0 | 0 | 0 | 9 | 0 | 0 |
+| FTB 5805F | California 2025 |  | 0 | 21 | 0 | 0 | 0 | 21 | 0 | 0 |
+| FTB 5870A | California 2025 |  | 0 | 225 | 0 | 0 | 0 | 225 | 0 | 0 |
 
 ## By form
 
@@ -1339,54 +1339,63 @@ For each form: the fields that are not verified and that other fields read, by t
 
 ## Forms the engine lacks
 
-A blank field names the form that it waits for, in its label or its reason. Each form here is on the list in `engine/scripts/formGraph/missingForms.ts`. **Fields that wait** is the count of blank fields that name the form. **Fields they feed** is the count of other fields that read those blank fields, directly or through other fields. The About column is a short description, not the form's official title.
+A blank field names the form that it waits for, in its label or its reason. Each form here is on the list in `engine/scripts/formGraph/missingForms.ts`: a form that a blank field names, or a tier 1 form. A tier 1 form is one that our target user needs; [Forms for an individual return](individual-forms.md) has the full list. **Fields that wait** is the count of blank fields that name the form. **Fields they feed** is the count of other fields that read those blank fields, directly or through other fields. The About column is a short description, not the form's official title.
 
-| Form | About | Jurisdiction | Fields that wait | Fields they feed | Forms that wait |
-| --- | --- | --- | --- | --- | --- |
-| Form 3468 | Investment credit | Federal 2025 | 227 | 0 | Form 3800, Form 4255 |
-| Form 8835 | Renewable electricity production credit | Federal 2025 | 57 | 0 | Form 3800, Form 4255 |
-| Form 7213 | Nuclear power production credit | Federal 2025 | 52 | 0 | Form 3800, Form 4255 |
-| Form 5884-A | Employee retention credit for employers affected by qualified disasters | Federal 2025 | 45 | 0 | Form 3800 |
-| Form 8881 | Credit for small employer pension plan startup costs and auto-enrollment | Federal 2025 | 45 | 0 | Form 3800 |
-| Form 7210 | Clean hydrogen production credit | Federal 2025 | 40 | 0 | Form 3800, Form 4255 |
-| Form 7211 | Clean electricity production credit | Federal 2025 | 40 | 0 | Form 3800, Form 4255 |
-| Form 7218 | Clean fuel production credit | Federal 2025 | 40 | 0 | Form 3800, Form 4255 |
-| Form 7207 | Advanced manufacturing production credit | Federal 2025 | 34 | 0 | Form 3800, Form 4255 |
-| Form 8864 | Biodiesel, renewable diesel, or sustainable aviation fuels credit | Federal 2025 | 32 | 0 | Form 3800 |
-| Form 6765 | Credit for increasing research activities | Federal 2025 | 30 | 0 | Form 3800 |
-| Form 8586 | Low-income housing credit | Federal 2025 | 25 | 0 | Form 3800, Form 8611 |
-| Form 5884 | Work opportunity credit | Federal 2025 | 24 | 0 | Form 3800 |
-| Form 6478 | Biofuel producer credit | Federal 2025 | 24 | 0 | Form 3800 |
-| Form 8846 | Credit for employer social security and Medicare taxes paid on certain employee tips | Federal 2025 | 24 | 0 | Form 3800 |
-| Form 8900 | Qualified railroad track maintenance credit | Federal 2025 | 24 | 0 | Form 3800 |
-| Form 8908 | Energy efficient home credit | Federal 2025 | 17 | 0 | Form 3800, Form 4255 |
-| Form 8820 | Orphan drug credit | Federal 2025 | 15 | 0 | Form 3800 |
-| Form 8826 | Disabled access credit | Federal 2025 | 15 | 0 | Form 3800 |
-| Form 8830 | Enhanced oil recovery credit | Federal 2025 | 15 | 0 | Form 3800 |
-| Form 8844 | Empowerment zone employment credit | Federal 2025 | 15 | 0 | Form 3800 |
-| Form 8874 | New markets credit | Federal 2025 | 15 | 0 | Form 3800 |
-| Form 8882 | Credit for employer-provided childcare facilities and services | Federal 2025 | 15 | 0 | Form 3800 |
-| Form 8896 | Low sulfur diesel fuel production credit | Federal 2025 | 15 | 0 | Form 3800 |
-| Form 8904 | Credit for oil and gas production from marginal wells | Federal 2025 | 15 | 0 | Form 3800 |
-| Form 8906 | Distilled spirits credit | Federal 2025 | 15 | 0 | Form 3800 |
-| Form 8932 | Credit for employer differential wage payments | Federal 2025 | 15 | 0 | Form 3800 |
-| Form 8941 | Credit for small employer health insurance premiums | Federal 2025 | 15 | 0 | Form 3800 |
-| Form 8994 | Employer credit for paid family and medical leave | Federal 2025 | 15 | 0 | Form 3800 |
-| Schedule J | Income averaging for farmers and fishermen | Federal 2025 | 10 | 0 | Form 4970, FTB 5870A, Form 8615 |
-| Form 5884-B | New hire retention credit | Federal 2025 | 9 | 0 | Form 3800 |
-| Form 8845 | Indian employment credit | Federal 2025 | 9 | 0 | Form 3800 |
-| Form 8847 | Credit for contributions to selected community development corporations | Federal 2025 | 9 | 0 | Form 3800 |
-| Form 8861 | Welfare-to-work credit | Federal 2025 | 9 | 0 | Form 3800 |
-| Form 8884 | New York Liberty Zone business employee credit | Federal 2025 | 9 | 0 | Form 3800 |
-| Form 8907 | Nonconventional source fuel credit | Federal 2025 | 9 | 0 | Form 3800 |
-| Form 8909 | Energy efficient appliance credit | Federal 2025 | 9 | 0 | Form 3800 |
-| Form 8910 | Alternative motor vehicle credit | Federal 2025 | 9 | 0 | Form 3800 |
-| Form 8923 | Mine rescue team training credit | Federal 2025 | 9 | 0 | Form 3800 |
-| Form 8931 | Agricultural chemicals security credit | Federal 2025 | 9 | 0 | Form 3800 |
-| Form 8942 | Qualifying therapeutic discovery project credit | Federal 2025 | 9 | 0 | Form 3800 |
-| Form 8609-A | Annual statement for the low-income housing credit | Federal 2025 | 4 | 0 | Form 8611 |
-| Form 7205 | Energy efficient commercial buildings deduction | Federal 2025 | 3 | 0 | Form 4255 |
-| Form 8824 | Like-kind exchanges | Federal 2025 | 2 | 0 | Form 4797 |
+| Form | About | Jurisdiction | Tier 1 | Fields that wait | Fields they feed | Forms that wait |
+| --- | --- | --- | --- | --- | --- | --- |
+| Form 3468 | Investment credit | Federal 2025 |  | 227 | 0 | Form 3800, Form 4255 |
+| Form 8835 | Renewable electricity production credit | Federal 2025 |  | 57 | 0 | Form 3800, Form 4255 |
+| Form 7213 | Nuclear power production credit | Federal 2025 |  | 52 | 0 | Form 3800, Form 4255 |
+| Form 5884-A | Employee retention credit for employers affected by qualified disasters | Federal 2025 |  | 45 | 0 | Form 3800 |
+| Form 8881 | Credit for small employer pension plan startup costs and auto-enrollment | Federal 2025 |  | 45 | 0 | Form 3800 |
+| Form 7210 | Clean hydrogen production credit | Federal 2025 |  | 40 | 0 | Form 3800, Form 4255 |
+| Form 7211 | Clean electricity production credit | Federal 2025 |  | 40 | 0 | Form 3800, Form 4255 |
+| Form 7218 | Clean fuel production credit | Federal 2025 |  | 40 | 0 | Form 3800, Form 4255 |
+| Form 7207 | Advanced manufacturing production credit | Federal 2025 |  | 34 | 0 | Form 3800, Form 4255 |
+| Form 8864 | Biodiesel, renewable diesel, or sustainable aviation fuels credit | Federal 2025 |  | 32 | 0 | Form 3800 |
+| Form 6765 | Credit for increasing research activities | Federal 2025 |  | 30 | 0 | Form 3800 |
+| Form 8586 | Low-income housing credit | Federal 2025 |  | 25 | 0 | Form 3800, Form 8611 |
+| Form 5884 | Work opportunity credit | Federal 2025 |  | 24 | 0 | Form 3800 |
+| Form 6478 | Biofuel producer credit | Federal 2025 |  | 24 | 0 | Form 3800 |
+| Form 8846 | Credit for employer social security and Medicare taxes paid on certain employee tips | Federal 2025 |  | 24 | 0 | Form 3800 |
+| Form 8900 | Qualified railroad track maintenance credit | Federal 2025 |  | 24 | 0 | Form 3800 |
+| Form 8908 | Energy efficient home credit | Federal 2025 |  | 17 | 0 | Form 3800, Form 4255 |
+| Form 8820 | Orphan drug credit | Federal 2025 |  | 15 | 0 | Form 3800 |
+| Form 8826 | Disabled access credit | Federal 2025 |  | 15 | 0 | Form 3800 |
+| Form 8830 | Enhanced oil recovery credit | Federal 2025 |  | 15 | 0 | Form 3800 |
+| Form 8844 | Empowerment zone employment credit | Federal 2025 |  | 15 | 0 | Form 3800 |
+| Form 8874 | New markets credit | Federal 2025 |  | 15 | 0 | Form 3800 |
+| Form 8882 | Credit for employer-provided childcare facilities and services | Federal 2025 |  | 15 | 0 | Form 3800 |
+| Form 8896 | Low sulfur diesel fuel production credit | Federal 2025 |  | 15 | 0 | Form 3800 |
+| Form 8904 | Credit for oil and gas production from marginal wells | Federal 2025 |  | 15 | 0 | Form 3800 |
+| Form 8906 | Distilled spirits credit | Federal 2025 |  | 15 | 0 | Form 3800 |
+| Form 8932 | Credit for employer differential wage payments | Federal 2025 |  | 15 | 0 | Form 3800 |
+| Form 8941 | Credit for small employer health insurance premiums | Federal 2025 |  | 15 | 0 | Form 3800 |
+| Form 8994 | Employer credit for paid family and medical leave | Federal 2025 |  | 15 | 0 | Form 3800 |
+| Schedule J | Income averaging for farmers and fishermen | Federal 2025 |  | 10 | 0 | Form 4970, FTB 5870A, Form 8615 |
+| Form 5884-B | New hire retention credit | Federal 2025 |  | 9 | 0 | Form 3800 |
+| Form 8845 | Indian employment credit | Federal 2025 |  | 9 | 0 | Form 3800 |
+| Form 8847 | Credit for contributions to selected community development corporations | Federal 2025 |  | 9 | 0 | Form 3800 |
+| Form 8861 | Welfare-to-work credit | Federal 2025 |  | 9 | 0 | Form 3800 |
+| Form 8884 | New York Liberty Zone business employee credit | Federal 2025 |  | 9 | 0 | Form 3800 |
+| Form 8907 | Nonconventional source fuel credit | Federal 2025 |  | 9 | 0 | Form 3800 |
+| Form 8909 | Energy efficient appliance credit | Federal 2025 |  | 9 | 0 | Form 3800 |
+| Form 8910 | Alternative motor vehicle credit | Federal 2025 |  | 9 | 0 | Form 3800 |
+| Form 8923 | Mine rescue team training credit | Federal 2025 |  | 9 | 0 | Form 3800 |
+| Form 8931 | Agricultural chemicals security credit | Federal 2025 |  | 9 | 0 | Form 3800 |
+| Form 8942 | Qualifying therapeutic discovery project credit | Federal 2025 |  | 9 | 0 | Form 3800 |
+| Schedule P (540NR) | California minimum tax and credit limits for a nonresident or part-year resident | California 2025 | Yes | 5 | 0 | FTB 3510 |
+| Form 8609-A | Annual statement for the low-income housing credit | Federal 2025 |  | 4 | 0 | Form 8611 |
+| Form 7205 | Energy efficient commercial buildings deduction | Federal 2025 |  | 3 | 0 | Form 4255 |
+| Form 8824 | Like-kind exchanges | Federal 2025 | Yes | 2 | 0 | Form 4797 |
+| Form 6781 | Gains and losses from section 1256 contracts and straddles | Federal 2025 | Yes | 0 | 0 | none |
+| Form 7203 | S corporation shareholder stock and debt basis limits | Federal 2025 | Yes | 0 | 0 | none |
+| Form 8582-CR | Passive activity credit limits | Federal 2025 | Yes | 0 | 0 | none |
+| FTB 3801-CR | California passive activity credit limits | California 2025 | Yes | 0 | 0 | none |
+| FTB 3805E | California installment sale income | California 2025 | Yes | 0 | 0 | none |
+| FTB 3840 | California like-kind exchanges | California 2025 | Yes | 0 | 0 | none |
+| Schedule D-1 | California sales of business property | California 2025 | Yes | 0 | 0 | none |
+| Schedule D (540NR) | California capital gain or loss for a nonresident or part-year resident | California 2025 | Yes | 0 | 0 | none |
 
 ### Names not classified
 

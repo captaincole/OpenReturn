@@ -1,5 +1,6 @@
 /*
- * The forms an individual attaches that the engine lacks. A blank field names the
+ * The forms an individual attaches that the engine lacks and that the form graph
+ * draws: a tier 1 form, or a form that a blank field names. A blank field names the
  * form it waits for in its label or its reason ("Education credits from Form 8863"),
  * and the form graph makes a node for each name on this list.
  *
@@ -27,7 +28,40 @@ const federal = (name: string, section: Section, about: string): MissingForm => 
   jurisdiction: "federal",
 });
 
+const california = (
+  name: string,
+  section: Section,
+  about: string,
+  aliases?: string[],
+): MissingForm => ({
+  name,
+  section,
+  about,
+  jurisdiction: "state/ca",
+  aliases,
+});
+
 export const MISSING_FORMS: MissingForm[] = [
+  /* Tier 1 forms (scripts/formLists) that the engine lacks. */
+  federal("Form 6781", "income", "Gains and losses from section 1256 contracts and straddles"),
+  federal("Form 7203", "income", "S corporation shareholder stock and debt basis limits"),
+  federal("Form 8582-CR", "credits", "Passive activity credit limits"),
+  california("FTB 3801-CR", "credits", "California passive activity credit limits", [
+    "Form 3801-CR",
+  ]),
+  california("FTB 3805E", "income", "California installment sale income", ["Form 3805E"]),
+  california("FTB 3840", "income", "California like-kind exchanges", ["Form 3840"]),
+  california("Schedule D-1", "income", "California sales of business property"),
+  california(
+    "Schedule D (540NR)",
+    "income",
+    "California capital gain or loss for a nonresident or part-year resident",
+  ),
+  california(
+    "Schedule P (540NR)",
+    "tax",
+    "California minimum tax and credit limits for a nonresident or part-year resident",
+  ),
   /* Named by a field of a form that has no rules yet. Most are the sources of the general business credit (Form 3800). */
   federal("Schedule J", "tax", "Income averaging for farmers and fishermen"),
   federal("Form 8824", "income", "Like-kind exchanges"),
