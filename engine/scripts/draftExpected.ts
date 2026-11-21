@@ -16,6 +16,13 @@ import { decisionsWithPreparerStyle } from "../tests/helpers/preparer.js";
 import { scenarioFolder } from "../tests/scenarios/index.js";
 import type { ExpectedResults, Scenario } from "../tests/types.js";
 
+/* tests/types.js from the scenario's folder: one level deeper for a synthetic scenario. */
+const typesImportPath = (name: string): string =>
+  `${scenarioFolder(name)
+    .split("/")
+    .map(() => "..")
+    .join("/")}/../types.js`;
+
 function draftedFields(scenario: Scenario): Record<string, Record<string, number>> {
   const evaluated = evaluateScenario({
     filing: { id: scenario.name, taxYear: scenario.taxYear },
@@ -84,7 +91,7 @@ function render(
     " * instructions or a filed return (scripts/compareFiled).",
     " */",
     "",
-    'import type { ExpectedResults } from "../../types.js";',
+    `import type { ExpectedResults } from "${typesImportPath(scenario.name)}";`,
     "",
     "const EXPECTED: Record<string, Partial<ExpectedResults>> = {",
   ];
