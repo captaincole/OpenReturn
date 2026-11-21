@@ -513,6 +513,18 @@ export const FEDERAL_FORMS: FormSpec[] = [
     relativeDir: "federal/schedule-eic",
     register: registerScheduleEIC,
   }),
+  makeFormSpec({
+    formId: "form-8283",
+    shortId: "8283",
+    displayName: "Form 8283",
+    relativeDir: "federal/8283",
+    register: registerForm8283,
+    /* Four Section A rows to a form (federal/8283/lines.ts form8283Plan). */
+    copies: {
+      count: (info) => info?.form8283Copies?.length ?? 1,
+      select: (info, index) => info && { ...info, form8283CopyIndex: index },
+    },
+  }),
   /* Wired with no rules yet: every field is blank, and only a must-file decision turns the form on. */
   makeFormSpec({
     formId: "form-1116",
@@ -527,13 +539,6 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 2210",
     relativeDir: "federal/2210",
     register: registerForm2210,
-  }),
-  makeFormSpec({
-    formId: "form-8283",
-    shortId: "8283",
-    displayName: "Form 8283",
-    relativeDir: "federal/8283",
-    register: registerForm8283,
   }),
   makeFormSpec({
     formId: "form-8801",
