@@ -19,7 +19,7 @@ import {
 } from "../src/types.js";
 import { blankPdfPath, catalogPath } from "../tests/helpers/formPaths.js";
 import { scenarioPdfName } from "../tests/helpers/scenarioPdfName.js";
-import { loadScenario } from "../tests/scenarios/index.js";
+import { loadScenario, scenarioFolder } from "../tests/scenarios/index.js";
 import type { Scenario } from "../tests/types.js";
 
 function buildContext(scenario: Scenario): DerivationContext {
@@ -87,7 +87,7 @@ async function main() {
     `Rendering ${scenario.forms.length} form(s) for scenario "${scenario.name}" (engine converged in ${passes} pass${passes === 1 ? "" : "es"}):\n`,
   );
 
-  const docsDir = resolve(ENGINE_ROOT, `tests/scenarios/${name}/docs`);
+  const docsDir = resolve(ENGINE_ROOT, `tests/scenarios/${scenarioFolder(name)}/docs`);
 
   for (const spec of specs) {
     const evaluated = forms.get(spec.formId);
