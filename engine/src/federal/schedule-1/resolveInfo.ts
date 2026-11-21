@@ -1,4 +1,5 @@
 import {
+  ARMED_FORCES_STORAGE_FEES_KEY,
   GAMBLING_KEYS,
   OTHER_INCOME_KEYS,
   businessesOnReturn,
@@ -9,6 +10,7 @@ import {
 } from "../../facts/index.js";
 import { sum, sumOrBlank } from "../../money.js";
 import { filingStatusOf, num, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import { resolve3903Info } from "../3903/resolveInfo.js";
 import { resolve8889Info } from "../8889/resolveInfo.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
@@ -70,6 +72,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
   const savingsPenalty = earlyWithdrawalPenalty(inputs);
   const studentLoan = resolveStudentLoanInterest(inputs);
   const studentLoanInterest = studentLoan.info.studentLoanInterestPaid;
+  const moving = movingExpenses(inputs);
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_1",
     fallbacks: [
@@ -90,6 +93,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
           (savingsPenalty ?? 0) > 0 ||
           (studentLoanInterest ?? 0) > 0,
       },
+      moving.fallback,
     ],
   });
   return {
@@ -108,6 +112,27 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     educatorExpenses,
     earlyWithdrawalPenalty: savingsPenalty,
     ...studentLoan.info,
+    armedForcesStorageFees: moving.storageFees,
+  };
+}
+
+/*
+ * Line 14: Form 3903 line 5 (irs-3903-inst-2025::sec::line-5::b01), or storage
+ * fees alone with the box checked and no Form 3903 (irs-3903-inst-2025::sec::line-1::b01).
+ * Schedule 1 files for either, or while the Form 3903 totals have a gap.
+ */
+function movingExpenses(inputs: ResolverInputs) {
+  const stated = num(inputs, ARMED_FORCES_STORAGE_FEES_KEY);
+  const storageFees = stated !== undefined && stated > 0 ? stated : undefined;
+  const form3903 = resolve3903Info(inputs);
+  const deduction = form3903.movingExpenseDeduction ?? 0;
+  return {
+    storageFees,
+    fallback: {
+      rule: `fallback: Armed Forces moving expenses (Form 3903 line 5 $${deduction} > 0, storage fees only $${storageFees ?? 0} > 0, or a Form 3903 total the engine cannot figure)`,
+      value: deduction > 0 || storageFees !== undefined || form3903.movingTotalsGap !== undefined,
+      triggeredByFactKeys: storageFees === undefined ? [] : [ARMED_FORCES_STORAGE_FEES_KEY],
+    },
   };
 }
 

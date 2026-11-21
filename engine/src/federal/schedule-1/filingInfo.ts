@@ -1,7 +1,12 @@
 import type { OtherIncomeItem } from "../../facts/index.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";
+import type { Form3903FilingInfo } from "../3903/filingInfo.js";
 
-export interface Schedule1FilingInfo extends BaseFilingInfo {
+/* Line 14 reads Form 3903's totals (federal/3903/resolveInfo.ts). */
+export interface Schedule1FilingInfo
+  extends BaseFilingInfo, Pick<Form3903FilingInfo, "movingExpenseDeduction" | "movingTotalsGap"> {
+  /** Line 14 with its box: Armed Forces storage fees claimed with no Form 3903, cents kept. */
+  armedForcesStorageFees?: number;
   /** Line 3: Schedule C line 31 summed over every business; undefined when any line 31 is blank. */
   businessIncome?: number;
   /**
