@@ -1,7 +1,8 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
 import { defineForm } from "../../../defineForm.js";
-import { roundDollars } from "../../../money.js";
+import { atLeast, roundDollars } from "../../../money.js";
+import { unsupported } from "../../../types.js";
 import type { Form3805pFilingInfo } from "./filingInfo.js";
 import { msaOwner, partIIIBindings } from "./partIII.js";
 import type { Form3805p } from "./types.js";
@@ -30,8 +31,11 @@ function ownerField<T>(info: Form3805pFilingInfo, taxpayer: T, spouse: T): T | u
   return owner === "spouse" ? spouse : taxpayer;
 }
 
-const NO_EXCEPTION_FACT =
-  "No fact records an exception to the early distribution tax (ca-3805p-inst-2025::sec::line-2-early-distributions-not-subject-to-additional-tax::b01, exception numbers 01-25); line 3 reads this line as zero.";
+/* An exception covers a row the engine cannot figure: lines 2–4 are unsupported for that reason. */
+const exclusionGap = (info: Form3805pFilingInfo) => {
+  const exclusion = info.earlyDistributionExclusion;
+  return exclusion?.status === "gap" ? unsupported(exclusion.reason) : undefined;
+};
 const PART_II =
   "No fact records a Coverdell ESA, QTP or ABLE account distribution (ca-3805p-inst-2025::sec::part-ii-additional-tax-on-certain-distributions-from-education-accounts-and-able-accounts::b01, from Schedule CA line 8z or 8q).";
 const FILED_ALONE =
@@ -65,15 +69,35 @@ export function register(): void {
           ? undefined
           : roundDollars(info.earlyDistributionsInIncome),
       /*
-       * ca-3805p-inst-2025::sec::line-2-early-distributions-not-subject-to-additional-tax::b06:
-       * "Line 3 – Subtract ... line 2 from ... line 1". Line 2 is unsupported, so it reads as zero.
+       * MANUAL EDIT: ca-3805p-inst-2025::sec::line-2-early-distributions-not-subject-to-additional-tax::b01:
+       * "Enter on line 2 the amount not subject to additional tax. In the box on
+       * line 2, enter the applicable exception number (01 – 25) ... If more than
+       * one exception applies, enter 99." exceptions.ts reads the facts; blank
+       * when no exception California allows applies.
        */
-      "0.part1.line_3_amount_subject_to_additional_tax": (form) => {
+      "0.part1.line_2_distributions_not_subject_to_tax": (_, info) => {
+        const exclusion = info.earlyDistributionExclusion;
+        return exclusion?.status === "excluded" ? exclusion.amount : exclusionGap(info);
+      },
+      "0.part1.line_2_exception_number": (_, info) => {
+        const exclusion = info.earlyDistributionExclusion;
+        return exclusion?.status === "excluded" ? exclusion.number : exclusionGap(info);
+      },
+      /*
+       * ca-3805p-inst-2025::sec::line-2-early-distributions-not-subject-to-additional-tax::b06:
+       * "Line 3 – Subtract ... line 2 from ... line 1". A blank line 2 (no exception) reads as zero.
+       */
+      "0.part1.line_3_amount_subject_to_additional_tax": (form, info) => {
+        const gap = exclusionGap(info);
+        if (gap) return gap;
         const line1 = form["0.part1.line_1_early_distributions_in_income"];
-        if (line1 === undefined) return undefined;
-        return line1 - (form["0.part1.line_2_distributions_not_subject_to_tax"] ?? 0);
+        if (line1 === undefined || info.earlyDistributionExclusion?.status === "pending")
+          return undefined;
+        return atLeast(0, line1 - (form["0.part1.line_2_distributions_not_subject_to_tax"] ?? 0));
       },
       "0.part1.line_4_early_distribution_tax_due": (form, info) => {
+        const gap = exclusionGap(info);
+        if (gap) return gap;
         const line3 = form["0.part1.line_3_amount_subject_to_additional_tax"];
         if (line3 === undefined) return undefined;
         const simple = Math.min(line3, info.simpleIraEarlyDistributions ?? 0);
@@ -84,8 +108,6 @@ export function register(): void {
     },
 
     unsupported: {
-      "0.part1.line_2_exception_number": NO_EXCEPTION_FACT,
-      "0.part1.line_2_distributions_not_subject_to_tax": NO_EXCEPTION_FACT,
       "0.part2.line_5_education_able_distributions_in_income": PART_II,
       "0.part2.line_6_distributions_not_subject_to_tax": PART_II,
       "0.part2.line_7_amount_subject_to_additional_tax": PART_II,

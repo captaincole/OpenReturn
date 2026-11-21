@@ -1,3 +1,4 @@
-import type { BaseFilingInfo } from "../../filingInfo.js";
+import type { Form8880FilingInfo } from "../8880/filingInfo.js";
 
-export interface Schedule3FilingInfo extends BaseFilingInfo {}
+/* Line 4 reads Form 8880's filing info to tell a gap from "no credit". */
+export interface Schedule3FilingInfo extends Form8880FilingInfo {}
