@@ -55,9 +55,9 @@ The golden suite ran 25 scenarios.
 | Form 8962 | Federal 2025 |  | 1 | 141 | 20 | 0 | 121 | 0 | 1 | 1 |
 | Form 4684 | Federal 2025 |  | 1 | 162 | 23 | 0 | 39 | 100 | 1 | 1 |
 | Schedule EIC | Federal 2025 |  | 5 | 38 | 32 | 0 | 6 | 0 | 3 | 0 |
+| Form 8283 | Federal 2025 | Yes | 1 | 117 | 35 | 0 | 9 | 73 | 0 | 0 |
 | Form 1116 | Federal 2025 | Yes | 0 | 118 | 0 | 0 | 0 | 118 | 0 | 0 |
 | Form 2210 | Federal 2025 | Yes | 0 | 167 | 0 | 0 | 0 | 167 | 0 | 0 |
-| Form 8283 | Federal 2025 | Yes | 0 | 117 | 0 | 0 | 0 | 117 | 0 | 0 |
 | Form 8801 | Federal 2025 | Yes | 0 | 57 | 0 | 0 | 0 | 57 | 0 | 0 |
 | Form 8814 | Federal 2025 | Yes | 0 | 24 | 0 | 0 | 0 | 24 | 0 | 0 |
 | Schedule F | Federal 2025 |  | 0 | 89 | 0 | 0 | 0 | 89 | 0 | 0 |
@@ -658,6 +658,14 @@ For each form: the fields that are not verified and that other fields read, by t
 
 6 more not checked, each of which feeds fewer fields.
 
+### Form 8283
+
+- Reads: none
+- Feeds: none
+- Fields: 35 of 117 verified, 82 not checked
+
+82 more not checked, each of which feeds fewer fields.
+
 ### Form 1116
 
 - Reads: none
@@ -673,14 +681,6 @@ For each form: the fields that are not verified and that other fields read, by t
 - Fields: 0 of 167 verified, 167 not checked
 
 167 more not checked, each of which feeds fewer fields.
-
-### Form 8283
-
-- Reads: none
-- Feeds: none
-- Fields: 0 of 117 verified, 117 not checked
-
-117 more not checked, each of which feeds fewer fields.
 
 ### Form 8801
 

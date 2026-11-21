@@ -1,4 +1,9 @@
-import { GAMBLING_KEYS, ITEMIZED_OTHER_KEYS, MORTGAGE_KEYS } from "../../facts/index.js";
+import {
+  GAMBLING_KEYS,
+  getNoncashGiftFacts,
+  ITEMIZED_OTHER_KEYS,
+  MORTGAGE_KEYS,
+} from "../../facts/index.js";
 import {
   factsInCategory,
   missingInputs,
@@ -11,6 +16,7 @@ import {
 } from "../../resolverInputs.js";
 import { additionalSheetsGap, netQualifiedDisasterLoss } from "../4684/lines.js";
 import { resolve4684Info } from "../4684/resolveInfo.js";
+import { giftDeduction, noncashGiftsTotal } from "../8283/lines.js";
 import type { ScheduleAFilingInfo } from "./filingInfo.js";
 
 /*
@@ -160,10 +166,29 @@ function itemizerAnswers(inputs: ResolverInputs, mortgage: MortgageLimit): strin
       ? { [MORTGAGE_KEYS.originationDateForm1098]: undefined }
       : {}),
     "charitable.cash": num(inputs, "charitable.cash"),
-    "charitable.noncash": num(inputs, "charitable.noncash"),
+    ...giftsOtherThanCashAnswers(inputs),
     "charitable.carryover": num(inputs, "charitable.carryover"),
     ...generalSalesTaxAnswers(inputs),
   });
+}
+
+/*
+ * Line 12 (irs-1040sa-inst-2025::sec::line-12::b01–b02): when any noncash gift
+ * fact exists, the gifts are every noncash gift of the year and the line is
+ * the total of their deductions (Form 8283 column (h), federal/8283/lines.ts);
+ * the single total `charitable.noncash` is then not read, so no gift counts
+ * twice. With no gift facts, the line is that total. Before the AGI limits.
+ */
+function giftsOtherThanCash(inputs: ResolverInputs): number | undefined {
+  const gifts = getNoncashGiftFacts(inputs.facts);
+  return gifts.length > 0 ? noncashGiftsTotal(gifts) : num(inputs, "charitable.noncash");
+}
+
+/* The line's answers: each gift whose deduction waits, or the single total. */
+function giftsOtherThanCashAnswers(inputs: ResolverInputs): Record<string, unknown> {
+  const gifts = getNoncashGiftFacts(inputs.facts);
+  if (gifts.length === 0) return { "charitable.noncash": num(inputs, "charitable.noncash") };
+  return Object.fromEntries(gifts.map((gift) => [gift.factKey, giftDeduction(gift.gift)]));
 }
 
 const GENERAL_SALES_TAX = "state_local_tax.general_sales_tax";
@@ -215,7 +240,7 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
     mortgageInterestNotForm1098: num(inputs, MORTGAGE_KEYS.interestNotForm1098),
     pointsNotForm1098: num(inputs, MORTGAGE_KEYS.pointsNotForm1098),
     giftsCashCheck: num(inputs, "charitable.cash"),
-    giftsOtherThanCash: num(inputs, "charitable.noncash"),
+    giftsOtherThanCash: giftsOtherThanCash(inputs),
     giftsCarryover: num(inputs, "charitable.carryover"),
     netQualifiedDisasterLoss: loss.amount,
     disasterLossGap: loss.gap,
