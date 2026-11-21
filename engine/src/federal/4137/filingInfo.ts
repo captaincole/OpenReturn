@@ -17,6 +17,11 @@ export interface Form4137FilingInfo extends BaseFilingInfo {
   form4137CopyIndex?: number;
   /* Form 1040 line 1c: every person's unreported and noncash tips; blank with no tips. */
   tipIncomeNotOnLine1a?: number;
+  /*
+   * Schedule 1-A Part II: cash tips as an employee (W-2 box 7 or 8, or a tip
+   * record) that may be qualified tips (irs-1040-inst-2025::sec::part-ii::b01).
+   */
+  employeeCashTips?: boolean;
   /* Form 8959's Who Must File: line 6 of every person's Form 4137 together. */
   tipsSubjectToMedicareTotal?: number;
 }

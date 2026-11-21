@@ -47,9 +47,15 @@ describe("lines 2 through 6", () => {
     expect([lines.line2, lines.line3, lines.line4]).toEqual([7500, 5000, 2500]);
   });
 
-  it("each row prints in whole dollars and line 2 adds the printed rows", () => {
+  // irs-1040-inst-2025::sec::rounding-off-to-whole::b01: keep cents while adding, round the total.
+  it("lines 2 and 3 keep the rows' cents and round only the total", () => {
     const lines = form4137Lines([row(100.4, 0), row(100.4, 0)], 0);
-    expect(lines.line2).toBe(200);
+    expect(lines.line2).toBe(201);
+    const halves = form4137Lines([row(100.5, 0), row(100.5, 0)], 0);
+    expect([halves.line2, halves.line4]).toEqual([201, 201]);
+    expect(tipIncomeNotOnLine1a([row(100.5, 0), row(100.5, 0)])).toBe(201);
+    const reported = form4137Lines([row(300, 100.4), row(300, 100.4)], 0);
+    expect([reported.line3, reported.line4]).toEqual([201, 399]);
   });
 
   it("line 5 is blank with no tips under $20; line 6 equals line 4", () => {

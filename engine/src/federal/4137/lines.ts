@@ -81,15 +81,17 @@ export interface Form4137Lines {
 
 /*
  * Lines 2 through 6 (omb-no-1545-0074::b01, b02): line 2 adds column (c), line 3
- * column (d), each row in whole dollars as printed. Line 4 is the unreported
- * tips, line 5 the part from months under $20 (line-5::b01), line 6 the rest.
- * Lines 4 and 6 do not go below 0: column (c) holds every tip of columns (d)
- * and line 5, so a negative result means the record is wrong (QUESTIONS.md).
+ * column (d). Each row prints in whole dollars, but the sums keep the rows'
+ * cents and round only the total: "include cents when adding the amounts and
+ * round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01).
+ * Line 4 subtracts the rounded lines 2 and 3 (QUESTIONS.md item 9). Line 4 is
+ * the unreported tips, line 5 the part from months under $20 (line-5::b01),
+ * line 6 the rest. Lines 4 and 6 do not go below 0: column (c) holds every tip
+ * of columns (d) and line 5, so a negative result means the record is wrong.
  */
 function medicareLines(rows: ReadonlyArray<TipRow>) {
-  const columns = rows.map(rowColumns);
-  const line2 = sum(...columns.map((column) => column.received));
-  const line3 = sum(...columns.map((column) => column.reported));
+  const line2 = roundDollars(sum(...rows.map((row) => row.received)));
+  const line3 = roundDollars(sum(...rows.map((row) => row.reported)));
   const line4 = atLeast(0, line2 - line3);
   const under20 = sumOrBlank(...rows.map((row) => row.under20));
   const line5 = under20 === undefined ? undefined : roundDollars(under20);

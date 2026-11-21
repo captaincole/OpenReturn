@@ -21,7 +21,7 @@ export interface Form1040FilingInfo
     Pick<Schedule8812FilingInfo, "dependents" | "w2NontaxableCombatPay">,
     Pick<ScheduleSEFilingInfo, "scheduleCNetProfit">,
     Pick<ScheduleAFilingInfo, "increasedStandardDeduction">,
-    Pick<Form4137FilingInfo, "tipIncomeNotOnLine1a"> {
+    Pick<Form4137FilingInfo, "tipIncomeNotOnLine1a" | "employeeCashTips"> {
   /** Social Security with a traditional IRA contribution and a plan: Pub. 590-A figures line 6b (schedule-1/pub590a.ts). */
   pub590aWorksheets?: boolean;
 

@@ -132,6 +132,8 @@ export function resolve4137Info(inputs: ResolverInputs): Form4137FilingInfo {
     },
     form4137Filers: filers,
     tipIncomeNotOnLine1a: tipIncomeNotOnLine1a(rows),
+    employeeCashTips:
+      w2s.some(({ w2 }) => sum(w2.box7, w2.box8) > 0) || rows.some((row) => row.received > 0),
     tipsSubjectToMedicareTotal: rows.length === 0 ? undefined : medicareTips,
   };
 }

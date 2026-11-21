@@ -5,9 +5,8 @@ Each item is a place where the form and its instructions do not settle a rule. T
 ## 1. Rounding of line 1 rows
 
 - Source: line 2 says "Add the amounts from line 1, column (c)" (irs-4137-form-2025::sec::omb-no-1545-0074::b01). The 1040 instructions say to keep cents while adding and round only the total.
-- Default: each row prints in whole dollars, and line 2 adds the printed rows (as Form 6781 does).
-- Changes dollars: yes, by $1 at most per row, and only when a tip record has cents.
-- Blind fill (2026-11-21) read it the other way: "include cents when adding the amounts and round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01), so line 2 keeps the rows' cents. In its cases (4, 9, 12, 15) both readings give the same line 2. Two rows of $100.50 would differ: 202 (engine) against 201.
+- Settled (tax review, 2026-11-21): each row prints in whole dollars, but lines 2 and 3 keep the rows' cents and round only the total: "include cents when adding the amounts and round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01). This is the repo rule for a total of rows (Form 4562 line 44) and the blind fill's reading. Two rows of $100.50 give line 2 = 201. Form 6781 adds its printed rows; that form is not changed here.
+- Changes dollars: by $1 at most, only when a tip record has cents. delphine's values do not change.
 
 ## 2. Column (d) when only W-2 box 8 is known
 
@@ -48,8 +47,10 @@ Each item is a place where the form and its instructions do not settle a rule. T
 ## 8. The qualified tips deduction (Schedule 1-A Part II)
 
 - Source: Schedule 1-A line 4b takes tips from Form 4137 for the 2025 deduction for qualified tips.
-- Default: not changed here. Schedule 1-A Part II stays unsupported: no fact says which tips are qualified (a listed tipped occupation). A tipped filer who qualifies gets no deduction from the engine.
-- Changes dollars: yes, for a filer in a listed occupation. Follow-up work.
+- Default: Schedule 1-A Part II stays unsupported: no fact says which tips are qualified (a listed tipped occupation, TTOC). Since the tax review (2026-11-21), Form 1040 line 13b is unsupported when the return has employee cash tips (W-2 box 7 or 8, or a tip record) and the filing status is not married filing separately. The return shows the gap; line 14 still adds 12e and 13a, so line 15 is the taxable income before the tips deduction.
+- delphine: line 13b is now unsupported. Her line 15 stays 56,200, but she is a server (wait staff, TTOC 102) with MAGI under $150,000, so the true deduction is about $13,600 to $18,510. Her taxable income is overstated until Part II is built.
+- To build Part II, a person decides: (a) a fact for the occupation (TTOC) of each job, which Cade must ask; (b) which of the four employee methods to use (W-2 box 7, Forms 4070, W-2 box 14, or Form 4137 column (c); qualified-tips::b10, b11); (c) whether line 4b is all of column (c) or only the unreported part, since Example 2 (qualified-tips::b12) adds Form 4137 line 4 to box 7; (d) the Qualified Tips From More Than One Employer Worksheet, which the corpus does not hold as text (delphine has three employers).
+- Changes dollars: yes, for a filer in a listed occupation.
 
 ## 9. Line 4 from rounded lines 2 and 3
 

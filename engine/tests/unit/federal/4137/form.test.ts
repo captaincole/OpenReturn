@@ -268,3 +268,35 @@ describe("Schedule SE line 8b (Form 4137 line 10)", () => {
     expect(run.value("schedule-se", "0.line.8d")).toBe(33000);
   });
 });
+
+/*
+ * Tips on Form W-2 or Form 4137 may be qualified tips for the 2025 deduction
+ * (irs-1040-inst-2025::sec::part-ii::b01). Schedule 1-A Part II is not modeled,
+ * so Form 1040 line 13b shows the gap instead of a silent blank.
+ */
+describe("Form 1040 line 13b: the qualified tips deduction is a gap", () => {
+  const isUnsupported = (run: ReturnType<typeof evaluate>) => {
+    const line13b = run.field("form-1040", "line.13b");
+    return line13b !== undefined && !line13b.ok && line13b.unsupported === true;
+  };
+
+  it("delphine (a single server with W-2 tips and tip records): unsupported", () => {
+    expect(isUnsupported(evaluate(base.facts.filter(isWages)))).toBe(true);
+  });
+
+  it("W-2 box 7 tips alone: unsupported", () => {
+    expect(isUnsupported(evaluate([w2("cafe", { box7: 18000 })]))).toBe(true);
+  });
+
+  it("no tips: line 13b is not a gap", () => {
+    expect(isUnsupported(evaluate([w2("plain", {})]))).toBe(false);
+  });
+
+  it("married filing separately cannot claim it: no gap", () => {
+    const run = evaluate(
+      [w2("cafe", { box7: 18000 })],
+      [decision("decisions.scope.filing_status", "married_filing_separately")],
+    );
+    expect(isUnsupported(run)).toBe(false);
+  });
+});

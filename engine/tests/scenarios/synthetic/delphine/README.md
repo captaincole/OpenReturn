@@ -6,7 +6,7 @@ She has three W-2s from tipped jobs. She kept a daily tip record at two of them.
 
 The scenario renders a filled Form 4137 and checks that its results reach Form 1040 line 1c and Schedule 2 line 5. The published example that checks the rules is a unit test (`tests/unit/federal/4137/`).
 
-The engine does not model the 2025 deduction for qualified tips (Schedule 1-A Part II), so Form 1040 line 13b stays blank (QUESTIONS.md item 8 in `src/federal/4137/`).
+The engine does not model the 2025 deduction for qualified tips (Schedule 1-A Part II), so Form 1040 line 13b is unsupported and prints blank (QUESTIONS.md item 8 in `src/federal/4137/`). Her taxable income (line 15) is before that deduction: as a server with income under $150,000, she may deduct her qualified tips.
 
 Forms that file: Form 1040, Schedule 2, Form 4137.
 
