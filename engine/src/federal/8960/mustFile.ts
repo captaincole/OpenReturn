@@ -22,6 +22,7 @@ import {
   sumW2Box,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { resolve4137Info } from "../4137/resolveInfo.js";
 import { line1Row } from "../6781/lines.js";
 import { netReceipts, tentativeProfit } from "../schedule-c/lines.js";
 
@@ -58,6 +59,8 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
   );
   return sum(
     sumW2Box(inputs, "box1"),
+    // Unreported, allocated and noncash tips reach line 1z through 1040 line 1c.
+    resolve4137Info(inputs).tipIncomeNotOnLine1a,
     sumInvestmentBox(inputs, "box1", isInterestFactKey),
     sumInvestmentBox(inputs, "box3", isInterestFactKey),
     sumInvestmentBox(inputs, "box1a", isDividendFactKey),

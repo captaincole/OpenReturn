@@ -2,6 +2,7 @@
 
 import { defineForm } from "../../defineForm.js";
 import { sum } from "../../money.js";
+import { withLaterCopies } from "../4137/laterCopies.js";
 import type { Schedule2FilingInfo } from "./filingInfo.js";
 import type { Schedule2 } from "./types.js";
 
@@ -35,6 +36,16 @@ export function register(): void {
         ),
       // MANUAL EDIT: irs-1040-inst-2025::sec::line-4-3::b01: Schedule SE line 12.
       "0.line.4_self_employment_tax": (form) => total(form["schedule-se.0.line.12"]),
+      /*
+       * MANUAL EDIT: irs-1040-inst-2025::sec::line-5-2::b01: "the total of any taxes
+       * from Form 4137", line 13 of each spouse's form. Blank when no Form 4137 files.
+       */
+      "0.line.5_ss_medicare_tax_unreported_tips": (form, info) =>
+        withLaterCopies(
+          form["form-4137.0.line.13_total_tax_unreported_tips"],
+          info,
+          (lines) => lines.line13,
+        ),
       "0.line.7_total_additional_ss_medicare_tax": (form) =>
         total(
           form["0.line.5_ss_medicare_tax_unreported_tips"],
@@ -126,8 +137,6 @@ export function register(): void {
         "No self-employment exemption scenario (EAS/EN notary) modeled yet.",
       "0.line.4_se_tax_exemption_other_form_number":
         "No self-employment exemption scenario (EAS/EN notary) modeled yet.",
-      "0.line.5_ss_medicare_tax_unreported_tips":
-        "Form 4137 (unreported tips) not ingested; no unreported-tip scenario yet.",
       "0.line.6_uncollected_ss_medicare_tax_wages":
         "Form 8919 (uncollected SS/Medicare on wages) not ingested; no misclassified-worker scenario yet.",
       "0.line.8_ira_tax_favored_accounts_not_required":

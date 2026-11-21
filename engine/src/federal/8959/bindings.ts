@@ -3,6 +3,7 @@
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { SSN } from "../../values.js";
+import { withLaterCopies } from "../4137/laterCopies.js";
 import type { Form8959FilingInfo } from "./filingInfo.js";
 import { ADDITIONAL_MEDICARE_THRESHOLDS, excessMedicareWages } from "./lines.js";
 import type { Form8959 } from "./types.js";
@@ -24,6 +25,16 @@ export function register(): void {
       "0.header.ssn": (_, info) => info.taxpayerSSN,
       // MANUAL EDIT: routed to the FilingInfo slot (sum of W-2 box 5).
       "0.line.1_medicare_wages_tips": (_, info) => roundDollars(info.w2MedicareWagesTotal),
+      /*
+       * MANUAL EDIT: irs-8959-inst-2025::sec::line-2::b01: Form 4137 line 6, and on a
+       * joint return the spouse's line 6 too. Blank when no Form 4137 files.
+       */
+      "0.line.2_unreported_tips": (form, info) =>
+        withLaterCopies(
+          form["form-4137.0.line.6_tips_subject_medicare_tax"],
+          info,
+          (lines) => lines.line6,
+        ),
       "0.line.4_total_medicare_wages": (form) =>
         sum(
           form["0.line.1_medicare_wages_tips"],
@@ -155,8 +166,6 @@ export function register(): void {
     },
 
     unsupported: {
-      "0.line.2_unreported_tips":
-        "Requires Form 4137 line 6 (unreported tips subject to Medicare tax). No Form 4137 ingestion path exists yet.",
       "0.line.3_wages_form_8919":
         "Requires Form 8919 line 6 (uncollected Social Security and Medicare tax on wages). No Form 8919 ingestion path exists yet.",
       "0.line.14_rrta_compensation_tips":

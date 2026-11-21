@@ -168,6 +168,12 @@ export function register(): void {
         const line26 = numberOrBlank(form["form-2441.1.line.26_taxable_benefits"]);
         return line26 !== undefined && line26 > 0 ? line26 : undefined;
       },
+      /*
+       * MANUAL EDIT: irs-1040-inst-2025::sec::line-1c::b01: tips not reported to the
+       * employer, with W-2 box 8 allocated tips, and noncash tips (4137/lines.ts).
+       * With one Form 4137 it equals that form's line 4 plus noncash tips.
+       */
+      "line.1c": (_, info) => info.tipIncomeNotOnLine1a,
       "line.1z": (form) =>
         sum(
           form["line.1a"],
@@ -559,8 +565,6 @@ export function register(): void {
         "No nonresident/dual-status alien spouse scenario modeled yet — spouse name field only applies when the NRA-spouse checkbox is checked, which has no ingestion path.",
       "line.1b":
         "Household employee wages not reported on W-2 require a separate household-employer intake scenario not yet built; no fact key exists for this.",
-      "line.1c":
-        "Unreported tip income (allocated tips, noncash tips) has no fact ingestion path; requires a tip-income intake scenario not yet built.",
       "line.1d":
         "No ingestion path for Medicaid waiver payments not reported on W-2 — no scenario built for this income type yet.",
       "line.1f":
