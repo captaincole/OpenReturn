@@ -6,7 +6,7 @@ Each item is a place where the form and its instructions do not settle a rule. T
 
 - Source: "Enter the result as a decimal (rounded to at least three places)" (`irs-8815-form-2025::sec::omb-no-1545-0074::b02`).
 - Default: three places, rounded to nearest. Lines 8 and 13 multiply by the printed ratio.
-- Dollars: yes, by $1 at most. Pub. 550's Max and Helene use the exact fraction ($746.90); three places give $747.35. Both round to $747.
+- Dollars: yes, by $1 at most. Pub. 550's Max and Helene use the exact fraction ($746.90); three places give $747.35. Both round to $747. The blind fill found two cases that move: $9,000 / $9,500 on line 7 with line 6 of $4,500 gives line 8 of $4,262 at three places and $4,263 exact; a line 12 of 10,750 / 30,000 gives line 14 of $676 at three places and $675 exact.
 
 ## 2. The digit before the decimal point
 
@@ -68,6 +68,12 @@ Each item is a place where the form and its instructions do not settle a rule. T
 - Default: no fact holds it, so nothing is added.
 - Dollars: yes, only for a bona fide resident of Puerto Rico.
 
+## 12. Rounding inside the chain
+
+- Source: the form says nothing on rounding. The 1040 rule rounds each line to the nearest dollar, and a sum keeps its cents until the total.
+- Default: line 5 adds the proceeds with cents and rounds the total. Lines 8 and 13 multiply the rounded line 6 and line 8 by the printed ratio, then round. Exactly $0.50 rounds up.
+- Dollars: yes, by $1 at most. Two $1,000.40 proceeds give line 5 of $2,001 and line 6 of $1,001; with cents kept through line 8, line 6 is $1,000.80.
+
 ## Confidence by field group
 
 | Field group | Confidence |
@@ -80,3 +86,10 @@ Each item is a place where the form and its instructions do not settle a rule. T
 | Line 1 rows, header | stated rule; more than three rows unsupported (no attached statement) |
 | Line 9 with an IRA contribution, Form 2555 or 4563, adoption benefits, royalty interest | unsupported |
 | Ratio printing (lines 7, 12), line 11 at zero | own reading |
+
+## Second opinions
+
+- **Blind fill (15 cases).** A second preparer filled lines 4–14 from the blank form and its instructions only. Every line of every case matches the engine; no difference, not even blank against 0.
+- **PolicyEngine-US 2.152.15** (commit b274cacc). It does not model Form 8815. `us_bonds_for_higher_ed` is a bare person input with no formula, so it has no line 10 start, no line 12 range, no Line 6 Worksheet and no ownership test to compare. Its only rule is where the amount goes: an above-the-line exclusion, left out of modified AGI for the IRA deduction, and counted for the filer when recorded on a dependent. That matches the form: line 14 reduces Schedule B, and a bond in a child's name does not qualify.
+- **The engine's constants against the form.** Line 10 ($99,500; $149,250), the line 12 divisors ($15,000; $30,000) and the line 9 Note ($114,500; $179,250) match `irs-8815-form-2025::sec::omb-no-1545-0074::b02`.
+- **IRS Direct File.** No checkout is reachable from this project (issue #140 is open), so it was not compared.
