@@ -52,7 +52,8 @@ export interface ArmedForcesMoveFactValue {
    * (irs-3903-inst-2025::sec::purpose-of-form::b02). Lines 1 and 2 leave out the
    * expenses they paid ("don't include any expenses that were reimbursed by an
    * allowance you don't have to include in your income", line-1::b02, line-2::b01),
-   * so the engine takes this amount off line 1, then line 2. Never on line 4.
+   * so the engine takes this amount off line 1, then line 2, up to the cost that
+   * line 4 leaves unpaid: the allowance is never line 1h income. Never on line 4.
    * Absent: none. householdGoods and travel are what the member paid in full.
    */
   excludedAllowances?: number;

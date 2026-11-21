@@ -171,6 +171,42 @@ describe("Form 3903 allowances that are not income", () => {
     expect(lines.excessReimbursement).toBeUndefined();
   });
 
+  /*
+   * purpose-of-form::b02: only reimbursements "other than dislocation allowances,
+   * ..." that "exceed the cost of moving" are line 1h income. $8,000 of line 4
+   * does not exceed the $10,000 cost, so line 1h is blank; and $10,000 does not
+   * exceed $11,000 of reimbursements and allowances, so there is no deduction
+   * (irs-pub-3-2025::sec::how-to-report-moving-expenses::b01).
+   */
+  it("an allowance with reimbursements over the cost never becomes Form 1040 line 1h income", () => {
+    expect(
+      form3903Lines({
+        householdGoods: 10000,
+        travel: 0,
+        governmentReimbursements: 8000,
+        excludedAllowances: 3000,
+      }),
+    ).toEqual({
+      line1: 8000,
+      line2: 0,
+      line3: 8000,
+      line4: 8000,
+      line5Yes: false,
+      line5: undefined,
+      excessReimbursement: undefined,
+    });
+  });
+
+  it("line 4 over the full cost: the excess is line 4 − the cost, the allowance left out", () => {
+    const lines = form3903Lines({
+      householdGoods: 10000,
+      travel: 0,
+      governmentReimbursements: 10600,
+      excludedAllowances: 3000,
+    });
+    expect([lines.line3, lines.line4, lines.excessReimbursement]).toEqual([10000, 10600, 600]);
+  });
+
   it("no allowance stated changes nothing", () => {
     const amounts = { householdGoods: 3000, travel: 600, governmentReimbursements: 1000 };
     expect(form3903Lines(amounts)).toEqual(form3903Lines({ ...amounts, excludedAllowances: 0 }));

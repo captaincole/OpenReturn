@@ -48,15 +48,20 @@ export interface MoveAmounts {
 /*
  * Lines 1 and 2 leave out "any expenses that were reimbursed by an allowance you
  * don't have to include in your income" (irs-3903-inst-2025::sec::line-1::b02,
- * line-2::b01). The text does not say which line an allowance comes off: the
- * engine takes it off line 1 first, then line 2 (QUESTIONS.md). An allowance
- * over both lines leaves them at 0 and is not income
- * (purpose-of-form::b02: the line 1h excess is for amounts "other than
- * dislocation allowances, temporary lodging expenses, temporary lodging
- * allowances, or move-in housing allowances").
+ * line-2::b01). These allowances are never income: the line 1h excess is for
+ * reimbursements "other than dislocation allowances, temporary lodging expenses,
+ * temporary lodging allowances, or move-in housing allowances" that "exceed the
+ * cost of moving" (purpose-of-form::b02). So the allowance pays only for the cost
+ * that line 4 leaves unpaid, and line 4 − line 3 stays the line 4 reimbursements
+ * over the full cost. The text does not say which line an allowance comes off:
+ * the engine takes it off line 1 first, then line 2 (QUESTIONS.md question 2).
  */
 function lessExcludedAllowances(amounts: MoveAmounts): { householdGoods: number; travel: number } {
-  const allowances = atLeast(0, amounts.excludedAllowances);
+  const unreimbursed = atLeast(
+    0,
+    amounts.householdGoods + amounts.travel - amounts.governmentReimbursements,
+  );
+  const allowances = Math.min(atLeast(0, amounts.excludedAllowances), unreimbursed);
   const householdGoods = atLeast(0, amounts.householdGoods - allowances);
   const leftForTravel = atLeast(0, allowances - amounts.householdGoods);
   return { householdGoods, travel: atLeast(0, amounts.travel - leftForTravel) };
