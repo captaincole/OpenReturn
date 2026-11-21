@@ -8,6 +8,7 @@ import { describe, expect, it } from "vitest";
 import {
   ADOPTION_KEYS,
   makeAdoptionChildFactKey,
+  makeDependentFactKey,
   makeW2FactKey,
   type AdoptionChildFactValue,
   type W2FactValue,
@@ -284,4 +285,32 @@ describe("the receiving lines (the wren scenario)", () => {
     expect(run.value("form-8839", "0.line.7_modified_adjusted_gross_income")).toBe(
       run.value("form-1040", "line.11b"),
     ));
+});
+
+describe("Worksheet B on a whole return (wren plus a daughter under 17)", () => {
+  const daughter = row(makeDependentFactKey("hazel"), {
+    firstName: "Hazel",
+    lastName: "Albescu",
+    ssn: "400-00-1234",
+    relationship: "Daughter",
+    dob: "03/14/2020",
+    monthsLivedWithYou: 12,
+    livedInUs: true,
+    usCitizenOrResident: true,
+  });
+  const run = evaluate([...base.facts, daughter]);
+  it("Schedule 3 line 6c and Schedule 8812 line 13 are both unsupported", () => {
+    expect(run.value("schedule-8812", "0.line.4_qualifying_children_under_17")).toBe(1);
+    expect(run.reason("schedule-3", "0.line.6c")).toMatch(/Worksheet B/);
+    expect(run.value("schedule-8812", "0.line.13_credit_limit_worksheet_a")).toBeUndefined();
+    expect(run.reason("schedule-8812", "0.line.13_credit_limit_worksheet_a")).toMatch(
+      /Worksheet B line 15 needs Schedule 3 line 6c/,
+    );
+  });
+  it("with no adoption facts, the daughter's line 13 is a number", () => {
+    const plain = evaluate([...plainFacts, daughter]);
+    expect(typeof plain.value("schedule-8812", "0.line.13_credit_limit_worksheet_a")).toBe(
+      "number",
+    );
+  });
 });

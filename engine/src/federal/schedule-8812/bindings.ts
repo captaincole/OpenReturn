@@ -4,6 +4,7 @@ import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.
 import { atLeast, numberOrBlank, roundDollars, stepsOf, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
+import { line6cFrom8839 } from "../8839/receivers.js";
 import { eicOutcome } from "../schedule-eic/outcome.js";
 import { SELF_EMPLOYED_EARNED_INCOME, selfEmployedForLine18a } from "./earnedIncomeGap.js";
 import type { Schedule8812FilingInfo } from "./filingInfo.js";
@@ -114,19 +115,31 @@ export function register(): void {
        * Credit Limit Worksheet A: Form 1040 line 18 minus the Schedule 3 credits
        * it lists (lines 1, 2, 3, 4, 5b, 6d, 6f, 6l, 6m). Its line 4 is Credit
        * Limit Worksheet B, which applies only with a Form 8396, 8839, 5695 Part I
-       * or 8859 credit (Schedule 3 lines 5a, 6c, 6g, 6h). Those lines are
-       * unsupported today, so line 4 is -0-; the line waits if one ever fills.
+       * or 8859 credit (Schedule 3 lines 5a, 6c, 6g, 6h). Worksheet B is not
+       * modeled, so line 4 is -0-; the line waits if one of those lines fills.
        */
-      "0.line.13_credit_limit_worksheet_a": (form) => {
+      "0.line.13_credit_limit_worksheet_a": (form, info) => {
         const line18 = form["form-1040.line.18"];
         if (typeof line18 !== "number") return undefined;
+        /*
+         * MANUAL EDIT: Worksheet B line 15 adds Schedule 3 line 6c
+         * (irs-1040s8-inst-2025::sec::credit-limit-worksheet-b-continued::b02),
+         * so a Form 8839 credit that is unsupported is a gap here too.
+         */
+        const children = sum(form["0.line.4_qualifying_children_under_17"]) > 0;
+        const adoption = line6cFrom8839(form, info)?.value;
+        if (children && typeof adoption === "object") {
+          return unsupported(
+            `Credit Limit Worksheet B line 15 needs Schedule 3 line 6c: ${adoption.reason}`,
+          );
+        }
         const worksheetB = [
           form["schedule-3.0.line.5a"],
           form["schedule-3.0.line.6c"],
           form["schedule-3.0.line.6g"],
           form["schedule-3.0.line.6h"],
         ].some((credit) => typeof credit === "number" && credit > 0);
-        if (worksheetB && sum(form["0.line.4_qualifying_children_under_17"]) > 0) return undefined;
+        if (worksheetB && children) return undefined;
         const credits = sum(
           form["schedule-3.0.line.1"],
           form["schedule-3.0.line.2"],
