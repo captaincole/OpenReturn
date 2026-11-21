@@ -10,7 +10,9 @@ import {
   isDividendFactKey,
   isInterestFactKey,
 } from "./facts/index.js";
+import { scheduleTwoNeededForEarlyDistributions } from "./federal/5329/resolveInfo.js";
 import { resolve6251Info } from "./federal/6251/resolveInfo.js";
+import { figuredForm8814, form8814Totals } from "./federal/8814/totals.js";
 import { planForm8949Copies, totalsByBox } from "./federal/8949/copyPlan.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
 import { resolve8959Info } from "./federal/8959/resolveInfo.js";
@@ -317,8 +319,8 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
 /*
  * Default: required when Schedule SE (line 4), Form 8959 (line 11), Form 8960
  * (line 12), Schedule H (line 9), Form 6251 (line 2) or Form 8962 (line 1a) is
- * filed. While none is filed and one is still undecided, Schedule 2 is undecided
- * too. KNOWN GAP: the resolver cannot see Form 6251 line 11 or Form 8962 line 29,
+ * filed, or an early distribution owes the additional tax (line 8). While none
+ * is filed and one is still undecided, Schedule 2 is undecided too. KNOWN GAP: the resolver cannot see Form 6251 line 11 or Form 8962 line 29,
  * so a filed Form 6251 with no AMT, or a Form 8962 with no repayment, still files
  * Schedule 2 with 0 or blank lines.
  */
@@ -330,6 +332,7 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
     resolveScheduleHInfo(inputs).mustFile?.["schedule-h"]?.value,
     resolve6251Info(inputs).mustFile?.["form-6251"]?.value,
     resolve8962Info(inputs).mustFile?.["form-8962"]?.value,
+    scheduleTwoNeededForEarlyDistributions(inputs),
   ];
   const required = feeders.some((value) => value === true);
   const open = !required && feeders.some((value) => value === undefined);
@@ -339,7 +342,7 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
       ? []
       : [
           {
-            rule: "fallback: Schedule SE (line 4), Form 8959 (line 11), Form 8960 (line 12), Schedule H (line 9), Form 6251 (line 2), or Form 8962 (line 1a) is required",
+            rule: "fallback: Schedule SE (line 4), Form 8959 (line 11), Form 8960 (line 12), Schedule H (line 9), Form 6251 (line 2), Form 8962 (line 1a), or an early distribution tax (line 8) is required",
             value: required,
           },
         ],
@@ -354,7 +357,18 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
   const interestPayers = payerAmounts(inputs, isInterestFactKey, (value) =>
     sum(value.box1, value.box3),
   );
-  const dividendPayers = payerAmounts(inputs, isDividendFactKey, (value) => sum(value.box1a));
+  /*
+   * irs-8814-inst-2025::sec::line-9::b01: each Form 8814 line 9 is a line 5 row
+   * named "Form 8814", and Schedule B files when it plus the parents' dividends
+   * is more than $1,500. A child's foreign account (Part III, ::b07) has no fact.
+   */
+  const form8814Rows = (figuredForm8814(form8814Totals(inputs))?.line9ByChild ?? [])
+    .filter((line9) => line9 > 0)
+    .map((line9) => ({ payerName: "Form 8814", amount: line9 }));
+  const dividendPayers = [
+    ...payerAmounts(inputs, isDividendFactKey, (value) => sum(value.box1a)),
+    ...form8814Rows,
+  ];
   const hasForeignFinancialAccount = boolDecision(
     inputs,
     "decisions.scope.has_foreign_financial_account",

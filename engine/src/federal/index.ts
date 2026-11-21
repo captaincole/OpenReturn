@@ -553,6 +553,10 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8814",
     relativeDir: "federal/8814",
     register: registerForm8814,
+    copies: {
+      count: (info) => info?.form8814Children?.length ?? 1,
+      select: (info, index) => info && { ...info, form8814CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "schedule-f",
@@ -665,6 +669,10 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 5329",
     relativeDir: "federal/5329",
     register: registerForm5329,
+    copies: {
+      count: (info) => info?.form5329Filers?.length ?? 1,
+      select: (info, index) => info && { ...info, form5329CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-5471",

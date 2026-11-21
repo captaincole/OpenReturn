@@ -23,6 +23,7 @@ import {
   type ResolverInputs,
 } from "../../resolverInputs.js";
 import { line1Row } from "../6781/lines.js";
+import { form8814IncomeUpperBound } from "../8814/children.js";
 import { netReceipts, tentativeProfit } from "../schedule-c/lines.js";
 
 /* 1040 line 6b: at most 85% of social security benefits is taxable. */
@@ -80,6 +81,8 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
     ...socialSecurity.map(({ value }) =>
       atLeast(0, (value as SocialSecurityFactValue).box5 * MAX_TAXABLE_SOCIAL_SECURITY),
     ),
+    // A child's interest and dividends on Form 8814 (irs-8814-inst-2025::sec::parents-who-don-t-file-a-joint-return::b06).
+    form8814IncomeUpperBound(inputs),
   );
 }
 
@@ -87,8 +90,9 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
  * Line 4b: every Schedule C business has line G "Yes", so its income is nonpassive.
  * Who Must File asks for investment income: an interest, dividend or sale fact
  * (category investment_income), a capital loss carried over from last year
- * (it reaches line 5a through 1040 line 7a), a section 1256 contract (Form 6781, the same
- * way), or a business without line G "Yes" (passive).
+ * (it reaches line 5a through 1040 line 7a), a child's income on Form 8814, a
+ * section 1256 contract (Form 6781, the same way), or a business without line G
+ * "Yes" (passive).
  * This gate is stricter than who-must-file::b01, which states the MAGI test
  * alone: without investment income the tax is $0, and the gate keeps a $0
  * Form 8960 off high-wage returns. A person decides whether to drop it.
@@ -110,6 +114,7 @@ export function investmentSignals(
   );
   const hasInvestment =
     inputs.facts.some((fact) => fact.category === "investment_income") ||
+    form8814IncomeUpperBound(inputs) > 0 ||
     carryover ||
     getSection1256Facts(inputs.facts).length > 0 ||
     (businesses.length > 0 && !scheduleCNonpassive);

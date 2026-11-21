@@ -10,6 +10,7 @@ import {
   CA_MISC_DEDUCTION_KEYS,
   INVESTMENT_INTEREST_KEYS,
   makeDividendFactKey,
+  makeEarlyDistributionExceptionKey,
   makeInterestFactKey,
   makeRetirementDistributionFactKey,
   makeTradeFactKey,
@@ -30,12 +31,14 @@ const distribution = (box7: string, box2a: number): Fact => ({
   value: { payerName: "Plan", box1: box2a, box2a, box7, box7IraSepSimple: false },
 });
 
+const CA_RETURN: Decision[] = [{ decisionKey: "decisions.scope.must_file_ca_540", decision: true }];
+
 describe("resolve3805pInfo", () => {
   it("files for a code 1 distribution and sums the taxable amounts", () => {
     const info = resolve3805pInfo(
       makeResolverInputs({
         facts: [distribution("1", 11207), distribution("7", 5000)],
-        decisions: [],
+        decisions: CA_RETURN,
       }),
     );
     expect(info.mustFile?.["form-3805p"]?.value).toBe(true);
@@ -54,12 +57,12 @@ describe("resolve3805pInfo", () => {
       value: { rolledOver: amount },
     });
     const all = resolve3805pInfo(
-      makeResolverInputs({ facts: [ira, rolledOver(10000)], decisions: [] }),
+      makeResolverInputs({ facts: [ira, rolledOver(10000)], decisions: CA_RETURN }),
     );
     expect(all.mustFile?.["form-3805p"]?.value).toBe(false);
     expect(all.earlyDistributionsInIncome).toBe(0);
     const part = resolve3805pInfo(
-      makeResolverInputs({ facts: [ira, rolledOver(6000)], decisions: [] }),
+      makeResolverInputs({ facts: [ira, rolledOver(6000)], decisions: CA_RETURN }),
     );
     expect(part.mustFile?.["form-3805p"]?.value).toBe(true);
     expect(part.earlyDistributionsInIncome).toBe(4000);
@@ -77,7 +80,9 @@ describe("resolve3805pInfo", () => {
         box7IraSepSimple: false,
       },
     };
-    const info = resolve3805pInfo(makeResolverInputs({ facts: [undetermined], decisions: [] }));
+    const info = resolve3805pInfo(
+      makeResolverInputs({ facts: [undetermined], decisions: CA_RETURN }),
+    );
     expect(info.mustFile?.["form-3805p"]?.value).toBe(true);
     expect(info.earlyDistributionsInIncome).toBeUndefined();
   });
@@ -96,7 +101,7 @@ describe("resolve3805pInfo", () => {
       },
     };
     const info = resolve3805pInfo(
-      makeResolverInputs({ facts: [distribution("1", 11207), spouse], decisions: [] }),
+      makeResolverInputs({ facts: [distribution("1", 11207), spouse], decisions: CA_RETURN }),
     );
     expect(info.mustFile?.["form-3805p"]?.value).toBe(true);
     expect(info.earlyDistributionsInIncome).toBeUndefined();
@@ -107,8 +112,58 @@ describe("resolve3805pInfo", () => {
     const info = resolve3805pInfo(
       makeResolverInputs({
         facts: [distribution("2", 11207), distribution("7", 5000), distribution("G", 9000)],
-        decisions: [],
+        decisions: CA_RETURN,
       }),
+    );
+    expect(info.mustFile?.["form-3805p"]?.value).toBe(false);
+  });
+
+  // ca-3805p-inst-2025::sec::line-2-early-distributions-not-subject-to-additional-tax::b03: 07 "applies only to IRAs".
+  it("asks again for an exception that does not fit the plan, and line 2 waits", () => {
+    const key = makeEarlyDistributionExceptionKey("plan", "code-1");
+    const info = resolve3805pInfo(
+      makeResolverInputs({
+        facts: [
+          distribution("1", 8000),
+          { key, category: "retirement", value: { number: "07", amount: 500 } },
+        ],
+        decisions: CA_RETURN,
+      }),
+    );
+    expect(info.earlyDistributionExclusion).toEqual({ status: "pending" });
+    expect(info.missingInputs?.["form-3805p"]).toEqual([key]);
+  });
+
+  it("an exception on a distribution with an undetermined taxable amount is an engine gap", () => {
+    const info = resolve3805pInfo(
+      makeResolverInputs({
+        facts: [
+          {
+            key: makeRetirementDistributionFactKey("plan", "code-1"),
+            category: "retirement",
+            value: {
+              payerName: "Plan",
+              box1: 8000,
+              box2b: { taxableAmountNotDetermined: true },
+              box7: "1",
+              box7IraSepSimple: false,
+            },
+          },
+          {
+            key: makeEarlyDistributionExceptionKey("plan", "code-1"),
+            category: "retirement",
+            value: { number: "05", amount: 500 },
+          },
+        ],
+        decisions: CA_RETURN,
+      }),
+    );
+    expect(info.earlyDistributionExclusion?.status).toBe("gap");
+  });
+
+  it("does not file on a return with no California Form 540", () => {
+    const info = resolve3805pInfo(
+      makeResolverInputs({ facts: [distribution("1", 11207)], decisions: [] }),
     );
     expect(info.mustFile?.["form-3805p"]?.value).toBe(false);
   });
