@@ -63,6 +63,19 @@ const car = (vehicle: NoncashGiftFactValue["vehicle"], fairMarketValue: number) 
   });
 
 describe("column (h): the deduction", () => {
+  it("Schedule A line-12::b03: a worn household item of $500 or less has no deduction", () => {
+    const sofa = gift({ propertyType: "clothing_household", goodUsedCondition: false });
+    expect(giftDeduction(sofa)).toBe(0);
+    expect(giftDeduction({ ...sofa, goodUsedCondition: true })).toBe(400);
+  });
+
+  it("Pub. 526 patents-and-other-intellectual-property::b01: the smaller of basis and FMV", () => {
+    const patent = gift({ propertyType: "intellectual_property", fairMarketValue: 1000 });
+    expect(giftDeduction({ ...patent, costBasis: 200 })).toBe(200);
+    expect(giftDeduction({ ...patent, costBasis: 1500 })).toBe(1000);
+    expect(giftDeduction({ ...patent, costBasis: undefined })).toBe(1000);
+  });
+
   it("Pub. 526 ordinary-income-property::b01–b02: stock held 5 months, FMV $1,000, basis $800 → $800", () => {
     const stock = gift({
       propertyType: "publicly_traded_security",

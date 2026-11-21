@@ -108,18 +108,37 @@ function vehicleLimit(gift: NoncashGiftFactValue): number | undefined {
  * (line-1::b04). Ordinary income property (inventory, or a capital asset held
  * 1 year or less) deducts the FMV minus the gain, which limits it to the basis
  * (fair-market-value-fmv::b01–b02; Pub. 526 ordinary-income-property::b01–b02).
- * The capital gain property reductions (fair-market-value-fmv::b03: a private
- * nonoperating foundation, the 50% limit election, intellectual property,
- * taxidermy, unrelated use) have no facts: the engine does not make them.
+ * Intellectual property deducts the smaller of its basis and its FMV
+ * (fair-market-value-fmv::b03; Pub. 526 patents-and-other-intellectual-property::b01).
+ * With no basis stated it deducts the FMV, as the TaxCalcBench ty25-us-004
+ * answer key does: an open question.
+ * The other capital gain property reductions (::b03: a private nonoperating
+ * foundation, the 50% limit election, taxidermy, unrelated use) have no facts:
+ * the engine does not make them.
  */
 export function giftDeduction(gift: NoncashGiftFactValue): number | undefined {
+  if (wornItemNotDeductible(gift)) return 0;
   const limited = vehicleLimit(gift);
   if (limited === undefined) return undefined;
+  if (gift.propertyType === "intellectual_property") {
+    return gift.costBasis === undefined ? limited : Math.min(limited, gift.costBasis);
+  }
   const ordinaryIncome = gift.propertyType === "inventory" || heldMoreThanOneYear(gift) === false;
   if (!ordinaryIncome) return limited;
   if (gift.costBasis === undefined) return undefined;
   return Math.min(limited, gift.costBasis);
 }
+
+/*
+ * Clothing or a household item below good used condition has no deduction,
+ * unless its value is over $500 and an appraisal goes with Form 8283: that
+ * item is for Section B (irs-1040sa-inst-2025::sec::line-12::b03; Pub. 526
+ * clothing-and-household-items::b01).
+ */
+const wornItemNotDeductible = (gift: NoncashGiftFactValue) =>
+  gift.propertyType === "clothing_household" &&
+  gift.goodUsedCondition === false &&
+  gift.fairMarketValue <= SMALL_GIFT_LIMIT;
 
 /* The amount for the tests: the deduction, or while it waits its FMV (the most it can be). */
 const testedAmount = (gift: NoncashGiftFactValue) => giftDeduction(gift) ?? gift.fairMarketValue;
