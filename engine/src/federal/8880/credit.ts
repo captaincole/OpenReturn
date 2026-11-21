@@ -70,10 +70,11 @@ export function line8Of(form: Accessor, info: Form8880FilingInfo): Value {
   return numberOrBlank(form["form-1040.line.11a"]);
 }
 
-/* Line 9: the digit after "0." from the table. */
+/* Line 9: the digit after "0." from the table; blank while the filing status waits. */
 export function line9Of(form: Accessor, info: Form8880FilingInfo): Value {
   const line8 = line8Of(form, info);
-  if (typeof line8 !== "number" || info.filingStatus === undefined) return line8;
+  if (typeof line8 !== "number") return line8;
+  if (info.filingStatus === undefined) return undefined;
   return line9Digit(line8, info.filingStatus);
 }
 

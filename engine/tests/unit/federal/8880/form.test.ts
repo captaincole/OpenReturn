@@ -202,6 +202,34 @@ describe("Form 8880 columns", () => {
     expect(run.line("0.line.4_certain_distributions_col_a")).toBe(700);
   });
 
+  it("a direct IRA rollover (code G) comes off line 4 once, not again through rolledOver", () => {
+    const direct = row("retirement", makeRetirementDistributionFactKey("acme-ira", "code-g"), {
+      payerName: "Acme IRA",
+      box1: 5000,
+      box2a: 0,
+      box7: "G",
+      box7IraSepSimple: true,
+    });
+    const roth = row("retirement", makeRetirementDistributionFactKey("acme-roth", "code-j"), {
+      payerName: "Acme Roth IRA",
+      box1: 1500,
+      box7: "J",
+      box7IraSepSimple: false,
+    });
+    const traditional = row("retirement", makeTraditionalIraFactKey("taxpayer"), {
+      nondeductibleContributions: 0,
+      rolledOver: 5000,
+    });
+    const run = evaluate(factsWith({}, [direct, roth, traditional]));
+    // The Roth IRA's 1,500 plus Dorian's 300, in both columns.
+    expect(run.line("0.line.4_certain_distributions_col_a")).toBe(1800);
+    expect(run.line("0.line.4_certain_distributions_col_b")).toBe(1800);
+    // Line 5: (a) 2,800 − 1,800 = 1,000; (b) 2,400 − 1,800 = 600. Line 10: 1,600 × 0.5.
+    expect(run.line("0.line.6_smaller_of_line_5_or_2000_col_a")).toBe(1000);
+    expect(run.line("0.line.6_smaller_of_line_5_or_2000_col_b")).toBe(600);
+    expect(run.line("0.line.10_line_7_times_line_9")).toBe(800);
+  });
+
   it("column (b) is blank on a return that is not joint", () => {
     const run = evaluate(
       factsWith({
@@ -231,6 +259,15 @@ describe("Form 8880 stops and gaps", () => {
     expect(run.line("0.line.12_retirement_savings_credit")).toBeUndefined();
     expect(isGap(run.field("form-8880", "0.line.12_retirement_savings_credit"))).toBe(false);
     expect(run.value("schedule-3", "0.line.4")).toBeUndefined();
+  });
+
+  it("lines 9 and 10 stay blank while the filing status waits", () => {
+    const run = evaluate(
+      base.facts,
+      base.decisions.filter((each) => each.decisionKey !== "decisions.scope.filing_status"),
+    );
+    expect(run.line("0.line.9_applicable_decimal_amount")).toBeUndefined();
+    expect(run.line("0.line.10_line_7_times_line_9")).toBeUndefined();
   });
 
   it("foreign tax paid makes the worksheet a gap, and Schedule 3 line 4 too", () => {

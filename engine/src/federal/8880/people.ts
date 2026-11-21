@@ -124,23 +124,35 @@ const deferralsOf = (w2: W2FactValue): number =>
  * an excluded code, a traditional IRA distribution rolled over or converted to a
  * Roth IRA (retirement.traditional_ira), and the stated exclusions. Box 1 is the
  * gross distribution: a Roth IRA distribution counts even when not taxable
- * (irs-pub-590a-2025::sec::retirement-savings::b04).
+ * (irs-pub-590a-2025::sec::retirement-savings::b04). `rolledOver` counts direct
+ * rollovers too (Form 8606 line 7), and a code G row is already off, so only the
+ * rollover beyond the code G IRA rows' box 1 comes off the other rows, as Form
+ * 1040 traditionalTaxable does.
  */
 function distributions2025(
   inputs: ResolverInputs,
   owner: IraOwner,
   fact: SaversCreditFactValue | undefined,
 ): number {
-  const counted = factsInCategory(inputs, "retirement")
+  const own = factsInCategory(inputs, "retirement")
     .filter((row) => isRetirementDistributionFactKey(row.key))
     .map((row) => row.value as RetirementDistributionFactValue)
-    .filter((distribution) => (distribution.owner ?? "taxpayer") === owner)
-    .filter((distribution) => !hasDistributionCode(distribution, EXCLUDED_DISTRIBUTION_CODES));
+    .filter((distribution) => (distribution.owner ?? "taxpayer") === owner);
+  const counted = own.filter(
+    (distribution) => !hasDistributionCode(distribution, EXCLUDED_DISTRIBUTION_CODES),
+  );
+  const directIraRollovers = own.filter(
+    (distribution) => distribution.box7IraSepSimple && hasDistributionCode(distribution, ["G"]),
+  );
   const ira = readTraditionalIraFact(inputs.factByKey, owner);
+  const indirectRollover = atLeast(
+    0,
+    sum(ira?.rolledOver) - sum(...directIraRollovers.map((distribution) => distribution.box1)),
+  );
   return atLeast(
     0,
     sum(...counted.map((distribution) => distribution.box1)) -
-      sum(ira?.rolledOver, ira?.convertedToRoth, fact?.excluded2025Distributions),
+      sum(indirectRollover, ira?.convertedToRoth, fact?.excluded2025Distributions),
   );
 }
 
