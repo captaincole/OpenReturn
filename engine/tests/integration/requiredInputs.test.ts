@@ -26,6 +26,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "an excess contribution by the due date; blank otherwise",
   ],
   [
+    /^hsa\.archer_msa\.distributions_rolled_over$/,
+    "Form 8853 line 6b, recorded only when the user rolled an Archer MSA distribution over or " +
+      "took out an excess contribution by the due date; blank otherwise",
+  ],
+  [
     /^decisions\.scope\.must_file_schedule_a$/,
     "close-deductions records it when California itemizes and federal takes the standard " +
       "deduction (cade deductions/closing.ts); absent, Schedule A follows decisions.itemize_vs_standard",

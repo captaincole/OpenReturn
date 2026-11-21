@@ -22,3 +22,12 @@ export function bornBeforeJan2_1961(dob: string | undefined): boolean | undefine
 export function bornBeforeJan2_1971(dob: string | undefined): boolean | undefined {
   return bornBeforeJan2Of(dob, 1971);
 }
+
+/*
+ * 65 on or before December 31, 2024 (a January 1, 1960 birthday counts as the
+ * day before), so every 2025 distribution is made after the 65th birthday:
+ * the Archer MSA age exception (Form 8853 line 9a). Tax year 2025 only.
+ */
+export function bornBeforeJan2_1960(dob: string | undefined): boolean | undefined {
+  return bornBeforeJan2Of(dob, 1960);
+}

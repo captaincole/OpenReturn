@@ -2,12 +2,17 @@
 
 import { defineForm } from "../../defineForm.js";
 import { sum } from "../../money.js";
+import { unsupported } from "../../types.js";
+import { files8853, form8853Total } from "../8853/results.js";
 import type { Schedule2FilingInfo } from "./filingInfo.js";
 import type { Schedule2 } from "./types.js";
 
 /* Blank, not 0, when every line is blank, as on the paper form. */
 const total = (...values: unknown[]): number | undefined =>
   values.every((value) => value === undefined) ? undefined : sum(...values);
+
+const NO_FORM_8853_LINE_17E = "Form 8853 (Archer MSA) not ingested; no Archer MSA scenario yet";
+const NO_FORM_8853_LINE_17F = "Form 8853 (Medicare Advantage MSA) not ingested; no scenario yet";
 
 export function register(): void {
   defineForm<Schedule2, Schedule2FilingInfo>("schedule-2", {
@@ -50,6 +55,18 @@ export function register(): void {
         total(form["form-8889.0.line.17b_additional_20pct_tax"]),
       "1.line.17d_additional_tax_hsa_ineligible_individual": (form) =>
         total(form["form-8889.0.line.21_additional_tax_10pct"]),
+      /*
+       * MANUAL EDIT: lines 17e and 17f = Form 8853 lines 9b and 13b (irs-1040-inst-2025::sec::line-17e::b01,
+       * ::line-17f::b01). Without Form 8853 each keeps the reason it had before the form had rules.
+       */
+      "1.line.17e_additional_tax_archer_msa_distributions": (_, info) =>
+        files8853(info)
+          ? form8853Total(info, ["0.line.9b_additional_20_tax"])
+          : unsupported(NO_FORM_8853_LINE_17E),
+      "1.line.17f_additional_tax_medicare_advantage_msa_distributions": (_, info) =>
+        files8853(info)
+          ? form8853Total(info, ["0.line.13b_additional_50_tax"])
+          : unsupported(NO_FORM_8853_LINE_17F),
       "1.line.18_total_additional_taxes": (form) =>
         total(
           form["1.line.17a_recapture_other_credits_amount"],
@@ -148,10 +165,6 @@ export function register(): void {
         "No credit-recapture scenario (Forms 4255/8874/8882) yet",
       "1.line.17b_recapture_federal_mortgage_subsidy":
         "No Form 8828 / home-sale-with-mortgage-subsidy scenario yet",
-      "1.line.17e_additional_tax_archer_msa_distributions":
-        "Form 8853 (Archer MSA) not ingested; no Archer MSA scenario yet",
-      "1.line.17f_additional_tax_medicare_advantage_msa_distributions":
-        "Form 8853 (Medicare Advantage MSA) not ingested; no scenario yet",
       "1.line.17g_recapture_charitable_contribution_fractional_interest":
         "No fractional-interest charitable contribution recapture scenario yet",
       "1.line.17h_income_nonqualified_deferred_compensation_409a":

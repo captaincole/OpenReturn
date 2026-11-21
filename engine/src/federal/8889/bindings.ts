@@ -2,8 +2,12 @@
 
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
+import { unsupported } from "../../types.js";
+import { files8853, form8853Total } from "../8853/results.js";
 import type { Form8889FilingInfo } from "./filingInfo.js";
 import type { Form8889 } from "./types.js";
+
+const NO_FORM_8853 = "No Archer MSA / Form 8853 scenario or ingestion yet.";
 
 export function register(): void {
   defineForm<Form8889, Form8889FilingInfo>("form-8889", {
@@ -45,6 +49,18 @@ export function register(): void {
           ? Math.min(own, room)
           : undefined;
       },
+      /*
+       * MANUAL EDIT: line 4 = "Amount you and your employer contributed to your Archer MSAs
+       * for 2025 from Form 8853, lines 1 and 2" (the 8889 form). Line 1 already counts the
+       * spouse's employer contributions (irs-8853-inst-2025::sec::line-1::b01).
+       */
+      "0.line.4_archer_msa_contributions": (_, info) =>
+        files8853(info)
+          ? form8853Total(info, [
+              "0.line.1_employer_contributions",
+              "0.line.2_archer_msa_contributions",
+            ])
+          : unsupported(NO_FORM_8853),
       "0.line.14a_total_distributions": (_, info) => roundDollars(info.hsaDistributionsTotal),
       // MANUAL EDIT: the stated rollover and timely excess withdrawal (irs-8889-inst-2025::sec::line-14b::b01).
       "0.line.14b_distributions_rolled_over": (_, info) =>
@@ -107,7 +123,6 @@ export function register(): void {
     },
 
     unsupported: {
-      "0.line.4_archer_msa_contributions": "No Archer MSA / Form 8853 scenario or ingestion yet.",
       "0.line.7_additional_contribution_age_55":
         "Only a married filer 55 or older with family coverage uses line 7 (the others add $1,000 on line 3); the spouse's coverage is not modeled.",
       "0.line.10_qualified_hsa_funding_distributions":

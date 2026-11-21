@@ -9,6 +9,8 @@ import { traditionalTaxable } from "../../../federal/1040/resolveInfo.js";
 import { rowTaxable } from "../../../federal/1040/rowTaxable.js";
 import { NONQUALIFIED_ROTH_CODES, partIIIFigures } from "../../../federal/8606/partIII.js";
 import { form8606Filers } from "../../../federal/8606/resolveInfo.js";
+import { resolve8853Info } from "../../../federal/8853/resolveInfo.js";
+import { form8853Reaches } from "../../../federal/8853/results.js";
 import { sum } from "../../../money.js";
 import { factsInCategory, resolveMustFile, type ResolverInputs } from "../../../resolverInputs.js";
 import type { EarlyDistributionOwner, Form3805pFilingInfo } from "./filingInfo.js";
@@ -164,6 +166,16 @@ export function resolve3805pInfo(inputs: ResolverInputs): Form3805pFilingInfo {
         /* A full rollover leaves nothing in income: no form (::b02). Unknown amounts keep the form, and wait. */
         value: rows.length > 0 && (amount === undefined || amount > 0),
         triggeredByFactKeys: rows.map((row) => row.key),
+      },
+      {
+        /* Part III: a taxable Archer MSA distribution or a Medicare Advantage MSA tax on Form 8853 (ca-3805p-inst-2025::sec::part-iii-additional-tax-on-distributions-from-archer-and-medicare-advantage-medical-savings-accounts-msas::b01). */
+        rule: "fallback: Form 8853 line 8 or line 13b, with Form 540",
+        value:
+          inputs.decisionByKey.get("decisions.scope.must_file_ca_540") === true &&
+          form8853Reaches(resolve8853Info(inputs), [
+            "0.line.8_taxable_archer_msa_distributions",
+            "0.line.13b_additional_50_tax",
+          ]),
       },
     ],
   });
