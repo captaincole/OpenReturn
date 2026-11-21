@@ -2,15 +2,25 @@
  * The IRS and FTB lists of the forms that an individual return can hold, one file
  * for each jurisdiction and tax year. The names, titles and maximums are the
  * publisher's. `short` (the form's folder in the engine) and `tier1` (a form that
- * our target user needs) are ours, kept by hand.
+ * our target user needs) are ours, kept by hand. So is `kind`, on a row that is
+ * not a form to compute.
+ *
+ * input-documents-2025.json is our own list: the kinds of document that Cade reads.
  */
 
 import californiaForms from "./california-2025.json";
 import federalForms from "./federal-2025.json";
+import inputDocuments from "./input-documents-2025.json";
 
 export interface ListedForm {
   name: string;
   title?: string;
+  /*
+   * "document": a document that the taxpayer receives and attaches (Form W-2).
+   * "other": another return, or a request (Form 1040-NR, Form 4868).
+   * No kind: a form or schedule that the engine computes for the return.
+   */
+  kind?: string;
   /* The most copies of the form on one return, as the publisher writes it. */
   maxPerReturn?: string;
   short?: string;
@@ -30,6 +40,15 @@ export interface FormList {
 }
 
 export const FORM_LISTS: FormList[] = [federalForms, californiaForms];
+
+/* A kind of document that Cade reads, with the ingest tool that reads it. */
+export interface InputDocument {
+  name: string;
+  title: string;
+  ingestTool: string;
+}
+
+export const INPUT_DOCUMENTS: InputDocument[] = inputDocuments.documents;
 
 const NAME_CHARACTERS = "abcdefghijklmnopqrstuvwxyz0123456789";
 

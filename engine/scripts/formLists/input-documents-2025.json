@@ -1,0 +1,80 @@
+{
+  "note": "The kinds of input document that Cade reads, kept by hand. Each row names the ingest tool that reads it; a Cade unit test checks that the two agree.",
+  "taxYear": 2025,
+  "documents": [
+    { "name": "Form W-2", "title": "Wage and Tax Statement", "ingestTool": "ingest-w2-structured" },
+    {
+      "name": "Form W-2 (household employee)",
+      "title": "The Form W-2 that the taxpayer gives a household employee",
+      "ingestTool": "ingest-household-w2"
+    },
+    { "name": "Form W-2G", "title": "Certain Gambling Winnings", "ingestTool": "ingest-w2g" },
+    { "name": "Form 1099-INT", "title": "Interest Income", "ingestTool": "ingest-1099-int" },
+    {
+      "name": "Form 1099-DIV",
+      "title": "Dividends and Distributions",
+      "ingestTool": "ingest-1099-div"
+    },
+    {
+      "name": "Form 1099-B",
+      "title": "Proceeds From Broker and Barter Exchange Transactions",
+      "ingestTool": "ingest-1099-b"
+    },
+    {
+      "name": "Form 1099-MISC",
+      "title": "Miscellaneous Information",
+      "ingestTool": "ingest-1099-misc"
+    },
+    {
+      "name": "Form 1099-NEC",
+      "title": "Nonemployee Compensation",
+      "ingestTool": "ingest-1099-nec"
+    },
+    {
+      "name": "Form 1099-R",
+      "title": "Distributions From Pensions, Annuities, Retirement Plans and IRAs",
+      "ingestTool": "ingest-1099-r"
+    },
+    {
+      "name": "Form 1099-SA",
+      "title": "Distributions From an HSA, Archer MSA, or Medicare Advantage MSA",
+      "ingestTool": "ingest-1099-sa"
+    },
+    {
+      "name": "Form 1099-K",
+      "title": "Payment Card and Third Party Network Transactions",
+      "ingestTool": "ingest-1099-k"
+    },
+    {
+      "name": "Form 1099-G",
+      "title": "Certain Government Payments",
+      "ingestTool": "ingest-1099-g"
+    },
+    {
+      "name": "Form SSA-1099",
+      "title": "Social Security Benefit Statement",
+      "ingestTool": "ingest-ssa-1099"
+    },
+    { "name": "Form 1098", "title": "Mortgage Interest Statement", "ingestTool": "ingest-1098" },
+    {
+      "name": "Form 1098-E",
+      "title": "Student Loan Interest Statement",
+      "ingestTool": "ingest-1098-e"
+    },
+    {
+      "name": "Form 1095-A",
+      "title": "Health Insurance Marketplace Statement",
+      "ingestTool": "ingest-1095-a"
+    },
+    {
+      "name": "Form 3921",
+      "title": "Exercise of an Incentive Stock Option",
+      "ingestTool": "ingest-3921"
+    },
+    {
+      "name": "Home energy invoice",
+      "title": "An invoice for a home energy improvement",
+      "ingestTool": "ingest-energy-invoice"
+    }
+  ]
+}

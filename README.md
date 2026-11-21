@@ -120,17 +120,19 @@ The numbers count only the forms that the engine has. `npm run coverage` writes 
 
 ### Forms for an individual return
 
-The IRS and the FTB each publish the list of forms that they accept with an individual return. The table shows how many of those forms the engine has.
+The IRS and the FTB each publish the list of forms that they accept with an individual return. The table shows how many of those forms the engine has. It counts the forms and schedules to compute, and not the documents, other returns and requests that are also on those lists.
 
 <!-- form-list-table:start -->
 | Forms | Federal 2025 | California 2025 |
 | --- | --- | --- |
-| Forms an individual return can hold | 225 | 65 |
+| Forms and schedules for an individual return | 197 | 62 |
 | In the engine | 83 | 38 |
 | With rules | 32 | 9 |
 | Tier 1 forms | 43 | 22 |
 | Tier 1 in the engine | 43 | 22 |
 | Tier 1 with rules | 26 | 7 |
+
+Cade reads 18 kinds of input document, such as Form W-2 and Form 1099-B.
 <!-- form-list-table:end -->
 
 - **In the engine:** the engine has the form's field list and can fill the form.
