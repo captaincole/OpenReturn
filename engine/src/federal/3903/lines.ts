@@ -1,5 +1,5 @@
 import type { ArmedForcesMoveTravel } from "../../facts/index.js";
-import { roundDollars, sum } from "../../money.js";
+import { atLeast, roundDollars, sum } from "../../money.js";
 
 /*
  * Line 2: "Mileage at the rate of 21 cents a mile" for the member's own vehicle
@@ -41,6 +41,25 @@ export interface MoveAmounts {
   householdGoods: number;
   travel: number;
   governmentReimbursements: number;
+  /* Allowances that are not income (dislocation, temporary lodging, move-in housing). */
+  excludedAllowances?: number;
+}
+
+/*
+ * Lines 1 and 2 leave out "any expenses that were reimbursed by an allowance you
+ * don't have to include in your income" (irs-3903-inst-2025::sec::line-1::b02,
+ * line-2::b01). The text does not say which line an allowance comes off: the
+ * engine takes it off line 1 first, then line 2 (QUESTIONS.md). An allowance
+ * over both lines leaves them at 0 and is not income
+ * (purpose-of-form::b02: the line 1h excess is for amounts "other than
+ * dislocation allowances, temporary lodging expenses, temporary lodging
+ * allowances, or move-in housing allowances").
+ */
+function lessExcludedAllowances(amounts: MoveAmounts): { householdGoods: number; travel: number } {
+  const allowances = atLeast(0, amounts.excludedAllowances);
+  const householdGoods = atLeast(0, amounts.householdGoods - allowances);
+  const leftForTravel = atLeast(0, allowances - amounts.householdGoods);
+  return { householdGoods, travel: atLeast(0, amounts.travel - leftForTravel) };
 }
 
 export interface Form3903Lines {
@@ -64,8 +83,9 @@ export interface Form3903Lines {
  * the result is more than zero, enter it on Form 1040 ... line 1h."
  */
 export function form3903Lines(amounts: MoveAmounts): Form3903Lines {
-  const line1 = roundDollars(amounts.householdGoods);
-  const line2 = roundDollars(amounts.travel);
+  const paid = lessExcludedAllowances(amounts);
+  const line1 = roundDollars(paid.householdGoods);
+  const line2 = roundDollars(paid.travel);
   const line3 = line1 + line2;
   const line4 = roundDollars(amounts.governmentReimbursements);
   const line5Yes = line3 > line4;

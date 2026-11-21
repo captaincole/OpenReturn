@@ -40,11 +40,22 @@ export interface ArmedForcesMoveFactValue {
   /*
    * Line 1: what the member paid to pack, crate, move, store and insure household
    * goods and personal effects (storage within 30 days in a row, or longer for a
-   * move outside the United States). Not services the government provided, and
-   * not expenses an excluded allowance paid (irs-3903-inst-2025::sec::line-1::b01, b02).
+   * move outside the United States). Not services the government provided
+   * (irs-3903-inst-2025::sec::line-1::b01, b02). An excluded allowance is stated
+   * on its own (excludedAllowances), not taken off here.
    */
   householdGoods: number;
   travel: ArmedForcesMoveTravel;
+  /*
+   * Allowances for the move that are not income: a dislocation allowance, a
+   * temporary lodging allowance or expense, a move-in housing allowance
+   * (irs-3903-inst-2025::sec::purpose-of-form::b02). Lines 1 and 2 leave out the
+   * expenses they paid ("don't include any expenses that were reimbursed by an
+   * allowance you don't have to include in your income", line-1::b02, line-2::b01),
+   * so the engine takes this amount off line 1, then line 2. Never on line 4.
+   * Absent: none. householdGoods and travel are what the member paid in full.
+   */
+  excludedAllowances?: number;
   /*
    * Line 4: reimbursements and allowances from the government for the expenses
    * on lines 1 and 2 that are not in W-2 box 1. Not services in kind, and not a

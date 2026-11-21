@@ -9,12 +9,15 @@ Each place where the form and its instructions do not settle a rule. Short answe
 - Why a doubt: "should be" is not "is". A reimbursement the government paid that is missing from box 12 would be missed.
 - Changes dollars: yes (line 4, line 5, Schedule 1 line 14, Form 1040 line 1h).
 
-## 2. Dislocation and temporary lodging allowances on line 4
+## 2. Dislocation and temporary lodging allowances
 
-- Form instructions: "don't include any part of a dislocation allowance, a temporary lodging allowance, a temporary lodging expense, or a move-in housing allowance" (irs-3903-inst-2025::sec::line-4::b01).
+- Line 4: "don't include any part of a dislocation allowance, a temporary lodging allowance, a temporary lodging expense, or a move-in housing allowance" (irs-3903-inst-2025::sec::line-4::b01).
+- Lines 1 and 2: "don't include any expenses that were reimbursed by an allowance you don't have to include in your income" (irs-3903-inst-2025::sec::line-1::b02, ::sec::line-2::b01). These allowances are not income (irs-3903-inst-2025::sec::purpose-of-form::b02).
 - Pub. 3: the deduction is for "qualified expenses that exceed your reimbursements and allowances (including dislocation allowances, temporary lodging expenses, temporary lodging allowances, or move-in housing allowances that are excluded from gross income)" (irs-pub-3-2025::sec::how-to-report-moving-expenses::b01).
-- Default: the form instructions. The fact's line 4 amount leaves these allowances out, and the engine never adds them.
-- Changes dollars: yes. Pub. 3's reading lowers line 5.
+- Settled (blind fill, 2026-11-21): the allowance lowers lines 1 and 2, and line 4 leaves it out so it does not count twice. The move fact states it as `excludedAllowances`; the engine takes it off the paid amounts. An allowance over both lines leaves them at 0 and is not line 1h income (purpose-of-form::b02 names these allowances as the exception).
+- Open: which line it comes off. The text does not say. Default: line 1 first, then line 2. Lines 3, 4 and 5 do not depend on the split; the printed lines 1 and 2 do.
+- Open: a dislocation allowance pays for costs that are not deductible too (meals, deposits). The default takes the whole allowance off, as Pub. 3 reads.
+- Changes dollars: yes (line 5, Schedule 1 line 14).
 
 ## 3. Both vehicle methods on one move
 
@@ -46,16 +49,28 @@ Each place where the form and its instructions do not settle a rule. Short answe
 - Default: No is checked, line 5 is blank, and nothing goes to line 1h (the difference is 0). The form prints line 5's amount only under Yes.
 - Changes dollars: no.
 
+## 8. Two vehicles on one move
+
+- Source: "If you use your own vehicle(s) ..." and "you can only include expenses for one trip per person" (irs-3903-inst-2025::sec::line-2::b01).
+- Default: the engine adds every mile the move states. The member states the miles of each vehicle that a different household member drove, once.
+- Why a doubt: a fact does not say who drove. One person who drove twice (two cars, two trips) may count only one trip.
+- Changes dollars: yes (line 2, line 5).
+
+## Second opinions
+
+- PolicyEngine-US 2.152.15 (commit b274cacc2c): it does not model Form 3903 or the moving expense adjustment. `parameters/gov/irs/ald/deductions.yaml` lists no moving expense item, and no variable or parameter under `gov/irs` names moving, dislocation or 3903. Nothing to compare.
+- IRS Direct File (issue #140): no checkout in this worktree. Not compared.
+
 ## Confidence by field group
 
-| Field group | Confidence |
-| --- | --- |
-| Header name and SSN | stated rule (the return's names and SSN) |
-| Certification box | stated rule |
-| Lines 1 and 2 (amounts stated by the member; mileage at 21 cents) | stated rule; Pub. 521 (2017) example with numbers for the line 2 arithmetic |
-| Line 3 | published example with numbers (Pub. 521, 2017) |
-| Line 4 | published example with numbers for code P; own reading for the default (question 1) |
-| Line 5 Yes/No and amount | published example with numbers (Yes branch); stated rule (No branch) |
-| Schedule 1 line 14 and box | stated rule |
-| Form 1040 line 1h excess | stated rule |
-| Schedule CA (540) line 14 column A | stated rule; column C unsupported (needs FTB 3913) |
+| Field group                                                       | Confidence                                                                                                                    |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Header name and SSN                                               | stated rule (the return's names and SSN)                                                                                      |
+| Certification box                                                 | stated rule                                                                                                                   |
+| Lines 1 and 2 (amounts stated by the member; mileage at 21 cents) | stated rule; Pub. 521 (2017) example with numbers for the line 2 arithmetic; own reading for the allowance split (question 2) |
+| Line 3                                                            | published example with numbers (Pub. 521, 2017)                                                                               |
+| Line 4                                                            | published example with numbers for code P; own reading for the default (question 1)                                           |
+| Line 5 Yes/No and amount                                          | published example with numbers (Yes branch); stated rule (No branch)                                                          |
+| Schedule 1 line 14 and box                                        | stated rule                                                                                                                   |
+| Form 1040 line 1h excess                                          | stated rule                                                                                                                   |
+| Schedule CA (540) line 14 column A                                | stated rule; column C unsupported (needs FTB 3913)                                                                            |

@@ -50,6 +50,7 @@ function moveForm(move: ArmedForcesMoveFact, codeP: number | undefined): Form390
     householdGoods: value.householdGoods,
     travel: travelExpenses(value.travel),
     governmentReimbursements,
+    excludedAllowances: value.excludedAllowances,
   });
 }
 

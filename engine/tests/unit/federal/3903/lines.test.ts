@@ -125,6 +125,59 @@ describe("Form 3903 limits", () => {
   });
 });
 
+describe("Form 3903 allowances that are not income", () => {
+  /*
+   * Lines 1 and 2: "don't include any expenses that were reimbursed by an
+   * allowance you don't have to include in your income" (line-1::b02,
+   * line-2::b01). Line 4 leaves the dislocation allowance out (line-4::b01).
+   */
+  it("a $2,500 dislocation allowance comes off line 1 first: 500; 600; 1,100; 1,000; Yes, 100", () => {
+    expect(
+      form3903Lines({
+        householdGoods: 3000,
+        travel: 600,
+        governmentReimbursements: 1000,
+        excludedAllowances: 2500,
+      }),
+    ).toEqual({
+      line1: 500,
+      line2: 600,
+      line3: 1100,
+      line4: 1000,
+      line5Yes: true,
+      line5: 100,
+      excessReimbursement: undefined,
+    });
+  });
+
+  it("an allowance over line 1 takes the rest off line 2", () => {
+    const lines = form3903Lines({
+      householdGoods: 400,
+      travel: 600,
+      governmentReimbursements: 0,
+      excludedAllowances: 700,
+    });
+    expect([lines.line1, lines.line2, lines.line3, lines.line5]).toEqual([0, 300, 300, 300]);
+  });
+
+  it("an allowance over both lines leaves them at 0 and is not Form 1040 line 1h income", () => {
+    const lines = form3903Lines({
+      householdGoods: 400,
+      travel: 100,
+      governmentReimbursements: 0,
+      excludedAllowances: 2500,
+    });
+    expect([lines.line1, lines.line2, lines.line3, lines.line5Yes]).toEqual([0, 0, 0, false]);
+    expect(lines.excessReimbursement).toBeUndefined();
+  });
+
+  it("no allowance stated changes nothing", () => {
+    const amounts = { householdGoods: 3000, travel: 600, governmentReimbursements: 1000 };
+    expect(form3903Lines(amounts)).toEqual(form3903Lines({ ...amounts, excludedAllowances: 0 }));
+    expect(form3903Lines(amounts).line5).toBe(2600);
+  });
+});
+
 describe("Totals of every Form 3903", () => {
   const yes = form3903Lines({ householdGoods: 1000, travel: 0, governmentReimbursements: 400 });
   const no = form3903Lines({ householdGoods: 100, travel: 0, governmentReimbursements: 300 });

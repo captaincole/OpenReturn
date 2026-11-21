@@ -140,6 +140,16 @@ describe("Form 3903 line 4", () => {
   });
 });
 
+describe("An allowance that is not income", () => {
+  it("a dislocation allowance comes off line 1, not line 4, and lowers Schedule 1 line 14", () => {
+    const run = evaluate([move("pcs", { excludedAllowances: 300 })]);
+    expect(run.value("form-3903", "0.line.1_transportation_storage_household_goods")).toBe(2560);
+    expect(run.value("form-3903", LINE_4)).toBe(3150);
+    expect(run.value("form-3903", LINE_5)).toBe(213);
+    expect(run.value("schedule-1", LINE_14)).toBe(213);
+  });
+});
+
 describe("Line 4 more than line 3", () => {
   it("checks No, leaves line 5 and Schedule 1 blank, and puts the excess on Form 1040 line 1h", () => {
     const run = evaluate([move("pcs", { governmentReimbursements: 4000 })]);
