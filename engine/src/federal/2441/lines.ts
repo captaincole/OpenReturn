@@ -1,10 +1,14 @@
 /* Form 2441 Part II helpers: whether the credit applies, earned income, the line 8 decimal. */
 
-import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, stepsOf, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import type { Form2441FilingInfo } from "./filingInfo.js";
-import type { Form2441 } from "./types.js";
+
+/*
+ * The other forms' lines that earned income reads (Form 1040, Schedule SE,
+ * Schedule 1). Any form's accessor gives them, so FTB 3506 reads the same rule.
+ */
+export type OtherFormLines = { readonly [fieldId: string]: unknown };
 
 /*
  * Line 8 table (irs-pub-503-2025::sec::randall-s-reduced-dollar-limit::b01):
@@ -86,7 +90,7 @@ export interface EarnedIncome {
  * the lines this reads.
  */
 export function earnedIncome(
-  form: FormAccessor<Form2441>,
+  form: OtherFormLines,
   info: Form2441FilingInfo,
 ): EarnedIncome | Unsupported | undefined {
   return earnedIncomeFrom(form, info, numberOrBlank(form["form-1040.line.1z"]));
@@ -98,14 +102,14 @@ export function earnedIncome(
  * benefits. Summed line by line, as line 1z would loop back through line 26.
  */
 export function earnedIncomeWithoutBenefits(
-  form: FormAccessor<Form2441>,
+  form: OtherFormLines,
   info: Form2441FilingInfo,
 ): EarnedIncome | Unsupported | undefined {
   return earnedIncomeFrom(form, info, sum(...LINE_1_WITHOUT_BENEFITS.map((id) => form[id])));
 }
 
 function earnedIncomeFrom(
-  form: FormAccessor<Form2441>,
+  form: OtherFormLines,
   info: Form2441FilingInfo,
   line1: number | undefined,
 ): EarnedIncome | Unsupported | undefined {
@@ -126,7 +130,7 @@ function earnedIncomeFrom(
  * income (irs-2441-inst-2025::sec::lines-4-and-5::b02). Undefined while either waits.
  */
 function selfEmploymentEarnings(
-  form: FormAccessor<Form2441>,
+  form: OtherFormLines,
   info: Form2441FilingInfo,
 ): number | undefined {
   const scheduleSE = numberOrBlank(form["schedule-se.0.line.3"]);
@@ -148,7 +152,7 @@ function selfEmploymentEarnings(
  * taxpayer's; a spouse's business is a gap.
  */
 function jointEarnedIncome(
-  form: FormAccessor<Form2441>,
+  form: OtherFormLines,
   info: Form2441FilingInfo,
   line1: number,
 ): EarnedIncome | Unsupported | undefined {

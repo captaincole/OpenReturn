@@ -19,6 +19,20 @@ export interface DependentCareProviderFactValue {
   householdEmployee: boolean;
   /* Column (e): the amount paid to the provider in the year. */
   amountPaid: number;
+  /* FTB 3506 line 1c: the provider's telephone number, area code first. */
+  phone?: string;
+  /* FTB 3506 line 1d. A household employee is a person; a tax-exempt organization is an organization. */
+  providerType?: "person" | "organization";
+  /*
+   * FTB 3506 line 1f: the physical address where the care was given, when it is
+   * not the provider's address (a center) or the taxpayer's home (a household employee).
+   */
+  careAddress?: { line1: string; city: string; state: string; zip: string };
+  /*
+   * The employer furnished the care under its dependent care plan: FTB 3506
+   * line 1b reads "See W-2" and line 1g stays blank (ca-3506-inst-2025::sec::line-1a-through-line-1c::b01).
+   */
+  employerProvided?: boolean;
 }
 
 export interface DependentCareQualifyingPersonFactValue {
@@ -42,6 +56,16 @@ export interface DependentCareQualifyingPersonFactValue {
    * Line 16 has its own answer (expensesIncurred).
    */
   expensesPaid: number;
+  /*
+   * FTB 3506 line 2 column (e): the part of expensesPaid for care given in
+   * California. Needed only when some care was given outside California.
+   */
+  californiaExpensesPaid?: number;
+  /*
+   * FTB 3506 line 2 column (d): the percent of 2025 the taxpayer had physical
+   * custody, recorded only when custody was shared (ca-3506-inst-2025::sec::column-d::b01).
+   */
+  physicalCustodyPercent?: number;
 }
 
 export interface DependentCareProviderFact {

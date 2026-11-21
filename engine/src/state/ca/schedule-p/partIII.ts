@@ -1,14 +1,50 @@
 /*
- * Schedule P (540) Part III, the credit rows. Each row holds one credit; the
- * engine has no credit facts, so every row is `unsupported` with its reason.
+ * Schedule P (540) Part III, the credit rows. Each row holds one credit. Only
+ * line 5 (FTB 3506) has facts; every other row is `unsupported` with its reason.
  * Lines 1–3, 11, 22 and 25 (the tax balances) are bound in bindings.ts.
  * Rules: ca-540-sched-p-inst-2025::sec::to-complete-part-iii::b01 (a row is
  * completed only for a credit taken) and ::sec::column-a-through-column-d-instructions::b01.
  */
 
+import type { BindingFn, FormAccessor } from "../../../defineForm.js";
+import { numberOrBlank } from "../../../money.js";
+import type { SchedulePFilingInfo } from "./filingInfo.js";
 import type { ScheduleP } from "./types.js";
 
 type Unsupported = Partial<Record<keyof ScheduleP, string>>;
+type Bindings = Partial<{ [K in keyof ScheduleP]: BindingFn<ScheduleP, SchedulePFilingInfo, K> }>;
+type Form = FormAccessor<ScheduleP>;
+
+/*
+ * Section A1 line 5, the child and dependent care expenses credit (FTB 3506
+ * line 12). Column (b) is the smaller of column (a) and the previous line's
+ * column (c): line 4's when that credit is taken, else line 3. Column (c) is
+ * that balance less column (b) (ca-540-sched-p-inst-2025::sec::column-a-through-column-d-instructions::b01,
+ * ::section-a1-instructions::b01). Line 3 at 0 leaves column (b) at 0: the
+ * credit "may not" be taken (::section-a-instructions::b01). Blank with no credit.
+ */
+const openingBalance = (form: Form) =>
+  numberOrBlank(form["1.part3.4_prison_inmate_labor_credit_col_c"]) ??
+  numberOrBlank(form["1.part3.3_excess_tax_offset_by_credits_col_c"]);
+
+function creditUsed(form: Form): number | undefined {
+  const credit = numberOrBlank(form["1.part3.5_child_dependent_care_credit_col_a"]);
+  const balance = openingBalance(form);
+  return credit === undefined || balance === undefined ? undefined : Math.min(credit, balance);
+}
+
+export const childCareCreditRow: Bindings = {
+  "1.part3.5_child_dependent_care_credit_col_a": (form) => {
+    const credit = numberOrBlank(form["form-3506.0.line.12_child_dependent_care_credit"]);
+    return credit !== undefined && credit > 0 ? credit : undefined;
+  },
+  "1.part3.5_child_dependent_care_credit_col_b": (form) => creditUsed(form),
+  "1.part3.5_child_dependent_care_credit_col_c": (form) => {
+    const used = creditUsed(form);
+    const balance = openingBalance(form);
+    return used === undefined || balance === undefined ? undefined : balance - used;
+  },
+};
 
 function row(reason: string, ...keys: Array<keyof ScheduleP>): Array<[keyof ScheduleP, string]> {
   return keys.map((key) => [key, reason]);
@@ -37,12 +73,6 @@ export const partIIICreditRows: Unsupported = Object.fromEntries([
     "1.part3.4_prison_inmate_labor_credit_col_a",
     "1.part3.4_prison_inmate_labor_credit_col_b",
     "1.part3.4_prison_inmate_labor_credit_col_c",
-  ),
-  ...row(
-    `Section A1 line 5, nonrefundable child and dependent care expenses credit (FTB 3506) — ${NO_CREDIT_FACTS}.`,
-    "1.part3.5_child_dependent_care_credit_col_a",
-    "1.part3.5_child_dependent_care_credit_col_b",
-    "1.part3.5_child_dependent_care_credit_col_c",
   ),
   ...codedCreditRow(2, 6, "Section A2"),
   ...codedCreditRow(2, 7, "Section A2"),

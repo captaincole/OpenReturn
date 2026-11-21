@@ -46,8 +46,13 @@ describe("trackPendingReads", () => {
     );
   });
 
-  it("does not wait on a missing field of the same form", () => {
-    expect(readWaits(ctx({}), "form-8960.0.line.9a")).toBe(false);
+  it("waits on a field of the same form that this pass has not reached", () => {
+    expect(readWaits(ctx({}), "form-8960.0.line.9a")).toBe(true);
+  });
+
+  it("does not wait on a field of the same form that is blank", () => {
+    const fields = { "form-8960.0.line.9a": blocked("blank") };
+    expect(readWaits(ctx({ fields }), "form-8960.0.line.9a")).toBe(false);
   });
 
   it("waits on a field that is itself waiting", () => {

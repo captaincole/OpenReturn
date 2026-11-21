@@ -12,6 +12,7 @@ import { caExemptionCreditsAfterLimit } from "../../../worksheets/caAgiLimitatio
 import { caEitcOutcome, creditLine, NONE, type CaCreditOutcome } from "../3514/credit.js";
 import { fytcOutcome, yctcOutcome } from "../3514/youngChildAndFosterYouth.js";
 import { partIIUnsupported } from "../schedule-ca/increasedStandard.js";
+import { creditBindings } from "./credits.js";
 import type { Form540FilingInfo } from "./filingInfo.js";
 import type { Form540 } from "./types.js";
 
@@ -320,17 +321,8 @@ export function register(): void {
         const tax = form["line.33_tax_after_exemption_credits"];
         return typeof tax === "number" ? sum(tax, form["line.34_tax_amount"]) : undefined;
       },
-      "line.48_tax_after_credits": (form) => {
-        const tax = form["line.35_total_tax_after_credits"];
-        if (typeof tax !== "number") return undefined;
-        return atLeast(
-          0,
-          sum(
-            tax,
-            form["line.47_total_credits"] === undefined ? 0 : -form["line.47_total_credits"],
-          ),
-        );
-      },
+      // MANUAL EDIT: lines 40, 47 and 48 (FTB 3506's credit) are in credits.ts.
+      ...creditBindings,
       /*
        * MANUAL EDIT: Schedule P (540) Part II line 26: "If more than zero, enter
        * here and on Form 540, line 61" (ca-540-sched-p-inst-2025, the form text;
@@ -535,8 +527,6 @@ export function register(): void {
     },
 
     unsupported: {
-      "line.47_total_credits":
-        "Form 540 line 47 (total credits) — aggregates lines 40-46; no CA credit scenario (child/dependent care, renters, etc.) is exercised yet.",
       "line.94_use_tax_balance":
         "Form 540 line 94 (use tax balance) — no scenario has use tax above its payments (line 91 more than line 78), and the corpus has no FTB text for line 94 to ground the rule.",
       "line.96_isr_penalty_balance":
@@ -586,8 +576,6 @@ export function register(): void {
         "Checkbox indicating line 34 tax is from FTB 5870A (tax on accumulation distribution of trusts). No FTB 5870A scenario or fact-ingestion path exists yet.",
       "line.34_tax_amount":
         "Line 34 is tax from Schedule G-1 (lump-sum distributions) or FTB 5870A (tax on accumulation distribution of trusts). No ingestion path exists for these scenarios yet — requires Schedule G-1 or FTB 5870A data.",
-      "line.40_child_dependent_care_credit":
-        "CA nonrefundable Child and Dependent Care Expenses Credit (Code 232) requires FTB 3506 data and dependent/care-expense ingestion. No dependent or child-care-expense scenario built yet.",
       "line.43_credit_name":
         "Free-text credit name for an additional special credit on line 43. No ingestion path for user-supplied special credits (e.g., CA Competes, PTE, etc.) exists yet.",
       "line.43_credit_code":
