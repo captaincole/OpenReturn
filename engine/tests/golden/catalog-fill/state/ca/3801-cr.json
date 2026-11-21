@@ -1,0 +1,294 @@
+{
+  "formId": "form-3801-cr",
+  "fieldCount": 32,
+  "entries": [
+    {
+      "fieldId": "form-3801-cr.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on return",
+          "text": "T-1M1EY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.header.taxpayer_id_number",
+      "widgets": [
+        {
+          "widgetName": "Social Security Number (S S N), Individual Taxpayer Identification Numbers (I T I N), Federal Employer Identification Number (F E I N) or California corporation number (12 digits)",
+          "text": "T-ZJDJ9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.10_federal_modified_agi",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Enter federal modified adjusted gross income, but not less than zero. See instructions. If line 10 is equal to or more than line 9, skip line 11 through line 15 and enter 0 on line 16",
+          "text": "2,546"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.11_limit_minus_modified_agi",
+      "widgets": [
+        {
+          "widgetName": "Line 11. Subtract line 10 from line 9",
+          "text": "7,385"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.12_half_of_line_11",
+      "widgets": [
+        {
+          "widgetName": "Line 12. Multiply line 11 by 50% (.50). Do not enter more than $25,000 ($12,500 if married/R D P filing a separate return and you lived apart for the entire year)",
+          "text": "9,787"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.13_ftb_3801_line_9_amount",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Enter the amount, if any, from line 9 of form F T B 3801",
+          "text": "8,992"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.14_remaining_special_allowance",
+      "widgets": [
+        {
+          "widgetName": "Line 14. Subtract line 13 from line 12",
+          "text": "8,312"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.15_tax_on_line_14_amount",
+      "widgets": [
+        {
+          "widgetName": "Line 15. Enter the tax attributable to the amount on line 14. See instructions",
+          "text": "3,949"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.16_smaller_of_8_or_15",
+      "widgets": [
+        {
+          "widgetName": "Line 16. Enter the smaller of line 8 or line 15",
+          "text": "8,042"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.1a_rental_real_estate_credits",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line 1a. Credits from federal Worksheet 1, column (a)",
+          "text": "2,090"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.1b_rental_real_estate_prior_unallowed",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. Prior year unallowed credits from federal Worksheet 1, column (b)",
+          "text": "4,854"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.1c_rental_real_estate_total",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. Add line 1a and line 1b",
+          "text": "7,702"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.2a_housing_pre_1990_credits",
+      "widgets": [
+        {
+          "widgetName": "Line 2a. Credits from federal Worksheet 2, column (a)",
+          "text": "8,264"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.2b_housing_pre_1990_prior_unallowed",
+      "widgets": [
+        {
+          "widgetName": "Line 2b. Prior year unallowed credits from federal Worksheet 2, column (b)",
+          "text": "8,942"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.2c_housing_pre_1990_total",
+      "widgets": [
+        {
+          "widgetName": "Line 2c. Add line 2a and line 2b",
+          "text": "6,970"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.3a_housing_post_1989_credits",
+      "widgets": [
+        {
+          "widgetName": "Line 3a. Credits from federal Worksheet 3, column (a)",
+          "text": "8,104"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.3b_housing_post_1989_prior_unallowed",
+      "widgets": [
+        {
+          "widgetName": "Line 3b. Prior year unallowed credits from federal Worksheet 3, column (b)",
+          "text": "4,083"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.3c_housing_post_1989_total",
+      "widgets": [
+        {
+          "widgetName": "Line 3c. Add line 3a and line 3b",
+          "text": "7,395"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.4a_other_passive_credits",
+      "widgets": [
+        {
+          "widgetName": "Line 4a. Credits from federal Worksheet 4, column (a)",
+          "text": "5,453"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.4b_other_passive_prior_unallowed",
+      "widgets": [
+        {
+          "widgetName": "Line 4b. Prior year unallowed credits from federal Worksheet 4, column (b)",
+          "text": "1,531"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.4c_other_passive_total",
+      "widgets": [
+        {
+          "widgetName": "Line 4c. Add line 4a and line 4b",
+          "text": "2,639"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.5_total_passive_credits",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Add line 1c, line 2c, line 3c, and line 4c",
+          "text": "4,900"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.6_tax_on_net_passive_income",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Enter the tax attributable to net passive income. See instructions",
+          "text": "8,693"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.7_credits_over_passive_tax",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Subtract line 6 from line 5. If line 6 is more than or equal to line 5, enter 0. See instructions",
+          "text": "5,533"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.8_smaller_of_1c_or_7",
+      "widgets": [
+        {
+          "widgetName": "Part II, Line 8. Enter the smaller of line 1c or line 7",
+          "text": "7,479"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.9_special_allowance_income_limit",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Enter $150,000 ($75,000 if married/R D P filing a separate return and you lived apart for the entire year). See instructions",
+          "text": "7,441"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.1.line.17_passive_activity_credits_allowed",
+      "widgets": [
+        {
+          "widgetName": "Part III, Line 17. Passive Activity Credits Allowed. Add line 6 and line 16. See instructions if you have any credits from a publicly traded partnership",
+          "text": "6,921"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.1.line.18_elect_increase_basis_credit_property",
+      "widgets": [
+        {
+          "widgetName": "Part IV, Line 18. If you disposed of your entire interest in a passive activity or former passive activity in a fully taxable transaction, and you elect to increase the basis of the credit property used in that activity by the unallowed credit that reduced the property's basis, check here",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.1.line.19_name_of_activity_disposed",
+      "widgets": [
+        {
+          "widgetName": "Line 19, Name of activity disposed of",
+          "text": "T-2J3MI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.1.line.20_credit_property_description_row1",
+      "widgets": [
+        {
+          "widgetName": "Line 20. Description of the credit property for which the election is being made (1)",
+          "text": "T-1BUFZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.1.line.20_credit_property_description_row2",
+      "widgets": [
+        {
+          "widgetName": "Line 20. Description of the credit property for which the election is being made (2)",
+          "text": "T-136WT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3801-cr.1.line.21_unallowed_credit_reduced_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 21. Amount of unallowed credit that reduced the property's basis for California purposes",
+          "text": "7,569"
+        }
+      ]
+    }
+  ]
+}

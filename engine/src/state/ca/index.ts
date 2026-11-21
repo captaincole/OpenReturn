@@ -14,14 +14,17 @@ import { register as registerForm3526 } from "./3526/bindings.js";
 import { register as registerForm3532 } from "./3532/bindings.js";
 import { register as registerForm3541 } from "./3541/bindings.js";
 import { register as registerForm3800Ca } from "./3800-ca/bindings.js";
+import { register as registerForm3801CR } from "./3801-cr/bindings.js";
 import { register as registerForm3801 } from "./3801/bindings.js";
 import { register as registerForm3803 } from "./3803/bindings.js";
 import { register as registerForm3804CR } from "./3804-cr/bindings.js";
+import { register as registerForm3805E } from "./3805e/bindings.js";
 import { register as registerForm3805p } from "./3805p/bindings.js";
 import { register as registerForm3805V } from "./3805v/bindings.js";
 import { register as registerForm3805Z } from "./3805z/bindings.js";
 import { register as registerForm3807 } from "./3807/bindings.js";
 import { register as registerForm3809 } from "./3809/bindings.js";
+import { register as registerForm3840 } from "./3840/bindings.js";
 import { register as registerForm3853 } from "./3853/bindings.js";
 import { register as registerForm3885A } from "./3885a/bindings.js";
 import { register as registerForm3913 } from "./3913/bindings.js";
@@ -32,7 +35,10 @@ import { register as registerForm5805F } from "./5805f/bindings.js";
 import { register as registerForm5870A } from "./5870a/bindings.js";
 import { register as registerScheduleCa540NR } from "./schedule-ca-540nr/bindings.js";
 import { register as registerScheduleCa } from "./schedule-ca/bindings.js";
+import { register as registerScheduleD1 } from "./schedule-d-1/bindings.js";
+import { register as registerScheduleD540NR } from "./schedule-d-540nr/bindings.js";
 import { register as registerScheduleG1 } from "./schedule-g-1/bindings.js";
+import { register as registerScheduleP540NR } from "./schedule-p-540nr/bindings.js";
 import { register as registerScheduleP } from "./schedule-p/bindings.js";
 import { register as registerScheduleS } from "./schedule-s/bindings.js";
 import { register as registerScheduleX } from "./schedule-x/bindings.js";
@@ -46,14 +52,17 @@ import form3526CatalogJson from "./3526/catalog.json";
 import form3532CatalogJson from "./3532/catalog.json";
 import form3541CatalogJson from "./3541/catalog.json";
 import form3800CaCatalogJson from "./3800-ca/catalog.json";
+import form3801CRCatalogJson from "./3801-cr/catalog.json";
 import form3801CatalogJson from "./3801/catalog.json";
 import form3803CatalogJson from "./3803/catalog.json";
 import form3804CRCatalogJson from "./3804-cr/catalog.json";
+import form3805ECatalogJson from "./3805e/catalog.json";
 import form3805pCatalogJson from "./3805p/catalog.json";
 import form3805VCatalogJson from "./3805v/catalog.json";
 import form3805ZCatalogJson from "./3805z/catalog.json";
 import form3807CatalogJson from "./3807/catalog.json";
 import form3809CatalogJson from "./3809/catalog.json";
+import form3840CatalogJson from "./3840/catalog.json";
 import form3853CatalogJson from "./3853/catalog.json";
 import form3885aCatalogJson from "./3885a/catalog.json";
 import form3913CatalogJson from "./3913/catalog.json";
@@ -64,7 +73,10 @@ import form5805FCatalogJson from "./5805f/catalog.json";
 import form5870ACatalogJson from "./5870a/catalog.json";
 import scheduleCa540NRCatalogJson from "./schedule-ca-540nr/catalog.json";
 import scheduleCaCatalogJson from "./schedule-ca/catalog.json";
+import scheduleD1CatalogJson from "./schedule-d-1/catalog.json";
+import scheduleD540NRCatalogJson from "./schedule-d-540nr/catalog.json";
 import scheduleG1CatalogJson from "./schedule-g-1/catalog.json";
+import scheduleP540NRCatalogJson from "./schedule-p-540nr/catalog.json";
 import schedulePCatalogJson from "./schedule-p/catalog.json";
 import scheduleSCatalogJson from "./schedule-s/catalog.json";
 import scheduleXCatalogJson from "./schedule-x/catalog.json";
@@ -101,6 +113,12 @@ export const CA_CATALOGS = [
   fixtureFileSchema.parse(form3913CatalogJson),
   fixtureFileSchema.parse(form5805FCatalogJson),
   fixtureFileSchema.parse(form5870ACatalogJson),
+  fixtureFileSchema.parse(form3801CRCatalogJson),
+  fixtureFileSchema.parse(form3805ECatalogJson),
+  fixtureFileSchema.parse(form3840CatalogJson),
+  fixtureFileSchema.parse(scheduleD1CatalogJson),
+  fixtureFileSchema.parse(scheduleD540NRCatalogJson),
+  fixtureFileSchema.parse(scheduleP540NRCatalogJson),
 ];
 
 export const CA_FORMS: FormSpec[] = [
@@ -335,5 +353,47 @@ export const CA_FORMS: FormSpec[] = [
     displayName: "FTB 5870A",
     relativeDir: "state/ca/5870a",
     register: registerForm5870A,
+  }),
+  makeFormSpec({
+    formId: "form-3801-cr",
+    shortId: "3801-cr",
+    displayName: "FTB 3801-CR",
+    relativeDir: "state/ca/3801-cr",
+    register: registerForm3801CR,
+  }),
+  makeFormSpec({
+    formId: "form-3805e",
+    shortId: "3805e",
+    displayName: "FTB 3805E",
+    relativeDir: "state/ca/3805e",
+    register: registerForm3805E,
+  }),
+  makeFormSpec({
+    formId: "form-3840",
+    shortId: "3840",
+    displayName: "FTB 3840",
+    relativeDir: "state/ca/3840",
+    register: registerForm3840,
+  }),
+  makeFormSpec({
+    formId: "schedule-d-1",
+    shortId: "schedule-d-1",
+    displayName: "Schedule D-1",
+    relativeDir: "state/ca/schedule-d-1",
+    register: registerScheduleD1,
+  }),
+  makeFormSpec({
+    formId: "schedule-d-540nr",
+    shortId: "schedule-d-540nr",
+    displayName: "Schedule D (540NR)",
+    relativeDir: "state/ca/schedule-d-540nr",
+    register: registerScheduleD540NR,
+  }),
+  makeFormSpec({
+    formId: "schedule-p-540nr",
+    shortId: "schedule-p-540nr",
+    displayName: "Schedule P (540NR)",
+    relativeDir: "state/ca/schedule-p-540nr",
+    register: registerScheduleP540NR,
   }),
 ];

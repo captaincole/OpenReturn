@@ -1,0 +1,524 @@
+{
+  "form": {
+    "formId": "form-3801-cr",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "FTB 3801-CR, Passive Activity Credit Limitations"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3801-cr.0.header.name",
+      "label": "Name(s) as shown on return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on return",
+      "position": {
+        "page": 0,
+        "x": 35.8527,
+        "y": 683.52
+      }
+    },
+    {
+      "fieldId": "form-3801-cr.0.header.taxpayer_id_number",
+      "label": "Social Security Number (S S N), Individual Taxpayer Identification Numbers (I T I N), Federal Employer Identification Number (F E I N) or California corporation number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Social Security Number (S S N), Individual Taxpayer Identification Numbers (I T I N), Federal Employer Identification Number (F E I N) or California corporation number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 445.064,
+        "y": 683.52
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.1a_rental_real_estate_credits",
+      "label": "Part I, Line 1a. Credits from federal Worksheet 1, column (a).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Line 1a. Credits from federal Worksheet 1, column (a)",
+      "position": {
+        "page": 0,
+        "x": 310.113,
+        "y": 602.88
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.1b_rental_real_estate_prior_unallowed",
+      "label": "Line 1b. Prior year unallowed credits from federal Worksheet 1, column (b).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1b. Prior year unallowed credits from federal Worksheet 1, column (b)",
+      "position": {
+        "page": 0,
+        "x": 310.113,
+        "y": 590.88
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.1c_rental_real_estate_total",
+      "label": "Line 1c. Add line 1a and line 1b.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1c. Add line 1a and line 1b",
+      "position": {
+        "page": 0,
+        "x": 453.991,
+        "y": 578.35
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.2a_housing_pre_1990_credits",
+      "label": "Line 2a. Credits from federal Worksheet 2, column (a).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2a. Credits from federal Worksheet 2, column (a)",
+      "position": {
+        "page": 0,
+        "x": 310.031,
+        "y": 530.88
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.2b_housing_pre_1990_prior_unallowed",
+      "label": "Line 2b. Prior year unallowed credits from federal Worksheet 2, column (b).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2b. Prior year unallowed credits from federal Worksheet 2, column (b)",
+      "position": {
+        "page": 0,
+        "x": 310.031,
+        "y": 518.88
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.2c_housing_pre_1990_total",
+      "label": "Line 2c. Add line 2a and line 2b.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2c. Add line 2a and line 2b",
+      "position": {
+        "page": 0,
+        "x": 454.081,
+        "y": 506.132
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.3a_housing_post_1989_credits",
+      "label": "Line 3a. Credits from federal Worksheet 3, column (a).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3a. Credits from federal Worksheet 3, column (a)",
+      "position": {
+        "page": 0,
+        "x": 310.072,
+        "y": 458.89
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.3b_housing_post_1989_prior_unallowed",
+      "label": "Line 3b. Prior year unallowed credits from federal Worksheet 3, column (b).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3b. Prior year unallowed credits from federal Worksheet 3, column (b)",
+      "position": {
+        "page": 0,
+        "x": 310.072,
+        "y": 446.87
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.3c_housing_post_1989_total",
+      "label": "Line 3c. Add line 3a and line 3b.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3c. Add line 3a and line 3b",
+      "position": {
+        "page": 0,
+        "x": 454.015,
+        "y": 434.287
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.4a_other_passive_credits",
+      "label": "Line 4a. Credits from federal Worksheet 4, column (a).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4a. Credits from federal Worksheet 4, column (a)",
+      "position": {
+        "page": 0,
+        "x": 310.041,
+        "y": 386.88
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.4b_other_passive_prior_unallowed",
+      "label": "Line 4b. Prior year unallowed credits from federal Worksheet 4, column (b).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4b. Prior year unallowed credits from federal Worksheet 4, column (b)",
+      "position": {
+        "page": 0,
+        "x": 310.082,
+        "y": 374.89
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.4c_other_passive_total",
+      "label": "Line 4c. Add line 4a and line 4b.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4c. Add line 4a and line 4b",
+      "position": {
+        "page": 0,
+        "x": 453.981,
+        "y": 362.846
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.5_total_passive_credits",
+      "label": "Line 5. Add line 1c, line 2c, line 3c, and line 4c.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Add line 1c, line 2c, line 3c, and line 4c",
+      "position": {
+        "page": 0,
+        "x": 454.113,
+        "y": 350.88
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.6_tax_on_net_passive_income",
+      "label": "Line 6. Enter the tax attributable to net passive income. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Enter the tax attributable to net passive income. See instructions",
+      "position": {
+        "page": 0,
+        "x": 454.004,
+        "y": 338.88
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.7_credits_over_passive_tax",
+      "label": "Line 7. Subtract line 6 from line 5. If line 6 is more than or equal to line 5, enter 0. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Subtract line 6 from line 5. If line 6 is more than or equal to line 5, enter 0. See instructions",
+      "position": {
+        "page": 0,
+        "x": 454.028,
+        "y": 326.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.8_smaller_of_1c_or_7",
+      "label": "Part II, Line 8. Enter the smaller of line 1c or line 7.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, Line 8. Enter the smaller of line 1c or line 7",
+      "position": {
+        "page": 0,
+        "x": 453.917,
+        "y": 278.34
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.9_special_allowance_income_limit",
+      "label": "Line 9. Enter $150,000 ($75,000 if married/R D P filing a separate return and you lived apart for the entire year). See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Enter $150,000 ($75,000 if married/R D P filing a separate return and you lived apart for the entire year). See instructions",
+      "position": {
+        "page": 0,
+        "x": 309.927,
+        "y": 254.873
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.10_federal_modified_agi",
+      "label": "Line 10. Enter federal modified adjusted gross income, but not less than zero. See instructions. If line 10 is equal to or more than line 9, skip line 11 through line 15 and enter 0 on line 16.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Enter federal modified adjusted gross income, but not less than zero. See instructions. If line 10 is equal to or more than line 9, skip line 11 through line 15 and enter 0 on line 16",
+      "position": {
+        "page": 0,
+        "x": 310.167,
+        "y": 218.88
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.11_limit_minus_modified_agi",
+      "label": "Line 11. Subtract line 10 from line 9.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. Subtract line 10 from line 9",
+      "position": {
+        "page": 0,
+        "x": 309.785,
+        "y": 206.88
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.12_half_of_line_11",
+      "label": "Line 12. Multiply line 11 by 50% (.50). Do not enter more than $25,000 ($12,500 if married/R D P filing a separate return and you lived apart for the entire year).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. Multiply line 11 by 50% (.50). Do not enter more than $25,000 ($12,500 if married/R D P filing a separate return and you lived apart for the entire year)",
+      "position": {
+        "page": 0,
+        "x": 309.949,
+        "y": 170.88
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.13_ftb_3801_line_9_amount",
+      "label": "Line 13. Enter the amount, if any, from line 9 of form F T B 3801.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Enter the amount, if any, from line 9 of form F T B 3801",
+      "position": {
+        "page": 0,
+        "x": 310.004,
+        "y": 158.88
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.14_remaining_special_allowance",
+      "label": "Line 14. Subtract line 13 from line 12.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. Subtract line 13 from line 12",
+      "position": {
+        "page": 0,
+        "x": 310.004,
+        "y": 146.88
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.15_tax_on_line_14_amount",
+      "label": "Line 15. Enter the tax attributable to the amount on line 14. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Enter the tax attributable to the amount on line 14. See instructions",
+      "position": {
+        "page": 0,
+        "x": 454.103,
+        "y": 134.885
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.0.line.16_smaller_of_8_or_15",
+      "label": "Line 16. Enter the smaller of line 8 or line 15.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. Enter the smaller of line 8 or line 15",
+      "position": {
+        "page": 0,
+        "x": 454.113,
+        "y": 122.88
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.1.line.17_passive_activity_credits_allowed",
+      "label": "Part III, Line 17. Passive Activity Credits Allowed. Add line 6 and line 16. See instructions if you have any credits from a publicly traded partnership.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part III, Line 17. Passive Activity Credits Allowed. Add line 6 and line 16. See instructions if you have any credits from a publicly traded partnership",
+      "position": {
+        "page": 1,
+        "x": 454.178,
+        "y": 679.32
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3801-cr.1.line.18_elect_increase_basis_credit_property",
+      "label": "Part IV, Line 18. If you disposed of your entire interest in a passive activity or former passive activity in a fully taxable transaction, and you elect to increase the basis of the credit property used in that activity by the unallowed credit that reduced the property's basis, check here.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Part IV, Line 18. If you disposed of your entire interest in a passive activity or former passive activity in a fully taxable transaction, and you elect to increase the basis of the credit property used in that activity by the unallowed credit that reduced the property's basis, check here",
+      "position": {
+        "page": 1,
+        "x": 568.209,
+        "y": 582.541
+      }
+    },
+    {
+      "fieldId": "form-3801-cr.1.line.19_name_of_activity_disposed",
+      "label": "Line 19, Name of activity disposed of.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19, Name of activity disposed of",
+      "position": {
+        "page": 1,
+        "x": 154.44,
+        "y": 569.519
+      }
+    },
+    {
+      "fieldId": "form-3801-cr.1.line.20_credit_property_description_row1",
+      "label": "Line 20. Description of the credit property for which the election is being made (1).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. Description of the credit property for which the election is being made (1)",
+      "position": {
+        "page": 1,
+        "x": 293.4,
+        "y": 557.64
+      }
+    },
+    {
+      "fieldId": "form-3801-cr.1.line.20_credit_property_description_row2",
+      "label": "Line 20. Description of the credit property for which the election is being made (2).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. Description of the credit property for which the election is being made (2)",
+      "position": {
+        "page": 1,
+        "x": 49.0392,
+        "y": 545.566
+      }
+    },
+    {
+      "fieldId": "form-3801-cr.1.line.21_unallowed_credit_reduced_basis",
+      "label": "Line 21. Amount of unallowed credit that reduced the property's basis for California purposes.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 21. Amount of unallowed credit that reduced the property's basis for California purposes",
+      "position": {
+        "page": 1,
+        "x": 431.129,
+        "y": 532.29
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3801-cr/blank.pdf",
+    "ingestedAt": "2026-11-21T04:50:14.716Z",
+    "totalFields": 32,
+    "skipped": 0,
+    "catalogEntries": 32
+  }
+}

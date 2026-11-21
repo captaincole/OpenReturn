@@ -1,0 +1,1958 @@
+{
+  "form": {
+    "formId": "form-3840",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "FTB 3840, California Like-Kind Exchanges"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3840.0.header.fiscal_year_beginning",
+      "label": "For the calendar year 2025 or fiscal year beginning (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "For the calendar year 2025 or fiscal year beginning (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 294.824,
+        "y": 707.874
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3840.0.header.fiscal_year_ending",
+      "label": "For the calendar year 2025 or fiscal year ending (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "For the calendar year 2025 or fiscal year ending (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 461.04,
+        "y": 707.874
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3840.0.header.name",
+      "label": "Name(s) as shown on your state tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on your state tax return",
+      "position": {
+        "page": 0,
+        "x": 35.9955,
+        "y": 679.999
+      }
+    },
+    {
+      "fieldId": "form-3840.0.header.california_corporation_number",
+      "label": "California corporation number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "California corporation number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 432.728,
+        "y": 679.999
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.0.header.ssn",
+      "label": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 35.9943,
+        "y": 656.007
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3840.0.header.spouse_ssn",
+      "label": "Spouse's/R D P's S S N or I T I N (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Spouse's/R D P's S S N or I T I N (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 238.236,
+        "y": 655.987
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3840.0.header.fein",
+      "label": "Federal Employer Identification Number (F E I N) (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Federal Employer Identification Number (F E I N) (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 432.722,
+        "y": 656.007
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3840.0.header.additional_information",
+      "label": "Additional information. See instructions.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Additional information. See instructions",
+      "position": {
+        "page": 0,
+        "x": 35.989,
+        "y": 631.999
+      }
+    },
+    {
+      "fieldId": "form-3840.0.header.secretary_of_state_file_number",
+      "label": "California Secretary of State file number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "California Secretary of State file number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 432.723,
+        "y": 631.999
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.0.header.street_address",
+      "label": "Street address (suite/room number).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Street address (suite/room number)",
+      "position": {
+        "page": 0,
+        "x": 36.0049,
+        "y": 607.999
+      }
+    },
+    {
+      "fieldId": "form-3840.0.header.private_mailbox",
+      "label": "P M B number.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "P M B number",
+      "position": {
+        "page": 0,
+        "x": 432.718,
+        "y": 607.999
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-3840.0.header.city",
+      "label": "City (If you have a foreign address, see instructions.).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "City (If you have a foreign address, see instructions.)",
+      "position": {
+        "page": 0,
+        "x": 35.9797,
+        "y": 583.999
+      }
+    },
+    {
+      "fieldId": "form-3840.0.header.state",
+      "label": "2 letter state abbreviation.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "2 letter state abbreviation",
+      "position": {
+        "page": 0,
+        "x": 403.306,
+        "y": 583.999
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3840.0.header.zip",
+      "label": "ZIP code, maximum 9 digits.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "ZIP code, maximum 9 digits",
+      "position": {
+        "page": 0,
+        "x": 432.722,
+        "y": 583.999
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3840.0.header.foreign_country_name",
+      "label": "Foreign country name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Foreign country name",
+      "position": {
+        "page": 0,
+        "x": 36.0025,
+        "y": 560.243
+      }
+    },
+    {
+      "fieldId": "form-3840.0.header.foreign_province_state_county",
+      "label": "Foreign province/2 letter state abbreviation/county.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Foreign province/2 letter state abbreviation/county",
+      "position": {
+        "page": 0,
+        "x": 258.832,
+        "y": 560.259
+      }
+    },
+    {
+      "fieldId": "form-3840.0.header.foreign_postal_code",
+      "label": "Foreign postal code.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Foreign postal code",
+      "position": {
+        "page": 0,
+        "x": 432.712,
+        "y": 560.251
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3840.0.header.a_taxpayer_type",
+      "label": "Line A — Type of taxpayer",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line A",
+      "position": {
+        "page": 0,
+        "x": 63.2831,
+        "y": 545.068
+      },
+      "options": [
+        {
+          "value": "individual",
+          "radioOption": "Individual.",
+          "label": "Individual"
+        },
+        {
+          "value": "estate",
+          "radioOption": "Estate.",
+          "label": "Estate"
+        },
+        {
+          "value": "trust",
+          "radioOption": "Trust.",
+          "label": "Trust"
+        },
+        {
+          "value": "c_corporation",
+          "radioOption": "C corporation.",
+          "label": "C corporation"
+        },
+        {
+          "value": "s_corporation",
+          "radioOption": "S corporation.",
+          "label": "S corporation"
+        },
+        {
+          "value": "partnership",
+          "radioOption": "Partnership.",
+          "label": "Partnership"
+        },
+        {
+          "value": "limited_liability_company",
+          "radioOption": "Limited liability company.",
+          "label": "Limited liability company"
+        },
+        {
+          "value": "exempt_organization",
+          "radioOption": "Exempt organization.",
+          "label": "Exempt organization"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.b_filing_type",
+      "label": "Line B — Initial, Amended, Annual or Final FTB 3840",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line B",
+      "position": {
+        "page": 0,
+        "x": 63.2913,
+        "y": 532.07
+      },
+      "options": [
+        {
+          "value": "initial",
+          "radioOption": "Initial F T B 3840.",
+          "label": "Initial FTB 3840"
+        },
+        {
+          "value": "amended",
+          "radioOption": "Amended F T B 3840.",
+          "label": "Amended FTB 3840"
+        },
+        {
+          "value": "annual",
+          "radioOption": "Annual F T B 3840.",
+          "label": "Annual FTB 3840"
+        },
+        {
+          "value": "final",
+          "radioOption": "Final F T B 3840 (see instructions).",
+          "label": "Final FTB 3840 (See instructions)"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.b_exchange_taxable_year",
+      "label": "If the \"Annual FTB 3840\" or \"Final FTB 3840\" box is checked, enter the taxable year the exchange occurred (yyyy).",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "If the \"Annual FTB 3840\" or \"Final FTB 3840\" box is checked, enter the taxable year the exchange occurred (yyyy)",
+      "position": {
+        "page": 0,
+        "x": 452.872,
+        "y": 518.4
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-3840.0.header.c_exchange_involves",
+      "label": "Line C — This exchange involves",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line C. This exchange involves",
+      "position": {
+        "page": 0,
+        "x": 158.241,
+        "y": 506.061
+      },
+      "options": [
+        {
+          "value": "real_property",
+          "radioOption": "Real property.",
+          "label": "Real property"
+        },
+        {
+          "value": "personal_property",
+          "radioOption": "Personal property (See instructions).",
+          "label": "Personal property (See instructions)"
+        },
+        {
+          "value": "related_party",
+          "radioOption": "Related party.",
+          "label": "Related party"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.c_related_party_name",
+      "label": "Name of the related party.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name of the related party",
+      "position": {
+        "page": 0,
+        "x": 144.963,
+        "y": 492.404
+      }
+    },
+    {
+      "fieldId": "form-3840.0.header.c_related_party_tin",
+      "label": "Line C. Related party's S S N/I T I N or F E I N (9 digits).",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line C. Related party's S S N/I T I N or F E I N (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 481.969,
+        "y": 492.401
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3840.0.line.1_property_given_up_description",
+      "label": "Part I, line 1. Description of like-kind property given up.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, line 1. Description of like-kind property given up",
+      "position": {
+        "page": 0,
+        "x": 208.4,
+        "y": 456.998
+      }
+    },
+    {
+      "fieldId": "form-3840.0.line.2_property_received_description",
+      "label": "Line 2. Description of like-kind property received.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Description of like-kind property received",
+      "position": {
+        "page": 0,
+        "x": 208.351,
+        "y": 442.991
+      }
+    },
+    {
+      "fieldId": "form-3840.0.line.3_date_given_up_property_acquired",
+      "label": "Line 3. Date like-kind property given up was originally acquired (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Date like-kind property given up was originally acquired (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 474,
+        "y": 429.625
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3840.0.line.4_date_property_transferred",
+      "label": "Line 4. Date you actually transferred your property to other party (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Date you actually transferred your property to other party (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 474,
+        "y": 416.64
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3840.0.line.5_date_received_property_identified",
+      "label": "Line 5. Date like-kind property you received was identified by written notice to another party (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Date like-kind property you received was identified by written notice to another party (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 473.992,
+        "y": 403.647
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3840.0.line.6_date_property_received",
+      "label": "Line 6. Date you actually received the like-kind property from other party (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Date you actually received the like-kind property from other party (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 474,
+        "y": 390.625
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3840.0.line.7_fmv_other_property_given_up",
+      "label": "Part II, line 7. Fair market value (F M V) of other property given up.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, line 7. Fair market value (F M V) of other property given up",
+      "position": {
+        "page": 0,
+        "x": 345.995,
+        "y": 360.297
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.0.line.8_adjusted_basis_other_property",
+      "label": "Line 8. Adjusted basis of other property given up.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Adjusted basis of other property given up",
+      "position": {
+        "page": 0,
+        "x": 346.006,
+        "y": 348.297
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.0.line.9_gain_loss_other_property",
+      "label": "Line 9. Gain or (loss) recognized on other property given up. Subtract line 8 from line 7.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Gain or (loss) recognized on other property given up. Subtract line 8 from line 7",
+      "position": {
+        "page": 0,
+        "x": 474.497,
+        "y": 336.289
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.0.line.10_cash_and_other_property_received",
+      "label": "Line 10. Cash received, F M V of other property received, plus net liabilities assumed by the other party, reduced (but not below zero) by any exchange expenses incurred.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Cash received, F M V of other property received, plus net liabilities assumed by the other party, reduced (but not below zero) by any exchange expenses incurred",
+      "position": {
+        "page": 0,
+        "x": 474.497,
+        "y": 312.289
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.0.line.11_fmv_like_kind_property_received",
+      "label": "Line 11. F M V of like-kind property received.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. F M V of like-kind property received",
+      "position": {
+        "page": 0,
+        "x": 474.497,
+        "y": 300.281
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.0.line.12_total_amount_received",
+      "label": "Line 12. Add line 10 and line 11.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. Add line 10 and line 11",
+      "position": {
+        "page": 0,
+        "x": 474.497,
+        "y": 288.297
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.0.line.13_adjusted_basis_like_kind_given_up",
+      "label": "Line 13. Adjusted basis of like-kind property given up, net amounts paid to other party, plus any exchange expenses not used on line 10.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Adjusted basis of like-kind property given up, net amounts paid to other party, plus any exchange expenses not used on line 10",
+      "position": {
+        "page": 0,
+        "x": 474.497,
+        "y": 264.287
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.0.line.14_realized_gain_loss",
+      "label": "Line 14. Realized gain or (loss). Subtract line 13 from line 12.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. Realized gain or (loss). Subtract line 13 from line 12",
+      "position": {
+        "page": 0,
+        "x": 474.497,
+        "y": 252.295
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.0.line.15_smaller_of_line_10_or_14",
+      "label": "Line 15. Enter smaller of line 10 or line 14, but not less than zero.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Enter smaller of line 10 or line 14, but not less than zero",
+      "position": {
+        "page": 0,
+        "x": 474.497,
+        "y": 240.29
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.0.line.16_ordinary_income_recapture",
+      "label": "Line 16. Ordinary income under recapture rules.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. Ordinary income under recapture rules",
+      "position": {
+        "page": 0,
+        "x": 474.497,
+        "y": 228.282
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.0.line.17_line_15_minus_line_16",
+      "label": "Line 17. Subtract line 16 from line 15. If more than 0, enter here. If zero or less, enter 0.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. Subtract line 16 from line 15. If more than 0, enter here. If zero or less, enter 0",
+      "position": {
+        "page": 0,
+        "x": 474.497,
+        "y": 216.303
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.0.line.18_recognized_gain",
+      "label": "Line 18. Recognized gain. Add line 16 and line 17.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. Recognized gain. Add line 16 and line 17",
+      "position": {
+        "page": 0,
+        "x": 474.497,
+        "y": 204.295
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.0.line.19_deferred_gain_loss",
+      "label": "Line 19. Deferred gain or (loss). Subtract line 18 from line 14.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. Deferred gain or (loss). Subtract line 18 from line 14",
+      "position": {
+        "page": 0,
+        "x": 474.497,
+        "y": 192.303
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.0.line.20_basis_like_kind_property_received",
+      "label": "Line 20. Basis of like-kind property received. Subtract line 10 from the sum of line 13 and line 18.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. Basis of like-kind property received. Subtract line 10 from the sum of line 13 and line 18",
+      "position": {
+        "page": 0,
+        "x": 474.497,
+        "y": 180.303
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.0.signing.date_signed",
+      "label": "Your signature date (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Your signature date (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 362.204,
+        "y": 123.098
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3840.0.signing.taxpayer_phone",
+      "label": "Your telephone (10 digits).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "phone",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Your telephone (10 digits)",
+      "position": {
+        "page": 0,
+        "x": 438.165,
+        "y": 123.106
+      }
+    },
+    {
+      "fieldId": "form-3840.0.signing.spouse_date_signed",
+      "label": "Spouse's/R D P's signature date (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Spouse's/R D P's signature date (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 362.197,
+        "y": 102.105
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3840.0.signing.spouse_phone",
+      "label": "Spouse's/R D P's telephone (10 digits).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "phone",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Spouse's/R D P's telephone (10 digits)",
+      "position": {
+        "page": 0,
+        "x": 438.151,
+        "y": 102.114
+      }
+    },
+    {
+      "fieldId": "form-3840.0.signing.representative_title",
+      "label": "Owner, officer, or representative, title.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Owner, officer, or representative, title",
+      "position": {
+        "page": 0,
+        "x": 362.212,
+        "y": 81.0911
+      }
+    },
+    {
+      "fieldId": "form-3840.0.signing.representative_date_signed",
+      "label": "owner, officer, or representative, date (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "owner, officer, or representative, date (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 497.823,
+        "y": 81.0911
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3840.0.signing.firm_name",
+      "label": "Firm's name.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Firm's name",
+      "position": {
+        "page": 0,
+        "x": 105.25,
+        "y": 60.0844
+      }
+    },
+    {
+      "fieldId": "form-3840.0.signing.firm_address",
+      "label": "Firm's address.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Firm's address",
+      "position": {
+        "page": 0,
+        "x": 362.21,
+        "y": 60.1009
+      }
+    },
+    {
+      "fieldId": "form-3840.1.header.taxpayer_name",
+      "label": "Taxpayer name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Taxpayer name",
+      "position": {
+        "page": 1,
+        "x": 35.9904,
+        "y": 692.552
+      }
+    },
+    {
+      "fieldId": "form-3840.1.header.taxpayer_id",
+      "label": "Taxpayer ID.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Taxpayer ID",
+      "position": {
+        "page": 1,
+        "x": 461.661,
+        "y": 692.552
+      }
+    },
+    {
+      "fieldId": "form-3840.1.line.1a_in_california",
+      "label": "Line 1A — Property given up: Is property in California?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Part I, line 1A. Is property in California?",
+      "position": {
+        "page": 1,
+        "x": 65.1323,
+        "y": 612.443
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1a_ownership_percentage",
+      "label": "Line 1A. Ownership percentage. Enter 6 digits including decimal.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1A. Ownership percentage. Enter 6 digits including decimal",
+      "position": {
+        "page": 1,
+        "x": 110.842,
+        "y": 606.963
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-3840.1.line.1a_property_address",
+      "label": "Line 1A. Property address (if no street address, provide assessor's parcel number and county)/Description.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1A. Property address (if no street address, provide assessor's parcel number and county)/Description",
+      "position": {
+        "page": 1,
+        "x": 149.744,
+        "y": 608.839
+      }
+    },
+    {
+      "fieldId": "form-3840.1.line.1a_city",
+      "label": "Line 1A. City.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1A. City",
+      "position": {
+        "page": 1,
+        "x": 171.263,
+        "y": 591.315
+      }
+    },
+    {
+      "fieldId": "form-3840.1.line.1a_state",
+      "label": "Line 1A. 2 letter state abbreviation.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1A. 2 letter state abbreviation",
+      "position": {
+        "page": 1,
+        "x": 471.885,
+        "y": 591.315
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3840.1.line.1a_zip",
+      "label": "Line 1A. ZIP code, maximum 9 digits.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1A. ZIP code, maximum 9 digits",
+      "position": {
+        "page": 1,
+        "x": 518.374,
+        "y": 591.315
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3840.1.line.1b_in_california",
+      "label": "Line 1B — Property given up: Is property in California?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 1B. Is property in California?",
+      "position": {
+        "page": 1,
+        "x": 65.1159,
+        "y": 573.648
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1b_ownership_percentage",
+      "label": "Line 1B. Ownership percentage. Enter 6 digits including decimal.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1B. Ownership percentage. Enter 6 digits including decimal",
+      "position": {
+        "page": 1,
+        "x": 110.846,
+        "y": 568.181
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-3840.1.line.1b_property_address",
+      "label": "Line 1B. Property address (if no street address, provide assessor's parcel number and county)/Description.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1B. Property address (if no street address, provide assessor's parcel number and county)/Description",
+      "position": {
+        "page": 1,
+        "x": 149.759,
+        "y": 570.036
+      }
+    },
+    {
+      "fieldId": "form-3840.1.line.1b_city",
+      "label": "Line 1B. City.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1B. City",
+      "position": {
+        "page": 1,
+        "x": 172.629,
+        "y": 552.485
+      }
+    },
+    {
+      "fieldId": "form-3840.1.line.1b_state",
+      "label": "Line 1B. 2 letter state abbreviation.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1B. 2 letter state abbreviation",
+      "position": {
+        "page": 1,
+        "x": 472.544,
+        "y": 552.485
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3840.1.line.1b_zip",
+      "label": "Line 1B. ZIP code, maximum 9 digits.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1B. ZIP code, maximum 9 digits",
+      "position": {
+        "page": 1,
+        "x": 520.158,
+        "y": 552.485
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3840.1.line.1c_in_california",
+      "label": "Line 1C — Property given up: Is property in California?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 1C. Is property in California?",
+      "position": {
+        "page": 1,
+        "x": 65.1159,
+        "y": 534.834
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1c_ownership_percentage",
+      "label": "Line 1C. Ownership percentage. Enter 6 digits including decimal.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1C. Ownership percentage. Enter 6 digits including decimal",
+      "position": {
+        "page": 1,
+        "x": 110.819,
+        "y": 529.349
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-3840.1.line.1c_property_address",
+      "label": "Line 1C. Property address (if no street address, provide assessor's parcel number and county)/Description.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1C. Property address (if no street address, provide assessor's parcel number and county)/Description",
+      "position": {
+        "page": 1,
+        "x": 149.744,
+        "y": 531.22
+      }
+    },
+    {
+      "fieldId": "form-3840.1.line.1c_city",
+      "label": "Line 1C. City.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1C. City",
+      "position": {
+        "page": 1,
+        "x": 170.64,
+        "y": 513.685
+      }
+    },
+    {
+      "fieldId": "form-3840.1.line.1c_state",
+      "label": "Line 1C. 2 letter state abbreviation.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1C. 2 letter state abbreviation",
+      "position": {
+        "page": 1,
+        "x": 471.966,
+        "y": 513.685
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3840.1.line.1c_zip",
+      "label": "Line 1C. ZIP code, maximum 9 digits.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1C. ZIP code, maximum 9 digits",
+      "position": {
+        "page": 1,
+        "x": 520.28,
+        "y": 513.685
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3840.1.line.2_prior_deferred_exchange_col_a",
+      "label": "Line 2 — Was this property acquired in a prior tax deferred exchange? Property given up A",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 2. Was this property acquired in a prior tax deferred exchange?, A",
+      "position": {
+        "page": 1,
+        "x": 313.294,
+        "y": 470.151
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.2_prior_deferred_exchange_col_b",
+      "label": "Line 2 — Was this property acquired in a prior tax deferred exchange? Property given up B",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 2. Was this property acquired in a prior tax deferred exchange?, B",
+      "position": {
+        "page": 1,
+        "x": 409.012,
+        "y": 470.16
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.2_prior_deferred_exchange_col_c",
+      "label": "Line 2 — Was this property acquired in a prior tax deferred exchange? Property given up C",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 2. Was this property acquired in a prior tax deferred exchange?, C",
+      "position": {
+        "page": 1,
+        "x": 503.104,
+        "y": 470.168
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.3_consideration_sales_price_col_a",
+      "label": "Line 3. Consideration/Sales price, A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Consideration/Sales price, A",
+      "position": {
+        "page": 1,
+        "x": 311.809,
+        "y": 453.24
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.1.line.3_consideration_sales_price_col_b",
+      "label": "Line 3. Consideration/Sales price, B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Consideration/Sales price, B",
+      "position": {
+        "page": 1,
+        "x": 408.286,
+        "y": 453.24
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.1.line.3_consideration_sales_price_col_c",
+      "label": "Line 3. Consideration/Sales price, C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Consideration/Sales price, C",
+      "position": {
+        "page": 1,
+        "x": 504.045,
+        "y": 453.24
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.1.line.4_selling_expenses_col_a",
+      "label": "Line 4. Selling expenses paid/incurred, A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Selling expenses paid/incurred, A",
+      "position": {
+        "page": 1,
+        "x": 311.809,
+        "y": 438.046
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.1.line.4_selling_expenses_col_b",
+      "label": "Line 4. Selling expenses paid/incurred, B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Selling expenses paid/incurred, B",
+      "position": {
+        "page": 1,
+        "x": 408.286,
+        "y": 438.046
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.1.line.4_selling_expenses_col_c",
+      "label": "Line 4. Selling expenses paid/incurred, C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Selling expenses paid/incurred, C",
+      "position": {
+        "page": 1,
+        "x": 504.045,
+        "y": 438.046
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.1.line.5_amount_realized_col_a",
+      "label": "Line 5. Amount realized. Subtract line 4 from line 3, A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Amount realized. Subtract line 4 from line 3, A",
+      "position": {
+        "page": 1,
+        "x": 311.809,
+        "y": 422.847
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.1.line.5_amount_realized_col_b",
+      "label": "Line 5. Amount realized. Subtract line 4 from line 3, B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Amount realized. Subtract line 4 from line 3, B",
+      "position": {
+        "page": 1,
+        "x": 408.286,
+        "y": 422.847
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.1.line.5_amount_realized_col_c",
+      "label": "Line 5. Amount realized. Subtract line 4 from line 3, C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Amount realized. Subtract line 4 from line 3, C",
+      "position": {
+        "page": 1,
+        "x": 504.045,
+        "y": 422.847
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.1.line.6_california_adjusted_basis_col_a",
+      "label": "Line 6. California adjusted basis, A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. California adjusted basis, A",
+      "position": {
+        "page": 1,
+        "x": 311.809,
+        "y": 407.686
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.1.line.6_california_adjusted_basis_col_b",
+      "label": "Line 6. California adjusted basis, B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. California adjusted basis, B",
+      "position": {
+        "page": 1,
+        "x": 408.286,
+        "y": 407.686
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.1.line.6_california_adjusted_basis_col_c",
+      "label": "Line 6. California adjusted basis, C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. California adjusted basis, C",
+      "position": {
+        "page": 1,
+        "x": 504.045,
+        "y": 407.686
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.1.line.7_realized_gain_loss_col_a",
+      "label": "Line 7. Realized gain or (loss). Subtract line 6 from line 5, A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Realized gain or (loss). Subtract line 6 from line 5, A",
+      "position": {
+        "page": 1,
+        "x": 311.809,
+        "y": 392.471
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.1.line.7_realized_gain_loss_col_b",
+      "label": "Line 7. Realized gain or (loss). Subtract line 6 from line 5, B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Realized gain or (loss). Subtract line 6 from line 5, B",
+      "position": {
+        "page": 1,
+        "x": 408.286,
+        "y": 392.471
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.1.line.7_realized_gain_loss_col_c",
+      "label": "Line 7. Realized gain or (loss). Subtract line 6 from line 5, C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Realized gain or (loss). Subtract line 6 from line 5, C",
+      "position": {
+        "page": 1,
+        "x": 504.045,
+        "y": 392.471
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.1.line.8_california_sourced_deferred_gain",
+      "label": "Line 8. California source deferred gain. If all property given up was real property located in California, enter the amount from Side 1, line 19, Deferred gain, adjusted for differences between federal and California law. If multiple properties were given up and the properties were located both in and outside of California, see instructions. If the exchange included both real and personal property, see instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. California source deferred gain. If all property given up was real property located in California, enter the amount from Side 1, line 19, Deferred gain, adjusted for differences between federal and California law. If multiple properties were given up and the properties were located both in and outside of California, see instructions. If the exchange included both real and personal property, see instructions",
+      "position": {
+        "page": 1,
+        "x": 482.207,
+        "y": 349.033
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.1.line.9d_in_california",
+      "label": "Line 9D — Property received: Is property in California?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Part II, line 9D. Is property in California?",
+      "position": {
+        "page": 1,
+        "x": 65.1264,
+        "y": 274.932
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9d_property_address",
+      "label": "Line 9D. Property address (if no street address, provide assessor's parcel number and county)/Description.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9D. Property address (if no street address, provide assessor's parcel number and county)/Description",
+      "position": {
+        "page": 1,
+        "x": 149.748,
+        "y": 271.32
+      }
+    },
+    {
+      "fieldId": "form-3840.1.line.9d_ownership_percentage",
+      "label": "Line 9D. Ownership percentage. Enter 6 digits including decimal.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9D. Ownership percentage. Enter 6 digits including decimal",
+      "position": {
+        "page": 1,
+        "x": 110.412,
+        "y": 267.606
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-3840.1.line.9d_city",
+      "label": "Line 9D. City.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9D. City",
+      "position": {
+        "page": 1,
+        "x": 149.758,
+        "y": 250.046
+      }
+    },
+    {
+      "fieldId": "form-3840.1.line.9d_state",
+      "label": "Line 9D. 2 letter state abbreviation.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9D. 2 letter state abbreviation",
+      "position": {
+        "page": 1,
+        "x": 474.123,
+        "y": 250.046
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3840.1.line.9d_zip",
+      "label": "Line 9D. ZIP code, maximum 9 digits.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9D. ZIP code, maximum 9 digits",
+      "position": {
+        "page": 1,
+        "x": 509.252,
+        "y": 250.046
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3840.1.line.9e_in_california",
+      "label": "Line 9E — Property received: Is property in California?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 9E. Is property in California?",
+      "position": {
+        "page": 1,
+        "x": 65.1264,
+        "y": 232.375
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9e_property_address",
+      "label": "Line 9E. Property address (if no street address, provide assessor's parcel number and county)/Description.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9E. Property address (if no street address, provide assessor's parcel number and county)/Description",
+      "position": {
+        "page": 1,
+        "x": 149.748,
+        "y": 228.791
+      }
+    },
+    {
+      "fieldId": "form-3840.1.line.9e_ownership_percentage",
+      "label": "Line 9E. Ownership percentage. Enter 6 digits including decimal.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9E. Ownership percentage. Enter 6 digits including decimal",
+      "position": {
+        "page": 1,
+        "x": 110.412,
+        "y": 225.076
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-3840.1.line.9e_city",
+      "label": "Line 9E. City.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9E. City",
+      "position": {
+        "page": 1,
+        "x": 149.745,
+        "y": 207.509
+      }
+    },
+    {
+      "fieldId": "form-3840.1.line.9e_state",
+      "label": "Line 9E. 2 letter state abbreviation.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9E. 2 letter state abbreviation",
+      "position": {
+        "page": 1,
+        "x": 473.703,
+        "y": 207.509
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3840.1.line.9e_zip",
+      "label": "Line 9E. ZIP code, maximum 9 digits.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9E. ZIP code, maximum 9 digits",
+      "position": {
+        "page": 1,
+        "x": 509.232,
+        "y": 207.509
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3840.1.line.9f_in_california",
+      "label": "Line 9F — Property received: Is property in California?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 9F. Is property in California?",
+      "position": {
+        "page": 1,
+        "x": 65.1264,
+        "y": 189.835
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9f_property_address",
+      "label": "Line 9F. Property address (if no street address, provide assessor's parcel number and county)/Description.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9F. Property address (if no street address, provide assessor's parcel number and county)/Description",
+      "position": {
+        "page": 1,
+        "x": 149.75,
+        "y": 186.248
+      }
+    },
+    {
+      "fieldId": "form-3840.1.line.9f_ownership_percentage",
+      "label": "Line 9F. Ownership percentage. Enter 6 digits including decimal.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9F. Ownership percentage. Enter 6 digits including decimal",
+      "position": {
+        "page": 1,
+        "x": 110.412,
+        "y": 182.531
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-3840.1.line.9f_city",
+      "label": "Line 9F. City.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9F. City",
+      "position": {
+        "page": 1,
+        "x": 149.748,
+        "y": 164.991
+      }
+    },
+    {
+      "fieldId": "form-3840.1.line.9f_state",
+      "label": "Line 9F. 2 letter state abbreviation.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9F. 2 letter state abbreviation",
+      "position": {
+        "page": 1,
+        "x": 473.809,
+        "y": 164.991
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3840.1.line.9f_zip",
+      "label": "Line 9F. ZIP code, maximum 9 digits.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9F. ZIP code, maximum 9 digits",
+      "position": {
+        "page": 1,
+        "x": 509.253,
+        "y": 164.991
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3840.1.line.10_allocation_deferred_gain_col_d",
+      "label": "Part III, line 10. Allocation of California source deferred gain to properties received. If only one property was received, enter the amount from Part I, line 8, in column D. If more than one property was received, see instructions, D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part III, line 10. Allocation of California source deferred gain to properties received. If only one property was received, enter the amount from Part I, line 8, in column D. If more than one property was received, see instructions, D",
+      "position": {
+        "page": 1,
+        "x": 301.576,
+        "y": 89.88
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.1.line.10_allocation_deferred_gain_col_e",
+      "label": "Line 10. Allocation of California source deferred gain to properties received. If only one property was received, enter the amount from Part I, line 8, in column D. If more than one property was received, see instructions, E.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Allocation of California source deferred gain to properties received. If only one property was received, enter the amount from Part I, line 8, in column D. If more than one property was received, see instructions, E",
+      "position": {
+        "page": 1,
+        "x": 398.166,
+        "y": 89.88
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.1.line.10_allocation_deferred_gain_col_f",
+      "label": "Line 10. Allocation of California source deferred gain to properties received. If only one property was received, enter the amount from Part I, line 8, in column D. If more than one property was received, see instructions, F.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Allocation of California source deferred gain to properties received. If only one property was received, enter the amount from Part I, line 8, in column D. If more than one property was received, see instructions, F",
+      "position": {
+        "page": 1,
+        "x": 493.743,
+        "y": 89.8882
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3840.1.line.11_apportionment_percentage",
+      "label": "Line 11. Apportionment percentage for the taxable year of the exchange. See instructions. Enter 6 digits including decimal.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. Apportionment percentage for the taxable year of the exchange. See instructions. Enter 6 digits including decimal",
+      "position": {
+        "page": 1,
+        "x": 484.657,
+        "y": 75.8796
+      },
+      "maxLength": 8
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3840/blank.pdf",
+    "ingestedAt": "2026-11-21T04:50:16.219Z",
+    "totalFields": 112,
+    "skipped": 0,
+    "catalogEntries": 112
+  }
+}

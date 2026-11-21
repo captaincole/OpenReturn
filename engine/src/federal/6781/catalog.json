@@ -1,0 +1,1083 @@
+{
+  "form": {
+    "formId": "form-6781",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 6781, Gains and Losses From Section 1256 Contracts and Straddles"
+  },
+  "fields": [
+    {
+      "fieldId": "form-6781.0.header.taxpayer_name",
+      "label": "Name(s) shown on tax return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-6781.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 476.2,
+        "y": 684
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-6781.0.header.box_a_mixed_straddle_election",
+      "label": "A — Mixed straddle election",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Checkbox_ReadOrder[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 187.2,
+        "y": 674.251
+      }
+    },
+    {
+      "fieldId": "form-6781.0.header.box_c_mixed_straddle_account_election",
+      "label": "C — Mixed straddle account election",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 396,
+        "y": 674.251
+      }
+    },
+    {
+      "fieldId": "form-6781.0.header.box_b_straddle_by_straddle_identification_election",
+      "label": "B — Straddle-by-straddle identification election",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Checkbox_ReadOrder[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 187.2,
+        "y": 662.252
+      }
+    },
+    {
+      "fieldId": "form-6781.0.header.box_d_net_section_1256_loss_election",
+      "label": "D — Net section 1256 contracts loss election",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 396,
+        "y": 662.252
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.1_row1_col_a",
+      "label": "Line 1, row 1 — (a) Identification of account",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.1_row1_col_b",
+      "label": "Line 1, row 1 — (b) (Loss)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.1_row1_col_c",
+      "label": "Line 1, row 1 — (c) Gain",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.1_row2_col_a",
+      "label": "Line 1, row 2 — (a) Identification of account",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row2[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.1_row2_col_b",
+      "label": "Line 1, row 2 — (b) (Loss)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row2[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.1_row2_col_c",
+      "label": "Line 1, row 2 — (c) Gain",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row2[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.1_row3_col_a",
+      "label": "Line 1, row 3 — (a) Identification of account",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row3[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.1_row3_col_b",
+      "label": "Line 1, row 3 — (b) (Loss)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row3[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.1_row3_col_c",
+      "label": "Line 1, row 3 — (c) Gain",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row3[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.2_total_col_b",
+      "label": "Line 2 — Add the amounts on line 1 in columns (b) and (c): (b) (Loss)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 363,
+        "y": 576
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.2_total_col_c",
+      "label": "Line 2 — Add the amounts on line 1 in columns (b) and (c): (c) Gain",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 576
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.3_net_gain_or_loss",
+      "label": "Line 3 — Net gain or (loss). Combine line 2, columns (b) and (c)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 564.001
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.4_form_1099b_adjustments",
+      "label": "Line 4 — Form 1099-B adjustments",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 552.002
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.5_combine_lines_3_and_4",
+      "label": "Line 5 — Combine lines 3 and 4",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 540
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.6_loss_carried_back",
+      "label": "Line 6 — If you have a net section 1256 contracts loss and checked box D above, enter the amount of loss to be carried back. Enter the loss as a positive number. If you didn't check box D, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 492.001
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.7_combine_lines_5_and_6",
+      "label": "Line 7 — Combine lines 5 and 6",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 480.002
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.8_short_term_capital_gain_loss",
+      "label": "Line 8 — Short-term capital gain or (loss). Multiply line 7 by 40% (0.40)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.9_long_term_capital_gain_loss",
+      "label": "Line 9 — Long-term capital gain or (loss). Multiply line 7 by 60% (0.60)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.10_row1_col_a",
+      "label": "Line 10, row 1 — (a) Description of property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line10[0].Row1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 335.999
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.10_row1_col_b",
+      "label": "Line 10, row 1 — (b) Date entered into or acquired",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line10[0].Row1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 187.2,
+        "y": 335.999
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.10_row1_col_c",
+      "label": "Line 10, row 1 — (c) Date closed out or sold",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line10[0].Row1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 335.999
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.10_row1_col_d",
+      "label": "Line 10, row 1 — (d) Gross sales price",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line10[0].Row1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 273.6,
+        "y": 335.999
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.10_row1_col_e",
+      "label": "Line 10, row 1 — (e) Cost or other basis plus expense of sale",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line10[0].Row1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 331.2,
+        "y": 335.999
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.10_row1_col_f",
+      "label": "Line 10, row 1 — (f) Loss. If column (e) is more than (d), enter difference. Otherwise, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line10[0].Row1[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 388.8,
+        "y": 335.999
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.10_row1_col_g",
+      "label": "Line 10, row 1 — (g) Unrecognized gain on offsetting positions",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line10[0].Row1[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 335.999
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.10_row1_col_h",
+      "label": "Line 10, row 1 — (h) Recognized loss. If column (f) is more than (g), enter difference. Otherwise, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line10[0].Row1[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 335.999
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.10_row2_col_a",
+      "label": "Line 10, row 2 — (a) Description of property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line10[0].Row2[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.10_row2_col_b",
+      "label": "Line 10, row 2 — (b) Date entered into or acquired",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line10[0].Row2[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 187.2,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.10_row2_col_c",
+      "label": "Line 10, row 2 — (c) Date closed out or sold",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line10[0].Row2[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.10_row2_col_d",
+      "label": "Line 10, row 2 — (d) Gross sales price",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line10[0].Row2[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 273.6,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.10_row2_col_e",
+      "label": "Line 10, row 2 — (e) Cost or other basis plus expense of sale",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line10[0].Row2[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 331.2,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.10_row2_col_f",
+      "label": "Line 10, row 2 — (f) Loss. If column (e) is more than (d), enter difference. Otherwise, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line10[0].Row2[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 388.8,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.10_row2_col_g",
+      "label": "Line 10, row 2 — (g) Unrecognized gain on offsetting positions",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line10[0].Row2[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.10_row2_col_h",
+      "label": "Line 10, row 2 — (h) Recognized loss. If column (f) is more than (g), enter difference. Otherwise, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line10[0].Row2[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.11a_short_term_straddle_losses",
+      "label": "Line 11a — Enter the short-term portion of losses from line 10, column (h)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 507,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.11b_long_term_straddle_losses",
+      "label": "Line 11b — Enter the long-term portion of losses from line 10, column (h)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 507,
+        "y": 276.001
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.12_row1_col_a",
+      "label": "Line 12, row 1 — (a) Description of property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line12[0].Row1[0].f1_39[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 204.001
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.12_row1_col_b",
+      "label": "Line 12, row 1 — (b) Date entered into or acquired",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line12[0].Row1[0].f1_40[0]",
+      "position": {
+        "page": 0,
+        "x": 273.6,
+        "y": 204.001
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.12_row1_col_c",
+      "label": "Line 12, row 1 — (c) Date closed out or sold",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line12[0].Row1[0].f1_41[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 204.001
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.12_row1_col_d",
+      "label": "Line 12, row 1 — (d) Gross sales price",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line12[0].Row1[0].f1_42[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 204.001
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.12_row1_col_e",
+      "label": "Line 12, row 1 — (e) Cost or other basis plus expense of sale",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line12[0].Row1[0].f1_43[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 204.001
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.12_row1_col_f",
+      "label": "Line 12, row 1 — (f) Gain. If column (d) is more than (e), enter difference. Otherwise, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line12[0].Row1[0].f1_44[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 204.001
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.12_row2_col_a",
+      "label": "Line 12, row 2 — (a) Description of property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line12[0].Row2[0].f1_45[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.12_row2_col_b",
+      "label": "Line 12, row 2 — (b) Date entered into or acquired",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line12[0].Row2[0].f1_46[0]",
+      "position": {
+        "page": 0,
+        "x": 273.6,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.12_row2_col_c",
+      "label": "Line 12, row 2 — (c) Date closed out or sold",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line12[0].Row2[0].f1_47[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.12_row2_col_d",
+      "label": "Line 12, row 2 — (d) Gross sales price",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line12[0].Row2[0].f1_48[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.12_row2_col_e",
+      "label": "Line 12, row 2 — (e) Cost or other basis plus expense of sale",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line12[0].Row2[0].f1_49[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.12_row2_col_f",
+      "label": "Line 12, row 2 — (f) Gain. If column (d) is more than (e), enter difference. Otherwise, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line12[0].Row2[0].f1_50[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.13a_short_term_straddle_gains",
+      "label": "Line 13a — Enter the short-term portion of gains from line 12, column (f)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_51[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 168.001
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.13b_long_term_straddle_gains",
+      "label": "Line 13b — Enter the long-term portion of gains from line 12, column (f)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_52[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 144
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.14_row1_col_a",
+      "label": "Line 14, row 1 — (a) Description of property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line14[0].Row1[0].f1_53[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 72.003
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.14_row1_col_b",
+      "label": "Line 14, row 1 — (b) Date acquired",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line14[0].Row1[0].f1_54[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 72.003
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.14_row1_col_c",
+      "label": "Line 14, row 1 — (c) Fair market value on last business day of tax year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line14[0].Row1[0].f1_55[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 72.003
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.14_row1_col_d",
+      "label": "Line 14, row 1 — (d) Cost or other basis as adjusted",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line14[0].Row1[0].f1_56[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 72.003
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.14_row1_col_e",
+      "label": "Line 14, row 1 — (e) Unrecognized gain. If column (c) is more than (d), enter difference. Otherwise, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line14[0].Row1[0].f1_57[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 72.003
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.14_row2_col_a",
+      "label": "Line 14, row 2 — (a) Description of property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line14[0].Row2[0].f1_58[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 60.004
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.14_row2_col_b",
+      "label": "Line 14, row 2 — (b) Date acquired",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line14[0].Row2[0].f1_59[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 60.004
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.14_row2_col_c",
+      "label": "Line 14, row 2 — (c) Fair market value on last business day of tax year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line14[0].Row2[0].f1_60[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 60.004
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.14_row2_col_d",
+      "label": "Line 14, row 2 — (d) Cost or other basis as adjusted",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line14[0].Row2[0].f1_61[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 60.004
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.14_row2_col_e",
+      "label": "Line 14, row 2 — (e) Unrecognized gain. If column (c) is more than (d), enter difference. Otherwise, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line14[0].Row2[0].f1_62[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 60.004
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.14_row3_col_a",
+      "label": "Line 14, row 3 — (a) Description of property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line14[0].Row3[0].f1_63[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 48.005
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.14_row3_col_b",
+      "label": "Line 14, row 3 — (b) Date acquired",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line14[0].Row3[0].f1_64[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 48.005
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.14_row3_col_c",
+      "label": "Line 14, row 3 — (c) Fair market value on last business day of tax year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line14[0].Row3[0].f1_65[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 48.005
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.14_row3_col_d",
+      "label": "Line 14, row 3 — (d) Cost or other basis as adjusted",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line14[0].Row3[0].f1_66[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 48.005
+      }
+    },
+    {
+      "fieldId": "form-6781.0.line.14_row3_col_e",
+      "label": "Line 14, row 3 — (e) Unrecognized gain. If column (c) is more than (d), enter difference. Otherwise, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line14[0].Row3[0].f1_67[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 48.005
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/6781/blank.pdf",
+    "ingestedAt": "2026-11-21T04:50:11.750Z",
+    "totalFields": 71,
+    "skipped": 0,
+    "catalogEntries": 71
+  }
+}

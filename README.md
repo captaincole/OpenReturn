@@ -109,8 +109,8 @@ The form engine computes the return. The table shows how much of each form it ha
 <!-- coverage-table:start -->
 | Jurisdiction | Forms | Fields supported | Tested |
 | --- | --- | --- | --- |
-| Federal 2025 | 79 | **20%** (1,749 of 8,793) | 81.1% |
-| California 2025 | 32 | **14%** (489 of 3,413) | 79.4% |
+| Federal 2025 | 83 | **19%** (1,749 of 9,166) | 81.0% |
+| California 2025 | 38 | **12%** (489 of 4,075) | 79.2% |
 <!-- coverage-table:end -->
 
 - **Fields supported:** the share of the form fields that the engine computes. It leaves each other field blank and says so.
@@ -126,10 +126,10 @@ The IRS and the FTB each publish the list of forms that they accept with an indi
 | Forms | Federal 2025 | California 2025 |
 | --- | --- | --- |
 | Forms an individual return can hold | 225 | 65 |
-| In the engine | 79 | 32 |
+| In the engine | 83 | 38 |
 | With rules | 32 | 9 |
 | Tier 1 forms | 43 | 22 |
-| Tier 1 in the engine | 39 | 16 |
+| Tier 1 in the engine | 43 | 22 |
 | Tier 1 with rules | 26 | 7 |
 <!-- form-list-table:end -->
 

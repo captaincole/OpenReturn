@@ -1,0 +1,2758 @@
+{
+  "form": {
+    "formId": "schedule-d-1",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "Schedule D-1, Sales of Business Property"
+  },
+  "fields": [
+    {
+      "fieldId": "schedule-d-1.0.header.taxpayer_name",
+      "label": "Name(s) as shown on tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on tax return",
+      "position": {
+        "page": 0,
+        "x": 36.4017,
+        "y": 690.612
+      }
+    },
+    {
+      "fieldId": "schedule-d-1.0.header.taxpayer_id_number",
+      "label": "Social Security Number (S S N), Individual Taxpayer Identification Numbers (I T I N), California Secretary of State (S O S) file number, California Corporation number (12 digits), orFederal Employer Identification Number (F E I N) (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Social Security Number (S S N), Individual Taxpayer Identification Numbers (I T I N), California Secretary of State (S O S) file number, California Corporation number (12 digits), orFederal Employer Identification Number (F E I N) (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 402.71,
+        "y": 690.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.1a_gross_proceeds_1099b_1099s",
+      "label": "Part I, Line 1a. Enter the gross proceeds from sales or exchanges reported to you for 2025 on federal Form 1099-B, Proceeds from Broker and Barter Exchange Transactions, or federal Form 1099-S, Proceeds from Real Estate Transactions (or a substitute statement), that you are including on line 2 or line 10, column (d), or line 23.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Line 1a. Enter the gross proceeds from sales or exchanges reported to you for 2025 on federal Form 1099-B, Proceeds from Broker and Barter Exchange Transactions, or federal Form 1099-S, Proceeds from Real Estate Transactions (or a substitute statement), that you are including on line 2 or line 10, column (d), or line 23",
+      "position": {
+        "page": 0,
+        "x": 511.18,
+        "y": 639.242
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.1b_macrs_partial_disposition_gain",
+      "label": "Line 1b. Enter the total amount of gain that you are including on lines 2, 10, and 27 due to the partial dispositions of M A C R S assets. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1b. Enter the total amount of gain that you are including on lines 2, 10, and 27 due to the partial dispositions of M A C R S assets. See instructions",
+      "position": {
+        "page": 0,
+        "x": 511.18,
+        "y": 619.233
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.1c_macrs_partial_disposition_loss",
+      "label": "Line 1c. Enter the total amount of loss that you are including on lines 2 and 10 due to the partial dispositions of M A C R S assets. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1c. Enter the total amount of loss that you are including on lines 2 and 10 due to the partial dispositions of M A C R S assets. See instructions",
+      "position": {
+        "page": 0,
+        "x": 511.303,
+        "y": 598.905
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row1_col_a",
+      "label": "Line 2(a). Description of property (1).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(a). Description of property (1)",
+      "position": {
+        "page": 0,
+        "x": 46.3737,
+        "y": 538.009
+      }
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row1_col_b",
+      "label": "Line 2(b). Date acquired (mm/dd/yyyy) (1).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(b). Date acquired (mm/dd/yyyy) (1)",
+      "position": {
+        "page": 0,
+        "x": 198.403,
+        "y": 538.009
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row1_col_c",
+      "label": "Line 2(c). Date sold (mm/dd/yyyy) (1).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(c). Date sold (mm/dd/yyyy) (1)",
+      "position": {
+        "page": 0,
+        "x": 263.513,
+        "y": 538.009
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row1_col_d",
+      "label": "Line 2(d). Gross sales price (1).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(d). Gross sales price (1)",
+      "position": {
+        "page": 0,
+        "x": 327.919,
+        "y": 538.009
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row1_col_e",
+      "label": "Line 2(e). Depreciation allowed or allowable since acquisition (1).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(e). Depreciation allowed or allowable since acquisition (1)",
+      "position": {
+        "page": 0,
+        "x": 393.025,
+        "y": 538.009
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row1_col_f",
+      "label": "Line 2(f). Cost or other basis, plus improvements and expense of sale (1).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(f). Cost or other basis, plus improvements and expense of sale (1)",
+      "position": {
+        "page": 0,
+        "x": 457.258,
+        "y": 538.009
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row1_col_g",
+      "label": "Line 2(g). Gain or (Loss) Subtract (f) from the sum of (d) and (e) (1).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(g). Gain or (Loss) Subtract (f) from the sum of (d) and (e) (1)",
+      "position": {
+        "page": 0,
+        "x": 522.174,
+        "y": 538.009
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row2_col_a",
+      "label": "Line 2(a). Description of property (2).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(a). Description of property (2)",
+      "position": {
+        "page": 0,
+        "x": 46.3737,
+        "y": 525.976
+      }
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row2_col_b",
+      "label": "Line 2(b). Date acquired (mm/dd/yyyy) (2).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(b). Date acquired (mm/dd/yyyy) (2)",
+      "position": {
+        "page": 0,
+        "x": 198.403,
+        "y": 525.976
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row2_col_c",
+      "label": "Line 2(c). Date sold (mm/dd/yyyy) (2).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(c). Date sold (mm/dd/yyyy) (2)",
+      "position": {
+        "page": 0,
+        "x": 263.513,
+        "y": 525.976
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row2_col_d",
+      "label": "Line 2(d). Gross sales price (2).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(d). Gross sales price (2)",
+      "position": {
+        "page": 0,
+        "x": 327.919,
+        "y": 525.976
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row2_col_e",
+      "label": "Line 2(e). Depreciation allowed or allowable since acquisition (2).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(e). Depreciation allowed or allowable since acquisition (2)",
+      "position": {
+        "page": 0,
+        "x": 393.025,
+        "y": 525.976
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row2_col_f",
+      "label": "Line 2(f). Cost or other basis, plus improvements and expense of sale (2).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(f). Cost or other basis, plus improvements and expense of sale (2)",
+      "position": {
+        "page": 0,
+        "x": 457.258,
+        "y": 525.976
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row2_col_g",
+      "label": "Line 2(g). Gain or (Loss) Subtract (f) from the sum of (d) and (e) (2).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(g). Gain or (Loss) Subtract (f) from the sum of (d) and (e) (2)",
+      "position": {
+        "page": 0,
+        "x": 522.174,
+        "y": 525.976
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row3_col_a",
+      "label": "Line 2(a). Description of property (3).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(a). Description of property (3)",
+      "position": {
+        "page": 0,
+        "x": 46.3737,
+        "y": 513.282
+      }
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row3_col_b",
+      "label": "Line 2(b). Date acquired (mm/dd/yyyy) (3).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(b). Date acquired (mm/dd/yyyy) (3)",
+      "position": {
+        "page": 0,
+        "x": 198.403,
+        "y": 513.282
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row3_col_c",
+      "label": "Line 2(c). Date sold (mm/dd/yyyy) (3).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(c). Date sold (mm/dd/yyyy) (3)",
+      "position": {
+        "page": 0,
+        "x": 263.513,
+        "y": 513.282
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row3_col_d",
+      "label": "Line 2(d). Gross sales price (3).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(d). Gross sales price (3)",
+      "position": {
+        "page": 0,
+        "x": 327.919,
+        "y": 513.282
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row3_col_e",
+      "label": "Line 2(e). Depreciation allowed or allowable since acquisition (3).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(e). Depreciation allowed or allowable since acquisition (3)",
+      "position": {
+        "page": 0,
+        "x": 393.025,
+        "y": 513.282
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row3_col_f",
+      "label": "Line 2(f). Cost or other basis, plus improvements and expense of sale (3).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(f). Cost or other basis, plus improvements and expense of sale (3)",
+      "position": {
+        "page": 0,
+        "x": 457.258,
+        "y": 513.282
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row3_col_g",
+      "label": "Line 2(g). Gain or (Loss) Subtract (f) from the sum of (d) and (e) (3).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(g). Gain or (Loss) Subtract (f) from the sum of (d) and (e) (3)",
+      "position": {
+        "page": 0,
+        "x": 522.174,
+        "y": 513.282
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.3_gain_from_form_4684",
+      "label": "Line 3. Gain, if any, from federal Form 4684, line 39.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Gain, if any, from federal Form 4684, line 39",
+      "position": {
+        "page": 0,
+        "x": 511.302,
+        "y": 501.985
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.4_section_1231_installment_gain",
+      "label": "Line 4. I R C Section 1231 gain from installment sales from form F T B 3805E, line 26 or line 37.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. I R C Section 1231 gain from installment sales from form F T B 3805E, line 26 or line 37",
+      "position": {
+        "page": 0,
+        "x": 511.294,
+        "y": 489.974
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.5_section_1231_like_kind_gain_loss",
+      "label": "Line 5. I R C Section 1231 gain or (loss) from like-kind exchanges from federal Form 8824 (completed using California amounts).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. I R C Section 1231 gain or (loss) from like-kind exchanges from federal Form 8824 (completed using California amounts)",
+      "position": {
+        "page": 0,
+        "x": 511.296,
+        "y": 477.988
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.6_gain_from_line_35",
+      "label": "Line 6. Gain, if any, from line 35, from other than casualty and theft.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Gain, if any, from line 35, from other than casualty and theft",
+      "position": {
+        "page": 0,
+        "x": 511.27,
+        "y": 466.009
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.7_net_section_1231_gain_loss",
+      "label": "Line 7. Combine line 2 through line 6. Enter gain or (loss) here and on the appropriate line as follows.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Combine line 2 through line 6. Enter gain or (loss) here and on the appropriate line as follows",
+      "position": {
+        "page": 0,
+        "x": 511.289,
+        "y": 454.005
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.8_nonrecaptured_section_1231_losses",
+      "label": "Line 8. Nonrecaptured net I R C Section 1231 losses from prior years. Enter as a positive number. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Nonrecaptured net I R C Section 1231 losses from prior years. Enter as a positive number. See instructions",
+      "position": {
+        "page": 0,
+        "x": 512.589,
+        "y": 345.985
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.9_line_7_minus_line_8",
+      "label": "Line 9. Subtract line 8 from line 7. If zero or less, enter 0.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Subtract line 8 from line 7. If zero or less, enter 0",
+      "position": {
+        "page": 0,
+        "x": 512.606,
+        "y": 333.985
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row1_col_a",
+      "label": "Part II, Section A, Line 10(a). Description of property (1).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, Section A, Line 10(a). Description of property (1)",
+      "position": {
+        "page": 0,
+        "x": 46.2112,
+        "y": 235.575
+      }
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row1_col_b",
+      "label": "Line 10(b). Date acquired (mm/dd/yyyy) (1).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(b). Date acquired (mm/dd/yyyy) (1)",
+      "position": {
+        "page": 0,
+        "x": 198.662,
+        "y": 235.575
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row1_col_c",
+      "label": "Line 10(c). Date sold (mm/dd/yyyy) (1).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(c). Date sold (mm/dd/yyyy) (1)",
+      "position": {
+        "page": 0,
+        "x": 263.181,
+        "y": 235.575
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row1_col_d",
+      "label": "Line 10(d). Gross sales price (1).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(d). Gross sales price (1)",
+      "position": {
+        "page": 0,
+        "x": 327.866,
+        "y": 235.575
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row1_col_e",
+      "label": "Line 10(e). Depreciation allowed or allowable since acquisition (1).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(e). Depreciation allowed or allowable since acquisition (1)",
+      "position": {
+        "page": 0,
+        "x": 392.79,
+        "y": 235.575
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row1_col_f",
+      "label": "Line 10(f). Cost or other basis, plus improvements and expense of sale (1).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(f). Cost or other basis, plus improvements and expense of sale (1)",
+      "position": {
+        "page": 0,
+        "x": 457.369,
+        "y": 235.575
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row1_col_g",
+      "label": "Line 10(g). Gain or (Loss) Subtract (f) from the sum of (d) and (e) (1).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(g). Gain or (Loss) Subtract (f) from the sum of (d) and (e) (1)",
+      "position": {
+        "page": 0,
+        "x": 522.293,
+        "y": 235.575
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row2_col_a",
+      "label": "Line 10(a). Description of property (2).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(a). Description of property (2)",
+      "position": {
+        "page": 0,
+        "x": 46.2112,
+        "y": 223.578
+      }
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row2_col_b",
+      "label": "Line 10(b). Date acquired (mm/dd/yyyy) (2).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(b). Date acquired (mm/dd/yyyy) (2)",
+      "position": {
+        "page": 0,
+        "x": 198.662,
+        "y": 223.578
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row2_col_c",
+      "label": "Line 10(c). Date sold (mm/dd/yyyy) (2).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(c). Date sold (mm/dd/yyyy) (2)",
+      "position": {
+        "page": 0,
+        "x": 263.181,
+        "y": 223.578
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row2_col_d",
+      "label": "Line 10(d). Gross sales price (2).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(d). Gross sales price (2)",
+      "position": {
+        "page": 0,
+        "x": 327.866,
+        "y": 223.578
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row2_col_e",
+      "label": "Line 10(e). Depreciation allowed or allowable since acquisition (2).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(e). Depreciation allowed or allowable since acquisition (2)",
+      "position": {
+        "page": 0,
+        "x": 392.79,
+        "y": 223.578
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row2_col_f",
+      "label": "Line 10(f). Cost or other basis, plus improvements and expense of sale (2).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(f). Cost or other basis, plus improvements and expense of sale (2)",
+      "position": {
+        "page": 0,
+        "x": 457.369,
+        "y": 223.578
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row2_col_g",
+      "label": "Line 10(g). Gain or (Loss) Subtract (f) from the sum of (d) and (e) (2).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(g). Gain or (Loss) Subtract (f) from the sum of (d) and (e) (2)",
+      "position": {
+        "page": 0,
+        "x": 522.293,
+        "y": 223.578
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row3_col_a",
+      "label": "Line 10(a). Description of property (3).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(a). Description of property (3)",
+      "position": {
+        "page": 0,
+        "x": 46.2112,
+        "y": 212.688
+      }
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row3_col_b",
+      "label": "Line 10(b). Date acquired (mm/dd/yyyy) (3).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(b). Date acquired (mm/dd/yyyy) (3)",
+      "position": {
+        "page": 0,
+        "x": 198.662,
+        "y": 212.688
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row3_col_c",
+      "label": "Line 10(c). Date sold (mm/dd/yyyy) (3).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(c). Date sold (mm/dd/yyyy) (3)",
+      "position": {
+        "page": 0,
+        "x": 263.181,
+        "y": 212.688
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row3_col_d",
+      "label": "Line 10(d). Gross sales price (3).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(d). Gross sales price (3)",
+      "position": {
+        "page": 0,
+        "x": 327.866,
+        "y": 212.688
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row3_col_e",
+      "label": "Line 10(e). Depreciation allowed or allowable since acquisition (3).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(e). Depreciation allowed or allowable since acquisition (3)",
+      "position": {
+        "page": 0,
+        "x": 392.79,
+        "y": 212.688
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row3_col_f",
+      "label": "Line 10(f). Cost or other basis, plus improvements and expense of sale (3).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(f). Cost or other basis, plus improvements and expense of sale (3)",
+      "position": {
+        "page": 0,
+        "x": 457.369,
+        "y": 212.688
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row3_col_g",
+      "label": "Line 10(g). Gain or (Loss) Subtract (f) from the sum of (d) and (e) (3).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10(g). Gain or (Loss) Subtract (f) from the sum of (d) and (e) (3)",
+      "position": {
+        "page": 0,
+        "x": 522.293,
+        "y": 212.688
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.11_loss_from_line_7",
+      "label": "Line 11. Loss, if any, from line 7.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. Loss, if any, from line 7",
+      "position": {
+        "page": 0,
+        "x": 516.451,
+        "y": 201.644
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.12_gain_from_line_7_or_8",
+      "label": "Line 12. Gain, if any, from line 7, or amount from line 8, if applicable. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. Gain, if any, from line 7, or amount from line 8, if applicable. See instructions",
+      "position": {
+        "page": 0,
+        "x": 512.084,
+        "y": 187.591
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.13_gain_from_line_34",
+      "label": "Line 13. Gain, if any, from line 34.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Gain, if any, from line 34",
+      "position": {
+        "page": 0,
+        "x": 512.104,
+        "y": 175.576
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.14_net_gain_loss_form_4684",
+      "label": "Line 14. Net gain or (loss) from federal Form 4684, line 31 and line 38a (completed using California amounts).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. Net gain or (loss) from federal Form 4684, line 31 and line 38a (completed using California amounts)",
+      "position": {
+        "page": 0,
+        "x": 512.094,
+        "y": 163.591
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.15_ordinary_gain_installment_sales",
+      "label": "Line 15. Ordinary gain from installment sales from form F T B 3805E, line 25 or line 36. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Ordinary gain from installment sales from form F T B 3805E, line 25 or line 36. See instructions",
+      "position": {
+        "page": 0,
+        "x": 512.104,
+        "y": 151.593
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.16_ordinary_like_kind_gain_loss",
+      "label": "Line 16. Ordinary gain or (loss) from like-kind exchanges from federal Form 8824 (completed using California amounts).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. Ordinary gain or (loss) from like-kind exchanges from federal Form 8824 (completed using California amounts)",
+      "position": {
+        "page": 0,
+        "x": 512.104,
+        "y": 139.568
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.17_total_ordinary_gain_loss",
+      "label": "Line 17. Combine line 10 through line 16.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. Combine line 10 through line 16",
+      "position": {
+        "page": 0,
+        "x": 512.094,
+        "y": 127.811
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.18a_form_4684_loss_in_line_11",
+      "label": "Line 18a. If the loss on line 11 includes a loss from federal Form 4684, Section B, Part II, column (b)(ii) of line 30 or line 35, enter that part of the loss here. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18a. If the loss on line 11 includes a loss from federal Form 4684, Section B, Part II, column (b)(ii) of line 30 or line 35, enter that part of the loss here. See instructions",
+      "position": {
+        "page": 0,
+        "x": 512.596,
+        "y": 79.6113
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.18b_redetermined_gain_loss",
+      "label": "Line 18b. Redetermine the gain or (loss) on line 17, excluding the loss, if any, on line 18a. Enter here and on line 20.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18b. Redetermine the gain or (loss) on line 17, excluding the loss, if any, on line 18a. Enter here and on line 20",
+      "position": {
+        "page": 0,
+        "x": 512.598,
+        "y": 68.5907
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.19_federal_ordinary_gain_loss",
+      "label": "Part II, Section B, Line 19. Enter ordinary federal gain or (loss) from federal Schedule 1 (Form 1040), line 4.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, Section B, Line 19. Enter ordinary federal gain or (loss) from federal Schedule 1 (Form 1040), line 4",
+      "position": {
+        "page": 1,
+        "x": 504.472,
+        "y": 706.389
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.20_california_ordinary_gain_loss",
+      "label": "Line 20. Enter ordinary California gain or (loss) from line 18b.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. Enter ordinary California gain or (loss) from line 18b",
+      "position": {
+        "page": 1,
+        "x": 504.472,
+        "y": 694.368
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.21a_federal_exceeds_california_difference",
+      "label": "Line 21a. If line 19 is more than line 20, enter the difference here and on Schedule C A (540), Part I or Schedule C A (540NR), Part II, Section B, line 4, column B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 21a. If line 19 is more than line 20, enter the difference here and on Schedule C A (540), Part I or Schedule C A (540NR), Part II, Section B, line 4, column B",
+      "position": {
+        "page": 1,
+        "x": 504.484,
+        "y": 661.379
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.21b_california_exceeds_federal_difference",
+      "label": "Line 21b. If line 20 is more than line 19, enter the difference here and on Schedule C A (540), Part I or Schedule C A (540NR), Part II, Section B, line 4, column C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 21b. If line 20 is more than line 19, enter the difference here and on Schedule C A (540), Part I or Schedule C A (540NR), Part II, Section B, line 4, column C",
+      "position": {
+        "page": 1,
+        "x": 504.484,
+        "y": 638.98
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22a_property_description",
+      "label": "Part III, Line 22A. Description of I R C Sections 1245, 1250, 1252, 1254, and 1255 property.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part III, Line 22A. Description of I R C Sections 1245, 1250, 1252, 1254, and 1255 property",
+      "position": {
+        "page": 1,
+        "x": 67.8825,
+        "y": 605.3
+      }
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22a_date_acquired",
+      "label": "Line 22A. Date acquired (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22A. Date acquired (mm/dd/yyyy)",
+      "position": {
+        "page": 1,
+        "x": 443.791,
+        "y": 605.3
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22a_date_sold",
+      "label": "Line 22A. Date sold (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22A. Date sold (mm/dd/yyyy)",
+      "position": {
+        "page": 1,
+        "x": 517.485,
+        "y": 605.3
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22b_property_description",
+      "label": "Line 22B. Description of I R C Sections 1245, 1250, 1252, 1254, and 1255 property.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22B. Description of I R C Sections 1245, 1250, 1252, 1254, and 1255 property",
+      "position": {
+        "page": 1,
+        "x": 67.8825,
+        "y": 593.287
+      }
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22b_date_acquired",
+      "label": "Line 22B. Date acquired (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22B. Date acquired (mm/dd/yyyy)",
+      "position": {
+        "page": 1,
+        "x": 443.791,
+        "y": 593.287
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22b_date_sold",
+      "label": "Line 22B. Date sold (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22B. Date sold (mm/dd/yyyy)",
+      "position": {
+        "page": 1,
+        "x": 517.485,
+        "y": 593.287
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22c_property_description",
+      "label": "Line 22C. Description of I R C Sections 1245, 1250, 1252, 1254, and 1255 property.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22C. Description of I R C Sections 1245, 1250, 1252, 1254, and 1255 property",
+      "position": {
+        "page": 1,
+        "x": 67.8825,
+        "y": 581.276
+      }
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22c_date_acquired",
+      "label": "Line 22C. Date acquired (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22C. Date acquired (mm/dd/yyyy)",
+      "position": {
+        "page": 1,
+        "x": 443.791,
+        "y": 581.276
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22c_date_sold",
+      "label": "Line 22C. Date sold (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22C. Date sold (mm/dd/yyyy)",
+      "position": {
+        "page": 1,
+        "x": 517.485,
+        "y": 581.276
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22d_property_description",
+      "label": "Line 22D. Description of I R C Sections 1245, 1250, 1252, 1254, and 1255 property.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22D. Description of I R C Sections 1245, 1250, 1252, 1254, and 1255 property",
+      "position": {
+        "page": 1,
+        "x": 67.8825,
+        "y": 569.27
+      }
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22d_date_acquired",
+      "label": "Line 22D. Date acquired (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22D. Date acquired (mm/dd/yyyy)",
+      "position": {
+        "page": 1,
+        "x": 443.791,
+        "y": 569.27
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22d_date_sold",
+      "label": "Line 22D. Date sold (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22D. Date sold (mm/dd/yyyy)",
+      "position": {
+        "page": 1,
+        "x": 517.485,
+        "y": 569.27
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.23_gross_sales_price_col_a",
+      "label": "Line 23. Gross sales price, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. Gross sales price, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 546.301
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.23_gross_sales_price_col_b",
+      "label": "Line 23. Gross sales price, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. Gross sales price, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 546.301
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.23_gross_sales_price_col_c",
+      "label": "Line 23. Gross sales price, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. Gross sales price, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 546.301
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.23_gross_sales_price_col_d",
+      "label": "Line 23. Gross sales price, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. Gross sales price, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 546.301
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.24_cost_basis_plus_expense_col_a",
+      "label": "Line 24. Cost or other basis plus expense of sale, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Cost or other basis plus expense of sale, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 534.299
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.24_cost_basis_plus_expense_col_b",
+      "label": "Line 24. Cost or other basis plus expense of sale, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Cost or other basis plus expense of sale, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 534.299
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.24_cost_basis_plus_expense_col_c",
+      "label": "Line 24. Cost or other basis plus expense of sale, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Cost or other basis plus expense of sale, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 534.299
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.24_cost_basis_plus_expense_col_d",
+      "label": "Line 24. Cost or other basis plus expense of sale, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Cost or other basis plus expense of sale, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 534.299
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.25_depreciation_allowed_col_a",
+      "label": "Line 25. Depreciation (or depletion) allowed or allowable, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25. Depreciation (or depletion) allowed or allowable, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 522.291
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.25_depreciation_allowed_col_b",
+      "label": "Line 25. Depreciation (or depletion) allowed or allowable, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25. Depreciation (or depletion) allowed or allowable, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 522.291
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.25_depreciation_allowed_col_c",
+      "label": "Line 25. Depreciation (or depletion) allowed or allowable, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25. Depreciation (or depletion) allowed or allowable, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 522.291
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.25_depreciation_allowed_col_d",
+      "label": "Line 25. Depreciation (or depletion) allowed or allowable, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25. Depreciation (or depletion) allowed or allowable, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 522.291
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.26_adjusted_basis_col_a",
+      "label": "Line 26. Adjusted basis. Subtract line 25 from line 24, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 26. Adjusted basis. Subtract line 25 from line 24, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 510.312
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.26_adjusted_basis_col_b",
+      "label": "Line 26. Adjusted basis. Subtract line 25 from line 24, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 26. Adjusted basis. Subtract line 25 from line 24, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 510.312
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.26_adjusted_basis_col_c",
+      "label": "Line 26. Adjusted basis. Subtract line 25 from line 24, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 26. Adjusted basis. Subtract line 25 from line 24, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 510.312
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.26_adjusted_basis_col_d",
+      "label": "Line 26. Adjusted basis. Subtract line 25 from line 24, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 26. Adjusted basis. Subtract line 25 from line 24, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 510.312
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.27_total_gain_col_a",
+      "label": "Line 27. Total gain. Subtract line 26 from line 23, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 27. Total gain. Subtract line 26 from line 23, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 498.292
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.27_total_gain_col_b",
+      "label": "Line 27. Total gain. Subtract line 26 from line 23, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 27. Total gain. Subtract line 26 from line 23, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 498.292
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.27_total_gain_col_c",
+      "label": "Line 27. Total gain. Subtract line 26 from line 23, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 27. Total gain. Subtract line 26 from line 23, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 498.292
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.27_total_gain_col_d",
+      "label": "Line 27. Total gain. Subtract line 26 from line 23, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 27. Total gain. Subtract line 26 from line 23, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 498.292
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.28a_sec_1245_depreciation_col_a",
+      "label": "Line 28a. Depreciation allowed or allowable from line 25, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 28a. Depreciation allowed or allowable from line 25, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 474.288
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.28a_sec_1245_depreciation_col_b",
+      "label": "Line 28a. Depreciation allowed or allowable from line 25, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 28a. Depreciation allowed or allowable from line 25, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 474.288
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.28a_sec_1245_depreciation_col_c",
+      "label": "Line 28a. Depreciation allowed or allowable from line 25, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 28a. Depreciation allowed or allowable from line 25, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 474.288
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.28a_sec_1245_depreciation_col_d",
+      "label": "Line 28a. Depreciation allowed or allowable from line 25, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 28a. Depreciation allowed or allowable from line 25, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 474.288
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.28b_sec_1245_smaller_amount_col_a",
+      "label": "Line 28b. Enter the smaller of line 27 or line 28a, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 28b. Enter the smaller of line 27 or line 28a, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 462.26
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.28b_sec_1245_smaller_amount_col_b",
+      "label": "Line 28b. Enter the smaller of line 27 or line 28a, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 28b. Enter the smaller of line 27 or line 28a, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 462.26
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.28b_sec_1245_smaller_amount_col_c",
+      "label": "Line 28b. Enter the smaller of line 27 or line 28a, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 28b. Enter the smaller of line 27 or line 28a, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 462.26
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.28b_sec_1245_smaller_amount_col_d",
+      "label": "Line 28b. Enter the smaller of line 27 or line 28a, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 28b. Enter the smaller of line 27 or line 28a, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 462.26
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29a_additional_depreciation_after_1976_col_a",
+      "label": "Line 29a. Additional depreciation after 12/31/76. See instructions, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29a. Additional depreciation after 12/31/76. See instructions, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 429.306
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29a_additional_depreciation_after_1976_col_b",
+      "label": "Line 29a. Additional depreciation after 12/31/76. See instructions, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29a. Additional depreciation after 12/31/76. See instructions, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 429.306
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29a_additional_depreciation_after_1976_col_c",
+      "label": "Line 29a. Additional depreciation after 12/31/76. See instructions, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29a. Additional depreciation after 12/31/76. See instructions, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 429.306
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29a_additional_depreciation_after_1976_col_d",
+      "label": "Line 29a. Additional depreciation after 12/31/76. See instructions, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29a. Additional depreciation after 12/31/76. See instructions, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 429.306
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29b_sec_1250_applicable_percentage_amount_col_a",
+      "label": "Line 29b. Applicable percentage multiplied by the smaller of line 27 or line 29a. See instructions, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29b. Applicable percentage multiplied by the smaller of line 27 or line 29a. See instructions, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 408.279
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29b_sec_1250_applicable_percentage_amount_col_b",
+      "label": "Line 29b. Applicable percentage multiplied by the smaller of line 27 or line 29a. See instructions, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29b. Applicable percentage multiplied by the smaller of line 27 or line 29a. See instructions, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 408.279
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29b_sec_1250_applicable_percentage_amount_col_c",
+      "label": "Line 29b. Applicable percentage multiplied by the smaller of line 27 or line 29a. See instructions, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29b. Applicable percentage multiplied by the smaller of line 27 or line 29a. See instructions, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 408.279
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29b_sec_1250_applicable_percentage_amount_col_d",
+      "label": "Line 29b. Applicable percentage multiplied by the smaller of line 27 or line 29a. See instructions, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29b. Applicable percentage multiplied by the smaller of line 27 or line 29a. See instructions, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 408.279
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29c_gain_less_additional_depreciation_col_a",
+      "label": "Line 29c. Subtract line 29a from line 27. If line 27 is not more than line 29a, skip line 29d and line 29e, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29c. Subtract line 29a from line 27. If line 27 is not more than line 29a, skip line 29d and line 29e, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 387.303
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29c_gain_less_additional_depreciation_col_b",
+      "label": "Line 29c. Subtract line 29a from line 27. If line 27 is not more than line 29a, skip line 29d and line 29e, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29c. Subtract line 29a from line 27. If line 27 is not more than line 29a, skip line 29d and line 29e, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 387.303
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29c_gain_less_additional_depreciation_col_c",
+      "label": "Line 29c. Subtract line 29a from line 27. If line 27 is not more than line 29a, skip line 29d and line 29e, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29c. Subtract line 29a from line 27. If line 27 is not more than line 29a, skip line 29d and line 29e, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 387.303
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29c_gain_less_additional_depreciation_col_d",
+      "label": "Line 29c. Subtract line 29a from line 27. If line 27 is not more than line 29a, skip line 29d and line 29e, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29c. Subtract line 29a from line 27. If line 27 is not more than line 29a, skip line 29d and line 29e, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 387.303
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29d_additional_depreciation_1971_to_1976_col_a",
+      "label": "Line 29d. Additional depreciation after 12/31/70 and before 1/1/77, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29d. Additional depreciation after 12/31/70 and before 1/1/77, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 375.301
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29d_additional_depreciation_1971_to_1976_col_b",
+      "label": "Line 29d. Additional depreciation after 12/31/70 and before 1/1/77, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29d. Additional depreciation after 12/31/70 and before 1/1/77, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 375.301
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29d_additional_depreciation_1971_to_1976_col_c",
+      "label": "Line 29d. Additional depreciation after 12/31/70 and before 1/1/77, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29d. Additional depreciation after 12/31/70 and before 1/1/77, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 375.301
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29d_additional_depreciation_1971_to_1976_col_d",
+      "label": "Line 29d. Additional depreciation after 12/31/70 and before 1/1/77, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29d. Additional depreciation after 12/31/70 and before 1/1/77, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 375.301
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29e_smaller_of_29c_29d_col_a",
+      "label": "Line 29e. Enter the smaller of line 29c or line 29d, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29e. Enter the smaller of line 29c or line 29d, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 363.284
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29e_smaller_of_29c_29d_col_b",
+      "label": "Line 29e. Enter the smaller of line 29c or line 29d, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29e. Enter the smaller of line 29c or line 29d, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 363.284
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29e_smaller_of_29c_29d_col_c",
+      "label": "Line 29e. Enter the smaller of line 29c or line 29d, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29e. Enter the smaller of line 29c or line 29d, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 363.284
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29e_smaller_of_29c_29d_col_d",
+      "label": "Line 29e. Enter the smaller of line 29c or line 29d, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29e. Enter the smaller of line 29c or line 29d, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 363.284
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29f_sec_291_amount_col_a",
+      "label": "Line 29f. I R C Section 291 amount (for corporations only). See instructions, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29f. I R C Section 291 amount (for corporations only). See instructions, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 351.274
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29f_sec_291_amount_col_b",
+      "label": "Line 29f. I R C Section 291 amount (for corporations only). See instructions, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29f. I R C Section 291 amount (for corporations only). See instructions, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 351.274
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29f_sec_291_amount_col_c",
+      "label": "Line 29f. I R C Section 291 amount (for corporations only). See instructions, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29f. I R C Section 291 amount (for corporations only). See instructions, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 351.274
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29f_sec_291_amount_col_d",
+      "label": "Line 29f. I R C Section 291 amount (for corporations only). See instructions, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29f. I R C Section 291 amount (for corporations only). See instructions, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 351.274
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29g_sec_1250_recapture_total_col_a",
+      "label": "Line 29g. Add line 29b, line 29e, and line 29f, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29g. Add line 29b, line 29e, and line 29f, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 337.303
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29g_sec_1250_recapture_total_col_b",
+      "label": "Line 29g. Add line 29b, line 29e, and line 29f, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29g. Add line 29b, line 29e, and line 29f, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 337.303
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29g_sec_1250_recapture_total_col_c",
+      "label": "Line 29g. Add line 29b, line 29e, and line 29f, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29g. Add line 29b, line 29e, and line 29f, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 337.303
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29g_sec_1250_recapture_total_col_d",
+      "label": "Line 29g. Add line 29b, line 29e, and line 29f, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29g. Add line 29b, line 29e, and line 29f, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 337.303
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30a_soil_water_land_expenses_col_a",
+      "label": "Line 30a. Soil, water, and land clearing expenses, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 30a. Soil, water, and land clearing expenses, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 304.277
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30a_soil_water_land_expenses_col_b",
+      "label": "Line 30a. Soil, water, and land clearing expenses, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 30a. Soil, water, and land clearing expenses, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 304.277
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30a_soil_water_land_expenses_col_c",
+      "label": "Line 30a. Soil, water, and land clearing expenses, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 30a. Soil, water, and land clearing expenses, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 304.277
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30a_soil_water_land_expenses_col_d",
+      "label": "Line 30a. Soil, water, and land clearing expenses, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 30a. Soil, water, and land clearing expenses, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 304.277
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30b_sec_1252_applicable_percentage_amount_col_a",
+      "label": "Line 30b. Applicable percentage multiplied by line 30a. See instructions, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 30b. Applicable percentage multiplied by line 30a. See instructions, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 292.293
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30b_sec_1252_applicable_percentage_amount_col_b",
+      "label": "Line 30b. Applicable percentage multiplied by line 30a. See instructions, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 30b. Applicable percentage multiplied by line 30a. See instructions, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 292.293
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30b_sec_1252_applicable_percentage_amount_col_c",
+      "label": "Line 30b. Applicable percentage multiplied by line 30a. See instructions, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 30b. Applicable percentage multiplied by line 30a. See instructions, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 292.293
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30b_sec_1252_applicable_percentage_amount_col_d",
+      "label": "Line 30b. Applicable percentage multiplied by line 30a. See instructions, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 30b. Applicable percentage multiplied by line 30a. See instructions, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 292.293
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30c_sec_1252_smaller_amount_col_a",
+      "label": "Line 30c. Enter the smaller of line 27 or line 30b, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 30c. Enter the smaller of line 27 or line 30b, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 280.283
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30c_sec_1252_smaller_amount_col_b",
+      "label": "Line 30c. Enter the smaller of line 27 or line 30b, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 30c. Enter the smaller of line 27 or line 30b, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 280.283
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30c_sec_1252_smaller_amount_col_c",
+      "label": "Line 30c. Enter the smaller of line 27 or line 30b, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 30c. Enter the smaller of line 27 or line 30b, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 280.283
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30c_sec_1252_smaller_amount_col_d",
+      "label": "Line 30c. Enter the smaller of line 27 or line 30b, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 30c. Enter the smaller of line 27 or line 30b, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 280.283
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.31a_intangible_drilling_costs_col_a",
+      "label": "Line 31a. Intangible drilling and development costs deducted after 12/31/76, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 31a. Intangible drilling and development costs deducted after 12/31/76, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 256.283
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.31a_intangible_drilling_costs_col_b",
+      "label": "Line 31a. Intangible drilling and development costs deducted after 12/31/76, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 31a. Intangible drilling and development costs deducted after 12/31/76, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 256.283
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.31a_intangible_drilling_costs_col_c",
+      "label": "Line 31a. Intangible drilling and development costs deducted after 12/31/76, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 31a. Intangible drilling and development costs deducted after 12/31/76, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 256.283
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.31a_intangible_drilling_costs_col_d",
+      "label": "Line 31a. Intangible drilling and development costs deducted after 12/31/76, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 31a. Intangible drilling and development costs deducted after 12/31/76, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 256.283
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.31b_sec_1254_smaller_amount_col_a",
+      "label": "Line 31b. Enter the smaller of line 27 or line 31a, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 31b. Enter the smaller of line 27 or line 31a, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 244.282
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.31b_sec_1254_smaller_amount_col_b",
+      "label": "Line 31b. Enter the smaller of line 27 or line 31a, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 31b. Enter the smaller of line 27 or line 31a, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 244.282
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.31b_sec_1254_smaller_amount_col_c",
+      "label": "Line 31b. Enter the smaller of line 27 or line 31a, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 31b. Enter the smaller of line 27 or line 31a, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 244.282
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.31b_sec_1254_smaller_amount_col_d",
+      "label": "Line 31b. Enter the smaller of line 27 or line 31a, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 31b. Enter the smaller of line 27 or line 31a, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 244.282
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.32a_sec_126_excluded_payments_col_a",
+      "label": "Line 32a. Applicable percentage of payments excluded from income under I R C Section 126, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 32a. Applicable percentage of payments excluded from income under I R C Section 126, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 211.291
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.32a_sec_126_excluded_payments_col_b",
+      "label": "Line 32a. Applicable percentage of payments excluded from income under I R C Section 126, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 32a. Applicable percentage of payments excluded from income under I R C Section 126, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 211.291
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.32a_sec_126_excluded_payments_col_c",
+      "label": "Line 32a. Applicable percentage of payments excluded from income under I R C Section 126, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 32a. Applicable percentage of payments excluded from income under I R C Section 126, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 211.291
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.32a_sec_126_excluded_payments_col_d",
+      "label": "Line 32a. Applicable percentage of payments excluded from income under I R C Section 126, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 32a. Applicable percentage of payments excluded from income under I R C Section 126, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 211.291
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.32b_sec_1255_smaller_amount_col_a",
+      "label": "Line 32b. Enter the smaller of line 27 or line 32a, Property A.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 32b. Enter the smaller of line 27 or line 32a, Property A",
+      "position": {
+        "page": 1,
+        "x": 300.786,
+        "y": 195.19
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.32b_sec_1255_smaller_amount_col_b",
+      "label": "Line 32b. Enter the smaller of line 27 or line 32a, Property B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 32b. Enter the smaller of line 27 or line 32a, Property B",
+      "position": {
+        "page": 1,
+        "x": 372.775,
+        "y": 195.19
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.32b_sec_1255_smaller_amount_col_c",
+      "label": "Line 32b. Enter the smaller of line 27 or line 32a, Property C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 32b. Enter the smaller of line 27 or line 32a, Property C",
+      "position": {
+        "page": 1,
+        "x": 444.724,
+        "y": 195.19
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.32b_sec_1255_smaller_amount_col_d",
+      "label": "Line 32b. Enter the smaller of line 27 or line 32a, Property D.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 32b. Enter the smaller of line 27 or line 32a, Property D",
+      "position": {
+        "page": 1,
+        "x": 516.785,
+        "y": 195.19
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.33_total_gains_all_properties",
+      "label": "Line 33. Total gains for all properties. Add column A through column D of line 27.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 33. Total gains for all properties. Add column A through column D of line 27",
+      "position": {
+        "page": 1,
+        "x": 467.971,
+        "y": 173.191
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.34_total_recapture_ordinary_income",
+      "label": "Line 34. Add column A through column D of lines 28b, 29g, 30c, 31b, and 32b. Enter here and on line 13.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 34. Add column A through column D of lines 28b, 29g, 30c, 31b, and 32b. Enter here and on line 13",
+      "position": {
+        "page": 1,
+        "x": 467.971,
+        "y": 161.201
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.35_gain_less_recapture",
+      "label": "Line 35. Subtract line 34 from line 33. Enter the portion from other than casualty and theft here and on line 6. Enter the portion from casualty and theft on federal Form 4684, line 33.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 35. Subtract line 34 from line 33. Enter the portion from other than casualty and theft here and on line 6. Enter the portion from casualty and theft on federal Form 4684, line 33",
+      "position": {
+        "page": 1,
+        "x": 467.971,
+        "y": 138.202
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.36_expense_or_recovery_deductions_col_a",
+      "label": "Part IV, Line 36. Expense deductions or recovery deductions. See instructions, (a) Expense deductions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part IV, Line 36. Expense deductions or recovery deductions. See instructions, (a) Expense deductions",
+      "position": {
+        "page": 1,
+        "x": 372.581,
+        "y": 104.191
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.36_expense_or_recovery_deductions_col_b",
+      "label": "Line 36. Expense deductions or recovery deductions. See instructions, (b) Recovery deductions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 36. Expense deductions or recovery deductions. See instructions, (b) Recovery deductions",
+      "position": {
+        "page": 1,
+        "x": 480.17,
+        "y": 104.191
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.37_depreciation_or_recovery_deductions_col_a",
+      "label": "Line 37. Depreciation or recovery deductions. See instructions, (a) Expense deductions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 37. Depreciation or recovery deductions. See instructions, (a) Expense deductions",
+      "position": {
+        "page": 1,
+        "x": 372.581,
+        "y": 92.1805
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.37_depreciation_or_recovery_deductions_col_b",
+      "label": "Line 37. Depreciation or recovery deductions. See instructions, (b) Recovery deductions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 37. Depreciation or recovery deductions. See instructions, (b) Recovery deductions",
+      "position": {
+        "page": 1,
+        "x": 480.17,
+        "y": 92.1805
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.38_recapture_amount_col_a",
+      "label": "Line 38. Recapture amount. Subtract line 37 from line 36. See instructions, (a) Expense deductions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 38. Recapture amount. Subtract line 37 from line 36. See instructions, (a) Expense deductions",
+      "position": {
+        "page": 1,
+        "x": 372.581,
+        "y": 80.1907
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.38_recapture_amount_col_b",
+      "label": "Line 38. Recapture amount. Subtract line 37 from line 36. See instructions, (b) Recovery deductions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 38. Recapture amount. Subtract line 37 from line 36. See instructions, (b) Recovery deductions",
+      "position": {
+        "page": 1,
+        "x": 480.17,
+        "y": 80.1907
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/schedule-d-1/blank.pdf",
+    "ingestedAt": "2026-11-21T04:50:16.988Z",
+    "totalFields": 172,
+    "skipped": 0,
+    "catalogEntries": 172
+  }
+}

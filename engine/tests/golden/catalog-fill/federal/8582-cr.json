@@ -1,0 +1,474 @@
+{
+  "formId": "form-8582-cr",
+  "fieldCount": 52,
+  "entries": [
+    {
+      "fieldId": "form-8582-cr.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-EQIZ6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-1E4WO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.10_modified_agi",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "8,477"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.11_threshold_less_magi",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "7,850"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.12_half_of_line_11",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "7,350"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.13_form_8582_line_9",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "2,836"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.14_remaining_special_allowance",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "8,133"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.15_tax_on_line_14",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "7,393"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.16_smaller_line_8_or_15",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+          "text": "5,201"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.1a_rental_active_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "7,774"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.1b_rental_active_prior_unallowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "1,313"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.1c_rental_active_total",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "3,980"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.2a_rehab_pre_1990_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "8,399"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.2b_rehab_pre_1990_prior_unallowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "5,697"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.2c_rehab_pre_1990_total",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "1,531"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.3a_low_income_post_1989_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "5,157"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.3b_low_income_post_1989_prior_unallowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "5,895"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.3c_low_income_post_1989_total",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "9,479"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.4a_other_passive_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "8,966"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.4b_other_passive_prior_unallowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "7,579"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.4c_other_passive_total",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "9,170"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.5_total_passive_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "7,580"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.6_tax_net_passive_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "2,221"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.7_credits_over_passive_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "3,755"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.8_smaller_line_1c_or_7",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "8,303"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.9_150000_threshold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "2,206"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.17_amount_from_line_7",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+          "text": "9,286"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.18_amount_from_line_16",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+          "text": "6,631"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.19_line_17_minus_line_18",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+          "text": "9,360"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.20_smaller_of_2c_or_19",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+          "text": "9,016"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.21_income_limit_250000",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+          "text": "7,516"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.22_modified_adjusted_gross_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+          "text": "4,084"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.23_line_21_minus_line_22",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+          "text": "1,211"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.24_half_of_line_23",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+          "text": "4,197"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.25_form_8582_line_9",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+          "text": "1,985"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.26_line_24_minus_line_25",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+          "text": "3,370"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.27_tax_attributable_to_line_26",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+          "text": "7,706"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.28_amount_from_line_18",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+          "text": "8,215"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.29_line_27_minus_line_28",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+          "text": "9,834"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.30_smaller_of_20_or_29",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+          "text": "6,204"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.31_line_19_or_7_minus_16",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+          "text": "4,573"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.32_amount_from_line_30",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+          "text": "3,408"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.33_line_31_minus_line_32",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+          "text": "8,793"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.34_smaller_of_3c_or_33",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+          "text": "4,566"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.35_tax_remaining_special_allowance",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+          "text": "3,467"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.36_smaller_of_34_or_35",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+          "text": "4,555"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.37_passive_activity_credit_allowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+          "text": "6,488"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.38_elect_increase_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_01_0_[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.39_passive_activity_disposed_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+          "text": "T-1UVFI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.40_credit_property_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+          "text": "T-YY0UM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.40_credit_property_description_line2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+          "text": "T-63FIU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.41_unallowed_credit_reduced_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+          "text": "2,228"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2824 @@
+{
+  "form": {
+    "formId": "form-7203",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 7203, S Corporation Shareholder Stock and Debt Basis Limitations"
+  },
+  "fields": [
+    {
+      "fieldId": "form-7203.0.header.shareholder_name",
+      "label": "Name of shareholder",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-7203.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 440.2,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-7203.0.header.a_s_corporation_name",
+      "label": "A — Name of S corporation",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 659.967
+      }
+    },
+    {
+      "fieldId": "form-7203.0.header.b_employer_identification_number",
+      "label": "B — Employer identification number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 440.2,
+        "y": 659.967
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-7203.0.header.c_stock_block",
+      "label": "C — Stock block",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 172.512,
+        "y": 647.968
+      }
+    },
+    {
+      "fieldId": "form-7203.0.header.d1_original_shareholder",
+      "label": "D (1) — Stock was acquired as: Original shareholder",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 68.8,
+        "y": 625.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.header.d2_purchased",
+      "label": "D (2) — Stock was acquired as: Purchased",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 191.2,
+        "y": 625.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.header.d3_inherited",
+      "label": "D (3) — Stock was acquired as: Inherited",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 277.6,
+        "y": 625.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.header.d4_gift",
+      "label": "D (4) — Stock was acquired as: Gift",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 356.8,
+        "y": 625.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.header.d5_other",
+      "label": "D (5) — Stock was acquired as: Other",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 414.4,
+        "y": 625.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.header.d5_other_description",
+      "label": "D (5) — Other: how stock was acquired",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.header.e_section_1367_election",
+      "label": "E — Check if you have a Regulations section 1.1367-1(g) election in effect during the tax year for this S corporation",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 562.4,
+        "y": 613.968
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.1_stock_basis_beginning",
+      "label": "Line 1 — Stock basis at the beginning of the corporation's tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 587.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.2_capital_contributions_additional_stock",
+      "label": "Line 2 — Basis from any capital contributions made or additional stock acquired during the tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 575.968
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.3a_ordinary_business_income",
+      "label": "Line 3a — Ordinary business income (enter losses in Part III)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.3b_net_rental_real_estate_income",
+      "label": "Line 3b — Net rental real estate income (enter losses in Part III)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 551.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.3c_other_net_rental_income",
+      "label": "Line 3c — Other net rental income (enter losses in Part III)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.3d_interest_income",
+      "label": "Line 3d — Interest income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.3e_ordinary_dividends",
+      "label": "Line 3e — Ordinary dividends",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.3f_royalties",
+      "label": "Line 3f — Royalties",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 503.968
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.3g_net_capital_gains",
+      "label": "Line 3g — Net capital gains (enter losses in Part III)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.3h_net_section_1231_gain",
+      "label": "Line 3h — Net section 1231 gain (enter losses in Part III)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.3i_other_income",
+      "label": "Line 3i — Other income (enter losses in Part III)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 467.968
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.3j_excess_depletion_adjustment",
+      "label": "Line 3j — Excess depletion adjustment",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 455.969
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.3k_tax_exempt_income",
+      "label": "Line 3k — Tax-exempt income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.3l_recapture_business_credits",
+      "label": "Line 3l — Recapture of business credits",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 431.968
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.3m_other_items_increase_basis",
+      "label": "Line 3m — Other items that increase stock basis",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.4_total_basis_increases",
+      "label": "Line 4 — Add lines 3a through 3m",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.5_stock_basis_before_distributions",
+      "label": "Line 5 — Stock basis before distributions. Add lines 1, 2, and 4",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 395.968
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.6_distributions",
+      "label": "Line 6 — Distributions (excluding dividend distributions)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.7_stock_basis_after_distributions",
+      "label": "Line 7 — Stock basis after distributions. Subtract line 6 from line 5",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 335.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.8a_nondeductible_expenses",
+      "label": "Line 8a — Nondeductible expenses",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.8b_depletion_oil_gas",
+      "label": "Line 8b — Depletion for oil and gas",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.8c_business_credits",
+      "label": "Line 8c — Business credits (sections 50(c)(1) and (5))",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.9_total_basis_decreases",
+      "label": "Line 9 — Add lines 8a through 8c",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.10_stock_basis_before_loss_items",
+      "label": "Line 10 — Stock basis before loss and deduction items. Subtract line 9 from line 7",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.11_allowable_loss_deduction_items",
+      "label": "Line 11 — Allowable loss and deduction items. Enter the amount from line 47, column (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 504.003,
+        "y": 251.971
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.12_debt_basis_restoration",
+      "label": "Line 12 — Debt basis restoration",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.13_other_items_decrease_basis",
+      "label": "Line 13 — Other items that decrease stock basis",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.14_total_loss_restoration_other",
+      "label": "Line 14 — Add lines 11, 12, and 13",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.15_stock_basis_end",
+      "label": "Line 15 — Stock basis at the end of the corporation's tax year. Subtract line 14 from line 10",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 191.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.section_a_formal_note_col_a",
+      "label": "Section A — (a) Debt 1: Formal note",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Header[0].aDebt1[0].c1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 292,
+        "y": 145.971
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.section_a_formal_note_col_b",
+      "label": "Section A — (b) Debt 2: Formal note",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Header[0].bDebt2[0].c1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 364,
+        "y": 145.971
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.section_a_formal_note_col_c",
+      "label": "Section A — (c) Debt 3: Formal note",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Header[0].cDebt3[0].c1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 436,
+        "y": 145.971
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.section_a_open_account_col_a",
+      "label": "Section A — (a) Debt 1: Open account",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Header[0].aDebt1[0].c1_7[1]",
+      "position": {
+        "page": 0,
+        "x": 292,
+        "y": 134.469
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.section_a_open_account_col_b",
+      "label": "Section A — (b) Debt 2: Open account",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Header[0].bDebt2[0].c1_8[1]",
+      "position": {
+        "page": 0,
+        "x": 364,
+        "y": 134.469
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.section_a_open_account_col_c",
+      "label": "Section A — (c) Debt 3: Open account",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Header[0].cDebt3[0].c1_9[1]",
+      "position": {
+        "page": 0,
+        "x": 436,
+        "y": 134.469
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.16_loan_balance_beginning_col_a",
+      "label": "Line 16 — Loan balance at the beginning of the corporation's tax year — (a) Debt 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line16[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 107.968
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.16_loan_balance_beginning_col_b",
+      "label": "Line 16 — Loan balance at the beginning of the corporation's tax year — (b) Debt 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line16[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 107.968
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.16_loan_balance_beginning_col_c",
+      "label": "Line 16 — Loan balance at the beginning of the corporation's tax year — (c) Debt 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line16[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 107.968
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.16_loan_balance_beginning_col_d",
+      "label": "Line 16 — Loan balance at the beginning of the corporation's tax year — (d) Total",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line16[0].f2_39[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 107.968
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.17_additional_loans_col_a",
+      "label": "Line 17 — Additional loans — (a) Debt 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line17[0].f1_40[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 95.969
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.17_additional_loans_col_b",
+      "label": "Line 17 — Additional loans — (b) Debt 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line17[0].f1_41[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 95.969
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.17_additional_loans_col_c",
+      "label": "Line 17 — Additional loans — (c) Debt 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line17[0].f1_42[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 95.969
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.17_additional_loans_col_d",
+      "label": "Line 17 — Additional loans — (d) Total",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line17[0].f1_43[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 95.969
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.18_loan_balance_before_repayment_col_a",
+      "label": "Line 18 — Loan balance before repayment. Add lines 16 and 17 — (a) Debt 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line18[0].f1_44[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 83.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.18_loan_balance_before_repayment_col_b",
+      "label": "Line 18 — Loan balance before repayment. Add lines 16 and 17 — (b) Debt 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line18[0].f1_45[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 83.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.18_loan_balance_before_repayment_col_c",
+      "label": "Line 18 — Loan balance before repayment. Add lines 16 and 17 — (c) Debt 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line18[0].f1_46[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 83.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.18_loan_balance_before_repayment_col_d",
+      "label": "Line 18 — Loan balance before repayment. Add lines 16 and 17 — (d) Total",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line18[0].f1_47[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 83.97
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.19_principal_debt_repayment_col_a",
+      "label": "Line 19 — Principal portion of debt repayment (this line doesn't include interest) — (a) Debt 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line19[0].f1_48[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 59.969
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.19_principal_debt_repayment_col_b",
+      "label": "Line 19 — Principal portion of debt repayment (this line doesn't include interest) — (b) Debt 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line19[0].f1_49[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 59.969
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.19_principal_debt_repayment_col_c",
+      "label": "Line 19 — Principal portion of debt repayment (this line doesn't include interest) — (c) Debt 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line19[0].f1_50[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 59.969
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.19_principal_debt_repayment_col_d",
+      "label": "Line 19 — Principal portion of debt repayment (this line doesn't include interest) — (d) Total",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line19[0].f1_51[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 59.969
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.20_loan_balance_end_col_a",
+      "label": "Line 20 — Loan balance at the end of the corporation's tax year. Subtract line 19 from line 18 — (a) Debt 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line20[0].f1_52[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 35.968
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.20_loan_balance_end_col_b",
+      "label": "Line 20 — Loan balance at the end of the corporation's tax year. Subtract line 19 from line 18 — (b) Debt 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line20[0].f1_53[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 35.968
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.20_loan_balance_end_col_c",
+      "label": "Line 20 — Loan balance at the end of the corporation's tax year. Subtract line 19 from line 18 — (c) Debt 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line20[0].f1_54[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 35.968
+      }
+    },
+    {
+      "fieldId": "form-7203.0.line.20_loan_balance_end_col_d",
+      "label": "Line 20 — Loan balance at the end of the corporation's tax year. Subtract line 19 from line 18 — (d) Total",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line20[0].f1_55[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 35.968
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.21_debt_basis_beginning_col_a",
+      "label": "Line 21 — Debt basis at the beginning of the corporation's tax year — (a) Debt 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line21[0].f2_01[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.21_debt_basis_beginning_col_b",
+      "label": "Line 21 — Debt basis at the beginning of the corporation's tax year — (b) Debt 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line21[0].f2_02[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.21_debt_basis_beginning_col_c",
+      "label": "Line 21 — Debt basis at the beginning of the corporation's tax year — (c) Debt 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line21[0].f2_03[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.21_debt_basis_beginning_col_d",
+      "label": "Line 21 — Debt basis at the beginning of the corporation's tax year — (d) Total",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line21[0].f2_04[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.22_amount_from_line_17_col_a",
+      "label": "Line 22 — Enter the amount, if any, from line 17 — (a) Debt 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line22[0].f2_05[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 671.969
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.22_amount_from_line_17_col_b",
+      "label": "Line 22 — Enter the amount, if any, from line 17 — (b) Debt 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line22[0].f2_06[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 671.969
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.22_amount_from_line_17_col_c",
+      "label": "Line 22 — Enter the amount, if any, from line 17 — (c) Debt 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line22[0].f2_07[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 671.969
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.22_amount_from_line_17_col_d",
+      "label": "Line 22 — Enter the amount, if any, from line 17 — (d) Total",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line22[0].f2_08[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 671.969
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.23_debt_basis_restoration_col_a",
+      "label": "Line 23 — Debt basis restoration — (a) Debt 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line23[0].f2_09[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.23_debt_basis_restoration_col_b",
+      "label": "Line 23 — Debt basis restoration — (b) Debt 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line23[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.23_debt_basis_restoration_col_c",
+      "label": "Line 23 — Debt basis restoration — (c) Debt 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line23[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.23_debt_basis_restoration_col_d",
+      "label": "Line 23 — Debt basis restoration — (d) Total",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line23[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.24_debt_basis_before_repayment_col_a",
+      "label": "Line 24 — Debt basis before repayment. Add lines 21, 22, and 23 — (a) Debt 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line24[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 647.971
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.24_debt_basis_before_repayment_col_b",
+      "label": "Line 24 — Debt basis before repayment. Add lines 21, 22, and 23 — (b) Debt 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line24[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 647.971
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.24_debt_basis_before_repayment_col_c",
+      "label": "Line 24 — Debt basis before repayment. Add lines 21, 22, and 23 — (c) Debt 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line24[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 647.971
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.24_debt_basis_before_repayment_col_d",
+      "label": "Line 24 — Debt basis before repayment. Add lines 21, 22, and 23 — (d) Total",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line24[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 647.971
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.25_repayment_basis_ratio_col_a",
+      "label": "Line 25 — Divide line 24 by line 18 — (a) Debt 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line25[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 635.972
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.25_repayment_basis_ratio_col_b",
+      "label": "Line 25 — Divide line 24 by line 18 — (b) Debt 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line25[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 635.972
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.25_repayment_basis_ratio_col_c",
+      "label": "Line 25 — Divide line 24 by line 18 — (c) Debt 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line25[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 635.972
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.26_nontaxable_debt_repayment_col_a",
+      "label": "Line 26 — Nontaxable debt repayment. Multiply line 25 by line 19 — (a) Debt 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line26[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 623.973
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.26_nontaxable_debt_repayment_col_b",
+      "label": "Line 26 — Nontaxable debt repayment. Multiply line 25 by line 19 — (b) Debt 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line26[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 623.973
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.26_nontaxable_debt_repayment_col_c",
+      "label": "Line 26 — Nontaxable debt repayment. Multiply line 25 by line 19 — (c) Debt 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line26[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 623.973
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.26_nontaxable_debt_repayment_col_d",
+      "label": "Line 26 — Nontaxable debt repayment. Multiply line 25 by line 19 — (d) Total",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line26[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 623.973
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.27_debt_basis_before_nondeductible_col_a",
+      "label": "Line 27 — Debt basis before nondeductible expenses and losses. Subtract line 26 from line 24 — (a) Debt 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line27[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 599.972
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.27_debt_basis_before_nondeductible_col_b",
+      "label": "Line 27 — Debt basis before nondeductible expenses and losses. Subtract line 26 from line 24 — (b) Debt 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line27[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 599.972
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.27_debt_basis_before_nondeductible_col_c",
+      "label": "Line 27 — Debt basis before nondeductible expenses and losses. Subtract line 26 from line 24 — (c) Debt 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line27[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 599.972
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.27_debt_basis_before_nondeductible_col_d",
+      "label": "Line 27 — Debt basis before nondeductible expenses and losses. Subtract line 26 from line 24 — (d) Total",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line27[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 599.972
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.28_nondeductible_expenses_excess_col_a",
+      "label": "Line 28 — Nondeductible expenses and oil and gas depletion deductions in excess of stock basis — (a) Debt 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line28[0].f2_29[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 575.971
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.28_nondeductible_expenses_excess_col_b",
+      "label": "Line 28 — Nondeductible expenses and oil and gas depletion deductions in excess of stock basis — (b) Debt 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line28[0].f2_30[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 575.971
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.28_nondeductible_expenses_excess_col_c",
+      "label": "Line 28 — Nondeductible expenses and oil and gas depletion deductions in excess of stock basis — (c) Debt 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line28[0].f2_31[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 575.971
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.28_nondeductible_expenses_excess_col_d",
+      "label": "Line 28 — Nondeductible expenses and oil and gas depletion deductions in excess of stock basis — (d) Total",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line28[0].f2_32[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 575.971
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.29_debt_basis_before_losses_col_a",
+      "label": "Line 29 — Debt basis before losses and deductions. Subtract line 28 from line 27 — (a) Debt 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line29[0].f2_33[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 551.97
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.29_debt_basis_before_losses_col_b",
+      "label": "Line 29 — Debt basis before losses and deductions. Subtract line 28 from line 27 — (b) Debt 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line29[0].f2_34[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 551.97
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.29_debt_basis_before_losses_col_c",
+      "label": "Line 29 — Debt basis before losses and deductions. Subtract line 28 from line 27 — (c) Debt 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line29[0].f2_35[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 551.97
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.29_debt_basis_before_losses_col_d",
+      "label": "Line 29 — Debt basis before losses and deductions. Subtract line 28 from line 27 — (d) Total",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line29[0].f2_36[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 551.97
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.30_allowable_losses_excess_col_a",
+      "label": "Line 30 — Allowable losses in excess of stock basis. Enter the amount from line 47, column (d) — (a) Debt 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line30[0].f2_37[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.30_allowable_losses_excess_col_b",
+      "label": "Line 30 — Allowable losses in excess of stock basis. Enter the amount from line 47, column (d) — (b) Debt 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line30[0].f2_38[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.30_allowable_losses_excess_col_c",
+      "label": "Line 30 — Allowable losses in excess of stock basis. Enter the amount from line 47, column (d) — (c) Debt 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line30[0].f2_39[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.30_allowable_losses_excess_col_d",
+      "label": "Line 30 — Allowable losses in excess of stock basis. Enter the amount from line 47, column (d) — (d) Total",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line30[0].f2_40[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.31_debt_basis_end_col_a",
+      "label": "Line 31 — Debt basis at the end of the corporation's tax year. Subtract line 30 from line 29 — (a) Debt 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line31[0].f2_41[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.31_debt_basis_end_col_b",
+      "label": "Line 31 — Debt basis at the end of the corporation's tax year. Subtract line 30 from line 29 — (b) Debt 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line31[0].f2_42[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.31_debt_basis_end_col_c",
+      "label": "Line 31 — Debt basis at the end of the corporation's tax year. Subtract line 30 from line 29 — (c) Debt 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line31[0].f2_43[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.31_debt_basis_end_col_d",
+      "label": "Line 31 — Debt basis at the end of the corporation's tax year. Subtract line 30 from line 29 — (d) Total",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line31[0].f2_44[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.32_repayment_col_a",
+      "label": "Line 32 — Repayment. Enter the amount from line 19 — (a) Debt 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line32[0].f2_45[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 467.971
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.32_repayment_col_b",
+      "label": "Line 32 — Repayment. Enter the amount from line 19 — (b) Debt 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line32[0].f2_46[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 467.971
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.32_repayment_col_c",
+      "label": "Line 32 — Repayment. Enter the amount from line 19 — (c) Debt 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line32[0].f2_47[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 467.971
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.32_repayment_col_d",
+      "label": "Line 32 — Repayment. Enter the amount from line 19 — (d) Total",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line32[0].f2_48[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 467.971
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.33_nontaxable_repayments_col_a",
+      "label": "Line 33 — Nontaxable repayments. Enter the amount from line 26 — (a) Debt 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line33[0].f2_49[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 455.972
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.33_nontaxable_repayments_col_b",
+      "label": "Line 33 — Nontaxable repayments. Enter the amount from line 26 — (b) Debt 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line33[0].f2_50[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 455.972
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.33_nontaxable_repayments_col_c",
+      "label": "Line 33 — Nontaxable repayments. Enter the amount from line 26 — (c) Debt 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line33[0].f2_51[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 455.972
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.33_nontaxable_repayments_col_d",
+      "label": "Line 33 — Nontaxable repayments. Enter the amount from line 26 — (d) Total",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line33[0].f2_52[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 455.972
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.34_reportable_gain_col_a",
+      "label": "Line 34 — Reportable gain. Subtract line 33 from line 32 — (a) Debt 1",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line34[0].f2_53[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 443.973
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.34_reportable_gain_col_b",
+      "label": "Line 34 — Reportable gain. Subtract line 33 from line 32 — (b) Debt 2",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line34[0].f2_54[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 443.973
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.34_reportable_gain_col_c",
+      "label": "Line 34 — Reportable gain. Subtract line 33 from line 32 — (c) Debt 3",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line34[0].f2_55[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 443.973
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.34_reportable_gain_col_d",
+      "label": "Line 34 — Reportable gain. Subtract line 33 from line 32 — (d) Total",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line34[0].f2_56[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 443.973
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.35_ordinary_business_loss_col_a",
+      "label": "Line 35 — Ordinary business loss — (a) Current year losses and deductions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line35[0].f2_57[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 365.969
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.35_ordinary_business_loss_col_b",
+      "label": "Line 35 — Ordinary business loss — (b) Carryover amounts (column (e)) from the previous year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line35[0].f2_58[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 365.969
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.35_ordinary_business_loss_col_c",
+      "label": "Line 35 — Ordinary business loss — (c) Allowable loss from stock basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line35[0].f2_59[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 365.969
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.35_ordinary_business_loss_col_d",
+      "label": "Line 35 — Ordinary business loss — (d) Allowable loss from debt basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line35[0].f2_60[0]",
+      "position": {
+        "page": 1,
+        "x": 446.4,
+        "y": 365.969
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.35_ordinary_business_loss_col_e",
+      "label": "Line 35 — Ordinary business loss — (e) Carryover amounts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line35[0].f2_61[0]",
+      "position": {
+        "page": 1,
+        "x": 511.2,
+        "y": 365.969
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.36_net_rental_real_estate_loss_col_a",
+      "label": "Line 36 — Net rental real estate loss — (a) Current year losses and deductions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line36[0].f2_62[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 353.97
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.36_net_rental_real_estate_loss_col_b",
+      "label": "Line 36 — Net rental real estate loss — (b) Carryover amounts (column (e)) from the previous year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line36[0].f2_63[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 353.97
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.36_net_rental_real_estate_loss_col_c",
+      "label": "Line 36 — Net rental real estate loss — (c) Allowable loss from stock basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line36[0].f2_64[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 353.97
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.36_net_rental_real_estate_loss_col_d",
+      "label": "Line 36 — Net rental real estate loss — (d) Allowable loss from debt basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line36[0].f2_65[0]",
+      "position": {
+        "page": 1,
+        "x": 446.4,
+        "y": 353.97
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.36_net_rental_real_estate_loss_col_e",
+      "label": "Line 36 — Net rental real estate loss — (e) Carryover amounts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line36[0].f2_66[0]",
+      "position": {
+        "page": 1,
+        "x": 511.2,
+        "y": 353.97
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.37_other_net_rental_loss_col_a",
+      "label": "Line 37 — Other net rental loss — (a) Current year losses and deductions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line37[0].f2_67[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 341.971
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.37_other_net_rental_loss_col_b",
+      "label": "Line 37 — Other net rental loss — (b) Carryover amounts (column (e)) from the previous year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line37[0].f2_68[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 341.971
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.37_other_net_rental_loss_col_c",
+      "label": "Line 37 — Other net rental loss — (c) Allowable loss from stock basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line37[0].f2_69[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 341.971
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.37_other_net_rental_loss_col_d",
+      "label": "Line 37 — Other net rental loss — (d) Allowable loss from debt basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line37[0].f2_70[0]",
+      "position": {
+        "page": 1,
+        "x": 446.4,
+        "y": 341.971
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.37_other_net_rental_loss_col_e",
+      "label": "Line 37 — Other net rental loss — (e) Carryover amounts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line37[0].f2_71[0]",
+      "position": {
+        "page": 1,
+        "x": 511.2,
+        "y": 341.971
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.38_net_capital_loss_col_a",
+      "label": "Line 38 — Net capital loss — (a) Current year losses and deductions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line38[0].f2_72[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 329.972
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.38_net_capital_loss_col_b",
+      "label": "Line 38 — Net capital loss — (b) Carryover amounts (column (e)) from the previous year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line38[0].f2_73[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 329.972
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.38_net_capital_loss_col_c",
+      "label": "Line 38 — Net capital loss — (c) Allowable loss from stock basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line38[0].f2_74[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 329.972
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.38_net_capital_loss_col_d",
+      "label": "Line 38 — Net capital loss — (d) Allowable loss from debt basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line38[0].f2_75[0]",
+      "position": {
+        "page": 1,
+        "x": 446.4,
+        "y": 329.972
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.38_net_capital_loss_col_e",
+      "label": "Line 38 — Net capital loss — (e) Carryover amounts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line38[0].f2_76[0]",
+      "position": {
+        "page": 1,
+        "x": 511.2,
+        "y": 329.972
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.39_net_section_1231_loss_col_a",
+      "label": "Line 39 — Net section 1231 loss — (a) Current year losses and deductions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line39[0].f2_77[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 317.973
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.39_net_section_1231_loss_col_b",
+      "label": "Line 39 — Net section 1231 loss — (b) Carryover amounts (column (e)) from the previous year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line39[0].f2_78[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 317.973
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.39_net_section_1231_loss_col_c",
+      "label": "Line 39 — Net section 1231 loss — (c) Allowable loss from stock basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line39[0].f2_79[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 317.973
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.39_net_section_1231_loss_col_d",
+      "label": "Line 39 — Net section 1231 loss — (d) Allowable loss from debt basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line39[0].f2_80[0]",
+      "position": {
+        "page": 1,
+        "x": 446.4,
+        "y": 317.973
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.39_net_section_1231_loss_col_e",
+      "label": "Line 39 — Net section 1231 loss — (e) Carryover amounts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line39[0].f2_81[0]",
+      "position": {
+        "page": 1,
+        "x": 511.2,
+        "y": 317.973
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.40_other_loss_col_a",
+      "label": "Line 40 — Other loss — (a) Current year losses and deductions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line40[0].f2_82[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 305.974
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.40_other_loss_col_b",
+      "label": "Line 40 — Other loss — (b) Carryover amounts (column (e)) from the previous year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line40[0].f2_83[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 305.974
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.40_other_loss_col_c",
+      "label": "Line 40 — Other loss — (c) Allowable loss from stock basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line40[0].f2_84[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 305.974
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.40_other_loss_col_d",
+      "label": "Line 40 — Other loss — (d) Allowable loss from debt basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line40[0].f2_85[0]",
+      "position": {
+        "page": 1,
+        "x": 446.4,
+        "y": 305.974
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.40_other_loss_col_e",
+      "label": "Line 40 — Other loss — (e) Carryover amounts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line40[0].f2_86[0]",
+      "position": {
+        "page": 1,
+        "x": 511.2,
+        "y": 305.974
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.41_section_179_deductions_col_a",
+      "label": "Line 41 — Section 179 deductions — (a) Current year losses and deductions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line41[0].f2_87[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 293.975
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.41_section_179_deductions_col_b",
+      "label": "Line 41 — Section 179 deductions — (b) Carryover amounts (column (e)) from the previous year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line41[0].f2_88[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 293.975
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.41_section_179_deductions_col_c",
+      "label": "Line 41 — Section 179 deductions — (c) Allowable loss from stock basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line41[0].f2_90[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 293.975
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.41_section_179_deductions_col_d",
+      "label": "Line 41 — Section 179 deductions — (d) Allowable loss from debt basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line41[0].f2_91[0]",
+      "position": {
+        "page": 1,
+        "x": 446.4,
+        "y": 293.975
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.41_section_179_deductions_col_e",
+      "label": "Line 41 — Section 179 deductions — (e) Carryover amounts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line41[0].f2_92[0]",
+      "position": {
+        "page": 1,
+        "x": 511.2,
+        "y": 293.975
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.42_charitable_contributions_col_a",
+      "label": "Line 42 — Charitable contributions — (a) Current year losses and deductions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line42[0].f2_93[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 281.976
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.42_charitable_contributions_col_b",
+      "label": "Line 42 — Charitable contributions — (b) Carryover amounts (column (e)) from the previous year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line42[0].f2_94[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 281.976
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.42_charitable_contributions_col_c",
+      "label": "Line 42 — Charitable contributions — (c) Allowable loss from stock basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line42[0].f2_95[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 281.976
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.42_charitable_contributions_col_d",
+      "label": "Line 42 — Charitable contributions — (d) Allowable loss from debt basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line42[0].f2_96[0]",
+      "position": {
+        "page": 1,
+        "x": 446.4,
+        "y": 281.976
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.42_charitable_contributions_col_e",
+      "label": "Line 42 — Charitable contributions — (e) Carryover amounts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line42[0].f2_97[0]",
+      "position": {
+        "page": 1,
+        "x": 511.2,
+        "y": 281.976
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.43_investment_interest_expense_col_a",
+      "label": "Line 43 — Investment interest expense — (a) Current year losses and deductions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line43[0].f2_98[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 269.977
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.43_investment_interest_expense_col_b",
+      "label": "Line 43 — Investment interest expense — (b) Carryover amounts (column (e)) from the previous year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line43[0].f2_99[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 269.977
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.43_investment_interest_expense_col_c",
+      "label": "Line 43 — Investment interest expense — (c) Allowable loss from stock basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line43[0].f2_100[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 269.977
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.43_investment_interest_expense_col_d",
+      "label": "Line 43 — Investment interest expense — (d) Allowable loss from debt basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line43[0].f2_101[0]",
+      "position": {
+        "page": 1,
+        "x": 446.4,
+        "y": 269.977
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.43_investment_interest_expense_col_e",
+      "label": "Line 43 — Investment interest expense — (e) Carryover amounts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line43[0].f2_102[0]",
+      "position": {
+        "page": 1,
+        "x": 511.2,
+        "y": 269.977
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.44_section_59e2_expenditures_col_a",
+      "label": "Line 44 — Section 59(e)(2) expenditures — (a) Current year losses and deductions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line44[0].f2_103[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 257.978
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.44_section_59e2_expenditures_col_b",
+      "label": "Line 44 — Section 59(e)(2) expenditures — (b) Carryover amounts (column (e)) from the previous year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line44[0].f2_104[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 257.978
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.44_section_59e2_expenditures_col_c",
+      "label": "Line 44 — Section 59(e)(2) expenditures — (c) Allowable loss from stock basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line44[0].f2_105[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 257.978
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.44_section_59e2_expenditures_col_d",
+      "label": "Line 44 — Section 59(e)(2) expenditures — (d) Allowable loss from debt basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line44[0].f2_106[0]",
+      "position": {
+        "page": 1,
+        "x": 446.4,
+        "y": 257.978
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.44_section_59e2_expenditures_col_e",
+      "label": "Line 44 — Section 59(e)(2) expenditures — (e) Carryover amounts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line44[0].f2_107[0]",
+      "position": {
+        "page": 1,
+        "x": 511.2,
+        "y": 257.978
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.45_other_deductions_col_a",
+      "label": "Line 45 — Other deductions — (a) Current year losses and deductions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line45[0].f2_108[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 245.979
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.45_other_deductions_col_b",
+      "label": "Line 45 — Other deductions — (b) Carryover amounts (column (e)) from the previous year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line45[0].f2_109[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 245.979
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.45_other_deductions_col_c",
+      "label": "Line 45 — Other deductions — (c) Allowable loss from stock basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line45[0].f2_110[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 245.979
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.45_other_deductions_col_d",
+      "label": "Line 45 — Other deductions — (d) Allowable loss from debt basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line45[0].f2_111[0]",
+      "position": {
+        "page": 1,
+        "x": 446.4,
+        "y": 245.979
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.45_other_deductions_col_e",
+      "label": "Line 45 — Other deductions — (e) Carryover amounts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line45[0].f2_112[0]",
+      "position": {
+        "page": 1,
+        "x": 511.2,
+        "y": 245.979
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.46_foreign_taxes_paid_col_a",
+      "label": "Line 46 — Foreign taxes paid or accrued — (a) Current year losses and deductions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line46[0].f2_113[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 233.98
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.46_foreign_taxes_paid_col_b",
+      "label": "Line 46 — Foreign taxes paid or accrued — (b) Carryover amounts (column (e)) from the previous year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line46[0].f2_114[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 233.98
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.46_foreign_taxes_paid_col_c",
+      "label": "Line 46 — Foreign taxes paid or accrued — (c) Allowable loss from stock basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line46[0].f2_115[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 233.98
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.46_foreign_taxes_paid_col_d",
+      "label": "Line 46 — Foreign taxes paid or accrued — (d) Allowable loss from debt basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line46[0].f2_116[0]",
+      "position": {
+        "page": 1,
+        "x": 446.4,
+        "y": 233.98
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.46_foreign_taxes_paid_col_e",
+      "label": "Line 46 — Foreign taxes paid or accrued — (e) Carryover amounts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line46[0].f2_117[0]",
+      "position": {
+        "page": 1,
+        "x": 511.2,
+        "y": 233.98
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.47_total_loss_col_a",
+      "label": "Line 47 — Total loss. Add lines 35 through 46 for each column — (a) Current year losses and deductions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line47[0].f2_118[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 191.979
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.47_total_loss_col_b",
+      "label": "Line 47 — Total loss. Add lines 35 through 46 for each column — (b) Carryover amounts (column (e)) from the previous year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line47[0].f2_119[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 191.979
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.47_total_loss_col_c",
+      "label": "Line 47 — Total loss. Add lines 35 through 46 for each column — (c) Allowable loss from stock basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line47[0].f2_120[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 191.979
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.47_total_loss_col_d",
+      "label": "Line 47 — Total loss. Add lines 35 through 46 for each column — (d) Allowable loss from debt basis",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line47[0].f2_121[0]",
+      "position": {
+        "page": 1,
+        "x": 446.4,
+        "y": 191.979
+      }
+    },
+    {
+      "fieldId": "form-7203.1.line.47_total_loss_col_e",
+      "label": "Line 47 — Total loss. Add lines 35 through 46 for each column — (e) Carryover amounts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line47[0].f2_122[0]",
+      "position": {
+        "page": 1,
+        "x": 511.2,
+        "y": 191.979
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/7203/blank.pdf",
+    "ingestedAt": "2026-11-21T04:50:12.487Z",
+    "totalFields": 187,
+    "skipped": 0,
+    "catalogEntries": 187
+  }
+}

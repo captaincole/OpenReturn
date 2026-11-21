@@ -1,0 +1,573 @@
+{
+  "formId": "form-8824",
+  "fieldCount": 63,
+  "entries": [
+    {
+      "fieldId": "form-8824.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-8OD07"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-1IILT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.1_property_given_up_description_row1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-Y4MT9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.1_property_given_up_description_row2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "T-1AMMY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.10_you_disposed_property_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.10_you_disposed_property_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.11a_exception_death_related_party",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.11b_exception_involuntary_conversion",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.11c_exception_no_tax_avoidance",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.2_property_received_description_row1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "T-FRB0Q"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.2_property_received_description_row2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "T-1F1YH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.3_date_given_up_property_acquired",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.4_date_property_transferred",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.5_date_received_property_identified",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.6_date_property_received",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.7_related_party_exchange_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.7_related_party_exchange_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.8_related_party_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "T-BJCAD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.8_related_party_identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "T-15MP2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.8_related_party_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "T-167FB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.8_related_party_relationship",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "T-17GQV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.9_related_party_disposed_property_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.0.line.9_related_party_disposed_property_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+          "text": "T-1LGST"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+          "text": "T-1AE2N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.12_fmv_other_property_given_up",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+          "text": "1,191"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.12a_description_other_property_given_up",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+          "text": "T-W8RB6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.12a_description_other_property_given_up_line2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+          "text": "T-CJ2ND"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.13_adjusted_basis_other_property_given_up",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+          "text": "7,808"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.14_gain_loss_other_property_given_up",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+          "text": "8,726"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.15_cash_other_property_received",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+          "text": "5,311"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.15a_description_other_property_received",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+          "text": "T-DRG06"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.15a_description_other_property_received_line2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+          "text": "T-RH59D"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.16_fmv_like_kind_property_received",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+          "text": "8,582"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.17_add_lines_15_and_16",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+          "text": "5,118"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.18_adjusted_basis_like_kind_given_up",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+          "text": "1,415"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.19_realized_gain_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+          "text": "2,609"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.19_realized_gain_loss_entry_space",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+          "text": "T-7UO6F"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.20_smaller_of_line_15_or_19",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+          "text": "8,108"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.21_ordinary_income_recapture",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+          "text": "6,468"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.22_subtract_line_21_from_20",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+          "text": "6,722"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.23_recognized_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+          "text": "2,387"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.24_deferred_gain_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+          "text": "7,793"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.25_basis_like_kind_property_received",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+          "text": "5,858"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.25a_basis_section_1250_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+          "text": "7,283"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.25b_basis_section_1245_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+          "text": "4,295"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.25c_basis_intangible_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+          "text": "5,703"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.26_certificate_of_divestiture_number_part1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_26[0]",
+          "text": "T-1VWZV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.26_certificate_of_divestiture_number_part2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_27[0]",
+          "text": "T-1YG27"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.27_description_divested_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_28[0]",
+          "text": "T-18ZPR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.27_description_divested_property_line2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_29[0]",
+          "text": "T-NHOIX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.28_description_replacement_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_30[0]",
+          "text": "T-17OMB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.28_description_replacement_property_line2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_31[0]",
+          "text": "T-1RH4N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.29_date_divested_property_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_32[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.30_sales_price_divested_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_33[0]",
+          "text": "6,815"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.31_basis_divested_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_34[0]",
+          "text": "9,988"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.32_realized_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_35[0]",
+          "text": "8,416"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.33_cost_replacement_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_36[0]",
+          "text": "4,368"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.34_subtract_line_33_from_30",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_37[0]",
+          "text": "1,652"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.35_ordinary_income_recapture",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_38[0]",
+          "text": "4,325"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.36_subtract_line_35_from_34",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_39[0]",
+          "text": "2,261"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.37_deferred_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_40[0]",
+          "text": "8,733"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8824.1.line.38_basis_replacement_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_41[0]",
+          "text": "6,113"
+        }
+      ]
+    }
+  ]
+}

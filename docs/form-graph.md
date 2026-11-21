@@ -102,6 +102,10 @@ The golden suite ran 25 scenarios.
 | Form 8938 | Federal 2025 | Yes | 0 | 131 | 0 | 0 | 0 | 131 | 0 | 0 |
 | Form 8978 | Federal 2025 |  | 0 | 91 | 0 | 0 | 0 | 91 | 0 | 0 |
 | Form 8992 | Federal 2025 |  | 0 | 14 | 0 | 0 | 0 | 14 | 0 | 0 |
+| Form 6781 | Federal 2025 | Yes | 0 | 71 | 0 | 0 | 0 | 71 | 0 | 0 |
+| Form 7203 | Federal 2025 | Yes | 0 | 187 | 0 | 0 | 0 | 187 | 0 | 0 |
+| Form 8582-CR | Federal 2025 | Yes | 0 | 52 | 0 | 0 | 0 | 52 | 0 | 0 |
+| Form 8824 | Federal 2025 | Yes | 0 | 63 | 0 | 0 | 0 | 63 | 0 | 0 |
 | Schedule D (540) | California 2025 | Yes | 1 | 125 | 0 | 0 | 0 | 125 | 0 | 0 |
 | FTB 3885A | California 2025 | Yes | 1 | 65 | 14 | 0 | 51 | 0 | 0 | 0 |
 | Schedule CA (540) | California 2025 | Yes | 10 | 253 | 98 | 0 | 20 | 135 | 5 | 3 |
@@ -134,6 +138,12 @@ The golden suite ran 25 scenarios.
 | FTB 3913 | California 2025 |  | 0 | 9 | 0 | 0 | 0 | 9 | 0 | 0 |
 | FTB 5805F | California 2025 |  | 0 | 21 | 0 | 0 | 0 | 21 | 0 | 0 |
 | FTB 5870A | California 2025 |  | 0 | 225 | 0 | 0 | 0 | 225 | 0 | 0 |
+| FTB 3801-CR | California 2025 | Yes | 0 | 32 | 0 | 0 | 0 | 32 | 0 | 0 |
+| FTB 3805E | California 2025 | Yes | 0 | 41 | 0 | 0 | 0 | 41 | 0 | 0 |
+| FTB 3840 | California 2025 | Yes | 0 | 112 | 0 | 0 | 0 | 112 | 0 | 0 |
+| Schedule D-1 | California 2025 | Yes | 0 | 172 | 0 | 0 | 0 | 172 | 0 | 0 |
+| Schedule D (540NR) | California 2025 | Yes | 0 | 125 | 0 | 0 | 0 | 125 | 0 | 0 |
+| Schedule P (540NR) | California 2025 | Yes | 0 | 180 | 0 | 0 | 0 | 180 | 0 | 0 |
 
 ## By form
 
@@ -1024,6 +1034,38 @@ For each form: the fields that are not verified and that other fields read, by t
 
 14 more not checked, each of which feeds fewer fields.
 
+### Form 6781
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 71 verified, 71 not checked
+
+71 more not checked, each of which feeds fewer fields.
+
+### Form 7203
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 187 verified, 187 not checked
+
+187 more not checked, each of which feeds fewer fields.
+
+### Form 8582-CR
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 52 verified, 52 not checked
+
+52 more not checked, each of which feeds fewer fields.
+
+### Form 8824
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 63 verified, 63 not checked
+
+63 more not checked, each of which feeds fewer fields.
+
 ### Schedule D (540)
 
 - Reads: none
@@ -1337,6 +1379,54 @@ For each form: the fields that are not verified and that other fields read, by t
 
 225 more not checked, each of which feeds fewer fields.
 
+### FTB 3801-CR
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 32 verified, 32 not checked
+
+32 more not checked, each of which feeds fewer fields.
+
+### FTB 3805E
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 41 verified, 41 not checked
+
+41 more not checked, each of which feeds fewer fields.
+
+### FTB 3840
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 112 verified, 112 not checked
+
+112 more not checked, each of which feeds fewer fields.
+
+### Schedule D-1
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 172 verified, 172 not checked
+
+172 more not checked, each of which feeds fewer fields.
+
+### Schedule D (540NR)
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 125 verified, 125 not checked
+
+125 more not checked, each of which feeds fewer fields.
+
+### Schedule P (540NR)
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 180 verified, 180 not checked
+
+180 more not checked, each of which feeds fewer fields.
+
 ## Forms the engine lacks
 
 A blank field names the form that it waits for, in its label or its reason. Each form here is on the list in `engine/scripts/formGraph/missingForms.ts`: a form that a blank field names, or a tier 1 form. A tier 1 form is one that our target user needs; [Forms for an individual return](individual-forms.md) has the full list. **Fields that wait** is the count of blank fields that name the form. **Fields they feed** is the count of other fields that read those blank fields, directly or through other fields. The About column is a short description, not the form's official title.
@@ -1384,18 +1474,8 @@ A blank field names the form that it waits for, in its label or its reason. Each
 | Form 8923 | Mine rescue team training credit | Federal 2025 |  | 9 | 0 | Form 3800 |
 | Form 8931 | Agricultural chemicals security credit | Federal 2025 |  | 9 | 0 | Form 3800 |
 | Form 8942 | Qualifying therapeutic discovery project credit | Federal 2025 |  | 9 | 0 | Form 3800 |
-| Schedule P (540NR) | California minimum tax and credit limits for a nonresident or part-year resident | California 2025 | Yes | 5 | 0 | FTB 3510 |
 | Form 8609-A | Annual statement for the low-income housing credit | Federal 2025 |  | 4 | 0 | Form 8611 |
 | Form 7205 | Energy efficient commercial buildings deduction | Federal 2025 |  | 3 | 0 | Form 4255 |
-| Form 8824 | Like-kind exchanges | Federal 2025 | Yes | 2 | 0 | Form 4797 |
-| Form 6781 | Gains and losses from section 1256 contracts and straddles | Federal 2025 | Yes | 0 | 0 | none |
-| Form 7203 | S corporation shareholder stock and debt basis limits | Federal 2025 | Yes | 0 | 0 | none |
-| Form 8582-CR | Passive activity credit limits | Federal 2025 | Yes | 0 | 0 | none |
-| FTB 3801-CR | California passive activity credit limits | California 2025 | Yes | 0 | 0 | none |
-| FTB 3805E | California installment sale income | California 2025 | Yes | 0 | 0 | none |
-| FTB 3840 | California like-kind exchanges | California 2025 | Yes | 0 | 0 | none |
-| Schedule D-1 | California sales of business property | California 2025 | Yes | 0 | 0 | none |
-| Schedule D (540NR) | California capital gain or loss for a nonresident or part-year resident | California 2025 | Yes | 0 | 0 | none |
 
 ### Names not classified
 

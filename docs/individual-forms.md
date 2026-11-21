@@ -14,7 +14,7 @@ This page lists each form that an individual income tax return can hold, and wha
 
 Source: [Tax year 2025 accepted forms and schedules for individual tax returns and extensions](https://www.irs.gov/pub/irs-efile/tax-year-2025-accepted-forms-schedules-individual-tax-returns-extensions.xlsx), IRS, dated 2025-11-18.
 
-The engine has 79 of 225 forms, and 32 have rules. Of the 43 tier 1 forms, the engine has 39, and 26 have rules.
+The engine has 83 of 225 forms, and 32 have rules. Of the 43 tier 1 forms, the engine has 43, and 26 have rules.
 
 | Form | Title | Tier 1 | Engine | Copies |
 | --- | --- | --- | --- | --- |
@@ -109,8 +109,8 @@ The engine has 79 of 225 forms, and 32 have rules. Of the 43 tier 1 forms, the e
 | Form 6252 | Installment Sale Income | Yes | No rules yet | unbounded |
 | Form 6478 | Biofuel Producer Credit |  | Not in the engine | unbounded |
 | Form 6765 | Credit for Increasing Research Activities |  | Not in the engine | unbounded |
-| Form 6781 | Gains and Losses From Section 1256 Contracts and Straddles | Yes | Not in the engine | unbounded |
-| Form 7203 | S Corporation Shareholder Stock and Debt Basis Limitations | Yes | Not in the engine | unbounded |
+| Form 6781 | Gains and Losses From Section 1256 Contracts and Straddles | Yes | No rules yet | unbounded |
+| Form 7203 | S Corporation Shareholder Stock and Debt Basis Limitations | Yes | No rules yet | unbounded |
 | Form 7204 | Consent To Extend the Time To Assess Tax Related to Contested Foreign Income Taxes- Provisional Foreign Tax Credit Agreement |  | Not in the engine | unbounded |
 | Form 7205 | Energy Efficient Commercial Buildings Deduction |  | Not in the engine | unbounded |
 | Form 7206 | Self-Employed Health Insurance Deduction |  | Not in the engine | unbounded |
@@ -129,7 +129,7 @@ The engine has 79 of 225 forms, and 32 have rules. Of the 43 tier 1 forms, the e
 | Form 8379 | Injured Spouse Allocation |  | Not in the engine | 1 |
 | Form 8396 | Mortgage Interest Credit |  | No rules yet | 1 |
 | Form 8582 | Passive Activity Loss Limitations | Yes | Rules | 1 |
-| Form 8582CR | Passive Activity Credit Limitations | Yes | Not in the engine | 1 |
+| Form 8582CR | Passive Activity Credit Limitations | Yes | No rules yet | 1 |
 | Form 8586 | Low-Income Housing Credit |  | Not in the engine | unbounded |
 | Form 8594 | Asset Acquisition Statement Under Section 1060 |  | Not in the engine | unbounded |
 | Form 8606 | Nondeductible IRAs | Yes | Rules | 25 |
@@ -144,7 +144,7 @@ The engine has 79 of 225 forms, and 32 have rules. Of the 43 tier 1 forms, the e
 | Form 8814 | Parents' Election to Report Child's Interest and Dividends | Yes | No rules yet | 10 |
 | Form 8815 | Exclusion of Interest From Series EE and I U.S. Savings Bonds Issued after 1989 |  | No rules yet | 1 |
 | Form 8820 | Orphan Drug Credit |  | Not in the engine | unbounded |
-| Form 8824 | Like-Kind Exchanges | Yes | Not in the engine | unbounded |
+| Form 8824 | Like-Kind Exchanges | Yes | No rules yet | unbounded |
 | Form 8825 | Rental Real Estate Income and Expenses of a Partnership or an S Corporation |  | Not in the engine | unbounded |
 | Form 8826 | Disabled Access Credit |  | Not in the engine | unbounded |
 | Form 8828 | Recapture of Federal Mortgage Subsidy |  | No rules yet | 1 |
@@ -248,7 +248,7 @@ The engine has 79 of 225 forms, and 32 have rules. Of the 43 tier 1 forms, the e
 
 Source: [Forms you can e-file for individuals (tax year 2025)](https://www.ftb.ca.gov/tax-pros/efile/individual-efile-forms.html), FTB, dated 2026-01-02.
 
-The engine has 32 of 65 forms, and 9 have rules. Of the 22 tier 1 forms, the engine has 16, and 7 have rules.
+The engine has 38 of 65 forms, and 9 have rules. Of the 22 tier 1 forms, the engine has 22, and 7 have rules.
 
 | Form | Title | Tier 1 | Engine | Copies |
 | --- | --- | --- | --- | --- |
@@ -279,10 +279,10 @@ The engine has 32 of 65 forms, and 9 have rules. Of the 22 tier 1 forms, the eng
 | Form 3596 | Paid Preparer’s Due Diligence Checklist for California Earned Income Tax Credit |  | Not in the engine | 1 |
 | Form 3800 | Tax Computation for Certain Children with Unearned Income |  | No rules yet | 1 |
 | Form 3801 | Passive Activity Loss Limitations | Yes | No rules yet | 1 |
-| Form 3801-CR | Passive Activity Credit Limitations | Yes | Not in the engine | 1 |
+| Form 3801-CR | Passive Activity Credit Limitations | Yes | No rules yet | 1 |
 | Form 3803 | Parents’ Election to Report Child’s Interest and Dividends | Yes | No rules yet | 10 |
 | Form 3804-CR | Pass-Through Entity Elective Tax Credit | Yes | No rules yet | 2 |
-| Form 3805E | Installment Sale Income | Yes | Not in the engine | 25 |
+| Form 3805E | Installment Sale Income | Yes | No rules yet | 25 |
 | Form 3805P | Additional Taxes on Qualified Plans (Including IRAs) and Other Tax-Favored Accounts | Yes | Rules | 1 per t/p |
 | Form 3805V | Net Operating Loss (NOL) Computations and NOL and Disaster Loss Limitations – Individuals, Estates, and Trusts |  | No rules yet | 1 |
 | Form 3805Z | Enterprise Zone Deduction and Credit Summary |  | No rules yet | unbounded |
@@ -294,7 +294,7 @@ The engine has 32 of 65 forms, and 9 have rules. Of the 22 tier 1 forms, the eng
 | Form 3821 | Cannabis Equity Tax Credit |  | Not in the engine | unbounded |
 | Form 3831 | Homeless Hiring Tax Credit |  | Not in the engine | unbounded |
 | Form 3835 | State Historic Rehabilitation Tax Credit |  | Not in the engine | unbounded |
-| Form 3840 | California Like-Kind Exchanges | Yes | Not in the engine | unbounded |
+| Form 3840 | California Like-Kind Exchanges | Yes | No rules yet | unbounded |
 | Form 3853 | Health Coverage Exemptions and Individual Shared Responsibility Penalty |  | No rules yet | 1 |
 | Form 3870 | Election for Refundable Credit |  | Not in the engine | 1 |
 | Form 3872 | California Disaster Relief Request for Postponement of Tax Deadlines |  | Not in the engine | unbounded |
@@ -308,11 +308,11 @@ The engine has 32 of 65 forms, and 9 have rules. Of the 22 tier 1 forms, the eng
 | Schedule CA (540) | California Adjustments – Residents | Yes | Rules | 1 |
 | Schedule CA (540NR) | California Adjustments – Nonresidents or Part-Year Residents | Yes | No rules yet | 1 |
 | Schedule D (540) | California Capital Gain or Loss Adjustment | Yes | No rules yet | 1 |
-| Schedule D (540NR) | California Capital Gain or Loss Adjustment for Nonresidents or Part-Year Residents | Yes | Not in the engine | 1 |
-| Schedule D-1 | Sales of Business Property | Yes | Not in the engine | 1 |
+| Schedule D (540NR) | California Capital Gain or Loss Adjustment for Nonresidents or Part-Year Residents | Yes | No rules yet | 1 |
+| Schedule D-1 | Sales of Business Property | Yes | No rules yet | 1 |
 | Schedule G-1 | Tax on Lump Sum Distributions |  | No rules yet | 1 per t/p |
 | Schedule P (540) | Alternative Minimum Tax and Credit Limitations – Residents | Yes | Rules | 1 |
-| Schedule P (540NR) | Alternative Minimum Tax and Credit Limitations – Nonresidents or Part-Year Residents | Yes | Not in the engine | 1 |
+| Schedule P (540NR) | Alternative Minimum Tax and Credit Limitations – Nonresidents or Part-Year Residents | Yes | No rules yet | 1 |
 | Schedule R | Apportionment and Allocation of Income |  | Not in the engine | 1 per t/p |
 | Schedule S | Other State Tax Credit | Yes | No rules yet | unbounded |
 | Schedule RDP | CA RDP Adjustments Worksheet |  | Not in the engine | 1 |
