@@ -129,6 +129,66 @@ const SCHEDULE_A: Partial<ExpectedResults> = {
   ],
 };
 
+/*
+ * Form 8283 Section A, the first of the key's three forms (IRS8283-0, rows A–D;
+ * the other two are checked in tests/unit/federal/8283/tcbUs004.test.ts). Column
+ * (a) joins the key's donee name and address parts; dates print as the paper
+ * form does (the key's ContributionDt 2025-12-31 is 12/31/2025, and its
+ * DonorAcquiredDt 2021-12 is 12/2021). Left out on purpose (README.md):
+ * - Column (g) of rows B and C (key 800 and 500): publicly traded securities
+ *   held more than 12 months leave it blank (irs-8283-inst-2025::sec::line-1::b04).
+ * - Column (g) of row D (key 0): the answers give no cost, and a gift of $500 or
+ *   less need not complete it (the form's note; line-1::b03).
+ * - The name (key NameLine1Txt with middle initials the facts do not hold).
+ */
+const FORM_8283: Partial<ExpectedResults> = {
+  engineFields: {
+    "form-8283.0.line.1_row_a_col_g_cost_basis": 650, // DonorCostOrAdjustedBasisAmt
+    "form-8283.0.line.1_row_a_col_h_fair_market_value": 650, // FairMarketValueAmt
+    "form-8283.0.line.1_row_b_col_h_fair_market_value": 1000,
+    "form-8283.0.line.1_row_c_col_h_fair_market_value": 500,
+    "form-8283.0.line.1_row_d_col_h_fair_market_value": 300,
+  },
+  renderedText: {
+    "form-8283.0.header.identifying_number": "900-45-6789", // PrimarySSN 900456789
+    "form-8283.0.line.1_row_a_col_a_donee_name_address":
+      "GOODWILL, 1000 LEXINGTON RD, CITY, FL 32751",
+    "form-8283.0.line.1_row_a_col_c_property_description": "CLOTHES",
+    "form-8283.0.line.1_row_a_col_d_contribution_date": "12/31/2025",
+    "form-8283.0.line.1_row_a_col_e_date_acquired": "VARIOUS",
+    "form-8283.0.line.1_row_a_col_f_how_acquired": "PURCHASED",
+    "form-8283.0.line.1_row_a_col_i_valuation_method": "THRIFT SHOP VALUE",
+    "form-8283.0.line.1_row_b_col_a_donee_name_address": "SALVATION ARMY, 111 TEST, CITY, NC 28215",
+    "form-8283.0.line.1_row_b_col_c_property_description": "EXCHANGE SECURITIES",
+    "form-8283.0.line.1_row_b_col_d_contribution_date": "11/14/2025",
+    "form-8283.0.line.1_row_b_col_e_date_acquired": "VARIOUS",
+    "form-8283.0.line.1_row_b_col_f_how_acquired": "PURCHASED",
+    "form-8283.0.line.1_row_b_col_i_valuation_method": "APPRAISAL",
+    "form-8283.0.line.1_row_c_col_a_donee_name_address":
+      "STATE RESCUE MISSION, 1003 16TH AVE, CHARLOTTE, NC 28215",
+    "form-8283.0.line.1_row_c_col_c_property_description": "OTC SECURITIES",
+    "form-8283.0.line.1_row_c_col_d_contribution_date": "07/19/2025",
+    "form-8283.0.line.1_row_c_col_e_date_acquired": "12/2021",
+    "form-8283.0.line.1_row_c_col_f_how_acquired": "PURCHASED",
+    "form-8283.0.line.1_row_c_col_i_valuation_method": "APPRAISED",
+    "form-8283.0.line.1_row_d_col_a_donee_name_address":
+      "NONPROFIT ORGANIZATION, 111 DONOR ST, CITY, FL 32705",
+    "form-8283.0.line.1_row_d_col_c_property_description": "MUTUAL FUND SECURITIES",
+    "form-8283.0.line.1_row_d_col_d_contribution_date": "12/31/2025",
+    "form-8283.0.line.1_row_d_col_i_valuation_method": "APPRAISED",
+  },
+  renderedBlank: [
+    // The key has no vehicle on any row.
+    "form-8283.0.line.1_row_a_col_b_vehicle",
+    "form-8283.0.line.1_row_b_col_b_vehicle",
+    "form-8283.0.line.1_row_c_col_b_vehicle",
+    "form-8283.0.line.1_row_d_col_b_vehicle",
+    // Row D: the key has no DonorAcquiredDt and no DonorAcquisitionDesc.
+    "form-8283.0.line.1_row_d_col_e_date_acquired",
+    "form-8283.0.line.1_row_d_col_f_how_acquired",
+  ],
+};
+
 const SCHEDULE_B: Partial<ExpectedResults> = {
   engineFields: {
     "schedule-b.0.line.1_amount_1": 330, // Social Finance
@@ -252,6 +312,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
   "form-8960": FORM_8960,
   "form-8995": FORM_8995,
   "form-4952": FORM_4952,
+  "form-8283": FORM_8283,
   "schedule-a": SCHEDULE_A,
   "schedule-8812": SCHEDULE_8812,
   "schedule-1": SCHEDULE_1,
