@@ -30,6 +30,10 @@ const EARNED_INCOME_RATE = 0.15;
 // Line 20 Next: "On line 16b, is the amount $5,100 or more?"
 const PART_II_B_MINIMUM = 5_100;
 
+// MANUAL EDIT: line 13 with Form 8396 and a qualifying child (irs-1040s8-inst-2025::sec::line-21::b03).
+const WORKSHEET_B_WITH_FORM_8396 =
+  "Form 8396 files and line 4 is above 0: line 4 of Credit Limit Worksheet A is Credit Limit Worksheet B, which the engine does not figure.";
+
 type Form = FormAccessor<Schedule8812>;
 type Bindings = Partial<{
   [K in keyof Schedule8812]: BindingFn<Schedule8812, Schedule8812FilingInfo, K>;
@@ -113,20 +117,30 @@ export function register(): void {
       /*
        * Credit Limit Worksheet A: Form 1040 line 18 minus the Schedule 3 credits
        * it lists (lines 1, 2, 3, 4, 5b, 6d, 6f, 6l, 6m). Its line 4 is Credit
-       * Limit Worksheet B, which applies only with a Form 8396, 8839, 5695 Part I
-       * or 8859 credit (Schedule 3 lines 5a, 6c, 6g, 6h). Those lines are
-       * unsupported today, so line 4 is -0-; the line waits if one ever fills.
+       * Limit Worksheet B, which applies only with line 4 above 0 and a Form 8396,
+       * 8839, 5695 Part I or 8859 credit (Schedule 3 lines 5a, 6c, 6g, 6h;
+       * irs-1040s8-inst-2025::sec::line-21::b03). The engine has no Worksheet B:
+       * MANUAL EDIT: a filing Form 8396 with a qualifying child is unsupported, and
+       * the other three lines are unsupported today, so line 4 is -0-; the line
+       * waits if one ever fills. Line 6g is read only with a child: Form 8396
+       * reads Form 1040 line 19, which reads this line.
        */
-      "0.line.13_credit_limit_worksheet_a": (form) => {
+      "0.line.13_credit_limit_worksheet_a": (form, info) => {
         const line18 = form["form-1040.line.18"];
         if (typeof line18 !== "number") return undefined;
-        const worksheetB = [
-          form["schedule-3.0.line.5a"],
-          form["schedule-3.0.line.6c"],
-          form["schedule-3.0.line.6g"],
-          form["schedule-3.0.line.6h"],
-        ].some((credit) => typeof credit === "number" && credit > 0);
-        if (worksheetB && sum(form["0.line.4_qualifying_children_under_17"]) > 0) return undefined;
+        const children = sum(form["0.line.4_qualifying_children_under_17"]) > 0;
+        if (children && info.mustFile?.["form-8396"]?.value === true) {
+          return unsupported(WORKSHEET_B_WITH_FORM_8396);
+        }
+        const worksheetB =
+          children &&
+          [
+            form["schedule-3.0.line.5a"],
+            form["schedule-3.0.line.6c"],
+            form["schedule-3.0.line.6g"],
+            form["schedule-3.0.line.6h"],
+          ].some((credit) => typeof credit === "number" && credit > 0);
+        if (worksheetB) return undefined;
         const credits = sum(
           form["schedule-3.0.line.1"],
           form["schedule-3.0.line.2"],

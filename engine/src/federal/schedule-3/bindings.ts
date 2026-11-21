@@ -18,6 +18,9 @@ export function register(): void {
       "0.line.2": (form) => numberOrBlank(form["form-2441.0.line.11_dependent_care_credit"]),
       // MANUAL EDIT: Schedule R line 22 ("Also enter this amount on Schedule 3 (Form 1040), line 6d").
       "0.line.6d": (form) => numberOrBlank(form["schedule-r.1.line.22_credit"]),
+      // MANUAL EDIT: Form 8396 line 9 ("Also include this amount on Schedule 3 (Form 1040), line 6g").
+      "0.line.6g": (form) =>
+        numberOrBlank(form["form-8396.0.line.9_current_year_mortgage_interest_credit"]),
       "0.line.5b": (form) => {
         const value = form["form-5695.3.line.32"];
         return typeof value === "number" ? value : undefined;
@@ -68,7 +71,6 @@ export function register(): void {
       "0.line.6c": NO_SCENARIO,
       "0.line.6e": "Reserved for future use.",
       "0.line.6f": NO_SCENARIO,
-      "0.line.6g": NO_SCENARIO,
       "0.line.6h": NO_SCENARIO,
       "0.line.6i": NO_SCENARIO,
       "0.line.6j": NO_SCENARIO,
