@@ -10,8 +10,11 @@ function birthDateParts(dob: string | undefined): [number, number, number] | und
   return [year, month, day];
 }
 
-/* Born before January 2 of the given year: a January 1 birthday counts as the day before. */
-function bornBeforeJan2Of(dob: string | undefined, cutoffYear: number): boolean | undefined {
+/*
+ * Born before January 2 of the given year: a January 1 birthday counts as the
+ * day before. Undefined when the date of birth is missing or unreadable.
+ */
+export function bornBeforeJan2Of(dob: string | undefined, cutoffYear: number): boolean | undefined {
   const parts = birthDateParts(dob);
   if (!parts) return undefined;
   const [year, month, day] = parts;

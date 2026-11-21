@@ -1,7 +1,10 @@
 import type { OtherIncomeItem } from "../../facts/index.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";
+import type { Form8814FilingInfo } from "../8814/filingInfo.js";
 
-export interface Schedule1FilingInfo extends BaseFilingInfo {
+/* Line 8z also reads Form 8814's totals (line 12). */
+export interface Schedule1FilingInfo
+  extends BaseFilingInfo, Pick<Form8814FilingInfo, "form8814Totals"> {
   /** Line 3: Schedule C line 31 summed over every business; undefined when any line 31 is blank. */
   businessIncome?: number;
   /**

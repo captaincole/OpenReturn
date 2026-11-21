@@ -553,6 +553,10 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8814",
     relativeDir: "federal/8814",
     register: registerForm8814,
+    copies: {
+      count: (info) => info?.form8814Children?.length ?? 1,
+      select: (info, index) => info && { ...info, form8814CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "schedule-f",

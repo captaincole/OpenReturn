@@ -6,6 +6,7 @@
 
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
 import { roundDollars, sum } from "../../money.js";
+import { withForm8814 } from "../8814/totals.js";
 import type { PayerAmount, ScheduleBFilingInfo, ScheduleBRounding } from "./filingInfo.js";
 import type { ScheduleB } from "./types.js";
 
@@ -60,8 +61,9 @@ export function register(): void {
         : undefined;
     },
     ...payerRows("5", DIVIDEND_ROWS, (info) => info.dividendPayers),
+    // MANUAL EDIT: line 5 lists each Form 8814 line 9; the total waits with Form 8814 (::line-9::b01).
     "0.line.6_total_ordinary_dividends": (_, info) =>
-      payerTotal(info.dividendPayers, info.rounding),
+      withForm8814(info.form8814Totals, payerTotal(info.dividendPayers, info.rounding), () => 0),
     "0.line.7a_foreign_account_yes": yesNo((info) => info.hasForeignFinancialAccount, true),
     "0.line.7a_foreign_account_no": yesNo((info) => info.hasForeignFinancialAccount, false),
     "0.line.8_foreign_trust_yes": yesNo((info) => info.hasForeignTrust, true),
