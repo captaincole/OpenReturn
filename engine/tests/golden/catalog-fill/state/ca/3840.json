@@ -1,0 +1,1014 @@
+{
+  "formId": "form-3840",
+  "fieldCount": 112,
+  "entries": [
+    {
+      "fieldId": "form-3840.0.header.a_taxpayer_type",
+      "widgets": [
+        {
+          "widgetName": "Line A",
+          "text": "Individual."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.additional_information",
+      "widgets": [
+        {
+          "widgetName": "Additional information. See instructions",
+          "text": "T-1Y33G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.b_exchange_taxable_year",
+      "widgets": [
+        {
+          "widgetName": "If the \"Annual FTB 3840\" or \"Final FTB 3840\" box is checked, enter the taxable year the exchange occurred (yyyy)",
+          "text": "4348"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.b_filing_type",
+      "widgets": [
+        {
+          "widgetName": "Line B",
+          "text": "Initial F T B 3840."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.c_exchange_involves",
+      "widgets": [
+        {
+          "widgetName": "Line C. This exchange involves",
+          "text": "Real property."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.c_related_party_name",
+      "widgets": [
+        {
+          "widgetName": "Name of the related party",
+          "text": "T-1DM3R"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.c_related_party_tin",
+      "widgets": [
+        {
+          "widgetName": "Line C. Related party's S S N/I T I N or F E I N (9 digits)",
+          "text": "T-1QJ9C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.california_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "California corporation number (12 digits)",
+          "text": "T-131OX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.city",
+      "widgets": [
+        {
+          "widgetName": "City (If you have a foreign address, see instructions.)",
+          "text": "T-QGTJZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.fein",
+      "widgets": [
+        {
+          "widgetName": "Federal Employer Identification Number (F E I N) (9 digits)",
+          "text": "T-19Z9W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.fiscal_year_beginning",
+      "widgets": [
+        {
+          "widgetName": "For the calendar year 2025 or fiscal year beginning (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.fiscal_year_ending",
+      "widgets": [
+        {
+          "widgetName": "For the calendar year 2025 or fiscal year ending (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.foreign_country_name",
+      "widgets": [
+        {
+          "widgetName": "Foreign country name",
+          "text": "T-LT260"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.foreign_postal_code",
+      "widgets": [
+        {
+          "widgetName": "Foreign postal code",
+          "text": "T-50IM9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.foreign_province_state_county",
+      "widgets": [
+        {
+          "widgetName": "Foreign province/2 letter state abbreviation/county",
+          "text": "T-1OHOW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on your state tax return",
+          "text": "T-Y7W5P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.private_mailbox",
+      "widgets": [
+        {
+          "widgetName": "P M B number",
+          "text": "TODE50"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.secretary_of_state_file_number",
+      "widgets": [
+        {
+          "widgetName": "California Secretary of State file number (12 digits)",
+          "text": "T-T6KAZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.spouse_ssn",
+      "widgets": [
+        {
+          "widgetName": "Spouse's/R D P's S S N or I T I N (9 digits)",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits)",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.state",
+      "widgets": [
+        {
+          "widgetName": "2 letter state abbreviation",
+          "text": "29"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.street_address",
+      "widgets": [
+        {
+          "widgetName": "Street address (suite/room number)",
+          "text": "T-QL2XO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.header.zip",
+      "widgets": [
+        {
+          "widgetName": "ZIP code, maximum 9 digits",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.1_property_given_up_description",
+      "widgets": [
+        {
+          "widgetName": "Part I, line 1. Description of like-kind property given up",
+          "text": "T-14X54"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.10_cash_and_other_property_received",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Cash received, F M V of other property received, plus net liabilities assumed by the other party, reduced (but not below zero) by any exchange expenses incurred",
+          "text": "6,272"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.11_fmv_like_kind_property_received",
+      "widgets": [
+        {
+          "widgetName": "Line 11. F M V of like-kind property received",
+          "text": "3,344"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.12_total_amount_received",
+      "widgets": [
+        {
+          "widgetName": "Line 12. Add line 10 and line 11",
+          "text": "9,937"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.13_adjusted_basis_like_kind_given_up",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Adjusted basis of like-kind property given up, net amounts paid to other party, plus any exchange expenses not used on line 10",
+          "text": "2,093"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.14_realized_gain_loss",
+      "widgets": [
+        {
+          "widgetName": "Line 14. Realized gain or (loss). Subtract line 13 from line 12",
+          "text": "3,052"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.15_smaller_of_line_10_or_14",
+      "widgets": [
+        {
+          "widgetName": "Line 15. Enter smaller of line 10 or line 14, but not less than zero",
+          "text": "9,456"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.16_ordinary_income_recapture",
+      "widgets": [
+        {
+          "widgetName": "Line 16. Ordinary income under recapture rules",
+          "text": "4,300"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.17_line_15_minus_line_16",
+      "widgets": [
+        {
+          "widgetName": "Line 17. Subtract line 16 from line 15. If more than 0, enter here. If zero or less, enter 0",
+          "text": "1,593"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.18_recognized_gain",
+      "widgets": [
+        {
+          "widgetName": "Line 18. Recognized gain. Add line 16 and line 17",
+          "text": "9,016"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.19_deferred_gain_loss",
+      "widgets": [
+        {
+          "widgetName": "Line 19. Deferred gain or (loss). Subtract line 18 from line 14",
+          "text": "8,380"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.2_property_received_description",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Description of like-kind property received",
+          "text": "T-1KZMM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.20_basis_like_kind_property_received",
+      "widgets": [
+        {
+          "widgetName": "Line 20. Basis of like-kind property received. Subtract line 10 from the sum of line 13 and line 18",
+          "text": "5,288"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.3_date_given_up_property_acquired",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Date like-kind property given up was originally acquired (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.4_date_property_transferred",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Date you actually transferred your property to other party (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.5_date_received_property_identified",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Date like-kind property you received was identified by written notice to another party (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.6_date_property_received",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Date you actually received the like-kind property from other party (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.7_fmv_other_property_given_up",
+      "widgets": [
+        {
+          "widgetName": "Part II, line 7. Fair market value (F M V) of other property given up",
+          "text": "1,134"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.8_adjusted_basis_other_property",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Adjusted basis of other property given up",
+          "text": "8,657"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.line.9_gain_loss_other_property",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Gain or (loss) recognized on other property given up. Subtract line 8 from line 7",
+          "text": "6,368"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.signing.date_signed",
+      "widgets": [
+        {
+          "widgetName": "Your signature date (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.signing.firm_address",
+      "widgets": [
+        {
+          "widgetName": "Firm's address",
+          "text": "T-17XUQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.signing.firm_name",
+      "widgets": [
+        {
+          "widgetName": "Firm's name",
+          "text": "T-1CH9L"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.signing.representative_date_signed",
+      "widgets": [
+        {
+          "widgetName": "owner, officer, or representative, date (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.signing.representative_title",
+      "widgets": [
+        {
+          "widgetName": "Owner, officer, or representative, title",
+          "text": "T-XVVPC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.signing.spouse_date_signed",
+      "widgets": [
+        {
+          "widgetName": "Spouse's/R D P's signature date (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.signing.spouse_phone",
+      "widgets": [
+        {
+          "widgetName": "Spouse's/R D P's telephone (10 digits)",
+          "text": "555-123-4567"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.0.signing.taxpayer_phone",
+      "widgets": [
+        {
+          "widgetName": "Your telephone (10 digits)",
+          "text": "555-123-4567"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.header.taxpayer_id",
+      "widgets": [
+        {
+          "widgetName": "Taxpayer ID",
+          "text": "T-1NTB6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "Taxpayer name",
+          "text": "T-1VOQT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.10_allocation_deferred_gain_col_d",
+      "widgets": [
+        {
+          "widgetName": "Part III, line 10. Allocation of California source deferred gain to properties received. If only one property was received, enter the amount from Part I, line 8, in column D. If more than one property was received, see instructions, D",
+          "text": "9,504"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.10_allocation_deferred_gain_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Allocation of California source deferred gain to properties received. If only one property was received, enter the amount from Part I, line 8, in column D. If more than one property was received, see instructions, E",
+          "text": "2,352"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.10_allocation_deferred_gain_col_f",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Allocation of California source deferred gain to properties received. If only one property was received, enter the amount from Part I, line 8, in column D. If more than one property was received, see instructions, F",
+          "text": "7,317"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.11_apportionment_percentage",
+      "widgets": [
+        {
+          "widgetName": "Line 11. Apportionment percentage for the taxable year of the exchange. See instructions. Enter 6 digits including decimal",
+          "text": "T-S6IGE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1a_city",
+      "widgets": [
+        {
+          "widgetName": "Line 1A. City",
+          "text": "T-5KZCK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1a_in_california",
+      "widgets": [
+        {
+          "widgetName": "Part I, line 1A. Is property in California?",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1a_ownership_percentage",
+      "widgets": [
+        {
+          "widgetName": "Line 1A. Ownership percentage. Enter 6 digits including decimal",
+          "text": "T1BJZ2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1a_property_address",
+      "widgets": [
+        {
+          "widgetName": "Line 1A. Property address (if no street address, provide assessor's parcel number and county)/Description",
+          "text": "T-8X7AW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1a_state",
+      "widgets": [
+        {
+          "widgetName": "Line 1A. 2 letter state abbreviation",
+          "text": "28"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1a_zip",
+      "widgets": [
+        {
+          "widgetName": "Line 1A. ZIP code, maximum 9 digits",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1b_city",
+      "widgets": [
+        {
+          "widgetName": "Line 1B. City",
+          "text": "T-YZW1S"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1b_in_california",
+      "widgets": [
+        {
+          "widgetName": "Line 1B. Is property in California?",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1b_ownership_percentage",
+      "widgets": [
+        {
+          "widgetName": "Line 1B. Ownership percentage. Enter 6 digits including decimal",
+          "text": "T1O1Q8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1b_property_address",
+      "widgets": [
+        {
+          "widgetName": "Line 1B. Property address (if no street address, provide assessor's parcel number and county)/Description",
+          "text": "T-Q9T72"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1b_state",
+      "widgets": [
+        {
+          "widgetName": "Line 1B. 2 letter state abbreviation",
+          "text": "06"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1b_zip",
+      "widgets": [
+        {
+          "widgetName": "Line 1B. ZIP code, maximum 9 digits",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1c_city",
+      "widgets": [
+        {
+          "widgetName": "Line 1C. City",
+          "text": "T-1TP2A"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1c_in_california",
+      "widgets": [
+        {
+          "widgetName": "Line 1C. Is property in California?",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1c_ownership_percentage",
+      "widgets": [
+        {
+          "widgetName": "Line 1C. Ownership percentage. Enter 6 digits including decimal",
+          "text": "T9B5J7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1c_property_address",
+      "widgets": [
+        {
+          "widgetName": "Line 1C. Property address (if no street address, provide assessor's parcel number and county)/Description",
+          "text": "T-1DIJR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1c_state",
+      "widgets": [
+        {
+          "widgetName": "Line 1C. 2 letter state abbreviation",
+          "text": "66"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.1c_zip",
+      "widgets": [
+        {
+          "widgetName": "Line 1C. ZIP code, maximum 9 digits",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.2_prior_deferred_exchange_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Was this property acquired in a prior tax deferred exchange?, A",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.2_prior_deferred_exchange_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Was this property acquired in a prior tax deferred exchange?, B",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.2_prior_deferred_exchange_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Was this property acquired in a prior tax deferred exchange?, C",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.3_consideration_sales_price_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Consideration/Sales price, A",
+          "text": "7,470"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.3_consideration_sales_price_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Consideration/Sales price, B",
+          "text": "6,117"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.3_consideration_sales_price_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Consideration/Sales price, C",
+          "text": "9,493"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.4_selling_expenses_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Selling expenses paid/incurred, A",
+          "text": "9,092"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.4_selling_expenses_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Selling expenses paid/incurred, B",
+          "text": "2,512"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.4_selling_expenses_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Selling expenses paid/incurred, C",
+          "text": "9,162"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.5_amount_realized_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Amount realized. Subtract line 4 from line 3, A",
+          "text": "3,879"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.5_amount_realized_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Amount realized. Subtract line 4 from line 3, B",
+          "text": "5,644"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.5_amount_realized_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Amount realized. Subtract line 4 from line 3, C",
+          "text": "6,627"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.6_california_adjusted_basis_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 6. California adjusted basis, A",
+          "text": "2,458"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.6_california_adjusted_basis_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 6. California adjusted basis, B",
+          "text": "9,496"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.6_california_adjusted_basis_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 6. California adjusted basis, C",
+          "text": "1,325"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.7_realized_gain_loss_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Realized gain or (loss). Subtract line 6 from line 5, A",
+          "text": "4,238"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.7_realized_gain_loss_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Realized gain or (loss). Subtract line 6 from line 5, B",
+          "text": "7,864"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.7_realized_gain_loss_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Realized gain or (loss). Subtract line 6 from line 5, C",
+          "text": "7,000"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.8_california_sourced_deferred_gain",
+      "widgets": [
+        {
+          "widgetName": "Line 8. California source deferred gain. If all property given up was real property located in California, enter the amount from Side 1, line 19, Deferred gain, adjusted for differences between federal and California law. If multiple properties were given up and the properties were located both in and outside of California, see instructions. If the exchange included both real and personal property, see instructions",
+          "text": "3,385"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9d_city",
+      "widgets": [
+        {
+          "widgetName": "Line 9D. City",
+          "text": "T-Z671P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9d_in_california",
+      "widgets": [
+        {
+          "widgetName": "Part II, line 9D. Is property in California?",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9d_ownership_percentage",
+      "widgets": [
+        {
+          "widgetName": "Line 9D. Ownership percentage. Enter 6 digits including decimal",
+          "text": "T1EOMN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9d_property_address",
+      "widgets": [
+        {
+          "widgetName": "Line 9D. Property address (if no street address, provide assessor's parcel number and county)/Description",
+          "text": "T-12GR4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9d_state",
+      "widgets": [
+        {
+          "widgetName": "Line 9D. 2 letter state abbreviation",
+          "text": "99"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9d_zip",
+      "widgets": [
+        {
+          "widgetName": "Line 9D. ZIP code, maximum 9 digits",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9e_city",
+      "widgets": [
+        {
+          "widgetName": "Line 9E. City",
+          "text": "T-10IXP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9e_in_california",
+      "widgets": [
+        {
+          "widgetName": "Line 9E. Is property in California?",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9e_ownership_percentage",
+      "widgets": [
+        {
+          "widgetName": "Line 9E. Ownership percentage. Enter 6 digits including decimal",
+          "text": "T12OO5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9e_property_address",
+      "widgets": [
+        {
+          "widgetName": "Line 9E. Property address (if no street address, provide assessor's parcel number and county)/Description",
+          "text": "T-12N8X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9e_state",
+      "widgets": [
+        {
+          "widgetName": "Line 9E. 2 letter state abbreviation",
+          "text": "23"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9e_zip",
+      "widgets": [
+        {
+          "widgetName": "Line 9E. ZIP code, maximum 9 digits",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9f_city",
+      "widgets": [
+        {
+          "widgetName": "Line 9F. City",
+          "text": "T-T4AJJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9f_in_california",
+      "widgets": [
+        {
+          "widgetName": "Line 9F. Is property in California?",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9f_ownership_percentage",
+      "widgets": [
+        {
+          "widgetName": "Line 9F. Ownership percentage. Enter 6 digits including decimal",
+          "text": "T19UYI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9f_property_address",
+      "widgets": [
+        {
+          "widgetName": "Line 9F. Property address (if no street address, provide assessor's parcel number and county)/Description",
+          "text": "T-NZM7Q"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9f_state",
+      "widgets": [
+        {
+          "widgetName": "Line 9F. 2 letter state abbreviation",
+          "text": "02"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3840.1.line.9f_zip",
+      "widgets": [
+        {
+          "widgetName": "Line 9F. ZIP code, maximum 9 digits",
+          "text": "94110"
+        }
+      ]
+    }
+  ]
+}

@@ -163,6 +163,7 @@
       "name": "Form 3801-CR",
       "title": "Passive Activity Credit Limitations",
       "maxPerReturn": "1",
+      "short": "3801-cr",
       "tier1": true
     },
     {
@@ -183,6 +184,7 @@
       "name": "Form 3805E",
       "title": "Installment Sale Income",
       "maxPerReturn": "25",
+      "short": "3805e",
       "tier1": true
     },
     {
@@ -250,6 +252,7 @@
       "name": "Form 3840",
       "title": "California Like-Kind Exchanges",
       "maxPerReturn": "unbounded",
+      "short": "3840",
       "tier1": true
     },
     {
@@ -335,12 +338,14 @@
       "name": "Schedule D (540NR)",
       "title": "California Capital Gain or Loss Adjustment for Nonresidents or Part-Year Residents",
       "maxPerReturn": "1",
+      "short": "schedule-d-540nr",
       "tier1": true
     },
     {
       "name": "Schedule D-1",
       "title": "Sales of Business Property",
       "maxPerReturn": "1",
+      "short": "schedule-d-1",
       "tier1": true
     },
     {
@@ -360,6 +365,7 @@
       "name": "Schedule P (540NR)",
       "title": "Alternative Minimum Tax and Credit Limitations – Nonresidents or Part-Year Residents",
       "maxPerReturn": "1",
+      "short": "schedule-p-540nr",
       "tier1": true
     },
     {

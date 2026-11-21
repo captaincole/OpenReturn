@@ -1,0 +1,798 @@
+{
+  "form": {
+    "formId": "form-8582-cr",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 8582-CR, Passive Activity Credit Limitations"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8582-cr.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.1a_rental_active_credits",
+      "label": "Line 1a — Credits from Worksheet 1, column (a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 611.968
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.1b_rental_active_prior_unallowed",
+      "label": "Line 1b — Prior year unallowed credits from Worksheet 1, column (b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 587.967
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.1c_rental_active_total",
+      "label": "Line 1c — Add lines 1a and 1b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.2a_rehab_pre_1990_credits",
+      "label": "Line 2a — Credits from Worksheet 2, column (a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.2b_rehab_pre_1990_prior_unallowed",
+      "label": "Line 2b — Prior year unallowed credits from Worksheet 2, column (b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 491.972
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.2c_rehab_pre_1990_total",
+      "label": "Line 2c — Add lines 2a and 2b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 467.971
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.3a_low_income_post_1989_credits",
+      "label": "Line 3a — Credits from Worksheet 3, column (a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 431.968
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.3b_low_income_post_1989_prior_unallowed",
+      "label": "Line 3b — Prior year unallowed credits from Worksheet 3, column (b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.3c_low_income_post_1989_total",
+      "label": "Line 3c — Add lines 3a and 3b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.4a_other_passive_credits",
+      "label": "Line 4a — Credits from Worksheet 4, column (a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 359.971
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.4b_other_passive_prior_unallowed",
+      "label": "Line 4b — Prior year unallowed credits from Worksheet 4, column (b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 335.97
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.4c_other_passive_total",
+      "label": "Line 4c — Add lines 4a and 4b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.5_total_passive_credits",
+      "label": "Line 5 — Add lines 1c, 2c, 3c, and 4c",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.6_tax_net_passive_income",
+      "label": "Line 6 — Enter the tax attributable to net passive income",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.7_credits_over_passive_tax",
+      "label": "Line 7 — Subtract line 6 from line 5. If line 6 is more than or equal to line 5, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 275.969
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.8_smaller_line_1c_or_7",
+      "label": "Line 8 — Enter the smaller of line 1c or line 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.9_150000_threshold",
+      "label": "Line 9 — Enter $150,000. If married filing separately, see instructions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 203.969
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.10_modified_agi",
+      "label": "Line 10 — Enter modified adjusted gross income, but not less than zero",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.11_threshold_less_magi",
+      "label": "Line 11 — Subtract line 10 from line 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 155.97
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.12_half_of_line_11",
+      "label": "Line 12 — Multiply line 11 by 50% (0.50). Do not enter more than $25,000",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 131.969
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.13_form_8582_line_9",
+      "label": "Line 13 — Enter the amount, if any, from line 9 of Form 8582",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 119.97
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.14_remaining_special_allowance",
+      "label": "Line 14 — Subtract line 13 from line 12",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 107.971
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.15_tax_on_line_14",
+      "label": "Line 15 — Enter the tax attributable to the amount on line 14",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 95.969
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.0.line.16_smaller_line_8_or_15",
+      "label": "Line 16 — Enter the smaller of line 8 or line 15",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 83.967
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.17_amount_from_line_7",
+      "label": "Line 17 — Enter the amount from line 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 695.97
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.18_amount_from_line_16",
+      "label": "Line 18 — Enter the amount from line 16",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 683.971
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.19_line_17_minus_line_18",
+      "label": "Line 19 — Subtract line 18 from line 17",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 671.972
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.20_smaller_of_2c_or_19",
+      "label": "Line 20 — Enter the smaller of line 2c or line 19",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.21_income_limit_250000",
+      "label": "Line 21 — Enter $250,000. If married filing separately, see instructions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 635.972
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.22_modified_adjusted_gross_income",
+      "label": "Line 22 — Enter modified adjusted gross income, but not less than zero",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 599.972
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.23_line_21_minus_line_22",
+      "label": "Line 23 — Subtract line 22 from line 21",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 587.97
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.24_half_of_line_23",
+      "label": "Line 24 — Multiply line 23 by 50% (0.50). Do not enter more than $25,000. If married filing separately, see instructions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 563.972
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.25_form_8582_line_9",
+      "label": "Line 25 — Enter the amount, if any, from line 9 of Form 8582",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 551.97
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.26_line_24_minus_line_25",
+      "label": "Line 26 — Subtract line 25 from line 24",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.27_tax_attributable_to_line_26",
+      "label": "Line 27 — Enter the tax attributable to the amount on line 26 (see instructions)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.28_amount_from_line_18",
+      "label": "Line 28 — Enter the amount, if any, from line 18",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.29_line_27_minus_line_28",
+      "label": "Line 29 — Subtract line 28 from line 27",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 503.968
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.30_smaller_of_20_or_29",
+      "label": "Line 30 — Enter the smaller of line 20 or line 29",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.31_line_19_or_7_minus_16",
+      "label": "Line 31 — If you completed Part III, enter the amount from line 19. Otherwise, subtract line 16 from line 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 455.969
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.32_amount_from_line_30",
+      "label": "Line 32 — Enter the amount from line 30",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.33_line_31_minus_line_32",
+      "label": "Line 33 — Subtract line 32 from line 31",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 431.971
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.34_smaller_of_3c_or_33",
+      "label": "Line 34 — Enter the smaller of line 3c or line 33",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.35_tax_remaining_special_allowance",
+      "label": "Line 35 — Tax attributable to the remaining special allowance (see instructions)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.36_smaller_of_34_or_35",
+      "label": "Line 36 — Enter the smaller of line 34 or line 35",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 395.971
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.37_passive_activity_credit_allowed",
+      "label": "Line 37 — Passive Activity Credit Allowed. Add lines 6, 16, 30, and 36",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 335.97
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.38_elect_increase_basis",
+      "label": "Line 38 — If you disposed of your entire interest in a passive activity or former passive activity in a fully taxable transaction, and you elect to increase your basis in credit property used in that activity by the unallowed credit that reduced your basis in the property, check this box",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_01_0_[0]",
+      "position": {
+        "page": 1,
+        "x": 568,
+        "y": 290.964
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.39_passive_activity_disposed_name",
+      "label": "Line 39 — Name of passive activity disposed of",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 216.609,
+        "y": 275.966
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.40_credit_property_description",
+      "label": "Line 40 — Description of the credit property for which the election is being made",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 347.948,
+        "y": 263.964
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.40_credit_property_description_line2",
+      "label": "Line 40 — Description of the credit property for which the election is being made (second line)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 251.965
+      }
+    },
+    {
+      "fieldId": "form-8582-cr.1.line.41_unallowed_credit_reduced_basis",
+      "label": "Line 41 — Amount of unallowed credit that reduced your basis in the property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 503.45,
+        "y": 239.966
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8582-cr/blank.pdf",
+    "ingestedAt": "2026-11-21T04:50:13.229Z",
+    "totalFields": 52,
+    "skipped": 0,
+    "catalogEntries": 52
+  }
+}

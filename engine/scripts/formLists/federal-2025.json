@@ -522,12 +522,14 @@
       "name": "Form 6781",
       "title": "Gains and Losses From Section 1256 Contracts and Straddles",
       "maxPerReturn": "unbounded",
+      "short": "6781",
       "tier1": true
     },
     {
       "name": "Form 7203",
       "title": "S Corporation Shareholder Stock and Debt Basis Limitations",
       "maxPerReturn": "unbounded",
+      "short": "7203",
       "tier1": true
     },
     {
@@ -628,6 +630,7 @@
       "name": "Form 8582CR",
       "title": "Passive Activity Credit Limitations",
       "maxPerReturn": "1",
+      "short": "8582-cr",
       "tier1": true
     },
     {
@@ -715,6 +718,7 @@
       "name": "Form 8824",
       "title": "Like-Kind Exchanges",
       "maxPerReturn": "unbounded",
+      "short": "8824",
       "tier1": true
     },
     {

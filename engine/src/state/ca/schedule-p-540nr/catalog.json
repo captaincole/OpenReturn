@@ -1,0 +1,2888 @@
+{
+  "form": {
+    "formId": "schedule-p-540nr",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "Schedule P (540NR), Alternative Minimum Tax and Credit Limitations for Nonresidents or Part-Year Residents"
+  },
+  "fields": [
+    {
+      "fieldId": "schedule-p-540nr.0.header.name",
+      "label": "Name(s) as shown on Form 540NR.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on Form 540NR",
+      "position": {
+        "page": 0,
+        "x": 35.9798,
+        "y": 663.98
+      }
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.header.ssn",
+      "label": "Your Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Your Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 416.978,
+        "y": 664.003
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.1_standard_deduction",
+      "label": "Part 1, Line 1. If you itemized deductions, go to line 2. If you did not itemize deductions, enter your standard deduction from Form 540NR, line 18, and go to line 6.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part 1, Line 1. If you itemized deductions, go to line 2. If you did not itemize deductions, enter your standard deduction from Form 540NR, line 18, and go to line 6",
+      "position": {
+        "page": 0,
+        "x": 485.972,
+        "y": 629.894
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.2_medical_dental_expenses",
+      "label": "Line 2. Medical and dental expenses. Enter the smaller of federal Schedule A (Form 1040), line 4, or 2 and one-half % (.025) of federal Form 1040 or 1040-S R, line 11b. See instructions",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Medical and dental expenses. Enter the smaller of federal Schedule A (Form 1040), line 4, or 2 and one-half % (.025) of federal Form 1040 or 1040-S R, line 11b. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.972,
+        "y": 605.891
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.3_personal_real_property_taxes",
+      "label": "Line 3. Personal property taxes and real property taxes. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Personal property taxes and real property taxes. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.972,
+        "y": 593.889
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.4_home_mortgage_interest",
+      "label": "Line 4. Certain interest on a home mortgage not used to buy, build, or improve your home. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Certain interest on a home mortgage not used to buy, build, or improve your home. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.972,
+        "y": 581.877
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.5_miscellaneous_itemized_deductions",
+      "label": "Line 5. Miscellaneous itemized deductions. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Miscellaneous itemized deductions. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.972,
+        "y": 569.873
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.6_property_tax_refund",
+      "label": "Line 6. Refund of personal property taxes and real property taxes. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Refund of personal property taxes and real property taxes. See instructions",
+      "position": {
+        "page": 0,
+        "x": 487.286,
+        "y": 557.888
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.7_investment_interest_adjustment",
+      "label": "Line 7. Investment interest expense adjustment. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Investment interest expense adjustment. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.972,
+        "y": 533.885
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.8_post_1986_depreciation",
+      "label": "Line 8. Post-1986 depreciation. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Post-1986 depreciation. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.972,
+        "y": 521.897
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.9_adjusted_gain_loss",
+      "label": "Line 9. Adjusted gain or loss. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Adjusted gain or loss. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.972,
+        "y": 509.891
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.10_iso_cqso",
+      "label": "Line 10. Incentive stock options (I S Os) and California qualified stock options (C Q S Os). See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Incentive stock options (I S Os) and California qualified stock options (C Q S Os). See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.972,
+        "y": 497.901
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.11_passive_activities_adjustment",
+      "label": "Line 11. Passive activities adjustment. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. Passive activities adjustment. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.972,
+        "y": 485.894
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.12_estate_trust_beneficiaries",
+      "label": "Line 12. Beneficiaries of estates and trusts. Enter the amount from Schedule K-1 (541), line 12a.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. Beneficiaries of estates and trusts. Enter the amount from Schedule K-1 (541), line 12a",
+      "position": {
+        "page": 0,
+        "x": 485.992,
+        "y": 473.878
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13a_circulation_expenditures",
+      "label": "Line 13a. Circulation expenditures.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13a. Circulation expenditures",
+      "position": {
+        "page": 0,
+        "x": 378.771,
+        "y": 450.248
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13b_depletion",
+      "label": "Line 13b. Depletion.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13b. Depletion",
+      "position": {
+        "page": 0,
+        "x": 378.771,
+        "y": 438.243
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13c_installment_sales",
+      "label": "Line 13c. Installment sales.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13c. Installment sales",
+      "position": {
+        "page": 0,
+        "x": 378.771,
+        "y": 426.231
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13d_intangible_drilling_costs",
+      "label": "Line 13d. Intangible drilling costs.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13d. Intangible drilling costs",
+      "position": {
+        "page": 0,
+        "x": 378.771,
+        "y": 414.243
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13e_long_term_contracts",
+      "label": "Line 13e. Long-term contracts.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13e. Long-term contracts",
+      "position": {
+        "page": 0,
+        "x": 378.771,
+        "y": 402.239
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13f_loss_limitations",
+      "label": "Line 13f. Loss limitations.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13f. Loss limitations",
+      "position": {
+        "page": 0,
+        "x": 378.771,
+        "y": 390.234
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13g_mining_costs",
+      "label": "Line 13g. Mining costs.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13g. Mining costs",
+      "position": {
+        "page": 0,
+        "x": 378.771,
+        "y": 378.229
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13h_patrons_adjustment",
+      "label": "Line 13h. Patron's adjustment.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13h. Patron's adjustment",
+      "position": {
+        "page": 0,
+        "x": 378.771,
+        "y": 366.223
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13i_pollution_control_facilities",
+      "label": "Line 13i. Pollution control facilities.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13i. Pollution control facilities",
+      "position": {
+        "page": 0,
+        "x": 378.771,
+        "y": 354.255
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13j_research_experimental",
+      "label": "Line 13j. Research and experimental costs.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13j. Research and experimental costs",
+      "position": {
+        "page": 0,
+        "x": 378.771,
+        "y": 342.243
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13k_tax_shelter_farm_activities",
+      "label": "Line 13k. Tax shelter farm activities.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13k. Tax shelter farm activities",
+      "position": {
+        "page": 0,
+        "x": 378.771,
+        "y": 330.242
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13l_related_adjustments",
+      "label": "Line 13l. Related adjustments.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13l. Related adjustments",
+      "position": {
+        "page": 0,
+        "x": 378.771,
+        "y": 318.256
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13_other_adjustments_total",
+      "label": "Line 13. Add amounts on line a through line l, and enter total here.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Add amounts on line a through line l, and enter total here",
+      "position": {
+        "page": 0,
+        "x": 485.999,
+        "y": 303.501
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.14_total_adjustments_preferences",
+      "label": "Line 14. Total Adjustments and Preferences. Combine line 1 through line 13.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. Total Adjustments and Preferences. Combine line 1 through line 13",
+      "position": {
+        "page": 0,
+        "x": 485.999,
+        "y": 291.501
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.15_taxable_income",
+      "label": "Line 15. Enter taxable income from Form 540N R, line 19. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Enter taxable income from Form 540N R, line 19. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.999,
+        "y": 279.46
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.16_nol_deductions",
+      "label": "Line 16. Net operating loss (N O L) deduction from Schedule CA (540NR), Part II, Section B, line 9b1, line 9b2, and line 9b3, column B. Enter as a positive amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. Net operating loss (N O L) deduction from Schedule CA (540NR), Part II, Section B, line 9b1, line 9b2, and line 9b3, column B. Enter as a positive amount",
+      "position": {
+        "page": 0,
+        "x": 485.999,
+        "y": 255.486
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.17_amti_exclusion",
+      "label": "Line 17. A M T I exclusion. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. A M T I exclusion. See instructions",
+      "position": {
+        "page": 0,
+        "x": 488.008,
+        "y": 243.475
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.18_itemized_deductions_limitation",
+      "label": "Line 18. If your federal adjusted gross income (A G I) is less than the amount for your filing status (listed below), skip this line and go to line 19. If you itemized deductions and your federal A G I is more than the amount for your filing status, see instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. If your federal adjusted gross income (A G I) is less than the amount for your filing status (listed below), skip this line and go to line 19. If you itemized deductions and your federal A G I is more than the amount for your filing status, see instructions",
+      "position": {
+        "page": 0,
+        "x": 488.359,
+        "y": 207.459
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.19_combine_lines_14_through_18",
+      "label": "Line 19. Combine line 14 through line 18.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. Combine line 14 through line 18",
+      "position": {
+        "page": 0,
+        "x": 485.975,
+        "y": 159.49
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.20_amt_nol_deduction",
+      "label": "Line 20. Alternative minimum tax N O L deduction. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. Alternative minimum tax N O L deduction. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.975,
+        "y": 147.484
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.21_alternative_minimum_taxable_income",
+      "label": "Line 21. Alternative Minimum Taxable Income. Subtract line 20 from line 19 (if married/R D P filing separately and line 21 is more than $479,188, see instructions).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 21. Alternative Minimum Taxable Income. Subtract line 20 from line 19 (if married/R D P filing separately and line 21 is more than $479,188, see instructions)",
+      "position": {
+        "page": 0,
+        "x": 485.975,
+        "y": 123.5
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.22_exemption_amount",
+      "label": "Part II, Line 22. Exemption Amount. (If this schedule is for certain children under age 24, see instructions.).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, Line 22. Exemption Amount. (If this schedule is for certain children under age 24, see instructions.)",
+      "position": {
+        "page": 1,
+        "x": 491.007,
+        "y": 667.745
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.23_amti_less_exemption",
+      "label": "Line 23. Subtract line 22 from Part I, line 21. If zero or less, enter 0. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. Subtract line 22 from Part I, line 21. If zero or less, enter 0. See instructions",
+      "position": {
+        "page": 1,
+        "x": 491.007,
+        "y": 634.886
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.24_total_tentative_minimum_tax",
+      "label": "Line 24. Total Tentative Minimum Tax (T M T). Multiply line 23 by 7% (.07).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Total Tentative Minimum Tax (T M T). Multiply line 23 by 7% (.07)",
+      "position": {
+        "page": 1,
+        "x": 491.007,
+        "y": 622.882
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.25_california_agi",
+      "label": "Line 25. California adjusted gross income (A G I) from Schedule C A (540N R), Part IV, line 1.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25. California adjusted gross income (A G I) from Schedule C A (540N R), Part IV, line 1",
+      "position": {
+        "page": 1,
+        "x": 491.007,
+        "y": 610.887
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.26_nol_adjustment",
+      "label": "Line 26. N O L adjustment, if any, included on Schedule C A (540NR), Part II, Section B, line 9b1, line 9b2, and line 9b3, column E. Enter as a positive number.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 26. N O L adjustment, if any, included on Schedule C A (540NR), Part II, Section B, line 9b1, line 9b2, and line 9b3, column E. Enter as a positive number",
+      "position": {
+        "page": 1,
+        "x": 491.007,
+        "y": 586.879
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.27_amti_exclusion",
+      "label": "Line 27. Alternative Minimum Tax Income (A M T I) exclusion. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 27. Alternative Minimum Tax Income (A M T I) exclusion. See instructions",
+      "position": {
+        "page": 1,
+        "x": 491.457,
+        "y": 574.876
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.28_combine_lines_25_through_27",
+      "label": "Line 28. Combine line 25 through line 27.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 28. Combine line 25 through line 27",
+      "position": {
+        "page": 1,
+        "x": 491.007,
+        "y": 562.876
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29a_investment_interest_expense",
+      "label": "Line 29a. Investment interest expense.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29a. Investment interest expense",
+      "position": {
+        "page": 1,
+        "x": 181.979,
+        "y": 533.541
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29j_intangible_drilling_costs",
+      "label": "Line 29j. Intangible drilling costs.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29j. Intangible drilling costs",
+      "position": {
+        "page": 1,
+        "x": 424.538,
+        "y": 533.5
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29b_post_1986_depreciation",
+      "label": "Line 29b — Post-1986 depreciation",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29b. Post-1986 depreciation",
+      "position": {
+        "page": 1,
+        "x": 182.011,
+        "y": 521.602
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29k_long_term_contracts",
+      "label": "Line 29k. Long-term contracts.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29k. Long-term contracts",
+      "position": {
+        "page": 1,
+        "x": 424.538,
+        "y": 521.493
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29c_adjusted_gain_loss",
+      "label": "Line 29c. Adjusted gain or loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29c. Adjusted gain or loss",
+      "position": {
+        "page": 1,
+        "x": 182.02,
+        "y": 509.624
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29l_loss_limitations",
+      "label": "Line 29l. Loss limitations.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29l. Loss limitations",
+      "position": {
+        "page": 1,
+        "x": 424.538,
+        "y": 509.474
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29d_iso_cqso",
+      "label": "Line 29d. Incentive stock options and C Q S O s.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29d. Incentive stock options and C Q S O s",
+      "position": {
+        "page": 1,
+        "x": 181.979,
+        "y": 497.596
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29m_mining_costs",
+      "label": "Line 29m. Mining costs.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29m. Mining costs",
+      "position": {
+        "page": 1,
+        "x": 424.538,
+        "y": 497.487
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29e_passive_activities",
+      "label": "Line 29e. Passive activities.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29e. Passive activities",
+      "position": {
+        "page": 1,
+        "x": 181.979,
+        "y": 485.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29n_patrons_adjustment",
+      "label": "Line 29n. Patron's adjustment.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29n. Patron's adjustment",
+      "position": {
+        "page": 1,
+        "x": 424.538,
+        "y": 485.507
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29f_estate_trust_beneficiaries",
+      "label": "Line 29f. Beneficiaries of estates & trusts.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29f. Beneficiaries of estates & trusts",
+      "position": {
+        "page": 1,
+        "x": 182.011,
+        "y": 473.605
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29o_pollution_control_facilities",
+      "label": "Line 29o. Pollution control facilities.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29o. Pollution control facilities",
+      "position": {
+        "page": 1,
+        "x": 424.538,
+        "y": 473.479
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29g_circulation_expenditures",
+      "label": "Line 29g. Circulation expenditures.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29g. Circulation expenditures",
+      "position": {
+        "page": 1,
+        "x": 181.968,
+        "y": 461.605
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29p_research_experimental",
+      "label": "Line 29p. Research and experimental costs.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29p. Research and experimental costs",
+      "position": {
+        "page": 1,
+        "x": 424.538,
+        "y": 461.486
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29h_depletion",
+      "label": "Line 29h. Depletion.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29h. Depletion",
+      "position": {
+        "page": 1,
+        "x": 182.033,
+        "y": 449.588
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29q_tax_shelter_farm_activities",
+      "label": "Line 29q. Tax shelter farm activities.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29q. Tax shelter farm activities",
+      "position": {
+        "page": 1,
+        "x": 424.538,
+        "y": 449.506
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29i_installment_sales",
+      "label": "Line 29i. Installment sales.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29i. Installment sales",
+      "position": {
+        "page": 1,
+        "x": 182.011,
+        "y": 437.602
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29r_related_adjustments",
+      "label": "Line 29r. Related adjustments.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29r. Related adjustments",
+      "position": {
+        "page": 1,
+        "x": 424.538,
+        "y": 437.465
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29_adjustments_preferences_total",
+      "label": "Line 29. Add amounts on line a through line r, and enter total here.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29. Add amounts on line a through line r, and enter total here",
+      "position": {
+        "page": 1,
+        "x": 490.98,
+        "y": 411.826
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.30_combine_lines_28_and_29",
+      "label": "Line 30. Combine line 28 and line 29.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 30. Combine line 28 and line 29",
+      "position": {
+        "page": 1,
+        "x": 490.98,
+        "y": 399.834
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.31_california_amt_nol_deduction",
+      "label": "Line 31. California Alternative Minimum Tax (A M T) net operating loss (N O L) deduction. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 31. California Alternative Minimum Tax (A M T) net operating loss (N O L) deduction. See instructions",
+      "position": {
+        "page": 1,
+        "x": 490.98,
+        "y": 387.819
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.32_california_amt_agi",
+      "label": "Line 32. California A M T A G I. Subtract line 31 from line 30. If you did not itemize deductions, enter the result here and on line 40 and skip line 33 through line 39. If you itemized deductions, enter the result here and continue to line 33.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 32. California A M T A G I. Subtract line 31 from line 30. If you did not itemize deductions, enter the result here and on line 40 and skip line 33 through line 39. If you itemized deductions, enter the result here and continue to line 33",
+      "position": {
+        "page": 1,
+        "x": 490.98,
+        "y": 363.828
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.33_itemized_deductions",
+      "label": "Line 33. Itemized deductions (before federal A G I limitation and proration). Enter the amount from Schedule C A (540NR), Part III, line 28.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 33. Itemized deductions (before federal A G I limitation and proration). Enter the amount from Schedule C A (540NR), Part III, line 28",
+      "position": {
+        "page": 1,
+        "x": 490.98,
+        "y": 339.83
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.34a_medical_dental_expense",
+      "label": "Line 34a. Medical and dental expense, enter amount from Part I, line 2.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 34a. Medical and dental expense, enter amount from Part I, line 2",
+      "position": {
+        "page": 1,
+        "x": 376.022,
+        "y": 315.168
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.34b_personal_real_property_taxes",
+      "label": "Line 34b. Personal property taxes and real property taxes, enter amount from Part I, line 3.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 34b. Personal property taxes and real property taxes, enter amount from Part I, line 3",
+      "position": {
+        "page": 1,
+        "x": 376.022,
+        "y": 303.175
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.34c_home_mortgage_interest",
+      "label": "Line 34c. Interest on home mortgage, enter amount from Part I, line 4.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 34c. Interest on home mortgage, enter amount from Part I, line 4",
+      "position": {
+        "page": 1,
+        "x": 376.022,
+        "y": 291.192
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.34d_miscellaneous_itemized_deductions",
+      "label": "Line 34d. Miscellaneous itemized deductions, enter amount from Part I, line 5.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 34d. Miscellaneous itemized deductions, enter amount from Part I, line 5",
+      "position": {
+        "page": 1,
+        "x": 376.022,
+        "y": 279.141
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.34e_investment_interest_adjustment",
+      "label": "Line 34e. Investment interest expense adjustment, enter amount from Part I, line 7.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 34e. Investment interest expense adjustment, enter amount from Part I, line 7",
+      "position": {
+        "page": 1,
+        "x": 376.022,
+        "y": 267.163
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.34_itemized_deductions_part1_total",
+      "label": "Line 34. Combine amounts on line a through line e, and enter total here.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 34. Combine amounts on line a through line e, and enter total here",
+      "position": {
+        "page": 1,
+        "x": 491.769,
+        "y": 255.807
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.35_total_amt_itemized_deductions",
+      "label": "Line 35. Total A M T Itemized Deductions. Combine line 33 and line 34.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 35. Total A M T Itemized Deductions. Combine line 33 and line 34",
+      "position": {
+        "page": 1,
+        "x": 490.978,
+        "y": 243.828
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.36_total_amti",
+      "label": "Line 36. Total A M T I. Enter the amount from Part I, line 21.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 36. Total A M T I. Enter the amount from Part I, line 21",
+      "position": {
+        "page": 1,
+        "x": 490.978,
+        "y": 231.833
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.37_total_amt_agi",
+      "label": "Line 37. Total A M T A G I. Add line 35 and line 36.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 37. Total A M T A G I. Add line 35 and line 36",
+      "position": {
+        "page": 1,
+        "x": 490.978,
+        "y": 219.792
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.38_amt_itemized_deduction_percentage",
+      "label": "Line 38. A M T Itemized Deduction Percentage. Divide line 32 by line 37. Do not enter more than 1.0000. Enter 6 digits including decimal.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 38. A M T Itemized Deduction Percentage. Divide line 32 by line 37. Do not enter more than 1.0000. Enter 6 digits including decimal",
+      "position": {
+        "page": 1,
+        "x": 492.404,
+        "y": 207.145
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.39_prorated_amt_itemized_deductions",
+      "label": "Line 39. Prorated A M T Itemized Deductions. Multiply line 35 by line 38.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 39. Prorated A M T Itemized Deductions. Multiply line 35 by line 38",
+      "position": {
+        "page": 1,
+        "x": 491.015,
+        "y": 195.829
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.40_california_amti",
+      "label": "Line 40. California A M T I. Subtract line 39 from line 32.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 40. California A M T I. Subtract line 39 from line 32",
+      "position": {
+        "page": 1,
+        "x": 491.015,
+        "y": 183.812
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.41_total_tmt",
+      "label": "Line 41. Total T M T. Enter the amount from line 24.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 41. Total T M T. Enter the amount from line 24",
+      "position": {
+        "page": 1,
+        "x": 491.015,
+        "y": 171.828
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.42_california_amt_rate",
+      "label": "Line 42. California A M T Rate. Divide line 41 by amount from Part I, line 21. Enter 6 digits including decimal.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 42. California A M T Rate. Divide line 41 by amount from Part I, line 21. Enter 6 digits including decimal",
+      "position": {
+        "page": 1,
+        "x": 492.557,
+        "y": 159.18
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.43_california_tmt",
+      "label": "Line 43. California T M T. Multiply line 40 by line 42.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 43. California T M T. Multiply line 40 by line 42",
+      "position": {
+        "page": 1,
+        "x": 490.991,
+        "y": 147.802
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.44_regular_tax",
+      "label": "Line 44. Regular Tax. Enter the amount from Form 540N R, line 37.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 44. Regular Tax. Enter the amount from Form 540N R, line 37",
+      "position": {
+        "page": 1,
+        "x": 490.988,
+        "y": 135.813
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.45_alternative_minimum_tax",
+      "label": "Line 45. Alternative Minimum Tax. Subtract line 44 from line 43. If zero or less, enter 0 here and on Form 540NR, line 71. Continue to Part III to figure your allowable credits. (If you have a carryover credit for solar energy or commercial solar energy, also enter the result on Side 3, Part III, Section C, line 23 or 24). If you make estimated tax payments for taxable year 2026, enter amount from line 45 on the 2026 Form 540-ES, California Estimated Tax Worksheet, line 16",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 45. Alternative Minimum Tax. Subtract line 44 from line 43. If zero or less, enter 0 here and on Form 540NR, line 71. Continue to Part III to figure your allowable credits. (If you have a carryover credit for solar energy or commercial solar energy, also enter the result on Side 3, Part III, Section C, line 23 or 24). If you make estimated tax payments for taxable year 2026, enter amount from line 45 on the 2026 Form 540-ES, California Estimated Tax Worksheet, line 16",
+      "position": {
+        "page": 1,
+        "x": 490.994,
+        "y": 87.81
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.1_tax_from_form_540nr_line_42",
+      "label": "Part III, Line 1. Enter the amount from Form 540NR, line 42.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part III, Line 1. Enter the amount from Form 540NR, line 42",
+      "position": {
+        "page": 2,
+        "x": 486.014,
+        "y": 698.379
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.2_tentative_minimum_tax",
+      "label": "Line 2. Enter the tentative minimum tax from Side 2, Part II, line 43.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Enter the tentative minimum tax from Side 2, Part II, line 43",
+      "position": {
+        "page": 2,
+        "x": 485.996,
+        "y": 686.371
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.3_excess_tax_offset_by_credits_col_c",
+      "label": "Section A, Line 3. Subtract line 2 from line 1. If zero or less, enter 0 and see instructions. This is your excess tax which may be offset by credits, (c) Tax balance that may be offset by credits",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Section A, Line 3. Subtract line 2 from line 1. If zero or less, enter 0 and see instructions. This is your excess tax which may be offset by credits, (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.949,
+        "y": 617.148
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.4_prison_inmate_labor_credit_col_a",
+      "label": "Section A1, Line 4. Code: 162 Prison Inmate Labor Credit (FTB 3507), (a) Credit amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Section A1, Line 4. Code: 162 Prison Inmate Labor Credit (FTB 3507), (a) Credit amount",
+      "position": {
+        "page": 2,
+        "x": 352.417,
+        "y": 593.155
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.4_prison_inmate_labor_credit_col_b",
+      "label": "Line 4. Code: 162 Prison Inmate Labor Credit (F T B 3507), (b) Credit used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Code: 162 Prison Inmate Labor Credit (F T B 3507), (b) Credit used this year",
+      "position": {
+        "page": 2,
+        "x": 413.947,
+        "y": 593.135
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.4_prison_inmate_labor_credit_col_c",
+      "label": "Line 4. Code: 162 Prison Inmate Labor Credit (F T B 3507), (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Code: 162 Prison Inmate Labor Credit (F T B 3507), (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.949,
+        "y": 593.135
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.5_child_dependent_care_credit_col_a",
+      "label": "Line 5. Code: 232 Child and dependent care expenses credit (F T B 3506), (a) Credit amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Code: 232 Child and dependent care expenses credit (F T B 3506), (a) Credit amount",
+      "position": {
+        "page": 2,
+        "x": 352.417,
+        "y": 581.163
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.5_child_dependent_care_credit_col_b",
+      "label": "Line 5. Code: 232 Child and dependent care expenses credit (F T B 3506), (b) Credit used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Code: 232 Child and dependent care expenses credit (F T B 3506), (b) Credit used this year",
+      "position": {
+        "page": 2,
+        "x": 413.947,
+        "y": 581.163
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.5_child_dependent_care_credit_col_c",
+      "label": "Line 5. Code: 232 Child and dependent care expenses credit (F T B 3506), (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Code: 232 Child and dependent care expenses credit (F T B 3506), (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.949,
+        "y": 581.163
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.6_credit_code",
+      "label": "Section A2, Line 6. Code (3 digits).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Section A2, Line 6. Code (3 digits)",
+      "position": {
+        "page": 2,
+        "x": 81.1637,
+        "y": 557.505
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.6_credit_name",
+      "label": "Line 6. Credit Name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Credit Name",
+      "position": {
+        "page": 2,
+        "x": 184.8,
+        "y": 557.505
+      }
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.6_credit_amount_col_a",
+      "label": "Line 6. (a) Credit amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. (a) Credit amount",
+      "position": {
+        "page": 2,
+        "x": 352.417,
+        "y": 557.13
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.6_credit_used_col_b",
+      "label": "Line 6. (b) Credit used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. (b) Credit used this year",
+      "position": {
+        "page": 2,
+        "x": 413.947,
+        "y": 557.13
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.6_tax_balance_col_c",
+      "label": "Line 6. (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.949,
+        "y": 557.13
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.6_credit_carryover_col_d",
+      "label": "Line 6. (d) Credit carryover.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. (d) Credit carryover",
+      "position": {
+        "page": 2,
+        "x": 528.434,
+        "y": 557.13
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.7_credit_code",
+      "label": "Line 7. Code (3 digits).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Code (3 digits)",
+      "position": {
+        "page": 2,
+        "x": 81.1637,
+        "y": 545.543
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.7_credit_name",
+      "label": "Line 7. Credit Name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Credit Name",
+      "position": {
+        "page": 2,
+        "x": 184.8,
+        "y": 545.543
+      }
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.7_credit_amount_col_a",
+      "label": "Line 7. (a) Credit amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. (a) Credit amount",
+      "position": {
+        "page": 2,
+        "x": 352.417,
+        "y": 545.179
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.7_credit_used_col_b",
+      "label": "Line 7. (b) Credit used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. (b) Credit used this year",
+      "position": {
+        "page": 2,
+        "x": 413.947,
+        "y": 545.179
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.7_tax_balance_col_c",
+      "label": "Line 7. (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.949,
+        "y": 545.179
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.7_credit_carryover_col_d",
+      "label": "Line 7. (d) Credit carryover.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. (d) Credit carryover",
+      "position": {
+        "page": 2,
+        "x": 528.434,
+        "y": 545.179
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.8_credit_code",
+      "label": "Line 8. Code (3 digits).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Code (3 digits)",
+      "position": {
+        "page": 2,
+        "x": 81.1637,
+        "y": 533.508
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.8_credit_name",
+      "label": "Line 8. Credit Name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Credit Name",
+      "position": {
+        "page": 2,
+        "x": 185.127,
+        "y": 533.508
+      }
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.8_credit_amount_col_a",
+      "label": "Line 8. (a) Credit amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. (a) Credit amount",
+      "position": {
+        "page": 2,
+        "x": 352.417,
+        "y": 533.163
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.8_credit_used_col_b",
+      "label": "Line 8. (b) Credit used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. (b) Credit used this year",
+      "position": {
+        "page": 2,
+        "x": 413.947,
+        "y": 533.163
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.8_tax_balance_col_c",
+      "label": "Line 8. (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.949,
+        "y": 533.163
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.8_credit_carryover_col_d",
+      "label": "Line 8. (d) Credit carryover.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. (d) Credit carryover",
+      "position": {
+        "page": 2,
+        "x": 528.434,
+        "y": 533.163
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.9_credit_code",
+      "label": "Line 9. Code (3 digits).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Code (3 digits)",
+      "position": {
+        "page": 2,
+        "x": 81.1637,
+        "y": 521.505
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.9_credit_name",
+      "label": "Line 9. Credit Name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Credit Name",
+      "position": {
+        "page": 2,
+        "x": 184.8,
+        "y": 521.505
+      }
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.9_credit_amount_col_a",
+      "label": "Line 9. (a) Credit amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. (a) Credit amount",
+      "position": {
+        "page": 2,
+        "x": 352.417,
+        "y": 521.163
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.9_credit_used_col_b",
+      "label": "Line 9. (b) Credit used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. (b) Credit used this year",
+      "position": {
+        "page": 2,
+        "x": 413.947,
+        "y": 521.163
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.9_tax_balance_col_c",
+      "label": "Line 9. (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.949,
+        "y": 521.163
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.9_credit_carryover_col_d",
+      "label": "Line 9. (d) Credit carryover.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. (d) Credit carryover",
+      "position": {
+        "page": 2,
+        "x": 528.434,
+        "y": 521.163
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.10_prior_year_amt_entry",
+      "label": "Line 10. Code: 188 Credit for prior year alternative minimum tax.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Code: 188 Credit for prior year alternative minimum tax",
+      "position": {
+        "page": 2,
+        "x": 239.984,
+        "y": 509.489
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.10_prior_year_amt_credit_amount_col_a",
+      "label": "Line 10. (a) Credit amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. (a) Credit amount",
+      "position": {
+        "page": 2,
+        "x": 352.417,
+        "y": 507.146
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.10_prior_year_amt_credit_used_col_b",
+      "label": "Line 10. (b) Credit used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. (b) Credit used this year",
+      "position": {
+        "page": 2,
+        "x": 413.947,
+        "y": 507.105
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.10_prior_year_amt_tax_balance_col_c",
+      "label": "Line 10. (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.949,
+        "y": 507.105
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.10_prior_year_amt_credit_carryover_col_d",
+      "label": "Line 10. (d) Credit carryover.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. (d) Credit carryover",
+      "position": {
+        "page": 2,
+        "x": 528.434,
+        "y": 507.105
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.11_tax_balance_col_c",
+      "label": "Section B, Line 11. If Part III, line 3 is zero, enter the amount from line 1. If line 3 is more than zero, enter the total of line 2 and the last entry in column (c), (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Section B, Line 11. If Part III, line 3 is zero, enter the amount from line 1. If line 3 is more than zero, enter the total of line 2 and the last entry in column (c), (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.949,
+        "y": 472.984
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.12_joint_custody_hoh_credit_from_540nr",
+      "label": "Section B1, Line 12. Code: 170 Credit for joint custody head of household Credit from Form 540NR",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Section B1, Line 12. Code: 170 Credit for joint custody head of household Credit from Form 540NR",
+      "position": {
+        "page": 2,
+        "x": 97.3529,
+        "y": 425.501
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.12_joint_custody_hoh_credit_percentage",
+      "label": "Line 12. Credit percentage. Enter 6 digits including decimal.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. Credit percentage. Enter 6 digits including decimal",
+      "position": {
+        "page": 2,
+        "x": 239.955,
+        "y": 425.501
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.12_joint_custody_hoh_credit_amount_col_a",
+      "label": "Line 12. (a) Credit amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. (a) Credit amount",
+      "position": {
+        "page": 2,
+        "x": 352.417,
+        "y": 425.146
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.12_joint_custody_hoh_credit_used_col_b",
+      "label": "Line 12. (b) Credit used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. (b) Credit used this year",
+      "position": {
+        "page": 2,
+        "x": 413.947,
+        "y": 425.146
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.12_joint_custody_hoh_tax_balance_col_c",
+      "label": "Line 12. (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.949,
+        "y": 425.146
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.13_dependent_parent_credit_from_540nr",
+      "label": "Line 13. Code: 173 Credit for dependent parent Credit from Form 540NR.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Code: 173 Credit for dependent parent Credit from Form 540NR",
+      "position": {
+        "page": 2,
+        "x": 97.3529,
+        "y": 377.468
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.13_dependent_parent_credit_percentage",
+      "label": "Line 13. Credit percentage. Enter 6 digits including decimal.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Credit percentage. Enter 6 digits including decimal",
+      "position": {
+        "page": 2,
+        "x": 240.282,
+        "y": 377.468
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.13_dependent_parent_credit_amount_col_a",
+      "label": "Line 13. (a) Credit amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. (a) Credit amount",
+      "position": {
+        "page": 2,
+        "x": 352.417,
+        "y": 377.179
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.13_dependent_parent_credit_used_col_b",
+      "label": "Line 13. (b) Credit used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. (b) Credit used this year",
+      "position": {
+        "page": 2,
+        "x": 413.947,
+        "y": 377.179
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.13_dependent_parent_tax_balance_col_c",
+      "label": "Line 13. (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.949,
+        "y": 377.179
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.14_senior_hoh_credit_from_540nr",
+      "label": "Line 14. Code: 163 Credit for senior head of household Credit from Form 540NR.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. Code: 163 Credit for senior head of household Credit from Form 540NR",
+      "position": {
+        "page": 2,
+        "x": 97.3529,
+        "y": 329.468
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.14_senior_hoh_credit_percentage",
+      "label": "Line 14. Credit percentage. Enter 6 digits including decimal.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. Credit percentage. Enter 6 digits including decimal",
+      "position": {
+        "page": 2,
+        "x": 241.134,
+        "y": 329.468
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.14_senior_hoh_credit_amount_col_a",
+      "label": "Line 14. (a) Credit amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. (a) Credit amount",
+      "position": {
+        "page": 2,
+        "x": 352.483,
+        "y": 329.157
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.14_senior_hoh_credit_used_col_b",
+      "label": "Line 14. (b) Credit used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. (b) Credit used this year",
+      "position": {
+        "page": 2,
+        "x": 413.947,
+        "y": 329.179
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.14_senior_hoh_tax_balance_col_c",
+      "label": "Line 14. (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.949,
+        "y": 329.148
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.15_renters_credit_amount_col_a",
+      "label": "Line 15. Nonrefundable renter's credit, (a) Credit amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Nonrefundable renter's credit, (a) Credit amount",
+      "position": {
+        "page": 2,
+        "x": 352.417,
+        "y": 305.163
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.15_renters_credit_used_col_b",
+      "label": "Line 15. Nonrefundable renter's credit, (b) Credit used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Nonrefundable renter's credit, (b) Credit used this year",
+      "position": {
+        "page": 2,
+        "x": 413.947,
+        "y": 305.163
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.15_renters_tax_balance_col_c",
+      "label": "Line 15. Nonrefundable renter's credit, (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Nonrefundable renter's credit, (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.963,
+        "y": 305.163
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.16_credit_code",
+      "label": "Section B2, Line 16. Code (3 digits).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Section B2, Line 16. Code (3 digits)",
+      "position": {
+        "page": 2,
+        "x": 81.2502,
+        "y": 281.526
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.16_credit_name",
+      "label": "Line 16. Credit Name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. Credit Name",
+      "position": {
+        "page": 2,
+        "x": 184.8,
+        "y": 281.526
+      }
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.16_credit_amount_col_a",
+      "label": "Line 16. (a) Credit amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. (a) Credit amount",
+      "position": {
+        "page": 2,
+        "x": 352.417,
+        "y": 281.146
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.16_credit_used_col_b",
+      "label": "Line 16. (b) Credit used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. (b) Credit used this year",
+      "position": {
+        "page": 2,
+        "x": 413.947,
+        "y": 281.146
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.16_tax_balance_col_c",
+      "label": "Line 16. (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.949,
+        "y": 281.146
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.16_credit_carryover_col_d",
+      "label": "Line 16. (d) Credit carryover.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. (d) Credit carryover",
+      "position": {
+        "page": 2,
+        "x": 528.434,
+        "y": 281.146
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.17_credit_code",
+      "label": "Line 17. Code (3 digits).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. Code (3 digits)",
+      "position": {
+        "page": 2,
+        "x": 81.2502,
+        "y": 269.485
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.17_credit_name",
+      "label": "Line 17. Credit Name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. Credit Name",
+      "position": {
+        "page": 2,
+        "x": 184.8,
+        "y": 269.485
+      }
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.17_credit_amount_col_a",
+      "label": "Line 17. (a) Credit amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. (a) Credit amount",
+      "position": {
+        "page": 2,
+        "x": 352.417,
+        "y": 269.146
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.17_credit_used_col_b",
+      "label": "Line 17. (b) Credit used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. (b) Credit used this year",
+      "position": {
+        "page": 2,
+        "x": 413.947,
+        "y": 269.146
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.17_tax_balance_col_c",
+      "label": "Line 17. (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.883,
+        "y": 269.166
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.17_credit_carryover_col_d",
+      "label": "Line 17. (d) Credit carryover.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. (d) Credit carryover",
+      "position": {
+        "page": 2,
+        "x": 528.434,
+        "y": 269.146
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.18_credit_code",
+      "label": "Line 18. Code (3 digits).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. Code (3 digits)",
+      "position": {
+        "page": 2,
+        "x": 81.2721,
+        "y": 257.512
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.18_credit_name",
+      "label": "Line 18. Credit Name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. Credit Name",
+      "position": {
+        "page": 2,
+        "x": 184.8,
+        "y": 257.512
+      }
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.18_credit_amount_col_a",
+      "label": "Line 18. (a) Credit amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (a) Credit amount",
+      "position": {
+        "page": 2,
+        "x": 352.417,
+        "y": 257.163
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.18_credit_used_col_b",
+      "label": "Line 18. (b) Credit used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (b) Credit used this year",
+      "position": {
+        "page": 2,
+        "x": 413.947,
+        "y": 257.163
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.18_tax_balance_col_c",
+      "label": "Line 18. (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.918,
+        "y": 257.163
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.18_credit_carryover_col_d",
+      "label": "Line 18. (d) Credit carryover.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (d) Credit carryover",
+      "position": {
+        "page": 2,
+        "x": 528.434,
+        "y": 257.163
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.19_credit_code",
+      "label": "Line 19. Code (3 digits).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. Code (3 digits)",
+      "position": {
+        "page": 2,
+        "x": 81.283,
+        "y": 245.485
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.19_credit_name",
+      "label": "Line 19. Credit Name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. Credit Name",
+      "position": {
+        "page": 2,
+        "x": 184.8,
+        "y": 245.485
+      }
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.19_credit_amount_col_a",
+      "label": "Line 19. (a) Credit amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. (a) Credit amount",
+      "position": {
+        "page": 2,
+        "x": 352.417,
+        "y": 244.17
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.19_credit_used_col_b",
+      "label": "Line 19. (b) Credit used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. (b) Credit used this year",
+      "position": {
+        "page": 2,
+        "x": 413.947,
+        "y": 244.17
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.19_tax_balance_col_c",
+      "label": "Line 19. (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.918,
+        "y": 244.17
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.19_credit_carryover_col_d",
+      "label": "Line 19. (d) Credit carryover.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. (d) Credit carryover",
+      "position": {
+        "page": 2,
+        "x": 528.434,
+        "y": 244.17
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.20_other_state_tax_credit_amount_col_a",
+      "label": "Section B3, Line 20. Code: 187 Other state tax credit, (a) Credit amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Section B3, Line 20. Code: 187 Other state tax credit, (a) Credit amount",
+      "position": {
+        "page": 2,
+        "x": 352.417,
+        "y": 221.174
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.20_other_state_tax_credit_used_col_b",
+      "label": "Line 20. Code: 187 Other state tax credit, (b) Credit used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. Code: 187 Other state tax credit, (b) Credit used this year",
+      "position": {
+        "page": 2,
+        "x": 413.947,
+        "y": 221.174
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.20_other_state_tax_tax_balance_col_c",
+      "label": "Line 20. Code: 187 Other state tax credit, (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. Code: 187 Other state tax credit, (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.949,
+        "y": 221.164
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.21_pte_elective_tax_credit_amount_col_a",
+      "label": "Section B4, Line 21. Code: 242 Pass-through entity elective tax credit, (a) Credit amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Section B4, Line 21. Code: 242 Pass-through entity elective tax credit, (a) Credit amount",
+      "position": {
+        "page": 2,
+        "x": 352.417,
+        "y": 197.143
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.21_pte_elective_tax_credit_used_col_b",
+      "label": "Line 21. Code: 242 Pass-through entity elective tax credit, (b) Credit used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 21. Code: 242 Pass-through entity elective tax credit, (b) Credit used this year",
+      "position": {
+        "page": 2,
+        "x": 413.947,
+        "y": 197.176
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.21_pte_elective_tax_tax_balance_col_c",
+      "label": "Line 21. Code: 242 Pass-through entity elective tax credit, (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 21. Code: 242 Pass-through entity elective tax credit, (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.949,
+        "y": 197.143
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.21_pte_elective_tax_credit_carryover_col_d",
+      "label": "Line 21. Code: 242 Pass-through entity elective tax credit, (d) Credit carryover.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 21. Code: 242 Pass-through entity elective tax credit, (d) Credit carryover",
+      "position": {
+        "page": 2,
+        "x": 528.434,
+        "y": 197.143
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.22_alternative_minimum_tax_col_c",
+      "label": "Section C, Line 22. Enter your alternative minimum tax from Side 2, Part II, line 45, (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Section C, Line 22. Enter your alternative minimum tax from Side 2, Part II, line 45, (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.918,
+        "y": 173.139
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.23_solar_energy_carryover_credit_amount_col_a",
+      "label": "Line 23. Code: 180 Solar energy credit carryover from Section B2, column (d), (a) Credit amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. Code: 180 Solar energy credit carryover from Section B2, column (d), (a) Credit amount",
+      "position": {
+        "page": 2,
+        "x": 352.417,
+        "y": 161.161
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.23_solar_energy_carryover_credit_used_col_b",
+      "label": "Line 23. Code: 180 Solar energy credit carryover from Section B2, column (d), (b) Credit used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. Code: 180 Solar energy credit carryover from Section B2, column (d), (b) Credit used this year",
+      "position": {
+        "page": 2,
+        "x": 413.947,
+        "y": 161.161
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.23_solar_energy_carryover_tax_balance_col_c",
+      "label": "Line 23. Code: 180 Solar energy credit carryover from Section B2, column (d), (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. Code: 180 Solar energy credit carryover from Section B2, column (d), (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.949,
+        "y": 161.161
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.23_solar_energy_carryover_credit_carryover_col_d",
+      "label": "Line 23. Code: 180 Solar energy credit carryover from Section B2, column (d), (d) Credit carryover.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. Code: 180 Solar energy credit carryover from Section B2, column (d), (d) Credit carryover",
+      "position": {
+        "page": 2,
+        "x": 528.609,
+        "y": 161.049
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.24_commercial_solar_carryover_credit_amount_col_a",
+      "label": "Line 24. Code: 181 Commercial solar energy credit carryover from Section B2, column (d), (a) Credit amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Code: 181 Commercial solar energy credit carryover from Section B2, column (d), (a) Credit amount",
+      "position": {
+        "page": 2,
+        "x": 352.407,
+        "y": 137.153
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.24_commercial_solar_carryover_credit_used_col_b",
+      "label": "Line 24. Code: 181 Commercial solar energy credit carryover from Section B2, column (d), (b) Credit used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Code: 181 Commercial solar energy credit carryover from Section B2, column (d), (b) Credit used this year",
+      "position": {
+        "page": 2,
+        "x": 413.947,
+        "y": 137.153
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.24_commercial_solar_carryover_tax_balance_col_c",
+      "label": "Line 24. Code: 181 Commercial solar energy credit carryover from Section B2, column (d), (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Code: 181 Commercial solar energy credit carryover from Section B2, column (d), (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.949,
+        "y": 137.153
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.24_commercial_solar_carryover_credit_carryover_col_d",
+      "label": "Line 24. Code: 181 Commercial solar energy credit carryover from Section B2, column (d), (d) Credit carryover.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Code: 181 Commercial solar energy credit carryover from Section B2, column (d), (d) Credit carryover",
+      "position": {
+        "page": 2,
+        "x": 528.434,
+        "y": 137.153
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.25_adjusted_amt_col_c",
+      "label": "Line 25. Adjusted A M T. Enter the balance from line 24, column (c) here and on Form 540NR, line 71, (c) Tax balance that may be offset by credits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25. Adjusted A M T. Enter the balance from line 24, column (c) here and on Form 540NR, line 71, (c) Tax balance that may be offset by credits",
+      "position": {
+        "page": 2,
+        "x": 471.949,
+        "y": 113.127
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/schedule-p-540nr/blank.pdf",
+    "ingestedAt": "2026-11-21T04:50:18.489Z",
+    "totalFields": 180,
+    "skipped": 0,
+    "catalogEntries": 180
+  }
+}

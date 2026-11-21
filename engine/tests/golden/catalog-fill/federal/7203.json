@@ -1,0 +1,1689 @@
+{
+  "formId": "form-7203",
+  "fieldCount": 187,
+  "entries": [
+    {
+      "fieldId": "form-7203.0.header.a_s_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+          "text": "T-AAV8D"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.header.b_employer_identification_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+          "text": "T-1JTV1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.header.c_stock_block",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+          "text": "T-V06YJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.header.d1_original_shareholder",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.header.d2_purchased",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.header.d3_inherited",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.header.d4_gift",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.header.d5_other",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.header.d5_other_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+          "text": "T-YEB5N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.header.e_section_1367_election",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "T-1HPQ0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.header.shareholder_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-VODXL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.1_stock_basis_beginning",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+          "text": "1,460"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.10_stock_basis_before_loss_items",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+          "text": "1,184"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.11_allowable_loss_deduction_items",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+          "text": "4,282"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.12_debt_basis_restoration",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+          "text": "8,781"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.13_other_items_decrease_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+          "text": "4,830"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.14_total_loss_restoration_other",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+          "text": "3,682"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.15_stock_basis_end",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_35[0]",
+          "text": "2,820"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.16_loan_balance_beginning_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line16[0].f1_36[0]",
+          "text": "7,528"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.16_loan_balance_beginning_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line16[0].f1_37[0]",
+          "text": "5,618"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.16_loan_balance_beginning_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line16[0].f1_38[0]",
+          "text": "1,857"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.16_loan_balance_beginning_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line16[0].f2_39[0]",
+          "text": "5,143"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.17_additional_loans_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line17[0].f1_40[0]",
+          "text": "5,465"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.17_additional_loans_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line17[0].f1_41[0]",
+          "text": "3,536"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.17_additional_loans_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line17[0].f1_42[0]",
+          "text": "8,766"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.17_additional_loans_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line17[0].f1_43[0]",
+          "text": "2,377"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.18_loan_balance_before_repayment_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line18[0].f1_44[0]",
+          "text": "8,827"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.18_loan_balance_before_repayment_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line18[0].f1_45[0]",
+          "text": "5,948"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.18_loan_balance_before_repayment_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line18[0].f1_46[0]",
+          "text": "5,945"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.18_loan_balance_before_repayment_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line18[0].f1_47[0]",
+          "text": "5,899"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.19_principal_debt_repayment_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line19[0].f1_48[0]",
+          "text": "9,682"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.19_principal_debt_repayment_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line19[0].f1_49[0]",
+          "text": "8,704"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.19_principal_debt_repayment_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line19[0].f1_50[0]",
+          "text": "4,407"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.19_principal_debt_repayment_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line19[0].f1_51[0]",
+          "text": "7,495"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.2_capital_contributions_additional_stock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+          "text": "3,965"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.20_loan_balance_end_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line20[0].f1_52[0]",
+          "text": "9,004"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.20_loan_balance_end_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line20[0].f1_53[0]",
+          "text": "4,554"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.20_loan_balance_end_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line20[0].f1_54[0]",
+          "text": "2,999"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.20_loan_balance_end_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Line20[0].f1_55[0]",
+          "text": "5,753"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.3a_ordinary_business_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+          "text": "4,581"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.3b_net_rental_real_estate_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "4,403"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.3c_other_net_rental_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "2,595"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.3d_interest_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "8,812"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.3e_ordinary_dividends",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "7,318"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.3f_royalties",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "6,531"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.3g_net_capital_gains",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "1,135"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.3h_net_section_1231_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "6,913"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.3i_other_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "7,469"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.3j_excess_depletion_adjustment",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "5,079"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.3k_tax_exempt_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "3,094"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.3l_recapture_business_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "8,039"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.3m_other_items_increase_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "5,256"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.4_total_basis_increases",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "4,058"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.5_stock_basis_before_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "3,829"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.6_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "5,285"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.7_stock_basis_after_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "5,669"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.8a_nondeductible_expenses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+          "text": "1,899"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.8b_depletion_oil_gas",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+          "text": "9,269"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.8c_business_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+          "text": "1,296"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.9_total_basis_decreases",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+          "text": "5,147"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.section_a_formal_note_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Header[0].aDebt1[0].c1_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.section_a_formal_note_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Header[0].bDebt2[0].c1_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.section_a_formal_note_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Header[0].cDebt3[0].c1_9[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.section_a_open_account_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Header[0].aDebt1[0].c1_7[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.section_a_open_account_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Header[0].bDebt2[0].c1_8[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.0.line.section_a_open_account_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_SectionA[0].Header[0].cDebt3[0].c1_9[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.21_debt_basis_beginning_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line21[0].f2_01[0]",
+          "text": "8,593"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.21_debt_basis_beginning_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line21[0].f2_02[0]",
+          "text": "9,069"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.21_debt_basis_beginning_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line21[0].f2_03[0]",
+          "text": "3,653"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.21_debt_basis_beginning_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line21[0].f2_04[0]",
+          "text": "6,665"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.22_amount_from_line_17_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line22[0].f2_05[0]",
+          "text": "7,537"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.22_amount_from_line_17_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line22[0].f2_06[0]",
+          "text": "3,599"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.22_amount_from_line_17_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line22[0].f2_07[0]",
+          "text": "2,182"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.22_amount_from_line_17_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line22[0].f2_08[0]",
+          "text": "4,412"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.23_debt_basis_restoration_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line23[0].f2_09[0]",
+          "text": "8,614"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.23_debt_basis_restoration_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line23[0].f2_10[0]",
+          "text": "4,832"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.23_debt_basis_restoration_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line23[0].f2_11[0]",
+          "text": "9,616"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.23_debt_basis_restoration_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line23[0].f2_12[0]",
+          "text": "7,955"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.24_debt_basis_before_repayment_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line24[0].f2_13[0]",
+          "text": "4,861"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.24_debt_basis_before_repayment_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line24[0].f2_14[0]",
+          "text": "9,777"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.24_debt_basis_before_repayment_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line24[0].f2_15[0]",
+          "text": "7,196"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.24_debt_basis_before_repayment_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line24[0].f2_16[0]",
+          "text": "8,235"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.25_repayment_basis_ratio_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line25[0].f2_17[0]",
+          "text": "T-MYMG2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.25_repayment_basis_ratio_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line25[0].f2_18[0]",
+          "text": "T-U1UU3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.25_repayment_basis_ratio_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line25[0].f2_19[0]",
+          "text": "T-87ZGC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.26_nontaxable_debt_repayment_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line26[0].f2_21[0]",
+          "text": "4,687"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.26_nontaxable_debt_repayment_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line26[0].f2_22[0]",
+          "text": "8,575"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.26_nontaxable_debt_repayment_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line26[0].f2_23[0]",
+          "text": "8,444"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.26_nontaxable_debt_repayment_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line26[0].f2_24[0]",
+          "text": "2,638"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.27_debt_basis_before_nondeductible_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line27[0].f2_25[0]",
+          "text": "9,762"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.27_debt_basis_before_nondeductible_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line27[0].f2_26[0]",
+          "text": "1,709"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.27_debt_basis_before_nondeductible_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line27[0].f2_27[0]",
+          "text": "2,919"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.27_debt_basis_before_nondeductible_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line27[0].f2_28[0]",
+          "text": "5,913"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.28_nondeductible_expenses_excess_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line28[0].f2_29[0]",
+          "text": "6,529"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.28_nondeductible_expenses_excess_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line28[0].f2_30[0]",
+          "text": "2,044"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.28_nondeductible_expenses_excess_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line28[0].f2_31[0]",
+          "text": "7,832"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.28_nondeductible_expenses_excess_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line28[0].f2_32[0]",
+          "text": "5,394"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.29_debt_basis_before_losses_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line29[0].f2_33[0]",
+          "text": "7,626"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.29_debt_basis_before_losses_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line29[0].f2_34[0]",
+          "text": "6,520"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.29_debt_basis_before_losses_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line29[0].f2_35[0]",
+          "text": "3,559"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.29_debt_basis_before_losses_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line29[0].f2_36[0]",
+          "text": "1,514"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.30_allowable_losses_excess_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line30[0].f2_37[0]",
+          "text": "6,381"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.30_allowable_losses_excess_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line30[0].f2_38[0]",
+          "text": "7,181"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.30_allowable_losses_excess_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line30[0].f2_39[0]",
+          "text": "6,982"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.30_allowable_losses_excess_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line30[0].f2_40[0]",
+          "text": "6,974"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.31_debt_basis_end_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line31[0].f2_41[0]",
+          "text": "1,439"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.31_debt_basis_end_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line31[0].f2_42[0]",
+          "text": "7,953"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.31_debt_basis_end_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line31[0].f2_43[0]",
+          "text": "1,218"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.31_debt_basis_end_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionB[0].Line31[0].f2_44[0]",
+          "text": "3,887"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.32_repayment_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line32[0].f2_45[0]",
+          "text": "4,621"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.32_repayment_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line32[0].f2_46[0]",
+          "text": "5,141"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.32_repayment_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line32[0].f2_47[0]",
+          "text": "7,823"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.32_repayment_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line32[0].f2_48[0]",
+          "text": "1,397"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.33_nontaxable_repayments_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line33[0].f2_49[0]",
+          "text": "4,464"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.33_nontaxable_repayments_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line33[0].f2_50[0]",
+          "text": "4,614"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.33_nontaxable_repayments_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line33[0].f2_51[0]",
+          "text": "9,699"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.33_nontaxable_repayments_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line33[0].f2_52[0]",
+          "text": "2,177"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.34_reportable_gain_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line34[0].f2_53[0]",
+          "text": "9,912"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.34_reportable_gain_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line34[0].f2_54[0]",
+          "text": "2,422"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.34_reportable_gain_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line34[0].f2_55[0]",
+          "text": "3,107"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.34_reportable_gain_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line34[0].f2_56[0]",
+          "text": "8,907"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.35_ordinary_business_loss_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line35[0].f2_57[0]",
+          "text": "6,345"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.35_ordinary_business_loss_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line35[0].f2_58[0]",
+          "text": "6,095"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.35_ordinary_business_loss_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line35[0].f2_59[0]",
+          "text": "5,698"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.35_ordinary_business_loss_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line35[0].f2_60[0]",
+          "text": "6,573"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.35_ordinary_business_loss_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line35[0].f2_61[0]",
+          "text": "1,226"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.36_net_rental_real_estate_loss_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line36[0].f2_62[0]",
+          "text": "8,441"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.36_net_rental_real_estate_loss_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line36[0].f2_63[0]",
+          "text": "9,361"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.36_net_rental_real_estate_loss_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line36[0].f2_64[0]",
+          "text": "2,121"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.36_net_rental_real_estate_loss_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line36[0].f2_65[0]",
+          "text": "8,342"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.36_net_rental_real_estate_loss_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line36[0].f2_66[0]",
+          "text": "1,716"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.37_other_net_rental_loss_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line37[0].f2_67[0]",
+          "text": "7,862"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.37_other_net_rental_loss_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line37[0].f2_68[0]",
+          "text": "5,161"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.37_other_net_rental_loss_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line37[0].f2_69[0]",
+          "text": "1,893"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.37_other_net_rental_loss_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line37[0].f2_70[0]",
+          "text": "4,676"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.37_other_net_rental_loss_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line37[0].f2_71[0]",
+          "text": "4,171"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.38_net_capital_loss_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line38[0].f2_72[0]",
+          "text": "8,397"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.38_net_capital_loss_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line38[0].f2_73[0]",
+          "text": "8,921"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.38_net_capital_loss_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line38[0].f2_74[0]",
+          "text": "7,602"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.38_net_capital_loss_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line38[0].f2_75[0]",
+          "text": "8,884"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.38_net_capital_loss_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line38[0].f2_76[0]",
+          "text": "1,990"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.39_net_section_1231_loss_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line39[0].f2_77[0]",
+          "text": "7,318"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.39_net_section_1231_loss_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line39[0].f2_78[0]",
+          "text": "9,920"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.39_net_section_1231_loss_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line39[0].f2_79[0]",
+          "text": "5,619"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.39_net_section_1231_loss_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line39[0].f2_80[0]",
+          "text": "1,241"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.39_net_section_1231_loss_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line39[0].f2_81[0]",
+          "text": "7,685"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.40_other_loss_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line40[0].f2_82[0]",
+          "text": "7,251"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.40_other_loss_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line40[0].f2_83[0]",
+          "text": "1,658"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.40_other_loss_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line40[0].f2_84[0]",
+          "text": "9,413"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.40_other_loss_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line40[0].f2_85[0]",
+          "text": "8,777"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.40_other_loss_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line40[0].f2_86[0]",
+          "text": "1,375"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.41_section_179_deductions_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line41[0].f2_87[0]",
+          "text": "3,692"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.41_section_179_deductions_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line41[0].f2_88[0]",
+          "text": "9,717"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.41_section_179_deductions_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line41[0].f2_90[0]",
+          "text": "8,732"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.41_section_179_deductions_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line41[0].f2_91[0]",
+          "text": "6,743"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.41_section_179_deductions_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line41[0].f2_92[0]",
+          "text": "1,390"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.42_charitable_contributions_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line42[0].f2_93[0]",
+          "text": "8,753"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.42_charitable_contributions_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line42[0].f2_94[0]",
+          "text": "1,256"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.42_charitable_contributions_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line42[0].f2_95[0]",
+          "text": "2,894"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.42_charitable_contributions_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line42[0].f2_96[0]",
+          "text": "6,153"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.42_charitable_contributions_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line42[0].f2_97[0]",
+          "text": "1,025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.43_investment_interest_expense_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line43[0].f2_98[0]",
+          "text": "6,249"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.43_investment_interest_expense_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line43[0].f2_99[0]",
+          "text": "9,572"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.43_investment_interest_expense_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line43[0].f2_100[0]",
+          "text": "5,913"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.43_investment_interest_expense_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line43[0].f2_101[0]",
+          "text": "8,237"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.43_investment_interest_expense_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line43[0].f2_102[0]",
+          "text": "4,834"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.44_section_59e2_expenditures_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line44[0].f2_103[0]",
+          "text": "2,379"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.44_section_59e2_expenditures_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line44[0].f2_104[0]",
+          "text": "7,006"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.44_section_59e2_expenditures_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line44[0].f2_105[0]",
+          "text": "7,472"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.44_section_59e2_expenditures_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line44[0].f2_106[0]",
+          "text": "4,939"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.44_section_59e2_expenditures_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line44[0].f2_107[0]",
+          "text": "8,223"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.45_other_deductions_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line45[0].f2_108[0]",
+          "text": "1,014"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.45_other_deductions_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line45[0].f2_109[0]",
+          "text": "4,602"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.45_other_deductions_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line45[0].f2_110[0]",
+          "text": "8,476"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.45_other_deductions_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line45[0].f2_111[0]",
+          "text": "1,839"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.45_other_deductions_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line45[0].f2_112[0]",
+          "text": "3,699"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.46_foreign_taxes_paid_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line46[0].f2_113[0]",
+          "text": "3,361"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.46_foreign_taxes_paid_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line46[0].f2_114[0]",
+          "text": "1,137"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.46_foreign_taxes_paid_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line46[0].f2_115[0]",
+          "text": "9,787"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.46_foreign_taxes_paid_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line46[0].f2_116[0]",
+          "text": "4,998"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.46_foreign_taxes_paid_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line46[0].f2_117[0]",
+          "text": "4,760"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.47_total_loss_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line47[0].f2_118[0]",
+          "text": "5,562"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.47_total_loss_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line47[0].f2_119[0]",
+          "text": "2,062"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.47_total_loss_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line47[0].f2_120[0]",
+          "text": "3,458"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.47_total_loss_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line47[0].f2_121[0]",
+          "text": "2,710"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7203.1.line.47_total_loss_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Line47[0].f2_122[0]",
+          "text": "1,668"
+        }
+      ]
+    }
+  ]
+}

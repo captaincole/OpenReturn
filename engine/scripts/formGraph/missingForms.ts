@@ -28,43 +28,10 @@ const federal = (name: string, section: Section, about: string): MissingForm => 
   jurisdiction: "federal",
 });
 
-const california = (
-  name: string,
-  section: Section,
-  about: string,
-  aliases?: string[],
-): MissingForm => ({
-  name,
-  section,
-  about,
-  jurisdiction: "state/ca",
-  aliases,
-});
-
+/* The engine has every tier 1 form (scripts/formLists), and no blank field names a California form that it lacks. */
 export const MISSING_FORMS: MissingForm[] = [
-  /* Tier 1 forms (scripts/formLists) that the engine lacks. */
-  federal("Form 6781", "income", "Gains and losses from section 1256 contracts and straddles"),
-  federal("Form 7203", "income", "S corporation shareholder stock and debt basis limits"),
-  federal("Form 8582-CR", "credits", "Passive activity credit limits"),
-  california("FTB 3801-CR", "credits", "California passive activity credit limits", [
-    "Form 3801-CR",
-  ]),
-  california("FTB 3805E", "income", "California installment sale income", ["Form 3805E"]),
-  california("FTB 3840", "income", "California like-kind exchanges", ["Form 3840"]),
-  california("Schedule D-1", "income", "California sales of business property"),
-  california(
-    "Schedule D (540NR)",
-    "income",
-    "California capital gain or loss for a nonresident or part-year resident",
-  ),
-  california(
-    "Schedule P (540NR)",
-    "tax",
-    "California minimum tax and credit limits for a nonresident or part-year resident",
-  ),
   /* Named by a field of a form that has no rules yet. Most are the sources of the general business credit (Form 3800). */
   federal("Schedule J", "tax", "Income averaging for farmers and fishermen"),
-  federal("Form 8824", "income", "Like-kind exchanges"),
   federal("Form 3468", "credits", "Investment credit"),
   federal("Form 5884", "credits", "Work opportunity credit"),
   federal(
@@ -146,6 +113,7 @@ export const NOT_RETURN_FORMS: string[] = [
   "Form 1099-K",
   "Form 1099-NEC",
   "Form 1099-QA",
+  "Form 1099-S",
   "Form 2439",
   "Form 592-B",
   "Form 593",
@@ -155,6 +123,7 @@ export const NOT_RETURN_FORMS: string[] = [
   "Form 1066",
   "Form 1120-S",
   "Form 541",
+  "Form 540-ES",
   "Form 100",
   "Form 100S",
   "Form 100W",
@@ -182,7 +151,7 @@ export const NOT_RETURN_FORMS: string[] = [
 const FORM_WORDS = ["Form", "Schedule", "FTB"];
 const DIGITS = "0123456789";
 const LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const WORD_BREAKS = ["(", ")", ",", ".", ";", ":", "/", "—", "?"];
+const WORD_BREAKS = ["(", ")", ",", ".", ";", ":", "/", "—", "?", '"'];
 
 const endsAName = (next: string | undefined): boolean =>
   next === undefined || !(LETTERS.includes(next) || DIGITS.includes(next) || next === "-");

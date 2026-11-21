@@ -17,9 +17,9 @@ The golden suite ran 25 scenarios. A jurisdiction's code is its forms and the co
 
 | Jurisdiction | Forms | Fields supported | Branches | Lines |
 | --- | --- | --- | --- | --- |
-| Federal 2025 | 79 | 1,749 of 8,793 (20%) | 81.1% (5,760 of 7,103) | 97.2% (18,332 of 18,865) |
-| California 2025 | 32 | 489 of 3,413 (14%) | 79.4% (1,673 of 2,108) | 97.4% (6,379 of 6,549) |
-| All | 111 | 2,238 of 12,206 (18%) | 80.7% (7,441 of 9,221) | 97.2% (24,724 of 25,427) |
+| Federal 2025 | 83 | 1,749 of 9,166 (19%) | 81.0% (5,812 of 7,171) | 97.2% (18,484 of 19,025) |
+| California 2025 | 38 | 489 of 4,075 (12%) | 79.2% (1,751 of 2,210) | 97.3% (6,607 of 6,789) |
+| All | 121 | 2,238 of 13,241 (17%) | 80.6% (7,571 of 9,391) | 97.2% (25,104 of 25,827) |
 
 ## By form
 
@@ -104,6 +104,10 @@ The golden suite ran 25 scenarios. A jurisdiction's code is its forms and the co
 | Form 8938 | Federal 2025 | 0 | 0 of 131 (0%) | 76.5% | 92.3% |
 | Form 8978 | Federal 2025 | 0 | 0 of 91 (0%) | 76.5% | 92.3% |
 | Form 8992 | Federal 2025 | 0 | 0 of 14 (0%) | 76.5% | 92.3% |
+| Form 6781 | Federal 2025 | 0 | 0 of 71 (0%) | 76.5% | 92.3% |
+| Form 7203 | Federal 2025 | 0 | 0 of 187 (0%) | 76.5% | 92.3% |
+| Form 8582-CR | Federal 2025 | 0 | 0 of 52 (0%) | 76.5% | 92.3% |
+| Form 8824 | Federal 2025 | 0 | 0 of 63 (0%) | 76.5% | 92.3% |
 | Schedule D (540) | California 2025 | 1 | 0 of 125 (0%) | — | — |
 | FTB 3885A | California 2025 | 1 | 65 of 65 (100%) | 75.6% | 97.4% |
 | Schedule CA (540) | California 2025 | 10 | 118 of 253 (47%) | 87.9% | 97.3% |
@@ -136,7 +140,13 @@ The golden suite ran 25 scenarios. A jurisdiction's code is its forms and the co
 | FTB 3913 | California 2025 | 0 | 0 of 9 (0%) | 76.5% | 92.3% |
 | FTB 5805F | California 2025 | 0 | 0 of 21 (0%) | 76.5% | 92.3% |
 | FTB 5870A | California 2025 | 0 | 0 of 225 (0%) | 76.5% | 92.3% |
-| Code that forms share | — | — | — | 78.8% | 99.5% |
+| FTB 3801-CR | California 2025 | 0 | 0 of 32 (0%) | 76.5% | 92.3% |
+| FTB 3805E | California 2025 | 0 | 0 of 41 (0%) | 76.5% | 92.3% |
+| FTB 3840 | California 2025 | 0 | 0 of 112 (0%) | 76.5% | 92.3% |
+| Schedule D-1 | California 2025 | 0 | 0 of 172 (0%) | 76.5% | 92.3% |
+| Schedule D (540NR) | California 2025 | 0 | 0 of 125 (0%) | 76.5% | 92.3% |
+| Schedule P (540NR) | California 2025 | 0 | 0 of 180 (0%) | 76.5% | 92.3% |
+| Code that forms share | — | — | — | 78.8% | 99.6% |
 
 For the lines and paths that did not run, run `npm run coverage`. It prints one row for each file with the line numbers, and writes a page for each file to `engine/coverage/index.html`.
 

@@ -1,0 +1,730 @@
+{
+  "form": {
+    "formId": "form-3805e",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "FTB 3805E, Installment Sale Income"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3805e.0.header.taxpayer_name",
+      "label": "Name(s) as shown on tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on tax return",
+      "position": {
+        "page": 0,
+        "x": 40.738,
+        "y": 680.489
+      }
+    },
+    {
+      "fieldId": "form-3805e.0.header.taxpayer_id_number",
+      "label": "S S N, I T I N, F E I N, C A S O S file number, or C A corporation no (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "S S N, I T I N, F E I N, C A S O S file number, or C A corporation no (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 363.719,
+        "y": 680.479
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.0.line.1_description_of_property",
+      "label": "Line 1. Description of property.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. Description of property",
+      "position": {
+        "page": 0,
+        "x": 65.6904,
+        "y": 644.489
+      }
+    },
+    {
+      "fieldId": "form-3805e.0.line.2a_date_acquired",
+      "label": "Line 2a. Date acquired (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2a. Date acquired (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.6829,
+        "y": 609.583
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3805e.0.line.2b_date_sold",
+      "label": "Line 2b. Date sold (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2b. Date sold (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 375.087,
+        "y": 609.589
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3805e.0.line.3_sold_to_related_party",
+      "label": "Line 3 — Was the property sold to a related party after December 31, 1980?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 3. Was the property sold to a related party after December 31, 1980? If \"Yes,\" complete Part III for the year of sale and 2 years after the year of the sale unless you received the final payment during the tax year",
+      "position": {
+        "page": 0,
+        "x": 491.348,
+        "y": 585.072
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805e.0.line.4_selling_price_determinable",
+      "label": "Line 4 — Can the total selling price be determined by the close of the tax year in which such sale or other disposition occurs?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 4. Can the total selling price be determined by the close of the tax year in which such sale or other disposition occurs?",
+      "position": {
+        "page": 0,
+        "x": 491.584,
+        "y": 561.59
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805e.0.line.5_selling_price",
+      "label": "Part I, Line 5. Selling price including mortgages and other debts (do not include stated or unstated interest).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Line 5. Selling price including mortgages and other debts (do not include stated or unstated interest)",
+      "position": {
+        "page": 0,
+        "x": 442.556,
+        "y": 513.687
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.0.line.6_debts_buyer_assumed",
+      "label": "Line 6. Mortgages and other debts the buyer assumed or took the property subject to, but not new mortgages the buyer got from a bank or other source.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Mortgages and other debts the buyer assumed or took the property subject to, but not new mortgages the buyer got from a bank or other source",
+      "position": {
+        "page": 0,
+        "x": 393.561,
+        "y": 488.702
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.0.line.7_selling_price_less_debts",
+      "label": "Line 7. Subtract line 6 from line 5.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Subtract line 6 from line 5",
+      "position": {
+        "page": 0,
+        "x": 393.554,
+        "y": 465.698
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.0.line.8_cost_or_other_basis",
+      "label": "Line 8. Cost or other basis of property sold.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Cost or other basis of property sold",
+      "position": {
+        "page": 0,
+        "x": 393.574,
+        "y": 441.683
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.0.line.9_depreciation_allowed",
+      "label": "Line 9. Depreciation allowed or allowable. Use California amounts.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Depreciation allowed or allowable. Use California amounts",
+      "position": {
+        "page": 0,
+        "x": 393.575,
+        "y": 416.709
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.0.line.10_adjusted_basis",
+      "label": "Line 10. Adjusted basis. Subtract line 9 from line 8.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Adjusted basis. Subtract line 9 from line 8",
+      "position": {
+        "page": 0,
+        "x": 393.564,
+        "y": 393.697
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.0.line.11_expenses_of_sale",
+      "label": "Line 11. Commissions and other expenses of sale.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. Commissions and other expenses of sale",
+      "position": {
+        "page": 0,
+        "x": 393.575,
+        "y": 368.702
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.0.line.12_income_recapture",
+      "label": "Line 12. Income recapture from Schedule D-1, Part III and Part IV. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. Income recapture from Schedule D-1, Part III and Part IV. See instructions",
+      "position": {
+        "page": 0,
+        "x": 393.541,
+        "y": 345.68
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.0.line.13_basis_expenses_recapture_total",
+      "label": "Line 13. Add line 10, line 11, and line 12.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Add line 10, line 11, and line 12",
+      "position": {
+        "page": 0,
+        "x": 443.542,
+        "y": 320.696
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.0.line.14_selling_price_less_total",
+      "label": "Line 14. Subtract line 13 from line 5. If zero or less, stop here. Do not complete the rest of this form.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. Subtract line 13 from line 5. If zero or less, stop here. Do not complete the rest of this form",
+      "position": {
+        "page": 0,
+        "x": 443.542,
+        "y": 297.674
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.0.line.15_main_home_excluded_gain",
+      "label": "Line 15. If the above property was your main home, using California amounts, enter your excluded gain. Otherwise, enter 0.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. If the above property was your main home, using California amounts, enter your excluded gain. Otherwise, enter 0",
+      "position": {
+        "page": 0,
+        "x": 443.542,
+        "y": 273.684
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.0.line.16_gross_profit",
+      "label": "Line 16. Gross profit. Subtract line 15 from line 14.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. Gross profit. Subtract line 15 from line 14",
+      "position": {
+        "page": 0,
+        "x": 443.542,
+        "y": 248.689
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.0.line.17_debts_over_basis",
+      "label": "Line 17. Subtract line 13 from line 6. If zero or less, enter 0.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. Subtract line 13 from line 6. If zero or less, enter 0",
+      "position": {
+        "page": 0,
+        "x": 443.675,
+        "y": 225.401
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.0.line.18_contract_price",
+      "label": "Line 18. Contract price. Add line 7 and line 17.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. Contract price. Add line 7 and line 17",
+      "position": {
+        "page": 0,
+        "x": 443.675,
+        "y": 201.391
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.0.line.19_gross_profit_percentage",
+      "label": "Line 19. Gross profit percentage (expressed as a decimal amount, see instructions). Divide line 16 by line 18. For years after the sale, see instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. Gross profit percentage (expressed as a decimal amount, see instructions). Divide line 16 by line 18. For years after the sale, see instructions",
+      "position": {
+        "page": 0,
+        "x": 443.675,
+        "y": 141.377
+      },
+      "maxLength": 7
+    },
+    {
+      "fieldId": "form-3805e.0.line.20_year_of_sale_debts_over_basis",
+      "label": "Line 20. For year of sale only - Enter amount from line 17 above. Otherwise, enter 0.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. For year of sale only - Enter amount from line 17 above. Otherwise, enter 0",
+      "position": {
+        "page": 0,
+        "x": 443.674,
+        "y": 117.384
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.0.line.21_payments_received_during_year",
+      "label": "Line 21. Payments received during the year (do not include stated or unstated interest).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 21. Payments received during the year (do not include stated or unstated interest)",
+      "position": {
+        "page": 0,
+        "x": 443.705,
+        "y": 93.3739
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.0.line.22_payments_total",
+      "label": "Line 22. Add line 20 and line 21.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22. Add line 20 and line 21",
+      "position": {
+        "page": 0,
+        "x": 443.675,
+        "y": 69.3875
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.1.line.23_payments_received_prior_years",
+      "label": "Line 23. Payments received in prior years (do not include stated or unstated interest).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. Payments received in prior years (do not include stated or unstated interest)",
+      "position": {
+        "page": 1,
+        "x": 393.433,
+        "y": 705.487
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.1.line.24_installment_sale_income",
+      "label": "Line 24. Installment sale income. Multiply line 22 by line 19. This amount cannot be zero or less. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Installment sale income. Multiply line 22 by line 19. This amount cannot be zero or less. See instructions",
+      "position": {
+        "page": 1,
+        "x": 444.191,
+        "y": 681.484
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.1.line.25_ordinary_income_recapture",
+      "label": "Line 25. Enter the part of line 24 that is ordinary income under recapture rules. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25. Enter the part of line 24 that is ordinary income under recapture rules. See instructions",
+      "position": {
+        "page": 1,
+        "x": 444.167,
+        "y": 657.495
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.1.line.26_installment_income_less_recapture",
+      "label": "Line 26. Subtract line 25 from line 24. Enter the result here and on Schedule D (540, 540NR, 541, 565, 568, or 100S) or Schedule D-1.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 26. Subtract line 25 from line 24. Enter the result here and on Schedule D (540, 540NR, 541, 565, 568, or 100S) or Schedule D-1",
+      "position": {
+        "page": 1,
+        "x": 444.177,
+        "y": 632.478
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.1.line.27_related_party_name_address_tin",
+      "label": "Part III, Line 27. Name, address, and taxpayer identification number of related party.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part III, Line 27. Name, address, and taxpayer identification number of related party",
+      "position": {
+        "page": 1,
+        "x": 62.4402,
+        "y": 540.49
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-3805e.1.line.28_related_party_second_disposition",
+      "label": "Line 28 — Did the related party, during this taxable year, resell or dispose of the property (\"second disposition\")?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 28. Did the related party, during this taxable year, resell or dispose of the property (\"second disposition\")?",
+      "position": {
+        "page": 1,
+        "x": 491.492,
+        "y": 513.011
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805e.1.line.29_second_disposition_exception",
+      "label": "Line 29 — If you checked \"Yes,\" on line 28, complete line 30 through line 37 below unless one of the following conditions is met. Check only the box that applies.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 29. If you checked \"Yes,\" on line 28, complete line 30 through line 37 below unless one of the following conditions is met. Check only the box that applies",
+      "position": {
+        "page": 1,
+        "x": 66.7272,
+        "y": 452.827
+      },
+      "options": [
+        {
+          "value": "a_more_than_two_years_after",
+          "radioOption": "(a) The second disposition was more than two years after the first disposition (other than dispositions of marketable securities).",
+          "label": "a The second disposition was more than two years after the first disposition (other than dispositions of marketable securities)."
+        },
+        {
+          "value": "b_stock_to_issuing_corporation",
+          "radioOption": "(b) The first disposition was a sale or exchange of stock to the issuing corporation.",
+          "label": "b The first disposition was a sale or exchange of stock to the issuing corporation."
+        },
+        {
+          "value": "c_involuntary_conversion",
+          "radioOption": "(c) The second disposition was an involuntary conversion where the threat of conversion occurred after the first disposition.",
+          "label": "c The second disposition was an involuntary conversion where the threat of conversion occurred after the first disposition."
+        },
+        {
+          "value": "d_after_death_seller_or_buyer",
+          "radioOption": "(d) The second disposition occurred after the death of the original seller or buyer.",
+          "label": "d The second disposition occurred after the death of the original seller or buyer."
+        },
+        {
+          "value": "e_no_tax_avoidance_purpose",
+          "radioOption": "(e) It can be established to the satisfaction of the Franchise Tax Board that tax avoidance was not a principal purpose for either of the dispositions. If you check this box, attach an explanation.",
+          "label": "e It can be established to the satisfaction of the Franchise Tax Board that tax avoidance was not a principal purpose for either of the dispositions. If you check this box, attach an explanation."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805e.1.line.29a_second_disposition_date",
+      "label": "If this box is checked, enter the date of the disposition (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "If this box is checked, enter the date of the disposition (mm/dd/yyyy)",
+      "position": {
+        "page": 1,
+        "x": 494.634,
+        "y": 440.771
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3805e.1.line.30_related_party_selling_price",
+      "label": "Line 30. Selling price of property sold by related party.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 30. Selling price of property sold by related party",
+      "position": {
+        "page": 1,
+        "x": 444.192,
+        "y": 309.484
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.1.line.31_contract_price_first_sale",
+      "label": "Line 31. Enter contract price from line 18 for year of first sale.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 31. Enter contract price from line 18 for year of first sale",
+      "position": {
+        "page": 1,
+        "x": 444.165,
+        "y": 285.484
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.1.line.32_smaller_of_line_30_or_31",
+      "label": "Line 32. Enter the smaller of line 30 or line 31.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 32. Enter the smaller of line 30 or line 31",
+      "position": {
+        "page": 1,
+        "x": 444.182,
+        "y": 261.477
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.1.line.33_total_payments_received",
+      "label": "Line 33. Total payments received by the end of your 2025 taxable year. Add line 22 and line 23.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 33. Total payments received by the end of your 2025 taxable year. Add line 22 and line 23",
+      "position": {
+        "page": 1,
+        "x": 444.165,
+        "y": 236.482
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.1.line.34_line_32_less_payments",
+      "label": "Line 34. Subtract line 33 from line 32. If zero or less, enter 0.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 34. Subtract line 33 from line 32. If zero or less, enter 0",
+      "position": {
+        "page": 1,
+        "x": 444.17,
+        "y": 213.499
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.1.line.35_related_party_installment_income",
+      "label": "Line 35. Multiply line 34 by the gross profit percentage on line 19 for year of first sale.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 35. Multiply line 34 by the gross profit percentage on line 19 for year of first sale",
+      "position": {
+        "page": 1,
+        "x": 444.168,
+        "y": 189.484
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.1.line.36_ordinary_income_recapture",
+      "label": "Line 36. Enter the part of line 35 that is ordinary income under recapture rules. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 36. Enter the part of line 35 that is ordinary income under recapture rules. See instructions",
+      "position": {
+        "page": 1,
+        "x": 444.186,
+        "y": 165.502
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805e.1.line.37_related_party_income_less_recapture",
+      "label": "Line 37. Subtract line 36 from line 35. Enter the result here and on Schedule D (540, 540NR, 541, 565, 568, or 100S) or Schedule D-1.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 37. Subtract line 36 from line 35. Enter the result here and on Schedule D (540, 540NR, 541, 565, 568, or 100S) or Schedule D-1",
+      "position": {
+        "page": 1,
+        "x": 444.186,
+        "y": 141.488
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3805e/blank.pdf",
+    "ingestedAt": "2026-11-21T04:50:15.475Z",
+    "totalFields": 41,
+    "skipped": 0,
+    "catalogEntries": 41
+  }
+}

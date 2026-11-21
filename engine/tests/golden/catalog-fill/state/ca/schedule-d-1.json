@@ -1,0 +1,1554 @@
+{
+  "formId": "schedule-d-1",
+  "fieldCount": 172,
+  "entries": [
+    {
+      "fieldId": "schedule-d-1.0.header.taxpayer_id_number",
+      "widgets": [
+        {
+          "widgetName": "Social Security Number (S S N), Individual Taxpayer Identification Numbers (I T I N), California Secretary of State (S O S) file number, California Corporation number (12 digits), orFederal Employer Identification Number (F E I N) (9 digits)",
+          "text": "T-1BGVJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on tax return",
+          "text": "T-9UYRH"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row1_col_a",
+      "widgets": [
+        {
+          "widgetName": "Part II, Section A, Line 10(a). Description of property (1)",
+          "text": "T-QPW91"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row1_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 10(b). Date acquired (mm/dd/yyyy) (1)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row1_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 10(c). Date sold (mm/dd/yyyy) (1)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row1_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 10(d). Gross sales price (1)",
+          "text": "9,708"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row1_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 10(e). Depreciation allowed or allowable since acquisition (1)",
+          "text": "4,506"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row1_col_f",
+      "widgets": [
+        {
+          "widgetName": "Line 10(f). Cost or other basis, plus improvements and expense of sale (1)",
+          "text": "7,922"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row1_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 10(g). Gain or (Loss) Subtract (f) from the sum of (d) and (e) (1)",
+          "text": "3,357"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row2_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 10(a). Description of property (2)",
+          "text": "T-1BF7A"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row2_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 10(b). Date acquired (mm/dd/yyyy) (2)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row2_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 10(c). Date sold (mm/dd/yyyy) (2)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row2_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 10(d). Gross sales price (2)",
+          "text": "4,749"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row2_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 10(e). Depreciation allowed or allowable since acquisition (2)",
+          "text": "1,646"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row2_col_f",
+      "widgets": [
+        {
+          "widgetName": "Line 10(f). Cost or other basis, plus improvements and expense of sale (2)",
+          "text": "4,617"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row2_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 10(g). Gain or (Loss) Subtract (f) from the sum of (d) and (e) (2)",
+          "text": "7,707"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row3_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 10(a). Description of property (3)",
+          "text": "T-OK7F6"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row3_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 10(b). Date acquired (mm/dd/yyyy) (3)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row3_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 10(c). Date sold (mm/dd/yyyy) (3)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row3_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 10(d). Gross sales price (3)",
+          "text": "4,615"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row3_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 10(e). Depreciation allowed or allowable since acquisition (3)",
+          "text": "9,316"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row3_col_f",
+      "widgets": [
+        {
+          "widgetName": "Line 10(f). Cost or other basis, plus improvements and expense of sale (3)",
+          "text": "5,261"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.10_row3_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 10(g). Gain or (Loss) Subtract (f) from the sum of (d) and (e) (3)",
+          "text": "4,112"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.11_loss_from_line_7",
+      "widgets": [
+        {
+          "widgetName": "Line 11. Loss, if any, from line 7",
+          "text": "5,518"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.12_gain_from_line_7_or_8",
+      "widgets": [
+        {
+          "widgetName": "Line 12. Gain, if any, from line 7, or amount from line 8, if applicable. See instructions",
+          "text": "2,157"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.13_gain_from_line_34",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Gain, if any, from line 34",
+          "text": "4,269"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.14_net_gain_loss_form_4684",
+      "widgets": [
+        {
+          "widgetName": "Line 14. Net gain or (loss) from federal Form 4684, line 31 and line 38a (completed using California amounts)",
+          "text": "7,028"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.15_ordinary_gain_installment_sales",
+      "widgets": [
+        {
+          "widgetName": "Line 15. Ordinary gain from installment sales from form F T B 3805E, line 25 or line 36. See instructions",
+          "text": "6,327"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.16_ordinary_like_kind_gain_loss",
+      "widgets": [
+        {
+          "widgetName": "Line 16. Ordinary gain or (loss) from like-kind exchanges from federal Form 8824 (completed using California amounts)",
+          "text": "3,075"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.17_total_ordinary_gain_loss",
+      "widgets": [
+        {
+          "widgetName": "Line 17. Combine line 10 through line 16",
+          "text": "8,523"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.18a_form_4684_loss_in_line_11",
+      "widgets": [
+        {
+          "widgetName": "Line 18a. If the loss on line 11 includes a loss from federal Form 4684, Section B, Part II, column (b)(ii) of line 30 or line 35, enter that part of the loss here. See instructions",
+          "text": "9,104"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.18b_redetermined_gain_loss",
+      "widgets": [
+        {
+          "widgetName": "Line 18b. Redetermine the gain or (loss) on line 17, excluding the loss, if any, on line 18a. Enter here and on line 20",
+          "text": "7,535"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.1a_gross_proceeds_1099b_1099s",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line 1a. Enter the gross proceeds from sales or exchanges reported to you for 2025 on federal Form 1099-B, Proceeds from Broker and Barter Exchange Transactions, or federal Form 1099-S, Proceeds from Real Estate Transactions (or a substitute statement), that you are including on line 2 or line 10, column (d), or line 23",
+          "text": "2,643"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.1b_macrs_partial_disposition_gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. Enter the total amount of gain that you are including on lines 2, 10, and 27 due to the partial dispositions of M A C R S assets. See instructions",
+          "text": "8,992"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.1c_macrs_partial_disposition_loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. Enter the total amount of loss that you are including on lines 2 and 10 due to the partial dispositions of M A C R S assets. See instructions",
+          "text": "3,818"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row1_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 2(a). Description of property (1)",
+          "text": "T-MQBYD"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row1_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 2(b). Date acquired (mm/dd/yyyy) (1)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row1_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 2(c). Date sold (mm/dd/yyyy) (1)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row1_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 2(d). Gross sales price (1)",
+          "text": "2,652"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row1_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 2(e). Depreciation allowed or allowable since acquisition (1)",
+          "text": "6,273"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row1_col_f",
+      "widgets": [
+        {
+          "widgetName": "Line 2(f). Cost or other basis, plus improvements and expense of sale (1)",
+          "text": "7,375"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row1_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 2(g). Gain or (Loss) Subtract (f) from the sum of (d) and (e) (1)",
+          "text": "8,408"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row2_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 2(a). Description of property (2)",
+          "text": "T-1GZ17"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row2_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 2(b). Date acquired (mm/dd/yyyy) (2)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row2_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 2(c). Date sold (mm/dd/yyyy) (2)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row2_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 2(d). Gross sales price (2)",
+          "text": "8,965"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row2_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 2(e). Depreciation allowed or allowable since acquisition (2)",
+          "text": "9,518"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row2_col_f",
+      "widgets": [
+        {
+          "widgetName": "Line 2(f). Cost or other basis, plus improvements and expense of sale (2)",
+          "text": "6,546"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row2_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 2(g). Gain or (Loss) Subtract (f) from the sum of (d) and (e) (2)",
+          "text": "1,459"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row3_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 2(a). Description of property (3)",
+          "text": "T-WLHYD"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row3_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 2(b). Date acquired (mm/dd/yyyy) (3)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row3_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 2(c). Date sold (mm/dd/yyyy) (3)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row3_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 2(d). Gross sales price (3)",
+          "text": "8,284"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row3_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 2(e). Depreciation allowed or allowable since acquisition (3)",
+          "text": "7,120"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row3_col_f",
+      "widgets": [
+        {
+          "widgetName": "Line 2(f). Cost or other basis, plus improvements and expense of sale (3)",
+          "text": "4,021"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.2_row3_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 2(g). Gain or (Loss) Subtract (f) from the sum of (d) and (e) (3)",
+          "text": "5,130"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.3_gain_from_form_4684",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Gain, if any, from federal Form 4684, line 39",
+          "text": "6,823"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.4_section_1231_installment_gain",
+      "widgets": [
+        {
+          "widgetName": "Line 4. I R C Section 1231 gain from installment sales from form F T B 3805E, line 26 or line 37",
+          "text": "8,640"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.5_section_1231_like_kind_gain_loss",
+      "widgets": [
+        {
+          "widgetName": "Line 5. I R C Section 1231 gain or (loss) from like-kind exchanges from federal Form 8824 (completed using California amounts)",
+          "text": "4,753"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.6_gain_from_line_35",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Gain, if any, from line 35, from other than casualty and theft",
+          "text": "4,534"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.7_net_section_1231_gain_loss",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Combine line 2 through line 6. Enter gain or (loss) here and on the appropriate line as follows",
+          "text": "3,445"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.8_nonrecaptured_section_1231_losses",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Nonrecaptured net I R C Section 1231 losses from prior years. Enter as a positive number. See instructions",
+          "text": "2,430"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.0.line.9_line_7_minus_line_8",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Subtract line 8 from line 7. If zero or less, enter 0",
+          "text": "4,961"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.19_federal_ordinary_gain_loss",
+      "widgets": [
+        {
+          "widgetName": "Part II, Section B, Line 19. Enter ordinary federal gain or (loss) from federal Schedule 1 (Form 1040), line 4",
+          "text": "2,403"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.20_california_ordinary_gain_loss",
+      "widgets": [
+        {
+          "widgetName": "Line 20. Enter ordinary California gain or (loss) from line 18b",
+          "text": "1,941"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.21a_federal_exceeds_california_difference",
+      "widgets": [
+        {
+          "widgetName": "Line 21a. If line 19 is more than line 20, enter the difference here and on Schedule C A (540), Part I or Schedule C A (540NR), Part II, Section B, line 4, column B",
+          "text": "9,416"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.21b_california_exceeds_federal_difference",
+      "widgets": [
+        {
+          "widgetName": "Line 21b. If line 20 is more than line 19, enter the difference here and on Schedule C A (540), Part I or Schedule C A (540NR), Part II, Section B, line 4, column C",
+          "text": "6,094"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22a_date_acquired",
+      "widgets": [
+        {
+          "widgetName": "Line 22A. Date acquired (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22a_date_sold",
+      "widgets": [
+        {
+          "widgetName": "Line 22A. Date sold (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22a_property_description",
+      "widgets": [
+        {
+          "widgetName": "Part III, Line 22A. Description of I R C Sections 1245, 1250, 1252, 1254, and 1255 property",
+          "text": "T-1KTNN"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22b_date_acquired",
+      "widgets": [
+        {
+          "widgetName": "Line 22B. Date acquired (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22b_date_sold",
+      "widgets": [
+        {
+          "widgetName": "Line 22B. Date sold (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22b_property_description",
+      "widgets": [
+        {
+          "widgetName": "Line 22B. Description of I R C Sections 1245, 1250, 1252, 1254, and 1255 property",
+          "text": "T-12LLC"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22c_date_acquired",
+      "widgets": [
+        {
+          "widgetName": "Line 22C. Date acquired (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22c_date_sold",
+      "widgets": [
+        {
+          "widgetName": "Line 22C. Date sold (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22c_property_description",
+      "widgets": [
+        {
+          "widgetName": "Line 22C. Description of I R C Sections 1245, 1250, 1252, 1254, and 1255 property",
+          "text": "T-RGZ56"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22d_date_acquired",
+      "widgets": [
+        {
+          "widgetName": "Line 22D. Date acquired (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22d_date_sold",
+      "widgets": [
+        {
+          "widgetName": "Line 22D. Date sold (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.22d_property_description",
+      "widgets": [
+        {
+          "widgetName": "Line 22D. Description of I R C Sections 1245, 1250, 1252, 1254, and 1255 property",
+          "text": "T-1L3J1"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.23_gross_sales_price_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 23. Gross sales price, Property A",
+          "text": "2,761"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.23_gross_sales_price_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 23. Gross sales price, Property B",
+          "text": "5,146"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.23_gross_sales_price_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 23. Gross sales price, Property C",
+          "text": "5,140"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.23_gross_sales_price_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 23. Gross sales price, Property D",
+          "text": "2,079"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.24_cost_basis_plus_expense_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 24. Cost or other basis plus expense of sale, Property A",
+          "text": "5,931"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.24_cost_basis_plus_expense_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 24. Cost or other basis plus expense of sale, Property B",
+          "text": "6,191"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.24_cost_basis_plus_expense_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 24. Cost or other basis plus expense of sale, Property C",
+          "text": "7,350"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.24_cost_basis_plus_expense_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 24. Cost or other basis plus expense of sale, Property D",
+          "text": "8,386"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.25_depreciation_allowed_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 25. Depreciation (or depletion) allowed or allowable, Property A",
+          "text": "7,184"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.25_depreciation_allowed_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 25. Depreciation (or depletion) allowed or allowable, Property B",
+          "text": "9,037"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.25_depreciation_allowed_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 25. Depreciation (or depletion) allowed or allowable, Property C",
+          "text": "2,281"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.25_depreciation_allowed_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 25. Depreciation (or depletion) allowed or allowable, Property D",
+          "text": "7,028"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.26_adjusted_basis_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 26. Adjusted basis. Subtract line 25 from line 24, Property A",
+          "text": "5,133"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.26_adjusted_basis_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 26. Adjusted basis. Subtract line 25 from line 24, Property B",
+          "text": "1,986"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.26_adjusted_basis_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 26. Adjusted basis. Subtract line 25 from line 24, Property C",
+          "text": "7,723"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.26_adjusted_basis_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 26. Adjusted basis. Subtract line 25 from line 24, Property D",
+          "text": "1,301"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.27_total_gain_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 27. Total gain. Subtract line 26 from line 23, Property A",
+          "text": "3,117"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.27_total_gain_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 27. Total gain. Subtract line 26 from line 23, Property B",
+          "text": "5,959"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.27_total_gain_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 27. Total gain. Subtract line 26 from line 23, Property C",
+          "text": "2,788"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.27_total_gain_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 27. Total gain. Subtract line 26 from line 23, Property D",
+          "text": "1,178"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.28a_sec_1245_depreciation_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 28a. Depreciation allowed or allowable from line 25, Property A",
+          "text": "8,279"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.28a_sec_1245_depreciation_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 28a. Depreciation allowed or allowable from line 25, Property B",
+          "text": "3,542"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.28a_sec_1245_depreciation_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 28a. Depreciation allowed or allowable from line 25, Property C",
+          "text": "6,527"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.28a_sec_1245_depreciation_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 28a. Depreciation allowed or allowable from line 25, Property D",
+          "text": "4,537"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.28b_sec_1245_smaller_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 28b. Enter the smaller of line 27 or line 28a, Property A",
+          "text": "3,275"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.28b_sec_1245_smaller_amount_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 28b. Enter the smaller of line 27 or line 28a, Property B",
+          "text": "9,259"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.28b_sec_1245_smaller_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 28b. Enter the smaller of line 27 or line 28a, Property C",
+          "text": "6,757"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.28b_sec_1245_smaller_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 28b. Enter the smaller of line 27 or line 28a, Property D",
+          "text": "1,603"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29a_additional_depreciation_after_1976_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 29a. Additional depreciation after 12/31/76. See instructions, Property A",
+          "text": "8,457"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29a_additional_depreciation_after_1976_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 29a. Additional depreciation after 12/31/76. See instructions, Property B",
+          "text": "5,734"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29a_additional_depreciation_after_1976_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 29a. Additional depreciation after 12/31/76. See instructions, Property C",
+          "text": "1,248"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29a_additional_depreciation_after_1976_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 29a. Additional depreciation after 12/31/76. See instructions, Property D",
+          "text": "2,821"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29b_sec_1250_applicable_percentage_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 29b. Applicable percentage multiplied by the smaller of line 27 or line 29a. See instructions, Property A",
+          "text": "3,651"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29b_sec_1250_applicable_percentage_amount_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 29b. Applicable percentage multiplied by the smaller of line 27 or line 29a. See instructions, Property B",
+          "text": "8,728"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29b_sec_1250_applicable_percentage_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 29b. Applicable percentage multiplied by the smaller of line 27 or line 29a. See instructions, Property C",
+          "text": "7,191"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29b_sec_1250_applicable_percentage_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 29b. Applicable percentage multiplied by the smaller of line 27 or line 29a. See instructions, Property D",
+          "text": "8,211"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29c_gain_less_additional_depreciation_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 29c. Subtract line 29a from line 27. If line 27 is not more than line 29a, skip line 29d and line 29e, Property A",
+          "text": "9,799"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29c_gain_less_additional_depreciation_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 29c. Subtract line 29a from line 27. If line 27 is not more than line 29a, skip line 29d and line 29e, Property B",
+          "text": "2,303"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29c_gain_less_additional_depreciation_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 29c. Subtract line 29a from line 27. If line 27 is not more than line 29a, skip line 29d and line 29e, Property C",
+          "text": "1,257"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29c_gain_less_additional_depreciation_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 29c. Subtract line 29a from line 27. If line 27 is not more than line 29a, skip line 29d and line 29e, Property D",
+          "text": "6,241"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29d_additional_depreciation_1971_to_1976_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 29d. Additional depreciation after 12/31/70 and before 1/1/77, Property A",
+          "text": "1,991"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29d_additional_depreciation_1971_to_1976_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 29d. Additional depreciation after 12/31/70 and before 1/1/77, Property B",
+          "text": "5,938"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29d_additional_depreciation_1971_to_1976_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 29d. Additional depreciation after 12/31/70 and before 1/1/77, Property C",
+          "text": "6,045"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29d_additional_depreciation_1971_to_1976_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 29d. Additional depreciation after 12/31/70 and before 1/1/77, Property D",
+          "text": "6,033"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29e_smaller_of_29c_29d_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 29e. Enter the smaller of line 29c or line 29d, Property A",
+          "text": "2,848"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29e_smaller_of_29c_29d_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 29e. Enter the smaller of line 29c or line 29d, Property B",
+          "text": "2,788"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29e_smaller_of_29c_29d_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 29e. Enter the smaller of line 29c or line 29d, Property C",
+          "text": "6,669"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29e_smaller_of_29c_29d_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 29e. Enter the smaller of line 29c or line 29d, Property D",
+          "text": "4,827"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29f_sec_291_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 29f. I R C Section 291 amount (for corporations only). See instructions, Property A",
+          "text": "5,284"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29f_sec_291_amount_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 29f. I R C Section 291 amount (for corporations only). See instructions, Property B",
+          "text": "9,154"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29f_sec_291_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 29f. I R C Section 291 amount (for corporations only). See instructions, Property C",
+          "text": "5,839"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29f_sec_291_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 29f. I R C Section 291 amount (for corporations only). See instructions, Property D",
+          "text": "5,898"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29g_sec_1250_recapture_total_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 29g. Add line 29b, line 29e, and line 29f, Property A",
+          "text": "2,290"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29g_sec_1250_recapture_total_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 29g. Add line 29b, line 29e, and line 29f, Property B",
+          "text": "5,823"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29g_sec_1250_recapture_total_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 29g. Add line 29b, line 29e, and line 29f, Property C",
+          "text": "7,280"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.29g_sec_1250_recapture_total_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 29g. Add line 29b, line 29e, and line 29f, Property D",
+          "text": "2,320"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30a_soil_water_land_expenses_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 30a. Soil, water, and land clearing expenses, Property A",
+          "text": "8,853"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30a_soil_water_land_expenses_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 30a. Soil, water, and land clearing expenses, Property B",
+          "text": "9,336"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30a_soil_water_land_expenses_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 30a. Soil, water, and land clearing expenses, Property C",
+          "text": "7,922"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30a_soil_water_land_expenses_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 30a. Soil, water, and land clearing expenses, Property D",
+          "text": "1,685"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30b_sec_1252_applicable_percentage_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 30b. Applicable percentage multiplied by line 30a. See instructions, Property A",
+          "text": "2,134"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30b_sec_1252_applicable_percentage_amount_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 30b. Applicable percentage multiplied by line 30a. See instructions, Property B",
+          "text": "1,569"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30b_sec_1252_applicable_percentage_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 30b. Applicable percentage multiplied by line 30a. See instructions, Property C",
+          "text": "6,793"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30b_sec_1252_applicable_percentage_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 30b. Applicable percentage multiplied by line 30a. See instructions, Property D",
+          "text": "7,482"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30c_sec_1252_smaller_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 30c. Enter the smaller of line 27 or line 30b, Property A",
+          "text": "8,934"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30c_sec_1252_smaller_amount_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 30c. Enter the smaller of line 27 or line 30b, Property B",
+          "text": "4,161"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30c_sec_1252_smaller_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 30c. Enter the smaller of line 27 or line 30b, Property C",
+          "text": "5,943"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.30c_sec_1252_smaller_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 30c. Enter the smaller of line 27 or line 30b, Property D",
+          "text": "5,687"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.31a_intangible_drilling_costs_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 31a. Intangible drilling and development costs deducted after 12/31/76, Property A",
+          "text": "9,076"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.31a_intangible_drilling_costs_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 31a. Intangible drilling and development costs deducted after 12/31/76, Property B",
+          "text": "5,174"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.31a_intangible_drilling_costs_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 31a. Intangible drilling and development costs deducted after 12/31/76, Property C",
+          "text": "7,379"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.31a_intangible_drilling_costs_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 31a. Intangible drilling and development costs deducted after 12/31/76, Property D",
+          "text": "4,383"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.31b_sec_1254_smaller_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 31b. Enter the smaller of line 27 or line 31a, Property A",
+          "text": "7,831"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.31b_sec_1254_smaller_amount_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 31b. Enter the smaller of line 27 or line 31a, Property B",
+          "text": "1,308"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.31b_sec_1254_smaller_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 31b. Enter the smaller of line 27 or line 31a, Property C",
+          "text": "2,512"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.31b_sec_1254_smaller_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 31b. Enter the smaller of line 27 or line 31a, Property D",
+          "text": "3,185"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.32a_sec_126_excluded_payments_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 32a. Applicable percentage of payments excluded from income under I R C Section 126, Property A",
+          "text": "8,785"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.32a_sec_126_excluded_payments_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 32a. Applicable percentage of payments excluded from income under I R C Section 126, Property B",
+          "text": "9,066"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.32a_sec_126_excluded_payments_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 32a. Applicable percentage of payments excluded from income under I R C Section 126, Property C",
+          "text": "2,899"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.32a_sec_126_excluded_payments_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 32a. Applicable percentage of payments excluded from income under I R C Section 126, Property D",
+          "text": "4,322"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.32b_sec_1255_smaller_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 32b. Enter the smaller of line 27 or line 32a, Property A",
+          "text": "2,077"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.32b_sec_1255_smaller_amount_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 32b. Enter the smaller of line 27 or line 32a, Property B",
+          "text": "5,117"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.32b_sec_1255_smaller_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 32b. Enter the smaller of line 27 or line 32a, Property C",
+          "text": "1,592"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.32b_sec_1255_smaller_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 32b. Enter the smaller of line 27 or line 32a, Property D",
+          "text": "6,098"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.33_total_gains_all_properties",
+      "widgets": [
+        {
+          "widgetName": "Line 33. Total gains for all properties. Add column A through column D of line 27",
+          "text": "7,677"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.34_total_recapture_ordinary_income",
+      "widgets": [
+        {
+          "widgetName": "Line 34. Add column A through column D of lines 28b, 29g, 30c, 31b, and 32b. Enter here and on line 13",
+          "text": "8,090"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.35_gain_less_recapture",
+      "widgets": [
+        {
+          "widgetName": "Line 35. Subtract line 34 from line 33. Enter the portion from other than casualty and theft here and on line 6. Enter the portion from casualty and theft on federal Form 4684, line 33",
+          "text": "6,532"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.36_expense_or_recovery_deductions_col_a",
+      "widgets": [
+        {
+          "widgetName": "Part IV, Line 36. Expense deductions or recovery deductions. See instructions, (a) Expense deductions",
+          "text": "4,473"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.36_expense_or_recovery_deductions_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 36. Expense deductions or recovery deductions. See instructions, (b) Recovery deductions",
+          "text": "8,933"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.37_depreciation_or_recovery_deductions_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 37. Depreciation or recovery deductions. See instructions, (a) Expense deductions",
+          "text": "2,592"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.37_depreciation_or_recovery_deductions_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 37. Depreciation or recovery deductions. See instructions, (b) Recovery deductions",
+          "text": "3,198"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.38_recapture_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 38. Recapture amount. Subtract line 37 from line 36. See instructions, (a) Expense deductions",
+          "text": "2,131"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-1.1.line.38_recapture_amount_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 38. Recapture amount. Subtract line 37 from line 36. See instructions, (b) Recovery deductions",
+          "text": "8,485"
+        }
+      ]
+    }
+  ]
+}

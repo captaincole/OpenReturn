@@ -1,0 +1,1131 @@
+{
+  "formId": "schedule-d-540nr",
+  "fieldCount": 125,
+  "entries": [
+    {
+      "fieldId": "schedule-d-540nr.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on return",
+          "text": "T-2COLO"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits)",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.10",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Enter the gain or (loss) from federal Form 1040 or 1040-SR, line 7a",
+          "text": "1,116"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.11",
+      "widgets": [
+        {
+          "widgetName": "Line 11. Enter the California gain from line 8 or (loss) from line 9",
+          "text": "7,888"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.12a",
+      "widgets": [
+        {
+          "widgetName": "Line 12a. If line 10 is more than line 11, enter the difference here and on Schedule C A (540NR), Part II,, Section A, line 7a, column B",
+          "text": "1,284"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.12b",
+      "widgets": [
+        {
+          "widgetName": "Line 12b. If line 10 is less than line 11, enter the difference here and on Schedule C A (540NR), Part II, Section A, line 7a, column C",
+          "text": "1,348"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1a.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (c) Cost or other basis",
+          "text": "4,847"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1a.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-MVHCP"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1a.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "1,100"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1a.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "6,071"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1a.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (b) Sales price",
+          "text": "1,184"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1b.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (c) Cost or other basis",
+          "text": "3,819"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1b.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-YONJZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1b.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "8,742"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1b.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "2,567"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1b.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (b) Sales price",
+          "text": "5,650"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1c.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (c) Cost or other basis",
+          "text": "8,572"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1c.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-VW639"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1c.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "2,941"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1c.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "5,787"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1c.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (b) Sales price",
+          "text": "7,815"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1d.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (c) Cost or other basis",
+          "text": "8,726"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1d.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-X3WGV"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1d.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "8,904"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1d.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "3,857"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1d.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (b) Sales price",
+          "text": "7,833"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1e.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (c) Cost or other basis",
+          "text": "7,490"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1e.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-19C9Y"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1e.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "6,308"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1e.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "8,923"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1e.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (b) Sales price",
+          "text": "9,327"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1f.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1f. (c) Cost or other basis",
+          "text": "3,559"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1f.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1f. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-1ROG6"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1f.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1f. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "9,356"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1f.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1f. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "6,191"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1f.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1f. (b) Sales price",
+          "text": "9,878"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1g.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1g. (c) Cost or other basis",
+          "text": "4,932"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1g.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1g. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-1X7QH"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1g.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1g. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "2,846"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1g.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1g. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "1,883"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1g.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1g. (b) Sales price",
+          "text": "1,708"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1h.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1h. (c) Cost or other basis",
+          "text": "9,730"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1h.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1h. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-M6KT3"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1h.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1h. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "2,457"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1h.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1h. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "5,353"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1h.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1h. (b) Sales price",
+          "text": "3,390"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1i.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1i. (c) Cost or other basis",
+          "text": "5,771"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1i.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1i. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-1K7TW"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1i.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1i. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "4,742"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1i.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1i. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "5,815"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1i.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1i. (b) Sales price",
+          "text": "3,080"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1j.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1j. (c) Cost or other basis",
+          "text": "7,913"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1j.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1j. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-1YFN6"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1j.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1j. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "1,600"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1j.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1j. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "1,982"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1j.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1j. (b) Sales price",
+          "text": "9,964"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1k.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1k. (c) Cost or other basis",
+          "text": "7,403"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1k.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1k. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-14ZEF"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1k.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1k. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "1,173"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1k.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1k. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "7,184"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1k.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1k. (b) Sales price",
+          "text": "2,472"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1l.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1l. (c) Cost or other basis",
+          "text": "1,262"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1l.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1l. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-YHVQ0"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1l.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1l. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "8,427"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1l.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1l. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "1,525"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1l.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1l. (b) Sales price",
+          "text": "5,124"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1m.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1m. (c) Cost or other basis",
+          "text": "2,341"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1m.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1m. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-OME8F"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1m.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1m. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "9,605"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1m.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1m. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "5,243"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1m.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1m. (b) Sales price",
+          "text": "8,002"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1n.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1n. (c) Cost or other basis",
+          "text": "3,693"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1n.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1n. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-EH0P6"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1n.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1n. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "8,097"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1n.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1n. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "5,464"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1n.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1n. (b) Sales price",
+          "text": "8,625"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1o.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1o. (c) Cost or other basis",
+          "text": "8,308"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1o.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1o. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-3II5J"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1o.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1o. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "7,914"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1o.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1o. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "4,271"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1o.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1o. (b) Sales price",
+          "text": "6,746"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1p.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1p. (c) Cost or other basis",
+          "text": "2,001"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1p.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1p. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-1RLC7"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1p.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1p. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "9,623"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1p.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1p. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "3,871"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1p.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1p. (b) Sales price",
+          "text": "9,425"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1q.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1q. (c) Cost or other basis",
+          "text": "5,006"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1q.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1q. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-17US0"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1q.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1q. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "9,426"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1q.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1q. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "8,811"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1q.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1q. (b) Sales price",
+          "text": "6,638"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1r.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1r. (c) Cost or other basis",
+          "text": "7,032"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1r.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1r. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-E13LB"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1r.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1r. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "2,468"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1r.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1r. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "6,713"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1r.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1r. (b) Sales price",
+          "text": "4,494"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1s.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1s. (c) Cost or other basis",
+          "text": "4,456"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1s.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1s. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-1XBO1"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1s.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1s. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "1,927"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1s.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1s. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "7,724"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1s.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1s. (b) Sales price",
+          "text": "6,695"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1t.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1t. (c) Cost or other basis",
+          "text": "1,890"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1t.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1t. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-16F8W"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1t.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1t. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "1,653"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1t.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1t. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "1,007"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1t.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1t. (b) Sales price",
+          "text": "9,449"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1u.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1u. (c) Cost or other basis",
+          "text": "2,355"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1u.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1u. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-Q9V0V"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1u.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1u. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "2,759"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1u.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1u. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "8,609"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1u.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1u. (b) Sales price",
+          "text": "1,067"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1v.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "Line 1v. (c) Cost or other basis",
+          "text": "8,325"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1v.description",
+      "widgets": [
+        {
+          "widgetName": "Line 1v. (a) Description of property. Example: 100 shares of \"Z\" Co",
+          "text": "T-V5YL6"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1v.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 1v. (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "6,636"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1v.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 1v. (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "8,049"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.1v.sales_price",
+      "widgets": [
+        {
+          "widgetName": "Line 1v. (b) Sales price",
+          "text": "7,380"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.2.gain",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Net gain or (loss) shown on California Schedule(s) K-1 (100S, 541, 565, and 568), (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+          "text": "5,943"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.2.loss",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Net gain or (loss) shown on California Schedule(s) K-1 (100S, 541, 565, and 568), (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+          "text": "1,575"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.3",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Capital gain distributions (federal Form 1099-DIV, box 2a)",
+          "text": "7,129"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.4",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Total 2025 gains from all sources. Add column (e) amounts of line 1, line 2, and line 3",
+          "text": "9,578"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.5",
+      "widgets": [
+        {
+          "widgetName": "Line 5. 2025 loss. Add column (d) amounts of line 1 and line 2",
+          "text": "9,227"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.6",
+      "widgets": [
+        {
+          "widgetName": "Line 6. California capital loss carryover from 2024, if any. See instructions",
+          "text": "4,218"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.7",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Total 2025 loss. Add line 5 and line 6",
+          "text": "3,934"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.8",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Net gain or loss. Combine line 4 and line 7. If a loss, go to line 9. If a gain, go to line 10",
+          "text": "8,168"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-540nr.0.line.9",
+      "widgets": [
+        {
+          "widgetName": "Line 9. If line 8 is a loss, enter the smaller of: a the loss on line 8. b $3,000 ($1,500 if married/R D P filing separate). See instructions",
+          "text": "7,698"
+        }
+      ]
+    }
+  ]
+}

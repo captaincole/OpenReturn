@@ -1,0 +1,1626 @@
+{
+  "formId": "schedule-p-540nr",
+  "fieldCount": 180,
+  "entries": [
+    {
+      "fieldId": "schedule-p-540nr.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on Form 540NR",
+          "text": "T-174DD"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "Your Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits)",
+          "text": "T-GDJTC"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.1_standard_deduction",
+      "widgets": [
+        {
+          "widgetName": "Part 1, Line 1. If you itemized deductions, go to line 2. If you did not itemize deductions, enter your standard deduction from Form 540NR, line 18, and go to line 6",
+          "text": "4,755"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.10_iso_cqso",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Incentive stock options (I S Os) and California qualified stock options (C Q S Os). See instructions",
+          "text": "8,416"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.11_passive_activities_adjustment",
+      "widgets": [
+        {
+          "widgetName": "Line 11. Passive activities adjustment. See instructions",
+          "text": "8,569"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.12_estate_trust_beneficiaries",
+      "widgets": [
+        {
+          "widgetName": "Line 12. Beneficiaries of estates and trusts. Enter the amount from Schedule K-1 (541), line 12a",
+          "text": "3,446"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13_other_adjustments_total",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Add amounts on line a through line l, and enter total here",
+          "text": "5,551"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13a_circulation_expenditures",
+      "widgets": [
+        {
+          "widgetName": "Line 13a. Circulation expenditures",
+          "text": "8,719"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13b_depletion",
+      "widgets": [
+        {
+          "widgetName": "Line 13b. Depletion",
+          "text": "9,536"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13c_installment_sales",
+      "widgets": [
+        {
+          "widgetName": "Line 13c. Installment sales",
+          "text": "8,357"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13d_intangible_drilling_costs",
+      "widgets": [
+        {
+          "widgetName": "Line 13d. Intangible drilling costs",
+          "text": "3,092"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13e_long_term_contracts",
+      "widgets": [
+        {
+          "widgetName": "Line 13e. Long-term contracts",
+          "text": "6,288"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13f_loss_limitations",
+      "widgets": [
+        {
+          "widgetName": "Line 13f. Loss limitations",
+          "text": "2,232"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13g_mining_costs",
+      "widgets": [
+        {
+          "widgetName": "Line 13g. Mining costs",
+          "text": "2,130"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13h_patrons_adjustment",
+      "widgets": [
+        {
+          "widgetName": "Line 13h. Patron's adjustment",
+          "text": "5,745"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13i_pollution_control_facilities",
+      "widgets": [
+        {
+          "widgetName": "Line 13i. Pollution control facilities",
+          "text": "6,496"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13j_research_experimental",
+      "widgets": [
+        {
+          "widgetName": "Line 13j. Research and experimental costs",
+          "text": "5,094"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13k_tax_shelter_farm_activities",
+      "widgets": [
+        {
+          "widgetName": "Line 13k. Tax shelter farm activities",
+          "text": "8,063"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.13l_related_adjustments",
+      "widgets": [
+        {
+          "widgetName": "Line 13l. Related adjustments",
+          "text": "4,544"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.14_total_adjustments_preferences",
+      "widgets": [
+        {
+          "widgetName": "Line 14. Total Adjustments and Preferences. Combine line 1 through line 13",
+          "text": "8,313"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.15_taxable_income",
+      "widgets": [
+        {
+          "widgetName": "Line 15. Enter taxable income from Form 540N R, line 19. See instructions",
+          "text": "1,709"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.16_nol_deductions",
+      "widgets": [
+        {
+          "widgetName": "Line 16. Net operating loss (N O L) deduction from Schedule CA (540NR), Part II, Section B, line 9b1, line 9b2, and line 9b3, column B. Enter as a positive amount",
+          "text": "7,714"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.17_amti_exclusion",
+      "widgets": [
+        {
+          "widgetName": "Line 17. A M T I exclusion. See instructions",
+          "text": "5,367"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.18_itemized_deductions_limitation",
+      "widgets": [
+        {
+          "widgetName": "Line 18. If your federal adjusted gross income (A G I) is less than the amount for your filing status (listed below), skip this line and go to line 19. If you itemized deductions and your federal A G I is more than the amount for your filing status, see instructions",
+          "text": "3,341"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.19_combine_lines_14_through_18",
+      "widgets": [
+        {
+          "widgetName": "Line 19. Combine line 14 through line 18",
+          "text": "8,062"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.2_medical_dental_expenses",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Medical and dental expenses. Enter the smaller of federal Schedule A (Form 1040), line 4, or 2 and one-half % (.025) of federal Form 1040 or 1040-S R, line 11b. See instructions",
+          "text": "2,720"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.20_amt_nol_deduction",
+      "widgets": [
+        {
+          "widgetName": "Line 20. Alternative minimum tax N O L deduction. See instructions",
+          "text": "8,136"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.21_alternative_minimum_taxable_income",
+      "widgets": [
+        {
+          "widgetName": "Line 21. Alternative Minimum Taxable Income. Subtract line 20 from line 19 (if married/R D P filing separately and line 21 is more than $479,188, see instructions)",
+          "text": "9,023"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.3_personal_real_property_taxes",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Personal property taxes and real property taxes. See instructions",
+          "text": "6,994"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.4_home_mortgage_interest",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Certain interest on a home mortgage not used to buy, build, or improve your home. See instructions",
+          "text": "2,415"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.5_miscellaneous_itemized_deductions",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Miscellaneous itemized deductions. See instructions",
+          "text": "7,039"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.6_property_tax_refund",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Refund of personal property taxes and real property taxes. See instructions",
+          "text": "8,378"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.7_investment_interest_adjustment",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Investment interest expense adjustment. See instructions",
+          "text": "9,134"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.8_post_1986_depreciation",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Post-1986 depreciation. See instructions",
+          "text": "6,892"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.0.line.9_adjusted_gain_loss",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Adjusted gain or loss. See instructions",
+          "text": "3,426"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.22_exemption_amount",
+      "widgets": [
+        {
+          "widgetName": "Part II, Line 22. Exemption Amount. (If this schedule is for certain children under age 24, see instructions.)",
+          "text": "3,795"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.23_amti_less_exemption",
+      "widgets": [
+        {
+          "widgetName": "Line 23. Subtract line 22 from Part I, line 21. If zero or less, enter 0. See instructions",
+          "text": "1,619"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.24_total_tentative_minimum_tax",
+      "widgets": [
+        {
+          "widgetName": "Line 24. Total Tentative Minimum Tax (T M T). Multiply line 23 by 7% (.07)",
+          "text": "9,608"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.25_california_agi",
+      "widgets": [
+        {
+          "widgetName": "Line 25. California adjusted gross income (A G I) from Schedule C A (540N R), Part IV, line 1",
+          "text": "2,062"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.26_nol_adjustment",
+      "widgets": [
+        {
+          "widgetName": "Line 26. N O L adjustment, if any, included on Schedule C A (540NR), Part II, Section B, line 9b1, line 9b2, and line 9b3, column E. Enter as a positive number",
+          "text": "3,056"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.27_amti_exclusion",
+      "widgets": [
+        {
+          "widgetName": "Line 27. Alternative Minimum Tax Income (A M T I) exclusion. See instructions",
+          "text": "8,541"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.28_combine_lines_25_through_27",
+      "widgets": [
+        {
+          "widgetName": "Line 28. Combine line 25 through line 27",
+          "text": "9,636"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29_adjustments_preferences_total",
+      "widgets": [
+        {
+          "widgetName": "Line 29. Add amounts on line a through line r, and enter total here",
+          "text": "7,727"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29a_investment_interest_expense",
+      "widgets": [
+        {
+          "widgetName": "Line 29a. Investment interest expense",
+          "text": "3,673"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29b_post_1986_depreciation",
+      "widgets": [
+        {
+          "widgetName": "Line 29b. Post-1986 depreciation",
+          "text": "8,884"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29c_adjusted_gain_loss",
+      "widgets": [
+        {
+          "widgetName": "Line 29c. Adjusted gain or loss",
+          "text": "3,497"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29d_iso_cqso",
+      "widgets": [
+        {
+          "widgetName": "Line 29d. Incentive stock options and C Q S O s",
+          "text": "1,073"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29e_passive_activities",
+      "widgets": [
+        {
+          "widgetName": "Line 29e. Passive activities",
+          "text": "3,057"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29f_estate_trust_beneficiaries",
+      "widgets": [
+        {
+          "widgetName": "Line 29f. Beneficiaries of estates & trusts",
+          "text": "3,594"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29g_circulation_expenditures",
+      "widgets": [
+        {
+          "widgetName": "Line 29g. Circulation expenditures",
+          "text": "4,641"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29h_depletion",
+      "widgets": [
+        {
+          "widgetName": "Line 29h. Depletion",
+          "text": "4,249"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29i_installment_sales",
+      "widgets": [
+        {
+          "widgetName": "Line 29i. Installment sales",
+          "text": "5,838"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29j_intangible_drilling_costs",
+      "widgets": [
+        {
+          "widgetName": "Line 29j. Intangible drilling costs",
+          "text": "4,562"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29k_long_term_contracts",
+      "widgets": [
+        {
+          "widgetName": "Line 29k. Long-term contracts",
+          "text": "9,688"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29l_loss_limitations",
+      "widgets": [
+        {
+          "widgetName": "Line 29l. Loss limitations",
+          "text": "7,552"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29m_mining_costs",
+      "widgets": [
+        {
+          "widgetName": "Line 29m. Mining costs",
+          "text": "5,452"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29n_patrons_adjustment",
+      "widgets": [
+        {
+          "widgetName": "Line 29n. Patron's adjustment",
+          "text": "6,282"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29o_pollution_control_facilities",
+      "widgets": [
+        {
+          "widgetName": "Line 29o. Pollution control facilities",
+          "text": "4,222"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29p_research_experimental",
+      "widgets": [
+        {
+          "widgetName": "Line 29p. Research and experimental costs",
+          "text": "5,794"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29q_tax_shelter_farm_activities",
+      "widgets": [
+        {
+          "widgetName": "Line 29q. Tax shelter farm activities",
+          "text": "6,005"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.29r_related_adjustments",
+      "widgets": [
+        {
+          "widgetName": "Line 29r. Related adjustments",
+          "text": "2,679"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.30_combine_lines_28_and_29",
+      "widgets": [
+        {
+          "widgetName": "Line 30. Combine line 28 and line 29",
+          "text": "5,763"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.31_california_amt_nol_deduction",
+      "widgets": [
+        {
+          "widgetName": "Line 31. California Alternative Minimum Tax (A M T) net operating loss (N O L) deduction. See instructions",
+          "text": "6,027"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.32_california_amt_agi",
+      "widgets": [
+        {
+          "widgetName": "Line 32. California A M T A G I. Subtract line 31 from line 30. If you did not itemize deductions, enter the result here and on line 40 and skip line 33 through line 39. If you itemized deductions, enter the result here and continue to line 33",
+          "text": "3,005"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.33_itemized_deductions",
+      "widgets": [
+        {
+          "widgetName": "Line 33. Itemized deductions (before federal A G I limitation and proration). Enter the amount from Schedule C A (540NR), Part III, line 28",
+          "text": "3,929"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.34_itemized_deductions_part1_total",
+      "widgets": [
+        {
+          "widgetName": "Line 34. Combine amounts on line a through line e, and enter total here",
+          "text": "2,045"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.34a_medical_dental_expense",
+      "widgets": [
+        {
+          "widgetName": "Line 34a. Medical and dental expense, enter amount from Part I, line 2",
+          "text": "4,855"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.34b_personal_real_property_taxes",
+      "widgets": [
+        {
+          "widgetName": "Line 34b. Personal property taxes and real property taxes, enter amount from Part I, line 3",
+          "text": "4,201"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.34c_home_mortgage_interest",
+      "widgets": [
+        {
+          "widgetName": "Line 34c. Interest on home mortgage, enter amount from Part I, line 4",
+          "text": "8,655"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.34d_miscellaneous_itemized_deductions",
+      "widgets": [
+        {
+          "widgetName": "Line 34d. Miscellaneous itemized deductions, enter amount from Part I, line 5",
+          "text": "5,736"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.34e_investment_interest_adjustment",
+      "widgets": [
+        {
+          "widgetName": "Line 34e. Investment interest expense adjustment, enter amount from Part I, line 7",
+          "text": "9,493"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.35_total_amt_itemized_deductions",
+      "widgets": [
+        {
+          "widgetName": "Line 35. Total A M T Itemized Deductions. Combine line 33 and line 34",
+          "text": "5,011"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.36_total_amti",
+      "widgets": [
+        {
+          "widgetName": "Line 36. Total A M T I. Enter the amount from Part I, line 21",
+          "text": "4,646"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.37_total_amt_agi",
+      "widgets": [
+        {
+          "widgetName": "Line 37. Total A M T A G I. Add line 35 and line 36",
+          "text": "1,542"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.38_amt_itemized_deduction_percentage",
+      "widgets": [
+        {
+          "widgetName": "Line 38. A M T Itemized Deduction Percentage. Divide line 32 by line 37. Do not enter more than 1.0000. Enter 6 digits including decimal",
+          "text": "T1UE22"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.39_prorated_amt_itemized_deductions",
+      "widgets": [
+        {
+          "widgetName": "Line 39. Prorated A M T Itemized Deductions. Multiply line 35 by line 38",
+          "text": "8,374"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.40_california_amti",
+      "widgets": [
+        {
+          "widgetName": "Line 40. California A M T I. Subtract line 39 from line 32",
+          "text": "4,842"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.41_total_tmt",
+      "widgets": [
+        {
+          "widgetName": "Line 41. Total T M T. Enter the amount from line 24",
+          "text": "4,260"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.42_california_amt_rate",
+      "widgets": [
+        {
+          "widgetName": "Line 42. California A M T Rate. Divide line 41 by amount from Part I, line 21. Enter 6 digits including decimal",
+          "text": "T1I8X9"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.43_california_tmt",
+      "widgets": [
+        {
+          "widgetName": "Line 43. California T M T. Multiply line 40 by line 42",
+          "text": "5,119"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.44_regular_tax",
+      "widgets": [
+        {
+          "widgetName": "Line 44. Regular Tax. Enter the amount from Form 540N R, line 37",
+          "text": "1,486"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.1.line.45_alternative_minimum_tax",
+      "widgets": [
+        {
+          "widgetName": "Line 45. Alternative Minimum Tax. Subtract line 44 from line 43. If zero or less, enter 0 here and on Form 540NR, line 71. Continue to Part III to figure your allowable credits. (If you have a carryover credit for solar energy or commercial solar energy, also enter the result on Side 3, Part III, Section C, line 23 or 24). If you make estimated tax payments for taxable year 2026, enter amount from line 45 on the 2026 Form 540-ES, California Estimated Tax Worksheet, line 16",
+          "text": "2,933"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.1_tax_from_form_540nr_line_42",
+      "widgets": [
+        {
+          "widgetName": "Part III, Line 1. Enter the amount from Form 540NR, line 42",
+          "text": "8,023"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.10_prior_year_amt_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 10. (a) Credit amount",
+          "text": "3,741"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.10_prior_year_amt_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 10. (d) Credit carryover",
+          "text": "5,626"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.10_prior_year_amt_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 10. (b) Credit used this year",
+          "text": "9,630"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.10_prior_year_amt_entry",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Code: 188 Credit for prior year alternative minimum tax",
+          "text": "T-1DLV2"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.10_prior_year_amt_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 10. (c) Tax balance that may be offset by credits",
+          "text": "8,508"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.11_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "Section B, Line 11. If Part III, line 3 is zero, enter the amount from line 1. If line 3 is more than zero, enter the total of line 2 and the last entry in column (c), (c) Tax balance that may be offset by credits",
+          "text": "4,605"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.12_joint_custody_hoh_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 12. (a) Credit amount",
+          "text": "5,833"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.12_joint_custody_hoh_credit_from_540nr",
+      "widgets": [
+        {
+          "widgetName": "Section B1, Line 12. Code: 170 Credit for joint custody head of household Credit from Form 540NR",
+          "text": "7,769"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.12_joint_custody_hoh_credit_percentage",
+      "widgets": [
+        {
+          "widgetName": "Line 12. Credit percentage. Enter 6 digits including decimal",
+          "text": "TOZCZ7"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.12_joint_custody_hoh_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 12. (b) Credit used this year",
+          "text": "5,069"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.12_joint_custody_hoh_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 12. (c) Tax balance that may be offset by credits",
+          "text": "4,386"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.13_dependent_parent_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 13. (a) Credit amount",
+          "text": "1,863"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.13_dependent_parent_credit_from_540nr",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Code: 173 Credit for dependent parent Credit from Form 540NR",
+          "text": "6,430"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.13_dependent_parent_credit_percentage",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Credit percentage. Enter 6 digits including decimal",
+          "text": "T98U3D"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.13_dependent_parent_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 13. (b) Credit used this year",
+          "text": "3,768"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.13_dependent_parent_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 13. (c) Tax balance that may be offset by credits",
+          "text": "7,844"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.14_senior_hoh_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 14. (a) Credit amount",
+          "text": "5,206"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.14_senior_hoh_credit_from_540nr",
+      "widgets": [
+        {
+          "widgetName": "Line 14. Code: 163 Credit for senior head of household Credit from Form 540NR",
+          "text": "3,963"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.14_senior_hoh_credit_percentage",
+      "widgets": [
+        {
+          "widgetName": "Line 14. Credit percentage. Enter 6 digits including decimal",
+          "text": "T6DOU0"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.14_senior_hoh_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 14. (b) Credit used this year",
+          "text": "9,056"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.14_senior_hoh_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 14. (c) Tax balance that may be offset by credits",
+          "text": "4,231"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.15_renters_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 15. Nonrefundable renter's credit, (a) Credit amount",
+          "text": "9,847"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.15_renters_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 15. Nonrefundable renter's credit, (b) Credit used this year",
+          "text": "3,829"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.15_renters_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 15. Nonrefundable renter's credit, (c) Tax balance that may be offset by credits",
+          "text": "9,389"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.16_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 16. (a) Credit amount",
+          "text": "5,844"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.16_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 16. (d) Credit carryover",
+          "text": "8,791"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.16_credit_code",
+      "widgets": [
+        {
+          "widgetName": "Section B2, Line 16. Code (3 digits)",
+          "text": "951"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.16_credit_name",
+      "widgets": [
+        {
+          "widgetName": "Line 16. Credit Name",
+          "text": "T-1ETZF"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.16_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 16. (b) Credit used this year",
+          "text": "8,348"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.16_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 16. (c) Tax balance that may be offset by credits",
+          "text": "8,466"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.17_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 17. (a) Credit amount",
+          "text": "2,500"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.17_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 17. (d) Credit carryover",
+          "text": "4,352"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.17_credit_code",
+      "widgets": [
+        {
+          "widgetName": "Line 17. Code (3 digits)",
+          "text": "700"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.17_credit_name",
+      "widgets": [
+        {
+          "widgetName": "Line 17. Credit Name",
+          "text": "T-1SHQC"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.17_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 17. (b) Credit used this year",
+          "text": "8,253"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.17_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 17. (c) Tax balance that may be offset by credits",
+          "text": "1,115"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.18_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (a) Credit amount",
+          "text": "3,352"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.18_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (d) Credit carryover",
+          "text": "8,732"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.18_credit_code",
+      "widgets": [
+        {
+          "widgetName": "Line 18. Code (3 digits)",
+          "text": "055"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.18_credit_name",
+      "widgets": [
+        {
+          "widgetName": "Line 18. Credit Name",
+          "text": "T-NU1G8"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.18_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (b) Credit used this year",
+          "text": "3,890"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.18_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 18. (c) Tax balance that may be offset by credits",
+          "text": "5,604"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.19_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 19. (a) Credit amount",
+          "text": "3,873"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.19_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 19. (d) Credit carryover",
+          "text": "8,497"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.19_credit_code",
+      "widgets": [
+        {
+          "widgetName": "Line 19. Code (3 digits)",
+          "text": "235"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.19_credit_name",
+      "widgets": [
+        {
+          "widgetName": "Line 19. Credit Name",
+          "text": "T-FBEPD"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.19_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 19. (b) Credit used this year",
+          "text": "4,767"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.19_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 19. (c) Tax balance that may be offset by credits",
+          "text": "8,456"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.2_tentative_minimum_tax",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Enter the tentative minimum tax from Side 2, Part II, line 43",
+          "text": "2,497"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.20_other_state_tax_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Section B3, Line 20. Code: 187 Other state tax credit, (a) Credit amount",
+          "text": "9,404"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.20_other_state_tax_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 20. Code: 187 Other state tax credit, (b) Credit used this year",
+          "text": "9,073"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.20_other_state_tax_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 20. Code: 187 Other state tax credit, (c) Tax balance that may be offset by credits",
+          "text": "7,041"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.21_pte_elective_tax_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Section B4, Line 21. Code: 242 Pass-through entity elective tax credit, (a) Credit amount",
+          "text": "1,005"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.21_pte_elective_tax_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 21. Code: 242 Pass-through entity elective tax credit, (d) Credit carryover",
+          "text": "9,889"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.21_pte_elective_tax_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 21. Code: 242 Pass-through entity elective tax credit, (b) Credit used this year",
+          "text": "1,614"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.21_pte_elective_tax_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 21. Code: 242 Pass-through entity elective tax credit, (c) Tax balance that may be offset by credits",
+          "text": "9,335"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.22_alternative_minimum_tax_col_c",
+      "widgets": [
+        {
+          "widgetName": "Section C, Line 22. Enter your alternative minimum tax from Side 2, Part II, line 45, (c) Tax balance that may be offset by credits",
+          "text": "6,541"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.23_solar_energy_carryover_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 23. Code: 180 Solar energy credit carryover from Section B2, column (d), (a) Credit amount",
+          "text": "1,729"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.23_solar_energy_carryover_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 23. Code: 180 Solar energy credit carryover from Section B2, column (d), (d) Credit carryover",
+          "text": "5,419"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.23_solar_energy_carryover_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 23. Code: 180 Solar energy credit carryover from Section B2, column (d), (b) Credit used this year",
+          "text": "5,343"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.23_solar_energy_carryover_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 23. Code: 180 Solar energy credit carryover from Section B2, column (d), (c) Tax balance that may be offset by credits",
+          "text": "8,810"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.24_commercial_solar_carryover_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 24. Code: 181 Commercial solar energy credit carryover from Section B2, column (d), (a) Credit amount",
+          "text": "1,252"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.24_commercial_solar_carryover_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 24. Code: 181 Commercial solar energy credit carryover from Section B2, column (d), (d) Credit carryover",
+          "text": "8,360"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.24_commercial_solar_carryover_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 24. Code: 181 Commercial solar energy credit carryover from Section B2, column (d), (b) Credit used this year",
+          "text": "6,312"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.24_commercial_solar_carryover_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 24. Code: 181 Commercial solar energy credit carryover from Section B2, column (d), (c) Tax balance that may be offset by credits",
+          "text": "9,403"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.25_adjusted_amt_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 25. Adjusted A M T. Enter the balance from line 24, column (c) here and on Form 540NR, line 71, (c) Tax balance that may be offset by credits",
+          "text": "6,141"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.3_excess_tax_offset_by_credits_col_c",
+      "widgets": [
+        {
+          "widgetName": "Section A, Line 3. Subtract line 2 from line 1. If zero or less, enter 0 and see instructions. This is your excess tax which may be offset by credits, (c) Tax balance that may be offset by credits",
+          "text": "8,974"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.4_prison_inmate_labor_credit_col_a",
+      "widgets": [
+        {
+          "widgetName": "Section A1, Line 4. Code: 162 Prison Inmate Labor Credit (FTB 3507), (a) Credit amount",
+          "text": "8,368"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.4_prison_inmate_labor_credit_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Code: 162 Prison Inmate Labor Credit (F T B 3507), (b) Credit used this year",
+          "text": "3,490"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.4_prison_inmate_labor_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Code: 162 Prison Inmate Labor Credit (F T B 3507), (c) Tax balance that may be offset by credits",
+          "text": "9,011"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.5_child_dependent_care_credit_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Code: 232 Child and dependent care expenses credit (F T B 3506), (a) Credit amount",
+          "text": "6,242"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.5_child_dependent_care_credit_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Code: 232 Child and dependent care expenses credit (F T B 3506), (b) Credit used this year",
+          "text": "9,935"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.5_child_dependent_care_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Code: 232 Child and dependent care expenses credit (F T B 3506), (c) Tax balance that may be offset by credits",
+          "text": "4,272"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.6_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 6. (a) Credit amount",
+          "text": "1,018"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.6_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 6. (d) Credit carryover",
+          "text": "8,817"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.6_credit_code",
+      "widgets": [
+        {
+          "widgetName": "Section A2, Line 6. Code (3 digits)",
+          "text": "018"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.6_credit_name",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Credit Name",
+          "text": "T-I4GMB"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.6_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 6. (b) Credit used this year",
+          "text": "6,015"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.6_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 6. (c) Tax balance that may be offset by credits",
+          "text": "2,931"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.7_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 7. (a) Credit amount",
+          "text": "7,915"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.7_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 7. (d) Credit carryover",
+          "text": "5,662"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.7_credit_code",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Code (3 digits)",
+          "text": "292"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.7_credit_name",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Credit Name",
+          "text": "T-GP0M3"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.7_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 7. (b) Credit used this year",
+          "text": "2,435"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.7_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 7. (c) Tax balance that may be offset by credits",
+          "text": "9,019"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.8_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 8. (a) Credit amount",
+          "text": "8,119"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.8_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 8. (d) Credit carryover",
+          "text": "6,983"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.8_credit_code",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Code (3 digits)",
+          "text": "054"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.8_credit_name",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Credit Name",
+          "text": "T-L6V6B"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.8_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 8. (b) Credit used this year",
+          "text": "8,882"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.8_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 8. (c) Tax balance that may be offset by credits",
+          "text": "5,615"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.9_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 9. (a) Credit amount",
+          "text": "2,852"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.9_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 9. (d) Credit carryover",
+          "text": "9,946"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.9_credit_code",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Code (3 digits)",
+          "text": "869"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.9_credit_name",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Credit Name",
+          "text": "T-1LKQ8"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.9_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 9. (b) Credit used this year",
+          "text": "5,293"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p-540nr.2.part3.9_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 9. (c) Tax balance that may be offset by credits",
+          "text": "7,978"
+        }
+      ]
+    }
+  ]
+}
