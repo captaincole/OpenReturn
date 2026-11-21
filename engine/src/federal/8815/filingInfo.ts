@@ -20,6 +20,8 @@ export interface SavingsBondExclusion {
   marriedFilingSeparately: boolean;
   /* Why the engine cannot figure line 9 (line9Gaps.ts); lines 9 and 11–14 are unsupported then. */
   line9Gap?: string;
+  /* A traditional IRA contribution with no gap: line 9 waits for Schedule 1 line 20. */
+  readsIraDeduction?: boolean;
 }
 
 export interface Form8815FilingInfo extends BaseFilingInfo {

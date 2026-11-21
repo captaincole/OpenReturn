@@ -169,6 +169,40 @@ describe("line 9 cases the engine does not figure", () => {
     expect(run.value("schedule-b", LINE_4)).toBe(14042);
   });
 
+  /* Single, the taxpayer's W-2 only, box 13 not checked: step 3 does not send her to Pub. 590-A. */
+  const single = withDecision("decisions.scope.filing_status", "single");
+  const singleFacts = base.facts.filter((fact) => fact.key !== "employer.comstock-tile");
+  const ira = factRow("retirement", makeTraditionalIraFactKey("taxpayer"), {
+    contributions: 7000,
+  });
+
+  it("an IRA contribution by a person not covered by a plan: line 9 subtracts Schedule 1 line 20", () => {
+    const run = evaluate([...singleFacts, ira], single);
+    // Born 1974, 50 or older: the limit is $8,000, so the whole $7,000 is deductible.
+    expect(run.value("schedule-1", "1.line.20")).toBe(7000);
+    // 96,500 wages + 14,042 interest − 45 penalty − 7,000 IRA = 103,497.
+    expect(run.value("form-8815", "0.line.9_modified_adjusted_gross_income")).toBe(103497);
+    expect(run.value("form-8815", "3.line.4_worksheet_schedule_1_adjustments")).toBe(7045);
+    // 3,997 / 15,000 = 0.266; 5,365 × 0.266 = 1,427; 5,365 − 1,427 = 3,938.
+    expect(run.value("form-8815", LINE_14)).toBe(3938);
+    expect(run.value("schedule-b", LINE_3)).toBe(3938);
+    expect(run.value("schedule-b", LINE_4)).toBe(14042 - 3938);
+  });
+
+  it("the same contribution by a person covered by a plan at work stays unsupported", () => {
+    const covered = singleFacts.map((fact) =>
+      fact.key === "employer.high-desert-water"
+        ? { ...fact, value: { ...(fact.value as object), box13: { retirementPlan: true } } }
+        : fact,
+    );
+    const run = evaluate([...covered, ira], single);
+    expect(run.field("form-8815", "0.line.9_modified_adjusted_gross_income")).toMatchObject({
+      unsupported: true,
+      reason: IRA_CONTRIBUTION_GAP,
+    });
+    expect(run.field("schedule-b", LINE_3)).toMatchObject({ unsupported: true });
+  });
+
   it("Form 2555 filing makes line 9 unsupported", () => {
     const run = evaluate(base.facts, withDecision("decisions.scope.must_file_2555", true));
     expect(run.field("form-8815", "0.line.9_modified_adjusted_gross_income")).toMatchObject({

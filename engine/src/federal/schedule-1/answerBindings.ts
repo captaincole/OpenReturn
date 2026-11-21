@@ -42,7 +42,8 @@ function line20(form: FormAccessor<Schedule1>, info: Schedule1FilingInfo) {
     pub590aWorksheets: info.pub590aWorksheets === true,
   });
   if (gap) return unsupported(gap);
-  const totalIncome = form["form-1040.line.9"];
+  // Worksheet line 1a: not covered skips lines 2–6, so Form 1040 line 9 (Form 8815 reads line 20) is not read.
+  const totalIncome = covered ? form["form-1040.line.9"] : 0;
   if (typeof totalIncome !== "number" || info.iraAge50OrOlder === undefined) return undefined;
   const otherAdjustments = sum(
     form["1.line.11"],

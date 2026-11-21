@@ -84,7 +84,8 @@ Each item is a place where the form and its instructions do not settle a rule. T
 | Lines 10–14 | published example with numbers (Pub. 970 2007, logic only); 2025 amounts stated rule |
 | Line 9 and the Line 9 Worksheet | stated rule |
 | Line 1 rows, header | stated rule; more than three rows unsupported (no attached statement) |
-| Line 9 with an IRA contribution, Form 2555 or 4563, adoption benefits, royalty interest | unsupported |
+| Line 9 with an IRA contribution by a person not covered by a plan | stated rule (step 3; Schedule 1 line 20 with no income test) |
+| Line 9 with an IRA contribution by a covered person or on a joint return, Form 2555 or 4563, adoption benefits, royalty interest | unsupported |
 | Ratio printing (lines 7, 12), line 11 at zero | own reading |
 
 ## Second opinions

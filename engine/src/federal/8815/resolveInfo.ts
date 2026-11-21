@@ -7,7 +7,7 @@ import type { MustFileResolution } from "../../filingInfo.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { filingStatusOf, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import type { Form8815FilingInfo, SavingsBondExclusion } from "./filingInfo.js";
-import { line9Gap } from "./line9Gaps.js";
+import { line9Gap, readsIraDeduction } from "./line9Gaps.js";
 import {
   bondQualifies,
   expenseLines,
@@ -60,6 +60,7 @@ export function savingsBondExclusionScope(inputs: ResolverInputs): SavingsBondEx
     limits: limitsFor(status),
     marriedFilingSeparately,
     line9Gap: line9Gap(inputs),
+    readsIraDeduction: readsIraDeduction(inputs),
   };
   const line4 = expenseLines(exclusion.line2, exclusion.line3, exclusion.worksheet).line4;
   const resolution = resolveMustFile(inputs.decisionByKey, {

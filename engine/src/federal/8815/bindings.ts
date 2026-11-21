@@ -95,7 +95,8 @@ const ADJUSTMENTS = [
 /*
  * MANUAL EDIT: the Line 9 Worksheet (irs-8815-form-2025::sec::step-action::b03).
  * Blank when the form stopped at line 4. Like Form 1040 line 9, it waits while
- * Schedule 1 files and its line 10 is blank. A case that adds to modified AGI
+ * Schedule 1 files and its line 10 is blank, and for an IRA contribution while
+ * line 20 is blank. A case that adds to modified AGI
  * or needs a deduction figured first is unsupported (line9Gaps.ts).
  */
 function line9Of(form: Form, info: Form8815FilingInfo): Line9Worksheet | Unsupported | undefined {
@@ -104,6 +105,8 @@ function line9Of(form: Form, info: Form8815FilingInfo): Line9Worksheet | Unsuppo
   if (exclusion.line9Gap) return unsupported(exclusion.line9Gap);
   if (info.mustFile?.["schedule-1"]?.value === true && form["schedule-1.0.line.10"] === undefined)
     return undefined;
+  // An IRA deduction with no gap (line9Gaps.ts): wait for Schedule 1 line 20, never read it as 0.
+  if (exclusion.readsIraDeduction && form["schedule-1.1.line.20"] === undefined) return undefined;
   return line9Worksheet(
     sum(form["schedule-b.0.line.2_total_interest"]),
     sum(...OTHER_INCOME.map((id) => form[id])),
