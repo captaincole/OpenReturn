@@ -25,8 +25,10 @@ Each item is a place where the form and its instructions do not settle a rule. E
 ## 4. Credit Limit Worksheet B (a qualifying child under 17)
 
 - Source: "If you are directed to complete Form 8396 by Credit Limit Worksheet B … include the amount from line 14 of Credit Limit Worksheet B instead of … line 19" (`line-8-credit-limit-worksheet::b01`); Worksheet B applies with this credit and Schedule 8812 line 4 above 0 (`irs-1040s8-inst-2025::sec::line-21::b03`).
-- Default: unsupported. Lines 8 to 17 and the worksheet are unsupported, and so is Schedule 8812 line 13. Lines 1 to 7 print.
-- Changes dollars: yes. Fix: figure Worksheet B lines 1 to 14 from Schedule 8812 Part II-A and II-B amounts, without reading 8812 line 14 (that read makes a cycle).
+- Rule: Worksheet B lines 1 to 14 (`schedule-8812/worksheetB.ts`) give worksheet line 2's first amount. Schedule 8812 line 13 subtracts Schedule 3 line 6g as Credit Limit Worksheet A line 4 (Worksheet B line 15).
+- Gaps: Form 2555 and Puerto Rico residence have no fact, so the engine reads both as absent. Self-employment leaves Worksheet B line 3 unsupported, as it does Schedule 8812 line 18a.
+- When line 9 is an engine gap (this item, item 5, 8 or 9), Schedule 3 line 6g is unsupported with the same reason. Schedule 8812 line 13 then leaves 6g out, as Schedule 3 leaves out its other unsupported credits, so the child tax credit still prints.
+- Changes dollars: no, except in those gaps.
 
 ## 5. Worksheet line 2 credits the engine does not compute
 
@@ -107,9 +109,9 @@ A preparer filled 14 cases by hand from the blank form and instructions only. Th
 | Line 3, rate above 20% and the $2,000 limit, co-owner share | published example with numbers (Pub. 530) |
 | Line 3, reissued certificate | own reading (item 8); unsupported with different rates |
 | Lines 4 to 7 | stated rule |
-| Line 8 and the Credit Limit Worksheet | stated rule; unsupported with a child under 17 or an uncomputed credit |
+| Line 8 and the Credit Limit Worksheet | stated rule (Worksheet B with a child under 17); unsupported with an uncomputed credit |
 | Line 9 | published example with numbers (Pub. 530 carryforward) |
 | Lines 10 to 17 | stated rule; the $600 carryforward is a published example |
 | Schedule A line 8a | stated rule; unsupported when line 3 is more than the 1098 interest |
-| Schedule 3 line 6g | stated rule |
+| Schedule 3 line 6g | stated rule; unsupported when line 9 is |
 | Schedule CA line 8a and 8e column C | own reading (item 12) |

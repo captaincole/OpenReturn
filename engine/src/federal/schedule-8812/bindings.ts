@@ -2,12 +2,20 @@
 
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, stepsOf, sum } from "../../money.js";
-import { unsupported, type Unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
-import { eicOutcome } from "../schedule-eic/outcome.js";
-import { SELF_EMPLOYED_EARNED_INCOME, selfEmployedForLine18a } from "./earnedIncomeGap.js";
+import { mortgageCreditGap } from "../8396/creditGap.js";
 import type { Schedule8812FilingInfo } from "./filingInfo.js";
 import type { Schedule8812 } from "./types.js";
+import {
+  ADDITIONAL_CREDIT_PER_CHILD,
+  EARNED_INCOME_FLOOR,
+  earnedIncome,
+  earnedIncomeCredit15Percent,
+  eicAndScheduleThreeLine11,
+  PART_II_B_MINIMUM,
+  scheduleOneAndTwoTaxes,
+  withheldSocialSecurityAndMedicare,
+} from "./worksheetB.js";
 
 // Line 5: the maximum CTC for each qualifying child ("CTC amount increased").
 const CHILD_TAX_CREDIT_PER_CHILD = 2_200;
@@ -21,18 +29,7 @@ const PHASEOUT_STEP = 1_000;
 // Line 11: "Multiply line 10 by 5% (0.05)".
 const PHASEOUT_RATE = 0.05;
 
-// MANUAL EDIT: line 16b, "x $1,700" for each qualifying child.
-const ADDITIONAL_CREDIT_PER_CHILD = 1_700;
-// Line 19: "Subtract $2,500 from the amount on line 18a".
-const EARNED_INCOME_FLOOR = 2_500;
-// Line 20: "Multiply the amount on line 19 by 15% (0.15)".
-const EARNED_INCOME_RATE = 0.15;
-// Line 20 Next: "On line 16b, is the amount $5,100 or more?"
-const PART_II_B_MINIMUM = 5_100;
-
-// MANUAL EDIT: line 13 with Form 8396 and a qualifying child (irs-1040s8-inst-2025::sec::line-21::b03).
-const WORKSHEET_B_WITH_FORM_8396 =
-  "Form 8396 files and line 4 is above 0: line 4 of Credit Limit Worksheet A is Credit Limit Worksheet B, which the engine does not figure.";
+// MANUAL EDIT: line 16b ($1,700), line 19 ($2,500), line 20 (15%) and line 20 Next ($5,100) are in worksheetB.ts.
 
 type Form = FormAccessor<Schedule8812>;
 type Bindings = Partial<{
@@ -116,31 +113,34 @@ export function register(): void {
       "0.line.12_line8_more_than_line11_yes": (form) => line8MoreThanLine11(form),
       /*
        * Credit Limit Worksheet A: Form 1040 line 18 minus the Schedule 3 credits
-       * it lists (lines 1, 2, 3, 4, 5b, 6d, 6f, 6l, 6m). Its line 4 is Credit
-       * Limit Worksheet B, which applies only with line 4 above 0 and a Form 8396,
-       * 8839, 5695 Part I or 8859 credit (Schedule 3 lines 5a, 6c, 6g, 6h;
-       * irs-1040s8-inst-2025::sec::line-21::b03). The engine has no Worksheet B:
-       * MANUAL EDIT: a filing Form 8396 with a qualifying child is unsupported, and
-       * the other three lines are unsupported today, so line 4 is -0-; the line
-       * waits if one ever fills. Line 6g is read only with a child: Form 8396
-       * reads Form 1040 line 19, which reads this line.
+       * it lists (lines 1, 2, 3, 4, 5b, 6d, 6f, 6l, 6m), less its line 4.
+       * MANUAL EDIT: line 4 is line 15 of Credit Limit Worksheet B (Schedule 3
+       * lines 5a, 6c, 6g and 6h) with line 4 above 0 and one of those credits
+       * (irs-1040s8-inst-2025::sec::line-21::b03,
+       * credit-limit-worksheet-b-continued::b02), else -0-. Lines 5a, 6c and 6h
+       * are unsupported today. With a qualifying child the line waits for Form
+       * 8396 line 9 (6g), unless line 9 is an engine gap: then 6g is left out,
+       * as Schedule 3 leaves out its other unsupported credits. Form 8396 reads
+       * Worksheet B line 14, not this line, so the read makes no cycle.
        */
       "0.line.13_credit_limit_worksheet_a": (form, info) => {
         const line18 = form["form-1040.line.18"];
         if (typeof line18 !== "number") return undefined;
         const children = sum(form["0.line.4_qualifying_children_under_17"]) > 0;
-        if (children && info.mustFile?.["form-8396"]?.value === true) {
-          return unsupported(WORKSHEET_B_WITH_FORM_8396);
-        }
-        const worksheetB =
+        const waitsFor6g =
           children &&
-          [
-            form["schedule-3.0.line.5a"],
-            form["schedule-3.0.line.6c"],
-            form["schedule-3.0.line.6g"],
-            form["schedule-3.0.line.6h"],
-          ].some((credit) => typeof credit === "number" && credit > 0);
-        if (worksheetB) return undefined;
+          info.mustFile?.["form-8396"]?.value === true &&
+          mortgageCreditGap(form, info) === undefined &&
+          numberOrBlank(form["schedule-3.0.line.6g"]) === undefined;
+        if (waitsFor6g) return undefined;
+        const line4 = children
+          ? sum(
+              form["schedule-3.0.line.5a"],
+              form["schedule-3.0.line.6c"],
+              form["schedule-3.0.line.6g"],
+              form["schedule-3.0.line.6h"],
+            )
+          : 0;
         const credits = sum(
           form["schedule-3.0.line.1"],
           form["schedule-3.0.line.2"],
@@ -152,7 +152,7 @@ export function register(): void {
           form["schedule-3.0.line.6l"],
           form["schedule-3.0.line.6m"],
         );
-        return line18 - credits;
+        return line18 - credits - line4;
       },
       "0.line.14_child_tax_credit_and_other_dependents": (form) => {
         const line12 = form["0.line.12_credit_after_phaseout"];
@@ -235,9 +235,7 @@ function partIIABindings(): Bindings {
     "1.line.20_line19_times_15_percent": (form) => {
       const answer = line18aMoreThanFloor(form);
       if (answer === undefined) return undefined;
-      return answer
-        ? roundDollars(sum(form["1.line.19_earned_income_over_2500"]) * EARNED_INCOME_RATE)
-        : 0;
+      return answer ? earnedIncomeCredit15Percent(sum(form["1.line.18a_earned_income"])) : 0;
     },
     "1.line.20_line16b_at_least_5100_no": (form) => {
       const answer = line16bAtLeastPartIIBMinimum(form);
@@ -264,29 +262,10 @@ function partIIBBindings(): Bindings {
      * plus Form 8959 line 7, less Form 8959 line 22, plus half of Form 8959
      * line 13. Without Form 8959 it is boxes 4 and 6. Tier 1 RRTA has no fact.
      */
-    "1.line.21_withheld_ss_medicare_taxes": (form, info) => {
-      if (completesPartIIB(form) !== true) return undefined;
-      const line22Of8959 = sum(
-        form["form-8959.0.line.22_additional_medicare_tax_withholding_wages"],
-      );
-      return roundDollars(
-        sum(
-          info.w2SocialSecurityTaxWithheld,
-          info.w2MedicareTaxWithheld,
-          form["form-8959.0.line.7_additional_medicare_tax_wages"],
-          sum(form["form-8959.0.line.13_additional_medicare_tax_se"]) / 2,
-        ) - line22Of8959,
-      );
-    },
+    "1.line.21_withheld_ss_medicare_taxes": (form, info) =>
+      completesPartIIB(form) === true ? withheldSocialSecurityAndMedicare(form, info) : undefined,
     "1.line.22_schedule_1_and_2_taxes": (form) =>
-      completesPartIIB(form) === true
-        ? sum(
-            form["schedule-1.1.line.15"],
-            form["schedule-2.0.line.5_ss_medicare_tax_unreported_tips"],
-            form["schedule-2.0.line.6_uncollected_ss_medicare_tax_wages"],
-            form["schedule-2.0.line.13_uncollected_ss_medicare_rrta_tax_w2"],
-          )
-        : undefined,
+      completesPartIIB(form) === true ? scheduleOneAndTwoTaxes(form) : undefined,
     "1.line.23_total_lines_21_22": (form) =>
       completesPartIIB(form) === true
         ? sum(
@@ -298,15 +277,8 @@ function partIIBBindings(): Bindings {
      * MANUAL EDIT: Form 1040 line 27a is blank with no EIC, so its outcome tells no EIC (0)
      * from an EIC still waiting; only on this branch.
      */
-    "1.line.24_eic_and_schedule_3_line_11": (form, info) => {
-      if (completesPartIIB(form) !== true) return undefined;
-      const eic = eicOutcome(form, info);
-      if (eic.kind === "unsupported") return unsupported(eic.reason);
-      if (eic.kind === "waiting") return undefined;
-      const line27a = eic.kind === "credit" ? numberOrBlank(form["form-1040.line.27a"]) : 0;
-      if (line27a === undefined) return undefined;
-      return sum(line27a, form["schedule-3.0.line.11"]);
-    },
+    "1.line.24_eic_and_schedule_3_line_11": (form, info) =>
+      completesPartIIB(form) === true ? eicAndScheduleThreeLine11(form, info) : undefined,
     "1.line.25_line23_minus_line24": (form) => {
       const line23 = form["1.line.23_total_lines_21_22"];
       const line24 = form["1.line.24_eic_and_schedule_3_line_11"];
@@ -326,19 +298,7 @@ function partIIAOpen(form: Form): boolean {
   return sum(form["1.line.16b_qualifying_children_times_1700"]) > 0;
 }
 
-/*
- * MANUAL EDIT: line 18a, the Earned Income Chart (irs-1040s8-inst-2025::sec::earned-income-chart-line-18a::b01):
- * with no self-employment, EIC Step 5 and the Earned Income Worksheet both give
- * Form 1040 line 1z plus all nontaxable combat pay (no line 1i election fact),
- * less Medicaid waiver payments (Schedule 1 line 8s, unsupported). With a
- * business or Schedule SE the worksheets differ and are not drafted: unsupported.
- */
-function earnedIncome(form: Form, info: Schedule8812FilingInfo): number | Unsupported | undefined {
-  if (selfEmployedForLine18a(form, info)) return unsupported(SELF_EMPLOYED_EARNED_INCOME);
-  const line1z = numberOrBlank(form["form-1040.line.1z"]);
-  if (line1z === undefined) return undefined;
-  return atLeast(0, sum(line1z, form["1.line.18b_nontaxable_combat_pay"]));
-}
+// MANUAL EDIT: line 18a, the Earned Income Chart, is earnedIncome() in worksheetB.ts (Worksheet B line 3).
 
 // Line 19: "Is the amount on line 18a more than $2,500?"
 function line18aMoreThanFloor(form: Form): boolean | undefined {

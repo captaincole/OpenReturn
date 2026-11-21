@@ -1,6 +1,8 @@
 import { defineForm } from "../../defineForm.js";
 import { numberOrBlank, sum } from "../../money.js";
+import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
+import { mortgageCreditGap } from "../8396/creditGap.js";
 import type { Schedule3FilingInfo } from "./filingInfo.js";
 import type { Schedule3 } from "./types.js";
 
@@ -18,9 +20,15 @@ export function register(): void {
       "0.line.2": (form) => numberOrBlank(form["form-2441.0.line.11_dependent_care_credit"]),
       // MANUAL EDIT: Schedule R line 22 ("Also enter this amount on Schedule 3 (Form 1040), line 6d").
       "0.line.6d": (form) => numberOrBlank(form["schedule-r.1.line.22_credit"]),
-      // MANUAL EDIT: Form 8396 line 9 ("Also include this amount on Schedule 3 (Form 1040), line 6g").
-      "0.line.6g": (form) =>
-        numberOrBlank(form["form-8396.0.line.9_current_year_mortgage_interest_credit"]),
+      /*
+       * MANUAL EDIT: Form 8396 line 9 ("Also include this amount on Schedule 3 (Form 1040), line 6g").
+       * When line 9 is an engine gap, so is this line, with the same reason.
+       */
+      "0.line.6g": (form, info) => {
+        const gap = mortgageCreditGap(form, info);
+        if (gap !== undefined) return unsupported(gap);
+        return numberOrBlank(form["form-8396.0.line.9_current_year_mortgage_interest_credit"]);
+      },
       "0.line.5b": (form) => {
         const value = form["form-5695.3.line.32"];
         return typeof value === "number" ? value : undefined;

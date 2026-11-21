@@ -1,15 +1,14 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
 import { defineForm, type FormAccessor } from "../../defineForm.js";
-import { numberOrBlank, roundDollars, sum } from "../../money.js";
+import { roundDollars } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { namesOnReturn } from "../returnNames.js";
-import type { Form8396FilingInfo } from "./filingInfo.js";
+import { creditLimitOf, isUnsupported, type CreditLimitInfo } from "./creditGap.js";
 import {
   certificateCredit,
   certifiedInterest,
-  creditLimit,
   creditRateText,
   currentYearCredit,
   partII,
@@ -22,9 +21,8 @@ import {
 import type { Form8396 } from "./types.js";
 
 type Form = FormAccessor<Form8396>;
-type Info = Form8396FilingInfo;
-
-const isUnsupported = (value: object): value is Unsupported => "unsupported" in value;
+// MANUAL EDIT: Worksheet B line 14 (worksheet line 2) reads the Schedule 8812 slots too.
+type Info = CreditLimitInfo;
 
 /* Line 3, or why it cannot be figured; undefined while the certificate is not recorded. */
 function line3Of(info: Info): number | Unsupported | undefined {
@@ -53,56 +51,6 @@ function inputsOf(info: Info): CreditInputs | Unsupported | undefined {
 /* "Enter any … carryforward": the amount, blank when there is none. */
 const carried = (amount: number | undefined): number | undefined =>
   amount === undefined || roundDollars(amount) <= 0 ? undefined : roundDollars(amount);
-
-/*
- * Credit Limit Worksheet B of the Schedule 8812 instructions applies with a
- * qualifying child under 17 (line 4 above 0) and this credit
- * (irs-1040s8-inst-2025::sec::line-21::b03); worksheet line 2 then takes its
- * line 14 instead of Form 1040 line 19
- * (irs-8396-form-2025::sec::line-8-credit-limit-worksheet::b01). The engine has
- * no Worksheet B. Form 2555, which turns it off, has no fact.
- */
-const WORKSHEET_B =
-  "With a qualifying child under 17, line 2 of the Credit Limit Worksheet takes line 14 of Credit Limit Worksheet B in the Schedule 8812 instructions instead of Form 1040 line 19; the engine does not figure Worksheet B.";
-
-/*
- * Worksheet line 2 names Schedule 3 lines the engine does not compute yet. While
- * one of their forms files, the total would leave its credit out.
- */
-const UNCOMPUTED_CREDITS: ReadonlyArray<[formId: string, line: string]> = [
-  ["form-1116", "Schedule 3 line 1 (Form 1116)"],
-  ["form-8863", "Schedule 3 line 3 (Form 8863)"],
-  ["form-8880", "Schedule 3 line 4 (Form 8880)"],
-  ["form-8936", "Schedule 3 lines 6f and 6m (Form 8936)"],
-  ["form-8978", "Schedule 3 line 6l (Form 8978)"],
-];
-
-function creditLimitOf(form: Form, info: Info): CreditLimit | Unsupported | undefined {
-  if (sum(form["schedule-8812.0.line.4_qualifying_children_under_17"]) > 0) {
-    return unsupported(WORKSHEET_B);
-  }
-  const missing = UNCOMPUTED_CREDITS.find(([formId]) => info.mustFile?.[formId]?.value === true);
-  if (missing) {
-    return unsupported(
-      `Line 2 of the Credit Limit Worksheet takes ${missing[1]}, which the engine does not compute yet.`,
-    );
-  }
-  const line18 = numberOrBlank(form["form-1040.line.18"]);
-  if (line18 === undefined) return undefined;
-  const otherCredits = sum(
-    form["form-1040.line.19"],
-    form["schedule-3.0.line.1"],
-    form["schedule-3.0.line.2"],
-    form["schedule-3.0.line.3"],
-    form["schedule-3.0.line.4"],
-    form["schedule-3.0.line.6d"],
-    form["schedule-3.0.line.6f"],
-    form["schedule-3.0.line.6l"],
-    form["schedule-3.0.line.6m"],
-    form["form-5695.3.line.32"],
-  );
-  return creditLimit(line18, otherCredits);
-}
 
 /* Line 9, from lines 7 and 8. */
 function line9Of(form: Form, info: Info): number | Unsupported | undefined {
@@ -146,7 +94,7 @@ const certificateText =
     pick(info);
 
 export function register(): void {
-  defineForm<Form8396, Form8396FilingInfo>("form-8396", {
+  defineForm<Form8396, Info>("form-8396", {
     bindings: {
       "0.header.taxpayer_name": (_, info) => namesOnReturn(info),
       "0.header.ssn": (_, info) => info.taxpayerSSN,

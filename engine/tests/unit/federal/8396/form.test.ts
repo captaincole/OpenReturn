@@ -171,20 +171,21 @@ describe("Form 8396 results on other forms", () => {
     ]);
     expect(run.field("form-8396", LINE_8)).toMatchObject(UNSUPPORTED);
     expect(run.field("form-8396", LINE_9)).toMatchObject(UNSUPPORTED);
+    expect(run.field("schedule-3", "0.line.6g")).toMatchObject(UNSUPPORTED);
     expect(run.value("form-8396", "0.line.7_total_credit_available")).toBe(3_350);
   });
 });
 
-describe("Form 8396 with a qualifying child under 17", () => {
-  const child: TaxFactRow = {
+describe("Form 8396 with a qualifying child under 17 (Credit Limit Worksheet B)", () => {
+  const childFact = (slug: string, ssn: string): TaxFactRow => ({
     ...certificateFact,
-    id: "f-child",
+    id: `f-${slug}`,
     category: "dependents",
-    key: makeDependentFactKey("juniper-castellano"),
+    key: makeDependentFactKey(slug),
     value: {
-      firstName: "Juniper",
+      firstName: slug,
       lastName: "Castellano",
-      ssn: "400-00-8397",
+      ssn,
       relationship: "Daughter",
       dob: "05/01/2019",
       monthsLivedWithYou: 12,
@@ -193,19 +194,66 @@ describe("Form 8396 with a qualifying child under 17", () => {
       fullTimeStudent: false,
       permanentlyDisabled: false,
     },
-  };
-  const run = evaluate([...base.facts, child]);
+  });
+  const child = childFact("juniper", "400-00-8397");
+  const noEic = [
+    "eic.barred_by_irs",
+    "eic.denied_in_earlier_year",
+    "eic.nonresident_alien",
+    "eic.qualifying_child_of_another",
+  ].map((key) => ({ ...certificateFact, id: `f-${key}`, key, value: false, category: "other" }));
 
-  it("Credit Limit Worksheet B applies: line 8 and Schedule 8812 line 13 are unsupported", () => {
-    expect(run.value("schedule-8812", "0.line.4_qualifying_children_under_17")).toBe(1);
-    expect(run.field("form-8396", LINE_8)).toMatchObject(UNSUPPORTED);
-    expect(run.field("schedule-8812", "0.line.13_credit_limit_worksheet_a")).toMatchObject(
-      UNSUPPORTED,
-    );
+  /*
+   * Schedule 8812 line 12 2,200. Worksheet B: line 2 1,700; line 5
+   * (36,000 − 2,500) × 15% = 5,025; line 2 under $5,100, so line 11 is 0;
+   * line 13 = smaller of 1,700 and 5,025; line 14 = 2,200 − 1,700 = 500.
+   * Worksheet line 2 = 500 + 360; line 9 = 2,087 − 860 = 1,227. Credit Limit
+   * Worksheet A: 2,087 − 360 − 1,227 (its line 4) = 500.
+   */
+  it("one child: Worksheet B line 14 limits the credit, and line 22 is 0", () => {
+    const run = evaluate([...base.facts, child]);
+    expect(run.value("form-8396", "1.line8_worksheet.2_total_other_credits")).toBe(860);
+    expect(run.value("form-8396", LINE_9)).toBe(1_227);
+    expect(run.value("form-8396", "0.line.17_2025_carryforward_to_2026")).toBe(773);
+    expect(run.value("schedule-3", "0.line.6g")).toBe(1_227);
+    expect(run.value("schedule-8812", "0.line.13_credit_limit_worksheet_a")).toBe(500);
+    expect(run.value("form-1040", "line.19")).toBe(500);
+    expect(run.value("form-1040", "line.22")).toBe(0);
+    expect(run.value("schedule-8812", "1.line.27_additional_child_tax_credit")).toBe(1_700);
   });
 
-  it("lines 1 to 7 still print", () => {
-    expect(run.value("form-8396", "0.line.7_total_credit_available")).toBe(3_350);
+  /*
+   * Three children: line 1 6,600, line 2 5,100. Line 5 (5,025) is less than
+   * line 1, so lines 7 to 11 apply: the EIC (line 10) is more than the
+   * withheld taxes (line 9), so line 11 is 0. Line 14 = 6,600 − 5,025 = 1,575;
+   * line 9 = 2,087 − (1,575 + 360) = 152.
+   */
+  it("three children: lines 7 to 11 of Worksheet B, and line 9 is what is left", () => {
+    const children = [child, childFact("wren-jr", "400-00-8398"), childFact("ivy", "400-00-8399")];
+    const run = evaluate([...base.facts, ...children, ...noEic]);
+    expect(run.value("form-8396", LINE_9)).toBe(152);
+    expect(run.value("schedule-8812", "0.line.14_child_tax_credit_and_other_dependents")).toBe(
+      1_575,
+    );
+    expect(run.value("form-1040", "line.22")).toBe(0);
+    expect(run.value("schedule-8812", "1.line.27_additional_child_tax_credit")).toBe(5_025);
+  });
+
+  it("a gap in line 9 marks Schedule 3 line 6g, and the child tax credit still prints", () => {
+    const run = evaluate(
+      [...base.facts, child],
+      [...base.decisions, decision("decisions.scope.must_file_1116", true)],
+    );
+    expect(run.field("form-8396", LINE_9)).toMatchObject(UNSUPPORTED);
+    expect(run.field("schedule-3", "0.line.6g")).toMatchObject(UNSUPPORTED);
+    expect(run.value("schedule-8812", "0.line.13_credit_limit_worksheet_a")).toBe(1_727);
+    expect(run.value("form-1040", "line.19")).toBe(1_727);
+  });
+
+  it("lines 1 to 7 print", () => {
+    expect(
+      evaluate([...base.facts, child]).value("form-8396", "0.line.7_total_credit_available"),
+    ).toBe(3_350);
   });
 });
 
