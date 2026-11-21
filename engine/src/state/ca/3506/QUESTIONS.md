@@ -119,6 +119,53 @@ the engine applies, and whether the default can change a dollar amount.
 - Default: a Form 540 filer is domiciled in California. Not modeled.
 - Changes dollars: yes, for a servicemember domiciled elsewhere.
 
+## 14. Which AGI the line 9 chart reads
+
+- Source: the chart rows name no AGI: "$40,000 or less | ... .50"
+  (`ca-3506-inst-2025::sec::line-9::b02`). The line text says "use your
+  federal AGI less your military pay" (`::line-9::b01`), and Qualification 8
+  limits federal AGI to $100,000 (`::c-qualifications::b02`). The worksheet's
+  line 14 reads the same chart with "2024 California AGI" (`::line-14-2::b01`).
+- Default: federal AGI (Form 540 line 13), as lines 7 and 9 say.
+- Changes dollars: yes, when federal and California AGI fall in different bands.
+  The blind fill read California AGI; no blind case had the two differ.
+
+## 15. Line 15 when benefits are more than expenses
+
+- Source: "any amount included on line 13 that you did not receive because you
+  did not incur the expense is considered forfeited"
+  (`ca-3506-inst-2025::sec::line-15::b01`).
+- Default: line 15 is the stated forfeited amount. The engine does not infer
+  a forfeit from line 13 above line 17; benefits received and not spent stay
+  on line 13 and become taxable on line 27.
+- Changes dollars: yes, line 27 (taxable benefits), when a forfeit is not stated.
+
+## Second opinions
+
+- PolicyEngine-US 2.152.15 (commit b274cacc), `variables/gov/states/ca/tax/income/credits/`
+  and `parameters/.../child_dependent_care/`. Compared on 2026-11-21.
+  - Line 7: same chart (the federal Form 2441 decimals). Agrees.
+  - Line 9 decimals .50, .43, .34 and the $100,000 stop: same values. At AGI
+    of exactly $40,000, $70,000 or $100,000 its bracket gives the next band's
+    decimal (policyengine-core's single-amount scale puts a value equal to a
+    threshold in the upper band). The FTB text says "$40,000 or less" and
+    "not over" (`ca-3506-inst-2025::sec::line-9::b02`). The engine follows the
+    text. Filed upstream as PolicyEngine/policyengine-us#10915.
+  - It limits the credit base by federal tax liability (the Form 2441 Credit
+    Limit Worksheet). FTB 3506 line 8 is line 6 times line 7 with no such
+    limit (the form). The engine follows the form. Filed upstream as #10914.
+  - Lines 22 and 28 to 33: same rules ($5,000 or $2,500 on line 22; the
+    $3,000 or $6,000 limit less excluded benefits; line 32 from Form 2441
+    line 31). Agrees.
+  - Lines 4 and 5: it uses California earned income (payroll HSA
+    contributions count). The engine uses the Form 2441 figures (item 9). The
+    text says "taxable employee compensation" (`ca-3506-inst-2025::sec::line-4::b01`)
+    and does not say which law. Engine default kept.
+  - Married filing separately: the joint-return rule with the Section E
+    exception. Agrees.
+- IRS Direct File: federal only, no FTB 3506. Not compared. The repo names no
+  other reference implementation for this form.
+
 ## Confidence by field group
 
 | Field group | Confidence |
