@@ -1,5 +1,6 @@
 /*
- * Writes docs/coverage.md, and the table in the root README, from the c8 run of the golden suite (coverage/coverage-summary.json).
+ * Writes docs/coverage.md and docs/individual-forms.md, and the two tables in the root README. The coverage numbers come from the
+ * c8 run of the golden suite (coverage/coverage-summary.json); the form lists are in scripts/formLists.
  * `npm run coverage` runs both; this file alone reads the last run.
  */
 
@@ -12,6 +13,15 @@ import { FORMS, registerAllForms } from "../../src/registry.js";
 import { catalogPath, catalogTaxYear } from "../../tests/helpers/formPaths.js";
 import { loadScenarios } from "../../tests/scenarios/index.js";
 import type { Scenario } from "../../tests/types.js";
+import californiaForms from "../formLists/california-2025.json";
+import federalForms from "../formLists/federal-2025.json";
+import {
+  formsOnNoList,
+  renderFormListPage,
+  summarizeFormList,
+  type FormList,
+  type FormListSummary,
+} from "./formLists.js";
 import { updateReadme } from "./readme.js";
 import {
   buildCoverageReport,
@@ -24,6 +34,18 @@ import {
 const SUMMARY_PATH = resolve(ENGINE_ROOT, "coverage/coverage-summary.json");
 const REPORT_PATH = resolve(ENGINE_ROOT, "../docs/coverage.md");
 const README_PATH = resolve(ENGINE_ROOT, "../README.md");
+const FORM_LIST_PAGE_PATH = resolve(ENGINE_ROOT, "../docs/individual-forms.md");
+const FORM_LISTS: FormList[] = [federalForms, californiaForms];
+
+function formListSummaries(engineForms: FormInput[]): FormListSummary[] {
+  const unlisted = formsOnNoList(FORM_LISTS, engineForms);
+  if (unlisted.length > 0) {
+    throw new Error(
+      `These engine forms are on no list in scripts/formLists: ${unlisted.join(", ")}. Give the form's row its "short".`,
+    );
+  }
+  return FORM_LISTS.map((list) => summarizeFormList(list, engineForms));
+}
 
 /* c8 keys each file by its absolute path, and adds one "total" entry. */
 async function readFilesBySrcPath(): Promise<Record<string, FileCoverage>> {
@@ -61,20 +83,24 @@ async function main() {
    * catalog and no bindings yet is missing there, and its fields count as 0 supported.
    */
   const catalog = await loadFromFixtures(FORMS.map(catalogPath));
-  const report = buildCoverageReport(await readFilesBySrcPath(), formInputs(scenarios, catalog));
+  const engineForms = formInputs(scenarios, catalog);
+  const report = buildCoverageReport(await readFilesBySrcPath(), engineForms);
+  const formLists = formListSummaries(engineForms);
+  /* The en-CA locale writes a date as 2026-11-15. */
+  const date = new Date().toLocaleDateString("en-CA");
   await writeFile(
     REPORT_PATH,
     renderCoverageReport({
       report,
-      /* The en-CA locale writes a date as 2026-11-15. */
-      date: new Date().toLocaleDateString("en-CA"),
+      date,
       scenarioCount: scenarios.length,
     }),
   );
   await writeFile(
     README_PATH,
-    updateReadme(await readFile(README_PATH, "utf8"), report.jurisdictions),
+    updateReadme(await readFile(README_PATH, "utf8"), report.jurisdictions, formLists),
   );
+  await writeFile(FORM_LIST_PAGE_PATH, renderFormListPage(formLists, date));
   console.log(
     `Wrote ${relative(process.cwd(), REPORT_PATH)} and ${relative(process.cwd(), README_PATH)}`,
   );

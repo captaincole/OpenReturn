@@ -116,7 +116,28 @@ The form engine computes the return. The table shows how much of each form it ha
 - **Fields supported:** the share of the form fields that the engine computes. It leaves each other field blank and says so.
 - **Tested:** the share of the form code paths that the test scenarios run.
 
-The numbers count only the forms that the engine has. Those are the most common IRS and FTB forms, not all of them. `npm run coverage` writes the table; [Engine coverage](docs/coverage.md) has the numbers for each form.
+The numbers count only the forms that the engine has. `npm run coverage` writes the table; [Engine coverage](docs/coverage.md) has the numbers for each form.
+
+### Forms for an individual return
+
+The IRS and the FTB each publish the list of forms that they accept with an individual return. The table shows how many of those forms the engine has.
+
+<!-- form-list-table:start -->
+| Forms | Federal 2025 | California 2025 |
+| --- | --- | --- |
+| Forms an individual return can hold | 225 | 65 |
+| In the engine | 79 | 32 |
+| With rules | 32 | 9 |
+| Tier 1 forms | 43 | 22 |
+| Tier 1 in the engine | 39 | 16 |
+| Tier 1 with rules | 26 | 7 |
+<!-- form-list-table:end -->
+
+- **In the engine:** the engine has the form's field list and can fill the form.
+- **With rules:** the engine computes one or more fields of the form.
+- **Tier 1:** the forms that our target user needs: a person with high wages, stock compensation, K-1s, rental property, and income from other states or countries. This list is our own estimate.
+
+[Forms for an individual return](docs/individual-forms.md) has each form and its state.
 
 ## Evals
 

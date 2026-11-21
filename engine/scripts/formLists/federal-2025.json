@@ -1,0 +1,1240 @@
+{
+  "list": "Tax year 2025 accepted forms and schedules for individual tax returns and extensions",
+  "publisher": "IRS",
+  "taxYear": 2025,
+  "sourceUrl": "https://www.irs.gov/pub/irs-efile/tax-year-2025-accepted-forms-schedules-individual-tax-returns-extensions.xlsx",
+  "sourceDate": "2025-11-18",
+  "titlesUrl": "https://www.irs.gov/pub/irs-efile/tax-year-2025-forms-attachments-1040-series-extensions.xlsx",
+  "jurisdiction": "federal",
+  "forms": [
+    {
+      "name": "Form 1040",
+      "title": "U.S. Individual Income Tax Return",
+      "maxPerReturn": "1",
+      "short": "1040",
+      "tier1": true
+    },
+    {
+      "name": "Form 1040 Schedule 1",
+      "title": "Additional Income and Adjustments to Income",
+      "maxPerReturn": "1",
+      "short": "schedule-1",
+      "tier1": true
+    },
+    {
+      "name": "Form 1040 Schedule 1A",
+      "title": "Additional Deductions",
+      "maxPerReturn": "1",
+      "short": "schedule-1-a",
+      "tier1": true
+    },
+    {
+      "name": "Form 1040 Schedule 2",
+      "title": "Additional Taxes",
+      "maxPerReturn": "1",
+      "short": "schedule-2",
+      "tier1": true
+    },
+    {
+      "name": "Form 1040 Schedule 3",
+      "title": "Additional Credits and Payments",
+      "maxPerReturn": "1",
+      "short": "schedule-3",
+      "tier1": true
+    },
+    {
+      "name": "Form 1040 Schedule 8812",
+      "title": "Child Tax Credit",
+      "maxPerReturn": "1",
+      "short": "schedule-8812",
+      "tier1": true
+    },
+    {
+      "name": "Form 1040 Schedule A",
+      "title": "Itemized Deductions",
+      "maxPerReturn": "1",
+      "short": "schedule-a",
+      "tier1": true
+    },
+    {
+      "name": "Form 1040 Schedule B",
+      "title": "Interest and Ordinary Dividends",
+      "maxPerReturn": "1",
+      "short": "schedule-b",
+      "tier1": true
+    },
+    {
+      "name": "Form 1040 Schedule C",
+      "title": "Profit or Loss From Business (Sole Proprietorship)",
+      "maxPerReturn": "8",
+      "short": "schedule-c",
+      "tier1": true
+    },
+    {
+      "name": "Form 1040 Schedule D",
+      "title": "Capital Gains and Losses",
+      "maxPerReturn": "1",
+      "short": "schedule-d",
+      "tier1": true
+    },
+    {
+      "name": "Form 1040 Schedule E",
+      "title": "Supplemental Income and Loss",
+      "maxPerReturn": "1",
+      "short": "schedule-e",
+      "tier1": true
+    },
+    {
+      "name": "Form 1040 Schedule EIC",
+      "title": "Earned Income Credit",
+      "maxPerReturn": "1",
+      "short": "schedule-eic"
+    },
+    {
+      "name": "Form 1040 Schedule F",
+      "title": "Profit or Loss From Farming",
+      "maxPerReturn": "unbounded",
+      "short": "schedule-f"
+    },
+    {
+      "name": "Form 1040 Schedule H",
+      "title": "Household Employment Taxes",
+      "maxPerReturn": "2",
+      "short": "schedule-h",
+      "tier1": true
+    },
+    {
+      "name": "Form 1040 Schedule J",
+      "title": "Income Averaging for Farmers and Fishermen",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 1040 Schedule LEP",
+      "title": "Request for Change in Language Preference",
+      "maxPerReturn": "2"
+    },
+    {
+      "name": "Form 1040 Schedule R",
+      "title": "Credit for the Elderly or the Disabled",
+      "maxPerReturn": "1",
+      "short": "schedule-r"
+    },
+    {
+      "name": "Form 1040 Schedule SE",
+      "title": "Self-Employment Tax",
+      "maxPerReturn": "2",
+      "short": "schedule-se",
+      "tier1": true
+    },
+    {
+      "name": "Form 1040NR",
+      "title": "U.S. Nonresident Alien Income Tax Return"
+    },
+    {
+      "name": "Form 1040NR Schedule A",
+      "title": "Itemized Deductions"
+    },
+    {
+      "name": "Form 1040NR Schedule NEC",
+      "title": "Tax on Income Not Effectively Connected With a U.S. Trade or Business"
+    },
+    {
+      "name": "Form 1040NR Schedule OI",
+      "title": "Other Information"
+    },
+    {
+      "name": "Form 1040NR Schedule P",
+      "title": "Foreign Partner's Interests in Certain Partnerships Transferred During Tax Year"
+    },
+    {
+      "name": "Form 1040SS",
+      "title": "U.S. Self-Employment Tax Return (Including the Additional Child Tax Credit for Bona Fide Residents of Puerto Rico)"
+    },
+    {
+      "name": "Form 1040X",
+      "title": "Amended U.S. Individual Income Tax Return",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 1041 Schedule K1",
+      "title": "Beneficiary's Share of Income, Deductions, Credits, etc.",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 1042S",
+      "title": "Foreign Person's U.S. Source Income Subject to Withholding"
+    },
+    {
+      "name": "Form 1065 Schedule D",
+      "title": "Capital Gains and Losses",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 1099R",
+      "title": "Distributions From Pensions, Annuities, Retirement or Profit-Sharing Plans, IRAs, Insurance Contracts, etc.",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 1116",
+      "title": "Foreign Tax Credit (Individual, Estate, or Trust)",
+      "maxPerReturn": "unbounded",
+      "short": "1116",
+      "tier1": true
+    },
+    {
+      "name": "Form 1116 Schedule B",
+      "title": "Foreign Tax Carryover Reconciliation Schedule",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 1116 Schedule C",
+      "title": "Foreign Tax Redeterminations",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 1118",
+      "title": "Foreign Tax Credit-Corporations",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 1118 Schedule I",
+      "title": "Reduction of Foreign Oil and Gas Taxes",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 1118 Schedule J",
+      "title": "Adjustments to Separate Limitation Income (Loss) Categories for Determining Numerators of Limitation Fractions, Year-End Recharacterization Balances, and Overall Foreign and Domestic Loss Account Balances",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 1118 Schedule K",
+      "title": "Foreign Tax Carryover Reconcilliation Schedule",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 1118 Schedule L",
+      "title": "Foreign Tax Redeterminations",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 1310",
+      "title": "Statement of Person Claiming Refund Due a Deceased Taxpayer",
+      "maxPerReturn": "2"
+    },
+    {
+      "name": "Form 172",
+      "title": "Net Operating Losses (NOLs)",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 2106",
+      "title": "Employee Business Expenses",
+      "maxPerReturn": "4",
+      "short": "2106"
+    },
+    {
+      "name": "Form 2120",
+      "title": "Multiple Support Declaration",
+      "maxPerReturn": "4"
+    },
+    {
+      "name": "Form 2210",
+      "title": "Underpayment of Estimated Tax by Individuals, Estates, and Trusts",
+      "maxPerReturn": "1",
+      "short": "2210",
+      "tier1": true
+    },
+    {
+      "name": "Form 2210F",
+      "title": "Underpayment of Estimated Tax By Farmers and Fishermen",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 2350",
+      "title": "(no title in IRS listing)"
+    },
+    {
+      "name": "Form 2439",
+      "title": "Notice to Shareholder of Undistributed Long-Term Capital Gains",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 2441",
+      "title": "Child and Dependent Care Expenses",
+      "maxPerReturn": "1",
+      "short": "2441",
+      "tier1": true
+    },
+    {
+      "name": "Form 2555",
+      "title": "Foreign Earned Income",
+      "maxPerReturn": "2",
+      "short": "2555"
+    },
+    {
+      "name": "Form 3115",
+      "title": "Application for Change in Accounting Method",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 3468",
+      "title": "Investment Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 3800",
+      "title": "General Business Credit",
+      "maxPerReturn": "1",
+      "short": "3800",
+      "tier1": true
+    },
+    {
+      "name": "Form 3903",
+      "title": "Moving Expenses",
+      "maxPerReturn": "2",
+      "short": "3903"
+    },
+    {
+      "name": "Form 4136",
+      "title": "Credit For Federal Tax Paid On Fuels",
+      "maxPerReturn": "1",
+      "short": "4136"
+    },
+    {
+      "name": "Form 4137",
+      "title": "Social Security and Medicare Tax On Unreported Tip Income",
+      "maxPerReturn": "2",
+      "short": "4137"
+    },
+    {
+      "name": "Form 4255",
+      "title": "Recapture of Investment Credit",
+      "maxPerReturn": "unbounded",
+      "short": "4255"
+    },
+    {
+      "name": "Form 4547",
+      "title": "Trump Account Election(s)",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 4562",
+      "title": "Depreciation and Amortization (Including Information on Listed Property)",
+      "maxPerReturn": "unbounded",
+      "short": "4562",
+      "tier1": true
+    },
+    {
+      "name": "Form 4563",
+      "title": "Exclusion of Income for Bona Fide Residents of American Samoa",
+      "maxPerReturn": "2",
+      "short": "4563"
+    },
+    {
+      "name": "Form 461",
+      "title": "Limitation on Business Losses",
+      "maxPerReturn": "1",
+      "short": "461",
+      "tier1": true
+    },
+    {
+      "name": "Form 4684",
+      "title": "Casualties and Thefts",
+      "maxPerReturn": "unbounded",
+      "short": "4684"
+    },
+    {
+      "name": "Form 4797",
+      "title": "Sales of Business Property",
+      "maxPerReturn": "unbounded",
+      "short": "4797",
+      "tier1": true
+    },
+    {
+      "name": "Form 4835",
+      "title": "Farm Rental Income and Expenses",
+      "maxPerReturn": "4",
+      "short": "4835"
+    },
+    {
+      "name": "Form 4868",
+      "title": "(no title in IRS listing)"
+    },
+    {
+      "name": "Form 4952",
+      "title": "Investment Interest Expense Deduction",
+      "maxPerReturn": "1",
+      "short": "4952",
+      "tier1": true
+    },
+    {
+      "name": "Form 4970",
+      "title": "Tax on Accumulation Distribution of Trusts",
+      "maxPerReturn": "1",
+      "short": "4970"
+    },
+    {
+      "name": "Form 4972",
+      "title": "Tax on Lump-Sum Distributions",
+      "maxPerReturn": "2",
+      "short": "4972"
+    },
+    {
+      "name": "Form 499W2PR",
+      "title": "Form 499 W2PR"
+    },
+    {
+      "name": "Form 5074",
+      "title": "Allocation of Individual Income Tax to Guam or the Commonwealth of the Northern Mariana Islands (CNMI)",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 5329",
+      "title": "Additional Taxes on Qualified Plans (Including IRAs) and Other Tax-Favored Accounts",
+      "maxPerReturn": "2",
+      "short": "5329",
+      "tier1": true
+    },
+    {
+      "name": "Form 5471",
+      "title": "Information Return of U.S. Persons With Respect To Certain Foreign Corporations",
+      "maxPerReturn": "unbounded",
+      "short": "5471"
+    },
+    {
+      "name": "Form 5471 Schedule E",
+      "title": "Income, War Profits, and Excess Profits Taxes Paid or Accrued",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 5471 Schedule G1",
+      "title": "Cost Sharing Arrangement",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 5471 Schedule H",
+      "title": "Current Earnings and Profits",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 5471 Schedule I1",
+      "title": "Information for Global Net Controlled Foreign Corporation (CFC) Tested Income",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 5471 Schedule J",
+      "title": "Accumulated Earnings and Profits (E&P) of Controlled Foreign Corporation",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 5471 Schedule M",
+      "title": "Transactions Between Controlled Foreign Corporation and Shareholders or Other Related Persons",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 5471 Schedule O",
+      "title": "Organization or Reorganization of Foreign Corporation, and Acquisitions and Dispositions of its Stock",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 5471 Schedule P",
+      "title": "Previously Taxed Earnings and Profits of U.S. Shareholder of Certain Foreign Corporations",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 5471 Schedule Q",
+      "title": "CFC Income by CFC Income Groups",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 5471 Schedule R",
+      "title": "Distributions From a Foreign Corporation",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 56",
+      "title": "(no title in IRS listing)"
+    },
+    {
+      "name": "Form 5695",
+      "title": "Residential Energy Credits",
+      "maxPerReturn": "2",
+      "short": "5695",
+      "tier1": true
+    },
+    {
+      "name": "Form 5713",
+      "title": "International Boycott Report",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 5713 Schedule A",
+      "title": "International Boycott Factor (Section 999(c)(1))",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 5713 Schedule B",
+      "title": "Specifically Attributable Taxes and Income (Section 999(c)(2))",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 5713 Schedule C",
+      "title": "Tax Effect of the International Boycott Provisions",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 5884",
+      "title": "Work Opportunity Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 6198",
+      "title": "At-Risk Limitations",
+      "maxPerReturn": "unbounded",
+      "short": "6198",
+      "tier1": true
+    },
+    {
+      "name": "Form 6251",
+      "title": "Alternative Minimum Tax-Individuals",
+      "maxPerReturn": "1",
+      "short": "6251",
+      "tier1": true
+    },
+    {
+      "name": "Form 6252",
+      "title": "Installment Sale Income",
+      "maxPerReturn": "unbounded",
+      "short": "6252",
+      "tier1": true
+    },
+    {
+      "name": "Form 6478",
+      "title": "Biofuel Producer Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 6765",
+      "title": "Credit for Increasing Research Activities",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 6781",
+      "title": "Gains and Losses From Section 1256 Contracts and Straddles",
+      "maxPerReturn": "unbounded",
+      "tier1": true
+    },
+    {
+      "name": "Form 7203",
+      "title": "S Corporation Shareholder Stock and Debt Basis Limitations",
+      "maxPerReturn": "unbounded",
+      "tier1": true
+    },
+    {
+      "name": "Form 7204",
+      "title": "Consent To Extend the Time To Assess Tax Related to Contested Foreign Income Taxes- Provisional Foreign Tax Credit Agreement",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 7205",
+      "title": "Energy Efficient Commercial Buildings Deduction",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 7206",
+      "title": "Self-Employed Health Insurance Deduction",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 7207",
+      "title": "Advanced Manufacturing Production Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 7210",
+      "title": "Clean Hydrogen Production Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 7211",
+      "title": "Clean Electricity Production Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 7213",
+      "title": "Nuclear Power Production Credit",
+      "maxPerReturn": "3"
+    },
+    {
+      "name": "Form 7217",
+      "title": "Partner's Report of Property Distributed by a Partnership",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 7218",
+      "title": "Clean Fuel Production Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8082",
+      "title": "Notice of Inconsistent Treatment or Administrative Adjustment Request (AAR)",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8275",
+      "title": "Disclosure Statement",
+      "maxPerReturn": "2"
+    },
+    {
+      "name": "Form 8275R",
+      "title": "Regulation Disclosure Statement",
+      "maxPerReturn": "2"
+    },
+    {
+      "name": "Form 8283",
+      "title": "Noncash Charitable Contributions",
+      "maxPerReturn": "unbounded",
+      "short": "8283",
+      "tier1": true
+    },
+    {
+      "name": "Form 8288A",
+      "title": "Statement of Withholding on Dispositions by Foreign Persons of U.S. Real Property Interests"
+    },
+    {
+      "name": "Form 8332",
+      "title": "Release/Revocation of Release of Claim to Exemption for Child by Custodial Parent",
+      "maxPerReturn": "100"
+    },
+    {
+      "name": "Form 8379",
+      "title": "Injured Spouse Allocation",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 8396",
+      "title": "Mortgage Interest Credit",
+      "maxPerReturn": "1",
+      "short": "8396"
+    },
+    {
+      "name": "Form 8582",
+      "title": "Passive Activity Loss Limitations",
+      "maxPerReturn": "1",
+      "short": "8582",
+      "tier1": true
+    },
+    {
+      "name": "Form 8582CR",
+      "title": "Passive Activity Credit Limitations",
+      "maxPerReturn": "1",
+      "tier1": true
+    },
+    {
+      "name": "Form 8586",
+      "title": "Low-Income Housing Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8594",
+      "title": "Asset Acquisition Statement Under Section 1060",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8606",
+      "title": "Nondeductible IRAs",
+      "maxPerReturn": "25",
+      "short": "8606",
+      "tier1": true
+    },
+    {
+      "name": "Form 8609A",
+      "title": "Annual Statement for Low-Income Housing Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8611",
+      "title": "Recapture of Low-Income Housing Credit",
+      "maxPerReturn": "unbounded",
+      "short": "8611"
+    },
+    {
+      "name": "Form 8615",
+      "title": "Tax for Certain Children Who Have Unearned Income",
+      "maxPerReturn": "1",
+      "short": "8615"
+    },
+    {
+      "name": "Form 8621",
+      "title": "Return By Shareholder of a Passive Foreign Investment Company or Qualified Electing Fund",
+      "maxPerReturn": "unbounded",
+      "short": "8621",
+      "tier1": true
+    },
+    {
+      "name": "Form 8689",
+      "title": "Allocation of Individual Income Tax to the U.S. Virgin Islands",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 8697",
+      "title": "Interest Computation Under the Look-Back Method for Completed Long-Term Contracts",
+      "maxPerReturn": "unbounded",
+      "short": "8697"
+    },
+    {
+      "name": "Form 8801",
+      "title": "Credit for Prior Year Minimum Tax-Individuals, Estates, and Trusts",
+      "maxPerReturn": "1",
+      "short": "8801",
+      "tier1": true
+    },
+    {
+      "name": "Form 8805",
+      "title": "Foreign Partner's Information Statement of Section 1446 Withholding tax"
+    },
+    {
+      "name": "Form 8814",
+      "title": "Parents' Election to Report Child's Interest and Dividends",
+      "maxPerReturn": "10",
+      "short": "8814",
+      "tier1": true
+    },
+    {
+      "name": "Form 8815",
+      "title": "Exclusion of Interest From Series EE and I U.S. Savings Bonds Issued after 1989",
+      "maxPerReturn": "1",
+      "short": "8815"
+    },
+    {
+      "name": "Form 8820",
+      "title": "Orphan Drug Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8824",
+      "title": "Like-Kind Exchanges",
+      "maxPerReturn": "unbounded",
+      "tier1": true
+    },
+    {
+      "name": "Form 8825",
+      "title": "Rental Real Estate Income and Expenses of a Partnership or an S Corporation",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8826",
+      "title": "Disabled Access Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8828",
+      "title": "Recapture of Federal Mortgage Subsidy",
+      "maxPerReturn": "1",
+      "short": "8828"
+    },
+    {
+      "name": "Form 8829",
+      "title": "Expenses for Business Use of Your Home",
+      "maxPerReturn": "32",
+      "short": "8829"
+    },
+    {
+      "name": "Form 8833",
+      "title": "Treaty-Based Return Position Disclosure Under Section 6114 or 7701(b)",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8834",
+      "title": "Qualified Electric Vehicle Credit",
+      "maxPerReturn": "unbounded",
+      "short": "8834"
+    },
+    {
+      "name": "Form 8835",
+      "title": "Renewable Electricity, Refined Coal, and Indian Coal Production Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8838",
+      "title": "Consent to Extend the Time To Assess Tax Under Section 367-Gain Recognition Agreement",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8838P",
+      "title": "Consent To Extend the Time To Assess Tax Pursuant to the Gain Deferral Method (Section 721(c))",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8839",
+      "title": "Qualified Adoption Expenses",
+      "maxPerReturn": "1",
+      "short": "8839"
+    },
+    {
+      "name": "Form 8840",
+      "title": "Closer Connection Exception Statement for Aliens"
+    },
+    {
+      "name": "Form 8843",
+      "title": "Statement for Exempt Individuals and Individuals With a Medical Condition"
+    },
+    {
+      "name": "Form 8844",
+      "title": "Empowerment Zone and Renewal Community Employment Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8845",
+      "title": "(no title in IRS listing)",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8846",
+      "title": "Credit for Employer Social Security and Medicare Taxes Paid on Certain Employee Tips",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8853",
+      "title": "Archer MSAs and Long-Term Care Insurance Contracts",
+      "maxPerReturn": "1",
+      "short": "8853"
+    },
+    {
+      "name": "Form 8854",
+      "title": "Initial and Annual Expatriation Information Statement",
+      "maxPerReturn": "2"
+    },
+    {
+      "name": "Form 8858",
+      "title": "Information Return of U.S. Persons With Respect To Foreign Disregarded Entities",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8858 Schedule M",
+      "title": "Transactions Between Foreign Disregarded Entity of a Foreign Tax Owner and the Filer or Other Related Entities",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8859",
+      "title": "District of Columbia First-Time Homebuyer Credit",
+      "maxPerReturn": "1",
+      "short": "8859"
+    },
+    {
+      "name": "Form 8862",
+      "title": "Information To Claim Earned Income Credit After Disallowance",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 8863",
+      "title": "Education Credits (American Opportunity and Lifetime Learning Credits)",
+      "maxPerReturn": "1",
+      "short": "8863"
+    },
+    {
+      "name": "Form 8864",
+      "title": "Biodiesel and Renewable Diesel Fuels Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8865",
+      "title": "Return of U.S. Persons With Respect to Certain Foreign Partnerships",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8865 Schedule G",
+      "title": "Statement of Application of the Gain Deferral Method Under Section 721(c)",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8865 Schedule H",
+      "title": "Acceleration Events and Exceptions Reporting Relating to Gain Deferral Method Under Section 721(c)",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8865 Schedule K1",
+      "title": "Partner's Share of Income, Credits, Deductions, etc.",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8865 Schedule K2",
+      "title": "Partners' Distributive Share Items - International",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8865 Schedule K3",
+      "title": "Partner's Share of Income, Deductions, Credits, etc. - International",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8865 Schedule O",
+      "title": "Transfer of Property to a Foreign Partnership",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8865 Schedule P",
+      "title": "Acquisitions, Dispositions, and Changes of Interests in a Foreign Partnership",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8866",
+      "title": "Interest Computation Under the Look-Back Method for Property Depreciated Under the Income Forecast Method",
+      "maxPerReturn": "5"
+    },
+    {
+      "name": "Form 8867",
+      "title": "Paid Preparer's Due Diligence Checklist",
+      "maxPerReturn": "4"
+    },
+    {
+      "name": "Form 8873",
+      "title": "Extraterritorial Income Exclusion",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8874",
+      "title": "New Markets Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8880",
+      "title": "Credit for Qualified Retirement Savings Contributions",
+      "maxPerReturn": "1",
+      "short": "8880"
+    },
+    {
+      "name": "Form 8881",
+      "title": "Credit for Small Employer Pension Plan Startup Costs",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8882",
+      "title": "Credit for Employer-Provided Childcare Facilities and Services",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8883",
+      "title": "Asset Allocation Statement Under Section 338",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8886",
+      "title": "Reportable Transaction Disclosure Statement",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8888",
+      "title": "Allocation of Refund (Including Savings Bond Purchases)",
+      "maxPerReturn": "1",
+      "short": "8888"
+    },
+    {
+      "name": "Form 8889",
+      "title": "Health Savings Accounts (HSAs)",
+      "maxPerReturn": "2",
+      "short": "8889",
+      "tier1": true
+    },
+    {
+      "name": "Form 8896",
+      "title": "Low Sulfur Diesel Fuel Production Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8900",
+      "title": "Qualified Railroad Track Maintenance Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8906",
+      "title": "Distilled Spirits Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8908",
+      "title": "Energy Efficient Home Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8911",
+      "title": "Alternative Fuel Vehicle Refueling Property Credit",
+      "maxPerReturn": "unbounded",
+      "short": "8911"
+    },
+    {
+      "name": "Form 8911 Schedule A",
+      "title": "Alternative Fuel Vehicle Refueling Property",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8912",
+      "title": "Credit to Holders of Tax Credit Bonds",
+      "maxPerReturn": "unbounded",
+      "short": "8912"
+    },
+    {
+      "name": "Form 8915F",
+      "title": "Qualified Disaster Retirement Plan Distributions and Repayments",
+      "maxPerReturn": "6",
+      "short": "8915-f"
+    },
+    {
+      "name": "Form 8917",
+      "title": "Tuition and Fees Deduction",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 8919",
+      "title": "Uncollected Social Security and Medicare Tax on Wages",
+      "maxPerReturn": "2",
+      "short": "8919"
+    },
+    {
+      "name": "Form 8925",
+      "title": "Report of Employer-Owned Life Insurance Contracts",
+      "maxPerReturn": "8"
+    },
+    {
+      "name": "Form 8932",
+      "title": "Credit for Employer Differential Wage Payments",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 8933",
+      "title": "Carbon Dioxide Sequestration Credit",
+      "maxPerReturn": "unbounded",
+      "short": "8933"
+    },
+    {
+      "name": "Form 8933 Schedule A",
+      "title": "Disposal or Enhanced Oil Recovery Owner Certification",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8933 Schedule B",
+      "title": "Disposal Operator Certification",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8933 Schedule C",
+      "title": "Enhanced Oil Recovery Operator Certification",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8933 Schedule D",
+      "title": "Recapture Certification",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8933 Schedule E",
+      "title": "Election Certification",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8933 Schedule F",
+      "title": "Utilization Certification",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8936",
+      "title": "Qualified Plug-In Electric Drive Motor Vehicle Credit",
+      "maxPerReturn": "1",
+      "short": "8936"
+    },
+    {
+      "name": "Form 8936 Schedule A",
+      "title": "Clean Vehicle Credit Amount",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8938",
+      "title": "Statement of Foreign Financial Assets",
+      "maxPerReturn": "1",
+      "short": "8938",
+      "tier1": true
+    },
+    {
+      "name": "Form 8941",
+      "title": "Credit for Small Employer Health Insurance Premiums",
+      "maxPerReturn": "2"
+    },
+    {
+      "name": "Form 8949",
+      "title": "Sales and Other Dispositions of Capital Assets",
+      "maxPerReturn": "unbounded",
+      "short": "8949",
+      "tier1": true
+    },
+    {
+      "name": "Form 8958",
+      "title": "Allocation of Tax Amounts Between Certain Individuals in Community Property States",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 8959",
+      "title": "Additional Medicare Tax",
+      "maxPerReturn": "1",
+      "short": "8959",
+      "tier1": true
+    },
+    {
+      "name": "Form 8960",
+      "title": "Net Investment Income Tax -- Individuals, Estates, and Trusts",
+      "maxPerReturn": "1",
+      "short": "8960",
+      "tier1": true
+    },
+    {
+      "name": "Form 8962",
+      "title": "Premium Tax Credit",
+      "maxPerReturn": "1",
+      "short": "8962"
+    },
+    {
+      "name": "Form 8978",
+      "title": "Partner's Additional Reporting Year Tax",
+      "maxPerReturn": "6",
+      "short": "8978"
+    },
+    {
+      "name": "Form 8978 Schedule A",
+      "title": "Partner's Additional Reporting Year Tax (Schedule of Adjustments)",
+      "maxPerReturn": "6"
+    },
+    {
+      "name": "Form 8990",
+      "title": "Limitation on Business Interest Expense Under Section 163(j)",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8992",
+      "title": "Calculation of Net Controlled Foreign Corporation Tested Income (NCTI)",
+      "maxPerReturn": "2",
+      "short": "8992"
+    },
+    {
+      "name": "Form 8992 Schedule A",
+      "title": "Schedule of Controlled Foreign Corporation (CFC)/Foreign Controlled Foreign Corporation (FCFC)) Information to Compute Net CFC Tested Income (NCTI)",
+      "maxPerReturn": "2"
+    },
+    {
+      "name": "Form 8993",
+      "title": "Section 250 Deduction for Foreign Derived Intangible Income (FDII) and Global Intangible Low-Taxed Income (GILTI)",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 8994",
+      "title": "Employer Credit for Paid Family and Medical Leave",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 8995",
+      "title": "Qualified Business Income Deduction Simplified Computation",
+      "maxPerReturn": "1",
+      "short": "8995",
+      "tier1": true
+    },
+    {
+      "name": "Form 8995A",
+      "title": "Qualified Business Income Deduction",
+      "maxPerReturn": "1",
+      "short": "8995-a",
+      "tier1": true
+    },
+    {
+      "name": "Form 8995A Schedule A",
+      "title": "Specified Service Trades or Businesses",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 8995A Schedule B",
+      "title": "Aggregation of Business Operations",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 8995A Schedule C",
+      "title": "Loss Netting and Carryforward",
+      "maxPerReturn": "1",
+      "short": "8995-a-schedule-c"
+    },
+    {
+      "name": "Form 8995A Schedule D",
+      "title": "Special Rules for Patrons of Agricultural or Horticultural Cooperatives",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 8997",
+      "title": "Initial and Annual Statement of Qualified Opportunity Fund (QOF) Investments",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 9000",
+      "title": "Alternative Media Preference",
+      "maxPerReturn": "2"
+    },
+    {
+      "name": "Form 9465",
+      "title": "Installment Agreement Request",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 926",
+      "title": "Return by a U.S. Transferor of Property to a Foreign Corporation",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 965A",
+      "title": "Individual Report of Net 965 Tax Liability",
+      "maxPerReturn": "1",
+      "short": "965-a"
+    },
+    {
+      "name": "Form 970",
+      "title": "Application to Use LIFO Inventory Method",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 982",
+      "title": "Reduction of Tax Attributes Due to Discharge of Indebtedness (and Section 1082 Basis Adjustment)",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form RRB1042S",
+      "title": "Statement for Nonresident Alien Recipients of Payments by the Railroad Retirement Board",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form SSA1042S",
+      "title": "Social Security Benefit Statement",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form T",
+      "title": "Forest Activities Schedule",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form W2",
+      "title": "Wage and Tax Statement (Info Copy Only)",
+      "maxPerReturn": "50"
+    },
+    {
+      "name": "Form W2AS",
+      "title": "American Samoa Wage and Tax Statement (Info Copy Only)"
+    },
+    {
+      "name": "Form W2G",
+      "title": "Certain Gambling Winnings (Info Copy Only)",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form W2GU",
+      "title": "Guam Wage and Tax Statement (Info Copy Only)"
+    },
+    {
+      "name": "Form W2VI",
+      "title": "U.S. Virgin Islands Wage and Tax Statement (Info Copy Only)"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 /* Pure: the jurisdiction rows in, the generated table of the root README out. */
 
+import { renderReadmeFormLists, type FormListSummary } from "./formLists.js";
 import { percent, table, wholeNumber, type JurisdictionRow } from "./report.js";
 
 /* The percent comes first here: it is the number a reader looks for. */
@@ -28,6 +29,11 @@ export const TABLE_MARKERS: Markers = {
   end: "<!-- coverage-table:end -->",
 };
 
+export const FORM_LIST_MARKERS: Markers = {
+  start: "<!-- form-list-table:start -->",
+  end: "<!-- form-list-table:end -->",
+};
+
 /* Replaces the lines between the two marker lines, and keeps the marker lines. */
 export function replaceBetween(text: string, markers: Markers, body: string): string {
   const start = text.indexOf(markers.start);
@@ -39,6 +45,11 @@ export function replaceBetween(text: string, markers: Markers, body: string): st
   return `${text.slice(0, start + markers.start.length)}\n${body}\n${text.slice(endLineStart)}`;
 }
 
-export function updateReadme(readme: string, jurisdictions: JurisdictionRow[]): string {
-  return replaceBetween(readme, TABLE_MARKERS, renderReadmeTable(jurisdictions));
+export function updateReadme(
+  readme: string,
+  jurisdictions: JurisdictionRow[],
+  formLists: FormListSummary[],
+): string {
+  const withCoverage = replaceBetween(readme, TABLE_MARKERS, renderReadmeTable(jurisdictions));
+  return replaceBetween(withCoverage, FORM_LIST_MARKERS, renderReadmeFormLists(formLists));
 }

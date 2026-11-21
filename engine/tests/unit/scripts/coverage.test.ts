@@ -1,4 +1,10 @@
 import { describe, expect, it } from "vitest";
+import {
+  formsOnNoList,
+  renderFormListPage,
+  summarizeFormList,
+  type FormList,
+} from "../../../scripts/coverage/formLists.js";
 import { replaceBetween, updateReadme } from "../../../scripts/coverage/readme.js";
 import {
   buildCoverageReport,
@@ -131,6 +137,76 @@ describe("renderCoverageReport", () => {
   });
 });
 
+const FEDERAL_LIST: FormList = {
+  list: "Accepted forms",
+  publisher: "IRS",
+  taxYear: 2025,
+  sourceUrl: "https://example.test/list",
+  sourceDate: "2025-11-18",
+  jurisdiction: "federal",
+  forms: [
+    { name: "Form 8995", title: "Simplified", maxPerReturn: "1", short: "8995", tier1: true },
+    { name: "Form 8995A", short: "8995-a" },
+    { name: "Form 8582CR", tier1: true },
+    { name: "Form W2", maxPerReturn: "50" },
+  ],
+};
+
+const CALIFORNIA_LIST: FormList = {
+  ...FEDERAL_LIST,
+  publisher: "FTB",
+  jurisdiction: "state/ca",
+  forms: [
+    { name: "Form 540", short: "540", tier1: true },
+    { name: "Schedule D (540)", short: "schedule-d-ca", tier1: true },
+  ],
+};
+
+const FORM_LISTS = [FEDERAL_LIST, CALIFORNIA_LIST].map((list) => summarizeFormList(list, FORMS));
+
+describe("summarizeFormList", () => {
+  it("counts the forms the engine has, and the forms with one or more supported fields", () => {
+    expect(FORM_LISTS[0]).toMatchObject({
+      name: "Federal 2025",
+      states: ["rules", "rules", "not_in_engine", "not_in_engine"],
+      all: { total: 4, inEngine: 2, withRules: 2 },
+      tier1: { total: 2, inEngine: 1, withRules: 1 },
+    });
+  });
+
+  it("counts a form with a field list and no supported field as a form with no rules", () => {
+    expect(FORM_LISTS[1]).toMatchObject({
+      states: ["rules", "no_rules"],
+      tier1: { total: 2, inEngine: 2, withRules: 1 },
+    });
+  });
+
+  it("finds an engine form that no list has", () => {
+    expect(formsOnNoList([FEDERAL_LIST], FORMS)).toEqual([
+      "state/ca/540",
+      "state/ca/schedule-d-ca",
+    ]);
+    expect(formsOnNoList([FEDERAL_LIST, CALIFORNIA_LIST], FORMS)).toEqual([]);
+  });
+});
+
+describe("renderFormListPage", () => {
+  const page = renderFormListPage(FORM_LISTS, "2026-01-02");
+
+  it("writes one row for each form of a list, with its state", () => {
+    expect(page).toContain("| Form 8995 | Simplified | Yes | Rules | 1 |");
+    expect(page).toContain("| Form 8582CR |  | Yes | Not in the engine |  |");
+    expect(page).toContain("| Schedule D (540) |  | Yes | No rules yet |  |");
+  });
+
+  it("names the source and the counts of each list", () => {
+    expect(page).toContain(
+      "Source: [Accepted forms](https://example.test/list), IRS, dated 2025-11-18.",
+    );
+    expect(page).toContain("The engine has 2 of 4 forms, and 2 have rules.");
+  });
+});
+
 describe("updateReadme", () => {
   const README = [
     "before",
@@ -138,9 +214,12 @@ describe("updateReadme", () => {
     "<!-- coverage-table:start -->",
     "an old table",
     "<!-- coverage-table:end -->",
+    "between",
+    "<!-- form-list-table:start -->",
+    "<!-- form-list-table:end -->",
     "after",
   ].join("\n");
-  const text = updateReadme(README, buildCoverageReport(FILES, FORMS).jurisdictions);
+  const text = updateReadme(README, buildCoverageReport(FILES, FORMS).jurisdictions, FORM_LISTS);
 
   it("writes the table, and keeps the marker lines and the text around them", () => {
     expect(text).toContain(
@@ -151,15 +230,35 @@ describe("updateReadme", () => {
         "| Federal 2025 | 2 | **88%** (112 of 127) | 44.2% |",
         "| California 2025 | 2 | **50%** (5 of 10) | 75.0% |",
         "<!-- coverage-table:end -->",
-        "after",
+        "between",
       ].join("\n"),
     );
     expect(text).toContain("before\n## Form support\n<!-- coverage-table:start -->");
     expect(text).not.toContain("an old table");
   });
 
+  it("writes the form list table between its own marker lines", () => {
+    expect(text).toContain(
+      [
+        "<!-- form-list-table:start -->",
+        "| Forms | Federal 2025 | California 2025 |",
+        "| --- | --- | --- |",
+        "| Forms an individual return can hold | 4 | 2 |",
+        "| In the engine | 2 | 2 |",
+        "| With rules | 2 | 1 |",
+        "| Tier 1 forms | 2 | 2 |",
+        "| Tier 1 in the engine | 1 | 2 |",
+        "| Tier 1 with rules | 1 | 1 |",
+        "<!-- form-list-table:end -->",
+        "after",
+      ].join("\n"),
+    );
+  });
+
   it("writes the same text on a second run", () => {
-    expect(updateReadme(text, buildCoverageReport(FILES, FORMS).jurisdictions)).toBe(text);
+    expect(updateReadme(text, buildCoverageReport(FILES, FORMS).jurisdictions, FORM_LISTS)).toBe(
+      text,
+    );
   });
 
   it("fails when the README has lost a marker", () => {

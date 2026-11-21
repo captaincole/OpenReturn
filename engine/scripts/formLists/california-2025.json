@@ -1,0 +1,389 @@
+{
+  "list": "Forms you can e-file for individuals (tax year 2025)",
+  "publisher": "FTB",
+  "taxYear": 2025,
+  "sourceUrl": "https://www.ftb.ca.gov/tax-pros/efile/individual-efile-forms.html",
+  "sourceDate": "2026-01-02",
+  "jurisdiction": "state/ca",
+  "forms": [
+    {
+      "name": "Form 540",
+      "title": "California Resident Income Tax Return",
+      "maxPerReturn": "1",
+      "short": "540",
+      "tier1": true
+    },
+    {
+      "name": "Form 540 2EZ",
+      "title": "California Resident Income Tax Return",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 540NR",
+      "title": "California Nonresident or Part-Year Resident Income Tax Return",
+      "maxPerReturn": "1",
+      "short": "540nr",
+      "tier1": true
+    },
+    {
+      "name": "Form 592-B",
+      "title": "Resident and Nonresident Withholding Tax Statement",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 593",
+      "title": "Real Estate Withholding Statement",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 3461",
+      "title": "California Limitations on Business Losses",
+      "maxPerReturn": "1",
+      "short": "3461",
+      "tier1": true
+    },
+    {
+      "name": "Form 3503",
+      "title": "Natural Heritage Preservation Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 3504",
+      "title": "Enrolled Tribal Member Certification",
+      "maxPerReturn": "2"
+    },
+    {
+      "name": "Form 3506",
+      "title": "Child and Dependent Care Expenses Credit",
+      "maxPerReturn": "1",
+      "short": "3506"
+    },
+    {
+      "name": "Form 3507",
+      "title": "Prison Inmate Labor Credit",
+      "maxPerReturn": "1",
+      "short": "3507"
+    },
+    {
+      "name": "Form 3510",
+      "title": "Credit for Prior Year Alternative Minimum Tax – Individuals/Fiduciaries",
+      "maxPerReturn": "1",
+      "short": "3510",
+      "tier1": true
+    },
+    {
+      "name": "Form 3514",
+      "title": "California Earned Income Tax Credit",
+      "maxPerReturn": "1",
+      "short": "3514"
+    },
+    {
+      "name": "Form 3521",
+      "title": "Low-Income Housing Credit",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 3523",
+      "title": "Research Credit",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 3526",
+      "title": "Investment Interest Expense Deduction",
+      "maxPerReturn": "1",
+      "short": "3526",
+      "tier1": true
+    },
+    {
+      "name": "Form 3531",
+      "title": "California Competes Tax Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 3532",
+      "title": "Head of Household Filing Status Schedule",
+      "maxPerReturn": "1",
+      "short": "3532"
+    },
+    {
+      "name": "Form 3540",
+      "title": "Credit Carryover and Recapture Summary",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 3541",
+      "title": "California Motion Picture and Television Production Credit",
+      "maxPerReturn": "unbounded",
+      "short": "3541"
+    },
+    {
+      "name": "Form 3547",
+      "title": "Donated Agricultural Products Transportation Credit",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 3548",
+      "title": "Disabled Access Credit for Eligible Small Businesses",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 3554",
+      "title": "New Employment Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 3568",
+      "title": "Alternative Identifying Information for the Dependent Exemption Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 3592",
+      "title": "College Access Tax Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 3596",
+      "title": "Paid Preparer’s Due Diligence Checklist for California Earned Income Tax Credit",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 3800",
+      "title": "Tax Computation for Certain Children with Unearned Income",
+      "maxPerReturn": "1",
+      "short": "3800-ca"
+    },
+    {
+      "name": "Form 3801",
+      "title": "Passive Activity Loss Limitations",
+      "maxPerReturn": "1",
+      "short": "3801",
+      "tier1": true
+    },
+    {
+      "name": "Form 3801-CR",
+      "title": "Passive Activity Credit Limitations",
+      "maxPerReturn": "1",
+      "tier1": true
+    },
+    {
+      "name": "Form 3803",
+      "title": "Parents’ Election to Report Child’s Interest and Dividends",
+      "maxPerReturn": "10",
+      "short": "3803",
+      "tier1": true
+    },
+    {
+      "name": "Form 3804-CR",
+      "title": "Pass-Through Entity Elective Tax Credit",
+      "maxPerReturn": "2",
+      "short": "3804-cr",
+      "tier1": true
+    },
+    {
+      "name": "Form 3805E",
+      "title": "Installment Sale Income",
+      "maxPerReturn": "25",
+      "tier1": true
+    },
+    {
+      "name": "Form 3805P",
+      "title": "Additional Taxes on Qualified Plans (Including IRAs) and Other Tax-Favored Accounts",
+      "maxPerReturn": "1 per t/p",
+      "short": "3805p",
+      "tier1": true
+    },
+    {
+      "name": "Form 3805V",
+      "title": "Net Operating Loss (NOL) Computations and NOL and Disaster Loss Limitations – Individuals, Estates, and Trusts",
+      "maxPerReturn": "1",
+      "short": "3805v"
+    },
+    {
+      "name": "Form 3805Z",
+      "title": "Enterprise Zone Deduction and Credit Summary",
+      "maxPerReturn": "unbounded",
+      "short": "3805z"
+    },
+    {
+      "name": "Form 3807",
+      "title": "Local Agency Military Base Recovery Area Deduction and Credit Summary (LAMBRA)",
+      "maxPerReturn": "unbounded",
+      "short": "3807"
+    },
+    {
+      "name": "Form 3808",
+      "title": "Manufacturing Enhancement Area Credit Summary (MEA)",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 3809",
+      "title": "Targeted Tax Area Deduction and Credit Summary (TTA)",
+      "maxPerReturn": "unbounded",
+      "short": "3809"
+    },
+    {
+      "name": "Form 3814",
+      "title": "New Donated Fresh Fruits or Vegetables Credit",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 3820",
+      "title": "High-Road Cannabis Tax Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 3821",
+      "title": "Cannabis Equity Tax Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 3831",
+      "title": "Homeless Hiring Tax Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 3835",
+      "title": "State Historic Rehabilitation Tax Credit",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 3840",
+      "title": "California Like-Kind Exchanges",
+      "maxPerReturn": "unbounded",
+      "tier1": true
+    },
+    {
+      "name": "Form 3853",
+      "title": "Health Coverage Exemptions and Individual Shared Responsibility Penalty",
+      "maxPerReturn": "1",
+      "short": "3853"
+    },
+    {
+      "name": "Form 3870",
+      "title": "Election for Refundable Credit",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Form 3872",
+      "title": "California Disaster Relief Request for Postponement of Tax Deadlines",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 3885A",
+      "title": "Depreciation and Amortization Adjustments",
+      "maxPerReturn": "unbounded",
+      "short": "3885a",
+      "tier1": true
+    },
+    {
+      "name": "Form 3913",
+      "title": "Moving Expense Deduction",
+      "maxPerReturn": "unbounded",
+      "short": "3913"
+    },
+    {
+      "name": "Form 4197",
+      "title": "Information on Tax Expenditure Items",
+      "maxPerReturn": "unbounded"
+    },
+    {
+      "name": "Form 5805",
+      "title": "Underpayment of Estimated Tax by Individuals and Fiduciaries",
+      "maxPerReturn": "1",
+      "short": "5805",
+      "tier1": true
+    },
+    {
+      "name": "Form 5805F",
+      "title": "Underpayment of Estimated Tax by Farmers and Fishermen",
+      "maxPerReturn": "1",
+      "short": "5805f"
+    },
+    {
+      "name": "Form 5870A",
+      "title": "Tax on Accumulation Distribution of Trusts",
+      "maxPerReturn": "1 per t/p",
+      "short": "5870a"
+    },
+    {
+      "name": "Form W-2",
+      "title": "Wage and Tax Statement",
+      "maxPerReturn": "50"
+    },
+    {
+      "name": "Schedule CA (540)",
+      "title": "California Adjustments – Residents",
+      "maxPerReturn": "1",
+      "short": "schedule-ca",
+      "tier1": true
+    },
+    {
+      "name": "Schedule CA (540NR)",
+      "title": "California Adjustments – Nonresidents or Part-Year Residents",
+      "maxPerReturn": "1",
+      "short": "schedule-ca-540nr",
+      "tier1": true
+    },
+    {
+      "name": "Schedule D (540)",
+      "title": "California Capital Gain or Loss Adjustment",
+      "maxPerReturn": "1",
+      "short": "schedule-d-ca",
+      "tier1": true
+    },
+    {
+      "name": "Schedule D (540NR)",
+      "title": "California Capital Gain or Loss Adjustment for Nonresidents or Part-Year Residents",
+      "maxPerReturn": "1",
+      "tier1": true
+    },
+    {
+      "name": "Schedule D-1",
+      "title": "Sales of Business Property",
+      "maxPerReturn": "1",
+      "tier1": true
+    },
+    {
+      "name": "Schedule G-1",
+      "title": "Tax on Lump Sum Distributions",
+      "maxPerReturn": "1 per t/p",
+      "short": "schedule-g-1"
+    },
+    {
+      "name": "Schedule P (540)",
+      "title": "Alternative Minimum Tax and Credit Limitations – Residents",
+      "maxPerReturn": "1",
+      "short": "schedule-p",
+      "tier1": true
+    },
+    {
+      "name": "Schedule P (540NR)",
+      "title": "Alternative Minimum Tax and Credit Limitations – Nonresidents or Part-Year Residents",
+      "maxPerReturn": "1",
+      "tier1": true
+    },
+    {
+      "name": "Schedule R",
+      "title": "Apportionment and Allocation of Income",
+      "maxPerReturn": "1 per t/p"
+    },
+    {
+      "name": "Schedule S",
+      "title": "Other State Tax Credit",
+      "maxPerReturn": "unbounded",
+      "short": "schedule-s",
+      "tier1": true
+    },
+    {
+      "name": "Schedule RDP",
+      "title": "CA RDP Adjustments Worksheet",
+      "maxPerReturn": "1"
+    },
+    {
+      "name": "Schedule X",
+      "title": "California Explanation of Amended Return Changes",
+      "maxPerReturn": "1",
+      "short": "schedule-x"
+    }
+  ]
+}

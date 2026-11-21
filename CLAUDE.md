@@ -125,6 +125,8 @@ npm run test:unit    # engine + canon + agent unit tests, then the web app's (we
 npm run typecheck    # tsc over engine + builder + canon + agent
 npm run coverage     # golden suite under c8; rewrites docs/coverage.md (fields supported, branches, lines, by form)
                      # and the README "Form support" table (by jurisdiction and tax year)
+                     # and docs/individual-forms.md with its README table: the IRS and FTB lists of forms for an individual
+                     # return (engine/scripts/formLists, where `tier1` marks the forms the target user needs) against the engine
 npm run form-graph   # runs the scenarios; rewrites docs/form-graph.md and web/data/form-graph.json (which form
                      # reads which form, and the fields that no scenario has checked); the web app draws it at /library/graph
 npm run e2e          # Playwright E2E through the UI + real model (stop dev:all first; see web/e2e/README.md)
