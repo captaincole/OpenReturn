@@ -159,6 +159,10 @@ function exceptionOf(
 
 const DOB_KEYS: Record<IraOwner, string> = { taxpayer: "identity.dob", spouse: SPOUSE_KEYS.dob };
 
+/* The person was 59½ or older all of 2025, so exception 12 covers every code 1 or S row. */
+export const over59AndAHalfAllYear = (inputs: ResolverInputs, owner: IraOwner): boolean =>
+  age59AndAHalfIn2025(text(inputs, DOB_KEYS[owner])) === "all_year";
+
 export interface PersonRead {
   person?: EarlyDistributionPerson;
   invalidExceptionKeys: string[];
@@ -186,7 +190,7 @@ export function earlyDistributionPerson(
   if (typeof amounts === "string") {
     return { person: { ...blank, gap: amounts, pending: false }, invalidExceptionKeys: [] };
   }
-  const over59AndAHalf = age59AndAHalfIn2025(text(inputs, DOB_KEYS[owner])) === "all_year";
+  const over59AndAHalf = over59AndAHalfAllYear(inputs, owner);
   const reads = earlyFacts.map((fact, index) =>
     exceptionOf(inputs, fact, amounts[index], over59AndAHalf),
   );

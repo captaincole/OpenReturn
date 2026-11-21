@@ -10,6 +10,7 @@ import {
   CA_MISC_DEDUCTION_KEYS,
   INVESTMENT_INTEREST_KEYS,
   makeDividendFactKey,
+  makeEarlyDistributionExceptionKey,
   makeInterestFactKey,
   makeRetirementDistributionFactKey,
   makeTradeFactKey,
@@ -115,6 +116,49 @@ describe("resolve3805pInfo", () => {
       }),
     );
     expect(info.mustFile?.["form-3805p"]?.value).toBe(false);
+  });
+
+  // ca-3805p-inst-2025::sec::line-2-early-distributions-not-subject-to-additional-tax::b03: 07 "applies only to IRAs".
+  it("asks again for an exception that does not fit the plan, and line 2 waits", () => {
+    const key = makeEarlyDistributionExceptionKey("plan", "code-1");
+    const info = resolve3805pInfo(
+      makeResolverInputs({
+        facts: [
+          distribution("1", 8000),
+          { key, category: "retirement", value: { number: "07", amount: 500 } },
+        ],
+        decisions: CA_RETURN,
+      }),
+    );
+    expect(info.earlyDistributionExclusion).toEqual({ status: "pending" });
+    expect(info.missingInputs?.["form-3805p"]).toEqual([key]);
+  });
+
+  it("an exception on a distribution with an undetermined taxable amount is an engine gap", () => {
+    const info = resolve3805pInfo(
+      makeResolverInputs({
+        facts: [
+          {
+            key: makeRetirementDistributionFactKey("plan", "code-1"),
+            category: "retirement",
+            value: {
+              payerName: "Plan",
+              box1: 8000,
+              box2b: { taxableAmountNotDetermined: true },
+              box7: "1",
+              box7IraSepSimple: false,
+            },
+          },
+          {
+            key: makeEarlyDistributionExceptionKey("plan", "code-1"),
+            category: "retirement",
+            value: { number: "05", amount: 500 },
+          },
+        ],
+        decisions: CA_RETURN,
+      }),
+    );
+    expect(info.earlyDistributionExclusion?.status).toBe("gap");
   });
 
   it("does not file on a return with no California Form 540", () => {

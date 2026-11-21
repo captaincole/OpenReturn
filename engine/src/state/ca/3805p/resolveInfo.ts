@@ -9,8 +9,14 @@ import { traditionalTaxable } from "../../../federal/1040/resolveInfo.js";
 import { rowTaxable } from "../../../federal/1040/rowTaxable.js";
 import { NONQUALIFIED_ROTH_CODES, partIIIFigures } from "../../../federal/8606/partIII.js";
 import { form8606Filers } from "../../../federal/8606/resolveInfo.js";
-import { sum } from "../../../money.js";
-import { factsInCategory, resolveMustFile, type ResolverInputs } from "../../../resolverInputs.js";
+import { atLeast, sum } from "../../../money.js";
+import {
+  factsInCategory,
+  missingInputs,
+  resolveMustFile,
+  type ResolverInputs,
+} from "../../../resolverInputs.js";
+import { californiaExclusion } from "./exceptions.js";
 import type { EarlyDistributionOwner, Form3805pFilingInfo } from "./filingInfo.js";
 
 /*
@@ -156,6 +162,8 @@ export function resolve3805pInfo(inputs: ResolverInputs): Form3805pFilingInfo {
   const simpleIraAmount = rows
     .filter((row) => row.distribution.box7.includes(SIMPLE_IRA_CODE))
     .map((row) => rowTaxable(row.distribution));
+  const { exclusion, invalidExceptionKeys } = californiaExclusion(inputs, owner);
+  const simpleIraExcluded = exclusion.status === "excluded" ? exclusion.simpleIraExcluded : 0;
   /* The form goes with a California return: none on a federal-only return (as FTB 3532). */
   const files540 = inputs.decisionByKey.get("decisions.scope.must_file_ca_540") === true;
   const resolution = resolveMustFile(inputs.decisionByKey, {
@@ -172,11 +180,18 @@ export function resolve3805pInfo(inputs: ResolverInputs): Form3805pFilingInfo {
   });
   return {
     mustFile: { "form-3805p": resolution },
+    /* A stated exception Cade must ask again (unreadable, or not for this kind of plan). */
+    missingInputs: {
+      "form-3805p": missingInputs(
+        Object.fromEntries(invalidExceptionKeys.map((key) => [key, undefined])),
+      ),
+    },
     earlyDistributionsInIncome: amount,
     simpleIraEarlyDistributions:
       amount === undefined || simpleIraAmount.includes(undefined)
         ? undefined
-        : Math.min(amount, sum(...simpleIraAmount)),
+        : atLeast(0, Math.min(amount, sum(...simpleIraAmount)) - simpleIraExcluded),
+    earlyDistributionExclusion: exclusion,
     earlyDistributionOwner: owner,
   };
 }
