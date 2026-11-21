@@ -3,6 +3,7 @@
 export * from "./kinds/activitiesOnReturn.js";
 export * from "./kinds/adjustments.js";
 export * from "./kinds/alternativeMinimumTax.js";
+export * from "./kinds/archerMsa.js";
 export * from "./kinds/blindness.js";
 export * from "./kinds/business.js";
 export * from "./kinds/caEarnedIncomeCredit.js";
@@ -31,6 +32,7 @@ export * from "./kinds/interest.js";
 export * from "./kinds/investmentInterest.js";
 export * from "./kinds/isoExercise.js";
 export * from "./kinds/itemizedOther.js";
+export * from "./kinds/ltcBenefits.js";
 export * from "./kinds/marketplaceCoverage.js";
 export * from "./kinds/miscIncome.js";
 export * from "./kinds/mortgage.js";

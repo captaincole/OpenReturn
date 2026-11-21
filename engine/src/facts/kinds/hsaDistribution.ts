@@ -11,6 +11,8 @@ export interface HsaDistributionFactValue {
   box3: string; // Distribution code, e.g. "1" (normal distribution)
   box4?: number; // FMV on date of death
   box5: "HSA" | "Archer MSA" | "MA MSA"; // Account type (checkbox)
+  /* Whose account on a joint return (the account holder); absent means the taxpayer's. */
+  owner?: "taxpayer" | "spouse";
 }
 
 export interface HsaDistributionFact {

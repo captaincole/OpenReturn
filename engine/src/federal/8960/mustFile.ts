@@ -4,6 +4,7 @@ import {
   businessesOnReturn,
   getGamblingWinningsFacts,
   getGovernmentPaymentsFacts,
+  getLtcBenefitsFacts,
   getSection1256Facts,
   isDividendFactKey,
   isHsaDistributionFactKey,
@@ -46,7 +47,7 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
     (fact) => fact.category === "retirement" && isSocialSecurityFactKey(fact.key),
   );
   const misc = factsInCategory(inputs, "other").filter((row) => isMiscIncomeFactKey(row.key));
-  // Taxable HSA distributions reach AGI through Form 8889 line 16 and Schedule 1 line 8f.
+  // Taxable HSA and MSA distributions reach AGI through Schedule 1 lines 8f and 8e (Forms 8889, 8853).
   const hsaDistributions = inputs.facts.filter((fact) => isHsaDistributionFactKey(fact.key));
   const tradeGain = sum(
     ...inputs.trades.boxed.map(({ trade, basis }) =>
@@ -78,6 +79,10 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
       return distribution.box2a ?? distribution.box1;
     }),
     ...hsaDistributions.map(({ value }) => (value as { box1?: unknown }).box1),
+    // Form 8853 line 26 (Schedule 1 line 8e) is at most the per diem payments of 1099-LTC boxes 1 and 2.
+    ...getLtcBenefitsFacts(inputs.facts)
+      .filter(({ value }) => value.box3 === "per_diem")
+      .flatMap(({ value }) => [value.box1, value.box2]),
     ...socialSecurity.map(({ value }) =>
       atLeast(0, (value as SocialSecurityFactValue).box5 * MAX_TAXABLE_SOCIAL_SECURITY),
     ),

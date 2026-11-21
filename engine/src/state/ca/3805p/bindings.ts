@@ -4,6 +4,7 @@ import { defineForm } from "../../../defineForm.js";
 import { atLeast, roundDollars } from "../../../money.js";
 import { unsupported } from "../../../types.js";
 import type { Form3805pFilingInfo } from "./filingInfo.js";
+import { msaOwner, partIIIBindings } from "./partIII.js";
 import type { Form3805p } from "./types.js";
 
 /*
@@ -23,8 +24,11 @@ const CA_SIMPLE_IRA_EARLY_TAX_RATE = 0.06;
  * sets the owner when one person took every early distribution.
  */
 function ownerField<T>(info: Form3805pFilingInfo, taxpayer: T, spouse: T): T | undefined {
-  if (info.earlyDistributionOwner === undefined) return undefined;
-  return info.earlyDistributionOwner === "spouse" ? spouse : taxpayer;
+  // MANUAL EDIT: with no early distribution, the person with the MSA (Part III).
+  const msa = msaOwner(info);
+  const owner = info.earlyDistributionOwner ?? (typeof msa === "string" ? msa : undefined);
+  if (owner === undefined) return undefined;
+  return owner === "spouse" ? spouse : taxpayer;
 }
 
 /* An exception covers a row the engine cannot figure: lines 2–4 are unsupported for that reason. */
@@ -34,14 +38,13 @@ const exclusionGap = (info: Form3805pFilingInfo) => {
 };
 const PART_II =
   "No fact records a Coverdell ESA, QTP or ABLE account distribution (ca-3805p-inst-2025::sec::part-ii-additional-tax-on-certain-distributions-from-education-accounts-and-able-accounts::b01, from Schedule CA line 8z or 8q).";
-const PART_III =
-  "No fact records an Archer MSA or Medicare Advantage MSA distribution, and federal Form 8853 is not modeled (ca-3805p-inst-2025::sec::part-iii-additional-tax-on-distributions-from-archer-and-medicare-advantage-medical-savings-accounts-msas::b01).";
 const FILED_ALONE =
   "Signed only when FTB 3805P is filed separately from Form 540 (ca-3805p-inst-2025::sec::c-when-and-where-to-file::b01); the engine attaches it to Form 540, and no preparer facts exist.";
 
 export function register(): void {
   defineForm<Form3805p, Form3805pFilingInfo>("form-3805p", {
     bindings: {
+      ...partIIIBindings,
       "0.header.first_name": (_, info) =>
         ownerField(info, info.taxpayerFirstName, info.spouseFirstName),
       "0.header.middle_initial": (_, info) =>
@@ -109,10 +112,6 @@ export function register(): void {
       "0.part2.line_6_distributions_not_subject_to_tax": PART_II,
       "0.part2.line_7_amount_subject_to_additional_tax": PART_II,
       "0.part2.line_8_education_able_tax_due": PART_II,
-      "0.part3.line_9_taxable_archer_msa_distribution": PART_III,
-      "0.part3.line_10a_archer_msa_tax_exception": PART_III,
-      "0.part3.line_10b_archer_msa_tax_due": PART_III,
-      "0.part3.line_11_medicare_advantage_msa_tax_due": PART_III,
       "0.signing.date_signed": FILED_ALONE,
       "0.signing.preparer_ptin": FILED_ALONE,
       "0.signing.preparer_firm_name_and_address": FILED_ALONE,

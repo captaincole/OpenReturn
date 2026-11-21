@@ -35,6 +35,15 @@ export function bornBeforeJan2_1971(dob: string | undefined): boolean | undefine
 }
 
 /*
+ * 65 on or before December 31, 2024 (a January 1, 1960 birthday counts as the
+ * day before), so every 2025 distribution is made after the 65th birthday:
+ * the Archer MSA age exception (Form 8853 line 9a). Tax year 2025 only.
+ */
+export function bornBeforeJan2_1960(dob: string | undefined): boolean | undefined {
+  return bornBeforeJan2Of(dob, 1960);
+}
+
+/*
  * Form 8880's Caution: a person born after January 1, 2008 cannot take the
  * saver's credit (irs-8880-form-2025::sec::who-can-take-this-credit::b01).
  * Tax year 2025 only.
