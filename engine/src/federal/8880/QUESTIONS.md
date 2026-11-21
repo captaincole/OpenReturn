@@ -67,6 +67,25 @@ Each item is a place where the form and its instructions do not settle a rule. I
 - Default: `retirement.traditional_ira.<owner>.contributions`; without it, the stated Form 8606 line 1 (nondeductible contributions).
 - Changes dollars: no, while the fact follows its own definition.
 
+## 11. Rounding line 1 and line 2 before line 3
+
+- Text: "If you have to add two or more amounts to figure the amount to enter on a line, include cents when adding the amounts and round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01).
+- The gap: line 3 adds lines 1 and 2. Rounding each line first can differ by $1 from rounding the cents total (1,000.50 + 499.50 gives 1,501, not 1,500).
+- Default: lines 1, 2 and 4 each round their own cents total; line 3 adds the rounded lines, as the form defines it. The blind fill read it the same way.
+- Changes dollars: at most $1 on line 3, and on line 10 only when line 6 is under $2,000.
+
+## Second opinions
+
+- **PolicyEngine-US 2.152.15** (commit b274cacc), `variables/gov/irs/credits/retirement_savings/` and `parameters/gov/irs/credits/retirement_saving/`.
+  - Same: the $2,000 cap per person; the AGI limits; every line 9 row edge (its joint table times 0.5 for single, separate and surviving spouse, and 0.75 for head of household gives the engine's table); "not over" is inclusive on each edge; the cap applies per person before the two are added; the worksheet's credits (foreign tax, child care, education, elderly or disabled; 6l not modeled there).
+  - Differs, form decides, no change:
+    - Line 4: PolicyEngine subtracts only the current year's distributions. The form takes the whole testing period, after 2022 and before the due date (irs-8880-form-2025::sec::line-4::b01).
+    - Age: PolicyEngine tests age 18 or more. The form says "born after January 1, 2008" (irs-8880-form-2025::sec::who-can-take-this-credit::b01). The engine follows the form.
+    - Worksheet line 1: PolicyEngine uses regular tax plus AMT. The form says Form 1040 line 18 (irs-8880-form-2025::sec::credit-limit-worksheet::b01), which also holds the excess advance premium tax credit repayment. This is a source conflict between the statute and the form. The engine fills the form.
+    - Line 8: PolicyEngine adds back the section 911, 931 and 933 exclusions. The engine makes line 8 unsupported with Form 2555 (item 8). This is the same rule, with the engine's gap stated.
+    - Rounding: PolicyEngine does not round to whole dollars. The engine rounds by form line.
+- **IRS Direct File**: the repo names no checkout of it, so it was not compared.
+
 ## Confidence by field group
 
 | Field group | Confidence |
