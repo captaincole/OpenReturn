@@ -16,7 +16,7 @@ export const LINE_5B_SUBTRACTIONS_GAP =
   "CA pension/annuity subtraction adjustments (Tier 2 railroad retirement benefits, pre-1987 three-year rule) require RRB-1099-R and specialized pension scenario data not yet ingested.";
 
 const FEDERAL_4972 = unsupported(
-  "Federal Form 4972 also files, and it has no rules: the part of the lump-sum distribution that federal AGI leaves out is not known, so the California subtraction is not figured.",
+  "Federal Form 4972 also files, so federal AGI already leaves out part of the lump-sum distribution. The engine does not figure the California subtraction for this case yet.",
 );
 
 export function line5bSubtractions(_: unknown, info: ScheduleCaFilingInfo) {

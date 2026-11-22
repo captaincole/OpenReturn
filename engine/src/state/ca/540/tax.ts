@@ -20,7 +20,7 @@ export const line31TaxFromRateSchedule: Form540Line<"line.31_tax_from_rate_sched
   usesRateSchedule(form["line.19_taxable_income"]);
 
 // MANUAL EDIT: Tax Table ("ca-2025") up to $100,000 of line 19; above it, Tax Rate Schedules X/Y/Z.
-export const line31TaxAmount: Form540Line<"line.31_tax_amount"> = (form, info) => {
+function taxOnTaxableIncome(form: Form540Form, info: Form540FilingInfo): number | undefined {
   if (!info.filingStatus) return undefined;
   const income = form["line.19_taxable_income"];
   if (typeof income !== "number") return undefined;
@@ -30,7 +30,27 @@ export const line31TaxAmount: Form540Line<"line.31_tax_amount"> = (form, info) =
   }
   const lookup = lookupTax("ca-2025", income, info.filingStatus);
   return lookup.ok ? lookup.tax : undefined;
+}
+
+/*
+ * MANUAL EDIT: plus the tax "from each form FTB 3803, line 9"
+ * (ca-540-inst-2025::sec::line-31-tax::b02). Blank while an FTB 3803 waits,
+ * unsupported with its gap.
+ */
+export const line31TaxAmount: Form540Line<"line.31_tax_amount"> = (form, info) => {
+  const tax = taxOnTaxableIncome(form, info);
+  const ftb3803 = info.form3803Totals;
+  if (info.mustFile?.["form-3803"]?.value !== true || ftb3803 === undefined) return tax;
+  if (ftb3803.kind === "waits") return undefined;
+  if (ftb3803.kind === "unsupported") return unsupported(ftb3803.reason);
+  return tax === undefined ? undefined : tax + ftb3803.line9;
 };
+
+// MANUAL EDIT: the FTB 3803 box (ca-540-inst-2025::sec::line-31-tax::b01) when the parents attach one.
+export const line31TaxFromFtb3803: Form540Line<"line.31_tax_from_ftb_3803"> = (_, info) =>
+  info.mustFile?.["form-3803"]?.value === true && info.form3803Totals !== undefined
+    ? true
+    : undefined;
 
 /*
  * MANUAL EDIT: line 11, limited by the AGI Limitation Worksheet.

@@ -16,8 +16,8 @@ names the default the engine applies.
   part that Schedule G-1 taxes is subtracted on Schedule CA line 5b, column B:
   box 3 under Part II, the rest of box 2a under Part III. Without it, California
   would tax the same amount twice.
-- When Form 4972 also files, the line is unsupported: Form 4972 has no rules,
-  so the part federal AGI leaves out is not known.
+- When Form 4972 also files, the line is unsupported. Form 4972 now has rules,
+  so a follow-up can read the part federal AGI leaves out and figure the line.
 - Not modeled: Form 4972 used federally but Schedule G-1 not used (a column C
   addition).
 

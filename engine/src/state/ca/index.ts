@@ -245,6 +245,11 @@ export const CA_FORMS: FormSpec[] = [
     displayName: "FTB 3803",
     relativeDir: "state/ca/3803",
     register: registerForm3803,
+    /* One form per child (ca-3803-inst-2025::sec::c-how-to-make-the-election::b01). */
+    copies: {
+      count: (info) => info?.form3803Children?.length ?? 1,
+      select: (info, index) => info && { ...info, form3803CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "schedule-g-1",

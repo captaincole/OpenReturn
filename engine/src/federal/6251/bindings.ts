@@ -337,14 +337,20 @@ export function register(): void {
           : line7 - sum(form["0.line.8_amt_foreign_tax_credit"]);
       },
       /*
-       * MANUAL EDIT: irs-6251-inst-2025::sec::line-10::b01–b02. Forms 4972 and 8978 and
-       * Schedule J are not modeled, so 1040 line 16 needs no refiguring; Schedule 3
-       * line 1 is unsupported and subtracts nothing.
+       * MANUAL EDIT: irs-6251-inst-2025::sec::line-10::b01–b02. "Form 1040 ... line 16
+       * (minus any tax from Form 4972)" (the form's line 10). Form 8978 and Schedule J
+       * are not modeled, so 1040 line 16 needs no refiguring; Schedule 3 line 1 is
+       * unsupported and subtracts nothing.
        */
-      "0.line.10_regular_tax_less_credits": (form) => {
+      "0.line.10_regular_tax_less_credits": (form, info) => {
         const line16 = numberOrBlank(form["form-1040.line.16"]);
         if (line16 === undefined) return undefined;
-        const tax = sum(line16, form["schedule-2.0.line.1z_total_lines_1a_through_1y"]);
+        const form4972Tax = info.mustFile?.["form-4972"]?.value === true ? info.form4972Tax : 0;
+        const tax = sum(
+          line16,
+          -sum(form4972Tax),
+          form["schedule-2.0.line.1z_total_lines_1a_through_1y"],
+        );
         return atLeast(0, tax - sum(form["schedule-3.0.line.1"]));
       },
       // MANUAL EDIT: a zero line 9 (line 6 zero) enters -0- without line 10.

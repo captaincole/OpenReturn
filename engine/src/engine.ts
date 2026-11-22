@@ -52,8 +52,21 @@ export function bindingKind(fieldId: string): "binding" | "unsupported" | undefi
   return binding.rule.name === UNSUPPORTED_RULE_NAME ? "unsupported" : "binding";
 }
 
+/*
+ * A form that files only when a line of another form holds an amount above 0
+ * (Form 8888 splits a refund, so it needs Form 1040 line 35a). Who files is
+ * decided from facts before any line is computed; this check runs after the
+ * lines settle and takes the form off the return.
+ */
+const amountLineByForm = new Map<string, string>(); // formId → full field id
+
+export function fileOnlyWithAmountOn(formId: string, fieldId: string): void {
+  amountLineByForm.set(formId, fieldId);
+}
+
 export function _resetBindingRegistryForTests(): void {
   fieldBindings.clear();
+  amountLineByForm.clear();
 }
 
 /*
@@ -235,12 +248,33 @@ export function evaluateAllForms(
     resolvedPerPass.push(delta);
     // A settle-pass value can change with no new ok result: wait until values are stable.
     if (delta === 0 && okValues(shared.fieldResults) === valuesBefore) {
-      if (shared.settling || !hasPending(shared)) return { forms, passes: pass, resolvedPerPass };
+      if (shared.settling || !hasPending(shared)) {
+        dropFormsWithNoAmount(forms, shared.fieldResults);
+        return { forms, passes: pass, resolvedPerPass };
+      }
       shared.settling = true;
     }
   }
 
   throw nonConvergenceError(shared);
+}
+
+function dropFormsWithNoAmount(
+  forms: Map<string, EvaluatedForm<AnyFormField>>,
+  fieldResults: Map<string, DerivationResult<unknown>>,
+): void {
+  for (const [formId, fieldId] of amountLineByForm) {
+    const form = forms.get(formId);
+    if (!form || !form.mustFile.ok || !form.mustFile.value) continue;
+    const line = fieldResults.get(fieldId);
+    if (line?.ok && typeof line.value === "number" && line.value > 0) continue;
+    forms.set(formId, {
+      ...form,
+      mustFile: ok(false, `${formId} does not file: ${fieldId} holds no amount.`, []),
+      missingInputs: [],
+      fields: [],
+    });
+  }
 }
 
 function nonConvergenceError(shared: EvaluateFormSharedState): Error {

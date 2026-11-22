@@ -5,12 +5,15 @@ import { defineForm, type FormAccessor, type FormSpec } from "../../../defineFor
 import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../../money.js";
 import { unsupported } from "../../../types.js";
 import { answerLines } from "./answerLines.js";
+import { childIncomeBindings } from "./childIncome.js";
+import { line12Adjustment, line12Federal } from "./employeeBusinessExpenses.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
 import { form8853Bindings } from "./form8853.js";
 import { partIIUnsupported } from "./increasedStandard.js";
 import { CA_MISC_FLOOR_RATE, caItemizedLine29 } from "./itemizedWorksheet.js";
 import { line5bSubtractions } from "./lumpSum.js";
 import { mortgageCreditBindings } from "./mortgageCredit.js";
+import { movingExpenseBindings } from "./movingExpenses.js";
 import { sectionCBindings } from "./sectionC.js";
 import type { ScheduleCa } from "./types.js";
 
@@ -143,6 +146,8 @@ export function register(): void {
   defineForm<ScheduleCa, ScheduleCaFilingInfo>("schedule-ca", {
     bindings: waitsWithIncreasedStandard({
       ...sectionCBindings,
+      ...childIncomeBindings,
+      ...movingExpenseBindings,
       ...mortgageCreditBindings,
       ...form8853Bindings,
       /*
@@ -156,10 +161,6 @@ export function register(): void {
       "1.line.b8z_federal": (form) => {
         const value = form["schedule-1.0.line.8z"];
         return typeof value === "number" ? value : undefined;
-      },
-      "1.line.b8z_income_type": (form) => {
-        const value = form["schedule-1.0.line.8z_type"];
-        return typeof value === "string" ? value : undefined;
       },
       /*
        * MANUAL EDIT: col A copies federal Schedule 1 line 7. "California excludes
@@ -195,10 +196,14 @@ export function register(): void {
       "2.line.c13_subtractions": (form) => numberOrBlank(form["2.line.c13_federal"]),
       /*
        * MANUAL EDIT: column A copies the federal amount, Schedule 1 line 14 (Form 3903
-       * line 5). Column C stays unsupported: it needs FTB 3913
+       * line 5). Column C takes FTB 3913 (movingExpenses.ts)
        * (ca-540-sched-ca-inst-2025::sec::line-11-through-line-25::b01).
        */
       "2.line.c14_federal": (form) => amountIfNonzero(form["schedule-1.1.line.14"]),
+      // MANUAL EDIT: line 12 from Schedule 1 line 12 (Form 2106); columns B and C (employeeBusinessExpenses.ts).
+      "2.line.c12_federal": line12Federal,
+      "2.line.c12_subtractions": line12Adjustment,
+      "2.line.c12_additions": line12Adjustment,
       "3.line.c26_federal": (form) => adjustmentsTotalFederal(form),
       "3.line.c26_subtractions": (form) =>
         sumOrBlank(...ADJUSTMENT_SUBTRACTIONS.map((id) => form[id])),
@@ -300,11 +305,8 @@ export function register(): void {
           : unsupported(LINE_1F_WITHOUT_8839),
       // Federal 1040 line 1c (Form 4137 line 4 and noncash tips); blank when it is.
       "0.line.1c_federal": (form) => numberOrBlank(form["form-1040.line.1c"]),
-      // MANUAL EDIT: 1h type is a text field; read it as a string, not with sum().
-      "0.line.1h_income_type": (form) => {
-        const value = form["form-1040.line.1h_type"];
-        return typeof value === "string" ? value : undefined;
-      },
+      // Federal 1040 line 1g, Form 8919 line 6 (ftb-pub-737-2025::sec::line-1g::b01); blank when it is.
+      "0.line.1g_federal": (form) => numberOrBlank(form["form-1040.line.1g"]),
       "0.line.1z_federal": (form) =>
         sum(
           form["0.line.1a_federal"],
@@ -592,19 +594,14 @@ export function register(): void {
         "Medicaid waiver payments not reported on W-2 (federal 1040 line 1d) — no scenario modeled yet.",
       "0.line.1e_federal":
         "Taxable dependent care benefits from Form 2441 (federal 1040 line 1e) — no scenario modeled yet.",
-      "0.line.1g_federal": "Wages from Form 8919 (federal 1040 line 1g) — no scenario modeled yet.",
       "0.line.1h_federal": "Other earned income (federal 1040 line 1h) — no scenario modeled yet.",
       "0.line.1z_subtractions":
         "Aggregate of line 1 subtractions; all upstream rows are unsupported.",
       "0.line.2a_federal": "Tax-exempt interest (federal 1040 line 2a) — no scenario modeled yet.",
-      "2.line.b9a_additions":
-        "Section B line 9a col C — aggregates other-income additions we don't model yet.",
       "3.line.c24j_subtractions":
         "Form 2555 housing deduction (line 24j) col B — no scenario modeled yet.",
       "3.line.c25_additions":
         "Line 25 col C — aggregates 24a-24z col C; all upstream rows are unsupported.",
-      "3.line.c26_additions":
-        "Line 26 col C — aggregates 11-23+25 col C; all upstream rows are unsupported.",
       "0.line.1a_subtractions":
         "CA-specific subtraction adjustments to W-2 wages (e.g. active-duty military pay exclusions, combat zone exclusions) require specialized facts/scenarios not yet ingested.",
       "0.line.1b_subtractions":
@@ -633,8 +630,6 @@ export function register(): void {
         "No CA-specific addition scenario for Form 8919 wages has been modeled; no fact ingestion path exists for this adjustment.",
       "0.line.1h_subtractions":
         "CA subtractions for 'other earned income' (line 1h) depend on taxpayer-specific scenarios (e.g. ridesharing fringe benefits, CQSO exclusion) that have no ingested fact path yet.",
-      "0.line.1h_additions":
-        "CA additions for 'other earned income' (line 1h) depend on taxpayer-specific scenarios (e.g. employer HSA contributions) that have no ingested fact path yet.",
       "0.line.1i_additions":
         "Nontaxable combat pay addition applies only to active-duty military taxpayers in designated combat zones; no military/combat-zone fact ingestion scenario has been built yet.",
       "0.line.2b_subtractions":
@@ -727,24 +722,12 @@ export function register(): void {
         "No CA-specific subtraction rules ingested for digital asset ordinary income; no scenario modeled yet.",
       "1.line.b8v_additions":
         "No CA-specific addition rules ingested for digital asset ordinary income; no scenario modeled yet.",
-      "1.line.b8z_subtractions":
-        "Line 8z 'Other income' CA subtractions are catch-all adjustments (e.g. Native American earned income, state income tax refunds reclassified, etc.) that require per-item CA guidance and no structured fact path exists for the general 8z bucket.",
-      "1.line.b8z_additions":
-        "Line 8z 'Other income' CA additions are catch-all adjustments (e.g. expanded IRC 529 use, tribal income differences) requiring per-item CA guidance; no structured fact path exists for this bucket.",
       "2.line.b9b1_subtractions":
         "CA-specific disaster loss deduction from FTB Form 3805V — no ingestion path for FTB 3805V data exists yet.",
       "2.line.b9b2_subtractions":
         "CA-specific NOL deduction from FTB Form 3805V — no ingestion path for FTB 3805V data exists yet.",
       "2.line.b9b3_subtractions":
         "CA-specific NOL deduction from FTB Forms 3805Z, 3807, or 3809 — no ingestion path for these FTB enterprise-zone NOL forms exists yet.",
-      "2.line.c12_federal":
-        "Requires Schedule 1 (Form 1040) line 12 — federal Schedule 1 is not an ingested form; no fieldId available to reference.",
-      "2.line.c12_subtractions":
-        "CA adjustment for reservist/performing artist business expenses requires FTB Pub. 1001 analysis and Schedule 1 line 12 source data — no ingestion path for either yet.",
-      "2.line.c12_additions":
-        "CA addition for reservist/performing artist business expenses (line 12, col C) requires FTB Pub. 1001 analysis and Schedule 1 line 12 source — no ingestion path yet.",
-      "2.line.c14_additions":
-        "CA moving expense addition (for non-military taxpayers who can deduct under CA but not federal) requires FTB 3913 data — no FTB 3913 ingestion path exists yet.",
       "2.line.c17_federal":
         "Requires federal Schedule 1 line 17 (self-employed health insurance deduction). Schedule 1 individual lines are not ingested; no self-employment health insurance scenario yet.",
       "2.line.c19a_additions":

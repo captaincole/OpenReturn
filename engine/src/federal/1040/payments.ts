@@ -2,6 +2,7 @@ import type { FormAccessor } from "../../defineForm.js";
 import { numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { line30From8839 } from "../8839/receivers.js";
+import { LINE_8_ID, refundableCreditGap } from "../8863/credit.js";
 import { schedule8812Line18aGap } from "../schedule-8812/earnedIncomeGap.js";
 import { eicOutcome } from "../schedule-eic/outcome.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
@@ -87,6 +88,14 @@ export function line27cNoEicClaim(form: Form, info: Form1040FilingInfo) {
 export const line28 = (form: Form) =>
   numberOrBlank(form["schedule-8812.1.line.27_additional_child_tax_credit"]);
 
+/*
+ * MANUAL EDIT: line 29 = Form 8863 line 8, the refundable American opportunity
+ * credit (irs-1040-inst-2025::sec::line-29::b01). Blank when the form does not
+ * file or line 8 is blank; a gap in Form 8863 stays a gap here.
+ */
+export const line29 = (form: Form, info: Form1040FilingInfo) =>
+  numberOrBlank(form[LINE_8_ID]) ?? refundableCreditGap(form, info);
+
 // MANUAL EDIT: line 30 = Form 8839 line 13, the refundable adoption credit.
 export function line30(form: Form, info: Form1040FilingInfo) {
   const received = line30From8839(form, info);
@@ -94,7 +103,7 @@ export function line30(form: Form, info: Form1040FilingInfo) {
 }
 
 /*
- * MANUAL EDIT: lines 29 and 31 are not modeled (line 30 reads Form 8839); blank when every line is blank.
+ * MANUAL EDIT: line 31 is not modeled (line 29 reads Form 8863, line 30 Form 8839); blank when every line is blank.
  * Waits while line 27a or 28 can still change (payments.ts).
  */
 export function line32(form: Form, info: Form1040FilingInfo) {
@@ -126,6 +135,17 @@ export function line34(form: Form) {
 // MANUAL EDIT: line 35a = line 34 only when the full overpayment is refunded.
 export const line35a = (form: Form, info: Form1040FilingInfo) =>
   info.refundFullOverpaymentFederal ? form["line.34"] : undefined;
+
+/*
+ * MANUAL EDIT: the line 35a box: "Check the box on line 35a and attach Form 8888
+ * if you want to split the direct deposit of your refund into more than one
+ * account" (irs-1040-inst-2025::sec::starting-in-october-2025-the-irs::b01).
+ * Checked when Form 8888 line 5 carries the refund; blank otherwise.
+ */
+export function line35aForm8888Attached(form: Form) {
+  const total = form["form-8888.0.line.5_total_allocation_refund"];
+  return typeof total === "number" && total > 0 ? true : undefined;
+}
 
 // MANUAL EDIT: line 37 includes the line 38 penalty (not modeled).
 export function line37(form: Form) {

@@ -1,6 +1,7 @@
 import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";
 import { makeBusinessFactKey } from "./business.js";
+import { form1099KeysOnForm8919 } from "./uncollectedWages.js";
 
 export interface MiscIncomeFactValue {
   payerName: string;
@@ -75,9 +76,16 @@ function miscRows(facts: ReadonlyArray<Row>): Row[] {
   return facts.filter((fact) => fact.category === MISC_CATEGORY && MISC_KEY_RE.test(fact.key));
 }
 
-/* The 1099-MISCs that pay no business: their box 3 is Schedule 1 line 8z. */
+/*
+ * The 1099-MISCs that pay no business: their box 3 is Schedule 1 line 8z. A
+ * 1099-MISC that a Form 8919 firm names holds wages (Form 1040 line 1g), so it
+ * is left out (irs-8919-form-2025::sec::lines-1-through-5::b02, b03).
+ */
 export function miscIncomeNotForBusiness(facts: ReadonlyArray<Row>): Row[] {
-  return miscRows(facts).filter((row) => businessIdOf(row) === undefined);
+  const onForm8919 = form1099KeysOnForm8919(facts);
+  return miscRows(facts).filter(
+    (row) => businessIdOf(row) === undefined && !onForm8919.has(row.key),
+  );
 }
 
 /*
