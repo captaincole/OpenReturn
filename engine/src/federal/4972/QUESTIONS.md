@@ -82,6 +82,36 @@ default changes a dollar amount.
 - Text: "the total of Form 1040 ... line 16, and Schedule 2 ... line 1z, less any tax included on line 16 from Form 4972" (`irs-1116-inst-2025::sec::line-20::b01`).
 - Form 1116 has no rules, and Schedule 3 line 1 is unsupported. Nothing changes.
 
+## 14. Line 29 for a shared distribution with no annuity
+
+- Text: line 25 says "If line 11 is zero, skip lines 26 through 28, enter this amount on line 29" (the blank form). Step 5 says "A. Subtract line 28 from line 25 ... C. Multiply line A by line B. Enter here and on Form 4972, line 29" (`specific-instructions::b04`).
+- Default: Step 5 applies with line 28 as 0, so line 29 is the box 9a share of line 25. The blind fill agrees.
+- Changes dollars: yes. The other reading puts the whole line 25 on line 29 (blind case 13: 7,670 instead of 3,835).
+
+## 15. Death Benefit Worksheet line D for a shared distribution
+
+- Text: line D is "your share of the death benefit exclusion*"; the note says it "must be allocated among the recipients in the same proportion that they share the distribution" (`specific-instructions::b05`). Line 9 says "multiply the full allowable death benefit exclusion (don't allocate among the recipients) by the percentage on line C" (`line-9::b01`).
+- Default: line D is the box 9a share of the exclusion (for line 6); line 9 uses the full exclusion. The blind fill agrees.
+- Changes dollars: yes. A full exclusion on line D gives blind case 13 line 6 = 7,000 and line 7 = 1,400 instead of 7,500 and 1,500.
+
+## 16. Line 6 for a shared distribution
+
+- Text: "Step 1. Complete Form 4972, Parts I and II" (`specific-instructions::b02`). Steps 2 and 3 divide line 8 and line 11 by the box 9a and box 8 percentages; no step divides line 6.
+- Default: line 6 is the recipient's own capital gain, not grossed up. The blind fill agrees.
+- Changes dollars: yes. A line 6 divided by box 9a doubles line 7 in blind case 13 (3,000 instead of 1,500).
+
+## 17. Estate tax with both NUA and a death benefit exclusion
+
+- Text: reduce "line F of the Death Benefit Worksheet if you do" take the exclusion; reduce "line G of the NUA Worksheet" if you include NUA "and you didn't take the death benefit exclusion"; "the capital gain amount must be reduced by both the procedures" (`line-6::b02`).
+- Default: Death Benefit Worksheet line A is NUA line G, line B is box 2a plus box 6, and the estate tax share comes off line F. The blind fill agrees.
+- Changes dollars: yes. Taking the share off line G and skipping the exclusion gives blind case 11 line 6 = 5,880 instead of 5,280.
+
+## 18. Line 21 when lines 13 to 16 are skipped
+
+- Text: line 12 says "skip lines 13 through 16"; line 21 says "Multiply line 16 by the decimal on line 20" and has no skip.
+- Default: line 21 is blank and line 22 is line 11. Pub. 575 (2024) Example 2 prints line 21 blank and line 22 as 10,000. The blind fill wrote 0.
+- Changes dollars: no.
+
 ## Confidence by field group
 
 | Field group | Confidence |
@@ -101,3 +131,10 @@ default changes a dollar amount.
 | Form 1040 lines 5a and 5b, Part II alone | own reading (5a); stated rule (5b) |
 | Form 1040 line 16 and box 2 | stated rule |
 | Form 6251 line 10 | stated rule |
+
+## Second opinions
+
+- Blind fill (15 cases, from the blank form and instructions only): no dollar difference. The only differences are line 21 blank against 0 in cases 2 and 12 (item 18).
+- PolicyEngine-US 2.152.16 (commit 794e17e675): it has no Form 4972 formula. `form_4972_lumpsum_distributions` is a bare input, and its Form 6251 line 10 subtracts it from the regular tax, as the engine's line 10 does. It has no Tax Rate Schedule, minimum distribution allowance or worksheet to compare.
+- The Tax Rate Schedule constants match `irs-4972-form-2025::sec::tax-rate-schedule::b01` row for row.
+- IRS Direct File: no checkout is in the repo, so it was not compared.
