@@ -1,518 +1,222 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
-import { lookupCaRateSchedule } from "../../../data/caRateSchedule.js";
-import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
-import { lookupTax } from "../../../data/taxTable.js";
-import { defineForm, type BindingFn, type FormAccessor } from "../../../defineForm.js";
-import type { DependentFactValue } from "../../../facts/kinds/dependents.js";
-import { atLeast, roundDollars, sum, sumOrBlank } from "../../../money.js";
-import { unsupported } from "../../../types.js";
-import { SSN, ssn, type FilingStatus } from "../../../values.js";
-import { caExemptionCreditsAfterLimit } from "../../../worksheets/caAgiLimitation.js";
-import { caEitcOutcome, creditLine, NONE, type CaCreditOutcome } from "../3514/credit.js";
-import { fytcOutcome, yctcOutcome } from "../3514/youngChildAndFosterYouth.js";
-import { partIIUnsupported } from "../schedule-ca/increasedStandard.js";
-import { creditBindings } from "./credits.js";
+/*
+ * Form 540: one entry per field, in the order of the paper form. Each line's
+ * method lives in the file for its section of the form.
+ */
+
+import { defineForm } from "../../../defineForm.js";
+import { SSN } from "../../../values.js";
+import {
+  line40ChildDependentCareCredit,
+  line47TotalCredits,
+  line48TaxAfterCredits,
+} from "./credits.js";
+import {
+  line10DependentExemptionAmount,
+  line10DependentExemptionCount,
+  line10DependentFirstName,
+  line10DependentLastName,
+  line10DependentRelationship,
+  line10DependentSsn,
+  line11TotalExemptionAmount,
+  line7PersonalExemptionAmount,
+  line7PersonalExemptionCount,
+  line8BlindExemptionAmount,
+  line8BlindExemptionCount,
+  line9SeniorExemptionAmount,
+  line9SeniorExemptionCount,
+} from "./exemptions.js";
 import type { Form540FilingInfo } from "./filingInfo.js";
+import {
+  headerApartment,
+  headerCity,
+  headerCountyAtFiling,
+  headerDateOfBirth,
+  headerFilingStatus,
+  headerFirstName,
+  headerHomeAddress,
+  headerLastName,
+  headerMailingSameAsResidence,
+  headerMiddleInitial,
+  headerResidenceApartment,
+  headerResidenceCity,
+  headerResidenceState,
+  headerResidenceZip,
+  headerSpouseFirstName,
+  headerSpouseLastName,
+  headerSpouseMiddleInitial,
+  headerSpouseSsn,
+  headerSsn,
+  headerState,
+  headerZip,
+  line3MfsSpouseRdpName,
+  line5SpouseRdpYearOfDeath,
+  page2TaxpayerName,
+  page2TaxpayerSsn,
+} from "./header.js";
+import {
+  line61AlternativeMinimumTax,
+  line62BehavioralHealthServicesTax,
+  line63OtherTaxesCreditRecapture,
+  line64TotalTax,
+} from "./otherTaxes.js";
+import {
+  line71CaIncomeTaxWithheld,
+  line72CaEstimatedTaxPayments,
+  line75Eitc,
+  line76YoungChildTaxCredit,
+  line77FosterYouthTaxCredit,
+  line78TotalPayments,
+} from "./payments.js";
+import {
+  line100TaxDue,
+  line111AmountYouOwe,
+  line113UnderpaymentEstimatedTax,
+  line114TotalAmountDue,
+  line115RefundOrNoAmountDue,
+  line91NoUseTaxOwed,
+  line91UseTax,
+  line92FullYearHealthCoverage,
+  line93PaymentsBalance,
+  line95PaymentsAfterIsrPenalty,
+  line97OverpaidTax,
+  line99OverpaidTaxAvailable,
+} from "./refundOrAmountDue.js";
+import { signingTaxpayerEmail, signingTaxpayerPhone } from "./signing.js";
+import {
+  line31TaxAmount,
+  line31TaxFromRateSchedule,
+  line31TaxFromTaxTable,
+  line32ExemptionCredits,
+  line33TaxAfterExemptionCredits,
+  line35TotalTaxAfterCredits,
+} from "./tax.js";
+import {
+  line12StateWages,
+  line13FederalAgi,
+  line14CaAdjustmentsSubtractions,
+  line15CaAgiBeforeAdditions,
+  line16CaAdjustmentsAdditions,
+  line17CaAgi,
+  line18Deductions,
+  line19TaxableIncome,
+} from "./taxableIncome.js";
 import type { Form540 } from "./types.js";
-
-const CA_FILING_STATUS_OPTION = {
-  single: "single",
-  married_filing_jointly: "married_rdp_filing_jointly",
-  married_filing_separately: "married_rdp_filing_separately",
-  head_of_household: "head_of_household",
-  qualifying_surviving_spouse: "qualifying_surviving_spouse_rdp",
-} as const satisfies Record<FilingStatus, string>;
-
-/*
- * MANUAL EDIT: the dependent exemption credit pre-printed on the 2025 form
- * ("Total dependent exemptions X $475", ca-540nr-booklet-2025::sec::dependent-1-dependent-2-dependent-3::b01).
- * The instructions multiply the line 10 count by it
- * (ca-540-inst-2025::sec::line-10-dependent-exemptions::b01).
- */
-const CA_DEPENDENT_EXEMPTION_2025 = 475;
-
-/*
- * MANUAL EDIT: the personal, blind and senior exemption credit pre-printed on the
- * 2025 form: "Multiply the number you put in the line 7 box by $153" (the form's
- * lines 7, 8 and 9).
- */
-const CA_EXEMPTION_CREDIT_2025 = 153;
-
-/* Lines 7, 8 and 9: the count times the exemption credit; blank with no count. */
-const exemptionCreditAmount = (count: unknown) =>
-  typeof count === "number" ? count * CA_EXEMPTION_CREDIT_2025 : undefined;
-
-type Bindings = Partial<{ [K in keyof Form540]: BindingFn<Form540, Form540FilingInfo, K> }>;
-type RowBinding = (form: FormAccessor<Form540>, info: Form540FilingInfo) => unknown;
-
-// MANUAL EDIT: the SSN, else the ITIN ("SSN or ITIN", line 10 instructions), as nine digits for the formatter.
-function dependentTin(dep: DependentFactValue | undefined) {
-  const raw = dep?.ssn ?? dep?.tin;
-  return raw === undefined ? undefined : ssn(raw);
-}
-
-/*
- * MANUAL EDIT: line 10's Dependents table, rows 1 to 3, one row per dependent
- * fact in the order recorded (the same persons as the federal return). A row
- * with no dependent stays blank; a fourth dependent needs an attached statement.
- */
-function dependentRowBindings(): Bindings {
-  const bindings: Record<string, RowBinding> = {};
-  for (const row of [1, 2, 3]) {
-    const dep = (info: Form540FilingInfo) => info.dependents?.[row - 1]?.dependent;
-    bindings[`dependents.dep${row}_first_name`] = (_, info) => dep(info)?.firstName;
-    bindings[`dependents.dep${row}_last_name`] = (_, info) => dep(info)?.lastName;
-    bindings[`dependents.dep${row}_ssn`] = (_, info) => dependentTin(dep(info));
-    bindings[`dependents.dep${row}_relationship`] = (_, info) => dep(info)?.relationship;
-  }
-  return bindings as Bindings;
-}
-
-/* MANUAL EDIT: FTB 3514's EITC, YCTC and FYTC; no credit when the form does not file. */
-type Ftb3514Outcome = (form: FormAccessor<Form540>, info: Form540FilingInfo) => CaCreditOutcome;
-
-const ftb3514Credit =
-  (outcome: Ftb3514Outcome): Ftb3514Outcome =>
-  (form, info) =>
-    info.mustFile?.["form-3514"]?.value === true ? outcome(form, info) : NONE;
-
-const FTB_3514_CREDITS = {
-  eitc: ftb3514Credit(caEitcOutcome),
-  yctc: ftb3514Credit(yctcOutcome),
-  fytc: ftb3514Credit(fytcOutcome),
-};
-
-function ftb3514Credits(form: FormAccessor<Form540>, info: Form540FilingInfo): CaCreditOutcome[] {
-  return Object.values(FTB_3514_CREDITS).map((credit) => credit(form, info));
-}
-
-/* Line 62: taxable income over this amount is taxed at this rate (2025). */
-const BEHAVIORAL_HEALTH_TAX_FLOOR = 1_000_000;
-const BEHAVIORAL_HEALTH_TAX_RATE = 0.01;
 
 export function register(): void {
   defineForm<Form540, Form540FilingInfo>("form-540", {
     bindings: {
-      "header.first_name": (_, info) => info.taxpayerFirstName,
-      "header.last_name": (_, info) => info.taxpayerLastName,
-      "header.ssn": (_, info) => info.taxpayerSSN,
-      "header.home_address": (_, info) => info.homeAddressLine1,
-      "header.apartment": (_, info) => info.homeAddressApt,
-      "header.city": (_, info) => info.homeAddressCity,
-      "header.state": (_, info) => info.homeAddressState,
-      "header.zip": (_, info) => info.homeAddressZip,
-      "header.date_of_birth": (_, info) => info.taxpayerDateOfBirth,
-      "header.county_at_filing": (_, info) => info.homeAddressCounty,
-      // MANUAL EDIT: compare with boolean `true`, not the string "true".
-      "header.mailing_same_as_residence": (_, info) => info.mailingSameAsResidence === true,
-      // MANUAL EDIT: FTB fills the residence block only when it differs from the mailing address.
-      "header.residence_apartment": (_, info) =>
-        info.mailingSameAsResidence ? undefined : info.homeAddressApt,
-      "header.residence_city": (_, info) =>
-        info.mailingSameAsResidence ? undefined : info.homeAddressCity,
-      "header.residence_state": (_, info) =>
-        info.mailingSameAsResidence ? undefined : info.homeAddressState,
-      "header.residence_zip": (_, info) =>
-        info.mailingSameAsResidence ? undefined : info.homeAddressZip,
-      // MANUAL EDIT: the 540 catalog's married and QSS options carry "rdp".
-      "header.filing_status": (_, info) =>
-        info.filingStatus ? CA_FILING_STATUS_OPTION[info.filingStatus] : undefined,
-      // MANUAL EDIT: line 5, the year the spouse/RDP died (identity.spouse.year_of_death).
-      "header.spouse_rdp_year_of_death": (_, info) =>
-        info.filingStatus === "qualifying_surviving_spouse" ? info.spouseYearOfDeath : undefined,
-      // MANUAL EDIT: the count widget gets the count; the amount widget gets count × $153 (CA_EXEMPTION_CREDIT_2025).
-      "line.7_personal_exemption_count": (_, info) =>
-        info.filingStatus === "married_filing_jointly" ||
-        info.filingStatus === "qualifying_surviving_spouse"
-          ? 2
-          : info.filingStatus
-            ? 1
-            : undefined,
-      "line.7_personal_exemption_amount": (form) =>
-        exemptionCreditAmount(form["line.7_personal_exemption_count"]),
-      /*
-       * MANUAL EDIT: 65 or older on December 31, 2025: "If you are married/or an RDP,
-       * each spouse/RDP 65 years of age or older should claim an additional credit"
-       * (ca-540-inst-2025::sec::line-9-senior-exemptions::b01). Only a joint return
-       * counts the spouse. It waits for each date of birth it reads. A qualifying
-       * surviving spouse is unmarried in 2025, so only the taxpayer counts.
-       */
-      "line.9_senior_exemption_count": (_, info) => {
-        const joint = info.filingStatus === "married_filing_jointly";
-        if (info.taxpayerBornBeforeJan2_1961 === undefined) return undefined;
-        if (joint && info.spouseBornBeforeJan2_1961 === undefined) return undefined;
-        const count =
-          (info.taxpayerBornBeforeJan2_1961 === true ? 1 : 0) +
-          (joint && info.spouseBornBeforeJan2_1961 === true ? 1 : 0);
-        return count > 0 ? count : undefined;
-      },
-      /*
-       * MANUAL EDIT: "If you (or your spouse/RDP) are visually impaired, enter 1; if
-       * both are visually impaired, enter 2" (the form). Only a joint return counts
-       * the spouse. Blank when no one is (ca-540-inst-2025::sec::line-8-blind-exemptions::b01).
-       * Line 6 (claimed as a dependent) is not modeled, as for line 7.
-       */
-      "line.8_blind_exemption_count": (_, info) => {
-        const count =
-          (info.taxpayerBlind ? 1 : 0) +
-          (info.filingStatus === "married_filing_jointly" && info.spouseBlind ? 1 : 0);
-        return count > 0 ? count : undefined;
-      },
-      "line.8_blind_exemption_amount": (form) =>
-        exemptionCreditAmount(form["line.8_blind_exemption_count"]),
-      "line.9_senior_exemption_amount": (form) =>
-        exemptionCreditAmount(form["line.9_senior_exemption_count"]),
-      // MANUAL EDIT: MFS puts the spouse's SSN in the header and full name on line 3.
-      "header.spouse_ssn": (_, info) =>
-        info.filingStatus === "married_filing_separately" ||
-        info.filingStatus === "married_filing_jointly"
-          ? info.spouseSSN
-          : undefined,
-      /*
-       * MANUAL EDIT: the header's spouse name is for a joint return ("If joint tax return").
-       * The middle initials come from the identity facts when stated (filingInfoResolvers reads them).
-       */
-      "header.middle_initial": (_, info) => info.taxpayerMiddleInitial,
-      "header.spouse_middle_initial": (_, info) =>
-        info.filingStatus === "married_filing_jointly" ? info.spouseMiddleInitial : undefined,
-      "header.spouse_first_name": (_, info) =>
-        info.filingStatus === "married_filing_jointly" ? info.spouseFirstName : undefined,
-      "header.spouse_last_name": (_, info) =>
-        info.filingStatus === "married_filing_jointly" ? info.spouseLastName : undefined,
-      "header.mfs_spouse_rdp_name_and_ssn": (_, info) =>
-        info.filingStatus === "married_filing_separately" &&
-        info.spouseFirstName &&
-        info.spouseLastName
-          ? `${info.spouseFirstName} ${info.spouseLastName}`
-          : undefined,
-      "page2.taxpayer_ssn": (_, info) => info.taxpayerSSN,
-      ...dependentRowBindings(),
-      /*
-       * MANUAL EDIT: "Count the number of dependents listed and enter the total
-       * in the box on line 10. Multiply the number you entered by the
-       * pre-printed dollar amount" (ca-540-inst-2025::sec::line-10-dependent-exemptions::b01).
-       * No dependents: both widgets stay blank.
-       */
-      "line.10_dependent_exemption_count": (_, info) =>
-        info.dependents && info.dependents.length > 0 ? info.dependents.length : undefined,
-      "line.10_dependent_exemption_amount": (form) => {
-        const count = form["line.10_dependent_exemption_count"];
-        return typeof count === "number" ? count * CA_DEPENDENT_EXEMPTION_2025 : undefined;
-      },
-      // MANUAL EDIT: page 2 reprints the taxpayer's full name.
-      "page2.taxpayer_name": (_, info) =>
-        info.taxpayerFirstName && info.taxpayerLastName
-          ? `${info.taxpayerFirstName} ${info.taxpayerLastName}`
-          : undefined,
-      // MANUAL EDIT: line 31 source checkbox: Tax Table up to $100,000, else Tax Rate Schedule.
-      "line.31_tax_from_tax_table": (form) =>
-        usesRateSchedule(form["line.19_taxable_income"]) === false,
-      "line.31_tax_from_rate_schedule": (form) => usesRateSchedule(form["line.19_taxable_income"]),
-      /*
-       * MANUAL EDIT: line 14 takes Schedule CA line 27 column B, and line 16 column C.
-       * A negative column moves to the other line as a positive amount. Both lines
-       * are 0 when Schedule CA is not filed
-       * (ca-540-sched-ca-inst-2025::sec::line-11-through-line-25::b08;
-       * ca-540-inst-2025::sec::line-14-california-adjustments-subtractions-from-schedule-ca-540-part-i-line-27-column-b::b01;
-       * ca-540-inst-2025::sec::line-16-california-adjustments-additions-from-schedule-ca-540-part-i-line-27-column-c::b01).
-       */
-      "line.14_ca_adjustments_subtractions": (form) =>
-        adjustmentFromLine27(
-          form["schedule-ca.3.line.c27_subtractions"],
-          form["schedule-ca.3.line.c27_additions"],
-        ),
-      "line.16_ca_adjustments_additions": (form) =>
-        adjustmentFromLine27(
-          form["schedule-ca.3.line.c27_additions"],
-          form["schedule-ca.3.line.c27_subtractions"],
-        ),
-      "line.11_total_exemption_amount": (form) =>
-        sum(
-          form["line.7_personal_exemption_amount"],
-          form["line.8_blind_exemption_amount"],
-          form["line.9_senior_exemption_amount"],
-          form["line.10_dependent_exemption_amount"],
-        ),
-      // MANUAL EDIT: round the W-2 box 16 sum to the nearest dollar.
-      "line.12_state_wages": (_, info) => roundDollars(info.w2StateWages),
-      "line.13_federal_agi": (form) => sum(form["form-1040.line.11b"]),
-      "line.15_ca_agi_before_additions": (form) =>
-        sum(
-          form["line.13_federal_agi"],
-          form["line.14_ca_adjustments_subtractions"] === undefined
-            ? 0
-            : -form["line.14_ca_adjustments_subtractions"],
-        ),
-      "line.17_ca_agi": (form) =>
-        sum(form["line.15_ca_agi_before_additions"], form["line.16_ca_adjustments_additions"]),
-      // MANUAL EDIT: Schedule CA line 30 when filed, else the standard deduction (same value for non-itemizers).
-      "line.18_deductions": (form, info) => {
-        const fromScheduleCA = form["schedule-ca.5.page2.total_itemized_30_standard_or_itemized"];
-        if (typeof fromScheduleCA === "number") return fromScheduleCA;
-        // MANUAL EDIT: a person completes Schedule CA Part II, line 30 included; so line 18 too.
-        const partIIOpen =
-          info.increasedStandardDeduction !== false &&
-          info.mustFile?.["schedule-ca"]?.value === true;
-        if (partIIOpen) return partIIUnsupported(info);
-        return info.filingStatus
-          ? lookupStandardDeduction("state-ca", 2025, info.filingStatus)
-          : undefined;
-      },
-      // MANUAL EDIT: lines 19 to 115 wait with the line they read; 0 would print a wrong tax.
-      "line.19_taxable_income": (form) => {
-        const deductions = form["line.18_deductions"];
-        if (typeof deductions !== "number") return undefined;
-        return atLeast(0, sum(form["line.17_ca_agi"], -deductions));
-      },
-      // MANUAL EDIT: Tax Table ("ca-2025") up to $100,000 of line 19; above it, Tax Rate Schedules X/Y/Z.
-      "line.31_tax_amount": (form, info) => {
-        if (!info.filingStatus) return undefined;
-        const income = form["line.19_taxable_income"];
-        if (typeof income !== "number") return undefined;
-        if (income === 0) return 0; // the table starts at $1
-        if (usesRateSchedule(income)) {
-          return roundDollars(lookupCaRateSchedule(2025, info.filingStatus, income));
-        }
-        const lookup = lookupTax("ca-2025", income, info.filingStatus);
-        return lookup.ok ? lookup.tax : undefined;
-      },
-      /*
-       * MANUAL EDIT: line 11, limited by the AGI Limitation Worksheet.
-       */
-      "line.32_exemption_credits": (form, info) => {
-        const agi = form["line.13_federal_agi"];
-        const count = form["line.7_personal_exemption_count"];
-        if (!info.filingStatus || typeof agi !== "number" || typeof count !== "number") {
-          return sum(form["line.11_total_exemption_amount"]);
-        }
-        return caExemptionCreditsAfterLimit({
-          filingStatus: info.filingStatus,
-          federalAgi: agi,
-          // Worksheet line f: the exemptions on lines 7, 8, and 9.
-          personalCount: sum(
-            count,
-            form["line.8_blind_exemption_count"],
-            form["line.9_senior_exemption_count"],
-          ),
-          personalAmount: sum(
-            form["line.7_personal_exemption_amount"],
-            form["line.8_blind_exemption_amount"],
-            form["line.9_senior_exemption_amount"],
-          ),
-          dependentCount: sum(form["line.10_dependent_exemption_count"]),
-          dependentAmount: sum(form["line.10_dependent_exemption_amount"]),
-        });
-      },
-      "line.33_tax_after_exemption_credits": (form) => {
-        const tax = form["line.31_tax_amount"];
-        if (typeof tax !== "number") return undefined;
-        return atLeast(
-          0,
-          sum(
-            tax,
-            form["line.32_exemption_credits"] === undefined
-              ? 0
-              : -form["line.32_exemption_credits"],
-          ),
-        );
-      },
-      "line.35_total_tax_after_credits": (form) => {
-        const tax = form["line.33_tax_after_exemption_credits"];
-        return typeof tax === "number" ? sum(tax, form["line.34_tax_amount"]) : undefined;
-      },
-      // MANUAL EDIT: lines 40, 47 and 48 (FTB 3506's credit) are in credits.ts.
-      ...creditBindings,
-      /*
-       * MANUAL EDIT: Schedule P (540) Part II line 26: "If more than zero, enter
-       * here and on Form 540, line 61" (ca-540-sched-p-inst-2025, the form text;
-       * ca-540-inst-2025::sec::line-61-alternative-minimum-tax-amt::b01). Blank
-       * when the schedule is not completed or owes nothing.
-       */
-      "line.61_alternative_minimum_tax": (form) => {
-        const amt = form["schedule-p.1.line.26_alternative_minimum_tax"];
-        return typeof amt === "number" && amt > 0 ? amt : undefined;
-      },
-      /*
-       * MANUAL EDIT: ca-540-inst-2025::sec::line-62-behavioral-health-services-tax::b01:
-       * 1% of taxable income over $1,000,000, whole dollars.
-       */
-      "line.62_behavioral_health_services_tax": (form) => {
-        const taxable = form["line.19_taxable_income"];
-        if (typeof taxable !== "number" || taxable <= BEHAVIORAL_HEALTH_TAX_FLOOR) return undefined;
-        return roundDollars((taxable - BEHAVIORAL_HEALTH_TAX_FLOOR) * BEHAVIORAL_HEALTH_TAX_RATE);
-      },
-      /*
-       * MANUAL EDIT: ca-540-inst-2025::sec::line-63-other-taxes-and-credit-recapture::b01:
-       * the additional tax on early distributions from form FTB 3805P (its lines
-       * 4, 8, 10b and 11). NQDC income, IRC 453A interest and credit recapture
-       * (::b02) have no facts. Blank when FTB 3805P is not filed.
-       */
-      "line.63_other_taxes_credit_recapture": (form) =>
-        sumOrBlank(
-          form["form-3805p.0.part1.line_4_early_distribution_tax_due"],
-          form["form-3805p.0.part2.line_8_education_able_tax_due"],
-          form["form-3805p.0.part3.line_10b_archer_msa_tax_due"],
-          form["form-3805p.0.part3.line_11_medicare_advantage_msa_tax_due"],
-        ),
-      "line.64_total_tax": (form, info) => {
-        /*
-         * MANUAL EDIT: FTB 3805P files but its tax is still unknown (an
-         * undetermined taxable amount, or two spouses who need two forms):
-         * the total waits, because sum() would read the blank line 63 as 0.
-         */
-        const earlyTaxUnknown =
-          info.mustFile?.["form-3805p"]?.value === true &&
-          form["line.63_other_taxes_credit_recapture"] === undefined;
-        // Schedule P completed with its AMT still unknown (Part I line 7 waiting): the same.
-        const amtUnknown =
-          info.mustFile?.["schedule-p"]?.value === true &&
-          form["schedule-p.1.line.26_alternative_minimum_tax"] === undefined;
-        if (earlyTaxUnknown || amtUnknown) return undefined;
-        if (typeof form["line.48_tax_after_credits"] !== "number") return undefined;
-        return sum(
-          form["line.48_tax_after_credits"],
-          form["line.61_alternative_minimum_tax"],
-          form["line.62_behavioral_health_services_tax"],
-          form["line.63_other_taxes_credit_recapture"],
-        );
-      },
-      /*
-       * MANUAL EDIT: round the W-2 box 17 sum to the nearest dollar.
-       * MANUAL EDIT: W-2 box 17 and the other forms' California withholding (withholding.ts).
-       */
-      "line.71_ca_income_tax_withheld": (_, info) =>
-        roundDollars(sumOrBlank(info.w2StateWithholding, info.caWithholdingOtherForms)),
-      // MANUAL EDIT: the total of the stated payments (ca-540-inst-2025::sec::line-72-2025-california-estimated-tax-and-other-payments::b01).
-      "line.72_ca_estimated_tax_payments": (_, info) =>
-        roundDollars(info.caEstimatedAndOtherPayments),
-      /*
-       * MANUAL EDIT: FTB 3514 files and a credit is still unknown: the total
-       * waits (or is a gap), because sum() would read its blank line as 0.
-       */
-      "line.78_total_payments": (form, info) => {
-        const credits = ftb3514Credits(form, info);
-        if (credits.some((outcome) => outcome.kind === "waiting")) return undefined;
-        // A credit the engine cannot figure would count as 0: the total is not known either.
-        const gap = credits.find((outcome) => outcome.kind === "unsupported");
-        if (gap?.kind === "unsupported") return unsupported(gap.reason);
-        return sum(
-          form["line.71_ca_income_tax_withheld"],
-          form["line.72_ca_estimated_tax_payments"],
-          form["line.73_withholding_592b_593"],
-          form["line.74_motion_picture_production_credit"],
-          form["line.75_eitc"],
-          form["line.76_young_child_tax_credit"],
-          form["line.77_foster_youth_tax_credit"],
-        );
-      },
-      /*
-       * MANUAL EDIT: lines 75–77 take FTB 3514 lines 20, 28 and 39
-       * (ca-540-inst-2025, lines 75–77; ca-3514-inst-2025::sec::part-iii-your-earned-income-tax-credit::b01,
-       * ::line-28-young-child-tax-credit::b01, ::line-39-foster-youth-tax-credit::b01).
-       * Blank when the form does not file or a credit does not apply.
-       */
-      "line.75_eitc": (form, info) => creditLine(FTB_3514_CREDITS.eitc(form, info)),
-      "line.76_young_child_tax_credit": (form, info) =>
-        creditLine(FTB_3514_CREDITS.yctc(form, info)),
-      "line.77_foster_youth_tax_credit": (form, info) =>
-        creditLine(FTB_3514_CREDITS.fytc(form, info)),
-      "line.91_use_tax": (_, info) => info.useTaxOwed,
-      // MANUAL EDIT: bound by hand; the generator emitted a TODO here.
-      "line.91_no_use_tax_owed": (_, info) => info.useTaxZeroReason,
-      "line.92_full_year_health_coverage": (_, info) => info.fullYearMEC,
-      "line.93_payments_balance": (form) =>
-        atLeast(
-          0,
-          sum(
-            form["line.78_total_payments"],
-            form["line.91_use_tax"] === undefined ? 0 : -form["line.91_use_tax"],
-          ),
-        ),
-      "line.95_payments_after_isr_penalty": (form) =>
-        atLeast(
-          0,
-          sum(
-            form["line.93_payments_balance"],
-            form["line.92_isr_penalty"] === undefined ? 0 : -form["line.92_isr_penalty"],
-          ),
-        ),
-      "line.97_overpaid_tax": (form) => {
-        const totalTax = form["line.64_total_tax"];
-        if (typeof totalTax !== "number") return undefined;
-        return atLeast(0, sum(form["line.95_payments_after_isr_penalty"], -totalTax));
-      },
-      "line.99_overpaid_tax_available": (form) => {
-        const overpaid = form["line.97_overpaid_tax"];
-        if (typeof overpaid !== "number") return undefined;
-        return atLeast(
-          0,
-          sum(
-            overpaid,
-            form["line.98_applied_to_2026_estimated_tax"] === undefined
-              ? 0
-              : -form["line.98_applied_to_2026_estimated_tax"],
-          ),
-        );
-      },
-      "line.100_tax_due": (form) => {
-        if (typeof form["line.64_total_tax"] !== "number") return undefined;
-        const taxDue = sum(
-          form["line.64_total_tax"],
-          form["line.95_payments_after_isr_penalty"] === undefined
-            ? 0
-            : -form["line.95_payments_after_isr_penalty"],
-        );
-        return taxDue > 0 ? taxDue : undefined;
-      },
-      // 540 inst.: with no amount on line 99, amount owed = lines 94 + 96 + 100 + 110.
-      "line.111_amount_you_owe": (form) => {
-        const owed = sum(
-          form["line.94_use_tax_balance"],
-          form["line.96_isr_penalty_balance"],
-          form["line.100_tax_due"],
-          form["line.110_total_contributions"],
-        );
-        return owed > 0 ? owed : undefined;
-      },
-      // MANUAL EDIT: FTB 5805 line 13; blank when 5805 is not filed.
-      "line.113_underpayment_estimated_tax": (form) => {
-        const value = form["form-5805.1.part2.line_13"];
-        return typeof value === "number" ? value : undefined;
-      },
-      "line.114_total_amount_due": (form) => {
-        const due = atLeast(
-          0,
-          sum(
-            form["line.100_tax_due"],
-            form["line.110_total_contributions"],
-            form["line.112_interest_and_late_penalties"],
-            form["line.113_underpayment_estimated_tax"],
-          ),
-        );
-        return due > 0 ? due : undefined;
-      },
-      "line.115_refund_or_no_amount_due": (form) => {
-        const available = form["line.99_overpaid_tax_available"];
-        if (typeof available !== "number") return undefined;
-        return atLeast(
-          0,
-          sum(
-            available,
-            form["line.110_total_contributions"] === undefined
-              ? 0
-              : -form["line.110_total_contributions"],
-            form["line.112_interest_and_late_penalties"] === undefined
-              ? 0
-              : -form["line.112_interest_and_late_penalties"],
-            form["line.113_underpayment_estimated_tax"] === undefined
-              ? 0
-              : -form["line.113_underpayment_estimated_tax"],
-          ),
-        );
-      },
-      "signing.taxpayer_email": (_, info) => info.taxpayerEmail,
-      "signing.taxpayer_phone": (_, info) => info.taxpayerPhone,
+      // Header: names, SSNs, address and residence (header.ts).
+      "header.first_name": headerFirstName,
+      "header.middle_initial": headerMiddleInitial,
+      "header.last_name": headerLastName,
+      "header.ssn": headerSsn,
+      "header.spouse_first_name": headerSpouseFirstName,
+      "header.spouse_middle_initial": headerSpouseMiddleInitial,
+      "header.spouse_last_name": headerSpouseLastName,
+      "header.spouse_ssn": headerSpouseSsn,
+      "header.home_address": headerHomeAddress,
+      "header.apartment": headerApartment,
+      "header.city": headerCity,
+      "header.state": headerState,
+      "header.zip": headerZip,
+      "header.date_of_birth": headerDateOfBirth,
+      "header.county_at_filing": headerCountyAtFiling,
+      "header.mailing_same_as_residence": headerMailingSameAsResidence,
+      "header.residence_apartment": headerResidenceApartment,
+      "header.residence_city": headerResidenceCity,
+      "header.residence_state": headerResidenceState,
+      "header.residence_zip": headerResidenceZip,
+
+      // Filing status, lines 1 to 5 (header.ts).
+      "header.filing_status": headerFilingStatus,
+      "header.spouse_rdp_year_of_death": line5SpouseRdpYearOfDeath,
+      "header.mfs_spouse_rdp_name_and_ssn": line3MfsSpouseRdpName,
+
+      // Exemptions, lines 7 to 9 (exemptions.ts).
+      "line.7_personal_exemption_count": line7PersonalExemptionCount,
+      "line.7_personal_exemption_amount": line7PersonalExemptionAmount,
+      "line.8_blind_exemption_count": line8BlindExemptionCount,
+      "line.8_blind_exemption_amount": line8BlindExemptionAmount,
+      "line.9_senior_exemption_count": line9SeniorExemptionCount,
+      "line.9_senior_exemption_amount": line9SeniorExemptionAmount,
+
+      // Page 2 header (header.ts).
+      "page2.taxpayer_name": page2TaxpayerName,
+      "page2.taxpayer_ssn": page2TaxpayerSsn,
+
+      // Exemptions, line 10's Dependents table and lines 10 to 11 (exemptions.ts).
+      "dependents.dep1_first_name": line10DependentFirstName(1),
+      "dependents.dep2_first_name": line10DependentFirstName(2),
+      "dependents.dep3_first_name": line10DependentFirstName(3),
+      "dependents.dep1_last_name": line10DependentLastName(1),
+      "dependents.dep2_last_name": line10DependentLastName(2),
+      "dependents.dep3_last_name": line10DependentLastName(3),
+      "dependents.dep1_ssn": line10DependentSsn(1),
+      "dependents.dep2_ssn": line10DependentSsn(2),
+      "dependents.dep3_ssn": line10DependentSsn(3),
+      "dependents.dep1_relationship": line10DependentRelationship(1),
+      "dependents.dep2_relationship": line10DependentRelationship(2),
+      "dependents.dep3_relationship": line10DependentRelationship(3),
+      "line.10_dependent_exemption_count": line10DependentExemptionCount,
+      "line.10_dependent_exemption_amount": line10DependentExemptionAmount,
+      "line.11_total_exemption_amount": line11TotalExemptionAmount,
+
+      // Taxable income, lines 12 to 19 (taxableIncome.ts).
+      "line.12_state_wages": line12StateWages,
+      "line.13_federal_agi": line13FederalAgi,
+      "line.14_ca_adjustments_subtractions": line14CaAdjustmentsSubtractions,
+      "line.15_ca_agi_before_additions": line15CaAgiBeforeAdditions,
+      "line.16_ca_adjustments_additions": line16CaAdjustmentsAdditions,
+      "line.17_ca_agi": line17CaAgi,
+      "line.18_deductions": line18Deductions,
+      "line.19_taxable_income": line19TaxableIncome,
+
+      // Tax, lines 31 to 35 (tax.ts).
+      "line.31_tax_from_tax_table": line31TaxFromTaxTable,
+      "line.31_tax_from_rate_schedule": line31TaxFromRateSchedule,
+      "line.31_tax_amount": line31TaxAmount,
+      "line.32_exemption_credits": line32ExemptionCredits,
+      "line.33_tax_after_exemption_credits": line33TaxAfterExemptionCredits,
+      "line.35_total_tax_after_credits": line35TotalTaxAfterCredits,
+
+      // Special credits. MANUAL EDIT: lines 40, 47 and 48 (FTB 3506's credit) are in credits.ts.
+      "line.40_child_dependent_care_credit": line40ChildDependentCareCredit,
+      "line.47_total_credits": line47TotalCredits,
+      "line.48_tax_after_credits": line48TaxAfterCredits,
+
+      // Other taxes, lines 61 to 64 (otherTaxes.ts).
+      "line.61_alternative_minimum_tax": line61AlternativeMinimumTax,
+      "line.62_behavioral_health_services_tax": line62BehavioralHealthServicesTax,
+      "line.63_other_taxes_credit_recapture": line63OtherTaxesCreditRecapture,
+      "line.64_total_tax": line64TotalTax,
+
+      // Payments, lines 71 to 78 (payments.ts).
+      "line.71_ca_income_tax_withheld": line71CaIncomeTaxWithheld,
+      "line.72_ca_estimated_tax_payments": line72CaEstimatedTaxPayments,
+      "line.75_eitc": line75Eitc,
+      "line.76_young_child_tax_credit": line76YoungChildTaxCredit,
+      "line.77_foster_youth_tax_credit": line77FosterYouthTaxCredit,
+      "line.78_total_payments": line78TotalPayments,
+
+      // Use tax, overpaid tax or tax due, amount you owe, refund: lines 91 to 115 (refundOrAmountDue.ts).
+      "line.91_use_tax": line91UseTax,
+      "line.91_no_use_tax_owed": line91NoUseTaxOwed,
+      "line.92_full_year_health_coverage": line92FullYearHealthCoverage,
+      "line.93_payments_balance": line93PaymentsBalance,
+      "line.95_payments_after_isr_penalty": line95PaymentsAfterIsrPenalty,
+      "line.97_overpaid_tax": line97OverpaidTax,
+      "line.99_overpaid_tax_available": line99OverpaidTaxAvailable,
+      "line.100_tax_due": line100TaxDue,
+      "line.111_amount_you_owe": line111AmountYouOwe,
+      "line.113_underpayment_estimated_tax": line113UnderpaymentEstimatedTax,
+      "line.114_total_amount_due": line114TotalAmountDue,
+      "line.115_refund_or_no_amount_due": line115RefundOrNoAmountDue,
+
+      // Signing (signing.ts).
+      "signing.taxpayer_email": signingTaxpayerEmail,
+      "signing.taxpayer_phone": signingTaxpayerPhone,
     },
 
     /*
@@ -692,19 +396,4 @@ export function register(): void {
         "Third-party designee block — no designee ingestion scenario built yet.",
     },
   });
-}
-
-/*
- * The amount Form 540 line 14 or 16 takes from Schedule CA line 27: its own
- * column when positive, plus the other column's negative as a positive amount.
- */
-function adjustmentFromLine27(ownColumn: unknown, otherColumn: unknown): number {
-  const own = typeof ownColumn === "number" && ownColumn > 0 ? ownColumn : 0;
-  const other = typeof otherColumn === "number" && otherColumn < 0 ? -otherColumn : 0;
-  return own + other;
-}
-
-// MANUAL EDIT: FTB sends line 19 over $100,000 to the Tax Rate Schedules.
-function usesRateSchedule(taxableIncome: number | undefined): boolean | undefined {
-  return typeof taxableIncome === "number" ? taxableIncome > 100000 : undefined;
 }
