@@ -1,6 +1,6 @@
 # Form 8888: open questions
 
-Each place where the form and its instructions do not settle a rule. Short answers; a person decides. No question changes the tax or the refund. Questions 1 and 2 change how the refund is split among the accounts.
+Each place where the form and its instructions do not settle a rule. Short answers; a person decides. No question changes the tax or the refund. Questions 1 and 8 change how the refund is split among the accounts; question 2 changes which line an account takes.
 
 ## 1. Stated amounts that do not add up to the refund
 
@@ -46,6 +46,19 @@ Each place where the form and its instructions do not settle a rule. Short answe
 - Source: the form's header, "For calendar year 20__". The form is for continuous use (irs-8888-form-2025::sec::omb-no-1545-0074).
 - Default: "25", the tax year of the return. The engine has no fiscal-year return.
 - Changes dollars: no.
+
+## 8. Cents in a stated amount
+
+- Source: "drop amounts under 50 cents and increase amounts from 50 to 99 cents to the next dollar" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01). Form 8888 itself says nothing about cents.
+- Default: the engine rounds each stated amount to the nearest dollar, then the account with no stated amount takes the refund minus the rounded amounts. Line 5 then equals the whole-dollar refund. Example: refund $1,000, first account $100.50, second the rest: 101 and 899.
+- Other reading: keep the cents on line 1a ($100.50) and give the rest $899.50. The form's line 5 must equal the refund on Form 1040 line 35a, which the engine prints in whole dollars.
+- Changes dollars: yes, at most $1 between two accounts. Not the refund, not the tax.
+
+## Second opinions
+
+- **Blind fill** (15 cases, from the blank form and instructions only): every line matches the engine. The preparer made the same choices as questions 1, 2, 3, 4 and 8.
+- **PolicyEngine-US 2.152.16** (commit 794e17e6), `variables/gov/irs` and `parameters/gov/irs`: no variable or parameter for Form 8888, refund allocation or direct deposit. It does not model the form, so it was not compared.
+- **IRS Direct File**: the repo names no checkout of it, so it was not compared.
 
 ## Confidence by field group
 
