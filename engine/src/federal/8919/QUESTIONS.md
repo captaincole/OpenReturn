@@ -62,10 +62,18 @@ Each item is a place where the form and its instructions do not settle a rule. T
 - Default: the engine models only the taxpayer's Schedule SE, so line 8c takes the taxpayer's Form 8919 line 10. A spouse's Form 8919 does not reach it. Line 8b (Form 4137) does the same.
 - Changes dollars: no for the taxpayer. A spouse's Schedule SE is not modeled.
 
+## 11. Rounding of line 8, and of lines 11 to 13 on rounded amounts
+
+- Source: "If you have to add two or more amounts to figure the amount to enter on a line, include cents when adding the amounts and round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01). Line 12 says "Multiply line 6 by 0.0145 (Medicare tax rate)" and line 13 "Add lines 11 and 12" (irs-8919-form-2025::sec::omb-no-1545-0074::b03). The text does not say whether a line multiplies the rounded line it names or the unrounded sum.
+- Default: line 8 adds the W-2 amounts with cents and rounds once. Lines 9 to 13 use the rounded amounts on the lines they name; lines 11 and 12 round their products to the nearest dollar. This is the project rule (CLAUDE.md, whole-dollar rounding). The blind fill made the same choice.
+- Changes dollars: by $1 at most. Three firms of $333.33: line 6 = 1,000 (999.99), line 12 = 15 (14.50). With the unrounded sum, line 12 = 14 (14.4999) and line 13 = 76, not 77.
+
 ## Second opinions
 
-- No published example with numbers exists for this form (corpus and web search, .scratch/evidence.md). The blind check runs after this work.
-- PolicyEngine-US models no Form 8919 lines (4137 QUESTIONS.md: `unreported_payroll_tax` is a bare input). Its 2025 constants agree with line 7 and the rates.
+- No published example with numbers exists for this form (corpus and web search, .scratch/evidence.md).
+- Blind fill (14 cases and a joint return, filled by hand from the blank form and instructions only): every line matches the engine. No blank-against-0 difference and no dollar difference. The blind preparer's rounding doubt is item 11.
+- PolicyEngine-US 2.152.16 (commit 794e17e6): it models no Form 8919 lines. `unreported_payroll_tax` ("Unreported payroll taxes from Form 4137 or 8919") is a bare input with no formula, so it cannot check lines 6 to 13. Its 2025 constants agree: social security wage base 176,100 (`payroll/social_security/cap.yaml`), employee rates 0.062 and 0.0145 (`payroll/social_security/rate/employee.yaml`, `payroll/medicare/rate/employee.yaml`). It adds the tax to total tax and to the Schedule 8812 Part II-B social security taxes; the engine does the same (Schedule 2 lines 6 and 7; Schedule 8812 line 22 reads Schedule 2 line 6). No disagreement.
+- IRS Direct File (issue #140): no checkout in this worktree. Not compared.
 
 ## Confidence by field group
 
@@ -76,7 +84,7 @@ Each item is a place where the form and its instructions do not settle a rule. T
 | Lines 1–5, column (d) | stated rule (lines-1-through-5::b03) |
 | Lines 1–5, column (e) | stated rule (omb-no-1545-0074::b02) |
 | Line 6 | stated rule; the rounding is own reading (item 1) |
-| Lines 8–13 | stated rule (omb-no-1545-0074::b02, b03); RRTA unsupported by fact (item 2) |
+| Lines 8–13 | stated rule (omb-no-1545-0074::b02, b03); RRTA unsupported by fact (item 2); the rounding is own reading (item 11) |
 | 1040 line 1g, Schedule 2 line 6 | stated rule (irs-1040-inst-2025 line-1g::b01, line-6::b01) |
 | Form 8959 line 3 and who files | stated rule (irs-8959-inst-2025 line-3::b01, who-must-file::b01) |
 | Schedule SE line 8c | stated rule (catalog label); joint return is own reading (item 10) |
