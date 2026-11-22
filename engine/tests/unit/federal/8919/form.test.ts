@@ -208,6 +208,39 @@ describe("line 8 (irs-8919-form-2025::sec::omb-no-1545-0074::b02)", () => {
   });
 });
 
+describe("Schedule SE line 8d with no W-2 (irs-pub-560-2025::sec::omb-no-1545-0074::b03)", () => {
+  const business = factRow(
+    makeBusinessFactKey("photo"),
+    {
+      owner: "taxpayer",
+      activity: "photo",
+      grossReceipts: 12000,
+      sellsGoods: false,
+      materiallyParticipated: true,
+    },
+    "self_employment",
+  );
+
+  it("a blank line 8a counts as 0: line 8c still reduces line 9", () => {
+    const run = evaluate([firm("acme", { wages: 172851 })], [], [business]);
+    expect(run.value("form-8919", "0.line.10_wages_subject_social_security_tax")).toBe(172851);
+    expect(run.value("schedule-se", "0.line.6")).toBe(11082);
+    expect(run.isBlank("schedule-se", "0.line.8a")).toBe(true);
+    expect(run.value("schedule-se", "0.line.8c")).toBe(172851);
+    expect(run.value("schedule-se", "0.line.8d")).toBe(172851);
+    expect(run.value("schedule-se", "0.line.9")).toBe(3249);
+    // 3,249 × 12.4% = 402.88 → 403; 11,082 × 2.9% = 321.38 → 321.
+    expect(run.value("schedule-se", "0.line.10")).toBe(403);
+    expect(run.value("schedule-se", "0.line.12")).toBe(724);
+  });
+
+  it("with no W-2 and no Form 8919, line 8d stays blank and line 9 is $176,100", () => {
+    const run = evaluate([], [], [business]);
+    expect(run.isBlank("schedule-se", "0.line.8d")).toBe(true);
+    expect(run.value("schedule-se", "0.line.9")).toBe(176100);
+  });
+});
+
 describe("the 1099s a firm names (irs-8919-form-2025::sec::lines-1-through-5::b02)", () => {
   const necKey = makeNonemployeeCompensationFactKey("acme", "2025");
   const nec = factRow(necKey, { payerName: "acme LLC", box1: 10000 }, "self_employment");

@@ -1,7 +1,7 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
 import { defineForm, type FormAccessor } from "../../defineForm.js";
-import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
+import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { SSN } from "../../values.js";
 import type { ScheduleSEFilingInfo } from "./filingInfo.js";
 import { MIN_NET_EARNINGS, netEarnings } from "./lines.js";
@@ -104,10 +104,13 @@ export function register(): void {
           ? numberOrBlank(form["form-8919.0.line.10_wages_subject_social_security_tax"])
           : undefined;
       },
+      /*
+       * A blank line 8a (no W-2) counts as 0: line 8c still reduces line 9
+       * (irs-pub-560-2025::sec::omb-no-1545-0074::b03). Blank when all three are.
+       */
       "0.line.8d": (form) => {
-        const line8a = form["0.line.8a"];
-        if (!owesTax(form) || skipsTo11(form) || line8a === undefined) return undefined;
-        return sum(line8a, form["0.line.8b"], form["0.line.8c"]);
+        if (!owesTax(form) || skipsTo11(form)) return undefined;
+        return sumOrBlank(form["0.line.8a"], form["0.line.8b"], form["0.line.8c"]);
       },
       "0.line.9": (form) =>
         owesTax(form) && !skipsTo11(form)
