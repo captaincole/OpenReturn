@@ -231,6 +231,10 @@ A binding (a form's `bindings.ts`) computes one field. It returns one of three r
 
 Do not use `undefined` for an engine gap: a blank line looks like "nothing applies", and the return prints without it.
 
+### The central forms keep their rules in section files
+
+Every new form adds lines to Form 1040, so its rules do not live in one file. `engine/src/federal/1040/bindings.ts` is the index: one entry for each field, in form order, that names an imported function, and the `unsupported` list. The function for a line is in the section file of the paper form (`header.ts`, `income.ts`, `adjustmentsAndDeductions.ts`, `taxAndCredits.ts`, `payments.ts`, `signing.ts`). A new or changed Form 1040 line is a function in its section file and one entry in the index. Every other form keeps its rules in its own `bindings.ts`.
+
 ### Whole-dollar rounding convention — nearest dollar
 
 Tax-form lines take whole dollars, rounded to the **nearest** dollar with `roundDollars()` in `engine/src/money.ts` (decided 2026-10-16). `money.ts` is the one module for engine money math: `sum`, `atLeast`, `roundDollars`, `stepsOf`, `formatDollars`, the printed-zero helpers `sumOrBlank` and `numberOrBlank` (blank, not 0, when no input is a number), and the `Money` brand. Lint bans `Math.round` / `ceil` / `floor` / `trunc`, `toFixed`, and `toLocaleString` elsewhere in the engine's `src/`. The IRS rule (1040 instructions, "Rounding Off to Whole Dollars"): drop amounts under 50 cents, raise 50–99 cents to the next dollar.

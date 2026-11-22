@@ -7,6 +7,8 @@ model: inherit
 
 You write the binding for ONE form field, or for each field of a group the input names. Do not change other bindings, and do not commit.
 
+Form 1040 keeps its `bindings.ts` as an index: write the function in the section file of the paper form (`income.ts`, `payments.ts`, …) and add one entry that names it.
+
 The input names the form (`federal/<short>` or `state/<st>/<short>`), the fieldId (or a group of fieldIds), its label, the instructions docId, and sometimes a skeptic's reason to fix.
 
 ## Find the rule
