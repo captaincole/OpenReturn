@@ -2,8 +2,10 @@
 
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, stepsOf, sum } from "../../money.js";
+import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { mortgageCreditGap } from "../8396/creditGap.js";
+import { line6cFrom8839 } from "../8839/receivers.js";
 import type { Schedule8812FilingInfo } from "./filingInfo.js";
 import type { Schedule8812 } from "./types.js";
 import {
@@ -117,7 +119,7 @@ export function register(): void {
        * MANUAL EDIT: line 4 is line 15 of Credit Limit Worksheet B (Schedule 3
        * lines 5a, 6c, 6g and 6h) with line 4 above 0 and one of those credits
        * (irs-1040s8-inst-2025::sec::line-21::b03,
-       * credit-limit-worksheet-b-continued::b02), else -0-. Lines 5a, 6c and 6h
+       * credit-limit-worksheet-b-continued::b02), else -0-. Lines 5a and 6h
        * are unsupported today. With a qualifying child the line waits for Form
        * 8396 line 9 (6g), unless line 9 is an engine gap: then 6g is left out,
        * as Schedule 3 leaves out its other unsupported credits. Form 8396 reads
@@ -126,7 +128,18 @@ export function register(): void {
       "0.line.13_credit_limit_worksheet_a": (form, info) => {
         const line18 = form["form-1040.line.18"];
         if (typeof line18 !== "number") return undefined;
+        /*
+         * MANUAL EDIT: Worksheet B line 15 adds Schedule 3 line 6c
+         * (irs-1040s8-inst-2025::sec::credit-limit-worksheet-b-continued::b02),
+         * so a Form 8839 credit that is unsupported is a gap here too.
+         */
         const children = sum(form["0.line.4_qualifying_children_under_17"]) > 0;
+        const adoption = line6cFrom8839(form, info)?.value;
+        if (children && typeof adoption === "object") {
+          return unsupported(
+            `Credit Limit Worksheet B line 15 needs Schedule 3 line 6c: ${adoption.reason}`,
+          );
+        }
         const waitsFor6g =
           children &&
           info.mustFile?.["form-8396"]?.value === true &&

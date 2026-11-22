@@ -13,6 +13,9 @@ import { mortgageCreditBindings } from "./mortgageCredit.js";
 import { sectionCBindings } from "./sectionC.js";
 import type { ScheduleCa } from "./types.js";
 
+const LINE_1F_WITHOUT_8839 =
+  "Employer-provided adoption benefits from Form 8839 (federal 1040 line 1f) — no scenario modeled yet.";
+
 const text = (value: unknown): string | undefined =>
   typeof value === "string" ? value : undefined;
 
@@ -284,6 +287,14 @@ export function register(): void {
           : undefined,
       "0.header.ssn": (_, info) => info.taxpayerSSN,
       "0.line.1a_federal": (form) => sum(form["form-1040.line.1a"]),
+      /*
+       * MANUAL EDIT: column A copies federal 1040 line 1f (Form 8839 line 31,
+       * ftb-pub-737-2025::sec::line-1f::b01). Without Form 8839, the old reason.
+       */
+      "0.line.1f_federal": (form, info) =>
+        info.mustFile?.["form-8839"]?.value === true
+          ? numberOrBlank(form["form-1040.line.1f"])
+          : unsupported(LINE_1F_WITHOUT_8839),
       // Federal 1040 line 1c (Form 4137 line 4 and noncash tips); blank when it is.
       "0.line.1c_federal": (form) => numberOrBlank(form["form-1040.line.1c"]),
       // MANUAL EDIT: 1h type is a text field; read it as a string, not with sum().
@@ -578,8 +589,6 @@ export function register(): void {
         "Medicaid waiver payments not reported on W-2 (federal 1040 line 1d) — no scenario modeled yet.",
       "0.line.1e_federal":
         "Taxable dependent care benefits from Form 2441 (federal 1040 line 1e) — no scenario modeled yet.",
-      "0.line.1f_federal":
-        "Employer-provided adoption benefits from Form 8839 (federal 1040 line 1f) — no scenario modeled yet.",
       "0.line.1g_federal": "Wages from Form 8919 (federal 1040 line 1g) — no scenario modeled yet.",
       "0.line.1h_federal": "Other earned income (federal 1040 line 1h) — no scenario modeled yet.",
       "0.line.1z_subtractions":

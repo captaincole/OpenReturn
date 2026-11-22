@@ -86,6 +86,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "whether one exists is Cade's question",
   ],
   [
+    /^adoption\.child\.[^.]+$/,
+    "each fact is a whole child the taxpayer adopted or tried to adopt (Form 8839 line 1); " +
+      "whether one exists is Cade's question",
+  ],
+  [
     /^education\.savings_bond(_expense)?\.[^.]+$/,
     "each fact is a whole savings bond cashed or a whole line 1 row (Form 8815); whether one " +
       "exists is Cade's question",
