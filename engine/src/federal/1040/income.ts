@@ -15,8 +15,20 @@ import { WITHOUT_8839 } from "./withoutForm8839.js";
 
 type Form = FormAccessor<Form1040>;
 
-// MANUAL EDIT: document sums (1a, 2a–3b, 25a) round to the nearest dollar.
-export const line1a = (_: unknown, info: Form1040FilingInfo) => roundDollars(info.w2WagesTotal);
+/*
+ * MANUAL EDIT: document sums (1a, 2a–3b, 25a) round to the nearest dollar. Line
+ * 1a adds Form 2106's excess reimbursement: "if line 7 is greater than line 6 in
+ * Column A, report the excess as income on Form 1040 ... line 1a" (Form 2106
+ * line 8; irs-2106-inst-2025::sec::general-instructions::b01).
+ */
+export function line1a(_: unknown, info: Form1040FilingInfo) {
+  const excess = info.form2106Totals?.excessReimbursement;
+  if (!excess) {
+    if (info.form2106TotalsGap) return unsupported(info.form2106TotalsGap);
+    return roundDollars(info.w2WagesTotal);
+  }
+  return roundDollars(sum(info.w2WagesTotal, excess));
+}
 
 /*
  * MANUAL EDIT: irs-1040-inst-2025::sec::line-1c::b01: tips not reported to the

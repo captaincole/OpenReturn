@@ -81,6 +81,8 @@ export interface ScheduleAFilingInfo
   /** Line 6: other taxes and their type (irs-1040sa-inst-2025::sec::line-6-2::b01). */
   otherTaxes?: number;
   otherTaxesDescription?: string;
-  /** Line 16: impairment-related work expenses of a disabled person. */
+  /** Line 16: impairment-related work expenses of a disabled person, stated and from Form 2106 line 10. */
   impairmentRelatedWorkExpenses?: number;
+  /** Line 16: why a Form 2106 with impairment-related expenses cannot be figured. */
+  impairmentGap?: string;
 }

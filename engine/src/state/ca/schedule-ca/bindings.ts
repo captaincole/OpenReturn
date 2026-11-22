@@ -5,6 +5,7 @@ import { defineForm, type FormAccessor, type FormSpec } from "../../../defineFor
 import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../../money.js";
 import { unsupported } from "../../../types.js";
 import { answerLines } from "./answerLines.js";
+import { line12Adjustment, line12Federal } from "./employeeBusinessExpenses.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
 import { form8853Bindings } from "./form8853.js";
 import { partIIUnsupported } from "./increasedStandard.js";
@@ -200,6 +201,10 @@ export function register(): void {
        * (ca-540-sched-ca-inst-2025::sec::line-11-through-line-25::b01).
        */
       "2.line.c14_federal": (form) => amountIfNonzero(form["schedule-1.1.line.14"]),
+      // MANUAL EDIT: line 12 from Schedule 1 line 12 (Form 2106); columns B and C (employeeBusinessExpenses.ts).
+      "2.line.c12_federal": line12Federal,
+      "2.line.c12_subtractions": line12Adjustment,
+      "2.line.c12_additions": line12Adjustment,
       "3.line.c26_federal": (form) => adjustmentsTotalFederal(form),
       "3.line.c26_subtractions": (form) =>
         sumOrBlank(...ADJUSTMENT_SUBTRACTIONS.map((id) => form[id])),
@@ -730,12 +735,6 @@ export function register(): void {
         "CA-specific NOL deduction from FTB Form 3805V — no ingestion path for FTB 3805V data exists yet.",
       "2.line.b9b3_subtractions":
         "CA-specific NOL deduction from FTB Forms 3805Z, 3807, or 3809 — no ingestion path for these FTB enterprise-zone NOL forms exists yet.",
-      "2.line.c12_federal":
-        "Requires Schedule 1 (Form 1040) line 12 — federal Schedule 1 is not an ingested form; no fieldId available to reference.",
-      "2.line.c12_subtractions":
-        "CA adjustment for reservist/performing artist business expenses requires FTB Pub. 1001 analysis and Schedule 1 line 12 source data — no ingestion path for either yet.",
-      "2.line.c12_additions":
-        "CA addition for reservist/performing artist business expenses (line 12, col C) requires FTB Pub. 1001 analysis and Schedule 1 line 12 source — no ingestion path yet.",
       "2.line.c17_federal":
         "Requires federal Schedule 1 line 17 (self-employed health insurance deduction). Schedule 1 individual lines are not ingested; no self-employment health insurance scenario yet.",
       "2.line.c19a_additions":
