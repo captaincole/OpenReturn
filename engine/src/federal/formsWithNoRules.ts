@@ -32,8 +32,6 @@ import type { Form4970FilingInfo } from "./4970/filingInfo.js";
 import { resolve4970Info } from "./4970/resolveInfo.js";
 import type { Form4972FilingInfo } from "./4972/filingInfo.js";
 import { resolve4972Info } from "./4972/resolveInfo.js";
-import type { Form5329FilingInfo } from "./5329/filingInfo.js";
-import { resolve5329Info } from "./5329/resolveInfo.js";
 import type { Form5471FilingInfo } from "./5471/filingInfo.js";
 import { resolve5471Info } from "./5471/resolveInfo.js";
 import type { Form6198FilingInfo } from "./6198/filingInfo.js";
@@ -42,8 +40,6 @@ import type { Form6252FilingInfo } from "./6252/filingInfo.js";
 import { resolve6252Info } from "./6252/resolveInfo.js";
 import type { Form7203FilingInfo } from "./7203/filingInfo.js";
 import { resolve7203Info } from "./7203/resolveInfo.js";
-import type { Form8396FilingInfo } from "./8396/filingInfo.js";
-import { resolve8396Info } from "./8396/resolveInfo.js";
 import type { Form8582CRFilingInfo } from "./8582-cr/filingInfo.js";
 import { resolve8582CRInfo } from "./8582-cr/resolveInfo.js";
 import type { Form8611FilingInfo } from "./8611/filingInfo.js";
@@ -64,14 +60,10 @@ import type { Form8834FilingInfo } from "./8834/filingInfo.js";
 import { resolve8834Info } from "./8834/resolveInfo.js";
 import type { Form8839FilingInfo } from "./8839/filingInfo.js";
 import { resolve8839Info } from "./8839/resolveInfo.js";
-import type { Form8853FilingInfo } from "./8853/filingInfo.js";
-import { resolve8853Info } from "./8853/resolveInfo.js";
 import type { Form8859FilingInfo } from "./8859/filingInfo.js";
 import { resolve8859Info } from "./8859/resolveInfo.js";
 import type { Form8863FilingInfo } from "./8863/filingInfo.js";
 import { resolve8863Info } from "./8863/resolveInfo.js";
-import type { Form8880FilingInfo } from "./8880/filingInfo.js";
-import { resolve8880Info } from "./8880/resolveInfo.js";
 import type { Form8888FilingInfo } from "./8888/filingInfo.js";
 import { resolve8888Info } from "./8888/resolveInfo.js";
 import type { Form8911FilingInfo } from "./8911/filingInfo.js";
@@ -112,11 +104,9 @@ export type FederalFormsWithNoRulesFilingInfo = ScheduleFFilingInfo &
   Form4835FilingInfo &
   Form4970FilingInfo &
   Form4972FilingInfo &
-  Form5329FilingInfo &
   Form5471FilingInfo &
   Form6198FilingInfo &
   Form6252FilingInfo &
-  Form8396FilingInfo &
   Form8611FilingInfo &
   Form8615FilingInfo &
   Form8621FilingInfo &
@@ -125,10 +115,8 @@ export type FederalFormsWithNoRulesFilingInfo = ScheduleFFilingInfo &
   Form8828FilingInfo &
   Form8834FilingInfo &
   Form8839FilingInfo &
-  Form8853FilingInfo &
   Form8859FilingInfo &
   Form8863FilingInfo &
-  Form8880FilingInfo &
   Form8888FilingInfo &
   Form8911FilingInfo &
   Form8912FilingInfo &
@@ -161,11 +149,9 @@ export const FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS: ReadonlyArray<
   resolve4835Info,
   resolve4970Info,
   resolve4972Info,
-  resolve5329Info,
   resolve5471Info,
   resolve6198Info,
   resolve6252Info,
-  resolve8396Info,
   resolve8611Info,
   resolve8615Info,
   resolve8621Info,
@@ -174,10 +160,8 @@ export const FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS: ReadonlyArray<
   resolve8828Info,
   resolve8834Info,
   resolve8839Info,
-  resolve8853Info,
   resolve8859Info,
   resolve8863Info,
-  resolve8880Info,
   resolve8888Info,
   resolve8911Info,
   resolve8912Info,

@@ -6,6 +6,7 @@
 import type { BindingFn, FormAccessor } from "../../defineForm.js";
 import { formatDollars, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported } from "../../types.js";
+import { figuredForm8814, withForm8814 } from "../8814/totals.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
 import {
   iraDeduction,
@@ -17,6 +18,12 @@ import {
 import type { Schedule1 } from "./types.js";
 
 type Bindings = Partial<{ [K in keyof Schedule1]: BindingFn<Schedule1, Schedule1FilingInfo, K> }>;
+
+/* Line 8z's "Form 8814" item: the total of every Form 8814 line 12, when not 0. */
+function form8814Item(info: Schedule1FilingInfo) {
+  const line12 = figuredForm8814(info.form8814Totals)?.line12 ?? 0;
+  return line12 === 0 ? [] : [{ description: "Form 8814", amount: line12 }];
+}
 
 /* Lines 2b and 19c: the month and year of the agreement (irs-1040-inst-2025::sec::line-19c::b01). */
 const monthYear = (date: string | undefined) => {
@@ -104,11 +111,16 @@ export function answerBindings(): Bindings {
         ? unsupported(
             "Form 1099-G box 5 (RTAA payments) belongs on line 8z, and the engine does not add it yet.",
           )
-        : roundDollars(
-            sumOrBlank(
-              info.miscOtherIncome,
-              ...(info.otherIncomeItems ?? []).map((item) => item.amount),
+        : // MANUAL EDIT: plus the total of every Form 8814 line 12 (irs-8814-inst-2025::sec::line-12::b01).
+          withForm8814(
+            info.form8814Totals,
+            roundDollars(
+              sumOrBlank(
+                info.miscOtherIncome,
+                ...(info.otherIncomeItems ?? []).map((item) => item.amount),
+              ),
             ),
+            (figured) => figured.line12,
           ),
     /*
      * "List the type and amount of income" (irs-1040-inst-2025::sec::line-8z::b01):
@@ -121,6 +133,7 @@ export function answerBindings(): Bindings {
           ? [{ description: "Form 1099-MISC", amount: info.miscOtherIncome }]
           : []),
         ...(info.otherIncomeItems ?? []),
+        ...form8814Item(info),
       ];
       if (items.length === 0) return undefined;
       if (items.length === 1) return items[0].description;

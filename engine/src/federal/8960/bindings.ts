@@ -2,9 +2,15 @@
 
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
+import { unsupported } from "../../types.js";
+import { withForm8814 } from "../8814/totals.js";
 import type { Form8960FilingInfo } from "./filingInfo.js";
 import { NIIT_THRESHOLDS, netInvestmentIncome, nonpassiveRentalAdjustments } from "./lines.js";
 import type { Form8960 } from "./types.js";
+
+const OTHER_MODIFICATIONS = unsupported(
+  "Other NII modifications (section 1411 NOL, estate/trust distributions, section 404(k) dividends, etc.) — no scenario modeled yet.",
+);
 
 export function register(): void {
   defineForm<Form8960, Form8960FilingInfo>("form-8960", {
@@ -43,6 +49,20 @@ export function register(): void {
       "0.line.4c": (form) => sum(form["0.line.4a"], form["0.line.4b"]),
       "0.line.5a": (form) => sum(form["form-1040.line.7a"], form["schedule-1.0.line.4"]),
       "0.line.5d": (form) => sum(form["0.line.5a"], form["0.line.5b"], form["0.line.5c"]),
+      /*
+       * MANUAL EDIT: irs-8960-inst-2025::sec::line-7-other-modifications-to-investment-income::b04:
+       * each Form 8814 line 12, excluding Alaska Permanent Fund dividends (the
+       * Pub. 550 share, federal/8814/lines.ts). The other line 7 items have no
+       * fact: with no Form 8814 amount the line stays unsupported.
+       */
+      "0.line.7": (_, info) => {
+        const line7 = withForm8814(
+          info.form8814Totals,
+          0,
+          (figured) => figured.line12LessAlaskaDividends,
+        );
+        return line7 === 0 ? OTHER_MODIFICATIONS : line7;
+      },
       "0.line.8": (form) =>
         sum(
           form["0.line.1"],
@@ -115,8 +135,6 @@ export function register(): void {
       "0.line.5c":
         "Partnership interest / S corporation stock disposition adjustment — no K-1 or pass-through disposition scenario yet.",
       "0.line.6": "CFC/PFIC adjustments — no CFC/PFIC ownership scenario yet.",
-      "0.line.7":
-        "Other NII modifications (section 1411 NOL, estate/trust distributions, section 404(k) dividends, etc.) — no scenario modeled yet.",
       "0.line.9c":
         "Miscellaneous investment expenses are generally disallowed post-2017 (OBBBA made permanent); no ingestion path for allowable section 62/212 expenses.",
       "0.line.18a":

@@ -1,6 +1,7 @@
 import type { DependentCredit, DependentFactValue } from "../../facts/index.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Money } from "../../money.js";
+import type { Form8396FilingInfo } from "../8396/filingInfo.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
 import type { EicLineSlot } from "../schedule-eic/eicAnswers.js";
 import type { ScheduleSEFilingInfo } from "../schedule-se/filingInfo.js";
@@ -21,8 +22,13 @@ export interface DependentRow {
 }
 
 /* Line 24 reads Form 1040 line 27a's outcome: the EIC slot, Schedule SE's net profit and Schedule E's columns. */
+/* MANUAL EDIT: line 13 reads Form 8396's gap, which needs the certificate. */
 export interface Schedule8812FilingInfo
-  extends BaseFilingInfo, EicLineSlot, Pick<ScheduleSEFilingInfo, "scheduleCNetProfit"> {
+  extends
+    BaseFilingInfo,
+    EicLineSlot,
+    Pick<ScheduleSEFilingInfo, "scheduleCNetProfit">,
+    Pick<Form8396FilingInfo, "mortgageCreditCertificate"> {
   /** Schedule E's resolver fills it (Pub. 596 Worksheet 1). */
   rentalProperties?: RentalProperty[];
   /** Every dependent claimed on the return, in the order recorded. */

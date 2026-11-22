@@ -31,6 +31,7 @@ export type EicOutcomeInfo = Pick<
   | "w2NontaxableCombatPay"
   | "scheduleCNetProfit"
   | "rentalProperties"
+  | "form8814Totals"
 >;
 
 /*
