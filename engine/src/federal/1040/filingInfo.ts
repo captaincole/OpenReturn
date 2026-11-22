@@ -2,6 +2,7 @@ import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Money } from "../../money.js";
 import type { Form3903FilingInfo } from "../3903/filingInfo.js";
 import type { Form4137FilingInfo } from "../4137/filingInfo.js";
+import type { Form4972FilingInfo } from "../4972/filingInfo.js";
 import type { Form8814FilingInfo } from "../8814/filingInfo.js";
 import type { Schedule8812FilingInfo } from "../schedule-8812/filingInfo.js";
 import type { ScheduleAFilingInfo } from "../schedule-a/filingInfo.js";
@@ -16,7 +17,7 @@ import type { ScheduleSEFilingInfo } from "../schedule-se/filingInfo.js";
  * EIC answers and counts. Line 12e reads Schedule A's increased standard
  * deduction mode. Line 1c reads Form 4137's tip income.
  * Line 1h reads Form 3903's excess reimbursement.
- * Lines 3a–3c, 7a, 7b and 16 read Form 8814's totals.
+ * Lines 3a–3c, 7a, 7b and 16 read Form 8814's totals. Line 16 reads Form 4972's tax.
  */
 export interface Form1040FilingInfo
   extends
@@ -27,7 +28,8 @@ export interface Form1040FilingInfo
     Pick<ScheduleSEFilingInfo, "scheduleCNetProfit">,
     Pick<ScheduleAFilingInfo, "increasedStandardDeduction">,
     Pick<Form4137FilingInfo, "tipIncomeNotOnLine1a" | "employeeCashTips">,
-    Pick<Form8814FilingInfo, "form8814Totals"> {
+    Pick<Form8814FilingInfo, "form8814Totals">,
+    Pick<Form4972FilingInfo, "form4972Tax" | "form4972TaxGap"> {
   /** Social Security with a traditional IRA contribution and a plan: Pub. 590-A figures line 6b (schedule-1/pub590a.ts). */
   pub590aWorksheets?: boolean;
 
@@ -58,6 +60,8 @@ export interface Form1040FilingInfo
   line1hGap?: string;
   /** Lines 5a–5c. */
   pensionDistributions?: RetirementLine;
+  /** Lines 5a and 5b: why a Form 4972 leaves them unfigured (federal/4972/line5.ts). */
+  pensionDistributionsGap?: string;
   /** Line 6a. */
   socialSecurityBenefits?: Money;
   /** MFS: the line 6d box, and a $25,000 worksheet base instead of 0. */

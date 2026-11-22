@@ -117,11 +117,16 @@ export function line4b(form: Form, info: Form1040FilingInfo) {
 export const line4cRollover = (_: unknown, info: Form1040FilingInfo) =>
   info.iraDistributions?.rollover ? true : undefined;
 
+// MANUAL EDIT: a Form 4972 takes its distribution off lines 5a and 5b (federal/4972/line5.ts).
 export const line5a = (_: unknown, info: Form1040FilingInfo) =>
-  roundDollars(info.pensionDistributions?.gross);
+  info.pensionDistributionsGap
+    ? unsupported(info.pensionDistributionsGap)
+    : roundDollars(info.pensionDistributions?.gross);
 
 export const line5b = (_: unknown, info: Form1040FilingInfo) =>
-  roundDollars(info.pensionDistributions?.taxable);
+  info.pensionDistributionsGap
+    ? unsupported(info.pensionDistributionsGap)
+    : roundDollars(info.pensionDistributions?.taxable);
 
 export const line5cRollover = (_: unknown, info: Form1040FilingInfo) =>
   info.pensionDistributions?.rollover ? true : undefined;

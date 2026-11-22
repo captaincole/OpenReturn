@@ -96,6 +96,7 @@ import {
 } from "./signing.js";
 import {
   line16,
+  line16FromForm4972,
   line17,
   line18,
   line19,
@@ -170,6 +171,7 @@ export function register(): void {
       "line.14": line14,
       "line.15": line15,
       "line.16_from_form_8814": line16FromForm8814,
+      "line.16_from_form_4972": line16FromForm4972,
       "line.16": line16,
       "line.17": line17,
       "line.18": line18,
@@ -283,8 +285,6 @@ export function register(): void {
         "No MFJ scenario ingested yet — spouse-as-dependent checkbox requires a joint-return scenario where the spouse can be claimed by a third party.",
       "line.12b_dual_status_alien":
         "No dual-status alien scenario ingested yet — this checkbox requires a residency/immigration-status fact we don't model.",
-      "line.16_from_form_4972":
-        "Checkbox indicating tax includes amounts from Form 4972 (lump-sum distribution). No Form 4972 ingestion scenario built yet.",
       "line.16_from_other_form":
         "Checkbox indicating tax includes amounts from a third special form (e.g. section 962 election, recapture). No ingestion scenario built for these edge cases.",
       "line.16_other_form_number":

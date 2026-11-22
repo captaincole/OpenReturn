@@ -67,6 +67,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],
   [
+    /^retirement\.lump_sum_distribution\.[^.]+$/,
+    "each fact is a whole participant's lump-sum distribution with its Part I answers and " +
+      "elections (Form 4972); whether the user elects the special tax is Cade's question",
+  ],
+  [
     /^adjustments\.armed_forces_storage_fees_only$/,
     "an answer Cade records only for storage fees alone from an earlier move (Schedule 1 line 14 box)",
   ],

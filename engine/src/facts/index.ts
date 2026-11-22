@@ -37,6 +37,7 @@ export * from "./kinds/investmentInterest.js";
 export * from "./kinds/isoExercise.js";
 export * from "./kinds/itemizedOther.js";
 export * from "./kinds/ltcBenefits.js";
+export * from "./kinds/lumpSumDistribution.js";
 export * from "./kinds/marketplaceCoverage.js";
 export * from "./kinds/miscIncome.js";
 export * from "./kinds/mortgage.js";
