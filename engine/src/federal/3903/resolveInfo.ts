@@ -26,8 +26,8 @@ const BOTH_METHODS =
 const SPLIT_CODE_P =
   "More than one move, and a move does not state its government reimbursements: the W-2 box 12 code P total cannot be split among the Forms 3903.";
 
-/* The code P amounts on every W-2 of the return, cents kept; 0 with none. */
-function codePTotal(inputs: ResolverInputs): number {
+/* The code P amounts on every W-2 of the return, cents kept; 0 with none. FTB 3913 line 4 reads it too. */
+export function codePTotal(inputs: ResolverInputs): number {
   const entries = factsInCategory(inputs, "wages")
     .filter((row) => isW2FactKey(row.key))
     .flatMap((row) => (row.value as W2FactValue).box12 ?? [])

@@ -67,6 +67,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],
   [
+    /^ca_work_move\.[^.]+$/,
+    "each fact is a whole move for a new job (FTB 3913); whether one happened is Cade's question. " +
+      "FTB 3913 lists the fact again while an answer inside it (time test, line 4) is missing",
+  ],
+  [
     /^adjustments\.armed_forces_storage_fees_only$/,
     "an answer Cade records only for storage fees alone from an earlier move (Schedule 1 line 14 box)",
   ],
