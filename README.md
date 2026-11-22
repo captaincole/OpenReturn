@@ -28,6 +28,22 @@
 
 OpenReturn prepares your US federal and California return, or an estimate, on your own machine. Twin agents do the work: **Cade**, your CPA, interviews you and reads your documents. **Canon**, your tax attorney, checks each of Cade's decisions against the IRS and FTB text. A deterministic form engine computes every line. No AI touches the math.
 
+## Have we solved taxes yet?
+
+Not yet. The table shows how far the form engine is.
+
+<!-- solved-table:start -->
+|  | Federal 2025 | California 2025 |
+| --- | --- | --- |
+| Forms with rules | **25%** (50 of 197) | **23%** (14 of 62) |
+| Fields computed | **27%** (2,492 of 9,166) | **20%** (797 of 4,075) |
+<!-- solved-table:end -->
+
+- **Forms with rules:** the forms that the engine computes, against the list of forms that the IRS or the FTB accepts with an individual return.
+- **Fields computed:** the form fields that the engine computes, against all fields of the forms that the engine has.
+
+[Form support](#form-support) has the details.
+
 ## Why? - Let's Break The System...
 
 Taxes shouldn't be as hard as they are today. An entire industry profits from keeping the U.S. tax system difficult and opaque, but it doesn't have to be that way and this project is an attempt to change that system.
@@ -109,8 +125,8 @@ The form engine computes the return. The table shows how much of each form it ha
 <!-- coverage-table:start -->
 | Jurisdiction | Forms | Fields supported | Tested |
 | --- | --- | --- | --- |
-| Federal 2025 | 83 | **23%** (2,140 of 9,166) | 80.8% |
-| California 2025 | 38 | **18%** (729 of 4,075) | 78.7% |
+| Federal 2025 | 83 | **27%** (2,492 of 9,166) | 79.9% |
+| California 2025 | 38 | **20%** (797 of 4,075) | 78.9% |
 <!-- coverage-table:end -->
 
 - **Fields supported:** the share of the form fields that the engine computes. It leaves each other field blank and says so.
@@ -127,10 +143,10 @@ The IRS and the FTB each publish the list of forms that they accept with an indi
 | --- | --- | --- |
 | Forms and schedules for an individual return | 197 | 62 |
 | In the engine | 83 | 38 |
-| With rules | 43 | 11 |
+| With rules | 50 | 14 |
 | Tier 1 forms | 43 | 22 |
 | Tier 1 in the engine | 43 | 22 |
-| Tier 1 with rules | 30 | 8 |
+| Tier 1 with rules | 30 | 9 |
 
 Cade reads 18 kinds of input document, such as Form W-2 and Form 1099-B.
 <!-- form-list-table:end -->

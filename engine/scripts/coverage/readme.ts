@@ -20,6 +20,34 @@ export function renderReadmeTable(jurisdictions: JurisdictionRow[]): string {
   );
 }
 
+/* A share with its counts: "**25%** (50 of 197)". */
+const shareWithCounts = (covered: number, total: number): string =>
+  `**${percent({ covered, total }, 0)}** (${wholeNumber(covered)} of ${wholeNumber(total)})`;
+
+/*
+ * The table at the top of the README: for each jurisdiction, the forms with
+ * rules against the publisher's list, and the fields the engine computes.
+ */
+export function renderSolvedTable(
+  jurisdictions: JurisdictionRow[],
+  formLists: FormListSummary[],
+): string {
+  const fieldsOf = (name: string): string => {
+    const row = jurisdictions.find((each) => each.name === name);
+    return row ? supportedWithCounts(row) : "none";
+  };
+  return table(
+    ["", ...formLists.map((summary) => summary.name)],
+    [
+      [
+        "Forms with rules",
+        ...formLists.map((summary) => shareWithCounts(summary.all.withRules, summary.all.total)),
+      ],
+      ["Fields computed", ...formLists.map((summary) => fieldsOf(summary.name))],
+    ],
+  );
+}
+
 export interface Markers {
   start: string;
   end: string;
@@ -28,6 +56,11 @@ export interface Markers {
 export const TABLE_MARKERS: Markers = {
   start: "<!-- coverage-table:start -->",
   end: "<!-- coverage-table:end -->",
+};
+
+export const SOLVED_MARKERS: Markers = {
+  start: "<!-- solved-table:start -->",
+  end: "<!-- solved-table:end -->",
 };
 
 export const FORM_LIST_MARKERS: Markers = {
@@ -52,7 +85,12 @@ export function updateReadme(
   formLists: FormListSummary[],
   documents: InputDocument[],
 ): string {
-  const withCoverage = replaceBetween(readme, TABLE_MARKERS, renderReadmeTable(jurisdictions));
+  const withSolved = replaceBetween(
+    readme,
+    SOLVED_MARKERS,
+    renderSolvedTable(jurisdictions, formLists),
+  );
+  const withCoverage = replaceBetween(withSolved, TABLE_MARKERS, renderReadmeTable(jurisdictions));
   return replaceBetween(
     withCoverage,
     FORM_LIST_MARKERS,
