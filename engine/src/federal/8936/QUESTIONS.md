@@ -56,6 +56,32 @@ Each item is a place where the form and the instructions do not settle a rule. T
 - Default: the stated price, cents kept: $25,000.01 is more than $25,000. Line 14 prints the whole-dollar price.
 - Changes dollars: yes, at the edge only.
 
+## 10. Schedule 2 line 1b or 1c for a previously owned vehicle
+
+- Source: the Schedule A line 4 instructions say "If directed by line 8a, 8d, 13a, or 13c, you must report this amount on Schedule 2 (Form 1040), line 1b" (`line-4::b01`). The printed Schedule A lines 13a and 13c say "line 1c", and so do the Form 1040 instructions (`irs-1040-inst-2025::sec::line-1c-2::b01`).
+- Default: line 1b for a new vehicle (lines 8a, 8d), line 1c for a previously owned vehicle (lines 13a, 13c). Two sources against one sentence that names all four lines.
+- Changes dollars: the line only; Schedule 2 line 1z adds both, so the total tax does not change.
+
+## Blind fill (2026-11-22)
+
+A blind preparer filled 15 cases from the blank Form 8936 and the instructions, without the blank Schedule A. Every credit and repayment matched. The differences:
+
+- Line 2 in a case that stops at Schedule A line 7 (acquired after September 30, 2025) or line 13a (resold within 30 days): the blind fill entered the 2025 modified AGI; the engine leaves it blank. The printed Schedule A decides: line 7 "No. Stop here." and line 13a "Yes. Stop here." come before lines 8c and 13b, which say "Complete Form 8936, lines 1 and 2." Engine kept. No credit changes.
+- Lines 9 and 13 with 100% business use: blank in the engine, 0 in the blind fill. Schedule A line 11: "If you entered 100% on line 10, stop here." Engine kept.
+
+The blind doubts that change a dollar amount, and what settles each:
+
+- Part III subtracts the Part IV credit, not the reverse: line 11 adds Schedule 3 line 6m (`line-11::b01`), line 16 does not (`part-iv-credit-for-previously-owned::b01`). Stated rule.
+- A resale 20 days after delivery repays a transferred credit: Schedule A line 13a asks "Did you resell the vehicle within 30 days of the placed-in-service date shown on line 3?" Stated rule (printed Schedule A).
+- A contract and payment on October 3, 2025 is too late: a vehicle is "acquired" when "a written binding contract is entered into and a payment has been made" (`what-s-new::b01`). Stated rule.
+- The repaid amount is the transferred amount: Schedule A line 4a holds it ("Yes. Enter the transferred amount shown on the seller's report"); line 4b is the check box. Stated rule (printed Schedule A).
+- Schedule 2 line 1b or 1c: item 10.
+
+## Second opinions
+
+- PolicyEngine-US 2.152.16 (commit 794e17e6): it models the new and the previously owned credits (`variables/gov/irs/credits/clean_vehicle/`), not the commercial credit or the business-use part. Constants agree: the MAGI limits for both charts, 30% of the sales price, the $4,000 maximum and the $25,000 price limit. Logic agrees: either year's MAGI under its own year's status limit qualifies; the previously owned credit comes before the new one in the tax limit (Form 8936 line 11 adds line 6m). Its credits before the clean vehicle credits are Schedule 3 lines 1–4, 5b and 6d, without 6l (Form 8978): a scope difference, since the engine makes line 11 unsupported while Form 8978 files. Differences that are scope, not a rule: it allows both credits for all of 2025 and ends them from 2026, with no September 30 cutoff (its own note calls this an approximation); it figures the new credit from battery components, not the seller report; and it has no rule for a 2025 joint return after a 2024 return that was not joint (item 1). Nothing to change.
+- IRS Direct File (IRS-Public/direct-file): a code search finds no Form 8936 or clean vehicle credit. Nothing to compare.
+
 ## Confidence
 
 | Field group | Confidence |
