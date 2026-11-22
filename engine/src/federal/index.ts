@@ -782,6 +782,12 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8863",
     relativeDir: "federal/8863",
     register: registerForm8863,
+    /* One page 2 per student, and one more per pair of further institutions; page 1 prints once. */
+    copies: {
+      count: (info) => info?.form8863?.pages.length ?? 1,
+      select: (info, index) => info && { ...info, form8863CopyIndex: index },
+      laterCopyPages: [1],
+    },
   }),
   makeFormSpec({
     formId: "form-8880",
@@ -824,6 +830,10 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8919",
     relativeDir: "federal/8919",
     register: registerForm8919,
+    copies: {
+      count: (info) => info?.form8919Filers?.length ?? 1,
+      select: (info, index) => info && { ...info, form8919CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-8933",

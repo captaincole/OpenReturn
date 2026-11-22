@@ -211,12 +211,14 @@ export function register(): void {
         numberOrBlank(form["form-4684.0.line.18_deductible_loss"]),
       "0.line.16_other_itemized_deductions_description": (form, info) => {
         if (info.disasterLossGap) return unsupported(info.disasterLossGap);
+        if (info.impairmentGap) return unsupported(info.impairmentGap);
         const items = line16Items(form, info);
         if (!items?.length) return undefined;
         return items.map((item) => `${item.description} ${formatDollars(item.amount)}`).join("; ");
       },
       "0.line.16_other_itemized_deductions_amount": (form, info) => {
         if (info.disasterLossGap) return unsupported(info.disasterLossGap);
+        if (info.impairmentGap) return unsupported(info.impairmentGap);
         const items = line16Items(form, info);
         if (!items?.length) return undefined;
         return roundDollars(sum(...items.map((item) => item.amount)));
@@ -224,6 +226,7 @@ export function register(): void {
       // MANUAL EDIT: waits with Form 4684's totals, which lines 15 and 16 read; unsupported with their gap.
       "0.line.17_total_itemized_deductions": (form, info) => {
         if (info.disasterLossGap) return unsupported(info.disasterLossGap);
+        if (info.impairmentGap) return unsupported(info.impairmentGap);
         if (info.mortgageInterestWaits || info.netQualifiedDisasterLoss === undefined) {
           return undefined;
         }

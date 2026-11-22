@@ -5,6 +5,7 @@ import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../mon
 import { unsupported } from "../../types.js";
 import { socialSecurityTaxable } from "../../worksheets/socialSecurityBenefits.js";
 import { line1fFrom8839, socialSecurityGapFrom8839 } from "../8839/receivers.js";
+import { withLaterForm8919Copies } from "../8919/laterCopies.js";
 import { PUB_590A_GAP } from "../schedule-1/pub590a.js";
 import { form1040Line7a } from "../schedule-d/lines.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
@@ -14,8 +15,20 @@ import { WITHOUT_8839 } from "./withoutForm8839.js";
 
 type Form = FormAccessor<Form1040>;
 
-// MANUAL EDIT: document sums (1a, 2a–3b, 25a) round to the nearest dollar.
-export const line1a = (_: unknown, info: Form1040FilingInfo) => roundDollars(info.w2WagesTotal);
+/*
+ * MANUAL EDIT: document sums (1a, 2a–3b, 25a) round to the nearest dollar. Line
+ * 1a adds Form 2106's excess reimbursement: "if line 7 is greater than line 6 in
+ * Column A, report the excess as income on Form 1040 ... line 1a" (Form 2106
+ * line 8; irs-2106-inst-2025::sec::general-instructions::b01).
+ */
+export function line1a(_: unknown, info: Form1040FilingInfo) {
+  const excess = info.form2106Totals?.excessReimbursement;
+  if (!excess) {
+    if (info.form2106TotalsGap) return unsupported(info.form2106TotalsGap);
+    return roundDollars(info.w2WagesTotal);
+  }
+  return roundDollars(sum(info.w2WagesTotal, excess));
+}
 
 /*
  * MANUAL EDIT: irs-1040-inst-2025::sec::line-1c::b01: tips not reported to the
@@ -23,6 +36,14 @@ export const line1a = (_: unknown, info: Form1040FilingInfo) => roundDollars(inf
  * With one Form 4137 it equals that form's line 4 plus noncash tips.
  */
 export const line1c = (_: unknown, info: Form1040FilingInfo) => info.tipIncomeNotOnLine1a;
+
+/*
+ * MANUAL EDIT: "Enter the total of your wages from Form 8919, line 6"
+ * (irs-1040-inst-2025::sec::line-1g::b01): each spouse's form on a joint
+ * return. Blank when no Form 8919 files.
+ */
+export const line1g = (form: Form, info: Form1040FilingInfo) =>
+  withLaterForm8919Copies(form["form-8919.0.line.6_total_wages"], info, (lines) => lines.line6);
 
 /*
  * MANUAL EDIT: "If line 26 is more than zero, you have taxable dependent

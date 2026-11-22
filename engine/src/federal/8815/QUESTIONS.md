@@ -41,7 +41,7 @@ Each item is a place where the form and its instructions do not settle a rule. T
 ## 7. Lines 2 and 3 are stated net amounts
 
 - Source: line 2 leaves out expenses "Used to figure an education credit on Form 8863" and Coverdell or QTP tax-free amounts (`line-2::b01`).
-- Default: the expense fact holds line 2 already reduced. Form 8863 has no rules yet, so the engine cannot check that an expense is not counted twice.
+- Default: the expense fact holds line 2 already reduced. The Form 8863 facts hold their own expenses, so the engine does not check that an expense is not counted twice.
 - Dollars: yes, if the stated amount is wrong.
 
 ## 8. Educator expenses on line 9

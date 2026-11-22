@@ -10,6 +10,7 @@ import {
 } from "../../facts/index.js";
 import { sum, sumOrBlank } from "../../money.js";
 import { filingStatusOf, num, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import { resolve2106Info } from "../2106/resolveInfo.js";
 import { resolve3903Info } from "../3903/resolveInfo.js";
 import { figuredForm8814, form8814Totals } from "../8814/totals.js";
 import { resolve8853Info } from "../8853/resolveInfo.js";
@@ -102,6 +103,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
           (studentLoanInterest ?? 0) > 0,
       },
       moving.fallback,
+      employeeBusinessExpensesFallback(inputs),
       {
         rule: `fallback: Form 8814 line 12 $${form8814Line12} on line 8z`,
         value: form8814Line12 !== 0,
@@ -125,6 +127,21 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     earlyWithdrawalPenalty: savingsPenalty,
     ...studentLoan.info,
     armedForcesStorageFees: moving.storageFees,
+  };
+}
+
+/*
+ * Line 12: Form 2106 line 10's parts for reservists, performing artists and
+ * fee-basis officials (irs-2106-inst-2025::sec::line-10::b01–b03). Schedule 1
+ * files for them, or while the Form 2106 totals have a gap.
+ */
+function employeeBusinessExpensesFallback(inputs: ResolverInputs) {
+  const form2106 = resolve2106Info(inputs);
+  const totals = form2106.form2106Totals;
+  const amount = (totals?.scheduleOne ?? 0) + (totals?.performingArts ?? 0);
+  return {
+    rule: `fallback: Form 2106 line 10 on Schedule 1 line 12 (${amount} > 0, or a Form 2106 total the engine cannot figure)`,
+    value: amount > 0 || form2106.form2106TotalsGap !== undefined,
   };
 }
 
