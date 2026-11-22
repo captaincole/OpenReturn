@@ -47,6 +47,7 @@ export * from "./kinds/nonemployeeCompensation.js";
 export * from "./kinds/otherIncome.js";
 export * from "./kinds/paymentTransactions.js";
 export * from "./kinds/priorYear.js";
+export * from "./kinds/refundDeposit.js";
 export * from "./kinds/rental.js";
 export * from "./kinds/retirementDistribution.js";
 export * from "./kinds/rothIra.js";

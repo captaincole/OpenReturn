@@ -67,6 +67,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],
   [
+    /^refund_deposit\.account_[123]$/,
+    "each fact is a whole account for the refund (Form 8888 lines 1–3); whether to split the " +
+      "refund is Cade's question. Form 8888 asks for two accounts when it files without them",
+  ],
+  [
     /^adjustments\.armed_forces_storage_fees_only$/,
     "an answer Cade records only for storage fees alone from an earlier move (Schedule 1 line 14 box)",
   ],
