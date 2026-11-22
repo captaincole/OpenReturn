@@ -194,6 +194,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "absent, the 1099-R's code 1 stands and no part is excluded (Form 5329 line 2)",
   ],
   [
+    /^retirement\.ca_lump_sum\.[^.]+$/,
+    "each fact is a whole Schedule G-1 choice for one plan participant (a lump-sum distribution " +
+      "taxed by the special methods); whether the taxpayer makes it is Cade's question",
+  ],
+  [
     /^prior_year\.ca_tax$/,
     "KNOWN GAP: decides whether FTB 5805 files. Needed only when the CA balance due is " +
       "$500 or more, which the resolver cannot see before evaluation.",

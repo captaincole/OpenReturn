@@ -91,6 +91,8 @@ import {
   line31TaxFromTaxTable,
   line32ExemptionCredits,
   line33TaxAfterExemptionCredits,
+  line34TaxAmount,
+  line34TaxFromScheduleG1,
   line35TotalTaxAfterCredits,
 } from "./tax.js";
 import {
@@ -181,6 +183,8 @@ export function register(): void {
       "line.31_tax_amount": line31TaxAmount,
       "line.32_exemption_credits": line32ExemptionCredits,
       "line.33_tax_after_exemption_credits": line33TaxAfterExemptionCredits,
+      "line.34_tax_from_schedule_g1": line34TaxFromScheduleG1,
+      "line.34_tax_amount": line34TaxAmount,
       "line.35_total_tax_after_credits": line35TotalTaxAfterCredits,
 
       // Special credits. MANUAL EDIT: lines 40, 47 and 48 (FTB 3506's credit) are in credits.ts.
@@ -274,12 +278,8 @@ export function register(): void {
         "No scenario yet where the taxpayer themselves is claimed as a dependent by another person — no fact or decision models this.",
       "line.31_tax_from_ftb_3800":
         "Checkbox indicating tax includes FTB 3800 (tax on child's unearned income). No FTB 3800 scenario or fact-ingestion path exists yet.",
-      "line.34_tax_from_schedule_g1":
-        "Checkbox indicating line 34 tax is from Schedule G-1 (lump-sum distributions). No Schedule G-1 scenario or fact-ingestion path exists yet.",
       "line.34_tax_from_ftb_5870a":
         "Checkbox indicating line 34 tax is from FTB 5870A (tax on accumulation distribution of trusts). No FTB 5870A scenario or fact-ingestion path exists yet.",
-      "line.34_tax_amount":
-        "Line 34 is tax from Schedule G-1 (lump-sum distributions) or FTB 5870A (tax on accumulation distribution of trusts). No ingestion path exists for these scenarios yet — requires Schedule G-1 or FTB 5870A data.",
       "line.43_credit_name":
         "Free-text credit name for an additional special credit on line 43. No ingestion path for user-supplied special credits (e.g., CA Competes, PTE, etc.) exists yet.",
       "line.43_credit_code":

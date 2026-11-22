@@ -10,6 +10,7 @@ import type { BaseFilingInfo } from "../../../filingInfo.js";
 import type { Form3803FilingInfo } from "../3803/filingInfo.js";
 import type { Form3913FilingInfo } from "../3913/filingInfo.js";
 import type { ScheduleDCaFilingInfo } from "../schedule-d-ca/filingInfo.js";
+import type { ScheduleG1FilingInfo } from "../schedule-g-1/filingInfo.js";
 import type { CaEmployeeAmounts, DepreciationAdjustment } from "./activities.js";
 
 /*
@@ -30,7 +31,8 @@ export interface ScheduleCaFilingInfo
       | "caMovingExpenseDeduction"
       | "caMovingReimbursementExcess"
       | "caMovingTotalsGap"
-    > {
+    >,
+    Pick<ScheduleG1FilingInfo, "scheduleG1CaSubtraction"> {
   /** Part II line 21: investment fees (misc_deductions.investment_fees), a California-only deduction. */
   caInvestmentFees?: number;
   /** Lines 1a, 3, 15 and 17: a contractor who is an employee for California; undefined when not one. */

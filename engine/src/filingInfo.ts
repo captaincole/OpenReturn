@@ -157,6 +157,8 @@ import { resolveScheduleCa540NRInfo } from "./state/ca/schedule-ca-540nr/resolve
 import type { ScheduleCaFilingInfo } from "./state/ca/schedule-ca/filingInfo.js";
 import type { ScheduleDCaFilingInfo } from "./state/ca/schedule-d-ca/filingInfo.js";
 import { resolveScheduleDCaInfo } from "./state/ca/schedule-d-ca/resolveInfo.js";
+import type { ScheduleG1FilingInfo } from "./state/ca/schedule-g-1/filingInfo.js";
+import { resolveScheduleG1Info } from "./state/ca/schedule-g-1/resolveInfo.js";
 import type { SchedulePFilingInfo } from "./state/ca/schedule-p/filingInfo.js";
 import { resolveSchedulePInfo } from "./state/ca/schedule-p/resolveInfo.js";
 import type { ScheduleSFilingInfo } from "./state/ca/schedule-s/filingInfo.js";
@@ -283,6 +285,7 @@ export type FilingInfo = BaseFilingInfo &
   Form3801FilingInfo &
   Form3510FilingInfo &
   Form3803FilingInfo &
+  ScheduleG1FilingInfo &
   Form3913FilingInfo &
   CaliforniaFormsWithNoRulesFilingInfo;
 
@@ -361,6 +364,7 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve3801Info,
   resolve3510Info,
   resolve3803Info,
+  resolveScheduleG1Info,
   resolve3913Info,
   ...CALIFORNIA_FORMS_WITH_NO_RULES_RESOLVERS,
 ];
