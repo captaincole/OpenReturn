@@ -4,7 +4,7 @@ import { resolve5695Info } from "../5695/resolveInfo.js";
 import { resolve8396Info } from "../8396/resolveInfo.js";
 import { resolve8839Info } from "../8839/resolveInfo.js";
 import { resolve8880Info } from "../8880/resolveInfo.js";
-import { cleanVehicleSchedules } from "../8936/resolveInfo.js";
+import { cleanVehicleBusinessCredit, cleanVehicleSchedules } from "../8936/resolveInfo.js";
 import { resolveScheduleRInfo } from "../schedule-r/resolveInfo.js";
 import type { Schedule3FilingInfo } from "./filingInfo.js";
 
@@ -29,6 +29,10 @@ export function resolveSchedule3Info(inputs: ResolverInputs): Schedule3FilingInf
       {
         rule: "fallback: Form 8936 (lines 6f, 6m) has a vehicle that kept its credit",
         value: cleanVehicleSchedules(inputs).personalCredit,
+      },
+      {
+        rule: "fallback: Form 8936 has a business credit (line 6a, through Form 3800)",
+        value: cleanVehicleBusinessCredit(inputs),
       },
     ],
   });

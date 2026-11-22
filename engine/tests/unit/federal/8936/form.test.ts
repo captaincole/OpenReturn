@@ -239,6 +239,38 @@ describe("Form 8936 Parts II and V", () => {
     expect(run.line("0.line.21_commercial_vehicle_credit_total")).toBe(8000);
     expect(run.value("schedule-3", "0.line.6f")).toBe(7500);
   });
+
+  /* Lines 8 and 21 go to Form 3800, which has no rules: Schedule 3 line 6a names that gap. */
+  const reasonOf = (result: unknown) => (result as { reason?: string } | undefined)?.reason;
+  const FORM_3800_GAP = /^Form 3800 files/;
+
+  it("a business-use credit files Form 3800, and Schedule 3 line 6a is its gap", () => {
+    const facts = factsWith({ [NEW_KEY]: { ...ELAYNE_NEW_VEHICLE, businessUsePercent: 40 } });
+    const run = evaluate(facts);
+    expect(run.line("0.line.8_business_investment_use_credit")).toBe(3000);
+    expect(run.files("form-3800")).toBe(true);
+    const line6a = run.field("schedule-3", "0.line.6a");
+    expect(isGap(line6a)).toBe(true);
+    expect(reasonOf(line6a)).toMatch(FORM_3800_GAP);
+  });
+
+  it("a commercial vehicle alone files Schedule 3 and Form 3800", () => {
+    const run = evaluate(
+      factsWith(noVehicles, [row("other", makeCleanVehicleFactKey("haulwell"), commercial)]),
+    );
+    expect(run.line("0.line.21_commercial_vehicle_credit_total")).toBe(7500);
+    expect(run.files("form-3800")).toBe(true);
+    expect(run.files("schedule-3")).toBe(true);
+    expect(reasonOf(run.field("schedule-3", "0.line.6a"))).toMatch(FORM_3800_GAP);
+  });
+
+  it("personal use only: no Form 3800, and line 6a keeps the general reason", () => {
+    const run = evaluate(base.facts);
+    expect(run.files("form-3800")).toBe(false);
+    const line6a = run.field("schedule-3", "0.line.6a");
+    expect(isGap(line6a)).toBe(true);
+    expect(reasonOf(line6a)).toBe("No scenario uses this credit or payment yet.");
+  });
 });
 
 describe("Form 8936 gaps", () => {

@@ -84,6 +84,29 @@ export function cleanVehicleSchedules(inputs: ResolverInputs): {
 }
 
 /*
+ * A general business credit for Form 3800: a new vehicle with business use
+ * (line 8, "report this amount on Form 3800, Part III, line 1y"), a commercial
+ * vehicle (line 21, "... line 1aa"), or a K-1 clean vehicle credit
+ * (irs-8936-inst-2025::sec::use-parts-i-ii-and-iii-of-schedule-a-form-8936-to::b01).
+ * The resolver cannot see modified AGI, so Form 3800 may file for a credit
+ * that line 8 leaves at 0 (KNOWN GAP, as Schedule 3 has for lines 6f and 6m).
+ */
+export function cleanVehicleBusinessCredit(inputs: ResolverInputs): boolean {
+  const k1 = inputs.factByKey.get(CLEAN_VEHICLE_KEYS.k1Credits) as
+    CleanVehicleK1Credits | undefined;
+  if ((k1?.newVehicleCodeAY ?? 0) > 0 || (k1?.commercialCodeAZ ?? 0) > 0) return true;
+  const businessUse = (vehicle: CleanVehicleFact) =>
+    vehicle.value.kind === "new" &&
+    !transfers(vehicle) &&
+    (vehicle.value.businessUsePercent ?? 0) > 0;
+  return (resolve8936Info(inputs).cleanVehicles ?? []).some(
+    (vehicle) =>
+      passesLines5To7(vehicle.value) &&
+      (vehicle.value.kind === "commercial" || businessUse(vehicle)),
+  );
+}
+
+/*
  * Who files: a taxpayer with a clean vehicle placed in service in 2025, and
  * always one who transferred the credit to the dealer
  * (irs-8936-inst-2025::sec::general-instructions::b01; what-s-new::b02). A
