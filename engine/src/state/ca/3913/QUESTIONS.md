@@ -37,7 +37,9 @@ Each place where the form and its instructions do not settle a rule. Short answe
 
 - Source: lines 1 and 2 leave out "any expenses that were reimbursed by an allowance you do not have to include in your income" (ca-3913-inst-2025::sec::storage-fees::b01, line-2::b01); line 4 leaves out a dislocation allowance (line-4::b01).
 - Default: the Form 3903 rule (federal/3903/QUESTIONS.md question 2): the allowance comes off line 1, then line 2, up to the cost line 4 leaves unpaid.
-- Changes dollars: printed lines 1 and 2 only; line 5 does not depend on the split.
+- Blind fill (2026-11-22, case 8: movers $2,500, lodging $300, a $400 dislocation allowance): the blind preparer left lines 1 and 2 as paid (line 5 $2,800); the engine takes the $400 off line 1 (line 5 $2,400). The engine stands: line-2::b01 and storage-fees::b01 say "do not include any expenses that were reimbursed by an allowance you do not have to include in your income", and Pub. 3 deducts only the expenses "that exceed your reimbursements and allowances (including dislocation allowances ...)" (irs-pub-3-2025::sec::how-to-report-moving-expenses::b01). The case did not say the allowance paid for no moving cost.
+- Open: an allowance that pays for no cost on lines 1 and 2 (meals, deposits). The default takes the whole allowance off.
+- Changes dollars: line 5 for a military member (no Schedule CA adjustment, so no California dollars). The split between lines 1 and 2 changes the printed lines only.
 
 ## 7. The time test before it is met
 
@@ -55,6 +57,29 @@ Each place where the form and its instructions do not settle a rule. Short answe
 
 - Default: FTB 3913 files with Form 540NR, but Schedule CA (540NR) has no rules yet, so its lines 14 and 1h do not take the result.
 - Changes dollars: yes for a 540NR filer (an engine limit).
+
+## 10. Whole-dollar rounding
+
+- Source: the FTB 3913 and Schedule CA instructions give no rounding rule for this form.
+- Default: the IRS nearest-dollar rule, as on Form 3903: lines 1, 2 and 4 keep cents while adding and round the total; line 3 adds the rounded lines 1 and 2. The blind fill made the same choice.
+- Changes dollars: at most $1 on line 3 against one rounding of the unrounded total. No blind case differs.
+
+## 11. W-2 box 12 code P for a military member
+
+- Source: line-4::b01 leaves the allowances off line 4, then says "This excluded amount should be identified on federal Form W-2, box 12, with code P for excludable moving expense reimbursements paid directly to a member of the U.S. Armed Forces."
+- Default: a government reimbursement shown with code P is not in box 1, so it is on line 4 (the form's line 4 text, and Form 3903). "This excluded amount" is not read as "leave code P off line 4". The blind fill agrees (case 7).
+- Changes dollars: line 5 for a military member only (no Schedule CA adjustment).
+
+## 12. A remote worker's old workplace
+
+- Source: distance-test::b01 covers a filer with no old workplace: the new workplace "must be at least 50 miles from your old home". It does not say what the old workplace is for someone who worked from home.
+- Default: the taxpayer's stated miles to the old workplace (0 for a home office). The blind fill agrees (case 11).
+- Changes dollars: yes, whether the form files at all, for a move near the 50-mile edge.
+
+## Second opinions
+
+- PolicyEngine-US 2.152.16 (commit 794e17e6, 2026-11-22; sparse checkout of `variables` and `parameters` under `gov/irs` and `gov/states/ca`): no moving expense variable or parameter, federal or California. Nothing to compare.
+- IRS Direct File: federal only, no FTB 3913, and the repo names no checkout of its tax logic (issue #140). Not compared.
 
 ## Confidence by field group
 

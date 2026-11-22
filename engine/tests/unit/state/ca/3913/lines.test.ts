@@ -125,6 +125,23 @@ describe("FTB 3913, stated rules and limits", () => {
     expect(lines.excessReimbursement).toBe(1013);
   });
 
+  /*
+   * Lines 1 and 2 leave out "any expenses that were reimbursed by an allowance
+   * you do not have to include in your income" (line-2::b01, storage-fees::b01),
+   * and line 4 leaves out "any part of a dislocation allowance" (line-4::b01).
+   * Movers $2,500, lodging $300, a $400 dislocation allowance, nothing else paid.
+   */
+  it("a dislocation allowance comes off line 1 and stays off line 4", () => {
+    const lines = form3913Lines({
+      householdGoods: 2500,
+      travel: 300,
+      governmentReimbursements: 0,
+      excludedAllowances: 400,
+    });
+    expect([lines.line1, lines.line2, lines.line3, lines.line4]).toEqual([2100, 300, 2400, 0]);
+    expect([lines.line5Yes, lines.line5]).toEqual([true, 2400]);
+  });
+
   it("one dollar over line 4 is Yes with a $1 deduction", () => {
     const lines = form3913Lines({
       householdGoods: 2001,
