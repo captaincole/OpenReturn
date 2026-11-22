@@ -234,7 +234,13 @@ export function register(): void {
           benefits,
           otherIncome: sum(
             form["line.1z"],
-            form["line.2b"],
+            /*
+             * MANUAL EDIT: with Form 8815, Pub. 915 Worksheet 1 line 3 takes Schedule B
+             * line 2, not line 2b (irs-pub-915-2025::sec::repayments-more-than-gross::b04).
+             */
+            info.mustFile?.["form-8815"]?.value === true
+              ? form["schedule-b.0.line.2_total_interest"]
+              : form["line.2b"],
             form["line.3b"],
             form["line.4b"],
             form["line.5b"],

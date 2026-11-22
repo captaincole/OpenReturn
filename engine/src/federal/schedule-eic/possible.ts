@@ -32,6 +32,7 @@ import {
   sumW2Box,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { largestSavingsBondExclusion, savingsBondExclusionScope } from "../8815/resolveInfo.js";
 import { resolve8889Info } from "../8889/resolveInfo.js";
 import { booleanFact, isPassiveActivity, spousePropertiesOnReturn } from "../rentals/passive.js";
 import { SECTION_501C18D_CODE } from "../schedule-1/answers.js";
@@ -140,15 +141,17 @@ function incomeLines(inputs: ResolverInputs) {
   return {
     line1a: roundDollars(sumW2Box(inputs, "box1")),
     line2a: roundDollars(sumInvestmentBox(inputs, "box8", isInterestFactKey)),
-    line2b: payerLineFloor(interestPayers ?? []),
+    line2b:
+      payerLineFloor(interestPayers ?? []) -
+      largestSavingsBondExclusion(savingsBondExclusionScope(inputs)),
     line3b: payerLineFloor(dividendPayers ?? []),
   };
 }
 
 /*
  * Step 2's investment income (lines 2a + 2b + 3b + 7a, a loss on 7a as 0) is
- * at least lines 2a, 2b and 3b: Schedule B line 3 (Form 8815) is not modeled,
- * so line 2b subtracts nothing. Pub. 596 Worksheet 1 line 14 adds lines 10 and
+ * at least lines 2a, 2b and 3b. Line 2b subtracts Schedule B line 3, which is
+ * at most Form 8815 line 6 (largestSavingsBondExclusion). Pub. 596 Worksheet 1 line 14 adds lines 10 and
  * 13, each at least 0, to the same lines (worksheet1.ts).
  */
 export function investmentIncomeFloor(inputs: ResolverInputs): number {

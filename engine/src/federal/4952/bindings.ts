@@ -1,7 +1,7 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
 import { defineForm } from "../../defineForm.js";
-import { atLeast, roundDollars, sum } from "../../money.js";
+import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
 import { SSN } from "../../values.js";
 import { withForm8814 } from "../8814/totals.js";
 import type { Form4952FilingInfo } from "./filingInfo.js";
@@ -33,13 +33,20 @@ export function register(): void {
        * Each Form 8814 line 12, less its Alaska Permanent Fund dividend share
        * (irs-pub-550-2025::sec::net-investment-income::b03–b05,
        * irs-4952-form-2025::sec::part-ii-net-investment-income::b01).
+       * Interest excluded on Form 8815 (Schedule B line 3) is not gross income
+       * (irs-4952-form-2025::sec::part-ii-net-investment-income::b01), so it comes out.
        */
-      "0.line.4a_gross_investment_income": (_, info) =>
-        withForm8814(
+      "0.line.4a_gross_investment_income": (form, info) => {
+        const gross = withForm8814(
           info.form8814Totals,
           roundDollars(info.grossInvestmentIncome),
           (figured) => figured.line12LessAlaskaDividends,
-        ),
+        );
+        const excluded = numberOrBlank(
+          form["schedule-b.0.line.3_excludable_savings_bond_interest"],
+        );
+        return typeof gross !== "number" || excluded === undefined ? gross : gross - excluded;
+      },
       "0.line.4b_qualified_dividends": (_, info) => roundDollars(info.qualifiedDividends),
       "0.line.4c_income_less_qualified_dividends": (form) => {
         const line4a = form["0.line.4a_gross_investment_income"];
