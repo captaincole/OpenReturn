@@ -30,15 +30,12 @@ const FOREIGN_INCOME_GAP =
 
 /*
  * The Schedule 3 credits worksheet line 2 adds, each with the form the engine
- * does not compute. Lines 2 (Form 2441) and 6d (Schedule R) are computed.
+ * does not compute. Lines 2 (Form 2441), 3 (Form 8863) and 6d (Schedule R) are computed.
  */
 function creditsGap(info: Form8880FilingInfo): string | undefined {
   const files = (formId: string) => info.mustFile?.[formId]?.value === true;
   if (info.form8880ForeignTaxPaid === true || files("form-1116")) {
     return "Credit Limit Worksheet line 2 adds Schedule 3 line 1, the foreign tax credit, which the engine does not compute; a 1099 shows foreign tax paid.";
-  }
-  if (files("form-8863")) {
-    return "Credit Limit Worksheet line 2 adds Schedule 3 line 3, the education credits (Form 8863), which the engine does not compute.";
   }
   if (files("form-8978")) {
     return "Credit Limit Worksheet line 2 adds Schedule 3 line 6l (Form 8978), which the engine does not compute.";

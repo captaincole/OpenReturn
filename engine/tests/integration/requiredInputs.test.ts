@@ -77,6 +77,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "exclusion, or a K-1 code AY or AZ credit (Form 8936 lines 1b, 3b–3e, 7 and 20)",
   ],
   [
+    /^ca_work_move\.[^.]+$/,
+    "each fact is a whole move for a new job (FTB 3913); whether one happened is Cade's question. " +
+      "FTB 3913 lists the fact again while an answer inside it (time test, line 4) is missing",
+  ],
+  [
     /^adjustments\.armed_forces_storage_fees_only$/,
     "an answer Cade records only for storage fees alone from an earlier move (Schedule 1 line 14 box)",
   ],

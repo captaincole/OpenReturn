@@ -25,7 +25,6 @@ export const isUnsupported = (value: object): value is Unsupported => "unsupport
  */
 const UNCOMPUTED_CREDITS: ReadonlyArray<[formId: string, line: string]> = [
   ["form-1116", "Schedule 3 line 1 (Form 1116)"],
-  ["form-8863", "Schedule 3 line 3 (Form 8863)"],
   ["form-8880", "Schedule 3 line 4 (Form 8880)"],
   ["form-8978", "Schedule 3 line 6l (Form 8978)"],
 ];
