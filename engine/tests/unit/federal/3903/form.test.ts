@@ -211,6 +211,14 @@ describe("Schedule CA (540) line 14", () => {
       ]);
     const run = evaluate([move("pcs")], caDecisions);
     expect(run.value("schedule-ca", "2.line.c14_federal")).toBe(513);
-    expect(run.field("schedule-ca", "2.line.c14_additions")).toMatchObject(UNSUPPORTED);
+    /*
+     * The move files FTB 3913 with "military member" Yes: no California
+     * adjustment (ca-3913-inst-2025::sec::line-5::b01), so column C is blank.
+     */
+    expect(run.files("form-3913")).toBe(true);
+    expect(run.value("form-3913", "0.header.military_member")).toBe("yes");
+    expect(run.value("form-3913", "0.line.5_moving_expense_deduction")).toBe(513);
+    expect(run.field("schedule-ca", "2.line.c14_additions")).not.toMatchObject(UNSUPPORTED);
+    expect(run.value("schedule-ca", "2.line.c14_additions")).toBeUndefined();
   });
 });
