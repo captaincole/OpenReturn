@@ -32,6 +32,7 @@ Each item is a place where the form and its instructions do not settle a rule. I
 
 - Text: line B is "the total of any net loss from self-employment, any net operating loss deduction, any foreign earned income exclusion, and any foreign housing exclusion" (::alternate-worksheet-for-form-8615-line-1::b01).
 - Default: a loss on Schedule 1 line 3, a loss on line 6, and the net operating loss deduction on line 8a, each as a positive number. Form 2555 makes the form unsupported.
+- Any loss on Schedule 1 line 3 counts as a "net loss from self-employment" (::line-1::b01), so it moves line 1 to the Alternate Worksheet. The blind check (case 13: wages $16,000, a $2,000 Schedule C loss) read it the same way: line 1 = $14,000, not the $12,000 of the ordinary worksheet.
 - Changes dollars: yes, when a child has both a profit and a loss.
 
 ## 6. The stops
@@ -50,7 +51,7 @@ Each item is a place where the form and its instructions do not settle a rule. I
 
 - Text: "rounded to at least three places" (::lines-12a-and-12b::b01).
 - Default: three places. When three places give 1.000 (line 5 is almost all of line 12a), the engine keeps up to six, so the form's "× ." prints the digits. Line 13 rounds to the dollar.
-- Changes dollars: by a dollar at most.
+- Changes dollars: by a dollar at most. Blind check case 14: line 11 $1,944 × .333 = $647; with 1/3 exactly it is $648.
 
 ## 9. The Line 5 Worksheets' rounding
 
@@ -107,20 +108,46 @@ Each item is a place where the form and its instructions do not settle a rule. I
 - Default: nothing changes on Form 6251.
 - Changes dollars: no.
 
+## 18. Other children's qualified dividends and net capital gain
+
+- Text: "The qualified dividends included on line 7 are the total of the amounts of qualified dividends included on line 5 of the other children's Forms 8615" (::line-8::b03); the net capital gain on line 7 likewise (::line-8::b02).
+- The gap: the parent's return answer can give an other child's line 5 with no split.
+- Default: an absent `qualifiedDividends` or `netCapitalGain` on an other child is 0, so all of that child's line 5 is taxed at ordinary rates on line 9.
+- Changes dollars: yes, when an other child has qualified dividends or net capital gain on line 5 and the answer leaves them out.
+
+## 19. Worksheet #1 and deductions connected with dividends and gains
+
+- Text: "Use this worksheet only if line 2 of the child's Form 8615 is $2,700 and lines 3 and 5 are the same amount" (::line-8::b04). The worksheet has no line for itemized deductions directly connected with the dividends and gain.
+- Default: when line 2 is $2,700 (the connected deductions are $1,350 or less), the engine uses Worksheet #1 and leaves out the deductions connected with the dividends and gain. The blind check (case 8: $300 connected, $200 of it with the dividends) did the same.
+- Changes dollars: no under the text. A reading that took the $200 off the dividends (Worksheet #2's lines 1–9) would move a little preferential income to ordinary rates.
+
 ## Confidence by field group
 
-| Field group | Confidence |
-| --- | --- |
-| Header, lines A–C | stated rule |
-| Line 1 | published example (Amanda Black, Roger, Eleanor; Pub. 929 (2012) Joshua) |
-| Line 2 | published example (Roger, Eleanor) |
-| Lines 3–5 | stated rule; Pub. 929 (2012) Joshua |
-| Line 6 | stated rule |
-| Line 7 | published example (Persimmon) |
-| Line 8 and its parts (Line 5 Worksheet #1) | published example (Pub. 929 (2012) Joshua, Randy) |
-| Line 5 Worksheets #2 and #3 | own reading of the stated rule |
-| Line 9 and its box | stated rule (the Qualified Dividends and Capital Gain Tax Worksheet) |
-| Line 10 and its box | stated rule; the box is own reading (item 12) |
-| Lines 11–13 | published example (Sharon Persimmon; Pub. 929 (2012) Randy, Joshua) |
-| Lines 14–18 and the boxes | stated rule; Pub. 929 (2012) Joshua for the arithmetic |
-| Schedule D Tax Worksheet, Schedule J, Form 2555, Form 4952 election | unsupported |
+| Field group                                                         | Confidence                                                               |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Header, lines A–C                                                   | stated rule                                                              |
+| Line 1                                                              | published example (Amanda Black, Roger, Eleanor; Pub. 929 (2012) Joshua) |
+| Line 2                                                              | published example (Roger, Eleanor)                                       |
+| Lines 3–5                                                           | stated rule; Pub. 929 (2012) Joshua                                      |
+| Line 6                                                              | stated rule                                                              |
+| Line 7                                                              | published example (Persimmon)                                            |
+| Line 8 and its parts (Line 5 Worksheet #1)                          | published example (Pub. 929 (2012) Joshua, Randy)                        |
+| Line 5 Worksheets #2 and #3                                         | own reading of the stated rule                                           |
+| Line 9 and its box                                                  | stated rule (the Qualified Dividends and Capital Gain Tax Worksheet)     |
+| Line 10 and its box                                                 | stated rule; the box is own reading (item 12)                            |
+| Lines 11–13                                                         | published example (Sharon Persimmon; Pub. 929 (2012) Randy, Joshua)      |
+| Lines 14–18 and the boxes                                           | stated rule; Pub. 929 (2012) Joshua for the arithmetic                   |
+| Schedule D Tax Worksheet, Schedule J, Form 2555, Form 4952 election | unsupported                                                              |
+
+## Blind check
+
+A preparer filled 15 cases by hand from the blank form and the instructions only. All 360 values (24 per case) match the engine: no dollar difference and no blank-against-zero difference. The preparer's doubts that can move dollars are items 5, 8, 9, 18 and 19.
+
+## Second opinions
+
+- **PolicyEngine-US 2.152.16** (commit 794e17e6): it does not compute the Form 8615 tax. It models only who the rule covers (`amt_kiddie_tax_applies`), for the Form 6251 child exemption limit. Compared:
+  - The age groups (under 18; 18 with earned income not over half of support; 19 to 23 and a full-time student) and the joint-return exclusion match the resolver. PolicyEngine treats the support test as met when no support is reported; the engine asks.
+  - It switches the child exemption limit off from 2018 (`amt/exemption/child/in_effect.yaml`), which matches item 17.
+  - The $1,350 dependent standard deduction for 2025 matches `ITEMIZED_BASE`; line 2's $2,700 is twice that.
+  - No disagreement on a constant or a formula. No engine change.
+- **IRS Direct File** (IRS-Public/direct-file): its product docs say Form 8615 is out of scope ("The kiddie tax requires either form 8814 or 8615, neither of which Direct File supports"). Nothing to compare.
