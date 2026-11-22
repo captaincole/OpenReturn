@@ -5,6 +5,7 @@ import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../mon
 import { unsupported } from "../../types.js";
 import { socialSecurityTaxable } from "../../worksheets/socialSecurityBenefits.js";
 import { line1fFrom8839, socialSecurityGapFrom8839 } from "../8839/receivers.js";
+import { withLaterForm8919Copies } from "../8919/laterCopies.js";
 import { PUB_590A_GAP } from "../schedule-1/pub590a.js";
 import { form1040Line7a } from "../schedule-d/lines.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
@@ -35,6 +36,14 @@ export function line1a(_: unknown, info: Form1040FilingInfo) {
  * With one Form 4137 it equals that form's line 4 plus noncash tips.
  */
 export const line1c = (_: unknown, info: Form1040FilingInfo) => info.tipIncomeNotOnLine1a;
+
+/*
+ * MANUAL EDIT: "Enter the total of your wages from Form 8919, line 6"
+ * (irs-1040-inst-2025::sec::line-1g::b01): each spouse's form on a joint
+ * return. Blank when no Form 8919 files.
+ */
+export const line1g = (form: Form, info: Form1040FilingInfo) =>
+  withLaterForm8919Copies(form["form-8919.0.line.6_total_wages"], info, (lines) => lines.line6);
 
 /*
  * MANUAL EDIT: "If line 26 is more than zero, you have taxable dependent

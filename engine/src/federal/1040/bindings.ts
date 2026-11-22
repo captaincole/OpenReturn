@@ -56,6 +56,7 @@ import {
   line1c,
   line1e,
   line1f,
+  line1g,
   line1hAmount,
   line1z,
   line2a,
@@ -82,6 +83,7 @@ import {
   line27a,
   line27cNoEicClaim,
   line28,
+  line29,
   line30,
   line32,
   line33,
@@ -135,6 +137,7 @@ export function register(): void {
       "line.1c": line1c,
       "line.1e": line1e,
       "line.1f": line1f,
+      "line.1g": line1g,
       "line.1h_amount": line1hAmount,
       "line.1z": line1z,
       "line.2a": line2a,
@@ -186,6 +189,7 @@ export function register(): void {
       "line.27a": line27a,
       "line.27c_no_eic_claim": line27cNoEicClaim,
       "line.28": line28,
+      "line.29": line29,
       "line.30": line30,
       "line.32": line32,
       "line.33": line33,
@@ -257,8 +261,6 @@ export function register(): void {
         "Household employee wages not reported on W-2 require a separate household-employer intake scenario not yet built; no fact key exists for this.",
       "line.1d":
         "No ingestion path for Medicaid waiver payments not reported on W-2 — no scenario built for this income type yet.",
-      "line.1g":
-        "Requires Form 8919 (Uncollected SS/Medicare Tax on Wages) — no Form 8919 ingestion or scenario built yet.",
       "line.1h_type":
         "Free-text label describing the type of other earned income on line 1h — no fact or decision maps to this descriptor field; no other-earned-income scenario built yet.",
       "line.1i":
@@ -297,8 +299,6 @@ export function register(): void {
         "Clergy/minister checkbox for Schedule SE filing — no clergy occupation scenario or Schedule SE ingestion built yet.",
       "line.28_no_actc_claim":
         "Opt-out checkbox for ACTC claim — no ACTC eligibility or opt-out decision modeled yet; requires taxpayer election fact.",
-      "line.29":
-        "American Opportunity Credit from Form 8863 line 8 — Form 8863 not ingested and no education-credit scenario built yet.",
       "line.31":
         "Amount from Schedule 3 line 15 (additional refundable credits/payments) — Schedule 3 not ingested as a separate form catalog yet.",
       "line.35a_form_8888_attached":

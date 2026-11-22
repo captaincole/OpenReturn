@@ -6,7 +6,7 @@ argument-hint: <form> [lines…]  e.g. federal/8959 line.21 line.22
 
 # Write binding rules
 
-A binding is the function in `engine/src/<form>/bindings.ts` that computes one catalog field, or an `unsupported` entry that says why the engine does not compute it. Form 1040 is the exception: its `bindings.ts` is an index, and the function for a line goes in the section file of the paper form (CLAUDE.md, "The central forms keep their rules in section files"). This skill drafts them one field at a time:
+A binding is the function in `engine/src/<form>/bindings.ts` that computes one catalog field, or an `unsupported` entry that says why the engine does not compute it. Form 1040 and California's Form 540 are the exception: each `bindings.ts` is an index, and the function for a line goes in the section file of the paper form (CLAUDE.md, "The central forms keep their rules in section files"). This skill drafts them one field at a time:
 
 - A `line-rule-drafter` subagent writes one binding, grounded in the instructions through Canon.
 - A read-only `line-rule-skeptic` subagent checks it against the instructions.

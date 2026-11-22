@@ -4,6 +4,7 @@ import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { SSN } from "../../values.js";
 import { withLaterCopies } from "../4137/laterCopies.js";
+import { withLaterForm8919Copies } from "../8919/laterCopies.js";
 import type { Form8959FilingInfo } from "./filingInfo.js";
 import { ADDITIONAL_MEDICARE_THRESHOLDS, excessMedicareWages } from "./lines.js";
 import type { Form8959 } from "./types.js";
@@ -32,6 +33,16 @@ export function register(): void {
       "0.line.2_unreported_tips": (form, info) =>
         withLaterCopies(
           form["form-4137.0.line.6_tips_subject_medicare_tax"],
+          info,
+          (lines) => lines.line6,
+        ),
+      /*
+       * MANUAL EDIT: irs-8959-inst-2025::sec::line-3::b01: Form 8919 line 6, and on a
+       * joint return the spouse's line 6 too. Blank when no Form 8919 files.
+       */
+      "0.line.3_wages_form_8919": (form, info) =>
+        withLaterForm8919Copies(
+          form["form-8919.0.line.6_total_wages"],
           info,
           (lines) => lines.line6,
         ),
@@ -166,8 +177,6 @@ export function register(): void {
     },
 
     unsupported: {
-      "0.line.3_wages_form_8919":
-        "Requires Form 8919 line 6 (uncollected Social Security and Medicare tax on wages). No Form 8919 ingestion path exists yet.",
       "0.line.14_rrta_compensation_tips":
         "Railroad retirement (RRTA) compensation from W-2 box 14 — no ingestion path for RRTA-specific box 14 data, and no railroad-worker scenario exists yet.",
       "0.line.23_additional_medicare_tax_withholding_rrta":

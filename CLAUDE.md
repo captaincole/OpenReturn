@@ -98,7 +98,8 @@ package.json                     # workspace root: workspaces + thin delegating 
 CLAUDE.md
 .claude/skills/                 # checked-in Claude skills (corpus, e2e, vercel-logs, engine-scripts, verify-with-filed-return, catalog-form-fields, register-form, write-binding-rules, update-form, verify-form, create-input-documents, add-scenario): "must use" for those tasks
 .claude/agents/                 # checked-in Claude Code subagents (form-labeler, line-rule-drafter, line-rule-skeptic) that the form skills start
-.claude/workflows/              # checked-in Claude Code workflows (pr-review, tax-correctness-review): multi-agent PR reviews;
+.claude/workflows/              # checked-in Claude Code workflows: pr-review and tax-correctness-review (multi-agent PR reviews)
+                                # and solve-forms-batch (the rules of several forms at once, one worktree per form);
                                 # they name no model (CLAUDE_CODE_SUBAGENT_MODEL in your own settings picks one)
 .mcp.json                        # Canon as an MCP server for Claude Code (searchRefDocs, citeRefDoc); needs npm run dev:canon
 ```
@@ -233,7 +234,7 @@ Do not use `undefined` for an engine gap: a blank line looks like "nothing appli
 
 ### The central forms keep their rules in section files
 
-Every new form adds lines to Form 1040, so its rules do not live in one file. `engine/src/federal/1040/bindings.ts` is the index: one entry for each field, in form order, that names an imported function, and the `unsupported` list. The function for a line is in the section file of the paper form (`header.ts`, `income.ts`, `adjustmentsAndDeductions.ts`, `taxAndCredits.ts`, `payments.ts`, `signing.ts`). A new or changed Form 1040 line is a function in its section file and one entry in the index. Every other form keeps its rules in its own `bindings.ts`.
+Every new form adds lines to Form 1040 or to California's Form 540, so their rules do not live in one file. `engine/src/federal/1040/bindings.ts` is the index: one entry for each field, in form order, that names an imported function, and the `unsupported` list. The function for a line is in the section file of the paper form (`header.ts`, `income.ts`, `adjustmentsAndDeductions.ts`, `taxAndCredits.ts`, `payments.ts`, `signing.ts`). A new or changed Form 1040 line is a function in its section file and one entry in the index. Form 540 (`engine/src/state/ca/540/`) has the same shape, with its own section files. Every other form keeps its rules in its own `bindings.ts`.
 
 ### Whole-dollar rounding convention — nearest dollar
 

@@ -71,6 +71,26 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole Form 2106 (one person, one occupation); whether one exists is Cade's question",
   ],
   [
+    /^uncollected_wages\.[^.]+$/,
+    "each fact is a whole firm that paid wages with no social security or Medicare tax withheld " +
+      "(Form 8919 lines 1 to 5); whether one exists is Cade's question",
+  ],
+  [
+    /^clean_vehicle\.[^.]+$/,
+    "each fact is a whole clean vehicle placed in service (Schedule A (Form 8936)); whether one " +
+      "was bought is Cade's question",
+  ],
+  [
+    /^clean_vehicle_credit\.(puerto_rico_excluded_income|prior_year_magi_additions|k1_credits)$/,
+    "an answer Cade records only when the taxpayer has excluded Puerto Rico income, a 2024 " +
+      "exclusion, or a K-1 code AY or AZ credit (Form 8936 lines 1b, 3b–3e, 7 and 20)",
+  ],
+  [
+    /^ca_work_move\.[^.]+$/,
+    "each fact is a whole move for a new job (FTB 3913); whether one happened is Cade's question. " +
+      "FTB 3913 lists the fact again while an answer inside it (time test, line 4) is missing",
+  ],
+  [
     /^adjustments\.armed_forces_storage_fees_only$/,
     "an answer Cade records only for storage fees alone from an earlier move (Schedule 1 line 14 box)",
   ],
