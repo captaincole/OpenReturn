@@ -63,6 +63,14 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole casualty event (Form 4684); whether one happened is Cade's question",
   ],
   [
+    /^armed_forces_move\.[^.]+$/,
+    "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
+  ],
+  [
+    /^adjustments\.armed_forces_storage_fees_only$/,
+    "an answer Cade records only for storage fees alone from an earlier move (Schedule 1 line 14 box)",
+  ],
+  [
     /^charitable\.noncash_gift\.[^.]+$/,
     "each fact is a whole noncash gift (Form 8283, Schedule A line 12); whether one was given is " +
       "Cade's question",
