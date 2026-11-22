@@ -134,19 +134,25 @@ export function mealsRate(fact: EmployeeBusinessExpensesFactValue): number {
 
 /*
  * The part of line 10 for impairment-related work expenses, which goes on
- * Schedule A line 16 (irs-2106-inst-2025::sec::line-10::b04). For an employee
- * whose qualification is impairment-related work expenses, all of line 10. For
- * another qualification, the impairment-related expenses inside line 4 take
- * their share of column A after reimbursements: line 9A × expenses ÷ line 6A
- * (QUESTIONS.md).
+ * Schedule A line 16 (irs-2106-inst-2025::sec::line-10::b04). Impairment-related
+ * work expenses are attendant care and other expenses in connection with the
+ * place of employment (::line-10::b03), so they sit inside line 4; vehicle,
+ * travel and meals (lines 1–3 and 5) are not, and for this group they are not
+ * deductible (::general-instructions::b01). The impairment-related expenses
+ * inside line 4 take their share of column A after reimbursements: line 9A ×
+ * expenses ÷ line 6A (QUESTIONS.md). For an employee whose qualification is
+ * impairment-related work expenses and who states no amount, all of line 4.
  */
 export function impairmentShare(
   fact: EmployeeBusinessExpensesFactValue,
   lines: Form2106PartI,
 ): number {
-  const line10 = lines.line10 ?? 0;
-  if (fact.qualification === "impairment_related_work_expenses") return line10;
-  const expenses = Math.min(atLeast(0, fact.impairmentRelatedWorkExpenses), lines.line4 ?? 0);
+  const stated =
+    fact.qualification === "impairment_related_work_expenses" &&
+    fact.impairmentRelatedWorkExpenses === undefined
+      ? lines.line4
+      : fact.impairmentRelatedWorkExpenses;
+  const expenses = Math.min(atLeast(0, stated), lines.line4 ?? 0);
   if (expenses === 0 || lines.line6a === 0) return 0;
   return roundDollars(((lines.line9a ?? 0) * expenses) / lines.line6a);
 }

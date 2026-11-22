@@ -172,6 +172,23 @@ describe("Where line 10 goes", () => {
     expect(run.value("schedule-1", SCHEDULE_1_LINE_12)).toBeUndefined();
   });
 
+  it("an employee with a disability and a conference trip: only line 4 on Schedule A", () => {
+    const run = federal.evaluate([
+      federal.expenses("reader", {
+        qualification: "impairment_related_work_expenses",
+        vehicles: [],
+        overnightTravel: 2000,
+        parkingTollsTransportation: undefined,
+        meals: undefined,
+        otherExpenses: 3000,
+        impairmentRelatedWorkExpenses: undefined,
+        reimbursements: {},
+      }),
+    ]);
+    expect(run.value("form-2106", LINE_10)).toBe(5000);
+    expect(run.value("schedule-a", SCHEDULE_A_LINE_16)).toBe(3000);
+  });
+
   it("a reservist's line 12 is held to the per diem limit", () => {
     const run = california.evaluate([
       california.expenses("reserve", { reimbursements: undefined, federalPerDiemMeals: 400 }),

@@ -371,6 +371,22 @@ describe("Form 2106, where line 10 goes", () => {
     ).toBe(3000);
   });
 
+  it("an employee with a disability: travel and meals stay off Schedule A line 16", () => {
+    const lines = partILines({
+      otherExpenses: 3000,
+      overnightTravel: 2000,
+      meals: 1000,
+      mealsRate: 0.5,
+    });
+    expect(lines.line10).toBe(5500);
+    const impairment = fact({ qualification: "impairment_related_work_expenses" });
+    expect(impairmentShare(impairment, lines)).toBe(3000);
+    // A stated amount that is only part of line 4.
+    expect(impairmentShare({ ...impairment, impairmentRelatedWorkExpenses: 2500 }, lines)).toBe(
+      2500,
+    );
+  });
+
   it("impairment expenses inside line 4: their share of column A after reimbursements", () => {
     const lines = partILines({
       otherExpenses: 4000,

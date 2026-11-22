@@ -5,7 +5,7 @@ Each place where the form and its instructions do not settle a rule. Short answe
 ## 1. The impairment-related share of line 10
 
 - Source: "enter the part of the line 10 amount attributable to impairment-related work expenses on Schedule A (Form 1040), line 16" (irs-2106-inst-2025::sec::line-10::b04).
-- Default: a person whose qualification is impairment-related work expenses sends all of line 10. For a person in another group, the impairment-related expenses inside line 4 take their share of column A after reimbursements: line 9A × expenses ÷ line 6A.
+- Default: the impairment-related expenses inside line 4 take their share of column A after reimbursements: line 9A × expenses ÷ line 6A. A person whose qualification is impairment-related work expenses and who states no amount counts all of line 4. Vehicle, travel and meals (lines 1–3 and 5) never go: these expenses are workplace expenses (::line-10::b03), and the rest is not deductible (::general-instructions::b01).
 - Why a doubt: the text does not say how a reimbursement splits between the two parts. A reimbursement that paid only for travel would leave the interpreter's cost whole.
 - Changes dollars: yes (Schedule A line 16, Schedule 1 line 12).
 - Blind fill (case 15: a fee-basis official, 6,000 travel, a 4,000 interpreter, 2,000 column A reimbursement) agrees with the default: Schedule A 2,400, Schedule 1 5,600. Other readings: a reimbursement of the travel only gives 3,000 and 5,000. An interpreter's cost also fits "expenses you paid or incurred for services performed in that job" (::line-10::b02), so all 8,000 on Schedule 1 is a third reading.

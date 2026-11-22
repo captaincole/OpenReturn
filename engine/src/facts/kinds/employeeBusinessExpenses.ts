@@ -111,8 +111,10 @@ export interface EmployeeBusinessExpensesFactValue {
   /* Line 4: other job expenses (gifts, education, publications); never meals, taxes or interest. */
   otherExpenses?: number;
   /*
-   * The impairment-related work expenses inside line 4, for a person whose
-   * qualification is another one (irs-2106-inst-2025::sec::line-10::b04).
+   * The impairment-related work expenses inside line 4: attendant care and other
+   * workplace expenses that enable the person to work (irs-2106-inst-2025::sec::line-10::b03,
+   * b04). Absent for a person whose qualification is impairment-related work
+   * expenses: all of line 4.
    */
   impairmentRelatedWorkExpenses?: number;
   /* Line 5: meals, actual or the standard meal allowance, at the full amount. */
