@@ -79,6 +79,15 @@ function qualifies(row: DependentCarePersonRow): boolean {
   );
 }
 
+/* Line 2's qualifying persons, in the order recorded, each with whether its row is complete. */
+export function qualifyingPersonRows(
+  inputs: ResolverInputs,
+): Array<{ row: DependentCarePersonRow; complete: boolean }> {
+  return getDependentCareQualifyingPersonFacts(inputs.facts)
+    .map((fact) => personRow(inputs, fact.factKey, fact.person))
+    .filter(({ row }) => qualifies(row));
+}
+
 /* Each spouse's W-2 box 1 on a joint return (w2Owner); undefined while a W-2 cannot be placed. */
 function w2WagesByOwner(inputs: ResolverInputs): {
   taxpayer?: number;
@@ -114,9 +123,7 @@ function spouseHasBusiness(inputs: ResolverInputs): boolean {
 export function resolve2441Info(inputs: ResolverInputs): Form2441FilingInfo {
   const status = filingStatusOf(inputs);
   const providers = getDependentCareProviderFacts(inputs.facts);
-  const persons = getDependentCareQualifyingPersonFacts(inputs.facts)
-    .map((fact) => personRow(inputs, fact.factKey, fact.person))
-    .filter(({ row }) => qualifies(row));
+  const persons = qualifyingPersonRows(inputs);
   const benefitsByW2 = factsInCategory(inputs, "wages")
     .filter((row) => isW2FactKey(row.key))
     .map((row) => (row.value as W2FactValue).box10 ?? 0)

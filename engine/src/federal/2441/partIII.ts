@@ -69,7 +69,7 @@ function planLimit(info: Form2441FilingInfo): number | Unsupported | undefined {
  * (irs-pub-503-2025::sec::dependent-care-benefits::b03), so each W-2 is tested
  * on its own; the total over $5,000 is line 21's to cap.
  */
-function line12(info: Form2441FilingInfo): number | Unsupported {
+export function benefitsReceived(info: Form2441FilingInfo): number | Unsupported {
   const limit = planLimit(info) ?? EXCLUSION_LIMIT;
   if (typeof limit !== "number") return limit;
   const overLimit = (info.dependentCareBenefitsByW2 ?? []).some((box10) => box10 > limit);
@@ -92,7 +92,7 @@ function line19(form: Form, info: Form2441FilingInfo): number | Unsupported | un
  * MANUAL EDIT: line 21 is $2,500 when MFS enters the spouse's earned income on
  * line 19 (the form's text), else $5,000; no more than the plan allows.
  */
-function line21(info: Form2441FilingInfo): number | Unsupported | undefined {
+export function maximumExclusion(info: Form2441FilingInfo): number | Unsupported | undefined {
   const limit = planLimit(info);
   if (limit === undefined || typeof limit !== "number") return limit;
   if (info.filingStatus === undefined) return undefined;
@@ -118,7 +118,7 @@ function line25(form: Form): number | undefined {
 /* Lines 12 to 17. */
 function benefitBindings(): Bindings {
   return {
-    "1.line.12_benefits_received": (_, info) => partIII(info, () => line12(info)),
+    "1.line.12_benefits_received": (_, info) => partIII(info, () => benefitsReceived(info)),
     "1.line.13_grace_period_carryover": (_, info) =>
       partIII(info, () => roundDollars(info.dependentCareGracePeriodCarryover)),
     "1.line.14_forfeited_or_carried_forward": (_, info) =>
@@ -163,7 +163,7 @@ function exclusionBindings(): Bindings {
       );
       return lines === undefined ? undefined : atLeast(0, Math.min(...lines));
     },
-    "1.line.21_maximum_exclusion": (_, info) => partIII(info, () => line21(info)),
+    "1.line.21_maximum_exclusion": (_, info) => partIII(info, () => maximumExclusion(info)),
     // MANUAL EDIT: line 12 reads only W-2s (employer plans), so nothing on it is from the taxpayer's own business.
     "1.line.22_no": (_, info) => partIII(info, () => true),
     "1.line.22_yes": (_, info) => partIII(info, () => false),

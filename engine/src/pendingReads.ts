@@ -7,6 +7,11 @@ import { blocked, type DerivationResult } from "./types.js";
  * result, so the binding must wait for the next pass instead. A form
  * outside the evaluated set never gets a must-file result, so the final
  * settle pass (`ctx.settling`) stops the wait.
+ *
+ * A read of a line later on the same form waits the same way: before this
+ * pass reaches it, the line has no result. Without the wait, Form 2441 line 10
+ * (which reads line 29) was blank in the first pass, and Form 1040 line 21
+ * kept line 19 alone as an ok sum.
  */
 
 const pendingResults = new WeakSet<object>();
@@ -44,7 +49,8 @@ export function trackPendingReads(
 
 function isPendingSource(ctx: EngineContext, formId: string, fieldId: string): boolean {
   const sourceFormId = fieldId.split(".")[0];
-  if (sourceFormId === formId) return false; // intra-form: catalog order decides
+  // Intra-form: a field later in catalog order has no result until this pass reaches it.
+  if (sourceFormId === formId) return true;
   const mustFile = ctx.formMustFile(sourceFormId);
   if (mustFile === undefined) return true; // not evaluated yet
   return mustFile.ok && mustFile.value === true; // filed, field not evaluated yet
