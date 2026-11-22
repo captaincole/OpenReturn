@@ -1,16 +1,19 @@
 import {
   ARMED_FORCES_STORAGE_FEES_KEY,
-  GAMBLING_KEYS,
-  OTHER_INCOME_KEYS,
   businessesOnReturn,
+  GAMBLING_KEYS,
   getGamblingWinningsFacts,
   getGovernmentPaymentsFacts,
   miscIncomeNotForBusiness,
+  OTHER_INCOME_KEYS,
   unlinkedMiscIncomeKeys,
 } from "../../facts/index.js";
 import { sum, sumOrBlank } from "../../money.js";
 import { filingStatusOf, num, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import { resolve3903Info } from "../3903/resolveInfo.js";
+import { figuredForm8814, form8814Totals } from "../8814/totals.js";
+import { resolve8853Info } from "../8853/resolveInfo.js";
+import { form8853Reaches, SCHEDULE_1_LINES } from "../8853/results.js";
 import { resolve8889Info } from "../8889/resolveInfo.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
@@ -31,6 +34,8 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
       : undefined;
   // Form 8889 lines 13 and 16 reach the 1040 only through Schedule 1.
   const form8889 = resolve8889Info(inputs).mustFile?.["form-8889"]?.value === true;
+  // Form 8853 lines 8, 12 and 26 (line 8e) and line 5 (line 23).
+  const form8853 = form8853Reaches(resolve8853Info(inputs), SCHEDULE_1_LINES);
   const jointReturn = filingStatusOf(inputs) === "married_filing_jointly";
   const onReturn = businessesOnReturn(inputs.facts, jointReturn);
   const hasBusiness =
@@ -73,11 +78,13 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
   const studentLoan = resolveStudentLoanInterest(inputs);
   const studentLoanInterest = studentLoan.info.studentLoanInterestPaid;
   const moving = movingExpenses(inputs);
+  // irs-8814-inst-2025::sec::line-12::b01: every Form 8814 line 12 goes on line 8z.
+  const form8814Line12 = figuredForm8814(form8814Totals(inputs))?.line12 ?? 0;
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_1",
     fallbacks: [
       {
-        rule: `fallback: a stated Schedule 1 amount (${stated}), unemployment compensation $${unemploymentCompensation ?? 0} > 0, RTAA payments $${rtaaPayments ?? 0} > 0, 1099-MISC other income $${miscOtherIncome ?? 0} > 0, W-2G winnings $${gamblingWinnings ?? 0} > 0, Alaska Permanent Fund dividends $${alaskaPermanentFundDividends ?? 0} > 0, a Schedule C business (${hasBusiness}), Schedule SE filed (${scheduleSE}), Schedule E filed (${scheduleE}), Form 8889 filed (${form8889}), educator expenses $${educatorExpenses ?? 0} > 0, an early withdrawal penalty $${savingsPenalty ?? 0} > 0, or student loan interest $${studentLoanInterest ?? 0} > 0`,
+        rule: `fallback: a stated Schedule 1 amount (${stated}), unemployment compensation $${unemploymentCompensation ?? 0} > 0, RTAA payments $${rtaaPayments ?? 0} > 0, 1099-MISC other income $${miscOtherIncome ?? 0} > 0, W-2G winnings $${gamblingWinnings ?? 0} > 0, Alaska Permanent Fund dividends $${alaskaPermanentFundDividends ?? 0} > 0, a Schedule C business (${hasBusiness}), Schedule SE filed (${scheduleSE}), Schedule E filed (${scheduleE}), Form 8889 filed (${form8889}), a Form 8853 amount (${form8853}), educator expenses $${educatorExpenses ?? 0} > 0, an early withdrawal penalty $${savingsPenalty ?? 0} > 0, or student loan interest $${studentLoanInterest ?? 0} > 0`,
         value:
           stated ||
           (unemploymentCompensation ?? 0) > 0 ||
@@ -89,11 +96,16 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
           scheduleSE ||
           scheduleE ||
           form8889 ||
+          form8853 ||
           (educatorExpenses ?? 0) > 0 ||
           (savingsPenalty ?? 0) > 0 ||
           (studentLoanInterest ?? 0) > 0,
       },
       moving.fallback,
+      {
+        rule: `fallback: Form 8814 line 12 $${form8814Line12} on line 8z`,
+        value: form8814Line12 !== 0,
+      },
     ],
   });
   return {

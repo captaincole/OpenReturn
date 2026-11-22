@@ -1,6 +1,7 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Money } from "../../money.js";
 import type { Form3903FilingInfo } from "../3903/filingInfo.js";
+import type { Form8814FilingInfo } from "../8814/filingInfo.js";
 import type { Schedule8812FilingInfo } from "../schedule-8812/filingInfo.js";
 import type { ScheduleAFilingInfo } from "../schedule-a/filingInfo.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
@@ -13,6 +14,7 @@ import type { ScheduleSEFilingInfo } from "../schedule-se/filingInfo.js";
  * (Worksheet B line 2b), Schedule E's columns (Pub. 596 Worksheet 1) and the
  * EIC answers and counts. Line 12e reads Schedule A's increased standard
  * deduction mode. Line 1h reads Form 3903's excess reimbursement.
+ * Lines 3a–3c, 7a, 7b and 16 read Form 8814's totals.
  */
 export interface Form1040FilingInfo
   extends
@@ -21,7 +23,8 @@ export interface Form1040FilingInfo
     Pick<Form3903FilingInfo, "movingReimbursementExcess" | "movingTotalsGap">,
     Pick<Schedule8812FilingInfo, "dependents" | "w2NontaxableCombatPay">,
     Pick<ScheduleSEFilingInfo, "scheduleCNetProfit">,
-    Pick<ScheduleAFilingInfo, "increasedStandardDeduction"> {
+    Pick<ScheduleAFilingInfo, "increasedStandardDeduction">,
+    Pick<Form8814FilingInfo, "form8814Totals"> {
   /** Social Security with a traditional IRA contribution and a plan: Pub. 590-A figures line 6b (schedule-1/pub590a.ts). */
   pub590aWorksheets?: boolean;
 

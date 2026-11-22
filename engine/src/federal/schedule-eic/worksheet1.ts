@@ -1,9 +1,9 @@
 /*
  * Pub. 596 Worksheet 1, investment income, for a filer whom Step 2, question 4
  * sends there (irs-1040-inst-2025::sec::yes-see-form-4797::b01,
- * ::yes-use-worksheet-1::b01). Of its four cases the engine has facts only for
- * Schedule E, whose rentals are its only passive activities: Form 8814 and the
- * rental of personal property (Schedule 1 line 8l) have none.
+ * ::yes-use-worksheet-1::b01). Of its four cases the engine has facts for
+ * Schedule E, whose rentals are its only passive activities, and Form 8814; the
+ * rental of personal property (Schedule 1 line 8l) has none.
  */
 
 import type { FormAccessor } from "../../defineForm.js";
@@ -11,6 +11,7 @@ import type { RentalFactValue } from "../../facts/index.js";
 import type { MustFileResolution } from "../../filingInfo.js";
 import { atLeast, numberOrBlank, sum } from "../../money.js";
 import { unmodeled } from "../8582/activities.js";
+import type { Form8814Totals } from "../8814/filingInfo.js";
 import { selfRentalState } from "../rentals/passive.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
 import type { Worksheet1 } from "./credit.js";
@@ -23,10 +24,11 @@ export const ROYALTIES_WITH_RENTS_GAP =
 export const RECHARACTERIZED_INCOME_GAP =
   "Pub. 596 Worksheet 1 leaves out a passive rental's income that is recharacterized as nonpassive (land, a stay of 7 days or less, a disposition or a type 8 property), which the engine does not model.";
 
-/* The slots Worksheet 1 reads: Schedule E's must-file and its columns. */
+/* The slots Worksheet 1 reads: Schedule E's must-file and its columns, and Form 8814's totals. */
 export interface Worksheet1Info {
   mustFile?: Readonly<Record<string, MustFileResolution>>;
   rentalProperties?: RentalProperty[];
+  form8814Totals?: Form8814Totals;
 }
 
 /* A royalty property, or a rental property with royalties: lines 8–10, not 11–13. */
@@ -77,8 +79,8 @@ const onLine26 = (form: Lines, property: RentalProperty) =>
 
 /*
  * Line 14 from Step 2's sum (Form 1040 lines 2a, 2b, 3b and 7a, a loss as 0),
- * which is Worksheet 1 lines 1–3 and 5; lines 4 (Form 8814) and 6 (Form 4797)
- * have no facts and are 0, so line 7 is line 5
+ * which is Worksheet 1 lines 1–3 and 5; line 6 (Form 4797) has no facts and is
+ * 0, and worksheet1 adds Form 8814's lines 2 and 4
  * (irs-pub-596-2025::sec::interest-and-dividends::b01, ::capital-gain-net-income::b01).
  * Lines 8–10: Schedule E line 23b less the royalty columns' line 20, at least 0
  * (::royalties-and-rental-income-from-personal-property::b01). Lines 11–13: the
@@ -89,7 +91,7 @@ const onLine26 = (form: Lines, property: RentalProperty) =>
  * number, which needs every column's line 21 and line 22. A gap decides
  * first: Form 8582 waits on a property whose income it does not model.
  */
-export function worksheet1(
+function rentalWorksheet1(
   form: Lines,
   info: Worksheet1Info,
   step2InvestmentIncome: number,
@@ -124,4 +126,30 @@ export function worksheet1(
   const counted = passive.filter((_, index) => states[index] !== "recharacterized");
   const line13 = atLeast(0, sum(...counted.map((property) => onLine26(form, property))));
   return { kind: "line14", amount: sum(step2InvestmentIncome, line10, line13) };
+}
+
+/*
+ * Worksheet 1 for a Schedule E or a Form 8814 filer. Form 8814 adds each form's
+ * line 1b to line 2, and line 12 (or Worksheet 2 line 10 with an Alaska
+ * Permanent Fund dividend) on line 4 (irs-pub-596-2025::sec::interest-and-dividends::b01,
+ * ::passive-activities::b03, ::b04); its lines 9 and 10 are already in Form
+ * 1040 lines 3b and 7a. Undefined when neither form files.
+ */
+export function worksheet1(
+  form: Lines,
+  info: Worksheet1Info,
+  step2InvestmentIncome: number,
+): Worksheet1 | undefined {
+  const rentals = rentalWorksheet1(form, info, step2InvestmentIncome);
+  const child = info.form8814Totals;
+  if (child === undefined) return rentals;
+  if (child.kind === "waits") return { kind: "waiting" };
+  if (child.kind === "unsupported") return { kind: "unsupported", reason: child.reason };
+  const fromForm8814 = sum(child.line1b, child.eicWorksheet1Line4);
+  if (rentals === undefined) {
+    return { kind: "line14", amount: sum(step2InvestmentIncome, fromForm8814) };
+  }
+  return rentals.kind === "line14"
+    ? { kind: "line14", amount: sum(rentals.amount, fromForm8814) }
+    : rentals;
 }

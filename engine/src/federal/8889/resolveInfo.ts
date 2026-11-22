@@ -15,7 +15,10 @@ export function resolve8889Info(inputs: ResolverInputs): Form8889FilingInfo {
   const { factByKey } = inputs;
   const coverageType = factByKey.get(HSA_COVERAGE_KEYS.coverageType) as HsaCoverageType | undefined;
   const employer = employerContributions(inputs);
-  const distributions = factsInCategory(inputs, "hsa").filter((row) => SA_KEY_RE.test(row.key));
+  /* A 1099-SA for an Archer MSA or a Medicare Advantage MSA (box 5) goes on Form 8853, not here. */
+  const distributions = factsInCategory(inputs, "hsa").filter(
+    (row) => SA_KEY_RE.test(row.key) && isHsaAccount(row.value),
+  );
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_8889",
     fallbacks: [
@@ -69,6 +72,11 @@ function employerContributions(inputs: ResolverInputs): number | undefined {
     }
   }
   return total;
+}
+
+function isHsaAccount(value: unknown): boolean {
+  const accountType = (value as { box5?: unknown }).box5;
+  return accountType === undefined || accountType === "HSA";
 }
 
 function numberFact(value: unknown): number | undefined {

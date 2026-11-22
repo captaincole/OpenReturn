@@ -2,11 +2,16 @@
 
 import { defineForm } from "../../defineForm.js";
 import { roundDollars, sum } from "../../money.js";
+import { unsupported } from "../../types.js";
+import { files8853, form8853Total } from "../8853/results.js";
 import { answerBindings } from "./answerBindings.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
 import { line14, storageFeesOnlyBox } from "./movingExpenses.js";
 import { line21 } from "./studentLoanInterest.js";
 import type { Schedule1 } from "./types.js";
+
+const NO_FORM_8853_LINE_8E = "No Form 8853 (Archer MSA / LTC) scenario yet";
+const NO_FORM_8853_LINE_23 = "Form 8853 (Archer MSA) not ingested; no scenario.";
 
 export function register(): void {
   defineForm<Schedule1, Schedule1FilingInfo>("schedule-1", {
@@ -56,6 +61,23 @@ export function register(): void {
           form["0.line.8z"],
         ) - sum(form["0.line.8a"], form["0.line.8d"], form["0.line.8s"]),
       "0.header.ssn": (_, info) => info.taxpayerSSN,
+      /*
+       * MANUAL EDIT: line 8e = Form 8853 lines 8, 12 and 26 (irs-1040-inst-2025::sec::line-8e::b01).
+       * Without Form 8853 the line keeps the reason it had before the form had rules.
+       */
+      "0.line.8e": (_, info) =>
+        files8853(info)
+          ? form8853Total(info, [
+              "0.line.8_taxable_archer_msa_distributions",
+              "0.line.12_taxable_medicare_advantage_distributions",
+              "1.line.26_taxable_payments",
+            ])
+          : unsupported(NO_FORM_8853_LINE_8E),
+      // MANUAL EDIT: line 23 = Form 8853 line 5 (irs-1040-inst-2025::sec::line-23::b01; the 8853 form).
+      "1.line.23": (_, info) =>
+        files8853(info)
+          ? form8853Total(info, ["0.line.5_archer_msa_deduction"])
+          : unsupported(NO_FORM_8853_LINE_23),
       "0.line.8f": (form) =>
         sum(
           form["form-8889.0.line.16_taxable_hsa_distributions"],
@@ -143,7 +165,6 @@ export function register(): void {
       "0.line.8a": "No NOL carryforward scenario yet",
       "0.line.8c": "No 1099-C cancellation-of-debt ingestion yet",
       "0.line.8d": "No Form 2555 foreign earned income exclusion scenario yet",
-      "0.line.8e": "No Form 8853 (Archer MSA / LTC) scenario yet",
       "0.line.8j": "No hobby (not-for-profit activity) income scenario yet.",
       "0.line.8l": "No personal-property rental income scenario yet.",
       "0.line.8m": "No Olympic/Paralympic medal or USOC prize money scenario yet.",
@@ -160,7 +181,6 @@ export function register(): void {
         "No ingestion for digital-asset ordinary income (staking, mining, forks) yet; 1099-DA covers only dispositions.",
       "1.line.12": "No Form 2106 (reservist/performing artist/fee-basis official) scenario yet.",
       "1.line.17": "No self-employed health insurance scenario yet.",
-      "1.line.23": "Form 8853 (Archer MSA) not ingested; no scenario.",
       "1.line.24b": "No personal-property rental scenario (line 8l) yet.",
       "1.line.24c": "No Olympic/Paralympic medal or USOC prize scenario (line 8m) yet.",
       "1.line.24g": "No chaplain 403(b) contribution scenario or facts yet.",

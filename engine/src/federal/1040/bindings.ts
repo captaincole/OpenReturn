@@ -13,16 +13,21 @@ import { form1040Line7a } from "../schedule-d/lines.js";
 import { eicOutcome } from "../schedule-eic/outcome.js";
 import { awaitsSchedule1A, standardDeduction } from "./deductions.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
+import {
+  childDividendsIncluded,
+  line16FromForm8814,
+  line16WithForm8814,
+  line3a,
+  line3b,
+  line7aWithoutScheduleD,
+  line7bBindings,
+} from "./form8814Lines.js";
 import { refundableCreditsFinal } from "./payments.js";
 import { qdcgInputsFromReturn } from "./qdcgInputs.js";
 import type { Form1040 } from "./types.js";
 
 type Bindings = Partial<{ [K in keyof Form1040]: BindingFn<Form1040, Form1040FilingInfo, K> }>;
 type RowBinding = (form: FormAccessor<Form1040>, info: Form1040FilingInfo) => unknown;
-
-function fromScheduleB(value: unknown): number | undefined {
-  return typeof value === "number" ? value : undefined;
-}
 
 /*
  * MANUAL EDIT: column (2) prints the SSN, else the ITIN or ATIN (the 1040
@@ -192,12 +197,13 @@ export function register(): void {
        * and 6, so its rounding choice carries through.
        */
       "line.2b": (form, info) =>
-        fromScheduleB(form["schedule-b.0.line.4_taxable_interest"]) ??
+        numberOrBlank(form["schedule-b.0.line.4_taxable_interest"]) ??
         roundDollars(info.taxableInterestTotal),
-      "line.3a": (_, info) => roundDollars(info.qualifiedDividends),
-      "line.3b": (form, info) =>
-        fromScheduleB(form["schedule-b.0.line.6_total_ordinary_dividends"]) ??
-        roundDollars(info.ordinaryDividends),
+      // MANUAL EDIT: lines 3a–3c, 7a, 7b and 16 take Form 8814 amounts (form8814Lines.ts).
+      "line.3a": (_, info) => line3a(info),
+      "line.3b": line3b,
+      "line.3c_box1": childDividendsIncluded,
+      "line.3c_box2": childDividendsIncluded,
       // MANUAL EDIT: lines 4a–5c from 1099-R facts.
       "line.4a": (_, info) => roundDollars(info.iraDistributions?.gross),
       "line.4b": line4b,
@@ -259,10 +265,9 @@ export function register(): void {
           return form1040Line7a(value, typeof l21 === "number" ? l21 : undefined);
         }
         // MANUAL EDIT: Exception 1 — capital gain distributions only, no Schedule D.
-        return roundDollars(info.capitalGainDistributionsNoScheduleD);
+        return line7aWithoutScheduleD(info);
       },
-      "line.7b_schedule_d_not_required": (_, info) =>
-        info.capitalGainDistributionsNoScheduleD !== undefined ? true : undefined,
+      ...line7bBindings,
       /*
        * MANUAL EDIT: irs-1040-inst-2025::sec::instructions-for-schedule-1::b01. Line 8
        * is Schedule 1 line 10. While Schedule 1 is filed and line 10 is blank, line 9
@@ -369,17 +374,18 @@ export function register(): void {
               form,
               taxable,
               // MANUAL EDIT: worksheet line 2 = 1040 line 3a as entered (a rounded document sum).
-              roundDollars(info.qualifiedDividends) ?? 0,
+              numberOrBlank(line3a(info)) ?? 0,
               info.filingStatus,
             ),
           );
-          return qdcg.tax;
+          return line16WithForm8814(info, qdcg.tax);
         } catch {
           // Unknown filing status or missing table data: use the plain tax table.
           const lookup = lookupTax("federal-2025", taxable, info.filingStatus);
-          return lookup.ok ? lookup.tax : undefined;
+          return line16WithForm8814(info, lookup.ok ? lookup.tax : undefined);
         }
       },
+      "line.16_from_form_8814": line16FromForm8814,
       // MANUAL EDIT: line 8 = Schedule 1 line 10; blank when Schedule 1 is not filed.
       "line.8": (form) => {
         const value = form["schedule-1.0.line.10"];
@@ -577,10 +583,6 @@ export function register(): void {
         "Free-text label describing the type of other earned income on line 1h — no fact or decision maps to this descriptor field; no other-earned-income scenario built yet.",
       "line.1i":
         "Nontaxable combat pay election — no combat pay fact ingestion or military-taxpayer scenario built yet.",
-      "line.3c_box1":
-        "Checkbox indicating child's qualified dividends are included in line 3a — requires Form 8814 / dependent-income scenario which has not been built yet.",
-      "line.3c_box2":
-        "Checkbox indicating child's ordinary dividends are included in line 3b — requires Form 8814 / dependent-income scenario which has not been built yet.",
       "line.4c_qcd":
         "IRA QCD checkbox (Exception 3) — requires 1099-R ingestion and qualified-charitable-distribution scenario. No QCD scenario built yet.",
       "line.4c_box3":
@@ -595,18 +597,12 @@ export function register(): void {
         "Companion amount field to line 5c box 3; no scenario requiring this annotation amount has been modeled.",
       "line.6c_lump_sum_election":
         "No lump-sum social security benefit scenario or decision modeled; this checkbox requires knowing whether the taxpayer received a prior-year lump-sum SS payment and elected the special treatment.",
-      "line.7b_includes_childs_capital_gain":
-        "Requires Form 8814 (child's interest and dividends) scenario — no dependent income ingestion or Form 8814 computation path exists yet.",
-      "line.7b_childs_capital_gain_amount":
-        "Amount from Form 8814 line 10 — requires Form 8814 computation for child's capital gain, which depends on dependent income ingestion not yet built.",
       "line.12a_you_as_dependent":
         "Whether the taxpayer can be claimed as a dependent on someone else's return requires a dependent-status decision not yet modeled in the decision set.",
       "line.12a_spouse_as_dependent":
         "No MFJ scenario ingested yet — spouse-as-dependent checkbox requires a joint-return scenario where the spouse can be claimed by a third party.",
       "line.12b_dual_status_alien":
         "No dual-status alien scenario ingested yet — this checkbox requires a residency/immigration-status fact we don't model.",
-      "line.16_from_form_8814":
-        "Checkbox indicating tax includes amounts from Form 8814 (child's interest/dividends election). No Form 8814 ingestion scenario built yet; requires dependent-with-investment-income data.",
       "line.16_from_form_4972":
         "Checkbox indicating tax includes amounts from Form 4972 (lump-sum distribution). No Form 4972 ingestion scenario built yet.",
       "line.16_from_other_form":
