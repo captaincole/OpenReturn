@@ -86,6 +86,7 @@ import {
 import { signingTaxpayerEmail, signingTaxpayerPhone } from "./signing.js";
 import {
   line31TaxAmount,
+  line31TaxFromFtb3803,
   line31TaxFromRateSchedule,
   line31TaxFromTaxTable,
   line32ExemptionCredits,
@@ -176,6 +177,7 @@ export function register(): void {
       // Tax, lines 31 to 35 (tax.ts).
       "line.31_tax_from_tax_table": line31TaxFromTaxTable,
       "line.31_tax_from_rate_schedule": line31TaxFromRateSchedule,
+      "line.31_tax_from_ftb_3803": line31TaxFromFtb3803,
       "line.31_tax_amount": line31TaxAmount,
       "line.32_exemption_credits": line32ExemptionCredits,
       "line.33_tax_after_exemption_credits": line33TaxAfterExemptionCredits,
@@ -272,8 +274,6 @@ export function register(): void {
         "No scenario yet where the taxpayer themselves is claimed as a dependent by another person — no fact or decision models this.",
       "line.31_tax_from_ftb_3800":
         "Checkbox indicating tax includes FTB 3800 (tax on child's unearned income). No FTB 3800 scenario or fact-ingestion path exists yet.",
-      "line.31_tax_from_ftb_3803":
-        "Checkbox indicating tax includes FTB 3803 (parent's election to report child's interest/dividend income). No FTB 3803 scenario or fact-ingestion path exists yet.",
       "line.34_tax_from_schedule_g1":
         "Checkbox indicating line 34 tax is from Schedule G-1 (lump-sum distributions). No Schedule G-1 scenario or fact-ingestion path exists yet.",
       "line.34_tax_from_ftb_5870a":

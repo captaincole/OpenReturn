@@ -6,6 +6,7 @@
 import type { Form8889FilingInfo } from "../../../federal/8889/filingInfo.js";
 import type { ScheduleAFilingInfo } from "../../../federal/schedule-a/filingInfo.js";
 import type { BaseFilingInfo } from "../../../filingInfo.js";
+import type { Form3803FilingInfo } from "../3803/filingInfo.js";
 import type { ScheduleDCaFilingInfo } from "../schedule-d-ca/filingInfo.js";
 import type { CaEmployeeAmounts, DepreciationAdjustment } from "./activities.js";
 
@@ -15,7 +16,8 @@ export interface ScheduleCaFilingInfo
     BaseFilingInfo,
     Pick<Form8889FilingInfo, "hsaEmployerContributions">,
     Pick<ScheduleAFilingInfo, "increasedStandardDeduction" | "disasterLossGap">,
-    Pick<ScheduleDCaFilingInfo, "scheduleDCaFigures"> {
+    Pick<ScheduleDCaFilingInfo, "scheduleDCaFigures">,
+    Pick<Form3803FilingInfo, "childIncomeLine8z"> {
   /** Part II line 21: investment fees (misc_deductions.investment_fees), a California-only deduction. */
   caInvestmentFees?: number;
   /** Lines 1a, 3, 15 and 17: a contractor who is an employee for California; undefined when not one. */

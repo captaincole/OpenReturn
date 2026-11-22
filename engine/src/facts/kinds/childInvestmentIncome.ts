@@ -5,7 +5,8 @@
  * (irs-8814-inst-2025::sec::general-instructions::b01). The key names the
  * child's dependent fact (dependent.<slug>), which holds the name, SSN, date of
  * birth and full-time student status. Category dependents, so no sum of the
- * parents' own investment income counts it.
+ * parents' own investment income counts it. California's FTB 3803 reads the
+ * same fact, with the California fields at the end.
  *
  * Nominee amounts and the accrued-interest, bond-premium and OID adjustments
  * (::line-1a::b01, ::line-2a::b01, ::line-3::b03) have no field: the engine
@@ -39,6 +40,23 @@ export interface ChildInvestmentIncomeFactValue {
   estimatedTaxPaid?: boolean;
   /* Answer: the child had income other than interest and dividends (wages, for example). */
   hadOtherIncome?: boolean;
+  /*
+   * California (FTB 3803, ca-3803-inst-2025::sec::line-1a::b01, ::line-1b::b01).
+   * The part of taxableInterest from U.S. savings bonds and Treasury obligations
+   * (1099-INT box 3): California does not tax it, so it moves to FTB 3803 line 1b.
+   */
+  usObligationInterest?: number;
+  /*
+   * The part of taxExemptInterest that California taxes: interest on another
+   * state's bonds, and exempt-interest dividends California does not exempt
+   * (1099-INT box 8 or 1099-DIV box 12 with another state in the state box).
+   * It moves to FTB 3803 line 1a.
+   */
+  taxExemptInterestTaxedByCalifornia?: number;
+  /* California tax withheld (1099-INT box 17, 1099-DIV box 16): backup withholding bars FTB 3803. */
+  stateTaxWithheld?: number;
+  /* Answer: California estimated tax paid for 2025 under the child's name, a 2024 California overpayment applied included. */
+  californiaEstimatedTaxPaid?: boolean;
 }
 
 export interface ChildInvestmentIncomeFact {
