@@ -6,12 +6,14 @@ Each item is a place where the form and its instructions do not settle a rule. I
 
 - Text: line 1 "enter the total of all amounts from all Parts III, line 30" (blank form; `part-i-refundable-american::b01`). The form has no "if zero" rule for Part I.
 - Default: when no student completes lines 27–30, lines 1–9 stay blank. Credit Limit Worksheet line 2 reads 0.
-- Changes dollars: no.
+- Other reading: the blind fill (Form 8863 batch check) printed line 1 as 0, figured lines 4 and 6 (for example 3,750 and 0.375), and printed 0 on lines 7–9. The line 1 instruction speaks only to a filer "claiming the American opportunity credit" (`part-i-refundable-american::b01`), and line 10, not line 1, has an "If zero" rule. The text does not settle it; the engine keeps Part I blank.
+- Changes dollars: no. Line 4 and line 15 use the same MAGI and limit, so Part II and line 19 are the same either way.
 
 ## 2. The stops on lines 4 and 15
 
 - Text: line 4 "If zero or less, stop; you can't take any education credit". Line 15 "If zero or less, skip lines 16 and 17, enter -0- on line 18".
 - Default: the engine cannot un-file a form. Line 4 prints 0 and lines 5–9 stay blank. Part II runs on its own: line 15 has the same MAGI and limit, so it prints 0 and line 18 is 0. Line 19 is then 0.
+- Other reading: the blind fill left lines 10–19 blank after the line 4 stop. The credit is $0 either way.
 - Changes dollars: no.
 
 ## 3. Credit Limit Worksheet line 6 below zero
@@ -91,6 +93,38 @@ Each item is a place where the form and its instructions do not settle a rule. I
 - Text: "If you can choose ... the American opportunity credit will always be greater than the lifetime learning credit" (`american-opportunity-credit::b01`); line 26 "No—Complete lines 27 through 30".
 - Default: a student who passes lines 23–26 takes the American opportunity credit; no fact chooses the lifetime learning credit instead.
 - Changes dollars: no.
+
+## 16. "Full-time student" on line 7
+
+- Text: condition 1c reads "a full-time student (defined later)" (`line-7::b02`). The definition opens "Solely for purposes of determining whether a scholarship is considered support, you were a full-time student for 2025 if during any part of any 5 calendar months during the year you were enrolled as a full-time student" (`line-7::b05`). Pub. 970 gives the same 5-month test without "solely".
+- Default: question 3 uses the 5-month test (the `fullTimeStudent` answer). The blind fill made the same choice.
+- Changes dollars: yes. It moves the refundable 40% (line 8) to line 9 for a filer aged 19–23.
+
+## 17. Tax-free assistance larger than one period's expenses
+
+- Text: the worksheet is "a separate worksheet for each student for each academic period", and line 4 reads "If zero or less, enter -0-" (`adjusted-qualified-education-expenses::b01`). Line 2a is assistance "allocable to the academic period".
+- Default: each period floors at 0 on its own, so the excess of one period does not reduce another period's expenses. The blind fill made the same choice.
+- Changes dollars: yes, when a scholarship for one term is larger than that term's expenses and another term (such as a prepaid period that begins in the first 3 months of 2026) has expenses.
+
+## 18. Course materials and the lifetime learning credit
+
+- Text: "Lifetime learning credit: Qualified education expenses include amounts paid for books, supplies, and equipment only if required to be paid to the institution as a condition of enrollment or attendance" (`qualified-education-expenses::b01`).
+- Default: `courseMaterialsPaid` counts for the American opportunity credit only. Materials that must be paid to the school belong in `tuitionAndFeesPaid`. The blind fill made the same choice.
+- Changes dollars: yes, if materials that must be paid to the school are stated as course materials.
+
+## Second opinions
+
+- **PolicyEngine-US 2.152.16** (commit 794e17e6), `variables/gov/irs/credits/education/` and `parameters/gov/irs/credits/education/`.
+  - Same: the MAGI limits and phase-out ranges ($80,000 + $10,000; $160,000 + $20,000 joint); the American opportunity tiers (100% of the first $2,000, 25% of the next $2,000); 40% refundable; the lifetime learning $10,000 cap and 20% rate; no credit on a separate return; the American opportunity student tests (degree program and half-time, first 4 years, fewer than 4 earlier claims, no felony drug conviction); an American opportunity student never adds to the lifetime learning expenses; the worksheet's earlier credits (Schedule 3 lines 1, 2 and 6d; 6l not modeled there).
+  - Differs, form decides, no change:
+    - Line 7: PolicyEngine makes 40% refundable for every filer. The form takes the refundable part away from a filer under 24 who meets conditions 1, 2 and 3 (`line-7::b02`). The engine follows the form; PolicyEngine lacks this rule.
+    - Lines 6 and 17: PolicyEngine uses the exact ratio. The form rounds it "to at least three places" (item 4); at most $1.
+    - Lines 3 and 14: PolicyEngine adds back the section 911, 931 and 933 exclusions. The engine makes the lines unsupported with Form 2555 or 4563 (item 10). This is the same rule, with the engine's gap stated.
+    - Worksheet line 4: PolicyEngine uses its tax before credits. The form says Form 1040 line 18 (`credit-limit-worksheet::b01`). The engine fills the form.
+    - The order: PolicyEngine limits the American opportunity part first, then the lifetime learning credit. The worksheet limits their sum (line 3). The total is the same.
+    - Who cannot claim: PolicyEngine holds a dependency bar and a bar after a denied or reckless claim (`american-opportunity-credit::b01`: "Don't claim the American opportunity credit for 2 years after there was a final determination that your claim was due to reckless or intentional disregard of the rules or 10 years after..."). No engine fact holds either; Cade asks (item 8). The improper-claim bar and Form 8862 are not modeled.
+    - Rounding: PolicyEngine does not round to whole dollars. The engine rounds by form line (line 29, lines 7, 8, 12 and 18).
+- **IRS Direct File**: the repo names no checkout of it (issue #140 is open), so it was not compared.
 
 ## Confidence by field group
 
