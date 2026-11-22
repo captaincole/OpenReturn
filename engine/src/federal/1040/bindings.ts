@@ -89,6 +89,7 @@ import {
   line33,
   line34,
   line35a,
+  line35aForm8888Attached,
   line37,
 } from "./payments.js";
 import {
@@ -195,6 +196,7 @@ export function register(): void {
       "line.33": line33,
       "line.34": line34,
       "line.35a": line35a,
+      "line.35a_form_8888_attached": line35aForm8888Attached,
       "line.37": line37,
       "signing.taxpayer_occupation": signingTaxpayerOccupation,
       "signing.taxpayer_phone": signingTaxpayerPhone,
@@ -301,8 +303,6 @@ export function register(): void {
         "Opt-out checkbox for ACTC claim — no ACTC eligibility or opt-out decision modeled yet; requires taxpayer election fact.",
       "line.31":
         "Amount from Schedule 3 line 15 (additional refundable credits/payments) — Schedule 3 not ingested as a separate form catalog yet.",
-      "line.35a_form_8888_attached":
-        "Form 8888 (split refund into multiple accounts) has no ingestion path or scenario modeled yet — taxpayer must check this manually if they attach Form 8888.",
       "line.35b_routing_number":
         "Bank routing number for direct deposit refund — no banking fact category ingested; taxpayer must enter this manually.",
       "line.35c_checking":

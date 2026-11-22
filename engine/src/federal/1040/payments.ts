@@ -136,6 +136,17 @@ export function line34(form: Form) {
 export const line35a = (form: Form, info: Form1040FilingInfo) =>
   info.refundFullOverpaymentFederal ? form["line.34"] : undefined;
 
+/*
+ * MANUAL EDIT: the line 35a box: "Check the box on line 35a and attach Form 8888
+ * if you want to split the direct deposit of your refund into more than one
+ * account" (irs-1040-inst-2025::sec::starting-in-october-2025-the-irs::b01).
+ * Checked when Form 8888 line 5 carries the refund; blank otherwise.
+ */
+export function line35aForm8888Attached(form: Form) {
+  const total = form["form-8888.0.line.5_total_allocation_refund"];
+  return typeof total === "number" && total > 0 ? true : undefined;
+}
+
 // MANUAL EDIT: line 37 includes the line 38 penalty (not modeled).
 export function line37(form: Form) {
   const paid = form["line.33"];
