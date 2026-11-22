@@ -2,9 +2,11 @@
 
 import { lookupCaRateSchedule } from "../../../data/caRateSchedule.js";
 import { lookupTax } from "../../../data/taxTable.js";
-import { atLeast, roundDollars, sum } from "../../../money.js";
+import { atLeast, numberOrBlank, roundDollars, sum } from "../../../money.js";
+import { unsupported } from "../../../types.js";
 import { caExemptionCreditsAfterLimit } from "../../../worksheets/caAgiLimitation.js";
-import type { Form540Line } from "./form540Binding.js";
+import type { Form540FilingInfo } from "./filingInfo.js";
+import type { Form540Form, Form540Line } from "./form540Binding.js";
 
 // MANUAL EDIT: FTB sends line 19 over $100,000 to the Tax Rate Schedules.
 function usesRateSchedule(taxableIncome: number | undefined): boolean | undefined {
@@ -72,9 +74,47 @@ export const line33TaxAfterExemptionCredits: Form540Line<"line.33_tax_after_exem
   );
 };
 
+const filesScheduleG1 = (info: Form540FilingInfo) =>
+  info.mustFile?.["schedule-g-1"]?.value === true;
+
+const FTB_5870A_GAP =
+  "Line 34 includes the tax from FTB 5870A (tax on accumulation distribution of trusts), which has no rules yet.";
+
+/*
+ * Schedule G-1's tax: line 28, or line 7 when only Part II is used ("Otherwise,
+ * enter the amount from line 7 on Form 540, line 34", the blank Schedule G-1).
+ * Both lines come from one evaluation of the schedule, so line 7 never stands
+ * in for a line 28 that is still to come.
+ */
+function scheduleG1Tax(form: Form540Form): number | undefined {
+  return (
+    numberOrBlank(form["schedule-g-1.0.line.28_tax_on_lump_sum_distribution"]) ??
+    numberOrBlank(form["schedule-g-1.0.line.7_capital_gain_election_tax"])
+  );
+}
+
+/*
+ * Line 34 (ca-540-inst-2025::sec::line-34-tax-from-schedule-g-1-and-form-ftb-5870a::b01):
+ * the tax from Schedule G-1 and from FTB 5870A. Blank when neither files; it
+ * waits while Schedule G-1 files and its tax waits.
+ */
+export const line34TaxAmount: Form540Line<"line.34_tax_amount"> = (form, info) => {
+  if (info.mustFile?.["form-5870a"]?.value === true) return unsupported(FTB_5870A_GAP);
+  return filesScheduleG1(info) ? scheduleG1Tax(form) : undefined;
+};
+
+/* Line 34's Schedule G-1 box: checked when the schedule's tax is on the line. */
+export const line34TaxFromScheduleG1: Form540Line<"line.34_tax_from_schedule_g1"> = (form, info) =>
+  filesScheduleG1(info) && scheduleG1Tax(form) !== undefined ? true : undefined;
+
+/* "Add line 33 and line 34" (the form); waits while Schedule G-1 files and line 34 waits. */
 export const line35TotalTaxAfterCredits: Form540Line<"line.35_total_tax_after_credits"> = (
   form,
+  info,
 ) => {
   const tax = form["line.33_tax_after_exemption_credits"];
-  return typeof tax === "number" ? sum(tax, form["line.34_tax_amount"]) : undefined;
+  if (typeof tax !== "number") return undefined;
+  const lumpSumTax = form["line.34_tax_amount"];
+  if (filesScheduleG1(info) && typeof lumpSumTax !== "number") return undefined;
+  return sum(tax, lumpSumTax);
 };

@@ -24,6 +24,7 @@ export interface RetirementDistributionFactValue {
   /* Checked: 1040 lines 4a/4b. Unchecked: pensions and annuities, lines 5a/5b. */
   box7IraSepSimple: boolean;
   box8?: number; // Other
+  box8Percent?: number; // The percentage printed next to box 8 (a lump sum shared with others)
   box9a?: number; // Your percentage of total distribution
   box9b?: number; // Total employee contributions
   box10?: number; // Amount allocable to IRR within 5 years

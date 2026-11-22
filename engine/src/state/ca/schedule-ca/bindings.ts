@@ -9,6 +9,7 @@ import type { ScheduleCaFilingInfo } from "./filingInfo.js";
 import { form8853Bindings } from "./form8853.js";
 import { partIIUnsupported } from "./increasedStandard.js";
 import { CA_MISC_FLOOR_RATE, caItemizedLine29 } from "./itemizedWorksheet.js";
+import { line5bSubtractions } from "./lumpSum.js";
 import { mortgageCreditBindings } from "./mortgageCredit.js";
 import { sectionCBindings } from "./sectionC.js";
 import type { ScheduleCa } from "./types.js";
@@ -253,6 +254,8 @@ export function register(): void {
       "0.line.6a_federal": (form) => numberOrBlank(form["form-1040.line.6a"]),
       "0.line.6b_federal": (form) => numberOrBlank(form["form-1040.line.6b"]),
       "0.line.6b_subtractions": (form) => numberOrBlank(form["0.line.6b_federal"]),
+      // MANUAL EDIT: the part of line 5b that Schedule G-1 taxes (lumpSum.ts).
+      "0.line.5b_subtractions": line5bSubtractions,
       "2.line.b10_subtractions": (form) =>
         sumOrBlank(
           form["0.line.1z_subtractions"],
@@ -646,8 +649,6 @@ export function register(): void {
         "CA IRA/pension subtraction adjustments (e.g. Tier 2 railroad retirement, three-year rule annuities) require ingestion of RRB-1099-R and specialized pension facts we don't yet model. No worked scenario exists for this.",
       "0.line.4b_additions":
         "CA IRA distribution addition adjustments (e.g. pre-1987 annuity rule elections) require specialized pension/annuity facts not yet modeled. No worked scenario exists.",
-      "0.line.5b_subtractions":
-        "CA pension/annuity subtraction adjustments (Tier 2 railroad retirement benefits, pre-1987 three-year rule) require RRB-1099-R and specialized pension scenario data not yet ingested.",
       "0.line.5b_additions":
         "CA pension/annuity addition adjustments (pre-1987 three-year rule elections where CA uses different tax treatment) require specialized pension facts not yet modeled. No worked scenario exists.",
       "0.line.b1_federal":
