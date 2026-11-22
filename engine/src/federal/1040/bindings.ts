@@ -83,6 +83,7 @@ import {
   line27a,
   line27cNoEicClaim,
   line28,
+  line29,
   line30,
   line32,
   line33,
@@ -188,6 +189,7 @@ export function register(): void {
       "line.27a": line27a,
       "line.27c_no_eic_claim": line27cNoEicClaim,
       "line.28": line28,
+      "line.29": line29,
       "line.30": line30,
       "line.32": line32,
       "line.33": line33,
@@ -297,8 +299,6 @@ export function register(): void {
         "Clergy/minister checkbox for Schedule SE filing — no clergy occupation scenario or Schedule SE ingestion built yet.",
       "line.28_no_actc_claim":
         "Opt-out checkbox for ACTC claim — no ACTC eligibility or opt-out decision modeled yet; requires taxpayer election fact.",
-      "line.29":
-        "American Opportunity Credit from Form 8863 line 8 — Form 8863 not ingested and no education-credit scenario built yet.",
       "line.31":
         "Amount from Schedule 3 line 15 (additional refundable credits/payments) — Schedule 3 not ingested as a separate form catalog yet.",
       "line.35a_form_8888_attached":

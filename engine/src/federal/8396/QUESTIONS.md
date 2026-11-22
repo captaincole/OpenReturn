@@ -33,8 +33,8 @@ Each item is a place where the form and its instructions do not settle a rule. E
 ## 5. Worksheet line 2 credits the engine does not compute
 
 - Source: worksheet line 2 lists Schedule 3 lines 1 through 4, 6d, 6f, 6l and 6m (`line-8-credit-limit-worksheet::b01`).
-- Schedule 3 lines 1, 3, 4, 6f, 6l and 6m are unsupported in the engine.
-- Default: while Form 1116, 8863, 8880, 8936 or 8978 files, lines 8 to 17 are unsupported.
+- Schedule 3 lines 1, 4, 6f, 6l and 6m are unsupported in the engine. Line 3 (Form 8863) is computed; a gap in Form 8863 reads as 0 here.
+- Default: while Form 1116, 8880, 8936 or 8978 files, lines 8 to 17 are unsupported.
 - Changes dollars: yes, for those filers only.
 
 ## 6. The outdated list in "Before you begin Part I"

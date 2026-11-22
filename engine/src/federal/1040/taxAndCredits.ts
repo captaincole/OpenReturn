@@ -4,6 +4,7 @@ import { lookupTax } from "../../data/taxTable.js";
 import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, sum } from "../../money.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
+import { childTaxOnLine16 } from "../8615/form.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import { line16WithForm8814, line3a } from "./form8814Lines.js";
 import { qdcgInputsFromReturn } from "./qdcgInputs.js";
@@ -14,11 +15,17 @@ type Form = FormAccessor<Form1040>;
 /*
  * MANUAL EDIT: line 16 always uses the QDCG worksheet. With no
  * preferential income it gives the tax-table answer; one code path.
+ * A child who files Form 8615 enters its line 18 instead
+ * (irs-8615-inst-2025::sec::line-18::b01).
  */
 export function line16(form: Form, info: Form1040FilingInfo) {
   if (!info.filingStatus) return undefined;
   const taxable = form["line.15"];
   if (typeof taxable !== "number") return undefined;
+  const childTax = childTaxOnLine16(form, info);
+  if (childTax !== "regular") {
+    return typeof childTax === "number" ? line16WithForm8814(info, childTax) : childTax;
+  }
 
   try {
     const qdcg = computeQdcg(
