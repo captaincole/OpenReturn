@@ -58,6 +58,35 @@ Each item is a place where the form and its instructions do not settle a rule. T
 - Default: 1% of line 8, rounded to the nearest dollar (CLAUDE.md rounding rule). 1% of $1,250 is $12.50 → $13.
 - Changes dollars: at most $1.
 
+## 10. Form 8814 line 6 when its line 4 is $2,700 or less
+
+- Source: FTB 3803 compares "the total amount on line 6 of all your federal Form(s) 8814" (::line-6::b01). Form 8814 says "If the total is $2,700 or less, skip lines 5 through 12".
+- Default: a skipped federal line 6 counts as 0, so all of the FTB 3803 line 6 goes in column C, as with no Form 8814. The blind fill made the same choice (case 5).
+- Changes dollars: yes, for a child whose federal line 4 is $2,700 or less and whose California line 4 is more.
+
+## 11. Federal election only (Form 8814, no FTB 3803)
+
+- Source: "If you elect to report your child's income on your federal income tax return, but not on your California income tax return, be sure to make an adjustment on your Schedule CA (540) ... line 8z" (ca-3800-inst-2025::sec::purpose::b02). "If the amount of your child's income you are reporting on your California income tax return is different than the amount you reported on your federal income tax return, enter the difference on line 8z, column B or column C" (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b16).
+- Default: subtract the Form 8814 line 6 total in column B (California amount 0). The Form 8814 line 15 tax is not income and needs no adjustment. The blind fill made the same choice (case 15).
+- Open: capital gain distributions in that amount may belong on Schedule CA line 7a instead ("Capital gain from children ... included on the parent's or child's federal tax return and reported on the California tax return by the opposite taxpayer", ca-540-sched-ca-inst-2025::sec::line-7a-capital-gain-or-loss::b02). The engine keeps them on line 8z; with Schedule D (540) they are unsupported (item 4).
+- Changes dollars: yes, on the parents' California AGI if the default amount is wrong; the column split between lines 7a and 8z does not change the total.
+
+## Blind fill (2026-11-22)
+
+A blind preparer filled 15 cases from the blank form and instructions only. Every line of every case matched the engine, blank against 0 included. Doubts the text settles, kept for the record:
+
+- California-only exempt interest (Treasury bills) goes in line 8z column B, not on Schedule CA line 2: "enter the difference on ... line 8z, column B" (::line-6::b01).
+- Interest on another state's bonds is taxable by California and goes on line 1a (::line-1a::b01). The fact's `taxExemptInterestTaxedByCalifornia` holds the split; the rule needs no default.
+- Doubts 1 (child at exactly $1,350) and 7 (capital gain distributions with Schedule D) are items 7 and 4.
+
+## Second opinions
+
+- PolicyEngine-US 2.152.16 (commit 794e17e6), `variables/gov/states/ca/tax/income/` and `parameters/gov/irs/deductions/standard/dependent/`. Compared on 2026-11-22.
+  - It does not model FTB 3803 or Form 8814. Its out-of-state bond interest variable says "a parent election to report it is not inferred". No formula to compare.
+  - Line 7 ($1,350): its dependent standard deduction floor for 2025 is 1,350, used by its California dependent worksheet too. Agrees.
+  - Other-state bond interest is a California addition (R&TC 17143) and California bond interest stays exempt. Agrees with line 1a and line 1b.
+- IRS Direct File: federal only, no FTB 3803. No checkout is reachable from this project (issue #140). Not compared. The repo names no other reference implementation for this form.
+
 ## Confidence by field group
 
 | Fields | Confidence |
