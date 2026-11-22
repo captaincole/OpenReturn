@@ -1,9 +1,13 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Money } from "../../money.js";
+import type { Form2106FilingInfo } from "../2106/filingInfo.js";
 import type { Form3903FilingInfo } from "../3903/filingInfo.js";
 import type { Form4137FilingInfo } from "../4137/filingInfo.js";
 import type { Form4972FilingInfo } from "../4972/filingInfo.js";
+import type { Form8615FilingInfo } from "../8615/filingInfo.js";
 import type { Form8814FilingInfo } from "../8814/filingInfo.js";
+import type { Form8863FilingInfo } from "../8863/filingInfo.js";
+import type { Form8919FilingInfo } from "../8919/filingInfo.js";
 import type { Schedule8812FilingInfo } from "../schedule-8812/filingInfo.js";
 import type { ScheduleAFilingInfo } from "../schedule-a/filingInfo.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
@@ -15,20 +19,27 @@ import type { ScheduleSEFilingInfo } from "../schedule-se/filingInfo.js";
  * its combat pay (Step 5 line 4), Schedule SE's Schedule C net profit
  * (Worksheet B line 2b), Schedule E's columns (Pub. 596 Worksheet 1) and the
  * EIC answers and counts. Line 12e reads Schedule A's increased standard
- * deduction mode. Line 1c reads Form 4137's tip income.
- * Line 1h reads Form 3903's excess reimbursement.
- * Lines 3a–3c, 7a, 7b and 16 read Form 8814's totals. Line 16 reads Form 4972's tax.
+ * deduction mode. Line 1c reads Form 4137's tip income. Line 1g adds a
+ * second Form 8919 (a spouse's) from its filers.
+ * Line 1h reads Form 3903's excess reimbursement. Line 1a reads Form 2106's.
+ * Lines 3a–3c, 7a, 7b and 16 read Form 8814's totals. Line 16 reads Form 8615
+ * and Form 4972's tax.
+ * Line 29 reads Form 8863's figures to tell a gap from "no credit".
  */
 export interface Form1040FilingInfo
   extends
     BaseFilingInfo,
     EicLineSlot,
+    Pick<Form2106FilingInfo, "form2106Totals" | "form2106TotalsGap">,
     Pick<Form3903FilingInfo, "movingReimbursementExcess" | "movingTotalsGap">,
     Pick<Schedule8812FilingInfo, "dependents" | "w2NontaxableCombatPay">,
     Pick<ScheduleSEFilingInfo, "scheduleCNetProfit">,
     Pick<ScheduleAFilingInfo, "increasedStandardDeduction">,
     Pick<Form4137FilingInfo, "tipIncomeNotOnLine1a" | "employeeCashTips">,
     Pick<Form8814FilingInfo, "form8814Totals">,
+    Omit<Form8615FilingInfo, keyof BaseFilingInfo | "useItemizedDeductions">,
+    Pick<Form8863FilingInfo, "form8863">,
+    Pick<Form8919FilingInfo, "form8919Filers">,
     Pick<Form4972FilingInfo, "form4972Tax" | "form4972TaxGap"> {
   /** Social Security with a traditional IRA contribution and a plan: Pub. 590-A figures line 6b (schedule-1/pub590a.ts). */
   pub590aWorksheets?: boolean;

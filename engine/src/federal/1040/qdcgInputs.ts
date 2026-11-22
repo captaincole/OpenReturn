@@ -12,7 +12,7 @@ import type { QdcgInputs } from "../../worksheets/qdcg.js";
 type ReturnAccessor = { readonly [fieldId: string]: unknown };
 
 /* Worksheet line 3: the smaller of Schedule D lines 15 and 16 (a loss counts as 0). */
-function netLongTermGain(form: ReturnAccessor): number {
+export function netLongTermGain(form: ReturnAccessor): number {
   const schDL15 = form["schedule-d.0.line.15_net_long_term_gain_loss"];
   const schDL16 = form["schedule-d.1.line.16_combined_gain_loss"];
   if (schDL15 !== undefined || schDL16 !== undefined) {

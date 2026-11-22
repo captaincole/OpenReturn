@@ -8,6 +8,7 @@ import {
   type ResolverInputs,
 } from "../../resolverInputs.js";
 import { resolve4137Info } from "../4137/resolveInfo.js";
+import { resolve8919Info } from "../8919/resolveInfo.js";
 import { resolveScheduleSEInfo, selfEmploymentIncome } from "../schedule-se/resolveInfo.js";
 import type { Form8959FilingInfo } from "./filingInfo.js";
 import { ADDITIONAL_MEDICARE_THRESHOLDS, SINGLE_W2_MEDICARE_WAGES_LIMIT } from "./lines.js";
@@ -16,13 +17,17 @@ import { ADDITIONAL_MEDICARE_THRESHOLDS, SINGLE_W2_MEDICARE_WAGES_LIMIT } from "
  * irs-8959-inst-2025::sec::who-must-file::b01: Medicare wages on any single W-2 over
  * $200,000, or Medicare wages plus self-employment income (Schedule SE line 6) over
  * the filing-status threshold. Medicare wages include the tips on Form 4137 line 6
- * (::who-must-file::b01), both spouses' on a joint return. RRTA, Form 8919 and a
- * spouse's Schedule SE have no facts. With no filing status or an open Schedule SE
- * the question stays open.
+ * and the wages on Form 8919 line 6 (::who-must-file::b01), both spouses' on a
+ * joint return. RRTA and a spouse's Schedule SE have no facts. With no filing
+ * status or an open Schedule SE the question stays open.
  */
 export function resolve8959Info(inputs: ResolverInputs): Form8959FilingInfo {
   const w2MedicareWages = sumW2Box(inputs, "box5");
-  const medicareWages = sum(w2MedicareWages, resolve4137Info(inputs).tipsSubjectToMedicareTotal);
+  const medicareWages = sum(
+    w2MedicareWages,
+    resolve4137Info(inputs).tipsSubjectToMedicareTotal,
+    resolve8919Info(inputs).uncollectedWagesTotal,
+  );
   const w2s = factsInCategory(inputs, "wages").filter((row) => isW2FactKey(row.key));
   const overOneW2 = w2s.some(
     (row) => sum((row.value as W2FactValue).box5) > SINGLE_W2_MEDICARE_WAGES_LIMIT,
