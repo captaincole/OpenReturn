@@ -24,7 +24,9 @@ export interface RetirementDistributionFactValue {
   /* Checked: 1040 lines 4a/4b. Unchecked: pensions and annuities, lines 5a/5b. */
   box7IraSepSimple: boolean;
   box8?: number; // Other
-  box9a?: number; // Your percentage of total distribution
+  /* Box 8's percentage, as printed (40 means 40%): the recipient's share of an annuity contract shared by several recipients (Form 4972 line 11). */
+  box8Percent?: number;
+  box9a?: number; // Your percentage of total distribution, as printed (40 means 40%)
   box9b?: number; // Total employee contributions
   box10?: number; // Amount allocable to IRR within 5 years
   box11?: number; // 1st year of designated Roth contributions

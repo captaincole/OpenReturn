@@ -32,6 +32,7 @@ import {
   text,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { pensionRowsAfterForm4972 } from "../4972/line5.js";
 import { NONQUALIFIED_ROTH_CODES, partIIIFigures } from "../8606/partIII.js";
 import { form8606Filers } from "../8606/resolveInfo.js";
 import { needsPub590AWorksheets } from "../schedule-1/pub590a.js";
@@ -171,7 +172,8 @@ function iraLine(inputs: ResolverInputs, rows: RetirementDistributionFactValue[]
  * A disability pension before the minimum retirement age goes on line 1h, not
  * line 5 (disabilityPensions.ts), and so does a corrective distribution
  * (isCorrectiveDistribution). While a pension's answer is missing, lines 1h and
- * 5a–5b wait.
+ * 5a–5b wait. A Form 4972 takes its rows off line 5, or leaves their ordinary
+ * income part (federal/4972/line5.ts).
  */
 function resolveRetirementSlots(inputs: ResolverInputs): Form1040FilingInfo {
   const rows = retirementRows(inputs);
@@ -185,9 +187,11 @@ function resolveRetirementSlots(inputs: ResolverInputs): Form1040FilingInfo {
       .map((pension) => pension.distribution),
   );
   const corrective = rows.filter(isCorrectiveDistribution);
-  const pensionRows = rows.filter(
-    (row) => !isIra(row) && !onLine1h.has(row) && !isCorrectiveDistribution(row),
+  const afterForm4972 = pensionRowsAfterForm4972(
+    inputs,
+    rows.filter((row) => !isIra(row) && !onLine1h.has(row) && !isCorrectiveDistribution(row)),
   );
+  const pensionRows = afterForm4972.rows;
   const taxable = pensionRows.map(rowTaxable);
   const answered = disabilityAnswersComplete(disability);
   const disabilityPensionWages = onLine1h.size === 0 ? undefined : disabilityWages(disability);
@@ -204,6 +208,7 @@ function resolveRetirementSlots(inputs: ResolverInputs): Form1040FilingInfo {
       (onLine1h.size > 0 && disabilityPensionWages === undefined) ||
       correctiveTaxable.includes(undefined),
     line1hGap: line1hGap(inputs),
+    pensionDistributionsGap: afterForm4972.gap,
     pensionDistributions:
       pensionRows.length === 0 || !answered
         ? undefined

@@ -3,6 +3,7 @@
 import { lookupTax } from "../../data/taxTable.js";
 import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, sum } from "../../money.js";
+import { unsupported, type Unsupported } from "../../types.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
 import { childTaxOnLine16 } from "../8615/form.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
@@ -24,7 +25,9 @@ export function line16(form: Form, info: Form1040FilingInfo) {
   if (typeof taxable !== "number") return undefined;
   const childTax = childTaxOnLine16(form, info);
   if (childTax !== "regular") {
-    return typeof childTax === "number" ? line16WithForm8814(info, childTax) : childTax;
+    return typeof childTax === "number"
+      ? withForm4972(info, line16WithForm8814(info, childTax))
+      : childTax;
   }
 
   try {
@@ -37,13 +40,35 @@ export function line16(form: Form, info: Form1040FilingInfo) {
         info.filingStatus,
       ),
     );
-    return line16WithForm8814(info, qdcg.tax);
+    return withForm4972(info, line16WithForm8814(info, qdcg.tax));
   } catch {
     // Unknown filing status or missing table data: use the plain tax table.
     const lookup = lookupTax("federal-2025", taxable, info.filingStatus);
-    return line16WithForm8814(info, lookup.ok ? lookup.tax : undefined);
+    return withForm4972(info, line16WithForm8814(info, lookup.ok ? lookup.tax : undefined));
   }
 }
+
+const form4972Files = (info: Form1040FilingInfo) => info.mustFile?.["form-4972"]?.value === true;
+
+/*
+ * MANUAL EDIT: line 16 adds the tax from Form 4972 and checks box 2
+ * (irs-1040-inst-2025::sec::line-16::b01). Each spouse's form adds: "combine the
+ * tax, and include the combined tax in the total on Form 1040 ... line 16"
+ * (irs-4972-form-2025::sec::specific-instructions::b01). With no Form 4972 the
+ * line is what it was.
+ */
+function withForm4972(
+  info: Form1040FilingInfo,
+  tax: number | Unsupported | undefined,
+): number | Unsupported | undefined {
+  if (!form4972Files(info) || typeof tax !== "number") return tax;
+  if (info.form4972TaxGap) return unsupported(info.form4972TaxGap);
+  return info.form4972Tax === undefined ? undefined : sum(tax, info.form4972Tax);
+}
+
+// MANUAL EDIT: line 16 box 2, "Tax from Form 4972 ... Check the appropriate box" (::line-16::b01).
+export const line16FromForm4972 = (_: unknown, info: Form1040FilingInfo) =>
+  form4972Files(info) && (info.form4972Tax ?? 0) > 0 ? true : undefined;
 
 // MANUAL EDIT: line 17 = Schedule 2 line 3 (AMT + excess APTC); blank when Schedule 2 is not filed.
 export function line17(form: Form) {
