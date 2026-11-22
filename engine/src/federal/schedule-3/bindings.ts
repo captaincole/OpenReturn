@@ -4,6 +4,7 @@ import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { mortgageCreditGap } from "../8396/creditGap.js";
 import { line6cFrom8839 } from "../8839/receivers.js";
+import { LINE_19_ID, nonrefundableCreditGap } from "../8863/credit.js";
 import { creditGap, LINE_12_ID } from "../8880/credit.js";
 import type { Schedule3FilingInfo } from "./filingInfo.js";
 import type { Schedule3 } from "./types.js";
@@ -42,6 +43,13 @@ export function register(): void {
        * in Form 8880 stays a gap here.
        */
       "0.line.4": (form, info) => numberOrBlank(form[LINE_12_ID]) ?? creditGap(form, info),
+      /*
+       * MANUAL EDIT: Form 8863 line 19 ("here and on Schedule 3 (Form 1040), line 3",
+       * irs-8863-inst-2025::sec::line-19::b01). Blank when the form does not file; a
+       * gap in Form 8863 stays a gap here.
+       */
+      "0.line.3": (form, info) =>
+        numberOrBlank(form[LINE_19_ID]) ?? nonrefundableCreditGap(form, info),
       "0.line.5b": (form) => {
         const value = form["form-5695.3.line.32"];
         return typeof value === "number" ? value : undefined;
@@ -84,7 +92,6 @@ export function register(): void {
 
     unsupported: {
       "0.line.1": "Foreign tax credit (Form 1116): no scenario has foreign tax paid yet.",
-      "0.line.3": "Education credits (Form 8863): no scenario yet.",
       "0.line.5a": "Residential clean energy credit (Form 5695 Part I) is not modeled.",
       "0.line.6a": NO_SCENARIO,
       "0.line.6b": NO_SCENARIO,

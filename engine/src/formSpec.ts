@@ -18,6 +18,11 @@ export interface FormSpec {
 export interface FormCopies {
   count: (info: FilingInfo | undefined) => number;
   select: (info: FilingInfo | undefined, index: number) => FilingInfo | undefined;
+  /*
+   * The pages (0-based) each later copy appends; absent means every page. Form
+   * 8863 says "Use additional copies of page 2 as needed for each student".
+   */
+  laterCopyPages?: readonly number[];
 }
 
 export function makeFormSpec(args: {
