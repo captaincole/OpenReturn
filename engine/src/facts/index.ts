@@ -58,5 +58,6 @@ export * from "./kinds/studentLoanInterest.js";
 export * from "./kinds/tips.js";
 export * from "./kinds/trade.js";
 export * from "./kinds/traditionalIra.js";
+export * from "./kinds/uncollectedWages.js";
 export * from "./kinds/wages.js";
 export * from "./rows.js";

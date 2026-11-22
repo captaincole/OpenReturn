@@ -297,6 +297,8 @@ export function register(): void {
           : unsupported(LINE_1F_WITHOUT_8839),
       // Federal 1040 line 1c (Form 4137 line 4 and noncash tips); blank when it is.
       "0.line.1c_federal": (form) => numberOrBlank(form["form-1040.line.1c"]),
+      // Federal 1040 line 1g, Form 8919 line 6 (ftb-pub-737-2025::sec::line-1g::b01); blank when it is.
+      "0.line.1g_federal": (form) => numberOrBlank(form["form-1040.line.1g"]),
       // MANUAL EDIT: 1h type is a text field; read it as a string, not with sum().
       "0.line.1h_income_type": (form) => {
         const value = form["form-1040.line.1h_type"];
@@ -589,7 +591,6 @@ export function register(): void {
         "Medicaid waiver payments not reported on W-2 (federal 1040 line 1d) — no scenario modeled yet.",
       "0.line.1e_federal":
         "Taxable dependent care benefits from Form 2441 (federal 1040 line 1e) — no scenario modeled yet.",
-      "0.line.1g_federal": "Wages from Form 8919 (federal 1040 line 1g) — no scenario modeled yet.",
       "0.line.1h_federal": "Other earned income (federal 1040 line 1h) — no scenario modeled yet.",
       "0.line.1z_subtractions":
         "Aggregate of line 1 subtractions; all upstream rows are unsupported.",

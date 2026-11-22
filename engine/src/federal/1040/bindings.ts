@@ -56,6 +56,7 @@ import {
   line1c,
   line1e,
   line1f,
+  line1g,
   line1hAmount,
   line1z,
   line2a,
@@ -135,6 +136,7 @@ export function register(): void {
       "line.1c": line1c,
       "line.1e": line1e,
       "line.1f": line1f,
+      "line.1g": line1g,
       "line.1h_amount": line1hAmount,
       "line.1z": line1z,
       "line.2a": line2a,
@@ -257,8 +259,6 @@ export function register(): void {
         "Household employee wages not reported on W-2 require a separate household-employer intake scenario not yet built; no fact key exists for this.",
       "line.1d":
         "No ingestion path for Medicaid waiver payments not reported on W-2 — no scenario built for this income type yet.",
-      "line.1g":
-        "Requires Form 8919 (Uncollected SS/Medicare Tax on Wages) — no Form 8919 ingestion or scenario built yet.",
       "line.1h_type":
         "Free-text label describing the type of other earned income on line 1h — no fact or decision maps to this descriptor field; no other-earned-income scenario built yet.",
       "line.1i":
