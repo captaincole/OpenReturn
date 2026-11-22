@@ -231,6 +231,10 @@ A binding (a form's `bindings.ts`) computes one field. It returns one of three r
 
 Do not use `undefined` for an engine gap: a blank line looks like "nothing applies", and the return prints without it.
 
+### A form that files only with an amount on another form
+
+A form's resolver decides who files from facts and decisions, before any line is computed. A form that also needs a computed amount names that line in `filesOnlyWithAmountOn` in its `defineForm` spec. After the lines settle, the engine takes the form off the return when the line holds no amount above 0. Form 8888 is the first: it splits the refund on Form 1040 line 35a, so it does not file without one.
+
 ### The central forms keep their rules in section files
 
 Every new form adds lines to Form 1040, so its rules do not live in one file. `engine/src/federal/1040/bindings.ts` is the index: one entry for each field, in form order, that names an imported function, and the `unsupported` list. The function for a line is in the section file of the paper form (`header.ts`, `income.ts`, `adjustmentsAndDeductions.ts`, `taxAndCredits.ts`, `payments.ts`, `signing.ts`). A new or changed Form 1040 line is a function in its section file and one entry in the index. Every other form keeps its rules in its own `bindings.ts`.

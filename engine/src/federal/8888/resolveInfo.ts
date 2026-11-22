@@ -35,7 +35,8 @@ function accountAnswers(inputs: ResolverInputs): Record<string, RefundAccount | 
  * irs-1040-inst-2025::sec::starting-in-october-2025-the-irs::b01). Two or more
  * account facts file it; one account goes on Form 1040 lines 35b–35d instead.
  * The explicit decision still wins. Whether there is a refund at all shows only
- * on Form 1040 line 35a, which a resolver cannot read: the lines wait on it.
+ * on Form 1040 line 35a, which a resolver cannot read: the form names that line
+ * in `filesOnlyWithAmountOn` (bindings.ts), and does not file without a refund.
  */
 export function resolve8888Info(inputs: ResolverInputs): Form8888FilingInfo {
   const facts = getRefundDepositFacts(inputs.factByKey);

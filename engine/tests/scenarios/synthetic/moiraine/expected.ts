@@ -31,13 +31,13 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "form-8888.0.header.ssn": "400-00-8888",
       // Lines 1b and 1d — the sample-check routing number; the hyphen stays
       "form-8888.0.line.1b_first_account_routing_number": "250250025",
-      "form-8888.0.line.1d_first_account_number": "4410-2286",
-      // Lines 2b and 2d — the spaces of "RX 551 0293" are left out
+      "form-8888.0.line.1d_first_account_number": "4410-2286-5501",
+      // Lines 2b and 2d — the spaces of "RX 55102 93066 41700" are left out
       "form-8888.0.line.2b_second_account_routing_number": "091999996",
-      "form-8888.0.line.2d_second_account_number": "RX5510293",
+      "form-8888.0.line.2d_second_account_number": "RX551029306641700",
       // Lines 3b and 3d
       "form-8888.0.line.3b_third_account_routing_number": "321999990",
-      "form-8888.0.line.3d_third_account_number": "778812345",
+      "form-8888.0.line.3d_third_account_number": "7788123450",
     },
     // Line c — one box per account
     renderedChecked: [

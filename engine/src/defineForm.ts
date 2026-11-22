@@ -9,6 +9,7 @@ import { z } from "zod";
 import {
   _resetBindingRegistryForTests,
   bindField,
+  fileOnlyWithAmountOn,
   UNSUPPORTED_RULE_NAME,
   type EngineContext,
   type Rule,
@@ -27,6 +28,8 @@ export interface FormSpec<TForm extends object, TInfo extends BaseFilingInfo> {
   bindings: Partial<{ [K in keyof TForm]: BindingFn<TForm, TInfo, K> }>;
   formatters?: Partial<{ [K in keyof TForm]: FormatterFn<TForm[K]> }>;
   unsupported?: Partial<{ [K in keyof TForm]: string }>;
+  /** The form files only when this line of another form (a full field id) holds an amount above 0. */
+  filesOnlyWithAmountOn?: string;
 }
 
 // Also indexable by a full cross-form field id ("form-1040.line.11b").
@@ -67,6 +70,8 @@ export function defineForm<TForm extends object, TInfo extends BaseFilingInfo>(
   registerEntries<FormatterFn<unknown>>(spec.formatters, (shortKey, formatter) => {
     formatterRegistry.set(`${formId}.${shortKey}`, formatter);
   });
+
+  if (spec.filesOnlyWithAmountOn) fileOnlyWithAmountOn(formId, spec.filesOnlyWithAmountOn);
 }
 
 function makeBindingRule(

@@ -101,6 +101,30 @@ describe("Who files Form 8888", () => {
   });
 });
 
+describe("No refund: the form does not file", () => {
+  const noRefund = [
+    ...base.decisions.filter(
+      (each) => each.decisionKey !== "decisions.refund.refund_full_overpayment_federal",
+    ),
+    decision("decisions.refund.refund_full_overpayment_federal", false),
+  ];
+
+  it("two accounts with no amount on Form 1040 line 35a file nothing and ask nothing", () => {
+    const run = evaluate([account(1, { amount: 1000 }), account(2)], noRefund);
+    expect(run.value("form-1040", "line.35a")).toBeUndefined();
+    expect(run.files("form-8888")).toBe(false);
+    expect(run.value("form-1040", BOX_35A)).toBeUndefined();
+  });
+
+  it("an explicit decision true does not file it either", () => {
+    const run = evaluate(
+      [account(1, { amount: 1000 }), account(2)],
+      [...noRefund, decision("decisions.scope.must_file_8888", true)],
+    );
+    expect(run.files("form-8888")).toBe(false);
+  });
+});
+
 describe("No account fact: nothing changes", () => {
   it("Form 8888 does not file; Form 1040 lines 34, 35a and the box stay as before", () => {
     const run = evaluate([]);

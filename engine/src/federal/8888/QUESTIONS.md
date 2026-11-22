@@ -23,14 +23,12 @@ Each place where the form and its instructions do not settle a rule. Short answe
 - Default: when the split leaves only one account with money, the form's lines are unsupported. The deposit belongs on Form 1040 lines 35b–35d, which the engine does not fill yet.
 - Changes dollars: no (unsupported, not a guess).
 
-## 4. No refund, but two accounts stated
+## 4. No refund, but two accounts stated (decided)
 
 - Source: line 5 must equal the refund (line-5::b01). The form files only to split a refund (general-instructions::b01).
-- Default: two account facts file the form, because a resolver cannot read Form 1040 line 35a. With no refund (tax due, or the decision `decisions.refund.refund_full_overpayment_federal` not true), the form files with only its header; every line is blank.
-- The tax correctness review confirmed it: moiraine with W-2 box 2 at $5,000 owes $1,415, and a blank Form 8888 still files.
-- Why it is not fixed: the engine decides who files from facts and decisions, before any line is computed. Not filing when line 35a is blank needs a must-file rule that reads a computed line, a change to the engine for all forms.
-- Not a fix: the decision `refund_full_overpayment_federal` = false means "apply part to 2026 estimated tax". A part refund can still be split, so the decision alone cannot stop the form.
-- Options: (a) keep the blank form (harmless, no amount); (b) mark the lines unsupported when line 34 is blank, so the return shows the gap but is not ready to file; (c) let a must-file rule read Form 1040 line 35a.
+- Decided by a person (2026-11-22): the form does not file. With no refund, the taxpayer does not list accounts.
+- Rule: the form names Form 1040 line 35a in `filesOnlyWithAmountOn`. After the lines settle, the engine takes the form off the return when line 35a holds no amount above 0. An explicit decision to file does not change this.
+- Still open: with `decisions.refund.refund_full_overpayment_federal` not true (part of the overpayment goes to 2026 estimated tax), the engine leaves line 35a blank, so the form does not file. A part refund can be split; this waits for line 35a to handle a part refund.
 - Changes dollars: no.
 
 ## 5. Injured spouse (Form 8379)

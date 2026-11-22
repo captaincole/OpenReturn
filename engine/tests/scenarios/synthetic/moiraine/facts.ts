@@ -74,21 +74,21 @@ const w2: W2FactValue = {
  */
 const savings: RefundDepositAccountFactValue = {
   routingNumber: "250250025",
-  accountNumber: "4410-2286",
+  accountNumber: "4410-2286-5501",
   accountType: "savings",
   amount: 1500,
 };
 
 const brokerage: RefundDepositAccountFactValue = {
   routingNumber: "091999996",
-  accountNumber: "RX 551 0293",
+  accountNumber: "RX 55102 93066 41700",
   accountType: "savings",
   amount: 1000,
 };
 
 const checking: RefundDepositAccountFactValue = {
   routingNumber: "321999990",
-  accountNumber: "778812345",
+  accountNumber: "7788123450",
   accountType: "checking",
 };
 

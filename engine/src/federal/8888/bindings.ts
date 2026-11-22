@@ -93,6 +93,9 @@ export function register(): void {
       },
     },
 
+    // MANUAL EDIT: with no refund there is nothing to split, so the form does not file.
+    filesOnlyWithAmountOn: REFUND_FIELD,
+
     // The SSN widget (text, maxLength 11) keeps the dashes.
     formatters: {
       "0.header.ssn": (value) => SSN.format(value as Parameters<typeof SSN.format>[0]),
