@@ -4,11 +4,14 @@
  * other, or in different amounts (FTB 3803 line 6 against Form 8814 line 6;
  * ca-3803-inst-2025::sec::line-6::b01,
  * ca-540-sched-ca-inst-2025::sec::line-8-other-income::b16). With no child's
- * income on either return the lines keep their earlier reasons.
+ * income on either return the lines keep their earlier reasons. So does a
+ * return whose Schedule 1 line 8z holds another item: columns B and C are
+ * "the total of all individual items" (::line-8-other-income::b05), and the
+ * other items' California rules are not modeled.
  */
 
-import type { BindingFn } from "../../../defineForm.js";
-import { sumOrBlank } from "../../../money.js";
+import type { BindingFn, FormAccessor } from "../../../defineForm.js";
+import { numberOrBlank, sum, sumOrBlank } from "../../../money.js";
 import { unsupported } from "../../../types.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
 import type { ScheduleCa } from "./types.js";
@@ -29,16 +32,37 @@ const SCHEDULE_D_GAP =
 /* The label FTB asks for on line 8z (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b16). */
 const FTB_3803_LABEL = "FTB 3803";
 
-/* Line 8z column B or C: the child's amount, blank while it waits, or the earlier reason with no child. */
+/*
+ * Column A (Schedule 1 line 8z) holds more than the Form 8814 line 12 total: a
+ * 1099-MISC box 3 amount or an item the taxpayer lists, whose column B or C
+ * rule the engine does not model.
+ */
+const otherLine8zItems = (form: FormAccessor<ScheduleCa>, federalLine12: number) =>
+  sum(numberOrBlank(form["1.line.b8z_federal"])) !== federalLine12;
+
+/*
+ * The child's line 8z adjustment, or why the line cannot print it: the
+ * earlier reason with no child or with another line 8z item, "waits" while an
+ * answer is missing.
+ */
+function childLine8z(form: FormAccessor<ScheduleCa>, info: ScheduleCaFilingInfo, noChild: string) {
+  const line8z = info.childIncomeLine8z;
+  if (line8z === undefined) return { gap: noChild };
+  if (line8z.kind === "waits") return "waits";
+  if (line8z.kind === "unsupported") return { gap: line8z.reason };
+  if (line8z.childCapitalGainDistributions && info.mustFile?.["schedule-d-ca"]?.value === true) {
+    return { gap: SCHEDULE_D_GAP };
+  }
+  if (otherLine8zItems(form, line8z.federalLine12)) return { gap: noChild };
+  return line8z;
+}
+
+/* Line 8z column B or C: the child's amount, blank while it waits, or the reason it cannot print. */
 function childColumn(pick: "subtraction" | "addition", noChild: string) {
-  return (_: unknown, info: ScheduleCaFilingInfo) => {
-    const line8z = info.childIncomeLine8z;
-    if (line8z === undefined) return unsupported(noChild);
-    if (line8z.kind === "waits") return undefined;
-    if (line8z.kind === "unsupported") return unsupported(line8z.reason);
-    if (line8z.childCapitalGainDistributions && info.mustFile?.["schedule-d-ca"]?.value === true) {
-      return unsupported(SCHEDULE_D_GAP);
-    }
+  return (form: FormAccessor<ScheduleCa>, info: ScheduleCaFilingInfo) => {
+    const line8z = childLine8z(form, info, noChild);
+    if (line8z === "waits") return undefined;
+    if ("gap" in line8z) return unsupported(line8z.gap);
     return line8z[pick];
   };
 }
@@ -64,10 +88,11 @@ const childAdjustmentPrints = (info: ScheduleCaFilingInfo) => {
 export const childIncomeBindings: Bindings = {
   "1.line.b8z_subtractions": childColumn("subtraction", LINE_8Z_SUBTRACTIONS_GAP),
   "1.line.b8z_additions": childColumn("addition", LINE_8Z_ADDITIONS_GAP),
-  "2.line.b9a_additions": (form, info) =>
-    info.childIncomeLine8z === undefined
-      ? unsupported(LINE_9A_ADDITIONS_GAP)
-      : sumOrBlank(...OTHER_INCOME_ADDITIONS.map((id) => form[id])),
+  "2.line.b9a_additions": (form, info) => {
+    const line8z = childLine8z(form, info, LINE_9A_ADDITIONS_GAP);
+    if (line8z !== "waits" && "gap" in line8z) return unsupported(LINE_9A_ADDITIONS_GAP);
+    return sumOrBlank(...OTHER_INCOME_ADDITIONS.map((id) => form[id]));
+  },
   /*
    * Column A's description copies Schedule 1 line 8z; with a child's
    * adjustment, "write 'FTB 3803' on line 8z" (::line-8-other-income::b16).

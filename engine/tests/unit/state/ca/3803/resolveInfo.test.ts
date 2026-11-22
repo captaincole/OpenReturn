@@ -178,6 +178,7 @@ describe("Schedule CA (540) line 8z (ca-3803-inst-2025::sec::line-6::b01)", () =
       kind: "figured",
       subtraction: 1600,
       childCapitalGainDistributions: false,
+      federalLine12: 1864,
     });
   });
 
@@ -186,6 +187,7 @@ describe("Schedule CA (540) line 8z (ca-3803-inst-2025::sec::line-6::b01)", () =
       kind: "figured",
       addition: 1000,
       childCapitalGainDistributions: false,
+      federalLine12: 0,
     });
   });
 
@@ -195,6 +197,7 @@ describe("Schedule CA (540) line 8z (ca-3803-inst-2025::sec::line-6::b01)", () =
       kind: "figured",
       subtraction: 2600,
       childCapitalGainDistributions: false,
+      federalLine12: 1864,
     });
   });
 
@@ -208,6 +211,7 @@ describe("Schedule CA (540) line 8z (ca-3803-inst-2025::sec::line-6::b01)", () =
       kind: "figured",
       addition: 1400,
       childCapitalGainDistributions: true,
+      federalLine12: 0,
     });
   });
 

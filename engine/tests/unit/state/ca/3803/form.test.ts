@@ -9,6 +9,7 @@ import { describe, expect, it } from "vitest";
 import {
   makeChildInvestmentIncomeFactKey,
   makeTradeFactKey,
+  OTHER_INCOME_KEYS,
 } from "../../../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../../../src/facts/rows.js";
 import { evaluateScenario, pendingInputs } from "../../../../../src/index.js";
@@ -181,5 +182,22 @@ describe("gaps and waits", () => {
     );
     expect(run.files("schedule-d-ca")).toBe(true);
     expect(run.gap("schedule-ca", "1.line.b8z_additions")).toBe(true);
+  });
+
+  it("line 8z columns B and C and line 9a column C are unsupported when Schedule 1 line 8z holds another item (::line-8-other-income::b05)", () => {
+    /* A Fire Victims Trust payment is income on line 8z and excluded in column B (::b12). */
+    const fireVictimsTrust: TaxFactRow = {
+      ...base.facts[0],
+      id: "f-other-items",
+      category: "other",
+      key: OTHER_INCOME_KEYS.otherItems,
+      value: [{ description: "Fire Victims Trust", amount: 5000 }],
+    };
+    const run = evaluate([...base.facts, fireVictimsTrust]);
+    /* Schedule 1 line 8z: 5,000 plus Form 8814 line 12. */
+    expect(ca(run, "1.line.b8z_federal")).toBeGreaterThan(5000);
+    expect(run.gap("schedule-ca", "1.line.b8z_subtractions")).toBe(true);
+    expect(run.gap("schedule-ca", "1.line.b8z_additions")).toBe(true);
+    expect(run.gap("schedule-ca", "2.line.b9a_additions")).toBe(true);
   });
 });

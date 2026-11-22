@@ -15,18 +15,18 @@ import type { ResolverInputs } from "../../../resolverInputs.js";
 import type { ChildIncomeLine8z, Form3803Child, Form3803Totals } from "./filingInfo.js";
 import { scheduleCaLine8zColumns } from "./lines.js";
 
-/* The federal Form 8814 side: line 6 added across the forms, and whether line 10 carries a capital gain. */
+/* The federal Form 8814 side: lines 6 and 12 added across the forms, and whether line 10 carries a capital gain. */
 type FederalSide =
-  | { kind: "figured"; line6: number; capitalGain: boolean }
+  | { kind: "figured"; line6: number; line12: number; capitalGain: boolean }
   | { kind: "waits" }
   | { kind: "unsupported"; reason: string };
 
 function federalSide(children: Form8814Child[]): FederalSide {
   const totals = form8814TotalsOf(children);
-  if (totals === undefined) return { kind: "figured", line6: 0, capitalGain: false };
+  if (totals === undefined) return { kind: "figured", line6: 0, line12: 0, capitalGain: false };
   if (totals.kind !== "figured") return totals;
   const line6 = sum(...children.map((child) => child.lines?.partI?.line6));
-  return { kind: "figured", line6, capitalGain: totals.line10 > 0 };
+  return { kind: "figured", line6, line12: totals.line12, capitalGain: totals.line10 > 0 };
 }
 
 /* A child's capital gain distributions reach FTB 3803 line 6 (line 3 filled and line 6 over 0). */
@@ -53,6 +53,7 @@ export function childIncomeLine8z(
       kind: "figured",
       ...scheduleCaLine8zColumns(0, federal.line6),
       childCapitalGainDistributions: federal.capitalGain,
+      federalLine12: federal.line12,
     };
   }
   if (totals === undefined || totals.kind !== "figured") return totals;
@@ -60,5 +61,6 @@ export function childIncomeLine8z(
     kind: "figured",
     ...scheduleCaLine8zColumns(totals.line6, federal.line6),
     childCapitalGainDistributions: federal.capitalGain || californiaCapitalGain(children),
+    federalLine12: federal.line12,
   };
 }

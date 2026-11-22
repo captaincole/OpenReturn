@@ -41,6 +41,8 @@ export type ChildIncomeLine8z =
       addition?: number;
       /* A child's capital gain distributions reach line 6 on either return. */
       childCapitalGainDistributions: boolean;
+      /* The Form 8814 line 12 total on Schedule 1 line 8z (0 with no Form 8814). */
+      federalLine12: number;
     }
   | { kind: "waits" }
   | { kind: "unsupported"; reason: string };
