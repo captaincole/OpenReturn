@@ -5,6 +5,7 @@ import { SSN } from "../../values.js";
 import { mortgageCreditGap } from "../8396/creditGap.js";
 import { line6cFrom8839 } from "../8839/receivers.js";
 import { creditGap, LINE_12_ID } from "../8880/credit.js";
+import { personalCredit } from "../8936/credit.js";
 import type { Schedule3FilingInfo } from "./filingInfo.js";
 import type { Schedule3 } from "./types.js";
 
@@ -42,6 +43,12 @@ export function register(): void {
        * in Form 8880 stays a gap here.
        */
       "0.line.4": (form, info) => numberOrBlank(form[LINE_12_ID]) ?? creditGap(form, info),
+      /*
+       * MANUAL EDIT: Form 8936 line 13 ("here and on Schedule 3 (Form 1040), line 6f")
+       * and line 18 ("... line 6m"); irs-1040-inst-2025::sec::line-6f::b01, line-6m::b01.
+       */
+      "0.line.6f": (form, info) => personalCredit(form, info, "III"),
+      "0.line.6m": (form, info) => personalCredit(form, info, "IV"),
       "0.line.5b": (form) => {
         const value = form["form-5695.3.line.32"];
         return typeof value === "number" ? value : undefined;
@@ -89,13 +96,11 @@ export function register(): void {
       "0.line.6a": NO_SCENARIO,
       "0.line.6b": NO_SCENARIO,
       "0.line.6e": "Reserved for future use.",
-      "0.line.6f": NO_SCENARIO,
       "0.line.6h": NO_SCENARIO,
       "0.line.6i": NO_SCENARIO,
       "0.line.6j": NO_SCENARIO,
       "0.line.6k": NO_SCENARIO,
       "0.line.6l": NO_SCENARIO,
-      "0.line.6m": NO_SCENARIO,
       "0.line.6z_description": NO_SCENARIO,
       "0.line.6z_amount": NO_SCENARIO,
       "0.line.9":
