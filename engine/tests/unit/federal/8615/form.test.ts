@@ -8,6 +8,8 @@ import { describe, expect, it } from "vitest";
 import {
   CHILD_UNEARNED_INCOME_KEYS as KEYS,
   makeDividendFactKey,
+  makeInterestFactKey,
+  makeTradeFactKey,
   makeW2FactKey,
   type DividendFactValue,
   type ParentReturnFactValue,
@@ -65,10 +67,11 @@ function evaluate(facts: Record<string, unknown> = {}, decisions: Record<string,
   return { files, field, value, pending: pendingInputs(result) };
 }
 
-/* A replaced fact keeps its category; a new one is an identity fact or a Form 8615 answer. */
+/* A replaced fact keeps its category; a new one is an identity fact, a sale, or a Form 8615 answer. */
 function categoryOf(key: string): string {
   const existing = base.facts.find((fact) => fact.key === key);
   if (existing) return existing.category;
+  if (key.startsWith("account.")) return "investment_income";
   return key.startsWith("identity.") ? "identity" : "other";
 }
 
@@ -143,6 +146,41 @@ describe("Form 8615 who files (who-must-file::b01, ::b02)", () => {
     expect(run.pending.pendingFacts).toContain(KEYS.parentReturn);
     expect(run.value(LINE("1_child_unearned_income"))).toBeUndefined();
     expect(run.value(LINE_16)).toBeUndefined();
+  });
+
+  it("asks whether someone can claim the child as a dependent and waits for it", () => {
+    const run = evaluate({ [KEYS.claimableAsDependent]: undefined });
+    expect(run.pending.pendingFacts).toContain(KEYS.claimableAsDependent);
+    expect(run.value(LINE_16)).toBeUndefined();
+  });
+
+  it("a gain from a sale, with the parent's return recorded, is taxed at the parent's rate (unearned-income::b01)", () => {
+    /*
+     * Nynaeve without her 1099s: a $12,000 long-term gain alone. The fallback does not
+     * count sales (QUESTIONS.md item 1), so the parent's return files the form. With no
+     * other child: line 3 = 12,000 − 2,700 = 9,300, all net capital gain (Worksheet #1),
+     * so line 13 = 15% × 9,300 = 1,395; line 15 is the tax on 6,950 with 2,700 of gain
+     * at 0%, 428; line 16 = 1,823 beats line 17's 428.
+     */
+    const priced = evaluate({
+      [makeInterestFactKey("inland-empire-savings")]: undefined,
+      [dividendFact.key]: undefined,
+      [makeTradeFactKey("palouse-brokerage", "t1")]: {
+        tradeId: "t1",
+        description: "100 sh PALOUSE FUND",
+        dateAcquired: "03/01/20",
+        dateSold: "06/02/25",
+        proceeds: 20_000,
+        costBasis: 8_000,
+      },
+      ...parentWith({ otherChildren: [] }),
+    });
+    expect(priced.files("form-8615")).toBe(true);
+    expect(priced.value(LINE("5_net_unearned_income"))).toBe(9_300);
+    expect(priced.value(LINE("13_child_share_parent_rate_tax"))).toBe(1_395);
+    expect(priced.value(LINE("15_tax_on_line_14"))).toBe(428);
+    expect(priced.value(LINE("17_tax_on_line_4"))).toBe(428);
+    expect(priced.value(LINE_16)).toBe(1_823);
   });
 
   it("a child who itemizes is asked for the directly connected deductions", () => {
@@ -258,6 +296,16 @@ describe("Form 8615 cases the engine does not handle", () => {
     expect(run.field(LINE("15_tax_on_line_14"))).toMatchObject(UNSUPPORTED);
     expect(run.field(LINE("17_tax_on_line_4"))).toMatchObject(UNSUPPORTED);
     expect(run.field(LINE("9_tax_on_line_8"))).toMatchObject(UNSUPPORTED);
+  });
+
+  it("a child someone can claim as a dependent: every line, and Form 1040 line 16 (who-must-file::b01)", () => {
+    // Form 1040 line 12e has no Standard Deduction Worksheet for Dependents, so line 4 would be wrong.
+    const run = evaluate({ [KEYS.claimableAsDependent]: true, [KEYS.parentReturn]: undefined });
+    expect(run.files("form-8615")).toBe(true);
+    expect(run.field(LINE("4_child_taxable_income"))).toMatchObject(UNSUPPORTED);
+    expect(run.field(LINE_16)).toMatchObject(UNSUPPORTED);
+    // The form cannot be figured, so the parent's return is not asked for.
+    expect(run.pending.pendingFacts).not.toContain(KEYS.parentReturn);
   });
 
   it("the child's Form 2555: every line", () => {

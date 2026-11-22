@@ -59,7 +59,8 @@ function meetsAgeCondition(inputs: ResolverInputs, group: AgeGroup | undefined) 
 /*
  * The least unearned income the documents show: taxable interest (1099-INT
  * boxes 1 and 3), ordinary dividends and capital gain distributions (1099-DIV
- * boxes 1a and 2a), each total rounded. A sale or another income can raise it.
+ * boxes 1a and 2a), each total rounded. A sale or another income can raise it
+ * (QUESTIONS.md item 1).
  */
 function unearnedIncomeFromDocuments(inputs: ResolverInputs): number {
   return sum(
@@ -82,6 +83,9 @@ function hasDividendsOrGains(inputs: ResolverInputs): boolean {
     inputs.trades.factKeys.length > 0
   );
 }
+
+const DEPENDENT_GAP =
+  "Someone can claim the child as a dependent, so Form 1040 line 12e needs the Standard Deduction Worksheet for Dependents (irs-1040-inst-2025::sec::line-16::b03), which the engine does not model; line 4 (Form 1040 line 15) and the tax cannot be figured. The rules apply to a dependent child too (irs-8615-inst-2025::sec::who-must-file::b01).";
 
 const SCHEDULE_D_WORKSHEET =
   "has 28% rate gain or unrecaptured section 1250 gain, so the tax is figured on the Schedule D Tax Worksheet (irs-8615-inst-2025::sec::line-9::b01), which the engine does not model.";
@@ -127,6 +131,7 @@ function requiredAnswers(inputs: ResolverInputs, group: AgeGroup | undefined) {
   const itemizes = inputs.decisionByKey.get("decisions.itemize_vs_standard") === "itemized";
   return {
     [KEYS.parentAlive]: answer(inputs, KEYS.parentAlive),
+    [KEYS.claimableAsDependent]: answer(inputs, KEYS.claimableAsDependent),
     [KEYS.parentReturn]: readParentReturnFact(inputs.facts),
     ...(group === "age_18" || group === "age_19_to_23"
       ? { [KEYS.earnedIncomeOverHalfOfSupport]: answer(inputs, KEYS.earnedIncomeOverHalfOfSupport) }
@@ -182,6 +187,9 @@ export function resolve8615Info(inputs: ResolverInputs): Form8615FilingInfo {
   });
   const filed = { mustFile: { "form-8615": resolution } };
   if (resolution.value !== true) return { ...filed, missingInputs: { "form-8615": [] } };
+  if (answer(inputs, KEYS.claimableAsDependent) === true) {
+    return { ...filed, missingInputs: { "form-8615": [] }, form8615DependentGap: DEPENDENT_GAP };
+  }
   const required = requiredAnswers(inputs, group);
   const missing = missingInputs(required);
   if (missing.length > 0 || parent === undefined) {

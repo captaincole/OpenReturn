@@ -6,8 +6,10 @@ Each item is a place where the form and its instructions do not settle a rule. I
 
 - Text: "The child had more than $2,700 of unearned income" (irs-8615-inst-2025::sec::who-must-file::b01).
 - The gap: a resolver cannot read line 1.
-- Default: the form files when the 1099-INT taxable interest, the 1099-DIV ordinary dividends and the capital gain distributions add to more than $2,700, or when Cade recorded the parent's return. A child whose unearned income comes from sales, a trust or rents, with no parent's return recorded, does not file; the explicit decision `decisions.scope.must_file_8615` still files it.
-- Changes dollars: yes, for that child (the regular tax is used).
+- Text: unearned income "includes taxable interest, dividends, capital gains (including capital gain distributions), rents, royalties, pension and annuity income, taxable scholarship and fellowship grants not reported on Form W-2, unemployment compensation" (::unearned-income::b01).
+- Default: the form files when the 1099-INT taxable interest, the 1099-DIV ordinary dividends and the capital gain distributions add to more than $2,700, or when Cade recorded the parent's return. A child whose unearned income comes from sales, unemployment, a pension, a trust, rents or a scholarship, with no parent's return recorded, does not file; the explicit decision `decisions.scope.must_file_8615` still files it.
+- Changes dollars: yes, for that child (the regular tax is used). Example: a 17-year-old with a $20,000 W-2 and a $12,000 long-term gain, parents at 15% on gains: Form 1040 line 16 is $428; with Form 8615 it is $1,823 (unit test "a gain from a sale").
+- Needs a person: counting the net 1099-B gain, 1099-G unemployment and 1099-R taxable amounts in the fallback was tried and reverted. It files Form 8615 on the alejandro scenario (a CPA answer key: age 22, W-2, stock sales, no Form 8615), which then waits on the full-time student and support answers and blanks Form 1040 line 16. Choose: add those two answers to alejandro (his values stay the same) and count the sales, or keep the fallback as it is.
 
 ## 2. Condition 2: the child must file
 
@@ -19,8 +21,8 @@ Each item is a place where the form and its instructions do not settle a rule. I
 
 - Text: "These rules apply whether or not the child is a dependent" (::who-must-file::b01).
 - The gap: Form 1040 line 12e has no Standard Deduction Worksheet for Dependents (a KNOWN GAP of Form 1040, `line.12a_you_as_dependent` is unsupported). Line 4 reads line 15, which then uses the full standard deduction.
-- Default: none on this form. The nynaeve scenario is a child nobody can claim.
-- Changes dollars: yes, for a dependent child.
+- Default: the form asks `child_unearned_income.claimable_as_dependent`. When the answer is yes, every line of Form 8615 and Form 1040 line 16 are unsupported until Form 1040 line 12e has the worksheet (irs-1040-inst-2025::sec::line-16::b03), and the parent's return is not asked for. The nynaeve scenario answers no.
+- Changes dollars: no (the lines are unsupported, not wrong). The worksheet itself is a change to Form 1040 and waits for a person.
 
 ## 4. Earned income from a business
 

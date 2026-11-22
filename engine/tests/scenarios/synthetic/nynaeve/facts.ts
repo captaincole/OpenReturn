@@ -131,6 +131,12 @@ export const nynaeveFacts: TaxFactRow[] = [
   fact("other", KEYS.parentAlive, true, "Stated by Nynaeve: both parents are living."),
   fact(
     "other",
+    KEYS.claimableAsDependent,
+    false,
+    "Stated by Nynaeve: she pays more than half of her own support, so nobody can claim her.",
+  ),
+  fact(
+    "other",
     KEYS.parentReturn,
     PARENT_RETURN,
     "Stated by her parents from their 2025 joint Form 1040 and her brother's Form 8615.",

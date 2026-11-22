@@ -86,6 +86,13 @@ export const CHILD_UNEARNED_INCOME_KEYS = {
   /* The parent's return: a ParentReturnFactValue. */
   parentReturn: "child_unearned_income.parent_return",
   /*
+   * Someone can claim the child as a dependent (boolean). The rules apply
+   * either way (::who-must-file::b01), but a dependent's standard deduction
+   * comes from the Standard Deduction Worksheet for Dependents
+   * (irs-1040-inst-2025::sec::line-16::b03), which changes line 4.
+   */
+  claimableAsDependent: "child_unearned_income.claimable_as_dependent",
+  /*
    * Line 2, for a child who itemizes: the part of Schedule A line 17 directly
    * connected with producing the unearned income on line 1 (::line-2::b01), a number.
    */

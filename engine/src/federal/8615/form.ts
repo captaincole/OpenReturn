@@ -207,7 +207,8 @@ function partIII(
 
 /*
  * The form's lines; undefined while the form does not file or an input is
- * blank; unsupported when the child files Form 2555.
+ * blank; unsupported when the child files Form 2555 or someone can claim the
+ * child as a dependent.
  */
 export function form8615Lines(
   form: Accessor,
@@ -215,6 +216,7 @@ export function form8615Lines(
 ): Form8615Lines | Unsupported | undefined {
   if (info.mustFile?.["form-8615"]?.value !== true) return undefined;
   if (info.mustFile?.["form-2555"]?.value === true) return unsupported(CHILD_FORM_2555);
+  if (info.form8615DependentGap) return unsupported(info.form8615DependentGap);
   const answers = info.form8615Answers;
   const child = childReturn(form);
   if (answers === undefined || child === undefined || info.filingStatus === undefined)

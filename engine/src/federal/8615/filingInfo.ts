@@ -23,4 +23,6 @@ export interface Form8615FilingInfo extends BaseFilingInfo {
   form8615Line9Gap?: string;
   /* A case the engine does not handle for the child's tax on lines 15 and 17. */
   form8615ChildTaxGap?: string;
+  /* Someone can claim the child as a dependent: line 4 (Form 1040 line 15) cannot be figured. */
+  form8615DependentGap?: string;
 }
