@@ -67,6 +67,10 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],
   [
+    /^employee_business_expenses\.[^.]+$/,
+    "each fact is a whole Form 2106 (one person, one occupation); whether one exists is Cade's question",
+  ],
+  [
     /^adjustments\.armed_forces_storage_fees_only$/,
     "an answer Cade records only for storage fees alone from an earlier move (Schedule 1 line 14 box)",
   ],
