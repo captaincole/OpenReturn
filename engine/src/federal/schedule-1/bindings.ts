@@ -5,6 +5,7 @@ import { roundDollars, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
 import { files8853, form8853Total } from "../8853/results.js";
 import { answerBindings } from "./answerBindings.js";
+import { line12 } from "./employeeBusinessExpenses.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
 import { line14, storageFeesOnlyBox } from "./movingExpenses.js";
 import { line21 } from "./studentLoanInterest.js";
@@ -107,6 +108,8 @@ export function register(): void {
             ),
       // MANUAL EDIT: line 11, at most $300 per eligible educator (adjustments.ts).
       "1.line.11": (_, info) => roundDollars(info.educatorExpenses),
+      // MANUAL EDIT: line 12, Form 2106 line 10's reservist, performing-artist and fee-basis parts (employeeBusinessExpenses.ts).
+      "1.line.12": line12,
       "1.line.13": (form) => sum(form["form-8889.0.line.13_hsa_deduction"]),
       // MANUAL EDIT: line 14 and its storage-fees box (movingExpenses.ts).
       "1.line.14": line14,
@@ -179,7 +182,6 @@ export function register(): void {
       "0.line.8u": "No incarcerated-wages scenario yet.",
       "0.line.8v":
         "No ingestion for digital-asset ordinary income (staking, mining, forks) yet; 1099-DA covers only dispositions.",
-      "1.line.12": "No Form 2106 (reservist/performing artist/fee-basis official) scenario yet.",
       "1.line.17": "No self-employed health insurance scenario yet.",
       "1.line.24b": "No personal-property rental scenario (line 8l) yet.",
       "1.line.24c": "No Olympic/Paralympic medal or USOC prize scenario (line 8m) yet.",

@@ -15,6 +15,7 @@ import {
   text,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { impairmentRelatedWorkExpenses } from "../2106/impairment.js";
 import { additionalSheetsGap, netQualifiedDisasterLoss } from "../4684/lines.js";
 import { resolve4684Info } from "../4684/resolveInfo.js";
 import { giftDeduction, noncashGiftsTotal } from "../8283/lines.js";
@@ -289,6 +290,9 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
     gamblingLosses: num(inputs, GAMBLING_KEYS.losses),
     otherTaxes: num(inputs, ITEMIZED_OTHER_KEYS.otherTaxes),
     otherTaxesDescription: text(inputs, ITEMIZED_OTHER_KEYS.otherTaxesDescription),
-    impairmentRelatedWorkExpenses: num(inputs, ITEMIZED_OTHER_KEYS.impairmentRelatedWorkExpenses),
+    ...impairmentRelatedWorkExpenses(
+      inputs,
+      num(inputs, ITEMIZED_OTHER_KEYS.impairmentRelatedWorkExpenses),
+    ),
   };
 }
