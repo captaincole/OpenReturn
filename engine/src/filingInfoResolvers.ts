@@ -17,6 +17,7 @@ import { figuredForm8814, form8814Totals } from "./federal/8814/totals.js";
 import { filesForm8815, savingsBondExclusionScope } from "./federal/8815/resolveInfo.js";
 import { resolve8853Info } from "./federal/8853/resolveInfo.js";
 import { SCHEDULE_2_LINES, form8853Reaches } from "./federal/8853/results.js";
+import { resolve8919Info } from "./federal/8919/resolveInfo.js";
 import { cleanVehicleSchedules } from "./federal/8936/resolveInfo.js";
 import { planForm8949Copies, totalsByBox } from "./federal/8949/copyPlan.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
@@ -322,8 +323,8 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
 }
 
 /*
- * Default: required when Schedule SE (line 4), Form 4137 (line 5), Form 8959
- * (line 11), Form 8960 (line 12), Schedule H (line 9), Form 6251 (line 2) or
+ * Default: required when Schedule SE (line 4), Form 4137 (line 5), Form 8919
+ * (line 6), Form 8959 (line 11), Form 8960 (line 12), Schedule H (line 9), Form 6251 (line 2) or
  * Form 8962 (line 1a) is filed, an early distribution owes the additional tax
  * (line 8), or Form 8853 has an additional tax for lines 17e and 17f. While
  * none is filed and one is still undecided, Schedule 2 is undecided too. KNOWN
@@ -335,6 +336,7 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
   const feeders = [
     resolveScheduleSEInfo(inputs).mustFile?.["schedule-se"]?.value,
     resolve4137Info(inputs).mustFile?.["form-4137"]?.value,
+    resolve8919Info(inputs).mustFile?.["form-8919"]?.value,
     resolve8959Info(inputs).mustFile?.["form-8959"]?.value,
     resolve8960Info(inputs).mustFile?.["form-8960"]?.value,
     resolveScheduleHInfo(inputs).mustFile?.["schedule-h"]?.value,
@@ -354,7 +356,7 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
       ? []
       : [
           {
-            rule: "fallback: Schedule SE (line 4), Form 4137 (line 5), Form 8959 (line 11), Form 8960 (line 12), Schedule H (line 9), Form 6251 (line 2), Form 8962 (line 1a), or an early distribution tax (line 8) is required, or Form 8853 has an additional tax (lines 17e and 17f), or a clean vehicle credit was transferred (lines 1b, 1c)",
+            rule: "fallback: Schedule SE (line 4), Form 4137 (line 5), Form 8919 (line 6), Form 8959 (line 11), Form 8960 (line 12), Schedule H (line 9), Form 6251 (line 2), Form 8962 (line 1a), or an early distribution tax (line 8) is required, or Form 8853 has an additional tax (lines 17e and 17f), or a clean vehicle credit was transferred (lines 1b, 1c)",
             value: required,
           },
         ],

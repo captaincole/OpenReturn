@@ -8,6 +8,7 @@
  */
 
 import { makeBusinessFactKey } from "./business.js";
+import { form1099KeysOnForm8919 } from "./uncollectedWages.js";
 
 type FactRow = { key: string; value: unknown; category: string };
 
@@ -53,11 +54,14 @@ export function getNonemployeeCompensationFacts(
 /*
  * The keys of the 1099-NECs that name no business: no businessId, or a
  * businessId with no business fact. Cade must ask which business each one
- * belongs to.
+ * belongs to. A 1099-NEC that a Form 8919 firm names is wages, not a business
+ * (irs-8919-form-2025::sec::lines-1-through-5::b02), so it is not asked.
  */
 export function unlinkedNonemployeeCompensationKeys(facts: ReadonlyArray<FactRow>): string[] {
   const factKeys = new Set(facts.map((fact) => fact.key));
+  const onForm8919 = form1099KeysOnForm8919(facts);
   return getNonemployeeCompensationFacts(facts)
+    .filter((form) => !onForm8919.has(form.key))
     .filter(
       (form) =>
         form.value.businessId === undefined ||

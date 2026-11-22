@@ -6,6 +6,7 @@ import { unsupported, type Unsupported } from "../../types.js";
 import { withLaterCopies } from "../4137/laterCopies.js";
 import { earlyDistributionTax } from "../5329/lines.js";
 import { files8853, form8853Total } from "../8853/results.js";
+import { withLaterForm8919Copies } from "../8919/laterCopies.js";
 import { totalOver } from "../8936/credit.js";
 import type { Schedule2FilingInfo } from "./filingInfo.js";
 import type { Schedule2 } from "./types.js";
@@ -83,6 +84,16 @@ export function register(): void {
       "0.line.5_ss_medicare_tax_unreported_tips": (form, info) =>
         withLaterCopies(
           form["form-4137.0.line.13_total_tax_unreported_tips"],
+          info,
+          (lines) => lines.line13,
+        ),
+      /*
+       * MANUAL EDIT: irs-1040-inst-2025::sec::line-6::b01: "Include on line 6 the
+       * amount from line 13 of Form 8919", each spouse's form. Blank when none files.
+       */
+      "0.line.6_uncollected_ss_medicare_tax_wages": (form, info) =>
+        withLaterForm8919Copies(
+          form["form-8919.0.line.13_total_uncollected_tax"],
           info,
           (lines) => lines.line13,
         ),
@@ -189,8 +200,6 @@ export function register(): void {
         "No self-employment exemption scenario (EAS/EN notary) modeled yet.",
       "0.line.4_se_tax_exemption_other_form_number":
         "No self-employment exemption scenario (EAS/EN notary) modeled yet.",
-      "0.line.6_uncollected_ss_medicare_tax_wages":
-        "Form 8919 (uncollected SS/Medicare on wages) not ingested; no misclassified-worker scenario yet.",
       "0.line.13_uncollected_ss_medicare_rrta_tax_w2":
         "W-2 box 12 codes A/B/M/N are not exposed as summable fields; no uncollected-tip-tax scenario yet",
       "0.line.14_interest_tax_installment_residential_lots":

@@ -67,6 +67,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],
   [
+    /^uncollected_wages\.[^.]+$/,
+    "each fact is a whole firm that paid wages with no social security or Medicare tax withheld " +
+      "(Form 8919 lines 1 to 5); whether one exists is Cade's question",
+  ],
+  [
     /^clean_vehicle\.[^.]+$/,
     "each fact is a whole clean vehicle placed in service (Schedule A (Form 8936)); whether one " +
       "was bought is Cade's question",
