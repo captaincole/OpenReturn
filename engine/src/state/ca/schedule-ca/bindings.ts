@@ -189,6 +189,12 @@ export function register(): void {
        */
       "2.line.c13_federal": (form) => amountIfNonzero(form["schedule-1.1.line.13"]),
       "2.line.c13_subtractions": (form) => numberOrBlank(form["2.line.c13_federal"]),
+      /*
+       * MANUAL EDIT: column A copies the federal amount, Schedule 1 line 14 (Form 3903
+       * line 5). Column C stays unsupported: it needs FTB 3913
+       * (ca-540-sched-ca-inst-2025::sec::line-11-through-line-25::b01).
+       */
+      "2.line.c14_federal": (form) => amountIfNonzero(form["schedule-1.1.line.14"]),
       "3.line.c26_federal": (form) => adjustmentsTotalFederal(form),
       "3.line.c26_subtractions": (form) =>
         sumOrBlank(...ADJUSTMENT_SUBTRACTIONS.map((id) => form[id])),
@@ -727,8 +733,6 @@ export function register(): void {
         "CA adjustment for reservist/performing artist business expenses requires FTB Pub. 1001 analysis and Schedule 1 line 12 source data — no ingestion path for either yet.",
       "2.line.c12_additions":
         "CA addition for reservist/performing artist business expenses (line 12, col C) requires FTB Pub. 1001 analysis and Schedule 1 line 12 source — no ingestion path yet.",
-      "2.line.c14_federal":
-        "Requires Schedule 1 (Form 1040) line 14 (moving expenses, military only federally) — federal Schedule 1 is not an ingested form; also no FTB 3913 ingestion path yet.",
       "2.line.c14_additions":
         "CA moving expense addition (for non-military taxpayers who can deduct under CA but not federal) requires FTB 3913 data — no FTB 3913 ingestion path exists yet.",
       "2.line.c17_federal":

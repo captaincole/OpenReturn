@@ -1,5 +1,6 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Money } from "../../money.js";
+import type { Form3903FilingInfo } from "../3903/filingInfo.js";
 import type { Form4137FilingInfo } from "../4137/filingInfo.js";
 import type { Form8814FilingInfo } from "../8814/filingInfo.js";
 import type { Schedule8812FilingInfo } from "../schedule-8812/filingInfo.js";
@@ -14,12 +15,14 @@ import type { ScheduleSEFilingInfo } from "../schedule-se/filingInfo.js";
  * (Worksheet B line 2b), Schedule E's columns (Pub. 596 Worksheet 1) and the
  * EIC answers and counts. Line 12e reads Schedule A's increased standard
  * deduction mode. Line 1c reads Form 4137's tip income.
+ * Line 1h reads Form 3903's excess reimbursement.
  * Lines 3a–3c, 7a, 7b and 16 read Form 8814's totals.
  */
 export interface Form1040FilingInfo
   extends
     BaseFilingInfo,
     EicLineSlot,
+    Pick<Form3903FilingInfo, "movingReimbursementExcess" | "movingTotalsGap">,
     Pick<Schedule8812FilingInfo, "dependents" | "w2NontaxableCombatPay">,
     Pick<ScheduleSEFilingInfo, "scheduleCNetProfit">,
     Pick<ScheduleAFilingInfo, "increasedStandardDeduction">,

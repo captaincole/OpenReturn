@@ -159,12 +159,18 @@ export function register(): void {
        * excess deferrals make it unsupported (line1hGaps.ts). Strike benefits have
        * no fact, and a retired public safety officer's premium exclusion ("PSO",
        * irs-1040-inst-2025::sec::insurance-premiums-for-retired::b03) has no answer.
+       * It also holds Form 3903 line 4 − line 3 when more than 0 (irs-3903-inst-2025::sec::line-5::b01).
        */
       "line.1h_amount": (_, info) => {
         if (info.line1hGap) return unsupported(info.line1hGap);
+        if (info.movingTotalsGap) return unsupported(info.movingTotalsGap);
         if (info.line1hWaits) return undefined;
         return roundDollars(
-          sumOrBlank(info.disabilityPensionWages, info.correctiveDistributionWages),
+          sumOrBlank(
+            info.disabilityPensionWages,
+            info.correctiveDistributionWages,
+            info.movingReimbursementExcess,
+          ),
         );
       },
       /*
