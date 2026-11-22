@@ -1,561 +1,200 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
-import { lookupTax } from "../../data/taxTable.js";
-import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
-import type { DependentCredit, DependentFactValue } from "../../facts/kinds/dependents.js";
-import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
-import { unsupported } from "../../types.js";
-import { ssn } from "../../values.js";
-import { computeQdcg } from "../../worksheets/qdcg.js";
-import { socialSecurityTaxable } from "../../worksheets/socialSecurityBenefits.js";
-import { line1fFrom8839, line30From8839, socialSecurityGapFrom8839 } from "../8839/receivers.js";
-import { PUB_590A_GAP } from "../schedule-1/pub590a.js";
-import { form1040Line7a } from "../schedule-d/lines.js";
-import { eicOutcome } from "../schedule-eic/outcome.js";
-import { awaitsSchedule1A, standardDeduction } from "./deductions.js";
+/*
+ * The Form 1040 index: one entry per field, in the order of the paper form.
+ * Each line's rule is in the section file that its import names.
+ */
+
+import { defineForm } from "../../defineForm.js";
+import {
+  line10,
+  line11a,
+  line11b,
+  line12bSpouseItemizesSeparate,
+  line12dSpouseBlind,
+  line12dSpouseBornBeforeJan2_1961,
+  line12dYouBlind,
+  line12dYouBornBeforeJan2_1961,
+  line12e,
+  line13a,
+  line13b,
+  line14,
+  line15,
+} from "./adjustmentsAndDeductions.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import {
   childDividendsIncluded,
   line16FromForm8814,
-  line16WithForm8814,
-  line3a,
   line3b,
-  line7aWithoutScheduleD,
   line7bBindings,
 } from "./form8814Lines.js";
-import { refundableCreditsFinal } from "./payments.js";
-import { qdcgInputsFromReturn } from "./qdcgInputs.js";
+import {
+  dependentRowBindings,
+  filingStatusHoh,
+  filingStatusMfj,
+  filingStatusMfs,
+  filingStatusQss,
+  filingStatusSingle,
+  headerApartment,
+  headerCity,
+  headerDigitalAssetsNo,
+  headerDigitalAssetsYes,
+  headerFirstNameMi,
+  headerHomeAddress,
+  headerLastName,
+  headerLivedApartMfsHoh,
+  headerMainHomeUsOverHalfYear,
+  headerMfsSpouseFullName,
+  headerSpouseSsn,
+  headerSsn,
+  headerState,
+  headerZip,
+  moreThanFourDependents,
+} from "./header.js";
+import {
+  line1a,
+  line1c,
+  line1e,
+  line1f,
+  line1hAmount,
+  line1z,
+  line2a,
+  line2b,
+  line3aQualifiedDividends,
+  line4a,
+  line4b,
+  line4cRollover,
+  line5a,
+  line5b,
+  line5cRollover,
+  line6a,
+  line6b,
+  line6dMfsLivedApart,
+  line7a,
+  line8,
+  line9,
+} from "./income.js";
+import {
+  line25a,
+  line25b,
+  line25c,
+  line25d,
+  line27a,
+  line27cNoEicClaim,
+  line28,
+  line30,
+  line32,
+  line33,
+  line34,
+  line35a,
+  line37,
+} from "./payments.js";
+import {
+  signingTaxpayerEmail,
+  signingTaxpayerOccupation,
+  signingTaxpayerPhone,
+} from "./signing.js";
+import {
+  line16,
+  line17,
+  line18,
+  line19,
+  line20,
+  line21,
+  line22,
+  line23,
+  line24,
+} from "./taxAndCredits.js";
 import type { Form1040 } from "./types.js";
-
-type Bindings = Partial<{ [K in keyof Form1040]: BindingFn<Form1040, Form1040FilingInfo, K> }>;
-type RowBinding = (form: FormAccessor<Form1040>, info: Form1040FilingInfo) => unknown;
-
-/* MANUAL EDIT: without Form 8839, lines 1f and 30 keep the reasons they had before it had rules. */
-const WITHOUT_8839 = {
-  line1f:
-    "Requires Form 8839 (Adoption Benefits) computation — no Form 8839 ingestion or scenario built yet.",
-  line30:
-    "Refundable adoption credit from Form 8839 line 13 — Form 8839 not ingested and no adoption expense scenario built yet.",
-} as const;
-
-const QUALIFIED_TIPS_GAP =
-  "The return has employee cash tips, and the 2025 deduction for qualified tips (Schedule 1-A Part II) is not modeled: no fact says the tips came from a listed tipped occupation.";
-
-/*
- * MANUAL EDIT: column (2) prints the SSN, else the ITIN or ATIN (the 1040
- * instructions: "You must enter each dependent's social security number").
- * Like the header SSN, the comb widget takes the nine digits.
- */
-function dependentTin(dep: DependentFactValue | undefined) {
-  const raw = dep?.ssn ?? dep?.tin;
-  return raw === undefined ? undefined : ssn(raw);
-}
-
-/*
- * MANUAL EDIT: the Dependents table, rows 1 to 4, one row per dependent fact in
- * the order recorded. Rows (5) and (7) print what Schedule 8812's resolver
- * decided for the person (the one place that applies the tax year); a box stays
- * blank while an answer is still missing. A row with no dependent stays blank.
- */
-function dependentRowBindings(): Bindings {
-  const bindings: Record<string, RowBinding> = {};
-  for (const row of [1, 2, 3, 4]) {
-    const entry = (info: Form1040FilingInfo) => info.dependents?.[row - 1];
-    const dep = (info: Form1040FilingInfo) => entry(info)?.dependent;
-    const checks = (info: Form1040FilingInfo, box: DependentCredit) => {
-      const credit = entry(info)?.credit;
-      return credit === undefined ? undefined : credit === box;
-    };
-    bindings[`dependents.dep${row}_first_name`] = (_, info) => dep(info)?.firstName;
-    bindings[`dependents.dep${row}_last_name`] = (_, info) => dep(info)?.lastName;
-    bindings[`dependents.dep${row}_ssn`] = (_, info) => dependentTin(dep(info));
-    bindings[`dependents.dep${row}_relationship`] = (_, info) => dep(info)?.relationship;
-    bindings[`dependents.dep${row}_lived_with_you`] = (_, info) =>
-      entry(info)?.livedWithYouOverHalfYear;
-    bindings[`dependents.dep${row}_lived_in_us`] = (_, info) => entry(info)?.livedWithYouInUs;
-    bindings[`dependents.dep${row}_full_time_student`] = (_, info) => dep(info)?.fullTimeStudent;
-    bindings[`dependents.dep${row}_permanently_disabled`] = (_, info) =>
-      dep(info)?.permanentlyDisabled;
-    bindings[`dependents.dep${row}_child_tax_credit`] = (_, info) =>
-      checks(info, "child_tax_credit");
-    bindings[`dependents.dep${row}_other_dependent_credit`] = (_, info) =>
-      checks(info, "other_dependents");
-  }
-  return bindings as Bindings;
-}
-
-/*
- * MANUAL EDIT: line 4b adds the Form 8606 filer's line 18, and line 15c when
- * Part I applies (Part III, line 25c, is not modeled).
- */
-function line4b(form: FormAccessor<Form1040>, info: Form1040FilingInfo) {
-  const ira = info.iraDistributions;
-  if (ira?.taxable === undefined) return undefined;
-  if (ira.form8606Filers === 0) return roundDollars(ira.taxable);
-  // Only the first Form 8606 copy is evaluated, so two filers leave line 4b blank.
-  if (ira.form8606Filers > 1) return undefined;
-  if (ira.form8606PartI && ira.form8606Line1Gap) return unsupported(ira.form8606Line1Gap);
-  const line15c = form["form-8606.1.line.15c_taxable_traditional_distributions"];
-  const line16 = form["form-8606.1.line.16_net_amount_converted"];
-  const line18 = form["form-8606.1.line.18_taxable_conversion_amount"];
-  if (ira.form8606PartI && typeof line15c !== "number") return undefined;
-  if (typeof line16 === "number" && typeof line18 !== "number") return undefined;
-  // 8606 inst. line 18: zero or less is not included on line 4b.
-  const fromPartI = ira.form8606PartI ? line15c : 0;
-  return roundDollars(sum(ira.taxable, fromPartI, atLeast(0, line18 ?? 0)));
-}
 
 export function register(): void {
   defineForm<Form1040, Form1040FilingInfo>("form-1040", {
     bindings: {
-      /*
-       * MANUAL EDIT: this box is on every return, not only nonresident ones.
-       * Every modeled scenario is a full-year US resident.
-       */
-      "header.main_home_us_over_half_year": (_, info) => (info.homeAddressState ? true : undefined),
-      // MANUAL EDIT: mandatory for every filer. Undefined fills neither box, so the gap shows.
-      "header.digital_assets_yes": (_, info) => (info.hasDigitalAssets === true ? true : undefined),
-      "header.digital_assets_no": (_, info) => (info.hasDigitalAssets === false ? true : undefined),
-      // No middle-initial fact; the first name fills this combined field.
-      "header.first_name_mi": (_, info) => info.taxpayerFirstName,
-      "header.last_name": (_, info) => info.taxpayerLastName,
-      "header.ssn": (_, info) => info.taxpayerSSN,
-      "header.home_address": (_, info) => info.homeAddressLine1,
-      "header.apartment": (_, info) => info.homeAddressApt,
-      "header.city": (_, info) => info.homeAddressCity,
-      "header.state": (_, info) => info.homeAddressState,
-      "header.zip": (_, info) => info.homeAddressZip,
-      "header.filing_status_single": (_, info) => info.filingStatus === "single",
-      "header.filing_status_hoh": (_, info) => info.filingStatus === "head_of_household",
-      "header.filing_status_mfj": (_, info) => info.filingStatus === "married_filing_jointly",
-      "header.filing_status_qss": (_, info) => info.filingStatus === "qualifying_surviving_spouse",
-      "header.filing_status_mfs": (_, info) => info.filingStatus === "married_filing_separately",
-      // MANUAL EDIT: MFS names the spouse. The MFJ spouse name fields are not modeled.
-      "header.spouse_ssn": (_, info) =>
-        info.filingStatus === "married_filing_separately" ||
-        info.filingStatus === "married_filing_jointly"
-          ? info.spouseSSN
-          : undefined,
-      "header.mfs_spouse_full_name": (_, info) =>
-        info.filingStatus === "married_filing_separately" &&
-        info.spouseFirstName &&
-        info.spouseLastName
-          ? `${info.spouseFirstName} ${info.spouseLastName}`
-          : undefined,
-      /*
-       * MANUAL EDIT: the form's text: MFS or HOH, and lived apart the last 6 months
-       * (living apart all year covers it) or legally separated and apart at year end
-       * (irs-1040-inst-2025::sec::definitions-and-special-rules-2::b08).
-       */
-      "header.lived_apart_mfs_hoh": (_, info) =>
-        (info.filingStatus === "married_filing_separately" ||
-          info.filingStatus === "head_of_household") &&
-        (info.livedApartFromSpouseAllYear === true ||
-          info.livedApartFromSpouseLastSixMonths === true ||
-          info.legallySeparatedApartAtYearEnd === true)
-          ? true
-          : undefined,
+      "header.first_name_mi": headerFirstNameMi,
+      "header.last_name": headerLastName,
+      "header.ssn": headerSsn,
+      "header.spouse_ssn": headerSpouseSsn,
+      "header.home_address": headerHomeAddress,
+      "header.apartment": headerApartment,
+      "header.main_home_us_over_half_year": headerMainHomeUsOverHalfYear,
+      "header.city": headerCity,
+      "header.state": headerState,
+      "header.zip": headerZip,
+      "header.filing_status_single": filingStatusSingle,
+      "header.filing_status_hoh": filingStatusHoh,
+      "header.filing_status_mfj": filingStatusMfj,
+      "header.filing_status_qss": filingStatusQss,
+      "header.filing_status_mfs": filingStatusMfs,
+      "header.mfs_spouse_full_name": headerMfsSpouseFullName,
+      "header.digital_assets_yes": headerDigitalAssetsYes,
+      "header.digital_assets_no": headerDigitalAssetsNo,
       ...dependentRowBindings(),
-      // The attached statement for the fifth dependent onward is not modeled.
-      "dependents.more_than_four_dependents": (_, info) =>
-        info.dependents === undefined ? undefined : info.dependents.length > 4,
-      // MANUAL EDIT: document sums (1a, 2a–3b, 25a) round to the nearest dollar.
-      "line.1a": (_, info) => roundDollars(info.w2WagesTotal),
-      /*
-       * MANUAL EDIT: line 1h holds the taxable amount of the disability pensions
-       * received before the minimum retirement age (irs-1040-inst-2025::sec::line-1h::b02)
-       * and of corrective distributions (code 8, ::line-1h::b03). Code P or B and
-       * excess deferrals make it unsupported (line1hGaps.ts). Strike benefits have
-       * no fact, and a retired public safety officer's premium exclusion ("PSO",
-       * irs-1040-inst-2025::sec::insurance-premiums-for-retired::b03) has no answer.
-       * It also holds Form 3903 line 4 − line 3 when more than 0 (irs-3903-inst-2025::sec::line-5::b01).
-       */
-      "line.1h_amount": (_, info) => {
-        if (info.line1hGap) return unsupported(info.line1hGap);
-        if (info.movingTotalsGap) return unsupported(info.movingTotalsGap);
-        if (info.line1hWaits) return undefined;
-        return roundDollars(
-          sumOrBlank(
-            info.disabilityPensionWages,
-            info.correctiveDistributionWages,
-            info.movingReimbursementExcess,
-          ),
-        );
-      },
-      /*
-       * MANUAL EDIT: "If line 26 is more than zero, you have taxable dependent
-       * care benefits. Enter this amount on Form 1040 ... line 1e"
-       * (irs-2441-inst-2025::sec::line-26::b01).
-       */
-      "line.1e": (form) => {
-        const line26 = numberOrBlank(form["form-2441.1.line.26_taxable_benefits"]);
-        return line26 !== undefined && line26 > 0 ? line26 : undefined;
-      },
-      // MANUAL EDIT: Form 8839 line 31 (irs-1040-inst-2025::sec::line-1f::b01); negative on its Yes box.
-      "line.1f": (form, info) => {
-        const received = line1fFrom8839(form, info);
-        return received === undefined ? unsupported(WITHOUT_8839.line1f) : received.value;
-      },
-      /*
-       * MANUAL EDIT: irs-1040-inst-2025::sec::line-1c::b01: tips not reported to the
-       * employer, with W-2 box 8 allocated tips, and noncash tips (4137/lines.ts).
-       * With one Form 4137 it equals that form's line 4 plus noncash tips.
-       */
-      "line.1c": (_, info) => info.tipIncomeNotOnLine1a,
-      "line.1z": (form) =>
-        sum(
-          form["line.1a"],
-          form["line.1b"],
-          form["line.1c"],
-          form["line.1d"],
-          form["line.1e"],
-          form["line.1f"],
-          form["line.1g"],
-          form["line.1h_amount"],
-        ),
-      // MANUAL EDIT: 1099-INT box 8 sum.
-      "line.2a": (_, info) => roundDollars(info.taxExemptInterestTotal),
-      /*
-       * MANUAL EDIT: with Schedule B filed, lines 2b and 3b copy its lines 4
-       * and 6, so its rounding choice carries through.
-       */
-      "line.2b": (form, info) =>
-        numberOrBlank(form["schedule-b.0.line.4_taxable_interest"]) ??
-        roundDollars(info.taxableInterestTotal),
-      // MANUAL EDIT: lines 3a–3c, 7a, 7b and 16 take Form 8814 amounts (form8814Lines.ts).
-      "line.3a": (_, info) => line3a(info),
+      "dependents.more_than_four_dependents": moreThanFourDependents,
+      "header.lived_apart_mfs_hoh": headerLivedApartMfsHoh,
+      "line.1a": line1a,
+      "line.1c": line1c,
+      "line.1e": line1e,
+      "line.1f": line1f,
+      "line.1h_amount": line1hAmount,
+      "line.1z": line1z,
+      "line.2a": line2a,
+      "line.2b": line2b,
+      "line.3a": line3aQualifiedDividends,
       "line.3b": line3b,
       "line.3c_box1": childDividendsIncluded,
       "line.3c_box2": childDividendsIncluded,
-      // MANUAL EDIT: lines 4a–5c from 1099-R facts.
-      "line.4a": (_, info) => roundDollars(info.iraDistributions?.gross),
+      "line.4a": line4a,
       "line.4b": line4b,
-      "line.4c_rollover": (_, info) => (info.iraDistributions?.rollover ? true : undefined),
-      "line.5a": (_, info) => roundDollars(info.pensionDistributions?.gross),
-      "line.5b": (_, info) => roundDollars(info.pensionDistributions?.taxable),
-      "line.5c_rollover": (_, info) => (info.pensionDistributions?.rollover ? true : undefined),
-      // MANUAL EDIT: for MFS, line 6b waits for the lived-apart answer; it picks the worksheet base.
-      "line.6a": (_, info) => roundDollars(info.socialSecurityBenefits),
-      "line.6b": (form, info) => {
-        // MANUAL EDIT: Pub. 590-A's worksheets figure 6b with an IRA contribution (schedule-1/pub590a.ts).
-        if (info.socialSecurityBenefits !== undefined && info.pub590aWorksheets)
-          return unsupported(PUB_590A_GAP);
-        // MANUAL EDIT: an adoption benefit exclusion takes the Pub. 915 worksheet (use-the-social-security-benefits::b01).
-        const adoptionGap = socialSecurityGapFrom8839(info);
-        if (adoptionGap) return adoptionGap;
-        const benefits = info.socialSecurityBenefits;
-        if (benefits === undefined || !info.filingStatus) return undefined;
-        const mfs = info.filingStatus === "married_filing_separately";
-        if (mfs && info.livedApartFromSpouseAllYear === undefined) return undefined;
-        return socialSecurityTaxable({
-          benefits,
-          otherIncome: sum(
-            form["line.1z"],
-            /*
-             * MANUAL EDIT: with Form 8815, Pub. 915 Worksheet 1 line 3 takes Schedule B
-             * line 2, not line 2b (irs-pub-915-2025::sec::repayments-more-than-gross::b04).
-             */
-            info.mustFile?.["form-8815"]?.value === true
-              ? form["schedule-b.0.line.2_total_interest"]
-              : form["line.2b"],
-            form["line.3b"],
-            form["line.4b"],
-            form["line.5b"],
-            form["line.7a"],
-            form["line.8"],
-          ),
-          taxExemptInterest: sum(form["line.2a"]),
-          adjustments: sum(
-            form["schedule-1.1.line.11"],
-            form["schedule-1.1.line.12"],
-            form["schedule-1.1.line.13"],
-            form["schedule-1.1.line.14"],
-            form["schedule-1.1.line.15"],
-            form["schedule-1.1.line.16"],
-            form["schedule-1.1.line.17"],
-            form["schedule-1.1.line.18"],
-            form["schedule-1.1.line.19a"],
-            form["schedule-1.1.line.20"],
-            form["schedule-1.1.line.23"],
-            form["schedule-1.1.line.25"],
-          ),
-          filingStatus: info.filingStatus,
-          livedApartAllYear: info.livedApartFromSpouseAllYear,
-        }).taxable;
-      },
-      "line.6d_mfs_lived_apart": (_, info) =>
-        info.socialSecurityBenefits !== undefined &&
-        info.filingStatus === "married_filing_separately" &&
-        info.livedApartFromSpouseAllYear === true
-          ? true
-          : undefined,
-      // MANUAL EDIT: line 7a = Schedule D line 16, or line 21 if line 16 is a loss.
-      "line.7a": (form, info) => {
-        const value = form["schedule-d.1.line.16_combined_gain_loss"];
-        if (typeof value === "number") {
-          const l21 = form["schedule-d.1.line.21_allowable_loss"];
-          return form1040Line7a(value, typeof l21 === "number" ? l21 : undefined);
-        }
-        // MANUAL EDIT: Exception 1 — capital gain distributions only, no Schedule D.
-        return line7aWithoutScheduleD(info);
-      },
+      "line.4c_rollover": line4cRollover,
+      "line.5a": line5a,
+      "line.5b": line5b,
+      "line.5c_rollover": line5cRollover,
+      "line.6a": line6a,
+      "line.6b": line6b,
+      "line.6d_mfs_lived_apart": line6dMfsLivedApart,
+      "line.7a": line7a,
       ...line7bBindings,
-      /*
-       * MANUAL EDIT: irs-1040-inst-2025::sec::instructions-for-schedule-1::b01. Line 8
-       * is Schedule 1 line 10. While Schedule 1 is filed and line 10 is blank, line 9
-       * waits: sum() would add 0 and give a total that looks complete.
-       */
-      "line.9": (form, info) =>
-        info.mustFile?.["schedule-1"]?.value === true && form["line.8"] === undefined
-          ? undefined
-          : sum(
-              form["line.1z"],
-              form["line.2b"],
-              form["line.3b"],
-              form["line.4b"],
-              form["line.5b"],
-              form["line.6b"],
-              form["line.7a"],
-              form["line.8"],
-            ),
-      // MANUAL EDIT: blank while line 9 is blank; sum() would leave only -line 10.
-      "line.11a": (form) =>
-        form["line.9"] === undefined
-          ? undefined
-          : sum(form["line.9"], form["line.10"] === undefined ? 0 : -form["line.10"]),
-      // MANUAL EDIT: a copy of line 11a, blank while it is blank.
-      "line.11b": (form) => form["line.11a"],
-      /*
-       * MANUAL EDIT: line 12e is the standard deduction, Schedule A line 17, or
-       * the increased standard deduction on Schedule A line 16.
-       * The worksheet for a filer someone can claim as a dependent is not modeled.
-       */
-      "line.12d_you_born_before_jan2_1961": (_, info) =>
-        info.taxpayerBornBeforeJan2_1961 === true ? true : undefined,
-      /*
-       * MANUAL EDIT: joint returns only. The MFS case (spouse had no income,
-       * files no return) and a spouse's 2025 death are not modeled.
-       */
-      "line.12d_spouse_born_before_jan2_1961": (_, info) =>
-        info.filingStatus === "married_filing_jointly" && info.spouseBornBeforeJan2_1961 === true
-          ? true
-          : undefined,
-      /*
-       * MANUAL EDIT: "were blind at the end of 2025, check the appropriate box(es)
-       * on line 12d" (irs-1040-inst-2025::sec::line-12d::b01). The spouse box is
-       * for a joint return only, as for the age box.
-       */
-      "line.12d_you_blind": (_, info) => (info.taxpayerBlind ? true : undefined),
-      "line.12d_spouse_blind": (_, info) =>
-        info.filingStatus === "married_filing_jointly" && info.spouseBlind ? true : undefined,
-      "line.12b_spouse_itemizes_separate": (_, info) =>
-        info.filingStatus === "married_filing_separately" && info.spouseItemizesSeparately === true
-          ? true
-          : undefined,
-      "line.12e": (form, info) => {
-        if (info.useItemizedDeductions === true) {
-          const itemized = form["schedule-a.0.line.17_total_itemized_deductions"];
-          return typeof itemized === "number" ? itemized : undefined;
-        }
-        // MANUAL EDIT: Exception 5 (irs-1040-inst-2025::sec::line-12c-2::b01): Schedule A line 16.
-        if (info.increasedStandardDeduction !== false) {
-          return numberOrBlank(form["schedule-a.0.line.16_other_itemized_deductions_amount"]);
-        }
-        return standardDeduction(info);
-      },
-      /*
-       * Blank when 12e is blank: sum() would count it as 0 and overstate
-       * taxable income. Also blank while Schedule 1-A is filed but 13b is blank,
-       * and while Form 8995 or 8995-A is filed but 13a (its line 15 or 39) is blank
-       * (irs-1040-inst-2025::sec::line-13a::b01, irs-8995-inst-2025::sec::line-15::b01,
-       * irs-8995a-inst-2025::sec::line-39::b01).
-       */
-      "line.14": (form, info) => {
-        const filesQbiForm =
-          info.mustFile?.["form-8995"]?.value === true ||
-          info.mustFile?.["form-8995-a"]?.value === true;
-        if (
-          form["line.12e"] === undefined ||
-          awaitsSchedule1A(info, form["line.13b"]) ||
-          (filesQbiForm && form["line.13a"] === undefined)
-        ) {
-          return undefined;
-        }
-        return sum(form["line.12e"], form["line.13a"], form["line.13b"]);
-      },
-      /*
-       * Blank when line 14 is blank: sum() would read it as 0 and tax all of 11b.
-       * MANUAL EDIT: also blank when 11b is blank; sum() would give 0 taxable income.
-       */
-      "line.15": (form) =>
-        form["line.11b"] === undefined || form["line.14"] === undefined
-          ? undefined
-          : atLeast(0, sum(form["line.11b"], -form["line.14"])),
-      /*
-       * MANUAL EDIT: line 16 always uses the QDCG worksheet. With no
-       * preferential income it gives the tax-table answer; one code path.
-       */
-      "line.16": (form, info) => {
-        if (!info.filingStatus) return undefined;
-        const taxable = form["line.15"];
-        if (typeof taxable !== "number") return undefined;
-
-        try {
-          const qdcg = computeQdcg(
-            qdcgInputsFromReturn(
-              form,
-              taxable,
-              // MANUAL EDIT: worksheet line 2 = 1040 line 3a as entered (a rounded document sum).
-              numberOrBlank(line3a(info)) ?? 0,
-              info.filingStatus,
-            ),
-          );
-          return line16WithForm8814(info, qdcg.tax);
-        } catch {
-          // Unknown filing status or missing table data: use the plain tax table.
-          const lookup = lookupTax("federal-2025", taxable, info.filingStatus);
-          return line16WithForm8814(info, lookup.ok ? lookup.tax : undefined);
-        }
-      },
+      "line.8": line8,
+      "line.9": line9,
+      "line.10": line10,
+      "line.11a": line11a,
+      "line.11b": line11b,
+      "line.12b_spouse_itemizes_separate": line12bSpouseItemizesSeparate,
+      "line.12d_you_born_before_jan2_1961": line12dYouBornBeforeJan2_1961,
+      "line.12d_you_blind": line12dYouBlind,
+      "line.12d_spouse_born_before_jan2_1961": line12dSpouseBornBeforeJan2_1961,
+      "line.12d_spouse_blind": line12dSpouseBlind,
+      "line.12e": line12e,
+      "line.13a": line13a,
+      "line.13b": line13b,
+      "line.14": line14,
+      "line.15": line15,
       "line.16_from_form_8814": line16FromForm8814,
-      // MANUAL EDIT: line 8 = Schedule 1 line 10; blank when Schedule 1 is not filed.
-      "line.8": (form) => {
-        const value = form["schedule-1.0.line.10"];
-        return typeof value === "number" ? value : undefined;
-      },
-      // MANUAL EDIT: line 10 = Schedule 1 line 26; blank when Schedule 1 is not filed.
-      "line.10": (form) => {
-        const value = form["schedule-1.1.line.26"];
-        return typeof value === "number" ? value : undefined;
-      },
-      // MANUAL EDIT: line 13a = Form 8995 line 15 or Form 8995-A line 39; at most one files (whichForm.ts).
-      "line.13a": (form) => {
-        const value = form["form-8995.0.line.15"] ?? form["form-8995-a.1.line.39"];
-        return typeof value === "number" ? value : undefined;
-      },
-      /*
-       * MANUAL EDIT: line 13b = Schedule 1-A line 38; blank when Schedule 1-A is not filed.
-       * Employee cash tips may be qualified tips (irs-1040-inst-2025::sec::part-ii::b01),
-       * and Part II is not modeled, so the line shows the gap. A married filer
-       * must file jointly to claim it, so a separate return has no gap.
-       */
-      "line.13b": (form, info) => {
-        if (info.employeeCashTips && info.filingStatus !== "married_filing_separately") {
-          return unsupported(QUALIFIED_TIPS_GAP);
-        }
-        const value = form["schedule-1-a.1.line.38_total_additional_deductions"];
-        return typeof value === "number" ? value : undefined;
-      },
-      // MANUAL EDIT: line 17 = Schedule 2 line 3 (AMT + excess APTC); blank when Schedule 2 is not filed.
-      "line.17": (form) => {
-        const value = form["schedule-2.0.line.3_total_lines_1z_and_2"];
-        return typeof value === "number" ? value : undefined;
-      },
-      // MANUAL EDIT: line 19 = Schedule 8812 line 14; blank when Schedule 8812 is not filed.
-      "line.19": (form) => {
-        const value = form["schedule-8812.0.line.14_child_tax_credit_and_other_dependents"];
-        return typeof value === "number" ? value : undefined;
-      },
-      "line.20": (form) => {
-        const value = form["schedule-3.0.line.8"];
-        return typeof value === "number" ? value : undefined;
-      },
-      "line.21": (form) =>
-        form["line.19"] === undefined && form["line.20"] === undefined
-          ? undefined
-          : sum(form["line.19"], form["line.20"]),
-      "line.18": (form) =>
-        form["line.16"] === undefined ? undefined : sum(form["line.16"], form["line.17"]),
-      // MANUAL EDIT: line 23 = Schedule 2 line 21 (other taxes); blank when Schedule 2 is not filed.
-      "line.23": (form) => {
-        const value = form["schedule-2.1.line.21_total_other_taxes"];
-        return typeof value === "number" ? value : undefined;
-      },
-      "line.22": (form) =>
-        form["line.18"] === undefined
-          ? undefined
-          : atLeast(0, sum(form["line.18"], form["line.21"] === undefined ? 0 : -form["line.21"])),
-      /*
-       * Blank when Schedule H line 9 is Yes: Schedule 2 line 21 is blank then
-       * (FUTA tax not modeled), and sum() would count it as 0.
-       */
-      "line.24": (form) =>
-        form["line.22"] === undefined || form["schedule-h.0.line.9_yes"] === true
-          ? undefined
-          : sum(form["line.22"], form["line.23"]),
-      "line.25a": (_, info) => roundDollars(info.w2FederalWithholding),
-      /*
-       * MANUAL EDIT: line 25c = W-2G box 4 (rounded sum) + Form 8959 line 24; blank
-       * when neither has an amount (irs-1040-inst-2025::sec::line-25c-other-forms::b01).
-       * Schedule K-1, 1042-S, 8805 and 8288-A withholding is not modeled: no facts.
-       */
-      "line.25c": (form, info) => {
-        const medicare = form["form-8959.0.line.24_total_additional_medicare_tax_withholding"];
-        const w2g = roundDollars(info.w2gFederalWithholding);
-        return typeof medicare !== "number" && w2g === undefined ? undefined : sum(medicare, w2g);
-      },
-      "line.25d": (form) => sum(form["line.25a"], form["line.25b"], form["line.25c"]),
-      // MANUAL EDIT: 1099 box 4 and SSA-1099 box 6; blank when nothing was withheld.
-      "line.25b": (_, info) => roundDollars(info.form1099FederalWithholding),
-      // MANUAL EDIT: line 27a's steps (schedule-eic/outcome.ts); blank when there is no credit.
-      "line.27a": (form, info) => {
-        const outcome = eicOutcome(form, info);
-        if (outcome.kind === "unsupported") return unsupported(outcome.reason);
-        return outcome.kind === "credit" ? outcome.amount : undefined;
-      },
-      // MANUAL EDIT: checked where the line 27a steps say to; the opt-out has no fact.
-      "line.27c_no_eic_claim": (form, info) => {
-        const outcome = eicOutcome(form, info);
-        if (outcome.kind === "unsupported") return unsupported(outcome.reason);
-        return outcome.kind === "none" && outcome.checkLine27c ? true : undefined;
-      },
-      // MANUAL EDIT: line 28 = Schedule 8812 line 27; blank when Schedule 8812 is not filed.
-      "line.28": (form) =>
-        numberOrBlank(form["schedule-8812.1.line.27_additional_child_tax_credit"]),
-      // MANUAL EDIT: line 30 = Form 8839 line 13, the refundable adoption credit.
-      "line.30": (form, info) => {
-        const received = line30From8839(form, info);
-        return received === undefined ? unsupported(WITHOUT_8839.line30) : received.value;
-      },
-      /*
-       * MANUAL EDIT: lines 29 and 31 are not modeled (line 30 reads Form 8839); blank when every line is blank.
-       * Waits while line 27a or 28 can still change (payments.ts).
-       */
-      "line.32": (form, info) => {
-        const final = refundableCreditsFinal(form, info);
-        if (final !== true) return final;
-        return sumOrBlank(
-          form["line.27a"],
-          form["line.28"],
-          form["line.29"],
-          form["line.30"],
-          form["line.31"],
-        );
-      },
-      // MANUAL EDIT: a blank line 32 counts as 0 only when it is final.
-      "line.33": (form, info) =>
-        refundableCreditsFinal(form, info) === true
-          ? sum(form["line.25d"], form["line.26"], form["line.32"])
-          : undefined,
-      // MANUAL EDIT: line 34 (overpaid) only when line 33 exceeds line 24; blank otherwise.
-      "line.34": (form) => {
-        const paid = form["line.33"];
-        const tax = form["line.24"];
-        if (typeof paid !== "number" || typeof tax !== "number") return undefined;
-        return paid > tax ? paid - tax : undefined;
-      },
-      // MANUAL EDIT: line 37 includes the line 38 penalty (not modeled).
-      "line.37": (form) => {
-        const paid = form["line.33"];
-        const tax = form["line.24"];
-        if (typeof paid !== "number" || typeof tax !== "number") return undefined;
-        return tax > paid ? tax - paid + sum(form["line.38"]) : undefined;
-      },
-      // MANUAL EDIT: line 35a = line 34 only when the full overpayment is refunded.
-      "line.35a": (form, info) => (info.refundFullOverpaymentFederal ? form["line.34"] : undefined),
-      "signing.taxpayer_occupation": (_, info) => info.taxpayerOccupation,
-      "signing.taxpayer_phone": (_, info) => info.taxpayerPhone,
-      "signing.taxpayer_email": (_, info) => info.taxpayerEmail,
+      "line.16": line16,
+      "line.17": line17,
+      "line.18": line18,
+      "line.19": line19,
+      "line.20": line20,
+      "line.21": line21,
+      "line.22": line22,
+      "line.23": line23,
+      "line.24": line24,
+      "line.25a": line25a,
+      "line.25b": line25b,
+      "line.25c": line25c,
+      "line.25d": line25d,
+      "line.27a": line27a,
+      "line.27c_no_eic_claim": line27cNoEicClaim,
+      "line.28": line28,
+      "line.30": line30,
+      "line.32": line32,
+      "line.33": line33,
+      "line.34": line34,
+      "line.35a": line35a,
+      "line.37": line37,
+      "signing.taxpayer_occupation": signingTaxpayerOccupation,
+      "signing.taxpayer_phone": signingTaxpayerPhone,
+      "signing.taxpayer_email": signingTaxpayerEmail,
     },
 
     unsupported: {

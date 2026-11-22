@@ -1,9 +1,14 @@
 import type { FormAccessor } from "../../defineForm.js";
+import { numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
+import { line30From8839 } from "../8839/receivers.js";
 import { schedule8812Line18aGap } from "../schedule-8812/earnedIncomeGap.js";
 import { eicOutcome } from "../schedule-eic/outcome.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import type { Form1040 } from "./types.js";
+import { WITHOUT_8839 } from "./withoutForm8839.js";
+
+type Form = FormAccessor<Form1040>;
 
 /*
  * MANUAL EDIT: Schedule 8812 Part II (irs-1040s8-inst-2025::sec::part-ii-a-additional-child-tax-credit::b01)
@@ -42,4 +47,90 @@ export function refundableCreditsFinal(
   const line18aGap = schedule8812Line18aGap(form, info);
   if (line18aGap !== undefined) return unsupported(line18aGap);
   return partIIMayOpen(form, info) ? undefined : true;
+}
+
+export const line25a = (_: unknown, info: Form1040FilingInfo) =>
+  roundDollars(info.w2FederalWithholding);
+
+// MANUAL EDIT: 1099 box 4 and SSA-1099 box 6; blank when nothing was withheld.
+export const line25b = (_: unknown, info: Form1040FilingInfo) =>
+  roundDollars(info.form1099FederalWithholding);
+
+/*
+ * MANUAL EDIT: line 25c = W-2G box 4 (rounded sum) + Form 8959 line 24; blank
+ * when neither has an amount (irs-1040-inst-2025::sec::line-25c-other-forms::b01).
+ * Schedule K-1, 1042-S, 8805 and 8288-A withholding is not modeled: no facts.
+ */
+export function line25c(form: Form, info: Form1040FilingInfo) {
+  const medicare = form["form-8959.0.line.24_total_additional_medicare_tax_withholding"];
+  const w2g = roundDollars(info.w2gFederalWithholding);
+  return typeof medicare !== "number" && w2g === undefined ? undefined : sum(medicare, w2g);
+}
+
+export const line25d = (form: Form) => sum(form["line.25a"], form["line.25b"], form["line.25c"]);
+
+// MANUAL EDIT: line 27a's steps (schedule-eic/outcome.ts); blank when there is no credit.
+export function line27a(form: Form, info: Form1040FilingInfo) {
+  const outcome = eicOutcome(form, info);
+  if (outcome.kind === "unsupported") return unsupported(outcome.reason);
+  return outcome.kind === "credit" ? outcome.amount : undefined;
+}
+
+// MANUAL EDIT: checked where the line 27a steps say to; the opt-out has no fact.
+export function line27cNoEicClaim(form: Form, info: Form1040FilingInfo) {
+  const outcome = eicOutcome(form, info);
+  if (outcome.kind === "unsupported") return unsupported(outcome.reason);
+  return outcome.kind === "none" && outcome.checkLine27c ? true : undefined;
+}
+
+// MANUAL EDIT: line 28 = Schedule 8812 line 27; blank when Schedule 8812 is not filed.
+export const line28 = (form: Form) =>
+  numberOrBlank(form["schedule-8812.1.line.27_additional_child_tax_credit"]);
+
+// MANUAL EDIT: line 30 = Form 8839 line 13, the refundable adoption credit.
+export function line30(form: Form, info: Form1040FilingInfo) {
+  const received = line30From8839(form, info);
+  return received === undefined ? unsupported(WITHOUT_8839.line30) : received.value;
+}
+
+/*
+ * MANUAL EDIT: lines 29 and 31 are not modeled (line 30 reads Form 8839); blank when every line is blank.
+ * Waits while line 27a or 28 can still change (payments.ts).
+ */
+export function line32(form: Form, info: Form1040FilingInfo) {
+  const final = refundableCreditsFinal(form, info);
+  if (final !== true) return final;
+  return sumOrBlank(
+    form["line.27a"],
+    form["line.28"],
+    form["line.29"],
+    form["line.30"],
+    form["line.31"],
+  );
+}
+
+// MANUAL EDIT: a blank line 32 counts as 0 only when it is final.
+export const line33 = (form: Form, info: Form1040FilingInfo) =>
+  refundableCreditsFinal(form, info) === true
+    ? sum(form["line.25d"], form["line.26"], form["line.32"])
+    : undefined;
+
+// MANUAL EDIT: line 34 (overpaid) only when line 33 exceeds line 24; blank otherwise.
+export function line34(form: Form) {
+  const paid = form["line.33"];
+  const tax = form["line.24"];
+  if (typeof paid !== "number" || typeof tax !== "number") return undefined;
+  return paid > tax ? paid - tax : undefined;
+}
+
+// MANUAL EDIT: line 35a = line 34 only when the full overpayment is refunded.
+export const line35a = (form: Form, info: Form1040FilingInfo) =>
+  info.refundFullOverpaymentFederal ? form["line.34"] : undefined;
+
+// MANUAL EDIT: line 37 includes the line 38 penalty (not modeled).
+export function line37(form: Form) {
+  const paid = form["line.33"];
+  const tax = form["line.24"];
+  if (typeof paid !== "number" || typeof tax !== "number") return undefined;
+  return tax > paid ? tax - paid + sum(form["line.38"]) : undefined;
 }
