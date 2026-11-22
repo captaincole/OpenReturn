@@ -148,8 +148,11 @@ export function register(): void {
         if (line5e === undefined && six === undefined) return undefined;
         return sum(line5e, six);
       },
-      // MANUAL EDIT: routed to a FilingInfo slot. Only one 1098 is supported.
-      "0.line.8a_mortgage_interest_form1098": (_, info) => info.mortgageInterestForm1098,
+      // MANUAL EDIT: routed to a FilingInfo slot (less Form 8396 line 3). Only one 1098 is supported.
+      "0.line.8a_mortgage_interest_form1098": (_, info) =>
+        info.mortgageCreditGap
+          ? unsupported(info.mortgageCreditGap)
+          : info.mortgageInterestForm1098,
       // MANUAL EDIT: routed to FilingInfo slot.
       "0.line.8b_mortgage_interest_not_form1098": (_, info) => info.mortgageInterestNotForm1098,
       // MANUAL EDIT: routed to FilingInfo slot.
