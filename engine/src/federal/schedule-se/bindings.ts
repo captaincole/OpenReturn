@@ -1,7 +1,7 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
 import { defineForm, type FormAccessor } from "../../defineForm.js";
-import { atLeast, roundDollars, sum } from "../../money.js";
+import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
 import { SSN } from "../../values.js";
 import type { ScheduleSEFilingInfo } from "./filingInfo.js";
 import { MIN_NET_EARNINGS, netEarnings } from "./lines.js";
@@ -23,7 +23,6 @@ const CRP =
   "No fact gives Conservation Reserve Program payments (Schedule F line 4b, or K-1 box 20, code AQ).";
 const CHURCH =
   "No fact gives church employee income (W-2 wages from a church that elected out of social security tax).";
-const FORM_4137 = "No fact gives unreported tips; Form 4137 is not modeled.";
 const FORM_8919 = "No fact gives uncollected-tax wages; Form 8919 is not modeled.";
 const PART_II =
   "Part II (the optional methods) is not modeled: no fact or decision elects the farm or nonfarm optional method.";
@@ -84,6 +83,17 @@ export function register(): void {
       // No fact gives railroad retirement (tier 1) compensation.
       "0.line.8a": (form, info) =>
         owesTax(form) ? roundDollars(info.w2SocialSecurityWagesAndTips) : undefined,
+      /*
+       * MANUAL EDIT: line 8b is "Unreported tips subject to social security tax from
+       * Form 4137, line 10" of the SE person, the taxpayer. The taxpayer's Form 4137
+       * is the first copy when it files; a spouse's form does not count here.
+       */
+      "0.line.8b": (form, info) => {
+        if (!owesTax(form) || skipsTo11(form)) return undefined;
+        return info.form4137Filers?.[0]?.owner === "taxpayer"
+          ? numberOrBlank(form["form-4137.0.line.10_tips_subject_social_security_tax"])
+          : undefined;
+      },
       "0.line.8d": (form) => {
         const line8a = form["0.line.8a"];
         if (!owesTax(form) || skipsTo11(form) || line8a === undefined) return undefined;
@@ -116,7 +126,6 @@ export function register(): void {
       "0.line.4b": PART_II,
       "0.line.5a": CHURCH,
       "0.line.5b": CHURCH,
-      "0.line.8b": FORM_4137,
       "0.line.8c": FORM_8919,
       "1.line.15": PART_II,
       "1.line.16": PART_II,

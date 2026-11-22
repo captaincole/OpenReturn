@@ -38,6 +38,9 @@ const WITHOUT_8839 = {
     "Refundable adoption credit from Form 8839 line 13 — Form 8839 not ingested and no adoption expense scenario built yet.",
 } as const;
 
+const QUALIFIED_TIPS_GAP =
+  "The return has employee cash tips, and the 2025 deduction for qualified tips (Schedule 1-A Part II) is not modeled: no fact says the tips came from a listed tipped occupation.";
+
 /*
  * MANUAL EDIT: column (2) prints the SSN, else the ITIN or ATIN (the 1040
  * instructions: "You must enter each dependent's social security number").
@@ -193,6 +196,12 @@ export function register(): void {
         const received = line1fFrom8839(form, info);
         return received === undefined ? unsupported(WITHOUT_8839.line1f) : received.value;
       },
+      /*
+       * MANUAL EDIT: irs-1040-inst-2025::sec::line-1c::b01: tips not reported to the
+       * employer, with W-2 box 8 allocated tips, and noncash tips (4137/lines.ts).
+       * With one Form 4137 it equals that form's line 4 plus noncash tips.
+       */
+      "line.1c": (_, info) => info.tipIncomeNotOnLine1a,
       "line.1z": (form) =>
         sum(
           form["line.1a"],
@@ -242,7 +251,13 @@ export function register(): void {
           benefits,
           otherIncome: sum(
             form["line.1z"],
-            form["line.2b"],
+            /*
+             * MANUAL EDIT: with Form 8815, Pub. 915 Worksheet 1 line 3 takes Schedule B
+             * line 2, not line 2b (irs-pub-915-2025::sec::repayments-more-than-gross::b04).
+             */
+            info.mustFile?.["form-8815"]?.value === true
+              ? form["schedule-b.0.line.2_total_interest"]
+              : form["line.2b"],
             form["line.3b"],
             form["line.4b"],
             form["line.5b"],
@@ -418,8 +433,16 @@ export function register(): void {
         const value = form["form-8995.0.line.15"] ?? form["form-8995-a.1.line.39"];
         return typeof value === "number" ? value : undefined;
       },
-      // MANUAL EDIT: line 13b = Schedule 1-A line 38; blank when Schedule 1-A is not filed.
-      "line.13b": (form) => {
+      /*
+       * MANUAL EDIT: line 13b = Schedule 1-A line 38; blank when Schedule 1-A is not filed.
+       * Employee cash tips may be qualified tips (irs-1040-inst-2025::sec::part-ii::b01),
+       * and Part II is not modeled, so the line shows the gap. A married filer
+       * must file jointly to claim it, so a separate return has no gap.
+       */
+      "line.13b": (form, info) => {
+        if (info.employeeCashTips && info.filingStatus !== "married_filing_separately") {
+          return unsupported(QUALIFIED_TIPS_GAP);
+        }
         const value = form["schedule-1-a.1.line.38_total_additional_deductions"];
         return typeof value === "number" ? value : undefined;
       },
@@ -593,8 +616,6 @@ export function register(): void {
         "No nonresident/dual-status alien spouse scenario modeled yet — spouse name field only applies when the NRA-spouse checkbox is checked, which has no ingestion path.",
       "line.1b":
         "Household employee wages not reported on W-2 require a separate household-employer intake scenario not yet built; no fact key exists for this.",
-      "line.1c":
-        "Unreported tip income (allocated tips, noncash tips) has no fact ingestion path; requires a tip-income intake scenario not yet built.",
       "line.1d":
         "No ingestion path for Medicaid waiver payments not reported on W-2 — no scenario built for this income type yet.",
       "line.1g":

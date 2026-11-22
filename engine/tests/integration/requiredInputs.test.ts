@@ -91,6 +91,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "whether one exists is Cade's question",
   ],
   [
+    /^education\.savings_bond(_expense)?\.[^.]+$/,
+    "each fact is a whole savings bond cashed or a whole line 1 row (Form 8815); whether one " +
+      "exists is Cade's question",
+  ],
+  [
     /^gambling\.losses$/,
     "an answer Cade records only when the user reports gambling losses (Schedule A line 16)",
   ],

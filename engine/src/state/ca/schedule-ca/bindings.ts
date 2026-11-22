@@ -295,6 +295,8 @@ export function register(): void {
         info.mustFile?.["form-8839"]?.value === true
           ? numberOrBlank(form["form-1040.line.1f"])
           : unsupported(LINE_1F_WITHOUT_8839),
+      // Federal 1040 line 1c (Form 4137 line 4 and noncash tips); blank when it is.
+      "0.line.1c_federal": (form) => numberOrBlank(form["form-1040.line.1c"]),
       // MANUAL EDIT: 1h type is a text field; read it as a string, not with sum().
       "0.line.1h_income_type": (form) => {
         const value = form["form-1040.line.1h_type"];
@@ -583,8 +585,6 @@ export function register(): void {
     unsupported: {
       "0.line.1b_federal":
         "Household-employee wages not reported on W-2 (federal 1040 line 1b) — no scenario modeled yet.",
-      "0.line.1c_federal":
-        "Tip income not reported on line 1a (federal 1040 line 1c) — no scenario modeled yet.",
       "0.line.1d_federal":
         "Medicaid waiver payments not reported on W-2 (federal 1040 line 1d) — no scenario modeled yet.",
       "0.line.1e_federal":
