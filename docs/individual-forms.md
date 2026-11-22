@@ -15,7 +15,7 @@ This page lists each form that an individual income tax return can hold, and wha
 
 Source: [Tax year 2025 accepted forms and schedules for individual tax returns and extensions](https://www.irs.gov/pub/irs-efile/tax-year-2025-accepted-forms-schedules-individual-tax-returns-extensions.xlsx), IRS, dated 2025-11-18.
 
-The list has 225 rows, and 197 are forms and schedules to compute. The engine has 83 of them, and 34 have rules. Of the 43 tier 1 forms, the engine has 43, and 28 have rules.
+The list has 225 rows, and 197 are forms and schedules to compute. The engine has 83 of them, and 39 have rules. Of the 43 tier 1 forms, the engine has 43, and 30 have rules.
 
 | Form | Title | Tier 1 | Engine | Copies |
 | --- | --- | --- | --- | --- |
@@ -86,7 +86,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 4972 | Tax on Lump-Sum Distributions |  | No rules yet | 2 |
 | Form 499W2PR | Form 499 W2PR |  | Not a form: a document |  |
 | Form 5074 | Allocation of Individual Income Tax to Guam or the Commonwealth of the Northern Mariana Islands (CNMI) |  | Not in the engine | 1 |
-| Form 5329 | Additional Taxes on Qualified Plans (Including IRAs) and Other Tax-Favored Accounts | Yes | No rules yet | 2 |
+| Form 5329 | Additional Taxes on Qualified Plans (Including IRAs) and Other Tax-Favored Accounts | Yes | Rules | 2 |
 | Form 5471 | Information Return of U.S. Persons With Respect To Certain Foreign Corporations |  | No rules yet | unbounded |
 | Form 5471 Schedule E | Income, War Profits, and Excess Profits Taxes Paid or Accrued |  | Not in the engine | unbounded |
 | Form 5471 Schedule G1 | Cost Sharing Arrangement |  | Not in the engine | unbounded |
@@ -128,7 +128,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8288A | Statement of Withholding on Dispositions by Foreign Persons of U.S. Real Property Interests |  | Not a form: a document |  |
 | Form 8332 | Release/Revocation of Release of Claim to Exemption for Child by Custodial Parent |  | Not in the engine | 100 |
 | Form 8379 | Injured Spouse Allocation |  | Not in the engine | 1 |
-| Form 8396 | Mortgage Interest Credit |  | No rules yet | 1 |
+| Form 8396 | Mortgage Interest Credit |  | Rules | 1 |
 | Form 8582 | Passive Activity Loss Limitations | Yes | Rules | 1 |
 | Form 8582CR | Passive Activity Credit Limitations | Yes | No rules yet | 1 |
 | Form 8586 | Low-Income Housing Credit |  | Not in the engine | unbounded |
@@ -142,7 +142,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8697 | Interest Computation Under the Look-Back Method for Completed Long-Term Contracts |  | No rules yet | unbounded |
 | Form 8801 | Credit for Prior Year Minimum Tax-Individuals, Estates, and Trusts | Yes | No rules yet | 1 |
 | Form 8805 | Foreign Partner's Information Statement of Section 1446 Withholding tax |  | Not a form: a document |  |
-| Form 8814 | Parents' Election to Report Child's Interest and Dividends | Yes | No rules yet | 10 |
+| Form 8814 | Parents' Election to Report Child's Interest and Dividends | Yes | Rules | 10 |
 | Form 8815 | Exclusion of Interest From Series EE and I U.S. Savings Bonds Issued after 1989 |  | No rules yet | 1 |
 | Form 8820 | Orphan Drug Credit |  | Not in the engine | unbounded |
 | Form 8824 | Like-Kind Exchanges | Yes | No rules yet | unbounded |
@@ -161,7 +161,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8844 | Empowerment Zone and Renewal Community Employment Credit |  | Not in the engine | unbounded |
 | Form 8845 | (no title in IRS listing) |  | Not in the engine | unbounded |
 | Form 8846 | Credit for Employer Social Security and Medicare Taxes Paid on Certain Employee Tips |  | Not in the engine | unbounded |
-| Form 8853 | Archer MSAs and Long-Term Care Insurance Contracts |  | No rules yet | 1 |
+| Form 8853 | Archer MSAs and Long-Term Care Insurance Contracts |  | Rules | 1 |
 | Form 8854 | Initial and Annual Expatriation Information Statement |  | Not in the engine | 2 |
 | Form 8858 | Information Return of U.S. Persons With Respect To Foreign Disregarded Entities |  | Not in the engine | unbounded |
 | Form 8858 Schedule M | Transactions Between Foreign Disregarded Entity of a Foreign Tax Owner and the Filer or Other Related Entities |  | Not in the engine | unbounded |
@@ -181,7 +181,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8867 | Paid Preparer's Due Diligence Checklist |  | Not in the engine | 4 |
 | Form 8873 | Extraterritorial Income Exclusion |  | Not in the engine | unbounded |
 | Form 8874 | New Markets Credit |  | Not in the engine | unbounded |
-| Form 8880 | Credit for Qualified Retirement Savings Contributions |  | No rules yet | 1 |
+| Form 8880 | Credit for Qualified Retirement Savings Contributions |  | Rules | 1 |
 | Form 8881 | Credit for Small Employer Pension Plan Startup Costs |  | Not in the engine | unbounded |
 | Form 8882 | Credit for Employer-Provided Childcare Facilities and Services |  | Not in the engine | unbounded |
 | Form 8883 | Asset Allocation Statement Under Section 338 |  | Not in the engine | unbounded |
