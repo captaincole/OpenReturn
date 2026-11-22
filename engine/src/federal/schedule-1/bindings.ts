@@ -6,6 +6,7 @@ import { unsupported } from "../../types.js";
 import { files8853, form8853Total } from "../8853/results.js";
 import { answerBindings } from "./answerBindings.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
+import { line14, storageFeesOnlyBox } from "./movingExpenses.js";
 import { line21 } from "./studentLoanInterest.js";
 import type { Schedule1 } from "./types.js";
 
@@ -107,6 +108,9 @@ export function register(): void {
       // MANUAL EDIT: line 11, at most $300 per eligible educator (adjustments.ts).
       "1.line.11": (_, info) => roundDollars(info.educatorExpenses),
       "1.line.13": (form) => sum(form["form-8889.0.line.13_hsa_deduction"]),
+      // MANUAL EDIT: line 14 and its storage-fees box (movingExpenses.ts).
+      "1.line.14": line14,
+      "1.line.14_storage_fees_only": storageFeesOnlyBox,
       // MANUAL EDIT: line 18 = 1099-INT box 2 summed (irs-1040-inst-2025::sec::line-18::b01).
       "1.line.18": (_, info) => roundDollars(info.earlyWithdrawalPenalty),
       // MANUAL EDIT: line 21, the Student Loan Interest Deduction Worksheet (studentLoanInterest.ts).
@@ -176,8 +180,6 @@ export function register(): void {
       "0.line.8v":
         "No ingestion for digital-asset ordinary income (staking, mining, forks) yet; 1099-DA covers only dispositions.",
       "1.line.12": "No Form 2106 (reservist/performing artist/fee-basis official) scenario yet.",
-      "1.line.14_storage_fees_only": "No Armed Forces moving-expense (Form 3903) scenario yet.",
-      "1.line.14": "No Armed Forces moving-expense (Form 3903) scenario yet.",
       "1.line.17": "No self-employed health insurance scenario yet.",
       "1.line.24b": "No personal-property rental scenario (line 8l) yet.",
       "1.line.24c": "No Olympic/Paralympic medal or USOC prize scenario (line 8m) yet.",
