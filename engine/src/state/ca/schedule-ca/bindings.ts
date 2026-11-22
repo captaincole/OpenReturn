@@ -5,6 +5,7 @@ import { defineForm, type FormAccessor, type FormSpec } from "../../../defineFor
 import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../../money.js";
 import { unsupported } from "../../../types.js";
 import { answerLines } from "./answerLines.js";
+import { childIncomeBindings } from "./childIncome.js";
 import { line12Adjustment, line12Federal } from "./employeeBusinessExpenses.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
 import { form8853Bindings } from "./form8853.js";
@@ -144,6 +145,7 @@ export function register(): void {
   defineForm<ScheduleCa, ScheduleCaFilingInfo>("schedule-ca", {
     bindings: waitsWithIncreasedStandard({
       ...sectionCBindings,
+      ...childIncomeBindings,
       ...movingExpenseBindings,
       ...mortgageCreditBindings,
       ...form8853Bindings,
@@ -158,10 +160,6 @@ export function register(): void {
       "1.line.b8z_federal": (form) => {
         const value = form["schedule-1.0.line.8z"];
         return typeof value === "number" ? value : undefined;
-      },
-      "1.line.b8z_income_type": (form) => {
-        const value = form["schedule-1.0.line.8z_type"];
-        return typeof value === "string" ? value : undefined;
       },
       /*
        * MANUAL EDIT: col A copies federal Schedule 1 line 7. "California excludes
@@ -597,8 +595,6 @@ export function register(): void {
       "0.line.1z_subtractions":
         "Aggregate of line 1 subtractions; all upstream rows are unsupported.",
       "0.line.2a_federal": "Tax-exempt interest (federal 1040 line 2a) — no scenario modeled yet.",
-      "2.line.b9a_additions":
-        "Section B line 9a col C — aggregates other-income additions we don't model yet.",
       "3.line.c24j_subtractions":
         "Form 2555 housing deduction (line 24j) col B — no scenario modeled yet.",
       "3.line.c25_additions":
@@ -725,10 +721,6 @@ export function register(): void {
         "No CA-specific subtraction rules ingested for digital asset ordinary income; no scenario modeled yet.",
       "1.line.b8v_additions":
         "No CA-specific addition rules ingested for digital asset ordinary income; no scenario modeled yet.",
-      "1.line.b8z_subtractions":
-        "Line 8z 'Other income' CA subtractions are catch-all adjustments (e.g. Native American earned income, state income tax refunds reclassified, etc.) that require per-item CA guidance and no structured fact path exists for the general 8z bucket.",
-      "1.line.b8z_additions":
-        "Line 8z 'Other income' CA additions are catch-all adjustments (e.g. expanded IRC 529 use, tribal income differences) requiring per-item CA guidance; no structured fact path exists for this bucket.",
       "2.line.b9b1_subtractions":
         "CA-specific disaster loss deduction from FTB Form 3805V — no ingestion path for FTB 3805V data exists yet.",
       "2.line.b9b2_subtractions":

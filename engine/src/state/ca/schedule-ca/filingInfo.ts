@@ -7,6 +7,7 @@ import type { Form2106FilingInfo } from "../../../federal/2106/filingInfo.js";
 import type { Form8889FilingInfo } from "../../../federal/8889/filingInfo.js";
 import type { ScheduleAFilingInfo } from "../../../federal/schedule-a/filingInfo.js";
 import type { BaseFilingInfo } from "../../../filingInfo.js";
+import type { Form3803FilingInfo } from "../3803/filingInfo.js";
 import type { Form3913FilingInfo } from "../3913/filingInfo.js";
 import type { ScheduleDCaFilingInfo } from "../schedule-d-ca/filingInfo.js";
 import type { CaEmployeeAmounts, DepreciationAdjustment } from "./activities.js";
@@ -22,6 +23,7 @@ export interface ScheduleCaFilingInfo
     Pick<Form8889FilingInfo, "hsaEmployerContributions">,
     Pick<ScheduleAFilingInfo, "increasedStandardDeduction" | "disasterLossGap">,
     Pick<ScheduleDCaFilingInfo, "scheduleDCaFigures">,
+    Pick<Form3803FilingInfo, "childIncomeLine8z">,
     Pick<
       Form3913FilingInfo,
       | "caMovingWaits"
