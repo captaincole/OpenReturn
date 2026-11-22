@@ -52,10 +52,14 @@ import type { Form8839FilingInfo } from "./federal/8839/filingInfo.js";
 import { resolve8839Info } from "./federal/8839/resolveInfo.js";
 import type { Form8853FilingInfo } from "./federal/8853/filingInfo.js";
 import { resolve8853Info } from "./federal/8853/resolveInfo.js";
+import type { Form8863FilingInfo } from "./federal/8863/filingInfo.js";
+import { resolve8863Info } from "./federal/8863/resolveInfo.js";
 import type { Form8880FilingInfo } from "./federal/8880/filingInfo.js";
 import { resolve8880Info } from "./federal/8880/resolveInfo.js";
 import type { Form8889FilingInfo } from "./federal/8889/filingInfo.js";
 import { resolve8889Info } from "./federal/8889/resolveInfo.js";
+import type { Form8936FilingInfo } from "./federal/8936/filingInfo.js";
+import { resolve8936Info } from "./federal/8936/resolveInfo.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
 import type { Form8959FilingInfo } from "./federal/8959/filingInfo.js";
 import { resolve8959Info } from "./federal/8959/resolveInfo.js";
@@ -129,6 +133,8 @@ import type { Form3805pFilingInfo } from "./state/ca/3805p/filingInfo.js";
 import { resolve3805pInfo } from "./state/ca/3805p/resolveInfo.js";
 import type { Form3885AFilingInfo } from "./state/ca/3885a/filingInfo.js";
 import { resolve3885AInfo } from "./state/ca/3885a/resolveInfo.js";
+import type { Form3913FilingInfo } from "./state/ca/3913/filingInfo.js";
+import { resolve3913Info } from "./state/ca/3913/resolveInfo.js";
 import type { Form540FilingInfo } from "./state/ca/540/filingInfo.js";
 import type { Form540NRFilingInfo } from "./state/ca/540nr/filingInfo.js";
 import { resolve540NRInfo } from "./state/ca/540nr/resolveInfo.js";
@@ -248,6 +254,7 @@ export type FilingInfo = BaseFilingInfo &
   Form8801FilingInfo &
   Form8814FilingInfo &
   Form6781FilingInfo &
+  Form8936FilingInfo &
   Form8839FilingInfo &
   Form8815FilingInfo &
   Form4137FilingInfo &
@@ -256,6 +263,7 @@ export type FilingInfo = BaseFilingInfo &
   Form8396FilingInfo &
   Form8853FilingInfo &
   Form8880FilingInfo &
+  Form8863FilingInfo &
   FederalFormsWithNoRulesFilingInfo &
   Form540NRFilingInfo &
   ScheduleCa540NRFilingInfo &
@@ -263,6 +271,7 @@ export type FilingInfo = BaseFilingInfo &
   Form3801FilingInfo &
   Form3510FilingInfo &
   Form3803FilingInfo &
+  Form3913FilingInfo &
   CaliforniaFormsWithNoRulesFilingInfo;
 
 /* One resolver per form. A new form adds its resolver here. */
@@ -319,6 +328,7 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve8801Info,
   resolve8814Info,
   resolve6781Info,
+  resolve8936Info,
   resolve8839Info,
   resolve8815Info,
   resolve4137Info,
@@ -327,6 +337,7 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve8396Info,
   resolve8853Info,
   resolve8880Info,
+  resolve8863Info,
   ...FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
   resolve540NRInfo,
   resolveScheduleCa540NRInfo,
@@ -334,6 +345,7 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve3801Info,
   resolve3510Info,
   resolve3803Info,
+  resolve3913Info,
   ...CALIFORNIA_FORMS_WITH_NO_RULES_RESOLVERS,
 ];
 

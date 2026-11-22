@@ -58,7 +58,7 @@ Each item is a place where the form and its instructions do not settle a rule. I
 ## 9. Worksheet line 2 credits the engine does not compute
 
 - Text: line 2 adds "Schedule 3, lines 1 through 3, 6d, and 6l" (irs-8880-form-2025::sec::credit-limit-worksheet::b01).
-- Default: Schedule 3 lines 1, 3 and 6l have no rules. Worksheet line 2, line 11, line 12 and Schedule 3 line 4 are unsupported when a 1099 shows foreign tax paid, or Form 1116, 8863 or 8978 files. Lines 2 and 6d come from Form 2441 and Schedule R. A gap inside those forms reads as 0 here.
+- Default: Schedule 3 lines 1 and 6l have no rules. Worksheet line 2, line 11, line 12 and Schedule 3 line 4 are unsupported when a 1099 shows foreign tax paid, or Form 1116 or 8978 files. Lines 2, 3 and 6d come from Form 2441, Form 8863 and Schedule R. A gap inside those forms reads as 0 here.
 - Changes dollars: yes, when Form 2441 or Schedule R has a gap.
 
 ## 10. Line 1 traditional IRA contributions
@@ -97,5 +97,5 @@ Each item is a place where the form and its instructions do not settle a rule. I
 | Line 8 | stated rule; unsupported with Form 2555 |
 | Line 9 (table) | stated rule (every row edge tested) |
 | Line 10 | published example with numbers (IRS page, Jill, 2021, same 2025 rate) |
-| Credit Limit Worksheet, line 11 | stated rule; unsupported with foreign tax, Form 1116, 8863 or 8978 |
+| Credit Limit Worksheet, line 11 | stated rule; unsupported with foreign tax, Form 1116 or 8978 |
 | Line 12, Schedule 3 line 4 | stated rule |

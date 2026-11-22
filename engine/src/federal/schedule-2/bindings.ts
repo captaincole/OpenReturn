@@ -6,6 +6,7 @@ import { unsupported, type Unsupported } from "../../types.js";
 import { withLaterCopies } from "../4137/laterCopies.js";
 import { earlyDistributionTax } from "../5329/lines.js";
 import { files8853, form8853Total } from "../8853/results.js";
+import { totalOver } from "../8936/credit.js";
 import type { Schedule2FilingInfo } from "./filingInfo.js";
 import type { Schedule2 } from "./types.js";
 
@@ -43,6 +44,19 @@ export function register(): void {
       // MANUAL EDIT: irs-1040-inst-2025::sec::line-1a-2::b01: Form 8962 line 29; blank when 8962 is not filed.
       "0.line.1a_excess_aptc_repayment": (form) =>
         total(form["form-8962.0.line.29_excess_advance_ptc_repayment"]),
+      /*
+       * MANUAL EDIT: Schedule A (Form 8936) line 4a of each vehicle whose credit
+       * went to the dealer and that line 8a or 8d (1b), 13a or 13c (1c) rules out
+       * (irs-1040-inst-2025::sec::line-1b-2::b01, line-1c-2::b01).
+       */
+      "0.line.1b_new_clean_vehicle_credit_repayment": (form, info) =>
+        totalOver(form, info, (outcome) =>
+          outcome.kind === "repay" && outcome.schedule2Line === "1b" ? outcome.amount : undefined,
+        ),
+      "0.line.1c_previously_owned_clean_vehicle_credit_repayment": (form, info) =>
+        totalOver(form, info, (outcome) =>
+          outcome.kind === "repay" && outcome.schedule2Line === "1c" ? outcome.amount : undefined,
+        ),
       "0.line.1z_total_lines_1a_through_1y": (form) =>
         total(
           form["0.line.1a_excess_aptc_repayment"],
@@ -150,10 +164,6 @@ export function register(): void {
     unsupported: {
       "0.header.taxpayer_name":
         "Full name needs first + last name joined together. No single full-name fact exists and lookupFact can't concatenate, and form-1040 has no combined-name field to reference.",
-      "0.line.1b_new_clean_vehicle_credit_repayment":
-        "No Form 8936 / Schedule A (8936) clean vehicle scenario yet.",
-      "0.line.1c_previously_owned_clean_vehicle_credit_repayment":
-        "No Form 8936 / Schedule A (8936) previously owned clean vehicle scenario yet.",
       "0.line.1d_recapture_net_epe_form4255":
         "No Form 4255 elective payment election recapture scenario yet.",
       "0.line.1e_ep_checkbox_line1a": "No Form 4255 excessive payments scenario yet.",

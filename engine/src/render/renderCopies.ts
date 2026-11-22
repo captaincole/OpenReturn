@@ -29,7 +29,7 @@ export async function renderFormCopies(opts: {
     const copyForm = evaluateForm(spec.formId, copyCtx, catalog);
     const filled = await fillFromCatalog({ blankPdfBytes, form: copyForm, catalog });
     warnings.push(...filled.warnings.map((warning) => `copy ${i + 1}: ${warning}`));
-    await appendPages(merged, filled.pdfBytes);
+    await appendPages(merged, filled.pdfBytes, spec.copies.laterCopyPages);
   }
   return {
     pdfBytes: Buffer.from(await merged.save()),
@@ -39,8 +39,15 @@ export async function renderFormCopies(opts: {
   };
 }
 
-async function appendPages(target: PDFDocument, pdfBytes: Uint8Array): Promise<void> {
+async function appendPages(
+  target: PDFDocument,
+  pdfBytes: Uint8Array,
+  only?: readonly number[],
+): Promise<void> {
   const source = await PDFDocument.load(pdfBytes);
-  const pages = await target.copyPages(source, source.getPageIndices());
+  const indices = source
+    .getPageIndices()
+    .filter((index) => only === undefined || only.includes(index));
+  const pages = await target.copyPages(source, indices);
   for (const page of pages) target.addPage(page);
 }
