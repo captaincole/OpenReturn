@@ -8,6 +8,7 @@ import { unsupported } from "../../types.js";
 import { ssn } from "../../values.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
 import { socialSecurityTaxable } from "../../worksheets/socialSecurityBenefits.js";
+import { line1fFrom8839, line30From8839, socialSecurityGapFrom8839 } from "../8839/receivers.js";
 import { PUB_590A_GAP } from "../schedule-1/pub590a.js";
 import { form1040Line7a } from "../schedule-d/lines.js";
 import { eicOutcome } from "../schedule-eic/outcome.js";
@@ -28,6 +29,17 @@ import type { Form1040 } from "./types.js";
 
 type Bindings = Partial<{ [K in keyof Form1040]: BindingFn<Form1040, Form1040FilingInfo, K> }>;
 type RowBinding = (form: FormAccessor<Form1040>, info: Form1040FilingInfo) => unknown;
+
+/* MANUAL EDIT: without Form 8839, lines 1f and 30 keep the reasons they had before it had rules. */
+const WITHOUT_8839 = {
+  line1f:
+    "Requires Form 8839 (Adoption Benefits) computation — no Form 8839 ingestion or scenario built yet.",
+  line30:
+    "Refundable adoption credit from Form 8839 line 13 — Form 8839 not ingested and no adoption expense scenario built yet.",
+} as const;
+
+const QUALIFIED_TIPS_GAP =
+  "The return has employee cash tips, and the 2025 deduction for qualified tips (Schedule 1-A Part II) is not modeled: no fact says the tips came from a listed tipped occupation.";
 
 /*
  * MANUAL EDIT: column (2) prints the SSN, else the ITIN or ATIN (the 1040
@@ -179,6 +191,17 @@ export function register(): void {
         const line26 = numberOrBlank(form["form-2441.1.line.26_taxable_benefits"]);
         return line26 !== undefined && line26 > 0 ? line26 : undefined;
       },
+      // MANUAL EDIT: Form 8839 line 31 (irs-1040-inst-2025::sec::line-1f::b01); negative on its Yes box.
+      "line.1f": (form, info) => {
+        const received = line1fFrom8839(form, info);
+        return received === undefined ? unsupported(WITHOUT_8839.line1f) : received.value;
+      },
+      /*
+       * MANUAL EDIT: irs-1040-inst-2025::sec::line-1c::b01: tips not reported to the
+       * employer, with W-2 box 8 allocated tips, and noncash tips (4137/lines.ts).
+       * With one Form 4137 it equals that form's line 4 plus noncash tips.
+       */
+      "line.1c": (_, info) => info.tipIncomeNotOnLine1a,
       "line.1z": (form) =>
         sum(
           form["line.1a"],
@@ -217,6 +240,9 @@ export function register(): void {
         // MANUAL EDIT: Pub. 590-A's worksheets figure 6b with an IRA contribution (schedule-1/pub590a.ts).
         if (info.socialSecurityBenefits !== undefined && info.pub590aWorksheets)
           return unsupported(PUB_590A_GAP);
+        // MANUAL EDIT: an adoption benefit exclusion takes the Pub. 915 worksheet (use-the-social-security-benefits::b01).
+        const adoptionGap = socialSecurityGapFrom8839(info);
+        if (adoptionGap) return adoptionGap;
         const benefits = info.socialSecurityBenefits;
         if (benefits === undefined || !info.filingStatus) return undefined;
         const mfs = info.filingStatus === "married_filing_separately";
@@ -225,7 +251,13 @@ export function register(): void {
           benefits,
           otherIncome: sum(
             form["line.1z"],
-            form["line.2b"],
+            /*
+             * MANUAL EDIT: with Form 8815, Pub. 915 Worksheet 1 line 3 takes Schedule B
+             * line 2, not line 2b (irs-pub-915-2025::sec::repayments-more-than-gross::b04).
+             */
+            info.mustFile?.["form-8815"]?.value === true
+              ? form["schedule-b.0.line.2_total_interest"]
+              : form["line.2b"],
             form["line.3b"],
             form["line.4b"],
             form["line.5b"],
@@ -401,8 +433,16 @@ export function register(): void {
         const value = form["form-8995.0.line.15"] ?? form["form-8995-a.1.line.39"];
         return typeof value === "number" ? value : undefined;
       },
-      // MANUAL EDIT: line 13b = Schedule 1-A line 38; blank when Schedule 1-A is not filed.
-      "line.13b": (form) => {
+      /*
+       * MANUAL EDIT: line 13b = Schedule 1-A line 38; blank when Schedule 1-A is not filed.
+       * Employee cash tips may be qualified tips (irs-1040-inst-2025::sec::part-ii::b01),
+       * and Part II is not modeled, so the line shows the gap. A married filer
+       * must file jointly to claim it, so a separate return has no gap.
+       */
+      "line.13b": (form, info) => {
+        if (info.employeeCashTips && info.filingStatus !== "married_filing_separately") {
+          return unsupported(QUALIFIED_TIPS_GAP);
+        }
         const value = form["schedule-1-a.1.line.38_total_additional_deductions"];
         return typeof value === "number" ? value : undefined;
       },
@@ -472,8 +512,13 @@ export function register(): void {
       // MANUAL EDIT: line 28 = Schedule 8812 line 27; blank when Schedule 8812 is not filed.
       "line.28": (form) =>
         numberOrBlank(form["schedule-8812.1.line.27_additional_child_tax_credit"]),
+      // MANUAL EDIT: line 30 = Form 8839 line 13, the refundable adoption credit.
+      "line.30": (form, info) => {
+        const received = line30From8839(form, info);
+        return received === undefined ? unsupported(WITHOUT_8839.line30) : received.value;
+      },
       /*
-       * MANUAL EDIT: lines 29–31 are not modeled; blank when every line is blank.
+       * MANUAL EDIT: lines 29 and 31 are not modeled (line 30 reads Form 8839); blank when every line is blank.
        * Waits while line 27a or 28 can still change (payments.ts).
        */
       "line.32": (form, info) => {
@@ -571,12 +616,8 @@ export function register(): void {
         "No nonresident/dual-status alien spouse scenario modeled yet — spouse name field only applies when the NRA-spouse checkbox is checked, which has no ingestion path.",
       "line.1b":
         "Household employee wages not reported on W-2 require a separate household-employer intake scenario not yet built; no fact key exists for this.",
-      "line.1c":
-        "Unreported tip income (allocated tips, noncash tips) has no fact ingestion path; requires a tip-income intake scenario not yet built.",
       "line.1d":
         "No ingestion path for Medicaid waiver payments not reported on W-2 — no scenario built for this income type yet.",
-      "line.1f":
-        "Requires Form 8839 (Adoption Benefits) computation — no Form 8839 ingestion or scenario built yet.",
       "line.1g":
         "Requires Form 8919 (Uncollected SS/Medicare Tax on Wages) — no Form 8919 ingestion or scenario built yet.",
       "line.1h_type":
@@ -619,8 +660,6 @@ export function register(): void {
         "Opt-out checkbox for ACTC claim — no ACTC eligibility or opt-out decision modeled yet; requires taxpayer election fact.",
       "line.29":
         "American Opportunity Credit from Form 8863 line 8 — Form 8863 not ingested and no education-credit scenario built yet.",
-      "line.30":
-        "Refundable adoption credit from Form 8839 line 13 — Form 8839 not ingested and no adoption expense scenario built yet.",
       "line.31":
         "Amount from Schedule 3 line 15 (additional refundable credits/payments) — Schedule 3 not ingested as a separate form catalog yet.",
       "line.35a_form_8888_attached":

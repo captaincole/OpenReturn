@@ -22,4 +22,6 @@ export interface ScheduleBFilingInfo
   rounding?: ScheduleBRounding;
   hasForeignFinancialAccount?: boolean;
   hasForeignTrust?: boolean;
+  /** Why Form 8815 line 14 is unsupported (federal/8815/line9Gaps.ts); line 3 is then unsupported too. */
+  savingsBondExclusionGap?: string;
 }

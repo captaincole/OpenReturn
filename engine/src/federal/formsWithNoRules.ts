@@ -14,8 +14,6 @@ import type { Form3800FilingInfo } from "./3800/filingInfo.js";
 import { resolve3800Info } from "./3800/resolveInfo.js";
 import type { Form4136FilingInfo } from "./4136/filingInfo.js";
 import { resolve4136Info } from "./4136/resolveInfo.js";
-import type { Form4137FilingInfo } from "./4137/filingInfo.js";
-import { resolve4137Info } from "./4137/resolveInfo.js";
 import type { Form4255FilingInfo } from "./4255/filingInfo.js";
 import { resolve4255Info } from "./4255/resolveInfo.js";
 import type { Form4563FilingInfo } from "./4563/filingInfo.js";
@@ -48,16 +46,12 @@ import type { Form8621FilingInfo } from "./8621/filingInfo.js";
 import { resolve8621Info } from "./8621/resolveInfo.js";
 import type { Form8697FilingInfo } from "./8697/filingInfo.js";
 import { resolve8697Info } from "./8697/resolveInfo.js";
-import type { Form8815FilingInfo } from "./8815/filingInfo.js";
-import { resolve8815Info } from "./8815/resolveInfo.js";
 import type { Form8824FilingInfo } from "./8824/filingInfo.js";
 import { resolve8824Info } from "./8824/resolveInfo.js";
 import type { Form8828FilingInfo } from "./8828/filingInfo.js";
 import { resolve8828Info } from "./8828/resolveInfo.js";
 import type { Form8834FilingInfo } from "./8834/filingInfo.js";
 import { resolve8834Info } from "./8834/resolveInfo.js";
-import type { Form8839FilingInfo } from "./8839/filingInfo.js";
-import { resolve8839Info } from "./8839/resolveInfo.js";
 import type { Form8859FilingInfo } from "./8859/filingInfo.js";
 import { resolve8859Info } from "./8859/resolveInfo.js";
 import type { Form8863FilingInfo } from "./8863/filingInfo.js";
@@ -94,7 +88,6 @@ export type FederalFormsWithNoRulesFilingInfo = ScheduleFFilingInfo &
   Form2555FilingInfo &
   Form3800FilingInfo &
   Form4136FilingInfo &
-  Form4137FilingInfo &
   Form4255FilingInfo &
   Form4563FilingInfo &
   Form4797FilingInfo &
@@ -108,10 +101,8 @@ export type FederalFormsWithNoRulesFilingInfo = ScheduleFFilingInfo &
   Form8615FilingInfo &
   Form8621FilingInfo &
   Form8697FilingInfo &
-  Form8815FilingInfo &
   Form8828FilingInfo &
   Form8834FilingInfo &
-  Form8839FilingInfo &
   Form8859FilingInfo &
   Form8863FilingInfo &
   Form8888FilingInfo &
@@ -138,7 +129,6 @@ export const FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS: ReadonlyArray<
   resolve2555Info,
   resolve3800Info,
   resolve4136Info,
-  resolve4137Info,
   resolve4255Info,
   resolve4563Info,
   resolve4797Info,
@@ -152,10 +142,8 @@ export const FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS: ReadonlyArray<
   resolve8615Info,
   resolve8621Info,
   resolve8697Info,
-  resolve8815Info,
   resolve8828Info,
   resolve8834Info,
-  resolve8839Info,
   resolve8859Info,
   resolve8863Info,
   resolve8888Info,

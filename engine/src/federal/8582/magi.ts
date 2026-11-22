@@ -7,8 +7,10 @@
  * out: taxable social security (1040 line 6b), the IRA
  * deduction (Schedule 1 line 20), section 501(c)(18) contributions (line 24f),
  * half of self-employment tax (line 15) and student loan interest (line 21).
- * The EE/I bond exclusion (Form 8815) and the FDII/GILTI deduction are not
- * modeled, so nothing is added back for them.
+ * With Form 8815, interest is Schedule B line 2, before the EE/I bond
+ * exclusion (Pub. 925 MAGI is figured without it), so the two forms do not
+ * read each other. The FDII/GILTI deduction is not modeled, so nothing is
+ * added back for it.
  */
 
 import type { FormAccessor } from "../../defineForm.js";
@@ -18,8 +20,13 @@ import type { RentalProperty } from "../schedule-e/filingInfo.js";
 import type { Form8582FilingInfo } from "./filingInfo.js";
 import type { Form8582 } from "./types.js";
 
-/* Form 1040 income lines with no passive activity amount. */
-const FORM_1040_INCOME = ["line.1z", "line.2b", "line.3b", "line.4b", "line.5b", "line.7a"];
+/* Form 1040 income lines with no passive activity amount; line 2b is interestBeforeExclusion. */
+const FORM_1040_INCOME = ["line.1z", "line.3b", "line.4b", "line.5b", "line.7a"];
+
+const interestBeforeExclusion = (form: FormAccessor<Form8582>, info: Form8582FilingInfo) =>
+  info.mustFile?.["form-8815"]?.value === true
+    ? form["schedule-b.0.line.2_total_interest"]
+    : form["form-1040.line.2b"];
 
 /* Schedule 1 Part I, less line 5 (Schedule E) and the totals. */
 const SCHEDULE_1_INCOME = [
@@ -94,6 +101,7 @@ export function modifiedAgi(
   if (scheduleE === undefined) return undefined;
   const income = sum(
     ...FORM_1040_INCOME.map((line) => form[`form-1040.${line}`]),
+    interestBeforeExclusion(form, info),
     ...SCHEDULE_1_INCOME.map((line) => form[`schedule-1.${line}`]),
     scheduleE,
   );
