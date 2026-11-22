@@ -27,6 +27,10 @@ Each place where the form and its instructions do not settle a rule. Short answe
 
 - Source: line 5 must equal the refund (line-5::b01). The form files only to split a refund (general-instructions::b01).
 - Default: two account facts file the form, because a resolver cannot read Form 1040 line 35a. With no refund (tax due, or the decision `decisions.refund.refund_full_overpayment_federal` not true), the form files with only its header; every line is blank.
+- The tax correctness review confirmed it: moiraine with W-2 box 2 at $5,000 owes $1,415, and a blank Form 8888 still files.
+- Why it is not fixed: the engine decides who files from facts and decisions, before any line is computed. Not filing when line 35a is blank needs a must-file rule that reads a computed line, a change to the engine for all forms.
+- Not a fix: the decision `refund_full_overpayment_federal` = false means "apply part to 2026 estimated tax". A part refund can still be split, so the decision alone cannot stop the form.
+- Options: (a) keep the blank form (harmless, no amount); (b) mark the lines unsupported when line 34 is blank, so the return shows the gap but is not ready to file; (c) let a must-file rule read Form 1040 line 35a.
 - Changes dollars: no.
 
 ## 5. Injured spouse (Form 8379)
