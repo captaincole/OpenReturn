@@ -17,7 +17,7 @@ You can complete a return for a taxpayer who fits **all** of these:
 - Optionally: student loan interest on Form 1098-E (Schedule 1 line 21)
 - Optionally: unemployment compensation on Form 1099-G
 - Optionally: dependents (the child tax credit and the credit for other dependents, Schedule 8812; the CA 540 dependent exemption credit)
-- Optionally: an early distribution from a retirement plan (1099-R code 1): the CA 2.5% additional tax (FTB 3805P). The federal 10% tax (Form 5329, Schedule 2 line 8) is not computed yet: say so.
+- Optionally: an early distribution from a retirement plan (1099-R code 1): the CA 2.5% additional tax (FTB 3805P). The federal 10% tax goes on Schedule 2 line 8, with Form 5329 when an exception applies. An early distribution from a Roth IRA beyond its contributions is not computed yet: say so.
 - Optionally: an incentive stock option exercised and held at year end (Form 3921): the alternative minimum tax, federal (Form 6251) and California (Schedule P (540))
 - Optionally: Form 1099-K payments and Forms 1099-NEC for that business
 - Standard deduction, or itemized deductions on Schedule A (state and local taxes, mortgage interest on one Form 1098, gifts, medical, investment interest expense through Form 4952) and on Schedule CA (540) Part II for California (investment interest through FTB 3526)

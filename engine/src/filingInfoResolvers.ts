@@ -10,8 +10,12 @@ import {
   isDividendFactKey,
   isInterestFactKey,
 } from "./facts/index.js";
+import { scheduleTwoNeededForEarlyDistributions } from "./federal/5329/resolveInfo.js";
 import { resolve6251Info } from "./federal/6251/resolveInfo.js";
+import { figuredForm8814, form8814Totals } from "./federal/8814/totals.js";
 import { filesForm8815, savingsBondExclusionScope } from "./federal/8815/resolveInfo.js";
+import { resolve8853Info } from "./federal/8853/resolveInfo.js";
+import { SCHEDULE_2_LINES, form8853Reaches } from "./federal/8853/results.js";
 import { planForm8949Copies, totalsByBox } from "./federal/8949/copyPlan.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
 import { resolve8959Info } from "./federal/8959/resolveInfo.js";
@@ -318,8 +322,10 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
 /*
  * Default: required when Schedule SE (line 4), Form 8959 (line 11), Form 8960
  * (line 12), Schedule H (line 9), Form 6251 (line 2) or Form 8962 (line 1a) is
- * filed. While none is filed and one is still undecided, Schedule 2 is undecided
- * too. KNOWN GAP: the resolver cannot see Form 6251 line 11 or Form 8962 line 29,
+ * filed, an early distribution owes the additional tax (line 8), or Form 8853
+ * has an additional tax for lines 17e and 17f. While none is filed and one is
+ * still undecided, Schedule 2 is undecided too. KNOWN GAP: the resolver cannot
+ * see Form 6251 line 11 or Form 8962 line 29,
  * so a filed Form 6251 with no AMT, or a Form 8962 with no repayment, still files
  * Schedule 2 with 0 or blank lines.
  */
@@ -331,6 +337,9 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
     resolveScheduleHInfo(inputs).mustFile?.["schedule-h"]?.value,
     resolve6251Info(inputs).mustFile?.["form-6251"]?.value,
     resolve8962Info(inputs).mustFile?.["form-8962"]?.value,
+    // Form 8853 lines 9b and 13b (lines 17e and 17f).
+    form8853Reaches(resolve8853Info(inputs), SCHEDULE_2_LINES),
+    scheduleTwoNeededForEarlyDistributions(inputs),
   ];
   const required = feeders.some((value) => value === true);
   const open = !required && feeders.some((value) => value === undefined);
@@ -340,7 +349,7 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
       ? []
       : [
           {
-            rule: "fallback: Schedule SE (line 4), Form 8959 (line 11), Form 8960 (line 12), Schedule H (line 9), Form 6251 (line 2), or Form 8962 (line 1a) is required",
+            rule: "fallback: Schedule SE (line 4), Form 8959 (line 11), Form 8960 (line 12), Schedule H (line 9), Form 6251 (line 2), Form 8962 (line 1a), or an early distribution tax (line 8) is required, or Form 8853 has an additional tax (lines 17e and 17f)",
             value: required,
           },
         ],
@@ -350,12 +359,25 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
   };
 }
 
+/*
+ * Schedule B line 5 rows: the parents' dividends, then each Form 8814 line 9.
+ * irs-8814-inst-2025::sec::line-9::b01: each Form 8814 line 9 is a line 5 row
+ * named "Form 8814", and Schedule B files when it plus the parents' dividends
+ * is more than $1,500. A child's foreign account (Part III, ::b07) has no fact.
+ */
+function scheduleBDividendPayers(inputs: ResolverInputs) {
+  const form8814Rows = (figuredForm8814(form8814Totals(inputs))?.line9ByChild ?? [])
+    .filter((line9) => line9 > 0)
+    .map((line9) => ({ payerName: "Form 8814", amount: line9 }));
+  return [...payerAmounts(inputs, isDividendFactKey, (value) => sum(value.box1a)), ...form8814Rows];
+}
+
 // IRS Schedule B inst.: interest or dividends over $1,500, or a Part III "Yes".
 export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInfo {
   const interestPayers = payerAmounts(inputs, isInterestFactKey, (value) =>
     sum(value.box1, value.box3),
   );
-  const dividendPayers = payerAmounts(inputs, isDividendFactKey, (value) => sum(value.box1a));
+  const dividendPayers = scheduleBDividendPayers(inputs);
   const hasForeignFinancialAccount = boolDecision(
     inputs,
     "decisions.scope.has_foreign_financial_account",

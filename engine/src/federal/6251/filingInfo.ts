@@ -1,13 +1,18 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Form1040FilingInfo } from "../1040/filingInfo.js";
+import type { Form8814FilingInfo } from "../8814/filingInfo.js";
 import type { ScheduleAFilingInfo } from "../schedule-a/filingInfo.js";
 
-/* Lines 2a and 3: the increased standard deduction mode, and the standard deduction it lists. */
+/*
+ * Lines 2a and 3: the increased standard deduction mode, and the standard
+ * deduction it lists. Line 2g: Form 8814's private activity bond interest.
+ */
 export interface Form6251FilingInfo
   extends
     BaseFilingInfo,
     Pick<ScheduleAFilingInfo, "increasedStandardDeduction">,
-    Pick<Form1040FilingInfo, "spouseItemizesSeparately"> {
+    Pick<Form1040FilingInfo, "spouseItemizesSeparately">,
+    Pick<Form8814FilingInfo, "form8814Totals"> {
   /** Line 2a: the return itemizes (decisions.itemize_vs_standard); undefined means 1040 line 12e. */
   itemizesDeductions?: boolean;
   /** Line 2c: last year's AMT Form 4952 line 7 (investment_interest.amt_disallowed_carryover). */

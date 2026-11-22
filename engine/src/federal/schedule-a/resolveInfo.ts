@@ -2,6 +2,7 @@ import {
   GAMBLING_KEYS,
   getNoncashGiftFacts,
   ITEMIZED_OTHER_KEYS,
+  MORTGAGE_CREDIT_KEYS,
   MORTGAGE_KEYS,
 } from "../../facts/index.js";
 import {
@@ -17,6 +18,7 @@ import {
 import { additionalSheetsGap, netQualifiedDisasterLoss } from "../4684/lines.js";
 import { resolve4684Info } from "../4684/resolveInfo.js";
 import { giftDeduction, noncashGiftsTotal } from "../8283/lines.js";
+import { mortgageCreditReduction, type MortgageCreditReduction } from "../8396/resolveInfo.js";
 import type { ScheduleAFilingInfo } from "./filingInfo.js";
 
 /*
@@ -91,6 +93,34 @@ export function mortgageInterestWithinLimit(
 }
 
 /*
+ * Line 8a with Form 8396: the deductible interest less Form 8396 line 3
+ * (irs-1040sa-inst-2025::sec::line-8a::b02), even when part of line 3 carries
+ * forward (irs-8396-form-2025::sec::line-3::b01). The line waits while the
+ * certificate is not recorded. Line 3 more than the 1098 interest (the
+ * certificate's loan is reported elsewhere) is a gap, and so is an unsupported line 3.
+ */
+interface CreditedInterest {
+  interest: number | undefined;
+  waits: boolean;
+  gap?: string;
+}
+
+const CREDIT_OVER_INTEREST =
+  "Form 8396 line 3 is more than the Form 1098 interest on line 8a; the instructions take the credit off line 8a only, so a person splits it.";
+
+function lessMortgageCredit(
+  interest: number | undefined,
+  credit: MortgageCreditReduction,
+): CreditedInterest {
+  if (interest === undefined) return { interest, waits: false };
+  if (credit.gap) return { interest: undefined, waits: true, gap: credit.gap };
+  if (credit.waits) return { interest: undefined, waits: true };
+  const amount = credit.amount ?? 0;
+  if (amount > interest) return { interest: undefined, waits: true, gap: CREDIT_OVER_INTEREST };
+  return { interest: interest - amount, waits: false };
+}
+
+/*
  * Form 4684 line 15 when it is a net qualified disaster loss
  * (irs-1040sa-inst-2025::sec::net-qualified-disaster-loss-reporting::b01), and
  * whether one is possible while the totals wait: an event marked qualified.
@@ -145,7 +175,11 @@ function scheduleAMustFile(
 }
 
 /* An itemizer answers these once; 0 is an answer. Blank lines would hide a deduction. */
-function itemizerAnswers(inputs: ResolverInputs, mortgage: MortgageLimit): string[] {
+function itemizerAnswers(
+  inputs: ResolverInputs,
+  mortgage: MortgageLimit,
+  credit: MortgageCreditReduction,
+): string[] {
   const interestForm1098 = num(inputs, MORTGAGE_KEYS.interestForm1098);
   return missingInputs({
     "medical.expenses_total": num(inputs, "medical.expenses_total"),
@@ -165,6 +199,8 @@ function itemizerAnswers(inputs: ResolverInputs, mortgage: MortgageLimit): strin
     ...(mortgage.originationDateNeeded
       ? { [MORTGAGE_KEYS.originationDateForm1098]: undefined }
       : {}),
+    /* Form 8396 line 3 comes off line 8a: the certificate is needed with a credit to use. */
+    ...(credit.waits ? { [MORTGAGE_CREDIT_KEYS.certificate]: undefined } : {}),
     "charitable.cash": num(inputs, "charitable.cash"),
     ...giftsOtherThanCashAnswers(inputs),
     "charitable.carryover": num(inputs, "charitable.carryover"),
@@ -223,11 +259,14 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
   const interestForm1098 = num(inputs, MORTGAGE_KEYS.interestForm1098);
   const principalForm1098 = num(inputs, MORTGAGE_KEYS.outstandingPrincipalForm1098);
   const mortgage = mortgageInterestWithinLimit(inputs, interestForm1098, principalForm1098);
+  const credit = mortgageCreditReduction(inputs);
+  const credited = lessMortgageCredit(mortgage.interest, credit);
   return {
     mustFile: { "schedule-a": resolution },
     /* The increased standard deduction prints no itemized line, so it asks none of their answers. */
     missingInputs: {
-      "schedule-a": increasedStandardDeduction === false ? itemizerAnswers(inputs, mortgage) : [],
+      "schedule-a":
+        increasedStandardDeduction === false ? itemizerAnswers(inputs, mortgage, credit) : [],
     },
     medicalDentalExpenses: num(inputs, "medical.expenses_total"),
     stateLocalIncomeTaxPaid: w2Box17 + caSdi + (estStateTax ?? 0),
@@ -235,8 +274,10 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
     generalSalesTaxPaid: num(inputs, GENERAL_SALES_TAX),
     realEstateTaxes: num(inputs, "state_local_tax.real_estate"),
     personalPropertyTaxes: num(inputs, "state_local_tax.personal_property"),
-    mortgageInterestForm1098: mortgage.interest,
-    mortgageInterestWaits: interestForm1098 !== undefined && mortgage.interest === undefined,
+    mortgageInterestForm1098: credited.interest,
+    mortgageInterestWaits:
+      (interestForm1098 !== undefined && mortgage.interest === undefined) || credited.waits,
+    mortgageCreditGap: credited.gap,
     mortgageInterestNotForm1098: num(inputs, MORTGAGE_KEYS.interestNotForm1098),
     pointsNotForm1098: num(inputs, MORTGAGE_KEYS.pointsNotForm1098),
     giftsCashCheck: num(inputs, "charitable.cash"),

@@ -45,6 +45,19 @@ export function roundDollars(value: number | undefined): number | undefined {
   return Math.sign(value) * Math.floor(cents + 0.5);
 }
 
+/*
+ * A ratio a form enters "as a decimal (rounded to at least three places)" (Form
+ * 8814 lines 7 and 8): rounded to `places` decimals, the half up. The small
+ * tolerance absorbs float error only (0.4115 scaled is 411.49999999999994 and
+ * gives 0.412). It is not roundDollars: that snaps to cents first, which would
+ * round 0.4774951 to 0.478.
+ */
+const FLOAT_TOLERANCE = 1e-9;
+export function roundToPlaces(value: number, places: number): number {
+  const scale = 10 ** places;
+  return (Math.sign(value) * Math.floor(Math.abs(value) * scale + 0.5 + FLOAT_TOLERANCE)) / scale;
+}
+
 // "Each $step or part of $step": a part step counts, so this rounds up by rule.
 export function stepsOf(amount: number, step: number): number {
   return Math.ceil(amount / step);

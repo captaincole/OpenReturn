@@ -6,8 +6,10 @@ import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../../
 import { unsupported } from "../../../types.js";
 import { answerLines } from "./answerLines.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
+import { form8853Bindings } from "./form8853.js";
 import { partIIUnsupported } from "./increasedStandard.js";
 import { CA_MISC_FLOOR_RATE, caItemizedLine29 } from "./itemizedWorksheet.js";
+import { mortgageCreditBindings } from "./mortgageCredit.js";
 import { sectionCBindings } from "./sectionC.js";
 import type { ScheduleCa } from "./types.js";
 
@@ -129,7 +131,7 @@ function adjustmentsTotalFederal(form: FormAccessor<ScheduleCa>) {
   const federal = numberOrBlank(form["schedule-1.1.line.26"]);
   if (sum(total) === sum(federal)) return total;
   return unsupported(
-    "Schedule 1 line 26 holds an adjustment that Section C does not copy yet (only lines 11, 13, 15, 18 and 21 are copied).",
+    "Schedule 1 line 26 holds an adjustment that Section C does not copy yet (only lines 11, 13, 15, 18, 21 and 23 are copied).",
   );
 }
 
@@ -137,6 +139,8 @@ export function register(): void {
   defineForm<ScheduleCa, ScheduleCaFilingInfo>("schedule-ca", {
     bindings: waitsWithIncreasedStandard({
       ...sectionCBindings,
+      ...mortgageCreditBindings,
+      ...form8853Bindings,
       /*
        * MANUAL EDIT: CA does not conform to HSAs. Employer contributions
        * (W-2 box 12 code W) are CA wages: line 1a col C, carried to line 27.
@@ -665,10 +669,8 @@ export function register(): void {
         "Foreign earned income exclusion from federal Form 2555 line 45. No foreign income scenario or Form 2555 fact ingestion path exists. CA does not allow the federal foreign earned income exclusion, so this amount also requires a column C addition on line 8d.",
       "1.line.b8d_additions":
         "Column C additions for foreign earned income exclusion (Form 2555) — CA does not conform for certain combat-zone contractors, but no fact/decision ingestion path exists for Form 2555 scenarios yet.",
-      "1.line.b8e_federal":
-        "Income from federal Form 8853 (Archer MSAs and Long-Term Care Insurance Contracts) — no fact ingestion path for Form 8853 data exists yet.",
       "1.line.b8e_additions":
-        "Column C additions for Form 8853 income — no fact ingestion path for Form 8853 scenarios yet.",
+        "Column C adds an Archer MSA rolled over to an HSA (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b02); no fact splits Form 8853 line 6b between rollovers to an HSA and other amounts.",
       "1.line.b8g_federal":
         "Alaska Permanent Fund dividends — niche income type specific to Alaska residents; no fact ingestion path exists.",
       "1.line.b8j_federal":
@@ -739,8 +741,6 @@ export function register(): void {
         "CA subtraction adjustment to IRA deduction (line 20 col B) — requires knowledge of CA vs. federal IRA deductibility differences and no fact ingestion path exists yet.",
       "2.line.c20_additions":
         "CA addition adjustment to IRA deduction (line 20 col C) — requires knowledge of CA vs. federal IRA deductibility differences and no fact ingestion path exists yet.",
-      "2.line.c23_federal":
-        "Archer MSA deduction (federal Schedule 1 line 23, from Form 8853) — no Archer MSA fact ingestion path exists; uncommon scenario not yet modeled.",
       "3.line.c24b_federal":
         "Deductible expenses for personal-property rental (Schedule 1 line 24b) — no personal-property-rental expense fact ingestion path exists yet.",
       "3.line.c24b_subtractions":
@@ -781,16 +781,12 @@ export function register(): void {
         "Line 6 col B (foreign income taxes, generation-skipping transfer tax) needs Schedule A line 6 detail, which has no data path.",
       "4.page2.taxes_6_additions":
         "Line 6 col C (foreign property taxes) has no fact kind or decision.",
-      "4.page2.interest_8a_additions":
-        "Line 8a col C (the interest the federal $750,000 limit disallowed, home equity interest, the mortgage interest credit) needs the Pub. 936 average-balance worksheet and California's $1,000,000 limit; the engine knows only the 1098's January 1 principal.",
       "4.page2.interest_8b_additions":
         "Line 8b col C needs the federal limit on non-1098 mortgage interest (Pub. 936); not modeled.",
       "4.page2.interest_8c_additions":
         "Line 8c col C needs the federal limit on non-1098 points (Pub. 936); not modeled.",
       "4.page2.interest_8e_subtractions":
         "Line 8e col B has no column B rows on lines 8a–8c, and the instructions name no subtraction for line 8.",
-      "4.page2.interest_8e_additions":
-        "Line 8e col C totals lines 8a–8c col C; every upstream row is unsupported.",
       "5.page2.charity_11_subtractions":
         "Line 11 col B (the CA 50%-of-AGI contribution limit, College Access Tax Credit) needs the contribution limitation worksheet with CA percentages; not modeled.",
       "5.page2.charity_11_additions": "The instructions name no column C adjustment for line 11.",
