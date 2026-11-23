@@ -45,10 +45,12 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
   },
   "schedule-e": {
     engineFields: {
-      // Line 28 row A — (i) Nonpassive loss allowed (see Schedule K-1)
-      "schedule-e.1.line.28_row_a_col_i_nonpassive_loss_allowed": 15000,
-      // Line 29b — Totals, column (i) nonpassive loss allowed
-      "schedule-e.1.line.29b_totals_col_i": 15000,
+      // Line 28 row A — (g) Passive loss allowed: this year's box 1 loss, allowed in full
+      "schedule-e.1.line.28_row_a_col_g_passive_loss_allowed": 6000,
+      // Line 28 row B ("PYA") — (g) Passive loss allowed: the carried passive loss the sale releases
+      "schedule-e.1.line.28_row_b_col_g_passive_loss_allowed": 9000,
+      // Line 29b — Totals, column (g) passive loss allowed
+      "schedule-e.1.line.29b_totals_col_g": 15000,
       // Line 31 — Add columns (g), (i), and (j) of line 29b
       "schedule-e.1.line.31_add_loss_columns": 15000,
       // Line 32 — Total partnership and S corporation income or (loss). Combine lines 30 and 31

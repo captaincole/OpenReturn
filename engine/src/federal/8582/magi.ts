@@ -14,7 +14,10 @@
  */
 
 import type { FormAccessor } from "../../defineForm.js";
-import { atLeast, numberOrBlank, sum } from "../../money.js";
+import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
+import { limitContextFrom } from "../passThrough/limits.js";
+import { releasedOnDisposition } from "../passThrough/passiveActivity.js";
+import { allowedWithRoute, routeEntities } from "../passThrough/routing.js";
 import { isRentalActivity, selfRentalState } from "../rentals/passive.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
 import type { Form8582FilingInfo } from "./filingInfo.js";
@@ -89,19 +92,39 @@ function nonpassiveScheduleE(form: FormAccessor<Form8582>, info: Form8582FilingI
 }
 
 /*
+ * The losses an entire disposition releases (Schedule E column (g), its own row
+ * and its PYA row): line 6 takes "into account the overall loss from the
+ * disposition" (irs-8582-inst-2025::sec::reporting-an-entire-disposition-on-form-4797-or::b02);
+ * the gain is already in Form 1040 line 7a. Undefined while such a K-1 is not routed.
+ */
+function releasedLosses(info: Form8582FilingInfo): number | undefined {
+  const entities = info.passThroughEntities ?? [];
+  const released = entities.filter((entity) => releasedOnDisposition(entity));
+  if (released.length === 0) return 0;
+  const routed = routeEntities(entities, limitContextFrom(info));
+  const amounts = released.map((entity) => {
+    const entry = routed.find((candidate) => candidate.entity.key === entity.key);
+    if (entry?.kind !== "routed") return undefined;
+    return sum(...allowedWithRoute(entry, "schedule_e_part_ii").map((item) => item.amount));
+  });
+  return amounts.includes(undefined) ? undefined : roundDollars(sum(...amounts));
+}
+
+/*
  * Schedule E Part II's nonpassive columns: column (k) less column (i). Line 6
  * leaves out passive income and loss only; a nonpassive K-1 amount, and the
- * overall loss of an entire disposition (column (i)), count
- * (irs-8582-inst-2025::sec::reporting-an-entire-disposition-on-form-4797-or::b02).
- * Undefined while Part II has a row and its total is not a number.
+ * overall loss of an entire disposition (releasedLosses), count. Undefined
+ * while Part II has a row and its total is not a number.
  */
 function nonpassivePartII(form: FormAccessor<Form8582>, info: Form8582FilingInfo) {
   if (!(info.passThroughEntities ?? []).some((entity) => entity.form !== "1041")) return 0;
   const line32 = numberOrBlank(form["schedule-e.1.line.32_total_partnership_s_corp_income"]);
-  if (line32 === undefined) return undefined;
+  const released = releasedLosses(info);
+  if (line32 === undefined || released === undefined) return undefined;
   return (
     sum(form["schedule-e.1.line.29a_totals_col_k"]) -
-    sum(form["schedule-e.1.line.29b_totals_col_i"])
+    sum(form["schedule-e.1.line.29b_totals_col_i"]) +
+    released
   );
 }
 

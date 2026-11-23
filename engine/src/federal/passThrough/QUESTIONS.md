@@ -284,9 +284,19 @@ Each question has its source and the default the code uses now.
     Schedule E instructions put a prior-year passive loss released by a
     disposition "on a separate line in column (g)" with "PYA"
     (irs-1040se-inst-2025::sec::prior-year-unallowed-losses-from-a-passive::b01).
-    Default: the Form 8582 example, one row, column (i) (scenario `bayle`);
-    the totals are the same either way. Line 27 is Yes: the carried loss is
-    not reported on Form 8582. The overall gain or loss needs the gain on the
+    Default: the Schedule E reading (scenario `bayle`): this year's passive
+    loss in column (g) on the K-1's own row (the applicable column,
+    irs-1040se-inst-2025::sec::line-28::b01), the carried passive loss in
+    column (g) on its own "PYA" row. Schedule E's instructions govern how
+    Schedule E prints; the Form 8582 example describes the worksheet; and the
+    S corporation's carried basis loss already takes a PYA row, so one layout
+    serves both. The totals are the same either way. Line 27 is Yes: the
+    carried loss is not reported on Form 8582. The released losses stay in net
+    investment income, with no Form 8960 line 4b adjustment: "the suspended
+    passive losses from that activity are allowed in full as a properly
+    allocable deduction" (irs-8960-inst-2025::sec::disposition-of-entire-interest::b01).
+    Form 8582 line 6 still counts them (::b02 of the Form 8582 block above).
+    The overall gain or loss needs the gain on the
     sale, which no K-1 prints: the holding's `gainOnDisposition`. The engine
     does not check it against the Form 8949 row, which is a trade fact with
     the box F decision (no 1099-B reports a private sale). How Cade records a
@@ -336,8 +346,9 @@ Each question has its source and the default the code uses now.
     allows it (item 5).
 38. **Form 8582 line 6 and K-1 amounts.** Line 6 leaves out passive income
     and loss only. Default: it now adds Schedule E Part II columns (k) less
-    (i), every K-1's nonpassive amount and an entire disposition's released
-    loss (irs-8582-inst-2025::sec::reporting-an-entire-disposition-on-form-4797-or::b02).
+    (i), every K-1's nonpassive amount, and the losses an entire disposition
+    releases (column (g), both rows; `releasedLosses` in `8582/magi.ts`)
+    (irs-8582-inst-2025::sec::reporting-an-entire-disposition-on-form-4797-or::b02).
     A trust's Part III column (f) income is still not added; no scenario has
     it with Form 8582 Part II.
 39. **Partnership items with no route.** Box 6c dividend equivalents are not

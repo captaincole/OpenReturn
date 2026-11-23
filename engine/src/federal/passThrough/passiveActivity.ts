@@ -150,9 +150,12 @@ export function releasedOnDisposition(entity: PassThroughEntity, items = entity.
   return row.netIncome - row.netLoss - row.priorUnallowedLoss < 0;
 }
 
-/* An allowed item of a partnership K-1 that Schedule E Part II reports as passive (columns (g) and (h)). */
+/*
+ * An allowed item of a partnership K-1 that Schedule E Part II reports as
+ * passive (columns (g) and (h)); a released disposition's losses stay passive.
+ */
 export function isPassiveItem(entity: PassThroughEntity, item: PassThroughItem): boolean {
-  if (entity.form !== "1065" || releasedOnDisposition(entity)) return false;
+  if (entity.form !== "1065") return false;
   if (item.passiveCarryover === true) return true;
   return passiveItemsOf(entity, [item]).length > 0;
 }

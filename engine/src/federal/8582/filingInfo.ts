@@ -13,6 +13,7 @@ export interface Form8582FilingInfo
       | "rentalPropertiesOverflow"
       | "passiveK1Activities"
       | "passThroughEntities"
+      | "passThroughLimitContext"
     >,
     Pick<Form1040FilingInfo, "livedApartFromSpouseAllYear">,
     // MANUAL EDIT: line 6 waits for a business's Schedule 1 line 3, as line 10 does.

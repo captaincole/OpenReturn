@@ -64,11 +64,19 @@ interface PartIIRow {
 
 /*
  * An allowed item on the "PYA" row: a basis loss carried from an earlier year,
- * nonpassive. A passive one, and a carried passive loss, go through Form 8582
- * and are in the activity's own row (irs-8582-inst-2025::sec::how-to-report-allowed-losses::b04).
+ * nonpassive, in column (i)
+ * (irs-1040se-inst-2025::sec::losses-not-allowed-in-prior-years-due-to-the-basis::b01);
+ * and a carried passive loss not reported on Form 8582, which an entire
+ * disposition releases, in column (g)
+ * (irs-1040se-inst-2025::sec::prior-year-unallowed-losses-from-a-passive::b01).
+ * A passive basis loss, and a carried passive loss on Form 8582, are in the
+ * activity's own row (irs-8582-inst-2025::sec::how-to-report-allowed-losses::b04).
  */
-const onPriorYearRow = (entity: PassThroughEntity, item: PassThroughItem) =>
-  item.fromPriorYear === true && item.passiveCarryover !== true && !isPassiveItem(entity, item);
+function onPriorYearRow(entity: PassThroughEntity, item: PassThroughItem): boolean {
+  if (item.fromPriorYear !== true) return false;
+  if (item.passiveCarryover === true) return releasedOnDisposition(entity);
+  return !isPassiveItem(entity, item);
+}
 
 const GUARANTEED_PARTS: ReadonlyArray<string> = [
   "guaranteed_payment_services",
@@ -177,13 +185,15 @@ function columnAmount(
  * and a partner's guaranteed payments (irs-1065k1-inst-2025::sec::box-4a-guaranteed-payments-for-services::b01,
  * ::box-4b-guaranteed-payments-for-capital::b01); column (i): a nonpassive loss
  * the limits allow (irs-1120sk1-inst-2025::sec::income-loss::b01, report box 1
- * "in column (i) or (k)"), and every loss an entire disposition releases
- * (irs-8582-inst-2025::sec::reporting-an-entire-disposition-on-form-4797-or::b03);
- * a PYA row's column (i) is the carried basis loss allowed now. Column (h):
- * passive income; column (g): the passive loss Form 8582 allows, the carried
- * passive loss included (irs-1065k1-inst-2025::sec::income-loss::b01, ::b02;
- * irs-8582-inst-2025::sec::how-to-report-allowed-losses::b04). Column (j),
- * section 179, has no route: a K-1 with it is unsupported.
+ * "in column (i) or (k)"); a PYA row's column (i) is the carried basis loss
+ * allowed now. Column (h): passive income; column (g): the passive loss Form
+ * 8582 allows, the carried passive loss included
+ * (irs-1065k1-inst-2025::sec::income-loss::b01, ::b02;
+ * irs-8582-inst-2025::sec::how-to-report-allowed-losses::b04), or, for an
+ * entire disposition off Form 8582, this year's passive loss in full (the
+ * applicable column, irs-1040se-inst-2025::sec::line-28::b01) and the carried
+ * one on its PYA row. Column (j), section 179, has no route: a K-1 with it is
+ * unsupported.
  */
 const nonpassiveIncome = amountColumn((routed, priorYearAllowed) =>
   priorYearAllowed ? undefined : columnAmount(routed, false, false, true),
@@ -195,7 +205,7 @@ const passiveIncome = amountColumn((routed, priorYearAllowed) =>
   priorYearAllowed ? undefined : columnAmount(routed, false, true, true),
 );
 const passiveLoss = amountColumn((routed, priorYearAllowed) =>
-  priorYearAllowed ? undefined : columnAmount(routed, false, true, false),
+  columnAmount(routed, priorYearAllowed, true, false),
 );
 const noRouteYet = amountColumn(() => undefined);
 

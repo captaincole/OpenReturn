@@ -160,10 +160,37 @@ describe("a holding that ended (bayle)", () => {
     ),
   );
 
-  it("releases the carried passive loss in full, off Form 8582", () => {
+  it("releases the carried passive loss in full, off Form 8582, on its own PYA row", () => {
     expect(sold.files("form-8582")).toBe(false);
-    expect(sold.value("schedule-e.1.line.28_row_a_col_i_nonpassive_loss_allowed")).toBe(15000);
+    expect(sold.value("schedule-e.1.line.28_row_a_col_g_passive_loss_allowed")).toBe(6000);
+    expect(sold.value("schedule-e.1.line.28_row_b_col_a_name")).toBe("PYA Snow Goose Shipping LP");
+    expect(sold.value("schedule-e.1.line.28_row_b_col_g_passive_loss_allowed")).toBe(9000);
+    expect(sold.value("schedule-e.1.line.28_row_a_col_i_nonpassive_loss_allowed")).toBeUndefined();
+    expect(sold.value("schedule-e.1.line.32_total_partnership_s_corp_income")).toBe(-15000);
     expect(sold.value("schedule-e.1.line.27_yes")).toBe(true);
+  });
+
+  /*
+   * irs-8960-inst-2025::sec::disposition-of-entire-interest::b01: "If you
+   * dispose of an activity that's always been a passive activity, the
+   * suspended passive losses from that activity are allowed in full as a
+   * properly allocable deduction." The released losses stay in NII: line 4a
+   * takes them with Schedule 1 line 5, and line 4b does not take them out.
+   */
+  it("keeps the released passive losses in net investment income (no line 4b adjustment)", () => {
+    const highWages = run(
+      bayleScenario,
+      bayleScenario.facts.map((fact) =>
+        fact.category === "wages"
+          ? { ...fact, value: { ...(fact.value as object), box1: 260000, box5: 260000 } }
+          : fact,
+      ),
+    );
+    expect(highWages.files("form-8960")).toBe(true);
+    expect(highWages.value("form-8960.0.line.4a")).toBe(-15000);
+    expect(highWages.value("form-8960.0.line.4b")).toBeUndefined();
+    expect(highWages.value("form-8960.0.line.5a")).toBe(4000);
+    expect(highWages.value("form-8960.0.line.8")).toBe(-11000);
   });
 
   it("holds every loss back on Form 8582 while the interest is still held", () => {

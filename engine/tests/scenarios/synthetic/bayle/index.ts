@@ -4,7 +4,8 @@
  * business loss, and $9,000 of passive losses were carried from 2024. With the
  * gain on the sale the activity still has an overall loss, so it is not
  * entered on Form 8582: every loss is allowed in full, in Schedule E line 28
- * column (i), and the gain is on Form 8949 box F and Schedule D line 10.
+ * column (g), the carried loss on its own "PYA" row, and the gain is on Form
+ * 8949 box F and Schedule D line 10.
  * Federal only. UNVERIFIED: no answer key; the expected values are engine
  * output checked by hand, so a failure means "the engine changed".
  */
@@ -20,7 +21,7 @@ const FORM_IDS = ["form-8949", "schedule-d", "schedule-e", "schedule-1", "form-1
 export const bayleScenario: Scenario = {
   name: "bayle",
   description:
-    "Single WA filer: a limited partner who sold his whole interest; the final K-1's loss and the carried passive loss are allowed in full (Schedule E column (i), line 27 Yes), with no Form 8582; the gain on Form 8949 box F.",
+    "Single WA filer: a limited partner who sold his whole interest; the final K-1's loss and the carried passive loss are allowed in full (Schedule E column (g), the carried loss on a PYA row, line 27 Yes), with no Form 8582; the gain on Form 8949 box F.",
   verification: "unverified",
   taxYear: BAYLE_TAX_YEAR,
   userId: BAYLE_USER_ID,
