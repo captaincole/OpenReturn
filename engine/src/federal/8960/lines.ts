@@ -1,6 +1,7 @@
 import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
+import type { ItemType } from "../passThrough/itemTypes.js";
 import type { Receipt } from "../passThrough/receipts.js";
 import { selfRentalState } from "../rentals/passive.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
@@ -14,6 +15,12 @@ export const NIIT_THRESHOLDS: Record<string, number> = {
   qualifying_surviving_spouse: 250000,
   married_filing_separately: 125000,
 };
+
+const GUARANTEED_PAYMENTS: ReadonlyArray<ItemType> = [
+  "guaranteed_payment_services",
+  "guaranteed_payment_capital",
+  "guaranteed_payments_total",
+];
 
 /* Line 12: the form says "If zero or less, enter -0-". */
 export const netInvestmentIncome = (
@@ -56,7 +63,10 @@ function section162Nonpassive(property: RentalProperty): boolean | undefined {
  * prints it: one for the K-1's own amounts, one for its "PYA" row. Passive K-1
  * income (column (h), a trust's Part III column (d)) stays in NII. Undefined
  * while a K-1 waits; the gap when one is unsupported. No fact marks an entity
- * whose business is trading financial instruments (QUESTIONS.md).
+ * whose business is trading financial instruments (QUESTIONS.md). Only the
+ * box 1 business counts: a partnership's rentals are passive (column (h) or
+ * (g)) and stay in NII. A partner's guaranteed payments are a gap: the corpus
+ * has no rule on them for line 4b (QUESTIONS.md item 31).
  */
 export function nonpassiveK1Adjustments(
   receipt: Receipt | undefined,
@@ -64,9 +74,17 @@ export function nonpassiveK1Adjustments(
   if (receipt === undefined) return [];
   if (receipt.kind === "unsupported") return unsupported(receipt.reason);
   if (receipt.kind === "waiting") return undefined;
+  const guaranteed = receipt.items.filter(({ item }) => GUARANTEED_PAYMENTS.includes(item.type));
+  if (guaranteed.length > 0) {
+    const names = [...new Set(guaranteed.map(({ entity }) => entity.name))].join(", ");
+    return unsupported(
+      `${names}: whether a partner's guaranteed payments are net investment income (Form 8960 line 4b) is not modeled.`,
+    );
+  }
   const rows = new Map<string, number[]>();
   for (const { entity, item } of receipt.items) {
     if (entity.holding?.materiallyParticipated !== true) continue;
+    if (item.type !== "ordinary_business_income" || item.passiveCarryover === true) continue;
     const row = `${entity.key}:${item.fromPriorYear === true}`;
     rows.set(row, [...(rows.get(row) ?? []), item.amount ?? 0]);
   }

@@ -9,7 +9,10 @@ export interface Form8582FilingInfo
     BaseFilingInfo,
     Pick<
       ScheduleEFilingInfo,
-      "rentalProperties" | "rentalPropertiesOverflow" | "passiveK1Activities"
+      | "rentalProperties"
+      | "rentalPropertiesOverflow"
+      | "passiveK1Activities"
+      | "passThroughEntities"
     >,
     Pick<Form1040FilingInfo, "livedApartFromSpouseAllYear">,
     // MANUAL EDIT: line 6 waits for a business's Schedule 1 line 3, as line 10 does.

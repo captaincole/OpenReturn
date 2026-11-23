@@ -36,7 +36,10 @@ function entityFor(form: K1Form, row: BoxRow, amount: number): PassThroughEntity
   const holding: K1HoldingFactValue = {
     owner: "taxpayer",
     materiallyParticipated: true,
+    realEstateProfessional: false,
+    activelyParticipated: false,
     stockBasisAtStart: 50000,
+    partnershipBasisAtStart: 50000,
     allInvestmentAtRisk: true,
   };
   const key = `k1.test.${row.box}${row.code ?? ""}`;
@@ -56,6 +59,7 @@ function entityFor(form: K1Form, row: BoxRow, amount: number): PassThroughEntity
 const CONTEXT = {
   filingStatus: "single" as const,
   otherBusinessLosses: { scheduleCLosses: 0, rentalLosses: 0, unknownKeys: [] },
+  passiveRentals: { part4: [], part5: [], waitingKeys: [] },
 };
 
 const gapInfo = (entity: PassThroughEntity) => ({
@@ -117,7 +121,7 @@ describe("the box tables", () => {
     expect(rowFor(BOX_TABLES["1065"], "13", "A").type).toBe("charitable_contribution");
   });
 
-  it("routes an S corporation's income, portfolio and basis items, gross receipts, and a trust's income items", () => {
+  it("routes an S corporation's, a partnership's and a trust's income, portfolio and basis items", () => {
     const routedRows = cases.filter(({ form, row }) => routeOf(form, row.type) !== undefined);
     expect(routedRows.map(({ name }) => name)).toEqual([
       "1120-S box 1 (ordinary_business_income)",
@@ -140,7 +144,38 @@ describe("the box tables", () => {
       "1120-S box 16 code F (foreign_tax_paid)",
       "1120-S box 17 code V (section_199a_information)",
       "1120-S box 17 code AC (gross_receipts_448c)",
+      "1065 box 1 (ordinary_business_income)",
+      "1065 box 2 (net_rental_real_estate_income)",
+      "1065 box 3 (other_net_rental_income)",
+      "1065 box 4a (guaranteed_payment_services)",
+      "1065 box 4b (guaranteed_payment_capital)",
+      "1065 box 4c (guaranteed_payments_total)",
+      "1065 box 5 (interest)",
+      "1065 box 6a (ordinary_dividends)",
+      "1065 box 6b (qualified_dividends)",
+      "1065 box 8 (net_short_term_capital_gain)",
+      "1065 box 9a (net_long_term_capital_gain)",
+      "1065 box 9b (collectibles_gain)",
+      "1065 box 9c (unrecaptured_section_1250_gain)",
+      "1065 box 13 code A (charitable_contribution)",
+      "1065 box 13 code B (charitable_contribution)",
+      "1065 box 13 code C (charitable_contribution)",
+      "1065 box 13 code D (charitable_contribution)",
+      "1065 box 13 code E (charitable_contribution)",
+      "1065 box 13 code F (charitable_contribution)",
+      "1065 box 13 code G (charitable_contribution)",
+      "1065 box 18 code A (tax_exempt_interest)",
+      "1065 box 18 code B (other_tax_exempt_income)",
+      "1065 box 18 code C (nondeductible_expenses)",
+      "1065 box 19 code A (distribution)",
+      "1065 box 19 code B (distribution)",
+      "1065 box 19 code C (distribution)",
+      "1065 box 19 code D (distribution)",
+      "1065 box 19 code F (distribution)",
+      "1065 box 19 code G (distribution)",
+      "1065 box 20 code Z (section_199a_information)",
       "1065 box 20 code AG (gross_receipts_448c)",
+      "1065 box 21 (foreign_tax_paid)",
       "1041 box 1 (interest)",
       "1041 box 2a (ordinary_dividends)",
       "1041 box 2b (qualified_dividends)",

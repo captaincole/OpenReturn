@@ -12,9 +12,10 @@ import type { FormAccessor } from "../../defineForm.js";
 import { numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { needsForm7203 } from "../passThrough/basis.js";
-import type { PassThroughEntity } from "../passThrough/items.js";
+import type { PassThroughEntity, PassThroughItem } from "../passThrough/items.js";
 import { limitContextFrom } from "../passThrough/limits.js";
-import { allowedAmount, routeEntities, type RoutedEntity } from "../passThrough/routing.js";
+import { isPassiveItem, releasedOnDisposition } from "../passThrough/passiveActivity.js";
+import { allowedWithRoute, routeEntities, type RoutedEntity } from "../passThrough/routing.js";
 import type { ScheduleEFilingInfo } from "./filingInfo.js";
 import type { PartIBindings } from "./lines.js";
 import {
@@ -61,8 +62,42 @@ interface PartIIRow {
   priorYearAllowed: boolean;
 }
 
+/*
+ * An allowed item on the "PYA" row: a basis loss carried from an earlier year,
+ * nonpassive. A passive one, and a carried passive loss, go through Form 8582
+ * and are in the activity's own row (irs-8582-inst-2025::sec::how-to-report-allowed-losses::b04).
+ */
+const onPriorYearRow = (entity: PassThroughEntity, item: PassThroughItem) =>
+  item.fromPriorYear === true && item.passiveCarryover !== true && !isPassiveItem(entity, item);
+
+const GUARANTEED_PARTS: ReadonlyArray<string> = [
+  "guaranteed_payment_services",
+  "guaranteed_payment_capital",
+];
+
+/*
+ * Box 4c is the total of boxes 4a and 4b
+ * (irs-1065k1-inst-2025::sec::box-4c-total-guaranteed-payments::b01): only the
+ * part of it above them is more income (a K-1 that prints the total alone).
+ */
+function guaranteedPaymentsOnce(items: PassThroughItem[]): PassThroughItem[] {
+  const parts = sum(
+    ...items.filter((item) => GUARANTEED_PARTS.includes(item.type)).map((item) => item.amount),
+  );
+  return items.map((item) =>
+    item.type === "guaranteed_payments_total"
+      ? { ...item, amount: Math.max(0, (item.amount ?? 0) - parts) }
+      : item,
+  );
+}
+
+const partIIItems = (routed: RoutedEntity, priorYearAllowed: boolean) =>
+  guaranteedPaymentsOnce(allowedWithRoute(routed, "schedule_e_part_ii")).filter(
+    (item) => onPriorYearRow(routed.entity, item) === priorYearAllowed,
+  );
+
 const priorYearLoss = (routed: RoutedEntity | undefined) =>
-  routed && roundDollars(allowedAmount(routed, "ordinary_business_income", true));
+  routed && roundDollars(sumOrBlank(...partIIItems(routed, true).map((item) => item.amount)));
 
 /* The rows in order: each K-1's row, then its PYA row when a carried loss is allowed. */
 function partIIRows(info: PassThroughInfo): PartIIRow[] {
@@ -118,24 +153,50 @@ function amountColumn(read: (routed: RoutedEntity, priorYearAllowed: boolean) =>
     };
 }
 
-const ordinary = (routed: RoutedEntity) =>
-  roundDollars(allowedAmount(routed, "ordinary_business_income"));
+/*
+ * One column of a row: the row's allowed Part II items that are passive or
+ * not, and income or loss, added up; a loss as a positive amount. Blank with none.
+ */
+function columnAmount(
+  routed: RoutedEntity,
+  priorYearAllowed: boolean,
+  passive: boolean,
+  income: boolean,
+): number | undefined {
+  const amounts = partIIItems(routed, priorYearAllowed)
+    .filter((item) => isPassiveItem(routed.entity, item) === passive)
+    .map((item) => item.amount ?? 0)
+    .filter((amount) => (income ? amount > 0 : amount < 0));
+  const total = roundDollars(sumOrBlank(...amounts));
+  if (total === undefined || total === 0) return undefined;
+  return income ? total : -total;
+}
 
 /*
- * Column (k): nonpassive income; column (i): a nonpassive loss the limits
- * allow, a positive amount (irs-1120sk1-inst-2025::sec::income-loss::b01, report
- * box 1 "in column (i) or (k)"); a PYA row's column (i) is the carried loss
- * allowed now. Columns (g), (h) and (j) take passive amounts and section 179,
- * which no route fills yet: a K-1 with them is unsupported.
+ * Column (k): nonpassive income, box 1 of an owner who materially participated
+ * and a partner's guaranteed payments (irs-1065k1-inst-2025::sec::box-4a-guaranteed-payments-for-services::b01,
+ * ::box-4b-guaranteed-payments-for-capital::b01); column (i): a nonpassive loss
+ * the limits allow (irs-1120sk1-inst-2025::sec::income-loss::b01, report box 1
+ * "in column (i) or (k)"), and every loss an entire disposition releases
+ * (irs-8582-inst-2025::sec::reporting-an-entire-disposition-on-form-4797-or::b03);
+ * a PYA row's column (i) is the carried basis loss allowed now. Column (h):
+ * passive income; column (g): the passive loss Form 8582 allows, the carried
+ * passive loss included (irs-1065k1-inst-2025::sec::income-loss::b01, ::b02;
+ * irs-8582-inst-2025::sec::how-to-report-allowed-losses::b04). Column (j),
+ * section 179, has no route: a K-1 with it is unsupported.
  */
-const nonpassiveIncome = amountColumn((routed, priorYearAllowed) => {
-  const amount = ordinary(routed);
-  return !priorYearAllowed && amount !== undefined && amount > 0 ? amount : undefined;
-});
-const nonpassiveLoss = amountColumn((routed, priorYearAllowed) => {
-  const amount = priorYearAllowed ? priorYearLoss(routed) : ordinary(routed);
-  return amount !== undefined && amount < 0 ? -amount : undefined;
-});
+const nonpassiveIncome = amountColumn((routed, priorYearAllowed) =>
+  priorYearAllowed ? undefined : columnAmount(routed, false, false, true),
+);
+const nonpassiveLoss = amountColumn((routed, priorYearAllowed) =>
+  columnAmount(routed, priorYearAllowed, false, false),
+);
+const passiveIncome = amountColumn((routed, priorYearAllowed) =>
+  priorYearAllowed ? undefined : columnAmount(routed, false, true, true),
+);
+const passiveLoss = amountColumn((routed, priorYearAllowed) =>
+  priorYearAllowed ? undefined : columnAmount(routed, false, true, false),
+);
 const noRouteYet = amountColumn(() => undefined);
 
 /*
@@ -175,8 +236,8 @@ function rowBindings(row: Row): Record<string, Fn> {
     [`${prefix}_col_d_ein`]: (_, info) => entity(info)?.ein,
     [`${prefix}_col_e_basis_computation_required`]: basisComputationColumn(row),
     [`${prefix}_col_f_amount_not_at_risk`]: notAtRiskColumn(row),
-    [`${prefix}_col_g_passive_loss_allowed`]: noRouteYet(row),
-    [`${prefix}_col_h_passive_income`]: noRouteYet(row),
+    [`${prefix}_col_g_passive_loss_allowed`]: passiveLoss(row),
+    [`${prefix}_col_h_passive_income`]: passiveIncome(row),
     [`${prefix}_col_i_nonpassive_loss_allowed`]: nonpassiveLoss(row),
     [`${prefix}_col_j_section_179_deduction`]: noRouteYet(row),
     [`${prefix}_col_k_nonpassive_income`]: nonpassiveIncome(row),
@@ -221,15 +282,20 @@ function columnTotal(column: string): Fn {
  * Line 27 (irs-1040se-inst-2025::sec::line-27::b01): "Yes" when the return
  * reports a loss not allowed in a prior year because of the at-risk or basis
  * limits, or a prior-year unallowed passive loss, or unreimbursed partnership
- * expenses. The limits route a carried loss only from the basis limit, as an
- * allowed item from an earlier year; any such item makes it Yes.
+ * expenses. The form asks about a passive loss only "if that loss wasn't
+ * reported on Form 8582": an allowed basis loss from an earlier year makes it
+ * Yes, and so does a carried passive loss an entire disposition releases
+ * (irs-1040se-inst-2025::sec::prior-year-unallowed-losses-from-a-passive::b01).
  */
 function priorYearLossAllowed(info: Info): boolean {
+  const reported = (entity: PassThroughEntity, item: PassThroughItem) =>
+    item.fromPriorYear === true &&
+    (item.passiveCarryover !== true || releasedOnDisposition(entity));
   return routedEntities(info).some(
     (routed) =>
       routed.entity.form !== "1041" &&
       routed.kind === "routed" &&
-      routed.allowed.some((item) => item.fromPriorYear === true),
+      routed.allowed.some((item) => reported(routed.entity, item)),
   );
 }
 
