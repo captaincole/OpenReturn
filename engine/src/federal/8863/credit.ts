@@ -6,6 +6,7 @@
 
 import { numberOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
+import { foreignTaxCreditGap } from "../1116/credit.js";
 import type { Form8863Figured, Form8863FilingInfo } from "./filingInfo.js";
 import {
   creditLimitLines,
@@ -27,8 +28,6 @@ const SEPARATE_RETURN_GAP =
   "A married filing separately return cannot take an education credit (irs-8863-inst-2025::sec::who-can-claim-an-education-credit::b03); lines 2 and 13 have no amount for it.";
 const MAGI_GAP =
   "Lines 3 and 14 must add back the income excluded on Form 2555 or Form 4563 (irs-8863-inst-2025::sec::line-3::b01, Pub. 970 Worksheet 2-1), and the engine has no rules for those forms.";
-const FOREIGN_TAX_GAP =
-  "Credit Limit Worksheet line 5 adds Schedule 3 line 1, the foreign tax credit, which the engine does not compute; a 1099 shows foreign tax paid or Form 1116 files.";
 const FORM_8978_GAP =
   "Credit Limit Worksheet line 5 adds Schedule 3 line 6l (Form 8978), which the engine does not compute.";
 
@@ -79,9 +78,10 @@ export function partIIOf(form: Accessor, info: Form8863FilingInfo): Result<PartI
   return partIILines(ret.figured.line10, magi, ret.joint);
 }
 
-/* Schedule 3 lines the worksheet's line 5 adds but the engine does not compute. */
-function creditsGap(info: Form8863FilingInfo): string | undefined {
-  if (info.form8863?.foreignTaxPaid === true || files(info, "form-1116")) return FOREIGN_TAX_GAP;
+/* Schedule 3 lines the worksheet's line 5 adds but the engine does not compute, or a gap in line 1. */
+function creditsGap(form: Accessor, info: Form8863FilingInfo): string | undefined {
+  const foreignTax = foreignTaxCreditGap(form, info);
+  if (foreignTax !== undefined) return `Credit Limit Worksheet line 5 adds ${foreignTax}`;
   return files(info, "form-8978") ? FORM_8978_GAP : undefined;
 }
 
@@ -103,7 +103,7 @@ export function worksheetOf(form: Accessor, info: Form8863FilingInfo): Result<Cr
   if (partII === undefined || isGap(partII)) return partII;
   const line9 = line9Of(form, info);
   if (line9 === undefined || isGap(line9)) return line9;
-  const gap = creditsGap(info);
+  const gap = creditsGap(form, info);
   if (gap !== undefined) return unsupported(gap);
   const line18 = numberOrBlank(form["form-1040.line.18"]);
   if (line18 === undefined) return undefined;

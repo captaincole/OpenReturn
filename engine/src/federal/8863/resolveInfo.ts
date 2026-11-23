@@ -3,18 +3,14 @@ import {
   form1098TStudentSlug,
   getEducationCreditStudentFacts,
   getForm1098TFactKeys,
-  isDividendFactKey,
-  isInterestFactKey,
   makeEducationCreditStudentFactKey,
   type EducationCreditStudentFact,
   type EducationRefundAnswersFactValue,
 } from "../../facts/index.js";
-import { sum } from "../../money.js";
 import {
   filingStatusOf,
   missingInputs,
   resolveMustFile,
-  sumInvestmentBox,
   text,
   type ResolverInputs,
 } from "../../resolverInputs.js";
@@ -81,11 +77,6 @@ function figure(
     americanOpportunity,
     refund,
     studentsMissing: unnamed.length > 0,
-    foreignTaxPaid:
-      sum(
-        sumInvestmentBox(inputs, "box7", isDividendFactKey),
-        sumInvestmentBox(inputs, "box6", isInterestFactKey),
-      ) > 0,
   };
   return { figured, required: requiredAnswers(students, unnamed, refund, answers) };
 }

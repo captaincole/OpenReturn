@@ -5,6 +5,7 @@ import { sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { withLaterCopies } from "../4137/laterCopies.js";
 import { earlyDistributionTax } from "../5329/lines.js";
+import { amtGap } from "../6251/foreignTaxCredit.js";
 import { files8853, form8853Total } from "../8853/results.js";
 import { withLaterForm8919Copies } from "../8919/laterCopies.js";
 import { totalOver } from "../8936/credit.js";
@@ -68,9 +69,14 @@ export function register(): void {
           form["0.line.1f_20pct_ep_amount"],
           form["0.line.1y_other_additions_amount"],
         ),
-      // MANUAL EDIT: irs-1040-inst-2025::sec::line-2::b01: Form 6251 line 11, its -0- too.
-      "0.line.2_alternative_minimum_tax": (form) => total(form["form-6251.0.line.11_amt"]),
-      "0.line.3_total_lines_1z_and_2": (form) =>
+      /*
+       * MANUAL EDIT: irs-1040-inst-2025::sec::line-2::b01: Form 6251 line 11, its -0- too.
+       * A gap on line 11 is a gap here and on line 3, not a blank (amtGap).
+       */
+      "0.line.2_alternative_minimum_tax": (form, info) =>
+        amtGap(form, info) ?? total(form["form-6251.0.line.11_amt"]),
+      "0.line.3_total_lines_1z_and_2": (form, info) =>
+        amtGap(form, info) ??
         total(
           form["0.line.1z_total_lines_1a_through_1y"],
           form["0.line.2_alternative_minimum_tax"],

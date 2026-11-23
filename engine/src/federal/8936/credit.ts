@@ -7,6 +7,7 @@
 
 import { numberOrBlank, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
+import { foreignTaxCreditGap } from "../1116/credit.js";
 import { creditGap as retirementCreditGap } from "../8880/credit.js";
 import type { Form8936FilingInfo } from "./filingInfo.js";
 import { modifiedAgi, taxLimit, totalOf, wholeDollars, type TaxLimitLines } from "./lines.js";
@@ -115,20 +116,18 @@ export function totalOver(
 }
 
 const OTHER_CREDIT_GAPS: ReadonlyArray<[formId: string, line: string]> = [
-  ["form-1116", "Schedule 3 line 1 (Form 1116)"],
   ["form-8863", "Schedule 3 line 3 (Form 8863)"],
   ["form-8978", "Schedule 3 line 6l (Form 8978)"],
 ];
 
 /*
  * Lines 11 and 16 add Schedule 3 lines the engine does not compute while their
- * form files: then the total would leave a credit out. A foreign tax on a 1099
- * reaches line 1 with no Form 1116.
+ * form files: then the total would leave a credit out. Line 1 (Form 1116 or
+ * the election) is computed; a gap there is a gap here.
  */
 function otherCreditsGap(form: Accessor, info: Form8936FilingInfo): string | undefined {
-  if (info.form8880ForeignTaxPaid === true) {
-    return "Lines 11 and 16 add Schedule 3 line 1, the foreign tax credit, which the engine does not compute; a 1099 shows foreign tax paid.";
-  }
+  const foreignTax = foreignTaxCreditGap(form, info);
+  if (foreignTax !== undefined) return `Lines 11 and 16 add ${foreignTax}`;
   const missing = OTHER_CREDIT_GAPS.find(([formId]) => files(info, formId));
   if (missing) {
     return `Lines 11 and 16 add ${missing[1]}, which the engine does not compute.`;

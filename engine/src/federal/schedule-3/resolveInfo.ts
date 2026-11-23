@@ -1,4 +1,5 @@
 import { resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import { resolve1116Info } from "../1116/resolveInfo.js";
 import { resolve2441Info } from "../2441/resolveInfo.js";
 import { resolve5695Info } from "../5695/resolveInfo.js";
 import { resolve8396Info } from "../8396/resolveInfo.js";
@@ -22,9 +23,16 @@ export function resolveSchedule3Info(inputs: ResolverInputs): Schedule3FilingInf
   const form8863 = resolve8863Info(inputs).mustFile?.["form-8863"]?.value === true;
   // A K-1's foreign taxes (irs-1116-inst-2025::sec::publications-see-pub-514-foreign-tax-credit-for::b02).
   const foreignTaxK1Keys = k1KeysWithRoute(inputs, "schedule_3_line_1");
+  const form1116 = resolve1116Info(inputs);
+  const foreignTaxCredit =
+    form1116.mustFile?.["form-1116"]?.value === true || form1116.foreignTax?.election === true;
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_3",
     fallbacks: [
+      {
+        rule: "fallback: Form 1116, or the election to claim the credit without it (line 1)",
+        value: foreignTaxCredit,
+      },
       { rule: "fallback: Form 5695 (line 5b) is required", value: form5695 },
       { rule: "fallback: Form 2441 (line 2) is required", value: form2441 },
       { rule: "fallback: Schedule R (line 6d) is required", value: scheduleR },

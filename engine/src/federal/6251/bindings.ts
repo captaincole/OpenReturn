@@ -11,6 +11,7 @@ import { standardDeduction } from "../1040/deductions.js";
 import { qdcgInputsFromReturn } from "../1040/qdcgInputs.js";
 import { withForm8814 } from "../8814/totals.js";
 import type { Form6251FilingInfo } from "./filingInfo.js";
+import { line10Of, line11Of, line8Of, line9Of } from "./foreignTaxCredit.js";
 import type { Form6251 } from "./types.js";
 
 type Form = FormAccessor<Form6251>;
@@ -329,37 +330,11 @@ export function register(): void {
           ? form["1.line.40_smaller_line_38_or_39"]
           : amtTaxAtRates(line6, info.filingStatus);
       },
-      // MANUAL EDIT: line 8 is unsupported, so it subtracts nothing.
-      "0.line.9_tentative_minimum_tax": (form) => {
-        const line7 = numberOrBlank(form["0.line.7_tax_on_line_6"]);
-        return line7 === undefined
-          ? undefined
-          : line7 - sum(form["0.line.8_amt_foreign_tax_credit"]);
-      },
-      /*
-       * MANUAL EDIT: irs-6251-inst-2025::sec::line-10::b01–b02. "Form 1040 ... line 16
-       * (minus any tax from Form 4972)" (the form's line 10). Form 8978 and Schedule J
-       * are not modeled, so 1040 line 16 needs no refiguring; Schedule 3 line 1 is
-       * unsupported and subtracts nothing.
-       */
-      "0.line.10_regular_tax_less_credits": (form, info) => {
-        const line16 = numberOrBlank(form["form-1040.line.16"]);
-        if (line16 === undefined) return undefined;
-        const form4972Tax = info.mustFile?.["form-4972"]?.value === true ? info.form4972Tax : 0;
-        const tax = sum(
-          line16,
-          -sum(form4972Tax),
-          form["schedule-2.0.line.1z_total_lines_1a_through_1y"],
-        );
-        return atLeast(0, tax - sum(form["schedule-3.0.line.1"]));
-      },
-      // MANUAL EDIT: a zero line 9 (line 6 zero) enters -0- without line 10.
-      "0.line.11_amt": (form) => {
-        const line9 = numberOrBlank(form["0.line.9_tentative_minimum_tax"]);
-        if (line9 === 0) return 0;
-        const line10 = numberOrBlank(form["0.line.10_regular_tax_less_credits"]);
-        return line9 === undefined || line10 === undefined ? undefined : atLeast(0, line9 - line10);
-      },
+      // MANUAL EDIT: lines 8–11 with the regular foreign tax credit (foreignTaxCredit.ts).
+      "0.line.8_amt_foreign_tax_credit": (form, info) => line8Of(form, info),
+      "0.line.9_tentative_minimum_tax": (form, info) => line9Of(form, info),
+      "0.line.10_regular_tax_less_credits": (form, info) => line10Of(form, info),
+      "0.line.11_amt": (form, info) => line11Of(form, info),
       // MANUAL EDIT: Part III is blank unless line 7 sends the filer to it.
       "1.line.12_amount_from_line_6": (form) =>
         completesPartIII(form) ? numberOrBlank(form["0.line.6_amti_less_exemption"]) : undefined,
@@ -540,8 +515,6 @@ export function register(): void {
         "No fact holds an installment sale made after August 16, 1986, and before 1987.",
       "0.line.2t_intangible_drilling_costs":
         "No fact holds intangible drilling costs for oil, gas or geothermal wells.",
-      "0.line.8_amt_foreign_tax_credit":
-        "Schedule 3 line 1 (the regular foreign tax credit) is unsupported and Form 1116 is not modeled, so no AMT foreign tax credit can be figured.",
     },
 
     // MANUAL EDIT: the SSN renders with dashes; this form has no comb widget.

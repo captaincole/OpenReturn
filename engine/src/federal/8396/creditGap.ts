@@ -8,6 +8,7 @@
 import type { FormAccessor } from "../../defineForm.js";
 import { numberOrBlank, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
+import { foreignTaxCreditGap } from "../1116/credit.js";
 import { cleanVehicleCreditGap } from "../8936/credit.js";
 import type { Form8936FilingInfo } from "../8936/filingInfo.js";
 import { worksheetBLine14, type WorksheetBInfo } from "../schedule-8812/worksheetB.js";
@@ -24,7 +25,6 @@ export const isUnsupported = (value: object): value is Unsupported => "unsupport
  * one of their forms files, the total would leave its credit out.
  */
 const UNCOMPUTED_CREDITS: ReadonlyArray<[formId: string, line: string]> = [
-  ["form-1116", "Schedule 3 line 1 (Form 1116)"],
   ["form-8880", "Schedule 3 line 4 (Form 8880)"],
   ["form-8978", "Schedule 3 line 6l (Form 8978)"],
 ];
@@ -53,6 +53,11 @@ export function creditLimitOf(
     return unsupported(
       `Line 2 of the Credit Limit Worksheet takes ${missing[1]}, which the engine does not compute yet.`,
     );
+  }
+  // Schedule 3 line 1 (Form 1116 or the election) is figured; a gap there is a gap here.
+  const foreignTax = foreignTaxCreditGap(form, info);
+  if (foreignTax !== undefined) {
+    return unsupported(`Line 2 of the Credit Limit Worksheet takes ${foreignTax}`);
   }
   // Schedule 3 lines 6f and 6m (Form 8936) are figured; a gap there is a gap here.
   const vehicleGap = cleanVehicleCreditGap(form, info);
