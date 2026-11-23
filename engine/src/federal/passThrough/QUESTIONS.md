@@ -24,7 +24,10 @@ Each question has its source and the default the code uses now.
    for a shareholder it means the stock was sold or the corporation ended,
    which needs the basis computation
    (irs-1040se-inst-2025::sec::line-28::b03). Default: a final K-1 from an S
-   corporation or a partnership stops at the basis stage, as unsupported.
+   corporation stops at the basis stage, as unsupported. A final partnership
+   K-1 goes on when the holding records the disposition of the entire interest
+   (`disposedOfEntirely`, item 32); without it, and for a partial sale (item
+   J), it stops there.
 4. **Losses carried from earlier years when the holding does not say.**
    Schedule E line 27 asks about them (irs-1040se-inst-2025::sec::line-27::b01).
    Default: an absent `carriedLosses` means none, the same rule as a
@@ -53,7 +56,11 @@ Each question has its source and the default the code uses now.
 6. **When the material participation answer is asked.** It matters only for
    trade or business items (irs-1120sk1-inst-2025::sec::passive-activity-limitations::b08).
    Default: the holding is asked for its answer only when the K-1 has an item
-   that is not portfolio income; a K-1 with only interest does not ask.
+   that is not portfolio income; a K-1 with only interest does not ask. A
+   partnership K-1 asks it for a business item (boxes 1, 10 to 13) or a
+   carried passive loss, and asks the real estate professional answer for a
+   rental item (boxes 2 and 3,
+   irs-1065k1-inst-2025::sec::box-2-net-rental-real-estate-income-loss::b01).
 7. **Schedule E columns (e) and (f) for a routed K-1.** Column (e) is checked
    for a loss, a distribution, a sale of stock or a loan repayment, with the
    basis computation attached (irs-1040se-inst-2025::sec::line-28::b03);
@@ -62,8 +69,10 @@ Each question has its source and the default the code uses now.
    when Form 7203 files for the K-1 (`needsForm7203`); column (f) is No, since
    the at-risk stage routes a loss only when all of the investment is at
    risk. A "PYA" row leaves both blank: the K-1's own row answers them. A
-   sale of stock stops at the basis stage. A partnership's item J sale
-   answer is not read yet.
+   sale of stock stops at the basis stage. A partnership's row leaves column
+   (e) unchecked: the line 28 instructions ask for the basis computation from
+   an S corporation's owner only (::line-28::b03). A partnership's item J
+   sale answer stops the K-1 (item 3).
 8. **Schedule E lines A and B with only Part II.** Line A asks about payments
    that require Forms 1099 (irs-1040se-inst-2025::sec::line-a::b01) and sits in
    Part I. Default: asked only when Part I is in use, as before.
@@ -73,8 +82,9 @@ Each question has its source and the default the code uses now.
 10. **Schedule K-3.** A checked box 14 (S corporation) or box 16 (partnership)
     means international items on another schedule
     (irs-1120sk1-inst-2025::sec::box-14-international-transactions::b01).
-    Default: the K-1 is unsupported. A partnership's box 21 foreign taxes have
-    no route yet, so its K-1 is unsupported too.
+    Default: the K-1 is unsupported. A partnership's box 21 foreign taxes go to
+    Schedule 3 line 1, which is the gap that names them, as an S corporation's
+    box 16 code F (item 22).
 11. **A beneficiary's basis and at-risk.** The basis limits in the corpus are
     for shareholders and partners (irs-1120sk1-inst-2025::sec::basis-limitations::b01,
     irs-1065k1-inst-2025::sec::basis-limitations). Default: the basis stage
@@ -129,7 +139,9 @@ Each question has its source and the default the code uses now.
     irs-8582cr-inst-2025::sec::material-participation::b06). Default: column
     (d), passive income, which keeps it in net investment income (Form 8960
     line 4a, no line 4b adjustment). While Form 8582 files, Part III is
-    unsupported: Form 8582 does not take a K-1's passive income yet. Form
+    unsupported: Form 8582 takes a partnership K-1's passive income (item
+    32 to 35) but not a trust K-1's, since the beneficiary rules are not
+    issued. Form
     8960's filing test counts the same income: every rental item, a trust's
     business income, and the business income of a K-1 whose owner did not
     materially participate (irs-8960-inst-2025::sec::passive-activity::b01).
@@ -222,10 +234,20 @@ Each question has its source and the default the code uses now.
     they never count as dropped. A distribution above basis stops the K-1
     (federal/7203/QUESTIONS.md).
 29. **A partnership's basis.** The partner's basis has no IRS form, only the
-    worksheet in irs-1065k1-inst-2025::sec::basis-limitations. Default: a
-    partnership K-1 with a loss, deduction, distribution, loan repayment or
-    carried basis loss stays unsupported at the basis stage (README.md, "What
-    the next steps add").
+    worksheet (irs-1065k1-inst-2025::sec::basis-limitations::b01,
+    ::use-the-worksheet-for-adjusting-the-basis-of-a::b01). Default
+    (`partnerBasis.ts`): the worksheet's lines in its order. The engine
+    assumes no liabilities assumed either way (lines 3d and 9b, ::line-3d::b01,
+    ::line-9b::b01), no gain on contributed property (line 5) and no excess
+    depletion (lines 6 and 13): no fact holds them. A K-1 that gives item K1
+    at one end of the year only waits on the K-1 fact; neither end means no
+    share of liabilities. Business interest expense (box 20 code N, line 4n and
+    line 15q), excess business interest expense (box 13 code K), a
+    distribution other than cash (box 19 codes B to G), a distribution above
+    basis (line 11b), nondeductible expenses above basis (line 12 column E)
+    and a loss held back in the year the interest is sold are each a gap that
+    names the K-1. The liabilities share counts as basis whatever kind of debt
+    it is; whether it is at risk is the at-risk stage's question (item 36).
 30. **A nonpassive K-1 business and net investment income.** Line 4a takes
     all of Schedule 1 line 5, and line 4b takes out "net income or loss from a
     section 162 trade or business that's not a passive activity"
@@ -242,4 +264,89 @@ Each question has its source and the default the code uses now.
     entity; one would need its own answer. A partnership's self-employment
     income (::special-rule-for-self-employed::b01) has no route yet. The
     corpus has no rule on working capital for line 4b. Passive K-1 income (a
-    trust's Part III column (d)) stays in NII.
+    trust's Part III column (d), a partnership's column (h)) stays in NII, and
+    so does a partnership's rental, which is passive for every partner but a
+    real estate professional (irs-1065k1-inst-2025::sec::box-2-net-rental-real-estate-income-loss::b01):
+    line 4b takes only box 1.
+31. **Guaranteed payments and net investment income.** Boxes 4a and 4b go in
+    Schedule E column (k) (irs-1065k1-inst-2025::sec::box-4a-guaranteed-payments-for-services::b01,
+    ::box-4b-guaranteed-payments-for-capital::b01), so Form 8960 line 4a takes
+    them in. The Form 8960 instructions in the corpus do not name guaranteed
+    payments; line 4b removes income "taken into account in determining
+    self-employment income" (irs-8960-inst-2025::sec::line-4b-adjustment-for-net-income-or-loss::b01),
+    which may cover box 4a but not box 4b. Default: a K-1 with guaranteed
+    payments makes line 4b a gap that names it.
+32. **An entire disposition: which column.** With an overall loss the
+    activity is not entered on Form 8582 and every loss is allowed
+    (irs-8582-inst-2025::sec::reporting-an-entire-disposition-on-form-4797-or::b01).
+    Two readings say where. The Form 8582 example puts "the net loss plus the
+    prior-year unallowed loss" in Schedule E Part II column (i) (::b03); the
+    Schedule E instructions put a prior-year passive loss released by a
+    disposition "on a separate line in column (g)" with "PYA"
+    (irs-1040se-inst-2025::sec::prior-year-unallowed-losses-from-a-passive::b01).
+    Default: the Form 8582 example, one row, column (i) (scenario `bayle`);
+    the totals are the same either way. Line 27 is Yes: the carried loss is
+    not reported on Form 8582. The overall gain or loss needs the gain on the
+    sale, which no K-1 prints: the holding's `gainOnDisposition`. The engine
+    does not check it against the Form 8949 row, which is a trade fact with
+    the box F decision (no 1099-B reports a private sale). How Cade records a
+    sale with no 1099-B is open. A disposition with an overall gain is a Part
+    V row with the gain in column (a) (::b02, Example 1).
+33. **The special allowance next to a K-1 loss.** Form 8582 line 9 needs
+    modified AGI (line 6), which the limit stage, run from the facts, does
+    not have. Default: when the return's Part IV rentals have a loss (line 1d)
+    and line 3 is a loss, a K-1 with an overall passive loss is unsupported;
+    a K-1 with passive income is allowed as usual. Form 8582 itself still
+    figures line 9 for the rentals.
+34. **K-1 rental real estate and active participation.** A limited partner
+    cannot actively participate
+    (irs-1065k1-inst-2025::sec::passive-activity-limitations::b16), so the
+    rental is a Part V row. Default: any other partner is asked
+    (`activelyParticipated`); a yes is unsupported (Part IV and the special
+    allowance for a K-1, item 33); a no is Part V. The box 2 exception that
+    skips Form 8582 (::box-2-net-rental-real-estate-income-loss::b01, item 1)
+    needs active participation, so it never applies here.
+35. **What one K-1 activity is.** Each partnership K-1 is one passive
+    activity unless box 23 is checked
+    (irs-1065k1-inst-2025::sec::passive-activity-limitations::b04). A trade or
+    business and a rental are separate activities, and so are rental real
+    estate and other rentals. Default: box 23 checked, or passive items of two
+    kinds on one K-1, is unsupported. A publicly traded partnership is figured
+    apart from Form 8582 (::b10): unsupported. Only box 1, 2 and 3 items can be
+    in the activity; another passive item (box 10, 11, 12 or 13) is
+    unsupported. A carried passive loss with no passive item this year (a
+    former passive activity, or one whose kind is not known) is unsupported.
+36. **A basis loss and the passive limit.** The limits apply in order
+    (irs-1040se-inst-2025::sec::special-rules-that-limit-losses::b02: "After
+    applying the basis rules, the loss ... may be further reduced by the
+    at-risk rules and passive activity loss rules"). Default: a basis loss
+    carried from an earlier year and allowed now is, for a passive activity,
+    this year's loss on Form 8582 (column (b)) and is reported in column (g);
+    for a nonpassive one it is the "PYA" row. The at-risk stage passes only
+    when the holding says all of the investment is at risk, the share of
+    nonrecourse debt included (::other-deductions::b04 of the partner's
+    instructions lists what is not at risk); otherwise Form 6198 is
+    unsupported, as before.
+37. **The carried passive loss and QBI.** A passive loss allowed this year
+    after being carried is a QBI loss carryforward (Form 8995 line 3,
+    irs-8995-inst-2025::sec::line-3::b01), and its qualified part is not in
+    any fact (`carriedQualifiedBusinessLoss` is the basis loss's). Default: a
+    K-1 with a statement and an allowed carried passive loss makes its QBI a
+    gap. This year's passive loss counts as QBI only as far as Form 8582
+    allows it (item 5).
+38. **Form 8582 line 6 and K-1 amounts.** Line 6 leaves out passive income
+    and loss only. Default: it now adds Schedule E Part II columns (k) less
+    (i), every K-1's nonpassive amount and an entire disposition's released
+    loss (irs-8582-inst-2025::sec::reporting-an-entire-disposition-on-form-4797-or::b02).
+    A trust's Part III column (f) income is still not added; no scenario has
+    it with Form 8582 Part II.
+39. **Partnership items with no route.** Box 6c dividend equivalents are not
+    reported on Form 1040 (irs-1065k1-inst-2025::sec::box-6c-dividend-equivalents::b01)
+    but share a type with other box 20 information, so they stay unrouted.
+    Box 7 royalties go on Schedule E line 4 (::box-7-royalties::b01), a Part I
+    column the engine fills from rental facts only. Box 14 goes on Schedule SE
+    (irs-1040se-inst-2025::sec::domestic-partnerships::b02), which reads
+    Schedule C only today. Box 20 codes A and B are Form 4952 amounts. Boxes
+    10, 11 (other than code A), 12, 15, 17 and the rest of box 20 stay
+    unrouted, each a named gap on Schedule E line 41, as the business-tax
+    depth rule asks.

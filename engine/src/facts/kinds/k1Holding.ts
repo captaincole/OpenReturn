@@ -15,9 +15,10 @@
 type FactRow = { key: string; value: unknown; category: string };
 
 /*
- * Losses and deductions an S corporation shareholder could not deduct last year
- * because of the basis limit, by item, positive amounts: last year's Form 7203
- * Part III column (e), this year's column (b). They keep their character
+ * Losses and deductions an S corporation shareholder or a partner could not
+ * deduct last year because of the basis limit, by item, positive amounts: last
+ * year's Form 7203 Part III column (e), this year's column (b), or the
+ * Partner's Basis Worksheet line 15 columns E and B. They keep their character
  * (irs-7203-inst-2025::sec::part-iii::b01) and are carried forward indefinitely
  * (irs-7203-inst-2025::sec::basis-limitations::b01).
  */

@@ -12,12 +12,15 @@ layers, and each layer reads only the one before it.
    fact. Nothing is interpreted here.
 2. **The holding** (`facts/kinds/k1Holding.ts`). One fact for each entity,
    with the owner's answers that no K-1 prints: whose K-1 it is on a joint
-   return, material participation, all of the investment at risk, the Form
-   7203 answers (stock basis at the start, contributions, loans, debt basis),
-   losses carried from earlier years by each limit (basis losses by item), and
-   an interest that ended. It shares the K-1's id: `k1.holding.<id>` goes with
-   `k1.s_corporation.<id>`. The carried basis losses become items marked
-   `fromPriorYear` (`priorYearItemsOf` in `items.ts`).
+   return, material participation, active participation and the real estate
+   professional answer, all of the investment at risk, the Form 7203 answers
+   (stock basis at the start, contributions, loans, debt basis), a partner's
+   basis at the start, losses carried from earlier years by each limit (basis
+   losses by item), and an interest that ended with the gain on it. It shares
+   the K-1's id: `k1.holding.<id>` goes with `k1.s_corporation.<id>`. The
+   carried basis losses become items marked `fromPriorYear` (`priorYearItemsOf`
+   in `items.ts`); a carried passive loss becomes one at the passive stage,
+   marked `passiveCarryover` too.
 3. **One vocabulary** (`itemTypes.ts`, `boxTable.ts` and the three tables
    `sCorporationBoxes.ts`, `partnershipBoxes.ts`, `trustBoxes.ts`). Each
    table turns a box and code into an item `{ entity, type, amount }`. The
@@ -30,10 +33,16 @@ layers, and each layer reads only the one before it.
    it carries to next year, or why it waits or cannot decide. Portfolio items
    (interest, dividends, capital gains) skip the passive stage. The basis
    stage of an S corporation reads `basis.ts`, which figures every Form 7203
-   line; Form 7203's rules read the same computation. The stages read a
-   `LimitContext` besides the items: the filing status and the return's other
-   business losses (`limitContextOf` in `receipts.ts`), which a form gets from
-   Schedule E's `passThroughLimitContext` slot (`limitContextFrom`).
+   line; Form 7203's rules read the same computation. A partner's basis stage
+   reads `partnerBasis.ts`, the Partner's Basis Worksheet. The passive stage
+   (`passive.ts`, `passiveActivity.ts`) puts each passive partnership K-1 on
+   Form 8582 Part V with the return's rentals and allows what Part VIII
+   allows. The stages read a `LimitContext` besides the items: the filing
+   status, the return's other business losses and Form 8582's rows for the
+   return's rentals (`limitContextOf` in `receipts.ts`), which a form gets from
+   Schedule E's `passThroughLimitContext` slot (`limitContextFrom`). Form 8582
+   reads the K-1 rows from Schedule E's `passiveK1Activities` slot
+   (`form8582Rows.ts`), the same rows the stage builds.
 5. **Routing** (`routing.ts`, `receipts.ts`, and the forms). `ROUTES` lists,
    for each K-1 form, the item types that have a line, and each route names
    its destination (`interest_list`, `schedule_d_line_12`, ...). A form that
@@ -55,6 +64,14 @@ layers, and each layer reads only the one before it.
 | 1120-S | box 16 code F foreign taxes | `schedule_3_line_1` | unsupported there: the credit comes from Schedule K-3, which the engine does not read; Form 7203 line 46 still takes it |
 | 1120-S | box 17 code V statement | `qbi` | one more business on Form 8995 or 8995-A (`qbi/`), its QBI scaled to the allowed loss |
 | 1120-S, 1065 | box 17 code AC, box 20 code AG: gross receipts for section 448(c) | `no_line` | none: it informs Form 8990 only |
+| 1065 | box 1, boxes 2 and 3 | `schedule_e_part_ii` | Schedule E line 28: (h) passive income, (g) the passive loss Form 8582 allows, (k) or (i) for a business the partner materially participated in; an entire disposition with an overall loss in (i) |
+| 1065 | boxes 4a, 4b, 4c guaranteed payments | `schedule_e_part_ii` | column (k); box 4c only for the part above 4a and 4b |
+| 1065 | box 5, box 6a, box 6b | `interest_list`, `dividend_list`, `qualified_dividends` | Schedule B payer rows; Form 1040 lines 2b, 3b, 3a |
+| 1065 | box 8, box 9a; boxes 9b, 9c | `schedule_d_line_5`, `schedule_d_line_12`; `schedule_d_line_18`, `schedule_d_line_19` | Schedule D lines 5 and 12; lines 18 and 19 are unsupported there |
+| 1065 | box 13 codes A to G | `schedule_a_line_11` | code A on line 11; the others are unsupported there |
+| 1065 | box 18 code A; codes B, C; box 19 | `form_1040_line_2a`; `partner_basis` | Form 1040 line 2a; the Partner's Basis Worksheet only (box 19 codes other than A are unsupported there) |
+| 1065 | box 20 code Z statement | `qbi` | one more business on Form 8995 or 8995-A, its QBI scaled to the allowed loss |
+| 1065 | box 21 foreign taxes | `schedule_3_line_1` | unsupported there: the credit comes from Schedule K-3 |
 | 1041 | box 1 interest | `interest_list` | a Schedule B line 1 payer row (the trust's name); Form 1040 line 2b |
 | 1041 | box 2a ordinary dividends | `dividend_list` | a Schedule B line 5 payer row; Form 1040 line 3b |
 | 1041 | box 2b qualified dividends | `qualified_dividends` | Form 1040 line 3a, so the qualified dividends worksheet |
@@ -144,24 +161,49 @@ routed nor reported (`tests/unit/federal/passThrough/boxTables.test.ts`).
   or loss (columns (i) and (k)) back out of line 4a: it is not net investment
   income (`8960/lines.ts nonpassiveK1Adjustments`, QUESTIONS.md item 30).
 
+## What the partnership step handles
+
+- A partnership K-1's items have routes (the table above): business and
+  rental income or loss, guaranteed payments, the portfolio boxes, gifts,
+  tax-exempt interest, the basis-only items, the section 199A statement and
+  foreign taxes.
+- A partner's basis (`partnerBasis.ts`): the worksheet's Part I (the basis at
+  the start, contributions, the change in the share of liabilities from item
+  K1, the income items, cash distributions) and Part II (nondeductible
+  expenses, then each loss and deduction in proportion). A loss over the basis
+  carries to next year by item, as Form 7203 does; once allowed, a carried
+  nonpassive loss is a "PYA" row.
+- A passive partnership K-1 on Form 8582 (scenarios `tam`, `cadsuane`): a
+  business the partner does not materially participate in, or a rental, is
+  one Part V activity with its carried passive loss in column (c). Its passive
+  income frees other K-1s' losses and the rentals' losses; each losing K-1 is
+  allowed its Part VIII column (c), shared between this year's loss and the
+  carried one in proportion; the rest carries. Schedule E line 28 shows the
+  income in column (h) and the allowed loss in column (g). The rentals' rows
+  are the same with or without a K-1 (`8582/rentalRows.ts`).
+- A holding that ended (scenario `bayle`): an entire disposition with an
+  overall loss is not on Form 8582, and every loss, the carried one included,
+  is allowed in column (i), line 27 Yes; one with an overall gain is a Part V
+  row with the gain in column (a). The holding gives the gain; the sale itself
+  is a Form 8949 row from a trade fact.
+- Readers: Form 8960 keeps passive K-1 income in net investment income and
+  takes out only a materially participating partner's box 1 on line 4b; Form
+  8995 scales the statement's QBI to the allowed loss; Form 8582 line 6 counts
+  Schedule E Part II's nonpassive columns.
+
 ## What the next steps add
 
 - **Schedule K-3** for an S corporation's or a partnership's foreign taxes,
   and the 28% rate gain and unrecaptured section 1250 gain worksheets.
-- **A partnership K-1's losses** (step 4). The partner's basis has no IRS form:
-  it is the Worksheet for Adjusting the Basis of a Partner's Interest in the
-  Partner's Instructions (irs-1065k1-inst-2025::sec::basis-limitations). It
-  needs the holding's `partnershipBasisAtStart`, the partner's share of
-  liabilities (the K-1's item K) as part of basis, contributions and
-  withdrawals (item L), and the same proportion rule as Form 7203 Part III.
-  `basisLimit` sends a partnership with a loss, a distribution or a carried
-  basis loss to unsupported until then; a basis computation like `basis.ts`
-  for the worksheet fills that branch, and the routes for a partnership's
-  items (none but section 448(c) gross receipts today) come with it.
-- **A passive partnership K-1** (Form 8582): the passive stage. Form 8582
-  builds its activities from Schedule E Part I columns only
-  (`8582/activities.ts`: `PassiveActivity.column` is a `PropertyColumn`); it
-  needs a K-1 activity there, and `LimitContext` needs Form 8582's allowed
-  losses. A holding that ended this year releases its passive losses.
+- **A passive S corporation K-1**: the same Form 8582 rows as a partnership's;
+  `passiveForSCorporation` still reports it unsupported.
+- **The special allowance next to a K-1 loss**: when the return's rental real
+  estate with active participation has a loss, Form 8582 line 9 needs modified
+  AGI, which the limit stage cannot read; a losing K-1 is unsupported then.
+  K-1 rental real estate with active participation (Part IV) waits for it too.
+- **The other partnership items**: box 14 (Schedule SE takes Schedule C
+  only), box 7 royalties (Schedule E Part I), boxes 10 to 12 (Form 4797 and
+  Form 4562), box 15 credits, box 17 (Form 6251), box 20 codes A and B (Form
+  4952), a publicly traded partnership, Form 6198, and a partial sale.
 
 `QUESTIONS.md` lists every doubt, with its source and the default chosen.
