@@ -67,6 +67,8 @@ export interface Form1040FilingInfo
   passThroughInterest?: Receipt;
   passThroughOrdinaryDividends?: Receipt;
   passThroughQualifiedDividends?: Receipt;
+  /** Line 2a: a K-1's tax-exempt interest (S corporation box 16 code A). */
+  passThroughTaxExemptInterest?: Receipt;
   /** Lines 4a–4c. */
   iraDistributions?: IraLine;
   /** Line 1h: disability pensions before the minimum retirement age; undefined while an answer is missing. */

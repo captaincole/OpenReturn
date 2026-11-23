@@ -33,7 +33,12 @@ function entityFor(form: K1Form, row: BoxRow, amount: number): PassThroughEntity
     boxes: [{ box: row.box, code: row.code, amount }],
     ...(row.type === "section_199a_information" ? { section199A: STATEMENT } : {}),
   } as K1FactValue;
-  const holding: K1HoldingFactValue = { owner: "taxpayer", materiallyParticipated: true };
+  const holding: K1HoldingFactValue = {
+    owner: "taxpayer",
+    materiallyParticipated: true,
+    stockBasisAtStart: 50000,
+    allInvestmentAtRisk: true,
+  };
   const key = `k1.test.${row.box}${row.code ?? ""}`;
   return {
     key,
@@ -44,8 +49,19 @@ function entityFor(form: K1Form, row: BoxRow, amount: number): PassThroughEntity
     k1,
     holding,
     items: itemsOf(key, k1),
+    priorYearItems: [],
   };
 }
+
+const CONTEXT = {
+  filingStatus: "single" as const,
+  otherBusinessLosses: { scheduleCLosses: 0, rentalLosses: 0, unknownKeys: [] },
+};
+
+const gapInfo = (entity: PassThroughEntity) => ({
+  passThroughEntities: [entity],
+  passThroughLimitContext: CONTEXT,
+});
 
 const rowName = (form: K1Form, row: BoxRow) =>
   `${form} box ${row.box}${row.code ? ` code ${row.code}` : ""} (${row.type})`;
@@ -58,17 +74,17 @@ describe("every row of the three K-1 box tables is routed or reported", () => {
   it.each(cases)("$name", ({ form, row }) => {
     for (const amount of [1000, -1000]) {
       const entity = entityFor(form, row, amount);
-      const [routed] = routeEntities([entity], { filingStatus: "single" });
+      const [routed] = routeEntities([entity], CONTEXT);
       // A full holding never leaves a single box waiting.
       expect(routed.kind).not.toBe("waiting");
       if (routed.kind === "routed") {
         // Only a row with a route, and only an amount the limits let through.
         expect(routeOf(form, row.type)).toBeDefined();
-        expect(passThroughGaps({ passThroughEntities: [entity] })).toEqual([]);
+        expect(passThroughGaps(gapInfo(entity))).toEqual([]);
         continue;
       }
       // Reported: line 41's reason names the entity and the item type.
-      const gaps = passThroughGaps({ passThroughEntities: [entity] });
+      const gaps = passThroughGaps(gapInfo(entity));
       expect(gaps.length).toBeGreaterThan(0);
       expect(gaps.join(" ")).toContain(entity.name);
       expect(gaps.join(" ")).toContain(labelOf(row.type));
@@ -101,10 +117,26 @@ describe("the box tables", () => {
     expect(rowFor(BOX_TABLES["1065"], "13", "A").type).toBe("charitable_contribution");
   });
 
-  it("routes an S corporation's box 1 and statement, gross receipts, and a trust's income items", () => {
+  it("routes an S corporation's income, portfolio and basis items, gross receipts, and a trust's income items", () => {
     const routedRows = cases.filter(({ form, row }) => routeOf(form, row.type) !== undefined);
     expect(routedRows.map(({ name }) => name)).toEqual([
       "1120-S box 1 (ordinary_business_income)",
+      "1120-S box 4 (interest)",
+      "1120-S box 5a (ordinary_dividends)",
+      "1120-S box 5b (qualified_dividends)",
+      "1120-S box 7 (net_short_term_capital_gain)",
+      "1120-S box 8a (net_long_term_capital_gain)",
+      "1120-S box 12 code A (charitable_contribution)",
+      "1120-S box 12 code B (charitable_contribution)",
+      "1120-S box 12 code C (charitable_contribution)",
+      "1120-S box 12 code D (charitable_contribution)",
+      "1120-S box 12 code E (charitable_contribution)",
+      "1120-S box 12 code F (charitable_contribution)",
+      "1120-S box 12 code G (charitable_contribution)",
+      "1120-S box 16 code A (tax_exempt_interest)",
+      "1120-S box 16 code B (other_tax_exempt_income)",
+      "1120-S box 16 code C (nondeductible_expenses)",
+      "1120-S box 16 code D (distribution)",
       "1120-S box 17 code V (section_199a_information)",
       "1120-S box 17 code AC (gross_receipts_448c)",
       "1065 box 20 code AG (gross_receipts_448c)",
@@ -127,7 +159,7 @@ describe("the box tables", () => {
 
   it("reports an unknown box by its box and code", () => {
     const row = rowFor(BOX_TABLES["1120-S"], "17", "W");
-    const gaps = passThroughGaps({ passThroughEntities: [entityFor("1120-S", row, 500)] });
+    const gaps = passThroughGaps(gapInfo(entityFor("1120-S", row, 500)));
     expect(gaps.join(" ")).toContain("box 17 code W");
   });
 });

@@ -1,6 +1,7 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Form1040FilingInfo } from "../1040/filingInfo.js";
 import type { Form4952FilingInfo } from "../4952/filingInfo.js";
+import type { Receipt } from "../passThrough/receipts.js";
 
 /*
  * Line 9 reads Form 4952 line 8 through the form accessor; the 4952 answer
@@ -56,6 +57,9 @@ export interface ScheduleAFilingInfo
 
   /** Line 11. */
   giftsCashCheck?: number;
+
+  /** Line 11: the K-1 charitable contributions the basis limit allows (passThrough/receipts.ts). */
+  passThroughCharitable?: Receipt;
 
   /** Line 12. */
   giftsOtherThanCash?: number;

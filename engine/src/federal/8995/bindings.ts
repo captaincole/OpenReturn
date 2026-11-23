@@ -70,6 +70,21 @@ function line2Pending(form: Read, info: Form8995FilingInfo): boolean {
   return (info.qbiBusinesses?.length ?? 0) > 0 && numberOrBlank(form["0.line.2"]) === undefined;
 }
 
+/*
+ * Line 3 (irs-8995-inst-2025::sec::line-3::b01): "the qualified portion of
+ * trade or business (loss) carryforward allowed in calculating taxable income
+ * in the current year": a K-1's basis loss carried from an earlier year and
+ * allowed now (qbi/resolveInfo.ts). MANUAL EDIT: no fact gives last year's line
+ * 16, so without a K-1 amount the line stays the gap it was; with one it
+ * counts the K-1's part only (QUESTIONS.md in federal/passThrough/).
+ */
+function line3(info: Form8995FilingInfo) {
+  const amounts = (info.qbiBusinesses ?? [])
+    .map((business) => business.priorYearQbiLoss)
+    .filter((amount): amount is number => amount !== undefined);
+  return amounts.length > 0 ? roundDollars(sum(...amounts)) : unsupported(QBI_CARRYFORWARD);
+}
+
 // Lines 3 and 7 print in parentheses: a positive loss that the combining lines subtract.
 const combined = (amount: unknown, loss: unknown) => sum(amount) - sum(loss);
 
@@ -109,6 +124,7 @@ export function register(): void {
       "0.line.1v_b": (_, info) => tin(info, "v"),
       "0.line.1v_c": (form, info) => qbi(form, info, "v"),
       "0.line.2": (form, info) => line2(form, info),
+      "0.line.3": (_, info) => line3(info),
       "0.line.4": (form, info) =>
         line2Pending(form, info)
           ? undefined
@@ -146,7 +162,6 @@ export function register(): void {
     },
 
     unsupported: {
-      "0.line.3": QBI_CARRYFORWARD,
       "0.line.7": REIT_PTP_CARRYFORWARD,
     },
   });

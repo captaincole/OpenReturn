@@ -2,6 +2,7 @@ import type { RentalFactValue } from "../../facts/index.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Form1040FilingInfo } from "../1040/filingInfo.js";
 import type { PassThroughEntity } from "../passThrough/items.js";
+import type { LimitContext } from "../passThrough/limits.js";
 
 /* Part I has three columns; a fourth property needs a second Schedule E (not modeled). */
 export type PropertyColumn = "a" | "b" | "c";
@@ -35,4 +36,6 @@ export interface ScheduleEFilingInfo
    * Part II rows take the S corporations and partnerships; Part III the estates and trusts.
    */
   passThroughEntities?: PassThroughEntity[];
+  /* What the loss limits read besides the items (passThrough/receipts.ts, limitContextOf). */
+  passThroughLimitContext?: LimitContext;
 }

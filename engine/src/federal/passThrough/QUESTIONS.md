@@ -27,14 +27,24 @@ Each question has its source and the default the code uses now.
 4. **Losses carried from earlier years when the holding does not say.**
    Schedule E line 27 asks about them (irs-1040se-inst-2025::sec::line-27::b01).
    Default: an absent `carriedLosses` means none, the same rule as a
-   rental's `priorYearUnallowedLoss`. Line 27 is No when every Part II K-1 is
-   routed, and the gap otherwise.
+   rental's `priorYearUnallowedLoss`. A carried basis loss is held by item
+   (last year's Form 7203 Part III column (e)). Line 27 is Yes when a routed
+   K-1 has an allowed item from an earlier year, No when every Part II K-1 is
+   routed with none, and the gap otherwise.
 5. **QBI from the section 199A statement.** The statement "may include items
    that aren't includible"; only items allowed in figuring taxable income count
-   (irs-1120sk1-inst-2025::sec::box-17-other-information::b12). Default: when
-   every item of the K-1 is routed (so all are allowed), the statement's QBI is
-   used unchanged; otherwise Form 8995 shows the K-1's gap. One statement holds
-   one trade or business; more are not modeled.
+   (irs-1120sk1-inst-2025::sec::box-17-other-information::b12). Losses a limit
+   suspends are not QBI, and "the allowed loss or deduction is then multiplied
+   by this percentage to determine the portion of the allowed loss or
+   deduction attributable to QBI" (irs-8995-inst-2025::sec::determining-your-qualified-business::b02,
+   ::b03). Default: when every item is routed and the limits hold back none of
+   the business losses (not portfolio, not charitable), the statement's QBI is
+   used unchanged. When they hold back part, a negative statement QBI is
+   scaled by the allowed business losses over this year's business losses
+   (the percentage method of ::b03, reading the statement's QBI as the QBI
+   part of the whole loss); a statement QBI of 0 or more with a loss held
+   back is a gap. One statement holds one trade or business; more are not
+   modeled.
 6. **When the material participation answer is asked.** It matters only for
    trade or business items (irs-1120sk1-inst-2025::sec::passive-activity-limitations::b08).
    Default: the holding is asked for its answer only when the K-1 has an item
@@ -43,11 +53,12 @@ Each question has its source and the default the code uses now.
    for a loss, a distribution, a sale of stock or a loan repayment, with the
    basis computation attached (irs-1040se-inst-2025::sec::line-28::b03);
    column (f) for amounts not at risk in an activity with a loss
-   (::special-rules-that-limit-losses::b03). Default: a routed K-1 has none of
-   these, so both print unchecked. Fewer shares at the end of the year than at
-   the start (Part II item H) is a sale: the basis stage reports it, since
-   Form 7203 and the gain on the sale are not modeled. A partnership's item J
-   sale answer is not read yet.
+   (::special-rules-that-limit-losses::b03). Default: column (e) is checked
+   when Form 7203 files for the K-1 (`needsForm7203`); column (f) is No, since
+   the at-risk stage routes a loss only when all of the investment is at
+   risk. A "PYA" row leaves both blank: the K-1's own row answers them. A
+   sale of stock stops at the basis stage. A partnership's item J sale
+   answer is not read yet.
 8. **Schedule E lines A and B with only Part II.** Line A asks about payments
    that require Forms 1099 (irs-1040se-inst-2025::sec::line-a::b01) and sits in
    Part I. Default: asked only when Part I is in use, as before.
@@ -66,9 +77,28 @@ Each question has its source and the default the code uses now.
     (irs-1041k1-inst-2025::sec::box-5-other-portfolio-and-nonbusiness-income::b01).
 12. **The excess business loss cap.** It applies to an aggregate business loss
     above the threshold, figured with every business on the return (Form 461,
-    irs-1120sk1-inst-2025::sec::excess-business-loss-limitations::b01). Default:
-    any K-1 business loss is unsupported, even a small one. The basis stage
-    already stops every loss in this step.
+    irs-1120sk1-inst-2025::sec::excess-business-loss-limitations::b01). An
+    excess business loss is the amount by which business deductions are more
+    than business income "plus the threshold amount", $313,000 or $626,000 on
+    a joint return for 2025 (irs-461-inst-2025::sec::who-must-file::b02).
+    Form 461 must be attached when net business losses are more than the
+    threshold, or "a loss of more than $156,500 on any one of Form 461, lines
+    1 through 8" (::b01). Default (`excessBusinessLoss.ts`): the stage adds
+    every K-1 business loss that reaches it and the return's other business
+    losses (each Schedule C line 31 loss and each rental's loss before the
+    passive rules, `otherBusinessLosses` in `receipts.ts`), without any
+    income. At or below the threshold no loss can be limited and the items
+    pass in full; above it the K-1 is unsupported, since the income side and
+    Form 461's rules are not modeled. An unknown filing status uses the lower
+    threshold (no other stage waits on the status). Separately, Form 461's
+    resolver files the form when the K-1 and rental losses (line 5) or the
+    Schedule C losses (line 2), added without income, are more than $156,500.
+    That bound can require the form when a line nets below $156,500; Form 461
+    has no rules, so it shows as filed with every line unsupported, and the
+    rest of the return computes. A business whose amount is not known yet
+    makes the K-1 wait on that business's fact. A K-1 stopped at an earlier
+    stage is not added; its own gap already keeps the return from looking
+    finished.
 13. **Scenario `lan`: who owns which business.** The task gives the spouse the
     Schedule C and the taxpayer the S corporation. A spouse's Schedule SE on a
     joint return is not modeled (`schedule-se/resolveInfo.ts`). Default: the
@@ -135,3 +165,39 @@ Each question has its source and the default the code uses now.
     income and excess business interest income (codes AA, AB; AE, AF) go on
     Form 8990 "if you are required to file" it (::b15,
     irs-1065k1-inst-2025::sec::part-xiii::b02), so they stay unrouted.
+25. **Splitting an allowed amount between this year's item and a carried one.**
+    Form 7203 Part III prorates each line's columns (a) plus (b) together
+    (irs-7203-inst-2025::sec::part-iii::b01, ::b02). The routes need the two
+    apart: a carried loss allowed now has its own Schedule E row and goes on
+    Form 8995 line 3. Default: one Part III row for each item, this year's and
+    each carried one, prorated on its own; a line prints the sum of its rows.
+    With rounding the line can differ by a dollar from prorating the line once.
+26. **The qualified part of a carried loss.** Form 8995 line 3 takes "the
+    qualified portion of trade or business (loss) carryforward allowed in
+    calculating taxable income in the current year"
+    (irs-8995-inst-2025::sec::line-3::b01), and line 1 never takes it
+    (::specific-instructions::b02). Losses from before 2018 are not qualified
+    (::determining-your-qualified-business::b03). Default: the holding gives
+    the qualified part of the carried ordinary loss
+    (`carriedQualifiedBusinessLoss`, the QBI Loss Tracking Worksheet's column
+    I); the allowed part times its share is line 3, and the QBI form waits on
+    the holding while it is missing. No fact gives last year's Form 8995 line
+    16, so line 3 counts only the K-1's part, and stays the old gap without
+    one. On Form 8995-A the K-1's QBI is a gap: Schedule C (Form 8995-A) line 2
+    has no rules.
+27. **A K-1 contribution other than cash to a 60% organization.** Code A goes
+    on Schedule A line 11 subject to the 60% limit; codes B to G have other
+    limits or lines (irs-1120sk1-inst-2025::sec::box-12-other-deductions::b06
+    to ::b08). Default: only code A is added to line 11; any other allowed
+    contribution makes line 11 a gap that names it. On the standard deduction
+    no line takes them.
+28. **Distributions and nondeductible expenses route nowhere.** Box 16 codes B,
+    C and D change basis only (irs-1120sk1-inst-2025::sec::box-16-items-affecting-shareholder-basis::b01).
+    Default: they route to `form_7203`, which no form reads as a receipt, so
+    they never count as dropped. A distribution above basis stops the K-1
+    (federal/7203/QUESTIONS.md).
+29. **A partnership's basis.** The partner's basis has no IRS form, only the
+    worksheet in irs-1065k1-inst-2025::sec::basis-limitations. Default: a
+    partnership K-1 with a loss, deduction, distribution, loan repayment or
+    carried basis loss stays unsupported at the basis stage (README.md, "What
+    the next steps add").

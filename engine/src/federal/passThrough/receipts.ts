@@ -5,16 +5,27 @@
  * receipt: the items, or why they are not known yet.
  */
 
+import { businessesOnReturn, rentalsOnReturn } from "../../facts/index.js";
 import { roundDollars, sum } from "../../money.js";
 import { filingStatusOf, type ResolverInputs } from "../../resolverInputs.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { spousePropertiesOnReturn } from "../rentals/passive.js";
+import { netProfit } from "../schedule-c/lines.js";
+import { netIncomeOrLoss } from "../schedule-e/lines.js";
+import type { OtherBusinessLosses } from "./excessBusinessLoss.js";
 import {
   passThroughEntitiesOnReturn,
   type PassThroughEntity,
   type PassThroughItem,
 } from "./items.js";
-import { itemsWithRoute, routeEntities, type Route, type RoutedEntity } from "./routing.js";
+import type { LimitContext } from "./limits.js";
+import {
+  allowedWithRoute,
+  itemsWithRoute,
+  routeEntities,
+  type Route,
+  type RoutedEntity,
+} from "./routing.js";
 
 /* One item a route receives, with the K-1 it came from (a payer row names it). */
 export interface ReceivedItem {
@@ -44,9 +55,7 @@ export function receivedAt(routed: ReadonlyArray<RoutedEntity>, route: Route): R
       factKeys.push(...entry.factKeys);
       continue;
     }
-    const allowed = entry.allowed.filter((item) =>
-      itemsWithRoute(entry.entity, route).includes(item),
-    );
+    const allowed = allowedWithRoute(entry, route);
     if (entry.kind === "unsupported" && allowed.length === 0) {
       reasons.push(...entry.reasons);
       continue;
@@ -98,9 +107,43 @@ const entitiesOnReturn = (inputs: ResolverInputs) =>
   passThroughEntitiesOnReturn(inputs.facts, spousePropertiesOnReturn(filingStatusOf(inputs)))
     .entities;
 
+/*
+ * The return's business losses outside the K-1s, for the excess business loss
+ * stage (limits.ts): each Schedule C business's line 31 loss and each rental
+ * or royalty property's loss before the passive rules (Schedule E line 21),
+ * added without any income, so the total bounds what Form 461 would add up
+ * (irs-461-inst-2025::sec::who-must-file::b02). A business or property whose
+ * amount is not known yet is listed by its key.
+ */
+export function otherBusinessLosses(inputs: ResolverInputs): OtherBusinessLosses {
+  const joint = spousePropertiesOnReturn(filingStatusOf(inputs));
+  const { businesses } = businessesOnReturn(inputs.facts, joint);
+  const { properties } = rentalsOnReturn(inputs.facts, joint);
+  const values = businesses.map((business) => business.value);
+  const scheduleC = businesses.map(({ key, value }) => ({ key, net: netProfit(value, values) }));
+  const rentals = properties.map(({ key, value }) => ({ key, net: netIncomeOrLoss(value) }));
+  const losses = (amounts: Array<{ net: number | undefined }>) =>
+    sum(...amounts.map(({ net }) => Math.max(0, -(net ?? 0))));
+  return {
+    scheduleCLosses: losses(scheduleC),
+    rentalLosses: losses(rentals),
+    unknownKeys: [...scheduleC, ...rentals]
+      .filter(({ net }) => net === undefined)
+      .map(({ key }) => key),
+  };
+}
+
+/* What every loss limit reads besides the items, for a resolver. */
+export function limitContextOf(inputs: ResolverInputs): LimitContext {
+  return {
+    filingStatus: filingStatusOf(inputs),
+    otherBusinessLosses: otherBusinessLosses(inputs),
+  };
+}
+
 /* Every K-1 on this return after the limits and the routes, for a resolver. */
 export function routedOnReturn(inputs: ResolverInputs): RoutedEntity[] {
-  return routeEntities(entitiesOnReturn(inputs), { filingStatus: filingStatusOf(inputs) });
+  return routeEntities(entitiesOnReturn(inputs), limitContextOf(inputs));
 }
 
 /* What one route receives on this return. */

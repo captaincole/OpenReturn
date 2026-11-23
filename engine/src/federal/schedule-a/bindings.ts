@@ -5,6 +5,8 @@ import { atLeast, formatDollars, numberOrBlank, roundDollars, sum } from "../../
 import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { standardDeduction } from "../1040/deductions.js";
+import { describeItem, entityTitle } from "../passThrough/items.js";
+import { receivedAmounts, roundedWithReceived } from "../passThrough/receipts.js";
 import type { ScheduleAFilingInfo } from "./filingInfo.js";
 import { MEDICAL_FLOOR_RATE } from "./rates.js";
 import { saltCap } from "./saltCap.js";
@@ -68,6 +70,26 @@ function onlyWhenItemizing(bindings: Bindings): Bindings {
             info.increasedStandardDeduction === false ? bind(form, info) : undefined,
     ]),
   ) as Bindings;
+}
+
+/*
+ * MANUAL EDIT: line 11 adds a K-1's cash contributions to 60% organizations
+ * (box 12 code A, irs-1120sk1-inst-2025::sec::box-12-other-deductions::b06)
+ * that the basis limit allows. Any other K-1 contribution (30% cash, noncash,
+ * capital gain property) has its own limit and line, not modeled: a gap. With
+ * no K-1 contribution the line is the stated cash gifts, as before.
+ */
+function line11(info: ScheduleAFilingInfo) {
+  const receipt = info.passThroughCharitable;
+  const other = receivedAmounts(receipt).filter(({ item }) => item.detail !== "cash_60");
+  if (other.length > 0) {
+    const named = other.map(({ entity, item }) => `${entityTitle(entity)}: ${describeItem(item)}`);
+    return unsupported(
+      `${named.join("; ")}: a K-1 contribution other than cash to a 60% organization is not modeled on Schedule A.`,
+    );
+  }
+  if (receipt?.kind === "received" && receipt.items.length === 0) return info.giftsCashCheck;
+  return roundedWithReceived(info.giftsCashCheck, receipt);
 }
 
 export function register(): void {
@@ -192,7 +214,7 @@ export function register(): void {
         return sum(line8e, nine);
       },
       // MANUAL EDIT: routed to FilingInfo slot.
-      "0.line.11_gifts_cash_check": (_, info) => info.giftsCashCheck,
+      "0.line.11_gifts_cash_check": (_, info) => line11(info),
       // MANUAL EDIT: routed to FilingInfo slot.
       "0.line.12_gifts_other_than_cash": (_, info) => info.giftsOtherThanCash,
       // MANUAL EDIT: routed to FilingInfo slot.

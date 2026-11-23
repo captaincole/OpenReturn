@@ -20,8 +20,16 @@ export interface QbiBusiness {
   specifiedService?: boolean;
   /* Schedule C line 31; undefined while it is blank, and for a rental (Schedule E is read). */
   netProfit?: number;
-  /* A K-1's QBI as its section 199A statement gives it; undefined while the K-1 waits. */
+  /*
+   * A K-1's QBI as its section 199A statement gives it, scaled to the part of
+   * the business losses the limits allow; undefined while the K-1 waits.
+   */
   statementQbi?: number;
+  /*
+   * Form 8995 line 3: the qualified part of a K-1's basis loss carried from an
+   * earlier year and allowed this year, a positive amount, unrounded.
+   */
+  priorYearQbiLoss?: number;
   /* The owner's only business, so it carries all of the owner's Schedule SE line 13. */
   ownersOnlyBusiness: boolean;
   /* Schedule 1 line 16 (self-employed plan contributions) this business's QBI takes off, cents kept. */

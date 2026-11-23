@@ -69,6 +69,22 @@ describe("reading K-1 and holding facts", () => {
     expect(malformedKeys).toEqual(["k1.holding.oak"]);
   });
 
+  it("reads carried basis losses by item, and lists an unknown item as malformed", () => {
+    const { holdings, malformedKeys } = readK1HoldingFacts([
+      {
+        key: "k1.holding.harbor",
+        category: "k1",
+        value: {
+          carriedLosses: { basis: { ordinaryBusinessLoss: 900, cashCharitableContributions: 40 } },
+        },
+      },
+      { key: "k1.holding.oak", category: "k1", value: { carriedLosses: { basis: { rent: 300 } } } },
+      { key: "k1.holding.elm", category: "k1", value: { carriedLosses: { basis: 300 } } },
+    ]);
+    expect([...holdings.keys()]).toEqual(["k1.holding.harbor"]);
+    expect(malformedKeys).toEqual(["k1.holding.oak", "k1.holding.elm"]);
+  });
+
   it("lists a holding whose carried losses name a limit that is not one of the three as malformed", () => {
     const { holdings, malformedKeys } = readK1HoldingFacts([
       { key: "k1.holding.harbor", category: "k1", value: { carriedLosses: { atRisk: 300 } } },

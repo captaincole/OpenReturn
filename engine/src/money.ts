@@ -46,6 +46,21 @@ export function roundDollars(value: number | undefined): number | undefined {
 }
 
 /*
+ * A whole-dollar total split among shares in proportion (Form 7203 Part III
+ * columns (c) and (d), irs-7203-inst-2025::sec::part-iii::b01–b02). Each running
+ * total is rounded once, so the parts add up to the rounded total exactly and
+ * each part is within a dollar of its share. Shares are positive.
+ */
+export function prorateDollars(total: number, shares: readonly number[]): number[] {
+  const whole = sum(...shares);
+  if (whole <= 0) return shares.map(() => 0);
+  const runningTotals = shares.map((_, index) =>
+    roundDollars((total * sum(...shares.slice(0, index + 1))) / whole),
+  );
+  return runningTotals.map((upTo, index) => upTo - (index === 0 ? 0 : runningTotals[index - 1]));
+}
+
+/*
  * A ratio a form enters "as a decimal (rounded to at least three places)" (Form
  * 8814 lines 7 and 8): rounded to `places` decimals, the half up. The small
  * tolerance absorbs float error only (0.4115 scaled is 411.49999999999994 and

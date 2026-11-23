@@ -887,6 +887,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 7203",
     relativeDir: "federal/7203",
     register: registerForm7203,
+    /* One copy for each S corporation K-1 that files it (irs-7203-inst-2025::sec::who-must-file::b01). */
+    copies: {
+      count: (info) => info?.form7203Entities?.length ?? 1,
+      select: (info, index) => info && { ...info, form7203CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-8582-cr",

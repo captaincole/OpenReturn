@@ -7,10 +7,15 @@ import {
 import { sum } from "../../money.js";
 import { factsInCategory, filingStatusOf, num, type ResolverInputs } from "../../resolverInputs.js";
 import type { Unsupported } from "../../types.js";
-import { passThroughEntitiesOnReturn } from "../passThrough/items.js";
-import { receivedOnReturn, withReceived, type ReceivedItem } from "../passThrough/receipts.js";
-import { routeEntities } from "../passThrough/routing.js";
-import { spousePropertiesOnReturn } from "../rentals/passive.js";
+import { isLossOrDeduction, isPortfolio } from "../passThrough/itemTypes.js";
+import { entityTitle, type PassThroughItem } from "../passThrough/items.js";
+import {
+  receivedOnReturn,
+  routedOnReturn,
+  withReceived,
+  type ReceivedItem,
+} from "../passThrough/receipts.js";
+import type { RoutedEntity } from "../passThrough/routing.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
 import { resolveScheduleSEInfo } from "../schedule-se/resolveInfo.js";
@@ -95,6 +100,81 @@ function qbiRentals(inputs: ResolverInputs): QbiBusiness[] {
 const TRUST_QBI_GAP = (name: string) =>
   `${name} (estate or trust K-1): QBI from an estate's or trust's trade or business on the section 199A statement is not modeled.`;
 
+/* A loss or deduction of the business itself: not portfolio, not a charitable contribution. */
+const isBusinessLoss = (item: PassThroughItem) =>
+  isLossOrDeduction(item.type, item.amount) &&
+  !isPortfolio(item.type) &&
+  item.type !== "charitable_contribution";
+
+const lossTotal = (items: PassThroughItem[]) =>
+  sum(...items.filter(isBusinessLoss).map((item) => Math.abs(item.amount ?? 0)));
+
+/*
+ * The K-1's QBI this year. Losses a limit suspends are not QBI; "only the
+ * portion of the allowed loss or deduction attributable to QBI" counts: the
+ * allowed loss times the share of the total loss that is QBI
+ * (irs-8995-inst-2025::sec::determining-your-qualified-business::b02, ::b03).
+ * The statement's QBI is for the whole year's loss, so it is scaled by the part
+ * of the business losses the limits allow. A statement with QBI of 0 or more
+ * while a business loss is held back is not modeled.
+ */
+function allowedStatementQbi(routed: RoutedEntity, statementQbi: number) {
+  if (routed.kind !== "routed") return undefined;
+  const current = routed.allowed.filter((item) => item.fromPriorYear !== true);
+  const whole = lossTotal(routed.entity.items);
+  const allowed = lossTotal(current);
+  if (allowed >= whole) return { qbi: statementQbi };
+  if (statementQbi >= 0) {
+    return {
+      gap: `${entityTitle(routed.entity)}: the section 199A statement gives QBI of 0 or more while a limit holds back part of a business loss; scaling it is not modeled.`,
+    };
+  }
+  return { qbi: (statementQbi * allowed) / whole };
+}
+
+/*
+ * A basis loss carried from an earlier year and allowed now goes on Form 8995
+ * line 3, not line 1 (irs-8995-inst-2025::sec::specific-instructions::b02,
+ * ::line-3::b01): its qualified part, the allowed loss times the share of the
+ * carried loss that is QBI (the holding's answer; the QBI Loss Tracking
+ * Worksheet's column B, ::specific-instructions-2::b01). Undefined with none;
+ * "waiting" while the holding does not give the qualified part.
+ */
+function priorYearQbiLossOf(routed: RoutedEntity): number | "waiting" | undefined {
+  if (routed.kind !== "routed") return undefined;
+  const allowed = lossTotal(routed.allowed.filter((item) => item.fromPriorYear === true));
+  if (allowed === 0) return undefined;
+  const qualified = routed.entity.holding?.carriedQualifiedBusinessLoss;
+  if (qualified === undefined) return "waiting";
+  const carried = lossTotal(routed.entity.priorYearItems);
+  return (allowed * qualified) / carried;
+}
+
+/* The K-1s whose allowed carried loss waits on the holding's qualified part. */
+export function k1sWithoutCarriedQbiAnswer(inputs: ResolverInputs): string[] {
+  return routedOnReturn(inputs)
+    .filter(
+      (routed) =>
+        routed.entity.k1.section199A?.qualifiedBusinessIncome !== undefined &&
+        priorYearQbiLossOf(routed) === "waiting",
+    )
+    .map((routed) => routed.entity.holdingKey);
+}
+
+/* What a routed K-1 gives its QBI row: the statement's QBI, the carried qualified loss, or a gap. */
+function passThroughQbi(routed: RoutedEntity) {
+  const statement = routed.entity.k1.section199A;
+  const scaled = allowedStatementQbi(routed, statement?.qualifiedBusinessIncome ?? 0);
+  const priorYear = priorYearQbiLossOf(routed);
+  const trustGap = routed.entity.form === "1041" ? TRUST_QBI_GAP(routed.entity.name) : undefined;
+  const limitGap = routed.kind === "unsupported" ? routed.reasons.join(" ") : undefined;
+  return {
+    statementQbi: priorYear === "waiting" ? undefined : scaled?.qbi,
+    priorYearQbiLoss: typeof priorYear === "number" ? priorYear : undefined,
+    qbiGap: limitGap ?? trustGap ?? scaled?.gap,
+  };
+}
+
 /*
  * MANUAL EDIT: a K-1 with a section 199A statement is one more trade or business
  * (irs-1120sk1-inst-2025::sec::box-17-other-information::b11, ::b12). Its QBI,
@@ -102,36 +182,31 @@ const TRUST_QBI_GAP = (name: string) =>
  * no statement, or a statement with no QBI (section 199A dividends only), adds
  * no business. Its QBI waits while the K-1 waits, and is a gap while any of
  * its items has no route: the amounts on the statement may include items not
- * allowed this year (::b12). A trust's QBI is a gap (TRUST_QBI_GAP).
+ * allowed this year (::b12); passThroughQbi keeps only the allowed part. A
+ * trust's QBI is a gap (TRUST_QBI_GAP). Every K-1 goes through the limits
+ * together, since the excess business loss stage adds them all.
  */
 function qbiPassThroughs(inputs: ResolverInputs): QbiBusiness[] {
-  const status = filingStatusOf(inputs);
-  const { entities } = passThroughEntitiesOnReturn(inputs.facts, spousePropertiesOnReturn(status));
-  const withStatement = entities.filter(
-    (entity) => entity.k1.section199A?.qualifiedBusinessIncome !== undefined,
-  );
-  return routeEntities(withStatement, { filingStatus: status }).map((routed): QbiBusiness => {
-    const { entity } = routed;
-    const statement = entity.k1.section199A;
-    return {
-      factKey: entity.key,
-      kind: "passThrough",
-      owner: entity.holding?.owner ?? "taxpayer",
-      name: statement?.businessName ?? entity.name,
-      ein: entity.ein,
-      specifiedService: statement?.specifiedService,
-      statementQbi: routed.kind === "routed" ? statement?.qualifiedBusinessIncome : undefined,
-      ownersOnlyBusiness: false,
-      qbiGap:
-        routed.kind === "unsupported"
-          ? routed.reasons.join(" ")
-          : entity.form === "1041"
-            ? TRUST_QBI_GAP(entity.name)
-            : undefined,
-      w2WagesPaid: statement?.w2Wages,
-      qualifiedPropertyUbia: statement?.qualifiedPropertyUbia,
-    };
-  });
+  const withStatement = (routed: RoutedEntity) =>
+    routed.entity.k1.section199A?.qualifiedBusinessIncome !== undefined;
+  return routedOnReturn(inputs)
+    .filter(withStatement)
+    .map((routed): QbiBusiness => {
+      const { entity } = routed;
+      const statement = entity.k1.section199A;
+      return {
+        factKey: entity.key,
+        kind: "passThrough",
+        owner: entity.holding?.owner ?? "taxpayer",
+        name: statement?.businessName ?? entity.name,
+        ein: entity.ein,
+        specifiedService: statement?.specifiedService,
+        ...passThroughQbi(routed),
+        ownersOnlyBusiness: false,
+        w2WagesPaid: statement?.w2Wages,
+        qualifiedPropertyUbia: statement?.qualifiedPropertyUbia,
+      };
+    });
 }
 
 /* Rental properties whose QBI answer is missing: Cade asks for the property again. */

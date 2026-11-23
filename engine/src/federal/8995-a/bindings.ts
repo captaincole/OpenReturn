@@ -134,11 +134,20 @@ function qbiWithoutNetting(form: Read, info: Info, business: QbiBusiness): numbe
   return business.kind === "rental" && qbi !== undefined && qbi < 0 ? undefined : qbi;
 }
 
+/*
+ * MANUAL EDIT: a K-1's carried basis loss allowed this year is a qualified loss
+ * carryforward (irs-8995-inst-2025::sec::line-3::b01), which Schedule C (Form
+ * 8995-A) line 2 would take; that line has no rules, so the business is a gap.
+ */
+const PRIOR_YEAR_QBI_LOSS_GAP =
+  "A K-1 loss carried from an earlier year and allowed this year is a qualified loss carryforward on Schedule C (Form 8995-A) line 2, which is not modeled.";
+
 // MANUAL EDIT: with loss netting, line 2 is Schedule C (Form 8995-A) line 1 column (c) (line-2::b01).
 function line2(form: Read, info: Info, column: Column) {
   const business = businessIn(form, info, column);
   if (!business) return undefined;
   if (business.qbiGap) return unsupported(business.qbiGap);
+  if ((business.priorYearQbiLoss ?? 0) > 0) return unsupported(PRIOR_YEAR_QBI_LOSS_GAP);
   const netting = info.mustFile?.["form-8995-a-schedule-c"]?.value;
   if (netting === true) {
     return num(form[`form-8995-a-schedule-c.0.line.1_col_c_adjusted_qbi_${column}`]);
