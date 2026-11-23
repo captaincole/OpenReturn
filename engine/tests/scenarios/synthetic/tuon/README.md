@@ -16,6 +16,14 @@ hand against the form and its instructions, then locked the engine's output.
   gain election and 10-year averaging. She does not use federal Form 4972: the
   pension is ordinary income on her federal return.
 
+## Input documents
+
+The Form 1099-R is a made document, `docs/01-redwood-valley-mills-1099-r.pdf`,
+rendered by `generate-docs.ts` from the fact object in `facts.ts`
+(`documents/form1099R.ts`). The payer's address and phone number are invented.
+The Schedule G-1 Part I answers and the two elections are her answers: the form
+does not print them. The 1099-INT has no PDF.
+
 ## What it covers
 
 - Schedule G-1 Parts I to III: every line but line 9 (no death benefit). Lines

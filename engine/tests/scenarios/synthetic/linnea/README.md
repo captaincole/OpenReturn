@@ -14,10 +14,13 @@ Forms that file: Form 1040, Schedule A, Schedule 3, Form 5695, Form 8396.
 | --- | --- |
 | W-2, Harborview Dental Group | box 1 $36,000, box 2 $2,400 |
 | Form 1098, Pelican State Mortgage | box 1 $11,520, box 2 $228,400, box 3 06/14/2021 |
-| MCC, Gulf Coast Housing Finance Authority | rate 25%, certified indebtedness $200,000, loan $240,000 |
+| MCC, Gulf Coast Housing Finance Authority (`docs/01-mortgage-credit-certificate.pdf`) | rate 25%, certified indebtedness $200,000 |
+| Her answer: the loan's original amount | $240,000 |
 | 2024 Form 8396 carryforwards | 2022 $300, 2023 $450, 2024 $600 |
 | Insulation invoice | $1,200 |
 | Schedule A answers | real estate tax $4,100, cash gifts $3,000 |
+
+The Mortgage Credit Certificate comes from `generate-docs.ts` and the generator `tests/scenarios/documents/mortgageCreditCertificate.ts`, with the values in `facts.ts`. It prints the issuer, number, date, rate and certified indebtedness. The loan's original amount (her loan papers) and the interest (Form 1098 box 1) are in the same fact but not on the certificate. The other inputs have no PDF.
 
 ## Hand check
 

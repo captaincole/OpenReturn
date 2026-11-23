@@ -1,7 +1,8 @@
 /*
- * A made-up couple (README.md): every name and amount is invented. No input
- * documents: the facts are the boxes as the W-2, the Form 1098 and the
- * Schedule K-1 (Form 1120-S) would print them, and the couple's answers.
+ * A made-up couple (README.md): every name and amount is invented. The
+ * Schedule K-1 (Form 1120-S) is a made PDF in docs/ (generate-docs.ts); the W-2
+ * and the Form 1098 have none: their facts are the boxes as they would print
+ * them. The rest are the couple's answers.
  */
 
 import {
@@ -67,7 +68,7 @@ const garethW2: W2FactValue = {
  * to a 60% charity and a cash distribution. The section 199A statement gives
  * this year's QBI.
  */
-const stablesK1: SCorporationK1FactValue = {
+export const stablesK1: SCorporationK1FactValue = {
   form: "1120-S",
   entityName: "Kore Springs Stables, Inc.",
   entityEin: STABLES_EIN,
@@ -141,7 +142,7 @@ export const garethFacts: TaxFactRow[] = [
     "k1",
     makeSCorporationK1FactKey(STABLES_ID),
     stablesK1,
-    "Schedule K-1 (Form 1120-S) from Kore Springs Stables, Inc. (Gareth's).",
+    "Schedule K-1 (Form 1120-S) from Kore Springs Stables, Inc. (Gareth's) (docs/01-schedule-k1-kore-springs-stables.pdf).",
   ),
   fact(
     "k1",

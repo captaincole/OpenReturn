@@ -1,6 +1,6 @@
 /*
- * A made-up taxpayer (README.md): every name and amount is invented. No input
- * documents: the facts are the boxes as the two Forms 1099-R would print them.
+ * A made-up taxpayer (README.md): every name and amount is invented. The two
+ * Forms 1099-R are in docs/ (generate-docs.ts); the rest are her answers.
  */
 
 import {
@@ -111,13 +111,13 @@ export const siuanFacts: TaxFactRow[] = [
     "retirement",
     makeRetirementDistributionFactKey("truckee-valley-water", "pension"),
     pension,
-    "1099-R from Truckee Valley Water District Pension Plan.",
+    "1099-R from Truckee Valley Water District Pension Plan (docs/01-truckee-valley-water-1099-r.pdf).",
   ),
   fact(
     "retirement",
     LUMP_SUM_KEY,
     lumpSum,
-    "1099-R from Harlow Tool Works Profit-Sharing Plan, total distribution.",
+    "1099-R from Harlow Tool Works Profit-Sharing Plan, total distribution (docs/02-harlow-tool-works-1099-r.pdf).",
   ),
   fact(
     "retirement",

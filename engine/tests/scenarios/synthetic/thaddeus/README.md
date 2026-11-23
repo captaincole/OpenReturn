@@ -22,6 +22,10 @@ Forms that file: Form 1040, Schedule 1, Schedule 1-A, Schedule 2, Form 8853.
 | 1099-LTC, Olympic Life | box 2 $6,000, per diem, chronically ill |
 | LTC answers | no other payees; one 120-day period; costs $30,000; reimbursements $6,000 |
 
+## Input documents
+
+`generate-docs.ts` makes the four 1099-SAs (`docs/01`–`04`) and the two 1099-LTCs (`docs/05`, `06`) from the fact values in `facts.ts`, with the generators in `tests/scenarios/documents/`. The payer and insured addresses are made up; the facts hold no payer TIN or account number, so those cells print blank. The W-2 has no document yet. Run it from `engine/`: `npx tsx tests/scenarios/synthetic/thaddeus/generate-docs.ts`.
+
 ## Hand check
 
 | Line | Rule | Value |

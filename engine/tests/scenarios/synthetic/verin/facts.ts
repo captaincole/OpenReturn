@@ -1,7 +1,8 @@
 /*
  * Synthetic: the Castellanos family is made up (README.md). Every name,
- * number and address is invented. No input documents: the facts are the only
- * source, and each sourceNote names the made-up document or answer.
+ * number and address is invented. The girls' 1099-INTs and 1099-DIV are in
+ * docs/ (made by generate-docs.ts from the values below); each sourceNote names
+ * the made-up document or answer.
  */
 
 import {
@@ -33,7 +34,7 @@ const fact = (category: string, key: string, value: unknown, sourceNote: string)
   createdAt: CREATED_AT,
 });
 
-const HOME = { line1: "1407 Larkspur Ct", city: "Sacramento", state: "CA", zip: "95822" };
+export const HOME = { line1: "1407 Larkspur Ct", city: "Sacramento", state: "CA", zip: "95822" };
 const TAXPAYER = { firstName: "Verin", lastName: "Castellanos", ssn: "400-00-0611" };
 const SPOUSE = { firstName: "Dorian", lastName: "Castellanos", ssn: "400-00-0612" };
 
@@ -75,7 +76,7 @@ export const NOOR = "noor-castellanos";
  * Lucia: $600 of her $900 tax-exempt interest is Oregon bond interest, which
  * California taxes. FTB 3803 line 6 ($3,050) is over Form 8814 line 6 ($2,450).
  */
-const luciaIncome: ChildInvestmentIncomeFactValue = {
+export const luciaIncome: ChildInvestmentIncomeFactValue = {
   taxableInterest: 1240,
   taxExemptInterest: 900,
   taxExemptInterestTaxedByCalifornia: 600,
@@ -88,7 +89,7 @@ const luciaIncome: ChildInvestmentIncomeFactValue = {
 };
 
 /* Noor: interest only, $250 of it Treasury bill interest California does not tax; line 4 under $2,700. */
-const noorIncome: ChildInvestmentIncomeFactValue = {
+export const noorIncome: ChildInvestmentIncomeFactValue = {
   taxableInterest: 2000,
   usObligationInterest: 250,
   estimatedTaxPaid: false,
@@ -134,13 +135,13 @@ const CHILDREN: TaxFactRow[] = [
     "dependents",
     makeChildInvestmentIncomeFactKey(LUCIA),
     luciaIncome,
-    `Lucia's 1099-INT and 1099-DIV, and the parents' answers, ${MADE_UP}.`,
+    `Lucia's 1099-INT and 1099-DIV (docs/01-1099-int-lucia.pdf, docs/02-1099-div-lucia.pdf), and the parents' answers, ${MADE_UP}.`,
   ),
   fact(
     "dependents",
     makeChildInvestmentIncomeFactKey(NOOR),
     noorIncome,
-    `Noor's 1099-INT, and the parents' answers, ${MADE_UP}.`,
+    `Noor's 1099-INT (docs/03-1099-int-noor.pdf), and the parents' answers, ${MADE_UP}.`,
   ),
 ];
 

@@ -1,7 +1,8 @@
 /*
- * A made-up married couple (README.md): every name and amount is invented. No
- * input documents: the facts are the boxes as the documents would print them,
- * and the answers the couple states.
+ * A made-up married couple (README.md): every name and amount is invented. The
+ * Forms 1099-SA and 1099-LTC are made input documents (generate-docs.ts); the
+ * other facts are the boxes as the documents would print them, and the answers
+ * the couple states.
  */
 
 import {
@@ -166,13 +167,13 @@ export const thaddeusFacts: TaxFactRow[] = [
     "hsa",
     makeHsaDistributionFactKey("cascade-health", "sa1"),
     thaddeusArcher,
-    "1099-SA, Cascade Health Trust.",
+    "1099-SA (docs/01-cascade-health-1099-sa.pdf).",
   ),
   fact(
     "hsa",
     makeHsaDistributionFactKey("sound-savings", "sa1"),
     margueriteArcher,
-    "1099-SA, Sound Savings Bank.",
+    "1099-SA (docs/02-sound-savings-1099-sa.pdf).",
   ),
   fact(
     "hsa",
@@ -191,13 +192,13 @@ export const thaddeusFacts: TaxFactRow[] = [
     "hsa",
     makeHsaDistributionFactKey("evergreen-ma", "sa1"),
     margueriteMaNormal,
-    "1099-SA (code 1), Evergreen.",
+    "1099-SA (docs/03-evergreen-ma-1099-sa-code-1.pdf).",
   ),
   fact(
     "hsa",
     makeHsaDistributionFactKey("evergreen-ma", "sa2"),
     margueriteMaDisability,
-    "1099-SA (code 3), Evergreen.",
+    "1099-SA (docs/04-evergreen-ma-1099-sa-code-3.pdf).",
   ),
   fact("hsa", MEDICARE_ADVANTAGE_MSA_KEYS.qualifiedMedicalExpenses, 4100, "verbal: receipts"),
   fact(
@@ -212,13 +213,13 @@ export const thaddeusFacts: TaxFactRow[] = [
     "medical",
     makeLtcBenefitsFactKey("mount-rainier", "ltc1"),
     ltcContract,
-    "1099-LTC, Mount Rainier Mutual.",
+    "1099-LTC (docs/05-mount-rainier-1099-ltc.pdf).",
   ),
   fact(
     "medical",
     makeLtcBenefitsFactKey("olympic-life", "ltc1"),
     lifePolicy,
-    "1099-LTC, Olympic Life Assurance.",
+    "1099-LTC (docs/06-olympic-life-1099-ltc.pdf).",
   ),
   fact("medical", LTC_KEYS.otherPayees, false, "verbal: no one else was paid"),
   fact("medical", LTC_KEYS.periodDays, 120, "verbal: one rate, September 3 to December 31"),

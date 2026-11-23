@@ -1,7 +1,8 @@
 /*
- * A made-up couple (README.md): every name and amount is invented. No input
- * documents: the facts are the boxes as the W-2 and the Schedule K-1 (Form
- * 1120-S) would print them, and the couple's answers.
+ * A made-up couple (README.md): every name and amount is invented. The
+ * Schedule K-1 (Form 1120-S) is a made PDF in docs/ (generate-docs.ts); the W-2
+ * has none: its facts are the boxes as it would print them. The rest are the
+ * couple's answers.
  */
 
 import {
@@ -107,7 +108,7 @@ const driedFlowers: BusinessFactValue = {
  * long-term capital loss, a cash gift to a 60% charity, nondeductible expenses
  * and a cash distribution. The section 199A statement gives the loss as QBI.
  */
-const glassK1: SCorporationK1FactValue = {
+export const glassK1: SCorporationK1FactValue = {
   form: "1120-S",
   entityName: "White Tower Glassworks, Inc.",
   entityEin: GLASS_EIN,
@@ -190,7 +191,7 @@ export const elaidaFacts: TaxFactRow[] = [
     "k1",
     makeSCorporationK1FactKey(GLASS_ID),
     glassK1,
-    "Schedule K-1 (Form 1120-S) from White Tower Glassworks, Inc. (Daved's).",
+    "Schedule K-1 (Form 1120-S) from White Tower Glassworks, Inc. (Daved's) (docs/01-schedule-k1-white-tower-glassworks.pdf).",
   ),
   fact(
     "k1",

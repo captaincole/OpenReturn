@@ -1,6 +1,7 @@
 /*
- * A made-up couple (README.md): every name and amount is invented. No input
- * documents: the facts are the boxes and records as the documents would print them.
+ * A made-up couple (README.md): every name and amount is invented. One made
+ * input document, the savings bond record (generate-docs.ts); the other facts
+ * are the boxes as the documents would print them.
  */
 
 import {
@@ -96,7 +97,7 @@ const bonds: Array<[string, SavingsBondCashedFactValue, string]> = [
       proceeds: 10420,
       ownerQualifies: true,
     },
-    "Bond record: paper EE, face $10,000, cashed at Sierra Federal Credit Union for $10,420.",
+    "Savings bond record (docs/01-savings-bonds-cashed.pdf), row 1; the ownership test stated by Odessa.",
   ],
   [
     "electronic-ee-2012",
@@ -108,7 +109,7 @@ const bonds: Array<[string, SavingsBondCashedFactValue, string]> = [
       proceeds: 6310,
       ownerQualifies: true,
     },
-    "TreasuryDirect record: electronic EE, face $5,000, redeemed for $6,310.",
+    "Savings bond record (docs/01-savings-bonds-cashed.pdf), row 2; the ownership test stated by Odessa.",
   ],
   [
     "series-i-2015",
@@ -120,7 +121,7 @@ const bonds: Array<[string, SavingsBondCashedFactValue, string]> = [
       proceeds: 11280,
       ownerQualifies: true,
     },
-    "TreasuryDirect record: series I, $8,000, redeemed for $11,280.",
+    "Savings bond record (docs/01-savings-bonds-cashed.pdf), row 3; the ownership test stated by Odessa.",
   ],
   [
     "paper-ee-1988",
@@ -133,7 +134,7 @@ const bonds: Array<[string, SavingsBondCashedFactValue, string]> = [
       proceeds: 4620,
       ownerQualifies: true,
     },
-    "Bond record: paper EE issued 1988 (not after 1989), cashed for $4,620.",
+    "Savings bond record (docs/01-savings-bonds-cashed.pdf), row 4; the ownership test stated by Odessa.",
   ],
 ];
 

@@ -9,6 +9,7 @@ import {
 } from "@openreturn/engine/facts";
 import { z } from "zod";
 import { cadeRequestContextSchema } from "../server/requestContext";
+import { dependentSlugField, recordChildForm, type ChildForm } from "./ingestChild1099";
 import { recordIngestFact, statementContext, statementFields } from "./ingestShared";
 
 /*
@@ -30,6 +31,31 @@ interface FormSpec<V> {
   factKey: (slug: string) => string;
   boxes: BoxSchemas<V>;
   description: string;
+  /* Set for a form a child may receive: the tool then takes dependentSlug (ingestChild1099.ts). */
+  child?: ChildForm;
+}
+
+const outputSchema = z.object({
+  accountSlug: z.string(),
+  factKey: z.string(),
+  boxesNotOnChildFact: z
+    .array(z.string())
+    .optional()
+    .describe("A child's form only: boxes with an amount that Form 8814 does not take"),
+});
+
+/* The fact value: the payer and the boxes the input passed. */
+export function formValueOf<V>(
+  spec: Pick<FormSpec<V>, "boxes">,
+  input: { payer: { name: string; tin?: string } } & Record<string, unknown>,
+): V {
+  const boxes = Object.entries(input).filter(([key]) => key in spec.boxes);
+  /* The boxes passed the schemas above, which BoxSchemas ties to V. */
+  return {
+    payerName: input.payer.name,
+    payerTin: input.payer.tin,
+    ...Object.fromEntries(boxes),
+  } as V;
 }
 
 function formTool<V extends { payerName: string; payerTin?: string }>(spec: FormSpec<V>) {
@@ -37,18 +63,21 @@ function formTool<V extends { payerName: string; payerTin?: string }>(spec: Form
     id: spec.id,
     requestContextSchema: cadeRequestContextSchema,
     description: `${spec.description} ${ONLY_NON_ZERO}`,
-    inputSchema: z.object({ ...statementFields, ...(spec.boxes as z.ZodRawShape) }),
-    outputSchema: z.object({ accountSlug: z.string(), factKey: z.string() }),
+    inputSchema: z.object({
+      ...statementFields,
+      ...(spec.child ? { dependentSlug: dependentSlugField } : {}),
+      ...(spec.boxes as z.ZodRawShape),
+    }),
+    outputSchema,
     execute: async (input, context) => {
       const { ctx, slug } = await statementContext(input, context, spec.form);
-      const boxes = Object.entries(input).filter(([key]) => key in spec.boxes);
+      const value = formValueOf(spec, input);
+      const dependentSlug = (input as { dependentSlug?: string }).dependentSlug;
+      if (spec.child && dependentSlug) {
+        const child = { dependentSlug, payerSlug: slug, form: spec.child, value } as const;
+        return { accountSlug: slug, ...(await recordChildForm(ctx, child)) };
+      }
       const factKey = spec.factKey(slug);
-      /* The boxes passed the schemas above, which BoxSchemas ties to V. */
-      const value = {
-        payerName: input.payer.name,
-        payerTin: input.payer.tin,
-        ...Object.fromEntries(boxes),
-      } as V;
       await recordIngestFact(ctx, spec.category, factKey, value);
       return { accountSlug: slug, factKey };
     },
@@ -60,6 +89,7 @@ export const ingest1099Int = formTool<InterestFactValue>({
   form: "1099-INT",
   category: "investment_income",
   factKey: makeInterestFactKey,
+  child: "1099-INT",
   description:
     "Ingest one 1099-INT: a standalone form, or the 1099-INT section of a consolidated statement.",
   boxes: {
@@ -87,6 +117,7 @@ export const ingest1099Div = formTool<DividendFactValue>({
   form: "1099-DIV",
   category: "investment_income",
   factKey: makeDividendFactKey,
+  child: "1099-DIV",
   description:
     "Ingest one 1099-DIV: a standalone form, or the 1099-DIV section of a consolidated statement.",
   boxes: {

@@ -21,8 +21,11 @@ export interface DocScore {
 /* "account.x.trades.y" → "investment_income:account.trades". A trade id can hold a dot. */
 const kindOf = (fact: TaxFactRow) =>
   `${fact.category}:${fact.key
-    .replace(/^(account|payer|employer|employee|vendor)\.[^.]+/, "$1")
-    .replace(/\.(trades|distributions|hsa_distributions|w2g|1099k)\..*$/, ".$1")}`;
+    .replace(
+      /^(account|payer|employer|employee|vendor|clean_vehicle|dependent_care\.provider|k1\.s_corporation|k1\.trust)\.[^.]+/,
+      "$1",
+    )
+    .replace(/\.(trades|distributions|hsa_distributions|ltc_benefits|w2g|1099k)\..*$/, ".$1")}`;
 
 const FORM_BY_SUFFIX: [RegExp, string][] = [
   [/\.interest$/, "1099-INT"],

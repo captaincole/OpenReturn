@@ -2,7 +2,8 @@
  * Made-up taxpayers (README.md): a married couple filing jointly in Fresno,
  * California, with a son and a stepdaughter in daycare and with a babysitter,
  * and a dependent care FSA on one W-2. Every name, number and address is
- * invented. No input documents: the facts are the only source.
+ * invented. The care providers' year-end statements are in docs/ (made by
+ * generate-docs.ts from the provider facts); the other facts have no document.
  */
 
 import {
@@ -185,13 +186,13 @@ export const ottilieFacts: TaxFactRow[] = [
     "dependents",
     makeDependentCareProviderFactKey("sunflower-hill"),
     preschool,
-    "Verbal: preschool statement and Form W-10.",
+    "Year-end statement (docs/01-sunflower-hill-care-statement.pdf).",
   ),
   fact(
     "dependents",
     makeDependentCareProviderFactKey("lupe-arroyo"),
     babysitter,
-    "Verbal: babysitter's Form W-10.",
+    "Year-end statement (docs/02-lupe-arroyo-care-statement.pdf).",
   ),
   fact(
     "dependents",
