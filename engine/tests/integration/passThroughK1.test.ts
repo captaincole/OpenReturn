@@ -85,24 +85,24 @@ describe("an S corporation K-1 is income, not self-employment or earned income (
 describe("a K-1 item with no route makes the return visibly incomplete", () => {
   const facts = editK1(lanScenario.facts, (k1) => ({
     ...k1,
-    boxes: [...k1.boxes, { box: "16", code: "D", amount: 9000 }],
+    boxes: [...k1.boxes, { box: "6", amount: 900 }],
   }));
-  const run16D = run(lanScenario, facts);
+  const withRoyalties = run(lanScenario, facts);
 
   it("reports it on Schedule E line 41 with the entity and the item type", () => {
-    const line41 = run16D.field("schedule-e.1.line.41_total_income_or_loss");
+    const line41 = withRoyalties.field("schedule-e.1.line.41_total_income_or_loss");
     expect(line41?.ok).toBe(false);
     if (line41 && !line41.ok) {
       expect(line41.unsupported).toBe(true);
       expect(line41.reason).toContain("Malkier Fencing Academy, Inc. (S corporation K-1)");
-      expect(line41.reason).toContain("distribution (box 16 code D)");
+      expect(line41.reason).toContain("royalties (box 6)");
     }
   });
 
   it("reports it on the row's amount column too, and AGI stays blank", () => {
-    const column = run16D.field("schedule-e.1.line.28_row_a_col_k_nonpassive_income");
+    const column = withRoyalties.field("schedule-e.1.line.28_row_a_col_k_nonpassive_income");
     expect(column?.ok === false && column.unsupported).toBe(true);
-    expect(run16D.value("form-1040.line.11a")).toBeUndefined();
+    expect(withRoyalties.value("form-1040.line.11a")).toBeUndefined();
   });
 
   it("reports a trust K-1's unrouted item on line 41, and still lists its interest", () => {

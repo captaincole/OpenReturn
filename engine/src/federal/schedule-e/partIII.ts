@@ -12,6 +12,7 @@ import { numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import type { ItemType } from "../passThrough/itemTypes.js";
 import type { PassThroughEntity } from "../passThrough/items.js";
+import { limitContextFrom } from "../passThrough/limits.js";
 import { itemsWithRoute, routeEntities, type RoutedEntity } from "../passThrough/routing.js";
 import type { ScheduleEFilingInfo } from "./filingInfo.js";
 import type { ScheduleE } from "./types.js";
@@ -56,8 +57,8 @@ export function partIIIEntities(info: Pick<Info, "passThroughEntities">): PassTh
 
 function routedRows(info: Info): RoutedEntity[] {
   const keys = new Set(partIIIEntities(info).map((entity) => entity.key));
-  return routeEntities(info.passThroughEntities ?? [], { filingStatus: info.filingStatus }).filter(
-    (routed) => keys.has(routed.entity.key),
+  return routeEntities(info.passThroughEntities ?? [], limitContextFrom(info)).filter((routed) =>
+    keys.has(routed.entity.key),
   );
 }
 

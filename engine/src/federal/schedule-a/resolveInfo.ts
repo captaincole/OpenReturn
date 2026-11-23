@@ -20,6 +20,7 @@ import { additionalSheetsGap, netQualifiedDisasterLoss } from "../4684/lines.js"
 import { resolve4684Info } from "../4684/resolveInfo.js";
 import { giftDeduction, noncashGiftsTotal } from "../8283/lines.js";
 import { mortgageCreditReduction, type MortgageCreditReduction } from "../8396/resolveInfo.js";
+import { receivedOnReturn } from "../passThrough/receipts.js";
 import type { ScheduleAFilingInfo } from "./filingInfo.js";
 
 /*
@@ -282,6 +283,7 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
     mortgageInterestNotForm1098: num(inputs, MORTGAGE_KEYS.interestNotForm1098),
     pointsNotForm1098: num(inputs, MORTGAGE_KEYS.pointsNotForm1098),
     giftsCashCheck: num(inputs, "charitable.cash"),
+    passThroughCharitable: receivedOnReturn(inputs, "schedule_a_line_11"),
     giftsOtherThanCash: giftsOtherThanCash(inputs),
     giftsCarryover: num(inputs, "charitable.carryover"),
     netQualifiedDisasterLoss: loss.amount,

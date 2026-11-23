@@ -78,6 +78,8 @@ function resolveInterestSlots(inputs: ResolverInputs): Form1040FilingInfo {
 }
 
 /*
+ * Line 2a takes an S corporation's tax-exempt interest
+ * (irs-1120sk1-inst-2025::sec::box-16-items-affecting-shareholder-basis::b01).
  * Lines 2b, 3a and 3b take a K-1's interest and dividends
  * (irs-1041k1-inst-2025::sec::box-1-interest-income::b01, ::box-2a-ordinary-dividends::b01,
  * ::box-2b-qualified-dividends::b01). Undefined slots with no K-1.
@@ -89,6 +91,7 @@ function resolvePassThroughSlots(inputs: ResolverInputs): Form1040FilingInfo {
     passThroughInterest: receivedAt(routed, "interest_list"),
     passThroughOrdinaryDividends: receivedAt(routed, "dividend_list"),
     passThroughQualifiedDividends: receivedAt(routed, "qualified_dividends"),
+    passThroughTaxExemptInterest: receivedAt(routed, "form_1040_line_2a"),
   };
 }
 

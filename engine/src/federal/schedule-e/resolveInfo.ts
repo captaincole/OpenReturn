@@ -6,6 +6,8 @@ import {
   type ResolverInputs,
 } from "../../resolverInputs.js";
 import { passThroughEntitiesOnReturn } from "../passThrough/items.js";
+import type { LimitContext } from "../passThrough/limits.js";
+import { limitContextOf } from "../passThrough/receipts.js";
 import { itemsWithRoute, routeEntities } from "../passThrough/routing.js";
 import {
   booleanFact,
@@ -106,7 +108,7 @@ function passiveAnswers(
 function passThroughOpenKeys(inputs: ResolverInputs): string[] {
   const status = filingStatusOf(inputs);
   const k1 = passThroughEntitiesOnReturn(inputs.facts, spousePropertiesOnReturn(status));
-  const waiting = routeEntities(k1.entities, { filingStatus: status }).flatMap((routed) =>
+  const waiting = routeEntities(k1.entities, limitContextOf(inputs)).flatMap((routed) =>
     routed.kind === "waiting" ? routed.factKeys : [],
   );
   return [...k1.malformedKeys, ...k1.spouseKeys, ...k1.missingHoldingKeys, ...waiting];
@@ -121,9 +123,9 @@ function passThroughOpenKeys(inputs: ResolverInputs): string[] {
  */
 function k1sOnScheduleE(
   k1: ReturnType<typeof passThroughEntitiesOnReturn>,
-  status: ReturnType<typeof filingStatusOf>,
+  context: LimitContext,
 ): string[] {
-  const routed = routeEntities(k1.entities, { filingStatus: status });
+  const routed = routeEntities(k1.entities, context);
   return routed
     .filter(
       ({ entity, kind }) =>
@@ -164,7 +166,8 @@ export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInf
   const filed1099s = booleanFact(inputs.factByKey.get(RENTAL_KEYS.filedRequired1099s));
   const professional = booleanFact(inputs.factByKey.get(RENTAL_KEYS.realEstateProfessional));
   const rentalFiles = properties.length + spouseKeys.length > 0;
-  const k1Keys = k1sOnScheduleE(k1, status);
+  const context = limitContextOf(inputs);
+  const k1Keys = k1sOnScheduleE(k1, context);
   const files = rentalFiles || k1Keys.length + k1.spouseKeys.length > 0;
   const columns = properties.slice(0, COLUMNS.length);
   /*
@@ -218,6 +221,7 @@ export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInf
     rentalPropertiesOverflow: properties.length > COLUMNS.length,
     partIInUse: rentalFiles || malformedKeys.length > 0,
     passThroughEntities: k1.entities.length > 0 ? k1.entities : undefined,
+    passThroughLimitContext: k1.entities.length > 0 ? context : undefined,
     rentalPaymentsRequire1099: paymentsRequire1099,
     rentalFiled1099s: filed1099s,
     realEstateProfessional: professional,

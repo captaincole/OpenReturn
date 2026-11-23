@@ -96,9 +96,9 @@ export const line1z = (form: Form) =>
     form["line.1h_amount"],
   );
 
-// MANUAL EDIT: 1099-INT box 8 sum.
+// MANUAL EDIT: 1099-INT box 8 sum, and a K-1's tax-exempt interest (box 16 code A).
 export const line2a = (_: unknown, info: Form1040FilingInfo) =>
-  roundDollars(info.taxExemptInterestTotal);
+  roundedWithReceived(info.taxExemptInterestTotal, info.passThroughTaxExemptInterest);
 
 /*
  * MANUAL EDIT: with Schedule B filed, lines 2b and 3b copy its lines 4

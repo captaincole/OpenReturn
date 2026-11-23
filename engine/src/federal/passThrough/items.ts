@@ -9,6 +9,7 @@ import {
   makeK1HoldingFactKey,
   readK1Facts,
   readK1HoldingFacts,
+  type K1CarriedBasisLosses,
   type K1FactValue,
   type K1Form,
   type K1HoldingFactValue,
@@ -53,12 +54,19 @@ export interface PassThroughItem {
   box: string;
   code?: string;
   label: string;
+  /*
+   * A loss or deduction the basis limit held back in an earlier year, carried to
+   * this one (the holding's carriedLosses.basis); box and code are the K-1's
+   * for that item.
+   */
+  fromPriorYear?: boolean;
 }
 
 /* An item as a reason names it: its type and the box it came from. */
 export function describeItem(item: PassThroughItem): string {
   const where = item.code === undefined ? `box ${item.box}` : `box ${item.box} code ${item.code}`;
-  return `${labelOf(item.type)} (${where})`;
+  const when = item.fromPriorYear === true ? ", carried from an earlier year" : "";
+  return `${labelOf(item.type)} (${where}${when})`;
 }
 
 /* "<name> (<kind> K-1)", the way every reason starts. */
@@ -77,6 +85,69 @@ export interface PassThroughEntity {
   /* Undefined until the owner's answers are recorded. */
   holding?: K1HoldingFactValue;
   items: PassThroughItem[];
+  /* The basis losses carried from earlier years (fromPriorYear), from the holding. */
+  priorYearItems: PassThroughItem[];
+}
+
+/*
+ * Each carried basis loss of the holding as the item the K-1 box would give
+ * (Schedule K-1 (Form 1120-S) boxes 1 to 12 and 16 code F): a loss negative, a
+ * deduction positive, as the K-1 prints them.
+ */
+const CARRIED_BASIS_ITEMS: Record<
+  keyof K1CarriedBasisLosses,
+  { type: ItemType; box: string; code?: string; detail?: string; sign: 1 | -1 }
+> = {
+  ordinaryBusinessLoss: { type: "ordinary_business_income", box: "1", sign: -1 },
+  netRentalRealEstateLoss: { type: "net_rental_real_estate_income", box: "2", sign: -1 },
+  otherNetRentalLoss: { type: "other_net_rental_income", box: "3", sign: -1 },
+  netShortTermCapitalLoss: { type: "net_short_term_capital_gain", box: "7", sign: -1 },
+  netLongTermCapitalLoss: { type: "net_long_term_capital_gain", box: "8a", sign: -1 },
+  netSection1231Loss: { type: "net_section_1231_gain", box: "9", sign: -1 },
+  otherLoss: { type: "other_income", box: "10", code: "ZZ", detail: "other", sign: -1 },
+  section179Deduction: { type: "section_179_deduction", box: "11", sign: 1 },
+  cashCharitableContributions: {
+    type: "charitable_contribution",
+    box: "12",
+    code: "A",
+    detail: "cash_60",
+    sign: 1,
+  },
+  otherCharitableContributions: { type: "charitable_contribution", box: "12", sign: 1 },
+  investmentInterestExpense: { type: "investment_interest_expense", box: "12", code: "H", sign: 1 },
+  section59eExpenditures: {
+    type: "other_deduction",
+    box: "12",
+    code: "J",
+    detail: "section_59e_expenditures",
+    sign: 1,
+  },
+  otherDeductions: { type: "other_deduction", box: "12", code: "ZZ", detail: "other", sign: 1 },
+  foreignTaxes: { type: "foreign_tax_paid", box: "16", code: "F", sign: 1 },
+};
+
+/* A holding with any basis loss carried from an earlier year. */
+export function hasCarriedBasisLoss(holding: K1HoldingFactValue | undefined): boolean {
+  return Object.values(holding?.carriedLosses?.basis ?? {}).some((amount) => (amount ?? 0) > 0);
+}
+
+/* The holding's carried basis losses as items, in Form 7203 Part III order. */
+export function priorYearItemsOf(key: string, holding: K1HoldingFactValue | undefined) {
+  const carried = holding?.carriedLosses?.basis ?? {};
+  return Object.entries(CARRIED_BASIS_ITEMS).flatMap(([field, row]): PassThroughItem[] => {
+    const amount = carried[field as keyof K1CarriedBasisLosses] ?? 0;
+    if (amount <= 0) return [];
+    const { sign, ...where } = row;
+    return [
+      {
+        entityKey: key,
+        ...where,
+        amount: sign * amount,
+        label: `${labelOf(row.type)} carried from an earlier year`,
+        fromPriorYear: true,
+      },
+    ];
+  });
 }
 
 /*
@@ -129,6 +200,7 @@ export function passThroughEntitiesOnReturn(
   const { holdings, malformedKeys: malformedHoldings } = readK1HoldingFacts(facts);
   const all = k1s.map(({ key, value }): PassThroughEntity => {
     const holdingKey = makeK1HoldingFactKey(k1EntityIdOf(key) ?? key);
+    const holding = holdings.get(holdingKey);
     return {
       key,
       holdingKey,
@@ -136,8 +208,9 @@ export function passThroughEntitiesOnReturn(
       name: value.entityName,
       ein: value.entityEin,
       k1: value,
-      holding: holdings.get(holdingKey),
+      holding,
       items: itemsOf(key, value),
+      priorYearItems: value.form === "1120-S" ? priorYearItemsOf(key, holding) : [],
     };
   });
   const offReturn = (entity: PassThroughEntity) => !joint && entity.holding?.owner === "spouse";
@@ -222,8 +295,9 @@ export function passThroughLossFloor(facts: ReadonlyArray<FactRow>): number {
   const deductions = items
     .filter((item) => roleOf(item.type) === "deduction")
     .map((item) => -Math.abs(item.amount ?? 0));
-  const carried = [...readK1HoldingFacts(facts).holdings.values()].flatMap((holding) =>
-    Object.values(holding.carriedLosses ?? {}).map((amount) => -(amount ?? 0)),
-  );
+  const carried = [...readK1HoldingFacts(facts).holdings.values()].flatMap((holding) => {
+    const { basis, atRisk, passive } = holding.carriedLosses ?? {};
+    return [...Object.values(basis ?? {}), atRisk, passive].map((amount) => -(amount ?? 0));
+  });
   return sum(...losses, ...deductions, ...carried);
 }
