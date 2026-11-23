@@ -114,8 +114,11 @@ export function register(): void {
           ? undefined
           : atLeast(0, combined(form["0.line.2"], form["0.line.3"])),
       "0.line.5": (form) => percentOf(form["0.line.4"]),
-      // No fact gives PTP income; line 6 is the REIT dividends alone.
-      "0.line.6": (_, info) => roundDollars(info.qualifiedReitDividends),
+      // No fact gives PTP income; line 6 is the REIT dividends alone. MANUAL EDIT: a K-1's gap shows here.
+      "0.line.6": (_, info) =>
+        info.qualifiedReitDividendsGap
+          ? unsupported(info.qualifiedReitDividendsGap)
+          : roundDollars(info.qualifiedReitDividends),
       "0.line.8": (form) => atLeast(0, combined(form["0.line.6"], form["0.line.7"])),
       "0.line.9": (form) => percentOf(form["0.line.8"]),
       "0.line.10": (form) => {

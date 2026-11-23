@@ -6,36 +6,37 @@
 import type { FormAccessor } from "../../defineForm.js";
 import { numberOrBlank, roundDollars } from "../../money.js";
 import { figuredForm8814, withForm8814 } from "../8814/totals.js";
+import { roundedWithReceived } from "../passThrough/receipts.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import type { Form1040 } from "./types.js";
 
 type Form = FormAccessor<Form1040>;
 
 /*
- * Line 3a: qualified dividends, plus each Form 8814 line 9, not its line 2b
- * (irs-8814-inst-2025::sec::line-2b::b01, ::line-9::b01, ::line-3::b06;
- * irs-1040-inst-2025::sec::line-3a::b01). Line 16's worksheet line 2 reads it.
+ * Line 3a: qualified dividends, a K-1's qualified dividends
+ * (irs-1041k1-inst-2025::sec::box-2b-qualified-dividends::b01), plus each Form
+ * 8814 line 9, not its line 2b (irs-8814-inst-2025::sec::line-2b::b01,
+ * ::line-9::b01, ::line-3::b06; irs-1040-inst-2025::sec::line-3a::b01). Line
+ * 16's worksheet line 2 reads it.
  */
-export const line3a = (info: Form1040FilingInfo) =>
-  withForm8814(
-    info.form8814Totals,
-    roundDollars(info.qualifiedDividends),
-    (figured) => figured.line9,
-  );
+export function line3a(info: Form1040FilingInfo) {
+  const own = roundedWithReceived(info.qualifiedDividends, info.passThroughQualifiedDividends);
+  if (typeof own === "object") return own;
+  return withForm8814(info.form8814Totals, own, (figured) => figured.line9);
+}
 
 /*
  * Line 3b: Schedule B line 6 when Schedule B files, whose line 5 lists each
- * Form 8814 line 9 (::line-9::b01); otherwise the ordinary dividends plus line 9
- * (irs-1040-inst-2025::sec::line-3b::b01).
+ * K-1's dividends and each Form 8814 line 9 (::line-9::b01); otherwise the
+ * ordinary dividends, a K-1's (irs-1041k1-inst-2025::sec::box-2a-ordinary-dividends::b01),
+ * plus line 9 (irs-1040-inst-2025::sec::line-3b::b01).
  */
 export function line3b(form: Form, info: Form1040FilingInfo) {
   const scheduleB = numberOrBlank(form["schedule-b.0.line.6_total_ordinary_dividends"]);
   if (scheduleB !== undefined) return withForm8814(info.form8814Totals, scheduleB, () => 0);
-  return withForm8814(
-    info.form8814Totals,
-    roundDollars(info.ordinaryDividends),
-    (figured) => figured.line9,
-  );
+  const own = roundedWithReceived(info.ordinaryDividends, info.passThroughOrdinaryDividends);
+  if (typeof own === "object") return own;
+  return withForm8814(info.form8814Totals, own, (figured) => figured.line9);
 }
 
 /* Line 3c boxes 1 and 2: the child's qualified dividends (line 9) are in lines 3a and 3b. */

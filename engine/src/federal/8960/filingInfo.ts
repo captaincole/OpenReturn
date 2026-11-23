@@ -1,5 +1,6 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Form8814FilingInfo } from "../8814/filingInfo.js";
+import type { Receipt } from "../passThrough/receipts.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
 
 /* Line 7 reads Form 8814's totals. */
@@ -13,4 +14,6 @@ export interface Form8960FilingInfo
   stateLocalTaxAllocableToInvestmentIncome?: number;
   /** Line 10: additional deductions or modifications properly allocable to NII (the taxpayer's answer). */
   additionalModifications?: number;
+  /** Lines 7 and 13: each K-1's net investment income adjustment (Schedule K-1 (Form 1041) box 14 code H). */
+  passThroughNetInvestmentAdjustment?: Receipt;
 }

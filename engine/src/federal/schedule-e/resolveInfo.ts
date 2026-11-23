@@ -6,7 +6,7 @@ import {
   type ResolverInputs,
 } from "../../resolverInputs.js";
 import { passThroughEntitiesOnReturn } from "../passThrough/items.js";
-import { routeEntities } from "../passThrough/routing.js";
+import { itemsWithRoute, routeEntities } from "../passThrough/routing.js";
 import {
   booleanFact,
   isPassiveActivity,
@@ -113,6 +113,29 @@ function passThroughOpenKeys(inputs: ResolverInputs): string[] {
 }
 
 /*
+ * The K-1s that file Schedule E: every partnership and S corporation K-1
+ * (Part II), and a trust K-1 with an item for Part III
+ * (irs-1040se-inst-2025::sec::part-iii::b01). A trust K-1 whose items all go
+ * elsewhere (Schedule B, Schedule D, Form 1040) files it only while it is
+ * unsupported (line 41 shows the gap) or waits on an answer.
+ */
+function k1sOnScheduleE(
+  k1: ReturnType<typeof passThroughEntitiesOnReturn>,
+  status: ReturnType<typeof filingStatusOf>,
+): string[] {
+  const routed = routeEntities(k1.entities, { filingStatus: status });
+  return routed
+    .filter(
+      ({ entity, kind }) =>
+        entity.form !== "1041" ||
+        itemsWithRoute(entity, "schedule_e_part_iii").length > 0 ||
+        kind !== "routed" ||
+        k1.missingHoldingKeys.includes(entity.holdingKey),
+    )
+    .map(({ entity }) => entity.key);
+}
+
+/*
  * irs-1040se-inst-2025::sec::general-instructions::b01: Schedule E reports income
  * or loss from rental real estate and royalties (Part I), and from partnerships,
  * S corporations, estates, trusts and REMICs (Parts II–IV). The engine has facts
@@ -128,7 +151,7 @@ function passThroughOpenKeys(inputs: ResolverInputs): string[] {
  * files the schedule and waits on its key, as a spouse's Schedule C business does.
  * MANUAL EDIT: a Schedule K-1 files it too (Parts II and III,
  * irs-1040se-inst-2025::sec::part-ii::b01), and so does any K-1 whose items have no
- * route yet, so its line 41 shows the gap (passThrough/README.md).
+ * route yet, so its line 41 shows the gap (passThrough/README.md; k1sOnScheduleE).
  */
 export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInfo {
   const status = filingStatusOf(inputs);
@@ -141,7 +164,8 @@ export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInf
   const filed1099s = booleanFact(inputs.factByKey.get(RENTAL_KEYS.filedRequired1099s));
   const professional = booleanFact(inputs.factByKey.get(RENTAL_KEYS.realEstateProfessional));
   const rentalFiles = properties.length + spouseKeys.length > 0;
-  const files = rentalFiles || k1.entities.length + k1.spouseKeys.length > 0;
+  const k1Keys = k1sOnScheduleE(k1, status);
+  const files = rentalFiles || k1Keys.length + k1.spouseKeys.length > 0;
   const columns = properties.slice(0, COLUMNS.length);
   /*
    * MANUAL EDIT: a fourth property needs another Schedule E, which the engine does not
@@ -162,7 +186,7 @@ export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInf
                   triggeredByFactKeys: [
                     ...properties.map((property) => property.key),
                     ...spouseKeys,
-                    ...k1.entities.map((entity) => entity.key),
+                    ...k1Keys,
                     ...k1.spouseKeys,
                   ],
                 },

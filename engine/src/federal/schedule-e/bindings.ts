@@ -113,7 +113,7 @@ export function register(): void {
       "0.line.19_other_description": (_, info) => otherExpenseDescription(info),
       // MANUAL EDIT: lines 22–26 and 43 (totals.ts).
       ...totalBindings(),
-      // MANUAL EDIT: Part II, lines 27–32, and line 41 (partII.ts).
+      // MANUAL EDIT: Parts II and III, lines 27–37, and line 41 (partII.ts, partIII.ts).
       ...partIIBindings(),
       "1.header.name": (_, info) => namesOnReturn(info),
       "1.header.ssn": (_, info) => info.taxpayerSSN,
@@ -123,7 +123,7 @@ export function register(): void {
       "0.header.ssn": (value) => SSN.format(value as Parameters<typeof SSN.format>[0]),
       "1.header.ssn": (value) => SSN.format(value as Parameters<typeof SSN.format>[0]),
     },
-    // MANUAL EDIT: Parts III and IV, lines 40 and 42 (unsupported.ts).
+    // MANUAL EDIT: Part IV, lines 40 and 42 (unsupported.ts).
     unsupported: UNSUPPORTED,
   });
 }

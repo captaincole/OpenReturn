@@ -7,12 +7,27 @@ import { line6cFrom8839 } from "../8839/receivers.js";
 import { LINE_19_ID, nonrefundableCreditGap } from "../8863/credit.js";
 import { creditGap, LINE_12_ID } from "../8880/credit.js";
 import { personalCredit } from "../8936/credit.js";
+import { describeItem, entityTitle } from "../passThrough/items.js";
+import { receivedAmounts, type Receipt } from "../passThrough/receipts.js";
 import type { Schedule3FilingInfo } from "./filingInfo.js";
 import type { Schedule3 } from "./types.js";
 
 const NO_SCENARIO = "No scenario uses this credit or payment yet.";
 const FORM_3800_GAP =
   "Form 3800 files, and line 6a takes its general business credit; Form 3800 has no rules in the engine.";
+
+const NO_FOREIGN_TAX = "Foreign tax credit (Form 1116): no scenario has foreign tax paid yet.";
+
+/* Line 1's reason: each K-1 with foreign taxes, by name, or the reason it had. */
+function foreignTaxReason(receipt: Receipt | undefined): string {
+  if (receipt?.kind === "unsupported") return receipt.reason;
+  const named = receivedAmounts(receipt).map(
+    ({ entity, item }) => `${entityTitle(entity)}: ${describeItem(item)}`,
+  );
+  return named.length > 0
+    ? `${named.join("; ")} needs the foreign tax credit (Form 1116), which is not modeled.`
+    : NO_FOREIGN_TAX;
+}
 
 export function register(): void {
   defineForm<Schedule3, Schedule3FilingInfo>("schedule-3", {
@@ -22,6 +37,11 @@ export function register(): void {
           ? `${info.taxpayerFirstName} ${info.taxpayerLastName}`
           : undefined,
       "0.header.ssn": (_, info) => info.taxpayerSSN,
+      /*
+       * MANUAL EDIT: the foreign tax credit (Form 1116) is not modeled. A K-1's
+       * foreign taxes are named here, so the income lines still compute.
+       */
+      "0.line.1": (_, info) => unsupported(foreignTaxReason(info.passThroughForeignTax)),
       // MANUAL EDIT: Form 2441 line 11 ("Also enter ... on Schedule 3 (Form 1040), line 2").
       "0.line.2": (form) => numberOrBlank(form["form-2441.0.line.11_dependent_care_credit"]),
       // MANUAL EDIT: Schedule R line 22 ("Also enter this amount on Schedule 3 (Form 1040), line 6d").
@@ -106,7 +126,6 @@ export function register(): void {
     },
 
     unsupported: {
-      "0.line.1": "Foreign tax credit (Form 1116): no scenario has foreign tax paid yet.",
       "0.line.5a": "Residential clean energy credit (Form 5695 Part I) is not modeled.",
       "0.line.6b": NO_SCENARIO,
       "0.line.6e": "Reserved for future use.",

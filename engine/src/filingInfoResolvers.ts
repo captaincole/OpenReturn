@@ -8,13 +8,10 @@ import {
   SPOUSE_KEYS,
   getSection1256Facts,
   isDividendFactKey,
-  isInterestFactKey,
 } from "./facts/index.js";
 import { resolve4137Info } from "./federal/4137/resolveInfo.js";
 import { scheduleTwoNeededForEarlyDistributions } from "./federal/5329/resolveInfo.js";
 import { resolve6251Info } from "./federal/6251/resolveInfo.js";
-import { figuredForm8814, form8814Totals } from "./federal/8814/totals.js";
-import { filesForm8815, savingsBondExclusionScope } from "./federal/8815/resolveInfo.js";
 import { resolve8853Info } from "./federal/8853/resolveInfo.js";
 import { SCHEDULE_2_LINES, form8853Reaches } from "./federal/8853/results.js";
 import { resolve8919Info } from "./federal/8919/resolveInfo.js";
@@ -26,15 +23,21 @@ import type { Form8960FilingInfo } from "./federal/8960/filingInfo.js";
 import { NIIT_THRESHOLDS, rentalsWithoutTradeOrBusinessAnswer } from "./federal/8960/lines.js";
 import { investmentSignals, magiUpperBound } from "./federal/8960/mustFile.js";
 import { resolve8962Info } from "./federal/8962/resolveInfo.js";
+import {
+  k1KeysWithRoute,
+  receivedAt,
+  receivedOnReturn,
+  routedOnReturn,
+} from "./federal/passThrough/receipts.js";
+import type { Route } from "./federal/passThrough/routing.js";
 import type { Schedule2FilingInfo } from "./federal/schedule-2/filingInfo.js";
 import { resolveScheduleAInfo } from "./federal/schedule-a/resolveInfo.js";
-import type { PayerAmount, ScheduleBFilingInfo } from "./federal/schedule-b/filingInfo.js";
 import type { ScheduleDFilingInfo } from "./federal/schedule-d/filingInfo.js";
 import { resolveScheduleEInfo } from "./federal/schedule-e/resolveInfo.js";
 import { resolveScheduleHInfo } from "./federal/schedule-h/resolveInfo.js";
 import { resolveScheduleSEInfo } from "./federal/schedule-se/resolveInfo.js";
 import type { BaseFilingInfo } from "./filingInfo.js";
-import { sum, sumOrBlank, type Money } from "./money.js";
+import { sumOrBlank, type Money } from "./money.js";
 import {
   factsInCategory,
   filingStatusOf,
@@ -56,6 +59,7 @@ import type { ScheduleCaFilingInfo } from "./state/ca/schedule-ca/filingInfo.js"
 import { phone, ssn } from "./values.js";
 
 export { resolveSchedule1Info } from "./federal/schedule-1/resolveInfo.js";
+export { resolveScheduleBInfo } from "./federal/schedule-b/resolveInfo.js";
 export { makeResolverInputs, type ResolverInputs } from "./resolverInputs.js";
 
 export function resolveBaseInfo(inputs: ResolverInputs): BaseFilingInfo {
@@ -240,6 +244,8 @@ export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInf
     (key) => (num(inputs, key) ?? 0) > 0,
   );
   const section1256Keys = getSection1256Facts(inputs.facts).map((fact) => fact.key);
+  // irs-1041k1-inst-2025::sec::boxes-3-and-4a-net-short-term-and-net::b01: lines 5 and 12.
+  const k1Keys = [...new Set(SCHEDULE_D_ROUTES.flatMap((route) => k1KeysWithRoute(inputs, route)))];
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_d",
     fallbacks: [
@@ -254,9 +260,15 @@ export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInf
         value: section1256Keys.length > 0,
         triggeredByFactKeys: section1256Keys,
       },
+      {
+        rule: "fallback: a Schedule K-1 capital gain or loss (lines 5 and 12)",
+        value: k1Keys.length > 0,
+        triggeredByFactKeys: k1Keys,
+      },
     ],
   });
   const distributions = sumInvestmentBox(inputs, "box2a", isDividendFactKey);
+  const routed = routedOnReturn(inputs);
   const positive = (value: number | undefined): Money | undefined =>
     value !== undefined && value > 0 ? (value as Money) : undefined;
   return {
@@ -264,8 +276,19 @@ export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInf
     capitalGainDistributions: positive(distributions),
     shortTermLossCarryover: positive(num(inputs, CAPITAL_LOSS_CARRYOVER_KEYS.shortTerm)),
     longTermLossCarryover: positive(num(inputs, CAPITAL_LOSS_CARRYOVER_KEYS.longTerm)),
+    passThroughShortTermGain: receivedAt(routed, "schedule_d_line_5"),
+    passThroughLongTermGain: receivedAt(routed, "schedule_d_line_12"),
+    passThrough28RateGain: receivedAt(routed, "schedule_d_line_18"),
+    passThroughUnrecaptured1250Gain: receivedAt(routed, "schedule_d_line_19"),
   };
 }
+
+const SCHEDULE_D_ROUTES: Route[] = [
+  "schedule_d_line_5",
+  "schedule_d_line_12",
+  "schedule_d_line_18",
+  "schedule_d_line_19",
+];
 
 /*
  * irs-8960-inst-2025::sec::who-must-file::b01 and application-to-individuals::b01:
@@ -319,6 +342,7 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
     rentalProperties,
     stateLocalTaxAllocableToInvestmentIncome: allocableTax,
     additionalModifications,
+    passThroughNetInvestmentAdjustment: receivedOnReturn(inputs, "form_8960_line_7"),
   };
 }
 
@@ -364,86 +388,4 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
   return {
     mustFile: { "schedule-2": resolution },
   };
-}
-
-/*
- * Schedule B line 5 rows: the parents' dividends, then each Form 8814 line 9.
- * irs-8814-inst-2025::sec::line-9::b01: each Form 8814 line 9 is a line 5 row
- * named "Form 8814", and Schedule B files when it plus the parents' dividends
- * is more than $1,500. A child's foreign account (Part III, ::b07) has no fact.
- */
-function scheduleBDividendPayers(inputs: ResolverInputs) {
-  const form8814Rows = (figuredForm8814(form8814Totals(inputs))?.line9ByChild ?? [])
-    .filter((line9) => line9 > 0)
-    .map((line9) => ({ payerName: "Form 8814", amount: line9 }));
-  return [...payerAmounts(inputs, isDividendFactKey, (value) => sum(value.box1a)), ...form8814Rows];
-}
-
-// IRS Schedule B inst.: interest or dividends over $1,500, or a Part III "Yes".
-export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInfo {
-  const interestPayers = payerAmounts(inputs, isInterestFactKey, (value) =>
-    sum(value.box1, value.box3),
-  );
-  const dividendPayers = scheduleBDividendPayers(inputs);
-  const hasForeignFinancialAccount = boolDecision(
-    inputs,
-    "decisions.scope.has_foreign_financial_account",
-  );
-  const hasForeignTrust = boolDecision(inputs, "decisions.scope.has_foreign_trust");
-  const partIII = {
-    "decisions.scope.has_foreign_financial_account": hasForeignFinancialAccount,
-    "decisions.scope.has_foreign_trust": hasForeignTrust,
-  };
-  const rounding = inputs.decisionByKey.get("decisions.rounding.schedule_b");
-  const interest = sum(...interestPayers.map((interestPayer) => interestPayer.amount));
-  const dividends = sum(...dividendPayers.map((dividendPayer) => dividendPayer.amount));
-  const bondExclusion = savingsBondExclusionScope(inputs);
-  const resolution = resolveMustFile(inputs.decisionByKey, {
-    explicitKey: "decisions.scope.must_file_schedule_b",
-    fallbacks: [
-      {
-        rule: `fallback: interest $${interest} or dividends $${dividends} > $1,500, or a Part III "Yes"`,
-        value:
-          interest > 1500 ||
-          dividends > 1500 ||
-          hasForeignFinancialAccount === true ||
-          hasForeignTrust === true,
-      },
-      // Line 3 takes Form 8815 line 14 (irs-8815-form-2025::sec::omb-no-1545-0074::b03).
-      {
-        rule: "fallback: Form 8815 files (the savings bond interest exclusion, line 3)",
-        value: filesForm8815(bondExclusion),
-        triggeredByFactKeys: bondExclusion.resolution.derivation?.triggeredByFactKeys ?? [],
-      },
-    ],
-  });
-  return {
-    mustFile: { "schedule-b": resolution },
-    missingInputs: { "schedule-b": missingInputs(partIII) },
-    interestPayers,
-    rounding: rounding === "sum_rounded_rows" ? "sum_rounded_rows" : "round_total",
-    dividendPayers,
-    hasForeignFinancialAccount,
-    hasForeignTrust,
-    savingsBondExclusionGap: bondExclusion.exclusion.line9Gap,
-  };
-}
-
-function payerAmounts(
-  inputs: ResolverInputs,
-  isKind: (key: string) => boolean,
-  amountOf: (v: Record<string, unknown>) => number,
-): PayerAmount[] {
-  return factsInCategory(inputs, "investment_income")
-    .filter((row) => isKind(row.key))
-    .map((row) => {
-      const value = row.value as Record<string, unknown>;
-      return { payerName: String(value.payerName ?? ""), amount: amountOf(value) };
-    })
-    .filter((payer) => payer.amount !== 0);
-}
-
-function boolDecision(inputs: ResolverInputs, key: string): boolean | undefined {
-  const value = inputs.decisionByKey.get(key);
-  return typeof value === "boolean" ? value : undefined;
 }

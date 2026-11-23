@@ -1,5 +1,6 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Form8814FilingInfo } from "../8814/filingInfo.js";
+import type { Receipt } from "../passThrough/receipts.js";
 
 /** Amount keeps cents. */
 export interface PayerAmount {
@@ -15,10 +16,13 @@ export type ScheduleBRounding = "round_total" | "sum_rounded_rows";
 
 export interface ScheduleBFilingInfo
   extends BaseFilingInfo, Pick<Form8814FilingInfo, "form8814Totals"> {
-  /** 1099-INT box 1 + box 3. */
+  /** 1099-INT box 1 + box 3, then each K-1's interest (passThroughInterest). */
   interestPayers?: PayerAmount[];
-  /** 1099-DIV box 1a, then a "Form 8814" row for each Form 8814 line 9. */
+  /** 1099-DIV box 1a, then each K-1's dividends, then a "Form 8814" row for each Form 8814 line 9. */
   dividendPayers?: PayerAmount[];
+  /** The K-1 interest and dividends the rows list; lines 2 and 6 wait or show the gap with them. */
+  passThroughInterest?: Receipt;
+  passThroughDividends?: Receipt;
   rounding?: ScheduleBRounding;
   hasForeignFinancialAccount?: boolean;
   hasForeignTrust?: boolean;

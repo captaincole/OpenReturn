@@ -6,7 +6,9 @@ import {
 } from "../../facts/index.js";
 import { sum } from "../../money.js";
 import { factsInCategory, filingStatusOf, num, type ResolverInputs } from "../../resolverInputs.js";
+import type { Unsupported } from "../../types.js";
 import { passThroughEntitiesOnReturn } from "../passThrough/items.js";
+import { receivedOnReturn, withReceived, type ReceivedItem } from "../passThrough/receipts.js";
 import { routeEntities } from "../passThrough/routing.js";
 import { spousePropertiesOnReturn } from "../rentals/passive.js";
 import { netProfit } from "../schedule-c/lines.js";
@@ -14,8 +16,8 @@ import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
 import { resolveScheduleSEInfo } from "../schedule-se/resolveInfo.js";
 import type { QbiBusiness, QbiFilingInfo } from "./filingInfo.js";
 
-/* Qualified REIT dividends: 1099-DIV box 5, cents kept. Undefined with no 1099-DIV. */
-export function qualifiedReitDividends(inputs: ResolverInputs): number | undefined {
+/* 1099-DIV box 5, cents kept. Undefined with no 1099-DIV. */
+function form1099ReitDividends(inputs: ResolverInputs): number | undefined {
   const divs = factsInCategory(inputs, "investment_income").filter((row) =>
     isDividendFactKey(row.key),
   );
@@ -24,11 +26,39 @@ export function qualifiedReitDividends(inputs: ResolverInputs): number | undefin
     : undefined;
 }
 
+/* A K-1 statement's section 199A dividends (irs-1041k1-inst-2025::sec::box-14-other-information::b05). */
+const statementReitDividends = ({ entity }: ReceivedItem) =>
+  entity.k1.section199A?.section199ADividends;
+
+/*
+ * Qualified REIT dividends: 1099-DIV box 5 and each K-1 statement's section
+ * 199A dividends (irs-1120sk1-inst-2025::sec::box-17-other-information::b13),
+ * cents kept. Undefined with neither, and while a K-1 waits; the gap when a
+ * K-1 is unsupported.
+ */
+function reitDividendsWithK1s(inputs: ResolverInputs): number | Unsupported | undefined {
+  const own = form1099ReitDividends(inputs);
+  const receipt = receivedOnReturn(inputs, "qbi");
+  const withK1 = withReceived(own, receipt, statementReitDividends);
+  const anyK1 =
+    receipt.kind !== "received" ||
+    receipt.items.some((received) => (statementReitDividends(received) ?? 0) !== 0);
+  return anyK1 ? withK1 : own;
+}
+
+/* Qualified REIT dividends as a number, for the must-file and form-choice bounds. */
+export function qualifiedReitDividends(inputs: ResolverInputs): number | undefined {
+  const amount = reitDividendsWithK1s(inputs);
+  return typeof amount === "number" ? amount : form1099ReitDividends(inputs);
+}
+
 /* The shared QBI slots, filled whichever QBI form files (Form 8995 or 8995-A). */
 export function resolveQbiInfo(inputs: ResolverInputs): QbiFilingInfo {
   const { businesses } = qbiBusinesses(inputs);
+  const reit = reitDividendsWithK1s(inputs);
   return {
-    qualifiedReitDividends: qualifiedReitDividends(inputs),
+    qualifiedReitDividends: typeof reit === "number" ? reit : undefined,
+    qualifiedReitDividendsGap: typeof reit === "object" ? reit.reason : undefined,
     qbiBusinesses: businesses.length > 0 ? businesses : undefined,
     qbiScheduleSEFiled: resolveScheduleSEInfo(inputs).mustFile?.["schedule-se"]?.value,
   };
@@ -58,17 +88,28 @@ function qbiRentals(inputs: ResolverInputs): QbiBusiness[] {
 }
 
 /*
+ * A beneficiary's QBI is apportioned from the trust's trades or businesses
+ * (irs-1041k1-inst-2025::sec::box-14-other-information::b03, ::b04), which
+ * Part III does not identify; not modeled.
+ */
+const TRUST_QBI_GAP = (name: string) =>
+  `${name} (estate or trust K-1): QBI from an estate's or trust's trade or business on the section 199A statement is not modeled.`;
+
+/*
  * MANUAL EDIT: a K-1 with a section 199A statement is one more trade or business
  * (irs-1120sk1-inst-2025::sec::box-17-other-information::b11, ::b12). Its QBI,
  * W-2 wages, UBIA and specified service answer are the statement's. A K-1 with
- * no statement adds nothing. Its QBI waits while the K-1 waits, and is a gap
- * while any of its items has no route: the amounts on the statement may
- * include items not allowed this year (::b12).
+ * no statement, or a statement with no QBI (section 199A dividends only), adds
+ * no business. Its QBI waits while the K-1 waits, and is a gap while any of
+ * its items has no route: the amounts on the statement may include items not
+ * allowed this year (::b12). A trust's QBI is a gap (TRUST_QBI_GAP).
  */
 function qbiPassThroughs(inputs: ResolverInputs): QbiBusiness[] {
   const status = filingStatusOf(inputs);
   const { entities } = passThroughEntitiesOnReturn(inputs.facts, spousePropertiesOnReturn(status));
-  const withStatement = entities.filter((entity) => entity.k1.section199A !== undefined);
+  const withStatement = entities.filter(
+    (entity) => entity.k1.section199A?.qualifiedBusinessIncome !== undefined,
+  );
   return routeEntities(withStatement, { filingStatus: status }).map((routed): QbiBusiness => {
     const { entity } = routed;
     const statement = entity.k1.section199A;
@@ -81,7 +122,12 @@ function qbiPassThroughs(inputs: ResolverInputs): QbiBusiness[] {
       specifiedService: statement?.specifiedService,
       statementQbi: routed.kind === "routed" ? statement?.qualifiedBusinessIncome : undefined,
       ownersOnlyBusiness: false,
-      qbiGap: routed.kind === "unsupported" ? routed.reasons.join(" ") : undefined,
+      qbiGap:
+        routed.kind === "unsupported"
+          ? routed.reasons.join(" ")
+          : entity.form === "1041"
+            ? TRUST_QBI_GAP(entity.name)
+            : undefined,
       w2WagesPaid: statement?.w2Wages,
       qualifiedPropertyUbia: statement?.qualifiedPropertyUbia,
     };

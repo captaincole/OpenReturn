@@ -26,7 +26,11 @@ import {
 import { resolve4137Info } from "../4137/resolveInfo.js";
 import { line1Row } from "../6781/lines.js";
 import { form8814IncomeUpperBound } from "../8814/children.js";
-import { passThroughIncomeUpperBound } from "../passThrough/items.js";
+import {
+  passThroughHasInvestmentIncome,
+  passThroughIncomeUpperBound,
+} from "../passThrough/items.js";
+import { k1ItemsWithRoute } from "../passThrough/receipts.js";
 import { netReceipts, tentativeProfit } from "../schedule-c/lines.js";
 
 /* 1040 line 6b: at most 85% of social security benefits is taxable. */
@@ -95,6 +99,8 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
     // A child's interest and dividends on Form 8814 (irs-8814-inst-2025::sec::parents-who-don-t-file-a-joint-return::b06).
     form8814IncomeUpperBound(inputs),
     passThroughIncomeUpperBound(inputs.facts),
+    // A positive beneficiary's adjustment increases MAGI (irs-8960-inst-2025::sec::line-13-modified-adjusted-gross-income-magi::b03).
+    ...k1ItemsWithRoute(inputs, "form_8960_line_7").map((item) => atLeast(0, item.amount ?? 0)),
   );
 }
 
@@ -103,8 +109,8 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
  * Who Must File asks for investment income: an interest, dividend or sale fact
  * (category investment_income), a capital loss carried over from last year
  * (it reaches line 5a through 1040 line 7a), a child's income on Form 8814, a
- * section 1256 contract (Form 6781, the same way), or a business without line G
- * "Yes" (passive).
+ * section 1256 contract (Form 6781, the same way), a K-1's portfolio income or
+ * net investment income adjustment, or a business without line G "Yes" (passive).
  * This gate is stricter than who-must-file::b01, which states the MAGI test
  * alone: without investment income the tax is $0, and the gate keeps a $0
  * Form 8960 off high-wage returns. A person decides whether to drop it.
@@ -129,6 +135,7 @@ export function investmentSignals(
     form8814IncomeUpperBound(inputs) > 0 ||
     carryover ||
     getSection1256Facts(inputs.facts).length > 0 ||
+    passThroughHasInvestmentIncome(inputs.facts) ||
     (businesses.length > 0 && !scheduleCNonpassive);
   return { scheduleCNonpassive, hasInvestment };
 }

@@ -216,7 +216,10 @@ export function register(): void {
   defineForm<Form8995A, Info>("form-8995-a", {
     bindings: {
       // MANUAL EDIT: Part IV for the REIT-dividend path.
-      "1.line.28": (_, info) => roundDollars(info.qualifiedReitDividends),
+      "1.line.28": (_, info) =>
+        info.qualifiedReitDividendsGap
+          ? unsupported(info.qualifiedReitDividendsGap)
+          : roundDollars(info.qualifiedReitDividends),
       "1.line.31": (form) => {
         const value = form["1.line.30"];
         return typeof value === "number" ? roundDollars(value * 0.2) : undefined;
