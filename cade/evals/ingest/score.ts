@@ -22,7 +22,7 @@ export interface DocScore {
 const kindOf = (fact: TaxFactRow) =>
   `${fact.category}:${fact.key
     .replace(
-      /^(account|payer|employer|employee|vendor|clean_vehicle|dependent_care\.provider|k1\.s_corporation|k1\.trust)\.[^.]+/,
+      /^(account|payer|employer|employee|vendor|dependent_care\.provider|k1\.s_corporation|k1\.trust)\.[^.]+/,
       "$1",
     )
     .replace(/\.(trades|distributions|hsa_distributions|ltc_benefits|w2g|1099k)\..*$/, ".$1")}`;

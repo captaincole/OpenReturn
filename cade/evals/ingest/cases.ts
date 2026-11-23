@@ -1,5 +1,4 @@
 import {
-  makeCleanVehicleFactKey,
   makeDependentCareProviderFactKey,
   makeDividendFactKey,
   makeForeignIncomeStatementKey,
@@ -10,7 +9,6 @@ import {
   makeLtcBenefitsFactKey,
   makePaymentTransactionsFactKey,
   makeRetirementDistributionFactKey,
-  makeSavingsBondCashedFactKey,
   makeSCorporationK1FactKey,
   makeSection1256StatementFactKey,
   makeSocialSecurityFactKey,
@@ -169,30 +167,6 @@ const MANIFEST: [string, string, string, KeyMatch[]][] = [
     [makeForeignIncomeStatementKey(makeDividendFactKey("larchmont-international"))],
   ],
   [
-    "birgitte",
-    "01-seller-report-new-vehicle.pdf",
-    "Clean vehicle seller report",
-    [makeCleanVehicleFactKey("aurelle-sona")],
-  ],
-  [
-    "birgitte",
-    "02-seller-report-previously-owned-vehicle.pdf",
-    "Clean vehicle seller report",
-    [makeCleanVehicleFactKey("pellam-coastline")],
-  ],
-  [
-    "elayne",
-    "01-seller-report-new-vehicle.pdf",
-    "Clean vehicle seller report",
-    [makeCleanVehicleFactKey("aurelle-ridgeline")],
-  ],
-  [
-    "elayne",
-    "02-seller-report-previously-owned-vehicle.pdf",
-    "Clean vehicle seller report",
-    [makeCleanVehicleFactKey("pellam-strata")],
-  ],
-  [
     "hollis",
     "01-1099-b-ridgeline-futures.pdf",
     "1099-B futures",
@@ -215,17 +189,6 @@ const MANIFEST: [string, string, string, KeyMatch[]][] = [
     "02-lupe-arroyo-care-statement.pdf",
     "Care provider statement",
     [makeDependentCareProviderFactKey("lupe-arroyo")],
-  ],
-  [
-    "odessa",
-    "01-savings-bonds-cashed.pdf",
-    "Savings bond record",
-    [
-      makeSavingsBondCashedFactKey("paper-ee-2004"),
-      makeSavingsBondCashedFactKey("electronic-ee-2012"),
-      makeSavingsBondCashedFactKey("series-i-2015"),
-      makeSavingsBondCashedFactKey("paper-ee-1988"),
-    ],
   ],
   [
     "siuan",
@@ -323,23 +286,20 @@ const MANIFEST: [string, string, string, KeyMatch[]][] = [
 /*
  * Fields that need what the user said, not only the document: a 1099-K's businessId
  * links it to a business Cade asked about, and a 1099-R's owner compares the
- * recipient with the taxpayer's name. A seller report, a care provider's statement
- * and a savings bond record each go into a fact that also holds the taxpayer's
- * answers. The eval asks no questions and gives no identity, so it does not score them.
+ * recipient with the taxpayer's name. A care provider's statement goes into a fact
+ * that also holds the taxpayer's answers. The eval asks no questions and gives no
+ * identity, so it does not score them.
+ *
+ * Not in the manifest: a document whose tool needs an answer before it records
+ * (the clean vehicle seller report, the savings bond record, the Mortgage Credit
+ * Certificate). Cade asks first, and the eval cannot answer.
  */
 const ANSWER_FIELDS = [
   "businessId",
   "owner",
-  "acquiredForUse",
-  "resoldWithin30Days",
-  "businessUsePercent",
-  "businessUseMonths",
-  "claimedUsedCreditInPrior3Years",
   "householdEmployee",
   "providerType",
   "employerProvided",
-  "ownerQualifies",
-  "interestReportedInPriorYears",
 ];
 
 function documentValue(fact: TaxFactRow): TaxFactRow {
@@ -367,10 +327,8 @@ const LITE = new Set([
   "tcb-ca-005/07-chase-bank-1098.pdf",
   "perrin/01-rio-grande-valley-1098-t.pdf",
   "galad/02-foreign-income-larchmont.pdf",
-  "birgitte/01-seller-report-new-vehicle.pdf",
   "hollis/01-1099-b-ridgeline-futures.pdf",
   "ottilie/01-sunflower-hill-care-statement.pdf",
-  "odessa/01-savings-bonds-cashed.pdf",
   "thaddeus/03-evergreen-ma-1099-sa-code-1.pdf",
   "thaddeus/05-mount-rainier-1099-ltc.pdf",
   "min/01-schedule-k1-baerlon-bindery.pdf",
