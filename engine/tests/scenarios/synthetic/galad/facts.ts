@@ -22,13 +22,13 @@ import {
 import type { TaxFactRow } from "../../../../src/facts/rows.js";
 import { identityFact } from "../../../helpers/fixtureBuilders.js";
 
-export const RAND_USER_ID = "rand-synthetic";
-export const RAND_TAX_YEAR = 2025;
+export const GALAD_USER_ID = "galad-synthetic";
+export const GALAD_TAX_YEAR = 2025;
 
 const CREATED_AT = "2026-11-22T00:00:00Z";
 
-export const RAND = {
-  firstName: "Rand",
+export const GALAD = {
+  firstName: "Galad",
   lastName: "Ostrander",
   ssn: "400-00-1116",
   street: "2817 Fremont Terrace N",
@@ -37,12 +37,12 @@ export const RAND = {
   zip: "98103",
 };
 
-const address = { line1: RAND.street, city: RAND.city, state: RAND.state, zip: RAND.zip };
+const address = { line1: GALAD.street, city: GALAD.city, state: GALAD.state, zip: GALAD.zip };
 
 const fact = (category: string, key: string, value: unknown, sourceNote: string): TaxFactRow => ({
   id: `f-${key}`,
-  userId: RAND_USER_ID,
-  taxYear: RAND_TAX_YEAR,
+  userId: GALAD_USER_ID,
+  taxYear: GALAD_TAX_YEAR,
   category,
   key,
   value,
@@ -56,7 +56,7 @@ const w2: W2FactValue = {
   employerName: "Cascade Lumen Instruments, Inc.",
   employerEin: "00-0001116",
   employerAddress: { line1: "900 Westlake Ave N", city: "Seattle", state: "WA", zip: "98109" },
-  employee: { firstName: RAND.firstName, lastName: RAND.lastName, ssn: RAND.ssn, address },
+  employee: { firstName: GALAD.firstName, lastName: GALAD.lastName, ssn: GALAD.ssn, address },
   box1: 185000,
   box2: 33600,
   box3: 176100,
@@ -133,20 +133,20 @@ const ukTax: StatedForeignTaxValue = {
 };
 
 const idFact = (suffix: string, value: string) =>
-  identityFact({ userId: RAND_USER_ID, taxYear: RAND_TAX_YEAR, suffix, value });
+  identityFact({ userId: GALAD_USER_ID, taxYear: GALAD_TAX_YEAR, suffix, value });
 
 const dividendKey = (slug: string) => makeDividendFactKey(slug);
 const interestKey = (slug: string) => makeInterestFactKey(slug);
 
-export const randFacts: TaxFactRow[] = [
-  idFact("name.first", RAND.firstName),
-  idFact("name.last", RAND.lastName),
-  idFact("ssn", RAND.ssn),
+export const galadFacts: TaxFactRow[] = [
+  idFact("name.first", GALAD.firstName),
+  idFact("name.last", GALAD.lastName),
+  idFact("ssn", GALAD.ssn),
   idFact("dob", "03/09/1983"),
-  idFact("address.street", RAND.street),
-  idFact("address.city", RAND.city),
-  idFact("address.state", RAND.state),
-  idFact("address.zip", RAND.zip),
+  idFact("address.street", GALAD.street),
+  idFact("address.city", GALAD.city),
+  idFact("address.state", GALAD.state),
+  idFact("address.zip", GALAD.zip),
   idFact("occupation", "Optical engineer"),
   idFact("phone", "206-555-0116"),
   fact("wages", makeW2FactKey("cascade-lumen"), w2, "W-2 from Cascade Lumen Instruments."),

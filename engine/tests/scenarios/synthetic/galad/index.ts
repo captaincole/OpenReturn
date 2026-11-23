@@ -9,9 +9,9 @@
 
 import { lockedGoldenPath } from "../../../helpers/scenarioPdfName.js";
 import type { Scenario } from "../../../types.js";
-import { randDecisions } from "./decisions.js";
-import { randExpected } from "./expected.js";
-import { RAND_TAX_YEAR, RAND_USER_ID, randFacts } from "./facts.js";
+import { galadDecisions } from "./decisions.js";
+import { galadExpected } from "./expected.js";
+import { GALAD_TAX_YEAR, GALAD_USER_ID, galadFacts } from "./facts.js";
 
 const FORM_IDS = [
   "form-1116",
@@ -24,18 +24,18 @@ const FORM_IDS = [
   "form-8960",
 ];
 
-export const randScenario: Scenario = {
-  name: "rand",
+export const galadScenario: Scenario = {
+  name: "galad",
   description:
     "Single WA filer with passive foreign tax (a fund, a Dutch stock, Australian bonds) and UK tax on wages: two Forms 1116 with the qualified dividend adjustment, and the credit on Schedule 3 line 1.",
   verification: "unverified",
-  taxYear: RAND_TAX_YEAR,
-  userId: RAND_USER_ID,
-  facts: randFacts,
-  decisions: randDecisions,
+  taxYear: GALAD_TAX_YEAR,
+  userId: GALAD_USER_ID,
+  facts: galadFacts,
+  decisions: galadDecisions,
   forms: FORM_IDS.map((formId) => ({
     formId,
-    expected: randExpected(formId),
-    goldenPdfPath: lockedGoldenPath("rand", formId),
+    expected: galadExpected(formId),
+    goldenPdfPath: lockedGoldenPath("galad", formId),
   })),
 };

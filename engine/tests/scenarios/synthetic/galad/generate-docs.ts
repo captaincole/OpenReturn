@@ -1,4 +1,4 @@
-/* Renders the 1099-DIVs and the fund's foreign income statement into docs/: npx tsx tests/scenarios/synthetic/rand/generate-docs.ts */
+/* Renders the 1099-DIVs and the fund's foreign income statement into docs/: npx tsx tests/scenarios/synthetic/galad/generate-docs.ts */
 
 import { writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
@@ -6,8 +6,8 @@ import { fileURLToPath } from "node:url";
 import { foreignIncomeStatementPdf } from "../../documents/foreignIncomeStatement.js";
 import { form1099DivPdf } from "../../documents/form1099Div.js";
 import {
-  RAND,
-  RAND_TAX_YEAR,
+  GALAD,
+  GALAD_TAX_YEAR,
   brokerDividends,
   brokerForeignIncome,
   fundDividends,
@@ -17,10 +17,10 @@ import {
 const docsDir = join(dirname(fileURLToPath(import.meta.url)), "docs");
 
 const recipient = {
-  recipientName: `${RAND.firstName} ${RAND.lastName}`,
+  recipientName: `${GALAD.firstName} ${GALAD.lastName}`,
   recipientTin: "***-**-1116",
-  recipientStreet: RAND.street,
-  recipientCityStateZip: `${RAND.city}, ${RAND.state} ${RAND.zip}`,
+  recipientStreet: GALAD.street,
+  recipientCityStateZip: `${GALAD.city}, ${GALAD.state} ${GALAD.zip}`,
 };
 
 const FUND = { payerStreet: "PO Box 4410", payerCityStateZip: "Boston, MA 02110" };
@@ -33,7 +33,7 @@ async function main() {
       await form1099DivPdf(
         fundDividends,
         { ...FUND, ...recipient, accountNumber: "LIX-0047731" },
-        RAND_TAX_YEAR,
+        GALAD_TAX_YEAR,
       ),
     ],
     [
@@ -49,7 +49,7 @@ async function main() {
           box1b: fundDividends.box1b,
           box7: fundDividends.box7,
         },
-        RAND_TAX_YEAR,
+        GALAD_TAX_YEAR,
       ),
     ],
     [
@@ -57,7 +57,7 @@ async function main() {
       await form1099DivPdf(
         brokerDividends,
         { ...BROKER, ...recipient, accountNumber: "NG-88213-4", box8: brokerForeignIncome.country },
-        RAND_TAX_YEAR,
+        GALAD_TAX_YEAR,
       ),
     ],
   ];

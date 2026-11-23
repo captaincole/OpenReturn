@@ -1,6 +1,6 @@
-# rand — two Forms 1116: passive and general (synthetic)
+# galad — two Forms 1116: passive and general (synthetic)
 
-Rand Ostrander is single and lives in Seattle, Washington. Every name and amount here is made up. There is no outside source and no answer key: the expected values are the engine's output, checked by hand against the form instructions, then locked (`verification: "unverified"`).
+Galad Ostrander is single and lives in Seattle, Washington. Every name and amount here is made up. There is no outside source and no answer key: the expected values are the engine's output, checked by hand against the form instructions, then locked (`verification: "unverified"`).
 
 He is an optical engineer. His employer sent him to London for three months, and the UK taxed those wages: general category income. He also owns an international index fund (a mutual fund, so its 1099-DIV leaves box 8 blank and line i says "RIC"), Dutch shares, and Australian bonds: passive category income. His foreign tax is far over $300, so the election does not apply and Form 1116 files, one copy for each category. Foreign qualified dividends are over $20,000, so the adjustment exception does not apply: line 1a adjusts them and line 18 comes from the Worksheet for Line 18. He itemizes (mortgage, property tax, sales tax), so lines 3a and 4a take Schedule A amounts. The return is federal only: Washington has no income tax.
 

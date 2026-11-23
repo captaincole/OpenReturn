@@ -2,12 +2,12 @@
 
 import type { AIDecisionRow } from "../../../../src/facts/rows.js";
 import { decisionRow } from "../../../helpers/fixtureBuilders.js";
-import { RAND_TAX_YEAR, RAND_USER_ID } from "./facts.js";
+import { GALAD_TAX_YEAR, GALAD_USER_ID } from "./facts.js";
 
 const dec = (key: string, decision: unknown, rationale: string) =>
-  decisionRow({ userId: RAND_USER_ID, taxYear: RAND_TAX_YEAR, key, decision, rationale });
+  decisionRow({ userId: GALAD_USER_ID, taxYear: GALAD_TAX_YEAR, key, decision, rationale });
 
-export const randDecisions: AIDecisionRow[] = [
+export const galadDecisions: AIDecisionRow[] = [
   dec("decisions.scope.must_file_federal", true, "Gross income is over the single threshold."),
   dec("decisions.scope.filing_status", "single", "Not married at the end of 2025."),
   dec("decisions.scope.has_digital_assets", false, "No digital asset activity."),

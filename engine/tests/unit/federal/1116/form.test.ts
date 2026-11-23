@@ -1,7 +1,7 @@
 /*
  * Form 1116 on a whole return: who files, the election, the two copies, the
  * answers it asks for, the gaps, and the forms that take its result (Schedule 3
- * line 1, Form 1040 line 20). The synthetic rand scenario is the base.
+ * line 1, Form 1040 line 20). The synthetic galad scenario is the base.
  */
 
 import { describe, expect, it } from "vitest";
@@ -17,7 +17,7 @@ import { form1116Set } from "../../../../src/federal/1116/copies.js";
 import { evaluateScenario } from "../../../../src/index.js";
 import { decisionRow } from "../../../helpers/fixtureBuilders.js";
 import { faileScenario } from "../../../scenarios/synthetic/faile/index.js";
-import { randScenario as base } from "../../../scenarios/synthetic/rand/index.js";
+import { galadScenario as base } from "../../../scenarios/synthetic/galad/index.js";
 
 const FORM = "form-1116";
 const UNSUPPORTED = { ok: false, unsupported: true };
@@ -92,7 +92,7 @@ describe("no foreign tax: nothing changes", () => {
   });
 });
 
-describe("the rand return: two copies", () => {
+describe("the galad return: two copies", () => {
   const run = evaluate(base.facts);
 
   it("files, with the general copy first (the larger line 24) and Part IV on it", () => {

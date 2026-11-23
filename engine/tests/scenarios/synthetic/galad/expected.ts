@@ -1,5 +1,5 @@
 /*
- * rand — LOCKED expected values, drafted from the engine's
+ * galad — LOCKED expected values, drafted from the engine's
  * output on 2026-11-23 (scripts/draftExpected.ts).
  *
  * UNVERIFIED: no CPA return or filed-return check stands behind these
@@ -233,7 +233,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
   },
 };
 
-export function randExpected(formId: string): ExpectedResults {
+export function galadExpected(formId: string): ExpectedResults {
   const expected = EXPECTED[formId] ?? {};
   return {
     engineFields: expected.engineFields ?? {},

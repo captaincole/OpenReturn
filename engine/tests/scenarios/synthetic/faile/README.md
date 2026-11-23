@@ -4,7 +4,7 @@ Faile Bashere is single and lives in Austin, Texas. Every name and amount here i
 
 She is a data analyst. A global equity fund (a mutual fund: its 1099-DIV leaves box 8 blank) withheld $118.40 of foreign tax, and a broker's 1099-INT shows $31.20 of Canadian tax on bond interest. All her foreign income is passive, all of it is on 1099s, and the tax is not over $300. The election applies (`irs-1116-inst-2025::sec::publications-see-pub-514-foreign-tax-credit-for::b01`, `b02`): no Form 1116 files, and Schedule 3 line 1 takes "the smaller of (a) your total foreign tax, or (b) your regular tax" (`b03`). She takes the standard deduction. The return is federal only: Texas has no income tax.
 
-`rand` covers Form 1116 itself.
+`galad` covers Form 1116 itself.
 
 ## Documents
 
