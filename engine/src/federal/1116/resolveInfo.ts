@@ -1,22 +1,146 @@
-import { resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
-import type { Form1116FilingInfo } from "./filingInfo.js";
+import { FOREIGN_TAX_CREDIT_KEYS, PRIOR_YEAR_KEYS } from "../../facts/index.js";
+import { sum } from "../../money.js";
+import {
+  filingStatusOf,
+  missingInputs,
+  num,
+  resolveMustFile,
+  type ResolverInputs,
+} from "../../resolverInputs.js";
+import type { ForeignTaxInfo, Form1116CategoryInfo, Form1116FilingInfo } from "./filingInfo.js";
+import { electionLimit } from "./lines.js";
+import { foreignTaxSources, type ForeignTaxSource } from "./sources.js";
+
+const MUST_FILE_KEY = "decisions.scope.must_file_1116";
+
+const CARRYOVER_KEY = {
+  passive: PRIOR_YEAR_KEYS.foreignTaxCarryoverPassive,
+  general: PRIOR_YEAR_KEYS.foreignTaxCarryoverGeneral,
+} as const;
+
+const OTHER_CATEGORY_GAP =
+  "A foreign tax source is in a category other than passive or general (irs-1116-inst-2025::sec::categories-of-income::b01); the engine figures only those two Forms 1116.";
+const NO_SOURCE_GAP =
+  "Form 1116 files by decision, but no fact holds a foreign tax or foreign-source income (1099-DIV box 7, 1099-INT box 6, or a stated foreign tax).";
+const EXCLUDED_INCOME_GAP =
+  "Form 2555 or Form 4563 files: line 12 takes off the taxes on the excluded income (irs-1116-inst-2025::sec::line-12-2::b01, b02), and neither form has rules in the engine.";
+const LOSS_ACCOUNT_GAP =
+  "An earlier year left a foreign or domestic loss account; line 16 recaptures it (irs-1116-inst-2025::sec::line-16::b06–b13), and the engine has no balances to do it.";
+const FORM_461_GAP =
+  "Form 461 files: line 16 adds back a disallowed business loss (irs-1116-inst-2025::sec::line-16::b01), and Form 461 has no rules in the engine.";
+const FORM_5471_GAP =
+  "Form 5471 files: line 22 may take a section 960(c) increase (irs-1116-inst-2025::sec::line-22::b01), and the engine has no rules for it.";
+
+/* Forms 2555, 4563, 461 and 5471 have no rules: only their must-file decision files them. */
+const decidedToFile = (inputs: ResolverInputs, shortId: string) =>
+  inputs.decisionByKey.get(`decisions.scope.must_file_${shortId}`) === true;
 
 /*
- * irs-1116-inst-2025::sec::purpose-of-form::b01: file to claim the foreign tax credit when the small-amount election does not apply.
- * The engine does not total foreign tax paid or check the election yet, so no fact turns the form on: only the decision does.
+ * The election (irs-1116-inst-2025::sec::publications-see-pub-514-foreign-tax-credit-for::b01, b02):
+ * all foreign income passive, all of it and its taxes on payee statements, and
+ * the creditable taxes no more than the limit. Form 2555 income is general
+ * category income, so it ends the election. A stated carryover above 0 does
+ * too: the election year cannot use one (part-iii-figuring-the-credit::b03, b04).
+ */
+function electionApplies(sources: ForeignTaxSource[], inputs: ResolverInputs): boolean {
+  const taxes = sum(...sources.map((source) => source.foreignTaxPaid));
+  if (taxes <= 0) return false;
+  const status = filingStatusOf(inputs) ?? "single";
+  return (
+    sources.every((source) => source.category === "passive" && source.onPayeeStatement) &&
+    taxes <= electionLimit(status) &&
+    !decidedToFile(inputs, "2555") &&
+    (num(inputs, CARRYOVER_KEY.passive) ?? 0) <= 0
+  );
+}
+
+function categoriesOf(sources: ForeignTaxSource[], inputs: ResolverInputs): Form1116CategoryInfo[] {
+  return (["passive", "general"] as const)
+    .map((category) => ({
+      category,
+      sources: sources.filter((source) => source.category === category),
+      carryover: num(inputs, CARRYOVER_KEY[category]),
+    }))
+    .filter((each) => each.sources.length > 0);
+}
+
+/* The answers a filed Form 1116 reads: each category's carryover, the loss accounts, each 1099's statement. */
+function requiredAnswers(categories: Form1116CategoryInfo[], inputs: ResolverInputs): string[] {
+  const required: Record<string, unknown> = {
+    [PRIOR_YEAR_KEYS.foreignLossAccounts]: inputs.factByKey.get(
+      PRIOR_YEAR_KEYS.foreignLossAccounts,
+    ),
+  };
+  for (const each of categories) {
+    required[CARRYOVER_KEY[each.category]] = each.carryover;
+    for (const source of each.sources) {
+      if (source.grossIncomeKey) required[source.grossIncomeKey] = undefined;
+    }
+  }
+  return missingInputs(required);
+}
+
+/* Line h: a home address in a U.S. state is a U.S. resident (own reading, QUESTIONS.md). */
+function residentOf(inputs: ResolverInputs): string | undefined {
+  const state = inputs.factByKey.get("identity.address.state");
+  return typeof state === "string" && state !== "" ? "United States" : undefined;
+}
+
+function formGaps(inputs: ResolverInputs, sources: ForeignTaxSource[], filesForm: boolean) {
+  const otherCategory = sources.some(
+    (source) => source.category !== "passive" && source.category !== "general",
+  );
+  const excluded = decidedToFile(inputs, "2555") || decidedToFile(inputs, "4563");
+  const lossAccounts = inputs.factByKey.get(PRIOR_YEAR_KEYS.foreignLossAccounts) === true;
+  return {
+    formGap: otherCategory
+      ? OTHER_CATEGORY_GAP
+      : filesForm && sources.length === 0
+        ? NO_SOURCE_GAP
+        : undefined,
+    line12Gap: excluded ? EXCLUDED_INCOME_GAP : undefined,
+    line16Gap: lossAccounts
+      ? LOSS_ACCOUNT_GAP
+      : decidedToFile(inputs, "461")
+        ? FORM_461_GAP
+        : undefined,
+    line22Gap: decidedToFile(inputs, "5471") ? FORM_5471_GAP : undefined,
+  };
+}
+
+/*
+ * Who files (irs-1116-inst-2025::sec::purpose-of-form::b01): a filer who paid
+ * a creditable foreign tax and for whom the election does not apply. The
+ * election is the default when it applies; the explicit decision wins either
+ * way (true files the form instead of the election).
  */
 export function resolve1116Info(inputs: ResolverInputs): Form1116FilingInfo {
+  const sources = foreignTaxSources(inputs.facts);
+  const taxed = sources.filter((source) => source.foreignTaxPaid > 0);
+  const election = electionApplies(sources, inputs);
+  const mustFile = resolveMustFile(inputs.decisionByKey, {
+    explicitKey: MUST_FILE_KEY,
+    fallbacks: [
+      {
+        rule: `fallback: ${taxed.length} foreign tax source(s); the election ${election ? "applies" : "does not apply"}`,
+        value: taxed.length > 0 && !election,
+        triggeredByFactKeys: taxed.map((source) => source.factKey),
+      },
+    ],
+  });
+  const filesForm = mustFile.value === true;
+  const categories = filesForm ? categoriesOf(sources, inputs) : [];
+  const foreignTax: ForeignTaxInfo = {
+    sources,
+    election: !filesForm && election,
+    categories,
+    claimAccrued: inputs.factByKey.get(FOREIGN_TAX_CREDIT_KEYS.claimAccrued) === true,
+    residentOf: residentOf(inputs),
+    ...formGaps(inputs, sources, filesForm),
+  };
   return {
-    mustFile: {
-      "form-1116": resolveMustFile(inputs.decisionByKey, {
-        explicitKey: "decisions.scope.must_file_1116",
-        fallbacks: [
-          {
-            rule: "fallback: no rule yet for foreign tax paid above the election limit",
-            value: false,
-          },
-        ],
-      }),
-    },
+    mustFile: { "form-1116": mustFile },
+    missingInputs: { "form-1116": filesForm ? requiredAnswers(categories, inputs) : [] },
+    foreignTax,
   };
 }

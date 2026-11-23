@@ -525,13 +525,17 @@ export const FEDERAL_FORMS: FormSpec[] = [
       select: (info, index) => info && { ...info, form8283CopyIndex: index },
     },
   }),
-  /* Wired with no rules yet: every field is blank, and only a must-file decision turns the form on. */
+  /* One Form 1116 for each category, the summary copy (Part IV) first (federal/1116/copies.ts). */
   makeFormSpec({
     formId: "form-1116",
     shortId: "1116",
     displayName: "Form 1116",
     relativeDir: "federal/1116",
     register: registerForm1116,
+    copies: {
+      count: (info) => Math.max(1, info?.foreignTax?.categories.length ?? 1),
+      select: (info, index) => info && { ...info, form1116CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-2210",

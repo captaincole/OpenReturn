@@ -1,5 +1,6 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { SSN } from "../../values.js";
+import type { Form1116FilingInfo } from "../1116/filingInfo.js";
 import type { AmericanOpportunityLines, StudentCredit } from "./lines.js";
 import type { RefundOutcome } from "./refund.js";
 
@@ -56,11 +57,10 @@ export interface Form8863Figured {
   refund: RefundOutcome;
   /* A Form 1098-T that no student fact names: the student's answers are missing, so the totals wait. */
   studentsMissing: boolean;
-  /* A 1099 shows foreign tax paid: Schedule 3 line 1 may hold a credit the engine does not compute. */
-  foreignTaxPaid: boolean;
 }
 
-export interface Form8863FilingInfo extends BaseFilingInfo {
+/* Form 1116's slots: the worksheet asks foreignTaxCreditGap whether Schedule 3 line 1 is a gap. */
+export interface Form8863FilingInfo extends BaseFilingInfo, Form1116FilingInfo {
   form8863?: Form8863Figured;
   /* Which page 2 this copy prints (renderCopies sets it); absent means the first. */
   form8863CopyIndex?: number;

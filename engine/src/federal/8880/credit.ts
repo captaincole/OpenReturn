@@ -6,6 +6,7 @@
 
 import { numberOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
+import { foreignTaxCreditGap } from "../1116/credit.js";
 import type { Form8880FilingInfo } from "./filingInfo.js";
 import {
   columnLines,
@@ -30,13 +31,13 @@ const FOREIGN_INCOME_GAP =
 
 /*
  * The Schedule 3 credits worksheet line 2 adds, each with the form the engine
- * does not compute. Lines 2 (Form 2441), 3 (Form 8863) and 6d (Schedule R) are computed.
+ * does not compute. Lines 1 (Form 1116), 2 (Form 2441), 3 (Form 8863) and 6d
+ * (Schedule R) are computed; a gap in line 1 is a gap here.
  */
-function creditsGap(info: Form8880FilingInfo): string | undefined {
+function creditsGap(form: Accessor, info: Form8880FilingInfo): string | undefined {
   const files = (formId: string) => info.mustFile?.[formId]?.value === true;
-  if (info.form8880ForeignTaxPaid === true || files("form-1116")) {
-    return "Credit Limit Worksheet line 2 adds Schedule 3 line 1, the foreign tax credit, which the engine does not compute; a 1099 shows foreign tax paid.";
-  }
+  const foreignTax = foreignTaxCreditGap(form, info);
+  if (foreignTax !== undefined) return `Credit Limit Worksheet line 2 adds ${foreignTax}`;
   if (files("form-8978")) {
     return "Credit Limit Worksheet line 2 adds Schedule 3 line 6l (Form 8978), which the engine does not compute.";
   }
@@ -90,7 +91,7 @@ export function worksheetOf(
 ): CreditLimitLines | Unsupported | undefined {
   const tentative = line10Of(form, info);
   if (typeof tentative !== "number") return tentative;
-  const gap = creditsGap(info);
+  const gap = creditsGap(form, info);
   if (gap !== undefined) return unsupported(gap);
   const line18 = numberOrBlank(form["form-1040.line.18"]);
   if (line18 === undefined) return undefined;
@@ -114,6 +115,6 @@ export function creditGap(form: Accessor, info: Form8880FilingInfo): Unsupported
   if (files2555 && (numberOrBlank(form[LINE_7_ID]) ?? 0) > 0) {
     return unsupported(FOREIGN_INCOME_GAP);
   }
-  const gap = (numberOrBlank(form[LINE_10_ID]) ?? 0) > 0 ? creditsGap(info) : undefined;
+  const gap = (numberOrBlank(form[LINE_10_ID]) ?? 0) > 0 ? creditsGap(form, info) : undefined;
   return gap === undefined ? undefined : unsupported(gap);
 }

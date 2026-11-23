@@ -1,4 +1,5 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
+import type { Form1116FilingInfo } from "../1116/filingInfo.js";
 import type { ColumnInputs } from "./lines.js";
 
 /*
@@ -11,8 +12,7 @@ import type { ColumnInputs } from "./lines.js";
 export type Form8880Column =
   { kind: "counts"; inputs: ColumnInputs } | { kind: "waits" } | { kind: "blank" };
 
-export interface Form8880FilingInfo extends BaseFilingInfo {
+/* Form 1116's slots: the worksheet asks foreignTaxCreditGap whether Schedule 3 line 1 is a gap. */
+export interface Form8880FilingInfo extends BaseFilingInfo, Form1116FilingInfo {
   form8880Columns?: { you: Form8880Column; spouse: Form8880Column };
-  /* A 1099-INT or 1099-DIV shows foreign tax paid: Schedule 3 line 1 may hold a credit. */
-  form8880ForeignTaxPaid?: boolean;
 }

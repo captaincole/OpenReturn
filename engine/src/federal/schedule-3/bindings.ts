@@ -2,6 +2,7 @@ import { defineForm } from "../../defineForm.js";
 import { numberOrBlank, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
+import { foreignTaxCredit } from "../1116/credit.js";
 import { mortgageCreditGap } from "../8396/creditGap.js";
 import { line6cFrom8839 } from "../8839/receivers.js";
 import { LINE_19_ID, nonrefundableCreditGap } from "../8863/credit.js";
@@ -22,6 +23,13 @@ export function register(): void {
           ? `${info.taxpayerFirstName} ${info.taxpayerLastName}`
           : undefined,
       "0.header.ssn": (_, info) => info.taxpayerSSN,
+      /*
+       * MANUAL EDIT: the foreign tax credit: Form 1116 line 35, or with the election
+       * the smaller of the foreign tax and the regular tax
+       * (irs-1116-inst-2025::sec::publications-see-pub-514-foreign-tax-credit-for::b03).
+       * Blank with no foreign tax; a Form 1116 gap stays a gap here.
+       */
+      "0.line.1": (form, info) => foreignTaxCredit(form, info),
       // MANUAL EDIT: Form 2441 line 11 ("Also enter ... on Schedule 3 (Form 1040), line 2").
       "0.line.2": (form) => numberOrBlank(form["form-2441.0.line.11_dependent_care_credit"]),
       // MANUAL EDIT: Schedule R line 22 ("Also enter this amount on Schedule 3 (Form 1040), line 6d").
@@ -106,7 +114,6 @@ export function register(): void {
     },
 
     unsupported: {
-      "0.line.1": "Foreign tax credit (Form 1116): no scenario has foreign tax paid yet.",
       "0.line.5a": "Residential clean energy credit (Form 5695 Part I) is not modeled.",
       "0.line.6b": NO_SCENARIO,
       "0.line.6e": "Reserved for future use.",

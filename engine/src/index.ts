@@ -144,5 +144,6 @@ export async function renderForm(
     ctx: scenario.ctx,
     catalog: bundledCatalog,
     blankPdfBytes,
+    forms: scenario.forms,
   });
 }

@@ -201,6 +201,16 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "taxed by the special methods); whether the taxpayer makes it is Cade's question",
   ],
   [
+    /^foreign_tax\.[^.]+$/,
+    "each fact is a whole foreign tax payment no payee statement shows (Form 1116 Parts I and II); " +
+      "whether one was paid is Cade's question",
+  ],
+  [
+    /^foreign_tax_credit\.claim_accrued$/,
+    "an answer Cade records only when the taxpayer chose, on an earlier return, to credit " +
+      "foreign taxes when they accrue (Form 1116 Part II box k); absent, box j (paid)",
+  ],
+  [
     /^prior_year\.ca_tax$/,
     "KNOWN GAP: decides whether FTB 5805 files. Needed only when the CA balance due is " +
       "$500 or more, which the resolver cannot see before evaluation.",
