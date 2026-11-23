@@ -1,5 +1,6 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Money } from "../../money.js";
+import type { Form1116FilingInfo } from "../1116/filingInfo.js";
 import type { Form2106FilingInfo } from "../2106/filingInfo.js";
 import type { Form3903FilingInfo } from "../3903/filingInfo.js";
 import type { Form4137FilingInfo } from "../4137/filingInfo.js";
@@ -24,7 +25,8 @@ import type { ScheduleSEFilingInfo } from "../schedule-se/filingInfo.js";
  * Line 1h reads Form 3903's excess reimbursement. Line 1a reads Form 2106's.
  * Lines 3a–3c, 7a, 7b and 16 read Form 8814's totals. Line 16 reads Form 8615
  * and Form 4972's tax.
- * Line 29 reads Form 8863's figures to tell a gap from "no credit".
+ * Line 29 reads Form 8863's figures to tell a gap from "no credit". Lines 17
+ * and 18 read Form 1116's slots to tell a gap in the AMT from "no AMT".
  */
 export interface Form1040FilingInfo
   extends
@@ -40,7 +42,8 @@ export interface Form1040FilingInfo
     Omit<Form8615FilingInfo, keyof BaseFilingInfo | "useItemizedDeductions">,
     Pick<Form8863FilingInfo, "form8863">,
     Pick<Form8919FilingInfo, "form8919Filers">,
-    Pick<Form4972FilingInfo, "form4972Tax" | "form4972TaxGap"> {
+    Pick<Form4972FilingInfo, "form4972Tax" | "form4972TaxGap">,
+    Form1116FilingInfo {
   /** Social Security with a traditional IRA contribution and a plan: Pub. 590-A figures line 6b (schedule-1/pub590a.ts). */
   pub590aWorksheets?: boolean;
 

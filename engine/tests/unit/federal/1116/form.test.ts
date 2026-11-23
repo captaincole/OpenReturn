@@ -9,6 +9,7 @@ import {
   PRIOR_YEAR_KEYS,
   makeDividendFactKey,
   makeForeignIncomeStatementKey,
+  makeInterestFactKey,
   makeStatedForeignTaxKey,
 } from "../../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../../src/facts/rows.js";
@@ -274,6 +275,47 @@ describe("Form 6251 with Form 1116", () => {
     expect(line7).toBeGreaterThan(37472 - 11103);
     expect(run.field("form-6251", "0.line.8_amt_foreign_tax_credit")).toMatchObject(UNSUPPORTED);
     expect(run.field("form-6251", "0.line.11_amt")).toMatchObject(UNSUPPORTED);
+  });
+
+  /*
+   * faile with $431 of foreign tax (Form 1116 files) and a $100,000 ISO spread:
+   * line 10 is below line 7, so the AMT is owed but line 8 is a gap. The gap
+   * must reach Schedule 2 and Form 1040; a total tax without the AMT is wrong.
+   */
+  it("a gap in the AMT reaches Schedule 2 lines 2 and 3 and Form 1040 lines 17 to 24", () => {
+    const pecos = makeDividendFactKey("pecos-global-equity");
+    const loneStar = makeInterestFactKey("lone-star");
+    const facts = [
+      ...faileScenario.facts.map((fact) =>
+        fact.key === pecos ? { ...fact, value: { ...(fact.value as object), box7: 400 } } : fact,
+      ),
+      row("investment_income", makeForeignIncomeStatementKey(pecos), {
+        grossIncome: 4200,
+        qualifiedDividends: 3100,
+      }),
+      row("investment_income", makeForeignIncomeStatementKey(loneStar), {
+        grossIncome: 780,
+        country: "Canada",
+      }),
+      row("other", PRIOR_YEAR_KEYS.foreignTaxCarryoverPassive, 0),
+      row("other", PRIOR_YEAR_KEYS.foreignLossAccounts, false),
+      row("amt", "amt.iso_exercise_spread", 100000),
+    ];
+    const run = evaluate(facts, [
+      ...faileScenario.decisions,
+      decision("decisions.scope.must_file_6251", true),
+    ]);
+    expect(run.value("schedule-3", "0.line.1")).toBe(431);
+    const line7 = run.value("form-6251", "0.line.7_tax_on_line_6") as number;
+    const line10 = run.value("form-6251", "0.line.10_regular_tax_less_credits") as number;
+    expect(line10).toBeLessThan(line7);
+    expect(run.field("form-6251", "0.line.11_amt")).toMatchObject(UNSUPPORTED);
+    expect(run.field("schedule-2", "0.line.2_alternative_minimum_tax")).toMatchObject(UNSUPPORTED);
+    expect(run.field("schedule-2", "0.line.3_total_lines_1z_and_2")).toMatchObject(UNSUPPORTED);
+    expect(run.field("form-1040", "line.17")).toMatchObject(UNSUPPORTED);
+    expect(run.field("form-1040", "line.18")).toMatchObject(UNSUPPORTED);
+    expect(run.value("form-1040", "line.22")).toBeUndefined();
+    expect(run.value("form-1040", "line.24")).toBeUndefined();
   });
 });
 

@@ -6,8 +6,8 @@
 import { atLeast, numberOrBlank, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { claimsByElection, foreignTaxCredit } from "../1116/credit.js";
+import type { Form1116FilingInfo } from "../1116/filingInfo.js";
 import { isGap } from "../1116/lines.js";
-import type { Form6251FilingInfo } from "./filingInfo.js";
 
 type Accessor = { readonly [fieldId: string]: unknown };
 type Value = number | Unsupported | undefined;
@@ -23,7 +23,7 @@ const AMT_COPY_GAP =
  * any Form 4972 tax) and Schedule 2 line 1z, minus Schedule 3 line 1. Form 8978
  * and Schedule J are not modeled. A gap in Schedule 3 line 1 is a gap here.
  */
-export function line10Of(form: Accessor, info: Form6251FilingInfo): Value {
+export function line10Of(form: Accessor, info: Form1116FilingInfo): Value {
   const line16 = numberOrBlank(form["form-1040.line.16"]);
   if (line16 === undefined) return undefined;
   const credit = foreignTaxCredit(form, info);
@@ -43,7 +43,7 @@ export function line10Of(form: Accessor, info: Form6251FilingInfo): Value {
  * the election it is the Schedule 3 line 1 amount. With Form 1116 it needs the
  * AMT Forms 1116: a gap.
  */
-export function line8Of(form: Accessor, info: Form6251FilingInfo): Value {
+export function line8Of(form: Accessor, info: Form1116FilingInfo): Value {
   const line7 = numberOrBlank(form[LINE_7]);
   const line10 = numberOrBlank(form[LINE_10]);
   if (line7 === undefined || line10 === undefined || line10 >= line7) return undefined;
@@ -54,7 +54,7 @@ export function line8Of(form: Accessor, info: Form6251FilingInfo): Value {
 }
 
 /* Line 9: line 7 minus line 8; a gap in line 8 is a gap here. */
-export function line9Of(form: Accessor, info: Form6251FilingInfo): Value {
+export function line9Of(form: Accessor, info: Form1116FilingInfo): Value {
   const line7 = numberOrBlank(form[LINE_7]);
   if (line7 === undefined) return undefined;
   const line8 = line8Of(form, info);
@@ -62,11 +62,23 @@ export function line9Of(form: Accessor, info: Form6251FilingInfo): Value {
 }
 
 /* Line 11: a zero line 9 enters -0-; else line 9 minus line 10, at least 0. */
-export function line11Of(form: Accessor, info: Form6251FilingInfo): Value {
+export function line11Of(form: Accessor, info: Form1116FilingInfo): Value {
   const line9 = line9Of(form, info);
   if (line9 === 0) return 0;
   if (isGap(line9) || line9 === undefined) return line9;
   const line10 = line10Of(form, info);
   if (isGap(line10)) return line10;
   return line10 === undefined ? undefined : atLeast(0, line9 - line10);
+}
+
+/*
+ * Line 11 when it is a gap, else undefined. A gap reads as blank through the
+ * accessor, so Schedule 2 lines 2 and 3 and Form 1040 lines 17 and 18 ask here:
+ * a missing AMT foreign tax credit must not drop the AMT from the total tax
+ * (irs-6251-inst-2025::sec::line-8-alternative-minimum-tax-foreign-tax::b01).
+ */
+export function amtGap(form: Accessor, info: Form1116FilingInfo): Unsupported | undefined {
+  if (info.mustFile?.["form-6251"]?.value !== true) return undefined;
+  const line11 = line11Of(form, info);
+  return isGap(line11) ? line11 : undefined;
 }
