@@ -45,7 +45,11 @@ Each question has its source and the default the code uses now.
    (the percentage method of ::b03, reading the statement's QBI as the QBI
    part of the whole loss); a statement QBI of 0 or more with a loss held
    back is a gap. One statement holds one trade or business; more are not
-   modeled.
+   modeled. A statement with W-2 wages or UBIA but no QBI amount is a
+   business row whose QBI is a gap: Form 8995-A lines 4 and 7 are 0 when the
+   business's QBI is 0 (irs-8995a-inst-2025::sec::line-4-3::b01, ::line-7::b02),
+   but an absent QBI is not a stated 0, so the engine does not print the row
+   with 0 income.
 6. **When the material participation answer is asked.** It matters only for
    trade or business items (irs-1120sk1-inst-2025::sec::passive-activity-limitations::b08).
    Default: the holding is asked for its answer only when the K-1 has an item

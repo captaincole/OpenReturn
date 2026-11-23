@@ -3,6 +3,7 @@ import {
   businessesOnReturn,
   isDividendFactKey,
   ownerOf,
+  type Section199AStatement,
 } from "../../facts/index.js";
 import { sum } from "../../money.js";
 import { factsInCategory, filingStatusOf, num, type ResolverInputs } from "../../resolverInputs.js";
@@ -161,6 +162,19 @@ export function k1sWithoutCarriedQbiAnswer(inputs: ResolverInputs): string[] {
     .map((routed) => routed.entity.holdingKey);
 }
 
+/*
+ * A statement with W-2 wages or UBIA and no QBI amount. Form 8995-A lines 4
+ * and 7 count them only with the business's QBI: "If the QBI on line 2 ... is
+ * zero, then the amount reported on line 4 ... must also be zero"
+ * (irs-8995a-inst-2025::sec::line-4-3::b01, ::line-7::b02). An absent QBI is
+ * not a stated 0, so the row is a gap rather than a row with 0 income.
+ */
+const NO_QBI_GAP = (title: string) =>
+  `${title}: the section 199A statement gives W-2 wages or UBIA of qualified property but no QBI amount, and Form 8995-A lines 4 and 7 count them only with the business's QBI.`;
+
+const hasLimitAmounts = (statement: Section199AStatement | undefined) =>
+  (statement?.w2Wages ?? 0) > 0 || (statement?.qualifiedPropertyUbia ?? 0) > 0;
+
 /* What a routed K-1 gives its QBI row: the statement's QBI, the carried qualified loss, or a gap. */
 function passThroughQbi(routed: RoutedEntity) {
   const statement = routed.entity.k1.section199A;
@@ -168,10 +182,14 @@ function passThroughQbi(routed: RoutedEntity) {
   const priorYear = priorYearQbiLossOf(routed);
   const trustGap = routed.entity.form === "1041" ? TRUST_QBI_GAP(routed.entity.name) : undefined;
   const limitGap = routed.kind === "unsupported" ? routed.reasons.join(" ") : undefined;
+  const noQbiGap =
+    statement?.qualifiedBusinessIncome === undefined
+      ? NO_QBI_GAP(entityTitle(routed.entity))
+      : undefined;
   return {
     statementQbi: priorYear === "waiting" ? undefined : scaled?.qbi,
     priorYearQbiLoss: typeof priorYear === "number" ? priorYear : undefined,
-    qbiGap: limitGap ?? trustGap ?? scaled?.gap,
+    qbiGap: limitGap ?? noQbiGap ?? trustGap ?? scaled?.gap,
   };
 }
 
@@ -180,7 +198,9 @@ function passThroughQbi(routed: RoutedEntity) {
  * (irs-1120sk1-inst-2025::sec::box-17-other-information::b11, ::b12). Its QBI,
  * W-2 wages, UBIA and specified service answer are the statement's. A K-1 with
  * no statement, or a statement with no QBI (section 199A dividends only), adds
- * no business. Its QBI waits while the K-1 waits, and is a gap while any of
+ * no business; a statement with W-2 wages or UBIA but no QBI adds a business
+ * whose QBI is a gap (NO_QBI_GAP), so the amounts are never dropped without a
+ * word. Its QBI waits while the K-1 waits, and is a gap while any of
  * its items has no route: the amounts on the statement may include items not
  * allowed this year (::b12); passThroughQbi keeps only the allowed part. A
  * trust's QBI is a gap (TRUST_QBI_GAP). Every K-1 goes through the limits
@@ -188,7 +208,8 @@ function passThroughQbi(routed: RoutedEntity) {
  */
 function qbiPassThroughs(inputs: ResolverInputs): QbiBusiness[] {
   const withStatement = (routed: RoutedEntity) =>
-    routed.entity.k1.section199A?.qualifiedBusinessIncome !== undefined;
+    routed.entity.k1.section199A?.qualifiedBusinessIncome !== undefined ||
+    hasLimitAmounts(routed.entity.k1.section199A);
   return routedOnReturn(inputs)
     .filter(withStatement)
     .map((routed): QbiBusiness => {

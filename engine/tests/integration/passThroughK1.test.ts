@@ -167,6 +167,22 @@ describe("the section 199A statement makes the K-1 a QBI business (min)", () => 
     expect(withStatement.value("form-1040.line.13a")).toBe(640);
   });
 
+  it("names a statement with W-2 wages and UBIA but no QBI amount on the QBI line", () => {
+    const facts = editK1(minScenario.facts, (k1) => ({
+      ...k1,
+      section199A: { ...k1.section199A, qualifiedBusinessIncome: undefined },
+    }));
+    const noQbi = run(minScenario, facts);
+    expect(noQbi.files("form-8995")).toBe(true);
+    expect(noQbi.value("form-8995.0.line.1i_a")).toBe("Baerlon Bindery, Inc.");
+    const line1c = noQbi.field("form-8995.0.line.1i_c");
+    expect(line1c?.ok === false && line1c.unsupported).toBe(true);
+    expect(line1c?.ok === false && line1c.reason).toContain(
+      "gives W-2 wages or UBIA of qualified property but no QBI amount",
+    );
+    expect(noQbi.value("form-1040.line.13a")).toBeUndefined();
+  });
+
   it("adds nothing to the deduction without a statement", () => {
     const facts = editK1(minScenario.facts, (k1) => ({
       ...k1,
