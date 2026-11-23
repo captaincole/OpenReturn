@@ -12,9 +12,12 @@ layers, and each layer reads only the one before it.
    fact. Nothing is interpreted here.
 2. **The holding** (`facts/kinds/k1Holding.ts`). One fact for each entity,
    with the owner's answers that no K-1 prints: whose K-1 it is on a joint
-   return, material participation, basis at the start of the year, losses
-   carried from earlier years by each limit, and an interest that ended. It
-   shares the K-1's id: `k1.holding.<id>` goes with `k1.s_corporation.<id>`.
+   return, material participation, all of the investment at risk, the Form
+   7203 answers (stock basis at the start, contributions, loans, debt basis),
+   losses carried from earlier years by each limit (basis losses by item), and
+   an interest that ended. It shares the K-1's id: `k1.holding.<id>` goes with
+   `k1.s_corporation.<id>`. The carried basis losses become items marked
+   `fromPriorYear` (`priorYearItemsOf` in `items.ts`).
 3. **One vocabulary** (`itemTypes.ts`, `boxTable.ts` and the three tables
    `sCorporationBoxes.ts`, `partnershipBoxes.ts`, `trustBoxes.ts`). Each
    table turns a box and code into an item `{ entity, type, amount }`. The
@@ -25,7 +28,12 @@ layers, and each layer reads only the one before it.
    sets: basis, at-risk, passive, excess business loss. Each takes the items
    still allowed and returns, for each K-1, the items it allows and the items
    it carries to next year, or why it waits or cannot decide. Portfolio items
-   (interest, dividends, capital gains) skip the passive stage.
+   (interest, dividends, capital gains) skip the passive stage. The basis
+   stage of an S corporation reads `basis.ts`, which figures every Form 7203
+   line; Form 7203's rules read the same computation. The stages read a
+   `LimitContext` besides the items: the filing status and the return's other
+   business losses (`limitContextOf` in `receipts.ts`), which a form gets from
+   Schedule E's `passThroughLimitContext` slot (`limitContextFrom`).
 5. **Routing** (`routing.ts`, `receipts.ts`, and the forms). `ROUTES` lists,
    for each K-1 form, the item types that have a line, and each route names
    its destination (`interest_list`, `schedule_d_line_12`, ...). A form that
@@ -38,8 +46,13 @@ layers, and each layer reads only the one before it.
 
 | Form | Item | Route | Where |
 | --- | --- | --- | --- |
-| 1120-S | box 1 ordinary business income, nonpassive | `schedule_e_part_ii` | Schedule E line 28 (i) or (k) (`schedule-e/partII.ts`) |
-| 1120-S | box 17 code V statement | `qbi` | one more business on Form 8995 or 8995-A (`qbi/`) |
+| 1120-S | box 1 ordinary business income or allowed loss, nonpassive | `schedule_e_part_ii` | Schedule E line 28 (i) or (k); a carried loss allowed now on its own "PYA" row (`schedule-e/partII.ts`) |
+| 1120-S | box 4 interest, box 5a ordinary dividends, box 5b qualified dividends | `interest_list`, `dividend_list`, `qualified_dividends` | Schedule B payer rows; Form 1040 lines 2b, 3b, 3a |
+| 1120-S | box 7, box 8a net short-term and long-term gain or allowed loss | `schedule_d_line_5`, `schedule_d_line_12` | Schedule D lines 5 and 12 |
+| 1120-S | box 12 charitable contributions, allowed | `schedule_a_line_11` | Schedule A line 11 for code A (cash, 60%); any other code is unsupported there |
+| 1120-S | box 16 code A tax-exempt interest | `form_1040_line_2a` | Form 1040 line 2a |
+| 1120-S | box 16 codes B, C, D | `form_7203` | the basis computation only (Form 7203 lines 3k, 8a, 6) |
+| 1120-S | box 17 code V statement | `qbi` | one more business on Form 8995 or 8995-A (`qbi/`), its QBI scaled to the allowed loss |
 | 1120-S, 1065 | box 17 code AC, box 20 code AG: gross receipts for section 448(c) | `no_line` | none: it informs Form 8990 only |
 | 1041 | box 1 interest | `interest_list` | a Schedule B line 1 payer row (the trust's name); Form 1040 line 2b |
 | 1041 | box 2a ordinary dividends | `dividend_list` | a Schedule B line 5 payer row; Form 1040 line 3b |
@@ -90,12 +103,43 @@ routed nor reported (`tests/unit/federal/passThrough/boxTables.test.ts`).
 - Guaranteed payments printed only as the box 4c total count in the income
   upper bound.
 
+## What the third step handles
+
+- An S corporation shareholder's basis limit (Form 7203, `basis.ts`): stock
+  basis, then debt basis, in the form's order. Losses and deductions above the
+  basis are allowed in proportion, item by item, and the rest carries to next
+  year with its character (scenario `elaida`). A loss carried from an earlier
+  year is column (b) and, once allowed, a "PYA" row on Schedule E, a "Yes" on
+  line 27, and Form 8995 line 3 (scenario `gareth`).
+- Form 7203 itself, one copy for each S corporation K-1 that files it, and
+  Schedule E line 28 column (e) checked on its row.
+- The at-risk stage passes a loss when the holding says all of the investment
+  is at risk; the excess business loss stage passes when every business loss
+  on the return, added without any income, is at most $156,500 (so Form 461 is
+  not needed).
+- QBI counts only the allowed loss: the statement's QBI is scaled to the part
+  of the business losses the limits allow, and a net QBI loss carries forward
+  on Form 8995 line 16.
+- Not yet: a distribution above stock basis (a capital gain on Form 8949), a
+  loan repayment (Form 7203 Part II Section C), a sale of stock, the section
+  1.1367-1(g) election, amounts not at risk (Form 6198), a total business loss
+  above $156,500 (Form 461), and a carried loss on Form 8995-A. Each is
+  unsupported with a reason.
+
 ## What the next steps add
 
 - **The foreign tax credit** (Form 1116), for a trust's box 14 code B, and
   the 28% rate gain and unrecaptured section 1250 gain worksheets.
-- **The S corporation basis limit** (Form 7203): the basis stage takes the
-  holding's basis, limits losses and deductions, and carries the rest.
+- **A partnership K-1's losses** (step 4). The partner's basis has no IRS form:
+  it is the Worksheet for Adjusting the Basis of a Partner's Interest in the
+  Partner's Instructions (irs-1065k1-inst-2025::sec::basis-limitations). It
+  needs the holding's `partnershipBasisAtStart`, the partner's share of
+  liabilities (the K-1's item K) as part of basis, contributions and
+  withdrawals (item L), and the same proportion rule as Form 7203 Part III.
+  `basisLimit` sends a partnership with a loss, a distribution or a carried
+  basis loss to unsupported until then; a basis computation like `basis.ts`
+  for the worksheet fills that branch, and the routes for a partnership's
+  items (none but section 448(c) gross receipts today) come with it.
 - **A passive partnership K-1** (Form 8582): the passive stage. Form 8582
   builds its activities from Schedule E Part I columns only
   (`8582/activities.ts`: `PassiveActivity.column` is a `PropertyColumn`); it
