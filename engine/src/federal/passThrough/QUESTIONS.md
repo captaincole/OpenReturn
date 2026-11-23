@@ -8,9 +8,10 @@ Each question has its source and the default the code uses now.
    and that page is not in the corpus. Box 13 codes F, G, I, K, M, N, P, Q and
    box 14 codes A, B, E, G have no text. Default: they map to `not_modeled`,
    with one exception: box 14 code B is foreign taxes, routed to Schedule 3
-   line 1 as unsupported. No block names the letter; that a K-1 (Form 1041)
-   reports foreign taxes is in
-   irs-1116-inst-2025::sec::publications-see-pub-514-foreign-tax-credit-for::b02.
+   line 1 (a Form 1116 source, item 22). No block names the letter; that a K-1
+   (Form 1041) reports foreign taxes is in
+   irs-1116-inst-2025::sec::publications-see-pub-514-foreign-tax-credit-for::b02
+   and irs-pub-514-2025::sec::you-must-have-paid-or-accrued-the::b03.
    Code A (tax-exempt interest, Form 1040 line 2a) stays `not_modeled`, so a
    K-1 with it is a gap on line 41. The blank K-1 (Form 1041) is not in
    `sources/`; adding it and its page 2 to the corpus would settle both.
@@ -68,7 +69,8 @@ Each question has its source and the default the code uses now.
 10. **Schedule K-3.** A checked box 14 (S corporation) or box 16 (partnership)
     means international items on another schedule
     (irs-1120sk1-inst-2025::sec::box-14-international-transactions::b01).
-    Default: the K-1 is unsupported.
+    Default: the K-1 is unsupported. A partnership's box 21 foreign taxes have
+    no route yet, so its K-1 is unsupported too.
 11. **A beneficiary's basis and at-risk.** The basis limits in the corpus are
     for shareholders and partners (irs-1120sk1-inst-2025::sec::basis-limitations::b01,
     irs-1065k1-inst-2025::sec::basis-limitations). Default: the basis stage
@@ -148,11 +150,27 @@ Each question has its source and the default the code uses now.
     the trust's trades or businesses (irs-1041k1-inst-2025::sec::box-14-other-information::b04).
     Default: a trust statement with QBI is one more business row whose QBI is
     unsupported; a statement with section 199A dividends only adds no business.
-22. **The foreign tax credit not taken.** Schedule 3 files and line 1 is
-    unsupported, naming the trust; the tax lines compute without the credit,
-    so they can overstate the tax, and an unsupported line does not make the
-    return pending. A taxpayer may also deduct foreign taxes on Schedule A
-    instead. Default: as described; Form 1116 is the next step.
+22. **A K-1's foreign taxes.** A K-1 (Form 1041) is a qualified payee
+    statement for the election
+    (irs-1116-inst-2025::sec::publications-see-pub-514-foreign-tax-credit-for::b02);
+    an S corporation's or a partnership's foreign taxes come from Schedule K-3
+    (irs-1120sk1-inst-2025::sec::box-16-items-affecting-shareholder-basis::b02:
+    "Do not use this amount to complete your Form 1116";
+    irs-pub-514-2025::sec::you-must-have-paid-or-accrued-the::b02). Default: a
+    trust K-1 is one passive category source in `1116/sources.ts`, and the
+    election and Form 1116 read it like a 1099-DIV. Passive because the trust's
+    items are interest and dividends (irs-pub-514-2025::sec::passive-category-income::b01);
+    no block gives a beneficiary another category. Form 1116 needs the
+    trustee's statement (the K-1 fact's `foreignIncome`: the foreign-source
+    gross income, its qualified dividends, the country or "RIC", and whether
+    it is dividends or interest); while it is missing, Form 1116 waits on the
+    K-1 fact. One statement holds one country; foreign capital gains from a
+    trust are not modeled. Part II column (l) prints "1099 taxes": the K-1
+    reports the tax in U.S. dollars, a "similar statement"
+    (irs-1116-inst-2025::sec::part-ii-foreign-taxes-paid-or::b04). An S
+    corporation's box 16 code F makes Schedule 3 line 1 a gap that names it.
+    A taxpayer may also deduct foreign taxes on Schedule A instead; no
+    decision records that.
 23. **Box 14 code H and MAGI.** A positive code H increases MAGI
     (irs-8960-inst-2025::sec::line-13-modified-adjusted-gross-income-magi::b03).
     Default: Form 8960's must-file bound adds a positive code H; lines 7 and 13

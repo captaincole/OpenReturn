@@ -140,6 +140,28 @@ export interface PartnershipK1FactValue extends K1Entity {
   moreThanOnePassiveActivity?: boolean;
 }
 
+/*
+ * The trustee's statement of the foreign-source income behind the foreign taxes
+ * on a K-1 (Form 1041). The K-1 box gives only the tax; Form 1116 line 1a needs
+ * the income and its qualified dividends (irs-1116-inst-2025::sec::qualified-dividends-and-capital-gain-tax::b02).
+ * The election to claim the credit without Form 1116 does not need it. Amounts
+ * in U.S. dollars, cents kept.
+ */
+export interface K1ForeignIncomeStatement {
+  /* Gross income from foreign sources, its qualified dividends included. */
+  grossIncome: number;
+  /* The part of grossIncome that is qualified dividends. Absent: none. */
+  qualifiedDividends?: number;
+  /*
+   * Form 1116 line i: the country the statement names, or "RIC" when the income
+   * passed through from a mutual fund (irs-1116-inst-2025::sec::specific-instructions::b02).
+   * Absent: no column has a country, and line i is a gap.
+   */
+  country?: string;
+  /* The Part II column the tax goes in: (q) dividends or (s) interest. */
+  incomeKind: "dividends" | "interest";
+}
+
 /* Schedule K-1 (Form 1041): a beneficiary's share. */
 export interface TrustK1FactValue extends K1Entity {
   form: "1041";
@@ -147,6 +169,8 @@ export interface TrustK1FactValue extends K1Entity {
   finalYearOfEntity?: boolean;
   /* An estate (true) or a trust (false). */
   isEstate?: boolean;
+  /* The statement behind the foreign taxes (box 14 code B), when the trustee gives one. */
+  foreignIncome?: K1ForeignIncomeStatement;
 }
 
 export type K1FactValue = SCorporationK1FactValue | PartnershipK1FactValue | TrustK1FactValue;
@@ -233,7 +257,16 @@ const isStatement = (value: unknown): boolean =>
     isOptionalSigned(value.section199ADividends) &&
     isOptionalSigned(value.qualifiedPtpIncome));
 
-/* The fields every K-1 has; the header answers each form adds are optional and not checked. */
+const isForeignIncome = (value: unknown): boolean =>
+  value === undefined ||
+  (isRecord(value) &&
+    isOptionalAmount(value.grossIncome) &&
+    value.grossIncome !== undefined &&
+    isOptionalAmount(value.qualifiedDividends) &&
+    isOptionalText(value.country) &&
+    (value.incomeKind === "dividends" || value.incomeKind === "interest"));
+
+/* The fields every K-1 has, and its statements; the header answers each form adds are optional and not checked. */
 function isK1(value: unknown, form: K1Form): value is K1FactValue {
   return (
     isRecord(value) &&
@@ -243,7 +276,8 @@ function isK1(value: unknown, form: K1Form): value is K1FactValue {
     Array.isArray(value.boxes) &&
     value.boxes.every(isBox) &&
     isOptionalBoolean(value.finalK1) &&
-    isStatement(value.section199A)
+    isStatement(value.section199A) &&
+    isForeignIncome(value.foreignIncome)
   );
 }
 

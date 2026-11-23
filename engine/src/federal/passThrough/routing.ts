@@ -34,7 +34,8 @@ import { applyLossLimits, type LimitContext } from "./limits.js";
  *   cash gifts (another kind of contribution is unsupported there);
  * - form_1040_line_2a: tax-exempt interest;
  * - form_7203: an item that only moves the shareholder's basis (Form 7203);
- * - schedule_3_line_1: the foreign tax credit (Form 1116 not modeled: unsupported there);
+ * - schedule_3_line_1: the foreign tax credit: a trust K-1 is one more Form 1116
+ *   source (1116/sources.ts); an S corporation's needs Schedule K-3 (unsupported there);
  * - form_8960_line_7: the beneficiary's net investment income adjustment
  *   (not modeled when not 0: unsupported there);
  * - no_line: an item the instructions say needs no entry on the return.
@@ -80,6 +81,8 @@ export const ROUTES: Readonly<Record<K1Form, Partial<Record<ItemType, Route>>>> 
     other_tax_exempt_income: "form_7203",
     nondeductible_expenses: "form_7203",
     distribution: "form_7203",
+    // irs-1120sk1-inst-2025::sec::box-16-items-affecting-shareholder-basis::b02: code F; Form 1116 reads Schedule K-3 instead
+    foreign_tax_paid: "schedule_3_line_1",
     // irs-1120sk1-inst-2025::sec::box-17-other-information::b11
     section_199a_information: "qbi",
     // irs-1120sk1-inst-2025::sec::box-17-other-information::b16: used to figure Form 8990, no line of its own.

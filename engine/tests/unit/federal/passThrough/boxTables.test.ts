@@ -137,6 +137,7 @@ describe("the box tables", () => {
       "1120-S box 16 code B (other_tax_exempt_income)",
       "1120-S box 16 code C (nondeductible_expenses)",
       "1120-S box 16 code D (distribution)",
+      "1120-S box 16 code F (foreign_tax_paid)",
       "1120-S box 17 code V (section_199a_information)",
       "1120-S box 17 code AC (gross_receipts_448c)",
       "1065 box 20 code AG (gross_receipts_448c)",

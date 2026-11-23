@@ -7,9 +7,10 @@ import {
   resolveMustFile,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { receivedOnReturn } from "../passThrough/receipts.js";
 import type { ForeignTaxInfo, Form1116CategoryInfo, Form1116FilingInfo } from "./filingInfo.js";
 import { electionLimit } from "./lines.js";
-import { foreignTaxSources, type ForeignTaxSource } from "./sources.js";
+import { foreignTaxSources, k1ForeignTax, type ForeignTaxSource } from "./sources.js";
 
 const MUST_FILE_KEY = "decisions.scope.must_file_1116";
 
@@ -21,7 +22,7 @@ const CARRYOVER_KEY = {
 const OTHER_CATEGORY_GAP =
   "A foreign tax source is in a category other than passive or general (irs-1116-inst-2025::sec::categories-of-income::b01); the engine figures only those two Forms 1116.";
 const NO_SOURCE_GAP =
-  "Form 1116 files by decision, but no fact holds a foreign tax or foreign-source income (1099-DIV box 7, 1099-INT box 6, or a stated foreign tax).";
+  "Form 1116 files by decision, but no fact holds a foreign tax or foreign-source income (1099-DIV box 7, 1099-INT box 6, a trust K-1's foreign taxes, or a stated foreign tax).";
 const EXCLUDED_INCOME_GAP =
   "Form 2555 or Form 4563 files: line 12 takes off the taxes on the excluded income (irs-1116-inst-2025::sec::line-12-2::b01, b02), and neither form has rules in the engine.";
 const LOSS_ACCOUNT_GAP =
@@ -115,7 +116,9 @@ function formGaps(inputs: ResolverInputs, sources: ForeignTaxSource[], filesForm
  * way (true files the form instead of the election).
  */
 export function resolve1116Info(inputs: ResolverInputs): Form1116FilingInfo {
-  const sources = foreignTaxSources(inputs.facts);
+  // A K-1's foreign taxes (irs-1116-inst-2025::sec::publications-see-pub-514-foreign-tax-credit-for::b02).
+  const k1 = k1ForeignTax(receivedOnReturn(inputs, "schedule_3_line_1"));
+  const sources = foreignTaxSources(inputs.facts, k1);
   const taxed = sources.filter((source) => source.foreignTaxPaid > 0);
   const election = electionApplies(sources, inputs);
   const mustFile = resolveMustFile(inputs.decisionByKey, {
@@ -136,6 +139,8 @@ export function resolve1116Info(inputs: ResolverInputs): Form1116FilingInfo {
     categories,
     claimAccrued: inputs.factByKey.get(FOREIGN_TAX_CREDIT_KEYS.claimAccrued) === true,
     residentOf: residentOf(inputs),
+    k1Gap: k1.gap,
+    k1Waiting: k1.waiting,
     ...formGaps(inputs, sources, filesForm),
   };
   return {
