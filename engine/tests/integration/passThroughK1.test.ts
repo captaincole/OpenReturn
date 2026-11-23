@@ -296,6 +296,28 @@ describe("a trust K-1's items join the beneficiary's own lines (mat)", () => {
     expect(loss.value("form-1040.line.11a")).toBeUndefined();
   });
 
+  it("never adds a box 5 loss to a Part III income column: every amount there is the gap", () => {
+    const loss = run(matScenario, withBoxes({ box: "5", amount: -700 }, { box: "6", amount: 900 }));
+    const fields = [
+      "schedule-e.1.line.33_row_a_col_d_passive_income",
+      "schedule-e.1.line.33_row_a_col_e_nonpassive_deduction_loss",
+      "schedule-e.1.line.33_row_a_col_f_other_income",
+      "schedule-e.1.line.34a_totals_col_d",
+      "schedule-e.1.line.34a_totals_col_f",
+      "schedule-e.1.line.35_add_income_columns",
+      "schedule-e.1.line.37_total_estate_trust_income",
+    ];
+    for (const fieldId of fields) {
+      const field = loss.field(fieldId);
+      expect(field?.ok === false && field.unsupported, fieldId).toBe(true);
+      expect(field?.ok === false && field.reason, fieldId).toContain(
+        "other portfolio income (loss) (box 5): a loss on Schedule E Part III is not modeled",
+      );
+    }
+    expect(loss.value("schedule-e.1.line.33_row_a_col_a_name")).toBe("Shandalle Family Trust");
+    expect(loss.value("schedule-1.0.line.5")).toBeUndefined();
+  });
+
   it("puts a net short-term gain on Schedule D line 5", () => {
     const shortTerm = run(matScenario, withBoxes({ box: "3", amount: 1100 }));
     expect(shortTerm.value("schedule-d.0.line.5_net_short_term_passthrough")).toBe(1100);
