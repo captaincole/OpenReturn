@@ -72,7 +72,9 @@ const itemAmount = (received: ReceivedItem) => received.item.amount ?? 0;
 
 /*
  * The return's own amount plus what the route receives, cents kept: undefined
- * with neither, and while a K-1 waits; the gap when a K-1 is unsupported.
+ * with neither, and while a K-1 waits; the gap when a K-1 is unsupported. With
+ * no amount of its own and every K-1 amount 0 or absent, the line is blank,
+ * not 0 (a statement-only item, or an item a limit allowed at 0).
  */
 export function withReceived(
   own: number | undefined,
@@ -82,8 +84,9 @@ export function withReceived(
   if (receipt === undefined) return own;
   if (receipt.kind === "unsupported") return unsupported(receipt.reason);
   if (receipt.kind === "waiting") return undefined;
-  if (receipt.items.length === 0) return own;
-  return sum(own, ...receipt.items.map(amountOf));
+  const amounts = receipt.items.map(amountOf);
+  if (own === undefined && amounts.every((amount) => (amount ?? 0) === 0)) return undefined;
+  return sum(own, ...amounts);
 }
 
 /* withReceived rounded to whole dollars, for a line that adds document amounts. */
