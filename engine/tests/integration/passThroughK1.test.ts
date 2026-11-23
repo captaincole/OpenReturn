@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { evaluateScenario, pendingInputs } from "../../src";
 import {
   PRIOR_YEAR_KEYS,
+  isInterestFactKey,
   isK1FactKey,
   isK1HoldingFactKey,
   isW2FactKey,
@@ -335,6 +336,27 @@ describe("a trust K-1's items join the beneficiary's own lines (mat)", () => {
     // Line 16 is the smaller of the net investment income and MAGI over $250,000.
     expect(high.value("form-8960.0.line.12")).toBe(11270);
     expect(high.value("form-8960.0.line.17")).toBe(428);
+  });
+
+  it("files Form 8960 for a trust's rental income alone, and puts it on line 4a", () => {
+    // No 1099-INT and only box 7: the trust's rental income is the only investment income.
+    const facts = raiseWages(
+      editTrust(
+        matScenario.facts.filter((fact) => !isInterestFactKey(fact.key)),
+        (k1) => ({ ...k1, boxes: [{ box: "7", amount: 6000 }], section199A: undefined }),
+      ),
+      40000,
+    );
+    const rental = run(matScenario, facts);
+    expect(rental.value("schedule-e.1.line.33_row_a_col_d_passive_income")).toBe(6000);
+    expect(rental.value("form-1040.line.11a")).toBe(296000);
+    expect(rental.files("form-8960")).toBe(true);
+    expect(rental.value("form-8960.0.line.4a")).toBe(6000);
+    expect(rental.value("form-8960.0.line.4c")).toBe(6000);
+    expect(rental.value("form-8960.0.line.12")).toBe(6000);
+    expect(rental.value("form-8960.0.line.16")).toBe(6000);
+    expect(rental.value("form-8960.0.line.17")).toBe(228);
+    expect(rental.value("schedule-2.0.line.12_net_investment_income_tax")).toBe(228);
   });
 
   it("makes Form 8960 lines 7 and 13 unsupported for a box 14 code H adjustment", () => {

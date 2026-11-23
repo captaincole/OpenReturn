@@ -109,8 +109,9 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
  * Who Must File asks for investment income: an interest, dividend or sale fact
  * (category investment_income), a capital loss carried over from last year
  * (it reaches line 5a through 1040 line 7a), a child's income on Form 8814, a
- * section 1256 contract (Form 6781, the same way), a K-1's portfolio income or
- * net investment income adjustment, or a business without line G "Yes" (passive).
+ * section 1256 contract (Form 6781, the same way), a K-1's portfolio income,
+ * passive activity income (a trust's boxes 6 to 8, any rental) or net
+ * investment income adjustment, or a business without line G "Yes" (passive).
  * This gate is stricter than who-must-file::b01, which states the MAGI test
  * alone: without investment income the tax is $0, and the gate keeps a $0
  * Form 8960 off high-wage returns. A person decides whether to drop it.

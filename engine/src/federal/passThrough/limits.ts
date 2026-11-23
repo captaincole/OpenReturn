@@ -33,7 +33,7 @@ import {
   type PassThroughEntity,
   type PassThroughItem,
 } from "./items.js";
-import { isLossOrDeduction, isPortfolio, type ItemType } from "./itemTypes.js";
+import { isLossOrDeduction, isPortfolio, RENTAL_TYPES, type ItemType } from "./itemTypes.js";
 
 /*
  * What a stage may read besides the items. The passive stage will need Form
@@ -195,12 +195,6 @@ export const atRiskLimit: LimitStage = perEntity(({ entity, items }) => {
     "a loss or deduction from the activity with amounts not at risk, or a carried at-risk loss, needs the at-risk limit (Form 6198), which is not modeled for a K-1.",
   );
 });
-
-/* Rental activities are passive for every owner but a real estate professional (::passive-activity-limitations::b01, ::b02). */
-const RENTAL_TYPES: ReadonlyArray<ItemType> = [
-  "net_rental_real_estate_income",
-  "other_net_rental_income",
-];
 
 /* Guaranteed payments are generally not passive (irs-1065k1-inst-2025::sec::box-4a-guaranteed-payments-for-services::b01). */
 const NONPASSIVE_TYPES: ReadonlyArray<ItemType> = [

@@ -125,7 +125,10 @@ Each question has its source and the default the code uses now.
     irs-8582cr-inst-2025::sec::material-participation::b06). Default: column
     (d), passive income, which keeps it in net investment income (Form 8960
     line 4a, no line 4b adjustment). While Form 8582 files, Part III is
-    unsupported: Form 8582 does not take a K-1's passive income yet.
+    unsupported: Form 8582 does not take a K-1's passive income yet. Form
+    8960's filing test counts the same income: every rental item, a trust's
+    business income, and the business income of a K-1 whose owner did not
+    materially participate (irs-8960-inst-2025::sec::passive-activity::b01).
 17. **Boxes 4b and 4c and the tax.** A 28% rate gain or an unrecaptured
     section 1250 gain goes on its worksheet
     (irs-1041k1-inst-2025::sec::boxes-4b-and-4c-28-rate-gain-and::b01), and

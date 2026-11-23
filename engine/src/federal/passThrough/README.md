@@ -138,6 +138,8 @@ routed nor reported (`tests/unit/federal/passThrough/boxTables.test.ts`).
   the statement Form 1116 waits on the K-1 fact.
 - An S corporation's box 16 code F has a route: Schedule 3 line 1 is the gap
   (the credit needs Schedule K-3), and the rest of the K-1 computes.
+- Form 8960 files for a K-1's passive activity income too: a trust's boxes 6
+  to 8 reach line 4a through Schedule E line 41 and Schedule 1 line 5.
 
 ## What the next steps add
 
