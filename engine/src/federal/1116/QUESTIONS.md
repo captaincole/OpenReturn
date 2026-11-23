@@ -49,8 +49,8 @@ Each place where the form and its instructions do not settle a rule. The engine 
 ## 8. Line 19 and line 3f rounding
 
 - Text: line 3f is rounded "to at least four decimal places" (`line-3f::b01`); line 19 has no rounding rule (`line-19::b01`).
-- Default: both keep four places, and line 21 multiplies by the rounded line 19.
-- Dollars: yes, a dollar or so.
+- Default: both keep four places, and line 21 multiplies by the rounded line 19. The Worksheet for Lump-Sum Distributions rounds the ratio it enters on line 19 "to at least four places" (`explanation-of-certain-line-items-on-schedule-k-3::b03`).
+- Dollars: yes, a dollar or so. Blind case 4: line 19 at four places (0.0619) gives line 21 $2,043; at six places (0.061944), $2,044.
 
 ## 9. Line h
 
@@ -80,6 +80,43 @@ Each place where the form and its instructions do not settle a rule. The engine 
 
 - Default: blank, unless Form 2555 or 4563 files (line 12, and Part I, a gap) or Form 5471 files (line 22 a gap). The boycott, oil and gas, mineral and splitting-event reductions have no facts.
 - Dollars: yes when one applies.
+
+## 14. Line 16 on the loss category's form
+
+- Text: the example puts each reduction "(in parentheses) on line 16 of the passive category income Form 1116" and on the treaty category's form (`irs-1116-inst-2025::sec::line-16::b04`). It says nothing about line 16 of the form with the loss.
+- Default: the loss form's line 16 stays 0, so its line 17 is the loss. The blind fill entered the used loss as a positive amount, so its line 17 is 0.
+- Dollars: no credit change. Line 17 is zero or less either way, so line 19 is 0 and line 24 is 0. Only the printed lines 16 and 17 of the loss form differ.
+
+## 15. The election's regular tax: Schedule 2 line 1a or line 1z
+
+- Text: the Form 1040 instructions say "Form 1040 or 1040-SR, line 16, and Schedule 2, line 1a" (`irs-1040-inst-2025::sec::specific-instructions-2::b02`); the Form 1116 instructions say "your regular tax" (`publications-see-pub-514-foreign-tax-credit-for::b03`), which line 20 defines as line 16 plus Schedule 2 line 1z (`line-20::b01`).
+- Default: line 16 plus Schedule 2 line 1z, less Form 4972 tax (`returnAmounts.ts regularTaxForCredit`).
+- Dollars: yes, when Schedule 2 has lines 1b–1y and the regular tax is below the foreign tax.
+
+## 16. The election's conditions
+
+- Text: the Form 1040 instructions list five conditions (interest and dividends only, the 16-day holding period, no Form 4563, a legal tax liability, recognized countries) (`irs-1040-inst-2025::sec::specific-instructions-2::b01`). The Form 1116 instructions list three (passive income, a qualified payee statement, the $300/$600 limit) (`publications-see-pub-514-foreign-tax-credit-for::b01`, `b02`).
+- Default: the Form 1116 list. The holding period and creditability are taken as given by the payee statement. The limit test compares the unrounded total of the taxes.
+- Dollars: yes (the election, or Form 1116).
+
+## 17. The election's total: rounded before the comparison
+
+- Text: none on the cents.
+- Default: the taxes keep their cents while adding, and the total is rounded to the nearest dollar before the comparison with the regular tax (the 1040 rounding rule). The blind fill made the same choice.
+- Dollars: yes, $1.
+
+## 18. Line 1a with the qualified dividend adjustment
+
+- Text: "multiply your foreign source qualified dividends ... by 0.4054" (`qualified-dividends-and-capital-gain-tax::b02`); no rule on the product's cents.
+- Default: the cents stay inside line 1a, and line 1a is rounded once (`partI.ts`). The blind fill made the same choice.
+- Dollars: yes, $1 on line 1a; line 7 can move by $1.
+
+## Second opinions
+
+- Blind fill (13 cases, `.scratch/blind`): two dollar differences. Case 4 line 19 is 0.0619 (engine) against 0.061944 (blind), so lines 21 and 24 are $2,043 against $2,044; question 8. Case 6 general line 16 is 0 against +$3,000; question 14. Every other line agreed.
+- Line 19 places: the Worksheet for Lump-Sum Distributions enters its ratio "as a decimal (rounded to at least four places) here and on Form 1116, line 19" (`irs-1116-inst-2025::sec::explanation-of-certain-line-items-on-schedule-k-3::b03`). That supports four places on line 19 as one allowed choice; "at least" also allows more, so question 8 stays open.
+- PolicyEngine-US 2.152.17 (commit 94f818ade5): it does not model Form 1116. `foreign_tax_credit_potential` is a bare input with no formula, and `foreign_tax_credit` is its smaller with `income_tax_before_credits` (regular tax plus capital gains tax plus AMT). No constant ($300/$600, 0.4054, 0.5946, the exception limits) and no line logic to compare. Its cap includes AMT; line 20 is the section 26(b)(1) regular tax, Form 1040 line 16 plus Schedule 2 line 1z (`line-20::b01`). That is a scope difference, and the engine follows the form.
+- IRS Direct File (issue #140): no checkout in this worktree. Not compared.
 
 ## Confidence by field group
 
