@@ -229,6 +229,8 @@ describe("renderFormListPage", () => {
 
 describe("updateReadme", () => {
   const README = [
+    "<!-- solved-table:start -->",
+    "<!-- solved-table:end -->",
     "before",
     "## Form support",
     "<!-- coverage-table:start -->",
@@ -280,6 +282,12 @@ describe("updateReadme", () => {
         "after",
       ].join("\n"),
     );
+  });
+
+  it("writes the top table: forms with rules and fields computed, by jurisdiction", () => {
+    const top = text.slice(text.indexOf("<!-- solved-table:start -->"), text.indexOf("## Form"));
+    expect(top).toContain("| Forms with rules | **67%** (2 of 3) |");
+    expect(top).toContain("| Fields computed | **");
   });
 
   it("writes the same text on a second run", () => {

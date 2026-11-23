@@ -15,7 +15,7 @@ This page lists each form that an individual income tax return can hold, and wha
 
 Source: [Tax year 2025 accepted forms and schedules for individual tax returns and extensions](https://www.irs.gov/pub/irs-efile/tax-year-2025-accepted-forms-schedules-individual-tax-returns-extensions.xlsx), IRS, dated 2025-11-18.
 
-The list has 225 rows, and 197 are forms and schedules to compute. The engine has 83 of them, and 43 have rules. Of the 43 tier 1 forms, the engine has 43, and 30 have rules.
+The list has 225 rows, and 197 are forms and schedules to compute. The engine has 83 of them, and 50 have rules. Of the 43 tier 1 forms, the engine has 43, and 30 have rules.
 
 | Form | Title | Tier 1 | Engine | Copies |
 | --- | --- | --- | --- | --- |
@@ -58,7 +58,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 1118 Schedule L | Foreign Tax Redeterminations |  | Not in the engine | 1 |
 | Form 1310 | Statement of Person Claiming Refund Due a Deceased Taxpayer |  | Not in the engine | 2 |
 | Form 172 | Net Operating Losses (NOLs) |  | Not in the engine | unbounded |
-| Form 2106 | Employee Business Expenses |  | No rules yet | 4 |
+| Form 2106 | Employee Business Expenses |  | Rules | 4 |
 | Form 2120 | Multiple Support Declaration |  | Not in the engine | 4 |
 | Form 2210 | Underpayment of Estimated Tax by Individuals, Estates, and Trusts | Yes | No rules yet | 1 |
 | Form 2210F | Underpayment of Estimated Tax By Farmers and Fishermen |  | Not in the engine | 1 |
@@ -83,7 +83,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 4868 | (no title in IRS listing) |  | Not a form: another return or a request |  |
 | Form 4952 | Investment Interest Expense Deduction | Yes | Rules | 1 |
 | Form 4970 | Tax on Accumulation Distribution of Trusts |  | No rules yet | 1 |
-| Form 4972 | Tax on Lump-Sum Distributions |  | No rules yet | 2 |
+| Form 4972 | Tax on Lump-Sum Distributions |  | Rules | 2 |
 | Form 499W2PR | Form 499 W2PR |  | Not a form: a document |  |
 | Form 5074 | Allocation of Individual Income Tax to Guam or the Commonwealth of the Northern Mariana Islands (CNMI) |  | Not in the engine | 1 |
 | Form 5329 | Additional Taxes on Qualified Plans (Including IRAs) and Other Tax-Favored Accounts | Yes | Rules | 2 |
@@ -136,7 +136,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8606 | Nondeductible IRAs | Yes | Rules | 25 |
 | Form 8609A | Annual Statement for Low-Income Housing Credit |  | Not in the engine | unbounded |
 | Form 8611 | Recapture of Low-Income Housing Credit |  | No rules yet | unbounded |
-| Form 8615 | Tax for Certain Children Who Have Unearned Income |  | No rules yet | 1 |
+| Form 8615 | Tax for Certain Children Who Have Unearned Income |  | Rules | 1 |
 | Form 8621 | Return By Shareholder of a Passive Foreign Investment Company or Qualified Electing Fund | Yes | No rules yet | unbounded |
 | Form 8689 | Allocation of Individual Income Tax to the U.S. Virgin Islands |  | Not in the engine | 1 |
 | Form 8697 | Interest Computation Under the Look-Back Method for Completed Long-Term Contracts |  | No rules yet | unbounded |
@@ -167,7 +167,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8858 Schedule M | Transactions Between Foreign Disregarded Entity of a Foreign Tax Owner and the Filer or Other Related Entities |  | Not in the engine | unbounded |
 | Form 8859 | District of Columbia First-Time Homebuyer Credit |  | No rules yet | 1 |
 | Form 8862 | Information To Claim Earned Income Credit After Disallowance |  | Not in the engine | 1 |
-| Form 8863 | Education Credits (American Opportunity and Lifetime Learning Credits) |  | No rules yet | 1 |
+| Form 8863 | Education Credits (American Opportunity and Lifetime Learning Credits) |  | Rules | 1 |
 | Form 8864 | Biodiesel and Renewable Diesel Fuels Credit |  | Not in the engine | unbounded |
 | Form 8865 | Return of U.S. Persons With Respect to Certain Foreign Partnerships |  | Not in the engine | unbounded |
 | Form 8865 Schedule G | Statement of Application of the Gain Deferral Method Under Section 721(c) |  | Not in the engine | unbounded |
@@ -186,7 +186,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8882 | Credit for Employer-Provided Childcare Facilities and Services |  | Not in the engine | unbounded |
 | Form 8883 | Asset Allocation Statement Under Section 338 |  | Not in the engine | unbounded |
 | Form 8886 | Reportable Transaction Disclosure Statement |  | Not in the engine | unbounded |
-| Form 8888 | Allocation of Refund (Including Savings Bond Purchases) |  | No rules yet | 1 |
+| Form 8888 | Allocation of Refund (Including Savings Bond Purchases) |  | Rules | 1 |
 | Form 8889 | Health Savings Accounts (HSAs) | Yes | Rules | 2 |
 | Form 8896 | Low Sulfur Diesel Fuel Production Credit |  | Not in the engine | unbounded |
 | Form 8900 | Qualified Railroad Track Maintenance Credit |  | Not in the engine | unbounded |
@@ -197,7 +197,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8912 | Credit to Holders of Tax Credit Bonds |  | No rules yet | unbounded |
 | Form 8915F | Qualified Disaster Retirement Plan Distributions and Repayments |  | No rules yet | 6 |
 | Form 8917 | Tuition and Fees Deduction |  | Not in the engine | 1 |
-| Form 8919 | Uncollected Social Security and Medicare Tax on Wages |  | No rules yet | 2 |
+| Form 8919 | Uncollected Social Security and Medicare Tax on Wages |  | Rules | 2 |
 | Form 8925 | Report of Employer-Owned Life Insurance Contracts |  | Not in the engine | 8 |
 | Form 8932 | Credit for Employer Differential Wage Payments |  | Not in the engine | 1 |
 | Form 8933 | Carbon Dioxide Sequestration Credit |  | No rules yet | unbounded |
@@ -207,7 +207,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8933 Schedule D | Recapture Certification |  | Not in the engine | unbounded |
 | Form 8933 Schedule E | Election Certification |  | Not in the engine | unbounded |
 | Form 8933 Schedule F | Utilization Certification |  | Not in the engine | unbounded |
-| Form 8936 | Qualified Plug-In Electric Drive Motor Vehicle Credit |  | No rules yet | 1 |
+| Form 8936 | Qualified Plug-In Electric Drive Motor Vehicle Credit |  | Rules | 1 |
 | Form 8936 Schedule A | Clean Vehicle Credit Amount |  | Not in the engine | unbounded |
 | Form 8938 | Statement of Foreign Financial Assets | Yes | No rules yet | 1 |
 | Form 8941 | Credit for Small Employer Health Insurance Premiums |  | Not in the engine | 2 |
@@ -249,7 +249,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 
 Source: [Forms you can e-file for individuals (tax year 2025)](https://www.ftb.ca.gov/tax-pros/efile/individual-efile-forms.html), FTB, dated 2026-01-02.
 
-The list has 65 rows, and 62 are forms and schedules to compute. The engine has 38 of them, and 11 have rules. Of the 22 tier 1 forms, the engine has 22, and 8 have rules.
+The list has 65 rows, and 62 are forms and schedules to compute. The engine has 38 of them, and 14 have rules. Of the 22 tier 1 forms, the engine has 22, and 9 have rules.
 
 | Form | Title | Tier 1 | Engine | Copies |
 | --- | --- | --- | --- | --- |
@@ -281,7 +281,7 @@ The list has 65 rows, and 62 are forms and schedules to compute. The engine has 
 | Form 3800 | Tax Computation for Certain Children with Unearned Income |  | No rules yet | 1 |
 | Form 3801 | Passive Activity Loss Limitations | Yes | No rules yet | 1 |
 | Form 3801-CR | Passive Activity Credit Limitations | Yes | No rules yet | 1 |
-| Form 3803 | Parents’ Election to Report Child’s Interest and Dividends | Yes | No rules yet | 10 |
+| Form 3803 | Parents’ Election to Report Child’s Interest and Dividends | Yes | Rules | 10 |
 | Form 3804-CR | Pass-Through Entity Elective Tax Credit | Yes | No rules yet | 2 |
 | Form 3805E | Installment Sale Income | Yes | No rules yet | 25 |
 | Form 3805P | Additional Taxes on Qualified Plans (Including IRAs) and Other Tax-Favored Accounts | Yes | Rules | 1 per t/p |
@@ -300,7 +300,7 @@ The list has 65 rows, and 62 are forms and schedules to compute. The engine has 
 | Form 3870 | Election for Refundable Credit |  | Not in the engine | 1 |
 | Form 3872 | California Disaster Relief Request for Postponement of Tax Deadlines |  | Not in the engine | unbounded |
 | Form 3885A | Depreciation and Amortization Adjustments | Yes | Rules | unbounded |
-| Form 3913 | Moving Expense Deduction |  | No rules yet | unbounded |
+| Form 3913 | Moving Expense Deduction |  | Rules | unbounded |
 | Form 4197 | Information on Tax Expenditure Items |  | Not in the engine | unbounded |
 | Form 5805 | Underpayment of Estimated Tax by Individuals and Fiduciaries | Yes | Rules | 1 |
 | Form 5805F | Underpayment of Estimated Tax by Farmers and Fishermen |  | No rules yet | 1 |
@@ -311,7 +311,7 @@ The list has 65 rows, and 62 are forms and schedules to compute. The engine has 
 | Schedule D (540) | California Capital Gain or Loss Adjustment | Yes | Rules | 1 |
 | Schedule D (540NR) | California Capital Gain or Loss Adjustment for Nonresidents or Part-Year Residents | Yes | No rules yet | 1 |
 | Schedule D-1 | Sales of Business Property | Yes | No rules yet | 1 |
-| Schedule G-1 | Tax on Lump Sum Distributions |  | No rules yet | 1 per t/p |
+| Schedule G-1 | Tax on Lump Sum Distributions |  | Rules | 1 per t/p |
 | Schedule P (540) | Alternative Minimum Tax and Credit Limitations – Residents | Yes | Rules | 1 |
 | Schedule P (540NR) | Alternative Minimum Tax and Credit Limitations – Nonresidents or Part-Year Residents | Yes | No rules yet | 1 |
 | Schedule R | Apportionment and Allocation of Income |  | Not in the engine | 1 per t/p |
