@@ -5,6 +5,8 @@ import type { Form8949Box } from "../../facts/index.js";
 import { numberOrBlank, roundDollars, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { withForm8814 } from "../8814/totals.js";
+import { describeItem, entityTitle } from "../passThrough/items.js";
+import { receivedAmounts, roundedWithReceived, type Receipt } from "../passThrough/receipts.js";
 import type { ScheduleDFilingInfo } from "./filingInfo.js";
 import { allowableLoss } from "./lines.js";
 import type { ScheduleD } from "./types.js";
@@ -54,6 +56,53 @@ function boxLineBindings(): Partial<{
     };
   }
   return out as Partial<{ [K in keyof ScheduleD]: BindingFn<ScheduleD, ScheduleDFilingInfo, K> }>;
+}
+
+/*
+ * MANUAL EDIT: lines 18 and 19 take a K-1's 28% rate gain (box 4b) on line 4
+ * of the 28% Rate Gain Worksheet and its unrecaptured section 1250 gain (box
+ * 4c) on line 11 of the Unrecaptured Section 1250 Gain Worksheet
+ * (irs-1041k1-inst-2025::sec::boxes-4b-and-4c-28-rate-gain-and::b01). Neither
+ * worksheet is modeled: with a K-1 amount the line names it; otherwise it
+ * keeps the reason it had.
+ */
+const WORKSHEETS = {
+  line18: {
+    worksheet: "line 4 of the 28% Rate Gain Worksheet",
+    without:
+      "Amount from line 7 of the 28% Rate Gain Worksheet requires ingestion of collectibles gains and section 1202 QSB stock exclusion data — no such fact ingestion path exists yet.",
+  },
+  line19: {
+    worksheet: "line 11 of the Unrecaptured Section 1250 Gain Worksheet",
+    without:
+      "Amount from line 18 of the Unrecaptured Section 1250 Gain Worksheet requires Form 4797 depreciation recapture and real-property sale data — no such fact ingestion path exists yet.",
+  },
+} as const;
+
+/* A K-1's gain for a worksheet line, as the reason that names it; undefined with none. */
+function k1WorksheetGain(receipt: Receipt | undefined, worksheet: string): Unsupported | undefined {
+  if (receipt?.kind === "unsupported") return unsupported(receipt.reason);
+  const named = receivedAmounts(receipt).map(
+    ({ entity, item }) => `${entityTitle(entity)}: ${describeItem(item)}`,
+  );
+  return named.length > 0
+    ? unsupported(`${named.join("; ")} goes on ${worksheet}, which is not modeled.`)
+    : undefined;
+}
+
+function worksheetLine(
+  receipt: Receipt | undefined,
+  line: (typeof WORKSHEETS)[keyof typeof WORKSHEETS],
+): Unsupported {
+  return k1WorksheetGain(receipt, line.worksheet) ?? unsupported(line.without);
+}
+
+/* Line 20 asks whether lines 18 and 19 are zero; with a K-1 amount on either, the answer is not known. */
+function line20Gap(info: ScheduleDFilingInfo): Unsupported | undefined {
+  return (
+    k1WorksheetGain(info.passThrough28RateGain, WORKSHEETS.line18.worksheet) ??
+    k1WorksheetGain(info.passThroughUnrecaptured1250Gain, WORKSHEETS.line19.worksheet)
+  );
 }
 
 // MANUAL EDIT: line 20, undefined until line 17 answers Yes.
@@ -140,12 +189,21 @@ export function register(): void {
        */
       "1.line.20_use_qual_div_worksheet_yes": (form, info) => {
         const simple = qualifiedDividendsWorksheetApplies(form, info);
-        return simple === true ? true : undefined;
+        return line20Gap(info) ?? (simple === true ? true : undefined);
       },
       "1.line.20_use_qual_div_worksheet_no": (form, info) => {
         const simple = qualifiedDividendsWorksheetApplies(form, info);
-        return simple === false ? true : undefined;
+        return line20Gap(info) ?? (simple === false ? true : undefined);
       },
+      // MANUAL EDIT: a K-1's net short-term and long-term gain (irs-1041k1-inst-2025::sec::boxes-3-and-4a-net-short-term-and-net::b01).
+      "0.line.5_net_short_term_passthrough": (_, info) =>
+        roundedWithReceived(undefined, info.passThroughShortTermGain),
+      "0.line.12_net_long_term_passthrough": (_, info) =>
+        roundedWithReceived(undefined, info.passThroughLongTermGain),
+      "1.line.18_rate_gain_worksheet_amount": (_, info) =>
+        worksheetLine(info.passThrough28RateGain, WORKSHEETS.line18),
+      "1.line.19_unrecaptured_sec1250_gain": (_, info) =>
+        worksheetLine(info.passThroughUnrecaptured1250Gain, WORKSHEETS.line19),
       "0.header.ssn": (_, info) => info.taxpayerSSN,
       // MANUAL EDIT: line 6 is entered in parentheses: it reduces line 7.
       "0.line.7_net_short_term_gain_loss": (form) =>
@@ -213,8 +271,6 @@ export function register(): void {
         "Requires summing column (g) adjustments only for Form 8949 Part I transactions with Box B or H checked; engine lacks per-box-type filtered aggregation.",
       "0.line.3_adjustments":
         "Requires summing column (g) adjustments only for Form 8949 Part I transactions with Box C or I checked; engine lacks per-box-type filtered aggregation.",
-      "0.line.5_net_short_term_passthrough":
-        "K-1 passthrough income/loss from partnerships, S-corps, estates, and trusts — no K-1 fact ingestion path built yet. Bind when K-1 scenario is modeled.",
       "0.line.8a_proceeds":
         "Line 8a covers long-term trades that bypass Form 8949 (basis IRS-reported, no adjustments). No fact-level flag distinguishes long-term bypass trades from short-term bypass trades — sumFacts cannot filter by the form_8949_box decision. Bind when a decision-filtered sum rule is available.",
       "0.line.8a_cost":
@@ -223,14 +279,8 @@ export function register(): void {
         "Form 8949 Part II has only one aggregate totals row with no per-box (E/K) breakdown. The engine cannot isolate adjustments for box E or box K transactions until 8949 ingests per-box totals.",
       "0.line.10_adjustments":
         "Form 8949 Part II has only one aggregate totals row with no per-box (F/L) breakdown. The engine cannot isolate adjustments for box F or box L transactions until 8949 ingests per-box totals.",
-      "0.line.12_net_long_term_passthrough":
-        "Requires Schedule K-1 data from partnerships, S corporations, estates, and trusts — no K-1 fact category or ingestion path exists in the current inventory.",
       "1.line.17_both_gains_no":
         "This boolean is true when line 15 or line 16 is NOT a gain (i.e., zero or negative). Requires a conditional-comparison rule not yet in the library.",
-      "1.line.18_rate_gain_worksheet_amount":
-        "Amount from line 7 of the 28% Rate Gain Worksheet requires ingestion of collectibles gains and section 1202 QSB stock exclusion data — no such fact ingestion path exists yet.",
-      "1.line.19_unrecaptured_sec1250_gain":
-        "Amount from line 18 of the Unrecaptured Section 1250 Gain Worksheet requires Form 4797 depreciation recapture and real-property sale data — no such fact ingestion path exists yet.",
       "0.line.1a_proceeds":
         "confidence=low: Line 1a aggregates short-term proceeds for 1099-B/DA transactions where basis was reported and no adjustments needed; however, no fact fieldPath exists for this sub-bucket — unsupported until fact schema is extended.",
       "0.line.1a_gain_loss":

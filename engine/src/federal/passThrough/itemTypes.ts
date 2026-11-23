@@ -95,6 +95,7 @@ export const ITEM_TYPES = {
   investment_expenses: kind("investment expenses", "information"),
   net_investment_income: kind("net investment income information", "information"),
   section_199a_information: kind("section 199A information", "information"),
+  gross_receipts_448c: kind("gross receipts for section 448(c)", "information"),
   other_information: kind("other information", "information"),
   not_modeled: kind("a box or code the engine does not know", "unknown"),
 } as const satisfies Record<string, TypeInfo>;

@@ -415,7 +415,7 @@ const BOX_17: BoxTable = [
   // box-17-other-information::b15
   info("AB", "Excess business interest income", "excess_business_interest_income"),
   // box-17-other-information::b15
-  info("AC", "Gross receipts for section 448(c)", "gross_receipts_448c"),
+  coded("17", "AC", "gross_receipts_448c", "Gross receipts for section 448(c)"),
   // box-17-other-information::b16
   info("AJ", "Excess business loss limitation", "excess_business_loss_statement"),
   // box-17-other-information::b16

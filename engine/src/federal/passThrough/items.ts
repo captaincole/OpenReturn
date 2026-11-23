@@ -15,7 +15,7 @@ import {
 } from "../../facts/index.js";
 import { sum } from "../../money.js";
 import { rowFor, type BoxTable, type StatementBox } from "./boxTable.js";
-import { labelOf, roleOf, type ItemType } from "./itemTypes.js";
+import { isPortfolio, labelOf, roleOf, type ItemType } from "./itemTypes.js";
 import { PARTNERSHIP_BOXES, PARTNERSHIP_STATEMENT_BOX } from "./partnershipBoxes.js";
 import { S_CORPORATION_BOXES, S_CORPORATION_STATEMENT_BOX } from "./sCorporationBoxes.js";
 import { TRUST_BOXES, TRUST_STATEMENT_BOX } from "./trustBoxes.js";
@@ -112,7 +112,9 @@ export function itemsOf(key: string, k1: K1FactValue): PassThroughItem[] {
  * other status, a K-1 the holding gives to the spouse belongs on the spouse's
  * return: its key is in spouseKeys so a form can wait on it, as a spouse's
  * Schedule C business does. A K-1 whose holding is not recorded yet stays on
- * the return; its holding key is in missingHoldingKeys.
+ * the return; its holding key is in missingHoldingKeys. A beneficiary's
+ * holding decides only whose K-1 it is (the passive stage asks a trust
+ * nothing), so on a joint return a trust K-1 does not ask for it.
  */
 export function passThroughEntitiesOnReturn(
   facts: ReadonlyArray<FactRow>,
@@ -144,7 +146,7 @@ export function passThroughEntitiesOnReturn(
     entities,
     spouseKeys: all.filter(offReturn).map((entity) => entity.key),
     missingHoldingKeys: entities
-      .filter((entity) => entity.holding === undefined)
+      .filter((entity) => entity.holding === undefined && (entity.form !== "1041" || !joint))
       .map((entity) => entity.holdingKey),
     malformedKeys: [...malformedKeys, ...malformedHoldings],
   };
@@ -156,16 +158,55 @@ const allItems = (facts: ReadonlyArray<FactRow>) =>
 const enteringIncome = (item: PassThroughItem) =>
   roleOf(item.type) === "income" || roleOf(item.type) === "unknown";
 
+const positiveAmount = (item: PassThroughItem) => Math.max(0, item.amount ?? 0);
+
+/*
+ * A partnership K-1 may print only the total of guaranteed payments (box 4c,
+ * irs-1065k1-inst-2025::sec::box-4c-total-guaranteed-payments::b01), not boxes
+ * 4a and 4b. The part of the total above boxes 4a and 4b is income too.
+ */
+function guaranteedPaymentsOnlyInTotal(items: PassThroughItem[]): number {
+  const total = sum(
+    ...items.filter((item) => item.type === "guaranteed_payments_total").map(positiveAmount),
+  );
+  const parts = sum(
+    ...items
+      .filter(
+        (item) =>
+          item.type === "guaranteed_payment_services" || item.type === "guaranteed_payment_capital",
+      )
+      .map(positiveAmount),
+  );
+  return Math.max(0, total - parts);
+}
+
 /*
  * An upper bound on what every K-1 adds to AGI, for the bounds the resolvers
  * use before evaluation (Form 8960's MAGI, the QBI form choice): each income
- * item's amount above 0, and an unknown item's. Every K-1 counts, whoever's.
+ * item's amount above 0, an unknown item's, and guaranteed payments printed
+ * only as a total. Every K-1 counts, whoever's.
  */
 export function passThroughIncomeUpperBound(facts: ReadonlyArray<FactRow>): number {
-  return sum(
-    ...allItems(facts)
-      .filter(enteringIncome)
-      .map((item) => Math.max(0, item.amount ?? 0)),
+  const perK1 = readK1Facts(facts).k1s.map(({ key, value }) => {
+    const items = itemsOf(key, value);
+    return sum(
+      ...items.filter(enteringIncome).map(positiveAmount),
+      guaranteedPaymentsOnlyInTotal(items),
+    );
+  });
+  return sum(...perK1);
+}
+
+/*
+ * A K-1 brings investment income for Form 8960's Who Must File: a portfolio
+ * item (interest, dividends, gains, other portfolio income) or a beneficiary's
+ * net investment income adjustment (irs-1041k1-inst-2025::sec::box-14-other-information::b03).
+ */
+export function passThroughHasInvestmentIncome(facts: ReadonlyArray<FactRow>): boolean {
+  return allItems(facts).some(
+    (item) =>
+      (isPortfolio(item.type) && (item.amount ?? 0) !== 0) ||
+      (item.type === "net_investment_income" && (item.amount ?? 0) !== 0),
   );
 }
 

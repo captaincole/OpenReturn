@@ -9,6 +9,7 @@ import type { Form8615FilingInfo } from "../8615/filingInfo.js";
 import type { Form8814FilingInfo } from "../8814/filingInfo.js";
 import type { Form8863FilingInfo } from "../8863/filingInfo.js";
 import type { Form8919FilingInfo } from "../8919/filingInfo.js";
+import type { Receipt } from "../passThrough/receipts.js";
 import type { Schedule8812FilingInfo } from "../schedule-8812/filingInfo.js";
 import type { ScheduleAFilingInfo } from "../schedule-a/filingInfo.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
@@ -62,6 +63,10 @@ export interface Form1040FilingInfo
   capitalGainDistributionsNoScheduleD?: Money;
   taxableInterestTotal?: Money;
   taxExemptInterestTotal?: Money;
+  /** Lines 2b, 3b and 3a: what the K-1s send there (passThrough/receipts.ts); undefined with no K-1. */
+  passThroughInterest?: Receipt;
+  passThroughOrdinaryDividends?: Receipt;
+  passThroughQualifiedDividends?: Receipt;
   /** Lines 4a–4c. */
   iraDistributions?: IraLine;
   /** Line 1h: disability pensions before the minimum retirement age; undefined while an answer is missing. */

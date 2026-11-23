@@ -6,6 +6,7 @@ import { unsupported } from "../../types.js";
 import { socialSecurityTaxable } from "../../worksheets/socialSecurityBenefits.js";
 import { line1fFrom8839, socialSecurityGapFrom8839 } from "../8839/receivers.js";
 import { withLaterForm8919Copies } from "../8919/laterCopies.js";
+import { roundedWithReceived } from "../passThrough/receipts.js";
 import { PUB_590A_GAP } from "../schedule-1/pub590a.js";
 import { form1040Line7a } from "../schedule-d/lines.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
@@ -101,11 +102,12 @@ export const line2a = (_: unknown, info: Form1040FilingInfo) =>
 
 /*
  * MANUAL EDIT: with Schedule B filed, lines 2b and 3b copy its lines 4
- * and 6, so its rounding choice carries through.
+ * and 6, so its rounding choice carries through. Without it, line 2b adds a
+ * K-1's interest (irs-1041k1-inst-2025::sec::box-1-interest-income::b01).
  */
 export const line2b = (form: Form, info: Form1040FilingInfo) =>
   numberOrBlank(form["schedule-b.0.line.4_taxable_interest"]) ??
-  roundDollars(info.taxableInterestTotal);
+  roundedWithReceived(info.taxableInterestTotal, info.passThroughInterest);
 
 // MANUAL EDIT: lines 3a–3c, 7a, 7b and 16 take Form 8814 amounts (form8814Lines.ts).
 export const line3aQualifiedDividends = (_: unknown, info: Form1040FilingInfo) => line3a(info);

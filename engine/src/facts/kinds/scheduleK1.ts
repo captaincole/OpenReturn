@@ -34,8 +34,13 @@ export interface K1Box {
 export interface Section199AStatement {
   /* The trade or business, as the statement names it. */
   businessName?: string;
-  /* QBI (qualified business income or loss) of the trade or business, signed. */
-  qualifiedBusinessIncome: number;
+  /*
+   * QBI (qualified business income or loss) of the trade or business, signed.
+   * Absent on a statement that names no trade or business: a trust's statement
+   * may hold only section 199A dividends
+   * (irs-1041k1-inst-2025::sec::box-14-other-information::b05).
+   */
+  qualifiedBusinessIncome?: number;
   /* W-2 wages allocable to the QBI (Form 8995-A line 4). */
   w2Wages?: number;
   /* UBIA of qualified property (Form 8995-A line 7). */
@@ -220,7 +225,7 @@ const isBox = (value: unknown): boolean =>
 const isStatement = (value: unknown): boolean =>
   value === undefined ||
   (isRecord(value) &&
-    isSignedAmount(value.qualifiedBusinessIncome) &&
+    isOptionalSigned(value.qualifiedBusinessIncome) &&
     isOptionalText(value.businessName) &&
     isOptionalAmount(value.w2Wages) &&
     isOptionalAmount(value.qualifiedPropertyUbia) &&

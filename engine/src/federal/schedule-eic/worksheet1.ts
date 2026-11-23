@@ -15,6 +15,7 @@ import type { Form8814Totals } from "../8814/filingInfo.js";
 import { selfRentalState } from "../rentals/passive.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
 import { passThroughGaps, type PassThroughInfo } from "../schedule-e/partII.js";
+import { partIIIEntities } from "../schedule-e/partIII.js";
 import type { Worksheet1 } from "./credit.js";
 
 type Lines = FormAccessor<object>;
@@ -39,10 +40,11 @@ export const PASS_THROUGH_GAP =
 
 /*
  * MANUAL EDIT: lines 11 and 12 from Parts II and III
- * (irs-pub-596-2025::sec::passive-activities::b01): line 29a column (h) less
- * line 29b column (g). Nonpassive K-1 income (column (k)) is not investment
- * income. 0 with no K-1; a K-1 the engine does not route is a gap; waiting
- * while line 32 is blank.
+ * (irs-pub-596-2025::sec::passive-activities::b01): line 29a column (h) and
+ * line 34a column (d), less line 29b column (g) and line 34b column (c).
+ * Nonpassive K-1 income (columns (k) and (f)) is not investment income. 0 with
+ * no K-1; a K-1 the engine does not route is a gap; waiting while line 32, or
+ * line 37 with a Part III row, is blank.
  */
 function passThroughPassive(
   form: Lines,
@@ -57,11 +59,18 @@ function passThroughPassive(
   ) {
     return { kind: "waiting" };
   }
+  const partIII = partIIIEntities(info).length > 0;
+  if (
+    partIII &&
+    numberOrBlank(form["schedule-e.1.line.37_total_estate_trust_income"]) === undefined
+  ) {
+    return { kind: "waiting" };
+  }
   return {
     kind: "amount",
     amount:
-      sum(form["schedule-e.1.line.29a_totals_col_h"]) -
-      sum(form["schedule-e.1.line.29b_totals_col_g"]),
+      sum(form["schedule-e.1.line.29a_totals_col_h"], form["schedule-e.1.line.34a_totals_col_d"]) -
+      sum(form["schedule-e.1.line.29b_totals_col_g"], form["schedule-e.1.line.34b_totals_col_c"]),
   };
 }
 

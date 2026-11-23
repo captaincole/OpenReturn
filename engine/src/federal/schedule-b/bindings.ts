@@ -6,8 +6,9 @@
 
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
 import { numberOrBlank, roundDollars, sum } from "../../money.js";
-import { unsupported } from "../../types.js";
+import { unsupported, type Unsupported } from "../../types.js";
 import { withForm8814 } from "../8814/totals.js";
+import type { Receipt } from "../passThrough/receipts.js";
 import type { PayerAmount, ScheduleBFilingInfo, ScheduleBRounding } from "./filingInfo.js";
 import type { ScheduleB } from "./types.js";
 
@@ -42,6 +43,16 @@ function payerTotal(
   return roundDollars(sum(...payers.map((payer) => payer.amount)));
 }
 
+/* The total, unless a K-1 row is not known: blank while it waits, its gap when unsupported. */
+function withPassThrough(
+  receipt: Receipt | undefined,
+  total: () => number | Unsupported | undefined,
+): number | Unsupported | undefined {
+  if (receipt?.kind === "unsupported") return unsupported(receipt.reason);
+  if (receipt?.kind === "waiting") return undefined;
+  return total();
+}
+
 function yesNo(answer: (info: ScheduleBFilingInfo) => boolean | undefined, yes: boolean): Fn {
   return (_, info) => (answer(info) === yes ? true : undefined);
 }
@@ -54,7 +65,11 @@ export function register(): void {
         : undefined,
     "0.header.ssn": (_, info) => info.taxpayerSSN,
     ...payerRows("1", INTEREST_ROWS, (info) => info.interestPayers),
-    "0.line.2_total_interest": (_, info) => payerTotal(info.interestPayers, info.rounding),
+    // MANUAL EDIT: a K-1 whose interest is not known yet leaves the total waiting, or shows its gap.
+    "0.line.2_total_interest": (_, info) =>
+      withPassThrough(info.passThroughInterest, () =>
+        payerTotal(info.interestPayers, info.rounding),
+      ),
     /*
      * MANUAL EDIT: line 3 is Form 8815 line 14 (irs-8815-form-2025::sec::omb-no-1545-0074::b03);
      * blank when Form 8815 does not file, or stops before line 14.
@@ -73,7 +88,9 @@ export function register(): void {
     ...payerRows("5", DIVIDEND_ROWS, (info) => info.dividendPayers),
     // MANUAL EDIT: line 5 lists each Form 8814 line 9; the total waits with Form 8814 (::line-9::b01).
     "0.line.6_total_ordinary_dividends": (_, info) =>
-      withForm8814(info.form8814Totals, payerTotal(info.dividendPayers, info.rounding), () => 0),
+      withPassThrough(info.passThroughDividends, () =>
+        withForm8814(info.form8814Totals, payerTotal(info.dividendPayers, info.rounding), () => 0),
+      ),
     "0.line.7a_foreign_account_yes": yesNo((info) => info.hasForeignFinancialAccount, true),
     "0.line.7a_foreign_account_no": yesNo((info) => info.hasForeignFinancialAccount, false),
     "0.line.8_foreign_trust_yes": yesNo((info) => info.hasForeignTrust, true),

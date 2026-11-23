@@ -1,5 +1,6 @@
 /*
  * Part II (partnerships and S corporations), lines 27 to 32, and line 41.
+ * Part III (estates and trusts) is in partIII.ts.
  * Hand-written (MANUAL EDIT): the bindings spread partIIBindings. The K-1
  * items come through the loss limits and routes in federal/passThrough/
  * (README.md there). One row per K-1, in fact order; a K-1 whose items have
@@ -14,6 +15,14 @@ import type { PassThroughEntity } from "../passThrough/items.js";
 import { allowedAmount, routeEntities, type RoutedEntity } from "../passThrough/routing.js";
 import type { ScheduleEFilingInfo } from "./filingInfo.js";
 import type { PartIBindings } from "./lines.js";
+import {
+  OVERFLOW_PART_III,
+  PART_III_ROWS,
+  line37ForLine41,
+  partIIIBindings,
+  partIIIEntities,
+  partIIIGap,
+} from "./partIII.js";
 import type { ScheduleE } from "./types.js";
 
 type Form = FormAccessor<ScheduleE>;
@@ -25,17 +34,11 @@ export type PassThroughInfo = Pick<ScheduleEFilingInfo, "passThroughEntities" | 
 const ROWS = ["a", "b", "c", "d"] as const;
 type Row = (typeof ROWS)[number];
 
-/* Part III prints two rows. */
-const PART_III_ROWS = 2;
-
 /* Line 28 column (b): "P" for a partnership, "S" for an S corporation. */
 const ENTITY_TYPE_CODE = { "1065": "P", "1120-S": "S" } as const;
 
 const partIIEntities = (info: PassThroughInfo): PassThroughEntity[] =>
   (info.passThroughEntities ?? []).filter((entity) => entity.form !== "1041");
-
-const partIIIEntities = (info: PassThroughInfo): PassThroughEntity[] =>
-  (info.passThroughEntities ?? []).filter((entity) => entity.form === "1041");
 
 /* Every K-1 on the return after the limits and routes, in fact order. */
 function routedEntities(info: PassThroughInfo): RoutedEntity[] {
@@ -49,8 +52,6 @@ function routedRow(info: Info, row: Row): RoutedEntity | undefined {
 
 const OVERFLOW_PART_II =
   "More than four partnership or S corporation K-1s need a continuation sheet for Part II, which the engine does not fill.";
-const OVERFLOW_PART_III =
-  "More than two estate or trust K-1s need a continuation sheet for Part III, which the engine does not fill.";
 
 /* Every reason the return is incomplete because of a K-1, in order; empty when there is none. */
 export function passThroughGaps(info: PassThroughInfo): string[] {
@@ -187,22 +188,28 @@ function line27(checked: boolean): Fn {
 /*
  * Line 41: lines 26, 32, 37, 39 and 40. MANUAL EDIT: a K-1 with an item that
  * has no route makes it unsupported, with every reason; Part I waits on line 26
- * only when Part I is in use. Lines 37, 39 and 40 are unsupported (no route)
- * and add nothing; a trust K-1 is reported here, as is any other gap.
+ * only when Part I is in use, Part II on line 32 and Part III on line 37 only
+ * when they have a row. Lines 39 and 40 are unsupported (no fact) and add
+ * nothing; any K-1 gap is reported here, a trust K-1's too.
  */
 function line41(form: Form, info: Info): number | Unsupported | undefined {
   const gaps = passThroughGaps(info);
   if (gaps.length > 0) return unsupported(gaps.join(" "));
+  const partIII = partIIIGap(info);
+  if (partIII) return partIII;
   const line26 = numberOrBlank(form["0.line.26_total_income_or_loss"]);
   const line32 = numberOrBlank(form["1.line.32_total_partnership_s_corp_income"]);
+  const line37 = line37ForLine41(form, info);
   const hasPartII = partIIEntities(info).length > 0;
+  const hasPartIII = partIIIEntities(info).length > 0;
   if (info.partIInUse && line26 === undefined) return undefined;
   if (hasPartII && line32 === undefined) return undefined;
-  if (!info.partIInUse && !hasPartII) return undefined;
+  if (hasPartIII && line37 === undefined) return undefined;
+  if (!info.partIInUse && !hasPartII && !hasPartIII) return undefined;
   return sum(
     line26,
     line32,
-    form["1.line.37_total_estate_trust_income"],
+    line37,
     form["1.line.39_remic_income_combined"],
     form["1.line.40_net_farm_rental_income"],
   );
@@ -243,6 +250,8 @@ export function partIIBindings(): PartIBindings {
       (partIIReady(info)
         ? sum(form["1.line.30_add_income_columns"]) - sum(form["1.line.31_add_loss_columns"])
         : undefined),
+    // MANUAL EDIT: Part III, lines 33–37 (partIII.ts).
+    ...partIIIBindings(),
     "1.line.41_total_income_or_loss": line41,
   };
   return out as PartIBindings;

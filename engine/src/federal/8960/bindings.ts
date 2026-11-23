@@ -2,8 +2,10 @@
 
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
-import { unsupported } from "../../types.js";
+import { unsupported, type Unsupported } from "../../types.js";
 import { withForm8814 } from "../8814/totals.js";
+import { describeItem, entityTitle } from "../passThrough/items.js";
+import { receivedAmounts } from "../passThrough/receipts.js";
 import type { Form8960FilingInfo } from "./filingInfo.js";
 import { NIIT_THRESHOLDS, netInvestmentIncome, nonpassiveRentalAdjustments } from "./lines.js";
 import type { Form8960 } from "./types.js";
@@ -11,6 +13,24 @@ import type { Form8960 } from "./types.js";
 const OTHER_MODIFICATIONS = unsupported(
   "Other NII modifications (section 1411 NOL, estate/trust distributions, section 404(k) dividends, etc.) — no scenario modeled yet.",
 );
+
+/*
+ * A beneficiary enters box 14 code H on line 7 and, as its sign says, adjusts
+ * MAGI on line 13 (irs-1041k1-inst-2025::sec::box-14-other-information::b03;
+ * irs-8960-inst-2025::sec::line-7-other-modifications-to-investment-income::b04,
+ * ::line-13-modified-adjusted-gross-income-magi::b03). Not modeled: a code H
+ * that is not 0 makes both lines unsupported, naming the estate or trust.
+ */
+function netInvestmentAdjustmentGap(info: Form8960FilingInfo): Unsupported | undefined {
+  const receipt = info.passThroughNetInvestmentAdjustment;
+  if (receipt?.kind === "unsupported") return unsupported(receipt.reason);
+  const named = receivedAmounts(receipt).map(
+    ({ entity, item }) => `${entityTitle(entity)}: ${describeItem(item)}`,
+  );
+  return named.length > 0
+    ? unsupported(`${named.join("; ")} adjusts lines 7 and 13, which is not modeled for a K-1.`)
+    : undefined;
+}
 
 export function register(): void {
   defineForm<Form8960, Form8960FilingInfo>("form-8960", {
@@ -56,6 +76,8 @@ export function register(): void {
        * fact: with no Form 8814 amount the line stays unsupported.
        */
       "0.line.7": (_, info) => {
+        const k1Gap = netInvestmentAdjustmentGap(info);
+        if (k1Gap) return k1Gap;
         const line7 = withForm8814(
           info.form8814Totals,
           0,
@@ -81,8 +103,9 @@ export function register(): void {
       },
       "0.line.11": (form) => sum(form["0.line.9d"], form["0.line.10"]),
       "0.line.12": (form) => netInvestmentIncome(form["0.line.8"], form["0.line.11"]),
-      // MAGI = AGI; the FEIE/CFC add-backs are not modeled.
-      "0.line.13": (form) => sum(form["form-1040.line.11b"]),
+      // MAGI = AGI; the FEIE/CFC add-backs are not modeled. MANUAL EDIT: nor a K-1's code H adjustment.
+      "0.line.13": (form, info) =>
+        netInvestmentAdjustmentGap(info) ?? sum(form["form-1040.line.11b"]),
       // MANUAL EDIT: statutory thresholds; not indexed for inflation.
       "0.line.14": (_, info) =>
         info.filingStatus ? NIIT_THRESHOLDS[info.filingStatus] : undefined,
@@ -112,11 +135,14 @@ export function register(): void {
         const base = form["0.line.16"];
         return typeof base === "number" ? roundDollars(base * 0.038) : undefined;
       },
+      // MANUAL EDIT: line 15 waits while line 13 is blank or a gap, so line 17 never shows a $0 it did not figure.
       "0.line.15": (form) =>
-        atLeast(
-          0,
-          sum(form["0.line.13"], form["0.line.14"] === undefined ? 0 : -form["0.line.14"]),
-        ),
+        typeof form["0.line.13"] !== "number"
+          ? undefined
+          : atLeast(
+              0,
+              sum(form["0.line.13"], form["0.line.14"] === undefined ? 0 : -form["0.line.14"]),
+            ),
     },
 
     unsupported: {

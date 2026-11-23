@@ -86,6 +86,18 @@ const activityLosses = (items: PassThroughItem[]) =>
 const BASIS_DECREASES: ReadonlyArray<ItemType> = ["distribution", "loan_repayment"];
 
 /*
+ * A shareholder who disposed of stock checks column (e) and attaches the basis
+ * computation (irs-1040se-inst-2025::sec::line-28::b03). Fewer shares at the
+ * end of the year than at the start (Part II item H) is such a disposal.
+ */
+function soldSomeShares(entity: PassThroughEntity): boolean {
+  const k1 = entity.k1;
+  if (k1.form !== "1120-S") return false;
+  const { sharesAtStart, sharesAtEnd } = k1;
+  return sharesAtStart !== undefined && sharesAtEnd !== undefined && sharesAtEnd < sharesAtStart;
+}
+
+/*
  * Basis (irs-1120sk1-inst-2025::sec::basis-limitations::b01; the partnership's
  * irs-1065k1-inst-2025::sec::basis-limitations): losses and deductions are
  * limited to the owner's basis, and a distribution above basis is a gain
@@ -96,6 +108,13 @@ const BASIS_DECREASES: ReadonlyArray<ItemType> = ["distribution", "loan_repaymen
  */
 export const basisLimit: LimitStage = perEntity(({ entity, items }) => {
   if (entity.form === "1041") return passAll(items);
+  if (soldSomeShares(entity)) {
+    return unsupportedFor(
+      entity,
+      [],
+      "the shareholder held fewer shares at the end of the year than at the start: a sale of stock checks Schedule E line 28 column (e) and needs the basis computation (Form 7203) and the gain or loss on the sale, which are not modeled.",
+    );
+  }
   const ended = entity.holding?.disposedOfEntirely === true || entity.k1.finalK1 === true;
   const limited = [
     ...lossesAndDeductions(items),
@@ -149,16 +168,21 @@ function activityItem(item: PassThroughItem): boolean {
   return isLossOrDeduction(item.type, item.amount) || (item.amount ?? 0) > 0;
 }
 
+/*
+ * irs-1041k1-inst-2025::sec::box-5-other-portfolio-and-nonbusiness-income::b01:
+ * rules for beneficiaries are not issued. A loss in boxes 6 to 8, or a passive
+ * loss carried from an earlier year, is unsupported; income passes.
+ */
 function passiveForTrust(entry: EntityItems): StageOutcome {
-  // irs-1041k1-inst-2025::sec::box-5-other-portfolio-and-nonbusiness-income::b01: rules for beneficiaries are not issued.
   const losses = entry.items.filter(
     (item) => activityItem(item) && isLossOrDeduction(item.type, item.amount),
   );
-  return losses.length > 0
+  const carried = (entry.entity.holding?.carriedLosses?.passive ?? 0) > 0;
+  return losses.length > 0 || carried
     ? unsupportedFor(
         entry.entity,
         losses,
-        "a loss in boxes 6 to 8 may be passive, and the passive rules for a beneficiary are not issued or modeled.",
+        "a loss in boxes 6 to 8, or a passive loss carried from an earlier year, may be passive, and the passive rules for a beneficiary are not issued or modeled.",
       )
     : passAll(entry.items);
 }

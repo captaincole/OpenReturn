@@ -101,11 +101,27 @@ describe("the box tables", () => {
     expect(rowFor(BOX_TABLES["1065"], "13", "A").type).toBe("charitable_contribution");
   });
 
-  it("routes only an S corporation's box 1 and its section 199A statement", () => {
+  it("routes an S corporation's box 1 and statement, gross receipts, and a trust's income items", () => {
     const routedRows = cases.filter(({ form, row }) => routeOf(form, row.type) !== undefined);
     expect(routedRows.map(({ name }) => name)).toEqual([
       "1120-S box 1 (ordinary_business_income)",
       "1120-S box 17 code V (section_199a_information)",
+      "1120-S box 17 code AC (gross_receipts_448c)",
+      "1065 box 20 code AG (gross_receipts_448c)",
+      "1041 box 1 (interest)",
+      "1041 box 2a (ordinary_dividends)",
+      "1041 box 2b (qualified_dividends)",
+      "1041 box 3 (net_short_term_capital_gain)",
+      "1041 box 4a (net_long_term_capital_gain)",
+      "1041 box 4b (collectibles_gain)",
+      "1041 box 4c (unrecaptured_section_1250_gain)",
+      "1041 box 5 (other_portfolio_income)",
+      "1041 box 6 (ordinary_business_income)",
+      "1041 box 7 (net_rental_real_estate_income)",
+      "1041 box 8 (other_net_rental_income)",
+      "1041 box 14 code B (foreign_tax_paid)",
+      "1041 box 14 code H (net_investment_income)",
+      "1041 box 14 code I (section_199a_information)",
     ]);
   });
 

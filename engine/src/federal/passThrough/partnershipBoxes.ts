@@ -452,7 +452,7 @@ const BOXES_20_AND_21: BoxTable = [
   // part-xiii::b02
   info("AF", "Excess business interest income", "excess_business_interest_income"),
   // part-xiii::b02
-  info("AG", "Gross receipts for section 448(c)", "gross_receipts_448c"),
+  coded("20", "AG", "gross_receipts_448c", "Gross receipts for section 448(c)"),
   // part-xiii::b04
   info("AH", "Noncash charitable contributions", "noncash_charitable_contributions"),
   // part-xiii::b04

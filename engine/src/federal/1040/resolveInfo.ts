@@ -35,6 +35,7 @@ import {
 import { pensionRowsAfterForm4972 } from "../4972/line5.js";
 import { NONQUALIFIED_ROTH_CODES, partIIIFigures } from "../8606/partIII.js";
 import { form8606Filers } from "../8606/resolveInfo.js";
+import { receivedAt, routedOnReturn } from "../passThrough/receipts.js";
 import { needsPub590AWorksheets } from "../schedule-1/pub590a.js";
 import { resolveScheduleAInfo } from "../schedule-a/resolveInfo.js";
 import { eicQuestions, resolveEicLineInfo } from "../schedule-eic/eicAnswers.js";
@@ -73,6 +74,21 @@ function resolveInterestSlots(inputs: ResolverInputs): Form1040FilingInfo {
       "box8",
       isInterestFactKey,
     ) as Form1040FilingInfo["taxExemptInterestTotal"],
+  };
+}
+
+/*
+ * Lines 2b, 3a and 3b take a K-1's interest and dividends
+ * (irs-1041k1-inst-2025::sec::box-1-interest-income::b01, ::box-2a-ordinary-dividends::b01,
+ * ::box-2b-qualified-dividends::b01). Undefined slots with no K-1.
+ */
+function resolvePassThroughSlots(inputs: ResolverInputs): Form1040FilingInfo {
+  const routed = routedOnReturn(inputs);
+  if (routed.length === 0) return {};
+  return {
+    passThroughInterest: receivedAt(routed, "interest_list"),
+    passThroughOrdinaryDividends: receivedAt(routed, "dividend_list"),
+    passThroughQualifiedDividends: receivedAt(routed, "qualified_dividends"),
   };
 }
 
@@ -359,6 +375,7 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
     w2gFederalWithholding: w2gWithholding(inputs),
     capitalGainDistributionsNoScheduleD: capitalGainDistributionsNoScheduleD(inputs),
     ...resolveInterestSlots(inputs),
+    ...resolvePassThroughSlots(inputs),
     ...resolveRetirementSlots(inputs),
     socialSecurityBenefits:
       ss.length > 0

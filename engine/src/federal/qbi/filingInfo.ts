@@ -35,8 +35,10 @@ export interface QbiBusiness {
 }
 
 export interface QbiFilingInfo extends BaseFilingInfo {
-  /** Form 8995 line 6, Form 8995-A line 28: 1099-DIV box 5 sum, cents kept. */
+  /** Form 8995 line 6, Form 8995-A line 28: 1099-DIV box 5 and K-1 section 199A dividends, cents kept. */
   qualifiedReitDividends?: number;
+  /** Why a K-1's section 199A dividends are not known (an unsupported K-1); lines 6 and 28 show it. */
+  qualifiedReitDividendsGap?: string;
   /* The QBI rentals, then the Schedule C businesses, then the K-1 statements, in fact order; undefined with none. */
   qbiBusinesses?: QbiBusiness[];
   /* Schedule SE must-file: false means no deductible SE tax. */

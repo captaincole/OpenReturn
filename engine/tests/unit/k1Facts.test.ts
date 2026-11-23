@@ -68,6 +68,15 @@ describe("reading K-1 and holding facts", () => {
     expect([...holdings.keys()]).toEqual(["k1.holding.harbor"]);
     expect(malformedKeys).toEqual(["k1.holding.oak"]);
   });
+
+  it("lists a holding whose carried losses name a limit that is not one of the three as malformed", () => {
+    const { holdings, malformedKeys } = readK1HoldingFacts([
+      { key: "k1.holding.harbor", category: "k1", value: { carriedLosses: { atRisk: 300 } } },
+      { key: "k1.holding.oak", category: "k1", value: { carriedLosses: { capital: 300 } } },
+    ]);
+    expect([...holdings.keys()]).toEqual(["k1.holding.harbor"]);
+    expect(malformedKeys).toEqual(["k1.holding.oak"]);
+  });
 });
 
 describe("K-1s on the return", () => {
@@ -97,5 +106,29 @@ describe("K-1s on the return", () => {
   it("bounds what the K-1s add to AGI from above and below", () => {
     expect(passThroughIncomeUpperBound(facts)).toBe(15000);
     expect(passThroughLossFloor(facts)).toBe(-2000);
+  });
+
+  it("counts guaranteed payments printed only as the box 4c total in the upper bound", () => {
+    const partnership = (boxes: Array<{ box: string; amount: number }>) => [
+      { key: "k1.partnership.oak", category: "k1", value: { ...k1, form: "1065", boxes } },
+    ];
+    expect(passThroughIncomeUpperBound(partnership([{ box: "4c", amount: 40000 }]))).toBe(40000);
+    expect(
+      passThroughIncomeUpperBound(
+        partnership([
+          { box: "4a", amount: 30000 },
+          { box: "4b", amount: 10000 },
+          { box: "4c", amount: 40000 },
+        ]),
+      ),
+    ).toBe(40000);
+  });
+
+  it("asks for a trust K-1's holding only on a return that is not joint", () => {
+    const trust = [{ key: "k1.trust.ash", category: "k1", value: { ...k1, form: "1041" } }];
+    expect(passThroughEntitiesOnReturn(trust, true).missingHoldingKeys).toEqual([]);
+    expect(passThroughEntitiesOnReturn(trust, false).missingHoldingKeys).toEqual([
+      "k1.holding.ash",
+    ]);
   });
 });

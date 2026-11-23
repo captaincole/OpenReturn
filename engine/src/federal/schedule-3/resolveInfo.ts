@@ -7,6 +7,7 @@ import { resolve8839Info } from "../8839/resolveInfo.js";
 import { resolve8863Info } from "../8863/resolveInfo.js";
 import { resolve8880Info } from "../8880/resolveInfo.js";
 import { cleanVehicleBusinessCredit, cleanVehicleSchedules } from "../8936/resolveInfo.js";
+import { k1KeysWithRoute, receivedOnReturn } from "../passThrough/receipts.js";
 import { resolveScheduleRInfo } from "../schedule-r/resolveInfo.js";
 import type { Schedule3FilingInfo } from "./filingInfo.js";
 
@@ -20,6 +21,8 @@ export function resolveSchedule3Info(inputs: ResolverInputs): Schedule3FilingInf
   const form8396 = resolve8396Info(inputs).mustFile?.["form-8396"]?.value === true;
   const form8880 = resolve8880Info(inputs).mustFile?.["form-8880"]?.value === true;
   const form8863 = resolve8863Info(inputs).mustFile?.["form-8863"]?.value === true;
+  // A K-1's foreign taxes (irs-1116-inst-2025::sec::publications-see-pub-514-foreign-tax-credit-for::b02).
+  const foreignTaxK1Keys = k1KeysWithRoute(inputs, "schedule_3_line_1");
   const form1116 = resolve1116Info(inputs);
   const foreignTaxCredit =
     form1116.mustFile?.["form-1116"]?.value === true || form1116.foreignTax?.election === true;
@@ -45,7 +48,15 @@ export function resolveSchedule3Info(inputs: ResolverInputs): Schedule3FilingInf
         rule: "fallback: Form 8936 has a business credit (line 6a, through Form 3800)",
         value: cleanVehicleBusinessCredit(inputs),
       },
+      {
+        rule: "fallback: a Schedule K-1 reports foreign taxes (line 1, Form 1116)",
+        value: foreignTaxK1Keys.length > 0,
+        triggeredByFactKeys: foreignTaxK1Keys,
+      },
     ],
   });
-  return { mustFile: { "schedule-3": resolution } };
+  return {
+    mustFile: { "schedule-3": resolution },
+    passThroughForeignTax: receivedOnReturn(inputs, "schedule_3_line_1"),
+  };
 }
