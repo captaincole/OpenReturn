@@ -342,6 +342,7 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
     rentalProperties,
     stateLocalTaxAllocableToInvestmentIncome: allocableTax,
     additionalModifications,
+    passThroughBusiness: receivedOnReturn(inputs, "schedule_e_part_ii"),
     passThroughNetInvestmentAdjustment: receivedOnReturn(inputs, "form_8960_line_7"),
   };
 }

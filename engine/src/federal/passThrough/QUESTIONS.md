@@ -226,3 +226,20 @@ Each question has its source and the default the code uses now.
     partnership K-1 with a loss, deduction, distribution, loan repayment or
     carried basis loss stays unsupported at the basis stage (README.md, "What
     the next steps add").
+30. **A nonpassive K-1 business and net investment income.** Line 4a takes
+    all of Schedule 1 line 5, and line 4b takes out "net income or loss from a
+    section 162 trade or business that's not a passive activity"
+    (irs-8960-inst-2025::sec::line-4a-income-from-trades-businesses::b01,
+    ::b02; ::line-4b-adjustment-for-net-income-or-loss::b01). The trade or
+    business must be a section 162 one and nonpassive, "with the exception of
+    a trade or business of trading in financial instruments or commodities",
+    whose income stays in NII; for a pass-through entity the test "is made at
+    that entity's level" (::trade-or-business-activities::b01). Default: the
+    K-1 items on Schedule E Part II columns (i) and (k) (nonpassive ordinary
+    business income or loss, a "PYA" row included) of an owner who materially
+    participated are a section 162 business that does not trade, so line 4b
+    takes them out: income negative, a loss positive. No fact marks a trading
+    entity; one would need its own answer. A partnership's self-employment
+    income (::special-rule-for-self-employed::b01) has no route yet. The
+    corpus has no rule on working capital for line 4b. Passive K-1 income (a
+    trust's Part III column (d)) stays in NII.

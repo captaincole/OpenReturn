@@ -1,5 +1,7 @@
 import type { FormAccessor } from "../../defineForm.js";
-import { atLeast, sum } from "../../money.js";
+import { atLeast, roundDollars, sum } from "../../money.js";
+import { unsupported, type Unsupported } from "../../types.js";
+import type { Receipt } from "../passThrough/receipts.js";
 import { selfRentalState } from "../rentals/passive.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
 import type { Form8960 } from "./types.js";
@@ -40,6 +42,38 @@ function section162Nonpassive(property: RentalProperty): boolean | undefined {
   const isNonpassive = nonpassive(property);
   if (isNonpassive !== true) return isNonpassive;
   return property.value.tradeOrBusiness;
+}
+
+/*
+ * Line 4b for a K-1 (irs-8960-inst-2025::sec::line-4b-adjustment-for-net-income-or-loss::b01):
+ * "Net income or loss from a section 162 trade or business that's not a passive
+ * activity", which line 4a took in through Schedule 1 line 5
+ * (::line-4a-income-from-trades-businesses::b01, ::b02). These are the K-1
+ * items the routes put on Schedule E Part II columns (i) and (k): nonpassive
+ * trade or business income or loss, this year's and a carried loss allowed now,
+ * of an owner who materially participated (the passive answer). Income is a
+ * negative adjustment, a loss a positive one. Each row is rounded as Part II
+ * prints it: one for the K-1's own amounts, one for its "PYA" row. Passive K-1
+ * income (column (h), a trust's Part III column (d)) stays in NII. Undefined
+ * while a K-1 waits; the gap when one is unsupported. No fact marks an entity
+ * whose business is trading financial instruments (QUESTIONS.md).
+ */
+export function nonpassiveK1Adjustments(
+  receipt: Receipt | undefined,
+): number[] | Unsupported | undefined {
+  if (receipt === undefined) return [];
+  if (receipt.kind === "unsupported") return unsupported(receipt.reason);
+  if (receipt.kind === "waiting") return undefined;
+  const rows = new Map<string, number[]>();
+  for (const { entity, item } of receipt.items) {
+    if (entity.holding?.materiallyParticipated !== true) continue;
+    const row = `${entity.key}:${item.fromPriorYear === true}`;
+    rows.set(row, [...(rows.get(row) ?? []), item.amount ?? 0]);
+  }
+  return [...rows.values()]
+    .map((amounts) => roundDollars(sum(...amounts)))
+    .filter((amount) => amount !== 0)
+    .map((amount) => 0 - amount);
 }
 
 /* Nonpassive properties whose section 162 answer is missing: Cade asks for the property again. */

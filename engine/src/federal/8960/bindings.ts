@@ -7,7 +7,12 @@ import { withForm8814 } from "../8814/totals.js";
 import { describeItem, entityTitle } from "../passThrough/items.js";
 import { receivedAmounts } from "../passThrough/receipts.js";
 import type { Form8960FilingInfo } from "./filingInfo.js";
-import { NIIT_THRESHOLDS, netInvestmentIncome, nonpassiveRentalAdjustments } from "./lines.js";
+import {
+  NIIT_THRESHOLDS,
+  netInvestmentIncome,
+  nonpassiveK1Adjustments,
+  nonpassiveRentalAdjustments,
+} from "./lines.js";
 import type { Form8960 } from "./types.js";
 
 const OTHER_MODIFICATIONS = unsupported(
@@ -51,20 +56,24 @@ export function register(): void {
        * MANUAL EDIT: irs-8960-inst-2025::sec::line-4b-adjustment-for-net-income-or-loss::b01,
        * ::b02: nonpassive section 162 income goes on line 4b as a negative, a loss as a
        * positive. Line G "Yes" makes every Schedule C business nonpassive. Schedule F
-       * is not modeled, and no fact marks a trader in financial instruments.
+       * is not modeled, and no fact marks a trader in financial instruments. A K-1's
+       * nonpassive trade or business income or loss on Schedule E Part II comes out
+       * the same way (lines.ts nonpassiveK1Adjustments).
        */
       "0.line.4b": (form, info) => {
         const scheduleC = form["schedule-1.0.line.3"];
         if (info.scheduleCNonpassive === true && typeof scheduleC !== "number") return undefined;
         const rentals = nonpassiveRentalAdjustments(form, info.rentalProperties ?? []);
         if (rentals === undefined) return undefined;
+        const k1s = nonpassiveK1Adjustments(info.passThroughBusiness);
+        if (k1s === undefined || !Array.isArray(k1s)) return k1s;
         const business =
           info.scheduleCNonpassive === true && typeof scheduleC === "number"
             ? 0 - scheduleC
             : undefined;
-        return business === undefined && rentals.length === 0
+        return business === undefined && rentals.length === 0 && k1s.length === 0
           ? undefined
-          : sum(business, ...rentals);
+          : sum(business, ...rentals, ...k1s);
       },
       "0.line.4c": (form) => sum(form["0.line.4a"], form["0.line.4b"]),
       "0.line.5a": (form) => sum(form["form-1040.line.7a"], form["schedule-1.0.line.4"]),

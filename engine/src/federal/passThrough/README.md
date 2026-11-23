@@ -140,6 +140,9 @@ routed nor reported (`tests/unit/federal/passThrough/boxTables.test.ts`).
   (the credit needs Schedule K-3), and the rest of the K-1 computes.
 - Form 8960 files for a K-1's passive activity income too: a trust's boxes 6
   to 8 reach line 4a through Schedule E line 41 and Schedule 1 line 5.
+- Form 8960 line 4b takes a materially participating owner's Part II income
+  or loss (columns (i) and (k)) back out of line 4a: it is not net investment
+  income (`8960/lines.ts nonpassiveK1Adjustments`, QUESTIONS.md item 30).
 
 ## What the next steps add
 

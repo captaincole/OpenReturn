@@ -14,6 +14,8 @@ export interface Form8960FilingInfo
   stateLocalTaxAllocableToInvestmentIncome?: number;
   /** Line 10: additional deductions or modifications properly allocable to NII (the taxpayer's answer). */
   additionalModifications?: number;
+  /** Line 4b: the K-1 trade or business items on Schedule E Part II (the schedule_e_part_ii route). */
+  passThroughBusiness?: Receipt;
   /** Lines 7 and 13: each K-1's net investment income adjustment (Schedule K-1 (Form 1041) box 14 code H). */
   passThroughNetInvestmentAdjustment?: Receipt;
 }
