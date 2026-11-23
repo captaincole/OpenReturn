@@ -3,8 +3,10 @@
  * Beneficiary describe, and its item type. The comment over each row is the
  * corpus block that describes it, after "irs-1041k1-inst-2025::sec::". The
  * instructions do not describe every code that page 2 of the K-1 lists (box 13
- * codes F, G, I, K, M, N, P, Q; box 14 codes A, B, E, G): those map to
- * not_modeled until the K-1 itself is in the corpus (QUESTIONS.md). The same
+ * codes F, G, I, K, M, N, P, Q; box 14 codes A, E, G): those map to
+ * not_modeled until the K-1 itself is in the corpus (QUESTIONS.md). Box 14
+ * code B (foreign taxes) has no text either; its row is the one exception,
+ * named in QUESTIONS.md item 1. The same
  * box number means something else here: box 1 is interest, not business income.
  */
 
@@ -149,6 +151,12 @@ const info = (code: string, label: string, detail: string) =>
   coded("14", code, "other_information", label, detail);
 
 const BOX_14: BoxTable = [
+  /*
+   * No block names code B: page 2 of the K-1 does (QUESTIONS.md item 1). A
+   * K-1 (Form 1041) does report foreign taxes for Form 1116
+   * (irs-1116-inst-2025::sec::publications-see-pub-514-foreign-tax-credit-for::b02).
+   */
+  coded("14", "B", "foreign_tax_paid", "Foreign taxes"),
   // box-14-other-information::b01
   info("C", "Qualified rehabilitation expenditures", "qre"),
   // box-14-other-information::b02

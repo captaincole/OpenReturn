@@ -88,6 +88,20 @@ const isOptionalBoolean = (value: unknown): boolean =>
   value === undefined || typeof value === "boolean";
 
 const AMOUNT_FIELDS = ["stockBasisAtStart", "debtBasisAtStart", "partnershipBasisAtStart"] as const;
+/* The three limits a loss can be carried under; any other key makes the holding malformed. */
+const CARRIED_LOSS_LIMITS: ReadonlyArray<string> = [
+  "basis",
+  "atRisk",
+  "passive",
+] satisfies ReadonlyArray<keyof K1CarriedLosses>;
+
+const isCarriedLosses = (value: unknown): boolean =>
+  value === undefined ||
+  (isRecord(value) &&
+    Object.entries(value).every(
+      ([limit, amount]) => CARRIED_LOSS_LIMITS.includes(limit) && isOptionalAmount(amount),
+    ));
+
 const BOOLEAN_FIELDS = [
   "materiallyParticipated",
   "activelyParticipated",
@@ -98,12 +112,11 @@ const BOOLEAN_FIELDS = [
 
 function isHolding(value: unknown): value is K1HoldingFactValue {
   if (!isRecord(value)) return false;
-  const carried = value.carriedLosses;
   return (
     (value.owner === undefined || value.owner === "taxpayer" || value.owner === "spouse") &&
     AMOUNT_FIELDS.every((field) => isOptionalAmount(value[field])) &&
     BOOLEAN_FIELDS.every((field) => isOptionalBoolean(value[field])) &&
-    (carried === undefined || (isRecord(carried) && Object.values(carried).every(isOptionalAmount)))
+    isCarriedLosses(value.carriedLosses)
   );
 }
 
