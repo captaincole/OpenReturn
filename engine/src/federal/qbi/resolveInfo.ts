@@ -130,7 +130,8 @@ function allowedStatementQbi(routed: RoutedEntity, statementQbi: number) {
       gap: `${entityTitle(routed.entity)}: the section 199A statement gives QBI of 0 or more while a limit holds back part of a business loss; scaling it is not modeled.`,
     };
   }
-  return { qbi: (statementQbi * allowed) / whole };
+  // A loss the limits hold back in full is no QBI at all (0, not a negative zero).
+  return { qbi: allowed === 0 ? 0 : (statementQbi * allowed) / whole };
 }
 
 /*
