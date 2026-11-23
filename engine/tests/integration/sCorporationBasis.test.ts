@@ -102,18 +102,34 @@ describe("the basis limit in proportion (elaida)", () => {
     expect(covered.value("form-8995.0.line.1iii_c")).toBe(-60000);
   });
 
-  it("stops a business loss that can be more than $156,500 (Form 461)", () => {
-    const facts = editHolding(
+  const withLoss = (amount: number) =>
+    editHolding(
       editK1(elaidaScenario.facts, (k1) => ({
         ...k1,
-        boxes: k1.boxes.map((entry) => (entry.box === "1" ? { ...entry, amount: -200000 } : entry)),
+        boxes: k1.boxes.map((entry) => (entry.box === "1" ? { ...entry, amount } : entry)),
       })),
-      (holding) => ({ ...holding, stockBasisAtStart: 300000 }),
+      (holding) => ({ ...holding, stockBasisAtStart: 1000000 }),
     );
-    const large = run(elaidaScenario, facts);
-    expect(unsupportedReason(large.field("schedule-e.1.line.41_total_income_or_loss"))).toContain(
+
+  it("allows a joint loss of $200,000 in full and files Form 461, the lines still computing", () => {
+    const large = run(elaidaScenario, withLoss(-200000));
+    expect(large.value("schedule-e.1.line.41_total_income_or_loss")).toBe(-200000);
+    expect(large.files("form-461")).toBe(true);
+    const line2 = large.field("form-461.0.line.2_schedule_1_line_3");
+    expect(line2?.ok).toBe(false);
+    expect(typeof large.value("form-1040.line.11a")).toBe("number");
+    expect(large.value("form-1040.line.15")).toBe(0);
+  });
+
+  it("stops a joint loss of $700,000, over the $626,000 threshold", () => {
+    const larger = run(elaidaScenario, withLoss(-700000));
+    expect(unsupportedReason(larger.field("schedule-e.1.line.41_total_income_or_loss"))).toContain(
       "Form 461",
     );
+  });
+
+  it("files no Form 461 for elaida's own loss", () => {
+    expect(run(elaidaScenario, elaidaScenario.facts).files("form-461")).toBe(false);
   });
 });
 

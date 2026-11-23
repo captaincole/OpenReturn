@@ -77,20 +77,28 @@ Each question has its source and the default the code uses now.
     (irs-1041k1-inst-2025::sec::box-5-other-portfolio-and-nonbusiness-income::b01).
 12. **The excess business loss cap.** It applies to an aggregate business loss
     above the threshold, figured with every business on the return (Form 461,
-    irs-1120sk1-inst-2025::sec::excess-business-loss-limitations::b01). Form
-    461 files when "your net losses from all of your trades or businesses are
-    more than $313,000 ($626,000 for taxpayers filing a joint return), or ...
-    you would report a loss of more than $156,500 on any one of Form 461, lines
-    1 through 8" (irs-461-inst-2025::sec::who-must-file::b01; the 2025
-    threshold, ::b02). Default: the stage adds every K-1 business loss that
-    reaches it and the return's other business losses (each Schedule C line 31
-    loss and each rental's loss before the passive rules, `otherBusinessLosses`
-    in `receipts.ts`), without any income. At or below $156,500 neither test
-    can be met, so the loss passes; above it the K-1 is unsupported, even when
-    a joint return's threshold is not reached, because the second filing test
-    may still be met. A business whose amount is not known yet makes the K-1
-    wait on that business's fact. A K-1 stopped at an earlier stage is not
-    added; its own gap already keeps the return from looking finished.
+    irs-1120sk1-inst-2025::sec::excess-business-loss-limitations::b01). An
+    excess business loss is the amount by which business deductions are more
+    than business income "plus the threshold amount", $313,000 or $626,000 on
+    a joint return for 2025 (irs-461-inst-2025::sec::who-must-file::b02).
+    Form 461 must be attached when net business losses are more than the
+    threshold, or "a loss of more than $156,500 on any one of Form 461, lines
+    1 through 8" (::b01). Default (`excessBusinessLoss.ts`): the stage adds
+    every K-1 business loss that reaches it and the return's other business
+    losses (each Schedule C line 31 loss and each rental's loss before the
+    passive rules, `otherBusinessLosses` in `receipts.ts`), without any
+    income. At or below the threshold no loss can be limited and the items
+    pass in full; above it the K-1 is unsupported, since the income side and
+    Form 461's rules are not modeled. An unknown filing status uses the lower
+    threshold (no other stage waits on the status). Separately, Form 461's
+    resolver files the form when the K-1 and rental losses (line 5) or the
+    Schedule C losses (line 2), added without income, are more than $156,500.
+    That bound can require the form when a line nets below $156,500; Form 461
+    has no rules, so it shows as filed with every line unsupported, and the
+    rest of the return computes. A business whose amount is not known yet
+    makes the K-1 wait on that business's fact. A K-1 stopped at an earlier
+    stage is not added; its own gap already keeps the return from looking
+    finished.
 13. **Scenario `lan`: who owns which business.** The task gives the spouse the
     Schedule C and the taxpayer the S corporation. A spouse's Schedule SE on a
     joint return is not modeled (`schedule-se/resolveInfo.ts`). Default: the

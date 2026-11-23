@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 import type { K1Box, K1FactValue, K1HoldingFactValue } from "../../../../src/facts/index.js";
 import {
+  excessBusinessLossThreshold,
+  form461Required,
+} from "../../../../src/federal/passThrough/excessBusinessLoss.js";
+import {
   itemsOf,
   priorYearItemsOf,
   type PassThroughEntity,
@@ -9,15 +13,17 @@ import {
   applyLossLimits,
   atRiskLimit,
   basisLimit,
+  businessLossesBeforeExcessBusinessLoss,
   excessBusinessLossLimit,
   LIMIT_STAGES,
   passiveLimit,
+  type LimitContext,
 } from "../../../../src/federal/passThrough/limits.js";
 import { routeEntities } from "../../../../src/federal/passThrough/routing.js";
 
 const CONTEXT = {
   filingStatus: "married_filing_jointly" as const,
-  otherBusinessLosses: { amount: 0, unknownKeys: [] },
+  otherBusinessLosses: { scheduleCLosses: 0, rentalLosses: 0, unknownKeys: [] },
 };
 
 /* A shareholder who works in the company, all of whose money in it is at risk, with $50,000 of stock basis. */
@@ -208,26 +214,70 @@ describe("at-risk", () => {
 });
 
 describe("excess business loss", () => {
-  const withOther = (amount: number, unknownKeys: string[] = []) => ({
-    ...CONTEXT,
-    otherBusinessLosses: { amount, unknownKeys },
+  const none = { scheduleCLosses: 0, rentalLosses: 0, unknownKeys: [] };
+  const context = (
+    filingStatus: "single" | "married_filing_jointly",
+    unknownKeys: string[] = [],
+  ) => ({
+    filingStatus,
+    otherBusinessLosses: { ...none, unknownKeys },
   });
-  const run = (entity: PassThroughEntity, context: Parameters<typeof excessBusinessLossLimit>[1]) =>
-    excessBusinessLossLimit([{ entity, items: entity.items }], context).get(entity.key);
+  const loss = (amount: number) =>
+    sCorp([{ box: "1", amount: -amount }], { ...OWNER, stockBasisAtStart: 1_000_000 });
+  const run = (entity: PassThroughEntity, limitContext: LimitContext) =>
+    excessBusinessLossLimit([{ entity, items: entity.items }], limitContext).get(entity.key);
+  const form461 = (entity: PassThroughEntity, limitContext: LimitContext) =>
+    form461Required(businessLossesBeforeExcessBusinessLoss([entity], limitContext), none);
 
-  it("passes when every business loss added up is at most $156,500", () => {
-    const entity = sCorp([{ box: "1", amount: -100000 }]);
-    expect(run(entity, withOther(56500))?.kind).toBe("applied");
+  it("passes a joint loss of $300,000 in full, with Form 461 required (over $156,500 on line 5)", () => {
+    const entity = loss(300_000);
+    expect(run(entity, context("married_filing_jointly"))).toMatchObject({
+      kind: "applied",
+      allowed: [{ amount: -300_000 }],
+    });
+    expect(form461(entity, context("married_filing_jointly"))).toBe(true);
   });
 
-  it("reports a total above it (Form 461), and waits on a business whose loss is not known", () => {
-    const entity = sCorp([{ box: "1", amount: -100000 }]);
-    expect(run(entity, withOther(56501))?.kind).toBe("unsupported");
-    expect(run(entity, withOther(0, ["self_employment.business.shop"]))).toEqual({
+  it("passes a single filer's loss of $300,000 (under $313,000), with Form 461 required", () => {
+    const entity = loss(300_000);
+    expect(run(entity, context("single"))?.kind).toBe("applied");
+    expect(form461(entity, context("single"))).toBe(true);
+  });
+
+  it("reports a joint loss of $700,000, over the $626,000 threshold", () => {
+    const result = run(loss(700_000), context("married_filing_jointly"));
+    expect(result?.kind).toBe("unsupported");
+    if (result?.kind === "unsupported") expect(result.reason).toContain("$626000");
+  });
+
+  it("passes a loss of $100,000 with no Form 461", () => {
+    const entity = loss(100_000);
+    expect(run(entity, context("single"))?.kind).toBe("applied");
+    expect(form461(entity, context("single"))).toBe(false);
+  });
+
+  it("uses the lower threshold for an unknown filing status", () => {
+    expect(excessBusinessLossThreshold(undefined)).toBe(313_000);
+    expect(run(loss(400_000), { otherBusinessLosses: none })?.kind).toBe("unsupported");
+  });
+
+  it("adds the return's other losses, and waits on a business whose loss is not known", () => {
+    const entity = loss(200_000);
+    const withScheduleC = {
+      filingStatus: "single" as const,
+      otherBusinessLosses: { ...none, scheduleCLosses: 120_000 },
+    };
+    expect(run(entity, withScheduleC)?.kind).toBe("unsupported");
+    expect(run(entity, context("single", ["self_employment.business.shop"]))).toEqual({
       kind: "waiting",
       factKeys: ["self_employment.business.shop"],
     });
     expect(run(entity, { filingStatus: "single" })?.kind).toBe("unsupported");
+  });
+
+  it("requires Form 461 for a Schedule C loss over $156,500 on its own line", () => {
+    expect(form461Required(0, { ...none, scheduleCLosses: 156_501 })).toBe(true);
+    expect(form461Required(100_000, { ...none, scheduleCLosses: 100_000 })).toBe(false);
   });
 });
 

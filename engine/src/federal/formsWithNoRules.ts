@@ -1,7 +1,8 @@
 /*
  * The federal forms that have a catalog and no rules yet. Each has a FilingInfo
- * type with no slots and a resolver that reads only its must-file decision, so
- * they are joined here and filingInfo.ts takes them as one.
+ * type with no slots and a resolver that reads only its must-file decision
+ * (Form 461 also files from the return's business losses, with its lines
+ * unsupported), so they are joined here and filingInfo.ts takes them as one.
  */
 
 import type { BaseFilingInfo } from "../filingInfo.js";

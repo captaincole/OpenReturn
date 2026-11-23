@@ -12,12 +12,13 @@ import { unsupported, type Unsupported } from "../../types.js";
 import { spousePropertiesOnReturn } from "../rentals/passive.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { netIncomeOrLoss } from "../schedule-e/lines.js";
+import type { OtherBusinessLosses } from "./excessBusinessLoss.js";
 import {
   passThroughEntitiesOnReturn,
   type PassThroughEntity,
   type PassThroughItem,
 } from "./items.js";
-import type { LimitContext, OtherBusinessLosses } from "./limits.js";
+import type { LimitContext } from "./limits.js";
 import {
   allowedWithRoute,
   itemsWithRoute,
@@ -119,13 +120,16 @@ export function otherBusinessLosses(inputs: ResolverInputs): OtherBusinessLosses
   const { businesses } = businessesOnReturn(inputs.facts, joint);
   const { properties } = rentalsOnReturn(inputs.facts, joint);
   const values = businesses.map((business) => business.value);
-  const amounts = [
-    ...businesses.map(({ key, value }) => ({ key, net: netProfit(value, values) })),
-    ...properties.map(({ key, value }) => ({ key, net: netIncomeOrLoss(value) })),
-  ];
+  const scheduleC = businesses.map(({ key, value }) => ({ key, net: netProfit(value, values) }));
+  const rentals = properties.map(({ key, value }) => ({ key, net: netIncomeOrLoss(value) }));
+  const losses = (amounts: Array<{ net: number | undefined }>) =>
+    sum(...amounts.map(({ net }) => Math.max(0, -(net ?? 0))));
   return {
-    amount: sum(...amounts.map(({ net }) => Math.max(0, -(net ?? 0)))),
-    unknownKeys: amounts.filter(({ net }) => net === undefined).map(({ key }) => key),
+    scheduleCLosses: losses(scheduleC),
+    rentalLosses: losses(rentals),
+    unknownKeys: [...scheduleC, ...rentals]
+      .filter(({ net }) => net === undefined)
+      .map(({ key }) => key),
   };
 }
 

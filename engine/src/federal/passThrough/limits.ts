@@ -21,7 +21,11 @@ import {
   withAmount,
   type BasisFigures,
 } from "./basis.js";
-import { isLossOrDeduction, isPortfolio, type ItemType } from "./itemTypes.js";
+import {
+  excessBusinessLossThreshold,
+  noLossCanBeLimited,
+  type OtherBusinessLosses,
+} from "./excessBusinessLoss.js";
 import {
   describeItem,
   entityTitle,
@@ -29,17 +33,7 @@ import {
   type PassThroughEntity,
   type PassThroughItem,
 } from "./items.js";
-
-/*
- * The return's business losses outside the K-1s, for the excess business loss
- * stage: an upper bound, each Schedule C business's and rental property's loss
- * added without any income (positive), and the facts whose loss is not known
- * yet (receipts.ts, limitContextOf).
- */
-export interface OtherBusinessLosses {
-  amount: number;
-  unknownKeys: string[];
-}
+import { isLossOrDeduction, isPortfolio, type ItemType } from "./itemTypes.js";
 
 /*
  * What a stage may read besides the items. The passive stage will need Form
@@ -269,34 +263,26 @@ export const passiveLimit: LimitStage = perEntity((entry) => {
   return passAll(items);
 });
 
-/*
- * irs-461-inst-2025::sec::who-must-file::b01: Form 461 files when "your net
- * losses from all of your trades or businesses are more than $313,000
- * ($626,000 for taxpayers filing a joint return), or ... you would report a
- * loss of more than $156,500 on any one of Form 461, lines 1 through 8"; the
- * 2025 threshold is the same (::b02). Business losses added without any income
- * bound both the net loss and each line's loss, so at or below $156,500
- * neither test is met and nothing is limited.
- */
-export const FORM_461_NOT_NEEDED_UP_TO = 156_500;
-
 const positiveTotal = (items: PassThroughItem[]) =>
   items.reduce((total, item) => total + Math.abs(item.amount ?? 0), 0);
+
+/* The business losses of the K-1s a stage is given, added up (positive). */
+export const k1BusinessLosses = (entities: ReadonlyArray<EntityItems>) =>
+  entities.reduce((total, entry) => total + positiveTotal(activityLosses(entry.items)), 0);
 
 /*
  * Excess business loss (irs-1120sk1-inst-2025::sec::excess-business-loss-limitations::b01):
  * only a business loss is limited, on Form 461, and the limit does not change
  * Schedule E (irs-1040se-inst-2025::sec::special-rules-that-limit-losses::b01).
  * It is figured with every business on the return, so the stage adds every
- * K-1's business losses and the return's other ones (context). With no K-1
- * business loss, or a bound at most FORM_461_NOT_NEEDED_UP_TO, nothing is
- * limited; above it Form 461 is needed, which is not modeled.
+ * K-1's business losses and the return's other ones (context), without any
+ * income. At or below the threshold for the filing status no loss can be
+ * limited and the items pass in full (excessBusinessLoss.ts); whether Form
+ * 461 must still be attached is its resolver's question. Above the threshold
+ * the limit needs the income side and Form 461's rules, which are not modeled.
  */
 export const excessBusinessLossLimit: LimitStage = (entities, context) => {
-  const k1Losses = entities.reduce(
-    (total, entry) => total + positiveTotal(activityLosses(entry.items)),
-    0,
-  );
+  const k1Losses = k1BusinessLosses(entities);
   const decide = ({ entity, items }: EntityItems): StageOutcome => {
     const limited = activityLosses(items);
     if (limited.length === 0) return passAll(items);
@@ -309,11 +295,12 @@ export const excessBusinessLossLimit: LimitStage = (entities, context) => {
       );
     }
     if (other.unknownKeys.length > 0) return { kind: "waiting", factKeys: other.unknownKeys };
-    if (k1Losses + other.amount <= FORM_461_NOT_NEEDED_UP_TO) return passAll(items);
+    if (noLossCanBeLimited(k1Losses, other, context.filingStatus)) return passAll(items);
+    const threshold = excessBusinessLossThreshold(context.filingStatus);
     return unsupportedFor(
       entity,
       limited,
-      `the return's business losses can be more than $${FORM_461_NOT_NEEDED_UP_TO}, so the excess business loss limit (Form 461) may apply, which is not modeled for a K-1.`,
+      `the return's business losses can be more than the $${threshold} threshold, so the excess business loss limit (Form 461) may apply, which is not modeled for a K-1.`,
     );
   };
   return new Map(entities.map((entry) => [entry.entity.key, decide(entry)]));
@@ -340,15 +327,19 @@ export type LimitedEntity =
 type Carried = Record<LimitName, PassThroughItem[]>;
 const NO_CARRY = (): Carried => ({ basis: [], atRisk: [], passive: [], excessBusinessLoss: [] });
 
-/* Runs the stages in order; an entity that waits or is unsupported leaves the pipeline there. */
+/*
+ * Runs the stages in order (all of them unless told otherwise); an entity that
+ * waits or is unsupported leaves the pipeline there.
+ */
 export function applyLossLimits(
   entities: ReadonlyArray<PassThroughEntity>,
   context: LimitContext,
+  stages: ReadonlyArray<readonly [LimitName, LimitStage]> = LIMIT_STAGES,
 ): LimitedEntity[] {
   const stopped = new Map<string, LimitedEntity>();
   const carried = new Map(entities.map((entity) => [entity.key, NO_CARRY()]));
   let current: EntityItems[] = entities.map((entity) => ({ entity, items: entity.items }));
-  for (const [name, stage] of LIMIT_STAGES) {
+  for (const [name, stage] of stages) {
     const outcomes = stage(current, context);
     current = current.flatMap(({ entity }) => {
       const outcome = outcomes.get(entity.key) ?? passAll([]);
@@ -375,4 +366,19 @@ export function applyLossLimits(
         carried: carried.get(entity.key) ?? NO_CARRY(),
       },
   );
+}
+
+/*
+ * The K-1 business losses as they reach the excess business loss stage (after
+ * basis, at-risk and passive), for Form 461's resolver.
+ */
+export function businessLossesBeforeExcessBusinessLoss(
+  entities: ReadonlyArray<PassThroughEntity>,
+  context: LimitContext,
+): number {
+  const earlier = LIMIT_STAGES.filter(([name]) => name !== "excessBusinessLoss");
+  const reached = applyLossLimits(entities, context, earlier).flatMap((limited) =>
+    limited.kind === "allowed" ? [{ entity: limited.entity, items: limited.allowed }] : [],
+  );
+  return k1BusinessLosses(reached);
 }

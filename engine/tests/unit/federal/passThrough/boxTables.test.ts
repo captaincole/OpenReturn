@@ -55,7 +55,7 @@ function entityFor(form: K1Form, row: BoxRow, amount: number): PassThroughEntity
 
 const CONTEXT = {
   filingStatus: "single" as const,
-  otherBusinessLosses: { amount: 0, unknownKeys: [] },
+  otherBusinessLosses: { scheduleCLosses: 0, rentalLosses: 0, unknownKeys: [] },
 };
 
 const gapInfo = (entity: PassThroughEntity) => ({
