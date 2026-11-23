@@ -1,6 +1,7 @@
 import type { RentalFactValue } from "../../facts/index.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Form1040FilingInfo } from "../1040/filingInfo.js";
+import type { PassThroughEntity } from "../passThrough/items.js";
 
 /* Part I has three columns; a fourth property needs a second Schedule E (not modeled). */
 export type PropertyColumn = "a" | "b" | "c";
@@ -27,4 +28,11 @@ export interface ScheduleEFilingInfo
   rentalFiled1099s?: boolean;
   /* Line 43 and Form 8582: the taxpayer or spouse qualified as a real estate professional. */
   realEstateProfessional?: boolean;
+  /* Part I is in use: a rental or royalty fact is on the return or waits (line 41 then waits on line 26). */
+  partIInUse?: boolean;
+  /*
+   * Parts II and III: the K-1s on this return, in fact order (passThrough/items.ts).
+   * Part II rows take the S corporations and partnerships; Part III the estates and trusts.
+   */
+  passThroughEntities?: PassThroughEntity[];
 }

@@ -34,6 +34,7 @@ import {
 } from "../../resolverInputs.js";
 import { largestSavingsBondExclusion, savingsBondExclusionScope } from "../8815/resolveInfo.js";
 import { resolve8889Info } from "../8889/resolveInfo.js";
+import { passThroughLossFloor } from "../passThrough/items.js";
 import { booleanFact, isPassiveActivity, spousePropertiesOnReturn } from "../rentals/passive.js";
 import { SECTION_501C18D_CODE } from "../schedule-1/answers.js";
 import { resolveSchedule8812Info } from "../schedule-8812/resolveInfo.js";
@@ -185,8 +186,8 @@ const personalUseOpen = (value: RentalFactValue) =>
   value.propertyType !== "royalties" && value.personalUseDays !== 0;
 
 /*
- * Schedule 1 line 5's least amount: Schedule E line 41, which is line 26 (the
- * engine fills no Part II–IV line). Each property adds at least its line 21
+ * Schedule 1 line 5's least amount from Part I: Schedule E line 26 (agiFloor
+ * adds the K-1s of Part II). Each property adds at least its line 21
  * loss (a profit counts as 0) less its prior-year unallowed loss, the most
  * Form 8582 can free with it; the at-risk and passive rules only shrink a loss.
  * Every property counts, a spouse's on a separate return too: a share of a
@@ -223,7 +224,19 @@ export function agiFloor(inputs: ResolverInputs, joint: boolean): number | undef
   if (businesses === undefined || rentals === undefined || hsa === undefined) return undefined;
   const { line1a, line2b, line3b } = incomeLines(inputs);
   const adjustments = statedAdjustmentsCeiling(inputs);
-  return sum(line1a, line2b, line3b, capitalFloor(inputs), businesses, rentals, -hsa, -adjustments);
+  // MANUAL EDIT: a K-1's losses, deductions and carried losses, as if all were allowed (passThrough/items.ts).
+  const k1s = passThroughLossFloor(inputs.facts);
+  return sum(
+    line1a,
+    line2b,
+    line3b,
+    capitalFloor(inputs),
+    businesses,
+    rentals,
+    k1s,
+    -hsa,
+    -adjustments,
+  );
 }
 
 /*

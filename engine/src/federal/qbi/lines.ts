@@ -144,8 +144,10 @@ export function rentalQbi(
 }
 
 /*
- * One trade or business's QBI, unrounded: a Schedule C business's (businessQbi)
- * or a QBI rental's (rentalQbi). Undefined while it waits.
+ * One trade or business's QBI, unrounded: a Schedule C business's (businessQbi),
+ * a QBI rental's (rentalQbi), or a K-1's statement amount: the statement gives
+ * the QBI, and an S corporation's income bears no SE tax
+ * (irs-1120sk1-inst-2025::sec::general-instructions::b01). Undefined while it waits.
  */
 export function qbiOf(
   form: Record<string, unknown>,
@@ -153,5 +155,6 @@ export function qbiOf(
   business: QbiBusiness,
 ): number | undefined {
   if (business.kind === "business") return businessQbi(form, info, business);
+  if (business.kind === "passThrough") return business.statementQbi;
   return business.scheduleEColumn && rentalQbi(form, info, business.scheduleEColumn);
 }

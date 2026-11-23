@@ -1,6 +1,6 @@
 /*
- * Part I lines 22–26 and the page 2 summary, lines 41 and 43. Hand-written
- * (MANUAL EDIT): the bindings spread totalBindings.
+ * Part I lines 22–26 and the page 2 summary, line 43 (line 41 is in
+ * partII.ts). Hand-written (MANUAL EDIT): the bindings spread totalBindings.
  */
 
 import type { FormAccessor } from "../../defineForm.js";
@@ -163,19 +163,7 @@ export function totalBindings(): PartIBindings {
       if (line24 === undefined || line25 === undefined) return undefined;
       return sum(line24) - sum(line25);
     },
-    // Lines 32, 37, 39 and 40 are unsupported (no facts) and add nothing.
-    "1.line.41_total_income_or_loss": (form) => {
-      const line26 = numberOrBlank(form["0.line.26_total_income_or_loss"]);
-      return line26 === undefined
-        ? undefined
-        : sum(
-            line26,
-            form["1.line.32_total_partnership_s_corp_income"],
-            form["1.line.37_total_estate_trust_income"],
-            form["1.line.39_remic_income_combined"],
-            form["1.line.40_net_farm_rental_income"],
-          );
-    },
+    // Line 41 is in partII.ts: it adds Part II and reports every K-1 gap.
     "1.line.43_real_estate_professional_reconciliation": professionalReconciliation,
   };
   for (const column of COLUMNS) {

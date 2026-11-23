@@ -9,6 +9,7 @@ import { SSN } from "../../values.js";
 import { namesOnReturn } from "../returnNames.js";
 import type { PropertyColumn, ScheduleEFilingInfo } from "./filingInfo.js";
 import { otherExpenseDescription, partIColumnBindings } from "./lines.js";
+import { partIIBindings } from "./partII.js";
 import { totalBindings } from "./totals.js";
 import type { ScheduleE } from "./types.js";
 import { UNSUPPORTED } from "./unsupported.js";
@@ -110,8 +111,10 @@ export function register(): void {
       ...partIColumnBindings("b"),
       ...partIColumnBindings("c"),
       "0.line.19_other_description": (_, info) => otherExpenseDescription(info),
-      // MANUAL EDIT: lines 22–26, 41 and 43 (totals.ts).
+      // MANUAL EDIT: lines 22–26 and 43 (totals.ts).
       ...totalBindings(),
+      // MANUAL EDIT: Part II, lines 27–32, and line 41 (partII.ts).
+      ...partIIBindings(),
       "1.header.name": (_, info) => namesOnReturn(info),
       "1.header.ssn": (_, info) => info.taxpayerSSN,
     },
@@ -120,7 +123,7 @@ export function register(): void {
       "0.header.ssn": (value) => SSN.format(value as Parameters<typeof SSN.format>[0]),
       "1.header.ssn": (value) => SSN.format(value as Parameters<typeof SSN.format>[0]),
     },
-    // MANUAL EDIT: Parts II–IV, lines 40 and 42 (unsupported.ts).
+    // MANUAL EDIT: Parts III and IV, lines 40 and 42 (unsupported.ts).
     unsupported: UNSUPPORTED,
   });
 }

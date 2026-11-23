@@ -86,6 +86,10 @@ Documents: W-2, 1099-INT, 1099-DIV, 1099-B, 1099-DA, 1099-MISC, 1099-R,
 unemployment compensation and box 4), 1095-A, a W-2 you issued to a household employee
 (Schedule H, without FUTA tax), and invoices for home energy improvements
 (Form 5695 Part II). The last two have one unverified test scenario.
+A Schedule K-1 (Form 1120-S) works for box 1 income from an S corporation
+you work in, with its box 17 code V statement (Form 8995); every other K-1
+box, and every partnership or trust K-1, shows on Schedule E line 41 as not
+supported yet.
 A business you run yourself is answers, not a document: receipts and
 expenses by Schedule C line, vehicles at the standard mileage rate, a
 home office by the simplified method or, in a rented home, by Form 8829,

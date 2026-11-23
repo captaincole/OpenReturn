@@ -44,6 +44,8 @@ import {
   isHouseholdEmployeeFact,
   isHsaDistributionFact,
   isInterestFact,
+  isK1FactKey,
+  isK1HoldingFactKey,
   isMarketplaceCoverageFactKey,
   isMiscIncomeFact,
   isNonemployeeCompensationFactKey,
@@ -94,6 +96,9 @@ const DOCUMENT_FACTS = [
   (fact: TaxFactRow) => isDependentCareProviderFactKey(fact.key),
   (fact: TaxFactRow) => isDependentCareQualifyingPersonFactKey(fact.key),
   (fact: TaxFactRow) => isStudentLoanInterestFactKey(fact.key),
+  // A K-1 is read whole; an item with no route shows on Schedule E line 41 as not supported.
+  (fact: TaxFactRow) => isK1FactKey(fact.key),
+  (fact: TaxFactRow) => isK1HoldingFactKey(fact.key),
 ];
 
 /* support.test.ts fails when a resolver reads a key that is missing here. */

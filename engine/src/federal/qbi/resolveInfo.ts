@@ -6,6 +6,9 @@ import {
 } from "../../facts/index.js";
 import { sum } from "../../money.js";
 import { factsInCategory, filingStatusOf, num, type ResolverInputs } from "../../resolverInputs.js";
+import { passThroughEntitiesOnReturn } from "../passThrough/items.js";
+import { routeEntities } from "../passThrough/routing.js";
+import { spousePropertiesOnReturn } from "../rentals/passive.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
 import { resolveScheduleSEInfo } from "../schedule-se/resolveInfo.js";
@@ -52,6 +55,37 @@ function qbiRentals(inputs: ResolverInputs): QbiBusiness[] {
       w2WagesPaid: property.value.w2WagesPaid,
       qualifiedPropertyUbia: property.value.qualifiedPropertyUbia,
     }));
+}
+
+/*
+ * MANUAL EDIT: a K-1 with a section 199A statement is one more trade or business
+ * (irs-1120sk1-inst-2025::sec::box-17-other-information::b11, ::b12). Its QBI,
+ * W-2 wages, UBIA and specified service answer are the statement's. A K-1 with
+ * no statement adds nothing. Its QBI waits while the K-1 waits, and is a gap
+ * while any of its items has no route: the amounts on the statement may
+ * include items not allowed this year (::b12).
+ */
+function qbiPassThroughs(inputs: ResolverInputs): QbiBusiness[] {
+  const status = filingStatusOf(inputs);
+  const { entities } = passThroughEntitiesOnReturn(inputs.facts, spousePropertiesOnReturn(status));
+  const withStatement = entities.filter((entity) => entity.k1.section199A !== undefined);
+  return routeEntities(withStatement, { filingStatus: status }).map((routed): QbiBusiness => {
+    const { entity } = routed;
+    const statement = entity.k1.section199A;
+    return {
+      factKey: entity.key,
+      kind: "passThrough",
+      owner: entity.holding?.owner ?? "taxpayer",
+      name: statement?.businessName ?? entity.name,
+      ein: entity.ein,
+      specifiedService: statement?.specifiedService,
+      statementQbi: routed.kind === "routed" ? statement?.qualifiedBusinessIncome : undefined,
+      ownersOnlyBusiness: false,
+      qbiGap: routed.kind === "unsupported" ? routed.reasons.join(" ") : undefined,
+      w2WagesPaid: statement?.w2Wages,
+      qualifiedPropertyUbia: statement?.qualifiedPropertyUbia,
+    };
+  });
 }
 
 /* Rental properties whose QBI answer is missing: Cade asks for the property again. */
@@ -116,6 +150,7 @@ export function qbiBusinesses(inputs: ResolverInputs): {
         w2WagesPaid: value.w2WagesPaid,
         qualifiedPropertyUbia: value.qualifiedPropertyUbia,
       })),
+      ...qbiPassThroughs(inputs),
     ],
     malformedKeys,
   };
