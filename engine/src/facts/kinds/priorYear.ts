@@ -9,6 +9,19 @@ export const PRIOR_YEAR_KEYS = {
   federalTax: "prior_year.federal_tax",
   caTax: "prior_year.ca_tax",
   caBalancePaidThisYear: "prior_year.ca_balance_paid_this_year",
+  /*
+   * Form 1116 line 10: unused foreign tax from earlier years that may be carried
+   * to 2025 in the category, a number (0 when none). It is Schedule B (Form 1116)
+   * line 3, column (xiv) (irs-1116-inst-2025::sec::part-iii-figuring-the-credit::b01).
+   */
+  foreignTaxCarryoverPassive: "prior_year.foreign_tax_carryover_passive",
+  foreignTaxCarryoverGeneral: "prior_year.foreign_tax_carryover_general",
+  /*
+   * Form 1116 line 16: true when an earlier year left an overall foreign loss, a
+   * separate limitation loss or an overall domestic loss account with a balance
+   * (irs-1116-inst-2025::sec::line-16::b06–b13). The engine cannot recapture one.
+   */
+  foreignLossAccounts: "prior_year.foreign_loss_accounts",
 } as const;
 
 export interface PriorYear {

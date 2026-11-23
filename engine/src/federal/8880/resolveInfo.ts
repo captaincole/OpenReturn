@@ -1,14 +1,9 @@
-import {
-  isDividendFactKey,
-  isInterestFactKey,
-  makeSaversCreditFactKey,
-} from "../../facts/index.js";
+import { makeSaversCreditFactKey } from "../../facts/index.js";
 import { sum } from "../../money.js";
 import {
   filingStatusOf,
   missingInputs,
   resolveMustFile,
-  sumInvestmentBox,
   type ResolverInputs,
 } from "../../resolverInputs.js";
 import { agiFloor } from "../schedule-eic/possible.js";
@@ -112,10 +107,5 @@ export function resolve8880Info(inputs: ResolverInputs): Form8880FilingInfo {
       you: columnOf(you, spouse, blocked),
       spouse: spouse === undefined ? { kind: "blank" } : columnOf(spouse, you, blocked),
     },
-    form8880ForeignTaxPaid:
-      sum(
-        sumInvestmentBox(inputs, "box7", isDividendFactKey),
-        sumInvestmentBox(inputs, "box6", isInterestFactKey),
-      ) > 0,
   };
 }

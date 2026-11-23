@@ -31,6 +31,7 @@ export * from "./kinds/educationSavingsBonds.js";
 export * from "./kinds/educatorExpenses.js";
 export * from "./kinds/elderlyOrDisabledCredit.js";
 export * from "./kinds/employeeBusinessExpenses.js";
+export * from "./kinds/foreignTax.js";
 export * from "./kinds/gamblingWinnings.js";
 export * from "./kinds/governmentPayments.js";
 export * from "./kinds/headOfHousehold.js";

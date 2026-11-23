@@ -270,17 +270,29 @@ describe("Form 8880 stops and gaps", () => {
     expect(run.line("0.line.10_line_7_times_line_9")).toBeUndefined();
   });
 
-  it("foreign tax paid makes the worksheet a gap, and Schedule 3 line 4 too", () => {
+  it("foreign tax on a 1099 (the election): the worksheet subtracts Schedule 3 line 1", () => {
     const dividend = row("investment_income", makeDividendFactKey("acme-brokerage"), {
       payerName: "Acme Brokerage",
       box1a: 10,
       box7: 1,
     });
     const run = evaluate(factsWith({}, [dividend]));
+    expect(run.value("schedule-3", "0.line.1")).toBe(1);
+    expect(run.line("1.credit_limit_worksheet.2_schedule_3_credits_total")).toBeGreaterThanOrEqual(
+      1,
+    );
+    expect(isGap(run.field("form-8880", "0.line.12_retirement_savings_credit"))).toBe(false);
+  });
+
+  it("a Form 1116 gap makes the worksheet a gap, and Schedule 3 line 4 too", () => {
+    const run = evaluate(base.facts, [
+      ...base.decisions,
+      decision("decisions.scope.must_file_1116", true),
+    ]);
+    expect(isGap(run.field("schedule-3", "0.line.1"))).toBe(true);
     expect(
       isGap(run.field("form-8880", "1.credit_limit_worksheet.2_schedule_3_credits_total")),
     ).toBe(true);
-    expect(isGap(run.field("form-8880", "0.line.12_retirement_savings_credit"))).toBe(true);
     expect(isGap(run.field("schedule-3", "0.line.4"))).toBe(true);
   });
 

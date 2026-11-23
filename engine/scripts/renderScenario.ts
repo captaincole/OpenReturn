@@ -101,7 +101,7 @@ async function main() {
     );
     const { pdfBytes, warnings, copies } = values.golden
       ? await renderGolden(evaluated, catalog, blankPdfBytes)
-      : await renderFormCopies({ spec, form: evaluated, ctx, catalog, blankPdfBytes });
+      : await renderFormCopies({ spec, form: evaluated, ctx, catalog, blankPdfBytes, forms });
 
     const outName = scenarioPdfName(
       scenario.name,

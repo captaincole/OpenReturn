@@ -5,6 +5,7 @@ import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
+import { amtGap } from "../6251/foreignTaxCredit.js";
 import { childTaxOnLine16 } from "../8615/form.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import { line16WithForm8814, line3a } from "./form8814Lines.js";
@@ -70,14 +71,20 @@ function withForm4972(
 export const line16FromForm4972 = (_: unknown, info: Form1040FilingInfo) =>
   form4972Files(info) && (info.form4972Tax ?? 0) > 0 ? true : undefined;
 
-// MANUAL EDIT: line 17 = Schedule 2 line 3 (AMT + excess APTC); blank when Schedule 2 is not filed.
-export function line17(form: Form) {
+/*
+ * MANUAL EDIT: line 17 = Schedule 2 line 3 (AMT + excess APTC); blank when Schedule 2 is not filed.
+ * A gap in the AMT (Form 6251 line 11) is a gap here and on line 18, so the
+ * total tax never prints without it.
+ */
+export function line17(form: Form, info: Form1040FilingInfo) {
   const value = form["schedule-2.0.line.3_total_lines_1z_and_2"];
-  return typeof value === "number" ? value : undefined;
+  return typeof value === "number" ? value : amtGap(form, info);
 }
 
-export const line18 = (form: Form) =>
-  form["line.16"] === undefined ? undefined : sum(form["line.16"], form["line.17"]);
+export const line18 = (form: Form, info: Form1040FilingInfo) =>
+  form["line.16"] === undefined
+    ? undefined
+    : (amtGap(form, info) ?? sum(form["line.16"], form["line.17"]));
 
 // MANUAL EDIT: line 19 = Schedule 8812 line 14; blank when Schedule 8812 is not filed.
 export function line19(form: Form) {
