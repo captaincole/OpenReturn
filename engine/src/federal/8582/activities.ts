@@ -21,8 +21,10 @@ export const ROWS_PER_PART = 5;
 export type ActivityPart = "part4" | "part5";
 
 export interface PassiveActivity {
+  /* The property's fact key, or the K-1's. */
   factKey: string;
-  column: PropertyColumn;
+  /* The Schedule E Part I column; undefined for a K-1 activity (Schedule E line 28). */
+  column?: PropertyColumn;
   part: ActivityPart;
   name: string;
   /* Column (a): current year net income; 0 when none. */
@@ -37,16 +39,33 @@ export interface PassiveActivity {
 export type PassiveActivities = Record<ActivityPart, PassiveActivity[]>;
 
 /*
+ * The Part V rows of the K-1s (irs-8582-inst-2025::sec::part-v::b01), after
+ * Schedule E's properties. settled is false while a K-1 that may be passive
+ * waits or is unsupported before the passive limit: Part V waits on it.
+ */
+export interface PassiveK1Activities {
+  rows: PassiveActivity[];
+  settled: boolean;
+}
+
+/*
  * The same, with a part undefined while a property that could add a row to it
  * is undecided or its amounts wait: the part's row order and totals (Part I
  * lines 1 or 2) depend on it. The other part's rows still print.
  */
 export type ActivitiesByPart = Partial<PassiveActivities>;
 
-/* What the parts read: Schedule E's properties and the MFS caution's answers. */
+/*
+ * What the parts read: Schedule E's properties, the MFS caution's answers, and
+ * the K-1 activities (passThrough/form8582Rows.ts).
+ */
 export type ActivitiesInfo = Pick<
   Form8582FilingInfo,
-  "rentalProperties" | "rentalPropertiesOverflow" | "filingStatus" | "livedApartFromSpouseAllYear"
+  | "rentalProperties"
+  | "rentalPropertiesOverflow"
+  | "filingStatus"
+  | "livedApartFromSpouseAllYear"
+  | "passiveK1Activities"
 >;
 
 /* Schedule E line 21 for a column: signed whole dollars; not a number while blocked. */
@@ -180,6 +199,9 @@ export function activitiesByPart(
     }
     for (const row of rowsOf(property, placement, net)) rows[row.part].push(row);
   }
+  const k1 = info.passiveK1Activities;
+  if (k1 && !k1.settled) waiting.add("part5");
+  rows.part5.push(...(k1?.rows ?? []));
   const settled = (part: ActivityPart) =>
     waiting.has(part) || rows[part].length > ROWS_PER_PART ? undefined : rows[part];
   return { part4: settled("part4"), part5: settled("part5") };

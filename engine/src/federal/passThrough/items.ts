@@ -60,6 +60,13 @@ export interface PassThroughItem {
    * for that item.
    */
   fromPriorYear?: boolean;
+  /*
+   * A loss the passive limit held back in an earlier year (the holding's
+   * carriedLosses.passive), allowed this year by the passive stage;
+   * fromPriorYear is true too. It is not a basis loss: no "PYA" row of its own
+   * while Form 8582 reports it.
+   */
+  passiveCarryover?: boolean;
 }
 
 /* An item as a reason names it: its type and the box it came from. */
@@ -89,15 +96,20 @@ export interface PassThroughEntity {
   priorYearItems: PassThroughItem[];
 }
 
+type CarriedBasisItem = {
+  type: ItemType;
+  box: string;
+  code?: string;
+  detail?: string;
+  sign: 1 | -1;
+};
+
 /*
  * Each carried basis loss of the holding as the item the K-1 box would give
  * (Schedule K-1 (Form 1120-S) boxes 1 to 12 and 16 code F): a loss negative, a
  * deduction positive, as the K-1 prints them.
  */
-const CARRIED_BASIS_ITEMS: Record<
-  keyof K1CarriedBasisLosses,
-  { type: ItemType; box: string; code?: string; detail?: string; sign: 1 | -1 }
-> = {
+const S_CORPORATION_CARRIED: Record<keyof K1CarriedBasisLosses, CarriedBasisItem> = {
   ordinaryBusinessLoss: { type: "ordinary_business_income", box: "1", sign: -1 },
   netRentalRealEstateLoss: { type: "net_rental_real_estate_income", box: "2", sign: -1 },
   otherNetRentalLoss: { type: "other_net_rental_income", box: "3", sign: -1 },
@@ -126,15 +138,63 @@ const CARRIED_BASIS_ITEMS: Record<
   foreignTaxes: { type: "foreign_tax_paid", box: "16", code: "F", sign: 1 },
 };
 
+/*
+ * The same for a partner (Schedule K-1 (Form 1065) boxes 1 to 13 and 21): the
+ * rows of the Partner's Basis Worksheet Part II line 15, column (B)
+ * (irs-1065k1-inst-2025::sec::line-14::b03).
+ */
+const PARTNERSHIP_CARRIED: Record<keyof K1CarriedBasisLosses, CarriedBasisItem> = {
+  ordinaryBusinessLoss: { type: "ordinary_business_income", box: "1", sign: -1 },
+  netRentalRealEstateLoss: { type: "net_rental_real_estate_income", box: "2", sign: -1 },
+  otherNetRentalLoss: { type: "other_net_rental_income", box: "3", sign: -1 },
+  netShortTermCapitalLoss: { type: "net_short_term_capital_gain", box: "8", sign: -1 },
+  netLongTermCapitalLoss: { type: "net_long_term_capital_gain", box: "9a", sign: -1 },
+  netSection1231Loss: { type: "net_section_1231_gain", box: "10", sign: -1 },
+  otherLoss: { type: "other_income", box: "11", code: "ZZ", detail: "other", sign: -1 },
+  section179Deduction: { type: "section_179_deduction", box: "12", sign: 1 },
+  cashCharitableContributions: {
+    type: "charitable_contribution",
+    box: "13",
+    code: "A",
+    detail: "cash_60",
+    sign: 1,
+  },
+  otherCharitableContributions: { type: "charitable_contribution", box: "13", sign: 1 },
+  investmentInterestExpense: { type: "investment_interest_expense", box: "13", code: "H", sign: 1 },
+  section59eExpenditures: {
+    type: "other_deduction",
+    box: "13",
+    code: "J",
+    detail: "section_59e_expenditures",
+    sign: 1,
+  },
+  otherDeductions: { type: "other_deduction", box: "13", code: "ZZ", detail: "other", sign: 1 },
+  foreignTaxes: { type: "foreign_tax_paid", box: "21", sign: 1 },
+};
+
+/* A beneficiary has no basis limit, so a trust K-1 carries no basis loss. */
+const CARRIED_BASIS_ITEMS: Partial<
+  Record<K1Form, Record<keyof K1CarriedBasisLosses, CarriedBasisItem>>
+> = {
+  "1120-S": S_CORPORATION_CARRIED,
+  "1065": PARTNERSHIP_CARRIED,
+};
+
 /* A holding with any basis loss carried from an earlier year. */
 export function hasCarriedBasisLoss(holding: K1HoldingFactValue | undefined): boolean {
   return Object.values(holding?.carriedLosses?.basis ?? {}).some((amount) => (amount ?? 0) > 0);
 }
 
 /* The holding's carried basis losses as items, in Form 7203 Part III order. */
-export function priorYearItemsOf(key: string, holding: K1HoldingFactValue | undefined) {
+export function priorYearItemsOf(
+  key: string,
+  holding: K1HoldingFactValue | undefined,
+  form: K1Form = "1120-S",
+) {
   const carried = holding?.carriedLosses?.basis ?? {};
-  return Object.entries(CARRIED_BASIS_ITEMS).flatMap(([field, row]): PassThroughItem[] => {
+  const rows: Partial<Record<string, CarriedBasisItem>> = CARRIED_BASIS_ITEMS[form] ?? {};
+  return Object.entries(rows).flatMap(([field, row]): PassThroughItem[] => {
+    if (row === undefined) return [];
     const amount = carried[field as keyof K1CarriedBasisLosses] ?? 0;
     if (amount <= 0) return [];
     const { sign, ...where } = row;
@@ -210,7 +270,7 @@ export function passThroughEntitiesOnReturn(
       k1: value,
       holding,
       items: itemsOf(key, value),
-      priorYearItems: value.form === "1120-S" ? priorYearItemsOf(key, holding) : [],
+      priorYearItems: priorYearItemsOf(key, holding, value.form),
     };
   });
   const offReturn = (entity: PassThroughEntity) => !joint && entity.holding?.owner === "spouse";

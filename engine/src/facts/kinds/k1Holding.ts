@@ -6,9 +6,10 @@
  * (irs-1120sk1-inst-2025::sec::additional-information::b01).
  *
  * The limits read owner, materiallyParticipated, the Form 7203 fields (basis
- * at the start, contributions, loans, carried basis losses), allInvestmentAtRisk,
- * carriedLosses and disposedOfEntirely. The other fields are here so later work
- * has one place to add rules: at-risk (Form 6198), passive (Form 8582).
+ * at the start, contributions, loans, carried basis losses), the partner's
+ * basis at the start, allInvestmentAtRisk, the passive answers (active
+ * participation, real estate professional), carriedLosses, disposedOfEntirely
+ * and gainOnDisposition. stockAcquiredAs is here for Form 7203's header.
  */
 
 type FactRow = { key: string; value: unknown; category: string };
@@ -73,12 +74,15 @@ export interface K1HoldingFactValue {
   materiallyParticipated?: boolean;
   /*
    * The owner actively participated in the entity's rental real estate, for
-   * the $25,000 special allowance (::b09, ::b10). Read by Form 8582 later.
+   * the $25,000 special allowance (::b09, ::b10): Form 8582 Part IV. A limited
+   * partner cannot (irs-1065k1-inst-2025::sec::passive-activity-limitations::b16),
+   * so a partnership K-1 that names a limited partner does not ask.
    */
   activelyParticipated?: boolean;
   /*
    * The owner, or on a joint return the spouse, was a real estate professional
-   * and materially participated in the entity's rental real estate (::b02). Read later.
+   * and materially participated in the entity's rental real estate (::b02):
+   * the rental is then nonpassive. Asked for a partnership K-1 with a rental item.
    */
   realEstateProfessional?: boolean;
   /*
@@ -87,7 +91,12 @@ export interface K1HoldingFactValue {
    * deduction, a distribution or a carried basis loss.
    */
   stockBasisAtStart?: number;
-  /* Capital contributed or stock bought during the year (Form 7203 line 2); absent means none. */
+  /*
+   * Capital contributed or stock bought during the year (Form 7203 line 2), or
+   * a partnership interest bought and money or property contributed (the
+   * Partner's Basis Worksheet line 2, irs-1065k1-inst-2025::sec::line-2::b01);
+   * absent means none.
+   */
   capitalContributions?: number;
   /*
    * The balance of the shareholder's loans to the corporation at the start of
@@ -104,7 +113,12 @@ export interface K1HoldingFactValue {
   debtBasisAtStart?: number;
   /* How the stock was acquired (Form 7203 item D). */
   stockAcquiredAs?: "original_shareholder" | "purchased" | "inherited" | "gift" | "other";
-  /* Adjusted basis of the partnership interest at the start of the year (the Partner's Basis Worksheet line 1). Read later. */
+  /*
+   * Adjusted basis of the partnership interest at the start of the year, its
+   * share of liabilities included: the Partner's Basis Worksheet line 1, last
+   * year's line 18 (irs-1065k1-inst-2025::sec::line-1::b01). Asked when the
+   * K-1 has a loss, a deduction, a distribution or a carried basis loss.
+   */
   partnershipBasisAtStart?: number;
   /*
    * All of the investment in the activity is at risk (Form 6198 not needed). The
@@ -123,10 +137,20 @@ export interface K1HoldingFactValue {
   carriedQualifiedBusinessLoss?: number;
   /*
    * The owner disposed of the entire interest this year: a sale of S corporation
-   * stock or of a partnership interest, or a trust that ended. Read later
-   * (irs-1120sk1-inst-2025::sec::sale-of-s-corporation-stock::b01).
+   * stock or of a partnership interest, or a trust that ended
+   * (irs-1120sk1-inst-2025::sec::sale-of-s-corporation-stock::b01). For a
+   * partnership it means a fully taxable disposition to an unrelated person,
+   * which releases the carried passive losses
+   * (irs-8582-inst-2025::sec::former-passive-activities::b02).
    */
   disposedOfEntirely?: boolean;
+  /*
+   * The gain (a loss negative) on that disposition, as the owner reports it on
+   * Form 8949: it decides whether the activity has an overall gain or loss
+   * (irs-8582-inst-2025::sec::reporting-an-entire-disposition-on-form-4797-or::b01).
+   * Asked for a partnership K-1 when disposedOfEntirely is true.
+   */
+  gainOnDisposition?: number;
 }
 
 const HOLDING_PREFIX = "k1.holding.";
@@ -149,6 +173,9 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
 
 const isOptionalAmount = (value: unknown): boolean =>
   value === undefined || (typeof value === "number" && Number.isFinite(value) && value >= 0);
+
+const isOptionalSigned = (value: unknown): boolean =>
+  value === undefined || (typeof value === "number" && Number.isFinite(value));
 
 const isOptionalBoolean = (value: unknown): boolean =>
   value === undefined || typeof value === "boolean";
@@ -218,6 +245,7 @@ function isHolding(value: unknown): value is K1HoldingFactValue {
   return (
     (value.owner === undefined || value.owner === "taxpayer" || value.owner === "spouse") &&
     AMOUNT_FIELDS.every((field) => isOptionalAmount(value[field])) &&
+    isOptionalSigned(value.gainOnDisposition) &&
     BOOLEAN_FIELDS.every((field) => isOptionalBoolean(value[field])) &&
     ACQUIRED_AS.includes(value.stockAcquiredAs) &&
     isCarriedLosses(value.carriedLosses)

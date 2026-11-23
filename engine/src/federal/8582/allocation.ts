@@ -28,10 +28,10 @@ export type FieldReader = (fieldId: string) => unknown;
 const RATIO_DIGITS = 5;
 const RATIO_SCALE = 100000;
 
-/* One activity of Part VII or VIII: Schedule E column and name. */
+/* One activity of Part VII or VIII: Schedule E column (none for a K-1) and name. */
 interface ActivityRef {
   factKey: string;
-  column: PropertyColumn;
+  column?: PropertyColumn;
   name: string;
 }
 

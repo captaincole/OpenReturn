@@ -121,7 +121,12 @@ export interface PartnershipK1FactValue extends K1Entity {
   /* Item J: the interest decreased by a sale or an exchange this year (::item-j::b01). */
   decreasedBySale?: boolean;
   decreasedByExchange?: boolean;
-  /* Item K1, at the end of the year (::item-k1::b01). */
+  /*
+   * Item K1, at the beginning and the end of the year (::item-k1::b01): the
+   * Partner's Basis Worksheet lines 3b and 3a (irs-1065k1-inst-2025::sec::line-3a::b01,
+   * ::line-3b::b01). Both absent: the K-1 shows no share of liabilities.
+   */
+  liabilitiesAtStart?: PartnerLiabilities;
   liabilitiesAtEnd?: PartnerLiabilities;
   /* Item K3: the partner's share of liabilities is subject to guarantees (::item-k3::b01). */
   liabilitiesGuaranteed?: boolean;

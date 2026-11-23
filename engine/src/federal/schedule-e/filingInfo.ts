@@ -1,6 +1,7 @@
 import type { RentalFactValue } from "../../facts/index.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Form1040FilingInfo } from "../1040/filingInfo.js";
+import type { PassiveK1Activities } from "../8582/activities.js";
 import type { PassThroughEntity } from "../passThrough/items.js";
 import type { LimitContext } from "../passThrough/limits.js";
 
@@ -38,4 +39,9 @@ export interface ScheduleEFilingInfo
   passThroughEntities?: PassThroughEntity[];
   /* What the loss limits read besides the items (passThrough/receipts.ts, limitContextOf). */
   passThroughLimitContext?: LimitContext;
+  /*
+   * Form 8582 Part V's K-1 rows (passThrough/form8582Rows.ts); line 22 and Form
+   * 8582 read them with the properties. Undefined with no partnership K-1.
+   */
+  passiveK1Activities?: PassiveK1Activities;
 }

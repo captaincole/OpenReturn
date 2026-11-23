@@ -9,6 +9,7 @@ import { businessesOnReturn, rentalsOnReturn } from "../../facts/index.js";
 import { roundDollars, sum } from "../../money.js";
 import { filingStatusOf, type ResolverInputs } from "../../resolverInputs.js";
 import { unsupported, type Unsupported } from "../../types.js";
+import { passiveRentalsOf } from "../8582/rentalRows.js";
 import { spousePropertiesOnReturn } from "../rentals/passive.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { netIncomeOrLoss } from "../schedule-e/lines.js";
@@ -141,6 +142,7 @@ export function limitContextOf(inputs: ResolverInputs): LimitContext {
   return {
     filingStatus: filingStatusOf(inputs),
     otherBusinessLosses: otherBusinessLosses(inputs),
+    passiveRentals: passiveRentalsOf(inputs),
   };
 }
 
