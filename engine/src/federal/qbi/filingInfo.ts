@@ -6,8 +6,11 @@ import type { PropertyColumn, RentalProperty } from "../schedule-e/filingInfo.js
 /* One QBI trade or business on this return: a column of Parts I and II. */
 export interface QbiBusiness {
   factKey: string;
-  /* A Schedule C business, or a rental or royalty property that is a trade or business (Schedule E). */
-  kind: "business" | "rental";
+  /*
+   * A Schedule C business, a rental or royalty property that is a trade or
+   * business (Schedule E), or a K-1's section 199A statement (passThrough).
+   */
+  kind: "business" | "rental" | "passThrough";
   /* A rental's column on Schedule E Part I. */
   scheduleEColumn?: PropertyColumn;
   owner: "taxpayer" | "spouse";
@@ -17,6 +20,8 @@ export interface QbiBusiness {
   specifiedService?: boolean;
   /* Schedule C line 31; undefined while it is blank, and for a rental (Schedule E is read). */
   netProfit?: number;
+  /* A K-1's QBI as its section 199A statement gives it; undefined while the K-1 waits. */
+  statementQbi?: number;
   /* The owner's only business, so it carries all of the owner's Schedule SE line 13. */
   ownersOnlyBusiness: boolean;
   /* Schedule 1 line 16 (self-employed plan contributions) this business's QBI takes off, cents kept. */
@@ -32,7 +37,7 @@ export interface QbiBusiness {
 export interface QbiFilingInfo extends BaseFilingInfo {
   /** Form 8995 line 6, Form 8995-A line 28: 1099-DIV box 5 sum, cents kept. */
   qualifiedReitDividends?: number;
-  /* The QBI rentals, then the Schedule C businesses, in fact order; undefined with none. */
+  /* The QBI rentals, then the Schedule C businesses, then the K-1 statements, in fact order; undefined with none. */
   qbiBusinesses?: QbiBusiness[];
   /* Schedule SE must-file: false means no deductible SE tax. */
   qbiScheduleSEFiled?: boolean;

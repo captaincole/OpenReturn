@@ -8,6 +8,7 @@
 import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
 import type { Form1040FilingInfo } from "../1040/filingInfo.js";
+import type { ScheduleEFilingInfo } from "../schedule-e/filingInfo.js";
 import { earnedIncomeCredit, type EicOutcome } from "./credit.js";
 import { worksheet1 } from "./worksheet1.js";
 
@@ -32,7 +33,9 @@ export type EicOutcomeInfo = Pick<
   | "scheduleCNetProfit"
   | "rentalProperties"
   | "form8814Totals"
->;
+> &
+  // MANUAL EDIT: Worksheet 1 adds Schedule E's K-1s (worksheet1.ts).
+  Pick<ScheduleEFilingInfo, "passThroughEntities" | "partIInUse">;
 
 /*
  * Step 5 line 5 (irs-1040-inst-2025::sec::step-5::b01): line 1z, less Medicaid

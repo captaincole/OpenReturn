@@ -26,6 +26,7 @@ import {
 import { resolve4137Info } from "../4137/resolveInfo.js";
 import { line1Row } from "../6781/lines.js";
 import { form8814IncomeUpperBound } from "../8814/children.js";
+import { passThroughIncomeUpperBound } from "../passThrough/items.js";
 import { netReceipts, tentativeProfit } from "../schedule-c/lines.js";
 
 /* 1040 line 6b: at most 85% of social security benefits is taxable. */
@@ -37,7 +38,9 @@ const MAX_TAXABLE_SOCIAL_SECURITY = 0.85;
  * subtracts no adjustment (the SE tax deduction, HSA, IRA), and it counts a
  * business at line 29 (or line 3 plus line 6 while line 29 is open) and a sale
  * at proceeds less known basis. So it can file a Form 8960 that owes $0, but it
- * does not miss one. Income with no facts (rents, K-1s, alimony) is not counted.
+ * does not miss one. Income with no facts (rents, alimony) is not counted.
+ * MANUAL EDIT: a K-1's income items count at their amounts above 0
+ * (passThrough/items.ts).
  */
 export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
   const { businesses } = businessesOnReturn(inputs.facts, joint);
@@ -91,6 +94,7 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
     ),
     // A child's interest and dividends on Form 8814 (irs-8814-inst-2025::sec::parents-who-don-t-file-a-joint-return::b06).
     form8814IncomeUpperBound(inputs),
+    passThroughIncomeUpperBound(inputs.facts),
   );
 }
 

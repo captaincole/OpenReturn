@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { evaluateScenario, pendingInputs } from "../../src";
+import { isK1FactKey } from "../../src/facts";
 import type { AIDecisionRow, TaxFactRow } from "../../src/facts/rows";
 import { decisionsWithPreparerStyle } from "../helpers/preparer";
 import { loadScenarios } from "../scenarios/index";
@@ -11,7 +12,8 @@ import type { Scenario } from "../types";
  * Document facts are skipped: the scope decisions cover whether they exist.
  * A business fact (Schedule C), a dependent fact and a rental property fact
  * (Schedule E) are skipped too: each is the whole business, person or property,
- * and whether one exists is Cade's question.
+ * and whether one exists is Cade's question. A Schedule K-1 is a document; its
+ * holding fact (the owner's answers) is not, so dropping it must be reported.
  */
 const OPTIONAL: Array<[RegExp, string]> = [
   [/^decisions\.scope\.must_file_schedule_ca$/, "Schedule CA files with the 540 unless set false"],
@@ -208,7 +210,7 @@ const OPTIONAL: Array<[RegExp, string]> = [
 const isDocument = (key: string) =>
   /^(employer|account|payer|employee|vendor|business|dependent|rental\.property|marketplace|lender)\./.test(
     key,
-  );
+  ) || isK1FactKey(key);
 const isOptional = (key: string) => OPTIONAL.some(([pattern]) => pattern.test(key));
 
 interface Outcome {

@@ -31,6 +31,12 @@ export function resolve8995AScheduleCInfo(inputs: ResolverInputs): Form8995ASche
       const profit = business.netProfit;
       return { business, loss: profit === undefined ? undefined : profit < 0 };
     }
+    // MANUAL EDIT: a K-1's QBI is its statement's; undefined while the K-1 waits. A gap is reported on Form 8995-A.
+    if (business.kind === "passThrough") {
+      const qbi = business.statementQbi;
+      if (business.qbiGap) return { business, loss: false };
+      return { business, loss: qbi === undefined ? undefined : qbi < 0 };
+    }
     const property = rentalOf(business.factKey);
     if (property === undefined) return { business, loss: false };
     // Schedule E line 21 before the at-risk test; undefined while an answer is open.

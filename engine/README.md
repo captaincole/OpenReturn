@@ -88,8 +88,9 @@ src/
 ├── deductions/       the itemized-deductions catalog, item states and the itemize-or-standard comparison (#92); the totals are Schedule A line 17 and Schedule CA line 29 from a pass as if the return itemizes, and the federal standard side adds a net qualified disaster loss (Form 4684)
 ├── render/           PDF fill (fillFromCatalog + hand-verified widget overrides)
 ├── federal/          one folder per federal form (catalog.json, bindings.ts, …) + registry (index.ts);
-│                     two folders are not forms: federal/qbi/ holds the code Forms 8995 and 8995-A
-│                     share, and federal/rentals/ the passive-activity tests Schedule E and Form 8582 share
+│                     three folders are not forms: federal/qbi/ holds the code Forms 8995 and 8995-A
+│                     share, federal/rentals/ the passive-activity tests Schedule E and Form 8582 share,
+│                     and federal/passThrough/ the K-1 items, box tables, loss limits and routes (its README)
 └── state/
     ├── index.ts      one import + one spread per supported state
     └── ca/           CA registry + one folder per CA form (+ ca/data/ tables)

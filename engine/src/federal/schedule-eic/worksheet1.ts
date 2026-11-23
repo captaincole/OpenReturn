@@ -14,6 +14,7 @@ import { unmodeled } from "../8582/activities.js";
 import type { Form8814Totals } from "../8814/filingInfo.js";
 import { selfRentalState } from "../rentals/passive.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
+import { passThroughGaps, type PassThroughInfo } from "../schedule-e/partII.js";
 import type { Worksheet1 } from "./credit.js";
 
 type Lines = FormAccessor<object>;
@@ -24,11 +25,44 @@ export const ROYALTIES_WITH_RENTS_GAP =
 export const RECHARACTERIZED_INCOME_GAP =
   "Pub. 596 Worksheet 1 leaves out a passive rental's income that is recharacterized as nonpassive (land, a stay of 7 days or less, a disposition or a type 8 property), which the engine does not model.";
 
-/* The slots Worksheet 1 reads: Schedule E's must-file and its columns, and Form 8814's totals. */
-export interface Worksheet1Info {
+/* The slots Worksheet 1 reads: Schedule E's must-file, its columns and K-1s, and Form 8814's totals. */
+export interface Worksheet1Info extends PassThroughInfo {
   mustFile?: Readonly<Record<string, MustFileResolution>>;
   rentalProperties?: RentalProperty[];
+  /* Schedule E Part I is in use; without it, lines 8–13 take only Parts II and III. */
+  partIInUse?: boolean;
   form8814Totals?: Form8814Totals;
+}
+
+export const PASS_THROUGH_GAP =
+  "Pub. 596 Worksheet 1 lines 11 and 12 take a K-1's passive income or loss (Schedule E lines 29a column (h), 29b column (g), 34a and 34b), and a K-1 on this return has items the engine does not route.";
+
+/*
+ * MANUAL EDIT: lines 11 and 12 from Parts II and III
+ * (irs-pub-596-2025::sec::passive-activities::b01): line 29a column (h) less
+ * line 29b column (g). Nonpassive K-1 income (column (k)) is not investment
+ * income. 0 with no K-1; a K-1 the engine does not route is a gap; waiting
+ * while line 32 is blank.
+ */
+function passThroughPassive(
+  form: Lines,
+  info: Worksheet1Info,
+): Worksheet1 | { kind: "amount"; amount: number } {
+  if ((info.passThroughEntities ?? []).length === 0) return { kind: "amount", amount: 0 };
+  if (passThroughGaps(info).length > 0) return { kind: "unsupported", reason: PASS_THROUGH_GAP };
+  const hasPartII = (info.passThroughEntities ?? []).some((entity) => entity.form !== "1041");
+  if (
+    hasPartII &&
+    numberOrBlank(form["schedule-e.1.line.32_total_partnership_s_corp_income"]) === undefined
+  ) {
+    return { kind: "waiting" };
+  }
+  return {
+    kind: "amount",
+    amount:
+      sum(form["schedule-e.1.line.29a_totals_col_h"]) -
+      sum(form["schedule-e.1.line.29b_totals_col_g"]),
+  };
 }
 
 /* A royalty property, or a rental property with royalties: lines 8–10, not 11–13. */
@@ -99,6 +133,12 @@ function rentalWorksheet1(
   const files = info.mustFile?.["schedule-e"];
   if (files === undefined || files.value === false) return undefined;
   if (files.value === undefined) return { kind: "waiting" };
+  const k1s = passThroughPassive(form, info);
+  if (k1s.kind !== "amount") return k1s;
+  // MANUAL EDIT: a Schedule E with no Part I adds only its K-1s' passive amounts.
+  if (info.partIInUse === false) {
+    return { kind: "line14", amount: sum(step2InvestmentIncome, atLeast(0, k1s.amount)) };
+  }
   const properties = info.rentalProperties ?? [];
   if (properties.some((property) => mixesRentsAndRoyalties(property.value))) {
     return { kind: "unsupported", reason: ROYALTIES_WITH_RENTS_GAP };
@@ -124,7 +164,10 @@ function rentalWorksheet1(
   const states = passive.map((property) => selfRental(form, property));
   if (states.some((state) => state === undefined || state === "waits")) return { kind: "waiting" };
   const counted = passive.filter((_, index) => states[index] !== "recharacterized");
-  const line13 = atLeast(0, sum(...counted.map((property) => onLine26(form, property))));
+  const line13 = atLeast(
+    0,
+    sum(...counted.map((property) => onLine26(form, property)), k1s.amount),
+  );
   return { kind: "line14", amount: sum(step2InvestmentIncome, line10, line13) };
 }
 

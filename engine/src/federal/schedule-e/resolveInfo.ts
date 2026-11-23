@@ -5,6 +5,8 @@ import {
   resolveMustFile,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { passThroughEntitiesOnReturn } from "../passThrough/items.js";
+import { routeEntities } from "../passThrough/routing.js";
 import {
   booleanFact,
   isPassiveActivity,
@@ -97,6 +99,20 @@ function passiveAnswers(
 }
 
 /*
+ * MANUAL EDIT: the K-1 answers Parts II and III wait on: a K-1 or holding fact
+ * that cannot be read, a spouse's K-1 on a separate return, a K-1 with no
+ * holding, and an answer the loss limits or routes wait on (passThrough/routing.ts).
+ */
+function passThroughOpenKeys(inputs: ResolverInputs): string[] {
+  const status = filingStatusOf(inputs);
+  const k1 = passThroughEntitiesOnReturn(inputs.facts, spousePropertiesOnReturn(status));
+  const waiting = routeEntities(k1.entities, { filingStatus: status }).flatMap((routed) =>
+    routed.kind === "waiting" ? routed.factKeys : [],
+  );
+  return [...k1.malformedKeys, ...k1.spouseKeys, ...k1.missingHoldingKeys, ...waiting];
+}
+
+/*
  * irs-1040se-inst-2025::sec::general-instructions::b01: Schedule E reports income
  * or loss from rental real estate and royalties (Part I), and from partnerships,
  * S corporations, estates, trusts and REMICs (Parts II–IV). The engine has facts
@@ -110,6 +126,9 @@ function passiveAnswers(
  * rents of a community property (irs-pub-504-2025::sec::community-income::b01)
  * belongs here. The fact holds neither share, so a spouse's or joint property
  * files the schedule and waits on its key, as a spouse's Schedule C business does.
+ * MANUAL EDIT: a Schedule K-1 files it too (Parts II and III,
+ * irs-1040se-inst-2025::sec::part-ii::b01), and so does any K-1 whose items have no
+ * route yet, so its line 41 shows the gap (passThrough/README.md).
  */
 export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInfo {
   const status = filingStatusOf(inputs);
@@ -117,10 +136,12 @@ export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInf
     inputs.facts,
     spousePropertiesOnReturn(status),
   );
+  const k1 = passThroughEntitiesOnReturn(inputs.facts, spousePropertiesOnReturn(status));
   const paymentsRequire1099 = booleanFact(inputs.factByKey.get(RENTAL_KEYS.paymentsRequire1099));
   const filed1099s = booleanFact(inputs.factByKey.get(RENTAL_KEYS.filedRequired1099s));
   const professional = booleanFact(inputs.factByKey.get(RENTAL_KEYS.realEstateProfessional));
-  const files = properties.length + spouseKeys.length > 0;
+  const rentalFiles = properties.length + spouseKeys.length > 0;
+  const files = rentalFiles || k1.entities.length + k1.spouseKeys.length > 0;
   const columns = properties.slice(0, COLUMNS.length);
   /*
    * MANUAL EDIT: a fourth property needs another Schedule E, which the engine does not
@@ -132,15 +153,17 @@ export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInf
       "schedule-e": resolveMustFile(inputs.decisionByKey, {
         explicitKey: MUST_FILE_KEY,
         fallbacks:
-          malformedKeys.length > 0
+          malformedKeys.length + k1.malformedKeys.length > 0
             ? []
             : [
                 {
-                  rule: "fallback: a rental real estate or royalty property fact",
+                  rule: "fallback: a rental real estate or royalty property fact, or a Schedule K-1",
                   value: files,
                   triggeredByFactKeys: [
                     ...properties.map((property) => property.key),
                     ...spouseKeys,
+                    ...k1.entities.map((entity) => entity.key),
+                    ...k1.spouseKeys,
                   ],
                 },
               ],
@@ -153,7 +176,8 @@ export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInf
           openPropertyKeys(columns, professional).map((key) => [key, undefined]),
         ),
         ...Object.fromEntries(overflowKeys.map((key) => [key, undefined])),
-        ...(files ? { [RENTAL_KEYS.paymentsRequire1099]: paymentsRequire1099 } : {}),
+        ...Object.fromEntries(passThroughOpenKeys(inputs).map((key) => [key, undefined])),
+        ...(rentalFiles ? { [RENTAL_KEYS.paymentsRequire1099]: paymentsRequire1099 } : {}),
         ...passiveAnswers(columns, professional),
         ...(paymentsRequire1099 === true ? { [RENTAL_KEYS.filedRequired1099s]: filed1099s } : {}),
       }),
@@ -168,6 +192,8 @@ export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInf
           }))
         : undefined,
     rentalPropertiesOverflow: properties.length > COLUMNS.length,
+    partIInUse: rentalFiles || malformedKeys.length > 0,
+    passThroughEntities: k1.entities.length > 0 ? k1.entities : undefined,
     rentalPaymentsRequire1099: paymentsRequire1099,
     rentalFiled1099s: filed1099s,
     realEstateProfessional: professional,
