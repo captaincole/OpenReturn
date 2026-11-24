@@ -164,6 +164,26 @@ describe("Lines of other forms", () => {
       UNSUPPORTED,
     );
   });
+
+  it("a section 1291 fund sold at a loss: Schedule D files, and line 11 is unsupported", () => {
+    const sale = { date: "2025-06-30", amountRealized: 30000, adjustedBasis: 40000 };
+    const lossFund = { ...smallFund, acquiredDate: "2020-01-10", disposition: sale };
+    const run = evaluate([fund("small", lossFund)]);
+    // A loss is no gain: under $25,000 in all PFIC stock, Form 8621 itself does not file.
+    expect(run.files("form-8621")).toBe(false);
+    expect(run.files("schedule-d")).toBe(true);
+    expect(run.field("schedule-d", "0.line.11_long_term_gain_other_forms")).toMatchObject(
+      UNSUPPORTED,
+    );
+  });
+
+  it("a section 1291 fund sold at a gain: the gain is an excess distribution, not Schedule D", () => {
+    const sale = { date: "2025-06-30", amountRealized: 40000, adjustedBasis: 30000 };
+    const gainFund = { ...smallFund, acquiredDate: "2020-01-10", disposition: sale };
+    const run = evaluate([fund("small", gainFund)]);
+    expect(run.value("form-8621", "2.line.15f_gain_or_loss_disposition")).toBe(10000);
+    expect(run.files("schedule-d")).toBe(false);
+  });
 });
 
 describe("Branches of the form", () => {

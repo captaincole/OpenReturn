@@ -39,8 +39,12 @@ export interface FundResults {
   foreignIncomeUsd: number;
   /* Why lines that take this fund's amounts cannot be figured. */
   gap?: string;
-  /* Line 14c follows the general loss rules: Form 8949, which the engine does not fill from this form. */
-  generalRulesLoss?: number;
+  /*
+   * A loss under the general rules: line 14c (::line-14c::b01), or a section
+   * 1291 fund's loss on line 15f (::line-15f::b01). It belongs on Form 8949,
+   * which the engine does not fill from this form. 0 with no loss.
+   */
+  generalRulesLoss: number;
 }
 
 interface Parts {
@@ -55,6 +59,9 @@ function section1291Nii(partV: PartV | undefined): number {
   if (partV === undefined) return 0;
   return sum(partV.line15.line15e2, partV.deemedDividend, atLeast(0, partV.line15.line15f));
 }
+
+/* The amount when it is a loss (below 0); 0 otherwise. */
+const lossOnly = (amount: number | undefined) => (amount !== undefined && amount < 0 ? amount : 0);
 
 export function fundResults(parts: Parts, section1411gElection: boolean): FundResults {
   const { partIII, partIV, partV, partVI } = parts;
@@ -81,6 +88,6 @@ export function fundResults(parts: Parts, section1411gElection: boolean): FundRe
     foreignTax: sum(partV?.line15.dividendForeignTax, line16?.generalRulesForeignTax),
     foreignIncomeUsd: sum(partV?.line15.dividendsUsd, line16?.currentYearDistributionsUsd),
     gap: partV?.line16Gap,
-    generalRulesLoss: partIV?.sale?.line14c,
+    generalRulesLoss: sum(lossOnly(partIV?.sale?.line14c), lossOnly(partV?.line15.line15f)),
   };
 }

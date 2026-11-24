@@ -69,10 +69,10 @@ Each place where the form and its instructions do not settle a rule. Short answe
 - Default: line 6 adds every excess distribution (line 15e(2)) and gain (line 15f), the section 1296 amounts (lines 10c or 12, 13c or 14b), and line 6c with the (g) election. Line 5b subtracts line 7c without it. A QEF's distribution of earnings taxed before (NII without the election, ::b04) is not modeled.
 - Changes dollars: yes (Form 8960, Schedule 2 line 12).
 
-## 12. Line 14c: the loss under the general rules
+## 12. Lines 14c and 15f: a loss under the general rules
 
-- Source: "This amount is subject to the rules generally applicable to losses provided elsewhere in the Code" (irs-8621-inst-2025::sec::line-14c::b01).
-- Default: the line is figured, and Schedule D line 11 is unsupported while a fund has one: the loss belongs on Form 8949, which the engine fills only from sale facts.
+- Source: "This amount is subject to the rules generally applicable to losses provided elsewhere in the Code" (irs-8621-inst-2025::sec::line-14c::b01). For a section 1291 fund: "Loss realized on the disposition of stock of a section 1291 fund is not taken into account under section 1291 ... However, the loss may be recognized under another provision of the Code and reported accordingly." (::line-15f::b01)
+- Default: the line is figured, and Schedule D line 11 is unsupported while a fund has a loss on line 14c or line 15f: the loss belongs on Form 8949, which the engine fills only from sale facts. A deemed sale (Elections C, D, F) at a loss gets the same gap; the instructions do not say whether that loss is recognized.
 - Changes dollars: no (a gap, not a guess).
 
 ## 13. A holding period before 1987

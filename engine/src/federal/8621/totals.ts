@@ -33,7 +33,7 @@ export interface Form8621Totals {
   gap?: string;
   amounts: Omit<FundResults, "gap" | "section1411gElection" | "generalRulesLoss">;
   section1411gElection: boolean;
-  /* A line 14c loss: the general loss rules (Form 8949), which the engine does not fill from this form. */
+  /* A line 14c loss or a line 15f loss: the general loss rules (Form 8949), which the engine does not fill from this form. */
   generalRulesLossGap?: string;
   dividendPayers: PayerRow[];
 }
@@ -73,7 +73,7 @@ const SUMMED = [
 ] as const;
 
 const GENERAL_RULES_LOSS =
-  "Form 8621 line 14c is a loss under the general rules (Form 8949 and Schedule D); the engine does not place it.";
+  "Form 8621 has a loss under the general rules (line 14c, or a section 1291 fund's loss on line 15f) that goes on Form 8949 and Schedule D; the engine does not place it.";
 
 /* The totals from the facts, or undefined with no fund fact. */
 export function form8621Totals(inputs: ResolverInputs): Form8621Totals | undefined {
@@ -93,7 +93,7 @@ export function form8621Totals(inputs: ResolverInputs): Form8621Totals | undefin
     gap: results.find((each) => each.gap !== undefined)?.gap,
     amounts,
     section1411gElection: results.some((each) => each.section1411gElection),
-    generalRulesLossGap: results.some((each) => (each.generalRulesLoss ?? 0) < 0)
+    generalRulesLossGap: results.some((each) => each.generalRulesLoss < 0)
       ? GENERAL_RULES_LOSS
       : undefined,
     dividendPayers: funds
@@ -119,7 +119,7 @@ export function form8621IncomeUpperBound(inputs: ResolverInputs): number {
 
 /*
  * The schedules the funds' amounts reach, for their must-file rules: Schedule
- * D line 11 (line 7c, or a line 14c loss the engine cannot place) and Schedule
+ * D line 11 (line 7c, or a line 14c or 15f loss the engine cannot place) and Schedule
  * 2 lines 17p, 17q and 17z (lines 16f, 24 and 23). A fund's gap reaches both.
  */
 export function form8621Feeds(inputs: ResolverInputs) {
