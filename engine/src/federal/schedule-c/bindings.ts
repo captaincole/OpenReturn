@@ -6,6 +6,7 @@ import { roundDollars } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { homeOfficeActualGap, sharedHomeGap } from "../8829/lines.js";
+import { businessNeedsForm6198, figureBusinessForm6198 } from "./atRisk.js";
 import { line13Depreciation, partVEntries } from "./attachments.js";
 import type { ScheduleCFilingInfo } from "./filingInfo.js";
 import {
@@ -17,6 +18,7 @@ import {
   netProfit,
   netReceipts,
   otherExpensesTotal,
+  profitBeforeLossRules,
   tentativeProfit,
   totalExpenses,
 } from "./lines.js";
@@ -116,16 +118,18 @@ function attachmentUnsupported(
   return gap ? unsupported(gap) : undefined;
 }
 
-/* MANUAL EDIT: a loss with some investment not at risk needs Form 6198 (line 32b), which is not modeled. */
-const NOT_AT_RISK =
-  "Some investment is not at risk (box 32b): Form 6198 figures the loss for line 31 (irs-1040sc-inst-2025::sec::line-32::b03), and it is not modeled.";
-
+/*
+ * MANUAL EDIT: a loss with some investment not at risk (box 32b) takes the loss
+ * Form 6198 allows (irs-1040sc-inst-2025::sec::line-32::b03, schedule-c/atRisk.ts);
+ * a case Form 6198 does not handle makes line 31 unsupported with its reason.
+ */
 function notAtRiskLoss(business: BusinessFactValue, onReturn: readonly BusinessFactValue[]) {
-  const line29 = tentativeProfit(business);
-  const line30 = homeOfficeExpenses(business, onReturn) ?? 0;
-  return business.allInvestmentAtRisk === false && line29 !== undefined && line29 - line30 < 0
-    ? unsupported(NOT_AT_RISK)
-    : undefined;
+  const beforeAtRisk = profitBeforeLossRules(business, onReturn);
+  if (beforeAtRisk === undefined || !businessNeedsForm6198(business, beforeAtRisk)) {
+    return undefined;
+  }
+  const outcome = figureBusinessForm6198(business, beforeAtRisk);
+  return outcome.kind === "unsupported" ? unsupported(outcome.reason) : undefined;
 }
 
 // MANUAL EDIT: a line that reads line 13 (Form 4562 line 22) carries its gap.

@@ -13,8 +13,9 @@ import {
   type ResolverInputs,
 } from "../../resolverInputs.js";
 import { homeOfficeActualOpen } from "../8829/lines.js";
+import { businessNeedsForm6198, figureBusinessForm6198 } from "./atRisk.js";
 import type { ScheduleCFilingInfo } from "./filingInfo.js";
-import { tentativeProfit } from "./lines.js";
+import { profitBeforeLossRules, tentativeProfit } from "./lines.js";
 
 const MUST_FILE_KEY = "decisions.scope.must_file_schedule_c";
 
@@ -71,7 +72,10 @@ export function resolveScheduleCInfo(inputs: ResolverInputs): ScheduleCFilingInf
                 homeOfficeOpen(business.value.homeOffice) ||
                 (business.value.homeOfficeActual !== undefined &&
                   homeOfficeActualOpen(business.value.homeOfficeActual)) ||
-                atRiskOpen(business.value),
+                atRiskOpen(
+                  business.value,
+                  businesses.map((entry) => entry.value),
+                ),
             )
             .map((business) => [business.key, undefined]),
         ]),
@@ -95,10 +99,19 @@ function homeOfficeOpen(office: HomeOfficeSimplified | undefined): boolean {
   );
 }
 
-/* A loss (line 29 below 0) needs line 32: whether all investment is at risk. */
-function atRiskOpen(business: BusinessFactValue): boolean {
+/*
+ * A loss (line 29 below 0) needs line 32: whether all investment is at risk.
+ * With box 32b, line 31 waits on Form 6198's amounts at risk (schedule-c/atRisk.ts).
+ */
+function atRiskOpen(business: BusinessFactValue, onReturn: readonly BusinessFactValue[]): boolean {
   const line29 = tentativeProfit(business);
-  return line29 !== undefined && line29 < 0 && business.allInvestmentAtRisk === undefined;
+  if (line29 !== undefined && line29 < 0 && business.allInvestmentAtRisk === undefined) return true;
+  const beforeAtRisk = profitBeforeLossRules(business, onReturn);
+  return (
+    beforeAtRisk !== undefined &&
+    businessNeedsForm6198(business, beforeAtRisk) &&
+    figureBusinessForm6198(business, beforeAtRisk).kind === "waiting"
+  );
 }
 
 /* Schedule SE and Form 8995-A wait while Schedule C's must-file answer is open. */
