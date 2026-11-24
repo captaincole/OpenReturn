@@ -4,8 +4,9 @@ import { defineForm, type BindingFn } from "../../defineForm.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { namesOnReturn } from "../returnNames.js";
+import { rowOnCopy } from "./copies.js";
 import { printedDate } from "./dates.js";
-import type { Form4797FilingInfo, Form4797Overflow } from "./filingInfo.js";
+import type { Form4797FilingInfo } from "./filingInfo.js";
 import type { Form4797Lines, PartIVColumn } from "./lines.js";
 import type { PartIIIColumn, SaleRow } from "./properties.js";
 import type { Form4797 } from "./types.js";
@@ -18,32 +19,36 @@ type Bindings = Partial<{ [K in keyof Form4797]: BindingFn<Form4797, Form4797Fil
  * MANUAL EDIT: lines 3, 14 and 18a (Form 4684 Section B), 4 and 15 (Form 6252),
  * and 5 and 16 (Form 8824) are in `unsupported` below.
  */
-const OVERFLOW =
-  "More than four properties in this part: the paper form has four rows (part-iii::b01, use additional forms), and the engine prints one Form 4797 and no attached statement.";
-
 type LineFn<T> = (form: unknown, info: Form4797FilingInfo) => T | Unsupported | undefined;
 
-/* A line of the figured form: unsupported with a gap, blank with no figured form. */
-function lineOf<T extends Value>(pick: (lines: Form4797Lines) => T | undefined): LineFn<T> {
+const copyIndexOf = (info: Form4797FilingInfo): number => info.form4797CopyIndex ?? 0;
+
+/*
+ * A line of a copy's rows or columns (copies.ts): unsupported with a gap, blank
+ * with no figured form. `pick` gets the copy's index.
+ */
+function copyLineOf<T extends Value>(
+  pick: (lines: Form4797Lines, copyIndex: number) => T | undefined,
+): LineFn<T> {
   return (_, info) => {
     if (info.form4797Gap) return unsupported(info.form4797Gap);
-    return info.form4797 === undefined ? undefined : pick(info.form4797);
+    return info.form4797 === undefined ? undefined : pick(info.form4797, copyIndexOf(info));
   };
+}
+
+/* A total of the whole form: on the first copy only (copies.ts). */
+function lineOf<T extends Value>(pick: (lines: Form4797Lines) => T | undefined): LineFn<T> {
+  return copyLineOf((lines, copyIndex) => (copyIndex === 0 ? pick(lines) : undefined));
 }
 
 /* A line of lines 7–18b, which also waits on the summary gap (a K-1 section 1231 item, Form 6252 or 8824). */
 function summaryLineOf(pick: (lines: Form4797Lines) => number | undefined): LineFn<number> {
   return (form, info) => {
-    if (info.form4797SummaryGap && !info.form4797Gap) return unsupported(info.form4797SummaryGap);
+    if (info.form4797SummaryGap && !info.form4797Gap && copyIndexOf(info) === 0) {
+      return unsupported(info.form4797SummaryGap);
+    }
     return lineOf(pick)(form, info);
   };
-}
-
-function overflowLineOf(part: keyof Form4797Overflow, pick: (lines: Form4797Lines) => Value): Fn {
-  return (form, info) =>
-    info.form4797Overflow?.[part] && !info.form4797Gap
-      ? unsupported(OVERFLOW)
-      : lineOf(pick)(form, info);
 }
 
 /* MANUAL EDIT: columns (a)–(g) of the line 2 and line 10 rows (properties.ts saleRow). */
@@ -60,14 +65,14 @@ const ROW_COLUMNS: Array<[string, (row: SaleRow) => Value]> = [
 function rowBindings(): Bindings {
   const out: Record<string, Fn> = {};
   const parts = [
-    { line: "2", part: "partI" as const, rows: (lines: Form4797Lines) => lines.partIRows },
-    { line: "10", part: "partII" as const, rows: (lines: Form4797Lines) => lines.partIIRows },
+    { line: "2", rows: (lines: Form4797Lines) => lines.partIRows },
+    { line: "10", rows: (lines: Form4797Lines) => lines.partIIRows },
   ];
-  for (const { line, part, rows } of parts) {
-    for (let index = 0; index < 4; index += 1) {
+  for (const { line, rows } of parts) {
+    for (let slot = 0; slot < 4; slot += 1) {
       for (const [column, pick] of ROW_COLUMNS) {
-        out[`0.line.${line}_row${index + 1}_col_${column}`] = overflowLineOf(part, (lines) => {
-          const row = rows(lines)[index];
+        out[`0.line.${line}_row${slot + 1}_col_${column}`] = copyLineOf((lines, copyIndex) => {
+          const row = rows(lines)[rowOnCopy(copyIndex, slot)];
           return row === undefined ? undefined : pick(row);
         });
       }
@@ -103,31 +108,22 @@ const PART_III_LINES: Array<[string, (column: PartIIIColumn) => Value]> = [
   ["29b_sec_1255_smaller_amount", (column) => column.line29b],
 ];
 
-const partIIIColumnOf =
-  (index: number, pick: (column: PartIIIColumn) => Value) =>
-  (lines: Form4797Lines): Value => {
-    const column = lines.partIIIColumns[index];
+/* Property column `slot` (A to D) of a copy: the copy's own property (copies.ts). */
+const partIIIColumnOf = (slot: number, pick: (column: PartIIIColumn) => Value): Fn =>
+  copyLineOf((lines, copyIndex) => {
+    const column = lines.partIIIColumns[rowOnCopy(copyIndex, slot)];
     return column === undefined ? undefined : pick(column);
-  };
+  });
 
 function partIIIBindings(): Bindings {
   const out: Record<string, Fn> = {};
-  LETTERS.forEach((letter, index) => {
+  LETTERS.forEach((letter, slot) => {
     const line19 = `1.line.19${letter}_property_col_`;
-    out[`${line19}a`] = overflowLineOf(
-      "partIII",
-      partIIIColumnOf(index, (column) => column.description),
-    );
-    out[`${line19}b`] = overflowLineOf(
-      "partIII",
-      partIIIColumnOf(index, (column) => printedDate(column.dateAcquired)),
-    );
-    out[`${line19}c`] = overflowLineOf(
-      "partIII",
-      partIIIColumnOf(index, (column) => printedDate(column.dateSold)),
-    );
+    out[`${line19}a`] = partIIIColumnOf(slot, (column) => column.description);
+    out[`${line19}b`] = partIIIColumnOf(slot, (column) => printedDate(column.dateAcquired));
+    out[`${line19}c`] = partIIIColumnOf(slot, (column) => printedDate(column.dateSold));
     for (const [line, pick] of PART_III_LINES) {
-      out[`1.line.${line}_col_${letter}`] = overflowLineOf("partIII", partIIIColumnOf(index, pick));
+      out[`1.line.${line}_col_${letter}`] = partIIIColumnOf(slot, pick);
     }
   });
   return out as Bindings;
@@ -141,7 +137,7 @@ function partIVLine(
 ): LineFn<number> {
   return (form, info) => {
     const gap = info.form4797PartIVGap?.[column];
-    if (isLine35 && gap && !info.form4797Gap) return unsupported(gap);
+    if (isLine35 && gap && !info.form4797Gap && copyIndexOf(info) === 0) return unsupported(gap);
     return lineOf((lines) => {
       const figured = lines.partIV[column];
       return figured === undefined ? undefined : pick(figured);

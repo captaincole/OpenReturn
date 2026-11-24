@@ -183,7 +183,7 @@ describe("Form 4797 waits and gaps", () => {
     expect(run.value("schedule-c", "0.line.6")).toBe(8134);
   });
 
-  it("more than four Part I rows: the rows are a gap, line 7 still adds them all", () => {
+  it("more than four Part I rows: the first copy prints four, line 7 adds them all", () => {
     const extra = [1, 2].map((each) =>
       saleFact(`lot-${each}`, {
         description: `Lot ${each}`,
@@ -192,13 +192,12 @@ describe("Form 4797 waits and gaps", () => {
         dateSold: "2025-04-01",
         grossSalesPrice: 1000,
         costOrOtherBasis: 500,
+        businessId: "caprock-print",
       }),
     );
     const run = evaluate([...base.facts, ...extra]);
-    expect(run.field("form-4797", "0.line.2_row1_col_g")).toMatchObject({
-      ok: false,
-      unsupported: true,
-    });
+    expect(run.value("form-4797", "0.line.2_row1_col_g")).toBe(13800);
+    expect(run.value("form-4797", "0.line.2_row4_col_g")).toBe(500);
     expect(run.value("form-4797", "0.line.7_net_section_1231_gain_loss")).toBe(95960);
   });
 

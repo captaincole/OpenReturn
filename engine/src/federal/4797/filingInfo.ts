@@ -3,13 +3,6 @@ import type { Section1250Property } from "../../worksheets/unrecapturedSection12
 import type { Form4797Activities } from "./activities.js";
 import type { Form4797Lines } from "./lines.js";
 
-/* Each part of the form that has more rows than the paper prints (four). */
-export interface Form4797Overflow {
-  partI?: boolean;
-  partII?: boolean;
-  partIII?: boolean;
-}
-
 export interface Form4797FilingInfo extends BaseFilingInfo {
   /* The figured form; undefined with no sale or recapture fact, or with a gap. */
   form4797?: Form4797Lines;
@@ -21,7 +14,8 @@ export interface Form4797FilingInfo extends BaseFilingInfo {
    * or 8824 filing.
    */
   form4797SummaryGap?: string;
-  form4797Overflow?: Form4797Overflow;
+  /* Which copy this render prints (renderCopies sets it; copies.ts); absent means the first. */
+  form4797CopyIndex?: number;
   /* Why a Part IV column's line 35 cannot reach its schedule. */
   form4797PartIVGap?: { section179?: string; section280f?: string };
   /* The section 1250 properties of Part III, for the Unrecaptured Section 1250 Gain Worksheet lines 1–3. */

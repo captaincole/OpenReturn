@@ -116,12 +116,17 @@ default the engine applies, and whether the default can change a dollar amount.
 16. **Owner on a joint or separate return.** A sale fact names no owner; every
     sale is the return's. Changes dollars: on a separate return with a spouse's sale.
 
-17. **More than four rows in a part.** The paper has four; the engine prints one
-    form and no statement: those rows are a gap, and the totals still add every
-    property. Changes dollars: no. For Part III the instructions say "If you
-    have more than four properties to report, use additional forms"
-    (irs-4797-inst-2025::sec::part-iii::b01); they give no rule for the rows
-    of lines 2 and 10. The work to repeat the form is issue #247.
+17. **More than four rows in a part.** The paper has four rows on line 2, four
+    on line 10 and four Part III columns. "If you have more than four
+    properties to report, use additional forms"
+    (irs-4797-inst-2025::sec::part-iii::b01). Default: the form repeats
+    (`copies.ts`); each part counts on its own, and copy n holds rows 4n to
+    4n + 3. The instructions give no rule for the totals on an additional
+    form, and none for the rows of lines 2 and 10 (the Part III sentence is
+    the only one). Default: lines 1a–1c, 6–18b and 30–35 print on the first
+    copy only and add every property; line 30's own label is "Total gains for
+    all properties". The synthetic alanna scenario has five Part III
+    properties. Changes dollars: no.
 
 18. **Not modeled (no fact):** a section 121 exclusion on a home used for
     business, a QOF deferral, a mark-to-market trader's line 10 and 1099-B

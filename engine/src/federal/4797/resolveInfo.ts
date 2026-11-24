@@ -14,12 +14,11 @@ import { resolve8582Info } from "../8582/resolveInfo.js";
 import { describeItem, entityTitle, passThroughEntitiesOnReturn } from "../passThrough/items.js";
 import { spousePropertiesOnReturn } from "../rentals/passive.js";
 import { NO_ACTIVITY, activityOf, form4797Activities } from "./activities.js";
-import type { Form4797FilingInfo, Form4797Overflow } from "./filingInfo.js";
+import type { Form4797FilingInfo } from "./filingInfo.js";
 import { form4797Lines, type Form4797Lines } from "./lines.js";
 import { placeProperty, saleGap, type PlacedProperty } from "./properties.js";
 
 const MUST_FILE_KEY = "decisions.scope.must_file_4797";
-const ROWS_ON_PAPER = 4;
 
 /* Forms with no rules whose amounts Form 4797 takes (lines 4, 5, 15, 16). */
 const OTHER_FORMS = [
@@ -109,16 +108,6 @@ function reportedProceeds(
     const form = forms.get(key);
     return form === undefined ? [] : [form.box2];
   });
-}
-
-function overflowOf(placed: PlacedProperty[]): Form4797Overflow | undefined {
-  const count = (part: string) => placed.filter((each) => each.part === part).length;
-  const overflow = {
-    partI: count("part_i") > ROWS_ON_PAPER,
-    partII: count("part_ii") > ROWS_ON_PAPER,
-    partIII: count("part_iii") > ROWS_ON_PAPER,
-  };
-  return Object.values(overflow).some(Boolean) ? overflow : undefined;
 }
 
 /* Line 35 reaches only a Schedule C business on this return; any other recapture is a gap for its column. */
@@ -262,7 +251,6 @@ export function resolve4797Info(inputs: ResolverInputs): Form4797FilingInfo {
     form4797: lines,
     form4797SummaryGap: summary,
     form4797Activities: activitiesOf(placed, activities, lines, summary),
-    form4797Overflow: overflowOf(placed),
     form4797PartIVGap: partIVGaps(recaptures.recaptures, businessIds),
     form4797Section1250: placed.flatMap((each) =>
       each.part === "part_iii" && each.kind === "section_1250"
