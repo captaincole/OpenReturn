@@ -69,6 +69,42 @@ whether the default can change a dollar amount.
     unsupported: columns B and C need FTB 3461, which has no rules, and
     column A belongs with that work. Dollars: no (gaps).
 
+14. **A nonbusiness capital loss inside a positive line 3.** Line 3 holds
+    the net of business and investment trades. "Losses from sales or
+    exchanges of capital assets are not included ... added back on line 11",
+    but gains "should not exceed the lesser of capital gain net income limited
+    to only gains and losses attributable to a trade or business, or capital
+    gain net income" (::line-3::b01). Example: line 3 is $40,000, business
+    trades net $60,000, investment trades net -$20,000. Default (`lines.ts`,
+    `capitalAdjustment`): apply the cap; the business gain counts as $40,000
+    and lines 10 and 11 stay blank. Adding the -$20,000 back on line 11 would
+    count $60,000, above the cap. The blind fill chose the same. Dollars: yes,
+    $20,000 on line 14 in the example.
+15. **The threshold for married filing separately, head of household and a
+    qualifying surviving spouse.** "$313,000 ($626,000 for taxpayers filing a
+    joint return)" (::who-must-file::b02). Settled by the text: $313,000 for
+    every status but a joint return. The blind fill agreed. Dollars: no.
+
+## Second opinions
+
+- **Blind fill (14 cases, 2025).** No dollar difference with the engine.
+  Lines 12 and 13 differ only as blank against 0 (cases 1, 5, 7, 8, 9: the
+  engine leaves them blank when lines 10 and 11 are blank; "Subtract line 11
+  from line 10", ::line-12::b01, gives no amount to enter).
+- **PolicyEngine-US 2.153.8 (commit b3edc04).** `excess_business_loss`,
+  `net_business_loss`, `limited_business_loss`, parameter
+  `gov.irs.ald.loss.max`. The 2025 threshold agrees ($313,000; $626,000 joint
+  only; $313,000 for a qualifying surviving spouse). The formula agrees:
+  business losses over business income plus the threshold, wages left out.
+  Three scope differences, where the IRS text decides for the engine: it
+  counts every rental and estate amount as business (the engine asks, per
+  ::who-must-file::b03, and keeps trust box 5 out, item 5); it leaves every
+  capital gain out (the engine counts the business part up to the cap,
+  ::line-3::b01); it counts Schedule F and Form 4797 amounts, which are
+  gaps here (item 8). No engine change.
+- **IRS Direct File.** Not compared: no checkout in the repo, and Direct File
+  did not support business income, so it has no Form 461 logic.
+
 ## Confidence
 
 | Field group | Confidence |
