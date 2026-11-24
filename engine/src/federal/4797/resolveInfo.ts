@@ -9,6 +9,7 @@ import {
   type Section179RecaptureFact,
 } from "../../facts/index.js";
 import { filingStatusOf, num, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import { resolve8582Info } from "../8582/resolveInfo.js";
 import { describeItem, entityTitle, passThroughEntitiesOnReturn } from "../passThrough/items.js";
 import { spousePropertiesOnReturn } from "../rentals/passive.js";
 import type { Form4797FilingInfo, Form4797Overflow } from "./filingInfo.js";
@@ -34,6 +35,22 @@ function section1231K1s(inputs: ResolverInputs, joint: boolean) {
   });
 }
 
+/*
+ * A loss on line 2 or 10 while Form 8582 files: "If you have an overall loss from
+ * passive activities and you report a loss on an asset used in a passive activity,
+ * use Form 8582 ... to see how much loss is allowed before entering it on Form 4797"
+ * (irs-4797-inst-2025::sec::passive-loss-limitations::b01). No fact ties a sale to
+ * its activity, so the loss is a gap, not the whole loss.
+ */
+function passiveLossGap(inputs: ResolverInputs, placed: PlacedProperty[]): string | undefined {
+  const losses = placed.flatMap((each) =>
+    each.part !== "part_iii" && each.row.gainOrLoss < 0 ? [each.row.description] : [],
+  );
+  if (losses.length === 0) return undefined;
+  if (resolve8582Info(inputs).mustFile?.["form-8582"]?.value !== true) return undefined;
+  return `${losses.join(", ")}: a loss on line 2 or 10 while Form 8582 files. A loss on an asset used in a passive activity goes through Form 8582 first (passive-loss-limitations::b01), and no fact ties a sale to its activity.`;
+}
+
 /* Why lines 7–18b cannot be figured: a K-1 section 1231 item, or a form the engine does not carry. */
 function summaryGap(inputs: ResolverInputs, joint: boolean): string | undefined {
   const k1s = section1231K1s(inputs, joint).map(
@@ -47,9 +64,37 @@ function summaryGap(inputs: ResolverInputs, joint: boolean): string | undefined 
   return `${others.map((form) => form.name).join(" and ")} file, and the engine does not carry their amounts to Form 4797.`;
 }
 
-/* The gross sales price: the stated one, else box 2 of the Form 1099-S the sale names. */
-function priceOf(sale: BusinessPropertySaleFact, forms: Map<string, Form1099SFactValue>) {
-  return sale.value.grossSalesPrice ?? forms.get(sale.value.form1099SKey ?? "")?.box2;
+/* The Form 1099-S keys that more than one sale names (a building and its land in one closing). */
+function sharedForms(sales: BusinessPropertySaleFact[]): Set<string> {
+  const keys = sales.flatMap((sale) => sale.value.form1099SKey ?? []);
+  return new Set(keys.filter((key, index) => keys.indexOf(key) !== index));
+}
+
+/*
+ * The gross sales price: the stated one, else box 2 of the Form 1099-S the sale
+ * names. A form that more than one sale names gives no sale its box 2: the amount
+ * realized is split between the properties by fair market value
+ * (irs-4797-inst-2025::sec::depreciable-property-and-other-property::b01), so each
+ * sale states its own price.
+ */
+function priceOf(
+  sale: BusinessPropertySaleFact,
+  forms: Map<string, Form1099SFactValue>,
+  shared: Set<string>,
+) {
+  if (sale.value.grossSalesPrice !== undefined) return sale.value.grossSalesPrice;
+  const key = sale.value.form1099SKey ?? "";
+  return shared.has(key) ? undefined : forms.get(key)?.box2;
+}
+
+/* A sale with no stated price whose Form 1099-S also reports another sale. */
+function sharedFormGap(sales: BusinessPropertySaleFact[], shared: Set<string>) {
+  const sale = sales.find(
+    ({ value }) => value.grossSalesPrice === undefined && shared.has(value.form1099SKey ?? ""),
+  );
+  return sale === undefined
+    ? undefined
+    : `${sale.value.description}: its Form 1099-S also reports another property's sale, and the amount realized is split between them by fair market value (depreciable-property-and-other-property::b01); the sale states no price of its own.`;
 }
 
 /* Line 1a: box 2 of each Form 1099-S a sale names, each form once (irs-4797-inst-2025::sec::line-1a::b01). */
@@ -134,9 +179,14 @@ export function resolve4797Info(inputs: ResolverInputs): Form4797FilingInfo {
     return { ...filed, form4797Gap: `Malformed Form 4797 fact(s): ${malformed.join(", ")}.` };
   }
   const forms = getForm1099SFacts(inputs.facts);
-  const gap = sales.sales.map((sale) => saleGap(sale.value, priceOf(sale, forms))).find(Boolean);
+  const shared = sharedForms(sales.sales);
+  const gap =
+    sharedFormGap(sales.sales, shared) ??
+    sales.sales.map((sale) => saleGap(sale.value, priceOf(sale, forms, shared))).find(Boolean);
   if (gap) return { ...filed, form4797Gap: gap };
-  const placed = sales.sales.map((sale) => placeProperty(sale.value, priceOf(sale, forms) ?? 0));
+  const placed = sales.sales.map((sale) =>
+    placeProperty(sale.value, priceOf(sale, forms, shared) ?? 0),
+  );
   const lines = form4797Lines({
     properties: placed,
     reportedProceeds: reportedProceeds(sales.sales, forms),
@@ -149,7 +199,7 @@ export function resolve4797Info(inputs: ResolverInputs): Form4797FilingInfo {
   return {
     ...filed,
     form4797: lines,
-    form4797SummaryGap: summaryGap(inputs, joint),
+    form4797SummaryGap: summaryGap(inputs, joint) ?? passiveLossGap(inputs, placed),
     form4797Overflow: overflowOf(placed),
     form4797PartIVGap: partIVGaps(recaptures.recaptures, businessIds),
     form4797Section1250: placed.flatMap((each) =>

@@ -239,6 +239,68 @@ describe("Form 4797 waits and gaps", () => {
     });
   });
 
+  it("two sales on one Form 1099-S with no price of their own are a gap, not box 2 each", () => {
+    const noPrice = new Set([
+      makeBusinessPropertySaleFactKey("shop-building"),
+      makeBusinessPropertySaleFactKey("shop-land"),
+    ]);
+    const facts = base.facts.map((fact) => {
+      if (!noPrice.has(fact.key)) return fact;
+      const { grossSalesPrice: _price, ...rest } = fact.value as BusinessPropertySaleFactValue;
+      return { ...fact, value: rest };
+    });
+    const run = evaluate(facts);
+    expect(run.field("form-4797", "1.line.20_gross_sales_price_col_a")).toMatchObject({
+      ok: false,
+      unsupported: true,
+    });
+    expect(run.field("schedule-1", SCHEDULE_1_LINE_4)).toMatchObject({
+      ok: false,
+      unsupported: true,
+    });
+  });
+
+  it("a sale that alone names its Form 1099-S still takes box 2 as its price", () => {
+    const facts = base.facts.map((fact) => {
+      const value = fact.value as BusinessPropertySaleFactValue;
+      if (fact.key === makeBusinessPropertySaleFactKey("shop-building")) {
+        const { grossSalesPrice: _price, ...rest } = value;
+        return { ...fact, value: rest };
+      }
+      if (value.form1099SKey !== undefined) {
+        const { form1099SKey: _key, ...rest } = value;
+        return { ...fact, value: rest };
+      }
+      return fact;
+    });
+    expect(evaluate(facts).value("form-4797", "1.line.20_gross_sales_price_col_a")).toBe(350000);
+  });
+
+  it("a Part I loss while Form 8582 files makes lines 7–18b and what they send a gap", () => {
+    const run = evaluate(base.facts, [decision("decisions.scope.must_file_8582", true)]);
+    expect(run.field("form-4797", "0.line.7_net_section_1231_gain_loss")).toMatchObject({
+      ok: false,
+      unsupported: true,
+    });
+    expect(run.field("schedule-1", SCHEDULE_1_LINE_4)).toMatchObject({
+      ok: false,
+      unsupported: true,
+    });
+    expect(run.field("schedule-d", SCHEDULE_D_LINE_11)).toMatchObject({
+      ok: false,
+      unsupported: true,
+    });
+    // The rows and Part III still print.
+    expect(run.value("form-4797", "0.line.2_row2_col_g")).toBe(-2500);
+    expect(run.value("form-4797", "1.line.31_total_recapture_amounts")).toBe(30500);
+  });
+
+  it("with no Form 8582 the same losses stay on the form", () => {
+    const run = evaluate(base.facts, [decision("decisions.scope.must_file_8582", false)]);
+    expect(run.value("form-4797", "0.line.7_net_section_1231_gain_loss")).toBe(94960);
+    expect(run.value("schedule-1", SCHEDULE_1_LINE_4)).toBe(46400);
+  });
+
   it("Pub. 596 Worksheet 1 is a gap for a Form 4797 filer", () => {
     const info = { mustFile: { "form-4797": { value: true } } } as unknown as Parameters<
       typeof worksheet1

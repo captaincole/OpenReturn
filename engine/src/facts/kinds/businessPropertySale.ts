@@ -55,7 +55,9 @@ export interface BusinessPropertySaleFactValue {
   /*
    * Line 20 / column (d): money, the FMV of other property received, and any debt
    * the buyer assumed (irs-4797-inst-2025::sec::line-20::b01). Absent: box 2 of
-   * the Form 1099-S the sale names.
+   * the Form 1099-S the sale names, when no other sale names it. Sales that share
+   * a form each state their price: the amount realized is split by fair market
+   * value (depreciable-property-and-other-property::b01).
    */
   grossSalesPrice?: number;
   /* Cost or other basis, plus improvements; not reduced by depreciation (line-21::b01). */
