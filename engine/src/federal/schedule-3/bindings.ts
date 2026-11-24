@@ -4,6 +4,7 @@ import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { foreignTaxCredit } from "../1116/credit.js";
 import { mortgageCreditGap } from "../8396/creditGap.js";
+import { line6bFrom8801 } from "../8801/credit.js";
 import { line6cFrom8839 } from "../8839/receivers.js";
 import { LINE_19_ID, nonrefundableCreditGap } from "../8863/credit.js";
 import { creditGap, LINE_12_ID } from "../8880/credit.js";
@@ -34,6 +35,14 @@ export function register(): void {
       "0.line.1": (form, info) => foreignTaxCredit(form, info),
       // MANUAL EDIT: Form 2441 line 11 ("Also enter ... on Schedule 3 (Form 1040), line 2").
       "0.line.2": (form) => numberOrBlank(form["form-2441.0.line.11_dependent_care_credit"]),
+      /*
+       * MANUAL EDIT: Form 8801 line 25 ("Also enter this amount on your 2025 Schedule 3
+       * (Form 1040), line 6b"; irs-1040-inst-2025::sec::line-6b::b01). No Form 8801, the old reason.
+       */
+      "0.line.6b": (form, info) => {
+        const received = line6bFrom8801(form, info);
+        return received === undefined ? unsupported(NO_SCENARIO) : received.value;
+      },
       // MANUAL EDIT: Schedule R line 22 ("Also enter this amount on Schedule 3 (Form 1040), line 6d").
       "0.line.6d": (form) => numberOrBlank(form["schedule-r.1.line.22_credit"]),
       // MANUAL EDIT: Form 8839 line 18 ("here and on Schedule 3 (Form 1040), line 6c"); no 8839, the old reason.
@@ -117,7 +126,6 @@ export function register(): void {
 
     unsupported: {
       "0.line.5a": "Residential clean energy credit (Form 5695 Part I) is not modeled.",
-      "0.line.6b": NO_SCENARIO,
       "0.line.6e": "Reserved for future use.",
       "0.line.6h": NO_SCENARIO,
       "0.line.6i": NO_SCENARIO,

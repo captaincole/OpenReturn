@@ -9,10 +9,9 @@
  * The basis stage figures an S corporation shareholder's basis (Form 7203,
  * basis.ts) and a partner's (the Partner's Basis Worksheet, partnerBasis.ts).
  * The passive stage (passive.ts) puts a passive partnership K-1 on Form 8582
- * with the return's rentals. The other stages pass the items through when the
- * facts show their limit cannot apply, and otherwise report unsupported with
- * one sentence: Form 461 has no rules for a K-1 yet. The at-risk stage
- * (atRisk.ts) figures Form 6198 when some of the investment is not at risk.
+ * with the return's rentals. The at-risk stage (atRisk.ts) figures Form 6198
+ * when some of the investment is not at risk. The excess business loss stage
+ * allows every item: Form 461 figures that limit outside Schedule E.
  */
 
 import type { FilingStatus } from "../../values.js";
@@ -26,11 +25,7 @@ import {
   withAmount,
   type BasisFigures,
 } from "./basis.js";
-import {
-  excessBusinessLossThreshold,
-  noLossCanBeLimited,
-  type OtherBusinessLosses,
-} from "./excessBusinessLoss.js";
+import type { OtherBusinessLosses } from "./excessBusinessLoss.js";
 import type { OtherPassiveActivities } from "./form8582Rows.js";
 import { hasCarriedBasisLoss, type PassThroughEntity, type PassThroughItem } from "./items.js";
 import {
@@ -46,7 +41,7 @@ import { passAll, perEntity, unsupportedFor } from "./stageHelpers.js";
 /* What a stage may read besides the items. */
 export interface LimitContext {
   filingStatus?: FilingStatus;
-  /* Undefined when the caller does not know them: a K-1 business loss is then unsupported. */
+  /* The return's business losses outside the K-1s: Form 461's must-file bound reads them, no stage does. */
   otherBusinessLosses?: OtherBusinessLosses;
   /*
    * Form 8582's rows for the return's Schedule E properties (8582/rentalRows.ts).
@@ -200,39 +195,19 @@ export const k1BusinessLosses = (entities: ReadonlyArray<EntityItems>) =>
 
 /*
  * Excess business loss (irs-1120sk1-inst-2025::sec::excess-business-loss-limitations::b01):
- * only a business loss is limited, on Form 461, and the limit does not change
- * Schedule E (irs-1040se-inst-2025::sec::special-rules-that-limit-losses::b01).
- * It is figured with every business on the return, so the stage adds every
- * K-1's business losses and the return's other ones (context), without any
- * income. At or below the threshold for the filing status no loss can be
- * limited and the items pass in full (excessBusinessLoss.ts); whether Form
- * 461 must still be attached is its resolver's question. Above the threshold
- * the limit needs the income side and Form 461's rules, which are not modeled.
+ * the last limit in the order the law sets (irs-461-inst-2025::sec::ordering-rules::b01).
+ * It does not change Schedule E: "Any reduction to your loss due to the
+ * excess business loss rules will not be reflected on your Schedule E"
+ * (irs-1040se-inst-2025::sec::special-rules-that-limit-losses::b01, ::b06).
+ * Form 461 figures it from every business on the return, after this stage,
+ * and Schedule 1 line 8p adds the excess back (federal/461/). So the stage
+ * allows every item in full and carries nothing; the excess is a net
+ * operating loss carryover, not a K-1 carryover
+ * (irs-461-inst-2025::sec::purpose-of-form::b01). The QBI forms read Form 461
+ * line 16 (qbi/excessBusinessLoss.ts).
  */
-export const excessBusinessLossLimit: LimitStage = (entities, context) => {
-  const k1Losses = k1BusinessLosses(entities);
-  const decide = ({ entity, items }: EntityItems): StageOutcome => {
-    const limited = activityLosses(items);
-    if (limited.length === 0) return passAll(items);
-    const other = context.otherBusinessLosses;
-    if (other === undefined) {
-      return unsupportedFor(
-        entity,
-        limited,
-        "the return's other business losses are not known, so the excess business loss limit (Form 461) cannot be ruled out.",
-      );
-    }
-    if (other.unknownKeys.length > 0) return { kind: "waiting", factKeys: other.unknownKeys };
-    if (noLossCanBeLimited(k1Losses, other, context.filingStatus)) return passAll(items);
-    const threshold = excessBusinessLossThreshold(context.filingStatus);
-    return unsupportedFor(
-      entity,
-      limited,
-      `the return's business losses can be more than the $${threshold} threshold, so the excess business loss limit (Form 461) may apply, which is not modeled for a K-1.`,
-    );
-  };
-  return new Map(entities.map((entry) => [entry.entity.key, decide(entry)]));
-};
+export const excessBusinessLossLimit: LimitStage = (entities) =>
+  new Map(entities.map(({ entity, items }) => [entity.key, passAll(items)]));
 
 export const LIMIT_STAGES: ReadonlyArray<readonly [LimitName, LimitStage]> = [
   ["basis", basisLimit],

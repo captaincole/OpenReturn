@@ -132,19 +132,19 @@ routed nor reported (`tests/unit/federal/passThrough/boxTables.test.ts`).
 - Form 7203 itself, one copy for each S corporation K-1 that files it, and
   Schedule E line 28 column (e) checked on its row.
 - The at-risk stage passes a loss when the holding says all of the investment
-  is at risk; the excess business loss stage passes when every business loss
-  on the return, added without any income, is at most the threshold ($313,000,
-  or $626,000 on a joint return), so no loss can be limited. Form 461 then
-  still files when a line's losses are more than $156,500, with its lines
-  unsupported (`excessBusinessLoss.ts`, `461/resolveInfo.ts`).
+  is at risk. The excess business loss stage allows every item: the limit
+  does not change Schedule E. Form 461 (`federal/461/`) figures it from the
+  return's lines, and Schedule 1 line 8p adds the excess back (scenario
+  `juilin`). Its resolver files the form from the business losses added
+  without any income (`excessBusinessLoss.ts`, `461/resolveInfo.ts`).
 - QBI counts only the allowed loss: the statement's QBI is scaled to the part
   of the business losses the limits allow, and a net QBI loss carries forward
   on Form 8995 line 16.
 - Not yet: a distribution above stock basis (a capital gain on Form 8949), a
   loan repayment (Form 7203 Part II Section C), a sale of stock, the section
-  1.1367-1(g) election, business losses above the threshold (Form 461's
-  limit), and a carried loss on Form 8995-A. Each is unsupported with a
-  reason.
+  1.1367-1(g) election, and a carried loss on Form 8995-A. Each is unsupported
+  with a reason. With an excess business loss, a QBI line that adds a losing
+  business is a gap (`qbi/excessBusinessLoss.ts`).
 
 ## What the fourth step handles
 

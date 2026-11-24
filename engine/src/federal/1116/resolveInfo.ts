@@ -27,12 +27,10 @@ const EXCLUDED_INCOME_GAP =
   "Form 2555 or Form 4563 files: line 12 takes off the taxes on the excluded income (irs-1116-inst-2025::sec::line-12-2::b01, b02), and neither form has rules in the engine.";
 const LOSS_ACCOUNT_GAP =
   "An earlier year left a foreign or domestic loss account; line 16 recaptures it (irs-1116-inst-2025::sec::line-16::b06–b13), and the engine has no balances to do it.";
-const FORM_461_GAP =
-  "Form 461 files: line 16 adds back a disallowed business loss (irs-1116-inst-2025::sec::line-16::b01), and Form 461 has no rules in the engine.";
 const FORM_5471_GAP =
   "Form 5471 files: line 22 may take a section 960(c) increase (irs-1116-inst-2025::sec::line-22::b01), and the engine has no rules for it.";
 
-/* Forms 2555, 4563, 461 and 5471 have no rules: only their must-file decision files them. */
+/* Forms 2555, 4563 and 5471 have no rules: only their must-file decision files them. */
 const decidedToFile = (inputs: ResolverInputs, shortId: string) =>
   inputs.decisionByKey.get(`decisions.scope.must_file_${shortId}`) === true;
 
@@ -100,11 +98,7 @@ function formGaps(inputs: ResolverInputs, sources: ForeignTaxSource[], filesForm
         ? NO_SOURCE_GAP
         : undefined,
     line12Gap: excluded ? EXCLUDED_INCOME_GAP : undefined,
-    line16Gap: lossAccounts
-      ? LOSS_ACCOUNT_GAP
-      : decidedToFile(inputs, "461")
-        ? FORM_461_GAP
-        : undefined,
+    line16Gap: lossAccounts ? LOSS_ACCOUNT_GAP : undefined,
     line22Gap: decidedToFile(inputs, "5471") ? FORM_5471_GAP : undefined,
   };
 }

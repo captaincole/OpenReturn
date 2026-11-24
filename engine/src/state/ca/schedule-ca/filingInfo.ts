@@ -7,6 +7,7 @@ import type { Form2106FilingInfo } from "../../../federal/2106/filingInfo.js";
 import type { Form8889FilingInfo } from "../../../federal/8889/filingInfo.js";
 import type { ScheduleAFilingInfo } from "../../../federal/schedule-a/filingInfo.js";
 import type { BaseFilingInfo } from "../../../filingInfo.js";
+import type { Form3801FilingInfo } from "../3801/filingInfo.js";
 import type { Form3803FilingInfo } from "../3803/filingInfo.js";
 import type { Form3913FilingInfo } from "../3913/filingInfo.js";
 import type { ScheduleDCaFilingInfo } from "../schedule-d-ca/filingInfo.js";
@@ -16,10 +17,12 @@ import type { CaEmployeeAmounts, DepreciationAdjustment } from "./activities.js"
 /*
  * Part II waits while Schedule A prints the federal increased standard deduction.
  * Line 12 columns B and C read whether a Form 2106 claims depreciation.
+ * Line 5 reads FTB 3801's figures when that form files.
  */
 export interface ScheduleCaFilingInfo
   extends
     BaseFilingInfo,
+    Form3801FilingInfo,
     Pick<Form2106FilingInfo, "form2106Totals" | "form2106TotalsGap">,
     Pick<Form8889FilingInfo, "hsaEmployerContributions">,
     Pick<ScheduleAFilingInfo, "increasedStandardDeduction" | "disasterLossGap">,
