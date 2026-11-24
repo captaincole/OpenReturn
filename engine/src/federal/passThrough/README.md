@@ -142,9 +142,9 @@ routed nor reported (`tests/unit/federal/passThrough/boxTables.test.ts`).
   on Form 8995 line 16.
 - Not yet: a distribution above stock basis (a capital gain on Form 8949), a
   loan repayment (Form 7203 Part II Section C), a sale of stock, the section
-  1.1367-1(g) election, amounts not at risk (Form 6198), business losses above
-  the threshold (Form 461's limit), and a carried loss on Form 8995-A. Each is
-  unsupported with a reason.
+  1.1367-1(g) election, business losses above the threshold (Form 461's
+  limit), and a carried loss on Form 8995-A. Each is unsupported with a
+  reason.
 
 ## What the fourth step handles
 
@@ -209,6 +209,23 @@ routed nor reported (`tests/unit/federal/passThrough/boxTables.test.ts`).
 - **The other partnership items**: box 14 (Schedule SE takes Schedule C
   only), box 7 royalties (Schedule E Part I), boxes 10 to 12 (Form 4797 and
   Form 4562), box 15 credits, box 17 (Form 6251), box 20 codes A and B (Form
-  4952), a publicly traded partnership, Form 6198, and a partial sale.
+  4952), a publicly traded partnership, and a partial sale.
+
+## What the at-risk step handles
+
+- Amounts not at risk (`atRisk.ts`, scenario `ituralde`): a partnership or S
+  corporation K-1 whose holding says some investment is not at risk, or that
+  has a loss the at-risk limit carried from an earlier year
+  (`carriedLosses.atRisk`), goes through Form 6198 (`federal/6198/`). Part I
+  takes the items that reach the stage after the basis limit (box 1 on line 1,
+  a section 1231 item on line 2b, other income on line 3, other deductions and
+  losses on line 4) and the carried loss as an ordinary loss on line 1. The
+  owner's amounts at risk are their own fact, `at_risk.<K-1 fact key>`.
+- Each item is allowed in proportion and the rest carries with its character.
+  An allowed carried loss is a "PYA" row (`atRiskCarryover`), line 27 is Yes,
+  and Schedule E column (f) is checked for a K-1 that files Form 6198.
+- Not yet: more than one at-risk activity on a K-1, guaranteed payments next to
+  amounts not at risk, a disposition of the interest, recapture, and a
+  beneficiary's K-1. Each is unsupported with a reason (`6198/QUESTIONS.md`).
 
 `QUESTIONS.md` lists every doubt, with its source and the default chosen.

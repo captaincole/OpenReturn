@@ -6,6 +6,7 @@ export * from "./kinds/adoption.js";
 export * from "./kinds/alternativeMinimumTax.js";
 export * from "./kinds/archerMsa.js";
 export * from "./kinds/armedForcesMove.js";
+export * from "./kinds/atRisk.js";
 export * from "./kinds/blindness.js";
 export * from "./kinds/business.js";
 export * from "./kinds/caDependentCare.js";

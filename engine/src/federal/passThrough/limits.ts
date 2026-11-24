@@ -11,11 +11,13 @@
  * The passive stage (passive.ts) puts a passive partnership K-1 on Form 8582
  * with the return's rentals. The other stages pass the items through when the
  * facts show their limit cannot apply, and otherwise report unsupported with
- * one sentence: Form 6198 and Form 461 have no rules for a K-1 yet.
+ * one sentence: Form 461 has no rules for a K-1 yet. The at-risk stage
+ * (atRisk.ts) figures Form 6198 when some of the investment is not at risk.
  */
 
 import type { FilingStatus } from "../../values.js";
 import type { PassiveRentals } from "../8582/rentalRows.js";
+import { activityLosses, atRiskLimit, needsForm6198 } from "./atRisk.js";
 import {
   basisItems,
   figureBasis,
@@ -31,7 +33,6 @@ import {
 } from "./excessBusinessLoss.js";
 import type { OtherPassiveActivities } from "./form8582Rows.js";
 import { hasCarriedBasisLoss, type PassThroughEntity, type PassThroughItem } from "./items.js";
-import { isLossOrDeduction, isPortfolio } from "./itemTypes.js";
 import {
   figurePartnerBasis,
   isPartnerLossItem,
@@ -92,19 +93,6 @@ export type LimitStage = (
 ) => ReadonlyMap<string, StageOutcome>;
 
 export type LimitName = "basis" | "atRisk" | "passive" | "excessBusinessLoss";
-
-const lossesAndDeductions = (items: PassThroughItem[]) =>
-  items.filter((item) => isLossOrDeduction(item.type, item.amount));
-
-/*
- * A loss or deduction from the trade or business: not portfolio, and not a
- * charitable contribution, which the owner deducts on Schedule A
- * (irs-1120sk1-inst-2025::sec::box-12-other-deductions::b06), not from the activity.
- */
-const activityLosses = (items: PassThroughItem[]) =>
-  lossesAndDeductions(items).filter(
-    (item) => !isPortfolio(item.type) && item.type !== "charitable_contribution",
-  );
 
 /*
  * The basis stage's answer from Form 7203: every item outside Part III passes;
@@ -201,30 +189,7 @@ export const basisLimit: LimitStage = perEntity(({ entity, items }) => {
   return sCorporationBasis(entity, items);
 });
 
-/*
- * At-risk (irs-1120sk1-inst-2025::sec::at-risk-limitations::b01): only a loss
- * or deduction from an activity is limited, so with none, and no loss carried
- * from an earlier year (::b03), nothing is limited. Portfolio items are not
- * from an at-risk activity. With all of the investment at risk the limit does
- * not reduce the loss (Form 6198 is not needed); otherwise Form 6198 figures
- * it, which is not modeled for a K-1.
- */
-export const atRiskLimit: LimitStage = perEntity(({ entity, items }) => {
-  const limited = activityLosses(items);
-  const carried = (entity.holding?.carriedLosses?.atRisk ?? 0) > 0;
-  if (limited.length === 0 && !carried) return passAll(items);
-  const allAtRisk = entity.holding?.allInvestmentAtRisk;
-  if (!carried && allAtRisk === true) return passAll(items);
-  if (!carried && allAtRisk === undefined)
-    return { kind: "waiting", factKeys: [entity.holdingKey] };
-  return unsupportedFor(
-    entity,
-    limited,
-    "a loss or deduction from the activity with amounts not at risk, or a carried at-risk loss, needs the at-risk limit (Form 6198), which is not modeled for a K-1.",
-  );
-});
-
-export { passiveLimit };
+export { atRiskLimit, passiveLimit };
 
 const positiveTotal = (items: PassThroughItem[]) =>
   items.reduce((total, item) => total + Math.abs(item.amount ?? 0), 0);
@@ -344,4 +309,22 @@ export function businessLossesBeforeExcessBusinessLoss(
     limited.kind === "allowed" ? [{ entity: limited.entity, items: limited.allowed }] : [],
   );
   return k1BusinessLosses(reached);
+}
+
+/*
+ * The K-1s that file Form 6198 (needsForm6198 in atRisk.ts), each with the
+ * items that reach the at-risk stage: after the basis limit, which comes first
+ * (irs-pub-925-2025::sec::at-risk-limits::b02). A K-1 the basis stage stops
+ * does not reach it.
+ */
+export function k1sOnForm6198(
+  entities: ReadonlyArray<PassThroughEntity>,
+  context: LimitContext,
+): EntityItems[] {
+  const basisOnly = LIMIT_STAGES.filter(([name]) => name === "basis");
+  return applyLossLimits(entities, context, basisOnly).flatMap((limited) =>
+    limited.kind === "allowed" && needsForm6198(limited.entity, limited.allowed)
+      ? [{ entity: limited.entity, items: limited.allowed }]
+      : [],
+  );
 }
