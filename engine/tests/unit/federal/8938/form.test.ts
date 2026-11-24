@@ -18,9 +18,9 @@ import { evaluateScenario } from "../../../../src/index.js";
 import { decisionRow } from "../../../helpers/fixtureBuilders.js";
 import {
   alpenroseFund,
+  baselCurrent,
   fjordlineShares,
   polderNote,
-  rhineCurrent,
 } from "../../../scenarios/synthetic/amys/assets.js";
 import { amysScenario as base } from "../../../scenarios/synthetic/amys/index.js";
 import { faileScenario } from "../../../scenarios/synthetic/faile/index.js";
@@ -98,7 +98,7 @@ const info = (facts: TaxFactRow[] = base.facts, decisions: AIDecisionRow[] = bas
 const ASSET = (slug: string) => makeForeignFinancialAssetFactKey(slug);
 
 describe("who files Form 8938", () => {
-  it("files for the amys couple: $383,808 at year end is over the $100,000 joint threshold", () => {
+  it("files for the amys couple: $382,943 at year end is over the $100,000 joint threshold", () => {
     const { files, missing } = evaluate();
     expect(files("form-8938")).toBe(true);
     expect(missing).toEqual([]);
@@ -117,7 +117,7 @@ describe("who files Form 8938", () => {
 
   it("does not ask where they live when the domestic threshold is not met either way", () => {
     const small = {
-      ...rhineCurrent,
+      ...baselCurrent,
       maximumValue: 30000,
       yearEndValue: 30000,
       closedOrDisposed: undefined,
@@ -126,7 +126,7 @@ describe("who files Form 8938", () => {
       ...base.facts.filter(
         (fact) => fact.category !== "foreign" || fact.key === FOREIGN_ASSET_KEYS.exceptedForms,
       ),
-      row("foreign", ASSET("rhine-current"), small),
+      row("foreign", ASSET("basel-current"), small),
     ];
     const { files, missing } = evaluate(facts);
     expect(files("form-8938")).toBe(false);
@@ -135,7 +135,7 @@ describe("who files Form 8938", () => {
 
   it("asks for the highest total when only it can settle the any-time test", () => {
     const first = {
-      ...rhineCurrent,
+      ...baselCurrent,
       maximumValue: 40000,
       yearEndValue: 30000,
       conversion: undefined,
@@ -146,7 +146,7 @@ describe("who files Form 8938", () => {
     const single = decisionsWith({ "decisions.scope.filing_status": "single" });
     const facts = [
       ...onlyThese,
-      row("foreign", ASSET("rhine-current"), first),
+      row("foreign", ASSET("basel-current"), first),
       row("foreign", ASSET("polder-note"), second),
       row("foreign", FOREIGN_ASSET_KEYS.livesAbroad, false),
     ];
@@ -188,7 +188,7 @@ describe("a separate return", () => {
   it("leaves out the spouse's shares, and reports the joint account at its full value", () => {
     const figured = info(base.facts, separate).form8938;
     expect(figured?.partVI.map((each) => each.description)).toEqual([polderNote.description]);
-    expect(figured?.partV[0]).toMatchObject({ maximumValue: 123116, jointWithSpouse: true });
+    expect(figured?.partV[0]).toMatchObject({ maximumValue: 122066, jointWithSpouse: true });
     expect(figured?.otherAssets.totals.dividends).toBeUndefined();
   });
 
@@ -201,7 +201,7 @@ describe("the lines", () => {
   it("summarizes Part V by type and Part VI once per asset", () => {
     const { line } = evaluate();
     expect(line("0.line.5_number_deposit_accounts")).toBe(2);
-    expect(line("0.line.6_max_value_deposit_accounts")).toBe(123116 + 16784);
+    expect(line("0.line.6_max_value_deposit_accounts")).toBe(122066 + 16834);
     expect(line("0.line.8_max_value_custodial_accounts")).toBe(82347);
     expect(line("0.line.11_max_value_foreign_assets")).toBe(221235 + 76500);
   });
@@ -231,29 +231,32 @@ describe("the lines", () => {
     expect(evaluate(facts).line("0.header.number_of_additional_statements")).toBe(3);
   });
 
-  it("ties Part III to the income lines: interest, dividends and credits add to Schedule B and line 20", () => {
+  /*
+   * Each category's line rounds on its own, as the Schedule B rows do; the
+   * Schedule B totals round once, so a sum of rounded lines can differ by $1
+   * (dividends: 1,450.20 + 1,239.41 = 2,689.61, line 6 prints 2,690).
+   */
+  it("ties Part III to the income lines: Schedule B's rows and Form 1040 line 20", () => {
     const { line, value } = evaluate();
-    const interest =
-      Number(line("0.line.13a_accounts_interest_col_c")) +
-      Number(line("0.line.14a_other_assets_interest_col_c"));
-    const dividends =
-      Number(line("0.line.13b_accounts_dividends_col_c")) +
-      Number(line("0.line.14b_other_assets_dividends_col_c"));
+    const scheduleB = (id: string) => Number(value("schedule-b", id));
+    expect(line("0.line.13a_accounts_interest_col_c")).toBe(scheduleB("0.line.1_amount_1"));
+    expect(line("0.line.14a_other_assets_interest_col_c")).toBe(scheduleB("0.line.1_amount_2"));
+    expect(line("0.line.13b_accounts_dividends_col_c")).toBe(scheduleB("0.line.5_amount_1"));
+    expect(line("0.line.14b_other_assets_dividends_col_c")).toBe(scheduleB("0.line.5_amount_2"));
     const credits =
       Number(line("0.line.13g_accounts_credits_col_c")) +
       Number(line("0.line.14g_other_assets_credits_col_c"));
-    expect(interest).toBe(value("schedule-b", "0.line.2_total_interest"));
-    expect(dividends).toBe(value("schedule-b", "0.line.6_total_ordinary_dividends"));
+    // 138.54 + 187.39 = 325.93: the rounded lines and line 20 agree here.
     expect(credits).toBe(value("form-1040", "line.20"));
   });
 
   it("leaves the credits blank when no foreign tax credit is claimed", () => {
-    const zurich = base.facts.find((fact) => fact.key === makeInterestFactKey("zurich-savings"))!;
+    const bologna = base.facts.find((fact) => fact.key === makeInterestFactKey("bologna-savings"))!;
     const fjordline = base.facts.find(
       (fact) => fact.key === makeDividendFactKey("fjordline-shares"),
     )!;
     const facts = factsWith({
-      [zurich.key]: { ...(zurich.value as object), box6: undefined },
+      [bologna.key]: { ...(bologna.value as object), box6: undefined },
       [fjordline.key]: { ...(fjordline.value as object), box7: undefined },
     });
     const { line } = evaluate(facts);
@@ -270,10 +273,10 @@ describe("the lines", () => {
   });
 
   it("makes a GIIN in the wrong shape a gap, not a blank", () => {
-    const zurich = base.facts.find((fact) => fact.key === ASSET("zurich-savings"))!;
-    const value = zurich.value as ForeignFinancialAssetFactValue;
+    const bologna = base.facts.find((fact) => fact.key === ASSET("bologna-savings"))!;
+    const value = bologna.value as ForeignFinancialAssetFactValue;
     const facts = factsWith({
-      [zurich.key]: { ...value, institution: { ...value.institution!, giin: "K7Q2M400018SL756" } },
+      [bologna.key]: { ...value, institution: { ...value.institution!, giin: "B4S7G200031SL380" } },
     });
     expect(isGap(evaluate(facts).field("form-8938", "1.line.26b_institution_giin_segment_1"))).toBe(
       true,
@@ -291,32 +294,32 @@ describe("Schedule B line 7 from the account facts", () => {
     expect(missingOf("schedule-b").filter((key) => key.startsWith("account."))).toEqual([]);
     expect(value("schedule-b", "0.line.7a_foreign_account_yes")).toBe(true);
     expect(value("schedule-b", "0.line.7a_fincen_114_required_yes")).toBe(true);
-    expect(value("schedule-b", "0.line.7b_foreign_country_1")).toBe("Switzerland");
-    expect(value("schedule-b", "0.line.7b_foreign_country_2")).toBe("United Kingdom, Germany");
+    expect(value("schedule-b", "0.line.7b_foreign_country_1")).toBe("Italy");
+    expect(value("schedule-b", "0.line.7b_foreign_country_2")).toBe("United Kingdom, Switzerland");
   });
 
   it("lists the country of a Part VI asset answered as a financial account", () => {
     // The Luxembourg fund units are a "mutual fund or similar pooled fund" (Schedule B line 7a).
     const { value, missingOf } = evaluate();
     expect(value("schedule-b", "0.line.7a_fincen_114_required_yes")).toBe(true);
-    expect(value("schedule-b", "0.line.7b_foreign_country_1")).toBe("Switzerland");
+    expect(value("schedule-b", "0.line.7b_foreign_country_1")).toBe("Italy");
     expect(value("schedule-b", "0.line.7b_foreign_country_2")).toBe(
-      "United Kingdom, Germany, Luxembourg",
+      "United Kingdom, Switzerland, Luxembourg",
     );
     expect(missingOf("schedule-b").filter((key) => key.startsWith("account."))).toEqual([]);
   });
 
   it("counts a Part VI financial account alone for the $10,000 test", () => {
-    // Cologne at $8,000 does not settle question 2; the fund's $21,000 does.
+    // Basel at CHF 7,000 ($8,794) does not settle question 2; the fund's $21,000 does.
     const facts = factsWith({
-      [ASSET("rhine-current")]: { ...rhineCurrent, maximumValue: 8000 },
-      [ASSET("zurich-savings")]: undefined,
+      [ASSET("basel-current")]: { ...baselCurrent, maximumValue: 7000 },
+      [ASSET("bologna-savings")]: undefined,
       [ASSET("thames-brokerage")]: undefined,
     });
     const { value } = evaluate(facts);
     expect(value("schedule-b", "0.line.7a_foreign_account_yes")).toBe(true);
     expect(value("schedule-b", "0.line.7a_fincen_114_required_yes")).toBe(true);
-    expect(value("schedule-b", "0.line.7b_foreign_country_1")).toBe("Germany");
+    expect(value("schedule-b", "0.line.7b_foreign_country_1")).toBe("Switzerland");
     expect(value("schedule-b", "0.line.7b_foreign_country_2")).toBe("Luxembourg");
   });
 
@@ -325,12 +328,12 @@ describe("Schedule B line 7 from the account facts", () => {
       [ASSET("alpenrose-fund")]: { ...alpenroseFund, financialAccount: false },
     });
     const { value } = evaluate(facts);
-    expect(value("schedule-b", "0.line.7b_foreign_country_1")).toBe("Switzerland");
-    expect(value("schedule-b", "0.line.7b_foreign_country_2")).toBe("United Kingdom, Germany");
+    expect(value("schedule-b", "0.line.7b_foreign_country_1")).toBe("Italy");
+    expect(value("schedule-b", "0.line.7b_foreign_country_2")).toBe("United Kingdom, Switzerland");
     // Alone, it does not count for the $10,000 test either.
     const small = factsWith({
-      [ASSET("rhine-current")]: { ...rhineCurrent, maximumValue: 8000 },
-      [ASSET("zurich-savings")]: undefined,
+      [ASSET("basel-current")]: { ...baselCurrent, maximumValue: 7000 },
+      [ASSET("bologna-savings")]: undefined,
       [ASSET("thames-brokerage")]: undefined,
       [ASSET("alpenrose-fund")]: { ...alpenroseFund, financialAccount: false },
     });
@@ -372,13 +375,13 @@ describe("Schedule B line 7 from the account facts", () => {
   });
 
   it("leaves question 2 to a person when no account alone is over $10,000", () => {
-    const onlyRhine = base.facts.filter(
-      (fact) => fact.category !== "foreign" || fact.key === ASSET("rhine-current"),
+    const onlyBasel = base.facts.filter(
+      (fact) => fact.category !== "foreign" || fact.key === ASSET("basel-current"),
     );
-    const small = { ...rhineCurrent, maximumValue: 8000 };
+    const small = { ...baselCurrent, maximumValue: 7000 };
     const { value, field } = evaluate(
-      onlyRhine.map((fact) =>
-        fact.key === ASSET("rhine-current") ? { ...fact, value: small } : fact,
+      onlyBasel.map((fact) =>
+        fact.key === ASSET("basel-current") ? { ...fact, value: small } : fact,
       ),
     );
     expect(value("schedule-b", "0.line.7a_foreign_account_yes")).toBe(true);

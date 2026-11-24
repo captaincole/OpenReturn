@@ -1,8 +1,16 @@
 /*
  * amys's foreign accounts and holdings (README.md), with the income each one
- * pays. Every name, number and amount is made up. The balances are in the
- * account's currency, as the statements print them; the income is in U.S.
- * dollars, as each statement's U.S. tax annex prints it.
+ * pays. Every name, number and amount is made up. Each amount is in the
+ * account's currency, as its statement prints it; the engine converts it with
+ * the rate on the fact (facts/kinds/foreignCurrency.ts):
+ * - balances: the year-end rate (irs-8938-inst-2025::sec::currency-determination-date::b01);
+ * - interest and dividends: the yearly average rate (irs.gov "Yearly average
+ *   currency exchange rates"; federal/8938/QUESTIONS.md question 15);
+ * - tax withheld: the rate on the day withheld (irs-1116-inst-2025::sec::foreign-currency-conversion::b01);
+ * - a sale: the rates on the settlement dates of the sale and the purchase
+ *   (26 CFR 1.988-2(a)(2)(iv)).
+ * The year-end and day rates are made up; the yearly averages are the IRS
+ * table's 2025 values as read on 2026-11-24.
  */
 
 import type {
@@ -11,40 +19,56 @@ import type {
   InterestFactValue,
   TradeFactValue,
 } from "../../../../src/facts/index.js";
+import type { MonthEndBalances } from "../../documents/foreignAssetStatement.js";
 
 /* Treasury-style year-end rates: units of the currency per U.S. dollar (made up). */
-const CHF = { currency: "Swiss franc (CHF)", exchangeRate: 0.796 };
-const GBP = { currency: "British pound (GBP)", exchangeRate: 0.7432 };
 const EUR = { currency: "Euro (EUR)", exchangeRate: 0.852 };
+const GBP = { currency: "British pound (GBP)", exchangeRate: 0.7432 };
+const CHF = { currency: "Swiss franc (CHF)", exchangeRate: 0.796 };
 const NOK = { currency: "Norwegian krone (NOK)", exchangeRate: 10.125 };
 
-/* A joint savings account in Zurich: interest, a time-deposit penalty, Swiss withholding tax. */
-export const zurichSavings: ForeignFinancialAssetFactValue = {
+const YEARLY_AVERAGE = "IRS yearly average currency exchange rates, 2025";
+
+/* A joint time-deposit savings account in Bologna: interest, an early withdrawal penalty, Italian tax. */
+export const bolognaSavings: ForeignFinancialAssetFactValue = {
   part: "deposit_account",
   owner: "joint_with_spouse",
-  accountNumber: "CH93 0076 2011 6238 5295 7",
-  maximumValue: 98000,
-  yearEndValue: 91500,
-  conversion: CHF,
+  // Check digits 00: not a valid IBAN.
+  accountNumber: "IT00 X000 0000 0000 0000 0089 38",
+  maximumValue: 104000,
+  yearEndValue: 97200,
+  conversion: EUR,
   institution: {
-    name: "Limmat Kantonal Savings Bank",
-    giin: "K7Q2M4.00018.SL.756",
+    name: "Banca Saragozza S.p.A.",
+    giin: "B4S7G2.00031.SL.380",
     address: {
-      street: "Uraniastrasse 12",
-      city: "Zurich",
-      country: "Switzerland",
-      postalCode: "8001",
+      street: "Via Saragozza 61",
+      city: "Bologna",
+      country: "Italy",
+      postalCode: "40123",
     },
   },
 };
 
-export const zurichInterest: InterestFactValue = {
-  payerName: "Limmat Kantonal Savings Bank",
-  box1: 812.4,
-  box2: 45,
-  box6: 284.34,
-  box7: "Switzerland",
+/* Credited, and the tax withheld, on 31 December; the time deposit was broken in September. */
+export const bolognaInterest: InterestFactValue = {
+  payerName: "Banca Saragozza S.p.A.",
+  box1: 1180.4,
+  box2: 40,
+  box6: 118.04,
+  box7: "Italy",
+  conversion: {
+    currency: "Euro (EUR)",
+    exchangeRate: 0.886,
+    rateSource: YEARLY_AVERAGE,
+    taxExchangeRate: 0.852,
+    taxRateSource: "Treasury rate for 12/31/2025, the day the tax was withheld",
+  },
 };
+
+export const bolognaBalances: MonthEndBalances = [
+  101250, 101900, 102600, 103300, 104000, 103850, 103700, 103550, 96140, 96060, 96137.64, 97200,
+];
 
 /* Amys's custody account at a London broker, opened in 2025: dividends and one sale. */
 export const thamesBrokerage: ForeignFinancialAssetFactValue = {
@@ -68,39 +92,78 @@ export const thamesBrokerage: ForeignFinancialAssetFactValue = {
 
 export const thamesDividends: DividendFactValue = {
   payerName: "Thames Crown Securities Ltd",
-  box1a: 1450.25,
-  box1b: 1450.25,
+  box1a: 1100.7,
+  box1b: 1100.7,
+  conversion: { currency: "British pound (GBP)", exchangeRate: 0.759, rateSource: YEARLY_AVERAGE },
 };
 
+/* Traded 03/10 and 09/22; settled two business days later, on 03/12 and 09/24. */
 export const thamesSale: TradeFactValue = {
   tradeId: "thames-001",
   description: "300 sh Severn Water plc",
   quantity: 300,
   dateAcquired: "03/10/2025",
   dateSold: "09/22/2025",
-  proceeds: 18400,
-  costBasis: 12150,
+  proceeds: 13616,
+  costBasis: 9402,
+  conversion: {
+    currency: "British pound (GBP)",
+    saleExchangeRate: 0.7395,
+    purchaseExchangeRate: 0.7741,
+    rateSource: "Spot rates on the settlement dates, 09/24/2025 and 03/12/2025",
+  },
 };
 
-/* Amys's old current account in Cologne, closed in June: no income in 2025. */
-export const rhineCurrent: ForeignFinancialAssetFactValue = {
+export const thamesBalances: MonthEndBalances = [
+  undefined,
+  undefined,
+  52400,
+  55100,
+  58300,
+  61200,
+  59800,
+  60450,
+  47100,
+  47650,
+  48200,
+  47800,
+];
+
+/* Amys's old current account in Basel, closed in June: no income in 2025. */
+export const baselCurrent: ForeignFinancialAssetFactValue = {
   part: "deposit_account",
   owner: "taxpayer",
-  accountNumber: "DE89 3704 0044 0532 0130 00",
-  maximumValue: 14300,
+  // Check digits 00: not a valid IBAN.
+  accountNumber: "CH00 0000 0000 0000 8938 0",
+  maximumValue: 13400,
   yearEndValue: 0,
-  conversion: EUR,
+  conversion: CHF,
   closedOrDisposed: "06/30/2025",
   institution: {
-    name: "Rheinufer Volksbank eG",
+    name: "Rheinknie Bank AG",
     address: {
-      street: "Rheinuferstrasse 7",
-      city: "Cologne",
-      country: "Germany",
-      postalCode: "50667",
+      street: "Rheingasse 18",
+      city: "Basel",
+      country: "Switzerland",
+      postalCode: "4058",
     },
   },
 };
+
+export const baselBalances: MonthEndBalances = [
+  13400,
+  13250,
+  13100,
+  12900,
+  12750,
+  0,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+];
 
 /* Shares of a Norwegian company that Corin holds on its share register, not in an account. */
 export const fjordlineShares: ForeignFinancialAssetFactValue = {
@@ -120,11 +183,19 @@ export const fjordlineShares: ForeignFinancialAssetFactValue = {
   },
 };
 
+/* Paid on 05/22/2025, Norwegian tax withheld at 15% that day. */
 export const fjordlineDividends: DividendFactValue = {
   payerName: "Fjordline Shipping ASA",
-  box1a: 1240,
-  box1b: 1240,
-  box7: 186,
+  box1a: 12880,
+  box1b: 12880,
+  box7: 1932,
+  conversion: {
+    currency: "Norwegian krone (NOK)",
+    exchangeRate: 10.392,
+    rateSource: YEARLY_AVERAGE,
+    taxExchangeRate: 10.31,
+    taxRateSource: "Spot rate on 05/22/2025, the day the tax was withheld",
+  },
 };
 
 /* A U.S.-dollar note of a Dutch company that Amys bought in March and holds herself. */
@@ -154,6 +225,7 @@ export const polderNote: ForeignFinancialAssetFactValue = {
   ],
 };
 
+/* In U.S. dollars, as the note pays: no conversion. */
 export const polderInterest: InterestFactValue = {
   payerName: "Polder Grid Finance B.V.",
   box1: 1912.5,

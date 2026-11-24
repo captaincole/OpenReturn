@@ -19,16 +19,16 @@ import type { TaxFactRow } from "../../../../src/facts/rows.js";
 import { identityFact } from "../../../helpers/fixtureBuilders.js";
 import {
   alpenroseFund,
+  baselCurrent,
+  bolognaInterest,
+  bolognaSavings,
   fjordlineDividends,
   fjordlineShares,
   polderInterest,
   polderNote,
-  rhineCurrent,
   thamesBrokerage,
   thamesDividends,
   thamesSale,
-  zurichInterest,
-  zurichSavings,
 } from "./assets.js";
 
 export const AMYS_USER_ID = "amys-integration";
@@ -87,8 +87,14 @@ const asset = (slug: string, value: unknown, file: string) =>
     `Year-end statement (docs/${file}).`,
   );
 
+/* The amounts as the statement prints them, with the rates the couple looked up (assets.ts). */
 const income = (key: string, value: unknown, file: string) =>
-  fact("investment_income", key, value, `U.S. tax annex of the year-end statement (docs/${file}).`);
+  fact(
+    "investment_income",
+    key,
+    value,
+    `Year-end statement, page 2 (docs/${file}); rates: see the fact's conversion.`,
+  );
 
 const idFact = (suffix: string, value: string) =>
   identityFact({ userId: AMYS_USER_ID, taxYear: AMYS_TAX_YEAR, suffix, value });
@@ -109,8 +115,8 @@ export const amysFacts: TaxFactRow[] = [
   fact("identity", SPOUSE_KEYS.ssn, CORIN.ssn, "Stated by Corin."),
   fact("identity", SPOUSE_KEYS.dob, "12/02/1979", "Stated by Corin."),
   fact("wages", makeW2FactKey("lonestar-turbine"), w2, "W-2 from Lonestar Turbine Works Inc."),
-  asset("zurich-savings", zurichSavings, "01-limmat-savings.pdf"),
-  income(makeInterestFactKey("zurich-savings"), zurichInterest, "01-limmat-savings.pdf"),
+  asset("bologna-savings", bolognaSavings, "01-banca-saragozza-savings.pdf"),
+  income(makeInterestFactKey("bologna-savings"), bolognaInterest, "01-banca-saragozza-savings.pdf"),
   asset("thames-brokerage", thamesBrokerage, "02-thames-crown-custody.pdf"),
   income(makeDividendFactKey("thames-brokerage"), thamesDividends, "02-thames-crown-custody.pdf"),
   income(
@@ -118,7 +124,7 @@ export const amysFacts: TaxFactRow[] = [
     thamesSale,
     "02-thames-crown-custody.pdf",
   ),
-  asset("rhine-current", rhineCurrent, "03-rheinufer-current.pdf"),
+  asset("basel-current", baselCurrent, "03-rheinknie-current.pdf"),
   asset("fjordline-shares", fjordlineShares, "04-fjordline-register.pdf"),
   income(makeDividendFactKey("fjordline-shares"), fjordlineDividends, "04-fjordline-register.pdf"),
   asset("polder-note", polderNote, "05-polder-grid-note.pdf"),
