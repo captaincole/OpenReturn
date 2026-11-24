@@ -211,6 +211,24 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "foreign taxes when they accrue (Form 1116 Part II box k); absent, box j (paid)",
   ],
   [
+    /^estimated_tax\.payment\.[^.]+$/,
+    "each fact is one 2025 estimated tax payment (Form 1040 line 26, Form 2210 line 11); " +
+      "whether one was made is Cade's question",
+  ],
+  [
+    /^estimated_tax\.prior_year_overpayment_applied$/,
+    "recorded only when the 2024 return applied an overpayment to 2025 estimated tax",
+  ],
+  [
+    /^estimated_tax_penalty\.withholding_on\.[^.]+$/,
+    "each fact is one date of withholding for Form 2210 box D; recorded only when the " +
+      "taxpayer has the dates, else withholding counts in four equal parts",
+  ],
+  [
+    /^estimated_tax_penalty\.waiver_request$/,
+    "recorded only when the taxpayer asks for a waiver of the penalty (Form 2210 box A or B)",
+  ],
+  [
     /^prior_year\.ca_tax$/,
     "KNOWN GAP: decides whether FTB 5805 files. Needed only when the CA balance due is " +
       "$500 or more, which the resolver cannot see before evaluation.",

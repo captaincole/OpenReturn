@@ -80,6 +80,7 @@ import {
   line25b,
   line25c,
   line25d,
+  line26,
   line27a,
   line27cNoEicClaim,
   line28,
@@ -91,6 +92,7 @@ import {
   line35a,
   line35aForm8888Attached,
   line37,
+  line38,
 } from "./payments.js";
 import {
   signingTaxpayerEmail,
@@ -189,6 +191,7 @@ export function register(): void {
       "line.25b": line25b,
       "line.25c": line25c,
       "line.25d": line25d,
+      "line.26": line26,
       "line.27a": line27a,
       "line.27c_no_eic_claim": line27cNoEicClaim,
       "line.28": line28,
@@ -200,6 +203,7 @@ export function register(): void {
       "line.35a": line35a,
       "line.35a_form_8888_attached": line35aForm8888Attached,
       "line.37": line37,
+      "line.38": line38,
       "signing.taxpayer_occupation": signingTaxpayerOccupation,
       "signing.taxpayer_phone": signingTaxpayerPhone,
       "signing.taxpayer_email": signingTaxpayerEmail,
@@ -293,8 +297,6 @@ export function register(): void {
         "Checkbox indicating tax includes amounts from a third special form (e.g. section 962 election, recapture). No ingestion scenario built for these edge cases.",
       "line.16_other_form_number":
         "Free-text entry for the form number associated with the third checkbox on line 16. Tied to special-form tax scenarios not yet ingested.",
-      "line.26":
-        "Estimated tax payments and prior-year overpayment applied forward have no ingestion path yet — no estimated_payments fact category exists.",
       "line.former_spouse_ssn":
         "Former spouse SSN for joint estimated tax split — no MFS/divorce scenario with prior joint estimated payments modeled yet; requires separate fact ingestion for former spouse identity.",
       "line.27b_clergy_schedule_se":
@@ -313,8 +315,6 @@ export function register(): void {
         "Bank account number for direct deposit refund — no banking fact category ingested; taxpayer must enter this manually.",
       "line.36":
         "Amount of overpayment (line 34) to apply to 2026 estimated tax — a taxpayer election with no corresponding fact or decision in the ingestion model.",
-      "line.38":
-        "Estimated tax penalty requires Form 2210 calculation (prior-year tax liability, installment due dates, underpayment amounts) — no penalty-calculation engine or prior-year facts ingested yet.",
       "page2.third_party_designee_yes":
         "No fact or decision models whether the taxpayer designates a third party — no third-party-designee scenario built yet.",
       "page2.third_party_designee_no":

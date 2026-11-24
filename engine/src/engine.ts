@@ -53,15 +53,16 @@ export function bindingKind(fieldId: string): "binding" | "unsupported" | undefi
 }
 
 /*
- * A form that files only when a line of another form holds an amount above 0
- * (Form 8888 splits a refund, so it needs Form 1040 line 35a). Who files is
+ * A form that files only when a line holds an amount above 0 or a box is
+ * checked (Form 8888 splits a refund, so it needs Form 1040 line 35a; Form 2210
+ * files only with a Part II box). Who files is
  * decided from facts before any line is computed; this check runs after the
  * lines settle and takes the form off the return.
  */
-const amountLineByForm = new Map<string, string>(); // formId → full field id
+const amountLineByForm = new Map<string, readonly string[]>(); // formId → full field ids
 
-export function fileOnlyWithAmountOn(formId: string, fieldId: string): void {
-  amountLineByForm.set(formId, fieldId);
+export function fileOnlyWithAmountOn(formId: string, fieldIds: string | readonly string[]): void {
+  amountLineByForm.set(formId, typeof fieldIds === "string" ? [fieldIds] : fieldIds);
 }
 
 export function _resetBindingRegistryForTests(): void {
@@ -263,18 +264,35 @@ function dropFormsWithNoAmount(
   forms: Map<string, EvaluatedForm<AnyFormField>>,
   fieldResults: Map<string, DerivationResult<unknown>>,
 ): void {
-  for (const [formId, fieldId] of amountLineByForm) {
+  for (const [formId, fieldIds] of amountLineByForm) {
     const form = forms.get(formId);
     if (!form || !form.mustFile.ok || !form.mustFile.value) continue;
-    const line = fieldResults.get(fieldId);
-    if (line?.ok && typeof line.value === "number" && line.value > 0) continue;
+    const keeps = (fieldId: string) =>
+      keepsFormOnReturn(fieldResults.get(fieldId), fieldId.startsWith(`${formId}.`));
+    if (fieldIds.some(keeps)) continue;
     forms.set(formId, {
       ...form,
-      mustFile: ok(false, `${formId} does not file: ${fieldId} holds no amount.`, []),
+      mustFile: ok(
+        false,
+        `${formId} does not file: no amount or checked box on ${fieldIds.join(", ")}.`,
+        [],
+      ),
       missingInputs: [],
       fields: [],
     });
   }
+}
+
+/*
+ * An amount above 0 or a checked box keeps the form; so does a gap, which must
+ * stay in sight. A field of the form's own that is still blank keeps it too:
+ * such a form writes an unchecked box as false, so a blank one waits on an
+ * answer, and the form's missing inputs must stay in sight.
+ */
+function keepsFormOnReturn(result: DerivationResult<unknown> | undefined, own: boolean): boolean {
+  if (!result) return own;
+  if (!result.ok) return own || ("unsupported" in result && result.unsupported === true);
+  return result.value === true || (typeof result.value === "number" && result.value > 0);
 }
 
 function nonConvergenceError(shared: EvaluateFormSharedState): Error {

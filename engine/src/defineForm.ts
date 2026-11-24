@@ -28,8 +28,11 @@ export interface FormSpec<TForm extends object, TInfo extends BaseFilingInfo> {
   bindings: Partial<{ [K in keyof TForm]: BindingFn<TForm, TInfo, K> }>;
   formatters?: Partial<{ [K in keyof TForm]: FormatterFn<TForm[K]> }>;
   unsupported?: Partial<{ [K in keyof TForm]: string }>;
-  /** The form files only when this line of another form (a full field id) holds an amount above 0. */
-  filesOnlyWithAmountOn?: string;
+  /**
+   * The form files only when one of these full field ids holds an amount above 0
+   * or a checked box (Form 8888: Form 1040 line 35a; Form 2210: its Part II boxes).
+   */
+  filesOnlyWithAmountOn?: string | readonly string[];
 }
 
 // Also indexable by a full cross-form field id ("form-1040.line.11b").
