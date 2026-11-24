@@ -117,6 +117,47 @@ whether the choice changes a dollar amount.
 - Default: lines 33 to 39 are unsupported: Schedule P (540NR) has no rules yet.
   Sections A and B still compute.
 
+## 13. Whole-dollar rounding of the computed lines
+
+- Source: the form and the instructions give no rounding rule for lines 8, 11,
+  22, 25 or the separate-return addition on line 4.
+- Default: each line rounds to the nearest dollar when it is computed (50
+  cents and up rounds up), the engine's rule for every form. The blind fill
+  made the same choice (blind doubt 3).
+- Changes dollars: by $1 at most, when a product ends in exactly 50 cents
+  (line 8 at $8,080.50 prints $8,081).
+
+## Blind check (2026-11-24)
+
+A blind preparer filled 15 cases from the blank form and the instructions. No
+line differs in dollars. Two lines differ only as blank against 0: line 31 with
+no carryover (engine 0, blind blank) and line 15 when 2024 Schedule P (540NR)
+line 35 is blank (engine 0, blind blank). Neither changes a later line. The
+blind doubts that can change dollars are items 1, 3, 7 and 13 here.
+
+## Second opinions
+
+- PolicyEngine-US 2.153.8 (commit b3edc0446b), `parameters/gov/states/ca/tax/income/amt/`
+  and `variables/gov/states/ca/tax/income/alternative_minimum_tax/`. Compared on 2026-11-24.
+  It models the California AMT (Schedule P Part II), not the credit for prior
+  year AMT: FTB 3510 Part II (lines 28 to 39) has no counterpart there.
+  - Lines 5 and 6, 2024 values: $90,048 / $337,678 single and head of household,
+    $120,065 / $450,238 joint and surviving spouse, $60,029 / $225,115 separate.
+    Agrees with the engine. The blind preparer recalled $337,672 / $450,230 for
+    line 6 (1.5 and 2 times the separate amount); those do not index at 3.0% to
+    the 2025 worksheet amounts ($347,808 / $463,745,
+    `ca-540-sched-p-inst-2025::sec::exemption-worksheet::b01`), and
+    PolicyEngine has $337,678 / $450,238. Engine kept.
+  - Line 4 separate-return threshold $465,231 (the form): PolicyEngine's 2024
+    separate upper threshold is the same. Agrees.
+  - Line 8 phase-out rate 25%, line 11 rate 7%, line 9 child amount $9,450
+    (`ca-3510-inst-2025::sec::specific-line-instructions::b03`): same values,
+    and the same smaller-of rule on line 9. Agrees. It gates the child rule
+    on "qualifying child dependent"; the engine asks the FTB conditions. Scope
+    difference only.
+- IRS Direct File: federal only, no California forms. Not compared. The repo
+  names no other reference implementation for this form.
+
 ## Confidence by field group
 
 | Field group | Confidence |
