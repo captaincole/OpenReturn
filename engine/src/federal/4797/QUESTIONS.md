@@ -109,7 +109,10 @@ default the engine applies, and whether the default can change a dollar amount.
 
 17. **More than four rows in a part.** The paper has four; the engine prints one
     form and no statement: those rows are a gap, and the totals still add every
-    property. Changes dollars: no.
+    property. Changes dollars: no. For Part III the instructions say "If you
+    have more than four properties to report, use additional forms"
+    (irs-4797-inst-2025::sec::part-iii::b01); they give no rule for the rows
+    of lines 2 and 10. The work to repeat the form is issue #247.
 
 18. **Not modeled (no fact):** a section 121 exclusion on a home used for
     business, a QOF deferral, a mark-to-market trader's line 10 and 1099-B
