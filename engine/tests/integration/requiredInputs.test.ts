@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { evaluateScenario, pendingInputs } from "../../src";
 import { isK1FactKey } from "../../src/facts";
 import type { AIDecisionRow, TaxFactRow } from "../../src/facts/rows";
@@ -260,6 +260,13 @@ function unreported(base: Outcome, dropped: Outcome): string[] {
 }
 
 const SCENARIOS = await loadScenarios();
+
+/*
+ * Each case runs synchronously and vitest chains them with microtasks, so the
+ * file can hold the worker's event loop past its 60-second RPC timeout on a
+ * busy machine. Yield to the event loop before each case.
+ */
+beforeEach(() => new Promise<void>((resolve) => setImmediate(resolve)));
 
 describe.each(SCENARIOS)("required inputs: $name", (scenario) => {
   const decisions = decisionsWithPreparerStyle(scenario);

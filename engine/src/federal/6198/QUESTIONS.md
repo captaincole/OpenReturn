@@ -30,6 +30,16 @@ Each question has its source, the default the code uses, and whether the default
 
 14. **A rental (Schedule E Part I) with amounts not at risk.** Schedule E line 21 should take Form 6198's deductible loss (irs-1040se-inst-2025::sec::line-21::b01). Default: unchanged from before: line 21 stays blank with `allInvestmentAtRisk` false and a loss. Only the K-1 and Schedule C users are connected.
 
+15. **Last year's line 21 loss when line 15 is last year's line 19b (box b).** Line 19b comes before line 21 on the same form, so last year's 19b does not net last year's deducted loss. The text says "Your prior tax year line 21 deductible loss reduces your at-risk investment as of the beginning of your current tax year" (::line-14-2::b01), but line 18 with box b takes decreases "that occurred since the end of your prior tax year" (::line-18::b01). Default: the owner includes last year's line 21 in line 18 (`decreasesSince`, facts/kinds/atRisk.ts). The blind fill read it the other way: nothing more on line 18. Changes dollars when last year's line 21 was above 0 (the blind case had 0).
+
+16. **Cents on lines 6 and 7 (and 11, 12, 16).** "Include cents when adding the amounts and round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01). Default: each entered line rounds on its own, and lines 8, 13 and 17 add the rounded lines (the engine's rule for lines defined as arithmetic on other lines). Changes a total by $1 only when two lines both carry 50 cents or more, or both under.
+
+## Second opinions
+
+- **PolicyEngine-US 2.153.8** (commit b3edc044, 2026-11-23): no at-risk model. It has no variable or parameter for section 465 or Form 6198; business losses go only through the section 461(l) limit (`limited_business_loss`). Nothing to compare.
+- **IRS Direct File** (commit e365f9f4, 2026-06-11): its fact dictionary (`backend/src/main/resources/tax/`) has no Schedule C, Schedule K-1 or Form 6198 module. Nothing to compare.
+- **Blind fill** (15 cases, 2026-11-24): every dollar amount matches. One line differs only as blank against 0: case 15 line 7, where $0.49 of increases rounds to 0; the engine leaves it blank (item 11).
+
 ## Confidence
 
 | Field group | Confidence |
