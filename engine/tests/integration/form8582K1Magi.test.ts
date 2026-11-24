@@ -19,10 +19,10 @@ import { cadsuaneScenario } from "../scenarios/synthetic/cadsuane";
 
 /*
  * Form 8582 line 6 (irs-8582-inst-2025::sec::line-6::b01) with a K-1 whose
- * entire interest was sold at an overall loss: its released passive losses
- * count once, and its nonpassive amounts (columns (k) and (i)) count once.
- * Single, W-2 $110,000, one rental with active participation and a $15,000
- * loss. Hand figures: line 6 is 110,000 plus the K-1's nonpassive amounts plus
+ * entire interest was sold at an overall loss. Single, W-2 $110,000, one
+ * rental with active participation and a $15,000 loss, so Part II needs line
+ * 6. Line 6 is a gap for now (8582/magiGap.ts). Hand figures, the target for
+ * the rebuild: line 6 is 110,000 plus the K-1's nonpassive amounts once plus
  * its released passive losses; line 7 is 150,000 less line 6; line 8 half of
  * that; line 9 the smaller of line 4 (15,000) and line 8.
  */
@@ -95,16 +95,46 @@ function run(rows: TaxFactRow[]) {
     decisions: cadsuaneScenario.decisions,
     authEmail: null,
   });
-  return (fieldId: string) => {
+  const field = (fieldId: string) => {
     const formId = fieldId.split(".")[0];
-    const found = result.forms.get(formId)?.fields.find((entry) => entry.fieldId === fieldId);
-    return found?.result.ok ? found.result.value : undefined;
+    return result.forms.get(formId)?.fields.find((entry) => entry.fieldId === fieldId)?.result;
   };
+  const value = (fieldId: string) => {
+    const found = field(fieldId);
+    return found?.ok ? found.value : undefined;
+  };
+  return { field, value };
+}
+
+/*
+ * Line 6 is not rebuilt yet (QUESTIONS.md item 43): on a return with a Part IV
+ * rental loss and a K-1, line 6 and every line that reads it are a gap.
+ */
+const LINE_6_READERS = [
+  "form-8582.0.line.6_modified_agi",
+  "form-8582.0.line.7_line5_minus_line6",
+  "form-8582.0.line.8_half_of_line7",
+  "form-8582.0.line.9_special_allowance",
+  "form-8582.0.line.11_total_losses_allowed",
+  "form-8582.1.part6.row_1_col_a_loss",
+  "form-8582.1.part6.total_col_c_special_allowance",
+  "schedule-e.0.line.22_deductible_loss_a",
+  "schedule-e.0.line.25_losses",
+  "schedule-e.0.line.26_total_income_or_loss",
+  "schedule-e.1.line.41_total_income_or_loss",
+];
+
+function expectLine6Gap(field: ReturnType<typeof run>["field"]) {
+  for (const fieldId of LINE_6_READERS) {
+    const result = field(fieldId);
+    expect(result?.ok, fieldId).toBe(false);
+    if (result && !result.ok) expect(result.reason, fieldId).toContain("Form 8582 line 6");
+  }
 }
 
 describe("Form 8582 line 6 with a K-1 sold at an overall loss", () => {
-  it("counts a passive partner's guaranteed payments once, and the released box 1 loss", () => {
-    const value = run(
+  it("is a gap with a passive partner's guaranteed payments and released box 1 loss", () => {
+    const { field } = run(
       facts(
         [
           { box: "1", amount: -6000 },
@@ -113,16 +143,18 @@ describe("Form 8582 line 6 with a K-1 sold at an overall loss", () => {
         { materiallyParticipated: false },
       ),
     );
-    // 110,000 + 15,000 guaranteed payments (column (k)) − 6,000 released loss.
-    expect(value("form-8582.0.line.6_modified_agi")).toBe(119000);
-    expect(value("form-8582.0.line.7_line5_minus_line6")).toBe(31000);
-    expect(value("form-8582.0.line.8_half_of_line7")).toBe(15500);
-    expect(value("form-8582.0.line.9_special_allowance")).toBe(15000);
-    expect(value("schedule-e.0.line.22_deductible_loss_a")).toBe(15000);
+    /*
+     * Target for the rebuild: line 6 = 110,000 + 15,000 guaranteed payments
+     * (column (k)) − 6,000 released loss = 119,000; line 7 31,000; line 8
+     * 15,500; line 9 15,000; Schedule E line 22 15,000, the rental loss in full.
+     */
+    expectLine6Gap(field);
+    // Lines that do not read line 6 still compute.
+    expect(field("form-8582.0.line.3_combined")).toMatchObject({ ok: true, value: -15000 });
   });
 
-  it("counts a working partner's box 1 income once, and the released rental loss", () => {
-    const value = run(
+  it("is a gap with a working partner's box 1 income and released rental loss", () => {
+    const { field, value } = run(
       facts(
         [
           { box: "1", amount: 10000 },
@@ -131,12 +163,12 @@ describe("Form 8582 line 6 with a K-1 sold at an overall loss", () => {
         { materiallyParticipated: true, carriedLosses: { passive: 2000 } },
       ),
     );
-    // 110,000 + 10,000 box 1 (column (k)) − 8,000 − 2,000 released passive losses.
-    expect(value("form-8582.0.line.6_modified_agi")).toBe(110000);
-    expect(value("form-8582.0.line.7_line5_minus_line6")).toBe(40000);
-    expect(value("form-8582.0.line.8_half_of_line7")).toBe(20000);
-    expect(value("form-8582.0.line.9_special_allowance")).toBe(15000);
-    expect(value("schedule-e.0.line.22_deductible_loss_a")).toBe(15000);
+    /*
+     * Target for the rebuild: line 6 = 110,000 + 10,000 box 1 (column (k))
+     * − 8,000 − 2,000 released passive losses = 110,000; line 7 40,000; line 8
+     * 20,000; line 9 15,000; Schedule E line 22 15,000.
+     */
+    expectLine6Gap(field);
     expect(value("schedule-e.1.line.28_row_a_col_k_nonpassive_income")).toBe(10000);
     expect(value("schedule-e.1.line.28_row_b_col_a_name")).toBe(
       "Andor Mills LP, rental real estate",

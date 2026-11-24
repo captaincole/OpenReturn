@@ -11,6 +11,7 @@
 import type { FormAccessor } from "../../defineForm.js";
 import { numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
+import { magiWithK1Gap } from "../8582/magiGap.js";
 import { needsForm7203 } from "../passThrough/basis.js";
 import type { PassThroughEntity, PassThroughItem } from "../passThrough/items.js";
 import type { ItemType } from "../passThrough/itemTypes.js";
@@ -388,6 +389,9 @@ function line41(form: Form, info: Info): number | Unsupported | undefined {
   if (gaps.length > 0) return unsupported(gaps.join(" "));
   const partIII = partIIIGap(info);
   if (partIII) return partIII;
+  // Line 26 is Form 8582 line 6's gap with a K-1 (8582/magiGap.ts): line 41 shows it too.
+  const magiGap = info.partIInUse ? magiWithK1Gap((fieldId) => form[fieldId], info) : undefined;
+  if (magiGap) return magiGap;
   const line26 = numberOrBlank(form["0.line.26_total_income_or_loss"]);
   const line32 = numberOrBlank(form["1.line.32_total_partnership_s_corp_income"]);
   const line37 = line37ForLine41(form, info);

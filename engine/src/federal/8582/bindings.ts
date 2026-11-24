@@ -18,6 +18,7 @@ import {
 import { allocationBindings, part9Unsupported } from "./allocationBindings.js";
 import type { Form8582FilingInfo } from "./filingInfo.js";
 import { modifiedAgi } from "./magi.js";
+import { magiWithK1Gap } from "./magiGap.js";
 import type { Form8582 } from "./types.js";
 
 type Fn = (f: FormAccessor<Form8582>, info: Form8582FilingInfo) => unknown;
@@ -201,16 +202,31 @@ function withK1Gap(bindings: Record<string, Fn>): Record<string, Fn> {
   return Object.fromEntries(
     Object.entries(bindings).map(([fieldId, binding]): [string, Fn] => {
       if (fieldId.startsWith("0.header.")) return [fieldId, binding];
+      const readsLine6 = READS_LINE_6.some((prefix) => fieldId.startsWith(prefix));
       return [
         fieldId,
         (form, info) => {
           const gap = info.passiveK1Activities?.gap;
-          return gap ? unsupported(gap) : binding(form, info);
+          if (gap) return unsupported(gap);
+          const magiGap = readsLine6 ? magiWithK1Gap((id) => form[id], info) : undefined;
+          return magiGap ?? binding(form, info);
         },
       ];
     }),
   );
 }
+
+/* MANUAL EDIT: line 6 and the fields that read it (magiGap.ts). */
+const READS_LINE_6 = [
+  "0.line.6_",
+  "0.line.7_",
+  "0.line.8_",
+  "0.line.9_",
+  "0.line.11_",
+  "1.part6.",
+  "1.part7.",
+  "1.part8.",
+];
 
 export function register(): void {
   const bindings: Record<string, Fn> = {

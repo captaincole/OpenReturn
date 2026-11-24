@@ -349,8 +349,9 @@ Each question has its source and the default the code uses now.
     (i), every K-1's nonpassive amount, and the losses an entire disposition
     releases (column (g), both rows; `releasedLosses` in `8582/magi.ts`)
     (irs-8582-inst-2025::sec::reporting-an-entire-disposition-on-form-4797-or::b02).
-    A trust's Part III column (f) income is still not added; no scenario has
-    it with Form 8582 Part II.
+    A trust's Part III column (f) income is still not added. These K-1 parts
+    of line 6 stay in the code but are not reached: with a K-1, a line 6 that
+    is used is a gap (item 43).
 39. **Partnership items with no route.** Box 6c dividend equivalents are not
     reported on Form 1040 (irs-1065k1-inst-2025::sec::box-6c-dividend-equivalents::b01)
     but share a type with other box 20 information, so they stay unrouted.
@@ -391,3 +392,17 @@ Each question has its source and the default the code uses now.
     the worksheet runs whenever item K1 shows a decrease at both ends, so a
     gain above basis is the named gap of item 29; a K-1 with neither end, or
     one end only, and no loss or distribution, passes without it.
+43. **Rebuild Form 8582 line 6 for a return with a K-1.** Line 6 is modified
+    AGI: AGI figured without the listed items
+    (irs-8582-inst-2025::sec::line-6::b01; irs-pub-925-2025::sec::rental-activities::b09,
+    ::b10). `magi.ts` builds it from AGI's parts instead, which does not yet
+    count every K-1 amount. Default for now (`8582/magiGap.ts`): when Part II
+    is used (a Part IV rental real estate loss with active participation, and
+    a loss on line 3) and the return has any Schedule K-1, line 6, lines 7 to
+    9 and 11, Parts VI to VIII, and Schedule E lines 22, 25, 26 and 41 are a
+    gap. A return with no K-1, or with no Part IV loss, is unchanged. The
+    rebuild: figure line 6 from AGI less the listed exclusions, with three
+    target cases: a trust's box 5 income (Part III column (f)) counts; the gain
+    on a K-1 interest sold at an overall gain (a passive gain on Form 8582)
+    does not count; a sold K-1's nonpassive amounts count once
+    (`tests/integration/form8582K1Magi.test.ts` keeps the hand figures).
