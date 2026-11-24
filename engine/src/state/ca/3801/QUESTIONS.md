@@ -42,6 +42,11 @@ default changes a dollar amount.
   (`ca-3801-inst-2025::sec::part-ii::b01`).
 - Default: 0 on line 9, lines 4 to 8 blank (the federal engine leaves line 9
   blank).
+- A married/RDP filing separately filer who lived with the spouse puts the
+  rental in Part V, not Part IV: "must use Part V instead of Part IV"
+  (`irs-8582-inst-2025::sec::part-iv-2::b01`). The California text says only
+  "You must enter -0- on line 9". A reading that keeps the rental in Part IV
+  moves the loss from line 2b to line 1b; lines 9 to 11 stay the same.
 - Changes dollars: no.
 
 ## 4. "Form or schedule to be reported on" (Parts VI to VIII)
@@ -102,6 +107,38 @@ default changes a dollar amount.
 - Default: a passive royalty's loss is the part federal Form 8582 allows; any
   other royalty's line 21.
 - Changes dollars: no (Schedule E line 26 counts the same amounts).
+
+## 10. Lines 4 to 11 when line 3 is income or zero
+
+- Source: the form's line 3: "If the result is net income or zero, see the
+  instructions for line 3. If line 3 and line 1d are losses, go to line 4.
+  Otherwise, enter -0- on line 9 and go to line 10." The line 3 instruction:
+  "If line 3 shows income, all of your losses are allowed, including any prior
+  year unallowed losses entered on line 1c or line 2c. Transfer the income and
+  losses to the form or schedule on which you normally report them"
+  (`ca-3801-inst-2025::sec::part-i::b01`). Neither text says to fill lines 9
+  to 11 then.
+- Default: the form stops after line 3; lines 4 to 11 and Part VII are blank.
+  The blind fill made the same choice.
+- The other reading: "Otherwise" also covers line 3 income, so line 9 = 0,
+  line 10 = lines 1a + 2a and line 11 = line 10. That prints an "allowed
+  loss" on line 11 smaller than the losses the line 3 rule allows.
+- Changes dollars: yes on the printed lines 9 to 11; no on Schedule CA (every
+  loss is allowed under both readings).
+
+## Second opinions
+
+- PolicyEngine-US 2.153.8 (commit b3edc04, 2026-11-23), read 2026-11-24. It
+  has no passive activity loss model, federal or California: no IRC 469
+  variable, no $25,000 special allowance or $150,000 phase-out parameter.
+  Rental losses reach AGI limited only by the IRC 461(l) excess business loss
+  rule (`limited_business_loss`). Its California code has no rental,
+  depreciation or passive-loss adjustment. Nothing to compare.
+- IRS Direct File: no checkout in the repo (issue #140 is undecided), and it
+  covers no rental or passive activity. Not compared.
+- The blind fill (14 cases) matched the engine on every dollar amount. The
+  only differences were line 10 blank (engine) against 0 (blind) in 9 cases
+  with no income on lines 1a or 2a.
 
 ## Confidence by field group
 
