@@ -29,6 +29,7 @@ No input documents: the engine has no K-1 document generator, so the facts are t
 | 8582 lines 10, 11 | line 2a; line 9 blank plus line 10 | 12,000; 12,000 |
 | 8582 Part VII row 1 | the only overall loss: ratio 1.00000, line 3 less line 9 (::part-vii-allocation-of-unallowed-losses::b02) | 30,000; 1.00000; 18,000 |
 | 8582 Part VIII row 1 | 30,000 − 18,000 (::part-viii-allowed-losses::b01) | 30,000; 18,000; 12,000 |
+| 8582 Parts VII and VIII, second column | the boatyard is Schedule E line 28 row A, written as the example writes it (::part-vi::b01) | Sch E, line 28A |
 | Sch E line 28 A (g); B (h) | Part VIII column (c) (irs-8582-inst-2025::sec::how-to-report-allowed-losses::b04); box 2 passive income (irs-1065k1-inst-2025::sec::box-2-net-rental-real-estate-income-loss::b02, item 4) | 12,000; 12,000 |
 | Sch E lines 30, 31, 32, 41 | 12,000 − 12,000 | 12,000; 12,000; 0; 0 |
 | 1040 lines 1a, 8, 9, 11a | | 180,000; 0; 180,000; 180,000 |

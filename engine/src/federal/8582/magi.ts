@@ -16,7 +16,7 @@
 import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
 import { limitContextFrom } from "../passThrough/limits.js";
-import { releasedOnDisposition } from "../passThrough/passiveActivity.js";
+import { isPassiveItem, releasedOnDisposition } from "../passThrough/passiveActivity.js";
 import { allowedWithRoute, routeEntities } from "../passThrough/routing.js";
 import { isRentalActivity, selfRentalState } from "../rentals/passive.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
@@ -95,7 +95,10 @@ function nonpassiveScheduleE(form: FormAccessor<Form8582>, info: Form8582FilingI
  * The losses an entire disposition releases (Schedule E column (g), its own row
  * and its PYA row): line 6 takes "into account the overall loss from the
  * disposition" (irs-8582-inst-2025::sec::reporting-an-entire-disposition-on-form-4797-or::b02);
- * the gain is already in Form 1040 line 7a. Undefined while such a K-1 is not routed.
+ * the gain is already in Form 1040 line 7a. Only the activity's passive items
+ * and its carried passive loss: the K-1's nonpassive amounts (guaranteed
+ * payments, a materially participated box 1) are already in columns (k) and (i)
+ * (line-6::b01). Undefined while such a K-1 is not routed.
  */
 function releasedLosses(info: Form8582FilingInfo): number | undefined {
   const entities = info.passThroughEntities ?? [];
@@ -105,7 +108,11 @@ function releasedLosses(info: Form8582FilingInfo): number | undefined {
   const amounts = released.map((entity) => {
     const entry = routed.find((candidate) => candidate.entity.key === entity.key);
     if (entry?.kind !== "routed") return undefined;
-    return sum(...allowedWithRoute(entry, "schedule_e_part_ii").map((item) => item.amount));
+    return sum(
+      ...allowedWithRoute(entry, "schedule_e_part_ii")
+        .filter((item) => isPassiveItem(entity, item))
+        .map((item) => item.amount),
+    );
   });
   return amounts.includes(undefined) ? undefined : roundDollars(sum(...amounts));
 }

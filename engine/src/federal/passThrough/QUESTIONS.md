@@ -361,3 +361,17 @@ Each question has its source and the default the code uses now.
     10, 11 (other than code A), 12, 15, 17 and the rest of box 20 stay
     unrouted, each a named gap on Schedule E line 41, as the business-tax
     depth rule asks.
+40. **Line 28 rows for separately stated items.** The K-1's ordinary income or
+    loss goes on one line; "each related item ... (including items of income
+    or loss stated separately on Schedule K-1)" goes "on a separate line
+    following" it, with a description in column (a)
+    (irs-1040se-inst-2025::sec::line-28::b01). Default: a partnership K-1's
+    first line takes the first kind it has of box 1, box 2, box 3 and boxes 4a
+    to 4c; each other kind is a line of its own named "<entity>, rental real
+    estate", "<entity>, other rental" or "<entity>, guaranteed payments"; the
+    PYA row comes last. Columns (e) and (f) are on the first line only. Each
+    line counts toward the four rows, and more than four make Part II
+    unsupported, as before. The wording of the description is ours: the block
+    gives only "depletion" as an example. Form 8582's second column names the
+    row of the K-1's passive activity, "Sch E, line 28A"
+    (irs-8582-inst-2025::sec::part-vi::b01).

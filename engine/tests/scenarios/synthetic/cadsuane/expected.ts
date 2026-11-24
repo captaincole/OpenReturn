@@ -60,6 +60,11 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Part VIII total — (c) Allowed loss
       "form-8582.1.part8.total_col_c_allowed_loss": 12000,
     },
+    // The boatyard's loss is on Schedule E line 28, row A (irs-8582-inst-2025::sec::part-vi::b01 writes "Sch E, line 28A").
+    renderedText: {
+      "form-8582.1.part7.row_1_form_or_schedule": "Sch E, line 28A",
+      "form-8582.1.part8.row_1_form_or_schedule": "Sch E, line 28A",
+    },
   },
   "schedule-e": {
     engineFields: {

@@ -65,7 +65,7 @@ layers, and each layer reads only the one before it.
 | 1120-S | box 17 code V statement | `qbi` | one more business on Form 8995 or 8995-A (`qbi/`), its QBI scaled to the allowed loss |
 | 1120-S, 1065 | box 17 code AC, box 20 code AG: gross receipts for section 448(c) | `no_line` | none: it informs Form 8990 only |
 | 1065 | box 1, boxes 2 and 3 | `schedule_e_part_ii` | Schedule E line 28: (h) passive income, (g) the passive loss Form 8582 allows, (k) or (i) for a business the partner materially participated in; an entire disposition with an overall loss in (g), its carried passive loss on a "PYA" row |
-| 1065 | boxes 4a, 4b, 4c guaranteed payments | `schedule_e_part_ii` | column (k); box 4c only for the part above 4a and 4b |
+| 1065 | boxes 4a, 4b, 4c guaranteed payments | `schedule_e_part_ii` | column (k); box 4c only for the part above 4a and 4b. Rentals and guaranteed payments next to box 1 go on separate line 28 rows that follow it, described in column (a) (irs-1040se-inst-2025::sec::line-28::b01) |
 | 1065 | box 5, box 6a, box 6b | `interest_list`, `dividend_list`, `qualified_dividends` | Schedule B payer rows; Form 1040 lines 2b, 3b, 3a |
 | 1065 | box 8, box 9a; boxes 9b, 9c | `schedule_d_line_5`, `schedule_d_line_12`; `schedule_d_line_18`, `schedule_d_line_19` | Schedule D lines 5 and 12; lines 18 and 19 are unsupported there |
 | 1065 | box 13 codes A to G | `schedule_a_line_11` | code A on line 11; the others are unsupported there |

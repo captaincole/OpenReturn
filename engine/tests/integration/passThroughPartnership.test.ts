@@ -239,7 +239,13 @@ describe("partnership items the engine does not handle are named", () => {
 
   it("puts guaranteed payments in column (k), and makes Form 8960 line 4b a gap", () => {
     const paid = withBox({ box: "4a", amount: 5000 });
-    expect(paid.value("schedule-e.1.line.28_row_a_col_k_nonpassive_income")).toBe(5000);
+    // irs-1040se-inst-2025::sec::line-28::b01: a related item on a separate line, described.
+    expect(paid.value("schedule-e.1.line.28_row_a_col_h_passive_income")).toBe(40000);
+    expect(paid.value("schedule-e.1.line.28_row_a_col_k_nonpassive_income")).toBeUndefined();
+    expect(paid.value("schedule-e.1.line.28_row_b_col_a_name")).toBe(
+      "Two Rivers Timber Fund LP, guaranteed payments",
+    );
+    expect(paid.value("schedule-e.1.line.28_row_b_col_k_nonpassive_income")).toBe(5000);
     expect(paid.value("schedule-e.1.line.32_total_partnership_s_corp_income")).toBe(45000);
     const line4b = paid.field("form-8960.0.line.4b");
     expect(line4b?.ok).toBe(false);

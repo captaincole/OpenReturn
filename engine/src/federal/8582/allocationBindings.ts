@@ -6,6 +6,7 @@
 import type { FormAccessor } from "../../defineForm.js";
 import { sumOrBlank } from "../../money.js";
 import type { PropertyColumn } from "../schedule-e/filingInfo.js";
+import { passiveActivityRowLetter } from "../schedule-e/partII.js";
 import { ROWS_PER_PART } from "./activities.js";
 import {
   lossAllocation,
@@ -33,19 +34,24 @@ interface PartSpec<R> {
  * example for Part VI (irs-8582-inst-2025::sec::part-vi::b01). A royalty has no
  * line 22 (irs-1040se-inst-2025::sec::line-22::b01): its loss is on line 21, and
  * line 25 counts only the part Form 8582 allows. A K-1 activity's allowed loss is
- * in Schedule E Part II's passive loss column (how-to-report-allowed-losses::b04).
+ * in Schedule E Part II's passive loss column (how-to-report-allowed-losses::b04),
+ * on the K-1's own line 28 row, written with its letter as the example writes
+ * "Sch E, line 28A" (part-vi::b01); a row past D has no letter.
  */
 function reportedOn(
   info: Form8582FilingInfo,
-  column: PropertyColumn | undefined,
+  activity: { factKey: string; column?: PropertyColumn },
 ): string | undefined {
-  if (column === undefined) return "Sch E, line 28";
+  const { column } = activity;
+  if (column === undefined) {
+    return `Sch E, line 28${passiveActivityRowLetter(info, activity.factKey) ?? ""}`;
+  }
   const property = info.rentalProperties?.find((entry) => entry.column === column);
   if (!property) return undefined;
   return property.value.propertyType === "royalties" ? "Sch E, line 21" : "Sch E, line 22";
 }
 
-function partBindings<R extends { name: string; column?: PropertyColumn }>(
+function partBindings<R extends { name: string; factKey: string; column?: PropertyColumn }>(
   spec: PartSpec<R>,
 ): Record<string, Fn> {
   const rowsOf = (form: FormAccessor<Form8582>, info: Form8582FilingInfo) => {
@@ -60,7 +66,7 @@ function partBindings<R extends { name: string; column?: PropertyColumn }>(
     out[`${key}_name`] = (form, info) => row(form, info)?.name;
     out[`${key}_form_or_schedule`] = (form, info) => {
       const activity = row(form, info);
-      return activity ? reportedOn(info, activity.column) : undefined;
+      return activity ? reportedOn(info, activity) : undefined;
     };
     for (const [suffix, value] of spec.columns) {
       out[`${key}_${suffix}`] = (form, info) => {

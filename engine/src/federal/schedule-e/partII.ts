@@ -13,6 +13,7 @@ import { numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { needsForm7203 } from "../passThrough/basis.js";
 import type { PassThroughEntity, PassThroughItem } from "../passThrough/items.js";
+import type { ItemType } from "../passThrough/itemTypes.js";
 import { limitContextFrom } from "../passThrough/limits.js";
 import { isPassiveItem, releasedOnDisposition } from "../passThrough/passiveActivity.js";
 import { allowedWithRoute, routeEntities, type RoutedEntity } from "../passThrough/routing.js";
@@ -52,14 +53,46 @@ function routedEntities(info: PassThroughInfo): RoutedEntity[] {
 }
 
 /*
- * One line 28 row: a K-1's current-year amounts, or its losses carried from
- * earlier years and allowed now, which go "on a separate line in column (i)"
- * with "PYA" in column (a), never netted against the current year
+ * The kind of a line 28 row. The K-1's ordinary income or loss is on its first
+ * line, and "each related item ... stated separately on Schedule K-1" on a
+ * separate line that follows it, described in column (a)
+ * (irs-1040se-inst-2025::sec::line-28::b01): a partnership's rentals (boxes 2
+ * and 3) and guaranteed payments (boxes 4a to 4c). Losses carried from earlier
+ * years and allowed now go "on a separate line" with "PYA" in column (a), never
+ * netted against the current year
  * (irs-1040se-inst-2025::sec::losses-not-allowed-in-prior-years-due-to-the-basis::b01).
  */
+type RowKind = "ordinary" | "rental_real_estate" | "other_rental" | "guaranteed" | "pya";
+
+const ROW_KIND_OF: Partial<Record<ItemType, RowKind>> = {
+  ordinary_business_income: "ordinary",
+  net_rental_real_estate_income: "rental_real_estate",
+  other_net_rental_income: "other_rental",
+  guaranteed_payment_services: "guaranteed",
+  guaranteed_payment_capital: "guaranteed",
+  guaranteed_payments_total: "guaranteed",
+};
+
+/* The current-year kinds in line order; the first a K-1 has takes its first line. */
+const CURRENT_KINDS: ReadonlyArray<RowKind> = [
+  "ordinary",
+  "rental_real_estate",
+  "other_rental",
+  "guaranteed",
+];
+
+/* Column (a)'s description of a related item's line. */
+const RELATED_DESCRIPTION: Partial<Record<RowKind, string>> = {
+  rental_real_estate: "rental real estate",
+  other_rental: "other rental",
+  guaranteed: "guaranteed payments",
+};
+
 interface PartIIRow {
   entity: PassThroughEntity;
-  priorYearAllowed: boolean;
+  kind: RowKind;
+  /* The K-1's first line: it answers columns (e) and (f). */
+  first: boolean;
 }
 
 /*
@@ -99,27 +132,59 @@ function guaranteedPaymentsOnce(items: PassThroughItem[]): PassThroughItem[] {
   );
 }
 
-const partIIItems = (routed: RoutedEntity, priorYearAllowed: boolean) =>
+/* The row an item goes on: its kind, or the PYA row. */
+const rowKindOf = (entity: PassThroughEntity, item: PassThroughItem): RowKind =>
+  onPriorYearRow(entity, item) ? "pya" : (ROW_KIND_OF[item.type] ?? "ordinary");
+
+/* The allowed Part II items of one kind of row. */
+const partIIItems = (routed: RoutedEntity, kind: RowKind) =>
   guaranteedPaymentsOnce(allowedWithRoute(routed, "schedule_e_part_ii")).filter(
-    (item) => onPriorYearRow(routed.entity, item) === priorYearAllowed,
+    (item) => rowKindOf(routed.entity, item) === kind,
   );
 
 const priorYearLoss = (routed: RoutedEntity | undefined) =>
-  routed && roundDollars(sumOrBlank(...partIIItems(routed, true).map((item) => item.amount)));
+  routed && roundDollars(sumOrBlank(...partIIItems(routed, "pya").map((item) => item.amount)));
 
-/* The rows in order: each K-1's row, then its PYA row when a carried loss is allowed. */
+/* The current-year kinds a K-1 has, from its items, in line order; one line at least. */
+function currentKinds(entity: PassThroughEntity): RowKind[] {
+  const present = new Set(
+    [...entity.items, ...entity.priorYearItems]
+      .filter((item) => (item.amount ?? 0) !== 0)
+      .map((item) => ROW_KIND_OF[item.type])
+      .filter((kind) => kind !== undefined),
+  );
+  const kinds = CURRENT_KINDS.filter((kind) => present.has(kind));
+  return kinds.length > 0 ? kinds : ["ordinary"];
+}
+
+/* The rows in order: each K-1's first line, its related items' lines, then its PYA row. */
 function partIIRows(info: PassThroughInfo): PartIIRow[] {
   const routed = routedEntities(info);
   return partIIEntities(info).flatMap((entity) => {
     const own = routed.find((entry) => entry.entity.key === entity.key);
     const pya = (priorYearLoss(own) ?? 0) !== 0;
-    return pya
-      ? [
-          { entity, priorYearAllowed: false },
-          { entity, priorYearAllowed: true },
-        ]
-      : [{ entity, priorYearAllowed: false }];
+    const kinds: RowKind[] = [...currentKinds(entity), ...(pya ? (["pya"] as const) : [])];
+    return kinds.map((kind, index) => ({ entity, kind, first: index === 0 }));
   });
+}
+
+/*
+ * The letter of the line 28 row that holds a K-1's passive activity, for Form
+ * 8582's second column ("Sch E, line 28A", irs-8582-inst-2025::sec::part-vi::b01);
+ * undefined past the four rows.
+ */
+export function passiveActivityRowLetter(
+  info: PassThroughInfo,
+  entityKey: string,
+): string | undefined {
+  const rows = partIIRows(info);
+  const index = rows.findIndex((row) => {
+    if (row.entity.key !== entityKey || row.kind === "pya") return false;
+    return row.entity.items.some(
+      (item) => isPassiveItem(row.entity, item) && rowKindOf(row.entity, item) === row.kind,
+    );
+  });
+  return index >= 0 && index < ROWS.length ? ROWS[index].toUpperCase() : undefined;
 }
 
 const rowAt = (info: PassThroughInfo, row: Row) => partIIRows(info)[ROWS.indexOf(row)];
@@ -130,7 +195,7 @@ function routedRow(info: Info, row: Row): RoutedEntity | undefined {
 }
 
 const OVERFLOW_PART_II =
-  "More than four rows of partnership or S corporation K-1s (a carried loss allowed this year takes a row of its own) need a continuation sheet for Part II, which the engine does not fill.";
+  "More than four rows of partnership or S corporation K-1s (a carried loss allowed this year, and each separately stated item, takes a row of its own) need a continuation sheet for Part II, which the engine does not fill.";
 
 /* Every reason the return is incomplete because of a K-1, in order; empty when there is none. */
 export function passThroughGaps(info: PassThroughInfo): string[] {
@@ -149,15 +214,13 @@ const gapOf = (routed: RoutedEntity): Unsupported | undefined =>
  * An amount column of a row: blank with no K-1 in the row, the gap when the
  * K-1 is unsupported, blank while it waits, else the routed amount.
  */
-function amountColumn(read: (routed: RoutedEntity, priorYearAllowed: boolean) => unknown) {
+function amountColumn(read: (routed: RoutedEntity, row: PartIIRow) => unknown) {
   return (row: Row): Fn =>
     (_, info) => {
       const routed = routedRow(info, row);
-      if (!routed) return undefined;
-      const priorYearAllowed = rowAt(info, row)?.priorYearAllowed === true;
-      return (
-        gapOf(routed) ?? (routed.kind === "routed" ? read(routed, priorYearAllowed) : undefined)
-      );
+      const current = rowAt(info, row);
+      if (!routed || !current) return undefined;
+      return gapOf(routed) ?? (routed.kind === "routed" ? read(routed, current) : undefined);
     };
 }
 
@@ -167,11 +230,11 @@ function amountColumn(read: (routed: RoutedEntity, priorYearAllowed: boolean) =>
  */
 function columnAmount(
   routed: RoutedEntity,
-  priorYearAllowed: boolean,
+  kind: RowKind,
   passive: boolean,
   income: boolean,
 ): number | undefined {
-  const amounts = partIIItems(routed, priorYearAllowed)
+  const amounts = partIIItems(routed, kind)
     .filter((item) => isPassiveItem(routed.entity, item) === passive)
     .map((item) => item.amount ?? 0)
     .filter((amount) => (income ? amount > 0 : amount < 0));
@@ -195,18 +258,10 @@ function columnAmount(
  * one on its PYA row. Column (j), section 179, has no route: a K-1 with it is
  * unsupported.
  */
-const nonpassiveIncome = amountColumn((routed, priorYearAllowed) =>
-  priorYearAllowed ? undefined : columnAmount(routed, false, false, true),
-);
-const nonpassiveLoss = amountColumn((routed, priorYearAllowed) =>
-  columnAmount(routed, priorYearAllowed, false, false),
-);
-const passiveIncome = amountColumn((routed, priorYearAllowed) =>
-  priorYearAllowed ? undefined : columnAmount(routed, false, true, true),
-);
-const passiveLoss = amountColumn((routed, priorYearAllowed) =>
-  columnAmount(routed, priorYearAllowed, true, false),
-);
+const nonpassiveIncome = amountColumn((routed, row) => columnAmount(routed, row.kind, false, true));
+const nonpassiveLoss = amountColumn((routed, row) => columnAmount(routed, row.kind, false, false));
+const passiveIncome = amountColumn((routed, row) => columnAmount(routed, row.kind, true, true));
+const passiveLoss = amountColumn((routed, row) => columnAmount(routed, row.kind, true, false));
 const noRouteYet = amountColumn(() => undefined);
 
 /*
@@ -215,15 +270,20 @@ const noRouteYet = amountColumn(() => undefined);
  * (irs-1040se-inst-2025::sec::line-28::b03): when Form 7203 files for it
  * (needsForm7203). Column (f) is for amounts not at risk in an activity with a
  * loss (::special-rules-that-limit-losses::b03): the limits route a loss only
- * when all of the investment is at risk, so it is No. A PYA row leaves both
- * to the K-1's own row.
+ * when all of the investment is at risk, so it is No. A PYA row and a related
+ * item's line leave both to the K-1's first line.
  */
-const basisComputationColumn = amountColumn((routed, priorYearAllowed) =>
-  priorYearAllowed ? undefined : needsForm7203(routed.entity),
+const basisComputationColumn = amountColumn((routed, row) =>
+  row.first ? needsForm7203(routed.entity) : undefined,
 );
-const notAtRiskColumn = amountColumn((_, priorYearAllowed) =>
-  priorYearAllowed ? undefined : false,
-);
+const notAtRiskColumn = amountColumn((_, row) => (row.first ? false : undefined));
+
+/* Column (a): the K-1's name; a related item's line adds its description; a PYA row starts with "PYA". */
+function rowName(row: PartIIRow): string {
+  if (row.kind === "pya") return `PYA ${row.entity.name}`;
+  const description = row.first ? undefined : RELATED_DESCRIPTION[row.kind];
+  return description ? `${row.entity.name}, ${description}` : row.entity.name;
+}
 
 function rowBindings(row: Row): Record<string, Fn> {
   const entity = (info: Info) => rowAt(info, row)?.entity;
@@ -231,9 +291,7 @@ function rowBindings(row: Row): Record<string, Fn> {
   return {
     [`${prefix}_col_a_name`]: (_, info) => {
       const current = rowAt(info, row);
-      return (
-        current && (current.priorYearAllowed ? `PYA ${current.entity.name}` : current.entity.name)
-      );
+      return current && rowName(current);
     },
     [`${prefix}_col_b_entity_type`]: (_, info) => {
       const form = entity(info)?.form;
