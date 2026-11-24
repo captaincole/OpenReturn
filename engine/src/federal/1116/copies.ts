@@ -5,8 +5,9 @@
  * gap (unsupported), and a gap carries to every line that reads it.
  */
 
-import { roundDollars, sum } from "../../money.js";
+import { numberOrBlank, roundDollars, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
+import { formGap } from "../461/figures.js";
 import type {
   ForeignTaxInfo,
   Form1116Category,
@@ -161,14 +162,33 @@ function highTaxLine(drafts: CopyLines[]): Value {
   return high ? unsupported(HIGH_TAX_GAP) : 0;
 }
 
+const FORM_461_GAP =
+  "Form 461 line 16 shows an excess business loss: line 16 adds back the part of it that belongs to the category (irs-1116-inst-2025::sec::line-16::b01), which the engine does not split by category.";
+
+/*
+ * Adjustment 1 of line 16, the disallowed business loss: the gap when Form 461
+ * line 16 is below 0, or Form 461's own gap; undefined while it waits or with
+ * no excess business loss (no adjustment).
+ */
+function form461Line16(form: Accessor, info: Form1116FilingInfo): Value | null {
+  if (info.mustFile?.["form-461"]?.value !== true) return null;
+  const gap = formGap(info);
+  if (gap) return unsupported(gap);
+  const line16 = numberOrBlank(form["form-461.0.line.16_excess_business_loss"]);
+  if (line16 === undefined) return undefined;
+  return line16 < 0 ? unsupported(FORM_461_GAP) : null;
+}
+
 /* Line 16 for each copy (lines.ts line16Adjustments), or the value that blocks them all. */
 function line16Of(
   drafts: CopyLines[],
   foreignTax: ForeignTaxInfo,
   limitation: Limitation | Unsupported | undefined,
+  form461: Value | null,
 ): Map<Form1116Category, Value> {
   const all = (value: Value) => new Map(drafts.map((draft) => [draft.category, value]));
   if (foreignTax.line16Gap) return all(unsupported(foreignTax.line16Gap));
+  if (form461 !== null) return all(form461);
   const block = blocker(...drafts.map((draft) => draft.line15));
   if (block !== null) return all(block);
   if (limitation === undefined || isGap(limitation)) return all(limitation);
@@ -221,7 +241,7 @@ export function form1116Set(
   const limitation = limitationOf(form, info, foreignTax.sources);
   const drafts = foreignTax.categories.map((each) => draftCopy(each, foreignTax, limitation));
   const line13 = highTaxLine(drafts);
-  const line16 = line16Of(drafts, foreignTax, limitation);
+  const line16 = line16Of(drafts, foreignTax, limitation, form461Line16(form, info));
   const line20 = regularTaxForCredit(form, info);
   const floored = typeof line20 === "number" ? Math.max(0, line20) : line20;
   const copies = drafts.map((draft) =>

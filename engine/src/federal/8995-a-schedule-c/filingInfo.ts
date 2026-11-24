@@ -8,4 +8,4 @@ import type { QbiFilingInfo } from "../qbi/filingInfo.js";
 export interface Form8995AScheduleCFilingInfo
   extends
     BaseFilingInfo,
-    Pick<QbiFilingInfo, "qbiBusinesses" | "qbiScheduleSEFiled" | "rentalProperties"> {}
+    Pick<QbiFilingInfo, "qbiBusinesses" | "qbiScheduleSEFiled" | "rentalProperties" | "form461"> {}
