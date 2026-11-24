@@ -15,7 +15,7 @@ import { magiWithK1Gap } from "../8582/magiGap.js";
 import { needsForm7203 } from "../passThrough/basis.js";
 import type { PassThroughEntity, PassThroughItem } from "../passThrough/items.js";
 import type { ItemType } from "../passThrough/itemTypes.js";
-import { limitContextFrom } from "../passThrough/limits.js";
+import { k1sOnForm6198, limitContextFrom } from "../passThrough/limits.js";
 import { isPassiveItem, releasedOnDisposition } from "../passThrough/passiveActivity.js";
 import { allowedWithRoute, routeEntities, type RoutedEntity } from "../passThrough/routing.js";
 import type { ScheduleEFilingInfo } from "./filingInfo.js";
@@ -269,15 +269,18 @@ const noRouteYet = amountColumn(() => undefined);
  * Column (e) is checked for a loss, a distribution, a sale of stock or a loan
  * repayment from an S corporation, with the basis computation attached
  * (irs-1040se-inst-2025::sec::line-28::b03): when Form 7203 files for it
- * (needsForm7203). Column (f) is for amounts not at risk in an activity with a
- * loss (::special-rules-that-limit-losses::b03): the limits route a loss only
- * when all of the investment is at risk, so it is No. A PYA row and a related
- * item's line leave both to the K-1's first line.
+ * (needsForm7203). Column (f) is checked for an activity subject to the
+ * at-risk rules, with Form 6198 figuring the deductible loss
+ * (::special-rules-that-limit-losses::b03): when Form 6198 files for the K-1
+ * (k1sOnForm6198). A PYA row and a related item's line leave both to the K-1's
+ * first line.
  */
 const basisComputationColumn = amountColumn((routed, row) =>
   row.first ? needsForm7203(routed.entity) : undefined,
 );
-const notAtRiskColumn = amountColumn((_, row) => (row.first ? false : undefined));
+const notAtRiskColumn = amountColumn((routed, row) =>
+  row.first ? k1sOnForm6198([routed.entity], {}).length > 0 : undefined,
+);
 
 /* Column (a): the K-1's name; a related item's line adds its description; a PYA row starts with "PYA". */
 function rowName(row: PartIIRow): string {

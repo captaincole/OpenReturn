@@ -1,8 +1,7 @@
 /*
  * The federal forms that have a catalog and no rules yet. Each has a FilingInfo
- * type with no slots and a resolver that reads only its must-file decision
- * (Form 461 also files from the return's business losses, with its lines
- * unsupported), so they are joined here and filingInfo.ts takes them as one.
+ * type with no slots and a resolver that reads only its must-file decision,
+ * so they are joined here and filingInfo.ts takes them as one.
  */
 
 import type { BaseFilingInfo } from "../filingInfo.js";
@@ -17,8 +16,6 @@ import type { Form4255FilingInfo } from "./4255/filingInfo.js";
 import { resolve4255Info } from "./4255/resolveInfo.js";
 import type { Form4563FilingInfo } from "./4563/filingInfo.js";
 import { resolve4563Info } from "./4563/resolveInfo.js";
-import type { Form461FilingInfo } from "./461/filingInfo.js";
-import { resolve461Info } from "./461/resolveInfo.js";
 import type { Form4797FilingInfo } from "./4797/filingInfo.js";
 import { resolve4797Info } from "./4797/resolveInfo.js";
 import type { Form4835FilingInfo } from "./4835/filingInfo.js";
@@ -27,8 +24,6 @@ import type { Form4970FilingInfo } from "./4970/filingInfo.js";
 import { resolve4970Info } from "./4970/resolveInfo.js";
 import type { Form5471FilingInfo } from "./5471/filingInfo.js";
 import { resolve5471Info } from "./5471/resolveInfo.js";
-import type { Form6198FilingInfo } from "./6198/filingInfo.js";
-import { resolve6198Info } from "./6198/resolveInfo.js";
 import type { Form6252FilingInfo } from "./6252/filingInfo.js";
 import { resolve6252Info } from "./6252/resolveInfo.js";
 import type { Form8582CRFilingInfo } from "./8582-cr/filingInfo.js";
@@ -67,7 +62,6 @@ import type { ScheduleFFilingInfo } from "./schedule-f/filingInfo.js";
 import { resolveScheduleFInfo } from "./schedule-f/resolveInfo.js";
 
 export type FederalFormsWithNoRulesFilingInfo = ScheduleFFilingInfo &
-  Form461FilingInfo &
   Form965AFilingInfo &
   Form2555FilingInfo &
   Form3800FilingInfo &
@@ -78,7 +72,6 @@ export type FederalFormsWithNoRulesFilingInfo = ScheduleFFilingInfo &
   Form4835FilingInfo &
   Form4970FilingInfo &
   Form5471FilingInfo &
-  Form6198FilingInfo &
   Form6252FilingInfo &
   Form8611FilingInfo &
   Form8621FilingInfo &
@@ -100,7 +93,6 @@ export const FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS: ReadonlyArray<
   (inputs: ResolverInputs) => BaseFilingInfo
 > = [
   resolveScheduleFInfo,
-  resolve461Info,
   resolve965AInfo,
   resolve2555Info,
   resolve3800Info,
@@ -111,7 +103,6 @@ export const FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS: ReadonlyArray<
   resolve4835Info,
   resolve4970Info,
   resolve5471Info,
-  resolve6198Info,
   resolve6252Info,
   resolve8611Info,
   resolve8621Info,
