@@ -168,6 +168,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "Form 8960 line 10, recorded only when the user states additional modifications; blank otherwise",
   ],
   [
+    /^business_loss_limit\.(business_capital_gain|other_business_income)$/,
+    "Form 461 answers Cade records only when a capital gain or loss, or an amount outside " +
+      "Schedule 1 lines 3 to 6, comes from a trade or business (lines 3 and 8); absent means none",
+  ],
+  [
     /^decisions\.scope\.must_file_6251$/,
     "KNOWN GAP: an incentive stock option spread files Form 6251; a filer who owes AMT " +
       "for another reason (line 7 more than line 10) needs the explicit decision.",

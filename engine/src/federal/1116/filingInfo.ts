@@ -1,4 +1,5 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
+import type { Form461FilingInfo } from "../461/filingInfo.js";
 import type { ForeignTaxSource } from "./sources.js";
 
 /* The categories the engine figures a Form 1116 for. */
@@ -27,7 +28,7 @@ export interface ForeignTaxInfo {
   k1Waiting?: boolean;
   /* Why line 12 cannot be figured (excluded foreign income, Form 2555 or 4563). */
   line12Gap?: string;
-  /* Why line 16 cannot be figured (a loss account from an earlier year, Form 461). */
+  /* Why line 16 cannot be figured (a loss account from an earlier year); Form 461 is read in copies.ts. */
   line16Gap?: string;
   /* Why line 22 cannot be figured (Form 5471: an excess limitation account). */
   line22Gap?: string;
@@ -35,7 +36,8 @@ export interface ForeignTaxInfo {
   residentOf?: string;
 }
 
-export interface Form1116FilingInfo extends BaseFilingInfo {
+/* Form 461's slots: line 16 reads its line 16 (copies.ts). */
+export interface Form1116FilingInfo extends BaseFilingInfo, Pick<Form461FilingInfo, "form461"> {
   foreignTax?: ForeignTaxInfo;
   /* The copy being rendered; 0 (the summary copy) when absent. */
   form1116CopyIndex?: number;
