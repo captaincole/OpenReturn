@@ -292,7 +292,13 @@ beforeEach(() => new Promise<void>((resolve) => setImmediate(resolve)));
 
 describe.each(SCENARIOS)("required inputs: $name", (scenario) => {
   const decisions = decisionsWithPreparerStyle(scenario);
-  const base = evaluate(scenario, scenario.facts, decisions);
+  /*
+   * Evaluated on first use inside a test, not while the suite is collected:
+   * one long synchronous collection of every scenario holds the worker past
+   * vitest's RPC timeout on a busy machine.
+   */
+  let baseOutcome: Outcome | undefined;
+  const base = (): Outcome => (baseOutcome ??= evaluate(scenario, scenario.facts, decisions));
   const answers = [
     ...decisions.map((decision) => ({
       key: decision.decisionKey,
@@ -316,13 +322,7 @@ describe.each(SCENARIOS)("required inputs: $name", (scenario) => {
       })),
   ].filter((input) => !isOptional(input.key));
 
-  it.each(answers)("missing $key is reported", async ({ drop }) => {
-    expect(unreported(base, drop()).slice(0, 3)).toEqual([]);
-    /*
-     * Every check is synchronous, so the worker would not read its messages
-     * until the whole file ends. Past 60 s that fails the run with vitest's
-     * "Timeout calling onTaskUpdate". Yield one macrotask after each check.
-     */
-    await new Promise((resolve) => setImmediate(resolve));
+  it.each(answers)("missing $key is reported", ({ drop }) => {
+    expect(unreported(base(), drop()).slice(0, 3)).toEqual([]);
   });
 });

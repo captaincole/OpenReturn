@@ -252,19 +252,23 @@ const partI: Bindings = {
    * "Combine line 14 through line 18" (the form). Line 17 excludes a qualified
    * taxpayer's trade or business income from AMTI
    * (ca-540-sched-p-inst-2025::sec::g-alternative-minimum-taxable-income-amti-exclusion::b01),
-   * so it enters as a negative term.
+   * so it enters as a negative term. Line 18 does too: the form prints it in
+   * parentheses, because the limit on itemized deductions "does not apply" for
+   * AMT (ca-540-sched-p-inst-2025::sec::line-18-itemized-deductions-limitation::b01),
+   * so the amount the regular tax took away comes back off AMTI.
    */
   "1.line.19_combine_lines_14_through_18": (form, info) => {
     // Line 14 waits (an unknown adjustment) while the return itemizes: so does AMTI.
     const line14 = form["0.line.14_total_adjustments_preferences"];
     if (line14 === undefined && itemizesForCalifornia(form, info) === true) return undefined;
     const exclusion = numberOrBlank(form["0.line.17_amti_exclusion"]);
+    const limitation = numberOrBlank(form["1.line.18_itemized_deductions_limitation"]);
     return sumOrBlank(
       form["0.line.14_total_adjustments_preferences"],
       form["0.line.15_taxable_income"],
       form["0.line.16_nol_deductions"],
       exclusion === undefined ? undefined : -exclusion,
-      form["1.line.18_itemized_deductions_limitation"],
+      limitation === undefined ? undefined : -limitation,
     );
   },
   /*

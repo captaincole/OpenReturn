@@ -48,7 +48,9 @@ the other state's AGI are her answers. The W-2 and the Form 1098 have no PDF.
 | S (NY) line 12 | 3,974 | smaller of 4,626 and 3,974 |
 | S (IL) lines 3, 5, 6 | 9,000, 0.0290, 650 | 9,000 / 310,000; 22,402 × 0.0290 = 649.66 |
 | S (IL) lines 8, 9, 10, 11, 12 | 9,000, 9,000, 1.0000, 446, 446 | smaller of 650 and 446 |
-| P line 11 (c) | 22,402 | line 3 is above 0: 13,985 TMT + 8,417 |
+| P lines 19, 21 | 285,600 | 279,268 + 9,800 − 3,468 (line 18 is subtracted) |
+| P lines 23, 24 | 192,851, 13,500 | 285,600 − 92,749 exemption; × 7% = 13,499.57 |
+| P line 11 (c) | 22,402 | line 3 is above 0: 13,500 TMT + 8,902 |
 | P line 20 (a), (b), (c) | 4,420, 4,420, 17,982 | 3,974 + 446; smaller of 4,420 and 22,402; 22,402 − 4,420 |
 | 540 line 43 | Other State Tax, 187, 4,420 | P line 20 (b) |
 | 540 line 47, 48 | 4,420, 17,982 | 22,402 − 4,420 |

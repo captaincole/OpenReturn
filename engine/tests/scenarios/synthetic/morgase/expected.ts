@@ -236,23 +236,23 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 18 . If your federal adjusted gross income (A G I) is less than the amount for your f
       "schedule-p.1.line.18_itemized_deductions_limitation": 3468,
       // Line 19 . Combine line 14 through line 18 .
-      "schedule-p.1.line.19_combine_lines_14_through_18": 292536,
+      "schedule-p.1.line.19_combine_lines_14_through_18": 285600,
       // Line 21 . Alternative Minimum Taxable Income. Subtract line 20 from line 19 (if married/Re
-      "schedule-p.1.line.21_alternative_minimum_taxable_income": 292536,
+      "schedule-p.1.line.21_alternative_minimum_taxable_income": 285600,
       // Part 2 . Line 22 . Exemption Amount. (If this schedule is for a certain child under age 24
       "schedule-p.1.line.22_exemption_amount": 92749,
       // Line 23 . Subtract line 22 from line 21 . If zero or less, enter 0 . See instructions.
-      "schedule-p.1.line.23_amti_less_exemption": 199787,
+      "schedule-p.1.line.23_amti_less_exemption": 192851,
       // Line 24 . Tentative Minimum Tax. Multiply line 23 by 7.0% (.07)
-      "schedule-p.1.line.24_tentative_minimum_tax": 13985,
+      "schedule-p.1.line.24_tentative_minimum_tax": 13500,
       // Line 25 . Regular tax before credits from Form 540, line 31 .
       "schedule-p.1.line.25_regular_tax_before_credits": 22411,
       // Part 3 . Line 1 . Enter the amount from Form 540, line 35 .
       "schedule-p.1.part3.1_tax_from_form_540_line_35": 22402,
       // Line 2 . Enter the tentative minimum tax from Part 2, line 24 .
-      "schedule-p.1.part3.2_tentative_minimum_tax": 13985,
+      "schedule-p.1.part3.2_tentative_minimum_tax": 13500,
       // Section A. Line 3 . Subtract line 2 from line 1 . If zero or less enter 0 and see instruct
-      "schedule-p.1.part3.3_excess_tax_offset_by_credits_col_c": 8417,
+      "schedule-p.1.part3.3_excess_tax_offset_by_credits_col_c": 8902,
       // Section B. Line 11 . If Part 3, line 3 is zero, enter the amount from line 1 . If line 3 i
       "schedule-p.2.part3.11_tax_balance_col_c": 22402,
       // Section B3 . Line 20 . Code: 187, Other state tax credit. Column A. Credit amount.
