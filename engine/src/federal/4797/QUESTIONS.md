@@ -55,20 +55,23 @@ default the engine applies, and whether the default can change a dollar amount.
    pass-through layers have no route for it. Default: lines 7–18b and Schedule D
    line 11 and Schedule 1 line 4 are a gap. Changes dollars: no (a gap).
 
-10. **QBI (needs a person).** Section 1245 and 1250 recapture and a Part II
-    gain of a trade or business are ordinary income from it, and "ordinary
-    business income or loss is generally included in QBI ... a section 1231 gain
-    or loss is only includible in QBI if it isn't capital gain or loss"
-    (irs-8995-inst-2025::sec::determining-your-qualified-business::b06). Form
-    8995 reads Schedule C line 31, which does not hold them, and no sale fact
-    names its business. Default: no Form 4797 amount reaches the QBI forms.
-    Changes dollars: yes. Berelain: Form 8995 line 4 is 45,679 and line 15 is
-    9,136; with the van recapture (7,500), the QIP recapture (14,400) and the
-    laptop gain (900) in QBI, line 4 is at least 68,479 and line 15 at least
-    13,696 (under the line 14 limit of 17,746). Open: a sale-to-business link,
-    and which part of a netted section 1231 amount (line 12's recaptured loss,
-    a net section 1231 loss) counts as ordinary for QBI. The fix changes the
-    berelain values.
+10. **QBI: the split of line 11 or 12 among activities.** "Ordinary business
+    income or loss is generally included in QBI ... a section 1231 gain or loss
+    is only includible in QBI if it isn't capital gain or loss"
+    (irs-8995-inst-2025::sec::determining-your-qualified-business::b06). Each
+    sale fact names its activity: a Schedule C business (`businessId`), a rental
+    (`rentalId`), or none (`businessId: "none"`). A Schedule C business, or a
+    QBI rental, takes the ordinary part of its sales: its Part II rows, its Part
+    III recapture (line 13), and line 11 or line 12 when its properties alone
+    have section 1231 amounts. A section 1231 gain that ends as capital gain
+    (line 9, or line 7 with no line 8) stays out. A sale with no answer, or one
+    that names an activity not on the return, is asked again while the return
+    has a business or a rental; the QBI waits. Open: when line 11 or 12 holds
+    an amount and the section 1231 amounts come from two or more activities, the
+    text does not say how the ordinary part splits. Default: that activity's QBI
+    is a gap (`activities.ts` SHARE_GAP). Changes dollars: no (a gap). Berelain:
+    every sale is the shop's, so line 12's 15,000 is the shop's QBI, and Form
+    8995 line 15 is 17,746 (the line 14 limit; line 10 is 18,416).
 
 11. **Net investment income (needs a person).** Form 8960 line 5a takes Form
     1040 line 7a and Schedule 1 line 4. Line 5b takes out "Gain or loss from the
@@ -150,8 +153,8 @@ default the engine applies, and whether the default can change a dollar amount.
 22. **A loss on an asset of a passive activity.** "If you have an overall loss
     from passive activities and you report a loss on an asset used in a passive
     activity, use Form 8582 ... before entering it on Form 4797"
-    (irs-4797-inst-2025::sec::passive-loss-limitations::b01). No fact ties a
-    sale to its activity, and Form 8582 reads no Form 4797 amount. Default: a
+    (irs-4797-inst-2025::sec::passive-loss-limitations::b01). The sale names its
+    activity (item 10), but Form 8582 reads no Form 4797 amount. Default: a
     loss on line 2 or 10 while Form 8582 files makes lines 7–18b and what they
     send (Schedule 1 line 4, Schedule D lines 11 and 19) a gap; the rows still
     print the whole loss. Without Form 8582 the loss stays. Changes dollars: no

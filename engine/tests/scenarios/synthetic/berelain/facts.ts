@@ -299,11 +299,12 @@ export const berelainFacts: TaxFactRow[] = [
     closing1099S,
     "Form 1099-S from Llano Estacado Title Co (docs/01-1099-s-llano-estacado-title.pdf).",
   ),
+  // Every property she sold was the print shop's (Schedule C): each sale names the business.
   ...sales.map(([slug, value]) =>
     fact(
       "other",
       makeBusinessPropertySaleFactKey(slug),
-      value,
+      { ...value, businessId: BUSINESS_ID },
       "Stated by Berelain: closing statement and depreciation schedule.",
     ),
   ),

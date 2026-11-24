@@ -25,12 +25,19 @@ Her section 179 embroidery machine and her pickup (listed property) fell to
 50% or less business use (Part IV). She has $15,000 of nonrecaptured net
 section 1231 losses from 2021.
 
+Each sale names the shop (`businessId`), so the shop's QBI takes the ordinary
+part of the sales. The hay field is the shop's too, to keep one business: a
+real farm would file Schedule F, which has no rules in the engine. With two
+activities, line 12's 15,000 could not be split between them, and Form 8995
+would be a gap (`engine/src/federal/4797/QUESTIONS.md` item 10).
+
 ## What it covers
 
 Form 4797 Parts I to IV, and the lines that receive them: Schedule D line 11
 (Form 4797 line 9) and line 19 (the Unrecaptured Section 1250 Gain Worksheet),
-Schedule 1 line 4 and its box (line 18b), Schedule C line 6 (line 35), and Form
-1040 line 16 by the Schedule D Tax Worksheet.
+Schedule 1 line 4 and its box (line 18b), Schedule C line 6 (line 35), the
+shop's QBI on Form 8995 (the ordinary part of the sales), and Form 1040 line 16
+by the Schedule D Tax Worksheet.
 
 ## Documents
 
@@ -64,4 +71,38 @@ Schedule 1 line 4 and its box (line 18b), Schedule C line 6 (line 35), and Form
 | Sch D 11 | 79,960 | Form 4797 line 9 |
 | Sch D 19 | 38,460 | worksheet: line 3 = 48,460 + (18,800 − 14,400) = 52,860; line 9 = 52,860 − 15,000; line 11 = 600 (box 2b) |
 | Sch 1 4 | 46,400 | Form 4797 line 18b, box checked |
-| 1040 16 | 28,050 | Schedule D Tax Worksheet: 15% on 45,800 (6,870) + tax on 118,053 (21,180); the unrecaptured gain falls in the 22–24% brackets, so line 40 is 0 |
+| 8995 1i (c) | 92,079 | Schedule C 49,152 + the shop's Form 4797 ordinary gain 46,400 − SE tax deduction 3,473 (below) |
+| 8995 5 / 10 | 18,416 | 20% of 92,079 = 18,415.80; no REIT dividends (box 5 is blank) |
+| 8995 11 / 12 / 13 / 14 | 172,989 / 84,260 / 88,729 / 17,746 | 188,739 − 15,750; 2,800 + 81,460; 11 − 12; 20% of 88,729 = 17,745.80 |
+| 8995 15 | 17,746 | smaller of line 10 and line 14 |
+| 1040 13a / 14 / 15 | 17,746 / 33,496 / 155,243 | 8995 line 15; 15,750 + 17,746; 188,739 − 33,496 |
+| 1040 16 | 25,983 | Schedule D Tax Worksheet (below) |
+| 1040 24 / 37 | 32,928 / 32,028 | 25,983 + SE tax 6,945; 32,928 − 900 withheld |
+
+**The shop's Form 4797 ordinary gain (46,400).** "Ordinary business income or
+loss is generally included in QBI ... a section 1231 gain or loss is only
+includible in QBI if it isn't capital gain or loss"
+(irs-8995-inst-2025::sec::determining-your-qualified-business::b06). The
+ordinary part is the laptop's Part II gain (900), the Part III recapture of
+line 13 (van 7,500 + improvements 14,400 + hay field 3,600 + 5,000 = 30,500)
+and line 12, the part of the section 1231 gain that her 2021 loss makes
+ordinary (15,000). Every section 1231 amount is the shop's, so all of line 12
+is the shop's. 900 + 30,500 + 15,000 = 46,400, which is Form 4797 line 18b.
+The 79,960 on line 9 is capital gain and stays out.
+
+**Schedule D Tax Worksheet** (irs-1040sd-inst-2025::sec::schedule-d-tax-worksheet::b01
+to ::schedule-d-tax-worksheet-continued-keep-for-your-records::b03):
+
+| Line | Value | How |
+| --- | --- | --- |
+| 1 / 2 / 6 | 155,243 / 2,800 / 2,800 | 1040 line 15; line 3a; no Form 4952 |
+| 7 / 9 / 10 | 81,460 / 81,460 / 84,260 | smaller of Sch D 15 and 16; 7 − 0; 6 + 9 |
+| 11 / 12 / 13 | 38,460 / 38,460 / 45,800 | Sch D 18 (0) + 19; smaller of 9 and 11; 10 − 12 |
+| 14 / 16 / 17 | 109,443 / 48,350 / 48,350 | 1 − 13; smaller of 1 and 48,350; smaller of 14 and 16 |
+| 18 / 20 / 21 | 70,983 / 109,443 / 109,443 | 1 − 10; smaller of 14 and 155,243; larger of 18 and 20 |
+| 22 | 0 | 16 − 17 |
+| 23 / 25 / 27 / 29 / 30 | 45,800 / 45,800 / 155,243 / 45,800 / 45,800 | smaller of 1 and 13; 23 − 0; smaller of 1 and 533,400; 27 − (21 + 22); smaller of 25 and 29 |
+| 31 / 32 / 33 | 6,870 / 45,800 / 0 | 15% of 30; 24 + 30; 23 − 32 |
+| 35 / 38 / 39 / 40 | 38,460 / 38,460 / 0 / 0 | smaller of 9 and Sch D 19; (10 + 21) − 1 = 193,703 − 155,243; 35 − 38; 25% of 0 |
+| 44 | 19,113 | tax on 109,443: 109,443 × 24% − 7,153 = 19,113.32 (Tax Computation Worksheet) |
+| 45 / 46 / 47 | 25,983 / 30,105 / 25,983 | 31 + 34 + 40 + 44; tax on 155,243 (37,258.32 − 7,153); smaller of 45 and 46 |

@@ -1,5 +1,6 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Section1250Property } from "../../worksheets/unrecapturedSection1250.js";
+import type { Form4797Activities } from "./activities.js";
 import type { Form4797Lines } from "./lines.js";
 
 /* Each part of the form that has more rows than the paper prints (four). */
@@ -25,4 +26,6 @@ export interface Form4797FilingInfo extends BaseFilingInfo {
   form4797PartIVGap?: { section179?: string; section280f?: string };
   /* The section 1250 properties of Part III, for the Unrecaptured Section 1250 Gain Worksheet lines 1–3. */
   form4797Section1250?: Section1250Property[];
+  /* The amounts of each activity that sold property, for QBI and Form 8960 line 5b; undefined when the form does not file. */
+  form4797Activities?: Form4797Activities;
 }

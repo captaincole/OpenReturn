@@ -113,7 +113,23 @@ export interface BusinessPropertySaleFactValue {
    * and its land) name the same form; line 1a counts it once.
    */
   form1099SKey?: string;
+  /*
+   * The Schedule C business that used the property (business.ts businessId), as
+   * the Part IV fact names one; NO_BUSINESS when no Schedule C business on the
+   * return used it. A business's ordinary gain or loss is part of its QBI
+   * (irs-8995-inst-2025::sec::determining-your-qualified-business::b06), and Form
+   * 8960 line 5b takes out the gain or loss on property of a business the owner
+   * works in (irs-8960-inst-2025::sec::line-5b-net-gain-or-loss-from-disposition-of::b01).
+   * Absent with no rentalId: not answered. The engine asks while the return has
+   * a Schedule C business or a rental property.
+   */
+  businessId?: string;
+  /* A rental property's sale: the rental (rental.ts propertyId). Never with a business's id. */
+  rentalId?: string;
 }
+
+/* The businessId of a property that no Schedule C business on the return used. */
+export const NO_BUSINESS = "none";
 
 export interface BusinessPropertySaleFact {
   key: string;
@@ -157,6 +173,12 @@ const isAmount = (value: unknown): boolean =>
 
 const isOptionalDate = (value: unknown): boolean => value === undefined || isIsoDate(value);
 
+const isOptionalText = (value: unknown): boolean =>
+  value === undefined || (typeof value === "string" && value !== "");
+
+const namesBusiness = (businessId: unknown): boolean =>
+  businessId !== undefined && businessId !== NO_BUSINESS;
+
 const AMOUNT_FIELDS = [
   "grossSalesPrice",
   "expenseOfSale",
@@ -185,7 +207,10 @@ function isSale(value: unknown): value is BusinessPropertySaleFactValue {
       fields.partialDisposition === "elective" ||
       fields.partialDisposition === "required") &&
     (fields.abandoned === undefined || typeof fields.abandoned === "boolean") &&
-    (fields.form1099SKey === undefined || typeof fields.form1099SKey === "string")
+    (fields.form1099SKey === undefined || typeof fields.form1099SKey === "string") &&
+    isOptionalText(fields.businessId) &&
+    isOptionalText(fields.rentalId) &&
+    !(fields.rentalId !== undefined && namesBusiness(fields.businessId))
   );
 }
 

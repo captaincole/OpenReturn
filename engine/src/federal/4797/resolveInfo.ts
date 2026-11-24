@@ -4,6 +4,7 @@ import {
   getForm1099SFacts,
   readBusinessPropertySaleFacts,
   readSection179RecaptureFacts,
+  rentalsOnReturn,
   type BusinessPropertySaleFact,
   type Form1099SFactValue,
   type Section179RecaptureFact,
@@ -12,8 +13,9 @@ import { filingStatusOf, num, resolveMustFile, type ResolverInputs } from "../..
 import { resolve8582Info } from "../8582/resolveInfo.js";
 import { describeItem, entityTitle, passThroughEntitiesOnReturn } from "../passThrough/items.js";
 import { spousePropertiesOnReturn } from "../rentals/passive.js";
+import { NO_ACTIVITY, activityOf, form4797Activities } from "./activities.js";
 import type { Form4797FilingInfo, Form4797Overflow } from "./filingInfo.js";
-import { form4797Lines } from "./lines.js";
+import { form4797Lines, type Form4797Lines } from "./lines.js";
 import { placeProperty, saleGap, type PlacedProperty } from "./properties.js";
 
 const MUST_FILE_KEY = "decisions.scope.must_file_4797";
@@ -39,8 +41,8 @@ function section1231K1s(inputs: ResolverInputs, joint: boolean) {
  * A loss on line 2 or 10 while Form 8582 files: "If you have an overall loss from
  * passive activities and you report a loss on an asset used in a passive activity,
  * use Form 8582 ... to see how much loss is allowed before entering it on Form 4797"
- * (irs-4797-inst-2025::sec::passive-loss-limitations::b01). No fact ties a sale to
- * its activity, so the loss is a gap, not the whole loss.
+ * (irs-4797-inst-2025::sec::passive-loss-limitations::b01). Form 8582 reads no
+ * Form 4797 amount, so the loss is a gap, not the whole loss.
  */
 function passiveLossGap(inputs: ResolverInputs, placed: PlacedProperty[]): string | undefined {
   const losses = placed.flatMap((each) =>
@@ -48,7 +50,7 @@ function passiveLossGap(inputs: ResolverInputs, placed: PlacedProperty[]): strin
   );
   if (losses.length === 0) return undefined;
   if (resolve8582Info(inputs).mustFile?.["form-8582"]?.value !== true) return undefined;
-  return `${losses.join(", ")}: a loss on line 2 or 10 while Form 8582 files. A loss on an asset used in a passive activity goes through Form 8582 first (passive-loss-limitations::b01), and no fact ties a sale to its activity.`;
+  return `${losses.join(", ")}: a loss on line 2 or 10 while Form 8582 files. A loss on an asset used in a passive activity goes through Form 8582 first (passive-loss-limitations::b01), and Form 8582 reads no Form 4797 amount.`;
 }
 
 /* Why lines 7–18b cannot be figured: a K-1 section 1231 item, or a form the engine does not carry. */
@@ -168,22 +170,80 @@ function mustFile4797(inputs: ResolverInputs, joint: boolean) {
 const NO_FACTS =
   "Form 4797 files by decision, but no business property sale, K-1 section 1231 or Part IV recapture fact gives its amounts.";
 
+/*
+ * The activity each sale names when it is on this return (a Schedule C business,
+ * a rental property), or NO_ACTIVITY. A sale that names none while the return
+ * has a business or a rental, or names one not on the return, is unanswered:
+ * Cade asks for the sale again. With neither on the return, a sale that names
+ * none is NO_ACTIVITY.
+ */
+function saleActivities(inputs: ResolverInputs, joint: boolean, sales: BusinessPropertySaleFact[]) {
+  const onReturn = new Set([
+    ...businessesOnReturn(inputs.facts, joint).businesses.map((each) => each.key),
+    ...rentalsOnReturn(inputs.facts, joint).properties.map((each) => each.key),
+  ]);
+  const activities = sales.map((sale) => {
+    const named = activityOf(sale.value);
+    if (named === undefined) return onReturn.size === 0 ? NO_ACTIVITY : undefined;
+    return named === NO_ACTIVITY || onReturn.has(named) ? named : undefined;
+  });
+  const unanswered = sales.flatMap((sale, index) =>
+    activities[index] === undefined ? [sale.key] : [],
+  );
+  return { activities, unanswered };
+}
+
+/* The gap for every activity's amounts: no line of the form is figured. */
+function activitiesGap(activities: Array<string | undefined>, gap: string, waiting: boolean) {
+  const keys = [...new Set(activities.flatMap((each) => each ?? []))];
+  return {
+    amounts: keys.map((key) => ({ key, ordinary: 0, total: 0 })),
+    ordinaryGap: gap,
+    totalGap: gap,
+    waiting,
+  };
+}
+
+/* Each activity's amounts on the figured form; the summary gap holds the ordinary ones. */
+function activitiesOf(
+  placed: PlacedProperty[],
+  activities: Array<string | undefined>,
+  lines: Form4797Lines,
+  summary: string | undefined,
+) {
+  const linked = placed.flatMap((each, index) => {
+    const activity = activities[index];
+    return activity === undefined ? [] : [{ ...each, activity }];
+  });
+  const figured = form4797Activities(linked, lines);
+  const waiting = activities.includes(undefined) || lines.waitsForLine8;
+  return { ...figured, ordinaryGap: summary ?? figured.ordinaryGap, waiting };
+}
+
 export function resolve4797Info(inputs: ResolverInputs): Form4797FilingInfo {
   const joint = spousePropertiesOnReturn(filingStatusOf(inputs));
   const { resolution, sales, recaptures, factCount } = mustFile4797(inputs, joint);
   const filed: Form4797FilingInfo = { mustFile: { "form-4797": resolution } };
   if (resolution.value !== true) return filed;
-  if (factCount === 0) return { ...filed, form4797Gap: NO_FACTS };
+  const { activities, unanswered } = saleActivities(inputs, joint, sales.sales);
+  const asks = { "form-4797": unanswered };
+  const waiting = unanswered.length > 0;
   const malformed = [...sales.malformedKeys, ...recaptures.malformedKeys];
-  if (malformed.length > 0) {
-    return { ...filed, form4797Gap: `Malformed Form 4797 fact(s): ${malformed.join(", ")}.` };
-  }
   const forms = getForm1099SFacts(inputs.facts);
   const shared = sharedForms(sales.sales);
   const gap =
+    (factCount === 0 ? NO_FACTS : undefined) ??
+    (malformed.length > 0 ? `Malformed Form 4797 fact(s): ${malformed.join(", ")}.` : undefined) ??
     sharedFormGap(sales.sales, shared) ??
     sales.sales.map((sale) => saleGap(sale.value, priceOf(sale, forms, shared))).find(Boolean);
-  if (gap) return { ...filed, form4797Gap: gap };
+  if (gap) {
+    return {
+      ...filed,
+      form4797Gap: gap,
+      form4797Activities: activitiesGap(activities, gap, waiting),
+      missingInputs: asks,
+    };
+  }
   const placed = sales.sales.map((sale) =>
     placeProperty(sale.value, priceOf(sale, forms, shared) ?? 0),
   );
@@ -196,10 +256,12 @@ export function resolve4797Info(inputs: ResolverInputs): Form4797FilingInfo {
   const businessIds = new Set(
     businessesOnReturn(inputs.facts, joint).businesses.map((each) => each.key.split(".")[1] ?? ""),
   );
+  const summary = summaryGap(inputs, joint) ?? passiveLossGap(inputs, placed);
   return {
     ...filed,
     form4797: lines,
-    form4797SummaryGap: summaryGap(inputs, joint) ?? passiveLossGap(inputs, placed),
+    form4797SummaryGap: summary,
+    form4797Activities: activitiesOf(placed, activities, lines, summary),
     form4797Overflow: overflowOf(placed),
     form4797PartIVGap: partIVGaps(recaptures.recaptures, businessIds),
     form4797Section1250: placed.flatMap((each) =>
@@ -214,7 +276,10 @@ export function resolve4797Info(inputs: ResolverInputs): Form4797FilingInfo {
         : [],
     ),
     missingInputs: {
-      "form-4797": lines.waitsForLine8 ? [SECTION_1231_KEYS.nonrecapturedLosses] : [],
+      "form-4797": [
+        ...unanswered,
+        ...(lines.waitsForLine8 ? [SECTION_1231_KEYS.nonrecapturedLosses] : []),
+      ],
     },
   };
 }

@@ -83,14 +83,14 @@ describe("Form 4797 on the berelain return", () => {
 
   it("figures Form 1040 line 16 on the Schedule D Tax Worksheet, above the QDCG worksheet's tax", () => {
     const qdcg = computeQdcg({
-      taxableIncome: 163853,
+      taxableIncome: 155243,
       qualifiedDividends: 2800,
       netLongTermGain: 81460,
       filingStatus: "single",
       taxYear: 2025,
     }).tax;
-    expect(run.value("form-1040", "line.16")).toBe(28050);
-    expect(qdcg).toBeLessThan(28050);
+    expect(run.value("form-1040", "line.16")).toBe(25983);
+    expect(qdcg).toBeLessThan(25983);
   });
 
   it("an explicit decision false still wins", () => {

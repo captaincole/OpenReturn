@@ -6,6 +6,9 @@
  * values. They are engine output, checked by hand, so a failure means
  * "the engine changed", not "the engine is wrong".
  *
+ * 2026-11-24: Form 8995 and Form 1040 lines 13a to 37 changed by hand when
+ * QBI took the shop's Form 4797 ordinary gain (README, "Hand check").
+ *
  * Edit by hand. Change a value only after you verify it against the form
  * instructions or a filed return (scripts/compareFiled).
  */
@@ -230,16 +233,16 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
   },
   "form-8995": {
     engineFields: {
-      // Line 1i — (c) Qualified business income or (loss)
-      "form-8995.0.line.1i_c": 45679,
+      // Line 1i — (c) QBI: Schedule C 49,152 + Form 4797 ordinary 46,400 − SE deduction 3,473 (README).
+      "form-8995.0.line.1i_c": 92079,
       // Line 2 — Total qualified business income or (loss). Combine lines 1i through 1v, column (c
-      "form-8995.0.line.2": 45679,
+      "form-8995.0.line.2": 92079,
       // Line 4 — Total qualified business income. Combine lines 2 and 3. If zero or less, enter -0
-      "form-8995.0.line.4": 45679,
-      // Line 5 — Qualified business income component. Multiply line 4 by 20% (0.20)
-      "form-8995.0.line.5": 9136,
+      "form-8995.0.line.4": 92079,
+      // Line 5 — Qualified business income component. Multiply line 4 by 20% (0.20): 18,415.80
+      "form-8995.0.line.5": 18416,
       // Line 10 — Qualified business income deduction before the income limitation. Add lines 5 an
-      "form-8995.0.line.10": 9136,
+      "form-8995.0.line.10": 18416,
       // Line 11 — Taxable income before qualified business income deduction
       "form-8995.0.line.11": 172989,
       // Line 12 — Enter your net capital gain, if any, increased by any qualified dividends
@@ -249,7 +252,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 14 — Income limitation. Multiply line 13 by 20% (0.20)
       "form-8995.0.line.14": 17746,
       // Line 15 — Qualified business income deduction. Enter the smaller of line 10 or line 14
-      "form-8995.0.line.15": 9136,
+      "form-8995.0.line.15": 17746,
     },
   },
   "schedule-1": {
@@ -299,21 +302,21 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 12e — Standard deduction or itemized deductions (from Schedule A)
       "form-1040.line.12e": 15750,
       // Line 13a — Qualified business income deduction from Form 8995 or Form 8995-A
-      "form-1040.line.13a": 9136,
+      "form-1040.line.13a": 17746,
       // Line 14 — Add lines 12e, 13a, and 13b
-      "form-1040.line.14": 24886,
+      "form-1040.line.14": 33496,
       // Line 15 — Subtract line 14 from line 11b. Taxable income
-      "form-1040.line.15": 163853,
-      // Line 16 — Tax (see instructions)
-      "form-1040.line.16": 28050,
+      "form-1040.line.15": 155243,
+      // Line 16 — Tax: the Schedule D Tax Worksheet's line 47 (README).
+      "form-1040.line.16": 25983,
       // Line 18 — Add lines 16 and 17
-      "form-1040.line.18": 28050,
+      "form-1040.line.18": 25983,
       // Line 22 — Subtract line 21 from line 18. If zero or less, enter -0-
-      "form-1040.line.22": 28050,
+      "form-1040.line.22": 25983,
       // Line 23 — Other taxes, including self-employment tax, from Schedule 2, line 21
       "form-1040.line.23": 6945,
       // Line 24 — Add lines 22 and 23. Total tax
-      "form-1040.line.24": 34995,
+      "form-1040.line.24": 32928,
       // Line 25a — Federal income tax withheld from Form(s) W-2
       "form-1040.line.25a": 900,
       // Line 25d — Add lines 25a through 25c
@@ -321,7 +324,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 33 — Add lines 25d, 26, and 32. Total payments
       "form-1040.line.33": 900,
       // Line 37 — Amount you owe
-      "form-1040.line.37": 34095,
+      "form-1040.line.37": 32028,
     },
   },
 };

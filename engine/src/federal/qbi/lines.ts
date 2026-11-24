@@ -92,20 +92,28 @@ function selfEmploymentDeduction(
 
 /*
  * One business's QBI, for Form 8995 line 1(c) and Form 8995-A line 2: Schedule C
- * line 31 less the deductible part of SE tax and the self-employed plan
- * deduction (Schedule 1 line 16) attributed to it (qbi/resolveInfo.ts). No fact
- * gives SE health insurance (Schedule 1 line 17 is not modeled). Unrounded;
- * undefined while it waits or when qbiGap says why it is a gap.
+ * line 31 plus Form 4797's ordinary gain or loss on its property (qbi/form4797.ts),
+ * less the deductible part of SE tax and the self-employed plan deduction
+ * (Schedule 1 line 16) attributed to it (qbi/resolveInfo.ts). No fact gives SE
+ * health insurance (Schedule 1 line 17 is not modeled). Unrounded; undefined
+ * while it waits or when qbiGap says why it is a gap.
  */
 export function businessQbi(
   form: Record<string, unknown>,
   info: QbiInfo,
   business: QbiBusiness,
 ): number | undefined {
-  if (business.netProfit === undefined || business.qbiGap) return undefined;
+  if (business.netProfit === undefined || business.qbiGap || business.form4797Waits) {
+    return undefined;
+  }
   const deduction = selfEmploymentDeduction(form, info, business);
   if (deduction === undefined) return undefined;
-  return business.netProfit - deduction - (business.retirementPlanDeduction ?? 0);
+  return (
+    business.netProfit +
+    (business.form4797Ordinary ?? 0) -
+    deduction -
+    (business.retirementPlanDeduction ?? 0)
+  );
 }
 
 /* The first business whose QBI is a gap: its reason, for the lines that add QBI. */
@@ -145,8 +153,9 @@ export function rentalQbi(
 
 /*
  * One trade or business's QBI, unrounded: a Schedule C business's (businessQbi),
- * a QBI rental's (rentalQbi), or a K-1's statement amount: the statement gives
- * the QBI, and an S corporation's income bears no SE tax
+ * a QBI rental's (rentalQbi, plus Form 4797's ordinary gain or loss on its
+ * property), or a K-1's statement amount: the statement gives the QBI, and an S
+ * corporation's income bears no SE tax
  * (irs-1120sk1-inst-2025::sec::general-instructions::b01). Undefined while it waits.
  */
 export function qbiOf(
@@ -156,5 +165,7 @@ export function qbiOf(
 ): number | undefined {
   if (business.kind === "business") return businessQbi(form, info, business);
   if (business.kind === "passThrough") return business.statementQbi;
-  return business.scheduleEColumn && rentalQbi(form, info, business.scheduleEColumn);
+  if (business.form4797Waits || business.scheduleEColumn === undefined) return undefined;
+  const rental = rentalQbi(form, info, business.scheduleEColumn);
+  return rental === undefined ? undefined : rental + (business.form4797Ordinary ?? 0);
 }
