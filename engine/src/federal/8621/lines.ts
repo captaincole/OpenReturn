@@ -7,8 +7,9 @@
  * lines uses their rounded values.
  */
 
-import type { PficDisposition, PficQefAmounts } from "../../facts/index.js";
+import type { PficDisposition } from "../../facts/index.js";
 import { roundDollars } from "../../money.js";
+import type { QefTotals } from "./qef.js";
 
 /* Line 4 boxes (a)–(d) and their upper ends; above the last, line 4(e) lists the value. */
 export const VALUE_RANGE_TOPS = [50_000, 100_000, 150_000, 200_000] as const;
@@ -38,7 +39,7 @@ export interface PartIIILines {
  * shares, less the parts included under section 951 or excluded under section
  * 1293(g). Lines 8a–8e (the form; ::line-8::b01) only with Election B.
  */
-export function partIIILines(qef: PficQefAmounts, electionB: boolean): PartIIILines {
+export function partIIILines(qef: QefTotals, electionB: boolean): PartIIILines {
   const line6a = roundDollars(qef.ordinaryEarnings);
   const line6b = roundDollars(qef.ordinaryEarningsExcluded ?? 0);
   const line7a = roundDollars(qef.netCapitalGain);

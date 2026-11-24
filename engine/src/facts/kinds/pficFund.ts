@@ -73,17 +73,49 @@ export interface PficDisposition {
   unreversedInclusions?: number;
 }
 
-/* Part III: the QEF's PFIC Annual Information Statement, in U.S. dollars. */
-export interface PficQefAmounts {
-  /* Line 6a: the pro rata share of the ordinary earnings. */
+/*
+ * The amounts a PFIC Annual Information Statement prints for one unit held
+ * for one day, in U.S. dollars, as fund companies publish them: "multiply the
+ * number of unit days you held the fund series by the pro-rata amounts".
+ */
+export interface PficQefPerUnitPerDay {
   ordinaryEarnings: number;
-  /* Line 7a: the pro rata share of the net capital gain. */
   netCapitalGain: number;
+  /* The parts excludable under section 1293(g) (lines 6b and 7b). Absent: none. */
+  ordinaryEarningsExcluded?: number;
+  netCapitalGainExcluded?: number;
+}
+
+/* One distribution on the statement: the amount per unit in U.S. dollars, and the units held that day. */
+export interface PficQefDistribution {
+  date: string;
+  amountPerUnit: number;
+  units: number;
+}
+
+/*
+ * Part III: the QEF's PFIC Annual Information Statement, in U.S. dollars. The
+ * statement gives either the holder's pro rata shares (the totals below) or
+ * "sufficient information to enable the shareholder to calculate" them
+ * (irs-8621-inst-2025::sec::annual-election-requirements-of-the-pfic-or::b01):
+ * the amounts per unit per day, which the engine multiplies by the unit days.
+ */
+export interface PficQefAmounts {
+  /* Line 6a: the pro rata share of the ordinary earnings, when the statement gives it. */
+  ordinaryEarnings?: number;
+  /* Line 7a: the pro rata share of the net capital gain, when the statement gives it. */
+  netCapitalGain?: number;
   /* Lines 6b and 7b: the parts included under section 951 or excluded under section 1293(g). Absent: none. */
   ordinaryEarningsExcluded?: number;
   netCapitalGainExcluded?: number;
+  /* Or the statement's amounts per unit per day; then unitDays is required. */
+  perUnitPerDay?: PficQefPerUnitPerDay;
+  /* The units held times the days each was held in the fund's year, from the holder's account. */
+  unitDays?: number;
   /* Line 8b: cash and the fair market value of property distributed during the QEF's year. */
   distributions?: number;
+  /* Or the statement's distributions per unit, with the units held (line 8b is their sum). */
+  distributionsPerUnit?: PficQefDistribution[];
   /* Line 8c: the part of line 8a for shares disposed of, pledged or transferred. */
   disposedSharesIncome?: number;
   /* A section 1.1411-10(g) election in effect for the QEF (Form 8960). Absent: none. */

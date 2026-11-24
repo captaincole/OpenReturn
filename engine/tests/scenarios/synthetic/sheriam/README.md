@@ -14,7 +14,12 @@ The return is federal only: Florida has no income tax. Forms that file: Form 104
 
 ## Input documents
 
-Made by `generate-docs.ts` with `tests/scenarios/documents/pficFundStatement.ts`: `docs/01-pfic-alpine-balanced.pdf` (the PFIC Annual Information Statement), `docs/02-pfic-cape-horizon.pdf`, `docs/03-pfic-baltic-tech.pdf`. The basis, the unreversed inclusions, the exchange rates and the elections are the couple's records, stated.
+Made by `generate-docs.ts` from the fund facts:
+
+- `docs/01-pfic-alpine-balanced.pdf`: the QEF's PFIC Annual Information Statement (`tests/scenarios/documents/pficFundStatement.ts`), in the order fund companies publish it: the notice to U.S. holders, then (1) the fund's tax year, (2) ordinary earnings and net capital gain per unit per day in U.S. dollars, with the part excludable under section 1293(g), (3) distributions (none), (4) the promise to let the holder inspect the books, and an officer's signature. It names no holder.
+- `docs/04-pfic-alpine-balanced-account.pdf`, `docs/02-pfic-cape-horizon.pdf`, `docs/03-pfic-baltic-tech.pdf`: each fund's year-end account statement (`tests/scenarios/documents/fundAccountStatement.ts`), in the fund's currency. Cape Horizon (no election) and Baltic Tech (marked to market) send no PFIC statement: an account statement with the sale or the holding is all the couple has.
+
+The basis, the unreversed inclusions, the unit days, the exchange rates and the elections are the couple's records, stated.
 
 Each fund prints its amounts in its own currency, and the fact holds them that way: Alpine in Swiss francs, Cape Horizon in South African rand, Baltic Tech in euros. The couple's rate for each date converts them to dollars (`yearEndUsdPerUnit`, the sale's `usdPerUnit`); the hand check below shows each one. The basis is already in dollars (their records).
 
@@ -23,8 +28,9 @@ Each fund prints its amounts in its own currency, and the fact holds them that w
 | Line | Rule | Value |
 | --- | --- | --- |
 | 8621 (Alpine) 2, 4 | acquired 02/03/2025; CHF 57,600 × 1.25 USD per franc = $72,000, box (b) | 02/03/2025; (b) |
-| 8621 (Alpine) 6a–6c | 5,000 − 400 | 5,000; 400; 4,600 |
-| 8621 (Alpine) 7a, 7c; 5b | 1,200; 4,600 + 1,200 | 1,200; 5,800 |
+| 8621 (Alpine) unit days | 600 units × 332 days (02/03 through 12/31, both counted, as fund statements count them) | 199,200 |
+| 8621 (Alpine) 6a–6c | $0.0251004016 × 199,200 = 5,000.00; $0.0020080321 × 199,200 = 400.00; 5,000 − 400 | 5,000; 400; 4,600 |
+| 8621 (Alpine) 7a, 7c; 5b | $0.0060240964 × 199,200 = 1,200.00; 4,600 + 1,200 | 1,200; 5,800 |
 | 8621 (Cape) 15f | proceeds ZAR 827,586.21 × 0.058 USD per rand on 09/30/2025 = $48,000.00; − basis $39,500 | 8,500 |
 | 8621 (Cape) 16b | 8,500 × 273 ÷ 1,337 (2025 days) | 1,736 |
 | 8621 (Cape) 16c, 16d, 16e | 2022–2024 shares × 37%; no tax; 16c − 16d | 2,503; 0; 2,503 |

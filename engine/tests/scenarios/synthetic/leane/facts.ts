@@ -125,16 +125,29 @@ export const pacificRim: PficFundFactValue = {
   sharesAtYearEnd: 1200,
   valueAtYearEnd: 95000,
   regime: "qef",
-  qef: { ordinaryEarnings: 3840.62, netCapitalGain: 2215.4 },
+  /*
+   * The statement's amounts per unit per day; Leane held 1,200 units all 365
+   * days (438,000 unit days). One distribution of $6.75 a unit: $8,100.
+   */
+  qef: {
+    perUnitPerDay: { ordinaryEarnings: 0.0087685388, netCapitalGain: 0.0050579909 },
+    unitDays: 438000,
+    distributionsPerUnit: [{ date: "2025-11-14", amountPerUnit: 6.75, units: 1200 }],
+  },
+  /*
+   * The $8,100 distribution is first out of 2025's earnings ($6,056, lines 6c
+   * + 7c), then out of the most recent earnings: $2,044 of the 2023 election's
+   * (irs-8621-inst-2025::sec::line-8::b01–b02, ::line-22::b01).
+   */
   prior1294Elections: [
+    { taxYear: 2022, undistributedEarnings: 5000, deferredTax: 1850 },
     {
-      taxYear: 2022,
-      undistributedEarnings: 5000,
-      deferredTax: 1850,
+      taxYear: 2023,
+      undistributedEarnings: 3200,
+      deferredTax: 1184,
       terminatingEvent: "Distribution",
-      earningsDistributed: 2000,
+      earningsDistributed: 2044,
     },
-    { taxYear: 2023, undistributedEarnings: 3200, deferredTax: 1184 },
   ],
 };
 
@@ -169,7 +182,7 @@ export const leaneFacts: TaxFactRow[] = [
     "foreign",
     makePficFundFactKey("pacific-rim"),
     pacificRim,
-    "PFIC Annual Information Statement (docs/03-pfic-pacific-rim.pdf); section 1294 elections from Leane's earlier Forms 8621.",
+    "PFIC Annual Information Statement (docs/03-pfic-pacific-rim.pdf) and account statement (docs/04-pfic-pacific-rim-account.pdf); unit days and section 1294 elections from Leane's records and earlier Forms 8621.",
   ),
   fact("other", PRIOR_YEAR_KEYS.foreignTaxCarryoverPassive, 0, "Verbal, 2026-11-23: none."),
   fact("other", PRIOR_YEAR_KEYS.foreignLossAccounts, false, "Verbal, 2026-11-23: none."),

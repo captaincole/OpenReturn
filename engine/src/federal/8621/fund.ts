@@ -5,7 +5,7 @@
  * for outstanding section 1294 elections.
  */
 
-import type { PficFundFact, PficFundFactValue } from "../../facts/index.js";
+import type { PficFundFact, PficFundFactValue, PficPrior1294Election } from "../../facts/index.js";
 import { atLeast, sum } from "../../money.js";
 import { currencyGap, saleInDollars, yearEndValueUsd } from "./currency.js";
 import { holdingStartOf } from "./line15.js";
@@ -20,6 +20,7 @@ import {
 } from "./lines.js";
 import { markToMarketFirstYear, partVOf, takesPartV, type PartV } from "./partV.js";
 import { PART_VI_COLUMNS, partVIColumn, type PartVIColumn } from "./partVI.js";
+import { qefTotals } from "./qef.js";
 import { fundResults, type FundResults } from "./results.js";
 
 export interface Form8621Fund {
@@ -55,10 +56,31 @@ function partIVOf(fund: PficFundFactValue): Form8621Fund["partIV"] | string {
   };
 }
 
+/*
+ * "Earnings are treated as distributed out of the most recently accumulated
+ * earnings and profits. Accordingly, an event will first terminate the most
+ * recently made election" (irs-8621-inst-2025::sec::line-22::b01). An event
+ * that ends an election while a later one is left untouched contradicts that
+ * order: the fact is a gap, not a guess. (A disposition ends every election
+ * for the shares sold, so each column then names an event.)
+ */
+function outOfOrder(elections: PficPrior1294Election[]): string | undefined {
+  const byYear = [...elections].sort((first, second) => first.taxYear - second.taxYear);
+  for (const [index, each] of byYear.entries()) {
+    if (each.terminatingEvent === undefined) continue;
+    const later = byYear.slice(index + 1).find((other) => other.terminatingEvent === undefined);
+    if (later !== undefined)
+      return `An event ends the ${each.taxYear} section 1294 election while the later ${later.taxYear} election is untouched; an event first ends the most recent election (Part VI, line 22).`;
+  }
+  return undefined;
+}
+
 function partVIOf(fund: PficFundFactValue): PartVIColumn[] | string | undefined {
   const elections = fund.prior1294Elections ?? [];
   if (elections.length === 0) return undefined;
   if (elections.length > PART_VI_COLUMNS) return MORE_THAN_SIX;
+  const order = outOfOrder(elections);
+  if (order !== undefined) return order;
   const columns = elections.map(partVIColumn);
   const gap = columns.find((column): column is string => typeof column === "string");
   return gap ?? (columns as PartVIColumn[]);
@@ -69,12 +91,9 @@ function partsOf(fund: PficFundFactValue, holdingStart: Date) {
   if (fund.qualifyingInsuranceElection === true) return {};
   const partVI = partVIOf(fund);
   if (typeof partVI === "string") return partVI;
-  const partIII =
-    fund.regime === "qef" && fund.qef
-      ? partIIILines(fund.qef, fund.elections?.extendTime === true)
-      : undefined;
-  if (fund.regime === "qef" && !fund.qef)
-    return "The fund is a QEF, and the fact states no PFIC Annual Information Statement amounts (lines 6a and 7a).";
+  const qef = fund.regime === "qef" ? qefTotals(fund.qef ?? {}) : undefined;
+  if (typeof qef === "string") return qef;
+  const partIII = qef ? partIIILines(qef, fund.elections?.extendTime === true) : undefined;
   const marked = fund.regime === "mark_to_market" && !markToMarketFirstYear(fund, holdingStart);
   const partIV = marked ? partIVOf(fund) : undefined;
   if (typeof partIV === "string") return partIV;

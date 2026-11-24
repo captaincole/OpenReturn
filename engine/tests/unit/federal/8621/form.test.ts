@@ -242,6 +242,32 @@ describe("Branches of the form", () => {
   });
 });
 
+describe("The PFIC Annual Information Statement's amounts per unit per day", () => {
+  it("lines 6a and 7a are each amount times the unit days", () => {
+    const run = evaluate([fund("rim", pacificRim)]);
+    expect(run.value("form-8621", "1.line.6a_qef_ordinary_earnings_share")).toBe(3841);
+    expect(run.value("form-8621", "1.line.7a_qef_net_capital_gain_share")).toBe(2215);
+  });
+
+  it("amounts per unit per day without the unit days are a gap", () => {
+    const qef = { ...pacificRim.qef!, unitDays: undefined };
+    const run = evaluate([fund("rim", { ...pacificRim, qef })]);
+    expect(run.field("form-8621", "1.line.6a_qef_ordinary_earnings_share")).toMatchObject(
+      UNSUPPORTED,
+    );
+  });
+
+  it("an event that ends an older section 1294 election before the most recent one is a gap", () => {
+    const [older, recent] = pacificRim.prior1294Elections!;
+    const swapped = [
+      { ...older, terminatingEvent: "Distribution", earningsDistributed: 2044 },
+      { ...recent, terminatingEvent: undefined, earningsDistributed: undefined },
+    ];
+    const run = evaluate([fund("rim", { ...pacificRim, prior1294Elections: swapped })]);
+    expect(run.field("form-8621", "3.line.23_deferred_tax_due_col_i")).toMatchObject(UNSUPPORTED);
+  });
+});
+
 describe("Amounts in the fund's currency", () => {
   const inRand: PficFundFactValue = {
     ...smallFund,

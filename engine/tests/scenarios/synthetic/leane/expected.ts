@@ -60,13 +60,13 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 17p — Any interest from Form 8621, line 16f, relating to distributions from, and disp
       "schedule-2.1.line.17p_interest_form8621_line16f_section_1291_fund": 252,
       // Line 17q — Any interest from Form 8621, line 24
-      "schedule-2.1.line.17q_interest_form8621_line24": 184,
+      "schedule-2.1.line.17q_interest_form8621_line24": 119,
       // Line 17z — Any other taxes amount
-      "schedule-2.1.line.17z_other_taxes_amount": 740,
+      "schedule-2.1.line.17z_other_taxes_amount": 756,
       // Line 18 — Total additional taxes. Add lines 17a through 17z
-      "schedule-2.1.line.18_total_additional_taxes": 1176,
+      "schedule-2.1.line.18_total_additional_taxes": 1127,
       // Line 21 — Add lines 4, 7 through 16, 18, and 19. Total other taxes. Enter here and on Form
-      "schedule-2.1.line.21_total_other_taxes": 3467,
+      "schedule-2.1.line.21_total_other_taxes": 3418,
     },
   },
   "schedule-b": {
@@ -242,9 +242,9 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 22 — Subtract line 21 from line 18. If zero or less, enter -0-
       "form-1040.line.22": 84573,
       // Line 23 — Other taxes, including self-employment tax, from Schedule 2, line 21
-      "form-1040.line.23": 3467,
+      "form-1040.line.23": 3418,
       // Line 24 — Add lines 22 and 23. Total tax
-      "form-1040.line.24": 88040,
+      "form-1040.line.24": 87991,
       // Line 25a — Federal income tax withheld from Form(s) W-2
       "form-1040.line.25a": 64000,
       // Line 25c — Federal income tax withheld from other forms (see instructions)
@@ -254,7 +254,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 33 — Add lines 25d, 26, and 32. Total payments
       "form-1040.line.33": 64990,
       // Line 37 — Amount you owe
-      "form-1040.line.37": 23050,
+      "form-1040.line.37": 23001,
     },
   },
 };

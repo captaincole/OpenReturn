@@ -85,10 +85,18 @@ export const alpineBalanced: PficFundFactValue = {
   yearEndUsdPerUnit: 1.25,
   regime: "qef",
   elections: { qef: true },
+  /*
+   * The statement's amounts per unit per day. The couple held 600 units from
+   * February 3 through December 31 (332 days): 199,200 unit days. The fund
+   * made no distributions.
+   */
   qef: {
-    ordinaryEarnings: 5000,
-    ordinaryEarningsExcluded: 400,
-    netCapitalGain: 1200,
+    perUnitPerDay: {
+      ordinaryEarnings: 0.0251004016,
+      netCapitalGain: 0.0060240964,
+      ordinaryEarningsExcluded: 0.0020080321,
+    },
+    unitDays: 199200,
     section1411gElection: true,
   },
 };
@@ -155,7 +163,7 @@ export const sheriamFacts: TaxFactRow[] = [
     "foreign",
     makePficFundFactKey("alpine-balanced"),
     alpineBalanced,
-    "PFIC Annual Information Statement (docs/01-pfic-alpine-balanced.pdf); the elections are the couple's.",
+    "PFIC Annual Information Statement (docs/01-pfic-alpine-balanced.pdf) and account statement (docs/04-pfic-alpine-balanced-account.pdf); unit days, the exchange rate and the elections are the couple's.",
   ),
   fact(
     "foreign",
