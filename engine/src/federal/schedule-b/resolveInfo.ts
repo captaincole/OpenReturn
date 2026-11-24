@@ -4,6 +4,7 @@
  */
 
 import { isDividendFactKey, isInterestFactKey } from "../../facts/index.js";
+import { waitsForExchangeRate } from "../../incomeInDollars.js";
 import { sum } from "../../money.js";
 import {
   factsInCategory,
@@ -144,6 +145,7 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
   };
 }
 
+/* A foreign-currency fact that lacks its rate lists the payer with no amount: the row and the total wait. */
 function payerAmounts(
   inputs: ResolverInputs,
   isKind: (key: string) => boolean,
@@ -153,7 +155,8 @@ function payerAmounts(
     .filter((row) => isKind(row.key))
     .map((row) => {
       const value = row.value as Record<string, unknown>;
-      return { payerName: String(value.payerName ?? ""), amount: amountOf(value) };
+      const amount = waitsForExchangeRate(value) ? undefined : amountOf(value);
+      return { payerName: String(value.payerName ?? ""), amount };
     })
     .filter((payer) => payer.amount !== 0);
 }

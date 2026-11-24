@@ -73,6 +73,18 @@ export function roundToPlaces(value: number, places: number): number {
   return (Math.sign(value) * Math.floor(Math.abs(value) * scale + 0.5 + FLOAT_TOLERANCE)) / scale;
 }
 
+/*
+ * An amount in a foreign currency, in U.S. dollars with cents: divided by the
+ * rate (units of the currency per dollar, irs.gov "Yearly average currency
+ * exchange rates": "divide the foreign currency amount by the applicable ...
+ * rate") and rounded to the cent, the half cent up by magnitude. The cents
+ * stay until the form rounds its line (the whole-dollar rule).
+ */
+const CENT_PLACES = 2;
+export function dollarsFromForeign(amount: number, unitsPerDollar: number): number {
+  return roundToPlaces(amount / unitsPerDollar, CENT_PLACES);
+}
+
 // "Each $step or part of $step": a part step counts, so this rounds up by rule.
 export function stepsOf(amount: number, step: number): number {
   return Math.ceil(amount / step);

@@ -15,6 +15,7 @@ import {
   type InterestFactValue,
   type MiscIncomeFactValue,
 } from "../../facts/index.js";
+import { waitsForExchangeRate } from "../../incomeInDollars.js";
 import { roundDollars, sum, sumOrBlank } from "../../money.js";
 import type { ResolverInputs } from "../../resolverInputs.js";
 
@@ -32,8 +33,12 @@ export type TaxItem = (typeof TAX_ITEMS)[number];
 /* One asset's tax items: cents kept, except gains (each Form 8949 row is whole dollars). */
 export interface AssetTaxItems {
   amounts: Partial<Record<TaxItem, number>>;
-  /* A sale whose basis is not known yet: the gains item waits with Form 8949. */
-  gainsWait: boolean;
+  /*
+   * The items that wait: gains for a sale whose basis or exchange rate is not
+   * known yet (with Form 8949), and the items of a 1099-INT or 1099-DIV fact
+   * that waits for its exchange rate (incomeInDollars.ts).
+   */
+  waiting: TaxItem[];
   /* The Schedule D lines that carry the gains: "10", "13". */
   scheduleDLines: string[];
   /* Why an item cannot be figured, by item. */
@@ -75,7 +80,7 @@ function gainsOf(inputs: ResolverInputs, accountSlug: string) {
       .map((row) => row.key.slice(prefix.length)),
   );
   const sales = inputs.trades.boxed.filter((boxed) => tradeIds.has(boxed.trade.tradeId));
-  const wait = sales.some((sale) => sale.basis === undefined);
+  const wait = sales.some((sale) => sale.basis === undefined || sale.waitsForRate === true);
   const rows = sales.map((sale) =>
     sum(
       roundDollars(sale.trade.proceeds),
@@ -128,16 +133,29 @@ export function assetTaxItems(inputs: ResolverInputs, accountSlug: string): Asse
       deductions: interest?.box2,
       credits: sumOrBlank(interest?.box6, dividends?.box7),
     },
-    gainsWait: sales.wait,
+    waiting: waitingItems(sales.wait, interest, dividends),
     scheduleDLines: [...new Set(scheduleDLines)],
     gaps,
   };
 }
 
+function waitingItems(
+  salesWait: boolean,
+  interest: InterestFactValue | undefined,
+  dividends: DividendFactValue | undefined,
+): TaxItem[] {
+  const waiting: TaxItem[] = [
+    ...(salesWait ? (["gains"] as const) : []),
+    ...(waitsForExchangeRate(interest) ? (["interest", "deductions", "credits"] as const) : []),
+    ...(waitsForExchangeRate(dividends) ? (["dividends", "gains", "credits"] as const) : []),
+  ];
+  return [...new Set(waiting)];
+}
+
 /* "No tax item reported in Part III with respect to this asset" (lines 22d and 31d). */
 export function hasNoTaxItem(items: AssetTaxItems): boolean {
   return (
-    !items.gainsWait &&
+    items.waiting.length === 0 &&
     TAX_ITEMS.every((item) => (items.amounts[item] ?? 0) === 0) &&
     Object.keys(items.gaps).length === 0
   );
@@ -146,7 +164,7 @@ export function hasNoTaxItem(items: AssetTaxItems): boolean {
 /* One category's line (13 or 14) for each item: the assets' amounts added, cents kept. */
 export interface CategoryItems {
   totals: Partial<Record<TaxItem, number>>;
-  gainsWait: boolean;
+  waiting: TaxItem[];
   scheduleDLines: string[];
   gaps: Partial<Record<TaxItem, string>>;
 }
@@ -159,7 +177,7 @@ export function categoryItems(assets: ReadonlyArray<AssetTaxItems>): CategoryIte
   }
   return {
     totals,
-    gainsWait: assets.some((asset) => asset.gainsWait),
+    waiting: [...new Set(assets.flatMap((asset) => asset.waiting))],
     scheduleDLines: [...new Set(assets.flatMap((asset) => asset.scheduleDLines))],
     gaps: Object.assign({}, ...assets.map((asset) => asset.gaps)),
   };

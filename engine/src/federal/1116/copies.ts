@@ -235,9 +235,9 @@ export function form1116Set(
   const foreignTax = info.foreignTax;
   if (foreignTax?.formGap) return unsupported(foreignTax.formGap);
   if (foreignTax === undefined || foreignTax.categories.length === 0) return undefined;
-  // A K-1's foreign taxes that cannot be read, or are not known yet (sources.ts k1ForeignTax).
+  // A K-1's foreign taxes that cannot be read, or taxes not known yet (resolveInfo.ts).
   if (foreignTax.k1Gap) return unsupported(foreignTax.k1Gap);
-  if (foreignTax.k1Waiting === true) return undefined;
+  if (foreignTax.taxesWaiting === true) return undefined;
   const limitation = limitationOf(form, info, foreignTax.sources);
   const drafts = foreignTax.categories.map((each) => draftCopy(each, foreignTax, limitation));
   const line13 = highTaxLine(drafts);

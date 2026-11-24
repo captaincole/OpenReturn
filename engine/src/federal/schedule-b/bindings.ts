@@ -38,6 +38,8 @@ function payerTotal(
   rounding: ScheduleBRounding | undefined,
 ): number | undefined {
   if (!payers || payers.length === 0) return undefined;
+  // A row that waits for its exchange rate leaves the total waiting.
+  if (payers.some((payer) => payer.amount === undefined)) return undefined;
   if (rounding === "sum_rounded_rows")
     return sum(...payers.map((payer) => roundDollars(payer.amount)));
   return roundDollars(sum(...payers.map((payer) => payer.amount)));

@@ -2,7 +2,9 @@
 
 import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";
+import type { IncomeCurrencyConversion } from "./foreignCurrency.js";
 
+/* Amounts in U.S. dollars, or in the currency of `conversion` (foreignCurrency.ts). */
 export interface DividendFactValue {
   payerName: string;
   payerTin?: string;
@@ -20,6 +22,7 @@ export interface DividendFactValue {
   box10?: number; // Non-cash liquidation distributions
   box12?: number; // Exempt-interest dividends
   box13?: number; // Specified private activity bond interest dividends
+  conversion?: IncomeCurrencyConversion;
 }
 
 export interface DividendFact {

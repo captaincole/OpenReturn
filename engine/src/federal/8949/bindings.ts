@@ -106,9 +106,13 @@ function rowBindings(prefix: string, page: (c: Form8949Copy) => Form8949Page | u
     };
     out[`${key}_date_acquired`] = (_, info) => row(info)?.trade.dateAcquired;
     out[`${key}_date_sold`] = (_, info) => row(info)?.trade.dateSold;
-    /* IRS: if you round, round all amounts. */
-    out[`${key}_proceeds`] = (_, info) => roundDollars(row(info)?.trade.proceeds);
-    out[`${key}_cost_basis`] = (_, info) => roundDollars(row(info)?.basis);
+    /* IRS: if you round, round all amounts. A sale waiting for its exchange rate is blank. */
+    const settled = (info: Form8949FilingInfo) => {
+      const boxedTrade = row(info);
+      return boxedTrade?.waitsForRate === true ? undefined : boxedTrade;
+    };
+    out[`${key}_proceeds`] = (_, info) => roundDollars(settled(info)?.trade.proceeds);
+    out[`${key}_cost_basis`] = (_, info) => roundDollars(settled(info)?.basis);
     out[`${key}_gain_loss`] = (form) =>
       rowGainLoss(
         form[`${key}_proceeds`],
@@ -129,6 +133,7 @@ function totalBindings(prefix: string, page: (c: Form8949Copy) => Form8949Page |
     (amount: (r: Form8949Page["rows"][number]) => number | undefined): Fn =>
     (_, info) => {
       const rs = rows(info);
+      if (rs?.some((boxedTrade) => boxedTrade.waitsForRate === true)) return undefined;
       return rs && rs.length > 0 ? roundDollars(sum(...rs.map(amount))) : undefined;
     };
   return {

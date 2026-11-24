@@ -2,10 +2,10 @@ import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Form8814FilingInfo } from "../8814/filingInfo.js";
 import type { Receipt } from "../passThrough/receipts.js";
 
-/** Amount keeps cents. */
+/** Amount keeps cents; undefined while a foreign-currency fact waits for its rate. */
 export interface PayerAmount {
   payerName: string;
-  amount: number;
+  amount: number | undefined;
 }
 
 /**

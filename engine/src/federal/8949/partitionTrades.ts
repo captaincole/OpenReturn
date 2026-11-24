@@ -5,6 +5,7 @@ import {
   type Form8949Box,
   type TradeFactValue,
 } from "../../facts/index.js";
+import { waitsForExchangeRate } from "../../incomeInDollars.js";
 import type { BoxedTrade } from "./copyPlan.js";
 
 /*
@@ -61,7 +62,8 @@ export function partitionTrades(
           ? "partII.boxD"
           : "partI.boxA";
     const basis = trade.costBasis ?? stated.get(`${row.key}.reported_basis`);
-    boxed.push({ trade, box, basis });
+    // A sale in a foreign currency with no rate yet has no amounts (incomeInDollars.ts).
+    boxed.push({ trade, box, basis, ...(waitsForExchangeRate(printed) && { waitsForRate: true }) });
     factKeys.push(row.key);
   }
   return { short, long, boxed, factKeys, missingQuantityKeys };

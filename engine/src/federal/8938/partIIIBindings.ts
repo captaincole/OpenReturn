@@ -106,7 +106,7 @@ function amountOf(
 ) {
   const gap = category.gaps[item];
   if (gap !== undefined) return unsupported(gap);
-  if (item === "gains" && category.gainsWait) return undefined;
+  if (category.waiting.includes(item)) return undefined;
   const total = category.totals[item];
   if (total === undefined) return undefined;
   if (item === "credits") {

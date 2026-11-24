@@ -1,6 +1,8 @@
 import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";
+import type { IncomeCurrencyConversion } from "./foreignCurrency.js";
 
+/* Amounts in U.S. dollars, or in the currency of `conversion` (foreignCurrency.ts). */
 export interface InterestFactValue {
   payerName: string;
   payerTin?: string;
@@ -20,6 +22,7 @@ export interface InterestFactValue {
   box15?: string; // State
   box16?: string; // State identification number
   box17?: number; // State income tax withheld
+  conversion?: IncomeCurrencyConversion;
 }
 
 export interface InterestFact {

@@ -38,6 +38,8 @@ function boxLineBindings(): Partial<{
         const totals = boxes
           .map((box) => info.form8949BoxTotals?.[box])
           .filter((total) => total !== undefined);
+        // A Form 8949 sale that waits for its exchange rate leaves the line waiting.
+        if (totals.some((total) => total.waits === true)) return undefined;
         return totals.length > 0
           ? roundDollars(sum(...totals.map((total) => total[col])))
           : undefined;

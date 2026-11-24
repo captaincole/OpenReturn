@@ -10,6 +10,7 @@ import { bindingKind as registeredBindingKind } from "./engine.js";
 import { evaluateForms } from "./evaluateForms.js";
 import type { AIDecisionRow, TaxFactRow } from "./facts/rows.js";
 import type { FilingInfo } from "./filingInfo.js";
+import { incomeInDollars } from "./incomeInDollars.js";
 import { catalog as bundledCatalog, getFormSpec, registerAllForms } from "./registry.js";
 import { type RenderedWidget } from "./render/fillFromCatalog.js";
 import { renderFormCopies } from "./render/renderCopies.js";
@@ -59,6 +60,8 @@ export interface EvaluatedScenario {
   facts: TaxFactRow[];
   /** Assumptions whose key has no fact: while any is here, the return is not ready to file. */
   assumptionsInUse: TaxFactRow[];
+  /** Foreign-currency income facts that lack a rate (incomeInDollars.ts): each is a pending fact. */
+  factsWaitingForRate: string[];
   decisions: AIDecisionRow[];
   filingInfo: FilingInfo;
   authEmail: string | null;
@@ -96,6 +99,8 @@ export function evaluateScenario(inputs: ScenarioInputs): EvaluatedScenario {
   const facts = supersede(inputs.facts, (fact) => fact.key);
   const assumptions = supersede(inputs.assumptions ?? [], (assumption) => assumption.key);
   const filled = fillGaps(facts, assumptions);
+  // The forms read foreign-currency income in dollars; a fact with no rate waits (incomeInDollars.ts).
+  const { waitingForRate } = incomeInDollars(filled.facts);
   const decisions = supersede(inputs.decisions, (decision) => decision.decisionKey);
 
   const { filingInfo, ctx, forms } = evaluateForms(filing.taxYear, filled.facts, decisions);
@@ -111,6 +116,7 @@ export function evaluateScenario(inputs: ScenarioInputs): EvaluatedScenario {
     filing,
     facts,
     assumptionsInUse,
+    factsWaitingForRate: waitingForRate,
     decisions,
     filingInfo,
     authEmail,
