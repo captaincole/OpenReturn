@@ -60,7 +60,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "form-8938.0.line.13a_accounts_interest_col_d": "Form 1040, line 2b",
       "form-8938.0.line.13a_accounts_interest_col_e": "Schedule B, line 1",
       "form-8938.0.line.13b_accounts_dividends_col_e": "Schedule B, line 5",
-      "form-8938.0.line.13e_accounts_gains_losses_col_d": "Form 1040, line 7",
+      "form-8938.0.line.13e_accounts_gains_losses_col_d": "Form 1040, line 7a",
       "form-8938.0.line.13e_accounts_gains_losses_col_e": "Schedule D, line 3",
       "form-8938.0.line.13f_accounts_deductions_col_d": "Form 1040, line 10",
       "form-8938.0.line.13f_accounts_deductions_col_e": "Schedule 1, line 18",
@@ -122,11 +122,10 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 6 — Add the amounts on line 5. Enter the total here and on Form 1040 or 1040-SR, line
       "schedule-b.0.line.6_total_ordinary_dividends": 2690,
     },
-    // Line 7: the Form 8938 account facts answer both questions; one account alone is over $10,000.
-    renderedText: {
-      "schedule-b.0.line.7b_foreign_country_1": "Switzerland",
-      "schedule-b.0.line.7b_foreign_country_2": "United Kingdom, Germany",
-    },
+    /*
+     * Line 7: the Form 8938 account facts answer both questions; one account alone is over $10,000.
+     * Line 7b is unsupported: a Part VI asset (the Alpenrose fund shares) may be a financial account.
+     */
     renderedChecked: [
       "schedule-b.0.line.7a_foreign_account_yes",
       "schedule-b.0.line.7a_fincen_114_required_yes",
@@ -135,6 +134,8 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
     renderedBlank: [
       "schedule-b.0.line.7a_foreign_account_no",
       "schedule-b.0.line.7a_fincen_114_required_no",
+      "schedule-b.0.line.7b_foreign_country_1",
+      "schedule-b.0.line.7b_foreign_country_2",
     ],
   },
   "form-8949": {

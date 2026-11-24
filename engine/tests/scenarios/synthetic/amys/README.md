@@ -11,7 +11,7 @@ Amys earns wages. The couple holds six foreign assets:
 - Amys's U.S.-dollar note of a Dutch company, bought in March: interest;
 - Amys's fund units that she reports on Form 8621 (Part IV), so they are not in Part VI.
 
-The scenario fills Parts I to VI of Form 8938 with three copies of page 2, ties Part III to Schedules B, D, 1 and 3, and fills Schedule B line 7 from the account facts.
+The scenario fills Parts I to VI of Form 8938 with three copies of page 2, ties Part III to Schedules B, D, 1 and 3, and fills Schedule B line 7a from the account facts. Line 7b is unsupported: the Luxembourg fund shares in Part VI may be a financial account.
 
 ## Documents
 
@@ -39,7 +39,7 @@ The year-end total is $383,808: 114,950 (Zurich) + 64,316 (London) + 0 (Cologne)
 | 12 | note bought in 2025 | Yes |
 | 13a | Zurich interest 812.40 | 812, Form 1040 line 2b, Schedule B line 1 |
 | 13b | London dividends 1,450.25 | 1,450, line 3b, Schedule B line 5 |
-| 13e | 18,400 − 12,150 (Form 8949 box C) | 6,250, line 7, Schedule D line 3 |
+| 13e | 18,400 − 12,150 (Form 8949 box C) | 6,250, line 7a, Schedule D line 3 |
 | 13f | early withdrawal penalty 45 | 45, line 10, Schedule 1 line 18 |
 | 13g | Swiss tax 284.34; the election credit is claimed | 284, line 20, Schedule 3 line 1 |
 | 14a | note interest 1,912.50 | 1,913 |

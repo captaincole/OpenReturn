@@ -35,7 +35,8 @@ function scheduleDLines(category: CategoryItems): string {
 /*
  * Interest: Form 1040 line 2b and Schedule B line 1; dividends: line 3b and
  * Schedule B line 5; other income: line 8 from Schedule 1 line 8z; gains:
- * line 7 from Schedule D; deductions (the early withdrawal penalty): line 10
+ * line 7a from Schedule D (irs-1040-inst-2025::sec::line-7b::b01, "the total
+ * on line 7a"); deductions (the early withdrawal penalty): line 10
  * from Schedule 1 line 18; credits (the foreign tax credit): line 20 from
  * Schedule 3 line 1. Royalties have no route in the engine (partIII.ts).
  */
@@ -53,7 +54,7 @@ const WHERE: Record<TaxItem, Where> = {
     form: "Form 1040, line 8",
     schedule: { formId: "schedule-1", text: () => "Schedule 1, line 8z" },
   },
-  gains: { form: "Form 1040, line 7", schedule: { formId: "schedule-d", text: scheduleDLines } },
+  gains: { form: "Form 1040, line 7a", schedule: { formId: "schedule-d", text: scheduleDLines } },
   deductions: {
     form: "Form 1040, line 10",
     schedule: { formId: "schedule-1", text: () => "Schedule 1, line 18" },

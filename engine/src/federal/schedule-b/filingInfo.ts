@@ -20,6 +20,8 @@ export interface ForeignAccountFacts {
   countries: string[];
   /** One account alone was worth more than the FinCEN Form 114 limit at some time in the year. */
   overFincenLimit: boolean;
+  /** A Part VI asset is on the return: it may be a financial account, so the countries may be incomplete. */
+  countriesIncomplete: boolean;
 }
 
 export interface ScheduleBFilingInfo

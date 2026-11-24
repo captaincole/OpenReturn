@@ -13,7 +13,7 @@ import {
 } from "../../resolverInputs.js";
 import { figuredForm8814, form8814Totals } from "../8814/totals.js";
 import { filesForm8815, savingsBondExclusionScope } from "../8815/resolveInfo.js";
-import { foreignAccountsOnReturn } from "../8938/resolveInfo.js";
+import { foreignAccountsOnReturn, hasOtherAssetOnReturn } from "../8938/resolveInfo.js";
 import { receivedAmounts, receivedOnReturn, type Receipt } from "../passThrough/receipts.js";
 import type { ForeignAccountFacts, PayerAmount, ScheduleBFilingInfo } from "./filingInfo.js";
 
@@ -30,6 +30,8 @@ export const FINCEN_114_LIMIT = 10000;
  * (irs-1040sb-inst-2025::sec::line-7a-question-1-check-the-yes-box-if-at-any-time::b01).
  * Undefined with no account fact. One account worth more than $10,000 settles
  * question 2; a smaller one does not (the aggregate at any time is unknown).
+ * A Part VI asset may be a financial account too, so line 7b's list is then
+ * not known to be complete.
  */
 function foreignAccountFactsOf(inputs: ResolverInputs): ForeignAccountFacts | undefined {
   const accounts = foreignAccountsOnReturn(inputs);
@@ -40,6 +42,7 @@ function foreignAccountFactsOf(inputs: ResolverInputs): ForeignAccountFacts | un
   return {
     countries: [...new Set(countries)],
     overFincenLimit: accounts.some((account) => account.maximumDollars > FINCEN_114_LIMIT),
+    countriesIncomplete: hasOtherAssetOnReturn(inputs),
   };
 }
 

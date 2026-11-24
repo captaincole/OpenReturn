@@ -277,11 +277,22 @@ describe("the lines", () => {
 
 describe("Schedule B line 7 from the account facts", () => {
   it("answers both questions and lists the countries when one account is over $10,000", () => {
-    const { value } = evaluate();
+    const accountsOnly = base.facts.filter(
+      (fact) => (fact.value as { part?: string } | null)?.part !== "other_asset",
+    );
+    const { value } = evaluate(accountsOnly);
     expect(value("schedule-b", "0.line.7a_foreign_account_yes")).toBe(true);
     expect(value("schedule-b", "0.line.7a_fincen_114_required_yes")).toBe(true);
     expect(value("schedule-b", "0.line.7b_foreign_country_1")).toBe("Switzerland");
     expect(value("schedule-b", "0.line.7b_foreign_country_2")).toBe("United Kingdom, Germany");
+  });
+
+  it("leaves line 7b to a person when a Part VI asset may be a financial account", () => {
+    // The Luxembourg fund shares are a "mutual fund or similar pooled fund" (Schedule B line 7a).
+    const { value, field } = evaluate();
+    expect(value("schedule-b", "0.line.7a_fincen_114_required_yes")).toBe(true);
+    expect(isGap(field("schedule-b", "0.line.7b_foreign_country_1"))).toBe(true);
+    expect(isGap(field("schedule-b", "0.line.7b_foreign_country_2"))).toBe(true);
   });
 
   it("leaves question 2 to a person when no account alone is over $10,000", () => {

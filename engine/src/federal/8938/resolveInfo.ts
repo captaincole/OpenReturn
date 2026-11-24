@@ -35,6 +35,17 @@ export function foreignAccountsOnReturn(inputs: ResolverInputs): ForeignAccountO
 }
 
 /*
+ * A Part VI asset of the return. It may be a financial account for Schedule B
+ * line 7a ("shares in a mutual fund or similar pooled fund", an insurance or
+ * annuity policy with a cash value), and the fact does not say which
+ * (irs-1040sb-inst-2025::sec::line-7a-question-1-check-the-yes-box-if-at-any-time::b01).
+ */
+export function hasOtherAssetOnReturn(inputs: ResolverInputs): boolean {
+  const jointReturn = filingStatusOf(inputs) === "married_filing_jointly";
+  return assetsOnReturn(inputs, jointReturn).some((asset) => asset.value.part === "other_asset");
+}
+
+/*
  * Part IV (irs-8938-inst-2025::sec::part-iv::b01): the number of each form
  * filed. Read only when an asset is reported on one of them; it then waits
  * for the counts.

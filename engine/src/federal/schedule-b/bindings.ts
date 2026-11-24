@@ -60,6 +60,9 @@ function yesNo(answer: (info: ScheduleBFilingInfo) => boolean | undefined, yes: 
 const FINCEN_GAP =
   "FinCEN Form 114 is required when the foreign accounts together are worth more than $10,000 at any time; the engine knows it only when one recorded account alone is worth more.";
 
+const COUNTRIES_GAP =
+  "A Form 8938 Part VI asset (such as shares of a foreign mutual fund, or an insurance policy with a cash value) may be a foreign financial account; the engine cannot tell, so the list of countries may be incomplete.";
+
 /* Question 2 is Yes from the account facts (resolveInfo.ts foreignAccountFactsOf). */
 const fincenYes = (info: ScheduleBFilingInfo) =>
   info.hasForeignFinancialAccount === true && info.foreignAccountFacts?.overFincenLimit === true;
@@ -70,7 +73,10 @@ const fincenYes = (info: ScheduleBFilingInfo) =>
  * Yes, and the accounts' countries, when one recorded account alone is worth
  * more than $10,000; blank after a No to question 1. Otherwise the engine
  * cannot tell: unsupported. Line 7b
- * row 1 takes the first country, row 2 the others.
+ * row 1 takes the first country, row 2 the others; unsupported when a Part VI
+ * asset is on the return, which may be a financial account
+ * (line-7a-question-1-check-the-yes-box-if-at-any-time::b01, "shares in a
+ * mutual fund or similar pooled fund").
  */
 function fincenBindings(): Record<string, Fn> {
   // "If 'Yes,' are you required to file FinCEN Form 114": blank after a No.
@@ -81,12 +87,19 @@ function fincenBindings(): Record<string, Fn> {
       return fincenYes(info) ? value(info) : unsupported(FINCEN_GAP);
     };
   const countries = (info: ScheduleBFilingInfo) => info.foreignAccountFacts?.countries ?? [];
+  // A Part VI asset may be a financial account in a country not on the list.
+  const listed = (row: (list: string[]) => string | undefined) =>
+    settled((info) =>
+      info.foreignAccountFacts?.countriesIncomplete === true
+        ? unsupported(COUNTRIES_GAP)
+        : row(countries(info)),
+    );
   return {
     "0.line.7a_fincen_114_required_yes": settled(() => true),
     "0.line.7a_fincen_114_required_no": settled(() => undefined),
-    "0.line.7b_foreign_country_1": settled((info) => countries(info)[0]),
-    "0.line.7b_foreign_country_2": settled((info) =>
-      countries(info).length > 1 ? countries(info).slice(1).join(", ") : undefined,
+    "0.line.7b_foreign_country_1": listed((list) => list[0]),
+    "0.line.7b_foreign_country_2": listed((list) =>
+      list.length > 1 ? list.slice(1).join(", ") : undefined,
     ),
   };
 }

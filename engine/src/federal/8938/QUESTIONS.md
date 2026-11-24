@@ -32,7 +32,7 @@ Each item is a place where the form and its instructions do not settle a rule. B
 ## 5. Part III: where each item is reported
 
 - Text: "the schedule, form, or return on which you reported the items" (`part-iii::b01`).
-- Default: column (d) names the Form 1040 line; column (e) names the schedule line when that schedule files. Gains name the Schedule D lines of the sales' Form 8949 boxes, and line 13 for capital gain distributions.
+- Default: column (d) names the Form 1040 line (gains: line 7a, the 2025 capital gain line); column (e) names the schedule line when that schedule files. Gains name the Schedule D lines of the sales' Form 8949 boxes, and line 13 for capital gain distributions.
 - Dollars: no.
 
 ## 6. Part III: interest
@@ -66,6 +66,32 @@ Each item is a place where the form and its instructions do not settle a rule. B
 
 - Text: "if the aggregate value of foreign financial accounts exceeds $10,000 at any time during 2025" (`irs-1040sb-inst-2025::sec::line-7a-question-2-see-fincen-form-114-and-its::b01`).
 - Default: Yes, with the accounts' countries on line 7b, when one recorded Part V account alone is over $10,000. Otherwise unsupported: signature authority and the aggregate at any time are not facts.
+- Line 7b: a financial account "also includes ... shares in a mutual fund or similar pooled fund" and a policy with a cash value (`line-7a-question-1-check-the-yes-box-if-at-any-time::b01`). A Part VI asset may be one, and the fact does not say. With any Part VI asset on the return, line 7b is unsupported instead of a list that may leave a country out. A fact field that marks a Part VI financial account would let the engine list its country.
+
+## 12. Rounding of the Part I and Part II totals
+
+- Text: none. The instructions give no rounding rule; the form's dollar lines have no cents column.
+- Default: each line 23 and line 32 value rounds to the nearest dollar, and lines 6, 8 and 11 add the rounded values (the form's arithmetic on other lines).
+- Another reading: add the values with cents and round only the total. The two can differ by $1.
+- Dollars: yes, $1 at most on lines 6, 8 and 11. No tax amount changes.
+
+## 13. The account statement's exchange rate
+
+- Text: "Use the currency exchange rate on the last day of the tax year to figure the maximum value" (`currency-determination-date::b01`); "You may rely on the foreign currency conversion rate reflected in a financial account statement issued at least annually" (`exception-for-financial-account::b01`).
+- Default: the fact's `conversion.exchangeRate` is the Treasury rate on December 31; a statement rate the taxpayer chooses goes in the same field.
+- Dollars: yes, on lines 23 and 32, and the threshold test. No tax amount changes.
+
+## 14. An asset not in an account: the year-end value as the maximum
+
+- Text: "you may use the value ... as of the last day of the tax year, unless you know or have reason to know ... the value does not reflect a reasonable estimate of the maximum value" (`valuing-other-specified::b01`, Example 15).
+- Default: line 32 prints the fact's `maximumValue`. Cade records the known highest value; the year-end value only when no higher value is known.
+- Dollars: yes, on lines 11 and 32. No tax amount changes.
+
+## Second opinions
+
+- **Blind fill (14 cases).** Every value agrees but one: case 8, line 23. The harness printed the would-be line 23 ($71,765) for a return under the threshold; the engine does not file the form there (`resolveInfo.ts` builds no lines when `mustFile` is false), so the line is blank, as in the blind fill. Both read €61,000 / 0.85 = $71,765 (`currency-determination-date::b01`).
+- **PolicyEngine-US 2.153.8 (commit b3edc0446b).** It does not model Form 8938: no variable or parameter in `gov/irs` names Form 8938, FATCA or specified foreign financial assets. No constant or formula to compare.
+- **IRS Direct File (commit e365f9f434).** It does not support Form 8938. `backend/src/main/resources/tax/income.xml` has only the Schedule B question (`/hasForeignAccounts`, `/isForeignTrustsGrantor`) as a yes/no fact, with no threshold or value rule.
 
 ## Confidence by field group
 
