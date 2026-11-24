@@ -242,6 +242,37 @@ describe("Branches of the form", () => {
   });
 });
 
+describe("Amounts in the fund's currency", () => {
+  const inRand: PficFundFactValue = {
+    ...smallFund,
+    currencyCode: "ZAR",
+    valueAtYearEnd: 600000,
+    yearEndUsdPerUnit: 0.058,
+  };
+
+  it("the year-end value converts at the December 31 rate for line 4", () => {
+    const run = evaluate([fund("rand", inRand)]);
+    expect(run.value("form-8621", "0.line.4c_share_value_100001_to_150000")).toBeUndefined();
+    expect(run.value("form-8621", "0.line.4a_share_value_0_to_50000")).toBe(true);
+  });
+
+  it("a sale converts at the sale date's rate for line 15f", () => {
+    const sale = {
+      date: "2025-06-30",
+      amountRealized: 500000,
+      usdPerUnit: 0.055,
+      adjustedBasis: 20000,
+    };
+    const run = evaluate([fund("rand", { ...inRand, disposition: sale })]);
+    expect(run.value("form-8621", "2.line.15f_gain_or_loss_disposition")).toBe(7500);
+  });
+
+  it("an amount in another currency with no rate is a gap, not a guess", () => {
+    const run = evaluate([fund("rand", { ...inRand, yearEndUsdPerUnit: undefined })]);
+    expect(run.field("form-8621", "0.line.3_shares_held_year_end")).toMatchObject(UNSUPPORTED);
+  });
+});
+
 describe("Form 8960 line 5b and Schedule 2 line 17z on a return with a fund", () => {
   const withElection = { ...pacificRim, qef: { ...pacificRim.qef!, section1411gElection: true } };
   const carryover: TaxFactRow = {

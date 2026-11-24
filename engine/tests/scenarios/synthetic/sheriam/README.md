@@ -14,20 +14,22 @@ The return is federal only: Florida has no income tax. Forms that file: Form 104
 
 ## Input documents
 
-Made by `generate-docs.ts` with `tests/scenarios/documents/pficFundStatement.ts`: `docs/01-pfic-alpine-balanced.pdf` (the PFIC Annual Information Statement), `docs/02-pfic-cape-horizon.pdf`, `docs/03-pfic-baltic-tech.pdf`. The basis, the unreversed inclusions and the elections are the couple's records, stated.
+Made by `generate-docs.ts` with `tests/scenarios/documents/pficFundStatement.ts`: `docs/01-pfic-alpine-balanced.pdf` (the PFIC Annual Information Statement), `docs/02-pfic-cape-horizon.pdf`, `docs/03-pfic-baltic-tech.pdf`. The basis, the unreversed inclusions, the exchange rates and the elections are the couple's records, stated.
+
+Each fund prints its amounts in its own currency, and the fact holds them that way: Alpine in Swiss francs, Cape Horizon in South African rand, Baltic Tech in euros. The couple's rate for each date converts them to dollars (`yearEndUsdPerUnit`, the sale's `usdPerUnit`); the hand check below shows each one. The basis is already in dollars (their records).
 
 ## Hand check
 
 | Line | Rule | Value |
 | --- | --- | --- |
-| 8621 (Alpine) 2, 4 | acquired 02/03/2025; $72,000 is box (b) | 02/03/2025; (b) |
+| 8621 (Alpine) 2, 4 | acquired 02/03/2025; CHF 57,600 × 1.25 USD per franc = $72,000, box (b) | 02/03/2025; (b) |
 | 8621 (Alpine) 6a–6c | 5,000 − 400 | 5,000; 400; 4,600 |
 | 8621 (Alpine) 7a, 7c; 5b | 1,200; 4,600 + 1,200 | 1,200; 5,800 |
-| 8621 (Cape) 15f | 48,000 − 39,500 | 8,500 |
+| 8621 (Cape) 15f | proceeds ZAR 827,586.21 × 0.058 USD per rand on 09/30/2025 = $48,000.00; − basis $39,500 | 8,500 |
 | 8621 (Cape) 16b | 8,500 × 273 ÷ 1,337 (2025 days) | 1,736 |
 | 8621 (Cape) 16c, 16d, 16e | 2022–2024 shares × 37%; no tax; 16c − 16d | 2,503; 0; 2,503 |
 | 8621 (Cape) 16f | daily compound interest to 2026-04-15 (independent script) | 392 |
-| 8621 (Baltic) 10a–12 | 61,000 − 70,000; inclusions 5,500 cap the loss | −9,000; 5,500; −5,500 |
+| 8621 (Baltic) 10a–12 | EUR 51,959.11 × 1.174 USD per euro = $60,999.995 → 61,000; − 70,000; inclusions 5,500 cap the loss | −9,000; 5,500; −5,500 |
 | Schedule 1 line 8z; 1040 line 8 | 4,600 + 1,736 − 5,500 | 836 |
 | Schedule D line 11, 15, 16; 1040 line 7a | line 7c | 1,200 |
 | 1040 lines 9, 11a, 15 | 280,000 + 1,200 + 836; − 31,500 | 282,036; 250,536 |

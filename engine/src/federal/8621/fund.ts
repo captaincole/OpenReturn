@@ -7,6 +7,7 @@
 
 import type { PficFundFact, PficFundFactValue } from "../../facts/index.js";
 import { atLeast, sum } from "../../money.js";
+import { currencyGap, saleInDollars, yearEndValueUsd } from "./currency.js";
 import { holdingStartOf } from "./line15.js";
 import {
   markToMarketOrdinary,
@@ -45,12 +46,12 @@ function partIVOf(fund: PficFundFactValue): Form8621Fund["partIV"] | string {
   return {
     yearEnd:
       held && basis !== undefined
-        ? partIVYearEnd(fund.valueAtYearEnd, {
+        ? partIVYearEnd(yearEndValueUsd(fund), {
             adjustedBasis: basis,
             unreversedInclusions: fund.markToMarket?.unreversedInclusions,
           })
         : undefined,
-    sale: fund.disposition ? partIVDisposition(fund.disposition) : undefined,
+    sale: fund.disposition ? partIVDisposition(saleInDollars(fund.disposition)) : undefined,
   };
 }
 
@@ -94,6 +95,8 @@ function figureFund(fact: PficFundFact): Form8621Fund {
   const holdingStart = holdingStartOf(fact.value.acquiredDate);
   if (holdingStart === undefined)
     return withGap(base, `The acquisition date (${fact.value.acquiredDate}) is not a date.`);
+  const noRate = currencyGap(fact.value);
+  if (noRate !== undefined) return withGap(base, noRate);
   const parts = partsOf(fact.value, holdingStart);
   if (typeof parts === "string") return withGap(base, parts);
   return {

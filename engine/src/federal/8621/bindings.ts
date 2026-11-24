@@ -11,6 +11,7 @@ import { roundDollars } from "../../money.js";
 import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { namesOnReturn } from "../returnNames.js";
+import { yearEndValueUsd } from "./currency.js";
 import type { Form8621FilingInfo } from "./filingInfo.js";
 import { section1291Amount, section1293Amount, section1296Amount } from "./fund.js";
 import {
@@ -105,7 +106,7 @@ const partILine = <V>(read: Parameters<typeof fundLine<V>>[0]) =>
   fundLine<V>((fund) => (fund.fact.qualifyingInsuranceElection === true ? undefined : read(fund)));
 
 const valueBoxLine = (box: ValueBox) =>
-  partILine((fund) => checked(valueBox(fund.fact.valueAtYearEnd) === box));
+  partILine((fund) => checked(valueBox(yearEndValueUsd(fund.fact)) === box));
 
 const partIBindings: Bindings = {
   "0.line.1_share_class_description": partILine((fund) => fund.fact.shareClass),
@@ -124,9 +125,10 @@ const partIBindings: Bindings = {
   "0.line.4b_share_value_50001_to_100000": valueBoxLine("b"),
   "0.line.4c_share_value_100001_to_150000": valueBoxLine("c"),
   "0.line.4d_share_value_150001_to_200000": valueBoxLine("d"),
-  "0.line.4e_share_value_over_200000": partILine((fund) =>
-    valueBox(fund.fact.valueAtYearEnd) === "e" ? roundDollars(fund.fact.valueAtYearEnd) : undefined,
-  ),
+  "0.line.4e_share_value_over_200000": partILine((fund) => {
+    const value = yearEndValueUsd(fund.fact);
+    return valueBox(value) === "e" ? roundDollars(value) : undefined;
+  }),
   // ::line-5::b01: the type of PFIC and the amount under each section.
   "0.line.5a_section_1291_box": partILine((fund) => checked(fund.partV !== undefined)),
   "0.line.5a_section_1291_amount": partILine((fund) => {

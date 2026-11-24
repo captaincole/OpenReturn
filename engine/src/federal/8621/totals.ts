@@ -8,6 +8,7 @@ import { getPficFundFacts } from "../../facts/index.js";
 import { atLeast, sum } from "../../money.js";
 import { filingStatusOf, type ResolverInputs } from "../../resolverInputs.js";
 import { unsupported, type Unsupported } from "../../types.js";
+import { yearEndValueUsd } from "./currency.js";
 import { form8621Fund, section1291Amount, type Form8621Fund } from "./fund.js";
 import type { FundResults } from "./results.js";
 
@@ -82,7 +83,7 @@ export function form8621Totals(inputs: ResolverInputs): Form8621Totals | undefin
   const funds = facts.map(form8621Fund);
   const joint = filingStatusOf(inputs) === "married_filing_jointly";
   const limit = joint ? PART_I_EXCEPTION_LIMIT_JOINT : PART_I_EXCEPTION_LIMIT;
-  const aggregate = sum(...funds.map((fund) => fund.fact.valueAtYearEnd));
+  const aggregate = sum(...funds.map((fund) => yearEndValueUsd(fund.fact)));
   const results = funds.map((fund) => fund.results);
   const amounts = Object.fromEntries(
     SUMMED.map((name) => [name, sum(...results.map((each) => each[name]))]),

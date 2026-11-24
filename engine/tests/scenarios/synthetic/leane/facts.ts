@@ -62,7 +62,7 @@ const w2: W2FactValue = {
 
 /*
  * A section 1291 fund in euros, held since March 2021: two distributions in
- * 2025 with German tax withheld. The excess over 125% of the 2022–2024
+ * 2025 with tax withheld at source. The excess over 125% of the 2022–2024
  * average goes on Part V and line 16.
  */
 export const rhineValley: PficFundFactValue = {
@@ -70,13 +70,15 @@ export const rhineValley: PficFundFactValue = {
   fundAddress: "14 Rue des Tilleuls, L-2540 Luxembourg, Luxembourg",
   country: "Luxembourg",
   referenceId: "LVRHINE2021",
-  shareClass: "Class A accumulating shares",
+  shareClass: "Class D distributing shares",
   acquiredDate: "2021-03-15",
+  currencyCode: "EUR",
   sharesAtYearEnd: 2000,
-  valueAtYearEnd: 182000,
+  // EUR 155,000 at 1.1742 USD per euro on December 31: $182,001 (line 4(d)).
+  valueAtYearEnd: 155000,
+  yearEndUsdPerUnit: 1.1742,
   regime: "section_1291",
   section1291: {
-    currencyCode: "EUR",
     distributions: [
       { date: "2025-06-20", amount: 6000, usdPerUnit: 1.15, foreignTaxWithheld: 900 },
       { date: "2025-12-12", amount: 4000, usdPerUnit: 1.17, foreignTaxWithheld: 600 },
@@ -117,8 +119,9 @@ export const pacificRim: PficFundFactValue = {
   fundAddress: "88 Harbour Road, Wan Chai, Hong Kong",
   country: "Hong Kong",
   fundEin: "98-0008621",
-  shareClass: "Ordinary participating shares",
+  shareClass: "Ordinary participating shares, USD class",
   acquiredDate: "2020-08-10",
+  currencyCode: "USD",
   sharesAtYearEnd: 1200,
   valueAtYearEnd: 95000,
   regime: "qef",

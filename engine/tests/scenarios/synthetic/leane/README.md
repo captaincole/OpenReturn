@@ -4,7 +4,7 @@ Leane Varrow is single and lives in Austin, Texas. Every name and amount here is
 
 Leane has one W-2 and holds three foreign funds directly, each a passive foreign investment company (PFIC):
 
-- **Rhine Valley Equity Fund** (Luxembourg), a section 1291 fund held since March 2021. Two 2025 distributions in euros, with German tax withheld, exceed 125% of the 2022–2024 average. The excess goes through Part V and line 16: tax at the top rate for each earlier year, the foreign tax credit, and interest.
+- **Rhine Valley Equity Fund** (Luxembourg), a section 1291 fund held since March 2021. Two 2025 distributions in euros, with tax withheld at source, exceed 125% of the 2022–2024 average. The excess goes through Part V and line 16: tax at the top rate for each earlier year, the foreign tax credit, and interest.
 - **Nordic Broad Index ETF** (Sweden), marked to market since 2019. A year-end gain (Part IV line 10c), and a sale of some shares at a loss within the unreversed inclusions (lines 13a–14b).
 - **Pacific Rim Growth Fund** (Hong Kong), a QEF (Part III). Two section 1294 elections from earlier years are outstanding (Part VI); a 2025 distribution ends the 2022 one in part.
 
@@ -14,11 +14,14 @@ The return is federal only: Texas has no income tax. Forms that file: Form 1040,
 
 Made by `generate-docs.ts` from the fund facts, with the generator `tests/scenarios/documents/pficFundStatement.ts` (a new document type): `docs/01-pfic-rhine-valley.pdf`, `docs/02-pfic-nordic-index.pdf`, `docs/03-pfic-pacific-rim.pdf` (the PFIC Annual Information Statement). The basis, exchange rates, earlier distributions, unreversed inclusions and section 1294 elections are Leane's records, stated.
 
+Each fund prints its amounts in its own currency, and the fact holds them that way: the Rhine Valley fund in euros (the distributions, the tax withheld, the year-end value), the other two in U.S. dollars. Leane's rate for each date converts them (`yearEndUsdPerUnit`, each distribution's `usdPerUnit`). For example, the June distribution is EUR 6,000 × 1.15 = $6,900, and the year-end value is EUR 155,000 × 1.1742 = $182,001.
+
 ## Hand check
 
 | Line | Rule | Value |
 | --- | --- | --- |
-| 8621 (Rhine) 15a–15d | EUR 10,000; 9,600; 9,600 ÷ 3; × 1.25 | 10,000; 9,600; 3,200; 4,000 |
+| 8621 (Rhine) 4 | EUR 155,000 × 1.1742 USD per euro on 12/31/2025 = $182,001 | box (d) |
+| 8621 (Rhine) 15a–15d | EUR 6,000 + 4,000; 9,600; 9,600 ÷ 3; × 1.25 (all in euros) | 10,000; 9,600; 3,200; 4,000 |
 | 8621 (Rhine) 15e(1), 15e(2) | 10,000 − 4,000; EUR 3,600 × 1.15 + EUR 2,400 × 1.17 | 6,000; 6,948 |
 | 8621 (Rhine) 16b | the 2025 days' share of each excess part (independent script) | 1,015 |
 | 8621 (Rhine) 16c, 16d, 16e | 2021–2024 shares × 37%; the excess taxes, capped per year; 16c − 16d | 2,195; 890; 1,305 |

@@ -78,8 +78,11 @@ export const alpineBalanced: PficFundFactValue = {
   fundEin: "98-0008622",
   shareClass: "Registered shares, class B",
   acquiredDate: "2025-02-03",
+  currencyCode: "CHF",
   sharesAtYearEnd: 600,
-  valueAtYearEnd: 72000,
+  // CHF 57,600 at 1.25 USD per franc on December 31: $72,000 (line 4(b)).
+  valueAtYearEnd: 57600,
+  yearEndUsdPerUnit: 1.25,
   regime: "qef",
   elections: { qef: true },
   qef: {
@@ -99,10 +102,17 @@ export const capeHorizon: PficFundFactValue = {
   shareClass: "Class R income units",
   jointlyOwnedWithSpouse: true,
   acquiredDate: "2022-02-01",
+  currencyCode: "ZAR",
   sharesAtYearEnd: 0,
   valueAtYearEnd: 0,
   regime: "section_1291",
-  disposition: { date: "2025-09-30", amountRealized: 48000, adjustedBasis: 39500 },
+  // ZAR 827,586.21 at 0.058 USD per rand on the sale date: $48,000 (line 15f).
+  disposition: {
+    date: "2025-09-30",
+    amountRealized: 827586.21,
+    usdPerUnit: 0.058,
+    adjustedBasis: 39500,
+  },
 };
 
 /* An Estonian ETF marked to market since 2020: a year-end loss larger than the unreversed inclusions. */
@@ -113,8 +123,11 @@ export const balticTech: PficFundFactValue = {
   referenceId: "SOBALTIC2020",
   shareClass: "Accumulating shares",
   acquiredDate: "2020-11-05",
+  currencyCode: "EUR",
   sharesAtYearEnd: 1500,
-  valueAtYearEnd: 61000,
+  // EUR 51,959.11 at 1.174 USD per euro on December 31: $61,000 (line 10a).
+  valueAtYearEnd: 51959.11,
+  yearEndUsdPerUnit: 1.174,
   regime: "mark_to_market",
   markToMarket: { adjustedBasisAtYearEnd: 70000, unreversedInclusions: 5500 },
 };

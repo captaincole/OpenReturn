@@ -48,13 +48,19 @@ function holdingRows(ctx: Ctx, fund: PficFundFactValue, yStart: number): number 
   let yPos = heading(ctx, yStart, "Your holding at December 31");
   yPos = row(ctx, yPos, "Share class", fund.shareClass);
   yPos = row(ctx, yPos, "Shares held", String(fund.sharesAtYearEnd));
-  return row(ctx, yPos, "Market value (USD)", `$ ${fmtMoney(fund.valueAtYearEnd)}`);
+  const currency = fund.currencyCode ?? "USD";
+  return row(
+    ctx,
+    yPos,
+    `Market value (${currency})`,
+    `${currency} ${fmtMoney(fund.valueAtYearEnd)}`,
+  );
 }
 
 function distributionRows(ctx: Ctx, fund: PficFundFactValue, yStart: number): number {
   const distributions = fund.section1291?.distributions ?? [];
   if (distributions.length === 0) return yStart;
-  const currency = fund.section1291?.currencyCode ?? "USD";
+  const currency = fund.currencyCode ?? "USD";
   let yPos = heading(ctx, yStart, `Distributions paid (${currency})`);
   for (const each of distributions) {
     yPos = row(ctx, yPos, `Paid ${each.date}`, `${currency} ${fmtMoney(each.amount)}`);
@@ -107,8 +113,14 @@ function qefRows(ctx: Ctx, fund: PficFundFactValue, yStart: number): number {
 function saleRows(ctx: Ctx, fund: PficFundFactValue, yStart: number): number {
   const sale = fund.disposition;
   if (sale === undefined) return yStart;
-  const yPos = heading(ctx, yStart, "Shares redeemed or sold (USD)");
-  return row(ctx, yPos, `Proceeds, trade date ${sale.date}`, `$ ${fmtMoney(sale.amountRealized)}`);
+  const currency = fund.currencyCode ?? "USD";
+  const yPos = heading(ctx, yStart, `Shares redeemed or sold (${currency})`);
+  return row(
+    ctx,
+    yPos,
+    `Proceeds, trade date ${sale.date}`,
+    `${currency} ${fmtMoney(sale.amountRealized)}`,
+  );
 }
 
 export async function pficFundStatementPdf(

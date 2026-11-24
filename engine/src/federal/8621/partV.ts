@@ -6,7 +6,8 @@
  */
 
 import type { PficFundFactValue } from "../../facts/index.js";
-import { line15Of, TAX_YEAR, US_DOLLAR, type Line15 } from "./line15.js";
+import { currencyOf, saleInDollars, yearEndValueUsd } from "./currency.js";
+import { line15Of, TAX_YEAR, type Line15 } from "./line15.js";
 import { line16Of, type Line16 } from "./line16.js";
 
 export interface PartV {
@@ -57,15 +58,19 @@ const DEEMED_DIVIDEND_HOLDING_PERIOD =
 const NO_YEAR_END_BASIS =
   "The fund fact does not state the adjusted basis at the end of the year (the deemed sale of Election C, line 15f).";
 
-/* The sale line 15f takes: an actual sale, the deemed sale of D or F, or the year-end deemed sale of C. */
+/*
+ * The sale line 15f takes, in U.S. dollars: an actual sale, the deemed sale
+ * of D or F, or the year-end deemed sale of C at the year-end value.
+ */
 function saleOf(
   fund: PficFundFactValue,
   holdingStart: Date,
 ): PficFundFactValue["disposition"] | string {
-  if (!markToMarketFirstYear(fund, holdingStart)) return fund.disposition;
+  if (!markToMarketFirstYear(fund, holdingStart))
+    return fund.disposition === undefined ? undefined : saleInDollars(fund.disposition);
   const basis = fund.markToMarket?.adjustedBasisAtYearEnd;
   if (basis === undefined) return NO_YEAR_END_BASIS;
-  return { date: LAST_DAY_OF_YEAR, amountRealized: fund.valueAtYearEnd, adjustedBasis: basis };
+  return { date: LAST_DAY_OF_YEAR, amountRealized: yearEndValueUsd(fund), adjustedBasis: basis };
 }
 
 /* Part V of one fund, or why it cannot be figured. */
@@ -81,7 +86,7 @@ export function partVOf(fund: PficFundFactValue, holdingStart: Date): PartV | st
   if (typeof disposition === "string") return disposition;
   const line15 = line15Of({
     holdingStart,
-    currencyCode: fund.section1291?.currencyCode ?? US_DOLLAR,
+    currencyCode: currencyOf(fund),
     distributions: fund.section1291?.distributions ?? [],
     precedingDistributions: fund.section1291?.precedingDistributions,
     disposition,

@@ -48,20 +48,26 @@ export interface PficElections {
   formerPficDeemedDividend?: boolean;
 }
 
-/* One distribution of the year, in the fund's currency (currencyCode). */
+/* One distribution of the year, in the fund's currency (currencyCode), as the fund prints it. */
 export interface PficDistribution {
   date: string;
   amount: number;
-  /* U.S. dollars for one unit of the currency on the distribution date. Absent: 1 (U.S. dollars). */
+  /* U.S. dollars for one unit of the currency on the distribution date (the holder's rate). Absent: 1 (U.S. dollars). */
   usdPerUnit?: number;
   /* Foreign tax withheld from this distribution, in the fund's currency. Absent: none. */
   foreignTaxWithheld?: number;
 }
 
-/* A sale or other disposition (or a deemed sale) of the block, in U.S. dollars. */
+/*
+ * A sale or other disposition (or a deemed sale) of the block. The amount
+ * realized is in the fund's currency, as the fund prints it; the basis is the
+ * holder's record, in U.S. dollars.
+ */
 export interface PficDisposition {
   date: string;
   amountRealized: number;
+  /* U.S. dollars for one unit of the fund's currency on the sale date (the holder's rate). Absent: 1. */
+  usdPerUnit?: number;
   adjustedBasis: number;
   /* Mark-to-market stock: the unreversed inclusions for the shares sold (line 14a). */
   unreversedInclusions?: number;
@@ -94,10 +100,8 @@ export interface PficMarkToMarketAmounts {
 
 /* Part V: a section 1291 fund's distributions and disposition. */
 export interface PficSection1291Amounts {
-  /* The three-letter currency code of lines 15a to 15e(1). Absent: USD. */
-  currencyCode?: string;
   distributions?: PficDistribution[];
-  /* Line 15b, as reduced: the distributions of the 3 years before 2025 (or the shorter holding period). */
+  /* Line 15b, as reduced, in the fund's currency: the distributions of the 3 years before 2025 (or the shorter holding period). */
   precedingDistributions?: number;
   /* The first tax year the fund was a PFIC in the holding period. Absent: the year of acquiredDate. */
   firstPficYear?: number;
@@ -136,10 +140,18 @@ export interface PficFundFactValue {
   jointlyOwnedWithSpouse?: boolean;
   /* The date the block was acquired (line 2 when in 2025; the holding period starts the next day). */
   acquiredDate: string;
+  /*
+   * The currency the fund prints its amounts in (a three-letter ISO 4217
+   * code): the year-end value, the distributions and their tax, the sale
+   * proceeds, and Part V lines 15a to 15e(1). Absent: USD.
+   */
+  currencyCode?: string;
   /* Line 3. */
   sharesAtYearEnd: number;
-  /* Line 4, and line 10a for marked stock: the value at the end of 2025, in U.S. dollars. */
+  /* Line 4, and line 10a for marked stock: the value at the end of 2025, in the fund's currency. */
   valueAtYearEnd: number;
+  /* U.S. dollars for one unit of the fund's currency on December 31, 2025 (the holder's rate). Absent: 1. */
+  yearEndUsdPerUnit?: number;
   regime: PficRegime;
   elections?: PficElections;
   /* The page 1 election under section 1297(f)(2): then the form carries only the names and numbers. */
