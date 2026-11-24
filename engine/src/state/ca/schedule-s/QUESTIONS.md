@@ -5,6 +5,14 @@ Schedule S has no published example with numbers. The FTB instructions
 that the form and the instructions do not settle. The engine applies the
 default named. A person decides whether to keep it.
 
+## Sorted by kind
+
+1. **Two official texts give different numbers; a person decides:** item 11.
+2. **Work that could be done; not now:** items 4, 5, 6, 7 and 8 say why.
+   Items 1, 2, 3, 9, 10 and 12 are defaults that need no work.
+3. **Pattern change:** none. Form 540 line 43 was unsupported and now holds
+   this credit; item 13 is the recipe for when FTB 3510 also writes it.
+
 ## 1. Rounding of lines 5 and 10
 
 - Source: "Divide line 3 by line 4. Do not enter more than 1.0000" (the form).
@@ -39,6 +47,7 @@ default named. A person decides whether to keep it.
 - Default: nothing is added back. FTB 3804-CR has no rules in the engine, so
   no PTE credit is on the return.
 - Changes a dollar amount: not today. It will when FTB 3804-CR gets rules.
+- Not now: there is no PTE credit to add back until FTB 3804-CR has rules.
 
 ## 5. New Hampshire, Tennessee and the District of Columbia
 
@@ -51,6 +60,8 @@ default named. A person decides whether to keep it.
   California resident's DC tax is the unincorporated business tax or a dual
   resident's tax.
 - Changes a dollar amount: yes, if the taxpayer states a tax of another kind.
+- Not now: it needs a new answer (the kind of tax) and a question for Cade,
+  and no scenario has one of these states.
 
 ## 6. The group nonresident return exception
 
@@ -61,6 +72,8 @@ default named. A person decides whether to keep it.
 - Default: a stated group return allows the credit. The engine does not check
   whether the other state allows its own credit on that return.
 - Changes a dollar amount: yes, in that rare case.
+- Not now: the other state's rule is not in the corpus, so there is nothing to
+  check against.
 
 ## 7. Separate California returns, joint other-state return
 
@@ -72,14 +85,19 @@ default named. A person decides whether to keep it.
   does not prorate.
 - Changes a dollar amount: yes, for a married filer who files separately in
   California and jointly in the other state.
+- Not now: the proration needs the spouse's separate California return, which
+  the engine does not have.
 
 ## 8. More than three income items
 
 - Source: Part I has three rows. The instructions give no continuation
   statement (`ca-540-sched-s-inst-2025::sec::part-i-double-taxed-income::b01`).
-- Default: rows 1 and 2 print the first two items. Row 3 is unsupported.
-  Line 1 still adds every item.
+- Default: rows 1 and 2 print the first two items. Row 3 is unsupported, so
+  the return is not ready and the missing rows are named. Line 1 still adds
+  every item. More states are not a limit: each state is its own copy.
 - Changes a dollar amount: no.
+- Not now: the form has no place for a fourth item, and FTB names no
+  statement to attach; combining items on row 3 would be our own invention.
 
 ## 9. Rows and line 1 rounding
 
@@ -96,7 +114,11 @@ default named. A person decides whether to keep it.
 - Default: every line is blank, as Form 3903 does with no move.
 - Changes a dollar amount: no.
 
-## 11. Line 9 for a Virginia dual resident
+## 11. Line 9 for a Virginia dual resident (kind 1)
+
+The two texts below lead to different numbers: the dual-resident rule limits
+the credit to tax on Virginia-source income, and the line 9 rule puts all the
+income Virginia taxed on line 9.
 
 - Source: "If you are a dual resident, you are allowed to claim the other state
   tax credit for taxes paid to Virginia on Virginia source income"
@@ -121,6 +143,51 @@ default named. A person decides whether to keep it.
   raised it.
 - Changes a dollar amount: yes, if a reader took line 35 instead (blind case 4:
   $750, not $686).
+
+## 13. Form 540 line 43 when FTB 3510 is on `main` too
+
+This branch alone puts the other state tax credit on Form 540 line 43 (name
+"Other State Tax", code 187). The `form-3510` branch alone puts the credit for
+prior year AMT on line 43 too (name "Prior Year AMT", code 188). Each is right
+alone; together they collide. The rules:
+
+- "To claim only one or two credits, enter the credit name, code, and amount
+  of the credit on line 43 and line 44. To claim more than two credits, use
+  Schedule P (540), Part III" (`ca-540-inst-2025::sec::line-43-through-line-45-additional-special-credits::b01`).
+- "If you claim one or two other credits, enter the name, code, and amount of
+  the credit from column (b) on Form 540, line 43 and/or line 44. If you have
+  more than two other credits, do not use line 43 or 44 on Form 540. Add the
+  amounts from column (b) for the other credits and enter the total on Form
+  540, line 45" (`ca-540-sched-p-inst-2025::sec::how-to-claim-your-credits::b01`).
+- Neither text says which credit goes first. The recipe takes Schedule P
+  Part III order (line 10 before line 20); that order is our choice.
+
+Recipe for whoever merges the second branch:
+
+1. In `engine/src/state/ca/540/credits.ts`, replace both branches' line 43
+   functions with one ordered list of the credits claimed: the prior year AMT
+   credit (Schedule P line 10 column (b), above 0) first, then the other state
+   tax credit (this branch's `line43CreditAmount` amount, above 0). The first
+   takes line 43 (name, code, amount), the second line 44.
+2. Bind `line.44_credit_name`, `line.44_credit_code` and `line.44_credit_amount`
+   in `540/bindings.ts` and take them off its `unsupported` list. Line 44 is
+   blank with fewer than two credits.
+3. With neither form filing, line 43 stays unsupported with main's reason
+   (both branches do this). With a form filing and no credit, line 43 is blank.
+4. A third other credit does not exist today. When one comes, lines 43 and 44
+   stay blank and line 45 holds the total of the column (b) amounts.
+5. Schedule S line 2 subtracts the other credits (`OTHER_CREDIT_LINES` in
+   `schedule-s/returnAmounts.ts`). Today it reads `form-540.line.44_credit_amount`.
+   After the merge, line 43 or 44 may hold this credit itself, so read the
+   prior year AMT credit from its source (`schedule-p.2.part3.10_prior_year_amt_credit_used_col_b`)
+   instead of lines 43 and 44. Reading lines 43 or 44 would make line 2 depend
+   on its own credit.
+6. Line 47 waits for both credits: keep this branch's check and the
+   `form-3510` branch's `priorYearAmtCreditWaits`.
+7. Schedule P line 11 already counts line 10 (main), so line 20's balance needs
+   no change.
+8. Add a test or scenario that claims both: line 43 is code 188, line 44 is
+   code 187, and Schedule S line 2 is line 35 less the prior year AMT credit.
 
 ## Second opinions
 
