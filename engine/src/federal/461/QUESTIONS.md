@@ -65,9 +65,23 @@ whether the default can change a dollar amount.
 12. **Farming losses.** The threshold goes "first to the farming losses"
     (::ordering-rules::b01). Schedule F has no rules, so it is a gap (item 8).
     Dollars: no.
-13. **California.** Schedule CA line 8p (all three columns) stays
-    unsupported: columns B and C need FTB 3461, which has no rules, and
-    column A belongs with that work. Dollars: no (gaps).
+13. **California: needs a person.** Schedule CA line 8p column A copies
+    Schedule 1 line 8p, as line 9a column A does. "Enter the amount from
+    form FTB 3461, line 16 or line 17, whichever applies, on line 8p, column
+    C ... Enter the amount of the federal excess business loss adjustment
+    included on line 8p, column A, on line 8p, column B"
+    (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b04). FTB 3461 has
+    no rules, so column C is a gap; column B is a gap too, because alone it
+    would take the federal add-back out of California income. A gap counts
+    as 0 in a total, so California AGI keeps the federal add-back: it is
+    right only when FTB 3461 line 16 equals Form 461 line 16. They differ
+    with a California business amount that differs from the federal one, or
+    a California carryover on FTB 3461 line 14b (California carries the
+    disallowed loss as an excess business loss, not an NOL;
+    ca-3461-inst-2025::sec::line-16::b01). Default: California AGI computes
+    on that assumption. The choice: give FTB 3461 its rules, or make
+    California AGI wait while Schedule 1 line 8p holds an amount (a change
+    to Form 540). Dollars: yes, when FTB 3461 differs from Form 461.
 
 14. **A nonbusiness capital loss inside a positive line 3.** Line 3 holds
     the net of business and investment trades. "Losses from sales or
