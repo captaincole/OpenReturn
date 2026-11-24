@@ -859,6 +859,12 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8938",
     relativeDir: "federal/8938",
     register: registerForm8938,
+    /* One page 2 per foreign account, asset or issuer; page 1 prints once (resolveInfo.ts). */
+    copies: {
+      count: (info) => info?.form8938?.copies ?? 1,
+      select: (info, index) => info && { ...info, form8938CopyIndex: index },
+      laterCopyPages: [1],
+    },
   }),
   makeFormSpec({
     formId: "form-8978",

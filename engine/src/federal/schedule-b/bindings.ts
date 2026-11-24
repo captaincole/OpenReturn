@@ -57,6 +57,40 @@ function yesNo(answer: (info: ScheduleBFilingInfo) => boolean | undefined, yes: 
   return (_, info) => (answer(info) === yes ? true : undefined);
 }
 
+const FINCEN_GAP =
+  "FinCEN Form 114 is required when the foreign accounts together are worth more than $10,000 at any time; the engine knows it only when one recorded account alone is worth more.";
+
+/* Question 2 is Yes from the account facts (resolveInfo.ts foreignAccountFactsOf). */
+const fincenYes = (info: ScheduleBFilingInfo) =>
+  info.hasForeignFinancialAccount === true && info.foreignAccountFacts?.overFincenLimit === true;
+
+/*
+ * MANUAL EDIT: line 7a question 2 and line 7b
+ * (irs-1040sb-inst-2025::sec::line-7a-question-2-see-fincen-form-114-and-its::b01, line-7b::b01):
+ * Yes, and the accounts' countries, when one recorded account alone is worth
+ * more than $10,000; blank after a No to question 1. Otherwise the engine
+ * cannot tell: unsupported. Line 7b
+ * row 1 takes the first country, row 2 the others.
+ */
+function fincenBindings(): Record<string, Fn> {
+  // "If 'Yes,' are you required to file FinCEN Form 114": blank after a No.
+  const settled =
+    (value: (info: ScheduleBFilingInfo) => unknown): Fn =>
+    (_, info) => {
+      if (info.hasForeignFinancialAccount === false) return undefined;
+      return fincenYes(info) ? value(info) : unsupported(FINCEN_GAP);
+    };
+  const countries = (info: ScheduleBFilingInfo) => info.foreignAccountFacts?.countries ?? [];
+  return {
+    "0.line.7a_fincen_114_required_yes": settled(() => true),
+    "0.line.7a_fincen_114_required_no": settled(() => undefined),
+    "0.line.7b_foreign_country_1": settled((info) => countries(info)[0]),
+    "0.line.7b_foreign_country_2": settled((info) =>
+      countries(info).length > 1 ? countries(info).slice(1).join(", ") : undefined,
+    ),
+  };
+}
+
 export function register(): void {
   const bindings: Record<string, Fn> = {
     "0.header.taxpayer_name": (_, info) =>
@@ -95,16 +129,9 @@ export function register(): void {
     "0.line.7a_foreign_account_no": yesNo((info) => info.hasForeignFinancialAccount, false),
     "0.line.8_foreign_trust_yes": yesNo((info) => info.hasForeignTrust, true),
     "0.line.8_foreign_trust_no": yesNo((info) => info.hasForeignTrust, false),
+    ...fincenBindings(),
   };
   defineForm<ScheduleB, ScheduleBFilingInfo>("schedule-b", {
     bindings: bindings as Bindings,
-    unsupported: {
-      "0.line.7a_fincen_114_required_yes":
-        "FinCEN 114 question applies only after a foreign-account Yes; no foreign-account scenario yet.",
-      "0.line.7a_fincen_114_required_no":
-        "FinCEN 114 question applies only after a foreign-account Yes; no foreign-account scenario yet.",
-      "0.line.7b_foreign_country_1": "No foreign-account scenario yet.",
-      "0.line.7b_foreign_country_2": "No foreign-account scenario yet.",
-    },
   });
 }

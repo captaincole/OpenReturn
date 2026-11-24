@@ -13,8 +13,35 @@ import {
 } from "../../resolverInputs.js";
 import { figuredForm8814, form8814Totals } from "../8814/totals.js";
 import { filesForm8815, savingsBondExclusionScope } from "../8815/resolveInfo.js";
+import { foreignAccountsOnReturn } from "../8938/resolveInfo.js";
 import { receivedAmounts, receivedOnReturn, type Receipt } from "../passThrough/receipts.js";
-import type { PayerAmount, ScheduleBFilingInfo } from "./filingInfo.js";
+import type { ForeignAccountFacts, PayerAmount, ScheduleBFilingInfo } from "./filingInfo.js";
+
+/*
+ * FinCEN Form 114 is required "if the aggregate value of foreign financial
+ * accounts exceeds $10,000 at any time during 2025"
+ * (irs-1040sb-inst-2025::sec::line-7a-question-2-see-fincen-form-114-and-its::b01).
+ */
+export const FINCEN_114_LIMIT = 10000;
+
+/*
+ * Line 7a from the Form 8938 account facts: an account recorded there is "a
+ * financial account located in a foreign country"
+ * (irs-1040sb-inst-2025::sec::line-7a-question-1-check-the-yes-box-if-at-any-time::b01).
+ * Undefined with no account fact. One account worth more than $10,000 settles
+ * question 2; a smaller one does not (the aggregate at any time is unknown).
+ */
+function foreignAccountFactsOf(inputs: ResolverInputs): ForeignAccountFacts | undefined {
+  const accounts = foreignAccountsOnReturn(inputs);
+  if (accounts.length === 0) return undefined;
+  const countries = accounts
+    .map((account) => account.country)
+    .filter((country): country is string => country !== undefined && country !== "");
+  return {
+    countries: [...new Set(countries)],
+    overFincenLimit: accounts.some((account) => account.maximumDollars > FINCEN_114_LIMIT),
+  };
+}
 
 /*
  * A K-1's payer rows: "List each payer's name and the amount"
@@ -54,10 +81,11 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
     ...k1PayerRows(k1Interest),
   ];
   const dividendPayers = scheduleBDividendPayers(inputs, k1Dividends);
-  const hasForeignFinancialAccount = boolDecision(
-    inputs,
-    "decisions.scope.has_foreign_financial_account",
-  );
+  // The explicit decision wins; with none, a Form 8938 account fact answers Yes.
+  const foreignAccountFacts = foreignAccountFactsOf(inputs);
+  const hasForeignFinancialAccount =
+    boolDecision(inputs, "decisions.scope.has_foreign_financial_account") ??
+    (foreignAccountFacts === undefined ? undefined : true);
   const hasForeignTrust = boolDecision(inputs, "decisions.scope.has_foreign_trust");
   const partIII = {
     "decisions.scope.has_foreign_financial_account": hasForeignFinancialAccount,
@@ -93,6 +121,7 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
     rounding: rounding === "sum_rounded_rows" ? "sum_rounded_rows" : "round_total",
     dividendPayers,
     hasForeignFinancialAccount,
+    foreignAccountFacts,
     hasForeignTrust,
     savingsBondExclusionGap: bondExclusion.exclusion.line9Gap,
     passThroughInterest: k1Interest,

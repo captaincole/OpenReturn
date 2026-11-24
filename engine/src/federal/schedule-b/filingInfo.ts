@@ -14,6 +14,14 @@ export interface PayerAmount {
  */
 export type ScheduleBRounding = "round_total" | "sum_rounded_rows";
 
+/** The foreign deposit and custodial accounts recorded for Form 8938, on this return. */
+export interface ForeignAccountFacts {
+  /** The countries the accounts are in, each once, in the order recorded. */
+  countries: string[];
+  /** One account alone was worth more than the FinCEN Form 114 limit at some time in the year. */
+  overFincenLimit: boolean;
+}
+
 export interface ScheduleBFilingInfo
   extends BaseFilingInfo, Pick<Form8814FilingInfo, "form8814Totals"> {
   /** 1099-INT box 1 + box 3, then each K-1's interest (passThroughInterest). */
@@ -25,6 +33,8 @@ export interface ScheduleBFilingInfo
   passThroughDividends?: Receipt;
   rounding?: ScheduleBRounding;
   hasForeignFinancialAccount?: boolean;
+  /** Line 7a question 2 and line 7b from the Form 8938 account facts (resolveInfo.ts). */
+  foreignAccountFacts?: ForeignAccountFacts;
   hasForeignTrust?: boolean;
   /** Why Form 8815 line 14 is unsupported (federal/8815/line9Gaps.ts); line 3 is then unsupported too. */
   savingsBondExclusionGap?: string;
