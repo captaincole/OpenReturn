@@ -3,6 +3,7 @@
 import { defineForm } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
+import { excessBusinessLossHold } from "../qbi/excessBusinessLoss.js";
 import type { QbiBusiness } from "../qbi/filingInfo.js";
 import {
   businessTin,
@@ -40,6 +41,9 @@ const businessIn = (info: Form8995FilingInfo, row: Row): QbiBusiness | undefined
 function qbi(form: Read, info: Form8995FilingInfo, row: Row) {
   const business = businessIn(info, row);
   if (business?.qbiGap) return unsupported(business.qbiGap);
+  // MANUAL EDIT: an excess business loss (Form 461) holds the rows (qbi/excessBusinessLoss.ts).
+  const hold = business && excessBusinessLossHold(form, info, info.qbiBusinesses);
+  if (hold !== undefined) return hold === "waiting" ? undefined : hold;
   const amount = business && qbiOf(form, info, business);
   return amount === undefined ? undefined : roundDollars(amount);
 }
@@ -58,6 +62,8 @@ function tin(info: Form8995FilingInfo, row: Row): string | undefined {
 function line2(form: Read, info: Form8995FilingInfo) {
   const gap = qbiGapOf(info.qbiBusinesses);
   if (gap) return unsupported(gap);
+  const hold = excessBusinessLossHold(form, info, info.qbiBusinesses);
+  if (hold !== undefined) return hold === "waiting" ? undefined : hold;
   const amounts = (info.qbiBusinesses ?? []).map((business) =>
     roundDollars(qbiOf(form, info, business)),
   );

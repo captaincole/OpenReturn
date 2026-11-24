@@ -111,21 +111,29 @@ describe("the basis limit in proportion (elaida)", () => {
       (holding) => ({ ...holding, stockBasisAtStart: 1000000 }),
     );
 
-  it("allows a joint loss of $200,000 in full and files Form 461, the lines still computing", () => {
+  it("allows a joint loss of $200,000 in full and files Form 461 with no excess", () => {
     const large = run(elaidaScenario, withLoss(-200000));
     expect(large.value("schedule-e.1.line.41_total_income_or_loss")).toBe(-200000);
     expect(large.files("form-461")).toBe(true);
-    const line2 = large.field("form-461.0.line.2_schedule_1_line_3");
-    expect(line2?.ok).toBe(false);
+    expect(large.value("form-461.0.line.2_schedule_1_line_3")).toBe(400);
+    expect(large.value("form-461.0.line.14_net_business_income_loss")).toBe(-199600);
+    expect(large.value("form-461.0.line.16_excess_business_loss")).toBe(426400);
+    expect(large.value("schedule-1.0.line.8p")).toBeUndefined();
+    expect(large.value("form-8995.0.line.1iii_c")).toBe(-60000);
     expect(typeof large.value("form-1040.line.11a")).toBe("number");
     expect(large.value("form-1040.line.15")).toBe(0);
   });
 
-  it("stops a joint loss of $700,000, over the $626,000 threshold", () => {
+  it("adds back the excess of a joint loss of $700,000 over $626,000 on Schedule 1 line 8p", () => {
     const larger = run(elaidaScenario, withLoss(-700000));
-    expect(unsupportedReason(larger.field("schedule-e.1.line.41_total_income_or_loss"))).toContain(
-      "Form 461",
-    );
+    expect(larger.value("schedule-e.1.line.41_total_income_or_loss")).toBe(-700000);
+    expect(larger.value("form-461.0.line.9_total_income_loss_items")).toBe(-701100);
+    expect(larger.value("form-461.0.line.11_nonbusiness_losses_deductions")).toBe(1500);
+    expect(larger.value("form-461.0.line.16_excess_business_loss")).toBe(-73600);
+    expect(larger.value("schedule-1.0.line.8p")).toBe(73600);
+    expect(larger.value("schedule-1.0.line.10")).toBe(-626000);
+    // The suspended loss is not QBI, and which business it belongs to is not modeled.
+    expect(unsupportedReason(larger.field("form-8995.0.line.2"))).toContain("Form 461");
   });
 
   it("files no Form 461 for elaida's own loss", () => {

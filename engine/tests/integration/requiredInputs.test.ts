@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { evaluateScenario, pendingInputs } from "../../src";
 import { isK1FactKey } from "../../src/facts";
 import type { AIDecisionRow, TaxFactRow } from "../../src/facts/rows";
@@ -46,6 +46,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^capital_gains\.ca_loss_carryover$/,
     "a prior-year answer Cade records when the California carryover differs from the federal " +
       "one; Schedule D (540) files with it, and asks for it when it files and a federal carryover exists",
+  ],
+  [
+    /^ca_passive\.prior_year_unallowed_loss\.[^.]+$/,
+    "a prior-year answer Cade records when a property's California passive carryover differs " +
+      "from the federal one; FTB 3801 asks for it when the property has a federal carryover or " +
+      "is not passive federally",
   ],
   [
     /^decisions\.scope\.must_file_8995(_a)?$/,
@@ -168,6 +174,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "Form 8960 line 10, recorded only when the user states additional modifications; blank otherwise",
   ],
   [
+    /^business_loss_limit\.(business_capital_gain|other_business_income)$/,
+    "Form 461 answers Cade records only when a capital gain or loss, or an amount outside " +
+      "Schedule 1 lines 3 to 6, comes from a trade or business (lines 3 and 8); absent means none",
+  ],
+  [
     /^decisions\.scope\.must_file_6251$/,
     "KNOWN GAP: an incentive stock option spread files Form 6251; a filer who owes AMT " +
       "for another reason (line 7 more than line 10) needs the explicit decision.",
@@ -214,6 +225,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^prior_year\.ca_amt(_credit_carryover)?$/,
     "an answer Cade records only when the user paid California AMT for 2024 or carries an AMT " +
       "credit from 2024; either above 0 files FTB 3510, which then asks for the other",
+  ],
+  [
+    /^prior_year\.unallowed_qualified_electric_vehicle_credit$/,
+    "Form 8801 line 20, recorded only when a 2024 qualified electric vehicle credit was not " +
+      "allowed because of the old section 30(b)(3)(B) limit; absent means none",
   ],
   [
     /^prior_year\.ca_tax$/,
@@ -265,6 +281,13 @@ function unreported(base: Outcome, dropped: Outcome): string[] {
 }
 
 const SCENARIOS = await loadScenarios();
+
+/*
+ * Each case runs synchronously and vitest chains them with microtasks, so the
+ * file can hold the worker's event loop past its 60-second RPC timeout on a
+ * busy machine. Yield to the event loop before each case.
+ */
+beforeEach(() => new Promise<void>((resolve) => setImmediate(resolve)));
 
 describe.each(SCENARIOS)("required inputs: $name", (scenario) => {
   const decisions = decisionsWithPreparerStyle(scenario);

@@ -7,6 +7,8 @@
 import type { FormSpec } from "../../../defineForm.js";
 import { numberOrBlank, roundDollars, sumOrBlank } from "../../../money.js";
 import { unsupported } from "../../../types.js";
+import { isUnsupportedResult } from "../3801/context.js";
+import { scheduleEAdjustment } from "../3801/worksheetBindings.js";
 import type { DepreciationAdjustment } from "./activities.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
 import type { ScheduleCa } from "./types.js";
@@ -63,6 +65,28 @@ function depreciationColumn(
   return adjustment[side] > 0 ? adjustment[side] : undefined;
 }
 
+/*
+ * Line 5 column B or C. With FTB 3801 filed, its Schedule E worksheet total
+ * 2(e): positive in column C, negative in column B as a positive amount
+ * (ca-3801-inst-2025::sec::individuals::b01; "Use form FTB 3801 to figure the
+ * total adjustment for line 5", ca-540-sched-ca-inst-2025::sec::line-5-rental-real-estate-royalties-partnerships-s-corporations-trusts-etc::b01).
+ * Otherwise FTB 3885A line 8a/14a in column B, 8b/14b in column C
+ * (ca-3885a-inst-2025::sec::line-8a-and-line-8b::b01).
+ */
+function line5Column(
+  form: Record<string, unknown>,
+  info: ScheduleCaFilingInfo,
+  side: "subtraction" | "addition",
+) {
+  if (info.mustFile?.["form-3801"]?.value !== true) {
+    return depreciationColumn(info.rentalDepreciationAdjustment, side);
+  }
+  const adjustment = scheduleEAdjustment(form, info);
+  if (adjustment === undefined || isUnsupportedResult(adjustment)) return adjustment;
+  const amount = side === "subtraction" ? -adjustment : adjustment;
+  return amount > 0 ? amount : undefined;
+}
+
 /* An amount above 0, rounded; blank otherwise. */
 const positive = (amount: number | undefined) =>
   amount !== undefined && amount > 0 ? roundDollars(amount) : undefined;
@@ -96,11 +120,9 @@ export function answerLines(): Bindings {
      */
     "0.line.b3_subtractions": (_, info) => line3Column(info, "subtraction"),
     "0.line.b3_additions": (_, info) => line3Column(info, "addition"),
-    // Line 5: FTB 3885A line 8a/14a in column B, 8b/14b in column C (::line-8a-and-line-8b::b01).
-    "0.line.b5_subtractions": (_, info) =>
-      depreciationColumn(info.rentalDepreciationAdjustment, "subtraction"),
-    "0.line.b5_additions": (_, info) =>
-      depreciationColumn(info.rentalDepreciationAdjustment, "addition"),
+    // Line 5: FTB 3801's Schedule E adjustment when it files, else FTB 3885A (line5Column).
+    "0.line.b5_subtractions": (form, info) => line5Column(form, info, "subtraction"),
+    "0.line.b5_additions": (form, info) => line5Column(form, info, "addition"),
     // Lines 15 and 17 column B: not allowed to a California employee (::line-11-through-line-25::b02).
     "2.line.c15_subtractions": (_, info) =>
       positive(info.caEmployeeAmounts?.selfEmploymentTaxDeduction),
