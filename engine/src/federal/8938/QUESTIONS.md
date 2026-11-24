@@ -90,9 +90,38 @@ Each item is a place where the form and its instructions do not settle a rule. B
 - Default: line 32 prints the fact's `maximumValue`. Cade records the known highest value; the year-end value only when no higher value is known.
 - Dollars: yes, on lines 11 and 32. No tax amount changes.
 
+## 15. Income in a foreign currency: which rate
+
+- Decided: an interest, dividend or trade fact may hold its amounts in the account's currency with a `conversion` (`facts/kinds/foreignCurrency.ts`). The engine holds no rate table: each amount takes the rate on its fact, divided (units per dollar), kept to the cent, before any form reads it (`incomeInDollars.ts`). A fact with no `conversion` is in dollars, as before.
+- Decided, the foreign tax: its own rate, the day withheld for a credit for taxes paid, the yearly average for taxes accrued (`irs-1116-inst-2025::sec::foreign-currency-conversion::b01`; `irs-pub-514-2025::sec::internal-revenue-service::b01`). The fact names it (`taxExchangeRate`).
+- Decided, a sale: the proceeds at the spot rate on the settlement date of the sale, the cost at the spot rate on the settlement date of the purchase, for stock traded on an established market and a cash-basis taxpayer (26 CFR 1.988-2(a)(2)(iv)(A), (B)). No IRS form instruction or publication in the corpus states it.
+- Open, interest and dividends: the texts do not settle whether a yearly average may stand in for the spot rate. irs.gov "Yearly average currency exchange rates": "In general, use the exchange rate prevailing (i.e., the spot rate) when you receive, pay or accrue the item." The same page: "Generally, it accepts any posted exchange rate that is used consistently" and "divide the foreign currency amount by the applicable yearly average exchange rate in the table below." The engine does not pick; the fact names the rate and its source. amys uses the yearly average.
+- Dollars: yes, on every line that reads the income.
+
+## 16. Rounding a converted amount
+
+- Text: none for the conversion. The whole-dollar rule rounds lines, not amounts (`irs-1040-inst-2025`, "Rounding Off to Whole Dollars").
+- Default: each converted amount rounds to the cent, the half cent up (`money.ts` dollarsFromForeign); the form rounds its line as before.
+- Another reading: keep the full quotient until the line rounds. The two differ by under a cent for each amount.
+- Dollars: at most $1 on a line, and only when the cents fall within a cent of 50.
+
+## 17. A fact with no rate
+
+- Default: the fact keeps no amount and is a pending input (`pendingInputs().pendingFacts`). The lines that list the item wait: Schedule B lines 1 to 6, Form 1040 lines 2a to 3b, Form 8949 and Schedule D, the foreign tax credit (Schedule 3 line 1, Form 1116) and Form 8938 Part III.
+- Limit: a form that adds a box over all the 1099 facts (Form 8960, Form 6251, Form 8615, the EIC test, the California forms) reads the amount as absent while it waits. The return is not ready to file until the rate is recorded.
+- Limit: these stay in dollars: a 1099-MISC fact, the foreign income statement next to a 1099 (`.foreign_income`), a basis the taxpayer states (`.reported_basis`) and a Form 8949 adjustment.
+
+## 18. Open work: rates the engine could hold
+
+Not done in this change, because each needs a decision on the source and a yearly update:
+
+- A built-in table of the IRS yearly average rates, so Cade does not ask for a rate the IRS prints.
+- The spot-rate choice: which posted daily rate (Treasury, Federal Reserve, a bank) the engine would accept or suggest for a withholding date or a settlement date.
+- A currency the Treasury does not list: line 25 or 34 column (c) names the source (`foreign-currency-conversion::b01`); the asset fact has `rateSource`, but nothing checks that the Treasury lists the currency.
+
 ## Second opinions
 
-- **Blind fill (14 cases).** Every value agrees but one: case 8, line 23. The harness printed the would-be line 23 ($71,765) for a return under the threshold; the engine does not file the form there (`resolveInfo.ts` builds no lines when `mustFile` is false), so the line is blank, as in the blind fill. Both read €61,000 / 0.85 = $71,765 (`currency-determination-date::b01`).
+- **Blind fill (14 cases, before question 15).** Every value agrees but one: case 8, line 23. The harness printed the would-be line 23 ($71,765) for a return under the threshold; the engine does not file the form there (`resolveInfo.ts` builds no lines when `mustFile` is false), so the line is blank, as in the blind fill. Both read €61,000 / 0.85 = $71,765 (`currency-determination-date::b01`).
 - **PolicyEngine-US 2.153.8 (commit b3edc0446b).** It does not model Form 8938: no variable or parameter in `gov/irs` names Form 8938, FATCA or specified foreign financial assets. No constant or formula to compare.
 - **IRS Direct File (commit e365f9f434).** It does not support Form 8938. `backend/src/main/resources/tax/income.xml` has only the Schedule B question (`/hasForeignAccounts`, `/isForeignTrustsGrantor`) as a yes/no fact, with no threshold or value rule.
 
