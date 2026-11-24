@@ -284,14 +284,17 @@ function dropFormsWithNoAmount(
 }
 
 /*
- * An amount above 0 or a checked box keeps the form; so does a gap, which must
- * stay in sight. A field of the form's own that is still blank keeps it too:
- * such a form writes an unchecked box as false, so a blank one waits on an
- * answer, and the form's missing inputs must stay in sight.
+ * An amount above 0 or a checked box keeps the form. A field of the form's own
+ * that is blank or a gap keeps it too: such a form writes an unchecked box as
+ * false, so a blank one waits on an answer, and its missing inputs and gaps
+ * must stay in sight. Another form's field keeps it only with an amount
+ * (Form 8888: Form 1040 line 35a).
  */
-function keepsFormOnReturn(result: DerivationResult<unknown> | undefined, own: boolean): boolean {
-  if (!result) return own;
-  if (!result.ok) return own || ("unsupported" in result && result.unsupported === true);
+export function keepsFormOnReturn(
+  result: DerivationResult<unknown> | undefined,
+  own: boolean,
+): boolean {
+  if (!result || !result.ok) return own;
   return result.value === true || (typeof result.value === "number" && result.value > 0);
 }
 

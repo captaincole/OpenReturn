@@ -120,6 +120,35 @@ describe("Form 2210 Section A and the penalty worksheet", () => {
     expect(sheet.parts.filter((part) => part.column === 3)[0]?.paidDay).toBe(PENALTY_END_2025);
   });
 
+  /*
+   * Part III has four columns; a person can pay more often. Line 11 adds each
+   * column's payments, and the worksheet takes every payment on its own day.
+   */
+  it("nine payments: line 11 adds them by column; one after January 15 pays column (d) late", () => {
+    const nine = [
+      paid("2025-04-01", 400),
+      paid("2025-04-15", 400),
+      paid("2025-05-01", 300),
+      paid("2025-06-16", 300),
+      paid("2025-07-01", 500),
+      paid("2025-09-15", 500),
+      paid("2025-10-01", 500),
+      paid("2026-01-15", 500),
+      paid("2026-02-01", 200),
+    ];
+    expect(paymentsByColumn(nine)).toEqual([800, 600, 1000, 1000]);
+    const installments = [1000, 1000, 1000, 1000];
+    const sheet = penaltyWorksheet(installments, nine);
+    expect(sheet.underpayments).toEqual([200, 600, 600, 600]);
+    const lines = sectionALines(installments, paymentsByColumn(nine));
+    expect(lines.columns.map((column) => column.line17)).toEqual([200, 600, 600, 600]);
+    const columnD = sheet.parts.filter((part) => part.column === 3);
+    expect(columnD.map((part) => [part.amount, part.paidDay])).toEqual([
+      [200, day("2026-02-01")],
+      [400, PENALTY_END_2025],
+    ]);
+  });
+
   // Example 2 (section-b-figure-the-penalty::b01).
   it("Example 2: $500 April underpayment paid June 10 (56 days); $700 left for June 15", () => {
     const sheet = penaltyWorksheet(
