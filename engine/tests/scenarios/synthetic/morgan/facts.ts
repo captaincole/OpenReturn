@@ -1,6 +1,8 @@
 /*
- * Synthetic: the Morgan family is made up (README.md). No document or answer
- * key stands behind these facts; each sourceNote names the made-up document.
+ * Synthetic: the Morgan family is made up (README.md). No answer key stands
+ * behind these facts. The girls' 1099-INTs and 1099-DIV are in docs/ (made by
+ * generate-docs.ts from the values below); each sourceNote names the made-up
+ * document.
  */
 
 import {
@@ -41,7 +43,7 @@ const fact = (category: string, key: string, value: unknown, sourceNote: string)
 
 const TAXPAYER = { firstName: "Avery", lastName: "Morgan", ssn: "900-71-4401" };
 const SPOUSE = { firstName: "Riley", lastName: "Morgan", ssn: "900-71-4402" };
-const HOME = { line1: "418 Cedar Hollow Dr", city: "Round Rock", state: "TX", zip: "78664" };
+export const HOME = { line1: "418 Cedar Hollow Dr", city: "Round Rock", state: "TX", zip: "78664" };
 
 const averyW2: W2FactValue = {
   owner: "taxpayer",
@@ -103,7 +105,7 @@ export const WREN = "wren-morgan";
  * Child A, Ellis: line 4 $5,620 is over the $2,700 base amount, so lines 6–12
  * fill, and line 14 is $1,350 or more, so line 15 is the $135 maximum.
  */
-const ellisIncome: ChildInvestmentIncomeFactValue = {
+export const ellisIncome: ChildInvestmentIncomeFactValue = {
   taxableInterest: 1237,
   taxExemptInterest: 318,
   ordinaryDividends: 3486,
@@ -114,7 +116,7 @@ const ellisIncome: ChildInvestmentIncomeFactValue = {
 };
 
 /* Child B, Wren: interest only, line 4 $2,085, between $1,350 and $2,700: line 15 is 10% of line 14. */
-const wrenIncome: ChildInvestmentIncomeFactValue = {
+export const wrenIncome: ChildInvestmentIncomeFactValue = {
   taxableInterest: 2085,
   estimatedTaxPaid: false,
   hadOtherIncome: false,
@@ -177,13 +179,13 @@ const CHILDREN: TaxFactRow[] = [
     "dependents",
     makeChildInvestmentIncomeFactKey(ELLIS),
     ellisIncome,
-    `Ellis's 1099-INT and 1099-DIV, and the parents' answers, ${MADE_UP}.`,
+    `Ellis's 1099-INT and 1099-DIV (docs/01-1099-int-ellis.pdf, docs/02-1099-div-ellis.pdf), and the parents' answers, ${MADE_UP}.`,
   ),
   fact(
     "dependents",
     makeChildInvestmentIncomeFactKey(WREN),
     wrenIncome,
-    `Wren's 1099-INT, and the parents' answers, ${MADE_UP}.`,
+    `Wren's 1099-INT (docs/03-1099-int-wren.pdf), and the parents' answers, ${MADE_UP}.`,
   ),
 ];
 

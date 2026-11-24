@@ -1,8 +1,9 @@
 /*
- * A made-up couple (README.md): every name and amount is invented. No input
- * documents: the facts are the boxes as the W-2, the 1099-R, the 1098-E and
- * the Schedule K-1 (Form 1120-S) with its section 199A statement would print
- * them, and the couple's answers.
+ * A made-up couple (README.md): every name and amount is invented. The
+ * Schedule K-1 (Form 1120-S) with its section 199A statement is a made PDF in
+ * docs/ (generate-docs.ts); the W-2, the 1099-R and the 1098-E have none:
+ * their facts are the boxes as they would print them. The rest are the
+ * couple's answers.
  */
 
 import {
@@ -93,7 +94,7 @@ const thomLoan: StudentLoanInterestFactValue = {
  * The K-1 the corporation issued to Min, a 25% shareholder who runs its
  * restoration shop on weekends: box 1 and the box 17 code V statement.
  */
-const binderyK1: SCorporationK1FactValue = {
+export const binderyK1: SCorporationK1FactValue = {
   form: "1120-S",
   entityName: "Baerlon Bindery, Inc.",
   entityEin: BINDERY_EIN,
@@ -165,7 +166,7 @@ export const minFacts: TaxFactRow[] = [
     "k1",
     makeSCorporationK1FactKey(BINDERY_ID),
     binderyK1,
-    "Schedule K-1 (Form 1120-S) from Baerlon Bindery, Inc., with its box 17 code V statement.",
+    "Schedule K-1 (Form 1120-S) from Baerlon Bindery, Inc., with its box 17 code V statement (docs/01-schedule-k1-baerlon-bindery.pdf).",
   ),
   fact(
     "k1",

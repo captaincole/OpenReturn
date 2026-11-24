@@ -10,7 +10,7 @@ Two choices differ from the task text (QUESTIONS.md in `engine/src/federal/passT
 
 Forms that file: Form 1040, Schedules 1, 2, C, SE, E, EIC and 8812, Form 8995.
 
-No input documents. The K-1 has no fake PDF yet: the engine has no K-1 document generator, so the facts are the boxes as Schedule K-1 (Form 1120-S) would print them.
+One made input document: `docs/01-schedule-k1-malkier-fencing.pdf`, Lan's Schedule K-1 (Form 1120-S), from `generate-docs.ts` with the same fact object `facts.ts` uses. The K-1 prints the boxes and Part II answers the fact holds; the corporation's address, the IRS center and Lan's masked number are made up for the page. Item D (the corporation's total shares) is blank: the fact does not hold it. The W-2 has no PDF: its facts are the boxes as it would print them.
 
 ## Inputs
 

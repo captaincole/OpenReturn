@@ -1,7 +1,7 @@
 /*
  * Tuon Halloran, a made-up single filer in Santa Rosa, California (README.md).
- * Every name, number and address is invented. No input documents: the facts
- * are the only source.
+ * Every name, number and address is invented. The Form 1099-R is in docs/
+ * (generate-docs.ts).
  */
 
 import {
@@ -92,7 +92,7 @@ export const tuonFacts: TaxFactRow[] = [
     "retirement",
     makeRetirementDistributionFactKey(PENSION_PAYER, PENSION_ID),
     pension,
-    "1099-R from the Redwood Valley Mills Pension Plan.",
+    "1099-R from the Redwood Valley Mills Pension Plan (docs/01-redwood-valley-mills-1099-r.pdf).",
   ),
   fact(
     "retirement",

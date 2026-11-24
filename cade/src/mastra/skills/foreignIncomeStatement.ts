@@ -1,0 +1,15 @@
+import { ingestForeignIncomeStatement } from "../tools/ingestForeignIncomeStatement";
+import { topicSkill } from "./topicSkill";
+
+export const foreignIncomeStatementSkill = topicSkill({
+  name: "foreign-income-statement",
+  description:
+    "A fund's or broker's foreign income statement (the page next to a 1099-DIV that gives the foreign-source income), or foreign tax paid for Form 1116. Also when `pendingFacts` lists a key that ends in `.foreign_income`, or a `prior_year.foreign_*` key.",
+  tools: { ingestForeignIncomeStatement },
+  instructions: `- **Foreign income statement** (a fund's or broker's year-end supplement to a 1099-DIV or 1099-INT, often "Foreign Income and Foreign Tax Statement") → \`ingest-foreign-income-statement\`. Ingest the 1099 first, then make one call for each account with the same \`accountSlug\` the 1099 call returned. Copy the foreign-source amounts as printed: \`grossIncome\` holds the qualified dividends and capital gain distributions in it too. The foreign tax paid stays on the 1099-DIV (box 7); do not pass it here.
+- **Country**: a mutual fund leaves 1099-DIV box 8 blank; leave \`country\` out. When a broker's 1099-DIV box 8 names one country, pass it as \`country\` here: the 1099-DIV fact does not hold box 8.
+- **No statement**: when \`pendingFacts\` lists \`account.<slug>.dividends.foreign_income\` (or \`.interest.foreign_income\`), the return needs the foreign-source part of that account's income. Ask for the fund's foreign income statement first (funds post it on their website). If there is none and the user states the amount (an account that holds only one foreign company's shares: all of it), record it with the same tool and a verbal \`sourceNote\`. Never work it out from a guess.
+- **Prior-year answers**: when \`pendingFacts\` lists them, ask and record with \`record-tax-facts\`, category \`other\`: \`prior_year.foreign_tax_carryover_passive\` and \`prior_year.foreign_tax_carryover_general\` (unused foreign tax carried to 2025, last year's Schedule B (Form 1116) line 3 column (xiv); a number, 0 if none) and \`prior_year.foreign_loss_accounts\` (true if an earlier Form 1116 left a foreign or domestic loss account with a balance).
+- **Accrued taxes**: record \`foreign_tax_credit.claim_accrued\` = true (category \`foreign\`) only when the user says an earlier return chose to credit foreign taxes when they accrue. Do not ask for it otherwise.
+- **Foreign tax no 1099 shows** (a foreign country took tax from wages, for example) → \`record-tax-facts\`, category \`foreign\`, key \`foreign_tax.<slug>\`, one fact for each payment, an object: \`payer\`, \`country\`, \`category\` (\`general\` for wages, \`passive\` for investment income), \`incomeKind\` (\`dividends\`, \`rents_royalties\`, \`interest\` or \`other\`), \`description\` ("Wages"), \`grossIncome\`, \`foreignTaxPaid\` (in U.S. dollars), \`foreignTaxInForeignCurrency\`, \`datePaid\`, and \`definitelyRelatedExpenses\` when there are any. Take every amount from the user or their foreign tax document.`,
+});

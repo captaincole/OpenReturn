@@ -8,6 +8,10 @@ Avery and Riley Morgan file jointly and live in Round Rock, Texas, so there is n
 
 The daughters are under 17, so the return also claims the child tax credit on Schedule 8812. The engine supports it.
 
+## Documents
+
+Made by `generate-docs.ts` from each girl's investment income fact (fake data), with the girl as the recipient: Ellis's 1099-INT (`docs/01-…`, box 1 and box 8) and 1099-DIV (`docs/02-…`), and Wren's 1099-INT (`docs/03-…`). The parents' W-2, 1099s and 1099-B have no PDF.
+
 ## What it covers
 
 - Two copies of Form 8814, with box C checked on each.

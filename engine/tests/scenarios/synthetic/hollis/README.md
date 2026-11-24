@@ -16,6 +16,10 @@ Forms that file: Form 1040, Schedule D, Form 6781.
 | 1099-B, Ridgeline Futures LLC | box 8 $9,840, box 9 ($1,250), box 10 $2,115, box 11 $13,205 |
 | 1099-B, Mesa Commodity Partners | box 8 ($4,318), box 11 ($4,318) |
 
+## Input documents
+
+The two 1099-Bs are made documents in `docs/`: `01-1099-b-ridgeline-futures.pdf` and `02-1099-b-mesa-commodity.pdf`. `generate-docs.ts` renders them with `documents/form1099BFutures.ts` from the same objects `facts.ts` holds, so a document and its fact cannot disagree. They print boxes 8 to 11 only, with a loss in parentheses; every other box is blank, as the 1099-B instructions say for these contracts. The broker addresses and TINs are made up. The W-2 has no PDF.
+
 ## Hand check
 
 | Line | Rule | Value |
