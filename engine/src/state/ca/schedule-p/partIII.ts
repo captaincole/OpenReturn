@@ -1,6 +1,6 @@
 /*
  * Schedule P (540) Part III, the credit rows. Each row holds one credit. Only
- * line 5 (FTB 3506) has facts; every other row is `unsupported` with its reason.
+ * line 5 (FTB 3506) and line 10 (FTB 3510) have facts; every other row is `unsupported` with its reason.
  * Lines 1–3, 11, 22 and 25 (the tax balances) are bound in bindings.ts.
  * Rules: ca-540-sched-p-inst-2025::sec::to-complete-part-iii::b01 (a row is
  * completed only for a credit taken) and ::sec::column-a-through-column-d-instructions::b01.
@@ -46,6 +46,53 @@ export const childCareCreditRow: Bindings = {
   },
 };
 
+/*
+ * Section A2 line 10, the credit for prior year AMT (FTB 3510). Column (a) is
+ * FTB 3510 line 32 when above 0, and column (b) its line 38
+ * (ca-3510-inst-2025::sec::specific-line-instructions::b04, and the form's
+ * line 38). Column (c) is the previous line's column (c) less column (b), and
+ * column (d) is column (a) less column (b)
+ * (ca-540-sched-p-inst-2025::sec::column-a-through-column-d-instructions::b01).
+ * Blank with no credit.
+ */
+const SECTION_A_BALANCES = [
+  "2.part3.9_tax_balance_col_c",
+  "2.part3.8_tax_balance_col_c",
+  "2.part3.7_tax_balance_col_c",
+  "2.part3.6_tax_balance_col_c",
+  "1.part3.5_child_dependent_care_credit_col_c",
+  "1.part3.4_prison_inmate_labor_credit_col_c",
+  "1.part3.3_excess_tax_offset_by_credits_col_c",
+] as const;
+
+const priorYearAmtCredit = (form: Form) => {
+  const credit = numberOrBlank(form["form-3510.0.line.32_combine_lines_30_and_31"]);
+  return credit !== undefined && credit > 0 ? credit : undefined;
+};
+
+function priorYearAmtCreditUsed(form: Form): number | undefined {
+  if (priorYearAmtCredit(form) === undefined) return undefined;
+  return numberOrBlank(form["form-3510.0.line.38_prior_year_amt_credit"]);
+}
+
+export const priorYearAmtCreditRow: Bindings = {
+  "2.part3.10_prior_year_amt_credit_amount_col_a": (form) => priorYearAmtCredit(form),
+  "2.part3.10_prior_year_amt_credit_used_col_b": (form) => priorYearAmtCreditUsed(form),
+  "2.part3.10_prior_year_amt_tax_balance_col_c": (form) => {
+    const used = priorYearAmtCreditUsed(form);
+    if (used === undefined) return undefined;
+    const balance = SECTION_A_BALANCES.map((id) => numberOrBlank(form[id])).find(
+      (amount) => amount !== undefined,
+    );
+    return balance === undefined ? undefined : balance - used;
+  },
+  "2.part3.10_prior_year_amt_credit_carryover_col_d": (form) => {
+    const credit = priorYearAmtCredit(form);
+    const used = priorYearAmtCreditUsed(form);
+    return credit === undefined || used === undefined ? undefined : credit - used;
+  },
+};
+
 function row(reason: string, ...keys: Array<keyof ScheduleP>): Array<[keyof ScheduleP, string]> {
   return keys.map((key) => [key, reason]);
 }
@@ -78,13 +125,6 @@ export const partIIICreditRows: Unsupported = Object.fromEntries([
   ...codedCreditRow(2, 7, "Section A2"),
   ...codedCreditRow(2, 8, "Section A2"),
   ...codedCreditRow(2, 9, "Section A2"),
-  ...row(
-    `Section A2 line 10, credit for prior year AMT (FTB 3510) — no prior-year AMT credit carryover fact.`,
-    "2.part3.10_prior_year_amt_credit_amount_col_a",
-    "2.part3.10_prior_year_amt_credit_used_col_b",
-    "2.part3.10_prior_year_amt_tax_balance_col_c",
-    "2.part3.10_prior_year_amt_credit_carryover_col_d",
-  ),
   ...row(
     `Section B1 line 12, joint custody head of household credit — ${NO_CREDIT_FACTS}.`,
     "2.part3.12_joint_custody_hoh_credit_amount_col_a",

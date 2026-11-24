@@ -1,6 +1,7 @@
 /*
- * Form 540 lines 40, 47 and 48: the special credits. Only line 40 (FTB 3506)
- * has rules; lines 43 to 46 stay unsupported in bindings.ts and read as blank.
+ * Form 540 lines 40, 43, 47 and 48: the special credits. Only line 40 (FTB
+ * 3506) and line 43 (FTB 3510) have rules; lines 44 to 46 stay unsupported in
+ * bindings.ts and read as blank.
  */
 
 import { atLeast, numberOrBlank, sum, sumOrBlank } from "../../../money.js";
@@ -36,11 +37,50 @@ export const line40ChildDependentCareCredit: Form540Line<"line.40_child_dependen
 };
 
 /*
+ * Line 43, the credit for prior year AMT, code 188 (the Credit Table,
+ * ca-540-sched-p-inst-2025::sec::credit-table::b01): the amount from Schedule
+ * P (540) line 10 column (b), "If you claim one or two other credits"
+ * (ca-540-sched-p-inst-2025::sec::how-to-claim-your-credits::b01). It is the
+ * only other credit the engine figures, so it takes line 43. Blank with none used.
+ * The Credit Table's name, "Prior Year Alternative Minimum Tax", does not fit the
+ * printed box, so the name is shortened; the code names the credit.
+ */
+const PRIOR_YEAR_AMT_CREDIT_NAME = "Prior Year AMT";
+const PRIOR_YEAR_AMT_CREDIT_CODE = "188";
+
+const priorYearAmtCreditUsed = (form: Form540Form) =>
+  numberOrBlank(form["schedule-p.2.part3.10_prior_year_amt_credit_used_col_b"]);
+
+function claimsPriorYearAmtCredit(form: Form540Form): boolean {
+  const used = priorYearAmtCreditUsed(form);
+  return used !== undefined && used > 0;
+}
+
+export const line43CreditName: Form540Line<"line.43_credit_name"> = (form) =>
+  claimsPriorYearAmtCredit(form) ? PRIOR_YEAR_AMT_CREDIT_NAME : undefined;
+export const line43CreditCode: Form540Line<"line.43_credit_code"> = (form) =>
+  claimsPriorYearAmtCredit(form) ? PRIOR_YEAR_AMT_CREDIT_CODE : undefined;
+export const line43CreditAmount: Form540Line<"line.43_credit_amount"> = (form) =>
+  claimsPriorYearAmtCredit(form) ? priorYearAmtCreditUsed(form) : undefined;
+
+/*
+ * With FTB 3510 filed, its credit waits while line 32 waits, or while a line
+ * 32 above 0 has no Schedule P column (b) yet.
+ */
+function priorYearAmtCreditWaits(form: Form540Form, info: Form540FilingInfo): boolean {
+  if (info.mustFile?.["form-3510"]?.value !== true) return false;
+  const available = numberOrBlank(form["form-3510.0.line.32_combine_lines_30_and_31"]);
+  if (available === undefined) return true;
+  return available > 0 && priorYearAmtCreditUsed(form) === undefined;
+}
+
+/*
  * "Add line 40 through line 46" (the form). With FTB 3506 filed, the total
- * waits while its credit, or Schedule P's share of it, waits.
+ * waits while its credit, or Schedule P's share of it, waits; so with FTB 3510.
  */
 export const line47TotalCredits: Form540Line<"line.47_total_credits"> = (form, info) => {
   const credits = CREDIT_LINES.map((id) => form[id]);
+  if (priorYearAmtCreditWaits(form, info)) return undefined;
   if (!files3506(info)) return sumOrBlank(...credits);
   const credit = ftb3506Credit(form);
   if (credit === undefined) return undefined;
@@ -54,5 +94,6 @@ export const line48TaxAfterCredits: Form540Line<"line.48_tax_after_credits"> = (
   if (typeof tax !== "number") return undefined;
   const credits = form["line.47_total_credits"];
   if (files3506(info) && credits === undefined) return undefined;
+  if (priorYearAmtCreditWaits(form, info)) return undefined;
   return atLeast(0, sum(tax, credits === undefined ? 0 : -credits));
 };

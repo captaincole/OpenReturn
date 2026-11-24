@@ -211,6 +211,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "foreign taxes when they accrue (Form 1116 Part II box k); absent, box j (paid)",
   ],
   [
+    /^prior_year\.ca_amt(_credit_carryover)?$/,
+    "an answer Cade records only when the user paid California AMT for 2024 or carries an AMT " +
+      "credit from 2024; either above 0 files FTB 3510, which then asks for the other",
+  ],
+  [
     /^prior_year\.ca_tax$/,
     "KNOWN GAP: decides whether FTB 5805 files. Needed only when the CA balance due is " +
       "$500 or more, which the resolver cannot see before evaluation.",
