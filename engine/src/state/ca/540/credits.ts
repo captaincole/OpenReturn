@@ -1,10 +1,11 @@
 /*
  * Form 540 lines 40, 43, 47 and 48: the special credits. Only line 40 (FTB
- * 3506) and line 43 (FTB 3510) have rules; lines 44 to 46 stay unsupported in
- * bindings.ts and read as blank.
+ * 3506) and line 43 (FTB 3510, when it files; unsupported otherwise) have
+ * rules; lines 44 to 46 stay unsupported in bindings.ts and read as blank.
  */
 
 import { atLeast, numberOrBlank, sum, sumOrBlank } from "../../../money.js";
+import { unsupported } from "../../../types.js";
 import type { Form540FilingInfo } from "./filingInfo.js";
 import type { Form540Form, Form540Line } from "./form540Binding.js";
 
@@ -56,19 +57,38 @@ function claimsPriorYearAmtCredit(form: Form540Form): boolean {
   return used !== undefined && used > 0;
 }
 
-export const line43CreditName: Form540Line<"line.43_credit_name"> = (form) =>
-  claimsPriorYearAmtCredit(form) ? PRIOR_YEAR_AMT_CREDIT_NAME : undefined;
-export const line43CreditCode: Form540Line<"line.43_credit_code"> = (form) =>
-  claimsPriorYearAmtCredit(form) ? PRIOR_YEAR_AMT_CREDIT_CODE : undefined;
-export const line43CreditAmount: Form540Line<"line.43_credit_amount"> = (form) =>
-  claimsPriorYearAmtCredit(form) ? priorYearAmtCreditUsed(form) : undefined;
+/* Line 43 with no FTB 3510: no other special credit has facts (main's reasons). */
+const LINE_43_NAME_UNSUPPORTED = unsupported(
+  "Free-text credit name for an additional special credit on line 43. No ingestion path for user-supplied special credits (e.g., CA Competes, PTE, etc.) exists yet.",
+);
+const LINE_43_CODE_UNSUPPORTED = unsupported(
+  "Credit code for additional special credit on line 43. No ingestion path for user-supplied special credits exists yet.",
+);
+const LINE_43_AMOUNT_UNSUPPORTED = unsupported(
+  "Credit amount for additional special credit on line 43. No ingestion path for user-supplied special credits (requires supporting schedules/FTB forms) exists yet.",
+);
+
+const files3510 = (info: Form540FilingInfo) => info.mustFile?.["form-3510"]?.value === true;
+
+export const line43CreditName: Form540Line<"line.43_credit_name"> = (form, info) => {
+  if (!files3510(info)) return LINE_43_NAME_UNSUPPORTED;
+  return claimsPriorYearAmtCredit(form) ? PRIOR_YEAR_AMT_CREDIT_NAME : undefined;
+};
+export const line43CreditCode: Form540Line<"line.43_credit_code"> = (form, info) => {
+  if (!files3510(info)) return LINE_43_CODE_UNSUPPORTED;
+  return claimsPriorYearAmtCredit(form) ? PRIOR_YEAR_AMT_CREDIT_CODE : undefined;
+};
+export const line43CreditAmount: Form540Line<"line.43_credit_amount"> = (form, info) => {
+  if (!files3510(info)) return LINE_43_AMOUNT_UNSUPPORTED;
+  return claimsPriorYearAmtCredit(form) ? priorYearAmtCreditUsed(form) : undefined;
+};
 
 /*
  * With FTB 3510 filed, its credit waits while line 32 waits, or while a line
  * 32 above 0 has no Schedule P column (b) yet.
  */
 function priorYearAmtCreditWaits(form: Form540Form, info: Form540FilingInfo): boolean {
-  if (info.mustFile?.["form-3510"]?.value !== true) return false;
+  if (!files3510(info)) return false;
   const available = numberOrBlank(form["form-3510.0.line.32_combine_lines_30_and_31"]);
   if (available === undefined) return true;
   return available > 0 && priorYearAmtCreditUsed(form) === undefined;

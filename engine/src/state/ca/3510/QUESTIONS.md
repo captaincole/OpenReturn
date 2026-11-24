@@ -4,6 +4,18 @@ The 2025 instructions (ca-3510-inst-2025) have no worked example with numbers.
 Each doubt below names the source text, the default the engine applies, and
 whether the choice changes a dollar amount.
 
+## Sorted by kind
+
+1. **Two official texts conflict; a person decides:** none found.
+2. **Work that could be done; not now:** items 1, 4, 6 and 12 say why. Items
+   2, 3, 5, 7, 8, 9, 10, 11 and 13 are defaults that need no work.
+3. **Pattern change:** none. Form 540 line 43 was unsupported; it now holds
+   this credit when FTB 3510 files, and stays unsupported otherwise. Item 14 is
+   the recipe for when Schedule S also writes it.
+
+FTB 3510 has no rows or columns that a person can run out of: each line holds
+one amount, and Schedule P (540) line 10 holds the one credit.
+
 ## 1. Lines 5 and 6 come from the 2024 filing status
 
 - Source: line 5 "Enter the amount from your 2024 Schedule P (540 or 540NR)
@@ -14,6 +26,9 @@ whether the choice changes a dollar amount.
   2024 Schedule P (540) instructions, Exemption Worksheet (not in the corpus;
   read from ftb.ca.gov). The separate pair matches the form's 541 amounts.
 - Changes dollars: no, if the 2024 filing status is right.
+- Not now: the amounts come from the 2024 Schedule P (540) instructions, which
+  are not in the corpus. Adding them is a corpus change (the `corpus` skill),
+  separate from this form.
 
 ## 2. Line 1 subtracts 2024 Schedule P lines 17 and 18
 
@@ -23,12 +38,9 @@ whether the choice changes a dollar amount.
 - Default: line 15 + line 16 − line 17 − line 18. The taxpayer states 17 and 18
   as the positive amounts inside the parentheses.
 - Changes dollars: yes, when line 17 or 18 has an amount.
-- Related finding, outside this form: the engine's 2025 Schedule P (540) line 19
-  adds line 18 (schedule-p/bindings.ts). The 2024 and 2025 forms print line 18 in
-  parentheses, and the instructions say the AMT drops the regular-tax limit on
-  itemized deductions, so line 18 should lower AMTI. This changes 2025
-  Schedule P line 19 for an itemizer above the federal AGI threshold. Not
-  changed here: it is another form, and it may change existing goldens.
+- The 2025 Schedule P (540) line 19 now subtracts line 18 the same way (main,
+  PR #248). setalle and hurin take the standard deduction in 2025, so their
+  values did not change.
 
 ## 3. Line 2 takes line 6 away and keeps signs
 
@@ -47,6 +59,8 @@ whether the choice changes a dollar amount.
 - Default: the taxpayer states it; absent means none. The instructions give no
   computation, so the engine does not figure it.
 - Changes dollars: yes, when an NOL exists.
+- Not now: figuring it needs the R&TC sections named above and the 2024 NOL
+  history, and no scenario has an NOL.
 
 ## 5. Stops: which lines stay blank
 
@@ -64,6 +78,8 @@ whether the choice changes a dollar amount.
   = 0. Line 16 at 0 or less with itemized deductions: unsupported (the form
   gives no rule). Line 21 is also kept at 0 or more.
 - Changes dollars: no in the first case; the second is unsupported.
+- Not now: the form gives no rule for line 16 at 0 or less, so any rule would
+  be our own.
 
 ## 7. Ratios round to four places, half up, and the rounded ratio multiplies
 
@@ -109,13 +125,58 @@ whether the choice changes a dollar amount.
 - Default: column (a) is line 32; column (b) is line 38; column (c) is the last
   column (c) above, less column (b); column (d) is (a) − (b). Form 540 line 43
   takes the credit (the only other credit the engine figures), with code 188
-  and the name shortened to "Prior Year AMT" to fit the box. Blank when line 38 is 0.
+  and the name shortened to "Prior Year AMT" to fit the box. Blank when line 38
+  is 0. Unsupported, with main's reason, when FTB 3510 does not file.
 - Changes dollars: no.
+
+## 14. Form 540 line 43 when Schedule S is on `main` too
+
+This branch alone puts the credit for prior year AMT on Form 540 line 43 (name
+"Prior Year AMT", code 188). The `schedule-s` branch alone puts the other state
+tax credit on line 43 too (name "Other State Tax", code 187). Each is right
+alone; together they collide. The rules:
+
+- "To claim only one or two credits, enter the credit name, code, and amount
+  of the credit on line 43 and line 44. To claim more than two credits, use
+  Schedule P (540), Part III" (`ca-540-inst-2025::sec::line-43-through-line-45-additional-special-credits::b01`).
+- "If you claim one or two other credits, enter the name, code, and amount of
+  the credit from column (b) on Form 540, line 43 and/or line 44. If you have
+  more than two other credits, do not use line 43 or 44 on Form 540. Add the
+  amounts from column (b) for the other credits and enter the total on Form
+  540, line 45" (`ca-540-sched-p-inst-2025::sec::how-to-claim-your-credits::b01`).
+- Neither text says which credit goes first. The recipe takes Schedule P
+  Part III order (line 10 before line 20); that order is our choice.
+
+Recipe for whoever merges the second branch:
+
+1. In `engine/src/state/ca/540/credits.ts`, replace both branches' line 43
+   functions with one ordered list of the credits claimed: this credit
+   (Schedule P line 10 column (b), above 0) first, then the other state tax
+   credit (Schedule S's `line43CreditAmount` amount, above 0). The first takes
+   line 43 (name, code, amount), the second line 44.
+2. Bind `line.44_credit_name`, `line.44_credit_code` and `line.44_credit_amount`
+   in `540/bindings.ts` and take them off its `unsupported` list. Line 44 is
+   blank with fewer than two credits.
+3. With neither form filing, line 43 stays unsupported with main's reason (both
+   branches do this). With a form filing and no credit used, line 43 is blank.
+4. A third other credit does not exist today. When one comes, lines 43 and 44
+   stay blank and line 45 holds the total of the column (b) amounts.
+5. Schedule S line 2 subtracts the other credits (`OTHER_CREDIT_LINES` in
+   `schedule-s/returnAmounts.ts`), today through `form-540.line.44_credit_amount`.
+   After the merge, read this credit from `schedule-p.2.part3.10_prior_year_amt_credit_used_col_b`
+   instead of lines 43 and 44, or Schedule S line 2 would depend on its own credit.
+6. Line 47 waits for both credits: keep `priorYearAmtCreditWaits` here and
+   Schedule S's check that line 43 is figured.
+7. Schedule P line 11 already counts line 10 column (c) (main), so Schedule S's
+   line 20 balance needs no change.
+8. Add a test or scenario that claims both: line 43 is code 188, line 44 is
+   code 187, and Schedule S line 2 is line 35 less this credit.
 
 ## 12. A 2025 Form 540NR filer
 
 - Default: lines 33 to 39 are unsupported: Schedule P (540NR) has no rules yet.
   Sections A and B still compute.
+- Not now: it waits for Form 540NR and Schedule P (540NR) rules.
 
 ## 13. Whole-dollar rounding of the computed lines
 

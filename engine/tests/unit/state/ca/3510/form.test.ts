@@ -71,10 +71,11 @@ describe("FTB 3510 who files", () => {
     expect(run.missing).toEqual([]);
   });
 
-  it("no facts: no FTB 3510, no Schedule P, and Form 540 line 43 is blank", () => {
+  it("no facts: no FTB 3510, no Schedule P, and Form 540 line 43 stays unsupported as on main", () => {
     const run = evaluate(factsWith(NO_3510_FACTS));
     expect([run.files("form-3510"), run.files("schedule-p")]).toEqual([false, false]);
-    expect(run.value("form-540", "line.43_credit_amount")).toBeUndefined();
+    expect(isGap(run.field("form-540", "line.43_credit_amount"))).toBe(true);
+    expect(isGap(run.field("form-540", "line.43_credit_name"))).toBe(true);
     expect(run.value("form-540", "line.48_tax_after_credits")).toBe(
       run.value("form-540", "line.35_total_tax_after_credits"),
     );
