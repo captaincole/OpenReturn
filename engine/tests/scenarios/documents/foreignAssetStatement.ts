@@ -1,13 +1,19 @@
 /*
  * A foreign institution's year-end statement for one account or holding. No
  * official form exists, so the layout follows a common retail bank statement:
- * page 1 has the institution, the holder's address, a service block and an
- * account summary; page 2 has the amounts for the U.S. return, which some
- * foreign banks and registrars send their U.S. clients. It prints only the
- * values the facts hold: the Form 8938 asset fact (balances in the account's
- * currency, dates, the institution or issuer) and, when the account has them,
- * the income facts (amounts in U.S. dollars). Every institution is made up
- * and the page carries no real bank's name or mark.
+ * page 1 has the institution, the holder's address, a service block, an
+ * account summary and, for an account, its month-end balances; page 2 has the
+ * income, the tax withheld and the sales of the year. Every amount is in the
+ * account's own currency, as a foreign bank prints it: the statement names no
+ * U.S. dollar amount and no exchange rate.
+ *
+ * It prints only what the facts and the statement's own balances hold: the
+ * Form 8938 asset fact (currency, dates, the institution or issuer, the value on
+ * the last day), the month-end balances whose highest is the fact's maximum
+ * value (irs-8938-inst-2025::sec::valuing-financial-accounts::b01: "You may rely
+ * on periodic account statements"), and the account's income facts as recorded,
+ * in the account's currency. Every institution is made up and the page carries
+ * no real bank's name or mark.
  */
 
 import { PDFDocument, StandardFonts, rgb } from "@cantoo/pdf-lib";
@@ -37,16 +43,25 @@ export interface ForeignAssetStatementParties {
   taxYear: number;
 }
 
+/* The account's income facts as recorded: amounts in the account's currency. */
 export interface ForeignAssetIncome {
   interest?: InterestFactValue;
   dividends?: DividendFactValue;
   trades?: TradeFactValue[];
 }
 
+/*
+ * An account's balance at the end of each month, January first; undefined for
+ * a month the account was not open yet, or was closed. The highest must be the fact's maximum
+ * value and December's its value on the last day, or the generator throws.
+ */
+export type MonthEndBalances = ReadonlyArray<number | undefined>;
+
 const X_LEFT = 54;
 const X_END = 558;
 const X_SERVICE = 356;
 const X_SUMMARY_END = 340;
+const X_SECOND_COLUMN = 306;
 
 const WORDMARK_BLUE = rgb(0, 0.36, 0.69);
 const SECTION_RED = rgb(0.84, 0.08, 0.2);
@@ -58,7 +73,23 @@ const PRODUCT: Record<ForeignFinancialAssetFactValue["part"], string> = {
   other_asset: "Holding",
 };
 
+const MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
 const SAMPLE_NOTICE = "SAMPLE DOCUMENT FOR SOFTWARE TESTING. MADE-UP DATA.";
+const US_DOLLAR = "U.S. dollar (USD)";
 
 function addressLines(address: ForeignAddress): string[] {
   const city = [address.postalCode, address.city, address.stateOrProvince]
@@ -66,6 +97,16 @@ function addressLines(address: ForeignAddress): string[] {
     .join(" ");
   return [address.street, city, address.country];
 }
+
+/* "Euro (EUR)" gives "EUR": the code in the last parentheses, else the whole name. */
+function currencyCode(currency: string): string {
+  const open = currency.lastIndexOf("(");
+  const close = currency.lastIndexOf(")");
+  return open >= 0 && close > open ? currency.slice(open + 1, close) : currency;
+}
+
+const currencyOf = (value: ForeignFinancialAssetFactValue) =>
+  value.conversion?.currency ?? US_DOLLAR;
 
 /* The issuing institution: the bank, the company or the bond's issuer. */
 function issuerOf(value: ForeignFinancialAssetFactValue) {
@@ -104,11 +145,12 @@ function drawServiceBlock(ctx: Ctx, value: ForeignFinancialAssetFactValue) {
   lines.forEach((line, index) => drawText(ctx, line, X_SERVICE, 124 + index * 13, { size: 8.5 }));
 }
 
-function drawNotice(ctx: Ctx, hasTaxPage: boolean) {
+function drawNotice(ctx: Ctx, value: ForeignFinancialAssetFactValue, hasSecondPage: boolean) {
   drawBox(ctx, X_LEFT, 250, X_END - X_LEFT, 20, { fill: SHADE });
-  const text = hasTaxPage
-    ? "Please see the U.S. tax information section of your statement for the amounts in U.S. dollars."
-    : "This statement covers the calendar year. Keep it with your tax records.";
+  const amounts = `All amounts on this statement are in ${currencyOf(value)}.`;
+  const text = hasSecondPage
+    ? `${amounts} Income, tax withheld and sales are on page 2.`
+    : `${amounts} Keep this statement with your records.`;
   drawText(ctx, text, X_LEFT + 6, 256, { size: 8.5 });
 }
 
@@ -121,7 +163,8 @@ function drawTitle(
   drawText(ctx, title, X_LEFT, 300, { size: 17, bold: true });
   drawText(ctx, "for", X_LEFT + ctx.bold.widthOfTextAtSize(title, 17) + 6, 306, { size: 10 });
   drawText(ctx, periodOf(parties.taxYear), X_LEFT, 324, { size: 10 });
-  drawText(ctx, `Account number: ${value.accountNumber}`, X_SERVICE, 324, { size: 10 });
+  // Right-aligned: a 27-character IBAN with its spaces is wider than the service column.
+  drawTextRight(ctx, `Account number: ${value.accountNumber}`, X_END, 324, { size: 10 });
   drawText(ctx, parties.holderNames.toUpperCase(), X_LEFT, 342, { size: 9, bold: true });
 }
 
@@ -132,20 +175,59 @@ function summaryRow(ctx: Ctx, yPos: number, label: string, amount: string): numb
   return yPos + 22;
 }
 
-/* The account summary: the facts of the asset, the year-end value last and in colour. */
-function drawSummary(ctx: Ctx, value: ForeignFinancialAssetFactValue, taxYear: number) {
+/* The account summary: the facts of the asset, the value on the last day last and in colour. */
+function drawSummary(ctx: Ctx, value: ForeignFinancialAssetFactValue, taxYear: number): number {
   drawText(ctx, "Account summary", X_LEFT, 364, { size: 14, color: SECTION_RED });
-  const currency = value.conversion?.currency ?? "U.S. dollar (USD)";
-  let yPos = summaryRow(ctx, 390, "Currency", currency);
+  let yPos = summaryRow(ctx, 390, "Currency", currencyOf(value));
   if (value.description) yPos = summaryRow(ctx, yPos, "Holding", value.description);
   if (value.openedOrAcquired)
     yPos = summaryRow(ctx, yPos, "Opened or acquired", value.openedOrAcquired);
   if (value.closedOrDisposed)
     yPos = summaryRow(ctx, yPos, "Closed or disposed of", value.closedOrDisposed);
-  yPos = summaryRow(ctx, yPos, "Highest value during the year", fmtMoney(value.maximumValue));
   const ending = { size: 9.5, bold: true, color: TOTAL_BLUE };
-  drawText(ctx, `Value on 31 December ${taxYear}`, X_LEFT, yPos, ending);
+  const code = currencyCode(currencyOf(value));
+  drawText(ctx, `Value on 31 December ${taxYear} (${code})`, X_LEFT, yPos, ending);
   drawTextRight(ctx, fmtMoney(value.yearEndValue), X_SUMMARY_END, yPos, ending);
+  return yPos + 40;
+}
+
+/* The balances must agree with the fact: the highest is its maximum, December its last-day value. */
+function checkBalances(value: ForeignFinancialAssetFactValue, balances: MonthEndBalances) {
+  const held = balances.filter((balance): balance is number => balance !== undefined);
+  const december = balances[MONTHS.length - 1] ?? 0;
+  if (balances.length !== MONTHS.length || Math.max(...held) !== value.maximumValue) {
+    throw new Error(
+      `${value.accountNumber}: the highest month-end balance is not the maximum value`,
+    );
+  }
+  if (december !== value.yearEndValue) {
+    throw new Error(`${value.accountNumber}: December's balance is not the year-end value`);
+  }
+}
+
+/* Twelve month-end balances in two columns of six: the reader finds the highest among them. */
+function drawMonthEndBalances(
+  ctx: Ctx,
+  yTop: number,
+  value: ForeignFinancialAssetFactValue,
+  balances: MonthEndBalances,
+) {
+  checkBalances(value, balances);
+  const code = currencyCode(currencyOf(value));
+  drawText(ctx, "Month-end balances", X_LEFT, yTop, { size: 14, color: SECTION_RED });
+  const firstHeld = balances.findIndex((balance) => balance !== undefined);
+  // A month with no balance before the first is "not open"; after it, the account is closed.
+  const noBalance = (index: number) => (index < firstHeld ? "not open" : "closed");
+  MONTHS.forEach((month, index) => {
+    const xLeft = index < 6 ? X_LEFT : X_SECOND_COLUMN;
+    const xRight = index < 6 ? X_SECOND_COLUMN - 24 : X_END;
+    const yPos = yTop + 26 + (index % 6) * 18;
+    const balance = balances[index];
+    drawText(ctx, `${month} (${code})`, xLeft, yPos, { size: 9 });
+    const printed = balance === undefined ? noBalance(index) : fmtMoney(balance);
+    drawTextRight(ctx, printed, xRight, yPos, { size: 9 });
+    drawLine(ctx, xLeft, yPos + 12, xRight, yPos + 12);
+  });
 }
 
 function drawFooter(ctx: Ctx, pageNumber: number, pageCount: number) {
@@ -167,8 +249,8 @@ function incomeRows(income: ForeignAssetIncome): AmountRow[] {
 function subtractionRows(income: ForeignAssetIncome): AmountRow[] {
   const rows: Array<[string, number | undefined]> = [
     ["Penalty for early withdrawal of a time deposit", income.interest?.box2],
-    ["Foreign tax withheld on interest", income.interest?.box6],
-    ["Foreign tax withheld on dividends", income.dividends?.box7],
+    ["Withholding tax on interest", income.interest?.box6],
+    ["Withholding tax on dividends", income.dividends?.box7],
   ];
   return rows.filter((row): row is AmountRow => row[1] !== undefined);
 }
@@ -192,12 +274,11 @@ function tableRow(ctx: Ctx, yPos: number, label: string, amount: string): number
 function drawAmountTable(
   ctx: Ctx,
   yTop: number,
-  title: string,
-  rows: AmountRow[],
-  sign: 1 | -1,
+  table: { title: string; code: string; rows: AmountRow[]; sign: 1 | -1 },
 ): number {
+  const { title, code, rows, sign } = table;
   if (rows.length === 0) return yTop;
-  let yPos = tableHead(ctx, yTop, title, ["Description", "Amount (USD)"]);
+  let yPos = tableHead(ctx, yTop, title, ["Description", `Amount (${code})`]);
   for (const [label, amount] of rows) yPos = tableRow(ctx, yPos, label, fmtMoney(sign * amount));
   const cents = rows.reduce((total, [, amount]) => total + Math.round(amount * 100), 0);
   const total = { size: 9.5, bold: true, color: TOTAL_BLUE };
@@ -206,9 +287,9 @@ function drawAmountTable(
   return yPos + 40;
 }
 
-function drawSales(ctx: Ctx, yTop: number, trades: TradeFactValue[]): number {
+function drawSales(ctx: Ctx, yTop: number, code: string, trades: TradeFactValue[]): number {
   if (trades.length === 0) return yTop;
-  let yPos = tableHead(ctx, yTop, "Sales", ["Description", "Amount (USD)"]);
+  let yPos = tableHead(ctx, yTop, "Sales", ["Description", `Amount (${code})`]);
   for (const trade of trades) {
     const dates = `acquired ${trade.dateAcquired ?? ""}, sold ${trade.dateSold}`;
     yPos = tableRow(
@@ -222,8 +303,8 @@ function drawSales(ctx: Ctx, yTop: number, trades: TradeFactValue[]): number {
   return yPos + 19;
 }
 
-/* Page 2: the strip that names the account, then the amounts for the U.S. return. */
-function drawTaxPage(
+/* Page 2: the strip that names the account, then the year's income, charges and sales. */
+function drawActivityPage(
   ctx: Ctx,
   value: ForeignFinancialAssetFactValue,
   income: ForeignAssetIncome,
@@ -237,22 +318,19 @@ function drawTaxPage(
   ].join("   |   ");
   drawText(ctx, strip, X_LEFT, 64, { size: 8 });
   drawLine(ctx, X_LEFT, 78, X_END, 78);
-  drawText(ctx, "U.S. tax information: all amounts on this page are in U.S. dollars.", X_LEFT, 92, {
+  const code = currencyCode(currencyOf(value));
+  drawText(ctx, `Activity in the period. All amounts are in ${currencyOf(value)}.`, X_LEFT, 92, {
     size: 8.5,
     italic: true,
   });
-  let yPos = drawAmountTable(ctx, 124, "Income and other additions", incomeRows(income), 1);
-  yPos = drawAmountTable(
-    ctx,
-    yPos,
-    "Tax withheld and other subtractions",
-    subtractionRows(income),
-    -1,
-  );
-  drawSales(ctx, yPos, income.trades ?? []);
+  const additions = { title: "Income and other additions", code, sign: 1 as const };
+  let yPos = drawAmountTable(ctx, 124, { ...additions, rows: incomeRows(income) });
+  const subtractions = { title: "Tax withheld and other subtractions", code, sign: -1 as const };
+  yPos = drawAmountTable(ctx, yPos, { ...subtractions, rows: subtractionRows(income) });
+  drawSales(ctx, yPos, code, income.trades ?? []);
 }
 
-function hasTaxAmounts(income: ForeignAssetIncome): boolean {
+function hasActivity(income: ForeignAssetIncome): boolean {
   const rows = incomeRows(income).length + subtractionRows(income).length;
   return rows + (income.trades ?? []).length > 0;
 }
@@ -261,6 +339,7 @@ export async function foreignAssetStatementPdf(
   value: ForeignFinancialAssetFactValue,
   income: ForeignAssetIncome,
   parties: ForeignAssetStatementParties,
+  balances?: MonthEndBalances,
 ): Promise<Uint8Array> {
   const doc = await PDFDocument.create();
   const fonts = {
@@ -268,8 +347,8 @@ export async function foreignAssetStatementPdf(
     bold: await doc.embedFont(StandardFonts.HelveticaBold),
     italic: await doc.embedFont(StandardFonts.HelveticaOblique),
   };
-  const withTaxPage = hasTaxAmounts(income);
-  const pageCount = withTaxPage ? 2 : 1;
+  const withActivity = hasActivity(income);
+  const pageCount = withActivity ? 2 : 1;
 
   const first: Ctx = { page: doc.addPage([PAGE_W, PAGE_H]), ...fonts };
   const issuer = drawWordmark(first, value, 18);
@@ -278,14 +357,15 @@ export async function foreignAssetStatementPdf(
   );
   drawHolderBlock(first, parties);
   drawServiceBlock(first, value);
-  drawNotice(first, withTaxPage);
+  drawNotice(first, value, withActivity);
   drawTitle(first, value, parties);
-  drawSummary(first, value, parties.taxYear);
+  const yBalances = drawSummary(first, value, parties.taxYear);
+  if (balances) drawMonthEndBalances(first, yBalances, value, balances);
   drawFooter(first, 1, pageCount);
 
-  if (withTaxPage) {
+  if (withActivity) {
     const second: Ctx = { page: doc.addPage([PAGE_W, PAGE_H]), ...fonts };
-    drawTaxPage(second, value, income, parties);
+    drawActivityPage(second, value, income, parties);
     drawFooter(second, 2, pageCount);
   }
   return doc.save();
