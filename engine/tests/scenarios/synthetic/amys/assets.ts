@@ -111,6 +111,8 @@ export const fjordlineShares: ForeignFinancialAssetFactValue = {
   maximumValue: 2240000,
   yearEndValue: 1100000,
   conversion: NOK,
+  // Stock held on the company's register: not a financial account (Schedule B line 7a).
+  financialAccount: false,
   entity: {
     name: "Fjordline Shipping ASA",
     type: "corporation",
@@ -134,6 +136,8 @@ export const polderNote: ForeignFinancialAssetFactValue = {
   maximumValue: 76500,
   yearEndValue: 75900,
   openedOrAcquired: "03/14/2025",
+  // A note she holds herself, not in an account: not a financial account.
+  financialAccount: false,
   issuers: [
     {
       name: "Polder Grid Finance B.V.",
@@ -155,7 +159,10 @@ export const polderInterest: InterestFactValue = {
   box1: 1912.5,
 };
 
-/* Units of a Luxembourg fund that is a PFIC: reported on Form 8621, so not in Part VI. */
+/*
+ * Units of a Luxembourg fund that is a PFIC: reported on Form 8621, so not in
+ * Part VI. A mutual fund is a financial account for Schedule B line 7a.
+ */
 export const alpenroseFund: ForeignFinancialAssetFactValue = {
   part: "other_asset",
   owner: "taxpayer",
@@ -163,6 +170,7 @@ export const alpenroseFund: ForeignFinancialAssetFactValue = {
   description: "1,450 units of Alpenrose Equity Fund SICAV",
   maximumValue: 21000,
   yearEndValue: 20000,
+  financialAccount: true,
   entity: {
     name: "Alpenrose Equity Fund SICAV",
     type: "corporation",

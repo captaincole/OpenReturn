@@ -9,9 +9,9 @@ Amys earns wages. The couple holds six foreign assets:
 - Amys's current account in Cologne (EUR), closed in June: no income;
 - Corin's shares of a Norwegian company (NOK), on the company's register: dividends and Norwegian tax withheld;
 - Amys's U.S.-dollar note of a Dutch company, bought in March: interest;
-- Amys's fund units that she reports on Form 8621 (Part IV), so they are not in Part VI.
+- Amys's units of a Luxembourg mutual fund that she reports on Form 8621 (Part IV), so they are not in Part VI.
 
-The scenario fills Parts I to VI of Form 8938 with three copies of page 2, ties Part III to Schedules B, D, 1 and 3, and fills Schedule B line 7a from the account facts. Line 7b is unsupported: the Luxembourg fund shares in Part VI may be a financial account.
+The scenario fills Parts I to VI of Form 8938 with three copies of page 2, ties Part III to Schedules B, D, 1 and 3, and fills Schedule B line 7 from the asset facts. Each asset outside Part V carries the couple's answer whether it is a financial account for Schedule B and FinCEN Form 114 (`financialAccount`): the fund units are (a mutual fund, `irs-1040sb-inst-2025::sec::line-7a-question-1-check-the-yes-box-if-at-any-time::b01`); the shares on the register and the note are not.
 
 ## Documents
 
@@ -47,8 +47,8 @@ The year-end total is $383,808: 114,950 (Zurich) + 64,316 (London) + 0 (Cologne)
 | 18 | one Form 8621 | 1 |
 | 22c, 22d | Zurich joint; Cologne has no tax item | checked on its page |
 | Schedule B 2, 6 | 812.40 + 1,912.50; 1,450.25 + 1,240 | 2,725; 2,690 |
-| Schedule B 7a | Form 8938 accounts; Zurich alone is over $10,000 | Yes, Yes |
-| Schedule B 7b | the accounts' countries | Switzerland; United Kingdom, Germany |
+| Schedule B 7a | Form 8938 accounts and the fund units; Zurich alone is over $10,000 | Yes, Yes |
+| Schedule B 7b | the accounts' countries, in the order recorded | Switzerland; United Kingdom, Germany, Luxembourg |
 | Schedule 3 line 1 | election: the smaller of 470.34 and the tax | 470 |
 | 1040 line 20 | 284 + 186 in Part III | 470 |
 

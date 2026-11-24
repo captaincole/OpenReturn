@@ -61,22 +61,25 @@ const FINCEN_GAP =
   "FinCEN Form 114 is required when the foreign accounts together are worth more than $10,000 at any time; the engine knows it only when one recorded account alone is worth more.";
 
 const COUNTRIES_GAP =
-  "A Form 8938 Part VI asset (such as shares of a foreign mutual fund, or an insurance policy with a cash value) may be a foreign financial account; the engine cannot tell, so the list of countries may be incomplete.";
+  "A foreign financial account on the return has no country recorded (no address of an institution, entity or issuer), so the list of countries would leave one out.";
 
 /* Question 2 is Yes from the account facts (resolveInfo.ts foreignAccountFactsOf). */
 const fincenYes = (info: ScheduleBFilingInfo) =>
   info.hasForeignFinancialAccount === true && info.foreignAccountFacts?.overFincenLimit === true;
 
+/* A Part VI asset does not say yet whether it is a financial account (missingInputs lists it). */
+const waitsForAnswer = (info: ScheduleBFilingInfo) =>
+  (info.foreignAccountFacts?.unansweredAssetKeys.length ?? 0) > 0;
+
 /*
  * MANUAL EDIT: line 7a question 2 and line 7b
  * (irs-1040sb-inst-2025::sec::line-7a-question-2-see-fincen-form-114-and-its::b01, line-7b::b01):
  * Yes, and the accounts' countries, when one recorded account alone is worth
- * more than $10,000; blank after a No to question 1. Otherwise the engine
- * cannot tell: unsupported. Line 7b
- * row 1 takes the first country, row 2 the others; unsupported when a Part VI
- * asset is on the return, which may be a financial account
- * (line-7a-question-1-check-the-yes-box-if-at-any-time::b01, "shares in a
- * mutual fund or similar pooled fund").
+ * more than $10,000; blank after a No to question 1. A Part VI asset with no
+ * answer whether it is a financial account may change both, so they wait for
+ * it (line-7a-question-1-check-the-yes-box-if-at-any-time::b01, "shares in a
+ * mutual fund or similar pooled fund"). Otherwise the engine cannot tell:
+ * unsupported. Line 7b row 1 takes the first country, row 2 the others.
  */
 function fincenBindings(): Record<string, Fn> {
   // "If 'Yes,' are you required to file FinCEN Form 114": blank after a No.
@@ -84,16 +87,16 @@ function fincenBindings(): Record<string, Fn> {
     (value: (info: ScheduleBFilingInfo) => unknown): Fn =>
     (_, info) => {
       if (info.hasForeignFinancialAccount === false) return undefined;
-      return fincenYes(info) ? value(info) : unsupported(FINCEN_GAP);
+      if (fincenYes(info)) return value(info);
+      return waitsForAnswer(info) ? undefined : unsupported(FINCEN_GAP);
     };
   const countries = (info: ScheduleBFilingInfo) => info.foreignAccountFacts?.countries ?? [];
-  // A Part VI asset may be a financial account in a country not on the list.
   const listed = (row: (list: string[]) => string | undefined) =>
-    settled((info) =>
-      info.foreignAccountFacts?.countriesIncomplete === true
-        ? unsupported(COUNTRIES_GAP)
-        : row(countries(info)),
-    );
+    settled((info) => {
+      if (waitsForAnswer(info)) return undefined;
+      if (info.foreignAccountFacts?.countriesIncomplete === true) return unsupported(COUNTRIES_GAP);
+      return row(countries(info));
+    });
   return {
     "0.line.7a_fincen_114_required_yes": settled(() => true),
     "0.line.7a_fincen_114_required_no": settled(() => undefined),

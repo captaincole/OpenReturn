@@ -123,9 +123,15 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "schedule-b.0.line.6_total_ordinary_dividends": 2690,
     },
     /*
-     * Line 7: the Form 8938 account facts answer both questions; one account alone is over $10,000.
-     * Line 7b is unsupported: a Part VI asset (the Alpenrose fund shares) may be a financial account.
+     * Line 7b — the countries of the financial accounts, in the order recorded: the three
+     * Part V accounts, then the Alpenrose fund units (a mutual fund). The Norwegian shares on
+     * the company's register and the Dutch note are not accounts.
      */
+    renderedText: {
+      "schedule-b.0.line.7b_foreign_country_1": "Switzerland",
+      "schedule-b.0.line.7b_foreign_country_2": "United Kingdom, Germany, Luxembourg",
+    },
+    /* Line 7: the account facts answer both questions; one account alone is over $10,000. */
     renderedChecked: [
       "schedule-b.0.line.7a_foreign_account_yes",
       "schedule-b.0.line.7a_fincen_114_required_yes",
@@ -134,8 +140,6 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
     renderedBlank: [
       "schedule-b.0.line.7a_foreign_account_no",
       "schedule-b.0.line.7a_fincen_114_required_no",
-      "schedule-b.0.line.7b_foreign_country_1",
-      "schedule-b.0.line.7b_foreign_country_2",
     ],
   },
   "form-8949": {

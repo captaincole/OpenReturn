@@ -23,26 +23,45 @@ function assetsOnReturn(inputs: ResolverInputs, jointReturn: boolean): ForeignFi
   );
 }
 
-/* The Part V accounts of the return: Schedule B line 7a reads them. */
+const assetsOfReturn = (inputs: ResolverInputs) =>
+  assetsOnReturn(inputs, filingStatusOf(inputs) === "married_filing_jointly");
+
+/*
+ * A financial account for Schedule B line 7a: every Part V account, and a
+ * Part VI asset the person answered is one ("shares in a mutual fund or
+ * similar pooled fund", an insurance or annuity policy with a cash value,
+ * irs-1040sb-inst-2025::sec::line-7a-question-1-check-the-yes-box-if-at-any-time::b01).
+ */
+const isFinancialAccount = ({ value }: ForeignFinancialAssetFact) =>
+  value.part !== "other_asset" || value.financialAccount === true;
+
+/* The country of the account: the institution's, else the entity's, else the first issuer's. */
+const countryOf = ({ value }: ForeignFinancialAssetFact) =>
+  value.institution?.address.country ??
+  value.entity?.address.country ??
+  value.issuers?.[0]?.address.country;
+
+/* The foreign financial accounts of the return, in the order recorded: Schedule B line 7 reads them. */
 export function foreignAccountsOnReturn(inputs: ResolverInputs): ForeignAccountOnReturn[] {
-  const jointReturn = filingStatusOf(inputs) === "married_filing_jointly";
-  return assetsOnReturn(inputs, jointReturn)
-    .filter((asset) => asset.value.part !== "other_asset")
-    .map(({ value }) => ({
-      country: value.institution?.address.country,
-      maximumDollars: dollarsOf(value.maximumValue, value.conversion?.exchangeRate),
+  return assetsOfReturn(inputs)
+    .filter(isFinancialAccount)
+    .map((asset) => ({
+      country: countryOf(asset),
+      maximumDollars: dollarsOf(asset.value.maximumValue, asset.value.conversion?.exchangeRate),
     }));
 }
 
 /*
- * A Part VI asset of the return. It may be a financial account for Schedule B
- * line 7a ("shares in a mutual fund or similar pooled fund", an insurance or
- * annuity policy with a cash value), and the fact does not say which
- * (irs-1040sb-inst-2025::sec::line-7a-question-1-check-the-yes-box-if-at-any-time::b01).
+ * The fact keys of the Part VI assets of the return that do not say whether
+ * they are a financial account (`financialAccount`). Schedule B asks for them.
  */
-export function hasOtherAssetOnReturn(inputs: ResolverInputs): boolean {
-  const jointReturn = filingStatusOf(inputs) === "married_filing_jointly";
-  return assetsOnReturn(inputs, jointReturn).some((asset) => asset.value.part === "other_asset");
+export function unansweredOtherAssetKeys(inputs: ResolverInputs): string[] {
+  return assetsOfReturn(inputs)
+    .filter(
+      (asset) =>
+        asset.value.part === "other_asset" && typeof asset.value.financialAccount !== "boolean",
+    )
+    .map((asset) => asset.key);
 }
 
 /*

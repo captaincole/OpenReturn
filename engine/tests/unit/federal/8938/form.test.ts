@@ -16,7 +16,12 @@ import type { AIDecisionRow, TaxFactRow } from "../../../../src/facts/rows.js";
 import { resolveFilingInfo } from "../../../../src/filingInfo.js";
 import { evaluateScenario } from "../../../../src/index.js";
 import { decisionRow } from "../../../helpers/fixtureBuilders.js";
-import { polderNote, rhineCurrent } from "../../../scenarios/synthetic/amys/assets.js";
+import {
+  alpenroseFund,
+  fjordlineShares,
+  polderNote,
+  rhineCurrent,
+} from "../../../scenarios/synthetic/amys/assets.js";
 import { amysScenario as base } from "../../../scenarios/synthetic/amys/index.js";
 import { faileScenario } from "../../../scenarios/synthetic/faile/index.js";
 
@@ -76,8 +81,9 @@ function evaluate(facts: TaxFactRow[] = base.facts, decisions: AIDecisionRow[] =
     return found?.ok ? found.value : undefined;
   };
   const line = (id: string) => value("form-8938", id);
-  const missing = result.forms.get("form-8938")?.missingInputs ?? [];
-  return { files, field, value, line, missing };
+  const missingOf = (formId: string) => result.forms.get(formId)?.missingInputs ?? [];
+  const missing = missingOf("form-8938");
+  return { files, field, value, line, missing, missingOf };
 }
 
 const info = (facts: TaxFactRow[] = base.facts, decisions: AIDecisionRow[] = base.decisions) =>
@@ -280,19 +286,89 @@ describe("Schedule B line 7 from the account facts", () => {
     const accountsOnly = base.facts.filter(
       (fact) => (fact.value as { part?: string } | null)?.part !== "other_asset",
     );
-    const { value } = evaluate(accountsOnly);
+    // With no Part VI asset nothing waits for the financial account answer.
+    const { value, missingOf } = evaluate(accountsOnly);
+    expect(missingOf("schedule-b").filter((key) => key.startsWith("account."))).toEqual([]);
     expect(value("schedule-b", "0.line.7a_foreign_account_yes")).toBe(true);
     expect(value("schedule-b", "0.line.7a_fincen_114_required_yes")).toBe(true);
     expect(value("schedule-b", "0.line.7b_foreign_country_1")).toBe("Switzerland");
     expect(value("schedule-b", "0.line.7b_foreign_country_2")).toBe("United Kingdom, Germany");
   });
 
-  it("leaves line 7b to a person when a Part VI asset may be a financial account", () => {
-    // The Luxembourg fund shares are a "mutual fund or similar pooled fund" (Schedule B line 7a).
-    const { value, field } = evaluate();
+  it("lists the country of a Part VI asset answered as a financial account", () => {
+    // The Luxembourg fund units are a "mutual fund or similar pooled fund" (Schedule B line 7a).
+    const { value, missingOf } = evaluate();
     expect(value("schedule-b", "0.line.7a_fincen_114_required_yes")).toBe(true);
-    expect(isGap(field("schedule-b", "0.line.7b_foreign_country_1"))).toBe(true);
-    expect(isGap(field("schedule-b", "0.line.7b_foreign_country_2"))).toBe(true);
+    expect(value("schedule-b", "0.line.7b_foreign_country_1")).toBe("Switzerland");
+    expect(value("schedule-b", "0.line.7b_foreign_country_2")).toBe(
+      "United Kingdom, Germany, Luxembourg",
+    );
+    expect(missingOf("schedule-b").filter((key) => key.startsWith("account."))).toEqual([]);
+  });
+
+  it("counts a Part VI financial account alone for the $10,000 test", () => {
+    // Cologne at $8,000 does not settle question 2; the fund's $21,000 does.
+    const facts = factsWith({
+      [ASSET("rhine-current")]: { ...rhineCurrent, maximumValue: 8000 },
+      [ASSET("zurich-savings")]: undefined,
+      [ASSET("thames-brokerage")]: undefined,
+    });
+    const { value } = evaluate(facts);
+    expect(value("schedule-b", "0.line.7a_foreign_account_yes")).toBe(true);
+    expect(value("schedule-b", "0.line.7a_fincen_114_required_yes")).toBe(true);
+    expect(value("schedule-b", "0.line.7b_foreign_country_1")).toBe("Germany");
+    expect(value("schedule-b", "0.line.7b_foreign_country_2")).toBe("Luxembourg");
+  });
+
+  it("leaves out a Part VI asset answered as not a financial account", () => {
+    const facts = factsWith({
+      [ASSET("alpenrose-fund")]: { ...alpenroseFund, financialAccount: false },
+    });
+    const { value } = evaluate(facts);
+    expect(value("schedule-b", "0.line.7b_foreign_country_1")).toBe("Switzerland");
+    expect(value("schedule-b", "0.line.7b_foreign_country_2")).toBe("United Kingdom, Germany");
+    // Alone, it does not count for the $10,000 test either.
+    const small = factsWith({
+      [ASSET("rhine-current")]: { ...rhineCurrent, maximumValue: 8000 },
+      [ASSET("zurich-savings")]: undefined,
+      [ASSET("thames-brokerage")]: undefined,
+      [ASSET("alpenrose-fund")]: { ...alpenroseFund, financialAccount: false },
+    });
+    expect(isGap(evaluate(small).field("schedule-b", "0.line.7a_fincen_114_required_yes"))).toBe(
+      true,
+    );
+  });
+
+  it("waits for the answer and asks it when a Part VI asset does not say", () => {
+    const facts = factsWith({
+      [ASSET("alpenrose-fund")]: { ...alpenroseFund, financialAccount: undefined },
+    });
+    const { value, field, missingOf } = evaluate(facts);
+    expect(value("schedule-b", "0.line.7a_fincen_114_required_yes")).toBe(true);
+    for (const row of ["0.line.7b_foreign_country_1", "0.line.7b_foreign_country_2"]) {
+      expect(field("schedule-b", row)?.ok).toBe(false);
+      expect(isGap(field("schedule-b", row))).toBe(false);
+    }
+    expect(missingOf("schedule-b")).toContain(ASSET("alpenrose-fund"));
+  });
+
+  it("files Schedule B to ask when an unanswered Part VI asset is the only foreign asset", () => {
+    const onlyShares = (answer: boolean | undefined) =>
+      base.facts
+        .filter(
+          (fact) =>
+            (fact.category !== "foreign" || fact.key === ASSET("fjordline-shares")) &&
+            fact.category !== "investment_income",
+        )
+        .map((fact) =>
+          fact.key === ASSET("fjordline-shares")
+            ? { ...fact, value: { ...fjordlineShares, financialAccount: answer } }
+            : fact,
+        );
+    const waiting = evaluate(onlyShares(undefined));
+    expect(waiting.files("schedule-b")).toBe(true);
+    expect(waiting.missingOf("schedule-b")).toContain(ASSET("fjordline-shares"));
+    expect(evaluate(onlyShares(false)).files("schedule-b")).toBe(false);
   });
 
   it("leaves question 2 to a person when no account alone is over $10,000", () => {

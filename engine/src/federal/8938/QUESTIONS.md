@@ -65,8 +65,10 @@ Each item is a place where the form and its instructions do not settle a rule. B
 ## 11. Schedule B line 7a question 2 (FinCEN Form 114)
 
 - Text: "if the aggregate value of foreign financial accounts exceeds $10,000 at any time during 2025" (`irs-1040sb-inst-2025::sec::line-7a-question-2-see-fincen-form-114-and-its::b01`).
-- Default: Yes, with the accounts' countries on line 7b, when one recorded Part V account alone is over $10,000. Otherwise unsupported: signature authority and the aggregate at any time are not facts.
-- Line 7b: a financial account "also includes ... shares in a mutual fund or similar pooled fund" and a policy with a cash value (`line-7a-question-1-check-the-yes-box-if-at-any-time::b01`). A Part VI asset may be one, and the fact does not say. With any Part VI asset on the return, line 7b is unsupported instead of a list that may leave a country out. A fact field that marks a Part VI financial account would let the engine list its country.
+- Default: Yes, with the accounts' countries on line 7b, when one recorded account alone is over $10,000. Otherwise unsupported: signature authority and the aggregate at any time are not facts.
+- Decided, line 7b: a financial account "also includes ... shares in a mutual fund or similar pooled fund" and a policy with a cash value (`line-7a-question-1-check-the-yes-box-if-at-any-time::b01`). Each Part VI asset carries the person's answer `financialAccount`. With `true` it is an account: its country (the institution's, else the entity's, else the first issuer's) joins line 7b, it makes question 1 Yes, and its value counts in the one-account test. With `false` it is left out. With no answer, Schedule B lists the asset fact in its missing inputs and files to ask it; question 2 (unless already Yes) and line 7b wait. Form 8938 owns the fact; Schedule B owns the question, because only its lines read it.
+- Line 7b stays unsupported when an account has no country recorded.
+- Open: whether a sub-account at a foreign broker, a foreign pension, or a direct holding in a fund that is not available to the public counts. The engine does not decide; the person's answer does.
 
 ## 12. Rounding of the Part I and Part II totals
 

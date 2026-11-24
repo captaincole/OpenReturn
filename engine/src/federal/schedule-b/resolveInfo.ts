@@ -13,7 +13,7 @@ import {
 } from "../../resolverInputs.js";
 import { figuredForm8814, form8814Totals } from "../8814/totals.js";
 import { filesForm8815, savingsBondExclusionScope } from "../8815/resolveInfo.js";
-import { foreignAccountsOnReturn, hasOtherAssetOnReturn } from "../8938/resolveInfo.js";
+import { foreignAccountsOnReturn, unansweredOtherAssetKeys } from "../8938/resolveInfo.js";
 import { receivedAmounts, receivedOnReturn, type Receipt } from "../passThrough/receipts.js";
 import type { ForeignAccountFacts, PayerAmount, ScheduleBFilingInfo } from "./filingInfo.js";
 
@@ -25,24 +25,27 @@ import type { ForeignAccountFacts, PayerAmount, ScheduleBFilingInfo } from "./fi
 export const FINCEN_114_LIMIT = 10000;
 
 /*
- * Line 7a from the Form 8938 account facts: an account recorded there is "a
- * financial account located in a foreign country"
+ * Line 7a from the Form 8938 asset facts: a Part V account, or a Part VI asset
+ * answered as a financial account, is "a financial account located in a
+ * foreign country"
  * (irs-1040sb-inst-2025::sec::line-7a-question-1-check-the-yes-box-if-at-any-time::b01).
- * Undefined with no account fact. One account worth more than $10,000 settles
- * question 2; a smaller one does not (the aggregate at any time is unknown).
- * A Part VI asset may be a financial account too, so line 7b's list is then
- * not known to be complete.
+ * Undefined with no account and no Part VI asset waiting for its answer. One
+ * account worth more than $10,000 settles question 2; a smaller one does not
+ * (the aggregate at any time is unknown).
  */
 function foreignAccountFactsOf(inputs: ResolverInputs): ForeignAccountFacts | undefined {
   const accounts = foreignAccountsOnReturn(inputs);
-  if (accounts.length === 0) return undefined;
+  const unansweredAssetKeys = unansweredOtherAssetKeys(inputs);
+  if (accounts.length === 0 && unansweredAssetKeys.length === 0) return undefined;
   const countries = accounts
     .map((account) => account.country)
     .filter((country): country is string => country !== undefined && country !== "");
   return {
+    recorded: accounts.length > 0,
     countries: [...new Set(countries)],
     overFincenLimit: accounts.some((account) => account.maximumDollars > FINCEN_114_LIMIT),
-    countriesIncomplete: hasOtherAssetOnReturn(inputs),
+    countriesIncomplete: countries.length < accounts.length,
+    unansweredAssetKeys,
   };
 }
 
@@ -88,7 +91,10 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
   const foreignAccountFacts = foreignAccountFactsOf(inputs);
   const hasForeignFinancialAccount =
     boolDecision(inputs, "decisions.scope.has_foreign_financial_account") ??
-    (foreignAccountFacts === undefined ? undefined : true);
+    (foreignAccountFacts?.recorded === true ? true : undefined);
+  // After a No, line 7 does not read the Part VI answers.
+  const unansweredAssetKeys =
+    hasForeignFinancialAccount === false ? [] : (foreignAccountFacts?.unansweredAssetKeys ?? []);
   const hasForeignTrust = boolDecision(inputs, "decisions.scope.has_foreign_trust");
   const partIII = {
     "decisions.scope.has_foreign_financial_account": hasForeignFinancialAccount,
@@ -115,11 +121,17 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
         value: filesForm8815(bondExclusion),
         triggeredByFactKeys: bondExclusion.resolution.derivation?.triggeredByFactKeys ?? [],
       },
+      // The answer may make Part III a "Yes": the form files to ask it.
+      {
+        rule: "fallback: a Form 8938 Part VI asset does not say whether it is a financial account (line 7a)",
+        value: unansweredAssetKeys.length > 0,
+        triggeredByFactKeys: unansweredAssetKeys,
+      },
     ],
   });
   return {
     mustFile: { "schedule-b": resolution },
-    missingInputs: { "schedule-b": missingInputs(partIII) },
+    missingInputs: { "schedule-b": [...missingInputs(partIII), ...unansweredAssetKeys] },
     interestPayers,
     rounding: rounding === "sum_rounded_rows" ? "sum_rounded_rows" : "round_total",
     dividendPayers,

@@ -108,6 +108,16 @@ export interface ForeignFinancialAssetFactValue {
    * (irs-8938-inst-2025::sec::exceptions-to-reporting::b01, foreign-grantor-trusts::b01).
    */
   reportedOnOtherForm?: boolean;
+  /*
+   * Part VI only: the person's answer whether the asset is a financial account
+   * for Schedule B line 7a and FinCEN Form 114. true: shares in a mutual fund or
+   * similar pooled fund, or an insurance or annuity policy with a cash value
+   * (irs-1040sb-inst-2025::sec::line-7a-question-1-check-the-yes-box-if-at-any-time::b01).
+   * false: not an account, such as stock held on a company's share register or
+   * a bond held directly. Absent on a Part VI asset: Schedule B asks for it.
+   * A Part V account is a financial account; the field is not read there.
+   */
+  financialAccount?: boolean;
 }
 
 export interface ForeignFinancialAssetFact {

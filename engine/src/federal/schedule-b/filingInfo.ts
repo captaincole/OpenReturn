@@ -14,14 +14,21 @@ export interface PayerAmount {
  */
 export type ScheduleBRounding = "round_total" | "sum_rounded_rows";
 
-/** The foreign deposit and custodial accounts recorded for Form 8938, on this return. */
+/**
+ * The foreign financial accounts recorded for Form 8938, on this return: the
+ * Part V accounts and the Part VI assets answered as financial accounts.
+ */
 export interface ForeignAccountFacts {
+  /** At least one account is recorded: line 7a question 1 is Yes. */
+  recorded: boolean;
   /** The countries the accounts are in, each once, in the order recorded. */
   countries: string[];
   /** One account alone was worth more than the FinCEN Form 114 limit at some time in the year. */
   overFincenLimit: boolean;
-  /** A Part VI asset is on the return: it may be a financial account, so the countries may be incomplete. */
+  /** An account has no country recorded (no address of an institution, entity or issuer). */
   countriesIncomplete: boolean;
+  /** The Part VI asset facts that do not say whether they are a financial account: line 7 waits for them. */
+  unansweredAssetKeys: string[];
 }
 
 export interface ScheduleBFilingInfo

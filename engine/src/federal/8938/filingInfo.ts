@@ -20,7 +20,10 @@ export interface Form8938Figured {
   copies: number;
 }
 
-/* Schedule B Part III from the foreign asset facts: each Part V account on this return. */
+/*
+ * Schedule B Part III from the foreign asset facts: each Part V account on this
+ * return, and each Part VI asset answered as a financial account.
+ */
 export interface ForeignAccountOnReturn {
   country: string | undefined;
   maximumDollars: number;
@@ -30,6 +33,6 @@ export interface ForeignAccountOnReturn {
 export interface Form8938FilingInfo extends BaseFilingInfo, Form1116FilingInfo {
   form8938?: Form8938Figured;
   form8938CopyIndex?: number;
-  /* The Part V accounts on this return, whether or not Form 8938 files. */
+  /* The foreign financial accounts on this return (foreignAccountsOnReturn), whether or not Form 8938 files. */
   foreignAccounts?: ForeignAccountOnReturn[];
 }
