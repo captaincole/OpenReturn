@@ -206,6 +206,35 @@ describe("Form 4797, holding period and placement", () => {
     );
   });
 
+  it("a retired roof (elective partial disposition, no proceeds) is an abandonment: line 10, not Part I", () => {
+    const roof = placed(
+      sale({
+        kind: "section_1250",
+        dateAcquired: "2014-06-01",
+        dateSold: "2025-02-01",
+        costOrOtherBasis: 20000,
+        depreciationAllowed: 6000,
+        partialDisposition: "elective",
+        abandoned: true,
+      }),
+    );
+    expect(roof.part).toBe("part_ii");
+    const figured = lines([roof]);
+    expect([
+      figured.line7,
+      figured.line11,
+      figured.line1c,
+      figured.line17,
+      figured.line18b,
+    ]).toEqual([undefined, undefined, 14000, -14000, -14000]);
+  });
+
+  it("an abandonment with a gain is a gap", () => {
+    const value = sale({ grossSalesPrice: 500, costOrOtherBasis: 100, abandoned: true });
+    expect(saleGap(value, 500)).toMatch(/abandonment/);
+    expect(saleGap({ ...value, grossSalesPrice: 0 }, 0)).toBeUndefined();
+  });
+
   it("a sale with no price, or section 126 payments with no date, is a gap", () => {
     expect(saleGap(sale({}), undefined)).toMatch(/no gross sales price/);
     expect(saleGap(sale({ section126ExcludedPayments: 10 }), 0)).toMatch(/no date received/);

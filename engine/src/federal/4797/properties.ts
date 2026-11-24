@@ -248,9 +248,10 @@ function farmlandWithNoRecapture(sale: BusinessPropertySaleFactValue): boolean {
 }
 
 /*
- * Where the property goes (the chart): held 1 year or less, or ordinary
- * property, Part II; held more than 1 year at a gain, Part III for the
- * recapture kinds; land, a loss, and farmland with no recapture, Part I.
+ * Where the property goes (the chart): held 1 year or less, ordinary property,
+ * or an abandonment (not a sale or exchange: line-10::b01), Part II; held more
+ * than 1 year at a gain, Part III for the recapture kinds; land, a loss, and
+ * farmland with no recapture, Part I.
  */
 export function placeProperty(
   sale: BusinessPropertySaleFactValue,
@@ -262,7 +263,11 @@ export function placeProperty(
       : sale.description;
   const partial = sale.partialDisposition;
   const row = saleRow(sale, description, grossSalesPrice);
-  if (sale.kind === "ordinary" || !heldMoreThanOneYear(sale.dateAcquired, sale.dateSold)) {
+  if (
+    sale.kind === "ordinary" ||
+    sale.abandoned === true ||
+    !heldMoreThanOneYear(sale.dateAcquired, sale.dateSold)
+  ) {
     return { part: "part_ii", row, partial };
   }
   if (!PART_III_KINDS.includes(sale.kind) || farmlandWithNoRecapture(sale)) {
@@ -289,6 +294,9 @@ export function saleGap(
   }
   if (sale.section126ExcludedPayments !== undefined && !sale.section126PaymentsReceived) {
     return `${sale.description}: section 126 payments with no date received (line 29a's percentage needs it).`;
+  }
+  if (sale.abandoned === true && saleRow(sale, sale.description, grossSalesPrice).gainOrLoss > 0) {
+    return `${sale.description}: an abandonment with an amount realized above its adjusted basis; the engine does not figure it.`;
   }
   return undefined;
 }

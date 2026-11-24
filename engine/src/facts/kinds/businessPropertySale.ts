@@ -97,6 +97,15 @@ export interface BusinessPropertySaleFactValue {
   /* A partial disposition of a MACRS asset (lines 1b and 1c, partial-dispositions-of-macrs-property::b02). */
   partialDisposition?: "elective" | "required";
   /*
+   * The property, or the portion of a MACRS asset (an old roof that was replaced),
+   * was abandoned or retired with no sale or exchange. "Deduct the loss from a
+   * qualifying abandonment of business or investment property on line 10"
+   * (irs-4797-inst-2025::sec::line-10::b01); such a loss "is generally an
+   * ordinary loss" (irs-pub-544-2025::sec::partial-dispositions-of-macrs::b02).
+   * Gross sales price: 0. A gain on an abandonment is a gap.
+   */
+  abandoned?: boolean;
+  /*
    * The Form 1099-S (form1099S.ts) that reports this sale's gross proceeds: line 1a
    * adds its box 2 (line-1a::b01). Several properties sold together (a building
    * and its land) name the same form; line 1a counts it once.
@@ -173,6 +182,7 @@ function isSale(value: unknown): value is BusinessPropertySaleFactValue {
     (fields.partialDisposition === undefined ||
       fields.partialDisposition === "elective" ||
       fields.partialDisposition === "required") &&
+    (fields.abandoned === undefined || typeof fields.abandoned === "boolean") &&
     (fields.form1099SKey === undefined || typeof fields.form1099SKey === "string")
   );
 }

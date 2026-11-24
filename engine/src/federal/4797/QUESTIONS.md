@@ -99,6 +99,26 @@ default the engine applies, and whether the default can change a dollar amount.
     investment (Form 8949), a casualty or theft portion of line 32 (Form 4684
     line 33), an installment sale's Part III.
 
+19. **An abandoned or retired portion of a MACRS asset (an old roof).** The
+    chart puts depreciable real property "Sold or exchanged at a loss" in Part I
+    (where-to-make-first-entry-for-certain-items::b01). A retirement with no
+    proceeds is not a sale or exchange: "Deduct the loss from a qualifying
+    abandonment of business or investment property on line 10" (line-10::b01),
+    and "A loss from an abandonment of business or investment property that is
+    not treated as a sale or exchange is generally an ordinary loss"
+    (irs-pub-544-2025::sec::partial-dispositions-of-macrs::b02). Default: the
+    sale fact's `abandoned` puts the property on line 10; a gain on an
+    abandonment is a gap. Without the answer, a $0 sale at a loss stays in
+    Part I. Changes dollars: yes, in later years (a Part I loss is a
+    nonrecaptured section 1231 loss on a later line 8), and this year when
+    Part I also has a gain.
+
+20. **Low-income housing: when the month count starts.** Pub. 544 counts "each
+    full month the property was held over 100 full months"
+    (irs-pub-544-2025::sec::applicable-percentage::b02). Default: the holding
+    period starts the day after acquisition (part-i::b01). Changes dollars:
+    1% of line 26b's base when a sale falls on a month boundary.
+
 ## Confidence by field group
 
 | Field group | Confidence |
@@ -118,3 +138,21 @@ default the engine applies, and whether the default can change a dollar amount.
 | Line 29 (section 1255) | stated rule |
 | Lines 30–32 | stated rule |
 | Lines 33–35 | published examples with numbers (Pub. 946); several properties own reading (item 4) |
+
+## Second opinions
+
+- **Blind fill** (15 cases from the blank form and instructions only): every
+  line matched but one. The retired roof (case 14) went to line 10; the engine
+  put it in Part I. The text sides with line 10 (item 19), and the engine now
+  takes the `abandoned` answer.
+- **PolicyEngine-US 2.153.8** (commit b3edc0446b): it does not model Form 4797.
+  Its Form 4797 gain (`other_net_gain`) and the unrecaptured section 1250 gain
+  before losses are inputs, so Parts I to IV have nothing to compare. Its
+  Unrecaptured Section 1250 Gain Worksheet lines 13–18 (the losses of lines
+  14–16 netted, line 18 at least 0) match `worksheets/unrecapturedSection1250.ts`.
+  Its Schedule D Tax Worksheet line 19 amounts (the top of the 24% bracket,
+  2025: 197,300; 394,600 joint and surviving spouse) and the 25% rate on
+  unrecaptured section 1250 gain match `worksheets/scheduleDTax.ts`. No
+  disagreement.
+- **IRS Direct File:** the repo names no checkout, and Direct File does not
+  support Form 4797. Not compared.
