@@ -8,7 +8,7 @@ Both Schedule C businesses are Elaida's (the taxpayer's): a spouse's Schedule SE
 
 Forms that file: Form 1040, Schedules 1, C (two copies), D and E, Forms 7203 and 8995. The couple takes the standard deduction, so the allowed charitable gift reaches no line.
 
-No input documents: the engine has no K-1 document generator, so the facts are the boxes as Schedule K-1 (Form 1120-S) would print them.
+One made input document: `docs/01-schedule-k1-white-tower-glassworks.pdf`, Daved's Schedule K-1 (Form 1120-S) with the box 17 code V statement on its second page, from `generate-docs.ts` with the same fact object `facts.ts` uses. The IRS center and Daved's masked number are made up for the page. Item D (the corporation's total shares) is blank: the fact does not hold it. The holding answers (basis, contributions) are on no K-1. The W-2 has no PDF: its facts are the boxes as it would print them.
 
 ## Inputs
 

@@ -1,6 +1,7 @@
 /*
- * A made-up taxpayer (README.md): every name and amount is invented. No input
- * documents: the facts are the boxes as the documents would print them.
+ * A made-up taxpayer (README.md): every name and amount is invented. The two
+ * Form 1099-Bs are made documents (generate-docs.ts renders them from the
+ * objects below); the W-2 has no PDF.
  */
 
 import {
@@ -59,7 +60,7 @@ const w2: W2FactValue = {
  * 1099-B from Ridgeline Futures (made up): regulated futures, boxes 8–11 only.
  * Box 11 = box 8 − box 9 + box 10 = 9,840 + 1,250 + 2,115 = 13,205.
  */
-const ridgeline: Section1256StatementFactValue = {
+export const ridgeline: Section1256StatementFactValue = {
   brokerName: "Ridgeline Futures LLC",
   accountNumber: "RF-20417",
   box8: 9840,
@@ -69,7 +70,7 @@ const ridgeline: Section1256StatementFactValue = {
 };
 
 /* 1099-B from Mesa Commodity Partners (made up): a realized loss, nothing open. */
-const mesa: Section1256StatementFactValue = {
+export const mesa: Section1256StatementFactValue = {
   brokerName: "Mesa Commodity Partners",
   accountNumber: "MCP-5531",
   box8: -4318,
@@ -95,12 +96,12 @@ export const hollisFacts: TaxFactRow[] = [
     "capital_gains",
     makeSection1256StatementFactKey("ridgeline-futures"),
     ridgeline,
-    "Form 1099-B from Ridgeline Futures LLC, boxes 8–11.",
+    "Form 1099-B from Ridgeline Futures LLC, boxes 8–11 (docs/01-1099-b-ridgeline-futures.pdf).",
   ),
   fact(
     "capital_gains",
     makeSection1256StatementFactKey("mesa-commodity"),
     mesa,
-    "Form 1099-B from Mesa Commodity Partners, boxes 8 and 11.",
+    "Form 1099-B from Mesa Commodity Partners, boxes 8 and 11 (docs/02-1099-b-mesa-commodity.pdf).",
   ),
 ];

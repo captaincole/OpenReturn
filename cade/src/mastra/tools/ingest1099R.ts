@@ -24,8 +24,15 @@ const BoxesSchema = z.object({
   box6: z.number().optional().describe("Net unrealized appreciation"),
   box7: z.string().describe("Distribution code(s) exactly as printed, e.g. '7', 'G', 'H', '4G'"),
   box7IraSepSimple: z.boolean().describe("True when the IRA/SEP/SIMPLE checkbox is checked"),
-  box8: z.number().optional().describe("Other"),
-  box9a: z.number().optional().describe("Your percentage of total distribution"),
+  box8: z.number().optional().describe("Other: the amount"),
+  box8Percent: z
+    .number()
+    .optional()
+    .describe("Box 8's percentage, as printed (40 for 40%). Omit when blank."),
+  box9a: z
+    .number()
+    .optional()
+    .describe("Your percentage of total distribution, as printed (40 for 40%). Omit when blank."),
   box9b: z.number().optional().describe("Total employee contributions"),
   box10: z.number().optional().describe("Amount allocable to IRR within 5 years"),
   box11: z.number().int().optional().describe("1st year of designated Roth contributions"),
@@ -62,7 +69,12 @@ export const ingest1099R = createTool({
     boxes: BoxesSchema,
     sourceNote: z.string().default("Form 1099-R ingested via structured payload"),
   }),
-  outputSchema: z.object({ factKey: z.string() }),
+  outputSchema: z.object({
+    factKey: z.string(),
+    /* A Schedule G-1 fact names its 1099-Rs by these two. */
+    payerSlug: z.string(),
+    distributionId: z.string(),
+  }),
   execute: async (input, context) => {
     const { scope, userId, filingId } = await requireUserContext(context);
     const ctx: IngestCtx = {
@@ -84,6 +96,6 @@ export const ingest1099R = createTool({
     };
     const factKey = makeRetirementDistributionFactKey(payerSlug, distributionId);
     await recordIngestFact(ctx, "retirement", factKey, value);
-    return { factKey };
+    return { factKey, payerSlug, distributionId };
   },
 });

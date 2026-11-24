@@ -17,6 +17,15 @@ engine's output.
   $2,200 reimbursed. Expenses paid beyond it: Mateo $4,300, Ines $3,000.
 - Ines's other parent paid $4,800 of child support.
 
+## Documents
+
+Made by `generate-docs.ts` from the provider facts (fake data): each care
+provider's year-end statement (`docs/01-sunflower-hill-care-statement.pdf`,
+`docs/02-lupe-arroyo-care-statement.pdf`), with the name, address, TIN, phone
+and the total paid. The provider type (FTB 3506 line 1d), the household
+employee box and the qualifying persons' amounts are answers, not printed. The
+W-2s, the 1099-INT and the FSA statement have no PDF.
+
 ## What it covers
 
 - FTB 3506 Part I (the return's interest and the stated child support), both

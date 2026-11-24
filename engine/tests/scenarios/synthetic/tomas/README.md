@@ -6,6 +6,10 @@ The Albrecht family is made up. No filed return, benchmark case or FTB example s
 
 Tomas and Hana Albrecht file jointly and live in Oakland all year. Hana has one W-2. Their son Juniper (born 2010) has his own interest and dividends. The parents report his income on federal Form 8814 and on FTB 3803.
 
+## Documents
+
+Made by `generate-docs.ts` from Juniper's investment income fact (fake data), with Juniper as the recipient: his 1099-INT (`docs/01-…`; box 1 is his interest less the Treasury bill interest in box 3) and 1099-DIV (`docs/02-…`). The W-2 has no PDF.
+
 ## What it covers
 
 - One FTB 3803: the "more than one" box is blank.

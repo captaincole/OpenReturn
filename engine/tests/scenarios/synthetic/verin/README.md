@@ -6,6 +6,10 @@ The Castellanos family is made up. No filed return, benchmark case or FTB exampl
 
 Verin and Dorian Castellanos file jointly and live in Sacramento all year. Verin has one W-2. Their daughters Lucia (born 2012) and Noor (born 2016) have their own interest and dividends. The parents report both girls' income on federal Form 8814 and on FTB 3803.
 
+## Documents
+
+Made by `generate-docs.ts` from each girl's investment income fact (fake data), with the girl as the recipient: Lucia's 1099-INT (`docs/01-…`, box 1 and box 8) and 1099-DIV (`docs/02-…`), and Noor's 1099-INT (`docs/03-…`; box 1 is her interest less the Treasury bill interest in box 3). The forms do not show which bonds are Oregon's: Lucia's $600 is the parents' answer, like the estimated tax and other income answers. The W-2 has no PDF.
+
 ## What it covers
 
 - Two copies of FTB 3803, with the "more than one" box checked. The golden checks the first copy (Lucia).

@@ -6,7 +6,7 @@ Min has one large W-2. She also owns 25% of an S corporation, Baerlon Bindery, a
 
 Forms that file: Form 1040, Schedules 1, 2 and E, Form 8995.
 
-No input documents. The K-1 has no fake PDF yet: the engine has no K-1 document generator, so the facts are the boxes and the statement as Schedule K-1 (Form 1120-S) would print them.
+One made input document: `docs/01-schedule-k1-baerlon-bindery.pdf`, Min's Schedule K-1 (Form 1120-S) with the box 17 code V statement on its second page, from `generate-docs.ts` with the same fact object `facts.ts` uses. The corporation's address, the IRS center and Min's masked number are made up for the page. Item D (the corporation's total shares) is blank: the fact does not hold it. The W-2, the 1099-R and the 1098-E have no PDF: their facts are the boxes as they would print them.
 
 ## Inputs
 
