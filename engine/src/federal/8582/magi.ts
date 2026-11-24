@@ -14,7 +14,10 @@
  */
 
 import type { FormAccessor } from "../../defineForm.js";
-import { atLeast, numberOrBlank, sum } from "../../money.js";
+import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
+import { limitContextFrom } from "../passThrough/limits.js";
+import { isPassiveItem, releasedOnDisposition } from "../passThrough/passiveActivity.js";
+import { allowedWithRoute, routeEntities } from "../passThrough/routing.js";
 import { isRentalActivity, selfRentalState } from "../rentals/passive.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
 import type { Form8582FilingInfo } from "./filingInfo.js";
@@ -88,6 +91,50 @@ function nonpassiveScheduleE(form: FormAccessor<Form8582>, info: Form8582FilingI
   return total;
 }
 
+/*
+ * The losses an entire disposition releases (Schedule E column (g), its own row
+ * and its PYA row): line 6 takes "into account the overall loss from the
+ * disposition" (irs-8582-inst-2025::sec::reporting-an-entire-disposition-on-form-4797-or::b02);
+ * the gain is already in Form 1040 line 7a. Only the activity's passive items
+ * and its carried passive loss: the K-1's nonpassive amounts (guaranteed
+ * payments, a materially participated box 1) are already in columns (k) and (i)
+ * (line-6::b01). Undefined while such a K-1 is not routed.
+ */
+function releasedLosses(info: Form8582FilingInfo): number | undefined {
+  const entities = info.passThroughEntities ?? [];
+  const released = entities.filter((entity) => releasedOnDisposition(entity));
+  if (released.length === 0) return 0;
+  const routed = routeEntities(entities, limitContextFrom(info));
+  const amounts = released.map((entity) => {
+    const entry = routed.find((candidate) => candidate.entity.key === entity.key);
+    if (entry?.kind !== "routed") return undefined;
+    return sum(
+      ...allowedWithRoute(entry, "schedule_e_part_ii")
+        .filter((item) => isPassiveItem(entity, item))
+        .map((item) => item.amount),
+    );
+  });
+  return amounts.includes(undefined) ? undefined : roundDollars(sum(...amounts));
+}
+
+/*
+ * Schedule E Part II's nonpassive columns: column (k) less column (i). Line 6
+ * leaves out passive income and loss only; a nonpassive K-1 amount, and the
+ * overall loss of an entire disposition (releasedLosses), count. Undefined
+ * while Part II has a row and its total is not a number.
+ */
+function nonpassivePartII(form: FormAccessor<Form8582>, info: Form8582FilingInfo) {
+  if (!(info.passThroughEntities ?? []).some((entity) => entity.form !== "1041")) return 0;
+  const line32 = numberOrBlank(form["schedule-e.1.line.32_total_partnership_s_corp_income"]);
+  const released = releasedLosses(info);
+  if (line32 === undefined || released === undefined) return undefined;
+  return (
+    sum(form["schedule-e.1.line.29a_totals_col_k"]) -
+    sum(form["schedule-e.1.line.29b_totals_col_i"]) +
+    released
+  );
+}
+
 /* Line 6, not less than zero; undefined while a part of it is unknown. */
 export function modifiedAgi(
   form: FormAccessor<Form8582>,
@@ -98,12 +145,14 @@ export function modifiedAgi(
   // As on Schedule 1 line 10: a business whose line 3 waits.
   if (info.hasBusiness === true && form["schedule-1.0.line.3"] === undefined) return undefined;
   const scheduleE = nonpassiveScheduleE(form, info);
-  if (scheduleE === undefined) return undefined;
+  const partII = nonpassivePartII(form, info);
+  if (scheduleE === undefined || partII === undefined) return undefined;
   const income = sum(
     ...FORM_1040_INCOME.map((line) => form[`form-1040.${line}`]),
     interestBeforeExclusion(form, info),
     ...SCHEDULE_1_INCOME.map((line) => form[`schedule-1.${line}`]),
     scheduleE,
+    partII,
   );
   const adjustments =
     sum(...SCHEDULE_1_ADJUSTMENTS.map((line) => form[`schedule-1.${line}`])) -

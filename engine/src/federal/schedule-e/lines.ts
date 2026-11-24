@@ -138,6 +138,14 @@ function incomeOrLoss(property: RentalFactValue): number | undefined {
   return property.allInvestmentAtRisk === true ? net : undefined;
 }
 
+/*
+ * Line 21 as its binding computes it, from the fact alone: undefined while it
+ * waits or is a gap. The K-1 passive limit reads it for Form 8582's rows.
+ */
+export function line21Amount(property: RentalFactValue): number | undefined {
+  return rentalDepreciationGap(property) ? undefined : incomeOrLoss(property);
+}
+
 // One "Other (list)" box serves all three columns; several are labeled by column.
 export function otherExpenseDescription(info: ScheduleEFilingInfo) {
   const others = (info.rentalProperties ?? []).filter(

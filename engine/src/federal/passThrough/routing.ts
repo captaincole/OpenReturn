@@ -34,6 +34,8 @@ import { applyLossLimits, type LimitContext } from "./limits.js";
  *   cash gifts (another kind of contribution is unsupported there);
  * - form_1040_line_2a: tax-exempt interest;
  * - form_7203: an item that only moves the shareholder's basis (Form 7203);
+ * - partner_basis: an item that only moves the partner's basis (the Partner's
+ *   Basis Worksheet, partnerBasis.ts);
  * - schedule_3_line_1: the foreign tax credit: a trust K-1 is one more Form 1116
  *   source (1116/sources.ts); an S corporation's needs Schedule K-3 (unsupported there);
  * - form_8960_line_7: the beneficiary's net investment income adjustment
@@ -54,6 +56,7 @@ export type Route =
   | "schedule_a_line_11"
   | "form_1040_line_2a"
   | "form_7203"
+  | "partner_basis"
   | "schedule_3_line_1"
   | "form_8960_line_7"
   | "no_line";
@@ -89,6 +92,45 @@ export const ROUTES: Readonly<Record<K1Form, Partial<Record<ItemType, Route>>>> 
     gross_receipts_448c: "no_line",
   },
   "1065": {
+    // irs-1065k1-inst-2025::sec::income-loss::b01, ::b02: column (h), (k), (g) or (i) by participation
+    ordinary_business_income: "schedule_e_part_ii",
+    // irs-1065k1-inst-2025::sec::box-2-net-rental-real-estate-income-loss::b01, ::b02
+    net_rental_real_estate_income: "schedule_e_part_ii",
+    // irs-1065k1-inst-2025::sec::box-3-other-net-rental-income-loss::b01, ::b02
+    other_net_rental_income: "schedule_e_part_ii",
+    // irs-1065k1-inst-2025::sec::box-4a-guaranteed-payments-for-services::b01: column (k)
+    guaranteed_payment_services: "schedule_e_part_ii",
+    // irs-1065k1-inst-2025::sec::box-4b-guaranteed-payments-for-capital::b01: column (k)
+    guaranteed_payment_capital: "schedule_e_part_ii",
+    // irs-1065k1-inst-2025::sec::box-4c-total-guaranteed-payments::b01: the total of 4a and 4b
+    guaranteed_payments_total: "schedule_e_part_ii",
+    // irs-1065k1-inst-2025::sec::box-5-interest-income::b01
+    interest: "interest_list",
+    // irs-1065k1-inst-2025::sec::box-6a-ordinary-dividends::b01
+    ordinary_dividends: "dividend_list",
+    // irs-1065k1-inst-2025::sec::box-6b-qualified-dividends::b01
+    qualified_dividends: "qualified_dividends",
+    // irs-1065k1-inst-2025::sec::box-8-net-short-term-capital-gain-loss::b01
+    net_short_term_capital_gain: "schedule_d_line_5",
+    // irs-1065k1-inst-2025::sec::box-9a-net-long-term-capital-gain-loss::b01
+    net_long_term_capital_gain: "schedule_d_line_12",
+    // irs-1065k1-inst-2025::sec::box-9b-collectibles-28-gain-loss::b01
+    collectibles_gain: "schedule_d_line_18",
+    // irs-1065k1-inst-2025::sec::box-9c-unrecaptured-section-1250-gain::b01
+    unrecaptured_section_1250_gain: "schedule_d_line_19",
+    // irs-1065k1-inst-2025::sec::box-13-other-deductions::b01: code A on Schedule A line 11
+    charitable_contribution: "schedule_a_line_11",
+    // irs-1065k1-inst-2025::sec::box-18-tax-exempt-income-and::b01: code A on Form 1040 line 2a
+    tax_exempt_interest: "form_1040_line_2a",
+    // the same block: codes B and C change basis only (the worksheet's lines 4l and 12)
+    other_tax_exempt_income: "partner_basis",
+    nondeductible_expenses: "partner_basis",
+    // irs-1065k1-inst-2025::sec::box-19-distributions::b01: the worksheet's line 8
+    distribution: "partner_basis",
+    // irs-1065k1-inst-2025::sec::box-20-other-information::b15
+    section_199a_information: "qbi",
+    // irs-1065k1-inst-2025::sec::box-21-foreign-taxes-paid-or::b01; the credit reads Schedule K-3 (QUESTIONS.md item 22)
+    foreign_tax_paid: "schedule_3_line_1",
     // irs-1065k1-inst-2025::sec::part-xiii::b02, ::b03: the partner's share for the section 448(c) test.
     gross_receipts_448c: "no_line",
   },

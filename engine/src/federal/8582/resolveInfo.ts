@@ -13,6 +13,9 @@ import {
   resolveMustFile,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { form8582K1Activities, hasPassiveDeductions } from "../passThrough/form8582Rows.js";
+import { passThroughEntitiesOnReturn } from "../passThrough/items.js";
+import { limitContextOf } from "../passThrough/receipts.js";
 import {
   booleanFact,
   isPassiveActivity,
@@ -61,6 +64,15 @@ function undecidedKeys(
   });
   const pastColumns = properties.slice(SCHEDULE_E_COLUMNS);
   return [...onSchedule, ...pastColumns].map((property) => property.key);
+}
+
+/* The K-1 Part V rows, as Schedule E's resolver puts them in the info. */
+function passiveK1Rows(inputs: ResolverInputs) {
+  const entities = passThroughEntitiesOnReturn(
+    inputs.facts,
+    spousePropertiesOnReturn(filingStatusOf(inputs)),
+  ).entities;
+  return form8582K1Activities(entities, limitContextOf(inputs));
 }
 
 // MANUAL EDIT: line 6 adds back excluded adoption benefits (irs-8582-inst-2025::sec::line-6::b01).
@@ -114,6 +126,14 @@ export function resolve8582Info(inputs: ResolverInputs): Form8582FilingInfo {
     (property) =>
       property.passive && hasDeductions(property.value) && !offFormSelfRental(property.value),
   );
+  // MANUAL EDIT: a K-1's passive activity with a loss or a carried loss files it too (who-must-file::b01).
+  const k1 = passiveK1Rows(inputs);
+  // A K-1 the engine cannot put on the form, with a passive loss, files it too: its amounts are then a gap.
+  const k1Filing = [
+    ...(k1?.rows ?? []).filter(hasPassiveDeductions).map((row) => row.factKey),
+    ...(k1?.unmodeledWithDeductions ?? []),
+  ];
+  const k1Open = k1 !== undefined && !k1.settled;
   const hasRental = needsProfessionalAnswer(properties.map((property) => property.value));
   const livedApart = booleanFact(inputs.factByKey.get(SPOUSE_KEYS.livedApartAllYear));
   const info: ActivitiesInfo = { filingStatus: status, livedApartFromSpouseAllYear: livedApart };
@@ -133,13 +153,14 @@ export function resolve8582Info(inputs: ResolverInputs): Form8582FilingInfo {
       "form-8582": resolveMustFile(inputs.decisionByKey, {
         explicitKey: MUST_FILE_KEY,
         fallbacks:
-          malformedKeys.length > 0 || (open.length > 0 && filing.length === 0)
+          malformedKeys.length > 0 ||
+          ((open.length > 0 || k1Open) && filing.length + k1Filing.length === 0)
             ? []
             : [
                 {
-                  rule: "fallback: a passive rental or royalty with deductions or a prior-year loss",
-                  value: filing.length > 0,
-                  triggeredByFactKeys: filing.map((property) => property.key),
+                  rule: "fallback: a passive rental, royalty or K-1 activity with deductions or a prior-year loss",
+                  value: filing.length + k1Filing.length > 0,
+                  triggeredByFactKeys: [...filing.map((property) => property.key), ...k1Filing],
                 },
               ],
       }),

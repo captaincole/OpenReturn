@@ -7,12 +7,15 @@
  * carries to next year, or why it cannot decide.
  *
  * The basis stage figures an S corporation shareholder's basis (Form 7203,
- * basis.ts). The other stages pass the items through when the facts show
- * their limit cannot apply, and otherwise report unsupported with one
- * sentence: Form 6198, Form 8582 and Form 461 have no rules for a K-1 yet.
+ * basis.ts) and a partner's (the Partner's Basis Worksheet, partnerBasis.ts).
+ * The passive stage (passive.ts) puts a passive partnership K-1 on Form 8582
+ * with the return's rentals. The other stages pass the items through when the
+ * facts show their limit cannot apply, and otherwise report unsupported with
+ * one sentence: Form 6198 and Form 461 have no rules for a K-1 yet.
  */
 
 import type { FilingStatus } from "../../values.js";
+import type { PassiveRentals } from "../8582/rentalRows.js";
 import {
   basisItems,
   figureBasis,
@@ -26,24 +29,35 @@ import {
   noLossCanBeLimited,
   type OtherBusinessLosses,
 } from "./excessBusinessLoss.js";
+import type { OtherPassiveActivities } from "./form8582Rows.js";
+import { hasCarriedBasisLoss, type PassThroughEntity, type PassThroughItem } from "./items.js";
+import { isLossOrDeduction, isPortfolio } from "./itemTypes.js";
 import {
-  describeItem,
-  entityTitle,
-  hasCarriedBasisLoss,
-  type PassThroughEntity,
-  type PassThroughItem,
-} from "./items.js";
-import { isLossOrDeduction, isPortfolio, RENTAL_TYPES, type ItemType } from "./itemTypes.js";
+  figurePartnerBasis,
+  isPartnerLossItem,
+  liabilitiesDecreased,
+  partnerBasisGaps,
+  partnerBasisItems,
+} from "./partnerBasis.js";
+import { passiveLimit } from "./passive.js";
+import { passAll, perEntity, unsupportedFor } from "./stageHelpers.js";
 
-/*
- * What a stage may read besides the items. The passive stage will need Form
- * 8582's allowed losses and the return's other passive activities; they are
- * added here, so no caller moves.
- */
+/* What a stage may read besides the items. */
 export interface LimitContext {
   filingStatus?: FilingStatus;
   /* Undefined when the caller does not know them: a K-1 business loss is then unsupported. */
   otherBusinessLosses?: OtherBusinessLosses;
+  /*
+   * Form 8582's rows for the return's Schedule E properties (8582/rentalRows.ts).
+   * Undefined when the caller does not know them: a passive K-1 loss is then unsupported.
+   */
+  passiveRentals?: PassiveRentals;
+  /*
+   * The K-1s that are or may be passive but that the engine cannot put on Form
+   * 8582 (form8582Rows.ts): a losing K-1 activity is then unsupported, or waits.
+   * Undefined: none known.
+   */
+  otherPassiveActivities?: OtherPassiveActivities;
 }
 
 /* A form's context: the one Schedule E's resolver figured, else the filing status alone. */
@@ -78,27 +92,6 @@ export type LimitStage = (
 ) => ReadonlyMap<string, StageOutcome>;
 
 export type LimitName = "basis" | "atRisk" | "passive" | "excessBusinessLoss";
-
-const passAll = (items: PassThroughItem[]): StageOutcome => ({
-  kind: "applied",
-  allowed: items,
-  carried: [],
-});
-
-/* The stage's reason, naming the items it would limit (none for a carried loss or an ended interest). */
-const unsupportedFor = (
-  entity: PassThroughEntity,
-  items: PassThroughItem[],
-  what: string,
-): StageOutcome => {
-  const named = items.length > 0 ? ` ${items.map(describeItem).join(", ")}:` : "";
-  return { kind: "unsupported", reason: `${entityTitle(entity)}:${named} ${what}` };
-};
-
-const perEntity =
-  (decide: (entry: EntityItems) => StageOutcome): LimitStage =>
-  (entities) =>
-    new Map(entities.map((entry) => [entry.entity.key, decide(entry)]));
 
 const lossesAndDeductions = (items: PassThroughItem[]) =>
   items.filter((item) => isLossOrDeduction(item.type, item.amount));
@@ -137,18 +130,58 @@ function sCorporationBasis(entity: PassThroughEntity, items: PassThroughItem[]):
   return fromFigures(items, outcome.figures);
 }
 
+/* A partner's basis limit (the Partner's Basis Worksheet, partnerBasis.ts). */
+function partnershipBasis(entity: PassThroughEntity, items: PassThroughItem[]): StageOutcome {
+  const outcome = figurePartnerBasis(entity);
+  if (outcome.kind !== "figured") return outcome;
+  const gaps = partnerBasisGaps(entity, outcome.figures);
+  if (gaps.length > 0) return { kind: "unsupported", reason: gaps.join(" ") };
+  return { kind: "applied", ...partnerBasisItems(items, outcome.figures.rows) };
+}
+
+/*
+ * A partnership interest that ended this year: a sale of the entire interest
+ * (the holding's disposedOfEntirely, irs-8582-inst-2025::sec::former-passive-activities::b02)
+ * goes through the worksheet like any year; a partial sale (item J) or a final
+ * K-1 the holding does not explain is not modeled.
+ */
+function partnershipEnded(entity: PassThroughEntity): string | undefined {
+  const k1 = entity.k1;
+  if (k1.form !== "1065") return undefined;
+  if (entity.holding?.disposedOfEntirely === true) return undefined;
+  if (k1.decreasedBySale === true || k1.decreasedByExchange === true) {
+    return "the interest decreased by a sale or exchange (item J): a partial sale needs the basis of the part sold and the gain on it, which are not modeled.";
+  }
+  return k1.finalK1 === true
+    ? "a final K-1 with no disposition of the entire interest recorded (a liquidation or the end of the partnership) needs the basis at that point, which is not modeled."
+    : undefined;
+}
+
 /*
  * Basis (irs-1120sk1-inst-2025::sec::basis-limitations::b01; the partnership's
- * irs-1065k1-inst-2025::sec::basis-limitations): losses and deductions are
+ * irs-1065k1-inst-2025::sec::basis-limitations::b01): losses and deductions are
  * limited to the owner's basis, and a distribution above basis is a gain
  * (irs-1120sk1-inst-2025::sec::box-16-items-affecting-shareholder-basis::b02).
  * With no loss, deduction, distribution or loan repayment, no loss carried
  * from an earlier year, and the interest still held, nothing is limited. An
- * S corporation shareholder's basis is Form 7203's (basis.ts); a partner's
- * worksheet is not modeled. A beneficiary has no basis limit on a K-1 (Form 1041).
+ * S corporation shareholder's basis is Form 7203's (basis.ts); a partner's is
+ * the worksheet's (partnerBasis.ts). A beneficiary has no basis limit on a K-1
+ * (Form 1041).
  */
 export const basisLimit: LimitStage = perEntity(({ entity, items }) => {
   if (entity.form === "1041") return passAll(items);
+  if (entity.form === "1065") {
+    const ended = partnershipEnded(entity);
+    if (ended) return unsupportedFor(entity, [], ended);
+    const limited = items.filter((item) => isPartnerLossItem(item) || item.type === "distribution");
+    const disposed = entity.holding?.disposedOfEntirely === true;
+    const nothingLimited =
+      limited.length === 0 && !hasCarriedBasisLoss(entity.holding) && !liabilitiesDecreased(entity);
+    if (nothingLimited && !disposed) {
+      return passAll(items);
+    }
+    return partnershipBasis(entity, items);
+  }
   if (soldSomeShares(entity)) {
     return unsupportedFor(
       entity,
@@ -165,12 +198,7 @@ export const basisLimit: LimitStage = perEntity(({ entity, items }) => {
   }
   const limited = basisItems(items);
   if (limited.length === 0 && !hasCarriedBasisLoss(entity.holding)) return passAll(items);
-  if (entity.form === "1120-S") return sCorporationBasis(entity, items);
-  return unsupportedFor(
-    entity,
-    limited,
-    "a loss, deduction, distribution, loan repayment or carried basis loss needs the partner's basis limit (the Partner's Basis Worksheet), which is not modeled.",
-  );
+  return sCorporationBasis(entity, items);
 });
 
 /*
@@ -196,66 +224,7 @@ export const atRiskLimit: LimitStage = perEntity(({ entity, items }) => {
   );
 });
 
-/* Guaranteed payments are generally not passive (irs-1065k1-inst-2025::sec::box-4a-guaranteed-payments-for-services::b01). */
-const NONPASSIVE_TYPES: ReadonlyArray<ItemType> = [
-  "guaranteed_payment_services",
-  "guaranteed_payment_capital",
-  "guaranteed_payments_total",
-];
-
-/* An item the passive rules sort: not portfolio, and an amount of income, loss or deduction. */
-function activityItem(item: PassThroughItem): boolean {
-  if (isPortfolio(item.type) || NONPASSIVE_TYPES.includes(item.type)) return false;
-  return isLossOrDeduction(item.type, item.amount) || (item.amount ?? 0) > 0;
-}
-
-/*
- * irs-1041k1-inst-2025::sec::box-5-other-portfolio-and-nonbusiness-income::b01:
- * rules for beneficiaries are not issued. A loss in boxes 6 to 8, or a passive
- * loss carried from an earlier year, is unsupported; income passes.
- */
-function passiveForTrust(entry: EntityItems): StageOutcome {
-  const losses = entry.items.filter(
-    (item) => activityItem(item) && isLossOrDeduction(item.type, item.amount),
-  );
-  const carried = (entry.entity.holding?.carriedLosses?.passive ?? 0) > 0;
-  return losses.length > 0 || carried
-    ? unsupportedFor(
-        entry.entity,
-        losses,
-        "a loss in boxes 6 to 8, or a passive loss carried from an earlier year, may be passive, and the passive rules for a beneficiary are not issued or modeled.",
-      )
-    : passAll(entry.items);
-}
-
-/*
- * Passive (irs-1120sk1-inst-2025::sec::passive-activity-limitations::b01 to
- * ::b09): portfolio items skip it. A trade or business in which the owner
- * materially participated is nonpassive (::b08), so its items pass. A passive
- * business, a rental activity, more than one activity, or a loss carried from
- * an earlier passive year needs Form 8582, which is not modeled for a K-1.
- */
-export const passiveLimit: LimitStage = perEntity((entry) => {
-  const { entity, items } = entry;
-  if (entity.form === "1041") return passiveForTrust(entry);
-  const sorted = items.filter(activityItem);
-  const carried = (entity.holding?.carriedLosses?.passive ?? 0) > 0;
-  if (sorted.length === 0 && !carried) return passAll(items);
-  if (entity.holding?.materiallyParticipated === undefined) {
-    return { kind: "waiting", factKeys: [entity.holdingKey] };
-  }
-  const rental = sorted.some((item) => RENTAL_TYPES.includes(item.type));
-  const passive = entity.holding.materiallyParticipated === false;
-  const severalActivities = entity.k1.form !== "1041" && entity.k1.moreThanOnePassiveActivity;
-  if (rental || passive || carried || severalActivities === true) {
-    return unsupportedFor(
-      entity,
-      sorted,
-      "a passive activity (a rental, a business without material participation, more than one activity, or a carried passive loss) needs Form 8582, which is not modeled for a K-1.",
-    );
-  }
-  return passAll(items);
-});
+export { passiveLimit };
 
 const positiveTotal = (items: PassThroughItem[]) =>
   items.reduce((total, item) => total + Math.abs(item.amount ?? 0), 0);

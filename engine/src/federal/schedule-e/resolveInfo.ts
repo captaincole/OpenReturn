@@ -5,6 +5,7 @@ import {
   resolveMustFile,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { form8582K1Activities } from "../passThrough/form8582Rows.js";
 import { passThroughEntitiesOnReturn } from "../passThrough/items.js";
 import type { LimitContext } from "../passThrough/limits.js";
 import { limitContextOf } from "../passThrough/receipts.js";
@@ -16,10 +17,9 @@ import {
   selfRentalState,
   spousePropertiesOnReturn,
 } from "../rentals/passive.js";
-import type { PropertyColumn, ScheduleEFilingInfo } from "./filingInfo.js";
+import { PROPERTY_COLUMNS, rentalColumnsOf } from "./columns.js";
+import type { ScheduleEFilingInfo } from "./filingInfo.js";
 import { netIncomeOrLoss, personalUseUnknown } from "./lines.js";
-
-const COLUMNS: PropertyColumn[] = ["a", "b", "c"];
 
 const MUST_FILE_KEY = "decisions.scope.must_file_schedule_e";
 
@@ -169,12 +169,13 @@ export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInf
   const context = limitContextOf(inputs);
   const k1Keys = k1sOnScheduleE(k1, context);
   const files = rentalFiles || k1Keys.length + k1.spouseKeys.length > 0;
-  const columns = properties.slice(0, COLUMNS.length);
+  const columns = properties.slice(0, PROPERTY_COLUMNS.length);
+  const rentalColumns = rentalColumnsOf(inputs);
   /*
    * MANUAL EDIT: a fourth property needs another Schedule E, which the engine does not
    * fill (irs-1040se-inst-2025::sec::income-or-loss-from-rental-real::b01): it stays open.
    */
-  const overflowKeys = properties.slice(COLUMNS.length).map((property) => property.key);
+  const overflowKeys = properties.slice(PROPERTY_COLUMNS.length).map((property) => property.key);
   return {
     mustFile: {
       "schedule-e": resolveMustFile(inputs.decisionByKey, {
@@ -209,19 +210,12 @@ export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInf
         ...(paymentsRequire1099 === true ? { [RENTAL_KEYS.filedRequired1099s]: filed1099s } : {}),
       }),
     },
-    rentalProperties:
-      properties.length > 0
-        ? columns.map((property, index) => ({
-            factKey: property.key,
-            column: COLUMNS[index],
-            value: property.value,
-            passive: isPassiveActivity(property.value, professional),
-          }))
-        : undefined,
-    rentalPropertiesOverflow: properties.length > COLUMNS.length,
+    rentalProperties: rentalColumns.properties,
+    rentalPropertiesOverflow: rentalColumns.overflow,
     partIInUse: rentalFiles || malformedKeys.length > 0,
     passThroughEntities: k1.entities.length > 0 ? k1.entities : undefined,
     passThroughLimitContext: k1.entities.length > 0 ? context : undefined,
+    passiveK1Activities: form8582K1Activities(k1.entities, context),
     rentalPaymentsRequire1099: paymentsRequire1099,
     rentalFiled1099s: filed1099s,
     realEstateProfessional: professional,

@@ -103,6 +103,12 @@ const answers: { [K in keyof K1HoldingFactValue]-?: z.ZodType<K1HoldingFactValue
     .boolean()
     .optional()
     .describe("The owner sold or gave up the entire interest this year, or the trust ended"),
+  gainOnDisposition: z
+    .number()
+    .optional()
+    .describe(
+      "The gain on the sale of the entire interest, signed: a loss is negative. Only when the owner sold the whole interest in a partnership this year",
+    ),
 };
 
 const definedOnly = <T extends object>(value: T): Partial<T> =>

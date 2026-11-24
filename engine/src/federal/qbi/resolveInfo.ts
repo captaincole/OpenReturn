@@ -130,7 +130,8 @@ function allowedStatementQbi(routed: RoutedEntity, statementQbi: number) {
       gap: `${entityTitle(routed.entity)}: the section 199A statement gives QBI of 0 or more while a limit holds back part of a business loss; scaling it is not modeled.`,
     };
   }
-  return { qbi: (statementQbi * allowed) / whole };
+  // A loss the limits hold back in full is no QBI at all (0, not a negative zero).
+  return { qbi: allowed === 0 ? 0 : (statementQbi * allowed) / whole };
 }
 
 /*
@@ -143,13 +144,28 @@ function allowedStatementQbi(routed: RoutedEntity, statementQbi: number) {
  */
 function priorYearQbiLossOf(routed: RoutedEntity): number | "waiting" | undefined {
   if (routed.kind !== "routed") return undefined;
-  const allowed = lossTotal(routed.allowed.filter((item) => item.fromPriorYear === true));
+  const allowed = lossTotal(
+    routed.allowed.filter((item) => item.fromPriorYear === true && item.passiveCarryover !== true),
+  );
   if (allowed === 0) return undefined;
   const qualified = routed.entity.holding?.carriedQualifiedBusinessLoss;
   if (qualified === undefined) return "waiting";
   const carried = lossTotal(routed.entity.priorYearItems);
   return (allowed * qualified) / carried;
 }
+
+/*
+ * A passive loss carried from an earlier year and allowed now is a QBI loss
+ * carryforward too (irs-8995-inst-2025::sec::line-3::b01), but the holding's
+ * qualified part (carriedQualifiedBusinessLoss) is the basis loss's, so its
+ * part on Form 8995 line 3 is not modeled.
+ */
+const carriedPassiveLossAllowed = (routed: RoutedEntity) =>
+  routed.kind === "routed" &&
+  routed.allowed.some((item) => item.passiveCarryover === true && isBusinessLoss(item));
+
+const CARRIED_PASSIVE_QBI_GAP = (title: string) =>
+  `${title}: a passive loss carried from an earlier year and allowed this year is a QBI loss carryforward (Form 8995 line 3), whose qualified part is not modeled.`;
 
 /* The K-1s whose allowed carried loss waits on the holding's qualified part. */
 export function k1sWithoutCarriedQbiAnswer(inputs: ResolverInputs): string[] {
@@ -181,6 +197,9 @@ function passThroughQbi(routed: RoutedEntity) {
   const scaled = allowedStatementQbi(routed, statement?.qualifiedBusinessIncome ?? 0);
   const priorYear = priorYearQbiLossOf(routed);
   const trustGap = routed.entity.form === "1041" ? TRUST_QBI_GAP(routed.entity.name) : undefined;
+  const passiveGap = carriedPassiveLossAllowed(routed)
+    ? CARRIED_PASSIVE_QBI_GAP(entityTitle(routed.entity))
+    : undefined;
   const limitGap = routed.kind === "unsupported" ? routed.reasons.join(" ") : undefined;
   const noQbiGap =
     statement?.qualifiedBusinessIncome === undefined
@@ -189,7 +208,7 @@ function passThroughQbi(routed: RoutedEntity) {
   return {
     statementQbi: priorYear === "waiting" ? undefined : scaled?.qbi,
     priorYearQbiLoss: typeof priorYear === "number" ? priorYear : undefined,
-    qbiGap: limitGap ?? noQbiGap ?? trustGap ?? scaled?.gap,
+    qbiGap: limitGap ?? noQbiGap ?? trustGap ?? passiveGap ?? scaled?.gap,
   };
 }
 

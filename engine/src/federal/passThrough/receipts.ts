@@ -9,10 +9,12 @@ import { businessesOnReturn, rentalsOnReturn } from "../../facts/index.js";
 import { roundDollars, sum } from "../../money.js";
 import { filingStatusOf, type ResolverInputs } from "../../resolverInputs.js";
 import { unsupported, type Unsupported } from "../../types.js";
+import { passiveRentalsOf } from "../8582/rentalRows.js";
 import { spousePropertiesOnReturn } from "../rentals/passive.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { netIncomeOrLoss } from "../schedule-e/lines.js";
 import type { OtherBusinessLosses } from "./excessBusinessLoss.js";
+import { otherPassiveActivitiesOf } from "./form8582Rows.js";
 import {
   passThroughEntitiesOnReturn,
   type PassThroughEntity,
@@ -138,9 +140,15 @@ export function otherBusinessLosses(inputs: ResolverInputs): OtherBusinessLosses
 
 /* What every loss limit reads besides the items, for a resolver. */
 export function limitContextOf(inputs: ResolverInputs): LimitContext {
-  return {
+  const context: LimitContext = {
     filingStatus: filingStatusOf(inputs),
     otherBusinessLosses: otherBusinessLosses(inputs),
+    passiveRentals: passiveRentalsOf(inputs),
+  };
+  // The basis and at-risk stages read none of the context, so the K-1s Form 8582 cannot take come first.
+  return {
+    ...context,
+    otherPassiveActivities: otherPassiveActivitiesOf(entitiesOnReturn(inputs), context),
   };
 }
 

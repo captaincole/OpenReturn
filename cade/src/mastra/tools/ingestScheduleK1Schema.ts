@@ -110,6 +110,10 @@ const partnership: PartShape<PartnershipK1FactValue> = {
     .boolean()
     .optional()
     .describe("Item J: checked, decrease due to exchange of partnership interest"),
+  liabilitiesAtStart: z
+    .object(liabilities)
+    .optional()
+    .describe("Item K1: the partner's share of liabilities, the Beginning column"),
   liabilitiesAtEnd: z
     .object(liabilities)
     .optional()

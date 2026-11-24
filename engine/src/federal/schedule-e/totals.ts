@@ -7,6 +7,7 @@ import type { FormAccessor } from "../../defineForm.js";
 import { numberOrBlank, sum, sumOrBlank } from "../../money.js";
 import { activityLoss, passiveActivities } from "../8582/activities.js";
 import { allowedLossForColumn } from "../8582/allocation.js";
+import { magiWithK1Gap } from "../8582/magiGap.js";
 import { isRentalActivity } from "../rentals/passive.js";
 import type { PropertyColumn, RentalProperty, ScheduleEFilingInfo } from "./filingInfo.js";
 import type { PartIBindings } from "./lines.js";
@@ -63,6 +64,7 @@ function allowedPassiveLoss(form: Form, info: Info, property: RentalProperty): A
   const activities = passiveActivities(info, (entry) => line21(form, entry));
   if (!activities) return undefined;
   if ((activityLoss(activities, column) ?? 0) === 0) return null;
+  if (rentalMagiGap(form, info)) return undefined;
   const allowed = allowedLossForColumn((fieldId) => form[fieldId], info, column);
   return allowed ?? undefined;
 }
@@ -148,6 +150,23 @@ function professionalReconciliation(form: Form, info: Info): number | undefined 
 
 const orBlank = (amount: Amount) => (amount === null ? undefined : amount);
 
+/* Form 8582 line 6's gap with a K-1 (8582/magiGap.ts), which its allowed losses read. */
+function rentalMagiGap(form: Form, info: Info) {
+  return magiWithK1Gap((fieldId) => form[fieldId], info);
+}
+
+/* The gap for a column whose loss Form 8582 allows: a passive activity with a loss on it. */
+function columnMagiGap(form: Form, info: Info, column: PropertyColumn) {
+  const property = info.rentalProperties?.find((entry) => entry.column === column);
+  if (!property?.passive || without8582(info)) return undefined;
+  const activities = passiveActivities(info, (entry) => line21(form, entry));
+  if (!activities || (activityLoss(activities, column) ?? 0) === 0) return undefined;
+  return rentalMagiGap(form, info);
+}
+
+const anyColumnMagiGap = (form: Form, info: Info) =>
+  COLUMNS.map((column) => columnMagiGap(form, info, column)).find((gap) => gap !== undefined);
+
 export function totalBindings(): PartIBindings {
   const out: Record<string, Fn> = {
     "0.line.23a_total_rents": columnTotal("3_rents_received"),
@@ -156,9 +175,11 @@ export function totalBindings(): PartIBindings {
     "0.line.23d_total_depreciation": columnTotal("18_depreciation_or_depletion"),
     "0.line.23e_total_expenses": columnTotal("20_total_expenses"),
     "0.line.24_income": (form, info) => orBlank(income(form, info)),
-    "0.line.25_losses": (form, info) => orBlank(losses(form, info)),
+    "0.line.25_losses": (form, info) => anyColumnMagiGap(form, info) ?? orBlank(losses(form, info)),
     // Line 24 less the parenthesized line 25; signed, 0 when both are blank.
     "0.line.26_total_income_or_loss": (form, info) => {
+      const gap = anyColumnMagiGap(form, info);
+      if (gap) return gap;
       const [line24, line25] = [income(form, info), losses(form, info)];
       if (line24 === undefined || line25 === undefined) return undefined;
       return sum(line24) - sum(line25);
@@ -167,8 +188,12 @@ export function totalBindings(): PartIBindings {
     "1.line.43_real_estate_professional_reconciliation": professionalReconciliation,
   };
   for (const column of COLUMNS) {
-    out[`0.line.22_deductible_loss_${column}`] = (form, info) =>
-      orBlank(deductibleLoss(form, info, column));
+    // A royalty has no line 22 (deductibleLoss); its allowed loss reaches line 25 only.
+    out[`0.line.22_deductible_loss_${column}`] = (form, info) => {
+      const property = info.rentalProperties?.find((entry) => entry.column === column);
+      const gap = property && !isRoyalty(property) ? columnMagiGap(form, info, column) : undefined;
+      return gap ?? orBlank(deductibleLoss(form, info, column));
+    };
   }
   return out as PartIBindings;
 }
