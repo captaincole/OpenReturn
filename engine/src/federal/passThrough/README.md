@@ -52,6 +52,7 @@ layers, and each layer reads only the one before it.
 | 1120-S | box 12 charitable contributions, allowed | `schedule_a_line_11` | Schedule A line 11 for code A (cash, 60%); any other code is unsupported there |
 | 1120-S | box 16 code A tax-exempt interest | `form_1040_line_2a` | Form 1040 line 2a |
 | 1120-S | box 16 codes B, C, D | `form_7203` | the basis computation only (Form 7203 lines 3k, 8a, 6) |
+| 1120-S | box 16 code F foreign taxes | `schedule_3_line_1` | unsupported there: the credit comes from Schedule K-3, which the engine does not read; Form 7203 line 46 still takes it |
 | 1120-S | box 17 code V statement | `qbi` | one more business on Form 8995 or 8995-A (`qbi/`), its QBI scaled to the allowed loss |
 | 1120-S, 1065 | box 17 code AC, box 20 code AG: gross receipts for section 448(c) | `no_line` | none: it informs Form 8990 only |
 | 1041 | box 1 interest | `interest_list` | a Schedule B line 1 payer row (the trust's name); Form 1040 line 2b |
@@ -61,7 +62,7 @@ layers, and each layer reads only the one before it.
 | 1041 | box 4b, box 4c | `schedule_d_line_18`, `schedule_d_line_19` | unsupported there: the two worksheets are not modeled |
 | 1041 | boxes 5 to 8 income | `schedule_e_part_iii` | Schedule E line 33 column (f) for box 5, (d) for boxes 6 to 8 (`schedule-e/partIII.ts`) |
 | 1041 | box 14 code I statement | `qbi` | its section 199A dividends on Form 8995 line 6 or 8995-A line 28; QBI from a trust's business is a gap there |
-| 1041 | box 14 code B foreign taxes | `schedule_3_line_1` | unsupported there: Form 1116 is not modeled |
+| 1041 | box 14 code B foreign taxes | `schedule_3_line_1` | one Form 1116 source, passive category (`1116/sources.ts`): the election on Schedule 3 line 1, or Form 1116 with the trustee's statement (the K-1 fact's `foreignIncome`) |
 | 1041 | box 14 code H | `form_8960_line_7` | unsupported on Form 8960 lines 7 and 13 when not 0 |
 
 A route whose destination the engine does not fill is still a route: the
@@ -128,10 +129,25 @@ routed nor reported (`tests/unit/federal/passThrough/boxTables.test.ts`).
   the threshold (Form 461's limit), and a carried loss on Form 8995-A. Each is
   unsupported with a reason.
 
+## What the fourth step handles
+
+- A trust K-1's foreign taxes (box 14 code B) as one more Form 1116 source:
+  the election to claim the credit with no Form 1116 when the return's
+  foreign taxes are at most $300 ($600 joint), else Form 1116 from the
+  trustee's statement of the foreign-source income (scenario `thom`). Without
+  the statement Form 1116 waits on the K-1 fact.
+- An S corporation's box 16 code F has a route: Schedule 3 line 1 is the gap
+  (the credit needs Schedule K-3), and the rest of the K-1 computes.
+- Form 8960 files for a K-1's passive activity income too: a trust's boxes 6
+  to 8 reach line 4a through Schedule E line 41 and Schedule 1 line 5.
+- Form 8960 line 4b takes a materially participating owner's Part II income
+  or loss (columns (i) and (k)) back out of line 4a: it is not net investment
+  income (`8960/lines.ts nonpassiveK1Adjustments`, QUESTIONS.md item 30).
+
 ## What the next steps add
 
-- **The foreign tax credit** (Form 1116), for a trust's box 14 code B, and
-  the 28% rate gain and unrecaptured section 1250 gain worksheets.
+- **Schedule K-3** for an S corporation's or a partnership's foreign taxes,
+  and the 28% rate gain and unrecaptured section 1250 gain worksheets.
 - **A partnership K-1's losses** (step 4). The partner's basis has no IRS form:
   it is the Worksheet for Adjusting the Basis of a Partner's Interest in the
   Partner's Instructions (irs-1065k1-inst-2025::sec::basis-limitations). It

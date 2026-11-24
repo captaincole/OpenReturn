@@ -1,9 +1,9 @@
 /*
  * The foreign tax sources: one entry for each payer that reports foreign tax or
  * foreign-source income. Form 1116 and the election to claim the credit without
- * it read only this list. Today it holds Form 1099-DIV box 7, Form 1099-INT
- * box 6 and the stated foreign taxes; a Schedule K-1 (K-3) route adds its own
- * entries to the same list.
+ * it read only this list. It holds Form 1099-DIV box 7, Form 1099-INT box 6,
+ * the stated foreign taxes, and the foreign taxes a trust K-1 reports (read
+ * through the K-1 routes by item type, passThrough/routing.ts).
  */
 
 import {
@@ -16,6 +16,9 @@ import {
   type ForeignIncomeKind,
 } from "../../facts/index.js";
 import type { TaxFactRow } from "../../facts/rows.js";
+import { sum } from "../../money.js";
+import { entityTitle, type PassThroughEntity } from "../passThrough/items.js";
+import { receivedAmounts, type Receipt } from "../passThrough/receipts.js";
 
 export type { ForeignIncomeCategory, ForeignIncomeKind };
 
@@ -141,7 +144,85 @@ function parsedRows<T>(facts: ReadonlyArray<FactRow>, parse: (row: TaxFactRow) =
     .filter((parsed): parsed is T => parsed !== null);
 }
 
-/* Every source on the return, in fact order: 1099-DIV, then 1099-INT, then the stated taxes. */
-export function foreignTaxSources(facts: ReadonlyArray<FactRow>): ForeignTaxSource[] {
-  return [...dividendSources(facts), ...interestSources(facts), ...statedSources(facts)];
+/*
+ * A K-1 whose foreign taxes Form 1116 cannot read from the K-1: an S
+ * corporation's box 16 code F is not for Form 1116; the credit comes from
+ * Schedule K-3 (irs-1120sk1-inst-2025::sec::box-16-items-affecting-shareholder-basis::b02,
+ * irs-pub-514-2025::sec::you-must-have-paid-or-accrued-the::b02), which the
+ * engine does not read.
+ */
+const SCHEDULE_K3_GAP = (title: string) =>
+  `${title}: the foreign tax credit for these taxes comes from Schedule K-3, not the K-1, and the engine does not read Schedule K-3.`;
+
+/*
+ * A trust K-1 (Form 1041) is a qualified payee statement
+ * (irs-1116-inst-2025::sec::publications-see-pub-514-foreign-tax-credit-for::b02):
+ * the beneficiary's share of the trust's foreign taxes
+ * (irs-pub-514-2025::sec::you-must-have-paid-or-accrued-the::b03). A trust's
+ * interest and dividends are passive category income
+ * (irs-pub-514-2025::sec::passive-category-income::b01). The trustee's statement
+ * (the K-1 fact's foreignIncome) gives the income; without it Form 1116 waits
+ * on the K-1 fact, and Part II prints the tax under dividends until then.
+ */
+function trustSource(entity: PassThroughEntity, foreignTaxPaid: number): ForeignTaxSource {
+  const statement = entity.k1.form === "1041" ? entity.k1.foreignIncome : undefined;
+  return {
+    factKey: entity.key,
+    payer: entity.name,
+    country: statement?.country,
+    category: "passive",
+    incomeKind: statement?.incomeKind ?? "dividends",
+    grossIncome: statement?.grossIncome,
+    qualifiedDividends: statement?.qualifiedDividends,
+    foreignTaxPaid,
+    onPayeeStatement: true,
+    grossIncomeKey: statement ? undefined : entity.key,
+  };
+}
+
+/*
+ * What the K-1s add to the list (the schedule_3_line_1 route): one source for
+ * each trust K-1 with foreign taxes; gap names a K-1 whose taxes the engine
+ * cannot read (a limit stopped it, or it is not a trust's); waiting is true
+ * while a K-1 waits on an answer, so its taxes are not known yet.
+ */
+export interface K1ForeignTax {
+  sources: ForeignTaxSource[];
+  gap?: string;
+  waiting: boolean;
+}
+
+export function k1ForeignTax(receipt: Receipt): K1ForeignTax {
+  if (receipt.kind === "unsupported") return { sources: [], gap: receipt.reason, waiting: false };
+  if (receipt.kind === "waiting") return { sources: [], waiting: true };
+  const byEntity = new Map<string, { entity: PassThroughEntity; taxes: number[] }>();
+  for (const { entity, item } of receivedAmounts(receipt)) {
+    const entry = byEntity.get(entity.key) ?? { entity, taxes: [] };
+    entry.taxes.push(item.amount ?? 0);
+    byEntity.set(entity.key, entry);
+  }
+  const entries = [...byEntity.values()];
+  const gaps = entries
+    .filter(({ entity }) => entity.form !== "1041")
+    .map(({ entity }) => SCHEDULE_K3_GAP(entityTitle(entity)));
+  const sources = entries
+    .filter(({ entity }) => entity.form === "1041")
+    .map(({ entity, taxes }) => trustSource(entity, sum(...taxes)));
+  return { sources, gap: gaps.length > 0 ? gaps.join(" ") : undefined, waiting: false };
+}
+
+/*
+ * Every source on the return, in fact order: 1099-DIV, then 1099-INT, then the
+ * stated taxes, then the K-1s.
+ */
+export function foreignTaxSources(
+  facts: ReadonlyArray<FactRow>,
+  k1: K1ForeignTax = { sources: [], waiting: false },
+): ForeignTaxSource[] {
+  return [
+    ...dividendSources(facts),
+    ...interestSources(facts),
+    ...statedSources(facts),
+    ...k1.sources,
+  ];
 }

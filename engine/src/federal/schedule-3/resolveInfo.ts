@@ -7,7 +7,7 @@ import { resolve8839Info } from "../8839/resolveInfo.js";
 import { resolve8863Info } from "../8863/resolveInfo.js";
 import { resolve8880Info } from "../8880/resolveInfo.js";
 import { cleanVehicleBusinessCredit, cleanVehicleSchedules } from "../8936/resolveInfo.js";
-import { k1KeysWithRoute, receivedOnReturn } from "../passThrough/receipts.js";
+import { k1KeysWithRoute } from "../passThrough/receipts.js";
 import { resolveScheduleRInfo } from "../schedule-r/resolveInfo.js";
 import type { Schedule3FilingInfo } from "./filingInfo.js";
 
@@ -55,8 +55,5 @@ export function resolveSchedule3Info(inputs: ResolverInputs): Schedule3FilingInf
       },
     ],
   });
-  return {
-    mustFile: { "schedule-3": resolution },
-    passThroughForeignTax: receivedOnReturn(inputs, "schedule_3_line_1"),
-  };
+  return { mustFile: { "schedule-3": resolution } };
 }

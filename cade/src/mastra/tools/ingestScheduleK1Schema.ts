@@ -1,5 +1,6 @@
 import type {
   K1FactValue,
+  K1ForeignIncomeStatement,
   PartnerCapitalAccount,
   PartnerLiabilities,
   PartnershipK1FactValue,
@@ -135,6 +136,25 @@ const partnership: PartShape<PartnershipK1FactValue> = {
     .describe("Box 23: more than one activity for passive activity purposes"),
 };
 
+/* The statement a trustee attaches for the foreign taxes in box 14 code B. */
+const foreignIncome: {
+  [K in keyof K1ForeignIncomeStatement]-?: z.ZodType<K1ForeignIncomeStatement[K]>;
+} = {
+  grossIncome: amount.describe(
+    "Gross income from foreign sources, its qualified dividends included",
+  ),
+  qualifiedDividends: amount
+    .optional()
+    .describe("The part of the foreign gross income that is qualified dividends"),
+  country: z
+    .string()
+    .optional()
+    .describe("The country the statement names, or RIC when the income came through a mutual fund"),
+  incomeKind: z
+    .enum(["dividends", "interest"])
+    .describe("The kind of income the foreign tax was withheld on"),
+};
+
 const trust: PartShape<TrustK1FactValue> = {
   finalYearOfEntity: z
     .boolean()
@@ -144,6 +164,12 @@ const trust: PartShape<TrustK1FactValue> = {
     .boolean()
     .optional()
     .describe("True when the entity is an estate, false when it is a trust"),
+  foreignIncome: z
+    .object(foreignIncome)
+    .optional()
+    .describe(
+      "The trustee's statement behind the foreign taxes in box 14 code B. Leave it out when the K-1 has no such statement",
+    ),
 };
 
 export const ingestScheduleK1Input = z.object({

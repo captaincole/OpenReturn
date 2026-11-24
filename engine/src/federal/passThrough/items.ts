@@ -16,7 +16,7 @@ import {
 } from "../../facts/index.js";
 import { sum } from "../../money.js";
 import { rowFor, type BoxTable, type StatementBox } from "./boxTable.js";
-import { isPortfolio, labelOf, roleOf, type ItemType } from "./itemTypes.js";
+import { isPortfolio, labelOf, RENTAL_TYPES, roleOf, type ItemType } from "./itemTypes.js";
 import { PARTNERSHIP_BOXES, PARTNERSHIP_STATEMENT_BOX } from "./partnershipBoxes.js";
 import { S_CORPORATION_BOXES, S_CORPORATION_STATEMENT_BOX } from "./sCorporationBoxes.js";
 import { TRUST_BOXES, TRUST_STATEMENT_BOX } from "./trustBoxes.js";
@@ -271,16 +271,40 @@ export function passThroughIncomeUpperBound(facts: ReadonlyArray<FactRow>): numb
 }
 
 /*
+ * Income from a passive activity: every rental, and a trade or business the
+ * owner does not materially participate in (irs-8960-inst-2025::sec::passive-activity::b01).
+ * A trust's business and rental income goes in Schedule E Part III column (d),
+ * passive income (QUESTIONS.md item 16), so a trust K-1's is passive too.
+ */
+function isPassiveActivityIncome(
+  form: K1Form,
+  holding: K1HoldingFactValue | undefined,
+  item: PassThroughItem,
+): boolean {
+  if (RENTAL_TYPES.includes(item.type)) return true;
+  if (item.type !== "ordinary_business_income") return false;
+  return form === "1041" || holding?.materiallyParticipated === false;
+}
+
+/*
  * A K-1 brings investment income for Form 8960's Who Must File: a portfolio
- * item (interest, dividends, gains, other portfolio income) or a beneficiary's
- * net investment income adjustment (irs-1041k1-inst-2025::sec::box-14-other-information::b03).
+ * item (interest, dividends, gains, other portfolio income), income from a
+ * passive activity, or a beneficiary's net investment income adjustment
+ * (irs-1041k1-inst-2025::sec::box-14-other-information::b03). Every K-1
+ * counts, whoever's.
  */
 export function passThroughHasInvestmentIncome(facts: ReadonlyArray<FactRow>): boolean {
-  return allItems(facts).some(
-    (item) =>
-      (isPortfolio(item.type) && (item.amount ?? 0) !== 0) ||
-      (item.type === "net_investment_income" && (item.amount ?? 0) !== 0),
-  );
+  const { holdings } = readK1HoldingFacts(facts);
+  return readK1Facts(facts).k1s.some(({ key, value }) => {
+    const holding = holdings.get(makeK1HoldingFactKey(k1EntityIdOf(key) ?? key));
+    return itemsOf(key, value).some(
+      (item) =>
+        (item.amount ?? 0) !== 0 &&
+        (isPortfolio(item.type) ||
+          item.type === "net_investment_income" ||
+          isPassiveActivityIncome(value.form, holding, item)),
+    );
+  });
 }
 
 /*

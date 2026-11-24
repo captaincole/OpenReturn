@@ -1,9 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { evaluateScenario, pendingInputs } from "../../src";
 import {
+  PRIOR_YEAR_KEYS,
+  isInterestFactKey,
   isK1FactKey,
   isK1HoldingFactKey,
   isW2FactKey,
+  type K1HoldingFactValue,
   type SCorporationK1FactValue,
   type TrustK1FactValue,
   type W2FactValue,
@@ -131,6 +134,29 @@ describe("a K-1 item with no route makes the return visibly incomplete", () => {
   });
 });
 
+describe("an S corporation's foreign taxes need Schedule K-3 (lan)", () => {
+  // Foreign taxes reduce basis (Form 7203 line 46), so the holding gives the stock basis.
+  const facts = editK1(lanScenario.facts, (k1) => ({
+    ...k1,
+    boxes: [...k1.boxes, { box: "16", code: "F", amount: 120 }],
+  })).map((fact) =>
+    isK1HoldingFactKey(fact.key)
+      ? { ...fact, value: { ...(fact.value as K1HoldingFactValue), stockBasisAtStart: 20000 } }
+      : fact,
+  );
+  const withTax = run(lanScenario, facts);
+
+  it("names the S corporation on Schedule 3 line 1, and Schedule E still computes", () => {
+    expect(withTax.files("schedule-3")).toBe(true);
+    const line1 = withTax.field("schedule-3.0.line.1");
+    expect(line1?.ok === false && line1.unsupported).toBe(true);
+    expect(line1?.ok === false && line1.reason).toContain(
+      "Malkier Fencing Academy, Inc. (S corporation K-1): the foreign tax credit for these taxes comes from Schedule K-3",
+    );
+    expect(withTax.value("schedule-e.1.line.41_total_income_or_loss")).toBe(15000);
+  });
+});
+
 describe("the section 199A statement makes the K-1 a QBI business (min)", () => {
   const withStatement = run(minScenario, minScenario.facts);
 
@@ -139,6 +165,22 @@ describe("the section 199A statement makes the K-1 a QBI business (min)", () => 
     expect(withStatement.value("form-8995.0.line.1i_b")).toBe("00-0001121");
     expect(withStatement.value("form-8995.0.line.1i_c")).toBe(3200);
     expect(withStatement.value("form-1040.line.13a")).toBe(640);
+  });
+
+  it("names a statement with W-2 wages and UBIA but no QBI amount on the QBI line", () => {
+    const facts = editK1(minScenario.facts, (k1) => ({
+      ...k1,
+      section199A: { ...k1.section199A, qualifiedBusinessIncome: undefined },
+    }));
+    const noQbi = run(minScenario, facts);
+    expect(noQbi.files("form-8995")).toBe(true);
+    expect(noQbi.value("form-8995.0.line.1i_a")).toBe("Baerlon Bindery, Inc.");
+    const line1c = noQbi.field("form-8995.0.line.1i_c");
+    expect(line1c?.ok === false && line1c.unsupported).toBe(true);
+    expect(line1c?.ok === false && line1c.reason).toContain(
+      "gives W-2 wages or UBIA of qualified property but no QBI amount",
+    );
+    expect(noQbi.value("form-1040.line.13a")).toBeUndefined();
   });
 
   it("adds nothing to the deduction without a statement", () => {
@@ -164,6 +206,15 @@ const editTrust = (
 
 const withBoxes = (...boxes: TrustK1FactValue["boxes"]) =>
   editTrust(matScenario.facts, (k1) => ({ ...k1, boxes: [...k1.boxes, ...boxes] }));
+
+/* A prior-year answer on the mat return. */
+const priorYear = (key: string, value: unknown): TaxFactRow => ({
+  ...matScenario.facts[0],
+  id: `f-${key}`,
+  category: "other",
+  key,
+  value,
+});
 
 /* Each mat W-2's box 1, raised by the same amount. */
 const raiseWages = (facts: TaxFactRow[], raise: number): TaxFactRow[] =>
@@ -193,16 +244,48 @@ describe("a trust K-1's items join the beneficiary's own lines (mat)", () => {
     });
   });
 
-  it("names the trust on Schedule 3 line 1 for foreign taxes, and the income lines still compute", () => {
+  it("claims a trust's small foreign tax on Schedule 3 line 1 with no Form 1116 (the election)", () => {
     const foreign = run(matScenario, withBoxes({ box: "14", code: "B", amount: 60 }));
     expect(foreign.files("schedule-3")).toBe(true);
-    const line1 = foreign.field("schedule-3.0.line.1");
-    expect(line1?.ok === false && line1.unsupported).toBe(true);
-    expect(line1?.ok === false && line1.reason).toContain(
-      "Shandalle Family Trust (estate or trust K-1): foreign taxes paid or accrued (box 14 code B)",
+    expect(foreign.files("form-1116")).toBe(false);
+    expect(foreign.value("schedule-3.0.line.1")).toBe(60);
+    expect(foreign.value("schedule-3.0.line.8")).toBe(60);
+    expect(foreign.value("form-1040.line.20")).toBe(60);
+    expect(foreign.value("form-1040.line.22")).toBe(
+      (mat.value("form-1040.line.22") as number) - 60,
     );
     expect(foreign.value("form-1040.line.11a")).toBe(mat.value("form-1040.line.11a"));
-    expect(foreign.value("form-1040.line.15")).toBe(mat.value("form-1040.line.15"));
+    expect(pendingInputs(foreign.result).pendingFacts).toEqual([]);
+  });
+
+  it("files Form 1116 above the election's limit, and waits on the K-1 for the trustee's statement", () => {
+    const facts = [
+      ...withBoxes({ box: "14", code: "B", amount: 900 }),
+      priorYear(PRIOR_YEAR_KEYS.foreignTaxCarryoverPassive, 0),
+      priorYear(PRIOR_YEAR_KEYS.foreignLossAccounts, false),
+    ];
+    const waiting = run(matScenario, facts);
+    expect(waiting.files("form-1116")).toBe(true);
+    expect(waiting.value("schedule-3.0.line.1")).toBeUndefined();
+    expect(pendingInputs(waiting.result).pendingFacts).toContain("k1.trust.shandalle-family-trust");
+    const stated = run(
+      matScenario,
+      editTrust(facts, (k1) => ({
+        ...k1,
+        foreignIncome: {
+          grossIncome: 3000,
+          qualifiedDividends: 2400,
+          country: "Canada",
+          incomeKind: "dividends",
+        },
+      })),
+    );
+    expect(stated.value("form-1116.0.line.i_foreign_country_name_col_a")).toBe("Canada");
+    expect(stated.value("form-1116.0.line.row_a_usd_withheld_dividends_col_q")).toBe(900);
+    expect(stated.value("form-1116.0.line.3d_gross_foreign_source_income_col_a")).toBe(3000);
+    expect(stated.value("form-1116.0.line.8_total_foreign_taxes_paid")).toBe(900);
+    expect(typeof stated.value("schedule-3.0.line.1")).toBe("number");
+    expect(pendingInputs(stated.result).pendingFacts).toEqual([]);
   });
 
   it("puts box 5 income on Schedule E Part III, column (f), and adds it to AGI", () => {
@@ -227,6 +310,28 @@ describe("a trust K-1's items join the beneficiary's own lines (mat)", () => {
     const line41 = loss.field("schedule-e.1.line.41_total_income_or_loss");
     expect(line41?.ok === false && line41.reason).toContain("a loss on Schedule E Part III");
     expect(loss.value("form-1040.line.11a")).toBeUndefined();
+  });
+
+  it("never adds a box 5 loss to a Part III income column: every amount there is the gap", () => {
+    const loss = run(matScenario, withBoxes({ box: "5", amount: -700 }, { box: "6", amount: 900 }));
+    const fields = [
+      "schedule-e.1.line.33_row_a_col_d_passive_income",
+      "schedule-e.1.line.33_row_a_col_e_nonpassive_deduction_loss",
+      "schedule-e.1.line.33_row_a_col_f_other_income",
+      "schedule-e.1.line.34a_totals_col_d",
+      "schedule-e.1.line.34a_totals_col_f",
+      "schedule-e.1.line.35_add_income_columns",
+      "schedule-e.1.line.37_total_estate_trust_income",
+    ];
+    for (const fieldId of fields) {
+      const field = loss.field(fieldId);
+      expect(field?.ok === false && field.unsupported, fieldId).toBe(true);
+      expect(field?.ok === false && field.reason, fieldId).toContain(
+        "other portfolio income (loss) (box 5): a loss on Schedule E Part III is not modeled",
+      );
+    }
+    expect(loss.value("schedule-e.1.line.33_row_a_col_a_name")).toBe("Shandalle Family Trust");
+    expect(loss.value("schedule-1.0.line.5")).toBeUndefined();
   });
 
   it("puts a net short-term gain on Schedule D line 5", () => {
@@ -269,6 +374,27 @@ describe("a trust K-1's items join the beneficiary's own lines (mat)", () => {
     // Line 16 is the smaller of the net investment income and MAGI over $250,000.
     expect(high.value("form-8960.0.line.12")).toBe(11270);
     expect(high.value("form-8960.0.line.17")).toBe(428);
+  });
+
+  it("files Form 8960 for a trust's rental income alone, and puts it on line 4a", () => {
+    // No 1099-INT and only box 7: the trust's rental income is the only investment income.
+    const facts = raiseWages(
+      editTrust(
+        matScenario.facts.filter((fact) => !isInterestFactKey(fact.key)),
+        (k1) => ({ ...k1, boxes: [{ box: "7", amount: 6000 }], section199A: undefined }),
+      ),
+      40000,
+    );
+    const rental = run(matScenario, facts);
+    expect(rental.value("schedule-e.1.line.33_row_a_col_d_passive_income")).toBe(6000);
+    expect(rental.value("form-1040.line.11a")).toBe(296000);
+    expect(rental.files("form-8960")).toBe(true);
+    expect(rental.value("form-8960.0.line.4a")).toBe(6000);
+    expect(rental.value("form-8960.0.line.4c")).toBe(6000);
+    expect(rental.value("form-8960.0.line.12")).toBe(6000);
+    expect(rental.value("form-8960.0.line.16")).toBe(6000);
+    expect(rental.value("form-8960.0.line.17")).toBe(228);
+    expect(rental.value("schedule-2.0.line.12_net_investment_income_tax")).toBe(228);
   });
 
   it("makes Form 8960 lines 7 and 13 unsupported for a box 14 code H adjustment", () => {

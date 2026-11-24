@@ -1,6 +1,6 @@
 import { defineForm } from "../../defineForm.js";
 import { numberOrBlank, sum } from "../../money.js";
-import { unsupported, type Unsupported } from "../../types.js";
+import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { foreignTaxCredit } from "../1116/credit.js";
 import { mortgageCreditGap } from "../8396/creditGap.js";
@@ -8,27 +8,12 @@ import { line6cFrom8839 } from "../8839/receivers.js";
 import { LINE_19_ID, nonrefundableCreditGap } from "../8863/credit.js";
 import { creditGap, LINE_12_ID } from "../8880/credit.js";
 import { personalCredit } from "../8936/credit.js";
-import { describeItem, entityTitle } from "../passThrough/items.js";
-import { receivedAmounts, type Receipt } from "../passThrough/receipts.js";
 import type { Schedule3FilingInfo } from "./filingInfo.js";
 import type { Schedule3 } from "./types.js";
 
 const NO_SCENARIO = "No scenario uses this credit or payment yet.";
 const FORM_3800_GAP =
   "Form 3800 files, and line 6a takes its general business credit; Form 3800 has no rules in the engine.";
-
-/* Line 1's gap when a K-1 reports foreign taxes: each K-1 by name, or the reason it had. */
-function k1ForeignTaxGap(receipt: Receipt | undefined): Unsupported | undefined {
-  if (receipt?.kind === "unsupported") return unsupported(receipt.reason);
-  const named = receivedAmounts(receipt).map(
-    ({ entity, item }) => `${entityTitle(entity)}: ${describeItem(item)}`,
-  );
-  return named.length > 0
-    ? unsupported(
-        `${named.join("; ")} needs the foreign tax credit, and Form 1116 does not read a Schedule K-1 yet.`,
-      )
-    : undefined;
-}
 
 export function register(): void {
   defineForm<Schedule3, Schedule3FilingInfo>("schedule-3", {
@@ -42,11 +27,11 @@ export function register(): void {
        * MANUAL EDIT: the foreign tax credit: Form 1116 line 35, or with the election
        * the smaller of the foreign tax and the regular tax
        * (irs-1116-inst-2025::sec::publications-see-pub-514-foreign-tax-credit-for::b03).
-       * Blank with no foreign tax; a Form 1116 gap stays a gap here. A K-1's foreign
-       * taxes are not in Form 1116's sources yet, so they are a gap, named here.
+       * Blank with no foreign tax; a Form 1116 gap stays a gap here. A trust K-1's
+       * foreign taxes are one of Form 1116's sources; an S corporation's need
+       * Schedule K-3, a gap (1116/sources.ts).
        */
-      "0.line.1": (form, info) =>
-        k1ForeignTaxGap(info.passThroughForeignTax) ?? foreignTaxCredit(form, info),
+      "0.line.1": (form, info) => foreignTaxCredit(form, info),
       // MANUAL EDIT: Form 2441 line 11 ("Also enter ... on Schedule 3 (Form 1040), line 2").
       "0.line.2": (form) => numberOrBlank(form["form-2441.0.line.11_dependent_care_credit"]),
       // MANUAL EDIT: Schedule R line 22 ("Also enter this amount on Schedule 3 (Form 1040), line 6d").

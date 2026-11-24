@@ -21,6 +21,10 @@ export interface ForeignTaxInfo {
   claimAccrued: boolean;
   /* Why the engine cannot figure any Form 1116 (a category it does not do, no source). */
   formGap?: string;
+  /* Why a K-1's foreign taxes cannot be read (sources.ts k1ForeignTax): Schedule 3 line 1 and Form 1116 are gaps. */
+  k1Gap?: string;
+  /* A K-1 with foreign taxes waits on an answer: Schedule 3 line 1 and Form 1116 wait too. */
+  k1Waiting?: boolean;
   /* Why line 12 cannot be figured (excluded foreign income, Form 2555 or 4563). */
   line12Gap?: string;
   /* Why line 16 cannot be figured (a loss account from an earlier year, Form 461). */

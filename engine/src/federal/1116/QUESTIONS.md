@@ -111,6 +111,12 @@ Each place where the form and its instructions do not settle a rule. The engine 
 - Default: the cents stay inside line 1a, and line 1a is rounded once (`partI.ts`). The blind fill made the same choice.
 - Dollars: yes, $1 on line 1a; line 7 can move by $1.
 
+## 19. A Schedule K-1's foreign taxes
+
+- Text: "Qualified payee statements include Form 1099-DIV, Form 1099-INT, Schedule K-1 (Form 1041), Schedule K-3 (Form 1065), Schedule K-3 (Form 1120-S)" (`publications-see-pub-514-foreign-tax-credit-for::b02`); a beneficiary claims "your proportionate share of foreign income taxes paid or accrued by the estate or trust ... shown on the Schedule K-1" (`irs-pub-514-2025::sec::you-must-have-paid-or-accrued-the::b03`); an S corporation's box 16 code F: "Do not use this amount to complete your Form 1116. See Schedule K-3" (`irs-1120sk1-inst-2025::sec::box-16-items-affecting-shareholder-basis::b02`).
+- Default: a trust K-1 with foreign taxes is one source (`sources.ts k1ForeignTax`), read through the K-1 routes by item type. Passive category: the trust's items are interest and dividends, and no block gives a beneficiary another category. Line 1a and line 3d take the trustee's statement (the K-1 fact's `foreignIncome`); without it the form waits on the K-1 fact, and the election (which needs no income) still applies. One statement is one country, or "RIC" (`specific-instructions::b02`); the instructions give no "various". Column (l) prints "1099 taxes" (`part-ii-foreign-taxes-paid-or::b04`, "or similar statement"). An S corporation's or a partnership's foreign taxes are a gap on Schedule 3 line 1 and on every Form 1116 line: Schedule K-3 is not read.
+- Dollars: yes, when a trust has foreign capital gains (not on the statement, so not adjusted on line 1a) or income from more than one country.
+
 ## Second opinions
 
 - Blind fill (13 cases, `.scratch/blind`): two dollar differences. Case 4 line 19 is 0.0619 (engine) against 0.061944 (blind), so lines 21 and 24 are $2,043 against $2,044; question 8. Case 6 general line 16 is 0 against +$3,000; question 14. Every other line agreed.
@@ -130,6 +136,7 @@ Each place where the form and its instructions do not settle a rule. The engine 
 | Header, line i, Part II rows (q)–(u), (m)–(p), (l) | stated rule (line h, "Various": own reading) |
 | Lines 3a, 3b, 3d, 3e, 3g | stated rule (3b, 3e: own reading) |
 | Line 13 high-taxed test | own reading |
-| Line 2 with state income tax, 4b above $5,000, 3e with K-1s | unsupported |
+| A trust K-1 as a source (passive, the trustee's statement) | stated rule (category, column (l): own reading) |
+| Line 2 with state income tax, 4b above $5,000, 3e with Schedule E Parts II–IV; Schedule K-3 | unsupported |
 | Categories other than passive and general; AMT Forms 1116 (Form 6251 line 8) | unsupported |
 | Line 16 with earlier loss accounts or Form 461; line 12 with Form 2555/4563; line 22 with Form 5471 | unsupported |

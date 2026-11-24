@@ -103,6 +103,16 @@ export const ITEM_TYPES = {
 /* The closed list of item types. */
 export type ItemType = keyof typeof ITEM_TYPES;
 
+/*
+ * Rental activities: passive for every owner but a real estate professional
+ * (irs-1120sk1-inst-2025::sec::passive-activity-limitations::b01, ::b02), and
+ * net investment income whoever participates (irs-8960-inst-2025::sec::passive-activity::b01).
+ */
+export const RENTAL_TYPES: ReadonlyArray<ItemType> = [
+  "net_rental_real_estate_income",
+  "other_net_rental_income",
+];
+
 export function roleOf(type: ItemType): ItemRole {
   return ITEM_TYPES[type].role;
 }

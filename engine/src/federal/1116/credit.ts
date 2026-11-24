@@ -5,6 +5,7 @@
  * a gap from "no credit", since a gap reads as blank through the accessor.
  */
 
+import { unsupported } from "../../types.js";
 import { form1116Set, isGap, type Value } from "./copies.js";
 import type { Form1116FilingInfo } from "./filingInfo.js";
 import { electionCredit } from "./lines.js";
@@ -15,11 +16,14 @@ import { regularTaxForCredit, type Accessor } from "./returnAmounts.js";
  * tax, or (b) your regular tax" (irs-1116-inst-2025::sec::publications-see-pub-514-foreign-tax-credit-for::b03).
  * Form 1116: line 35 ("Enter here and on Schedule 3 (Form 1040), line 1").
  * Blank with no foreign tax, or when the decision files no Form 1116 and the
- * election does not apply.
+ * election does not apply. A K-1's foreign taxes the engine cannot read make
+ * it a gap; a K-1 that waits makes it wait.
  */
 export function foreignTaxCredit(form: Accessor, info: Form1116FilingInfo): Value {
   const foreignTax = info.foreignTax;
   if (foreignTax === undefined) return undefined;
+  if (foreignTax.k1Gap !== undefined) return unsupported(foreignTax.k1Gap);
+  if (foreignTax.k1Waiting === true) return undefined;
   if (foreignTax.election) {
     const regularTax = regularTaxForCredit(form, info);
     if (typeof regularTax !== "number") return regularTax;
