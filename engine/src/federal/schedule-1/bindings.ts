@@ -6,6 +6,7 @@ import { unsupported } from "../../types.js";
 import { files8853, form8853Total } from "../8853/results.js";
 import { answerBindings } from "./answerBindings.js";
 import { line12 } from "./employeeBusinessExpenses.js";
+import { line8p, line8pHold } from "./excessBusinessLoss.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
 import { line14, storageFeesOnlyBox } from "./movingExpenses.js";
 import { line21 } from "./studentLoanInterest.js";
@@ -37,30 +38,37 @@ export function register(): void {
       ...answerBindings(),
       // MANUAL EDIT: line 8g = the Alaska Permanent Fund dividend (irs-pub-525-2025::sec::other-income::b01).
       "0.line.8g": (_, info) => roundDollars(info.alaskaPermanentFundDividends),
-      // MANUAL EDIT: lines 8a, 8d and 8s are subtractions (printed in parentheses).
-      "0.line.9": (form) =>
-        sum(
-          form["0.line.8b"],
-          form["0.line.8c"],
-          form["0.line.8e"],
-          form["0.line.8f"],
-          form["0.line.8g"],
-          form["0.line.8h"],
-          form["0.line.8i"],
-          form["0.line.8j"],
-          form["0.line.8k"],
-          form["0.line.8l"],
-          form["0.line.8m"],
-          form["0.line.8n"],
-          form["0.line.8o"],
-          form["0.line.8p"],
-          form["0.line.8q"],
-          form["0.line.8r"],
-          form["0.line.8t"],
-          form["0.line.8u"],
-          form["0.line.8v"],
-          form["0.line.8z"],
-        ) - sum(form["0.line.8a"], form["0.line.8d"], form["0.line.8s"]),
+      // MANUAL EDIT: line 8p = Form 461 line 16 as a positive amount when below 0 (excessBusinessLoss.ts).
+      "0.line.8p": line8p,
+      // MANUAL EDIT: lines 8a, 8d and 8s are subtractions (printed in parentheses); line 8p holds it (excessBusinessLoss.ts).
+      "0.line.9": (form, info) => {
+        const hold = line8pHold(form, info);
+        if (hold !== undefined) return hold === "waiting" ? undefined : hold;
+        return (
+          sum(
+            form["0.line.8b"],
+            form["0.line.8c"],
+            form["0.line.8e"],
+            form["0.line.8f"],
+            form["0.line.8g"],
+            form["0.line.8h"],
+            form["0.line.8i"],
+            form["0.line.8j"],
+            form["0.line.8k"],
+            form["0.line.8l"],
+            form["0.line.8m"],
+            form["0.line.8n"],
+            form["0.line.8o"],
+            form["0.line.8p"],
+            form["0.line.8q"],
+            form["0.line.8r"],
+            form["0.line.8t"],
+            form["0.line.8u"],
+            form["0.line.8v"],
+            form["0.line.8z"],
+          ) - sum(form["0.line.8a"], form["0.line.8d"], form["0.line.8s"])
+        );
+      },
       "0.header.ssn": (_, info) => info.taxpayerSSN,
       /*
        * MANUAL EDIT: line 8e = Form 8853 lines 8, 12 and 26 (irs-1040-inst-2025::sec::line-8e::b01).
@@ -91,10 +99,13 @@ export function register(): void {
        * other terms are blank only when empty: 1, 2a, 4, 6 are unsupported, line
        * 7 is blank with no 1099-G, and line 9 is a sum.
        */
-      "0.line.10": (form, info) =>
-        (info.hasBusiness === true && form["0.line.3"] === undefined) ||
-        // MANUAL EDIT: Schedule E filed or still open (an unreadable rental fact), line 41 blank: wait too.
-        (info.mustFile?.["schedule-e"]?.value !== false && form["0.line.5"] === undefined)
+      "0.line.10": (form, info) => {
+        // MANUAL EDIT: line 9 holds while Form 461 line 16 waits or is a gap (excessBusinessLoss.ts).
+        const hold = line8pHold(form, info);
+        if (hold !== undefined) return hold === "waiting" ? undefined : hold;
+        return (info.hasBusiness === true && form["0.line.3"] === undefined) ||
+          // MANUAL EDIT: Schedule E filed or still open (an unreadable rental fact), line 41 blank: wait too.
+          (info.mustFile?.["schedule-e"]?.value !== false && form["0.line.5"] === undefined)
           ? undefined
           : sum(
               form["0.line.1"],
@@ -105,7 +116,8 @@ export function register(): void {
               form["0.line.6"],
               form["0.line.7"],
               form["0.line.9"],
-            ),
+            );
+      },
       // MANUAL EDIT: line 11, at most $300 per eligible educator (adjustments.ts).
       "1.line.11": (_, info) => roundDollars(info.educatorExpenses),
       // MANUAL EDIT: line 12, Form 2106 line 10's reservist, performing-artist and fee-basis parts (employeeBusinessExpenses.ts).
@@ -173,7 +185,6 @@ export function register(): void {
       "0.line.8m": "No Olympic/Paralympic medal or USOC prize money scenario yet.",
       "0.line.8n": "No Form 5471 / CFC subpart F inclusion scenario yet.",
       "0.line.8o": "No Form 8992 / GILTI inclusion scenario yet.",
-      "0.line.8p": "No Form 461 / excess business loss scenario yet.",
       "0.line.8q": "No ABLE account (Form 1099-QA) ingestion yet.",
       "0.line.8r": "No scholarship/fellowship grant (Form 1098-T) ingestion yet.",
       "0.line.8s": "No Medicaid waiver payment scenario yet (W-2 box 12 code II not modeled).",

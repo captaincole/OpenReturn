@@ -11,7 +11,9 @@
  *    trades or businesses are more than $313,000 ($626,000 for taxpayers
  *    filing a joint return), or ... you would report a loss of more than
  *    $156,500 on any one of Form 461, lines 1 through 8" (::b01).
- * The loss limits (limits.ts) ask the first; Form 461's resolver the second.
+ * Form 461's own lines answer the first (federal/461/); its resolver asks the
+ * second. The loss limits (limits.ts) no longer ask either: the limit does not
+ * change Schedule E.
  */
 
 import type { FilingStatus } from "../../values.js";
@@ -49,26 +51,24 @@ export function excessBusinessLossThreshold(status: FilingStatus | undefined): n
 export const totalBusinessLosses = (k1Losses: number, other: OtherBusinessLosses) =>
   k1Losses + other.scheduleCLosses + other.rentalLosses;
 
-/* Question 1: no loss can be limited when the losses are at most the threshold. */
-export function noLossCanBeLimited(
+/*
+ * Question 2: who must attach Form 461. Losses without income bound each
+ * line's loss and the net loss, so the answer can be yes when the lines net
+ * below the limits (QUESTIONS.md in federal/461/): the form then files with
+ * line 16 at 0 or more, and nothing reaches Schedule 1 line 8p. The K-1
+ * business losses and the rentals' reach line 5 (Schedule E), the Schedule C
+ * losses line 2, a stated other business loss (positive here) line 8.
+ */
+export function form461Required(
   k1Losses: number,
   other: OtherBusinessLosses,
+  otherBusinessLoss: number,
   status: FilingStatus | undefined,
 ): boolean {
-  return totalBusinessLosses(k1Losses, other) <= excessBusinessLossThreshold(status);
-}
-
-/*
- * Question 2: a line's losses above $156,500. The K-1 business losses and the
- * rentals' reach line 5 (Schedule E), the Schedule C losses line 2. Losses
- * without income bound each line's loss, so the answer can be yes when the
- * line nets below $156,500 (QUESTIONS.md). Losses above $313,000 always put
- * more than $156,500 on one of the two lines, so the net loss test needs no
- * check of its own here.
- */
-export function form461Required(k1Losses: number, other: OtherBusinessLosses): boolean {
+  const lineLosses = [k1Losses + other.rentalLosses, other.scheduleCLosses, otherBusinessLoss];
+  const total = totalBusinessLosses(k1Losses, other) + otherBusinessLoss;
   return (
-    k1Losses + other.rentalLosses > FORM_461_LINE_LOSS_LIMIT ||
-    other.scheduleCLosses > FORM_461_LINE_LOSS_LIMIT
+    lineLosses.some((loss) => loss > FORM_461_LINE_LOSS_LIMIT) ||
+    total > excessBusinessLossThreshold(status)
   );
 }

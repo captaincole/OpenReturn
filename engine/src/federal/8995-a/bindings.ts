@@ -3,6 +3,7 @@
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
+import { excessBusinessLossHold } from "../qbi/excessBusinessLoss.js";
 import type { QbiBusiness } from "../qbi/filingInfo.js";
 import {
   businessTin,
@@ -148,6 +149,9 @@ function line2(form: Read, info: Info, column: Column) {
   if (!business) return undefined;
   if (business.qbiGap) return unsupported(business.qbiGap);
   if ((business.priorYearQbiLoss ?? 0) > 0) return unsupported(PRIOR_YEAR_QBI_LOSS_GAP);
+  // MANUAL EDIT: an excess business loss (Form 461) holds the column (qbi/excessBusinessLoss.ts).
+  const hold = excessBusinessLossHold(form, info, info.qbiBusinesses);
+  if (hold !== undefined) return hold === "waiting" ? undefined : hold;
   const netting = info.mustFile?.["form-8995-a-schedule-c"]?.value;
   if (netting === true) {
     return num(form[`form-8995-a-schedule-c.0.line.1_col_c_adjusted_qbi_${column}`]);

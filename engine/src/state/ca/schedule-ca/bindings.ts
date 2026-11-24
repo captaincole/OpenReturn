@@ -176,6 +176,13 @@ export function register(): void {
         const value = form["schedule-1.0.line.9"];
         return typeof value === "number" ? value : undefined;
       },
+      /*
+       * MANUAL EDIT: column A copies Schedule 1 line 8p, the federal excess
+       * business loss adjustment that line 9a column A already holds
+       * (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b04). Columns B
+       * and C stay gaps (the unsupported list; Form 461 QUESTIONS.md item 13).
+       */
+      "1.line.b8p_federal": (form) => amountIfNonzero(form["schedule-1.0.line.8p"]),
       // MANUAL EDIT: col A copies Schedule 1 line 8f (income from Form 8889).
       "1.line.b8f_federal": (form) => amountIfNonzero(form["schedule-1.0.line.8f"]),
       /*
@@ -700,12 +707,10 @@ export function register(): void {
         "IRC §951A(a) GILTI inclusion has no fact ingestion path — no GILTI/CFC scenario built yet.",
       "1.line.b8o_subtractions":
         "IRC §951A(a) GILTI CA subtraction adjustment requires CFC/GILTI fact ingestion — no scenario built yet.",
-      "1.line.b8p_federal":
-        "IRC §461(l) excess business loss adjustment requires Form 461 computation — no business loss scenario or FTB 3461 ingestion path built yet.",
       "1.line.b8p_subtractions":
-        "IRC §461(l) CA subtraction adjustment requires FTB 3461 computation — no excess business loss scenario built yet.",
+        "Column B (the federal excess business loss adjustment in column A) prints only with column C, the FTB 3461 amount, and FTB 3461 has no rules. Alone it would take the federal add-back out of California income with nothing added back.",
       "1.line.b8p_additions":
-        "IRC §461(l) CA addition adjustment (CA does not conform to federal CARES/ARPA changes) requires FTB 3461 computation — no excess business loss scenario built yet.",
+        "Column C is FTB 3461 line 16 or 17 (California's own excess business loss, with its own carryover), and FTB 3461 has no rules.",
       "1.line.b8q_federal":
         "No fact ingestion path for ABLE account distributions; no scenario modeled yet.",
       "1.line.b8r_federal":

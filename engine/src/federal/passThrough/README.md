@@ -132,19 +132,19 @@ routed nor reported (`tests/unit/federal/passThrough/boxTables.test.ts`).
 - Form 7203 itself, one copy for each S corporation K-1 that files it, and
   Schedule E line 28 column (e) checked on its row.
 - The at-risk stage passes a loss when the holding says all of the investment
-  is at risk; the excess business loss stage passes when every business loss
-  on the return, added without any income, is at most the threshold ($313,000,
-  or $626,000 on a joint return), so no loss can be limited. Form 461 then
-  still files when a line's losses are more than $156,500, with its lines
-  unsupported (`excessBusinessLoss.ts`, `461/resolveInfo.ts`).
+  is at risk. The excess business loss stage allows every item: the limit
+  does not change Schedule E. Form 461 (`federal/461/`) figures it from the
+  return's lines, and Schedule 1 line 8p adds the excess back (scenario
+  `juilin`). Its resolver files the form from the business losses added
+  without any income (`excessBusinessLoss.ts`, `461/resolveInfo.ts`).
 - QBI counts only the allowed loss: the statement's QBI is scaled to the part
   of the business losses the limits allow, and a net QBI loss carries forward
   on Form 8995 line 16.
 - Not yet: a distribution above stock basis (a capital gain on Form 8949), a
   loan repayment (Form 7203 Part II Section C), a sale of stock, the section
-  1.1367-1(g) election, amounts not at risk (Form 6198), business losses above
-  the threshold (Form 461's limit), and a carried loss on Form 8995-A. Each is
-  unsupported with a reason.
+  1.1367-1(g) election, and a carried loss on Form 8995-A. Each is unsupported
+  with a reason. With an excess business loss, a QBI line that adds a losing
+  business is a gap (`qbi/excessBusinessLoss.ts`).
 
 ## What the fourth step handles
 
@@ -209,6 +209,23 @@ routed nor reported (`tests/unit/federal/passThrough/boxTables.test.ts`).
 - **The other partnership items**: box 14 (Schedule SE takes Schedule C
   only), box 7 royalties (Schedule E Part I), boxes 10 to 12 (Form 4797 and
   Form 4562), box 15 credits, box 17 (Form 6251), box 20 codes A and B (Form
-  4952), a publicly traded partnership, Form 6198, and a partial sale.
+  4952), a publicly traded partnership, and a partial sale.
+
+## What the at-risk step handles
+
+- Amounts not at risk (`atRisk.ts`, scenario `ituralde`): a partnership or S
+  corporation K-1 whose holding says some investment is not at risk, or that
+  has a loss the at-risk limit carried from an earlier year
+  (`carriedLosses.atRisk`), goes through Form 6198 (`federal/6198/`). Part I
+  takes the items that reach the stage after the basis limit (box 1 on line 1,
+  a section 1231 item on line 2b, other income on line 3, other deductions and
+  losses on line 4) and the carried loss as an ordinary loss on line 1. The
+  owner's amounts at risk are their own fact, `at_risk.<K-1 fact key>`.
+- Each item is allowed in proportion and the rest carries with its character.
+  An allowed carried loss is a "PYA" row (`atRiskCarryover`), line 27 is Yes,
+  and Schedule E column (f) is checked for a K-1 that files Form 6198.
+- Not yet: more than one at-risk activity on a K-1, guaranteed payments next to
+  amounts not at risk, a disposition of the interest, recapture, and a
+  beneficiary's K-1. Each is unsupported with a reason (`6198/QUESTIONS.md`).
 
 `QUESTIONS.md` lists every doubt, with its source and the default chosen.

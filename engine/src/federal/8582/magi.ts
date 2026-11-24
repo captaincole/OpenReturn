@@ -13,7 +13,6 @@
  * added back for it.
  */
 
-import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
 import { limitContextFrom } from "../passThrough/limits.js";
 import { isPassiveItem, releasedOnDisposition } from "../passThrough/passiveActivity.js";
@@ -21,12 +20,29 @@ import { allowedWithRoute, routeEntities } from "../passThrough/routing.js";
 import { isRentalActivity, selfRentalState } from "../rentals/passive.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
 import type { Form8582FilingInfo } from "./filingInfo.js";
-import type { Form8582 } from "./types.js";
+
+/*
+ * What line 6 reads: other forms' fields by full id (form-1040.line.1z), so
+ * FTB 3801 line 6, which takes this amount, reads it with its own accessor.
+ */
+export type MagiFields = { readonly [fullFieldId: string]: unknown };
+
+/* The filing info line 6 reads. */
+export type MagiInfo = Pick<
+  Form8582FilingInfo,
+  | "adoptionBenefits"
+  | "hasBusiness"
+  | "rentalProperties"
+  | "passThroughEntities"
+  | "passThroughLimitContext"
+  | "filingStatus"
+  | "mustFile"
+>;
 
 /* Form 1040 income lines with no passive activity amount; line 2b is interestBeforeExclusion. */
 const FORM_1040_INCOME = ["line.1z", "line.3b", "line.4b", "line.5b", "line.7a"];
 
-const interestBeforeExclusion = (form: FormAccessor<Form8582>, info: Form8582FilingInfo) =>
+const interestBeforeExclusion = (form: MagiFields, info: MagiInfo) =>
   info.mustFile?.["form-8815"]?.value === true
     ? form["schedule-b.0.line.2_total_interest"]
     : form["form-1040.line.2b"];
@@ -80,7 +96,7 @@ function line6Amount(property: RentalProperty, net: number): number {
 }
 
 /* Schedule E line 21 as line 6 counts it; undefined while a column it reads is blank. */
-function nonpassiveScheduleE(form: FormAccessor<Form8582>, info: Form8582FilingInfo) {
+function nonpassiveScheduleE(form: MagiFields, info: MagiInfo) {
   let total = 0;
   for (const property of info.rentalProperties ?? []) {
     if (!readsLine21(property)) continue;
@@ -100,7 +116,7 @@ function nonpassiveScheduleE(form: FormAccessor<Form8582>, info: Form8582FilingI
  * payments, a materially participated box 1) are already in columns (k) and (i)
  * (line-6::b01). Undefined while such a K-1 is not routed.
  */
-function releasedLosses(info: Form8582FilingInfo): number | undefined {
+function releasedLosses(info: MagiInfo): number | undefined {
   const entities = info.passThroughEntities ?? [];
   const released = entities.filter((entity) => releasedOnDisposition(entity));
   if (released.length === 0) return 0;
@@ -123,7 +139,7 @@ function releasedLosses(info: Form8582FilingInfo): number | undefined {
  * overall loss of an entire disposition (releasedLosses), count. Undefined
  * while Part II has a row and its total is not a number.
  */
-function nonpassivePartII(form: FormAccessor<Form8582>, info: Form8582FilingInfo) {
+function nonpassivePartII(form: MagiFields, info: MagiInfo) {
   if (!(info.passThroughEntities ?? []).some((entity) => entity.form !== "1041")) return 0;
   const line32 = numberOrBlank(form["schedule-e.1.line.32_total_partnership_s_corp_income"]);
   const released = releasedLosses(info);
@@ -136,10 +152,7 @@ function nonpassivePartII(form: FormAccessor<Form8582>, info: Form8582FilingInfo
 }
 
 /* Line 6, not less than zero; undefined while a part of it is unknown. */
-export function modifiedAgi(
-  form: FormAccessor<Form8582>,
-  info: Form8582FilingInfo,
-): number | undefined {
+export function modifiedAgi(form: MagiFields, info: MagiInfo): number | undefined {
   // The excluded part of employer adoption benefits needs Form 8839, not modeled.
   if ((info.adoptionBenefits ?? 0) > 0) return undefined;
   // As on Schedule 1 line 10: a business whose line 3 waits.
