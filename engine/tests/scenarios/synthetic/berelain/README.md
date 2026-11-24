@@ -47,6 +47,19 @@ by the Schedule D Tax Worksheet.
 - The W-2 has no PDF. The sale amounts are her answers from the closing
   statement and the depreciation schedule.
 
+## Printed-form check (2026-11-24)
+
+Form 4797 pages 1 and 2, Schedule D and Form 8995 were rendered and read.
+Every line her facts fill is filled. Blank on purpose: 4797 line 1b (no
+partial disposition at a gain), lines 3–5 and 14–16 (no Form 4684, 6252 or
+8824), line 11 (line 7 is a gain), line 26f (corporations only); Schedule D
+lines 1a–6 (no short-term sale), 18 (no 28% gain); Form 8995 line 3 (no
+carried loss). Two print problems remain. Column (a) clips the HVAC row's
+"(Partial Disposition Election)" (`src/federal/4797/QUESTIONS.md` item 24).
+Schedule D's opportunity fund question is unanswered on every return: the
+engine has no fact for it (Schedule D's `unsupported` list). The land row's
+description was shortened to fit column (a).
+
 ## Hand check
 
 | Line | Value | How |

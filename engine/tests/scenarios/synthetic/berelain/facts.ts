@@ -184,7 +184,8 @@ const sales: Array<[string, BusinessPropertySaleFactValue]> = [
   [
     "shop-land",
     {
-      description: "Land under the shop, 1450 Avenue Q",
+      // Short enough for column (a) of line 2 (8 pt in a 122 pt box).
+      description: "Shop land, 1450 Avenue Q",
       kind: "land",
       dateAcquired: "2016-03-15",
       dateSold: "2025-08-20",
@@ -209,7 +210,8 @@ const sales: Array<[string, BusinessPropertySaleFactValue]> = [
   [
     "old-hvac",
     {
-      description: "Shop HVAC unit, replaced",
+      // The engine adds "(Partial Disposition Election)"; column (a) clips it (QUESTIONS.md item 24).
+      description: "HVAC unit",
       kind: "section_1250",
       dateAcquired: "2016-03-15",
       dateSold: "2025-02-01",

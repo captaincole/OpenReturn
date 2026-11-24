@@ -181,6 +181,22 @@ default the engine applies, and whether the default can change a dollar amount.
     files and Form 4797 sends an amount, or a gap, to federal Schedule D line
     11, lines 12a and 12b are a gap. Changes dollars: no (a gap).
 
+24. **"Partial Disposition Election" does not fit column (a).** "Elective
+    partial dispositions ... include the words 'Partial Disposition Election'
+    in the description" (partial-dispositions-of-macrs-property::b02). The
+    blank PDF's line 2 and line 10 column (a) is 122 pt wide with a fixed 8 pt
+    font, about 30 characters; the words alone are 28. The value holds the
+    words, but the printed PDF clips them (berelain's HVAC row). Not fixed: the
+    renderer prints every text field at the PDF's own font size, and a smaller
+    font for long text is a change to every form. Changes dollars: no.
+
+25. **Schedule C line 30, Simplified Method Worksheet line 1.** With the
+    sale-to-business link, a gain on Form 4797 from a business's property is
+    known, but `schedule-c/lines.ts` homeOfficeExpenses still says no fact ties
+    a Form 4797 gain to the business and leaves line 1 as line 29. Not changed
+    here. Changes dollars: only for a home office whose line 30 is limited by
+    line 29.
+
 ## Confidence by field group
 
 | Field group | Confidence |
