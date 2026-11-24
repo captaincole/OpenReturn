@@ -4,7 +4,9 @@
 
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
+import type { Unsupported } from "../../types.js";
 import { needsScheduleA, partIBusinesses } from "../8995-a/lines.js";
+import { excessBusinessLossHold } from "../qbi/excessBusinessLoss.js";
 import type { QbiBusiness } from "../qbi/filingInfo.js";
 import { qbiOf } from "../qbi/lines.js";
 import { namesOnReturn } from "../returnNames.js";
@@ -70,9 +72,13 @@ function rowName(form: Read, info: Info, row: Row): string | undefined {
 }
 
 // Each row's column (a) stands alone; lines 3 and 4 wait for every row.
-function qbiIn(form: Read, info: Info, row: Row): number | undefined {
+function qbiIn(form: Read, info: Info, row: Row): number | Unsupported | undefined {
   const business = partIBusinesses(form, info)?.[ROWS.indexOf(row)];
-  return business && qbiBeforeNetting(form, info, business);
+  if (!business) return undefined;
+  // MANUAL EDIT: an excess business loss (Form 461) holds the rows (qbi/excessBusinessLoss.ts).
+  const hold = excessBusinessLossHold(form, info, info.qbiBusinesses);
+  if (hold !== undefined) return hold === "waiting" ? undefined : hold;
+  return qbiBeforeNetting(form, info, business);
 }
 
 export function register(): void {

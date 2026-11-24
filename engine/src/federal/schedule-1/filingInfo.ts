@@ -2,19 +2,21 @@ import type { OtherIncomeItem } from "../../facts/index.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Form2106FilingInfo } from "../2106/filingInfo.js";
 import type { Form3903FilingInfo } from "../3903/filingInfo.js";
+import type { Form461FilingInfo } from "../461/filingInfo.js";
 import type { Form8814FilingInfo } from "../8814/filingInfo.js";
 
 /*
  * Line 12 reads Form 2106's totals (federal/2106/resolveInfo.ts). Line 14 reads
  * Form 3903's totals (federal/3903/resolveInfo.ts). Line 8z also reads Form
- * 8814's totals (line 12).
+ * 8814's totals (line 12). Line 8p reads Form 461's gaps (federal/461/resolveInfo.ts).
  */
 export interface Schedule1FilingInfo
   extends
     BaseFilingInfo,
     Pick<Form2106FilingInfo, "form2106Totals" | "form2106TotalsGap">,
     Pick<Form3903FilingInfo, "movingExpenseDeduction" | "movingTotalsGap">,
-    Pick<Form8814FilingInfo, "form8814Totals"> {
+    Pick<Form8814FilingInfo, "form8814Totals">,
+    Pick<Form461FilingInfo, "form461"> {
   /** Line 14 with its box: Armed Forces storage fees claimed with no Form 3903, cents kept. */
   armedForcesStorageFees?: number;
   /** Line 3: Schedule C line 31 summed over every business; undefined when any line 31 is blank. */

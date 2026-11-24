@@ -8,6 +8,7 @@ export * from "./kinds/archerMsa.js";
 export * from "./kinds/armedForcesMove.js";
 export * from "./kinds/blindness.js";
 export * from "./kinds/business.js";
+export * from "./kinds/businessLossLimit.js";
 export * from "./kinds/caDependentCare.js";
 export * from "./kinds/caEarnedIncomeCredit.js";
 export * from "./kinds/caEmployeeClassification.js";
