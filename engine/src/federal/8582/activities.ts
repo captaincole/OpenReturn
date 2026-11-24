@@ -154,16 +154,20 @@ export function placementOf(
   return realEstatePlacement(value, info);
 }
 
-/* Schedule E line 1a's address; a royalty may have none. */
-function activityName(property: RentalProperty): string {
+/* Schedule E line 1a's address; a royalty may have none. FTB 3801 names its rows the same way. */
+export function activityName(property: RentalProperty): string {
   const place = property.value.address;
   if (place) return `${place.street}, ${place.city}, ${place.state} ${place.zip}`;
   const kind = property.value.propertyType === "royalties" ? "Royalties" : "Rental";
   return `${kind}, Schedule E property ${property.column.toUpperCase()}`;
 }
 
-/* One row, or two when the prior-year loss goes in Part V (part-iv-2::b01). */
-function rowsOf(property: RentalProperty, placement: Placement, net: number): PassiveActivity[] {
+/* One row, or two when the prior-year loss goes in Part V (part-iv-2::b01). FTB 3801 builds its rows with it. */
+export function rowsOf(
+  property: RentalProperty,
+  placement: Placement,
+  net: number,
+): PassiveActivity[] {
   const base = { factKey: property.factKey, column: property.column, name: activityName(property) };
   const prior = roundDollars(property.value.priorYearUnallowedLoss ?? 0);
   const current = {

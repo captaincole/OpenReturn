@@ -1,8 +1,7 @@
 /*
  * The federal forms that have a catalog and no rules yet. Each has a FilingInfo
- * type with no slots and a resolver that reads only its must-file decision
- * (Form 461 also files from the return's business losses, with its lines
- * unsupported), so they are joined here and filingInfo.ts takes them as one.
+ * type with no slots and a resolver that reads only its must-file decision,
+ * so they are joined here and filingInfo.ts takes them as one.
  */
 
 import type { BaseFilingInfo } from "../filingInfo.js";
@@ -17,8 +16,6 @@ import type { Form4255FilingInfo } from "./4255/filingInfo.js";
 import { resolve4255Info } from "./4255/resolveInfo.js";
 import type { Form4563FilingInfo } from "./4563/filingInfo.js";
 import { resolve4563Info } from "./4563/resolveInfo.js";
-import type { Form461FilingInfo } from "./461/filingInfo.js";
-import { resolve461Info } from "./461/resolveInfo.js";
 import type { Form4835FilingInfo } from "./4835/filingInfo.js";
 import { resolve4835Info } from "./4835/resolveInfo.js";
 import type { Form4970FilingInfo } from "./4970/filingInfo.js";
@@ -65,7 +62,6 @@ import type { ScheduleFFilingInfo } from "./schedule-f/filingInfo.js";
 import { resolveScheduleFInfo } from "./schedule-f/resolveInfo.js";
 
 export type FederalFormsWithNoRulesFilingInfo = ScheduleFFilingInfo &
-  Form461FilingInfo &
   Form965AFilingInfo &
   Form2555FilingInfo &
   Form3800FilingInfo &
@@ -97,7 +93,6 @@ export const FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS: ReadonlyArray<
   (inputs: ResolverInputs) => BaseFilingInfo
 > = [
   resolveScheduleFInfo,
-  resolve461Info,
   resolve965AInfo,
   resolve2555Info,
   resolve3800Info,

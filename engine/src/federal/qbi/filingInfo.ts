@@ -1,6 +1,7 @@
 /* The QBI slots Form 8995 and Form 8995-A both read; resolveQbiInfo fills them. */
 
 import type { BaseFilingInfo } from "../../filingInfo.js";
+import type { Form461FilingInfo } from "../461/filingInfo.js";
 import type { PropertyColumn, RentalProperty } from "../schedule-e/filingInfo.js";
 
 /* One QBI trade or business on this return: a column of Parts I and II. */
@@ -42,7 +43,8 @@ export interface QbiBusiness {
   qualifiedPropertyUbia?: number;
 }
 
-export interface QbiFilingInfo extends BaseFilingInfo {
+/* Form 461's slots: an excess business loss holds QBI lines (qbi/excessBusinessLoss.ts). */
+export interface QbiFilingInfo extends BaseFilingInfo, Pick<Form461FilingInfo, "form461"> {
   /** Form 8995 line 6, Form 8995-A line 28: 1099-DIV box 5 and K-1 section 199A dividends, cents kept. */
   qualifiedReitDividends?: number;
   /** Why a K-1's section 199A dividends are not known (an unsupported K-1); lines 6 and 28 show it. */
