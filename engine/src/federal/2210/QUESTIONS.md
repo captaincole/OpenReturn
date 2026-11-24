@@ -23,7 +23,8 @@ Each item is a place where the form and the 2025 instructions do not settle a ru
 ## 4. Rounding
 
 - Source: the IRS whole-dollar rule (CLAUDE.md); the worksheet's lines 4, 7, 10 and 13 are "$" amounts.
-- Default: each payment is rounded to whole dollars; line 10 is 25% of line 9 to the nearest dollar in each column; withholding splits into four whole-dollar parts that add up to line 6; the worksheet keeps cents and rounds line 14 once.
+- Default: each payment is rounded to whole dollars; line 10 is 25% of line 9 to the nearest dollar in each column; withholding splits into four whole-dollar parts that add up to line 6; the worksheet keeps cents and rounds line 14 once. Schedule AI Part II rounds each line (line 33 at 49.6%, 18.6% and so on; line 35), and line 36 adds the rounded lines.
+- Other reading: the blind fill rounded each worksheet line to cents first; it gave the same whole dollar in every case.
 - Changes dollars: by at most a dollar.
 
 ## 5. Household employment taxes on line 2
@@ -87,6 +88,20 @@ Each item is a place where the form and the 2025 instructions do not settle a ru
 - Line 28 below $400 is tested on net earnings (profit × 92.35%), as Schedule SE line 4c does (line-28::b01). Changes dollars: no in practice.
 - "Line 8 (additional tax on distributions only)" (line-2::b01): the engine's Schedule 2 line 8 holds only Form 5329 Part I, so it is taken whole. Changes dollars: no today.
 - Schedule AI Part II prints all four columns when any period has net earnings from self-employment.
+
+## 15. No 2024 tax liability, and no 2024 return
+
+- Source: "You won't have to pay the penalty or file this form if ... You had no tax liability for 2024, you were a U.S. citizen or resident alien for the entire year ..., and your 2024 tax return was (or would have been had you been required to file) for a full 12 months" (exceptions-to-the-penalty::b01). Line 8: "If you didn't file a return for 2024 or your 2024 tax year was less than 12 months, don't complete line 8. Instead, enter the amount from line 5 on line 9" (line-19::b03).
+- Default: the engine applies the exception only through line 8. A stated 2024 tax of 0 makes line 8 and line 9 zero, so line 9 is not more than line 6 and no penalty is figured. With `prior_year.no_twelve_month_return` true, line 9 is line 5 and the penalty is figured, even for a full-year citizen who did not file because the 2024 tax was zero. The engine has no fact for full-year citizenship or residence.
+- Other reading: a filer who was not required to file for 2024 and had no 2024 tax should record a 2024 tax of 0 (not "no 12-month return"), because the exception counts a return that "would have been" for 12 months. The blind fill raised this for its case 7 and kept the penalty, because the case did not say the 2024 tax was zero.
+- Changes dollars: yes. The whole penalty, for a 2024 non-filer with no tax liability whom Cade records as "no 12-month return".
+
+## Second opinions
+
+- Blind fill (14 cases, from the blank form and instructions only): no dollar difference on any line. The only difference is case 10 line 19: the comparison script called the worksheet directly and printed 0; the blind fill left it blank because line 11 is at least line 10 in every column ("stop here"). The form itself leaves line 19 blank there, because a zero penalty with no box C or D figures no Part III. Case 11 (line 17 zero in every column) is also blank on the form, 0 in the blind fill.
+- Blind doubts that the text settles: the June 16, 2025 payment counts as made on June 15, a Sunday ("the payment is considered made on the due date", table-1-estimated-tax-payments::b01); the engine and the blind fill agree. The early-distribution tax on Schedule 2 line 8 goes on line 2 (item 14). The withholding default (item 1) and rounding (item 4) are the blind fill's choices too.
+- PolicyEngine-US 2.153.8 (commit b3edc0446b): it does not model Form 2210 or the estimated tax penalty. A search of `variables/gov/irs` and `parameters/gov/irs` finds no 2210, underpayment, safe harbor or required-installment variable, so the 90% / 100% / 110% tests, the $150,000 / $75,000 AGI limits, the $1,000 floor and the 7% rate were not compared.
+- IRS Direct File (IRS-Public/direct-file, commit e365f9f): its fact dictionary (`backend/src/main/resources/tax`) has no Form 2210, underpayment or estimated tax penalty fact. Nothing to compare.
 
 ## Confidence by field group
 
