@@ -36,7 +36,8 @@ Each place where the form and its instructions do not settle a rule. Short answe
 
 - Source: interest runs "beginning on the due date (without regard to extensions) of your income tax return for the tax year to which an increase in tax is attributable and ending with the due date ... for the tax year of the excess distribution", "using the rates and methods under section 6621" (irs-8621-inst-2025::sec::line-16f::b01; ::line-24::b01).
 - Default: April 15 of the next year for every year, with no weekend or holiday shift. Interest compounds daily from the day after the start through the end date, at the quarter's underpayment rate over 365 days (366 in a leap year). The rates are Rev. Rul. 2024-18 and the 2025–2026 releases (data/underpaymentRates.ts).
-- Changes dollars: yes, by a few days' interest.
+- Alternative (the blind fill): the shifted due dates (2022-04-18 for 2021, 2023-04-18 for 2022). The blind fill also took 7% for April 1–15, 2026 from the Form 2210 worksheet ("Rate Period 4: January 1, 2026–April 15, 2026 ... × 0.07", irs-2210-inst-2025::sec::tax-year-2025::b04–b05). The engine keeps 6% for that quarter: Rev. Rul. 2026-5 sets "an underpayment rate of 6 percent" for the quarter that begins April 1, 2026. Form 2210 keeps the first quarter's rate through April 15 only because of a rule for the estimated tax penalty (section 6621(b)(2)(B)); line 16f is not that penalty.
+- Changes dollars: yes, by a few days' interest. The rate and the shift together moved line 16f by $1 in two blind cases (252 against 253, 392 against 393).
 
 ## 7. Line 20: interest up to the filing date
 
@@ -104,6 +105,19 @@ Each place where the form and its instructions do not settle a rule. Short answe
 - Default: the tax on the nonexcess distributions and those parts go to Form 1116 as a passive category source in the fund's country. Its income is the nonexcess distributions plus the parts of the excess distributions allocated to 2025 and pre-PFIC years. No payee statement shows it, so Form 1116 files.
 - Changes dollars: yes (Form 1116, Schedule 3 line 1).
 
+## 18. Line 15e(1) from a rounded line 15d
+
+- Source: "Subtract line 15d from line 15a" (the form, line 15e(1)). Line 15d is 125% of line 15c, and the instructions say nothing of cents on it.
+- Default: line 15d rounds to whole dollars, and line 15e(1) subtracts the rounded value (the engine's rule for a line that is arithmetic on other lines). 450 × 1.25 = 562.50 → 563, so line 15e(1) is 3,000 − 563 = 2,437.
+- Alternative: keep the cents of line 15d and round line 15e(1) once: 2,437.50 → 2,438.
+- Changes dollars: yes, by $1 on line 15e(1) when line 15d ends in 50 cents.
+
+## 19. Line 24 on a partial termination
+
+- Source: "Enter the interest accrued on the deferred tax" (irs-8621-inst-2025::sec::line-24::b01). It does not say whether that is the tax that becomes due or all of line 19.
+- Default: interest on the line 23 amount only, from the due date of the election year's return to the due date of the 2025 return. Interest on the rest of the deferred tax stays deferred with it.
+- Changes dollars: yes (line 24 and Schedule 2), when an election ends only in part.
+
 ## Confidence by field group
 
 | Field group | Confidence |
@@ -131,5 +145,6 @@ Each place where the form and its instructions do not settle a rule. Short answe
 
 ## Second opinions
 
-- PolicyEngine-US: not checked; it does not model Form 8621 that we know of.
-- IRS Direct File (issue #140): no checkout in this worktree. Not compared.
+- PolicyEngine-US 2.153.8 (commit b3edc04, 2026-11-23): it does not model Form 8621. It has no section 1291, 1293 or 1296 variable and no section 6621 rate table; its Form 8960 MAGI says "The CFC and PFIC adjustments of Treas. Reg. 1.1411-10(e) are not modeled." The one shared constant is the top section 1 rate (0.396 for 2015–2017, 0.37 from 2018), which matches line 16c's table. No disagreement.
+- IRS Direct File (issue #140): no checkout is reachable, and Direct File does not cover a PFIC. Not compared.
+- Blind fill (15 cases, 66 lines): every line matches but line 16f in two cases, $1 each (question 6).
