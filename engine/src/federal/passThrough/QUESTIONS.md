@@ -375,3 +375,19 @@ Each question has its source and the default the code uses now.
     gives only "depletion" as an example. Form 8582's second column names the
     row of the K-1's passive activity, "Sch E, line 28A"
     (irs-8582-inst-2025::sec::part-vi::b01).
+41. **Passive K-1s Form 8582 cannot take.** Part I combines every passive
+    activity (irs-8582-inst-2025::sec::specific-instructions::b01). A passive
+    or unanswered S corporation K-1, a beneficiary's boxes 6 to 8 (passive in
+    Part III column (d), item 16), and a partnership K-1 the limits stop with a
+    possibly passive item have no Part V row. Default (`form8582Rows.ts`): such
+    a K-1 makes every Form 8582 line past the header a gap that names it, and
+    a losing partnership activity next to it unsupported; while its answer is
+    missing, Part V and those activities wait on it. With a passive loss or a
+    carried passive loss it files Form 8582 by itself. A return with none of
+    them is unchanged.
+42. **A decrease in liabilities with no loss.** A smaller share of liabilities
+    at the end (item K1) is the worksheet's line 9a and can make a line 11b
+    gain (irs-1065k1-inst-2025::sec::line-9a::b01, ::line-11b::b01). Default:
+    the worksheet runs whenever item K1 shows a decrease at both ends, so a
+    gain above basis is the named gap of item 29; a K-1 with neither end, or
+    one end only, and no loss or distribution, passes without it.

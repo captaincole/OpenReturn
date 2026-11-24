@@ -128,7 +128,11 @@ export function resolve8582Info(inputs: ResolverInputs): Form8582FilingInfo {
   );
   // MANUAL EDIT: a K-1's passive activity with a loss or a carried loss files it too (who-must-file::b01).
   const k1 = passiveK1Rows(inputs);
-  const k1Filing = (k1?.rows ?? []).filter(hasPassiveDeductions).map((row) => row.factKey);
+  // A K-1 the engine cannot put on the form, with a passive loss, files it too: its amounts are then a gap.
+  const k1Filing = [
+    ...(k1?.rows ?? []).filter(hasPassiveDeductions).map((row) => row.factKey),
+    ...(k1?.unmodeledWithDeductions ?? []),
+  ];
   const k1Open = k1 !== undefined && !k1.settled;
   const hasRental = needsProfessionalAnswer(properties.map((property) => property.value));
   const livedApart = booleanFact(inputs.factByKey.get(SPOUSE_KEYS.livedApartAllYear));

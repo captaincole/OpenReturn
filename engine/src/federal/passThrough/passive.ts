@@ -35,7 +35,7 @@ function activityItem(item: PassThroughItem): boolean {
  * rules for beneficiaries are not issued. A loss in boxes 6 to 8, or a passive
  * loss carried from an earlier year, is unsupported; income passes.
  */
-function passiveForTrust(entry: EntityItems): StageOutcome {
+export function passiveForTrust(entry: EntityItems): StageOutcome {
   const losses = entry.items.filter(
     (item) => activityItem(item) && isLossOrDeduction(item.type, item.amount),
   );
@@ -56,7 +56,7 @@ function passiveForTrust(entry: EntityItems): StageOutcome {
  * activity, more than one activity, or a loss carried from an earlier passive
  * year needs Form 8582, which is not modeled for an S corporation K-1.
  */
-function passiveForSCorporation({ entity, items }: EntityItems): StageOutcome {
+export function passiveForSCorporation({ entity, items }: EntityItems): StageOutcome {
   const sorted = items.filter(activityItem);
   const carried = (entity.holding?.carriedLosses?.passive ?? 0) > 0;
   if (sorted.length === 0 && !carried) return passAll(items);
@@ -123,6 +123,15 @@ function figureForm8582(
       overallOf(activity.row) < 0 ? outcome(activity) : allowedInFull(activity),
     );
   if (losing.length === 0) return decide(allowedInFull);
+  // Part I combines every passive activity (irs-8582-inst-2025::sec::specific-instructions::b01).
+  const others = context.otherPassiveActivities;
+  if (others && others.gaps.length > 0) {
+    const reason = `Form 8582 combines every passive activity, and another K-1's is not on it: ${others.gaps.join(" ")}`;
+    return forLosing((activity) => unsupportedFor(activity.entity, [], reason));
+  }
+  if (others && others.waitingKeys.length > 0) {
+    return forLosing(() => ({ kind: "waiting", factKeys: others.waitingKeys }));
+  }
   const rentals = context.passiveRentals;
   if (rentals === undefined) {
     return forLosing((activity) =>

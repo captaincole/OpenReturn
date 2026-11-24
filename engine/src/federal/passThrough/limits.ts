@@ -29,11 +29,13 @@ import {
   noLossCanBeLimited,
   type OtherBusinessLosses,
 } from "./excessBusinessLoss.js";
+import type { OtherPassiveActivities } from "./form8582Rows.js";
 import { hasCarriedBasisLoss, type PassThroughEntity, type PassThroughItem } from "./items.js";
 import { isLossOrDeduction, isPortfolio } from "./itemTypes.js";
 import {
   figurePartnerBasis,
   isPartnerLossItem,
+  liabilitiesDecreased,
   partnerBasisGaps,
   partnerBasisItems,
 } from "./partnerBasis.js";
@@ -50,6 +52,12 @@ export interface LimitContext {
    * Undefined when the caller does not know them: a passive K-1 loss is then unsupported.
    */
   passiveRentals?: PassiveRentals;
+  /*
+   * The K-1s that are or may be passive but that the engine cannot put on Form
+   * 8582 (form8582Rows.ts): a losing K-1 activity is then unsupported, or waits.
+   * Undefined: none known.
+   */
+  otherPassiveActivities?: OtherPassiveActivities;
 }
 
 /* A form's context: the one Schedule E's resolver figured, else the filing status alone. */
@@ -167,7 +175,9 @@ export const basisLimit: LimitStage = perEntity(({ entity, items }) => {
     if (ended) return unsupportedFor(entity, [], ended);
     const limited = items.filter((item) => isPartnerLossItem(item) || item.type === "distribution");
     const disposed = entity.holding?.disposedOfEntirely === true;
-    if (limited.length === 0 && !hasCarriedBasisLoss(entity.holding) && !disposed) {
+    const nothingLimited =
+      limited.length === 0 && !hasCarriedBasisLoss(entity.holding) && !liabilitiesDecreased(entity);
+    if (nothingLimited && !disposed) {
       return passAll(items);
     }
     return partnershipBasis(entity, items);

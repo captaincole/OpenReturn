@@ -169,6 +169,19 @@ const liabilityTotal = (liabilities: PartnerLiabilities) =>
     sum(liabilities.nonrecourse, liabilities.qualifiedNonrecourseFinancing, liabilities.recourse),
   );
 
+/*
+ * Item K1 shows a smaller share of liabilities at the end than at the start:
+ * the decrease is a deemed distribution (line 9a, irs-1065k1-inst-2025::sec::line-9a::b01),
+ * and above the basis it is a gain (line 11b, ::line-11b::b01), so the worksheet
+ * runs even with no loss or distribution. A K-1 that prints neither end, or one
+ * end only, shows no decrease here.
+ */
+export function liabilitiesDecreased(entity: PassThroughEntity): boolean {
+  const k1 = entity.k1;
+  if (k1.form !== "1065" || !k1.liabilitiesAtStart || !k1.liabilitiesAtEnd) return false;
+  return liabilityTotal(k1.liabilitiesAtEnd) < liabilityTotal(k1.liabilitiesAtStart);
+}
+
 /* Lines 3a and 3b from item K1; waiting when the K-1 gives one end of the year only. */
 function liabilitiesOf(entity: PassThroughEntity): { start: number; end: number } | "waiting" {
   const k1 = entity.k1;

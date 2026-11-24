@@ -46,6 +46,13 @@ export type PassiveActivities = Record<ActivityPart, PassiveActivity[]>;
 export interface PassiveK1Activities {
   rows: PassiveActivity[];
   settled: boolean;
+  /*
+   * A K-1 that is or may be passive and that the engine cannot put on the form
+   * (passThrough/form8582Rows.ts): every amount of the form is this gap.
+   */
+  gap?: string;
+  /* Those K-1s with a passive loss or deduction: the form files for them. */
+  unmodeledWithDeductions?: string[];
 }
 
 /*

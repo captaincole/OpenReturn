@@ -4,6 +4,7 @@
 
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
 import { numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
+import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { namesOnReturn } from "../returnNames.js";
 import {
@@ -190,6 +191,27 @@ const partsIIAndIII: Record<string, Fn> = {
   },
 };
 
+/*
+ * MANUAL EDIT: Part I combines every passive activity
+ * (irs-8582-inst-2025::sec::specific-instructions::b01). While a K-1 that is or
+ * may be passive is not on the form (passThrough/form8582Rows.ts), every line
+ * past the header is that gap, which names the K-1.
+ */
+function withK1Gap(bindings: Record<string, Fn>): Record<string, Fn> {
+  return Object.fromEntries(
+    Object.entries(bindings).map(([fieldId, binding]): [string, Fn] => {
+      if (fieldId.startsWith("0.header.")) return [fieldId, binding];
+      return [
+        fieldId,
+        (form, info) => {
+          const gap = info.passiveK1Activities?.gap;
+          return gap ? unsupported(gap) : binding(form, info);
+        },
+      ];
+    }),
+  );
+}
+
 export function register(): void {
   const bindings: Record<string, Fn> = {
     "0.header.name": (_, info) => namesOnReturn(info),
@@ -229,7 +251,7 @@ export function register(): void {
     ...allocationBindings(),
   };
   defineForm<Form8582, Form8582FilingInfo>("form-8582", {
-    bindings: bindings as Bindings,
+    bindings: withK1Gap(bindings) as Bindings,
     unsupported: part9Unsupported() as Partial<Record<keyof Form8582, string>>,
     formatters: {
       // The identifying number renders with dashes; this form has no comb widget.

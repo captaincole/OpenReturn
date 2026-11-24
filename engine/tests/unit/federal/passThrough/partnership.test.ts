@@ -128,6 +128,37 @@ describe("the partner's basis (the Partner's Basis Worksheet)", () => {
     }
   });
 
+  it("reports a decrease in liabilities above the basis with no loss or distribution (line 11b)", () => {
+    // Line 7 = 10,000 + 5,000; line 9a = 100,000 − 60,000; line 11b = 40,000 − 15,000.
+    const entity = partnership("deleveraged", [{ box: "2", amount: 5000 }], owner(10000), {
+      liabilitiesAtStart: { nonrecourse: 100000 },
+      liabilitiesAtEnd: { nonrecourse: 60000 },
+    });
+    const result = basisOutcome(entity);
+    expect(result?.kind).toBe("unsupported");
+    if (result?.kind === "unsupported") expect(result.reason).toContain("$25000 above basis");
+  });
+
+  it("passes a decrease in liabilities within the basis, and lowers the basis", () => {
+    const entity = partnership("paid-down", [{ box: "2", amount: 5000 }], owner(50000), {
+      liabilitiesAtStart: { nonrecourse: 100000 },
+      liabilitiesAtEnd: { nonrecourse: 60000 },
+    });
+    expect(basisOutcome(entity)).toMatchObject({ kind: "applied", carried: [] });
+    const figured = figurePartnerBasis(entity);
+    if (figured.kind === "figured") {
+      expect(figured.figures.lines.line9a).toBe(40000);
+      expect(figured.figures.lines.line18).toBe(15000);
+    }
+  });
+
+  it("does not run the worksheet for a K-1 with income and no liabilities: no answer is asked", () => {
+    const entity = partnership("plain", [{ box: "1", amount: 5000 }], {
+      materiallyParticipated: true,
+    });
+    expect(basisOutcome(entity)?.kind).toBe("applied");
+  });
+
   it("waits for the K-1 when it gives the liabilities at one end of the year only", () => {
     const entity = partnership("half", [{ box: "1", amount: -100 }], owner(10000), {
       liabilitiesAtEnd: { recourse: 3000 },
@@ -258,7 +289,12 @@ describe("the passive stage and Form 8582", () => {
     expect(allowedOf(limited([sold]).get(sold.key)).map((item) => item.amount)).toEqual([
       -6000, -9000,
     ]);
-    expect(form8582K1Activities([sold], CONTEXT)).toEqual({ rows: [], settled: true });
+    expect(form8582K1Activities([sold], CONTEXT)).toEqual({
+      rows: [],
+      settled: true,
+      gap: undefined,
+      unmodeledWithDeductions: [],
+    });
   });
 
   it("puts an entire disposition with an overall gain on Form 8582, its gain in column (a)", () => {

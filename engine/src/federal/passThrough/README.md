@@ -198,7 +198,10 @@ routed nor reported (`tests/unit/federal/passThrough/boxTables.test.ts`).
 - **Schedule K-3** for an S corporation's or a partnership's foreign taxes,
   and the 28% rate gain and unrecaptured section 1250 gain worksheets.
 - **A passive S corporation K-1**: the same Form 8582 rows as a partnership's;
-  `passiveForSCorporation` still reports it unsupported.
+  `passiveForSCorporation` still reports it unsupported. Until then such a
+  K-1, a beneficiary's boxes 6 to 8, or a partnership K-1 the limits stop
+  makes Form 8582's lines a gap that names it (`form8582Rows.ts`,
+  QUESTIONS.md item 41).
 - **The special allowance next to a K-1 loss**: when the return's rental real
   estate with active participation has a loss, Form 8582 line 9 needs modified
   AGI, which the limit stage cannot read; a losing K-1 is unsupported then.
