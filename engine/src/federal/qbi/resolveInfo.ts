@@ -146,7 +146,12 @@ function allowedStatementQbi(routed: RoutedEntity, statementQbi: number) {
 function priorYearQbiLossOf(routed: RoutedEntity): number | "waiting" | undefined {
   if (routed.kind !== "routed") return undefined;
   const allowed = lossTotal(
-    routed.allowed.filter((item) => item.fromPriorYear === true && item.passiveCarryover !== true),
+    routed.allowed.filter(
+      (item) =>
+        item.fromPriorYear === true &&
+        item.passiveCarryover !== true &&
+        item.atRiskCarryover !== true,
+    ),
   );
   if (allowed === 0) return undefined;
   const qualified = routed.entity.holding?.carriedQualifiedBusinessLoss;
@@ -156,17 +161,20 @@ function priorYearQbiLossOf(routed: RoutedEntity): number | "waiting" | undefine
 }
 
 /*
- * A passive loss carried from an earlier year and allowed now is a QBI loss
- * carryforward too (irs-8995-inst-2025::sec::line-3::b01), but the holding's
- * qualified part (carriedQualifiedBusinessLoss) is the basis loss's, so its
- * part on Form 8995 line 3 is not modeled.
+ * A passive or at-risk loss carried from an earlier year and allowed now is a
+ * QBI loss carryforward too (irs-8995-inst-2025::sec::line-3::b01), but the
+ * holding's qualified part (carriedQualifiedBusinessLoss) is the basis loss's,
+ * so its part on Form 8995 line 3 is not modeled.
  */
 const carriedPassiveLossAllowed = (routed: RoutedEntity) =>
   routed.kind === "routed" &&
-  routed.allowed.some((item) => item.passiveCarryover === true && isBusinessLoss(item));
+  routed.allowed.some(
+    (item) =>
+      (item.passiveCarryover === true || item.atRiskCarryover === true) && isBusinessLoss(item),
+  );
 
 const CARRIED_PASSIVE_QBI_GAP = (title: string) =>
-  `${title}: a passive loss carried from an earlier year and allowed this year is a QBI loss carryforward (Form 8995 line 3), whose qualified part is not modeled.`;
+  `${title}: a passive or at-risk loss carried from an earlier year and allowed this year is a QBI loss carryforward (Form 8995 line 3), whose qualified part is not modeled.`;
 
 /* The K-1s whose allowed carried loss waits on the holding's qualified part. */
 export function k1sWithoutCarriedQbiAnswer(inputs: ResolverInputs): string[] {

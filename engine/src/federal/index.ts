@@ -701,6 +701,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 6198",
     relativeDir: "federal/6198",
     register: registerForm6198,
+    /* One copy for each activity that files it (irs-6198-inst-2025::sec::aggregation-or-separation::b01). */
+    copies: {
+      count: (info) => info?.form6198Copies?.length ?? 1,
+      select: (info, index) => info && { ...info, form6198CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-6252",

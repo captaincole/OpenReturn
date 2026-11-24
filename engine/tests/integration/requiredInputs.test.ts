@@ -297,8 +297,9 @@ beforeEach(() => new Promise<void>((resolve) => setImmediate(resolve)));
 describe.each(SCENARIOS)("required inputs: $name", (scenario) => {
   const decisions = decisionsWithPreparerStyle(scenario);
   /*
-   * Evaluated on first use inside a test, not while the suite is collected: one
-   * long synchronous collection blocks the worker past vitest's RPC timeout.
+   * Evaluated on first use inside a test, not while the suite is collected:
+   * one long synchronous collection of every scenario holds the worker past
+   * vitest's RPC timeout on a busy machine.
    */
   let baseOutcome: Outcome | undefined;
   const base = (): Outcome => (baseOutcome ??= evaluate(scenario, scenario.facts, decisions));
@@ -325,9 +326,7 @@ describe.each(SCENARIOS)("required inputs: $name", (scenario) => {
       })),
   ].filter((input) => !isOptional(input.key));
 
-  it.each(answers)("missing $key is reported", async ({ drop }) => {
-    // Let the worker answer vitest's RPC between the synchronous evaluations: the file runs past its timeout otherwise.
-    await new Promise((resolve) => setImmediate(resolve));
+  it.each(answers)("missing $key is reported", ({ drop }) => {
     expect(unreported(base(), drop()).slice(0, 3)).toEqual([]);
   });
 });
