@@ -62,6 +62,31 @@ All inputs to lines 1–21 and Part III are 2024 amounts. The taxpayer states th
 - Default: the form does not file from facts. With `decisions.scope.must_file_8801` true, lines 1–21 print and lines 22–26 stay blank.
 - Changes dollars: no.
 
+## 10. Rounding inside the computation
+
+- Text: the 8801 instructions have no rounding rule. The Form 1040 rule: "You can round off cents to whole dollars on your return and schedules. If you do round to whole dollars, you must round all amounts" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01).
+- The gap: lines 4 (the married-filing-separately add-on), 8, 11, 33, 46, 49, 52 and 54 multiply by a rate and can produce cents.
+- Default: each line that produces cents rounds to the nearest dollar (`roundDollars`), and the next line reads the rounded amount. The blind fill made the same choice.
+- Changes dollars: by $1 at most, against a preparer who keeps the cents until line 55 or line 25. In the blind cases 3, 7 and 12, both ways give the same result.
+
+## 11. Form 6251 line 2e goes on line 1 only
+
+- Text: line 1 combines "lines 1 and 2e of your 2024 Form 6251" (the blank form). Line 2 lists lines 2a, 2b, 2c, 2d, 2g and 2h, plus "Exclusion items on other lines" (irs-8801-inst-2025::sec::line-2::b01).
+- Default: the 2024 line 2e amount is in line 1 and not in line 2. The MTCNOLD is a subtraction on line 3 (question 2).
+- Changes dollars: yes, for a 2024 net operating loss deduction, if a preparer also counts line 2e on line 2. The text supports the default.
+
+## 12. A negative 2024 Form 6251 line 2b
+
+- Text: line 2 combines lines 2a, 2b, … of the 2024 Form 6251 (the blank form; irs-8801-inst-2025::sec::line-2::b01). Line 2b (a tax refund) is a negative amount.
+- Default: line 2 keeps each amount with its sign, so a negative line 2b lowers line 2.
+- Changes dollars: yes, if a preparer drops a negative amount. The word "combine" supports the default.
+
+## Second opinions
+
+- Blind fill (13 cases, `.scratch/blind`): every value matches the engine (13 lines and the files flag in each case). There are no dollar differences and no blank-against-0 differences. The preparer's doubts that change dollars are questions 3, 9, 10, 11 and 12.
+- PolicyEngine-US 2.153.8 (commit b3edc0446b): `prior_year_minimum_tax_credit` is a bare input with no formula, so it does not model Form 8801 lines 1–26. Its 2024 Form 6251 parameters are a check on the constants the 2025 form prints. These match: the exemption (85,700 / 133,300 / 66,650), the phase-out start (609,350 / 1,218,700), the 25% phase-out rate, the married-filing-separately limit (875,950, capped at the exemption), the 26%/28% break (232,600, half for married filing separately), and the 2024 0% and 15% capital gain ceilings for each filing status (lines 34 and 40). Its Form 6251 Part III formula (`amt_tax_including_cg`) has the same steps as lines 27–55. It skips the 25% step when unrecaptured section 1250 gain is 0; the form skips lines 50–52 when line 29 is zero or blank. These are the same condition. It keeps cents and the engine rounds each line (question 10). No disagreement.
+- IRS Direct File (IRS-Public/direct-file): a GitHub code search finds no Form 8801 or Form 6251. Nothing to compare.
+
 ## Confidence by field group
 
 | Field group | Confidence |
