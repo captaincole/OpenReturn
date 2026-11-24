@@ -73,18 +73,24 @@ default the engine applies, and whether the default can change a dollar amount.
     every sale is the shop's, so line 12's 15,000 is the shop's QBI, and Form
     8995 line 15 is 17,746 (the line 14 limit; line 10 is 18,416).
 
-11. **Net investment income (needs a person).** Form 8960 line 5a takes Form
-    1040 line 7a and Schedule 1 line 4. Line 5b takes out "Gain or loss from the
-    sale of property held in a non-section 1411 trade or business"
-    (irs-8960-inst-2025::sec::line-5b-net-gain-or-loss-from-disposition-of::b01).
-    Line 5b stays an unsupported line that the totals read as 0: no sale fact
-    names its business, and the text does not say how much of a netted section
-    1231 gain (line 9 after line 8) belongs to one property. Example: single,
-    W-2 300,000, a Schedule C business with material participation sells
-    equipment for 40,000 of section 1245 recapture; line 5d includes the 40,000
-    (1,520 of NIIT), and the right line 5b is -40,000. A passive rental's gain
-    (the common case) is net investment income, so it is right as it is.
-    Changes dollars: yes, when Form 8960 files with a nonpassive business's gain.
+11. **Net investment income: Form 8960 line 5b.** Line 5a takes Form 1040 line
+    7a and Schedule 1 line 4. Line 5b takes out "Gain or loss from the sale of
+    property held in a non-section 1411 trade or business"
+    (irs-8960-inst-2025::sec::line-5b-net-gain-or-loss-from-disposition-of::b01),
+    one net amount per business on the Lines 5a–5d Worksheet, lines 2(a) and
+    2(b) (::b05). A business's net amount is the total of its properties on
+    lines 2, 10 and 24, whatever line 8 makes ordinary: lines 7 to 18b keep the
+    sum. Default: a Schedule C business with line G "Yes" is such a business
+    (as on line 4b); its sales come out (`8960/line5b.ts`). A passive business's,
+    a rental's and a sale of no business stay in NII. Gaps: a rental that line
+    4b takes out as a nonpassive trade or business (its sale is not modeled),
+    and a capital loss carried in from 2024 (worksheet line 2(h) is last year's
+    line 2(i), which no fact gives). Not modeled, no fact: formerly passive
+    losses (2(c)), installment payments (2(d)), NUA (2(e)), and substantially
+    appreciated property recharacterized as portfolio income (::b01, item 2).
+    Who Must File now counts the Form 4797 net gain in the MAGI bound, and a
+    sale that no business with line G "Yes" made as investment income. Changes
+    dollars: no for the figured cases.
 
 12. **The Unrecaptured Section 1250 Gain Worksheet.** Lines 4, 10 and 12 have no
     fact (installment sales, a partnership interest, section 1250 property not in

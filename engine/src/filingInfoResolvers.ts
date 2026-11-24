@@ -323,7 +323,7 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
   const threshold = status ? NIIT_THRESHOLDS[status] : undefined;
   // With no filing status yet, count a spouse's income too, and test the lowest threshold.
   const joint = status === undefined || status === "married_filing_jointly";
-  const { scheduleCNonpassive, hasInvestment } = investmentSignals(inputs, joint);
+  const { hasInvestment, ...signals } = investmentSignals(inputs, joint);
   const magi = magiUpperBound(inputs, joint);
   const underEvery = magi <= Math.min(...Object.values(NIIT_THRESHOLDS));
   const resolution = resolveMustFile(inputs.decisionByKey, {
@@ -360,7 +360,8 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
         ...openRentals,
       ],
     },
-    scheduleCNonpassive,
+    // Line 4b's scheduleCNonpassive; line 5b's nonpassiveBusinessKeys and capitalLossCarriedIn.
+    ...signals,
     rentalProperties,
     stateLocalTaxAllocableToInvestmentIncome: allocableTax,
     additionalModifications,
