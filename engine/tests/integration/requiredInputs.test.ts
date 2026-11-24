@@ -293,7 +293,13 @@ describe.each(SCENARIOS)("required inputs: $name", (scenario) => {
       })),
   ].filter((input) => !isOptional(input.key));
 
-  it.each(answers)("missing $key is reported", ({ drop }) => {
+  it.each(answers)("missing $key is reported", async ({ drop }) => {
     expect(unreported(base, drop()).slice(0, 3)).toEqual([]);
+    /*
+     * Every check is synchronous, so the worker would not read its messages
+     * until the whole file ends. Past 60 s that fails the run with vitest's
+     * "Timeout calling onTaskUpdate". Yield one macrotask after each check.
+     */
+    await new Promise((resolve) => setImmediate(resolve));
   });
 });

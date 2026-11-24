@@ -96,6 +96,47 @@ default named. A person decides whether to keep it.
 - Default: every line is blank, as Form 3903 does with no move.
 - Changes a dollar amount: no.
 
+## 11. Line 9 for a Virginia dual resident
+
+- Source: "If you are a dual resident, you are allowed to claim the other state
+  tax credit for taxes paid to Virginia on Virginia source income"
+  (`ca-540-sched-s-inst-2025::sec::c-california-residents::b02`), and line 9
+  "Residents – Enter only those items of total adjusted gross income taxed by
+  the other state" (`ca-540-sched-s-inst-2025::sec::part-ii-figure-your-other-state-tax-credit::b02`).
+- Default: Part I holds the Virginia-source items only. Line 9 is all the
+  income Virginia taxed, as stated. Line 10 then limits the Virginia tax to its
+  Virginia-source share.
+- Changes a dollar amount: yes. With line 9 at the Virginia-source amount,
+  line 10 is 1.0000 and the credit can be larger (blind case 9: $4,000, not
+  $3,266). The blind fill made the same choice.
+
+## 12. Other credits before line 2
+
+- Source: "Form 540, line 48 (without other state tax credit and PTE elective
+  tax credit)" (`ca-540-sched-s-inst-2025::sec::part-ii-figure-your-other-state-tax-credit::b01`);
+  "The credit is applied against California net tax, less other credits"
+  (`ca-540-sched-s-inst-2025::sec::b-application-of-the-credit::b01`).
+- Default: line 2 is Form 540 line 35 less the other credits on lines 40 to 46,
+  not less than 0. The text settles this; it is listed because the blind fill
+  raised it.
+- Changes a dollar amount: yes, if a reader took line 35 instead (blind case 4:
+  $750, not $686).
+
+## Second opinions
+
+- Blind fill (14 cases, `.scratch/blind/`, not committed): every line agrees
+  with the engine, 0 differences. The blind fill made the same choice on each
+  open question above.
+- PolicyEngine-US 2.153.8 (commit b3edc044, 2026-11-23; sparse checkout of
+  `variables`, `parameters` and `tests` under `gov/states/ca`): it does not
+  model Schedule S. California's nonrefundable credits are only
+  `ca_exemptions`, `ca_cdcc` and `ca_renter_credit`
+  (`parameters/gov/states/ca/tax/income/credits/nonrefundable.yaml`), and no
+  variable names another state's tax. Nothing to compare.
+- IRS Direct File: federal only, no Schedule S. The repo names no checkout of
+  its tax logic (issue #140). Not compared. The repo names no other reference
+  implementation for this form.
+
 ## Confidence by field group
 
 | Field group | Confidence |
