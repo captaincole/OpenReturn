@@ -66,9 +66,9 @@ Each question has its source and the default the code uses now.
    basis computation attached (irs-1040se-inst-2025::sec::line-28::b03);
    column (f) for amounts not at risk in an activity with a loss
    (::special-rules-that-limit-losses::b03). Default: column (e) is checked
-   when Form 7203 files for the K-1 (`needsForm7203`); column (f) is No, since
-   the at-risk stage routes a loss only when all of the investment is at
-   risk. A "PYA" row leaves both blank: the K-1's own row answers them. A
+   when Form 7203 files for the K-1 (`needsForm7203`); column (f) is checked
+   when Form 6198 files for it (`k1sOnForm6198`), else No. A "PYA" row leaves
+   both blank: the K-1's own row answers them. A
    sale of stock stops at the basis stage. A partnership's row leaves column
    (e) unchecked: the line 28 instructions ask for the basis computation from
    an S corporation's owner only (::line-28::b03). A partnership's item J
@@ -99,22 +99,18 @@ Each question has its source and the default the code uses now.
     a joint return for 2025 (irs-461-inst-2025::sec::who-must-file::b02).
     Form 461 must be attached when net business losses are more than the
     threshold, or "a loss of more than $156,500 on any one of Form 461, lines
-    1 through 8" (::b01). Default (`excessBusinessLoss.ts`): the stage adds
-    every K-1 business loss that reaches it and the return's other business
-    losses (each Schedule C line 31 loss and each rental's loss before the
-    passive rules, `otherBusinessLosses` in `receipts.ts`), without any
-    income. At or below the threshold no loss can be limited and the items
-    pass in full; above it the K-1 is unsupported, since the income side and
-    Form 461's rules are not modeled. An unknown filing status uses the lower
-    threshold (no other stage waits on the status). Separately, Form 461's
-    resolver files the form when the K-1 and rental losses (line 5) or the
-    Schedule C losses (line 2), added without income, are more than $156,500.
-    That bound can require the form when a line nets below $156,500; Form 461
-    has no rules, so it shows as filed with every line unsupported, and the
-    rest of the return computes. A business whose amount is not known yet
-    makes the K-1 wait on that business's fact. A K-1 stopped at an earlier
-    stage is not added; its own gap already keeps the return from looking
-    finished.
+    1 through 8" (::b01). Default since Form 461 has rules (`limits.ts`,
+    `federal/461/`): the limit does not change Schedule E
+    (irs-1040se-inst-2025::sec::special-rules-that-limit-losses::b06), so the
+    stage allows every item in full and carries nothing. Form 461 adds the
+    return's lines after all the stages, and Schedule 1 line 8p adds the
+    excess back. Form 461's resolver still files the form from a bound: the
+    K-1 and rental losses (line 5), the Schedule C losses (line 2) and a
+    stated line 8 loss, added without income, each more than $156,500, or all
+    of them more than the threshold. That bound can file the form when the
+    lines net below the limits; line 16 is then 0 or more and nothing reaches
+    line 8p (`federal/461/QUESTIONS.md`). A K-1 stopped at an earlier stage
+    is not added; its own gap makes Form 461's line 5 a gap.
 13. **Scenario `lan`: who owns which business.** The task gives the spouse the
     Schedule C and the taxpayer the S corporation. A spouse's Schedule SE on a
     joint return is not modeled (`schedule-se/resolveInfo.ts`). Default: the
@@ -332,11 +328,11 @@ Each question has its source and the default the code uses now.
     at-risk rules and passive activity loss rules"). Default: a basis loss
     carried from an earlier year and allowed now is, for a passive activity,
     this year's loss on Form 8582 (column (b)) and is reported in column (g);
-    for a nonpassive one it is the "PYA" row. The at-risk stage passes only
-    when the holding says all of the investment is at risk, the share of
+    for a nonpassive one it is the "PYA" row. The at-risk stage passes when
+    the holding says all of the investment is at risk, the share of
     nonrecourse debt included (::other-deductions::b04 of the partner's
-    instructions lists what is not at risk); otherwise Form 6198 is
-    unsupported, as before.
+    instructions lists what is not at risk); otherwise Form 6198 figures the
+    allowed loss (`atRisk.ts`, `federal/6198/QUESTIONS.md`).
 37. **The carried passive loss and QBI.** A passive loss allowed this year
     after being carried is a QBI loss carryforward (Form 8995 line 3,
     irs-8995-inst-2025::sec::line-3::b01), and its qualified part is not in

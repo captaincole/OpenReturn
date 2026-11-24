@@ -6,9 +6,12 @@
 
 import {
   k1EntityIdOf,
+  makeAtRiskFactKey,
   makeK1HoldingFactKey,
+  readAtRiskFacts,
   readK1Facts,
   readK1HoldingFacts,
+  type AtRiskAmounts,
   type K1CarriedBasisLosses,
   type K1FactValue,
   type K1Form,
@@ -67,6 +70,13 @@ export interface PassThroughItem {
    * while Form 8582 reports it.
    */
   passiveCarryover?: boolean;
+  /*
+   * A loss the at-risk limit held back in an earlier year (the holding's
+   * carriedLosses.atRisk), on this year's Form 6198 line 1; fromPriorYear is
+   * true too, so once allowed it takes a "PYA" row like a carried basis loss
+   * (irs-1040se-inst-2025::sec::losses-not-allowed-in-prior-years-due-to-the-basis::b01).
+   */
+  atRiskCarryover?: boolean;
 }
 
 /* An item as a reason names it: its type and the box it came from. */
@@ -94,6 +104,8 @@ export interface PassThroughEntity {
   items: PassThroughItem[];
   /* The basis losses carried from earlier years (fromPriorYear), from the holding. */
   priorYearItems: PassThroughItem[];
+  /* Form 6198's amounts at risk (the fact at_risk.<key>); undefined until recorded. */
+  atRisk?: AtRiskAmounts;
 }
 
 type CarriedBasisItem = {
@@ -258,6 +270,7 @@ export function passThroughEntitiesOnReturn(
 } {
   const { k1s, malformedKeys } = readK1Facts(facts);
   const { holdings, malformedKeys: malformedHoldings } = readK1HoldingFacts(facts);
+  const { amounts: atRisk, malformedKeys: malformedAtRisk } = readAtRiskFacts(facts);
   const all = k1s.map(({ key, value }): PassThroughEntity => {
     const holdingKey = makeK1HoldingFactKey(k1EntityIdOf(key) ?? key);
     const holding = holdings.get(holdingKey);
@@ -271,6 +284,7 @@ export function passThroughEntitiesOnReturn(
       holding,
       items: itemsOf(key, value),
       priorYearItems: priorYearItemsOf(key, holding, value.form),
+      atRisk: atRisk.get(makeAtRiskFactKey(key)),
     };
   });
   const offReturn = (entity: PassThroughEntity) => !joint && entity.holding?.owner === "spouse";
@@ -281,7 +295,7 @@ export function passThroughEntitiesOnReturn(
     missingHoldingKeys: entities
       .filter((entity) => entity.holding === undefined && (entity.form !== "1041" || !joint))
       .map((entity) => entity.holdingKey),
-    malformedKeys: [...malformedKeys, ...malformedHoldings],
+    malformedKeys: [...malformedKeys, ...malformedHoldings, ...malformedAtRisk],
   };
 }
 

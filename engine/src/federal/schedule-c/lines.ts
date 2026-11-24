@@ -16,6 +16,7 @@ import {
 } from "../../facts/index.js";
 import { atLeast, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { form8829Figures, homeOfficeActualGap, sharedHomeGap } from "../8829/lines.js";
+import { allowedBusinessLoss } from "./atRisk.js";
 import { line13Depreciation, partVEntries } from "./attachments.js";
 
 // irs-1040sc-inst-2025::sec::what-s-new::b01: 70 cents per business mile for 2025.
@@ -192,24 +193,40 @@ export function homeOfficeExpenses(
 }
 
 /*
- * Line 31: line 29 less line 30. irs-1040sc-inst-2025::sec::line-31::b01–b02:
- * a loss waits for the at-risk and passive loss rules. With line G "Yes" and all
- * investment at risk (box 32a), neither reduces the loss
- * (irs-1040sc-inst-2025::sec::line-32::b02), so line 31 takes it. Form 6198 (box
- * 32b) and Form 8582 (line G "No") are not modeled: line 31 stays blank then, and
- * a profit with line G "No" (or unanswered) may carry prior-year passive losses.
- * A home office whose line 30 is blank leaves line 31 blank too. Schedule SE line
- * 2 and Schedule 1 line 3 take this amount.
+ * Line 29 less line 30: the profit or loss before the at-risk and passive loss
+ * rules, Form 6198 line 1 for a business with box 32b. Undefined while line 29,
+ * or a home office's line 30, is blank.
  */
-export function netProfit(
+export function profitBeforeLossRules(
   business: BusinessFactValue,
   onReturn: readonly BusinessFactValue[],
 ): number | undefined {
   const line29 = tentativeProfit(business);
   const line30 = homeOfficeExpenses(business, onReturn);
-  if (line29 === undefined || business.materiallyParticipated !== true) return undefined;
+  if (line29 === undefined) return undefined;
   const hasOffice = business.homeOffice !== undefined || business.homeOfficeActual !== undefined;
   if (hasOffice && line30 === undefined) return undefined;
-  const line31 = line29 - (line30 ?? 0);
-  return line31 < 0 && business.allInvestmentAtRisk !== true ? undefined : line31;
+  return line29 - (line30 ?? 0);
+}
+
+/*
+ * Line 31: line 29 less line 30. irs-1040sc-inst-2025::sec::line-31::b01–b02:
+ * a loss waits for the at-risk and passive loss rules. With line G "Yes" and all
+ * investment at risk (box 32a), neither reduces the loss
+ * (irs-1040sc-inst-2025::sec::line-32::b02), so line 31 takes it. With line G
+ * "Yes" and box 32b, Form 6198 figures the loss and the passive rules do not
+ * apply (::line-32::b03): line 31 takes the loss Form 6198 allows (atRisk.ts),
+ * blank while it waits. Form 8582 (line G "No") is not modeled: line 31 stays
+ * blank then, and a profit with line G "No" (or unanswered) may carry
+ * prior-year passive losses. A home office whose line 30 is blank leaves line 31
+ * blank too. Schedule SE line 2 and Schedule 1 line 3 take this amount.
+ */
+export function netProfit(
+  business: BusinessFactValue,
+  onReturn: readonly BusinessFactValue[],
+): number | undefined {
+  const line31 = profitBeforeLossRules(business, onReturn);
+  if (line31 === undefined || business.materiallyParticipated !== true) return undefined;
+  if (line31 >= 0 || business.allInvestmentAtRisk === true) return line31;
+  return business.allInvestmentAtRisk === false ? allowedBusinessLoss(business, line31) : undefined;
 }
