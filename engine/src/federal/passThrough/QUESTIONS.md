@@ -66,9 +66,9 @@ Each question has its source and the default the code uses now.
    basis computation attached (irs-1040se-inst-2025::sec::line-28::b03);
    column (f) for amounts not at risk in an activity with a loss
    (::special-rules-that-limit-losses::b03). Default: column (e) is checked
-   when Form 7203 files for the K-1 (`needsForm7203`); column (f) is No, since
-   the at-risk stage routes a loss only when all of the investment is at
-   risk. A "PYA" row leaves both blank: the K-1's own row answers them. A
+   when Form 7203 files for the K-1 (`needsForm7203`); column (f) is checked
+   when Form 6198 files for it (`k1sOnForm6198`), else No. A "PYA" row leaves
+   both blank: the K-1's own row answers them. A
    sale of stock stops at the basis stage. A partnership's row leaves column
    (e) unchecked: the line 28 instructions ask for the basis computation from
    an S corporation's owner only (::line-28::b03). A partnership's item J
@@ -328,11 +328,11 @@ Each question has its source and the default the code uses now.
     at-risk rules and passive activity loss rules"). Default: a basis loss
     carried from an earlier year and allowed now is, for a passive activity,
     this year's loss on Form 8582 (column (b)) and is reported in column (g);
-    for a nonpassive one it is the "PYA" row. The at-risk stage passes only
-    when the holding says all of the investment is at risk, the share of
+    for a nonpassive one it is the "PYA" row. The at-risk stage passes when
+    the holding says all of the investment is at risk, the share of
     nonrecourse debt included (::other-deductions::b04 of the partner's
-    instructions lists what is not at risk); otherwise Form 6198 is
-    unsupported, as before.
+    instructions lists what is not at risk); otherwise Form 6198 figures the
+    allowed loss (`atRisk.ts`, `federal/6198/QUESTIONS.md`).
 37. **The carried passive loss and QBI.** A passive loss allowed this year
     after being carried is a QBI loss carryforward (Form 8995 line 3,
     irs-8995-inst-2025::sec::line-3::b01), and its qualified part is not in
