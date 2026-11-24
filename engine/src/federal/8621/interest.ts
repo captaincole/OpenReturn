@@ -34,8 +34,10 @@ export function daysInYear(year: number): number {
 
 /*
  * The due date of a calendar-year individual return "without regard to
- * extensions": April 15 of the next year (QUESTIONS.md, question 7: the
- * weekend rule is not applied).
+ * extensions": April 15 of the next year (QUESTIONS.md, question 6: the
+ * weekend rule is not applied; it makes an act timely on the next business
+ * day, irs-2210-inst-2025::sec::future-developments::b01, and does not
+ * plainly move this date).
  */
 export function returnDueDate(taxYear: number): Date {
   return new Date(Date.UTC(taxYear + 1, 3, 15));

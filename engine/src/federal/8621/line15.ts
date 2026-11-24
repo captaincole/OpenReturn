@@ -60,7 +60,7 @@ interface Dated {
   date: Date;
 }
 
-/* The holding period starts the day after the acquisition date (QUESTIONS.md, question 5). */
+/* The holding period starts the day after the acquisition date (QUESTIONS.md, question 4). */
 export function holdingStartOf(acquiredDate: string): Date | undefined {
   const acquired = utcDate(acquiredDate);
   return acquired === undefined ? undefined : addDays(acquired, 1);
@@ -99,7 +99,7 @@ function firstYearDistributions(dated: Dated[]): Omit<Line15, "line15f"> {
 /*
  * Lines 15a–15e(2) after the first year. The excess (line 15e(1), not below
  * 0) "is apportioned among all actual distributions" (::line-15c::b01), in
- * proportion to each distribution (QUESTIONS.md, question 3). Each part
+ * proportion to each distribution (QUESTIONS.md, question 2). Each part
  * converts at its distribution's rate (::line-15::b01); the foreign tax on a
  * distribution splits in the same proportion (::line-16d::b01).
  */

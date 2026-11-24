@@ -2,6 +2,26 @@
 
 Each place where the form and its instructions do not settle a rule. Short answers; a person decides. The instructions publish no example with numbers, and no IRS publication has one.
 
+## Sorted
+
+**1. Two official texts conflict (a person decides):**
+
+- Question 6, the rate for April 1–15, 2026. The Form 2210 instructions: "Rate Period 4: January 1, 2026–April 15, 2026 ... × 0.07" (irs-2210-inst-2025::sec::tax-year-2025::b04–b05). Rev. Rul. 2026-5 (not in the corpus): "an underpayment rate of 6 percent" for the quarter that begins April 1, 2026. The engine uses 6%: the Form 2210 period follows a rule for the estimated tax penalty (section 6621(b)(2)(B)), and line 16f is not that penalty.
+
+**2. Should we do this now:**
+
+- Done in this branch: question 11 (Form 8960 line 5b is blank with the (g) election, and unsupported only on a sign of another line 5b item); question 20 (an event that ends an older section 1294 election before the most recent one is a gap); question 21 (the statement's amounts per unit per day, with the holder's unit days); amounts in the fund's currency (currency.ts).
+- Question 6, the weekend shift of the due date: not now. The only official text on weekend dates says an act "is considered to be performed timely if it's performed no later than the next day that isn't a Saturday, Sunday, or legal holiday" (irs-2210-inst-2025::sec::future-developments::b01); it moves when an act is timely, not the due date that line 16f counts from, so a shift would be a guess. A person decides; the blind fill shifted, and it moves line 16f by about $1.
+- Question 14, more than one block of shares: not now. One form would need a Part V page for each block, and the renderer prints one Part V per copy; both scenarios hold one block per fund.
+- Question 7, line 20 to the filing date: not now. No fact holds the date the return is filed, and the line is informational.
+- Question 22, Form 1116 line 20 and the section 1291 tax: not now. Neither scenario's credit reaches the line 21 limit, so no dollar changes here.
+- Questions 1, 2, 3, 4, 5, 9, 10, 13, 15, 16, 17, 18, 19: the default stands; each names what would change it. Nothing to do in this branch.
+
+**3. A pattern change:**
+
+- Question 8, Election B. Before: the engine figures the return once, in one pass to a fixed point, and no form line can ask for the tax of a different return. After: line 9b would evaluate the whole return a second time with the QEF's undistributed earnings (line 8e) left out, because total tax (Form 1040 line 24) also moves through the net investment income tax, the minimum tax and credit limits. The engine has no clean way to do that today (Form 8615 refigures only line 16 with the QDCG worksheet), so lines 9a to 9c stay unsupported.
+- Question 12, a loss under the general rules. Before: Form 8949 rows come only from sale facts. After: a Form 8621 loss (line 14c, or a section 1291 fund's loss on line 15f) would add a Form 8949 row. Until then Schedule D line 11 is unsupported with such a loss.
+
 ## 1. Which Schedule D line takes line 7c
 
 - Source: "This amount is a net long-term capital gain. Enter this amount in Part II of the Schedule D used for your income tax return." (the form, line 7c) "Portions of the net capital gain may have to be reported on different lines of Schedule D, depending upon the information provided by the QEF concerning the section 1(h) categories" (irs-8621-inst-2025::sec::line-7c::b01).
@@ -35,7 +55,7 @@ Each place where the form and its instructions do not settle a rule. Short answe
 ## 6. Interest: the due date and the day count
 
 - Source: interest runs "beginning on the due date (without regard to extensions) of your income tax return for the tax year to which an increase in tax is attributable and ending with the due date ... for the tax year of the excess distribution", "using the rates and methods under section 6621" (irs-8621-inst-2025::sec::line-16f::b01; ::line-24::b01).
-- Default: April 15 of the next year for every year, with no weekend or holiday shift. Interest compounds daily from the day after the start through the end date, at the quarter's underpayment rate over 365 days (366 in a leap year). The rates are Rev. Rul. 2024-18 and the 2025–2026 releases (data/underpaymentRates.ts).
+- Default: April 15 of the next year for every year, with no weekend or holiday shift. The weekend rule makes an act "performed timely if it's performed no later than the next day that isn't a Saturday, Sunday, or legal holiday" (irs-2210-inst-2025::sec::future-developments::b01); no act is due on the dates line 16f counts between. A disaster postponement (the 2019 and 2020 returns) is not applied either. Interest compounds daily from the day after the start through the end date, at the quarter's underpayment rate over 365 days (366 in a leap year). The rates are Rev. Rul. 2024-18 and the 2025–2026 releases (data/underpaymentRates.ts).
 - Alternative (the blind fill): the shifted due dates (2022-04-18 for 2021, 2023-04-18 for 2022). The blind fill also took 7% for April 1–15, 2026 from the Form 2210 worksheet ("Rate Period 4: January 1, 2026–April 15, 2026 ... × 0.07", irs-2210-inst-2025::sec::tax-year-2025::b04–b05). The engine keeps 6% for that quarter: Rev. Rul. 2026-5 sets "an underpayment rate of 6 percent" for the quarter that begins April 1, 2026. Form 2210 keeps the first quarter's rate through April 15 only because of a rule for the estimated tax penalty (section 6621(b)(2)(B)); line 16f is not that penalty.
 - Changes dollars: yes, by a few days' interest. The rate and the shift together moved line 16f by $1 in two blind cases (252 against 253, 392 against 393).
 
@@ -118,6 +138,24 @@ Each place where the form and its instructions do not settle a rule. Short answe
 - Default: interest on the line 23 amount only, from the due date of the election year's return to the due date of the 2025 return. Interest on the rest of the deferred tax stays deferred with it.
 - Changes dollars: yes (line 24 and Schedule 2), when an election ends only in part.
 
+## 20. The order in which an event ends section 1294 elections
+
+- Source: "Earnings are treated as distributed out of the most recently accumulated earnings and profits. Accordingly, an event will first terminate the most recently made election." (irs-8621-inst-2025::sec::line-22::b01) A distribution "is first treated as a distribution out of the earnings and profits of the QEF accumulated during the year" (::line-8::b01).
+- Default: line 22 is the holder's figure. An event that ends an election while a later election is untouched is a gap. A disposition ends every election for the shares sold, so each column then names an event and the check passes. Leane's distribution of $8,100 is first out of 2025's $6,056, then $2,044 out of the 2023 election.
+- Changes dollars: no (a gap, not a guess).
+
+## 21. Unit days
+
+- Source: the statement may give "Sufficient information to enable the shareholder to calculate its pro rata share" (irs-8621-inst-2025::sec::annual-election-requirements-of-the-pfic-or::b01). Fund companies print amounts per unit per day and ask the holder to multiply by unit days.
+- Default: the fact holds the unit days from the holder's account; the engine multiplies. The engine does not count the days itself, because a statement's day count (whether the purchase day counts) is the fund's and the holder's, not the form's.
+- Changes dollars: no.
+
+## 22. Form 1116 line 20 and the section 1291 tax
+
+- Source: line 20 is "your total U.S. income tax against which the credit is allowed (regular tax liability, as defined in section 26(b)(1)) ... Individuals. Enter the total of Form 1040 ... line 16, and Schedule 2 ... line 1z, less any tax included on line 16 from Form 4972." (irs-1116-inst-2025::sec::line-20::b01)
+- Default: line 20 takes Form 1040 line 16 with the "1291TAX" amount in it. Whether the section 1291 tax is regular tax liability is not checked against section 26(b)(2) (not in the corpus).
+- Changes dollars: only when the credit reaches the line 21 limit.
+
 ## Confidence by field group
 
 | Field group | Confidence |
@@ -128,14 +166,14 @@ Each place where the form and its instructions do not settle a rule. Short answe
 | Part I lines 1–4 | stated rule |
 | Part I line 5 boxes and amounts | stated rule |
 | Part II election boxes | stated rule (the fund fact states each election) |
-| Part III lines 6a–8e | stated rule |
+| Part III lines 6a–8e | stated rule; amounts per unit per day times the holder's unit days (question 21) |
 | Part III lines 9a–9c | unsupported (a second pass of the return) |
 | Part IV lines 10a–14c | stated rule |
 | Part V lines 15a–15f | stated rule; own reading for the split (question 2) and the first day (question 4) |
 | Part V line 16b–16e | stated rule; own reading for the split and the first day |
 | Part V line 16f | stated rule; own reading for the due date and day count (question 6) |
 | Part V lines 16b–16f, Elections E, G, H | unsupported (special holding periods) |
-| Part VI lines 17–19, 21–25 | stated rule; own reading for a full termination (question 9) |
+| Part VI lines 17–19, 21–25 | stated rule; own reading for a full termination (question 9); the order of terminations checked (question 20) |
 | Part VI lines 20 and 26 | unsupported (the filing date) |
 | Schedule 1 line 8z, Form 1040 lines 3b and 16 (box 3), Schedule 2 lines 17p, 17q, 17z | stated rule |
 | Schedule B line 5 | stated rule |
