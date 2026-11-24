@@ -48,6 +48,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "one; Schedule D (540) files with it, and asks for it when it files and a federal carryover exists",
   ],
   [
+    /^ca_passive\.prior_year_unallowed_loss\.[^.]+$/,
+    "a prior-year answer Cade records when a property's California passive carryover differs " +
+      "from the federal one; FTB 3801 asks for it when the property has a federal carryover or " +
+      "is not passive federally",
+  ],
+  [
     /^decisions\.scope\.must_file_8995(_a)?$/,
     "override; the QBI form follows the taxable income upper bound (federal/qbi/whichForm.ts)",
   ],
