@@ -86,11 +86,20 @@ export function register(): void {
         : undefined;
     },
     ...payerRows("5", DIVIDEND_ROWS, (info) => info.dividendPayers),
-    // MANUAL EDIT: line 5 lists each Form 8814 line 9; the total waits with Form 8814 (::line-9::b01).
+    /*
+     * MANUAL EDIT: line 5 lists each Form 8814 line 9; the total waits with Form 8814 (::line-9::b01).
+     * It lists each PFIC's dividends too: a fund the engine cannot figure is a gap here.
+     */
     "0.line.6_total_ordinary_dividends": (_, info) =>
-      withPassThrough(info.passThroughDividends, () =>
-        withForm8814(info.form8814Totals, payerTotal(info.dividendPayers, info.rounding), () => 0),
-      ),
+      info.form8621Totals?.gap !== undefined
+        ? unsupported(info.form8621Totals.gap)
+        : withPassThrough(info.passThroughDividends, () =>
+            withForm8814(
+              info.form8814Totals,
+              payerTotal(info.dividendPayers, info.rounding),
+              () => 0,
+            ),
+          ),
     "0.line.7a_foreign_account_yes": yesNo((info) => info.hasForeignFinancialAccount, true),
     "0.line.7a_foreign_account_no": yesNo((info) => info.hasForeignFinancialAccount, false),
     "0.line.8_foreign_trust_yes": yesNo((info) => info.hasForeignTrust, true),

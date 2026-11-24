@@ -1,11 +1,15 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
+import type { Form8621FilingInfo } from "../8621/filingInfo.js";
 import type { Form8814FilingInfo } from "../8814/filingInfo.js";
 import type { Receipt } from "../passThrough/receipts.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
 
-/* Line 7 reads Form 8814's totals. */
+/* Line 7 reads Form 8814's totals; lines 5b and 6 read Form 8621's. */
 export interface Form8960FilingInfo
-  extends BaseFilingInfo, Pick<Form8814FilingInfo, "form8814Totals"> {
+  extends
+    BaseFilingInfo,
+    Pick<Form8814FilingInfo, "form8814Totals">,
+    Pick<Form8621FilingInfo, "form8621Totals"> {
   /** Every Schedule C business has line G "Yes" (materially participated): its income is nonpassive. */
   scheduleCNonpassive?: boolean;
   /** Line 4b: the Schedule E Part I properties, when Schedule E files. */

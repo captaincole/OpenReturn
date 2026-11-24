@@ -165,6 +165,34 @@ function otherFormsLine(
   return numberOrBlank(form[line.form6781Field]);
 }
 
+/*
+ * MANUAL EDIT: line 11 also takes each QEF's Form 8621 line 7c, "a net
+ * long-term capital gain. Enter this amount in Part II of the Schedule D"
+ * (irs-8621-inst-2025::sec::line-7c::b01), on the line of a fund's
+ * undistributed long-term gain (irs-1040sd-inst-2025::sec::undistributed-capital::b01;
+ * federal/8621/QUESTIONS.md, question 1). With no QEF gain the line is what it was.
+ */
+function line11(form: FormAccessor<ScheduleD>, info: ScheduleDFilingInfo) {
+  const totals = info.form8621Totals;
+  if (totals?.generalRulesLossGap) return unsupported(totals.generalRulesLossGap);
+  const qefGain = totals?.amounts.capitalGain ?? 0;
+  if (totals === undefined || (qefGain === 0 && totals.gap === undefined))
+    return otherFormsLine(form, info, OTHER_FORMS.line11);
+  if (totals.gap !== undefined) return unsupported(totals.gap);
+  if (info.mustFile?.["form-6781"]?.value === true) {
+    const futures = otherFormsLine(form, info, OTHER_FORMS.line11);
+    return typeof futures === "object" ? futures : sum(futures, qefGain);
+  }
+  const filing = OTHER_FORMS.line11.forms.filter(
+    (formId) => info.mustFile?.[formId]?.value === true,
+  );
+  if (filing.length > 0)
+    return unsupported(
+      `Form 8621 line 7c goes on this line, but the engine has no Schedule D amount from ${filing.join(", ")}, which this line also takes.`,
+    );
+  return qefGain;
+}
+
 export function register(): void {
   defineForm<ScheduleD, ScheduleDFilingInfo>("schedule-d", {
     bindings: {
@@ -228,8 +256,7 @@ export function register(): void {
         ) - sum(form["0.line.14_long_term_loss_carryover"]),
       "0.line.4_short_term_gain_other_forms": (form, info) =>
         otherFormsLine(form, info, OTHER_FORMS.line4),
-      "0.line.11_long_term_gain_other_forms": (form, info) =>
-        otherFormsLine(form, info, OTHER_FORMS.line11),
+      "0.line.11_long_term_gain_other_forms": line11,
       "1.line.16_combined_gain_loss": (form) =>
         sum(form["0.line.7_net_short_term_gain_loss"], form["0.line.15_net_long_term_gain_loss"]),
       /*

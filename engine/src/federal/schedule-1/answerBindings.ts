@@ -5,7 +5,8 @@
 
 import type { BindingFn, FormAccessor } from "../../defineForm.js";
 import { formatDollars, roundDollars, sum, sumOrBlank } from "../../money.js";
-import { unsupported } from "../../types.js";
+import { unsupported, type Unsupported } from "../../types.js";
+import { form8621Amount, withForm8621 } from "../8621/totals.js";
 import { figuredForm8814, withForm8814 } from "../8814/totals.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
 import {
@@ -23,6 +24,21 @@ type Bindings = Partial<{ [K in keyof Schedule1]: BindingFn<Schedule1, Schedule1
 function form8814Item(info: Schedule1FilingInfo) {
   const line12 = figuredForm8814(info.form8814Totals)?.line12 ?? 0;
   return line12 === 0 ? [] : [{ description: "Form 8814", amount: line12 }];
+}
+
+/*
+ * Line 8z's "Form 8621" item: Form 8621 lines 6c, 10c or 12, 13c or 14b, and
+ * 16b of every fund (federal/8621/results.ts), when not 0.
+ */
+function form8621Item(info: Schedule1FilingInfo) {
+  const amount = form8621Amount(info.form8621Totals, (amounts) => amounts.otherIncome);
+  return amount === undefined ? [] : [{ description: "Form 8621", amount }];
+}
+
+/* Line 8z with Form 8621's other income; a line that is already unsupported stays so. */
+function withForm8621Income(info: Schedule1FilingInfo, own: number | Unsupported | undefined) {
+  if (typeof own === "object") return own;
+  return withForm8621(info.form8621Totals, own, (amounts) => amounts.otherIncome);
 }
 
 /* Lines 2b and 19c: the month and year of the agreement (irs-1040-inst-2025::sec::line-19c::b01). */
@@ -112,16 +128,19 @@ export function answerBindings(): Bindings {
         ? unsupported(
             "Form 1099-G box 5 (RTAA payments) belongs on line 8z, and the engine does not add it yet.",
           )
-        : // MANUAL EDIT: plus the total of every Form 8814 line 12 (irs-8814-inst-2025::sec::line-12::b01).
-          withForm8814(
-            info.form8814Totals,
-            roundDollars(
-              sumOrBlank(
-                info.miscOtherIncome,
-                ...(info.otherIncomeItems ?? []).map((item) => item.amount),
+        : // MANUAL EDIT: plus every Form 8814 line 12 (irs-8814-inst-2025::sec::line-12::b01) and Form 8621's other income.
+          withForm8621Income(
+            info,
+            withForm8814(
+              info.form8814Totals,
+              roundDollars(
+                sumOrBlank(
+                  info.miscOtherIncome,
+                  ...(info.otherIncomeItems ?? []).map((item) => item.amount),
+                ),
               ),
+              (figured) => figured.line12,
             ),
-            (figured) => figured.line12,
           ),
     /*
      * "List the type and amount of income" (irs-1040-inst-2025::sec::line-8z::b01):
@@ -135,6 +154,7 @@ export function answerBindings(): Bindings {
           : []),
         ...(info.otherIncomeItems ?? []),
         ...form8814Item(info),
+        ...form8621Item(info),
       ];
       if (items.length === 0) return undefined;
       if (items.length === 1) return items[0].description;

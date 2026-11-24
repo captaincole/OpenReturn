@@ -3,11 +3,13 @@
  * foreign-source income. Form 1116 and the election to claim the credit without
  * it read only this list. It holds Form 1099-DIV box 7, Form 1099-INT box 6,
  * the stated foreign taxes, and the foreign taxes a trust K-1 reports (read
- * through the K-1 routes by item type, passThrough/routing.ts).
+ * through the K-1 routes by item type, passThrough/routing.ts), and a PFIC's
+ * foreign tax under the general rules (Form 8621).
  */
 
 import {
   foreignIncomeStatementOf,
+  getPficFundFacts,
   getStatedForeignTaxFacts,
   makeForeignIncomeStatementKey,
   parseDividendFact,
@@ -17,6 +19,7 @@ import {
 } from "../../facts/index.js";
 import type { TaxFactRow } from "../../facts/rows.js";
 import { sum } from "../../money.js";
+import { form8621Fund } from "../8621/fund.js";
 import { entityTitle, type PassThroughEntity } from "../passThrough/items.js";
 import { receivedAmounts, type Receipt } from "../passThrough/receipts.js";
 
@@ -223,6 +226,39 @@ export function foreignTaxSources(
     ...dividendSources(facts),
     ...interestSources(facts),
     ...statedSources(facts),
+    ...pficSources(facts),
     ...k1.sources,
   ];
+}
+
+/*
+ * A PFIC's foreign tax that "the general rules of the foreign tax credit" take
+ * (irs-8621-inst-2025::sec::line-16d::b01): the tax on the nonexcess
+ * distributions and on the excess distribution parts allocated to 2025 and
+ * pre-PFIC years. Its income is those distributions, passive category
+ * dividends (irs-pub-514-2025::sec::passive-category-income::b01). No payee
+ * statement shows it, so the election without Form 1116 does not apply.
+ */
+function pficSources(facts: ReadonlyArray<FactRow>): ForeignTaxSource[] {
+  return getPficFundFacts(facts)
+    .map(form8621Fund)
+    .filter((fund) => fund.gap === undefined && fund.results.foreignTaxUsd > 0)
+    .map((fund) => {
+      // Column (l): the date the tax was paid; "Various" for more than one, as galad states it.
+      const dates = (fund.fact.section1291?.distributions ?? []).map((each) => each.date);
+      const [year, month, day] = (dates[0] ?? "").split("-");
+      return {
+        factKey: fund.key,
+        payer: fund.fact.fundName,
+        country: fund.fact.country,
+        category: "passive",
+        incomeKind: "dividends",
+        grossIncome: fund.results.foreignIncomeUsd,
+        foreignTaxPaid: fund.results.foreignTaxUsd,
+        onPayeeStatement: false,
+        description: "PFIC distributions",
+        datePaid: dates.length === 1 ? `${month}/${day}/${year}` : "Various",
+        foreignTaxInForeignCurrency: fund.results.foreignTax,
+      };
+    });
 }

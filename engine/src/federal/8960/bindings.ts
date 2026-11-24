@@ -13,6 +13,7 @@ import {
   nonpassiveK1Adjustments,
   nonpassiveRentalAdjustments,
 } from "./lines.js";
+import { pficBindings } from "./pficLines.js";
 import type { Form8960 } from "./types.js";
 
 const OTHER_MODIFICATIONS = unsupported(
@@ -40,6 +41,7 @@ function netInvestmentAdjustmentGap(info: Form8960FilingInfo): Unsupported | und
 export function register(): void {
   defineForm<Form8960, Form8960FilingInfo>("form-8960", {
     bindings: {
+      ...pficBindings,
       "0.header.ssn_or_ein": (_, info) => info.taxpayerSSN,
       "0.line.1": (form) => sum(form["form-1040.line.2b"]),
       "0.line.2": (form) => sum(form["form-1040.line.3b"]),
@@ -161,15 +163,10 @@ export function register(): void {
         "No nonresident-alien-spouse scenario yet; section 6013(g) NIIT election not modeled.",
       "0.header.election_6013h":
         "No nonresident-alien-spouse scenario yet; section 6013(h) NIIT election not modeled.",
-      "0.header.election_1411_10g":
-        "No CFC/QEF (PFIC) scenario yet; Reg. 1.1411-10(g) election not modeled.",
       "0.line.3":
         "Only nonqualified annuities count (not 401/403/IRA/457), and our 1099-R facts don't say which kind of plan paid the distribution; no nonqualified-annuity scenario yet.",
-      "0.line.5b":
-        "Gains/losses excluded from NII (non-section 1411 trade or business, NUA, capital loss carryforward adjustments) — no scenario or facts modeled yet.",
       "0.line.5c":
         "Partnership interest / S corporation stock disposition adjustment — no K-1 or pass-through disposition scenario yet.",
-      "0.line.6": "CFC/PFIC adjustments — no CFC/PFIC ownership scenario yet.",
       "0.line.9c":
         "Miscellaneous investment expenses are generally disallowed post-2017 (OBBBA made permanent); no ingestion path for allowable section 62/212 expenses.",
       "0.line.18a":
