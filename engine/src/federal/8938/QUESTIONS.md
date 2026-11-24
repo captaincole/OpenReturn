@@ -33,6 +33,7 @@ Each item is a place where the form and its instructions do not settle a rule. B
 
 - Text: "the schedule, form, or return on which you reported the items" (`part-iii::b01`).
 - Default: column (d) names the Form 1040 line (gains: line 7a, the 2025 capital gain line); column (e) names the schedule line when that schedule files. Gains name the Schedule D lines of the sales' Form 8949 boxes, and line 13 for capital gain distributions.
+- Limit: the text is a fixed table for each kind of income (`partIIIBindings.ts`). It does not follow the amount. It names the wrong line when the amount takes another path: a foreign fund on Form 8621 (Schedule 1 line 8z and Form 1040 line 16), interest a business earned (Schedule C), a child's account on Form 8814, a gain on Form 4797. The work to name the true line is issue #246.
 - Dollars: no.
 
 ## 6. Part III: interest
