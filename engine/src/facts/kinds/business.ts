@@ -5,6 +5,7 @@
  * written by hand.
  */
 
+import { isAtRiskAmounts, type AtRiskAmounts } from "./atRisk.js";
 import { isActivityDepreciation, type ActivityDepreciation } from "./depreciation.js";
 
 type FactRow = { key: string; value: unknown; category: string };
@@ -150,6 +151,8 @@ export interface BusinessFactValue {
   depreciation?: ActivityDepreciation;
   /* Line 32a (true) or 32b (false): all of the investment in the business is at risk. Asked for a loss. */
   allInvestmentAtRisk?: boolean;
+  /* Form 6198's amounts at risk, asked for a loss with box 32b (atRisk.ts). */
+  atRisk?: AtRiskAmounts;
   /* Form 8995-A: a specified service trade or business. */
   specifiedService?: boolean;
   /* Form 8995-A line 4: W-2 wages the business paid its employees (their Forms W-2). */
@@ -269,7 +272,8 @@ function isBusiness(value: unknown): value is BusinessFactValue {
     // One method for line 30: the simplified method or Form 8829.
     (fields.homeOffice === undefined || fields.homeOfficeActual === undefined) &&
     isActivityDepreciation(fields.depreciation) &&
-    isOptionalBoolean(fields.allInvestmentAtRisk)
+    isOptionalBoolean(fields.allInvestmentAtRisk) &&
+    isAtRiskAmounts(fields.atRisk)
   );
 }
 

@@ -192,13 +192,13 @@ describe("at-risk", () => {
     expect(outcome(atRiskLimit, loss(OWNER))?.kind).toBe("applied");
   });
 
-  it("waits for the answer, and reports amounts not at risk (Form 6198)", () => {
+  it("waits for the answer, and with amounts not at risk waits for Form 6198's amounts", () => {
     expect(outcome(atRiskLimit, loss({ materiallyParticipated: true }))).toEqual({
       kind: "waiting",
       factKeys: ["k1.holding.harbor"],
     });
     const notAtRisk = outcome(atRiskLimit, loss({ ...OWNER, allInvestmentAtRisk: false }));
-    expect(notAtRisk?.kind).toBe("unsupported");
+    expect(notAtRisk).toEqual({ kind: "waiting", factKeys: ["at_risk.k1.s_corporation.harbor"] });
   });
 
   it("passes a charitable contribution and a capital loss: they are not from the activity", () => {
