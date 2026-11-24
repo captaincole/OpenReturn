@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { evaluateScenario, pendingInputs } from "../../src";
 import { isK1FactKey } from "../../src/facts";
 import type { AIDecisionRow, TaxFactRow } from "../../src/facts/rows";
@@ -211,6 +211,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "foreign taxes when they accrue (Form 1116 Part II box k); absent, box j (paid)",
   ],
   [
+    /^prior_year\.unallowed_qualified_electric_vehicle_credit$/,
+    "Form 8801 line 20, recorded only when a 2024 qualified electric vehicle credit was not " +
+      "allowed because of the old section 30(b)(3)(B) limit; absent means none",
+  ],
+  [
     /^prior_year\.ca_tax$/,
     "KNOWN GAP: decides whether FTB 5805 files. Needed only when the CA balance due is " +
       "$500 or more, which the resolver cannot see before evaluation.",
@@ -260,6 +265,13 @@ function unreported(base: Outcome, dropped: Outcome): string[] {
 }
 
 const SCENARIOS = await loadScenarios();
+
+/*
+ * Each case runs synchronously and vitest chains them with microtasks, so the
+ * file can hold the worker's event loop past its 60-second RPC timeout on a
+ * busy machine. Yield to the event loop before each case.
+ */
+beforeEach(() => new Promise<void>((resolve) => setImmediate(resolve)));
 
 describe.each(SCENARIOS)("required inputs: $name", (scenario) => {
   const decisions = decisionsWithPreparerStyle(scenario);

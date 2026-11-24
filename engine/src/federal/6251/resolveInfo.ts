@@ -13,6 +13,7 @@ import {
   sumInvestmentBox,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { resolve8801Info } from "../8801/resolveInfo.js";
 import { resolveScheduleAInfo } from "../schedule-a/resolveInfo.js";
 import type { Form6251FilingInfo } from "./filingInfo.js";
 
@@ -25,10 +26,12 @@ import type { Form6251FilingInfo } from "./filingInfo.js";
  * return, which the resolver cannot see. The rule sees only the incentive stock
  * option exercise, the one AMT adjustment the engine models: a spread above 0, or
  * a Form 3921 on file, files the form. A filer who owes AMT for another reason
- * still needs the explicit decision.
+ * still needs the explicit decision. A filed Form 8801 files the form too
+ * (statement 3), and its line 23 reads line 9.
  */
 export function resolve6251Info(inputs: ResolverInputs): Form6251FilingInfo {
   const iso = resolveIsoSpread(inputs);
+  const form8801 = resolve8801Info(inputs).mustFile?.["form-8801"];
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_6251",
     fallbacks: [
@@ -36,6 +39,11 @@ export function resolve6251Info(inputs: ResolverInputs): Form6251FilingInfo {
         rule: `fallback: an ISO spread of $${iso.spread ?? 0} (files when above $0, or with a Form 3921 on file)`,
         value: iso.hasExercise,
         triggeredByFactKeys: [AMT_KEYS.isoExerciseSpread],
+      },
+      {
+        rule: "fallback: Form 8801 files (the credit for prior year minimum tax)",
+        value: form8801?.value === true,
+        triggeredByFactKeys: form8801?.derivation?.triggeredByFactKeys ?? [],
       },
     ],
   });
