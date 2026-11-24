@@ -23,6 +23,7 @@ const docsDir = join(dirname(fileURLToPath(import.meta.url)), "docs");
 
 const amys = `${AMYS.firstName} ${AMYS.lastName}`;
 const corin = `${CORIN.firstName} ${CORIN.lastName}`;
+const holderAddress = [AMYS.street, `${AMYS.city}, ${AMYS.state} ${AMYS.zip}`, "United States"];
 
 const documents = [
   {
@@ -57,6 +58,7 @@ async function main() {
   for (const { file, value, income, holders } of documents) {
     const pdf = await foreignAssetStatementPdf(value, income, {
       holderNames: holders,
+      holderAddress,
       taxYear: AMYS_TAX_YEAR,
     });
     await writeFile(join(docsDir, file), pdf);
