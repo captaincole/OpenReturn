@@ -8,6 +8,8 @@ Sheriam has one W-2. The couple holds three foreign funds directly. The scenario
 - **Cape Horizon Income Fund** (South Africa), a section 1291 fund owned jointly since 2022 and sold in September 2025. The gain is line 15f; line 16 spreads it over 1,337 days. No foreign tax, so line 16d is 0.
 - **Baltic Tech Leaders ETF** (Estonia), marked to market since 2020. The year-end loss is more than the unreversed inclusions, so line 12 allows only $5,500.
 
+Two lines this pull request fills stay empty here, on purpose. Form 8960 line 5b is blank: with the section 1.1411-10(g) election the QEF gain stays on line 5a (worksheet line 2(f) is 0), and the couple has no other line 5b item. Schedule 2 line 17z has no "1294DT": no section 1294 election ends, so Form 8621 line 23 is blank. Leane shows both lines with amounts.
+
 The return is federal only: Florida has no income tax. Forms that file: Form 1040, Schedules 1, 2 and D, Forms 8621 (three copies), 8959 and 8960. The golden PDF holds the first copy of Form 8621.
 
 ## Input documents

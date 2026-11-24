@@ -5,7 +5,11 @@
  */
 
 import { describe, expect, it } from "vitest";
-import { makePficFundFactKey, type PficFundFactValue } from "../../../../src/facts/index.js";
+import {
+  CAPITAL_LOSS_CARRYOVER_KEYS,
+  makePficFundFactKey,
+  type PficFundFactValue,
+} from "../../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../../src/facts/rows.js";
 import { evaluateScenario } from "../../../../src/index.js";
 import { decisionRow } from "../../../helpers/fixtureBuilders.js";
@@ -235,5 +239,39 @@ describe("Branches of the form", () => {
     expect(
       run.value("form-8621", "3.line.20_interest_accrued_deferred_tax_col_iii"),
     ).toBeUndefined();
+  });
+});
+
+describe("Form 8960 line 5b and Schedule 2 line 17z on a return with a fund", () => {
+  const withElection = { ...pacificRim, qef: { ...pacificRim.qef!, section1411gElection: true } };
+  const carryover: TaxFactRow = {
+    ...template,
+    id: "f-carryover",
+    category: "capital_gains",
+    key: CAPITAL_LOSS_CARRYOVER_KEYS.longTerm,
+    value: 5000,
+  };
+
+  it("a QEF without the section 1.1411-10(g) election: line 5b takes line 7c back out", () => {
+    expect(evaluate([fund("rim", pacificRim)]).value("form-8960", "0.line.5b")).toBe(-2215);
+  });
+
+  it("with the election the gain stays on line 5a: line 5b is blank", () => {
+    const run = evaluate([fund("rim", withElection)]);
+    expect(run.field("form-8960", "0.line.5b")).not.toMatchObject(UNSUPPORTED);
+    expect(run.value("form-8960", "0.line.5b")).toBeUndefined();
+  });
+
+  it("a capital loss carried in is a line 5b item the engine does not figure", () => {
+    const run = evaluate([fund("rim", withElection), carryover]);
+    expect(run.field("form-8960", "0.line.5b")).toMatchObject(UNSUPPORTED);
+  });
+
+  it("no section 1294 election ends: line 17z keeps the other taxes' gap and says so", () => {
+    const run = evaluate([fund("rhine", rhineValley)]);
+    expect(run.field("schedule-2", "1.line.17z_other_taxes_amount")).toMatchObject({
+      ...UNSUPPORTED,
+      reason: expect.stringContaining("Form 8621 line 23 is blank"),
+    });
   });
 });

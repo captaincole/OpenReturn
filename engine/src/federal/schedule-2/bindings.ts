@@ -26,24 +26,25 @@ const NO_PFIC = "No PFIC (Form 8621) ingestion or scenario yet.";
 const NO_OTHER_TAXES =
   "No miscellaneous other-taxes (PWA penalties, Form 8978 adjustments, etc.) scenario yet.";
 const SECTION_1294_DEFERRED_TAX = "1294DT";
+const NO_1294_DEFERRED_TAX = `Form 8621 line 23 is blank on every copy (no section 1294 election ends this year), so "${SECTION_1294_DEFERRED_TAX}" adds nothing here; the other taxes of line 17z (PWA penalties, Form 8978 adjustments, etc.) are not modeled.`;
 
 /*
  * A line that takes a Form 8621 amount. With no fund fact it keeps the reason
  * it had; a fund's gap is its gap; otherwise the amount, or blank with none.
  * Line 17z has other taxes the engine does not model: with no Form 8621
- * amount it stays unsupported (keepWithout).
+ * amount it stays unsupported (keepWithout names that reason).
  */
 function form8621Line(
   info: Schedule2FilingInfo,
   amountOf: (amounts: NonNullable<Schedule2FilingInfo["form8621Totals"]>["amounts"]) => number,
   without: string,
-  keepWithout = false,
+  keepWithout?: string,
 ): number | Unsupported | undefined {
   const totals = info.form8621Totals;
   if (totals === undefined) return unsupported(without);
   if (totals.gap !== undefined) return unsupported(totals.gap);
   const amount = form8621Amount(totals, amountOf);
-  if (amount === undefined) return keepWithout ? unsupported(without) : undefined;
+  if (amount === undefined) return keepWithout === undefined ? undefined : unsupported(keepWithout);
   return amount;
 }
 
@@ -171,13 +172,18 @@ export function register(): void {
       "1.line.17q_interest_form8621_line24": (_, info) =>
         form8621Line(info, (amounts) => amounts.deferredTaxInterest, NO_PFIC),
       "1.line.17z_other_taxes_amount": (_, info) =>
-        form8621Line(info, (amounts) => amounts.deferredTaxDue, NO_OTHER_TAXES, true),
+        form8621Line(
+          info,
+          (amounts) => amounts.deferredTaxDue,
+          NO_OTHER_TAXES,
+          NO_1294_DEFERRED_TAX,
+        ),
       "1.line.17z_other_taxes_description": (_, info) => {
         const amount = form8621Line(
           info,
           (amounts) => amounts.deferredTaxDue,
           NO_OTHER_TAXES,
-          true,
+          NO_1294_DEFERRED_TAX,
         );
         return typeof amount === "number" ? SECTION_1294_DEFERRED_TAX : amount;
       },

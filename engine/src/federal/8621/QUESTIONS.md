@@ -66,7 +66,7 @@ Each place where the form and its instructions do not settle a rule. Short answe
 ## 11. Form 8960: which PFIC amounts are net investment income
 
 - Source: "you'll include in NII any 'excess distributions that are dividends for NIIT purposes as well as any gains that are treated as excess distributions'"; section 1296 inclusions and deductions; a QEF's inclusions with a section 1.1411-10(g) election (irs-8960-inst-2025::sec::line-6-adjustments-to-investment-income-for::b02–b03); without it, "Use line 5b to deduct inclusions under section 1293(a)(1)(B) that are allowed on line 5a" (::b05).
-- Default: line 6 adds every excess distribution (line 15e(2)) and gain (line 15f), the section 1296 amounts (lines 10c or 12, 13c or 14b), and line 6c with the (g) election. Line 5b subtracts line 7c without it. A QEF's distribution of earnings taxed before (NII without the election, ::b04) is not modeled.
+- Default: line 6 adds every excess distribution (line 15e(2)) and gain (line 15f), the section 1296 amounts (lines 10c or 12, 13c or 14b), and line 6c with the (g) election. Line 5b subtracts line 7c without it (the Lines 5a–5d worksheet, line 2(f)); with the election line 5b gets nothing from the fund and is blank. The worksheet's other items (2(a)–(e), 2(g)–(i), irs-8960-inst-2025::sec::line-5b-net-gain-or-loss-from-disposition-of::b05–b07) are not figured: line 5b is unsupported when the return shows a sign of one (a business on Schedule 1 line 3, 5 or 6, a pension on Form 1040 line 5a, a capital loss carried in or out). A QEF's distribution of earnings taxed before (NII without the election, ::b04) is not modeled.
 - Changes dollars: yes (Form 8960, Schedule 2 line 12).
 
 ## 12. Lines 14c and 15f: a loss under the general rules
