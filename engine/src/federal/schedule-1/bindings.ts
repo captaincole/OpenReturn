@@ -3,6 +3,7 @@
 import { defineForm } from "../../defineForm.js";
 import { roundDollars, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
+import { form4797Files, scheduleOneLine4 } from "../4797/receivers.js";
 import { files8853, form8853Total } from "../8853/results.js";
 import { answerBindings } from "./answerBindings.js";
 import { line12 } from "./employeeBusinessExpenses.js";
@@ -13,6 +14,8 @@ import type { Schedule1 } from "./types.js";
 
 const NO_FORM_8853_LINE_8E = "No Form 8853 (Archer MSA / LTC) scenario yet";
 const NO_FORM_8853_LINE_23 = "Form 8853 (Archer MSA) not ingested; no scenario.";
+const NO_FORM_4797_LINE_4 = "No Form 4797 or Form 4684 scenario yet.";
+const NO_FORM_4797_BOX = "No Form 4797 business-property sale scenario yet.";
 
 export function register(): void {
   defineForm<Schedule1, Schedule1FilingInfo>("schedule-1", {
@@ -23,6 +26,18 @@ export function register(): void {
       "0.line.7": (_, info) => roundDollars(info.unemploymentCompensation),
       // MANUAL EDIT: line 8b = W-2G box 1. Winnings with no W-2G have no fact and are not included.
       "0.line.8b": (_, info) => roundDollars(info.gamblingWinnings),
+      /*
+       * MANUAL EDIT: line 4 = Form 4797 line 18b, its box checked
+       * (irs-4797-inst-2025::sec::line-18a::b01; the form's line 18b). Without
+       * Form 4797 each keeps the reason it had. Form 4684 sends nothing here:
+       * its Section B, which goes through Form 4797, is not modeled.
+       */
+      "0.line.4": (_, info) =>
+        form4797Files(info) ? scheduleOneLine4(info) : unsupported(NO_FORM_4797_LINE_4),
+      "0.line.4_form_4797": (_, info) => {
+        if (!form4797Files(info)) return unsupported(NO_FORM_4797_BOX);
+        return typeof scheduleOneLine4(info) === "number" ? true : undefined;
+      },
       // MANUAL EDIT: line 5 = Schedule E line 41; blank when Schedule E is not filed.
       "0.line.5": (form) => {
         const line41 = form["schedule-e.1.line.41_total_income_or_loss"];
@@ -94,7 +109,9 @@ export function register(): void {
       "0.line.10": (form, info) =>
         (info.hasBusiness === true && form["0.line.3"] === undefined) ||
         // MANUAL EDIT: Schedule E filed or still open (an unreadable rental fact), line 41 blank: wait too.
-        (info.mustFile?.["schedule-e"]?.value !== false && form["0.line.5"] === undefined)
+        (info.mustFile?.["schedule-e"]?.value !== false && form["0.line.5"] === undefined) ||
+        // MANUAL EDIT: Form 4797 waits on its line 8 answer: line 4 is not known yet.
+        info.form4797?.waitsForLine8 === true
           ? undefined
           : sum(
               form["0.line.1"],
@@ -157,9 +174,7 @@ export function register(): void {
       "0.header.form_1099k_error_amount":
         "No fact for a 1099-K amount in error or for personal items sold at a loss; a 1099-K that names no business stays open on Schedule C.",
       "0.line.1": "No 1099-G or state-refund taxability worksheet scenario yet.",
-      "0.line.4_form_4797": "No Form 4797 business-property sale scenario yet.",
       "0.line.4_form_4684": "No Form 4684 casualty/theft scenario yet.",
-      "0.line.4": "No Form 4797 or Form 4684 scenario yet.",
       "0.line.6": "No Schedule F / farm income scenario yet",
       "0.line.7_repaid_checkbox":
         "No fact for a repayment of unemployment compensation; Cade says a repayment is not supported.",

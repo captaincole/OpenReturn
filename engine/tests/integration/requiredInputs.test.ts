@@ -148,6 +148,16 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^ca_payments\.(estimated_tax|prior_year_overpayment_applied|extension_payment)$/,
     "an answer Cade records only when the user made that California payment (Form 540 line 72)",
   ],
+  [
+    /^business_property_sale\.(?!nonrecaptured_section_1231_losses$)[^.]+$/,
+    "a Form 4797 sale fact is the whole sale (as a rental property fact is the whole property); " +
+      "whether one exists is Cade's question",
+  ],
+  [
+    /^section_179_recapture\.[^.]+$/,
+    "a Form 4797 Part IV fact is the whole recapture of one property; whether business use " +
+      "dropped to 50% or less is Cade's question",
+  ],
   [/^identity\.email$/, "Cade records the login email at doc-gen time"],
   [/^identity\.(spouse\.)?name\.middle_initial$/, "printed when stated; not every name has one"],
   [
@@ -263,7 +273,12 @@ const SCENARIOS = await loadScenarios();
 
 describe.each(SCENARIOS)("required inputs: $name", (scenario) => {
   const decisions = decisionsWithPreparerStyle(scenario);
-  const base = evaluate(scenario, scenario.facts, decisions);
+  /*
+   * Evaluated on first use inside a test, not while the suite is collected: one
+   * long synchronous collection blocks the worker past vitest's RPC timeout.
+   */
+  let baseOutcome: Outcome | undefined;
+  const base = (): Outcome => (baseOutcome ??= evaluate(scenario, scenario.facts, decisions));
   const answers = [
     ...decisions.map((decision) => ({
       key: decision.decisionKey,
@@ -287,7 +302,9 @@ describe.each(SCENARIOS)("required inputs: $name", (scenario) => {
       })),
   ].filter((input) => !isOptional(input.key));
 
-  it.each(answers)("missing $key is reported", ({ drop }) => {
-    expect(unreported(base, drop()).slice(0, 3)).toEqual([]);
+  it.each(answers)("missing $key is reported", async ({ drop }) => {
+    // Let the worker answer vitest's RPC between the synchronous evaluations: the file runs past its timeout otherwise.
+    await new Promise((resolve) => setImmediate(resolve));
+    expect(unreported(base(), drop()).slice(0, 3)).toEqual([]);
   });
 });

@@ -135,7 +135,10 @@ export interface BusinessFactValue {
   grossReceipts: number;
   /* Line 2. */
   returnsAndAllowances?: number;
-  /* Line 6: other income, such as a fuel tax credit or refund. */
+  /*
+   * Line 6: other income, such as a fuel tax credit or refund. Not the Form 4797
+   * Part IV recapture: businessesOnReturn adds it from its own fact.
+   */
   otherIncome?: number;
   expenses?: BusinessExpenses;
   /* Part V (line 48), totaled on line 27b. */
