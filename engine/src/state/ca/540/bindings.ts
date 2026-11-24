@@ -9,6 +9,9 @@ import { defineForm } from "../../../defineForm.js";
 import { SSN } from "../../../values.js";
 import {
   line40ChildDependentCareCredit,
+  line43CreditAmount,
+  line43CreditCode,
+  line43CreditName,
   line47TotalCredits,
   line48TaxAfterCredits,
 } from "./credits.js";
@@ -189,6 +192,9 @@ export function register(): void {
 
       // Special credits. MANUAL EDIT: lines 40, 47 and 48 (FTB 3506's credit) are in credits.ts.
       "line.40_child_dependent_care_credit": line40ChildDependentCareCredit,
+      "line.43_credit_name": line43CreditName,
+      "line.43_credit_code": line43CreditCode,
+      "line.43_credit_amount": line43CreditAmount,
       "line.47_total_credits": line47TotalCredits,
       "line.48_tax_after_credits": line48TaxAfterCredits,
 
@@ -280,12 +286,6 @@ export function register(): void {
         "Checkbox indicating tax includes FTB 3800 (tax on child's unearned income). No FTB 3800 scenario or fact-ingestion path exists yet.",
       "line.34_tax_from_ftb_5870a":
         "Checkbox indicating line 34 tax is from FTB 5870A (tax on accumulation distribution of trusts). No FTB 5870A scenario or fact-ingestion path exists yet.",
-      "line.43_credit_name":
-        "Free-text credit name for an additional special credit on line 43. No ingestion path for user-supplied special credits (e.g., CA Competes, PTE, etc.) exists yet.",
-      "line.43_credit_code":
-        "Credit code for additional special credit on line 43. No ingestion path for user-supplied special credits exists yet.",
-      "line.43_credit_amount":
-        "Credit amount for additional special credit on line 43. No ingestion path for user-supplied special credits (requires supporting schedules/FTB forms) exists yet.",
       "line.44_credit_name":
         "Free-text credit name for an additional special credit on line 44. No ingestion path for user-supplied special credits exists yet.",
       "line.44_credit_code":

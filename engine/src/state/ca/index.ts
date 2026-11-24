@@ -224,6 +224,11 @@ export const CA_FORMS: FormSpec[] = [
     displayName: "Schedule S",
     relativeDir: "state/ca/schedule-s",
     register: registerScheduleS,
+    /* "A separate Schedule S for each state" (ca-540-sched-s-inst-2025::sec::specific-line-instructions::b01). */
+    copies: {
+      count: (info) => info?.otherStateCredits?.length ?? 1,
+      select: (info, index) => info && { ...info, scheduleSCopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-3801",

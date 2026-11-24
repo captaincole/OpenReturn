@@ -1,6 +1,7 @@
 /*
- * Schedule P (540) Part III, the credit rows. Each row holds one credit. Only
- * line 5 (FTB 3506) has facts; every other row is `unsupported` with its reason.
+ * Schedule P (540) Part III, the credit rows. Each row holds one credit. Line 5
+ * (FTB 3506) and line 20 (Schedule S) have facts; every other row is
+ * `unsupported` with its reason.
  * Lines 1–3, 11, 22 and 25 (the tax balances) are bound in bindings.ts.
  * Rules: ca-540-sched-p-inst-2025::sec::to-complete-part-iii::b01 (a row is
  * completed only for a credit taken) and ::sec::column-a-through-column-d-instructions::b01.
@@ -8,6 +9,8 @@
 
 import type { BindingFn, FormAccessor } from "../../../defineForm.js";
 import { numberOrBlank } from "../../../money.js";
+import { unsupported } from "../../../types.js";
+import { filesScheduleS, otherStateCreditTotal } from "../schedule-s/returnAmounts.js";
 import type { SchedulePFilingInfo } from "./filingInfo.js";
 import type { ScheduleP } from "./types.js";
 
@@ -42,6 +45,62 @@ export const childCareCreditRow: Bindings = {
   "1.part3.5_child_dependent_care_credit_col_c": (form) => {
     const used = creditUsed(form);
     const balance = openingBalance(form);
+    return used === undefined || balance === undefined ? undefined : balance - used;
+  },
+};
+
+/*
+ * Section B3 line 20, the other state tax credit: column (a) is the total of
+ * every Schedule S line 12 (ca-540-sched-p-inst-2025::sec::section-b3-instructions::b01).
+ * Column (b) is the smaller of column (a) and the previous line's column (c):
+ * the last Section B line with a balance, else line 11. Column (c) is that
+ * balance less column (b) (ca-540-sched-p-inst-2025::sec::column-a-through-column-d-instructions::b01).
+ * The credit has no carryover: there is no column (d). With no Schedule S the
+ * row stays unsupported; with a credit of 0 it is blank (no credit taken).
+ */
+const NO_SCHEDULE_S = unsupported(
+  "Section B3 line 20, other state tax credit (Schedule S) — no credit facts.",
+);
+const SECTION_B_BALANCES: Array<keyof ScheduleP> = [
+  "3.part3.19_tax_balance_col_c",
+  "3.part3.18_tax_balance_col_c",
+  "3.part3.17_tax_balance_col_c",
+  "3.part3.16_tax_balance_col_c",
+  "2.part3.15_renters_tax_balance_col_c",
+  "2.part3.14_senior_hoh_tax_balance_col_c",
+  "2.part3.13_dependent_parent_tax_balance_col_c",
+  "2.part3.12_joint_custody_hoh_tax_balance_col_c",
+  "2.part3.11_tax_balance_col_c",
+];
+
+function balanceBeforeLine20(form: Form): number | undefined {
+  for (const id of SECTION_B_BALANCES) {
+    const balance = numberOrBlank(form[id]);
+    if (balance !== undefined) return balance;
+  }
+  return undefined;
+}
+
+function otherStateCredit(form: Form, info: SchedulePFilingInfo) {
+  const total = otherStateCreditTotal((fieldId) => form[fieldId], info);
+  return total === 0 ? undefined : total;
+}
+
+function otherStateCreditUsed(form: Form, info: SchedulePFilingInfo): number | undefined {
+  const credit = numberOrBlank(otherStateCredit(form, info));
+  const balance = balanceBeforeLine20(form);
+  return credit === undefined || balance === undefined ? undefined : Math.min(credit, balance);
+}
+
+export const otherStateCreditRow: Bindings = {
+  "3.part3.20_other_state_tax_credit_amount_col_a": (form, info) =>
+    filesScheduleS(info) ? otherStateCredit(form, info) : NO_SCHEDULE_S,
+  "3.part3.20_other_state_tax_credit_used_col_b": (form, info) =>
+    filesScheduleS(info) ? otherStateCreditUsed(form, info) : NO_SCHEDULE_S,
+  "3.part3.20_other_state_tax_tax_balance_col_c": (form, info) => {
+    if (!filesScheduleS(info)) return NO_SCHEDULE_S;
+    const used = otherStateCreditUsed(form, info);
+    const balance = balanceBeforeLine20(form);
     return used === undefined || balance === undefined ? undefined : balance - used;
   },
 };
@@ -113,12 +172,6 @@ export const partIIICreditRows: Unsupported = Object.fromEntries([
   ...codedCreditRow(3, 17, "Section B2"),
   ...codedCreditRow(3, 18, "Section B2"),
   ...codedCreditRow(3, 19, "Section B2"),
-  ...row(
-    `Section B3 line 20, other state tax credit (Schedule S) — ${NO_CREDIT_FACTS}.`,
-    "3.part3.20_other_state_tax_credit_amount_col_a",
-    "3.part3.20_other_state_tax_credit_used_col_b",
-    "3.part3.20_other_state_tax_tax_balance_col_c",
-  ),
   ...row(
     `Section B4 line 21, pass-through entity elective tax credit (FTB 3804-CR) — ${NO_CREDIT_FACTS}.`,
     "3.part3.21_pte_elective_tax_credit_amount_col_a",
