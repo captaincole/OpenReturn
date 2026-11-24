@@ -2,14 +2,26 @@
   "note": "The kinds of input document that Cade reads, kept by hand. Each row names the ingest tool that reads it; a Cade unit test checks that the two agree.",
   "taxYear": 2025,
   "documents": [
-    { "name": "Form W-2", "title": "Wage and Tax Statement", "ingestTool": "ingest-w2-structured" },
+    {
+      "name": "Form W-2",
+      "title": "Wage and Tax Statement",
+      "ingestTool": "ingest-w2-structured"
+    },
     {
       "name": "Form W-2 (household employee)",
       "title": "The Form W-2 that the taxpayer gives a household employee",
       "ingestTool": "ingest-household-w2"
     },
-    { "name": "Form W-2G", "title": "Certain Gambling Winnings", "ingestTool": "ingest-w2g" },
-    { "name": "Form 1099-INT", "title": "Interest Income", "ingestTool": "ingest-1099-int" },
+    {
+      "name": "Form W-2G",
+      "title": "Certain Gambling Winnings",
+      "ingestTool": "ingest-w2g"
+    },
+    {
+      "name": "Form 1099-INT",
+      "title": "Interest Income",
+      "ingestTool": "ingest-1099-int"
+    },
     {
       "name": "Form 1099-DIV",
       "title": "Dividends and Distributions",
@@ -55,7 +67,11 @@
       "title": "Social Security Benefit Statement",
       "ingestTool": "ingest-ssa-1099"
     },
-    { "name": "Form 1098", "title": "Mortgage Interest Statement", "ingestTool": "ingest-1098" },
+    {
+      "name": "Form 1098",
+      "title": "Mortgage Interest Statement",
+      "ingestTool": "ingest-1098"
+    },
     {
       "name": "Form 1098-E",
       "title": "Student Loan Interest Statement",
@@ -75,6 +91,51 @@
       "name": "Home energy invoice",
       "title": "An invoice for a home energy improvement",
       "ingestTool": "ingest-energy-invoice"
+    },
+    {
+      "name": "Form 1098-T",
+      "title": "Tuition Statement",
+      "ingestTool": "ingest-1098-t"
+    },
+    {
+      "name": "Form 1099-B (futures)",
+      "title": "Form 1099-B boxes 8 to 11: regulated futures and section 1256 contracts",
+      "ingestTool": "ingest-1099-b-futures"
+    },
+    {
+      "name": "Form 1099-LTC",
+      "title": "Long-Term Care and Accelerated Death Benefits",
+      "ingestTool": "ingest-1099-ltc"
+    },
+    {
+      "name": "Schedule K-1",
+      "title": "An owner's share from an S corporation, a partnership, or an estate or trust",
+      "ingestTool": "ingest-schedule-k1"
+    },
+    {
+      "name": "Foreign income statement",
+      "title": "A fund's or broker's statement of foreign source income",
+      "ingestTool": "ingest-foreign-income-statement"
+    },
+    {
+      "name": "Clean vehicle seller report",
+      "title": "The report a dealer gives the buyer of a clean vehicle",
+      "ingestTool": "ingest-clean-vehicle-report"
+    },
+    {
+      "name": "Mortgage Credit Certificate",
+      "title": "A certificate from a state or local housing agency",
+      "ingestTool": "ingest-mortgage-credit-certificate"
+    },
+    {
+      "name": "Savings bond record",
+      "title": "A record of series EE and I savings bonds cashed (Form 8818)",
+      "ingestTool": "ingest-savings-bond-record"
+    },
+    {
+      "name": "Care provider statement",
+      "title": "A child care provider's year-end statement or Form W-10",
+      "ingestTool": "ingest-care-provider-statement"
     }
   ]
 }

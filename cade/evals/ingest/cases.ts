@@ -1,15 +1,23 @@
 import {
+  makeDependentCareProviderFactKey,
   makeDividendFactKey,
+  makeForeignIncomeStatementKey,
+  makeForm1098TFactKey,
   makeGamblingWinningsFactKey,
+  makeHsaDistributionFactKey,
   makeInterestFactKey,
+  makeLtcBenefitsFactKey,
   makePaymentTransactionsFactKey,
   makeRetirementDistributionFactKey,
+  makeSCorporationK1FactKey,
+  makeSection1256StatementFactKey,
   makeSocialSecurityFactKey,
+  makeTrustK1FactKey,
   makeW2FactKey,
   MORTGAGE_KEYS,
   type TaxFactRow,
 } from "@openreturn/engine/facts";
-import { loadScenarios } from "@openreturn/engine/scenarios";
+import { loadScenarios, scenarioFolder } from "@openreturn/engine/scenarios";
 import path from "node:path";
 
 export interface IngestCase {
@@ -134,15 +142,165 @@ const MANIFEST: [string, string, string, KeyMatch[]][] = [
       MORTGAGE_KEYS.originationDateForm1098,
     ],
   ],
+  [
+    "perrin",
+    "01-rio-grande-valley-1098-t.pdf",
+    "1098-T",
+    [makeForm1098TFactKey("rio-grande-valley-state", "perrin")],
+  ],
+  [
+    "perrin",
+    "02-sunland-park-1098-t.pdf",
+    "1098-T",
+    [makeForm1098TFactKey("sunland-park-cc", "perrin")],
+  ],
+  [
+    "perrin",
+    "03-franklin-mountains-1098-t.pdf",
+    "1098-T",
+    [makeForm1098TFactKey("franklin-mountains-business", "marisol")],
+  ],
+  [
+    "galad",
+    "02-foreign-income-larchmont.pdf",
+    "Foreign income statement",
+    [makeForeignIncomeStatementKey(makeDividendFactKey("larchmont-international"))],
+  ],
+  [
+    "hollis",
+    "01-1099-b-ridgeline-futures.pdf",
+    "1099-B futures",
+    [makeSection1256StatementFactKey("ridgeline-futures")],
+  ],
+  [
+    "hollis",
+    "02-1099-b-mesa-commodity.pdf",
+    "1099-B futures",
+    [makeSection1256StatementFactKey("mesa-commodity")],
+  ],
+  [
+    "ottilie",
+    "01-sunflower-hill-care-statement.pdf",
+    "Care provider statement",
+    [makeDependentCareProviderFactKey("sunflower-hill")],
+  ],
+  [
+    "ottilie",
+    "02-lupe-arroyo-care-statement.pdf",
+    "Care provider statement",
+    [makeDependentCareProviderFactKey("lupe-arroyo")],
+  ],
+  [
+    "siuan",
+    "01-truckee-valley-water-1099-r.pdf",
+    "1099-R",
+    [makeRetirementDistributionFactKey("truckee-valley-water", "pension")],
+  ],
+  [
+    "siuan",
+    "02-harlow-tool-works-1099-r.pdf",
+    "1099-R",
+    [makeRetirementDistributionFactKey("harlow-tool-works", "lump-sum")],
+  ],
+  [
+    "tuon",
+    "01-redwood-valley-mills-1099-r.pdf",
+    "1099-R",
+    [makeRetirementDistributionFactKey("redwood-valley-pension", "r-1")],
+  ],
+  [
+    "thaddeus",
+    "01-cascade-health-1099-sa.pdf",
+    "1099-SA",
+    [makeHsaDistributionFactKey("cascade-health", "sa1")],
+  ],
+  [
+    "thaddeus",
+    "02-sound-savings-1099-sa.pdf",
+    "1099-SA",
+    [makeHsaDistributionFactKey("sound-savings", "sa1")],
+  ],
+  [
+    "thaddeus",
+    "03-evergreen-ma-1099-sa-code-1.pdf",
+    "1099-SA",
+    [makeHsaDistributionFactKey("evergreen-ma", "sa1")],
+  ],
+  [
+    "thaddeus",
+    "04-evergreen-ma-1099-sa-code-3.pdf",
+    "1099-SA",
+    [makeHsaDistributionFactKey("evergreen-ma", "sa2")],
+  ],
+  [
+    "thaddeus",
+    "05-mount-rainier-1099-ltc.pdf",
+    "1099-LTC",
+    [makeLtcBenefitsFactKey("mount-rainier", "ltc1")],
+  ],
+  [
+    "thaddeus",
+    "06-olympic-life-1099-ltc.pdf",
+    "1099-LTC",
+    [makeLtcBenefitsFactKey("olympic-life", "ltc1")],
+  ],
+  [
+    "galad",
+    "01-1099-div-larchmont.pdf",
+    "1099-DIV",
+    [makeDividendFactKey("larchmont-international")],
+  ],
+  ["galad", "03-1099-div-northgate.pdf", "1099-DIV", [makeDividendFactKey("northgate-brokerage")]],
+  [
+    "lan",
+    "01-schedule-k1-malkier-fencing.pdf",
+    "Schedule K-1 (Form 1120-S)",
+    [makeSCorporationK1FactKey("malkier-fencing")],
+  ],
+  [
+    "min",
+    "01-schedule-k1-baerlon-bindery.pdf",
+    "Schedule K-1 (Form 1120-S)",
+    [makeSCorporationK1FactKey("baerlon-bindery")],
+  ],
+  [
+    "elaida",
+    "01-schedule-k1-white-tower-glassworks.pdf",
+    "Schedule K-1 (Form 1120-S)",
+    [makeSCorporationK1FactKey("white-tower-glass")],
+  ],
+  [
+    "gareth",
+    "01-schedule-k1-kore-springs-stables.pdf",
+    "Schedule K-1 (Form 1120-S)",
+    [makeSCorporationK1FactKey("kore-springs-stables")],
+  ],
+  [
+    "mat",
+    "01-schedule-k1-shandalle-family-trust.pdf",
+    "Schedule K-1 (Form 1041)",
+    [makeTrustK1FactKey("shandalle-family-trust")],
+  ],
 ];
 
 /*
  * Fields that need what the user said, not only the document: a 1099-K's businessId
  * links it to a business Cade asked about, and a 1099-R's owner compares the
- * recipient with the taxpayer's name. The eval asks no questions and gives no
+ * recipient with the taxpayer's name. A care provider's statement goes into a fact
+ * that also holds the taxpayer's answers. The eval asks no questions and gives no
  * identity, so it does not score them.
+ *
+ * Not in the manifest: a document whose tool needs an answer before it records
+ * (the clean vehicle seller report, the savings bond record, the Mortgage Credit
+ * Certificate). Cade asks first, and the eval cannot answer.
  */
-const ANSWER_FIELDS = ["businessId", "owner"];
+const ANSWER_FIELDS = [
+  "businessId",
+  "owner",
+  "householdEmployee",
+  "providerType",
+  "employerProvided",
+];
 
 function documentValue(fact: TaxFactRow): TaxFactRow {
   if (typeof fact.value !== "object" || fact.value === null) return fact;
@@ -167,6 +325,14 @@ const LITE = new Set([
   "tcb-us-006/02-poker-club-w2g.pdf",
   "tcb-us-006/05-metro-rides-1099-k.pdf",
   "tcb-ca-005/07-chase-bank-1098.pdf",
+  "perrin/01-rio-grande-valley-1098-t.pdf",
+  "galad/02-foreign-income-larchmont.pdf",
+  "hollis/01-1099-b-ridgeline-futures.pdf",
+  "ottilie/01-sunflower-hill-care-statement.pdf",
+  "thaddeus/03-evergreen-ma-1099-sa-code-1.pdf",
+  "thaddeus/05-mount-rainier-1099-ltc.pdf",
+  "min/01-schedule-k1-baerlon-bindery.pdf",
+  "mat/01-schedule-k1-shandalle-family-trust.pdf",
 ]);
 
 /* Every document in the full tier, as "<scenario>/<file>". */
@@ -185,7 +351,7 @@ export async function loadCases(tier: "lite" | "full"): Promise<IngestCase[]> {
       doc,
       lite: LITE.has(doc),
       type,
-      pdf: path.join(SCENARIO_DIR, scenario, "docs", file),
+      pdf: path.join(SCENARIO_DIR, scenarioFolder(scenario), "docs", file),
       expected,
     };
   });

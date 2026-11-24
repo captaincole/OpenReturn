@@ -8,7 +8,9 @@ One taxpayer shows every Form 4972 branch except a shared distribution: Part II,
 
 Forms that file: Form 1040, Schedule 1-A (the senior deduction), Form 4972.
 
-No input documents: the facts are the two Forms 1099-R as they would print.
+## Input documents
+
+Both Forms 1099-R are made documents in `docs/`, rendered by `generate-docs.ts` from the fact objects in `facts.ts` (`documents/form1099R.ts`): `01-truckee-valley-water-1099-r.pdf` (the pension) and `02-harlow-tool-works-1099-r.pdf` (the lump sum). The payers' addresses and phone numbers are invented. The Part I answers, the elections, the death benefit exclusion and the estate tax are her answers: no Form 1099-R prints them.
 
 ## Inputs
 

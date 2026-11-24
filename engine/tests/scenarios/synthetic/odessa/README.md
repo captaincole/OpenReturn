@@ -24,6 +24,10 @@ Forms that file: Form 1040, Schedule 1, Schedule B, Form 8815.
 | Rafael, Truckee Meadows Community College | tuition $3,400 |
 | Rafael, QTP contribution | $2,000 |
 
+## Made documents
+
+`docs/01-savings-bonds-cashed.pdf` is the written record of the four bonds that the Form 8815 instructions require: one row for each bond, with its serial number, series, paper or electronic, issue date, face value and total redemption proceeds. `generate-docs.ts` makes it from the bond facts (`documents/savingsBondRecord.ts`; run `npx tsx tests/scenarios/synthetic/odessa/generate-docs.ts` from `engine/`). The layout follows Form 8818, but with each bond's proceeds on its row: Form 8818 prints only their total. The two electronic bonds print no serial number, because their facts hold none. The ownership test (in Odessa's name, bought after she turned 24) is her answer, not on the record. The W-2s, the 1099-INTs and the expense records have no PDF yet.
+
 ## Hand check
 
 | Line | Rule | Value |

@@ -6,8 +6,10 @@ import type { IngestResult } from "./report";
 const CAPABILITIES: [string, (type: string) => boolean][] = [
   ["W-2", (docType) => docType.includes("W-2")],
   ["1099", (docType) => docType.includes("1099")],
-  ["1098", (docType) => docType === "1098"],
+  ["1098", (docType) => docType.startsWith("1098")],
   ["Invoices", (docType) => docType.includes("invoice")],
+  /* Statements and records with no form number: a seller report, a care provider's statement. */
+  ["Other documents", () => true],
 ];
 const capabilityOf = (type: string) => CAPABILITIES.find(([, has]) => has(type))?.[0] ?? "Other";
 

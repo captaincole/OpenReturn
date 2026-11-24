@@ -8,7 +8,7 @@ The trust's items join the couple's own lines. None of them goes on Schedule E: 
 
 Forms that file: Form 1040, Schedules B and D, Form 8995.
 
-No input documents. The K-1 has no fake PDF yet: the engine has no K-1 document generator, so the facts are the boxes and the statement as Schedule K-1 (Form 1041) would print them.
+One made input document: `docs/01-schedule-k1-shandalle-family-trust.pdf`, Leilwin's Schedule K-1 (Form 1041) with the box 14 code I statement (section 199A dividends) on its second page, from `generate-docs.ts` with the same fact object `facts.ts` uses. The fiduciary's name and address and Leilwin's masked number are made up for the page. The two W-2s and the 1099-INT have no PDF: their facts are the boxes as they would print them.
 
 ## Inputs
 

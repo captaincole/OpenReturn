@@ -1,7 +1,8 @@
 /*
  * Synthetic: the Albrecht family is made up (README.md). Every name, number
- * and address is invented. No input documents: the facts are the only source,
- * and each sourceNote names the made-up document or answer.
+ * and address is invented. Juniper's 1099-INT and 1099-DIV are in docs/ (made
+ * by generate-docs.ts from the values below); each sourceNote names the
+ * made-up document or answer.
  */
 
 import {
@@ -33,7 +34,7 @@ const fact = (category: string, key: string, value: unknown, sourceNote: string)
   createdAt: CREATED_AT,
 });
 
-const HOME = { line1: "52 Redwood Terrace", city: "Oakland", state: "CA", zip: "94611" };
+export const HOME = { line1: "52 Redwood Terrace", city: "Oakland", state: "CA", zip: "94611" };
 const TAXPAYER = { firstName: "Tomas", lastName: "Albrecht", ssn: "400-00-0711" };
 const SPOUSE = { firstName: "Hana", lastName: "Albrecht", ssn: "400-00-0712" };
 
@@ -75,7 +76,7 @@ const juniper: DependentFactValue = {
  * California does not tax. FTB 3803 line 6 ($1,000) is under Form 8814 line 6
  * ($2,600). No capital gain distributions.
  */
-const juniperIncome: ChildInvestmentIncomeFactValue = {
+export const juniperIncome: ChildInvestmentIncomeFactValue = {
   taxableInterest: 3400,
   usObligationInterest: 1600,
   ordinaryDividends: 1900,
@@ -119,7 +120,7 @@ export const tomasFacts: TaxFactRow[] = [
     "dependents",
     makeChildInvestmentIncomeFactKey(JUNIPER),
     juniperIncome,
-    `Juniper's 1099-INT and 1099-DIV, and the parents' answers, ${MADE_UP}.`,
+    `Juniper's 1099-INT and 1099-DIV (docs/01-1099-int-juniper.pdf, docs/02-1099-div-juniper.pdf), and the parents' answers, ${MADE_UP}.`,
   ),
   fact("health_coverage", "health_coverage.full_year_mec", true, "Verbal: employer plan all year."),
   fact("use_tax", "use_tax.owed_amount", 0, "Verbal: no out-of-state purchases."),

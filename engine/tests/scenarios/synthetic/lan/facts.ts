@@ -1,7 +1,8 @@
 /*
- * A made-up couple (README.md): every name and amount is invented. No input
- * documents: the facts are the boxes as the W-2 and the Schedule K-1 (Form
- * 1120-S) would print them, and the couple's answers.
+ * A made-up couple (README.md): every name and amount is invented. The
+ * Schedule K-1 (Form 1120-S) is a made PDF in docs/ (generate-docs.ts); the W-2
+ * has none: its facts are the boxes as it would print them. The rest are the
+ * couple's answers.
  */
 
 import {
@@ -84,7 +85,7 @@ const teaBusiness: BusinessFactValue = {
 };
 
 /* The K-1 the corporation issued to Lan: box 1 only, no section 199A statement. */
-const fencingK1: SCorporationK1FactValue = {
+export const fencingK1: SCorporationK1FactValue = {
   form: "1120-S",
   entityName: "Malkier Fencing Academy, Inc.",
   entityEin: FENCING_EIN,
@@ -149,7 +150,7 @@ export const lanFacts: TaxFactRow[] = [
     "k1",
     makeSCorporationK1FactKey(FENCING_ID),
     fencingK1,
-    "Schedule K-1 (Form 1120-S) from Malkier Fencing Academy, Inc. (Lan's).",
+    "Schedule K-1 (Form 1120-S) from Malkier Fencing Academy, Inc. (Lan's) (docs/01-schedule-k1-malkier-fencing.pdf).",
   ),
   fact(
     "k1",

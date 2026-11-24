@@ -1,8 +1,9 @@
 /*
- * A made-up couple (README.md): every name and amount is invented. No input
- * documents: the facts are the boxes as the two W-2s, the 1099-INT and the
- * Schedule K-1 (Form 1041) with its box 14 code I statement would print them,
- * and the couple's answers.
+ * A made-up couple (README.md): every name and amount is invented. The
+ * Schedule K-1 (Form 1041) with its box 14 code I statement is a made PDF in
+ * docs/ (generate-docs.ts); the two W-2s and the 1099-INT have none: their
+ * facts are the boxes as they would print them. The rest are the couple's
+ * answers.
  */
 
 import {
@@ -95,7 +96,7 @@ const bankInterest: InterestFactValue = {
  * capital gain, and the box 14 code I statement with section 199A dividends
  * (part of the ordinary dividends that are not qualified).
  */
-const trustK1: TrustK1FactValue = {
+export const trustK1: TrustK1FactValue = {
   form: "1041",
   entityName: "Shandalle Family Trust",
   entityEin: "00-0004141",
@@ -151,7 +152,7 @@ export const matFacts: TaxFactRow[] = [
     "k1",
     makeTrustK1FactKey(TRUST_ID),
     trustK1,
-    "Schedule K-1 (Form 1041) from the Shandalle Family Trust, with its box 14 code I statement.",
+    "Schedule K-1 (Form 1041) from the Shandalle Family Trust, with its box 14 code I statement (docs/01-schedule-k1-shandalle-family-trust.pdf).",
   ),
   fact(
     "k1",

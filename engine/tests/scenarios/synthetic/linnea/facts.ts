@@ -1,6 +1,7 @@
 /*
- * A made-up taxpayer (README.md): every name and amount is invented. No input
- * documents: the facts are the boxes as the documents would print them.
+ * A made-up taxpayer (README.md): every name and amount is invented. The
+ * Mortgage Credit Certificate is in docs/ (generate-docs.ts); the other facts are
+ * the boxes as the documents would print them.
  */
 
 import {
@@ -64,7 +65,7 @@ const w2: W2FactValue = {
  * applies. The loan ($240,000) is larger than the certified indebtedness
  * ($200,000), so line 1 is 200,000 / 240,000 of the 1098's box 1 interest.
  */
-const certificate: MortgageCreditCertificateFactValue = {
+export const LINNEA_CERTIFICATE: MortgageCreditCertificateFactValue = {
   issuerName: "Gulf Coast Housing Finance Authority",
   certificateNumber: "GCHFA-MCC-21-0417",
   issueDate: "06/14/2021",
@@ -121,8 +122,8 @@ export const linneaFacts: TaxFactRow[] = [
   fact(
     "mortgage",
     MORTGAGE_CREDIT_KEYS.certificate,
-    certificate,
-    `${fromCertificate}; interest from the Form 1098, box 1.`,
+    LINNEA_CERTIFICATE,
+    `${fromCertificate} (docs/01-mortgage-credit-certificate.pdf); interest from the Form 1098, box 1; original loan amount stated by Linnea.`,
   ),
   fact("other", MORTGAGE_CREDIT_KEYS.carryforwardFrom2022, 300, `${fromLastYear}, line 16.`),
   fact("other", MORTGAGE_CREDIT_KEYS.carryforwardFrom2023, 450, `${fromLastYear}, line 14.`),
