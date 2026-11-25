@@ -96,15 +96,16 @@ export function form3840Exchanges(inputs: ResolverInputs): Form3840Exchanges {
 }
 
 const MALFORMED = (keys: string[]) => `Malformed FTB 3840 fact(s): ${keys.join(", ")}.`;
-const SEPARATE_FORMS =
-  "More than one exchange files FTB 3840: each takes its own form (ca-3840-inst-2025::sec::g-multiple-exchanges::b01), and the engine prints one copy.";
 const NO_FACTS =
   "FTB 3840 files by decision, but no like-kind exchange fact gives the exchange (likeKindExchange.ts and caLikeKindExchange.ts).";
 
-/* The printed copy: its one exchange, or the gap of every exchange line. */
-export function form3840StateOf(exchanges: Form3840Exchanges): Form3840State {
-  if (exchanges.malformedKeys.length > 0) return { gap: MALFORMED(exchanges.malformedKeys) };
-  if (exchanges.filing.length > 1) return { gap: SEPARATE_FORMS };
-  const exchange = exchanges.filing[0];
-  return exchange === undefined ? { gap: NO_FACTS } : { exchange };
+/*
+ * The printed copies: one form for each exchange ("File a separate form FTB 3840
+ * for each such exchange", g-multiple-exchanges::b01), or one copy whose every
+ * exchange line is the gap.
+ */
+export function form3840CopiesOf(exchanges: Form3840Exchanges): Form3840State[] {
+  if (exchanges.malformedKeys.length > 0) return [{ gap: MALFORMED(exchanges.malformedKeys) }];
+  if (exchanges.filing.length === 0) return [{ gap: NO_FACTS }];
+  return exchanges.filing.map((exchange) => ({ exchange }));
 }

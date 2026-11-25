@@ -16,6 +16,7 @@ import {
 } from "../../../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../../../src/facts/rows.js";
 import { evaluateScenario, pendingInputs } from "../../../../../src/index.js";
+import { getFormSpec } from "../../../../../src/registry.js";
 import { decisionRow } from "../../../../helpers/fixtureBuilders.js";
 import { gaulScenario } from "../../../../scenarios/synthetic/gaul/index.js";
 import {
@@ -160,14 +161,21 @@ describe("FTB 3840 who files (ca-3840-inst-2025::sec::b-who-must-file::b01)", ()
     expect(run.field("1.line.8_california_sourced_deferred_gain")).toMatchObject(UNSUPPORTED);
   });
 
-  it("two exchanges: each takes its own form, and the engine prints one (g-multiple-exchanges::b01)", () => {
-    const facts = [
-      ...base.facts,
-      ...withFacts(INGTAR_EXCHANGE, INGTAR_CA_EXCHANGE, "second-parcel"),
-    ];
+  it("two exchanges: one copy of the form for each (g-multiple-exchanges::b01)", () => {
+    const second: LikeKindExchangeFactValue = {
+      ...INGTAR_EXCHANGE,
+      received: { ...INGTAR_EXCHANGE.received, fairMarketValue: 300000 },
+    };
+    const facts = [...base.facts, ...withFacts(second, INGTAR_CA_EXCHANGE, "second-parcel")];
     const run = evaluate(facts);
-    expect(run.field("0.line.19_deferred_gain_loss")).toMatchObject(UNSUPPORTED);
-    expect(run.value("0.header.ssn")).toBe("400003840");
+    // Copy 0 is the first exchange, as on the one-exchange return.
+    expect(run.value("0.line.19_deferred_gain_loss")).toBe(120000);
+    const spec = getFormSpec("form-3840");
+    const info = run.result.filingInfo;
+    expect(spec.copies?.count(info)).toBe(2);
+    const copy = spec.copies?.select(info, 1)?.form3840?.exchange;
+    expect(copy?.federalKey).toBe(makeLikeKindExchangeFactKey("second-parcel"));
+    expect(copy?.federal?.received.fairMarketValue).toBe(300000);
   });
 });
 

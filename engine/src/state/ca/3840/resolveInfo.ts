@@ -2,8 +2,8 @@ import { resolveMustFile, type ResolverInputs } from "../../../resolverInputs.js
 import {
   CALIFORNIA_RETURN_KEYS,
   filesCaliforniaReturn,
+  form3840CopiesOf,
   form3840Exchanges,
-  form3840StateOf,
 } from "./exchanges.js";
 import type { Form3840FilingInfo } from "./filingInfo.js";
 
@@ -32,10 +32,12 @@ export function resolve3840Info(inputs: ResolverInputs): Form3840FilingInfo {
     ],
   });
   const files = resolution.value === true;
+  const copies = files ? form3840CopiesOf(exchanges) : undefined;
   return {
     mustFile: { "form-3840": resolution },
     missingInputs: { "form-3840": files ? exchanges.missingKeys : [] },
-    form3840: files ? form3840StateOf(exchanges) : undefined,
+    form3840: copies?.[0],
+    form3840Copies: copies,
     form3840Attached: filesCaliforniaReturn(inputs),
   };
 }
