@@ -169,6 +169,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "whether one exists is Cade's question",
   ],
   [
+    /^(like_kind_exchange|conflict_of_interest_sale)\.[^.]+$/,
+    "each fact is a whole like-kind exchange or section 1043 sale (Form 8824); whether one " +
+      "happened is Cade's question. Form 8824 lists an exchange again while its lines 9 and 10 " +
+      "are not answered",
+  ],
+  [
     /^section_179_recapture\.[^.]+$/,
     "a Form 4797 Part IV fact is the whole recapture of one property; whether business use " +
       "dropped to 50% or less is Cade's question",

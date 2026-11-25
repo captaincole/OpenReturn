@@ -16,6 +16,8 @@ import { scheduleTwoNeededForEarlyDistributions } from "./federal/5329/resolveIn
 import { resolve6251Info } from "./federal/6251/resolveInfo.js";
 import { form6252TotalsOf } from "./federal/6252/resolveInfo.js";
 import { form8621Feeds } from "./federal/8621/totals.js";
+import { sendsToScheduleD } from "./federal/8824/receivers.js";
+import { resolve8824Info } from "./federal/8824/resolveInfo.js";
 import { resolve8853Info } from "./federal/8853/resolveInfo.js";
 import { SCHEDULE_2_LINES, form8853Reaches } from "./federal/8853/results.js";
 import { resolve8919Info } from "./federal/8919/resolveInfo.js";
@@ -274,6 +276,7 @@ export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInf
       form8621Feeds(inputs).scheduleDFallback,
       form4797Fallback(inputs),
       form6252Fallback(inputs),
+      form8824Fallback(inputs),
     ],
   });
   const distributions = sumInvestmentBox(inputs, "box2a", isDividendFactKey);
@@ -322,6 +325,20 @@ function form6252Fallback(inputs: ResolverInputs) {
     rule: "fallback: a Form 6252 installment sale of a capital asset (line 4 or 11)",
     value: keys.length > 0,
     triggeredByFactKeys: keys,
+  };
+}
+
+/*
+ * A Form 8824 gain or (loss) goes on line 4 or 11 (the Schedule D lines;
+ * irs-8824-inst-2025::sec::line-22::b01, line-36::b01).
+ */
+function form8824Fallback(inputs: ResolverInputs) {
+  const totals = resolve8824Info(inputs).form8824Totals;
+  const sends = sendsToScheduleD(totals);
+  return {
+    rule: "fallback: a Form 8824 gain or (loss) (lines 4 and 11)",
+    value: sends,
+    triggeredByFactKeys: sends ? (totals?.fileKeys ?? []) : [],
   };
 }
 
