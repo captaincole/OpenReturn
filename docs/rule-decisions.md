@@ -1,12 +1,11 @@
 # Rule decisions
 
-This page lists each tax rule that a person decided, because the official texts did not settle it. It is the place to start a discussion with a tax professional, and the list to check again when the tax law itself is in the reference library.
+This page lists each tax rule that someone had to decide, because the official texts did not settle it. It is the place to start a discussion with a tax professional, and the list to check again when the tax law itself is in the reference library.
 
-A person decides a rule in three cases (see `CLAUDE.md`, "When two official texts conflict, the code records the decision"):
+Who decides (see `CLAUDE.md`, "When two official texts conflict, the code records the decision"):
 
-- two official texts point different ways;
-- the guidance allows a choice of method or source;
-- an input has no official form, so someone must decide what the real document looks like.
+- The author of the rule decides when two official texts point different ways, or when a line can be read two ways. The author follows the principles below and adds the row. No pull request waits for it.
+- A person decides when the choice changes a pattern in the repository: a source of data that every form then uses, what an input document with no official form looks like, or how facts, forms or the corpus work.
 
 Each decision below also sits in the code, in a comment that starts with `DECISION (<date>):` above the rule that applies it. `grep -rn "DECISION (" engine/src` lists them. When you add a decision, add the comment and one row here in the same pull request.
 
