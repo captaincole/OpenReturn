@@ -13,6 +13,7 @@ import {
   type ResolverInputs,
 } from "../../../resolverInputs.js";
 import { form3805ETotalsOf } from "../3805e/resolveInfo.js";
+import { resolveScheduleD1Info } from "../schedule-d-1/resolveInfo.js";
 import type { ScheduleDCaFilingInfo } from "./filingInfo.js";
 import { scheduleDCaFigures, type InstallmentRow } from "./lines.js";
 import { salesWithBases, scheduleDCaMustFile } from "./mustFile.js";
@@ -62,6 +63,8 @@ export function resolveScheduleDCaInfo(inputs: ResolverInputs): ScheduleDCaFilin
   }
   const distributions = sumInvestmentBox(inputs, "box2a", isDividendFactKey);
   const installments = installmentRows(inputs);
+  // California's section 1231 gain (Schedule D-1), figured when Form 4797 files on a Form 540 return.
+  const section1231 = resolveScheduleD1Info(inputs).californiaSection1231Gain;
   const figures = scheduleDCaFigures({
     sales: salesWithBases(inputs).map((sale) => sale.sale),
     installmentRows: installments.rows,
@@ -72,6 +75,9 @@ export function resolveScheduleDCaInfo(inputs: ResolverInputs): ScheduleDCaFilin
         : undefined,
     californiaCarryoverMissing: asked.length > 0,
     filingStatus: filingStatusOf(inputs),
+    section1231Gain: section1231?.gap === undefined ? section1231?.gain : undefined,
+    section1231Waits: section1231?.waits,
+    section1231Gap: section1231?.gap && `Schedule D-1: ${section1231.gap}`,
   });
   return {
     mustFile: { "schedule-d-ca": resolution },

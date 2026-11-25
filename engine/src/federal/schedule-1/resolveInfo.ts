@@ -136,15 +136,21 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
 
 /*
  * Line 4: Form 4797 line 18b (the form's line 18b text). Schedule 1 files for
- * an ordinary gain or loss there, as when Form 6252 sends one (Form 4797
- * lines 10 and 15) on a return with no other Schedule 1 amount.
+ * an amount there even with no business or rental on the return (a Form 8824
+ * recapture on Form 4797 line 16, or a Form 6252 ordinary gain on Form 4797
+ * lines 10 and 15), or while the line is a gap.
  */
 function form4797Fallback(inputs: ResolverInputs) {
-  const lines = resolve4797Info(inputs).form4797;
-  const amount = lines?.line18b ?? 0;
+  const info = resolve4797Info(inputs);
+  const line18b = info.form4797?.line18b ?? 0;
+  const gap = info.form4797Gap ?? info.form4797SummaryGap;
+  const files = info.mustFile?.["form-4797"]?.value === true;
   return {
-    rule: `fallback: Form 4797 line 18b $${amount} on line 4`,
-    value: amount !== 0,
+    rule: `fallback: Form 4797 line 18b $${line18b} on line 4 (or a Form 4797 the engine cannot figure)`,
+    value: files && (line18b !== 0 || gap !== undefined),
+    triggeredByFactKeys: files
+      ? (info.mustFile?.["form-4797"]?.derivation?.triggeredByFactKeys ?? [])
+      : [],
   };
 }
 

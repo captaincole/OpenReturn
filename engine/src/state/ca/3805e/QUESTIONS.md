@@ -96,17 +96,21 @@ only what California adds.
     warning. Changes dollars: no (the return is not finished while the gap
     stands).
 14. **Line 12 in the year of sale with California depreciation.** It comes from
-    Schedule D-1, Part III and Part IV (line-12::b01). Not now: Schedule D-1 has
-    no rules, so lines 12 on are a gap for that form (proposal below).
+    Schedule D-1, Part III and Part IV (line-12::b01). Not now: Schedule D-1
+    figures Part III only for a business property sale fact, not for an
+    installment sale, so lines 12 on are a gap for that form (proposal below).
 15. **Line 25 in the year of sale with section 1252, 1254 or 1255 recapture**
     (Schedule D-1, Part IV). Not now, for the same reason: lines 25 on are a gap
     for that form.
 16. **Business property and ordinary gains.** Lines 26 and 37 go to Schedule D-1
     line 4 or 10, lines 25 and 36 to line 15 (line-26-and-line-37::b01). Not
-    now: Schedule D-1 has no rules. The 3805E lines are figured; Schedule CA
-    (540) line 4 columns B and C, where the difference would land, are on that
-    form's unsupported list, and their reason now names this route
-    (`SCHEDULE_D1_GAP` in `totals.ts`). A total that adds an unsupported line
+    now: Schedule D-1 has rules, but its lines 4 and 15 do not take this form's
+    amounts. The 3805E lines are figured; Schedule CA (540) line 4 columns B and
+    C, where the difference would land, are a gap with this route as the reason
+    (`SCHEDULE_D1_GAP` in `totals.ts`, read by `schedule-ca/otherGains.ts`), and
+    Schedule D-1 lines 7 to 21 are a gap for such a sale (`salesForScheduleD1`,
+    read from the facts because Schedule D-1 resolves before FTB 3805E's
+    decision is known). A total that adds an unsupported line
     still adds the others (Schedule CA line 10, Form 540 lines 14 and 16), so
     the difference is missing there; that is how every gap in the engine
     behaves today. Changes dollars: yes, the California difference of a
@@ -120,16 +124,19 @@ only what California adds.
   its own facts or the federal form's printed lines. After, FTB 3805E reads the
   federal installment sale fact with an optional `california` block of the
   amounts that differ, and runs Form 6252's arithmetic on them.
-- **FTB 3805E and Schedule D (540) resolve together.** Before, Schedule D (540)
-  resolved alone and FTB 3805E was a form with no rules. After, both sit in
-  `state/ca/gainForms.ts`: FTB 3805E gives Schedule D (540) its line 1 rows,
-  and Schedule D (540) filing makes a capital asset sale file FTB 3805E.
+- **FTB 3805E and Schedule D (540) read each other.** Before, Schedule D (540)
+  resolved alone and FTB 3805E was a form with no rules. After, FTB 3805E gives
+  Schedule D (540) its line 1 rows (`form3805ETotalsOf`), and Schedule D (540)
+  filing (`schedule-d-ca/mustFile.ts`) makes a capital asset sale file FTB
+  3805E. FTB 3805E's resolver sits at the end of `state/ca/laterForms.ts`;
+  resolvers read only the facts, so the order does not matter.
 
 ## Proposals for a discussion
 
-- **Schedule D-1 rules.** Part III (recapture) and Part IV would let line 12 and
-  line 25 compute in the year of sale, and lines 4, 10 and 15 would take this
-  form's business amounts. That is a new form's rules, so it waits.
+- **Schedule D-1 takes this form's amounts.** Schedule D-1 has rules now. Its
+  Part III and Part IV for an installment sale would let line 12 and line 25
+  compute in the year of sale, and its lines 4, 10 and 15 would take this
+  form's business amounts. That changes Schedule D-1's resolver, so it waits.
 
 ## Second opinions
 

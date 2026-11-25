@@ -15,6 +15,8 @@ import type { MustFileResolution } from "../../../filingInfo.js";
 import { sum } from "../../../money.js";
 import { num, resolveMustFile, type ResolverInputs } from "../../../resolverInputs.js";
 import { differsThisYear } from "../3805e/sale.js";
+import type { ScheduleD1FilingInfo } from "../schedule-d-1/filingInfo.js";
+import { resolveScheduleD1Info } from "../schedule-d-1/resolveInfo.js";
 import type { CaliforniaSale } from "./lines.js";
 
 const MUST_FILE_KEY = "decisions.scope.must_file_schedule_d_ca";
@@ -67,14 +69,32 @@ function installmentSalesThatDiffer(inputs: ResolverInputs): string[] {
     .map(({ key }) => key);
 }
 
+type Section1231 = ScheduleD1FilingInfo["californiaSection1231Gain"];
+
+/*
+ * A section 1231 gain that goes to Schedule D is a capital gain on both returns:
+ * when California's (Schedule D-1 line 7 or 9) is not the federal one (Form 4797
+ * to federal Schedule D line 11), the capital gains differ (::purpose::b01).
+ */
+function section1231Fallback(section1231: Section1231, files540: boolean) {
+  const differs = files540 && section1231?.differs === true;
+  return {
+    rule: `fallback: Form 540 files (${files540}) and the Schedule D-1 section 1231 gain differs from the federal Form 4797 gain (${differs})`,
+    value: differs,
+    triggeredByFactKeys: [],
+    triggeredByDecisionKeys: [FILES_540_KEY],
+  };
+}
+
 /*
  * ca-540-sched-d-inst-2025::sec::purpose::b01: use the schedule "only if there
  * is a difference between your California and federal capital gains and
  * losses". A fact shows one: a California carryover from 2024 that is not the
  * federal carryover (both short and long term), a sale whose California basis
- * is not its federal basis, or a capital asset installment sale whose
- * California amounts are not its federal ones (its FTB 3805E gain can differ).
- * A capital gain alone files nothing. The schedule goes with Form 540.
+ * is not its federal basis, a capital asset installment sale whose California
+ * amounts are not its federal ones (its FTB 3805E gain can differ), or a
+ * Schedule D-1 section 1231 gain that is not the federal one. A capital gain
+ * alone files nothing. The schedule goes with Form 540.
  */
 export function scheduleDCaMustFile(inputs: ResolverInputs): MustFileResolution {
   const files540 = inputs.decisionByKey.get(FILES_540_KEY) === true;
@@ -108,6 +128,7 @@ export function scheduleDCaMustFile(inputs: ResolverInputs): MustFileResolution 
         triggeredByFactKeys: installments,
         triggeredByDecisionKeys: [FILES_540_KEY],
       },
+      section1231Fallback(resolveScheduleD1Info(inputs).californiaSection1231Gain, files540),
     ],
   });
 }

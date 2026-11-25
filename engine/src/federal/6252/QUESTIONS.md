@@ -170,8 +170,9 @@ keep their numbers under three headings. The two conflicts are decisions in
 - **A selling price reduced after the sale** (Pub. 537 Worksheet B,
   selling-price-reduced::b01), **a like-kind exchange with an installment note**
   (Form 8824, like-kind-exchange::b02) and **a contingent payment sale with no stated
-  maximum**: each needs a new input; today the first two have no fact and the third
-  is a gap.
+  maximum**: each needs a new input. Today the first has no fact; the second is a
+  gap on Form 8824, whose exchange fact says the installment method applies but
+  names no installment sale (8824/exchange.ts); and the third is a gap.
 
 ## Confidence by field group
 

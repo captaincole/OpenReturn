@@ -3,7 +3,8 @@
  * due, contributions, the amount you owe, penalties and the refund.
  */
 
-import { atLeast, sum } from "../../../money.js";
+import { atLeast, numberOrBlank, sum } from "../../../money.js";
+import { isrPenalty } from "../3853/isrPenalty.js";
 import type { Form540Line } from "./form540Binding.js";
 
 export const line91UseTax: Form540Line<"line.91_use_tax"> = (_, info) => info.useTaxOwed;
@@ -16,6 +17,22 @@ export const line92FullYearHealthCoverage: Form540Line<"line.92_full_year_health
   _,
   info,
 ) => info.fullYearMEC;
+
+/*
+ * Line 92: "Enter your individual shared responsibility penalty from form FTB
+ * 3853, Part IV, line 1" (ca-540-inst-2025::sec::line-92-individual-shared-responsibility-isr-penalty::b01).
+ * Blank with no FTB 3853 or no penalty; the same rule as FTB 3853 line 1.
+ */
+export const line92IsrPenalty: Form540Line<"line.92_isr_penalty"> = (form, info) =>
+  isrPenalty((id) => form[id], info);
+
+/* Line 96, as the form prints it: "If line 92 is more than line 93, subtract line 93 from line 92"; blank otherwise. */
+export const line96IsrPenaltyBalance: Form540Line<"line.96_isr_penalty_balance"> = (form) => {
+  const penalty = numberOrBlank(form["line.92_isr_penalty"]);
+  if (penalty === undefined) return undefined;
+  const balance = penalty - atLeast(0, form["line.93_payments_balance"]);
+  return balance > 0 ? balance : undefined;
+};
 
 export const line93PaymentsBalance: Form540Line<"line.93_payments_balance"> = (form) =>
   atLeast(
@@ -87,10 +104,17 @@ export const line113UnderpaymentEstimatedTax: Form540Line<"line.113_underpayment
   return typeof value === "number" ? value : undefined;
 };
 
+/*
+ * Line 114: "Add line 111, line 112, and line 113"
+ * (ca-540-inst-2025::sec::line-114-total-amount-due::b01). Line 111 adds lines
+ * 94, 96, 100 and 110, so the penalty balance (line 96) is in the total.
+ */
 export const line114TotalAmountDue: Form540Line<"line.114_total_amount_due"> = (form) => {
   const due = atLeast(
     0,
     sum(
+      form["line.94_use_tax_balance"],
+      form["line.96_isr_penalty_balance"],
       form["line.100_tax_due"],
       form["line.110_total_contributions"],
       form["line.112_interest_and_late_penalties"],

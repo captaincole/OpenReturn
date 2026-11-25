@@ -3,7 +3,7 @@
  * year, and what they send on (ca-3805e-inst-2025::sec::line-26-and-line-37::b01):
  * a capital asset's line 26 and line 37 to Schedule D (540) line 1, and trade
  * or business property, an ordinary gain and lines 25 and 36 to Schedule D-1,
- * which has no rules yet (scheduleD1Gap).
+ * whose lines 4 and 15 do not take them yet (scheduleD1Gap).
  */
 
 import type { InstallmentSaleFact } from "../../../facts/index.js";
@@ -21,14 +21,15 @@ export interface Form3805ETotals {
   scheduleDRows: InstallmentRow[];
   /*
    * Why an amount bound for Schedule D-1 is not carried; undefined when none is
-   * sent. Schedule CA (540) line 4 columns B and C are on that form's unsupported
-   * list with this reason, so the route is a gap on every return.
+   * sent. Schedule CA (540) line 4 columns B and C are a gap with this reason
+   * (schedule-ca/otherGains.ts), and Schedule D-1 lines 7 to 21 are a gap too
+   * (salesForScheduleD1).
    */
   scheduleD1Gap?: string;
 }
 
 export const SCHEDULE_D1_GAP =
-  "FTB 3805E line 26 or 37 of trade or business property, or an ordinary gain, goes to Schedule D-1 line 4 or line 10, and lines 25 and 36 to Schedule D-1 line 15 (ca-3805e-inst-2025::sec::line-26-and-line-37::b01). The engine has no rules for Schedule D-1, so Schedule CA (540) line 4 columns B and C stay unsupported.";
+  "FTB 3805E line 26 or 37 of trade or business property, or an ordinary gain, goes to Schedule D-1 line 4 or line 10, and lines 25 and 36 to Schedule D-1 line 15 (ca-3805e-inst-2025::sec::line-26-and-line-37::b01). The engine does not carry FTB 3805E amounts to Schedule D-1 yet, so Schedule CA (540) line 4 columns B and C are unsupported.";
 
 type LineValue = ReturnType<typeof moneyLine>;
 
@@ -57,6 +58,21 @@ export function scheduleDRow(form: SaleForm): InstallmentRow | undefined {
 /* A form that sends an amount to Schedule D-1. */
 const sendsToScheduleD1 = (form: SaleForm): boolean =>
   form.sale.use !== "capital_asset" || (form.sale.remainingRecapture ?? 0) > 0;
+
+/*
+ * The installment sales with a form this year that send an amount to Schedule
+ * D-1, from the facts alone: Schedule D-1 resolves before it can know whether
+ * FTB 3805E files (FTB 3805E reads Schedule D (540), which reads Schedule D-1).
+ * Schedule D-1 takes none of these amounts, whether or not FTB 3805E files.
+ */
+export function salesForScheduleD1(sales: InstallmentSaleFact[], joint: boolean): string[] {
+  return sales
+    .filter((sale) => {
+      const form = californiaSaleForm(sale.key, sale.value, joint);
+      return filesThisYear(form) && sendsToScheduleD1(form);
+    })
+    .map((sale) => sale.key);
+}
 
 /* Every form of the return; with a whole-form gap, no form is figured. */
 export function form3805ETotals(

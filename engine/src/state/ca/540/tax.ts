@@ -3,10 +3,14 @@
 import { lookupCaRateSchedule } from "../../../data/caRateSchedule.js";
 import { lookupTax } from "../../../data/taxTable.js";
 import { atLeast, numberOrBlank, roundDollars, sum } from "../../../money.js";
-import { unsupported } from "../../../types.js";
+import { unsupported, type Unsupported } from "../../../types.js";
 import { caExemptionCreditsAfterLimit } from "../../../worksheets/caAgiLimitation.js";
+import { childTaxOnLine31 } from "../3800-ca/form.js";
 import type { Form540FilingInfo } from "./filingInfo.js";
 import type { Form540Form, Form540Line } from "./form540Binding.js";
+
+const isUnsupported = (value: unknown): value is Unsupported =>
+  typeof value === "object" && value !== null && "unsupported" in value;
 
 // MANUAL EDIT: FTB sends line 19 over $100,000 to the Tax Rate Schedules.
 function usesRateSchedule(taxableIncome: number | undefined): boolean | undefined {
@@ -33,17 +37,35 @@ function taxOnTaxableIncome(form: Form540Form, info: Form540FilingInfo): number 
 }
 
 /*
+ * MANUAL EDIT: a child's tax is FTB 3800 line 18 when that form figures it
+ * (ca-540-inst-2025::sec::line-31-tax::b01, ca-3800-inst-2025::sec::part-iii-child-s-tax::b03);
+ * otherwise the table or schedules. Blank while FTB 3800 waits, unsupported with its gap.
+ */
+function taxOnLine31(form: Form540Form, info: Form540FilingInfo) {
+  const child = childTaxOnLine31(form, info);
+  return child === "regular" ? taxOnTaxableIncome(form, info) : child;
+}
+
+/*
  * MANUAL EDIT: plus the tax "from each form FTB 3803, line 9"
  * (ca-540-inst-2025::sec::line-31-tax::b02). Blank while an FTB 3803 waits,
  * unsupported with its gap.
  */
 export const line31TaxAmount: Form540Line<"line.31_tax_amount"> = (form, info) => {
-  const tax = taxOnTaxableIncome(form, info);
+  const tax = taxOnLine31(form, info);
+  if (isUnsupported(tax)) return tax;
   const ftb3803 = info.form3803Totals;
   if (info.mustFile?.["form-3803"]?.value !== true || ftb3803 === undefined) return tax;
   if (ftb3803.kind === "waits") return undefined;
   if (ftb3803.kind === "unsupported") return unsupported(ftb3803.reason);
   return tax === undefined ? undefined : tax + ftb3803.line9;
+};
+
+// MANUAL EDIT: the FTB 3800 box (ca-3800-inst-2025::sec::part-iii-child-s-tax::b03) when line 31 holds FTB 3800 line 18.
+export const line31TaxFromFtb3800: Form540Line<"line.31_tax_from_ftb_3800"> = (form, info) => {
+  const child = childTaxOnLine31(form, info);
+  if (child === undefined || isUnsupported(child)) return child;
+  return typeof child === "number" ? true : undefined;
 };
 
 // MANUAL EDIT: the FTB 3803 box (ca-540-inst-2025::sec::line-31-tax::b01) when the parents attach one.

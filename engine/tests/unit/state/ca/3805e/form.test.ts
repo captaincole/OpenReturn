@@ -11,7 +11,11 @@ import {
 } from "../../../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../../../src/facts/rows.js";
 import { evaluateScenario } from "../../../../../src/index.js";
-import { form3805ETotals, SCHEDULE_D1_GAP } from "../../../../../src/state/ca/3805e/totals.js";
+import {
+  form3805ETotals,
+  salesForScheduleD1,
+  SCHEDULE_D1_GAP,
+} from "../../../../../src/state/ca/3805e/totals.js";
 import { decisionRow } from "../../../../helpers/fixtureBuilders.js";
 import { alderHome, foothillLot } from "../../../../scenarios/synthetic/joline/facts.js";
 import { jolineScenario as base } from "../../../../scenarios/synthetic/joline/index.js";
@@ -210,15 +214,20 @@ describe("what FTB 3805E sends on", () => {
     expect(line("schedule-ca", "0.line.7a_additions")).toBe(9990);
   });
 
-  it("business property goes to Schedule D-1, which has no rules: no line 1 row, the route is a gap", () => {
+  it("business property goes to Schedule D-1, which does not take it: no line 1 row, the route is a gap", () => {
     const business = { ...foothillLot, use: "business" as const, relatedParty: undefined };
-    const totals = form3805ETotals(
-      [{ key: "installment_sale.shop", value: business }],
-      false,
-      undefined,
-    );
+    const sales = [{ key: "installment_sale.shop", value: business }];
+    const totals = form3805ETotals(sales, false, undefined);
     expect(totals.scheduleDRows).toEqual([]);
     expect(totals.scheduleD1Gap).toBe(SCHEDULE_D1_GAP);
+    expect(salesForScheduleD1(sales, false)).toEqual(["installment_sale.shop"]);
+  });
+
+  it("on the return, a business sale's form makes Schedule CA line 4 columns B and C a gap", () => {
+    const business = { ...foothillLot, use: "business" as const, relatedParty: undefined };
+    const { line } = evaluate([...others, saleRow("shop", business)]);
+    expect(line("schedule-ca", "0.line.b4_subtractions")).toBe("unsupported");
+    expect(line("schedule-ca", "0.line.b4_additions")).toBe("unsupported");
   });
 
   it("a capital asset with only the same amounts sends nothing to Schedule D-1", () => {

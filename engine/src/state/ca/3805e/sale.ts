@@ -33,9 +33,9 @@ const yearOf = (date: string): number => Number(date.slice(0, 4));
 const CONTINGENT_NO_MAXIMUM =
   "A contingent payment sale with no stated maximum selling price: federal Form 6252's instructions, which FTB 3805E follows for line 5 (ca-3805e-inst-2025::sec::specific-line-instructions::b01), attach a computation of the gain (Temporary Regulations section 15a.453-1(c)). The engine does not figure it.";
 const RECAPTURE_IN_YEAR_OF_SALE =
-  "Line 12 is the recapture figured on Schedule D-1, Part III and Part IV (ca-3805e-inst-2025::sec::line-12::b01). The engine has no rules for Schedule D-1, so line 12 is not figured for a 2025 sale with California depreciation.";
+  "Line 12 is the recapture figured on Schedule D-1, Part III and Part IV (ca-3805e-inst-2025::sec::line-12::b01). The engine's Schedule D-1 does not figure an installment sale's recapture, so line 12 is not figured for a 2025 sale with California depreciation.";
 const OTHER_RECAPTURE_IN_YEAR_OF_SALE =
-  "Line 25 in the year of sale is the section 1252, 1254 or 1255 recapture of Schedule D-1, Part IV (ca-3805e-inst-2025::sec::line-25-and-line-36::b01); the engine has no rules for Schedule D-1.";
+  "Line 25 in the year of sale is the section 1252, 1254 or 1255 recapture of Schedule D-1, Part IV (ca-3805e-inst-2025::sec::line-25-and-line-36::b01); the engine's Schedule D-1 does not figure it for an installment sale.";
 const NO_GAIN =
   "Line 14 is zero or less: stop here (the form), and report the entire sale on Schedule D (540) or Schedule D-1 (ca-3805e-inst-2025::sec::line-24::b01). The engine does not move the sale there.";
 

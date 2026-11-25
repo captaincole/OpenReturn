@@ -1,9 +1,9 @@
 /*
  * Form 4797 for the whole return: lines 1a–18b and 30–35, from the placed
- * properties (properties.ts) and the amounts of Form 6252 (lines 4, 10 and 15).
- * Each money line is whole dollars. Lines 3, 5, 14, 16 and 18a come from Forms
- * 4684 and 8824, which the engine does not carry here: the resolver makes the
- * summary a gap while one files.
+ * properties (properties.ts), the amounts of Form 6252 (lines 4, 10 and 15) and
+ * Form 8824 (lines 5 and 16). Each money line is whole dollars. Lines 3, 14 and
+ * 18a come from Form 4684 Section B, which the engine does not model: those
+ * lines are unsupported (bindings.ts).
  */
 
 import { section179RecaptureAmount, type Section179RecaptureFactValue } from "../../facts/index.js";
@@ -29,6 +29,8 @@ export interface Form4797Lines {
   partIRows: SaleRow[];
   /* Form 6252 lines 26 and 37 of trade or business property held more than 1 year. */
   line4?: number;
+  /* Section 1231 gain or (loss) from like-kind exchanges, Form 8824. */
+  line5?: number;
   line6?: number;
   line7?: number;
   line8?: number;
@@ -39,6 +41,8 @@ export interface Form4797Lines {
   line13?: number;
   /* Form 6252 lines 25 and 36. */
   line15?: number;
+  /* Ordinary gain or (loss) from like-kind exchanges, Form 8824. */
+  line16?: number;
   line17?: number;
   line18b?: number;
   partIIIColumns: PartIIIColumn[];
@@ -62,7 +66,11 @@ export interface InstallmentAmounts {
   /* Line 10 rows "From Form 6252" (irs-6252-form-2025::sec::line-26::b01). */
   line10: number[];
   line15: number[];
-  /* A Form 6252 amount waits for an answer: lines 4, 7–18b are blank. */
+  /*
+   * A Form 6252 amount waits for an answer: lines 4, 7–12, 15, 17 and 18b are
+   * blank, and line 10 has no Form 6252 row. Lines 5, 6, 13 and 16 do not take
+   * Form 6252 and still print.
+   */
   waits: boolean;
 }
 
@@ -86,6 +94,11 @@ export interface Form4797Inputs {
   /* The answer for line 8; undefined when not recorded. */
   nonrecapturedLosses?: number;
   recaptures: Section179RecaptureFactValue[];
+  /*
+   * Form 8824's amounts: line 5 takes its section 1231 gain or (loss) and line 16
+   * its ordinary gain or (loss) (lines 21 and 22; irs-8824-inst-2025::sec::line-22::b01).
+   */
+  likeKindExchanges?: { line5?: number; line16?: number };
 }
 
 const rowsIn = (properties: PlacedProperty[], part: "part_i" | "part_ii"): SaleRow[] =>
@@ -172,6 +185,7 @@ function partIITotals(
   netting: ReturnType<typeof section1231Netting>,
   line13?: number,
   line15?: number,
+  line16?: number,
 ) {
   if (netting.waitsForLine8) return {};
   const line17 = sumOrBlank(
@@ -180,6 +194,7 @@ function partIITotals(
     netting.line12,
     line13,
     line15,
+    line16,
   );
   return { line17, line18b: line17 };
 }
@@ -199,9 +214,10 @@ export function form4797Lines(inputs: Form4797Inputs): Form4797Lines {
   const line6 = positiveOrBlank(summary.line32);
   const waits = installment?.waits === true;
   const line4 = waits ? undefined : totalOrBlank(installment?.line4);
+  const { line5, line16 } = inputs.likeKindExchanges ?? {};
   const line7 = waits
     ? undefined
-    : sumOrBlank(...partIRows.map((row) => row.gainOrLoss), line4, line6);
+    : sumOrBlank(...partIRows.map((row) => row.gainOrLoss), line4, line5, line6);
   const netting = waits
     ? { waitsForLine8: true }
     : section1231Netting(line7, inputs.nonrecapturedLosses);
@@ -217,13 +233,15 @@ export function form4797Lines(inputs: Form4797Inputs): Form4797Lines {
     line1c: partial.loss.length > 0 ? sum(...partial.loss) : undefined,
     partIRows,
     line4,
+    line5,
     line6,
     line7,
     ...netting,
     partIIRows,
     line13,
     line15,
-    ...partIITotals(partIIRows, netting, line13, line15),
+    line16,
+    ...partIITotals(partIIRows, netting, line13, line15, line16),
     partIIIColumns,
     ...summary,
     partIV: {
