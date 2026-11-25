@@ -227,6 +227,7 @@ export function netProfit(
 ): number | undefined {
   const line31 = profitBeforeLossRules(business, onReturn);
   if (line31 === undefined || business.materiallyParticipated !== true) return undefined;
-  if (line31 >= 0 || business.allInvestmentAtRisk === true) return line31;
-  return business.allInvestmentAtRisk === false ? allowedBusinessLoss(business, line31) : undefined;
+  // MANUAL EDIT: with some investment not at risk a profit goes through Form 6198 too, for recapture.
+  if (business.allInvestmentAtRisk === false) return allowedBusinessLoss(business, line31);
+  return line31 >= 0 || business.allInvestmentAtRisk === true ? line31 : undefined;
 }

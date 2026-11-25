@@ -12,13 +12,27 @@
 
 type FactRow = { key: string; value: unknown; category: string };
 
-/* Part II, the simplified computation: it needs the adjusted basis (irs-6198-inst-2025::sec::part-ii-simplified::b01). */
+/*
+ * Part II, the simplified computation: it needs the adjusted basis (irs-6198-inst-2025::sec::part-ii-simplified::b01).
+ * Where a person finds each answer: a partner's basis on last year's Partner's
+ * Basis Worksheet line 18, a shareholder's on last year's Form 7203; the
+ * K-1's item L (capital contributed, withdrawals and distributions) and box 19
+ * (box 16 code D for an S corporation); item K (the share of nonrecourse,
+ * qualified nonrecourse and recourse liabilities); the loan papers for who is
+ * personally liable.
+ */
 export interface AtRiskSimplified {
-  /* Line 6: adjusted basis in the activity, or in the interest, on the first day of the tax year (::line-6::b01). */
+  /* Line 6: what was your adjusted basis in the activity, or in your interest, on the first day of the year? (::line-6::b01). */
   adjustedBasisAtStart: number;
-  /* Line 7: increases for the tax year, not this year's income (::line-7::b01 to ::b03). */
+  /*
+   * Line 7: this year's cash and property put in, and loans for the activity
+   * you are personally liable for; not this year's income (::line-7::b01 to ::b03).
+   */
   increases?: number;
-  /* Line 9: decreases for the tax year, not this year's losses (::line-9::b01, ::b02). */
+  /*
+   * Line 9: this year's withdrawals and distributions, and the nonrecourse or
+   * protected amounts that are in line 6; not this year's losses (::line-9::b01, ::b02).
+   */
   decreases?: number;
 }
 
@@ -37,7 +51,7 @@ export type AtRiskDetailedStart =
 /* Part III, the detailed computation. */
 export interface AtRiskDetailed {
   start: AtRiskDetailedStart;
-  /* Line 15 when start is prior_year_form: last year's Form 6198 line 19b, never line 10b. */
+  /* Line 15 when start is prior_year_form: the amount on last year's Form 6198 line 19b, never line 10b. */
   priorYearAmountAtRisk?: number;
   /* Line 11 when start is effective_date: the investment at the effective date (the Line 11 Worksheet). */
   investmentAtEffectiveDate?: number;
@@ -45,9 +59,17 @@ export interface AtRiskDetailed {
   increasesAtEffectiveDate?: number;
   /* Line 14: decreases at the effective date (::line-14::b01, ::b02). */
   decreasesAtEffectiveDate?: number;
-  /* Line 16: increases since the effective date, or since the end of last year (::line-16::b01 to ::b06). */
+  /*
+   * Line 16: cash and property put in, loans you are personally liable for,
+   * and qualified nonrecourse financing, since the effective date or since
+   * the end of last year; not this year's income (::line-16::b01 to ::b06).
+   */
   increasesSince?: number;
-  /* Line 18: decreases since then, last year's line 21 loss included (::line-18::b01 to ::line-14-2::b02). */
+  /*
+   * Line 18: withdrawals and distributions, loans that became nonrecourse or
+   * protected, since then; with last year's form, last year's line 21 loss too
+   * (::line-18::b01 to ::line-14-2::b02; federal/6198/QUESTIONS.md item 15).
+   */
   decreasesSince?: number;
 }
 

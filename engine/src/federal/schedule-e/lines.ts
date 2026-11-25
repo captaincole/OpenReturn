@@ -130,7 +130,8 @@ export function netIncomeOrLoss(property: RentalFactValue): number | undefined {
 
 /*
  * irs-1040se-inst-2025::sec::line-21::b01: with amounts not at risk, Form 6198
- * figures the loss (not modeled), so a loss waits on allInvestmentAtRisk.
+ * figures the loss, so a loss waits on allInvestmentAtRisk (and is a gap when
+ * some is not at risk, rentalAtRiskGap).
  */
 function incomeOrLoss(property: RentalFactValue): number | undefined {
   const net = netIncomeOrLoss(property);
@@ -139,11 +140,31 @@ function incomeOrLoss(property: RentalFactValue): number | undefined {
 }
 
 /*
+ * A rental loss with some investment not at risk: "use Form 6198 to determine
+ * the amount of your deductible loss. Enter that amount in the appropriate
+ * column of Schedule E, line 21" (irs-1040se-inst-2025::sec::line-21::b01,
+ * ::b02). The rental fact holds no amounts at risk and no carried at-risk loss,
+ * and Form 8582 would then take the loss Form 6198 allows, so the rental is
+ * not connected to Form 6198: its line 21 is a gap, never the whole loss.
+ */
+export function rentalAtRiskGap(property: RentalFactValue): string | undefined {
+  if (property.allInvestmentAtRisk !== false) return undefined;
+  const net = netIncomeOrLoss(property);
+  return net !== undefined && net < 0
+    ? "Some of the investment in this rental is not at risk, so Form 6198 limits its loss (irs-1040se-inst-2025::sec::line-21::b01); Form 6198 for a rental is not modeled."
+    : undefined;
+}
+
+/* Why the property's line 21 is a case the engine does not handle: Form 4562, or Form 6198. */
+export const rentalLine21Gap = (property: RentalFactValue) =>
+  rentalDepreciationGap(property) ?? rentalAtRiskGap(property);
+
+/*
  * Line 21 as its binding computes it, from the fact alone: undefined while it
  * waits or is a gap. The K-1 passive limit reads it for Form 8582's rows.
  */
 export function line21Amount(property: RentalFactValue): number | undefined {
-  return rentalDepreciationGap(property) ? undefined : incomeOrLoss(property);
+  return rentalLine21Gap(property) ? undefined : incomeOrLoss(property);
 }
 
 // One "Other (list)" box serves all three columns; several are labeled by column.
@@ -170,21 +191,23 @@ export function partIColumnBindings(column: PropertyColumn): PartIBindings {
       const property = info.rentalProperties?.find((entry) => entry.column === column)?.value;
       return property ? line(property) : undefined;
     };
-  // MANUAL EDIT: a Form 4562 case the engine does not handle makes lines 18, 20 and 21 unsupported.
-  const afterDepreciation =
+  // MANUAL EDIT: a Form 4562 case the engine does not handle makes lines 18, 20 and 21 unsupported; a Form 6198 case, line 21.
+  const withGap =
+    (gapOf: (property: RentalFactValue) => string | undefined) =>
     (line: (property: RentalFactValue) => number | undefined): Fn =>
     (form, info) => {
       const property = info.rentalProperties?.find((entry) => entry.column === column)?.value;
-      const gap = property ? rentalDepreciationGap(property) : undefined;
+      const gap = property ? gapOf(property) : undefined;
       return gap ? unsupported(gap) : amount(line)(form, info);
     };
+  const afterDepreciation = withGap(rentalDepreciationGap);
   const out: Record<string, Fn> = {
     [`0.line.3_rents_received_${column}`]: amount(rents),
     [`0.line.4_royalties_received_${column}`]: amount((property) =>
       roundDollars(property.royaltiesReceived),
     ),
     [`0.line.20_total_expenses_${column}`]: afterDepreciation(totalExpenses),
-    [`0.line.21_income_or_loss_${column}`]: afterDepreciation(incomeOrLoss),
+    [`0.line.21_income_or_loss_${column}`]: withGap(rentalLine21Gap)(incomeOrLoss),
   };
   for (const [line, key] of EXPENSE_LINES) {
     const read = (property: RentalFactValue) => expense(property, key);
