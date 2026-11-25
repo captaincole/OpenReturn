@@ -14,8 +14,15 @@ import { resolveScheduleFInfo } from "../schedule-f/resolveInfo.js";
 import { rentalAnswerKey, sortK1Items, sortProperties } from "./classify.js";
 import type { Form461Figures, Form461FilingInfo, Form461LineGaps } from "./filingInfo.js";
 
+/*
+ * Form 461 line 4 is Schedule 1 line 4 (irs-461-inst-2025::sec::line-4::b01),
+ * which is Form 4797 line 18b (irs-1040-inst-2025::sec::line-4-2::b01). Form
+ * 4797 has no rules yet, so the line is a gap while it files. When Form 4797
+ * has rules, line 4 copies Schedule 1 line 4 the way line 2 copies line 3, and
+ * this gap goes (QUESTIONS.md item 8 lists each change).
+ */
 const FORM_4797_GAP =
-  "Form 4797 files, and the engine has no rules for it: Schedule 1 line 4 (Form 461 line 4) is not known.";
+  "Form 4797 files and has no rules yet, so its line 18b, which Schedule 1 line 4 and Form 461 line 4 carry, is not known.";
 const SCHEDULE_F_GAP =
   "Schedule F files, and the engine has no rules for it: Schedule 1 line 6 (Form 461 line 6) is not known.";
 const FORM_4835_GAP =
