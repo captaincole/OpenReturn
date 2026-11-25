@@ -77,6 +77,17 @@ only what California adds.
     every obligation of the year, which no fact lists (federal item 13).
     Changes dollars: yes, for a sale over $150,000 in a year with more than
     $5 million of obligations.
+13. **A sale with no gain.** The form's line 14: "If zero or less, stop here.
+    Do not complete the rest of this form." The instructions: "Do not file form
+    FTB 3805E if the amount calculated for line 24 is less than zero. Instead,
+    report the entire sale on Schedule D (540 ...) or Schedule D-1"
+    (line-24::b01). Line 24 cannot be below zero, so both say the same thing:
+    a loss is not reported on this form. The correct return has no FTB 3805E
+    for the sale. Default: the engine still prints line 14 and makes lines 15
+    on a gap (`NO_GAIN` in `sale.ts`), as on federal Form 6252 (federal item
+    7), because it does not move the sale to Schedule D (540) or Schedule D-1;
+    dropping the form would drop the sale with no warning. Changes dollars: no
+    (the return is not finished while the gap stands).
 
 ## Unsupported
 
@@ -92,6 +103,31 @@ only what California adds.
   are figured.
 - **Line 14 zero or less, a contingent sale with no maximum, a sale date after
   2025:** as on federal Form 6252.
+
+## Second opinions
+
+- **Blind fill** (15 cases from the blank form and instructions only): every
+  dollar amount on a filed form matched, including the California basis (case
+  2), California depreciation in a later year (case 13), the line 19 places
+  (cases 3 and 12), the section 1252 recapture left (case 6) and Part III
+  (cases 7, 8, 9 and 14). Two kinds of difference, no dollars:
+  - Line 23 in the year of sale (cases 1, 2, 3, 4, 7, 12 and 15): the blind
+    fill wrote 0, the engine leaves it blank (federal item 10).
+  - Case 10, line 14 zero or less: the blind fill files no form; the engine
+    prints line 14 (−3,000) and makes lines 15 on a gap. The text agrees with
+    the blind fill on the correct return (item 13); the engine keeps the gap
+    because it does not move the sale to Schedule D (540).
+  The blind fill's doubts that change dollars are decision A3 (line 19's
+  places) and item 3 (California recapture in a later year). Its other doubts
+  change no dollars: item 5 (a later year with no payment; the federal reading
+  would file a form with line 24 = 0), and federal items 2, 10 and 15.
+- **PolicyEngine-US 2.153.8** (commit b3edc0446b): its California model
+  (`variables/gov/states/ca`) has no installment sale, no FTB 3805E and no
+  Schedule D (540) adjustment; California AGI starts from federal AGI with a
+  short list of additions and subtractions. Nothing to compare. No
+  disagreement.
+- **IRS Direct File:** the repo names no checkout, and Direct File prepares no
+  California return. Not compared.
 
 ## Proposals for a discussion
 
