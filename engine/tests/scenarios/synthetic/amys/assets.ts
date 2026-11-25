@@ -1,16 +1,14 @@
 /*
  * amys's foreign accounts and holdings (README.md), with the income each one
  * pays. Every name, number and amount is made up. Each amount is in the
- * account's currency, as its statement prints it; the engine converts it with
- * the rate on the fact (facts/kinds/foreignCurrency.ts):
- * - balances: the year-end rate (irs-8938-inst-2025::sec::currency-determination-date::b01);
- * - interest and dividends: the yearly average rate (irs.gov "Yearly average
- *   currency exchange rates"; federal/8938/QUESTIONS.md question 15);
- * - tax withheld: the rate on the day withheld (irs-1116-inst-2025::sec::foreign-currency-conversion::b01);
- * - a sale: the rates on the settlement dates of the sale and the purchase
+ * account's currency, as its statement prints it, with the dates the rules
+ * need (facts/kinds/foreignCurrency.ts). The facts hold no rate: the engine
+ * looks each one up in its tables (currency/rates.ts):
+ * - balances: the Treasury rate on 12/31/2025 (irs-8938-inst-2025::sec::currency-determination-date::b01);
+ * - interest: the couple's method, the yearly average (the Board's G.5A 2025 average);
+ * - each dividend, the penalty and tax withheld: the H.10 rate of its day;
+ * - a sale: the H.10 rates on the settlement dates of the sale and the purchase
  *   (26 CFR 1.988-2(a)(2)(iv)).
- * The year-end and day rates are made up; the yearly averages are the IRS
- * table's 2025 values as read on 2026-11-24.
  */
 
 import type {
@@ -21,13 +19,10 @@ import type {
 } from "../../../../src/facts/index.js";
 import type { MonthEndBalances } from "../../documents/foreignAssetStatement.js";
 
-/* Treasury-style year-end rates: units of the currency per U.S. dollar (made up). */
-const EUR = { currency: "Euro (EUR)", exchangeRate: 0.852 };
-const GBP = { currency: "British pound (GBP)", exchangeRate: 0.7432 };
-const CHF = { currency: "Swiss franc (CHF)", exchangeRate: 0.796 };
-const NOK = { currency: "Norwegian krone (NOK)", exchangeRate: 10.125 };
-
-const YEARLY_AVERAGE = "IRS yearly average currency exchange rates, 2025";
+const EUR = { code: "EUR" };
+const GBP = { code: "GBP" };
+const CHF = { code: "CHF" };
+const NOK = { code: "NOK" };
 
 /* A joint time-deposit savings account in Bologna: interest, an early withdrawal penalty, Italian tax. */
 export const bolognaSavings: ForeignFinancialAssetFactValue = {
@@ -37,7 +32,7 @@ export const bolognaSavings: ForeignFinancialAssetFactValue = {
   accountNumber: "IT00 X000 0000 0000 0000 0089 38",
   maximumValue: 104000,
   yearEndValue: 97200,
-  conversion: EUR,
+  foreignCurrency: EUR,
   institution: {
     name: "Banca Saragozza S.p.A.",
     giin: "B4S7G2.00031.SL.380",
@@ -50,19 +45,22 @@ export const bolognaSavings: ForeignFinancialAssetFactValue = {
   },
 };
 
-/* Credited, and the tax withheld, on 31 December; the time deposit was broken in September. */
+/*
+ * The time deposit was broken on 15 September (the penalty); the interest was
+ * credited, and the Italian tax withheld, on 31 December.
+ */
 export const bolognaInterest: InterestFactValue = {
   payerName: "Banca Saragozza S.p.A.",
   box1: 1180.4,
   box2: 40,
   box6: 118.04,
   box7: "Italy",
-  conversion: {
-    currency: "Euro (EUR)",
-    exchangeRate: 0.886,
-    rateSource: YEARLY_AVERAGE,
-    taxExchangeRate: 0.852,
-    taxRateSource: "Treasury rate for 12/31/2025, the day the tax was withheld",
+  foreignCurrency: {
+    ...EUR,
+    byDate: [
+      { date: "09/15/2025", amounts: { box2: 40 } },
+      { date: "12/31/2025", amounts: { box1: 1180.4, box6: 118.04 } },
+    ],
   },
 };
 
@@ -77,7 +75,7 @@ export const thamesBrokerage: ForeignFinancialAssetFactValue = {
   accountNumber: "TB-4417-0925",
   maximumValue: 61200,
   yearEndValue: 47800,
-  conversion: GBP,
+  foreignCurrency: GBP,
   openedOrAcquired: "03/03/2025",
   institution: {
     name: "Thames Crown Securities Ltd",
@@ -94,7 +92,14 @@ export const thamesDividends: DividendFactValue = {
   payerName: "Thames Crown Securities Ltd",
   box1a: 1100.7,
   box1b: 1100.7,
-  conversion: { currency: "British pound (GBP)", exchangeRate: 0.759, rateSource: YEARLY_AVERAGE },
+  // Two dividends of Severn Water plc, both qualified.
+  foreignCurrency: {
+    ...GBP,
+    byDate: [
+      { date: "06/13/2025", amounts: { box1a: 520.3, box1b: 520.3 } },
+      { date: "11/14/2025", amounts: { box1a: 580.4, box1b: 580.4 } },
+    ],
+  },
 };
 
 /* Traded 03/10 and 09/22; settled two business days later, on 03/12 and 09/24. */
@@ -106,12 +111,7 @@ export const thamesSale: TradeFactValue = {
   dateSold: "09/22/2025",
   proceeds: 13616,
   costBasis: 9402,
-  conversion: {
-    currency: "British pound (GBP)",
-    saleExchangeRate: 0.7395,
-    purchaseExchangeRate: 0.7741,
-    rateSource: "Spot rates on the settlement dates, 09/24/2025 and 03/12/2025",
-  },
+  foreignCurrency: { ...GBP, saleSettled: "09/24/2025", purchaseSettled: "03/12/2025" },
 };
 
 export const thamesBalances: MonthEndBalances = [
@@ -137,7 +137,7 @@ export const baselCurrent: ForeignFinancialAssetFactValue = {
   accountNumber: "CH00 0000 0000 0000 8938 0",
   maximumValue: 13400,
   yearEndValue: 0,
-  conversion: CHF,
+  foreignCurrency: CHF,
   closedOrDisposed: "06/30/2025",
   institution: {
     name: "Rheinknie Bank AG",
@@ -173,7 +173,7 @@ export const fjordlineShares: ForeignFinancialAssetFactValue = {
   description: "22,400 ordinary shares of Fjordline Shipping ASA",
   maximumValue: 2240000,
   yearEndValue: 1100000,
-  conversion: NOK,
+  foreignCurrency: NOK,
   // Stock held on the company's register: not a financial account (Schedule B line 7a).
   financialAccount: false,
   entity: {
@@ -189,12 +189,9 @@ export const fjordlineDividends: DividendFactValue = {
   box1a: 12880,
   box1b: 12880,
   box7: 1932,
-  conversion: {
-    currency: "Norwegian krone (NOK)",
-    exchangeRate: 10.392,
-    rateSource: YEARLY_AVERAGE,
-    taxExchangeRate: 10.31,
-    taxRateSource: "Spot rate on 05/22/2025, the day the tax was withheld",
+  foreignCurrency: {
+    ...NOK,
+    byDate: [{ date: "05/22/2025", amounts: { box1a: 12880, box1b: 12880, box7: 1932 } }],
   },
 };
 
@@ -225,7 +222,7 @@ export const polderNote: ForeignFinancialAssetFactValue = {
   ],
 };
 
-/* In U.S. dollars, as the note pays: no conversion. */
+/* In U.S. dollars, as the note pays: no foreign currency. */
 export const polderInterest: InterestFactValue = {
   payerName: "Polder Grid Finance B.V.",
   box1: 1912.5,

@@ -87,14 +87,9 @@ const asset = (slug: string, value: unknown, file: string) =>
     `Year-end statement (docs/${file}).`,
   );
 
-/* The amounts as the statement prints them, with the rates the couple looked up (assets.ts). */
+/* The amounts and their dates as the statement prints them (assets.ts); the engine looks up the rates. */
 const income = (key: string, value: unknown, file: string) =>
-  fact(
-    "investment_income",
-    key,
-    value,
-    `Year-end statement, page 2 (docs/${file}); rates: see the fact's conversion.`,
-  );
+  fact("investment_income", key, value, `Year-end statement, page 2 (docs/${file}).`);
 
 const idFact = (suffix: string, value: string) =>
   identityFact({ userId: AMYS_USER_ID, taxYear: AMYS_TAX_YEAR, suffix, value });

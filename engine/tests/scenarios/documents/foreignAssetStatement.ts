@@ -17,7 +17,9 @@
  */
 
 import { PDFDocument, StandardFonts, rgb } from "@cantoo/pdf-lib";
+import { currencyLabel } from "../../../src/currency/currencies.js";
 import type {
+  DatedAmounts,
   DividendFactValue,
   ForeignAddress,
   ForeignFinancialAssetFactValue,
@@ -98,15 +100,22 @@ function addressLines(address: ForeignAddress): string[] {
   return [address.street, city, address.country];
 }
 
-/* "Euro (EUR)" gives "EUR": the code in the last parentheses, else the whole name. */
-function currencyCode(currency: string): string {
-  const open = currency.lastIndexOf("(");
-  const close = currency.lastIndexOf(")");
-  return open >= 0 && close > open ? currency.slice(open + 1, close) : currency;
-}
+/* "Euro (EUR)", or the U.S. dollar for an asset with no foreign currency. */
+const currencyOf = (value: ForeignFinancialAssetFactValue) => {
+  const code = value.foreignCurrency?.code;
+  return code === undefined ? US_DOLLAR : currencyLabel(code);
+};
 
-const currencyOf = (value: ForeignFinancialAssetFactValue) =>
-  value.conversion?.currency ?? US_DOLLAR;
+const currencyCodeOf = (value: ForeignFinancialAssetFactValue) =>
+  value.foreignCurrency?.code ?? "USD";
+
+/* "05/22/2025" as a European bank prints it: "22 May 2025". Any other text ("VARIOUS") as it is. */
+function printedDate(factDate: string): string {
+  const [month, day, year, ...rest] = factDate.split("/");
+  const monthName = MONTHS[Number(month) - 1];
+  if (rest.length > 0 || year?.length !== 4 || monthName === undefined) return factDate;
+  return `${Number(day)} ${monthName} ${year}`;
+}
 
 /* The issuing institution: the bank, the company or the bond's issuer. */
 function issuerOf(value: ForeignFinancialAssetFactValue) {
@@ -185,7 +194,7 @@ function drawSummary(ctx: Ctx, value: ForeignFinancialAssetFactValue, taxYear: n
   if (value.closedOrDisposed)
     yPos = summaryRow(ctx, yPos, "Closed or disposed of", value.closedOrDisposed);
   const ending = { size: 9.5, bold: true, color: TOTAL_BLUE };
-  const code = currencyCode(currencyOf(value));
+  const code = currencyCodeOf(value);
   drawText(ctx, `Value on 31 December ${taxYear} (${code})`, X_LEFT, yPos, ending);
   drawTextRight(ctx, fmtMoney(value.yearEndValue), X_SUMMARY_END, yPos, ending);
   return yPos + 40;
@@ -213,7 +222,7 @@ function drawMonthEndBalances(
   balances: MonthEndBalances,
 ) {
   checkBalances(value, balances);
-  const code = currencyCode(currencyOf(value));
+  const code = currencyCodeOf(value);
   drawText(ctx, "Month-end balances", X_LEFT, yTop, { size: 14, color: SECTION_RED });
   const firstHeld = balances.findIndex((balance) => balance !== undefined);
   // A month with no balance before the first is "not open"; after it, the account is closed.
@@ -238,21 +247,51 @@ function drawFooter(ctx: Ctx, pageNumber: number, pageCount: number) {
 
 type AmountRow = [label: string, amount: number];
 
+/*
+ * One kind of entry: a row for each dated amount the fact lists for the box,
+ * with its date, as a statement lists each credit, payment and withholding;
+ * one undated row for the total when the fact lists no dates for it.
+ */
+function entryRows(
+  label: string,
+  box: string,
+  total: number | undefined,
+  byDate: ReadonlyArray<DatedAmounts> | undefined,
+): AmountRow[] {
+  if (total === undefined) return [];
+  const dated = (byDate ?? []).flatMap((entry): AmountRow[] => {
+    const amount = (entry.amounts as Record<string, number | undefined>)[box];
+    return amount === undefined ? [] : [[`${label}, ${printedDate(entry.date)}`, amount]];
+  });
+  return dated.length > 0 ? dated : [[label, total]];
+}
+
 function incomeRows(income: ForeignAssetIncome): AmountRow[] {
-  const rows: Array<[string, number | undefined]> = [
-    ["Interest credited", income.interest?.box1],
-    ["Dividends paid", income.dividends?.box1a],
+  const { interest, dividends } = income;
+  return [
+    ...entryRows("Interest credited", "box1", interest?.box1, interest?.foreignCurrency?.byDate),
+    ...entryRows("Dividend paid", "box1a", dividends?.box1a, dividends?.foreignCurrency?.byDate),
   ];
-  return rows.filter((row): row is AmountRow => row[1] !== undefined);
 }
 
 function subtractionRows(income: ForeignAssetIncome): AmountRow[] {
-  const rows: Array<[string, number | undefined]> = [
-    ["Penalty for early withdrawal of a time deposit", income.interest?.box2],
-    ["Withholding tax on interest", income.interest?.box6],
-    ["Withholding tax on dividends", income.dividends?.box7],
+  const { interest, dividends } = income;
+  const interestDates = interest?.foreignCurrency?.byDate;
+  return [
+    ...entryRows(
+      "Penalty for early withdrawal of a time deposit",
+      "box2",
+      interest?.box2,
+      interestDates,
+    ),
+    ...entryRows("Withholding tax on interest", "box6", interest?.box6, interestDates),
+    ...entryRows(
+      "Withholding tax on dividends",
+      "box7",
+      dividends?.box7,
+      dividends?.foreignCurrency?.byDate,
+    ),
   ];
-  return rows.filter((row): row is AmountRow => row[1] !== undefined);
 }
 
 function tableHead(ctx: Ctx, yPos: number, title: string, columns: string[]): number {
@@ -291,14 +330,17 @@ function drawSales(ctx: Ctx, yTop: number, code: string, trades: TradeFactValue[
   if (trades.length === 0) return yTop;
   let yPos = tableHead(ctx, yTop, "Sales", ["Description", `Amount (${code})`]);
   for (const trade of trades) {
-    const dates = `acquired ${trade.dateAcquired ?? ""}, sold ${trade.dateSold}`;
-    yPos = tableRow(
-      ctx,
-      yPos,
-      `${trade.description}: ${dates}, proceeds`,
-      fmtMoney(trade.proceeds),
-    );
-    yPos = tableRow(ctx, yPos, `${trade.description}: cost`, fmtMoney(trade.costBasis ?? 0));
+    // Each side with its trade date, and its settlement date when the fact holds it.
+    const { saleSettled, purchaseSettled } = trade.foreignCurrency ?? {};
+    const when = (traded: string | undefined, settled: string | undefined) =>
+      [traded, settled]
+        .map((date, index) => (date ? `${index === 0 ? "" : "settled "}${printedDate(date)}` : ""))
+        .filter((part) => part !== "")
+        .join(", ");
+    const sold = `${trade.description}: sold ${when(trade.dateSold, saleSettled)}, proceeds`;
+    yPos = tableRow(ctx, yPos, sold, fmtMoney(trade.proceeds));
+    const bought = `${trade.description}: bought ${when(trade.dateAcquired, purchaseSettled)}, cost`;
+    yPos = tableRow(ctx, yPos, bought, fmtMoney(trade.costBasis ?? 0));
   }
   return yPos + 19;
 }
@@ -318,7 +360,7 @@ function drawActivityPage(
   ].join("   |   ");
   drawText(ctx, strip, X_LEFT, 64, { size: 8 });
   drawLine(ctx, X_LEFT, 78, X_END, 78);
-  const code = currencyCode(currencyOf(value));
+  const code = currencyCodeOf(value);
   drawText(ctx, `Activity in the period. All amounts are in ${currencyOf(value)}.`, X_LEFT, 92, {
     size: 8.5,
     italic: true,
