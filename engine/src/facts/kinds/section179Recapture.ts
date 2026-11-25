@@ -39,11 +39,40 @@ export interface Section179RecaptureFactValue {
    * b02). Absent: the federal amount.
    */
   californiaPriorDeductions?: number;
-  /* California Schedule D-1 line 37, with California amounts (part-iv::b02). Absent: the federal amount. */
+  /*
+   * California Schedule D-1 line 37, with California amounts (part-iv::b02), over
+   * the same years as recomputedDepreciation (see californiaRecapture). Absent: the
+   * federal amount.
+   */
   californiaRecomputedDepreciation?: number;
 }
 
-/* The recapture with its California amounts in the federal fields (Schedule D-1 lines 36 and 37). */
+/*
+ * The recapture with its California amounts in the federal fields (Schedule D-1 lines 36 and 37).
+ *
+ * DECISION (2026-11-24, by the author, not reviewed by a person): which property
+ * fills Schedule D-1 Part IV column (a). Text A: complete column (a) if "The
+ * property was not used predominantly in your trade or business at any time"
+ * and "That property ceased to be qualified property before the close of the
+ * second taxable year after it was placed in service"
+ * (ca-540-sched-d1-inst-2025::sec::part-iv::b01). Text B: the form's Part IV
+ * heading, "Recapture Amounts Under IRC Sections 179 and 280F(b)(2) When Business
+ * Use Drops to 50% or Less", and purpose item 6, recapture "when the business use
+ * of IRC Section 179 or 280F(b)(2) property drops to 50% or less"
+ * (a-purpose::b03), as federal Form 4797 (irs-4797-inst-2025::sec::part-iv::b01).
+ * The engine follows Text B, the same test as federal: a section 179 deduction
+ * needs more than 50% business use when the property is placed in service, so
+ * Text A read literally fits no property that took one.
+ *
+ * DECISION (2026-11-24, by the author, not reviewed by a person): the years of
+ * line 37 column (b). Text A: "Figure the deductions from the year it was placed
+ * in service to the current year" (ca-540-sched-d1-inst-2025::sec::part-iv::b02).
+ * Text B: "Figure the depreciation from the year it was placed in service up to
+ * (but not including) the current year" (irs-4797-inst-2025::sec::line-34::b01).
+ * The engine follows Text B (through 2024): line 36 column (b) counts the
+ * deductions "in prior tax years" (part-iv::b02), and line 38 subtracts line 37
+ * from line 36, so both lines must cover the same years.
+ */
 export function californiaRecapture(
   recapture: Section179RecaptureFactValue,
 ): Section179RecaptureFactValue {

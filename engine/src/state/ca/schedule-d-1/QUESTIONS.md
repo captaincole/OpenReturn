@@ -78,6 +78,44 @@ Part IV statements, line 11 at 0, abandonments).
     rows 3n to 3n + 2 of lines 2 and 10 and columns 4n to 4n + 3 of Part III; the
     totals print on the first copy only. Changes dollars: no.
 
+14. **Part IV column (a): which property.** The bullets in part-iv::b01 ("not
+    used predominantly in your trade or business at any time", "ceased to be
+    qualified property before the close of the second taxable year") read
+    against the form's heading, "When Business Use Drops to 50% or Less", and
+    purpose item 6 (a-purpose::b03). Decided (DECISION in
+    `facts/kinds/section179Recapture.ts`, `docs/rule-decisions.md` A2): the
+    heading and federal Form 4797, business use fell to 50% or less this year.
+    Changes dollars: yes, the whole recapture.
+
+15. **Line 37 years.** Column (b): "from the year it was placed in service to the
+    current year" (part-iv::b02); federal line 34, "up to (but not including) the
+    current year". Decided (same file, A3): through 2024 for column (b), through
+    2025 for column (a), as federal. Changes dollars: yes, one year of
+    depreciation on the listed property.
+
+## Second opinions
+
+- Blind fill (14 cases, `.scratch/blind/`, not committed): no dollar
+  difference with the engine. 15 lines differ only as blank against 0. The
+  blind fill printed 0 where the engine leaves a line blank: lines 6, 7 and 11
+  when Part III's line 35 is 0 (cases 3 and 4; line 6 in case 14), and lines
+  13, 17, 18b and 20
+  when a Part III column has no recapture (cases 7, 8). The blind fill made the
+  same choice as the engine on items 1, 3, 14 and 15.
+- PolicyEngine-US 2.153.8 (commit b3edc044, 2026-11-23; sparse checkout of
+  `gov/irs` and `gov/states/ca` variables and parameters): it does not model
+  Form 4797 or Schedule D-1. The Form 4797 gain is a bare input
+  (`other_net_gain_gross_income` reads `other_net_gain_person`), with no
+  section 1231 lookback, no section 1245, 1250 or 1252 recapture and no Part IV.
+  California's subtractions and additions name no Schedule D-1 or depreciation
+  difference (`parameters/gov/states/ca/tax/income/agi/subtractions.yaml`,
+  `variables/gov/states/ca/tax/income/ca_additions.py`); a difference could
+  enter only as the bare inputs `ca_other_subtractions` or `ca_other_additions`.
+  Nothing to compare.
+- IRS Direct File: federal only, and it does not support Form 4797 or
+  California. The repo names no checkout of its tax logic (issue #140). Not
+  compared. The repo names no other reference implementation for this form.
+
 ## Confidence by field group
 
 | Field group | Confidence |
