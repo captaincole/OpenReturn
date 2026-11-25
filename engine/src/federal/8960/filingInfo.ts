@@ -1,17 +1,19 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Form4797FilingInfo } from "../4797/filingInfo.js";
+import type { Form6252FilingInfo } from "../6252/filingInfo.js";
 import type { Form8621FilingInfo } from "../8621/filingInfo.js";
 import type { Form8814FilingInfo } from "../8814/filingInfo.js";
 import type { Receipt } from "../passThrough/receipts.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
 
-/* Line 7 reads Form 8814's totals; lines 5b and 6 read Form 8621's; line 5b reads Form 4797's activities. */
+/* Line 7 reads Form 8814's totals; lines 5b and 6 read Form 8621's; line 5b reads Form 4797's activities and Form 6252's sales. */
 export interface Form8960FilingInfo
   extends
     BaseFilingInfo,
     Pick<Form8814FilingInfo, "form8814Totals">,
     Pick<Form8621FilingInfo, "form8621Totals">,
-    Pick<Form4797FilingInfo, "form4797Activities"> {
+    Pick<Form4797FilingInfo, "form4797Activities">,
+    Pick<Form6252FilingInfo, "form6252Totals"> {
   /** Every Schedule C business has line G "Yes" (materially participated): its income is nonpassive. */
   scheduleCNonpassive?: boolean;
   /** Line 5b: the fact keys of the Schedule C businesses with line G "Yes" (line5b.ts). */

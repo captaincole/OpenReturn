@@ -14,6 +14,7 @@ import { resolve4137Info } from "./federal/4137/resolveInfo.js";
 import { resolve4797Info } from "./federal/4797/resolveInfo.js";
 import { scheduleTwoNeededForEarlyDistributions } from "./federal/5329/resolveInfo.js";
 import { resolve6251Info } from "./federal/6251/resolveInfo.js";
+import { form6252TotalsOf } from "./federal/6252/resolveInfo.js";
 import { form8621Feeds } from "./federal/8621/totals.js";
 import { resolve8853Info } from "./federal/8853/resolveInfo.js";
 import { SCHEDULE_2_LINES, form8853Reaches } from "./federal/8853/results.js";
@@ -23,6 +24,7 @@ import { planForm8949Copies, totalsByBox } from "./federal/8949/copyPlan.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
 import { resolve8959Info } from "./federal/8959/resolveInfo.js";
 import type { Form8960FilingInfo } from "./federal/8960/filingInfo.js";
+import { installmentSalesWithoutTradeOrBusinessAnswer } from "./federal/8960/line5b.js";
 import { NIIT_THRESHOLDS, rentalsWithoutTradeOrBusinessAnswer } from "./federal/8960/lines.js";
 import { investmentSignals, magiUpperBound } from "./federal/8960/mustFile.js";
 import { resolve8962Info } from "./federal/8962/resolveInfo.js";
@@ -271,6 +273,7 @@ export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInf
       },
       form8621Feeds(inputs).scheduleDFallback,
       form4797Fallback(inputs),
+      form6252Fallback(inputs),
     ],
   });
   const distributions = sumInvestmentBox(inputs, "box2a", isDividendFactKey);
@@ -308,6 +311,20 @@ function form4797Fallback(inputs: ResolverInputs) {
   };
 }
 
+/*
+ * A Form 6252 gain on a capital asset goes on line 4 or line 11
+ * (irs-pub-537-2025::sec::reporting-an-installment-sale::b03).
+ */
+function form6252Fallback(inputs: ResolverInputs) {
+  const forms = form6252TotalsOf(inputs)?.forms ?? [];
+  const keys = forms.filter((form) => form.sale.use === "capital_asset").map((form) => form.key);
+  return {
+    rule: "fallback: a Form 6252 installment sale of a capital asset (line 4 or 11)",
+    value: keys.length > 0,
+    triggeredByFactKeys: keys,
+  };
+}
+
 const SCHEDULE_D_ROUTES: Route[] = [
   "schedule_d_line_5",
   "schedule_d_line_12",
@@ -321,6 +338,17 @@ const SCHEDULE_D_ROUTES: Route[] = [
  * MAGI is an upper bound from facts (magiUpperBound), so a missed 8960 needs income
  * with no facts; set decisions.scope.must_file_8960 for that case.
  */
+/* Line 4b's rental answers, and line 5b's Form 6252 business sale answers (worksheet line 2(d)). */
+function tradeOrBusinessAnswersMissing(
+  inputs: ResolverInputs,
+  rentalProperties: Form8960FilingInfo["rentalProperties"],
+): string[] {
+  return [
+    ...rentalsWithoutTradeOrBusinessAnswer(rentalProperties ?? []),
+    ...installmentSalesWithoutTradeOrBusinessAnswer(form6252TotalsOf(inputs)?.forms ?? []),
+  ];
+}
+
 export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
   const status = filingStatusOf(inputs);
   const threshold = status ? NIIT_THRESHOLDS[status] : undefined;
@@ -349,8 +377,8 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
   const scheduleE = resolveScheduleEInfo(inputs);
   const rentalProperties =
     scheduleE.mustFile?.["schedule-e"]?.value === true ? scheduleE.rentalProperties : undefined;
-  const openRentals =
-    resolution.value === true ? rentalsWithoutTradeOrBusinessAnswer(rentalProperties ?? []) : [];
+  const openAnswers =
+    resolution.value === true ? tradeOrBusinessAnswersMissing(inputs, rentalProperties) : [];
   // Line 10 (…::sec::line-10-additional-modifications::b01): optional, recorded only when stated.
   const additionalModifications = num(inputs, NET_INVESTMENT_INCOME_KEYS.additionalModifications);
   return {
@@ -360,7 +388,7 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
         ...(asked
           ? missingInputs({ "state_local_tax.allocable_to_investment_income": allocableTax })
           : []),
-        ...openRentals,
+        ...openAnswers,
       ],
     },
     // Line 4b's scheduleCNonpassive; line 5b's nonpassiveBusinessKeys and capitalLossCarriedIn.

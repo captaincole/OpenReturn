@@ -12,6 +12,7 @@ import { sum, sumOrBlank } from "../../money.js";
 import { filingStatusOf, num, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import { resolve2106Info } from "../2106/resolveInfo.js";
 import { resolve3903Info } from "../3903/resolveInfo.js";
+import { resolve4797Info } from "../4797/resolveInfo.js";
 import { form8621Totals } from "../8621/totals.js";
 import { figuredForm8814, form8814Totals } from "../8814/totals.js";
 import { resolve8853Info } from "../8853/resolveInfo.js";
@@ -110,6 +111,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
         value: form8814Line12 !== 0,
       },
       form8621Fallback(inputs),
+      form4797Fallback(inputs),
     ],
   });
   return {
@@ -129,6 +131,20 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     earlyWithdrawalPenalty: savingsPenalty,
     ...studentLoan.info,
     armedForcesStorageFees: moving.storageFees,
+  };
+}
+
+/*
+ * Line 4: Form 4797 line 18b (the form's line 18b text). Schedule 1 files for
+ * an ordinary gain or loss there, as when Form 6252 sends one (Form 4797
+ * lines 10 and 15) on a return with no other Schedule 1 amount.
+ */
+function form4797Fallback(inputs: ResolverInputs) {
+  const lines = resolve4797Info(inputs).form4797;
+  const amount = lines?.line18b ?? 0;
+  return {
+    rule: `fallback: Form 4797 line 18b $${amount} on line 4`,
+    value: amount !== 0,
   };
 }
 

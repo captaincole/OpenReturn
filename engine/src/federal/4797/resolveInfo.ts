@@ -10,21 +10,53 @@ import {
   type Section179RecaptureFact,
 } from "../../facts/index.js";
 import { filingStatusOf, num, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import { form6252TotalsOf } from "../6252/resolveInfo.js";
+import { sendsToForm4797, type Destination } from "../6252/totals.js";
 import { resolve8582Info } from "../8582/resolveInfo.js";
 import { describeItem, entityTitle, passThroughEntitiesOnReturn } from "../passThrough/items.js";
 import { spousePropertiesOnReturn } from "../rentals/passive.js";
 import { NO_ACTIVITY, activityOf, form4797Activities } from "./activities.js";
 import type { Form4797FilingInfo } from "./filingInfo.js";
-import { form4797Lines, type Form4797Lines } from "./lines.js";
+import { form4797Lines, type Form4797Lines, type InstallmentAmounts } from "./lines.js";
 import { placeProperty, saleGap, type PlacedProperty } from "./properties.js";
 
 const MUST_FILE_KEY = "decisions.scope.must_file_4797";
 
-/* Forms with no rules whose amounts Form 4797 takes (lines 4, 5, 15, 16). */
-const OTHER_FORMS = [
-  { decision: "decisions.scope.must_file_6252", name: "Form 6252" },
-  { decision: "decisions.scope.must_file_8824", name: "Form 8824" },
-] as const;
+/* Forms with no rules whose amounts Form 4797 takes (lines 5, 16). */
+const OTHER_FORMS = [{ decision: "decisions.scope.must_file_8824", name: "Form 8824" }] as const;
+
+/*
+ * What Form 6252 sends: line 26 or 37 to line 4 or line 10, line 25 or 36 to
+ * line 15 (irs-4797-inst-2025::sec::installment-sales::b01;
+ * irs-6252-form-2025::sec::line-26::b01). A sale's gap holds its line and the
+ * summary; a sale that waits leaves lines 4 and 7–18b blank.
+ */
+function installmentFeeds(inputs: ResolverInputs) {
+  const totals = form6252TotalsOf(inputs);
+  const keys = (totals?.forms ?? []).filter(sendsToForm4797).map((form) => form.key);
+  const lines = {
+    line4: totals?.form4797Line4,
+    line10: totals?.form4797Line10,
+    line15: totals?.form4797Line15,
+  };
+  const gapOf = (line: Destination | undefined) =>
+    line?.gap === undefined ? undefined : `Form 6252: ${line.gap}`;
+  const gaps = {
+    line4: gapOf(lines.line4),
+    line10: gapOf(lines.line10),
+    line15: gapOf(lines.line15),
+  };
+  const amountsOf = (line: Destination | undefined) =>
+    line === undefined || line.gap !== undefined ? [] : line.amounts;
+  const amounts: InstallmentAmounts = {
+    line4: amountsOf(lines.line4),
+    line10: amountsOf(lines.line10),
+    line15: amountsOf(lines.line15),
+    waits: Object.values(lines).some((line) => line?.waits === true),
+  };
+  const gap = gaps.line4 ?? gaps.line10 ?? gaps.line15;
+  return { keys, gaps: gap === undefined ? undefined : gaps, amounts, gap };
+}
 
 /* The K-1s with a net section 1231 gain or loss, which goes in Part I (irs-4797-inst-2025::sec::line-7::b01). */
 function section1231K1s(inputs: ResolverInputs, joint: boolean) {
@@ -136,28 +168,30 @@ function mustFile4797(inputs: ResolverInputs, joint: boolean) {
   const sales = readBusinessPropertySaleFacts(inputs.facts);
   const recaptures = readSection179RecaptureFacts(inputs.facts);
   const k1Keys = section1231K1s(inputs, joint).map(({ entity }) => entity.key);
+  const installment = installmentFeeds(inputs);
   const keys = [
     ...sales.sales.map((sale) => sale.key),
     ...sales.malformedKeys,
     ...recaptures.recaptures.map((each) => each.key),
     ...recaptures.malformedKeys,
     ...k1Keys,
+    ...installment.keys,
   ];
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: MUST_FILE_KEY,
     fallbacks: [
       {
-        rule: `fallback: ${keys.length} business property sale, K-1 section 1231 or Part IV recapture fact(s)`,
+        rule: `fallback: ${keys.length} business property sale, K-1 section 1231, Part IV recapture or Form 6252 installment sale fact(s)`,
         value: keys.length > 0,
         triggeredByFactKeys: keys,
       },
     ],
   });
-  return { resolution, sales, recaptures, factCount: keys.length };
+  return { resolution, sales, recaptures, installment, factCount: keys.length };
 }
 
 const NO_FACTS =
-  "Form 4797 files by decision, but no business property sale, K-1 section 1231 or Part IV recapture fact gives its amounts.";
+  "Form 4797 files by decision, but no business property sale, K-1 section 1231, Part IV recapture or installment sale fact gives its amounts.";
 
 /*
  * The activity each sale names when it is on this return (a Schedule C business,
@@ -209,9 +243,24 @@ function activitiesOf(
   return { ...figured, ordinaryGap: summary ?? figured.ordinaryGap, waiting };
 }
 
+/* The section 1250 properties of Part III, for the Unrecaptured Section 1250 Gain Worksheet lines 1–3. */
+function section1250Properties(placed: PlacedProperty[]) {
+  return placed.flatMap((each) =>
+    each.part === "part_iii" && each.kind === "section_1250"
+      ? [
+          {
+            line22: each.column.line22,
+            line24: each.column.line24,
+            line26g: each.column.line26g ?? 0,
+          },
+        ]
+      : [],
+  );
+}
+
 export function resolve4797Info(inputs: ResolverInputs): Form4797FilingInfo {
   const joint = spousePropertiesOnReturn(filingStatusOf(inputs));
-  const { resolution, sales, recaptures, factCount } = mustFile4797(inputs, joint);
+  const { resolution, sales, recaptures, installment, factCount } = mustFile4797(inputs, joint);
   const filed: Form4797FilingInfo = { mustFile: { "form-4797": resolution } };
   if (resolution.value !== true) return filed;
   const { activities, unanswered } = saleActivities(inputs, joint, sales.sales);
@@ -241,33 +290,24 @@ export function resolve4797Info(inputs: ResolverInputs): Form4797FilingInfo {
     reportedProceeds: reportedProceeds(sales.sales, forms),
     nonrecapturedLosses: num(inputs, SECTION_1231_KEYS.nonrecapturedLosses),
     recaptures: recaptures.recaptures.map((each) => each.value),
+    installment: installment.amounts,
   });
   const businessIds = new Set(
     businessesOnReturn(inputs.facts, joint).businesses.map((each) => each.key.split(".")[1] ?? ""),
   );
-  const summary = summaryGap(inputs, joint) ?? passiveLossGap(inputs, placed);
+  const summary = summaryGap(inputs, joint) ?? installment.gap ?? passiveLossGap(inputs, placed);
+  // A Form 6252 sale that waits is asked on Form 6252; line 8 is asked only for its own wait.
+  const asksLine8 = lines.waitsForLine8 && !installment.amounts.waits;
   return {
     ...filed,
     form4797: lines,
     form4797SummaryGap: summary,
+    form4797InstallmentGaps: installment.gaps,
     form4797Activities: activitiesOf(placed, activities, lines, summary),
     form4797PartIVGap: partIVGaps(recaptures.recaptures, businessIds),
-    form4797Section1250: placed.flatMap((each) =>
-      each.part === "part_iii" && each.kind === "section_1250"
-        ? [
-            {
-              line22: each.column.line22,
-              line24: each.column.line24,
-              line26g: each.column.line26g ?? 0,
-            },
-          ]
-        : [],
-    ),
+    form4797Section1250: section1250Properties(placed),
     missingInputs: {
-      "form-4797": [
-        ...unanswered,
-        ...(lines.waitsForLine8 ? [SECTION_1231_KEYS.nonrecapturedLosses] : []),
-      ],
+      "form-4797": [...unanswered, ...(asksLine8 ? [SECTION_1231_KEYS.nonrecapturedLosses] : [])],
     },
   };
 }
