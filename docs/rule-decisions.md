@@ -32,6 +32,7 @@ Each decision below also sits in the code, in a comment that starts with `DECISI
 | 9 | 2026-11-24 | Foreign currency | Where do daily exchange rates come from, and which currencies are supported? | The IRS accepts "any posted exchange rate that is used consistently" and names no source. | — | The Federal Reserve's H.10 release, and only its 23 currencies. | Small. | `currency/rates.ts` (pull request #240) | Section 988 and its regulations; Regulations section 1.988-1(d). |
 | 10 | 2026-11-24 | Foreign currency | Which rate converts foreign income? | The IRS: in general, the rate of the day the item is received. | The IRS publishes yearly average rates and accepts a posted rate used consistently. | An amount with a known date takes that day's rate. An amount with no date takes the IRS yearly average. | Small: $2 to $50 on $1,200 of interest. | `incomeInDollars.ts` (pull request #240) | Sections 985 to 989; no court case was found on the choice of method (web search only, 2026-11-24). |
 | 11 | 2026-11-24 | Foreign currency | Which yearly average: the IRS table or the Federal Reserve's? | The IRS yearly average table. | The Federal Reserve's annual averages. | The IRS table. | $2 on 1,180 euros of interest. | `currency/` (pull request #240) | — |
+| 12 | 2026-11-24 | Form 8801 | Is line 23, the limit on the credit, the tentative minimum tax before or after the minimum tax foreign tax credit? | Form 8801 line 23 is Form 6251 line 9, and line 9 is line 7 less line 8. | Form 6251 instructions: when line 10 is at least line 7, leave line 8 blank. | After: line 7 less the credit line 8 would hold, also when Form 6251 leaves line 8 blank. Leaving line 8 blank is a shortcut for a person who owes no minimum tax, and it must not shrink this credit. With Form 1116, line 23 is unsupported. | Yes: $250 more credit in the made-up taxpayer `logain`. | `federal/8801/credit.ts` | Sections 53(c) and 55(b). Marked for research: the reading rests on memory of the law. |
 
 A row that names a pull request is in the code of that branch until it merges.
 
@@ -41,7 +42,6 @@ The last column names the section of law to read first. The section numbers are 
 
 | Form | Question | Engine today | Why it is open |
 | --- | --- | --- | --- |
-| Form 8801 | Is line 23, the limit on the credit, the tentative minimum tax before or after the minimum tax foreign tax credit? | Before: the form copies Form 6251 line 9, and the Form 6251 instructions leave the credit off that line for most filers. | The law (section 55(b)) is not in the library, so the reading "after" rests on memory. $250 in the made-up taxpayer `logain`, in the person's favor. |
 | Schedule S | A resident of both California and Virginia: is the credit limited to tax on Virginia-source income? | All income Virginia taxed goes on line 9. | Rare. Both texts are quoted in the form's `QUESTIONS.md`. |
 
 ## Settled by the author, for the record
