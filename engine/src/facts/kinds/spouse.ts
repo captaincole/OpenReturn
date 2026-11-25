@@ -3,6 +3,8 @@ export const SPOUSE_KEYS = {
   middleInitial: "identity.spouse.name.middle_initial",
   lastName: "identity.spouse.name.last",
   ssn: "identity.spouse.ssn",
+  /* 1040 Sign Here: the spouse's occupation, on a joint return. */
+  occupation: "identity.spouse.occupation",
   /* 1040 line 12d and Schedule 1-A line 36b: born before January 2, 1961. */
   dob: "identity.spouse.dob",
   /* CA 540 line 5 (qualifying surviving spouse/RDP): the year the spouse died, as "2023". */

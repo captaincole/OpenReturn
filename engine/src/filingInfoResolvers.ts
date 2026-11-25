@@ -86,6 +86,7 @@ export function resolveBaseInfo(inputs: ResolverInputs): BaseFilingInfo {
     spouseBornBeforeJan2_1961: bornBeforeJan2_1961(spouseDob),
     taxpayerBlind: inputs.factByKey.get(BLINDNESS_KEYS.taxpayer) === true,
     spouseBlind: inputs.factByKey.get(BLINDNESS_KEYS.spouse) === true,
+    spouseOccupation: text(inputs, SPOUSE_KEYS.occupation),
     taxpayerOccupation: text(inputs, "identity.occupation"),
     taxpayerPhone: phoneRaw ? phone(phoneRaw) : undefined,
     taxpayerEmail: text(inputs, "identity.email"),

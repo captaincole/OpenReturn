@@ -48,6 +48,14 @@ export const headerState: Form540Line<"header.state"> = (_, info) => info.homeAd
 export const headerZip: Form540Line<"header.zip"> = (_, info) => info.homeAddressZip;
 export const headerDateOfBirth: Form540Line<"header.date_of_birth"> = (_, info) =>
   info.taxpayerDateOfBirth;
+
+/*
+ * MANUAL EDIT: "enter the DOBs in the same order as the names"
+ * (ca-540-inst-2025::sec::date-of-birth-dob::b01). The spouse's DOB prints
+ * next to the spouse's header name, which is for a joint return only.
+ */
+export const headerSpouseDateOfBirth: Form540Line<"header.spouse_date_of_birth"> = (_, info) =>
+  info.filingStatus === "married_filing_jointly" ? info.spouseDateOfBirth : undefined;
 export const headerCountyAtFiling: Form540Line<"header.county_at_filing"> = (_, info) =>
   info.homeAddressCounty;
 
