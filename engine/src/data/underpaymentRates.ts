@@ -14,6 +14,16 @@
  *
  * The table ends with the quarter that holds April 15, 2026, the due date of a
  * 2025 return. Interest past its last quarter is not figured.
+ *
+ * DECISION (2026-11-24): two official texts differ on the rate for April 1 to
+ * April 15, 2026.
+ * - The Form 2210 instructions: "Rate Period 4: January 1, 2026–April 15,
+ *   2026 ... × 0.07" (irs-2210-inst-2025::sec::tax-year-2025::b04).
+ * - Rev. Rul. 2026-5: "an underpayment rate of 6 percent ... for the calendar
+ *   quarter beginning April 1, 2026".
+ * The engine uses 6% for Form 8621: the form points to the general rates of
+ * section 6621, and the 7% through April 15 is a special rule for the
+ * estimated tax penalty (section 6621(b)(2)(B)).
  */
 export const UNDERPAYMENT_RATES_BY_YEAR: Readonly<Record<number, readonly number[]>> = {
   1987: [9, 9, 9, 10],
