@@ -11,6 +11,7 @@ import { spousePropertiesOnReturn } from "../rentals/passive.js";
 import { passThroughGaps } from "../schedule-e/partII.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
 import { resolveScheduleFInfo } from "../schedule-f/resolveInfo.js";
+import { businessLossesOnReturn } from "./businessLosses.js";
 import { rentalAnswerKey, sortK1Items, sortProperties } from "./classify.js";
 import type { Form461Figures, Form461FilingInfo, Form461LineGaps } from "./filingInfo.js";
 
@@ -56,18 +57,17 @@ function lineGaps(inputs: ResolverInputs): Form461LineGaps {
 function figuresOf(inputs: ResolverInputs): { figures: Form461Figures; missing: string[] } {
   const scheduleE = resolveScheduleEInfo(inputs);
   const onScheduleE = scheduleE.mustFile?.["schedule-e"]?.value === true;
-  const properties = sortProperties(onScheduleE ? (scheduleE.rentalProperties ?? []) : []);
+  const onPartI = onScheduleE ? (scheduleE.rentalProperties ?? []) : [];
+  const properties = sortProperties(onPartI);
   const rentalAnswer = (entityKey: string) => {
     const answer = inputs.factByKey.get(rentalAnswerKey(entityKey));
     return typeof answer === "boolean" ? answer : undefined;
   };
-  const k1 = sortK1Items(
-    [
-      receivedOnReturn(inputs, "schedule_e_part_ii"),
-      receivedOnReturn(inputs, "schedule_e_part_iii"),
-    ],
-    rentalAnswer,
-  );
+  const receipts = [
+    receivedOnReturn(inputs, "schedule_e_part_ii"),
+    receivedOnReturn(inputs, "schedule_e_part_iii"),
+  ];
+  const k1 = sortK1Items(receipts, rentalAnswer);
   const missing = [
     ...(properties.kind === "waiting" ? properties.factKeys : []),
     ...(k1.kind === "waiting" ? k1.factKeys : []),
@@ -82,6 +82,7 @@ function figuresOf(inputs: ResolverInputs): { figures: Form461Figures; missing: 
       otherBusinessIncome: roundDollars(num(inputs, BUSINESS_LOSS_LIMIT_KEYS.otherBusinessIncome)),
       nonbusinessColumns: properties.kind === "sorted" ? properties.value : undefined,
       k1Nonbusiness: k1.kind === "sorted" ? k1.value : undefined,
+      businessLosses: businessLossesOnReturn(inputs, onPartI, receipts, rentalAnswer),
       gaps: lineGaps(inputs),
     },
     missing,
