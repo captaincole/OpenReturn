@@ -10,7 +10,9 @@ import {
 import {
   ageGroup,
   answer,
+  documentsShowOverBase,
   meetsAgeCondition,
+  saleGainFromDocuments,
   type AgeGroup,
 } from "../../../federal/8615/resolveInfo.js";
 import { roundDollars, sum } from "../../../money.js";
@@ -106,8 +108,10 @@ function requiredAnswers(inputs: ResolverInputs, group: AgeGroup | undefined) {
  * or 540NR, is under 18 (or 18, or a full-time student under 24, whose earned
  * income was not more than half of their support), has a parent alive at the
  * end of 2025, does not file a joint return, and had more than $2,700 of
- * unearned income taxable by California. The documents stand in for line 1,
- * and a recorded parent's California return files the form too; line 1 at
+ * unearned income taxable by California. The documents stand in for line 1
+ * (interest and dividends, and the net gain of 1099-B sales when the age
+ * condition surely holds), and a recorded parent's California return files
+ * the form too; line 1 at
  * $2,700 or less takes it off ("do not file this form", filesOnlyWithAmountOn
  * line 3 in bindings.ts). The explicit decision still wins.
  *
@@ -126,20 +130,24 @@ export function resolve3800CaInfo(inputs: ResolverInputs): Form3800CaFilingInfo 
   const group = ageGroup(text(inputs, "identity.dob"));
   const california = readParentCaliforniaReturnFact(inputs.facts);
   const unearned = californiaUnearnedFromDocuments(inputs);
+  const saleGain = saleGainFromDocuments(inputs);
+  const ageMet = meetsAgeCondition(inputs, group);
   const eligible =
     inputs.decisionByKey.get(FILES_540_KEY) === true &&
     filingStatusOf(inputs) !== "married_filing_jointly" &&
     answer(inputs, KEYS.parentAlive) !== false &&
-    meetsAgeCondition(inputs, group) !== false;
+    ageMet !== false;
+  const overBase = documentsShowOverBase(unearned, saleGain, ageMet, BASE_AMOUNT);
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: MUST_FILE_3800_CA_KEY,
     fallbacks: [
       {
-        rule: `fallback: a child (${group ?? "age unknown"}) with $${unearned} of California interest and dividends, or the parent's California return recorded`,
-        value: eligible && (unearned > BASE_AMOUNT || california !== undefined),
+        rule: `fallback: a child (${group ?? "age unknown"}) with $${unearned} of California interest and dividends and $${saleGain} of sale gains, or the parent's California return recorded`,
+        value: eligible && (overBase || california !== undefined),
         triggeredByFactKeys: [
           "identity.dob",
           ...(california ? [CA_KEYS.parentCaliforniaReturn] : []),
+          ...(saleGain > 0 ? inputs.trades.factKeys : []),
         ],
         triggeredByDecisionKeys: [FILES_540_KEY],
       },

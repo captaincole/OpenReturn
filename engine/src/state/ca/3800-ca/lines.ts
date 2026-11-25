@@ -111,6 +111,16 @@ export interface Line9Form540NRInputs {
  * (::part-ii-tentative-tax-based-on-parent-s-tax-rate::b02, ::b03). The
  * ratios G and M are kept whole; lines I and N are calculated lines, rounded
  * to the dollar. "If zero or less, enter -0-".
+ *
+ * DECISION (2026-11-24, by the author, not reviewed by a person): the
+ * worksheet ratios (here and line 10's line E) keep every digit. The FTB 3800
+ * worksheets say only "M. Divide line L by line K" and "E. Divide line C by
+ * line D" (ca-3800-inst-2025::sec::part-ii-tentative-tax-based-on-parent-s-tax-rate::b03,
+ * ::b04). The Form 540NR booklet says of its own line 36 rate: "the FTB rounds
+ * the tax rate to four digits after the decimal"
+ * (ca-540nr-booklet-2025::sec::line-36-ca-tax-rate::b01). The engine follows
+ * the FTB 3800 text, because a form's own instructions decide how that form is
+ * filled.
  */
 export function line9Form540NR(inputs: Line9Form540NRInputs, taxOn: TaxOn): number {
   const lineC =

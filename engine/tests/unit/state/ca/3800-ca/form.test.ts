@@ -10,6 +10,7 @@ import {
   CHILD_UNEARNED_INCOME_KEYS as KEYS,
   makeDividendFactKey,
   makeInterestFactKey,
+  makeTradeFactKey,
   type ParentCaliforniaReturnFactValue,
 } from "../../../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../../../src/facts/rows.js";
@@ -65,7 +66,25 @@ function evaluate(facts: Record<string, unknown> = {}, decisions: Record<string,
   return { files, field, value, pending: pendingInputs(result) };
 }
 
-const categoryOf = (key: string) => (key.startsWith("identity.") ? "identity" : "other");
+/* A new fact is an identity fact, a sale, or an FTB 3800 answer. */
+function categoryOf(key: string): string {
+  if (key.startsWith("account.")) return "investment_income";
+  return key.startsWith("identity.") ? "identity" : "other";
+}
+
+/* A $13,000 long-term gain from one 1099-B sale (made up). */
+const SALE_ONLY = {
+  [makeInterestFactKey("american-river-savings")]: undefined,
+  [makeDividendFactKey("sierra-foothill-growth")]: undefined,
+  [makeTradeFactKey("sierra-brokerage", "t1")]: {
+    tradeId: "t1",
+    description: "100 sh SIERRA INDEX FUND",
+    dateAcquired: "03/01/20",
+    dateSold: "06/02/25",
+    proceeds: 20_000,
+    costBasis: 7_000,
+  },
+};
 
 const parentWith = (overrides: Partial<ParentCaliforniaReturnFactValue>) => ({
   [CA_KEYS.parentCaliforniaReturn]: { ...PARENT_CA_RETURN, ...overrides },
@@ -134,6 +153,34 @@ describe("FTB 3800 who files (ca-3800-inst-2025::sec::purpose::b01)", () => {
     const low = evaluate({ ...NO_DIVIDENDS, ...NO_INTEREST });
     expect(low.files(FORM)).toBe(false);
     expect(low.value(BOX_3800)).toBeUndefined();
+  });
+
+  it("a gain from a sale alone files the form and asks for the parent's California return (::part-i-child-s-net-unearned-income::b01)", () => {
+    const sales = { "decisions.scope.has_reportable_sales": true };
+    const asks = evaluate({ ...SALE_ONLY, [CA_KEYS.parentCaliforniaReturn]: undefined }, sales);
+    expect(asks.files(FORM)).toBe(true);
+    expect(asks.files("form-8615")).toBe(true);
+    expect(asks.pending.pendingFacts).toContain(CA_KEYS.parentCaliforniaReturn);
+    expect(asks.value(LINE_31)).toBeUndefined();
+    // Line 1 = 31,000 − 18,000 = 13,000, as with the base's 1099s: the same line 18.
+    const priced = evaluate(SALE_ONLY, sales);
+    expect(priced.value(LINE("1_child_unearned_income"))).toBe(13_000);
+    expect(priced.value(LINE_31)).toBe(1_147);
+  });
+
+  it("a sale alone does not file the form for a 20-year-old who has not answered the student and support questions", () => {
+    const sales = { "decisions.scope.has_reportable_sales": true };
+    const run = evaluate(
+      {
+        ...SALE_ONLY,
+        "identity.dob": "05/02/2005",
+        [CA_KEYS.parentCaliforniaReturn]: undefined,
+        [KEYS.parentReturn]: undefined,
+      },
+      sales,
+    );
+    expect(run.files(FORM)).toBe(false);
+    expect(run.files("form-8615")).toBe(false);
   });
 });
 

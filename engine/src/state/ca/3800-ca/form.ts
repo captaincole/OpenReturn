@@ -63,6 +63,17 @@ const californiaAmount = (form: Accessor, federalId: string, scheduleCaLine: str
  * California taxes them: wages (Form 1040 line 1z) and business and farm
  * profit (Schedule 1 lines 3 and 6, a loss as 0), each with its Schedule CA
  * adjustments (QUESTIONS.md).
+ *
+ * DECISION (2026-11-24, by the author, not reviewed by a person): line 1 is
+ * the FTB worksheet's Form 540 line 17 less earned income, with no 30% limit
+ * and no Alternate Worksheet. ca-3800-inst-2025::sec::part-i-child-s-net-unearned-income::b02:
+ * "Enter the child's earned income (wages, tips, and other payments received
+ * for personal services performed)". ::part-i-child-s-net-unearned-income::b01:
+ * "In most cases, this will be the same as the amount entered on federal Form
+ * 8615", whose Alternate Worksheet adds back "any net loss from
+ * self-employment" (irs-8615-inst-2025::sec::alternate-worksheet-for-form-8615-line-1::b01).
+ * The engine follows the FTB worksheet, because a form's own instructions
+ * decide how that form is filled.
  */
 function californiaEarnedIncome(form: Accessor): number {
   return (

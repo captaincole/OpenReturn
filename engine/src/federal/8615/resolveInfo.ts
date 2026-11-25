@@ -6,7 +6,7 @@ import {
   readParentReturnFact,
   type ParentReturnFactValue,
 } from "../../facts/index.js";
-import { roundDollars, sum } from "../../money.js";
+import { atLeast, roundDollars, sum } from "../../money.js";
 import {
   filingStatusOf,
   missingInputs,
@@ -60,8 +60,8 @@ export function meetsAgeCondition(inputs: ResolverInputs, group: AgeGroup | unde
 /*
  * The least unearned income the documents show: taxable interest (1099-INT
  * boxes 1 and 3), ordinary dividends and capital gain distributions (1099-DIV
- * boxes 1a and 2a), each total rounded. A sale or another income can raise it
- * (QUESTIONS.md item 1).
+ * boxes 1a and 2a), each total rounded. A sale (saleGainFromDocuments) or
+ * another income can raise it (QUESTIONS.md item 1).
  */
 function unearnedIncomeFromDocuments(inputs: ResolverInputs): number {
   return sum(
@@ -74,6 +74,36 @@ function unearnedIncomeFromDocuments(inputs: ResolverInputs): number {
     roundDollars(sumInvestmentBox(inputs, "box1a", isDividendFactKey)),
     roundDollars(sumInvestmentBox(inputs, "box2a", isDividendFactKey)),
   );
+}
+
+/*
+ * The net gain the 1099-B sales show, 0 for a net loss: each sale's proceeds
+ * less its basis plus its column (g) adjustment. A sale with no basis, or in a
+ * currency with no rate, is left out. Unearned income "includes ... capital
+ * gains" (::unearned-income::b01; FTB 3800 line 1 too,
+ * ca-3800-inst-2025::sec::part-i-child-s-net-unearned-income::b01).
+ */
+export function saleGainFromDocuments(inputs: ResolverInputs): number {
+  const gains = inputs.trades.boxed
+    .filter((boxed) => boxed.basis !== undefined && !boxed.waitsForRate && !boxed.rateGap)
+    .map((boxed) => sum(boxed.trade.proceeds, -sum(boxed.basis), boxed.trade.adjustmentAmount));
+  return atLeast(0, roundDollars(sum(...gains)));
+}
+
+/*
+ * The documents' unearned income turns the form on. Sales count only when the
+ * age condition surely holds (a child under 18, or the answers given): an
+ * older child with sales is not asked the support and student questions on a
+ * sale alone (QUESTIONS.md item 1).
+ */
+export function documentsShowOverBase(
+  interestAndDividends: number,
+  saleGain: number,
+  ageConditionMet: boolean | undefined,
+  base: number,
+): boolean {
+  if (interestAndDividends > base) return true;
+  return ageConditionMet === true && interestAndDividends + saleGain > base;
 }
 
 /* The child has dividends or gains that a Line 5 Worksheet splits. */
@@ -172,17 +202,24 @@ export function resolve8615Info(inputs: ResolverInputs): Form8615FilingInfo {
   const group = ageGroup(text(inputs, "identity.dob"));
   const parent = readParentReturnFact(inputs.facts);
   const unearned = unearnedIncomeFromDocuments(inputs);
+  const saleGain = saleGainFromDocuments(inputs);
+  const ageMet = meetsAgeCondition(inputs, group);
   const eligible =
     filingStatusOf(inputs) !== "married_filing_jointly" &&
     answer(inputs, KEYS.parentAlive) !== false &&
-    meetsAgeCondition(inputs, group) !== false;
+    ageMet !== false;
+  const overBase = documentsShowOverBase(unearned, saleGain, ageMet, BASE_AMOUNT);
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_8615",
     fallbacks: [
       {
-        rule: `fallback: a child (${group ?? "age unknown"}) with $${unearned} of interest and dividends, or the parent's return recorded`,
-        value: eligible && (unearned > BASE_AMOUNT || parent !== undefined),
-        triggeredByFactKeys: ["identity.dob", ...(parent ? [KEYS.parentReturn] : [])],
+        rule: `fallback: a child (${group ?? "age unknown"}) with $${unearned} of interest and dividends and $${saleGain} of sale gains, or the parent's return recorded`,
+        value: eligible && (overBase || parent !== undefined),
+        triggeredByFactKeys: [
+          "identity.dob",
+          ...(parent ? [KEYS.parentReturn] : []),
+          ...(saleGain > 0 ? inputs.trades.factKeys : []),
+        ],
       },
     ],
   });
