@@ -221,9 +221,9 @@ export function register(): void {
       "0.line.18a_form_4684_loss_in_line_11":
         "Line 18a needs a loss from federal Form 4684 Section B, Part II, column (b)(ii); Form 4684 Section B is not modeled.",
       "0.line.4_section_1231_installment_gain":
-        "FTB 3805E (installment sales) has no rules: no line 26 or 37 section 1231 gain reaches Schedule D-1.",
+        "The engine does not carry an FTB 3805E (installment sales) line 26 or 37 section 1231 gain to Schedule D-1 yet; lines 7 to 21 are a gap when one is sent.",
       "0.line.15_ordinary_gain_installment_sales":
-        "FTB 3805E (installment sales) has no rules: no line 25 or 36 ordinary gain reaches Schedule D-1.",
+        "The engine does not carry an FTB 3805E (installment sales) line 25 or 36 ordinary gain to Schedule D-1 yet; lines 7 to 21 are a gap when one is sent.",
       "0.line.5_section_1231_like_kind_gain_loss":
         "Federal Form 8824 (like-kind exchanges) has no rules: no section 1231 gain or loss reaches Schedule D-1.",
       "0.line.16_ordinary_like_kind_gain_loss":

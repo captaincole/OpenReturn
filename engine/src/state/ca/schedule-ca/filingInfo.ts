@@ -10,6 +10,7 @@ import type { ScheduleAFilingInfo } from "../../../federal/schedule-a/filingInfo
 import type { BaseFilingInfo } from "../../../filingInfo.js";
 import type { Form3801FilingInfo } from "../3801/filingInfo.js";
 import type { Form3803FilingInfo } from "../3803/filingInfo.js";
+import type { Form3805EFilingInfo } from "../3805e/filingInfo.js";
 import type { Form3913FilingInfo } from "../3913/filingInfo.js";
 import type { ScheduleD1FilingInfo } from "../schedule-d-1/filingInfo.js";
 import type { ScheduleDCaFilingInfo } from "../schedule-d-ca/filingInfo.js";
@@ -43,7 +44,9 @@ export interface ScheduleCaFilingInfo
     Pick<
       ScheduleD1FilingInfo,
       "scheduleD1" | "scheduleD1Gap" | "scheduleD1SummaryGap" | "scheduleD1Recapture"
-    > {
+    >,
+    // Line 4 columns B and C are a gap while an FTB 3805E amount is bound for Schedule D-1.
+    Pick<Form3805EFilingInfo, "form3805ETotals"> {
   /** Part II line 21: investment fees (misc_deductions.investment_fees), a California-only deduction. */
   caInvestmentFees?: number;
   /** Lines 1a, 3, 15 and 17: a contractor who is an employee for California; undefined when not one. */

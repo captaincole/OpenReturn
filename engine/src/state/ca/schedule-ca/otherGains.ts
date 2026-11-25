@@ -26,8 +26,14 @@ const NO_FORM_4797_ADDITIONS =
 const scheduleD1Files = (info: ScheduleCaFilingInfo): boolean =>
   info.mustFile?.["schedule-d-1"]?.value === true;
 
-/* Column B or C: Schedule D-1 line 21a or 21b; blank while Schedule D-1 does not file (no difference). */
+/*
+ * Column B or C: Schedule D-1 line 21a or 21b; blank while Schedule D-1 does not
+ * file (no difference). An FTB 3805E amount bound for Schedule D-1 is a gap, filed
+ * or not: Schedule D-1 does not take it (3805e/totals.ts).
+ */
 function adjustment(info: ScheduleCaFilingInfo, pick: "line21a" | "line21b", noForm4797: string) {
+  const installmentGap = info.form3805ETotals?.scheduleD1Gap;
+  if (installmentGap) return unsupported(installmentGap);
   if (!form4797Files(info) && !scheduleD1Files(info)) return unsupported(noForm4797);
   if (!scheduleD1Files(info)) return undefined;
   const gap = info.scheduleD1Gap ?? info.scheduleD1SummaryGap;

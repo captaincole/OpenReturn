@@ -4,6 +4,7 @@ import {
   californiaRecapture,
   getForm1099SFacts,
   readBusinessPropertySaleFacts,
+  readInstallmentSaleFacts,
   readSection179RecaptureFacts,
   type BusinessPropertySaleFact,
   type Section179RecaptureFact,
@@ -24,6 +25,7 @@ import {
   type ResolverInputs,
 } from "../../../resolverInputs.js";
 import { resolve3801Info } from "../3801/resolveInfo.js";
+import { SCHEDULE_D1_GAP, salesForScheduleD1 } from "../3805e/totals.js";
 import { californiaSale, californiaSaleGap, differsForCalifornia } from "./california.js";
 import type { ScheduleD1FilingInfo } from "./filingInfo.js";
 import {
@@ -60,8 +62,28 @@ function differingKeys(
 }
 
 /*
+ * FTB 3805E amounts bound for lines 4 and 15, which this schedule does not take:
+ * an installment sale that sends one (3805e/totals.ts), or FTB 3805E filing by
+ * decision with no installment sale fact to tell. A capital asset sale with no
+ * ordinary gain sends nothing here (its gain goes to Schedule D (540) line 1).
+ */
+function installmentGapOf(inputs: ResolverInputs): string | undefined {
+  const read = readInstallmentSaleFacts(inputs.facts);
+  const joint = filingStatusOf(inputs) === "married_filing_jointly";
+  const sent = salesForScheduleD1(read.sales, joint);
+  if (sent.length > 0) return `${sent.join(", ")}: ${SCHEDULE_D1_GAP}`;
+  if (read.malformedKeys.length > 0) {
+    return `Malformed installment sale fact(s): ${read.malformedKeys.join(", ")}. FTB 3805E's amounts for lines 4 and 15 are not known.`;
+  }
+  if (inputs.decisionByKey.get(FTB_3805E_KEY) === true && read.sales.length === 0) {
+    return "FTB 3805E files by decision with no installment sale fact, so its amounts for lines 4 and 15 are not known.";
+  }
+  return undefined;
+}
+
+/*
  * Why lines 7–21 cannot be figured: the federal form's reason (a K-1 section
- * 1231 item, Form 6252 or 8824), FTB 3805E filing (lines 4 and 15), or a loss on
+ * 1231 item, Form 6252 or 8824), an FTB 3805E amount (lines 4 and 15), or a loss on
  * line 2 or 10 while FTB 3801 files: "get form FTB 3801 ... to see how much of
  * the loss is allowed before entering it on Schedule D-1"
  * (ca-540-sched-d1-inst-2025::sec::b-special-rules::b07). FTB 3801 reads no
@@ -73,9 +95,8 @@ function summaryGapOf(
   placed: PlacedProperty[],
 ): string | undefined {
   if (federal.form4797SummaryGap) return federal.form4797SummaryGap;
-  if (inputs.decisionByKey.get(FTB_3805E_KEY) === true) {
-    return "FTB 3805E files, and the engine does not carry its amounts to Schedule D-1 (lines 4 and 15).";
-  }
+  const installmentGap = installmentGapOf(inputs);
+  if (installmentGap) return installmentGap;
   const losses = placed.flatMap((each) =>
     each.part !== "part_iii" && each.row.gainOrLoss < 0 ? [each.row.description] : [],
   );

@@ -3,7 +3,7 @@
  * 10) holds the section 1231 gain that goes to federal Schedule D line 11, and
  * line 1 holds California's, from Schedule D-1 line 7 or 9 (the text under
  * Schedule D-1 lines 7 and 9). The lines are a gap only while California's
- * gain is not figured.
+ * gain is not figured. An FTB 3805E capital asset gain is a row of line 1 too.
  */
 
 import { describe, expect, it } from "vitest";
@@ -77,9 +77,49 @@ describe("Schedule D (540) line 1 with the Schedule D-1 gain", () => {
         loss: undefined,
         gain: 25500,
         gap: undefined,
+        waits: false,
       },
     ]);
     expect([figures.line4, figures.line8, figures.line11]).toEqual([25500, 25500, 25500]);
+  });
+
+  it("with an FTB 3805E gain too: a sale row, the FTB 3805E row, then the Schedule D-1 row", () => {
+    const figures = scheduleDCaFigures({
+      ...base,
+      sales: [{ description: "100 sh Z CO", salesPrice: 9000, basis: 10200, adjusted: false }],
+      installmentRows: [{ description: "Lot 7 (FTB 3805E)", gain: 14200, gap: undefined }],
+      section1231Gain: 25500,
+      capitalGainDistributions: 300,
+    });
+    expect(figures.line1.map((row) => [row.description, row.loss, row.gain])).toEqual([
+      ["100 sh Z CO", 1200, undefined],
+      ["Lot 7 (FTB 3805E)", undefined, 14200],
+      [SECTION_1231_ROW, undefined, 25500],
+    ]);
+    // Line 4: 14,200 + 25,500 + 300 (line 3); line 5: 1,200; line 8 and line 11: 38,800.
+    expect([figures.line3, figures.line4, figures.line5, figures.line7]).toEqual([
+      300, 40000, 1200, 1200,
+    ]);
+    expect([figures.line8, figures.line9, figures.line11, figures.gap]).toEqual([
+      38800,
+      undefined,
+      38800,
+      undefined,
+    ]);
+  });
+
+  it("a waiting FTB 3805E row holds the totals with a Schedule D-1 gain", () => {
+    const figures = scheduleDCaFigures({
+      ...base,
+      installmentRows: [{ description: "Lot 7 (FTB 3805E)", gain: undefined, gap: undefined }],
+      section1231Gain: 25500,
+    });
+    expect(figures.line1).toHaveLength(2);
+    expect([figures.line4, figures.line8, figures.line11]).toEqual([
+      undefined,
+      undefined,
+      undefined,
+    ]);
   });
 
   it("no gain, no row; a waiting gain holds the totals; a gap is the totals' gap", () => {

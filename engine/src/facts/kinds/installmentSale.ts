@@ -139,6 +139,28 @@ export interface InstallmentSaleFactValue {
   remainingRecapture?: number;
   /* Absent: the buyer is not a related party (line 3 "No"). */
   relatedParty?: InstallmentRelatedParty;
+  /* FTB 3805E only: the California amounts that differ from the federal ones. Absent: none differ. */
+  california?: InstallmentSaleCaliforniaAmounts;
+}
+
+/*
+ * FTB 3805E's own amounts (ca-3805e-inst-2025): line 9 "Use California
+ * amounts", line 15 "using California amounts", line 12 from Schedule D-1, and
+ * the California basis of Schedule D (540) (ca-540-sched-d-inst-2025::sec::line-1::b02).
+ * Each absent field is the federal amount.
+ */
+export interface InstallmentSaleCaliforniaAmounts {
+  /* Line 8: the California cost or other basis. */
+  costOrOtherBasis?: number;
+  /* Line 9: California depreciation allowed or allowable. */
+  depreciationAllowed?: number;
+  /*
+   * Line 12 for a sale in an earlier year: the recapture of that year's Schedule
+   * D-1. Needed when line 8 or 9 is stated here and California line 9 is above 0.
+   */
+  recaptureIncome?: number;
+  /* Line 15: the main home's excluded gain, using California amounts. */
+  excludedGain?: number;
 }
 
 export interface InstallmentSaleFact {
@@ -214,6 +236,20 @@ function isRelatedParty(value: unknown): boolean {
   );
 }
 
+const CALIFORNIA_AMOUNTS = [
+  "costOrOtherBasis",
+  "depreciationAllowed",
+  "recaptureIncome",
+  "excludedGain",
+] as const;
+
+function isCaliforniaAmounts(value: unknown): boolean {
+  if (value === undefined) return true;
+  if (typeof value !== "object" || value === null) return false;
+  const fields = value as Record<string, unknown>;
+  return CALIFORNIA_AMOUNTS.every((field) => isOptionalAmount(fields[field]));
+}
+
 function isSale(value: unknown): value is InstallmentSaleFactValue {
   if (typeof value !== "object" || value === null) return false;
   const fields = value as Record<string, unknown>;
@@ -229,7 +265,8 @@ function isSale(value: unknown): value is InstallmentSaleFactValue {
     isAmount(fields.costOrOtherBasis) &&
     isAmount(fields.paymentsThisYear) &&
     OPTIONAL_AMOUNTS.every((field) => isOptionalAmount(fields[field])) &&
-    isRelatedParty(fields.relatedParty)
+    isRelatedParty(fields.relatedParty) &&
+    isCaliforniaAmounts(fields.california)
   );
 }
 
