@@ -211,8 +211,27 @@ describe("the penalty paths", () => {
     expect(ftb(run, PART_II)).toBe(true);
     expect(ftb(run, PENALTY)).toBeUndefined();
     expect(ftb(run, "1.part3.2_first_code_oct")).toBeUndefined();
-    expect(ftb(run, "0.part1.1_first_name")).toBeUndefined();
+    expect(ftb(run, "1.part3.1_first_name")).toBeUndefined();
     expect(ca540(run, "line.92_isr_penalty")).toBeUndefined();
+  });
+
+  it("with Part II checked, Part I still lists the household and the joint MAGI", () => {
+    // The form's Part I: "List all members of your applicable household"; only Part III is skipped.
+    const nursery = valueOf<W2FactValue>(NURSERY_W2);
+    const freight = valueOf<W2FactValue>(FREIGHT_W2);
+    const low = { box1: 20_000, box3: 20_000, box5: 20_000, box16: 20_000 };
+    const run = evaluate(
+      factsWith({ [NURSERY_W2]: { ...nursery, ...low }, [FREIGHT_W2]: { ...freight, ...low } }, [
+        SELA,
+      ]),
+    );
+    expect(ftb(run, PART_II)).toBe(true);
+    expect(ftb(run, "0.part1.1_first_name")).toBeTypeOf("string");
+    expect(ftb(run, "0.part1.1_first_name")).toBe(ftb(evaluate(), "0.part1.1_first_name"));
+    expect(ftb(run, "0.part1.1_modified_agi")).toBeGreaterThan(0);
+    expect(ftb(run, "0.part1.1_modified_agi")).toBe(ca540(run, "line.17_ca_agi"));
+    expect(ftb(run, "0.part1.2_modified_agi")).toBeUndefined();
+    expect(ftb(run, "0.part1.1_ecn_1")).toBeDefined();
   });
 
   it("no X in any month: the form files with Part III and no penalty", () => {

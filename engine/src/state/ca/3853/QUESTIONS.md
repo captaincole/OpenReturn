@@ -19,17 +19,19 @@ The rules come from ca-3853-inst-2025. No answer key exists. Each point below is
 9. **California tax-exempt interest.** Step 3 question 2 uses Schedule CA (540) line 2a and line 2b columns B and C. The engine does not compute those lines yet. With no tax-exempt interest and no U.S. obligation interest, the amount is 0. Otherwise the household income is a floor (the amount is at least 0). The floor settles the penalty only when the bronze amount caps it; else the penalty and Part I line 1 are unsupported. Changes dollars only through the unsupported case.
 10. **Gross income for Part II.** Gross income is a stated answer. The engine asks it only when the household income holds amounts that gross income does not (tax-exempt interest, a member's own MAGI) and the California wages are not over the threshold. Gross income is at least Form 540 line 17, so the test fails when line 17 is over the threshold. No dollar change.
 11. **Part I MAGI of a member who does not file.** "Enter the MAGI for each person" (`modified-adjusted-gross-income-magi::b01`). The engine prints a stated MAGI, an FTB 3803 child's MAGI, or nothing. No dollar change.
-12. **Parts I and III with Part II checked.** "If you cannot check the box on Part II, you will need to complete Part I" (`part-i::b01`); "If you check the box in Part II, line 1, you do not have to complete Part III" (`line-1-applicable-household-income-or-gross::b01`). The engine leaves both blank. No dollar change.
+12. **Parts I and III with Part II checked.** The form's Part I heading says "List all members of your applicable household whether or not they have an exemption". Part II line 1 says "If you check the box in Part II, line 1, you do not have to complete Part III" (`line-1-applicable-household-income-or-gross::b01`). The engine fills Part I, with its Modified AGI, and leaves Part III blank. The corpus block `part-i::b01` ends "you will need to complete": the parser read the sentence's last words, "Part III", as the next section heading (`part-iii::b01` follows it). The first rules left Part I blank on that cut text; the blind fill found it (cases 4, 5, 13). Changes the printed Part I line 1 amount, not the penalty.
 13. **Line 1 with no penalty.** With no X month, or with Part II checked, line 1 is blank, not 0. No dollar change.
 14. **Middle initial of a dependent.** The dependent fact has no middle initial, so it prints blank. No dollar change.
 15. **Three codes in a month.** The form has two fields a month. The engine keeps the first two stated codes. No dollar change.
 16. **Form 540 line 114.** The instructions add line 111, line 112 and line 113 (`ca-540-inst-2025::sec::line-114-total-amount-due::b01`). The engine adds lines 94 and 96 to its existing sum. A return with no FTB 3853 penalty is unchanged.
+17. **Whose gross income Part II tests.** "compare ... your gross income to the California gross income filing threshold" (`line-1-applicable-household-income-or-gross::b01`). The text does not say whether a dependent's own income counts. The engine tests the gross income of the filers' own return, as the blind fill did. Example: parents with gross income $55,000 and a child who must file with MAGI $10,000 (household income $65,000, threshold $61,720) check Part II and owe nothing; Step 4 alone gives $2,375. Changes dollars.
+18. **Age 18 against the federal rule.** The FTB rule is "considered 18 for an entire month if they turn 18 on the first day of the month" (point 8). The federal age rule (a person reaches an age the day before the birthday) would make the month before a first-of-month birthday an adult month too. The engine follows the FTB text. About $16 of penalty in the blind case with a September 1 birthday.
 
 ## Unsupported
 
 | Field or case | Why |
 | --- | --- |
-| Line 1, Part II and Parts I/III for a married filer filing separately | The chart combines both spouses' income; the threshold for one spouse's household is not settled. |
+| Line 1, Part II and Part III for a married filer filing separately | The chart combines both spouses' income; the threshold for one spouse's household is not settled. |
 | Line 1 for a Form 540NR filer | Form 540NR has no rules in the engine. |
 | Line 1 and Part I line 1 MAGI with tax-exempt or U.S. obligation interest | Schedule CA (540) line 2a and line 2b columns B and C are not computed (point 9), unless the bronze amount caps the penalty. |
 | Codes with an affordability test and tax-exempt interest | Code A compares a contribution with the exact household income. |
@@ -37,20 +39,27 @@ The rules come from ca-3853-inst-2025. No answer key exists. Each point below is
 | Row 12 with more than 12 members | The instructions give no continuation statement. |
 | A qualifying surviving spouse with no dependents | The chart has no column for it. |
 
+## Second opinions
+
+- PolicyEngine-US 2.153.8 (commit b3edc044), `variables/gov/states/ca/`, `parameters/gov/states/ca/` and `parameters/gov/aca/`. Compared on 2026-11-24.
+  - It does not model FTB 3853, the California individual mandate or its filing threshold chart. No formula or constant to compare.
+  - Its `gov/aca/required_contribution_percentage` table is the federal premium tax credit's applicable percentage (IRC 36B). The 7.28% affordability rate here is a different rule (`lines-1-12-2::b03`). Not compared.
+- IRS Direct File: federal only, no California forms. No checkout is reachable from this project (issue #140). Not compared. The repo names no other reference implementation for this form.
+
 ## Confidence by field group
 
 | Fields | Confidence |
 | --- | --- |
 | Header (name, SSN) | stated rule |
 | Part I names, SSN, date of birth, ECNs | stated rule |
-| Part I Modified AGI | published example with numbers (Lisa and Jason, Jake's FTB 3803 MAGI) |
+| Part I Modified AGI | published example with numbers (Lisa and Jason, Jake's FTB 3803 MAGI); blind fill (15 cases) agrees |
 | Part II box | published example with numbers (Lisa and Jason); own reading for the threshold (decided) |
 | Part III codes Z, X, stated codes | stated rule |
 | Part III code C | published examples (Chris, Roger, Sam) |
 | Part III code A | published examples with numbers (Jackie, Sharon, Ethan, April) |
 | Part III code I | stated rule; own reading for the birth month (point 6) |
 | Part IV line 1, no Worksheet A | published example with numbers (ftb.ca.gov page: 2,375 and 3,457) |
-| Part IV line 1, Worksheets A and B | stated rule; no published example; limit tests |
+| Part IV line 1, Worksheets A and B | stated rule; no published example; limit tests; blind fill (15 cases) agrees |
 | Form 540 lines 92, 96, 114 | stated rule |
 
 ## Proposals for a discussion

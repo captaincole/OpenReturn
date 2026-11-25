@@ -57,15 +57,27 @@ const reader =
   (id) =>
     form[id];
 
+type Part = "I" | "III";
+
 /*
- * The member on a row of Parts I and III, in household order. Blank when
- * Part II is checked: "If you cannot check the box on Part II, you will need
- * to complete" Part I (part-i::b01), and Part III is not needed
- * (line-1-applicable-household-income-or-gross::b01).
+ * The member on a row of Parts I and III, in household order. Part I lists
+ * every member: "List all members of your applicable household whether or
+ * not they have an exemption" (the form's Part I heading). Part III is blank
+ * when Part II is checked: "If you check the box in Part II, line 1, you do
+ * not have to complete Part III" (line-1-applicable-household-income-or-gross::b01).
+ * The corpus block part-i::b01 ends "you will need to complete": the parser
+ * took the sentence's last words, "Part III", as the next heading.
  */
-function rowMember(form: Form, info: Info, row: number): Ca3853Member | Unsupported | undefined {
-  const box = partIIBox(reader(form), info);
-  if (box !== false) return box === true ? undefined : box;
+function rowMember(
+  form: Form,
+  info: Info,
+  row: number,
+  part: Part,
+): Ca3853Member | Unsupported | undefined {
+  if (part === "III") {
+    const box = partIIBox(reader(form), info);
+    if (box !== false) return box === true ? undefined : box;
+  }
   const members = info.ca3853?.members ?? [];
   if (row === ROWS && members.length > ROWS) return MORE_THAN_12;
   return members[row - 1];
@@ -73,9 +85,13 @@ function rowMember(form: Form, info: Info, row: number): Ca3853Member | Unsuppor
 
 /* A field of a row from its member; the gap or blank of the row passes through. */
 const fromMember =
-  (row: number, value: (person: Ca3853Member, form: Form, info: Info) => unknown): RowBinding =>
+  (
+    part: Part,
+    row: number,
+    value: (person: Ca3853Member, form: Form, info: Info) => unknown,
+  ): RowBinding =>
   (form, info) => {
-    const person = rowMember(form, info, row);
+    const person = rowMember(form, info, row, part);
     if (person === undefined || isGap(person)) return person;
     return value(person, form, info);
   };
@@ -105,23 +121,25 @@ function ecn(person: Ca3853Member, index: number) {
 
 function partIRow(row: number): Record<string, RowBinding> {
   const prefix = `0.part1.${row}_`;
+  const field = (value: (person: Ca3853Member, form: Form, info: Info) => unknown) =>
+    fromMember("I", row, value);
   const bindings: Record<string, RowBinding> = {
-    [`${prefix}first_name`]: fromMember(row, (person) => person.firstName),
-    [`${prefix}middle_initial`]: fromMember(row, (person) => person.middleInitial),
-    [`${prefix}last_name`]: fromMember(row, (person) => person.lastName),
-    [`${prefix}ssn`]: fromMember(row, (person) => person.idNumber ?? NO_ID),
-    [`${prefix}date_of_birth`]: fromMember(row, (person) => person.dob),
-    [`${prefix}modified_agi`]: fromMember(row, modifiedAgi),
+    [`${prefix}first_name`]: field((person) => person.firstName),
+    [`${prefix}middle_initial`]: field((person) => person.middleInitial),
+    [`${prefix}last_name`]: field((person) => person.lastName),
+    [`${prefix}ssn`]: field((person) => person.idNumber ?? NO_ID),
+    [`${prefix}date_of_birth`]: field((person) => person.dob),
+    [`${prefix}modified_agi`]: field(modifiedAgi),
   };
   for (let index = 0; index < ECN_FIELDS; index++) {
-    bindings[`${prefix}ecn_${index + 1}`] = fromMember(row, (person) => ecn(person, index));
+    bindings[`${prefix}ecn_${index + 1}`] = field((person) => ecn(person, index));
   }
   return bindings;
 }
 
 /* A Part III code field: column (a) when one code covers the year, else the month's codes. */
 function codeField(row: number, month: number | "year", slot: 0 | 1): RowBinding {
-  return fromMember(row, (person, form, info) => {
+  return fromMember("III", row, (person, form, info) => {
     const codes = memberCodes(person, reader(form), info);
     if (codes === undefined || isGap(codes)) return codes;
     const wholeYear = fullYearCode(codes);
@@ -133,9 +151,9 @@ function codeField(row: number, month: number | "year", slot: 0 | 1): RowBinding
 function partIIIRow(row: number): Record<string, RowBinding> {
   const prefix = `1.part3.${row}_`;
   const bindings: Record<string, RowBinding> = {
-    [`${prefix}first_name`]: fromMember(row, (person) => person.firstName),
-    [`${prefix}middle_initial`]: fromMember(row, (person) => person.middleInitial),
-    [`${prefix}last_name`]: fromMember(row, (person) => person.lastName),
+    [`${prefix}first_name`]: fromMember("III", row, (person) => person.firstName),
+    [`${prefix}middle_initial`]: fromMember("III", row, (person) => person.middleInitial),
+    [`${prefix}last_name`]: fromMember("III", row, (person) => person.lastName),
     [`${prefix}full_year_code`]: codeField(row, "year", 0),
   };
   MONTH_FIELDS.forEach((name, month) => {
