@@ -65,7 +65,12 @@ function childCareCredit(read: ReadField, info: Info): number | undefined {
  * tentative minimum tax (TMT)" (ca-3804cr-inst-2025::sec::general-information::b03,
  * ::e-limitations::b01), and Schedule P (540) takes it in Section B4, below
  * line 11. The engine follows Text B: a form's own instructions decide, and
- * Text A is a general sentence that Schedule P's sections refine.
+ * Text A is a general sentence that Schedule P's sections refine. The law
+ * agrees: Revenue and Taxation Code section 17039(c)(1) says no credit reduces
+ * the tax "below the tentative minimum tax, as defined by Section 17062, except
+ * the following credits", and its item (AD) is "For taxable years beginning on
+ * or after January 1, 2021, the credit allowed by Section 17052.10" (read on
+ * 2026-11-25 from a public copy of the code; the library does not hold it).
  *
  * With no Schedule P (540): Form 540 line 35 less the credits applied before
  * this one, in Schedule P (540) Part III order: line 40 (Section A1), the
