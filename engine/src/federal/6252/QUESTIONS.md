@@ -74,6 +74,36 @@ choice of method (line 19's places) is a decision in `docs/rule-decisions.md`
     with more than $5 million of obligations owes interest that no line carries.
     Changes dollars: yes, for those sales only.
 
+14. **Line 12 in a later year is copied, not figured again.** Source: "The
+    ordinary income recapture is the amount on line 31 of Form 4797"
+    (line-12::b01). In a year after the sale, the fact states the year of
+    sale's Form 4797 line 31 amount, and line 12 copies it. The engine does not
+    check it against the depreciation allowed (line 9) and the gain. A blind
+    fill raised this (a stated $55,000 next to $70,000 of depreciation).
+    Changes dollars: yes, if the earlier Form 4797 was wrong.
+
+15. **Line 25 in a later year: the recapture left.** Source: "all remaining
+    recapture from a prior year sale ... Don't enter on line 25 more than the
+    amount shown on line 24" (line-25::b01). Default: the fact states the
+    section 1252, 1254 or 1255 recapture not reported yet; line 25 is the
+    smaller of it and line 24. The rest waits for a later year, and the
+    taxpayer states the new amount left on that year's fact; the engine does not
+    carry it. Changes dollars: yes, if the stated amount left is wrong.
+
+## Second opinions
+
+- **Blind fill** (14 cases from the blank form and instructions only): every
+  dollar amount matched. The only differences are line 23 in the year of sale
+  (cases 1, 2, 3 and 14): the blind fill wrote 0, the engine leaves it blank
+  (item 10). No dollars change. The blind fill's doubts that change dollars are
+  items 1, 2, 14 and 15 and decision A1.
+- **PolicyEngine-US 2.153.8** (commit b3edc0446b): it does not model Form 6252
+  or the installment method. Its unrecaptured section 1250 gain before losses
+  is an input, so the worksheet lines 4 and 12 that Form 6252 feeds have
+  nothing to compare. No disagreement.
+- **IRS Direct File:** the repo names no checkout, and Direct File does not
+  support Form 6252. Not compared.
+
 ## Proposals for a discussion
 
 - **Form 4797 Part III for an installment sale in its year of sale.** Line 12 is
