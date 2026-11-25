@@ -4,6 +4,7 @@
  * intersection below, and gets wired in the form's resolver.
  */
 
+import type { BaseFilingInfo } from "./baseFilingInfo.js";
 import type { Form1040FilingInfo } from "./federal/1040/filingInfo.js";
 import { resolve1040Info } from "./federal/1040/resolveInfo.js";
 import type { Form1116FilingInfo } from "./federal/1116/filingInfo.js";
@@ -155,6 +156,8 @@ import type { Form3803FilingInfo } from "./state/ca/3803/filingInfo.js";
 import { resolve3803Info } from "./state/ca/3803/resolveInfo.js";
 import type { Form3805pFilingInfo } from "./state/ca/3805p/filingInfo.js";
 import { resolve3805pInfo } from "./state/ca/3805p/resolveInfo.js";
+import type { Form3840FilingInfo } from "./state/ca/3840/filingInfo.js";
+import { resolve3840Info } from "./state/ca/3840/resolveInfo.js";
 import type { Form3885AFilingInfo } from "./state/ca/3885a/filingInfo.js";
 import { resolve3885AInfo } from "./state/ca/3885a/resolveInfo.js";
 import type { Form3913FilingInfo } from "./state/ca/3913/filingInfo.js";
@@ -179,54 +182,9 @@ import type { SchedulePFilingInfo } from "./state/ca/schedule-p/filingInfo.js";
 import { resolveSchedulePInfo } from "./state/ca/schedule-p/resolveInfo.js";
 import type { ScheduleSFilingInfo } from "./state/ca/schedule-s/filingInfo.js";
 import { resolveScheduleSInfo } from "./state/ca/schedule-s/resolveInfo.js";
-import type { EngineDerivation } from "./types.js";
-import type { FilingStatus, Phone, SSN } from "./values.js";
 
-export interface MustFileResolution {
-  decisionKey: string;
-  /** undefined = waiting on decisionKey. */
-  value: boolean | undefined;
-  derivation: EngineDerivation | undefined;
-}
-
-export interface BaseFilingInfo {
-  mustFile?: Readonly<Record<string, MustFileResolution>>;
-  missingInputs?: Readonly<Record<string, readonly string[]>>;
-
-  filingStatus?: FilingStatus;
-
-  taxpayerFirstName?: string;
-  taxpayerMiddleInitial?: string;
-  taxpayerLastName?: string;
-  taxpayerSSN?: SSN;
-  taxpayerDateOfBirth?: string;
-  // Born before Jan 2, 1961 = age 65 by the end of 2025 (1040 line 12d, CA 540 line 9).
-  taxpayerBornBeforeJan2_1961?: boolean;
-  taxpayerOccupation?: string;
-  taxpayerPhone?: Phone;
-  taxpayerEmail?: string;
-
-  spouseFirstName?: string;
-  spouseMiddleInitial?: string;
-  spouseLastName?: string;
-  spouseSSN?: SSN;
-  spouseDateOfBirth?: string;
-  spouseBornBeforeJan2_1961?: boolean;
-  // Visually impaired (identity.blind facts): 1040 line 12d, CA 540 line 8.
-  taxpayerBlind?: boolean;
-  /** A joint return counts it (1040 line 12d, CA 540 line 8). */
-  spouseBlind?: boolean;
-  spouseOccupation?: string;
-
-  homeAddressLine1?: string;
-  homeAddressApt?: string;
-  homeAddressCity?: string;
-  homeAddressState?: string;
-  homeAddressZip?: string;
-  homeAddressCounty?: string;
-
-  fullYearMEC?: boolean;
-}
+/* The shared slots live in baseFilingInfo.ts, which keeps this file under the line limit. */
+export type { BaseFilingInfo, MustFileResolution } from "./baseFilingInfo.js";
 
 export type FilingInfo = BaseFilingInfo &
   Form1040FilingInfo &
@@ -311,6 +269,7 @@ export type FilingInfo = BaseFilingInfo &
   ScheduleG1FilingInfo &
   Form3913FilingInfo &
   Form3461FilingInfo &
+  Form3840FilingInfo &
   CaliforniaFormsWithNoRulesFilingInfo;
 
 /* One resolver per form. A new form adds its resolver here. */
@@ -398,6 +357,7 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolveScheduleG1Info,
   resolve3913Info,
   resolve3461Info,
+  resolve3840Info,
   ...CALIFORNIA_FORMS_WITH_NO_RULES_RESOLVERS,
 ];
 

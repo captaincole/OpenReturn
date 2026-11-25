@@ -15,6 +15,7 @@ export * from "./kinds/caDependentCare.js";
 export * from "./kinds/caEarnedIncomeCredit.js";
 export * from "./kinds/caEmployeeClassification.js";
 export * from "./kinds/caExcessBusinessLoss.js";
+export * from "./kinds/caLikeKindExchange.js";
 export * from "./kinds/caLumpSumDistribution.js";
 export * from "./kinds/caMiscellaneousDeductions.js";
 export * from "./kinds/caPassiveCarryover.js";

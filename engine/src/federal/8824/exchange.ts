@@ -91,8 +91,8 @@ const LATE_GAP =
 const NO_IDENTIFICATION_GAP =
   "A deferred exchange received more than 45 days after the transfer states no written identification date (line 5; irs-8824-inst-2025::sec::line-5::b01).";
 
-/* The reasons no line of an exchange can be figured. */
-function exchangeGap(value: LikeKindExchangeFactValue): string | undefined {
+/* The reasons no line of an exchange can be figured. FTB 3840 reads it too. */
+export function exchangeGap(value: LikeKindExchangeFactValue): string | undefined {
   if (value.usedPartlyAsHome === true) {
     return "The property given up was used partly as a main home: two worksheet Forms 8824 split every amount between the home and the business part (irs-8824-inst-2025::sec::property-used-as-home::b02), and the facts do not split them.";
   }
@@ -134,7 +134,7 @@ function line21Of(
 }
 
 /* Part II: lines 9 and 10 answered, a disposition, the line 11 box, and whether line 24 is reported. */
-function relatedPartyState(value: LikeKindExchangeFactValue) {
+export function relatedPartyState(value: LikeKindExchangeFactValue) {
   const related = value.relatedParty;
   if (related === undefined) return { waits: false, triggered: false, line11: undefined };
   const waits =
@@ -179,8 +179,8 @@ export function realizedOf(value: LikeKindExchangeFactValue): RealizedLines {
   });
 }
 
-/* Part III of one exchange: lines 12–25c, or the gap of lines 21–25c. */
-function partIII(value: LikeKindExchangeFactValue) {
+/* Part III of one exchange: lines 12–25c, or the gap of lines 21–25c. FTB 3840 copies it in any year. */
+export function partIII(value: LikeKindExchangeFactValue) {
   const exclusion = value.section121Exclusion ?? 0;
   const realized = realizedOf(value);
   const line21 = line21Of(value, realized);
