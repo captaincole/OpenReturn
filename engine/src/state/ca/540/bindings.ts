@@ -15,6 +15,7 @@ import {
   line44CreditAmount,
   line44CreditCode,
   line44CreditName,
+  line45SchedulePCredits,
   line47TotalCredits,
   line48TaxAfterCredits,
 } from "./credits.js";
@@ -203,6 +204,7 @@ export function register(): void {
       "line.44_credit_name": line44CreditName,
       "line.44_credit_code": line44CreditCode,
       "line.44_credit_amount": line44CreditAmount,
+      "line.45_schedule_p_credits": line45SchedulePCredits,
       "line.47_total_credits": line47TotalCredits,
       "line.48_tax_after_credits": line48TaxAfterCredits,
 
@@ -292,8 +294,6 @@ export function register(): void {
         "Checkbox indicating tax includes FTB 3800 (tax on child's unearned income). No FTB 3800 scenario or fact-ingestion path exists yet.",
       "line.34_tax_from_ftb_5870a":
         "Checkbox indicating line 34 tax is from FTB 5870A (tax on accumulation distribution of trusts). No FTB 5870A scenario or fact-ingestion path exists yet.",
-      "line.45_schedule_p_credits":
-        "Line 45 is for additional credits claimed via Schedule P (540). No ingestion path for Schedule P credits exists yet — would require a separate Schedule P catalog and credit data.",
       "line.46_renters_credit":
         "Nonrefundable Renter's Credit eligibility requires income limits, rent paid, landlord details, and rental address data — no fact ingestion path or scenario built for this yet.",
       "line.73_withholding_592b_593":

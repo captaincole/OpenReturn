@@ -34,6 +34,12 @@ Each decision below also sits in the code, in a comment that starts with `DECISI
 | 11 | 2026-11-24 | Foreign currency | Which yearly average: the IRS table or the Federal Reserve's? | The IRS yearly average table. | The Federal Reserve's annual averages. | The IRS table. | $2 on 1,180 euros of interest. | `currency/` (pull request #240) | — |
 | 12 | 2026-11-24 | Form 8801 | Is line 23, the limit on the credit, the tentative minimum tax before or after the minimum tax foreign tax credit? | Form 8801 line 23 is Form 6251 line 9, and line 9 is line 7 less line 8. | Form 6251 instructions: when line 10 is at least line 7, leave line 8 blank. | After: line 7 less the credit line 8 would hold, also when Form 6251 leaves line 8 blank. Leaving line 8 blank is a shortcut for a person who owes no minimum tax, and it must not shrink this credit. With Form 1116, line 23 is unsupported. | Yes: $250 more credit in the made-up taxpayer `logain`. | `federal/8801/credit.ts` | Sections 53(c) and 55(b). Marked for research: the reading rests on memory of the law. |
 
+## Decided by the author, waiting for a person's review
+
+| # | Date | Form | Question | Text A | Text B | Decision | Dollars | Where | Check when the law is in the library |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| A1 | 2026-11-24 | FTB 3804-CR | Is the PTE elective tax credit limited by tentative minimum tax? | Form 540 instructions: "the total amount you may claim for all credits is limited by tentative minimum tax (TMT)". | FTB 3804-CR instructions: "This credit can reduce regular tax below tentative minimum tax"; Schedule P (540) takes it in Section B4. | Text B: the limit is the tax left after the credits before it, with no TMT floor. A form's own instructions decide. | Yes, when the tax is near TMT: up to the whole difference between tax and TMT. | `state/ca/3804-cr/creditUsed.ts` | California Revenue and Taxation Code sections 17039 and 17052.10. |
+
 A row that names a pull request is in the code of that branch until it merges.
 
 The last column names the section of law to read first. The section numbers are from memory and were not checked against the Code, which the library does not hold yet.

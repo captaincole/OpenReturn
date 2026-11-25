@@ -1,14 +1,16 @@
 /*
- * Form 540 lines 40, 43, 44, 47 and 48: the special credits. Line 40 is FTB
- * 3506. Lines 43 and 44 hold the other credits the engine figures: the credit
- * for prior year AMT (FTB 3510) and the other state tax credit (Schedule S).
- * They are unsupported when neither form files. Lines 45 and 46 stay
- * unsupported in bindings.ts and read as blank.
+ * Form 540 lines 40, 43 to 45, 47 and 48: the special credits. Line 40 is FTB
+ * 3506. Lines 43 to 45 hold the other credits the engine figures: the credit
+ * for prior year AMT (FTB 3510), the other state tax credit (Schedule S) and
+ * the PTE elective tax credit (FTB 3804-CR). They are unsupported when no such
+ * form files. Line 46 stays unsupported in bindings.ts and reads as blank.
  */
 
 import { atLeast, numberOrBlank, sum, sumOrBlank } from "../../../money.js";
 import { unsupported, type Unsupported } from "../../../types.js";
 import { files3510, priorYearAmtCreditUsed, priorYearAmtCreditWaits } from "../3510/creditUsed.js";
+import { files3804Cr, pteCreditOnReturn } from "../3804-cr/creditUsed.js";
+import { PTE_CREDIT_CODE, PTE_CREDIT_NAME } from "../3804-cr/lines.js";
 import { OTHER_STATE_CREDIT_CODE, OTHER_STATE_CREDIT_NAME } from "../schedule-s/lines.js";
 import { filesScheduleS, otherStateCreditTotal } from "../schedule-s/returnAmounts.js";
 import type { Form540FilingInfo } from "./filingInfo.js";
@@ -70,9 +72,11 @@ function otherStateCreditUsed(form: Form540Form, info: Form540FilingInfo) {
 /*
  * The other credits taken, each from Schedule P (540) column (b) when it is
  * completed (ca-540-sched-p-inst-2025::sec::how-to-claim-your-credits::b01),
- * in Part III order: line 10 (prior year AMT) before line 20 (other state
- * tax). Neither text gives an order (QUESTIONS.md). A credit of 0 is not
- * taken. Undefined while either credit waits.
+ * in Part III order: line 10 (prior year AMT), line 20 (other state tax),
+ * line 21 (PTE elective tax). The last is applied "after the other state tax
+ * credit" (ca-540-sched-p-inst-2025::sec::pass-through-entity-pte-elective-tax-credit::b01);
+ * no text orders the first two (QUESTIONS.md). A credit of 0 is not taken.
+ * Undefined while any credit waits.
  */
 function otherCredits(
   form: Form540Form,
@@ -82,26 +86,35 @@ function otherCredits(
   if (priorYearAmtCreditWaits(read, info)) return undefined;
   const otherState = otherStateCreditUsed(form, info);
   if (typeof otherState !== "number") return otherState;
+  const pte = pteCreditOnReturn(read, info);
+  if (typeof pte !== "number") return pte;
   const priorYearAmt = files3510(info) ? (priorYearAmtCreditUsed(read) ?? 0) : 0;
   return [
     { name: PRIOR_YEAR_AMT_CREDIT_NAME, code: PRIOR_YEAR_AMT_CREDIT_CODE, amount: priorYearAmt },
     { name: OTHER_STATE_CREDIT_NAME, code: OTHER_STATE_CREDIT_CODE, amount: otherState },
+    { name: PTE_CREDIT_NAME, code: PTE_CREDIT_CODE, amount: pte },
   ].filter((credit) => credit.amount > 0);
 }
+
+const filesOtherCreditForm = (info: Form540FilingInfo) =>
+  files3510(info) || filesScheduleS(info) || files3804Cr(info);
+
+const isGap = (value: unknown): value is Unsupported =>
+  typeof value === "object" && value !== null && "unsupported" in value;
 
 /*
  * "To claim only one or two credits, enter the credit name, code, and amount of
  * the credit on line 43 and line 44. To claim more than two credits, use
  * Schedule P (540), Part III" (ca-540-inst-2025::sec::line-43-through-line-45-additional-special-credits::b01);
  * then lines 43 and 44 stay blank and line 45 holds the total
- * (ca-540-sched-p-inst-2025::sec::how-to-claim-your-credits::b01). A third
- * other credit has no rules yet. With neither form filed, no other special
- * credit has facts, and the line is unsupported. With a form filed and fewer
- * credits than the slot, the line is blank.
+ * (ca-540-sched-p-inst-2025::sec::how-to-claim-your-credits::b01). With no
+ * such form filed, no other special credit has facts, and the line is
+ * unsupported. With a form filed and fewer credits than the slot, the line is
+ * blank.
  */
 function otherCreditField<T>(slot: 0 | 1, pick: (credit: OtherCredit) => T, noFacts: Unsupported) {
   return (form: Form540Form, info: Form540FilingInfo): T | Unsupported | undefined => {
-    if (!files3510(info) && !filesScheduleS(info)) return noFacts;
+    if (!filesOtherCreditForm(info)) return noFacts;
     const credits = otherCredits(form, info);
     if (credits === undefined || !Array.isArray(credits)) return credits;
     const credit = credits.length > 2 ? undefined : credits[slot];
@@ -164,14 +177,33 @@ export const line44CreditAmount: Form540Line<"line.44_credit_amount"> = otherCre
   LINE_44_AMOUNT_UNSUPPORTED,
 );
 
+/* With no other credit form filed: main's reason, word for word. */
+const LINE_45_UNSUPPORTED = unsupported(
+  "Line 45 is for additional credits claimed via Schedule P (540). No ingestion path for Schedule P credits exists yet — would require a separate Schedule P catalog and credit data.",
+);
+
+/*
+ * "If you have more than two other credits, do not use line 43 or 44 on Form
+ * 540. Add the amounts from column (b) for the other credits and enter the
+ * total on Form 540, line 45" (ca-540-sched-p-inst-2025::sec::how-to-claim-your-credits::b01).
+ * Blank with two credits or fewer.
+ */
+export const line45SchedulePCredits: Form540Line<"line.45_schedule_p_credits"> = (form, info) => {
+  if (!filesOtherCreditForm(info)) return LINE_45_UNSUPPORTED;
+  const credits = otherCredits(form, info);
+  if (credits === undefined || !Array.isArray(credits)) return credits;
+  return credits.length > 2 ? sum(...credits.map(amountOf)) : undefined;
+};
+
 /*
  * "Add line 40 through line 46" (the form). With FTB 3506 filed, the total
  * waits while its credit, or Schedule P's share of it, waits; it also waits
- * while the credit for prior year AMT or the other state tax credit waits.
+ * while another credit waits, and has the gap of one that has a gap.
  */
 export const line47TotalCredits: Form540Line<"line.47_total_credits"> = (form, info) => {
   const credits = CREDIT_LINES.map((id) => form[id]);
-  if (otherCredits(form, info) === undefined) return undefined;
+  const others = otherCredits(form, info);
+  if (others === undefined || isGap(others)) return others;
   if (!files3506(info)) return sumOrBlank(...credits);
   const credit = ftb3506Credit(form);
   if (credit === undefined) return undefined;
@@ -185,6 +217,7 @@ export const line48TaxAfterCredits: Form540Line<"line.48_tax_after_credits"> = (
   if (typeof tax !== "number") return undefined;
   const credits = form["line.47_total_credits"];
   if (files3506(info) && credits === undefined) return undefined;
-  if (otherCredits(form, info) === undefined) return undefined;
+  const others = otherCredits(form, info);
+  if (others === undefined || isGap(others)) return others;
   return atLeast(0, sum(tax, credits === undefined ? 0 : -credits));
 };
