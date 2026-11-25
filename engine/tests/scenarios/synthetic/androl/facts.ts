@@ -121,6 +121,7 @@ export const androlFacts: TaxFactRow[] = [
   idFact("phone", "409-555-0462"),
   fact("identity", SPOUSE_KEYS.firstName, ANDROL.spouse.firstName, VERBAL),
   fact("identity", SPOUSE_KEYS.lastName, ANDROL.spouse.lastName, VERBAL),
+  fact("identity", SPOUSE_KEYS.occupation, "Harbor pilot", VERBAL),
   fact("identity", SPOUSE_KEYS.ssn, ANDROL.spouse.ssn, VERBAL),
   fact("identity", SPOUSE_KEYS.dob, "09/02/1979", VERBAL),
   fact(

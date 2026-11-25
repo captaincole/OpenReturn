@@ -167,6 +167,7 @@ export const elaidaFacts: TaxFactRow[] = [
   idFact("phone", "509-555-0131"),
   fact("identity", SPOUSE_KEYS.firstName, ELAIDA.spouse.firstName, VERBAL),
   fact("identity", SPOUSE_KEYS.lastName, ELAIDA.spouse.lastName, VERBAL),
+  fact("identity", SPOUSE_KEYS.occupation, "Glassblower", VERBAL),
   fact("identity", SPOUSE_KEYS.ssn, ELAIDA.spouse.ssn, VERBAL),
   fact("identity", SPOUSE_KEYS.dob, "08/02/1977", VERBAL),
   fact(

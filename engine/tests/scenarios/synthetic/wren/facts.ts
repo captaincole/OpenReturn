@@ -126,6 +126,7 @@ export const wrenFacts: TaxFactRow[] = [
   idFact("phone", "806-555-0188"),
   fact("identity", SPOUSE_KEYS.firstName, DORIAN.firstName, "Stated by Wren."),
   fact("identity", SPOUSE_KEYS.lastName, DORIAN.lastName, "Stated by Wren."),
+  fact("identity", SPOUSE_KEYS.occupation, "Truck driver", "Stated by Wren."),
   fact("identity", SPOUSE_KEYS.ssn, DORIAN.ssn, "Dorian's W-2, box a."),
   fact("identity", SPOUSE_KEYS.dob, "11/05/1992", "Stated by Dorian."),
   fact("wages", makeW2FactKey("caprock-dental"), wrenW2, "W-2 from Caprock Dental Group."),
