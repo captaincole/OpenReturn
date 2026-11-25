@@ -5,8 +5,14 @@ import { defineForm, type FormAccessor, type FormSpec } from "../../../defineFor
 import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../../money.js";
 import { unsupported } from "../../../types.js";
 import { answerLines } from "./answerLines.js";
+import {
+  LINE_7A_ADDITIONS_GAP,
+  LINE_7A_SUBTRACTIONS_GAP,
+  scheduleDCaAdjustment,
+} from "./capitalGain.js";
 import { childIncomeBindings } from "./childIncome.js";
 import { line12Adjustment, line12Federal } from "./employeeBusinessExpenses.js";
+import { excessBusinessLossBindings } from "./excessBusinessLoss.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
 import { form8853Bindings } from "./form8853.js";
 import { partIIUnsupported } from "./increasedStandard.js";
@@ -63,31 +69,6 @@ function line27Total(line10: unknown, line26: unknown): number | undefined {
   const adjustments = numberOrBlank(line26);
   if (income === undefined && adjustments === undefined) return undefined;
   return sum(income) - sum(adjustments);
-}
-
-/* MANUAL EDIT: line 7a columns B and C with no Schedule D (540), as before it had rules. */
-const LINE_7A_SUBTRACTIONS_GAP =
-  "CA vs. federal capital gain adjustments (e.g. differences in depreciation recapture, installment sale basis, or CA-only exclusions) require Schedule D CA-specific computations or FTB 3885A data we have not ingested yet.";
-const LINE_7A_ADDITIONS_GAP =
-  "CA vs. federal capital gain additions (e.g. CA-only gain recognition differences) require Schedule D CA-specific computations we have not ingested yet.";
-
-/*
- * MANUAL EDIT: line 7a column B takes Schedule D (540) line 12a and column C
- * line 12b (ca-540-sched-d-inst-2025::sec::line-12a::b01, ::line-12b::b01;
- * ca-540-sched-ca-inst-2025::sec::line-7a-capital-gain-or-loss::b01). With no
- * Schedule D (540), the column stays unsupported: the engine finds no
- * California difference, but it models only some of them.
- */
-function scheduleDCaAdjustment(
-  form: FormAccessor<ScheduleCa>,
-  info: ScheduleCaFilingInfo,
-  line: "12a" | "12b",
-  noScheduleD: string,
-) {
-  if (info.mustFile?.["schedule-d-ca"]?.value !== true) return unsupported(noScheduleD);
-  const gap = info.scheduleDCaFigures?.gap;
-  if (gap !== undefined) return unsupported(gap);
-  return numberOrBlank(form[`schedule-d-ca.3.line.${line}`]);
 }
 
 /* Line 9a col B: lines 8a through 8z, column B. */
@@ -147,6 +128,7 @@ export function register(): void {
     bindings: waitsWithIncreasedStandard({
       ...sectionCBindings,
       ...childIncomeBindings,
+      ...excessBusinessLossBindings,
       ...movingExpenseBindings,
       ...mortgageCreditBindings,
       ...form8853Bindings,
@@ -180,7 +162,7 @@ export function register(): void {
        * MANUAL EDIT: column A copies Schedule 1 line 8p, the federal excess
        * business loss adjustment that line 9a column A already holds
        * (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b04). Columns B
-       * and C stay gaps (the unsupported list; Form 461 QUESTIONS.md item 13).
+       * and C take FTB 3461 (excessBusinessLoss.ts).
        */
       "1.line.b8p_federal": (form) => amountIfNonzero(form["schedule-1.0.line.8p"]),
       // MANUAL EDIT: col A copies Schedule 1 line 8f (income from Form 8889).
@@ -707,10 +689,6 @@ export function register(): void {
         "IRC §951A(a) GILTI inclusion has no fact ingestion path — no GILTI/CFC scenario built yet.",
       "1.line.b8o_subtractions":
         "IRC §951A(a) GILTI CA subtraction adjustment requires CFC/GILTI fact ingestion — no scenario built yet.",
-      "1.line.b8p_subtractions":
-        "Column B (the federal excess business loss adjustment in column A) prints only with column C, the FTB 3461 amount, and FTB 3461 has no rules. Alone it would take the federal add-back out of California income with nothing added back.",
-      "1.line.b8p_additions":
-        "Column C is FTB 3461 line 16 or 17 (California's own excess business loss, with its own carryover), and FTB 3461 has no rules.",
       "1.line.b8q_federal":
         "No fact ingestion path for ABLE account distributions; no scenario modeled yet.",
       "1.line.b8r_federal":
