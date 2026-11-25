@@ -38,6 +38,12 @@ A row that names a pull request is in the code of that branch until it merges.
 
 The last column names the section of law to read first. The section numbers are from memory and were not checked against the Code, which the library does not hold yet.
 
+## Decided by the author, waiting for a person's review
+
+| # | Date | Form | Question | Text A | Text B | Decision | Dollars | Where | Check when the law is in the library |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| A1 | 2026-11-24 | Form 8911 | Is line 8, the tentative minimum tax, before or after the minimum tax foreign tax credit? | Form 8911 line 8 is Form 6251 line 9, and line 9 is line 7 less line 8. | Form 6251 instructions: when line 10 is at least line 7, leave line 8 blank. | After: line 7 less the credit line 8 would hold, also when Form 6251 leaves line 8 blank, as row 12 decides for Form 8801. With Form 1116, line 8 is unsupported. | Yes, up to the foreign tax credit: $95 less on line 8 in the made-up taxpayer `pevara` (no change to the credit there). | `federal/8911/credit.ts` | Sections 30C(d)(2) and 55(b). |
+
 ## Open: brought to a person, not decided
 
 | Form | Question | Engine today | Why it is open |
