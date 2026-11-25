@@ -1,0 +1,32 @@
+{
+  "note": "Treasury Reporting Rates of Exchange (Bureau of the Fiscal Service), the rate in effect on the record date: units of the currency for one U.S. dollar.",
+  "taxYear": 2025,
+  "recordDate": "2025-12-31",
+  "source": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/rates_of_exchange?fields=country_currency_desc,exchange_rate,record_date,effective_date&filter=record_date:eq:2025-12-31&page[size]=500",
+  "downloadedOn": "2026-11-25",
+  "rates": {
+    "AUD": "1.495",
+    "BRL": "5.477",
+    "CAD": "1.369",
+    "CNY": "6.998",
+    "DKK": "6.355",
+    "EUR": "0.851",
+    "HKD": "7.784",
+    "INR": "89.854",
+    "JPY": "156.61",
+    "MYR": "4.056",
+    "MXN": "17.956",
+    "NZD": "1.733",
+    "NOK": "10.072",
+    "SGD": "1.285",
+    "ZAR": "16.546",
+    "KRW": "1443.75",
+    "LKR": "309.4",
+    "SEK": "9.197",
+    "CHF": "0.792",
+    "TWD": "31.324",
+    "THB": "31.66",
+    "GBP": "0.743",
+    "VES": "300.618"
+  }
+}

@@ -41,6 +41,7 @@ npm run form-engine -- extract-widgets federal/8959 # PDF → .scratch/forms/…
 npm run form-engine -- seed-labels federal/8959     # catalog.json → labels.json; lists the widgets left to label
 npm run form-engine -- write-catalog federal/8959   # widgets.json + labels.json → catalog.json, every widget checked
 npm run form-engine -- ingest-federal-tax-table     # refresh the federal tax table JSON
+npm run form-engine -- ingest-exchange-rates        # refresh the H.10, G.5A and Treasury rate tables (engine/src/data/exchange-rates/)
 ```
 
 Run `npm run form-engine` with no arguments for the full command list
