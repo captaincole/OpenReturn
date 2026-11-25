@@ -22,7 +22,9 @@ export const NO_ACTIVITY = "none";
  * The fact key of the activity a sale names (business.<id>, rental.property.<id>),
  * NO_ACTIVITY, or undefined when the sale names none.
  */
-export function activityOf(sale: BusinessPropertySaleFactValue): string | undefined {
+export function activityOf(
+  sale: Pick<BusinessPropertySaleFactValue, "businessId" | "rentalId">,
+): string | undefined {
   if (sale.rentalId !== undefined) return makeRentalFactKey(sale.rentalId);
   if (sale.businessId === undefined) return undefined;
   return sale.businessId === NO_BUSINESS ? NO_ACTIVITY : makeBusinessFactKey(sale.businessId);
@@ -52,6 +54,13 @@ export interface Form4797Activities {
 }
 
 export type LinkedProperty = PlacedProperty & { activity: string };
+
+/* A Form 8824 exchange's line 5 and line 16 amounts, with the activity whose property it gave up. */
+export interface LinkedExchange {
+  activity: string;
+  section1231: number;
+  ordinary: number;
+}
 
 /* A Part I row, or a Part III column's line 24 less its recapture (its part of line 32 and line 6). */
 function section1231Amount(property: PlacedProperty): number {
@@ -96,21 +105,29 @@ const SHARE_GAP =
 export function form4797Activities(
   properties: LinkedProperty[],
   lines: Form4797Lines,
+  exchanges: LinkedExchange[] = [],
 ): Pick<Form4797Activities, "amounts" | "ordinaryGap"> {
-  const keys = [...new Set(properties.map((each) => each.activity))];
+  const keys = [
+    ...new Set([
+      ...properties.map((each) => each.activity),
+      ...exchanges.map((each) => each.activity),
+    ]),
+  ];
   const amounts = keys.map((key) => {
     const own = properties.filter((each) => each.activity === key);
+    const swapped = exchanges.filter((each) => each.activity === key);
     return {
       key,
-      ordinary: sum(...own.map(ordinaryOwnAmount)),
-      total: sum(...own.map(totalOf)),
+      ordinary: sum(...own.map(ordinaryOwnAmount), ...swapped.map((each) => each.ordinary)),
+      total: sum(...own.map(totalOf), ...swapped.map((each) => each.section1231 + each.ordinary)),
     };
   });
   const ordinary1231 = ordinarySection1231(lines);
   if (ordinary1231 === 0) return { amounts };
-  const netting = new Set(
-    properties.filter((each) => section1231Amount(each) !== 0).map((each) => each.activity),
-  );
+  const netting = new Set([
+    ...properties.filter((each) => section1231Amount(each) !== 0).map((each) => each.activity),
+    ...exchanges.filter((each) => each.section1231 !== 0).map((each) => each.activity),
+  ]);
   // Line 4's Form 6252 gain nets on line 7 too; its sale names no activity (6252/totals.ts).
   if ((lines.line4 ?? 0) !== 0) netting.add(FORM_6252_GAIN);
   if (netting.size !== 1) return { amounts, ordinaryGap: SHARE_GAP };

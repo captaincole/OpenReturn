@@ -24,8 +24,6 @@ import type { Form461FilingInfo } from "./federal/461/filingInfo.js";
 import { resolve461Info } from "./federal/461/resolveInfo.js";
 import type { Form4684FilingInfo } from "./federal/4684/filingInfo.js";
 import { resolve4684Info } from "./federal/4684/resolveInfo.js";
-import type { Form4797FilingInfo } from "./federal/4797/filingInfo.js";
-import { resolve4797Info } from "./federal/4797/resolveInfo.js";
 import type { Form4952FilingInfo } from "./federal/4952/filingInfo.js";
 import { resolve4952Info } from "./federal/4952/resolveInfo.js";
 import type { Form4972FilingInfo } from "./federal/4972/filingInfo.js";
@@ -38,8 +36,6 @@ import type { Form6198FilingInfo } from "./federal/6198/filingInfo.js";
 import { resolve6198Info } from "./federal/6198/resolveInfo.js";
 import type { Form6251FilingInfo } from "./federal/6251/filingInfo.js";
 import { resolve6251Info } from "./federal/6251/resolveInfo.js";
-import type { Form6252FilingInfo } from "./federal/6252/filingInfo.js";
-import { resolve6252Info } from "./federal/6252/resolveInfo.js";
 import type { Form6781FilingInfo } from "./federal/6781/filingInfo.js";
 import { resolve6781Info } from "./federal/6781/resolveInfo.js";
 import type { Form7203FilingInfo } from "./federal/7203/filingInfo.js";
@@ -100,6 +96,7 @@ import {
 } from "./federal/formsWithNoRules.js";
 import type { QbiFilingInfo } from "./federal/qbi/filingInfo.js";
 import { resolveQbiInfo } from "./federal/qbi/resolveInfo.js";
+import { SALE_FORMS_RESOLVERS, type SaleFormsFilingInfo } from "./federal/saleForms.js";
 import type { Schedule1AFilingInfo } from "./federal/schedule-1-a/filingInfo.js";
 import { resolveSchedule1AInfo } from "./federal/schedule-1-a/resolveInfo.js";
 import type { Schedule1FilingInfo } from "./federal/schedule-1/filingInfo.js";
@@ -284,8 +281,7 @@ export type FilingInfo = BaseFilingInfo &
   Form6781FilingInfo &
   Form461FilingInfo &
   Form8621FilingInfo &
-  Form6252FilingInfo &
-  Form4797FilingInfo &
+  SaleFormsFilingInfo &
   Form6198FilingInfo &
   Form7203FilingInfo &
   Form8936FilingInfo &
@@ -372,8 +368,7 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve6781Info,
   resolve461Info,
   resolve8621Info,
-  resolve6252Info,
-  resolve4797Info,
+  ...SALE_FORMS_RESOLVERS,
   resolve6198Info,
   resolve7203Info,
   resolve8936Info,

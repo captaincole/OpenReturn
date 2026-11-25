@@ -48,6 +48,7 @@ import { register as registerForm8801 } from "./8801/bindings.js";
 import { register as registerForm8814 } from "./8814/bindings.js";
 import { register as registerForm8815 } from "./8815/bindings.js";
 import { register as registerForm8824 } from "./8824/bindings.js";
+import { form8824CopyCount } from "./8824/printed.js";
 import { register as registerForm8828 } from "./8828/bindings.js";
 import { register as registerForm8829 } from "./8829/bindings.js";
 import { register as registerForm8834 } from "./8834/bindings.js";
@@ -935,5 +936,10 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8824",
     relativeDir: "federal/8824",
     register: registerForm8824,
+    // One Form 8824 for each exchange, and for each Part IV sale beyond them (federal/8824/printed.ts).
+    copies: {
+      count: (info) => form8824CopyCount(info?.form8824Totals),
+      select: (info, index) => info && { ...info, form8824CopyIndex: index },
+    },
   }),
 ];
