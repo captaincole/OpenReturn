@@ -238,7 +238,7 @@ A person decides a rule when two official texts point different ways, when the g
 
 ### A form that files only with an amount on another form
 
-A form's resolver decides who files from facts and decisions, before any line is computed. A form that also needs a computed amount names that line in `filesOnlyWithAmountOn` in its `defineForm` spec. After the lines settle, the engine takes the form off the return when the line holds no amount above 0. Form 8888 is the first: it splits the refund on Form 1040 line 35a, so it does not file without one.
+A form's resolver decides who files from facts and decisions, before any line is computed. A form that also needs a computed amount names that line in `filesOnlyWithAmountOn` in its `defineForm` spec. After the lines settle, the engine takes the form off the return when the line holds no amount above 0. Form 8888 is the first: it splits the refund on Form 1040 line 35a, so it does not file without one. The spec can name several fields, and a checked box counts: Form 2210 names its Part II boxes, so it files only with a box checked. A form's own named field that is still blank or a gap keeps it on the return, so its missing inputs stay in sight; such a form writes an unchecked box as `false`. Another form's line keeps it only with an amount above 0.
 
 ### The central forms keep their rules in section files
 
