@@ -37,6 +37,7 @@ import { register as registerForm5870A } from "./5870a/bindings.js";
 import { register as registerScheduleCa540NR } from "./schedule-ca-540nr/bindings.js";
 import { register as registerScheduleCa } from "./schedule-ca/bindings.js";
 import { register as registerScheduleD1 } from "./schedule-d-1/bindings.js";
+import { scheduleD1CopyCount } from "./schedule-d-1/copies.js";
 import { register as registerScheduleD540NR } from "./schedule-d-540nr/bindings.js";
 import { register as registerScheduleDCa } from "./schedule-d-ca/bindings.js";
 import { register as registerScheduleG1 } from "./schedule-g-1/bindings.js";
@@ -401,6 +402,11 @@ export const CA_FORMS: FormSpec[] = [
     displayName: "Schedule D-1",
     relativeDir: "state/ca/schedule-d-1",
     register: registerScheduleD1,
+    // More properties than a part holds: "use additional forms" (schedule-d-1/copies.ts).
+    copies: {
+      count: (info) => scheduleD1CopyCount(info?.scheduleD1),
+      select: (info, index) => info && { ...info, scheduleD1CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "schedule-d-540nr",

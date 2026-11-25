@@ -34,7 +34,8 @@ export interface CaliforniaSale {
 
 export interface Line1Row {
   description: string;
-  salesPrice: number;
+  /* Blank on the Schedule D-1 row, which carries only a gain. */
+  salesPrice: number | undefined;
   basis: number | undefined;
   /* Column (d) when (c) is more than (b); column (e) when (b) is more than (c). */
   loss: number | undefined;
@@ -51,6 +52,31 @@ export interface ScheduleDCaInputs {
   /* Line 6 waits for the taxpayer's answer: lines 7 to 11 wait with it. */
   californiaCarryoverMissing: boolean;
   filingStatus: FilingStatus | undefined;
+  /* California's section 1231 gain from Schedule D-1 line 7 or 9; undefined when none. */
+  section1231Gain?: number;
+  /* The Schedule D-1 gain waits for its line 8 answer: the totals wait with it. */
+  section1231Waits?: boolean;
+  /* Why the Schedule D-1 gain is not figured: the totals are a gap. */
+  section1231Gap?: string;
+}
+
+/* The Schedule D-1 row of line 1: its gain in column (e). */
+export const SECTION_1231_ROW = "Schedule D-1, net section 1231 gain";
+
+/*
+ * "Forms 540 and 540NR filers, enter the gain on Schedule D (540 or 540NR), line
+ * 1" (Schedule D-1, the text under lines 7 and 9). The gain is already net of its
+ * basis, so columns (b) to (d) stay blank.
+ */
+export function section1231Row(gain: number): Line1Row {
+  return {
+    description: SECTION_1231_ROW,
+    salesPrice: undefined,
+    basis: undefined,
+    loss: undefined,
+    gain,
+    gap: undefined,
+  };
 }
 
 export interface ScheduleDCaFigures {
@@ -121,11 +147,14 @@ export function adjustment(
 
 /* Lines 1 to 9 and 11. Line 2 stays blank: the engine has no K-1 fact. */
 export function scheduleDCaFigures(inputs: ScheduleDCaInputs): ScheduleDCaFigures {
-  const line1 = inputs.sales.map(line1Row);
-  const gap = line1.find((row) => row.gap !== undefined)?.gap;
+  const saleRows = inputs.sales.map(line1Row);
+  const gain = inputs.section1231Gain;
+  const line1 = gain !== undefined && gain > 0 ? [...saleRows, section1231Row(gain)] : saleRows;
+  const gap = line1.find((row) => row.gap !== undefined)?.gap ?? inputs.section1231Gap;
   const line3 = roundDollars(inputs.capitalGainDistributions);
   const line6 = roundDollars(inputs.californiaCarryover);
-  const rowsWait = line1.some((row) => row.basis === undefined);
+  const rowsWait =
+    saleRows.some((row) => row.basis === undefined) || inputs.section1231Waits === true;
   const line4 = rowsWait ? undefined : sumOrBlank(...line1.map((row) => row.gain), line3);
   const line5 = rowsWait ? undefined : sumOrBlank(...line1.map((row) => row.loss));
   const waiting = rowsWait || inputs.californiaCarryoverMissing;
