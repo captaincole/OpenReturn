@@ -41,7 +41,12 @@ const carriedLosses: { [K in keyof K1CarriedLosses]-?: z.ZodType<K1CarriedLosses
     .describe(
       "S corporation: losses the basis limit held back, by item, positive amounts: last year's Form 7203 Part III column (e)",
     ),
-  atRisk: amount.optional().describe("Loss held back by the at-risk limit (last year's Form 6198)"),
+  atRisk: z
+    .object(basisLosses)
+    .optional()
+    .describe(
+      "Losses the at-risk limit held back (last year's Form 6198), by item, positive amounts: a box 1 loss is ordinaryBusinessLoss",
+    ),
   passive: amount.optional().describe("Prior-year unallowed passive loss (last year's Form 8582)"),
 };
 
