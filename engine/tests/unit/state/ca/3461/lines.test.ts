@@ -48,22 +48,31 @@ describe("line 3 split (::line-11::b01 note, ::line-10::b01)", () => {
     expect(capitalSplit(-3000, 4000)).toEqual({ nonbusinessGain: 0, nonbusinessLoss: 3000 });
   });
 
-  it("a gain: the business gain counts up to the line 3 gain, the rest goes on line 10", () => {
+  it("a gain: the whole business net is business, the rest goes on line 10 or 11", () => {
     expect(capitalSplit(25000, 0)).toEqual({ nonbusinessGain: 25000, nonbusinessLoss: 0 });
     expect(capitalSplit(25000, 10000)).toEqual({ nonbusinessGain: 15000, nonbusinessLoss: 0 });
-    expect(capitalSplit(25000, 40000)).toEqual({ nonbusinessGain: 0, nonbusinessLoss: 0 });
-    expect(capitalSplit(25000, -5000)).toEqual({ nonbusinessGain: 25000, nonbusinessLoss: 0 });
+  });
+
+  it("a gain with a business capital loss: line 10 takes the whole nonbusiness gain (no CARES cap)", () => {
+    // A $5,000 business loss and a $15,000 investment gain: line 3 is $10,000.
+    expect(capitalSplit(10000, -5000)).toEqual({ nonbusinessGain: 15000, nonbusinessLoss: 0 });
+    expect(capitalSplit(25000, -5000)).toEqual({ nonbusinessGain: 30000, nonbusinessLoss: 0 });
+  });
+
+  it("a gain with a business gain above it: the nonbusiness loss goes on line 11 (no CARES cap)", () => {
+    // A $20,000 business gain and a $5,000 investment loss: line 3 is $15,000.
+    expect(capitalSplit(15000, 20000)).toEqual({ nonbusinessGain: 0, nonbusinessLoss: 5000 });
+    expect(capitalSplit(25000, 40000)).toEqual({ nonbusinessGain: 0, nonbusinessLoss: 15000 });
   });
 
   it("a blank line 3 splits into nothing", () => {
     expect(capitalSplit(undefined, -5000)).toEqual({ nonbusinessGain: 0, nonbusinessLoss: 0 });
   });
 
-  it("the business part and the nonbusiness part add up to line 3", () => {
+  it("a loss: the business part is never larger than line 3", () => {
     for (const [line3, business] of [
       [-3000, -1000],
       [-2000, -5000],
-      [25000, 10000],
       [-1500, 0],
     ]) {
       const split = capitalSplit(line3, business);

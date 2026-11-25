@@ -280,6 +280,10 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 30. Enter the larger of the amount on line 29 or your standard deduction shown below:
       "schedule-ca.5.page2.total_itemized_30_standard_or_itemized": 5706,
     },
+    // Line 8z: the label FTB requires with the carryover (ca-3461-inst-2025::sec::line-15::b01).
+    renderedText: {
+      "schedule-ca.1.line.b8z_income_type": "excess business losses carryover from prior years",
+    },
   },
   "form-3461": {
     engineFields: {

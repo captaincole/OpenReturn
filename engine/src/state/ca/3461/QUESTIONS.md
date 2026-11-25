@@ -29,8 +29,13 @@ sorting of business and nonbusiness amounts.
    line 11. Default: the business part is the stated
    `business_loss_limit.business_capital_gain`, the federal amount; it has
    the sign of line 3 and is never larger (`lines.ts`, `capitalSplit`). The
-   note is read for any loss on line 3, limited or not. For a gain, the
-   federal cap applies. Dollars: yes, when the California business capital
+   note is read for any loss on line 3, limited or not. For a gain (or 0),
+   the business part is the whole stated business net, gain or loss: the
+   federal cap at capital gain net income (irs-461-inst-2025::sec::line-3::b01)
+   is a CARES Act rule, and "California does not conform to those
+   amendments" (::excess-business-loss-limitation::b01). A $5,000 business
+   capital loss and a $15,000 investment gain put $15,000 on line 10, not
+   $10,000 (changed 2026-11-24 after the tax review). Dollars: yes, when the California business capital
    amount differs from the federal one, or for a loss line 3 that is not
    limited.
 4. **Using the carryover against business income.** Line 14b: "If you have
@@ -54,8 +59,10 @@ sorting of business and nonbusiness amounts.
    to carryover" (::line-16::b01), which reads as $100,000 used and $400,000
    carried, but the form's own sum on line 16 carries $87,000. The blind fill
    (2026-11-24) took the line 14b words: line 8z column B $100,000, not the
-   engine's $413,000, with line 16 at $87,000. A person decides; the
-   difference here is $313,000 of California AGI.
+   engine's $413,000, with line 16 at $87,000. The tax review (2026-11-24)
+   read it the same way as the blind fill. A person decides; the
+   difference here is $313,000 of California AGI. No scenario reaches it:
+   nisao has a business loss on line 14a.
 5. **"Included as income in prior years".** Line 17 subtracts "the excess
    business loss adjustment amount included as income in prior years"
    (::line-17::b01). The text does not say whether an amount already used in

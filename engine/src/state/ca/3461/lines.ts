@@ -53,25 +53,26 @@ export interface CaCapitalSplit {
 }
 
 /*
- * Line 3 split into a business part and the rest. The business part has the
- * sign of line 3 and is never larger than it.
+ * Line 3 split into a business part and the rest.
  * - A loss: "If the loss from your trade or business is less than ($3,000),
  *   enter the difference between ($3,000) and your trade or business loss. Do
  *   not enter any loss amount on this line ... if the loss from your trade or
  *   business is equal to or greater than ($3,000)" (::line-11::b01). Read for
- *   any loss on line 3, limited or not.
- * - A gain: line 10 takes "income or gain ... not from a trade or business"
- *   (::line-10::b01); the business part counts only up to the gain, as on
- *   federal Form 461 (irs-461-inst-2025::sec::line-3::b01).
+ *   any loss on line 3, limited or not: the business part has the sign of
+ *   line 3 and is never larger than it.
+ * - A gain (or 0): line 10 takes the "income or gain ... not from a trade or
+ *   business" and line 11 the losses (::line-10::b01, ::line-11::b01). The
+ *   business part is the whole business net, gain or loss. Federal Form 461
+ *   caps a business gain at capital gain net income
+ *   (irs-461-inst-2025::sec::line-3::b01), a CARES Act rule; "California does
+ *   not conform to those amendments"
+ *   (ca-3461-inst-2025::sec::excess-business-loss-limitation::b01).
  * businessNet is the stated net gain or loss from business capital assets.
  */
 export function capitalSplit(line3: number | undefined, businessNet: number): CaCapitalSplit {
-  const reported = line3 ?? 0;
-  const businessPart =
-    reported < 0
-      ? Math.max(reported, Math.min(0, businessNet))
-      : Math.min(reported, atLeast(0, businessNet));
-  const rest = reported - businessPart;
+  if (line3 === undefined) return { nonbusinessGain: 0, nonbusinessLoss: 0 };
+  const businessPart = line3 < 0 ? Math.max(line3, Math.min(0, businessNet)) : businessNet;
+  const rest = line3 - businessPart;
   return { nonbusinessGain: atLeast(0, rest), nonbusinessLoss: atLeast(0, 0 - rest) };
 }
 
