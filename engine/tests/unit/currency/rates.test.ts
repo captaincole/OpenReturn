@@ -4,7 +4,7 @@
  * - H.10 history pages (https://www.federalreserve.gov/releases/h10/hist/),
  *   dat00_eu.htm, dat00_uk.htm, dat00_al.htm, dat00_nz.htm, dat00_ja.htm,
  *   dat00_sz.htm, dat00_no.htm;
- * - G.5A, release of January 5, 2026 (https://www.federalreserve.gov/releases/g5a/current/);
+ * - the IRS "Yearly average currency exchange rates" page, the 2025 column;
  * - the Treasury Reporting Rates of Exchange as of December 31, 2025.
  */
 
@@ -74,17 +74,22 @@ describe("the H.10 daily table", () => {
   });
 });
 
-describe("the G.5A yearly averages", () => {
-  it("holds the 2025 averages, turned around for an asterisk currency", () => {
-    expect(found(yearlyAverageRate("EUR", 2025)).printed).toBe("1.1306");
-    expect(dollarsFor(100, yearlyAverageRate("EUR", 2025))).toBe(113.06);
-    expect(found(yearlyAverageRate("NOK", 2025)).printed).toBe("10.3852");
-    expect(dollarsFor(1000, yearlyAverageRate("NOK", 2025))).toBe(96.29);
-    expect(found(yearlyAverageRate("CHF", 2025)).printed).toBe("0.8305");
-    expect(found(yearlyAverageRate("GBP", 2025)).printed).toBe("1.3192");
+describe("the IRS yearly averages", () => {
+  it("holds the 2025 averages as printed: units for one dollar, every currency", () => {
+    expect(found(yearlyAverageRate("EUR", 2025)).printed).toBe("0.886");
+    expect(dollarsFor(886, yearlyAverageRate("EUR", 2025))).toBe(1000);
+    expect(found(yearlyAverageRate("GBP", 2025)).printed).toBe("0.759");
+    expect(found(yearlyAverageRate("NOK", 2025)).printed).toBe("10.392");
+    expect(dollarsFor(1000, yearlyAverageRate("NOK", 2025))).toBe(96.23); // 1,000 / 10.392
+    expect(found(yearlyAverageRate("CHF", 2025)).printed).toBe("0.831");
+    expect(found(yearlyAverageRate("KRW", 2025)).printed).toBe("1421.779");
   });
 
-  it("refuses a currency outside the list", () => {
+  it("has no average for the three the IRS table lacks, nor for a year it lacks", () => {
+    for (const code of ["MYR", "LKR", "VES"]) {
+      expect(yearlyAverageRate(code, 2025).ok, code).toBe(false);
+    }
+    expect(yearlyAverageRate("EUR", 2024).ok).toBe(false);
     expect(yearlyAverageRate("ARS", 2025).ok).toBe(false);
   });
 });

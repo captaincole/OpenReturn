@@ -4,11 +4,12 @@
  * - the H.10 history pages (https://www.federalreserve.gov/releases/h10/hist/):
  *   one page for 2000 to the present (dat00_<page>.htm), one for 1990-99
  *   (dat96_), one through 1989 (dat89_);
- * - the G.5A annual release, a row named by its COUNTRY column;
+ * - the IRS yearly average table, a row named by its Country column;
  * - the Treasury Reporting Rates of Exchange, a `country_currency_desc`.
  *
- * H.10 and G.5A print "currency units per U.S. dollar except as noted by an
- * asterisk"; the four with the asterisk print U.S. dollars per unit.
+ * H.10 prints "currency units per U.S. dollar except as noted by an
+ * asterisk"; the four with the asterisk print U.S. dollars per unit. The IRS
+ * and the Treasury print units per dollar for every currency.
  */
 
 export type Quote = "units_per_dollar" | "dollars_per_unit";
@@ -18,9 +19,14 @@ export interface CurrencySource {
   code: string;
   /* The H.10 history page's suffix: "eu" for dat00_eu.htm. */
   h10Page: string;
-  /* The G.5A COUNTRY column, without the asterisk. */
-  g5aCountry: string;
+  /* How H.10 prints it. */
   quote: Quote;
+  /*
+   * The IRS table's Country column. Absent: the IRS table has no average for
+   * the currency. It lists no Malaysia and no Sri Lanka, and its Venezuela row
+   * is the "Bolivar (Fuerte)", not the unit of the H.10 and Treasury series.
+   */
+  irsCountry?: string;
   treasury: string;
   /*
    * The first day the H.10 series is in today's unit. Venezuela's series
@@ -38,42 +44,43 @@ export interface CurrencySource {
 const units = (
   code: string,
   h10Page: string,
-  g5aCountry: string,
+  irsCountry: string | undefined,
   treasury: string,
-): CurrencySource => ({ code, h10Page, g5aCountry, quote: "units_per_dollar", treasury });
+): CurrencySource => ({ code, h10Page, irsCountry, quote: "units_per_dollar", treasury });
 
 const dollars = (
   code: string,
   h10Page: string,
-  g5aCountry: string,
+  irsCountry: string,
   treasury: string,
-): CurrencySource => ({ code, h10Page, g5aCountry, quote: "dollars_per_unit", treasury });
+): CurrencySource => ({ code, h10Page, irsCountry, quote: "dollars_per_unit", treasury });
 
 export const CURRENCY_SOURCES: CurrencySource[] = [
-  dollars("AUD", "al", "AUSTRALIA", "Australia-Dollar"),
-  { ...units("BRL", "bz", "BRAZIL", "Brazil-Real"), noPageBefore1990: true },
-  units("CAD", "ca", "CANADA", "Canada-Dollar"),
-  units("CNY", "ch", "CHINA, P.R.", "China-Renminbi"),
-  units("DKK", "dn", "DENMARK", "Denmark-Krone"),
-  { ...dollars("EUR", "eu", "EMU MEMBERS", "Euro Zone-Euro"), noPageBefore1990: true },
-  units("HKD", "hk", "HONG KONG", "Hong Kong-Dollar"),
-  units("INR", "in", "INDIA", "India-Rupee"),
-  units("JPY", "ja", "JAPAN", "Japan-Yen"),
-  units("MYR", "ma", "MALAYSIA", "Malaysia-Ringgit"),
-  { ...units("MXN", "mx", "MEXICO", "Mexico-Peso"), noPageBefore1990: true },
-  dollars("NZD", "nz", "NEW ZEALAND", "New Zealand-Dollar"),
-  units("NOK", "no", "NORWAY", "Norway-Krone"),
-  units("SGD", "si", "SINGAPORE", "Singapore-Dollar"),
-  units("ZAR", "sf", "SOUTH AFRICA", "South Africa-Rand"),
-  units("KRW", "ko", "SOUTH KOREA", "Korea-Won"),
-  units("LKR", "sl", "SRI LANKA", "Sri Lanka-Rupee"),
-  units("SEK", "sd", "SWEDEN", "Sweden-Krona"),
-  units("CHF", "sz", "SWITZERLAND", "Switzerland-Franc"),
-  units("TWD", "ta", "TAIWAN", "Taiwan-Dollar"),
-  units("THB", "th", "THAILAND", "Thailand-Baht"),
-  dollars("GBP", "uk", "UNITED KINGDOM", "United Kingdom-Pound"),
+  dollars("AUD", "al", "Australia", "Australia-Dollar"),
+  { ...units("BRL", "bz", "Brazil", "Brazil-Real"), noPageBefore1990: true },
+  units("CAD", "ca", "Canada", "Canada-Dollar"),
+  units("CNY", "ch", "China", "China-Renminbi"),
+  units("DKK", "dn", "Denmark", "Denmark-Krone"),
+  { ...dollars("EUR", "eu", "Euro Zone", "Euro Zone-Euro"), noPageBefore1990: true },
+  units("HKD", "hk", "Hong Kong", "Hong Kong-Dollar"),
+  units("INR", "in", "India", "India-Rupee"),
+  units("JPY", "ja", "Japan", "Japan-Yen"),
+  units("MYR", "ma", undefined, "Malaysia-Ringgit"),
+  { ...units("MXN", "mx", "Mexico", "Mexico-Peso"), noPageBefore1990: true },
+  dollars("NZD", "nz", "New Zealand", "New Zealand-Dollar"),
+  units("NOK", "no", "Norway", "Norway-Krone"),
+  units("SGD", "si", "Singapore", "Singapore-Dollar"),
+  units("ZAR", "sf", "South Africa", "South Africa-Rand"),
+  // The IRS table prints "South Korean".
+  units("KRW", "ko", "South Korean", "Korea-Won"),
+  units("LKR", "sl", undefined, "Sri Lanka-Rupee"),
+  units("SEK", "sd", "Sweden", "Sweden-Krona"),
+  units("CHF", "sz", "Switzerland", "Switzerland-Franc"),
+  units("TWD", "ta", "Taiwan", "Taiwan-Dollar"),
+  units("THB", "th", "Thailand", "Thailand-Baht"),
+  dollars("GBP", "uk", "United Kingdom", "United Kingdom-Pound"),
   {
-    ...units("VES", "ve", "VENEZUELA", "Venezuela-Bolivar Soberano"),
+    ...units("VES", "ve", undefined, "Venezuela-Bolivar Soberano"),
     firstDay: "2021-10-04",
     noPageBefore1990: true,
   },
@@ -93,7 +100,8 @@ export const H10_PAGE_SETS = [
   { prefix: "dat89_", century: 1900, years: [1900, 1989], before1990: true },
 ] as const;
 
-export const G5A_BASE = "https://www.federalreserve.gov/releases/g5a/";
+export const IRS_YEARLY_AVERAGES =
+  "https://www.irs.gov/individuals/international-taxpayers/yearly-average-currency-exchange-rates";
 
 export const TREASURY_API =
   "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/rates_of_exchange";

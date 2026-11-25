@@ -4,17 +4,17 @@
  * data/exchange-rates/ (each file names its source pages and the day of
  * download). The engine only reads them.
  * - dailyRate: the Federal Reserve Board's H.10 noon buying rate of a day.
- * - yearlyAverageRate: the Board's G.5A annual average of those rates.
+ * - yearlyAverageRate: the IRS yearly average of a tax year.
  * - yearEndRate: the Treasury Reporting Rate of Exchange on December 31 of a
  *   tax year, the rate the Form 8938 instructions name
  *   (irs-8938-inst-2025::sec::foreign-currency-conversion::b01).
- * Every rate comes out as UnitsPerDollar (money.ts): H.10 and G.5A print four
- * currencies the other way (U.S. dollars for one unit), and the tables turn
- * them around here, the one place that knows how each is printed.
+ * Every rate comes out as UnitsPerDollar (money.ts): H.10 prints four
+ * currencies the other way (U.S. dollars for one unit), and the table is
+ * turned around here, the one place that knows how each is printed.
  */
 
-import g5aAverages from "../data/exchange-rates/g5a-yearly-averages.json" with { type: "json" };
 import h10Daily from "../data/exchange-rates/h10-daily.json" with { type: "json" };
+import irsAverage2025 from "../data/exchange-rates/irs-yearly-average-2025.json" with { type: "json" };
 import treasury2025 from "../data/exchange-rates/treasury-year-end-2025.json" with { type: "json" };
 import type { UnitsPerDollar } from "../money.js";
 import { unsupportedCurrencyReason } from "./currencies.js";
@@ -30,9 +30,8 @@ interface DailyCurrency {
 }
 
 const DAILY = h10Daily as unknown as { currencies: Record<string, DailyCurrency> };
-const AVERAGES = g5aAverages as unknown as {
-  quotes: Record<string, Quote>;
-  years: Record<string, Record<string, string>>;
+const YEARLY_AVERAGE: Record<number, { rates: Record<string, string> }> = {
+  2025: irsAverage2025,
 };
 const YEAR_END: Record<number, { recordDate: string; rates: Record<string, string> }> = {
   2025: treasury2025,
@@ -76,13 +75,15 @@ function entryOf(code: string, currency: DailyCurrency, isoDay: string): string 
 }
 
 /*
- * DECISION (2026-11-24): the source of daily rates is the Federal Reserve
- * Board's H.10 release, and only its 23 currencies are supported. Text: "The
- * Internal Revenue Service has no official exchange rate. Generally, it
- * accepts any posted exchange rate that is used consistently" (irs.gov
- * "Yearly average currency exchange rates"); it names no source. The engine
- * follows H.10, because one public source from a U.S. authority makes every
- * return repeatable.
+ * DECISION (2026-11-24): the daily rate comes from the Federal Reserve Board's
+ * H.10 release, and only its 23 currencies are supported; the yearly average
+ * comes from the IRS's own table. Texts: "The Internal Revenue Service has no
+ * official exchange rate. Generally, it accepts any posted exchange rate that
+ * is used consistently", and the same page publishes the yearly average table
+ * (irs.gov "Yearly average currency exchange rates"); no source is named for
+ * a day's rate. The engine follows H.10 for days and the IRS table for years,
+ * one source for each kind of rate, because public sources from U.S.
+ * authorities make every return repeatable.
  *
  * DECISION (2026-11-24): a day with no published rate (a weekend, a U.S.
  * holiday, "ND") takes the last earlier day that has one. No IRS text states
@@ -114,22 +115,19 @@ export function dailyRate(code: string, isoDay: string): RateLookup {
   return gap(`The H.10 release has no ${code} rate on or before ${isoDay}.`);
 }
 
-/* The G.5A average of a year's daily H.10 rates. */
+/*
+ * The IRS yearly average of a tax year (units per dollar). The IRS table lacks
+ * three of the 23 for 2025 (Malaysia, Sri Lanka, Venezuela): no average.
+ */
 export function yearlyAverageRate(code: string, year: number): RateLookup {
-  const quote = AVERAGES.quotes[code];
-  if (quote === undefined) return gap(unsupportedCurrencyReason(code));
-  const printed = AVERAGES.years[String(year)]?.[code];
+  const table = YEARLY_AVERAGE[year];
+  if (table === undefined) return gap(`The engine has no IRS yearly averages for ${year}.`);
+  const printed = table.rates[code];
   if (printed === undefined) {
-    return gap(`The engine's G.5A table has no ${code} average for ${year}.`);
+    return gap(`The IRS yearly average table has no ${code} average for ${year}.`);
   }
-  const rate = unitsPerDollar(printed, quote);
-  return {
-    ok: true,
-    rate,
-    printed,
-    day: String(year),
-    source: `Federal Reserve G.5A, ${year} average`,
-  };
+  const rate = unitsPerDollar(printed, "units_per_dollar");
+  return { ok: true, rate, printed, day: String(year), source: `IRS yearly average, ${year}` };
 }
 
 /* The Treasury Reporting Rate of Exchange on the last day of the tax year (units per dollar). */

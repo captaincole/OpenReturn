@@ -1,0 +1,33 @@
+{
+  "note": "The IRS yearly average currency exchange rates for the tax year, as the IRS page prints them: units of the currency for one U.S. dollar. notInTable: the H.10 currencies the IRS table lacks.",
+  "taxYear": 2025,
+  "source": "https://www.irs.gov/individuals/international-taxpayers/yearly-average-currency-exchange-rates",
+  "downloadedOn": "2026-11-25",
+  "rates": {
+    "AUD": "1.551",
+    "BRL": "5.593",
+    "CAD": "1.398",
+    "CNY": "7.129",
+    "DKK": "6.617",
+    "EUR": "0.886",
+    "HKD": "7.796",
+    "INR": "87.133",
+    "JPY": "149.632",
+    "MXN": "19.212",
+    "NZD": "1.719",
+    "NOK": "10.392",
+    "SGD": "1.307",
+    "ZAR": "17.884",
+    "KRW": "1421.779",
+    "SEK": "9.813",
+    "CHF": "0.831",
+    "TWD": "31.167",
+    "THB": "32.870",
+    "GBP": "0.759"
+  },
+  "notInTable": [
+    "MYR",
+    "LKR",
+    "VES"
+  ]
+}

@@ -1,27 +1,26 @@
 /*
  * Builds the engine's three exchange-rate tables from the official pages:
  * - the H.10 daily rates, the whole history of each of the 23 currencies;
- * - the G.5A yearly averages, from each release that prints a table;
+ * - the IRS yearly averages of a tax year;
  * - the Treasury Reporting Rates of Exchange on the last day of a tax year.
  * Each downloaded page is cached in the repository's .scratch/ (never
  * committed). The pages are untrusted input: parsed as data, checked against
  * values typed by hand from the published pages (spotChecks.ts).
  */
 
-import { load } from "cheerio";
 import { fetchHtml } from "../fetchHtml.js";
 import {
   CURRENCY_SOURCES,
-  G5A_BASE,
   H10_HISTORY_BASE,
   H10_PAGE_SETS,
+  IRS_YEARLY_AVERAGES,
   TREASURY_API,
   type CurrencySource,
   type Quote,
 } from "./currencySources.js";
 import { dailyYears, type DailyYears } from "./dailyYears.js";
-import { parseG5a, type G5aRow } from "./parseG5a.js";
 import { parseH10History, type H10Rows } from "./parseH10History.js";
+import { parseIrsYearlyAverages } from "./parseIrsYearlyAverages.js";
 
 export interface FetchOptions {
   cacheDir: string;
@@ -94,61 +93,30 @@ export async function buildDailyTable(options: FetchOptions): Promise<DailyTable
 }
 
 export interface AverageTable {
+  taxYear: number;
+  source: string;
   downloadedOn: string;
-  releases: string[];
-  /* Year → currency code → the average as printed. */
-  years: Record<string, Record<string, string>>;
-  quotes: Record<string, Quote>;
+  /* Code → units of the currency per U.S. dollar, as printed. A currency the IRS table lacks is absent. */
+  rates: Record<string, string>;
+  /* The codes of the 23 that the IRS table lacks for the year. */
+  notInTable: string[];
 }
 
-/* The release pages the G.5A index lists ("20250106/"), newest first, and the current one. */
-async function releaseUrls(options: FetchOptions): Promise<string[]> {
-  const index = await page(`${G5A_BASE}default.htm`, "g5a-default.htm", options);
-  const dom = load(index.html);
-  const dated = dom("a")
-    .map((_, link) => dom(link).attr("href") ?? "")
-    .get()
-    .map((href) => (href.endsWith("/") ? href.slice(0, -1) : href))
-    .filter((href) => href.length === 8 && [...href].every((char) => "0123456789".includes(char)))
-    .sort()
-    .reverse();
-  return [`${G5A_BASE}current/`, ...dated.map((date) => `${G5A_BASE}${date}/`)];
-}
-
-function addRelease(table: AverageTable, rows: G5aRow[]) {
+/* The IRS yearly average table for one tax year, for the currencies the table lists. */
+export async function buildAverageTable(
+  taxYear: number,
+  options: FetchOptions,
+): Promise<AverageTable> {
+  const { html, fetchedOn } = await page(IRS_YEARLY_AVERAGES, "irs-yearly-averages.htm", options);
+  const rows = parseIrsYearlyAverages(html, taxYear);
+  const rates: Record<string, string> = {};
+  const notInTable: string[] = [];
   for (const source of CURRENCY_SOURCES) {
-    const row = rows.find((candidate) => candidate.country === source.g5aCountry);
-    if (row === undefined) continue;
-    if ((source.quote === "dollars_per_unit") !== row.dollarsPerUnit) {
-      throw new Error(`G.5A ${source.code}: the asterisk does not match H.10`);
-    }
-    for (const [year, average] of row.averages) {
-      // A year that begins before the series' unit does mixes two units (Venezuela).
-      if (source.firstDay !== undefined && `${year}-01-01` < source.firstDay) continue;
-      const byCode = (table.years[String(year)] ??= {});
-      // The newest release that prints a year wins: releases are read newest first.
-      byCode[source.code] ??= average;
-    }
+    const row = rows.find((candidate) => candidate.country === source.irsCountry);
+    if (row === undefined) notInTable.push(source.code);
+    else rates[source.code] = row.average;
   }
-}
-
-export async function buildAverageTable(options: FetchOptions): Promise<AverageTable> {
-  const quotes = Object.fromEntries(CURRENCY_SOURCES.map((source) => [source.code, source.quote]));
-  const table: AverageTable = { downloadedOn: "", releases: [], years: {}, quotes };
-  const fetched: string[] = [];
-  for (const url of await releaseUrls(options)) {
-    const file = `g5a-${url.slice(G5A_BASE.length, -1)}.htm`;
-    const { html, fetchedOn } = await page(url, file, options);
-    fetched.push(fetchedOn);
-    const rows = parseG5a(html);
-    if (rows === null) {
-      options.log(`skipped ${url}: no table (preformatted text)`);
-      continue;
-    }
-    table.releases.push(url);
-    addRelease(table, rows);
-  }
-  return { ...table, downloadedOn: earliest(fetched) };
+  return { taxYear, source: IRS_YEARLY_AVERAGES, downloadedOn: fetchedOn, rates, notInTable };
 }
 
 export interface YearEndTable {

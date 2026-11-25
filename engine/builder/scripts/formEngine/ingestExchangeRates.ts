@@ -3,7 +3,8 @@
  * (engine/src/currency/), into engine/src/data/exchange-rates/:
  * - h10-daily.json: every daily rate of the 23 currencies of the Federal
  *   Reserve Board's H.10 release, from its history pages;
- * - g5a-yearly-averages.json: the G.5A annual averages of the same currencies;
+ * - irs-yearly-average-<year>.json: the IRS yearly average rates of the tax
+ *   year, for the currencies of the 23 that the IRS table lists;
  * - treasury-year-end-<year>.json: the Treasury Reporting Rates of Exchange
  *   on December 31 of the tax year (Form 8938).
  * The pages are cached in the repository's .scratch/exchange-rates/ and read
@@ -20,7 +21,7 @@ import {
   buildYearEndTable,
   type FetchOptions,
 } from "../../src/tables/exchangeRates/buildTables.js";
-import { G5A_BASE, H10_HISTORY_BASE } from "../../src/tables/exchangeRates/currencySources.js";
+import { H10_HISTORY_BASE } from "../../src/tables/exchangeRates/currencySources.js";
 import {
   checkAverages,
   checkDaily,
@@ -37,8 +38,8 @@ const outDir = () => path.join(engineSrcDir, "data", "exchange-rates");
 const H10_NOTE =
   "Noon buying rates in New York for cable transfers payable in foreign currencies, as the history pages print them. Each year is one string: one entry per calendar day from January 1, separated by commas; an empty entry is a day with no rate (a weekend, a holiday, ND). quote: units_per_dollar is units of the currency for one U.S. dollar; dollars_per_unit (the release's asterisk) is U.S. dollars for one unit.";
 
-const G5A_NOTE =
-  "Annual averages of the daily noon buying rates, as each G.5A release prints them; a year takes the newest release that prints it. quote as in h10-daily.json.";
+const IRS_NOTE =
+  "The IRS yearly average currency exchange rates for the tax year, as the IRS page prints them: units of the currency for one U.S. dollar. notInTable: the H.10 currencies the IRS table lacks.";
 
 const TREASURY_NOTE =
   "Treasury Reporting Rates of Exchange (Bureau of the Fiscal Service), the rate in effect on the record date: units of the currency for one U.S. dollar.";
@@ -74,19 +75,9 @@ async function writeTable(table: Table, year: number, options: FetchOptions): Pr
     return;
   }
   if (table === "averages") {
-    const averages = await buildAverageTable(options);
+    const averages = await buildAverageTable(year, options);
     refuseOnFailures(checkAverages(averages));
-    const { downloadedOn, releases, quotes, years } = averages;
-    await writeJson("g5a-yearly-averages.json", {
-      release:
-        "G.5A Foreign Exchange Rates (Annual), Board of Governors of the Federal Reserve System",
-      source: G5A_BASE,
-      downloadedOn,
-      note: G5A_NOTE,
-      releases,
-      quotes,
-      years,
-    });
+    await writeJson(`irs-yearly-average-${year}.json`, { note: IRS_NOTE, ...averages });
     return;
   }
   const yearEnd = await buildYearEndTable(year, options);
@@ -122,10 +113,13 @@ async function run(argv: string[]): Promise<void> {
 
 export const ingestExchangeRatesCommand: Command = {
   name: "ingest-exchange-rates",
-  summary: "refresh the H.10 daily, G.5A average and Treasury year-end exchange-rate tables",
+  summary: "refresh the H.10 daily, IRS yearly average and Treasury year-end exchange-rate tables",
   options: [
     { flag: "--only <table>", desc: "one table: daily, averages or year-end" },
-    { flag: "--year <year>", desc: "the tax year of the Treasury year-end table (default 2025)" },
+    {
+      flag: "--year <year>",
+      desc: "the tax year of the IRS average and Treasury year-end tables (default 2025)",
+    },
     { flag: "--refresh", desc: "download the pages again instead of reading the cache" },
   ],
   run,
