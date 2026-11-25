@@ -53,7 +53,9 @@ Each item is a place where the form and its instructions do not settle a rule. I
 
 - Text: line 9 worksheet lines G and M, line 10 worksheet line E: "Divide ..." with no rounding rule (::part-ii-tentative-tax-based-on-parent-s-tax-rate::b02 to ::b04).
 - Default: the ratios keep every digit; line I and the results (lines N and G) round to the dollar. Line A for a resident child is all of line 5.
-- Changes dollars: by a dollar or two against a preparer who rounds the ratios.
+- Another text: the Form 540NR booklet rounds a rate of the same kind on its own line 36: "the FTB rounds the tax rate to four digits after the decimal" (ca-540nr-booklet-2025::sec::line-36-ca-tax-rate::b01). That sentence governs Form 540NR line 36, not this worksheet, so the engine follows the FTB 3800 text (a form's own instructions decide how that form is filled).
+- Changes dollars: yes. Example (blind case 11): parent's Form 540NR line 31 $16,064 with $68 of FTB 3803 tax, line 19 $248,588, line 35 $124,294. Line 10 worksheet E unrounded gives line 10 = $7,998; E rounded to .0643 gives $7,992, so lines 11, 13, 16 and 18 are $6 higher. Line 9 worksheet M rounded to four places moves line 9 by about $2 (blind case 10: $9,352 against $9,350).
+- Note: with no FTB 3803 tax, line 10 is Form 540NR line 37 itself, which the FTB figures with the rounded line 36 rate. The two paths for line 10 can then differ by a few dollars for the same parent.
 - The worksheets are headed "Form 540NR Filers". The engine uses the line 9 and line 10 worksheets when the parent's fact names Form 540NR, because they read the parent's Form 540NR lines.
 
 ## 7. Who files: unearned income from facts
@@ -73,6 +75,18 @@ Each item is a place where the form and its instructions do not settle a rule. I
 - Text: line 1 includes "only ... income taxable by California" (::part-i-child-s-net-unearned-income::b01).
 - Note: Schedule CA line 2b column B (U.S. obligation interest) has no rule yet; Form 540 line 14 then misses it and line 1 is too high by that interest. This is Schedule CA's gap, not this form's. The karede scenario has no such interest.
 - Changes dollars: yes, for a child with Treasury interest, until Schedule CA line 2b has a rule.
+
+## 10. Line 14 when lines 4 and 5 are the same
+
+- Text: Part III heading on the blank form: "If the amounts on line 4 and line 5 above are the same, enter -0- on line 15 and go to line 16." The instructions add nothing (::part-iii-child-s-tax::b01).
+- Default: line 14 prints 0 (line 4 less line 5) and line 15 prints 0. The text names only line 15, so a preparer may leave line 14 blank. Federal Form 8615 has the same sentence, and the engine prints its line 14 as 0 too; one rule for both forms.
+- Changes dollars: no.
+
+## Second opinions
+
+- **Blind fill (2026-11-25).** A preparer filled 15 cases by hand from the blank form and the instructions. Every dollar amount matched the engine on every line. The only differences were line 14 in cases 2, 4, 5 and 6: blank against the engine's 0 (item 10). The preparer's rounding doubts for the Form 540NR worksheets are item 6.
+- **PolicyEngine-US 2.153.8 (commit b3edc04).** It does not model FTB 3800 or federal Form 8615: its California tax (`ca_income_tax_before_credits`) applies the rate schedule to the filer's own taxable income, with no tax at the parent's rate. Its 2025 California rate schedule (`parameters/gov/states/ca/tax/income/rates/`, single, separate, joint, head of household) has the same bracket thresholds and rates as `data/caRateSchedule.ts`, which lines 9, 15 and 17 use above $100,000. No disagreement.
+- **IRS Direct File.** Federal only; it has no California logic. Not compared.
 
 ## Proposals for a discussion
 
