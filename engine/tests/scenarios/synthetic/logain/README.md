@@ -6,7 +6,7 @@ He is a chip design engineer. In 2024 he exercised incentive stock options and s
 
 The scenario renders a filled Form 8801 with Parts I, II and III. Line 7 is above 0 (the 2024 exemption phases out), line 15 is above 0 (exclusion items alone give a minimum tax above his 2024 regular tax), and Part III runs every line through 52. The credit is limited by line 24, reaches Schedule 3 line 6b, and leaves a carryforward to 2026. Form 6251 files because Form 8801 does.
 
-Forms checked: Form 8801, Form 6251, Schedule 3, Form 8959, Form 8960, Schedule 2, Form 1040.
+Forms checked: Form 8801, Form 6251, Schedule 3, Schedule B, Form 8959, Form 8960, Schedule 2, Form 1040. Schedule B files because interest ($6,000) and ordinary dividends ($34,000) are each over $1,500. He exercised no options in 2025, so no 2025 spread is recorded and Form 6251 line 2i is blank.
 
 ## Inputs
 
@@ -61,6 +61,8 @@ Forms checked: Form 8801, Form 6251, Schedule 3, Form 8959, Form 8960, Schedule 
 | 8801 line 18 | 160,493 − 7,673 | 152,820 |
 | 8801 line 19 | 2024 Form 8801 line 26 | 12,000 |
 | 8801 line 21 | 152,820 + 12,000 (line 20 blank) | 164,820 |
+| Schedule B lines 1, 2, 4 | Lugard Savings Bank, 1099-INT box 1 | 6,000 |
+| Schedule B lines 5, 6 | Tanchico World Index Fund, 1099-DIV box 1a | 34,000 |
 | 1040 line 15 | 690,000 − 15,750 | 674,250 |
 | 1040 line 16 | 644,250 ordinary (37% bracket) + 30,000 at 20% | 201,393 |
 | 8801 line 22 | 201,393 + Schedule 2 line 1z (0) − Schedule 3 line 1 (250) | 201,143 |
