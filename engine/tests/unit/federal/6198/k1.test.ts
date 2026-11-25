@@ -145,7 +145,11 @@ describe("the at-risk stage with amounts not at risk", () => {
 });
 
 describe("a loss the at-risk limit carried from an earlier year", () => {
-  const carried = { ...OWNER, allInvestmentAtRisk: true, carriedLosses: { atRisk: 6000 } };
+  const carried = {
+    ...OWNER,
+    allInvestmentAtRisk: true,
+    carriedLosses: { atRisk: { ordinaryBusinessLoss: 6000 } },
+  };
 
   it("joins line 1 and shares the allowed loss in proportion (irs-6198-inst-2025::sec::part-i-2::b01)", () => {
     const entity = partnership([{ box: "1", amount: -40000 }], carried, {
@@ -173,6 +177,71 @@ describe("a loss the at-risk limit carried from an earlier year", () => {
   it("files Form 6198 even with all of the investment at risk now", () => {
     expect(needsForm6198(partnership([], carried), [])).toBe(true);
   });
+
+  it("keeps each carried item's kind: a section 179 deduction on line 4 (::part-i::b01, ::line-4::b01)", () => {
+    const byItem = {
+      ...OWNER,
+      carriedLosses: { atRisk: { ordinaryBusinessLoss: 1000, section179Deduction: 500 } },
+    };
+    const entity = partnership([{ box: "1", amount: -2000 }], byItem);
+    const outcome = figureK1Form6198(entity, entity.items);
+    if (outcome.kind !== "figured") throw new Error("expected figured");
+    expect([outcome.figures.partI.line1, outcome.figures.partI.line4]).toEqual([-3000, -500]);
+    const allowed = stage(entity);
+    if (allowed?.kind !== "applied") throw new Error("expected applied");
+    expect(allowed.allowed.map((item) => [item.type, item.amount, item.atRiskCarryover])).toEqual([
+      ["ordinary_business_income", -1000, true],
+      ["section_179_deduction", 500, true],
+      ["ordinary_business_income", -2000, undefined],
+    ]);
+  });
+});
+
+describe("recapture in a profit year (irs-6198-inst-2025::sec::line-5::b01)", () => {
+  const DISTRIBUTION: K1Box = { box: "19", code: "A", amount: 3000 };
+  const BELOW_ZERO: AtRiskAmounts = { simplified: { adjustedBasisAtStart: 1000, decreases: 3000 } };
+  /* The K-1 with no at-risk fact recorded. */
+  const unanswered = (entity: PassThroughEntity): PassThroughEntity => ({
+    ...entity,
+    atRisk: undefined,
+  });
+
+  it("waits on the amounts at risk when the K-1 shows a distribution", () => {
+    const entity = unanswered(partnership([{ box: "1", amount: 5000 }, DISTRIBUTION]));
+    expect(stage(entity)).toEqual({ kind: "waiting", factKeys: [AT_RISK_KEY] });
+  });
+
+  it("waits when the partner's share of recourse debt fell", () => {
+    const entity = unanswered(
+      partnership([{ box: "1", amount: 5000 }], OWNER, PART_II, {
+        liabilitiesAtStart: { recourse: 10000 },
+        liabilitiesAtEnd: { recourse: 2000 },
+      }),
+    );
+    expect(stage(entity)).toEqual({ kind: "waiting", factKeys: [AT_RISK_KEY] });
+  });
+
+  it("is a gap when the amounts at risk end below zero", () => {
+    const entity = partnership([{ box: "1", amount: 5000 }, DISTRIBUTION], OWNER, BELOW_ZERO);
+    const outcome = stage(entity);
+    expect(outcome?.kind === "unsupported" && outcome.reason).toContain("recaptured");
+  });
+
+  it("is a gap on Form 6198 too when a deduction files it with a profit", () => {
+    const boxes = [{ box: "1", amount: 5000 }, { box: "12", amount: 1000 }, DISTRIBUTION];
+    const entity = partnership(boxes, OWNER, BELOW_ZERO);
+    expect(needsForm6198(entity, entity.items)).toBe(true);
+    expect(figureK1Form6198(entity, entity.items).kind).toBe("unsupported");
+    const waiting = unanswered(entity);
+    expect(figureK1Form6198(waiting, waiting.items).kind).toBe("waiting");
+  });
+
+  it("allows everything when the amount at risk stays above zero, or nothing shows a decrease", () => {
+    const above = partnership([{ box: "1", amount: 5000 }, DISTRIBUTION]);
+    expect(stage(above)?.kind).toBe("applied");
+    const quiet = unanswered(partnership([{ box: "1", amount: 5000 }]));
+    expect(stage(quiet)?.kind).toBe("applied");
+  });
 });
 
 describe("cases the stage does not figure", () => {
@@ -198,6 +267,20 @@ describe("cases the stage does not figure", () => {
         { box: "4a", amount: 2000 },
       ]),
     ],
+    [
+      "investment interest expense (line 4 after Form 4952, irs-6198-inst-2025::sec::line-4::b01)",
+      partnership([
+        { box: "1", amount: -500 },
+        { box: "13", code: "H", amount: 200 },
+      ]),
+    ],
+    [
+      "a carried at-risk capital loss, which has no Part I line here",
+      partnership([{ box: "1", amount: -500 }], {
+        ...OWNER,
+        carriedLosses: { atRisk: { netLongTermCapitalLoss: 300 } },
+      }),
+    ],
   ])("reports %s as unsupported", (_, entity) => {
     expect(figureK1Form6198(entity, entity.items).kind).toBe("unsupported");
   });
@@ -221,6 +304,12 @@ describe("cases the stage does not figure", () => {
       priorYearItems: [],
     };
     expect(needsForm6198(entity, entity.items)).toBe(false);
+    const carried = {
+      ...entity,
+      items: [],
+      holding: { carriedLosses: { atRisk: { ordinaryBusinessLoss: 100 } } },
+    };
+    expect(stage(carried)?.kind).toBe("unsupported");
   });
 });
 

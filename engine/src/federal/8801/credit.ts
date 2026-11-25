@@ -7,6 +7,8 @@ import { atLeast, numberOrBlank, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { foreignTaxCreditGap } from "../1116/credit.js";
 import type { Form1116FilingInfo } from "../1116/filingInfo.js";
+import { dependentCareCreditGap } from "../2441/creditGap.js";
+import type { Form2441FilingInfo } from "../2441/filingInfo.js";
 import { line9Of } from "../6251/foreignTaxCredit.js";
 import { mortgageCreditGap, type CreditLimitInfo } from "../8396/creditGap.js";
 import { line6cFrom8839 } from "../8839/receivers.js";
@@ -26,7 +28,8 @@ export type Form8801CreditInfo = Form8801FilingInfo &
   CreditLimitInfo &
   Form8880FilingInfo &
   Form8863FilingInfo &
-  Form1116FilingInfo;
+  Form1116FilingInfo &
+  Form2441FilingInfo;
 
 /*
  * Line 22 subtracts these Schedule 3 lines: 1 through 6z but not 6b (this
@@ -53,8 +56,15 @@ const SCHEDULE_3_CREDITS = [
   "schedule-3.0.line.6z_amount",
 ] as const;
 
-/* Schedule 3 lines the engine has no rules for: while the form that feeds one files, line 22 would leave it out. */
+/*
+ * Schedule 3 lines the engine has no rules for: while the form that feeds one
+ * files, line 22 would leave it out. Line 5a is Form 5695 Part I, which the
+ * engine does not model (irs-1040-inst-2025::sec::line-5a-residential-clean-energy::b01);
+ * a Form 5695 on the return may claim it. Line 6z is left blank for 2025
+ * (irs-1040-inst-2025::sec::line-6z::b01).
+ */
 const UNCOMPUTED_CREDITS: ReadonlyArray<[formId: string, line: string]> = [
+  ["form-5695", "Schedule 3 line 5a (Form 5695 Part I, the residential clean energy credit)"],
   ["form-3800", "Schedule 3 line 6a (Form 3800)"],
   ["form-8859", "Schedule 3 line 6h (Form 8859)"],
   ["form-8834", "Schedule 3 line 6i (Form 8834)"],
@@ -62,7 +72,12 @@ const UNCOMPUTED_CREDITS: ReadonlyArray<[formId: string, line: string]> = [
   ["form-8978", "Schedule 3 line 6l (Form 8978)"],
 ];
 
-/* Why a credit line 22 subtracts is an engine gap; undefined when each is a number or blank. */
+/*
+ * Why a credit line 22 subtracts is an engine gap; undefined when each is a
+ * number or blank. Schedule 3 lines 5b and 6d and Form 1040 line 19 (Schedule
+ * 8812) have no gap of their own that blanks them: the Schedule 8812 one is the
+ * adoption credit below (irs-8801-inst-2025::sec::line-22::b01).
+ */
 function otherCreditsGap(form: Accessor, info: Form8801CreditInfo): string | undefined {
   const files = (formId: string) => info.mustFile?.[formId]?.value === true;
   const uncomputed = UNCOMPUTED_CREDITS.find(([formId]) => files(formId));
@@ -70,6 +85,7 @@ function otherCreditsGap(form: Accessor, info: Form8801CreditInfo): string | und
   const adoption = line6cFrom8839(form, info)?.value;
   const gaps = [
     foreignTaxCreditGap(form, info),
+    dependentCareCreditGap(form, info),
     nonrefundableCreditGap(form, info)?.reason,
     creditGap(form, info)?.reason,
     typeof adoption === "object" ? adoption.reason : undefined,

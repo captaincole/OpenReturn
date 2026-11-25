@@ -61,7 +61,9 @@ export function figureBusinessForm6198(
 /*
  * Line 31 for a business on Form 6198: the allowed part of the line 1 loss
  * (the ::line-5::b02 example: a $4,600 loss, a $3,100 gain and $600 allowed
- * over it give $3,700). Undefined while the form waits or cannot be figured.
+ * over it give $3,700). With a profit, the profit, unless the amounts at risk
+ * end below zero (recapture, figure.ts profitYearRecapture). Undefined while
+ * the form waits or cannot be figured.
  */
 export function allowedBusinessLoss(
   business: BusinessFactValue,

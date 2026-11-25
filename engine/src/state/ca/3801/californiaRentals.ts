@@ -29,7 +29,7 @@ import {
 } from "../../../federal/8582/activities.js";
 import { isRentalActivity, selfRentalState } from "../../../federal/rentals/passive.js";
 import type { PropertyColumn, RentalProperty } from "../../../federal/schedule-e/filingInfo.js";
-import { line21Amount, rentalDepreciationGap } from "../../../federal/schedule-e/lines.js";
+import { line21Amount, rentalLine21Gap } from "../../../federal/schedule-e/lines.js";
 import type { FilingStatus } from "../../../values.js";
 import { californiaAdjustment, form3885AFigures } from "../3885a/lines.js";
 
@@ -172,7 +172,7 @@ function amountsOf(
   const { value, factKey } = property;
   const federalNet = line21Amount(value);
   if (federalNet === undefined) {
-    const gap = rentalDepreciationGap(value);
+    const gap = rentalLine21Gap(value);
     return gap ? { kind: "gap", reason: gap } : { kind: "waits", keys: [factKey] };
   }
   const adjustment = depreciationDifference(value);

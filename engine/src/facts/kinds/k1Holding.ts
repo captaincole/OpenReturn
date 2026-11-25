@@ -57,8 +57,16 @@ export interface K1CarriedBasisLosses {
 export interface K1CarriedLosses {
   /* Not allowed by the basis limit, by item (Form 7203 Part III column (b)). */
   basis?: K1CarriedBasisLosses;
-  /* Not allowed by the at-risk limit (irs-1120sk1-inst-2025::sec::at-risk-limitations::b03). Form 6198. */
-  atRisk?: number;
+  /*
+   * Not allowed by the at-risk limit (irs-1120sk1-inst-2025::sec::at-risk-limitations::b03),
+   * by item, with the same names as basis. Each item keeps its kind on this
+   * year's Form 6198: a box 1 loss on line 1 (irs-6198-inst-2025::sec::part-i-2::b01),
+   * and "The remaining portion of each deduction or loss item from the activity
+   * is disallowed and must be carried over to next year"
+   * (::part-iv-deductible-loss::b02). Last year's Form 6198 shows only the total,
+   * so the owner splits it by item from last year's allocation.
+   */
+  atRisk?: K1CarriedBasisLosses;
   /* Prior-year unallowed passive loss (irs-1120sk1-inst-2025::sec::passive-activity-limitations::b08). Form 8582. */
   passive?: number;
 }
@@ -218,9 +226,11 @@ const isAmountsByKey = (value: unknown, keys: ReadonlyArray<string>): boolean =>
 function isCarriedLosses(value: unknown): boolean {
   if (value === undefined) return true;
   if (!isRecord(value)) return false;
-  const { basis, ...others } = value;
+  const { basis, atRisk, ...others } = value;
   return (
-    isAmountsByKey(basis, CARRIED_BASIS_LOSS_ITEMS) && isAmountsByKey(others, ["atRisk", "passive"])
+    isAmountsByKey(basis, CARRIED_BASIS_LOSS_ITEMS) &&
+    isAmountsByKey(atRisk, CARRIED_BASIS_LOSS_ITEMS) &&
+    isAmountsByKey(others, ["passive"])
   );
 }
 

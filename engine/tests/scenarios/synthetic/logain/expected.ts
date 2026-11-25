@@ -201,6 +201,30 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "schedule-3.0.line.8": 35587,
     },
   },
+  // Interest $6,000 and ordinary dividends $34,000, each over $1,500: Schedule B files.
+  "schedule-b": {
+    engineFields: {
+      // Line 1 — Amount (row 1): Lugard Savings Bank, 1099-INT box 1
+      "schedule-b.0.line.1_amount_1": 6000,
+      // Line 2 — Add the amounts on line 1
+      "schedule-b.0.line.2_total_interest": 6000,
+      // Line 4 — Subtract line 3 from line 2 (no Form 8815, line 3 blank)
+      "schedule-b.0.line.4_taxable_interest": 6000,
+      // Line 5 — Amount (row 1): Tanchico World Index Fund, 1099-DIV box 1a
+      "schedule-b.0.line.5_amount_1": 34000,
+      // Line 6 — Add the amounts on line 5
+      "schedule-b.0.line.6_total_ordinary_dividends": 34000,
+    },
+    renderedText: {
+      "schedule-b.0.line.1_payer_name_1": "Lugard Savings Bank",
+      "schedule-b.0.line.5_payer_name_1": "Tanchico World Index Fund",
+    },
+    // No foreign account (decisions.scope.has_foreign_financial_account) and no foreign trust.
+    renderedChecked: [
+      "schedule-b.0.line.7a_foreign_account_no",
+      "schedule-b.0.line.8_foreign_trust_no",
+    ],
+  },
   "form-8959": {
     engineFields: {
       // Line 1 — Medicare wages and tips from Form W-2, box 5
