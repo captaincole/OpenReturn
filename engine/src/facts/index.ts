@@ -11,6 +11,7 @@ export * from "./kinds/blindness.js";
 export * from "./kinds/business.js";
 export * from "./kinds/businessLossLimit.js";
 export * from "./kinds/businessPropertySale.js";
+export * from "./kinds/caChildUnearnedIncome.js";
 export * from "./kinds/caDependentCare.js";
 export * from "./kinds/caEarnedIncomeCredit.js";
 export * from "./kinds/caEmployeeClassification.js";
