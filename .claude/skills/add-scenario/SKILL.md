@@ -20,7 +20,7 @@ Arguments: `$ARGUMENTS`, the source. The request may also say which forms to che
 
 ## 2. Make the input documents
 
-Run `create-input-documents <scenario>`. It sorts the inputs into documents and answers, copies or makes the PDFs in `docs/`, and stops for a person's review on the first document of a type. Last year's return is not supported (#79).
+Run `create-input-documents <scenario>`. It sorts the inputs into documents and answers, copies or makes the PDFs in `docs/`, and compares the first document of a type with 2 or 3 real examples found online. Last year's return is not supported (#79).
 
 ## 3. Turn documents and answers into facts
 

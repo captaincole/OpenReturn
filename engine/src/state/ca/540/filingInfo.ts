@@ -10,6 +10,7 @@ import type { Money } from "../../../money.js";
 import type { Form3514FilingInfo } from "../3514/filingInfo.js";
 import type { Form3800CaFilingInfo } from "../3800-ca/filingInfo.js";
 import type { Form3803FilingInfo } from "../3803/filingInfo.js";
+import type { Form3853FilingInfo } from "../3853/filingInfo.js";
 import type { ScheduleSFilingInfo } from "../schedule-s/filingInfo.js";
 
 /**
@@ -17,7 +18,8 @@ import type { ScheduleSFilingInfo } from "../schedule-s/filingInfo.js";
  * follows Schedule CA line 30 under the federal increased standard deduction.
  * Lines 75–77 read FTB 3514's credits, which need its slots. Line 31 adds
  * FTB 3803's line 9, and takes FTB 3800's line 18 for a child. Line 43
- * totals every Schedule S.
+ * totals every Schedule S. Line 92 is FTB 3853's penalty, figured from its
+ * household.
  */
 export interface Form540FilingInfo
   extends
@@ -27,6 +29,7 @@ export interface Form540FilingInfo
     Omit<Form3514FilingInfo, keyof BaseFilingInfo>,
     Pick<Form3803FilingInfo, "form3803Totals">,
     Omit<Form3800CaFilingInfo, keyof BaseFilingInfo>,
+    Pick<Form3853FilingInfo, "ca3853" | "form3803Children">,
     Pick<ScheduleSFilingInfo, "otherStateCredits"> {
   /** "full_year" | "part_year" | "non_resident". */
   caResidencyStatus?: string;

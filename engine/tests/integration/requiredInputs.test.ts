@@ -74,6 +74,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],
   [
+    /^installment_sale\.[^.]+$/,
+    "each fact is a whole installment sale (Form 6252, one copy per sale); whether the " +
+      "taxpayer made one is Cade's question",
+  ],
+  [
     /^pfic_fund\.[^.]+$/,
     "each fact is a whole foreign fund holding (Form 8621, one copy per fund); whether the " +
       "taxpayer holds one is Cade's question",
@@ -132,6 +137,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "whether one exists is Cade's question",
   ],
   [
+    /^ca_health_coverage\.unclaimed\.[^.]+$/,
+    "each fact is a whole person the taxpayer can claim as a dependent but does not (FTB 3853 " +
+      "Parts I and III); whether one lives in the household is Cade's question",
+  ],
+  [
     /^adoption\.child\.[^.]+$/,
     "each fact is a whole child the taxpayer adopted or tried to adopt (Form 8839 line 1); " +
       "whether one exists is Cade's question",
@@ -162,6 +172,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^business_property_sale\.(?!nonrecaptured_section_1231_losses$)[^.]+$/,
     "a Form 4797 sale fact is the whole sale (as a rental property fact is the whole property); " +
       "whether one exists is Cade's question",
+  ],
+  [
+    /^(like_kind_exchange|conflict_of_interest_sale)\.[^.]+$/,
+    "each fact is a whole like-kind exchange or section 1043 sale (Form 8824); whether one " +
+      "happened is Cade's question. Form 8824 lists an exchange again while its lines 9 and 10 " +
+      "are not answered",
   ],
   [
     /^section_179_recapture\.[^.]+$/,

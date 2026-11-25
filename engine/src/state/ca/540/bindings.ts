@@ -85,8 +85,10 @@ import {
   line91NoUseTaxOwed,
   line91UseTax,
   line92FullYearHealthCoverage,
+  line92IsrPenalty,
   line93PaymentsBalance,
   line95PaymentsAfterIsrPenalty,
+  line96IsrPenaltyBalance,
   line97OverpaidTax,
   line99OverpaidTaxAvailable,
 } from "./refundOrAmountDue.js";
@@ -226,8 +228,10 @@ export function register(): void {
       "line.91_use_tax": line91UseTax,
       "line.91_no_use_tax_owed": line91NoUseTaxOwed,
       "line.92_full_year_health_coverage": line92FullYearHealthCoverage,
+      "line.92_isr_penalty": line92IsrPenalty,
       "line.93_payments_balance": line93PaymentsBalance,
       "line.95_payments_after_isr_penalty": line95PaymentsAfterIsrPenalty,
+      "line.96_isr_penalty_balance": line96IsrPenaltyBalance,
       "line.97_overpaid_tax": line97OverpaidTax,
       "line.99_overpaid_tax_available": line99OverpaidTaxAvailable,
       "line.100_tax_due": line100TaxDue,
@@ -255,8 +259,6 @@ export function register(): void {
     unsupported: {
       "line.94_use_tax_balance":
         "Form 540 line 94 (use tax balance) — no scenario has use tax above its payments (line 91 more than line 78), and the corpus has no FTB text for line 94 to ground the rule.",
-      "line.96_isr_penalty_balance":
-        "Form 540 line 96 (individual shared responsibility penalty balance) — ISR penalty / health-coverage-gap scenario not modeled yet.",
       "line.110_total_contributions":
         "Form 540 line 110 (total voluntary contributions, codes 400-449) — no voluntary-contribution fact ingestion path built yet.",
       "header.is_amended_return":
@@ -300,8 +302,6 @@ export function register(): void {
         "Form 592-B and 593 withholding (partnership/LLC/real estate withholding) requires separate fact ingestion — no ingestion path or scenario built yet.",
       "line.74_motion_picture_production_credit":
         "CA Motion Picture and Television Production Credit (FTB 3541) requires allocation/certification data from the California Film Commission — no ingestion path or scenario built yet.",
-      "line.92_isr_penalty":
-        "ISR penalty amount requires FTB 3853 computation (months without coverage × penalty rate per household member) — no FTB 3853 ingestion or partial-coverage scenario built yet.",
       "line.98_applied_to_2026_estimated_tax":
         "Taxpayer-elected amount applied to 2026 estimated tax — this is a discretionary user input with no fact or decision key; we'd need an estimated-tax-election intake flow to support it.",
       "line.contrib_400_ca_seniors_special_fund":
