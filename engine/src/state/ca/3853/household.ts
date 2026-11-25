@@ -190,7 +190,7 @@ const THRESHOLD_STATUSES: ReadonlySet<string> = new Set([
 /*
  * Gross income matters to Part II only when the household income holds
  * amounts gross income does not: tax-exempt interest (1099-INT boxes 3 and 8,
- * 1099-DIV box 12, a child's on FTB 3803) or a member's own MAGI. Not asked
+ * 1099-DIV box 12, a child's on FTB 3803) or a claimed dependent's own MAGI. Not asked
  * when the California wages alone are over the gross income threshold.
  */
 function grossIncomeAsked(
@@ -209,7 +209,7 @@ function grossIncomeAsked(
     children.some(
       (child) => (child?.taxExemptInterest ?? 0) > 0 || (child?.usObligationInterest ?? 0) > 0,
     ) ||
-    members.some(({ coverage }) => coverage?.requiredToFile === true);
+    members.some(({ kind, coverage }) => kind === "dependent" && coverage?.requiredToFile === true);
   const status = filingStatusOf(inputs);
   if (!extras || status === undefined || !THRESHOLD_STATUSES.has(status) || over65 === undefined) {
     return false;

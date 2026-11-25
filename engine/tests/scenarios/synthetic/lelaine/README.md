@@ -22,7 +22,7 @@ Lelaine and Corin Tarvesh are made-up taxpayers. No filed return, benchmark case
 
 - FTB 3853 Parts I, III and IV; Part II is not checked.
 - Worksheet A with a person who turns 18 during the year, and Worksheet B.
-- Form 540 line 92, line 96 (the penalty is more than the payments) and line 114.
+- Form 540 line 92, line 95 (the payments are more than the penalty) and line 114. A unit test covers line 96.
 - No document: the coverage months, exemptions and ECNs are answers.
 
 ## Hand check
@@ -30,17 +30,18 @@ Lelaine and Corin Tarvesh are made-up taxpayers. No filed return, benchmark case
 | Line | Value | How |
 | --- | --- | --- |
 | 540 line 17 | 110,400 | 86,400 + 24,000 |
-| Household income (Step 3) | 134,400 | 110,400 + Sela's 24,000 |
+| Household income (Step 3) | 110,400 | 540 line 17; Sela is not a claimed dependent, so Step 3 question 4 leaves out her MAGI (DECISION in `penalty.ts`) |
 | Threshold (Step 4 line 2) | 73,595 | gross income chart, MFJ under 65, 2 or more dependents |
-| Step 4 line 5 | 1,520 | 60,805 × 2.5% = 1,520.125 |
-| Code A test, Sela | 10,800 > 9,959.04 | 5,400 / 6 × 12; 7.28% × (134,400 + 2,400 salary reduction) |
+| Step 4 line 5 | 920 | 36,805 × 2.5% = 920.125 |
+| Code A test, Sela | 10,800 > 8,211.84 | 5,400 / 6 × 12; 7.28% × (110,400 + 2,400 salary reduction) |
 | Worksheet A line 5 | 475 (Jan–Jun), 950 (Jul–Sep), 1,900 (Oct–Dec) | Davan under 18 to June; Corin and Davan from October |
 | Worksheet A line 7, line 8 | 950, 15 | 11,400 / 12; 6 + 3 + 6 |
-| Worksheet B line 14 | 1,615 | (1,520 × 9 + 1,900 × 3) / 12 |
+| Worksheet B line 14 | 1,173 | (920 × 6 + 950 × 3 + 1,900 × 3) / 12 = 1,172.50 |
 | Penalty Worksheet line 4 | 5,655 | 377 × 15 |
-| 3853 Part IV line 1, 540 line 92 | 1,615 | the smaller of 1,615 and 5,655 |
+| 3853 Part IV line 1, 540 line 92 | 1,173 | the smaller of 1,173 and 5,655 |
 | 3853 Part I line 1 MAGI | 110,400 | 540 line 17, no tax-exempt interest |
-| 3853 Part I line 6 MAGI | 24,000 | Sela's MAGI |
+| 3853 Part I line 6 MAGI | 24,000 | Sela's MAGI (printed, not counted) |
 | 540 line 93 | 1,200 | 1,000 + 200 withheld |
-| 540 line 96 | 415 | 1,615 − 1,200 |
-| 540 lines 111 and 114 | 1,694 | 415 + 1,279 tax due |
+| 540 line 95 | 27 | 1,200 − 1,173; line 96 is blank |
+| 540 line 100 | 1,252 | 1,279 − 27 |
+| 540 lines 111 and 114 | 1,252 | line 100 |

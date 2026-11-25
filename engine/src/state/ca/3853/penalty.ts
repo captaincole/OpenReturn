@@ -61,7 +61,25 @@ export interface HouseholdIncome {
   returnMagi?: number;
 }
 
-/* A member's own MAGI: `printed` in Part I, `counted` in the household income (Step 3 questions 4 to 6). */
+/*
+ * A member's own MAGI: `printed` in Part I, `counted` in the household income (Step 3 questions 4 to 6).
+ *
+ * DECISION (2026-11-24, by the author, not reviewed by a person): whether the
+ * MAGI of a person the taxpayer can claim but does not claim counts in the
+ * applicable household income. The Definitions say "your applicable household
+ * income is your modified adjusted gross income (MAGI) plus the MAGI of each
+ * individual in your applicable household whom is required to file a tax
+ * return" (ca-3853-inst-2025::sec::part-iii::b05), and the household "also
+ * generally includes each individual you can, but do not, claim as a
+ * dependent" (part-iii::b02). Step 3 says "Were any of the dependents you
+ * claimed required to file a tax return? Yes. Calculate each dependent's
+ * income ... and enter the total on line 4"
+ * (step-2-flat-dollar-amount::b02), and the Marketplace worksheet line 3
+ * counts "each claimed dependent who must file a tax return"
+ * (members-of::b05). The engine follows Step 3: an unclaimed person's MAGI
+ * prints in Part I but is not counted. Reason: Step 3 is the penalty's own
+ * arithmetic, as in the Part II threshold decision below.
+ */
 export function memberIncome(
   person: Ca3853Member,
   info: Ca3853Info,
@@ -81,10 +99,19 @@ export function memberIncome(
   const coverage = person.coverage;
   if (coverage?.requiredToFile === undefined) return undefined;
   if (!coverage.requiredToFile) return { printed: coverage.magi, counted: 0 };
-  return coverage.magi === undefined
-    ? undefined
+  if (coverage.magi === undefined) return undefined;
+  return person.kind === "unclaimed"
+    ? { printed: coverage.magi, counted: 0 }
     : { printed: coverage.magi, counted: coverage.magi };
 }
+
+/*
+ * Marketplace worksheet line 3 adds the benefits of "you, your spouse/RDP, and
+ * each claimed dependent who must file a tax return" (members-of::b05). The
+ * filers' own come from Form 1040; a member's fact adds a claimed dependent's.
+ */
+const countsSocialSecurity = ({ kind, coverage }: Ca3853Member) =>
+  kind === "dependent" && coverage?.requiredToFile === true;
 
 /* Step 3 question 2: 0 with no tax-exempt or U.S. obligation interest; undefined (not known) otherwise. */
 function caTaxExemptInterest(read: ReadField, info: Ca3853Info): number | undefined {
@@ -179,7 +206,9 @@ function requiredContribution(
     householdIncome: income.amount,
     nontaxableSocialSecurity: sum(
       returnBenefits,
-      ...members.map(({ coverage }) => coverage?.nontaxableSocialSecurity),
+      ...members
+        .filter(countsSocialSecurity)
+        .map(({ coverage }) => coverage?.nontaxableSocialSecurity),
     ),
     householdSize: members.filter(({ kind }) => kind !== "unclaimed").length,
     slcspMonthlyPremium: test.slcspMonthlyPremium,

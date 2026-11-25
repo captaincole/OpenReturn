@@ -2,11 +2,16 @@
 
 The rules come from ca-3853-inst-2025. No answer key exists. Each point below is a place the form and its instructions do not settle a rule. Block ids drop the `ca-3853-inst-2025::sec::` prefix.
 
-## Decided (also in docs/rule-decisions.md)
+## Two texts conflict
 
-- **Which threshold.** Part II compares household income with the AGI chart (`line-1-applicable-household-income-or-gross::b01`). Step 4 uses the gross income chart (`step-2-flat-dollar-amount::b04`). The engine follows Step 4. See the `DECISION` comment in `penalty.ts`. Changes dollars.
+Decided by the author, not reviewed by a person. Each has a `DECISION` comment in `penalty.ts` and a row in `docs/rule-decisions.md` ("Decided by the author, waiting for a person's review").
 
-## Defaults with no conflicting text
+- **Which threshold.** Part II compares household income with the AGI chart (`line-1-applicable-household-income-or-gross::b01`). Step 4 uses the gross income chart (`step-2-flat-dollar-amount::b04`). The engine follows Step 4. Changes dollars.
+- **A person they can claim but do not.** The Definitions add the MAGI of "each individual in your applicable household" who must file (`part-iii::b05`), and the household includes such a person (`part-iii::b02`). Step 3 question 4 adds only "the dependents you claimed" (`step-2-flat-dollar-amount::b02`), and the Marketplace worksheet line 3 counts only "each claimed dependent who must file" (`members-of::b05`). The engine follows Step 3: the person's MAGI prints in Part I and is not counted, and their nontaxable social security is not on worksheet line 3. In `lelaine` the penalty is $1,173, not $1,615.
+
+## Should we do this now
+
+Each point is a reading with no conflicting text. Each is done as stated, unless it says why not.
 
 1. **Worksheet B line 14 is rounded.** "Divide line 13 by 12.0. Enter the result on line 2 and line 3" (`name-jan-...::b02`). No rounding is stated. The penalty line takes whole dollars, so the engine rounds line 14 to the nearest dollar. Line 4 is whole dollars, so rounding at the end gives the same result. No dollar change.
 2. **Line 3 of the Penalty Worksheet with Worksheet B.** The worksheet says "Enter the larger of line 1 or line 2" (`yes-continue::b02`). Worksheet B says to enter line 14 on line 2 and line 3. The engine enters line 14 on line 3. Line 14 is never below Worksheet A line 7, so the result is the same. No dollar change.
@@ -17,7 +22,7 @@ The rules come from ca-3853-inst-2025. No answer key exists. Each point below is
 7. **Code B covers the year.** "Enter code 'B' in Part III, column (a)" (`example-2-2::b02`). The engine applies a stated B to all 12 months. No dollar change.
 8. **Age 18 by month.** "An individual is considered 18 for an entire month if they turn 18 on the first day of the month" (`step-2-flat-dollar-amount::b01`). The engine counts a person as 18 from the month after the 18th birthday, or from the birthday's month when it is the first day. No dollar change against the text.
 9. **California tax-exempt interest.** Step 3 question 2 uses Schedule CA (540) line 2a and line 2b columns B and C. The engine does not compute those lines yet. With no tax-exempt interest and no U.S. obligation interest, the amount is 0. Otherwise the household income is a floor (the amount is at least 0). The floor settles the penalty only when the bronze amount caps it; else the penalty and Part I line 1 are unsupported. Changes dollars only through the unsupported case.
-10. **Gross income for Part II.** Gross income is a stated answer. The engine asks it only when the household income holds amounts that gross income does not (tax-exempt interest, a member's own MAGI) and the California wages are not over the threshold. Gross income is at least Form 540 line 17, so the test fails when line 17 is over the threshold. No dollar change.
+10. **Gross income for Part II.** Gross income is a stated answer. The engine asks it only when the household income holds amounts that gross income does not (tax-exempt interest, a claimed dependent's own MAGI) and the California wages are not over the threshold. Gross income is at least Form 540 line 17, so the test fails when line 17 is over the threshold. No dollar change.
 11. **Part I MAGI of a member who does not file.** "Enter the MAGI for each person" (`modified-adjusted-gross-income-magi::b01`). The engine prints a stated MAGI, an FTB 3803 child's MAGI, or nothing. No dollar change.
 12. **Parts I and III with Part II checked.** The form's Part I heading says "List all members of your applicable household whether or not they have an exemption". Part II line 1 says "If you check the box in Part II, line 1, you do not have to complete Part III" (`line-1-applicable-household-income-or-gross::b01`). The engine fills Part I, with its Modified AGI, and leaves Part III blank. The corpus block `part-i::b01` ends "you will need to complete": the parser read the sentence's last words, "Part III", as the next section heading (`part-iii::b01` follows it). The first rules left Part I blank on that cut text; the blind fill found it (cases 4, 5, 13). Changes the printed Part I line 1 amount, not the penalty.
 13. **Line 1 with no penalty.** With no X month, or with Part II checked, line 1 is blank, not 0. No dollar change.
@@ -25,7 +30,13 @@ The rules come from ca-3853-inst-2025. No answer key exists. Each point below is
 15. **Three codes in a month.** The form has two fields a month. The engine keeps the first two stated codes. No dollar change.
 16. **Form 540 line 114.** The instructions add line 111, line 112 and line 113 (`ca-540-inst-2025::sec::line-114-total-amount-due::b01`). The engine adds lines 94 and 96 to its existing sum. A return with no FTB 3853 penalty is unchanged.
 17. **Whose gross income Part II tests.** "compare ... your gross income to the California gross income filing threshold" (`line-1-applicable-household-income-or-gross::b01`). The text does not say whether a dependent's own income counts. The engine tests the gross income of the filers' own return, as the blind fill did. Example: parents with gross income $55,000 and a child who must file with MAGI $10,000 (household income $65,000, threshold $61,720) check Part II and owe nothing; Step 4 alone gives $2,375. Changes dollars.
-18. **Age 18 against the federal rule.** The FTB rule is "considered 18 for an entire month if they turn 18 on the first day of the month" (point 8). The federal age rule (a person reaches an age the day before the birthday) would make the month before a first-of-month birthday an adult month too. The engine follows the FTB text. About $16 of penalty in the blind case with a September 1 birthday.
+18. **Age 18 against the federal rule.** The FTB rule is "considered 18 for an entire month if they turn 18 on the first day of the month" (point 8). The federal day-before rule ("You are considered age 65 on the day before your 65th birthday", `irs-1040sr-inst-2025::sec::age-65::b01`) is written for age 65 on other forms, so it does not apply here. It would make the month before a first-of-month birthday an adult month too. The engine follows the FTB text. About $16 of penalty in the blind case with a September 1 birthday.
+19. **Form 540 lines 97, 99 and 115 print 0 with a tax due.** In `lelaine` these lines print 0 where the paper return would leave them blank. Not now: it is a Form 540 rule from before this form, and Form 540 changes wait for a person. No dollar change.
+
+## Pattern change
+
+- **A household member who is not on the return.** Before, every person the engine knew was a filer or a claimed dependent. After, a coverage fact (`ca_health_coverage.unclaimed.<slug>`) names a person the taxpayer can claim but does not, with their own name, SSN and date of birth.
+- **Form 540 line 114 adds the penalty balance.** Before, line 114 added lines 100, 110, 112 and 113. After, it also adds lines 94 and 96, as line 111 does (point 16); a return with no use tax balance and no FTB 3853 penalty is unchanged.
 
 ## Unsupported
 

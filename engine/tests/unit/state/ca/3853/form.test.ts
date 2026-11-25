@@ -150,29 +150,82 @@ describe("with no FTB 3853, Form 540 is unchanged", () => {
 
 describe("Form 540 receives the penalty", () => {
   it("line 92 is Part IV line 1; line 96 is line 92 less line 93; line 114 adds it", () => {
-    const run = evaluate();
-    expect(ftb(run, PENALTY)).toBe(1_615);
-    expect(ca540(run, "line.92_isr_penalty")).toBe(1_615);
-    expect(ca540(run, "line.93_payments_balance")).toBe(1_200);
+    const nursery = valueOf<W2FactValue>(NURSERY_W2);
+    const run = evaluate(factsWith({ [NURSERY_W2]: { ...nursery, box17: 0 } }));
+    expect(ftb(run, PENALTY)).toBe(1_173);
+    expect(ca540(run, "line.92_isr_penalty")).toBe(1_173);
+    expect(ca540(run, "line.93_payments_balance")).toBe(200);
     expect(ca540(run, "line.95_payments_after_isr_penalty")).toBe(0);
-    expect(ca540(run, "line.96_isr_penalty_balance")).toBe(415);
-    expect(ca540(run, "line.114_total_amount_due")).toBe(415 + 1_279);
+    expect(ca540(run, "line.96_isr_penalty_balance")).toBe(1_173 - 200);
+    expect(ca540(run, "line.114_total_amount_due")).toBe(973 + 1_279);
   });
 
   it("with payments above the penalty, line 96 is blank and line 95 is the rest", () => {
-    const nursery = valueOf<W2FactValue>(NURSERY_W2);
-    const run = evaluate(factsWith({ [NURSERY_W2]: { ...nursery, box17: 5_000 } }));
-    expect(ca540(run, "line.92_isr_penalty")).toBe(1_615);
-    expect(ca540(run, "line.95_payments_after_isr_penalty")).toBe(5_200 - 1_615);
+    const run = evaluate();
+    expect(ca540(run, "line.92_isr_penalty")).toBe(1_173);
+    expect(ca540(run, "line.95_payments_after_isr_penalty")).toBe(1_200 - 1_173);
     expect(ca540(run, "line.96_isr_penalty_balance")).toBeUndefined();
+    expect(ca540(run, "line.114_total_amount_due")).toBe(1_279 - 27);
   });
 });
 
 describe("the penalty paths", () => {
   it("Davan alone, X all year and 18 in June: Worksheet A counts him half until July", () => {
-    // Line 5: 475 × 6, 950 × 6; Worksheet B: each month 1,520 (Step 4 line 5); bronze 377 × 12.
+    // Line 5: 475 × 6, 950 × 6; Step 4 line 5: 920; Worksheet B: (920 × 6 + 950 × 6) / 12; bronze 377 × 12.
     const run = evaluate(factsWith(onlyDavanUninsured()));
+    expect(ftb(run, PENALTY)).toBe(935);
+  });
+
+  it("the MAGI of a person they can claim but do not prints in Part I and is not counted (Step 3 question 4)", () => {
+    // Step 3 adds only the claimed dependents' MAGI: 110,400, not 134,400 with Sela's 24,000.
+    const run = evaluate();
+    expect(ftb(run, "0.part1.6_modified_agi")).toBe(24_000);
+    expect(ftb(run, PENALTY)).toBe(1_173);
+    const sela = valueOf<CaHealthCoverageFactValue>(SELA);
+    const richer = evaluate(factsWith({ [SELA]: { ...sela, magi: 90_000 } }));
+    expect(ftb(richer, PENALTY)).toBe(1_173);
+    expect(ftb(richer, "1.part3.6_first_code_jul")).toBe("A");
+  });
+
+  it("a claimed dependent who must file: the MAGI counts in the household income", () => {
+    const mira = makeCaHealthCoverageDependentKey("mira-tarvesh");
+    const value = valueOf<CaHealthCoverageFactValue>(mira);
+    const run = evaluate(
+      factsWith({
+        ...onlyDavanUninsured(),
+        [mira]: { ...value, requiredToFile: true, magi: 24_000 },
+      }),
+    );
+    // 134,400 − 73,595 = 60,805 × 2.5% = 1,520 each month.
     expect(ftb(run, PENALTY)).toBe(1_520);
+  });
+
+  it("Marketplace worksheet line 3: an unclaimed person's social security does not count, a claimed dependent's does", () => {
+    const sela = valueOf<CaHealthCoverageFactValue>(SELA);
+    const mira = makeCaHealthCoverageDependentKey("mira-tarvesh");
+    const miraValue = valueOf<CaHealthCoverageFactValue>(mira);
+    const marketplace: CaHealthCoverageFactValue = {
+      ...sela,
+      affordabilityTests: [
+        {
+          kind: "marketplace",
+          months: [7, 8, 9, 10, 11, 12],
+          bronzeMonthlyPremium: 1_000,
+          slcspMonthlyPremium: 1_000,
+        },
+      ],
+    };
+    const code = (replace: Record<string, unknown>) =>
+      ftb(evaluate(factsWith({ [SELA]: marketplace, ...replace })), "1.part3.6_first_code_jul");
+    const benefits = 50_000;
+    // Without benefits the required contribution is under 7.28% of the household income: X, not A.
+    expect(code({})).toBe("X");
+    expect(code({})).toBe(code({ [SELA]: { ...marketplace, nontaxableSocialSecurity: benefits } }));
+    expect(
+      code({
+        [mira]: { ...miraValue, requiredToFile: true, magi: 0, nontaxableSocialSecurity: benefits },
+      }),
+    ).not.toBe(code({ [mira]: { ...miraValue, requiredToFile: true, magi: 0 } }));
   });
 
   it("everyone uninsured all year with no one turning 18: Step 2 and the household bronze amount", () => {
@@ -286,17 +339,27 @@ describe("what FTB 3853 asks", () => {
     expect(ftb(answered, "1.part3.2_first_code_jan")).toBe("X");
   });
 
-  it("asks gross income when the household income holds a member's own MAGI and the wages are low", () => {
+  it("asks gross income when the household income holds a claimed dependent's own MAGI and the wages are low", () => {
     const nursery = valueOf<W2FactValue>(NURSERY_W2);
     const freight = valueOf<W2FactValue>(FREIGHT_W2);
+    const mira = makeCaHealthCoverageDependentKey("mira-tarvesh");
     const low = { box1: 30_000, box3: 30_000, box5: 30_000, box16: 30_000 };
-    const facts = factsWith({
+    const lowWages = {
       [NURSERY_W2]: { ...nursery, ...low },
       [FREIGHT_W2]: { ...freight, ...low },
+    };
+    // Sela's MAGI is not counted (Step 3 question 4), so it does not raise the question.
+    expect(evaluate(factsWith(lowWages)).pending()).not.toContain(
+      CA_HEALTH_COVERAGE_KEYS.grossIncome,
+    );
+    const miraValue = valueOf<CaHealthCoverageFactValue>(mira);
+    const facts = factsWith({
+      ...lowWages,
+      [mira]: { ...miraValue, requiredToFile: true, magi: 24_000 },
     });
     const run = evaluate(facts);
     expect(run.pending()).toContain(CA_HEALTH_COVERAGE_KEYS.grossIncome);
-    // 60,000 + Sela's 24,000 = 84,000, over 73,595; gross income 60,000 is under it.
+    // 60,000 + Mira's 24,000 = 84,000, over 73,595; gross income 60,000 is under it.
     const answered = evaluate([...facts, added(CA_HEALTH_COVERAGE_KEYS.grossIncome, 60_000)]);
     expect(ftb(answered, PART_II)).toBe(true);
     expect(ftb(answered, PENALTY)).toBeUndefined();

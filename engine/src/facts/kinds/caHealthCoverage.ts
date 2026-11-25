@@ -111,8 +111,9 @@ export interface CaHealthCoverageFactValue {
   /*
    * A dependent or a person not claimed: true when the person must file a
    * 2025 return (ca-3853-inst-2025::sec::part-iii::b05). Then `magi` is the
-   * person's Form 540 line 17 plus California tax-exempt interest, and it
-   * counts in the applicable household income. Not asked for a child on FTB 3803.
+   * person's Form 540 line 17 plus California tax-exempt interest. Part I
+   * prints it; it counts in the applicable household income only for a
+   * claimed dependent (Step 3 question 4). Not asked for a child on FTB 3803.
    */
   requiredToFile?: boolean;
   magi?: number;

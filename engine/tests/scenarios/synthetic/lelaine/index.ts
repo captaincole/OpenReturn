@@ -2,7 +2,7 @@
  * Made-up taxpayers (README.md): a married couple filing jointly, full-year
  * California residents, with a household of six where some members went
  * without health coverage. FTB 3853 fills Parts I, III and IV and its penalty
- * goes to Form 540 lines 92 and 96. No answer key: the expected values are
+ * goes to Form 540 lines 92 and 95. No answer key: the expected values are
  * hand-checked, locked engine output.
  */
 
@@ -18,7 +18,7 @@ const FORM_IDS = ["schedule-8812", "form-1040", "schedule-ca", "form-3853", "for
 export const lelaineScenario: Scenario = {
   name: "lelaine",
   description:
-    "MFJ Sacramento couple: two W-2s, three children (one turns 18, one born in 2025) and an adult daughter not claimed; FTB 3853 codes Z, C, X, K, M, F, I and A, Worksheets A and B, and Form 540 lines 92 and 96.",
+    "MFJ Sacramento couple: two W-2s, three children (one turns 18, one born in 2025) and an adult daughter not claimed; FTB 3853 codes Z, C, X, K, M, F, I and A, Worksheets A and B, and Form 540 lines 92 and 95.",
   taxYear: LELAINE_TAX_YEAR,
   userId: LELAINE_USER_ID,
   verification: "unverified",

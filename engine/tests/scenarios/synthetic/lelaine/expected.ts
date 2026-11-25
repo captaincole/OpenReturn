@@ -102,7 +102,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 6. Modified AGI
       "form-3853.0.part1.6_modified_agi": 24000,
       // Part 4. Individual Shared Responsibility Penalty. Line 1 . Your Individual Shared Responsi
-      "form-3853.1.part4.1_shared_responsibility_penalty": 1615,
+      "form-3853.1.part4.1_shared_responsibility_penalty": 1173,
     },
     // Hand-checked codes: Z all year, the short gap and the second gap, two codes in a month, I, A.
     renderedText: {
@@ -164,17 +164,17 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 78. Add line 71 through line 77. These are your total payments. See instructions.
       "form-540.line.78_total_payments": 1200,
       // Line 92. Individual Shared Responsibility (I S R) Penalty. See instructions.
-      "form-540.line.92_isr_penalty": 1615,
+      "form-540.line.92_isr_penalty": 1173,
       // Overpaid Tax or Tax Due. Line 93 Payments balance. If line 78 is more than line 91, subtra
       "form-540.line.93_payments_balance": 1200,
-      // Line 96. Individual Shared Responsibility Penalty Balance. If line 92 is more than line 93
-      "form-540.line.96_isr_penalty_balance": 415,
+      // Line 95. Payments after Individual Shared Responsibility Penalty. If line 92 is less than line 93
+      "form-540.line.95_payments_after_isr_penalty": 27,
       // Line 100. Tax due. If line 95 is less than line 64, subtract line 95 from line 64.
-      "form-540.line.100_tax_due": 1279,
+      "form-540.line.100_tax_due": 1252,
       // Amount You Owe. Line 111. Amount You Owe. If you do not have an amount on line 99, add lin
-      "form-540.line.111_amount_you_owe": 1694,
+      "form-540.line.111_amount_you_owe": 1252,
       // Line 114. Total amount due. See instructions. Enclose, but do not staple, any payment.
-      "form-540.line.114_total_amount_due": 1694,
+      "form-540.line.114_total_amount_due": 1252,
     },
   },
 };
