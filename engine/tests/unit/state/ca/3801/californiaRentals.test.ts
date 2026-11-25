@@ -14,7 +14,6 @@ import { allocateLosses } from "../../../../../src/federal/8582/allocation.js";
 import type { RentalProperty } from "../../../../../src/federal/schedule-e/filingInfo.js";
 import { californiaAfterLimits, partsOf } from "../../../../../src/state/ca/3801/afterLimits.js";
 import {
-  asksCarryover,
   californiaPassive,
   californiaProperty,
   FORMER_PASSIVE_GAP,
@@ -81,7 +80,7 @@ describe("californiaProperty", () => {
       expenses: { taxes: 2000, mortgageInterest: 6000 },
       depreciation: { priorYearMacrs: 7000, californiaPriorYearDepreciation: 5500 },
     });
-    const activity = ready(californiaProperty(property(value), answers()));
+    const activity = ready(californiaProperty(property(value), answers(0)));
     expect(activity.federalNet).toBe(-3000);
     expect(activity.californiaAdjustment).toBe(1500);
     expect(activity.californiaNet).toBe(-1500);
@@ -90,26 +89,41 @@ describe("californiaProperty", () => {
     ]);
   });
 
+  const waitsForCarryover = {
+    kind: "waits",
+    keys: ["ca_passive.prior_year_unallowed_loss.elm"],
+  };
+
   it("asks for the California carryover when the property has a federal one", () => {
     const value = house({ priorYearUnallowedLoss: 4000, activeParticipationWhenLossArose: true });
-    expect(asksCarryover(property(value), true)).toBe(true);
-    const waits = californiaProperty(property(value), answers());
-    expect(waits).toEqual({
-      kind: "waits",
-      keys: ["ca_passive.prior_year_unallowed_loss.elm"],
-    });
+    expect(californiaProperty(property(value), answers())).toEqual(waitsForCarryover);
     const activity = ready(californiaProperty(property(value), answers(3200)));
     expect(activity.rows[0]).toMatchObject({ part: "part4", priorUnallowedLoss: 3200 });
   });
 
   it("asks for it when the property is not passive federally (a real estate professional's)", () => {
-    expect(asksCarryover(property(house(), false), true)).toBe(true);
-    expect(asksCarryover(property(house(), true), true)).toBe(false);
+    expect(californiaProperty(property(house(), false), answers())).toEqual(waitsForCarryover);
   });
 
-  it("takes the federal carryover of 0 when none is asked", () => {
-    const activity = ready(californiaProperty(property(house()), answers()));
-    expect(activity.rows[0].priorUnallowedLoss).toBe(0);
+  // part-iv-2::b02: column (c) is last year's Part VII column (c); a federal 0 does not stand in.
+  it("asks for it when the federal carryover is 0 or not stated", () => {
+    const noFederal = californiaProperty(property(house()), answers());
+    expect(noFederal).toEqual(waitsForCarryover);
+    const zero = californiaProperty(property(house({ priorYearUnallowedLoss: 0 })), answers());
+    expect(zero).toEqual(waitsForCarryover);
+    const answered = house({ activeParticipationWhenLossArose: true });
+    const activity = ready(californiaProperty(property(answered), answers(1800)));
+    expect(activity.rows[0]).toMatchObject({ part: "part4", priorUnallowedLoss: 1800 });
+  });
+
+  it("does not ask for a property that is not passive for California", () => {
+    const royalty: RentalFactValue = {
+      propertyType: "royalties",
+      royaltiesReceived: 3000,
+      royaltyActivity: "portfolio",
+    };
+    const outcome = californiaProperty(property(royalty, false), answers());
+    expect(outcome).toMatchObject({ kind: "ready", producesLoss: false });
   });
 
   it("a carryover from a year without active participation goes to Part V", () => {
@@ -121,16 +135,29 @@ describe("californiaProperty", () => {
     ]);
   });
 
+  it("Side 2 names a property by street and city, or a royalty by its column", () => {
+    expect(ready(californiaProperty(property(house()), answers(0))).worksheetName).toBe(
+      "1 Elm St, Fresno",
+    );
+    const royalty: RentalFactValue = {
+      propertyType: "royalties",
+      royaltiesReceived: 3000,
+      royaltyActivity: "portfolio",
+    };
+    const outcome = californiaProperty(property(royalty, false), answers());
+    expect(ready(outcome).worksheetName).toBe("Royalties, property A");
+  });
+
   it("a rental without active participation goes to Part V", () => {
     const activity = ready(
-      californiaProperty(property(house({ activeParticipation: false })), answers()),
+      californiaProperty(property(house({ activeParticipation: false })), answers(0)),
     );
     expect(activity.rows[0].part).toBe("part5");
   });
 
   it("a self-rental with net income is nonpassive: no row", () => {
     const value = house({ propertyType: "self_rental", rentsReceived: 20000 });
-    const outcome = californiaProperty(property(value), answers());
+    const outcome = californiaProperty(property(value), answers(0));
     const activity = ready(outcome);
     expect(activity.passive).toBe(false);
     expect(activity.rows).toEqual([]);
@@ -138,14 +165,25 @@ describe("californiaProperty", () => {
   });
 
   it("a passive property with a California loss needs the form; one with only gains does not", () => {
-    const loss = californiaProperty(property(house()), answers());
+    const loss = californiaProperty(property(house()), answers(0));
     expect(loss.kind === "ready" && loss.producesLoss).toBe(true);
-    const gain = californiaProperty(property(house({ rentsReceived: 20000 })), answers());
+    const gain = californiaProperty(property(house({ rentsReceived: 20000 })), answers(0));
     expect(gain.kind === "ready" && gain.producesLoss).toBe(false);
   });
 
+  // QUESTIONS.md item 1: a federal loss that Form 8582 may limit, with a California gain.
+  it("a passive property with a federal loss and a California gain needs the form", () => {
+    const value = house({
+      expenses: { taxes: 2000, mortgageInterest: 6000 },
+      depreciation: { priorYearMacrs: 5000, californiaPriorYearDepreciation: 3000 },
+    });
+    const outcome = californiaProperty(property(value), answers(0));
+    expect(ready(outcome)).toMatchObject({ federalNet: -1000, californiaNet: 1000 });
+    expect(outcome.kind === "ready" && outcome.producesLoss).toBe(true);
+  });
+
   it("an entire disposition is a gap", () => {
-    const outcome = californiaProperty(property(house({ disposedOfEntirely: true })), answers());
+    const outcome = californiaProperty(property(house({ disposedOfEntirely: true })), answers(0));
     expect(outcome).toMatchObject({ kind: "gap", reason: UNMODELED_GAP });
   });
 
@@ -163,7 +201,7 @@ describe("californiaProperty", () => {
   it("waits while active participation is unanswered", () => {
     const outcome = californiaProperty(
       property(house({ activeParticipation: undefined })),
-      answers(),
+      answers(0),
     );
     expect(outcome).toMatchObject({ kind: "waits", keys: ["rental.property.elm"] });
   });
@@ -174,6 +212,7 @@ describe("Pub. 925, Terry, through Parts VII and VIII and the Schedule E workshe
     factKey,
     column: "a",
     name: factKey,
+    worksheetName: factKey,
     royalty: false,
     federalNet: net,
     californiaAdjustment: 0,

@@ -113,10 +113,9 @@ describe("FTB 3801 must-file", () => {
       priorYearUnallowedLoss: 0,
     };
     const { files, value } = run(
-      factsWith({ [HOUSE]: gains }, [
+      factsWith({ [HOUSE]: gains, [makeCaPassiveCarryoverKey(HOUSE)]: 0 }, [
         DUPLEX,
         makeCaPassiveCarryoverKey(DUPLEX),
-        makeCaPassiveCarryoverKey(HOUSE),
       ]),
     );
     expect(files("form-3801")).toBe(false);
@@ -137,6 +136,15 @@ describe("FTB 3801 must-file", () => {
     const { pending, value } = run(factsWith({}, [makeCaPassiveCarryoverKey(HOUSE)]));
     expect(pending.pendingFacts).toContain(makeCaPassiveCarryoverKey(HOUSE));
     expect(value(LINE_3)).toBeUndefined();
+  });
+
+  // irs-8582-inst-2025::sec::part-iv-2::b02: column (c) comes from last year's form, not the federal one.
+  it("asks for it when the property has no federal carryover; line 5 waits", () => {
+    const { pending, value, files } = run(factsWith({}, [makeCaPassiveCarryoverKey(ROYALTY)]));
+    expect(pending.pendingFacts).toContain(makeCaPassiveCarryoverKey(ROYALTY));
+    expect(files("form-3801")).toBe(true);
+    expect(value(LINE_3)).toBeUndefined();
+    expect(value(LINE_5_C)).toBeUndefined();
   });
 });
 
@@ -178,6 +186,33 @@ describe("FTB 3801 gaps", () => {
     expect(result(LINE_6)).toMatchObject({ unsupported: true, reason: MAGI_WITH_K1_GAP });
     expect(result(LINE_2E)).toMatchObject({ unsupported: true, reason: K1_WORKSHEET_GAP });
     expect(result(LINE_5_C)).toMatchObject({ unsupported: true, reason: K1_WORKSHEET_GAP });
+  });
+
+  it("a nonpassive K-1: no number prints on line 6 or anything after it, nor on line 5", () => {
+    const { scenario, result } = run(factsWith({}, [], k1Facts(lanScenario.facts)));
+    const fields = scenario.forms.get("form-3801")?.fields ?? [];
+    const readsLine6OrWorksheet = (fieldId: string) =>
+      ["line.6", "line.7", "line.8", "line.9", "line.11"].some((line) =>
+        fieldId.startsWith(`form-3801.0.${line}_`),
+      ) ||
+      [
+        "2.part6.",
+        "2.part7.",
+        "2.part8.",
+        "1.adjustment_worksheet.schedule_e",
+        "1.adjustment_worksheet.2",
+      ].some((prefix) => fieldId.startsWith(`form-3801.${prefix}`));
+    const printed = fields.filter(
+      (field) =>
+        readsLine6OrWorksheet(field.fieldId) &&
+        (field.result as Result).ok &&
+        typeof (field.result as Result).value === "number",
+    );
+    expect(fields.filter((field) => readsLine6OrWorksheet(field.fieldId)).length).toBe(129);
+    expect(printed.map((field) => field.fieldId)).toEqual([]);
+    for (const fieldId of [LINE_5_B, LINE_5_C]) {
+      expect(result(fieldId)).toMatchObject({ unsupported: true, reason: K1_WORKSHEET_GAP });
+    }
   });
 
   it("a passive K-1 makes the whole form a gap", () => {

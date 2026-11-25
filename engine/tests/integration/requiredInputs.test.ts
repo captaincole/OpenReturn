@@ -49,9 +49,8 @@ const OPTIONAL: Array<[RegExp, string]> = [
   ],
   [
     /^ca_passive\.prior_year_unallowed_loss\.[^.]+$/,
-    "a prior-year answer Cade records when a property's California passive carryover differs " +
-      "from the federal one; FTB 3801 asks for it when the property has a federal carryover or " +
-      "is not passive federally",
+    "a prior-year answer from last year's FTB 3801; FTB 3801 asks for it for every property " +
+      "that is passive for California on a California return",
   ],
   [
     /^decisions\.scope\.must_file_8995(_a)?$/,

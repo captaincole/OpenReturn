@@ -16,7 +16,8 @@ output.
 - Duplex B (Davis): net income $4,600. Active participation. Carryover $2,500
   (same for California) from years of active participation.
 - Royalty C: $6,000 less $1,000 of fees, from a mineral business Noal does not
-  work in (passive).
+  work in (passive). No carryover; the California 0 is an answer too, because
+  FTB 3801 asks for every passive property.
 
 ## Documents
 

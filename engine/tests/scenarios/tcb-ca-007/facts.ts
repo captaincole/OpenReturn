@@ -14,6 +14,7 @@ import {
   OTHER_INCOME_KEYS,
   SPOUSE_KEYS,
   makeBusinessFactKey,
+  makeCaPassiveCarryoverKey,
   makeDependentFactKey,
   makeDisabilityBeforeMinimumRetirementAgeKey,
   makeDividendFactKey,
@@ -458,6 +459,12 @@ const activities: TaxFactRow[] = [
   fact("rental", "rental.payments_require_1099", true, `${ANSWERS}: sche_gen.require1099.`),
   fact("rental", "rental.filed_required_1099s", false, `${ANSWERS}: sche_gen.require1099filed.`),
   fact("rental", "rental.real_estate_professional", false, "Not in the answers: no hours given."),
+  fact(
+    "rental",
+    makeCaPassiveCarryoverKey(makeRentalFactKey("property-1")),
+    0,
+    "Not in the answers: no FTB 3801 carryover given.",
+  ),
 ];
 
 const dependents: TaxFactRow[] = [
