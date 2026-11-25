@@ -12,6 +12,7 @@ import { sum, sumOrBlank } from "../../money.js";
 import { filingStatusOf, num, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import { resolve2106Info } from "../2106/resolveInfo.js";
 import { resolve3903Info } from "../3903/resolveInfo.js";
+import { resolve4797Info } from "../4797/resolveInfo.js";
 import { form8621Totals } from "../8621/totals.js";
 import { figuredForm8814, form8814Totals } from "../8814/totals.js";
 import { resolve8853Info } from "../8853/resolveInfo.js";
@@ -110,6 +111,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
         value: form8814Line12 !== 0,
       },
       form8621Fallback(inputs),
+      form4797Fallback(inputs),
     ],
   });
   return {
@@ -129,6 +131,25 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     earlyWithdrawalPenalty: savingsPenalty,
     ...studentLoan.info,
     armedForcesStorageFees: moving.storageFees,
+  };
+}
+
+/*
+ * Line 4: Form 4797 line 18b (the form's line 18b text). Schedule 1 files for
+ * an amount there even with no business or rental on the return (a Form 8824
+ * recapture on Form 4797 line 16), or while the line is a gap.
+ */
+function form4797Fallback(inputs: ResolverInputs) {
+  const info = resolve4797Info(inputs);
+  const line18b = info.form4797?.line18b ?? 0;
+  const gap = info.form4797Gap ?? info.form4797SummaryGap;
+  const files = info.mustFile?.["form-4797"]?.value === true;
+  return {
+    rule: `fallback: Form 4797 line 18b $${line18b} on line 4 (or a Form 4797 the engine cannot figure)`,
+    value: files && (line18b !== 0 || gap !== undefined),
+    triggeredByFactKeys: files
+      ? (info.mustFile?.["form-4797"]?.derivation?.triggeredByFactKeys ?? [])
+      : [],
   };
 }
 

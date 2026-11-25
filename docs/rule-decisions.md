@@ -36,6 +36,13 @@ Each decision below also sits in the code, in a comment that starts with `DECISI
 
 A row that names a pull request is in the code of that branch until it merges.
 
+## Decided by the author, waiting for a person's review
+
+| # | Date | Form | Question | Text A | Text B | Decision | Dollars | Where | Check when the law is in the library |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| A1 | 2026-11-24 | Form 8824 | An exchange of one property for one property plus cash. Are lines 12 to 18 filled? | Multi-asset exchanges: with cash or other property, do not complete lines 12 to 18; attach a statement. | The line 20 example fills line 15 with the cash received. | Text B, for one property given up and one received. The (b) clause sits under the multi-asset heading. | None: lines 19 to 25 are the same. | `federal/8824/lines.ts` | Regulations section 1.1031(j)-1. |
+| A2 | 2026-11-24 | Form 8824 | More than one exchange: a summary form or one form each? | "You can file a summary on one Form 8824" with a statement. | "Use Parts I, II, and III of Form 8824 to report each exchange." | The summary form, every time: the engine prints one copy. | None. | `federal/8824/printed.ts` | — |
+
 The last column names the section of law to read first. The section numbers are from memory and were not checked against the Code, which the library does not hold yet.
 
 ## Open: brought to a person, not decided

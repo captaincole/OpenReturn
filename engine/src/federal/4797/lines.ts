@@ -1,8 +1,8 @@
 /*
  * Form 4797 for the whole return: lines 1a–18b and 30–35, from the placed
- * properties (properties.ts). Each money line is whole dollars. Lines 3, 4, 5,
- * 14, 15, 16 and 18a come from Forms 4684, 6252 and 8824, which the engine does
- * not carry here: the resolver makes the summary a gap while one files.
+ * properties (properties.ts) and Form 8824's lines 5 and 16. Each money line is
+ * whole dollars. Lines 3, 4, 14, 15 and 18a come from Forms 4684 and 6252, which
+ * the engine does not carry here: the resolver makes the summary a gap while one files.
  */
 
 import { section179RecaptureAmount, type Section179RecaptureFactValue } from "../../facts/index.js";
@@ -26,6 +26,8 @@ export interface Form4797Lines {
   line1b?: number;
   line1c?: number;
   partIRows: SaleRow[];
+  /* Section 1231 gain or (loss) from like-kind exchanges, Form 8824. */
+  line5?: number;
   line6?: number;
   line7?: number;
   line8?: number;
@@ -34,6 +36,8 @@ export interface Form4797Lines {
   line11?: number;
   line12?: number;
   line13?: number;
+  /* Ordinary gain or (loss) from like-kind exchanges, Form 8824. */
+  line16?: number;
   line17?: number;
   line18b?: number;
   partIIIColumns: PartIIIColumn[];
@@ -54,6 +58,11 @@ export interface Form4797Inputs {
   /* The answer for line 8; undefined when not recorded. */
   nonrecapturedLosses?: number;
   recaptures: Section179RecaptureFactValue[];
+  /*
+   * Form 8824's amounts: line 5 takes its section 1231 gain or (loss) and line 16
+   * its ordinary gain or (loss) (lines 21 and 22; irs-8824-inst-2025::sec::line-22::b01).
+   */
+  likeKindExchanges?: { line5?: number; line16?: number };
 }
 
 const rowsIn = (properties: PlacedProperty[], part: "part_i" | "part_ii"): SaleRow[] =>
@@ -139,6 +148,7 @@ function partIITotals(
   rows: SaleRow[],
   netting: ReturnType<typeof section1231Netting>,
   line13?: number,
+  line16?: number,
 ) {
   if (netting.waitsForLine8) return {};
   const line17 = sumOrBlank(
@@ -146,6 +156,7 @@ function partIITotals(
     netting.line11 === undefined ? undefined : -netting.line11,
     netting.line12,
     line13,
+    line16,
   );
   return { line17, line18b: line17 };
 }
@@ -156,7 +167,8 @@ export function form4797Lines(inputs: Form4797Inputs): Form4797Lines {
   const partIIIColumns = columnsOf(inputs.properties);
   const summary = partIIISummary(partIIIColumns);
   const line6 = positiveOrBlank(summary.line32);
-  const line7 = sumOrBlank(...partIRows.map((row) => row.gainOrLoss), line6);
+  const { line5, line16 } = inputs.likeKindExchanges ?? {};
+  const line7 = sumOrBlank(...partIRows.map((row) => row.gainOrLoss), line5, line6);
   const netting = section1231Netting(line7, inputs.nonrecapturedLosses);
   const line13 = positiveOrBlank(summary.line31);
   const partial = partialDispositions(inputs.properties);
@@ -168,12 +180,14 @@ export function form4797Lines(inputs: Form4797Inputs): Form4797Lines {
     line1b: partial.gain.length > 0 ? sum(...partial.gain) : undefined,
     line1c: partial.loss.length > 0 ? sum(...partial.loss) : undefined,
     partIRows,
+    line5,
     line6,
     line7,
     ...netting,
     partIIRows,
     line13,
-    ...partIITotals(partIIRows, netting, line13),
+    line16,
+    ...partIITotals(partIIRows, netting, line13, line16),
     partIIIColumns,
     ...summary,
     partIV: {

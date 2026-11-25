@@ -46,10 +46,12 @@ default the engine applies, and whether the default can change a dollar amount.
    enter the amount from line 7 on line 11." Default: line 11 is blank at 0.
    Changes dollars: no.
 
-8. **Lines 3, 14 and 18a (Form 4684), 4 and 15 (Form 6252), 5 and 16 (Form
-   8824).** Form 4684 Section B and Forms 6252 and 8824 have no rules. Default:
-   the lines are unsupported; lines 7–18b and the lines they feed are a gap when
-   Form 6252 or 8824 files by decision. Changes dollars: no (a gap).
+8. **Lines 3, 14 and 18a (Form 4684), 4 and 15 (Form 6252).** Form 4684
+   Section B and Form 6252 have no rules. Default: the lines are unsupported;
+   lines 7–18b and the lines they feed are a gap when Form 6252 files by
+   decision. Changes dollars: no (a gap). Lines 5 and 16 take Form 8824's
+   amounts (`federal/8824/QUESTIONS.md`); an exchange amount the engine cannot
+   carry makes lines 5, 16 and 7–18b a gap.
 
 9. **A K-1 section 1231 item** (1065 box 10, 1120-S box 9; line-7::b01). The
    pass-through layers have no route for it. Default: lines 7–18b and Schedule D
@@ -204,7 +206,8 @@ default the engine applies, and whether the default can change a dollar amount.
 | Header | stated rule |
 | Lines 1a–1c | stated rule |
 | Line 2 and line 10 rows | stated rule |
-| Lines 3, 4, 5, 14, 15, 16, 18a | unsupported (Forms 4684 Section B, 6252, 8824) |
+| Lines 3, 4, 14, 15, 18a | unsupported (Forms 4684 Section B, 6252) |
+| Lines 5, 16 | stated rule (Form 8824 lines 21 and 22) |
 | Lines 6–9, 11–12 | published example with numbers (4797 line 8, Pub. 544) |
 | Lines 13, 17, 18b | stated rule |
 | Lines 19–24 | published example with numbers (Pub. 544 truck) |

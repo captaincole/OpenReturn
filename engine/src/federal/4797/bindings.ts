@@ -16,8 +16,8 @@ type Fn = BindingFn<Form4797, Form4797FilingInfo, keyof Form4797>;
 type Bindings = Partial<{ [K in keyof Form4797]: BindingFn<Form4797, Form4797FilingInfo, K> }>;
 
 /*
- * MANUAL EDIT: lines 3, 14 and 18a (Form 4684 Section B), 4 and 15 (Form 6252),
- * and 5 and 16 (Form 8824) are in `unsupported` below.
+ * MANUAL EDIT: lines 3, 14 and 18a (Form 4684 Section B), and 4 and 15 (Form
+ * 6252) are in `unsupported` below. Lines 5 and 16 take Form 8824's amounts.
  */
 type LineFn<T> = (form: unknown, info: Form4797FilingInfo) => T | Unsupported | undefined;
 
@@ -46,6 +46,20 @@ function summaryLineOf(pick: (lines: Form4797Lines) => number | undefined): Line
   return (form, info) => {
     if (info.form4797SummaryGap && !info.form4797Gap && copyIndexOf(info) === 0) {
       return unsupported(info.form4797SummaryGap);
+    }
+    return lineOf(pick)(form, info);
+  };
+}
+
+/*
+ * MANUAL EDIT: lines 5 and 16, Form 8824's section 1231 and ordinary gain or
+ * (loss) (irs-8824-inst-2025::sec::line-22::b01, the form's line 21 text), or the
+ * gap of an exchange the engine cannot carry.
+ */
+function exchangeLineOf(pick: (lines: Form4797Lines) => number | undefined): LineFn<number> {
+  return (form, info) => {
+    if (info.form4797ExchangeGap && !info.form4797Gap && copyIndexOf(info) === 0) {
+      return unsupported(info.form4797ExchangeGap);
     }
     return lineOf(pick)(form, info);
   };
@@ -182,6 +196,7 @@ export function register(): void {
       "0.line.1b_gain_macrs_partial_dispositions": lineOf((lines) => lines.line1b),
       "0.line.1c_loss_macrs_partial_dispositions": lineOf((lines) => lines.line1c),
       // MANUAL EDIT: line 6 is line 32 when a gain; lines 7–12 net the section 1231 gains (lines.ts).
+      "0.line.5_section_1231_like_kind_exchanges": exchangeLineOf((lines) => lines.line5),
       "0.line.6_gain_from_line_32": lineOf((lines) => lines.line6),
       "0.line.7_net_section_1231_gain_loss": summaryLineOf((lines) => lines.line7),
       "0.line.8_nonrecaptured_section_1231_losses": summaryLineOf((lines) => lines.line8),
@@ -190,6 +205,7 @@ export function register(): void {
       "0.line.11_loss_from_line_7": summaryLineOf((lines) => lines.line11),
       "0.line.12_gain_from_line_7_or_8": summaryLineOf((lines) => lines.line12),
       "0.line.13_gain_from_line_31": lineOf((lines) => lines.line13),
+      "0.line.16_ordinary_like_kind_exchanges": exchangeLineOf((lines) => lines.line16),
       "0.line.17_ordinary_gain_loss_total": summaryLineOf((lines) => lines.line17),
       "0.line.18b_redetermined_ordinary_gain_loss": summaryLineOf((lines) => lines.line18b),
       // MANUAL EDIT: the Summary of Part III Gains (lines 30–32).
@@ -209,10 +225,6 @@ export function register(): void {
         "Form 6252 (installment sales) has no rules: no line 26 or 37 section 1231 gain reaches Form 4797.",
       "0.line.15_ordinary_gain_installment_sales":
         "Form 6252 (installment sales) has no rules: no line 25 or 36 ordinary gain reaches Form 4797.",
-      "0.line.5_section_1231_like_kind_exchanges":
-        "Form 8824 (like-kind exchanges) has no rules: no section 1231 gain or loss reaches Form 4797.",
-      "0.line.16_ordinary_like_kind_exchanges":
-        "Form 8824 (like-kind exchanges) has no rules: no ordinary gain or loss reaches Form 4797.",
     },
 
     formatters: {

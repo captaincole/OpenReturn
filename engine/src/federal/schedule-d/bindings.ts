@@ -10,6 +10,7 @@ import {
   scheduleDLine19FromForm4797,
 } from "../4797/receivers.js";
 import { withForm8814 } from "../8814/totals.js";
+import { scheduleDReceipt } from "../8824/receivers.js";
 import { describeItem, entityTitle } from "../passThrough/items.js";
 import { receivedAmounts, roundedWithReceived, type Receipt } from "../passThrough/receipts.js";
 import type { ScheduleDFilingInfo } from "./filingInfo.js";
@@ -151,17 +152,48 @@ function qualifiedDividendsAnswer(form: FormAccessor<ScheduleD>): boolean | unde
 const OTHER_FORMS = {
   line4: {
     form6781Field: "form-6781.0.line.8_short_term_capital_gain_loss",
-    forms: ["form-4684", "form-6252", "form-8824"],
+    forms: ["form-4684", "form-6252"],
     without6781:
       "Requires data from Forms 6252, 4684, 6781, and 8824 — none of these forms are ingested in the current engine. No installment-sale, casualty/theft, straddle, or like-kind-exchange scenarios have been built yet.",
   },
   line11: {
     form6781Field: "form-6781.0.line.9_long_term_capital_gain_loss",
-    forms: ["form-4684", "form-4797", "form-6252", "form-8824"],
+    forms: ["form-4684", "form-4797", "form-6252"],
     without6781:
       "Requires gain figures from Form 4797 Part I, Forms 2439, 6252, 4684, 6781, and 8824 — none of these forms are ingested or have fact categories in the current inventory.",
   },
 } as const;
+
+/* Form 6781's amount for a line while it files, else blank. */
+const form6781Amount = (
+  form: FormAccessor<ScheduleD>,
+  info: ScheduleDFilingInfo,
+  line: (typeof OTHER_FORMS)[keyof typeof OTHER_FORMS],
+) =>
+  info.mustFile?.["form-6781"]?.value === true
+    ? numberOrBlank(form[line.form6781Field])
+    : undefined;
+
+/*
+ * MANUAL EDIT: line 4 also takes Form 8824's short-term gain or (loss): line 22
+ * of a capital asset held 1 year or less, line 14 of other property, Part IV
+ * line 36 (irs-8824-inst-2025::sec::line-22::b01, line-36::b01; 8824/receivers.ts).
+ * Without it the line is what it was.
+ */
+function line4(form: FormAccessor<ScheduleD>, info: ScheduleDFilingInfo) {
+  const exchange = scheduleDReceipt(info, "shortTermCapital");
+  if (exchange.kind === "none") return otherFormsLine(form, info, OTHER_FORMS.line4);
+  if (exchange.kind === "gap") return unsupported(exchange.reason);
+  const filing = OTHER_FORMS.line4.forms.filter(
+    (formId) => info.mustFile?.[formId]?.value === true,
+  );
+  if (filing.length > 0) {
+    return unsupported(
+      `Form 8824 goes on this line, but the engine has no Schedule D amount from ${filing.join(", ")}, which this line also takes.`,
+    );
+  }
+  return sumOrBlank(exchange.amount, form6781Amount(form, info, OTHER_FORMS.line4));
+}
 
 function otherFormsLine(
   form: FormAccessor<ScheduleD>,
@@ -185,10 +217,12 @@ function otherFormsLine(
  * Schedule D" (irs-8621-inst-2025::sec::line-7c::b01), on the line of a fund's
  * undistributed long-term gain (irs-1040sd-inst-2025::sec::undistributed-capital::b01;
  * federal/8621/QUESTIONS.md, question 1). With neither the line is what it was.
- * With either, Form 6781 line 9 adds when it files; Forms 4684, 6252 and 8824
- * still have no Schedule D amount, so the line is a gap while one files.
+ * With either, Form 6781 line 9 adds when it files; Forms 4684 and 6252 still
+ * have no Schedule D amount, so the line is a gap while one files. Form 8824's
+ * long-term gain or (loss) adds too (irs-8824-inst-2025::sec::line-22::b01,
+ * line-36::b01; 8824/receivers.ts).
  */
-const LINE_11_FORMS_WITH_NO_AMOUNT = ["form-4684", "form-6252", "form-8824"];
+const LINE_11_FORMS_WITH_NO_AMOUNT = ["form-4684", "form-6252"];
 
 /* The QEF gain for line 11 (Form 8621 line 7c), a fund's gap, or undefined with none. */
 function qefGainForLine11(info: ScheduleDFilingInfo): number | Unsupported | undefined {
@@ -204,13 +238,21 @@ function line11(form: FormAccessor<ScheduleD>, info: ScheduleDFilingInfo) {
   if (lossGap) return unsupported(lossGap);
   const qefGain = qefGainForLine11(info);
   const files4797 = form4797Files(info);
-  if (qefGain === undefined && !files4797) return otherFormsLine(form, info, OTHER_FORMS.line11);
+  const exchange = scheduleDReceipt(info, "longTermCapital");
+  if (qefGain === undefined && !files4797 && exchange.kind === "none") {
+    return otherFormsLine(form, info, OTHER_FORMS.line11);
+  }
   if (typeof qefGain === "object") return qefGain;
+  if (exchange.kind === "gap") return unsupported(exchange.reason);
   const filing = LINE_11_FORMS_WITH_NO_AMOUNT.filter(
     (formId) => info.mustFile?.[formId]?.value === true,
   );
   if (filing.length > 0) {
-    const source = files4797 ? "Form 4797 files" : "Form 8621 line 7c goes on this line";
+    const source = files4797
+      ? "Form 4797 files"
+      : qefGain !== undefined
+        ? "Form 8621 line 7c goes on this line"
+        : "Form 8824 goes on this line";
     return unsupported(
       `${source}, but the engine has no Schedule D amount from ${filing.join(", ")}, which this line also takes.`,
     );
@@ -218,11 +260,13 @@ function line11(form: FormAccessor<ScheduleD>, info: ScheduleDFilingInfo) {
   const form4797 = files4797 ? scheduleDGainFromForm4797(info) : undefined;
   if (typeof form4797 === "object") return form4797;
   if (files4797 && info.form4797?.waitsForLine8) return undefined;
-  const form6781 =
-    info.mustFile?.["form-6781"]?.value === true
-      ? numberOrBlank(form[OTHER_FORMS.line11.form6781Field])
-      : undefined;
-  return sumOrBlank(form4797, form6781, qefGain);
+  const fromExchange = exchange.kind === "amount" ? exchange.amount : undefined;
+  return sumOrBlank(
+    form4797,
+    form6781Amount(form, info, OTHER_FORMS.line11),
+    qefGain,
+    fromExchange,
+  );
 }
 
 /*
@@ -242,6 +286,10 @@ function line19(form: FormAccessor<ScheduleD>, info: ScheduleDFilingInfo) {
       ? unsupported(
           "Form 1099-DIV box 2d (28% rate gain) goes on line 14 of the Unrecaptured Section 1250 Gain Worksheet through the 28% Rate Gain Worksheet, which is not modeled.",
         )
+      : undefined) ??
+    // MANUAL EDIT: a Form 8824 section 1231 gain from depreciated section 1250 property (8824/exchange.ts).
+    (info.form8824Totals?.scheduleD.unrecapturedGap
+      ? unsupported(info.form8824Totals.scheduleD.unrecapturedGap)
       : undefined);
   return scheduleDLine19FromForm4797(info, {
     scheduleDLine7: numberOrBlank(form["0.line.7_net_short_term_gain_loss"]),
@@ -311,8 +359,7 @@ export function register(): void {
           form["0.line.12_net_long_term_passthrough"],
           form["0.line.13_capital_gain_distributions"],
         ) - sum(form["0.line.14_long_term_loss_carryover"]),
-      "0.line.4_short_term_gain_other_forms": (form, info) =>
-        otherFormsLine(form, info, OTHER_FORMS.line4),
+      "0.line.4_short_term_gain_other_forms": line4,
       "0.line.11_long_term_gain_other_forms": line11,
       "1.line.16_combined_gain_loss": (form) =>
         sum(form["0.line.7_net_short_term_gain_loss"], form["0.line.15_net_long_term_gain_loss"]),

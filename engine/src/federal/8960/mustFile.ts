@@ -31,6 +31,7 @@ import { form4797GainUpperBound } from "../4797/upperBound.js";
 import { line1Row } from "../6781/lines.js";
 import { form8621IncomeUpperBound } from "../8621/totals.js";
 import { form8814IncomeUpperBound } from "../8814/children.js";
+import { form8824GainUpperBound, form8824HasInvestmentIncome } from "../8824/upperBound.js";
 import {
   passThroughHasInvestmentIncome,
   passThroughIncomeUpperBound,
@@ -83,6 +84,8 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
     atLeast(0, section1256Gain),
     // Form 4797 reaches 1040 line 7a and Schedule 1 line 4.
     form4797GainUpperBound(inputs.facts),
+    // Form 8824 reaches them through Schedule D lines 4 and 11 and Form 4797 lines 5 and 16.
+    form8824GainUpperBound(inputs.facts),
     ...businesses.map(({ value }) =>
       atLeast(0, tentativeProfit(value) ?? sum(netReceipts(value), value.otherIncome)),
     ),
@@ -121,7 +124,8 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
  * section 1256 contract (Form 6781, the same way), a PFIC fund (Form 8621), a K-1's portfolio income,
  * passive activity income (a trust's boxes 6 to 8, any rental) or net
  * investment income adjustment, a business without line G "Yes" (passive), or
- * a Form 4797 sale that no business with line G "Yes" made (line 5b keeps it in).
+ * a Form 4797 sale that no business with line G "Yes" made (line 5b keeps it in),
+ * or a Form 8824 exchange or Part IV sale the same way.
  * This gate is stricter than who-must-file::b01, which states the MAGI test
  * alone: without investment income the tax is $0, and the gate keeps a $0
  * Form 8960 off high-wage returns. A person decides whether to drop it.
@@ -158,7 +162,8 @@ export function investmentSignals(
     getPficFundFacts(inputs.facts).length > 0 ||
     passThroughHasInvestmentIncome(inputs.facts) ||
     (businesses.length > 0 && !scheduleCNonpassive) ||
-    investmentSale;
+    investmentSale ||
+    form8824HasInvestmentIncome(inputs.facts, nonpassiveBusinessKeys);
   return {
     scheduleCNonpassive,
     hasInvestment,
