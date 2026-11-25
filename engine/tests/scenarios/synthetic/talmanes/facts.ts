@@ -171,6 +171,7 @@ export const talmanesFacts: TaxFactRow[] = [
   fact("identity", SPOUSE_KEYS.lastName, SEREN.lastName, VERBAL),
   fact("identity", SPOUSE_KEYS.ssn, SEREN.ssn, "Seren's W-2, box a."),
   fact("identity", SPOUSE_KEYS.dob, "09/03/1982", VERBAL),
+  fact("identity", SPOUSE_KEYS.occupation, "Physical therapist", VERBAL),
   fact("wages", makeW2FactKey("harpeth-data"), talmanesW2, "W-2 from Harpeth Data Systems."),
   fact("wages", makeW2FactKey("belle-meade"), serenW2, "W-2 from Belle Meade Pediatric Clinic."),
   fact(

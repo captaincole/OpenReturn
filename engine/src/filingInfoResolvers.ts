@@ -8,8 +8,10 @@ import {
   SPOUSE_KEYS,
   getSection1256Facts,
   isDividendFactKey,
+  readBusinessPropertySaleFacts,
 } from "./facts/index.js";
 import { resolve4137Info } from "./federal/4137/resolveInfo.js";
+import { resolve4797Info } from "./federal/4797/resolveInfo.js";
 import { scheduleTwoNeededForEarlyDistributions } from "./federal/5329/resolveInfo.js";
 import { resolve6251Info } from "./federal/6251/resolveInfo.js";
 import { resolve8853Info } from "./federal/8853/resolveInfo.js";
@@ -86,6 +88,7 @@ export function resolveBaseInfo(inputs: ResolverInputs): BaseFilingInfo {
     spouseBornBeforeJan2_1961: bornBeforeJan2_1961(spouseDob),
     taxpayerBlind: inputs.factByKey.get(BLINDNESS_KEYS.taxpayer) === true,
     spouseBlind: inputs.factByKey.get(BLINDNESS_KEYS.spouse) === true,
+    spouseOccupation: text(inputs, SPOUSE_KEYS.occupation),
     taxpayerOccupation: text(inputs, "identity.occupation"),
     taxpayerPhone: phoneRaw ? phone(phoneRaw) : undefined,
     taxpayerEmail: text(inputs, "identity.email"),
@@ -265,6 +268,7 @@ export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInf
         value: k1Keys.length > 0,
         triggeredByFactKeys: k1Keys,
       },
+      form4797Fallback(inputs),
     ],
   });
   const distributions = sumInvestmentBox(inputs, "box2a", isDividendFactKey);
@@ -280,6 +284,25 @@ export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInf
     passThroughLongTermGain: receivedAt(routed, "schedule_d_line_12"),
     passThrough28RateGain: receivedAt(routed, "schedule_d_line_18"),
     passThroughUnrecaptured1250Gain: receivedAt(routed, "schedule_d_line_19"),
+    dividendUnrecaptured1250Gain: positive(sumInvestmentBox(inputs, "box2b", isDividendFactKey)),
+    dividendCollectiblesGain: positive(sumInvestmentBox(inputs, "box2d", isDividendFactKey)),
+  };
+}
+
+/*
+ * A Form 4797 section 1231 gain goes to line 11 as a long-term capital gain
+ * (irs-4797-inst-2025::sec::line-7::b01, line-9::b01). While the line 8 answer is
+ * missing, the gain may still go there.
+ */
+function form4797Fallback(inputs: ResolverInputs) {
+  const form4797 = resolve4797Info(inputs).form4797;
+  const sends = (form4797?.scheduleDGain ?? 0) > 0 || form4797?.waitsForLine8 === true;
+  return {
+    rule: "fallback: a Form 4797 section 1231 gain (line 11)",
+    value: sends,
+    triggeredByFactKeys: sends
+      ? readBusinessPropertySaleFacts(inputs.facts).sales.map((sale) => sale.key)
+      : [],
   };
 }
 
@@ -301,7 +324,7 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
   const threshold = status ? NIIT_THRESHOLDS[status] : undefined;
   // With no filing status yet, count a spouse's income too, and test the lowest threshold.
   const joint = status === undefined || status === "married_filing_jointly";
-  const { scheduleCNonpassive, hasInvestment } = investmentSignals(inputs, joint);
+  const { hasInvestment, ...signals } = investmentSignals(inputs, joint);
   const magi = magiUpperBound(inputs, joint);
   const underEvery = magi <= Math.min(...Object.values(NIIT_THRESHOLDS));
   const resolution = resolveMustFile(inputs.decisionByKey, {
@@ -338,7 +361,8 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
         ...openRentals,
       ],
     },
-    scheduleCNonpassive,
+    // Line 4b's scheduleCNonpassive; line 5b's nonpassiveBusinessKeys and capitalLossCarriedIn.
+    ...signals,
     rentalProperties,
     stateLocalTaxAllocableToInvestmentIncome: allocableTax,
     additionalModifications,

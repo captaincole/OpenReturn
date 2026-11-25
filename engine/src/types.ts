@@ -6,6 +6,7 @@
 
 import type { AIDecisionRow, TaxFactRow } from "./facts/rows.js";
 import type { FilingInfo } from "./filingInfo.js";
+import { incomeInDollars } from "./incomeInDollars.js";
 
 export interface EngineDerivation {
   decidedBy: "engine";
@@ -116,7 +117,9 @@ export type FormEvaluator<F extends BaseFormField = AnyFormField> = (
   ctx: DerivationContext,
 ) => EvaluatedForm<F>;
 
-export function makeFactsView(rows: TaxFactRow[]): FactsView {
+/* Foreign-currency income reads in dollars, kept to the cent (incomeInDollars.ts). */
+export function makeFactsView(recorded: TaxFactRow[]): FactsView {
+  const rows = incomeInDollars(recorded).facts;
   const byKey = new Map(rows.map((row) => [row.key, row]));
   return {
     get: (key) => byKey.get(key),

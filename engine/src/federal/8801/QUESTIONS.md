@@ -11,12 +11,12 @@ All inputs to lines 1–21 and Part III are 2024 amounts. The taxpayer states th
 - Default: any minimum tax answer on file puts the form in scope, and the form asks for the 2024 Form 6251 lines. It files while line 21 waits, and stops when line 21 is figured and not above 0.
 - Changes dollars: no (Part I with no 2024 AMT gives line 15 = 0 in the common case).
 
-## 2. Line 3 is asked only with a 2024 net operating loss deduction
+## 2. Line 3 is asked on every return
 
 - Text: line 3 is "the total of the minimum tax credit net operating loss (MTCNOL) carryovers and carrybacks to 2024" (irs-8801-inst-2025::sec::line-3::b01).
-- The gap: the instructions give no trigger. An MTCNOL comes from a year when income with only exclusion items was a loss, so a regular loss carryover exists too.
-- Default: line 3 is asked only when the 2024 Form 6251 has a line 2e amount. Otherwise it is blank. The engine takes the stated MTCNOLD; it does not figure it.
-- Changes dollars: yes, for a filer with an MTCNOL carryover and no 2024 regular NOL deduction (a regular carryover used up, or 2024 income below 0).
+- The instructions give no trigger, and the MTCNOL is figured with only exclusion items, separately from the regular loss. A carryover can reach 2024 with no 2024 Form 6251 line 2e: the regular carryover was used up first, or 2024 regular income before the deduction was 0 or less while income with exclusion items was not.
+- Default (changed in the second pass): line 3 is asked whenever the form files; 0 means no loss was carried to 2024, and the line is then blank. No filed 2024 page prints it: it comes from the loss carryover worksheets. The engine takes the stated MTCNOLD; it does not figure it.
+- Changes dollars: no longer; the old trigger (a line 2e amount) dropped line 3 for the filers above.
 
 ## 3. Line 12 is asked only with a 2024 AMT foreign tax credit
 
@@ -46,8 +46,13 @@ All inputs to lines 1–21 and Part III are 2024 amounts. The taxpayer states th
 ## 7. Line 22: Schedule 3 lines the engine does not compute
 
 - Text: subtract "the total of any credits from Form 1040 ... line 19 and Schedule 3 (Form 1040), lines 1 through 6z (not including any credit for prior year minimum tax on line 6b or any credit claimed on Form 8912 ... on line 6k)" (irs-8801-inst-2025::sec::line-22::b01).
-- Default: the engine subtracts every Schedule 3 line it figures. Line 22 is unsupported while a credit it subtracts is a gap: Form 3800, 8859, 8834, 8911 or 8978 files, or Schedule 3 line 1, 3, 4, 6c, 6f, 6g or 6m is unsupported. Line 5a (Form 5695 Part I) is not modeled anywhere; it counts as 0, as on Schedule 3 line 8.
-- Changes dollars: yes, for a filer with a residential clean energy credit.
+- Default: the engine subtracts every Schedule 3 line it figures. Line 22, and lines 24–26 and Schedule 3 line 6b after it, are unsupported while a credit it subtracts is a gap:
+  - Form 5695 files (line 5a, Part I, is not modeled), or Form 3800, 8859, 8834, 8911 or 8978 files (lines 6a, 6h, 6i, 6j, 6l).
+  - Schedule 3 line 1, 3, 4, 6c, 6f, 6g or 6m is a gap (each form's own gap helper).
+  - Form 2441 claims the credit but its line 11 (Schedule 3 line 2) is blank above a tax limit (`2441/creditGap.ts`).
+- Lines checked and not gaps: 5b (Form 5695 Part II has no gap of its own; Part I files the form, above), 6d (Schedule R has no gap), Form 1040 line 19 (Schedule 8812 line 14 is a gap only through the adoption credit, above), 6z ("Leave line 6z blank", irs-1040-inst-2025::sec::line-6z::b01).
+- Left: Form 1040 line 16 and Schedule 2 line 1z are added, not subtracted. A gap in line 16 (Form 8615, Form 4972) leaves line 22 blank, not unsupported; the Schedule 2 lines 1d–1y that are unsupported count as 0 in line 1z, as on Form 1040 line 17.
+- Changes dollars: no longer for the credits above; a filer with only a residential clean energy credit and no Form 5695 on the return has no fact to record it.
 
 ## 8. Who "claims" the credit for Form 6251
 
@@ -81,6 +86,13 @@ All inputs to lines 1–21 and Part III are 2024 amounts. The taxpayer states th
 - Default: line 2 keeps each amount with its sign, so a negative line 2b lowers line 2.
 - Changes dollars: yes, if a preparer drops a negative amount. The word "combine" supports the default.
 
+## 13. Line 23 when the 2025 Form 6251 leaves line 8 blank
+
+- Text: line 23 is "the amount from your 2025 Form 6251, line 9" (the blank form). The Form 6251 instructions: "If the amount on line 10 is greater than or equal to the amount on line 7 ... Leave line 8 blank and enter -0- on line 11" (irs-6251-inst-2025::sec::line-8-alternative-minimum-tax-foreign-tax::b01); with the election, "your AMTFTC is the same as the foreign tax credit on Schedule 3 (Form 1040), line 1" (::b02).
+- The gap: a filer who takes the credit has line 10 above line 7, so line 8 is blank and line 9 is the tentative minimum tax before the AMT foreign tax credit. Section 55(b) defines the tentative minimum tax after that credit (not in the corpus; from the Code, not checked here). The two give different line 23 amounts when there is a foreign tax credit.
+- Decided (2026-11-24, `docs/rule-decisions.md` row 12): line 23 is line 7 less the credit line 8 would hold, also when Form 6251 leaves line 8 blank. With the election that credit is Schedule 3 line 1; with Form 1116 line 23 is unsupported, since the AMT copy of Form 1116 is not built. Form 6251's own lines 8 and 9 still follow its instructions. The `DECISION` comment is above `line23Of` in `credit.ts`. Marked for research when sections 53(c) and 55(b) are in the library.
+- Changes dollars: yes. For logain, line 23 = 165,556, line 24 and the credit = 35,587, and line 26 = 129,233, against 165,806, 35,337 and 129,483 before.
+
 ## Second opinions
 
 - Blind fill (13 cases, `.scratch/blind`): every value matches the engine (13 lines and the files flag in each case). There are no dollar differences and no blank-against-0 differences. The preparer's doubts that change dollars are questions 3, 9, 10, 11 and 12.
@@ -94,12 +106,12 @@ All inputs to lines 1–21 and Part III are 2024 amounts. The taxpayer states th
 | Header (name, identifying number) | stated rule |
 | Line 4 married-filing-separately add-on | published example with numbers (line-4::b01) |
 | Lines 1, 2, 4–10 | stated rule |
-| Line 3 | stated rule for the amount; own reading for when it is asked (question 2) |
+| Line 3 | stated rule for the amount; asked on every return (question 2) |
 | Line 11 (AMT rates or Part III) | stated rule; Form 2555 unsupported |
 | Line 12 | stated rule for the election; Form 1116 unsupported |
 | Lines 13–21 | stated rule |
 | Line 22 | stated rule; gaps per question 7 |
-| Lines 23–26 | stated rule |
+| Lines 23–26 | stated rule; line 23 with a foreign tax credit per question 13 |
 | Part III, lines 27–55 | stated rule; line 28 refigure is the taxpayer's (question 4) |
 | Schedule 3 line 6b | stated rule |
 | Form 6251 must-file with Form 8801 | stated rule; own reading for a zero credit (question 8) |

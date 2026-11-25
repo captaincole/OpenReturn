@@ -4,7 +4,7 @@ import { lookupPreferentialBrackets } from "../../data/preferentialBrackets.js";
 import { defineForm, type FormAccessor } from "../../defineForm.js";
 import { ISO_SOLD_IN_YEAR_UNSUPPORTED } from "../../isoSpread.js";
 import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
-import { unsupported } from "../../types.js";
+import { unsupported, type Unsupported } from "../../types.js";
 import { SSN, type FilingStatus } from "../../values.js";
 import { computeQdcg, type QdcgBreakdown } from "../../worksheets/qdcg.js";
 import { standardDeduction } from "../1040/deductions.js";
@@ -175,6 +175,23 @@ function regularWorksheet(form: Form, status: FilingStatus | undefined): QdcgBre
   }
 }
 
+/*
+ * MANUAL EDIT: with an amount on Schedule D line 19 (Form 4797), lines 13, 15, 20
+ * and 27 come from the AMT Schedule D Tax Worksheet
+ * (irs-6251-inst-2025::sec::part-iii-tax-computation-using::b02, ::line-20::b01),
+ * whose AMT Unrecaptured Section 1250 Gain Worksheet needs the AMT depreciation
+ * of the property sold (line 2k): not modeled, so those lines are a gap.
+ */
+const AMT_SCHEDULE_D_WORKSHEET =
+  "Schedule D line 19 has an amount: Part III needs the AMT Schedule D Tax Worksheet and the AMT Unrecaptured Section 1250 Gain Worksheet, which need the AMT basis of the property sold (line 2k); not modeled.";
+
+function amtWorksheetGap(form: Form): Unsupported | undefined {
+  return completesPartIII(form) &&
+    isPositive(form["schedule-d.1.line.19_unrecaptured_sec1250_gain"])
+    ? unsupported(AMT_SCHEDULE_D_WORKSHEET)
+    : undefined;
+}
+
 /* MANUAL EDIT: the form's gates: lines 32 and 12 the same skip 33–37; line 14 zero or blank skips 35–37. */
 const skipsLines33To37 = (form: Form): boolean =>
   form["1.line.32_add_lines_23_30"] === form["1.line.12_amount_from_line_6"];
@@ -340,7 +357,7 @@ export function register(): void {
         completesPartIII(form) ? numberOrBlank(form["0.line.6_amti_less_exemption"]) : undefined,
       // MANUAL EDIT: QDCG worksheet line 4 (or Schedule D Tax Worksheet line 13); see regularWorksheet.
       "1.line.13_qualified_dividends_gain_amount": (form, info) =>
-        regularWorksheet(form, info.filingStatus)?.line4,
+        amtWorksheetGap(form) ?? regularWorksheet(form, info.filingStatus)?.line4,
       // MANUAL EDIT: blank while Schedule D line 19 is (it is unsupported); the AMT amount matches.
       "1.line.14_schedule_d_line_19": (form) =>
         completesPartIII(form)
@@ -352,9 +369,10 @@ export function register(): void {
        * not modeled, so the line waits.
        */
       "1.line.15_adjusted_net_capital_gain": (form) =>
-        isPositive(form["1.line.14_schedule_d_line_19"])
+        amtWorksheetGap(form) ??
+        (isPositive(form["1.line.14_schedule_d_line_19"])
           ? undefined
-          : form["1.line.13_qualified_dividends_gain_amount"],
+          : form["1.line.13_qualified_dividends_gain_amount"]),
       "1.line.16_smaller_line_12_or_15": (form) => {
         const line12 = form["1.line.12_amount_from_line_6"];
         const line15 = form["1.line.15_adjusted_net_capital_gain"];
@@ -376,7 +394,7 @@ export function register(): void {
           : undefined,
       // MANUAL EDIT: QDCG worksheet line 5 (or Schedule D Tax Worksheet line 14); 0 when 1040 line 15 is.
       "1.line.20_regular_tax_taxable_income": (form, info) =>
-        regularWorksheet(form, info.filingStatus)?.line5,
+        amtWorksheetGap(form) ?? regularWorksheet(form, info.filingStatus)?.line5,
       "1.line.21_line_19_minus_20": (form) => {
         const line19 = form["1.line.19_zero_rate_threshold"];
         const line20 = form["1.line.20_regular_tax_taxable_income"];
@@ -406,7 +424,7 @@ export function register(): void {
       "1.line.26_amount_from_line_21": (form) => form["1.line.21_line_19_minus_20"],
       // MANUAL EDIT: QDCG worksheet line 5 (Schedule D Tax Worksheet line 21 equals line 14 here).
       "1.line.27_regular_tax_taxable_income": (form, info) =>
-        regularWorksheet(form, info.filingStatus)?.line5,
+        amtWorksheetGap(form) ?? regularWorksheet(form, info.filingStatus)?.line5,
       "1.line.28_add_lines_26_27": (form) => {
         const line26 = form["1.line.26_amount_from_line_21"];
         const line27 = form["1.line.27_regular_tax_taxable_income"];

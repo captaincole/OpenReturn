@@ -53,7 +53,7 @@ export function drawTextRight(
   str: string,
   xRight: number,
   yTopDown: number,
-  opts: TextOpts = {},
+  opts: TextOpts & { color?: ReturnType<typeof rgb> } = {},
 ) {
   const { size = 9 } = opts;
   drawText(ctx, str, xRight - widthOf(fontOf(ctx, opts), str, size), yTopDown, opts);

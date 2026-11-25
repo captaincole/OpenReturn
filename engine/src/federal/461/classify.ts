@@ -119,6 +119,21 @@ export function sortK1Items(
   receipts: ReadonlyArray<Receipt>,
   rentalAnswer: RentalAnswer,
 ): Sorted<K1Nonbusiness> {
+  const items = answeredItems(receipts, rentalAnswer);
+  if (items.kind !== "sorted") return items;
+  return {
+    kind: "sorted",
+    value: addNonbusiness(
+      items.value.filter((received) => itemIsBusiness(received, rentalAnswer) === false),
+    ),
+  };
+}
+
+/* The nonzero K-1 items of the receipts, once every item's business answer is known. */
+function answeredItems(
+  receipts: ReadonlyArray<Receipt>,
+  rentalAnswer: RentalAnswer,
+): Sorted<ReceivedItem[]> {
   const items: ReceivedItem[] = [];
   const waiting: string[] = [];
   for (const receipt of receipts) {
@@ -129,10 +144,33 @@ export function sortK1Items(
   const open = items.filter((received) => itemIsBusiness(received, rentalAnswer) === undefined);
   const keys = [...waiting, ...open.map((received) => rentalAnswerKey(received.entity.key))];
   if (keys.length > 0) return { kind: "waiting", factKeys: [...new Set(keys)] };
-  return {
-    kind: "sorted",
-    value: addNonbusiness(
-      items.filter((received) => itemIsBusiness(received, rentalAnswer) === false),
-    ),
-  };
+  return { kind: "sorted", value: items };
+}
+
+/* A K-1 whose business items on Schedule E net to a loss: its key and the loss, positive whole dollars. */
+export interface K1BusinessLoss {
+  key: string;
+  loss: number;
+}
+
+/*
+ * The K-1s whose business items on Schedule E (Form 461 line 5) net to a
+ * loss, rounded once for each K-1; undefined while a K-1 waits or is a gap.
+ */
+export function k1BusinessLosses(
+  receipts: ReadonlyArray<Receipt>,
+  rentalAnswer: RentalAnswer,
+): K1BusinessLoss[] | undefined {
+  const items = answeredItems(receipts, rentalAnswer);
+  if (items.kind !== "sorted") return undefined;
+  const byEntity = new Map<string, number[]>();
+  for (const received of items.value) {
+    if (itemIsBusiness(received, rentalAnswer) !== true) continue;
+    const amounts = byEntity.get(received.entity.key) ?? [];
+    byEntity.set(received.entity.key, [...amounts, received.item.amount ?? 0]);
+  }
+  return [...byEntity.entries()]
+    .map(([key, amounts]) => ({ key, net: roundDollars(sum(...amounts)) }))
+    .filter((entry) => entry.net < 0)
+    .map((entry) => ({ key: entry.key, loss: 0 - entry.net }));
 }

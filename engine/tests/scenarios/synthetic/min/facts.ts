@@ -139,6 +139,7 @@ export const minFacts: TaxFactRow[] = [
   idFact("phone", "509-555-0181"),
   fact("identity", SPOUSE_KEYS.firstName, MIN.spouse.firstName, VERBAL),
   fact("identity", SPOUSE_KEYS.lastName, MIN.spouse.lastName, VERBAL),
+  fact("identity", SPOUSE_KEYS.occupation, "Musician", VERBAL),
   fact("identity", SPOUSE_KEYS.ssn, MIN.spouse.ssn, VERBAL),
   fact("identity", SPOUSE_KEYS.dob, "03/02/1984", VERBAL),
   fact("wages", makeW2FactKey("caemlyn-analytics"), minW2, "W-2 from Caemlyn Analytics LLC."),

@@ -133,6 +133,7 @@ export const matFacts: TaxFactRow[] = [
   idFact("phone", "512-555-0191"),
   fact("identity", SPOUSE_KEYS.firstName, MAT.spouse.firstName, VERBAL),
   fact("identity", SPOUSE_KEYS.lastName, MAT.spouse.lastName, VERBAL),
+  fact("identity", SPOUSE_KEYS.occupation, "Marine engineer", VERBAL),
   fact("identity", SPOUSE_KEYS.ssn, MAT.spouse.ssn, VERBAL),
   fact("identity", SPOUSE_KEYS.dob, "09/30/1987", VERBAL),
   fact("wages", makeW2FactKey("ebou-dar-logistics"), matW2, "W-2 from Ebou Dar Logistics LLC."),

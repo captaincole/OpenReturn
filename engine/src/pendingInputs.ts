@@ -12,9 +12,12 @@ export function pendingInputs(scenario: {
   forms: ReadonlyMap<string, EvaluatedForm<BaseFormField>>;
   filingInfo: FilingInfo;
   assumptionsInUse: ReadonlyArray<{ key: string }>;
+  /* Foreign-currency income facts that lack a rate (incomeInDollars.ts). */
+  factsWaitingForRate?: ReadonlyArray<string>;
 }): PendingInputs {
   const { pendingDecisions, pendingFacts } = collectPending(scenario.forms.values());
   addPendingIdentityFacts(scenario.filingInfo, pendingFacts);
+  scenario.factsWaitingForRate?.forEach((key) => pendingFacts.add(key));
   return {
     pendingDecisions: Array.from(pendingDecisions).sort(),
     pendingFacts: Array.from(pendingFacts).sort(),

@@ -45,6 +45,8 @@ import {
   headerLivedApartMfsHoh,
   headerMainHomeUsOverHalfYear,
   headerMfsSpouseFullName,
+  headerSpouseFirstNameMi,
+  headerSpouseLastName,
   headerSpouseSsn,
   headerSsn,
   headerState,
@@ -95,6 +97,7 @@ import {
   line38,
 } from "./payments.js";
 import {
+  signingSpouseOccupation,
   signingTaxpayerEmail,
   signingTaxpayerOccupation,
   signingTaxpayerPhone,
@@ -119,6 +122,8 @@ export function register(): void {
       "header.first_name_mi": headerFirstNameMi,
       "header.last_name": headerLastName,
       "header.ssn": headerSsn,
+      "header.spouse_first_name_mi": headerSpouseFirstNameMi,
+      "header.spouse_last_name": headerSpouseLastName,
       "header.spouse_ssn": headerSpouseSsn,
       "header.home_address": headerHomeAddress,
       "header.apartment": headerApartment,
@@ -205,6 +210,7 @@ export function register(): void {
       "line.37": line37,
       "line.38": line38,
       "signing.taxpayer_occupation": signingTaxpayerOccupation,
+      "signing.spouse_occupation": signingSpouseOccupation,
       "signing.taxpayer_phone": signingTaxpayerPhone,
       "signing.taxpayer_email": signingTaxpayerEmail,
     },
@@ -245,10 +251,6 @@ export function register(): void {
         "Numeric amount for the 'Other' header block; no fact/decision key defined for this edge-case scenario.",
       "header.other_additional":
         "Additional text field for the 'Other' header block; no fact/decision key defined for this edge-case scenario.",
-      "header.spouse_first_name_mi":
-        "No MFJ scenario yet — spouse identity facts are not ingested. Will support when a married_filing_jointly scenario is built.",
-      "header.spouse_last_name":
-        "No MFJ scenario yet — spouse identity facts are not ingested. Will support when a married_filing_jointly scenario is built.",
       "header.foreign_country_name":
         "No foreign address scenario modeled yet — no fact key exists for a foreign country name. Relevant only for taxpayers with a foreign address.",
       "header.foreign_province_state_county":
@@ -327,8 +329,6 @@ export function register(): void {
         "Third-party designee PIN — no fact or decision models designee info; no scenario built yet.",
       "signing.taxpayer_ip_pin":
         "IRS Identity Protection PIN is not part of current fact ingestion — no identity.ip_pin fact key exists yet.",
-      "signing.spouse_occupation":
-        "No MFJ scenario built yet — spouse facts (including occupation) are not ingested.",
       "signing.spouse_ip_pin":
         "No MFJ scenario built yet — spouse IP PIN fact not ingested; also no identity.spouse_ip_pin fact key exists.",
       "signing.preparer_self_employed":

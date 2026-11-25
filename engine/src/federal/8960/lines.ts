@@ -45,7 +45,7 @@ function nonpassive(property: RentalProperty): boolean | undefined {
  * The property also rises to a section 162 trade or business (b01, b02), for a rental
  * and a royalty alike. Not the QBI answer: Rev. Proc. 2019-38's safe harbor is section 199A only.
  */
-function section162Nonpassive(property: RentalProperty): boolean | undefined {
+export function section162Nonpassive(property: RentalProperty): boolean | undefined {
   const isNonpassive = nonpassive(property);
   if (isNonpassive !== true) return isNonpassive;
   return property.value.tradeOrBusiness;
