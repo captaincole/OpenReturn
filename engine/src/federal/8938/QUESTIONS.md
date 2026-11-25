@@ -81,7 +81,9 @@ Each item is a place where the form and its instructions do not settle a rule. B
 ## 13. The account statement's exchange rate
 
 - Text: "Use the currency exchange rate on the last day of the tax year to figure the maximum value" (`currency-determination-date::b01`); "You may rely on the foreign currency conversion rate reflected in a financial account statement issued at least annually" (`exception-for-financial-account::b01`).
-- Default: the fact's `conversion.exchangeRate` is the Treasury rate on December 31; a statement rate the taxpayer chooses goes in the same field.
+- Default: the asset fact holds only its currency (`foreignCurrency.code`). The engine takes the Treasury rate for December 31 from its table (`currency/rates.ts` yearEndRate, `data/exchange-rates/treasury-year-end-2025.json`) and prints it in column (b); column (c) stays blank.
+- Open: the statement's own rate. The instructions allow it (`exception-for-financial-account::b01`), but the fact has no field for it, so the engine never uses it. To add it: a stated rate on the asset fact, printed with its source in column (c). No table can know a statement's rate, so that would be the one rate a person states.
+- An asset in a currency outside the H.10 list: the form files and every line is unsupported, because who files depends on its value in dollars. Schedule B's one-account test counts it as $0.
 - Dollars: yes, on lines 23 and 32, and the threshold test. No tax amount changes.
 
 ## 14. An asset not in an account: the year-end value as the maximum
@@ -92,11 +94,25 @@ Each item is a place where the form and its instructions do not settle a rule. B
 
 ## 15. Income in a foreign currency: which rate
 
-- Decided: an interest, dividend or trade fact may hold its amounts in the account's currency with a `conversion` (`facts/kinds/foreignCurrency.ts`). The engine holds no rate table: each amount takes the rate on its fact, divided (units per dollar), kept to the cent, before any form reads it (`incomeInDollars.ts`). A fact with no `conversion` is in dollars, as before.
-- Decided, the foreign tax: its own rate, the day withheld for a credit for taxes paid, the yearly average for taxes accrued (`irs-1116-inst-2025::sec::foreign-currency-conversion::b01`; `irs-pub-514-2025::sec::internal-revenue-service::b01`). The fact names it (`taxExchangeRate`).
-- Decided, a sale: the proceeds at the spot rate on the settlement date of the sale, the cost at the spot rate on the settlement date of the purchase, for stock traded on an established market and a cash-basis taxpayer (26 CFR 1.988-2(a)(2)(iv)(A), (B)). No IRS form instruction or publication in the corpus states it.
-- Open, interest and dividends: the texts do not settle whether a yearly average may stand in for the spot rate. irs.gov "Yearly average currency exchange rates": "In general, use the exchange rate prevailing (i.e., the spot rate) when you receive, pay or accrue the item." The same page: "Generally, it accepts any posted exchange rate that is used consistently" and "divide the foreign currency amount by the applicable yearly average exchange rate in the table below." The engine does not pick; the fact names the rate and its source. amys uses the yearly average.
+Decided by the product owner on 2026-11-24 (the decision comments in `currency/rates.ts` and `incomeInDollars.ts`):
+
+- The source of daily rates is the Federal Reserve Board's H.10 release, "Foreign Exchange Rates". Its 23 currencies are the only foreign currencies the engine supports; a fact in any other currency is unsupported, with a reason that names the currency.
+- The facts hold what the statement prints: the currency (`foreignCurrency.code`), each amount, and the dates the rule needs (`byDate` for dividends, tax and penalties, and credits under the daily method; the settlement dates of a sale). No fact holds a rate. The engine looks each rate up in its tables, divides (units per dollar), keeps the cents, before any form reads the amount (`incomeInDollars.ts`).
+- Interest that accrues through the year takes the return's method, `decisions.foreign_income_rate_method`: `yearly_average` (the Board's G.5A average for the tax year) or `daily` (the H.10 rate of each day credited). The person chooses. Texts: "In general, use the exchange rate prevailing (i.e., the spot rate) when you receive, pay or accrue the item" and "Generally, it accepts any posted exchange rate that is used consistently" (irs.gov "Yearly average currency exchange rates"); the IRS practice unit "Definition of Appropriate Exchange Rate" treats an item over a period at an average and a dividend as a one-day event (not read by this branch; cited as the decision gives it).
+- A single event takes the H.10 rate of its day: each dividend, the early withdrawal penalty, tax withheld. Foreign tax: the day withheld (`irs-1116-inst-2025::sec::foreign-currency-conversion::b01`; 26 CFR 1.986(a)-1); for taxes claimed on an accrual basis (`foreign_tax_credit.claim_accrued`), the yearly average for the tax year (the same block). The block's three exceptions to the average and the election to use the day paid are not modeled.
+- A sale: the proceeds at the H.10 rate of the settlement date of the sale, the cost at that of the purchase (26 CFR 1.988-2(a)(2)(iv)(A), (B)).
+- A day with no published rate (a weekend, a U.S. holiday, "ND"): the last earlier day that has one. This is the engine's convention; no IRS text states it. The longest gaps in the history are in the early 1990s (30 days, Taiwan, 1991); since 2000 the longest is 4 days.
+- A missing method decision means the yearly average, not a pending input. The engine takes the default of the other elections it reads the same way (Form 1116 `claim_accrued`, the Form 8949 box), and a pending input would make Cade ask on every return with foreign interest, when the answer changes nothing for a return with one credit a year. Under the daily method a missing dated credit is pending. This default is not confirmed by a person.
 - Dollars: yes, on every line that reads the income.
+
+Open:
+
+- A single large interest payment under the average method: a deposit that pays once a year at maturity is one event, but the average spreads it over the year. The method is the person's choice for the return, so the engine does not split by payment.
+- The IRS's own yearly average table differs from the Board's G.5A averages by more than rounding (2025, the currencies amys uses; units per dollar): euro IRS 0.886, G.5A 0.88449 (1 / 1.1306); pound IRS 0.759, G.5A 0.75804 (1 / 1.3192); krone IRS 10.392, G.5A 10.3852; Swiss franc IRS 0.831, G.5A 0.8305 (within rounding). The IRS table is the one the IRS publishes for taxpayers. On amys's euro interest the IRS table gives $1,332.28, the Board's average $1,334.56.
+- Refresh: the tables are built by `npm run form-engine -- ingest-exchange-rates` and committed. The H.10 table ends on 2026-11-20; a date after the table's last day is unsupported until someone runs the refresh. Who runs it, and how often (weekly for H.10, each January for G.5A, once a year for the Treasury rate of December 31), is not decided.
+- No court case was found on the choice between a yearly average and the day's rate.
+- Venezuela: the H.10 series changes unit at each redenomination (2018-08-20, 2021-10-04) and the history pages do not restate the older rates. The engine reads the series only from 2021-10-04, and G.5A averages only from 2022.
+- The open branch `form-8621` converts a foreign fund's amounts with rates stated on its own fact. After both branches merge, it must use these tables and this fact shape.
 
 ## 16. Rounding a converted amount
 
@@ -105,19 +121,20 @@ Each item is a place where the form and its instructions do not settle a rule. B
 - Another reading: keep the full quotient until the line rounds. The two differ by under a cent for each amount.
 - Dollars: at most $1 on a line, and only when the cents fall within a cent of 50.
 
-## 17. A fact with no rate
+## 17. A fact that cannot be converted
 
-- Default: the fact keeps no amount and is a pending input (`pendingInputs().pendingFacts`). The lines that list the item wait: Schedule B lines 1 to 6, Form 1040 lines 2a to 3b, Form 8949 and Schedule D, the foreign tax credit (Schedule 3 line 1, Form 1116) and Form 8938 Part III.
-- Limit: a form that adds a box over all the 1099 facts (Form 8960, Form 6251, Form 8615, the EIC test, the California forms) reads the amount as absent while it waits. The return is not ready to file until the rate is recorded.
+- A date the rule needs is missing, or the dated amounts do not add up to the box: the fact keeps no amount and is a pending input (`pendingInputs().pendingFacts`). The lines that list the item wait: Schedule B lines 1 to 6, Form 1040 lines 2a to 3b, Form 8949 and Schedule D, the foreign tax credit (Schedule 3 line 1, Form 1116) and Form 8938 Part III.
+- A currency outside the H.10 list, or a date the tables do not cover: the fact keeps no amount, is not pending, and the same lines are unsupported with the reason. Form 1040 lines 2b and 3b read Schedule B; without Schedule B they stay blank.
+- Limit: a form that adds a box over all the 1099 facts (Form 8960, Form 6251, Form 8615, the EIC test, the California forms) reads the amount as absent while it is not converted. The return is not ready to file until it is.
 - Limit: these stay in dollars: a 1099-MISC fact, the foreign income statement next to a 1099 (`.foreign_income`), a basis the taxpayer states (`.reported_basis`) and a Form 8949 adjustment.
 
-## 18. Open work: rates the engine could hold
+## 18. The rate tables
 
-Not done in this change, because each needs a decision on the source and a yearly update:
-
-- A built-in table of the IRS yearly average rates, so Cade does not ask for a rate the IRS prints.
-- The spot-rate choice: which posted daily rate (Treasury, Federal Reserve, a bank) the engine would accept or suggest for a withholding date or a settlement date.
-- A currency the Treasury does not list: line 25 or 34 column (c) names the source (`foreign-currency-conversion::b01`); the asset fact has `rateSource`, but nothing checks that the Treasury lists the currency.
+- `engine/src/data/exchange-rates/`, built by the builder's `ingest-exchange-rates` command from the official pages and committed; the engine only reads them (`currency/rates.ts`). Each file names its source pages and the day of download.
+- `h10-daily.json`: every daily H.10 rate of the 23 currencies, from each currency's first rate (1971 for most) to the day of download. About 2.1 MB; kept whole because a sale's cost needs the rate of its purchase date.
+- `g5a-yearly-averages.json`: the G.5A annual averages, 2014 to 2025 (releases before 2018 print a text table the builder does not read).
+- `treasury-year-end-2025.json`: the Treasury Reporting Rates of Exchange as of 2025-12-31, the rate in effect that day.
+- Every rate reads one way in the engine: units of the currency for one dollar (`money.ts` `UnitsPerDollar`). H.10 and G.5A print the euro, the pound, the Australian and the New Zealand dollar the other way (dollars per unit); `currency/rates.ts` turns them around.
 
 ## Second opinions
 
