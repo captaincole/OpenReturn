@@ -182,4 +182,47 @@ describe("QBI and an excess business loss", () => {
     const qbiForm = run.files("form-8995") ? "form-8995.0.line.2" : "form-8995-a.0.line.2_a";
     expect(run.reason(qbiForm)).toContain("Form 461");
   });
+
+  /*
+   * The consulting business is the only business with a loss: $400,000 on
+   * line 2; the K-1 has $50,000 of income. Line 16 is -$31,000, so the
+   * allowed loss is $369,000, and its QBI is -$400,000 x 369,000 / 400,000
+   * (irs-8995-inst-2025::sec::determining-your-qualified-business::b03).
+   */
+  const oneLosingBusiness = (extra: (fact: TaxFactRow) => TaxFactRow = (fact) => fact) =>
+    editK1Loss(base.facts, 50000)
+      .map((fact) =>
+        fact.key === makeBusinessFactKey("torvane-harbor-consulting")
+          ? {
+              ...fact,
+              value: {
+                ...(fact.value as object),
+                grossReceipts: 10000,
+                expenses: { supplies: 410000 },
+                allInvestmentAtRisk: true,
+              },
+            }
+          : fact,
+      )
+      .map(extra);
+
+  it("takes the excess off the QBI loss of the one business with a loss", () => {
+    const run = evaluate(oneLosingBusiness());
+    expect(run.value(LINE("2_schedule_1_line_3"))).toBe(-400000);
+    expect(run.value(LINE("16_excess_business_loss"))).toBe(-31000);
+    expect(run.value("form-8995-a-schedule-c.0.line.1_col_a_qbi_a")).toBe(-369000);
+    expect(run.value("form-8995-a-schedule-c.0.line.6_net_loss_carryforward")).toBe(369000);
+  });
+
+  it("keeps the gap when a stated line 8 loss is a second business loss", () => {
+    const run = evaluate(
+      oneLosingBusiness((fact) =>
+        fact.key === BUSINESS_LOSS_LIMIT_KEYS.otherBusinessIncome
+          ? { ...fact, value: -6000 }
+          : fact,
+      ),
+    );
+    expect(run.value(LINE("8_other_business_income_loss"))).toBe(-6000);
+    expect(run.reason("form-8995-a-schedule-c.0.line.1_col_a_qbi_a")).toContain("Form 461");
+  });
 });

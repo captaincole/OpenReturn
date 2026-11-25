@@ -148,6 +148,7 @@ export const isoldeFacts: TaxFactRow[] = [
   idFact("phone", "713-555-0188"),
   fact("identity", SPOUSE_KEYS.firstName, HOUSEHOLD.spouse.firstName, "W-2 from Gulf Arc."),
   fact("identity", SPOUSE_KEYS.lastName, HOUSEHOLD.spouse.lastName, "W-2 from Gulf Arc."),
+  fact("identity", SPOUSE_KEYS.occupation, "Structural engineer", "Verbal."),
   fact("identity", SPOUSE_KEYS.ssn, HOUSEHOLD.spouse.ssn, "W-2 from Gulf Arc."),
   fact("identity", SPOUSE_KEYS.dob, "11/19/1982", ANSWERS),
   fact("wages", makeW2FactKey("larkspur-biomedical"), isoldeW2, "W-2 from Larkspur Biomedical."),

@@ -67,7 +67,7 @@ export function resolveSchedulePInfo(inputs: ResolverInputs): SchedulePFilingInf
     /*
      * Line 7 needs last year's AMT carryover only when there was a regular one.
      * Line 10 needs what a recorded exercise waits for. An unstated spread is not
-     * asked here: Form 6251 asks it.
+     * asked: Cade records it only for an exercise (Form 6251 does the same).
      */
     missingInputs: {
       "schedule-p": [

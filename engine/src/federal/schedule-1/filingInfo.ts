@@ -3,6 +3,7 @@ import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Form2106FilingInfo } from "../2106/filingInfo.js";
 import type { Form3903FilingInfo } from "../3903/filingInfo.js";
 import type { Form461FilingInfo } from "../461/filingInfo.js";
+import type { Form4797FilingInfo } from "../4797/filingInfo.js";
 import type { Form8814FilingInfo } from "../8814/filingInfo.js";
 
 /*
@@ -16,6 +17,7 @@ export interface Schedule1FilingInfo
     Pick<Form2106FilingInfo, "form2106Totals" | "form2106TotalsGap">,
     Pick<Form3903FilingInfo, "movingExpenseDeduction" | "movingTotalsGap">,
     Pick<Form8814FilingInfo, "form8814Totals">,
+    Pick<Form4797FilingInfo, "form4797" | "form4797Gap" | "form4797SummaryGap">,
     Pick<Form461FilingInfo, "form461"> {
   /** Line 14 with its box: Armed Forces storage fees claimed with no Form 3903, cents kept. */
   armedForcesStorageFees?: number;

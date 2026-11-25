@@ -7,9 +7,11 @@
  * Form 4562 reports the test as a gap (federal/4562/lines.ts).
  */
 
+import { sum } from "../../money.js";
 import { statedBusinessesOnReturn, type BusinessFactValue } from "./business.js";
 import { placesPersonalProperty, type ScopedDepreciation } from "./depreciation.js";
 import { statedRentalsOnReturn, type RentalFactValue } from "./rental.js";
+import { section179RecaptureByBusiness } from "./section179Recapture.js";
 
 type FactRow = { key: string; value: unknown; category: string };
 type Activity = { key: string; value: BusinessFactValue | RentalFactValue };
@@ -43,11 +45,35 @@ function marked<T extends Activity>(activities: T[], shared: boolean): T[] {
 
 const SHARED_TEST_MINIMUM = 2;
 
-/* statedBusinessesOnReturn, with the return's depreciation scope. */
+const BUSINESS_PREFIX = "business.";
+
+/*
+ * Form 4797 line 35: the section 179 or 280F(b)(2) recapture goes "as other
+ * income on the same form or schedule on which you took the deduction"
+ * (irs-4797-inst-2025::sec::line-35::b01): Schedule C line 6 of the business the
+ * recapture fact names, added to its stated other income.
+ */
+function withRecapture<T extends { key: string; value: BusinessFactValue }>(
+  businesses: T[],
+  facts: ReadonlyArray<FactRow>,
+): T[] {
+  const recapture = section179RecaptureByBusiness(facts);
+  if (recapture.size === 0) return businesses;
+  return businesses.map((business) => {
+    const amount = recapture.get(business.key.slice(BUSINESS_PREFIX.length));
+    if (amount === undefined) return business;
+    return {
+      ...business,
+      value: { ...business.value, otherIncome: sum(business.value.otherIncome, amount) },
+    };
+  });
+}
+
+/* statedBusinessesOnReturn, with the return's depreciation scope and its Form 4797 Part IV recapture. */
 export function businessesOnReturn(facts: ReadonlyArray<FactRow>, joint: boolean) {
   const result = statedBusinessesOnReturn(facts, joint);
   const shared = activitiesWithPersonalProperty(facts, joint) >= SHARED_TEST_MINIMUM;
-  return { ...result, businesses: marked(result.businesses, shared) };
+  return { ...result, businesses: withRecapture(marked(result.businesses, shared), facts) };
 }
 
 /* statedRentalsOnReturn, with the return's depreciation scope. */

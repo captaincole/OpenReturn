@@ -21,6 +21,7 @@ import { netProfit } from "../schedule-c/lines.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
 import { resolveScheduleSEInfo } from "../schedule-se/resolveInfo.js";
 import type { QbiBusiness, QbiFilingInfo } from "./filingInfo.js";
+import { withForm4797 } from "./form4797.js";
 
 /* 1099-DIV box 5, cents kept. Undefined with no 1099-DIV. */
 function form1099ReitDividends(inputs: ResolverInputs): number | undefined {
@@ -303,7 +304,7 @@ export function qbiBusinesses(inputs: ResolverInputs): {
   const planDeduction = num(inputs, ADJUSTMENT_KEYS.selfEmployedPlanDeduction);
   const sharedPlan = onReturn.length > 1 && (planDeduction ?? 0) > 0;
   return {
-    businesses: [
+    businesses: withForm4797(inputs, [
       ...qbiRentals(inputs),
       ...onReturn.map(({ key, value, owner }): QbiBusiness => ({
         factKey: key,
@@ -320,7 +321,7 @@ export function qbiBusinesses(inputs: ResolverInputs): {
         qualifiedPropertyUbia: value.qualifiedPropertyUbia,
       })),
       ...qbiPassThroughs(inputs),
-    ],
+    ]),
     malformedKeys,
   };
 }

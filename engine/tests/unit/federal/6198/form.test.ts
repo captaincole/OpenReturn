@@ -10,6 +10,7 @@ import {
   makeBusinessFactKey,
   makeK1HoldingFactKey,
   makePartnershipK1FactKey,
+  makeRentalFactKey,
   type BusinessFactValue,
   type K1HoldingFactValue,
 } from "../../../../src/facts/index.js";
@@ -17,6 +18,7 @@ import type { AIDecisionRow, TaxFactRow } from "../../../../src/facts/rows.js";
 import { evaluateScenario } from "../../../../src/index.js";
 import { decisionRow } from "../../../helpers/fixtureBuilders.js";
 import { ituraldeScenario as base } from "../../../scenarios/synthetic/ituralde/index.js";
+import { noalScenario as noal } from "../../../scenarios/synthetic/noal/index.js";
 
 const FILM = makeBusinessFactKey("varga-film-works");
 const RANCH = makePartnershipK1FactKey("kandor-ridge-cattle");
@@ -150,6 +152,34 @@ describe("Form 6198 cases the engine does not handle", () => {
     );
     expect(gapReason(run.field("schedule-c", LINE_31))).toContain("recapture");
     expect(run.value("schedule-c", LINE_31)).toBeUndefined();
+  });
+
+  it("checks a profit year for recapture too (irs-6198-inst-2025::sec::line-5::b01)", () => {
+    const profit = { ...film, grossReceipts: 60000 };
+    const belowZero = evaluate(
+      factsWith({
+        [FILM]: {
+          ...profit,
+          atRisk: { simplified: { adjustedBasisAtStart: 1000, decreases: 4000 } },
+        },
+      }),
+    );
+    expect(gapReason(belowZero.field("schedule-c", LINE_31))).toContain("recapture");
+    expect(belowZero.value("schedule-1", "0.line.3")).toBeUndefined();
+    const aboveZero = evaluate(factsWith({ [FILM]: profit }));
+    expect(aboveZero.value("schedule-c", LINE_31)).toBe(15000);
+    expect(aboveZero.info.form6198Copies?.length).toBe(1);
+  });
+
+  it("makes a rental loss with amounts not at risk a gap, not the whole loss", () => {
+    const facts = noal.facts.map((fact) =>
+      fact.key === makeRentalFactKey("oriole-house")
+        ? { ...fact, value: { ...(fact.value as object), allInvestmentAtRisk: false } }
+        : fact,
+    );
+    const run = evaluate(facts, noal.decisions);
+    expect(gapReason(run.field("schedule-e", "0.line.21_income_or_loss_a"))).toContain("Form 6198");
+    expect(run.value("form-1040", "line.11a")).toBeUndefined();
   });
 });
 

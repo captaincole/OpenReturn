@@ -187,11 +187,22 @@ function rentalWorksheet1(
  * ::passive-activities::b03, ::b04); its lines 9 and 10 are already in Form
  * 1040 lines 3b and 7a. Undefined when neither form files.
  */
+/*
+ * A Form 4797 filer uses Worksheet 1 (irs-1040-inst-2025::sec::yes-see-form-4797::b01);
+ * its Form 4797 parts (the gain of line 6, an ordinary gain on Form 4797 line 10
+ * in line 11: irs-pub-596-2025::sec::passive-activities::b01) are not modeled.
+ */
+const FORM_4797_GAP =
+  "Form 4797 files: Pub. 596 Worksheet 1 needs its gains (lines 6 and 11), which the engine does not figure for the EIC.";
+
 export function worksheet1(
   form: Lines,
   info: Worksheet1Info,
   step2InvestmentIncome: number,
 ): Worksheet1 | undefined {
+  if (info.mustFile?.["form-4797"]?.value === true) {
+    return { kind: "unsupported", reason: FORM_4797_GAP };
+  }
   const rentals = rentalWorksheet1(form, info, step2InvestmentIncome);
   const child = info.form8814Totals;
   if (child === undefined) return rentals;
