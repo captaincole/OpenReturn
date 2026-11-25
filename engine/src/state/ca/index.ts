@@ -400,6 +400,11 @@ export const CA_FORMS: FormSpec[] = [
     displayName: "FTB 3840",
     relativeDir: "state/ca/3840",
     register: registerForm3840,
+    /* "File a separate form FTB 3840 for each such exchange" (ca-3840-inst-2025::sec::g-multiple-exchanges::b01). */
+    copies: {
+      count: (info) => info?.form3840Copies?.length ?? 1,
+      select: (info, index) => info && { ...info, form3840: info.form3840Copies?.[index] },
+    },
   }),
   makeFormSpec({
     formId: "schedule-d-1",
