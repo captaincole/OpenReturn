@@ -1,6 +1,7 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
 import { defineForm, type BindingFn, type FormAccessor } from "../../../defineForm.js";
+import { form4797Files, scheduleDGainFromForm4797 } from "../../../federal/4797/receivers.js";
 import { numberOrBlank } from "../../../money.js";
 import { unsupported, type Unsupported } from "../../../types.js";
 import type { ScheduleDCaFilingInfo } from "./filingInfo.js";
@@ -94,6 +95,24 @@ function federalLine7a(
   return federalHasCapitalGains ? numberOrBlank(form["form-1040.line.7a"]) : 0;
 }
 
+/*
+ * MANUAL EDIT: line 10 (federal 1040 line 7a) holds Form 4797's section 1231 gain
+ * through federal Schedule D line 11, and line 11 holds only the capital asset
+ * sales. A business property gain that is the same on both returns needs no
+ * adjustment (ca-540-sched-d1-inst-2025::sec::a-purpose::b01), but the
+ * instructions name no line of this form for California's gain, and the engine
+ * has no Schedule D-1. So lines 12a and 12b are a gap while Form 4797 sends an
+ * amount, or a gap, to federal Schedule D line 11.
+ */
+export function form4797Gap(info: ScheduleDCaFilingInfo): Unsupported | undefined {
+  if (!form4797Files(info)) return undefined;
+  const sent = scheduleDGainFromForm4797(info);
+  if (sent === undefined) return undefined;
+  return unsupported(
+    "Federal Schedule D line 11 holds a Form 4797 section 1231 amount, which line 10 includes and line 11 does not; the instructions name no Schedule D (540) line for California's section 1231 gain, and the engine has no Schedule D-1.",
+  );
+}
+
 /* Lines 12a and 12b: line 10 against line 11. */
 const line12 =
   (pick: "line12a" | "line12b") =>
@@ -101,6 +120,8 @@ const line12 =
     const figures = info.scheduleDCaFigures;
     if (figures === undefined) return undefined;
     if (figures.gap !== undefined) return unsupported(figures.gap);
+    const fromForm4797 = form4797Gap(info);
+    if (fromForm4797) return fromForm4797;
     const line10 = numberOrBlank(form["3.line.10"]);
     if (line10 === undefined || figures.line11 === undefined) return undefined;
     return adjustment(line10, figures.line11)[pick];

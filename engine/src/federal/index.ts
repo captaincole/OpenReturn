@@ -22,6 +22,7 @@ import { register as registerForm4563 } from "./4563/bindings.js";
 import { register as registerForm461 } from "./461/bindings.js";
 import { register as registerForm4684 } from "./4684/bindings.js";
 import { register as registerForm4797 } from "./4797/bindings.js";
+import { form4797CopyCount } from "./4797/copies.js";
 import { register as registerForm4835 } from "./4835/bindings.js";
 import { register as registerForm4952 } from "./4952/bindings.js";
 import { register as registerForm4970 } from "./4970/bindings.js";
@@ -649,6 +650,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 4797",
     relativeDir: "federal/4797",
     register: registerForm4797,
+    // More than four properties in a part: "use additional forms" (4797/copies.ts).
+    copies: {
+      count: (info) => form4797CopyCount(info?.form4797),
+      select: (info, index) => info && { ...info, form4797CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-4835",

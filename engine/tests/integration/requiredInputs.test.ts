@@ -154,6 +154,16 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^ca_payments\.(estimated_tax|prior_year_overpayment_applied|extension_payment)$/,
     "an answer Cade records only when the user made that California payment (Form 540 line 72)",
   ],
+  [
+    /^business_property_sale\.(?!nonrecaptured_section_1231_losses$)[^.]+$/,
+    "a Form 4797 sale fact is the whole sale (as a rental property fact is the whole property); " +
+      "whether one exists is Cade's question",
+  ],
+  [
+    /^section_179_recapture\.[^.]+$/,
+    "a Form 4797 Part IV fact is the whole recapture of one property; whether business use " +
+      "dropped to 50% or less is Cade's question",
+  ],
   [/^identity\.email$/, "Cade records the login email at doc-gen time"],
   [/^identity\.(spouse\.)?name\.middle_initial$/, "printed when stated; not every name has one"],
   [
