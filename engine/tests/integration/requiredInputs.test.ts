@@ -137,6 +137,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "whether one exists is Cade's question",
   ],
   [
+    /^ca_health_coverage\.unclaimed\.[^.]+$/,
+    "each fact is a whole person the taxpayer can claim as a dependent but does not (FTB 3853 " +
+      "Parts I and III); whether one lives in the household is Cade's question",
+  ],
+  [
     /^adoption\.child\.[^.]+$/,
     "each fact is a whole child the taxpayer adopted or tried to adopt (Form 8839 line 1); " +
       "whether one exists is Cade's question",
