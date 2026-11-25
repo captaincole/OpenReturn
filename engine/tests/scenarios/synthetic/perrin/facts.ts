@@ -200,6 +200,7 @@ export const perrinFacts: TaxFactRow[] = [
   idFact("phone", "915-555-0163"),
   fact("identity", SPOUSE_KEYS.firstName, MARISOL.firstName, "Stated by Perrin."),
   fact("identity", SPOUSE_KEYS.lastName, MARISOL.lastName, "Stated by Perrin."),
+  fact("identity", SPOUSE_KEYS.occupation, "Nurse", "Stated by Perrin."),
   fact("identity", SPOUSE_KEYS.ssn, MARISOL.ssn, "Marisol's W-2, box a."),
   fact("identity", SPOUSE_KEYS.dob, "08/09/1988", "Stated by Marisol."),
   fact("wages", makeW2FactKey("franklin-ridge"), perrinW2, "W-2 from Franklin Ridge Logistics."),
