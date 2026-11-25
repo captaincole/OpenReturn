@@ -157,6 +157,16 @@ export function line8pAdjustment(
  * plus, by the same line 15 rule, the threshold, so that what is used and
  * what line 16 carries forward add up to line 14b (QUESTIONS.md item 4).
  * The two cases are one formula: line 14a + line 15, from 0 to the carryover.
+ *
+ * DECISION (2026-11-24): two texts differ on the carryover used with business income.
+ * - "enter the line 14b amount (up to the business income amount) on Schedule
+ *   CA (540) ... line 8z, column B" (ca-3461-inst-2025::sec::line-14b::b01).
+ * - The form's own lines: line 16 is line 14c plus line 15, so the carryover
+ *   that remains is what line 14a and the line 15 threshold did not absorb.
+ * The engine follows the form's arithmetic. With $100,000 of business income
+ * and a $500,000 carryover it uses $413,000 and carries $87,000. Under the
+ * first text $100,000 is used while line 16 still carries only $87,000, so
+ * $313,000 of loss would be neither used nor carried.
  */
 export function carryoverUsed(line14a: number, carryover: number, threshold: number): number {
   if (carryover <= 0) return 0;
