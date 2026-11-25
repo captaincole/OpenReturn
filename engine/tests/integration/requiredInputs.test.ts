@@ -113,6 +113,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "exclusion, or a K-1 code AY or AZ credit (Form 8936 lines 1b, 3b–3e, 7 and 20)",
   ],
   [
+    /^refueling_property\.[^.]+$/,
+    "each fact is a whole item of refueling property placed in service (Schedule A (Form 8911)); " +
+      "whether one was installed is Cade's question. Form 8911 lists the fact again while line 13 " +
+      "or line 17 inside it has no answer",
+  ],
+  [
     /^ca_work_move\.[^.]+$/,
     "each fact is a whole move for a new job (FTB 3913); whether one happened is Cade's question. " +
       "FTB 3913 lists the fact again while an answer inside it (time test, line 4) is missing",
