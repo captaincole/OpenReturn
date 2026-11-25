@@ -16,8 +16,8 @@ type Fn = BindingFn<Form4797, Form4797FilingInfo, keyof Form4797>;
 type Bindings = Partial<{ [K in keyof Form4797]: BindingFn<Form4797, Form4797FilingInfo, K> }>;
 
 /*
- * MANUAL EDIT: lines 3, 14 and 18a (Form 4684 Section B), and 4 and 15 (Form
- * 6252) are in `unsupported` below. Lines 5 and 16 take Form 8824's amounts.
+ * MANUAL EDIT: lines 3, 14 and 18a (Form 4684 Section B) are in `unsupported`
+ * below. Lines 4 and 15 take Form 6252's amounts, and lines 5 and 16 Form 8824's.
  */
 type LineFn<T> = (form: unknown, info: Form4797FilingInfo) => T | Unsupported | undefined;
 
@@ -41,7 +41,7 @@ function lineOf<T extends Value>(pick: (lines: Form4797Lines) => T | undefined):
   return copyLineOf((lines, copyIndex) => (copyIndex === 0 ? pick(lines) : undefined));
 }
 
-/* A line of lines 7–18b, which also waits on the summary gap (a K-1 section 1231 item, Form 6252 or 8824). */
+/* A line of lines 7–18b, which also waits on the summary gap (a K-1 section 1231 item, a Form 6252 or 8824 gap). */
 function summaryLineOf(pick: (lines: Form4797Lines) => number | undefined): LineFn<number> {
   return (form, info) => {
     if (info.form4797SummaryGap && !info.form4797Gap && copyIndexOf(info) === 0) {
@@ -57,24 +57,31 @@ function summaryLineOf(pick: (lines: Form4797Lines) => number | undefined): Line
  * gap of an exchange the engine cannot carry.
  */
 function exchangeLineOf(pick: (lines: Form4797Lines) => number | undefined): LineFn<number> {
-  return (form, info) => {
-    if (info.form4797ExchangeGap && !info.form4797Gap && copyIndexOf(info) === 0) {
-      return unsupported(info.form4797ExchangeGap);
-    }
-    return lineOf(pick)(form, info);
-  };
+  return receivedLineOf((info) => info.form4797ExchangeGap, pick);
 }
 
 /* MANUAL EDIT: columns (a)–(g) of the line 2 and line 10 rows (properties.ts saleRow). */
 const ROW_COLUMNS: Array<[string, (row: SaleRow) => Value]> = [
   ["a", (row) => row.description],
-  ["b", (row) => printedDate(row.dateAcquired)],
-  ["c", (row) => printedDate(row.dateSold)],
-  ["d", (row) => row.grossSalesPrice],
+  ["b", (row) => (row.fromForm6252 ? undefined : printedDate(row.dateAcquired))],
+  ["c", (row) => (row.fromForm6252 ? undefined : printedDate(row.dateSold))],
+  ["d", (row) => (row.fromForm6252 ? undefined : row.grossSalesPrice)],
   ["e", (row) => row.depreciation],
-  ["f", (row) => row.costPlusExpense],
+  ["f", (row) => (row.fromForm6252 ? undefined : row.costPlusExpense)],
   ["g", (row) => row.gainOrLoss],
 ];
+
+/* MANUAL EDIT: a line another form sends (lines 4, 5, 15 and 16); that form's gap holds the line. */
+function receivedLineOf(
+  gapOf: (info: Form4797FilingInfo) => string | undefined,
+  pick: (lines: Form4797Lines) => number | undefined,
+): LineFn<number> {
+  return (form, info) => {
+    const gap = gapOf(info);
+    if (gap && !info.form4797Gap && copyIndexOf(info) === 0) return unsupported(gap);
+    return lineOf(pick)(form, info);
+  };
+}
 
 function rowBindings(): Bindings {
   const out: Record<string, Fn> = {};
@@ -205,6 +212,15 @@ export function register(): void {
       "0.line.11_loss_from_line_7": summaryLineOf((lines) => lines.line11),
       "0.line.12_gain_from_line_7_or_8": summaryLineOf((lines) => lines.line12),
       "0.line.13_gain_from_line_31": lineOf((lines) => lines.line13),
+      // MANUAL EDIT: lines 4 and 15 take Form 6252 (irs-4797-inst-2025::sec::installment-sales::b01).
+      "0.line.4_section_1231_gain_installment_sales": receivedLineOf(
+        (info) => info.form4797InstallmentGaps?.line4,
+        (lines) => lines.line4,
+      ),
+      "0.line.15_ordinary_gain_installment_sales": receivedLineOf(
+        (info) => info.form4797InstallmentGaps?.line15,
+        (lines) => lines.line15,
+      ),
       "0.line.16_ordinary_like_kind_exchanges": exchangeLineOf((lines) => lines.line16),
       "0.line.17_ordinary_gain_loss_total": summaryLineOf((lines) => lines.line17),
       "0.line.18b_redetermined_ordinary_gain_loss": summaryLineOf((lines) => lines.line18b),
@@ -221,10 +237,6 @@ export function register(): void {
         "Form 4684 Section B (business and income-producing property) is not modeled: no lines 31 and 38a amount reaches Form 4797.",
       "0.line.18a_loss_form_4684_income_producing":
         "Line 18a needs a loss on Form 4684 line 35 column (b)(ii) (irs-4797-inst-2025::sec::line-18a::b01); Form 4684 Section B is not modeled.",
-      "0.line.4_section_1231_gain_installment_sales":
-        "Form 6252 (installment sales) has no rules: no line 26 or 37 section 1231 gain reaches Form 4797.",
-      "0.line.15_ordinary_gain_installment_sales":
-        "Form 6252 (installment sales) has no rules: no line 25 or 36 ordinary gain reaches Form 4797.",
     },
 
     formatters: {

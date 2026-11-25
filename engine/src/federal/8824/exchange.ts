@@ -214,7 +214,7 @@ function placeGain(
 }
 
 const INSTALLMENT_GAP =
-  "The installment method applies: the gain goes on Form 6252 (irs-8824-inst-2025::sec::line-22::b01, line-21::b02), which has no rules.";
+  "The installment method applies: the gain goes on Form 6252 (irs-8824-inst-2025::sec::line-22::b01, line-21::b02), and the engine does not carry an exchange's gain to Form 6252.";
 const OTHER_BUSINESS_GAP =
   'Line 14: other property given up that was used in a business is reported "as if the exchange had been a sale" (irs-8824-inst-2025::sec::line-14::b01), on Form 4797 with its own recapture, and the engine does not carry that sale from an exchange fact.';
 const RELATED_LOSS_GAP =

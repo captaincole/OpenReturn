@@ -120,7 +120,7 @@ describe("Form 8824 results on other forms", () => {
     expect(run.value("schedule-d", "0.line.11_long_term_gain_other_forms")).toBe(95000);
   });
 
-  it("an installment sale makes Schedule D lines 4 and 11 a gap (Form 6252 has no rules)", () => {
+  it("an installment sale makes Schedule D lines 4 and 11 a gap (no exchange reaches Form 6252)", () => {
     const facts = withExchange(gaulScenario, (value) => ({ ...value, installmentMethod: true }));
     const run = evaluate(gaulScenario, facts);
     expect(run.field("schedule-d", "0.line.11_long_term_gain_other_forms")).toMatchObject(

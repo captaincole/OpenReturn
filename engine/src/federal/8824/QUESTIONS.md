@@ -6,15 +6,15 @@ Each place where the form and its instructions do not settle a rule, sorted in t
 
 Each is decided by the author, with a `DECISION` comment in the code and a row in `docs/rule-decisions.md`, and waits for a person's review.
 
-### A1. Cash on lines 12–18 (`lines.ts`; row A1)
+### A1. Cash on lines 12–18 (`lines.ts`; row A3)
 
 The multi-asset heading says not to complete lines 12–18 with cash; the line 20 example fills line 15 with cash. The engine fills them for one property given up and one received.
 
-### A2. The summary form (`printed.ts`; row A2)
+### A2. The summary form (`printed.ts`; row A4)
 
 More than one exchange prints the summary form every time.
 
-### 1. Line 21, section 1245: line 19 or the part's own gain (`lines.ts`; row A3)
+### 1. Line 21, section 1245: line 19 or the part's own gain (`lines.ts`; row A5)
 
 - Text A: "The total adjustments for deductions ... for depreciation or amortization (up to the amount of gain shown on line 19)" (irs-8824-inst-2025::sec::line-21::b01).
 - Text B: the example figures the section 1245(a)(1) amount as "the lesser of the property's depreciable basis of $35,000 or the amount realized of $55,000" (line-24::b01).
@@ -134,7 +134,7 @@ More than one exchange prints the summary form every time.
 
 - **Multi-asset exchanges.** The fact holds one property given up and one received. More than one property needs the exchange groups of Regulations section 1.1031(j)-1 and a statement in place of lines 12–18 (multi-asset-exchanges::b01). Proposal: a list of properties per side, and a statement layout.
 - **A home used partly for business.** Two worksheet Forms 8824 split every amount (property-used-as-home::b02). Proposal: the fact states the home share; the engine fills two worksheets and adds lines 15–25. Today such a fact is a gap.
-- **Installment sales.** Form 6252 has no rules. When it does, line 22 and line 21 of an installment exchange can flow through it.
+- **Installment sales.** Form 6252 has rules, but an installment exchange's line 22 and line 21 do not flow through it yet: the exchange fact and the installment sale fact are not linked, so Form 8824 makes such an exchange a gap (exchange.ts). Proposal: the exchange fact names its installment sale, and Form 6252 takes lines 21 and 22.
 - **A disposition date for lines 9 and 10.** The fact holds the answers, not the date. A date of the first disposition would let the engine test the 2-year window (question 7), but tolling (line-7::b03) can move the window, so the answer would still be the taxpayer's.
 
 ## Second opinions
