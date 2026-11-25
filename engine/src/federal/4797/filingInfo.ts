@@ -14,6 +14,8 @@ export interface Form4797FilingInfo extends BaseFilingInfo {
    * or 8824 filing.
    */
   form4797SummaryGap?: string;
+  /* Why a Form 6252 amount for line 4, 10 or 15 is not known (a sale's gap); the summary is a gap too. */
+  form4797InstallmentGaps?: { line4?: string; line10?: string; line15?: string };
   /* Which copy this render prints (renderCopies sets it; copies.ts); absent means the first. */
   form4797CopyIndex?: number;
   /* Why a Part IV column's line 35 cannot reach its schedule. */

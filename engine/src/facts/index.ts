@@ -50,6 +50,7 @@ export * from "./kinds/homeEnergy.js";
 export * from "./kinds/householdEmployment.js";
 export * from "./kinds/hsaCoverage.js";
 export * from "./kinds/hsaDistribution.js";
+export * from "./kinds/installmentSale.js";
 export * from "./kinds/interest.js";
 export * from "./kinds/investmentInterest.js";
 export * from "./kinds/isoExercise.js";

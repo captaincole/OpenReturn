@@ -80,6 +80,9 @@ function ordinarySection1231(lines: Form4797Lines): number {
   return lines.line7 <= 0 ? lines.line7 : (lines.line12 ?? 0);
 }
 
+/* The netting member of a Form 6252 gain on line 4: not an activity, so never QBI. */
+const FORM_6252_GAIN = "form-6252";
+
 const SHARE_GAP =
   "Section 1231 gains and losses of more than one activity net on line 7, and line 11 or 12 makes part of the net ordinary. A section 1231 amount is QBI only when it is not capital gain or loss (irs-8995-inst-2025::sec::determining-your-qualified-business::b06), and the instructions do not say how the ordinary part splits among the activities.";
 
@@ -108,6 +111,8 @@ export function form4797Activities(
   const netting = new Set(
     properties.filter((each) => section1231Amount(each) !== 0).map((each) => each.activity),
   );
+  // Line 4's Form 6252 gain nets on line 7 too; its sale names no activity (6252/totals.ts).
+  if ((lines.line4 ?? 0) !== 0) netting.add(FORM_6252_GAIN);
   if (netting.size !== 1) return { amounts, ordinaryGap: SHARE_GAP };
   return {
     amounts: amounts.map((each) =>
