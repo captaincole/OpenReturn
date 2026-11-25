@@ -57,14 +57,14 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "form-8801.1.line.21_combine_lines_18_through_20": 164820,
       // Line 22 — Enter your 2025 regular income tax liability minus allowable credits
       "form-8801.1.line.22_regular_tax_minus_credits": 201143,
-      // Line 23 — Enter the amount from your 2025 Form 6251, line 9, or 2025 Schedule I (Form 1041
-      "form-8801.1.line.23_current_year_tentative_minimum_tax": 165806,
+      // Line 23 — Form 6251 line 7 (165,806) less the $250 credit by the election (rule-decisions.md row 12)
+      "form-8801.1.line.23_current_year_tentative_minimum_tax": 165556,
       // Line 24 — Subtract line 23 from line 22. If zero or less, enter -0-
-      "form-8801.1.line.24_line_22_minus_line_23": 35337,
+      "form-8801.1.line.24_line_22_minus_line_23": 35587,
       // Line 25 — Minimum tax credit. Enter the smaller of line 21 or line 24
-      "form-8801.1.line.25_minimum_tax_credit": 35337,
+      "form-8801.1.line.25_minimum_tax_credit": 35587,
       // Line 26 — Credit carryforward to 2026. Subtract line 25 from line 21
-      "form-8801.1.line.26_credit_carryforward_next_year": 129483,
+      "form-8801.1.line.26_credit_carryforward_next_year": 129233,
       // Line 27 — Enter the amount from Form 8801, line 10
       "form-8801.2.line.27_amount_from_line_10": 618213,
       // Line 28 — Enter the amount from line 4 of your 2024 Qualified Dividends and Capital Gain T
@@ -194,12 +194,36 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 1 — Foreign tax credit. Attach Form 1116 if required
       "schedule-3.0.line.1": 250,
       // Line 6b — Credit for prior year minimum tax. Attach Form 8801
-      "schedule-3.0.line.6b": 35337,
+      "schedule-3.0.line.6b": 35587,
       // Line 7 — Total other nonrefundable credits. Add lines 6a through 6z
-      "schedule-3.0.line.7": 35337,
+      "schedule-3.0.line.7": 35587,
       // Line 8 — Add lines 1 through 4, 5a, 5b, and 7. Enter here and on Form 1040, line 20
-      "schedule-3.0.line.8": 35587,
+      "schedule-3.0.line.8": 35837,
     },
+  },
+  // Interest $6,000 and ordinary dividends $34,000, each over $1,500: Schedule B files.
+  "schedule-b": {
+    engineFields: {
+      // Line 1 — Amount (row 1): Lugard Savings Bank, 1099-INT box 1
+      "schedule-b.0.line.1_amount_1": 6000,
+      // Line 2 — Add the amounts on line 1
+      "schedule-b.0.line.2_total_interest": 6000,
+      // Line 4 — Subtract line 3 from line 2 (no Form 8815, line 3 blank)
+      "schedule-b.0.line.4_taxable_interest": 6000,
+      // Line 5 — Amount (row 1): Tanchico World Index Fund, 1099-DIV box 1a
+      "schedule-b.0.line.5_amount_1": 34000,
+      // Line 6 — Add the amounts on line 5
+      "schedule-b.0.line.6_total_ordinary_dividends": 34000,
+    },
+    renderedText: {
+      "schedule-b.0.line.1_payer_name_1": "Lugard Savings Bank",
+      "schedule-b.0.line.5_payer_name_1": "Tanchico World Index Fund",
+    },
+    // No foreign account (decisions.scope.has_foreign_financial_account) and no foreign trust.
+    renderedChecked: [
+      "schedule-b.0.line.7a_foreign_account_no",
+      "schedule-b.0.line.8_foreign_trust_no",
+    ],
   },
   "form-8959": {
     engineFields: {
@@ -288,15 +312,15 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 18 — Add lines 16 and 17
       "form-1040.line.18": 201393,
       // Line 20 — Amount from Schedule 3, line 8
-      "form-1040.line.20": 35587,
+      "form-1040.line.20": 35837,
       // Line 21 — Add lines 19 and 20
-      "form-1040.line.21": 35587,
+      "form-1040.line.21": 35837,
       // Line 22 — Subtract line 21 from line 18. If zero or less, enter -0-
-      "form-1040.line.22": 165806,
+      "form-1040.line.22": 165556,
       // Line 23 — Other taxes, including self-employment tax, from Schedule 2, line 21
       "form-1040.line.23": 5570,
       // Line 24 — Add lines 22 and 23. Total tax
-      "form-1040.line.24": 171376,
+      "form-1040.line.24": 171126,
       // Line 25a — Federal income tax withheld from Form(s) W-2
       "form-1040.line.25a": 175000,
       // Line 25c — Federal income tax withheld from other forms (see instructions)
@@ -306,9 +330,9 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 33 — Add lines 25d, 26, and 32. Total payments
       "form-1040.line.33": 179050,
       // Line 34 — If line 33 is more than line 24, the amount you overpaid
-      "form-1040.line.34": 7674,
+      "form-1040.line.34": 7924,
       // Line 35a — Amount of line 34 you want refunded to you
-      "form-1040.line.35a": 7674,
+      "form-1040.line.35a": 7924,
     },
   },
 };

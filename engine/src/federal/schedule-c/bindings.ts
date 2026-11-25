@@ -6,7 +6,7 @@ import { roundDollars } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { homeOfficeActualGap, sharedHomeGap } from "../8829/lines.js";
-import { businessNeedsForm6198, figureBusinessForm6198 } from "./atRisk.js";
+import { figureBusinessForm6198 } from "./atRisk.js";
 import { line13Depreciation, partVEntries } from "./attachments.js";
 import type { ScheduleCFilingInfo } from "./filingInfo.js";
 import {
@@ -122,12 +122,12 @@ function attachmentUnsupported(
  * MANUAL EDIT: a loss with some investment not at risk (box 32b) takes the loss
  * Form 6198 allows (irs-1040sc-inst-2025::sec::line-32::b03, schedule-c/atRisk.ts);
  * a case Form 6198 does not handle makes line 31 unsupported with its reason.
+ * A profit with some investment not at risk is checked for recapture too
+ * (irs-6198-inst-2025::sec::line-5::b01; figure.ts profitYearRecapture).
  */
 function notAtRiskLoss(business: BusinessFactValue, onReturn: readonly BusinessFactValue[]) {
   const beforeAtRisk = profitBeforeLossRules(business, onReturn);
-  if (beforeAtRisk === undefined || !businessNeedsForm6198(business, beforeAtRisk)) {
-    return undefined;
-  }
+  if (beforeAtRisk === undefined || business.allInvestmentAtRisk !== false) return undefined;
   const outcome = figureBusinessForm6198(business, beforeAtRisk);
   return outcome.kind === "unsupported" ? unsupported(outcome.reason) : undefined;
 }

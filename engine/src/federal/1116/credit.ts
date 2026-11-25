@@ -17,13 +17,15 @@ import { regularTaxForCredit, type Accessor } from "./returnAmounts.js";
  * Form 1116: line 35 ("Enter here and on Schedule 3 (Form 1040), line 1").
  * Blank with no foreign tax, or when the decision files no Form 1116 and the
  * election does not apply. A K-1's foreign taxes the engine cannot read make
- * it a gap; a K-1 that waits makes it wait.
+ * it a gap; a K-1 that waits, or a 1099 fact that waits for its exchange rate,
+ * makes it wait.
  */
 export function foreignTaxCredit(form: Accessor, info: Form1116FilingInfo): Value {
   const foreignTax = info.foreignTax;
   if (foreignTax === undefined) return undefined;
   if (foreignTax.k1Gap !== undefined) return unsupported(foreignTax.k1Gap);
-  if (foreignTax.k1Waiting === true) return undefined;
+  if (foreignTax.currencyGap !== undefined) return unsupported(foreignTax.currencyGap);
+  if (foreignTax.taxesWaiting === true) return undefined;
   if (foreignTax.election) {
     const regularTax = regularTaxForCredit(form, info);
     if (typeof regularTax !== "number") return regularTax;

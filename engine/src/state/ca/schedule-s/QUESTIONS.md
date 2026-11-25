@@ -10,8 +10,8 @@ default named. A person decides whether to keep it.
 1. **Two official texts give different numbers; a person decides:** item 11.
 2. **Work that could be done; not now:** items 4, 5, 6, 7 and 8 say why.
    Items 1, 2, 3, 9, 10 and 12 are defaults that need no work.
-3. **Pattern change:** none. Form 540 line 43 was unsupported and now holds
-   this credit; item 13 is the recipe for when FTB 3510 also writes it.
+3. **Pattern change:** none. Form 540 lines 43 and 44 were unsupported; they
+   now hold this credit and the credit for prior year AMT (item 13, applied).
 
 ## 1. Rounding of lines 5 and 10
 
@@ -146,6 +146,33 @@ income Virginia taxed on line 9.
 
 ## 13. Form 540 line 43 when FTB 3510 is on `main` too
 
+**Applied in the merge of `main` (2026-11-24).** How:
+
+- `540/credits.ts` builds one list of the other credits taken, each above 0:
+  the credit for prior year AMT (Schedule P line 10 column (b)), then this
+  credit (Schedule P line 20 column (b), or the Schedule S total with no
+  Schedule P). The first takes line 43, the second line 44. With more than two,
+  both lines are blank; no third credit exists yet. The list waits while
+  either credit waits, so no line is fixed too early.
+- Line 44 is bound in `540/bindings.ts` and is off its `unsupported` list. With
+  neither form filed, lines 43 and 44 keep main's unsupported reasons. With a
+  form filed, a line with no credit is blank. A Schedule S credit of 0 is now
+  blank on line 43, not a 0 with name and code.
+- Schedule S line 2 reads the prior year AMT credit from Schedule P line 10
+  column (b) and waits for it (`3510/creditUsed.ts`, shared with Form 540).
+  It no longer reads Form 540 line 44. No cycle: line 10 column (b) is FTB
+  3510 line 38, which reads Form 540 lines 31 and 32 and Schedule P Part II
+  and Section A, never Schedule S.
+- Lines 47 and 48 wait while either credit waits.
+- Schedule P Part III keeps both rows: line 10 (main) and line 20 (this branch).
+- `engine/tests/unit/state/ca/540/otherCredits.test.ts` claims both credits:
+  line 43 code 188 ($6,450), line 44 code 187 ($1,500), line 47 $7,950, and
+  Schedule S line 2 is line 35 less the AMT credit ($23,775 − $6,450 = $17,325).
+- The Form 540 and Schedule P (540) instructions give no order; the order is
+  still our choice.
+
+The recipe as written before the merge:
+
 This branch alone puts the other state tax credit on Form 540 line 43 (name
 "Other State Tax", code 187). The `form-3510` branch alone puts the credit for
 prior year AMT on line 43 too (name "Prior Year AMT", code 188). Each is right
@@ -218,7 +245,7 @@ Recipe for whoever merges the second branch:
 | Line 7 (state, amount), line 9 | stated rule (stated answers) |
 | Line 12 | stated rule |
 | Who files, one copy per state | stated rule; NH, TN, DC, group return own reading (5, 6) |
-| Form 540 line 43 (name, code 187, amount) | stated rule |
+| Form 540 line 43, or line 44 after the prior year AMT credit (name, code 187, amount) | stated rule; order own choice (13) |
 | Schedule P (540) line 20 (a), (b), (c) | stated rule |
 | A nonresident or part-year filer (Form 540NR) | unsupported |
 | A fourth Part I item (row 3) | unsupported |

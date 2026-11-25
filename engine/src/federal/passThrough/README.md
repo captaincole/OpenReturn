@@ -135,16 +135,19 @@ routed nor reported (`tests/unit/federal/passThrough/boxTables.test.ts`).
   is at risk. The excess business loss stage allows every item: the limit
   does not change Schedule E. Form 461 (`federal/461/`) figures it from the
   return's lines, and Schedule 1 line 8p adds the excess back (scenario
-  `juilin`). Its resolver files the form from the business losses added
-  without any income (`excessBusinessLoss.ts`, `461/resolveInfo.ts`).
+  `juilin`; scenario `androl` files it with no excess). Its resolver files
+  the form from the business losses added without any income
+  (`excessBusinessLoss.ts`, `461/resolveInfo.ts`).
 - QBI counts only the allowed loss: the statement's QBI is scaled to the part
   of the business losses the limits allow, and a net QBI loss carries forward
   on Form 8995 line 16.
 - Not yet: a distribution above stock basis (a capital gain on Form 8949), a
   loan repayment (Form 7203 Part II Section C), a sale of stock, the section
   1.1367-1(g) election, and a carried loss on Form 8995-A. Each is unsupported
-  with a reason. With an excess business loss, a QBI line that adds a losing
-  business is a gap (`qbi/excessBusinessLoss.ts`).
+  with a reason. With an excess business loss and two or more businesses
+  with a loss on Form 461, a QBI line that adds a losing business is a gap;
+  with one, the excess comes off that business's QBI loss
+  (`qbi/excessBusinessLoss.ts`).
 
 ## What the fourth step handles
 
@@ -219,13 +222,18 @@ routed nor reported (`tests/unit/federal/passThrough/boxTables.test.ts`).
   (`carriedLosses.atRisk`), goes through Form 6198 (`federal/6198/`). Part I
   takes the items that reach the stage after the basis limit (box 1 on line 1,
   a section 1231 item on line 2b, other income on line 3, other deductions and
-  losses on line 4) and the carried loss as an ordinary loss on line 1. The
+  losses on line 4) and the carried losses, by item, on the lines of their
+  kind (`carriedLosses.atRisk` has the item names of `carriedLosses.basis`). The
   owner's amounts at risk are their own fact, `at_risk.<K-1 fact key>`.
 - Each item is allowed in proportion and the rest carries with its character.
   An allowed carried loss is a "PYA" row (`atRiskCarryover`), line 27 is Yes,
   and Schedule E column (f) is checked for a K-1 that files Form 6198.
-- Not yet: more than one at-risk activity on a K-1, guaranteed payments next to
-  amounts not at risk, a disposition of the interest, recapture, and a
-  beneficiary's K-1. Each is unsupported with a reason (`6198/QUESTIONS.md`).
+- A K-1 with no loss, some investment not at risk and a distribution or a
+  smaller share of recourse debt waits on its at-risk fact; amounts at risk
+  that end below zero make it unsupported (recapture).
+- Not yet: more than one at-risk activity on a K-1, guaranteed payments or
+  investment interest expense next to amounts not at risk, a disposition of the
+  interest, recapture, and a beneficiary's K-1. Each is unsupported with a
+  reason (`6198/QUESTIONS.md`).
 
 `QUESTIONS.md` lists every doubt, with its source and the default chosen.

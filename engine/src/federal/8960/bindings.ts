@@ -7,6 +7,7 @@ import { withForm8814 } from "../8814/totals.js";
 import { describeItem, entityTitle } from "../passThrough/items.js";
 import { receivedAmounts } from "../passThrough/receipts.js";
 import type { Form8960FilingInfo } from "./filingInfo.js";
+import { line5b } from "./line5b.js";
 import {
   NIIT_THRESHOLDS,
   netInvestmentIncome,
@@ -77,7 +78,13 @@ export function register(): void {
       },
       "0.line.4c": (form) => sum(form["0.line.4a"], form["0.line.4b"]),
       "0.line.5a": (form) => sum(form["form-1040.line.7a"], form["schedule-1.0.line.4"]),
-      "0.line.5d": (form) => sum(form["0.line.5a"], form["0.line.5b"], form["0.line.5c"]),
+      // MANUAL EDIT: a nonpassive business's Form 4797 gain or loss comes out (line5b.ts).
+      "0.line.5b": (_, info) => line5b(info),
+      // MANUAL EDIT: line 5d waits while a Form 4797 sale's business is not answered.
+      "0.line.5d": (form, info) =>
+        info.form4797Activities?.waiting
+          ? undefined
+          : sum(form["0.line.5a"], form["0.line.5b"], form["0.line.5c"]),
       /*
        * MANUAL EDIT: irs-8960-inst-2025::sec::line-7-other-modifications-to-investment-income::b04:
        * each Form 8814 line 12, excluding Alaska Permanent Fund dividends (the
@@ -165,8 +172,6 @@ export function register(): void {
         "No CFC/QEF (PFIC) scenario yet; Reg. 1.1411-10(g) election not modeled.",
       "0.line.3":
         "Only nonqualified annuities count (not 401/403/IRA/457), and our 1099-R facts don't say which kind of plan paid the distribution; no nonqualified-annuity scenario yet.",
-      "0.line.5b":
-        "Gains/losses excluded from NII (non-section 1411 trade or business, NUA, capital loss carryforward adjustments) — no scenario or facts modeled yet.",
       "0.line.5c":
         "Partnership interest / S corporation stock disposition adjustment — no K-1 or pass-through disposition scenario yet.",
       "0.line.6": "CFC/PFIC adjustments — no CFC/PFIC ownership scenario yet.",

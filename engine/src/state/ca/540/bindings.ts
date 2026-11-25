@@ -12,6 +12,9 @@ import {
   line43CreditAmount,
   line43CreditCode,
   line43CreditName,
+  line44CreditAmount,
+  line44CreditCode,
+  line44CreditName,
   line47TotalCredits,
   line48TaxAfterCredits,
 } from "./credits.js";
@@ -46,6 +49,7 @@ import {
   headerResidenceCity,
   headerResidenceState,
   headerResidenceZip,
+  headerSpouseDateOfBirth,
   headerSpouseFirstName,
   headerSpouseLastName,
   headerSpouseMiddleInitial,
@@ -128,6 +132,7 @@ export function register(): void {
       "header.state": headerState,
       "header.zip": headerZip,
       "header.date_of_birth": headerDateOfBirth,
+      "header.spouse_date_of_birth": headerSpouseDateOfBirth,
       "header.county_at_filing": headerCountyAtFiling,
       "header.mailing_same_as_residence": headerMailingSameAsResidence,
       "header.residence_apartment": headerResidenceApartment,
@@ -190,11 +195,14 @@ export function register(): void {
       "line.34_tax_amount": line34TaxAmount,
       "line.35_total_tax_after_credits": line35TotalTaxAfterCredits,
 
-      // Special credits. MANUAL EDIT: lines 40, 47 and 48 (FTB 3506's credit) are in credits.ts.
+      // Special credits. MANUAL EDIT: lines 40, 43, 44, 47 and 48 (FTB 3506, FTB 3510, Schedule S) are in credits.ts.
       "line.40_child_dependent_care_credit": line40ChildDependentCareCredit,
       "line.43_credit_name": line43CreditName,
       "line.43_credit_code": line43CreditCode,
       "line.43_credit_amount": line43CreditAmount,
+      "line.44_credit_name": line44CreditName,
+      "line.44_credit_code": line44CreditCode,
+      "line.44_credit_amount": line44CreditAmount,
       "line.47_total_credits": line47TotalCredits,
       "line.48_tax_after_credits": line48TaxAfterCredits,
 
@@ -268,8 +276,6 @@ export function register(): void {
         "No foreign address facts are ingested; MVP supports domestic US addresses only.",
       "header.foreign_postal_code":
         "No foreign address facts are ingested; MVP supports domestic US addresses only.",
-      "header.spouse_date_of_birth":
-        "No MFJ/spouse scenario ingested; spouse date of birth has no corresponding fact key.",
       "header.prior_name":
         "No prior-name fact key exists in the identity category; taxpayer name-change scenario not modeled.",
       "header.spouse_prior_name":
@@ -286,12 +292,6 @@ export function register(): void {
         "Checkbox indicating tax includes FTB 3800 (tax on child's unearned income). No FTB 3800 scenario or fact-ingestion path exists yet.",
       "line.34_tax_from_ftb_5870a":
         "Checkbox indicating line 34 tax is from FTB 5870A (tax on accumulation distribution of trusts). No FTB 5870A scenario or fact-ingestion path exists yet.",
-      "line.44_credit_name":
-        "Free-text credit name for an additional special credit on line 44. No ingestion path for user-supplied special credits exists yet.",
-      "line.44_credit_code":
-        "Credit code for additional special credit on line 44. No ingestion path for user-supplied special credits exists yet.",
-      "line.44_credit_amount":
-        "Credit amount for additional special credit on line 44. No ingestion path for user-supplied special credits (requires supporting schedules/FTB forms) exists yet.",
       "line.45_schedule_p_credits":
         "Line 45 is for additional credits claimed via Schedule P (540). No ingestion path for Schedule P credits exists yet — would require a separate Schedule P catalog and credit data.",
       "line.46_renters_credit":

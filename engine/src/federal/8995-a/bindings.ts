@@ -3,11 +3,10 @@
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
-import { excessBusinessLossHold } from "../qbi/excessBusinessLoss.js";
+import { excessBusinessLossHold, qbiOf } from "../qbi/excessBusinessLoss.js";
 import type { QbiBusiness } from "../qbi/filingInfo.js";
 import {
   businessTin,
-  qbiOf,
   qualifiedDividendsPlusNetCapitalGain,
   taxableIncomeBeforeQbi,
 } from "../qbi/lines.js";

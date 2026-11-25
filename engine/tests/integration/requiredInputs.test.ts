@@ -154,6 +154,16 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^ca_payments\.(estimated_tax|prior_year_overpayment_applied|extension_payment)$/,
     "an answer Cade records only when the user made that California payment (Form 540 line 72)",
   ],
+  [
+    /^business_property_sale\.(?!nonrecaptured_section_1231_losses$)[^.]+$/,
+    "a Form 4797 sale fact is the whole sale (as a rental property fact is the whole property); " +
+      "whether one exists is Cade's question",
+  ],
+  [
+    /^section_179_recapture\.[^.]+$/,
+    "a Form 4797 Part IV fact is the whole recapture of one property; whether business use " +
+      "dropped to 50% or less is Cade's question",
+  ],
   [/^identity\.email$/, "Cade records the login email at doc-gen time"],
   [/^identity\.(spouse\.)?name\.middle_initial$/, "printed when stated; not every name has one"],
   [
@@ -226,6 +236,29 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^foreign_tax_credit\.claim_accrued$/,
     "an answer Cade records only when the taxpayer chose, on an earlier return, to credit " +
       "foreign taxes when they accrue (Form 1116 Part II box k); absent, box j (paid)",
+  ],
+  [
+    /^prior_year\.ca_amt(_credit_carryover)?$/,
+    "an answer Cade records only when the user paid California AMT for 2024 or carries an AMT " +
+      "credit from 2024; either above 0 files FTB 3510, which then asks for the other",
+  ],
+  [
+    /^estimated_tax\.payment\.[^.]+$/,
+    "each fact is one 2025 estimated tax payment (Form 1040 line 26, Form 2210 line 11); " +
+      "whether one was made is Cade's question",
+  ],
+  [
+    /^estimated_tax\.prior_year_overpayment_applied$/,
+    "recorded only when the 2024 return applied an overpayment to 2025 estimated tax",
+  ],
+  [
+    /^estimated_tax_penalty\.withholding_on\.[^.]+$/,
+    "each fact is one date of withholding for Form 2210 box D; recorded only when the " +
+      "taxpayer has the dates, else withholding counts in four equal parts",
+  ],
+  [
+    /^estimated_tax_penalty\.waiver_request$/,
+    "recorded only when the taxpayer asks for a waiver of the penalty (Form 2210 box A or B)",
   ],
   [
     /^prior_year\.unallowed_qualified_electric_vehicle_credit$/,

@@ -1,4 +1,8 @@
-import { AMT_KEYS, INVESTMENT_INTEREST_KEYS } from "../../../facts/index.js";
+import {
+  AMT_KEYS,
+  CA_PRIOR_YEAR_AMT_KEYS,
+  INVESTMENT_INTEREST_KEYS,
+} from "../../../facts/index.js";
 import { resolveIsoSpread } from "../../../isoSpread.js";
 import {
   missingInputs,
@@ -6,6 +10,7 @@ import {
   resolveMustFile,
   type ResolverInputs,
 } from "../../../resolverInputs.js";
+import { claimsCaPriorYearAmtCredit } from "../3510/resolveInfo.js";
 import type { SchedulePFilingInfo } from "./filingInfo.js";
 
 /*
@@ -43,6 +48,17 @@ export function resolveSchedulePInfo(inputs: ResolverInputs): SchedulePFilingInf
           "decisions.itemize_vs_standard",
         ],
       },
+      /*
+       * FTB 3510 reads Part II line 24 and takes its credit in Part III line 10
+       * (ca-3510-inst-2025::sec::specific-line-instructions::b01), and a Section
+       * A2 credit attaches the schedule (::b-who-must-file::b01 above).
+       */
+      {
+        rule: "fallback: Form 540 files with a credit for prior year AMT (FTB 3510)",
+        value: files540 && claimsCaPriorYearAmtCredit(inputs),
+        triggeredByFactKeys: [CA_PRIOR_YEAR_AMT_KEYS.amt, CA_PRIOR_YEAR_AMT_KEYS.creditCarryover],
+        triggeredByDecisionKeys: ["decisions.scope.must_file_ca_540"],
+      },
     ],
   });
   const files = resolution.value === true;
@@ -51,7 +67,7 @@ export function resolveSchedulePInfo(inputs: ResolverInputs): SchedulePFilingInf
     /*
      * Line 7 needs last year's AMT carryover only when there was a regular one.
      * Line 10 needs what a recorded exercise waits for. An unstated spread is not
-     * asked here: Form 6251 asks it.
+     * asked: Cade records it only for an exercise (Form 6251 does the same).
      */
     missingInputs: {
       "schedule-p": [

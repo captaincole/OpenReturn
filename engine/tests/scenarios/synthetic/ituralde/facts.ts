@@ -148,7 +148,7 @@ const ranchHolding: K1HoldingFactValue = {
   allInvestmentAtRisk: false,
   partnershipBasisAtStart: 90000,
   capitalContributions: 30000,
-  carriedLosses: { atRisk: 6000 },
+  carriedLosses: { atRisk: { ordinaryBusinessLoss: 6000 } },
 };
 
 /* His 2024 Form 6198 for the ranch had Part III, with $0 on line 19b. */

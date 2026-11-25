@@ -6,6 +6,7 @@ import { formStatusCommand } from "./formStatus";
 import { generateTypesCommand } from "./generateTypes";
 import { ingestCaEitcTableCommand } from "./ingestCaEitcTable";
 import { ingestCaTaxTableCommand } from "./ingestCaTaxTable";
+import { ingestExchangeRatesCommand } from "./ingestExchangeRates";
 import { ingestFederalTaxTableCommand } from "./ingestFederalTaxTable";
 import { seedLabelsCommand } from "./seedLabels";
 import { writeCatalogCommand } from "./writeCatalog";
@@ -25,5 +26,6 @@ void runCli({
     ingestFederalTaxTableCommand,
     ingestCaTaxTableCommand,
     ingestCaEitcTableCommand,
+    ingestExchangeRatesCommand,
   ],
 });

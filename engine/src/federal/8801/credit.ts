@@ -5,9 +5,11 @@
 
 import { atLeast, numberOrBlank, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
-import { foreignTaxCreditGap } from "../1116/credit.js";
+import { claimsByElection, foreignTaxCredit, foreignTaxCreditGap } from "../1116/credit.js";
 import type { Form1116FilingInfo } from "../1116/filingInfo.js";
-import { line9Of } from "../6251/foreignTaxCredit.js";
+import { isGap } from "../1116/lines.js";
+import { dependentCareCreditGap } from "../2441/creditGap.js";
+import type { Form2441FilingInfo } from "../2441/filingInfo.js";
 import { mortgageCreditGap, type CreditLimitInfo } from "../8396/creditGap.js";
 import { line6cFrom8839 } from "../8839/receivers.js";
 import { nonrefundableCreditGap } from "../8863/credit.js";
@@ -26,7 +28,8 @@ export type Form8801CreditInfo = Form8801FilingInfo &
   CreditLimitInfo &
   Form8880FilingInfo &
   Form8863FilingInfo &
-  Form1116FilingInfo;
+  Form1116FilingInfo &
+  Form2441FilingInfo;
 
 /*
  * Line 22 subtracts these Schedule 3 lines: 1 through 6z but not 6b (this
@@ -53,8 +56,15 @@ const SCHEDULE_3_CREDITS = [
   "schedule-3.0.line.6z_amount",
 ] as const;
 
-/* Schedule 3 lines the engine has no rules for: while the form that feeds one files, line 22 would leave it out. */
+/*
+ * Schedule 3 lines the engine has no rules for: while the form that feeds one
+ * files, line 22 would leave it out. Line 5a is Form 5695 Part I, which the
+ * engine does not model (irs-1040-inst-2025::sec::line-5a-residential-clean-energy::b01);
+ * a Form 5695 on the return may claim it. Line 6z is left blank for 2025
+ * (irs-1040-inst-2025::sec::line-6z::b01).
+ */
 const UNCOMPUTED_CREDITS: ReadonlyArray<[formId: string, line: string]> = [
+  ["form-5695", "Schedule 3 line 5a (Form 5695 Part I, the residential clean energy credit)"],
   ["form-3800", "Schedule 3 line 6a (Form 3800)"],
   ["form-8859", "Schedule 3 line 6h (Form 8859)"],
   ["form-8834", "Schedule 3 line 6i (Form 8834)"],
@@ -62,7 +72,12 @@ const UNCOMPUTED_CREDITS: ReadonlyArray<[formId: string, line: string]> = [
   ["form-8978", "Schedule 3 line 6l (Form 8978)"],
 ];
 
-/* Why a credit line 22 subtracts is an engine gap; undefined when each is a number or blank. */
+/*
+ * Why a credit line 22 subtracts is an engine gap; undefined when each is a
+ * number or blank. Schedule 3 lines 5b and 6d and Form 1040 line 19 (Schedule
+ * 8812) have no gap of their own that blanks them: the Schedule 8812 one is the
+ * adoption credit below (irs-8801-inst-2025::sec::line-22::b01).
+ */
 function otherCreditsGap(form: Accessor, info: Form8801CreditInfo): string | undefined {
   const files = (formId: string) => info.mustFile?.[formId]?.value === true;
   const uncomputed = UNCOMPUTED_CREDITS.find(([formId]) => files(formId));
@@ -70,6 +85,7 @@ function otherCreditsGap(form: Accessor, info: Form8801CreditInfo): string | und
   const adoption = line6cFrom8839(form, info)?.value;
   const gaps = [
     foreignTaxCreditGap(form, info),
+    dependentCareCreditGap(form, info),
     nonrefundableCreditGap(form, info)?.reason,
     creditGap(form, info)?.reason,
     typeof adoption === "object" ? adoption.reason : undefined,
@@ -100,10 +116,51 @@ export function line22Of(form: Accessor, info: Form8801CreditInfo): Value {
 const NO_FORM_6251 =
   "Line 23 is 2025 Form 6251 line 9, and Form 6251 does not file (decisions.scope.must_file_6251 is false).";
 
-/* Line 23: 2025 Form 6251 line 9, the tentative minimum tax; a gap there is a gap here. */
+const FORM_6251_LINE_7 = "form-6251.0.line.7_tax_on_line_6";
+
+const AMT_COPY_GAP =
+  "Form 1116 files: line 23 is Form 6251 line 7 less the AMT foreign tax credit, which is figured on a second set of Forms 1116 with AMT amounts (irs-6251-inst-2025::sec::line-8-alternative-minimum-tax-foreign-tax::b01), and the engine does not figure that set.";
+
+/*
+ * The AMT foreign tax credit that Form 6251 line 8 would hold, also when that
+ * form leaves line 8 blank: with the election, the Schedule 3 line 1 amount
+ * (irs-6251-inst-2025::sec::line-8-alternative-minimum-tax-foreign-tax::b02);
+ * with Form 1116, a gap; 0 with no foreign tax credit. Undefined while the
+ * credit waits.
+ */
+function amtForeignTaxCredit(form: Accessor, info: Form8801CreditInfo): Value {
+  const credit = foreignTaxCredit(form, info);
+  if (isGap(credit)) return credit;
+  if (claimsByElection(info) || info.foreignTax?.taxesWaiting === true) return credit;
+  return info.mustFile?.["form-1116"]?.value === true ? unsupported(AMT_COPY_GAP) : 0;
+}
+
+/*
+ * Line 23: the 2025 tentative minimum tax, Form 6251 line 7 less the AMT
+ * foreign tax credit, never below 0.
+ *
+ * DECISION (2026-11-24): line 23 is the tentative minimum tax after the AMT foreign tax credit.
+ * - Form 8801 line 23: "Enter the amount from your 2025 Form 6251, line 9"; and
+ *   Form 6251 line 9: "Tentative minimum tax. Subtract line 8 from line 7"
+ *   (the blank forms).
+ * - Form 6251 instructions: "If the amount on line 10 is greater than or equal
+ *   to the amount on line 7 ... Leave line 8 blank and enter -0- on line 11",
+ *   and a person who can carry the unused credit "will need to complete line 8
+ *   for your records"
+ *   (irs-6251-inst-2025::sec::line-8-alternative-minimum-tax-foreign-tax::b01).
+ * The engine takes line 7 less the credit line 8 would hold, also when Form
+ * 6251 leaves line 8 blank. Line 9 is defined as line 7 less line 8; leaving
+ * line 8 blank is a shortcut for a person who owes no AMT, and it must not
+ * shrink this credit. Form 6251's own lines 8 and 9 still follow its
+ * instructions (line9Of).
+ */
 export function line23Of(form: Accessor, info: Form8801CreditInfo): Value {
   if (info.mustFile?.["form-6251"]?.value !== true) return unsupported(NO_FORM_6251);
-  return line9Of(form, info);
+  const line7 = numberOrBlank(form[FORM_6251_LINE_7]);
+  if (line7 === undefined) return undefined;
+  const credit = amtForeignTaxCredit(form, info);
+  if (credit === undefined || isGap(credit)) return credit;
+  return atLeast(0, line7 - credit);
 }
 
 /* Line 21 once figured; lines 22–26 follow only when it is above 0 ("If zero or less, stop here"). */

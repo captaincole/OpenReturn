@@ -37,6 +37,10 @@ export interface QbiBusiness {
   retirementPlanDeduction?: number;
   /* Why the engine does not figure this business's QBI, or undefined. */
   qbiGap?: string;
+  /* Form 4797's ordinary gain or loss on the property of this business or rental (qbi/form4797.ts). */
+  form4797Ordinary?: number;
+  /* A Form 4797 sale does not name its business yet: the QBI waits. */
+  form4797Waits?: boolean;
   /* Line 4: W-2 wages the business paid; undefined while unanswered. */
   w2WagesPaid?: number;
   /* Line 7: UBIA of qualified property; undefined while unanswered. */

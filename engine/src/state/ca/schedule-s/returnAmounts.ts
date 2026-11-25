@@ -7,6 +7,7 @@
 import type { BaseFilingInfo } from "../../../filingInfo.js";
 import { atLeast, numberOrBlank, sum } from "../../../money.js";
 import { unsupported, type Unsupported } from "../../../types.js";
+import { PRIOR_YEAR_AMT_CREDIT_USED, priorYearAmtCreditWaits } from "../3510/creditUsed.js";
 import type { OtherStateCreditInput, ScheduleSFilingInfo } from "./filingInfo.js";
 import { scheduleSLines, type ScheduleSLines } from "./lines.js";
 
@@ -16,10 +17,15 @@ export const NOT_FORM_540 = unsupported(
   "Schedule S for a nonresident or part-year resident takes Form 540NR lines 32 and 63 (ca-540-sched-s-inst-2025::sec::part-ii-figure-your-other-state-tax-credit::b01); the engine fills it only for a Form 540 filer.",
 );
 
-/* The Form 540 credits that line 47 adds, other than this credit on line 43. */
+/*
+ * The credits that Form 540 line 47 adds, other than this credit. The credit
+ * for prior year AMT is read from its source, Schedule P (540) line 10 column
+ * (b): Form 540 line 43 or 44 can hold this credit, so reading them would make
+ * line 2 depend on its own credit.
+ */
 const OTHER_CREDIT_LINES = [
   "form-540.line.40_child_dependent_care_credit",
-  "form-540.line.44_credit_amount",
+  PRIOR_YEAR_AMT_CREDIT_USED,
   "form-540.line.45_schedule_p_credits",
   "form-540.line.46_renters_credit",
 ];
@@ -30,8 +36,8 @@ const files = (info: BaseFilingInfo, formId: string) => info.mustFile?.[formId]?
  * Line 2: "Residents – Form 540, line 48 (without other state tax credit and PTE
  * elective tax credit)" (ca-540-sched-s-inst-2025::sec::part-ii-figure-your-other-state-tax-credit::b01):
  * line 35 less the other credits of line 47, not less than 0. The engine has no
- * PTE elective tax credit, so nothing is added back. With FTB 3506 filed, the
- * line waits for its credit, as Form 540 line 47 does.
+ * PTE elective tax credit, so nothing is added back. With FTB 3506 or FTB 3510
+ * filed, the line waits for its credit, as Form 540 line 47 does.
  */
 export function californiaTaxLiability(
   read: ReadField,
@@ -45,6 +51,7 @@ export function californiaTaxLiability(
     if (credit === undefined) return undefined;
     if (credit > 0 && numberOrBlank(read(OTHER_CREDIT_LINES[0])) === undefined) return undefined;
   }
+  if (priorYearAmtCreditWaits(read, info)) return undefined;
   return atLeast(0, line35 - sum(...OTHER_CREDIT_LINES.map(read)));
 }
 

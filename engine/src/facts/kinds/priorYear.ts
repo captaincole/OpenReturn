@@ -5,8 +5,24 @@ import type { FactsView } from "../../types.js";
 export const PRIOR_YEAR_KEYS = {
   /* Picks the 100% / 110% safe harbor. */
   federalAgi: "prior_year.federal_agi",
-  /* 2024 Form 1040 line 22 plus Schedule 2 taxes (the Form 2210 line 8 value). */
+  /*
+   * The 2024 tax as Form 2210 line 8 figures it, before the 110%: 2024 Form 1040
+   * line 22 plus the listed Schedule 2 lines, less the listed refundable credits
+   * (irs-2210-inst-2025::sec::line-8::b01, line-19::b02). On a 2025 joint return
+   * after 2024 separate returns, both spouses' 2024 tax; on a 2025 separate
+   * return after a 2024 joint return, this filer's share (line-19::b03).
+   */
   federalTax: "prior_year.federal_tax",
+  /*
+   * true when the filer (or either spouse) filed a joint 2024 return. Form 2210
+   * box E compares it with the 2025 filing status.
+   */
+  filedJointReturn: "prior_year.filed_joint_return",
+  /*
+   * true when there was no 2024 return, or it covered less than 12 months:
+   * Form 2210 line 8 stays blank and line 9 is line 5 (line-19::b03).
+   */
+  noTwelveMonthReturn: "prior_year.no_twelve_month_return",
   caTax: "prior_year.ca_tax",
   caBalancePaidThisYear: "prior_year.ca_balance_paid_this_year",
   /*

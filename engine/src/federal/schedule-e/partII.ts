@@ -105,6 +105,16 @@ interface PartIIRow {
  * (irs-1040se-inst-2025::sec::prior-year-unallowed-losses-from-a-passive::b01).
  * A passive basis loss, and a carried passive loss on Form 8582, are in the
  * activity's own row (irs-8582-inst-2025::sec::how-to-report-allowed-losses::b04).
+ *
+ * DECISION (2026-11-24): two official texts differ on the released loss.
+ * - Schedule E instructions: "Enter on a separate line in column (g) of line
+ *   28 your total prior-year unallowed losses not reported on Form 8582"
+ *   (irs-1040se-inst-2025::sec::prior-year-unallowed-losses-from-a-passive::b01).
+ * - Form 8582 instructions, the entire disposition example: the current loss
+ *   and the prior-year loss together in the nonpassive column (i)
+ *   (irs-8582-inst-2025::sec::reporting-an-entire-disposition-on-form-4797-or::b03).
+ * The engine follows the Schedule E instructions: a form's own instructions
+ * decide how that form prints. Line 32 and line 41 are the same either way.
  */
 function onPriorYearRow(entity: PassThroughEntity, item: PassThroughItem): boolean {
   if (item.fromPriorYear !== true) return false;

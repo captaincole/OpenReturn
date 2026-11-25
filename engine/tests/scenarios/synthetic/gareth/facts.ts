@@ -130,6 +130,7 @@ export const garethFacts: TaxFactRow[] = [
   idFact("phone", "775-555-0148"),
   fact("identity", SPOUSE_KEYS.firstName, GARETH.spouse.firstName, VERBAL),
   fact("identity", SPOUSE_KEYS.lastName, GARETH.spouse.lastName, VERBAL),
+  fact("identity", SPOUSE_KEYS.occupation, "Bookkeeper", VERBAL),
   fact("identity", SPOUSE_KEYS.ssn, GARETH.spouse.ssn, VERBAL),
   fact("identity", SPOUSE_KEYS.dob, "10/09/1974", VERBAL),
   fact(

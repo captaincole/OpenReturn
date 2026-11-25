@@ -8,19 +8,27 @@
  * and the owner's amounts at risk (the at-risk fact, at_risk.<K-1 fact key>).
  * A loss the limit holds back "will be treated as a deduction allocable to the
  * activity in the next tax year" (::b03): it carries in the holding's
- * carriedLosses.atRisk.
+ * carriedLosses.atRisk, by item. With no loss, a decrease this year may still
+ * bring recapture (profitYear).
  */
 
-import { makeAtRiskFactKey } from "../../facts/index.js";
+import { makeAtRiskFactKey, type PartnerLiabilities } from "../../facts/index.js";
+import { sum } from "../../money.js";
 import {
   dispositionEntries,
   figureForm6198,
+  profitYearRecapture,
   type AtRiskActivity,
   type Form6198Outcome,
 } from "../6198/figure.js";
 import type { PartIEntry, PartILine } from "../6198/lines.js";
 import { withAmount } from "./basis.js";
-import { entityTitle, type PassThroughEntity, type PassThroughItem } from "./items.js";
+import {
+  atRiskCarriedItemsOf,
+  entityTitle,
+  type PassThroughEntity,
+  type PassThroughItem,
+} from "./items.js";
 import { isLossOrDeduction, isPortfolio, labelOf, roleOf, type ItemType } from "./itemTypes.js";
 import type { LimitStage, StageOutcome } from "./limits.js";
 import { passAll, perEntity, unsupportedFor } from "./stageHelpers.js";
@@ -38,9 +46,19 @@ export const activityLosses = (items: PassThroughItem[]) =>
       item.type !== "charitable_contribution",
   );
 
-/* The loss the at-risk limit held back in earlier years (the holding's carriedLosses.atRisk), positive. */
-export const carriedAtRiskLoss = (entity: PassThroughEntity) =>
-  entity.holding?.carriedLosses?.atRisk ?? 0;
+/*
+ * The losses and deductions the at-risk limit held back in earlier years (the
+ * holding's carriedLosses.atRisk), by item, as this year's items with their
+ * character: "these losses and deductions must be included in the current year
+ * amounts you enter in Part I" (irs-6198-inst-2025::sec::part-i::b01), a box 1
+ * loss on line 1 (::part-i-2::b01), the others on the lines of their kind.
+ */
+export const carriedAtRiskItems = (entity: PassThroughEntity) =>
+  atRiskCarriedItemsOf(entity.key, entity.holding, entity.form);
+
+/* Any amount in carriedLosses.atRisk, a beneficiary's too (which has no items: its stage is a gap). */
+const hasCarriedAtRiskLoss = (entity: PassThroughEntity) =>
+  Object.values(entity.holding?.carriedLosses?.atRisk ?? {}).some((amount) => (amount ?? 0) > 0);
 
 /*
  * Form 6198 files for the K-1: a partnership or an S corporation K-1 with a
@@ -51,24 +69,8 @@ export const carriedAtRiskLoss = (entity: PassThroughEntity) =>
  */
 export function needsForm6198(entity: PassThroughEntity, items: PassThroughItem[]): boolean {
   if (entity.form === "1041") return false;
-  if (carriedAtRiskLoss(entity) > 0) return true;
+  if (hasCarriedAtRiskLoss(entity)) return true;
   return entity.holding?.allInvestmentAtRisk === false && activityLosses(items).length > 0;
-}
-
-/* The carried at-risk loss as this year's ordinary loss on line 1 (irs-6198-inst-2025::sec::part-i-2::b01). */
-function carriedItem(entity: PassThroughEntity): PassThroughItem | undefined {
-  const amount = carriedAtRiskLoss(entity);
-  if (amount <= 0) return undefined;
-  const type: ItemType = "ordinary_business_income";
-  return {
-    entityKey: entity.key,
-    type,
-    box: "1",
-    amount: -amount,
-    label: `${labelOf(type)}: at-risk loss carried from an earlier year`,
-    fromPriorYear: true,
-    atRiskCarryover: true,
-  };
 }
 
 /* Items whose place in the activity the instructions do not settle. */
@@ -120,11 +122,66 @@ function k1Gap(entity: PassThroughEntity, items: PassThroughItem[]): string | un
   }
   const unsettled = items.filter((item) => UNSETTLED.includes(item.type));
   if (unsettled.length > 0) {
-    const named = [...new Set(unsettled.map((item) => labelOf(item.type)))].join(", ");
-    return `whether ${named} belong to the at-risk activity on Form 6198 is not settled by the instructions, so the at-risk limit is not modeled for this K-1.`;
+    return `whether ${namesOf(unsettled)} belong to the at-risk activity on Form 6198 is not settled by the instructions, so the at-risk limit is not modeled for this K-1.`;
   }
-  return undefined;
+  return investmentInterestGap(entity, items) ?? carriedOutsidePartIGap(entity);
 }
+
+const namesOf = (items: PassThroughItem[]) =>
+  [...new Set(items.map((item) => labelOf(item.type)))].join(", ");
+
+/*
+ * Investment interest expense from the activity goes on line 4 after Form
+ * 4952: "If you have investment interest expense from your at-risk activity,
+ * first complete Form 4952 ... enter that amount on line 4 of Form 6198. You
+ * must reduce the allowable investment interest deduction on Form 4952 by the
+ * amount you carry to Form 6198" (irs-6198-inst-2025::sec::line-4::b01; line 1
+ * names it too, ::line-1::b01). No fact says which part of the K-1's investment
+ * interest is from the activity, and Form 4952 does not take a K-1's, so the
+ * K-1's Form 6198 is a gap rather than a Part I without it.
+ */
+function investmentInterestGap(entity: PassThroughEntity, items: PassThroughItem[]) {
+  const interest = [...items, ...carriedAtRiskItems(entity)].some(
+    (item) => item.type === "investment_interest_expense" && (item.amount ?? 0) !== 0,
+  );
+  return interest
+    ? "investment interest expense from the at-risk activity goes on Form 6198 line 4 after Form 4952 (irs-6198-inst-2025::sec::line-4::b01); which part is from the activity, and the reduction on Form 4952, are not modeled."
+    : undefined;
+}
+
+/* A carried at-risk item that has no Part I line here (a capital loss, a gift, foreign taxes). */
+function carriedOutsidePartIGap(entity: PassThroughEntity) {
+  const outside = carriedAtRiskItems(entity).filter((item) => partILineOf(item) === undefined);
+  return outside.length > 0
+    ? `a ${namesOf(outside)} carried by the at-risk limit has no line in Part I of Form 6198 here, which is not modeled.`
+    : undefined;
+}
+
+/* The recourse debt and qualified nonrecourse financing in a partner's share of liabilities (item K1): at risk. */
+const debtAtRisk = (liabilities: PartnerLiabilities | undefined) =>
+  sum(liabilities?.recourse, liabilities?.qualifiedNonrecourseFinancing);
+
+/*
+ * The K-1 shows a decrease in the amount at risk this year: a distribution
+ * (irs-6198-inst-2025::sec::line-9::b02, item 4: "Withdrawals and
+ * distributions"), or, for a partner, a smaller share of the debt that is at
+ * risk at the end of the year than at the start (inferred: a smaller share of
+ * liabilities is treated as a distribution of money).
+ */
+function decreasedThisYear(entity: PassThroughEntity, items: PassThroughItem[]): boolean {
+  if (items.some((item) => item.type === "distribution" && (item.amount ?? 0) > 0)) return true;
+  const k1 = entity.k1;
+  if (k1.form !== "1065" || k1.liabilitiesAtStart === undefined) return false;
+  return debtAtRisk(k1.liabilitiesAtEnd) < debtAtRisk(k1.liabilitiesAtStart);
+}
+
+/* What the recapture check needs: the at-risk fact, the reason's title, the amounts, the decrease. */
+const recaptureInputs = (entity: PassThroughEntity, items: PassThroughItem[]) => ({
+  factKey: makeAtRiskFactKey(entity.key),
+  title: entityTitle(entity),
+  amounts: entity.atRisk,
+  decreasedThisYear: decreasedThisYear(entity, items),
+});
 
 /* The K-1's activity for Form 6198, or the reason it cannot be figured. */
 export function k1AtRiskActivity(
@@ -133,18 +190,15 @@ export function k1AtRiskActivity(
 ): AtRiskActivity<PassThroughItem> | string {
   const gap = k1Gap(entity, items);
   if (gap) return gap;
-  const carried = carriedItem(entity);
   const amounts = entity.atRisk;
   const named = `${entity.name}, ${entity.ein}`;
   return {
-    factKey: makeAtRiskFactKey(entity.key),
-    title: entityTitle(entity),
+    ...recaptureInputs(entity, items),
     description: amounts?.description ? `${amounts.description}, ${named}` : named,
     entries: [
-      ...entriesOf(carried ? [carried, ...items] : items),
+      ...entriesOf([...carriedAtRiskItems(entity), ...items]),
       ...dispositionEntries<PassThroughItem>(amounts),
     ],
-    amounts,
     owner: entity.holding?.owner ?? "taxpayer",
   };
 }
@@ -181,15 +235,28 @@ function fromForm6198(entity: PassThroughEntity, items: PassThroughItem[]): Stag
 }
 
 /*
+ * No loss or deduction from the activity: the limit allows everything, but
+ * with amounts not at risk a decrease this year may bring recapture income
+ * (irs-6198-inst-2025::sec::line-5::b01; figure.ts profitYearRecapture).
+ */
+function profitYear(entity: PassThroughEntity, items: PassThroughItem[]): StageOutcome {
+  if (entity.form === "1041" || entity.holding?.allInvestmentAtRisk !== false) {
+    return passAll(items);
+  }
+  return profitYearRecapture(recaptureInputs(entity, items)) ?? passAll(items);
+}
+
+/*
  * At-risk: with no loss or deduction from the activity and no carried at-risk
- * loss, nothing is limited. With all of the investment at risk the limit does
- * not reduce the loss; the stage waits while the holding does not say. A
- * beneficiary's at-risk rules are not modeled (QUESTIONS.md item 11).
+ * loss, nothing is limited (profitYear checks for recapture). With all of the
+ * investment at risk the limit does not reduce the loss; the stage waits while
+ * the holding does not say. A beneficiary's at-risk rules are not modeled
+ * (QUESTIONS.md item 11).
  */
 export const atRiskLimit: LimitStage = perEntity(({ entity, items }) => {
   const limited = activityLosses(items);
-  const carried = carriedAtRiskLoss(entity) > 0;
-  if (limited.length === 0 && !carried) return passAll(items);
+  const carried = hasCarriedAtRiskLoss(entity);
+  if (limited.length === 0 && !carried) return profitYear(entity, items);
   const allAtRisk = entity.holding?.allInvestmentAtRisk;
   if (!carried && allAtRisk === true) return passAll(items);
   if (!carried && allAtRisk === undefined) {

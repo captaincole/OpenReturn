@@ -9,9 +9,12 @@
 import type { FilingStatus } from "../../values.js";
 
 export const PRIOR_YEAR_MINIMUM_TAX_KEYS = {
-  /* The 2024 filing status: it picks the 2024 amounts on lines 4, 5, 6, 11, 33, 34, 40 and 54. */
+  /*
+   * The 2024 filing status, the box checked on page 1 of the 2024 Form 1040: it
+   * picks the 2024 amounts on lines 4, 5, 6, 11, 33, 34, 40 and 54.
+   */
   filingStatus: "prior_year.filing_status",
-  /* The 2024 Form 6251 lines as printed (PriorYearForm6251). */
+  /* The 2024 Form 6251 lines as printed, all on its page 1 (PriorYearForm6251). */
   form6251: "prior_year.form_6251",
   /*
    * Line 2's other part, a number (0 when none): the exclusion items not on 2024
@@ -22,13 +25,15 @@ export const PRIOR_YEAR_MINIMUM_TAX_KEYS = {
   otherExclusionItems: "prior_year.amt_other_exclusion_items",
   /*
    * Line 3: the minimum tax credit net operating loss deduction, a positive
-   * number (the form prints it in parentheses). The MTCNOL carryovers and
-   * carrybacks to 2024, figured with only exclusion items
-   * (irs-8801-inst-2025::sec::line-3::b01, b02). Asked only when the 2024
-   * Form 6251 has a line 2e amount.
+   * number (the form prints it in parentheses); 0 when no net operating loss
+   * was carried to 2024. The MTCNOL carryovers and carrybacks to 2024, figured
+   * with only exclusion items (irs-8801-inst-2025::sec::line-3::b01, b02). No
+   * filed 2024 page prints it: it comes from the 2024 net operating loss
+   * carryover worksheets (a preparer's MTCNOL schedule). Asked on every return
+   * that files the form: a carryover can exist with no 2024 Form 6251 line 2e.
    */
   minimumTaxCreditNolDeduction: "prior_year.amt_mtcnol_deduction",
-  /* Line 19: 2024 Form 8801 line 26, a number (0 when none). */
+  /* Line 19: 2024 Form 8801 line 26 (page 2), a number (0 when no 2024 Form 8801 or none). */
   creditCarryforward: "prior_year.form_8801_line_26",
   /*
    * Line 20: a 2024 qualified electric vehicle credit not allowed only because
@@ -73,7 +78,9 @@ export interface PriorYearForm6251 {
  * The 2024 worksheet behind line 11 and Part III. "none": the 2024 return had no
  * capital gain distributions on Form 1040 line 7, no qualified dividends on line
  * 3a, and no gain on both Schedule D lines 15 and 16; line 11 then uses the AMT
- * rates. Otherwise the worksheet the 2024 tax used, as filled. A 2024 taxable
+ * rates. Otherwise the worksheet the 2024 tax used, as filled. Neither worksheet
+ * is a filed page: it is in the 2024 records (the Form 1040 or Schedule D
+ * instructions' worksheet, or a preparer's copy). A 2024 taxable
  * income of zero or less used no worksheet: the taxpayer completes the first
  * lines of one for this form (irs-8801-inst-2025::sec::part-iii-tax-computation-using::b01),
  * and the lines after them are 0.

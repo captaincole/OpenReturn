@@ -9,14 +9,15 @@ import { amtGap } from "../6251/foreignTaxCredit.js";
 import { childTaxOnLine16 } from "../8615/form.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import { line16WithForm8814, line3a } from "./form8814Lines.js";
-import { qdcgInputsFromReturn } from "./qdcgInputs.js";
+import { qdcgInputsFromReturn, scheduleDWorksheetTax } from "./qdcgInputs.js";
 import type { Form1040 } from "./types.js";
 
 type Form = FormAccessor<Form1040>;
 
 /*
- * MANUAL EDIT: line 16 always uses the QDCG worksheet. With no
- * preferential income it gives the tax-table answer; one code path.
+ * MANUAL EDIT: line 16 uses the QDCG worksheet, or the Schedule D Tax
+ * Worksheet when Schedule D line 19 has an amount (qdcgInputs.ts). With no
+ * preferential income the QDCG worksheet gives the tax-table answer.
  * A child who files Form 8615 enters its line 18 instead
  * (irs-8615-inst-2025::sec::line-18::b01).
  */
@@ -32,16 +33,15 @@ export function line16(form: Form, info: Form1040FilingInfo) {
   }
 
   try {
+    // MANUAL EDIT: worksheet line 2 = 1040 line 3a as entered (a rounded document sum).
+    const qualifiedDividends = numberOrBlank(line3a(info)) ?? 0;
     const qdcg = computeQdcg(
-      qdcgInputsFromReturn(
-        form,
-        taxable,
-        // MANUAL EDIT: worksheet line 2 = 1040 line 3a as entered (a rounded document sum).
-        numberOrBlank(line3a(info)) ?? 0,
-        info.filingStatus,
-      ),
+      qdcgInputsFromReturn(form, taxable, qualifiedDividends, info.filingStatus),
     );
-    return withForm4972(info, line16WithForm8814(info, qdcg.tax));
+    // MANUAL EDIT: the Schedule D Tax Worksheet when Schedule D line 19 has an amount (qdcgInputs.ts).
+    const tax =
+      scheduleDWorksheetTax(form, taxable, qualifiedDividends, info.filingStatus) ?? qdcg.tax;
+    return withForm4972(info, line16WithForm8814(info, tax));
   } catch {
     // Unknown filing status or missing table data: use the plain tax table.
     const lookup = lookupTax("federal-2025", taxable, info.filingStatus);
