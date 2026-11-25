@@ -148,8 +148,9 @@ export function rentalQbi(
  * a QBI rental's (rentalQbi), or a K-1's statement amount: the statement gives
  * the QBI, and an S corporation's income bears no SE tax
  * (irs-1120sk1-inst-2025::sec::general-instructions::b01). Undefined while it waits.
+ * Before Form 461: qbiOf (excessBusinessLoss.ts) takes off a loss it holds back.
  */
-export function qbiOf(
+export function qbiBeforeExcessBusinessLoss(
   form: Record<string, unknown>,
   info: QbiInfo,
   business: QbiBusiness,
