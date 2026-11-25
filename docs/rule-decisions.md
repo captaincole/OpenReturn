@@ -1,12 +1,11 @@
 # Rule decisions
 
-This page lists each tax rule that a person decided, because the official texts did not settle it. It is the place to start a discussion with a tax professional, and the list to check again when the tax law itself is in the reference library.
+This page lists each tax rule that someone had to decide, because the official texts did not settle it. It is the place to start a discussion with a tax professional, and the list to check again when the tax law itself is in the reference library.
 
-A person decides a rule in three cases (see `CLAUDE.md`, "When two official texts conflict, the code records the decision"):
+Who decides (see `CLAUDE.md`, "When two official texts conflict, the code records the decision"):
 
-- two official texts point different ways;
-- the guidance allows a choice of method or source;
-- an input has no official form, so someone must decide what the real document looks like.
+- The author of the rule decides when two official texts point different ways, or when a line can be read two ways. The author follows the principles below and adds the row. No pull request waits for it.
+- A person decides when the choice changes a pattern in the repository: a source of data that every form then uses, what an input document with no official form looks like, or how facts, forms or the corpus work.
 
 Each decision below also sits in the code, in a comment that starts with `DECISION (<date>):` above the rule that applies it. `grep -rn "DECISION (" engine/src` lists them. When you add a decision, add the comment and one row here in the same pull request.
 
@@ -33,6 +32,13 @@ Each decision below also sits in the code, in a comment that starts with `DECISI
 | 10 | 2026-11-24 | Foreign currency | Which rate converts foreign income? | The IRS: in general, the rate of the day the item is received. | The IRS publishes yearly average rates and accepts a posted rate used consistently. | An amount with a known date takes that day's rate. An amount with no date takes the IRS yearly average. | Small: $2 to $50 on $1,200 of interest. | `incomeInDollars.ts` (pull request #240) | Sections 985 to 989; no court case was found on the choice of method (web search only, 2026-11-24). |
 | 11 | 2026-11-24 | Foreign currency | Which yearly average: the IRS table or the Federal Reserve's? | The IRS yearly average table. | The Federal Reserve's annual averages. | The IRS table. | $2 on 1,180 euros of interest. | `currency/` (pull request #240) | — |
 | 12 | 2026-11-24 | Form 8801 | Is line 23, the limit on the credit, the tentative minimum tax before or after the minimum tax foreign tax credit? | Form 8801 line 23 is Form 6251 line 9, and line 9 is line 7 less line 8. | Form 6251 instructions: when line 10 is at least line 7, leave line 8 blank. | After: line 7 less the credit line 8 would hold, also when Form 6251 leaves line 8 blank. Leaving line 8 blank is a shortcut for a person who owes no minimum tax, and it must not shrink this credit. With Form 1116, line 23 is unsupported. | Yes: $250 more credit in the made-up taxpayer `logain`. | `federal/8801/credit.ts` | Sections 53(c) and 55(b). Marked for research: the reading rests on memory of the law. |
+
+## Decided by the author, waiting for a person's review
+
+| # | Date | Form | Question | Text A | Text B | Decision | Dollars | Where | Check when the law is in the library |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| A1 | 2026-11-24 | Form 6252 | How many decimal places does the gross profit percentage (line 19) keep, and what do lines 24 and 35 multiply by? | Line 19: "a decimal rounded to at least 4 digits" (more are allowed). | Lines 24 and 35 multiply by line 19 as entered. | Exactly 4 places, and both lines multiply by the printed value, for every sale. | Small: under $1 for each $20,000 of payments. | `federal/6252/lines.ts` | Section 453(c) and Temporary Regulations section 15a.453-1(b)(2). |
+| A2 | 2026-11-24 | Form 6252 | A related party resells marketable securities more than 2 years after the year of sale: is Part III completed? | Which Parts To Complete: Part III "for the year of sale and 2 years after the year of sale" (which-parts-to-complete::b01). | The special rule applies to a resale "before making all payments", unless a line 29 condition is met, and line 29a excludes marketable securities (installment-sales-to-related-party::b01); Pub. 537: the 2-year limit "doesn't apply if the property involved is marketable securities". | Part III is completed in every year before the final payment for marketable securities: Text B is the specific rule for the case. | Yes: a 2025 resale of a 2021 sale (contract price $300,000, 50% gross profit, $120,000 paid) accelerates $90,000 of gain. | `federal/6252/relatedParty.ts` | Section 453(e)(2)(B). |
 
 A row that names a pull request is in the code of that branch until it merges.
 

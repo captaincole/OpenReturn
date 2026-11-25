@@ -713,6 +713,13 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 6252",
     relativeDir: "federal/6252",
     register: registerForm6252,
+    // One Form 6252 for each installment sale (federal/6252/totals.ts).
+    copies: {
+      count: (info) => info?.form6252Totals?.forms.length ?? 1,
+      select: (info, index) => info && { ...info, form6252CopyIndex: index },
+      // Pages 2–4 are the instructions: a later copy appends the form's page only.
+      laterCopyPages: [0],
+    },
   }),
   makeFormSpec({
     formId: "form-8396",
