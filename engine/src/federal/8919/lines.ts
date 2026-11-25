@@ -7,12 +7,12 @@ import { atLeast, roundDollars, sum } from "../../money.js";
 /*
  * Line 7 (printed on the form): the 2025 maximum wages subject to social
  * security tax (irs-8919-form-2025::sec::what-s-new::b01,
- * irs-8919-form-2025::sec::omb-no-1545-0074::b02).
+ * irs-8919-form-2025::sec::face-page-1::b03).
  */
 export const SOCIAL_SECURITY_WAGE_BASE = 176_100;
-/* Line 11: "Multiply line 10 by 0.062 (social security tax rate)" (omb-no-1545-0074::b03). */
+/* Line 11: "Multiply line 10 by 0.062 (social security tax rate)" (face-page-1::b03). */
 export const SOCIAL_SECURITY_TAX_RATE = 0.062;
-/* Line 12: "Multiply line 6 by 0.0145 (Medicare tax rate)" (omb-no-1545-0074::b03). */
+/* Line 12: "Multiply line 6 by 0.0145 (Medicare tax rate)" (face-page-1::b03). */
 export const MEDICARE_TAX_RATE = 0.0145;
 /* Lines 1 through 5: five firms; more go on another Form 8919 (lines-1-through-5::b01). */
 export const LINE_1_ROW_COUNT = 5;
@@ -76,7 +76,7 @@ export function totalWages(rows: ReadonlyArray<FirmRow>): number {
 }
 
 /*
- * Lines 6 through 13 of one person's Form 8919 (omb-no-1545-0074::b02, b03).
+ * Lines 6 through 13 of one person's Form 8919 (face-page-1::b03).
  * socialSecurityWagesAndTips is line 8: W-2 boxes 3 and 7 (cents kept) plus
  * the person's Form 4137 line 10; while it waits, lines 8 through 11 and 13
  * wait too. Line 9 does not go below 0 ("enter -0-"). Lines 11 and 12 round to

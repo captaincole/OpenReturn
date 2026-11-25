@@ -127,7 +127,7 @@ export function register(): void {
         payerTotal(info.interestPayers, info.rounding),
       ),
     /*
-     * MANUAL EDIT: line 3 is Form 8815 line 14 (irs-8815-form-2025::sec::omb-no-1545-0074::b03);
+     * MANUAL EDIT: line 3 is Form 8815 line 14 (irs-8815-form-2025::sec::face-page-1::b03);
      * blank when Form 8815 does not file, or stops before line 14.
      */
     "0.line.3_excludable_savings_bond_interest": (form, info) => {

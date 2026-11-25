@@ -159,7 +159,7 @@ const digitsOf = (scaled: number | undefined, part: "whole" | "decimal") =>
 function computedBindings(): Bindings {
   const out: Record<string, Fn> = {
     "0.line.9_modified_adjusted_gross_income": fromLine9((lines) => lines.line5),
-    // MANUAL EDIT: lines 10–14 (omb-no-1545-0074::b02, b03).
+    // MANUAL EDIT: lines 10–14 (face-page-1::b02, b03).
     "0.line.10_phaseout_threshold": fromPhase((lines) => lines.line10),
     "0.line.11_income_over_threshold": fromPhase((lines) => lines.line11),
     "0.line.12_phaseout_ratio_whole": fromPhase((lines) => digitsOf(lines.line12, "whole")),
@@ -191,7 +191,7 @@ export function register(): void {
       "0.header.taxpayer_name": (_, info) => namesOnReturn(info),
       "0.header.ssn": (_, info) => info.taxpayerSSN,
       ...line1Bindings(),
-      // MANUAL EDIT: lines 2–8 (irs-8815-form-2025::sec::omb-no-1545-0074::b01, b02; line-2::b01, line-3::b01).
+      // MANUAL EDIT: lines 2–8 (irs-8815-form-2025::sec::face-page-1::b01, b02; line-2::b01, line-3::b01).
       "0.line.2_qualified_education_expenses": (_, info) => info.savingsBondExclusion?.line2,
       "0.line.3_nontaxable_educational_benefits": (_, info) => info.savingsBondExclusion?.line3,
       "0.line.4_net_education_expenses": (_, info) => linesOf(info)?.line4,

@@ -19,7 +19,7 @@ import type { Form3526 } from "./types.js";
 export function register(): void {
   defineForm<Form3526, Form3526FilingInfo>("form-3526", {
     bindings: {
-      // ca-3526-inst-2025::sec::taxable-year::b01: "Name(s) as shown on tax return". No combined-name fact; first + last.
+      // ca-3526-inst-2025::sec::face-page-1::b01: "Name(s) as shown on tax return". No combined-name fact; first + last.
       "0.header.taxpayer_name": (_, info) =>
         info.taxpayerFirstName && info.taxpayerLastName
           ? `${info.taxpayerFirstName} ${info.taxpayerLastName}`
@@ -28,12 +28,12 @@ export function register(): void {
       "0.header.ssn_itin_fein": (_, info) => info.taxpayerSSN,
       // ca-3526-inst-2025::sec::line-1::b01: "the investment interest paid or accrued during the taxable year".
       "0.line.1_investment_interest_paid": (_, info) => info.investmentInterestPaid,
-      // ca-3526-inst-2025::sec::taxable-year::b02: "from 2024 form FTB 3526, line 7. If zero or less, enter 0".
+      // ca-3526-inst-2025::sec::face-page-1::b01: "from 2024 form FTB 3526, line 7. If zero or less, enter 0".
       "0.line.2_disallowed_prior_year_interest": (_, info) =>
         info.caDisallowedInterestCarryover === undefined
           ? undefined
           : atLeast(0, info.caDisallowedInterestCarryover),
-      // ca-3526-inst-2025::sec::taxable-year::b02: "Add line 1 and line 2." Blank, not 0, when both are blank.
+      // ca-3526-inst-2025::sec::face-page-1::b01: "Add line 1 and line 2." Blank, not 0, when both are blank.
       "0.line.3_total_investment_interest": (form) =>
         sumOrBlank(
           form["0.line.1_investment_interest_paid"],
@@ -69,7 +69,7 @@ export function register(): void {
           ? undefined
           : Math.min(line4b, netCapitalGainFromDispositions(form));
       },
-      // ca-3526-inst-2025::sec::taxable-year::b02/b03: "Subtract line 4c from line 4b. If zero or less, enter 0".
+      // ca-3526-inst-2025::sec::face-page-1::b01: "Subtract line 4c from line 4b. If zero or less, enter 0".
       "0.line.4d_net_gain_less_capital_gain": (form) => {
         const line4b = form["0.line.4b_net_gain_investment_property"];
         const line4c = form["0.line.4c_net_capital_gain_investment_property"];
@@ -90,7 +90,7 @@ export function register(): void {
         );
         return Math.min(roundDollars(elected), cap);
       },
-      // ca-3526-inst-2025::sec::taxable-year::b03: "Add line 4a, line 4d, and line 4e".
+      // ca-3526-inst-2025::sec::face-page-1::b01: "Add line 4a, line 4d, and line 4e".
       "0.line.4f_investment_income": (form) =>
         sumOrBlank(
           form["0.line.4a_gross_investment_income"],
@@ -116,7 +116,7 @@ export function register(): void {
         return roundDollars(info.investmentExpenses + Math.min(fees, line25 ?? 0));
       },
       /*
-       * ca-3526-inst-2025::sec::taxable-year::b03: "Subtract line 5 from line 4f."
+       * ca-3526-inst-2025::sec::face-page-1::b01: "Subtract line 5 from line 4f."
        * MANUAL EDIT: floored at 0 as federal line 6 ("If zero or less, enter
        * -0-"), which California follows (specific-line-instructions::b01).
        */
@@ -125,7 +125,7 @@ export function register(): void {
         if (line4f === undefined) return undefined;
         return atLeast(0, line4f - (form["0.line.5_investment_expenses"] ?? 0));
       },
-      // ca-3526-inst-2025::sec::taxable-year::b03: "Subtract line 6 from line 3. If zero or less, enter 0".
+      // ca-3526-inst-2025::sec::face-page-1::b02: "Subtract line 6 from line 3. If zero or less, enter 0".
       "0.line.7_disallowed_interest_carryforward": (form) => {
         const line3 = form["0.line.3_total_investment_interest"];
         const line6 = form["0.line.6_net_investment_income"];
@@ -133,7 +133,7 @@ export function register(): void {
         return atLeast(0, line3 - line6);
       },
       /*
-       * ca-3526-inst-2025::sec::taxable-year::b03: "the smaller of line 3 or
+       * ca-3526-inst-2025::sec::face-page-1::b02: "the smaller of line 3 or
        * line 6". The at-risk reduction (line-8::b01, Form 6198) is not modeled.
        */
       "0.line.8_investment_interest_deduction": (form) => {
@@ -142,7 +142,7 @@ export function register(): void {
         if (line3 === undefined || line6 === undefined) return undefined;
         return Math.min(line3, line6);
       },
-      // ca-3526-inst-2025::sec::taxable-year::b03: "the amount from federal Form 4952, line 8".
+      // ca-3526-inst-2025::sec::face-page-1::b02: "the amount from federal Form 4952, line 8".
       /*
        * MANUAL EDIT: the federal deduction is Schedule A line 9, which is Form
        * 4952 line 8 or, under the federal Who Must File exception, the interest

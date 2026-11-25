@@ -8,9 +8,9 @@
 
 import { atLeast, roundDollars, roundToPlaces, sum } from "../../money.js";
 
-/* Line 7: "Multiply line 6 by 20% (0.20)" (the blank form; irs-4972-form-2025::sec::omb-no-1545-0193::b02). */
+/* Line 7: "Multiply line 6 by 20% (0.20)" (the blank form; irs-4972-form-2025::sec::face-part-ii::b01). */
 export const CAPITAL_GAIN_RATE = 0.2;
-/* Line 12: "If this amount is $70,000 or more, skip lines 13 through 16" (omb-no-1545-0193::b03). */
+/* Line 12: "If this amount is $70,000 or more, skip lines 13 through 16" (face-part-iii::b01). */
 export const MINIMUM_ALLOWANCE_ENDS_AT = 70_000;
 /* Line 13: "Multiply line 12 by 50% (0.50), but don't enter more than $10,000". */
 export const MINIMUM_ALLOWANCE_RATE = 0.5;

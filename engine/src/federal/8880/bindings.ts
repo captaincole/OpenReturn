@@ -21,7 +21,7 @@ type Bindings = Partial<{ [K in keyof Form8880]: BindingFn<Form8880, Form8880Fil
 
 /*
  * MANUAL EDIT: lines 1 through 6, one per column
- * (irs-8880-form-2025::sec::omb-no-1545-0074::b01, ::b02). Column (b) is for a
+ * (irs-8880-form-2025::sec::face-page-1::b01, ::b02). Column (b) is for a
  * joint return only (irs-8880-form-2025::sec::specific-instructions::b01).
  */
 const COLUMN_FIELDS: Record<string, keyof ColumnLines> = {
@@ -53,7 +53,7 @@ function worksheetLine(
   return pick(worksheet);
 }
 
-/* MANUAL EDIT: line 12, the smaller of lines 10 and 11 (irs-8880-form-2025::sec::omb-no-1545-0074::b03). */
+/* MANUAL EDIT: line 12, the smaller of lines 10 and 11 (irs-8880-form-2025::sec::face-page-1::b02). */
 function line12Of(form: Accessor, info: Form8880FilingInfo) {
   const tentative = line10Of(form, info);
   const limit = worksheetLine(form, info, (lines) =>

@@ -14,6 +14,8 @@ export interface SectionBlock {
   section: string;
   page: number;
   text: string;
+  /** Printed on the form itself (block type form_face), not its instructions. */
+  printedOnForm: boolean;
 }
 
 export interface OutlineSection {
@@ -90,7 +92,7 @@ export async function readSections(opts: {
             UNION
             SELECT s.section_id FROM ref_sections s JOIN picked p ON s.parent_section_id = p.section_id
           )
-          SELECT b.block_id, s.heading_slug, b.page_num, b.text
+          SELECT b.block_id, s.heading_slug, b.page_num, b.text, b.block_type
           FROM ref_blocks b JOIN ref_sections s ON s.section_id = b.section_id
           WHERE s.section_id IN (SELECT section_id FROM picked)
           ORDER BY b.ordinal`,
@@ -101,5 +103,6 @@ export async function readSections(opts: {
     section: asStr(row.heading_slug),
     page: asNum(row.page_num),
     text: asStr(row.text),
+    printedOnForm: asStr(row.block_type) === "form_face",
   }));
 }

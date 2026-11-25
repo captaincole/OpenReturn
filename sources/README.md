@@ -5,7 +5,7 @@
 The documents the IRS and FTB publish, stored by tax year and then by document type. We download these files and do not edit them. The one exception is an FTB web page: we keep a cleaned copy of it (see below).
 
 ```
-<year>/forms/federal/<short>/        blank.pdf, instructions.meta.json
+<year>/forms/federal/<short>/        blank.pdf, blank.meta.json, instructions.meta.json
 <year>/forms/state/<st>/<short>/
 <year>/forms/federal/tax-table.source.html
 <year>/forms/state/ca/tax-table.source.pdf
@@ -14,6 +14,7 @@ The documents the IRS and FTB publish, stored by tax year and then by document t
 ```
 
 - `blank.pdf`: the fillable form. The engine fills it. A form's folder path below `forms/` (`federal/1040`) is the form's `relativeDir` in the engine.
+- `blank.meta.json`: the sidecar that puts the form face (the text `blank.pdf` prints) in the corpus, as its own document (`irs-8824-face-2025`). `npm run corpus -- add-face --dir 2025/forms/federal/8824` writes it. A form whose `blank.pdf` is also its instructions PDF (Form 6252) has none.
 - `instructions.meta.json`: the sidecar for the form's instructions — docId, title, publisher, taxYear, `sourceUrl`, the source file's `sha256`, and `format` (`pdf`, the default, or `html`). A form folder can hold only this, for a form the engine does not fill yet.
 - FTB publishes most instructions only as web pages. Use the page when FTB has one, and the PDF when it does not. `npm run corpus -- add-html <url> --dir 2025/forms/state/ca/540` fetches the page, keeps only its article (headings, paragraphs, lists, tables, images), and writes `instructions.html` with its sidecar.
 - `publication.meta.json`: the same for an IRS or FTB publication (e.g. `publications/federal/p587/` for Pub 587). Publications explain rules across forms. Their docIds start `irs-pub-` / `ftb-pub-`, so a consumer that needs only form instructions (for example binding generation) can filter them out.

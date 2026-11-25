@@ -1,7 +1,7 @@
 import { SOURCES_ROOT } from "@openreturn/sources";
 import type { Dirent } from "node:fs";
 import { readdir, readFile } from "node:fs/promises";
-import { join, relative, resolve } from "node:path";
+import { basename, join, relative, resolve } from "node:path";
 import type { SourceFormat } from "../db/corpusStore";
 import type { ParserStyle } from "./parse";
 import { isPublishedDate } from "./published";
@@ -37,7 +37,13 @@ export interface WalkResult {
   unconfigured: { sourcePath: string; sourceRelPath: string; reason: string }[];
 }
 
-const SOURCE_FILE = /^(instructions|publication)\.(pdf|html|meta\.json)$/;
+/*
+ * A form's blank.pdf (committed for the engine) is a corpus document only
+ * when blank.meta.json names it: the form face of a form whose instructions
+ * are a separate document. A blank.pdf with no sidecar is not unconfigured.
+ */
+const SOURCE_FILE = /^(instructions|publication)\.(pdf|html|meta\.json)$|^blank\.(pdf|meta\.json)$/;
+const BLANK_FORM = "blank.pdf";
 
 async function walkSourceFiles(dir: string): Promise<string[]> {
   let entries: Dirent[];
@@ -84,6 +90,7 @@ export async function walkCorpus(sourcesRoot: string = SOURCES_ROOT): Promise<Wa
       sources.delete(sidecarPath.replace(/\.meta\.json$/, `.${other}`));
   }
   for (const sourcePath of sources) {
+    if (basename(sourcePath) === BLANK_FORM) continue;
     unconfigured.push({
       sourcePath,
       sourceRelPath: relative(root, sourcePath),

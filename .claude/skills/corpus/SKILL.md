@@ -20,6 +20,19 @@ Each form's instructions are described by `sources/<year>/forms/<jurisdiction>/<
 
 When sync needs a source file that is not on disk, it takes it from corpus.db (every ingested file is stored there), else downloads `sourceUrl` (and cleans it, for HTML) and checks `sha256`. Publishers replace files at the same URL with new editions, so the stored copy is what keeps re-ingests working; a mismatch error names the fix (`canon/src/refdocs/fetchSource.ts`).
 
+## The form face
+
+The text printed on the form itself is in the corpus too, so a rule that only the form states has a block id.
+
+- A form whose instructions are a separate document gets a second sidecar, `blank.meta.json`, next to its committed `blank.pdf`. Its docId takes `-face-` for `-inst-` (`irs-8824-face-2025`). `npm run corpus -- add-face --dir 2025/forms/federal/8824` writes it. It needs no `sourceUrl`.
+- A PDF that holds the form and its instructions (`irs-6252-form-2025`) needs nothing more. Ingest finds the face in it.
+- The face is the leading run of pages with fill-in widgets. It ends at a page with none, or at the first line that starts the instructions ("General Instructions", "Purpose of Form", FTB's "General Information"). Instructions below the form on the same page are parsed as instructions.
+- One section is one part of the form as printed: `face-header` (above Part I), `face-part-i`, `face-part-ii`. A form with no parts gets `face-page-1`, `face-page-2`. Each heading starts "Form face:".
+- The face text is rebuilt from the text positions, one form line per row: "14 Subtract line 13 from line 5". Dot leaders and the repeated box number are dropped. A long part splits between rows, never inside one.
+- Face blocks have block type `form_face`. `corpus read` marks them "(printed on the form)"; `corpus search` marks them too.
+- The instruction blocks of a combined PDF keep their ids and text: the prose parser still reads every page, and only its blocks on the face are replaced. After a change to the face parser, re-ingest the documents that have a face (`corpus sync --force --doc …`) and re-point citations to the face blocks that moved.
+- Column tables (Form 8949 rows, Form 8283, Form 3800) and the left-margin labels of Forms 1040 and 540 come out readable but not exact.
+
 Each document has a publication date (`ref_documents.published`, `refdocs/published.ts`). The Ask answerer sees it in each passage header and prefers the newer document when two passages disagree; the library shows it. A PDF's date is its creation date, read at ingest; a sidecar's optional `"published": "YYYY-MM[-DD]"` overrides it (set it when the PDF's metadata is older than its revision, e.g. 3921 "Rev. April 2025"). `add-html` records an FTB page's "Revised" date; FTB's tax-year pages show none, so they have no date.
 
 ## Operator flow
@@ -57,8 +70,9 @@ Cost: ~$0.50 Haiku contextualization per doc; embeddings are local and free (Emb
 | subcommand | use |
 |---|---|
 | `fetch` | install the prebuilt corpus.db (local seed or sha-verified release download) |
-| `sync [--doc <docId>…]` | idempotent corpus sync from the `sources/**/{instructions,publication}.meta.json` sidecars; fetches source files as needed. `--doc` limits it to those documents |
+| `sync [--doc <docId>…]` | idempotent corpus sync from the `sources/**/{instructions,publication,blank}.meta.json` sidecars; fetches source files as needed. `--doc` limits it to those documents |
 | `add-html <url> --dir …` | fetch + clean a publisher web page into a sources folder (HTML file + sidecar); re-run to refresh the sha256 |
+| `add-face --dir …` | write `blank.meta.json` so a form's face (its `blank.pdf`) enters the corpus; refuses a PDF that is already the instructions document |
 | `status [--strict]` | diff repo sidecars vs corpus.db (no source file needed) |
 | `ingest` | manual single-doc ingest (any PDF or HTML path; debug flags) |
 | `reembed [--all]` | re-embed NULL blocks; `--all` after a model switch |

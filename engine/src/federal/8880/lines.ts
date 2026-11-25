@@ -1,20 +1,20 @@
 import { atLeast, roundDollars, sum } from "../../money.js";
 import type { FilingStatus } from "../../values.js";
 
-/* Line 6: at most $2,000 per person (irs-8880-form-2025::sec::omb-no-1545-0074::b02). */
+/* Line 6: at most $2,000 per person (irs-8880-form-2025::sec::face-page-1::b02). */
 export const CONTRIBUTION_LIMIT_PER_PERSON = 2_000;
 
 /*
  * The Caution: no credit when line 11a is more than $39,500 ($59,250 head of
  * household, $79,000 married filing jointly)
- * (irs-8880-form-2025::sec::omb-no-1545-0074::b01, ::who-can-take-this-credit::b01).
+ * (irs-8880-form-2025::sec::face-page-1::b01, ::who-can-take-this-credit::b01).
  */
 export const AGI_LIMIT_JOINT = 79_000;
 export const AGI_LIMIT_HEAD_OF_HOUSEHOLD = 59_250;
 export const AGI_LIMIT_OTHER = 39_500;
 
 /*
- * The line 9 table (irs-8880-form-2025::sec::omb-no-1545-0074::b02): each row is
+ * The line 9 table (irs-8880-form-2025::sec::face-page-1::b02): each row is
  * "But not over" and the digit after "0." for each filing status column. The
  * last row ("Over $79,000") is 0 in every column.
  */
@@ -76,7 +76,7 @@ export interface ColumnLines {
  * Lines 1 through 6 of one column. Lines 1, 2 and 4 are document sums: the
  * cents add, then the total rounds. Line 3 adds lines 1 and 2; line 5 is line 3
  * less line 4, -0- when zero or less; line 6 is the smaller of line 5 and
- * $2,000 (irs-8880-form-2025::sec::omb-no-1545-0074::b01, ::b02).
+ * $2,000 (irs-8880-form-2025::sec::face-page-1::b01, ::b02).
  */
 export function columnLines(inputs: ColumnInputs): ColumnLines {
   const line1 = roundDollars(inputs.iraAndAbleContributions);
@@ -126,7 +126,7 @@ export function creditLimit(
   };
 }
 
-/* Line 12: the smaller of line 10 and line 11 (irs-8880-form-2025::sec::omb-no-1545-0074::b03). */
+/* Line 12: the smaller of line 10 and line 11 (irs-8880-form-2025::sec::face-page-1::b02). */
 export function line12(line10Amount: number, line11Amount: number): number {
   return Math.min(line10Amount, line11Amount);
 }

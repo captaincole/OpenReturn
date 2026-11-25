@@ -16,6 +16,8 @@ import {
 import { sha1, summarizeBlocks } from "./contextualize";
 import { embedDocuments, resolveEmbeddings } from "./embeddings";
 import { extractPdf, pdfPublished, type PageSlice } from "./extract";
+import { readFacePages } from "./face/detectFace";
+import { mergeFace } from "./face/mergeFace";
 import { parseHtmlDoc } from "./html/parseHtml";
 import { parseDoc, type ParsedDoc, type ParserStyle } from "./parse";
 
@@ -180,7 +182,14 @@ async function extractSource(input: IngestInput, path: string): Promise<Extracte
     docId: input.docId,
     style: input.parserStyle,
   });
-  return { ...extracted, ...parsed, published: await pdfPublished(await readFile(path)) };
+  const bytes = new Uint8Array(await readFile(path));
+  const published = await pdfPublished(bytes);
+  const pageTexts = extracted.pages.map((page) =>
+    extracted.canonicalText.slice(page.charStart, page.charEnd),
+  );
+  const facePages = await readFacePages(bytes, pageTexts);
+  if (facePages.length === 0) return { ...extracted, ...parsed, published };
+  return { ...extracted, ...mergeFace(extracted, parsed, facePages, input.docId), published };
 }
 
 async function persistParsedDoc(

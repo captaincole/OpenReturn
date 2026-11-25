@@ -119,7 +119,7 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
           hasForeignFinancialAccount === true ||
           hasForeignTrust === true,
       },
-      // Line 3 takes Form 8815 line 14 (irs-8815-form-2025::sec::omb-no-1545-0074::b03).
+      // Line 3 takes Form 8815 line 14 (irs-8815-form-2025::sec::face-page-1::b03).
       {
         rule: "fallback: Form 8815 files (the savings bond interest exclusion, line 3)",
         value: filesForm8815(bondExclusion),

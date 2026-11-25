@@ -4,7 +4,7 @@ Each item is a place where the form and its instructions do not settle a rule. T
 
 ## 1. Places on lines 7 and 12
 
-- Source: "Enter the result as a decimal (rounded to at least three places)" (`irs-8815-form-2025::sec::omb-no-1545-0074::b02`).
+- Source: "Enter the result as a decimal (rounded to at least three places)" (`irs-8815-form-2025::sec::face-page-1::b02`).
 - Default: three places, rounded to nearest. Lines 8 and 13 multiply by the printed ratio.
 - Dollars: yes, by $1 at most. Pub. 550's Max and Helene use the exact fraction ($746.90); three places give $747.35. Both round to $747. The blind fill found two cases that move: $9,000 / $9,500 on line 7 with line 6 of $4,500 gives line 8 of $4,262 at three places and $4,263 exact; a line 12 of 10,750 / 30,000 gives line 14 of $676 at three places and $675 exact.
 
@@ -16,13 +16,13 @@ Each item is a place where the form and its instructions do not settle a rule. T
 
 ## 3. Line 11 when line 9 is at or below line 10
 
-- Source: "Subtract line 10 from line 9. If zero or less, skip line 12, enter -0- on line 13" (`omb-no-1545-0074::b02`). It does not say what line 11 shows.
+- Source: "Subtract line 10 from line 9. If zero or less, skip line 12, enter -0- on line 13" (`face-page-1::b02`). It does not say what line 11 shows.
 - Default: line 11 prints 0. Line 12 is blank, line 13 is 0.
 - Dollars: no.
 
 ## 4. The form files above the income limit
 
-- Source: "Note: If line 9 is $114,500 or more ... stop. You cannot take the exclusion" (`omb-no-1545-0074::b02`).
+- Source: "Note: If line 9 is $114,500 or more ... stop. You cannot take the exclusion" (`face-page-1::b02`).
 - Default: the resolver cannot see line 9, so the form files. Lines 1–9 print; lines 10–14 and Schedule B line 3 are blank.
 - Dollars: no. A preparer may leave the form off the return.
 
@@ -92,5 +92,5 @@ Each item is a place where the form and its instructions do not settle a rule. T
 
 - **Blind fill (15 cases).** A second preparer filled lines 4–14 from the blank form and its instructions only. Every line of every case matches the engine; no difference, not even blank against 0.
 - **PolicyEngine-US 2.152.15** (commit b274cacc). It does not model Form 8815. `us_bonds_for_higher_ed` is a bare person input with no formula, so it has no line 10 start, no line 12 range, no Line 6 Worksheet and no ownership test to compare. Its only rule is where the amount goes: an above-the-line exclusion, left out of modified AGI for the IRA deduction, and counted for the filer when recorded on a dependent. That matches the form: line 14 reduces Schedule B, and a bond in a child's name does not qualify.
-- **The engine's constants against the form.** Line 10 ($99,500; $149,250), the line 12 divisors ($15,000; $30,000) and the line 9 Note ($114,500; $179,250) match `irs-8815-form-2025::sec::omb-no-1545-0074::b02`.
+- **The engine's constants against the form.** Line 10 ($99,500; $149,250), the line 12 divisors ($15,000; $30,000) and the line 9 Note ($114,500; $179,250) match `irs-8815-form-2025::sec::face-page-1::b02`.
 - **IRS Direct File.** No checkout is reachable from this project (issue #140 is open), so it was not compared.

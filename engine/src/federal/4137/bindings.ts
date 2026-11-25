@@ -85,7 +85,7 @@ export function register(): void {
         return owner === "spouse" ? info.spouseSSN : info.taxpayerSSN;
       },
       ...line1Bindings(),
-      // MANUAL EDIT: irs-4137-form-2025::sec::omb-no-1545-0074::b01, b02 (lines.ts).
+      // MANUAL EDIT: irs-4137-form-2025::sec::face-page-1::b01, b02 (lines.ts).
       "0.line.2_total_tips_received": (_, info) => linesOf(info)?.line2,
       "0.line.3_total_tips_reported": (_, info) => linesOf(info)?.line3,
       "0.line.4_unreported_tips": (_, info) => linesOf(info)?.line4,

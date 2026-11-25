@@ -6,14 +6,14 @@ default changes a dollar amount.
 
 ## 1. Whole dollars on lines 23 to 28
 
-- Text: "23 Multiply line 19 by 10% (0.10) ... 24 Tax on amount on line 23 ... 25 Multiply line 24 by 10.0" (`irs-4972-form-2025::sec::omb-no-1545-0193::b04`).
+- Text: "23 Multiply line 19 by 10% (0.10) ... 24 Tax on amount on line 23 ... 25 Multiply line 24 by 10.0" (`irs-4972-form-2025::sec::face-part-iii::b02`).
 - 10% of a whole-dollar line can have cents, and the schedule's tax has cents.
 - Default: each line rounds to the nearest dollar (CLAUDE.md rounding rule), and line 25 is the rounded line 24 times 10.
 - Changes dollars: yes, by a few dollars on line 29. The two published examples have no cents, so they do not decide it.
 
 ## 2. Decimal places on line 20 and worksheet lines C
 
-- Text: "enter the result as a decimal (rounded to at least three places)" (`omb-no-1545-0193::b04`, `specific-instructions::b04`, `::b05`).
+- Text: "enter the result as a decimal (rounded to at least three places)" (`face-part-iii::b02`, `specific-instructions::b04`, `::b05`).
 - Default: four places, as the filled-in Form 4972 in Pub. 575 (2024) prints line 20 (.0588).
 - Changes dollars: yes, by a dollar or less on line 21 and worksheet line E.
 

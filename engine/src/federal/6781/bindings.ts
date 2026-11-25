@@ -59,7 +59,7 @@ export function register(): void {
       "0.header.taxpayer_name": (_, info) => namesOnReturn(info),
       "0.header.identifying_number": (_, info) => info.taxpayerSSN,
       ...line1Bindings(),
-      // MANUAL EDIT: irs-6781-form-2025::sec::omb-no-1545-0074::b01, lines 2–7.
+      // MANUAL EDIT: irs-6781-form-2025::sec::face-part-i::b01, lines 2–7.
       "0.line.2_total_col_b": (_, info) => partIOf(info)?.line2Loss,
       "0.line.2_total_col_c": (_, info) => partIOf(info)?.line2Gain,
       "0.line.3_net_gain_or_loss": (_, info) => partIOf(info)?.line3,
@@ -67,7 +67,7 @@ export function register(): void {
       // MANUAL EDIT: skipped on a net gain (the Note); else -0-, box D is not checked.
       "0.line.6_loss_carried_back": (_, info) => partIOf(info)?.line6,
       "0.line.7_combine_lines_5_and_6": (_, info) => partIOf(info)?.line7,
-      // MANUAL EDIT: omb-no-1545-0074::b01 and b02: 40% and 60% of line 7, nearest dollar.
+      // MANUAL EDIT: face-part-i::b01: 40% and 60% of line 7, nearest dollar.
       "0.line.8_short_term_capital_gain_loss": (_, info) => partIOf(info)?.line8,
       "0.line.9_long_term_capital_gain_loss": (_, info) => partIOf(info)?.line9,
     },

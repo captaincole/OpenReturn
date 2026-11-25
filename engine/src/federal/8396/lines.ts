@@ -111,11 +111,11 @@ export interface CreditInputs {
   line6: number;
 }
 
-/* Line 7: add lines 3 through 6 (irs-8396-form-2025::sec::part-i-current-year-mortgage-interest-credit::b01). */
+/* Line 7: add lines 3 through 6 (irs-8396-form-2025::sec::face-part-i::b01). */
 export const totalCredit = (inputs: CreditInputs): number =>
   sum(inputs.line3, inputs.line4, inputs.line5, inputs.line6);
 
-/* Line 9: the smaller of line 7 or line 8 (…::b02). */
+/* Line 9: the smaller of line 7 or line 8 (face-part-i::b01). */
 export const currentYearCredit = (line7: number, line8: number): number => Math.min(line7, line8);
 
 export interface PartIIResult {
@@ -131,7 +131,7 @@ export interface PartIIResult {
 
 /*
  * Part II, "Complete only if line 9 is less than line 7"
- * (irs-8396-form-2025::sec::part-i-current-year-mortgage-interest-credit::b02).
+ * (irs-8396-form-2025::sec::face-part-ii::b01).
  * The current-year credit is used first, then the prior years from the earliest
  * (irs-8396-form-2025::sec::part-ii-mortgage-interest-credit-carryforward-to-2026::b01):
  * the 2022 credit (line 4) ends with 2025, so it has no carryforward line.

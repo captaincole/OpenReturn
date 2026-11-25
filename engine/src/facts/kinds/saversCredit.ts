@@ -8,7 +8,7 @@
  * - Who can take the credit (irs-8880-form-2025::sec::who-can-take-this-credit::b01,
  *   ::b02): a person who was a full-time student for part of 5 calendar months
  *   of 2025, or whom someone else claims as a dependent, cannot.
- * - Line 1 (irs-8880-form-2025::sec::omb-no-1545-0074::b01): Roth IRA and ABLE
+ * - Line 1 (irs-8880-form-2025::sec::face-page-1::b01): Roth IRA and ABLE
  *   account contributions. No document the engine reads shows them (Form 5498
  *   and Form 5498-QA arrive after the return is due).
  * - Line 2 (irs-8880-form-2025::sec::line-2::b01): voluntary employee
