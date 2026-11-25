@@ -194,4 +194,10 @@ export const noalFacts: TaxFactRow[] = [
     2500,
     "Verbal: 2024 FTB 3801 Part VII column (c), the Davis duplex.",
   ),
+  fact(
+    "rental",
+    makeCaPassiveCarryoverKey(ROYALTY),
+    0,
+    "Verbal: the royalty is not on the 2024 FTB 3801 Part VII.",
+  ),
 ];

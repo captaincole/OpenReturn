@@ -13,8 +13,12 @@ default changes a dollar amount.
   3885A for "passive activities that produce gains"
   (`ca-540-sched-ca-inst-2025::sec::line-5-rental-real-estate-royalties-partnerships-s-corporations-trusts-etc::b01`, `::b02`).
 - The gap: a property can have a federal loss (federal Form 8582 limits it)
-  and a California gain (lower California depreciation). FTB 3885A alone then
-  misses the federal limit.
+  and a California gain (lower California depreciation). Read as written,
+  neither text files the form then (no California loss; a passive gain goes
+  to FTB 3885A). But FTB 3885A alone adds back only the depreciation
+  difference, not the part of the federal loss that Form 8582 disallowed, so
+  Schedule CA line 5 would be wrong. A person decides; the engine keeps its
+  default. No scenario covers this case (unit test only).
 - Default: the form files for a passive property with a California loss or
   carryover, and also with a federal loss or carryover on a property that is
   passive federally. Its Schedule E worksheet then sets line 5.
@@ -59,16 +63,24 @@ default changes a dollar amount.
   federal Form 8582 writes them.
 - Changes dollars: no.
 
-## 5. The California carryover when none is stated
+## 5. The California carryover when none is stated (settled 2026-11-24)
 
-- Source: Parts IV and V column (c) is the California prior year unallowed
-  loss; the instructions give no default.
-- Default: the federal carryover (the rental fact's) when the property is
-  passive federally and has no federal carryover. Otherwise the form asks
-  (`ca_passive.prior_year_unallowed_loss.<id>`), as Schedule D (540) does for
-  its carryover.
-- Changes dollars: yes, if a California-only carryover exists and is not
-  stated.
+- Source: column (c) is last year's Part VII column (c): "You find these
+  amounts in Part VII, column (c), of your 2024 Form 8582"
+  (`irs-8582-inst-2025::sec::part-iv-2::b02`), in California amounts
+  (`ca-3801-inst-2025::sec::part-i::b01`). No text lets the federal amount
+  stand in, and the PTP example has a $3,500 federal and a $5,000 California
+  prior year loss for one activity
+  (`ca-3801-inst-2025::sec::passive-activity-loss-rules-for-partners-in-ptps::b04`).
+- Rule now: the form asks (`ca_passive.prior_year_unallowed_loss.<id>`) for
+  every property that is passive for California, also when the federal
+  carryover is 0 or not stated. Before, a federal 0 stood in, which missed a
+  California-only carryover (a former real estate professional, or older
+  depreciation that differed).
+- Pattern note: Schedule D (540) still asks for its California capital loss
+  carryover only when a federal carryover exists (requiredInputs.test.ts).
+  The same gap may exist there; not changed in this branch.
+- Changes dollars: no longer; a missing answer now waits.
 
 ## 6. Column (e) of the California Passive Activity Worksheet
 
@@ -125,6 +137,30 @@ default changes a dollar amount.
   loss" on line 11 smaller than the losses the line 3 rule allows.
 - Changes dollars: yes on the printed lines 9 to 11; no on Schedule CA (every
   loss is allowed under both readings).
+
+## 11. Column (b) of the Schedule E worksheet for a self-rental with income
+
+- Source: "Enter the character of the activity for California purposes as
+  passive or nonpassive" (`ca-3801-inst-2025::sec::step-4-figuring-the-california-adjustment::b02`);
+  "For California purposes, all rental activities are passive activities"
+  (`::material-participation-in-real-property-business-irc-section-469-c-7::b01`).
+  A self-rental's net income is nonpassive under the federal rule
+  (`irs-pub-925-2025::sec::disclosure-requirement::b05`); no California text
+  speaks of it.
+- Default: "Nonpassive", and no row in Parts IV and V (the olver scenario,
+  property F).
+- Changes dollars: no (the income passes through either way).
+
+## 12. More than three Schedule E properties
+
+- The whole form is unsupported (`OVERFLOW_GAP`), as federal Form 8582 is.
+  The limit is Schedule E's: it has three columns, and the engine files no
+  second Schedule E. FTB 3801's own rows hold more (five in Parts IV to VI and
+  VIII, six in Part VII, seven on each Side 2 worksheet).
+- What it takes: Schedule E copies first (`copies` in `federal/index.ts`, as
+  Form 8949 and Form 1116 repeat), with the totals of lines 23 to 26 on one
+  copy only; then Form 8582 and this form read every copy's columns. More than
+  five rows in a part also needs an attached statement. Not done here.
 
 ## Second opinions
 
