@@ -21,9 +21,6 @@ export const FORM_1116_GAP =
 const nonZeroOrBlank = (value: number | undefined): number | undefined =>
   value === undefined || value === 0 ? undefined : roundDollars(value);
 
-/* Line 2 has the deduction line 3 subtracts only with a 2024 net operating loss deduction (line 2e). */
-const hasNolDeduction = (form6251: PriorYearForm6251 | undefined) => (form6251?.line2e ?? 0) > 0;
-
 /*
  * Line 1: 2024 Form 6251 lines 1 and 2e. Line 2: lines 2a, 2b, 2c, 2d, 2g and 2h,
  * and the other exclusion items (irs-8801-inst-2025::sec::line-2::b01, b02).
@@ -101,26 +98,26 @@ function fromLine11(
 type Figured = { priorYear?: Form8801PriorYear; missing: string[] };
 
 /*
- * Lines 1–21 from the answers, or the answers still missing. Line 3 is asked
- * only with a 2024 net operating loss deduction; the worksheet and Form 2555
- * only when line 10 is above 0; the foreign tax credit only when 2024 Form 6251
- * line 8 is too (QUESTIONS.md).
+ * Lines 1–21 from the answers, or the answers still missing. Line 3 is asked on
+ * every return: the MTCNOLD is the MTCNOL carryovers and carrybacks to 2024
+ * (irs-8801-inst-2025::sec::line-3::b01), and one can exist with no 2024 regular
+ * net operating loss deduction (Form 6251 line 2e), so 0 is the answer when no
+ * loss was carried to 2024. The worksheet and Form 2555 are asked only when
+ * line 10 is above 0; the foreign tax credit only when 2024 Form 6251 line 8
+ * is too (QUESTIONS.md).
  */
 function figurePriorYear(answers: PriorYearMinimumTax): Figured {
   const { filingStatus: status, form6251 } = answers;
-  const needsLine3 = hasNolDeduction(form6251);
   const first = missingInputs({
     [KEYS.filingStatus]: status,
     [KEYS.form6251]: form6251,
     [KEYS.otherExclusionItems]: answers.otherExclusionItems,
+    [KEYS.minimumTaxCreditNolDeduction]: answers.minimumTaxCreditNolDeduction,
     [KEYS.creditCarryforward]: answers.creditCarryforward,
-    ...(needsLine3
-      ? { [KEYS.minimumTaxCreditNolDeduction]: answers.minimumTaxCreditNolDeduction }
-      : {}),
   });
   if (first.length > 0 || status === undefined || form6251 === undefined) return { missing: first };
   const { line1, line2 } = line1And2(form6251, answers.otherExclusionItems ?? 0);
-  const line3 = needsLine3 ? nonZeroOrBlank(answers.minimumTaxCreditNolDeduction) : undefined;
+  const line3 = nonZeroOrBlank(answers.minimumTaxCreditNolDeduction);
   const upTo10 = lines1To10(status, line1, line2, line3);
   const line10 = upTo10.line10 ?? 0;
   if (line10 === 0) {

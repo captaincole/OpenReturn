@@ -72,8 +72,9 @@ export interface PassThroughItem {
   passiveCarryover?: boolean;
   /*
    * A loss the at-risk limit held back in an earlier year (the holding's
-   * carriedLosses.atRisk), on this year's Form 6198 line 1; fromPriorYear is
-   * true too, so once allowed it takes a "PYA" row like a carried basis loss
+   * carriedLosses.atRisk, by item), on this year's Form 6198 Part I by its kind;
+   * fromPriorYear is true too, so once allowed it takes a "PYA" row like a
+   * carried basis loss
    * (irs-1040se-inst-2025::sec::losses-not-allowed-in-prior-years-due-to-the-basis::b01).
    */
   atRiskCarryover?: boolean;
@@ -197,30 +198,48 @@ export function hasCarriedBasisLoss(holding: K1HoldingFactValue | undefined): bo
   return Object.values(holding?.carriedLosses?.basis ?? {}).some((amount) => (amount ?? 0) > 0);
 }
 
+/*
+ * Losses carried by item as the items the K-1 boxes would give, in Form 7203
+ * Part III order, each marked fromPriorYear; `limit` names the limit that held
+ * it back in the label, and an at-risk one is marked atRiskCarryover.
+ */
+function carriedItemsOf(
+  key: string,
+  carried: K1CarriedBasisLosses | undefined,
+  form: K1Form,
+  limit: "basis" | "atRisk",
+): PassThroughItem[] {
+  const rows: Partial<Record<string, CarriedBasisItem>> = CARRIED_BASIS_ITEMS[form] ?? {};
+  return Object.entries(rows).flatMap(([field, row]): PassThroughItem[] => {
+    const amount = carried?.[field as keyof K1CarriedBasisLosses] ?? 0;
+    if (row === undefined || amount <= 0) return [];
+    const { sign, ...where } = row;
+    const item = { entityKey: key, ...where, amount: sign * amount, fromPriorYear: true };
+    return limit === "basis"
+      ? [{ ...item, label: `${labelOf(row.type)} carried from an earlier year` }]
+      : [
+          {
+            ...item,
+            label: `${labelOf(row.type)}: at-risk loss carried from an earlier year`,
+            atRiskCarryover: true,
+          },
+        ];
+  });
+}
+
 /* The holding's carried basis losses as items, in Form 7203 Part III order. */
-export function priorYearItemsOf(
+export const priorYearItemsOf = (
   key: string,
   holding: K1HoldingFactValue | undefined,
   form: K1Form = "1120-S",
-) {
-  const carried = holding?.carriedLosses?.basis ?? {};
-  const rows: Partial<Record<string, CarriedBasisItem>> = CARRIED_BASIS_ITEMS[form] ?? {};
-  return Object.entries(rows).flatMap(([field, row]): PassThroughItem[] => {
-    if (row === undefined) return [];
-    const amount = carried[field as keyof K1CarriedBasisLosses] ?? 0;
-    if (amount <= 0) return [];
-    const { sign, ...where } = row;
-    return [
-      {
-        entityKey: key,
-        ...where,
-        amount: sign * amount,
-        label: `${labelOf(row.type)} carried from an earlier year`,
-        fromPriorYear: true,
-      },
-    ];
-  });
-}
+) => carriedItemsOf(key, holding?.carriedLosses?.basis, form, "basis");
+
+/* The holding's carried at-risk losses as items (Form 6198 Part I, federal/6198). */
+export const atRiskCarriedItemsOf = (
+  key: string,
+  holding: K1HoldingFactValue | undefined,
+  form: K1Form,
+) => carriedItemsOf(key, holding?.carriedLosses?.atRisk, form, "atRisk");
 
 /*
  * Each box with an amount other than 0 is an item; a box with no amount
@@ -395,7 +414,9 @@ export function passThroughLossFloor(facts: ReadonlyArray<FactRow>): number {
     .map((item) => -Math.abs(item.amount ?? 0));
   const carried = [...readK1HoldingFacts(facts).holdings.values()].flatMap((holding) => {
     const { basis, atRisk, passive } = holding.carriedLosses ?? {};
-    return [...Object.values(basis ?? {}), atRisk, passive].map((amount) => -(amount ?? 0));
+    return [...Object.values(basis ?? {}), ...Object.values(atRisk ?? {}), passive].map(
+      (amount) => -(amount ?? 0),
+    );
   });
   return sum(...losses, ...deductions, ...carried);
 }
