@@ -94,6 +94,18 @@ describe("who files FTB 3805E", () => {
     ]);
   });
 
+  it("a later year with no payment: a California basis that differs files neither", () => {
+    const quiet = saleRow("quiet-lot", {
+      ...foothillLot,
+      dateSold: "2020-03-14",
+      relatedParty: undefined,
+      paymentsThisYear: 0,
+      paymentsPriorYears: 100000,
+    });
+    const { files } = evaluate([...others, quiet]);
+    expect([files("form-3805e"), files("schedule-d-ca")]).toEqual([false, false]);
+  });
+
   it("no Form 540 (a nonresident): FTB 3805E does not file", () => {
     const { files } = evaluate(
       [...others, lot],

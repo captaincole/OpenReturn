@@ -26,7 +26,7 @@ import {
   type SaleForm,
 } from "../../../federal/6252/sale.js";
 import { roundDollars } from "../../../money.js";
-import { californiaPartIAmounts } from "./lines.js";
+import { californiaAmountsDiffer, californiaPartIAmounts } from "./lines.js";
 
 const yearOf = (date: string): number => Number(date.slice(0, 4));
 
@@ -186,4 +186,14 @@ export function filesThisYear(form: SaleForm): boolean {
     form.partIII !== undefined ||
     form.gap?.from === 5
   );
+}
+
+/*
+ * A sale whose California amounts differ (lines.ts) and that has a form this
+ * year. A later year with no payment and no Part III has no form, so its
+ * different basis changes no 2025 gain and files nothing (QUESTIONS.md item 5).
+ * Filing status only moves line 15's gap, which never decides whether a form files.
+ */
+export function differsThisYear(key: string, sale: InstallmentSaleFactValue): boolean {
+  return californiaAmountsDiffer(sale) && filesThisYear(californiaSaleForm(key, sale, false));
 }

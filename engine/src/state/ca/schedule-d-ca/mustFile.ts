@@ -14,7 +14,7 @@ import {
 import type { MustFileResolution } from "../../../filingInfo.js";
 import { sum } from "../../../money.js";
 import { num, resolveMustFile, type ResolverInputs } from "../../../resolverInputs.js";
-import { californiaAmountsDiffer } from "../3805e/lines.js";
+import { differsThisYear } from "../3805e/sale.js";
 import type { CaliforniaSale } from "./lines.js";
 
 const MUST_FILE_KEY = "decisions.scope.must_file_schedule_d_ca";
@@ -60,10 +60,10 @@ export function salesWithBases(inputs: ResolverInputs): SaleWithBases[] {
   });
 }
 
-/* A capital asset installment sale whose California amounts differ (FTB 3805E, 3805e/lines.ts). */
+/* A capital asset installment sale with a form this year whose California amounts differ (3805e/sale.ts). */
 function installmentSalesThatDiffer(inputs: ResolverInputs): string[] {
   return readInstallmentSaleFacts(inputs.facts)
-    .sales.filter(({ value }) => value.use === "capital_asset" && californiaAmountsDiffer(value))
+    .sales.filter(({ key, value }) => value.use === "capital_asset" && differsThisYear(key, value))
     .map(({ key }) => key);
 }
 

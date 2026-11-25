@@ -19,7 +19,11 @@ export interface Form3805ETotals {
   gap?: string;
   /* Schedule D (540) line 1: one row per capital asset form with a gain this year. */
   scheduleDRows: InstallmentRow[];
-  /* Why an amount bound for Schedule D-1 is not carried; undefined when none is sent. */
+  /*
+   * Why an amount bound for Schedule D-1 is not carried; undefined when none is
+   * sent. Schedule CA (540) line 4 columns B and C are on that form's unsupported
+   * list with this reason, so the route is a gap on every return.
+   */
   scheduleD1Gap?: string;
 }
 

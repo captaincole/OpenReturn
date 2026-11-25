@@ -102,6 +102,9 @@ export const unoFacts: TaxFactRow[] = [
   idFact("address.zip", UNO.zip),
   idFact("occupation", "Dispatcher"),
   idFact("phone", "559-555-0162"),
+  idFact("address.county", "Fresno"),
+  fact("health_coverage", "health_coverage.full_year_mec", true, "Verbal: employer plan all year."),
+  fact("use_tax", "use_tax.owed_amount", 0, "Verbal: no out-of-state purchases."),
   fact("wages", makeW2FactKey("san-joaquin-freight"), w2, "W-2 from San Joaquin Freight Lines."),
   fact(
     "capital_gains",

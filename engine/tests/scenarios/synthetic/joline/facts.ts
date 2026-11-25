@@ -120,6 +120,9 @@ export const jolineFacts: TaxFactRow[] = [
   idFact("address.zip", JOLINE.zip),
   idFact("occupation", "Hydrologist"),
   idFact("phone", "916-555-0138"),
+  idFact("address.county", "Sacramento"),
+  fact("health_coverage", "health_coverage.full_year_mec", true, "Verbal: employer plan all year."),
+  fact("use_tax", "use_tax.owed_amount", 0, "Verbal: no out-of-state purchases."),
   fact("wages", makeW2FactKey("capitol-valley-water"), w2, "W-2 from Capitol Valley Water Agency."),
   // The lot first: its form is the first copy, which the expected values check line by line.
   fact(

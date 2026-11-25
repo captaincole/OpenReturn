@@ -2,7 +2,7 @@ import { readInstallmentSaleFacts } from "../../../facts/index.js";
 import { filingStatusOf, resolveMustFile, type ResolverInputs } from "../../../resolverInputs.js";
 import { FILES_540_KEY, scheduleDCaMustFile } from "../schedule-d-ca/mustFile.js";
 import type { Form3805EFilingInfo } from "./filingInfo.js";
-import { californiaAmountsDiffer } from "./lines.js";
+import { differsThisYear } from "./sale.js";
 import { form3805ETotals, type Form3805ETotals } from "./totals.js";
 
 const MUST_FILE_KEY = "decisions.scope.must_file_3805e";
@@ -17,8 +17,8 @@ const NO_FACTS = "FTB 3805E files by decision, but no installment sale fact give
  * (line-26-and-line-37::b01), which a resident files "only if there is a
  * difference between your California and federal capital gains and losses"
  * (ca-540-sched-d-inst-2025::sec::purpose::b01). So, with Form 540:
- * 1. a sale states California amounts that differ from the federal ones
- *    (lines.ts); a malformed sale files too, so its gap shows;
+ * 1. a sale with a form this year states California amounts that differ from
+ *    the federal ones (sale.ts); a malformed sale files too, so its gap shows;
  * 2. Schedule D (540) files for any reason and a capital asset sale needs its
  *    line 1 row.
  * The explicit decision still wins.
@@ -27,7 +27,7 @@ function mustFile3805E(inputs: ResolverInputs) {
   const read = readInstallmentSaleFacts(inputs.facts);
   const files540 = inputs.decisionByKey.get(FILES_540_KEY) === true;
   const differ = [
-    ...read.sales.filter(({ value }) => californiaAmountsDiffer(value)).map(({ key }) => key),
+    ...read.sales.filter(({ key, value }) => differsThisYear(key, value)).map(({ key }) => key),
     ...read.malformedKeys,
   ];
   const scheduleD = scheduleDCaMustFile(inputs).value === true;

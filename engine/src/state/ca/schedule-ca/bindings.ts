@@ -4,6 +4,7 @@ import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
 import { defineForm, type FormAccessor, type FormSpec } from "../../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../../money.js";
 import { unsupported } from "../../../types.js";
+import { SCHEDULE_D1_GAP } from "../3805e/totals.js";
 import { answerLines } from "./answerLines.js";
 import {
   LINE_7A_ADDITIONS_GAP,
@@ -643,10 +644,8 @@ export function register(): void {
         "CA addition for alimony received under post-2018 or post-2025 agreements requires alimony fact data and divorce agreement date logic not yet ingested or modeled.",
       "0.line.b4_federal":
         "Other gains/losses (Sch CA Section B line 4 col A) comes from federal Schedule 1 line 4 (Form 4797 gains/losses); federal Schedule 1 is not an ingested form and we have no Form 4797 fact ingestion path.",
-      "0.line.b4_subtractions":
-        "Other gains/losses CA subtractions (Sch CA Section B line 4 col B) require CA-specific basis and depreciation adjustments for Form 4797 transactions; no ingestion path for Schedule 1 or Form 4797 yet.",
-      "0.line.b4_additions":
-        "Other gains/losses CA additions (Sch CA Section B line 4 col C) require CA-specific basis adjustments for Form 4797 transactions; no ingestion path for Schedule 1 or Form 4797 yet.",
+      "0.line.b4_subtractions": `Other gains/losses CA subtractions (Sch CA Section B line 4 col B) require CA-specific basis and depreciation adjustments for Form 4797 transactions; no ingestion path for Schedule 1 or Form 4797 yet. ${SCHEDULE_D1_GAP}`,
+      "0.line.b4_additions": `Other gains/losses CA additions (Sch CA Section B line 4 col C) require CA-specific basis adjustments for Form 4797 transactions; no ingestion path for Schedule 1 or Form 4797 yet. ${SCHEDULE_D1_GAP}`,
       "0.line.b6_federal":
         "Farm income/loss (Sch CA Section B line 6 col A) comes from federal Schedule 1 line 6 (Schedule F); federal Schedule 1 and Schedule F are not ingested forms and we have no farm income fact ingestion path.",
       "0.line.b6_subtractions":
