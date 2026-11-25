@@ -25,7 +25,7 @@ import type { Scenario } from "../tests/types.js";
 function buildContext(scenario: Scenario): DerivationContext {
   return {
     taxYear: scenario.taxYear,
-    facts: makeFactsView(scenario.facts, scenario.decisions),
+    facts: makeFactsView(scenario.facts),
     decisions: makeDecisionsView(scenario.decisions),
     filingInfo: resolveFilingInfo({
       facts: scenario.facts.map((fact) => ({

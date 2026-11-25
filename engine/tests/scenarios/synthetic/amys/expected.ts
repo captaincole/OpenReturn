@@ -32,7 +32,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 11 — Maximum value of all assets (reported in Part VI)
       "form-8938.0.line.11_max_value_foreign_assets": 298899,
       // Line 13a — Foreign deposit and custodial accounts: Interest — (c) Amount reported on form
-      "form-8938.0.line.13a_accounts_interest_col_c": 1335,
+      "form-8938.0.line.13a_accounts_interest_col_c": 1332,
       // Line 13b — Foreign deposit and custodial accounts: Dividends — (c) Amount reported on form
       "form-8938.0.line.13b_accounts_dividends_col_c": 1471,
       // Line 13e — Foreign deposit and custodial accounts: Gains (losses) — (c) Amount reported on
@@ -110,13 +110,13 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
   "schedule-b": {
     engineFields: {
       // Line 1 — Amount (row 1)
-      "schedule-b.0.line.1_amount_1": 1335,
+      "schedule-b.0.line.1_amount_1": 1332,
       // Line 1 — Amount (row 2)
       "schedule-b.0.line.1_amount_2": 1913,
       // Line 2 — Add the amounts on line 1
-      "schedule-b.0.line.2_total_interest": 3247,
+      "schedule-b.0.line.2_total_interest": 3245,
       // Line 4 — Subtract line 3 from line 2. Enter the result here and on Form 1040 or 1040-SR, l
-      "schedule-b.0.line.4_taxable_interest": 3247,
+      "schedule-b.0.line.4_taxable_interest": 3245,
       // Line 5 — Amount (row 1)
       "schedule-b.0.line.5_amount_1": 1471,
       // Line 5 — Amount (row 2)
@@ -197,7 +197,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 1z — Add lines 1a through 1h
       "form-1040.line.1z": 172400,
       // Line 2b — Taxable interest
-      "form-1040.line.2b": 3247,
+      "form-1040.line.2b": 3245,
       // Line 3a — Qualified dividends
       "form-1040.line.3a": 2732,
       // Line 3b — Ordinary dividends
@@ -205,19 +205,19 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 7a — Capital gain or (loss). Attach Schedule D if required
       "form-1040.line.7a": 6120,
       // Line 9 — Add lines 1z, 2b, 3b, 4b, 5b, 6b, 7a, and 8. This is your total income
-      "form-1040.line.9": 184499,
+      "form-1040.line.9": 184497,
       // Line 10 — Adjustments to income from Schedule 1, line 26
       "form-1040.line.10": 47,
       // Line 11a — Subtract line 10 from line 9. This is your adjusted gross income
-      "form-1040.line.11a": 184452,
+      "form-1040.line.11a": 184450,
       // Line 11b — Amount from line 11a (adjusted gross income)
-      "form-1040.line.11b": 184452,
+      "form-1040.line.11b": 184450,
       // Line 12e — Standard deduction or itemized deductions (from Schedule A)
       "form-1040.line.12e": 31500,
       // Line 14 — Add lines 12e, 13a, and 13b
       "form-1040.line.14": 31500,
       // Line 15 — Subtract line 14 from line 11b. Taxable income
-      "form-1040.line.15": 152952,
+      "form-1040.line.15": 152950,
       // Line 16 — Tax (see instructions)
       "form-1040.line.16": 23286,
       // Line 18 — Add lines 16 and 17

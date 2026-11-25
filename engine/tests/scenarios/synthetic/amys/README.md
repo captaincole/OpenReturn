@@ -15,16 +15,16 @@ The scenario fills Parts I to VI of Form 8938 with three copies of page 2, ties 
 
 ## Documents
 
-`generate-docs.ts` makes six year-end statements in `docs/` with the generator `documents/foreignAssetStatement.ts`. Each prints only the account's currency, as a foreign bank does: the balances, the month-end balances of an account (the highest is the Form 8938 maximum value, `valuing-financial-accounts::b01`), and on page 2 each credit, dividend and withholding with its date, and each sale with its trade and settlement dates. No statement prints a dollar amount or an exchange rate.
+`generate-docs.ts` makes six year-end statements in `docs/` with the generator `documents/foreignAssetStatement.ts`. Each prints only the account's currency, as a foreign bank does: the balances, the month-end balances of an account (the highest is the Form 8938 maximum value, `valuing-financial-accounts::b01`), and on page 2 the income (each dividend with its date; the Bologna interest as one year total with no date), each penalty and withholding with its date, and each sale with its trade and settlement dates. No statement prints a dollar amount or an exchange rate.
 
 ## Currencies and rates
 
-The income facts hold the amounts and their dates as the statements print them (`foreignCurrency` on each fact); no fact holds a rate. The engine looks each rate up in its tables (`engine/src/data/exchange-rates/`), converts, keeps the cents, and each form rounds its own lines. The couple's method for interest is the yearly average (`decisions.foreign_income_rate_method`). All rates are real, as the Board and the Treasury publish them (`federal/8938/QUESTIONS.md` questions 15 and 18).
+The income facts hold the amounts and their dates as the statements print them (`foreignCurrency` on each fact); no fact holds a rate. The engine looks each rate up in its tables (`engine/src/data/exchange-rates/`), converts, keeps the cents, and each form rounds its own lines. An amount with a date takes the H.10 rate of its day; an income amount with no date takes the IRS yearly average. The scenario shows both: the Bologna statement prints the year's interest as one total with no date, and every dividend with its date. All rates are real, as the Federal Reserve, the IRS and the Treasury publish them (`federal/8938/QUESTIONS.md` questions 15 and 18).
 
 | What | Table and day | Rate as printed | Rule |
 | --- | --- | --- | --- |
 | Balances (Form 8938) | Treasury, 12/31/2025 | EUR 0.851, GBP 0.743, CHF 0.792, NOK 10.072 (units per dollar) | `irs-8938-inst-2025::sec::currency-determination-date::b01` |
-| Bologna interest | G.5A, 2025 average | EUR 1.1306 (dollars per euro) | the couple's method |
+| Bologna interest (no date) | IRS yearly average, 2025 | EUR 0.886 (euros per dollar) | an amount with no date |
 | Bologna penalty | H.10, 09/15/2025 | EUR 1.1772 | an event: its day |
 | Italian tax withheld | H.10, 12/31/2025 | EUR 1.1736 | `irs-1116-inst-2025::sec::foreign-currency-conversion::b01` |
 | London dividends | H.10, 06/13/2025 and 11/14/2025 | GBP 1.3594, 1.3156 (dollars per pound) | each dividend: its day |
@@ -41,7 +41,7 @@ The conversions, in the account's currency, the rate with its table and day, and
 
 | Item | Foreign amount | Rate (table, day) | Dollars |
 | --- | --- | --- | --- |
-| Bologna interest | EUR 1,180.40 | × 1.1306 (G.5A, 2025) | 1,334.56 |
+| Bologna interest (year total, no date) | EUR 1,180.40 | ÷ 0.886 (IRS yearly average, 2025) | 1,332.28 |
 | Bologna early withdrawal penalty | EUR 40.00 | × 1.1772 (H.10, 09/15/2025) | 47.09 |
 | Bologna Italian tax withheld | EUR 118.04 | × 1.1736 (H.10, 12/31/2025) | 138.53 |
 | London dividend (qualified) | GBP 520.30 | × 1.3594 (H.10, 06/13/2025) | 707.30 |
@@ -72,7 +72,7 @@ The lines:
 | 8938 32 (note) | USD 76,500 | box b |
 | 8938 10, 11 | two assets: 222,399 + 76,500 | 2, 298,899 |
 | 8938 12 | note bought in 2025 | Yes |
-| 8938 13a | Bologna interest 1,334.56 | 1,335, Form 1040 line 2b, Schedule B line 1 |
+| 8938 13a | Bologna interest 1,332.28 | 1,332, Form 1040 line 2b, Schedule B line 1 |
 | 8938 13b | London dividends 1,470.87 | 1,471, line 3b, Schedule B line 5 |
 | 8938 13e | 18,314 − 12,194 (Form 8949 box C row) | 6,120, line 7a, Schedule D line 3 |
 | 8938 13f | penalty 47.09 | 47, line 10, Schedule 1 line 18 |
@@ -81,7 +81,7 @@ The lines:
 | 8938 14b, 14g | Fjordline dividend 1,261.51, tax 189.23 | 1,262; 189 |
 | 8938 18 | one Form 8621 | 1 |
 | 8938 22c, 22d | Bologna joint; Basel has no tax item | checked on their pages |
-| Schedule B 1, 2, 4 | 1,334.56 + 1,912.50 = 3,247.06 | rows 1,335 and 1,913; 3,247 |
+| Schedule B 1, 2, 4 | 1,332.28 + 1,912.50 = 3,244.78 | rows 1,332 and 1,913; 3,245 |
 | Schedule B 5, 6 | 1,470.87 + 1,261.51 = 2,732.38 | rows 1,471 and 1,262; 2,732 |
 | Schedule B 7a | Form 8938 accounts and the fund units; Bologna alone is over $10,000 | Yes, Yes |
 | Schedule B 7b | the accounts' countries, in the order recorded | Italy; United Kingdom, Switzerland, Luxembourg |
@@ -89,13 +89,16 @@ The lines:
 | Schedule D 3, 7, 16 | from Form 8949 box C | 6,120 |
 | Schedule 1 18, 26 | the penalty | 47 |
 | Schedule 3 1, 8 | election: the smaller of 327.76 (138.53 + 189.23) and the tax | 328 |
-| 1040 2b, 3a, 3b, 7a | Schedule B 4 and 6; qualified 2,732.38; Schedule D 16 | 3,247; 2,732; 2,732; 6,120 |
-| 1040 9, 10, 11 | 172,400 + 3,247 + 2,732 + 6,120; 47 | 184,499; 47; 184,452 |
-| 1040 15 | 184,452 − 31,500 standard deduction | 152,952 |
-| 1040 16 | QDCG worksheet: 150,220 × 22% − 10,172 = 22,876.40 → 22,876; 2,732 × 15% = 409.80 → 410 | 23,286 |
+| 1040 2b, 3a, 3b, 7a | Schedule B 4 and 6; qualified 2,732.38; Schedule D 16 | 3,245; 2,732; 2,732; 6,120 |
+| 1040 9, 10, 11 | 172,400 + 3,245 + 2,732 + 6,120; 47 | 184,497; 47; 184,450 |
+| 1040 15 | 184,450 − 31,500 standard deduction | 152,950 |
+| 1040 16 | QDCG worksheet: 150,218 × 22% − 10,172 = 22,875.96 → 22,876; 2,732 × 15% = 409.80 → 410 | 23,286 |
 | 1040 20, 22, 24 | Schedule 3 line 8; 23,286 − 328 | 328; 22,958; 22,958 |
 | 1040 34, 35a | 27,850 withheld − 22,958 | 4,892 |
 
-Before the rates came from the tables (rates stated on the facts, partly made up), the key lines were: Schedule B 2 3,245 and 6 2,690; Schedule D 16 6,266; Form 1040 line 11 184,556, line 16 23,313, line 24 22,987, line 34 4,863.
+History of the key lines:
+
+- Rates stated on the facts (partly made up): Schedule B 2 3,245 and 6 2,690; Schedule D 16 6,266; Form 1040 line 11 184,556, line 16 23,313, line 24 22,987, line 34 4,863.
+- The first tables, with the Board's G.5A average for the interest under the couple's chosen method (EUR 1,180.40 × 1.1306 = 1,334.56): Schedule B 2 3,247; Form 1040 line 11 184,452; lines 16, 24 and 34 as now.
 
 The golden PDF holds page 1 and the first page 2 (Bologna, Norway). A plain render prints all three page 2s.

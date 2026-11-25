@@ -47,7 +47,7 @@ export function evaluateForms(
 
   const ctx: DerivationContext = {
     taxYear,
-    facts: makeFactsView(facts, decisions),
+    facts: makeFactsView(facts),
     decisions: makeDecisionsView(decisions),
     // Without it, every binding blocks with "filingInfo missing".
     filingInfo,

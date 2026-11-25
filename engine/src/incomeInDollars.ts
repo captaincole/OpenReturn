@@ -8,22 +8,18 @@
  * `foreignCurrency` passes through as it is.
  *
  * The rate of each amount:
- * - interest that accrues through the year (every 1099-INT amount but the
- *   events below): the return's method, FOREIGN_INCOME_RATE_METHOD_KEY. The
- *   yearly average (the default) is the Board's G.5A average for the tax
- *   year; the daily method takes the H.10 rate of each day credited (`byDate`).
- * - an event, which happens on one day: each dividend (every 1099-DIV
- *   amount), the early withdrawal penalty, and tax withheld take the H.10 rate
- *   of their day (`byDate`). The decision behind this (federal/8938/QUESTIONS.md
- *   question 15) reads the IRS practice unit "Definition of Appropriate
- *   Exchange Rate": an item over a period takes an average rate for the
- *   period; a dividend, an event on one day, takes that day's rate. Foreign tax:
- *   "the rate of exchange in effect on the day you paid the foreign taxes (or
- *   on the day the tax was withheld)" (irs-1116-inst-2025::sec::foreign-currency-conversion::b01;
- *   26 CFR 1.986(a)-1). Taxes claimed on an accrual basis take "the average
- *   exchange rate for the tax year to which the taxes relate" (the same block).
+ * - income (interest, dividends, and the early withdrawal penalty): the H.10
+ *   rate of its day when the fact dates it (`byDate`); the part of a box with
+ *   no date takes the IRS yearly average for the tax year.
+ * - tax withheld: the H.10 rate of the day withheld: "the rate of exchange in
+ *   effect on the day you paid the foreign taxes (or on the day the tax was
+ *   withheld)" (irs-1116-inst-2025::sec::foreign-currency-conversion::b01;
+ *   26 CFR 1.986(a)-1). Its date is required. Foreign taxes claimed on an
+ *   accrual basis take "the average exchange rate for the tax year to which
+ *   the taxes relate" (the same block).
  * - a sale: the proceeds at the H.10 rate of the settlement date of the sale,
- *   the cost at that of the purchase (26 CFR 1.988-2(a)(2)(iv)).
+ *   the cost at that of the purchase (26 CFR 1.988-2(a)(2)(iv)). Both dates
+ *   are required.
  *
  * The two views the forms read convert: the resolvers' inputs
  * (resolverInputs.ts makeResolverInputs) and the bindings' facts (types.ts
@@ -31,12 +27,14 @@
  *
  * A fact that cannot be converted keeps no amount (no form adds a foreign
  * amount as dollars) and keeps its `foreignCurrency`:
- * - it waits when a date the rule needs is missing, or the dated amounts do
- *   not add up to the box: its key is a pending input (pendingInputs.ts) and
- *   the lines that list it are blank (waitsForExchangeRate);
- * - it is a gap when the currency is not supported or the tables have no
- *   rate: `foreignCurrency.gap` says why, and the lines that list it are
- *   unsupported (exchangeRateGap).
+ * - it waits when a date the rule needs is missing, when the dated amounts
+ *   come to more than the box, or when an amount with no date is in a currency
+ *   the IRS table lacks (the date lets the day's rate be used): its key is a
+ *   pending input (pendingInputs.ts) and the lines that list it are blank
+ *   (waitsForExchangeRate);
+ * - it is a gap when the currency is not supported or the H.10 table has no
+ *   rate for a date: `foreignCurrency.gap` says why, and the lines that list
+ *   it are unsupported (exchangeRateGap).
  * Converting twice changes nothing: a converted value has no
  * `foreignCurrency`, and one not converted has no amount.
  */
@@ -44,23 +42,19 @@
 import { supportedCurrency, unsupportedCurrencyReason } from "./currency/currencies.js";
 import { dailyRate, isoDayOf, yearlyAverageRate } from "./currency/rates.js";
 import {
-  FOREIGN_INCOME_RATE_METHOD_KEY,
-  FOREIGN_INCOME_RATE_METHODS,
   FOREIGN_TAX_CREDIT_KEYS,
   isDividendFactKey,
   isInterestFactKey,
   isTradeFact,
   type DatedAmounts,
-  type ForeignIncomeRateMethod,
   type IncomeInForeignCurrency,
   type SaleInForeignCurrency,
   type TradeFactValue,
 } from "./facts/index.js";
 import type { TaxFactRow } from "./facts/rows.js";
-import { dollarsFromForeign, sum } from "./money.js";
+import { dollarsFromForeign, roundToPlaces, sum } from "./money.js";
 
 type FactRow = { key: string; value: unknown; category: string };
-type DecisionRow = { decisionKey: string; decision: unknown };
 
 export interface DollarFacts<Row extends FactRow> {
   /** The facts the forms read: every foreign-currency amount in dollars. */
@@ -69,42 +63,39 @@ export interface DollarFacts<Row extends FactRow> {
   waitingForRate: string[];
 }
 
-/* The year of the G.5A average: the engine prepares 2025 returns (as each form's own TAX_YEAR). */
+/* The year of the IRS yearly average: the engine prepares 2025 returns (as each form's own TAX_YEAR). */
 const TAX_YEAR = 2025;
 const INCOME_CATEGORY = "investment_income";
 
-/* 1099-INT amounts that happen on one day: the penalty, and the taxes withheld. */
-const INTEREST_EVENT_BOXES = ["box2", "box4", "box6", "box17"];
-const INTEREST_FOREIGN_TAX_BOX = "box6";
-const DIVIDEND_FOREIGN_TAX_BOX = "box7";
+/* Taxes withheld: federal (box 4), foreign (box 6 or 7), state (1099-INT box 17). */
+const INTEREST_TAX_BOXES = ["box4", "box6", "box17"];
+const DIVIDEND_TAX_BOXES = ["box4", "box7"];
+const FOREIGN_TAX_BOXES = ["box6", "box7"];
 
 type Outcome = { dollars: number } | { waits: true } | { gap: string };
-type Rate = "yearly_average" | "by_date";
+/* "withheld": the day withheld, required; "average": the yearly average; "income": the day when dated, else the average. */
+type Rate = "withheld" | "average" | "income";
 
 const WAITS: Outcome = { waits: true };
+const CENT_PLACES = 2;
 
 /* A trade's share count is a number, not an amount. */
 const isAmount = ([field, amount]: [string, unknown]) =>
   typeof amount === "number" && field !== "quantity";
 
-/* Dated amounts add up to the box when they agree to the cent. */
+/* Two amounts agree when they differ by less than half a cent. */
 const HALF_CENT = 0.005;
 const sameAmount = (left: number, right: number) => Math.abs(left - right) < HALF_CENT;
 
-/* A box at the rate of each day it lists: the dated amounts must add up to it. */
-function byDateDollars(
-  box: string,
-  total: number,
-  code: string,
-  byDate: ReadonlyArray<DatedAmounts> | undefined,
-): Outcome {
-  const dated = (byDate ?? []).flatMap((entry) => {
+/* The amounts the fact dates for one box. */
+const datedOf = (box: string, byDate: ReadonlyArray<DatedAmounts> | undefined) =>
+  (byDate ?? []).flatMap((entry) => {
     const amount = entry.amounts[box];
     return typeof amount === "number" ? [{ date: entry.date, amount }] : [];
   });
-  if (dated.length === 0 || !sameAmount(sum(...dated.map((entry) => entry.amount)), total)) {
-    return WAITS;
-  }
+
+/* Each dated amount at the H.10 rate of its day; a date that is not a calendar date waits. */
+function dayDollars(code: string, dated: ReadonlyArray<{ date: string; amount: number }>): Outcome {
   const parts: number[] = [];
   for (const { date, amount } of dated) {
     const day = isoDayOf(date);
@@ -116,9 +107,46 @@ function byDateDollars(
   return { dollars: sum(...parts) };
 }
 
-function averageDollars(total: number, code: string): Outcome {
+/* The IRS yearly average. A currency the IRS table lacks waits for the amount's date. */
+function averageDollars(amount: number, code: string): Outcome {
   const found = yearlyAverageRate(code, TAX_YEAR);
-  return found.ok ? { dollars: dollarsFromForeign(total, found.rate) } : { gap: found.gap };
+  return found.ok ? { dollars: dollarsFromForeign(amount, found.rate) } : WAITS;
+}
+
+/* Tax withheld: the dated amounts must add up to the box. */
+function withheldDollars(box: string, total: number, currency: IncomeInForeignCurrency): Outcome {
+  const dated = datedOf(box, currency.byDate);
+  const datedTotal = sum(...dated.map((entry) => entry.amount));
+  if (dated.length === 0 || !sameAmount(datedTotal, total)) return WAITS;
+  return dayDollars(currency.code, dated);
+}
+
+/*
+ * DECISION (2026-11-24): an amount with a date takes the rate of that day; an
+ * amount with no date takes the yearly average of the tax year. Texts: "In
+ * general, use the exchange rate prevailing (i.e., the spot rate) when you
+ * receive, pay or accrue the item"; the same page says the IRS "accepts any
+ * posted exchange rate that is used consistently" and publishes the yearly
+ * average table (irs.gov "Yearly average currency exchange rates"). The engine
+ * follows both, by what the fact knows: the spot rate when the date is known,
+ * the IRS average when it is not.
+ */
+function incomeDollars(box: string, total: number, currency: IncomeInForeignCurrency): Outcome {
+  const dated = datedOf(box, currency.byDate);
+  const datedTotal = sum(...dated.map((entry) => entry.amount));
+  if (Math.abs(datedTotal) > Math.abs(total) + HALF_CENT) return WAITS;
+  const atDays = dayDollars(currency.code, dated);
+  if (!("dollars" in atDays)) return atDays;
+  const undated = roundToPlaces(total - datedTotal, CENT_PLACES);
+  if (sameAmount(undated, 0)) return atDays;
+  const atAverage = averageDollars(undated, currency.code);
+  return "dollars" in atAverage ? { dollars: sum(atDays.dollars, atAverage.dollars) } : atAverage;
+}
+
+function boxDollars(rate: Rate, box: string, total: number, currency: IncomeInForeignCurrency) {
+  if (rate === "average") return averageDollars(total, currency.code);
+  if (rate === "withheld") return withheldDollars(box, total, currency);
+  return incomeDollars(box, total, currency);
 }
 
 /* The value in dollars, or why not: the first gap, else waiting when any box waits. */
@@ -138,10 +166,7 @@ function boxesInDollars(
       out[field] = amount;
       continue;
     }
-    const outcome =
-      rateOf(field) === "yearly_average"
-        ? averageDollars(amount, currency.code)
-        : byDateDollars(field, amount, currency.code, currency.byDate);
+    const outcome = boxDollars(rateOf(field), field, amount, currency);
     outcomes.push(outcome);
     if ("dollars" in outcome) out[field] = outcome.dollars;
   }
@@ -180,57 +205,22 @@ function saleInDollars(
     : { ...dollars, costBasis: (cost as { dollars: number }).dollars };
 }
 
-interface ReturnRules {
-  method: ForeignIncomeRateMethod | { gap: string };
-  /* Form 1116 taxes claimed on an accrual basis (FOREIGN_TAX_CREDIT_KEYS.claimAccrued). */
-  taxesAccrued: boolean;
-}
-
-function returnRules(
-  facts: ReadonlyArray<FactRow>,
-  decisions: ReadonlyArray<DecisionRow>,
-): ReturnRules {
-  const decided = decisions.find((row) => row.decisionKey === FOREIGN_INCOME_RATE_METHOD_KEY);
-  const choice = decided?.decision ?? "yearly_average";
-  const method = FOREIGN_INCOME_RATE_METHODS.includes(choice as ForeignIncomeRateMethod)
-    ? (choice as ForeignIncomeRateMethod)
-    : { gap: `${FOREIGN_INCOME_RATE_METHOD_KEY} is neither "yearly_average" nor "daily".` };
-  const accrued = facts.find((row) => row.key === FOREIGN_TAX_CREDIT_KEYS.claimAccrued);
-  return { method, taxesAccrued: accrued?.value === true };
-}
-
-/*
- * DECISION (2026-11-24): income through the year takes the return's method
- * (the yearly average or the rate of each day); a single event takes the rate
- * of its day. Texts: "In general, use the exchange rate prevailing (i.e., the
- * spot rate) when you receive, pay or accrue the item"; the same page
- * publishes yearly averages and says the IRS "accepts any posted exchange rate
- * that is used consistently" (irs.gov "Yearly average currency exchange
- * rates"); the IRS practice unit "Definition of Appropriate Exchange Rate"
- * treats an item over a period at an average and a dividend as a one-day
- * event. The engine follows both: either method is accepted when used
- * consistently, and an average does not describe one day.
- */
-function interestRate(box: string, method: ForeignIncomeRateMethod, rules: ReturnRules): Rate {
-  if (box === INTEREST_FOREIGN_TAX_BOX && rules.taxesAccrued) return "yearly_average";
-  if (INTEREST_EVENT_BOXES.includes(box)) return "by_date";
-  return method === "daily" ? "by_date" : "yearly_average";
+/* The rule of each box: a tax withheld, a foreign tax claimed on an accrual basis, or income. */
+function rateRule(taxBoxes: readonly string[], taxesAccrued: boolean) {
+  return (box: string): Rate => {
+    if (taxesAccrued && FOREIGN_TAX_BOXES.includes(box)) return "average";
+    return taxBoxes.includes(box) ? "withheld" : "income";
+  };
 }
 
 /* The fact's value in dollars, or why it is not converted. */
-function valueInDollars(row: FactRow, value: Record<string, unknown>, rules: ReturnRules) {
+function valueInDollars(row: FactRow, value: Record<string, unknown>, taxesAccrued: boolean) {
   const currency = value.foreignCurrency as IncomeInForeignCurrency & SaleInForeignCurrency;
   if (isTradeFact(row as TaxFactRow)) {
     return saleInDollars(value as unknown as TradeFactValue, currency);
   }
-  if (isDividendFactKey(row.key)) {
-    return boxesInDollars(value, currency, (box) =>
-      box === DIVIDEND_FOREIGN_TAX_BOX && rules.taxesAccrued ? "yearly_average" : "by_date",
-    );
-  }
-  const { method } = rules;
-  if (typeof method !== "string") return method;
-  return boxesInDollars(value, currency, (box) => interestRate(box, method, rules));
+  const taxBoxes = isDividendFactKey(row.key) ? DIVIDEND_TAX_BOXES : INTEREST_TAX_BOXES;
+  return boxesInDollars(value, currency, rateRule(taxBoxes, taxesAccrued));
 }
 
 const isOutcome = (converted: unknown): converted is Outcome =>
@@ -255,11 +245,10 @@ function inForeignCurrency(row: FactRow): Record<string, unknown> | undefined {
   return value.foreignCurrency === undefined ? undefined : value;
 }
 
-export function incomeInDollars<Row extends FactRow>(
-  facts: ReadonlyArray<Row>,
-  decisions: ReadonlyArray<DecisionRow> = [],
-): DollarFacts<Row> {
-  const rules = returnRules(facts, decisions);
+export function incomeInDollars<Row extends FactRow>(facts: ReadonlyArray<Row>): DollarFacts<Row> {
+  // Form 1116 taxes claimed on an accrual basis take the yearly average.
+  const accrued = facts.find((row) => row.key === FOREIGN_TAX_CREDIT_KEYS.claimAccrued);
+  const taxesAccrued = accrued?.value === true;
   const waitingForRate: string[] = [];
   const converted = facts.map((row) => {
     const value = inForeignCurrency(row);
@@ -269,7 +258,7 @@ export function incomeInDollars<Row extends FactRow>(
       if (waitsForExchangeRate(value)) waitingForRate.push(row.key);
       return row;
     }
-    const dollars = valueInDollars(row, value, rules);
+    const dollars = valueInDollars(row, value, taxesAccrued);
     if (!isOutcome(dollars)) return { ...row, value: dollars };
     if ("waits" in dollars) waitingForRate.push(row.key);
     const gap = "gap" in dollars ? dollars.gap : undefined;

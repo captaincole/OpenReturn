@@ -1,20 +1,19 @@
 /*
  * Income of a foreign account recorded in the account's currency, as its
  * statement prints it: the currency, each amount, and the date of each amount
- * where the rule needs one. The fact holds no exchange rate: the engine looks
- * each one up in its tables (currency/rates.ts) and converts the amounts
- * before any form reads them (incomeInDollars.ts). A fact with no
+ * when the statement prints one. The fact holds no exchange rate: the engine
+ * looks each one up in its tables (currency/rates.ts) and converts the
+ * amounts before any form reads them (incomeInDollars.ts). A fact with no
  * `foreignCurrency` is in U.S. dollars, as before.
  *
  * The rate each amount takes (incomeInDollars.ts):
- * - interest that accrues through the year: the return's method
- *   (FOREIGN_INCOME_RATE_METHOD_KEY), the yearly average or the rate of the
- *   day each amount was credited;
- * - each dividend: the rate of the day it was paid;
- * - foreign tax withheld: the rate of the day it was withheld
+ * - income (interest, dividends, the early withdrawal penalty): the rate of
+ *   its day when the fact dates it, else the IRS yearly average for the tax
+ *   year;
+ * - tax withheld: the rate of the day withheld, so its date is required
  *   (irs-1116-inst-2025::sec::foreign-currency-conversion::b01);
- * - a sale: the rates on the settlement dates of the sale and of the purchase
- *   (26 CFR 1.988-2(a)(2)(iv)).
+ * - a sale: the rates on the settlement dates of the sale and of the purchase,
+ *   both required (26 CFR 1.988-2(a)(2)(iv)).
  * A currency outside the engine's list (currency/currencies.ts) is unsupported.
  */
 
@@ -33,9 +32,8 @@ export interface DatedAmounts<Box extends string = string> {
 
 /*
  * A 1099-INT or 1099-DIV fact in a foreign currency. `byDate` lists the
- * amounts that take the rate of their day, adding up to each such box: every
- * dividend box; the interest boxes that are events (the early withdrawal
- * penalty, tax withheld); and, under the daily method, the interest credited.
+ * amounts the statement dates. Every tax withheld must be dated in full; the
+ * part of an income box with no date takes the yearly average.
  */
 export interface IncomeInForeignCurrency<Box extends string = string> {
   /* ISO 4217: "EUR". */
@@ -58,14 +56,3 @@ export interface SaleInForeignCurrency {
   saleSettled?: string;
   purchaseSettled?: string;
 }
-
-/*
- * The rate method for foreign interest that accrues through the year, one for
- * the return: "yearly_average" (the Board's G.5A average for the tax year) or
- * "daily" (the H.10 rate of each day an amount is credited, from `byDate`).
- * With no decision the engine takes the yearly average, as it takes the
- * default of the other elections it reads.
- */
-export const FOREIGN_INCOME_RATE_METHOD_KEY = "decisions.foreign_income_rate_method";
-export const FOREIGN_INCOME_RATE_METHODS = ["yearly_average", "daily"] as const;
-export type ForeignIncomeRateMethod = (typeof FOREIGN_INCOME_RATE_METHODS)[number];

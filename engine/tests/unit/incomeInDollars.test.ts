@@ -1,17 +1,19 @@
 /*
  * Income of a foreign account recorded in the account's currency
  * (facts/kinds/foreignCurrency.ts): the engine looks up each rate in its tables
- * and converts before any form reads it (incomeInDollars.ts). The synthetic
- * faile return (a dollar 1099-DIV and 1099-INT, the election for the credit)
- * is the base. Rates typed from the published pages:
- * - G.5A 2025 average: EUR 1.1306 dollars per euro;
+ * and converts before any form reads it (incomeInDollars.ts). An amount with a
+ * date takes the H.10 rate of its day; an income amount with no date takes the
+ * IRS yearly average. The synthetic faile return (a dollar 1099-DIV and
+ * 1099-INT, the election for the credit) is the base. Rates typed from the
+ * published pages:
+ * - IRS 2025 yearly average: EUR 0.886 euros per dollar;
  * - H.10: EUR 12/31/2025 1.1736, 10/08/2025 1.1606, 07/03/2025 1.1758,
- *   02/05/2025 1.0419, 12/26/2025 1.1766 (dollars per euro).
+ *   02/05/2025 1.0419, 12/26/2025 1.1766 (dollars per euro); MYR 12/31/2025
+ *   4.0560 (ringgit per dollar).
  */
 
 import { describe, expect, it } from "vitest";
 import {
-  FOREIGN_INCOME_RATE_METHOD_KEY,
   FOREIGN_TAX_CREDIT_KEYS,
   makeDividendFactKey,
   makeForm8949BoxDecisionKey,
@@ -32,7 +34,7 @@ const EURO_KEY = makeInterestFactKey("porto-savings");
 const DIVIDEND_KEY = makeDividendFactKey("porto-savings");
 const SALE_KEY = makeTradeFactKey("lisbon-custody", "lisbon-001");
 
-/* Interest credited in euros on 31 December, Portuguese tax withheld that day. */
+/* The year's interest as one total with no date; Portuguese tax withheld on 31 December. */
 const euroInterest: InterestFactValue = {
   payerName: "Banco Ribeira de Teste S.A.",
   box1: 1180.4,
@@ -40,7 +42,7 @@ const euroInterest: InterestFactValue = {
   box7: "Portugal",
   foreignCurrency: {
     code: "EUR",
-    byDate: [{ date: "12/31/2025", amounts: { box1: 1180.4, box6: 118.04 } }],
+    byDate: [{ date: "12/31/2025", amounts: { box6: 118.04 } }],
   },
 };
 
@@ -100,8 +102,16 @@ function evaluate(extra: TaxFactRow[], decisions: AIDecisionRow[] = []) {
   return { value, field, unsupported, pending: pendingInputs(result).pendingFacts };
 }
 
-const convert = (value: unknown, decisions: AIDecisionRow[] = [], key = EURO_KEY) =>
-  incomeInDollars([income(key, value)], decisions).facts[0]!.value;
+const convert = (value: unknown, key = EURO_KEY) =>
+  incomeInDollars([income(key, value)]).facts[0]!.value;
+const waiting = (value: unknown, key = EURO_KEY) =>
+  incomeInDollars([income(key, value)]).waitingForRate;
+
+const interestWith = (byDate: InterestFactValue["foreignCurrency"]): InterestFactValue => ({
+  ...euroInterest,
+  box6: undefined,
+  foreignCurrency: byDate,
+});
 
 describe("a dollar account", () => {
   it("passes through unchanged: the same row, the same lines", () => {
@@ -116,74 +126,92 @@ describe("a dollar account", () => {
   });
 });
 
-describe("interest", () => {
-  it("takes the yearly average with no decision; the tax, the rate of its day", () => {
-    // 1,180.40 × 1.1306 = 1,334.56; 118.04 × 1.1736 = 138.53.
+describe("income: the day's rate when dated, else the IRS yearly average", () => {
+  it("takes the yearly average for interest with no date; the tax, the day withheld", () => {
+    // 1,180.40 / 0.886 = 1,332.28; 118.04 × 1.1736 = 138.53.
     expect(convert(euroInterest)).toEqual({
       payerName: "Banco Ribeira de Teste S.A.",
-      box1: 1334.56,
+      box1: 1332.28,
       box6: 138.53,
       box7: "Portugal",
     });
   });
 
-  it("takes the rate of each day credited under the daily method", () => {
-    const twice: InterestFactValue = {
-      ...euroInterest,
-      box6: undefined,
-      foreignCurrency: {
-        code: "EUR",
-        byDate: [
-          { date: "07/03/2025", amounts: { box1: 590.2 } },
-          { date: "12/31/2025", amounts: { box1: 590.2 } },
-        ],
-      },
-    };
-    const daily = [decision(FOREIGN_INCOME_RATE_METHOD_KEY, "daily")];
+  it("takes the rate of each day credited when the fact dates the interest", () => {
+    const dated = interestWith({
+      code: "EUR",
+      byDate: [
+        { date: "07/03/2025", amounts: { box1: 590.2 } },
+        { date: "12/31/2025", amounts: { box1: 590.2 } },
+      ],
+    });
     // 590.20 × 1.1758 = 693.96; 590.20 × 1.1736 = 692.66.
-    expect((convert(twice, daily) as InterestFactValue).box1).toBe(1386.62);
+    expect((convert(dated) as InterestFactValue).box1).toBe(1386.62);
   });
 
-  it("takes the yearly average for the tax under the accrual election", () => {
-    const accrued = row("foreign", FOREIGN_TAX_CREDIT_KEYS.claimAccrued, true);
-    const [, converted] = incomeInDollars([accrued, income(EURO_KEY, euroInterest)]).facts;
-    expect((converted!.value as InterestFactValue).box6).toBe(133.46); // 118.04 × 1.1306 = 133.456
+  it("takes the yearly average for the part of a box with no date", () => {
+    const partly = interestWith({
+      code: "EUR",
+      byDate: [{ date: "07/03/2025", amounts: { box1: 590.2 } }],
+    });
+    // 590.20 × 1.1758 = 693.96, and the undated 590.20 / 0.886 = 666.14.
+    expect((convert(partly) as InterestFactValue).box1).toBe(1360.1);
   });
 
-  it("flows in dollars to Schedule B, Form 1040 and the credit", () => {
-    const { value } = evaluate([income(EURO_KEY, euroInterest)]);
-    expect(value("schedule-b", "0.line.1_amount_2")).toBe(1335);
-    expect(value("schedule-b", "0.line.2_total_interest")).toBe(2115); // 780 + 1,334.56
-    expect(value("form-1040", "line.2b")).toBe(2115);
-    expect(value("schedule-3", "0.line.1")).toBe(288); // 118.40 + 31.20 + 138.53 = 288.13
+  it("waits when the dated amounts come to more than the box", () => {
+    const over = interestWith({
+      code: "EUR",
+      byDate: [{ date: "07/03/2025", amounts: { box1: 2000 } }],
+    });
+    expect(waiting(over)).toEqual([EURO_KEY]);
   });
-});
 
-describe("dividends", () => {
-  it("take the rate of the day paid, the last earlier day on a weekend", () => {
+  it("takes the day paid for a dated dividend, the last earlier day on a weekend", () => {
     const saturday: DividendFactValue = {
       payerName: "Exemplo Energia SA",
       box1a: 100,
       foreignCurrency: { code: "EUR", byDate: [{ date: "12/27/2025", amounts: { box1a: 100 } }] },
     };
     // Saturday 27 December: Friday's 1.1766.
-    expect((convert(saturday, [], DIVIDEND_KEY) as DividendFactValue).box1a).toBe(117.66);
+    expect((convert(saturday, DIVIDEND_KEY) as DividendFactValue).box1a).toBe(117.66);
+  });
+
+  it("takes the yearly average for a dividend with no date", () => {
+    const undated: DividendFactValue = {
+      payerName: "Exemplo Energia SA",
+      box1a: 100,
+      foreignCurrency: { code: "EUR" },
+    };
+    expect((convert(undated, DIVIDEND_KEY) as DividendFactValue).box1a).toBe(112.87); // 100 / 0.886
+  });
+
+  it("asks for the date of an amount in a currency the IRS table lacks", () => {
+    const ringgit = interestWith({ code: "MYR" });
+    expect(waiting(ringgit)).toEqual([EURO_KEY]);
+    const dated = interestWith({
+      code: "MYR",
+      byDate: [{ date: "12/31/2025", amounts: { box1: 1180.4 } }],
+    });
+    expect((convert(dated) as InterestFactValue).box1).toBe(291.03); // 1,180.40 / 4.0560
+  });
+
+  it("flows in dollars to Schedule B, Form 1040 and the credit", () => {
+    const { value } = evaluate([income(EURO_KEY, euroInterest)]);
+    expect(value("schedule-b", "0.line.1_amount_2")).toBe(1332);
+    expect(value("schedule-b", "0.line.2_total_interest")).toBe(2112); // 780 + 1,332.28
+    expect(value("form-1040", "line.2b")).toBe(2112);
+    expect(value("schedule-3", "0.line.1")).toBe(288); // 118.40 + 31.20 + 138.53 = 288.13
   });
 });
 
-describe("a sale", () => {
-  it("takes the rates of the settlement dates of the sale and the purchase", () => {
-    const { value } = evaluate([income(SALE_KEY, euroSale)], SALE_DECISIONS);
-    // 9,000 × 1.1606 = 10,445.40; 7,500 × 1.0419 = 7,814.25.
-    expect(value("form-8949", "0.part1.row1_proceeds")).toBe(10445);
-    expect(value("form-8949", "0.part1.row1_cost_basis")).toBe(7814);
-    expect(value("form-8949", "0.part1.row1_gain_loss")).toBe(2631);
-    expect(value("schedule-d", "0.line.3_gain_loss")).toBe(2631);
+describe("tax withheld", () => {
+  it("takes the yearly average under the accrual election", () => {
+    const accrued = row("foreign", FOREIGN_TAX_CREDIT_KEYS.claimAccrued, true);
+    const [, converted] = incomeInDollars([accrued, income(EURO_KEY, euroInterest)]).facts;
+    expect((converted!.value as InterestFactValue).box6).toBe(133.23); // 118.04 / 0.886
   });
-});
 
-describe("a missing date", () => {
-  it("is a pending input, and the interest lines and the credit wait", () => {
+  it("is a pending input with no date, and the interest lines and the credit wait", () => {
     const noDate = { ...euroInterest, foreignCurrency: { code: "EUR" } };
     const { value, field, unsupported, pending } = evaluate([income(EURO_KEY, noDate)]);
     expect(pending).toEqual([EURO_KEY]);
@@ -199,15 +227,26 @@ describe("a missing date", () => {
     }
   });
 
-  it("waits when the dated amounts do not add up to the box", () => {
+  it("waits when the dated tax does not add up to the box", () => {
     const short = {
       ...euroInterest,
       foreignCurrency: { code: "EUR", byDate: [{ date: "12/31/2025", amounts: { box6: 100 } }] },
     };
-    expect(incomeInDollars([income(EURO_KEY, short)]).waitingForRate).toEqual([EURO_KEY]);
+    expect(waiting(short)).toEqual([EURO_KEY]);
+  });
+});
+
+describe("a sale", () => {
+  it("takes the rates of the settlement dates of the sale and the purchase", () => {
+    const { value } = evaluate([income(SALE_KEY, euroSale)], SALE_DECISIONS);
+    // 9,000 × 1.1606 = 10,445.40; 7,500 × 1.0419 = 7,814.25.
+    expect(value("form-8949", "0.part1.row1_proceeds")).toBe(10445);
+    expect(value("form-8949", "0.part1.row1_cost_basis")).toBe(7814);
+    expect(value("form-8949", "0.part1.row1_gain_loss")).toBe(2631);
+    expect(value("schedule-d", "0.line.3_gain_loss")).toBe(2631);
   });
 
-  it("is a pending input for a sale, and its row and Schedule D line wait", () => {
+  it("is a pending input with a settlement date missing, and its lines wait", () => {
     const noDate = { ...euroSale, foreignCurrency: { code: "EUR", saleSettled: "10/08/2025" } };
     const { value, pending } = evaluate([income(SALE_KEY, noDate)], SALE_DECISIONS);
     expect(pending).toEqual([SALE_KEY]);
@@ -237,15 +276,6 @@ describe("a currency outside the H.10 release", () => {
   });
 });
 
-describe("the method decision", () => {
-  it("is a gap when it is neither method", () => {
-    const monthly = [decision(FOREIGN_INCOME_RATE_METHOD_KEY, "monthly")];
-    expect(exchangeRateGap(convert(euroInterest, monthly))).toContain(
-      FOREIGN_INCOME_RATE_METHOD_KEY,
-    );
-  });
-});
-
 describe("rounding", () => {
   const unitsPerDollar = (rate: number) => rate as UnitsPerDollar;
 
@@ -258,13 +288,9 @@ describe("rounding", () => {
   });
 
   it("keeps the cents to the line, which rounds the half dollar up", () => {
-    // 884.93 × 1.1306 = 1,000.50: Schedule B rounds the row to 1,001.
-    const half = {
-      ...euroInterest,
-      box1: 884.93,
-      box6: undefined,
-      foreignCurrency: { code: "EUR" },
-    };
+    // 886.443 / 0.886 = 1,000.50 exactly: Schedule B rounds the row to 1,001.
+    const half = interestWith({ code: "EUR" });
+    half.box1 = 886.443;
     expect((convert(half) as InterestFactValue).box1).toBe(1000.5);
     const { value } = evaluate([income(EURO_KEY, half)]);
     expect(value("schedule-b", "0.line.1_amount_2")).toBe(1001);

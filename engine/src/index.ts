@@ -101,7 +101,7 @@ export function evaluateScenario(inputs: ScenarioInputs): EvaluatedScenario {
   const filled = fillGaps(facts, assumptions);
   const decisions = supersede(inputs.decisions, (decision) => decision.decisionKey);
   // The forms read foreign-currency income in dollars; a fact that lacks a date waits (incomeInDollars.ts).
-  const { waitingForRate } = incomeInDollars(filled.facts, decisions);
+  const { waitingForRate } = incomeInDollars(filled.facts);
 
   const { filingInfo, ctx, forms } = evaluateForms(filing.taxYear, filled.facts, decisions);
   const deductions = evaluateDeductions({

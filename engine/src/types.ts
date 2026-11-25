@@ -117,16 +117,9 @@ export type FormEvaluator<F extends BaseFormField = AnyFormField> = (
   ctx: DerivationContext,
 ) => EvaluatedForm<F>;
 
-/*
- * Foreign-currency income reads in dollars, kept to the cent
- * (incomeInDollars.ts). The decisions pick the rate method for foreign
- * interest; with none, the yearly average.
- */
-export function makeFactsView(
-  recorded: TaxFactRow[],
-  decisions: ReadonlyArray<{ decisionKey: string; decision: unknown }> = [],
-): FactsView {
-  const rows = incomeInDollars(recorded, decisions).facts;
+/* Foreign-currency income reads in dollars, kept to the cent (incomeInDollars.ts). */
+export function makeFactsView(recorded: TaxFactRow[]): FactsView {
+  const rows = incomeInDollars(recorded).facts;
   const byKey = new Map(rows.map((row) => [row.key, row]));
   return {
     get: (key) => byKey.get(key),

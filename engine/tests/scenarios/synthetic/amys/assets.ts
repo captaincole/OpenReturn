@@ -1,12 +1,12 @@
 /*
  * amys's foreign accounts and holdings (README.md), with the income each one
  * pays. Every name, number and amount is made up. Each amount is in the
- * account's currency, as its statement prints it, with the dates the rules
- * need (facts/kinds/foreignCurrency.ts). The facts hold no rate: the engine
- * looks each one up in its tables (currency/rates.ts):
+ * account's currency, as its statement prints it, with the dates the
+ * statement prints (facts/kinds/foreignCurrency.ts). The facts hold no rate:
+ * the engine looks each one up in its tables (currency/rates.ts):
  * - balances: the Treasury rate on 12/31/2025 (irs-8938-inst-2025::sec::currency-determination-date::b01);
- * - interest: the couple's method, the yearly average (the Board's G.5A 2025 average);
- * - each dividend, the penalty and tax withheld: the H.10 rate of its day;
+ * - each dated dividend, the penalty and tax withheld: the H.10 rate of its day;
+ * - the Bologna interest, a year total with no date: the IRS 2025 yearly average;
  * - a sale: the H.10 rates on the settlement dates of the sale and the purchase
  *   (26 CFR 1.988-2(a)(2)(iv)).
  */
@@ -46,8 +46,9 @@ export const bolognaSavings: ForeignFinancialAssetFactValue = {
 };
 
 /*
- * The time deposit was broken on 15 September (the penalty); the interest was
- * credited, and the Italian tax withheld, on 31 December.
+ * The time deposit was broken on 15 September (the penalty), and the Italian
+ * tax was withheld on 31 December. The statement prints the year's interest
+ * as one total with no date, so it takes the IRS yearly average.
  */
 export const bolognaInterest: InterestFactValue = {
   payerName: "Banca Saragozza S.p.A.",
@@ -59,7 +60,7 @@ export const bolognaInterest: InterestFactValue = {
     ...EUR,
     byDate: [
       { date: "09/15/2025", amounts: { box2: 40 } },
-      { date: "12/31/2025", amounts: { box1: 1180.4, box6: 118.04 } },
+      { date: "12/31/2025", amounts: { box6: 118.04 } },
     ],
   },
 };

@@ -49,7 +49,7 @@ export async function evaluateScenarioForms(
   const decisions = decisionsWithPreparerStyle(scenario);
   const ctx: DerivationContext = {
     taxYear: scenario.taxYear,
-    facts: makeFactsView(scenario.facts, decisions),
+    facts: makeFactsView(scenario.facts),
     decisions: makeDecisionsView(decisions),
     /* The engine throws when ctx.filingInfo is missing. */
     filingInfo: resolveFilingInfo({
