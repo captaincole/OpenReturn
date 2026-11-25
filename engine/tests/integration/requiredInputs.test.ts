@@ -49,9 +49,8 @@ const OPTIONAL: Array<[RegExp, string]> = [
   ],
   [
     /^ca_passive\.prior_year_unallowed_loss\.[^.]+$/,
-    "a prior-year answer Cade records when a property's California passive carryover differs " +
-      "from the federal one; FTB 3801 asks for it when the property has a federal carryover or " +
-      "is not passive federally",
+    "a prior-year answer from last year's FTB 3801; FTB 3801 asks for it for every property " +
+      "that is passive for California on a California return",
   ],
   [
     /^decisions\.scope\.must_file_8995(_a)?$/,
@@ -73,6 +72,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
   [
     /^armed_forces_move\.[^.]+$/,
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
+  ],
+  [
+    /^pfic_fund\.[^.]+$/,
+    "each fact is a whole foreign fund holding (Form 8621, one copy per fund); whether the " +
+      "taxpayer holds one is Cade's question",
   ],
   [
     /^retirement\.lump_sum_distribution\.[^.]+$/,

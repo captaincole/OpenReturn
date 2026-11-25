@@ -12,6 +12,7 @@ import {
   resolveMustFile,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { form8621Totals } from "../8621/totals.js";
 import { figuredForm8814, form8814Totals } from "../8814/totals.js";
 import { filesForm8815, savingsBondExclusionScope } from "../8815/resolveInfo.js";
 import { foreignAccountsOnReturn, unansweredOtherAssetKeys } from "../8938/resolveInfo.js";
@@ -76,6 +77,8 @@ function scheduleBDividendPayers(inputs: ResolverInputs, k1Dividends: Receipt) {
     ...payerAmounts(inputs, isDividendFactKey, (value) => sum(value.box1a)),
     ...k1PayerRows(k1Dividends),
     ...form8814Rows,
+    // A PFIC's nonexcess distributions are dividends (irs-8621-inst-2025::sec::line-15c::b01, ::line-15a::b01).
+    ...(form8621Totals(inputs)?.dividendPayers ?? []),
   ];
 }
 

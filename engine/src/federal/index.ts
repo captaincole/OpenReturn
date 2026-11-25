@@ -741,6 +741,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8621",
     relativeDir: "federal/8621",
     register: registerForm8621,
+    // One Form 8621 for each fund that files (federal/8621/totals.ts).
+    copies: {
+      count: (info) => info?.form8621Totals?.filed.length ?? 1,
+      select: (info, index) => info && { ...info, form8621CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-8697",

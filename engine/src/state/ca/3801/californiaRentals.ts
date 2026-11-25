@@ -9,9 +9,13 @@
  * - Column (e) is the FTB 3885A difference (ca-3801-inst-2025::sec::step-1::b01):
  *   line 8b/14b raise California income, line 8a/14a lower it.
  * - Every rental activity is passive for California, a real estate
- *   professional's too (ca-3801-inst-2025::sec::material-participation-in-real-property-business-irc-section-469-c-7::b01).
- * - Column (c) of Parts IV and V is the California carryover
- *   (facts/kinds/caPassiveCarryover.ts).
+ *   professional's too: "California did not conform to this provision. For
+ *   California purposes, all rental activities are passive activities"
+ *   (ca-3801-inst-2025::sec::material-participation-in-real-property-business-irc-section-469-c-7::b01);
+ *   "these activities are still considered passive under California law"
+ *   (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b05).
+ * - Column (c) of Parts IV and V is the California carryover, always asked of
+ *   a passive property (carryoverOf; facts/kinds/caPassiveCarryover.ts).
  * Each property is then placed as federal Form 8582 places it (placementOf).
  */
 
@@ -34,6 +38,8 @@ export interface CaScheduleEActivity {
   factKey: string;
   column: PropertyColumn;
   name: string;
+  /* Side 2's column (a): shorter, so it fits the narrow column. */
+  worksheetName: string;
   royalty: boolean;
   /* Schedule E line 21: federal net income (loss) before the PAL rules. */
   federalNet: number;
@@ -86,13 +92,42 @@ export function californiaPassive(value: RentalFactValue): boolean | undefined {
 }
 
 /*
- * The federal carryover cannot stand in for California's when the property has
- * one (it is figured in federal amounts) or the property is not passive
- * federally (a real estate professional's rental has no federal carryover).
+ * Column (c) of Parts IV and V is the California prior year unallowed loss,
+ * stated for every property that is passive for California. The federal one
+ * never stands in, not even a federal 0. Part IV column (c) is last year's
+ * Part VII column (c) (irs-8582-inst-2025::sec::part-iv-2::b02: "You find these
+ * amounts in Part VII, column (c), of your 2024 Form 8582"), and the form uses
+ * California amounts (ca-3801-inst-2025::sec::part-i::b01). The two differ
+ * whenever depreciation differed in an earlier year, or a rental was not
+ * passive federally then (a real estate professional's): "differences ... may
+ * cause your California PAL to be different from your federal PAL"
+ * (ca-3801-inst-2025::sec::a-purpose::b01). The PTP example has a $3,500
+ * federal and a $5,000 California prior year loss for one activity
+ * (ca-3801-inst-2025::sec::passive-activity-loss-rules-for-partners-in-ptps::b04).
+ * A property that is not passive for California keeps the federal answer: a
+ * carryover there is a former passive activity, a gap (placementOf).
  */
-export function asksCarryover(property: RentalProperty, passiveForCalifornia: boolean): boolean {
-  if (!passiveForCalifornia) return false;
-  return (property.value.priorYearUnallowedLoss ?? 0) > 0 || property.passive === false;
+function carryoverOf(
+  property: RentalProperty,
+  passive: boolean,
+  answers: PlacementAnswers,
+): number | undefined {
+  const stated = answers.statedCarryover(property.factKey);
+  if (passive) return stated;
+  return stated ?? property.value.priorYearUnallowedLoss ?? 0;
+}
+
+/*
+ * Column (a) of both Side 2 worksheets prints about 27 characters: the full
+ * Schedule E address (Parts IV to VIII) is cut off there. The street and city
+ * name the property; a property with no address is named by its Schedule E
+ * column. A longer street and city still overflow (no smaller font is set).
+ */
+function worksheetName(property: RentalProperty): string {
+  const place = property.value.address;
+  if (place) return `${place.street}, ${place.city}`;
+  const kind = property.value.propertyType === "royalties" ? "Royalties" : "Rental";
+  return `${kind}, property ${property.column.toUpperCase()}`;
 }
 
 /* The FTB 3885A difference as one signed amount; undefined while it waits; a string is its gap. */
@@ -145,9 +180,7 @@ function amountsOf(
   if (adjustment === undefined) return { kind: "waits", keys: [factKey] };
   const passive = californiaPassive(value);
   if (passive === undefined) return { kind: "waits", keys: [factKey] };
-  const stated = answers.statedCarryover(factKey);
-  const asked = asksCarryover(property, passive);
-  const carryover = stated ?? (asked ? undefined : (value.priorYearUnallowedLoss ?? 0));
+  const carryover = carryoverOf(property, passive, answers);
   if (carryover === undefined) return { kind: "waits", keys: [answers.carryoverKey(factKey)] };
   return { federalNet, adjustment, passive, carryover };
 }
@@ -186,6 +219,7 @@ export function californiaProperty(
     factKey: property.factKey,
     column: property.column,
     name: activityName(property),
+    worksheetName: worksheetName(property),
     royalty: property.value.propertyType === "royalties",
     federalNet,
     californiaAdjustment: adjustment,

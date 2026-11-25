@@ -14,6 +14,7 @@ import { resolve4137Info } from "./federal/4137/resolveInfo.js";
 import { resolve4797Info } from "./federal/4797/resolveInfo.js";
 import { scheduleTwoNeededForEarlyDistributions } from "./federal/5329/resolveInfo.js";
 import { resolve6251Info } from "./federal/6251/resolveInfo.js";
+import { form8621Feeds } from "./federal/8621/totals.js";
 import { resolve8853Info } from "./federal/8853/resolveInfo.js";
 import { SCHEDULE_2_LINES, form8853Reaches } from "./federal/8853/results.js";
 import { resolve8919Info } from "./federal/8919/resolveInfo.js";
@@ -268,6 +269,7 @@ export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInf
         value: k1Keys.length > 0,
         triggeredByFactKeys: k1Keys,
       },
+      form8621Feeds(inputs).scheduleDFallback,
       form4797Fallback(inputs),
     ],
   });
@@ -396,6 +398,8 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
     scheduleTwoNeededForEarlyDistributions(inputs),
     // A clean vehicle credit transferred to the dealer may be repaid on line 1b or 1c.
     cleanVehicleSchedules(inputs).repayment,
+    // Form 8621 lines 16f, 23 and 24 (lines 17p, 17z and 17q).
+    form8621Feeds(inputs).scheduleTwo,
   ];
   const required = feeders.some((value) => value === true);
   const open = !required && feeders.some((value) => value === undefined);

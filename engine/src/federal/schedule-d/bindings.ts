@@ -180,30 +180,49 @@ function otherFormsLine(
 
 /*
  * MANUAL EDIT: line 11 also takes Form 4797's section 1231 gain (line 7 or 9:
- * irs-4797-inst-2025::sec::line-7::b01, line-9::b01). Without Form 4797 the line
- * is what it was. With it, Form 6781 line 9 adds when it files; Forms 4684, 6252
- * and 8824 still have no Schedule D amount, so the line is a gap while one files.
+ * irs-4797-inst-2025::sec::line-7::b01, line-9::b01) and each QEF's Form 8621
+ * line 7c, "a net long-term capital gain. Enter this amount in Part II of the
+ * Schedule D" (irs-8621-inst-2025::sec::line-7c::b01), on the line of a fund's
+ * undistributed long-term gain (irs-1040sd-inst-2025::sec::undistributed-capital::b01;
+ * federal/8621/QUESTIONS.md, question 1). With neither the line is what it was.
+ * With either, Form 6781 line 9 adds when it files; Forms 4684, 6252 and 8824
+ * still have no Schedule D amount, so the line is a gap while one files.
  */
 const LINE_11_FORMS_WITH_NO_AMOUNT = ["form-4684", "form-6252", "form-8824"];
 
+/* The QEF gain for line 11 (Form 8621 line 7c), a fund's gap, or undefined with none. */
+function qefGainForLine11(info: ScheduleDFilingInfo): number | Unsupported | undefined {
+  const totals = info.form8621Totals;
+  if (totals === undefined) return undefined;
+  if (totals.gap !== undefined) return unsupported(totals.gap);
+  const gain = totals.amounts.capitalGain;
+  return gain === 0 ? undefined : gain;
+}
+
 function line11(form: FormAccessor<ScheduleD>, info: ScheduleDFilingInfo) {
-  if (!form4797Files(info)) return otherFormsLine(form, info, OTHER_FORMS.line11);
+  const lossGap = info.form8621Totals?.generalRulesLossGap;
+  if (lossGap) return unsupported(lossGap);
+  const qefGain = qefGainForLine11(info);
+  const files4797 = form4797Files(info);
+  if (qefGain === undefined && !files4797) return otherFormsLine(form, info, OTHER_FORMS.line11);
+  if (typeof qefGain === "object") return qefGain;
   const filing = LINE_11_FORMS_WITH_NO_AMOUNT.filter(
     (formId) => info.mustFile?.[formId]?.value === true,
   );
   if (filing.length > 0) {
+    const source = files4797 ? "Form 4797 files" : "Form 8621 line 7c goes on this line";
     return unsupported(
-      `Form 4797 files, but the engine has no Schedule D amount from ${filing.join(", ")}, which this line also takes.`,
+      `${source}, but the engine has no Schedule D amount from ${filing.join(", ")}, which this line also takes.`,
     );
   }
-  const form4797 = scheduleDGainFromForm4797(info);
+  const form4797 = files4797 ? scheduleDGainFromForm4797(info) : undefined;
   if (typeof form4797 === "object") return form4797;
-  if (info.form4797?.waitsForLine8) return undefined;
+  if (files4797 && info.form4797?.waitsForLine8) return undefined;
   const form6781 =
     info.mustFile?.["form-6781"]?.value === true
       ? numberOrBlank(form[OTHER_FORMS.line11.form6781Field])
       : undefined;
-  return sumOrBlank(form4797, form6781);
+  return sumOrBlank(form4797, form6781, qefGain);
 }
 
 /*
