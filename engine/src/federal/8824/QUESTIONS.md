@@ -84,11 +84,36 @@ Each place where the form and its instructions do not settle a rule. Short answe
 
 - The engine changes no California line. California conforms to section 1031 for real property; its basis can differ, and FTB 3840 (property outside California) is another branch's work.
 
+## 15. A building received with no split stated (lines 21 and 25a)
+
+- Source: "If you received section 1250 property ... you must complete lines 25a, 25b, and/or 25c" (lines-25a-25b-and-25c::b01). In the example the taxpayer "determines the apartment building received from Finley contains only like-kind section 1250 property" and puts all of line 25 on line 25a (lines-25a-25b-and-25c::b02).
+- Default: the split is the taxpayer's statement (`received.section1250Value`, `section1245Value`, `intangibleValue`). A part not stated is 0: line 25a is blank, and the section 1250 rule of line 21 counts no section 1250 property received, so all of the ordinary income if sold is recognized on line 21.
+- The blind fill read a building, house or condo with no split as all section 1250 property (25a = line 25, as in the Taylor example). With that value stated, the engine gives the blind fill's 25a in all five cases.
+- Changes dollars: yes. Line 25a is basis only, but line 21 is tax this year when the property given up has section 1250 recapture and no section 1250 value of the property received is stated. Proposal: Cade asks for the split whenever the property received is a building; or the fact makes `section1250Value` required when `recapture.section1250OrdinaryIfSold` is above 0.
+
+## 16. Line 24 with a section 121 exclusion
+
+- Source: the home steps change only lines 19, 20 and 25 ("Fill out Form 8824 according to its instructions, with the following exceptions", property-used-as-home::b01). Line 24 stays "Subtract line 23 from line 19".
+- Default: the form's arithmetic. Example: gain $285,000, exclusion $250,000, nothing recognized: line 24 = $285,000. The gain truly deferred is $35,000, which line 25 reflects ($480,000 FMV − $35,000 = $445,000).
+- Changes dollars: yes on line 24 ($285,000 against $35,000); no tax this year. Line 24 sends nothing in the year of an exchange with an unrelated party.
+
+## 17. Lines 25a–25c that do not add to line 25 after rounding
+
+- Source: "Amounts entered on lines 25a, 25b, and 25c must be proportionate to their FMVs" (lines-25a-25b-and-25c::b01).
+- Default: each line rounds to the nearest dollar on its own. Example: line 25 $89,000 split 130/160 and 30/160 gives $72,312.50 and $16,687.50 → $72,313 + $16,688 = $89,001.
+- Changes dollars: $1 of basis. The alternative takes the last part as line 25 less the others.
+
 ## Proposals for a discussion
 
 - **Multi-asset exchanges.** The fact holds one property given up and one received. More than one property needs the exchange groups of Regulations section 1.1031(j)-1 and a statement in place of lines 12–18 (multi-asset-exchanges::b01). Proposal: a list of properties per side, and a statement layout.
 - **A home used partly for business.** Two worksheet Forms 8824 split every amount (property-used-as-home::b02). Proposal: the fact states the home share; the engine fills two worksheets and adds lines 15–25. Today such a fact is a gap.
 - **Installment sales.** Form 6252 has no rules. When it does, line 22 and line 21 of an installment exchange can flow through it.
+
+## Second opinions
+
+- **Blind fill** (14 cases, lines 14–25c and 30–38, from the blank form and the instructions only). Every line agrees in dollars once the building split is stated (question 15). Line 35 of a stock sale is 0 in the engine and blank in the blind fill (Form 4797 Part III as a worksheet gives 0).
+- **PolicyEngine-US** 2.153.8 (commit b3edc04): no variable for a like-kind exchange, Form 8824, section 1031 or section 1043. Capital gains and unrecaptured section 1250 gain are inputs there. Nothing to compare.
+- **IRS Direct File** (IRS-Public/direct-file, commit e365f9f): its fact dictionary (`backend/src/main/resources/tax`) has no Form 8824 or like-kind exchange. Nothing to compare.
 
 ## Confidence by field group
 
