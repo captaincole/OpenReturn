@@ -28,6 +28,7 @@ import {
 import { resolve4137Info } from "../4137/resolveInfo.js";
 import { activityOf } from "../4797/activities.js";
 import { form4797GainUpperBound } from "../4797/upperBound.js";
+import { form6252IncomeUpperBound, hasInstallmentSale } from "../6252/upperBound.js";
 import { line1Row } from "../6781/lines.js";
 import { form8621IncomeUpperBound } from "../8621/totals.js";
 import { form8814IncomeUpperBound } from "../8814/children.js";
@@ -83,6 +84,8 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
     atLeast(0, section1256Gain),
     // Form 4797 reaches 1040 line 7a and Schedule 1 line 4.
     form4797GainUpperBound(inputs.facts),
+    // Form 6252 reaches 1040 line 7a (Schedule D) and Schedule 1 line 4 (Form 4797).
+    form6252IncomeUpperBound(inputs.facts),
     ...businesses.map(({ value }) =>
       atLeast(0, tentativeProfit(value) ?? sum(netReceipts(value), value.otherIncome)),
     ),
@@ -158,7 +161,8 @@ export function investmentSignals(
     getPficFundFacts(inputs.facts).length > 0 ||
     passThroughHasInvestmentIncome(inputs.facts) ||
     (businesses.length > 0 && !scheduleCNonpassive) ||
-    investmentSale;
+    investmentSale ||
+    hasInstallmentSale(inputs.facts);
   return {
     scheduleCNonpassive,
     hasInvestment,

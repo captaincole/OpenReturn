@@ -14,6 +14,7 @@ import { resolve4137Info } from "./federal/4137/resolveInfo.js";
 import { resolve4797Info } from "./federal/4797/resolveInfo.js";
 import { scheduleTwoNeededForEarlyDistributions } from "./federal/5329/resolveInfo.js";
 import { resolve6251Info } from "./federal/6251/resolveInfo.js";
+import { form6252TotalsOf } from "./federal/6252/resolveInfo.js";
 import { form8621Feeds } from "./federal/8621/totals.js";
 import { resolve8853Info } from "./federal/8853/resolveInfo.js";
 import { SCHEDULE_2_LINES, form8853Reaches } from "./federal/8853/results.js";
@@ -271,6 +272,7 @@ export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInf
       },
       form8621Feeds(inputs).scheduleDFallback,
       form4797Fallback(inputs),
+      form6252Fallback(inputs),
     ],
   });
   const distributions = sumInvestmentBox(inputs, "box2a", isDividendFactKey);
@@ -305,6 +307,20 @@ function form4797Fallback(inputs: ResolverInputs) {
     triggeredByFactKeys: sends
       ? readBusinessPropertySaleFacts(inputs.facts).sales.map((sale) => sale.key)
       : [],
+  };
+}
+
+/*
+ * A Form 6252 gain on a capital asset goes on line 4 or line 11
+ * (irs-pub-537-2025::sec::reporting-an-installment-sale::b03).
+ */
+function form6252Fallback(inputs: ResolverInputs) {
+  const forms = form6252TotalsOf(inputs)?.forms ?? [];
+  const keys = forms.filter((form) => form.sale.use === "capital_asset").map((form) => form.key);
+  return {
+    rule: "fallback: a Form 6252 installment sale of a capital asset (line 4 or 11)",
+    value: keys.length > 0,
+    triggeredByFactKeys: keys,
   };
 }
 

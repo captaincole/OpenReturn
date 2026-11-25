@@ -1,15 +1,20 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Money } from "../../money.js";
 import type { Form4797FilingInfo } from "../4797/filingInfo.js";
+import type { Form6252FilingInfo } from "../6252/filingInfo.js";
 import type { Form8621FilingInfo } from "../8621/filingInfo.js";
 import type { Form8814FilingInfo } from "../8814/filingInfo.js";
 import type { Form8949FilingInfo } from "../8949/filingInfo.js";
 import type { Receipt } from "../passThrough/receipts.js";
 
-/* Line 13 also reads Form 8814's totals (line 10); line 11 reads Form 4797's and Form 8621's (line 7c). */
+/*
+ * Line 13 also reads Form 8814's totals (line 10); line 11 reads Form 4797's and
+ * Form 8621's (line 7c); lines 4, 11 and 19 read Form 6252's.
+ */
 export interface ScheduleDFilingInfo
   extends
     BaseFilingInfo,
+    Pick<Form6252FilingInfo, "form6252Totals">,
     Pick<Form8949FilingInfo, "form8949BoxTotals">,
     Pick<Form8814FilingInfo, "form8814Totals">,
     Pick<Form8621FilingInfo, "form8621Totals">,

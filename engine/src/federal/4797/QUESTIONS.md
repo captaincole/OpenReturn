@@ -46,10 +46,14 @@ default the engine applies, and whether the default can change a dollar amount.
    enter the amount from line 7 on line 11." Default: line 11 is blank at 0.
    Changes dollars: no.
 
-8. **Lines 3, 14 and 18a (Form 4684), 4 and 15 (Form 6252), 5 and 16 (Form
-   8824).** Form 4684 Section B and Forms 6252 and 8824 have no rules. Default:
-   the lines are unsupported; lines 7–18b and the lines they feed are a gap when
-   Form 6252 or 8824 files by decision. Changes dollars: no (a gap).
+8. **Lines 3, 14 and 18a (Form 4684), 5 and 16 (Form 8824).** Form 4684
+   Section B and Form 8824 have no rules. Default: the lines are unsupported;
+   lines 7–18b and the lines they feed are a gap when Form 8824 files by
+   decision. Changes dollars: no (a gap). Lines 4, 10 ("From Form 6252") and 15
+   take Form 6252 (6252/totals.ts); a Form 6252 gap makes its line and lines
+   7–18b a gap, and a Form 6252 that waits leaves lines 4 and 7–18b blank. An
+   installment sale's property is not placed in Part III in its year of sale
+   (6252/QUESTIONS.md, Proposals).
 
 9. **A K-1 section 1231 item** (1065 box 10, 1120-S box 9; line-7::b01). The
    pass-through layers have no route for it. Default: lines 7–18b and Schedule D
@@ -92,8 +96,9 @@ default the engine applies, and whether the default can change a dollar amount.
     sale that no business with line G "Yes" made as investment income. Changes
     dollars: no for the figured cases.
 
-12. **The Unrecaptured Section 1250 Gain Worksheet.** Lines 4, 10 and 12 have no
-    fact (installment sales, a partnership interest, section 1250 property not in
+12. **The Unrecaptured Section 1250 Gain Worksheet.** Lines 4 and 12 take Form
+    6252's section 1250 property (6252/lines.ts); line 10 and the rest of line
+    12 have no fact (a partnership interest, other section 1250 property not in
     Part I): 0. Line 5 or 11 from a K-1, or line 14 (a 28% rate gain: a K-1 or
     Form 1099-DIV box 2d), makes Schedule D line 19 a gap. Line 11 takes Form
     1099-DIV box 2b. Without Form 4797 the worksheet is not figured (as before).
@@ -204,7 +209,8 @@ default the engine applies, and whether the default can change a dollar amount.
 | Header | stated rule |
 | Lines 1a–1c | stated rule |
 | Line 2 and line 10 rows | stated rule |
-| Lines 3, 4, 5, 14, 15, 16, 18a | unsupported (Forms 4684 Section B, 6252, 8824) |
+| Lines 3, 5, 14, 16, 18a | unsupported (Forms 4684 Section B, 8824) |
+| Lines 4, 15, line 10 "From Form 6252" | stated rule (Form 6252 line-26::b01, line-25::b01) |
 | Lines 6–9, 11–12 | published example with numbers (4797 line 8, Pub. 544) |
 | Lines 13, 17, 18b | stated rule |
 | Lines 19–24 | published example with numbers (Pub. 544 truck) |
