@@ -249,7 +249,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 
 Source: [Forms you can e-file for individuals (tax year 2025)](https://www.ftb.ca.gov/tax-pros/efile/individual-efile-forms.html), FTB, dated 2026-01-02.
 
-The list has 65 rows, and 62 are forms and schedules to compute. The engine has 38 of them, and 15 have rules. Of the 22 tier 1 forms, the engine has 22, and 10 have rules.
+The list has 65 rows, and 62 are forms and schedules to compute. The engine has 38 of them, and 16 have rules. Of the 22 tier 1 forms, the engine has 22, and 11 have rules.
 
 | Form | Title | Tier 1 | Engine | Copies |
 | --- | --- | --- | --- | --- |
@@ -258,7 +258,7 @@ The list has 65 rows, and 62 are forms and schedules to compute. The engine has 
 | Form 540NR | California Nonresident or Part-Year Resident Income Tax Return | Yes | No rules yet | 1 |
 | Form 592-B | Resident and Nonresident Withholding Tax Statement |  | Not a form: a document | unbounded |
 | Form 593 | Real Estate Withholding Statement |  | Not a form: a document | unbounded |
-| Form 3461 | California Limitations on Business Losses | Yes | No rules yet | 1 |
+| Form 3461 | California Limitations on Business Losses | Yes | Rules | 1 |
 | Form 3503 | Natural Heritage Preservation Credit |  | Not in the engine | unbounded |
 | Form 3504 | Enrolled Tribal Member Certification |  | Not in the engine | 2 |
 | Form 3506 | Child and Dependent Care Expenses Credit |  | Rules | 1 |
