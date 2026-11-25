@@ -38,6 +38,12 @@ A row that names a pull request is in the code of that branch until it merges.
 
 The last column names the section of law to read first. The section numbers are from memory and were not checked against the Code, which the library does not hold yet.
 
+## Decided by the author, waiting for a person's review
+
+| # | Date | Form | Question | Text A | Text B | Decision | Dollars | Where | Check when the law is in the library |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| A1 | 2026-11-24 | FTB 3800 | Is a full-time student aged 19 to 23 held to the support test (earned income not more than half of support)? | FTB 3800 instructions, who files: the support test only for a child "age 18 at the end of 2025" (`ca-3800-inst-2025::sec::purpose::b01`). | FTB 3800 instructions, general information: California conforms to the federal 2007 provision for students under 24 (`::general-information::b01`), which holds the student to the test (`irs-8615-inst-2025::sec::who-must-file::b01`, condition 3c). | Text B: the same test as Form 8615. | Yes: a student whose earned income is over half of support pays the regular tax, not the parent's rate. | `state/ca/3800-ca/resolveInfo.ts` | Revenue and Taxation Code section 17041(g) and IRC section 1(g)(2)(A). |
+
 ## Open: brought to a person, not decided
 
 | Form | Question | Engine today | Why it is open |

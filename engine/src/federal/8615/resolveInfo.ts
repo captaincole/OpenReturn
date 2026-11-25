@@ -27,9 +27,10 @@ const KEYS = CHILD_UNEARNED_INCOME_KEYS;
  * counts as the day before, so a child born January 1, 2008 is 18 at the end
  * of 2025, January 1, 2007 is 19, and January 1, 2002 is 24.
  */
-type AgeGroup = "under_18" | "age_18" | "age_19_to_23" | "age_24_or_older";
+export type AgeGroup = "under_18" | "age_18" | "age_19_to_23" | "age_24_or_older";
 
-function ageGroup(dob: string | undefined): AgeGroup | undefined {
+/* California's FTB 3800 reads the same groups and answers (state/ca/3800-ca/resolveInfo.ts). */
+export function ageGroup(dob: string | undefined): AgeGroup | undefined {
   const born2007OrEarlier = bornBeforeJan2Of(dob, 2008);
   if (born2007OrEarlier === undefined) return undefined;
   if (!born2007OrEarlier) return "under_18";
@@ -37,7 +38,7 @@ function ageGroup(dob: string | undefined): AgeGroup | undefined {
   return bornBeforeJan2Of(dob, 2002) ? "age_24_or_older" : "age_19_to_23";
 }
 
-const answer = (inputs: ResolverInputs, key: string) => {
+export const answer = (inputs: ResolverInputs, key: string) => {
   const value = inputs.factByKey.get(key);
   return typeof value === "boolean" ? value : undefined;
 };
@@ -47,7 +48,7 @@ const answer = (inputs: ResolverInputs, key: string) => {
  * missing. An 18-year-old's earned income must not be more than half of the
  * child's support; a 19-to-23-year-old must also be a full-time student.
  */
-function meetsAgeCondition(inputs: ResolverInputs, group: AgeGroup | undefined) {
+export function meetsAgeCondition(inputs: ResolverInputs, group: AgeGroup | undefined) {
   if (group === "under_18") return true;
   if (group === undefined || group === "age_24_or_older") return false;
   const overHalf = answer(inputs, KEYS.earnedIncomeOverHalfOfSupport);
