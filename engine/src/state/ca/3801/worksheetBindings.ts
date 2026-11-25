@@ -38,7 +38,7 @@ function passiveWorksheetBindings(): Record<string, Fn> {
         return activity ? value(activity) : undefined;
       });
     const key = `1.passive_worksheet.row${rowNumber}`;
-    out[`${key}_activity_description_col_a`] = cell((activity) => activity.name);
+    out[`${key}_activity_description_col_a`] = cell((activity) => activity.worksheetName);
     out[`${key}_federal_schedule_col_b`] = cell(() => FEDERAL_SCHEDULE);
     out[`${key}_california_schedule_col_c`] = cell((activity) =>
       activity.californiaAdjustment === 0 ? undefined : CALIFORNIA_SCHEDULE,
@@ -121,7 +121,7 @@ function scheduleEWorksheetBindings(): Record<string, Fn> {
         return row ? value(row) : undefined;
       });
     const key = `1.adjustment_worksheet.schedule_e_row${rowNumber}`;
-    out[`${key}_activity_description_col_a`] = cell((row) => row.activity.name);
+    out[`${key}_activity_description_col_a`] = cell((row) => row.activity.worksheetName);
     // Column (b): "the character of the activity for California purposes".
     out[`${key}_passive_or_nonpassive_col_b`] = cell((row) =>
       row.activity.passive ? "Passive" : "Nonpassive",

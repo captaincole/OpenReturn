@@ -49,9 +49,8 @@ const OPTIONAL: Array<[RegExp, string]> = [
   ],
   [
     /^ca_passive\.prior_year_unallowed_loss\.[^.]+$/,
-    "a prior-year answer Cade records when a property's California passive carryover differs " +
-      "from the federal one; FTB 3801 asks for it when the property has a federal carryover or " +
-      "is not passive federally",
+    "a prior-year answer from last year's FTB 3801; FTB 3801 asks for it for every property " +
+      "that is passive for California on a California return",
   ],
   [
     /^decisions\.scope\.must_file_8995(_a)?$/,
@@ -235,6 +234,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^foreign_tax_credit\.claim_accrued$/,
     "an answer Cade records only when the taxpayer chose, on an earlier return, to credit " +
       "foreign taxes when they accrue (Form 1116 Part II box k); absent, box j (paid)",
+  ],
+  [
+    /^prior_year\.ca_amt(_credit_carryover)?$/,
+    "an answer Cade records only when the user paid California AMT for 2024 or carries an AMT " +
+      "credit from 2024; either above 0 files FTB 3510, which then asks for the other",
   ],
   [
     /^estimated_tax\.payment\.[^.]+$/,

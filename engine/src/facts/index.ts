@@ -20,6 +20,7 @@ export * from "./kinds/caMiscellaneousDeductions.js";
 export * from "./kinds/caPassiveCarryover.js";
 export * from "./kinds/caPayments.js";
 export * from "./kinds/capitalLossCarryover.js";
+export * from "./kinds/caPriorYearAmt.js";
 export * from "./kinds/casualty.js";
 export * from "./kinds/caWorkMove.js";
 export * from "./kinds/childInvestmentIncome.js";
