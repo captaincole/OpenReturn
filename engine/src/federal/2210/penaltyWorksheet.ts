@@ -9,6 +9,19 @@
  * April 15, 2026. A payment on or before a due date that no earlier
  * underpayment takes reduces that installment, as Section A's line 15 does,
  * so it never appears on worksheet line 1b (line-1b::b01).
+ *
+ * DECISION (2026-11-24): two official texts differ on withholding.
+ * - "For withheld federal income tax ... you are considered to have paid
+ *   one-fourth of these amounts on each payment due date"
+ *   (irs-2210-inst-2025::sec::table-1-estimated-tax-payments::b01), and
+ *   payments "are applied first to any underpayment balance on an earlier
+ *   installment" (section-b-figure-the-penalty::b01).
+ * - "Do not enter any withheld federal income tax ... on line 1b"
+ *   (irs-2210-inst-2025::sec::line-1b::b01).
+ * The engine follows the first: withholding counts as paid on each due date
+ * and first pays an earlier underpayment, as Section A line 15 does. Under
+ * the second, a person with enough withholding late in the year would owe a
+ * penalty to April 15 on tax that was paid.
  */
 
 import { roundDollars, sum } from "../../money.js";

@@ -109,7 +109,21 @@ function datedWithholdingGap(answers: Form2210Answers, lines: PartILines): strin
     : `The withholding stated by date adds up to ${dated}, not line 6 (${lines.line6}), so box D cannot be figured.`;
 }
 
-/* The pure form's inputs, or why they are not ready. */
+/*
+ * The pure form's inputs, or why they are not ready.
+ *
+ * DECISION (2026-11-24): two official texts differ for a person who had no
+ * tax for 2024 and did not file.
+ * - "You won't have to pay the penalty ... if ... You had no tax liability for
+ *   2024 ... and your 2024 tax return was (or would have been had you been
+ *   required to file) for a full 12 months"
+ *   (irs-2210-inst-2025::sec::exceptions-to-the-penalty::b01).
+ * - "If you didn't file a return for 2024 ... don't complete line 8. Instead,
+ *   enter the amount from line 5 on line 9" (irs-2210-inst-2025::sec::line-19::b03).
+ * The engine applies the exception through line 8 only: a stated 2024 tax of 0
+ * gives no penalty, and "no 12-month return" figures one. So a person with no
+ * 2024 tax must be recorded with a 2024 tax of 0, and Cade asks for it.
+ */
 function formInputs(
   form: ReturnAccessor,
   info: Form2210Info,
