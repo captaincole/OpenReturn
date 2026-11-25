@@ -90,8 +90,8 @@ All inputs to lines 1–21 and Part III are 2024 amounts. The taxpayer states th
 
 - Text: line 23 is "the amount from your 2025 Form 6251, line 9" (the blank form). The Form 6251 instructions: "If the amount on line 10 is greater than or equal to the amount on line 7 ... Leave line 8 blank and enter -0- on line 11" (irs-6251-inst-2025::sec::line-8-alternative-minimum-tax-foreign-tax::b01); with the election, "your AMTFTC is the same as the foreign tax credit on Schedule 3 (Form 1040), line 1" (::b02).
 - The gap: a filer who takes the credit has line 10 above line 7, so line 8 is blank and line 9 is the tentative minimum tax before the AMT foreign tax credit. Section 55(b) defines the tentative minimum tax after that credit (not in the corpus; from the Code, not checked here). The two give different line 23 amounts when there is a foreign tax credit.
-- Default: the form text. Line 23 reads line 9 as the engine fills it, with line 8 blank.
-- Changes dollars: yes. For logain, line 8 at the election amount ($250) gives line 23 = 165,556, line 24 and the credit = 35,587, and line 26 = 129,233, against 165,806, 35,337 and 129,483 now.
+- Decided (2026-11-24, `docs/rule-decisions.md` row 12): line 23 is line 7 less the credit line 8 would hold, also when Form 6251 leaves line 8 blank. With the election that credit is Schedule 3 line 1; with Form 1116 line 23 is unsupported, since the AMT copy of Form 1116 is not built. Form 6251's own lines 8 and 9 still follow its instructions. The `DECISION` comment is above `line23Of` in `credit.ts`. Marked for research when sections 53(c) and 55(b) are in the library.
+- Changes dollars: yes. For logain, line 23 = 165,556, line 24 and the credit = 35,587, and line 26 = 129,233, against 165,806, 35,337 and 129,483 before.
 
 ## Second opinions
 
