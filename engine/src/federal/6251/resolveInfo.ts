@@ -63,7 +63,10 @@ export function resolve6251Info(inputs: ResolverInputs): Form6251FilingInfo {
     /*
      * Line 2a needs the choice only when Schedule A files, as 1040 line 12e does.
      * Line 2c needs last year's AMT carryover only when there was a regular one.
-     * Line 2i needs the ISO spread (0 is an answer), or what its Form 3921 waits for.
+     * Line 2i needs what a recorded exercise waits for (its Form 3921, or whether
+     * the shares were held). An unstated spread is not asked: Cade records it only
+     * for an exercise, so a return that files for another reason (Form 8801, the
+     * decision) does not wait on it, and line 2i is blank.
      */
     missingInputs: {
       "form-6251": [
@@ -73,7 +76,7 @@ export function resolve6251Info(inputs: ResolverInputs): Form6251FilingInfo {
             ? { [INVESTMENT_INTEREST_KEYS.amtDisallowedCarryover]: amtDisallowedInterestCarryover }
             : {}),
         }),
-        ...iso.missing,
+        ...(iso.hasExercise ? iso.missing : []),
       ],
     },
     itemizesDeductions,

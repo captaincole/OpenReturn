@@ -40,4 +40,14 @@ describe("resolve6251Info", () => {
   it("follows an explicit true decision with no spread", () => {
     expect(files([], [mustFile6251(true)])).toBe(true);
   });
+
+  it("does not wait for a spread when the form files for another reason", () => {
+    const inputs = makeResolverInputs({ facts: [], decisions: [mustFile6251(true)] });
+    expect(resolve6251Info(inputs).missingInputs?.["form-6251"]).toEqual([]);
+  });
+
+  it("still waits for the Form 3921 of a stated spread above the limit", () => {
+    const inputs = makeResolverInputs({ facts: [spread(275000)], decisions: [] });
+    expect(resolve6251Info(inputs).missingInputs?.["form-6251"]).toEqual([AMT_KEYS.isoForm3921]);
+  });
 });
