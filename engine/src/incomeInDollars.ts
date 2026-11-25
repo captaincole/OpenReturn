@@ -27,13 +27,11 @@
  *
  * A fact that cannot be converted keeps no amount (no form adds a foreign
  * amount as dollars) and keeps its `foreignCurrency`:
- * - it waits when a date the rule needs is missing, when the dated amounts
- *   come to more than the box, or when an amount with no date is in a currency
- *   the IRS table lacks (the date lets the day's rate be used): its key is a
- *   pending input (pendingInputs.ts) and the lines that list it are blank
- *   (waitsForExchangeRate);
- * - it is a gap when the currency is not supported or the H.10 table has no
- *   rate for a date: `foreignCurrency.gap` says why, and the lines that list
+ * - it waits when a date the rule needs is missing, or when the dated amounts
+ *   do not fit the box: its key is a pending input (pendingInputs.ts) and the
+ *   lines that list it are blank (waitsForExchangeRate);
+ * - it is a gap when the currency is not supported or a table has no rate for
+ *   a date or a year: `foreignCurrency.gap` says why, and the lines that list
  *   it are unsupported (exchangeRateGap).
  * Converting twice changes nothing: a converted value has no
  * `foreignCurrency`, and one not converted has no amount.
@@ -107,10 +105,10 @@ function dayDollars(code: string, dated: ReadonlyArray<{ date: string; amount: n
   return { dollars: sum(...parts) };
 }
 
-/* The IRS yearly average. A currency the IRS table lacks waits for the amount's date. */
+/* The IRS yearly average. Every supported currency has one (currency/currencies.ts). */
 function averageDollars(amount: number, code: string): Outcome {
   const found = yearlyAverageRate(code, TAX_YEAR);
-  return found.ok ? { dollars: dollarsFromForeign(amount, found.rate) } : WAITS;
+  return found.ok ? { dollars: dollarsFromForeign(amount, found.rate) } : { gap: found.gap };
 }
 
 /* Tax withheld: the dated amounts must add up to the box. */

@@ -1,6 +1,9 @@
 /*
- * The 23 currencies of the Federal Reserve Board's H.10 release, "Foreign
- * Exchange Rates", and where each one is published:
+ * The 20 currencies the engine supports: those of the Federal Reserve Board's
+ * H.10 release, "Foreign Exchange Rates", that the IRS yearly average table
+ * also lists. H.10 also prints the Malaysian ringgit, the Sri Lankan rupee and
+ * the Venezuelan bolivar; the IRS table has no average for them, so the
+ * builder does not read them. Where each one is published:
  * - the H.10 history pages (https://www.federalreserve.gov/releases/h10/hist/):
  *   one page for 2000 to the present (dat00_<page>.htm), one for 1990-99
  *   (dat96_), one through 1989 (dat89_);
@@ -21,22 +24,12 @@ export interface CurrencySource {
   h10Page: string;
   /* How H.10 prints it. */
   quote: Quote;
-  /*
-   * The IRS table's Country column. Absent: the IRS table has no average for
-   * the currency. It lists no Malaysia and no Sri Lanka, and its Venezuela row
-   * is the "Bolivar (Fuerte)", not the unit of the H.10 and Treasury series.
-   */
-  irsCountry?: string;
+  /* The IRS table's Country column. */
+  irsCountry: string;
   treasury: string;
   /*
-   * The first day the H.10 series is in today's unit. Venezuela's series
-   * changes unit with each redenomination (it jumps on 2018-08-20 and on
-   * 2021-10-04) and the history pages do not restate the earlier rates.
-   */
-  firstDay?: string;
-  /*
    * The Board's index links a page through 1989 that is not there (HTTP 404):
-   * Brazil, Mexico and Venezuela (the euro began in 1999).
+   * Brazil and Mexico (the euro began in 1999).
    */
   noPageBefore1990?: boolean;
 }
@@ -44,7 +37,7 @@ export interface CurrencySource {
 const units = (
   code: string,
   h10Page: string,
-  irsCountry: string | undefined,
+  irsCountry: string,
   treasury: string,
 ): CurrencySource => ({ code, h10Page, irsCountry, quote: "units_per_dollar", treasury });
 
@@ -65,7 +58,6 @@ export const CURRENCY_SOURCES: CurrencySource[] = [
   units("HKD", "hk", "Hong Kong", "Hong Kong-Dollar"),
   units("INR", "in", "India", "India-Rupee"),
   units("JPY", "ja", "Japan", "Japan-Yen"),
-  units("MYR", "ma", undefined, "Malaysia-Ringgit"),
   { ...units("MXN", "mx", "Mexico", "Mexico-Peso"), noPageBefore1990: true },
   dollars("NZD", "nz", "New Zealand", "New Zealand-Dollar"),
   units("NOK", "no", "Norway", "Norway-Krone"),
@@ -73,17 +65,11 @@ export const CURRENCY_SOURCES: CurrencySource[] = [
   units("ZAR", "sf", "South Africa", "South Africa-Rand"),
   // The IRS table prints "South Korean".
   units("KRW", "ko", "South Korean", "Korea-Won"),
-  units("LKR", "sl", undefined, "Sri Lanka-Rupee"),
   units("SEK", "sd", "Sweden", "Sweden-Krona"),
   units("CHF", "sz", "Switzerland", "Switzerland-Franc"),
   units("TWD", "ta", "Taiwan", "Taiwan-Dollar"),
   units("THB", "th", "Thailand", "Thailand-Baht"),
   dollars("GBP", "uk", "United Kingdom", "United Kingdom-Pound"),
-  {
-    ...units("VES", "ve", undefined, "Venezuela-Bolivar Soberano"),
-    firstDay: "2021-10-04",
-    noPageBefore1990: true,
-  },
 ];
 
 export const H10_HISTORY_BASE = "https://www.federalreserve.gov/releases/h10/hist/";

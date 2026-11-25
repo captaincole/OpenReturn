@@ -397,7 +397,7 @@ describe("Schedule B line 7 from the account facts", () => {
   });
 });
 
-describe("an asset in a currency outside the H.10 release", () => {
+describe("an asset in a currency outside the 20 supported", () => {
   it("files the form with every line unsupported, and asks nothing", () => {
     const peso = { ...baselCurrent, foreignCurrency: { code: "ARS" } };
     const { files, field, missing } = evaluate(factsWith({ [ASSET("basel-current")]: peso }));

@@ -14,18 +14,16 @@ const isoOf = (time: number) => new Date(time).toISOString().slice(0, 10);
 
 const timeOf = (isoDate: string) => Date.parse(`${isoDate}T00:00:00Z`);
 
-/* The days the pages list, from the first rate (not before firstDay) to the last day listed. */
+/* The days the pages list, from the first rate to the last day listed. */
 export interface DailyYears {
   firstDay: string;
   lastDay: string;
   years: Record<string, string>;
 }
 
-export function dailyYears(rows: H10Rows, firstDayAllowed?: string): DailyYears {
+export function dailyYears(rows: H10Rows): DailyYears {
   const dates = [...rows.keys()].sort();
-  const firstRate = dates.find(
-    (date) => rows.get(date) !== null && (firstDayAllowed === undefined || date >= firstDayAllowed),
-  );
+  const firstRate = dates.find((date) => rows.get(date) !== null);
   if (firstRate === undefined) throw new Error("H.10: no rate on the pages");
   const lastDay = dates[dates.length - 1];
   const entriesByYear = new Map<string, string[]>();

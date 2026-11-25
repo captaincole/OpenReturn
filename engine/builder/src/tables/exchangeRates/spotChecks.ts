@@ -21,20 +21,17 @@ const H10_NOVEMBER_20_2026: Record<string, string> = {
   HKD: "7.8370",
   INR: "92.6700",
   JPY: "158.7600",
-  MYR: "4.1100",
   MXN: "19.0380",
   NZD: "0.5486",
   NOK: "9.7648",
   SGD: "1.2893",
   ZAR: "17.4750",
   KRW: "1342.4100",
-  LKR: "332.4100",
   SEK: "10.2114",
   CHF: "0.8394",
   TWD: "32.9700",
   THB: "33.9300",
   GBP: "1.3104",
-  VES: "916.4693",
 };
 
 /* [code, ISO date, rate]: the first rows of two history pages. */
@@ -43,7 +40,7 @@ const H10_OLD_ROWS: Array<[string, string, string]> = [
   ["EUR", "2000-01-03", "1.0155"],
 ];
 
-/* The IRS table's 2025 column: every one of the 23 it lists. */
+/* The IRS table's 2025 column, for each of the 20. */
 const IRS_2025: Record<string, string> = {
   AUD: "1.551",
   BRL: "5.593",
@@ -66,9 +63,6 @@ const IRS_2025: Record<string, string> = {
   THB: "32.870",
   GBP: "0.759",
 };
-
-/* The 23 that the IRS table lacks for 2025: Malaysia, Sri Lanka, and Venezuela (its row is the old bolivar). */
-const NOT_IN_IRS_2025 = ["MYR", "LKR", "VES"];
 
 const TREASURY_2025: Record<string, string> = { EUR: "0.851", CHF: "0.792" };
 
@@ -106,17 +100,13 @@ export function checkDaily(table: DailyTable): string[] {
 
 export function checkAverages(table: AverageTable): string[] {
   if (table.taxYear !== 2025) return [];
-  const rates = Object.entries(IRS_2025).map(([code, rate]): [string, string, string] => [
-    `IRS ${code} 2025`,
-    rate,
-    table.rates[code] ?? "",
-  ]);
-  const missing: [string, string, string] = [
-    "IRS currencies not in the table",
-    NOT_IN_IRS_2025.join(","),
-    table.notInTable.join(","),
-  ];
-  return failures([...rates, missing]);
+  return failures(
+    Object.entries(IRS_2025).map(([code, rate]): [string, string, string] => [
+      `IRS ${code} 2025`,
+      rate,
+      table.rates[code] ?? "",
+    ]),
+  );
 }
 
 export function checkYearEnd(table: YearEndTable): string[] {

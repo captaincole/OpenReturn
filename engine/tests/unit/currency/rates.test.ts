@@ -9,7 +9,7 @@
  */
 
 import { describe, expect, it } from "vitest";
-import { H10_CURRENCIES } from "../../../src/currency/currencies.js";
+import { H10_CURRENCIES, supportedCurrency } from "../../../src/currency/currencies.js";
 import {
   dailyRate,
   isoDayOf,
@@ -57,20 +57,39 @@ describe("the H.10 daily table", () => {
     expect(found(dailyRate("EUR", "2025-07-04")).printed).toBe("1.1758");
   });
 
-  it("holds every currency of the release, and no other", () => {
-    for (const { code } of H10_CURRENCIES) {
-      expect(dailyRate(code, "2025-12-31").ok, code).toBe(true);
-    }
+  it("refuses a currency outside the list, naming it", () => {
     const outside = dailyRate("ARS", "2025-12-31");
     expect(outside.ok).toBe(false);
-    expect(!outside.ok && outside.gap).toContain("H.10");
+    expect(!outside.ok && outside.gap).toContain("ARS");
+    expect(!outside.ok && outside.gap).toContain("IRS yearly average");
   });
 
   it("refuses a day before the series or after the table", () => {
     expect(dailyRate("EUR", "1998-12-31").ok).toBe(false);
     expect(dailyRate("EUR", "2099-01-04").ok).toBe(false);
-    // Venezuela's series is read only from its 2021 redenomination.
-    expect(dailyRate("VES", "2021-10-01").ok).toBe(false);
+  });
+});
+
+describe("the supported currencies", () => {
+  it("are 20: H.10 currencies with an IRS yearly average", () => {
+    expect(H10_CURRENCIES).toHaveLength(20);
+  });
+
+  it("leave out the three H.10 currencies the IRS table lacks", () => {
+    for (const code of ["MYR", "LKR", "VES"]) {
+      expect(supportedCurrency(code), code).toBeUndefined();
+      expect(dailyRate(code, "2025-12-31").ok, code).toBe(false);
+      expect(yearlyAverageRate(code, 2025).ok, code).toBe(false);
+      expect(yearEndRate(code, 2025).ok, code).toBe(false);
+    }
+  });
+
+  it("each have a daily rate, a 2025 yearly average and a 2025 year-end rate", () => {
+    for (const { code } of H10_CURRENCIES) {
+      expect(dailyRate(code, "2025-12-31").ok, `${code} daily`).toBe(true);
+      expect(yearlyAverageRate(code, 2025).ok, `${code} yearly average`).toBe(true);
+      expect(yearEndRate(code, 2025).ok, `${code} year end`).toBe(true);
+    }
   });
 });
 
@@ -85,10 +104,7 @@ describe("the IRS yearly averages", () => {
     expect(found(yearlyAverageRate("KRW", 2025)).printed).toBe("1421.779");
   });
 
-  it("has no average for the three the IRS table lacks, nor for a year it lacks", () => {
-    for (const code of ["MYR", "LKR", "VES"]) {
-      expect(yearlyAverageRate(code, 2025).ok, code).toBe(false);
-    }
+  it("refuses a year it lacks and a currency outside the list", () => {
     expect(yearlyAverageRate("EUR", 2024).ok).toBe(false);
     expect(yearlyAverageRate("ARS", 2025).ok).toBe(false);
   });

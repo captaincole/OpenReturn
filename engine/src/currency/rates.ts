@@ -76,14 +76,17 @@ function entryOf(code: string, currency: DailyCurrency, isoDay: string): string 
 
 /*
  * DECISION (2026-11-24): the daily rate comes from the Federal Reserve Board's
- * H.10 release, and only its 23 currencies are supported; the yearly average
- * comes from the IRS's own table. Texts: "The Internal Revenue Service has no
- * official exchange rate. Generally, it accepts any posted exchange rate that
- * is used consistently", and the same page publishes the yearly average table
- * (irs.gov "Yearly average currency exchange rates"); no source is named for
- * a day's rate. The engine follows H.10 for days and the IRS table for years,
- * one source for each kind of rate, because public sources from U.S.
- * authorities make every return repeatable.
+ * H.10 release and the yearly average from the IRS's own table, and only the
+ * 20 currencies that have both are supported (H.10's Malaysian ringgit, Sri
+ * Lankan rupee and Venezuelan bolivar have no IRS average). Texts: "The
+ * Internal Revenue Service has no official exchange rate. Generally, it
+ * accepts any posted exchange rate that is used consistently", and the same
+ * page publishes the yearly average table (irs.gov "Yearly average currency
+ * exchange rates"); no source is named for a day's rate. The engine follows
+ * H.10 for days and the IRS table for years, one source for each kind of
+ * rate, because public sources from U.S. authorities make every return
+ * repeatable; a currency must have both so that every amount converts,
+ * dated or not.
  *
  * DECISION (2026-11-24): a day with no published rate (a weekend, a U.S.
  * holiday, "ND") takes the last earlier day that has one. No IRS text states
@@ -115,17 +118,12 @@ export function dailyRate(code: string, isoDay: string): RateLookup {
   return gap(`The H.10 release has no ${code} rate on or before ${isoDay}.`);
 }
 
-/*
- * The IRS yearly average of a tax year (units per dollar). The IRS table lacks
- * three of the 23 for 2025 (Malaysia, Sri Lanka, Venezuela): no average.
- */
+/* The IRS yearly average of a tax year (units per dollar). */
 export function yearlyAverageRate(code: string, year: number): RateLookup {
   const table = YEARLY_AVERAGE[year];
   if (table === undefined) return gap(`The engine has no IRS yearly averages for ${year}.`);
   const printed = table.rates[code];
-  if (printed === undefined) {
-    return gap(`The IRS yearly average table has no ${code} average for ${year}.`);
-  }
+  if (printed === undefined) return gap(unsupportedCurrencyReason(code));
   const rate = unitsPerDollar(printed, "units_per_dollar");
   return { ok: true, rate, printed, day: String(year), source: `IRS yearly average, ${year}` };
 }

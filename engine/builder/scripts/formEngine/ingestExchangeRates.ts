@@ -1,10 +1,10 @@
 /*
  * The exchange-rate tables the engine converts foreign amounts with
  * (engine/src/currency/), into engine/src/data/exchange-rates/:
- * - h10-daily.json: every daily rate of the 23 currencies of the Federal
- *   Reserve Board's H.10 release, from its history pages;
+ * - h10-daily.json: every daily rate of the 20 supported currencies, from the
+ *   history pages of the Federal Reserve Board's H.10 release;
  * - irs-yearly-average-<year>.json: the IRS yearly average rates of the tax
- *   year, for the currencies of the 23 that the IRS table lists;
+ *   year for the same 20;
  * - treasury-year-end-<year>.json: the Treasury Reporting Rates of Exchange
  *   on December 31 of the tax year (Form 8938).
  * The pages are cached in the repository's .scratch/exchange-rates/ and read
@@ -39,7 +39,7 @@ const H10_NOTE =
   "Noon buying rates in New York for cable transfers payable in foreign currencies, as the history pages print them. Each year is one string: one entry per calendar day from January 1, separated by commas; an empty entry is a day with no rate (a weekend, a holiday, ND). quote: units_per_dollar is units of the currency for one U.S. dollar; dollars_per_unit (the release's asterisk) is U.S. dollars for one unit.";
 
 const IRS_NOTE =
-  "The IRS yearly average currency exchange rates for the tax year, as the IRS page prints them: units of the currency for one U.S. dollar. notInTable: the H.10 currencies the IRS table lacks.";
+  "The IRS yearly average currency exchange rates for the tax year, as the IRS page prints them: units of the currency for one U.S. dollar.";
 
 const TREASURY_NOTE =
   "Treasury Reporting Rates of Exchange (Bureau of the Fiscal Service), the rate in effect on the record date: units of the currency for one U.S. dollar.";

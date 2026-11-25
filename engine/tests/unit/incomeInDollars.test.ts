@@ -8,8 +8,7 @@
  * published pages:
  * - IRS 2025 yearly average: EUR 0.886 euros per dollar;
  * - H.10: EUR 12/31/2025 1.1736, 10/08/2025 1.1606, 07/03/2025 1.1758,
- *   02/05/2025 1.0419, 12/26/2025 1.1766 (dollars per euro); MYR 12/31/2025
- *   4.0560 (ringgit per dollar).
+ *   02/05/2025 1.0419, 12/26/2025 1.1766 (dollars per euro).
  */
 
 import { describe, expect, it } from "vitest";
@@ -185,14 +184,16 @@ describe("income: the day's rate when dated, else the IRS yearly average", () =>
     expect((convert(undated, DIVIDEND_KEY) as DividendFactValue).box1a).toBe(112.87); // 100 / 0.886
   });
 
-  it("asks for the date of an amount in a currency the IRS table lacks", () => {
-    const ringgit = interestWith({ code: "MYR" });
-    expect(waiting(ringgit)).toEqual([EURO_KEY]);
-    const dated = interestWith({
-      code: "MYR",
-      byDate: [{ date: "12/31/2025", amounts: { box1: 1180.4 } }],
-    });
-    expect((convert(dated) as InterestFactValue).box1).toBe(291.03); // 1,180.40 / 4.0560
+  it("leaves an H.10 currency with no IRS average unsupported, dated or not", () => {
+    for (const code of ["MYR", "LKR", "VES"]) {
+      const dated = interestWith({
+        code,
+        byDate: [{ date: "12/31/2025", amounts: { box1: 1180.4 } }],
+      });
+      expect(waiting(dated), code).toEqual([]);
+      expect(exchangeRateGap(convert(dated)), code).toContain(code);
+      expect(exchangeRateGap(convert(interestWith({ code }))), code).toContain(code);
+    }
   });
 
   it("flows in dollars to Schedule B, Form 1040 and the credit", () => {
@@ -256,7 +257,7 @@ describe("a sale", () => {
   });
 });
 
-describe("a currency outside the H.10 release", () => {
+describe("a currency outside the 20 supported", () => {
   const peso = { ...euroInterest, foreignCurrency: { code: "ARS" } };
 
   it("is unsupported with its reason, and not a pending input", () => {

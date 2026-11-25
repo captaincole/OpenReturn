@@ -131,7 +131,7 @@ const AMT_COPY_GAP =
 function amtForeignTaxCredit(form: Accessor, info: Form8801CreditInfo): Value {
   const credit = foreignTaxCredit(form, info);
   if (isGap(credit)) return credit;
-  if (claimsByElection(info) || info.foreignTax?.k1Waiting === true) return credit;
+  if (claimsByElection(info) || info.foreignTax?.taxesWaiting === true) return credit;
   return info.mustFile?.["form-1116"]?.value === true ? unsupported(AMT_COPY_GAP) : 0;
 }
 

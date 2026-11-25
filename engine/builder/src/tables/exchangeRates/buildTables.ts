@@ -1,6 +1,6 @@
 /*
  * Builds the engine's three exchange-rate tables from the official pages:
- * - the H.10 daily rates, the whole history of each of the 23 currencies;
+ * - the H.10 daily rates, the whole history of each of the 20 currencies;
  * - the IRS yearly averages of a tax year;
  * - the Treasury Reporting Rates of Exchange on the last day of a tax year.
  * Each downloaded page is cached in the repository's .scratch/ (never
@@ -86,7 +86,7 @@ export async function buildDailyTable(options: FetchOptions): Promise<DailyTable
     currencies[source.code] = {
       quote: source.quote,
       pages: history.pages,
-      ...dailyYears(history.rows, source.firstDay),
+      ...dailyYears(history.rows),
     };
   }
   return { downloadedOn: earliest(fetched), currencies };
@@ -96,13 +96,11 @@ export interface AverageTable {
   taxYear: number;
   source: string;
   downloadedOn: string;
-  /* Code → units of the currency per U.S. dollar, as printed. A currency the IRS table lacks is absent. */
+  /* Code → units of the currency per U.S. dollar, as printed. */
   rates: Record<string, string>;
-  /* The codes of the 23 that the IRS table lacks for the year. */
-  notInTable: string[];
 }
 
-/* The IRS yearly average table for one tax year, for the currencies the table lists. */
+/* The IRS yearly average table for one tax year. A supported currency the page lacks stops the build. */
 export async function buildAverageTable(
   taxYear: number,
   options: FetchOptions,
@@ -110,13 +108,12 @@ export async function buildAverageTable(
   const { html, fetchedOn } = await page(IRS_YEARLY_AVERAGES, "irs-yearly-averages.htm", options);
   const rows = parseIrsYearlyAverages(html, taxYear);
   const rates: Record<string, string> = {};
-  const notInTable: string[] = [];
   for (const source of CURRENCY_SOURCES) {
     const row = rows.find((candidate) => candidate.country === source.irsCountry);
-    if (row === undefined) notInTable.push(source.code);
-    else rates[source.code] = row.average;
+    if (row === undefined) throw new Error(`IRS yearly averages: no ${source.code} for ${taxYear}`);
+    rates[source.code] = row.average;
   }
-  return { taxYear, source: IRS_YEARLY_AVERAGES, downloadedOn: fetchedOn, rates, notInTable };
+  return { taxYear, source: IRS_YEARLY_AVERAGES, downloadedOn: fetchedOn, rates };
 }
 
 export interface YearEndTable {
