@@ -5,8 +5,11 @@
  */
 
 import type { BaseFilingInfo } from "../../../filingInfo.js";
+import type { ScheduleSFilingInfo } from "../schedule-s/filingInfo.js";
 
-export interface SchedulePFilingInfo extends BaseFilingInfo {
+/* Part III line 20 totals every Schedule S (otherStateCredits). */
+export interface SchedulePFilingInfo
+  extends BaseFilingInfo, Pick<ScheduleSFilingInfo, "otherStateCredits"> {
   /** Part I line 10: the incentive stock option spread (the Forms 3921, else amt.iso_exercise_spread). */
   isoExerciseSpread?: number;
   /** Forms 3921 are on file and the shares were sold in the year of exercise: line 10 is not handled. */

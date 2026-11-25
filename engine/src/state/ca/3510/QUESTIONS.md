@@ -10,8 +10,8 @@ whether the choice changes a dollar amount.
 2. **Work that could be done; not now:** items 1, 4, 6 and 12 say why. Items
    2, 3, 5, 7, 8, 9, 10, 11 and 13 are defaults that need no work.
 3. **Pattern change:** none. Form 540 line 43 was unsupported; it now holds
-   this credit when FTB 3510 files, and stays unsupported otherwise. Item 14 is
-   the recipe for when Schedule S also writes it.
+   this credit when FTB 3510 files, and stays unsupported otherwise. With
+   Schedule S too, the other state tax credit takes line 44 (item 14, applied).
 
 FTB 3510 has no rows or columns that a person can run out of: each line holds
 one amount, and Schedule P (540) line 10 holds the one credit.
@@ -124,12 +124,23 @@ one amount, and Schedule P (540) line 10 holds the one credit.
   540 lines 43 and 44 (ca-540-sched-p-inst-2025::sec::how-to-claim-your-credits::b01).
 - Default: column (a) is line 32; column (b) is line 38; column (c) is the last
   column (c) above, less column (b); column (d) is (a) − (b). Form 540 line 43
-  takes the credit (the only other credit the engine figures), with code 188
+  takes the credit (before the other state tax credit, item 14), with code 188
   and the name shortened to "Prior Year AMT" to fit the box. Blank when line 38
   is 0. Unsupported, with main's reason, when FTB 3510 does not file.
 - Changes dollars: no.
 
 ## 14. Form 540 line 43 when Schedule S is on `main` too
+
+**Applied when `main` merged into `schedule-s` (2026-11-24).** This credit
+takes line 43 and the other state tax credit line 44 when both are taken; a
+credit alone takes line 43. `540/credits.ts` builds the one ordered list, and
+lines 47 and 48 wait while either credit waits. Schedule S line 2 reads this
+credit from Schedule P line 10 column (b) through `3510/creditUsed.ts`, never
+from Form 540 line 43 or 44, so no cycle. `engine/tests/unit/state/ca/540/otherCredits.test.ts`
+claims both. The instructions give no order; Schedule P order is our choice.
+Schedule S QUESTIONS.md item 13 has the details.
+
+The recipe as written before the merge:
 
 This branch alone puts the credit for prior year AMT on Form 540 line 43 (name
 "Prior Year AMT", code 188). The `schedule-s` branch alone puts the other state

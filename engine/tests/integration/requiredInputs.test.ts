@@ -231,6 +231,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "whether one was paid is Cade's question",
   ],
   [
+    /^other_state_tax\.[^.]+$/,
+    "each fact is a whole return filed with another state (Schedule S, one copy per state); " +
+      "whether one was filed is Cade's question. Schedule S lists the fact again while an " +
+      "amount inside it (items, tax, the other state's AGI) is missing",
+  ],
+  [
     /^foreign_tax_credit\.claim_accrued$/,
     "an answer Cade records only when the taxpayer chose, on an earlier return, to credit " +
       "foreign taxes when they accrue (Form 1116 Part II box k); absent, box j (paid)",
