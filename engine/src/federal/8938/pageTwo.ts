@@ -7,8 +7,9 @@
  */
 
 import type { BindingFn } from "../../defineForm.js";
-import type { ForeignCurrencyConversion, ForeignPartyType } from "../../facts/index.js";
+import type { ForeignPartyType } from "../../facts/index.js";
 import { unsupported } from "../../types.js";
+import type { AssetConversion } from "./assetCurrency.js";
 import type { Form8938FilingInfo } from "./filingInfo.js";
 import { cityLine, giinSegments, type ValueRange } from "./lines.js";
 import type { PartVIRow, PartVRow } from "./rows.js";
@@ -35,10 +36,14 @@ const partVI =
 
 const checked = (yes: boolean) => (yes ? true : undefined);
 
-/* Lines 24–25 and 33–34: Yes with the currency, the rate and a source other than the Treasury (line-25::b01, line-34::b01). */
+/*
+ * Lines 24–25 and 33–34 (line-25::b01, line-34::b01): Yes with the currency
+ * and the Treasury rate. Column (c), the source of a rate other than the
+ * Treasury's, stays blank: the engine uses only the Treasury rate.
+ */
 function conversionLines(
   prefix: string,
-  rowOf: (pick: (row: { conversion?: ForeignCurrencyConversion }) => Value) => Fn,
+  rowOf: (pick: (row: { conversion?: AssetConversion }) => Value) => Fn,
 ): Record<string, Fn> {
   const [yesNoLine, columnsLine, subject] =
     prefix === "account" ? ["24", "25", "account"] : ["33", "34", "asset"];
@@ -49,15 +54,11 @@ function conversionLines(
     [`1.line.${yesNoLine}_${subject}_exchange_rate_used_no`]: rowOf((row) =>
       checked(row.conversion === undefined),
     ),
-    [`1.line.${columnsLine}_${subject}_exchange_rate_col_a`]: rowOf(
-      (row) => row.conversion?.currency,
-    ),
+    [`1.line.${columnsLine}_${subject}_exchange_rate_col_a`]: rowOf((row) => row.conversion?.label),
     [`1.line.${columnsLine}_${subject}_exchange_rate_col_b`]: rowOf(
-      (row) => row.conversion && String(row.conversion.exchangeRate),
+      (row) => row.conversion?.printed,
     ),
-    [`1.line.${columnsLine}_${subject}_exchange_rate_col_c`]: rowOf(
-      (row) => row.conversion?.rateSource,
-    ),
+    [`1.line.${columnsLine}_${subject}_exchange_rate_col_c`]: rowOf(() => undefined),
   };
 }
 

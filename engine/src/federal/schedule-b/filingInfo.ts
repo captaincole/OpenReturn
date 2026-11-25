@@ -6,6 +6,8 @@ import type { Receipt } from "../passThrough/receipts.js";
 export interface PayerAmount {
   payerName: string;
   amount: number | undefined;
+  /* A foreign-currency fact that cannot be converted (incomeInDollars.ts): the row and the total are unsupported. */
+  gap?: string;
 }
 
 /**

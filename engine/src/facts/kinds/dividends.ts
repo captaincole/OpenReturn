@@ -2,10 +2,10 @@
 
 import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";
-import type { IncomeCurrencyConversion } from "./foreignCurrency.js";
+import type { AmountBox, IncomeInForeignCurrency } from "./foreignCurrency.js";
 
-/* Amounts in U.S. dollars, or in the currency of `conversion` (foreignCurrency.ts). */
-export interface DividendFactValue {
+/* The 1099-DIV as printed. */
+export interface DividendBoxes {
   payerName: string;
   payerTin?: string;
   box1a?: number; // Total ordinary dividends
@@ -22,7 +22,11 @@ export interface DividendFactValue {
   box10?: number; // Non-cash liquidation distributions
   box12?: number; // Exempt-interest dividends
   box13?: number; // Specified private activity bond interest dividends
-  conversion?: IncomeCurrencyConversion;
+}
+
+/* Amounts in U.S. dollars, or in the currency of `foreignCurrency` (foreignCurrency.ts). */
+export interface DividendFactValue extends DividendBoxes {
+  foreignCurrency?: IncomeInForeignCurrency<AmountBox<DividendBoxes>>;
 }
 
 export interface DividendFact {

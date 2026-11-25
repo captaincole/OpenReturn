@@ -15,7 +15,7 @@ import {
   type InterestFactValue,
   type MiscIncomeFactValue,
 } from "../../facts/index.js";
-import { waitsForExchangeRate } from "../../incomeInDollars.js";
+import { exchangeRateGap, waitsForExchangeRate } from "../../incomeInDollars.js";
 import { roundDollars, sum, sumOrBlank } from "../../money.js";
 import type { ResolverInputs } from "../../resolverInputs.js";
 
@@ -89,7 +89,23 @@ function gainsOf(inputs: ResolverInputs, accountSlug: string) {
     ),
   );
   const lines = sales.map((sale) => SCHEDULE_D_LINE[sale.box]);
-  return { rows, wait, lines };
+  const gap = sales.find((sale) => sale.rateGap !== undefined)?.rateGap;
+  return { rows, wait, lines, gap };
+}
+
+/* An income fact that cannot be converted to dollars (incomeInDollars.ts) makes its items gaps. */
+function rateGaps(
+  interest: InterestFactValue | undefined,
+  dividends: DividendFactValue | undefined,
+  saleGap: string | undefined,
+  gaps: AssetTaxItems["gaps"],
+): void {
+  const mark = (gap: string | undefined, items: readonly TaxItem[]) => {
+    if (gap !== undefined) for (const item of items) gaps[item] ??= gap;
+  };
+  mark(exchangeRateGap(interest), ["interest", "deductions", "credits"]);
+  mark(exchangeRateGap(dividends), ["dividends", "gains", "credits"]);
+  mark(saleGap, ["gains"]);
 }
 
 function miscItems(misc: MiscIncomeFactValue | undefined, gaps: AssetTaxItems["gaps"]) {
@@ -121,6 +137,7 @@ export function assetTaxItems(inputs: ResolverInputs, accountSlug: string): Asse
   const gaps: AssetTaxItems["gaps"] = {};
   const { royalties, otherIncome } = miscItems(misc, gaps);
   const sales = gainsOf(inputs, accountSlug);
+  rateGaps(interest, dividends, sales.gap, gaps);
   const distributions = dividends?.box2a;
   const scheduleDLines = [...sales.lines, ...(distributions ? [DISTRIBUTIONS_LINE] : [])];
   return {

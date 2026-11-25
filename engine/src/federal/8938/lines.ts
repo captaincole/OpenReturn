@@ -5,7 +5,7 @@
  */
 
 import type { ForeignAddress, ForeignAssetOwner } from "../../facts/index.js";
-import { atLeast, roundDollars, sum } from "../../money.js";
+import { atLeast, roundDollars, sum, type UnitsPerDollar } from "../../money.js";
 
 export interface ReportingThreshold {
   /* "more than $X on the last day of the tax year" */
@@ -35,8 +35,8 @@ export function reportingThreshold(jointReturn: boolean, livesAbroad: boolean): 
  * the tax year (foreign-currency-conversion::b01, currency-determination-date::b01).
  * A value below zero is zero (asset-with-no-positive-value::b01).
  */
-export function dollarsOf(amount: number, exchangeRate?: number): number {
-  const dollars = exchangeRate === undefined ? amount : amount / exchangeRate;
+export function dollarsOf(amount: number, rate?: UnitsPerDollar): number {
+  const dollars = rate === undefined ? amount : amount / rate;
   return atLeast(0, dollars);
 }
 
@@ -122,8 +122,8 @@ export function valueRangeOf(maximumValue: number): ValueRange {
 }
 
 /* The maximum value printed on line 23 or 32: whole dollars, the nearest dollar. */
-export function printedMaximum(amount: number, exchangeRate?: number): number {
-  return roundDollars(dollarsOf(amount, exchangeRate));
+export function printedMaximum(amount: number, rate?: UnitsPerDollar): number {
+  return roundDollars(dollarsOf(amount, rate));
 }
 
 /* A GIIN is 19 characters: 6, 5, 2 and 3 characters with dots between (the four boxes of lines 26b and 35b). */

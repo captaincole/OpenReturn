@@ -17,7 +17,7 @@ export function makeResolverInputs(opts: {
   decisions: ReadonlyArray<{ decisionKey: string; decision: unknown }>;
 }): ResolverInputs {
   // Foreign-currency income in dollars, kept to the cent (incomeInDollars.ts).
-  const { facts } = incomeInDollars(opts.facts);
+  const { facts } = incomeInDollars(opts.facts, opts.decisions);
   const factByKey = new Map<string, unknown>();
   for (const fact of facts) factByKey.set(fact.key, fact.value);
   const decisionByKey = new Map<string, unknown>();

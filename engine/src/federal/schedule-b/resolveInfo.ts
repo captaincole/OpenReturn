@@ -4,7 +4,7 @@
  */
 
 import { isDividendFactKey, isInterestFactKey } from "../../facts/index.js";
-import { waitsForExchangeRate } from "../../incomeInDollars.js";
+import { exchangeRateGap, waitsForExchangeRate } from "../../incomeInDollars.js";
 import { sum } from "../../money.js";
 import {
   factsInCategory,
@@ -155,8 +155,14 @@ function payerAmounts(
     .filter((row) => isKind(row.key))
     .map((row) => {
       const value = row.value as Record<string, unknown>;
-      const amount = waitsForExchangeRate(value) ? undefined : amountOf(value);
-      return { payerName: String(value.payerName ?? ""), amount };
+      const gap = exchangeRateGap(value);
+      const notConverted = waitsForExchangeRate(value) || gap !== undefined;
+      const amount = notConverted ? undefined : amountOf(value);
+      return {
+        payerName: String(value.payerName ?? ""),
+        amount,
+        ...(gap !== undefined && { gap }),
+      };
     })
     .filter((payer) => payer.amount !== 0);
 }

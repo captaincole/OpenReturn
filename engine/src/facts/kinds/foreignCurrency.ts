@@ -1,61 +1,71 @@
 /*
- * The income of a foreign account, recorded in the account's currency as its
- * statement prints it, with the rates the taxpayer used. The engine holds no
- * rate table: each amount takes the rate on its fact, and incomeInDollars.ts
- * converts it before any form reads it. A fact with no `conversion` is in U.S.
- * dollars, as before.
+ * Income of a foreign account recorded in the account's currency, as its
+ * statement prints it: the currency, each amount, and the date of each amount
+ * where the rule needs one. The fact holds no exchange rate: the engine looks
+ * each one up in its tables (currency/rates.ts) and converts the amounts
+ * before any form reads them (incomeInDollars.ts). A fact with no
+ * `foreignCurrency` is in U.S. dollars, as before.
  *
- * A rate is units of the currency per one U.S. dollar, as the Treasury and the
- * IRS print them: dollars = amount / rate (irs.gov "Yearly average currency
- * exchange rates": "divide the foreign currency amount by the applicable
- * yearly average exchange rate").
+ * The rate each amount takes (incomeInDollars.ts):
+ * - interest that accrues through the year: the return's method
+ *   (FOREIGN_INCOME_RATE_METHOD_KEY), the yearly average or the rate of the
+ *   day each amount was credited;
+ * - each dividend: the rate of the day it was paid;
+ * - foreign tax withheld: the rate of the day it was withheld
+ *   (irs-1116-inst-2025::sec::foreign-currency-conversion::b01);
+ * - a sale: the rates on the settlement dates of the sale and of the purchase
+ *   (26 CFR 1.988-2(a)(2)(iv)).
+ * A currency outside the engine's list (currency/currencies.ts) is unsupported.
  */
 
-/*
- * An interest (1099-INT) or dividend (1099-DIV) fact's amounts in a foreign
- * currency. Two rates, because the rules differ:
- * - the income and the other boxes: "Use the exchange rate prevailing when you
- *   receive, pay, or accrue the item" (irs.gov "Foreign currency and currency
- *   exchange rates"); the IRS "accepts any posted exchange rate that is used
- *   consistently" and publishes yearly averages (irs.gov "Yearly average
- *   currency exchange rates"). Which of the two a taxpayer may use is not
- *   settled (federal/8938/QUESTIONS.md, question 15): the fact names its rate.
- * - the foreign tax (1099-INT box 6, 1099-DIV box 7): "If you take a credit for
- *   taxes paid, the conversion rate is the rate of exchange in effect on the
- *   day you paid the foreign taxes (or on the day the tax was withheld)"; for
- *   taxes accrued, "generally ... the average exchange rate for the tax year to
- *   which the taxes relate" (irs-1116-inst-2025::sec::foreign-currency-conversion::b01;
- *   irs-pub-514-2025::sec::internal-revenue-service::b01).
- * A rate that is missing for an amount on the fact makes the fact wait.
- */
-export interface IncomeCurrencyConversion {
-  /* The currency the amounts are in: "Euro (EUR)". */
-  currency: string;
-  /* For every amount but the foreign tax. */
-  exchangeRate?: number;
-  /* Where the rate comes from: "IRS yearly average currency exchange rates, 2025". */
-  rateSource?: string;
-  /* For the foreign tax box only. */
-  taxExchangeRate?: number;
-  taxRateSource?: string;
+/* The boxes of a fact value that hold an amount. */
+export type AmountBox<Value> = {
+  [Key in keyof Value]-?: NonNullable<Value[Key]> extends number ? Key : never;
+}[keyof Value] &
+  string;
+
+/* One day's amounts, as the statement lists them, by box: { box1a: 12880, box7: 1932 }. */
+export interface DatedAmounts<Box extends string = string> {
+  /* "MM/DD/YYYY". */
+  date: string;
+  amounts: Partial<Record<Box, number>>;
 }
 
 /*
- * A sale's proceeds and cost in a foreign currency. For stock traded on an
- * established securities market and a cash-basis taxpayer: "the amount
- * realized ... shall be computed by translating the units of nonfunctional
- * currency received into functional currency at the spot rate on the
- * settlement date of the sale", and the basis "at the spot rate on the
- * settlement date of the purchase" (26 CFR 1.988-2(a)(2)(iv)(A), (B)). The
- * dates on the trade fact stay the trade dates, which set the holding period
- * (irs-pub-550-2025::sec::holding-period::b03). A basis the taxpayer states
+ * A 1099-INT or 1099-DIV fact in a foreign currency. `byDate` lists the
+ * amounts that take the rate of their day, adding up to each such box: every
+ * dividend box; the interest boxes that are events (the early withdrawal
+ * penalty, tax withheld); and, under the daily method, the interest credited.
+ */
+export interface IncomeInForeignCurrency<Box extends string = string> {
+  /* ISO 4217: "EUR". */
+  code: string;
+  byDate?: DatedAmounts<Box>[];
+}
+
+/*
+ * A sale's proceeds and cost in a foreign currency. The trade fact's own dates
+ * stay the trade dates, which set the holding period
+ * (irs-pub-550-2025::sec::holding-period::b03); the settlement dates set the
+ * rates: "the amount realized ... at the spot rate on the settlement date of
+ * the sale", and the basis "at the spot rate on the settlement date of the
+ * purchase" (26 CFR 1.988-2(a)(2)(iv)(A), (B)). A basis the taxpayer states
  * (the reported-basis fact) and an adjustment amount are in U.S. dollars.
  */
-export interface SaleCurrencyConversion {
-  currency: string;
-  /* The proceeds: the rate on the settlement date of the sale. */
-  saleExchangeRate?: number;
-  /* The cost: the rate on the settlement date of the purchase. */
-  purchaseExchangeRate?: number;
-  rateSource?: string;
+export interface SaleInForeignCurrency {
+  code: string;
+  /* "MM/DD/YYYY". */
+  saleSettled?: string;
+  purchaseSettled?: string;
 }
+
+/*
+ * The rate method for foreign interest that accrues through the year, one for
+ * the return: "yearly_average" (the Board's G.5A average for the tax year) or
+ * "daily" (the H.10 rate of each day an amount is credited, from `byDate`).
+ * With no decision the engine takes the yearly average, as it takes the
+ * default of the other elections it reads.
+ */
+export const FOREIGN_INCOME_RATE_METHOD_KEY = "decisions.foreign_income_rate_method";
+export const FOREIGN_INCOME_RATE_METHODS = ["yearly_average", "daily"] as const;
+export type ForeignIncomeRateMethod = (typeof FOREIGN_INCOME_RATE_METHODS)[number];

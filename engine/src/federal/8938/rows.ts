@@ -7,13 +7,13 @@
  */
 
 import type {
-  ForeignCurrencyConversion,
   ForeignEntity,
   ForeignFinancialAssetFact,
   ForeignInstitution,
   ForeignIssuer,
 } from "../../facts/index.js";
 import { sum } from "../../money.js";
+import { assetConversion, type AssetConversion } from "./assetCurrency.js";
 import { printedMaximum, valueRangeOf, type ValueRange } from "./lines.js";
 import { hasNoTaxItem, type AssetTaxItems } from "./partIII.js";
 
@@ -25,7 +25,8 @@ interface RowCommon {
   noTaxItem: boolean;
   /* Line 23 or 32, whole dollars: "report the maximum value of the entire jointly held account" (spouses-filing-separate-returns::b01). */
   maximumValue: number;
-  conversion?: ForeignCurrencyConversion;
+  /* Lines 24–25 or 33–34: undefined for an asset in U.S. dollars. */
+  conversion?: AssetConversion;
 }
 
 export interface PartVRow extends RowCommon {
@@ -55,12 +56,13 @@ export interface ReportedAsset {
 
 function commonOf(asset: ReportedAsset): RowCommon {
   const { value } = asset.fact;
+  const conversion = assetConversion(value);
   return {
     accountNumber: value.accountNumber,
     jointWithSpouse: value.owner === "joint_with_spouse",
     noTaxItem: hasNoTaxItem(asset.items),
-    maximumValue: printedMaximum(value.maximumValue, value.conversion?.exchangeRate),
-    conversion: value.conversion,
+    maximumValue: printedMaximum(value.maximumValue, conversion?.rate),
+    conversion,
   };
 }
 

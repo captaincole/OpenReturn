@@ -22,7 +22,7 @@ const ONLY_NON_ZERO = "Pass only the boxes that have non-zero values.";
 type Payer = "payerName" | "payerTin";
 
 /* A 1099 prints U.S. dollars: the engine's foreign-currency part of the fact is not a box. */
-type NotABox = Payer | "conversion";
+type NotABox = Payer | "foreignCurrency";
 
 /* A missing, extra or mistyped box (against the engine's fact value) fails to compile. */
 type BoxSchemas<V> = { [K in keyof Omit<V, NotABox>]-?: z.ZodType<V[K]> };

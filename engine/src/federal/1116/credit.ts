@@ -24,6 +24,7 @@ export function foreignTaxCredit(form: Accessor, info: Form1116FilingInfo): Valu
   const foreignTax = info.foreignTax;
   if (foreignTax === undefined) return undefined;
   if (foreignTax.k1Gap !== undefined) return unsupported(foreignTax.k1Gap);
+  if (foreignTax.currencyGap !== undefined) return unsupported(foreignTax.currencyGap);
   if (foreignTax.taxesWaiting === true) return undefined;
   if (foreignTax.election) {
     const regularTax = regularTaxForCredit(form, info);

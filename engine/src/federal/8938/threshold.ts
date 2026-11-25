@@ -7,6 +7,7 @@
 
 import { FOREIGN_ASSET_KEYS, type ForeignFinancialAssetFact } from "../../facts/index.js";
 import { num, type ResolverInputs } from "../../resolverInputs.js";
+import { assetRate } from "./assetCurrency.js";
 import {
   dollarsOf,
   reportingThreshold,
@@ -41,8 +42,8 @@ function outcomeFor(
 ): ThresholdOutcome {
   const counted = assets.map(({ value }) => ({
     share: thresholdShare(value.owner, jointReturn, spouseIsSpecifiedIndividual) ?? 1,
-    maximumDollars: dollarsOf(value.maximumValue, value.conversion?.exchangeRate),
-    yearEndDollars: dollarsOf(value.yearEndValue, value.conversion?.exchangeRate),
+    maximumDollars: dollarsOf(value.maximumValue, assetRate(value)),
+    yearEndDollars: dollarsOf(value.yearEndValue, assetRate(value)),
   }));
   const threshold = reportingThreshold(jointReturn, livesAbroad);
   return thresholdOutcome(thresholdTotals(counted), threshold, highestTotalValue);

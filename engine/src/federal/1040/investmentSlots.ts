@@ -6,7 +6,7 @@
  */
 
 import { isDividendFactKey, isInterestFactKey } from "../../facts/index.js";
-import { waitsForExchangeRate } from "../../incomeInDollars.js";
+import { exchangeRateGap, waitsForExchangeRate } from "../../incomeInDollars.js";
 import { factsInCategory, sumInvestmentBox, type ResolverInputs } from "../../resolverInputs.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 
@@ -16,8 +16,11 @@ function factsOfKind(inputs: ResolverInputs, isKind: (key: string) => boolean) {
   return factsInCategory(inputs, "investment_income").filter((fact) => isKind(fact.key));
 }
 
+/* A fact not converted: it waits for a date, or it is a gap that Schedule B shows on its row. */
 const kindWaits = (inputs: ResolverInputs, isKind: (key: string) => boolean) =>
-  factsOfKind(inputs, isKind).some((fact) => waitsForExchangeRate(fact.value));
+  factsOfKind(inputs, isKind).some(
+    (fact) => waitsForExchangeRate(fact.value) || exchangeRateGap(fact.value) !== undefined,
+  );
 
 /*
  * The filter pins each box to 1099-INT: other 1099 sections may reuse low

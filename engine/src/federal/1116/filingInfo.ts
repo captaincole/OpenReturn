@@ -24,6 +24,8 @@ export interface ForeignTaxInfo {
   formGap?: string;
   /* Why a K-1's foreign taxes cannot be read (sources.ts k1ForeignTax): Schedule 3 line 1 and Form 1116 are gaps. */
   k1Gap?: string;
+  /* Why a foreign-currency 1099-INT or 1099-DIV fact cannot be converted (incomeInDollars.ts): the same lines are gaps. */
+  currencyGap?: string;
   /*
    * A K-1 with foreign taxes waits on an answer, or a foreign-currency 1099-INT
    * or 1099-DIV fact waits for its exchange rate: Schedule 3 line 1 and Form 1116 wait too.

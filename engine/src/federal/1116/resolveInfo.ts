@@ -4,7 +4,7 @@ import {
   isDividendFactKey,
   isInterestFactKey,
 } from "../../facts/index.js";
-import { waitsForExchangeRate } from "../../incomeInDollars.js";
+import { exchangeRateGap, waitsForExchangeRate } from "../../incomeInDollars.js";
 import { sum } from "../../money.js";
 import {
   filingStatusOf,
@@ -89,12 +89,17 @@ function requiredAnswers(categories: Form1116CategoryInfo[], inputs: ResolverInp
  * A 1099-INT or 1099-DIV fact in a foreign currency with no rate yet has no
  * amounts (incomeInDollars.ts): its foreign tax is not known, so the credit waits.
  */
+const incomeFacts = (inputs: ResolverInputs) =>
+  inputs.facts.filter((fact) => isInterestFactKey(fact.key) || isDividendFactKey(fact.key));
+
 const foreignIncomeWaits = (inputs: ResolverInputs) =>
-  inputs.facts.some(
-    (fact) =>
-      (isInterestFactKey(fact.key) || isDividendFactKey(fact.key)) &&
-      waitsForExchangeRate(fact.value),
-  );
+  incomeFacts(inputs).some((fact) => waitsForExchangeRate(fact.value));
+
+/* One that cannot be converted (an unsupported currency, a rate the tables lack): the credit is a gap. */
+const foreignIncomeGap = (inputs: ResolverInputs) =>
+  incomeFacts(inputs)
+    .map((fact) => exchangeRateGap(fact.value))
+    .find((gap) => gap !== undefined);
 
 /* Line h: a home address in a U.S. state is a U.S. resident (own reading, QUESTIONS.md). */
 function residentOf(inputs: ResolverInputs): string | undefined {
@@ -152,6 +157,7 @@ export function resolve1116Info(inputs: ResolverInputs): Form1116FilingInfo {
     residentOf: residentOf(inputs),
     k1Gap: k1.gap,
     taxesWaiting: k1.waiting || foreignIncomeWaits(inputs),
+    currencyGap: foreignIncomeGap(inputs),
     ...formGaps(inputs, sources, filesForm),
   };
   return {

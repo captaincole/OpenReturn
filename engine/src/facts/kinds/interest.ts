@@ -1,9 +1,9 @@
 import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";
-import type { IncomeCurrencyConversion } from "./foreignCurrency.js";
+import type { AmountBox, IncomeInForeignCurrency } from "./foreignCurrency.js";
 
-/* Amounts in U.S. dollars, or in the currency of `conversion` (foreignCurrency.ts). */
-export interface InterestFactValue {
+/* The 1099-INT as printed. */
+export interface InterestBoxes {
   payerName: string;
   payerTin?: string;
   box1?: number; // Interest income
@@ -22,7 +22,11 @@ export interface InterestFactValue {
   box15?: string; // State
   box16?: string; // State identification number
   box17?: number; // State income tax withheld
-  conversion?: IncomeCurrencyConversion;
+}
+
+/* Amounts in U.S. dollars, or in the currency of `foreignCurrency` (foreignCurrency.ts). */
+export interface InterestFactValue extends InterestBoxes {
+  foreignCurrency?: IncomeInForeignCurrency<AmountBox<InterestBoxes>>;
 }
 
 export interface InterestFact {

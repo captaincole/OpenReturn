@@ -17,6 +17,7 @@ import {
   thresholdTotals,
   valueRangeOf,
 } from "../../../../src/federal/8938/lines.js";
+import type { UnitsPerDollar } from "../../../../src/money.js";
 
 interface ExampleAsset {
   owner: ForeignAssetOwner;
@@ -190,9 +191,10 @@ describe("the reporting thresholds", () => {
 
 describe("values and boxes", () => {
   it("converts at the year-end rate and floors a negative value at zero", () => {
-    expect(dollarsOf(98000, 0.796)).toBeCloseTo(123115.58, 2);
+    const chf = 0.796 as UnitsPerDollar;
+    expect(dollarsOf(98000, chf)).toBeCloseTo(123115.58, 2);
     expect(dollarsOf(-500)).toBe(0);
-    expect(printedMaximum(98000, 0.796)).toBe(123116);
+    expect(printedMaximum(98000, chf)).toBe(123116);
     expect(printedMaximum(1912.5)).toBe(1913);
   });
 

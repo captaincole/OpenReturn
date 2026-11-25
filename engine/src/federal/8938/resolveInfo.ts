@@ -5,6 +5,7 @@ import {
   type ForeignFinancialAssetFact,
 } from "../../facts/index.js";
 import { filingStatusOf, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import { assetConversion, assetRate } from "./assetCurrency.js";
 import type { ForeignAccountOnReturn, Form8938Figured, Form8938FilingInfo } from "./filingInfo.js";
 import { dollarsOf } from "./lines.js";
 import { assetTaxItems, categoryItems } from "./partIII.js";
@@ -47,7 +48,14 @@ export function foreignAccountsOnReturn(inputs: ResolverInputs): ForeignAccountO
     .filter(isFinancialAccount)
     .map((asset) => ({
       country: countryOf(asset),
-      maximumDollars: dollarsOf(asset.value.maximumValue, asset.value.conversion?.exchangeRate),
+      /*
+       * An account in a currency the engine does not support counts as 0: the
+       * one-account test can then only miss a Yes, and Schedule B shows the
+       * gap when no other account answers it.
+       */
+      maximumDollars: assetConversion(asset.value)?.gap
+        ? 0
+        : dollarsOf(asset.value.maximumValue, assetRate(asset.value)),
     }));
 }
 
@@ -120,7 +128,10 @@ function figure(
 export function resolve8938Info(inputs: ResolverInputs): Form8938FilingInfo {
   const jointReturn = filingStatusOf(inputs) === "married_filing_jointly";
   const assets = assetsOnReturn(inputs, jointReturn);
-  const test = thresholdTest(inputs, assets, jointReturn);
+  const currencyGap = currencyGapOf(assets);
+  const test = currencyGap
+    ? { files: true, waitsFor: [], rule: "an asset's value cannot be converted to dollars" }
+    : thresholdTest(inputs, assets, jointReturn);
   const noReturnRequired = inputs.decisionByKey.get("decisions.scope.must_file_federal") === false;
   const mustFile = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_8938",
@@ -145,6 +156,14 @@ export function resolve8938Info(inputs: ResolverInputs): Form8938FilingInfo {
   return {
     ...filed,
     missingInputs: { "form-8938": waits },
-    form8938: figure(inputs, assets, excepted.counts),
+    form8938: { ...figure(inputs, assets, excepted.counts), currencyGap },
   };
 }
+
+/*
+ * An asset in a currency the engine does not support: who files and every
+ * line depend on its value in dollars, so the form files with every line
+ * unsupported (bindings.ts).
+ */
+const currencyGapOf = (assets: ForeignFinancialAssetFact[]) =>
+  assets.map((asset) => assetConversion(asset.value)?.gap).find((gap) => gap !== undefined);

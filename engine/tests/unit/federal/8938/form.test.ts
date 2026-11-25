@@ -98,7 +98,7 @@ const info = (facts: TaxFactRow[] = base.facts, decisions: AIDecisionRow[] = bas
 const ASSET = (slug: string) => makeForeignFinancialAssetFactKey(slug);
 
 describe("who files Form 8938", () => {
-  it("files for the amys couple: $382,943 at year end is over the $100,000 joint threshold", () => {
+  it("files for the amys couple: $383,666 at year end is over the $100,000 joint threshold", () => {
     const { files, missing } = evaluate();
     expect(files("form-8938")).toBe(true);
     expect(missing).toEqual([]);
@@ -138,7 +138,7 @@ describe("who files Form 8938", () => {
       ...baselCurrent,
       maximumValue: 40000,
       yearEndValue: 30000,
-      conversion: undefined,
+      foreignCurrency: undefined,
       closedOrDisposed: undefined,
     };
     const second = { ...polderNote, maximumValue: 40000, yearEndValue: 0 };
@@ -188,7 +188,7 @@ describe("a separate return", () => {
   it("leaves out the spouse's shares, and reports the joint account at its full value", () => {
     const figured = info(base.facts, separate).form8938;
     expect(figured?.partVI.map((each) => each.description)).toEqual([polderNote.description]);
-    expect(figured?.partV[0]).toMatchObject({ maximumValue: 122066, jointWithSpouse: true });
+    expect(figured?.partV[0]).toMatchObject({ maximumValue: 122209, jointWithSpouse: true });
     expect(figured?.otherAssets.totals.dividends).toBeUndefined();
   });
 
@@ -201,9 +201,9 @@ describe("the lines", () => {
   it("summarizes Part V by type and Part VI once per asset", () => {
     const { line } = evaluate();
     expect(line("0.line.5_number_deposit_accounts")).toBe(2);
-    expect(line("0.line.6_max_value_deposit_accounts")).toBe(122066 + 16834);
-    expect(line("0.line.8_max_value_custodial_accounts")).toBe(82347);
-    expect(line("0.line.11_max_value_foreign_assets")).toBe(221235 + 76500);
+    expect(line("0.line.6_max_value_deposit_accounts")).toBe(122209 + 16919);
+    expect(line("0.line.8_max_value_custodial_accounts")).toBe(82369);
+    expect(line("0.line.11_max_value_foreign_assets")).toBe(222399 + 76500);
   });
 
   it("prints one page 2 for each account and asset, and counts the additional statements", () => {
@@ -246,7 +246,7 @@ describe("the lines", () => {
     const credits =
       Number(line("0.line.13g_accounts_credits_col_c")) +
       Number(line("0.line.14g_other_assets_credits_col_c"));
-    // 138.54 + 187.39 = 325.93: the rounded lines and line 20 agree here.
+    // 138.53 + 189.23 = 327.76: the rounded lines (139 + 189) and line 20 (328) agree here.
     expect(credits).toBe(value("form-1040", "line.20"));
   });
 
@@ -310,7 +310,7 @@ describe("Schedule B line 7 from the account facts", () => {
   });
 
   it("counts a Part VI financial account alone for the $10,000 test", () => {
-    // Basel at CHF 7,000 ($8,794) does not settle question 2; the fund's $21,000 does.
+    // Basel at CHF 7,000 ($8,838 at the Treasury's 0.792) does not settle question 2; the fund's $21,000 does.
     const facts = factsWith({
       [ASSET("basel-current")]: { ...baselCurrent, maximumValue: 7000 },
       [ASSET("bologna-savings")]: undefined,
@@ -394,5 +394,17 @@ describe("Schedule B line 7 from the account facts", () => {
     expect(value("schedule-b", "0.line.7a_foreign_account_no")).toBe(true);
     expect(isGap(field("schedule-b", "0.line.7a_fincen_114_required_yes"))).toBe(false);
     expect(value("schedule-b", "0.line.7b_foreign_country_1")).toBeUndefined();
+  });
+});
+
+describe("an asset in a currency outside the H.10 release", () => {
+  it("files the form with every line unsupported, and asks nothing", () => {
+    const peso = { ...baselCurrent, foreignCurrency: { code: "ARS" } };
+    const { files, field, missing } = evaluate(factsWith({ [ASSET("basel-current")]: peso }));
+    expect(files("form-8938")).toBe(true);
+    expect(missing).toEqual([]);
+    for (const id of ["0.line.6_max_value_deposit_accounts", "1.line.23_account_maximum_value"]) {
+      expect(isGap(field("form-8938", id)), id).toBe(true);
+    }
   });
 });

@@ -18,6 +18,8 @@ export interface Form8938Figured {
   exceptedForms?: ExceptedFormsFactValue;
   /* The number of page 2s: one, or one for each account, asset or issuer page. */
   copies: number;
+  /* Why an asset's value cannot be converted (assetCurrency.ts): every line is unsupported. */
+  currencyGap?: string;
 }
 
 /*

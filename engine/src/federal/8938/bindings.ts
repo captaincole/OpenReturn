@@ -5,6 +5,7 @@
 
 import { defineForm, type BindingFn } from "../../defineForm.js";
 import type { ExceptedFormsFactValue } from "../../facts/index.js";
+import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { namesOnReturn } from "../returnNames.js";
 import type { Form8938FilingInfo } from "./filingInfo.js";
@@ -71,6 +72,19 @@ const header: Record<string, Fn> = {
   "0.line.4b_specified_person_tin": () => undefined,
 };
 
+/* An asset in a currency the engine does not support makes every line unsupported (resolveInfo.ts). */
+function unsupportedWithCurrencyGap(bindings: Record<string, Fn>): Record<string, Fn> {
+  return Object.fromEntries(
+    Object.entries(bindings).map(([fieldId, binding]): [string, Fn] => [
+      fieldId,
+      (form, info) => {
+        const gap = info.form8938?.currencyGap;
+        return gap === undefined ? binding(form, info) : unsupported(gap);
+      },
+    ]),
+  );
+}
+
 export function register(): void {
   const bindings: Record<string, Fn> = {
     ...header,
@@ -94,7 +108,7 @@ export function register(): void {
     ...partVIBindings(),
   };
   defineForm<Form8938, Form8938FilingInfo>("form-8938", {
-    bindings: bindings as Bindings,
+    bindings: unsupportedWithCurrencyGap(bindings) as Bindings,
     // The TIN widget (text, maxLength 11) keeps the dashes.
     formatters: {
       "0.header.tin": (value) => SSN.format(value as Parameters<typeof SSN.format>[0]),

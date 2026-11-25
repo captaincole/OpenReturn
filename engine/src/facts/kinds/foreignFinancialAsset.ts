@@ -38,17 +38,15 @@ export interface ForeignAddress {
 }
 
 /*
- * Lines 24–25 and 33–34: the value was figured in a foreign currency and
- * converted with the rate on the last day of the tax year
- * (irs-8938-inst-2025::sec::currency-determination-date::b01).
+ * Lines 24–25 and 33–34: the value is in a foreign currency. The engine
+ * converts it with the Treasury rate on the last day of the tax year
+ * (irs-8938-inst-2025::sec::foreign-currency-conversion::b01,
+ * currency-determination-date::b01), from its table (currency/rates.ts
+ * yearEndRate). The fact holds no rate.
  */
-export interface ForeignCurrencyConversion {
-  /* The currency the account is kept in, or the asset is denominated in: "Swiss franc (CHF)". */
-  currency: string;
-  /* Units of the currency per one U.S. dollar on the last day of the tax year (the Treasury's form). */
-  exchangeRate: number;
-  /* The source of the rate when the Treasury Bureau of the Fiscal Service gave none. Absent: the Treasury rate. */
-  rateSource?: string;
+export interface AssetInForeignCurrency {
+  /* ISO 4217: the currency the account is kept in, or the asset is denominated in. */
+  code: string;
 }
 
 /* Line 35: the asset is stock of, or an interest in, a foreign entity. */
@@ -85,13 +83,13 @@ export interface ForeignFinancialAssetFactValue {
   description?: string;
   /*
    * The highest fair market value during the tax year, in the currency of
-   * `conversion` (U.S. dollars without one). A value below zero counts as zero
+   * `foreignCurrency` (U.S. dollars without one). A value below zero counts as zero
    * (irs-8938-inst-2025::sec::assets-with-no-positive-value::b01).
    */
   maximumValue: number;
   /* The value on the last day of the tax year, in the same currency: 0 for an account closed or an asset disposed of. */
   yearEndValue: number;
-  conversion?: ForeignCurrencyConversion;
+  foreignCurrency?: AssetInForeignCurrency;
   /* "MM/DD/YYYY" or "Various": opened or acquired during the tax year. Absent: held before it began. */
   openedOrAcquired?: string;
   /* "MM/DD/YYYY" or "Various": closed or disposed of during the tax year. Absent: still held at its end. */
