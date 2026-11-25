@@ -114,8 +114,8 @@ const FORM_1099S_KEY = makeForm1099SFactKey("capitol-valley-title", "yard-closin
  * The five properties she sold in 2025. The yard land and its improvements
  * closed together on the one Form 1099-S ($60,000 + $40,000), so each states
  * its price. The federal schedule took the special allowance on the excavator
- * (2021), the improvements (2019) and the trailer (2025); the California
- * schedule did not.
+ * (2021) and the improvements (2019); the California schedule did not. The
+ * trailer was bought and sold in 2025, so neither schedule depreciates it.
  */
 const sales: Array<[string, BusinessPropertySaleFactValue]> = [
   [
@@ -181,8 +181,7 @@ const sales: Array<[string, BusinessPropertySaleFactValue]> = [
       dateSold: "2025-11-01",
       grossSalesPrice: 9000,
       costOrOtherBasis: 12000,
-      depreciationAllowed: 12000,
-      californiaDepreciationAllowed: 1700,
+      /* Placed in service and sold in 2025: no depreciation (irs-pub-946-2025::sec::excepted-property::b01). */
     },
   ],
 ];

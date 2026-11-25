@@ -80,12 +80,12 @@ describe("Schedule D-1 on the tylin return", () => {
 
   it("files, and line 21a goes to Schedule CA line 4 column B", () => {
     expect(run.files("schedule-d-1")).toBe(true);
-    expect(run.value("schedule-d-1", "1.line.19_federal_ordinary_gain_loss")).toBe(88000);
+    expect(run.value("schedule-d-1", "1.line.19_federal_ordinary_gain_loss")).toBe(76000);
     expect(run.value("schedule-d-1", "1.line.21a_federal_exceeds_california_difference")).toBe(
-      60800,
+      50500,
     );
-    expect(run.value("schedule-ca", "0.line.b4_federal")).toBe(88000);
-    expect(run.value("schedule-ca", LINE_4_B)).toBe(60800);
+    expect(run.value("schedule-ca", "0.line.b4_federal")).toBe(76000);
+    expect(run.value("schedule-ca", LINE_4_B)).toBe(50500);
     expect(run.value("schedule-ca", LINE_4_C)).toBeUndefined();
   });
 
@@ -121,7 +121,7 @@ describe("Schedule D-1 when California equals federal", () => {
 
   it("does not file; Schedule CA line 4 copies Schedule 1 line 4 with no adjustment", () => {
     expect(same.files("schedule-d-1")).toBe(false);
-    expect(same.value("schedule-ca", "0.line.b4_federal")).toBe(88000);
+    expect(same.value("schedule-ca", "0.line.b4_federal")).toBe(76000);
     expect(same.field("schedule-ca", LINE_4_B)?.ok).toBe(false);
     expect(same.value("schedule-ca", LINE_4_B)).toBeUndefined();
     expect(same.value("schedule-ca", "0.line.b3_subtractions")).toBeUndefined();

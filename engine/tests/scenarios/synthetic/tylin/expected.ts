@@ -41,20 +41,18 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "form-4797.0.line.9_line_7_minus_line_8": 22000,
       // Line 10, row 1 — (d) Gross sales price
       "form-4797.0.line.10_row1_col_d": 9000,
-      // Line 10, row 1 — (e) Depreciation allowed or allowable since acquisition
-      "form-4797.0.line.10_row1_col_e": 12000,
       // Line 10, row 1 — (f) Cost or other basis, plus improvements and expense of sale
       "form-4797.0.line.10_row1_col_f": 12000,
       // Line 10, row 1 — (g) Gain or (loss). Subtract (f) from the sum of (d) and (e)
-      "form-4797.0.line.10_row1_col_g": 9000,
+      "form-4797.0.line.10_row1_col_g": -3000,
       // Line 12 — Gain, if any, from line 7 or amount from line 8, if applicable
       "form-4797.0.line.12_gain_from_line_7_or_8": 3000,
       // Line 13 — Gain, if any, from line 31
       "form-4797.0.line.13_gain_from_line_31": 76000,
       // Line 17 — Combine lines 10 through 16
-      "form-4797.0.line.17_ordinary_gain_loss_total": 88000,
+      "form-4797.0.line.17_ordinary_gain_loss_total": 76000,
       // Line 18b — Redetermine the gain or (loss) on line 17 excluding the loss, if any, on line 1
-      "form-4797.0.line.18b_redetermined_ordinary_gain_loss": 88000,
+      "form-4797.0.line.18b_redetermined_ordinary_gain_loss": 76000,
       // Line 20 — Gross sales price — Property A
       "form-4797.1.line.20_gross_sales_price_col_a": 48000,
       // Line 20 — Gross sales price — Property B
@@ -166,49 +164,31 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
   "form-8995-a": {
     engineFields: {
       // Line 2 — Qualified business income from the trade, business, or aggregation (Column A)
-      "form-8995-a.0.line.2_a": 175173,
+      "form-8995-a.0.line.2_a": 163173,
       // Line 3 — Multiply line 2 by 20% (0.20) (Column A)
-      "form-8995-a.0.line.3_a": 35035,
-      // Line 12 — Phased-in reduction. Enter the amount from line 26, if any (Column A)
-      "form-8995-a.0.line.12_a": 29343,
+      "form-8995-a.0.line.3_a": 32635,
       // Line 13 — Qualified business income deduction before patron reduction. Enter the greater o
-      "form-8995-a.0.line.13_a": 29343,
+      "form-8995-a.0.line.13_a": 32635,
       // Line 15 — Qualified business income component. Subtract line 14 from line 13 (Column A)
-      "form-8995-a.0.line.15_a": 29343,
+      "form-8995-a.0.line.15_a": 32635,
       // Line 16 — Total qualified business income component. Add all amounts reported on line 15
-      "form-8995-a.0.line.16": 29343,
-      // Line 17 — Enter the amounts from line 3, Column A
-      "form-8995-a.1.line.17_a": 35035,
-      // Line 19 — Subtract line 18 from line 17, Column A
-      "form-8995-a.1.line.19_a": 35035,
-      // Line 20 — Taxable income before qualified business income deduction
-      "form-8995-a.1.line.20": 205423,
-      // Line 21 — Threshold. Enter $197,300 ($394,600 if married filing jointly)
-      "form-8995-a.1.line.21": 197300,
-      // Line 22 — Subtract line 21 from line 20
-      "form-8995-a.1.line.22": 8123,
-      // Line 23 — Phase-in range. Enter $50,000 ($100,000 if married filing jointly)
-      "form-8995-a.1.line.23": 50000,
-      // Line 25 — Total phase-in reduction. Multiply line 19 by line 24, Column A
-      "form-8995-a.1.line.25_a": 5692,
-      // Line 26 — Qualified business income after phase-in reduction, Column A
-      "form-8995-a.1.line.26_a": 29343,
+      "form-8995-a.0.line.16": 32635,
       // Line 27 — Total qualified business income component from all qualified trades, businesses,
-      "form-8995-a.1.line.27": 29343,
+      "form-8995-a.1.line.27": 32635,
       // Line 32 — Qualified business income deduction before the income limitation. Add lines 27 a
-      "form-8995-a.1.line.32": 29343,
+      "form-8995-a.1.line.32": 32635,
       // Line 33 — Taxable income before qualified business income deduction
-      "form-8995-a.1.line.33": 205423,
+      "form-8995-a.1.line.33": 193423,
       // Line 34 — Enter your net capital gain, if any, increased by any qualified dividends
       "form-8995-a.1.line.34": 22000,
       // Line 35 — Subtract line 34 from line 33. If zero or less, enter -0-
-      "form-8995-a.1.line.35": 183423,
+      "form-8995-a.1.line.35": 171423,
       // Line 36 — Income limitation. Multiply line 35 by 20% (0.20)
-      "form-8995-a.1.line.36": 36685,
+      "form-8995-a.1.line.36": 34285,
       // Line 37 — Qualified business income deduction before the domestic production activities de
-      "form-8995-a.1.line.37": 29343,
+      "form-8995-a.1.line.37": 32635,
       // Line 39 — Total qualified business income deduction. Add lines 37 and 38
-      "form-8995-a.1.line.39": 29343,
+      "form-8995-a.1.line.39": 32635,
     },
   },
   "schedule-1": {
@@ -216,9 +196,9 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 3 — Business income or (loss). Attach Schedule C
       "schedule-1.0.line.3": 93800,
       // Line 4 — Other gains or (losses)
-      "schedule-1.0.line.4": 88000,
+      "schedule-1.0.line.4": 76000,
       // Line 10 — Combine lines 1 through 7 and 9. This is your additional income
-      "schedule-1.0.line.10": 181800,
+      "schedule-1.0.line.10": 169800,
       // Line 15 — Deductible part of self-employment tax (attach Schedule SE)
       "schedule-1.1.line.15": 6627,
       // Line 26 — Adjustments to income. Add lines 11 through 23 and 25
@@ -242,33 +222,33 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 7a — Capital gain or (loss). Attach Schedule D if required
       "form-1040.line.7a": 22000,
       // Line 8 — Additional income from Schedule 1, line 10
-      "form-1040.line.8": 181800,
+      "form-1040.line.8": 169800,
       // Line 9 — Add lines 1z, 2b, 3b, 4b, 5b, 6b, 7a, and 8. This is your total income
-      "form-1040.line.9": 227800,
+      "form-1040.line.9": 215800,
       // Line 10 — Adjustments to income from Schedule 1, line 26
       "form-1040.line.10": 6627,
       // Line 11a — Subtract line 10 from line 9. This is your adjusted gross income
-      "form-1040.line.11a": 221173,
+      "form-1040.line.11a": 209173,
       // Line 11b — Amount from line 11a (adjusted gross income)
-      "form-1040.line.11b": 221173,
+      "form-1040.line.11b": 209173,
       // Line 12e — Standard deduction or itemized deductions (from Schedule A)
       "form-1040.line.12e": 15750,
       // Line 13a — Qualified business income deduction from Form 8995 or Form 8995-A
-      "form-1040.line.13a": 29343,
+      "form-1040.line.13a": 32635,
       // Line 14 — Add lines 12e, 13a, and 13b
-      "form-1040.line.14": 45093,
+      "form-1040.line.14": 48385,
       // Line 15 — Subtract line 14 from line 11b. Taxable income
-      "form-1040.line.15": 176080,
+      "form-1040.line.15": 160788,
       // Line 16 — Tax (see instructions)
-      "form-1040.line.16": 33126,
+      "form-1040.line.16": 29456,
       // Line 18 — Add lines 16 and 17
-      "form-1040.line.18": 33126,
+      "form-1040.line.18": 29456,
       // Line 22 — Subtract line 21 from line 18. If zero or less, enter -0-
-      "form-1040.line.22": 33126,
+      "form-1040.line.22": 29456,
       // Line 23 — Other taxes, including self-employment tax, from Schedule 2, line 21
       "form-1040.line.23": 13253,
       // Line 24 — Add lines 22 and 23. Total tax
-      "form-1040.line.24": 46379,
+      "form-1040.line.24": 42709,
       // Line 25a — Federal income tax withheld from Form(s) W-2
       "form-1040.line.25a": 1800,
       // Line 25d — Add lines 25a through 25c
@@ -276,7 +256,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 33 — Add lines 25d, 26, and 32. Total payments
       "form-1040.line.33": 1800,
       // Line 37 — Amount you owe
-      "form-1040.line.37": 44579,
+      "form-1040.line.37": 40909,
     },
   },
   "schedule-d-1": {
@@ -307,26 +287,24 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "schedule-d-1.0.line.9_line_7_minus_line_8": 25500,
       // Line 10(d). Gross sales price (1).
       "schedule-d-1.0.line.10_row1_col_d": 9000,
-      // Line 10(e). Depreciation allowed or allowable since acquisition (1).
-      "schedule-d-1.0.line.10_row1_col_e": 1700,
       // Line 10(f). Cost or other basis, plus improvements and expense of sale (1).
       "schedule-d-1.0.line.10_row1_col_f": 12000,
       // Line 10(g). Gain or (Loss) Subtract (f) from the sum of (d) and (e) (1).
-      "schedule-d-1.0.line.10_row1_col_g": -1300,
+      "schedule-d-1.0.line.10_row1_col_g": -3000,
       // Line 12. Gain, if any, from line 7, or amount from line 8, if applicable. See instructions
       "schedule-d-1.0.line.12_gain_from_line_7_or_8": 2500,
       // Line 13. Gain, if any, from line 34.
       "schedule-d-1.0.line.13_gain_from_line_34": 26000,
       // Line 17. Combine line 10 through line 16.
-      "schedule-d-1.0.line.17_total_ordinary_gain_loss": 27200,
+      "schedule-d-1.0.line.17_total_ordinary_gain_loss": 25500,
       // Line 18b. Redetermine the gain or (loss) on line 17, excluding the loss, if any, on line 1
-      "schedule-d-1.0.line.18b_redetermined_gain_loss": 27200,
+      "schedule-d-1.0.line.18b_redetermined_gain_loss": 25500,
       // Part II, Section B, Line 19. Enter ordinary federal gain or (loss) from federal Schedule 1
-      "schedule-d-1.1.line.19_federal_ordinary_gain_loss": 88000,
+      "schedule-d-1.1.line.19_federal_ordinary_gain_loss": 76000,
       // Line 20. Enter ordinary California gain or (loss) from line 18b.
-      "schedule-d-1.1.line.20_california_ordinary_gain_loss": 27200,
+      "schedule-d-1.1.line.20_california_ordinary_gain_loss": 25500,
       // Line 21a. If line 19 is more than line 20, enter the difference here and on Schedule C A (
-      "schedule-d-1.1.line.21a_federal_exceeds_california_difference": 60800,
+      "schedule-d-1.1.line.21a_federal_exceeds_california_difference": 50500,
       // Line 23. Gross sales price, Property A.
       "schedule-d-1.1.line.23_gross_sales_price_col_a": 48000,
       // Line 23. Gross sales price, Property B.
@@ -396,13 +374,13 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 3 . Column B. Subtractions.
       "schedule-ca.0.line.b3_subtractions": 9000,
       // Line 4. Other gains or (losses). Column A. Federal Amounts.
-      "schedule-ca.0.line.b4_federal": 88000,
+      "schedule-ca.0.line.b4_federal": 76000,
       // Line 4. Column B. Subtractions.
-      "schedule-ca.0.line.b4_subtractions": 60800,
+      "schedule-ca.0.line.b4_subtractions": 50500,
       // Line 10. Total. Add Section A, line 1z through line 7a, and Section B, line 1 through line
-      "schedule-ca.2.line.b10_federal": 227800,
+      "schedule-ca.2.line.b10_federal": 215800,
       // Line 10. Column B. Subtractions.
-      "schedule-ca.2.line.b10_subtractions": 69800,
+      "schedule-ca.2.line.b10_subtractions": 59500,
       // Line 10. Column C. Additions.
       "schedule-ca.2.line.b10_additions": 3500,
       // Line 15. Deductible part of self-employment tax. See instructions. Column A. Federal Amoun
@@ -410,9 +388,9 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 26. Add line 11 through line 23 and line 25 in columns A, B, and C. See instructions.
       "schedule-ca.3.line.c26_federal": 6627,
       // Line 27. Total. Subtract line 26 from line 10 in columns A, B, and C. See instructions. Co
-      "schedule-ca.3.line.c27_federal": 221173,
+      "schedule-ca.3.line.c27_federal": 209173,
       // Line 27. Column B. Subtractions.
-      "schedule-ca.3.line.c27_subtractions": 69800,
+      "schedule-ca.3.line.c27_subtractions": 59500,
       // Line 27. Column C. Additions.
       "schedule-ca.3.line.c27_additions": 3500,
       // Line 30. Enter the larger of the amount on line 29 or your standard deduction shown below:
@@ -430,31 +408,31 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Taxable Income. Line 12. State wages from your federal Form or Forms W-2, box 16 .
       "form-540.line.12_state_wages": 24000,
       // Line 13. Enter federal adjusted gross income (A G I) from federal Form 1040 or 1040-SR, li
-      "form-540.line.13_federal_agi": 221173,
+      "form-540.line.13_federal_agi": 209173,
       // Line 14. California adjustments – subtractions. Enter the amount from Schedule CA (540), P
-      "form-540.line.14_ca_adjustments_subtractions": 69800,
+      "form-540.line.14_ca_adjustments_subtractions": 59500,
       // Line 15. Subtract line 14 from line 13. If less than zero, enter the result in parentheses
-      "form-540.line.15_ca_agi_before_additions": 151373,
+      "form-540.line.15_ca_agi_before_additions": 149673,
       // Line 16. California adjustments – additions. Enter the amount from Schedule CA (540), Part
       "form-540.line.16_ca_adjustments_additions": 3500,
       // Line 17. California adjusted gross income. Combine line 15 and line 16.
-      "form-540.line.17_ca_agi": 154873,
+      "form-540.line.17_ca_agi": 153173,
       // Line 18. Enter the larger of your California itemized deductions from Schedule CA (540), P
       "form-540.line.18_deductions": 5706,
       // Line 19. Subtract line 18 from line 17. This is your taxable income. If less than zero, en
-      "form-540.line.19_taxable_income": 149167,
+      "form-540.line.19_taxable_income": 147467,
       // Line 31. Tax amount.
-      "form-540.line.31_tax_amount": 10311,
+      "form-540.line.31_tax_amount": 10153,
       // Line 32. Exemption credits. Enter the amount from line 11. If your federal adjusted gross
       "form-540.line.32_exemption_credits": 153,
       // Line 33. Subtract line 32 from line 31. If less than zero, enter 0.
-      "form-540.line.33_tax_after_exemption_credits": 10158,
+      "form-540.line.33_tax_after_exemption_credits": 10000,
       // Line 35. Add line 33 and line 34.
-      "form-540.line.35_total_tax_after_credits": 10158,
+      "form-540.line.35_total_tax_after_credits": 10000,
       // Line 48. Subtract line 47 from line 35. If less than zero, enter 0.
-      "form-540.line.48_tax_after_credits": 10158,
+      "form-540.line.48_tax_after_credits": 10000,
       // Line 64. Add line 48, line 61, line 62, and line 63. This is your total tax.
-      "form-540.line.64_total_tax": 10158,
+      "form-540.line.64_total_tax": 10000,
       // Payments. Line 71. California income tax withheld. See instructions.
       "form-540.line.71_ca_income_tax_withheld": 700,
       // Line 78. Add line 71 through line 77. These are your total payments. See instructions.
@@ -464,11 +442,11 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 95. Payments after Individual Shared Responsibility penalty. If line 93 is more than
       "form-540.line.95_payments_after_isr_penalty": 700,
       // Line 100. Tax due. If line 95 is less than line 64, subtract line 95 from line 64.
-      "form-540.line.100_tax_due": 9458,
+      "form-540.line.100_tax_due": 9300,
       // Amount You Owe. Line 111. Amount You Owe. If you do not have an amount on line 99, add lin
-      "form-540.line.111_amount_you_owe": 9458,
+      "form-540.line.111_amount_you_owe": 9300,
       // Line 114. Total amount due. See instructions. Enclose, but do not staple, any payment.
-      "form-540.line.114_total_amount_due": 9458,
+      "form-540.line.114_total_amount_due": 9300,
     },
   },
 };

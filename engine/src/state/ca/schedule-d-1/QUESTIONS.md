@@ -6,92 +6,119 @@ Schedule D-1 is federal Form 4797 with California amounts, so the doubts of
 `federal/4797/QUESTIONS.md` hold here too (more than one property per part,
 Part IV statements, line 11 at 0, abandonments).
 
-1. **Line 30b, farmland held 10 years or longer.** "Enter 100% of line 30a on
-   line 30b if your property was held for 10 years or longer"
+## Two texts conflict
+
+Each is decided by the author and waits for a person's review: a `DECISION`
+comment in the code and a row in `docs/rule-decisions.md` (section "Decided by
+the author, waiting for a person's review").
+
+1. **Line 30b, farmland held 10 years or longer (A1).** "Enter 100% of line 30a
+   on line 30b if your property was held for 10 years or longer"
    (ca-540-sched-d1-inst-2025::sec::irc-section-1252-property::b01). The same
    block: ordinary income on farmland "held more than one year but less than 10
-   years". Decided (DECISION in `lines.ts`, `docs/rule-decisions.md`): the
-   federal percentage, and no line 30 from the 10th year. Changes dollars: yes.
+   years". Decided (`lines.ts`): the federal percentage, and no line 30 from the
+   10th year. Changes dollars: yes.
 
-2. **California amounts default to the federal ones.** A sale or recapture fact
-   holds a California field only when the amount differs (as `depreciation.ts`
-   does). Default: an absent field is the federal amount. Changes dollars: yes,
-   if a difference is not stated.
+2. **Part IV column (a): which property (A2).** The bullets in part-iv::b01
+   ("not used predominantly in your trade or business at any time", "ceased to
+   be qualified property before the close of the second taxable year") read
+   against the form's heading, "When Business Use Drops to 50% or Less", and
+   purpose item 6 (a-purpose::b03). Decided (`facts/kinds/section179Recapture.ts`):
+   the heading and federal Form 4797, business use fell to 50% or less this year.
+   Changes dollars: yes, the whole recapture.
 
-3. **Line 29a and 29d periods.** California counts additional depreciation after
-   1976 and from 1971 through 1976 (irc-section-1250-property::b01); federal after
-   1975 and from 1970 through 1975. Default: for property acquired in 1977 or
-   later the federal amounts serve; before 1977, or with a different California
-   depreciation, the sale must state the California amounts, else the schedule
-   is a gap. A California additional depreciation of 0 is straight line: lines
-   29a–29e are blank and 29g is 0. Changes dollars: no (a gap).
+3. **Line 37 years (A3).** Column (b): "from the year it was placed in service to
+   the current year" (part-iv::b02); federal line 34, "up to (but not including)
+   the current year". Decided (same file): through 2024 for column (b), through
+   2025 for column (a), as federal. Changes dollars: yes, one year of
+   depreciation on the listed property.
 
-4. **R&TC 18171 and the section 1250(b) modifications** (irc-section-1250-property::b01).
-   Not read: the corpus has no R&TC text. Default: the federal rules with the
-   stated California amounts. Changes dollars: possibly, for old property.
+## Should we do this now
 
-5. **Who files.** "Complete and attach this form ... only if your California
-   gains or losses ... are different" (a-purpose::b01). Default: a fact states a
-   California amount that differs, and line 18b, the section 1231 gain to
-   Schedule D, or a Part IV recapture differs from federal Form 4797 (or cannot be
-   compared yet). A different basis that changes no gain files nothing. Changes
-   dollars: no.
+4. **California amounts default to the federal ones.** Done. A sale or recapture
+   fact holds a California field only when the amount differs (as
+   `depreciation.ts` does); an absent field is the federal amount. Changes
+   dollars: yes, if a difference is not stated.
 
-6. **Line 8, California nonrecaptured losses.** Prior California losses can differ.
-   Default: the California answer when stated, else the federal answer; when both
-   are missing and line 7 is a gain, the schedule asks for the federal answer.
-   Changes dollars: yes, if the California amount differs and is not stated.
+5. **Line 29a and 29d periods.** Done. California counts additional depreciation
+   after 1976 and from 1971 through 1976 (irc-section-1250-property::b01);
+   federal after 1975 and from 1970 through 1975. For property acquired in 1977
+   or later the federal amounts serve; before 1977, or with a different
+   California depreciation, the sale must state the California amounts, else the
+   schedule is a gap. A California additional depreciation of 0 is straight
+   line: lines 29a–29e are blank and 29g is 0. Changes dollars: no (a gap).
 
-7. **Lines 3, 4, 5, 14, 15, 16, 18a.** Federal Form 4684 Section B, FTB 3805E and
-   federal Form 8824 have no rules. Default: the lines are unsupported; FTB 3805E
-   or Form 8824 filing (by decision) makes lines 7–21 a gap. Changes dollars: no.
+6. **R&TC 18171 and the section 1250(b) modifications** (irc-section-1250-property::b01).
+   Not now: the corpus has no R&TC text, and only old property is affected. The
+   engine applies the federal rules with the stated California amounts. Changes
+   dollars: possibly, for old property.
 
-8. **A passive loss.** "Get form FTB 3801 ... to see how much of the loss is
-   allowed before entering it on Schedule D-1" (b-special-rules::b07). FTB 3801
-   reads no Schedule D-1 amount. Default: a loss on line 2 or 10 while FTB 3801
-   files makes lines 7–21 a gap. A federal summary gap (a K-1 section 1231 item,
-   Form 8582 with a loss) is a gap here too, because line 19 copies the federal
-   line. Changes dollars: no (a gap).
+7. **Who files.** Done. "Complete and attach this form ... only if your
+   California gains or losses ... are different" (a-purpose::b01). The schedule
+   files when a fact states a California amount that differs, and line 18b, the
+   section 1231 gain to Schedule D, or a Part IV recapture differs from federal
+   Form 4797 (or cannot be compared yet). A different basis that changes no gain
+   files nothing. Changes dollars: no.
 
-9. **Line 38 destination.** "Enter on the line for reporting the type of business
-   income that resulted in the recapture" (part-iv::b03). Default: a recapture
-   that names a Schedule C business on the return goes to Schedule CA line 3; any
-   other makes that column's line 38 a gap, and Schedule CA line 3 a gap when its
-   amounts differ. A passive business's recapture is not sent through FTB 3801.
-   Changes dollars: no for the figured cases.
+8. **Line 8, California nonrecaptured losses.** Done. The California answer when
+   stated, else the federal answer; when both are missing and line 7 is a gain,
+   the schedule asks for the federal answer. Changes dollars: yes, if the
+   California amount differs and is not stated.
 
-10. **Schedule D (540) line 1 row.** The form says to enter the gain on line 1 and
-    names no columns. Default: one row, "Schedule D-1, net section 1231 gain",
+9. **Lines 3, 4, 5, 14, 15, 16, 18a.** Not now: federal Form 4684 Section B,
+   FTB 3805E and federal Form 8824 have no rules, and each is its own form. The
+   lines are unsupported; FTB 3805E or Form 8824 filing (by decision) makes
+   lines 7–21 a gap. Changes dollars: no.
+
+10. **A passive loss.** Not now: it needs a change to FTB 3801 (see "Proposals
+    for a discussion"). "Get form FTB 3801 ... to see how much of the loss is
+    allowed before entering it on Schedule D-1" (b-special-rules::b07). A loss on
+    line 2 or 10 while FTB 3801 files makes lines 7–21 a gap. A federal summary
+    gap (a K-1 section 1231 item, Form 8582 with a loss) is a gap here too,
+    because line 19 copies the federal line. Changes dollars: no (a gap).
+
+11. **Line 38 destination.** Done for a Schedule C business; not now for the
+    others, because Schedule CA has no line rule yet that takes a farm or rental
+    recapture difference. "Enter on the line for reporting the type of business
+    income that resulted in the recapture" (part-iv::b03). A recapture that names
+    a Schedule C business on the return goes to Schedule CA line 3; any other
+    makes that column's line 38 a gap, and Schedule CA line 3 a gap when its
+    amounts differ. A passive business's recapture is not sent through FTB 3801.
+    Changes dollars: no for the figured cases.
+
+12. **Schedule D (540) line 1 row.** Done. The form says to enter the gain on
+    line 1 and names no columns. One row, "Schedule D-1, net section 1231 gain",
     with the gain in column (e) and columns (b) to (d) blank. With no California
     difference Schedule D-1 does not file, and the row carries the same gain as
     federal Schedule D line 11 when Schedule D (540) files for another reason.
     Changes dollars: no.
 
-11. **Lines 19–21 when a line is blank.** Default: a blank line 19 or 20 counts as
+13. **Lines 19–21 when a line is blank.** Done. A blank line 19 or 20 counts as
     0 (no ordinary gain or loss). Changes dollars: no.
 
-12. **Form 540NR and Schedule CA (540NR).** The engine's Form 540NR has no rules.
-    Default: Schedule D-1 files only on Form 540. Changes dollars: no.
+14. **Form 540NR and Schedule CA (540NR).** Not now: the engine's Form 540NR has
+    no rules. Schedule D-1 files only on Form 540. Changes dollars: no.
 
-13. **Copies.** "If you have more than 4 transactions to report, use additional
-    forms" (part-iii::b01). Lines 2 and 10 have three rows. Default: copy n holds
-    rows 3n to 3n + 2 of lines 2 and 10 and columns 4n to 4n + 3 of Part III; the
-    totals print on the first copy only. Changes dollars: no.
+15. **Copies.** Done. "If you have more than 4 transactions to report, use
+    additional forms" (part-iii::b01). Lines 2 and 10 have three rows. Copy n
+    holds rows 3n to 3n + 2 of lines 2 and 10 and columns 4n to 4n + 3 of Part
+    III; the totals print on the first copy only. Part IV has one column per
+    kind (section 179, section 280F) and adds every property's recapture, as
+    federal Form 4797 does. Changes dollars: no.
 
-14. **Part IV column (a): which property.** The bullets in part-iv::b01 ("not
-    used predominantly in your trade or business at any time", "ceased to be
-    qualified property before the close of the second taxable year") read
-    against the form's heading, "When Business Use Drops to 50% or Less", and
-    purpose item 6 (a-purpose::b03). Decided (DECISION in
-    `facts/kinds/section179Recapture.ts`, `docs/rule-decisions.md` A2): the
-    heading and federal Form 4797, business use fell to 50% or less this year.
-    Changes dollars: yes, the whole recapture.
+16. **Depreciation on property bought and sold in the same year.** Not now: the
+    sale fact's depreciation is the taxpayer's stated record, and federal Form
+    4797 reads the same fact, so a check belongs on the fact kind for both forms.
+    Property "placed in service and disposed of in the same year" takes no
+    depreciation (irs-pub-946-2025::sec::excepted-property::b01); the made-up
+    taxpayers `tylin` and `beslan` follow it. Changes dollars: no.
 
-15. **Line 37 years.** Column (b): "from the year it was placed in service to the
-    current year" (part-iv::b02); federal line 34, "up to (but not including) the
-    current year". Decided (same file, A3): through 2024 for column (b), through
-    2025 for column (a), as federal. Changes dollars: yes, one year of
-    depreciation on the listed property.
+## Pattern change
+
+None. Before: a California form that mirrors a federal form already called the
+federal line functions (FTB 3885A calls Form 4562's). After: Schedule D-1 does
+the same with Form 4797's, on a sale whose amounts are swapped for the
+California ones (`california.ts`).
 
 ## Second opinions
 
@@ -101,7 +128,7 @@ Part IV statements, line 11 at 0, abandonments).
   when Part III's line 35 is 0 (cases 3 and 4; line 6 in case 14), and lines
   13, 17, 18b and 20
   when a Part III column has no recapture (cases 7, 8). The blind fill made the
-  same choice as the engine on items 1, 3, 14 and 15.
+  same choice as the engine on items 1, 2, 3 and 5.
 - PolicyEngine-US 2.153.8 (commit b3edc044, 2026-11-23; sparse checkout of
   `gov/irs` and `gov/states/ca` variables and parameters): it does not model
   Form 4797 or Schedule D-1. The Form 4797 gain is a bare input
@@ -125,7 +152,7 @@ Part IV statements, line 11 at 0, abandonments).
 | Lines 2, 6–13, 17, 18b (Parts I and II) | published example with numbers (federal examples, California amounts equal) |
 | Lines 19–21b | stated rule |
 | Lines 22–28b, 31a–32b (Part III) | published example with numbers (Pub. 544 truck); California amounts own reading |
-| Lines 29a–29g | stated rule; California periods own reading (item 3) |
+| Lines 29a–29g | stated rule; California periods own reading (item 5) |
 | Lines 30a–30c | published example (Pub. 225 logic) and a decision (item 1) |
 | Lines 33–35 | published example with numbers |
 | Lines 36–38 | published example with numbers (Pub. 946) |

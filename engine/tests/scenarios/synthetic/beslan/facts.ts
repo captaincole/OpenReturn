@@ -149,7 +149,7 @@ const sales: Array<[string, BusinessPropertySaleFactValue]> = [
       dateSold: "2025-12-05",
       grossSalesPrice: 30000,
       costOrOtherBasis: 34000,
-      depreciationAllowed: 6800,
+      /* Placed in service and sold in 2025: no depreciation (irs-pub-946-2025::sec::excepted-property::b01). */
       californiaCostOrOtherBasis: 31000,
     },
   ],
