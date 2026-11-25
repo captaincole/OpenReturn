@@ -1,6 +1,6 @@
 ---
 name: create-input-documents
-description: Find the input documents a scenario needs (W-2, 1099s, SSA-1099, invoices) and make the missing ones as fake PDFs from a committed generator, so the scenario tests Cade's document reading too. A first document of its type stops for a person's review. Use when adding a scenario, or when a binding or catalog run finds a line that needs a document the scenario lacks.
+description: Find the input documents a scenario needs (W-2, 1099s, SSA-1099, invoices) and make the missing ones as fake PDFs from a committed generator, so the scenario tests Cade's document reading too. A first document of its type is compared with real examples found online. Use when adding a scenario, or when a binding or catalog run finds a line that needs a document the scenario lacks.
 argument-hint: <scenario>  e.g. carter
 ---
 
@@ -38,7 +38,12 @@ Use fake data only: invented names and addresses, and SSNs, EINs and TINs in the
 - **The first document of its type:** write the generator. It is one exported function that takes the fact's value object (the type from `engine/src/facts/kinds/`) and the names and addresses, and returns the PDF bytes. Then the document and the fact cannot disagree. Print only the values the fact holds; never work one out from the others. Copy the drawing helpers you need from `marcus/generate-docs.ts` into `documents/draw.ts`. Follow the official form's box numbers and labels.
 - In the scenario's `generate-docs.ts`, take the values from the same objects `facts.ts` uses. Run it: `npx tsx tests/scenarios/<scenario>/generate-docs.ts` from `engine/`.
 
-**A first document of its type stops here.** Show the person the PDF path and the generator, and wait for their review. Do not use the document before they approve it.
+**A first document of its type is compared with real examples.** No person reviews it first. Do this before the document is used:
+
+1. Search the web for 2 or 3 real examples of the document: the official blank form for an IRS or FTB document, or a sample, a template or a program's required format for a document with no official form (an invoice, a statement).
+2. Compare field by field: what each real example has, what ours has, and whether every fact the engine reads can be found on ours.
+3. Add what a real one normally has, and remove what no real one would have. Every name, address and number stays made up; never copy a real business's name, logo or licence number.
+4. Write the result in the scenario README under "Compared with real examples": each source as a link, and one line on what matched and what changed. Name the comparison in the pull request.
 
 ## 4. Check the documents against the facts
 
