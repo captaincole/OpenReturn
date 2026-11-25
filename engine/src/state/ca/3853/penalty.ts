@@ -64,7 +64,8 @@ export interface HouseholdIncome {
 /*
  * A member's own MAGI: `printed` in Part I, `counted` in the household income (Step 3 questions 4 to 6).
  *
- * DECISION (2026-11-24, by the author, not reviewed by a person): whether the
+ * DECISION (2026-11-25): a person confirmed the author's choice of 2026-11-24
+ * ("only include claimed dependents, not everyone in the household"). Whether the
  * MAGI of a person the taxpayer can claim but does not claim counts in the
  * applicable household income. The Definitions say "your applicable household
  * income is your modified adjusted gross income (MAGI) plus the MAGI of each
