@@ -97,20 +97,25 @@ function federalLine7a(
 
 /*
  * MANUAL EDIT: line 10 (federal 1040 line 7a) holds Form 4797's section 1231 gain
- * through federal Schedule D line 11, and line 11 holds only the capital asset
- * sales. A business property gain that is the same on both returns needs no
- * adjustment (ca-540-sched-d1-inst-2025::sec::a-purpose::b01), but the
- * instructions name no line of this form for California's gain, and the engine
- * has no Schedule D-1. So lines 12a and 12b are a gap while Form 4797 sends an
- * amount, or a gap, to federal Schedule D line 11.
+ * through federal Schedule D line 11. Line 1 holds California's: Schedule D-1
+ * line 7 or 9, "enter the gain on Schedule D (540 or 540NR), line 1" (the text
+ * under Schedule D-1 lines 7 and 9). With no California difference, Schedule D-1
+ * does not file and its figures equal the federal ones, so line 1 carries the
+ * same gain. Lines 12a and 12b are a gap only while California's gain is not
+ * figured (a Schedule D-1 gap) and Form 4797 sends an amount, or a gap, to
+ * federal Schedule D line 11.
  */
 export function form4797Gap(info: ScheduleDCaFilingInfo): Unsupported | undefined {
   if (!form4797Files(info)) return undefined;
   const sent = scheduleDGainFromForm4797(info);
   if (sent === undefined) return undefined;
-  return unsupported(
-    "Federal Schedule D line 11 holds a Form 4797 section 1231 amount, which line 10 includes and line 11 does not; the instructions name no Schedule D (540) line for California's section 1231 gain, and the engine has no Schedule D-1.",
-  );
+  const california = info.californiaSection1231Gain;
+  if (california === undefined) {
+    return unsupported(
+      "Federal Schedule D line 11 holds a Form 4797 section 1231 amount, and California's section 1231 gain (Schedule D-1) is figured only on a Form 540 return.",
+    );
+  }
+  return california.gap === undefined ? undefined : unsupported(`Schedule D-1: ${california.gap}`);
 }
 
 /* Lines 12a and 12b: line 10 against line 11. */

@@ -126,7 +126,40 @@ export interface BusinessPropertySaleFactValue {
   businessId?: string;
   /* A rental property's sale: the rental (rental.ts propertyId). Never with a business's id. */
   rentalId?: string;
+  /*
+   * California Schedule D-1 (ca-540-sched-d1-inst-2025). Each California amount
+   * is the federal amount unless the field says otherwise, as in depreciation.ts.
+   * The basis "may have been required to reduce ... for California purposes"
+   * (part-i::b02); the depreciation uses the California section 179 expense
+   * (R&TC 17201) and no federal special allowance (part-iii::b01).
+   */
+  californiaCostOrOtherBasis?: number;
+  /* Line 2 or 10 column (e) / line 25: California depreciation allowed or allowable. */
+  californiaDepreciationAllowed?: number;
+  /*
+   * Section 1250 property, line 29a: California additional depreciation after
+   * December 31, 1976 (irc-section-1250-property::b01). The federal line 26a
+   * counts from 1975, so property acquired before 1977 needs this field.
+   */
+  californiaAdditionalDepreciationAfter1976?: number;
+  /* Section 1250 property, line 29d: after December 31, 1970 and before January 1, 1977. */
+  californiaAdditionalDepreciation1971To1976?: number;
+  /*
+   * Section 1254 property, line 31a: the intangible drilling and development
+   * costs deducted for California. California allows no section 263(c)
+   * deduction for costs paid on or after January 1, 2024 (general-information::b02).
+   */
+  californiaSection1254Costs?: number;
 }
+
+/* The California fields of a sale, each with the federal field it replaces. */
+export const CALIFORNIA_SALE_FIELDS = [
+  ["californiaCostOrOtherBasis", "costOrOtherBasis"],
+  ["californiaDepreciationAllowed", "depreciationAllowed"],
+  ["californiaAdditionalDepreciationAfter1976", "additionalDepreciationAfter1975"],
+  ["californiaAdditionalDepreciation1971To1976", "additionalDepreciation1970To1975"],
+  ["californiaSection1254Costs", "section1254Costs"],
+] as const;
 
 /* The businessId of a property that no Schedule C business on the return used. */
 export const NO_BUSINESS = "none";
@@ -139,10 +172,17 @@ export interface BusinessPropertySaleFact {
 const SALE_CATEGORY = "other";
 const SALE_PREFIX = "business_property_sale.";
 
-/* Line 8: the nonrecaptured net section 1231 losses of the five prior years, a number (line-8::b01). */
+/*
+ * Line 8: the nonrecaptured net section 1231 losses of the five prior years, a
+ * number (line-8::b01). California Schedule D-1 line 8 takes the California
+ * amount when one is stated, else the federal one (ca-540-sched-d1-inst-2025::sec::part-i::b02).
+ */
 export const SECTION_1231_KEYS = {
   nonrecapturedLosses: "business_property_sale.nonrecaptured_section_1231_losses",
+  californiaNonrecapturedLosses: "business_property_sale.ca_nonrecaptured_section_1231_losses",
 } as const;
+
+const SECTION_1231_KEY_LIST: readonly string[] = Object.values(SECTION_1231_KEYS);
 
 const KINDS: readonly string[] = [
   "section_1245",
@@ -164,7 +204,7 @@ export function isBusinessPropertySaleFactKey(key: string): boolean {
     parts.length === 2 &&
     `${parts[0]}.` === SALE_PREFIX &&
     parts[1] !== "" &&
-    key !== SECTION_1231_KEYS.nonrecapturedLosses
+    !SECTION_1231_KEY_LIST.includes(key)
   );
 }
 
@@ -188,6 +228,7 @@ const AMOUNT_FIELDS = [
   "soilWaterLandClearing",
   "section1254Costs",
   "section126ExcludedPayments",
+  ...CALIFORNIA_SALE_FIELDS.map(([california]) => california),
 ] as const;
 
 function isSale(value: unknown): value is BusinessPropertySaleFactValue {

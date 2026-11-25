@@ -21,12 +21,14 @@ export const NOT_FORM_540 = unsupported(
  * The credits that Form 540 line 47 adds, other than this credit. The credit
  * for prior year AMT is read from its source, Schedule P (540) line 10 column
  * (b): Form 540 line 43 or 44 can hold this credit, so reading them would make
- * line 2 depend on its own credit.
+ * line 2 depend on its own credit. Line 45 is not read for the same reason: it
+ * holds the total of three or more other credits, and the engine's other
+ * credits are this credit, the credit for prior year AMT (read here) and the
+ * PTE elective tax credit, which line 2 leaves out.
  */
 const OTHER_CREDIT_LINES = [
   "form-540.line.40_child_dependent_care_credit",
   PRIOR_YEAR_AMT_CREDIT_USED,
-  "form-540.line.45_schedule_p_credits",
   "form-540.line.46_renters_credit",
 ];
 
@@ -35,8 +37,9 @@ const files = (info: BaseFilingInfo, formId: string) => info.mustFile?.[formId]?
 /*
  * Line 2: "Residents – Form 540, line 48 (without other state tax credit and PTE
  * elective tax credit)" (ca-540-sched-s-inst-2025::sec::part-ii-figure-your-other-state-tax-credit::b01):
- * line 35 less the other credits of line 47, not less than 0. The engine has no
- * PTE elective tax credit, so nothing is added back. With FTB 3506 or FTB 3510
+ * line 35 less the other credits of line 47, not less than 0. Line 2 is built
+ * from line 35 and never subtracts the PTE elective tax credit (FTB 3804-CR),
+ * so nothing needs adding back. With FTB 3506 or FTB 3510
  * filed, the line waits for its credit, as Form 540 line 47 does.
  */
 export function californiaTaxLiability(

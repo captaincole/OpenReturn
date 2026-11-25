@@ -12,6 +12,7 @@ import {
   otherStateCreditRow,
   partIIICreditRows,
   priorYearAmtCreditRow,
+  pteCreditRowBindings,
 } from "./partIII.js";
 import type { ScheduleP } from "./types.js";
 
@@ -398,6 +399,7 @@ export function register(): void {
       ...childCareCreditRow,
       ...priorYearAmtCreditRow,
       ...otherStateCreditRow,
+      ...pteCreditRowBindings,
     },
     unsupported: {
       "0.line.4_home_mortgage_interest":

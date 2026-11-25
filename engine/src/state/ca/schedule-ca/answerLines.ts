@@ -91,14 +91,30 @@ export function line5Column(
 const positive = (amount: number | undefined) =>
   amount !== undefined && amount > 0 ? roundDollars(amount) : undefined;
 
-/* Line 3 column B or C: a California employee's profit or loss, plus the FTB 3885A business difference. */
+/*
+ * Schedule D-1 line 38 against federal Form 4797 line 35, for the Schedule C
+ * businesses that took the deduction: federal more is column B, California more
+ * is column C (ca-540-sched-d1-inst-2025::sec::part-iv::b03). Only while
+ * Schedule D-1 files; with no California difference it does not.
+ */
+function recaptureColumn(info: ScheduleCaFilingInfo, side: "subtraction" | "addition") {
+  if (info.mustFile?.["schedule-d-1"]?.value !== true) return undefined;
+  return depreciationColumn(info.scheduleD1Recapture, side);
+}
+
+/*
+ * Line 3 column B or C: a California employee's profit or loss, plus the FTB
+ * 3885A business difference and the Schedule D-1 Part IV difference.
+ */
 export function line3Column(info: ScheduleCaFilingInfo, side: "subtraction" | "addition") {
   const employee =
     side === "subtraction" ? info.caEmployeeAmounts?.netProfit : info.caEmployeeAmounts?.netLoss;
   const depreciation = depreciationColumn(info.businessDepreciationAdjustment, side);
   if (depreciation !== undefined && typeof depreciation !== "number") return depreciation;
   if (info.businessDepreciationAdjustment?.waits) return undefined;
-  const total = (employee ?? 0) + (depreciation ?? 0);
+  const recapture = recaptureColumn(info, side);
+  if (recapture !== undefined && typeof recapture !== "number") return recapture;
+  const total = (employee ?? 0) + (depreciation ?? 0) + (recapture ?? 0);
   return positive(total);
 }
 
