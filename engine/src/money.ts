@@ -74,15 +74,26 @@ export function roundToPlaces(value: number, places: number): number {
 }
 
 /*
+ * Every exchange rate in the engine reads one way: units of the foreign
+ * currency for one U.S. dollar, as the Treasury and the IRS print them. Only
+ * the rate tables (currency/rates.ts) make one, turning a rate printed the
+ * other way (the H.10 release's asterisk: dollars for one unit) around, so no
+ * caller can multiply where it must divide.
+ */
+export type UnitsPerDollar = number & {
+  readonly __direction: "units of the currency per U.S. dollar";
+};
+
+/*
  * An amount in a foreign currency, in U.S. dollars with cents: divided by the
- * rate (units of the currency per dollar, irs.gov "Yearly average currency
- * exchange rates": "divide the foreign currency amount by the applicable ...
- * rate") and rounded to the cent, the half cent up by magnitude. The cents
- * stay until the form rounds its line (the whole-dollar rule).
+ * rate (irs.gov "Yearly average currency exchange rates": "divide the foreign
+ * currency amount by the applicable ... rate") and rounded to the cent, the
+ * half cent up by magnitude. The cents stay until the form rounds its line
+ * (the whole-dollar rule).
  */
 const CENT_PLACES = 2;
-export function dollarsFromForeign(amount: number, unitsPerDollar: number): number {
-  return roundToPlaces(amount / unitsPerDollar, CENT_PLACES);
+export function dollarsFromForeign(amount: number, rate: UnitsPerDollar): number {
+  return roundToPlaces(amount / rate, CENT_PLACES);
 }
 
 // "Each $step or part of $step": a part step counts, so this rounds up by rule.
