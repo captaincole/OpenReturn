@@ -19,7 +19,15 @@ Forms checked: Form 8911, Form 6251, Schedule 3, Schedule 2, Schedule 8812, Form
 | Installer's invoice, driveway charger (`docs/02-invoice-driveway-charger.pdf`) | $2,080, working 2025-09-26 |
 | Answers, both chargers | eligible census tract 48453002424, main home, 0% business use |
 
-The two invoices are made by `generate-docs.ts` from the values in `facts.ts` (`documents/refuelingPropertyInvoice.ts`, the first document of its type).
+The two invoices are made by `generate-docs.ts` from the values in `facts.ts` (`documents/refuelingPropertyInvoice.ts`, the first document of its type). The table lines, the sales tax and the payment are made up in `generate-docs.ts`; the generator refuses them unless they add to the fact's cost.
+
+## Compared with real examples
+
+- [LADWP, Residential EV Charging Station sample documents](https://acquia.ladwp.com/sites/default/files/2023-10/102623%20ResidentialEVChargingStation_Sample_Booklet.pdf), page 12, a paid itemized installation invoice. Matched: installer and licence at the top, invoice number and date, site address, installation date. Changed: the charger's make and model with "new", separate lines, sales tax, the payment method and a zero balance.
+- [BC Hydro, EV charger invoice requirements, single family homes](https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/power-smart/electric-vehicles/ev-charger-sample-invoice-single-family-homes.pdf). Matched: quantity, description, unit price and line total columns, and a paid mark. Changed: phone and email, a permit line, and a subtotal before tax.
+- [PG&E, Residential EV Charging Rebate sample documents](https://www.pge.com/assets/pge/docs/clean-energy/electric-vehicles/revc-sample-supporting-documents.pdf), page 8, an electrician's invoice. Matched: contractor name, licence number and the customer in "Bill to". Changed: labor, materials and the permit fee as their own lines.
+
+No sample prints a work-start date; ours keeps it because Schedule A (Form 8911) line 4 asks for it. The permit number on each invoice is the one Schedule A line 7 asks for; no fact holds it yet.
 
 ## Hand check
 
