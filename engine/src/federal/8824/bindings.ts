@@ -8,7 +8,6 @@ import { namesOnReturn } from "../returnNames.js";
 import { line15aDescription, line19Entry, line5Date } from "./describe.js";
 import type { ExchangeForm } from "./exchange.js";
 import type { Form8824FilingInfo } from "./filingInfo.js";
-import { SUMMARY } from "./printed.js";
 import { AFTER_LABEL, FULL_LINE, certificateParts, twoLines } from "./printing.js";
 import {
   divestitureLine,
@@ -16,12 +15,14 @@ import {
   noBox,
   realizedLine,
   recognizedLine,
-  summaryTotal,
   yesBox,
 } from "./selectors.js";
 import type { Form8824 } from "./types.js";
 
-/* MANUAL EDIT: a description over two entry lines (printing.ts); the summary form prints "Summary" on line 1. */
+/*
+ * MANUAL EDIT: one copy for each exchange (printed.ts; the copies spec in
+ * federal/index.ts). A description goes over two entry lines (printing.ts).
+ */
 const describedRow = (row: 0 | 1, text: (form: ExchangeForm) => string) =>
   exchangeLine((form) => twoLines(text(form), FULL_LINE)[row]);
 
@@ -39,9 +40,9 @@ export function register(): void {
       "1.header.identifying_number": () => undefined,
 
       // MANUAL EDIT: Part I (irs-8824-inst-2025::sec::lines-1-and-2::b01, line-5::b01, line-6::b01).
-      "0.line.1_property_given_up_description_row1": exchangeLine(
-        (form) => twoLines(form.value.givenUp.description, FULL_LINE)[0],
-        () => SUMMARY,
+      "0.line.1_property_given_up_description_row1": describedRow(
+        0,
+        (form) => form.value.givenUp.description,
       ),
       "0.line.1_property_given_up_description_row2": describedRow(
         1,
@@ -134,18 +135,12 @@ export function register(): void {
       "1.line.19_realized_gain_loss": realizedLine((lines) => lines.line19),
       "1.line.20_smaller_of_line_15_or_19": realizedLine((lines) => lines.line20),
 
-      // MANUAL EDIT: lines 21–25c (lines.ts); the summary form's lines 23 and 25 (printed.ts).
+      // MANUAL EDIT: lines 21–25c (lines.ts).
       "1.line.21_ordinary_income_recapture": recognizedLine((lines) => lines.line21),
       "1.line.22_subtract_line_21_from_20": recognizedLine((lines) => lines.line22),
-      "1.line.23_recognized_gain": recognizedLine(
-        (lines) => lines.line23,
-        summaryTotal((summary) => summary.line23),
-      ),
+      "1.line.23_recognized_gain": recognizedLine((lines) => lines.line23),
       "1.line.24_deferred_gain_loss": recognizedLine((lines) => lines.line24),
-      "1.line.25_basis_like_kind_property_received": recognizedLine(
-        (lines) => lines.line25,
-        summaryTotal((summary) => summary.line25),
-      ),
+      "1.line.25_basis_like_kind_property_received": recognizedLine((lines) => lines.line25),
       "1.line.25a_basis_section_1250_property": recognizedLine(
         (_, form) => form.basisParts?.section1250,
       ),

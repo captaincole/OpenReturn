@@ -1,6 +1,6 @@
 /*
- * Form 8824 on a whole return: who files, what it asks, the summary form, and
- * the lines that take its results (Schedule D lines 4, 11 and 19, Form 4797
+ * Form 8824 on a whole return: who files, what it asks, and the lines that
+ * take its results (one copy per exchange: copies.test.ts) (Schedule D lines 4, 11 and 19, Form 4797
  * lines 5 and 16, Schedule 1 line 4). The synthetic gaul and dobraine
  * scenarios are the bases.
  */
@@ -9,7 +9,6 @@ import { describe, expect, it } from "vitest";
 import {
   isConflictOfInterestSaleFactKey,
   isLikeKindExchangeFactKey,
-  makeLikeKindExchangeFactKey,
   type LikeKindExchangeFactValue,
 } from "../../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../../src/facts/rows.js";
@@ -167,21 +166,5 @@ describe("Form 8824 results on other forms", () => {
     expect(run.field("form-4797", "0.line.7_net_section_1231_gain_loss")).toMatchObject(
       UNSUPPORTED,
     );
-  });
-});
-
-describe("Form 8824 with two exchanges: the summary form (irs-8824-inst-2025::sec::purpose-of-form::b02)", () => {
-  it("prints Summary on line 1, the totals on lines 23 and 25, and leaves the rest blank", () => {
-    const second = {
-      ...exchangeOf(dobraineScenario),
-      id: "f-second",
-      key: makeLikeKindExchangeFactKey("second-site"),
-    };
-    const run = evaluate(dobraineScenario, [...dobraineScenario.facts, second]);
-    expect(run.value("form-8824", "0.line.1_property_given_up_description_row1")).toBe("Summary");
-    expect(run.value("form-8824", "1.line.23_recognized_gain")).toBe(52000);
-    expect(run.value("form-8824", "1.line.25_basis_like_kind_property_received")).toBe(120000);
-    expect(run.value("form-8824", "1.line.19_realized_gain_loss")).toBeUndefined();
-    expect(run.value("form-4797", "0.line.16_ordinary_like_kind_exchanges")).toBe(36000);
   });
 });

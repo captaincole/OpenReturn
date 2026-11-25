@@ -4,17 +4,17 @@ Each place where the form and its instructions do not settle a rule, sorted in t
 
 ## Two texts conflict
 
-Each is decided by the author, with a `DECISION` comment in the code and a row in `docs/rule-decisions.md`, and waits for a person's review.
+Each has a `DECISION` comment in the code and a row in `docs/rule-decisions.md`. A1 and 1 are decided by the author and wait for a person's review; A2 is decided by a person.
 
 ### A1. Cash on lines 12–18 (`lines.ts`; row A3)
 
 The multi-asset heading says not to complete lines 12–18 with cash; the line 20 example fills line 15 with cash. The engine fills them for one property given up and one received.
 
-### A2. The summary form (`printed.ts`; row A4)
+### A2. One form for each exchange (`printed.ts`; row 13, decided by a person 2026-11-25)
 
-More than one exchange prints the summary form every time.
+The instructions allow a summary form with an attached statement, or one form for each exchange. The engine prints one form for each exchange: the summary needs a statement, and the engine writes no statements. Schedule D and Form 4797 take the total of all exchanges.
 
-### 1. Line 21, section 1245: line 19 or the part's own gain (`lines.ts`; row A5)
+### 1. Line 21, section 1245: line 19 or the part's own gain (`lines.ts`; row A4)
 
 - Text A: "The total adjustments for deductions ... for depreciation or amortization (up to the amount of gain shown on line 19)" (irs-8824-inst-2025::sec::line-21::b01).
 - Text B: the example figures the section 1245(a)(1) amount as "the lesser of the property's depreciable basis of $35,000 or the amount realized of $55,000" (line-24::b01).
@@ -115,8 +115,7 @@ More than one exchange prints the summary form every time.
 ### 18. More than one Part IV sale
 
 - Part IV holds one sale; the instructions give no summary for Part IV.
-- Engine: two or more sale facts make Part IV unsupported (`printed.ts`, `ONE_PART_IV`).
-- Not now: no scenario has two sales, and copies of the whole form for Part IV would print Parts I–III twice.
+- Done: each Part IV sale prints on its own copy, the nth sale on the copy of the nth exchange (`printed.ts`). A copy with no exchange of its own leaves Parts I–III blank, so no exchange prints twice.
 
 ## Pattern change
 
@@ -154,10 +153,10 @@ More than one exchange prints the summary form every time.
 | Lines 15–20 | published example with numbers (Taylor, Finley; Pub. 544) |
 | Line 15a | own reading (question 4) |
 | Line 19 entry space, section 121 | published example with numbers (Rev. Proc. 2005-14 Example 1) |
-| Line 21 | published example with numbers (Taylor, Finley; Pub. 544); DECISION A3; unsupported for both kinds or sections 1252–1255 |
+| Line 21 | published example with numbers (Taylor, Finley; Pub. 544); DECISION question 1 (row A4); unsupported for both kinds or sections 1252–1255 |
 | Lines 22–25 | published example with numbers |
 | Lines 25a–25c | published example with numbers (Finley); own reading for land (question 5) |
-| Summary form (lines 1, 23, 25) | stated rule; DECISION A2 |
+| One copy for each exchange and Part IV sale | stated rule; DECISION A2 (row 13, decided by a person) |
 | Lines 26–34 | stated rule (the form's arithmetic) |
 | Lines 35–38 | stated rule; unsupported for business property |
 | Schedule D lines 4 and 11 | stated rule (the Schedule D lines) |

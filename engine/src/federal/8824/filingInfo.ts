@@ -5,4 +5,6 @@ import type { Form8824Totals } from "./totals.js";
 export interface Form8824FilingInfo extends BaseFilingInfo {
   /* Every exchange and Part IV sale that files this year; undefined with none. */
   form8824Totals?: Form8824Totals;
+  /* Which copy this render prints (one per exchange; printed.ts); absent means the first. */
+  form8824CopyIndex?: number;
 }

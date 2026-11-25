@@ -1,6 +1,6 @@
 /*
- * The line functions of Form 8824: each reads the printed exchange or the
- * printed Part IV sale, and returns a gap when that is one.
+ * The line functions of Form 8824: each reads the exchange or the Part IV sale
+ * of the copy being printed (printed.ts), and returns a gap when that is one.
  */
 
 import { unsupported, type Unsupported } from "../../types.js";
@@ -8,26 +8,21 @@ import type { DivestitureForm } from "./divestiture.js";
 import type { ExchangeForm } from "./exchange.js";
 import type { Form8824FilingInfo } from "./filingInfo.js";
 import type { RealizedLines, RecognizedLines } from "./lines.js";
-import { printedDivestiture, printedExchange, type PrintedExchange } from "./printed.js";
+import { printedDivestiture, printedExchange } from "./printed.js";
 
 export type LineFn<T> = (form: unknown, info: Form8824FilingInfo) => T | Unsupported | undefined;
 
-type Summary = Extract<PrintedExchange, { kind: "summary" }>;
+const copyIndexOf = (info: Form8824FilingInfo): number => info.form8824CopyIndex ?? 0;
 
-/*
- * A line of Parts I–III. `pick` reads one exchange; `fromSummary` reads the
- * summary form, which leaves every other line blank (purpose-of-form::b02).
- */
+/* A line of Parts I–III: `pick` reads this copy's exchange; blank on a copy with none. */
 export function exchangeLine<T>(
   pick: (form: ExchangeForm) => T | Unsupported | undefined,
-  fromSummary?: (summary: Summary) => T | Unsupported | undefined,
 ): LineFn<T> {
   return (_, info) => {
     const totals = info.form8824Totals;
     if (totals === undefined) return undefined;
-    const printed = printedExchange(totals);
+    const printed = printedExchange(totals, copyIndexOf(info));
     if (printed.kind === "gap") return unsupported(printed.reason);
-    if (printed.kind === "summary") return fromSummary?.(printed);
     return printed.kind === "one" ? pick(printed.form) : undefined;
   };
 }
@@ -40,19 +35,12 @@ export const realizedLine = <T>(
 /* Lines 21–25c: the line 21 gap when the instructions do not settle it. */
 export const recognizedLine = <T>(
   pick: (lines: RecognizedLines, form: ExchangeForm) => T | undefined,
-  fromSummary?: (summary: Summary) => T | Unsupported | undefined,
 ) =>
   exchangeLine((form) => {
     if (form.realized === undefined) return undefined;
     if (form.line21Gap) return unsupported(form.line21Gap);
     return form.recognized === undefined ? undefined : pick(form.recognized, form);
-  }, fromSummary);
-
-/* A total of the summary form, or the gap of an exchange in it. */
-export const summaryTotal =
-  (pick: (summary: Summary) => number | undefined) =>
-  (summary: Summary): number | Unsupported | undefined =>
-    summary.gap ? unsupported(summary.gap) : pick(summary);
+  });
 
 /* A line of Part IV; `figured` lines (35–38) also take the gap of a business property. */
 export function divestitureLine<T>(
@@ -62,7 +50,7 @@ export function divestitureLine<T>(
   return (_, info) => {
     const totals = info.form8824Totals;
     if (totals === undefined) return undefined;
-    const printed = printedDivestiture(totals);
+    const printed = printedDivestiture(totals, copyIndexOf(info));
     if (printed.kind === "gap") return unsupported(printed.reason);
     if (printed.kind === "blank") return undefined;
     if (figured && printed.form.linesGap) return unsupported(printed.form.linesGap);
