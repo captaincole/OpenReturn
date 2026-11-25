@@ -32,6 +32,27 @@ export interface Section179RecaptureFactValue {
   recomputedDepreciation: number;
   /* The business (business.ts businessId) whose Schedule C took the deduction. */
   businessId?: string;
+  /*
+   * California Schedule D-1 line 36: column (a), the section 179 expense claimed
+   * on the California return under R&TC 17201; column (b), the California
+   * recovery deductions of prior years (ca-540-sched-d1-inst-2025::sec::part-iv::b01,
+   * b02). Absent: the federal amount.
+   */
+  californiaPriorDeductions?: number;
+  /* California Schedule D-1 line 37, with California amounts (part-iv::b02). Absent: the federal amount. */
+  californiaRecomputedDepreciation?: number;
+}
+
+/* The recapture with its California amounts in the federal fields (Schedule D-1 lines 36 and 37). */
+export function californiaRecapture(
+  recapture: Section179RecaptureFactValue,
+): Section179RecaptureFactValue {
+  return {
+    ...recapture,
+    priorDeductions: recapture.californiaPriorDeductions ?? recapture.priorDeductions,
+    recomputedDepreciation:
+      recapture.californiaRecomputedDepreciation ?? recapture.recomputedDepreciation,
+  };
 }
 
 export interface Section179RecaptureFact {
@@ -62,6 +83,10 @@ function isRecapture(value: unknown): value is Section179RecaptureFactValue {
     (fields.column === "section_179" || fields.column === "section_280f") &&
     isAmount(fields.priorDeductions) &&
     isAmount(fields.recomputedDepreciation) &&
+    (fields.californiaPriorDeductions === undefined ||
+      isAmount(fields.californiaPriorDeductions)) &&
+    (fields.californiaRecomputedDepreciation === undefined ||
+      isAmount(fields.californiaRecomputedDepreciation)) &&
     (fields.businessId === undefined || typeof fields.businessId === "string")
   );
 }

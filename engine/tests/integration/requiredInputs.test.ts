@@ -159,7 +159,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "an answer Cade records only when the user made that California payment (Form 540 line 72)",
   ],
   [
-    /^business_property_sale\.(?!nonrecaptured_section_1231_losses$)[^.]+$/,
+    /^business_property_sale\.ca_nonrecaptured_section_1231_losses$/,
+    "Schedule D-1 line 8, recorded only when the California amount differs from the federal " +
+      "answer; absent, Schedule D-1 takes the federal one (and asks for it when both are missing)",
+  ],
+  [
+    /^business_property_sale\.(?!(ca_)?nonrecaptured_section_1231_losses$)[^.]+$/,
     "a Form 4797 sale fact is the whole sale (as a rental property fact is the whole property); " +
       "whether one exists is Cade's question",
   ],

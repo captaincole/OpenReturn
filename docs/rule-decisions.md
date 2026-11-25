@@ -34,6 +34,12 @@ Each decision below also sits in the code, in a comment that starts with `DECISI
 | 11 | 2026-11-24 | Foreign currency | Which yearly average: the IRS table or the Federal Reserve's? | The IRS yearly average table. | The Federal Reserve's annual averages. | The IRS table. | $2 on 1,180 euros of interest. | `currency/` (pull request #240) | — |
 | 12 | 2026-11-24 | Form 8801 | Is line 23, the limit on the credit, the tentative minimum tax before or after the minimum tax foreign tax credit? | Form 8801 line 23 is Form 6251 line 9, and line 9 is line 7 less line 8. | Form 6251 instructions: when line 10 is at least line 7, leave line 8 blank. | After: line 7 less the credit line 8 would hold, also when Form 6251 leaves line 8 blank. Leaving line 8 blank is a shortcut for a person who owes no minimum tax, and it must not shrink this credit. With Form 1116, line 23 is unsupported. | Yes: $250 more credit in the made-up taxpayer `logain`. | `federal/8801/credit.ts` | Sections 53(c) and 55(b). Marked for research: the reading rests on memory of the law. |
 
+## Decided by the author, waiting for a person's review
+
+| # | Date | Form | Question | Text A | Text B | Decision | Dollars | Where | Check when the law is in the library |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| A1 | 2026-11-24 | Schedule D-1 | Line 30b: farmland held 10 years or longer. 100% of the expenses, or none? | Schedule D-1 instructions, line 30b: "Enter 100% of line 30a on line 30b if your property was held for 10 years or longer" (`ca-540-sched-d1-inst-2025::sec::irc-section-1252-property::b01`). | The same block: ordinary income on farmland "held more than one year but less than 10 years"; Form 4797: "Skip line 27 if you dispose of such farmland during the 10th or later year" (`irs-4797-inst-2025::sec::line-27::b01`). | Text B: the federal percentage, and no line 30 from the 10th year. | Yes: the whole line 30a for farmland held 10 years or more. | `state/ca/schedule-d-1/lines.ts` | Section 1252(a)(3) and R&TC section 18151. |
+
 A row that names a pull request is in the code of that branch until it merges.
 
 The last column names the section of law to read first. The section numbers are from memory and were not checked against the Code, which the library does not hold yet.

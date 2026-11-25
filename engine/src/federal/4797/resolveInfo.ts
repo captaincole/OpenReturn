@@ -66,7 +66,7 @@ function summaryGap(inputs: ResolverInputs, joint: boolean): string | undefined 
 }
 
 /* The Form 1099-S keys that more than one sale names (a building and its land in one closing). */
-function sharedForms(sales: BusinessPropertySaleFact[]): Set<string> {
+export function sharedForms(sales: BusinessPropertySaleFact[]): Set<string> {
   const keys = sales.flatMap((sale) => sale.value.form1099SKey ?? []);
   return new Set(keys.filter((key, index) => keys.indexOf(key) !== index));
 }
@@ -78,7 +78,7 @@ function sharedForms(sales: BusinessPropertySaleFact[]): Set<string> {
  * (irs-4797-inst-2025::sec::depreciable-property-and-other-property::b01), so each
  * sale states its own price.
  */
-function priceOf(
+export function priceOf(
   sale: BusinessPropertySaleFact,
   forms: Map<string, Form1099SFactValue>,
   shared: Set<string>,
@@ -99,7 +99,7 @@ function sharedFormGap(sales: BusinessPropertySaleFact[], shared: Set<string>) {
 }
 
 /* Line 1a: box 2 of each Form 1099-S a sale names, each form once (irs-4797-inst-2025::sec::line-1a::b01). */
-function reportedProceeds(
+export function reportedProceeds(
   sales: BusinessPropertySaleFact[],
   forms: Map<string, Form1099SFactValue>,
 ) {

@@ -15,6 +15,8 @@ import {
   sumInvestmentBox,
   type ResolverInputs,
 } from "../../../resolverInputs.js";
+import type { ScheduleD1FilingInfo } from "../schedule-d-1/filingInfo.js";
+import { resolveScheduleD1Info } from "../schedule-d-1/resolveInfo.js";
 import type { ScheduleDCaFilingInfo } from "./filingInfo.js";
 import { scheduleDCaFigures, type CaliforniaSale } from "./lines.js";
 
@@ -61,6 +63,23 @@ function salesWithBases(inputs: ResolverInputs): SaleWithBases[] {
   });
 }
 
+type Section1231 = ScheduleD1FilingInfo["californiaSection1231Gain"];
+
+/*
+ * A section 1231 gain that goes to Schedule D is a capital gain on both returns:
+ * when California's (Schedule D-1 line 7 or 9) is not the federal one (Form 4797
+ * to federal Schedule D line 11), the capital gains differ (::purpose::b01).
+ */
+function section1231Fallback(section1231: Section1231, files540: boolean) {
+  const differs = files540 && section1231?.differs === true;
+  return {
+    rule: `fallback: Form 540 files (${files540}) and the Schedule D-1 section 1231 gain differs from the federal Form 4797 gain (${differs})`,
+    value: differs,
+    triggeredByFactKeys: [],
+    triggeredByDecisionKeys: [FILES_540_KEY],
+  };
+}
+
 /*
  * ca-540-sched-d-inst-2025::sec::purpose::b01: use the schedule "only if there
  * is a difference between your California and federal capital gains and
@@ -77,6 +96,8 @@ export function resolveScheduleDCaInfo(inputs: ResolverInputs): ScheduleDCaFilin
   const federalCarryover = sum(...federalCarryovers);
   const californiaCarryover = num(inputs, CA_CAPITAL_LOSS_CARRYOVER_KEY);
   const sales = salesWithBases(inputs);
+  // California's section 1231 gain (Schedule D-1), figured when Form 4797 files on a Form 540 return.
+  const section1231 = resolveScheduleD1Info(inputs).californiaSection1231Gain;
   const differentBases = sales.filter(
     (sale) => sale.californiaBasis !== undefined && sale.californiaBasis !== sale.federalBasis,
   );
@@ -96,6 +117,7 @@ export function resolveScheduleDCaInfo(inputs: ResolverInputs): ScheduleDCaFilin
         triggeredByFactKeys: differentBases.map((sale) => sale.californiaBasisKey),
         triggeredByDecisionKeys: [FILES_540_KEY],
       },
+      section1231Fallback(section1231, files540),
     ],
   });
   const files = resolution.value === true;
@@ -118,6 +140,9 @@ export function resolveScheduleDCaInfo(inputs: ResolverInputs): ScheduleDCaFilin
               : undefined,
           californiaCarryoverMissing: asked.length > 0,
           filingStatus: filingStatusOf(inputs),
+          section1231Gain: section1231?.gap === undefined ? section1231?.gain : undefined,
+          section1231Waits: section1231?.waits,
+          section1231Gap: section1231?.gap && `Schedule D-1: ${section1231.gap}`,
         })
       : undefined,
   };
