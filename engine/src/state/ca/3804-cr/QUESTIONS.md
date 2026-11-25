@@ -77,6 +77,28 @@ stated rule or the author's reading.
 - Changes a dollar amount: rarely. Without Schedule P, the line 40 credit is
   not held to the tentative minimum tax.
 
+## 9. Blank or 0 on Part II lines 1 and 2
+
+- Source: "Enter the carryover amount from the PTE elective tax credit from
+  the prior year" (`ca-3804cr-inst-2025::sec::line-2-credit-carryover-from-prior-year::b01`).
+  Nothing says to enter 0.
+- Default: line 2 prints the stated carryover, so a stated 0 prints 0. Line 1
+  prints 0 when no entity has a credit (a carryover only), while Part I line 2
+  is blank. The blind fill left both blank.
+- Changes a dollar amount: no.
+
+## Blind fill (2026-11-25)
+
+A blind preparer filled 14 cases from the blank form and the instructions
+only. Every dollar amount agrees with the engine, Schedule P (540) line 21
+included. The only differences are blank against 0 (point 9): line 2 in ten
+cases with no carryover, and line 1 in the carryover-only case. The blind
+doubts that change a dollar amount are points 1 (TMT), 2 (order) and 8 (more
+than two credits with no Schedule P). Its other doubts change no dollar on
+this form: the previous column (c) when Schedule P line 20 is blank (the
+engine and the blind fill both use the last column (c) with an amount), and
+which year's credit is used first (point 6).
+
 ## Unsupported cases
 
 | Field | Case | Why |
@@ -90,6 +112,17 @@ stated rule or the author's reading.
 - The California K-1 (100S, 565, 568, 541) as a fact kind with every column,
   so the credit, the income and the California adjustments come from one
   document. Today the credit is a stated answer of its own.
+
+## Second opinions
+
+- PolicyEngine-US 2.153.8 (commit b3edc0446b), `variables/gov/states/ca/tax/income/credits/`
+  and `parameters/gov/states/ca/tax/income/credits/`. Compared on 2026-11-25.
+  It does not model the PTE elective tax credit: its California nonrefundable
+  credits are the exemption credits, the child and dependent care credit and
+  the renter's credit, limited only to the tax (Form 540 line 48 at least 0).
+  No constant or formula of FTB 3804-CR to compare. No lead.
+- IRS Direct File: federal only, no California forms. Not compared. The repo
+  names no other reference implementation for this form.
 
 ## Confidence by field group
 
