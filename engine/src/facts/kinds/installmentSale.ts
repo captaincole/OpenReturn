@@ -81,6 +81,15 @@ export interface InstallmentSaleFactValue {
    * (irs-6252-form-2025::sec::line-26::b01). Absent: not section 1250 property.
    */
   section1250?: boolean;
+  /*
+   * Form 8960 only, for use "business" or "ordinary": the property was used in a
+   * non-section 1411 trade or business (one that is not passive to the taxpayer
+   * and does not trade financial instruments). Its gain this year comes out of
+   * net investment income (Lines 5a–5d Worksheet line 2(d),
+   * irs-8960-inst-2025::sec::line-5b-net-gain-or-loss-from-disposition-of::b06).
+   * A passive rental's property is false. Absent: Form 8960 line 5b waits for it.
+   */
+  nonSection1411TradeOrBusiness?: boolean;
   /* Line 4: can the total selling price be determined by the end of the year of sale? */
   sellingPriceDeterminable: boolean;
   /*
@@ -165,6 +174,9 @@ const isOptionalAmount = (value: unknown): boolean => value === undefined || isA
 
 const isText = (value: unknown): boolean => typeof value === "string" && value !== "";
 
+const isOptionalBoolean = (value: unknown): boolean =>
+  value === undefined || typeof value === "boolean";
+
 const OPTIONAL_AMOUNTS = [
   "sellingPrice",
   "liabilitiesAssumed",
@@ -211,7 +223,8 @@ function isSale(value: unknown): value is InstallmentSaleFactValue {
     (fields.dateAcquired === INHERITED || isIsoDate(fields.dateAcquired)) &&
     isIsoDate(fields.dateSold) &&
     USES.includes(fields.use) &&
-    (fields.section1250 === undefined || typeof fields.section1250 === "boolean") &&
+    isOptionalBoolean(fields.section1250) &&
+    isOptionalBoolean(fields.nonSection1411TradeOrBusiness) &&
     typeof fields.sellingPriceDeterminable === "boolean" &&
     isAmount(fields.costOrOtherBasis) &&
     isAmount(fields.paymentsThisYear) &&

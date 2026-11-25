@@ -28,7 +28,7 @@ import {
 import { resolve4137Info } from "../4137/resolveInfo.js";
 import { activityOf } from "../4797/activities.js";
 import { form4797GainUpperBound } from "../4797/upperBound.js";
-import { form6252IncomeUpperBound, hasInstallmentSale } from "../6252/upperBound.js";
+import { form6252IncomeUpperBound, hasInvestmentInstallmentSale } from "../6252/upperBound.js";
 import { line1Row } from "../6781/lines.js";
 import { form8621IncomeUpperBound } from "../8621/totals.js";
 import { form8814IncomeUpperBound } from "../8814/children.js";
@@ -162,7 +162,7 @@ export function investmentSignals(
     passThroughHasInvestmentIncome(inputs.facts) ||
     (businesses.length > 0 && !scheduleCNonpassive) ||
     investmentSale ||
-    hasInstallmentSale(inputs.facts);
+    hasInvestmentInstallmentSale(inputs.facts);
   return {
     scheduleCNonpassive,
     hasInvestment,

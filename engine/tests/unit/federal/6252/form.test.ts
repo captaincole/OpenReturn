@@ -254,7 +254,7 @@ describe("Form 6252 Part III", () => {
     ]);
   });
 
-  it("marketable securities resold after that window are a gap from line 30", () => {
+  it("marketable securities resold after that window still complete Part III (decision, relatedParty.ts)", () => {
     const run = evaluate([
       sale("duplex", {
         ...duplex,
@@ -262,8 +262,12 @@ describe("Form 6252 Part III", () => {
         relatedParty: { ...party, marketableSecurities: true },
       }),
     ]);
-    expect(run.gap("form-6252", LINE.l35)).toBe(true);
-    expect(run.gap("form-4797", F4797_LINE_4)).toBe(true);
+    // The same lines as bain's duplex: no 29a box for marketable securities.
+    expect([run.value("form-6252", LINE.l29a), run.value("form-6252", LINE.l35)]).toEqual([
+      undefined,
+      171369,
+    ]);
+    expect(run.value("form-4797", F4797_LINE_4)).toBe(19041 + 171369);
   });
 
   it("the final payment this year: Part III is not completed", () => {

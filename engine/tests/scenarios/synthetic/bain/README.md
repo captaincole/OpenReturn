@@ -8,6 +8,8 @@ He has one W-2 and three installment sales from earlier years, so he files three
 - Pasture land, sold in 2023, with $5,000 of section 1252 recapture still to report (line 25).
 - A trailer bought and sold in 2024, held less than a year (Form 4797 line 10).
 
+None of the three served a business he worked in, so each fact answers `nonSection1411TradeOrBusiness: false` and every gain stays in net investment income (Form 8960 line 5b blank).
+
 The scenario checks Form 6252 Parts I to III and their results on Form 4797 lines 4, 10 and 15, Schedule D lines 11 and 19, Schedule 1 line 4, Form 8960 and Form 1040. The published examples are unit tests (`tests/unit/federal/6252/`).
 
 Forms that file: Form 1040, Schedules 1, 2 and D, Forms 4797, 6252 (three copies) and 8960.

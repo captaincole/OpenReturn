@@ -87,6 +87,20 @@ function saleAmounts(form: SaleForm) {
   };
 }
 
+/*
+ * One sale's income this year, as routed() sends it: lines 25 and 26 (line 24),
+ * with lines 36 and 37 (line 35) when Part III counts. An amount, a gap, or
+ * undefined while it waits.
+ */
+export function saleIncome(form: SaleForm): LineValue {
+  const { gain, ordinary, partIII } = saleAmounts(form);
+  const parts = partIII ? [...gain, ...ordinary] : [gain[0], ordinary[0]];
+  const blocked = parts.find((value) => typeof value === "object");
+  if (blocked !== undefined) return blocked;
+  const amounts = parts.filter((value): value is number => typeof value === "number");
+  return amounts.length === parts.length ? sum(...amounts) : undefined;
+}
+
 /* The unrecaptured section 1250 gain in this year's gain (lines.ts), or the gain's gap or wait. */
 function worksheetValue(
   form: SaleForm,

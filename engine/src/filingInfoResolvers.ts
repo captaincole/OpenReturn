@@ -24,6 +24,7 @@ import { planForm8949Copies, totalsByBox } from "./federal/8949/copyPlan.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
 import { resolve8959Info } from "./federal/8959/resolveInfo.js";
 import type { Form8960FilingInfo } from "./federal/8960/filingInfo.js";
+import { installmentSalesWithoutTradeOrBusinessAnswer } from "./federal/8960/line5b.js";
 import { NIIT_THRESHOLDS, rentalsWithoutTradeOrBusinessAnswer } from "./federal/8960/lines.js";
 import { investmentSignals, magiUpperBound } from "./federal/8960/mustFile.js";
 import { resolve8962Info } from "./federal/8962/resolveInfo.js";
@@ -337,6 +338,17 @@ const SCHEDULE_D_ROUTES: Route[] = [
  * MAGI is an upper bound from facts (magiUpperBound), so a missed 8960 needs income
  * with no facts; set decisions.scope.must_file_8960 for that case.
  */
+/* Line 4b's rental answers, and line 5b's Form 6252 business sale answers (worksheet line 2(d)). */
+function tradeOrBusinessAnswersMissing(
+  inputs: ResolverInputs,
+  rentalProperties: Form8960FilingInfo["rentalProperties"],
+): string[] {
+  return [
+    ...rentalsWithoutTradeOrBusinessAnswer(rentalProperties ?? []),
+    ...installmentSalesWithoutTradeOrBusinessAnswer(form6252TotalsOf(inputs)?.forms ?? []),
+  ];
+}
+
 export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
   const status = filingStatusOf(inputs);
   const threshold = status ? NIIT_THRESHOLDS[status] : undefined;
@@ -365,8 +377,8 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
   const scheduleE = resolveScheduleEInfo(inputs);
   const rentalProperties =
     scheduleE.mustFile?.["schedule-e"]?.value === true ? scheduleE.rentalProperties : undefined;
-  const openRentals =
-    resolution.value === true ? rentalsWithoutTradeOrBusinessAnswer(rentalProperties ?? []) : [];
+  const openAnswers =
+    resolution.value === true ? tradeOrBusinessAnswersMissing(inputs, rentalProperties) : [];
   // Line 10 (…::sec::line-10-additional-modifications::b01): optional, recorded only when stated.
   const additionalModifications = num(inputs, NET_INVESTMENT_INCOME_KEYS.additionalModifications);
   return {
@@ -376,7 +388,7 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
         ...(asked
           ? missingInputs({ "state_local_tax.allocable_to_investment_income": allocableTax })
           : []),
-        ...openRentals,
+        ...openAnswers,
       ],
     },
     // Line 4b's scheduleCNonpassive; line 5b's nonpassiveBusinessKeys and capitalLossCarriedIn.

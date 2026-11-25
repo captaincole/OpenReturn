@@ -23,7 +23,14 @@ export function form6252IncomeUpperBound(facts: ReadonlyArray<FactRow>): number 
   );
 }
 
-/* An installment sale's gain is a gain from the disposition of property: investment income for Form 8960 line 5a. */
-export function hasInstallmentSale(facts: ReadonlyArray<FactRow>): boolean {
-  return readInstallmentSaleFacts(facts).sales.length > 0;
+/*
+ * An installment sale's gain is a gain from the disposition of property:
+ * investment income for Form 8960 line 5a, unless worksheet line 2(d) takes it
+ * out (a business sale's property used in a non-section 1411 trade or business,
+ * 8960/line5b.ts).
+ */
+export function hasInvestmentInstallmentSale(facts: ReadonlyArray<FactRow>): boolean {
+  return readInstallmentSaleFacts(facts).sales.some(
+    ({ value }) => value.use === "capital_asset" || value.nonSection1411TradeOrBusiness !== true,
+  );
 }

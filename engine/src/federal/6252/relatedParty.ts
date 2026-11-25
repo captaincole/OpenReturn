@@ -39,8 +39,6 @@ export function moreThanTwoYearsAfter(firstDate: string, secondDate: string): bo
   return secondDate > anniversary;
 }
 
-const MARKETABLE_AFTER_WINDOW =
-  "The related party resold marketable securities more than 2 years after the year of sale. The two-year limit does not apply to marketable securities (irs-pub-537-2025::sec::sale-and-later-disposition::b02), but the form completes Part III only for the year of sale and 2 years after (irs-6252-form-2025::sec::which-parts-to-complete::b01); the engine does not choose.";
 const RESALE_NOT_THIS_YEAR =
   "Line 28 asks about a second disposition during this tax year, and the stated date is not in 2025.";
 
@@ -50,18 +48,32 @@ export interface PartIIIResult {
   waits?: LineStop;
 }
 
+/*
+ * DECISION (2026-11-24, by the author, not reviewed by a person): a related
+ * party's resale of marketable securities after the window still completes
+ * Part III. Text A: "also complete Part III for the year of sale and 2 years
+ * after the year of sale unless you received the final payment during the tax
+ * year" (irs-6252-form-2025::sec::which-parts-to-complete::b01). Text B: the
+ * special rule applies to a second disposition "before making all payments on
+ * the first disposition", and "doesn't apply if any of the conditions listed on
+ * line 29 are met" (installment-sales-to-related-party::b01), where line 29a
+ * excludes "dispositions of marketable securities"; Pub. 537, on the 2-year
+ * limit: "This rule doesn't apply if the property involved is marketable
+ * securities" (irs-pub-537-2025::sec::sale-and-later-disposition::b02). The engine follows
+ * Text B: it is the specific rule for this case, and Text A would leave an
+ * accelerated gain off the return.
+ */
+const outsideWindow = (sale: InstallmentSaleFactValue): boolean =>
+  PREPARED_YEAR - yearOf(sale.dateSold) > RELATED_PARTY_YEARS &&
+  sale.relatedParty?.marketableSecurities !== true;
+
 /* Lines 27–29, or why Part III is a gap or waits; no answers when Part III is not completed. */
 export function partIIIAnswers(
   sale: InstallmentSaleFactValue,
   receivedFinalPayment: boolean,
 ): PartIIIResult {
   const party = sale.relatedParty;
-  if (party === undefined || receivedFinalPayment) return {};
-  if (PREPARED_YEAR - yearOf(sale.dateSold) > RELATED_PARTY_YEARS) {
-    return party.resoldThisYear && party.marketableSecurities === true
-      ? { gap: { from: 30, reason: MARKETABLE_AFTER_WINDOW } }
-      : {};
-  }
+  if (party === undefined || receivedFinalPayment || outsideWindow(sale)) return {};
   const base = {
     line27Row1: party.name,
     line27Row2: `${party.address}, ${party.identifyingNumber}`,

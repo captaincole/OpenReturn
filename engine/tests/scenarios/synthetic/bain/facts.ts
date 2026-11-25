@@ -67,6 +67,8 @@ export const duplex: InstallmentSaleFactValue = {
   dateAcquired: "2012-06-01",
   dateSold: "2024-05-10",
   use: "business",
+  // A rental he did not run as a real estate professional: passive, so its gain is NII.
+  nonSection1411TradeOrBusiness: false,
   section1250: true,
   sellingPriceDeterminable: true,
   sellingPrice: 480000,
@@ -96,6 +98,8 @@ export const pasture: InstallmentSaleFactValue = {
   dateAcquired: "2004-03-20",
   dateSold: "2023-08-15",
   use: "business",
+  // Farmed by a tenant on a crop share; Bain did not materially participate: passive.
+  nonSection1411TradeOrBusiness: false,
   sellingPriceDeterminable: true,
   sellingPrice: 160000,
   costOrOtherBasis: 64000,
@@ -112,6 +116,8 @@ export const trailer: InstallmentSaleFactValue = {
   dateAcquired: "2024-02-01",
   dateSold: "2024-12-01",
   use: "business",
+  // Leased to a food vendor in 2024; not a business Bain worked in: passive.
+  nonSection1411TradeOrBusiness: false,
   sellingPriceDeterminable: true,
   sellingPrice: 75000,
   costOrOtherBasis: 60000,
