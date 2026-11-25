@@ -104,9 +104,18 @@ export interface RelatedPartyExchange {
   relationship: string;
   identifyingNumber?: string;
   address: string;
-  /* Line 9: during 2025 the related party sold or disposed of the property it received. Absent: not answered. */
+  /*
+   * Lines 9 and 10 answer the form's own questions, which hold a time limit:
+   * "During this tax year (and before the date that is 2 years after the last
+   * transfer of property that was part of the exchange)". Only a disposition in
+   * that window makes line 24 reportable (irs-8824-inst-2025::sec::line-7::b02).
+   * A disposition in 2025 on or after the 2-year date is "No" (false). The
+   * 2-year period stops running while the risk of loss is substantially reduced
+   * (line-7::b03, "Tolling of holding period").
+   */
+  /* Line 9: the related party sold or disposed of the property it received, in 2025 and in the window. Absent: not answered. */
   relatedPartyDisposed?: boolean;
-  /* Line 10: during 2025 the taxpayer sold or disposed of the property received. Absent: not answered. */
+  /* Line 10: the taxpayer sold or disposed of the property received, in 2025 and in the window. Absent: not answered. */
   taxpayerDisposed?: boolean;
   /* The note under line 7: the related party sold the replacement property into the exchange. */
   soldIntoExchange?: boolean;

@@ -32,7 +32,7 @@ export interface ExchangeRoute {
   amounts: RoutedAmounts;
   /* Why some amounts cannot be carried, and the forms that leaves open. */
   gap?: { reason: string; destinations: Destination[] };
-  /* Lines 9 or 10 are not answered: the receiving lines wait. */
+  /* Lines 9 or 10 are not answered, or line 21 lacks the section 1250 value received: the form asks for the exchange again. */
   waits: boolean;
   /* A section 1231 gain from section 1250 property that was depreciated (Schedule D line 19). */
   unrecapturedGap?: string;
@@ -147,6 +147,17 @@ function relatedPartyState(value: LikeKindExchangeFactValue) {
     line11: boxed ? related.exception : undefined,
   };
 }
+
+/*
+ * The section 1250 rule of line 21 reads "the FMV of the section 1250 property
+ * received" (irs-8824-inst-2025::sec::line-21::b01), and the taxpayer decides
+ * that split (lines-25a-25b-and-25c::b02). With section 1250 recapture on the
+ * property given up and no section 1250 value stated, the exchange waits for
+ * it (QUESTIONS.md, question 15); a stated 0 (land received) answers it.
+ */
+const waitsForSection1250Value = (value: LikeKindExchangeFactValue): boolean =>
+  (value.givenUp.recapture?.section1250OrdinaryIfSold ?? 0) > 0 &&
+  value.received.section1250Value === undefined;
 
 /* Lines 12–20 of one exchange, from its fact. */
 export function realizedOf(value: LikeKindExchangeFactValue): RealizedLines {
@@ -318,8 +329,9 @@ export function evaluateExchange({ key, value }: LikeKindExchangeFact): Exchange
     triggered: related.triggered,
     line21Gap: part?.line21Gap,
   };
+  const waits = related.waits || (completes && waitsForSection1250Value(value));
   const route = completes
-    ? routeOf(inputs, related.waits)
+    ? routeOf(inputs, waits)
     : { amounts: emptyAmounts(), waits: related.waits };
   return {
     kind: "filed",

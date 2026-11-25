@@ -135,6 +135,18 @@ export interface RecaptureInputs {
  * like-kind property received (irs-8824-inst-2025::sec::line-21::b01). The
  * example: $35,000 depreciation, line 20 $40,000 plus $250,000 → $35,000
  * (line-24::b02).
+ *
+ * DECISION (2026-11-24, by the author, not reviewed by a person): the cap on
+ * the depreciation is line 19, the gain of the whole property. Text A, the line
+ * instruction (irs-8824-inst-2025::sec::line-21::b01): "The total adjustments
+ * for deductions ... for depreciation or amortization (up to the amount of gain
+ * shown on line 19)". Text B, the example (line-24::b01): "the lesser of the
+ * property's depreciable basis of $35,000 or the amount realized of $55,000",
+ * a cap from the section 1245 parts' own value. The engine follows Text A: it
+ * is the stated rule of the line, both give the example's $35,000, and the fact
+ * does not hold the value of the section 1245 parts given up. Dollars differ
+ * only when those parts are worth less than their depreciation: parts worth
+ * $20,000 with $35,000 of depreciation give line 21 $35,000 (A) or $20,000 (B).
  */
 export function section1245Recapture(lines: RealizedLines, inputs: RecaptureInputs): number {
   const depreciation = Math.min(

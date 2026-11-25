@@ -235,6 +235,15 @@ describe("Pub. 544, recapture in like-kind exchanges (irs-pub-544-2025::sec::ord
     expect(lines(section1250(40000))).toMatchObject({ line20: 40000, line21: 10000 });
   });
 
+  it("section 1250 recapture with no section 1250 value received stated: the exchange waits", () => {
+    const value = section1250(40000);
+    const unstated = { ...value, received: { ...value.received, section1250Value: undefined } };
+    expect(filed(unstated).route.waits).toBe(true);
+    expect(
+      filed({ ...value, received: { ...value.received, section1250Value: 0 } }).route.waits,
+    ).toBe(false);
+  });
+
   it("section 1250 with no cash: the limit is $0, nothing recaptured (b05, b06)", () => {
     expect(lines(section1250(0))).toMatchObject({ line19: 80000, line21: 0, line24: 80000 });
   });
@@ -400,6 +409,43 @@ describe("Form 8824 Part II branches (the form's text under lines 7 and 10; line
       "death",
       undefined,
     ]);
+  });
+
+  /*
+   * Land traded with a brother on 2023-02-01 (line 24 $100,000); he sells it on
+   * 2025-09-01, after the 2-year date of 2025-02-01. Line 9 asks only about a
+   * disposition "before the date that is 2 years after the last transfer", so
+   * the answer is No and nothing is reported (irs-8824-inst-2025::sec::line-7::b02).
+   */
+  it("a disposition after the 2-year date is line 9 No: no Part III, $0 reported", () => {
+    const outcome = evaluateExchange({
+      key: "like_kind_exchange.test",
+      value: exchange({
+        givenUp: {
+          description: "Land",
+          use: "investment",
+          dateAcquired: "2010-05-01",
+          dateTransferred: "2023-02-01",
+          adjustedBasis: 50000,
+        },
+        received: { description: "Land", dateReceived: "2023-02-01", fairMarketValue: 150000 },
+        relatedParty: {
+          name: "Brother",
+          relationship: "Brother",
+          address: "2 Oak St",
+          relatedPartyDisposed: false,
+          taxpayerDisposed: false,
+        },
+      }),
+    });
+    if (outcome.kind !== "filed") throw new Error(`expected a filed form, got ${outcome.kind}`);
+    expect(outcome.form.realized).toBeUndefined();
+    expect(outcome.form.route.amounts).toEqual({
+      shortTermCapital: 0,
+      longTermCapital: 0,
+      section1231: 0,
+      ordinary: 0,
+    });
   });
 
   it("lines 9 and 10 not answered: the exchange waits", () => {

@@ -154,13 +154,13 @@ const OTHER_FORMS = {
     form6781Field: "form-6781.0.line.8_short_term_capital_gain_loss",
     forms: ["form-4684", "form-6252"],
     without6781:
-      "Requires data from Forms 6252, 4684, 6781, and 8824 — none of these forms are ingested in the current engine. No installment-sale, casualty/theft, straddle, or like-kind-exchange scenarios have been built yet.",
+      "Requires data from Forms 6252, 4684, 6781 and 8824: Forms 6252 and 4684 send this line no amount in the current engine, Form 6781 does not file, and Form 8824 has no short-term amount. No installment-sale or casualty/theft scenarios have been built yet.",
   },
   line11: {
     form6781Field: "form-6781.0.line.9_long_term_capital_gain_loss",
     forms: ["form-4684", "form-4797", "form-6252"],
     without6781:
-      "Requires gain figures from Form 4797 Part I, Forms 2439, 6252, 4684, 6781, and 8824 — none of these forms are ingested or have fact categories in the current inventory.",
+      "Requires gain figures from Form 4797 Part I and Forms 2439, 6252, 4684, 6781, 8621 and 8824: Forms 2439, 6252 and 4684 send this line no amount in the current engine, Form 6781 does not file, and the others have no long-term amount.",
   },
 } as const;
 
