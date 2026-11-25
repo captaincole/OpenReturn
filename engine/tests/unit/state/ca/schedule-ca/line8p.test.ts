@@ -1,13 +1,14 @@
 /*
  * Schedule CA line 8p, the federal excess business loss adjustment
  * (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b04). Column A copies
- * Schedule 1 line 8p; columns B and C wait for FTB 3461 (Form 461
- * QUESTIONS.md item 13). The base is the synthetic juilin scenario, moved to
- * California.
+ * Schedule 1 line 8p; column B takes it out and column C adds FTB 3461 line
+ * 16 (state/ca/schedule-ca/excessBusinessLoss.ts). The base is the synthetic
+ * juilin scenario, moved to California.
  */
 
 import { describe, expect, it } from "vitest";
-import type { AIDecisionRow } from "../../../../../src/facts/rows.js";
+import { CA_BUSINESS_LOSS_LIMIT_KEYS } from "../../../../../src/facts/index.js";
+import type { AIDecisionRow, TaxFactRow } from "../../../../../src/facts/rows.js";
 import { evaluateScenario } from "../../../../../src/index.js";
 import { decisionRow } from "../../../../helpers/fixtureBuilders.js";
 import { juilinScenario as base } from "../../../../scenarios/synthetic/juilin/index.js";
@@ -23,10 +24,19 @@ const decision = (key: string, value: unknown): AIDecisionRow =>
     rationale: "test",
   });
 
+/* No FTB 3461 carryover from 2024 (line 14b). */
+const NO_CARRYOVER: TaxFactRow = {
+  ...base.facts[0],
+  id: "f-no-carryover",
+  category: "other",
+  key: CA_BUSINESS_LOSS_LIMIT_KEYS.priorYearCarryover,
+  value: 0,
+};
+
 function evaluateInCalifornia() {
   const result = evaluateScenario({
     filing: { id: "schedule-ca-line-8p-test", taxYear: base.taxYear },
-    facts: base.facts,
+    facts: [...base.facts, NO_CARRYOVER],
     decisions: [
       ...base.decisions.filter((row) => !CA_KEYS.includes(row.decisionKey)),
       decision("decisions.scope.must_file_ca_540", true),
@@ -51,9 +61,12 @@ describe("Schedule CA line 8p", () => {
     );
   });
 
-  it("columns B and C stay gaps for FTB 3461", () => {
+  it("column B takes the federal amount out and column C adds FTB 3461 line 16", () => {
     const { field } = evaluateInCalifornia();
-    expect(field("schedule-ca.1.line.b8p_subtractions")?.unsupported).toBe(true);
-    expect(field("schedule-ca.1.line.b8p_additions")?.unsupported).toBe(true);
+    const federal = field("schedule-1.0.line.8p")?.value as number;
+    const line16 = field("form-3461.0.line.16_excess_business_loss")?.value as number;
+    expect(line16).toBeLessThan(0);
+    expect(field("schedule-ca.1.line.b8p_subtractions")?.value).toBe(federal);
+    expect(field("schedule-ca.1.line.b8p_additions")?.value).toBe(0 - line16);
   });
 });

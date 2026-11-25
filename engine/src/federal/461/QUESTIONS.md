@@ -142,7 +142,13 @@ do now, (3) a pattern change. Item numbers stay as they were.
 
 ## Kind 3: a pattern change
 
-- **Item 13. California: needs a person.** Schedule CA line 8p column A
+- **Item 13. California: settled by FTB 3461's rules.** Schedule CA line 8p
+  column B now takes out the federal amount and column C adds FTB 3461 line 16
+  or 17, so California AGI no longer assumes the federal amount
+  (`state/ca/3461/QUESTIONS.md` has that form's own questions). The text below
+  is the record of what was wrong before, kept for the pattern it shows.
+
+  Before FTB 3461 had rules: Schedule CA line 8p column A
   copies Schedule 1 line 8p, as line 9a column A does. "Enter the amount from
   form FTB 3461, line 16 or line 17, whichever applies, on line 8p, column C
   ... Enter the amount of the federal excess business loss adjustment
