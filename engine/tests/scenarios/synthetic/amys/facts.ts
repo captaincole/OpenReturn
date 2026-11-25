@@ -109,6 +109,7 @@ export const amysFacts: TaxFactRow[] = [
   fact("identity", SPOUSE_KEYS.lastName, CORIN.lastName, "Stated by Amys."),
   fact("identity", SPOUSE_KEYS.ssn, CORIN.ssn, "Stated by Corin."),
   fact("identity", SPOUSE_KEYS.dob, "12/02/1979", "Stated by Corin."),
+  fact("identity", SPOUSE_KEYS.occupation, "Translator", "Stated by Corin."),
   fact("wages", makeW2FactKey("lonestar-turbine"), w2, "W-2 from Lonestar Turbine Works Inc."),
   asset("bologna-savings", bolognaSavings, "01-banca-saragozza-savings.pdf"),
   income(makeInterestFactKey("bologna-savings"), bolognaInterest, "01-banca-saragozza-savings.pdf"),
