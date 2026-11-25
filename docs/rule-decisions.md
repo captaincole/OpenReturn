@@ -38,6 +38,12 @@ A row that names a pull request is in the code of that branch until it merges.
 
 The last column names the section of law to read first. The section numbers are from memory and were not checked against the Code, which the library does not hold yet.
 
+## Decided by the author, waiting for a person's review
+
+| # | Date | Form | Question | Text A | Text B | Decision | Dollars | Where | Check when the law is in the library |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 2026-11-24 | FTB 3853 | Which filing threshold is the household income tested against? | Part II line 1: household income against the California AGI threshold, or gross income against the gross income threshold (`line-1-applicable-household-income-or-gross::b01`). | Step 4: "Use your gross income to look up your filing threshold"; household income less it at zero or less owes no penalty and checks Part II (`step-2-flat-dollar-amount::b04`). | Text B: the household income against the gross income chart, then gross income against the same chart. The FTB web example (2 adults, 1 child, $200,000) uses $61,720, the gross income amount. | Yes: the whole penalty for a household whose income is between the two thresholds. | `state/ca/3853/penalty.ts` | Revenue and Taxation Code section 61015 and Government Code section 100705: the definition of the filing threshold. |
+
 ## Open: brought to a person, not decided
 
 | Form | Question | Engine today | Why it is open |

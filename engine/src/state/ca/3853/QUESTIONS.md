@@ -1,0 +1,59 @@
+# FTB 3853 — open points
+
+The rules come from ca-3853-inst-2025. No answer key exists. Each point below is a place the form and its instructions do not settle a rule. Block ids drop the `ca-3853-inst-2025::sec::` prefix.
+
+## Decided (also in docs/rule-decisions.md)
+
+- **Which threshold.** Part II compares household income with the AGI chart (`line-1-applicable-household-income-or-gross::b01`). Step 4 uses the gross income chart (`step-2-flat-dollar-amount::b04`). The engine follows Step 4. See the `DECISION` comment in `penalty.ts`. Changes dollars.
+
+## Defaults with no conflicting text
+
+1. **Worksheet B line 14 is rounded.** "Divide line 13 by 12.0. Enter the result on line 2 and line 3" (`name-jan-...::b02`). No rounding is stated. The penalty line takes whole dollars, so the engine rounds line 14 to the nearest dollar. Line 4 is whole dollars, so rounding at the end gives the same result. No dollar change.
+2. **Line 3 of the Penalty Worksheet with Worksheet B.** The worksheet says "Enter the larger of line 1 or line 2" (`yes-continue::b02`). Worksheet B says to enter line 14 on line 2 and line 3. The engine enters line 14 on line 3. Line 14 is never below Worksheet A line 7, so the result is the same. No dollar change.
+3. **The short coverage gap.** "A gap in coverage of 3 continuous months or less" (`federal-poverty-line::b01`). The engine counts a gap as continuous months with no coverage, no stated exemption, no birth month and no code A. A month with another exemption ends the gap. The text does not say this. Can change dollars when an exemption month sits inside a gap.
+4. **"The first gap."** "If an individual had more than one short coverage gap during the year, the individual is exempt only for the month(s) in the first gap" (`federal-poverty-line::b01`). The engine reads this as the first short gap: a long gap before it does not use up the exemption. Can change dollars.
+5. **A gap that continues into 2026.** The instructions count 2024 months for a gap that starts in January (`example-2-4::b01`), and say nothing about 2026. The engine ends a gap at December. Can change dollars.
+6. **Code I from a 2025 birth.** "The months before and including the month that an individual was added to your applicable household by birth" (`coverage-exemption-granted-by::b02`). The engine fills I through the birth month from the date of birth. An adoption is a stated code I. No dollar change against the text.
+7. **Code B covers the year.** "Enter code 'B' in Part III, column (a)" (`example-2-2::b02`). The engine applies a stated B to all 12 months. No dollar change.
+8. **Age 18 by month.** "An individual is considered 18 for an entire month if they turn 18 on the first day of the month" (`step-2-flat-dollar-amount::b01`). The engine counts a person as 18 from the month after the 18th birthday, or from the birthday's month when it is the first day. No dollar change against the text.
+9. **California tax-exempt interest.** Step 3 question 2 uses Schedule CA (540) line 2a and line 2b columns B and C. The engine does not compute those lines yet. With no tax-exempt interest and no U.S. obligation interest, the amount is 0. Otherwise the household income is a floor (the amount is at least 0). The floor settles the penalty only when the bronze amount caps it; else the penalty and Part I line 1 are unsupported. Changes dollars only through the unsupported case.
+10. **Gross income for Part II.** Gross income is a stated answer. The engine asks it only when the household income holds amounts that gross income does not (tax-exempt interest, a member's own MAGI) and the California wages are not over the threshold. Gross income is at least Form 540 line 17, so the test fails when line 17 is over the threshold. No dollar change.
+11. **Part I MAGI of a member who does not file.** "Enter the MAGI for each person" (`modified-adjusted-gross-income-magi::b01`). The engine prints a stated MAGI, an FTB 3803 child's MAGI, or nothing. No dollar change.
+12. **Parts I and III with Part II checked.** "If you cannot check the box on Part II, you will need to complete Part I" (`part-i::b01`); "If you check the box in Part II, line 1, you do not have to complete Part III" (`line-1-applicable-household-income-or-gross::b01`). The engine leaves both blank. No dollar change.
+13. **Line 1 with no penalty.** With no X month, or with Part II checked, line 1 is blank, not 0. No dollar change.
+14. **Middle initial of a dependent.** The dependent fact has no middle initial, so it prints blank. No dollar change.
+15. **Three codes in a month.** The form has two fields a month. The engine keeps the first two stated codes. No dollar change.
+16. **Form 540 line 114.** The instructions add line 111, line 112 and line 113 (`ca-540-inst-2025::sec::line-114-total-amount-due::b01`). The engine adds lines 94 and 96 to its existing sum. A return with no FTB 3853 penalty is unchanged.
+
+## Unsupported
+
+| Field or case | Why |
+| --- | --- |
+| Line 1, Part II and Parts I/III for a married filer filing separately | The chart combines both spouses' income; the threshold for one spouse's household is not settled. |
+| Line 1 for a Form 540NR filer | Form 540NR has no rules in the engine. |
+| Line 1 and Part I line 1 MAGI with tax-exempt or U.S. obligation interest | Schedule CA (540) line 2a and line 2b columns B and C are not computed (point 9), unless the bronze amount caps the penalty. |
+| Codes with an affordability test and tax-exempt interest | Code A compares a contribution with the exact household income. |
+| Part I ECN 3 with more than three ECNs | The other ECNs go on a statement that is not modeled. |
+| Row 12 with more than 12 members | The instructions give no continuation statement. |
+| A qualifying surviving spouse with no dependents | The chart has no column for it. |
+
+## Confidence by field group
+
+| Fields | Confidence |
+| --- | --- |
+| Header (name, SSN) | stated rule |
+| Part I names, SSN, date of birth, ECNs | stated rule |
+| Part I Modified AGI | published example with numbers (Lisa and Jason, Jake's FTB 3803 MAGI) |
+| Part II box | published example with numbers (Lisa and Jason); own reading for the threshold (decided) |
+| Part III codes Z, X, stated codes | stated rule |
+| Part III code C | published examples (Chris, Roger, Sam) |
+| Part III code A | published examples with numbers (Jackie, Sharon, Ethan, April) |
+| Part III code I | stated rule; own reading for the birth month (point 6) |
+| Part IV line 1, no Worksheet A | published example with numbers (ftb.ca.gov page: 2,375 and 3,457) |
+| Part IV line 1, Worksheets A and B | stated rule; no published example; limit tests |
+| Form 540 lines 92, 96, 114 | stated rule |
+
+## Proposals for a discussion
+
+- **Schedule CA (540) line 2 interest.** Computing line 2a and line 2b columns B and C (U.S. obligation interest, other states' bonds) would make California tax-exempt interest exact. It needs the state of each tax-exempt bond on the 1099-INT fact. That is a change to Schedule CA, not to this form.
+- **Coverage documents.** Forms 1095-A, 1095-B and 1095-C show the months of coverage. Today the months are a stated answer. Reading the documents would be a new family of input documents.
