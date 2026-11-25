@@ -73,9 +73,13 @@ function otherStateCreditUsed(form: Form540Form, info: Form540FilingInfo) {
  * The other credits taken, each from Schedule P (540) column (b) when it is
  * completed (ca-540-sched-p-inst-2025::sec::how-to-claim-your-credits::b01),
  * in Part III order: line 10 (prior year AMT), line 20 (other state tax),
- * line 21 (PTE elective tax). The last is applied "after the other state tax
- * credit" (ca-540-sched-p-inst-2025::sec::pass-through-entity-pte-elective-tax-credit::b01);
- * no text orders the first two (QUESTIONS.md). A credit of 0 is not taken.
+ * line 21 (PTE elective tax). "The prior year AMT credit must be applied before
+ * any credits that can reduce regular tax below the TMT"
+ * (ca-540-sched-p-inst-2025::sec::section-a-instructions::b01), and the PTE
+ * credit is applied "after the other state tax credit"
+ * (ca-540-sched-p-inst-2025::sec::pass-through-entity-pte-elective-tax-credit::b01).
+ * No text says which credit prints on line 43 and which on line 44; the list
+ * order is our choice (3510/QUESTIONS.md). A credit of 0 is not taken.
  * Undefined while any credit waits.
  */
 function otherCredits(

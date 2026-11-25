@@ -10,7 +10,7 @@
 import type { BindingFn, FormAccessor } from "../../../defineForm.js";
 import { numberOrBlank } from "../../../money.js";
 import { unsupported, type Unsupported as Gap } from "../../../types.js";
-import { PTE_CREDIT_AVAILABLE, files3804Cr } from "../3804-cr/creditUsed.js";
+import { PTE_CREDIT_AVAILABLE, files3804Cr, pteCreditGap } from "../3804-cr/creditUsed.js";
 import { scheduleCreditRow, type CreditRow } from "../3804-cr/lines.js";
 import { filesScheduleS, otherStateCreditTotal } from "../schedule-s/returnAmounts.js";
 import type { SchedulePFilingInfo } from "./filingInfo.js";
@@ -183,16 +183,23 @@ function pteCreditRow(form: Form, info: SchedulePFilingInfo) {
   return balance === undefined ? undefined : scheduleCreditRow(available, balance);
 }
 
+/*
+ * Columns (b) to (d) share FTB 3804-CR line 4's gap (a credit through a
+ * disregarded SMLLC), so the row never prints a credit used that line 4 cannot
+ * figure. Column (a), the credit available, has no gap.
+ */
 const pteColumn =
-  (pick: (row: CreditRow) => number) =>
+  (pick: (row: CreditRow) => number, limited = true) =>
   (form: Form, info: SchedulePFilingInfo): number | Gap | undefined => {
     if (!files3804Cr(info)) return NO_3804_CR;
+    const gap = limited ? pteCreditGap(info) : undefined;
+    if (gap !== undefined) return gap;
     const credit = pteCreditRow(form, info);
     return credit === undefined ? undefined : pick(credit);
   };
 
 export const pteCreditRowBindings: Bindings = {
-  "3.part3.21_pte_elective_tax_credit_amount_col_a": pteColumn((row) => row.available),
+  "3.part3.21_pte_elective_tax_credit_amount_col_a": pteColumn((row) => row.available, false),
   "3.part3.21_pte_elective_tax_credit_used_col_b": pteColumn((row) => row.used),
   "3.part3.21_pte_elective_tax_tax_balance_col_c": pteColumn((row) => row.balance),
   "3.part3.21_pte_elective_tax_credit_carryover_col_d": pteColumn((row) => row.carryover),

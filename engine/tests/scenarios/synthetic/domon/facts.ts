@@ -1,6 +1,6 @@
 /*
  * Made-up taxpayer (README.md): a single full-year California resident in San
- * Diego with a W-2, tax paid to Colorado on wages, and a share of three
+ * Diego with a W-2, tax paid to Colorado on wages, and a share of ten
  * entities that elected to pay California's pass-through entity elective tax.
  * Every name, number and address is invented. The K-1s are not in the engine:
  * each credit is his answer as the K-1 statement prints it.
@@ -69,7 +69,7 @@ const colorado: OtherStateTaxFactValue = {
   otherStateAdjustedGrossIncome: 35000,
 };
 
-/* The three electing entities, as each K-1 statement prints the credit. */
+/* The ten electing entities, as each K-1 statement prints the credit. */
 const credits: Array<[string, CaPteElectiveCreditFactValue, string]> = [
   [
     "pacific-tidewater",

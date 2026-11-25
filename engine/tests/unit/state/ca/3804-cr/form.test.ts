@@ -264,4 +264,29 @@ describe("FTB 3804-CR with Schedule P (540): teslyn", () => {
     expect(value("form-540", "line.43_credit_amount")).toBeUndefined();
     expect(value("form-540", "line.44_credit_amount")).toBeUndefined();
   });
+
+  it("a credit through a disregarded SMLLC: line 21 columns (b) to (d) share line 4's gap", () => {
+    const smllc = {
+      ...pteFact("smllc", {
+        entityName: "Through LLC",
+        entityId: "201900000003",
+        credit: 3000,
+        throughDisregardedSmllc: true,
+      }),
+      userId: teslynScenario.userId,
+    };
+    const run = evaluate([...teslynScenario.facts, smllc], teslynScenario.decisions);
+    expect(run.value("schedule-p", "3.part3.21_pte_elective_tax_credit_amount_col_a")).toBe(
+      17950 + 3000,
+    );
+    for (const id of [
+      "3.part3.21_pte_elective_tax_credit_used_col_b",
+      "3.part3.21_pte_elective_tax_tax_balance_col_c",
+      "3.part3.21_pte_elective_tax_credit_carryover_col_d",
+    ]) {
+      expect(isGap(run.field("schedule-p", id))).toBe(true);
+    }
+    expect(isGap(run.field("form-3804-cr", "0.part2.4_credit_claimed_current_year"))).toBe(true);
+    expect(isGap(run.field("form-540", "line.45_schedule_p_credits"))).toBe(true);
+  });
 });
