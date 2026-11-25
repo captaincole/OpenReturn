@@ -7,6 +7,7 @@ import { withForm8814 } from "../8814/totals.js";
 import { describeItem, entityTitle } from "../passThrough/items.js";
 import { receivedAmounts } from "../passThrough/receipts.js";
 import type { Form8960FilingInfo } from "./filingInfo.js";
+import { line5b } from "./line5b.js";
 import {
   NIIT_THRESHOLDS,
   netInvestmentIncome,
@@ -79,7 +80,13 @@ export function register(): void {
       },
       "0.line.4c": (form) => sum(form["0.line.4a"], form["0.line.4b"]),
       "0.line.5a": (form) => sum(form["form-1040.line.7a"], form["schedule-1.0.line.4"]),
-      "0.line.5d": (form) => sum(form["0.line.5a"], form["0.line.5b"], form["0.line.5c"]),
+      // MANUAL EDIT: a nonpassive business's Form 4797 gain or loss and a QEF's line 7c come out (line5b.ts).
+      "0.line.5b": line5b,
+      // MANUAL EDIT: line 5d waits while a Form 4797 sale's business is not answered.
+      "0.line.5d": (form, info) =>
+        info.form4797Activities?.waiting
+          ? undefined
+          : sum(form["0.line.5a"], form["0.line.5b"], form["0.line.5c"]),
       /*
        * MANUAL EDIT: irs-8960-inst-2025::sec::line-7-other-modifications-to-investment-income::b04:
        * each Form 8814 line 12, excluding Alaska Permanent Fund dividends (the

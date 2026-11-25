@@ -4,6 +4,7 @@
  */
 
 import { isDividendFactKey, isInterestFactKey } from "../../facts/index.js";
+import { exchangeRateGap, waitsForExchangeRate } from "../../incomeInDollars.js";
 import { sum } from "../../money.js";
 import {
   factsInCategory,
@@ -14,8 +15,41 @@ import {
 import { form8621Totals } from "../8621/totals.js";
 import { figuredForm8814, form8814Totals } from "../8814/totals.js";
 import { filesForm8815, savingsBondExclusionScope } from "../8815/resolveInfo.js";
+import { foreignAccountsOnReturn, unansweredOtherAssetKeys } from "../8938/resolveInfo.js";
 import { receivedAmounts, receivedOnReturn, type Receipt } from "../passThrough/receipts.js";
-import type { PayerAmount, ScheduleBFilingInfo } from "./filingInfo.js";
+import type { ForeignAccountFacts, PayerAmount, ScheduleBFilingInfo } from "./filingInfo.js";
+
+/*
+ * FinCEN Form 114 is required "if the aggregate value of foreign financial
+ * accounts exceeds $10,000 at any time during 2025"
+ * (irs-1040sb-inst-2025::sec::line-7a-question-2-see-fincen-form-114-and-its::b01).
+ */
+export const FINCEN_114_LIMIT = 10000;
+
+/*
+ * Line 7a from the Form 8938 asset facts: a Part V account, or a Part VI asset
+ * answered as a financial account, is "a financial account located in a
+ * foreign country"
+ * (irs-1040sb-inst-2025::sec::line-7a-question-1-check-the-yes-box-if-at-any-time::b01).
+ * Undefined with no account and no Part VI asset waiting for its answer. One
+ * account worth more than $10,000 settles question 2; a smaller one does not
+ * (the aggregate at any time is unknown).
+ */
+function foreignAccountFactsOf(inputs: ResolverInputs): ForeignAccountFacts | undefined {
+  const accounts = foreignAccountsOnReturn(inputs);
+  const unansweredAssetKeys = unansweredOtherAssetKeys(inputs);
+  if (accounts.length === 0 && unansweredAssetKeys.length === 0) return undefined;
+  const countries = accounts
+    .map((account) => account.country)
+    .filter((country): country is string => country !== undefined && country !== "");
+  return {
+    recorded: accounts.length > 0,
+    countries: [...new Set(countries)],
+    overFincenLimit: accounts.some((account) => account.maximumDollars > FINCEN_114_LIMIT),
+    countriesIncomplete: countries.length < accounts.length,
+    unansweredAssetKeys,
+  };
+}
 
 /*
  * A K-1's payer rows: "List each payer's name and the amount"
@@ -57,10 +91,14 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
     ...k1PayerRows(k1Interest),
   ];
   const dividendPayers = scheduleBDividendPayers(inputs, k1Dividends);
-  const hasForeignFinancialAccount = boolDecision(
-    inputs,
-    "decisions.scope.has_foreign_financial_account",
-  );
+  // The explicit decision wins; with none, a Form 8938 account fact answers Yes.
+  const foreignAccountFacts = foreignAccountFactsOf(inputs);
+  const hasForeignFinancialAccount =
+    boolDecision(inputs, "decisions.scope.has_foreign_financial_account") ??
+    (foreignAccountFacts?.recorded === true ? true : undefined);
+  // After a No, line 7 does not read the Part VI answers.
+  const unansweredAssetKeys =
+    hasForeignFinancialAccount === false ? [] : (foreignAccountFacts?.unansweredAssetKeys ?? []);
   const hasForeignTrust = boolDecision(inputs, "decisions.scope.has_foreign_trust");
   const partIII = {
     "decisions.scope.has_foreign_financial_account": hasForeignFinancialAccount,
@@ -87,15 +125,22 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
         value: filesForm8815(bondExclusion),
         triggeredByFactKeys: bondExclusion.resolution.derivation?.triggeredByFactKeys ?? [],
       },
+      // The answer may make Part III a "Yes": the form files to ask it.
+      {
+        rule: "fallback: a Form 8938 Part VI asset does not say whether it is a financial account (line 7a)",
+        value: unansweredAssetKeys.length > 0,
+        triggeredByFactKeys: unansweredAssetKeys,
+      },
     ],
   });
   return {
     mustFile: { "schedule-b": resolution },
-    missingInputs: { "schedule-b": missingInputs(partIII) },
+    missingInputs: { "schedule-b": [...missingInputs(partIII), ...unansweredAssetKeys] },
     interestPayers,
     rounding: rounding === "sum_rounded_rows" ? "sum_rounded_rows" : "round_total",
     dividendPayers,
     hasForeignFinancialAccount,
+    foreignAccountFacts,
     hasForeignTrust,
     savingsBondExclusionGap: bondExclusion.exclusion.line9Gap,
     passThroughInterest: k1Interest,
@@ -103,6 +148,7 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
   };
 }
 
+/* A foreign-currency fact that lacks its rate lists the payer with no amount: the row and the total wait. */
 function payerAmounts(
   inputs: ResolverInputs,
   isKind: (key: string) => boolean,
@@ -112,7 +158,14 @@ function payerAmounts(
     .filter((row) => isKind(row.key))
     .map((row) => {
       const value = row.value as Record<string, unknown>;
-      return { payerName: String(value.payerName ?? ""), amount: amountOf(value) };
+      const gap = exchangeRateGap(value);
+      const notConverted = waitsForExchangeRate(value) || gap !== undefined;
+      const amount = notConverted ? undefined : amountOf(value);
+      return {
+        payerName: String(value.payerName ?? ""),
+        amount,
+        ...(gap !== undefined && { gap }),
+      };
     })
     .filter((payer) => payer.amount !== 0);
 }

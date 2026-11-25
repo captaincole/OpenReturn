@@ -160,6 +160,7 @@ export const ottilieFacts: TaxFactRow[] = [
   idFact("phone", "559-555-0110"),
   fact("identity", SPOUSE_KEYS.firstName, SPOUSE.firstName, "Verbal: spouse's name."),
   fact("identity", SPOUSE_KEYS.lastName, SPOUSE.lastName, "Verbal: spouse's name."),
+  fact("identity", SPOUSE_KEYS.occupation, "Librarian", "Verbal: spouse's occupation."),
   fact("identity", SPOUSE_KEYS.ssn, SPOUSE.ssn, "Verbal: spouse's SSN."),
   fact("identity", SPOUSE_KEYS.dob, "02/11/1987", "Verbal: spouse's date of birth."),
   fact("wages", makeW2FactKey("valley-orchard"), orchardW2, "W-2 from Valley Orchard Cooperative."),

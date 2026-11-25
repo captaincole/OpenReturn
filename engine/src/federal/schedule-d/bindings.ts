@@ -2,8 +2,13 @@
 
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
 import type { Form8949Box } from "../../facts/index.js";
-import { numberOrBlank, roundDollars, sum } from "../../money.js";
+import { numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
+import {
+  form4797Files,
+  scheduleDGainFromForm4797,
+  scheduleDLine19FromForm4797,
+} from "../4797/receivers.js";
 import { withForm8814 } from "../8814/totals.js";
 import { describeItem, entityTitle } from "../passThrough/items.js";
 import { receivedAmounts, roundedWithReceived, type Receipt } from "../passThrough/receipts.js";
@@ -32,19 +37,27 @@ function boxLineBindings(): Partial<{
 }> {
   const out: Record<string, Fn> = {};
   for (const [line, boxes] of BOX_LINES) {
+    const totalsOf = (info: ScheduleDFilingInfo) =>
+      boxes.map((box) => info.form8949BoxTotals?.[box]).filter((total) => total !== undefined);
+    const gapOf = (info: ScheduleDFilingInfo) =>
+      totalsOf(info).find((total) => total.gap !== undefined)?.gap;
     const column =
       (col: "proceeds" | "cost"): Fn =>
       (_, info) => {
-        const totals = boxes
-          .map((box) => info.form8949BoxTotals?.[box])
-          .filter((total) => total !== undefined);
+        const totals = totalsOf(info);
+        // A Form 8949 sale that cannot be converted makes the line a gap; one that waits, blank.
+        const gap = gapOf(info);
+        if (gap !== undefined) return unsupported(gap);
+        if (totals.some((total) => total.waits === true)) return undefined;
         return totals.length > 0
           ? roundDollars(sum(...totals.map((total) => total[col])))
           : undefined;
       };
     out[`0.line.${line}_proceeds`] = column("proceeds");
     out[`0.line.${line}_cost`] = column("cost");
-    out[`0.line.${line}_gain_loss`] = (form) => {
+    out[`0.line.${line}_gain_loss`] = (form, info) => {
+      const gap = gapOf(info);
+      if (gap !== undefined) return unsupported(gap);
       const proceeds = form[`0.line.${line}_proceeds` as keyof ScheduleD];
       if (typeof proceeds !== "number") return undefined;
       const cost = form[`0.line.${line}_cost` as keyof ScheduleD];
@@ -75,7 +88,7 @@ const WORKSHEETS = {
   line19: {
     worksheet: "line 11 of the Unrecaptured Section 1250 Gain Worksheet",
     without:
-      "Amount from line 18 of the Unrecaptured Section 1250 Gain Worksheet requires Form 4797 depreciation recapture and real-property sale data — no such fact ingestion path exists yet.",
+      "Amount from line 18 of the Unrecaptured Section 1250 Gain Worksheet: the engine figures the worksheet only with Form 4797, so a Form 1099-DIV box 2b alone is not figured.",
   },
 } as const;
 
@@ -166,31 +179,76 @@ function otherFormsLine(
 }
 
 /*
- * MANUAL EDIT: line 11 also takes each QEF's Form 8621 line 7c, "a net
- * long-term capital gain. Enter this amount in Part II of the Schedule D"
- * (irs-8621-inst-2025::sec::line-7c::b01), on the line of a fund's
+ * MANUAL EDIT: line 11 also takes Form 4797's section 1231 gain (line 7 or 9:
+ * irs-4797-inst-2025::sec::line-7::b01, line-9::b01) and each QEF's Form 8621
+ * line 7c, "a net long-term capital gain. Enter this amount in Part II of the
+ * Schedule D" (irs-8621-inst-2025::sec::line-7c::b01), on the line of a fund's
  * undistributed long-term gain (irs-1040sd-inst-2025::sec::undistributed-capital::b01;
- * federal/8621/QUESTIONS.md, question 1). With no QEF gain the line is what it was.
+ * federal/8621/QUESTIONS.md, question 1). With neither the line is what it was.
+ * With either, Form 6781 line 9 adds when it files; Forms 4684, 6252 and 8824
+ * still have no Schedule D amount, so the line is a gap while one files.
  */
-function line11(form: FormAccessor<ScheduleD>, info: ScheduleDFilingInfo) {
+const LINE_11_FORMS_WITH_NO_AMOUNT = ["form-4684", "form-6252", "form-8824"];
+
+/* The QEF gain for line 11 (Form 8621 line 7c), a fund's gap, or undefined with none. */
+function qefGainForLine11(info: ScheduleDFilingInfo): number | Unsupported | undefined {
   const totals = info.form8621Totals;
-  if (totals?.generalRulesLossGap) return unsupported(totals.generalRulesLossGap);
-  const qefGain = totals?.amounts.capitalGain ?? 0;
-  if (totals === undefined || (qefGain === 0 && totals.gap === undefined))
-    return otherFormsLine(form, info, OTHER_FORMS.line11);
+  if (totals === undefined) return undefined;
   if (totals.gap !== undefined) return unsupported(totals.gap);
-  if (info.mustFile?.["form-6781"]?.value === true) {
-    const futures = otherFormsLine(form, info, OTHER_FORMS.line11);
-    return typeof futures === "object" ? futures : sum(futures, qefGain);
-  }
-  const filing = OTHER_FORMS.line11.forms.filter(
+  const gain = totals.amounts.capitalGain;
+  return gain === 0 ? undefined : gain;
+}
+
+function line11(form: FormAccessor<ScheduleD>, info: ScheduleDFilingInfo) {
+  const lossGap = info.form8621Totals?.generalRulesLossGap;
+  if (lossGap) return unsupported(lossGap);
+  const qefGain = qefGainForLine11(info);
+  const files4797 = form4797Files(info);
+  if (qefGain === undefined && !files4797) return otherFormsLine(form, info, OTHER_FORMS.line11);
+  if (typeof qefGain === "object") return qefGain;
+  const filing = LINE_11_FORMS_WITH_NO_AMOUNT.filter(
     (formId) => info.mustFile?.[formId]?.value === true,
   );
-  if (filing.length > 0)
+  if (filing.length > 0) {
+    const source = files4797 ? "Form 4797 files" : "Form 8621 line 7c goes on this line";
     return unsupported(
-      `Form 8621 line 7c goes on this line, but the engine has no Schedule D amount from ${filing.join(", ")}, which this line also takes.`,
+      `${source}, but the engine has no Schedule D amount from ${filing.join(", ")}, which this line also takes.`,
     );
-  return qefGain;
+  }
+  const form4797 = files4797 ? scheduleDGainFromForm4797(info) : undefined;
+  if (typeof form4797 === "object") return form4797;
+  if (files4797 && info.form4797?.waitsForLine8) return undefined;
+  const form6781 =
+    info.mustFile?.["form-6781"]?.value === true
+      ? numberOrBlank(form[OTHER_FORMS.line11.form6781Field])
+      : undefined;
+  return sumOrBlank(form4797, form6781, qefGain);
+}
+
+/*
+ * MANUAL EDIT: with Form 4797 filing, line 19 is the Unrecaptured Section 1250
+ * Gain Worksheet (4797/receivers.ts), on a Yes to line 17 (irs-1040sd-inst-2025::sec::line-19::b01).
+ * Its line 11 takes Form 1099-DIV box 2b; a K-1 amount (lines 5 and 11) or a 28%
+ * rate gain (line 14: a K-1, or 1099-DIV box 2d) is not modeled, so the line is a gap.
+ */
+function line19(form: FormAccessor<ScheduleD>, info: ScheduleDFilingInfo) {
+  if (!form4797Files(info))
+    return worksheetLine(info.passThroughUnrecaptured1250Gain, WORKSHEETS.line19);
+  if (form["1.line.17_both_gains_yes"] !== true) return undefined;
+  const otherSourceGap =
+    k1WorksheetGain(info.passThroughUnrecaptured1250Gain, WORKSHEETS.line19.worksheet) ??
+    k1WorksheetGain(info.passThrough28RateGain, WORKSHEETS.line18.worksheet) ??
+    ((info.dividendCollectiblesGain ?? 0) > 0
+      ? unsupported(
+          "Form 1099-DIV box 2d (28% rate gain) goes on line 14 of the Unrecaptured Section 1250 Gain Worksheet through the 28% Rate Gain Worksheet, which is not modeled.",
+        )
+      : undefined);
+  return scheduleDLine19FromForm4797(info, {
+    scheduleDLine7: numberOrBlank(form["0.line.7_net_short_term_gain_loss"]),
+    scheduleDLine14: numberOrBlank(form["0.line.14_long_term_loss_carryover"]),
+    dividendUnrecaptured1250: info.dividendUnrecaptured1250Gain,
+    otherSourceGap,
+  });
 }
 
 export function register(): void {
@@ -230,8 +288,7 @@ export function register(): void {
         roundedWithReceived(undefined, info.passThroughLongTermGain),
       "1.line.18_rate_gain_worksheet_amount": (_, info) =>
         worksheetLine(info.passThrough28RateGain, WORKSHEETS.line18),
-      "1.line.19_unrecaptured_sec1250_gain": (_, info) =>
-        worksheetLine(info.passThroughUnrecaptured1250Gain, WORKSHEETS.line19),
+      "1.line.19_unrecaptured_sec1250_gain": line19,
       "0.header.ssn": (_, info) => info.taxpayerSSN,
       // MANUAL EDIT: line 6 is entered in parentheses: it reduces line 7.
       "0.line.7_net_short_term_gain_loss": (form) =>

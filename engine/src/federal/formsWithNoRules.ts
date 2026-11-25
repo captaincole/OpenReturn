@@ -16,8 +16,6 @@ import type { Form4255FilingInfo } from "./4255/filingInfo.js";
 import { resolve4255Info } from "./4255/resolveInfo.js";
 import type { Form4563FilingInfo } from "./4563/filingInfo.js";
 import { resolve4563Info } from "./4563/resolveInfo.js";
-import type { Form4797FilingInfo } from "./4797/filingInfo.js";
-import { resolve4797Info } from "./4797/resolveInfo.js";
 import type { Form4835FilingInfo } from "./4835/filingInfo.js";
 import { resolve4835Info } from "./4835/resolveInfo.js";
 import type { Form4970FilingInfo } from "./4970/filingInfo.js";
@@ -48,8 +46,6 @@ import type { Form8915FFilingInfo } from "./8915-f/filingInfo.js";
 import { resolve8915FInfo } from "./8915-f/resolveInfo.js";
 import type { Form8933FilingInfo } from "./8933/filingInfo.js";
 import { resolve8933Info } from "./8933/resolveInfo.js";
-import type { Form8938FilingInfo } from "./8938/filingInfo.js";
-import { resolve8938Info } from "./8938/resolveInfo.js";
 import type { Form8978FilingInfo } from "./8978/filingInfo.js";
 import { resolve8978Info } from "./8978/resolveInfo.js";
 import type { Form8992FilingInfo } from "./8992/filingInfo.js";
@@ -66,7 +62,6 @@ export type FederalFormsWithNoRulesFilingInfo = ScheduleFFilingInfo &
   Form4136FilingInfo &
   Form4255FilingInfo &
   Form4563FilingInfo &
-  Form4797FilingInfo &
   Form4835FilingInfo &
   Form4970FilingInfo &
   Form5471FilingInfo &
@@ -80,7 +75,6 @@ export type FederalFormsWithNoRulesFilingInfo = ScheduleFFilingInfo &
   Form8912FilingInfo &
   Form8915FFilingInfo &
   Form8933FilingInfo &
-  Form8938FilingInfo &
   Form8978FilingInfo &
   Form8992FilingInfo &
   Form8582CRFilingInfo &
@@ -96,7 +90,6 @@ export const FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS: ReadonlyArray<
   resolve4136Info,
   resolve4255Info,
   resolve4563Info,
-  resolve4797Info,
   resolve4835Info,
   resolve4970Info,
   resolve5471Info,
@@ -110,7 +103,6 @@ export const FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS: ReadonlyArray<
   resolve8912Info,
   resolve8915FInfo,
   resolve8933Info,
-  resolve8938Info,
   resolve8978Info,
   resolve8992Info,
   resolve8582CRInfo,

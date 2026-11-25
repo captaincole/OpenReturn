@@ -244,11 +244,11 @@ describe("Line 11 and line 12 routes", () => {
 });
 
 describe("The credit on the 2025 return", () => {
-  it("line 22 leaves out line 6b itself; line 23 is Form 6251 line 9", () => {
+  it("line 22 leaves out line 6b itself; line 23 is Form 6251 line 7 less the $250 credit", () => {
     const run = evaluate(answers());
     expect(run.value("form-8801", LINE.line22)).toBe(201_393 - 250);
     expect(run.value("form-8801", LINE.line23)).toBe(
-      run.value("form-6251", "0.line.9_tentative_minimum_tax"),
+      (run.value("form-6251", "0.line.7_tax_on_line_6") as number) - 250,
     );
   });
 
@@ -257,7 +257,7 @@ describe("The credit on the 2025 return", () => {
     const credit = run.value("form-8801", LINE.line25);
     expect(run.value("schedule-3", "0.line.6b")).toBe(credit);
     expect(run.value("form-1040", "line.20")).toBe(250 + (credit as number));
-    expect(run.value("form-1040", "line.22")).toBe(165_806);
+    expect(run.value("form-1040", "line.22")).toBe(165_556);
   });
 
   it("a carryforward smaller than line 24 is used in full: line 26 is 0", () => {

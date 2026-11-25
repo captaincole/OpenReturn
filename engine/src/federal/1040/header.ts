@@ -58,7 +58,22 @@ export const filingStatusQss = (_: unknown, info: Form1040FilingInfo) =>
 export const filingStatusMfs = (_: unknown, info: Form1040FilingInfo) =>
   info.filingStatus === "married_filing_separately";
 
-// MANUAL EDIT: MFS names the spouse. The MFJ spouse name fields are not modeled.
+/*
+ * MANUAL EDIT: the spouse's name line is "If joint return". A separate return
+ * names the spouse "below the filing status checkboxes instead of below your
+ * name" (irs-1040-inst-2025::sec::name-and-address::b01), so it stays blank
+ * there; a qualifying surviving spouse files alone. Like the taxpayer's field,
+ * the first name fills this combined field and the middle initial is left out.
+ */
+const joint = (info: Form1040FilingInfo) => info.filingStatus === "married_filing_jointly";
+
+export const headerSpouseFirstNameMi = (_: unknown, info: Form1040FilingInfo) =>
+  joint(info) ? info.spouseFirstName : undefined;
+
+export const headerSpouseLastName = (_: unknown, info: Form1040FilingInfo) =>
+  joint(info) ? info.spouseLastName : undefined;
+
+// MANUAL EDIT: a joint or a separate return shows the spouse's SSN in the header.
 export const headerSpouseSsn = (_: unknown, info: Form1040FilingInfo) =>
   info.filingStatus === "married_filing_separately" ||
   info.filingStatus === "married_filing_jointly"

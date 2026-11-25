@@ -109,6 +109,7 @@ export const gawynFacts: TaxFactRow[] = [
   idFact("phone", "916-555-0142"),
   fact("identity", SPOUSE_KEYS.firstName, MIREILLE.firstName, "Verbal: spouse's name."),
   fact("identity", SPOUSE_KEYS.lastName, MIREILLE.lastName, "Verbal: spouse's name."),
+  fact("identity", SPOUSE_KEYS.occupation, "Home care aide", "Verbal: spouse's occupation."),
   fact("identity", SPOUSE_KEYS.ssn, MIREILLE.ssn, "Verbal: spouse's SSN."),
   fact("identity", SPOUSE_KEYS.dob, "12/02/1987", "Verbal: spouse's date of birth."),
   fact("wages", makeW2FactKey("capitol-glass"), glassW2, "W-2 from Capitol Glass Works."),

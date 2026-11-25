@@ -65,7 +65,8 @@ export interface QdcgResult {
   breakdown: QdcgBreakdown;
 }
 
-function taxByAmount(amount: number, filingStatus: FilingStatus, taxYear: number): number {
+/* The Tax Table under $100,000, else the Tax Computation Worksheet (the Schedule D Tax Worksheet reads it too). */
+export function taxByAmount(amount: number, filingStatus: FilingStatus, taxYear: number): number {
   if (amount < 0) return 0;
   if (amount < 100000) {
     const lookup = lookupTax(`federal-${taxYear}`, amount, filingStatus);

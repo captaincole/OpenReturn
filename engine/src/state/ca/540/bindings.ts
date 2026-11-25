@@ -43,6 +43,7 @@ import {
   headerResidenceCity,
   headerResidenceState,
   headerResidenceZip,
+  headerSpouseDateOfBirth,
   headerSpouseFirstName,
   headerSpouseLastName,
   headerSpouseMiddleInitial,
@@ -125,6 +126,7 @@ export function register(): void {
       "header.state": headerState,
       "header.zip": headerZip,
       "header.date_of_birth": headerDateOfBirth,
+      "header.spouse_date_of_birth": headerSpouseDateOfBirth,
       "header.county_at_filing": headerCountyAtFiling,
       "header.mailing_same_as_residence": headerMailingSameAsResidence,
       "header.residence_apartment": headerResidenceApartment,
@@ -262,8 +264,6 @@ export function register(): void {
         "No foreign address facts are ingested; MVP supports domestic US addresses only.",
       "header.foreign_postal_code":
         "No foreign address facts are ingested; MVP supports domestic US addresses only.",
-      "header.spouse_date_of_birth":
-        "No MFJ/spouse scenario ingested; spouse date of birth has no corresponding fact key.",
       "header.prior_name":
         "No prior-name fact key exists in the identity category; taxpayer name-change scenario not modeled.",
       "header.spouse_prior_name":

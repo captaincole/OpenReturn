@@ -28,12 +28,16 @@ const isAboveZero = (value: unknown) => typeof value === "number" && value > 0;
  * worksheet, irs-8960-inst-2025::sec::line-5b-net-gain-or-loss-from-disposition-of::b05–b07):
  * a trade or business on Schedule 1 lines 3, 5 or 6 (worksheet lines 2(a) to
  * 2(d)), a pension or annuity that may hold employer securities (2(e), NUA),
- * and a capital loss carried in or out (2(h) and 2(i)).
+ * and a capital loss carried in or out (2(h) and 2(i)). With Form 4797 on the
+ * return, line5b.ts figures lines 2(a) and 2(b) from its sales, so a trade or
+ * business is not a sign then.
  */
-function otherLine5bItems(form: FormAccessor<Form8960>): boolean {
-  const business = ["schedule-1.0.line.3", "schedule-1.0.line.5", "schedule-1.0.line.6"].some(
-    (fieldId) => isNonZero(form[fieldId]),
-  );
+function otherLine5bItems(form: FormAccessor<Form8960>, info: Form8960FilingInfo): boolean {
+  const business =
+    info.form4797Activities === undefined &&
+    ["schedule-1.0.line.3", "schedule-1.0.line.5", "schedule-1.0.line.6"].some((fieldId) =>
+      isNonZero(form[fieldId]),
+    );
   const carryIn = [
     "schedule-d.0.line.6_short_term_loss_carryover",
     "schedule-d.0.line.14_long_term_loss_carryover",
@@ -51,16 +55,16 @@ function otherLine5bItems(form: FormAccessor<Form8960>): boolean {
  * which is in line 5a through Schedule D. With the election the gain stays on
  * line 5a, and 2(f) is 0. The worksheet's other items are not figured: on a
  * return with a fund fact the line is the 2(f) amount (blank when 0), unless
- * the return shows a sign of another item (otherLine5bItems).
+ * the return shows a sign of another item (otherLine5bItems). line5b.ts adds
+ * the Form 4797 part.
  */
-function line5b(
+export function pficLine5b(
   form: FormAccessor<Form8960>,
   info: Form8960FilingInfo,
+  totals: NonNullable<Form8960FilingInfo["form8621Totals"]>,
 ): number | Unsupported | undefined {
-  const totals = info.form8621Totals;
-  if (totals === undefined) return unsupported(LINE_5B);
   if (totals.gap !== undefined) return unsupported(totals.gap);
-  if (otherLine5bItems(form)) return unsupported(LINE_5B);
+  if (otherLine5bItems(form, info)) return unsupported(LINE_5B);
   const excluded = totals.amounts.netInvestmentIncomeGainExcluded;
   return excluded > 0 ? -excluded : undefined;
 }
@@ -80,6 +84,5 @@ function line6(_: unknown, info: Form8960FilingInfo): number | Unsupported | und
 
 export const pficBindings = {
   "0.header.election_1411_10g": election1411g,
-  "0.line.5b": line5b,
   "0.line.6": line6,
 };

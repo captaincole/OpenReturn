@@ -156,6 +156,7 @@ export const sheriamFacts: TaxFactRow[] = [
   idFact("phone", "941-555-0142"),
   fact("identity", SPOUSE_KEYS.firstName, TAVIN.firstName, "Stated by Sheriam."),
   fact("identity", SPOUSE_KEYS.lastName, TAVIN.lastName, "Stated by Sheriam."),
+  fact("identity", SPOUSE_KEYS.occupation, "Marine surveyor", "Stated by Tavin."),
   fact("identity", SPOUSE_KEYS.ssn, TAVIN.ssn, "Stated by Tavin."),
   fact("identity", SPOUSE_KEYS.dob, "09/30/1979", "Stated by Tavin."),
   fact("wages", makeW2FactKey("gulfline-marine"), w2, "W-2 from Gulfline Marine Engineering."),

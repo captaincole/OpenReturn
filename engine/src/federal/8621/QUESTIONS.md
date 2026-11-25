@@ -156,6 +156,13 @@ Each place where the form and its instructions do not settle a rule. Short answe
 - Default: line 20 takes Form 1040 line 16 with the "1291TAX" amount in it. Whether the section 1291 tax is regular tax liability is not checked against section 26(b)(2) (not in the corpus).
 - Changes dollars: only when the credit reaches the line 21 limit.
 
+## 23. The fund's stated exchange rates and the committed rate tables
+
+- Source: `main` now converts foreign amounts with committed rate tables (`engine/src/currency/`, `engine/src/incomeInDollars.ts`; 20 supported currencies). A fund fact here states its own rates (`yearEndUsdPerUnit`, a sale's `usdPerUnit`; `currency.ts`).
+- Default: not joined yet. Each path converts only its own amounts, so neither changes the other's results.
+- To do: move the fund's stated rates to the committed tables. Every currency in the two scenarios is in the tables, the rand (ZAR) of sheriam's section 1291 fund too.
+- Changes dollars: possibly, where a stated rate differs from the table's rate for the same date.
+
 ## Confidence by field group
 
 | Field group | Confidence |

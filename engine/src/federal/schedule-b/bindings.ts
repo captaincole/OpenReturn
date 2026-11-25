@@ -27,8 +27,10 @@ function payerRows(
   for (let rowNumber = 1; rowNumber <= rows; rowNumber++) {
     out[`0.line.${line}_payer_name_${rowNumber}`] = (_, info) =>
       payers(info)?.[rowNumber - 1]?.payerName;
-    out[`0.line.${line}_amount_${rowNumber}`] = (_, info) =>
-      roundDollars(payers(info)?.[rowNumber - 1]?.amount);
+    out[`0.line.${line}_amount_${rowNumber}`] = (_, info) => {
+      const payer = payers(info)?.[rowNumber - 1];
+      return payer?.gap !== undefined ? unsupported(payer.gap) : roundDollars(payer?.amount);
+    };
   }
   return out;
 }
@@ -36,8 +38,12 @@ function payerRows(
 function payerTotal(
   payers: PayerAmount[] | undefined,
   rounding: ScheduleBRounding | undefined,
-): number | undefined {
+): number | Unsupported | undefined {
   if (!payers || payers.length === 0) return undefined;
+  const gap = payers.find((payer) => payer.gap !== undefined)?.gap;
+  if (gap !== undefined) return unsupported(gap);
+  // A row that waits for its exchange rate leaves the total waiting.
+  if (payers.some((payer) => payer.amount === undefined)) return undefined;
   if (rounding === "sum_rounded_rows")
     return sum(...payers.map((payer) => roundDollars(payer.amount)));
   return roundDollars(sum(...payers.map((payer) => payer.amount)));
@@ -55,6 +61,56 @@ function withPassThrough(
 
 function yesNo(answer: (info: ScheduleBFilingInfo) => boolean | undefined, yes: boolean): Fn {
   return (_, info) => (answer(info) === yes ? true : undefined);
+}
+
+const FINCEN_GAP =
+  "FinCEN Form 114 is required when the foreign accounts together are worth more than $10,000 at any time; the engine knows it only when one recorded account alone is worth more.";
+
+const COUNTRIES_GAP =
+  "A foreign financial account on the return has no country recorded (no address of an institution, entity or issuer), so the list of countries would leave one out.";
+
+/* Question 2 is Yes from the account facts (resolveInfo.ts foreignAccountFactsOf). */
+const fincenYes = (info: ScheduleBFilingInfo) =>
+  info.hasForeignFinancialAccount === true && info.foreignAccountFacts?.overFincenLimit === true;
+
+/* A Part VI asset does not say yet whether it is a financial account (missingInputs lists it). */
+const waitsForAnswer = (info: ScheduleBFilingInfo) =>
+  (info.foreignAccountFacts?.unansweredAssetKeys.length ?? 0) > 0;
+
+/*
+ * MANUAL EDIT: line 7a question 2 and line 7b
+ * (irs-1040sb-inst-2025::sec::line-7a-question-2-see-fincen-form-114-and-its::b01, line-7b::b01):
+ * Yes, and the accounts' countries, when one recorded account alone is worth
+ * more than $10,000; blank after a No to question 1. A Part VI asset with no
+ * answer whether it is a financial account may change both, so they wait for
+ * it (line-7a-question-1-check-the-yes-box-if-at-any-time::b01, "shares in a
+ * mutual fund or similar pooled fund"). Otherwise the engine cannot tell:
+ * unsupported. Line 7b row 1 takes the first country, row 2 the others.
+ */
+function fincenBindings(): Record<string, Fn> {
+  // "If 'Yes,' are you required to file FinCEN Form 114": blank after a No.
+  const settled =
+    (value: (info: ScheduleBFilingInfo) => unknown): Fn =>
+    (_, info) => {
+      if (info.hasForeignFinancialAccount === false) return undefined;
+      if (fincenYes(info)) return value(info);
+      return waitsForAnswer(info) ? undefined : unsupported(FINCEN_GAP);
+    };
+  const countries = (info: ScheduleBFilingInfo) => info.foreignAccountFacts?.countries ?? [];
+  const listed = (row: (list: string[]) => string | undefined) =>
+    settled((info) => {
+      if (waitsForAnswer(info)) return undefined;
+      if (info.foreignAccountFacts?.countriesIncomplete === true) return unsupported(COUNTRIES_GAP);
+      return row(countries(info));
+    });
+  return {
+    "0.line.7a_fincen_114_required_yes": settled(() => true),
+    "0.line.7a_fincen_114_required_no": settled(() => undefined),
+    "0.line.7b_foreign_country_1": listed((list) => list[0]),
+    "0.line.7b_foreign_country_2": listed((list) =>
+      list.length > 1 ? list.slice(1).join(", ") : undefined,
+    ),
+  };
 }
 
 export function register(): void {
@@ -93,27 +149,17 @@ export function register(): void {
     "0.line.6_total_ordinary_dividends": (_, info) =>
       info.form8621Totals?.gap !== undefined
         ? unsupported(info.form8621Totals.gap)
-        : withPassThrough(info.passThroughDividends, () =>
-            withForm8814(
-              info.form8814Totals,
-              payerTotal(info.dividendPayers, info.rounding),
-              () => 0,
-            ),
-          ),
+        : withPassThrough(info.passThroughDividends, () => {
+            const own = payerTotal(info.dividendPayers, info.rounding);
+            return typeof own === "object" ? own : withForm8814(info.form8814Totals, own, () => 0);
+          }),
     "0.line.7a_foreign_account_yes": yesNo((info) => info.hasForeignFinancialAccount, true),
     "0.line.7a_foreign_account_no": yesNo((info) => info.hasForeignFinancialAccount, false),
     "0.line.8_foreign_trust_yes": yesNo((info) => info.hasForeignTrust, true),
     "0.line.8_foreign_trust_no": yesNo((info) => info.hasForeignTrust, false),
+    ...fincenBindings(),
   };
   defineForm<ScheduleB, ScheduleBFilingInfo>("schedule-b", {
     bindings: bindings as Bindings,
-    unsupported: {
-      "0.line.7a_fincen_114_required_yes":
-        "FinCEN 114 question applies only after a foreign-account Yes; no foreign-account scenario yet.",
-      "0.line.7a_fincen_114_required_no":
-        "FinCEN 114 question applies only after a foreign-account Yes; no foreign-account scenario yet.",
-      "0.line.7b_foreign_country_1": "No foreign-account scenario yet.",
-      "0.line.7b_foreign_country_2": "No foreign-account scenario yet.",
-    },
   });
 }
