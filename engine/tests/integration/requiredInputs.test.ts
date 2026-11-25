@@ -74,6 +74,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],
   [
+    /^installment_sale\.[^.]+$/,
+    "each fact is a whole installment sale (Form 6252, one copy per sale); whether the " +
+      "taxpayer made one is Cade's question",
+  ],
+  [
     /^pfic_fund\.[^.]+$/,
     "each fact is a whole foreign fund holding (Form 8621, one copy per fund); whether the " +
       "taxpayer holds one is Cade's question",
@@ -132,6 +137,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "whether one exists is Cade's question",
   ],
   [
+    /^ca_health_coverage\.unclaimed\.[^.]+$/,
+    "each fact is a whole person the taxpayer can claim as a dependent but does not (FTB 3853 " +
+      "Parts I and III); whether one lives in the household is Cade's question",
+  ],
+  [
     /^adoption\.child\.[^.]+$/,
     "each fact is a whole child the taxpayer adopted or tried to adopt (Form 8839 line 1); " +
       "whether one exists is Cade's question",
@@ -167,6 +177,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^business_property_sale\.(?!(ca_)?nonrecaptured_section_1231_losses$)[^.]+$/,
     "a Form 4797 sale fact is the whole sale (as a rental property fact is the whole property); " +
       "whether one exists is Cade's question",
+  ],
+  [
+    /^(like_kind_exchange|conflict_of_interest_sale)\.[^.]+$/,
+    "each fact is a whole like-kind exchange or section 1043 sale (Form 8824); whether one " +
+      "happened is Cade's question. Form 8824 lists an exchange again while its lines 9 and 10 " +
+      "are not answered",
   ],
   [
     /^section_179_recapture\.[^.]+$/,
@@ -245,6 +261,17 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^foreign_tax_credit\.claim_accrued$/,
     "an answer Cade records only when the taxpayer chose, on an earlier return, to credit " +
       "foreign taxes when they accrue (Form 1116 Part II box k); absent, box j (paid)",
+  ],
+  [
+    /^ca_pte_elective_credit\.[^.]+$/,
+    "each fact is a whole electing entity's PTE elective tax credit (FTB 3804-CR Part I, one " +
+      "row); whether the taxpayer has one is Cade's question. FTB 3804-CR lists the fact again " +
+      "while an answer inside it (name, number, credit) is missing",
+  ],
+  [
+    /^prior_year\.ca_pte_elective_credit_carryover$/,
+    "an answer Cade records only when the user carries a PTE elective tax credit from 2024; " +
+      "above 0 it files FTB 3804-CR, which asks for it whenever it files",
   ],
   [
     /^prior_year\.ca_amt(_credit_carryover)?$/,

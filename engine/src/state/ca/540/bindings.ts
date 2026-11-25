@@ -15,6 +15,7 @@ import {
   line44CreditAmount,
   line44CreditCode,
   line44CreditName,
+  line45SchedulePCredits,
   line47TotalCredits,
   line48TaxAfterCredits,
 } from "./credits.js";
@@ -85,14 +86,17 @@ import {
   line91NoUseTaxOwed,
   line91UseTax,
   line92FullYearHealthCoverage,
+  line92IsrPenalty,
   line93PaymentsBalance,
   line95PaymentsAfterIsrPenalty,
+  line96IsrPenaltyBalance,
   line97OverpaidTax,
   line99OverpaidTaxAvailable,
 } from "./refundOrAmountDue.js";
 import { signingTaxpayerEmail, signingTaxpayerPhone } from "./signing.js";
 import {
   line31TaxAmount,
+  line31TaxFromFtb3800,
   line31TaxFromFtb3803,
   line31TaxFromRateSchedule,
   line31TaxFromTaxTable,
@@ -187,6 +191,7 @@ export function register(): void {
       // Tax, lines 31 to 35 (tax.ts).
       "line.31_tax_from_tax_table": line31TaxFromTaxTable,
       "line.31_tax_from_rate_schedule": line31TaxFromRateSchedule,
+      "line.31_tax_from_ftb_3800": line31TaxFromFtb3800,
       "line.31_tax_from_ftb_3803": line31TaxFromFtb3803,
       "line.31_tax_amount": line31TaxAmount,
       "line.32_exemption_credits": line32ExemptionCredits,
@@ -203,6 +208,7 @@ export function register(): void {
       "line.44_credit_name": line44CreditName,
       "line.44_credit_code": line44CreditCode,
       "line.44_credit_amount": line44CreditAmount,
+      "line.45_schedule_p_credits": line45SchedulePCredits,
       "line.47_total_credits": line47TotalCredits,
       "line.48_tax_after_credits": line48TaxAfterCredits,
 
@@ -224,8 +230,10 @@ export function register(): void {
       "line.91_use_tax": line91UseTax,
       "line.91_no_use_tax_owed": line91NoUseTaxOwed,
       "line.92_full_year_health_coverage": line92FullYearHealthCoverage,
+      "line.92_isr_penalty": line92IsrPenalty,
       "line.93_payments_balance": line93PaymentsBalance,
       "line.95_payments_after_isr_penalty": line95PaymentsAfterIsrPenalty,
+      "line.96_isr_penalty_balance": line96IsrPenaltyBalance,
       "line.97_overpaid_tax": line97OverpaidTax,
       "line.99_overpaid_tax_available": line99OverpaidTaxAvailable,
       "line.100_tax_due": line100TaxDue,
@@ -253,8 +261,6 @@ export function register(): void {
     unsupported: {
       "line.94_use_tax_balance":
         "Form 540 line 94 (use tax balance) — no scenario has use tax above its payments (line 91 more than line 78), and the corpus has no FTB text for line 94 to ground the rule.",
-      "line.96_isr_penalty_balance":
-        "Form 540 line 96 (individual shared responsibility penalty balance) — ISR penalty / health-coverage-gap scenario not modeled yet.",
       "line.110_total_contributions":
         "Form 540 line 110 (total voluntary contributions, codes 400-449) — no voluntary-contribution fact ingestion path built yet.",
       "header.is_amended_return":
@@ -288,20 +294,14 @@ export function register(): void {
         "Static instructions reference label on the form; no computable value — no scenario for QSS filing status with deceased spouse data ingested.",
       "header.claimed_as_dependent":
         "No scenario yet where the taxpayer themselves is claimed as a dependent by another person — no fact or decision models this.",
-      "line.31_tax_from_ftb_3800":
-        "Checkbox indicating tax includes FTB 3800 (tax on child's unearned income). No FTB 3800 scenario or fact-ingestion path exists yet.",
       "line.34_tax_from_ftb_5870a":
         "Checkbox indicating line 34 tax is from FTB 5870A (tax on accumulation distribution of trusts). No FTB 5870A scenario or fact-ingestion path exists yet.",
-      "line.45_schedule_p_credits":
-        "Line 45 is for additional credits claimed via Schedule P (540). No ingestion path for Schedule P credits exists yet — would require a separate Schedule P catalog and credit data.",
       "line.46_renters_credit":
         "Nonrefundable Renter's Credit eligibility requires income limits, rent paid, landlord details, and rental address data — no fact ingestion path or scenario built for this yet.",
       "line.73_withholding_592b_593":
         "Form 592-B and 593 withholding (partnership/LLC/real estate withholding) requires separate fact ingestion — no ingestion path or scenario built yet.",
       "line.74_motion_picture_production_credit":
         "CA Motion Picture and Television Production Credit (FTB 3541) requires allocation/certification data from the California Film Commission — no ingestion path or scenario built yet.",
-      "line.92_isr_penalty":
-        "ISR penalty amount requires FTB 3853 computation (months without coverage × penalty rate per household member) — no FTB 3853 ingestion or partial-coverage scenario built yet.",
       "line.98_applied_to_2026_estimated_tax":
         "Taxpayer-elected amount applied to 2026 estimated tax — this is a discretionary user input with no fact or decision key; we'd need an estimated-tax-election intake flow to support it.",
       "line.contrib_400_ca_seniors_special_fund":

@@ -22,6 +22,8 @@ export interface SaleRow {
   costPlusExpense: number;
   /* Column (g): (d) + (e) − (f). */
   gainOrLoss: number;
+  /* A line 10 row "From Form 6252": only columns (a) and (g) print (4797/lines.ts). */
+  fromForm6252?: boolean;
 }
 
 /* One property column of Part III, lines 19 to 29b. A line the property skips is undefined. */

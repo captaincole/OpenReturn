@@ -18,6 +18,7 @@ import { register as registerForm3801CR } from "./3801-cr/bindings.js";
 import { register as registerForm3801 } from "./3801/bindings.js";
 import { register as registerForm3803 } from "./3803/bindings.js";
 import { register as registerForm3804CR } from "./3804-cr/bindings.js";
+import { rowsByForm } from "./3804-cr/lines.js";
 import { register as registerForm3805E } from "./3805e/bindings.js";
 import { register as registerForm3805p } from "./3805p/bindings.js";
 import { register as registerForm3805V } from "./3805v/bindings.js";
@@ -312,6 +313,11 @@ export const CA_FORMS: FormSpec[] = [
     displayName: "FTB 3804-CR",
     relativeDir: "state/ca/3804-cr",
     register: registerForm3804CR,
+    /* Ten entities per form; "use additional forms FTB 3804-CR" (ca-3804cr-inst-2025::sec::line-1-column-c-pte-elective-tax-credit-s::b01). */
+    copies: {
+      count: (info) => rowsByForm(info?.pteCreditRows ?? []).length,
+      select: (info, index) => info && { ...info, form3804CrCopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-3805v",

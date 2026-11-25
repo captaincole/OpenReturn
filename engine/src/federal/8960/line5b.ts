@@ -13,7 +13,8 @@
  * business, as on line 4b (line-4b-adjustment-for-net-income-or-loss::b01), so
  * its sales come out. A passive business's, a rental's and a sale with no
  * business's gain stays in NII. A rental that line 4b takes out as a
- * nonpassive trade or business is a gap: its sale is not modeled. Lines 2(c) to
+ * nonpassive trade or business is a gap: its sale is not modeled. Line 2(d)
+ * takes a Form 6252 business sale's gain (form6252Line5b). Lines 2(c), 2(e) and
  * 2(g) have no facts. Lines 2(h) and 2(i) adjust a capital loss carryforward;
  * 2(h) is last year's line 2(i), which no fact gives, so a capital loss carried
  * in from 2024 makes the line a gap.
@@ -23,6 +24,8 @@ import type { FormAccessor } from "../../defineForm.js";
 import { sum, sumOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import type { Form4797Activities } from "../4797/activities.js";
+import type { SaleForm } from "../6252/sale.js";
+import { saleIncome } from "../6252/totals.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
 import type { Form8960FilingInfo } from "./filingInfo.js";
 import { section162Nonpassive } from "./lines.js";
@@ -67,21 +70,79 @@ export function form4797Line5b(
   return 0 - sum(...excluded.map((each) => each.total));
 }
 
+/* A Form 6252 sale whose gain goes to Form 4797 (line 4 or 10): property used in a trade or business, or another noncapital asset. */
+const isBusinessInstallmentSale = (form: SaleForm): boolean => form.sale.use !== "capital_asset";
+
+/* The fact keys of the business sales whose line 2(d) answer is missing: Form 8960 asks for each while it files. */
+export function installmentSalesWithoutTradeOrBusinessAnswer(forms: SaleForm[]): string[] {
+  return forms
+    .filter(
+      (each) =>
+        isBusinessInstallmentSale(each) && each.sale.nonSection1411TradeOrBusiness === undefined,
+    )
+    .map((each) => each.key);
+}
+
 /*
- * The line: the Form 4797 part (worksheet lines 2(a) and 2(b)) and, with a fund
- * fact, a QEF's line 7c (worksheet line 2(f), pficLines.ts). Either part's gap
- * makes the line a gap, the fund's first; the line waits while Form 4797 waits.
- * With no fund fact the line is the Form 4797 part.
+ * Worksheet line 2(d): "Gains recognized in the current year for payments
+ * received on an installment sale obligation or private annuity for the
+ * disposition of property used in a non-section 1411 trade or business" (::b06),
+ * as a negative: the sale's whole income this year, line 24 (and line 35),
+ * recapture included, since Form 4797 sends all of it to line 5a. The sale's
+ * fact answers whether its property was used in one
+ * (nonSection1411TradeOrBusiness); the line waits while a business sale's answer
+ * is missing. A capital asset's gain (Schedule D) stays in NII. A capital loss
+ * carried in is the same gap as the Form 4797 part's (worksheet line 2(h)).
+ */
+export function form6252Line5b(
+  info: Form8960FilingInfo,
+): number | Unsupported | "waiting" | undefined {
+  const forms = info.form6252Totals?.forms ?? [];
+  if (installmentSalesWithoutTradeOrBusinessAnswer(forms).length > 0) return "waiting";
+  const incomes = forms
+    .filter((each) => isBusinessInstallmentSale(each))
+    .filter((each) => each.sale.nonSection1411TradeOrBusiness === true)
+    .map(saleIncome);
+  const amounts: number[] = [];
+  for (const income of incomes) {
+    if (typeof income === "object") return unsupported(`Form 6252: ${income.reason}`);
+    if (income === undefined) return "waiting";
+    amounts.push(income);
+  }
+  const total = sum(...amounts);
+  if (total === 0) return undefined;
+  if (info.capitalLossCarriedIn) return unsupported(CARRYOVER_GAP);
+  return 0 - total;
+}
+
+/* Line 5b, and line 5d with it, waits while a Form 4797 sale's activity or a Form 6252 sale's answer is missing. */
+export function line5bWaits(info: Form8960FilingInfo): boolean {
+  return info.form4797Activities?.waiting === true || form6252Line5b(info) === "waiting";
+}
+
+/*
+ * The line: the Form 4797 part (worksheet lines 2(a) and 2(b)), the Form 6252
+ * part (line 2(d)) and, with a fund fact, a QEF's line 7c (worksheet line 2(f),
+ * pficLines.ts). Any part's gap makes the line a gap, the fund's first; the line
+ * waits while Form 4797 or Form 6252 waits. With no fund fact the line is the
+ * two sale parts.
  */
 export function line5b(
   form: FormAccessor<Form8960>,
   info: Form8960FilingInfo,
 ): number | Unsupported | undefined {
   const form4797 = form4797Line5b(info);
-  if (form4797 === "waiting") return undefined;
-  if (info.form8621Totals === undefined) return form4797;
+  const form6252 = form6252Line5b(info);
+  if (form4797 === "waiting" || form6252 === "waiting") return undefined;
+  const sales =
+    typeof form4797 === "object"
+      ? form4797
+      : typeof form6252 === "object"
+        ? form6252
+        : sumOrBlank(form4797, form6252);
+  if (info.form8621Totals === undefined) return sales;
   const pfic = pficLine5b(form, info, info.form8621Totals);
   if (typeof pfic === "object") return pfic;
-  if (typeof form4797 === "object") return form4797;
-  return sumOrBlank(form4797, pfic);
+  if (typeof sales === "object") return sales;
+  return sumOrBlank(sales, pfic);
 }

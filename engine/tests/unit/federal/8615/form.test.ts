@@ -156,8 +156,8 @@ describe("Form 8615 who files (who-must-file::b01, ::b02)", () => {
 
   it("a gain from a sale, with the parent's return recorded, is taxed at the parent's rate (unearned-income::b01)", () => {
     /*
-     * Nynaeve without her 1099s: a $12,000 long-term gain alone. The fallback does not
-     * count sales (QUESTIONS.md item 1), so the parent's return files the form. With no
+     * Nynaeve without her 1099s: a $12,000 long-term gain alone. The fallback counts
+     * the sale for a child under 18 (QUESTIONS.md item 1). With no
      * other child: line 3 = 12,000 − 2,700 = 9,300, all net capital gain (Worksheet #1),
      * so line 13 = 15% × 9,300 = 1,395; line 15 is the tax on 6,950 with 2,700 of gain
      * at 0%, 428; line 16 = 1,823 beats line 17's 428.
