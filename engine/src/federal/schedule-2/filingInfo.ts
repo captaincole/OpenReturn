@@ -2,6 +2,7 @@ import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Form1116FilingInfo } from "../1116/filingInfo.js";
 import type { Form4137FilingInfo } from "../4137/filingInfo.js";
 import type { Form5329FilingInfo } from "../5329/filingInfo.js";
+import type { Form8621FilingInfo } from "../8621/filingInfo.js";
 import type { Form8919FilingInfo } from "../8919/filingInfo.js";
 import type { Form8936FilingInfo } from "../8936/filingInfo.js";
 
@@ -19,4 +20,5 @@ export interface Schedule2FilingInfo
     Form8936FilingInfo,
     Pick<Form4137FilingInfo, "form4137Filers">,
     Pick<Form8919FilingInfo, "form8919Filers">,
+    Pick<Form8621FilingInfo, "form8621Totals">,
     Pick<Form5329FilingInfo, "earlyDistributionPeople" | "earlyDistributionTaxWithoutForm"> {}

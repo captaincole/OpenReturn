@@ -5,6 +5,7 @@ import {
   getGamblingWinningsFacts,
   getGovernmentPaymentsFacts,
   getLtcBenefitsFacts,
+  getPficFundFacts,
   getSection1256Facts,
   isDividendFactKey,
   isHsaDistributionFactKey,
@@ -28,6 +29,7 @@ import { resolve4137Info } from "../4137/resolveInfo.js";
 import { activityOf } from "../4797/activities.js";
 import { form4797GainUpperBound } from "../4797/upperBound.js";
 import { line1Row } from "../6781/lines.js";
+import { form8621IncomeUpperBound } from "../8621/totals.js";
 import { form8814IncomeUpperBound } from "../8814/children.js";
 import {
   passThroughHasInvestmentIncome,
@@ -103,6 +105,8 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
     ),
     // A child's interest and dividends on Form 8814 (irs-8814-inst-2025::sec::parents-who-don-t-file-a-joint-return::b06).
     form8814IncomeUpperBound(inputs),
+    // A PFIC's income reaches AGI through Schedule 1 line 8z, Schedule D line 11 and line 3b (Form 8621).
+    form8621IncomeUpperBound(inputs),
     passThroughIncomeUpperBound(inputs.facts),
     // A positive beneficiary's adjustment increases MAGI (irs-8960-inst-2025::sec::line-13-modified-adjusted-gross-income-magi::b03).
     ...k1ItemsWithRoute(inputs, "form_8960_line_7").map((item) => atLeast(0, item.amount ?? 0)),
@@ -114,7 +118,7 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
  * Who Must File asks for investment income: an interest, dividend or sale fact
  * (category investment_income), a capital loss carried over from last year
  * (it reaches line 5a through 1040 line 7a), a child's income on Form 8814, a
- * section 1256 contract (Form 6781, the same way), a K-1's portfolio income,
+ * section 1256 contract (Form 6781, the same way), a PFIC fund (Form 8621), a K-1's portfolio income,
  * passive activity income (a trust's boxes 6 to 8, any rental) or net
  * investment income adjustment, a business without line G "Yes" (passive), or
  * a Form 4797 sale that no business with line G "Yes" made (line 5b keeps it in).
@@ -151,6 +155,7 @@ export function investmentSignals(
     form8814IncomeUpperBound(inputs) > 0 ||
     carryover ||
     getSection1256Facts(inputs.facts).length > 0 ||
+    getPficFundFacts(inputs.facts).length > 0 ||
     passThroughHasInvestmentIncome(inputs.facts) ||
     (businesses.length > 0 && !scheduleCNonpassive) ||
     investmentSale;

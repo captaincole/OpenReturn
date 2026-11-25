@@ -19,12 +19,15 @@
  * in from 2024 makes the line a gap.
  */
 
-import { sum } from "../../money.js";
+import type { FormAccessor } from "../../defineForm.js";
+import { sum, sumOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import type { Form4797Activities } from "../4797/activities.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
 import type { Form8960FilingInfo } from "./filingInfo.js";
 import { section162Nonpassive } from "./lines.js";
+import { pficLine5b } from "./pficLines.js";
+import type { Form8960 } from "./types.js";
 
 const CARRYOVER_GAP =
   "A capital loss was carried into 2025, and Lines 5a–5d Worksheet line 2(h) needs last year's line 2(i) (irs-8960-inst-2025::sec::line-5b-net-gain-or-loss-from-disposition-of::b06), which no fact gives.";
@@ -46,11 +49,15 @@ function rentalSaleGap(
   return undefined;
 }
 
-export function line5b(info: Form8960FilingInfo): number | Unsupported | undefined {
+/* The Form 4797 part of line 5b, or "waiting" while a sale's business or rental answer is missing. */
+export function form4797Line5b(
+  info: Form8960FilingInfo,
+): number | Unsupported | "waiting" | undefined {
   const activities = info.form4797Activities;
-  if (activities === undefined || activities.waiting) return undefined;
+  if (activities === undefined) return undefined;
+  if (activities.waiting) return "waiting";
   const rental = rentalSaleGap(activities, info.rentalProperties ?? []);
-  if (rental !== undefined) return rental === "waiting" ? undefined : rental;
+  if (rental !== undefined) return rental;
   const nonpassive = info.nonpassiveBusinessKeys ?? [];
   const excluded = activities.amounts.filter((each) => nonpassive.includes(each.key));
   const unread = activities.amounts.length === 0 && nonpassive.length > 0;
@@ -58,4 +65,23 @@ export function line5b(info: Form8960FilingInfo): number | Unsupported | undefin
   if (activities.totalGap) return unsupported(`Form 4797: ${activities.totalGap}`);
   if (info.capitalLossCarriedIn) return unsupported(CARRYOVER_GAP);
   return 0 - sum(...excluded.map((each) => each.total));
+}
+
+/*
+ * The line: the Form 4797 part (worksheet lines 2(a) and 2(b)) and, with a fund
+ * fact, a QEF's line 7c (worksheet line 2(f), pficLines.ts). Either part's gap
+ * makes the line a gap, the fund's first; the line waits while Form 4797 waits.
+ * With no fund fact the line is the Form 4797 part.
+ */
+export function line5b(
+  form: FormAccessor<Form8960>,
+  info: Form8960FilingInfo,
+): number | Unsupported | undefined {
+  const form4797 = form4797Line5b(info);
+  if (form4797 === "waiting") return undefined;
+  if (info.form8621Totals === undefined) return form4797;
+  const pfic = pficLine5b(form, info, info.form8621Totals);
+  if (typeof pfic === "object") return pfic;
+  if (typeof form4797 === "object") return form4797;
+  return sumOrBlank(form4797, pfic);
 }

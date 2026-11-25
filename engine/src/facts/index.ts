@@ -65,6 +65,7 @@ export * from "./kinds/noncashGifts.js";
 export * from "./kinds/nonemployeeCompensation.js";
 export * from "./kinds/otherIncome.js";
 export * from "./kinds/paymentTransactions.js";
+export * from "./kinds/pficFund.js";
 export * from "./kinds/priorYear.js";
 export * from "./kinds/priorYearMinimumTax.js";
 export * from "./kinds/refundDeposit.js";

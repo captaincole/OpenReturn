@@ -90,7 +90,33 @@ function setText(ctx: WriterCtx, fieldId: string, widgetName: string, value: str
     );
     return;
   }
+  shrinkToFit(ctx, field, written);
   appendRendered(ctx.rendered, fieldId, { widgetName, text: written });
+}
+
+/* Points left free inside a widget's edges: pdf-lib draws the text inside its border and padding. */
+const WIDGET_INSET = 4;
+
+/* The font size in a default appearance string such as "/Helv 8.00 Tf 0 g"; undefined when none. */
+function appearanceFontSize(field: PDFTextField): number | undefined {
+  const tokens = (field.acroField.getDefaultAppearance() ?? "").split(" ");
+  const size = Number(tokens[tokens.indexOf("Tf") - 1]);
+  return Number.isFinite(size) && size > 0 ? size : undefined;
+}
+
+/*
+ * A one-line text that is wider than its widget at the form's font size is
+ * cut off when the page is printed (Form 1040 line 16 box 3 holds "1291TAX"
+ * and an amount in 36 points). Such a text gets the font size that fits.
+ */
+function shrinkToFit(ctx: WriterCtx, field: PDFTextField, text: string): void {
+  if (field.isMultiline() || field.isCombed()) return;
+  const size = appearanceFontSize(field);
+  const widget = field.acroField.getWidgets()[0];
+  if (size === undefined || widget === undefined) return;
+  const room = widget.getRectangle().width - WIDGET_INSET;
+  const width = ctx.pdfForm.getDefaultFont().widthOfTextAtSize(text, size);
+  if (width > room && room > 0) field.setFontSize((size * room) / width);
 }
 
 function check(ctx: WriterCtx, fieldId: string, widgetName: string): void {

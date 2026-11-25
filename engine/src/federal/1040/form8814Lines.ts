@@ -5,8 +5,9 @@
 
 import type { FormAccessor } from "../../defineForm.js";
 import { numberOrBlank, roundDollars } from "../../money.js";
+import { withForm8621 } from "../8621/totals.js";
 import { figuredForm8814, withForm8814 } from "../8814/totals.js";
-import { roundedWithReceived } from "../passThrough/receipts.js";
+import { roundedWithReceived, withReceived } from "../passThrough/receipts.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import type { Form1040 } from "./types.js";
 
@@ -29,14 +30,18 @@ export function line3a(info: Form1040FilingInfo) {
  * Line 3b: Schedule B line 6 when Schedule B files, whose line 5 lists each
  * K-1's dividends and each Form 8814 line 9 (::line-9::b01); otherwise the
  * ordinary dividends, a K-1's (irs-1041k1-inst-2025::sec::box-2a-ordinary-dividends::b01),
- * plus line 9 (irs-1040-inst-2025::sec::line-3b::b01).
+ * plus line 9 (irs-1040-inst-2025::sec::line-3b::b01). Without Schedule B it
+ * adds each PFIC's nonexcess distributions, a dividend "on Form 1040, line 3b"
+ * (irs-8621-inst-2025::sec::line-15c::b01), cents kept until the total.
  */
 export function line3b(form: Form, info: Form1040FilingInfo) {
   const scheduleB = numberOrBlank(form["schedule-b.0.line.6_total_ordinary_dividends"]);
   if (scheduleB !== undefined) return withForm8814(info.form8814Totals, scheduleB, () => 0);
-  const own = roundedWithReceived(info.ordinaryDividends, info.passThroughOrdinaryDividends);
+  const own = withReceived(info.ordinaryDividends, info.passThroughOrdinaryDividends);
   if (typeof own === "object") return own;
-  return withForm8814(info.form8814Totals, own, (figured) => figured.line9);
+  const withFunds = withForm8621(info.form8621Totals, own, (amounts) => amounts.dividendsUsd);
+  if (typeof withFunds === "object") return withFunds;
+  return withForm8814(info.form8814Totals, roundDollars(withFunds), (figured) => figured.line9);
 }
 
 /* Line 3c boxes 1 and 2: the child's qualified dividends (line 9) are in lines 3a and 3b. */

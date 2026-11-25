@@ -12,6 +12,7 @@ import { sum, sumOrBlank } from "../../money.js";
 import { filingStatusOf, num, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import { resolve2106Info } from "../2106/resolveInfo.js";
 import { resolve3903Info } from "../3903/resolveInfo.js";
+import { form8621Totals } from "../8621/totals.js";
 import { figuredForm8814, form8814Totals } from "../8814/totals.js";
 import { resolve8853Info } from "../8853/resolveInfo.js";
 import { form8853Reaches, SCHEDULE_1_LINES } from "../8853/results.js";
@@ -108,6 +109,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
         rule: `fallback: Form 8814 line 12 $${form8814Line12} on line 8z`,
         value: form8814Line12 !== 0,
       },
+      form8621Fallback(inputs),
     ],
   });
   return {
@@ -127,6 +129,20 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     earlyWithdrawalPenalty: savingsPenalty,
     ...studentLoan.info,
     armedForcesStorageFees: moving.storageFees,
+  };
+}
+
+/*
+ * Line 8z: Form 8621's other income (federal/8621/results.ts). Schedule 1
+ * files for it, or while a fund's amounts have a gap.
+ */
+function form8621Fallback(inputs: ResolverInputs) {
+  const totals = form8621Totals(inputs);
+  const amount = totals?.amounts.otherIncome ?? 0;
+  return {
+    rule: `fallback: Form 8621 other income $${amount} on line 8z (or a fund the engine cannot figure)`,
+    value: amount !== 0 || totals?.gap !== undefined,
+    triggeredByFactKeys: totals?.funds.map((fund) => fund.key) ?? [],
   };
 }
 

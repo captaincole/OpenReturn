@@ -105,6 +105,8 @@ import {
 import {
   line16,
   line16FromForm4972,
+  line16FromOtherForm,
+  line16OtherFormNumber,
   line17,
   line18,
   line19,
@@ -183,6 +185,8 @@ export function register(): void {
       "line.15": line15,
       "line.16_from_form_8814": line16FromForm8814,
       "line.16_from_form_4972": line16FromForm4972,
+      "line.16_from_other_form": line16FromOtherForm,
+      "line.16_other_form_number": line16OtherFormNumber,
       "line.16": line16,
       "line.17": line17,
       "line.18": line18,
@@ -295,10 +299,6 @@ export function register(): void {
         "No MFJ scenario ingested yet — spouse-as-dependent checkbox requires a joint-return scenario where the spouse can be claimed by a third party.",
       "line.12b_dual_status_alien":
         "No dual-status alien scenario ingested yet — this checkbox requires a residency/immigration-status fact we don't model.",
-      "line.16_from_other_form":
-        "Checkbox indicating tax includes amounts from a third special form (e.g. section 962 election, recapture). No ingestion scenario built for these edge cases.",
-      "line.16_other_form_number":
-        "Free-text entry for the form number associated with the third checkbox on line 16. Tied to special-form tax scenarios not yet ingested.",
       "line.former_spouse_ssn":
         "Former spouse SSN for joint estimated tax split — no MFS/divorce scenario with prior joint estimated payments modeled yet; requires separate fact ingestion for former spouse identity.",
       "line.27b_clergy_schedule_se":

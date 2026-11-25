@@ -6,6 +6,7 @@ import { unsupported, type Unsupported } from "../../types.js";
 import { withLaterCopies } from "../4137/laterCopies.js";
 import { earlyDistributionTax } from "../5329/lines.js";
 import { amtGap } from "../6251/foreignTaxCredit.js";
+import { form8621Amount } from "../8621/totals.js";
 import { files8853, form8853Total } from "../8853/results.js";
 import { withLaterForm8919Copies } from "../8919/laterCopies.js";
 import { totalOver } from "../8936/credit.js";
@@ -20,6 +21,32 @@ const NO_FORM_8853_LINE_17E = "Form 8853 (Archer MSA) not ingested; no Archer MS
 const NO_FORM_8853_LINE_17F = "Form 8853 (Medicare Advantage MSA) not ingested; no scenario yet";
 const OTHER_PARTS_OF_5329 =
   "Form 5329 files by decision, but only its Part I (early distributions) is figured; Parts II–IX have no facts.";
+
+const NO_PFIC = "No PFIC (Form 8621) ingestion or scenario yet.";
+const NO_OTHER_TAXES =
+  "No miscellaneous other-taxes (PWA penalties, Form 8978 adjustments, etc.) scenario yet.";
+const SECTION_1294_DEFERRED_TAX = "1294DT";
+const NO_1294_DEFERRED_TAX = `Form 8621 line 23 is blank on every copy (no section 1294 election ends this year), so "${SECTION_1294_DEFERRED_TAX}" adds nothing here; the other taxes of line 17z (PWA penalties, Form 8978 adjustments, etc.) are not modeled.`;
+
+/*
+ * A line that takes a Form 8621 amount. With no fund fact it keeps the reason
+ * it had; a fund's gap is its gap; otherwise the amount, or blank with none.
+ * Line 17z has other taxes the engine does not model: with no Form 8621
+ * amount it stays unsupported (keepWithout names that reason).
+ */
+function form8621Line(
+  info: Schedule2FilingInfo,
+  amountOf: (amounts: NonNullable<Schedule2FilingInfo["form8621Totals"]>["amounts"]) => number,
+  without: string,
+  keepWithout?: string,
+): number | Unsupported | undefined {
+  const totals = info.form8621Totals;
+  if (totals === undefined) return unsupported(without);
+  if (totals.gap !== undefined) return unsupported(totals.gap);
+  const amount = form8621Amount(totals, amountOf);
+  if (amount === undefined) return keepWithout === undefined ? undefined : unsupported(keepWithout);
+  return amount;
+}
 
 /*
  * MANUAL EDIT: line 8 takes Form 5329 line 4 of each person, the combined tax
@@ -134,6 +161,32 @@ export function register(): void {
         files8853(info)
           ? form8853Total(info, ["0.line.13b_additional_50_tax"])
           : unsupported(NO_FORM_8853_LINE_17F),
+      /*
+       * MANUAL EDIT: line 17p is Form 8621 line 16f of every fund, line 17q its
+       * line 24 (irs-8621-inst-2025::sec::line-16f::b02, ::line-24::b01;
+       * irs-1040-inst-2025::sec::line-17p::b01). Line 17z takes its line 23 as
+       * "1294DT" (irs-8621-inst-2025::sec::line-23::b01).
+       */
+      "1.line.17p_interest_form8621_line16f_section_1291_fund": (_, info) =>
+        form8621Line(info, (amounts) => amounts.section1291Interest, NO_PFIC),
+      "1.line.17q_interest_form8621_line24": (_, info) =>
+        form8621Line(info, (amounts) => amounts.deferredTaxInterest, NO_PFIC),
+      "1.line.17z_other_taxes_amount": (_, info) =>
+        form8621Line(
+          info,
+          (amounts) => amounts.deferredTaxDue,
+          NO_OTHER_TAXES,
+          NO_1294_DEFERRED_TAX,
+        ),
+      "1.line.17z_other_taxes_description": (_, info) => {
+        const amount = form8621Line(
+          info,
+          (amounts) => amounts.deferredTaxDue,
+          NO_OTHER_TAXES,
+          NO_1294_DEFERRED_TAX,
+        );
+        return typeof amount === "number" ? SECTION_1294_DEFERRED_TAX : amount;
+      },
       "1.line.18_total_additional_taxes": (form) =>
         total(
           form["1.line.17a_recapture_other_credits_amount"],
@@ -238,13 +291,6 @@ export function register(): void {
         "No Form 8697/8866 look-back interest scenario yet.",
       "1.line.17o_tax_non_effectively_connected_income_nonresident_alien":
         "No dual-status / nonresident alien (Form 1040-NR) scenario yet.",
-      "1.line.17p_interest_form8621_line16f_section_1291_fund":
-        "No PFIC (Form 8621) ingestion or scenario yet.",
-      "1.line.17q_interest_form8621_line24": "No PFIC (Form 8621) ingestion or scenario yet.",
-      "1.line.17z_other_taxes_description":
-        "No miscellaneous other-taxes (PWA penalties, Form 8978 adjustments, etc.) scenario yet.",
-      "1.line.17z_other_taxes_amount":
-        "No miscellaneous other-taxes (PWA penalties, Form 8978 adjustments, etc.) scenario yet.",
       "1.line.19_recapture_net_epe_form4255_line1d":
         "No Form 4255 / elective payment election recapture scenario yet.",
       "1.line.20_section_965_net_tax_liability_installment":
