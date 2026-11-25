@@ -101,9 +101,20 @@ describe("who files (ca-3461-inst-2025::sec::b-who-must-file::b01)", () => {
     const income = evaluate(nisao, withK1Loss(nisao, -50000));
     expect(income.files("form-3461")).toBe(true);
     expect(income.value(L14A)).toBe(50000);
-    expect(income.value(L16)).toBe(163000);
+    // 50,000 − 200,000 + 313,000 = 163,000: "zero or greater", so line 16 is blank (the form).
+    expect(income.value(L16)).toBeUndefined();
     expect(income.value(L17)).toBeUndefined();
     expect(income.value(COLUMN_B_8Z)).toBe(200000);
+  });
+
+  it("leaves line 16 blank at exactly zero (the form: only a negative amount is entered)", () => {
+    // 100,000 − 213,000 − 200,000 = −313,000 on line 14c; + 313,000 = 0.
+    const even = evaluate(nisao, withK1Loss(nisao, -213000));
+    expect(even.value(LINE("14c_total_business_losses"))).toBe(-313000);
+    expect(even.value(L16)).toBeUndefined();
+    expect(even.value(L17)).toBeUndefined();
+    expect(even.value(COLUMN_C_8P)).toBeUndefined();
+    expect(even.value(COLUMN_B_8Z)).toBe(200000);
   });
 
   it("never files without Form 540", () => {

@@ -70,7 +70,10 @@ const form3461Bindings: Bindings = {
   "0.line.14c_total_business_losses": afterCarryover((lines) => lines.line14c),
   // Line 15: $313,000, or $626,000 if married/RDP filing jointly (::line-15::b01, ::c-definitions::b01).
   "0.line.15_threshold_amount": (_, info) => info.form3461?.threshold,
-  "0.line.16_excess_business_loss": afterCarryover((lines) => lines.line16),
+  // Line 16: "If the result is zero or greater, you do not have excess business loss ... If the result is a negative amount, enter it here" (the form).
+  "0.line.16_excess_business_loss": afterCarryover((lines) =>
+    lines.line16 < 0 ? lines.line16 : undefined,
+  ),
   "0.line.17_excess_business_loss_adjustment": afterCarryover((lines) =>
     lines.line17Waits ? undefined : lines.line17,
   ),

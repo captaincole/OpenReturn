@@ -48,6 +48,14 @@ sorting of business and nonbusiness amounts.
    one rule for both, line 14a + line 15, from 0 to line 14b
    (`carryoverUsed`); what is used and what line 16 carries add up to line
    14b. Dollars: yes, only with business income smaller than the carryover.
+   The text does not settle it. Line 16 also says: "If there is business
+   income in the subsequent year, but not enough to fully offset all of the
+   excess business loss carryover, then any remaining balance will continue
+   to carryover" (::line-16::b01), which reads as $100,000 used and $400,000
+   carried, but the form's own sum on line 16 carries $87,000. The blind fill
+   (2026-11-24) took the line 14b words: line 8z column B $100,000, not the
+   engine's $413,000, with line 16 at $87,000. A person decides; the
+   difference here is $313,000 of California AGI.
 5. **"Included as income in prior years".** Line 17 subtracts "the excess
    business loss adjustment amount included as income in prior years"
    (::line-17::b01). The text does not say whether an amount already used in
@@ -57,9 +65,12 @@ sorting of business and nonbusiness amounts.
 6. **Line 17 equal to the prior adjustments.** The form covers "more than"
    and "less than". Default: equal gives 0, so no adjustment (blank).
    Dollars: no.
-7. **Line 16 at 0 or more.** "If the result is a negative amount, enter it
-   here." Default: the engine prints the sum, signed, as federal Form 461
-   line 16 does. Dollars: no.
+7. **Line 16 at 0 or more.** "If the result is zero or greater, you do not
+   have excess business loss ... If the result is a negative amount, enter
+   it here" (the form, line 16). Settled by the form: line 16 is blank at 0
+   or more (changed 2026-11-24 after the blind fill; it printed the signed
+   sum before). Lines 17 and 8p still read the sum, so they do not change.
+   Dollars: no.
 8. **Line 5 with a California adjustment and nonbusiness rentals.** Line 5 is
    Schedule CA line 5, column A minus B plus C. The California adjustment
    (FTB 3801 or FTB 3885A) has no split between business and nonbusiness
@@ -83,11 +94,37 @@ sorting of business and nonbusiness amounts.
     column B does. Line 8z column B adds the carryover used to a child's
     amount; with another line 8z item it stays a gap. Dollars: yes, when an
     unmodeled line 8 column C item exists.
+13. **A carryover with line 14a above line 15.** No block gives a line 8z
+    amount then; the carryover goes into line 16, and line 17 subtracts only
+    the prior adjustments (::line-17::b01), not the whole carryover. A $650,000
+    loss, a $300,000 carryover and $100,000 of prior adjustments give line 17
+    $537,000. Default: no line 8z amount; line 17 as written. The blind fill
+    read it the same way. Dollars: yes, if another reading is right.
+14. **The size of a capital loss on line 11.** "If the loss from your trade
+    or business is less than ($3,000)" (::line-11::b01) does not say whether
+    it compares sizes or signed numbers. Default: sizes (a $1,000 loss is
+    less than $3,000; no business capital loss counts as $0). The blind fill
+    read it the same way. Dollars: yes, up to $3,000 on line 11.
 
 ## Second opinions
 
 - No published example with numbers (searched the corpus and ftb.ca.gov).
-- The blind fill runs after this work (.scratch/blind, not committed).
+- Blind fill (2026-11-24, 14 cases from the blank form and the
+  instructions): every dollar amount matched but three. Line 16 printed a
+  positive sum in two cases; the form says to enter only a negative amount,
+  so the engine changed (item 7). Line 8z column B with business income
+  smaller than the carryover is item 4 (engine default kept). The other
+  differences were a blank against 0 on lines 12 and 13 with nothing on
+  lines 10 and 11 (the engine leaves them blank).
+- PolicyEngine-US 2.153.8 (commit b3edc044): it does not model FTB 3461.
+  California AGI there is federal AGI plus additions less subtractions, so
+  the federal excess business loss carries into it unchanged, and it has no
+  carryover. Its section 461(l) threshold for 2025 is $313,000 and $626,000
+  joint, the same as line 15 (::c-definitions::b01). Its federal limit is
+  business income plus the threshold, the same shape as lines 14a to 16.
+  No lead.
+- IRS Direct File: it prepares no California return and no Form 461, so it
+  has nothing to compare.
 
 ## Confidence
 
@@ -100,7 +137,7 @@ sorting of business and nonbusiness amounts.
 | Line 9 | stated rule |
 | Line 10 | stated rule (capital gain); own reading (rentals, K-1 items at federal amounts) |
 | Line 11 | stated rule (the capital loss note); own reading (rentals, K-1 items) |
-| Lines 12 to 16 | stated rule |
+| Lines 12 to 16 | stated rule (line 16 blank at 0 or more: the form) |
 | Line 17 | stated rule; the prior adjustments are a stated answer (item 5) |
 | Schedule CA line 8p columns B and C | stated rule |
 | Schedule CA line 8z column B | stated rule with a loss (line 15); own reading with business income (item 4) |
