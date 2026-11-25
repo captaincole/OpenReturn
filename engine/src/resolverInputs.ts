@@ -1,6 +1,7 @@
 import { isW2FactKey, type W2FactValue } from "./facts/index.js";
 import { partitionTrades, type PartitionedTrades } from "./federal/8949/partitionTrades.js";
 import type { MustFileResolution } from "./filingInfo.js";
+import { incomeInDollars } from "./incomeInDollars.js";
 import { sum } from "./money.js";
 import { ssnOf, type FilingStatus } from "./values.js";
 
@@ -15,15 +16,17 @@ export function makeResolverInputs(opts: {
   facts: ReadonlyArray<{ key: string; value: unknown; category: string }>;
   decisions: ReadonlyArray<{ decisionKey: string; decision: unknown }>;
 }): ResolverInputs {
+  // Foreign-currency income in dollars, kept to the cent (incomeInDollars.ts).
+  const { facts } = incomeInDollars(opts.facts);
   const factByKey = new Map<string, unknown>();
-  for (const fact of opts.facts) factByKey.set(fact.key, fact.value);
+  for (const fact of facts) factByKey.set(fact.key, fact.value);
   const decisionByKey = new Map<string, unknown>();
   for (const decision of opts.decisions) decisionByKey.set(decision.decisionKey, decision.decision);
   return {
-    facts: opts.facts,
+    facts,
     factByKey,
     decisionByKey,
-    trades: partitionTrades(opts.facts, decisionByKey),
+    trades: partitionTrades(facts, decisionByKey),
   };
 }
 

@@ -8,7 +8,6 @@ import {
   hasDistributionCode,
   isCorrectiveDistribution,
   isDividendFactKey,
-  isInterestFactKey,
   isMiscIncomeFactKey,
   isRetirementDistributionFactKey,
   isSocialSecurityFactKey,
@@ -45,37 +44,11 @@ import {
   disabilityWages,
 } from "./disabilityPensions.js";
 import type { Form1040FilingInfo, IraLine } from "./filingInfo.js";
+import { dividendSlots, interestSlots } from "./investmentSlots.js";
 import { line1hGap } from "./line1hGaps.js";
 import { rowTaxable } from "./rowTaxable.js";
 
 const OWNERS: IraOwner[] = ["taxpayer", "spouse"];
-
-/*
- * The filter pins each box to 1099-INT: other 1099 sections may reuse low
- * box names. No interest facts: undefined, so the cells stay blank, not "0".
- */
-function resolveInterestSlots(inputs: ResolverInputs): Form1040FilingInfo {
-  const hasInterest = inputs.facts.some(
-    (fact) => fact.category === "investment_income" && isInterestFactKey(fact.key),
-  );
-  if (!hasInterest) {
-    return { taxableInterestTotal: undefined, taxExemptInterestTotal: undefined };
-  }
-  return {
-    // Box 3 (US savings bond and Treasury interest) is taxable federally, as on Schedule B line 1.
-    taxableInterestTotal: (sumInvestmentBox(inputs, "box1", isInterestFactKey) +
-      sumInvestmentBox(
-        inputs,
-        "box3",
-        isInterestFactKey,
-      )) as Form1040FilingInfo["taxableInterestTotal"],
-    taxExemptInterestTotal: sumInvestmentBox(
-      inputs,
-      "box8",
-      isInterestFactKey,
-    ) as Form1040FilingInfo["taxExemptInterestTotal"],
-  };
-}
 
 /*
  * Line 2a takes an S corporation's tax-exempt interest
@@ -375,15 +348,11 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
     w2FederalWithholding: hasW2(inputs)
       ? (sumW2Box(inputs, "box2") as Form1040FilingInfo["w2FederalWithholding"])
       : undefined,
-    qualifiedDividends: sumInvestmentBox(
-      inputs,
-      "box1b",
-    ) as Form1040FilingInfo["qualifiedDividends"],
-    ordinaryDividends: sumInvestmentBox(inputs, "box1a") as Form1040FilingInfo["ordinaryDividends"],
+    ...dividendSlots(inputs),
     form1099FederalWithholding: form1099Withholding(inputs),
     w2gFederalWithholding: w2gWithholding(inputs),
     capitalGainDistributionsNoScheduleD: capitalGainDistributionsNoScheduleD(inputs),
-    ...resolveInterestSlots(inputs),
+    ...interestSlots(inputs),
     ...resolvePassThroughSlots(inputs),
     ...resolveRetirementSlots(inputs),
     socialSecurityBenefits:

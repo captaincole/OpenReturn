@@ -6,6 +6,7 @@
 
 import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";
+import type { SaleInForeignCurrency } from "./foreignCurrency.js";
 
 export interface TradeFactValue {
   tradeId: string;
@@ -22,6 +23,8 @@ export interface TradeFactValue {
   costBasis?: number;
   adjustmentCode?: string; // Form 8949 column (f)
   adjustmentAmount?: number; // column (g)
+  /* Proceeds and costBasis in a foreign currency (foreignCurrency.ts); absent: U.S. dollars. */
+  foreignCurrency?: SaleInForeignCurrency;
 }
 
 export interface TradeFact {

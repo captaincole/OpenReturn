@@ -7,7 +7,13 @@
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
 import { printsShareCount, type Form8949Box } from "../../facts/index.js";
 import { roundDollars, sum } from "../../money.js";
-import { ROWS_PER_PAGE, type Form8949Copy, type Form8949Page } from "./copyPlan.js";
+import { unsupported } from "../../types.js";
+import {
+  ROWS_PER_PAGE,
+  type BoxedTrade,
+  type Form8949Copy,
+  type Form8949Page,
+} from "./copyPlan.js";
 import type { Form8949FilingInfo } from "./filingInfo.js";
 import type { Form8949 } from "./types.js";
 
@@ -106,15 +112,33 @@ function rowBindings(prefix: string, page: (c: Form8949Copy) => Form8949Page | u
     };
     out[`${key}_date_acquired`] = (_, info) => row(info)?.trade.dateAcquired;
     out[`${key}_date_sold`] = (_, info) => row(info)?.trade.dateSold;
-    /* IRS: if you round, round all amounts. */
-    out[`${key}_proceeds`] = (_, info) => roundDollars(row(info)?.trade.proceeds);
-    out[`${key}_cost_basis`] = (_, info) => roundDollars(row(info)?.basis);
-    out[`${key}_gain_loss`] = (form) =>
-      rowGainLoss(
+    /*
+     * IRS: if you round, round all amounts. A sale waiting for a date of its
+     * exchange rate is blank; one that cannot be converted is unsupported.
+     */
+    const settled = (info: Form8949FilingInfo) => {
+      const boxedTrade = row(info);
+      return boxedTrade?.waitsForRate === true ? undefined : boxedTrade;
+    };
+    const amount =
+      (pick: (boxedTrade: BoxedTrade) => number | undefined): Fn =>
+      (_, info) => {
+        const gap = row(info)?.rateGap;
+        if (gap !== undefined) return unsupported(gap);
+        const boxedTrade = settled(info);
+        return boxedTrade === undefined ? undefined : roundDollars(pick(boxedTrade));
+      };
+    out[`${key}_proceeds`] = amount((boxedTrade) => boxedTrade.trade.proceeds);
+    out[`${key}_cost_basis`] = amount((boxedTrade) => boxedTrade.basis);
+    out[`${key}_gain_loss`] = (form, info) => {
+      const gap = row(info)?.rateGap;
+      if (gap !== undefined) return unsupported(gap);
+      return rowGainLoss(
         form[`${key}_proceeds`],
         form[`${key}_cost_basis`],
         form[`${key}_adjustment_amount`],
       );
+    };
   }
   return out;
 }
@@ -129,12 +153,17 @@ function totalBindings(prefix: string, page: (c: Form8949Copy) => Form8949Page |
     (amount: (r: Form8949Page["rows"][number]) => number | undefined): Fn =>
     (_, info) => {
       const rs = rows(info);
+      const gap = rs?.find((boxedTrade) => boxedTrade.rateGap !== undefined)?.rateGap;
+      if (gap !== undefined) return unsupported(gap);
+      if (rs?.some((boxedTrade) => boxedTrade.waitsForRate === true)) return undefined;
       return rs && rs.length > 0 ? roundDollars(sum(...rs.map(amount))) : undefined;
     };
   return {
     [`${prefix}.totals_proceeds`]: total((boxedTrade) => boxedTrade.trade.proceeds),
     [`${prefix}.totals_cost_basis`]: total((boxedTrade) => boxedTrade.basis),
-    [`${prefix}.totals_gain_loss`]: ((form) => {
+    [`${prefix}.totals_gain_loss`]: ((form, info) => {
+      const gap = rows(info)?.find((boxedTrade) => boxedTrade.rateGap !== undefined)?.rateGap;
+      if (gap !== undefined) return unsupported(gap);
       const proceeds = form[`${prefix}.totals_proceeds`];
       return typeof proceeds === "number"
         ? proceeds - sum(form[`${prefix}.totals_cost_basis`])
