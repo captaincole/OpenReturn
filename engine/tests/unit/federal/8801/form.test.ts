@@ -10,6 +10,7 @@ import {
   type PriorYearForm6251,
 } from "../../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../../src/facts/rows.js";
+import { line22Of, type Form8801CreditInfo } from "../../../../src/federal/8801/credit.js";
 import { evaluateScenario } from "../../../../src/index.js";
 import { decisionRow } from "../../../helpers/fixtureBuilders.js";
 import { logainScenario as base } from "../../../scenarios/synthetic/logain/index.js";
@@ -57,8 +58,9 @@ function evaluate(prior: TaxFactRow[], decisions: AIDecisionRow[] = base.decisio
     const found = field(formId, id);
     return found !== undefined && !found.ok && found.unsupported === true;
   };
-  const missing = result.forms.get("form-8801")?.missingInputs ?? [];
-  return { files, value, isGap, missing };
+  const missingOf = (formId: string) => result.forms.get(formId)?.missingInputs ?? [];
+  const missing = missingOf("form-8801");
+  return { files, value, isGap, missing, missingOf };
 }
 
 const LINE = {
@@ -144,15 +146,28 @@ describe("The answers it asks for", () => {
     expect(run.value("form-8801", LINE.line21)).toBeUndefined();
   });
 
-  it("asks line 3 only with a 2024 net operating loss deduction", () => {
+  it("asks line 3 with or without a 2024 net operating loss deduction (line-3::b01)", () => {
     const asked = evaluate(answers({ [KEYS.minimumTaxCreditNolDeduction]: undefined }));
     expect(asked.missing).toContain(KEYS.minimumTaxCreditNolDeduction);
     const form6251 = { ...baseForm6251, line2e: undefined };
-    const notAsked = evaluate(
-      answers({ [KEYS.form6251]: form6251, [KEYS.minimumTaxCreditNolDeduction]: undefined }),
+    const noLine2e = { [KEYS.form6251]: form6251, [KEYS.minimumTaxCreditNolDeduction]: undefined };
+    expect(evaluate(answers(noLine2e)).missing).toContain(KEYS.minimumTaxCreditNolDeduction);
+    // An MTCNOL carried to 2024 with no regular deduction that year still goes on line 3.
+    const carried = evaluate(
+      answers({ [KEYS.form6251]: form6251, [KEYS.minimumTaxCreditNolDeduction]: 4_000 }),
     );
-    expect(notAsked.missing).not.toContain(KEYS.minimumTaxCreditNolDeduction);
-    expect(notAsked.value("form-8801", LINE.line3)).toBeUndefined();
+    expect(carried.value("form-8801", LINE.line3)).toBe(4_000);
+    const none = evaluate(
+      answers({ [KEYS.form6251]: form6251, [KEYS.minimumTaxCreditNolDeduction]: 0 }),
+    );
+    expect(none.missing).toEqual([]);
+    expect(none.value("form-8801", LINE.line3)).toBeUndefined();
+  });
+
+  it("Form 6251 files with Form 8801 and does not wait for a 2025 ISO spread", () => {
+    const run = evaluate(answers());
+    expect(run.files("form-6251")).toBe(true);
+    expect(run.missingOf("form-6251")).toEqual([]);
   });
 
   it("asks the worksheet, Form 2555 and the foreign tax credit while line 10 is above 0", () => {
@@ -177,7 +192,7 @@ describe("The answers it asks for", () => {
     const run = evaluate(
       answers({
         [KEYS.form6251]: form6251,
-        [KEYS.minimumTaxCreditNolDeduction]: undefined,
+        [KEYS.minimumTaxCreditNolDeduction]: 0,
         [KEYS.capitalGainWorksheet]: undefined,
       }),
     );
@@ -260,5 +275,52 @@ describe("The credit on the 2025 return", () => {
     ]);
     expect(run.isGap("form-8801", LINE.line23)).toBe(true);
     expect(run.isGap("schedule-3", "0.line.6b")).toBe(true);
+  });
+});
+
+/* Line 22 subtracts Schedule 3 lines 1 through 6z (irs-8801-inst-2025::sec::line-22::b01). */
+describe("Line 22 never counts a credit it cannot figure as 0", () => {
+  it("a Form 5695 on the return: line 5a (Part I) is not modeled, so line 22 on is a gap", () => {
+    const run = evaluate(answers(), [
+      ...base.decisions,
+      decision("decisions.scope.must_file_5695", true),
+    ]);
+    expect(run.files("form-5695")).toBe(true);
+    expect(run.isGap("schedule-3", "0.line.5a")).toBe(true);
+    for (const line of [LINE.line22, LINE.line25, LINE.line26]) {
+      expect(run.isGap("form-8801", line)).toBe(true);
+    }
+    expect(run.isGap("schedule-3", "0.line.6b")).toBe(true);
+    // Lines 1–21 are the 2024 amounts and still print.
+    expect(run.value("form-8801", LINE.line21)).toBe(164_820);
+  });
+
+  it("a Form 2441 that claims the credit with line 11 blank: line 22 is a gap", () => {
+    const info = {
+      mustFile: { "form-2441": { value: true } },
+      filingStatus: "single",
+      dependentCarePersons: [{ factKey: "dependent.child", expensesPaid: 3_000 }],
+      dependentCareProviders: [{ name: "Caemlyn Day School" }],
+    } as unknown as Form8801CreditInfo;
+    const form = {
+      "form-1040.line.16": 201_393,
+      "form-2441.0.line.10_tax_liability_limit": 201_143,
+    };
+    const line22 = line22Of(form, info);
+    expect(line22).toMatchObject({ unsupported: true });
+    expect((line22 as { reason: string }).reason).toContain("Form 2441 line 11");
+    // With line 11 figured, line 22 subtracts it.
+    const figured = { ...form, "form-2441.0.line.11_dependent_care_credit": 600 };
+    expect(line22Of({ ...figured, "schedule-3.0.line.2": 600 }, info)).toBe(201_393 - 600);
+  });
+
+  it("a Form 2441 with no tax limit (line 10 blank) has no credit: line 22 computes", () => {
+    const info = {
+      mustFile: { "form-2441": { value: true } },
+      filingStatus: "single",
+      dependentCarePersons: [{ factKey: "dependent.child", expensesPaid: 3_000 }],
+      dependentCareProviders: [{ name: "Caemlyn Day School" }],
+    } as unknown as Form8801CreditInfo;
+    expect(line22Of({ "form-1040.line.16": 201_393 }, info)).toBe(201_393);
   });
 });

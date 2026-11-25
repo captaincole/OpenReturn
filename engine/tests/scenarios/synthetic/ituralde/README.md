@@ -19,7 +19,7 @@ Forms that file: Form 1040, Schedule 1, Schedule C, Schedule E, Form 6198 (two c
 | Schedule C, Varga Film Works | receipts $18,000; expenses $45,000; box 32b |
 | Form 6198 answers, film business | line 6 $12,000, line 7 $5,000, line 9 $9,000; Part III began after the effective date, line 16 $21,000, line 18 $11,000 |
 | K-1 (Form 1065), Kandor Ridge Cattle LLC | box 1 −$40,000, box 5 $420, box 19 code A $2,000; nonrecourse debt share $60,000 |
-| Holding answers | materially participates; not all at risk; basis at start $90,000; contributed $30,000; at-risk loss carried from 2024 $6,000 |
+| Holding answers | materially participates; not all at risk; basis at start $90,000; contributed $30,000; at-risk loss carried from 2024 $6,000, all of it a box 1 ordinary loss |
 | Form 6198 answers, ranch | 2024 line 19b $0; line 16 $30,000; line 18 $2,000 |
 
 ## Hand check

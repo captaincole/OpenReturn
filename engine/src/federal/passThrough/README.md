@@ -222,13 +222,18 @@ routed nor reported (`tests/unit/federal/passThrough/boxTables.test.ts`).
   (`carriedLosses.atRisk`), goes through Form 6198 (`federal/6198/`). Part I
   takes the items that reach the stage after the basis limit (box 1 on line 1,
   a section 1231 item on line 2b, other income on line 3, other deductions and
-  losses on line 4) and the carried loss as an ordinary loss on line 1. The
+  losses on line 4) and the carried losses, by item, on the lines of their
+  kind (`carriedLosses.atRisk` has the item names of `carriedLosses.basis`). The
   owner's amounts at risk are their own fact, `at_risk.<K-1 fact key>`.
 - Each item is allowed in proportion and the rest carries with its character.
   An allowed carried loss is a "PYA" row (`atRiskCarryover`), line 27 is Yes,
   and Schedule E column (f) is checked for a K-1 that files Form 6198.
-- Not yet: more than one at-risk activity on a K-1, guaranteed payments next to
-  amounts not at risk, a disposition of the interest, recapture, and a
-  beneficiary's K-1. Each is unsupported with a reason (`6198/QUESTIONS.md`).
+- A K-1 with no loss, some investment not at risk and a distribution or a
+  smaller share of recourse debt waits on its at-risk fact; amounts at risk
+  that end below zero make it unsupported (recapture).
+- Not yet: more than one at-risk activity on a K-1, guaranteed payments or
+  investment interest expense next to amounts not at risk, a disposition of the
+  interest, recapture, and a beneficiary's K-1. Each is unsupported with a
+  reason (`6198/QUESTIONS.md`).
 
 `QUESTIONS.md` lists every doubt, with its source and the default chosen.
