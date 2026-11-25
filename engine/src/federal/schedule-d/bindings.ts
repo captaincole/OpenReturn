@@ -37,19 +37,27 @@ function boxLineBindings(): Partial<{
 }> {
   const out: Record<string, Fn> = {};
   for (const [line, boxes] of BOX_LINES) {
+    const totalsOf = (info: ScheduleDFilingInfo) =>
+      boxes.map((box) => info.form8949BoxTotals?.[box]).filter((total) => total !== undefined);
+    const gapOf = (info: ScheduleDFilingInfo) =>
+      totalsOf(info).find((total) => total.gap !== undefined)?.gap;
     const column =
       (col: "proceeds" | "cost"): Fn =>
       (_, info) => {
-        const totals = boxes
-          .map((box) => info.form8949BoxTotals?.[box])
-          .filter((total) => total !== undefined);
+        const totals = totalsOf(info);
+        // A Form 8949 sale that cannot be converted makes the line a gap; one that waits, blank.
+        const gap = gapOf(info);
+        if (gap !== undefined) return unsupported(gap);
+        if (totals.some((total) => total.waits === true)) return undefined;
         return totals.length > 0
           ? roundDollars(sum(...totals.map((total) => total[col])))
           : undefined;
       };
     out[`0.line.${line}_proceeds`] = column("proceeds");
     out[`0.line.${line}_cost`] = column("cost");
-    out[`0.line.${line}_gain_loss`] = (form) => {
+    out[`0.line.${line}_gain_loss`] = (form, info) => {
+      const gap = gapOf(info);
+      if (gap !== undefined) return unsupported(gap);
       const proceeds = form[`0.line.${line}_proceeds` as keyof ScheduleD];
       if (typeof proceeds !== "number") return undefined;
       const cost = form[`0.line.${line}_cost` as keyof ScheduleD];

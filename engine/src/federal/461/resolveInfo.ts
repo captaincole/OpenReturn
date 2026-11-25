@@ -11,11 +11,19 @@ import { spousePropertiesOnReturn } from "../rentals/passive.js";
 import { passThroughGaps } from "../schedule-e/partII.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
 import { resolveScheduleFInfo } from "../schedule-f/resolveInfo.js";
+import { businessLossesOnReturn } from "./businessLosses.js";
 import { rentalAnswerKey, sortK1Items, sortProperties } from "./classify.js";
 import type { Form461Figures, Form461FilingInfo, Form461LineGaps } from "./filingInfo.js";
 
+/*
+ * Form 461 line 4 is Schedule 1 line 4 (irs-461-inst-2025::sec::line-4::b01),
+ * which is Form 4797 line 18b (irs-1040-inst-2025::sec::line-4-2::b01). Form
+ * 4797 has no rules yet, so the line is a gap while it files. When Form 4797
+ * has rules, line 4 copies Schedule 1 line 4 the way line 2 copies line 3, and
+ * this gap goes (QUESTIONS.md item 8 lists each change).
+ */
 const FORM_4797_GAP =
-  "Form 4797 files, and the engine has no rules for it: Schedule 1 line 4 (Form 461 line 4) is not known.";
+  "Form 4797 files and has no rules yet, so its line 18b, which Schedule 1 line 4 and Form 461 line 4 carry, is not known.";
 const SCHEDULE_F_GAP =
   "Schedule F files, and the engine has no rules for it: Schedule 1 line 6 (Form 461 line 6) is not known.";
 const FORM_4835_GAP =
@@ -46,21 +54,23 @@ function lineGaps(inputs: ResolverInputs): Form461LineGaps {
  * Schedule E's amounts sorted into business and not business (classify.ts),
  * with the facts whose answer is still missing.
  */
-function figuresOf(inputs: ResolverInputs): { figures: Form461Figures; missing: string[] } {
+export function form461Figures(inputs: ResolverInputs): {
+  figures: Form461Figures;
+  missing: string[];
+} {
   const scheduleE = resolveScheduleEInfo(inputs);
   const onScheduleE = scheduleE.mustFile?.["schedule-e"]?.value === true;
-  const properties = sortProperties(onScheduleE ? (scheduleE.rentalProperties ?? []) : []);
+  const onPartI = onScheduleE ? (scheduleE.rentalProperties ?? []) : [];
+  const properties = sortProperties(onPartI);
   const rentalAnswer = (entityKey: string) => {
     const answer = inputs.factByKey.get(rentalAnswerKey(entityKey));
     return typeof answer === "boolean" ? answer : undefined;
   };
-  const k1 = sortK1Items(
-    [
-      receivedOnReturn(inputs, "schedule_e_part_ii"),
-      receivedOnReturn(inputs, "schedule_e_part_iii"),
-    ],
-    rentalAnswer,
-  );
+  const receipts = [
+    receivedOnReturn(inputs, "schedule_e_part_ii"),
+    receivedOnReturn(inputs, "schedule_e_part_iii"),
+  ];
+  const k1 = sortK1Items(receipts, rentalAnswer);
   const missing = [
     ...(properties.kind === "waiting" ? properties.factKeys : []),
     ...(k1.kind === "waiting" ? k1.factKeys : []),
@@ -75,9 +85,29 @@ function figuresOf(inputs: ResolverInputs): { figures: Form461Figures; missing: 
       otherBusinessIncome: roundDollars(num(inputs, BUSINESS_LOSS_LIMIT_KEYS.otherBusinessIncome)),
       nonbusinessColumns: properties.kind === "sorted" ? properties.value : undefined,
       k1Nonbusiness: k1.kind === "sorted" ? k1.value : undefined,
+      businessLosses: businessLossesOnReturn(inputs, onPartI, receipts, rentalAnswer),
       gaps: lineGaps(inputs),
     },
     missing,
+  };
+}
+
+/*
+ * The return's business losses added without any income, by the line they
+ * reach: the K-1s' as the loss limits allow them before the excess business
+ * loss stage, the other ones (Schedule C, rentals; undefined while an amount
+ * is unknown) and a stated line 8 loss, positive. FTB 3461 reads them too.
+ */
+export function businessLossesWithoutIncome(inputs: ResolverInputs) {
+  const context = limitContextOf(inputs);
+  const joint = spousePropertiesOnReturn(filingStatusOf(inputs));
+  const { entities } = passThroughEntitiesOnReturn(inputs.facts, joint);
+  const line8 = num(inputs, BUSINESS_LOSS_LIMIT_KEYS.otherBusinessIncome) ?? 0;
+  return {
+    k1Losses: businessLossesBeforeExcessBusinessLoss(entities, context),
+    other: context.otherBusinessLosses,
+    line8Loss: line8 < 0 ? 0 - line8 : 0,
+    entityKeys: entities.map((entity) => entity.key),
   };
 }
 
@@ -93,14 +123,8 @@ function figuresOf(inputs: ResolverInputs): { figures: Form461Figures; missing: 
  * form461Required). The explicit decision wins.
  */
 export function resolve461Info(inputs: ResolverInputs): Form461FilingInfo {
-  const context = limitContextOf(inputs);
-  const other = context.otherBusinessLosses;
+  const { k1Losses, other, line8Loss, entityKeys } = businessLossesWithoutIncome(inputs);
   const status = filingStatusOf(inputs);
-  const joint = spousePropertiesOnReturn(status);
-  const { entities } = passThroughEntitiesOnReturn(inputs.facts, joint);
-  const k1Losses = businessLossesBeforeExcessBusinessLoss(entities, context);
-  const line8 = num(inputs, BUSINESS_LOSS_LIMIT_KEYS.otherBusinessIncome) ?? 0;
-  const line8Loss = line8 < 0 ? 0 - line8 : 0;
   const required = other !== undefined && form461Required(k1Losses, other, line8Loss, status);
   const mustFile = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_461",
@@ -108,12 +132,12 @@ export function resolve461Info(inputs: ResolverInputs): Form461FilingInfo {
       {
         rule: "fallback: business losses, added without any income, of more than $156,500 on one Form 461 line (2, 5 or 8), or more than the threshold in all",
         value: required,
-        triggeredByFactKeys: required ? entities.map((entity) => entity.key) : [],
+        triggeredByFactKeys: required ? entityKeys : [],
       },
     ],
   });
   if (mustFile.value !== true) return { mustFile: { "form-461": mustFile } };
-  const { figures, missing } = figuresOf(inputs);
+  const { figures, missing } = form461Figures(inputs);
   return {
     mustFile: { "form-461": mustFile },
     missingInputs: { "form-461": [...new Set(missing)] },

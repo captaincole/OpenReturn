@@ -50,6 +50,25 @@ export interface CapitalAdjustment {
  * goes on line 10. Capital gain net income is the excess of gains over losses,
  * never below 0: the gain on line 3 (Form 1040 line 7a). businessNet is the
  * taxpayer's net gain or loss from business capital assets (0 when none).
+ *
+ * DECISION (2026-11-24): a business's capital loss does not count as a business loss.
+ * - Pub. 225, the farmer's tax guide: "Business gains and losses reported on
+ *   Form 4797 and Form 8949 are included in the excess business loss
+ *   calculation" (irs-pub-225-2025::sec::excess-business-loss::b01).
+ * - Form 461 instructions: "Losses from sales or exchanges of capital assets
+ *   are not included in the calculation of the total deductions from your
+ *   trades or businesses" (irs-461-inst-2025::sec::line-3::b01).
+ * The engine follows the Form 461 instructions. A guide written for farmers
+ * governs a farm's forms; on every other form its own instructions decide.
+ *
+ * DECISION (2026-11-24): a business gain next to an investment loss takes the cap.
+ * Two sentences of irs-461-inst-2025::sec::line-3::b01 differ: "any such
+ * amounts included here in line 3 should be added back on line 11", and gains
+ * "should not exceed the lesser of capital gain net income limited to only
+ * gains and losses attributable to a trade or business, or capital gain net
+ * income". With a $60,000 business gain and a $20,000 investment loss, line 3
+ * is $40,000: the engine counts $40,000. Adding the loss back would count
+ * $60,000, above the cap.
  */
 export function capitalAdjustment(
   line3: number | undefined,

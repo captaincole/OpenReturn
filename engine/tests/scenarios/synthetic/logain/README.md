@@ -6,7 +6,7 @@ He is a chip design engineer. In 2024 he exercised incentive stock options and s
 
 The scenario renders a filled Form 8801 with Parts I, II and III. Line 7 is above 0 (the 2024 exemption phases out), line 15 is above 0 (exclusion items alone give a minimum tax above his 2024 regular tax), and Part III runs every line through 52. The credit is limited by line 24, reaches Schedule 3 line 6b, and leaves a carryforward to 2026. Form 6251 files because Form 8801 does.
 
-Forms checked: Form 8801, Form 6251, Schedule 3, Form 8959, Form 8960, Schedule 2, Form 1040.
+Forms checked: Form 8801, Form 6251, Schedule 3, Schedule B, Form 8959, Form 8960, Schedule 2, Form 1040. Schedule B files because interest ($6,000) and ordinary dividends ($34,000) are each over $1,500. He exercised no options in 2025, so no 2025 spread is recorded and Form 6251 line 2i is blank.
 
 ## Inputs
 
@@ -61,15 +61,20 @@ Forms checked: Form 8801, Form 6251, Schedule 3, Form 8959, Form 8960, Schedule 
 | 8801 line 18 | 160,493 − 7,673 | 152,820 |
 | 8801 line 19 | 2024 Form 8801 line 26 | 12,000 |
 | 8801 line 21 | 152,820 + 12,000 (line 20 blank) | 164,820 |
+| Schedule B lines 1, 2, 4 | Lugard Savings Bank, 1099-INT box 1 | 6,000 |
+| Schedule B lines 5, 6 | Tanchico World Index Fund, 1099-DIV box 1a | 34,000 |
 | 1040 line 15 | 690,000 − 15,750 | 674,250 |
 | 1040 line 16 | 644,250 ordinary (37% bracket) + 30,000 at 20% | 201,393 |
 | 8801 line 22 | 201,393 + Schedule 2 line 1z (0) − Schedule 3 line 1 (250) | 201,143 |
 | 6251 line 4 | 674,250 + 15,750 | 690,000 |
 | 6251 line 5 | 88,100 − 25% of 63,650 (15,912.50 → 15,913) | 72,187 |
-| 6251 line 9, 8801 line 23 | 587,813 × 28% − 4,782 = 159,806; + 30,000 at 20% | 165,806 |
-| 8801 line 24, 25 | 201,143 − 165,806; smaller of 164,820 and 35,337 | 35,337 |
-| 8801 line 26 | 164,820 − 35,337 | 129,483 |
-| Schedule 3 lines 6b, 7 | 8801 line 25 | 35,337 |
-| Schedule 3 line 8, 1040 lines 20, 21 | 250 + 35,337 | 35,587 |
-| 1040 line 22 | 201,393 − 35,587: the tax falls to the tentative minimum tax | 165,806 |
+| 6251 lines 7, 9 | 587,813 × 28% − 4,782 = 159,806; + 30,000 at 20%. Line 10 (201,143) is above line 7, so line 8 is blank | 165,806 |
+| 8801 line 23 | 6251 line 7 less the credit line 8 would hold: Schedule 3 line 1 by the election, 165,806 − 250 (`docs/rule-decisions.md`, row 12) | 165,556 |
+| 8801 line 24, 25 | 201,143 − 165,556; smaller of 164,820 and 35,587 | 35,587 |
+| 8801 line 26 | 164,820 − 35,587 | 129,233 |
+| Schedule 3 lines 6b, 7 | 8801 line 25 | 35,587 |
+| Schedule 3 line 8, 1040 lines 20, 21 | 250 + 35,587 | 35,837 |
+| 1040 line 22 | 201,393 − 35,837: the tax falls to the tentative minimum tax after the foreign tax credit | 165,556 |
 | 1040 line 23 | Additional Medicare Tax 4,050 + net investment income tax 1,520 | 5,570 |
+| 1040 line 24 | 165,556 + 5,570 | 171,126 |
+| 1040 lines 34, 35a | payments 179,050 − 171,126 | 7,924 |

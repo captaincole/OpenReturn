@@ -132,6 +132,7 @@ export const lanFacts: TaxFactRow[] = [
   idFact("phone", "512-555-0172"),
   fact("identity", SPOUSE_KEYS.firstName, LAN.spouse.firstName, VERBAL),
   fact("identity", SPOUSE_KEYS.lastName, LAN.spouse.lastName, VERBAL),
+  fact("identity", SPOUSE_KEYS.occupation, "Fencing instructor", VERBAL),
   fact("identity", SPOUSE_KEYS.ssn, LAN.spouse.ssn, VERBAL),
   fact("identity", SPOUSE_KEYS.dob, "11/30/1986", VERBAL),
   fact(
