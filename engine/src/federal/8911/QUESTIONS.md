@@ -83,6 +83,20 @@ Decided by the author: docs/rule-decisions.md row A1, and the `DECISION` comment
 - Default: the fact does not name the vehicle. Cade must not record a personal use part for such a charger.
 - Dollars: up to $1,000 an item.
 
+## 12. Doubts from the blind fill (settled by the Schedule A blank)
+
+A blind preparer filled 15 cases from the blank Form 8911 and its instructions. Every line matched the engine. The preparer had no Schedule A (Form 8911) blank: it is not in `sources/` or the corpus (copy in `.scratch/dl/f8911sa.pdf`). Three doubts change dollars, and the blank settles each one the way the engine does.
+
+- **The limits on a property with mixed use.** The instructions say "limited to $1,000 for each single item" (amount-of-credit::b01) and do not say whether the limit scales with the personal share. Schedule A prints flat amounts: line 15 "Maximum business/investment use part of credit ... $100,000" and line 20 "Maximum personal use part of credit ... $1,000". The engine uses the flat limits. Dollars: a scaled limit gives $700 in place of $1,000 at 70% personal use.
+- **Section 179 and the personal part.** Line 18 is "Subtract line 10 from line 8", and line 10 is before the section 179 deduction (line 11). The deduction lowers only the business part. Dollars: up to 30% of the deduction, below the $1,000 limit.
+- **Construction before January 29, 2023.** The instructions for line 13 send the reader to the PWA requirements (line-13::b01). Schedule A line 13 says "If construction began before January 29, 2023 (see line 4), skip the instructions and answer 'Yes'", and line 14 then takes 30%. The engine answers Yes from the construction date. Dollars: 30% in place of 6% (case 14: $6,000 in place of $1,200).
+- Proposal: add the Schedule A blank to `sources/2025/forms/federal/8911/`, so the next reader has its text.
+
+## Second opinions
+
+- PolicyEngine-US 2.153.8 (commit b3edc044): it does not model Form 8911 or the section 30C credit. No variable or parameter under `gov/irs` names refueling, charging, alternative fuel or 30C. Its list of nonrefundable credits (`parameters/gov/irs/credits/non_refundable.yaml`) has no entry for it. Nothing to compare for the rates, the limits or the tax limit in Part II.
+- IRS Direct File (IRS-Public/direct-file): a code search finds no Form 8911 rules and no "refueling" (the two "8911" hits are a test scenario with no credits and a lock file). Nothing to compare.
+
 ## Proposals for a discussion
 
 - **Print Schedule A (Form 8911).** The engine figures each Schedule A in `lines.ts`, but there is no catalog for it, so the return prints only Form 8911. A new form `form-8911-schedule-a` that repeats for each property would print lines 1–21. It needs a catalog and the repeating-form pattern (issue #174).
