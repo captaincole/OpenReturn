@@ -258,6 +258,17 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "foreign taxes when they accrue (Form 1116 Part II box k); absent, box j (paid)",
   ],
   [
+    /^ca_pte_elective_credit\.[^.]+$/,
+    "each fact is a whole electing entity's PTE elective tax credit (FTB 3804-CR Part I, one " +
+      "row); whether the taxpayer has one is Cade's question. FTB 3804-CR lists the fact again " +
+      "while an answer inside it (name, number, credit) is missing",
+  ],
+  [
+    /^prior_year\.ca_pte_elective_credit_carryover$/,
+    "an answer Cade records only when the user carries a PTE elective tax credit from 2024; " +
+      "above 0 it files FTB 3804-CR, which asks for it whenever it files",
+  ],
+  [
     /^prior_year\.ca_amt(_credit_carryover)?$/,
     "an answer Cade records only when the user paid California AMT for 2024 or carries an AMT " +
       "credit from 2024; either above 0 files FTB 3510, which then asks for the other",

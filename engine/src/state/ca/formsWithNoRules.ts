@@ -12,8 +12,6 @@ import type { Form3541FilingInfo } from "./3541/filingInfo.js";
 import { resolve3541Info } from "./3541/resolveInfo.js";
 import type { Form3801CRFilingInfo } from "./3801-cr/filingInfo.js";
 import { resolve3801CRInfo } from "./3801-cr/resolveInfo.js";
-import type { Form3804CRFilingInfo } from "./3804-cr/filingInfo.js";
-import { resolve3804CRInfo } from "./3804-cr/resolveInfo.js";
 import type { Form3805EFilingInfo } from "./3805e/filingInfo.js";
 import { resolve3805EInfo } from "./3805e/resolveInfo.js";
 import type { Form3805VFilingInfo } from "./3805v/filingInfo.js";
@@ -42,7 +40,6 @@ import { resolveScheduleXInfo } from "./schedule-x/resolveInfo.js";
 export type CaliforniaFormsWithNoRulesFilingInfo = ScheduleXFilingInfo &
   Form3507FilingInfo &
   Form3541FilingInfo &
-  Form3804CRFilingInfo &
   Form3805VFilingInfo &
   Form3805ZFilingInfo &
   Form3807FilingInfo &
@@ -62,7 +59,6 @@ export const CALIFORNIA_FORMS_WITH_NO_RULES_RESOLVERS: ReadonlyArray<
   resolveScheduleXInfo,
   resolve3507Info,
   resolve3541Info,
-  resolve3804CRInfo,
   resolve3805VInfo,
   resolve3805ZInfo,
   resolve3807Info,
