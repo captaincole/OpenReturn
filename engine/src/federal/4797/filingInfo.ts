@@ -10,12 +10,14 @@ export interface Form4797FilingInfo extends BaseFilingInfo {
   form4797Gap?: string;
   /*
    * Why lines 7–12, 17 and 18b and what they send on (Schedule D line 11,
-   * Schedule 1 line 4) are a gap: a K-1 section 1231 item, Form 4684 or 6252
-   * filing, or a Form 8824 amount the engine cannot carry.
+   * Schedule 1 line 4) are a gap: a K-1 section 1231 item, or a Form 6252 or
+   * Form 8824 amount the engine cannot carry.
    */
   form4797SummaryGap?: string;
   /* Why lines 5 and 16 (Form 8824) are a gap. */
   form4797ExchangeGap?: string;
+  /* Why a Form 6252 amount for line 4, 10 or 15 is not known (a sale's gap); the summary is a gap too. */
+  form4797InstallmentGaps?: { line4?: string; line10?: string; line15?: string };
   /* Which copy this render prints (renderCopies sets it; copies.ts); absent means the first. */
   form4797CopyIndex?: number;
   /* Why a Part IV column's line 35 cannot reach its schedule. */

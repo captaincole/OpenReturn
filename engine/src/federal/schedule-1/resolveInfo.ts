@@ -137,7 +137,8 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
 /*
  * Line 4: Form 4797 line 18b (the form's line 18b text). Schedule 1 files for
  * an amount there even with no business or rental on the return (a Form 8824
- * recapture on Form 4797 line 16), or while the line is a gap.
+ * recapture on Form 4797 line 16, or a Form 6252 ordinary gain on Form 4797
+ * lines 10 and 15), or while the line is a gap.
  */
 function form4797Fallback(inputs: ResolverInputs) {
   const info = resolve4797Info(inputs);

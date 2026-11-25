@@ -1,7 +1,7 @@
 /*
  * Every Form 8824 of the return: the exchanges and the Part IV sales that file
- * this year, the form the engine prints, and what they send to Schedule D and
- * Form 4797. Schedule D, Form 4797 and Form 8960 read it from the facts.
+ * this year, what each copy of the form prints, and what all of them send to
+ * Schedule D and Form 4797 (one total, whatever the number of copies). Schedule D, Form 4797 and Form 8960 read it from the facts.
  */
 
 import {
@@ -13,12 +13,6 @@ import type { ResolverInputs } from "../../resolverInputs.js";
 import { evaluateDivestiture, type DivestitureForm } from "./divestiture.js";
 import { evaluateExchange, type ExchangeForm } from "./exchange.js";
 import { addAll, emptyAmounts, type Destination, type RoutedAmounts } from "./routedAmounts.js";
-
-/* An exchange that files whose lines cannot be figured. */
-export interface ExchangeGap {
-  key: string;
-  reason: string;
-}
 
 /*
  * What Form 8824 sends to one receiving form. While lines 9 and 10 of a related
@@ -38,14 +32,21 @@ export interface ExchangeActivityAmounts {
   ordinary: number;
 }
 
+/* What one copy of the form prints in Parts I–III, or in Part IV: a figured form or a gap. */
+export type CopyEntry<T> = { kind: "one"; form: T } | { kind: "gap"; reason: string };
+
 export interface Form8824Totals {
   /* Why no line of the form can be figured: a malformed fact, or a form filed with no fact. */
   formGap?: string;
-  /* The exchanges that file, figured or a gap, in fact order. */
+  /* The exchanges and Part IV sales that file and are figured. */
   exchanges: ExchangeForm[];
-  exchangeGaps: ExchangeGap[];
   divestitures: DivestitureForm[];
-  divestitureGaps: ExchangeGap[];
+  /*
+   * Every exchange and Part IV sale that files, figured or a gap, in fact order:
+   * copy n of the form prints entry n of each (printed.ts).
+   */
+  exchangeCopies: CopyEntry<ExchangeForm>[];
+  divestitureCopies: CopyEntry<DivestitureForm>[];
   /* The keys of the facts that file the form, and of malformed facts. */
   fileKeys: string[];
   malformedKeys: string[];
@@ -76,6 +77,18 @@ function readOutcomes(inputs: ResolverInputs) {
     saleOutcomes,
     malformedKeys: [...exchangeFacts.malformedKeys, ...saleFacts.malformedKeys],
   };
+}
+
+/* The copy entries of the outcomes that file, in fact order. */
+function copyEntries<T>(
+  outcomes: ReadonlyArray<
+    { kind: "not_this_year" } | { kind: "gap"; reason: string } | { kind: "filed"; form: T }
+  >,
+): CopyEntry<T>[] {
+  return outcomes.flatMap((each): CopyEntry<T>[] => {
+    if (each.kind === "filed") return [{ kind: "one", form: each.form }];
+    return each.kind === "gap" ? [{ kind: "gap", reason: each.reason }] : [];
+  });
 }
 
 const BUSINESS_DIVESTITURE =
@@ -109,9 +122,9 @@ export function form8824Totals(inputs: ResolverInputs): Form8824Totals | undefin
   return {
     formGap: malformedKeys.length > 0 ? MALFORMED(malformedKeys) : undefined,
     exchanges,
-    exchangeGaps: exchangeOutcomes.flatMap((each) => (each.kind === "gap" ? [each] : [])),
     divestitures,
-    divestitureGaps: saleOutcomes.flatMap((each) => (each.kind === "gap" ? [each] : [])),
+    exchangeCopies: copyEntries(exchangeOutcomes),
+    divestitureCopies: copyEntries(saleOutcomes),
     fileKeys: [
       ...exchanges.map((form) => form.key),
       ...divestitures.map((form) => form.key),
@@ -145,9 +158,9 @@ const NO_FACTS =
 export const NO_FACT_TOTALS: Form8824Totals = {
   formGap: NO_FACTS,
   exchanges: [],
-  exchangeGaps: [],
   divestitures: [],
-  divestitureGaps: [],
+  exchangeCopies: [],
+  divestitureCopies: [],
   fileKeys: [],
   malformedKeys: [],
   unansweredKeys: [],

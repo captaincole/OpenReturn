@@ -1,7 +1,7 @@
 /*
  * Schedule P (540) Part III, the credit rows. Each row holds one credit. Line 5
- * (FTB 3506), line 10 (FTB 3510) and line 20 (Schedule S) have facts; every
- * other row is `unsupported` with its reason.
+ * (FTB 3506), line 10 (FTB 3510), line 20 (Schedule S) and line 21 (FTB
+ * 3804-CR) have facts; every other row is `unsupported` with its reason.
  * Lines 1–3, 11, 22 and 25 (the tax balances) are bound in bindings.ts.
  * Rules: ca-540-sched-p-inst-2025::sec::to-complete-part-iii::b01 (a row is
  * completed only for a credit taken) and ::sec::column-a-through-column-d-instructions::b01.
@@ -9,7 +9,9 @@
 
 import type { BindingFn, FormAccessor } from "../../../defineForm.js";
 import { numberOrBlank } from "../../../money.js";
-import { unsupported } from "../../../types.js";
+import { unsupported, type Unsupported as Gap } from "../../../types.js";
+import { PTE_CREDIT_AVAILABLE, files3804Cr, pteCreditGap } from "../3804-cr/creditUsed.js";
+import { scheduleCreditRow, type CreditRow } from "../3804-cr/lines.js";
 import { filesScheduleS, otherStateCreditTotal } from "../schedule-s/returnAmounts.js";
 import type { SchedulePFilingInfo } from "./filingInfo.js";
 import type { ScheduleP } from "./types.js";
@@ -152,6 +154,57 @@ export const otherStateCreditRow: Bindings = {
   },
 };
 
+/*
+ * Section B4 line 21, the PTE elective tax credit: column (a) is FTB 3804-CR
+ * line 3 (ca-540-sched-p-inst-2025::sec::section-b4-instructions::b01). The
+ * credit "should be applied against the net tax after the other state tax
+ * credit" (::pass-through-entity-pte-elective-tax-credit::b01), so the balance
+ * before it is line 20 column (c) when that credit is taken, else the last
+ * Section B balance. Columns (b) to (d) follow the column rules (3804-cr/lines.ts).
+ * With no FTB 3804-CR the row stays unsupported; with line 3 at 0 it is blank.
+ */
+const NO_3804_CR = unsupported(
+  "Section B4 line 21, pass-through entity elective tax credit (FTB 3804-CR) — no credit facts.",
+);
+
+function balanceBeforeLine21(form: Form, info: SchedulePFilingInfo): number | undefined {
+  if (filesScheduleS(info)) {
+    const total = otherStateCreditTotal((fieldId) => form[fieldId], info);
+    if (typeof total !== "number") return undefined;
+    if (total > 0) return numberOrBlank(form["3.part3.20_other_state_tax_tax_balance_col_c"]);
+  }
+  return balanceBeforeLine20(form);
+}
+
+function pteCreditRow(form: Form, info: SchedulePFilingInfo) {
+  const available = numberOrBlank(form[PTE_CREDIT_AVAILABLE]);
+  if (available === undefined || available <= 0) return undefined;
+  const balance = balanceBeforeLine21(form, info);
+  return balance === undefined ? undefined : scheduleCreditRow(available, balance);
+}
+
+/*
+ * Columns (b) to (d) share FTB 3804-CR line 4's gap (a credit through a
+ * disregarded SMLLC), so the row never prints a credit used that line 4 cannot
+ * figure. Column (a), the credit available, has no gap.
+ */
+const pteColumn =
+  (pick: (row: CreditRow) => number, limited = true) =>
+  (form: Form, info: SchedulePFilingInfo): number | Gap | undefined => {
+    if (!files3804Cr(info)) return NO_3804_CR;
+    const gap = limited ? pteCreditGap(info) : undefined;
+    if (gap !== undefined) return gap;
+    const credit = pteCreditRow(form, info);
+    return credit === undefined ? undefined : pick(credit);
+  };
+
+export const pteCreditRowBindings: Bindings = {
+  "3.part3.21_pte_elective_tax_credit_amount_col_a": pteColumn((row) => row.available, false),
+  "3.part3.21_pte_elective_tax_credit_used_col_b": pteColumn((row) => row.used),
+  "3.part3.21_pte_elective_tax_tax_balance_col_c": pteColumn((row) => row.balance),
+  "3.part3.21_pte_elective_tax_credit_carryover_col_d": pteColumn((row) => row.carryover),
+};
+
 function row(reason: string, ...keys: Array<keyof ScheduleP>): Array<[keyof ScheduleP, string]> {
   return keys.map((key) => [key, reason]);
 }
@@ -212,13 +265,6 @@ export const partIIICreditRows: Unsupported = Object.fromEntries([
   ...codedCreditRow(3, 17, "Section B2"),
   ...codedCreditRow(3, 18, "Section B2"),
   ...codedCreditRow(3, 19, "Section B2"),
-  ...row(
-    `Section B4 line 21, pass-through entity elective tax credit (FTB 3804-CR) — ${NO_CREDIT_FACTS}.`,
-    "3.part3.21_pte_elective_tax_credit_amount_col_a",
-    "3.part3.21_pte_elective_tax_credit_used_col_b",
-    "3.part3.21_pte_elective_tax_tax_balance_col_c",
-    "3.part3.21_pte_elective_tax_credit_carryover_col_d",
-  ),
   ...row(
     `Section C line 23, solar energy credit carryover — ${NO_CREDIT_FACTS}.`,
     "3.part3.23_solar_energy_carryover_credit_amount_col_a",
