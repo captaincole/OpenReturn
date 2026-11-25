@@ -32,18 +32,34 @@ export interface CaliforniaSale {
   adjusted: boolean;
 }
 
+/*
+ * An FTB 3805E capital asset gain (line 26, plus line 37): "Enter this amount on
+ * Schedule D (540 or 540NR), line 1" (ca-3805e-inst-2025::sec::line-26-and-line-37::b01).
+ * The gain is undefined while the form waits or has a gap.
+ */
+export interface InstallmentRow {
+  description: string;
+  gain: number | undefined;
+  gap: string | undefined;
+}
+
 export interface Line1Row {
   description: string;
-  salesPrice: number;
+  /* Blank on an FTB 3805E row, which gives only the gain. */
+  salesPrice: number | undefined;
   basis: number | undefined;
   /* Column (d) when (c) is more than (b); column (e) when (b) is more than (c). */
   loss: number | undefined;
   gain: number | undefined;
   gap: string | undefined;
+  /* The row waits for an answer (a basis, or the FTB 3805E amount): the totals wait. */
+  waits: boolean;
 }
 
 export interface ScheduleDCaInputs {
   sales: CaliforniaSale[];
+  /* FTB 3805E rows, after the sales. Absent: none. */
+  installmentRows?: InstallmentRow[];
   /* 1099-DIV box 2a, all payers. */
   capitalGainDistributions: number | undefined;
   /* Line 6, positive. */
@@ -77,6 +93,23 @@ export function line1Row(sale: CaliforniaSale): Line1Row {
     loss: basis !== undefined && basis > salesPrice ? basis - salesPrice : undefined,
     gain: basis !== undefined && salesPrice > basis ? salesPrice - basis : undefined,
     gap: sale.adjusted ? ADJUSTED_SALE_GAP : undefined,
+    waits: basis === undefined,
+  };
+}
+
+/*
+ * An FTB 3805E row: column (e) takes the gain; columns (b) and (c) stay blank,
+ * because line 26 is already the gain (QUESTIONS.md of FTB 3805E).
+ */
+export function installmentLine1Row(row: InstallmentRow): Line1Row {
+  return {
+    description: row.description,
+    salesPrice: undefined,
+    basis: undefined,
+    loss: undefined,
+    gain: row.gain,
+    gap: row.gap,
+    waits: row.gain === undefined && row.gap === undefined,
   };
 }
 
@@ -121,11 +154,14 @@ export function adjustment(
 
 /* Lines 1 to 9 and 11. Line 2 stays blank: the engine has no K-1 fact. */
 export function scheduleDCaFigures(inputs: ScheduleDCaInputs): ScheduleDCaFigures {
-  const line1 = inputs.sales.map(line1Row);
+  const line1 = [
+    ...inputs.sales.map(line1Row),
+    ...(inputs.installmentRows ?? []).map(installmentLine1Row),
+  ];
   const gap = line1.find((row) => row.gap !== undefined)?.gap;
   const line3 = roundDollars(inputs.capitalGainDistributions);
   const line6 = roundDollars(inputs.californiaCarryover);
-  const rowsWait = line1.some((row) => row.basis === undefined);
+  const rowsWait = line1.some((row) => row.waits);
   const line4 = rowsWait ? undefined : sumOrBlank(...line1.map((row) => row.gain), line3);
   const line5 = rowsWait ? undefined : sumOrBlank(...line1.map((row) => row.loss));
   const waiting = rowsWait || inputs.californiaCarryoverMissing;

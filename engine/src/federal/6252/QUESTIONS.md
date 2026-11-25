@@ -121,12 +121,11 @@ keep their numbers under three headings. The two conflicts are decisions in
 
 17. **California Schedule D (540) with a capital asset installment gain.**
     California's gain goes on line 1 from FTB 3805E line 26 or 37
-    (ca-3805e-inst-2025::sec::line-26-and-line-37::b01), and FTB 3805E has no
-    rules yet. Done for now: when Schedule D (540) files, its lines 4 to 12b are
-    a gap while federal Schedule D line 4 or 11 holds a Form 6252 gain
-    (`state/ca/schedule-d-ca/resolveInfo.ts`); the FTB 3805E branch adds the row.
-    A business sale reaches federal Schedule D through Form 4797, which the
-    existing Form 4797 gap already covers. Changes dollars: no (a gap).
+    (ca-3805e-inst-2025::sec::line-26-and-line-37::b01). Done: FTB 3805E has
+    rules now and adds the row (`state/ca/3805e/`); lines 4 to 12b are a gap
+    only when FTB 3805E is off by decision. A business sale reaches federal
+    Schedule D through Form 4797, which the existing Form 4797 gap already
+    covers. Changes dollars: no.
 
 18. **Form 8960 line 5c: an installment sale of a partnership interest or S
     corporation stock** (worksheet line 3(c), ::b09). Not now: the fact does not
@@ -191,4 +190,4 @@ keep their numbers under three headings. The two conflicts are decisions in
 | Form 4797 lines 4, 10, 15 | stated rule (line-26::b01, line-25::b01) |
 | Unrecaptured section 1250 gain (worksheet lines 4, 12) | stated rule; earlier gain own reading (items 5, 6) |
 | Form 8960 line 5b (worksheet line 2(d)) | stated rule; the business answer is stated (item 16) |
-| Schedule D (540) | gap until FTB 3805E has rules (item 17) |
+| Schedule D (540) | FTB 3805E's row (item 17; `state/ca/3805e/QUESTIONS.md`) |

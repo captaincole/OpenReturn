@@ -381,6 +381,11 @@ export const CA_FORMS: FormSpec[] = [
     displayName: "FTB 3805E",
     relativeDir: "state/ca/3805e",
     register: registerForm3805E,
+    // One FTB 3805E for each installment sale with a form this year (3805e/totals.ts).
+    copies: {
+      count: (info) => info?.form3805ETotals?.forms.length ?? 1,
+      select: (info, index) => info && { ...info, form3805ECopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-3840",

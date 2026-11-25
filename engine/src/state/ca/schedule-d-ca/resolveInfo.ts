@@ -1,10 +1,7 @@
 import {
   CAPITAL_LOSS_CARRYOVER_KEYS,
   CA_CAPITAL_LOSS_CARRYOVER_KEY,
-  californiaBasisKeyOf,
   isDividendFactKey,
-  printsShareCount,
-  type TradeFactValue,
 } from "../../../facts/index.js";
 import { form6252TotalsOf } from "../../../federal/6252/resolveInfo.js";
 import { sum } from "../../../money.js";
@@ -12,131 +9,73 @@ import {
   filingStatusOf,
   missingInputs,
   num,
-  resolveMustFile,
   sumInvestmentBox,
   type ResolverInputs,
 } from "../../../resolverInputs.js";
+import { form3805ETotalsOf } from "../3805e/resolveInfo.js";
 import type { ScheduleDCaFilingInfo } from "./filingInfo.js";
-import { scheduleDCaFigures, type CaliforniaSale } from "./lines.js";
-
-const MUST_FILE_KEY = "decisions.scope.must_file_schedule_d_ca";
-const FILES_540_KEY = "decisions.scope.must_file_ca_540";
-
-interface SaleWithBases {
-  californiaBasisKey: string;
-  federalBasis: number | undefined;
-  californiaBasis: number | undefined;
-  sale: CaliforniaSale;
-}
-
-/* Column (a), as Form 8949 prints it: "100 sh Z CO" (the form's example: "100 shares of “Z” Co."). */
-function describeSale(trade: TradeFactValue): string {
-  if (printsShareCount(trade.description) || trade.quantity === undefined) {
-    return trade.description;
-  }
-  return `${trade.quantity} sh ${trade.description}`;
-}
-
-/*
- * ca-540-sched-d-inst-2025::sec::line-1::b01, "List each capital asset
- * transaction": every sale on the federal return, with its California basis
- * where a fact states one (::line-1::b02), else the federal basis. The boxed
- * trades and the fact keys are built in one loop (partitionTrades), so index i
- * of each is the same sale.
- */
-function salesWithBases(inputs: ResolverInputs): SaleWithBases[] {
-  return inputs.trades.boxed.map((boxed, index) => {
-    const californiaBasisKey = californiaBasisKeyOf(inputs.trades.factKeys[index]);
-    const californiaBasis = num(inputs, californiaBasisKey);
-    return {
-      californiaBasisKey,
-      federalBasis: boxed.basis,
-      californiaBasis,
-      sale: {
-        description: describeSale(boxed.trade),
-        salesPrice: boxed.trade.proceeds,
-        basis: californiaBasis ?? boxed.basis,
-        adjusted: (boxed.trade.adjustmentAmount ?? 0) !== 0,
-      },
-    };
-  });
-}
+import { scheduleDCaFigures, type InstallmentRow } from "./lines.js";
+import { salesWithBases, scheduleDCaMustFile } from "./mustFile.js";
 
 const INSTALLMENT_SALE_GAP =
-  "Federal Schedule D holds a Form 6252 capital asset gain, which line 10 includes. California's gain goes on line 1 from FTB 3805E line 26 or 37 (ca-3805e-inst-2025::sec::line-26-and-line-37::b01), and the engine has no rules for FTB 3805E yet.";
+  "Federal Schedule D holds a Form 6252 capital asset gain, which line 10 includes. California's gain goes on line 1 from FTB 3805E line 26 or 37 (ca-3805e-inst-2025::sec::line-26-and-line-37::b01), and FTB 3805E does not file (its decision says no).";
 
 /*
  * A Form 6252 capital asset sale sends its gain to federal Schedule D line 4 or
- * 11, so line 10 holds it. Its California amount is an FTB 3805E row on line 1,
- * and without it lines 4 to 12b would subtract the whole gain on Schedule CA.
+ * 11, so line 10 holds it. Its California amount is an FTB 3805E row on line 1
+ * (3805e/totals.ts). FTB 3805E files whenever this schedule does and such a
+ * sale exists; when its decision says no, the row is missing, and lines 4 to
+ * 12b are a gap rather than subtract the whole gain on Schedule CA.
  */
-function sendsCapitalGain(inputs: ResolverInputs): boolean {
-  const totals = form6252TotalsOf(inputs);
-  return totals?.scheduleDLine4 !== undefined || totals?.scheduleDLine11 !== undefined;
+function installmentRows(inputs: ResolverInputs): {
+  rows: InstallmentRow[];
+  gap: string | undefined;
+} {
+  const totals = form3805ETotalsOf(inputs);
+  if (totals !== undefined) {
+    const gap = totals.gap;
+    return { rows: totals.scheduleDRows, gap };
+  }
+  const federal = form6252TotalsOf(inputs);
+  const sendsGain = federal?.scheduleDLine4 !== undefined || federal?.scheduleDLine11 !== undefined;
+  return { rows: [], gap: sendsGain ? INSTALLMENT_SALE_GAP : undefined };
 }
 
-/*
- * ca-540-sched-d-inst-2025::sec::purpose::b01: use the schedule "only if there
- * is a difference between your California and federal capital gains and
- * losses". A fact shows one: a California carryover from 2024 that is not the
- * federal carryover (both short and long term), or a sale whose California basis
- * is not its federal basis. A capital gain alone files nothing. The schedule goes
- * with Form 540.
- */
+/* Schedule D (540): who files (mustFile.ts), line 6's question, and lines 1 to 11. */
 export function resolveScheduleDCaInfo(inputs: ResolverInputs): ScheduleDCaFilingInfo {
-  const files540 = inputs.decisionByKey.get(FILES_540_KEY) === true;
-  const federalCarryovers = Object.values(CAPITAL_LOSS_CARRYOVER_KEYS).map((key) =>
-    num(inputs, key),
-  );
-  const federalCarryover = sum(...federalCarryovers);
-  const californiaCarryover = num(inputs, CA_CAPITAL_LOSS_CARRYOVER_KEY);
-  const sales = salesWithBases(inputs);
-  const differentBases = sales.filter(
-    (sale) => sale.californiaBasis !== undefined && sale.californiaBasis !== sale.federalBasis,
-  );
-  const resolution = resolveMustFile(inputs.decisionByKey, {
-    explicitKey: MUST_FILE_KEY,
-    fallbacks: [
-      {
-        rule: `fallback: Form 540 files (${files540}) and the California capital loss carryover ($${californiaCarryover ?? "none"}) is not the federal carryover ($${federalCarryover})`,
-        value:
-          files540 && californiaCarryover !== undefined && californiaCarryover !== federalCarryover,
-        triggeredByFactKeys: [CA_CAPITAL_LOSS_CARRYOVER_KEY],
-        triggeredByDecisionKeys: [FILES_540_KEY],
-      },
-      {
-        rule: `fallback: Form 540 files (${files540}) and ${differentBases.length} sale(s) have a California basis that is not the federal basis`,
-        value: files540 && differentBases.length > 0,
-        triggeredByFactKeys: differentBases.map((sale) => sale.californiaBasisKey),
-        triggeredByDecisionKeys: [FILES_540_KEY],
-      },
-    ],
-  });
+  const resolution = scheduleDCaMustFile(inputs);
   const files = resolution.value === true;
+  const federalCarryover = sum(
+    ...Object.values(CAPITAL_LOSS_CARRYOVER_KEYS).map((key) => num(inputs, key)),
+  );
+  const californiaCarryover = num(inputs, CA_CAPITAL_LOSS_CARRYOVER_KEY);
   /* Line 6 (::line-6-…::b01): asked when the federal return carries a loss over and no California amount is stated. */
   const asked =
     files && federalCarryover > 0
       ? missingInputs({ [CA_CAPITAL_LOSS_CARRYOVER_KEY]: californiaCarryover })
       : [];
+  if (!files) {
+    return {
+      mustFile: { "schedule-d-ca": resolution },
+      missingInputs: { "schedule-d-ca": asked },
+    };
+  }
   const distributions = sumInvestmentBox(inputs, "box2a", isDividendFactKey);
-  const figures = files
-    ? scheduleDCaFigures({
-        sales: sales.map((sale) => sale.sale),
-        capitalGainDistributions: distributions > 0 ? distributions : undefined,
-        californiaCarryover:
-          californiaCarryover !== undefined && californiaCarryover > 0
-            ? californiaCarryover
-            : undefined,
-        californiaCarryoverMissing: asked.length > 0,
-        filingStatus: filingStatusOf(inputs),
-      })
-    : undefined;
+  const installments = installmentRows(inputs);
+  const figures = scheduleDCaFigures({
+    sales: salesWithBases(inputs).map((sale) => sale.sale),
+    installmentRows: installments.rows,
+    capitalGainDistributions: distributions > 0 ? distributions : undefined,
+    californiaCarryover:
+      californiaCarryover !== undefined && californiaCarryover > 0
+        ? californiaCarryover
+        : undefined,
+    californiaCarryoverMissing: asked.length > 0,
+    filingStatus: filingStatusOf(inputs),
+  });
   return {
     mustFile: { "schedule-d-ca": resolution },
     missingInputs: { "schedule-d-ca": asked },
-    scheduleDCaFigures:
-      figures && sendsCapitalGain(inputs)
-        ? { ...figures, gap: figures.gap ?? INSTALLMENT_SALE_GAP }
-        : figures,
+    scheduleDCaFigures: { ...figures, gap: figures.gap ?? installments.gap },
   };
 }
