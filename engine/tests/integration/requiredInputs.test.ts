@@ -113,6 +113,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "exclusion, or a K-1 code AY or AZ credit (Form 8936 lines 1b, 3b–3e, 7 and 20)",
   ],
   [
+    /^refueling_property\.[^.]+$/,
+    "each fact is a whole item of refueling property placed in service (Schedule A (Form 8911)); " +
+      "whether one was installed is Cade's question. Form 8911 lists the fact again while line 13 " +
+      "or line 17 inside it has no answer",
+  ],
+  [
     /^ca_work_move\.[^.]+$/,
     "each fact is a whole move for a new job (FTB 3913); whether one happened is Cade's question. " +
       "FTB 3913 lists the fact again while an answer inside it (time test, line 4) is missing",
@@ -135,6 +141,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^dependent_care\.(provider|qualifying_person)\.[^.]+$/,
     "each fact is a whole care provider or qualifying person (Form 2441 lines 1 and 2); " +
       "whether one exists is Cade's question",
+  ],
+  [
+    /^ca_health_coverage\.unclaimed\.[^.]+$/,
+    "each fact is a whole person the taxpayer can claim as a dependent but does not (FTB 3853 " +
+      "Parts I and III); whether one lives in the household is Cade's question",
   ],
   [
     /^adoption\.child\.[^.]+$/,
@@ -164,9 +175,20 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "an answer Cade records only when the user made that California payment (Form 540 line 72)",
   ],
   [
-    /^business_property_sale\.(?!nonrecaptured_section_1231_losses$)[^.]+$/,
+    /^business_property_sale\.ca_nonrecaptured_section_1231_losses$/,
+    "Schedule D-1 line 8, recorded only when the California amount differs from the federal " +
+      "answer; absent, Schedule D-1 takes the federal one (and asks for it when both are missing)",
+  ],
+  [
+    /^business_property_sale\.(?!(ca_)?nonrecaptured_section_1231_losses$)[^.]+$/,
     "a Form 4797 sale fact is the whole sale (as a rental property fact is the whole property); " +
       "whether one exists is Cade's question",
+  ],
+  [
+    /^(like_kind_exchange|conflict_of_interest_sale)\.[^.]+$/,
+    "each fact is a whole like-kind exchange or section 1043 sale (Form 8824); whether one " +
+      "happened is Cade's question. Form 8824 lists an exchange again while its lines 9 and 10 " +
+      "are not answered",
   ],
   [
     /^section_179_recapture\.[^.]+$/,
@@ -245,6 +267,17 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^foreign_tax_credit\.claim_accrued$/,
     "an answer Cade records only when the taxpayer chose, on an earlier return, to credit " +
       "foreign taxes when they accrue (Form 1116 Part II box k); absent, box j (paid)",
+  ],
+  [
+    /^ca_pte_elective_credit\.[^.]+$/,
+    "each fact is a whole electing entity's PTE elective tax credit (FTB 3804-CR Part I, one " +
+      "row); whether the taxpayer has one is Cade's question. FTB 3804-CR lists the fact again " +
+      "while an answer inside it (name, number, credit) is missing",
+  ],
+  [
+    /^prior_year\.ca_pte_elective_credit_carryover$/,
+    "an answer Cade records only when the user carries a PTE elective tax credit from 2024; " +
+      "above 0 it files FTB 3804-CR, which asks for it whenever it files",
   ],
   [
     /^prior_year\.ca_amt(_credit_carryover)?$/,

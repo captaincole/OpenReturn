@@ -7,6 +7,7 @@ import { resolve8801Info } from "../8801/resolveInfo.js";
 import { resolve8839Info } from "../8839/resolveInfo.js";
 import { resolve8863Info } from "../8863/resolveInfo.js";
 import { resolve8880Info } from "../8880/resolveInfo.js";
+import { refuelingBusinessCredit, refuelingPersonalPart } from "../8911/resolveInfo.js";
 import { cleanVehicleBusinessCredit, cleanVehicleSchedules } from "../8936/resolveInfo.js";
 import { k1KeysWithRoute } from "../passThrough/receipts.js";
 import { resolveScheduleRInfo } from "../schedule-r/resolveInfo.js";
@@ -50,6 +51,19 @@ export function resolveSchedule3Info(inputs: ResolverInputs): Schedule3FilingInf
       {
         rule: "fallback: Form 8936 has a business credit (line 6a, through Form 3800)",
         value: cleanVehicleBusinessCredit(inputs),
+      },
+      /*
+       * Form 8911: a property at the main home (line 6j), or a business credit (line 6a,
+       * through Form 3800). The resolver cannot see the tax limit, so Schedule 3 may
+       * file with line 6j blank (KNOWN GAP, as for lines 6f and 6m).
+       */
+      {
+        rule: "fallback: Form 8911 has a personal use part (line 6j)",
+        value: refuelingPersonalPart(inputs),
+      },
+      {
+        rule: "fallback: Form 8911 or a K-1 has a refueling property business credit (line 6a, through Form 3800)",
+        value: refuelingBusinessCredit(inputs),
       },
       {
         rule: "fallback: a Schedule K-1 reports foreign taxes (line 1, Form 1116)",

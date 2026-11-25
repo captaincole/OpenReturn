@@ -46,14 +46,15 @@ default the engine applies, and whether the default can change a dollar amount.
    enter the amount from line 7 on line 11." Default: line 11 is blank at 0.
    Changes dollars: no.
 
-8. **Lines 3, 14 and 18a (Form 4684), 5 and 16 (Form 8824).** Form 4684
-   Section B and Form 8824 have no rules. Default: the lines are unsupported;
-   lines 7–18b and the lines they feed are a gap when Form 8824 files by
-   decision. Changes dollars: no (a gap). Lines 4, 10 ("From Form 6252") and 15
-   take Form 6252 (6252/totals.ts); a Form 6252 gap makes its line and lines
-   7–18b a gap, and a Form 6252 that waits leaves lines 4 and 7–18b blank. An
-   installment sale's property is not placed in Part III in its year of sale
-   (6252/QUESTIONS.md, Proposals).
+8. **Lines 3, 14 and 18a (Form 4684); lines 4, 5, 10, 15 and 16 (Forms 6252
+   and 8824).** Form 4684 Section B is not modeled. Default: lines 3, 14 and
+   18a are unsupported. Changes dollars: no (a gap). Lines 4, 10 ("From Form
+   6252") and 15 take Form 6252 (6252/totals.ts); a Form 6252 gap makes its
+   line and lines 7–18b a gap, and a Form 6252 that waits leaves lines 4,
+   7–12, 15, 17 and 18b blank. An installment sale's property is not placed in
+   Part III in its year of sale (6252/QUESTIONS.md, Proposals). Lines 5 and 16
+   take Form 8824's amounts (`federal/8824/QUESTIONS.md`); an exchange amount
+   the engine cannot carry makes lines 5, 16 and 7–18b a gap.
 
 9. **A K-1 section 1231 item** (1065 box 10, 1120-S box 9; line-7::b01). The
    pass-through layers have no route for it. Default: lines 7–18b and Schedule D
@@ -209,8 +210,9 @@ default the engine applies, and whether the default can change a dollar amount.
 | Header | stated rule |
 | Lines 1a–1c | stated rule |
 | Line 2 and line 10 rows | stated rule |
-| Lines 3, 5, 14, 16, 18a | unsupported (Forms 4684 Section B, 8824) |
+| Lines 3, 14, 18a | unsupported (Form 4684 Section B) |
 | Lines 4, 15, line 10 "From Form 6252" | stated rule (Form 6252 line-26::b01, line-25::b01) |
+| Lines 5, 16 | stated rule (Form 8824 lines 21 and 22) |
 | Lines 6–9, 11–12 | published example with numbers (4797 line 8, Pub. 544) |
 | Lines 13, 17, 18b | stated rule |
 | Lines 19–24 | published example with numbers (Pub. 544 truck) |

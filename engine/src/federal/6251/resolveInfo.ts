@@ -14,6 +14,7 @@ import {
   type ResolverInputs,
 } from "../../resolverInputs.js";
 import { resolve8801Info } from "../8801/resolveInfo.js";
+import { refuelingPersonalPart } from "../8911/resolveInfo.js";
 import { resolveScheduleAInfo } from "../schedule-a/resolveInfo.js";
 import type { Form6251FilingInfo } from "./filingInfo.js";
 
@@ -27,7 +28,10 @@ import type { Form6251FilingInfo } from "./filingInfo.js";
  * option exercise, the one AMT adjustment the engine models: a spread above 0, or
  * a Form 3921 on file, files the form. A filer who owes AMT for another reason
  * still needs the explicit decision. A filed Form 8801 files the form too
- * (statement 3), and its line 23 reads line 9.
+ * (statement 3), and its line 23 reads line 9. So does a Form 8911 with a
+ * personal use part (statement 3): its line 8 reads line 9. The resolver cannot
+ * see whether line 10 of Form 8911 ends above 0, so the form may file for a
+ * personal part that the tax limit leaves at 0 (KNOWN GAP).
  */
 export function resolve6251Info(inputs: ResolverInputs): Form6251FilingInfo {
   const iso = resolveIsoSpread(inputs);
@@ -44,6 +48,10 @@ export function resolve6251Info(inputs: ResolverInputs): Form6251FilingInfo {
         rule: "fallback: Form 8801 files (the credit for prior year minimum tax)",
         value: form8801?.value === true,
         triggeredByFactKeys: form8801?.derivation?.triggeredByFactKeys ?? [],
+      },
+      {
+        rule: "fallback: Form 8911 has a personal use part (the refueling property credit)",
+        value: refuelingPersonalPart(inputs),
       },
     ],
   });

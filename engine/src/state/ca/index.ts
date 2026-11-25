@@ -18,6 +18,7 @@ import { register as registerForm3801CR } from "./3801-cr/bindings.js";
 import { register as registerForm3801 } from "./3801/bindings.js";
 import { register as registerForm3803 } from "./3803/bindings.js";
 import { register as registerForm3804CR } from "./3804-cr/bindings.js";
+import { rowsByForm } from "./3804-cr/lines.js";
 import { register as registerForm3805E } from "./3805e/bindings.js";
 import { register as registerForm3805p } from "./3805p/bindings.js";
 import { register as registerForm3805V } from "./3805v/bindings.js";
@@ -36,6 +37,7 @@ import { register as registerForm5870A } from "./5870a/bindings.js";
 import { register as registerScheduleCa540NR } from "./schedule-ca-540nr/bindings.js";
 import { register as registerScheduleCa } from "./schedule-ca/bindings.js";
 import { register as registerScheduleD1 } from "./schedule-d-1/bindings.js";
+import { scheduleD1CopyCount } from "./schedule-d-1/copies.js";
 import { register as registerScheduleD540NR } from "./schedule-d-540nr/bindings.js";
 import { register as registerScheduleDCa } from "./schedule-d-ca/bindings.js";
 import { register as registerScheduleG1 } from "./schedule-g-1/bindings.js";
@@ -311,6 +313,11 @@ export const CA_FORMS: FormSpec[] = [
     displayName: "FTB 3804-CR",
     relativeDir: "state/ca/3804-cr",
     register: registerForm3804CR,
+    /* Ten entities per form; "use additional forms FTB 3804-CR" (ca-3804cr-inst-2025::sec::line-1-column-c-pte-elective-tax-credit-s::b01). */
+    copies: {
+      count: (info) => rowsByForm(info?.pteCreditRows ?? []).length,
+      select: (info, index) => info && { ...info, form3804CrCopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-3805v",
@@ -381,6 +388,11 @@ export const CA_FORMS: FormSpec[] = [
     displayName: "FTB 3805E",
     relativeDir: "state/ca/3805e",
     register: registerForm3805E,
+    // One FTB 3805E for each installment sale with a form this year (3805e/totals.ts).
+    copies: {
+      count: (info) => info?.form3805ETotals?.forms.length ?? 1,
+      select: (info, index) => info && { ...info, form3805ECopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-3840",
@@ -388,6 +400,11 @@ export const CA_FORMS: FormSpec[] = [
     displayName: "FTB 3840",
     relativeDir: "state/ca/3840",
     register: registerForm3840,
+    /* "File a separate form FTB 3840 for each such exchange" (ca-3840-inst-2025::sec::g-multiple-exchanges::b01). */
+    copies: {
+      count: (info) => info?.form3840Copies?.length ?? 1,
+      select: (info, index) => info && { ...info, form3840: info.form3840Copies?.[index] },
+    },
   }),
   makeFormSpec({
     formId: "schedule-d-1",
@@ -395,6 +412,11 @@ export const CA_FORMS: FormSpec[] = [
     displayName: "Schedule D-1",
     relativeDir: "state/ca/schedule-d-1",
     register: registerScheduleD1,
+    // More properties than a part holds: "use additional forms" (schedule-d-1/copies.ts).
+    copies: {
+      count: (info) => scheduleD1CopyCount(info?.scheduleD1),
+      select: (info, index) => info && { ...info, scheduleD1CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "schedule-d-540nr",

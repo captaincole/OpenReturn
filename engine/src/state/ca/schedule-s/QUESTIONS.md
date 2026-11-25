@@ -44,10 +44,13 @@ default named. A person decides whether to keep it.
 
 - Source: "Form 540, line 48 (without other state tax credit and PTE elective
   tax credit)" (`ca-540-sched-s-inst-2025::sec::part-ii-figure-your-other-state-tax-credit::b01`).
-- Default: nothing is added back. FTB 3804-CR has no rules in the engine, so
-  no PTE credit is on the return.
-- Changes a dollar amount: not today. It will when FTB 3804-CR gets rules.
-- Not now: there is no PTE credit to add back until FTB 3804-CR has rules.
+- Default: line 2 is line 35 less the credits on lines 40 and 46 and the
+  credit for prior year AMT. It never subtracts the PTE credit, so nothing is
+  added back. Form 540 line 45 is not read: it holds the total of three or more
+  other credits, and those are this credit, the prior year AMT credit (read
+  from Schedule P (540) line 10) and the PTE credit.
+- Changes a dollar amount: no. FTB 3804-CR has rules now, and line 2 already
+  leaves its credit out.
 
 ## 5. New Hampshire, Tennessee and the District of Columbia
 

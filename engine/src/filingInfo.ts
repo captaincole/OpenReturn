@@ -24,8 +24,6 @@ import type { Form461FilingInfo } from "./federal/461/filingInfo.js";
 import { resolve461Info } from "./federal/461/resolveInfo.js";
 import type { Form4684FilingInfo } from "./federal/4684/filingInfo.js";
 import { resolve4684Info } from "./federal/4684/resolveInfo.js";
-import type { Form4797FilingInfo } from "./federal/4797/filingInfo.js";
-import { resolve4797Info } from "./federal/4797/resolveInfo.js";
 import type { Form4952FilingInfo } from "./federal/4952/filingInfo.js";
 import { resolve4952Info } from "./federal/4952/resolveInfo.js";
 import type { Form4972FilingInfo } from "./federal/4972/filingInfo.js";
@@ -38,8 +36,6 @@ import type { Form6198FilingInfo } from "./federal/6198/filingInfo.js";
 import { resolve6198Info } from "./federal/6198/resolveInfo.js";
 import type { Form6251FilingInfo } from "./federal/6251/filingInfo.js";
 import { resolve6251Info } from "./federal/6251/resolveInfo.js";
-import type { Form6252FilingInfo } from "./federal/6252/filingInfo.js";
-import { resolve6252Info } from "./federal/6252/resolveInfo.js";
 import type { Form6781FilingInfo } from "./federal/6781/filingInfo.js";
 import { resolve6781Info } from "./federal/6781/resolveInfo.js";
 import type { Form7203FilingInfo } from "./federal/7203/filingInfo.js";
@@ -76,6 +72,8 @@ import type { Form8888FilingInfo } from "./federal/8888/filingInfo.js";
 import { resolve8888Info } from "./federal/8888/resolveInfo.js";
 import type { Form8889FilingInfo } from "./federal/8889/filingInfo.js";
 import { resolve8889Info } from "./federal/8889/resolveInfo.js";
+import type { Form8911FilingInfo } from "./federal/8911/filingInfo.js";
+import { resolve8911Info } from "./federal/8911/resolveInfo.js";
 import type { Form8919FilingInfo } from "./federal/8919/filingInfo.js";
 import { resolve8919Info } from "./federal/8919/resolveInfo.js";
 import type { Form8936FilingInfo } from "./federal/8936/filingInfo.js";
@@ -100,6 +98,7 @@ import {
 } from "./federal/formsWithNoRules.js";
 import type { QbiFilingInfo } from "./federal/qbi/filingInfo.js";
 import { resolveQbiInfo } from "./federal/qbi/resolveInfo.js";
+import { SALE_FORMS_RESOLVERS, type SaleFormsFilingInfo } from "./federal/saleForms.js";
 import type { Schedule1AFilingInfo } from "./federal/schedule-1-a/filingInfo.js";
 import { resolveSchedule1AInfo } from "./federal/schedule-1-a/resolveInfo.js";
 import type { Schedule1FilingInfo } from "./federal/schedule-1/filingInfo.js";
@@ -137,48 +136,34 @@ import {
   resolveScheduleDInfo,
   type ResolverInputs,
 } from "./filingInfoResolvers.js";
-import type { Form3461FilingInfo } from "./state/ca/3461/filingInfo.js";
-import { resolve3461Info } from "./state/ca/3461/resolveInfo.js";
 import type { Form3506FilingInfo } from "./state/ca/3506/filingInfo.js";
 import { resolve3506Info } from "./state/ca/3506/resolveInfo.js";
-import type { Form3510FilingInfo } from "./state/ca/3510/filingInfo.js";
-import { resolve3510Info } from "./state/ca/3510/resolveInfo.js";
 import type { Form3514FilingInfo } from "./state/ca/3514/filingInfo.js";
 import { resolve3514Info } from "./state/ca/3514/resolveInfo.js";
 import type { Form3526FilingInfo } from "./state/ca/3526/filingInfo.js";
 import { resolve3526Info } from "./state/ca/3526/resolveInfo.js";
 import type { Form3532FilingInfo } from "./state/ca/3532/filingInfo.js";
 import { resolve3532Info } from "./state/ca/3532/resolveInfo.js";
-import type { Form3801FilingInfo } from "./state/ca/3801/filingInfo.js";
-import { resolve3801Info } from "./state/ca/3801/resolveInfo.js";
-import type { Form3803FilingInfo } from "./state/ca/3803/filingInfo.js";
-import { resolve3803Info } from "./state/ca/3803/resolveInfo.js";
 import type { Form3805pFilingInfo } from "./state/ca/3805p/filingInfo.js";
 import { resolve3805pInfo } from "./state/ca/3805p/resolveInfo.js";
 import type { Form3885AFilingInfo } from "./state/ca/3885a/filingInfo.js";
 import { resolve3885AInfo } from "./state/ca/3885a/resolveInfo.js";
-import type { Form3913FilingInfo } from "./state/ca/3913/filingInfo.js";
-import { resolve3913Info } from "./state/ca/3913/resolveInfo.js";
 import type { Form540FilingInfo } from "./state/ca/540/filingInfo.js";
-import type { Form540NRFilingInfo } from "./state/ca/540nr/filingInfo.js";
-import { resolve540NRInfo } from "./state/ca/540nr/resolveInfo.js";
 import type { Form5805FilingInfo } from "./state/ca/5805/filingInfo.js";
 import { resolve5805Info } from "./state/ca/5805/resolveInfo.js";
 import {
   CALIFORNIA_FORMS_WITH_NO_RULES_RESOLVERS,
   type CaliforniaFormsWithNoRulesFilingInfo,
 } from "./state/ca/formsWithNoRules.js";
-import type { ScheduleCa540NRFilingInfo } from "./state/ca/schedule-ca-540nr/filingInfo.js";
-import { resolveScheduleCa540NRInfo } from "./state/ca/schedule-ca-540nr/resolveInfo.js";
+import {
+  LATER_CALIFORNIA_FORMS_RESOLVERS,
+  type LaterCaliforniaFormsFilingInfo,
+} from "./state/ca/laterForms.js";
 import type { ScheduleCaFilingInfo } from "./state/ca/schedule-ca/filingInfo.js";
 import type { ScheduleDCaFilingInfo } from "./state/ca/schedule-d-ca/filingInfo.js";
 import { resolveScheduleDCaInfo } from "./state/ca/schedule-d-ca/resolveInfo.js";
-import type { ScheduleG1FilingInfo } from "./state/ca/schedule-g-1/filingInfo.js";
-import { resolveScheduleG1Info } from "./state/ca/schedule-g-1/resolveInfo.js";
 import type { SchedulePFilingInfo } from "./state/ca/schedule-p/filingInfo.js";
 import { resolveSchedulePInfo } from "./state/ca/schedule-p/resolveInfo.js";
-import type { ScheduleSFilingInfo } from "./state/ca/schedule-s/filingInfo.js";
-import { resolveScheduleSInfo } from "./state/ca/schedule-s/resolveInfo.js";
 import type { EngineDerivation } from "./types.js";
 import type { FilingStatus, Phone, SSN } from "./values.js";
 
@@ -282,11 +267,11 @@ export type FilingInfo = BaseFilingInfo &
   Form6781FilingInfo &
   Form461FilingInfo &
   Form8621FilingInfo &
-  Form6252FilingInfo &
-  Form4797FilingInfo &
+  SaleFormsFilingInfo &
   Form6198FilingInfo &
   Form7203FilingInfo &
   Form8936FilingInfo &
+  Form8911FilingInfo &
   Form8839FilingInfo &
   Form8815FilingInfo &
   Form4137FilingInfo &
@@ -302,15 +287,7 @@ export type FilingInfo = BaseFilingInfo &
   Form8863FilingInfo &
   Form8938FilingInfo &
   FederalFormsWithNoRulesFilingInfo &
-  Form540NRFilingInfo &
-  ScheduleCa540NRFilingInfo &
-  ScheduleSFilingInfo &
-  Form3801FilingInfo &
-  Form3510FilingInfo &
-  Form3803FilingInfo &
-  ScheduleG1FilingInfo &
-  Form3913FilingInfo &
-  Form3461FilingInfo &
+  LaterCaliforniaFormsFilingInfo &
   CaliforniaFormsWithNoRulesFilingInfo;
 
 /* One resolver per form. A new form adds its resolver here. */
@@ -369,11 +346,11 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve6781Info,
   resolve461Info,
   resolve8621Info,
-  resolve6252Info,
-  resolve4797Info,
+  ...SALE_FORMS_RESOLVERS,
   resolve6198Info,
   resolve7203Info,
   resolve8936Info,
+  resolve8911Info,
   resolve8839Info,
   resolve8815Info,
   resolve4137Info,
@@ -389,15 +366,7 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve8863Info,
   resolve8938Info,
   ...FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
-  resolve540NRInfo,
-  resolveScheduleCa540NRInfo,
-  resolveScheduleSInfo,
-  resolve3801Info,
-  resolve3510Info,
-  resolve3803Info,
-  resolveScheduleG1Info,
-  resolve3913Info,
-  resolve3461Info,
+  ...LATER_CALIFORNIA_FORMS_RESOLVERS,
   ...CALIFORNIA_FORMS_WITH_NO_RULES_RESOLVERS,
 ];
 
