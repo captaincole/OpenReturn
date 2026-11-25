@@ -127,6 +127,7 @@ export const tamFacts: TaxFactRow[] = [
   idFact("phone", "806-555-0141"),
   fact("identity", SPOUSE_KEYS.firstName, TAM.spouse.firstName, VERBAL),
   fact("identity", SPOUSE_KEYS.lastName, TAM.spouse.lastName, VERBAL),
+  fact("identity", SPOUSE_KEYS.occupation, "Veterinarian", VERBAL),
   fact("identity", SPOUSE_KEYS.ssn, TAM.spouse.ssn, VERBAL),
   fact("identity", SPOUSE_KEYS.dob, "06/30/1974", VERBAL),
   fact("wages", makeW2FactKey("emond-field-milling"), tamW2, "W-2 from Emond Field Milling Co."),

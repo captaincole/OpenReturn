@@ -7,7 +7,7 @@ import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../../
 import { unsupported } from "../../../types.js";
 import type { FilingStatus } from "../../../values.js";
 import type { SchedulePFilingInfo } from "./filingInfo.js";
-import { childCareCreditRow, partIIICreditRows } from "./partIII.js";
+import { childCareCreditRow, partIIICreditRows, priorYearAmtCreditRow } from "./partIII.js";
 import type { ScheduleP } from "./types.js";
 
 type Bindings = Partial<{ [K in keyof ScheduleP]: BindingFn<ScheduleP, SchedulePFilingInfo, K> }>;
@@ -386,7 +386,7 @@ const partIII: Bindings = {
 
 export function register(): void {
   defineForm<ScheduleP, SchedulePFilingInfo>("schedule-p", {
-    bindings: { ...partI, ...partII, ...partIII, ...childCareCreditRow },
+    bindings: { ...partI, ...partII, ...partIII, ...childCareCreditRow, ...priorYearAmtCreditRow },
     unsupported: {
       "0.line.4_home_mortgage_interest":
         "Home mortgage interest on proceeds not used to buy, build or improve the home (ca-540-sched-p-inst-2025::sec::line-4-certain-interest-on-a-home-mortgage::b01) — no fact on the use of home-equity loan proceeds.",

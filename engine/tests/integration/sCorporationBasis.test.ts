@@ -132,8 +132,12 @@ describe("the basis limit in proportion (elaida)", () => {
     expect(larger.value("form-461.0.line.16_excess_business_loss")).toBe(-73600);
     expect(larger.value("schedule-1.0.line.8p")).toBe(73600);
     expect(larger.value("schedule-1.0.line.10")).toBe(-626000);
-    // The suspended loss is not QBI, and which business it belongs to is not modeled.
-    expect(unsupportedReason(larger.field("form-8995.0.line.2"))).toContain("Form 461");
+    /*
+     * The suspended loss is not QBI. The K-1 is the only business with a loss,
+     * so only its allowed part counts: -60,000 x (700,000 - 73,600) / 700,000
+     * (irs-8995-inst-2025::sec::determining-your-qualified-business::b03).
+     */
+    expect(larger.value("form-8995.0.line.1iii_c")).toBe(-53691);
   });
 
   it("files no Form 461 for elaida's own loss", () => {

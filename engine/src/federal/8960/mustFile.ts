@@ -12,6 +12,7 @@ import {
   isMiscIncomeFactKey,
   isRetirementDistributionFactKey,
   isSocialSecurityFactKey,
+  readBusinessPropertySaleFacts,
   type RetirementDistributionFactValue,
   type SocialSecurityFactValue,
 } from "../../facts/index.js";
@@ -24,6 +25,8 @@ import {
   type ResolverInputs,
 } from "../../resolverInputs.js";
 import { resolve4137Info } from "../4137/resolveInfo.js";
+import { activityOf } from "../4797/activities.js";
+import { form4797GainUpperBound } from "../4797/upperBound.js";
 import { line1Row } from "../6781/lines.js";
 import { form8814IncomeUpperBound } from "../8814/children.js";
 import {
@@ -76,6 +79,8 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
     sumInvestmentBox(inputs, "box2a", isDividendFactKey),
     atLeast(0, tradeGain),
     atLeast(0, section1256Gain),
+    // Form 4797 reaches 1040 line 7a and Schedule 1 line 4.
+    form4797GainUpperBound(inputs.facts),
     ...businesses.map(({ value }) =>
       atLeast(0, tentativeProfit(value) ?? sum(netReceipts(value), value.otherIncome)),
     ),
@@ -111,12 +116,14 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
  * (it reaches line 5a through 1040 line 7a), a child's income on Form 8814, a
  * section 1256 contract (Form 6781, the same way), a K-1's portfolio income,
  * passive activity income (a trust's boxes 6 to 8, any rental) or net
- * investment income adjustment, or a business without line G "Yes" (passive).
+ * investment income adjustment, a business without line G "Yes" (passive), or
+ * a Form 4797 sale that no business with line G "Yes" made (line 5b keeps it in).
  * This gate is stricter than who-must-file::b01, which states the MAGI test
  * alone: without investment income the tax is $0, and the gate keeps a $0
  * Form 8960 off high-wage returns. A person decides whether to drop it.
  * Mixed businesses (some line G "No") need no per-business line 4b: a business
  * without "Yes" leaves Schedule C line 31, so Schedule 1 line 3 and line 4a, blank.
+ * The keys of the businesses with "Yes" and a capital loss carried in go to line 5b.
  */
 export function investmentSignals(
   inputs: ResolverInputs,
@@ -124,12 +131,20 @@ export function investmentSignals(
 ): {
   scheduleCNonpassive: boolean;
   hasInvestment: boolean;
+  nonpassiveBusinessKeys: string[];
+  capitalLossCarriedIn: boolean;
 } {
   const { businesses } = businessesOnReturn(inputs.facts, joint);
   const scheduleCNonpassive =
     businesses.length > 0 && businesses.every(({ value }) => value.materiallyParticipated === true);
+  const nonpassiveBusinessKeys = businesses
+    .filter(({ value }) => value.materiallyParticipated === true)
+    .map(({ key }) => key);
   const carryover = Object.values(CAPITAL_LOSS_CARRYOVER_KEYS).some(
     (key) => (num(inputs, key) ?? 0) > 0,
+  );
+  const investmentSale = readBusinessPropertySaleFacts(inputs.facts).sales.some(
+    ({ value }) => !nonpassiveBusinessKeys.includes(activityOf(value) ?? ""),
   );
   const hasInvestment =
     inputs.facts.some((fact) => fact.category === "investment_income") ||
@@ -137,6 +152,12 @@ export function investmentSignals(
     carryover ||
     getSection1256Facts(inputs.facts).length > 0 ||
     passThroughHasInvestmentIncome(inputs.facts) ||
-    (businesses.length > 0 && !scheduleCNonpassive);
-  return { scheduleCNonpassive, hasInvestment };
+    (businesses.length > 0 && !scheduleCNonpassive) ||
+    investmentSale;
+  return {
+    scheduleCNonpassive,
+    hasInvestment,
+    nonpassiveBusinessKeys,
+    capitalLossCarriedIn: carryover,
+  };
 }

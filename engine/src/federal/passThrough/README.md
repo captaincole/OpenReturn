@@ -135,16 +135,19 @@ routed nor reported (`tests/unit/federal/passThrough/boxTables.test.ts`).
   is at risk. The excess business loss stage allows every item: the limit
   does not change Schedule E. Form 461 (`federal/461/`) figures it from the
   return's lines, and Schedule 1 line 8p adds the excess back (scenario
-  `juilin`). Its resolver files the form from the business losses added
-  without any income (`excessBusinessLoss.ts`, `461/resolveInfo.ts`).
+  `juilin`; scenario `androl` files it with no excess). Its resolver files
+  the form from the business losses added without any income
+  (`excessBusinessLoss.ts`, `461/resolveInfo.ts`).
 - QBI counts only the allowed loss: the statement's QBI is scaled to the part
   of the business losses the limits allow, and a net QBI loss carries forward
   on Form 8995 line 16.
 - Not yet: a distribution above stock basis (a capital gain on Form 8949), a
   loan repayment (Form 7203 Part II Section C), a sale of stock, the section
   1.1367-1(g) election, and a carried loss on Form 8995-A. Each is unsupported
-  with a reason. With an excess business loss, a QBI line that adds a losing
-  business is a gap (`qbi/excessBusinessLoss.ts`).
+  with a reason. With an excess business loss and two or more businesses
+  with a loss on Form 461, a QBI line that adds a losing business is a gap;
+  with one, the excess comes off that business's QBI loss
+  (`qbi/excessBusinessLoss.ts`).
 
 ## What the fourth step handles
 

@@ -1,6 +1,7 @@
 import type { FormAccessor } from "../../defineForm.js";
-import { numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
+import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
+import { penaltyOnReturn } from "../2210/receivers.js";
 import { line30From8839 } from "../8839/receivers.js";
 import { LINE_8_ID, refundableCreditGap } from "../8863/credit.js";
 import { schedule8812Line18aGap } from "../schedule-8812/earnedIncomeGap.js";
@@ -70,6 +71,12 @@ export function line25c(form: Form, info: Form1040FilingInfo) {
 
 export const line25d = (form: Form) => sum(form["line.25a"], form["line.25b"], form["line.25c"]);
 
+/*
+ * MANUAL EDIT: line 26 = the 2025 estimated tax payments and the 2024
+ * overpayment applied to 2025 (irs-1040-inst-2025::sec::line-26::b01); blank with none.
+ */
+export const line26 = (_: unknown, info: Form1040FilingInfo) => info.estimatedTaxPaid;
+
 // MANUAL EDIT: line 27a's steps (schedule-eic/outcome.ts); blank when there is no credit.
 export function line27a(form: Form, info: Form1040FilingInfo) {
   const outcome = eicOutcome(form, info);
@@ -132,9 +139,21 @@ export function line34(form: Form) {
   return paid > tax ? paid - tax : undefined;
 }
 
-// MANUAL EDIT: line 35a = line 34 only when the full overpayment is refunded.
-export const line35a = (form: Form, info: Form1040FilingInfo) =>
-  info.refundFullOverpaymentFederal ? form["line.34"] : undefined;
+/*
+ * MANUAL EDIT: line 35a = line 34 only when the full overpayment is refunded,
+ * less the line 38 penalty: "subtract the penalty from the amount you would
+ * otherwise enter on line 35a ... If the penalty is more than the overpayment
+ * on line 34, enter -0- on lines 35a and 36"
+ * (irs-1040-inst-2025::sec::figuring-the-penalty::b01). Waits for Form 2210.
+ */
+export function line35a(form: Form, info: Form1040FilingInfo) {
+  if (!info.refundFullOverpaymentFederal) return undefined;
+  const overpaid = form["line.34"];
+  const penalty = penaltyOnReturn(form, info);
+  if (penalty === "waiting" || typeof overpaid !== "number") return undefined;
+  if ("unsupported" in penalty) return penalty;
+  return atLeast(0, overpaid - sum(penalty.penalty));
+}
 
 /*
  * MANUAL EDIT: the line 35a box: "Check the box on line 35a and attach Form 8888
@@ -147,10 +166,27 @@ export function line35aForm8888Attached(form: Form) {
   return typeof total === "number" && total > 0 ? true : undefined;
 }
 
-// MANUAL EDIT: line 37 includes the line 38 penalty (not modeled).
-export function line37(form: Form) {
+/*
+ * MANUAL EDIT: line 37 includes the line 38 penalty: "Add the penalty to any
+ * tax due", and when the penalty is more than the line 34 overpayment,
+ * "subtract line 34 from line 38 and enter the result on line 37"
+ * (irs-1040-inst-2025::sec::figuring-the-penalty::b01). Waits for Form 2210.
+ */
+export function line37(form: Form, info: Form1040FilingInfo) {
   const paid = form["line.33"];
   const tax = form["line.24"];
-  if (typeof paid !== "number" || typeof tax !== "number") return undefined;
-  return tax > paid ? tax - paid + sum(form["line.38"]) : undefined;
+  const penalty = penaltyOnReturn(form, info);
+  if (typeof paid !== "number" || typeof tax !== "number" || penalty === "waiting") {
+    return undefined;
+  }
+  if ("unsupported" in penalty) return penalty;
+  const owed = tax - paid + sum(penalty.penalty);
+  return owed > 0 ? owed : undefined;
+}
+
+/* MANUAL EDIT: line 38 = Form 2210 line 19 when the form figures the penalty; blank otherwise. */
+export function line38(form: Form, info: Form1040FilingInfo) {
+  const penalty = penaltyOnReturn(form, info);
+  if (penalty === "waiting") return undefined;
+  return "unsupported" in penalty ? penalty : penalty.penalty;
 }

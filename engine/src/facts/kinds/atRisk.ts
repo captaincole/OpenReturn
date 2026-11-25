@@ -69,6 +69,16 @@ export interface AtRiskDetailed {
    * Line 18: withdrawals and distributions, loans that became nonrecourse or
    * protected, since then; with last year's form, last year's line 21 loss too
    * (::line-18::b01 to ::line-14-2::b02; federal/6198/QUESTIONS.md item 15).
+   *
+   * DECISION (2026-11-24): last year's deducted loss lowers this year's start.
+   * - "Your prior tax year line 21 deductible loss reduces your at-risk
+   *   investment as of the beginning of your current tax year"
+   *   (irs-6198-inst-2025::sec::line-14-2::b01).
+   * - Line 18 takes decreases "that occurred since the end of your prior tax
+   *   year" (irs-6198-inst-2025::sec::line-18::b01).
+   * The engine follows the first: this amount includes last year's line 21.
+   * Last year's line 19b is figured before line 21, so without this the same
+   * dollars at risk would support a loss twice.
    */
   decreasesSince?: number;
 }

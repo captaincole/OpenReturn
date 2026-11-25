@@ -148,6 +148,7 @@ export const noalFacts: TaxFactRow[] = [
   idFact("phone", "916-555-0142"),
   fact("identity", SPOUSE_KEYS.firstName, SPOUSE.firstName, "Verbal: spouse's name."),
   fact("identity", SPOUSE_KEYS.lastName, SPOUSE.lastName, "Verbal: spouse's name."),
+  fact("identity", SPOUSE_KEYS.occupation, "Teacher", "Verbal: spouse's occupation."),
   fact("identity", SPOUSE_KEYS.ssn, SPOUSE.ssn, "Verbal: spouse's SSN."),
   fact("identity", SPOUSE_KEYS.dob, "12/02/1983", "Verbal: spouse's date of birth."),
   fact(

@@ -188,6 +188,7 @@ export const odessaFacts: TaxFactRow[] = [
   idFact("phone", "775-555-0188"),
   fact("identity", SPOUSE_KEYS.firstName, ODESSA.spouse.firstName, "Stated by the taxpayer."),
   fact("identity", SPOUSE_KEYS.lastName, ODESSA.spouse.lastName, "Stated by the taxpayer."),
+  fact("identity", SPOUSE_KEYS.occupation, "Research assistant", "Stated by the taxpayer."),
   fact("identity", SPOUSE_KEYS.ssn, ODESSA.spouse.ssn, "Stated by the taxpayer."),
   fact("identity", SPOUSE_KEYS.dob, "08/30/1972", "Stated by the taxpayer."),
   fact(

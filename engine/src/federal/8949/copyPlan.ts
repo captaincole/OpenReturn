@@ -30,6 +30,10 @@ export interface BoxedTrade {
   trade: TradeFactValue;
   box: Form8949Box;
   basis?: number;
+  /* A sale in a foreign currency whose rate is not recorded: its amounts, and its box's totals, wait. */
+  waitsForRate?: boolean;
+  /* Why a sale in a foreign currency cannot be converted: its amounts, and its box's totals, are unsupported. */
+  rateGap?: string;
 }
 
 export interface Form8949Page {
@@ -42,10 +46,13 @@ export interface Form8949Copy {
   partII?: Form8949Page;
 }
 
-/** Across every copy; not rounded. */
+/** Across every copy; not rounded. `waits`: a sale in the box waits for its exchange rate. */
 export interface BoxTotals {
   proceeds: number;
   cost: number;
+  waits?: boolean;
+  /* A sale in the box cannot be converted (BoxedTrade.rateGap). */
+  gap?: string;
 }
 
 export function planForm8949Copies(trades: readonly BoxedTrade[]): Form8949Copy[] {
@@ -63,6 +70,8 @@ export function totalsByBox(
     const totals = (out[trade.box] ??= { proceeds: 0, cost: 0 });
     totals.proceeds = sum(totals.proceeds, trade.trade.proceeds);
     totals.cost = sum(totals.cost, trade.basis);
+    if (trade.waitsForRate === true) totals.waits = true;
+    if (trade.rateGap !== undefined) totals.gap ??= trade.rateGap;
   }
   return out;
 }

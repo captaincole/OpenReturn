@@ -73,7 +73,7 @@ function depreciationColumn(
  * Otherwise FTB 3885A line 8a/14a in column B, 8b/14b in column C
  * (ca-3885a-inst-2025::sec::line-8a-and-line-8b::b01).
  */
-function line5Column(
+export function line5Column(
   form: Record<string, unknown>,
   info: ScheduleCaFilingInfo,
   side: "subtraction" | "addition",
@@ -92,7 +92,7 @@ const positive = (amount: number | undefined) =>
   amount !== undefined && amount > 0 ? roundDollars(amount) : undefined;
 
 /* Line 3 column B or C: a California employee's profit or loss, plus the FTB 3885A business difference. */
-function line3Column(info: ScheduleCaFilingInfo, side: "subtraction" | "addition") {
+export function line3Column(info: ScheduleCaFilingInfo, side: "subtraction" | "addition") {
   const employee =
     side === "subtraction" ? info.caEmployeeAmounts?.netProfit : info.caEmployeeAmounts?.netLoss;
   const depreciation = depreciationColumn(info.businessDepreciationAdjustment, side);

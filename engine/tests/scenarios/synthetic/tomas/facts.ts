@@ -103,6 +103,7 @@ const IDENTITY: TaxFactRow[] = [
   idFact("phone", "510-555-0144"),
   fact("identity", SPOUSE_KEYS.firstName, SPOUSE.firstName, MADE_UP),
   fact("identity", SPOUSE_KEYS.lastName, SPOUSE.lastName, MADE_UP),
+  fact("identity", SPOUSE_KEYS.occupation, "Pediatric nurse", MADE_UP),
   fact("identity", SPOUSE_KEYS.ssn, SPOUSE.ssn, MADE_UP),
   fact("identity", SPOUSE_KEYS.dob, "07/25/1981", MADE_UP),
 ];
