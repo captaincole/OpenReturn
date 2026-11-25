@@ -68,10 +68,13 @@ Forms checked: Form 8801, Form 6251, Schedule 3, Schedule B, Form 8959, Form 896
 | 8801 line 22 | 201,393 + Schedule 2 line 1z (0) − Schedule 3 line 1 (250) | 201,143 |
 | 6251 line 4 | 674,250 + 15,750 | 690,000 |
 | 6251 line 5 | 88,100 − 25% of 63,650 (15,912.50 → 15,913) | 72,187 |
-| 6251 line 9, 8801 line 23 | 587,813 × 28% − 4,782 = 159,806; + 30,000 at 20% | 165,806 |
-| 8801 line 24, 25 | 201,143 − 165,806; smaller of 164,820 and 35,337 | 35,337 |
-| 8801 line 26 | 164,820 − 35,337 | 129,483 |
-| Schedule 3 lines 6b, 7 | 8801 line 25 | 35,337 |
-| Schedule 3 line 8, 1040 lines 20, 21 | 250 + 35,337 | 35,587 |
-| 1040 line 22 | 201,393 − 35,587: the tax falls to the tentative minimum tax | 165,806 |
+| 6251 lines 7, 9 | 587,813 × 28% − 4,782 = 159,806; + 30,000 at 20%. Line 10 (201,143) is above line 7, so line 8 is blank | 165,806 |
+| 8801 line 23 | 6251 line 7 less the credit line 8 would hold: Schedule 3 line 1 by the election, 165,806 − 250 (`docs/rule-decisions.md`, row 12) | 165,556 |
+| 8801 line 24, 25 | 201,143 − 165,556; smaller of 164,820 and 35,587 | 35,587 |
+| 8801 line 26 | 164,820 − 35,587 | 129,233 |
+| Schedule 3 lines 6b, 7 | 8801 line 25 | 35,587 |
+| Schedule 3 line 8, 1040 lines 20, 21 | 250 + 35,587 | 35,837 |
+| 1040 line 22 | 201,393 − 35,837: the tax falls to the tentative minimum tax after the foreign tax credit | 165,556 |
 | 1040 line 23 | Additional Medicare Tax 4,050 + net investment income tax 1,520 | 5,570 |
+| 1040 line 24 | 165,556 + 5,570 | 171,126 |
+| 1040 lines 34, 35a | payments 179,050 − 171,126 | 7,924 |

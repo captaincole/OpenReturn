@@ -62,7 +62,7 @@ function columnAmounts(form: Read, entry: NonbusinessColumn) {
  * for line 26, which settles every column's line 21 and line 22 (a blank
  * line 22 then means no loss is allowed).
  */
-function nonbusinessColumns(form: Read, figures: Form461Figures) {
+export function nonbusinessColumns(form: Read, figures: Form461Figures) {
   const columns = figures.nonbusinessColumns;
   if (columns === undefined) return undefined;
   if (columns.length === 0) return { income: 0, losses: 0 };

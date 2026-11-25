@@ -68,7 +68,7 @@ function childColumn(pick: "subtraction" | "addition", noChild: string) {
 }
 
 /* Line 9a col C: lines 8a through 8z, column C. Only line 8z has a column C rule. */
-const OTHER_INCOME_ADDITIONS = [
+export const OTHER_INCOME_ADDITIONS = [
   "1.line.b8a_additions",
   "1.line.b8c_additions",
   "1.line.b8d_additions",
