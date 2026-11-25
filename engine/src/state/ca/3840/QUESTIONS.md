@@ -44,6 +44,25 @@ Instructions: `ca-3840-inst-2025`. Side 1 copies Form 8824 (see
    basis). Line 8 = Side 1 line 19 + federal basis − California basis, valid
    while the California recognized gain equals the federal one. Otherwise, or
    with recapture and a different basis, line 8 is unsupported. Changes line 8.
+   The blind fill (case 12) shows the other reading: federal basis $80,000,
+   California basis $104,000, land of $100,000 and $5,000 cash. The simple move
+   gives −$4,000; the blind preparer redid Form 8824 lines 19–24 with the
+   California basis (realized $1,000, recognized the smaller of line 15 or that
+   gain, $1,000) and entered 0. The engine keeps line 8 unsupported: a line 8 of
+   0 is right only when the California return also recognizes $1,000, not the
+   federal $5,000, and Schedule D (540) does not take California Form 8824
+   amounts yet. Changes line 8 by up to the basis difference.
+13. **A deferred loss on line 8.** Line 8 is titled "California sourced
+    deferred gain", but the instructions "add the deferred gain or loss
+    amounts" (`part-i-properties-given-up::b03`). Default: a loss on Side 1
+    line 19 prints as a negative amount on lines 8 and 10 column D (blind case
+    7 agrees: −$20,000). Changes line 8 when the other reading (0) is right.
+14. **Other property given up is not a Schedule A column.** Line 1 says "List
+    each property given up" (`part-i-properties-given-up::b01`); line 8 speaks of
+    real property in California. Default: column A is the like-kind property
+    only; the stock's gain is recognized on Side 1 line 9, and its value comes
+    out of line 3 (decision 1). The blind fill agrees (cases 5 and 13). Changes
+    lines 3, 5 and 7 when wrong; line 8 does not change.
 7. **The California basis, when not stated.** Default: the federal adjusted
    basis (the fact says "absent: the same"). Cade asks when a property was
    depreciated or came from an earlier exchange. Changes lines 6–8 when wrong.
@@ -69,6 +88,23 @@ Instructions: `ca-3840-inst-2025`. Side 1 copies Form 8824 (see
     values. No dollars.
 12. **Ownership percentage boxes.** The comb has six cells with the point in
     the fourth. Default: three places, zero-padded ("050.00"). No dollars.
+
+## Second opinions
+
+- **Blind fill** (14 cases, Side 1 lines 9–20 and Schedule A lines 3, 5, 7, 8
+  and 10 column D, from the blank form and the instructions only). Every line
+  agrees in dollars except case 12 line 8 and line 10 column D: the engine
+  leaves them unsupported and the blind fill enters 0 (question 6). The blind
+  doubts on Form 8824 itself (lines 12–18 of an exchange with cash, the line 21
+  cap) are the federal form's points (`federal/8824/QUESTIONS.md`, the
+  multi-asset note and question 1); the engine agrees with the blind fill on
+  both.
+- **PolicyEngine-US** 2.153.8 (commit b3edc04), California tax code
+  (`variables/gov/states/ca`, `parameters/gov/states/ca`): no variable for a
+  like-kind exchange, R&TC 18031, FTB 3840 or a California basis difference.
+  Nothing to compare.
+- **IRS Direct File** prepares no California return, and its fact dictionary
+  has no like-kind exchange (`federal/8824/QUESTIONS.md`). Nothing to compare.
 
 ## Confidence by field group
 
