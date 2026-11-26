@@ -1,8 +1,8 @@
 /*
  * Form 8859 on a whole return: who files, what it asks, Credit Limit Worksheet
  * B line 14 or Form 1040 line 19 on worksheet line 2, Schedule 3 line 6h and
- * Schedule 8812 line 13, the case the engine leaves to a person, and "no
- * facts, nothing changes". The synthetic takima scenario is the base.
+ * Schedule 8812 line 13, Form 2555 (no Worksheet B), and "no facts, nothing
+ * changes". The synthetic takima scenario is the base; bair has Form 2555.
  */
 
 import { describe, expect, it } from "vitest";
@@ -10,6 +10,7 @@ import { DC_HOMEBUYER_CREDIT_KEYS } from "../../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../../src/facts/rows.js";
 import { evaluateScenario, pendingInputs } from "../../../../src/index.js";
 import { decisionRow } from "../../../helpers/fixtureBuilders.js";
+import { bairScenario as bair } from "../../../scenarios/synthetic/bair/index.js";
 import { takimaScenario as base } from "../../../scenarios/synthetic/takima/index.js";
 
 const KEY = DC_HOMEBUYER_CREDIT_KEYS.carryforwardFrom2024;
@@ -142,14 +143,26 @@ describe("Form 8859 lines with no qualifying child (Form 1040 line 19)", () => {
   });
 });
 
-describe("Form 8859 gaps", () => {
-  it("Form 2555 with a qualifying child: line 2 is unsupported, and Schedule 8812 line 13 leaves 6h out", () => {
-    const run = evaluate(base.facts, withDecision("decisions.scope.must_file_2555", true));
-    expect(run.field("form-8859", "0.line.2_tax_liability_limitation")).toMatchObject({
-      ok: false,
-      unsupported: true,
-    });
-    expect(run.field("schedule-3", LINE_6H)).toMatchObject({ ok: false, unsupported: true });
+describe("Form 8859 with Form 2555 and a qualifying child (no Credit Limit Worksheet B)", () => {
+  // bair files Form 2555 with a grandson under 17: line 18 13,474, line 19 700.
+  const bairFacts = [...bair.facts, { ...carryFact, userId: bair.userId, value: 3800 }];
+
+  it("worksheet line 2 is Form 1040 line 19, and Schedule 8812 line 13 leaves 6h out", () => {
+    const run = evaluate(bairFacts, bair.decisions);
+    expect(run.files("form-2555")).toBe(true);
+    expect(run.value("form-8859", WORKSHEET_2)).toBe(700);
+    expect(run.lines()).toEqual([3800, 12774, 3800, 0]);
+    expect(run.value("schedule-3", LINE_6H)).toBe(3800);
+    expect(run.value("schedule-8812", LINE_13)).toBe(13474);
+    expect(run.value("form-1040", "line.19")).toBe(700);
+    expect(run.value("form-1040", "line.22")).toBe(13474 - 700 - 3800);
+    expect(run.pending.pendingFacts).toEqual([]);
+  });
+
+  it("with no carryforward, bair's Schedule 8812 line 13 is unchanged", () => {
+    const run = evaluate(bair.facts, bair.decisions);
+    expect(run.files("form-8859")).toBe(false);
+    expect(run.value("schedule-8812", LINE_13)).toBe(13474);
   });
 });
 

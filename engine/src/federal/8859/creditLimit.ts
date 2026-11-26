@@ -77,16 +77,12 @@ function otherCreditsGap(form: Lines, info: Form8859CreditInfo): string | undefi
  * Schedule 8812 (Form 1040) direct you to complete Credit Limit Worksheet B"
  * (irs-8859-form-2025::sec::line-4::b01). They do with this credit, no Form
  * 2555 and Schedule 8812 line 4 above 0 (irs-1040s8-inst-2025::sec::line-13::b01).
- * With Form 2555 and a qualifying child, Schedule 8812 line 13 still subtracts
- * line 6h, so line 19 would wait for this form: a gap.
+ * With Form 2555 it is line 19; Schedule 8812 line 13 then leaves line 6h out
+ * (Worksheet A line 4 is -0-, line-21::b03), so the read makes no cycle.
  */
-const FORM_2555_WITH_CHILD =
-  "Form 1040 line 19, and with Form 2555 Schedule 8812 skips Credit Limit Worksheet B (irs-1040s8-inst-2025::sec::line-13::b01), and the engine's Schedule 8812 line 13 still subtracts Schedule 3 line 6h for a qualifying child, so line 19 cannot be figured before this form.";
-
 function childCredit(form: Lines, info: Form8859CreditInfo): Result<number> {
   const children = sum(form["schedule-8812.0.line.4_qualifying_children_under_17"]) > 0;
-  if (!children) return sum(form["form-1040.line.19"]);
-  if (files2555(info)) return unsupported(FORM_2555_WITH_CHILD);
+  if (!children || files2555(info)) return sum(form["form-1040.line.19"]);
   const line14 = worksheetBLine14(form, info);
   return isUnsupported(line14)
     ? unsupported(`Credit Limit Worksheet B line 14: ${line14.reason}`)
