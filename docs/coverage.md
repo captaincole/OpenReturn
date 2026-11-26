@@ -13,13 +13,13 @@ A dash means that there is nothing to measure: the form has a field list and no 
 
 ## Summary
 
-The golden suite ran 126 scenarios. A jurisdiction's code is its forms and the code that they share.
+The golden suite ran 132 scenarios. A jurisdiction's code is its forms and the code that they share.
 
 | Jurisdiction | Forms | Fields supported | Branches | Lines |
 | --- | --- | --- | --- | --- |
-| Federal 2025 | 88 | 6,937 of 9,583 (72%) | 79.3% (18,529 of 23,356) | 96.8% (67,605 of 69,806) |
-| California 2025 | 38 | 2,588 of 4,075 (64%) | 79.0% (5,735 of 7,263) | 97.2% (21,525 of 22,143) |
-| All | 126 | 9,525 of 13,658 (70%) | 79.2% (24,272 of 30,629) | 96.9% (89,143 of 91,962) |
+| Federal 2025 | 88 | 7,457 of 9,583 (78%) | 79.3% (19,214 of 24,215) | 96.9% (70,346 of 72,588) |
+| California 2025 | 38 | 2,610 of 4,075 (64%) | 78.8% (5,871 of 7,449) | 97.2% (22,114 of 22,741) |
+| All | 126 | 10,067 of 13,658 (74%) | 79.2% (25,093 of 31,674) | 97.0% (92,473 of 95,342) |
 
 ## By form
 
@@ -27,19 +27,19 @@ The golden suite ran 126 scenarios. A jurisdiction's code is its forms and the c
 | --- | --- | --- | --- | --- | --- |
 | Form 8949 | Federal 2025 | 14 | 154 of 200 (77%) | 82.6% | 99.7% |
 | Schedule D | Federal 2025 | 34 | 38 of 53 (72%) | 79.5% | 93.9% |
-| Form 1040 | Federal 2025 | 126 | 137 of 199 (69%) | 87.8% | 98.9% |
+| Form 1040 | Federal 2025 | 132 | 138 of 199 (69%) | 87.8% | 98.8% |
 | Schedule A | Federal 2025 | 15 | 30 of 32 (94%) | 81.6% | 97.9% |
-| Schedule B | Federal 2025 | 29 | 72 of 72 (100%) | 81.7% | 99.4% |
+| Schedule B | Federal 2025 | 31 | 72 of 72 (100%) | 81.8% | 99.4% |
 | Form 4562 | Federal 2025 | 1 | 88 of 240 (37%) | 75.3% | 93.1% |
 | Form 8829 | Federal 2025 | 1 | 51 of 58 (88%) | 74.0% | 99.7% |
-| Schedule C | Federal 2025 | 24 | 87 of 105 (83%) | 79.7% | 100.0% |
-| Schedule SE | Federal 2025 | 23 | 18 of 25 (72%) | 81.3% | 98.4% |
+| Schedule C | Federal 2025 | 25 | 87 of 105 (83%) | 79.8% | 100.0% |
+| Schedule SE | Federal 2025 | 25 | 18 of 25 (72%) | 81.6% | 98.4% |
 | Form 8582 | Federal 2025 | 8 | 173 of 198 (87%) | 85.9% | 96.5% |
-| Schedule E | Federal 2025 | 25 | 170 of 176 (97%) | 82.4% | 97.4% |
-| Schedule 1 | Federal 2025 | 66 | 49 of 72 (68%) | 81.4% | 95.3% |
-| Schedule 1-A | Federal 2025 | 9 | 16 of 54 (30%) | 88.4% | 99.6% |
-| Schedule 2 | Federal 2025 | 65 | 45 of 62 (73%) | 90.8% | 99.5% |
-| Schedule 3 | Federal 2025 | 22 | 18 of 37 (49%) | 90.5% | 99.6% |
+| Schedule E | Federal 2025 | 26 | 170 of 176 (97%) | 82.4% | 97.4% |
+| Schedule 1 | Federal 2025 | 69 | 49 of 72 (68%) | 81.4% | 95.3% |
+| Schedule 1-A | Federal 2025 | 10 | 16 of 54 (30%) | 88.4% | 99.6% |
+| Schedule 2 | Federal 2025 | 68 | 45 of 62 (73%) | 90.8% | 99.5% |
+| Schedule 3 | Federal 2025 | 27 | 23 of 37 (62%) | 91.3% | 99.7% |
 | Form 2441 | Federal 2025 | 3 | 72 of 72 (100%) | 82.4% | 97.2% |
 | Schedule R | Federal 2025 | 2 | 27 of 27 (100%) | 80.3% | 97.0% |
 | Schedule H | Federal 2025 | 1 | 19 of 72 (26%) | 76.4% | 97.4% |
@@ -47,12 +47,12 @@ The golden suite ran 126 scenarios. A jurisdiction's code is its forms and the c
 | Form 8606 | Federal 2025 | 3 | 32 of 45 (71%) | 80.8% | 93.3% |
 | Form 8889 | Federal 2025 | 3 | 20 of 27 (74%) | 79.5% | 96.5% |
 | Form 4952 | Federal 2025 | 5 | 17 of 17 (100%) | 87.1% | 99.6% |
-| Schedule 8812 | Federal 2025 | 20 | 38 of 40 (95%) | 86.6% | 92.6% |
+| Schedule 8812 | Federal 2025 | 22 | 38 of 40 (95%) | 85.6% | 97.3% |
 | Form 8959 | Federal 2025 | 28 | 24 of 26 (92%) | 75.7% | 97.0% |
-| Form 8960 | Federal 2025 | 26 | 24 of 38 (63%) | 78.3% | 96.9% |
-| Form 8995-A | Federal 2025 | 10 | 81 of 94 (86%) | 88.8% | 97.8% |
-| Form 8995 | Federal 2025 | 25 | 32 of 33 (97%) | 91.7% | 99.5% |
-| Form 6251 | Federal 2025 | 8 | 46 of 62 (74%) | 85.4% | 98.1% |
+| Form 8960 | Federal 2025 | 27 | 24 of 38 (63%) | 78.3% | 96.9% |
+| Form 8995-A | Federal 2025 | 11 | 81 of 94 (86%) | 88.8% | 97.8% |
+| Form 8995 | Federal 2025 | 26 | 32 of 33 (97%) | 91.7% | 99.5% |
+| Form 6251 | Federal 2025 | 9 | 46 of 62 (74%) | 85.4% | 98.2% |
 | Schedule C (Form 8995-A) | Federal 2025 | 2 | 18 of 19 (95%) | 85.3% | 97.4% |
 | Form 8962 | Federal 2025 | 1 | 141 of 141 (100%) | 69.2% | 93.7% |
 | Form 4684 | Federal 2025 | 1 | 62 of 162 (38%) | 76.5% | 96.5% |
@@ -62,14 +62,14 @@ The golden suite ran 126 scenarios. A jurisdiction's code is its forms and the c
 | Form 2210 | Federal 2025 | 2 | 167 of 167 (100%) | 79.9% | 97.6% |
 | Form 8801 | Federal 2025 | 1 | 57 of 57 (100%) | 74.9% | 97.8% |
 | Form 8814 | Federal 2025 | 3 | 24 of 24 (100%) | 77.2% | 98.1% |
-| Schedule F | Federal 2025 | 4 | 89 of 89 (100%) | 79.6% | 97.9% |
+| Schedule F | Federal 2025 | 5 | 89 of 89 (100%) | 79.6% | 97.9% |
 | Form 461 | Federal 2025 | 5 | 16 of 16 (100%) | 79.6% | 98.4% |
 | Form 965-A | Federal 2025 | 0 | 0 of 391 (0%) | 76.5% | 92.3% |
 | Form 2106 | Federal 2025 | 2 | 82 of 82 (100%) | 69.6% | 93.4% |
 | Form 2555 | Federal 2025 | 2 | 160 of 160 (100%) | 75.4% | 96.9% |
-| Form 3800 | Federal 2025 | 3 | 1,635 of 1,635 (100%) | 78.8% | 97.3% |
+| Form 3800 | Federal 2025 | 3 | 1,635 of 1,635 (100%) | 79.2% | 97.3% |
 | Form 3903 | Federal 2025 | 2 | 10 of 10 (100%) | 80.2% | 100.0% |
-| Form 4136 | Federal 2025 | 0 | 0 of 276 (0%) | 76.5% | 92.3% |
+| Form 4136 | Federal 2025 | 1 | 276 of 276 (100%) | 79.5% | 97.8% |
 | Form 4137 | Federal 2025 | 1 | 33 of 33 (100%) | 83.2% | 99.3% |
 | Form 4255 | Federal 2025 | 1 | 483 of 483 (100%) | 81.5% | 99.0% |
 | Form 4563 | Federal 2025 | 0 | 0 of 45 (0%) | 76.5% | 92.3% |
@@ -81,22 +81,22 @@ The golden suite ran 126 scenarios. A jurisdiction's code is its forms and the c
 | Form 5471 | Federal 2025 | 0 | 0 of 436 (0%) | 76.5% | 92.3% |
 | Form 6198 | Federal 2025 | 2 | 34 of 34 (100%) | 75.3% | 95.4% |
 | Form 6252 | Federal 2025 | 4 | 49 of 49 (100%) | 79.8% | 96.4% |
-| Form 8396 | Federal 2025 | 1 | 26 of 26 (100%) | 73.6% | 96.4% |
+| Form 8396 | Federal 2025 | 1 | 26 of 26 (100%) | 73.1% | 96.4% |
 | Form 8611 | Federal 2025 | 1 | 37 of 37 (100%) | 77.5% | 93.0% |
 | Form 8615 | Federal 2025 | 2 | 32 of 32 (100%) | 72.8% | 91.2% |
 | Form 8621 | Federal 2025 | 2 | 151 of 151 (100%) | 78.8% | 97.5% |
 | Form 8697 | Federal 2025 | 0 | 0 of 98 (0%) | 76.5% | 92.3% |
 | Form 8815 | Federal 2025 | 1 | 39 of 39 (100%) | 86.2% | 99.5% |
 | Form 8828 | Federal 2025 | 1 | 33 of 33 (100%) | 76.0% | 97.2% |
-| Form 8834 | Federal 2025 | 0 | 0 of 11 (0%) | 76.5% | 92.3% |
+| Form 8834 | Federal 2025 | 1 | 11 of 11 (100%) | 76.6% | 99.8% |
 | Form 8839 | Federal 2025 | 1 | 100 of 100 (100%) | 84.4% | 98.6% |
 | Form 8853 | Federal 2025 | 1 | 38 of 38 (100%) | 67.2% | 94.4% |
-| Form 8859 | Federal 2025 | 0 | 0 of 9 (0%) | 76.5% | 92.3% |
+| Form 8859 | Federal 2025 | 1 | 9 of 9 (100%) | 84.5% | 98.4% |
 | Form 8863 | Federal 2025 | 2 | 77 of 77 (100%) | 79.2% | 97.0% |
 | Form 8880 | Federal 2025 | 1 | 23 of 23 (100%) | 84.4% | 99.2% |
 | Form 8888 | Federal 2025 | 1 | 19 of 19 (100%) | 78.3% | 97.6% |
 | Form 8911 | Federal 2025 | 1 | 15 of 15 (100%) | 74.9% | 99.5% |
-| Form 8912 | Federal 2025 | 0 | 0 of 218 (0%) | 76.5% | 92.3% |
+| Form 8912 | Federal 2025 | 2 | 218 of 218 (100%) | 76.7% | 95.3% |
 | Form 8915-F | Federal 2025 | 2 | 95 of 95 (100%) | 80.0% | 97.6% |
 | Form 8919 | Federal 2025 | 2 | 39 of 39 (100%) | 81.4% | 98.7% |
 | Form 8933 | Federal 2025 | 0 | 0 of 141 (0%) | 76.5% | 92.3% |
@@ -106,7 +106,7 @@ The golden suite ran 126 scenarios. A jurisdiction's code is its forms and the c
 | Form 8992 | Federal 2025 | 0 | 0 of 14 (0%) | 76.5% | 92.3% |
 | Form 6781 | Federal 2025 | 1 | 19 of 71 (27%) | 80.7% | 99.6% |
 | Form 7203 | Federal 2025 | 5 | 115 of 187 (61%) | 85.7% | 100.0% |
-| Form 8582-CR | Federal 2025 | 2 | 52 of 52 (100%) | 67.1% | 97.2% |
+| Form 8582-CR | Federal 2025 | 3 | 52 of 52 (100%) | 68.0% | 97.2% |
 | Form 8824 | Federal 2025 | 3 | 63 of 63 (100%) | 76.8% | 96.5% |
 | Form 982 | Federal 2025 | 2 | 27 of 27 (100%) | 79.6% | 95.6% |
 | Form 8958 | Federal 2025 | 1 | 202 of 202 (100%) | 74.9% | 95.8% |
@@ -115,13 +115,13 @@ The golden suite ran 126 scenarios. A jurisdiction's code is its forms and the c
 | Form 7206 | Federal 2025 | 1 | 16 of 16 (100%) | 76.1% | 90.3% |
 | Schedule D (540) | California 2025 | 5 | 125 of 125 (100%) | 77.0% | 98.7% |
 | FTB 3885A | California 2025 | 3 | 65 of 65 (100%) | 77.5% | 97.4% |
-| Schedule CA (540) | California 2025 | 45 | 159 of 253 (63%) | 82.6% | 98.1% |
+| Schedule CA (540) | California 2025 | 46 | 159 of 253 (63%) | 82.9% | 98.2% |
 | FTB 3526 | California 2025 | 2 | 17 of 17 (100%) | 85.9% | 98.8% |
 | FTB 3805P | California 2025 | 2 | 19 of 27 (70%) | 76.1% | 94.0% |
 | FTB 3514 | California 2025 | 4 | 94 of 94 (100%) | 72.7% | 97.1% |
-| Form 540 | California 2025 | 49 | 102 of 169 (60%) | 88.6% | 99.3% |
+| Form 540 | California 2025 | 50 | 103 of 169 (61%) | 88.4% | 99.3% |
 | Schedule P (540) | California 2025 | 8 | 58 of 131 (44%) | 86.9% | 99.5% |
-| FTB 5805 | California 2025 | 1 | 55 of 111 (50%) | 83.6% | 99.5% |
+| FTB 5805 | California 2025 | 1 | 55 of 111 (50%) | 84.1% | 99.5% |
 | FTB 3532 | California 2025 | 2 | 16 of 16 (100%) | 71.4% | 93.1% |
 | Form 540NR | California 2025 | 0 | 0 of 169 (0%) | 76.5% | 93.5% |
 | Schedule CA (540NR) | California 2025 | 0 | 0 of 415 (0%) | 76.5% | 92.9% |
@@ -129,7 +129,7 @@ The golden suite ran 126 scenarios. A jurisdiction's code is its forms and the c
 | FTB 3801 | California 2025 | 3 | 337 of 337 (100%) | 81.8% | 97.9% |
 | FTB 3510 | California 2025 | 3 | 40 of 40 (100%) | 78.6% | 99.5% |
 | FTB 3803 | California 2025 | 2 | 15 of 15 (100%) | 75.8% | 98.9% |
-| Schedule G-1 | California 2025 | 1 | 30 of 30 (100%) | 70.8% | 97.6% |
+| Schedule G-1 | California 2025 | 2 | 30 of 30 (100%) | 75.5% | 97.6% |
 | Schedule X | California 2025 | 0 | 0 of 28 (0%) | 76.5% | 92.3% |
 | FTB 3461 | California 2025 | 3 | 19 of 19 (100%) | 77.5% | 98.9% |
 | FTB 3506 | California 2025 | 1 | 95 of 95 (100%) | 77.6% | 92.3% |
@@ -143,7 +143,7 @@ The golden suite ran 126 scenarios. A jurisdiction's code is its forms and the c
 | FTB 3809 | California 2025 | 0 | 0 of 55 (0%) | 76.5% | 92.3% |
 | FTB 3853 | California 2025 | 1 | 448 of 448 (100%) | 78.7% | 94.0% |
 | FTB 3913 | California 2025 | 2 | 9 of 9 (100%) | 80.4% | 94.8% |
-| FTB 5805F | California 2025 | 0 | 0 of 21 (0%) | 76.5% | 92.3% |
+| FTB 5805F | California 2025 | 1 | 21 of 21 (100%) | 66.9% | 97.7% |
 | FTB 5870A | California 2025 | 2 | 225 of 225 (100%) | 74.9% | 98.5% |
 | FTB 3801-CR | California 2025 | 2 | 32 of 32 (100%) | 74.8% | 98.8% |
 | FTB 3805E | California 2025 | 2 | 41 of 41 (100%) | 78.2% | 96.2% |
