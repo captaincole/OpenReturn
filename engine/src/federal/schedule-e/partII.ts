@@ -18,6 +18,7 @@ import type { ItemType } from "../passThrough/itemTypes.js";
 import { k1sOnForm6198, limitContextFrom } from "../passThrough/limits.js";
 import { isPassiveItem, releasedOnDisposition } from "../passThrough/passiveActivity.js";
 import { allowedWithRoute, routeEntities, type RoutedEntity } from "../passThrough/routing.js";
+import { line40ForLine41 } from "./farmRental.js";
 import type { ScheduleEFilingInfo } from "./filingInfo.js";
 import type { PartIBindings } from "./lines.js";
 import {
@@ -394,8 +395,9 @@ function line27(yes: boolean): Fn {
  * Line 41: lines 26, 32, 37, 39 and 40. MANUAL EDIT: a K-1 with an item that
  * has no route makes it unsupported, with every reason; Part I waits on line 26
  * only when Part I is in use, Part II on line 32 and Part III on line 37 only
- * when they have a row. Lines 39 and 40 are unsupported (no fact) and add
- * nothing; any K-1 gap is reported here, a trust K-1's too.
+ * when they have a row, and line 40 only when Form 4835 files with a farm
+ * rental. Line 39 is unsupported (no fact) and adds nothing; any K-1 gap is
+ * reported here, a trust K-1's too.
  */
 function line41(form: Form, info: Info): number | Unsupported | undefined {
   const gaps = passThroughGaps(info);
@@ -405,6 +407,10 @@ function line41(form: Form, info: Info): number | Unsupported | undefined {
   // Line 26 is Form 8582 line 6's gap with a K-1 (8582/magiGap.ts): line 41 shows it too.
   const magiGap = info.partIInUse ? magiWithK1Gap((fieldId) => form[fieldId], info) : undefined;
   if (magiGap) return magiGap;
+  // MANUAL EDIT: line 40, Form 4835 (farmRental.ts): its gap, or wait while it waits.
+  const line40 = line40ForLine41(form, info);
+  if (typeof line40 === "object") return line40;
+  if (line40 === "waits") return undefined;
   const line26 = numberOrBlank(form["0.line.26_total_income_or_loss"]);
   const line32 = numberOrBlank(form["1.line.32_total_partnership_s_corp_income"]);
   const line37 = line37ForLine41(form, info);
@@ -413,14 +419,8 @@ function line41(form: Form, info: Info): number | Unsupported | undefined {
   if (info.partIInUse && line26 === undefined) return undefined;
   if (hasPartII && line32 === undefined) return undefined;
   if (hasPartIII && line37 === undefined) return undefined;
-  if (!info.partIInUse && !hasPartII && !hasPartIII) return undefined;
-  return sum(
-    line26,
-    line32,
-    line37,
-    form["1.line.39_remic_income_combined"],
-    form["1.line.40_net_farm_rental_income"],
-  );
+  if (!info.partIInUse && !hasPartII && !hasPartIII && line40 === undefined) return undefined;
+  return sum(line26, line32, line37, form["1.line.39_remic_income_combined"], line40);
 }
 
 export function partIIBindings(): PartIBindings {

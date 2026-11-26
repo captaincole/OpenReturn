@@ -74,7 +74,7 @@ Form 4970 figures the extra tax on trust income that a trust kept in earlier yea
 
 - Text: "If you received accumulation distributions from foreign trusts or from certain domestic trusts, get form FTB 5870A" (`ca-540-inst-2025::sec::line-34-tax-from-schedule-g-1-and-form-ftb-5870a::b01`); FTB 5870A covers "a foreign trust and certain domestic trusts" (`ca-5870a-inst-2025::sec::purpose::b01`).
 - Done: a trust fact with a throwback year on a Form 540 return files FTB 5870A, foreign or domestic, and Form 540 line 34 is unsupported until FTB 5870A has rules. California's "certain domestic trusts" (R&TC 17745) is not the federal test, so the engine does not apply the March 1, 1984 limit there; the line is a gap, so a broad test drops nothing.
-- Not now: the FTB 5870A rules themselves (its own form's work), Form 540NR line 41 (Form 540NR has no rules yet), and Form 540 line 34's FTB 5870A box, whose unsupported reason still says no fact exists (a Form 540 change waits for a person).
+- Later done: FTB 5870A has rules (`state/ca/5870a/QUESTIONS.md`). A trust fact with a federal throwback year and no California answers files FTB 5870A and asks for them; Form 540 line 34 and its FTB 5870A box take the form's tax. Form 540NR line 41 waits for Form 540NR's rules.
 
 ### 14. More than one trust, estate taxes, foreign trusts (not now)
 

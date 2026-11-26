@@ -15,6 +15,7 @@ import {
   HSA_COVERAGE_KEYS,
   RENTAL_KEYS,
   businessesOnReturn,
+  farmsOnReturn,
   isInterestFactKey,
   readRentalFacts,
   readTraditionalIraFact,
@@ -41,6 +42,10 @@ import { resolveSchedule8812Info } from "../schedule-8812/resolveInfo.js";
 import type { PayerAmount } from "../schedule-b/filingInfo.js";
 import { netProfit, tentativeProfit } from "../schedule-c/lines.js";
 import { netIncomeOrLoss } from "../schedule-e/lines.js";
+import {
+  farmNetProfitAmount,
+  profitBeforeLossRules as farmProfitBeforeLossRules,
+} from "../schedule-f/lines.js";
 import { INVESTMENT_INCOME_LIMIT } from "./credit.js";
 import { eicIncomeLimit } from "./limits.js";
 import { incomeMayBeNonpassive, mixesRentsAndRoyalties } from "./worksheet1.js";
@@ -67,7 +72,32 @@ function businessFloor(inputs: ResolverInputs, joint: boolean): number | undefin
   if (malformedKeys.length > 0) return undefined;
   const lines29 = businesses.map((business) => tentativeProfit(business.value));
   if (lines29.some((line29) => line29 === undefined)) return undefined;
-  return sum(...lines29.map((line29) => Math.min(0, line29!)));
+  const farms = farmLines(inputs, joint);
+  if (farms === undefined) return undefined;
+  return sum(
+    ...lines29.map((line29) => Math.min(0, line29!)),
+    ...farms.map(({ before }) => Math.min(0, before)),
+  );
+}
+
+/*
+ * MANUAL EDIT: each farm's line 9 less line 33 (before the at-risk rules, which
+ * can only shrink a loss) and its line 34 where the engine figures it: Worksheet
+ * B line 2a takes Schedule F line 34 (irs-1040-inst-2025::sec::bworksheet-2025-eic-line-27a::b02).
+ * Undefined while a farm's lines wait, or a farm fact is malformed.
+ */
+function farmLines(
+  inputs: ResolverInputs,
+  joint: boolean,
+): Array<{ before: number; line34: number | undefined }> | undefined {
+  const { farms, malformedKeys } = farmsOnReturn(inputs.facts, joint);
+  if (malformedKeys.length > 0) return undefined;
+  const lines = farms.map(({ value }) => ({
+    before: farmProfitBeforeLossRules(value),
+    line34: farmNetProfitAmount(value),
+  }));
+  if (lines.some(({ before }) => before === undefined)) return undefined;
+  return lines.map(({ before, line34 }) => ({ before: before!, line34 }));
 }
 
 /*
@@ -97,13 +127,15 @@ function businessIncomeFloor(inputs: ResolverInputs, joint: boolean): number | u
   const onReturn = businesses.map((business) => business.value);
   const lines29 = onReturn.map((business) => tentativeProfit(business));
   if (lines29.some((line29) => line29 === undefined)) return undefined;
+  const farms = farmLines(inputs, joint);
+  if (farms === undefined) return undefined;
+  const least = (profit: number | undefined, tentative: number) =>
+    profit !== undefined && profit > 0
+      ? profit * PROFIT_AFTER_HALF_SE_TAX - SE_ROUNDING_ALLOWANCE
+      : Math.min(0, profit ?? tentative);
   return sum(
-    ...onReturn.map((business, index) => {
-      const line31 = netProfit(business, onReturn);
-      if (line31 !== undefined && line31 > 0)
-        return line31 * PROFIT_AFTER_HALF_SE_TAX - SE_ROUNDING_ALLOWANCE;
-      return Math.min(0, line31 ?? lines29[index]!);
-    }),
+    ...onReturn.map((business, index) => least(netProfit(business, onReturn), lines29[index]!)),
+    ...farms.map(({ before, line34 }) => least(line34, before)),
   );
 }
 
@@ -278,7 +310,12 @@ export function eicMayApply(inputs: ResolverInputs, children: number): boolean {
   const { line1a } = incomeLines(inputs);
   const { businesses, malformedKeys } = businessesOnReturn(inputs.facts, joint);
   const combatPay = resolveSchedule8812Info(inputs).w2NontaxableCombatPay !== undefined;
-  const noBusiness = businesses.length === 0 && malformedKeys.length === 0;
+  const farms = farmsOnReturn(inputs.facts, joint);
+  const noBusiness =
+    businesses.length === 0 &&
+    malformedKeys.length === 0 &&
+    farms.farms.length === 0 &&
+    farms.malformedKeys.length === 0;
   if (line1a <= 0 && !combatPay && noBusiness) return false;
   const limit = eicIncomeLimit(children, joint);
   const agi = agiFloor(inputs, joint);

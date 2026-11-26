@@ -1,4 +1,10 @@
-import { CA_EITC_KEYS, EIC_KEYS, SPOUSE_KEYS, businessesOnReturn } from "../../../facts/index.js";
+import {
+  CA_EITC_KEYS,
+  EIC_KEYS,
+  SPOUSE_KEYS,
+  businessesOnReturn,
+  farmsOnReturn,
+} from "../../../facts/index.js";
 import { agiFloor, investmentIncomeFloor } from "../../../federal/schedule-eic/possible.js";
 import {
   filingStatusOf,
@@ -73,9 +79,11 @@ function incomeTestsPass(inputs: ResolverInputs, joint: boolean): boolean {
 function caEitcMayApply(inputs: ResolverInputs, joint: boolean, children: number): boolean {
   const wages = caEitcWages(inputs) ?? 0;
   const { businesses } = businessesOnReturn(inputs.facts, joint);
+  // MANUAL EDIT: a farm is self-employment earned income too (line 18, Schedule 1 line 6).
+  const selfEmployed = businesses.length > 0 || farmsOnReturn(inputs.facts, joint).farms.length > 0;
   const other = combatPay(inputs) !== undefined || medicaidWaiverPayments(inputs) !== undefined;
-  if (wages <= 0 && businesses.length === 0 && !other) return false;
-  if (businesses.length === 0 && wages >= CA_EITC_INCOME_LIMIT) return false;
+  if (wages <= 0 && !selfEmployed && !other) return false;
+  if (!selfEmployed && wages >= CA_EITC_INCOME_LIMIT) return false;
   if (children > 0) return true;
   const dobs = [text(inputs, "identity.dob"), ...(joint ? [text(inputs, SPOUSE_KEYS.dob)] : [])];
   return dobs.some((dob) => atLeast18(dob) !== false);
@@ -212,5 +220,6 @@ export function resolve3514Info(inputs: ResolverInputs): Form3514FilingInfo {
     caWagesOutsideCalifornia: wagesOutsideCalifornia(inputs),
     caEitcBusiness: largestBusiness(inputs, joint),
     caEitcHasBusiness: businessesOnReturn(inputs.facts, joint).businesses.length > 0,
+    caEitcHasFarm: farmsOnReturn(inputs.facts, joint).farms.length > 0,
   };
 }

@@ -48,6 +48,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "a California NOL or disaster loss over (last year's return is not read, #79); FTB 3805V files with it",
   ],
   [
+    /^nol\.carryovers$/,
+    "a prior-year answer from last year's Form 172 or carryover statement, recorded when the " +
+      "taxpayer carries a federal NOL to 2025 (last year's return is not read, #79); Schedule 1 " +
+      "line 8a deducts it",
+  ],
+  [
     /^capital_gains\.ca_loss_carryover$/,
     "a prior-year answer Cade records when the California carryover differs from the federal " +
       "one; Schedule D (540) files with it, and asks for it when it files and a federal carryover exists",
@@ -71,8 +77,25 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "an answer Cade records only when the user received the dividend (Schedule 1 line 8g)",
   ],
   [
+    /^farm_rental\.[^.]+$/,
+    "each fact is a whole farm rented for crop or livestock shares (Form 4835); whether one " +
+      "exists is Cade's question. Form 4835 lists the fact again while an answer inside it " +
+      "(line A, the CCC loan election, line 34's at-risk box, material participation) is missing",
+  ],
+  [
     /^casualty\.[^.]+$/,
     "each fact is a whole casualty event (Form 4684); whether one happened is Cade's question",
+  ],
+  [
+    /^farm\.[^.]+$/,
+    "each fact is a whole farm (Schedule F), as a business fact is a whole Schedule C business; " +
+      "whether the taxpayer farms is Cade's question. Schedule F lists the fact again while an " +
+      "answer inside it is missing",
+  ],
+  [
+    /^general_business_credit\.(current|carryover)\.[^.]+$/,
+    "each fact is one whole credit or carryover from last year's return (Form 3800 Parts III " +
+      "and IV); whether one exists is Cade's question",
   ],
   [
     /^foreign_earned_income\.(taxpayer|spouse)$/,
@@ -87,8 +110,35 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "year or a repayment is Cade's question",
   ],
   [
+    /^community_property\.item\.[^.]+$/,
+    "each fact is one whole item of Form 8958 (community or separate, the taxpayer's or the " +
+      "spouse's); whether one exists is Cade's question. Form 8958 lists the item again while an " +
+      "answer inside it (basis, owner, the community part) is missing",
+  ],
+  [
+    /^community_property\.spouses_living_apart_rules$/,
+    "an answer Cade records only when the spouses meet the four conditions of Pub. 555 " +
+      "(Spouses living apart all year); absent, community property law applies as usual",
+  ],
+  [
+    /^community_property\.married_during_year$/,
+    "an answer Cade records only for a single or head of household filer who was married " +
+      "during the year; absent, the other person on Form 8958 is a registered domestic partner",
+  ],
+  [
+    /^canceled_debt\.[^.]+$/,
+    "each fact is a whole canceled debt (Form 982, Schedule 1 line 8c); whether a debt was canceled " +
+      "with no Form 1099-C is Cade's question. A Form 1099-C with no debt fact asks for one, and " +
+      "Form 982 lists a debt fact again while an answer inside it is missing",
+  ],
+  [
     /^armed_forces_move\.[^.]+$/,
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
+  ],
+  [
+    /^low_income_housing_recapture\.[^.]+$/,
+    "each fact is a whole building's credit recapture (Form 8611); whether the qualified basis " +
+      "fell is Cade's question. A K-1 with a recapture asks for its building fact",
   ],
   [
     /^trust_accumulation_distribution\.[^.]+$/,
@@ -222,6 +272,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "a Form 4797 Part IV fact is the whole recapture of one property; whether business use " +
       "dropped to 50% or less is Cade's question",
   ],
+  [
+    /^credit_recapture\.(line|property|emissions_tier)\.[^.]+$/,
+    "each Form 4255 fact is a whole Part I line, Part II property or Part III facility; " +
+      "whether a recapture happened is Cade's question. Form 4255 lists a line's fact while a " +
+      "property or facility on that line waits for it",
+  ],
   [/^identity\.email$/, "Cade records the login email at doc-gen time"],
   [/^identity\.(spouse\.)?name\.middle_initial$/, "printed when stated; not every name has one"],
   [
@@ -280,6 +336,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "taxed by the special methods); whether the taxpayer makes it is Cade's question",
   ],
   [
+    /^se_health_plan\.[^.]+$/,
+    "each fact is a whole health plan established under a business (Form 7206, Schedule 1 " +
+      "line 17); whether one exists is Cade's question",
+  ],
+  [
     /^foreign_tax\.[^.]+$/,
     "each fact is a whole foreign tax payment no payee statement shows (Form 1116 Parts I and II); " +
       "whether one was paid is Cade's question",
@@ -302,6 +363,18 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "while an answer inside it (name, number, credit) is missing",
   ],
   [
+    /^ca_passive_credit\.[^.]+$/,
+    "each fact is one whole California credit from a passive activity (one FTB 3801-CR " +
+      "worksheet row); whether the taxpayer has one is Cade's question. FTB 3801-CR lists the " +
+      "fact again while an answer inside it (code, column, amount, the activity's answers) is missing",
+  ],
+  [
+    /^decisions\.scope\.must_file_schedule_p$/,
+    "override: Schedule P (540) is attached with more than two credits " +
+      "(ca-540-sched-p-inst-2025::sec::b-who-must-file::b01), a count the resolver cannot see " +
+      "before the credits are figured; absent, the resolver's own fallbacks decide",
+  ],
+  [
     /^prior_year\.ca_pte_elective_credit_carryover$/,
     "an answer Cade records only when the user carries a PTE elective tax credit from 2024; " +
       "above 0 it files FTB 3804-CR, which asks for it whenever it files",
@@ -310,6 +383,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^prior_year\.ca_amt(_credit_carryover)?$/,
     "an answer Cade records only when the user paid California AMT for 2024 or carries an AMT " +
       "credit from 2024; either above 0 files FTB 3510, which then asks for the other",
+  ],
+  [
+    /^refund\.injured_spouse$/,
+    "the whole injured spouse claim (Form 8379): whether a spouse's refund share is applied " +
+      "to the other spouse's debt is Cade's question. Form 8379 lists the fact again while its " +
+      "share of itemized deductions is missing",
   ],
   [
     /^estimated_tax\.payment\.[^.]+$/,

@@ -35,6 +35,16 @@ const complete = (input: OtherStateCreditInput) =>
   input.otherStateAdjustedGrossIncome !== undefined;
 
 /*
+ * The states California allows the credit for, with tax paid above 0 or not
+ * stated yet: one copy each. Schedule P (540) counts the credit from them.
+ */
+export const otherStateCreditInputs = (inputs: ResolverInputs): OtherStateCreditInput[] =>
+  getOtherStateTaxFacts(inputs.facts)
+    .filter((fact) => typeof fact.value?.state === "string" && residentCreditAllowed(fact.value))
+    .map(creditInput)
+    .filter((input) => input.taxPaid === undefined || input.taxPaid > 0);
+
+/*
  * Who files (ca-540-sched-s-inst-2025::sec::a-purpose::b01, ::c-california-residents::b01–b02):
  * a California resident (Form 540 files) who paid net income tax to a state
  * California allows the credit for, on income California also taxes. One copy
@@ -44,10 +54,7 @@ const complete = (input: OtherStateCreditInput) =>
  */
 export function resolveScheduleSInfo(inputs: ResolverInputs): ScheduleSFilingInfo {
   const files540 = inputs.decisionByKey.get("decisions.scope.must_file_ca_540") === true;
-  const credits = getOtherStateTaxFacts(inputs.facts)
-    .filter((fact) => typeof fact.value?.state === "string" && residentCreditAllowed(fact.value))
-    .map(creditInput)
-    .filter((input) => input.taxPaid === undefined || input.taxPaid > 0);
+  const credits = otherStateCreditInputs(inputs);
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_s",
     fallbacks: [

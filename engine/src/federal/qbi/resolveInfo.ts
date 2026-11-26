@@ -21,8 +21,10 @@ import type { RoutedEntity } from "../passThrough/routing.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
 import { resolveScheduleSEInfo } from "../schedule-se/resolveInfo.js";
+import { farmQbiBusiness, qbiFarms } from "./farms.js";
 import type { QbiBusiness, QbiFilingInfo } from "./filingInfo.js";
 import { withForm4797 } from "./form4797.js";
+import { withHealthPlanGaps } from "./healthInsurance.js";
 
 /* 1099-DIV box 5, cents kept. Undefined with no 1099-DIV. */
 function form1099ReitDividends(inputs: ResolverInputs): number | undefined {
@@ -300,29 +302,40 @@ export function qbiBusinesses(inputs: ResolverInputs): {
     filingStatusOf(inputs) === "married_filing_jointly",
   );
   const onReturn = businesses.map((business) => ({ ...business, owner: ownerOf(business.value) }));
-  const taxpayerCount = onReturn.filter((business) => business.owner === "taxpayer").length;
+  // MANUAL EDIT: a farm is a trade or business too (Schedule F line 34); it counts with the businesses.
+  const farms = qbiFarms(inputs);
+  const taxpayerCount = [...onReturn, ...farms].filter((each) => each.owner === "taxpayer").length;
   const onReturnValues = businesses.map((business) => business.value);
   const planDeduction = num(inputs, ADJUSTMENT_KEYS.selfEmployedPlanDeduction);
-  const sharedPlan = onReturn.length > 1 && (planDeduction ?? 0) > 0;
+  const activities = onReturn.length + farms.length;
+  const sharedPlan = activities > 1 && (planDeduction ?? 0) > 0;
+  const planGap = sharedPlan ? PLAN_DEDUCTION_GAP : undefined;
+  const farmQbi = farms.map((farm) =>
+    farmQbiBusiness(farm, { taxpayerCount, activities, planDeduction, planGap }),
+  );
   return {
     businesses: withForm4797(inputs, [
       ...qbiRentals(inputs),
-      ...withForeignBusinessGap(inputs, [
-        ...onReturn.map(({ key, value, owner }): QbiBusiness => ({
-          factKey: key,
-          kind: "business",
-          owner,
-          name: value.name ?? value.activity,
-          ein: value.ein,
-          specifiedService: value.specifiedService,
-          netProfit: netProfit(value, onReturnValues),
-          ownersOnlyBusiness: owner === "taxpayer" && taxpayerCount === 1,
-          retirementPlanDeduction: onReturn.length === 1 ? planDeduction : undefined,
-          qbiGap: sharedPlan ? PLAN_DEDUCTION_GAP : undefined,
-          w2WagesPaid: value.w2WagesPaid,
-          qualifiedPropertyUbia: value.qualifiedPropertyUbia,
-        })),
-        ...qbiPassThroughs(inputs),
+      // MANUAL EDIT: a business whose health insurance deduction is a gap (healthInsurance.ts).
+      ...withHealthPlanGaps(inputs, [
+        ...withForeignBusinessGap(inputs, [
+          ...onReturn.map(({ key, value, owner }): QbiBusiness => ({
+            factKey: key,
+            kind: "business",
+            owner,
+            name: value.name ?? value.activity,
+            ein: value.ein,
+            specifiedService: value.specifiedService,
+            netProfit: netProfit(value, onReturnValues),
+            ownersOnlyBusiness: owner === "taxpayer" && taxpayerCount === 1,
+            retirementPlanDeduction: activities === 1 ? planDeduction : undefined,
+            qbiGap: planGap,
+            w2WagesPaid: value.w2WagesPaid,
+            qualifiedPropertyUbia: value.qualifiedPropertyUbia,
+          })),
+          ...farmQbi,
+          ...qbiPassThroughs(inputs),
+        ]),
       ]),
     ]),
     malformedKeys,

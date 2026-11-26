@@ -12,6 +12,9 @@ import {
   rentalsOnReturn,
   SPOUSE_KEYS,
 } from "../../../facts/index.js";
+import type { FarmRentalSummary } from "../../../federal/4835/filingInfo.js";
+import { isGap } from "../../../federal/4835/lines.js";
+import { resolve4835Info } from "../../../federal/4835/resolveInfo.js";
 import {
   form8582K1Activities,
   hasPassiveDeductions,
@@ -60,7 +63,7 @@ export const PASSIVE_K1_GAP =
 export const PASSIVE_BUSINESS_GAP =
   "A Schedule C business the owner did not materially participate in is a passive activity; its net income or loss before the PAL rules is not modeled, so FTB 3801 cannot list it.";
 export const FARM_GAP =
-  "A farm (Schedule F) or a farm rental (Form 4835) is on the return; the engine has no farm facts, so FTB 3801 cannot place it.";
+  "A farm (Schedule F) or a farm rental (Form 4835) is on the return; FTB 3801 does not take a farm or farm rental activity yet, so it cannot place it.";
 export const OVERFLOW_GAP =
   "More than three Schedule E properties: a second Schedule E is not modeled, so FTB 3801 cannot list them.";
 export const K1_WORKSHEET_GAP =
@@ -82,13 +85,45 @@ function k1Scope(inputs: ResolverInputs, joint: boolean) {
   };
 }
 
+/* Form 4835 files: by its decision (MUST_FILE_4835_KEY) or by a farm rental fact. */
+const farmRentalFiles = (inputs: ResolverInputs) =>
+  resolve4835Info(inputs).mustFile?.["form-4835"]?.value === true;
+
+/*
+ * The farm rental's part of who files (ca-3801-inst-2025::sec::b-who-must-file::b01:
+ * "losses (including prior year unallowed losses) from passive activities").
+ * Each farm's Schedule E line 40 part decides: a loss, or a gap that hides it
+ * (a prior-year unallowed loss is one), files the form with that farm's fact;
+ * net income does not. A gap over the whole Form 4835 (the decision with no
+ * fact) files it with what files Form 4835. While a farm's part waits, FTB 3801
+ * waits on Form 4835's answers.
+ */
+function farmRentalScope(inputs: ResolverInputs): { triggers: string[]; waitingKeys: string[] } {
+  const info = resolve4835Info(inputs);
+  const derivation = info.mustFile?.["form-4835"]?.derivation;
+  if (!farmRentalFiles(inputs) || !derivation) return { triggers: [], waitingKeys: [] };
+  if (!info.farmRentals) {
+    return {
+      triggers: [...derivation.triggeredByDecisionKeys, ...derivation.triggeredByFactKeys],
+      waitingKeys: [],
+    };
+  }
+  const lossOrGap = (net: FarmRentalSummary["net"]) => net !== undefined && (isGap(net) || net < 0);
+  // A real estate professional's farm rental they materially participated in is not passive.
+  const triggers = info.farmRentals
+    .filter((farm) => lossOrGap(farm.net) && farm.nonpassive !== true)
+    .map((farm) => farm.factKey);
+  const waits = info.farmRentals.some((farm) => farm.net === undefined);
+  return { triggers, waitingKeys: waits ? [...(info.missingInputs?.["form-4835"] ?? [])] : [] };
+}
+
 /* The first gap that covers the whole form, or undefined. */
 function formGapOf(inputs: ResolverInputs, k1Passive: boolean, passiveBusiness: boolean) {
   const decided = (key: string) => inputs.decisionByKey.get(key) === true;
   if (decided(MUST_FILE_540NR_KEY)) return NONRESIDENT_GAP;
   if (k1Passive) return PASSIVE_K1_GAP;
   if (passiveBusiness) return PASSIVE_BUSINESS_GAP;
-  if (decided(MUST_FILE_4835_KEY) || decided(MUST_FILE_SCHEDULE_F_KEY)) return FARM_GAP;
+  if (farmRentalFiles(inputs) || decided(MUST_FILE_SCHEDULE_F_KEY)) return FARM_GAP;
   return undefined;
 }
 
@@ -123,12 +158,12 @@ export function form3801Scope(inputs: ResolverInputs): Form3801Scope {
   const passiveBusinesses = businessesOnReturn(inputs.facts, joint).businesses.filter(
     (business) => business.value.materiallyParticipated === false,
   );
-  const farmRental = inputs.decisionByKey.get(MUST_FILE_4835_KEY) === true;
   const properties = propertiesOf(outcomes);
   const gap =
     formGapOf(inputs, k1.passive && k1.settled, passiveBusinesses.length > 0) ??
     (columns.overflow ? OVERFLOW_GAP : properties.gap);
-  const waitingKeys = [...malformedKeys, ...properties.waitingKeys];
+  const farmRental = farmRentalScope(inputs);
+  const waitingKeys = [...malformedKeys, ...properties.waitingKeys, ...farmRental.waitingKeys];
   const waits = waitingKeys.length > 0 || !k1.settled;
   const triggeredBy = [
     ...outcomes.flatMap((outcome, index) =>
@@ -136,7 +171,7 @@ export function form3801Scope(inputs: ResolverInputs): Form3801Scope {
     ),
     ...k1.triggers,
     ...passiveBusinesses.map((business) => business.key),
-    ...(farmRental ? [MUST_FILE_4835_KEY] : []),
+    ...farmRental.triggers,
   ];
   return {
     figures: {

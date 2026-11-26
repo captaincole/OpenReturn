@@ -1,0 +1,249 @@
+{
+  "formId": "form-982",
+  "fieldCount": 27,
+  "entries": [
+    {
+      "fieldId": "form-982.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-HKOCQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-732UM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.10a_property_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "1,936"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.10b_principal_residence_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "8,429"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.11a_farm_depreciable_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "7,574"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.11b_farm_land",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "6,430"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.11c_farm_other_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "5,448"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.12_passive_activity_carryovers",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "6,312"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.13_foreign_tax_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "2,077"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.1a_title_11_case",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.1b_insolvency",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.1c_qualified_farm_indebtedness",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.1d_qualified_real_property_business",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.1e_qualified_principal_residence",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.2_total_discharged_excluded",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "6,448"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.3_elect_real_property_depreciable_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_7[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.3_elect_real_property_depreciable_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.4_real_property_business_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "8,613"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.5_elect_depreciable_basis_first",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "2,563"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.6_net_operating_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "8,493"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.7_general_business_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "4,305"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.8_minimum_tax_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "1,955"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.line.9_net_capital_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "2,485"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.part3.corporation_amount_excluded",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "3,213"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.part3.state_of_incorporation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "T-OZIT3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.part3.tax_year_beginning",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-982.0.part3.tax_year_ending",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    }
+  ]
+}

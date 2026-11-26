@@ -122,10 +122,12 @@ describe("California: FTB 5870A on Form 540 line 34", () => {
     ...more,
   ];
 
-  it("a resident with the trust fact files FTB 5870A; line 34 is a gap, not a blank", () => {
+  it("a resident with the trust fact files FTB 5870A; line 34 waits for the California answers", () => {
     const run = evaluate(base.facts, caDecisions());
     expect([run.files("form-4970"), run.files("form-5870a")]).toEqual([true, true]);
-    expect(run.isGap("form-540", "line.34_tax_amount")).toBe(true);
+    expect(run.value("form-540", "line.34_tax_amount")).toBeUndefined();
+    expect(run.isGap("form-540", "line.34_tax_amount")).toBe(false);
+    expect(run.pending).toContain(template.key);
   });
 
   it("a foreign trust files FTB 5870A too", () => {

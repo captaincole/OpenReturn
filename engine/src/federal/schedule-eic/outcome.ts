@@ -9,6 +9,7 @@ import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
 import type { Form1040FilingInfo } from "../1040/filingInfo.js";
 import type { ScheduleEFilingInfo } from "../schedule-e/filingInfo.js";
+import type { ScheduleSEFilingInfo } from "../schedule-se/filingInfo.js";
 import { earnedIncomeCredit, type EicOutcome } from "./credit.js";
 import { worksheet1 } from "./worksheet1.js";
 
@@ -35,7 +36,12 @@ export type EicOutcomeInfo = Pick<
   | "form8814Totals"
 > &
   // MANUAL EDIT: Worksheet 1 adds Schedule E's K-1s (worksheet1.ts).
-  Pick<ScheduleEFilingInfo, "passThroughEntities" | "partIInUse">;
+  Pick<ScheduleEFilingInfo, "passThroughEntities" | "partIInUse"> &
+  // MANUAL EDIT: Worksheet B Part 2 adds the farms (Schedule SE's resolver sums them).
+  Pick<
+    ScheduleSEFilingInfo,
+    "farmNetProfit" | "farmNetProfitGap" | "farmNetProfitWaits" | "scheduleCNetProfitWaits"
+  >;
 
 /*
  * Step 5 line 5 (irs-1040-inst-2025::sec::step-5::b01): line 1z, less Medicaid
@@ -52,9 +58,10 @@ function step5EarnedIncome(form: Lines, info: EicOutcomeInfo): number | undefine
 /*
  * Worksheet B line 4b (irs-1040-inst-2025::sec::bworksheet-2025-eic-line-27a::b01
  * to ::b03). Part 1 for a Schedule SE filer: SE line 3, plus lines 4b and 5a,
- * less line 13. Part 2 for a business that files no Schedule SE: Schedule C
- * line 31. Farm income, Schedule K-1 box 14 and statutory employees (Part 3)
- * are not modeled, so a statutory employee is a gap.
+ * less line 13. Part 2 for a business or farm that files no Schedule SE:
+ * Schedule F line 34 (line 2a) and Schedule C line 31 (line 2b). Schedule K-1
+ * box 14 and statutory employees (Part 3) are not modeled, so a statutory
+ * employee is a gap.
  */
 function worksheetBEarnedIncome(
   form: Lines,
@@ -65,9 +72,13 @@ function worksheetBEarnedIncome(
   if (seFiles === undefined || line4a === undefined) return undefined;
   if (info.earnedIncomeCredit?.statutoryEmployee !== false) return undefined;
   if (!seFiles) {
-    return info.scheduleCNetProfit === undefined
-      ? undefined
-      : roundDollars(info.scheduleCNetProfit) + line4a;
+    // MANUAL EDIT: line 2a takes Schedule F line 34, line 2b Schedule C line 31 (::bworksheet-2025-eic-line-27a::b02).
+    if (info.farmNetProfitWaits === true || info.farmNetProfitGap) return undefined;
+    if (info.scheduleCNetProfit === undefined && info.farmNetProfit === undefined) return undefined;
+    if (info.scheduleCNetProfitWaits === true) return undefined;
+    return (
+      roundDollars(info.scheduleCNetProfit ?? 0) + roundDollars(info.farmNetProfit ?? 0) + line4a
+    );
   }
   const line1a = numberOrBlank(form["schedule-se.0.line.3"]);
   const line1d = numberOrBlank(form["schedule-se.0.line.13"]);

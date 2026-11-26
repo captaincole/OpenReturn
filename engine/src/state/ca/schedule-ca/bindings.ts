@@ -5,6 +5,7 @@ import { defineForm, type FormAccessor, type FormSpec } from "../../../defineFor
 import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../../money.js";
 import { unsupported } from "../../../types.js";
 import { answerLines } from "./answerLines.js";
+import { canceledDebtBindings } from "./canceledDebt.js";
 import {
   LINE_7A_ADDITIONS_GAP,
   LINE_7A_SUBTRACTIONS_GAP,
@@ -25,6 +26,7 @@ import { movingExpenseBindings } from "./movingExpenses.js";
 import { nolDeductionBindings } from "./nolDeduction.js";
 import { otherGainsBindings } from "./otherGains.js";
 import { sectionCBindings } from "./sectionC.js";
+import { trustDistributionBindings } from "./trustDistribution.js";
 import type { ScheduleCa } from "./types.js";
 
 const LINE_1F_WITHOUT_8839 =
@@ -137,10 +139,14 @@ export function register(): void {
       ...otherGainsBindings,
       ...childIncomeBindings,
       ...excessBusinessLossBindings,
+      // MANUAL EDIT: line 8z column C from FTB 5870A or an untaxed trust distribution (trustDistribution.ts).
+      ...trustDistributionBindings,
       ...nolDeductionBindings,
       ...movingExpenseBindings,
       ...mortgageCreditBindings,
       ...form8853Bindings,
+      // MANUAL EDIT: line 8c columns A and C from Schedule 1 and Form 982 (canceledDebt.ts).
+      ...canceledDebtBindings,
       /*
        * MANUAL EDIT: CA does not conform to HSAs. Employer contributions
        * (W-2 box 12 code W) are CA wages: line 1a col C, carried to line 27.
@@ -638,24 +644,8 @@ export function register(): void {
         "CA subtraction for state income tax refunds (not taxable in CA) requires knowledge of the taxable refund amount from federal Schedule 1 line 1, which is not ingested as a separate fact or field.",
       "0.line.b2a_additions":
         "CA addition for alimony received under post-2018 or post-2025 agreements requires alimony fact data and divorce agreement date logic not yet ingested or modeled.",
-      "0.line.b6_federal":
-        "Farm income/loss (Sch CA Section B line 6 col A) comes from federal Schedule 1 line 6 (Schedule F); federal Schedule 1 and Schedule F are not ingested forms and we have no farm income fact ingestion path.",
-      "0.line.b6_subtractions":
-        "Farm income CA subtractions (Sch CA Section B line 6 col B) require FTB 3801 passive activity and CA depreciation adjustments for farm activities; no Schedule F or farm fact ingestion path yet.",
-      "0.line.b6_additions":
-        "Farm income CA additions (Sch CA Section B line 6 col C) require FTB 3801 passive activity and CA depreciation adjustments for farm activities; no Schedule F or farm fact ingestion path yet.",
-      "1.line.b8a_federal":
-        "Federal net operating loss from Schedule 1 line 8a. Schedule 1 is not ingested and there is no NOL fact category in the current fact model.",
-      "1.line.b8a_additions":
-        "CA requires the federal NOL amount (column A) to be added back in column C because CA computes its own NOL via FTB 3805V. Column A source is unsupported (Schedule 1 not ingested) and FTB 3805V NOL is not modeled.",
       "1.line.b8b_subtractions":
         "CA subtracts California lottery winnings from gambling income. No CA lottery winnings fact category exists, and the column A source (Schedule 1 line 8b) is not ingested. This subtraction requires a scenario with CA lottery income.",
-      "1.line.b8c_federal":
-        "Cancellation of debt income from Schedule 1 line 8c (1099-C). Schedule 1 is not ingested and there is no cancellation_of_debt fact category in the current fact model.",
-      "1.line.b8c_subtractions":
-        "CA may allow a subtraction for mortgage forgiveness debt relief (Cancellation of Debt). No cancellation_of_debt fact category exists and Schedule 1 is not ingested. Requires a scenario with COD income and CA mortgage forgiveness exclusion.",
-      "1.line.b8c_additions":
-        "CA additions for cancellation of debt (e.g. non-federal excluded COD amounts). No cancellation_of_debt fact category exists and Schedule 1 is not ingested.",
       "1.line.b8e_additions":
         "Column C adds an Archer MSA rolled over to an HSA (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b02); no fact splits Form 8853 line 6b between rollovers to an HSA and other amounts.",
       "1.line.b8g_federal":
@@ -694,8 +684,6 @@ export function register(): void {
         "No CA-specific addition rules ingested for digital asset ordinary income; no scenario modeled yet.",
       "2.line.b9b3_subtractions":
         "CA-specific NOL deduction from FTB Forms 3805Z, 3807, or 3809 — no ingestion path for these FTB enterprise-zone NOL forms exists yet.",
-      "2.line.c17_federal":
-        "Requires federal Schedule 1 line 17 (self-employed health insurance deduction). Schedule 1 individual lines are not ingested; no self-employment health insurance scenario yet.",
       "2.line.c19a_additions":
         "CA addition for alimony paid (post-2018/post-2025 divorce agreements differ between federal and CA law) requires an alimony scenario; no such scenario or fact ingestion path exists yet.",
       "2.line.c19b_recipient_last_name":

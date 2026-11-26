@@ -1,0 +1,258 @@
+{
+  "form": {
+    "formId": "form-7206",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Self-Employed Health Insurance Deduction"
+  },
+  "fields": [
+    {
+      "fieldId": "form-7206.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-7206.0.header.taxpayer_id",
+      "label": "Your taxpayer identification number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-7206.0.line.1_health_insurance_paid",
+      "label": "Line 1 — Enter the total amount paid in 2025 for health insurance coverage established under your business (or the S corporation in which you were a more-than-2% shareholder) for 2025 for you, your spouse, and your dependents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 635.969
+      }
+    },
+    {
+      "fieldId": "form-7206.0.line.2_long_term_care_premiums",
+      "label": "Line 2 — For coverage under a qualified long-term care insurance contract, enter for each person covered the smaller of (a) total payments made for that person during the year or (b) the age-based amount; enter the total of those amounts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 389.97
+      }
+    },
+    {
+      "fieldId": "form-7206.0.line.3_total_premiums",
+      "label": "Line 3 — Add lines 1 and 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 377.968
+      }
+    },
+    {
+      "fieldId": "form-7206.0.line.4_business_net_profit",
+      "label": "Line 4 — Enter your net profit and any other earned income from the trade or business under which the insurance plan is established",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 341.968
+      }
+    },
+    {
+      "fieldId": "form-7206.0.line.5_total_net_profits",
+      "label": "Line 5 — Enter the total of all net profits from Schedule C (Form 1040), line 31; Schedule F (Form 1040), line 34; or Schedule K-1 (Form 1065), box 14, code A, plus any other income allocable to the profitable businesses",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "form-7206.0.line.6_business_profit_ratio",
+      "label": "Line 6 — Divide line 4 by line 5",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 275.969
+      }
+    },
+    {
+      "fieldId": "form-7206.0.line.7_allocated_se_tax_deduction",
+      "label": "Line 7 — Multiply Schedule 1 (Form 1040), line 15, deductible part of self-employment tax, by the percentage on line 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-7206.0.line.8_profit_less_se_tax",
+      "label": "Line 8 — Subtract line 7 from line 4",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-7206.0.line.9_retirement_plan_deduction",
+      "label": "Line 9 — Enter the amount, if any, from Schedule 1 (Form 1040), line 16, self-employed SEP, SIMPLE, and qualified plans, attributable to the same trade or business in which the insurance plan is established",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "form-7206.0.line.10_net_earned_income",
+      "label": "Line 10 — Subtract line 9 from line 8",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 203.969
+      }
+    },
+    {
+      "fieldId": "form-7206.0.line.11_s_corp_medicare_wages",
+      "label": "Line 11 — Enter your Medicare wages (box 5 of Form W-2) from an S corporation in which you are a more-than-2% shareholder and in which the insurance plan is established",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-7206.0.line.12_form_2555_exclusion",
+      "label": "Line 12 — Enter any amount from Form 2555, line 45, attributable to the amount entered on line 4 or 11 above",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "form-7206.0.line.13_earned_income_limit",
+      "label": "Line 13 — Subtract line 12 from line 10 or 11, whichever applies",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 155.97
+      }
+    },
+    {
+      "fieldId": "form-7206.0.line.14_se_health_insurance_deduction",
+      "label": "Line 14 — Self-employed health insurance deduction. Enter the smaller of line 3 or line 13",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 119.97
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/7206/blank.pdf",
+    "ingestedAt": "2026-11-26T09:18:32.176Z",
+    "totalFields": 16,
+    "skipped": 0,
+    "catalogEntries": 16
+  }
+}

@@ -60,6 +60,56 @@ export interface TrustAccumulationDistributionFactValue {
    * taxes", line-28::b01).
    */
   estateOrGenerationSkippingTax: boolean;
+  /*
+   * FTB 5870A: what the trustee tells a California beneficiary. Absent while
+   * the beneficiary has not given it; a trust with only a California
+   * distribution has no federal throwback years ([]).
+   */
+  california?: CaliforniaTrustDistribution;
+}
+
+/*
+ * The beneficiary's interest, which picks the part of FTB 5870A
+ * (ca-5870a-inst-2025::sec::purpose::b01, ::b02):
+ * - "schedule_j": noncontingent, with Schedule J (541) from a trust that filed
+ *   Form 541 and paid the tax: Part I (IRC section 667);
+ * - "contingent": an otherwise contingent beneficiary with no Schedule J (541):
+ *   Part II (R&TC section 17745(b) and (d));
+ * - "untaxed": noncontingent with no Schedule J (541), because the trust did not
+ *   file Form 541 or pay the tax: no FTB 5870A; the whole amount goes on
+ *   Schedule CA (540) line 8z column C (R&TC section 17745(a)).
+ */
+export type CaliforniaBeneficiaryInterest = "schedule_j" | "contingent" | "untaxed";
+
+export interface CaliforniaTrustDistribution {
+  beneficiaryInterest: CaliforniaBeneficiaryInterest;
+  /* The header: the trust's address, in the form's four boxes. */
+  trustStreet: string;
+  trustCity: string;
+  trustState: string;
+  trustZip: string;
+  /*
+   * Part I: Schedule J (541) Part IV, one row per throwback year (lines 26 to
+   * 29, more rows when the trust attaches more years: "There can be more than
+   * four throwback years", ca-5870a-inst-2025::sec::part-i-tax-on-accumulation-distribution::b04).
+   * California amounts: column (a) the UNI, (b) the California taxes, (c) the
+   * tax-exempt interest; otherTrustsCounted is the multiple trust rule (::b03).
+   */
+  throwbackYears?: ThrowbackYearRow[];
+  /*
+   * Part II line 1, or the "untaxed" amount for Schedule CA: "Total amount of
+   * the accumulation distribution" that the trustee must provide
+   * (ca-5870a-inst-2025::sec::part-ii-tax-on-distributions-of-previously-untaxed-trust-income::b01).
+   */
+  accumulationDistribution?: number;
+  /* Part II: "Total number of years that the trust income was accumulated" (the same block). */
+  accumulationYears?: number;
+  /*
+   * Part II Section A line 5, Section B line 7: the distribution is a capital
+   * gain distribution, which needs each year's capital loss refigured
+   * (ca-5870a-inst-2025::sec::section-a::b03). Absent: ordinary income.
+   */
+  capitalGain?: boolean;
 }
 
 export interface TrustAccumulationDistributionFact {

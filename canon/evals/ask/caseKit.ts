@@ -1,8 +1,10 @@
 import { anyOf, type AnyOf } from "../lib/anyOf";
+import type { StatuteExpectation } from "../lib/statute";
 
 export type Coverage = "covered" | "partial" | "not_covered";
 export type Tier = 1 | 2 | 3;
-export type Kind = "standard" | "false_premise" | "insufficient";
+/* conflict: two official texts disagree on the answer (statute.ts); its own row in the report. */
+export type Kind = "standard" | "false_premise" | "insufficient" | "conflict";
 
 export interface AskCase {
   name: string;
@@ -14,6 +16,8 @@ export interface AskCase {
   facts: AnyOf[];
   /* In the lite tier: a case both models answered the same way on every full run. */
   lite?: boolean;
+  /* Two IRS texts disagree: the answer should consult the statute and cite this section. */
+  statute?: StatuteExpectation;
 }
 
 export const CA540 = "ca-540-inst-2025::sec::";

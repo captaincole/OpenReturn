@@ -9,6 +9,7 @@ import {
   EIC_KEYS,
   SPOUSE_KEYS,
   businessesOnReturn,
+  farmsOnReturn,
   isW2FactKey,
   type W2FactValue,
 } from "../../facts/index.js";
@@ -63,7 +64,10 @@ export function resolveEicLineInfo(inputs: ResolverInputs): EicLineInfo {
         : answer(inputs, SPOUSE_KEYS.livedApartLastSixMonths),
     legallySeparatedApartAtYearEnd: answer(inputs, SPOUSE_KEYS.legallySeparatedApartAtYearEnd),
     filesForm2555: resolve2555Info(inputs).mustFile?.["form-2555"]?.value === true,
-    selfEmployed: businessesOnReturn(inputs.facts, joint).businesses.length > 0,
+    // MANUAL EDIT: a farm is self-employment too (Worksheet B line 2a, Schedule F line 34).
+    selfEmployed:
+      businessesOnReturn(inputs.facts, joint).businesses.length > 0 ||
+      farmsOnReturn(inputs.facts, joint).farms.length > 0,
     statutoryEmployee: w2s.some((w2) => w2.box13?.statutoryEmployee === true),
     openDependentKeys: open.map((dependent) => dependent.sourceFact.key),
   };

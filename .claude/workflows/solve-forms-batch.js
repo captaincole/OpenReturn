@@ -3,7 +3,7 @@ export const meta = {
   description:
     "Write, test and review the rules of each form in a batch: rules with a scenario, blind fill, reconcile with other projects, tax review, fixes",
   whenToUse:
-    "On demand, to write the rules of several forms that the engine catalogs and that have no rules yet. Make one worktree per form first (branch from main, npm install). args: {corpusDbPath: <absolute path of the main checkout canon/.data/corpus.db>, forms: [{id, branch, root (the worktree, absolute), title, folder, sources, docs, scenario, scenario2}]}. Each agent commits on its branch and never pushes; a person or the lead merges the branches one at a time.",
+    "On demand, to write the rules of several forms that the engine catalogs and that have no rules yet. Make one worktree per form first (branch from main, npm install). args: {corpusDbPath: <absolute path of the main checkout canon/.data/corpus.db>, forms: [{id, branch, root (the worktree, absolute), title, folder, sources, docs, scenario, scenario2, rulesDone (optional: true when the rules stage is already committed on the branch, so the run starts at the blind fill)}]}. Each agent commits on its branch and never pushes; a person or the lead merges the branches one at a time.",
   phases: [
     {
       title: "Rules",
@@ -38,6 +38,8 @@ const ground = (f) =>
     "Work only in this git worktree: " + f.root,
     "Run every command from it (or its engine/ folder). Never cd to another checkout. Write files only inside it; scratch files go under its .scratch/ folder (gitignored).",
     "If a permission is denied, stop and report it; never work around it. Never push. Never git stash. Do not start subagents. Do not run npm run coverage or npm run form-graph.",
+    "THE REGISTRY: engine/src/filingInfo.ts is at its 400-line lint cap, so never add a form to it. When a federal form leaves engine/src/federal/formsWithNoRules.ts, put its FilingInfo type and resolver in a group file in engine/src/federal/ (an existing one that fits, such as creditForms.ts or farmForms.ts, or a new one shaped like them) and join a new group in engine/src/federal/laterForms.ts. A California form goes in engine/src/state/ca/laterForms.ts.",
+    "CHECKS: judge a command by its exit code (run `echo $?` after it), never by output that went through tail, head or grep.",
     "Edit source and scenario files only with the Edit and Write tools: no sed -i, no heredoc or script that writes a source file, no --no-verify. Scratch files go under the worktree ROOT .scratch/ folder, never under engine/.scratch/ (the linter reads that folder and the commit hook fails).",
     'OPEN QUESTIONS: do not stop for a rule question; decide it and go on. Read docs/rule-decisions.md first and follow its principles (a form\'s own instructions decide how that form is filled; a guide written for one group applies to that group; the form\'s arithmetic wins over a sentence that breaks it; one rule applied the same way every time). When two official texts conflict, or the guidance allows a choice of method or source, record the decision in two places: a comment above the code that starts with "DECISION (<today\'s date>, by the author):", quoting each text with its block id and giving the reason in one sentence; and one row in docs/rule-decisions.md, in the section "Decided by the author" (create it under the Decided table if it is not there), with the same columns as the Decided table. Start the row\'s Question cell with one plain sentence that says what the line is for, so a reader who has not seen the form can follow it. A doubt with no conflicting text (a default, a reading that changes no dollars) goes in the form\'s QUESTIONS.md only. When two instructions disagree, the statute may be read with npm run corpus -- law search "<words from the instructions>" and law read <citation> (never a section number from memory; if the law is not installed, go on without it). The instructions still decide: when the statute disagrees with them, write both texts with block ids in QUESTIONS.md and name it in your report for docs/law-findings.md.',
     'LARGER CHANGES: do not make a larger architecture change (a new layer, a change to how facts or forms are evaluated, a change to the structure of another form, a new family of input documents). Make that case unsupported(reason) and describe the change you would propose in the form\'s QUESTIONS.md under a heading "Proposals for a discussion".',
@@ -48,7 +50,7 @@ const ground = (f) =>
   ].join("\n");
 
 const commitRule =
-  'Commit your work on the current branch with a plain message that says what changed and why, ending with the line "Co-Authored-By: Claude <noreply@anthropic.com>" and nothing else after it (no session link). The commit hook runs the test suites and is slow: allow 10 minutes. Never push.';
+  'Commit your work on the current branch with a plain message that says what changed and why, ending with the line "Co-Authored-By: Claude <noreply@anthropic.com>" and nothing else after it (no session link). The commit hook runs the test suites and is slow: allow 15 minutes, and WAIT for it. Before you report, confirm the commit with `git log --oneline -1` and a clean `git status --short`; never report a commit that git log does not show, and never report while the hook still runs. If the hook fails on a test that passes alone, run the commit again. Never push.';
 
 const RULES_SCHEMA = {
   type: "object",
@@ -344,7 +346,11 @@ const step = (phase, label, schema) => ({ phase, label, schema });
 
 const results = await pipeline(
   FORMS,
-  (f) => agent(rulesPrompt(f), step("Rules", "rules:" + f.id, RULES_SCHEMA)),
+  // A form whose rules stage is committed from an earlier run (rulesDone: true) starts at the blind fill.
+  (f) =>
+    f.rulesDone
+      ? { done: true, summary: "The rules stage ran in an earlier run and is committed." }
+      : agent(rulesPrompt(f), step("Rules", "rules:" + f.id, RULES_SCHEMA)),
   async (rules, f) => {
     if (!rules || !rules.done)
       return {

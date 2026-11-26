@@ -1,5 +1,7 @@
 import type { CorpusFormat } from "../../../db/corpusStore";
-import type { AskAnswerOutput } from "./judges/askAnswerer";
+import { validateConflicts } from "../ground/validateCitations";
+import type { Conflict, ConflictOutput } from "../statute";
+import type { AskAnswerOutput, AskConflictOutput } from "./judges/askAnswerer";
 import type { AskCitation, AskCoverage } from "./types";
 
 /*
@@ -9,7 +11,9 @@ import type { AskCitation, AskCoverage } from "./types";
  * not-covered message.
  */
 
-type AnswerOutput = Omit<AskAnswerOutput, "gaps">;
+type AnswerOutput = Omit<AskAnswerOutput, "gaps" | "statuteQueries" | "conflicts"> & {
+  conflicts?: AskConflictOutput[];
+};
 
 export interface Passage {
   blockId: string;
@@ -20,6 +24,8 @@ export interface Passage {
   sectionHeading: string | null;
   pageNum: number;
   text: string;
+  /** A statute passage only: "26 U.S.C. § 469(g)(1)". */
+  citation?: string;
 }
 
 export interface ValidatedAnswer {
@@ -27,7 +33,8 @@ export interface ValidatedAnswer {
   coverage: AskCoverage;
   citations: AskCitation[];
   missingDocuments: string[];
-  dropped: { markers: number[]; quotes: number[]; ungrounded: boolean };
+  conflicts: Conflict[];
+  dropped: { markers: number[]; quotes: number[]; ungrounded: boolean; conflicts: number };
 }
 
 export const NOT_COVERED_ANSWER =
@@ -76,6 +83,18 @@ function quoteFor(output: AnswerOutput, passageNum: number, passage: Passage) {
   return { quote: ok ? quote : passage.text.trim(), ok };
 }
 
+/* A side names a passage by number; a number that was not given drops the conflict. */
+function checkConflicts(raw: AskConflictOutput[], passages: Passage[]) {
+  const blockOf = (passageNum: number) => passages[passageNum - 1]?.blockId ?? "";
+  const named: ConflictOutput[] = raw.map((conflict) => ({
+    kind: conflict.kind,
+    a: { blockId: blockOf(conflict.a.passage), quote: conflict.a.quote },
+    b: { blockId: blockOf(conflict.b.passage), quote: conflict.b.quote },
+    note: conflict.note,
+  }));
+  return validateConflicts(named, passages);
+}
+
 export function validateAnswer(output: AnswerOutput, passages: Passage[]): ValidatedAnswer {
   const missingDocuments = output.missingDocuments.map((doc) => doc.trim()).filter(Boolean);
   const { answer, order, invalid } = renumberMarkers(
@@ -90,7 +109,8 @@ export function validateAnswer(output: AnswerOutput, passages: Passage[]): Valid
       coverage: "not_covered",
       citations: [],
       missingDocuments,
-      dropped: { markers: invalid, quotes: [], ungrounded },
+      conflicts: [],
+      dropped: { markers: invalid, quotes: [], ungrounded, conflicts: 0 },
     };
   }
 
@@ -108,14 +128,17 @@ export function validateAnswer(output: AnswerOutput, passages: Passage[]): Valid
       sectionHeading: passage.sectionHeading,
       pageNum: passage.pageNum,
       quote,
+      ...(passage.citation ? { citation: passage.citation } : {}),
     };
   });
+  const checked = checkConflicts(output.conflicts ?? [], passages);
 
   return {
     answer,
     coverage: output.coverage,
     citations,
     missingDocuments,
-    dropped: { markers: invalid, quotes: badQuotes, ungrounded: false },
+    conflicts: checked.conflicts,
+    dropped: { markers: invalid, quotes: badQuotes, ungrounded: false, conflicts: checked.dropped },
   };
 }

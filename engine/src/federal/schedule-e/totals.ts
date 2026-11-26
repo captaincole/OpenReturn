@@ -9,6 +9,7 @@ import { activityLoss, passiveActivities } from "../8582/activities.js";
 import { allowedLossForColumn } from "../8582/allocation.js";
 import { magiWithK1Gap } from "../8582/magiGap.js";
 import { isRentalActivity } from "../rentals/passive.js";
+import { farmRentalForLine43 } from "./farmRental.js";
 import type { PropertyColumn, RentalProperty, ScheduleEFilingInfo } from "./filingInfo.js";
 import type { PartIBindings } from "./lines.js";
 import type { ScheduleE } from "./types.js";
@@ -134,18 +135,27 @@ function reportedAmount(form: Form, info: Info, column: PropertyColumn): number 
  * they materially participated in. A stay of 7 days or less is not a rental
  * activity (irs-8582-inst-2025::sec::rental-activities::b01).
  */
-function professionalReconciliation(form: Form, info: Info): number | undefined {
-  if (info.realEstateProfessional !== true) return undefined;
+function partIReconciliation(form: Form, info: Info): number | "waits" | undefined {
+  if ((info.rentalProperties ?? []).length === 0) return undefined;
   const properties = columnsReady(form, info);
   const rentals = properties?.filter((property) => !isRoyalty(property));
-  if (!rentals || rentals.some((property) => property.passive === undefined)) return undefined;
+  if (!rentals || rentals.some((property) => property.passive === undefined)) return "waits";
   const materiallyParticipated = rentals.filter(
     (property) => property.passive === false && isRentalActivity(property.value) !== false,
   );
   const amounts = materiallyParticipated.map((property) =>
     reportedAmount(form, info, property.column),
   );
-  return amounts.includes(undefined) ? undefined : sumOrBlank(...amounts);
+  return amounts.includes(undefined) ? "waits" : sumOrBlank(...amounts);
+}
+
+/* MANUAL EDIT: line 43 also takes a farm rental the professional materially participated in (farmRental.ts). */
+function professionalReconciliation(form: Form, info: Info): number | undefined {
+  if (info.realEstateProfessional !== true) return undefined;
+  const partI = partIReconciliation(form, info);
+  const farm = farmRentalForLine43(info);
+  if (partI === "waits" || farm === "waits") return undefined;
+  return sumOrBlank(partI, farm);
 }
 
 const orBlank = (amount: Amount) => (amount === null ? undefined : amount);

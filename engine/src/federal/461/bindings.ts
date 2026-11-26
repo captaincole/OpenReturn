@@ -9,6 +9,7 @@ import {
   line2Source,
   line3Source,
   line5Source,
+  line6Source,
   partIAmounts,
   partIIAmounts,
   type Info,
@@ -71,13 +72,17 @@ export function register(): void {
       // MANUAL EDIT: Part I copies the return's lines (irs-461-inst-2025::sec::line-2::b01 to ::line-8::b01).
       "0.line.2_schedule_1_line_3": (form, info) => line2Source(form, info) ?? undefined,
       "0.line.3_form_1040_line_7a": (form, info) => line3Source(form, info) ?? undefined,
-      // Schedule 1 lines 4 and 6 come from Form 4797 and Schedule F, which have no rules: blank without them.
+      // Schedule 1 line 4 comes from Form 4797, which has no rules here: blank without it.
       "0.line.4_schedule_1_line_4": gapOrBlank((info) => info.form461?.gaps.line4),
       "0.line.5_schedule_1_line_5": (form, info) => {
         const gap = info.form461?.gaps.line5;
         return gap ? unsupported(gap) : (line5Source(form, info) ?? undefined);
       },
-      "0.line.6_schedule_1_line_6": gapOrBlank((info) => info.form461?.gaps.line6),
+      // MANUAL EDIT: line 6 copies Schedule 1 line 6, Schedule F line 34 (::line-6::b01); the gap when a farm's is one.
+      "0.line.6_schedule_1_line_6": (form, info) => {
+        const gap = info.form461?.gaps.line6;
+        return gap ? unsupported(gap) : (line6Source(form, info) ?? undefined);
+      },
       "0.line.8_other_business_income_loss": (_, info) => info.form461?.otherBusinessIncome,
       "0.line.9_total_income_loss_items": partIComputed,
       // MANUAL EDIT: Part II (line-10::b01, line-11::b01, line-12::b01; figures.ts and classify.ts).
