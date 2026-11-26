@@ -26,8 +26,6 @@ const SHARE_OVER_JOINT =
   "The injured spouse's stated share is below 0 or more than the amount on the joint return (column (a) must equal columns (b) + (c)).";
 const DISASTER_STANDARD_DEDUCTION =
   "Line 15: the standard deduction is increased by a net qualified disaster loss (Schedule A line 16), and the Form 8379 instructions give no rule to split that increase (irs-8379-inst-2025::sec::line-15::b01).";
-const EXCESS_SOCIAL_SECURITY =
-  "Line 19 includes each spouse's excess social security tax withheld (irs-8379-inst-2025::sec::line-19::b01), and Schedule 3 line 11 is not computed.";
 const PAYMENTS_NOT_AGREED =
   "Line 20: spouses who do not agree split joint estimated tax payments by each spouse's separate tax liability (irs-8379-inst-2025::sec::line-20::b01), and the engine does not figure separate returns.";
 
@@ -130,13 +128,17 @@ function deductionShare(form: Accessor, info: Form8379FilingInfo, joint: number)
 
 /*
  * Line 19, column (b): the injured spouse's W-2 box 2 and 1099-R box 4, the
- * injured spouse's part of Form 8959 line 24, and the stated withholding on
- * other Forms 1099 and W-2G (irs-8379-inst-2025::sec::line-19::b01).
+ * injured spouse's excess social security tax (that spouse's part of Schedule 3
+ * line 11, schedule-3/excessSocialSecurity.ts), the injured spouse's part of
+ * Form 8959 line 24, and the stated withholding on other Forms 1099 and W-2G
+ * (irs-8379-inst-2025::sec::line-19::b01). A gap in either spouse's line 11 is
+ * a gap here: column (a) holds Schedule 3 line 11.
  */
 function withholdingShare(form: Accessor, spouses: Spouses, otherWithholding: number): Value {
-  if (spouses.injured.excessSocialSecurity || spouses.other.excessSocialSecurity) {
-    return unsupported(EXCESS_SOCIAL_SECURITY);
+  for (const excess of [spouses.injured.excessSocialSecurity, spouses.other.excessSocialSecurity]) {
+    if ("gap" in excess) return unsupported(excess.gap);
   }
+  const ownExcess = spouses.injured.excessSocialSecurity;
   const line24 = amount(form, "form-8959.0.line.24_total_additional_medicare_tax_withholding");
   const own = additionalMedicareWithholding(
     spouses.injured.medicareTaxWithheld,
@@ -145,6 +147,7 @@ function withholdingShare(form: Accessor, spouses: Spouses, otherWithholding: nu
   return sum(
     roundDollars(spouses.injured.w2Withholding),
     roundDollars(spouses.injured.retirementWithholding),
+    "amount" in ownExcess ? roundDollars(ownExcess.amount) : 0,
     line24 > 0 ? Math.min(line24, own) : 0,
     otherWithholding,
   );

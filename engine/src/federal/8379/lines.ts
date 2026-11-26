@@ -5,7 +5,7 @@
  * (irs-8379-inst-2025::sec::general-instructions::b01).
  */
 
-import { atLeast, roundDollars, sum } from "../../money.js";
+import { atLeast, roundDollars } from "../../money.js";
 
 /* Line 1: the tax year of the return this form is filed with. */
 export const FORM_TAX_YEAR = "2025";
@@ -34,13 +34,6 @@ export const ADDITIONAL_STANDARD_DEDUCTION_2025 = 1600;
 
 /* Form 8959 line 21: the regular Medicare tax, 1.45% of the Medicare wages on line 20 (the form). */
 export const REGULAR_MEDICARE_TAX_RATE = 0.0145;
-
-/*
- * The most social security tax one person owes for 2025 on wages: "the amount
- * withheld in excess of $10,918.20" is the Schedule 3 line 11 credit
- * (irs-1040-inst-2025::sec::line-11-2::b01).
- */
-export const MAX_SOCIAL_SECURITY_TAX_2025 = 10918.2;
 
 /* Every Part III line: "Column (a) must equal columns (b) + (c)" (irs-8379-face-2025::sec::face-part-iii::b01). */
 export const otherSpouseShare = (joint: number, injured: number): number => joint - injured;
@@ -81,17 +74,6 @@ export function additionalMedicareWithholding(medicareTaxWithheld: number, medic
   return atLeast(
     0,
     roundDollars(medicareTaxWithheld) - roundDollars(medicareWages * REGULAR_MEDICARE_TAX_RATE),
-  );
-}
-
-/*
- * Schedule 3 line 11 would hold this spouse's excess social security tax: more
- * than one employer, and more than $10,918.20 withheld in all
- * (irs-1040-inst-2025::sec::line-11-2::b01).
- */
-export function hasExcessSocialSecurity(socialSecurityTaxByW2: readonly number[]): boolean {
-  return (
-    socialSecurityTaxByW2.length > 1 && sum(...socialSecurityTaxByW2) > MAX_SOCIAL_SECURITY_TAX_2025
   );
 }
 
