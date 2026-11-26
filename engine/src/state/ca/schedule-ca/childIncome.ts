@@ -90,7 +90,12 @@ export const childIncomeBindings: Bindings = {
   "1.line.b8z_additions": childColumn("addition", LINE_8Z_ADDITIONS_GAP),
   "2.line.b9a_additions": (form, info) => {
     const line8z = childLine8z(form, info, LINE_9A_ADDITIONS_GAP);
-    if (line8z !== "waits" && "gap" in line8z) return unsupported(LINE_9A_ADDITIONS_GAP);
+    // MANUAL EDIT: line 8c column C (Form 982 line 1e, canceledDebt.ts) is a modeled item too.
+    const principalResidence = (info.principalResidenceExclusion ?? 0) > 0;
+    const noChild = line8z !== "waits" && "gap" in line8z && line8z.gap === LINE_9A_ADDITIONS_GAP;
+    if (line8z !== "waits" && "gap" in line8z && !(noChild && principalResidence)) {
+      return unsupported(LINE_9A_ADDITIONS_GAP);
+    }
     return sumOrBlank(...OTHER_INCOME_ADDITIONS.map((id) => form[id]));
   },
   /*
