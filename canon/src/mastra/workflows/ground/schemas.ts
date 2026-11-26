@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { conflictOutputSchema, conflictSchema, statuteBlockSchema } from "../statute";
 
 // Canon is stateless: the caller (Cade) owns the filing and stores the verdict.
 export const DEFAULT_MAX_ITERATIONS = 3;
@@ -55,6 +56,8 @@ export const irsBlockSnapshotSchema = z.object({
 export const evidenceBundleSchema = z.object({
   facts: z.array(taxFactSnapshotSchema),
   irsBlocks: z.array(irsBlockSnapshotSchema),
+  // Empty until the rule judge consults the statute; then kept for the rest of the run.
+  statuteBlocks: z.array(statuteBlockSchema).default([]),
   queriesUsed: z.array(z.string()),
   iteration: z.number().int().min(1),
 });
@@ -93,6 +96,10 @@ export const ruleVerdictOutputSchema = z.object({
   verdict: verdictSchema,
   reason: z.string(),
   citations: z.array(authorityCitationSchema),
+  conflicts: z
+    .array(conflictOutputSchema)
+    .default([])
+    .describe("Two retrieved passages that disagree on the deciding point. Empty when none."),
 });
 
 export const ruleNeedMoreOutputSchema = z.object({
@@ -106,11 +113,27 @@ export const ruleNeedMoreOutputSchema = z.object({
     ),
 });
 
+export const ruleConsultStatuteOutputSchema = z.object({
+  kind: z.literal("consult_statute"),
+  reason: z
+    .string()
+    .describe("Which passages conflict, or which rule of law they name without stating it."),
+  // Capped at 3 in the prompt and by a slice; Anthropic rejects maxItems.
+  statuteQueries: z
+    .array(z.string())
+    .default([])
+    .describe("Queries for the statute, in the terms the passages use."),
+});
+
 export const ruleOutputSchema = z.discriminatedUnion("kind", [
   ruleVerdictOutputSchema,
   ruleNeedMoreOutputSchema,
+  ruleConsultStatuteOutputSchema,
 ]);
 export type RuleOutput = z.infer<typeof ruleOutputSchema>;
+export type ConsultStatuteOutput = z.infer<typeof ruleConsultStatuteOutputSchema>;
+// After the code handles a consult_statute, the loop sees only these two.
+export type SettledRuleOutput = Exclude<RuleOutput, ConsultStatuteOutput>;
 
 /*
  * Anthropic refuses a top-level anyOf (a discriminated union) as an output
@@ -128,6 +151,8 @@ export const loopCarrierSchema = z.object({
   queries: z.array(z.string()),
 
   needMoreReasons: z.array(z.string()),
+  // At most one statute search per run.
+  statuteConsulted: z.boolean(),
 
   evidence: evidenceBundleSchema.optional(),
   riskAssessment: riskAssessmentSchema.optional(),
@@ -137,7 +162,7 @@ export type LoopCarrier = z.infer<typeof loopCarrierSchema>;
 
 export const groundStepLogSchema = z.object({
   iteration: z.number().int().min(1),
-  kind: z.enum(["gather", "assess", "rule"]),
+  kind: z.enum(["gather", "assess", "rule", "statute"]),
   durationMs: z.number(),
   input: z.unknown(),
   output: z.unknown(),
@@ -151,6 +176,9 @@ export const groundResultSchema = z.object({
   riskTier: riskTierSchema.nullable(),
   iterationCount: z.number().int().min(1),
   whatsMissing: z.string().optional(),
+  // Passages that disagree, with both quotes. The verdict still follows the instructions.
+  conflicts: z.array(conflictSchema).default([]),
+  statuteConsulted: z.boolean().default(false),
   log: z.object({ steps: z.array(groundStepLogSchema) }),
 });
 export type GroundResult = z.infer<typeof groundResultSchema>;

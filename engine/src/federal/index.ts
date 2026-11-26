@@ -66,6 +66,7 @@ import { register as registerForm8888 } from "./8888/bindings.js";
 import { register as registerForm8889 } from "./8889/bindings.js";
 import { register as registerForm8911 } from "./8911/bindings.js";
 import { register as registerForm8912 } from "./8912/bindings.js";
+import { form8912CopyCount } from "./8912/copies.js";
 import { register as registerForm8915F } from "./8915-f/bindings.js";
 import { register as registerForm8919 } from "./8919/bindings.js";
 import { register as registerForm8933 } from "./8933/bindings.js";
@@ -898,6 +899,12 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8912",
     relativeDir: "federal/8912",
     register: registerForm8912,
+    // "Complete and attach as many copies of Part III ... Part IV" (federal/8912/copies.ts).
+    copies: {
+      count: (info) => form8912CopyCount(info?.form8912),
+      select: (info, index) => info && { ...info, form8912CopyIndex: index },
+      laterCopyPages: [1, 2],
+    },
   }),
   makeFormSpec({
     formId: "form-8915-f",

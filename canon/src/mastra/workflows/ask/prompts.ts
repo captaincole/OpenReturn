@@ -30,10 +30,24 @@ function renderPassage(passage: Passage, passageNum: number): string {
   return `[${passageNum}] ${passage.documentTitle}${section}${page}${published}\n${passage.text.trim()}`;
 }
 
+/* Statute passages come last, in their own block; their numbers follow the others. */
 export function renderAnswerPrompt(history: string, question: string, passages: Passage[]): string {
+  const numbered = passages.map((passage, i) => ({ passage, passageNum: i + 1 }));
+  const statute = numbered.filter(({ passage }) => passage.citation);
   return [
     history,
-    `Passages:\n\n${passages.map((passage, i) => renderPassage(passage, i + 1)).join("\n\n")}`,
+    `Passages:\n\n${numbered
+      .filter(({ passage }) => !passage.citation)
+      .map(({ passage, passageNum }) => renderPassage(passage, passageNum))
+      .join("\n\n")}`,
+    statute.length
+      ? `\n\nStatute passages (the Internal Revenue Code, the law the passages above explain):\n\n${statute
+          .map(
+            ({ passage, passageNum }) =>
+              `[${passageNum}] ${passage.citation}\n${passage.text.trim()}`,
+          )
+          .join("\n\n")}`
+      : "",
     `\n\nQuestion: ${question}\n\nAnswer from the passages above.`,
   ].join("");
 }

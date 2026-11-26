@@ -3,23 +3,31 @@ import type { ParsedDoc } from "../refdocs/parse";
 import { citationOf } from "./lawIds";
 import { splitStatute } from "./splitStatute";
 import type { Span } from "./textSink";
-import type { UnitNode } from "./uslmUnits";
+import type { UnitNode } from "./unitTree";
 
 /*
  * Turns a section's unit tree into blocks. A unit that fits the cap with its
  * children is one block. A larger unit gives its lead, each child and each
  * continuation their own blocks; a lead that is only a heading joins the
- * first block below it. The block id is the citation path.
+ * first block below it. The block id is the citation path. The statute and
+ * the regulations share it; only the citation's spelling differs.
  */
 
 type Block = ParsedDoc["blocks"][number];
 
 export interface SectionInfo {
   sectionId: string;
-  /** As printed: "469", "1400Z–2". */
+  /** As printed: "469", "1400Z–2", "1.469-5T". */
   number: string;
   /** The catchline: "Passive activity losses and credits limited". */
   catchline: string;
+  /** The citation of a path in this section; the Code's "26 U.S.C. § 469(g)(1)" unless named. */
+  cite?: (path: string[]) => string;
+  /**
+   * A section with no numbered unit that fits the cap is one block. The
+   * statute keeps its rule (the section's text never packs with what follows).
+   */
+  packFlat?: boolean;
 }
 
 interface Plan {
@@ -45,13 +53,17 @@ export function sectionBlocks(
   laidOut: LaidOutText,
   firstOrdinal: number,
 ): Block[] {
-  return planRoot(root, laidOut.text).map((plan, index) =>
+  return planRoot(info, root, laidOut.text).map((plan, index) =>
     blockRow(info, plan, laidOut.text, laidOut.refsIn(plan.span), firstOrdinal + index),
   );
 }
 
 // The section itself never packs whole: its lead is "text", its subsections stand alone.
-function planRoot(root: UnitNode, text: string): Plan[] {
+function planRoot(info: SectionInfo, root: UnitNode, text: string): Plan[] {
+  const flat = root.items.every((item) => item.kind === "continuation");
+  const fits = root.span.end - root.span.start <= MAX_BLOCK_CHARS;
+  if (info.packFlat && flat && fits)
+    return [{ idPath: ["text"], span: root.span, unit: root, ancestors: [] }];
   return planParts(root, [], ["text"], [], text);
 }
 
@@ -73,8 +85,8 @@ function planParts(
   const items = unit.items.flatMap((item) => {
     if (item.kind === "unit")
       return planUnit(item.unit, below, [...unitPath, item.unit.idSegment], text);
-    continuations += 1;
-    const name = continuations === 1 ? "cont" : `cont${continuations}`;
+    if (!item.name) continuations += 1;
+    const name = item.name ?? (continuations === 1 ? "cont" : `cont${continuations}`);
     return pieces(item.span, [...unitPath, name], text).map((piece) => ({
       ...piece,
       unit,
@@ -115,7 +127,7 @@ function blockRow(
 ): Block {
   const chain = chainOf(plan).filter((unit) => unit.segment);
   const path = chain.map((unit) => unit.segment);
-  const citation = citationOf(info.number, path);
+  const citation = info.cite ? info.cite(path) : citationOf(info.number, path);
   const blockText = text.slice(plan.span.start, plan.span.end);
   return {
     blockId: `${info.sectionId}::${plan.idPath.join("-")}`,

@@ -10,16 +10,32 @@ import {
   type RefBlock,
 } from "../db/corpusStore";
 import { embedDocuments, resolveEmbeddings } from "../refdocs/embeddings";
+import type { ParsedDoc } from "../refdocs/parse";
 import type { LawEntry } from "./lawSidecar";
-import { ensureLawZip } from "./lawSource";
-import { parseUslmTitle, type ParsedUslm } from "./parseUslm";
+import { ensureLawParts, ensureLawZip } from "./lawSource";
+import { parseEcfrParts } from "./parseEcfr";
+import { parseUslmTitle } from "./parseUslm";
 import { readZip } from "./unzip";
 
 /*
- * Builds one law document in law.db: zip → USLM XML → rows → embeddings.
+ * Builds one law document in law.db: source → XML → rows → embeddings. The
+ * Code is one USLM zip; the regulations are eCFR XML, one file per part.
  * No model writes the context: the parser builds each block's header and
- * chapeaus itself, so contextualSummary stays null and there is no Haiku cost.
+ * the lead text above it, so contextualSummary stays null and there is no
+ * Haiku cost.
  */
+
+/** What both parsers return. */
+export interface ParsedLaw extends ParsedDoc {
+  canonicalText: string;
+  stats: object;
+}
+
+interface LawSource {
+  parsed: ParsedLaw;
+  /** The blob law.db stores. */
+  blob: Uint8Array;
+}
 
 export interface LawIngestResult {
   docId: string;
@@ -43,15 +59,15 @@ export async function ingestLaw(
     console.log(`  ${docId}: sha unchanged (${sha256.slice(0, 12)}…), skipping ingest`);
     return { docId, skipped: true, replaced: false, sections: -1, blocks: -1, embedded: -1 };
   }
-  const zip = await ensureLawZip(entry);
-  const parsed = parseUslmTitle(titleXml(zip, entry.zipRelPath), docId);
+  const { parsed, blob } = await readSource(entry);
   console.log(`  parsed ${parsed.sections.length} sections, ${parsed.blocks.length} blocks`);
+  console.log(`  ${JSON.stringify(parsed.stats)}`);
   if (existing) await deleteDocument(docId, "law");
   const payload = lawPayload(entry, parsed);
   // Rows first: an embedding failure leaves them for `law reembed`.
   await writeFile(canonicalTextPath(entry), parsed.canonicalText, "utf8");
   await writeDocument(payload, "law");
-  await setDocumentSource(docId, zip, "law");
+  await setDocumentSource(docId, blob, "law");
   const embedded = await embedLawBlocks(payload.blocks);
   return {
     docId,
@@ -61,6 +77,17 @@ export async function ingestLaw(
     blocks: payload.blocks.length,
     embedded,
   };
+}
+
+async function readSource(entry: LawEntry): Promise<LawSource> {
+  const { docId } = entry.sidecar;
+  if (entry.sidecar.format === "ecfr") {
+    const parts = await ensureLawParts(entry);
+    const xmls = parts.files.map(({ data }) => new TextDecoder().decode(data));
+    return { parsed: parseEcfrParts(xmls, docId), blob: parts.zip };
+  }
+  const zip = await ensureLawZip(entry);
+  return { parsed: parseUslmTitle(titleXml(zip, entry.zipRelPath), docId), blob: zip };
 }
 
 // A release zip holds one title: one XML file.
@@ -76,7 +103,7 @@ const canonicalTextPath = (entry: LawEntry) => entry.zipPath.replace(/\.zip$/, "
 
 const sha1 = (text: string) => createHash("sha1").update(text).digest("hex");
 
-export function lawPayload(entry: LawEntry, parsed: ParsedUslm): IngestPayload {
+export function lawPayload(entry: LawEntry, parsed: ParsedLaw): IngestPayload {
   const { sidecar } = entry;
   const docId = sidecar.docId;
   const length = parsed.canonicalText.length;
@@ -92,7 +119,7 @@ export function lawPayload(entry: LawEntry, parsed: ParsedUslm): IngestPayload {
       totalPages: 1,
       totalChars: length,
       canonicalTextPath: entry.zipRelPath.replace(/\.zip$/, ".canonical.txt"),
-      format: "uslm",
+      format: sidecar.format,
       published: sidecar.published,
     },
     // No pages: one page row holds the whole text, as for an HTML document.

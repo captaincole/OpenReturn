@@ -82,6 +82,7 @@ export function resolveScheduleCInfo(inputs: ResolverInputs): ScheduleCFilingInf
       ),
     },
     businesses: businesses.map((business) => business.value),
+    businessKeys: businesses.map((business) => business.key),
   };
 }
 

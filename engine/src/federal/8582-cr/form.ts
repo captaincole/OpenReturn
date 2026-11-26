@@ -67,7 +67,14 @@ export function partIAmountsOf(entries: PassiveEntries): PartIAmounts {
 
 const waits = (value: unknown): value is Waiting => value === "waiting";
 
-/* The form, or undefined while an answer or a line it reads waits. */
+/*
+ * The form, or undefined while an answer or a line it reads waits. The rows
+ * are Form 3800's passive sources and the prior year unallowed qualified
+ * electric vehicle credits ("See the Instructions for Form 8834 for the
+ * amount to enter in column (a) of Worksheet 1 or 4",
+ * irs-8582cr-inst-2025::sec::form-8834-qualified-electric-vehicle-credit-see-the::b01),
+ * which Form 3800 does not hold: the credit is not a general business credit.
+ */
 export function passiveCreditLimitOf(
   sources: ReadonlyArray<PassiveSource>,
   form: Accessor,
@@ -75,7 +82,8 @@ export function passiveCreditLimitOf(
 ): PassiveCreditLimit | undefined {
   const livedWithSpouse = livedWithSpouseOf(info);
   if (livedWithSpouse === undefined) return undefined;
-  const entries = passiveEntriesOf(sources, livedWithSpouse);
+  const rows = [...sources, ...(info.electricVehiclePassiveCarryovers ?? [])];
+  const entries = passiveEntriesOf(rows, livedWithSpouse);
   if (entries.waiting) return undefined;
   if (entries.gap) return { entries, lines: {}, gap: entries.gap };
   const taxAttributable = taxAttributableOf(form, info);

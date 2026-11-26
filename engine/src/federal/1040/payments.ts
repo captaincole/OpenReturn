@@ -2,6 +2,7 @@ import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { penaltyOnReturn } from "../2210/receivers.js";
+import { line12From4136 } from "../4136/receivers.js";
 import { line30From8839 } from "../8839/receivers.js";
 import { LINE_8_ID, refundableCreditGap } from "../8863/credit.js";
 import { schedule8812Line18aGap } from "../schedule-8812/earnedIncomeGap.js";
@@ -109,8 +110,23 @@ export function line30(form: Form, info: Form1040FilingInfo) {
   return received === undefined ? unsupported(WITHOUT_8839.line30) : received.value;
 }
 
+const LINE_31_WITHOUT_SCHEDULE_3 =
+  "Amount from Schedule 3 line 15 (additional refundable credits/payments) — Schedule 3 not ingested as a separate form catalog yet.";
+
 /*
- * MANUAL EDIT: line 31 is not modeled (line 29 reads Form 8863, line 30 Form 8839); blank when every line is blank.
+ * MANUAL EDIT: line 31, "Amount from Schedule 3, line 15". Schedule 3 line 15
+ * holds an amount only with Form 4136: its line 12, the one Part II line the
+ * engine computes. The line reads Form 4136's slots, not Schedule 3's field:
+ * a read of Schedule 3 from Form 1040 adds fixpoint passes to every return.
+ * Without Form 4136, the old reason.
+ */
+export function line31(_form: Form, info: Form1040FilingInfo) {
+  const received = line12From4136(info);
+  return received === undefined ? unsupported(LINE_31_WITHOUT_SCHEDULE_3) : received.value;
+}
+
+/*
+ * MANUAL EDIT: line 32 adds lines 27a to 31; blank when every line is blank.
  * Waits while line 27a or 28 can still change (payments.ts).
  */
 export function line32(form: Form, info: Form1040FilingInfo) {

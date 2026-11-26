@@ -12,6 +12,7 @@ import { isGap } from "../1116/lines.js";
 import { dependentCareCreditGap } from "../2441/creditGap.js";
 import type { Form2441FilingInfo } from "../2441/filingInfo.js";
 import { mortgageCreditGap, type CreditLimitInfo } from "../8396/creditGap.js";
+import { electricVehicleCreditGap, type Form8834CreditInfo } from "../8834/credit.js";
 import { line6cFrom8839 } from "../8839/receivers.js";
 import { homebuyerCreditGap } from "../8859/creditLimit.js";
 import { nonrefundableCreditGap } from "../8863/credit.js";
@@ -39,7 +40,8 @@ export type Form8911CreditInfo = Form8911FilingInfo &
   Form8880FilingInfo &
   Form8863FilingInfo &
   Form1116FilingInfo &
-  Form2441FilingInfo;
+  Form2441FilingInfo &
+  Form8834CreditInfo;
 
 const files = (info: Form8911CreditInfo, formId: string) => info.mustFile?.[formId]?.value === true;
 
@@ -89,7 +91,6 @@ export function partILine(
  */
 const UNCOMPUTED_CREDITS: ReadonlyArray<[formId: string, line: string]> = [
   ["form-5695", "Schedule 3 line 5a (Form 5695 Part I, the residential clean energy credit)"],
-  ["form-8834", "Schedule 3 line 6i (Form 8834)"],
 ];
 
 /* Why a credit line 6b adds is an engine gap; undefined when each is a number or blank. */
@@ -106,6 +107,7 @@ function otherCreditsGap(form: Accessor, info: Form8911CreditInfo): string | und
     mortgageCreditGap(form, info),
     homebuyerCreditGap(form, info),
     line6lGap(info),
+    electricVehicleCreditGap(form, info),
   ];
   const gap = gaps.find((reason) => reason !== undefined);
   return gap === undefined ? undefined : `Line 6b adds a credit the engine cannot figure: ${gap}`;

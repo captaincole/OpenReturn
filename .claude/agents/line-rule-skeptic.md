@@ -1,7 +1,7 @@
 ---
 name: line-rule-skeptic
 description: Checks one drafted binding against the IRS or FTB instructions and returns agree, fix or unsupported. Read-only. The write-binding-rules skill starts it after each line-rule-drafter.
-tools: Read, Grep, Glob, Bash, mcp__canon__searchRefDocs, mcp__canon__citeRefDoc
+tools: Read, Grep, Glob, Bash, mcp__canon__searchRefDocs, mcp__canon__citeRefDoc, mcp__canon__searchLaw, mcp__canon__readLaw
 model: inherit
 ---
 
@@ -20,6 +20,15 @@ Stop at the first check that fails.
 5. **Unsupported.** The reason is true: no fact kind or decision gives the value (search `engine/src/facts/kinds/` and the resolver). If a data path exists, the field is not unsupported.
 6. **Example.** Take one set of synthetic inputs. Work out the rule's value and the code's value. They must match.
 
+## The statute
+
+The instructions decide how the form is filled. Read the statute only when two instructions disagree on the line, or an instruction names a rule without stating it.
+
+- Search with `mcp__canon__searchLaw`, in the statute's words taken from the instructions, never by a section number from memory. Read the subdivision with `mcp__canon__readLaw`.
+- Quote a statute passage only by a block id you retrieved. Check each statute quote in the drafter's report the same way as an instruction quote.
+- A statute that disagrees with the instructions is not a `fix`. Judge the binding by the instructions, and add a `statute:` line to your verdict with both texts and their block ids, so the lead adds it to `docs/law-findings.md`.
+- If the tools answer `installed: false`, go on without the statute and say so.
+
 ## Verdict
 
 - `agree`: every check passed.
@@ -31,4 +40,5 @@ Your final message is the verdict:
 ```
 verdict: agree | fix | unsupported
 reason: <one or two sentences, with the blockId or file:line that shows it>
+statute: <only when you read it: both texts with block ids, and agree or disagree>
 ```
