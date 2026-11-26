@@ -5,7 +5,7 @@ import { modelFor } from "./models";
 import { ConsoleLogger } from "./server/consoleLogger";
 import { createObservability } from "./server/observability";
 import { requestGuard } from "./server/requestGuard";
-import { lawSectionRoute, lawStatusRoute } from "./server/routes/law";
+import { lawSectionRoute, lawStatusRoute, lawTocNodeRoute, lawTocRoute } from "./server/routes/law";
 import { listRefDocsRoute, refDocHtmlRoute, refDocPdfRoute } from "./server/routes/refdocs";
 import { createStorage } from "./server/storage";
 import { tokenGate } from "./server/tokenGate";
@@ -57,6 +57,14 @@ export const mastra = new Mastra({
      * CANON_API_TOKEN gates the port when it is reachable beyond localhost.
      */
     middleware: [requestGuard, tokenGate],
-    apiRoutes: [listRefDocsRoute, refDocPdfRoute, refDocHtmlRoute, lawStatusRoute, lawSectionRoute],
+    apiRoutes: [
+      listRefDocsRoute,
+      refDocPdfRoute,
+      refDocHtmlRoute,
+      lawStatusRoute,
+      lawSectionRoute,
+      lawTocRoute,
+      lawTocNodeRoute,
+    ],
   },
 });
