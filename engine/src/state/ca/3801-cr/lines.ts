@@ -92,11 +92,15 @@ export function lowIncomeHousingOffsetOf(
  *   have an amount on line 1c"; line 8 "Enter the smaller of line 1c or line
  *   7", ca-3801cr-face-2025::sec::face-part-ii::b01), and line 17 reads
  *   "Passive Activity Credits Allowed. Add line 6 and line 16. See
- *   instructions ..." (ca-3801cr-face-2025::sec::face-part-iii::b01).
+ *   instructions if you have any credits from a publicly traded partnership"
+ *   (ca-3801cr-face-2025::sec::face-part-iii::b01).
  * The engine follows Text A: the form's own instructions and the statute both
  * say the dollar limit does not apply, and the form has no line to show it, so
- * the engine adds the amount on line 17, whose label says "See instructions";
- * the form's arithmetic alone would deny a credit the law allows (a $12,000
+ * the engine adds the amount on line 17, the form's total of credits allowed,
+ * beyond what its label adds. The label's "See instructions" is about a
+ * publicly traded partnership and does not support this; the instructions'
+ * Important Information and the statute do. The form's arithmetic alone
+ * would deny a credit the law allows (a $12,000
  * credit with no net passive income is allowed up to $12,000, not $0).
  * Lines 8 to 16 are unchanged. The tax limit of Schedule P (540) Section B2, or
  * of Form 540 lines 43 to 45, still applies after this form (creditUsed.ts).
