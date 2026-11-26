@@ -35,6 +35,12 @@ Form 965-A is the yearly report of the section 965 transition tax of 2017 to 202
 
 - **A triggering event in 2025.** Form 1040 line 16 would add each Part I line triggered in 2025 (box 3 with "965INC" and the amount), and Schedule 3 line 13d would take column (i) less the year 1 installment. This is a Form 1040 change, so it waits for a person.
 
+## Second opinions
+
+- **Blind fill (2026-11-26).** A preparer filled 14 cases by hand from the blank form and `irs-965a-inst-2025`. One dollar difference: a triggered $8,000 liability of 2021 with $640 paid in years 1 to 4. The blind fill wrote Part II column (j) $4,160; the engine writes $4,800. 2025 is year 5 (year 1 is "the year of the ... triggering event", `line-1::b01`), so five payments of $640 are made, and $8,000 − $3,200 = $4,800 (`line-1::b05`). The blind fill subtracted six payments. The engine is right. Five lines differ only as blank against 0 in Part II column (k): "report only the payment made (if any)" (`line-1::b05`), so the engine leaves it blank. The blind doubts that change dollars are decisions A68 and A69 and doubts 4 and 7 above.
+- **PolicyEngine-US 2.154.1 (commit 0fbed6ddb1).** It does not model section 965: no variable or parameter under `gov/irs` names the net 965 tax liability, the installment schedule or Form 965-A. Nothing to compare.
+- **Other projects.** The repository names no other reference implementation that models Form 965-A, so no other comparison was made.
+
 ## Confidence
 
 | Field group | Confidence |
