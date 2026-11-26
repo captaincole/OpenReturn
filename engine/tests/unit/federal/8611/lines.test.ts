@@ -55,6 +55,18 @@ describe("Form 8611 (Rev. 1-2006), Line 7 example: $270 of Year 1 credit", () =>
     });
     expect(lines).toMatchObject({ line5: 90, line6: 300, line7: 9 });
   });
+
+  it("takes the earlier recapture off line 5 × line 6, not off line 5 (QUESTIONS.md doubt 2)", () => {
+    const lines = ownPartLines({
+      credits: Array.from({ length: 9 }, () => 3000),
+      worksheets: [],
+      line4: recapturePercentage(10)!,
+      line6: basisDecreasePercentage(decrease(800000, 800000, 720000)),
+      acceleratedPortionRecapturedEarlier: 1000,
+    });
+    // $8,991 × .100 = $899, less the $1,000 recaptured earlier: 0, not ($8,991 − $1,000) × .100 = $799.
+    expect(lines).toMatchObject({ line5: 8991, line6: 100, line7: 0 });
+  });
 });
 
 describe("line 4: the table (line-4::b01)", () => {
