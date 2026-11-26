@@ -27,7 +27,7 @@ const FORM_4797_GAP =
 const SCHEDULE_F_GAP =
   "Schedule F files, and the engine has no rules for it: Schedule 1 line 6 (Form 461 line 6) is not known.";
 const FORM_4835_GAP =
-  "Form 4835 files, and Schedule E line 40 (farm rental income, part of Form 461 line 5) is not modeled.";
+  "Form 4835 files, and Form 461 does not sort its farm rental (Schedule E line 40, part of Form 461 line 5) into business or nonbusiness amounts (lines 10 and 11).";
 const OVERFLOW_GAP =
   "More than three rental or royalty properties need a second Schedule E, which the engine does not fill: Schedule 1 line 5 (Form 461 line 5) is not known.";
 

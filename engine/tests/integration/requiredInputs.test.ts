@@ -71,6 +71,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "an answer Cade records only when the user received the dividend (Schedule 1 line 8g)",
   ],
   [
+    /^farm_rental\.[^.]+$/,
+    "each fact is a whole farm rented for crop or livestock shares (Form 4835); whether one " +
+      "exists is Cade's question. Form 4835 lists the fact again while an answer inside it " +
+      "(line A, the CCC loan election, line 34's at-risk box, material participation) is missing",
+  ],
+  [
     /^casualty\.[^.]+$/,
     "each fact is a whole casualty event (Form 4684); whether one happened is Cade's question",
   ],

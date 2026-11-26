@@ -681,6 +681,12 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 4835",
     relativeDir: "federal/4835",
     register: registerForm4835,
+    /* One Form 4835 for each farm rental (federal/4835/farmTotals.ts); pages 2 and 3 are the instructions. */
+    copies: {
+      count: (info) => info?.form4835Copies?.length ?? 1,
+      select: (info, index) => info && { ...info, ...info.form4835Copies?.[index] },
+      laterCopyPages: [0],
+    },
   }),
   makeFormSpec({
     formId: "form-4970",

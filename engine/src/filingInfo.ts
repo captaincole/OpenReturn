@@ -102,6 +102,7 @@ import type { Form8995AFilingInfo } from "./federal/8995-a/filingInfo.js";
 import { resolve8995AInfo } from "./federal/8995-a/resolveInfo.js";
 import type { Form8995FilingInfo } from "./federal/8995/filingInfo.js";
 import { resolve8995Info } from "./federal/8995/resolveInfo.js";
+import { FARM_FORMS_RESOLVERS, type FarmFormsFilingInfo } from "./federal/farmForms.js";
 import {
   FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
   type FederalFormsWithNoRulesFilingInfo,
@@ -306,6 +307,7 @@ export type FilingInfo = BaseFilingInfo &
   Form8863FilingInfo &
   Form8938FilingInfo &
   RecaptureFormsFilingInfo &
+  FarmFormsFilingInfo &
   FederalFormsWithNoRulesFilingInfo &
   LaterCaliforniaFormsFilingInfo &
   CaliforniaFormsWithNoRulesFilingInfo;
@@ -391,6 +393,7 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve8863Info,
   resolve8938Info,
   ...RECAPTURE_FORMS_RESOLVERS,
+  ...FARM_FORMS_RESOLVERS,
   ...FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
   ...LATER_CALIFORNIA_FORMS_RESOLVERS,
   ...CALIFORNIA_FORMS_WITH_NO_RULES_RESOLVERS,
