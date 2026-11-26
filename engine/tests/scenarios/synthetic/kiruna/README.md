@@ -27,7 +27,8 @@ credits are her answers; the credit forms (FTB 3521, 3523, 3540) are not in the 
 ## What it covers
 
 - FTB 3801-CR lines 1a to 1c, 3a to 12, 14 to 17: net passive income on
-  line 6, the special allowance in Part II, Worksheets 5 to 9.
+  line 6, the special allowance in Part II, the low-income housing credit's
+  offset with no dollar limit on line 17 (decision A47), Worksheets 5 to 9.
 - Schedule P (540) Section B2 lines 16 to 18, all four columns, in the order
   research, orphan drug, low-income housing (decision A48).
 - Form 540 line 45 (more than two credits), lines 47 and 48.
@@ -50,13 +51,15 @@ credits are her answers; the credit forms (FTB 3521, 3523, 3540) are not in the 
 | 3801-CR 9, 10, 11, 12 | 150,000; 140,000; 10,000; 5,000 | federal 8582-CR line 10 = AGI with the net passive income |
 | 3801-CR 13, 14 | blank; 5,000 | FTB 3801 line 3 is income, so no line 9 |
 | 3801-CR 15, 16 | 465; 465 | 9.3% × 5,000; smaller of 1,500 and 465 |
-| 3801-CR 17 | 2,511 | 2,046 + 465 |
+| Housing offset | 5,500 | smaller of line 3c (5,500) and line 7 − line 16 (8,254 − 465 = 7,789); no dollar limit (decision A47) |
+| 3801-CR 17 | 8,011 | 2,046 + 465 + 5,500 |
 | Worksheet 5 | 372; 93 | 465 by 1,200 : 300; column (d) 828, 207 |
-| Worksheet 8 | 656, 164, 3,168, 1,188, 1,979, 634 | 10,300 − 2,511 = 7,789 over 828, 207, 4,000, 1,500, 2,500, 800 |
-| Worksheet 9 | research 544 + 136 + 521 = 1,201; housing 832 + 312 = 1,144; orphan drug 166 | each credit less its share |
+| Worksheet 7 | 4,000; 1,500 | the 5,500 offset by 4,000 : 1,500; column (d) 0, 0 |
+| Worksheet 8 | 437, 110, 0, 0, 1,320, 422 | 10,300 − 8,011 = 2,289 over 828, 207, 0, 0, 2,500, 800 (running totals of 4,335) |
+| Worksheet 9 | research 763 + 190 + 1,180 = 2,133; housing 4,000 + 1,500 = 5,500; orphan drug 378 | each credit less its share |
 | Sch P line 11 | 8,775 | line 2 (3,308) + line 3 (5,467) |
-| Sch P line 16 (a) to (d) | 1,201; 1,201; 7,574; 0 | code 183 |
-| Sch P line 17 (a) to (d) | 166; 166; 7,408; 0 | code 185 |
-| Sch P line 18 (a) to (d) | 1,144; 1,144; 6,264; 0 | code 172 |
-| 540 line 45, 47, 48 | 2,511; 2,511; 6,264 | column (b) total; 8,775 − 2,511 |
-| 540 line 115 | 1,136 | 7,400 withheld − 6,264 |
+| Sch P line 16 (a) to (d) | 2,133; 2,133; 6,642; 0 | code 183 |
+| Sch P line 17 (a) to (d) | 378; 378; 6,264; 0 | code 185 |
+| Sch P line 18 (a) to (d) | 5,500; 5,500; 764; 0 | code 172 |
+| 540 line 45, 47, 48 | 8,011; 8,011; 764 | column (b) total; 8,775 − 8,011 |
+| 540 line 115 | 6,636 | 7,400 withheld − 764 |

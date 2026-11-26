@@ -8,7 +8,13 @@
  * Each line is a Cell: a gap passes through; blank is a line the form skips.
  */
 
-import { isGap, totalOf, type Cell } from "../../../federal/3800/cells.js";
+import {
+  isGap,
+  smallerOf,
+  subtractedAtLeastZero,
+  totalOf,
+  type Cell,
+} from "../../../federal/3800/cells.js";
 import {
   partI,
   partII,
@@ -34,10 +40,29 @@ export type Form3801CRLines = Pick<
 const hasAmount = (cell: Cell) => typeof cell === "number" && cell > 0;
 
 /*
+ * The low-income housing credit allowed beyond line 6: the smaller of line 2c
+ * plus line 3c, and line 7 less line 16, with no dollar limit (the DECISION
+ * below). Line 2c takes it first, then line 3c, as federal Form 8582-CR Part III comes
+ * before Part IV. The two amounts are named for the federal lines 30 and 36,
+ * which Worksheets 6 and 7 share (federal/8582-cr/allocation.ts). A separate
+ * return that lived with the spouse has these credits on line 4 (Worksheet 4,
+ * ca-3801cr-inst-2025::sec::line-2a-through-line-2c::b01), so it gets none.
+ */
+export function lowIncomeHousingOffsetOf(
+  lines: Pick<Form8582CRLines, "line2c" | "line3c" | "line7" | "line16">,
+): Pick<Form8582CRLines, "line30" | "line36"> {
+  const room = subtractedAtLeastZero(lines.line7, lines.line16);
+  const line30 = smallerOf(lines.line2c, room);
+  const line36 = smallerOf(lines.line3c, subtractedAtLeastZero(room, line30));
+  return { line30, line36 };
+}
+
+/*
  * Lines 1a to 17. Part II only with an amount on line 1c ("Complete Part II
  * if you have an amount on line 1c", the face), and not for a separate return
  * that lived with the spouse at any time (ca-3801cr-inst-2025::sec::line-9::b01).
- * Line 17: "Add line 6 and line 16" (the face).
+ * Line 17: "Add line 6 and line 16" (the face), plus the low-income housing
+ * credit allowed beyond line 6.
  *
  * DECISION (2026-11-26, by the author): with line 7 at zero, line 17 is line 5.
  * - The face, line 17: "Passive Activity Credits Allowed. Add line 6 and line
@@ -50,17 +75,31 @@ const hasAmount = (cell: Cell) => typeof cell === "number" && cell > 0;
  * (row A44): the credit allowed is never more than the credits there are.
  * Part II then has nothing left to allow, so it stays blank.
  *
- * DECISION (2026-11-26, by the author): a low-income housing credit (lines 2
- * and 3) is allowed only through line 6.
- * - Important Information: "For taxable years beginning on or after January 1,
- *   2020, the dollar limitation for the offset for rental real estate
- *   activities shall not apply to the low-income housing credit program"
- *   (ca-3801cr-inst-2025::sec::rental-real-estate-activities::b01).
- * - The face: Part II takes only line 1c ("Complete Part II if you have an
- *   amount on line 1c"; line 8 "Enter the smaller of line 1c or line 7"), and
- *   line 17 adds only lines 6 and 16; the form has no part for lines 2c and 3c.
- * The engine follows the form's lines: the form's arithmetic wins over a
- * sentence whose amount its lines cannot produce (docs/rule-decisions.md).
+ * DECISION (2026-11-26, by the author): a low-income housing credit (lines 2c
+ * and 3c) gets the rental real estate offset with no dollar limit.
+ * - Text A, Important Information: "For taxable years beginning on or after
+ *   January 1, 2020, the dollar limitation for the offset for rental real
+ *   estate activities shall not apply to the low-income housing credit
+ *   program. For more information, see California Revenue & Taxation Code
+ *   (R&TC) Section 17561(d)(1)"
+ *   (ca-3801cr-inst-2025::sec::rental-real-estate-activities::b01). R&TC
+ *   section 17561(d)(1) and (d)(2), as the lead read a public copy on
+ *   2026-11-26 (the Code is not in the library): for section 469(i), the
+ *   section 469(i)(2) dollar limitation does not apply to the section 17058
+ *   low-income housing credit, for taxable years beginning on or after
+ *   January 1, 2020.
+ * - Text B, the face: Part II takes only line 1c ("Complete Part II if you
+ *   have an amount on line 1c"; line 8 "Enter the smaller of line 1c or line
+ *   7", ca-3801cr-face-2025::sec::face-part-ii::b01), and line 17 reads
+ *   "Passive Activity Credits Allowed. Add line 6 and line 16. See
+ *   instructions ..." (ca-3801cr-face-2025::sec::face-part-iii::b01).
+ * The engine follows Text A: the form's own instructions and the statute both
+ * say the dollar limit does not apply, and the form has no line to show it, so
+ * the engine adds the amount on line 17, whose label says "See instructions";
+ * the form's arithmetic alone would deny a credit the law allows (a $12,000
+ * credit with no net passive income is allowed up to $12,000, not $0).
+ * Lines 8 to 16 are unchanged. The tax limit of Schedule P (540) Section B2, or
+ * of Form 540 lines 43 to 45, still applies after this form (creditUsed.ts).
  */
 export function form3801CRLines(amounts: PartIAmounts, inputs: CaReturnAmounts): Form3801CRLines {
   let lines: Form8582CRLines = partI(amounts, inputs.line6);
@@ -69,5 +108,6 @@ export function form3801CRLines(amounts: PartIAmounts, inputs: CaReturnAmounts):
   if (!inputs.livedWithSpouse && hasAmount(lines.line1c)) {
     lines = { ...lines, ...partII(lines, inputs) };
   }
-  return { ...lines, line17: totalOf(lines.line6, lines.line16) };
+  const housing = lowIncomeHousingOffsetOf(lines);
+  return { ...lines, line17: totalOf(lines.line6, lines.line16, housing.line30, housing.line36) };
 }

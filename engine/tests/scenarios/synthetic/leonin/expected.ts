@@ -142,7 +142,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 7. Subtract line 6 from line 5. If line 6 is more than or equal to line 5, enter 0. S
       "form-3801-cr.0.line.7_credits_over_passive_tax": 2298,
       // Part III, Line 17. Passive Activity Credits Allowed. Add line 6 and line 16. See instructi
-      "form-3801-cr.1.line.17_passive_activity_credits_allowed": 1302,
+      "form-3801-cr.1.line.17_passive_activity_credits_allowed": 3600,
     },
   },
   "form-540": {
@@ -174,15 +174,15 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 35. Add line 33 and line 34.
       "form-540.line.35_total_tax_after_credits": 4684,
       // Line 43. Enter credit amount
-      "form-540.line.43_credit_amount": 434,
+      "form-540.line.43_credit_amount": 1200,
       // Line 44. Enter credit amount
-      "form-540.line.44_credit_amount": 868,
+      "form-540.line.44_credit_amount": 2400,
       // Line 47. Add line 40 through line 46. These are your total credits.
-      "form-540.line.47_total_credits": 1302,
+      "form-540.line.47_total_credits": 3600,
       // Line 48. Subtract line 47 from line 35. If less than zero, enter 0.
-      "form-540.line.48_tax_after_credits": 3382,
+      "form-540.line.48_tax_after_credits": 1084,
       // Line 64. Add line 48, line 61, line 62, and line 63. This is your total tax.
-      "form-540.line.64_total_tax": 3382,
+      "form-540.line.64_total_tax": 1084,
       // Payments. Line 71. California income tax withheld. See instructions.
       "form-540.line.71_ca_income_tax_withheld": 3600,
       // Line 78. Add line 71 through line 77. These are your total payments. See instructions.
@@ -192,11 +192,11 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 95. Payments after Individual Shared Responsibility penalty. If line 93 is more than
       "form-540.line.95_payments_after_isr_penalty": 3600,
       // Line 97. Overpaid tax. If line 95 is more than line 64, subtract line 64 from line 95.
-      "form-540.line.97_overpaid_tax": 218,
+      "form-540.line.97_overpaid_tax": 2516,
       // Line 99. Overpaid tax available this year. Subtract line 98 from line 97.
-      "form-540.line.99_overpaid_tax_available": 218,
+      "form-540.line.99_overpaid_tax_available": 2516,
       // Refund and Direct Deposit. Line 115. Refund or no amount due. Subtract the sum of line 110
-      "form-540.line.115_refund_or_no_amount_due": 218,
+      "form-540.line.115_refund_or_no_amount_due": 2516,
     },
   },
 };

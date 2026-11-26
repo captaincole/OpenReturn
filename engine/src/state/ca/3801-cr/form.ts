@@ -13,7 +13,7 @@ import type { Accessor, Waiting } from "../../../federal/8582-cr/returnInputs.js
 import { passiveEntriesOf, type PassiveEntries } from "../../../federal/8582-cr/worksheets.js";
 import type { Unsupported } from "../../../types.js";
 import type { Form3801CRInfo } from "./filingInfo.js";
-import { form3801CRLines, type Form3801CRLines } from "./lines.js";
+import { form3801CRLines, lowIncomeHousingOffsetOf, type Form3801CRLines } from "./lines.js";
 import {
   caNetPassiveIncomeOf,
   caTaxAttributableOf,
@@ -72,10 +72,11 @@ export function caPassiveCreditLimitOf(
   if (magiWaits) return undefined;
   const gap = [lines.line17, lines.line5].find(isGap);
   if (gap) return { entries, lines, gap };
-  // Worksheets 5 to 9 share line 16 among Worksheet 1 and the rest by line 5 less line 17.
+  // Worksheets 5 to 7 share line 16 and the low-income housing offset; Worksheet 8 line 5 less line 17.
+  const housing = lowIncomeHousingOffsetOf(lines);
   return {
     entries,
     lines,
-    allocation: allocate(entries.entries, { ...lines, line37: lines.line17 }),
+    allocation: allocate(entries.entries, { ...lines, ...housing, line37: lines.line17 }),
   };
 }

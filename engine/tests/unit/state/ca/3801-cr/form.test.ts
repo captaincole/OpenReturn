@@ -148,7 +148,8 @@ describe("FTB 3801-CR on the kiruna return (net passive income, Schedule P)", ()
       2046, 465,
     ]);
     expect(at("13_ftb_3801_line_9_amount")).toBeUndefined();
-    expect(run.line("1.line.17_passive_activity_credits_allowed")).toBe(2511);
+    // 2,046 + 465 + the low-income housing offset: line 3c (5,500), less than 8,254 − 465.
+    expect(run.line("1.line.17_passive_activity_credits_allowed")).toBe(2046 + 465 + 5500);
   });
 
   it("Schedule P (540) lines 16 to 18 take the credits in the order of use; Form 540 line 45 adds them", () => {
@@ -160,12 +161,12 @@ describe("FTB 3801-CR on the kiruna return (net passive income, Schedule P)", ()
       "185",
       "172",
     ]);
-    expect([row(16, "credit_amount_col_a"), row(17, "credit_amount_col_a")]).toEqual([1201, 166]);
-    expect([row(18, "credit_used_col_b"), row(18, "tax_balance_col_c")]).toEqual([1144, 6264]);
+    expect([row(16, "credit_amount_col_a"), row(17, "credit_amount_col_a")]).toEqual([2133, 378]);
+    expect([row(18, "credit_used_col_b"), row(18, "tax_balance_col_c")]).toEqual([5500, 764]);
     expect(isGap(run.field("schedule-p", "3.part3.19_credit_code"))).toBe(true);
-    expect(run.form540("45_schedule_p_credits")).toBe(2511);
+    expect(run.form540("45_schedule_p_credits")).toBe(8011);
     expect(run.form540("43_credit_amount")).toBeUndefined();
-    expect(run.form540("48_tax_after_credits")).toBe(8775 - 2511);
+    expect(run.form540("48_tax_after_credits")).toBe(8775 - 8011);
   });
 
   it("a credit is never used past the tax: column (b) stops at the balance, column (d) carries the rest", () => {
@@ -182,8 +183,8 @@ describe("FTB 3801-CR on the kiruna return (net passive income, Schedule P)", ()
         : fact,
     );
     const run = evaluate(kiruna, smallWages);
-    // Line 17 is 1,832 (line 6 886 + line 16 946), shared 1,235 / 76 / 521.
-    expect(run.line("1.line.17_passive_activity_credits_allowed")).toBe(1832);
+    // Line 17 is 7,332 (line 6 886 + line 16 946 + the housing offset 5,500), shared 1,648 / 184 / 5,500.
+    expect(run.line("1.line.17_passive_activity_credits_allowed")).toBe(7332);
     const row = (line: number) =>
       [
         "credit_amount_col_a",
@@ -192,9 +193,9 @@ describe("FTB 3801-CR on the kiruna return (net passive income, Schedule P)", ()
         "credit_carryover_col_d",
       ].map((column) => run.value("schedule-p", `3.part3.${line}_${column}`));
     expect(run.value("schedule-p", "2.part3.11_tax_balance_col_c")).toBe(1082);
-    expect(row(16)).toEqual([1235, 1082, 0, 153]);
-    expect(row(17)).toEqual([76, 0, 0, 76]);
-    expect(row(18)).toEqual([521, 0, 0, 521]);
+    expect(row(16)).toEqual([1648, 1082, 0, 566]);
+    expect(row(17)).toEqual([184, 0, 0, 184]);
+    expect(row(18)).toEqual([5500, 0, 0, 5500]);
     expect(run.form540("47_total_credits")).toBe(1082);
     expect(run.form540("48_tax_after_credits")).toBe(0);
   });
@@ -215,12 +216,12 @@ describe("the credits after Section B2 on the kiruna return", () => {
 
   it("Schedule S line 2 is Form 540 line 48 without the other state tax credit: line 35 less the passive credits", () => {
     const run = evaluate(kiruna, [...kiruna.facts, massachusetts]);
-    expect(run.value("schedule-s", "0.line.2_california_tax_liability")).toBe(8775 - 2511);
-    // 6,264 × 0.1429 = 895, less than the $1,000 paid.
-    expect(run.value("schedule-s", "0.line.12_other_state_tax_credit")).toBe(895);
-    expect(run.value("schedule-p", "3.part3.20_other_state_tax_credit_used_col_b")).toBe(895);
-    expect(run.form540("45_schedule_p_credits")).toBe(2511 + 895);
-    expect(run.form540("48_tax_after_credits")).toBe(8775 - 2511 - 895);
+    expect(run.value("schedule-s", "0.line.2_california_tax_liability")).toBe(8775 - 8011);
+    // 764 × 0.1429 = 109, less than the $1,000 paid.
+    expect(run.value("schedule-s", "0.line.12_other_state_tax_credit")).toBe(109);
+    expect(run.value("schedule-p", "3.part3.20_other_state_tax_credit_used_col_b")).toBe(109);
+    expect(run.form540("45_schedule_p_credits")).toBe(8011 + 109);
+    expect(run.form540("48_tax_after_credits")).toBe(8775 - 8011 - 109);
   });
 
   it("Schedule P (540) attaches with more than two credits, with no decision", () => {
@@ -240,25 +241,47 @@ describe("FTB 3801-CR on the leonin return (no FTB 3801, no Schedule P)", () => 
     expect(run.files("form-3801")).toBe(false);
     expect(run.line("0.line.2c_housing_pre_1990_total")).toBe(2400);
     expect(run.line("0.line.6_tax_on_net_passive_income")).toBe(1302);
-    expect(run.line("1.line.17_passive_activity_credits_allowed")).toBe(1302);
-    expect([run.form540("43_credit_code"), run.form540("43_credit_amount")]).toEqual(["183", 434]);
-    expect([run.form540("44_credit_code"), run.form540("44_credit_amount")]).toEqual(["172", 868]);
-    expect(run.form540("47_total_credits")).toBe(1302);
+    // 1,302 + the housing offset: line 7 (2,298), less than line 2c (2,400). Every credit is allowed.
+    expect(run.line("1.line.17_passive_activity_credits_allowed")).toBe(3600);
+    expect([run.form540("43_credit_code"), run.form540("43_credit_amount")]).toEqual(["183", 1200]);
+    expect([run.form540("44_credit_code"), run.form540("44_credit_amount")]).toEqual(["172", 2400]);
+    expect(run.form540("47_total_credits")).toBe(3600);
   });
 
   it("with no Schedule P, a credit stops at the tax left", () => {
     const big = creditFact(leonin, "big", {
-      creditCode: "183",
+      creditCode: "172",
       column: "current",
       amount: 90000,
-      activity: ACTIVITY,
+      activity: { name: "Big Housing LP", rentalRealEstate: true, before1990: false },
     });
     const run = evaluate(leonin, [...leonin.facts, big]);
-    // Line 35 is 4,684; line 6 is 1,302, so line 17 is 1,302 and fits.
-    expect(run.form540("47_total_credits")).toBe(1302);
-    const total =
-      (run.form540("43_credit_amount") as number) + (run.form540("44_credit_amount") as number);
-    expect(total).toBe(1302);
+    // Line 17 allows all 93,600 (the offset has no dollar limit); line 35 is 4,684.
+    expect(run.line("1.line.17_passive_activity_credits_allowed")).toBe(93600);
+    expect(run.form540("43_credit_amount")).toBe(1200);
+    expect(run.form540("44_credit_amount")).toBe(4684 - 1200);
+    expect(run.form540("47_total_credits")).toBe(4684);
+    expect(run.form540("48_tax_after_credits")).toBe(0);
+  });
+
+  it("a separate return living with the spouse: the housing credit is on line 4 and gets no offset", () => {
+    const decisions = withDecision(
+      leonin,
+      "decisions.scope.filing_status",
+      "married_filing_separately",
+    );
+    const spouse: TaxFactRow = {
+      ...creditFact(leonin, "spouse", {}),
+      category: "filing_status",
+      key: SPOUSE_KEYS.livedApartAllYear,
+      value: false,
+    };
+    const run = evaluate(leonin, [...leonin.facts, spouse], decisions);
+    expect(run.line("0.line.2c_housing_pre_1990_total")).toBeUndefined();
+    expect(run.line("0.line.4c_other_passive_total")).toBe(3600);
+    const line6 = run.line("0.line.6_tax_on_net_passive_income");
+    expect(line6).toBeGreaterThan(0);
+    expect(run.line("1.line.17_passive_activity_credits_allowed")).toBe(line6);
   });
 });
 
@@ -276,8 +299,8 @@ describe("the credits after Section B2", () => {
       value: 0,
     };
     const run = evaluate(leonin, [...leonin.facts, pte, carryover]);
-    // Form 540 line 35 is 4,684; the passive credits take 1,302 first.
-    expect(run.value("form-3804-cr", "0.part2.4_credit_claimed_current_year")).toBe(4684 - 1302);
+    // Form 540 line 35 is 4,684; the passive credits take 3,600 first.
+    expect(run.value("form-3804-cr", "0.part2.4_credit_claimed_current_year")).toBe(4684 - 3600);
     expect(run.form540("45_schedule_p_credits")).toBe(4684);
     expect(run.form540("48_tax_after_credits")).toBe(0);
   });

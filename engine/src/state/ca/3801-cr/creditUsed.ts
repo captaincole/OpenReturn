@@ -24,6 +24,7 @@ import { unsupported, type Unsupported } from "../../../types.js";
 import { taxBeforeSectionB2 } from "../540/creditBalance.js";
 import type { Form3801CRInfo } from "./filingInfo.js";
 import { caPassiveEntriesOf } from "./form.js";
+import { lowIncomeHousingOffsetOf } from "./lines.js";
 import type { CaPassiveSource } from "./sources.js";
 
 type ReadField = (fieldId: string) => unknown;
@@ -40,7 +41,10 @@ export const files3801Cr = (info: BaseFilingInfo) =>
 
 const filesScheduleP = (info: BaseFilingInfo) => info.mustFile?.["schedule-p"]?.value === true;
 
+const LINE_2C = "form-3801-cr.0.line.2c_housing_pre_1990_total";
+const LINE_3C = "form-3801-cr.0.line.3c_housing_post_1989_total";
 export const LINE_5 = "form-3801-cr.0.line.5_total_passive_credits";
+const LINE_7 = "form-3801-cr.0.line.7_credits_over_passive_tax";
 export const LINE_16 = "form-3801-cr.0.line.16_smaller_of_8_or_15";
 export const LINE_17 = "form-3801-cr.1.line.17_passive_activity_credits_allowed";
 
@@ -82,15 +86,14 @@ export function passiveCreditsAllowed(
   if (entries === undefined) return undefined;
   if (entries.publiclyTraded.length > 0) return PUBLICLY_TRADED_GAP;
   if (entries.gap) return entries.gap;
-  const [line5, line16, line17] = [read(LINE_5), read(LINE_16), read(LINE_17)];
-  const gap = [line5, line16, line17].find(isGap);
+  const read3801 = [LINE_2C, LINE_3C, LINE_5, LINE_7, LINE_16, LINE_17].map(read);
+  const gap = read3801.find(isGap);
   if (gap) return gap;
-  if (numberOrBlank(line5) === undefined || numberOrBlank(line17) === undefined) return undefined;
-  const allocation = allocate(entries.entries, {
-    line5: numberOrBlank(line5),
-    line16: numberOrBlank(line16),
-    line37: numberOrBlank(line17),
-  });
+  const [line2c, line3c, line5, line7, line16, line17] = read3801.map(numberOrBlank);
+  if (line5 === undefined || line17 === undefined) return undefined;
+  // Worksheets 6 and 7 share the low-income housing offset of line 17 (lines.ts).
+  const housing = lowIncomeHousingOffsetOf({ line2c, line3c, line7, line16 });
+  const allocation = allocate(entries.entries, { line5, line16, ...housing, line37: line17 });
   const allowedOf = (code: CaPassiveCreditCode) =>
     sum(
       ...entries.entries

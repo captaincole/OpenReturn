@@ -14,7 +14,7 @@ The engine fills FTB 3801-CR for a Form 540 filer from the California passive cr
 | Line 10 | Stated rule; RDPs are own reading (item 6) |
 | Line 13 | Stated rule |
 | Line 17 | Stated rule; line 7 at zero: decision A46; low-income housing: decision A47 |
-| Worksheets 5 to 9 (the allowed credit of each code) | Stated rule (the federal worksheets) |
+| Worksheets 5 to 9 (the allowed credit of each code) | Stated rule (the federal worksheets); Worksheets 6 and 7 share the low-income housing offset (decision A47) |
 | Lines 18 to 21 (Part IV) | Stated rule; the lower credit is own reading (item 7) |
 | Form 540 lines 43 to 45, Schedule P (540) lines 16 to 18 | Stated rule; the order is decision A48 |
 
@@ -29,8 +29,8 @@ Each is decided by the author, with a `DECISION` comment and a row in `docs/rule
 
 ### 2. A low-income housing credit with nothing to offset (A47)
 
-- Texts: Important Information says the dollar limit does not apply to the low-income housing credit (`ca-3801cr-inst-2025::sec::rental-real-estate-activities::b01`); the form's lines allow lines 2c and 3c only through line 6.
-- Decided: the form's lines. The unallowed part carries forward (Worksheet 9 column (b)). `lines.ts`. Check R&TC section 17561(d)(1) first: Text A may be the law.
+- Texts: Important Information says the dollar limit does not apply to the low-income housing credit (`ca-3801cr-inst-2025::sec::rental-real-estate-activities::b01`), and so does R&TC section 17561(d)(1), as the lead read a public copy on 2026-11-26; the form's lines allow lines 2c and 3c only through line 6.
+- Decided: the instructions and the statute. Lines 2c and 3c get the rental real estate offset with no dollar limit: line 17 adds the smaller of line 2c plus line 3c, and line 7 less line 16 (line 2c first). Lines 8 to 16 are unchanged. Worksheets 6 and 7 share the offset. A separate return that lived with the spouse has the credits on Worksheet 4, so it gets none. Schedule P (540) Section B2, or Form 540 lines 43 to 45, still limit the credit by the tax. `lines.ts`, `form.ts`, `creditUsed.ts`. Check the Code itself when it is in the library.
 
 ### 3. The order of use in Schedule P (540) Section B2 (A48)
 

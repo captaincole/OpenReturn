@@ -224,23 +224,23 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Section B. Line 11 . If Part 3, line 3 is zero, enter the amount from line 1 . If line 3 i
       "schedule-p.2.part3.11_tax_balance_col_c": 8775,
       // Line 16 . Column A. Credit amount.
-      "schedule-p.3.part3.16_credit_amount_col_a": 1201,
+      "schedule-p.3.part3.16_credit_amount_col_a": 2133,
       // Line 16 . Column B*. Credit used this year. *If the taxpayer is subject to the business cr
-      "schedule-p.3.part3.16_credit_used_col_b": 1201,
+      "schedule-p.3.part3.16_credit_used_col_b": 2133,
       // Line 16 . Column C. Tax balance that may be offset by credits.
-      "schedule-p.3.part3.16_tax_balance_col_c": 7574,
+      "schedule-p.3.part3.16_tax_balance_col_c": 6642,
       // Line 17 . Column A. Credit amount.
-      "schedule-p.3.part3.17_credit_amount_col_a": 166,
+      "schedule-p.3.part3.17_credit_amount_col_a": 378,
       // Line 17 . Column B*. Credit used this year. *If the taxpayer is subject to the business cr
-      "schedule-p.3.part3.17_credit_used_col_b": 166,
+      "schedule-p.3.part3.17_credit_used_col_b": 378,
       // Line 17 . Column C. Tax balance that may be offset by credits.
-      "schedule-p.3.part3.17_tax_balance_col_c": 7408,
+      "schedule-p.3.part3.17_tax_balance_col_c": 6264,
       // Line 18 . Column A. Credit amount.
-      "schedule-p.3.part3.18_credit_amount_col_a": 1144,
+      "schedule-p.3.part3.18_credit_amount_col_a": 5500,
       // Line 18 . Column B*. Credit used this year. *If the taxpayer is subject to the business cr
-      "schedule-p.3.part3.18_credit_used_col_b": 1144,
+      "schedule-p.3.part3.18_credit_used_col_b": 5500,
       // Line 18 . Column C. Tax balance that may be offset by credits.
-      "schedule-p.3.part3.18_tax_balance_col_c": 6264,
+      "schedule-p.3.part3.18_tax_balance_col_c": 764,
     },
   },
   "form-3801-cr": {
@@ -286,7 +286,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 16. Enter the smaller of line 8 or line 15.
       "form-3801-cr.0.line.16_smaller_of_8_or_15": 465,
       // Part III, Line 17. Passive Activity Credits Allowed. Add line 6 and line 16. See instructi
-      "form-3801-cr.1.line.17_passive_activity_credits_allowed": 2511,
+      "form-3801-cr.1.line.17_passive_activity_credits_allowed": 8011,
     },
   },
   "form-540": {
@@ -318,13 +318,13 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 35. Add line 33 and line 34.
       "form-540.line.35_total_tax_after_credits": 8775,
       // Line 45. To claim more than two credits, see instructions. Attach Schedule P (540).
-      "form-540.line.45_schedule_p_credits": 2511,
+      "form-540.line.45_schedule_p_credits": 8011,
       // Line 47. Add line 40 through line 46. These are your total credits.
-      "form-540.line.47_total_credits": 2511,
+      "form-540.line.47_total_credits": 8011,
       // Line 48. Subtract line 47 from line 35. If less than zero, enter 0.
-      "form-540.line.48_tax_after_credits": 6264,
+      "form-540.line.48_tax_after_credits": 764,
       // Line 64. Add line 48, line 61, line 62, and line 63. This is your total tax.
-      "form-540.line.64_total_tax": 6264,
+      "form-540.line.64_total_tax": 764,
       // Payments. Line 71. California income tax withheld. See instructions.
       "form-540.line.71_ca_income_tax_withheld": 7400,
       // Line 78. Add line 71 through line 77. These are your total payments. See instructions.
@@ -334,11 +334,11 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 95. Payments after Individual Shared Responsibility penalty. If line 93 is more than
       "form-540.line.95_payments_after_isr_penalty": 7400,
       // Line 97. Overpaid tax. If line 95 is more than line 64, subtract line 64 from line 95.
-      "form-540.line.97_overpaid_tax": 1136,
+      "form-540.line.97_overpaid_tax": 6636,
       // Line 99. Overpaid tax available this year. Subtract line 98 from line 97.
-      "form-540.line.99_overpaid_tax_available": 1136,
+      "form-540.line.99_overpaid_tax_available": 6636,
       // Refund and Direct Deposit. Line 115. Refund or no amount due. Subtract the sum of line 110
-      "form-540.line.115_refund_or_no_amount_due": 1136,
+      "form-540.line.115_refund_or_no_amount_due": 6636,
     },
   },
 };

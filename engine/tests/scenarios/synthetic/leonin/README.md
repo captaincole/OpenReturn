@@ -26,7 +26,10 @@ credit are his answers; the credit forms (FTB 3521, 3523) are not in the engine.
 - FTB 3801-CR lines 2a to 2c (an interest acquired before 1990), 4a and 4c,
   5 to 7 and 17. Line 6 comes from the rental's California net income because
   FTB 3801 does not file. Part II is skipped: there is no amount on line 1c.
-- Worksheets 8 and 9 share the unallowed credit between the two credits.
+- The low-income housing credit's offset with no dollar limit (decision A47):
+  line 17 adds line 7 to line 6, so every credit is allowed. Worksheet 6
+  shares the offset; Worksheets 8 and 9 have no unallowed credit to share
+  (`kiruna` shares one).
 - Form 540 lines 43 and 44 with no Schedule P (540): each credit's name, code
   and amount, up to the tax left. Lines 47 and 48.
 - Not covered: Part II and Schedule P (540) (`kiruna`), line 13 and Part IV
@@ -43,10 +46,12 @@ credit are his answers; the credit forms (FTB 3521, 3523) are not in the engine.
 | 3801-CR 5 | 3,600 | 2,400 + 1,200 |
 | 3801-CR 6 | 1,302 | 9.3% × 14,000 (90,294 and 76,294 in the 9.3% bracket) |
 | 3801-CR 7 | 2,298 | 3,600 − 1,302 |
-| 3801-CR 17 | 1,302 | line 6 + line 16 (blank) |
-| Worksheet 8 | 383; 1,149; 766 | 2,298 over 600, 1,800, 1,200 |
-| Worksheet 9 | housing 217 + 651 = 868; research 434 | each credit less its share |
-| 540 line 43 | Research, 183, 434 | first in the order of use (decision A48) |
-| 540 line 44 | Low-Income Housing, 172, 868 | the tax left (4,684 − 434) covers it |
-| 540 lines 47, 48 | 1,302; 3,382 | 434 + 868; 4,684 − 1,302 |
-| 540 line 115 | 218 | 3,600 withheld − 3,382 |
+| Housing offset | 2,298 | smaller of line 2c (2,400) and line 7 − line 16 (2,298 − 0); no dollar limit (decision A47) |
+| 3801-CR 17 | 3,600 | line 6 + line 16 (blank) + 2,298, which is line 5 |
+| Worksheet 6 | 575; 1,723 | the 2,298 offset by 600 : 1,800; column (d) 25, 77 |
+| Worksheet 8 | 0; 0; 0 | 3,600 − 3,600 = 0 over 25, 77, 1,200 |
+| Worksheet 9 | housing 600 + 1,800 = 2,400; research 1,200 | each credit less its share |
+| 540 line 43 | Research, 183, 1,200 | first in the order of use (decision A48) |
+| 540 line 44 | Low-Income Housing, 172, 2,400 | the tax left (4,684 − 1,200) covers it |
+| 540 lines 47, 48 | 3,600; 1,084 | 1,200 + 2,400; 4,684 − 3,600 |
+| 540 line 115 | 2,516 | 3,600 withheld − 1,084 |
