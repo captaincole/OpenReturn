@@ -5,7 +5,7 @@
  * code", ca-3541-inst-2025::sec::part-ii-carryover-computation::b01).
  * Original (223) and new (237) take Schedule P (540) Section A2 lines 6 and 7;
  * program 3.0, soundstage filming and program 4.0 take Section B2 from line
- * 16, before FTB 3801-CR's passive credits (QUESTIONS.md, decision A68).
+ * 16, before FTB 3801-CR's passive credits (QUESTIONS.md, decision A75).
  * Form 540 lines 43 to 45, Schedule P (540), Schedule S line 2, FTB 3801-CR
  * and FTB 3804-CR read them here. `read` takes a full field id.
  */

@@ -10,7 +10,7 @@ other rule is a stated rule or the author's reading.
 Decided by the author; each has a DECISION comment and a row in
 `docs/rule-decisions.md`.
 
-### 1. The order of the Section B2 credits (A68)
+### 1. The order of the Section B2 credits (A75)
 
 - Sources: `ca-540-sched-p-inst-2025::sec::section-b2-instructions::b01`
   (limited carryovers first, "However, you may apply credits with no
@@ -21,7 +21,7 @@ Decided by the author; each has a DECISION comment and a row in
 - Default: film credits first (239, 245, 248), then the passive credits.
 - Changes dollars: yes, when the tax is short. DECISION in `creditUsed.ts`.
 
-### 2. Schedule P (540) column (d) of the program 4.0 credit (A69)
+### 2. Schedule P (540) column (d) of the program 4.0 credit (A76)
 
 - Sources: `ca-540-sched-p-inst-2025::sec::column-a-through-column-d-instructions::b01`
   (column (d) subtracts only an FTB 3870 election);
@@ -191,7 +191,7 @@ Doubts with no conflicting text. Each says whether it is done, or why not now.
 | Lines 1 to 3, 5a, 9, 10, 11 | stated rule (line 11: own reading, item 3; line 5a: the period test, item 10) |
 | Lines 4a to 4c, 5b, 7, 8, Part III (14 to 19), 12b, 12c | stated rule (blank or 0 for an individual) |
 | Line 6 | unsupported when a credit is sold (FTB 3551 and the gain are not in the engine) |
-| Line 12a, 13 | stated rule, with the order of A68 and item 4 |
+| Line 12a, 13 | stated rule, with the order of A75 and item 4 |
 | Lines 20 to 24 | published example with numbers (CFC Examples 1 and 2) |
 | Lines 25, 26 | stated rule (unsupported above $5,000,000) |
 

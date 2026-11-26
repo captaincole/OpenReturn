@@ -99,7 +99,7 @@ export function partIVOf(
  * The program 4.0 credit elected as refundable: line 22 of each form that
  * qualifies (Part II line 12d), 0 with none. It is not carried over ("Do not
  * include ... amounts included in Part IV", ca-3541-inst-2025::sec::part-ii-carryover-computation::b03),
- * so Schedule P (540) column (d) leaves it out too (decision A69).
+ * so Schedule P (540) column (d) leaves it out too (decision A76).
  */
 export function program40ElectedRefundable(
   read: ReadField,

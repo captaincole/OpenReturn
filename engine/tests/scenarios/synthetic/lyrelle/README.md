@@ -28,7 +28,7 @@ left out on purpose, so the scenario tests the credits alone.
 - FTB 3541 header, boxes, lines A to C, 1, 5a, 9 to 13, Part IV lines 20 to 26
   (the first form). The other four forms are in the rendered copies.
 - Schedule P (540) Section A2 lines 6 and 7 (the TMT limit), line 11, Section
-  B2 lines 16 to 18 (decision A68), column (d) of line 18 (decision A69).
+  B2 lines 16 to 18 (decision A75), column (d) of line 18 (decision A76).
 - Form 540 lines 45, 47, 48, 74 and 78.
 - Not covered: Form 540 lines 43 and 44, Schedule S line 2 (`moria`), the
   gaps and the passive credits after the film credits (unit tests).

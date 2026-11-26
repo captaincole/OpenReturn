@@ -60,7 +60,7 @@ type SectionB2Credit = Pick<PassiveCreditTaken, "name" | "allowed"> & { code: st
 
 /*
  * The credits of lines 16 to 18 in order: FTB 3541's motion picture credits
- * first, then FTB 3801-CR's passive credits (3541/creditUsed.ts, decision A68).
+ * first, then FTB 3801-CR's passive credits (3541/creditUsed.ts, decision A75).
  */
 function sectionB2Credits(form: Form, info: Info): SectionB2Credit[] | Unsupported | undefined {
   const passive = passiveCreditsAllowed((fieldId) => form[fieldId], info);

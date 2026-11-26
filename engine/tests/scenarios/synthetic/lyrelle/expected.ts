@@ -155,7 +155,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "schedule-p.3.part3.18_credit_amount_col_a": 55000,
       // Line 18 . Column B*. Credit used this year. *If the taxpayer is subject to the business cr
       "schedule-p.3.part3.18_credit_used_col_b": 28000,
-      // Line 18 . Column D. Credit carryover. MANUAL EDIT: 55,000 − 28,000 − the 27,000 elected refundable (decision A69).
+      // Line 18 . Column D. Credit carryover. MANUAL EDIT: 55,000 − 28,000 − the 27,000 elected refundable (decision A76).
       "schedule-p.3.part3.18_credit_carryover_col_d": 0,
     },
   },
