@@ -6,19 +6,16 @@
 
 import type { BaseFilingInfo } from "../filingInfo.js";
 import type { ResolverInputs } from "../resolverInputs.js";
-import type { Form4563FilingInfo } from "./4563/filingInfo.js";
-import { resolve4563Info } from "./4563/resolveInfo.js";
 import type { Form5471FilingInfo } from "./5471/filingInfo.js";
 import { resolve5471Info } from "./5471/resolveInfo.js";
 import type { Form8933FilingInfo } from "./8933/filingInfo.js";
 import { resolve8933Info } from "./8933/resolveInfo.js";
 import type { Form8992FilingInfo } from "./8992/filingInfo.js";
 import { resolve8992Info } from "./8992/resolveInfo.js";
-export type FederalFormsWithNoRulesFilingInfo = Form4563FilingInfo &
-  Form5471FilingInfo &
+export type FederalFormsWithNoRulesFilingInfo = Form5471FilingInfo &
   Form8933FilingInfo &
   Form8992FilingInfo;
 
 export const FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS: ReadonlyArray<
   (inputs: ResolverInputs) => BaseFilingInfo
-> = [resolve4563Info, resolve5471Info, resolve8933Info, resolve8992Info];
+> = [resolve5471Info, resolve8933Info, resolve8992Info];

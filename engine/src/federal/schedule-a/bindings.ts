@@ -6,6 +6,7 @@ import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { standardDeduction } from "../1040/deductions.js";
 import { files2555 } from "../2555/results.js";
+import { scheduleAGap } from "../4563/receivers.js";
 import { describeItem, entityTitle } from "../passThrough/items.js";
 import { receivedAmounts, roundedWithReceived } from "../passThrough/receipts.js";
 import type { ScheduleAFilingInfo } from "./filingInfo.js";
@@ -159,11 +160,14 @@ export function register(): void {
         if (typeof line5d !== "number") return undefined;
         // MANUAL EDIT: the worksheet's MAGI adds back the section 911 exclusions (Form 2555), not modeled.
         if (files2555(info)) return unsupported(SALT_MAGI_WITH_FORM_2555);
-        const magi = form["form-1040.line.11b"];
-        return Math.min(
-          line5d,
-          saltCap(typeof magi === "number" ? magi : undefined, info.filingStatus),
-        );
+        /*
+         * MANUAL EDIT: with Form 4563 lines 5a–5c take only their share (federal/4563/receivers.ts),
+         * a gap; the worksheet's line 3d then adds Form 4563 line 15 (QUESTIONS.md of Form 4563).
+         */
+        const shared = scheduleAGap(info);
+        if (shared) return shared;
+        const magi = numberOrBlank(form["form-1040.line.11b"]);
+        return Math.min(line5d, saltCap(magi, info.filingStatus));
       },
       // MANUAL EDIT: line 6, one total with its type (irs-1040sa-inst-2025::sec::line-6-2::b01).
       "0.line.6_other_taxes_amount": (_, info) => roundDollars(info.otherTaxes),
@@ -254,6 +258,9 @@ export function register(): void {
       "0.line.17_total_itemized_deductions": (form, info) => {
         if (info.disasterLossGap) return unsupported(info.disasterLossGap);
         if (info.impairmentGap) return unsupported(info.impairmentGap);
+        // MANUAL EDIT: with Form 4563 only a share of each deduction goes on Schedule A (federal/4563/receivers.ts).
+        const shared = scheduleAGap(info);
+        if (shared) return shared;
         if (info.mortgageInterestWaits || info.netQualifiedDisasterLoss === undefined) {
           return undefined;
         }

@@ -3,6 +3,8 @@
 import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
+import { deductionGap, standardDeductionShare } from "../4563/receivers.js";
+import { nonresidentAlienGap } from "../4563/results.js";
 import { awaitsSchedule1A, standardDeduction } from "./deductions.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import type { Form1040 } from "./types.js";
@@ -61,15 +63,20 @@ export const line12dSpouseBlind = (_: unknown, info: Form1040FilingInfo) =>
  * The worksheet for a filer someone can claim as a dependent is not modeled.
  */
 export function line12e(form: Form, info: Form1040FilingInfo) {
+  // MANUAL EDIT: with Form 4563, a nonresident alien has no standard deduction (federal/4563/results.ts).
+  const alien = nonresidentAlienGap(info);
+  if (alien) return alien;
   if (info.useItemizedDeductions === true) {
     const itemized = form["schedule-a.0.line.17_total_itemized_deductions"];
-    return typeof itemized === "number" ? itemized : undefined;
+    return deductionGap(info, true) ?? (typeof itemized === "number" ? itemized : undefined);
   }
   // MANUAL EDIT: Exception 5 (irs-1040-inst-2025::sec::line-12c-2::b01): Schedule A line 16.
   if (info.increasedStandardDeduction !== false) {
-    return numberOrBlank(form["schedule-a.0.line.16_other_itemized_deductions_amount"]);
+    const increased = form["schedule-a.0.line.16_other_itemized_deductions_amount"];
+    return deductionGap(info, false) ?? numberOrBlank(increased);
   }
-  return standardDeduction(info);
+  // MANUAL EDIT: with Form 4563, the share of gross income subject to U.S. tax (Pub. 570, chapter 4).
+  return standardDeductionShare(form, info, standardDeduction(info));
 }
 
 // MANUAL EDIT: line 13a = Form 8995 line 15 or Form 8995-A line 39; at most one files (whichForm.ts).

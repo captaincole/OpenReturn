@@ -11,6 +11,7 @@ import {
   form4255ForSchedule2,
   schedule2Line,
 } from "../4255/schedule2.js";
+import { additionalMedicareGap, otherTaxesGap, selfEmploymentTaxGap } from "../4563/receivers.js";
 import { earlyDistributionTax } from "../5329/lines.js";
 import { amtGap } from "../6251/foreignTaxCredit.js";
 import { recaptureTaxForSchedule2 as lowIncomeHousingRecaptureTax } from "../8611/results.js";
@@ -193,8 +194,12 @@ export function register(): void {
           form["0.line.1z_total_lines_1a_through_1y"],
           form["0.line.2_alternative_minimum_tax"],
         ),
-      // MANUAL EDIT: irs-1040-inst-2025::sec::line-4-3::b01: Schedule SE line 12.
-      "0.line.4_self_employment_tax": (form) => total(form["schedule-se.0.line.12"]),
+      /*
+       * MANUAL EDIT: irs-1040-inst-2025::sec::line-4-3::b01: Schedule SE line 12.
+       * A gap when Form 4563 excludes self-employment income (federal/4563/receivers.ts).
+       */
+      "0.line.4_self_employment_tax": (form, info) =>
+        selfEmploymentTaxGap(info) ?? total(form["schedule-se.0.line.12"]),
       /*
        * MANUAL EDIT: irs-1040-inst-2025::sec::line-5-2::b01: "the total of any taxes
        * from Form 4137", line 13 of each spouse's form. Blank when no Form 4137 files.
@@ -223,7 +228,9 @@ export function register(): void {
       // Schedule H Part II (FUTA) is not modeled, so a line 9 Yes leaves this blank.
       "0.line.9_household_employment_taxes": (form) =>
         form["schedule-h.0.line.9_no"] === true ? total(form["schedule-h.0.line.8"]) : undefined,
-      "0.line.11_additional_medicare_tax": (form) =>
+      // MANUAL EDIT: a gap when Form 4563's W-2AS Medicare wages pass the threshold (federal/4563/receivers.ts).
+      "0.line.11_additional_medicare_tax": (form, info) =>
+        additionalMedicareGap(info) ??
         total(form["form-8959.0.line.18_total_additional_medicare_tax"]),
       "0.line.12_net_investment_income_tax": (form) => total(form["form-8960.0.line.17"]),
       "0.line.8_additional_tax_iras_tax_favored_accounts": (_, info) => line8(info),
@@ -337,10 +344,11 @@ export function register(): void {
         const received = line20From965A(info);
         return received === "none" ? unsupported(NO_SECTION_965) : received;
       },
-      "1.line.21_total_other_taxes": (form) =>
+      "1.line.21_total_other_taxes": (form, info) =>
         form["schedule-h.0.line.9_yes"] === true
           ? undefined
-          : total(
+          : (otherTaxesGap(info) ??
+            total(
               form["0.line.4_self_employment_tax"],
               form["0.line.7_total_additional_ss_medicare_tax"],
               form["0.line.8_additional_tax_iras_tax_favored_accounts"],
@@ -353,7 +361,7 @@ export function register(): void {
               form["0.line.16_recapture_low_income_housing_credit"],
               form["1.line.18_total_additional_taxes"],
               form["1.line.19_recapture_net_epe_form4255_line1d"],
-            ),
+            )),
     },
 
     unsupported: {

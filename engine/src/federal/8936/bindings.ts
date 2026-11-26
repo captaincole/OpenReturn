@@ -23,7 +23,7 @@ type K1Code = "newVehicleCodeAY" | "commercialCodeAZ";
 /* Lines 1a–2 print once a vehicle reaches Schedule A line 8c or 13b; lines 3a–5 once one reaches 8d or 13c. */
 const reaches = (form: Accessor, info: Info, step: number) => partIReach(form, info) >= step;
 
-function part2025(form: Accessor, info: Info, pick: "line1a" | "line1b" | "line2") {
+function part2025(form: Accessor, info: Info, pick: "line1a" | "line1b" | "line1e" | "line2") {
   if (!reaches(form, info, 1)) return undefined;
   return line2Of(form, info)?.[pick];
 }
@@ -70,15 +70,14 @@ export function register(): void {
       "0.line.1a_2025_form_1040_line_11a": (form, info) => part2025(form, info, "line1a"),
       "0.line.1b_2025_puerto_rico_income_excluded": (form, info) => part2025(form, info, "line1b"),
       "0.line.1c_2025_form_2555_line_45": (form, info) =>
-        reaches(form, info, 1) ? excludedIncomeGap(info, "2555") : undefined,
+        reaches(form, info, 1) ? excludedIncomeGap(info) : undefined,
       "0.line.1d_2025_form_2555_line_50": (form, info) =>
-        reaches(form, info, 1) ? excludedIncomeGap(info, "2555") : undefined,
-      "0.line.1e_2025_form_4563_line_15": (form, info) =>
-        reaches(form, info, 1) ? excludedIncomeGap(info, "4563") : undefined,
+        reaches(form, info, 1) ? excludedIncomeGap(info) : undefined,
+      // MANUAL EDIT: line 1e, "Enter any amount from Form 4563, line 15", every copy (credit.ts line2Of).
+      "0.line.1e_2025_form_4563_line_15": (form, info) => part2025(form, info, "line1e"),
       "0.line.2_2025_magi": (form, info) => {
         if (!reaches(form, info, 1)) return undefined;
-        const gap = excludedIncomeGap(info, "2555") ?? excludedIncomeGap(info, "4563");
-        return gap ?? line2Of(form, info)?.line2;
+        return excludedIncomeGap(info) ?? line2Of(form, info)?.line2;
       },
       "0.line.3a_2024_form_1040_line_11": (form, info) => part2024(form, info, "agi"),
       "0.line.3b_2024_puerto_rico_income_excluded": (form, info) =>

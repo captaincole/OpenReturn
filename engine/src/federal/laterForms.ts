@@ -2,8 +2,8 @@
  * The federal form groups that came after filingInfo.ts reached its line
  * limit: the recapture forms, the farm forms, the debt forms, the community
  * property forms, the loss forms, the refund forms, the self-employed forms, the home credit
- * forms, the long-term contract forms and the foreign corporation forms. They are joined
- * here, in this order, and
+ * forms, the long-term contract forms, the foreign corporation forms and the territory
+ * forms. They are joined here, in this order, and
  * filingInfo.ts takes them as one. A new group file adds its resolvers (and its
  * type, when FilingInfo needs it) here, never to filingInfo.ts. California has
  * the same file in state/ca/laterForms.ts.
@@ -31,6 +31,7 @@ import { LOSS_FORMS_RESOLVERS } from "./lossForms.js";
 import { RECAPTURE_FORMS_RESOLVERS, type RecaptureFormsFilingInfo } from "./recaptureForms.js";
 import { REFUND_FORMS_RESOLVERS, type RefundFormsFilingInfo } from "./refundForms.js";
 import { SELF_EMPLOYED_RESOLVERS, type SelfEmployedFilingInfo } from "./selfEmployedForms.js";
+import { TERRITORY_FORMS_RESOLVERS, type TerritoryFormsFilingInfo } from "./territoryForms.js";
 
 export type LaterFederalFormsFilingInfo = RecaptureFormsFilingInfo &
   FarmFormsFilingInfo &
@@ -39,7 +40,8 @@ export type LaterFederalFormsFilingInfo = RecaptureFormsFilingInfo &
   SelfEmployedFilingInfo &
   HomeCreditFormsFilingInfo &
   ContractFormsFilingInfo &
-  ForeignCorporationFormsFilingInfo;
+  ForeignCorporationFormsFilingInfo &
+  TerritoryFormsFilingInfo;
 
 export const LATER_FEDERAL_FORMS_RESOLVERS: ReadonlyArray<
   (inputs: ResolverInputs) => BaseFilingInfo
@@ -54,4 +56,5 @@ export const LATER_FEDERAL_FORMS_RESOLVERS: ReadonlyArray<
   ...HOME_CREDIT_FORMS_RESOLVERS,
   ...CONTRACT_FORMS_RESOLVERS,
   ...FOREIGN_CORPORATION_FORMS_RESOLVERS,
+  ...TERRITORY_FORMS_RESOLVERS,
 ];

@@ -4,6 +4,7 @@ import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
 import { exclusionTotal, files2555, housingDeductionTotal } from "../2555/results.js";
+import { form4563Line15Total, form4563Waits } from "../4563/results.js";
 import type { Schedule1AFilingInfo } from "./filingInfo.js";
 import type { FormSchedule1A } from "./types.js";
 
@@ -74,6 +75,8 @@ export function register(): void {
         files2555(info) ? exclusionTotal(form, info) : unsupported(NO_FORM_2555_LINE_45),
       "0.line.2c_form_2555_line_50": (_, info) =>
         files2555(info) ? housingDeductionTotal(info) : unsupported(NO_FORM_2555_LINE_50),
+      // MANUAL EDIT: line 2d, "Enter the amount from Form 4563, line 15", every person's form; blank without it.
+      "0.line.2d_form_4563_line_15": (_, info) => form4563Line15Total(info),
       // Part I: complete lines 2a–2e only with Puerto Rico, Form 2555 or Form 4563 exclusions.
       "0.line.2e_total_excluded_income": (form) => {
         const parts = [
@@ -84,10 +87,10 @@ export function register(): void {
         ];
         return parts.some((part) => typeof part === "number") ? sum(...parts) : undefined;
       },
-      // Without exclusions, line 3 is Form 1040 line 11b and line 2e stays blank.
-      "0.line.3_modified_agi": (form) => {
+      // Without exclusions, line 3 is Form 1040 line 11b and line 2e stays blank; it waits while Form 4563 waits.
+      "0.line.3_modified_agi": (form, info) => {
         const line1 = form["0.line.1_agi_form_1040"];
-        if (typeof line1 !== "number") return undefined;
+        if (typeof line1 !== "number" || form4563Waits(info)) return undefined;
         return sum(line1, form["0.line.2e_total_excluded_income"]);
       },
       "1.line.31_magi_from_line_3": (form, info) => {
@@ -146,8 +149,6 @@ export function register(): void {
     unsupported: {
       "0.line.2a_puerto_rico_excluded_income":
         "No fact records Puerto Rico income that a bona fide resident excluded.",
-      "0.line.2d_form_4563_line_15":
-        "No Form 4563 American Samoa income exclusion facts or scenario exist yet.",
       // Parts II–IV: fill each part only if it applies (part-ii::b02, part-iii::b01, part-iv::b01).
       "0.line.4a_tips_form_w2_box_7": NO_TIPS,
       "0.line.4b_tips_form_4137": NO_TIPS,
