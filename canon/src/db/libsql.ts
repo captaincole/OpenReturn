@@ -1,33 +1,48 @@
 import { createClient, type Client } from "@libsql/client";
 import "dotenv/config";
-import { mkdirSync } from "node:fs";
+import { existsSync, mkdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 /*
- * Set CORPUS_DB_PATH so `mastra dev` and the corpus CLI agree on one file:
- * the module-relative default resolves differently inside Mastra's bundle.
+ * Two library files with the same tables: corpus.db (IRS/FTB instructions and
+ * publications) and law.db (the Internal Revenue Code, an optional download).
+ * Set CORPUS_DB_PATH / LAW_DB_PATH so `mastra dev` and the CLIs agree on one
+ * file: the module-relative default resolves differently inside Mastra's bundle.
  */
+export type Library = "corpus" | "law";
+
 const MODULE_DIR = dirname(fileURLToPath(import.meta.url));
-const DEFAULT_DB_PATH = resolve(MODULE_DIR, "../../.data/corpus.db");
+const DEFAULT_DB_PATHS: Record<Library, string> = {
+  corpus: resolve(MODULE_DIR, "../../.data/corpus.db"),
+  law: resolve(MODULE_DIR, "../../.data/law.db"),
+};
+const DB_PATH_ENV: Record<Library, string> = { corpus: "CORPUS_DB_PATH", law: "LAW_DB_PATH" };
 
-export function corpusDbPath(): string {
-  return process.env.CORPUS_DB_PATH ? resolve(process.env.CORPUS_DB_PATH) : DEFAULT_DB_PATH;
+export function libraryDbPath(library: Library): string {
+  const fromEnv = process.env[DB_PATH_ENV[library]];
+  return fromEnv ? resolve(fromEnv) : DEFAULT_DB_PATHS[library];
 }
 
-let cached: Client | null = null;
-let schemaReady: Promise<void> | null = null;
+export const corpusDbPath = (): string => libraryDbPath("corpus");
 
-export function getCorpusDb(): Client {
+const clients = new Map<Library, Client>();
+const schemaReady = new Map<Library, Promise<void>>();
+
+export function getLibraryDb(library: Library): Client {
+  const cached = clients.get(library);
   if (cached) return cached;
-  const path = corpusDbPath();
+  const path = libraryDbPath(library);
   mkdirSync(dirname(path), { recursive: true });
-  cached = createClient({ url: `file:${path}` });
-  return cached;
+  const client = createClient({ url: `file:${path}` });
+  clients.set(library, client);
+  return client;
 }
+
+export const getCorpusDb = (): Client => getLibraryDb("corpus");
 
 // Every statement is IF NOT EXISTS, so it is safe on a prebuilt corpus.db.
-const CORPUS_SCHEMA_DDL: string[] = [
+const LIBRARY_SCHEMA_DDL: string[] = [
   `CREATE TABLE IF NOT EXISTS ref_documents (
            doc_id              TEXT PRIMARY KEY,
            title               TEXT NOT NULL,
@@ -38,7 +53,7 @@ const CORPUS_SCHEMA_DDL: string[] = [
            sha256              TEXT NOT NULL,
            total_pages         INTEGER NOT NULL,
            total_chars         INTEGER NOT NULL,
-           -- 'pdf', or 'html' (a cleaned publisher page, which has no pages)
+           -- 'pdf', 'html' (a cleaned publisher page) or 'uslm' (US Code XML); only a pdf has pages
            format              TEXT NOT NULL DEFAULT 'pdf',
            -- YYYY-MM-DD the publisher issued the source (sidecar "published"):
            -- when passages disagree, the newer document wins (askAnswerer)
@@ -124,22 +139,45 @@ async function addMissingColumns(db: Client): Promise<void> {
   }
 }
 
-export function ensureCorpusSchema(): Promise<void> {
-  if (schemaReady) return schemaReady;
-  schemaReady = (async () => {
-    const db = getCorpusDb();
-    // ON DELETE CASCADE needs this per connection; SQLite defaults it off.
-    await db.execute("PRAGMA foreign_keys = ON");
-    await db.batch(CORPUS_SCHEMA_DDL, "write");
-    await addMissingColumns(db);
-    const count = await db.execute(`SELECT count(*) AS n FROM ref_documents`);
-    if (Number(count.rows[0]?.n ?? 0) === 0) {
-      console.warn(
-        "[corpus] reference corpus is EMPTY — grounding reviews will return " +
-          "needs_more_facts. Run `npm run corpus -- fetch` (prebuilt) or " +
-          "`npm run corpus -- sync` (rebuild, needs ANTHROPIC_API_KEY + Ollama).",
-      );
-    }
-  })();
-  return schemaReady;
+export function ensureLibrarySchema(library: Library): Promise<void> {
+  const ready = schemaReady.get(library);
+  if (ready) return ready;
+  const created = createSchema(library);
+  schemaReady.set(library, created);
+  return created;
+}
+
+export const ensureCorpusSchema = (): Promise<void> => ensureLibrarySchema("corpus");
+
+/* The schema is ready before the client is handed out. */
+export async function openLibraryDb(library: Library): Promise<Client> {
+  await ensureLibrarySchema(library);
+  return getLibraryDb(library);
+}
+
+async function createSchema(library: Library): Promise<void> {
+  const db = getLibraryDb(library);
+  // ON DELETE CASCADE needs this per connection; SQLite defaults it off.
+  await db.execute("PRAGMA foreign_keys = ON");
+  await db.batch(LIBRARY_SCHEMA_DDL, "write");
+  await addMissingColumns(db);
+  // The law library is optional, so only an empty corpus is worth a warning.
+  if (library === "corpus" && (await documentCount(db)) === 0) {
+    console.warn(
+      "[corpus] reference corpus is EMPTY — grounding reviews will return " +
+        "needs_more_facts. Run `npm run corpus -- fetch` (prebuilt) or " +
+        "`npm run corpus -- sync` (rebuild, needs ANTHROPIC_API_KEY + Ollama).",
+    );
+  }
+}
+
+async function documentCount(db: Client): Promise<number> {
+  const count = await db.execute(`SELECT count(*) AS n FROM ref_documents`);
+  return Number(count.rows[0]?.n ?? 0);
+}
+
+/* Checks the file first: opening a missing law.db would create an empty one. */
+export async function lawInstalled(): Promise<boolean> {
+  if (!existsSync(libraryDbPath("law"))) return false;
+  return (await documentCount(await openLibraryDb("law"))) > 0;
 }
