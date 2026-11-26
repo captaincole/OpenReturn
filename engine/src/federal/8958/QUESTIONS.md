@@ -26,6 +26,18 @@ Form 8958 lists the community and separate items of a separate return, and how e
 
 11. **The RDP's name and SSN.** The form names the "Spouse's or partner's" name and SSN. An RDP's partner uses the spouse identity facts (`SPOUSE_KEYS`). Form 1040 prints the spouse only on a joint or separate married return, so a single RDP's Form 1040 does not show the partner.
 
+12. **Line 5 for a married sole proprietor.** Sole proprietorship income that is community income splits evenly (`irs-8958-form-2025::sec::identifying-income-and-deductions::b01`). For spouses, "self-employment tax is imposed on the spouse carrying on the trade or business" (`::credits-taxes-and-payments::b01`). Line 5 shows the income-tax split (half each); only lines 9 and 10 follow the self-employment tax rule. A reader who puts all of line 5 in the owner's column moves half the profit ($20,000 on a $40,000 business). Default: half each. The blind fill read it the same way.
+
+13. **Withholding on a W-2 that spans the wedding date.** The W-2 shows one withholding amount for the year. The engine divides it as the wages divide (with $15,000 of $60,000 earned before the marriage, a quarter of the withholding is the filer's separate credit). Withholding by pay period could differ from that ratio. Default: the wage ratio; a different split needs two items, one per period. The blind fill read it the same way.
+
+14. **Separate property income of spouses living apart.** In Idaho, Louisiana, Texas and Wisconsin, income from separate property is community income (`irs-pub-555-2025::sec::in-idaho-louisiana-texas-and-wisconsin-in::b15`). When the living-apart rules apply, "Treat income from the separate property of one spouse as the income of that spouse" (`irs-pub-555-2025::sec::community-property-laws::b06`). The engine applies the living-apart rule first, as the George and Sharon example does (`irs-pub-555-2025::sec::george-sharon::b01`): $1,000 of dividends stays with the owner, not $500 each. The blind fill read it the same way.
+
+## Second opinions
+
+- **Blind fill (2026-11-26).** 14 cases, 81 cells, filled by hand from the blank form, its instructions and Pub. 555. Every cell matches the engine, including the odd-dollar rows (cases 1, 13, 14), the pension by months (case 5), the self-employment tax for spouses and RDPs (cases 6, 7), the living-apart rules (cases 8, 9) and joint estimated tax (cases 10, 11). Its dollar doubts are doubts 2, 5, 12, 13 and 14 here.
+- **PolicyEngine-US 2.154.0 (commit 363e9fc5, 2026-11-25).** It does not model Form 8958 or any community property allocation: no variable or parameter names community property, separate property or Form 8958. Its one overlap is line 9: `self_employment_tax_ald_person` is each person's self-employment tax times `percent_deductible` (0.5). That matches the engine's `DEDUCTIBLE_SE_TAX_RATE` (Schedule SE line 13) and the rule that the deductible part follows the person who owes the tax. It figures self-employment tax per person, so it cannot check the RDP split (doubt 3). No disagreement.
+- **IRS Direct File.** The repository names no checkout of its tax logic, so it was not compared.
+
 ## Proposals for a discussion
 
 **The return should take column B.** Pub. 555: "On the appropriate lines of your separate return, list only your share of the income and deductions" (`irs-pub-555-2025::sec::separate-return-preparation::b01`). Today the return reads the filer's own documents in full: Form 1040 line 1a is the filer's W-2, not half of both spouses' community wages. Form 8958 is a statement next to it. The two agree only when the couple's community items balance, as in the made-up taxpayer `careane`. The change would be a community property layer between the facts and the forms:
