@@ -10,7 +10,7 @@ scenarios.
 
 Each is decided by the author, with a `DECISION` comment and a row in `docs/rule-decisions.md`.
 
-### 1. Line 7 carries only the part the $5,000,000 limit disallowed (A68)
+### 1. Line 7 carries only the part the $5,000,000 limit disallowed (A77)
 
 - Text A, the texts written for this credit: "Generally, there is no provision for carryover of any unused Prison Inmate Labor Credit to succeeding taxable years, and in no event can taxpayers carry this back and apply it against a prior year's tax. However, for taxable years 2024 through 2026, taxpayers are allowed to carryover the amount of credit disallowed due to the $5,000,000 business credit limitation" (`ca-3507-form-2025::sec::credit-limitation::b02`). The Schedule P (540) face lists the credit under "A1 Credits that reduce excess tax and have no carryover provisions", and its column (d) is shaded (`ca-540-sched-p-face-2025::sec::face-part-iii::b01`). Schedule P (540): "only the disallowed portion of the credit may be carried over" (`ca-540-sched-p-inst-2025::sec::section-a1-instructions::b01`).
 - Text B: line 7, "Credit limited by your tax liability cannot be included in an election for refundable credit. ... They can, however, be carried over for future years. Include any such amounts here" (`ca-3507-form-2025::sec::line-7::b01`), and the form's arithmetic, line 5 less lines 6a to 6c.

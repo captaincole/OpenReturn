@@ -12,7 +12,7 @@ import {
 } from "../../../resolverInputs.js";
 import { prisonLaborCreditFactKeys } from "../3507/resolveInfo.js";
 import { claimsCaPriorYearAmtCredit } from "../3510/resolveInfo.js";
-import { moreThanTwoCreditsFallback } from "./creditCount.js";
+import { filmSectionA2Fallback, moreThanTwoCreditsFallback } from "./creditCount.js";
 import type { SchedulePFilingInfo } from "./filingInfo.js";
 
 /*
@@ -76,6 +76,7 @@ export function resolveSchedulePInfo(inputs: ResolverInputs): SchedulePFilingInf
         triggeredByDecisionKeys: ["decisions.scope.must_file_ca_540"],
       },
       moreThanTwoCreditsFallback(inputs, files540),
+      filmSectionA2Fallback(inputs, files540),
     ],
   });
   const files = resolution.value === true;

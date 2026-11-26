@@ -173,7 +173,8 @@ function headingParts(heading: string): { number: string; catchline: string } {
   return { number, catchline: space < 0 ? "" : afterMark.slice(space + 1).trim() };
 }
 
-const sectionNumber = (heading: string): string => headingParts(heading).number;
+/** "§ 469. Passive activity losses…" → "469"; "§ 1.469-5T Material…" → "1.469-5T". */
+export const sectionNumber = (heading: string): string => headingParts(heading).number;
 
 /** "§ 469. Passive activity losses and credits limited" → "Passive activity losses and credits limited". */
 export const catchlineOf = (heading: string): string => headingParts(heading).catchline;

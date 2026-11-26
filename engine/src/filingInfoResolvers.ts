@@ -12,6 +12,7 @@ import {
 } from "./facts/index.js";
 import { resolve4137Info } from "./federal/4137/resolveInfo.js";
 import { resolve4255Info } from "./federal/4255/resolveInfo.js";
+import { form8959OrForm4563ReachesSchedule2 } from "./federal/4563/receivers.js";
 import { resolve4797Info } from "./federal/4797/resolveInfo.js";
 import { form4970ReachesSchedule2, resolve4970Info } from "./federal/4970/resolveInfo.js";
 import { scheduleTwoNeededForEarlyDistributions } from "./federal/5329/resolveInfo.js";
@@ -29,12 +30,12 @@ import { resolve8919Info } from "./federal/8919/resolveInfo.js";
 import { cleanVehicleSchedules } from "./federal/8936/resolveInfo.js";
 import { planForm8949Copies, totalsByBox } from "./federal/8949/copyPlan.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
-import { resolve8959Info } from "./federal/8959/resolveInfo.js";
 import type { Form8960FilingInfo } from "./federal/8960/filingInfo.js";
 import { installmentSalesWithoutTradeOrBusinessAnswer } from "./federal/8960/line5b.js";
 import { NIIT_THRESHOLDS, rentalsWithoutTradeOrBusinessAnswer } from "./federal/8960/lines.js";
 import { investmentSignals, magiUpperBound } from "./federal/8960/mustFile.js";
 import { resolve8962Info } from "./federal/8962/resolveInfo.js";
+import { form965AReachesSchedule2 } from "./federal/965-a/receivers.js";
 import {
   k1KeysWithRoute,
   receivedAt,
@@ -440,7 +441,8 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
     resolveScheduleSEInfo(inputs).mustFile?.["schedule-se"]?.value,
     resolve4137Info(inputs).mustFile?.["form-4137"]?.value,
     resolve8919Info(inputs).mustFile?.["form-8919"]?.value,
-    resolve8959Info(inputs).mustFile?.["form-8959"]?.value,
+    // Form 8959, or a Form 4563 gap on line 4 or 11 (federal/4563/receivers.ts), so it shows.
+    form8959OrForm4563ReachesSchedule2(inputs),
     resolve8960Info(inputs).mustFile?.["form-8960"]?.value,
     resolveScheduleHInfo(inputs).mustFile?.["schedule-h"]?.value,
     resolve6251Info(inputs).mustFile?.["form-6251"]?.value,
@@ -460,6 +462,8 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
     form8611ReachesSchedule2(resolve8611Info(inputs)),
     // Form 4255 line 3 columns (q) and (r) (lines 1d–1f, 1y, 17a, 17z, 19).
     resolve4255Info(inputs).mustFile?.["form-4255"]?.value,
+    // Form 965-A Part II Totals, column (k) (line 20), a payment for 2025 or a gap.
+    form965AReachesSchedule2(inputs),
   ];
   const required = feeders.some((value) => value === true);
   const open = !required && feeders.some((value) => value === undefined);
@@ -469,12 +473,10 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
       ? []
       : [
           {
-            rule: "fallback: Schedule SE (line 4), Form 4137 (line 5), Form 8919 (line 6), Form 8959 (line 11), Form 8960 (line 12), Schedule H (line 9), Form 6251 (line 2), Form 8962 (line 1a), or an early distribution tax (line 8) is required, or Form 8853 has an additional tax (lines 17e and 17f), or a clean vehicle credit was transferred (lines 1b, 1c), or Form 4970 has a partial tax (line 17l), or Form 4255 is filed (lines 1d–1f, 1y, 17a, 17z, 19)",
+            rule: "fallback: Schedule SE (line 4), Form 4137 (line 5), Form 8919 (line 6), Form 8959 (line 11), Form 8960 (line 12), Schedule H (line 9), Form 6251 (line 2), Form 8962 (line 1a), or an early distribution tax (line 8) is required, or Form 8853 has an additional tax (lines 17e and 17f), or a clean vehicle credit was transferred (lines 1b, 1c), or Form 4970 has a partial tax (line 17l), or Form 4255 is filed (lines 1d–1f, 1y, 17a, 17z, 19), or Form 965-A has a 2025 installment (line 20)",
             value: required,
           },
         ],
   });
-  return {
-    mustFile: { "schedule-2": resolution },
-  };
+  return { mustFile: { "schedule-2": resolution } };
 }

@@ -55,7 +55,7 @@ export const CA_PRISON_INMATE_LABOR_KEYS = {
   /*
    * Line 4: "the amount of credit carryover from 2024", the 2024 FTB 3507 line 7
    * (ca-3507-form-2025::sec::line-4::b01). A number; 0 when none. Only the
-   * credit the $5,000,000 limit disallowed carries over (decision A68 in
+   * credit the $5,000,000 limit disallowed carries over (decision A77 in
    * state/ca/3507/bindings.ts); the engine takes the amount as stated.
    */
   carryover: "prior_year.ca_prison_inmate_labor_credit_carryover",

@@ -14,7 +14,7 @@ against the forms and their instructions, then the engine's output was locked.
   prison inmate labor credit and a $1,500 PTE elective tax credit.
 - Her 2024 FTB 3507 line 7 carried $300 to 2025. The engine takes the
   carryover as she states it (item 7 of `state/ca/3507/QUESTIONS.md`). Under
-  decision A68 a real carryover comes only from the $5,000,000 limit, so the
+  decision A77 a real carryover comes only from the $5,000,000 limit, so the
   amount tests line 4's arithmetic, not a likely return.
 - She paid $38,000 of federal and $4,000 of California estimated tax.
 

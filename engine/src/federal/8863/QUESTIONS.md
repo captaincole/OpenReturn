@@ -61,7 +61,7 @@ Each item is a place where the form and its instructions do not settle a rule. I
 ## 10. MAGI add-backs
 
 - Text: with Form 2555 or 4563, or income excluded from Puerto Rico, add the excluded income to line 11b (`line-3::b01`, `line-14::b01`; Pub. 970 Worksheets 2-1 and 3-1).
-- Default: with Form 2555 or 4563 filed, lines 3–9 and 11–19 are unsupported (lines 11 and 12 come with the part), and so are Form 1040 line 29 and Schedule 3 line 3. No fact holds a Puerto Rico exclusion, so the engine cannot see one.
+- Default: with Form 4563 filed, lines 3 and 14 add its line 15 (every copy). With Form 2555 filed, lines 3–9 and 11–19 are unsupported (lines 11 and 12 come with the part), and so are Form 1040 line 29 and Schedule 3 line 3. No fact holds a Puerto Rico exclusion, so the engine cannot see one.
 - Changes dollars: yes, for those filers only.
 
 ## 11. Who files: AGI from facts, and a lone Form 1098-T
@@ -119,7 +119,7 @@ Each item is a place where the form and its instructions do not settle a rule. I
   - Differs, form decides, no change:
     - Line 7: PolicyEngine makes 40% refundable for every filer. The form takes the refundable part away from a filer under 24 who meets conditions 1, 2 and 3 (`line-7::b02`). The engine follows the form; PolicyEngine lacks this rule.
     - Lines 6 and 17: PolicyEngine uses the exact ratio. The form rounds it "to at least three places" (item 4); at most $1.
-    - Lines 3 and 14: PolicyEngine adds back the section 911, 931 and 933 exclusions. The engine makes the lines unsupported with Form 2555 or 4563 (item 10). This is the same rule, with the engine's gap stated.
+    - Lines 3 and 14: PolicyEngine adds back the section 911, 931 and 933 exclusions. The engine adds the section 931 exclusion (Form 4563 line 15) and makes the lines unsupported with Form 2555 (item 10). This is the same rule, with the engine's gap stated.
     - Worksheet line 4: PolicyEngine uses its tax before credits. The form says Form 1040 line 18 (`credit-limit-worksheet::b01`). The engine fills the form.
     - The order: PolicyEngine limits the American opportunity part first, then the lifetime learning credit. The worksheet limits their sum (line 3). The total is the same.
     - Who cannot claim: PolicyEngine holds a dependency bar and a bar after a denied or reckless claim (`american-opportunity-credit::b01`: "Don't claim the American opportunity credit for 2 years after there was a final determination that your claim was due to reckless or intentional disregard of the rules or 10 years after..."). No engine fact holds either; Cade asks (item 8). The improper-claim bar and Form 8862 are not modeled.
@@ -139,4 +139,4 @@ Each item is a place where the form and its instructions do not settle a rule. I
 | Line 7 box, lines 7–9 | published examples with numbers (Bill, Jane); the line 7 questions are a stated rule; ages own reading (item 9) |
 | Lines 18–19, Credit Limit Worksheet | published examples with numbers (Bill, Jane, Judy); line 6 floor own reading (item 3) |
 | Form 1040 line 29, Schedule 3 line 3 | stated rule |
-| Lines 3–9 and 11–19 with Form 2555 or 4563; line 19 with foreign tax, Form 1116 or 8978 | unsupported |
+| Lines 3–9 and 11–19 with Form 2555; line 19 with foreign tax, Form 1116 or 8978 | unsupported |

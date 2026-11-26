@@ -27,7 +27,7 @@ engine has no California K-1, so this scenario tests the credits alone.
 - The credit is more than the tax above tentative minimum tax. Schedule P
   (540) line 4 column (b) stops at line 3. The rest is lost: FTB 3507 line 7
   carries only the part the $5,000,000 limit disallowed, and here that is 0
-  (decision A68 in `docs/rule-decisions.md`).
+  (decision A77 in `docs/rule-decisions.md`).
 - Section B starts from TMT: line 11 is line 2 plus a column (c) of 0.
 - Schedule S line 2 leaves out code 162's credit along with the others.
 - Three other credits: Form 540 line 45 holds them; lines 43 and 44 stay blank.

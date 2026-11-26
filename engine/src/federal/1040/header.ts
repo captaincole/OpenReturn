@@ -6,6 +6,7 @@
 import type { BindingFn, FormAccessor } from "../../defineForm.js";
 import type { DependentCredit, DependentFactValue } from "../../facts/kinds/dependents.js";
 import { ssn } from "../../values.js";
+import { files4563 } from "../4563/results.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import type { Form1040 } from "./types.js";
 
@@ -17,13 +18,18 @@ type RowBinding = (form: FormAccessor<Form1040>, info: Form1040FilingInfo) => un
  * main home can be any location where you regularly live"
  * (irs-1040-inst-2025::sec::yes-continue-no-stop-11::b01): a Form 2555 whose
  * qualifying period holds more than half of 2025 (lines 31 and 38) leaves it
- * blank, as the box covers both spouses on a joint return.
+ * blank, as the box covers both spouses on a joint return. So does a Form
+ * 4563: its filer was a bona fide resident of American Samoa all year, and
+ * "The United States means the 50 states and the District of Columbia. It
+ * doesn't include Puerto Rico or U.S. territories"
+ * (irs-1040-inst-2025::sec::definitions-and-special-rules-2::b12).
  */
 const HALF_OF_2025_DAYS = 182;
 
 export const headerMainHomeUsOverHalfYear = (_: unknown, info: Form1040FilingInfo) => {
   const abroad = (info.form2555Filers ?? []).some((filer) => filer.days > HALF_OF_2025_DAYS);
   if (abroad && info.mustFile?.["form-2555"]?.value === true) return undefined;
+  if (files4563(info)) return undefined;
   return info.homeAddressState ? true : undefined;
 };
 

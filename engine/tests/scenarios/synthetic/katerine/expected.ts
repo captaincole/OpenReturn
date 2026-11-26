@@ -159,7 +159,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "form-3507.0.line.6a_credit_claimed": 9267,
       /*
        * Verified zeros: she pays no wages (1, 2), no 2024 credit (4), not a corporation (6b), no election (6c),
-       * and no carryover (7): the 2,733 the tax could not use is lost, and the $5,000,000 limit disallowed nothing (decision A68).
+       * and no carryover (7): the 2,733 the tax could not use is lost, and the $5,000,000 limit disallowed nothing (decision A77).
        */
       "form-3507.0.line.7_disallowed_credit_carryover": 0,
       "form-3507.0.line.1_total_qualifying_wages": 0,

@@ -80,7 +80,7 @@ export interface Line25WorksheetInput {
 /*
  * The MAGI Worksheet—Line 25, lines 1–6
  * (irs-8839-inst-2025::sec::modified-adjusted-gross-income-magi-worksheet-line-25::b01, b02).
- * The Form 2555, Form 4563 and Puerto Rico additions are gaps the caller checks.
+ * The caller adds Form 4563 line 15; the Form 2555 and Puerto Rico additions are gaps it checks.
  */
 export function line25ModifiedAgi(input: Line25WorksheetInput): number {
   const line4 = input.wagesWithoutLine1f + input.line23 + input.otherIncome;

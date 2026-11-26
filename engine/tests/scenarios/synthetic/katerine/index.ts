@@ -3,7 +3,7 @@
  * three other credits (a pass-through prison inmate labor credit, Utah tax,
  * PTE elective tax). The prison inmate labor credit is more than the tax above
  * tentative minimum tax; the rest is lost, so FTB 3507 line 7 is 0 (decision
- * A68), and Form 540 line 45 takes the three credits. No answer key: the expected values are
+ * A77), and Form 540 line 45 takes the three credits. No answer key: the expected values are
  * hand-checked, locked engine output.
  */
 

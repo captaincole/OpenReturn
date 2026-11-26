@@ -7,6 +7,8 @@ import { roundDollars, sum, sumOrBlank } from "../../../money.js";
 import { unsupported } from "../../../types.js";
 import { caEitcOutcome, creditLine, NONE, type CaCreditOutcome } from "../3514/credit.js";
 import { fytcOutcome, yctcOutcome } from "../3514/youngChildAndFosterYouth.js";
+import { files3541 } from "../3541/creditUsed.js";
+import { refundableFilmCredit, refundableFilmCreditWaits } from "../3541/partIV.js";
 import type { Form540FilingInfo } from "./filingInfo.js";
 import type { Form540Form, Form540Line } from "./form540Binding.js";
 
@@ -42,6 +44,20 @@ export const line72CaEstimatedTaxPayments: Form540Line<"line.72_ca_estimated_tax
 ) => roundDollars(info.caEstimatedAndOtherPayments);
 
 /*
+ * Line 74: "Enter your Refundable Program 4.0 California Motion Picture and
+ * Television Production Credit from form FTB 3541 ... line 25"
+ * (ca-540-inst-2025::sec::line-74-refundable-program-4-0-california-motion-picture-and-television-production-credit::b01).
+ * With no FTB 3541, main's reason, word for word; blank with no election.
+ */
+const LINE_74_UNSUPPORTED = unsupported(
+  "CA Motion Picture and Television Production Credit (FTB 3541) requires allocation/certification data from the California Film Commission — no ingestion path or scenario built yet.",
+);
+export const line74MotionPictureProductionCredit: Form540Line<
+  "line.74_motion_picture_production_credit"
+> = (form, info) =>
+  files3541(info) ? refundableFilmCredit((id) => form[id], info) : LINE_74_UNSUPPORTED;
+
+/*
  * MANUAL EDIT: lines 75–77 take FTB 3514 lines 20, 28 and 39
  * (ca-540-inst-2025, lines 75–77; ca-3514-inst-2025::sec::part-iii-your-earned-income-tax-credit::b01,
  * ::line-28-young-child-tax-credit::b01, ::line-39-foster-youth-tax-credit::b01).
@@ -68,6 +84,13 @@ export const line78TotalPayments: Form540Line<"line.78_total_payments"> = (form,
   // A credit the engine cannot figure would count as 0: the total is not known either.
   const gap = credits.find((outcome) => outcome.kind === "unsupported");
   if (gap?.kind === "unsupported") return unsupported(gap.reason);
+  // FTB 3541 files: its refundable credit waits or has a gap, as the FTB 3514 credits do.
+  if (files3541(info)) {
+    const read = (id: string) => form[id];
+    const refundable = refundableFilmCredit(read, info);
+    if (typeof refundable === "object") return refundable;
+    if (refundableFilmCreditWaits(read, info)) return undefined;
+  }
   return sum(
     form["line.71_ca_income_tax_withheld"],
     form["line.72_ca_estimated_tax_payments"],

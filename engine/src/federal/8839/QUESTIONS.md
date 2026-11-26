@@ -68,7 +68,7 @@ choice changes a dollar amount.
 | A foreign child not final at the end of 2025 | more-than-three-eligible-children::b09; the-hague-convention…::b01 | The benefits go on 1040 line 1f outside the form. |
 | Benefits before 2025 for a foreign child final in 2025 | exclusion-of-prior-year-benefits-worksheet::b01–b03 | The worksheet's line 9 goes on no line the instructions name. |
 | Schedule 8812 Credit Limit Worksheet B | credit-limit-worksheet-line-17::b01; irs-1040s8-inst-2025::sec::line-13::b01 | Line 17 reads Worksheet B line 14, which is not modeled. Schedule 3 line 6c and Schedule 8812 line 13 (Worksheet B line 15 → Worksheet A line 4) are then unsupported too. |
-| Form 2555, Form 4563, Puerto Rico income | line-7::b01 | Those forms have no rules; Puerto Rico income has no fact. |
+| Form 2555, Puerto Rico income | line-7::b01 | Lines 7 and 25 do not add Form 2555's lines; Puerto Rico income has no fact. Form 4563 line 15 is added. |
 | Social security benefits with Part III | irs-1040-inst-2025::sec::use-the-social-security-benefits::b01 | 1040 line 6b needs the Pub. 915 worksheet. |
 | More than three children | more-than-three-eligible-children::b01 | The columns of a second form are not printed; the totals count every child. |
 

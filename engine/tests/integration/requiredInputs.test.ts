@@ -119,6 +119,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "(the test, line 44's self-employment answer) is missing",
   ],
   [
+    /^american_samoa_exclusion\.(taxpayer|spouse)$/,
+    "each fact is a whole person's Form 4563 (Parts I and II); whether the person is a bona " +
+      "fide resident of American Samoa with income to exclude is Cade's question. Form 4563 " +
+      "lists the fact again while an answer inside it (Part I) is missing",
+  ],
+  [
     /^retirement\.qualified_disaster\.[^.]+$/,
     "each fact is a whole Form 8915-F (one person, one year in which the disasters began); " +
       "whether the taxpayer had a qualified disaster distribution, income spread from an earlier " +
@@ -151,9 +157,20 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],
   [
+    /^section_965\.(inclusion|other_liability|s_corporation|deferred)\.[^.]+$/,
+    "each fact is one whole line of last year's Form 965-A (Part I with its Part II line, a " +
+      "Part III row or a Part IV row); whether one exists is Cade's question. Form 965-A lists " +
+      "a Part III year's Part I line, and a triggered liability whose amount or election is missing",
+  ],
+  [
     /^low_income_housing_recapture\.[^.]+$/,
     "each fact is a whole building's credit recapture (Form 8611); whether the qualified basis " +
       "fell is Cade's question. A K-1 with a recapture asks for its building fact",
+  ],
+  [
+    /^look_back\.long_term_contracts$/,
+    "the fact is the whole look-back computation (Form 8697); whether a long-term contract was " +
+      "completed or adjusted in 2025 is Cade's question",
   ],
   [
     /^trust_accumulation_distribution\.[^.]+$/,
@@ -390,6 +407,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "while an answer inside it (name, number, credit) is missing",
   ],
   [
+    /^ca_film_credit\.[^.]+$/,
+    "each fact is one whole California Film Commission credit certificate (one FTB 3541); " +
+      "whether the taxpayer has one is Cade's question. FTB 3541 lists the fact again while an " +
+      "answer inside it (number, year, copyright number, source, amounts, owner, price) is missing",
+  ],
+  [
     /^ca_passive_credit\.[^.]+$/,
     "each fact is one whole California credit from a passive activity (one FTB 3801-CR " +
       "worksheet row); whether the taxpayer has one is Cade's question. FTB 3801-CR lists the " +
@@ -431,6 +454,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
   [
     /^estimated_tax\.prior_year_overpayment_applied$/,
     "recorded only when the 2024 return applied an overpayment to 2025 estimated tax",
+  ],
+  [
+    /^estimated_tax\.extension_payment$/,
+    "an answer Cade records only when the user paid with Form 4868, an extension payment or " +
+      "Form 2350 (Schedule 3 line 10); Schedule 3 files with it",
   ],
   [
     /^estimated_tax_penalty\.withholding_on\.[^.]+$/,

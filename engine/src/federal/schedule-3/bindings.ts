@@ -18,10 +18,10 @@ import { line6kFrom8912 } from "../8912/credit.js";
 import { personalCredit } from "../8936/credit.js";
 import { line6lFrom8978 } from "../8978/receivers.js";
 import type { Schedule3FilingInfo } from "./filingInfo.js";
+import { line10, line11, line9From8962, partTwoTotal } from "./partTwo.js";
 import type { Schedule3 } from "./types.js";
 
 const NO_SCENARIO = "No scenario uses this credit or payment yet.";
-const LINE_15_WITHOUT_4136 = "Total of lines 9–14, which are not modeled.";
 
 export function register(): void {
   defineForm<Schedule3, Schedule3FilingInfo>("schedule-3", {
@@ -139,24 +139,21 @@ export function register(): void {
         const received = line12From4136(info);
         return received === undefined ? unsupported(NO_SCENARIO) : received.value;
       },
+      // MANUAL EDIT: line 9, Form 8962 line 26 (irs-1040-inst-2025::sec::line-9-3::b02; partTwo.ts).
+      "0.line.9": (form, info) => line9From8962(form, info),
+      // MANUAL EDIT: line 10, the payment with an extension (irs-1040-inst-2025::sec::line-10-4::b01).
+      "0.line.10": (_, info) => line10(info),
       /*
-       * MANUAL EDIT: line 15, "Add lines 9 through 12 and 14". Only line 12 is computed;
-       * lines 9, 10, 11 and 14 are engine gaps that count as 0, as Form 1040 line 32
-       * counts line 31 (federal/4136/QUESTIONS.md). No Form 4136, the old reason.
+       * MANUAL EDIT: line 11, the excess social security tax of each spouse with
+       * two or more employers (irs-1040-inst-2025::sec::line-11-2::b01;
+       * excessSocialSecurity.ts). One employer that withheld too much: no amount.
        */
-      "0.line.15": (form, info) => {
-        const received = line12From4136(info);
-        if (received === undefined) return unsupported(LINE_15_WITHOUT_4136);
-        const line12 = received.value;
-        if (typeof line12 !== "number") return line12;
-        return sum(
-          form["0.line.9"],
-          form["0.line.10"],
-          form["0.line.11"],
-          line12,
-          form["0.line.14"],
-        );
-      },
+      "0.line.11": (_, info) => line11(info),
+      /*
+       * MANUAL EDIT: line 15, "Add lines 9 through 12 and 14", the same total Form
+       * 1040 line 31 takes (partTwo.ts). Line 14 has no rules and counts as none.
+       */
+      "0.line.15": (form, info) => partTwoTotal(form, info),
       "0.line.5b": (form) => {
         const value = form["form-5695.3.line.32"];
         return typeof value === "number" ? value : undefined;
@@ -202,11 +199,6 @@ export function register(): void {
       "0.line.6e": "Reserved for future use.",
       "0.line.6z_description": NO_SCENARIO,
       "0.line.6z_amount": NO_SCENARIO,
-      "0.line.9":
-        "Net premium tax credit: Form 8962 line 26 is computed, but this line is not bound to it yet.",
-      "0.line.10": "Extension payment: no estimated or extension payment facts yet.",
-      "0.line.11":
-        "Excess social security tax withheld (two or more employers): no scenario reaches the wage base yet.",
       "0.line.13a": NO_SCENARIO,
       "0.line.13b": NO_SCENARIO,
       "0.line.13c": NO_SCENARIO,

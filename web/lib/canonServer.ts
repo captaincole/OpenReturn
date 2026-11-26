@@ -1,4 +1,5 @@
-import type { LawNotInstalled, LawSection, LawStatus } from "./law";
+import type { LawNotInstalled, LawSection, LawSource, LawStatus } from "./law";
+import type { LawToc } from "./lawToc";
 
 /*
  * SERVER-ONLY. Calls Canon from a Server Component or a Route Handler, the
@@ -41,3 +42,10 @@ export const fetchLawSection = (
   section: string,
 ): Promise<CanonResult<LawSection | LawNotInstalled>> =>
   canonGet(`/app/law/sections/${encodeURIComponent(section)}`);
+
+/* One level of the table of contents; with no node, the library's top level. */
+export const fetchLawToc = (
+  source: LawSource,
+  node?: string,
+): Promise<CanonResult<LawToc | LawNotInstalled>> =>
+  canonGet(`/app/law/toc/${source}${node ? `/${encodeURIComponent(node)}` : ""}`);

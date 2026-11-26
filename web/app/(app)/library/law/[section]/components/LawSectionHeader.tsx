@@ -1,6 +1,7 @@
 import { formatPublished } from "@/lib/format";
 import { officialTextUrl, type LawSection } from "@/lib/law";
 import Link from "next/link";
+import { LawCrumbs } from "../../components/LawCrumbs";
 
 // eCFR's page is the current text; the library's copy is dated, so the two can differ.
 const CURRENT_TEXT_NOTE =
@@ -13,9 +14,7 @@ export function LawSectionHeader({ page }: { page: LawSection }) {
       <Link href="/library/law" className="text-[12px] text-ink-muted hover:text-ink-primary">
         ← Law
       </Link>
-      {section.breadcrumbs.length > 0 && (
-        <p className="text-[12px] text-ink-muted">{section.breadcrumbs.join(" › ")}</p>
-      )}
+      <LawCrumbs source={page.source} ancestors={section.breadcrumbs} />
       <div>
         <h1 className="font-serif text-3xl text-ink-primary">{section.citation}</h1>
         <p className="mt-2 font-serif text-xl text-ink-secondary">{section.heading}</p>

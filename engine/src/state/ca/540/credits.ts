@@ -12,6 +12,7 @@ import { unsupported, type Unsupported } from "../../../types.js";
 import { files3507, prisonLaborCreditOnReturn } from "../3507/creditUsed.js";
 import { PRISON_LABOR_CREDIT_CODE, PRISON_LABOR_CREDIT_NAME } from "../3507/lines.js";
 import { files3510, priorYearAmtCreditUsed, priorYearAmtCreditWaits } from "../3510/creditUsed.js";
+import { files3541, filmCreditsUsed } from "../3541/creditUsed.js";
 import { files3801Cr, passiveCreditsUsed } from "../3801-cr/creditUsed.js";
 import { files3804Cr, pteCreditOnReturn } from "../3804-cr/creditUsed.js";
 import { PTE_CREDIT_CODE, PTE_CREDIT_NAME } from "../3804-cr/lines.js";
@@ -79,9 +80,10 @@ function otherStateCreditUsed(form: Form540Form, info: Form540FilingInfo) {
 /*
  * The other credits taken, each from Schedule P (540) column (b) when it is
  * completed (ca-540-sched-p-inst-2025::sec::how-to-claim-your-credits::b01),
- * in Part III order: line 4 (prison inmate labor, FTB 3507), line 10 (prior
- * year AMT), lines 16 to 18 (FTB 3801-CR's
- * passive credits, 3801-cr/creditUsed.ts), line 20 (other state tax), line
+ * in Part III order: line 4 (prison inmate labor, FTB 3507), lines 6 and 7
+ * (FTB 3541's original and new credits), line 10 (prior year AMT), lines 16
+ * to 18 (FTB 3541's other film credits, then FTB 3801-CR's passive credits),
+ * line 20 (other state tax), line
  * 21 (PTE elective tax). "The prior year AMT credit must be applied before
  * any credits that can reduce regular tax below the TMT"
  * (ca-540-sched-p-inst-2025::sec::section-a-instructions::b01), and the PTE
@@ -105,10 +107,18 @@ function otherCredits(
   if (typeof pte !== "number") return pte;
   const passive = passiveCreditsUsed(read, info);
   if (passive === undefined || isGap(passive)) return passive;
+  const film = filmCreditsUsed(read, info);
+  if (film === undefined || isGap(film)) return film;
+  const filmIn = (section: string) =>
+    film
+      .filter((credit) => credit.program.section === section)
+      .map(({ program, used }) => ({ name: program.name, code: program.code, amount: used }));
   const priorYearAmt = files3510(info) ? (priorYearAmtCreditUsed(read) ?? 0) : 0;
   return [
     { name: PRISON_LABOR_CREDIT_NAME, code: PRISON_LABOR_CREDIT_CODE, amount: prisonLabor },
+    ...filmIn("A2"),
     { name: PRIOR_YEAR_AMT_CREDIT_NAME, code: PRIOR_YEAR_AMT_CREDIT_CODE, amount: priorYearAmt },
+    ...filmIn("B2"),
     ...passive.map((credit) => ({ name: credit.name, code: credit.code, amount: credit.used })),
     { name: OTHER_STATE_CREDIT_NAME, code: OTHER_STATE_CREDIT_CODE, amount: otherState },
     { name: PTE_CREDIT_NAME, code: PTE_CREDIT_CODE, amount: pte },
@@ -120,7 +130,8 @@ const filesOtherCreditForm = (info: Form540FilingInfo) =>
   files3510(info) ||
   filesScheduleS(info) ||
   files3804Cr(info) ||
-  files3801Cr(info);
+  files3801Cr(info) ||
+  files3541(info);
 
 /*
  * "To claim only one or two credits, enter the credit name, code, and amount of
