@@ -11,6 +11,7 @@ import {
   readBusinessPropertySaleFacts,
 } from "./facts/index.js";
 import { resolve4137Info } from "./federal/4137/resolveInfo.js";
+import { resolve4255Info } from "./federal/4255/resolveInfo.js";
 import { resolve4797Info } from "./federal/4797/resolveInfo.js";
 import { form4970ReachesSchedule2, resolve4970Info } from "./federal/4970/resolveInfo.js";
 import { scheduleTwoNeededForEarlyDistributions } from "./federal/5329/resolveInfo.js";
@@ -426,7 +427,9 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
  * Default: required when Schedule SE (line 4), Form 4137 (line 5), Form 8919
  * (line 6), Form 8959 (line 11), Form 8960 (line 12), Schedule H (line 9), Form 6251 (line 2) or
  * Form 8962 (line 1a) is filed, an early distribution owes the additional tax
- * (line 8), or Form 8853 has an additional tax for lines 17e and 17f. While
+ * (line 8), Form 8853 has an additional tax for lines 17e and 17f, or Form
+ * 4255 files (its line 3 columns (q) and (r) go on the return,
+ * irs-4255-inst-2025::sec::lines-1-and-2::b02). While
  * none is filed and one is still undecided, Schedule 2 is undecided too. KNOWN
  * GAP: the resolver cannot see Form 6251 line 11 or Form 8962 line 29,
  * so a filed Form 6251 with no AMT, or a Form 8962 with no repayment, still files
@@ -455,6 +458,8 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
     resolve8828Info(inputs).form8828ReachesSchedule2 === true,
     // Form 8611 line 14 (line 16), when a copy has a tax above 0, waits or has a gap.
     form8611ReachesSchedule2(resolve8611Info(inputs)),
+    // Form 4255 line 3 columns (q) and (r) (lines 1d–1f, 1y, 17a, 17z, 19).
+    resolve4255Info(inputs).mustFile?.["form-4255"]?.value,
   ];
   const required = feeders.some((value) => value === true);
   const open = !required && feeders.some((value) => value === undefined);
@@ -464,7 +469,7 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
       ? []
       : [
           {
-            rule: "fallback: Schedule SE (line 4), Form 4137 (line 5), Form 8919 (line 6), Form 8959 (line 11), Form 8960 (line 12), Schedule H (line 9), Form 6251 (line 2), Form 8962 (line 1a), or an early distribution tax (line 8) is required, or Form 8853 has an additional tax (lines 17e and 17f), or a clean vehicle credit was transferred (lines 1b, 1c), or Form 4970 has a partial tax (line 17l)",
+            rule: "fallback: Schedule SE (line 4), Form 4137 (line 5), Form 8919 (line 6), Form 8959 (line 11), Form 8960 (line 12), Schedule H (line 9), Form 6251 (line 2), Form 8962 (line 1a), or an early distribution tax (line 8) is required, or Form 8853 has an additional tax (lines 17e and 17f), or a clean vehicle credit was transferred (lines 1b, 1c), or Form 4970 has a partial tax (line 17l), or Form 4255 is filed (lines 1d–1f, 1y, 17a, 17z, 19)",
             value: required,
           },
         ],

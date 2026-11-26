@@ -4,6 +4,13 @@ import { defineForm } from "../../defineForm.js";
 import { sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { withLaterCopies } from "../4137/laterCopies.js";
+import {
+  boxOf,
+  entryAmount,
+  entryTypes,
+  form4255ForSchedule2,
+  schedule2Line,
+} from "../4255/schedule2.js";
 import { earlyDistributionTax } from "../5329/lines.js";
 import { amtGap } from "../6251/foreignTaxCredit.js";
 import { recaptureTaxForSchedule2 as lowIncomeHousingRecaptureTax } from "../8611/results.js";
@@ -26,6 +33,7 @@ const OTHER_PARTS_OF_5329 =
   "Form 5329 files by decision, but only its Part I (early distributions) is figured; Parts II–IX have no facts.";
 
 const NO_PFIC = "No PFIC (Form 8621) ingestion or scenario yet.";
+const NO_OTHER_RECAPTURE = "No credit-recapture scenario (Forms 8874/8882) yet";
 const NO_OTHER_TAXES = "No miscellaneous other-taxes (PWA penalties, etc.) scenario yet.";
 const SECTION_1294_DEFERRED_TAX = "1294DT";
 const NO_1294_DEFERRED_TAX = `Form 8621 line 23 is blank on every copy (no section 1294 election ends this year), so "${SECTION_1294_DEFERRED_TAX}" adds nothing here; the other taxes of line 17z (PWA penalties, etc.) are not modeled.`;
@@ -55,12 +63,18 @@ function form8621Line(
  * "1294DT" (irs-8621-inst-2025::sec::line-23::b01), and the part of a negative
  * Form 8978 line 14 that Schedule 3 line 6l could not take, as "Form 8978 ADJ"
  * (irs-1040-inst-2025::sec::line-17z::b01, ::line-19-2::b01;
- * federal/8978/receivers.ts). With neither, the line keeps the reason it had.
+ * federal/8978/receivers.ts), and Form 4255's penalties as "PWA7210",
+ * "PWA8933" and "NPWA" (federal/4255/schedule2.ts). With none, the line keeps
+ * the reason it had.
  */
 function line17zEntries(
   form: { readonly [fieldId: string]: unknown },
   info: Schedule2FilingInfo,
 ): Array<[type: string, amount: number]> | Unsupported | undefined {
+  const recapture = form4255ForSchedule2(info);
+  if (recapture === undefined || (typeof recapture === "object" && "unsupported" in recapture))
+    return recapture;
+  const penalties = recapture === "none" ? [] : recapture.line17z;
   const fund = form8621Line(
     info,
     (amounts) => amounts.deferredTaxDue,
@@ -69,12 +83,16 @@ function line17zEntries(
   );
   const fundEntries: Array<[string, number]> =
     typeof fund === "number" ? [[SECTION_1294_DEFERRED_TAX, fund]] : [];
-  const adjustment = line17zAdjustment(form, info, typeof fund === "number" ? fund : 0);
-  if (adjustment === undefined) return typeof fund === "number" ? fundEntries : fund;
-  if (typeof adjustment !== "number") return adjustment;
   const fundGap = info.form8621Totals?.gap;
+  const adjustment = line17zAdjustment(form, info, typeof fund === "number" ? fund : 0);
+  if (adjustment === undefined) {
+    if (typeof fund === "number" || (penalties.length > 0 && fundGap === undefined))
+      return [...fundEntries, ...penalties];
+    return fund;
+  }
+  if (typeof adjustment !== "number") return adjustment;
   if (fundGap !== undefined) return unsupported(fundGap);
-  return [...fundEntries, [FORM_8978_ADJUSTMENT_TYPE, adjustment]];
+  return [...fundEntries, ...penalties, [FORM_8978_ADJUSTMENT_TYPE, adjustment]];
 }
 
 /*
@@ -114,6 +132,40 @@ export function register(): void {
       "0.line.1c_previously_owned_clean_vehicle_credit_repayment": (form, info) =>
         totalOver(form, info, (outcome) =>
           outcome.kind === "repay" && outcome.schedule2Line === "1c" ? outcome.amount : undefined,
+        ),
+      /*
+       * MANUAL EDIT: lines 1d, 1e, 1f and 1y take Form 4255's column (q) amounts
+       * (irs-1040-inst-2025::sec::line-1d-2::b01, ::line-1e-2::b01, ::line-1f-2::b01,
+       * ::line-1y::b01; federal/4255/schedule2.ts). Blank without Form 4255.
+       */
+      "0.line.1d_recapture_net_epe_form4255": (_, info) =>
+        schedule2Line(info, (amounts) => amounts.line1d),
+      "0.line.1e_ep_checkbox_line1a": (_, info) => schedule2Line(info, boxOf("line1eBoxes", "1a")),
+      "0.line.1e_ep_checkbox_line1c": (_, info) => schedule2Line(info, boxOf("line1eBoxes", "1c")),
+      "0.line.1e_ep_checkbox_line1d": (_, info) => schedule2Line(info, boxOf("line1eBoxes", "1d")),
+      "0.line.1e_ep_checkbox_line2a": (_, info) => schedule2Line(info, boxOf("line1eBoxes", "2a")),
+      "0.line.1e_excessive_payments_epe_amount": (_, info) =>
+        schedule2Line(info, (amounts) => amounts.line1e),
+      "0.line.1f_20pct_ep_checkbox_line1a": (_, info) =>
+        schedule2Line(info, boxOf("line1fBoxes", "1a")),
+      "0.line.1f_20pct_ep_checkbox_line1c": (_, info) =>
+        schedule2Line(info, boxOf("line1fBoxes", "1c")),
+      "0.line.1f_20pct_ep_checkbox_line1d": (_, info) =>
+        schedule2Line(info, boxOf("line1fBoxes", "1d")),
+      "0.line.1f_20pct_ep_checkbox_line2a": (_, info) =>
+        schedule2Line(info, boxOf("line1fBoxes", "2a")),
+      "0.line.1f_20pct_ep_amount": (_, info) => schedule2Line(info, (amounts) => amounts.line1f),
+      "0.line.1y_other_additions_description": (_, info) =>
+        entryTypes(
+          info,
+          (amounts) => amounts.line1y,
+          () => undefined,
+        ),
+      "0.line.1y_other_additions_amount": (_, info) =>
+        entryAmount(
+          info,
+          (amounts) => amounts.line1y,
+          () => undefined,
         ),
       "0.line.1z_total_lines_1a_through_1y": (form) =>
         total(
@@ -177,6 +229,25 @@ export function register(): void {
       // MANUAL EDIT: line 16 is Form 8611 line 14, every copy (irs-1040-inst-2025::sec::line-16-3::b01).
       "0.line.16_recapture_low_income_housing_credit": (_, info) =>
         lowIncomeHousingRecaptureTax(info),
+      /*
+       * MANUAL EDIT: line 17a lists Form 4255's column (r) recaptures
+       * (irs-1040-inst-2025::sec::line-17a::b01, ::identify-as-eccfr::b01). With
+       * none, Forms 8874 and 8882 are still not modeled. Line 19 is line 1d column (l).
+       */
+      "1.line.17a_recapture_other_credits_description": (_, info) =>
+        entryTypes(
+          info,
+          (amounts) => amounts.line17a,
+          () => unsupported(NO_OTHER_RECAPTURE),
+        ),
+      "1.line.17a_recapture_other_credits_amount": (_, info) =>
+        entryAmount(
+          info,
+          (amounts) => amounts.line17a,
+          () => unsupported(NO_OTHER_RECAPTURE),
+        ),
+      "1.line.19_recapture_net_epe_form4255_line1d": (_, info) =>
+        schedule2Line(info, (amounts) => amounts.line19),
       // MANUAL EDIT: line 17b is Form 8828 line 23 (irs-1040-inst-2025::sec::line-17b::b01).
       "1.line.17b_recapture_federal_mortgage_subsidy": (form, info) =>
         recaptureTaxForSchedule2(form, info),
@@ -269,23 +340,6 @@ export function register(): void {
     unsupported: {
       "0.header.taxpayer_name":
         "Full name needs first + last name joined together. No single full-name fact exists and lookupFact can't concatenate, and form-1040 has no combined-name field to reference.",
-      "0.line.1d_recapture_net_epe_form4255":
-        "No Form 4255 elective payment election recapture scenario yet.",
-      "0.line.1e_ep_checkbox_line1a": "No Form 4255 excessive payments scenario yet.",
-      "0.line.1e_ep_checkbox_line1c": "No Form 4255 excessive payments scenario yet.",
-      "0.line.1e_ep_checkbox_line1d": "No Form 4255 excessive payments scenario yet.",
-      "0.line.1e_ep_checkbox_line2a": "No Form 4255 excessive payments scenario yet.",
-      "0.line.1e_excessive_payments_epe_amount":
-        "Form 4255 (elective payment election recapture) not ingested; no EPE scenario yet",
-      "0.line.1f_20pct_ep_checkbox_line1a": "Form 4255 not ingested; no EPE scenario yet",
-      "0.line.1f_20pct_ep_checkbox_line1c": "Form 4255 not ingested; no EPE scenario yet",
-      "0.line.1f_20pct_ep_checkbox_line1d": "Form 4255 not ingested; no EPE scenario yet",
-      "0.line.1f_20pct_ep_checkbox_line2a": "Form 4255 not ingested; no EPE scenario yet",
-      "0.line.1f_20pct_ep_amount": "Form 4255 not ingested; no EPE scenario yet",
-      "0.line.1y_other_additions_description":
-        "No scenario for other additions to tax (Form 8911 ARPCR recapture, Form 8933 EPE)",
-      "0.line.1y_other_additions_amount":
-        "No scenario for other additions to tax (Form 8911 ARPCR recapture, Form 8933 EPE)",
       "0.line.4_se_tax_exemption_4361":
         "No self-employment / Form 4361 clergy-exemption scenario modeled yet.",
       "0.line.4_se_tax_exemption_4029":
@@ -300,10 +354,6 @@ export function register(): void {
         "No installment-sale (section 453(l)(3)) scenario yet",
       "0.line.15_interest_deferred_tax_installment_sales":
         "No section 453A(c) installment-sale scenario yet",
-      "1.line.17a_recapture_other_credits_description":
-        "No credit-recapture scenario (Forms 4255/8874/8882) yet",
-      "1.line.17a_recapture_other_credits_amount":
-        "No credit-recapture scenario (Forms 4255/8874/8882) yet",
       "1.line.17g_recapture_charitable_contribution_fractional_interest":
         "No fractional-interest charitable contribution recapture scenario yet",
       "1.line.17h_income_nonqualified_deferred_compensation_409a":
@@ -320,8 +370,6 @@ export function register(): void {
         "No Form 8697/8866 look-back interest scenario yet.",
       "1.line.17o_tax_non_effectively_connected_income_nonresident_alien":
         "No dual-status / nonresident alien (Form 1040-NR) scenario yet.",
-      "1.line.19_recapture_net_epe_form4255_line1d":
-        "No Form 4255 / elective payment election recapture scenario yet.",
       "1.line.20_section_965_net_tax_liability_installment":
         "No section 965 / Form 965-A scenario yet; the deferred installment amount is informational and is not added into line 21.",
     },

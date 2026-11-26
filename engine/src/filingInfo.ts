@@ -54,8 +54,6 @@ import type { Form8582FilingInfo } from "./federal/8582/filingInfo.js";
 import { resolve8582Info } from "./federal/8582/resolveInfo.js";
 import type { Form8606FilingInfo } from "./federal/8606/filingInfo.js";
 import { resolve8606Info } from "./federal/8606/resolveInfo.js";
-import type { Form8611FilingInfo } from "./federal/8611/filingInfo.js";
-import { resolve8611Info } from "./federal/8611/resolveInfo.js";
 import type { Form8615FilingInfo } from "./federal/8615/filingInfo.js";
 import { resolve8615Info } from "./federal/8615/resolveInfo.js";
 import type { Form8621FilingInfo } from "./federal/8621/filingInfo.js";
@@ -66,8 +64,6 @@ import type { Form8814FilingInfo } from "./federal/8814/filingInfo.js";
 import { resolve8814Info } from "./federal/8814/resolveInfo.js";
 import type { Form8815FilingInfo } from "./federal/8815/filingInfo.js";
 import { resolve8815Info } from "./federal/8815/resolveInfo.js";
-import type { Form8828FilingInfo } from "./federal/8828/filingInfo.js";
-import { resolve8828Info } from "./federal/8828/resolveInfo.js";
 import type { Form8829FilingInfo } from "./federal/8829/filingInfo.js";
 import { resolve8829Info } from "./federal/8829/resolveInfo.js";
 import type { Form8839FilingInfo } from "./federal/8839/filingInfo.js";
@@ -112,6 +108,10 @@ import {
 } from "./federal/formsWithNoRules.js";
 import type { QbiFilingInfo } from "./federal/qbi/filingInfo.js";
 import { resolveQbiInfo } from "./federal/qbi/resolveInfo.js";
+import {
+  RECAPTURE_FORMS_RESOLVERS,
+  type RecaptureFormsFilingInfo,
+} from "./federal/recaptureForms.js";
 import { SALE_FORMS_RESOLVERS, type SaleFormsFilingInfo } from "./federal/saleForms.js";
 import type { Schedule1AFilingInfo } from "./federal/schedule-1-a/filingInfo.js";
 import { resolveSchedule1AInfo } from "./federal/schedule-1-a/resolveInfo.js";
@@ -305,8 +305,7 @@ export type FilingInfo = BaseFilingInfo &
   Form8888FilingInfo &
   Form8863FilingInfo &
   Form8938FilingInfo &
-  Form8828FilingInfo &
-  Form8611FilingInfo &
+  RecaptureFormsFilingInfo &
   FederalFormsWithNoRulesFilingInfo &
   LaterCaliforniaFormsFilingInfo &
   CaliforniaFormsWithNoRulesFilingInfo;
@@ -391,8 +390,7 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve8888Info,
   resolve8863Info,
   resolve8938Info,
-  resolve8828Info,
-  resolve8611Info,
+  ...RECAPTURE_FORMS_RESOLVERS,
   ...FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
   ...LATER_CALIFORNIA_FORMS_RESOLVERS,
   ...CALIFORNIA_FORMS_WITH_NO_RULES_RESOLVERS,
