@@ -9,6 +9,7 @@ import {
   BUSINESS_LOSS_LIMIT_KEYS,
   isRentalFactKey,
   makeBusinessFactKey,
+  makeFarmFactKey,
   type RentalFactValue,
   type SCorporationK1FactValue,
 } from "../../../../src/facts/index.js";
@@ -155,10 +156,24 @@ describe("gaps", () => {
     expect(run.value(LINE("2_schedule_1_line_3"))).toBe(42000);
   });
 
-  it("shows line 6 as a gap when Schedule F files", () => {
-    const run = evaluate(base.facts, [decision("decisions.scope.must_file_schedule_f", true)]);
-    expect(run.reason(LINE("6_schedule_1_line_6"))).toContain("Schedule F");
-    expect(run.reason(LINE("9_total_income_loss_items"))).toContain("Schedule F");
+  it("shows line 6 as a gap when a farm's Schedule F line 34 is one (a passive farm)", () => {
+    const farm: TaxFactRow = {
+      ...base.facts[0]!,
+      id: "f-farm",
+      category: "self_employment",
+      key: makeFarmFactKey("orchard"),
+      value: {
+        activity: "Apples",
+        accountingMethod: "cash",
+        materiallyParticipated: false,
+        paymentsRequire1099: false,
+        productSales: 10000,
+        expenses: { supplies: 30000 },
+      },
+    };
+    const run = evaluate([...base.facts, farm]);
+    expect(run.reason(LINE("6_schedule_1_line_6"))).toContain("passive");
+    expect(run.reason(LINE("9_total_income_loss_items"))).toContain("passive");
   });
 });
 

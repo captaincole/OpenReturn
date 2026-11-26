@@ -1,6 +1,7 @@
 import {
   ARMED_FORCES_STORAGE_FEES_KEY,
   businessesOnReturn,
+  farmsOnReturn,
   GAMBLING_KEYS,
   getGamblingWinningsFacts,
   getGovernmentPaymentsFacts,
@@ -21,6 +22,7 @@ import { form8853Reaches, SCHEDULE_1_LINES } from "../8853/results.js";
 import { resolve8889Info } from "../8889/resolveInfo.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
+import { farmsTotal } from "../schedule-f/totals.js";
 import { resolveScheduleSEInfo } from "../schedule-se/resolveInfo.js";
 import { earlyWithdrawalPenalty, educatorExpenseDeduction } from "./adjustments.js";
 import { schedule1Answers } from "./answers.js";
@@ -45,6 +47,9 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
   const hasBusiness =
     onReturn.businesses.length + onReturn.spouseKeys.length + onReturn.malformedKeys.length > 0;
   const businessIncome = scheduleCTotal(onReturn);
+  const farms = farmsOnReturn(inputs.facts, jointReturn);
+  const hasFarm = farms.farms.length + farms.malformedKeys.length > 0;
+  const farmTotal = farmsTotal(farms.farms);
   const w2gs = getGamblingWinningsFacts(inputs.facts);
   const winningsNotOnW2G = num(inputs, GAMBLING_KEYS.winningsNotOnW2G);
   const gamblingWinnings =
@@ -113,6 +118,12 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
       },
       form8621Fallback(inputs),
       form4797Fallback(inputs),
+      // Schedule F line 34 goes on line 6 (irs-1040sf-inst-2025::sec::line-34::b02).
+      {
+        rule: "fallback: a farm fact (Schedule F line 34 on line 6)",
+        value: hasFarm,
+        triggeredByFactKeys: farms.farms.map((farm) => farm.key),
+      },
       // Form 2555 line 45 goes on line 8d and line 50 on line 24j (line-8d::b01, line-24j::b01).
       {
         rule: "fallback: Form 2555 files (lines 8d and 24j)",
@@ -128,6 +139,9 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     },
     businessIncome,
     hasBusiness,
+    farmIncome: farmTotal?.kind === "amount" ? farmTotal.amount : undefined,
+    farmIncomeGap: farmTotal?.kind === "gap" ? farmTotal.reason : undefined,
+    hasFarm,
     unemploymentCompensation,
     rtaaPayments,
     gamblingWinnings,

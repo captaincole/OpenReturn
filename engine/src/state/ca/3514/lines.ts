@@ -74,6 +74,10 @@ export function businessIncome(form: Lines, info: Form3514FilingInfo): number | 
   const line3 = numberOrBlank(form["schedule-1.0.line.3"]);
   const line15 = numberOrBlank(form["schedule-1.1.line.15"]);
   if (info.caEitcHasBusiness === true && line3 === undefined) return undefined;
+  // MANUAL EDIT: line 18 waits for a farm's Schedule 1 line 6 too.
+  if (info.caEitcHasFarm === true && numberOrBlank(form["schedule-1.0.line.6"]) === undefined) {
+    return undefined;
+  }
   if (info.mustFile?.["schedule-se"]?.value === true && line15 === undefined) return undefined;
   return sum(line3, federal(form, "schedule-1.0.line.6")) - sum(line15);
 }

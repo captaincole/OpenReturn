@@ -118,6 +118,25 @@ export function line3Column(info: ScheduleCaFilingInfo, side: "subtraction" | "a
   return positive(total);
 }
 
+const FARM_DEPRECIATION_GAP =
+  "A farm deducts depreciation on federal Schedule F line 14, and California's can differ (ca-540-sched-ca-inst-2025::sec::line-6-farm-income-or-loss::b01): FTB 3885A needs the farm's assets, and the farm fact holds only the federal amount.";
+
+/*
+ * Line 6 columns B and C: the adjustments "generally are necessary because of
+ * the difference between California and federal law relating to depreciation
+ * methods, special credits, NOLs, and accelerated write-offs"
+ * (ca-540-sched-ca-inst-2025::sec::line-6-farm-income-or-loss::b01). A farm with
+ * no depreciation has none of these on line 34: blank. With depreciation the
+ * California amount is not known (a gap). A passive farm, which needs FTB 3801,
+ * is already a gap on federal line 34.
+ */
+export function line6Column(info: ScheduleCaFilingInfo) {
+  const depreciates = (info.farms ?? []).some(
+    (farm) => (farm.value.expenses?.depreciation ?? 0) > 0,
+  );
+  return depreciates ? unsupported(FARM_DEPRECIATION_GAP) : undefined;
+}
+
 export function answerLines(): Bindings {
   const bindings: Record<string, unknown> = Object.fromEntries(
     COPIED.map(([field, federal]) => [field, copy(federal)]),
@@ -139,6 +158,10 @@ export function answerLines(): Bindings {
     // Line 5: FTB 3801's Schedule E adjustment when it files, else FTB 3885A (line5Column).
     "0.line.b5_subtractions": (form, info) => line5Column(form, info, "subtraction"),
     "0.line.b5_additions": (form, info) => line5Column(form, info, "addition"),
+    // MANUAL EDIT: line 6 column A copies Schedule 1 line 6; columns B and C (line6Column).
+    "0.line.b6_federal": copy("0.line.6"),
+    "0.line.b6_subtractions": (_, info) => line6Column(info),
+    "0.line.b6_additions": (_, info) => line6Column(info),
     // Lines 15 and 17 column B: not allowed to a California employee (::line-11-through-line-25::b02).
     "2.line.c15_subtractions": (_, info) =>
       positive(info.caEmployeeAmounts?.selfEmploymentTaxDeduction),

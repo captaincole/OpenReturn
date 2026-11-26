@@ -1,4 +1,4 @@
-import { BUSINESS_LOSS_LIMIT_KEYS } from "../../facts/index.js";
+import { BUSINESS_LOSS_LIMIT_KEYS, farmsOnReturn } from "../../facts/index.js";
 import { roundDollars } from "../../money.js";
 import { filingStatusOf, num, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import { resolve4797Info } from "../4797/resolveInfo.js";
@@ -10,7 +10,7 @@ import { limitContextOf, receivedOnReturn } from "../passThrough/receipts.js";
 import { spousePropertiesOnReturn } from "../rentals/passive.js";
 import { passThroughGaps } from "../schedule-e/partII.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
-import { resolveScheduleFInfo } from "../schedule-f/resolveInfo.js";
+import { farmsTotal } from "../schedule-f/totals.js";
 import { businessLossesOnReturn } from "./businessLosses.js";
 import { rentalAnswerKey, sortK1Items, sortProperties } from "./classify.js";
 import type { Form461Figures, Form461FilingInfo, Form461LineGaps } from "./filingInfo.js";
@@ -24,8 +24,6 @@ import type { Form461Figures, Form461FilingInfo, Form461LineGaps } from "./filin
  */
 const FORM_4797_GAP =
   "Form 4797 files and has no rules yet, so its line 18b, which Schedule 1 line 4 and Form 461 line 4 carry, is not known.";
-const SCHEDULE_F_GAP =
-  "Schedule F files, and the engine has no rules for it: Schedule 1 line 6 (Form 461 line 6) is not known.";
 const FORM_4835_GAP =
   "Form 4835 files, and Schedule E line 40 (farm rental income, part of Form 461 line 5) is not modeled.";
 const OVERFLOW_GAP =
@@ -45,8 +43,17 @@ function lineGaps(inputs: ResolverInputs): Form461LineGaps {
   return {
     line4: decided(resolve4797Info(inputs), "form-4797") ? FORM_4797_GAP : undefined,
     line5: line5.length > 0 ? line5.join(" ") : undefined,
-    line6: decided(resolveScheduleFInfo(inputs), "schedule-f") ? SCHEDULE_F_GAP : undefined,
+    line6: scheduleFGap(inputs),
   };
+}
+
+/* Line 6 is Schedule 1 line 6 (irs-461-inst-2025::sec::line-6::b01): a gap when a farm's line 34 is one. */
+function scheduleFGap(inputs: ResolverInputs): string | undefined {
+  const joint = filingStatusOf(inputs) === "married_filing_jointly";
+  const total = farmsTotal(farmsOnReturn(inputs.facts, joint).farms);
+  return total?.kind === "gap"
+    ? `Schedule 1 line 6 (Form 461 line 6) is not known: ${total.reason}`
+    : undefined;
 }
 
 /*

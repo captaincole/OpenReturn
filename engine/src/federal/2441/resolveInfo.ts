@@ -2,6 +2,8 @@ import {
   DEPENDENT_CARE_KEYS,
   ageAtYearEnd,
   businessesOnReturn,
+  farmOwnerOf,
+  farmsOnReturn,
   getDependentCareProviderFacts,
   getDependentCareQualifyingPersonFacts,
   isW2FactKey,
@@ -112,7 +114,12 @@ function w2WagesByOwner(inputs: ResolverInputs): {
  */
 function spouseHasBusiness(inputs: ResolverInputs): boolean {
   const { businesses } = businessesOnReturn(inputs.facts, true);
-  return businesses.some((business) => ownerOf(business.value) === "spouse");
+  // MANUAL EDIT: a spouse's farm is self-employment earned income too.
+  const { farms } = farmsOnReturn(inputs.facts, true);
+  return (
+    businesses.some((business) => ownerOf(business.value) === "spouse") ||
+    farms.some((farm) => farmOwnerOf(farm.value) === "spouse")
+  );
 }
 
 /*
