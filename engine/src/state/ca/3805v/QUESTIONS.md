@@ -54,6 +54,24 @@ line 23 (`sectionAReads.ts`) and the suspension with disaster losses
    disaster loss) is a gap: suspensions extended those periods.
 9. **FEIN.** Only an estate or trust has one. The engine prepares individual
    returns, so the line is blank.
+10. **Order of use (Part III line 2).** Source: "use your NOLs and disaster
+    losses in the order the losses were incurred. There is no requirement to
+    deduct NOL carryovers before disaster loss carryovers"
+    (`part-iii-limitations::b01`), and column (a) "earliest first" (`::b02`).
+    Default: the rows go by year of loss, whatever the type; two rows of one
+    year keep the order the facts list them. Changes dollars: a 2016 general
+    NOL and a 2019 disaster loss against $15,000 of MTI deduct $15,000 of the
+    NOL and nothing of the disaster loss.
+11. **Part II adds back the capital loss deduction.** Source: Part II line 2,
+    "the net capital loss deduction from your 2025 Schedule D (540), line 9"
+    (`part-ii-modified-taxable-income-mti::b02`). Default: the form's
+    arithmetic, so the carryovers can absorb up to $3,000 more than taxable
+    income before them. No text conflicts. Changes dollars against a reading
+    that stops at taxable income of 0.
+12. **Line 3a of exactly 0.** Line 3a says "If positive, enter 0 here and on
+    line 25"; line 3c says "If zero or more, do not complete the rest of Part
+    I" (`ca-3805v-face-2025::sec::face-part-i::b01`). Default: 0 on line 3a
+    and line 25, as a positive amount. No dollars: there is no 2025 NOL.
 
 ## Unsupported
 
@@ -77,6 +95,21 @@ line 23 (`sectionAReads.ts`) and the suspension with disaster losses
   loss). That is a new input on Form 4684's fact and a rule with no text.
 - **Section B.** Needs the Schedule CA (540NR) column E amounts sorted into
   business and nonbusiness, and the resident and nonresident periods.
+
+## Second opinions
+
+- No published example with numbers.
+- Blind fill (2026-11-25, 13 cases from the blank form and the
+  instructions): every dollar amount matched. The nine differences are a
+  blank against 0. The engine prints 0 on Part III line 5 or line 6 when no
+  row of that kind exists, and 0 on line 23 when no carryover exists; the
+  blind fill left them blank. No dollars change. The blind doubts that change
+  dollars are decisions A18 and A19 and items 10 and 11.
+- PolicyEngine-US 2.154.0 (commit 363e9fc5): it does not model FTB 3805V or
+  a California NOL or disaster loss carryover. It has no federal NOL
+  deduction either, so it has no constant or formula to compare. No lead.
+- IRS Direct File: it prepares no California return and no NOL, so it has
+  nothing to compare.
 
 ## Confidence by field group
 
