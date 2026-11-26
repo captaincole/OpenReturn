@@ -13,6 +13,7 @@ import { dependentCareCreditGap } from "../2441/creditGap.js";
 import type { Form2441FilingInfo } from "../2441/filingInfo.js";
 import { mortgageCreditGap, type CreditLimitInfo } from "../8396/creditGap.js";
 import { line6cFrom8839 } from "../8839/receivers.js";
+import { homebuyerCreditGap } from "../8859/creditLimit.js";
 import { nonrefundableCreditGap } from "../8863/credit.js";
 import type { Form8863FilingInfo } from "../8863/filingInfo.js";
 import { creditGap } from "../8880/credit.js";
@@ -88,7 +89,6 @@ export function partILine(
  */
 const UNCOMPUTED_CREDITS: ReadonlyArray<[formId: string, line: string]> = [
   ["form-5695", "Schedule 3 line 5a (Form 5695 Part I, the residential clean energy credit)"],
-  ["form-8859", "Schedule 3 line 6h (Form 8859)"],
   ["form-8834", "Schedule 3 line 6i (Form 8834)"],
 ];
 
@@ -104,6 +104,7 @@ function otherCreditsGap(form: Accessor, info: Form8911CreditInfo): string | und
     typeof adoption === "object" ? adoption.reason : undefined,
     cleanVehicleCreditGap(form, info),
     mortgageCreditGap(form, info),
+    homebuyerCreditGap(form, info),
     line6lGap(info),
   ];
   const gap = gaps.find((reason) => reason !== undefined);

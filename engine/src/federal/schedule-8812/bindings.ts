@@ -7,6 +7,7 @@ import { SSN } from "../../values.js";
 import { excludedAmounts, files2555 } from "../2555/results.js";
 import { mortgageCreditGap } from "../8396/creditGap.js";
 import { line6cFrom8839 } from "../8839/receivers.js";
+import { form8859Files, homebuyerCreditGap } from "../8859/creditLimit.js";
 import type { Schedule8812FilingInfo } from "./filingInfo.js";
 import type { Schedule8812 } from "./types.js";
 import {
@@ -130,11 +131,12 @@ export function register(): void {
        * MANUAL EDIT: line 4 is line 15 of Credit Limit Worksheet B (Schedule 3
        * lines 5a, 6c, 6g and 6h) with line 4 above 0 and one of those credits
        * (irs-1040s8-inst-2025::sec::line-21::b03,
-       * credit-limit-worksheet-b-continued::b02), else -0-. Lines 5a and 6h
-       * are unsupported today. With a qualifying child the line waits for Form
-       * 8396 line 9 (6g), unless line 9 is an engine gap: then 6g is left out,
-       * as Schedule 3 leaves out its other unsupported credits. Form 8396 reads
-       * Worksheet B line 14, not this line, so the read makes no cycle.
+       * credit-limit-worksheet-b-continued::b02), else -0-. Line 5a is
+       * unsupported today. With a qualifying child the line waits for Form
+       * 8396 line 9 (6g) and Form 8859 line 3 (6h), unless the line is an engine
+       * gap: then it is left out, as Schedule 3 leaves out its other unsupported
+       * credits. Forms 8396 and 8859 read Worksheet B line 14, not this line, so
+       * the read makes no cycle.
        */
       "0.line.13_credit_limit_worksheet_a": (form, info) => {
         const line18 = form["form-1040.line.18"];
@@ -157,6 +159,13 @@ export function register(): void {
           mortgageCreditGap(form, info) === undefined &&
           numberOrBlank(form["schedule-3.0.line.6g"]) === undefined;
         if (waitsFor6g) return undefined;
+        // MANUAL EDIT: the same for Form 8859 line 3 (6h); Form 8859 reads Worksheet B line 14, not this line.
+        const waitsFor6h =
+          children &&
+          form8859Files(info) &&
+          homebuyerCreditGap(form, info) === undefined &&
+          numberOrBlank(form["schedule-3.0.line.6h"]) === undefined;
+        if (waitsFor6h) return undefined;
         const line4 = children
           ? sum(
               form["schedule-3.0.line.5a"],
