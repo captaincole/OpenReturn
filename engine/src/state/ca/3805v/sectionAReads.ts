@@ -143,8 +143,15 @@ function nonbusinessIncome(form: Read): Amount {
   return sum(...NONBUSINESS_INCOME_LINES.map((line) => caAmount(form, line)));
 }
 
-/* Line 3b: none, or the gap when the itemized deductions hold a casualty loss. */
-export function disasterLossOf(form: Read, deduction: number): Amount {
+/*
+ * Line 3b: none, or the gap when the itemized deductions hold a casualty loss.
+ * With line 3a (Form 540 line 17 less line 18) at 0 or more, line 3b is not
+ * figured: "If positive, enter 0 here and on line 25. Do not complete the rest
+ * of Section A" (ca-3805v-face-2025::sec::face-part-i::b01), and income absorbed
+ * the loss, so Part III line 3 has nothing to carry.
+ */
+export function disasterLossOf(form: Read, agi: number, deduction: number): Amount {
+  if (agi - deduction >= 0) return 0;
   const casualty = caAmount(form, "5.page2.casualty_15");
   return itemizes(form, deduction) && casualty > 0 ? unsupported(DISASTER_2025_GAP) : 0;
 }
@@ -180,7 +187,7 @@ export function sectionALinesOf(form: Read, info: Info): SectionALines | Unsuppo
   return sectionA({
     agi,
     deduction,
-    disasterLoss: disasterLossOf(form, deduction),
+    disasterLoss: disasterLossOf(form, agi, deduction),
     ...(capital ?? everyCapitalLine(0)),
     nonbusinessDeductions: nonbusinessDeductions(form, deduction),
     nonbusinessIncome: nonbusinessIncome(form),

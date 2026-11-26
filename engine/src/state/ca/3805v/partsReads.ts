@@ -26,7 +26,8 @@ import { disasterLossOf, sectionALinesOf } from "./sectionAReads.js";
 export function currentDisasterOf(form: Read, info: Info): Amount | undefined {
   const deduction = deductionOf(form, info);
   if (deduction === undefined || isUnsupportedResult(deduction)) return deduction;
-  return disasterLossOf(form, deduction);
+  const agi = form[CA_AGI];
+  return typeof agi === "number" ? disasterLossOf(form, agi, deduction) : undefined;
 }
 
 /* Part II; undefined when no carryover is on the form, or while a line waits. */
@@ -38,7 +39,7 @@ export function partIILinesOf(form: Read, info: Info): PartIILines | Unsupported
   if (deduction === undefined || isUnsupportedResult(deduction)) return deduction;
   if (typeof agi !== "number") return undefined;
   if (carryovers.rows.length === 0) {
-    const disaster = disasterLossOf(form, deduction);
+    const disaster = disasterLossOf(form, agi, deduction);
     return isUnsupportedResult(disaster) ? disaster : undefined;
   }
   const capitalLossDeduction = capitalLossDeductionOf(form);

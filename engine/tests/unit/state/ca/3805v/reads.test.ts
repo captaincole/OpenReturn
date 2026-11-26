@@ -16,6 +16,11 @@ import {
   type Info,
   type Read,
 } from "../../../../../src/state/ca/3805v/figures.js";
+import {
+  currentDisasterOf,
+  partIILinesOf,
+  totalsOf,
+} from "../../../../../src/state/ca/3805v/partsReads.js";
 import { FORM_540NR_GAP } from "../../../../../src/state/ca/3805v/resolveInfo.js";
 import {
   CAPITAL_LIST_GAP,
@@ -166,6 +171,34 @@ describe("Section A reads", () => {
     expect(gapOf(deductionOf(read, info({}, { increasedStandardDeduction: true })))).toMatch(
       /increased standard/,
     );
+  });
+});
+
+describe("a casualty loss with line 3a positive", () => {
+  // Itemized deductions of 1,706 hold a 2,000 casualty loss; line 3a is 2,706 - 1,706 = 1,000.
+  const read: Read = {
+    ...READ,
+    "form-540.line.18_deductions": 1706,
+    "schedule-ca.5.page2.total_itemized_29": 1706,
+    "schedule-ca.5.page2.casualty_15_federal": 2000,
+  };
+
+  it("no 2025 disaster loss reaches Part III: line 3 blank, line 6 the disaster rows' column (h)", () => {
+    expect(currentDisasterOf(read, info())).toBe(0);
+    expect(lines(read)).toMatchObject({ line3a: 0, line25: 0 });
+    const totals = totalsOf(read, info());
+    if (totals === undefined || "unsupported" in totals) throw new Error("totals did not figure");
+    // The 2018 disaster row of 22,000 is used in full against the MTI.
+    expect(totals.line6).toBe(0);
+  });
+
+  it("with no prior row, Part II is blank, not the gap", () => {
+    expect(partIILinesOf(read, info({ priorRows: [] }))).toBeUndefined();
+  });
+
+  it("line 3a negative: the casualty loss is still the gap", () => {
+    const loss = { ...read, "form-540.line.17_ca_agi": 1000 };
+    expect(gapOf(currentDisasterOf(loss, info()))).toBe(DISASTER_2025_GAP);
   });
 });
 
