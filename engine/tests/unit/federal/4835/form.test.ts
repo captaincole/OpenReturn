@@ -64,7 +64,7 @@ function evaluate(base: Scenario, facts: TaxFactRow[], extraDecisions: AIDecisio
   };
   const isUnsupported = (formId: string, id: string) =>
     (field(formId, id) as { unsupported?: boolean } | undefined)?.unsupported === true;
-  return { files, value, isUnsupported, pending: pendingInputs(result) };
+  return { files, value, isUnsupported, pending: pendingInputs(result), info: result.filingInfo };
 }
 
 const otherFacts = (base: Scenario) => base.facts.filter((fact) => !isFarm(fact));
@@ -91,6 +91,16 @@ describe("who files", () => {
     ]);
     expect(run.files("form-4835")).toBe(false);
     expect(run.files("schedule-e")).toBe(false);
+  });
+
+  it("the decision with no farm rental fact: every line and Schedule E line 40 name the gap", () => {
+    const run = evaluate(jasinScenario, otherFacts(jasinScenario), [
+      decision(jasinScenario, "decisions.scope.must_file_4835", true),
+    ]);
+    expect(run.files("form-4835")).toBe(true);
+    expect(run.isUnsupported("form-4835", "0.line.32_net_farm_rental_income_loss")).toBe(true);
+    expect(run.isUnsupported("schedule-e", LINE_40)).toBe(true);
+    expect(run.isUnsupported("schedule-e", LINE_41)).toBe(true);
   });
 
   it("a spouse's farm rental is off a single return", () => {
@@ -122,12 +132,58 @@ describe("Schedule E", () => {
     );
   });
 
-  it("two farm rentals: every line and Schedule E lines 40 and 41 are unsupported", () => {
-    const facts = [...jasinScenario.facts, withFarm(jasinScenario, {}, "second-farm")];
+  it("keille and a second farm she did not materially participate in: line 43 takes only hers", () => {
+    // The second farm: 50,000 + 1,200 − 30,200 = 21,000 of passive income.
+    const second = withFarm(
+      keilleScenario,
+      { productionIncome: 50000, materiallyParticipated: false },
+      "passive-farm",
+    );
+    const run = evaluate(keilleScenario, [...keilleScenario.facts, second]);
+    const copies = run.info.form4835Copies ?? [];
+    expect(copies.map((copy) => copy.form4835?.["0.line.32_net_farm_rental_income_loss"])).toEqual([
+      undefined,
+      21000,
+    ]);
+    expect(run.value("schedule-e", LINE_40)).toBe(10000);
+    expect(run.value("schedule-e", "1.line.43_real_estate_professional_reconciliation")).toBe(
+      -11000,
+    );
+  });
+
+  // jasin's farm with no conservation costs: line 31 is 30,600 + 1,750 − 500 = 31,850, line 32 is 39,700.
+  const noConservation = (slug?: string) =>
+    withFarm(
+      jasinScenario,
+      {
+        expenses: {
+          ...(farmOf(jasinScenario).value as FarmRentalFactValue).expenses,
+          conservation: 0,
+        },
+      },
+      slug,
+    );
+
+  it("two farm rentals: one copy each; Schedule E lines 40 and 42 take both", () => {
+    const run = evaluate(jasinScenario, [
+      ...otherFacts(jasinScenario),
+      noConservation(),
+      noConservation("second-farm"),
+    ]);
+    expect(run.info.form4835Copies).toHaveLength(2);
+    expect(run.value("form-4835", "0.line.32_net_farm_rental_income_loss")).toBe(39700);
+    expect(run.value("schedule-e", LINE_40)).toBe(79400);
+    expect(run.value("schedule-e", LINE_41)).toBe(79400);
+    expect(run.value("schedule-e", "1.line.42_farming_fishing_reconciliation")).toBe(143100);
+  });
+
+  it("two farm rentals and conservation costs: line 10's shared limit is a gap", () => {
+    const facts = [...jasinScenario.facts, noConservation("second-farm")];
     const run = evaluate(jasinScenario, facts);
-    expect(run.isUnsupported("form-4835", "0.line.1_income_from_production")).toBe(true);
+    expect(run.isUnsupported("form-4835", "0.line.10_conservation_expenses")).toBe(true);
+    expect(run.value("form-4835", "0.line.1_income_from_production")).toBe(48000);
     expect(run.isUnsupported("schedule-e", LINE_40)).toBe(true);
-    expect(run.isUnsupported("schedule-e", LINE_41)).toBe(true);
+    expect(run.value("schedule-e", "1.line.42_farming_fishing_reconciliation")).toBe(143100);
   });
 
   it("Schedule F on the return makes line 10 a gap; Part I and line 42 still print", () => {

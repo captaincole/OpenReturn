@@ -75,16 +75,14 @@ export function line40ForLine41(
 
 /*
  * Line 43's farm rental part: a real estate professional's net income or loss from
- * the farm rental they materially participated in (irs-4835-inst-2025::sec::line-34::b01,
+ * the farm rentals they materially participated in (irs-4835-inst-2025::sec::line-34::b01,
  * "include the loss in the total for Schedule E (Form 1040), line 43"). Undefined
- * with no such farm rental; "waits" while line 40 or the answer waits.
+ * with no such farm rental; "waits" while a farm's line 40 part or the answer waits
+ * (federal/4835/farmTotals.ts).
  */
-export function farmRentalForLine43(form: Form, info: Info): number | "waits" | undefined {
+export function farmRentalForLine43(info: Info): number | "waits" | undefined {
   if (info.realEstateProfessional !== true || !info.farmRentalInUse) return undefined;
-  if (info.farmRentalNonpassive === false) return undefined;
-  const amount = form["1.line.40_net_farm_rental_income"];
-  if (info.farmRentalNonpassive === undefined || typeof amount !== "number") return "waits";
-  return amount;
+  return info.farmRentalLine43;
 }
 
 export function farmRentalBindings() {

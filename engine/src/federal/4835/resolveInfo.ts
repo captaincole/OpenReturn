@@ -9,6 +9,7 @@ import { resolve8582Info } from "../8582/resolveInfo.js";
 import { passThroughEntitiesOnReturn } from "../passThrough/items.js";
 import { booleanFact, spousePropertiesOnReturn } from "../rentals/passive.js";
 import { resolveScheduleFInfo } from "../schedule-f/resolveInfo.js";
+import { farmTotals, type FarmOutcome } from "./farmTotals.js";
 import type { Form4835FilingInfo } from "./filingInfo.js";
 import { grossIncomeFromFarming, isGap, partI, partII, type Gap } from "./lines.js";
 import { printedForm } from "./printed.js";
@@ -24,10 +25,9 @@ import {
 const MUST_FILE_KEY = "decisions.scope.must_file_4835";
 const MUST_FILE_8582_KEY = "decisions.scope.must_file_8582";
 
-const ONE_COPY =
-  "Each farm rental files its own Form 4835; the engine prints one copy, so a return with more than one needs a preparer for the forms and for Schedule E line 40.";
 const JOINT_ON_SEPARATE_RETURN =
   "A jointly owned farm rental on a separate return needs the taxpayer's share, which the fact does not hold.";
+const NO_FARM_RENTAL = "Form 4835 files by decision, but no farm rental fact gives its amounts.";
 const SHARED_CONSERVATION_LIMIT =
   "Line 10: the 25% limit is on all gross income from farming, and Schedule F or a Schedule K-1 also has farming on this return; the instructions do not say how the limit is split (irs-pub-225-2025::sec::assessment-for-depreciable::b07).";
 
@@ -77,25 +77,41 @@ function answerKeys(farm: FarmRentalFact, answers: ResultAnswer[]): string[] {
   });
 }
 
-/* Every line of the form, and Schedule E lines 40 and 42, carry one gap. */
+/* Every line of the one form, and Schedule E lines 40, 42 and 43, carry one gap. */
 function formGap(reason: string): Form4835FilingInfo {
   const gap: Gap = { gap: reason };
-  return { form4835Gap: reason, farmRentalInUse: true, farmRentalNet: gap, farmRentalGross: gap };
+  return {
+    form4835Gap: reason,
+    farmRentalInUse: true,
+    farmRentalNet: gap,
+    farmRentalGross: gap,
+    farmRentalLine43: "waits",
+  };
 }
 
-interface FarmOutcome {
-  info: Form4835FilingInfo;
-  waitingKeys: string[];
+/* One farm rental whose Part I is a gap: its copy, line 40 part and line 7 carry it. */
+function farmGap(farm: FarmRentalFact, reason: string): FarmOutcome {
+  const gap: Gap = { gap: reason };
+  return {
+    copy: { form4835: undefined, form4835Gap: reason },
+    summary: { factKey: farm.key, net: gap },
+    gross: gap,
+    waitingKeys: [],
+  };
 }
 
 /* One farm rental's Form 4835 and the amounts Schedule E reads. */
-function farmOutcome(inputs: ResolverInputs, farm: FarmRentalFact): FarmOutcome {
+function farmOutcome(
+  inputs: ResolverInputs,
+  farm: FarmRentalFact,
+  otherFarming: () => boolean,
+): FarmOutcome {
   const lines = partI(farm.value);
-  if (isGap(lines)) return { info: formGap(lines.gap), waitingKeys: [] };
+  if (isGap(lines)) return farmGap(farm, lines.gap);
   const claimsConservation =
     (farm.value.expenses?.conservation ?? 0) + (farm.value.conservationCarryover ?? 0) > 0;
   const conservationGap =
-    claimsConservation && otherFarmingOnReturn(inputs) ? SHARED_CONSERVATION_LIMIT : undefined;
+    claimsConservation && otherFarming() ? SHARED_CONSERVATION_LIMIT : undefined;
   const grossIncome = lines.waitsOnElection
     ? undefined
     : grossIncomeFromFarming(lines.line7 ?? 0, farm.value.breedingLivestockGains);
@@ -113,13 +129,9 @@ function farmOutcome(inputs: ResolverInputs, farm: FarmRentalFact): FarmOutcome 
     ...answerKeys(farm, result?.waitsOn ?? []),
   ];
   return {
-    info: {
-      form4835: printedForm(farm.value, lines, expenses, result),
-      farmRentalInUse: true,
-      farmRentalNet: result?.scheduleELine40,
-      farmRentalGross: lines.line7,
-      farmRentalNonpassive: nonpassive,
-    },
+    copy: { form4835: printedForm(farm.value, lines, expenses, result), form4835Gap: undefined },
+    summary: { factKey: farm.key, net: result?.scheduleELine40, nonpassive },
+    gross: lines.line7,
     waitingKeys,
   };
 }
@@ -144,13 +156,17 @@ export function resolve4835Info(inputs: ResolverInputs): Form4835FilingInfo {
     ],
   });
   const filed = { mustFile: { "form-4835": mustFile } };
-  if (mustFile.value !== true || (farms.length === 0 && !jointOnSeparate)) return filed;
+  if (mustFile.value !== true) return filed;
   if (jointOnSeparate) return { ...filed, ...formGap(JOINT_ON_SEPARATE_RETURN) };
-  if (farms.length > 1) return { ...filed, ...formGap(ONE_COPY) };
-  const { info, waitingKeys } = farmOutcome(inputs, farms[0]);
+  // The decision alone: the amounts are not known, so every line and Schedule E line 40 show it.
+  if (farms.length === 0) return { ...filed, ...formGap(NO_FARM_RENTAL) };
+  // Another farm rental's line 7 is gross income from farming too, so it shares line 10's limit.
+  const otherFarming = () => farms.length > 1 || otherFarmingOnReturn(inputs);
+  const outcomes = farms.map((farm) => farmOutcome(inputs, farm, otherFarming));
+  const waitingKeys = [...new Set(outcomes.flatMap((outcome) => outcome.waitingKeys))];
   return {
     ...filed,
-    ...info,
+    ...farmTotals(outcomes),
     missingInputs: {
       "form-4835": missingInputs(Object.fromEntries(waitingKeys.map((key) => [key, undefined]))),
     },

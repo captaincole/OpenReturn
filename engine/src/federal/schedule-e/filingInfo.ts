@@ -28,7 +28,7 @@ export interface ScheduleEFilingInfo
     Pick<Form1040FilingInfo, "livedApartFromSpouseAllYear">,
     Pick<
       Form4835FilingInfo,
-      "farmRentalInUse" | "farmRentalNet" | "farmRentalGross" | "farmRentalNonpassive"
+      "farmRentalInUse" | "farmRentalNet" | "farmRentalGross" | "farmRentalLine43"
     > {
   /* Part I columns A–C, in fact order; undefined with no property. */
   rentalProperties?: RentalProperty[];

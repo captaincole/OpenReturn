@@ -153,7 +153,7 @@ function partIReconciliation(form: Form, info: Info): number | "waits" | undefin
 function professionalReconciliation(form: Form, info: Info): number | undefined {
   if (info.realEstateProfessional !== true) return undefined;
   const partI = partIReconciliation(form, info);
-  const farm = farmRentalForLine43(form, info);
+  const farm = farmRentalForLine43(info);
   if (partI === "waits" || farm === "waits") return undefined;
   return sumOrBlank(partI, farm);
 }
