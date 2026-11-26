@@ -80,7 +80,8 @@ Each item is a doubt with no conflicting text. "Done" names the default the engi
 ### 9. Form 8834 and trusts
 
 - Source: who must file names the qualified plug-in electric vehicle credit (`who-must-file::b01`); trusts put every credit on Worksheet 4 (`lines-4a-through-4c::b01`).
-- Not now: Form 8834 has no fact (it is carried forward only, Form 3800 Part IV line 2g); the engine figures an individual's return, not a trust's.
+- Done for Form 8834: a prior year unallowed qualified electric vehicle credit is a fact (`electric_vehicle_credit.passive_carryover.<slug>`). It is a row in column (b) of Worksheet 1 or 4 next to Form 3800's sources (`form.ts`), and Form 8834 line 1 takes its allowed part (`federal/8834/`). The credit is not a general business credit, so Form 3800 never holds the row.
+- Not now: the engine figures an individual's return, not a trust's.
 - Changes dollars: no.
 
 ### 10. A section 6418 transfer of a credit that cannot be transferred

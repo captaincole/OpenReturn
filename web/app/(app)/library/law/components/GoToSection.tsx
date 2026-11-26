@@ -4,7 +4,7 @@ import { lawHref } from "@/lib/law";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-/* A section number, or a full citation such as 469(g)(1), opens that section's page. */
+/* A section number, or a full citation such as 469(g)(1) or 1.469-5T(a), opens that section's page. */
 export function GoToSection() {
   const router = useRouter();
   const [value, setValue] = useState("");
@@ -14,7 +14,7 @@ export function GoToSection() {
     event.preventDefault();
     const href = lawHref(value);
     if (!href) {
-      setProblem("Type a section number, such as 469 or 199A.");
+      setProblem("Type a section number, such as 469, 199A or the regulation 1.469-5T.");
       return;
     }
     router.push(href);
@@ -33,7 +33,7 @@ export function GoToSection() {
             setValue(event.target.value);
             setProblem(null);
           }}
-          placeholder="469"
+          placeholder="469 or 1.469-5T"
           autoComplete="off"
           spellCheck={false}
           className="input-base max-w-xs font-mono"

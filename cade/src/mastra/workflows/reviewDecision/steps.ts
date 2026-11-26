@@ -8,6 +8,7 @@ import {
   setDecisionLatestRunId,
 } from "../../db/reviewRuns";
 import { listFactsByKeys, noteQuestion } from "../../db/taxFacts";
+import { noteConflictQuestion } from "./conflictQuestion";
 import {
   reviewCarrierSchema,
   reviewDecisionOutputSchema,
@@ -166,6 +167,8 @@ export const finalizeStep = createStep({
     );
 
     const openQuestionId = await noteFollowUpQuestion(scope, carrier, ground);
+    // A fake Canon in tests may leave the field out; the parse fills it otherwise.
+    const conflictQuestionId = await noteConflictQuestion(scope, carrier, ground.conflicts ?? []);
 
     await completeReviewRun(scope, {
       id: carrier.reviewRunId,
@@ -184,6 +187,7 @@ export const finalizeStep = createStep({
       reason: ground.reason,
       citations: ground.citations,
       ...(openQuestionId ? { openQuestionId } : {}),
+      ...(conflictQuestionId ? { conflictQuestionId } : {}),
       ...(ground.whatsMissing ? { whatsMissing: ground.whatsMissing } : {}),
     };
 

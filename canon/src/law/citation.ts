@@ -1,13 +1,20 @@
-import { citationOf, citationSegment, slugOf } from "./lawIds";
+import { citationOf, citationSegment, QA_STEP, regCitationOf, regSlugOf, slugOf } from "./lawIds";
 
 /*
- * Code citations as people write them ("469", "§ 469(g)(1)(A)",
- * "26 U.S.C. 1400Z-2(a)") and the blocks they name. Pure: the database read
- * is in lawRead.ts.
+ * Citations as people write them, and the blocks they name. A Code
+ * citation: "469", "§ 469(g)(1)(A)", "26 U.S.C. 1400Z-2(a)". A regulation:
+ * "1.469-5T", "26 CFR 1.469-5T(a)(1)", "Treas. Reg. § 1.1031(a)-1(b)",
+ * "1.408A-4, Q&A-1(b)". The dot tells them apart: a Code section number
+ * never has one. Pure: the database read is in lawRead.ts.
  */
 
 export type LawTarget =
-  { kind: "block"; blockId: string } | { kind: "citation"; section: string; path: string[] };
+  | { kind: "block"; blockId: string }
+  | { kind: "citation"; section: string; path: string[] }
+  | { kind: "regulation"; section: string; path: string[] };
+
+/** Which library a law document is: the statute (the Code) or the regulations. */
+export type LawSource = "statute" | "regulations";
 
 /** One block of a Code section, as the resolver needs it. */
 export interface PathBlock {
@@ -17,8 +24,26 @@ export interface PathBlock {
 }
 
 const BLOCK_ID_MARK = "::";
-// Words that may come before the section number; they carry nothing.
-const LEADING_WORDS = ["26 u.s.c.", "26 usc", "irc", "i.r.c.", "section", "sec.", "§"];
+// Words that may come before the section number; they carry nothing. Longer ones first.
+const LEADING_WORDS = [
+  "26 u.s.c.",
+  "26 usc",
+  "irc",
+  "i.r.c.",
+  "26 c.f.r.",
+  "26 cfr",
+  "c.f.r.",
+  "cfr",
+  "treasury regulation",
+  "treas. reg.",
+  "treas. regs.",
+  "reg.",
+  "section",
+  "sec.",
+  "§§",
+  "§",
+];
+const REG_DOT = ".";
 
 const isDigit = (char: string) => char >= "0" && char <= "9";
 const isLetter = (char: string) => char.toLowerCase() !== char.toUpperCase();
@@ -28,11 +53,61 @@ export function parseLawTarget(input: string): LawTarget | null {
   const raw = input.trim();
   if (raw.includes(BLOCK_ID_MARK)) return { kind: "block", blockId: raw };
   const rest = dropLeadingWords(raw.replace(/[–—]/g, "-"));
-  const section = takeWhile(rest, isSectionChar);
-  if (!section || !isDigit(section[0])) return null;
-  const path = parseSegments(rest.slice(section.length));
-  return path ? { kind: "citation", section, path } : null;
+  const head = takeWhile(rest, isSectionChar);
+  if (!head || !isDigit(head[0])) return null;
+  if (rest[head.length] === REG_DOT) return regulationTarget(rest);
+  const path = parseSegments(rest.slice(head.length));
+  return path ? { kind: "citation", section: head, path } : null;
 }
+
+/** "1.1031(a)-1(b)": the section number runs through "(a)-1"; the path is "(b)". */
+function regulationTarget(text: string): LawTarget | null {
+  const section = regSectionNumber(text);
+  if (!section || section.endsWith(REG_DOT)) return null;
+  const { qa, rest } = qaStep(text.slice(section.length));
+  const path = parseSegments(rest);
+  return path ? { kind: "regulation", section, path: qa ? [qa, ...path] : path } : null;
+}
+
+/*
+ * A regulation number is "<part>.<section>": letters, digits and hyphens,
+ * and parenthesized groups that a hyphen follows ("1.401(a)(9)-1"). A
+ * group with no hyphen after it starts the paragraph path.
+ */
+function regSectionNumber(text: string): string {
+  let end = text.indexOf(REG_DOT) + 1;
+  for (;;) {
+    end += takeWhile(text.slice(end), isSectionChar).length;
+    const groups = groupsLength(text.slice(end));
+    if (groups === 0 || text[end + groups] !== "-") return text.slice(0, end);
+    end += groups;
+  }
+}
+
+/** The length of the "(…)(…)" run at the start of the text; 0 when there is none. */
+function groupsLength(text: string): number {
+  let length = 0;
+  while (text[length] === "(") {
+    const close = text.indexOf(")", length);
+    if (close < 0) return 0;
+    length = close + 1;
+  }
+  return length;
+}
+
+/** ", Q&A-1" or " Q&A-1" after the number: the Q&A is the path's first step. */
+function qaStep(text: string): { qa: string | null; rest: string } {
+  const trimmed = text.replace(/^[\s,]+/, "");
+  if (!trimmed.toUpperCase().startsWith(QA_STEP)) return { qa: null, rest: text };
+  const digits = takeWhile(trimmed.slice(QA_STEP.length), isDigit);
+  if (!digits) return { qa: null, rest: text };
+  return { qa: `${QA_STEP}${digits}`, rest: trimmed.slice(QA_STEP.length + digits.length) };
+}
+
+export const isRegulationNumber = (section: string): boolean => section.includes(REG_DOT);
+
+export const sourceOfSection = (section: string): LawSource =>
+  isRegulationNumber(section) ? "regulations" : "statute";
 
 function dropLeadingWords(text: string): string {
   let rest = text.trim();
@@ -65,12 +140,12 @@ function parseSegments(text: string): string[] | null {
   return rest === "" ? segments : null;
 }
 
-/** "469" → "usc-26-2025::sec::s469", the section row's id. */
+/** "469" → "usc-26-2025::sec::s469", "1.469-5T" → "cfr-26-2025::sec::s1.469-5t": the section row's id. */
 export const sectionIdOf = (docId: string, section: string): string =>
-  `${docId}::sec::${slugOf(`s${section}`)}`;
+  `${docId}::sec::${isRegulationNumber(section) ? regSlugOf(section) : slugOf(`s${section}`)}`;
 
 export const formatCitation = (section: string, path: string[]): string =>
-  citationOf(section, path);
+  isRegulationNumber(section) ? regCitationOf(section, path) : citationOf(section, path);
 
 const startsWith = (path: string[], prefix: string[]) =>
   prefix.every((segment, index) => path[index] === segment);

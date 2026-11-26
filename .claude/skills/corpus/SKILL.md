@@ -83,18 +83,18 @@ Cost: ~$0.50 Haiku contextualization per doc; embeddings are local and free (Emb
 
 ## The law library (`law.db`)
 
-The Internal Revenue Code is a second file, `canon/.data/law.db` (`LAW_DB_PATH`). The plain `corpus` commands never read it. Its sidecar is `sources/2025/law/federal/usc-26/law.meta.json`, which pins one dated release of the Code by `sourceUrl` and `sha256`.
+The law is a second file, `canon/.data/law.db` (`LAW_DB_PATH`). The plain `corpus` commands never read it. It holds two documents, each with a sidecar under `sources/2025/law/federal/`: the Internal Revenue Code (`usc-26/law.meta.json`, one zip named by `sourceUrl` and `sha256`) and the Treasury regulations, 26 CFR Parts 1 and 301 (`cfr-26/law.meta.json`, `"format": "ecfr"`, with a `files` entry of `sourceUrl` and `sha256` for each part, from the eCFR's dated API).
 
 | subcommand | use |
 |---|---|
 | `law fetch` | install the prebuilt law.db (`canon/seed/law.manifest.json`) |
-| `law sync [--force]` | build it from the sidecar: no model call, about 17 minutes of local embedding |
+| `law sync [--force] [--doc <docId>]` | build it from the sidecars: no model call, only local embedding (about 17 minutes for the Code, about 1 hour 40 minutes for the regulations). `--doc` limits it to one document |
 | `law check` | row counts and embedding coverage |
-| `law search "q" [--mode …] [--limit n]` | search the statute |
-| `law read <citation>` | print a section or subdivision with block ids: `469`, `"469(g)"`, `"469(g)(1)(A)"`, or a block id |
+| `law search "q" [--mode …] [--limit n] [--source statute\|regulations]` | search the law; with no `--source` the two documents take turns in the results |
+| `law read <citation>` | print a section or subdivision with block ids: `469`, `"469(g)(1)(A)"`, a regulation `"1.469-5T(a)(1)"`, or a block id |
 | `law reembed [--all]` | embed the blocks that have no vector; `--all` after a model switch |
 
-To move to a newer release of the Code, change `sourceUrl`, `sha256`, `releasePoint` and `published` in the sidecar, then run `law sync`. After a change to the parser (`canon/src/law/`), run `law sync --force` and `npm run evals:law`.
+To move to a newer release, change `sourceUrl`, `sha256` and `releasePoint` (and `published` for the Code) in the sidecar, then run `law sync`. Do not read `law.db` (a search, an eval) while `law sync` or `law reembed` writes it: the write stops with SQLITE_BUSY, and `law reembed` then finishes the vectors. After a change to the parser (`canon/src/law/`), run `law sync --force` and `npm run evals:law`.
 
 ## In a git worktree
 

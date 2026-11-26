@@ -98,6 +98,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "and IV); whether one exists is Cade's question",
   ],
   [
+    /^electric_vehicle_credit\.passive_carryover\.[^.]+$/,
+    "each fact is one whole prior year unallowed qualified electric vehicle credit from last " +
+      "year's Form 8582-CR (Form 8834 line 1); whether one exists is Cade's question",
+  ],
+  [
     /^foreign_earned_income\.(taxpayer|spouse)$/,
     "each fact is a whole person's Form 2555 (Parts I to IX); whether the person claims the " +
       "exclusion is Cade's question. Form 2555 lists the fact again while an answer inside it " +

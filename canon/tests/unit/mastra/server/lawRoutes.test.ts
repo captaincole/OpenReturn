@@ -13,6 +13,7 @@ const lawFile = process.env.LAW_DB_PATH;
 const { writeDocument } = await import("../../../../src/db/corpusStore.js");
 const { lawPayload } = await import("../../../../src/law/ingestLaw.js");
 const { parseUslmTitle } = await import("../../../../src/law/parseUslm.js");
+const { parsedRegulations, REG_ENTRY } = await import("../../law/regFixture.js");
 const { lawSectionRoute, lawStatusRoute } =
   await import("../../../../src/mastra/server/routes/law.js");
 
@@ -42,6 +43,7 @@ const SIDECAR = {
   format: "uslm" as const,
   releasePoint: "119-73",
   published: "2026-01-12",
+  files: [],
 };
 
 async function installLaw(): Promise<void> {
@@ -57,6 +59,7 @@ async function installLaw(): Promise<void> {
     zipRelPath: "law.zip",
   };
   await writeDocument(lawPayload(entry, parsed), "law");
+  await writeDocument(lawPayload(REG_ENTRY, parsedRegulations()), "law");
 }
 
 describe("the law routes without law.db", () => {
@@ -73,16 +76,28 @@ describe("the law routes without law.db", () => {
 });
 
 describe("the law routes with law.db", () => {
-  it("report the release and how many sections it holds", async () => {
+  it("report each document, the statute first, and how many sections it holds", async () => {
     await installLaw();
     expect(await getJson("/app/law/status")).toEqual({
       status: 200,
       body: {
         installed: true,
-        docId: "usc-26-2025",
-        title: SIDECAR.title,
-        published: "2026-01-12",
-        sections: 2,
+        documents: [
+          {
+            docId: "usc-26-2025",
+            source: "statute",
+            title: SIDECAR.title,
+            published: "2026-01-12",
+            sections: 2,
+          },
+          {
+            docId: "cfr-26-2025",
+            source: "regulations",
+            title: REG_ENTRY.sidecar.title,
+            published: null,
+            sections: 2,
+          },
+        ],
       },
     });
   });
@@ -92,6 +107,7 @@ describe("the law routes with law.db", () => {
     expect(status).toBe(200);
     expect(body).toMatchObject({
       installed: true,
+      source: "statute",
       section: {
         number: "469",
         citation: "26 U.S.C. § 469",
@@ -124,11 +140,33 @@ describe("the law routes with law.db", () => {
     }
   });
 
-  it("answer 404 with a plain message for a section the Code does not hold", async () => {
-    for (const section of ["9999", "469(g)", "not-a-section"]) {
+  it("return a regulation section, told from a Code section by its dot", async () => {
+    for (const section of ["1.469-5T", "1.469-5t"]) {
+      const { status, body } = await getJson(`/app/law/sections/${section}`);
+      expect(status).toBe(200);
+      expect(body).toMatchObject({
+        source: "regulations",
+        section: {
+          number: "1.469-5T",
+          citation: "26 CFR § 1.469-5T",
+          heading: "Material participation (temporary).",
+          breadcrumbs: ["PART 1—INCOME TAXES", "Test Group"],
+        },
+        release: { title: REG_ENTRY.sidecar.title, published: null },
+      });
+      const blocks = body.blocks as { blockId: string; citation: string }[];
+      expect(blocks[1]).toMatchObject({
+        blockId: "cfr-26-2025::sec::s1.469-5t::a-1",
+        citation: "26 CFR § 1.469-5T(a)(1)",
+      });
+    }
+  });
+
+  it("answer 404 with a plain message for a section the library does not hold", async () => {
+    for (const section of ["9999", "469(g)", "not-a-section", "1.469-99", "1.469-5T(a)"]) {
       const { status, body } = await getJson(`/app/law/sections/${encodeURIComponent(section)}`);
       expect(status).toBe(404);
-      expect(body.error).toContain("The Code has no section");
+      expect(body.error).toContain("The law library has no section");
     }
   });
 });

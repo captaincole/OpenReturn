@@ -6,6 +6,7 @@ import { resolve4136Info } from "../4136/resolveInfo.js";
 import { resolve5695Info } from "../5695/resolveInfo.js";
 import { resolve8396Info } from "../8396/resolveInfo.js";
 import { resolve8801Info } from "../8801/resolveInfo.js";
+import { resolve8834Info } from "../8834/resolveInfo.js";
 import { resolve8839Info } from "../8839/resolveInfo.js";
 import { resolve8863Info } from "../8863/resolveInfo.js";
 import { resolve8880Info } from "../8880/resolveInfo.js";
@@ -34,6 +35,7 @@ export function resolveSchedule3Info(inputs: ResolverInputs): Schedule3FilingInf
   const form8880 = resolve8880Info(inputs).mustFile?.["form-8880"]?.value === true;
   const form8863 = resolve8863Info(inputs).mustFile?.["form-8863"]?.value === true;
   const form8801 = resolve8801Info(inputs).mustFile?.["form-8801"]?.value === true;
+  const form8834 = resolve8834Info(inputs).mustFile?.["form-8834"]?.value === true;
   // A K-1's foreign taxes (irs-1116-inst-2025::sec::publications-see-pub-514-foreign-tax-credit-for::b02).
   const foreignTaxK1Keys = k1KeysWithRoute(inputs, "schedule_3_line_1");
   const form1116 = resolve1116Info(inputs);
@@ -54,6 +56,7 @@ export function resolveSchedule3Info(inputs: ResolverInputs): Schedule3FilingInf
       { rule: "fallback: Form 8880 (line 4) is required", value: form8880 },
       { rule: "fallback: Form 8863 (line 3) is required", value: form8863 },
       { rule: "fallback: Form 8801 (line 6b) is required", value: form8801 },
+      { rule: "fallback: Form 8834 (line 6i) is required", value: form8834 },
       {
         rule: "fallback: Form 8936 (lines 6f, 6m) has a vehicle that kept its credit",
         value: cleanVehicleSchedules(inputs).personalCredit,

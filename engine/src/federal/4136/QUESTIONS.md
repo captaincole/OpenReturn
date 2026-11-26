@@ -6,10 +6,10 @@ Form 4136 refunds the federal excise tax paid on fuel used for a nontaxable purp
 
 Each is decided, with a `DECISION` comment in the code and a row in `docs/rule-decisions.md`.
 
-- **A58, the cents** (`receivers.ts`): Form 4136 keeps its cents boxes; Schedule 3 line 12 takes line 17 to the nearest dollar.
-- **A59, the year the credit is income** (`receivers.ts`): a cash-method business reports it next year, as the schedules say; an accrual-method business reports it this year, as Pub. 225 says, and its other-income line is unsupported (doubt 10).
-- **A60, home kerosene** (`rows.ts`): line 4a's credit goes in column (e), its cost in column (d).
-- **A61, Part I with several activities** (`bindings.ts`): lines C to F describe the activity with the most credit.
+- **A59, the cents** (`receivers.ts`): Form 4136 keeps its cents boxes; Schedule 3 line 12 takes line 17 to the nearest dollar.
+- **A60, the year the credit is income** (`receivers.ts`): a cash-method business reports it next year, as the schedules say; an accrual-method business reports it this year, as Pub. 225 says, and its other-income line is unsupported (doubt 10).
+- **A61, home kerosene** (`rows.ts`): line 4a's credit goes in column (e), its cost in column (d).
+- **A62, Part I with several activities** (`bindings.ts`): lines C to F describe the activity with the most credit.
 
 ## Should we do this now
 
@@ -33,7 +33,7 @@ Each doubt below has no conflicting text. Doubts 1 to 4, 6 to 8 and 11 to 13 are
 
 9. **Schedule 3 line 15 counts its other lines as 0.** Lines 9, 10, 11 and 13a to 14 are engine gaps. Default: line 15 is line 12 plus any of them that holds a number, as Form 1040 line 32 already counts line 31. Form 1040 line 31 takes Form 4136's amount from its slots, not Schedule 3's field: a Schedule 3 read from Form 1040 tripled the evaluation time of every return with a Schedule 3. When another Part II line gets rules, line 31 must add it too. A return with a net premium tax credit or excess social security tax and a fuel credit understates line 15. Dollars: yes, for that return only.
 
-10. **An accrual-method business.** Pub. 225: "If you use an accrual method, include the amount of credit or refund in gross income for the tax year in which you used the fuels" (`irs-pub-225-2025::sec::including-the-credit-or::b02`). Decided in row A59 (it conflicts with the schedules' "2024" credit): this year's credit is this year's income. The engine does not add it, so Schedule C line 6 or Schedule F line 43 of the linked accrual-method business is unsupported.
+10. **An accrual-method business.** Pub. 225: "If you use an accrual method, include the amount of credit or refund in gross income for the tax year in which you used the fuels" (`irs-pub-225-2025::sec::including-the-credit-or::b02`). Decided in row A60 (it conflicts with the schedules' "2024" credit): this year's credit is this year's income. The engine does not add it, so Schedule C line 6 or Schedule F line 43 of the linked accrual-method business is unsupported.
 
 11. **Half a cent rounds up.** Column (e) has a cents box, and the instructions give no rule for a product such as 405 x $.183 = $74.115. Default: column (e) rounds to the cent, half a cent up, as the whole-dollar rule raises 50 cents (`irs-1040-inst-2025::sec::rounding-off-to-whole::b01`). Dollars: one cent on a row. The blind fill made the same choice (its doubt 4).
 
@@ -52,7 +52,7 @@ Doubt 5 is not done now: the engine writes no attached statements on any form. D
 
 ## Second opinions
 
-- **Blind fill (2026-11-26, 15 cases).** Filled by hand from the blank form and the instructions: lines 1 to 8, 11, 13 to 16 (brackets, bus rates, gallon equivalents, line 13c at $.244, LUST rows, home kerosene), line 17 and Schedule 3 line 12. All 53 compared values match the engine; no blank-against-0 difference. The blind fill's doubts that change cents or dollars are doubts 1, 11, 12 and 13 above, and row A60 changes no dollars.
+- **Blind fill (2026-11-26, 15 cases).** Filled by hand from the blank form and the instructions: lines 1 to 8, 11, 13 to 16 (brackets, bus rates, gallon equivalents, line 13c at $.244, LUST rows, home kerosene), line 17 and Schedule 3 line 12. All 53 compared values match the engine; no blank-against-0 difference. The blind fill's doubts that change cents or dollars are doubts 1, 11, 12 and 13 above, and row A61 changes no dollars.
 - **PolicyEngine-US 2.154.1** (commit `0fbed6dd`, 2026-11-26). It does not model Form 4136: no variable or parameter for fuel tax credits, excise rates or Schedule 3 line 12 (a search of `variables/gov/irs` and `parameters/gov/irs` for fuel, kerosene, excise and 4136 finds only the residential clean energy fuel cell credit). Nothing to compare.
 - **Other projects.** The repository names no other reference implementation that models Form 4136. IRS Direct File (issue #140) is not checked out here, and its scope did not include business credits or Form 4136.
 
@@ -64,9 +64,9 @@ Doubt 5 is not done now: the engine writes no attached statements on any form. D
 | Rates, brackets, line 17 | Stated rule (form face, part-ii-credits::b01) |
 | Bus rates (11a-11h, 14a), line 13c at $.244 | Stated rule |
 | Types of use allowed on each line | Stated rule (each line's instructions) |
-| Home kerosene on line 4a | Stated rule; column per decision A60 |
-| Cents kept; Schedule 3 line 12 rounded | Own reading (decision A58) |
-| Part I lines A to F | Stated rule; which activity per decision A61 |
+| Home kerosene on line 4a | Stated rule; column per decision A61 |
+| Cents kept; Schedule 3 line 12 rounded | Own reading (decision A59) |
+| Part I lines A to F | Stated rule; which activity per decision A62 |
 | Dye boxes, registration numbers | Stated rule |
 | Gallon equivalents rounded | Own reading (doubt 1) |
 | Line B with more than one activity | Unsupported (Schedule A) |

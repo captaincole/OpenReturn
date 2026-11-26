@@ -4,7 +4,7 @@ import Link from "next/link";
 const TABS = [
   { id: "documents", label: "Documents", href: "/library" },
   { id: "graph", label: "Form graph", href: "/library/graph" },
-  { id: "law", label: "Statute", href: "/library/law" },
+  { id: "law", label: "Law", href: "/library/law" },
 ] as const;
 
 export function LibraryTabs({ active }: { active: (typeof TABS)[number]["id"] }) {

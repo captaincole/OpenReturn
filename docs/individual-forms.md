@@ -15,7 +15,7 @@ This page lists each form that an individual income tax return can hold, and wha
 
 Source: [Tax year 2025 accepted forms and schedules for individual tax returns and extensions](https://www.irs.gov/pub/irs-efile/tax-year-2025-accepted-forms-schedules-individual-tax-returns-extensions.xlsx), IRS, dated 2025-11-18.
 
-The list has 225 rows, and 197 are forms and schedules to compute. The engine has 83 of them, and 72 have rules. Of the 43 tier 1 forms, the engine has 43, and 42 have rules.
+The list has 225 rows, and 197 are forms and schedules to compute. The engine has 88 of them, and 78 have rules. Of the 43 tier 1 forms, the engine has 43, and 43 have rules.
 
 | Form | Title | Tier 1 | Engine | Copies |
 | --- | --- | --- | --- | --- |
@@ -57,7 +57,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 1118 Schedule K | Foreign Tax Carryover Reconcilliation Schedule |  | Not in the engine | unbounded |
 | Form 1118 Schedule L | Foreign Tax Redeterminations |  | Not in the engine | 1 |
 | Form 1310 | Statement of Person Claiming Refund Due a Deceased Taxpayer |  | Not in the engine | 2 |
-| Form 172 | Net Operating Losses (NOLs) |  | Not in the engine | unbounded |
+| Form 172 | Net Operating Losses (NOLs) |  | Rules | unbounded |
 | Form 2106 | Employee Business Expenses |  | Rules | 4 |
 | Form 2120 | Multiple Support Declaration |  | Not in the engine | 4 |
 | Form 2210 | Underpayment of Estimated Tax by Individuals, Estates, and Trusts | Yes | Rules | 1 |
@@ -114,7 +114,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 7203 | S Corporation Shareholder Stock and Debt Basis Limitations | Yes | Rules | unbounded |
 | Form 7204 | Consent To Extend the Time To Assess Tax Related to Contested Foreign Income Taxes- Provisional Foreign Tax Credit Agreement |  | Not in the engine | unbounded |
 | Form 7205 | Energy Efficient Commercial Buildings Deduction |  | Not in the engine | unbounded |
-| Form 7206 | Self-Employed Health Insurance Deduction |  | Not in the engine | unbounded |
+| Form 7206 | Self-Employed Health Insurance Deduction |  | Rules | unbounded |
 | Form 7207 | Advanced Manufacturing Production Credit |  | Not in the engine | unbounded |
 | Form 7210 | Clean Hydrogen Production Credit |  | Not in the engine | unbounded |
 | Form 7211 | Clean Electricity Production Credit |  | Not in the engine | unbounded |
@@ -127,10 +127,10 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8283 | Noncash Charitable Contributions | Yes | Rules | unbounded |
 | Form 8288A | Statement of Withholding on Dispositions by Foreign Persons of U.S. Real Property Interests |  | Not a form: a document |  |
 | Form 8332 | Release/Revocation of Release of Claim to Exemption for Child by Custodial Parent |  | Not in the engine | 100 |
-| Form 8379 | Injured Spouse Allocation |  | Not in the engine | 1 |
+| Form 8379 | Injured Spouse Allocation |  | Rules | 1 |
 | Form 8396 | Mortgage Interest Credit |  | Rules | 1 |
 | Form 8582 | Passive Activity Loss Limitations | Yes | Rules | 1 |
-| Form 8582CR | Passive Activity Credit Limitations | Yes | No rules yet | 1 |
+| Form 8582CR | Passive Activity Credit Limitations | Yes | Rules | 1 |
 | Form 8586 | Low-Income Housing Credit |  | Not in the engine | unbounded |
 | Form 8594 | Asset Acquisition Statement Under Section 1060 |  | Not in the engine | unbounded |
 | Form 8606 | Nondeductible IRAs | Yes | Rules | 25 |
@@ -212,7 +212,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8938 | Statement of Foreign Financial Assets | Yes | Rules | 1 |
 | Form 8941 | Credit for Small Employer Health Insurance Premiums |  | Not in the engine | 2 |
 | Form 8949 | Sales and Other Dispositions of Capital Assets | Yes | Rules | unbounded |
-| Form 8958 | Allocation of Tax Amounts Between Certain Individuals in Community Property States |  | Not in the engine | 1 |
+| Form 8958 | Allocation of Tax Amounts Between Certain Individuals in Community Property States |  | Rules | 1 |
 | Form 8959 | Additional Medicare Tax | Yes | Rules | 1 |
 | Form 8960 | Net Investment Income Tax -- Individuals, Estates, and Trusts | Yes | Rules | 1 |
 | Form 8962 | Premium Tax Credit |  | Rules | 1 |
@@ -235,7 +235,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 926 | Return by a U.S. Transferor of Property to a Foreign Corporation |  | Not in the engine | unbounded |
 | Form 965A | Individual Report of Net 965 Tax Liability |  | No rules yet | 1 |
 | Form 970 | Application to Use LIFO Inventory Method |  | Not in the engine | unbounded |
-| Form 982 | Reduction of Tax Attributes Due to Discharge of Indebtedness (and Section 1082 Basis Adjustment) |  | Not in the engine | 1 |
+| Form 982 | Reduction of Tax Attributes Due to Discharge of Indebtedness (and Section 1082 Basis Adjustment) |  | Rules | 1 |
 | Form RRB1042S | Statement for Nonresident Alien Recipients of Payments by the Railroad Retirement Board |  | Not a form: a document | unbounded |
 | Form SSA1042S | Social Security Benefit Statement |  | Not a form: a document | unbounded |
 | Form T | Forest Activities Schedule |  | Not in the engine | unbounded |
@@ -249,7 +249,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 
 Source: [Forms you can e-file for individuals (tax year 2025)](https://www.ftb.ca.gov/tax-pros/efile/individual-efile-forms.html), FTB, dated 2026-01-02.
 
-The list has 65 rows, and 62 are forms and schedules to compute. The engine has 38 of them, and 26 have rules. Of the 22 tier 1 forms, the engine has 22, and 17 have rules.
+The list has 65 rows, and 62 are forms and schedules to compute. The engine has 38 of them, and 27 have rules. Of the 22 tier 1 forms, the engine has 22, and 18 have rules.
 
 | Form | Title | Tier 1 | Engine | Copies |
 | --- | --- | --- | --- | --- |
@@ -280,7 +280,7 @@ The list has 65 rows, and 62 are forms and schedules to compute. The engine has 
 | Form 3596 | Paid Preparer’s Due Diligence Checklist for California Earned Income Tax Credit |  | Not in the engine | 1 |
 | Form 3800 | Tax Computation for Certain Children with Unearned Income |  | Rules | 1 |
 | Form 3801 | Passive Activity Loss Limitations | Yes | Rules | 1 |
-| Form 3801-CR | Passive Activity Credit Limitations | Yes | No rules yet | 1 |
+| Form 3801-CR | Passive Activity Credit Limitations | Yes | Rules | 1 |
 | Form 3803 | Parents’ Election to Report Child’s Interest and Dividends | Yes | Rules | 10 |
 | Form 3804-CR | Pass-Through Entity Elective Tax Credit | Yes | Rules | 2 |
 | Form 3805E | Installment Sale Income | Yes | Rules | 25 |

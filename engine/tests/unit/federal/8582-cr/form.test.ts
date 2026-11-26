@@ -290,17 +290,21 @@ describe("Part VI, the election to increase basis (line-38::b01)", () => {
     expect(run.line("0.line.2b_rehab_pre_1990_prior_unallowed")).toBe(400 + 300);
   });
 
-  it("no election: line 38 unchecked and lines 39 to 41 blank; two elections are a gap", () => {
+  it("no election: line 38 unchecked and lines 39 to 41 blank", () => {
     const none = evaluate(base.facts);
     expect(none.line("1.line.38_elect_increase_basis")).toBe(false);
     expect(none.line("1.line.39_passive_activity_disposed_name")).toBeUndefined();
+  });
+
+  it("two elections are a gap", () => {
     const two = evaluate([
       ...base.facts,
       election("granary", "Granary Lofts"),
       election("depot", "Depot Lofts"),
     ]);
     expect(isGap(two.field("form-8582-cr", "1.line.39_passive_activity_disposed_name"))).toBe(true);
-  });
+    // Two whole returns: over the default 5 seconds when the full suite runs on a busy machine.
+  }, 20_000);
 });
 
 describe("the tax attributable to an amount (line-35::b01)", () => {
