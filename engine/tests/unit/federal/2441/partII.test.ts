@@ -84,6 +84,20 @@ describe("Form 2441 lines 4 and 5", () => {
     ]);
   });
 
+  // A farm's Schedule F line 34 is on Schedule 1 line 6 (irs-2441-inst-2025, lines 4 and 5).
+  it("adds a farm's profit with no Schedule SE, and waits while line 6 is blank", () => {
+    const farm = { ...BASE, hasFarm: true, qbiScheduleSEFiled: false };
+    const lines = evaluate(farm, { ...OTHER_FORMS, "schedule-1.0.line.6": 350 });
+    expect(lines["0.line.4_earned_income"]).toBe(5350);
+    expect(evaluate(farm)["0.line.4_earned_income"]).toBeUndefined();
+  });
+
+  it("adds a business and a farm together", () => {
+    const both = { ...BASE, hasBusiness: true, hasFarm: true, qbiScheduleSEFiled: false };
+    const federal = { ...OTHER_FORMS, "schedule-1.0.line.3": 300, "schedule-1.0.line.6": -1000 };
+    expect(evaluate(both, federal)["0.line.4_earned_income"]).toBe(4300);
+  });
+
   it("waits while a business's Schedule SE is undecided", () => {
     const lines = evaluate(
       { ...BASE, hasBusiness: true },

@@ -66,14 +66,18 @@ export interface PartIV {
 /*
  * Line 18, Worksheet 3 (ca-3514-inst-2025::sec::worksheet-3::b01): Schedule 1
  * line 3 (business) plus line 6 (farm) plus Schedule K-1 (Form 1065) box 14
- * code A, less Schedule 1 line 15 (the deductible part of SE tax). K-1s and
- * farms have no fact kind, so they add 0. Line 3 waits while a business is on
- * the return; line 15 waits while Schedule SE files.
+ * code A, less Schedule 1 line 15 (the deductible part of SE tax). K-1s have
+ * no fact kind, so they add 0. Line 3 waits while a business is on the return,
+ * line 6 while a farm is; line 15 waits while Schedule SE files.
  */
 export function businessIncome(form: Lines, info: Form3514FilingInfo): number | undefined {
   const line3 = numberOrBlank(form["schedule-1.0.line.3"]);
   const line15 = numberOrBlank(form["schedule-1.1.line.15"]);
   if (info.caEitcHasBusiness === true && line3 === undefined) return undefined;
+  // MANUAL EDIT: line 18 waits for a farm's Schedule 1 line 6 too.
+  if (info.caEitcHasFarm === true && numberOrBlank(form["schedule-1.0.line.6"]) === undefined) {
+    return undefined;
+  }
   if (info.mustFile?.["schedule-se"]?.value === true && line15 === undefined) return undefined;
   return sum(line3, federal(form, "schedule-1.0.line.6")) - sum(line15);
 }

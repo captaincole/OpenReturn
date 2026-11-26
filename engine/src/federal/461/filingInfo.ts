@@ -7,13 +7,13 @@ export interface Form461LineGaps {
   line4?: string;
   /* Schedule 1 line 5: a K-1 the limits stopped, a continuation sheet, Form 4835. */
   line5?: string;
-  /* Schedule 1 line 6: Schedule F files, and it has no rules. */
+  /* Schedule 1 line 6: a farm's Schedule F line 34 is a case the engine does not handle. */
   line6?: string;
 }
 
 /* A trade or business with a loss on Form 461 Part I (businessLosses.ts). */
 export interface BusinessLoss {
-  /* Its fact key: a Schedule C business, a rental property, a K-1, or the line 8 answer. */
+  /* Its fact key: a Schedule C business, a farm, a rental property, a K-1, or the line 8 answer. */
   key: string;
   /* The loss as Form 461 counts it, positive whole dollars; undefined for a rental (Schedule E line 22 has it). */
   loss?: number;
@@ -31,7 +31,7 @@ export interface Form461Figures {
   nonbusinessColumns?: NonbusinessColumn[];
   /* The K-1 amounts on Schedule E not from a trade or business; undefined while a K-1 waits. */
   k1Nonbusiness?: K1Nonbusiness;
-  /* The businesses with a loss on lines 2, 5 and 8; undefined while one is not known. */
+  /* The businesses with a loss on lines 2, 5, 6 and 8; undefined while one is not known. */
   businessLosses?: BusinessLoss[];
   gaps: Form461LineGaps;
 }

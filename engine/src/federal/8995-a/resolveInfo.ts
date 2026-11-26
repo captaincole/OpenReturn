@@ -1,4 +1,5 @@
 import { missingInputs, type ResolverInputs } from "../../resolverInputs.js";
+import { farmsWithoutQualifiedPaymentsAnswer } from "../qbi/farms.js";
 import type { QbiBusiness } from "../qbi/filingInfo.js";
 import {
   k1sWithoutCarriedQbiAnswer,
@@ -25,6 +26,7 @@ export function resolve8995AInfo(inputs: ResolverInputs): Form8995AFilingInfo {
         ...rentalsWithoutQbiAnswer(inputs),
         ...rentalsWithUnmodeledQbi(inputs),
         ...k1sWithoutCarriedQbiAnswer(inputs),
+        ...farmsWithoutQualifiedPaymentsAnswer(inputs),
       ],
     },
   };

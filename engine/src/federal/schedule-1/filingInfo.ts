@@ -31,6 +31,12 @@ export interface Schedule1FilingInfo
    * tells a waiting line 3 (true) from no business (false).
    */
   hasBusiness?: boolean;
+  /** Line 6: Schedule F line 34 summed over every farm; undefined while any line 34 waits or is a gap. */
+  farmIncome?: number;
+  /** Why line 6 is not known: a farm's line 34 is a case the engine does not handle. */
+  farmIncomeGap?: string;
+  /** A farm fact is on this return (unreadable ones too): line 10 waits while line 6 does. */
+  hasFarm?: boolean;
   /** Line 7: 1099-G box 1 sum, cents kept. */
   unemploymentCompensation?: number;
   /** Line 8z: 1099-G box 5 (RTAA payments) sum; the engine does not add it to line 8z yet. */

@@ -2,6 +2,7 @@
 
 import { defineForm, type FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
+import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import type { ScheduleSEFilingInfo } from "./filingInfo.js";
 import { MIN_NET_EARNINGS, netEarnings } from "./lines.js";
@@ -17,10 +18,6 @@ const MEDICARE_RATE = 0.029;
 const DEDUCTIBLE_SHARE = 0.5;
 
 const FORM_4361 = "No fact says whether the taxpayer is a minister who filed Form 4361.";
-const FARM =
-  "No fact gives net farm profit (Schedule F line 34, or a farm partnership's K-1 box 14, code A); line 3 counts none.";
-const CRP =
-  "No fact gives Conservation Reserve Program payments (Schedule F line 4b, or K-1 box 20, code AQ).";
 const CHURCH =
   "No fact gives church employee income (W-2 wages from a church that elected out of social security tax).";
 const PART_II =
@@ -39,11 +36,18 @@ function skipsTo11(form: Form): boolean {
   return (form["0.line.8a"] ?? 0) >= SOCIAL_SECURITY_WAGE_BASE;
 }
 
-function line3(form: Form): number | undefined {
+/*
+ * Line 3: lines 1a and 2 combined, less line 1b. It waits while a farm's line 34
+ * or a business's line 31 does; blank with neither.
+ */
+function line3(form: Form, info: ScheduleSEFilingInfo) {
+  if (info.farmNetProfitGap) return unsupported(info.farmNetProfitGap);
+  const line1a = form["0.line.1a"];
   const line2 = form["0.line.2"];
-  if (line2 === undefined) return undefined;
+  if (info.farmNetProfitWaits === true || info.scheduleCNetProfitWaits === true) return undefined;
+  if (line1a === undefined && line2 === undefined) return undefined;
   // Line 1b is entered in parentheses: it reduces line 3.
-  return sum(form["0.line.1a"], line2) - sum(form["0.line.1b"]);
+  return sum(line1a, line2) - sum(form["0.line.1b"]);
 }
 
 function line4a(form: Form): number | undefined {
@@ -70,9 +74,19 @@ export function register(): void {
           ? `${info.taxpayerFirstName} ${info.taxpayerLastName}`
           : undefined,
       "0.header.ssn": (_, info) => info.taxpayerSSN,
+      /*
+       * MANUAL EDIT: line 1a = the taxpayer's Schedule F line 34 (irs-1040sf-inst-2025::sec::line-34::b02).
+       * A farm partnership's K-1 box 14, code A, has no route here.
+       */
+      "0.line.1a": (_, info) =>
+        info.farmNetProfitGap
+          ? unsupported(info.farmNetProfitGap)
+          : roundDollars(info.farmNetProfit),
+      // MANUAL EDIT: line 1b = taxable CRP payments received while on social security (irs-1040sse-inst-2025::sec::line-1b::b01).
+      "0.line.1b": (_, info) => roundDollars(info.crpPayments),
       // Only Schedule C feeds line 2: no fact gives partnership (K-1) earnings.
       "0.line.2": (_, info) => roundDollars(info.scheduleCNetProfit),
-      "0.line.3": (form) => line3(form),
+      "0.line.3": (form, info) => line3(form, info),
       "0.line.4a": (form) => line4a(form),
       "0.line.4c": (form) => {
         const value = form["0.line.4a"];
@@ -134,8 +148,6 @@ export function register(): void {
     },
     unsupported: {
       "0.line.a_form_4361_exempt": FORM_4361,
-      "0.line.1a": FARM,
-      "0.line.1b": CRP,
       "0.line.4b": PART_II,
       "0.line.5a": CHURCH,
       "0.line.5b": CHURCH,

@@ -40,6 +40,12 @@ export function register(): void {
         if (!form4797Files(info)) return unsupported(NO_FORM_4797_BOX);
         return typeof scheduleOneLine4(info) === "number" ? true : undefined;
       },
+      /*
+       * MANUAL EDIT: line 6 = Schedule F line 34, every farm (irs-1040sf-inst-2025::sec::line-34::b02);
+       * blank with no farm and while a line 34 waits, the gap when one is a case the engine does not handle.
+       */
+      "0.line.6": (_, info) =>
+        info.farmIncomeGap ? unsupported(info.farmIncomeGap) : info.farmIncome,
       // MANUAL EDIT: line 5 = Schedule E line 41; blank when Schedule E is not filed.
       "0.line.5": (form) => {
         const line41 = form["schedule-e.1.line.41_total_income_or_loss"];
@@ -115,14 +121,17 @@ export function register(): void {
        * MANUAL EDIT: irs-1040-inst-2025::sec::line-3::b01. Line 3 is blank with no
        * business (adds nothing) and blank while a business's line 31 waits. Then
        * line 10 waits: sum() would add the loss as 0 and overstate income. The
-       * other terms are blank only when empty: 1, 2a, 4, 6 are unsupported, line
-       * 7 is blank with no 1099-G, and line 9 is a sum.
+       * other terms are blank only when empty: 1, 2a, 4 are unsupported, line 6
+       * is blank with no farm, line 7 is blank with no 1099-G, and line 9 is a sum.
        */
       "0.line.10": (form, info) => {
         // MANUAL EDIT: line 9 holds while Form 461 line 16 or Form 2555 waits or is a gap.
         const hold = line8pHold(form, info) ?? foreignExclusionHold(form, info);
         if (hold !== undefined) return hold === "waiting" ? undefined : hold;
+        // MANUAL EDIT: a farm's line 34 gap reaches line 10; a farm whose line 34 waits makes it wait.
+        if (info.farmIncomeGap) return unsupported(info.farmIncomeGap);
         return (info.hasBusiness === true && form["0.line.3"] === undefined) ||
+          (info.hasFarm === true && form["0.line.6"] === undefined) ||
           // MANUAL EDIT: Schedule E filed or still open (an unreadable rental fact), line 41 blank: wait too.
           (info.mustFile?.["schedule-e"]?.value !== false && form["0.line.5"] === undefined) ||
           // MANUAL EDIT: Form 4797 waits on its line 8 answer: line 4 is not known yet.
@@ -199,7 +208,6 @@ export function register(): void {
         "No fact for a 1099-K amount in error or for personal items sold at a loss; a 1099-K that names no business stays open on Schedule C.",
       "0.line.1": "No 1099-G or state-refund taxability worksheet scenario yet.",
       "0.line.4_form_4684": "No Form 4684 casualty/theft scenario yet.",
-      "0.line.6": "No Schedule F / farm income scenario yet",
       "0.line.7_repaid_checkbox":
         "No fact for a repayment of unemployment compensation; Cade says a repayment is not supported.",
       "0.line.7_amount_repaid":

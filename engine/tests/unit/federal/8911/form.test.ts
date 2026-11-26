@@ -168,7 +168,7 @@ describe("Form 8911 answers that wait", () => {
 });
 
 describe("Form 8911 Part I: the business part goes through Form 3800", () => {
-  it("a mixed-use charger fills lines 1 and 3, files Form 3800 and leaves Schedule 3 line 6a a gap", () => {
+  it("a mixed-use charger fills lines 1 and 3, and line 3 reaches Form 3800 line 1s and Schedule 3 line 6a", () => {
     const mixed = { ...GARAGE_CHARGER, businessUsePercent: 40, meetsPwaRequirements: false };
     const run = evaluate(factsWith({ [GARAGE]: mixed }));
     // Line 10 $1,660 × 6% = $100; line 18 $2,490 × 30% = $747.
@@ -176,7 +176,10 @@ describe("Form 8911 Part I: the business part goes through Form 3800", () => {
     expect(run.line(LINE_3)).toBe(100);
     expect(run.line(LINE_4)).toBe(747 + 624);
     expect(run.files("form-3800")).toBe(true);
-    expect(isGap(run.field("schedule-3", "0.line.6a"))).toBe(true);
+    expect(run.value("form-3800", "2.part3.1s_form_8911_part_i_col_e")).toBe(100);
+    const allowed = run.value("form-3800", "1.line.38_credit_allowed_current_year");
+    expect(typeof allowed).toBe("number");
+    expect(run.value("schedule-3", "0.line.6a")).toBe(allowed);
   });
 
   it("a K-1 code AO credit goes on line 2 next to a Schedule A; alone it files only Form 3800", () => {
