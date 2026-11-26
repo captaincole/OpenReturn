@@ -3,7 +3,7 @@
  */
 
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
-import { numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
+import { numberOrBlank, sum, sumOrBlank } from "../../money.js";
 import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { namesOnReturn } from "../returnNames.js";
@@ -19,6 +19,15 @@ import { allocationBindings, part9Unsupported } from "./allocationBindings.js";
 import type { Form8582FilingInfo } from "./filingInfo.js";
 import { modifiedAgi } from "./magi.js";
 import { magiWithK1Gap } from "./magiGap.js";
+// MANUAL EDIT: Part II amounts (form lines 5 and 8; line-5::b01, line-8::b01 for MFS living apart).
+import {
+  ALLOWANCE_THRESHOLD,
+  ALLOWANCE_THRESHOLD_MFS_APART,
+  halfOfExcess,
+  isMfsApart,
+  MAX_ALLOWANCE,
+  MAX_ALLOWANCE_MFS_APART,
+} from "./specialAllowance.js";
 import type { Form8582 } from "./types.js";
 
 type Fn = (f: FormAccessor<Form8582>, info: Form8582FilingInfo) => unknown;
@@ -39,13 +48,6 @@ const AMOUNT_COLUMNS: ReadonlyArray<{
   { suffix: "col_b_net_loss", amount: (activity) => activity.netLoss },
   { suffix: "col_c_unallowed_loss", amount: (activity) => activity.priorUnallowedLoss },
 ];
-
-// MANUAL EDIT: Part II amounts (form lines 5 and 8; line-5::b01, line-8::b01 for MFS living apart).
-const ALLOWANCE_THRESHOLD = 150000;
-const ALLOWANCE_THRESHOLD_MFS_APART = 75000;
-const ALLOWANCE_RATE = 0.5;
-const MAX_ALLOWANCE = 25000;
-const MAX_ALLOWANCE_MFS_APART = 12500;
 
 const positiveOrBlank = (value: number) => (value > 0 ? value : undefined);
 
@@ -136,8 +138,7 @@ function partIIApplies(form: FormAccessor<Form8582>, info: Form8582FilingInfo) {
   return info.livedApartFromSpouseAllYear;
 }
 
-const mfsApart = (info: Form8582FilingInfo) =>
-  info.filingStatus === "married_filing_separately" && info.livedApartFromSpouseAllYear === true;
+const mfsApart = isMfsApart;
 
 // MANUAL EDIT: "If line 6 is greater than or equal to line 5, skip lines 7 and 8 and enter -0- on line 9."
 function line6ReachesLine5(form: FormAccessor<Form8582>) {
@@ -165,8 +166,7 @@ const partsIIAndIII: Record<string, Fn> = {
   "0.line.8_half_of_line7": (form, info) => {
     const line7 = numberOrBlank(form["0.line.7_line5_minus_line6"]);
     if (line7 === undefined) return undefined;
-    const cap = mfsApart(info) ? MAX_ALLOWANCE_MFS_APART : MAX_ALLOWANCE;
-    return Math.min(roundDollars(line7 * ALLOWANCE_RATE), cap);
+    return halfOfExcess(line7, mfsApart(info) ? MAX_ALLOWANCE_MFS_APART : MAX_ALLOWANCE);
   },
   // No fact gives prior-year unallowed CRD, so the CRD worksheet adds nothing (line-9::b01).
   "0.line.9_special_allowance": (form) => {

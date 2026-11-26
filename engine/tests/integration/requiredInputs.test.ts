@@ -120,6 +120,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "during the year; absent, the other person on Form 8958 is a registered domestic partner",
   ],
   [
+    /^canceled_debt\.[^.]+$/,
+    "each fact is a whole canceled debt (Form 982, Schedule 1 line 8c); whether a debt was canceled " +
+      "with no Form 1099-C is Cade's question. A Form 1099-C with no debt fact asks for one, and " +
+      "Form 982 lists a debt fact again while an answer inside it is missing",
+  ],
+  [
     /^armed_forces_move\.[^.]+$/,
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],

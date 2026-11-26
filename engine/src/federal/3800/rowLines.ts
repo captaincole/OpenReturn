@@ -8,7 +8,7 @@
 import { addCells, blankForZero, firstGap, gap, type Cell } from "./cells.js";
 import {
   ELECTIVE_PAYMENT_GAP,
-  PASSIVE_GAP,
+  allowedOf,
   isCarryback,
   needsPassiveLimit,
   signedTransfer,
@@ -65,11 +65,14 @@ export function partIIIColumns(credits: ReadonlyArray<CurrentCredit>): PartIIICo
   const nonpassiveColumn = addCells(...nonpassive.map(amountCell));
   const transferColumn = addCells(...credits.map(signedTransfer));
   const anyGap = firstGap([passiveColumn, nonpassiveColumn, transferColumn]);
+  // (g): "Combine columns (e) and (f) with the credit from column (d) allowed after the passive activity limit" (face-part-iii::b01).
   const combined =
     anyGap ??
-    (credits.some(needsPassiveLimit)
-      ? gap(PASSIVE_GAP)
-      : addCells(nonpassiveColumn, transferColumn));
+    addCells(
+      nonpassiveColumn,
+      nonpassiveTransfers(credits),
+      ...credits.filter(needsPassiveLimit).map(allowedOf),
+    );
   const elective = credits.some((credit) => credit.electivePayment !== undefined);
   const elected = credits.find((credit) => credit.transfer ?? credit.electivePayment);
   return {
@@ -111,7 +114,7 @@ const carryAmount = (carryover: Carryover): Cell =>
 
 /*
  * Columns (a) to (f) and (h) of one Part IV row (part-iv-2::b03, ::b04). Column
- * (e), the passive carryovers allowed, needs Form 8582-CR.
+ * (e), the passive carryovers allowed, is what Form 8582-CR allows of them.
  */
 export function partIVColumns(carryovers: ReadonlyArray<Carryover>): PartIVColumns {
   const passive = carryovers.filter((carryover) => carryover.passive);
@@ -126,7 +129,7 @@ export function partIVColumns(carryovers: ReadonlyArray<Carryover>): PartIVColum
     b: years.length > 0 ? Math.max(...years) : undefined,
     c: einOf(sized),
     d: passiveColumn,
-    e: passive.length > 0 ? gap(PASSIVE_GAP) : undefined,
+    e: passive.length > 0 ? addCells(...passive.map(allowedOf)) : undefined,
     f: addCells(...carryovers.filter((carryover) => !carryover.passive).map(carryAmount)),
     h: blankForZero(addCells(...carryovers.map((carryover) => carryover.recaptured))),
   };

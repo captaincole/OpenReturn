@@ -6,7 +6,7 @@ The items keep their first numbers, so "doubt 3" below and in other notes still 
 
 ## Two texts conflict
 
-- **2. The odd dollar.** Decided: row A44 of `docs/rule-decisions.md` and the `DECISION` comment in `lines.ts`. Column C is column A less column B. At most $1, on the spouse's column.
+- **2. The odd dollar.** Decided: row A49 of `docs/rule-decisions.md` and the `DECISION` comment in `lines.ts`. Column C is column A less column B. At most $1, on the spouse's column.
 
 ## Should we do this now
 
