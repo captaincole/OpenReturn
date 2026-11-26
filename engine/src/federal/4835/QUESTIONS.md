@@ -30,6 +30,7 @@ Each place where the form and its instructions do not settle a rule. Short answe
 
 - Source: "If you did elect to report the loan proceeds as income, you generally won't have an entry on line 5c. But if the amount forfeited is different from your basis in the commodity, you may have an entry on line 5c" (irs-1040sf-inst-2025::sec::lines-4a-and-4b::b03).
 - Default: a gain prints on line 4c. A forfeited amount below the basis makes the whole form unsupported: the text does not say whether line 4c takes a negative amount.
+- The gain's amount is the engine's own reading: the text says only "you may have an entry". The engine enters the forfeited amount less the basis, because the forfeiture "is treated for tax purposes as a sale of the crops" (irs-pub-225-2025::sec::use-form-w-4v-see-how-to-get-tax::b02). The blind fill read it the same way ($5,000 − $4,200 = $800).
 - Changes dollars: yes, for that case only.
 
 ## 6. Line 3b: what is not taxable
@@ -69,6 +70,23 @@ Each place where the form and its instructions do not settle a rule. Short answe
 - California's FTB 3801 shows its farm gap when Form 4835 files, by the fact or by the decision.
 - Lines 19a and 19b: the business interest limit (Form 8990) is not applied.
 - A joint farm rental on a separate return, and more than one farm rental, make the whole form unsupported.
+
+## 12. Lines 5a to 5d: a deferral of part of the crop insurance
+
+- Source: "Generally, if you elect to defer any eligible crop insurance proceeds, you must defer all such crop insurance proceeds (including federal crop disaster payments)" (irs-4835-inst-2025::sec::lines-5a-through-5d::b01); the Schedule F lines 6a to 6d text in the next block adds "from a single trade or business" (irs-4835-inst-2025::sec::lines-5a-through-5d::b02).
+- Default: line 5b is line 5a less the stated `cropInsuranceDeferredTo2026`. The engine does not check that the stated amount is all of the eligible proceeds; part of a payment can be ineligible (Pub. 225, chapter 3). Cade asks for the eligible amount.
+- Changes dollars: yes, if Cade records a part of the eligible proceeds. The blind fill read a partial amount the same way.
+
+## 13. Line 7 with no income
+
+- Source: "Add amounts in the right column for lines 1 through 6" (the form face). Nothing says whether a total of no amounts prints 0 or blank.
+- Default: line 7 is blank when lines 1 to 6 are all blank (`sumOrBlank`); line 32 and line 10 read it as 0. The blind fill printed 0.
+- Changes dollars: no.
+
+## Second opinions
+
+- **PolicyEngine-US 2.154.0 (commit 363e9fc5e4).** It models Form 4835 only as one input, `farm_rent_income`, the net amount on Schedule E line 40. It has no formula for any line of Parts I and II, no conservation limit and no CCC rules, so no constant or line formula could be compared. It counts the net amount in net investment income (the engine agrees, through Schedule 1 line 5), in qualified business income and in the section 461(l) business loss limit. The engine does not take the farm rental on Form 8995 or Form 461 (item 11); those are scope gaps already listed, not differences in a rule.
+- **IRS Direct File:** not compared. The repository names no checkout of it, and its scope has no farm income.
 
 ## Proposals for a discussion
 
