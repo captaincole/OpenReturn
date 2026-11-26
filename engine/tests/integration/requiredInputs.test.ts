@@ -74,6 +74,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],
   [
+    /^mortgage_subsidy\.[^.]+\.sale$/,
+    "each fact is a whole sale of a home with a federal mortgage subsidy (Form 8828); whether " +
+      "the taxpayer sold one is Cade's question. The form asks for the issuer's notice of each sale",
+  ],
+  [
     /^installment_sale\.[^.]+$/,
     "each fact is a whole installment sale (Form 6252, one copy per sale); whether the " +
       "taxpayer made one is Cade's question",

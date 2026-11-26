@@ -18,6 +18,7 @@ import { form6252TotalsOf } from "./federal/6252/resolveInfo.js";
 import { form8621Feeds } from "./federal/8621/totals.js";
 import { sendsToScheduleD } from "./federal/8824/receivers.js";
 import { resolve8824Info } from "./federal/8824/resolveInfo.js";
+import { resolve8828Info } from "./federal/8828/resolveInfo.js";
 import { resolve8853Info } from "./federal/8853/resolveInfo.js";
 import { SCHEDULE_2_LINES, form8853Reaches } from "./federal/8853/results.js";
 import { resolve8919Info } from "./federal/8919/resolveInfo.js";
@@ -445,6 +446,8 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
     cleanVehicleSchedules(inputs).repayment,
     // Form 8621 lines 16f, 23 and 24 (lines 17p, 17z and 17q).
     form8621Feeds(inputs).scheduleTwo,
+    // Form 8828 line 23 (line 17b), when its facts allow a tax above 0.
+    resolve8828Info(inputs).form8828ReachesSchedule2 === true,
   ];
   const required = feeders.some((value) => value === true);
   const open = !required && feeders.some((value) => value === undefined);
