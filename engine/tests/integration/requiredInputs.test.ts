@@ -43,6 +43,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "(last year's return is not read, #79); Schedule D files with it",
   ],
   [
+    /^ca_nol\.prior_year_carryovers$/,
+    "a prior-year answer from last year's FTB 3805V Part III, recorded when the taxpayer carries " +
+      "a California NOL or disaster loss over (last year's return is not read, #79); FTB 3805V files with it",
+  ],
+  [
     /^capital_gains\.ca_loss_carryover$/,
     "a prior-year answer Cade records when the California carryover differs from the federal " +
       "one; Schedule D (540) files with it, and asks for it when it files and a federal carryover exists",
