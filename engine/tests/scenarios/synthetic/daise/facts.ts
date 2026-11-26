@@ -69,6 +69,8 @@ export const ranch: FarmFactValue = {
   productSales: 286400,
   cooperativeDistributions: 4800,
   cooperativeDistributionsNotTaxable: 600,
+  // Her Forms 1099-PATR are from a farm supply cooperative: no box 7 qualified payments.
+  cooperativeQualifiedPayments: 0,
   agriculturalProgramPayments: 21300,
   marketGain: 1800,
   costShareExclusion: 1500,

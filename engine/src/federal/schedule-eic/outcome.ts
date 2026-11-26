@@ -58,9 +58,10 @@ function step5EarnedIncome(form: Lines, info: EicOutcomeInfo): number | undefine
 /*
  * Worksheet B line 4b (irs-1040-inst-2025::sec::bworksheet-2025-eic-line-27a::b01
  * to ::b03). Part 1 for a Schedule SE filer: SE line 3, plus lines 4b and 5a,
- * less line 13. Part 2 for a business that files no Schedule SE: Schedule C
- * line 31. Farm income, Schedule K-1 box 14 and statutory employees (Part 3)
- * are not modeled, so a statutory employee is a gap.
+ * less line 13. Part 2 for a business or farm that files no Schedule SE:
+ * Schedule F line 34 (line 2a) and Schedule C line 31 (line 2b). Schedule K-1
+ * box 14 and statutory employees (Part 3) are not modeled, so a statutory
+ * employee is a gap.
  */
 function worksheetBEarnedIncome(
   form: Lines,

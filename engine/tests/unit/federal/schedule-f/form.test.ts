@@ -44,6 +44,22 @@ const withRanch = (fields: Partial<FarmFactValue>) =>
   );
 const withoutFarm = (facts: TaxFactRow[]) => facts.filter((fact) => !fact.key.startsWith("farm."));
 
+/* Daise's return with a small egg farm in place of the ranch. */
+const smallFarm = (fields: Partial<FarmFactValue>): TaxFactRow[] => [
+  ...withoutFarm(daise.facts),
+  {
+    ...daise.facts.find((fact) => fact.key === FARM_KEY)!,
+    value: {
+      activity: "Eggs",
+      accountingMethod: "cash",
+      materiallyParticipated: true,
+      paymentsRequire1099: false,
+      expenses: { feed: 3000 },
+      ...fields,
+    },
+  },
+];
+
 describe("who files", () => {
   it("files for a farm fact", () => {
     expect(evaluate(daise.facts).files("schedule-f")).toMatchObject({ ok: true, value: true });
@@ -159,21 +175,6 @@ describe("the lines that receive line 34", () => {
     expect(run.reason("schedule-ca.0.line.b6_additions")).toContain("depreciation");
   });
 
-  const smallFarm = (fields: Partial<FarmFactValue>): TaxFactRow[] => [
-    ...withoutFarm(daise.facts),
-    {
-      ...daise.facts.find((fact) => fact.key === FARM_KEY)!,
-      value: {
-        activity: "Eggs",
-        accountingMethod: "cash",
-        materiallyParticipated: true,
-        paymentsRequire1099: false,
-        expenses: { feed: 3000 },
-        ...fields,
-      },
-    },
-  ];
-
   it("a small farm profit reaches Schedule 1 line 6 with no Schedule SE (4a under $400)", () => {
     const run = evaluate(smallFarm({ productSales: 3400 }));
     expect(run.value("schedule-1.0.line.6")).toBe(400);
@@ -195,6 +196,19 @@ describe("the lines that receive line 34", () => {
     expect(run.value("schedule-se.0.line.6")).toBeUndefined();
   });
 
+  it("Schedule CA line 6 columns B and C are a gap when a federal wage credit reduced line 22", () => {
+    const facts = edarra.facts.map((fact) =>
+      fact.key.startsWith("farm.")
+        ? { ...fact, value: { ...(fact.value as FarmFactValue), employmentCredits: 2400 } }
+        : fact,
+    );
+    const run = evaluate(facts, edarra.decisions);
+    expect(run.reason("schedule-ca.0.line.b6_subtractions")).toContain("wage credit");
+    expect(run.reason("schedule-ca.0.line.b6_additions")).toContain("wage credit");
+    const plain = evaluate(edarra.facts, edarra.decisions);
+    expect(plain.reason("schedule-ca.0.line.b6_subtractions")).toBeUndefined();
+  });
+
   it("under $434 with line 1b, no Schedule SE", () => {
     const run = evaluate(
       smallFarm({
@@ -204,6 +218,43 @@ describe("the lines that receive line 34", () => {
       }),
     );
     expect(run.files("schedule-se")).toMatchObject({ value: false });
+  });
+});
+
+/*
+ * irs-8995-inst-2025::sec::who-can-take-the-deduction::b01 and
+ * ::determining-your-qualified-business::b07: a cooperative's patron uses Form
+ * 8995-A, and qualified payments (Form 1099-PATR box 7) bring the patron
+ * reduction on line 14.
+ */
+describe("a cooperative patron (Schedule F line 3a)", () => {
+  it("daise: qualified payments of 0 leave Form 8995-A line 15 at line 13", () => {
+    const run = evaluate(daise.facts);
+    expect(run.value("form-8995-a.0.line.15_a")).toBe(run.value("form-8995-a.0.line.13_a"));
+  });
+
+  it("asks for the qualified payments when line 3a holds an amount", () => {
+    const run = evaluate(withRanch({ cooperativeQualifiedPayments: undefined }));
+    expect(pendingInputs(run.result).pendingFacts).toContain(FARM_KEY);
+    expect(run.value("form-8995-a.0.line.2_a")).toBeUndefined();
+  });
+
+  it("qualified payments above 0 make the farm's QBI a gap (the patron reduction)", () => {
+    const run = evaluate(withRanch({ cooperativeQualifiedPayments: 3000 }));
+    expect(run.reason("form-8995-a.0.line.2_a")).toContain("patron reduction");
+    // Form 1040 line 13a is blocked by the gap, never $22,079.
+    expect(run.value("form-1040.line.13a")).toBeUndefined();
+  });
+
+  const smallPatron = (cooperativeDistributions: number) =>
+    smallFarm({ productSales: 3400, cooperativeDistributions, cooperativeQualifiedPayments: 0 });
+
+  it("a patron below the threshold files Form 8995-A, not Form 8995", () => {
+    const patron = evaluate(smallPatron(500));
+    expect(patron.files("form-8995-a")).toMatchObject({ value: true });
+    expect(patron.files("form-8995")).toMatchObject({ value: false });
+    const notPatron = evaluate(smallPatron(0));
+    expect(notPatron.files("form-8995")).toMatchObject({ value: true });
   });
 });
 

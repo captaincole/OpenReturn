@@ -17,7 +17,18 @@ const dollars = (amount: number | undefined) => roundDollars(amount);
 const less = (whole: number | undefined, ...parts: Array<number | undefined>) =>
   whole === undefined ? undefined : roundDollars(whole) - sum(...parts.map(dollars));
 
-/* Line 1c: line 1a less line 1b (irs-pub-225-2025::sec::sales-of-farm-products::b01, the feeder calves). */
+/*
+ * Line 1c: line 1a less line 1b (irs-pub-225-2025::sec::sales-of-farm-products::b01, the feeder calves).
+ *
+ * DECISION (2026-11-25, by the author): Pub. 225's market gain example says
+ * "His gain from the sale is $1,200 ($5,200 – $4,000). He reports the $5,000
+ * sale on line 1a and the $4,000 basis on line 1b. After subtracting his basis
+ * from the sale, Mike will have a $1,200 gain for 2025 on Schedule F, line 1c"
+ * (irs-pub-225-2025::sec::market-gain::b03), while the form says "Subtract line
+ * 1b from line 1a" ($5,000 − $4,000 = $1,000). The engine follows the form:
+ * line 1c is line 1a less line 1b, with line 1a the sale amount the farmer
+ * states, because the form's arithmetic wins over a sentence that breaks it.
+ */
 export function line1c(farm: FarmFactValue): number | undefined {
   if (farm.purchasedItemSales === undefined && farm.purchasedItemBasis === undefined) {
     return undefined;

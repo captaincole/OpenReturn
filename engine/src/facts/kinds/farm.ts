@@ -108,6 +108,13 @@ export interface FarmFactValue {
   cooperativeDistributions?: number;
   /* The part of line 3a from buying personal or family items, capital assets or depreciable assets: not on line 3b. */
   cooperativeDistributionsNotTaxable?: number;
+  /*
+   * Form 1099-PATR box 7 on the forms in line 3a: qualified payments from a
+   * specified agricultural or horticultural cooperative, which bring the
+   * patron reduction (Form 8995-A line 14). Asked when line 3a holds an
+   * amount; 0 when no form shows box 7.
+   */
+  cooperativeQualifiedPayments?: number;
   /* Line 4a / 39a: agricultural program payments, market gain included. */
   agriculturalProgramPayments?: number;
   /* The market gain in line 4a (Form 1099-G box 9, CCC-1099-G): not taxable under the CCC loan election. */
@@ -186,6 +193,7 @@ const AMOUNT_FIELDS = [
   "productSales",
   "cooperativeDistributions",
   "cooperativeDistributionsNotTaxable",
+  "cooperativeQualifiedPayments",
   "agriculturalProgramPayments",
   "marketGain",
   "costShareExclusion",

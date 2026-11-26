@@ -80,6 +80,8 @@ export const nursery: FarmFactValue = {
   productSales: 210000,
   purchasedItemSales: 15000,
   cooperativeDistributions: 2000,
+  // Her Form 1099-PATR is from a farm supply cooperative: no box 7 qualified payments.
+  cooperativeQualifiedPayments: 0,
   agriculturalProgramPayments: 6000,
   cccLoanElection: true,
   cccLoansReported: 5000,

@@ -122,19 +122,36 @@ const FARM_DEPRECIATION_GAP =
   "A farm deducts depreciation on federal Schedule F line 14, and California's can differ (ca-540-sched-ca-inst-2025::sec::line-6-farm-income-or-loss::b01): FTB 3885A needs the farm's assets, and the farm fact holds only the federal amount.";
 
 /*
+ * The federal wage credits reduce Schedule F lines 22 and 15, and Schedule CA
+ * lists "Employer wage expense for the federal Work Opportunity Credit" and the
+ * "Small Employer Health Insurance Credit" among the business deductions that
+ * differ (ca-540-sched-ca-inst-2025::sec::business-deductions-related-to::b01).
+ * The farm's employmentCredits adds four credits (Forms 5884, 8844, 8932, 8994)
+ * and does not say which, so the California amount is not known.
+ */
+const FARM_WAGE_CREDIT_GAP =
+  "A federal wage credit (Forms 5884, 8844, 8932, 8994 on Schedule F line 22, or Form 8941 on line 15) reduced the farm's deduction, and California's business deductions differ for the Work Opportunity Credit and the Small Employer Health Insurance Credit (ca-540-sched-ca-inst-2025::sec::business-deductions-related-to::b01); the farm fact does not split the credits by form.";
+
+/*
  * Line 6 columns B and C: the adjustments "generally are necessary because of
  * the difference between California and federal law relating to depreciation
  * methods, special credits, NOLs, and accelerated write-offs"
  * (ca-540-sched-ca-inst-2025::sec::line-6-farm-income-or-loss::b01). A farm with
- * no depreciation has none of these on line 34: blank. With depreciation the
- * California amount is not known (a gap). A passive farm, which needs FTB 3801,
- * is already a gap on federal line 34.
+ * no depreciation and no federal wage credit has none of these on line 34:
+ * blank. With depreciation or a wage credit the California amount is not known
+ * (a gap). A passive farm, which needs FTB 3801, is already a gap on federal
+ * line 34.
  */
 export function line6Column(info: ScheduleCaFilingInfo) {
-  const depreciates = (info.farms ?? []).some(
-    (farm) => (farm.value.expenses?.depreciation ?? 0) > 0,
+  const farms = info.farms ?? [];
+  if (farms.some((farm) => (farm.value.expenses?.depreciation ?? 0) > 0)) {
+    return unsupported(FARM_DEPRECIATION_GAP);
+  }
+  const credits = farms.some(
+    (farm) =>
+      (farm.value.employmentCredits ?? 0) > 0 || (farm.value.smallEmployerHealthCredit ?? 0) > 0,
   );
-  return depreciates ? unsupported(FARM_DEPRECIATION_GAP) : undefined;
+  return credits ? unsupported(FARM_WAGE_CREDIT_GAP) : undefined;
 }
 
 export function answerLines(): Bindings {

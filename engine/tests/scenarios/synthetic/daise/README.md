@@ -26,6 +26,8 @@ She paid $66,000 of estimated tax.
   CRP payments while on social security on Schedule SE line 1b.
 - The farm as her QBI business (Form 8995-A, above the threshold) and the
   nonpassive farm taken out of net investment income on Form 8960 line 4b.
+  Her Forms 1099-PATR are from a farm supply cooperative with no qualified
+  payments (box 7), so Form 8995-A line 14 has no patron reduction.
 
 ## Documents
 

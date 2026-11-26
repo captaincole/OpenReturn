@@ -7,8 +7,10 @@ import {
   RENTAL_KEYS,
   SPOUSE_KEYS,
   makeDependentFactKey,
+  makeFarmFactKey,
   makeRentalFactKey,
   type DependentFactValue,
+  type FarmFactValue,
   type RentalFactValue,
 } from "../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../src/facts/rows";
@@ -99,7 +101,9 @@ const fact = (key: string, value: unknown): TaxFactRow => ({
         ? "dependents"
         : key.startsWith("rental.")
           ? "rental"
-          : "other",
+          : key.startsWith("farm.")
+            ? "self_employment"
+            : "other",
   key,
   value,
 });
@@ -228,6 +232,44 @@ describe("Form 1040 line 27a never waits on an answer no one asks", () => {
         checkLine27c: false,
       });
     });
+  });
+});
+
+/*
+ * irs-1040-inst-2025::sec::bworksheet-2025-eic-line-27a::b02: with no Schedule
+ * SE (line 4c under $400), Worksheet B line 2a takes Schedule F line 34.
+ */
+describe("Form 1040 line 27a for a small farm (Worksheet B Part 2)", () => {
+  const eggFarm: FarmFactValue = {
+    activity: "Eggs",
+    accountingMethod: "cash",
+    materiallyParticipated: true,
+    paymentsRequire1099: false,
+    productSales: 3_350,
+    expenses: { feed: 3_000 },
+  };
+
+  it("adds line 34 of $350 to wages of $8,000", () => {
+    const { outcome } = settle({
+      status: "single",
+      dependent: "nephew",
+      wages: 8_000,
+      extra: { [makeFarmFactKey("eggs")]: eggFarm },
+    });
+    expect(eicTableCredit(8_350, 1, false)).not.toBe(eicTableCredit(8_000, 1, false));
+    expect(outcome).toEqual({ kind: "credit", amount: eicTableCredit(8_350, 1, false) });
+  });
+
+  it("takes a farm loss off earned income", () => {
+    const { outcome } = settle({
+      status: "single",
+      dependent: "nephew",
+      wages: 8_000,
+      extra: {
+        [makeFarmFactKey("eggs")]: { ...eggFarm, productSales: 2_000, allInvestmentAtRisk: true },
+      },
+    });
+    expect(outcome).toEqual({ kind: "credit", amount: eicTableCredit(7_000, 1, false) });
   });
 });
 
