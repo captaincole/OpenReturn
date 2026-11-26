@@ -1,5 +1,6 @@
 import { z } from "zod";
 import type { CorpusFormat, SourceFormat } from "../../../db/corpusStore";
+import { conflictSchema, statuteBlockSchema } from "../statute";
 
 // Canon is stateless: Cade keeps the threads in app.db and sends `history`.
 export type { SourceFormat };
@@ -16,6 +17,8 @@ export interface AskCitation {
   sectionHeading: string | null;
   pageNum: number;
   quote: string;
+  /** A statute passage only: "26 U.S.C. § 469(g)(1)". */
+  citation?: string;
 }
 
 export interface AskHistoryTurn {
@@ -32,6 +35,7 @@ export const askCitationSchema = z.object({
   sectionHeading: z.string().nullable(),
   pageNum: z.number(),
   quote: z.string(),
+  citation: z.string().optional(),
 });
 
 export const askInputSchema = z.object({
@@ -47,6 +51,11 @@ export const askResultSchema = z.object({
   coverage: z.enum(["covered", "partial", "not_covered"]),
   citations: z.array(askCitationSchema),
   missingDocuments: z.array(z.string()),
+  // The statute passages the answerer saw; empty when the statute was not searched.
+  statutePassages: z.array(statuteBlockSchema).default([]),
+  statuteConsulted: z.boolean().default(false),
+  // Passages that disagree, with both quotes; nothing picks a winner.
+  conflicts: z.array(conflictSchema).default([]),
   log: z.object({ steps: z.array(z.record(z.string(), z.unknown())) }),
 });
 

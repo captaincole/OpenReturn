@@ -7,16 +7,18 @@
  *   authority: a run passes a group when it cites (or retrieves) ANY block in it.
  *   facts: each group lists accepted spellings; matching ignores case.
  *   lite: the cases the lite tier runs (each kind in each tier; stable across full runs).
+ *   statute: the answer should consult the statute and cite this Code section (statute.ts).
  */
 
 import type { AskCase } from "./caseKit";
+import { STATUTE } from "./statute";
 import { TIER_1 } from "./tier1";
 import { TIER_2 } from "./tier2";
 import { TIER_3 } from "./tier3";
 
 export type { AskCase, Kind, Tier } from "./caseKit";
 
-export const CASES: AskCase[] = [...TIER_1, ...TIER_2, ...TIER_3];
+export const CASES: AskCase[] = [...TIER_1, ...TIER_2, ...TIER_3, ...STATUTE];
 
 export const casesFor = (tier: "lite" | "full"): AskCase[] =>
   tier === "full" ? CASES : CASES.filter((testCase) => testCase.lite);

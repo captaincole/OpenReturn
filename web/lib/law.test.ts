@@ -19,12 +19,28 @@ describe("lawHref", () => {
     expect(lawHref(" 469 (g) (1) ")).toBe("/library/law/469#g-1");
   });
 
+  it("turns a regulation citation or block id into its page: the dot tells it from a Code section", () => {
+    expect(lawHref("1.469-5T")).toBe("/library/law/1.469-5T");
+    expect(lawHref("1.469-5T(a)(1)")).toBe("/library/law/1.469-5T#a-1");
+    expect(lawHref("26 CFR § 1.469-5T(a)(1)(ii)")).toBe("/library/law/1.469-5T#a-1-ii");
+    expect(lawHref("Treas. Reg. § 1.1031(a)-1(b)")).toBe("/library/law/1.1031(a)-1#b");
+    expect(lawHref("26 CFR § 1.408A-4, Q&A-1(b)")).toBe("/library/law/1.408A-4#qa1-b");
+    expect(lawHref("cfr-26-2025::sec::s1.469-5t::a-1-ii")).toBe("/library/law/1.469-5T#a-1-ii");
+    expect(lawHref("cfr-26-2025::sec::s1.1031(a)-1::b")).toBe("/library/law/1.1031(a)-1#b");
+    expect(lawHref("cfr-26-2025::sec::s301.6103(p)(2)(b)-1")).toBe(
+      "/library/law/301.6103(p)(2)(b)-1",
+    );
+    expect(lawHref("1031")).toBe("/library/law/1031");
+  });
+
   it("answers null for anything else", () => {
     expect(lawHref("passive activity")).toBeNull();
     expect(lawHref("469(g")).toBeNull();
     expect(lawHref("469(g) and more")).toBeNull();
     expect(lawHref("irs-1040-inst-2025::sec::single::b01")).toBeNull();
     expect(lawHref("")).toBeNull();
+    expect(lawHref("1.")).toBeNull();
+    expect(lawHref("1.469-5T(a")).toBeNull();
   });
 });
 
@@ -42,5 +58,8 @@ describe("the section helpers", () => {
   it("link the official text of one section", () => {
     expect(officialTextUrl("469")).toBe("https://uscode.house.gov/us/usc/t26/s469/");
     expect(officialTextUrl("1400Z–2")).toBe("https://uscode.house.gov/us/usc/t26/s1400Z-2/");
+    expect(officialTextUrl("1.469-5T")).toBe(
+      "https://www.ecfr.gov/current/title-26/section-1.469-5T",
+    );
   });
 });

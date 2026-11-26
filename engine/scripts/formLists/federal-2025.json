@@ -234,7 +234,8 @@
     {
       "name": "Form 172",
       "title": "Net Operating Losses (NOLs)",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "172"
     },
     {
       "name": "Form 2106",
@@ -560,7 +561,8 @@
     {
       "name": "Form 7206",
       "title": "Self-Employed Health Insurance Deduction",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "7206"
     },
     {
       "name": "Form 7207",
@@ -627,7 +629,8 @@
     {
       "name": "Form 8379",
       "title": "Injured Spouse Allocation",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "8379"
     },
     {
       "name": "Form 8396",
@@ -1093,7 +1096,8 @@
     {
       "name": "Form 8958",
       "title": "Allocation of Tax Amounts Between Certain Individuals in Community Property States",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "8958"
     },
     {
       "name": "Form 8959",
@@ -1222,7 +1226,8 @@
     {
       "name": "Form 982",
       "title": "Reduction of Tax Attributes Due to Discharge of Indebtedness (and Section 1082 Basis Adjustment)",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "982"
     },
     {
       "name": "Form RRB1042S",

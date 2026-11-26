@@ -6,7 +6,7 @@ import { ensureAppSchema, getAppDb, nowIso, type Scope } from "./appDb";
  */
 
 export type ReviewRunStatus = "running" | "completed" | "failed";
-export type ReviewStepKind = "init" | "gather" | "assess" | "rule" | "finalize";
+export type ReviewStepKind = "init" | "gather" | "assess" | "rule" | "statute" | "finalize";
 
 export interface InsertReviewRunArgs {
   id: string;

@@ -5,7 +5,8 @@ import { lawCheckCommand, lawReadCommand, lawSearchCommand } from "./lawInspect"
 
 /*
  * `corpus law <subcommand>`: the same jobs as the corpus commands, on
- * law.db (the Internal Revenue Code). The plain commands never touch it.
+ * law.db (the Internal Revenue Code and the Treasury regulations). The
+ * plain commands never touch it.
  */
 
 const SUBCOMMANDS: Command[] = [
@@ -50,7 +51,7 @@ const usageOf = (command: Command) =>
 export const lawCommand: Command = {
   name: "law",
   summary:
-    "The law library (law.db, the Internal Revenue Code): sync, fetch, check, search, read, reembed",
+    "The law library (law.db: the Internal Revenue Code and the regulations): sync, fetch, check, search, read, reembed",
   usage: "<command>",
   options: SUBCOMMANDS.map((command) => ({ flag: usageOf(command), desc: command.summary })),
   run,

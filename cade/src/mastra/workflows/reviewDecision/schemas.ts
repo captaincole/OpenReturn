@@ -40,5 +40,7 @@ export const reviewDecisionOutputSchema = z.object({
   /* openQuestionId: needs_more_facts and inaccurate only. whatsMissing: needs_more_facts only. */
   openQuestionId: z.string().optional(),
   whatsMissing: z.string().optional(),
+  /* When two official texts disagree: one open question for a person to choose. */
+  conflictQuestionId: z.string().optional(),
 });
 export type ReviewDecisionOutput = z.infer<typeof reviewDecisionOutputSchema>;

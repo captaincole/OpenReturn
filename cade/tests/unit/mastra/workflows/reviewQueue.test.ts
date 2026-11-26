@@ -21,6 +21,7 @@ const client = await import("../../../../src/mastra/canon/client");
 const db = await import("../../../../src/mastra/db/appDb");
 const filings = await import("../../../../src/mastra/db/filings");
 const decisions = await import("../../../../src/mastra/db/aiDecisions");
+const taxFacts = await import("../../../../src/mastra/db/taxFacts");
 const review = await import("../../../../src/mastra/workflows/reviewDecision");
 
 const YEAR = 2025;
@@ -92,6 +93,63 @@ describe("reviewDecision", () => {
     expect(out.finalVerdict).toBe("accurate");
     expect((await decisions.getDecisionById(scope, id))?.verdict).toBe("accurate");
     expect(await stepKinds(id)).toEqual(["init", "gather", "assess", "rule", "finalize"]);
+  });
+
+  it("stores the statute step, and writes one open question for texts that disagree", async () => {
+    const own = { userId, filingId: crypto.randomUUID() };
+    await filings.createOwnerFiling({ ...own, taxYear: YEAR });
+    const side = (blockId: string, quote: string, citation?: string) => ({
+      blockId,
+      quote,
+      ...(citation ? { citation } : {}),
+    });
+    const law = "usc-26-2025::sec::s461::l-3-B";
+    ground = async () => ({
+      ...okRun,
+      statuteConsulted: true,
+      conflicts: [
+        {
+          kind: "instruction_vs_statute",
+          a: side("irs-pub-225-2025::sec::excess-business-loss::b01", "Form 8949 are included"),
+          b: side(law, "shall not be taken into account", "26 U.S.C. § 461(l)(3)(B)"),
+          note: "Pub 225 counts business capital losses; the statute does not.",
+        },
+        {
+          kind: "instruction_vs_statute",
+          a: side("irs-461-inst-2025::sec::line-3::b01", "should be added back"),
+          b: side(law, "shall not exceed the lesser of"),
+          note: "A second point.",
+        },
+      ],
+      log: {
+        steps: [
+          ...okRun.log.steps,
+          { iteration: 1, kind: "statute" as const, durationMs: 1, input: {}, output: {} },
+          { iteration: 1, kind: "rule" as const, durationMs: 1, input: {}, output: {} },
+        ],
+      },
+    });
+    const id = await seedDecision(own);
+    const out = await review.reviewDecision(own, id);
+    expect(out.finalVerdict).toBe("accurate");
+    expect(await stepKinds(id)).toEqual([
+      "init",
+      "gather",
+      "assess",
+      "rule",
+      "statute",
+      "rule",
+      "finalize",
+    ]);
+    const questions = await taxFacts.listOpenQuestions(own);
+    expect(questions).toHaveLength(1);
+    expect(questions[0].question).toBe(
+      "Decide which text to follow for decision `decisions.scope.must_file_federal`: the IRS instructions and the statute disagree.",
+    );
+    expect(questions[0].context).toContain(
+      "26 U.S.C. § 461(l)(3)(B) (usc-26-2025::sec::s461::l-3-B)",
+    );
+    expect(questions[0].context).toContain("“Form 8949 are included”");
   });
 
   it("passes CANON_GROUND_MAX_ITERATIONS to Canon, and nothing when unset", async () => {
