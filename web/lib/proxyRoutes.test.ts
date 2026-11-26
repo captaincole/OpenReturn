@@ -70,6 +70,19 @@ describe("the Canon proxy's routes", () => {
     expect(canonAllows("GET", "/app/refdocs/ca-540-inst-2025/html")).toBe(true);
   });
 
+  it("forwards the statute's two calls", () => {
+    expect(canonAllows("GET", "/app/law/status")).toBe(true);
+    expect(canonAllows("GET", "/app/law/sections/469")).toBe(true);
+    expect(canonAllows("GET", "/app/law/sections/1400Z-2")).toBe(true);
+  });
+
+  it("refuses any other statute path", () => {
+    expect(canonAllows("POST", "/app/law/status")).toBe(false);
+    expect(canonAllows("GET", "/app/law/sections")).toBe(false);
+    expect(canonAllows("GET", "/app/law/sections/469/blocks")).toBe(false);
+    expect(canonAllows("GET", "/app/law/sections/..")).toBe(false);
+  });
+
   it("refuses Canon's other routes", () => {
     expect(canonAllows("GET", "/api/mcp/canon/mcp")).toBe(false);
     expect(canonAllows("GET", "/api/workflows")).toBe(false);

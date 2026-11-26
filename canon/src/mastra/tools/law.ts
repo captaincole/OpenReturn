@@ -1,0 +1,110 @@
+import { createTool } from "@mastra/core/tools";
+import { z } from "zod";
+import { lawInstalled } from "../../db/libsql";
+import { LAW_NOT_INSTALLED, readLaw, type LawBlock } from "../../law/lawRead";
+import { searchLaw } from "../../law/lawSearch";
+
+/*
+ * The statute (law.db) is a second library, searched only on purpose. Both
+ * tools answer { installed: false } when law.db is missing, and never
+ * create the file.
+ */
+
+const WHEN_TO_USE =
+  'This is the statute, the Internal Revenue Code (26 U.S.C.), not the IRS instructions. Search the form instructions first (searchRefDocs). Use this only when two instructions conflict, or when the instructions do not settle the question. Write the query in the statute\'s own terms, which the instructions supply ("disposition of entire interest in passive activity", not "sold my partnership"). A statute passage can itself conflict with another passage or with the instructions: then report both texts, with their citations, and do not pick one.';
+
+const notInstalled = z.object({ installed: z.literal(false), message: z.string() });
+
+const lawHitSchema = z.object({
+  blockId: z.string(),
+  citation: z.string(),
+  sectionHeading: z.string().nullable(),
+  headings: z.array(z.string()),
+  text: z.string(),
+  score: z.number(),
+});
+
+export const searchLawTool = createTool({
+  id: "search-law",
+  description: `Search the Internal Revenue Code. ${WHEN_TO_USE} Each hit has its citation ("26 U.S.C. § 469(g)(1)"); read the whole subdivision with readLaw.`,
+  inputSchema: z.object({
+    query: z.string().describe("The rule in the statute's words, taken from the instructions."),
+    section: z.string().optional().describe('Optional: search one Code section only, e.g. "469".'),
+    limit: z.number().int().min(1).max(25).optional().describe("Max hits to return (default 8)."),
+    mode: z
+      .enum(["fts", "vector", "hybrid"])
+      .optional()
+      .describe("Retrieval mode. Default 'hybrid'. Override only for evals or debugging."),
+  }),
+  outputSchema: z.union([
+    z.object({ installed: z.literal(true), query: z.string(), results: z.array(lawHitSchema) }),
+    notInstalled,
+  ]),
+  execute: async (input) => {
+    if (!(await lawInstalled())) return { installed: false as const, message: LAW_NOT_INSTALLED };
+    const results = await searchLaw(input);
+    return { installed: true as const, query: input.query, results };
+  },
+});
+
+// A whole long section (401 is over 300 KB) would flood the caller: it gets the start and the way to narrow.
+const MAX_READ_BLOCKS = 40;
+const MAX_READ_CHARS = 40_000;
+
+const lawBlockSchema = z.object({
+  blockId: z.string(),
+  citation: z.string(),
+  headings: z.array(z.string()),
+  text: z.string(),
+});
+
+export const readLawTool = createTool({
+  id: "read-law",
+  description: `Read the Internal Revenue Code by citation: a section ("469"), a subdivision ("469(g)(1)(A)") or a block id from searchLaw. ${WHEN_TO_USE} Returns the blocks in statute order. A long read is cut short with truncated: true and the list of its subdivisions: read one of them instead.`,
+  inputSchema: z.object({
+    citation: z.string().describe('A Code citation, e.g. "469(g)(1)", or a block id.'),
+  }),
+  outputSchema: z.union([
+    z.object({
+      installed: z.literal(true),
+      found: z.boolean(),
+      citation: z.string(),
+      sectionHeading: z.string().nullable(),
+      blocks: z.array(lawBlockSchema),
+      truncated: z.boolean(),
+      subdivisions: z.array(z.string()),
+      message: z.string().optional(),
+    }),
+    notInstalled,
+  ]),
+  execute: async ({ citation }) => {
+    if (!(await lawInstalled())) return { installed: false as const, message: LAW_NOT_INSTALLED };
+    const reading = await readLaw(citation).catch((err: unknown) =>
+      err instanceof Error ? err.message : String(err),
+    );
+    if (reading === null || typeof reading === "string") {
+      const message = reading ?? `nothing in the Code at ${citation}`;
+      const empty = { citation, sectionHeading: null, blocks: [], subdivisions: [] };
+      return { installed: true as const, found: false, truncated: false, message, ...empty };
+    }
+    const blocks = capped(reading.blocks);
+    return {
+      installed: true as const,
+      found: true,
+      ...reading,
+      blocks,
+      truncated: blocks.length < reading.blocks.length,
+    };
+  },
+});
+
+function capped(blocks: LawBlock[]): LawBlock[] {
+  let chars = 0;
+  const kept: LawBlock[] = [];
+  for (const block of blocks.slice(0, MAX_READ_BLOCKS)) {
+    chars += block.text.length;
+    if (chars > MAX_READ_CHARS && kept.length > 0) break;
+    kept.push(block);
+  }
+  return kept;
+}

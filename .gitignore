@@ -42,3 +42,5 @@ sources/**/publication.pdf
 sources/**/instructions.html
 sources/**/publication.html
 sources/**/*.canonical.txt
+# The Internal Revenue Code's source zip: law.db stores it (`npm run corpus -- law sync`).
+sources/**/law.zip

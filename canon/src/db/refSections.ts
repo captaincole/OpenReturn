@@ -1,5 +1,5 @@
 import { asNum, asStr } from "./corpusStore";
-import { ensureCorpusSchema, getCorpusDb } from "./libsql";
+import { openLibraryDb, type Library } from "./libsql";
 
 /*
  * Whole sections for readers that need more than a search hit: Canon's search
@@ -28,9 +28,12 @@ export interface OutlineSection {
   chars: number;
 }
 
-export async function readOutline(docId: string): Promise<OutlineSection[]> {
-  await ensureCorpusSchema();
-  const res = await getCorpusDb().execute({
+export async function readOutline(
+  docId: string,
+  library: Library = "corpus",
+): Promise<OutlineSection[]> {
+  const db = await openLibraryDb(library);
+  const res = await db.execute({
     sql: `SELECT s.section_id, s.parent_section_id, s.heading_slug, s.heading, s.first_page,
                  coalesce(sum(length(b.text)), 0) AS chars
           FROM ref_sections s LEFT JOIN ref_blocks b ON b.section_id = s.section_id
@@ -54,8 +57,9 @@ export async function readOutline(docId: string): Promise<OutlineSection[]> {
   });
 }
 
-async function sectionOrdinal(docId: string, section: string): Promise<number> {
-  const res = await getCorpusDb().execute({
+async function sectionOrdinal(library: Library, docId: string, section: string): Promise<number> {
+  const db = await openLibraryDb(library);
+  const res = await db.execute({
     sql: `SELECT ordinal FROM ref_sections WHERE doc_id = ? AND heading_slug = ?`,
     args: [docId, section],
   });
@@ -64,15 +68,18 @@ async function sectionOrdinal(docId: string, section: string): Promise<number> {
 }
 
 /* The document and section a block id (as Canon's search returns it) belongs to. */
-export async function sectionOfBlock(blockId: string): Promise<{ docId: string; section: string }> {
-  await ensureCorpusSchema();
-  const res = await getCorpusDb().execute({
+export async function sectionOfBlock(
+  blockId: string,
+  library: Library = "corpus",
+): Promise<{ docId: string; section: string }> {
+  const db = await openLibraryDb(library);
+  const res = await db.execute({
     sql: `SELECT b.doc_id, s.heading_slug
           FROM ref_blocks b JOIN ref_sections s ON s.section_id = b.section_id
           WHERE b.block_id = ?`,
     args: [blockId],
   });
-  if (!res.rows[0]) throw new Error(`no block "${blockId}" in the corpus`);
+  if (!res.rows[0]) throw new Error(`no block "${blockId}" in the ${library} library`);
   return { docId: asStr(res.rows[0].doc_id), section: asStr(res.rows[0].heading_slug) };
 }
 
@@ -81,12 +88,14 @@ export async function readSections(opts: {
   docId: string;
   section: string;
   through?: string;
+  library?: Library;
 }): Promise<SectionBlock[]> {
-  await ensureCorpusSchema();
-  const first = await sectionOrdinal(opts.docId, opts.section);
-  const last = opts.through ? await sectionOrdinal(opts.docId, opts.through) : first;
+  const library = opts.library ?? "corpus";
+  const db = await openLibraryDb(library);
+  const first = await sectionOrdinal(library, opts.docId, opts.section);
+  const last = opts.through ? await sectionOrdinal(library, opts.docId, opts.through) : first;
   if (last < first) throw new Error(`"${opts.through}" comes before "${opts.section}"`);
-  const res = await getCorpusDb().execute({
+  const res = await db.execute({
     sql: `WITH RECURSIVE picked(section_id) AS (
             SELECT section_id FROM ref_sections WHERE doc_id = ? AND ordinal BETWEEN ? AND ?
             UNION

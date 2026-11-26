@@ -8,10 +8,10 @@ import {
   getDocument,
   setBlockEmbeddings,
   writeDocument,
+  type CorpusFormat,
   type RefBlock,
   type RefPage,
   type RefSection,
-  type SourceFormat,
 } from "../db/corpusStore";
 import { sha1, summarizeBlocks } from "./contextualize";
 import { embedDocuments, resolveEmbeddings } from "./embeddings";
@@ -23,7 +23,7 @@ import { parseDoc, type ParsedDoc, type ParserStyle } from "./parse";
 
 export interface IngestInput {
   sourcePath: string;
-  format?: SourceFormat;
+  format?: CorpusFormat;
   docId: string;
   title: string;
   publisher: string;

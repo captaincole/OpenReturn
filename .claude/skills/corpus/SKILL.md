@@ -81,6 +81,21 @@ Cost: ~$0.50 Haiku contextualization per doc; embeddings are local and free (Emb
 | `outline <docId>` | list a document's sections, with first page and size; fails when the document is not in corpus.db |
 | `read <blockId>` or `read <docId> <section> [--through <section>]` | print whole sections with block ids. Search with Canon (`mcp__canon__searchRefDocs`); when a hit needs more context, read its block's whole section, or a part with `--through` |
 
+## The law library (`law.db`)
+
+The Internal Revenue Code is a second file, `canon/.data/law.db` (`LAW_DB_PATH`). The plain `corpus` commands never read it. Its sidecar is `sources/2025/law/federal/usc-26/law.meta.json`, which pins one dated release of the Code by `sourceUrl` and `sha256`.
+
+| subcommand | use |
+|---|---|
+| `law fetch` | install the prebuilt law.db (`canon/seed/law.manifest.json`) |
+| `law sync [--force]` | build it from the sidecar: no model call, about 17 minutes of local embedding |
+| `law check` | row counts and embedding coverage |
+| `law search "q" [--mode …] [--limit n]` | search the statute |
+| `law read <citation>` | print a section or subdivision with block ids: `469`, `"469(g)"`, `"469(g)(1)(A)"`, or a block id |
+| `law reembed [--all]` | embed the blocks that have no vector; `--all` after a model switch |
+
+To move to a newer release of the Code, change `sourceUrl`, `sha256`, `releasePoint` and `published` in the sidecar, then run `law sync`. After a change to the parser (`canon/src/law/`), run `law sync --force` and `npm run evals:law`.
+
 ## In a git worktree
 
 A worktree has no `canon/.data/`, so `read`, `search` and `outline` stop with "has no documents". Set `CORPUS_DB_PATH` in the worktree's `canon/.env` to the main checkout's `canon/.data/corpus.db`, or search with Canon MCP. Do not `fetch` a second copy.

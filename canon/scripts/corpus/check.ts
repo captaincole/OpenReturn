@@ -1,13 +1,14 @@
 import { countBlocksByDoc, listDocuments, tableCounts } from "../../src/db/corpusStore";
+import type { Library } from "../../src/db/libsql";
 import type { Command } from "../lib/cli";
 
-async function run(): Promise<void> {
-  const counts = await tableCounts();
+export async function checkLibrary(library: Library): Promise<void> {
+  const counts = await tableCounts(library);
   for (const [table, count] of Object.entries(counts)) {
     console.log(`${table}: count=${count}`);
   }
-  for (const doc of await listDocuments()) {
-    const { blocks, embedded } = await countBlocksByDoc(doc.docId);
+  for (const doc of await listDocuments(library)) {
+    const { blocks, embedded } = await countBlocksByDoc(doc.docId, library);
     console.log(`  ${doc.docId}: blocks=${blocks}, embedded=${embedded}`);
   }
 }
@@ -15,5 +16,5 @@ async function run(): Promise<void> {
 export const checkCommand: Command = {
   name: "check",
   summary: "Table row counts + per-doc embedding coverage",
-  run,
+  run: () => checkLibrary("corpus"),
 };

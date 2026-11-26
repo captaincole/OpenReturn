@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uscDoc xml:lang="en" identifier="/us/usc/t26" xmlns="http://xml.house.gov/schemas/uslm/1.0">
+<main>
+<title identifier="/us/usc/t26"><num value="26">Title 26&#x2014;</num><heading>INTERNAL REVENUE CODE</heading>
+<subtitle identifier="/us/usc/t26/stA"><num value="A">Subtitle A&#x2014;</num><heading>Income Taxes</heading>
+<toc role="twoColumnTOC">
+<layout>
+<header role="tocColumnHeader">
+<column class="tocHeaderLeft">Chapter</column>
+</header>
+<tocItem>
+<column class="twoColumnLeft"><ref href="/us/usc/t26/stA/ch1">1.</ref></column><column class="twoColumnRight">Normal taxes and surtaxes.</column>
+</tocItem>
+</layout>
+</toc>
+<notes type="uscNote">
+<note role="crossHeading" topic="editorialNotes"><heading class="centered"><b>Editorial Notes</b></heading></note>
+<note topic="amendments"><heading class="centered smallCaps">Amendments</heading><p class="indent0">2010&#x2014;<ref href="/us/pl/111/152/tI/s1402/a/3">Pub. L. 111&#x2013;152, title I, &#xa7;&#x202f;1402(a)(3)</ref>, <date date="2010-03-30">Mar. 30, 2010</date>, <ref href="/us/stat/124/1062">124 Stat. 1062</ref>, which directed amendment of the &#x201c;table of chapters for subtitle A of chapter 1 of the Internal Revenue Code of 1986&#x201d; by adding item for chapter 2A, was executed by adding item for chapter 2A to the table of chapters for this subtitle to reflect the probable intent of Congress.</p>
+</note>
+</notes>
+<chapter identifier="/us/usc/t26/stA/ch1"><num value="1">CHAPTER 1&#x2014;</num><heading>NORMAL TAXES AND SURTAXES</heading>
+<toc role="threeColumnTOC">
+<layout>
+<header role="tocColumnHeader">
+<column class="tocHeaderLeft">Subchapter</column>
+<column/>
+<column class="tocHeaderRight">Sec.<ref class="footnoteRef" idref="fn002003">1</ref><note type="footnote"><num>1</num>&#x202f;Section numbers editorially supplied.</note></column></header>
+<tocItem>
+<column class="threeColumnLeft"><ref href="/us/usc/t26/stA/ch1/schA">A.</ref></column><column class="threeColumnMiddle">Determination of tax liability</column><column class="threeColumnRight"><ref href="/us/usc/t26/s1">1</ref></column></tocItem>
+</layout>
+</toc>
+<notes type="uscNote">
+<note role="crossHeading" topic="editorialNotes"><heading class="centered"><b>Editorial Notes</b></heading></note>
+<note topic="amendments"><heading class="centered smallCaps">Amendments</heading><p class="indent0">2018&#x2014;<ref href="/us/pl/115/141/dU/tIV/s401/a/1">Pub. L. 115&#x2013;141, div. U, title IV, &#xa7;&#x202f;401(a)(1)</ref>, (d)(4)(A), (5)(A), (6)(A), <date date="2018-03-23">Mar. 23, 2018</date>, <ref href="/us/stat/132/1184">132 Stat. 1184</ref>, 1209&#x2013;1211, transferred subchapter R to follow subchapter Q and struck out subchapter W &#x201c;District of Columbia Enterprise Zone&#x201d;, subchapter X &#x201c;Renewal Communities&#x201d;, and subchapter Y &#x201c;Short-Term Regional Benefits&#x201d;.</p>
+</note>
+</notes>
+<subchapter identifier="/us/usc/t26/stA/ch1/schA"><num value="A">Subchapter A&#x2014;</num><heading>Determination of Tax Liability</heading>
+<toc role="twoColumnTOC">
+<layout>
+<header role="tocColumnHeader">
+<column class="tocHeaderLeft">Part</column>
+</header>
+<tocItem>
+<column class="twoColumnLeft"><ref href="/us/usc/t26/stA/ch1/schA/ptI">I.</ref></column><column class="twoColumnRight">Tax on individuals.</column>
+</tocItem>
+</layout>
+</toc>
+<notes type="uscNote">
+<note role="crossHeading" topic="editorialNotes"><heading class="centered"><b>Editorial Notes</b></heading></note>
+<note topic="amendments"><heading class="centered smallCaps">Amendments</heading><p class="indent0">2017&#x2014;<ref href="/us/pl/115/97/tI/s14401/d/1">Pub. L. 115&#x2013;97, title I, &#xa7;&#x202f;14401(d)(1)</ref>, <date date="2017-12-22">Dec. 22, 2017</date>, <ref href="/us/stat/131/2233">131 Stat. 2233</ref>, added part VII.</p>
+</note>
+</notes>
+<part identifier="/us/usc/t26/stA/ch1/schA/ptI"><num value="I">PART I&#x2014;</num><heading>TAX ON INDIVIDUALS</heading>
+<toc role="twoColumnTOC">
+<layout>
+<header role="tocColumnHeader">
+<column class="tocHeaderLeft">Sec.</column>
+</header>
+<tocItem>
+<column class="twoColumnLeft"><ref href="/us/usc/t26/s1">1.</ref></column><column class="twoColumnRight">Tax imposed.</column>
+</tocItem>
+</layout>
+</toc>
+<notes type="uscNote">
+<note role="crossHeading" topic="editorialNotes"><heading class="centered"><b>Editorial Notes</b></heading></note>
+<note topic="amendments"><heading class="centered smallCaps">Amendments</heading><p class="indent0">1976&#x2014;<ref href="/us/pl/94/455/tV/s501/c/1">Pub. L. 94&#x2013;455, title V, &#xa7;&#x202f;501(c)(1)</ref>, <date date="1976-10-04">Oct. 4, 1976</date>, <ref href="/us/stat/90/1559">90 Stat. 1559</ref>, substituted &#x201c;Tax tables for individuals having taxable income of less than &#x24;20,000&#x201d; for &#x201c;Optional tax tables for individuals&#x201d; in item 3 and struck out item 4 relating to rules for optional tax.</p>
+</note>
+</notes>
+{{PART_I}}
+</part>
+<part status="repealed" identifier="/us/usc/t26/stA/ch1/schA/ptV"><num value="V">[PART V&#x2014;</num><heading>REPEALED]</heading>
+<notes type="uscNote">
+<note role="crossHeading" topic="editorialNotes"><heading class="centered"><b>Editorial Notes</b></heading></note>
+<note topic="codification"><heading class="centered smallCaps">Codification</heading>
+<p class="indent0">Part V, consisting of a prior section 51, was repealed by <ref href="/us/pl/94/455/tXIX/s1901/a/7">Pub. L. 94&#x2013;455, title XIX, &#xa7;&#x202f;1901(a)(7)</ref>, <date date="1976-10-04">Oct. 4, 1976</date>, <ref href="/us/stat/90/1765">90 Stat. 1765</ref>. See Prior Provisions note set out under <ref href="/us/usc/t26/s51">section 51 of this title</ref></p>
+</note>
+</notes>
+</part>
+</subchapter>
+</chapter>
+</subtitle>
+</title>
+</main>
+</uscDoc>

@@ -56,7 +56,7 @@ async function download({ sidecar, sourceRelPath }: CorpusEntry): Promise<Uint8A
   return file;
 }
 
-async function fetchBytes(url: string): Promise<Uint8Array> {
+export async function fetchBytes(url: string): Promise<Uint8Array> {
   const res = await fetch(url, { headers: FETCH_HEADERS });
   if (!res.ok) throw new Error(`download failed (${res.status}): ${url}`);
   return new Uint8Array(await res.arrayBuffer());
