@@ -1,7 +1,7 @@
 ---
 name: line-rule-drafter
 description: Writes the binding for one form field in the engine's bindings.ts, grounded in the IRS or FTB instructions through Canon, and runs the type check and the golden tests. The write-binding-rules skill starts it once per field.
-tools: Read, Edit, Write, Grep, Glob, Bash, mcp__canon__searchRefDocs, mcp__canon__citeRefDoc
+tools: Read, Edit, Write, Grep, Glob, Bash, mcp__canon__searchRefDocs, mcp__canon__citeRefDoc, mcp__canon__searchLaw, mcp__canon__readLaw
 model: inherit
 ---
 
@@ -17,6 +17,15 @@ The input names the form (`federal/<short>` or `state/<st>/<short>`), the fieldI
 2. A hit is often only part of the rule. Read its whole section: `npm run corpus -- read <blockId>`. A part's opening text often sets a gate for every line in it: read the part with `npm run corpus -- read <docId> <part-section> --through <line-section>`.
 3. Get the exact text of each block you rely on with `mcp__canon__citeRefDoc`. Never write a rule from memory.
 4. Some lines have no section: the instructions skip lines whose rule is on the form, such as "Subtract line 21 from line 19". Then the form face is the rule. Search for the line's words with `docId` set to the form face: the instructions docId with `-face-` for `-inst-` (`irs-8824-face-2025`), or the `-form-` document when the form and its instructions are one PDF (`irs-6252-form-2025`). A face block's section heading starts with "Form face:". Cite that block, and still cite the part's opening block for its gates. When the corpus has no face for the form, the catalog label is the rule: search once to confirm no section covers the line.
+
+## When the instructions do not settle it: the statute
+
+The instructions come first, and they decide how the form is filled. Read the statute only when two instructions disagree on the line, or an instruction names a rule without stating it.
+
+1. Search with `mcp__canon__searchLaw`, in the statute's words taken from the instructions. Never search by a section number from memory.
+2. Read the whole subdivision with `mcp__canon__readLaw`. Quote a statute passage only by a block id you retrieved (`usc-26-2025::sec::s469::g-1`).
+3. When the statute disagrees with the instructions, do not pick. Follow the instructions, write both texts with their block ids in the form's `QUESTIONS.md`, and put the finding in your report, so the lead adds it to `docs/law-findings.md`.
+4. If the tools answer `installed: false`, go on without the statute and say so in your report.
 
 ## Find the data
 
@@ -52,6 +61,7 @@ fieldId: <fieldId>
 result: bound | unsupported
 code: <the entry as written>
 rule: <blockId> "<exact quote>" (one line per block)
+statute: <usc-26 blockId> "<exact quote>", and whether it agrees with the instructions (or "not read")
 data: <the lines and info slots it reads; new slots and missingInputs>
 files: <files changed>
 checks: <each command and its result>
