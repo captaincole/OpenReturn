@@ -2,6 +2,7 @@ import { resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import { resolve1116Info } from "../1116/resolveInfo.js";
 import { resolve2441Info } from "../2441/resolveInfo.js";
 import { resolve3800Info } from "../3800/resolveInfo.js";
+import { resolve4136Info } from "../4136/resolveInfo.js";
 import { resolve5695Info } from "../5695/resolveInfo.js";
 import { resolve8396Info } from "../8396/resolveInfo.js";
 import { resolve8801Info } from "../8801/resolveInfo.js";
@@ -89,6 +90,10 @@ export function resolveSchedule3Info(inputs: ResolverInputs): Schedule3FilingInf
       {
         rule: "fallback: Form 8978 line 14 is negative (line 6l)",
         value: negativeForm8978(inputs),
+      },
+      {
+        rule: "fallback: Form 4136 (line 12) is required",
+        value: resolve4136Info(inputs).mustFile?.["form-4136"]?.value === true,
       },
     ],
   });
