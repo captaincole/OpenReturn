@@ -67,6 +67,12 @@ Three rules have conflicting texts. They are decisions A46, A47 and A48 in `docs
 - Part IV needs the sale of an entire interest on the return; unit tests cover lines 18 to 21.
 - A research credit from a rental activity (Worksheet 1) is unusual; `kiruna` has one so that Part II shows.
 
+## Second opinions
+
+- **PolicyEngine-US 2.154.0** (commit `363e9fc5`, 2026-11-25). It does not model this form. Its California code (`variables/gov/states/ca`, `parameters/gov/states/ca`) has no passive activity credit, no research, orphan drug or low-income housing credit, and no special allowance. Its federal code applies no section 469 limit to credits either (see `federal/8582-cr/QUESTIONS.md`). There is nothing to compare.
+- **Other projects.** The repository names no other reference implementation that models California passive credits. IRS Direct File (issue #140) is federal only, is not checked out here, and does not support passive activities or business credits.
+- **Blind fill** (2026-11-26, 14 cases): no line differs, in dollars or as blank against 0. The blind preparer's dollar doubts are decisions A46 (line 17 when line 6 is more than line 5) and A47 (item 4). Its other doubts change no dollars: line 17 is 0, not blank, when line 6 is an entered 0 and Part II is blank; line 12 rounds to the nearest dollar; a low-income housing credit through a pass-through interest bought before 1990 goes on line 2; an orphan drug carryover goes in column (b).
+
 ## Proposals for a discussion
 
 None.
