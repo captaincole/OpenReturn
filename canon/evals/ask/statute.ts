@@ -6,6 +6,8 @@ import type { AskCase } from "./caseKit";
  * of law without stating it (docs/rule-decisions.md, rows 2, 6 and 8). The
  * answer should consult the statute and cite the named section; the true
  * answer is the decided row's.
+ *
+ * Not reviewed by a person yet: agents wrote and checked these cases. Use the scores for development only.
  */
 
 export const STATUTE: AskCase[] = [

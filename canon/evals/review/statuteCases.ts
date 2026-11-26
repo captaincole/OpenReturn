@@ -8,6 +8,8 @@
  * the excess business loss; the Form 461 instructions and section
  * 461(l)(3)(B)(i) do not count a capital loss. Each Form 461 line stays
  * under $156,500, so only the total test decides.
+ *
+ * Not reviewed by a person yet: agents wrote and checked these cases. Use the scores for development only.
  */
 
 import { anyOf } from "../lib/anyOf";
