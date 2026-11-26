@@ -190,7 +190,107 @@ describe("who files and what it waits for", () => {
   });
 });
 
+const formTemplate = berowynScenario.facts.find((fact) => fact.key.includes(".1099c."))!;
+const form1099C = (slug: string, value: Record<string, unknown>): TaxFactRow => ({
+  ...formTemplate,
+  id: `f-1099c-${slug}`,
+  key: makeForm1099CFactKey(slug, "1"),
+  value: { creditorName: "Test Lender", ...value },
+});
+
+describe("a debt the taxpayer was not personally liable for (Form 1099-C box 5)", () => {
+  const foreclosed = (keepsHome: boolean | undefined) => [
+    ...without(berowynScenario, isDebtFact),
+    form1099C("home", { box1: "2025-06-01", box2: 40000, box5: false, box6: "D", box7: 400000 }),
+    debtFact("home", {
+      form1099CKey: makeForm1099CFactKey("home", "1"),
+      kind: "principal_residence",
+      title11Case: false,
+      insolventBefore: false,
+      principalResidence: {
+        loanBalance: 440000,
+        qualifiedPart: 440000,
+        keepsHome: keepsHome as boolean,
+      },
+    }),
+  ];
+
+  it("a foreclosure: no canceled debt income, no Form 982, no California addition", () => {
+    const result = evaluate(berowynScenario, foreclosed(false));
+    expect(result.files("form-982")).toBe(false);
+    expect(result.value("schedule-1", "0.line.8c")).toBeUndefined();
+    expect(result.value("schedule-ca", "1.line.b8c_additions")).toBeUndefined();
+    expect(result.pending).toEqual([]);
+  });
+
+  it("a principal reduction on a kept home is still line 1e", () => {
+    const facts = foreclosed(true).map((fact) =>
+      fact.key === makeCanceledDebtFactKey("home")
+        ? {
+            ...fact,
+            value: {
+              ...(fact.value as CanceledDebtFactValue),
+              principalResidence: {
+                loanBalance: 440000,
+                qualifiedPart: 440000,
+                keepsHome: true,
+                homeBasis: 500000,
+              },
+            },
+          }
+        : fact,
+    );
+    const result = evaluate(berowynScenario, facts);
+    expect(result.value("form-982", "0.line.2_total_discharged_excluded")).toBe(40000);
+  });
+
+  it("a repossessed car: box 2 stays off line 8c; with no keep answer, the debt waits", () => {
+    const car = (keepsCollateral?: boolean) => [
+      ...without(berowynScenario, isDebtFact),
+      form1099C("car", { box1: "2025-06-01", box2: 3000, box5: false, box6: "D" }),
+      debtFact("car", {
+        form1099CKey: makeForm1099CFactKey("car", "1"),
+        kind: "personal",
+        title11Case: false,
+        insolventBefore: false,
+        keepsCollateral,
+      }),
+    ];
+    expect(evaluate(berowynScenario, car(false)).value("schedule-1", "0.line.8c")).toBeUndefined();
+    expect(evaluate(berowynScenario, car(true)).value("schedule-1", "0.line.8c")).toBe(3000);
+    const waits = evaluate(berowynScenario, car());
+    expect(waits.pending).toContain(makeCanceledDebtFactKey("car"));
+    expect(waits.value("schedule-1", "0.line.9")).toBeUndefined();
+  });
+});
+
 describe("cases the engine does not figure", () => {
+  it("a taxable business debt next to a personal one: lines 9 and 10 do not print a total", () => {
+    const facts = [
+      ...without(berowynScenario, isDebtFact),
+      debtFact("card", {
+        amount: 5000,
+        date: "2025-05-01",
+        kind: "personal",
+        title11Case: false,
+        insolventBefore: false,
+      }),
+      debtFact("supplier", {
+        amount: 2000,
+        date: "2025-05-01",
+        kind: "other_business",
+        title11Case: false,
+        insolventBefore: false,
+      }),
+    ];
+    const result = evaluate(berowynScenario, facts);
+    for (const id of ["0.line.8c", "0.line.9", "0.line.10"]) {
+      const line = result.field("schedule-1", id);
+      expect(line?.ok === false && line.unsupported).toBe(true);
+    }
+    expect(result.value("form-1040", "line.9")).toBeUndefined();
+  });
+
   it("a taxable business debt makes line 8c unsupported", () => {
     const facts = [
       ...without(aililScenario, isDebtFact),

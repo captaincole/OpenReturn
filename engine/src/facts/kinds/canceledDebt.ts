@@ -98,6 +98,22 @@ export interface CanceledDebtFactValue {
    */
   notIncome?: number;
   kind: CanceledDebtKind;
+  /*
+   * The taxpayer was personally liable for the debt (recourse debt). Absent: the
+   * Form 1099-C box 5 answer, and with no form, liable. "If you aren't
+   * personally liable for the debt, you don't have ordinary income from the
+   * cancellation of debt unless you retain the collateral" with a discount for
+   * early payment or a principal reduction (irs-pub-4681-2025::sec::general-rules::b01).
+   */
+  personallyLiable?: boolean;
+  /*
+   * For a debt the taxpayer was not liable for: the taxpayer keeps the property
+   * that secures it. A principal_residence debt answers with keepsHome instead.
+   * Not kept (a foreclosure, a repossession, an abandonment): the whole debt is
+   * an amount realized on the disposition, a sale on its own form, and none of
+   * it is canceled debt income (sales-or-other-dispositions::b02, ::b03).
+   */
+  keepsCollateral?: boolean;
   /* The discharge was granted in, or under a plan approved in, a title 11 case (line 1a). */
   title11Case: boolean;
   /* The taxpayer was insolvent immediately before this cancellation (line 1b). */

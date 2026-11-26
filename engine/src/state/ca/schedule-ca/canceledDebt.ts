@@ -1,6 +1,6 @@
 /*
  * Schedule CA (540) line 8c, cancellation of debt. Column A copies federal
- * Schedule 1 line 8c. Column C adds back the federal exclusion of qualified
+ * Schedule 1 line 8c. Column B has no item. Column C adds back the federal exclusion of qualified
  * principal residence indebtedness (Form 982 line 1e): "California law does not
  * conform to federal law regarding the exclusion of income from discharge of
  * indebtedness from the disposition of your principal residence occurring after
@@ -30,6 +30,8 @@ export const canceledDebtBindings: Bindings = {
     const amount = numberOrBlank(form["schedule-1.0.line.8c"]);
     return amount === 0 ? undefined : amount;
   },
+  // Column B is blank: the line 8c instructions name only column C items (line-8-other-income::b01, ::b02).
+  "1.line.b8c_subtractions": () => undefined,
   "1.line.b8c_additions": (_, info) => {
     if (info.form982Gap) return unsupported(info.form982Gap);
     const excluded = info.principalResidenceExclusion ?? 0;

@@ -49,6 +49,30 @@ const INSOLVENT_ON_TWO_DATES =
 const isAmount = (value: unknown): value is number =>
   typeof value === "number" && Number.isFinite(value) && value >= 0;
 
+/*
+ * A nonrecourse debt (not personally liable: the fact's answer, else Form
+ * 1099-C box 5 unchecked) is canceled debt income only when the taxpayer keeps
+ * the collateral (irs-pub-4681-2025::sec::general-rules::b01). When the lender
+ * takes the property, "The entire amount of the nonrecourse debt is treated as
+ * an amount realized on the disposition" (sales-or-other-dispositions::b02):
+ * "disposed", with no canceled debt income. "missing" while the keep answer is
+ * absent; undefined for a recourse debt or kept collateral.
+ */
+function nonrecourseCollateral(
+  fact: CanceledDebtFact,
+  form: Form1099CFactValue | undefined,
+): "disposed" | "missing" | undefined {
+  const value = fact.value;
+  const liable = value.personallyLiable ?? form?.box5 ?? true;
+  if (liable) return undefined;
+  const kept =
+    value.kind === "principal_residence"
+      ? value.principalResidence?.keepsHome
+      : value.keepsCollateral;
+  if (typeof kept !== "boolean") return "missing";
+  return kept ? undefined : "disposed";
+}
+
 /* One debt with its form, or the reason its answers are missing. */
 function readDebt(
   fact: CanceledDebtFact,
@@ -57,6 +81,17 @@ function readDebt(
   const value = fact.value;
   const amount = isAmount(value.amount) ? value.amount : form?.box2;
   if (!isAmount(amount) || !KINDS.has(value.kind)) return "missing";
+  const collateral = nonrecourseCollateral(fact, form);
+  if (collateral === "missing") return "missing";
+  if (collateral === "disposed") {
+    return {
+      key: fact.key,
+      income: 0,
+      kind: value.kind,
+      title11Case: false,
+      insolventBefore: false,
+    };
+  }
   if (typeof value.title11Case !== "boolean" || typeof value.insolventBefore !== "boolean") {
     return "missing";
   }

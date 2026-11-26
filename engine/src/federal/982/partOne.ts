@@ -74,7 +74,21 @@ export function realPropertyFirstLimit(
   return amountOrZero(principalBeforeDischarge - netValue);
 }
 
-/* Lines 1a, 1e and 1b for every debt, in the order of the facts. */
+/*
+ * Lines 1a, 1e and 1b for every debt, in the order of the facts.
+ *
+ * DECISION (2026-11-26, by the author): on a home loan, line 1e comes before
+ * line 1b, and insolvency takes only what line 1e leaves. Text A, the Form 982
+ * instructions: the insolvency exclusion "doesn't apply to a discharge of
+ * qualified principal residence indebtedness (see Line 1e, later) unless you
+ * elect to have the insolvency exclusion apply instead of the exclusion for
+ * qualified principal residence indebtedness" (irs-982-inst-2025::sec::line-1b::b01).
+ * Text B, Pub. 4681: "Other exclusions must be applied before the qualified
+ * principal residence indebtedness exclusion" (irs-pub-4681-2025::sec::qualified-principal::b04).
+ * The engine follows Text A: a form's own instructions decide how the form is
+ * filled, and Pub. 4681's next sentences give the same election (insolvency
+ * "instead of" line 1e), which only makes sense if line 1e applies first.
+ */
 export function splitDebts(
   debts: readonly DebtInput[],
   insolvency: number,

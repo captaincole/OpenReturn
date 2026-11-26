@@ -650,8 +650,6 @@ export function register(): void {
         "CA requires the federal NOL amount (column A) to be added back in column C because CA computes its own NOL via FTB 3805V. Column A source is unsupported (Schedule 1 not ingested) and FTB 3805V NOL is not modeled.",
       "1.line.b8b_subtractions":
         "CA subtracts California lottery winnings from gambling income. No CA lottery winnings fact category exists, and the column A source (Schedule 1 line 8b) is not ingested. This subtraction requires a scenario with CA lottery income.",
-      "1.line.b8c_subtractions":
-        "CA may allow a subtraction for mortgage forgiveness debt relief (Cancellation of Debt). No cancellation_of_debt fact category exists and Schedule 1 is not ingested. Requires a scenario with COD income and CA mortgage forgiveness exclusion.",
       "1.line.b8e_additions":
         "Column C adds an Archer MSA rolled over to an HSA (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b02); no fact splits Form 8853 line 6b between rollovers to an HSA and other amounts.",
       "1.line.b8g_federal":

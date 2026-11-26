@@ -19,7 +19,12 @@ export function line8c(_: unknown, info: Schedule1FilingInfo): number | Unsuppor
   return amount > 0 ? roundDollars(amount) : undefined;
 }
 
-/* Line 9 waits while line 8c waits for an answer about a canceled debt. */
-export function canceledDebtHold(info: Schedule1FilingInfo): "waiting" | undefined {
-  return info.canceledDebtWaits && !info.canceledDebtGap ? "waiting" : undefined;
+/*
+ * Line 9 adds lines 8a to 8z, so it holds with line 8c: it is unsupported with
+ * line 8c's gap, as the Form 2555 hold does, and waits while line 8c waits for
+ * an answer. A gap never prints a total that leaves the canceled debt out.
+ */
+export function canceledDebtHold(info: Schedule1FilingInfo): Unsupported | "waiting" | undefined {
+  if (info.canceledDebtGap) return unsupported(info.canceledDebtGap);
+  return info.canceledDebtWaits ? "waiting" : undefined;
 }
