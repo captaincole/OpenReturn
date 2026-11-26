@@ -53,12 +53,20 @@ const LICENSE_GAP =
 const SEIN_GAP =
   "FTB 3514 line 18d asks for the business's California SEIN, and no fact records it (blank when there is none).";
 
-const business =
-  (pick: (lines: CaEitcBusiness) => string | undefined) => (_: Lines, info: Form3514FilingInfo) =>
-    info.caEitcBusiness === undefined ? undefined : pick(info.caEitcBusiness);
+// MANUAL EDIT: with a farm, Schedule F may hold the largest net profit, and no farm fact gives a name or address.
+const FARM_GAP =
+  "FTB 3514 lines 18a to 18e describe the schedule with the largest net profit (loss), which can be Schedule F, and the farm fact holds no business name, address, license or SEIN.";
 
-const businessGap = (reason: string) => (_: Lines, info: Form3514FilingInfo) =>
-  info.caEitcHasBusiness ? unsupported(reason) : undefined;
+const business =
+  (pick: (lines: CaEitcBusiness) => string | undefined) => (_: Lines, info: Form3514FilingInfo) => {
+    if (info.caEitcHasFarm === true) return unsupported(FARM_GAP);
+    return info.caEitcBusiness === undefined ? undefined : pick(info.caEitcBusiness);
+  };
+
+const businessGap = (reason: string) => (_: Lines, info: Form3514FilingInfo) => {
+  if (info.caEitcHasFarm === true) return unsupported(FARM_GAP);
+  return info.caEitcHasBusiness ? unsupported(reason) : undefined;
+};
 
 /*
  * Header box (::sec::specific-instructions::b02): a married filer not filing

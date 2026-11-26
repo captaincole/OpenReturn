@@ -28,7 +28,7 @@ export interface DependentCarePersonRow {
 export interface Form2441FilingInfo
   extends
     BaseFilingInfo,
-    Pick<Schedule1FilingInfo, "hasBusiness">,
+    Pick<Schedule1FilingInfo, "hasBusiness" | "hasFarm">,
     Pick<QbiFilingInfo, "qbiScheduleSEFiled">,
     Pick<Form2555FilingInfo, "form2555Filers"> {
   /** Line 1, in the order recorded. */

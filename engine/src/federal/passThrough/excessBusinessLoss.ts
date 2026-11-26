@@ -21,13 +21,16 @@ import type { FilingStatus } from "../../values.js";
 /*
  * The return's business losses outside the K-1s, positive, added without any
  * income (receipts.ts, otherBusinessLosses), by the Form 461 line they reach:
- * Schedule 1 line 3 (Schedule C) is line 2, and Schedule 1 line 5 (Schedule E)
- * is line 5 (irs-461-inst-2025::sec::line-2::b01, ::line-5::b01). unknownKeys
- * lists the facts whose amount is not known yet.
+ * Schedule 1 line 3 (Schedule C) is line 2, Schedule 1 line 5 (Schedule E)
+ * is line 5, and Schedule 1 line 6 (Schedule F) is line 6
+ * (irs-461-inst-2025::sec::line-2::b01, ::line-5::b01, ::line-6::b01).
+ * unknownKeys lists the facts whose amount is not known yet.
  */
 export interface OtherBusinessLosses {
   scheduleCLosses: number;
   rentalLosses: number;
+  /* Absent where a caller builds the losses itself: no farm. */
+  farmLosses?: number;
   unknownKeys: string[];
 }
 
@@ -49,7 +52,7 @@ export function excessBusinessLossThreshold(status: FilingStatus | undefined): n
 
 /* Every business loss of the return added up: the K-1s' and the other ones. */
 export const totalBusinessLosses = (k1Losses: number, other: OtherBusinessLosses) =>
-  k1Losses + other.scheduleCLosses + other.rentalLosses;
+  k1Losses + other.scheduleCLosses + other.rentalLosses + (other.farmLosses ?? 0);
 
 /*
  * Question 2: who must attach Form 461. Losses without income bound each
@@ -57,7 +60,8 @@ export const totalBusinessLosses = (k1Losses: number, other: OtherBusinessLosses
  * below the limits (QUESTIONS.md in federal/461/): the form then files with
  * line 16 at 0 or more, and nothing reaches Schedule 1 line 8p. The K-1
  * business losses and the rentals' reach line 5 (Schedule E), the Schedule C
- * losses line 2, a stated other business loss (positive here) line 8.
+ * losses line 2, the farm losses line 6, a stated other business loss
+ * (positive here) line 8.
  */
 export function form461Required(
   k1Losses: number,
@@ -65,7 +69,12 @@ export function form461Required(
   otherBusinessLoss: number,
   status: FilingStatus | undefined,
 ): boolean {
-  const lineLosses = [k1Losses + other.rentalLosses, other.scheduleCLosses, otherBusinessLoss];
+  const lineLosses = [
+    k1Losses + other.rentalLosses,
+    other.scheduleCLosses,
+    other.farmLosses ?? 0,
+    otherBusinessLoss,
+  ];
   const total = totalBusinessLosses(k1Losses, other) + otherBusinessLoss;
   return (
     lineLosses.some((loss) => loss > FORM_461_LINE_LOSS_LIMIT) ||

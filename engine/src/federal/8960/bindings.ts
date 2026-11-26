@@ -59,8 +59,10 @@ export function register(): void {
       /*
        * MANUAL EDIT: irs-8960-inst-2025::sec::line-4b-adjustment-for-net-income-or-loss::b01,
        * ::b02: nonpassive section 162 income goes on line 4b as a negative, a loss as a
-       * positive. Line G "Yes" makes every Schedule C business nonpassive. Schedule F
-       * is not modeled, and no fact marks a trader in financial instruments. A K-1's
+       * positive. Line G "Yes" makes every Schedule C business nonpassive. A farm's
+       * line 34 reaches Schedule 1 line 6 only with line E "Yes" (a passive farm is a
+       * gap), so line 6 comes out the same way. No fact marks a trader in financial
+       * instruments. A K-1's
        * nonpassive trade or business income or loss on Schedule E Part II comes out
        * the same way (lines.ts nonpassiveK1Adjustments).
        */
@@ -75,9 +77,14 @@ export function register(): void {
           info.scheduleCNonpassive === true && typeof scheduleC === "number"
             ? 0 - scheduleC
             : undefined;
-        return business === undefined && rentals.length === 0 && k1s.length === 0
+        const farm = form["schedule-1.0.line.6"];
+        const farmAdjustment = typeof farm === "number" ? 0 - farm : undefined;
+        return business === undefined &&
+          farmAdjustment === undefined &&
+          rentals.length === 0 &&
+          k1s.length === 0
           ? undefined
-          : sum(business, ...rentals, ...k1s);
+          : sum(business, farmAdjustment, ...rentals, ...k1s);
       },
       "0.line.4c": (form) => sum(form["0.line.4a"], form["0.line.4b"]),
       "0.line.5a": (form) => sum(form["form-1040.line.7a"], form["schedule-1.0.line.4"]),

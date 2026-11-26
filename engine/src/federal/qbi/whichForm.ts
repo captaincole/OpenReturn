@@ -12,6 +12,7 @@ import {
 import { standardDeduction } from "../1040/deductions.js";
 import { magiUpperBound } from "../8960/mustFile.js";
 import { scheduleCOpen } from "../schedule-c/resolveInfo.js";
+import { hasCooperativePatronFarm } from "./farms.js";
 import { QBI_LIMITS } from "./lines.js";
 import { qbiBusinesses, qualifiedReitDividends, rentalsWithoutQbiAnswer } from "./resolveInfo.js";
 
@@ -74,8 +75,9 @@ function certainStandardDeduction(inputs: ResolverInputs): number {
  * Schedule A total, business losses, the age increase when a birth date is
  * unknown, and the dependent cap on low wages; in that band Form 8995-A files,
  * which at or below the threshold gives the Form 8995 result
- * (irs-8995a-inst-2025::sec::determining-your-qbi-deduction::b01). The engine
- * reads no Form 1099-PATR, so no taxpayer is a patron. An unknown filing status
+ * (irs-8995a-inst-2025::sec::determining-your-qbi-deduction::b01). A farm with
+ * cooperative distributions on Schedule F line 3a makes the taxpayer a patron
+ * (hasCooperativePatronFarm): Form 8995-A at any income. An unknown filing status
  * counts a spouse's income, subtracts no deduction and tests the lowest
  * threshold. Form 8995-A asks the W-2 wage and property answers by the same test.
  */
@@ -87,7 +89,9 @@ export function qbiIncomeMayExceedThreshold(inputs: ResolverInputs): boolean {
 }
 
 export function qbiFormByIncome(inputs: ResolverInputs): QbiForm {
-  return qbiIncomeMayExceedThreshold(inputs) ? "form-8995-a" : "form-8995";
+  return qbiIncomeMayExceedThreshold(inputs) || hasCooperativePatronFarm(inputs)
+    ? "form-8995-a"
+    : "form-8995";
 }
 
 /*

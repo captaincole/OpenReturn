@@ -158,9 +158,18 @@ function selfEmploymentEarnings(
 ): number | undefined {
   const scheduleSE = numberOrBlank(form["schedule-se.0.line.3"]);
   if (scheduleSE !== undefined) return scheduleSE - sum(form["schedule-1.1.line.15"]);
-  if (info.hasBusiness !== true) return 0;
+  if (info.hasBusiness !== true && info.hasFarm !== true) return 0;
   if (info.qbiScheduleSEFiled !== false) return undefined;
-  return numberOrBlank(form["schedule-1.0.line.3"]);
+  // MANUAL EDIT: a farm's Schedule F line 34 (Schedule 1 line 6) is self-employment earnings too.
+  const line3 = numberOrBlank(form["schedule-1.0.line.3"]);
+  const line6 = numberOrBlank(form["schedule-1.0.line.6"]);
+  if (
+    (info.hasBusiness === true && line3 === undefined) ||
+    (info.hasFarm === true && line6 === undefined)
+  ) {
+    return undefined;
+  }
+  return sum(line3, line6);
 }
 
 /*
