@@ -13,6 +13,18 @@ The rule decisions (two texts that conflict, or a choice of method) are in `docs
 - Default: the engine does the same (`proratedPercent` in `lines.ts`).
 - Changes dollars: yes, a little. 10.33% against 10% on a $2,390 column (d) is $8.
 
+### Line 20: the 70% of a rounded line 19
+
+- The Form 8912 instructions give no rounding rule. The engine rounds each column (f) to whole dollars (the Form 1040 rule, "Rounding Off to Whole Dollars"), so line 19 is whole dollars and line 20 multiplies it.
+- Example: column (f) 877.50 prints 878; line 20 = 878 x 70% = 614.60 = 615. Keeping the cents to line 20 gives 614.25 = 614.
+- Default: round each printed line, then multiply the printed line 19. The blind fill did the same.
+- Changes dollars: yes, at most $1.
+
+### Line 10e when lines 10a to 10d are blank
+
+- The form says "Add lines 10a through 10d". The engine prints 0; a preparer may leave it blank.
+- Changes dollars: no.
+
 ### Example 2 leaves out December 15, 2017
 
 - Text: the tax year is December 1, 2017 to November 30, 2018, and the table lists March 15, June 15 and September 15 for 60% (`line-18-column-a::b03`). December 15, 2017 is in that year, and the rule gives 25% "for each credit allowance date you hold" (`::b02`).
@@ -68,6 +80,12 @@ The rule decisions (two texts that conflict, or a choice of method) are in `docs
 ### California
 
 - The corpus has no California rule for this credit's interest. California follows the federal interest on Form 1040 line 2b, so no Schedule CA line changes.
+
+## Second opinions
+
+- **Blind fill (2026-11-26).** A preparer filled 15 cases from the blank form and the instructions only. No line differs in dollars. Line 10e differs 11 times as blank against 0 (above). The preparer's dollar doubts (the column (e) rounding, a purchase on a credit allowance date, the 70% of a rounded line 19, the 70% on a pass-through credit, line 11 below zero) match the engine's defaults and are listed here or in the rule decisions.
+- **PolicyEngine-US 2.154.1** (commit 0fbed6dd, `variables/gov/irs` and `parameters/gov/irs`): it does not model this credit. No variable or parameter names a tax credit bond, Form 8912 or Form 1097-BTC. Nothing to compare.
+- **IRS Direct File** (`IRS-Public/direct-file`, searched on GitHub): it has no Form 8912 logic. It reads only the Form 1099-INT "Tax Exempt And Tax Credit Bond CUSIP No" field. Nothing to compare.
 
 ## Proposals for a discussion
 
