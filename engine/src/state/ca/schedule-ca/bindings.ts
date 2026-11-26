@@ -25,6 +25,7 @@ import { movingExpenseBindings } from "./movingExpenses.js";
 import { nolDeductionBindings } from "./nolDeduction.js";
 import { otherGainsBindings } from "./otherGains.js";
 import { sectionCBindings } from "./sectionC.js";
+import { trustDistributionBindings } from "./trustDistribution.js";
 import type { ScheduleCa } from "./types.js";
 
 const LINE_1F_WITHOUT_8839 =
@@ -137,6 +138,8 @@ export function register(): void {
       ...otherGainsBindings,
       ...childIncomeBindings,
       ...excessBusinessLossBindings,
+      // MANUAL EDIT: line 8z column C from FTB 5870A or an untaxed trust distribution (trustDistribution.ts).
+      ...trustDistributionBindings,
       ...nolDeductionBindings,
       ...movingExpenseBindings,
       ...mortgageCreditBindings,
