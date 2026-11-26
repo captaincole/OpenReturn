@@ -43,7 +43,7 @@ function line9(plan: SelfEmployedHealthPlan, form: ReturnAccessor): number {
 
 /*
  * Line 12: blank without the person's Form 2555 ({}), 0 when none of it is this
- * business's, else Form 2555 line 45, not below 0 (QUESTIONS.md question 5).
+ * business's, else Form 2555 line 45, not below 0 (QUESTIONS.md question 6).
  * Undefined while line 45 waits.
  */
 function line12(

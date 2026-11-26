@@ -138,7 +138,7 @@ function hasOtherForeignIncome(answers: ForeignEarnedIncomeFactValue): boolean {
 /*
  * Line 12: "any amount from Form 2555, line 45, attributable to the amount
  * entered on line 4 or 11" (the form). The engine settles it only when the
- * answer is all or nothing (QUESTIONS.md question 5).
+ * answer is all or nothing (QUESTIONS.md question 6).
  */
 function line12Source(
   ctx: PlanContext,

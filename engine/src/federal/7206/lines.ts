@@ -18,7 +18,7 @@ export const LONG_TERM_CARE_LIMIT_71_OR_OLDER_2025 = 6020;
 /*
  * Line 6 has no rounding rule ("Divide line 4 by line 5"). The engine keeps 4
  * decimal places, prints them, and line 7 multiplies by the printed value
- * (QUESTIONS.md question 3).
+ * (QUESTIONS.md question 4).
  */
 export const RATIO_PLACES = 4;
 

@@ -41,7 +41,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
     renderedText: {
       "form-7206.0.header.taxpayer_name": "Ispan Corvane",
       "form-7206.0.header.taxpayer_id": "400-00-7206",
-      // Line 6 — Divide line 4 by line 5 (4 places, QUESTIONS.md question 3)
+      // Line 6 — Divide line 4 by line 5 (4 places, QUESTIONS.md question 4)
       "form-7206.0.line.6_business_profit_ratio": "1.0000",
     },
     renderedBlank: [
