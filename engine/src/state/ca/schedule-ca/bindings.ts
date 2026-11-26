@@ -17,9 +17,11 @@ import type { ScheduleCaFilingInfo } from "./filingInfo.js";
 import { form8853Bindings } from "./form8853.js";
 import { partIIUnsupported } from "./increasedStandard.js";
 import { CA_MISC_FLOOR_RATE, caItemizedLine29 } from "./itemizedWorksheet.js";
+import { LINE_10_SUBTRACTIONS_BEFORE_NOL } from "./line10.js";
 import { line5bSubtractions } from "./lumpSum.js";
 import { mortgageCreditBindings } from "./mortgageCredit.js";
 import { movingExpenseBindings } from "./movingExpenses.js";
+import { nolDeductionBindings } from "./nolDeduction.js";
 import { otherGainsBindings } from "./otherGains.js";
 import { sectionCBindings } from "./sectionC.js";
 import type { ScheduleCa } from "./types.js";
@@ -132,6 +134,7 @@ export function register(): void {
       ...otherGainsBindings,
       ...childIncomeBindings,
       ...excessBusinessLossBindings,
+      ...nolDeductionBindings,
       ...movingExpenseBindings,
       ...mortgageCreditBindings,
       ...form8853Bindings,
@@ -253,22 +256,12 @@ export function register(): void {
       "0.line.6b_subtractions": (form) => numberOrBlank(form["0.line.6b_federal"]),
       // MANUAL EDIT: the part of line 5b that Schedule G-1 taxes (lumpSum.ts).
       "0.line.5b_subtractions": line5bSubtractions,
+      // MANUAL EDIT: the lines before FTB 3805V's (line10.ts), then lines 9b1 and 9b2.
       "2.line.b10_subtractions": (form) =>
         sumOrBlank(
-          form["0.line.1z_subtractions"],
-          form["0.line.2b_subtractions"],
-          form["0.line.3b_subtractions"],
-          form["0.line.4b_subtractions"],
-          form["0.line.5b_subtractions"],
-          form["0.line.6b_subtractions"],
-          form["0.line.7a_subtractions"],
-          form["0.line.b2a_subtractions"],
-          form["0.line.b3_subtractions"],
-          form["0.line.b4_subtractions"],
-          form["0.line.b5_subtractions"],
-          form["0.line.b6_subtractions"],
-          form["0.line.b7_subtractions"],
-          form["2.line.b9a_subtractions"],
+          ...LINE_10_SUBTRACTIONS_BEFORE_NOL.map((id) => form[id]),
+          form["2.line.b9b1_subtractions"],
+          form["2.line.b9b2_subtractions"],
         ),
       /*
        * MANUAL EDIT: "Subtract line 26 from line 10 in column B and column C"
@@ -702,10 +695,6 @@ export function register(): void {
         "No CA-specific subtraction rules ingested for digital asset ordinary income; no scenario modeled yet.",
       "1.line.b8v_additions":
         "No CA-specific addition rules ingested for digital asset ordinary income; no scenario modeled yet.",
-      "2.line.b9b1_subtractions":
-        "CA-specific disaster loss deduction from FTB Form 3805V — no ingestion path for FTB 3805V data exists yet.",
-      "2.line.b9b2_subtractions":
-        "CA-specific NOL deduction from FTB Form 3805V — no ingestion path for FTB 3805V data exists yet.",
       "2.line.b9b3_subtractions":
         "CA-specific NOL deduction from FTB Forms 3805Z, 3807, or 3809 — no ingestion path for these FTB enterprise-zone NOL forms exists yet.",
       "2.line.c17_federal":

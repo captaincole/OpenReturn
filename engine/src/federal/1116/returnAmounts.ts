@@ -11,6 +11,7 @@ import { unsupported, type Unsupported } from "../../types.js";
 import type { FilingStatus } from "../../values.js";
 import { computeQdcg, type QdcgBreakdown } from "../../worksheets/qdcg.js";
 import { qdcgInputsFromReturn } from "../1040/qdcgInputs.js";
+import { negativeReportingYearTax } from "../8978/receivers.js";
 import type { Form1116FilingInfo } from "./filingInfo.js";
 
 export type Accessor = { readonly [fieldId: string]: unknown };
@@ -45,8 +46,6 @@ const OTHER_GAINS_GAP =
   "Line 3e needs gross income from all sources, and Schedule 1 line 4 (Form 4797) or line 6 (Schedule F) reports only a net amount.";
 const CHILD_TAX_GAP =
   "Form 1040 line 16 is figured on Form 8615, so the Qualified Dividends and Capital Gain Tax Worksheet that line 18 reads is not the one the tax used.";
-const FORM_8978_GAP =
-  "Form 8978 files, and line 20 is adjusted by its line 14 (irs-1116-inst-2025::sec::line-20::b02); Form 8978 has no rules in the engine.";
 
 const files = (info: Form1116FilingInfo, formId: string) => info.mustFile?.[formId]?.value === true;
 const positive = (value: unknown) => (numberOrBlank(value) ?? 0) > 0;
@@ -160,17 +159,21 @@ export function grossIncomeAllSources(
 
 /*
  * Line 20 (irs-1116-inst-2025::sec::line-20::b01): Form 1040 line 16 and
- * Schedule 2 line 1z, less any Form 4972 tax on line 16.
+ * Schedule 2 line 1z, less any Form 4972 tax on line 16. A negative Form 8978
+ * line 14 lowers it; a positive one is already in line 16; "If, after your
+ * adjustment, the amount of your tax is zero or less, enter -0-" (::line-20::b02).
  */
 export function regularTaxForCredit(
   form: Accessor,
   info: Form1116FilingInfo,
 ): number | Unsupported | undefined {
-  if (files(info, "form-8978")) return unsupported(FORM_8978_GAP);
+  const partnerReduction = negativeReportingYearTax(info);
+  if (typeof partnerReduction !== "number") return partnerReduction;
   const line16 = numberOrBlank(form["form-1040.line.16"]);
   if (line16 === undefined) return undefined;
   const form4972Tax = files(info, "form-4972") ? sum(info.form4972Tax) : 0;
-  return line16 - form4972Tax + sum(form["schedule-2.0.line.1z_total_lines_1a_through_1y"]);
+  const tax = line16 - form4972Tax + sum(form["schedule-2.0.line.1z_total_lines_1a_through_1y"]);
+  return partnerReduction > 0 ? atLeast(0, tax - partnerReduction) : tax;
 }
 
 /* The QDCG worksheet as Form 1040 line 16 figured it; a gap when line 16 came from Form 8615. */

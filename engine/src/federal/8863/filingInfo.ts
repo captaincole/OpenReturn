@@ -1,6 +1,7 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { SSN } from "../../values.js";
 import type { Form1116FilingInfo } from "../1116/filingInfo.js";
+import type { Form8978FilingInfo } from "../8978/filingInfo.js";
 import type { AmericanOpportunityLines, StudentCredit } from "./lines.js";
 import type { RefundOutcome } from "./refund.js";
 
@@ -59,8 +60,12 @@ export interface Form8863Figured {
   studentsMissing: boolean;
 }
 
-/* Form 1116's slots: the worksheet asks foreignTaxCreditGap whether Schedule 3 line 1 is a gap. */
-export interface Form8863FilingInfo extends BaseFilingInfo, Form1116FilingInfo {
+/*
+ * Form 1116's slots: the worksheet asks foreignTaxCreditGap whether Schedule 3
+ * line 1 is a gap, and Form 8978's whether line 6l is.
+ */
+export interface Form8863FilingInfo
+  extends BaseFilingInfo, Form1116FilingInfo, Pick<Form8978FilingInfo, "form8978"> {
   form8863?: Form8863Figured;
   /* Which page 2 this copy prints (renderCopies sets it); absent means the first. */
   form8863CopyIndex?: number;
