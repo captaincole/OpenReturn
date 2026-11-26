@@ -90,6 +90,10 @@ A Schedule K-1 (Form 1120-S) works for box 1 income from an S corporation
 you work in, with its box 17 code V statement (Form 8995); every other K-1
 box, and every partnership or trust K-1, shows on Schedule E line 41 as not
 supported yet.
+Part IV of a trust's Schedule J (Form 1041) works for one domestic trust
+created before March 1, 1984 (Form 4970, Schedule 2 line 17l), with your
+taxable income and tax of 2020 to 2024 as answers. It has one unverified
+test scenario.
 A business you run yourself is answers, not a document: receipts and
 expenses by Schedule C line, vehicles at the standard mileage rate, a
 home office by the simplified method or, in a rented home, by Form 8829,

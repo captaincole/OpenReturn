@@ -775,6 +775,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8828",
     relativeDir: "federal/8828",
     register: registerForm8828,
+    // One Form 8828 for each sold home that files (federal/8828/resolveInfo.ts).
+    copies: {
+      count: (info) => info?.form8828Copies?.length ?? 1,
+      select: (info, index) => info && { ...info, form8828CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-8834",

@@ -28,7 +28,7 @@ The two Forms 8986 are made documents in `docs/`: `01-form-8986-copperline-ventu
 
 - [Form 8986 (Rev. December 2024)](https://www.irs.gov/pub/irs-access/f8986_accessible.pdf), the official form: ours follows its Parts I to V, item letters and the Part V columns (a) to (h) and the Applicable Penalties table. We leave out Part II item B (the partnership representative), Part IV items F and G (liabilities, capital account) and Part VI: no fact holds them.
 - [Instructions for Form 8986](https://www.irs.gov/instructions/i8986): column (g) is the adjustment net of approved modifications and (h) the corrected amount; the penalties sit under Part V with section, description, rate and lines. Ours matches.
-- [Instructions for Form 8986 (2019)](https://www.irs.gov/pub/irs-prior/i8986--2019.pdf): there "Column (h), Net (column (f) minus column (g))" was the net amount. This explains the column letters the Form 8978 instructions use (decision A18 in `docs/rule-decisions.md`). Ours uses the current letters.
+- [Instructions for Form 8986 (2019)](https://www.irs.gov/pub/irs-prior/i8986--2019.pdf): there "Column (h), Net (column (f) minus column (g))" was the net amount. This explains the column letters the Form 8978 instructions use (decision A23 in `docs/rule-decisions.md`). Ours uses the current letters.
 
 ## Hand check
 

@@ -7,6 +7,7 @@ import { withLaterCopies } from "../4137/laterCopies.js";
 import { earlyDistributionTax } from "../5329/lines.js";
 import { amtGap } from "../6251/foreignTaxCredit.js";
 import { form8621Amount } from "../8621/totals.js";
+import { recaptureTaxForSchedule2 } from "../8828/results.js";
 import { files8853, form8853Total } from "../8853/results.js";
 import { withLaterForm8919Copies } from "../8919/laterCopies.js";
 import { totalOver } from "../8936/credit.js";
@@ -172,6 +173,9 @@ export function register(): void {
       // irs-1040-inst-2025::sec::line-8::b02: "check the box on line 8 to indicate that you don't have to file Form 5329".
       "0.line.8_ira_tax_favored_accounts_not_required": (_, info) =>
         info.earlyDistributionTaxWithoutForm === true ? true : undefined,
+      // MANUAL EDIT: line 17b is Form 8828 line 23 (irs-1040-inst-2025::sec::line-17b::b01).
+      "1.line.17b_recapture_federal_mortgage_subsidy": (form, info) =>
+        recaptureTaxForSchedule2(form, info),
       "1.line.17c_additional_tax_hsa_distributions": (form) =>
         total(form["form-8889.0.line.17b_additional_20pct_tax"]),
       "1.line.17d_additional_tax_hsa_ineligible_individual": (form) =>
@@ -194,6 +198,13 @@ export function register(): void {
        * irs-1040-inst-2025::sec::line-17p::b01). Line 17z takes its line 23 as
        * "1294DT" (irs-8621-inst-2025::sec::line-23::b01).
        */
+      /*
+       * MANUAL EDIT: line 17l is Form 4970 line 28 ("Include the amount from this
+       * line on Schedule 2 (Form 1040), line 17l", irs-4970-form-2025::sec::line-28::b01;
+       * irs-1040-inst-2025::sec::line-17l::b01). Blank with no Form 4970.
+       */
+      "1.line.17l_tax_accumulation_distribution_trusts": (_, info) =>
+        info.form4970TaxGap !== undefined ? unsupported(info.form4970TaxGap) : info.form4970Tax,
       "1.line.17p_interest_form8621_line16f_section_1291_fund": (_, info) =>
         form8621Line(info, (amounts) => amounts.section1291Interest, NO_PFIC),
       "1.line.17q_interest_form8621_line24": (_, info) =>
@@ -291,8 +302,6 @@ export function register(): void {
         "No credit-recapture scenario (Forms 4255/8874/8882) yet",
       "1.line.17a_recapture_other_credits_amount":
         "No credit-recapture scenario (Forms 4255/8874/8882) yet",
-      "1.line.17b_recapture_federal_mortgage_subsidy":
-        "No Form 8828 / home-sale-with-mortgage-subsidy scenario yet",
       "1.line.17g_recapture_charitable_contribution_fractional_interest":
         "No fractional-interest charitable contribution recapture scenario yet",
       "1.line.17h_income_nonqualified_deferred_compensation_409a":
@@ -303,8 +312,6 @@ export function register(): void {
         "No section 72(m)(5) excess benefits (owner-employee plan) scenario yet",
       "1.line.17k_golden_parachute_payments":
         "No golden parachute scenario yet (W-2 box 12 code K / 1099-NEC box 3 excise not modeled)",
-      "1.line.17l_tax_accumulation_distribution_trusts":
-        "No trust accumulation distribution (Form 4970) scenario yet.",
       "1.line.17m_excise_tax_insider_stock_compensation_expatriated_corp":
         "No section 4985 expatriated-corporation insider stock compensation scenario yet.",
       "1.line.17n_lookback_interest_section_167g_460b":

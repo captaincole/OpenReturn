@@ -1,10 +1,10 @@
 # Form 8978 — open questions
 
-Sources: `irs-8978-inst-2025` (Rev. December 2024) and Form 8986 (Rev. December 2024). Each item says where the form and its instructions do not settle a rule, the default the engine applies, and whether it can change a dollar amount. The items keep their numbers under three headings. The one conflict is a decision in `docs/rule-decisions.md` (row A18) and in the code.
+Sources: `irs-8978-inst-2025` (Rev. December 2024) and Form 8986 (Rev. December 2024). Each item says where the form and its instructions do not settle a rule, the default the engine applies, and whether it can change a dollar amount. The items keep their numbers under three headings. The one conflict is a decision in `docs/rule-decisions.md` (row A23) and in the code.
 
 ## Two texts conflict
 
-- **A18. The Form 8986 column that holds the change (Schedule A).** The Form 8978 instructions: "enter amounts from Form 8986, Part V, column (h), which reflect the adjustments net of any approved modifications (column (g) of Form 8986)" (`specific-instructions-for-schedule-a::b02`). On Form 8986 (Rev. December 2024), column (g) is the adjustment net of modifications and column (h) the corrected amount. Decided: column (g), the amount the sentence describes (`scheduleA.ts`). Changes dollars: column (h) would add back the amount already reported, $42,000 more 2021 income for vandene.
+- **A23. The Form 8986 column that holds the change (Schedule A).** The Form 8978 instructions: "enter amounts from Form 8986, Part V, column (h), which reflect the adjustments net of any approved modifications (column (g) of Form 8986)" (`specific-instructions-for-schedule-a::b02`). On Form 8986 (Rev. December 2024), column (g) is the adjustment net of modifications and column (h) the corrected amount. Decided: column (g), the amount the sentence describes (`scheduleA.ts`). Changes dollars: column (h) would add back the amount already reported, $42,000 more 2021 income for vandene.
 
 ## Should we do this now
 

@@ -35,6 +35,8 @@ export const CANON_ROUTES: ProxyRoute[] = [
   { method: "GET", path: "/app/refdocs" },
   { method: "GET", path: "/app/refdocs/:docId/pdf" },
   { method: "GET", path: "/app/refdocs/:docId/html" },
+  { method: "GET", path: "/app/law/status" },
+  { method: "GET", path: "/app/law/sections/:section" },
 ];
 
 const isPlaceholder = (segment: string): boolean => segment.startsWith(":");
