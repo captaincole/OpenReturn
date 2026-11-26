@@ -1,6 +1,7 @@
 /*
- * Federal estimated tax for 2025: the payments (Form 1040 line 26) and the
- * answers Form 2210 needs to figure the underpayment penalty. Each is an
+ * Federal estimated tax for 2025: the payments (Form 1040 line 26), the
+ * payment with an extension (Schedule 3 line 10) and the answers Form 2210
+ * needs to figure the underpayment penalty. Each is an
  * answer the taxpayer states, category estimated_payments. Cade records a
  * payment only when the taxpayer made it.
  *
@@ -21,6 +22,14 @@ export const ESTIMATED_TAX_KEYS = {
    * treats it as paid on April 15, 2025 (irs-2210-inst-2025::sec::line-11::b01).
    */
   priorYearOverpaymentApplied: "estimated_tax.prior_year_overpayment_applied",
+  /*
+   * Schedule 3 line 10: the total paid with Form 4868, by an electronic
+   * payment made to get the automatic extension, or with Form 2350, a number
+   * in dollars. The fee of a card or electronic payment is not part of it
+   * (irs-1040-inst-2025::sec::line-10-4::b01). Recorded only when the taxpayer
+   * made such a payment.
+   */
+  extensionPayment: "estimated_tax.extension_payment",
   /*
    * Form 2210 Part II box A or B: "entire" or "part", recorded only when the
    * taxpayer asks for a waiver (retired after age 62 or disabled in 2024 or

@@ -427,6 +427,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "recorded only when the 2024 return applied an overpayment to 2025 estimated tax",
   ],
   [
+    /^estimated_tax\.extension_payment$/,
+    "an answer Cade records only when the user paid with Form 4868, an extension payment or " +
+      "Form 2350 (Schedule 3 line 10); Schedule 3 files with it",
+  ],
+  [
     /^estimated_tax_penalty\.withholding_on\.[^.]+$/,
     "each fact is one date of withholding for Form 2210 box D; recorded only when the " +
       "taxpayer has the dates, else withholding counts in four equal parts",

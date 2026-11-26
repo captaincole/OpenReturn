@@ -1,3 +1,4 @@
+import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Form1116FilingInfo } from "../1116/filingInfo.js";
 import type { Form3800Info } from "../3800/tax.js";
 import type { CreditLimitInfo } from "../8396/creditGap.js";
@@ -18,9 +19,24 @@ import type { Form8978FilingInfo } from "../8978/filingInfo.js";
  * Form 8911's Schedules A. Line 6a reads Form 3800's sources. Line 6l reads
  * Form 8978's line 14 total. Line 6i reads Form 8834's passive carryovers
  * (in Form 3800's, through Form 8582-CR). Line 6k reads Form 8912's Parts III
- * and IV.
+ * and IV. Lines 10 and 11 read Part II's own slots below.
  */
-export type Schedule3FilingInfo = Form3800Info &
+
+/*
+ * Schedule 3 lines 10 and 11 in whole dollars, from the facts (resolvePartTwo.ts).
+ * Form 1040 line 31 reads them too, so it reads no Schedule 3 field (partTwo.ts).
+ */
+export interface Schedule3PartTwoInfo extends BaseFilingInfo {
+  /* Line 10: the payment with an extension; undefined with none. */
+  schedule3ExtensionPayment?: number;
+  /* Line 11: the excess social security tax of both spouses; undefined with none or with a gap. */
+  schedule3ExcessSocialSecurity?: number;
+  /* Why line 11 is unsupported. */
+  schedule3ExcessSocialSecurityGap?: string;
+}
+
+export type Schedule3FilingInfo = Schedule3PartTwoInfo &
+  Form3800Info &
   Form8912FilingInfo &
   CreditLimitInfo &
   Form8978FilingInfo &

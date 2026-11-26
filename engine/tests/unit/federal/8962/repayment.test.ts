@@ -18,6 +18,7 @@ import {
 } from "../../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../../src/facts/rows.js";
 import { evaluateScenario } from "../../../../src/index.js";
+import { decisionRow } from "../../../helpers/fixtureBuilders.js";
 import {
   ABC_TRADE_ID,
   INTUIT_TRADE_ID,
@@ -142,5 +143,38 @@ describe("Form 8962 net premium tax credit", () => {
     expect(result.line27).toBeUndefined();
     expect(result.line28).toBeUndefined();
     expect(result.line29).toBeUndefined();
+  });
+});
+
+describe("the net credit on Schedule 3 line 9 and Form 1040 line 31", () => {
+  function run(extra: AIDecisionRow[]) {
+    const result = evaluateScenario({
+      filing: { id: base.name, taxYear: base.taxYear },
+      facts: facts(25000, 500, "single"),
+      decisions: [...decisions("single"), ...extra],
+    });
+    const field = (formId: string, id: string) =>
+      result.forms.get(formId)?.fields.find((each) => each.fieldId === `${formId}.${id}`)?.result;
+    return { field, schedule3: result.forms.get("schedule-3") };
+  }
+
+  it("line 31 is a gap when Schedule 3 does not file: its must-file rule cannot see line 26", () => {
+    const result = run([]);
+    expect(result.schedule3?.mustFile).toMatchObject({ ok: true, value: false });
+    expect(result.field("form-1040", "line.31")).toMatchObject({ unsupported: true });
+  });
+
+  it("with Schedule 3 on the return, lines 9 and 15 and Form 1040 line 31 take the $1,800", () => {
+    const fileIt = decisionRow({
+      userId: base.userId,
+      taxYear: base.taxYear,
+      key: "decisions.scope.must_file_schedule_3",
+      decision: true,
+      rationale: "test",
+    });
+    const result = run([fileIt]);
+    expect(result.field("schedule-3", "0.line.9")).toMatchObject({ ok: true, value: 1800 });
+    expect(result.field("schedule-3", "0.line.15")).toMatchObject({ ok: true, value: 1800 });
+    expect(result.field("form-1040", "line.31")).toMatchObject({ ok: true, value: 1800 });
   });
 });

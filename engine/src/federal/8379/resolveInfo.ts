@@ -20,8 +20,8 @@ import {
   w2Owner,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { excessSocialSecurityOf } from "../schedule-3/excessSocialSecurity.js";
 import type { Form8379FilingInfo, Form8379Spouse } from "./filingInfo.js";
-import { hasExcessSocialSecurity } from "./lines.js";
 
 const otherOf = (injured: InjuredSpouse): InjuredSpouse =>
   injured === "taxpayer" ? "spouse" : "taxpayer";
@@ -55,7 +55,7 @@ function spouseOf(inputs: ResolverInputs, owner: InjuredSpouse): Form8379Spouse 
     retirementWithholding: sum(...retirement.map((distribution) => distribution.box4)),
     medicareTaxWithheld: sum(...w2s.map((w2) => w2.box6)),
     medicareWages: sum(...w2s.map((w2) => w2.box5)),
-    excessSocialSecurity: hasExcessSocialSecurity(w2s.map((w2) => sum(w2.box4))),
+    excessSocialSecurity: excessSocialSecurityOf(w2s),
     hasBusiness: ownsBusiness(inputs, owner),
   };
 }

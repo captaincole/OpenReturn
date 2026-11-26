@@ -16,7 +16,7 @@ Each is decided by the author, with a `DECISION` comment and a row in `docs/rule
 
 - Source: line 17 names "Part II of Schedule 3" (irs-8379-inst-2025::sec::line-17::b01); line 19 takes Schedule 3 line 11 (::line-19::b01) and line 20 takes Schedule 3 line 10 (::line-20::b01).
 - Decision: lines 10 and 11 go on lines 20 and 19 only (`partThree.ts`). Form 1040 line 30, the refundable adoption credit new for 2025, counts on line 17 and on line 9.
-- Dollars: only with an extension payment or excess social security tax; no made-up taxpayer has one.
+- Dollars: only with an extension payment or excess social security tax; no made-up joint taxpayer has one.
 
 ## Should we do this now
 
@@ -24,7 +24,7 @@ Each is decided by the author, with a `DECISION` comment and a row in `docs/rule
 2. **Line 9 leaves out the additional child tax credit.** Done. The line 9 list (irs-8379-inst-2025::sec::line-9::b01) does not name it, and line 8 asks about it. Line 9 is Yes when line 17 column (a) less Form 1040 line 28 is above 0. It changes only whether the form files.
 3. **Line 7, earned income.** Done. Yes when the injured spouse's W-2s show wages, or the spouse owns a Schedule C business or a Schedule F farm. A business with a loss counts; a Form 1099-NEC with no business fact does not.
 4. **Line 19, Additional Medicare Tax withholding.** Done. The instructions take "Form 8959, line 24, attributed to each spouse" (irs-8379-inst-2025::sec::line-19::b01). The injured spouse's part is Form 8959 lines 19 to 22 on that spouse's W-2s alone (box 6 less 1.45% of box 5, at least 0), at most line 24. $1 at most from rounding. Line 24's RRTA part (line 23) is not computed by the engine.
-5. **Line 19 with excess social security tax.** Not now: Schedule 3 line 11 is not computed. Line 19 is unsupported when a spouse with more than one W-2 had more than $10,918.20 withheld.
+5. **Line 19 with excess social security tax.** Done. Schedule 3 line 11 is figured for each spouse (`schedule-3/excessSocialSecurity.ts`), and column (b) adds the injured spouse's own part, rounded to the dollar. Line 19 is unsupported only when either spouse's line 11 is a gap (a railroad W-2 or uncollected tax in box 12, with two or more employers).
 6. **Line 20 when the spouses do not agree.** Not now: the IRS formula splits joint estimated payments by each spouse's separate tax liability (irs-8379-inst-2025::sec::line-20::b01), and the engine does not figure separate returns. Unsupported when the fact says the spouses do not agree.
 7. **Line 15 with a disaster loss.** Not now: the instructions split only the basic and the additional standard deduction (irs-8379-inst-2025::sec::basic-standard-deduction::b01). Unsupported when the standard deduction is increased by a net qualified disaster loss (Schedule A line 16).
 8. **Schedule 1-A and the QBI deduction have no line.** Done: Form 1040 lines 13a and 13b are on no line. Line 15 is "Form 1040 or 1040-SR, line 12" (irs-8379-inst-2025::sec::line-15::b01), and "the IRS will generally use information reported with the jointly filed Form 1040 or 1040-SR to allocate the QBI deduction" (::future-developments::b01).
@@ -68,4 +68,4 @@ None. The form adds one fact kind (`refund.injured_spouse`) and reads the joint 
 | Lines 13b, 14, 15 itemized, 16, 17, 18, 20 column (b) | stated by the spouses (item 1) |
 | Column (c) | stated rule: (a) less (b) |
 | Part IV | stated rule (blank with the return) |
-| Line 19 with excess social security, line 20 not agreed, line 15 with a disaster loss | unsupported |
+| Line 19 with a gap in Schedule 3 line 11, line 20 not agreed, line 15 with a disaster loss | unsupported |

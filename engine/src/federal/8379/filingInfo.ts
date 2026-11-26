@@ -1,6 +1,7 @@
 import type { InjuredSpouseFactValue } from "../../facts/index.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Form1040FilingInfo } from "../1040/filingInfo.js";
+import type { ExcessSocialSecurity } from "../schedule-3/excessSocialSecurity.js";
 
 /* One spouse's amounts from the documents that name the spouse (W-2s, 1099-Rs, businesses). */
 export interface Form8379Spouse {
@@ -13,8 +14,8 @@ export interface Form8379Spouse {
   /* W-2 box 6 and box 5, for this spouse's part of Form 8959 line 24 (line 19). */
   medicareTaxWithheld: number;
   medicareWages: number;
-  /* Schedule 3 line 11 would hold this spouse's excess social security tax. */
-  excessSocialSecurity: boolean;
+  /* This spouse's part of Schedule 3 line 11, the excess social security tax (line 19). */
+  excessSocialSecurity: ExcessSocialSecurity;
   /* A Schedule C business or a Schedule F farm of this spouse: self-employment income (line 7). */
   hasBusiness: boolean;
 }
