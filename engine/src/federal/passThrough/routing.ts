@@ -42,6 +42,9 @@ import { applyLossLimits, type LimitContext } from "./limits.js";
  *   (not modeled when not 0: unsupported there);
  * - form_8611_line_8: a recapture of the low-income housing credit, one Form
  *   8611 for each K-1 code (federal/8611/resolveInfo.ts);
+ * - form_3800: a general business credit, on its Form 3800 Part III line by the
+ *   item's detail (federal/3800/k1Credits.ts); a credit that needs its source
+ *   form or the entity's statement is unsupported on that line;
  * - no_line: an item the instructions say needs no entry on the return.
  */
 export type Route =
@@ -62,6 +65,7 @@ export type Route =
   | "schedule_3_line_1"
   | "form_8960_line_7"
   | "form_8611_line_8"
+  | "form_3800"
   | "no_line";
 
 /* The comment over each entry is the corpus block that sends the item there. */
@@ -96,6 +100,8 @@ export const ROUTES: Readonly<Record<K1Form, Partial<Record<ItemType, Route>>>> 
     // irs-1120sk1-inst-2025::sec::box-17-other-information::b02: codes E and F, "For details, see Form 8611"
     low_income_housing_recapture_42j5: "form_8611_line_8",
     low_income_housing_recapture: "form_8611_line_8",
+    // irs-1120sk1-inst-2025::sec::report-on-form-7207-advanced-manufacturing::b03 to ::b05: "Form 3800, Part III, line …"
+    business_credit: "form_3800",
   },
   "1065": {
     // irs-1065k1-inst-2025::sec::income-loss::b01, ::b02: column (h), (k), (g) or (i) by participation
@@ -142,6 +148,8 @@ export const ROUTES: Readonly<Record<K1Form, Partial<Record<ItemType, Route>>>> 
     // irs-1065k1-inst-2025::sec::box-20-other-information::b02: codes F and G, "For details, see Form 8611"
     low_income_housing_recapture_42j5: "form_8611_line_8",
     low_income_housing_recapture: "form_8611_line_8",
+    // irs-1065k1-inst-2025::sec::box-15-credits::b01: "report this credit directly in Form 3800, Part III"
+    business_credit: "form_3800",
   },
   "1041": {
     // irs-1041k1-inst-2025::sec::box-1-interest-income::b01

@@ -75,6 +75,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole casualty event (Form 4684); whether one happened is Cade's question",
   ],
   [
+    /^general_business_credit\.(current|carryover)\.[^.]+$/,
+    "each fact is one whole credit or carryover from last year's return (Form 3800 Parts III " +
+      "and IV); whether one exists is Cade's question",
+  ],
+  [
     /^foreign_earned_income\.(taxpayer|spouse)$/,
     "each fact is a whole person's Form 2555 (Parts I to IX); whether the person claims the " +
       "exclusion is Cade's question. Form 2555 lists the fact again while an answer inside it " +
