@@ -13,7 +13,7 @@ Forms that file: Form 1040, Schedule 2, Form 8611. Lines 8, 16 and 17 of Form 86
 | W-2, Sierra Meadow Engineering | box 1 $185,000, box 2 $36,000 |
 | Credits, 2018 to 2024 (Forms 8586) | $9,000; $12,000; $12,000; $13,400; $12,000; $12,000; $12,000 |
 | 2021 Form 8609-A | line 10 $700, line 11 $300, line 14 step 1 .25, line 15 12, line 16 9 |
-| Qualified basis | first year $2,400,000; end of 2024 $2,520,000; end of 2025 $1,980,000 |
+| Qualified basis (totals, the $120,000 of additions included) | first year $2,400,000; end of 2024 $2,520,000; end of 2025 $1,980,000 |
 | Earlier recapture of the accelerated portion | $400 |
 | Unused credits | $3,000; from additions $200 |
 

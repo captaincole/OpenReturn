@@ -75,10 +75,13 @@ export interface LowIncomeHousingPriorYear {
  *   of the compliance period (::purpose-of-form::b01);
  * - below_minimum_set_aside: the decrease takes the building below the
  *   minimum set-aside of section 42(g)(1);
- * - decrease: the qualified basis, figured without the additions after the
- *   first year of the credit period, at the end of the first year, of 2024 and
- *   of 2025. A casualty loss restored within a reasonable period is not a
- *   decrease (::purpose-of-form::b03).
+ * - decrease: the qualified basis at the end of the first year of the credit
+ *   period, of 2024 and of 2025. State the 2024 and 2025 amounts as the total
+ *   qualified basis, with every addition after the first year included (the
+ *   amount on that year's Form 8609-A). The engine compares the decrease first
+ *   to the additions, so the first-year amount less the 2025 total is the
+ *   first-year basis lost (::line-6::b01). A casualty loss restored within a
+ *   reasonable period is not a decrease (::purpose-of-form::b03).
  */
 export type LowIncomeHousingBasisChange =
   | { kind: "disposition" }

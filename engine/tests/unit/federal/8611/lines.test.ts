@@ -108,6 +108,13 @@ describe("line 6: the percentage decrease (line-6::b01)", () => {
     expect(basisDecreasePercentage(decrease(1000, 1200, 900))).toBe(100);
   });
 
+  it("reads the year-end amounts as totals with the additions included", () => {
+    // $500,000 first year, $100,000 of additions: a fall from $600,000 to $550,000 is within them.
+    expect(basisDecreasePercentage(decrease(500000, 600000, 550000))).toBe(0);
+    // pedron: $2,400,000 first year, $120,000 of additions, $2,520,000 to $1,980,000.
+    expect(basisDecreasePercentage(decrease(2400000, 2520000, 1980000))).toBe(175);
+  });
+
   it("rounds to 3 places, to the nearest", () => {
     expect(basisDecreasePercentage(decrease(3, 3, 2))).toBe(333);
     expect(basisDecreasePercentage(decrease(3, 3, 1))).toBe(667);
