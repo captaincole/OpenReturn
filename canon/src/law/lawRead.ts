@@ -88,19 +88,19 @@ async function readBlockId(blockId: string): Promise<LawReading | null> {
   };
 }
 
-interface StoredBlock extends PathBlock {
+export interface StoredBlock extends PathBlock {
   citation: string;
   headings: string[];
 }
 
-interface StoredSection {
+export interface StoredSection {
   /** As printed: "469", "1400Z–2". */
   number: string;
   heading: string;
   blocks: StoredBlock[];
 }
 
-async function sectionBlocks(sectionId: string): Promise<StoredSection | null> {
+export async function sectionBlocks(sectionId: string): Promise<StoredSection | null> {
   const db = await openLibraryDb("law");
   const head = await db.execute({
     sql: `SELECT heading FROM ref_sections WHERE section_id = ?`,
@@ -133,6 +133,11 @@ function storedBlock(blockId: string, text: string, metadataJson: unknown): Stor
 function sectionNumber(heading: string): string {
   const afterMark = heading.replace(/^§\s*/, "");
   return afterMark.slice(0, afterMark.indexOf(".")).trim();
+}
+
+/** "§ 469. Passive activity losses and credits limited" → "Passive activity losses and credits limited". */
+export function catchlineOf(heading: string): string {
+  return heading.slice(heading.indexOf(".") + 1).trim();
 }
 
 const toLawBlock = (block: StoredBlock): LawBlock => ({
