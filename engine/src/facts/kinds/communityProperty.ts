@@ -112,6 +112,14 @@ export const COMMUNITY_PROPERTY_KEYS = {
    * means community property law applies as usual.
    */
   spousesLivingApartRules: "community_property.spouses_living_apart_rules",
+  /*
+   * true when the person on a single or head of household return was married at
+   * some time during the year ("If you are married at any time during the
+   * calendar year", irs-pub-555-2025::sec::community-property-laws::b03), so the
+   * other person on Form 8958 is a spouse, not an RDP. A head of household filer
+   * who checked the 1040 lived-apart box is married without it.
+   */
+  marriedDuringYear: "community_property.married_during_year",
 } as const;
 
 const ITEM_CATEGORY = "other";

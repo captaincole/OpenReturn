@@ -27,11 +27,37 @@ const FILING_STATUS_KEY = "decisions.scope.filing_status";
  * A married person files separately as married filing separately; RDPs "aren't
  * married for federal tax purposes" and file as single or head of household
  * (irs-pub-555-2025::sec::publication-555::b05).
+ *
+ * A married person can file a separate return as head of household "under rules
+ * for married taxpayers living apart", and must still include the spouse's
+ * community earnings "in your gross income"
+ * (irs-pub-555-2025::sec::credits-taxes-and-payments::b04–b05); a person
+ * divorced during the year is taxed on "half the community income for the part
+ * of the year before the community ends" (end-of-the-community::b03). Both are
+ * spouses: the 1040 lived-apart answers mark the first, the fact
+ * marriedDuringYear either.
  */
-function relationshipOf(status: FilingStatus | undefined): Relationship | undefined {
+const MARRIED_HOH_KEYS = [
+  SPOUSE_KEYS.livedApartAllYear,
+  SPOUSE_KEYS.livedApartLastSixMonths,
+  SPOUSE_KEYS.legallySeparatedApartAtYearEnd,
+];
+
+function marriedDuringYear(inputs: ResolverInputs, status: FilingStatus): boolean {
+  if (inputs.factByKey.get(COMMUNITY_PROPERTY_KEYS.marriedDuringYear) === true) return true;
+  return (
+    status === "head_of_household" &&
+    MARRIED_HOH_KEYS.some((key) => inputs.factByKey.get(key) === true)
+  );
+}
+
+function relationshipOf(
+  inputs: ResolverInputs,
+  status: FilingStatus | undefined,
+): Relationship | undefined {
   if (status === "married_filing_separately") return "spouse";
-  if (status === "single" || status === "head_of_household") return "registered_domestic_partner";
-  return undefined;
+  if (status !== "single" && status !== "head_of_household") return undefined;
+  return marriedDuringYear(inputs, status) ? "spouse" : "registered_domestic_partner";
 }
 
 const statesFor = (relationship: Relationship) =>
@@ -46,7 +72,7 @@ function contextOf(
   domicileState: string | undefined,
 ): ContextState {
   if (status === undefined) return { waits: true };
-  const relationship = relationshipOf(status);
+  const relationship = relationshipOf(inputs, status);
   if (relationship === undefined) return { gap: NOT_SEPARATE };
   if (domicileState === undefined) return { waits: true };
   if (!statesFor(relationship).has(domicileState)) {
@@ -72,7 +98,7 @@ function contextOf(
 export function resolve8958Info(inputs: ResolverInputs): Form8958FilingInfo {
   const items = getCommunityPropertyItemFacts(inputs.facts);
   const status = filingStatusOf(inputs);
-  const relationship = relationshipOf(status);
+  const relationship = relationshipOf(inputs, status);
   const domicileState = text(inputs, COMMUNITY_PROPERTY_KEYS.domicileState)?.trim().toUpperCase();
   const subject =
     relationship !== undefined &&

@@ -8,6 +8,7 @@ import { describe, expect, it } from "vitest";
 import {
   COMMUNITY_PROPERTY_KEYS,
   makeCommunityPropertyItemFactKey,
+  SPOUSE_KEYS,
   type CommunityPropertyItemFactValue,
 } from "../../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../../src/facts/rows.js";
@@ -77,6 +78,8 @@ function evaluate(facts: TaxFactRow[], decisions: AIDecisionRow[] = base.decisio
 }
 
 const ROW_1 = "0.line.1_wages_each_employer_row_1";
+const SE_TAX_ROW_1_B = "1.line.10_self_employment_tax_row_1_col_b";
+const SE_TAX_ROW_1_C = "1.line.10_self_employment_tax_row_1_col_c";
 const UNSUPPORTED = { ok: false, unsupported: true };
 
 describe("Form 8958 who files", () => {
@@ -115,6 +118,47 @@ describe("Form 8958 who files", () => {
     expect(evaluate([...otherFacts, ...items, domicile("TX")], single).files("form-8958")).toBe(
       false,
     );
+  });
+
+  it("a married head of household living apart is a spouse, not an RDP", () => {
+    const hoh = withStatus("head_of_household");
+    const apartLastSix: TaxFactRow = {
+      ...template,
+      id: "f-apart-6",
+      key: SPOUSE_KEYS.livedApartLastSixMonths,
+      category: "filing_status",
+      value: true,
+    };
+    const notApart = (fact: TaxFactRow) => fact.key !== SPOUSE_KEYS.livedApartLastSixMonths;
+    const texas = evaluate([...base.facts.filter(notApart), apartLastSix], hoh);
+    expect(texas.files("form-8958")).toBe(true);
+    expect([texas.value(`${ROW_1}_col_b`), texas.value(`${ROW_1}_col_c`)]).toEqual([36000, 36000]);
+    const california = [
+      ...otherFacts.filter(notApart),
+      ...communityFacts.filter((fact) => fact.key !== COMMUNITY_PROPERTY_KEYS.domicileState),
+      domicile("CA"),
+      apartLastSix,
+    ];
+    const run = evaluate(california, hoh);
+    expect([run.value(SE_TAX_ROW_1_B), run.value(SE_TAX_ROW_1_C)]).toEqual([4238, 0]);
+    const apartRules = evaluate([...california, livingApart()], hoh);
+    expect([apartRules.value(`${ROW_1}_col_b`), apartRules.value(`${ROW_1}_col_c`)]).toEqual([
+      72000, 0,
+    ]);
+  });
+
+  it("a single filer married during the year is a spouse", () => {
+    const married: TaxFactRow = {
+      ...template,
+      id: "f-married",
+      key: COMMUNITY_PROPERTY_KEYS.marriedDuringYear,
+      value: true,
+    };
+    const single = withStatus("single");
+    expect(evaluate(base.facts, single).files("form-8958")).toBe(false);
+    const run = evaluate([...base.facts, married], single);
+    expect(run.files("form-8958")).toBe(true);
+    expect(run.value(`${ROW_1}_col_b`)).toBe(36000);
   });
 
   it("files while the domicile is missing, and asks for it", () => {

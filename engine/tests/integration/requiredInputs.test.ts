@@ -115,6 +115,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "(Spouses living apart all year); absent, community property law applies as usual",
   ],
   [
+    /^community_property\.married_during_year$/,
+    "an answer Cade records only for a single or head of household filer who was married " +
+      "during the year; absent, the other person on Form 8958 is a registered domestic partner",
+  ],
+  [
     /^armed_forces_move\.[^.]+$/,
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],
