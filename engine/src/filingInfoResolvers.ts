@@ -12,6 +12,7 @@ import {
 } from "./facts/index.js";
 import { resolve4137Info } from "./federal/4137/resolveInfo.js";
 import { resolve4797Info } from "./federal/4797/resolveInfo.js";
+import { form4970ReachesSchedule2, resolve4970Info } from "./federal/4970/resolveInfo.js";
 import { scheduleTwoNeededForEarlyDistributions } from "./federal/5329/resolveInfo.js";
 import { resolve6251Info } from "./federal/6251/resolveInfo.js";
 import { form6252TotalsOf } from "./federal/6252/resolveInfo.js";
@@ -445,6 +446,8 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
     cleanVehicleSchedules(inputs).repayment,
     // Form 8621 lines 16f, 23 and 24 (lines 17p, 17z and 17q).
     form8621Feeds(inputs).scheduleTwo,
+    // Form 4970 line 28 (line 17l).
+    form4970ReachesSchedule2(resolve4970Info(inputs)),
   ];
   const required = feeders.some((value) => value === true);
   const open = !required && feeders.some((value) => value === undefined);
@@ -454,7 +457,7 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
       ? []
       : [
           {
-            rule: "fallback: Schedule SE (line 4), Form 4137 (line 5), Form 8919 (line 6), Form 8959 (line 11), Form 8960 (line 12), Schedule H (line 9), Form 6251 (line 2), Form 8962 (line 1a), or an early distribution tax (line 8) is required, or Form 8853 has an additional tax (lines 17e and 17f), or a clean vehicle credit was transferred (lines 1b, 1c)",
+            rule: "fallback: Schedule SE (line 4), Form 4137 (line 5), Form 8919 (line 6), Form 8959 (line 11), Form 8960 (line 12), Schedule H (line 9), Form 6251 (line 2), Form 8962 (line 1a), or an early distribution tax (line 8) is required, or Form 8853 has an additional tax (lines 17e and 17f), or a clean vehicle credit was transferred (lines 1b, 1c), or Form 4970 has a partial tax (line 17l)",
             value: required,
           },
         ],
