@@ -4,7 +4,7 @@ Elza Marrowind is single and lives in Reno, Nevada. Every name and amount here i
 
 She runs a steel fabrication business (Schedule C, accrual method). She built a pedestrian bridge from 2021 to 2023 on the percentage of completion method. In 2025 the price came down in a final settlement, a post-completion adjustment, so she applies the look-back method again. She has elected the simplified marginal impact method (Form 8697 Part II). She filed and paid her 2025 return on March 2, 2026, and wants the refund in her checking account. She has no input documents.
 
-The scenario renders a filled Form 8697 Part II with three prior years. Column (a) hits the line 6 ceiling. Column (c) takes the AMT amount on line 5, because it is larger. The interest to be refunded is more than the interest due, so line 10a has the net; the form is filed by itself, with the address and the deposit lines, and Schedule 2 line 17n stays blank. The 2021 year starts its interest on April 16, 2022, the quarter Table 1 leaves out (row A68: 4%). The dagdara scenario covers Part I.
+The scenario renders a filled Form 8697 Part II with three prior years. Column (a) hits the line 6 ceiling. Column (c) takes the AMT amount on line 5, because it is larger. The interest to be refunded is more than the interest due, so line 10a has the net; the form is filed by itself, with the address and the deposit lines, and Schedule 2 line 17n stays blank. The 2021 year starts its interest on April 16, 2022, the quarter Table 1 leaves out (row A69: 4%). The dagdara scenario covers Part I.
 
 Forms that file: Form 1040, Schedules 1, 2, C and SE, Form 8995, Form 8697.
 

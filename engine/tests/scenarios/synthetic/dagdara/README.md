@@ -26,7 +26,7 @@ The interest runs from April 15 after each year to April 15, 2026. Each accrual 
 | 8697 filing year line 1 | Form 1040 line 15 | 106,357 |
 | 8697 line 1 (a), (b) | stated | 120,000; 135,000 |
 | 8697 line 2 filing year, (a), (b) | stated | −25,000; 40,000; −15,000 |
-| 8697 line 2 (c) | (a) + (b) (row A69) | 25,000 |
+| 8697 line 2 (c) | (a) + (b) (row A70) | 25,000 |
 | 8697 line 3 filing year, (a), (b) | line 1 + line 2 | 81,357; 160,000; 120,000 |
 | 8697 line 4 filing year, (a), (b) | stated | 12,817; 31,800; 21,843 |
 | 8697 line 5 (a), (b) | stated | 22,200; 25,443 |

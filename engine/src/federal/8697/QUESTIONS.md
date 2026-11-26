@@ -6,8 +6,8 @@ The form is Rev. December 2025 (`irs-8697-face-2025`); its instructions are `irs
 
 Each is decided by the author, with a `DECISION` comment and a row in `docs/rule-decisions.md`.
 
-- **The interest rate for two quarters (row A68).** Table 1 says 5% for 1/1/19–6/30/19 and has no row for 4/1/22–6/30/22 (`line-11::b02`). The rule it summarizes is the section 6621(a)(1) rate from the quarterly rulings (`applicable-interest-rates::b01`): 6% and 4%. The engine uses the rulings (`rates.ts`).
-- **Line 2, column (c) (row A69).** The heading adds columns (a) and (b); the line 2 instruction says the sum of all line 2 amounts, zero, shows in 2(c) (`line-2::b01`). The engine adds (a) and (b) (`plan.ts`).
+- **The interest rate for two quarters (row A69).** Table 1 says 5% for 1/1/19–6/30/19 and has no row for 4/1/22–6/30/22 (`line-11::b02`). The rule it summarizes is the section 6621(a)(1) rate from the quarterly rulings (`applicable-interest-rates::b01`): 6% and 4%. The engine uses the rulings (`rates.ts`).
+- **Line 2, column (c) (row A70).** The heading adds columns (a) and (b); the line 2 instruction says the sum of all line 2 amounts, zero, shows in 2(c) (`line-2::b01`). The engine adds (a) and (b) (`plan.ts`).
 
 ## Should we do this now
 
@@ -27,7 +27,7 @@ Each item is a default with no conflicting text. "Done" means the engine applies
 12. **The signature section.** Source: "A signature is not required if you are filing the form with your tax return" (`specific-instructions::b01`). The paid-preparer fields are blank: the engine prepares the taxpayer's own return, as on Form 8379. Changes dollars: no. Done.
 13. **Rounding.** Each stated amount rounds to the nearest dollar. Each column's interest keeps its cents until it prints; the totals keep the cents and round once (the computed-rows rule in `CLAUDE.md`). Part II lines 2 and 4 round each product. Changes dollars: $1 at most. Done.
 14. **The rate before 1999.** The engine's table has the underpayment rate only; before 1999 an individual's overpayment rate was lower. An accrual period that starts before 1999 makes the interest unsupported. Changes dollars: no (the engine stops). Not now: it needs the overpayment column of Rev. Rul. 2024-18 for a contract more than 25 years old.
-15. **The noncorporate rate is the underpayment table.** From 1999 an individual's overpayment rate and underpayment rate are both the short-term rate plus 3 points (Rev. Rul. 2024-18, noncorporate table). Every Table 1 row agrees with the engine's table except the two of row A68 (unit test). Changes dollars: no. Done.
+15. **The noncorporate rate is the underpayment table.** From 1999 an individual's overpayment rate and underpayment rate are both the short-term rate plus 3 points (Rev. Rul. 2024-18, noncorporate table). Every Table 1 row agrees with the engine's table except the two of row A69 (unit test). Changes dollars: no. Done.
 16. **Carrybacks and carryovers.** Source: the exceptions of `lines-7-and-8::b01` and `b02`, and `line-3::b01` (a negative line 3 is a look-back loss). When line 1 or line 3 of a prior year is below 0, or the fact marks a carryover, the interest lines, the totals, the net lines and Schedule 2 line 17n are unsupported. Lines 1 to 6 still print. Part II's instructions (`lines-8-and-9::b01`) name no exception, so Part II has none. Changes dollars: the engine stops. Not now: the other interest periods need the carryback year's return and the regulation's rules (Regulations section 1.460-6(c)(4)), which are not in the corpus.
 17. **Item C with more than one entity.** Source: "Attach a schedule if there is more than one such entity" (the form face). Item C is unsupported; the lines still compute. Changes dollars: no. Not now: the engine writes no attached statements (see "Pattern change").
 18. **The look-back exceptions.** The fact means the method applies: the home construction and small contract exceptions, the de minimis election and the delayed reapplication election (`exception-for-certain-construction-contracts::b01`, `small-contract-exception::b01`, `de-minimis-exception::b01`, `delayed-reapplication-method::b02`) are Cade's question before he records it. Changes dollars: no. Done.
@@ -45,7 +45,7 @@ These are the proposals for a discussion: each changes how the repository does s
 
 ## Second opinions
 
-- **A blind fill (2026-11-26).** A preparer filled 14 cases (9 Part I, 5 Part II) by hand from the blank form and the instructions. All 163 lines agree with the engine. The preparer read rows A68 and A69 before settling the 2019 rate, so that agreement is not independent; with Table 1's printed 5%, case 6 line 7a would be $4,769 (engine $4,918). The page number in that row ("15 571") also points at the 6% table ("10/1/22 12/31/22 6% 17 571"), which supports A68.
+- **A blind fill (2026-11-26).** A preparer filled 14 cases (9 Part I, 5 Part II) by hand from the blank form and the instructions. All 163 lines agree with the engine. The preparer read rows A69 and A70 before settling the 2019 rate, so that agreement is not independent; with Table 1's printed 5%, case 6 line 7a would be $4,769 (engine $4,918). The page number in that row ("15 571") also points at the 6% table ("10/1/22 12/31/22 6% 17 571"), which supports A69.
 - **PolicyEngine-US 2.154.1 (commit 0fbed6ddb1).** It does not model Form 8697, look-back interest or the section 6621 rates. Nothing to compare.
 - **IRS Direct File.** A code search of IRS-Public/direct-file finds no Form 8697 and no look-back interest. Nothing to compare.
 - **A page check (2026-11-26).** Every printed value of the dagdara and elza scenarios, on Form 8697, Schedule 2 and Form 1040, was worked again by hand from the instructions and the facts. All agree.
@@ -58,7 +58,7 @@ These are the proposals for a discussion: each changes how the repository does s
 | Header: address, item C | Stated rule |
 | Part I lines 1–6, filing-year column | Stated rule (stated amounts; line 1 of the filing year is own reading, item 5) |
 | Part I lines 7–8 and Part II lines 8–9 (interest) | Published example with numbers for the periods and rates (`line-11::b03`); daily compounding is a stated rule |
-| Part I line 2(c), 7(c), 8(c); Part II 8(d), 9(d) | Stated rule; 2(c) decided (A69) |
+| Part I line 2(c), 7(c), 8(c); Part II 8(d), 9(d) | Stated rule; 2(c) decided (A70) |
 | Part I 9a, 10; Part II 10a, 11 | Stated rule |
 | Lines 9b–9d, 10b–10d | Stated rule |
 | Part II lines 1–7 | Stated rule (rate tables from `line-2-2::b01`, `line-4::b01`) |
