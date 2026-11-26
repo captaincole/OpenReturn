@@ -15,6 +15,7 @@ The decision on lines 4, 6, 8 and 11 (the years before age 21) is row A18 of `do
 
 - Text: line 2 takes the UNI "accumulated before you were born or reached age 21" (`line-2::b01`). The form does not say what happens when every throwback year is before 21.
 - Default: line 8 is 0, lines 9 to 27 stay blank, and line 28 is 0.
+- The blind fill (2026-11-25) printed 0 on line 11 and on line 27 (a copy of line 4, which is 0) for the same case. That is blank against 0 only.
 - Dollars: none. The whole distribution is out of the tax.
 
 ## 3. Ties on line 14
@@ -50,7 +51,7 @@ The decision on lines 4, 6, 8 and 11 (the years before age 21) is row A18 of `do
 ## 8. The multiple trust rule
 
 - Text: "only count as trusts those trusts for which the sum of this accumulation distribution and any earlier accumulation distributions from the trust ... is $1,000 or more" (`line-4::b01`).
-- Default: the beneficiary states, for each throwback year, how many other trusts count. With two or more, that year's taxes leave line 4. The engine does not test the current trust against the $1,000.
+- Default: the beneficiary states, for each throwback year, how many other trusts count. With two or more, that year's taxes leave line 4, and so lines 5, 7 and 27. The year still counts on line 8: the rule removes the taxes, not the year. The engine does not test the current trust against the $1,000.
 - Line 2 says "if the multiple trust rule applies, see the instructions for line 4" (`line-2::b01`), and the line 4 text says nothing about line 2. A year before 21 under the rule is a gap.
 - Dollars: yes, the year's trust taxes.
 
@@ -68,8 +69,15 @@ The decision on lines 4, 6, 8 and 11 (the years before age 21) is row A18 of `do
 
 ## 11. Rounding
 
-- Default: lines 9, 10, 12 and 25 round to the nearest dollar (CLAUDE.md). Line 11 compares each year's column (a) amount with the rounded line 10; a year equal to line 10 stays ("is less than", `line-11::b01`).
-- Dollars: at most a dollar on lines 12 and 25, multiplied on line 26.
+- Default: lines 9, 10, 12 and 25 round to the nearest dollar (CLAUDE.md). Line 11 compares each year's column (a) amount with the rounded line 10, "the amount on line 10 of Form 4970" (`line-11::b01`); a year equal to line 10 stays ("is less than"). Line 26 multiplies the rounded line 25.
+- Other reading (the blind fill): compare with line 10 before it rounds. Line 10 is a quarter of a whole-dollar line 9, so the two readings differ only when line 10 ends in 25 cents and a year's distribution equals the dollars below it (line 10 = $2,500.25, a year of $2,500): the blind reading takes the year off line 11, the engine keeps it. The printed amount is what the text names, so the engine keeps its reading.
+- Dollars: at most a dollar on lines 12 and 25, multiplied on line 26. In the 25-cent case above, one year on line 11, which changes line 12 and line 26.
+
+## Second opinions
+
+- **Blind fill (2026-11-25).** A preparer filled 14 cases by hand from the blank form and the instructions only. Every dollar amount matched the engine. The only differences were blank against 0 on lines 11 and 27 in the case with no year on line 8 (question 2). The preparer's doubts that change dollars are questions 2, 3, 6, 7, 8 and 11 here and decision A18. One more (line 2 blank with nothing before 21, line 6 at 0) changes no dollars, and the engine prints the same.
+- **PolicyEngine-US 2.154.0** (commit 363e9fc5, 2026-11-25). It does not model Form 4970 or the throwback rules. It does hold the constants line 17 uses: all 207 of `data/earlierYearRates.ts` (the seven rates, six bracket tops for each of five filing statuses in 2020 to 2024, and the 0% and 15% capital gain ceilings) match its `income/bracket.yaml` and `capital_gains/thresholds.yaml`, with the surviving spouse on the joint table. Its capital gain formula (`capital_gains_tax`) has the same steps as `earlierYearTax.ts`: the 0%, 15% and 20% bands stacked on the ordinary part, then the smaller of that and the tax at ordinary rates on all of it. It also taxes 25% and 28% rate gain; the engine makes such a year a gap (question 7).
+- **IRS Direct File.** It does not cover trust distributions or Form 4970, and no checkout is in reach. Not compared.
 
 ## Proposals for a discussion
 
