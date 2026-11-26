@@ -41,3 +41,16 @@ export const regCitationOf = (number: string, path: string[]): string =>
 export const QA_STEP = "Q&A-";
 const regCitationStep = (segment: string) =>
   segment.startsWith(QA_STEP) ? `, ${segment}` : `(${segment})`;
+
+/** California: "Cal. Rev. & Tax. Code § 17041(a)(1)". */
+export const caCitationOf = (number: string, path: string[]): string =>
+  `Cal. Rev. & Tax. Code § ${number}${path.map((segment) => `(${segment})`).join("")}`;
+
+/*
+ * A California section in an id: "17024.5" → "s17024.5". The dots stay, as
+ * in a regulation's id; a second version of one number adds "-v2".
+ */
+export const caSlugOf = (number: string, version = 1): string =>
+  `s${number.toLowerCase()}${version > 1 ? `${CA_VERSION_MARK}${version}` : ""}`;
+
+export const CA_VERSION_MARK = "-v";
