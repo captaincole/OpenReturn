@@ -73,7 +73,7 @@ const w2: W2FactValue = {
  */
 export const SEAINE_TRUST: TrustAccumulationDistributionFactValue = {
   trustName: "Corvell Family Trust u/a dtd 6/12/1979",
-  trustAddress: "c/o Inland Empire Trust Co., 601 West Main Avenue, Spokane, WA 99201",
+  trustAddress: "c/o Larkspur Example Trust Services, 4970 Throwback Lane, Spokane, WA 99201",
   trustEin: "00-0001979",
   trustType: "domestic",
   createdBeforeMarch1984: true,

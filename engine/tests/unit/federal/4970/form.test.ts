@@ -110,6 +110,40 @@ describe("Form 4970 who files", () => {
   });
 });
 
+describe("California: FTB 5870A on Form 540 line 34", () => {
+  const caDecisions = (more: AIDecisionRow[] = []) => [
+    ...base.decisions.filter(
+      (entry) =>
+        entry.decisionKey !== "decisions.scope.must_file_ca_540" &&
+        entry.decisionKey !== "decisions.scope.ca_residency",
+    ),
+    decision("decisions.scope.must_file_ca_540", true),
+    decision("decisions.scope.ca_residency", "full_year"),
+    ...more,
+  ];
+
+  it("a resident with the trust fact files FTB 5870A; line 34 is a gap, not a blank", () => {
+    const run = evaluate(base.facts, caDecisions());
+    expect([run.files("form-4970"), run.files("form-5870a")]).toEqual([true, true]);
+    expect(run.isGap("form-540", "line.34_tax_amount")).toBe(true);
+  });
+
+  it("a foreign trust files FTB 5870A too", () => {
+    const run = evaluate([...otherFacts, trust("abroad", { trustType: "foreign" })], caDecisions());
+    expect(run.files("form-5870a")).toBe(true);
+  });
+
+  it("no Form 540, no trust fact, or a decision false: FTB 5870A does not file", () => {
+    expect(evaluate(base.facts).files("form-5870a")).toBe(false);
+    expect(evaluate(otherFacts, caDecisions()).files("form-5870a")).toBe(false);
+    const off = evaluate(
+      base.facts,
+      caDecisions([decision("decisions.scope.must_file_5870a", false)]),
+    );
+    expect(off.files("form-5870a")).toBe(false);
+  });
+});
+
 describe("No trust fact: nothing changes", () => {
   it("Form 4970 and Schedule 2 do not file; Form 1040 line 23 stays blank", () => {
     const run = evaluate(otherFacts.filter((fact) => !isEarlierYear(fact)));
