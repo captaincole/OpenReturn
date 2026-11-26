@@ -157,6 +157,16 @@ describe("Form 965-A: the made-up return (ferane)", () => {
     expect(line("0.part1.2_net_965_liability_col_e")).toBe(line("1.part3.2_total_col_g"));
   });
 
+  it("Part III column (d) prints Part I column (c) of the year, in whole dollars (lines-1-through-4::b02)", () => {
+    const value2017 = valueOf<Section965InclusionValue>(KEY_2017);
+    const facts = factsWith({ [KEY_2017]: { ...value2017, netTaxWithout965: 318400.4 } });
+    const { line } = evaluate(ferane, facts);
+    expect(line("0.part1.1_net_965_liability_col_c")).toBe(318400);
+    expect(line("1.part3.1_row1_col_d")).toBe(318400);
+    expect(line("1.part3.1_row2_col_d")).toBe(318400);
+    expect(line("1.part3.1_row1_col_e")).toBe(18500);
+  });
+
   it("a stated payment for 2025 replaces the scheduled one", () => {
     const value2019 = valueOf<Section965InclusionValue>(makeSection965InclusionFactKey(2019));
     const facts = factsWith({

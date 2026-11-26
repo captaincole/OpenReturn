@@ -29,13 +29,14 @@ export interface PartIIIYear {
 /*
  * Column (d) "should equal the taxpayer's net tax liability without section
  * 965 amounts for the corresponding tax year reported in Part I, column (c)"
- * (lines-1-through-4::b02), so it is that column. Column (g) is (e) only "If
- * the taxpayer elected to defer" (b03).
+ * (lines-1-through-4::b02), so it is that column, in whole dollars as Part I
+ * prints it. Column (g) is (e) only "If the taxpayer elected to defer" (b03).
  */
 export function partIIIYear(
   values: ReadonlyArray<Section965SCorporationValue>,
-  without: number | undefined,
+  statedWithout: number | undefined,
 ): PartIIIYear {
+  const without = roundDollars(statedWithout);
   const rows = values.map((value): PartIIIRow => {
     const withThisSCorporation = roundDollars(value.netTaxWithThisSCorporation);
     const net = without === undefined ? undefined : netLiability(withThisSCorporation, without);
