@@ -24,10 +24,22 @@ Form 4136 refunds the federal excise tax paid on fuel used for a nontaxable purp
 
 10. **An accrual-method business.** Pub. 225: "If you use an accrual method, include the amount of credit or refund in gross income for the tax year in which you used the fuels" (`irs-pub-225-2025::sec::including-the-credit-or::b02`). Default (decision A59): the engine adds nothing to this year's income; the business's stated other income must hold it. Dollars: yes, when the stated amount leaves it out.
 
+11. **Half a cent rounds up.** Column (e) has a cents box, and the instructions give no rule for a product such as 405 x $.183 = $74.115. Default: column (e) rounds to the cent, half a cent up, as the whole-dollar rule raises 50 cents (`irs-1040-inst-2025::sec::rounding-off-to-whole::b01`). Dollars: one cent on a row. The blind fill made the same choice (its doubt 4).
+
+12. **Line 17 adds column (e) as entered.** "Add lines 1 through 16, column (e)" (`irs-4136-face-2025::sec::face-part-ii-4::b01`). Default: line 17 adds the rows rounded to the cent, not the exact products (a made-up case: $309.18, against $309.17 from the exact products). Dollars: a cent or two. The blind fill made the same choice (its doubt 5).
+
+13. **A commercial air carrier's kerosene used in foreign trade.** Line 5's claimants: "For lines 5a and 5b, the ultimate purchaser of kerosene used in commercial aviation (other than foreign trade) ... For lines 5c, 5d, and 5e, the ultimate purchaser of kerosene used in noncommercial aviation" (`irs-4136-inst-2025::sec::line-5::b01`). Lines 5c and 5d allow type of use 9 (foreign trade), and line 5e allows only type 9. Read strictly, no line 5 row names a commercial carrier in foreign trade. Default: the engine checks only the type of use (doubt 8), so a claim recorded on line 5c with type 9 prints, as the blind fill also chose (its doubt 6). Cade must confirm that the claimant flies noncommercial aviation, or that the carrier has no other way to get the tax back (a tax-free purchase with its registration). Dollars: yes, the whole 5c and 5e claim ($976 in the blind case of 4,000 gallons).
+
 ## Proposals for a discussion
 
 - **Schedule A (Form 4136).** Each business activity past the first needs its own Schedule A. The engine has no Schedule A catalog, so line B is unsupported with two or more activities. Proposal: catalog Schedule A and print one copy per activity from the same activity facts.
 - **The credit in the business's income.** For an accrual-method business, Schedule C line 6 or Schedule F line 8 could take this year's credit of the activity that names the business (`businessKey`). That changes two other forms' lines; it waits for a discussion.
+
+## Second opinions
+
+- **Blind fill (2026-11-26, 15 cases).** Filled by hand from the blank form and the instructions: lines 1 to 8, 11, 13 to 16 (brackets, bus rates, gallon equivalents, line 13c at $.244, LUST rows, home kerosene), line 17 and Schedule 3 line 12. All 53 compared values match the engine; no blank-against-0 difference. The blind fill's doubts that change cents or dollars are doubts 1, 11, 12 and 13 above, and row A60 changes no dollars.
+- **PolicyEngine-US 2.154.1** (commit `0fbed6dd`, 2026-11-26). It does not model Form 4136: no variable or parameter for fuel tax credits, excise rates or Schedule 3 line 12 (a search of `variables/gov/irs` and `parameters/gov/irs` for fuel, kerosene, excise and 4136 finds only the residential clean energy fuel cell credit). Nothing to compare.
+- **Other projects.** The repository names no other reference implementation that models Form 4136. IRS Direct File (issue #140) is not checked out here, and its scope did not include business credits or Form 4136.
 
 ## Confidence
 
