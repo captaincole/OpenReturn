@@ -15,7 +15,7 @@ This page lists each form that an individual income tax return can hold, and wha
 
 Source: [Tax year 2025 accepted forms and schedules for individual tax returns and extensions](https://www.irs.gov/pub/irs-efile/tax-year-2025-accepted-forms-schedules-individual-tax-returns-extensions.xlsx), IRS, dated 2025-11-18.
 
-The list has 225 rows, and 197 are forms and schedules to compute. The engine has 83 of them, and 62 have rules. Of the 43 tier 1 forms, the engine has 43, and 41 have rules.
+The list has 225 rows, and 197 are forms and schedules to compute. The engine has 83 of them, and 67 have rules. Of the 43 tier 1 forms, the engine has 43, and 41 have rules.
 
 | Form | Title | Tier 1 | Engine | Copies |
 | --- | --- | --- | --- | --- |
@@ -65,7 +65,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 2350 | (no title in IRS listing) |  | Not a form: another return or a request |  |
 | Form 2439 | Notice to Shareholder of Undistributed Long-Term Capital Gains |  | Not a form: a document | unbounded |
 | Form 2441 | Child and Dependent Care Expenses | Yes | Rules | 1 |
-| Form 2555 | Foreign Earned Income |  | No rules yet | 2 |
+| Form 2555 | Foreign Earned Income |  | Rules | 2 |
 | Form 3115 | Application for Change in Accounting Method |  | Not in the engine | unbounded |
 | Form 3468 | Investment Credit |  | Not in the engine | unbounded |
 | Form 3800 | General Business Credit | Yes | No rules yet | 1 |
@@ -82,7 +82,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 4835 | Farm Rental Income and Expenses |  | No rules yet | 4 |
 | Form 4868 | (no title in IRS listing) |  | Not a form: another return or a request |  |
 | Form 4952 | Investment Interest Expense Deduction | Yes | Rules | 1 |
-| Form 4970 | Tax on Accumulation Distribution of Trusts |  | No rules yet | 1 |
+| Form 4970 | Tax on Accumulation Distribution of Trusts |  | Rules | 1 |
 | Form 4972 | Tax on Lump-Sum Distributions |  | Rules | 2 |
 | Form 499W2PR | Form 499 W2PR |  | Not a form: a document |  |
 | Form 5074 | Allocation of Individual Income Tax to Guam or the Commonwealth of the Northern Mariana Islands (CNMI) |  | Not in the engine | 1 |
@@ -148,7 +148,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8824 | Like-Kind Exchanges | Yes | Rules | unbounded |
 | Form 8825 | Rental Real Estate Income and Expenses of a Partnership or an S Corporation |  | Not in the engine | unbounded |
 | Form 8826 | Disabled Access Credit |  | Not in the engine | unbounded |
-| Form 8828 | Recapture of Federal Mortgage Subsidy |  | No rules yet | 1 |
+| Form 8828 | Recapture of Federal Mortgage Subsidy |  | Rules | 1 |
 | Form 8829 | Expenses for Business Use of Your Home |  | Rules | 32 |
 | Form 8833 | Treaty-Based Return Position Disclosure Under Section 6114 or 7701(b) |  | Not in the engine | unbounded |
 | Form 8834 | Qualified Electric Vehicle Credit |  | No rules yet | unbounded |
@@ -195,7 +195,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8911 | Alternative Fuel Vehicle Refueling Property Credit |  | Rules | unbounded |
 | Form 8911 Schedule A | Alternative Fuel Vehicle Refueling Property |  | Not in the engine | unbounded |
 | Form 8912 | Credit to Holders of Tax Credit Bonds |  | No rules yet | unbounded |
-| Form 8915F | Qualified Disaster Retirement Plan Distributions and Repayments |  | No rules yet | 6 |
+| Form 8915F | Qualified Disaster Retirement Plan Distributions and Repayments |  | Rules | 6 |
 | Form 8917 | Tuition and Fees Deduction |  | Not in the engine | 1 |
 | Form 8919 | Uncollected Social Security and Medicare Tax on Wages |  | Rules | 2 |
 | Form 8925 | Report of Employer-Owned Life Insurance Contracts |  | Not in the engine | 8 |
@@ -216,7 +216,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8959 | Additional Medicare Tax | Yes | Rules | 1 |
 | Form 8960 | Net Investment Income Tax -- Individuals, Estates, and Trusts | Yes | Rules | 1 |
 | Form 8962 | Premium Tax Credit |  | Rules | 1 |
-| Form 8978 | Partner's Additional Reporting Year Tax |  | No rules yet | 6 |
+| Form 8978 | Partner's Additional Reporting Year Tax |  | Rules | 6 |
 | Form 8978 Schedule A | Partner's Additional Reporting Year Tax (Schedule of Adjustments) |  | Not in the engine | 6 |
 | Form 8990 | Limitation on Business Interest Expense Under Section 163(j) |  | Not in the engine | unbounded |
 | Form 8992 | Calculation of Net Controlled Foreign Corporation Tested Income (NCTI) |  | No rules yet | 2 |
@@ -249,7 +249,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 
 Source: [Forms you can e-file for individuals (tax year 2025)](https://www.ftb.ca.gov/tax-pros/efile/individual-efile-forms.html), FTB, dated 2026-01-02.
 
-The list has 65 rows, and 62 are forms and schedules to compute. The engine has 38 of them, and 24 have rules. Of the 22 tier 1 forms, the engine has 22, and 17 have rules.
+The list has 65 rows, and 62 are forms and schedules to compute. The engine has 38 of them, and 25 have rules. Of the 22 tier 1 forms, the engine has 22, and 17 have rules.
 
 | Form | Title | Tier 1 | Engine | Copies |
 | --- | --- | --- | --- | --- |
@@ -285,7 +285,7 @@ The list has 65 rows, and 62 are forms and schedules to compute. The engine has 
 | Form 3804-CR | Pass-Through Entity Elective Tax Credit | Yes | Rules | 2 |
 | Form 3805E | Installment Sale Income | Yes | Rules | 25 |
 | Form 3805P | Additional Taxes on Qualified Plans (Including IRAs) and Other Tax-Favored Accounts | Yes | Rules | 1 per t/p |
-| Form 3805V | Net Operating Loss (NOL) Computations and NOL and Disaster Loss Limitations – Individuals, Estates, and Trusts |  | No rules yet | 1 |
+| Form 3805V | Net Operating Loss (NOL) Computations and NOL and Disaster Loss Limitations – Individuals, Estates, and Trusts |  | Rules | 1 |
 | Form 3805Z | Enterprise Zone Deduction and Credit Summary |  | No rules yet | unbounded |
 | Form 3807 | Local Agency Military Base Recovery Area Deduction and Credit Summary (LAMBRA) |  | No rules yet | unbounded |
 | Form 3808 | Manufacturing Enhancement Area Credit Summary (MEA) |  | Not in the engine | unbounded |

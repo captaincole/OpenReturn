@@ -13,6 +13,7 @@ import {
 } from "../4255/schedule2.js";
 import { earlyDistributionTax } from "../5329/lines.js";
 import { amtGap } from "../6251/foreignTaxCredit.js";
+import { recaptureTaxForSchedule2 as lowIncomeHousingRecaptureTax } from "../8611/results.js";
 import { form8621Amount } from "../8621/totals.js";
 import { recaptureTaxForSchedule2 } from "../8828/results.js";
 import { files8853, form8853Total } from "../8853/results.js";
@@ -225,6 +226,9 @@ export function register(): void {
       // irs-1040-inst-2025::sec::line-8::b02: "check the box on line 8 to indicate that you don't have to file Form 5329".
       "0.line.8_ira_tax_favored_accounts_not_required": (_, info) =>
         info.earlyDistributionTaxWithoutForm === true ? true : undefined,
+      // MANUAL EDIT: line 16 is Form 8611 line 14, every copy (irs-1040-inst-2025::sec::line-16-3::b01).
+      "0.line.16_recapture_low_income_housing_credit": (_, info) =>
+        lowIncomeHousingRecaptureTax(info),
       /*
        * MANUAL EDIT: line 17a lists Form 4255's column (r) recaptures
        * (irs-1040-inst-2025::sec::line-17a::b01, ::identify-as-eccfr::b01). With
@@ -350,8 +354,6 @@ export function register(): void {
         "No installment-sale (section 453(l)(3)) scenario yet",
       "0.line.15_interest_deferred_tax_installment_sales":
         "No section 453A(c) installment-sale scenario yet",
-      "0.line.16_recapture_low_income_housing_credit":
-        "Form 8611 not ingested; no low-income housing credit recapture scenario",
       "1.line.17g_recapture_charitable_contribution_fractional_interest":
         "No fractional-interest charitable contribution recapture scenario yet",
       "1.line.17h_income_nonqualified_deferred_compensation_409a":

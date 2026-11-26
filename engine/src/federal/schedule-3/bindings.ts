@@ -3,6 +3,7 @@ import { numberOrBlank, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { foreignTaxCredit } from "../1116/credit.js";
+import { line6aFrom3800 } from "../3800/receivers.js";
 import { mortgageCreditGap } from "../8396/creditGap.js";
 import { line6bFrom8801 } from "../8801/credit.js";
 import { line6cFrom8839 } from "../8839/receivers.js";
@@ -15,8 +16,6 @@ import type { Schedule3FilingInfo } from "./filingInfo.js";
 import type { Schedule3 } from "./types.js";
 
 const NO_SCENARIO = "No scenario uses this credit or payment yet.";
-const FORM_3800_GAP =
-  "Form 3800 files, and line 6a takes its general business credit; Form 3800 has no rules in the engine.";
 
 export function register(): void {
   defineForm<Schedule3, Schedule3FilingInfo>("schedule-3", {
@@ -75,11 +74,14 @@ export function register(): void {
       "0.line.3": (form, info) =>
         numberOrBlank(form[LINE_19_ID]) ?? nonrefundableCreditGap(form, info),
       /*
-       * MANUAL EDIT: the general business credit from Form 3800 (irs-1040-inst-2025::sec::line-6a::b01).
-       * While Form 3800 files (a Form 8936 business credit turns it on), the gap names it.
+       * MANUAL EDIT: the general business credit, Form 3800 line 38
+       * (irs-1040-inst-2025::sec::line-6a::b01). A Form 3800 gap stays a gap here;
+       * no Form 3800, the old reason.
        */
-      "0.line.6a": (_, info) =>
-        unsupported(info.mustFile?.["form-3800"]?.value === true ? FORM_3800_GAP : NO_SCENARIO),
+      "0.line.6a": (form, info) => {
+        const received = line6aFrom3800(form, info);
+        return received === undefined ? unsupported(NO_SCENARIO) : received.value;
+      },
       /*
        * MANUAL EDIT: Form 8936 line 13 ("here and on Schedule 3 (Form 1040), line 6f")
        * and line 18 ("... line 6m"); irs-1040-inst-2025::sec::line-6f::b01, line-6m::b01.

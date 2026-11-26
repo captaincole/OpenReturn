@@ -13,7 +13,7 @@ Forms that file: Form 1040, Schedule 2, Form 8959, Form 4255.
 - Part II: four properties. A, a rehabilitated building sold after 2 full years (60%, with a carryforward reduced). B, solar property with more nonrecourse financing (Section C). C, advanced manufacturing property with an expansion (0 years, 100%). D, a heat pump sold after 3 full years, with $1,000 on line 13.
 - Part III: a hydrogen facility whose verified emissions support 7.5% instead of 30%.
 - Worksheet 3: a prevailing wage failure on a repair, on line 1j.
-- Part I: lines 1a, 1b, 1c, 1d, 1j, 2a and 2b; "N/A" in column (g) of line 1j (four events); the penalty split of row A33; columns (q) to (t).
+- Part I: lines 1a, 1b, 1c, 1d, 1j, 2a and 2b; "N/A" in column (g) of line 1j (four events); the penalty split of row A38; columns (q) to (t).
 - Schedule 2: lines 1d, 1e and 1f with all eight boxes, 1y, 17a, 17z and 19.
 
 ## Hand check: Part II
@@ -61,7 +61,7 @@ Line 18 is 4,500. Line 19 is 14,400 + 10,000 + 2,000 = 26,400. Line 20 is 30,900
 - Lines 1d and 2a: only column (d) was used, so the recapture is column (l).
 - Column (n): 1a 2,000 / – / 400; 1c 1,000 / 500 / 300; 1d 500 / – / 100; 2a 4,000 / 1,000 / 1,000 (20% of (n)(1) + (n)(2), no reasonable cause).
 - Line 1j: (m)(1) 5,000, (m)(2) 1,000, (m)(3) 2,000, (p)(3) 1,200.
-- Line 2a penalty 3,000: (o)(1) = 3,000 × 50,000 / 60,000 = 2,500; (o)(2) = 0; (o)(3) = the rest, 500 (row A33).
+- Line 2a penalty 3,000: (o)(1) = 3,000 × 50,000 / 60,000 = 2,500; (o)(2) = 0; (o)(3) = the rest, 500 (row A38).
 - Column (q): 1a 2,400; 1c 1,800; 1d 600; 1j 6,000; 2a 6,000 + 9,000 = 15,000; 2b 3,600. Total 29,400.
 - Column (r): 1b 14,400; 1d 10,000; 1j 27,350 + 2,000 + 1,200 = 30,550; 2a 3,000. Total 57,950.
 - Column (s) = (l) + (n)(1): 1a 2,000; 1c 1,000; 1d 10,500; 2a 13,000. Total 26,500.

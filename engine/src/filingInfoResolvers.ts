@@ -17,6 +17,8 @@ import { form4970ReachesSchedule2, resolve4970Info } from "./federal/4970/resolv
 import { scheduleTwoNeededForEarlyDistributions } from "./federal/5329/resolveInfo.js";
 import { resolve6251Info } from "./federal/6251/resolveInfo.js";
 import { form6252TotalsOf } from "./federal/6252/resolveInfo.js";
+import { resolve8611Info } from "./federal/8611/resolveInfo.js";
+import { form8611ReachesSchedule2 } from "./federal/8611/results.js";
 import { form8621Feeds } from "./federal/8621/totals.js";
 import { sendsToScheduleD } from "./federal/8824/receivers.js";
 import { resolve8824Info } from "./federal/8824/resolveInfo.js";
@@ -454,6 +456,8 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
     form4970ReachesSchedule2(resolve4970Info(inputs)),
     // Form 8828 line 23 (line 17b), when its facts allow a tax above 0.
     resolve8828Info(inputs).form8828ReachesSchedule2 === true,
+    // Form 8611 line 14 (line 16), when a copy has a tax above 0, waits or has a gap.
+    form8611ReachesSchedule2(resolve8611Info(inputs)),
     // Form 4255 line 3 columns (q) and (r) (lines 1d–1f, 1y, 17a, 17z, 19).
     resolve4255Info(inputs).mustFile?.["form-4255"]?.value,
   ];

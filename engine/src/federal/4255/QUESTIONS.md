@@ -4,20 +4,20 @@ Each place where the form and its instructions do not settle a rule. Block ids a
 
 ## Two texts conflict
 
-### A33. The part of a penalty the ratios leave out
+### A38. The part of a penalty the ratios leave out
 
 - Source: the ratios (excessive-payments-eps-excessive-credit::b02) against "If you do not have an EPE enter the full penalty amounts in columns (o)(3) and/or (p)(3)" (the same block).
-- Decided: columns (1) and (2) take their ratios, and column (3) is the rest of the penalty. `DECISION` in `penalties.ts`, row A33.
+- Decided: columns (1) and (2) take their ratios, and column (3) is the rest of the penalty. `DECISION` in `penalties.ts`, row A38.
 
-### A34. Column (m)(3) of lines 1z and 2z
+### A39. Column (m)(3) of lines 1z and 2z
 
 - Source: column (r) adds "Lines 1b, 1g, and 1j in column (m)(3)" and column (q) adds no (m)(3) (totals-by-type::b01); the blank form has an (m)(3) cell on lines 1z and 2z.
-- Decided: line 1z's (m)(3) in column (r), line 2z's in column (q). `DECISION` in `partOne.ts`, row A34.
+- Decided: line 1z's (m)(3) in column (r), line 2z's in column (q). `DECISION` in `partOne.ts`, row A39.
 
-### A35. Form 4255 amounts the Schedule 2 list does not name
+### A40. Form 4255 amounts the Schedule 2 list does not name
 
 - Source: "on the appropriate line of your tax return" (lines-1-and-2::b02) against the lists of Schedule 2 lines 1y, 17a and 17z (irs-1040-inst-2025::sec::line-1y::b01, ::line-17a::b01, ::line-17z::b01).
-- Decided: each amount goes on the Schedule 2 line that takes the same kind of amount. `DECISION` in `schedule2.ts`, row A35.
+- Decided: each amount goes on the Schedule 2 line that takes the same kind of amount. `DECISION` in `schedule2.ts`, row A40.
 
 ## Should we do this now
 
@@ -56,7 +56,7 @@ Each place where the form and its instructions do not settle a rule. Block ids a
 
 - Columns (n)(1) and (n)(2): the IRS determines the excessive payment (excessive-payment::b01); the fact states both parts. Column (n)(3) is 20% of them unless there is reasonable cause.
 - Columns (m)(1) and (m)(3): the excessive credit transfer and the transferee's recapture are stated. Column (m)(2) is 20% of (m)(1) unless there is reasonable cause.
-- The penalties of Form 7220 (Part IV column (f), Part III column (i)) are stated before the split of row A33.
+- The penalties of Form 7220 (Part IV column (f), Part III column (i)) are stated before the split of row A38.
 - Lines 8 and 13 (Worksheets 1 and 2) and line 6 come from earlier years' returns the engine does not read.
 - Done as stated inputs. Figuring Worksheets 1 and 2 is under "Pattern change".
 
@@ -110,7 +110,7 @@ Each place where the form and its instructions do not settle a rule. Block ids a
 
 ## Second opinions
 
-- **Blind fill (2026-11-25).** 15 cases filled by hand from the blank form and the instructions: Part II Sections B and C, Part III, Worksheet 3, the penalty split, the excessive payment and credit transfer columns, and Schedule 2 lines 1e, 1f, 1y, 17a and 19. No dollar difference. One blank-or-zero difference: column (o)(3) of line 1c with nothing in column (e), blank in the engine and 0 in the blind fill (item 13). The blind fill's dollar doubts are items 3, 6, 7 and 12, and rows A33 and A35.
+- **Blind fill (2026-11-25).** 15 cases filled by hand from the blank form and the instructions: Part II Sections B and C, Part III, Worksheet 3, the penalty split, the excessive payment and credit transfer columns, and Schedule 2 lines 1e, 1f, 1y, 17a and 19. No dollar difference. One blank-or-zero difference: column (o)(3) of line 1c with nothing in column (e), blank in the engine and 0 in the blind fill (item 13). The blind fill's dollar doubts are items 3, 6, 7 and 12, and rows A38 and A40.
 - **PolicyEngine-US 2.154.0 (commit 363e9fc5).** It has one variable, `recapture_of_investment_credit`, a bare input with no formula: no recapture percentages, no Part II or Part III lines, no penalties, no elective payment amounts. It adds the amount to the tax after the nonrefundable credits, as Schedule 2 line 17a does with column (r). No constant or formula to compare, and no disagreement.
 - **IRS Direct File.** Not compared: no checkout in reach, and its scope did not include business credits.
 - **Page check (2026-11-25).** Every printed value of the liandrin Form 4255, Schedule 2, Form 8959 and Form 1040 worked again by hand from the instructions: no difference.
@@ -124,11 +124,11 @@ Each place where the form and its instructions do not settle a rule. Block ids a
 | Part I columns (g) to (j), no elective payment | published example with numbers (Examples 1 and 2)                                          |
 | Part I columns (k) and (l)                     | published example with numbers for (l) (Example 6); own reading for the split (question 1) |
 | Part I columns (m) and (n)                     | stated rule                                                                                |
-| Part I columns (o) and (p)                     | published example with numbers (the penalty ratio); own reading for the rest (A33)         |
-| Part I columns (q) to (t) and line 3           | stated rule; own reading for (m)(3) on 1z and 2z (A34)                                     |
+| Part I columns (o) and (p)                     | published example with numbers (the penalty ratio); own reading for the rest (A38)         |
+| Part I columns (q) to (t) and line 3           | stated rule; own reading for (m)(3) on 1z and 2z (A39)                                     |
 | Part II lines 1 to 9                           | stated rule                                                                                |
 | Part II lines 10 to 16                         | published example with numbers (Examples 1 to 4)                                           |
 | Part II line 17 and lines 18 to 20             | stated rule; own reading for an additional copy (question 15)                              |
 | Part III lines 1 to 9                          | stated rule (no example)                                                                   |
 | Worksheet 3 (column (h) of lines 1g and 1j)    | stated rule; own reading for the dates (question 3)                                        |
-| Schedule 2 lines 1d, 1e, 1f, 1y, 17a, 17z, 19  | stated rule; own reading for the amounts the list does not name (A35)                      |
+| Schedule 2 lines 1d, 1e, 1f, 1y, 17a, 17z, 19  | stated rule; own reading for the amounts the list does not name (A40)                      |

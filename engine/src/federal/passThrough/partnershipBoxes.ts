@@ -199,8 +199,14 @@ const BOX_14: BoxTable = [
   coded("14", "C", "gross_nonfarm_income", "Gross nonfarm income"),
 ];
 
-/* Box 15: each credit; the detail names it. */
+/*
+ * Box 15: each credit; the detail names it. A general business credit goes to
+ * Form 3800 (business_credit); code H (Schedule 3 line 13a), the bond credits
+ * (Form 8912) and code ZZ are other credits, which have no route yet.
+ */
 const credit = (code: string, label: string, detail: string) =>
+  coded("15", code, "business_credit", label, detail);
+const otherCredit = (code: string, label: string, detail: string) =>
   coded("15", code, "credit", label, detail);
 
 const BOX_15: BoxTable = [
@@ -223,7 +229,7 @@ const BOX_15: BoxTable = [
   // box-15-credits::b04
   credit("G", "Other rental credits", "other_rental"),
   // box-15-credits::b04
-  credit("H", "Undistributed capital gains credit", "undistributed_capital_gains"),
+  otherCredit("H", "Undistributed capital gains credit", "undistributed_capital_gains"),
   // box-15-credits::b04
   credit("I", "Biofuel producer credit", "biofuel_producer"),
   // box-15-credits::b06
@@ -301,17 +307,17 @@ const BOX_15: BoxTable = [
   // box-15-credits::b11
   credit("AO", "Alternative fuel vehicle refueling property credit", "refueling_property"),
   // box-15-credits::b11
-  credit("AP", "Clean renewable energy bond credit", "clean_renewable_energy_bond"),
+  otherCredit("AP", "Clean renewable energy bond credit", "clean_renewable_energy_bond"),
   // box-15-credits::b11
-  credit("AQ", "New clean renewable energy bond credit", "new_clean_renewable_energy_bond"),
+  otherCredit("AQ", "New clean renewable energy bond credit", "new_clean_renewable_energy_bond"),
   // box-15-credits::b11
-  credit("AR", "Qualified energy conservation bond credit", "energy_conservation_bond"),
+  otherCredit("AR", "Qualified energy conservation bond credit", "energy_conservation_bond"),
   // box-15-credits::b11
-  credit("AS", "Qualified zone academy bond credit", "zone_academy_bond"),
+  otherCredit("AS", "Qualified zone academy bond credit", "zone_academy_bond"),
   // box-15-credits::b11
-  credit("AT", "Qualified school construction bond credit", "school_construction_bond"),
+  otherCredit("AT", "Qualified school construction bond credit", "school_construction_bond"),
   // box-15-credits::b11
-  credit("AU", "Build America bond credit", "build_america_bond"),
+  otherCredit("AU", "Build America bond credit", "build_america_bond"),
   // box-15-credits::b11
   credit("AV", "Credit for employer differential wage payments", "differential_wage"),
   // box-15-credits::b11
@@ -335,7 +341,7 @@ const BOX_15: BoxTable = [
   // box-15-credits::b12
   credit("BC", "Eligible credits from transferor(s) under section 6418", "transferred_credits"),
   // box-15-credits::b12
-  credit("ZZ", "Other credits", "other"),
+  otherCredit("ZZ", "Other credits", "other"),
 ];
 
 const amt = (code: string, label: string, detail: string) =>
@@ -397,10 +403,20 @@ const BOXES_20_AND_21: BoxTable = [
   info("D", "Qualified rehabilitation expenditures (other than rental real estate)", "qre"),
   // box-20-other-information::b02
   info("E", "Basis of energy property", "energy_property_basis"),
+  // box-20-other-information::b02: Form 8611 line 8, one form for each code
+  coded(
+    "20",
+    "F",
+    "low_income_housing_recapture_42j5",
+    "Recapture of low-income housing credit (section 42(j)(5))",
+  ),
   // box-20-other-information::b02
-  recapture("F", "Recapture of low-income housing credit (section 42(j)(5))", "lih_42j5"),
-  // box-20-other-information::b02
-  recapture("G", "Recapture of low-income housing credit (other)", "lih_other"),
+  coded(
+    "20",
+    "G",
+    "low_income_housing_recapture",
+    "Recapture of low-income housing credit (other)",
+  ),
   // box-20-other-information::b02
   recapture("H", "Recapture of investment credit", "investment_credit"),
   // box-20-other-information::b03
