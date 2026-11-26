@@ -7,6 +7,7 @@ import { withLaterCopies } from "../4137/laterCopies.js";
 import { earlyDistributionTax } from "../5329/lines.js";
 import { amtGap } from "../6251/foreignTaxCredit.js";
 import { form8621Amount } from "../8621/totals.js";
+import { recaptureTaxForSchedule2 } from "../8828/results.js";
 import { files8853, form8853Total } from "../8853/results.js";
 import { withLaterForm8919Copies } from "../8919/laterCopies.js";
 import { totalOver } from "../8936/credit.js";
@@ -145,6 +146,9 @@ export function register(): void {
       // irs-1040-inst-2025::sec::line-8::b02: "check the box on line 8 to indicate that you don't have to file Form 5329".
       "0.line.8_ira_tax_favored_accounts_not_required": (_, info) =>
         info.earlyDistributionTaxWithoutForm === true ? true : undefined,
+      // MANUAL EDIT: line 17b is Form 8828 line 23 (irs-1040-inst-2025::sec::line-17b::b01).
+      "1.line.17b_recapture_federal_mortgage_subsidy": (form, info) =>
+        recaptureTaxForSchedule2(form, info),
       "1.line.17c_additional_tax_hsa_distributions": (form) =>
         total(form["form-8889.0.line.17b_additional_20pct_tax"]),
       "1.line.17d_additional_tax_hsa_ineligible_individual": (form) =>
@@ -278,8 +282,6 @@ export function register(): void {
         "No credit-recapture scenario (Forms 4255/8874/8882) yet",
       "1.line.17a_recapture_other_credits_amount":
         "No credit-recapture scenario (Forms 4255/8874/8882) yet",
-      "1.line.17b_recapture_federal_mortgage_subsidy":
-        "No Form 8828 / home-sale-with-mortgage-subsidy scenario yet",
       "1.line.17g_recapture_charitable_contribution_fractional_interest":
         "No fractional-interest charitable contribution recapture scenario yet",
       "1.line.17h_income_nonqualified_deferred_compensation_409a":

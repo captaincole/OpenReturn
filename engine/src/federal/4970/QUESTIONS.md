@@ -111,7 +111,7 @@ Form 4970 figures the extra tax on trust income that a trust kept in earlier yea
 | Header A to G | stated rule |
 | Lines 1, 3, 5, 7 | stated rule (form arithmetic) |
 | Line 2 | stated rule; own reading of the age test (item 5) |
-| Lines 4, 6, 8, 11 | own reading (decision A18) |
+| Lines 4, 6, 8, 11 | own reading (decision A20) |
 | Lines 9, 10, 12 | stated rule |
 | Line 13 | stated rule |
 | Lines 14 to 16 | stated rule; own reading on ties (item 4) |

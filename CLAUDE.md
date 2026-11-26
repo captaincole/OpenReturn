@@ -7,7 +7,7 @@
 The twin agents:
 
 - **Cade** — your CPA. The conversational front-desk agent: guides the user through the tax-prep flow, records facts and decisions, orchestrates workflows, narrates progress. First agent built.
-- **Canon** — your tax attorney. Grounds Cade's decisions in the IRS/FTB reference corpus and answers tax-code questions with citations. Canon is its own Mastra project (`canon/`, port 4112) with an MCP server (`searchRefDocs`, `citeRefDoc`, `run_ask`, `run_ground`) and the reference-library routes. Cade reaches Canon only over MCP (`cade/src/mastra/canon/client.ts`); nothing in Cade imports Canon's code or opens corpus.db (`cade/tests/unit/boundary.test.ts`).
+- **Canon** — your tax attorney. Grounds Cade's decisions in the IRS/FTB reference corpus and answers tax-code questions with citations. Canon is its own Mastra project (`canon/`, port 4112) with an MCP server (`searchRefDocs`, `citeRefDoc`, `run_ask`, `run_ground`, and `searchLaw` / `readLaw` for the statute) and the reference-library routes. Cade reaches Canon only over MCP (`cade/src/mastra/canon/client.ts`); nothing in Cade imports Canon's code or opens corpus.db (`cade/tests/unit/boundary.test.ts`).
 There is exactly **one** conversational persona (Cade), in two conversations per filing: the return, and the deductions conversation next to it (below). Each conversation is its own Mastra `Agent` with its own instructions and tools. Grounding is NOT a conversation: every `record-ai-decision` triggers the background **review-decision workflow** (`workflows/reviewDecision/`), which hands the decision and its facts to Canon's `ground` workflow — deterministic gather/retrieval plus three narrow LLM "judges" (Canon's `workflows/ground/judges/`: queryFormulator, assessRiskAgent, ruleAgent on Haiku), looped up to `maxIterations` (default 3) inside Canon — and writes the verdict and the judges' step log back to app.db.
 
 **Tax-code Q&A ("Ask The Tax Code")** is not a conversation either: each question runs a fixed pipeline (Canon's `workflows/ask/`: formulate → retrieve → answer → validate; Cade's `workflows/askTurn/` is a workflow of its own, started with `run.startAsync()` by the Ask routes; it owns the thread rows, calls Canon, and its `onError` marks the turn failed) with two more judges (askQueryFormulator, askAnswerer). A "partial" answer names its gaps as search queries; the pipeline searches once more with them and answers again. Follow-ups pass the earlier turns as context; threads live in `ask_threads`/`ask_turns` in `app.db`, whose `log_json` is the query log. `validate.ts` drops any citation or quote that does not trace to a retrieved block. The Ask eval (`canon/evals/ask/`, report in `docs/evals/ask.md`) runs labeled questions through this pipeline and scores coverage, grounding, retrieval and the stated facts.
@@ -143,6 +143,7 @@ All persistent state lives in local files: user data under `cade/.data/`, the co
 | file | contents | owner |
 | --- | --- | --- |
 | `corpus.db` | reference corpus (ref_* tables, FTS5 + vectors); lives in `canon/.data/` | `canon/src/db/libsql.ts` |
+| `law.db` | the tax statute, same tables; optional, lives in `canon/.data/`; searched only on purpose | `canon/src/db/libsql.ts` |
 | `app.db` | domain data (tax_facts, assumptions, ai_decisions, filings, ask_threads/ask_turns, …) and the people (`users`, `local_logins`) | `db/appDb.ts`; `web/lib/userStore.ts` for the people |
 | `mastra.db` | Mastra runtime (threads, messages, working memory) | `@mastra/libsql` |
 | `documents/` | document blobs `{filingId}/{category}/{slug}-{ulid}.{ext}` | `db/blobStore.ts` |
@@ -403,6 +404,17 @@ Falls back gracefully to keyword-only (searching always works; semantic quality 
 - **A failed run stamps itself.** The workflow's `onError` (in `reviewDecision/index.ts`) writes the verdict and the `review_runs` row for any run that fails, wherever it was started from; the `reviewDecision()` wrapper only turns the failed result into the output the queue returns. **When Canon is down**, the decision is stamped `review_unreached` (not `review_failed`): the judges never ran. No scheduler — the next `record-ai-decision` queues every unreached review after its own, and `POST /app/filings/:filingId/reviews/retry` does it on demand.
 - Shared CPA heuristics both judges import live in Canon's `workflows/ground/judges/cpaRules.ts` — rules accumulate there as CPAs flag edge cases.
 - Every step logs to `review_run_steps` (raw input/output JSON — future fine-tuning substrate). `npm run smoke:review` is the end-to-end test (3 cases, temp DB, real calls to Canon's judge model; needs Canon running, skips when it is not).
+
+### The law library: `law.db`, searched only on purpose
+
+The tax statute is a second library file, `canon/.data/law.db` (`LAW_DB_PATH`), with the same tables and the same search code as `corpus.db` (`Library` in `canon/src/db/libsql.ts`; every store and search function takes it and defaults to the corpus). Today it holds the Internal Revenue Code (Title 26), one document, `usc-26-2025`, pinned to one dated release of the Code in `sources/2025/law/federal/usc-26/law.meta.json`. Treasury regulations and California's code are not in it yet.
+
+- **Never searched by default.** `searchRefDocs`, Ask and the grounding review read only `corpus.db`. An agent calls `searchLaw` or `readLaw` (Canon's MCP tools, `canon/src/mastra/tools/law.ts`) after it searched the instructions, when two instructions conflict or do not settle the question. The instructions supply the statute's terms for the query.
+- **Optional.** `npm run corpus -- law fetch` installs it, and `law sync` builds it. Without it the two tools answer `installed: false`, and nothing creates the file.
+- **A passage is a subdivision of a section, and its id is its citation:** `usc-26-2025::sec::s469::g-1` is section 469(g)(1). `canon/src/law/parseUslm.ts` reads the official XML: a subdivision of at most 1,200 characters is one block, and a larger one splits into its children. A subdivision packed into its parent has no block of its own: `readLaw("469(g)(1)(A)")` returns block `g-1`.
+- **No model call at ingest.** Each block's search text is its citation, the headings above it and the lead text of its parents. The eval (`npm run evals:law`, report in `docs/evals/law.md`) checks that agent-written queries find the right section.
+- **The notes are not blocks.** Amendment history and statutory notes (effective dates among them) stay in the source zip that `law.db` stores.
+- **The statute can conflict with the instructions, and with itself.** Canon reports both texts. A person decides, and the decision is a `DECISION` comment like any other.
 
 ### Operator CLIs and inspection scripts
 

@@ -44,7 +44,7 @@ The earlier years' taxable income, tax and filing status are her answers from he
 | 4970 line 1 | Part IV line 37 (a): 6,000 + 18,000 + 22,000 + 20,000 + 3,000 | 69,000 |
 | 4970 line 2 | 2014: she reached 21 in 2016 | 6,000 |
 | 4970 line 3 | 69,000 − 6,000 | 63,000 |
-| 4970 line 4 | taxes of the years on line 3: 4,200 + 5,100 + 4,800 + 600 (decision A18) | 14,700 |
+| 4970 line 4 | taxes of the years on line 3: 4,200 + 5,100 + 4,800 + 600 (decision A20) | 14,700 |
 | 4970 line 5 | 63,000 + 14,700 | 77,700 |
 | 4970 line 6 | 900 + 1,100 + 0 + 200 | 2,200 |
 | 4970 line 7 | 77,700 − 2,200 | 75,500 |
@@ -83,4 +83,4 @@ The earlier years' taxable income, tax and filing status are her answers from he
 
 Line 17 uses each year's Tax Rate Schedule (Rev. Procs. 2020-45, 2021-45, 2022-38): the bracket amounts in the line 17 rows. In 2023 her $4,000 of dividends stays in the 15% band: the 0% band ends at $44,625, below her ordinary income.
 
-Under the other reading of decision A18 (line 4 = Part IV line 37 (b), $16,200), line 28 would be $0.
+Under the other reading of decision A20 (line 4 = Part IV line 37 (b), $16,200), line 28 would be $0.

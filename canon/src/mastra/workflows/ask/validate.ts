@@ -1,4 +1,4 @@
-import type { SourceFormat } from "../../../db/corpusStore";
+import type { CorpusFormat } from "../../../db/corpusStore";
 import type { AskAnswerOutput } from "./judges/askAnswerer";
 import type { AskCitation, AskCoverage } from "./types";
 
@@ -15,7 +15,7 @@ export interface Passage {
   blockId: string;
   docId: string;
   documentTitle: string;
-  format: SourceFormat;
+  format: CorpusFormat;
   published?: string | null;
   sectionHeading: string | null;
   pageNum: number;

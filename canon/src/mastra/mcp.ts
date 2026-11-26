@@ -1,4 +1,5 @@
 import { MCPServer } from "@mastra/mcp";
+import { readLawTool, searchLawTool } from "./tools/law";
 import { citeRefDocTool, searchRefDocsTool } from "./tools/refDocs";
 import { runWorkflowTool } from "./tools/runWorkflow";
 import { askWorkflow } from "./workflows/ask";
@@ -16,10 +17,12 @@ export const canonMcp = new MCPServer({
   name: "Canon",
   version: "0.1.0",
   description:
-    "The IRS and FTB reference library: search it, cite it, ask it a tax-code question, and ground a tax decision in it.",
+    "The IRS and FTB reference library: search it, cite it, ask it a tax-code question, and ground a tax decision in it. The Internal Revenue Code itself is a separate, optional library (searchLaw, readLaw), for when the instructions conflict or do not settle a question.",
   tools: {
     searchRefDocs: searchRefDocsTool,
     citeRefDoc: citeRefDocTool,
+    searchLaw: searchLawTool,
+    readLaw: readLawTool,
     run_ask: runWorkflowTool(askWorkflow, askRunResultSchema),
     run_ground: runWorkflowTool(groundWorkflow, groundRunResultSchema),
   },

@@ -7,6 +7,7 @@ import { addHtmlCommand } from "./addHtml";
 import { checkCommand } from "./check";
 import { fetchCommand } from "./fetch";
 import { ingestCommand } from "./ingest";
+import { lawCommand } from "./law";
 import { outlineCommand } from "./outline";
 import { readCommand } from "./read";
 import { reembedCommand } from "./reembed";
@@ -40,5 +41,6 @@ void runCli({
     searchCommand,
     outlineCommand,
     readCommand,
+    lawCommand,
   ],
 });
