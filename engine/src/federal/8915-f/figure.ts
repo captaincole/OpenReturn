@@ -94,12 +94,32 @@ const limitDisaster = (disaster: QualifiedDisaster): LimitDisaster => ({
   periodEnd: distributionPeriodEnd(disaster),
 });
 
+/* The disasters with a named piece in their period, and those pieces. */
+function withPieces(disasters: readonly QualifiedDisaster[], named: readonly NamedPiece[]) {
+  const listed = disasters.filter((disaster) =>
+    named.some((piece) => inDistributionPeriod(disaster, piece.date)),
+  );
+  const pieces = named.filter((piece) =>
+    listed.some((disaster) => inDistributionPeriod(disaster, piece.date)),
+  );
+  return { listed, pieces };
+}
+
 /*
  * The Part I disasters: those "for which qualified disaster distributions have
  * been made to you this year" (part-i-total-distributions-from-all::b01), where
- * the main home and loss requirements are met and less than $22,000 was used
- * ("If the amount on line 1 of this worksheet is $22,000 or more for a
- * disaster ... Remove that disaster", worksheet-1b::b10).
+ * the main home and loss requirements are met.
+ *
+ * DECISION (2026-11-25, by the author): does a disaster whose $22,000 was used
+ * in earlier years stay in the Part I table? Text A, the form, line 1e: "If the
+ * amount on line 1e is zero, complete lines 2 through 4 in column (a), skip
+ * line 5, enter -0- on line 6" (irs-8915f-face-2025::sec::face-part-i-2::b03).
+ * Text B, Worksheet 1B: "If the amount on line 1 of this worksheet is $22,000
+ * or more for a disaster ... Remove that disaster from the list at the top of
+ * Part I" (irs-8915f-inst-2025::sec::worksheet-1b::b10). The engine keeps it
+ * on the form's path (line 1e is then 0 and line 7 shows the distributions as
+ * taxable) and removes it when Worksheet 1B is required, because each text is
+ * written for its own path and line 1e is 0 only with such a disaster listed.
  */
 function partIFigure(
   disasters: readonly QualifiedDisaster[],
@@ -107,17 +127,14 @@ function partIFigure(
   columns: Record<"plan" | "traditional" | "roth", number>,
   line28: number,
 ): PartIFigure | undefined {
-  const open = disasters.filter(
-    (disaster) =>
-      disaster.mainHomeInAreaWithLoss === true &&
-      limitDisaster(disaster).earlier < QUALIFIED_DISASTER_LIMIT,
-  );
-  const partIDisasters = open.filter((disaster) =>
-    named.some((piece) => inDistributionPeriod(disaster, piece.date)),
-  );
-  const pieces = named.filter((piece) =>
-    partIDisasters.some((disaster) => inDistributionPeriod(disaster, piece.date)),
-  );
+  const eligible = disasters.filter((disaster) => disaster.mainHomeInAreaWithLoss === true);
+  let { listed: partIDisasters, pieces } = withPieces(eligible, named);
+  if (needsWorksheet1B(partIDisasters.map(limitDisaster), pieces)) {
+    const open = eligible.filter(
+      (disaster) => limitDisaster(disaster).earlier < QUALIFIED_DISASTER_LIMIT,
+    );
+    ({ listed: partIDisasters, pieces } = withPieces(open, named));
+  }
   if (pieces.length === 0) return undefined;
   const limits = partIDisasters.map(limitDisaster);
   const usesWorksheet = needsWorksheet1B(limits, pieces);
@@ -168,6 +185,19 @@ function line9Cost(partI: PartIFigure | undefined): number {
   );
 }
 
+/*
+ * DECISION (2026-11-25, by the author): with line 1e at 0, does the income
+ * spread from an earlier year still go on lines 12 and 23? Text A, the form,
+ * line 1e: "If the amount on line 1e is zero, ... do NOT include, in Part II
+ * or III later, amounts for disasters listed in the Part I Disaster Table"
+ * (irs-8915f-face-2025::sec::face-part-i-2::b03). Text B, Appendix A: "Complete
+ * lines 12 through 15 if ... On an earlier Form 8915-F, you did not check the
+ * box on line 11 ... you must report income from those distributions"
+ * (irs-8915f-inst-2025::sec::part-ii::b01), with Worksheets 2 and 4 taking the
+ * earlier lines 11 and 22 (worksheet-2-for-line-12-total-income-from-oth::b03).
+ * The engine keeps the earlier years' income: Text A speaks of this year's
+ * distributions, and reading it literally would leave that income on no line.
+ */
 function worksheets(fact: DisasterRetirementFact) {
   const { value } = fact;
   const common = { disasterYear: value.disasterYear, taxYear: FORM_YEAR };

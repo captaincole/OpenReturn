@@ -171,6 +171,34 @@ describe("Form 8915-F results on other forms", () => {
     expect(run.value(FORM, "2.line.22_taxable_amount_this_year")).toBe(21_000);
   });
 
+  it("a disaster with its $22,000 used: line 1e is 0, line 7 is taxable, earlier income stays", () => {
+    const [used] = DISASTER_FORM.disasters;
+    const run = evaluate([
+      ...otherFacts,
+      form({
+        disasters: [{ ...used, earlierQualifiedDisasterDistributions: 22_000 }],
+        qualifiedDisasterDistributions: [
+          { distributionKey: TRADITIONAL_IRA_KEY, date: "2025-02-01" },
+        ],
+        homePurchaseDistributions: [],
+      }),
+    ]);
+    // The form, line 1e: "If the amount on line 1e is zero, complete lines 2 through 4 in column (a), skip line 5, enter -0- on line 6".
+    expect(run.value(FORM, "1.line.1a_disaster_distribution_limit_col_b")).toBe(22_000);
+    expect(run.value(FORM, "1.line.1b_prior_year_disaster_distributions_col_b")).toBe(22_000);
+    expect(run.value(FORM, "1.line.1e_total_available_disaster_distribution_col_b")).toBe(0);
+    expect(run.value(FORM, "1.line.3_traditional_ira_distributions_col_a")).toBe(25_000);
+    expect(run.value(FORM, "1.line.3_traditional_ira_distributions_col_b")).toBeUndefined();
+    expect(run.value(FORM, "1.line.5b_distributions_less_line_5a_col_b")).toBeUndefined();
+    expect(run.value(FORM, "1.line.6_total_qualified_disaster_distributions")).toBe(0);
+    expect(run.value(FORM, "1.line.7_taxable_amount")).toBe(52_000);
+    // The earlier year's spread income still comes in (Appendix A, part-ii::b01).
+    expect(run.value(FORM, "2.line.12_income_for_prior_years")).toBe(2_000);
+    // The 1099-Rs stay ordinary, as with no Part I.
+    expect(run.value("form-1040", LINE_4B)).toBe(25_334);
+    expect(run.value("form-1040", LINE_5B)).toBe(25_700);
+  });
+
   it("Worksheet 1B: a distribution outside one disaster's period leaves lines 1a–1e blank", () => {
     const run = evaluate([
       ...otherFacts,
