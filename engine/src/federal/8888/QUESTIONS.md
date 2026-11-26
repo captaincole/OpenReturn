@@ -45,7 +45,7 @@ Each place where the form and its instructions do not settle a rule. Short answe
 
 ## 7. Calendar year box
 
-- Source: the form's header, "For calendar year 20__". The form is for continuous use (irs-8888-form-2025::sec::omb-no-1545-0074).
+- Source: the form's header, "For calendar year 20__". The form is for continuous use (irs-8888-form-2025::sec::face-page-1::b01).
 - Default: "25", the tax year of the return. The engine has no fiscal-year return.
 - Changes dollars: no.
 

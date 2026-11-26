@@ -77,7 +77,7 @@ function tipsLine10(info: Form4137FilingInfo, owner: Owner): number | undefined 
 }
 
 /*
- * Line 8 (omb-no-1545-0074::b02): "total of boxes 3 and 7 on Form(s) W-2 ...
+ * Line 8 (face-page-1::b03): "total of boxes 3 and 7 on Form(s) W-2 ...
  * and unreported tips subject to social security tax from Form 4137, line 10".
  * The engine has no railroad retirement (RRTA) facts, so none is added (line-8::b01).
  */
@@ -110,7 +110,7 @@ function filersOf(
 }
 
 /*
- * Who files (irs-8919-form-2025::sec::omb-no-1545-0074::b01): a worker the firm
+ * Who files (irs-8919-form-2025::sec::face-page-1::b01, b02): a worker the firm
  * treated as an independent contractor, who believes the pay was wages, whose
  * share of social security and Medicare tax the firm did not withhold, and to
  * whom a reason code applies. A firm fact states all four, so the form files

@@ -2,7 +2,7 @@ import type { SavingsBondCashedFactValue } from "../../facts/index.js";
 import { roundDollars, sum, sumOrBlank } from "../../money.js";
 
 /*
- * Line 10 and the line 12 divisor (irs-8815-form-2025::sec::omb-no-1545-0074::b02):
+ * Line 10 and the line 12 divisor (irs-8815-form-2025::sec::face-page-1::b02):
  * $99,500 and $15,000 if single, head of household or qualifying surviving
  * spouse; $149,250 and $30,000 if married filing jointly. The line 9 Note's
  * limits ($114,500; $179,250) are the start plus the range
@@ -28,7 +28,7 @@ const RATIO_SCALE = 1000;
 /* Issued after 1989 (irs-8815-form-2025::sec::u-s-savings-bonds-that-qualify-for-exclusion::b01). */
 export const FIRST_QUALIFIED_ISSUE_DATE = "1990-01-01";
 
-/* Line 1 prints three rows; "If you need more space, attach a statement" (omb-no-1545-0074::b01). */
+/* Line 1 prints three rows; "If you need more space, attach a statement" (face-page-1::b01). */
 export const LINE_1_ROW_COUNT = 3;
 
 /* A series EE or I bond issued after 1989 that passes the ownership test (u-s-savings-bonds-that-qualify::b01). */
@@ -107,7 +107,7 @@ export interface ExpenseLines {
   line8?: number;
 }
 
-/* Lines 4 through 8 (omb-no-1545-0074::b01, b02); line 6 comes from the Line 6 Worksheet. */
+/* Lines 4 through 8 (face-page-1::b01, b02); line 6 comes from the Line 6 Worksheet. */
 export function expenseLines(
   line2: number,
   line3: number | undefined,
@@ -131,7 +131,7 @@ export interface PhaseOutLines {
 }
 
 /*
- * Lines 10 through 14 (omb-no-1545-0074::b02, b03). Undefined when line 9 is
+ * Lines 10 through 14 (face-page-1::b02, b03). Undefined when line 9 is
  * at or above the upper limit: the Note says stop, no exclusion. Line 11 prints
  * 0 when line 9 is at or below line 10.
  */

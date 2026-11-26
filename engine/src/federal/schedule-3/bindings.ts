@@ -62,7 +62,7 @@ export function register(): void {
       },
       /*
        * MANUAL EDIT: Form 8880 line 12 ("here and on Schedule 3 (Form 1040), line 4",
-       * irs-8880-form-2025::sec::omb-no-1545-0074::b03). Blank when no credit; a gap
+       * irs-8880-form-2025::sec::face-page-1::b02). Blank when no credit; a gap
        * in Form 8880 stays a gap here.
        */
       "0.line.4": (form, info) => numberOrBlank(form[LINE_12_ID]) ?? creditGap(form, info),

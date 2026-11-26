@@ -146,7 +146,7 @@ describe("no Form 8919 facts, nothing changes", () => {
   });
 });
 
-describe("who files (irs-8919-form-2025::sec::omb-no-1545-0074::b01)", () => {
+describe("who files (irs-8919-form-2025::sec::face-page-1::b01, b02)", () => {
   it("a firm with wages files Form 8919 and Schedule 2", () => {
     const run = evaluate([w2("plain", {}), firm("acme", {})]);
     expect([run.files("form-8919"), run.files("schedule-2")]).toEqual([true, true]);
@@ -194,7 +194,7 @@ describe("lines 1 through 5", () => {
   });
 });
 
-describe("line 8 (irs-8919-form-2025::sec::omb-no-1545-0074::b02)", () => {
+describe("line 8 (irs-8919-form-2025::sec::face-page-1::b03)", () => {
   it("adds W-2 boxes 3 and 7 and Form 4137 line 10", () => {
     const tips = factRow(makeTipsFactKey("cafe"), {
       employerName: "cafe Inc",

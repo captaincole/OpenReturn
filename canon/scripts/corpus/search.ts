@@ -17,6 +17,7 @@ interface SearchToolOutput {
     citation: string;
     sectionHeading: string | null;
     pageNum: number;
+    blockType: string;
     score: number;
     snippet: string;
     text: string;
@@ -62,6 +63,7 @@ async function run(argv: string[]): Promise<void> {
   result.results.forEach((hit, i) => {
     console.log(`${i + 1}. ${hit.citation}  (score ${hit.score.toFixed(3)})`);
     console.log(`   blockId: ${hit.blockId}`);
+    if (hit.blockType === "form_face") console.log("   printed on the form (form face)");
     console.log(`   snippet: ${hit.snippet.slice(0, 220).replace(/\n/g, " ")}`);
     console.log();
   });

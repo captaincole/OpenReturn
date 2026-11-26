@@ -2,6 +2,7 @@
 import { config } from "dotenv";
 import { resolve } from "node:path";
 import { runCli } from "../lib/cli";
+import { addFaceCommand } from "./addFace";
 import { addHtmlCommand } from "./addHtml";
 import { checkCommand } from "./check";
 import { fetchCommand } from "./fetch";
@@ -31,6 +32,7 @@ void runCli({
     fetchCommand,
     syncCommand,
     addHtmlCommand,
+    addFaceCommand,
     statusCommand,
     ingestCommand,
     reembedCommand,

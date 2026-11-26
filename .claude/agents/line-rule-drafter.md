@@ -16,7 +16,7 @@ The input names the form (`federal/<short>` or `state/<st>/<short>`), the fieldI
 1. Search Canon with `mcp__canon__searchRefDocs`: the line number and words of the label, with `docId` set to the instructions. When the instructions send you to another document (a publication, a worksheet), search without `docId`.
 2. A hit is often only part of the rule. Read its whole section: `npm run corpus -- read <blockId>`. A part's opening text often sets a gate for every line in it: read the part with `npm run corpus -- read <docId> <part-section> --through <line-section>`.
 3. Get the exact text of each block you rely on with `mcp__canon__citeRefDoc`. Never write a rule from memory.
-4. Some lines have no section: the instructions skip lines whose rule is on the form, such as "Subtract line 21 from line 19". Then the catalog label is the rule. Search once to confirm no section covers the line, and still cite the part's opening block for its gates.
+4. Some lines have no section: the instructions skip lines whose rule is on the form, such as "Subtract line 21 from line 19". Then the form face is the rule. Search for the line's words with `docId` set to the form face: the instructions docId with `-face-` for `-inst-` (`irs-8824-face-2025`), or the `-form-` document when the form and its instructions are one PDF (`irs-6252-form-2025`). A face block's section heading starts with "Form face:". Cite that block, and still cite the part's opening block for its gates. When the corpus has no face for the form, the catalog label is the rule: search once to confirm no section covers the line.
 
 ## Find the data
 

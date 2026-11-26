@@ -27,7 +27,8 @@ async function run(argv: string[]): Promise<void> {
       current = block.section;
       console.log(`\n## ${current}`);
     }
-    console.log(`\n[${block.blockId}] p.${block.page}\n${block.text}`);
+    const printed = block.printedOnForm ? " (printed on the form)" : "";
+    console.log(`\n[${block.blockId}] p.${block.page}${printed}\n${block.text}`);
   }
 }
 

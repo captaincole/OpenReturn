@@ -107,7 +107,7 @@ export const TIER_2: AskCase[] = [
     coverage: ["covered", "partial"],
     authority: [
       anyOf(
-        ...blocks("irs-8880-form-2025::sec::omb-no-1545-0074", [1, 2]),
+        ...blocks("irs-8880-form-2025::sec::face-page-1", [1, 2]),
         "irs-8880-form-2025::sec::who-can-take-this-credit::b01",
         "irs-pub-590a-2025::sec::retirement-savings::b01",
       ),

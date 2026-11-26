@@ -25,7 +25,7 @@ const firm = (wages: number, extra: Partial<FirmRow> = {}): FirmRow => ({
   ...extra,
 });
 
-describe("the printed amounts (irs-8919-form-2025::sec::omb-no-1545-0074::b02, b03)", () => {
+describe("the printed amounts (irs-8919-form-2025::sec::face-page-1::b03)", () => {
   it("line 7 is $176,100; lines 11 and 12 use 6.2% and 1.45%", () => {
     expect(SOCIAL_SECURITY_WAGE_BASE).toBe(176_100);
     expect(SOCIAL_SECURITY_TAX_RATE).toBe(0.062);

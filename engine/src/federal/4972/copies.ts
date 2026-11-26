@@ -1,6 +1,6 @@
 /*
  * The Forms 4972 a return files: one per lump-sum fact whose Part I answers
- * allow the form and that makes an election (irs-4972-form-2025::sec::omb-no-1545-0193::b01, b02).
+ * allow the form and that makes an election (irs-4972-form-2025::sec::face-part-i::b01, b02).
  */
 
 import {

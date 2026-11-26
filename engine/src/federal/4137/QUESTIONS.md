@@ -4,7 +4,7 @@ Each item is a place where the form and its instructions do not settle a rule. T
 
 ## 1. Rounding of line 1 rows
 
-- Source: line 2 says "Add the amounts from line 1, column (c)" (irs-4137-form-2025::sec::omb-no-1545-0074::b01). The 1040 instructions say to keep cents while adding and round only the total.
+- Source: line 2 says "Add the amounts from line 1, column (c)" (irs-4137-form-2025::sec::face-page-1::b01). The 1040 instructions say to keep cents while adding and round only the total.
 - Settled (tax review, 2026-11-21): each row prints in whole dollars, but lines 2 and 3 keep the rows' cents and round only the total: "include cents when adding the amounts and round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01). This is the repo rule for a total of rows (Form 4562 line 44) and the blind fill's reading. Two rows of $100.50 give line 2 = 201. Form 6781 adds its printed rows; that form is not changed here.
 - Changes dollars: by $1 at most, only when a tip record has cents. delphine's values do not change.
 
@@ -54,7 +54,7 @@ Each item is a place where the form and its instructions do not settle a rule. T
 
 ## 9. Line 4 from rounded lines 2 and 3
 
-- Source: line 4 is "Subtract line 3 from line 2" (irs-4137-form-2025::sec::omb-no-1545-0074::b01). The instructions do not say whether line 4 uses the rounded lines or the cents.
+- Source: line 4 is "Subtract line 3 from line 2" (irs-4137-form-2025::sec::face-page-1::b01). The instructions do not say whether line 4 uses the rounded lines or the cents.
 - Default: line 4 subtracts the rounded lines 2 and 3 (the repo rule: a line that is arithmetic on other lines uses their rounded values). The blind fill made the same choice.
 - Changes dollars: yes, by $1 at most, when both lines have cents (100.50 − 50.40: 101 − 50 = 51, against 50.10 → 50).
 

@@ -39,7 +39,7 @@ Each item is a place where the form and its instructions do not settle a rule. E
 
 ## 6. The outdated list in "Before you begin Part I"
 
-- Source: "figure the amounts of … credit for the elderly or the disabled, alternative motor vehicle credit, and qualified plug-in electric drive motor vehicle credit" (`irs-8396-form-2025::sec::omb-no-1545-0074::b01`).
+- Source: "figure the amounts of … credit for the elderly or the disabled, alternative motor vehicle credit, and qualified plug-in electric drive motor vehicle credit" (`irs-8396-form-2025::sec::face-header::b01`).
 - The last two credits no longer exist. Default: the worksheet's own list decides line 2.
 - Changes dollars: no.
 

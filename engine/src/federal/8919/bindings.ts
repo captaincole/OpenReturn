@@ -90,7 +90,7 @@ export function register(): void {
         return owner === "spouse" ? info.spouseSSN : info.taxpayerSSN;
       },
       ...rowBindings(),
-      // MANUAL EDIT: irs-8919-form-2025::sec::omb-no-1545-0074::b02, b03 (lines.ts).
+      // MANUAL EDIT: irs-8919-form-2025::sec::face-page-1::b03 (lines.ts).
       "0.line.6_total_wages": (_, info) => linesOf(info)?.line6,
       // MANUAL EDIT: line 7 is printed on the form ($176,100); no widget.
       "0.line.8_total_social_security_wages_tips": (_, info) => linesOf(info)?.line8,

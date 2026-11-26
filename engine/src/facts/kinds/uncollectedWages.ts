@@ -2,7 +2,7 @@
  * Form 8919: pay from a firm that treated the worker as an independent
  * contractor, withheld no social security or Medicare tax, and did not report
  * the pay on a W-2, when one of the form's reason codes applies
- * (irs-8919-form-2025::sec::omb-no-1545-0074::b01). One fact per firm: line 1
+ * (irs-8919-form-2025::sec::face-page-1::b01, b02). One fact per firm: line 1
  * prints one row for each (irs-8919-form-2025::sec::lines-1-through-5::b01).
  * The taxpayer states each value; the pay often comes from the firm's Form
  * 1099-NEC or 1099-MISC.
@@ -11,7 +11,7 @@
 type FactRow = { key: string; value: unknown; category: string };
 
 /*
- * Column (c) (irs-8919-form-2025::sec::omb-no-1545-0074::b01, lines-1-through-5::b02):
+ * Column (c) (irs-8919-form-2025::sec::face-page-1::b02, lines-1-through-5::b02):
  * A: a Form SS-8 determination letter says the worker is an employee.
  * C: other IRS correspondence says so (a "section 530 employee" too).
  * G: a Form SS-8 is filed and has no reply (also when no other code applies).

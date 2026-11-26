@@ -72,7 +72,7 @@ function tipSources(inputs: ResolverInputs, w2s: PlacedW2[]): TipSource[] {
 }
 
 /*
- * Line 8: the person's W-2 boxes 3 and 7 (omb-no-1545-0074::b02). The engine
+ * Line 8: the person's W-2 boxes 3 and 7 (face-page-1::b02). The engine
  * has no railroad retirement (RRTA) facts, so none is added (line-8::b01).
  */
 function socialSecurityWagesAndTips(w2s: PlacedW2[], owner: Owner): number | undefined {

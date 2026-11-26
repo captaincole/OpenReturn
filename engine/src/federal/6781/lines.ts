@@ -3,7 +3,7 @@ import { roundDollars, sum, sumOrBlank } from "../../money.js";
 
 /*
  * Lines 8 and 9: 40% short term, 60% long term, however long the contracts
- * were held (irs-6781-form-2025::sec::omb-no-1545-0074::b01 and b02;
+ * were held (irs-6781-form-2025::sec::face-part-i::b01;
  * irs-6781-form-2025::sec::mark-to-market-rules::b01).
  */
 export const SHORT_TERM_SHARE = 0.4;

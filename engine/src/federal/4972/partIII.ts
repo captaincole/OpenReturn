@@ -1,6 +1,6 @@
 /*
- * Form 4972 Part III, the 10-year tax option (irs-4972-form-2025::sec::omb-no-1545-0193::b03
- * to b05, the blank form), with the multiple-recipient steps of
+ * Form 4972 Part III, the 10-year tax option (irs-4972-form-2025::sec::face-part-iii::b01
+ * and b02, the blank form), with the multiple-recipient steps of
  * irs-4972-form-2025::sec::specific-instructions::b02 to b04.
  */
 

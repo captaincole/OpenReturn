@@ -15,7 +15,7 @@ import { atLeast, roundDollars, roundToPlaces } from "../../money.js";
  * (irs-6252-form-2025::sec::part-ii-installment-sale-income::b01): more digits
  * are allowed. Text B: line 24 "Multiply line 22 by line 19" and line 35
  * "Multiply line 34 by the gross profit percentage on line 19"
- * (irs-6252-form-2025::sec::omb-no-1545-0228::b03, ::b04). The engine follows
+ * (irs-6252-form-2025::sec::face-part-ii::b01, ::face-part-iii::b02). The engine follows
  * the form's arithmetic on the printed line, with one precision for every sale,
  * so the return reads the same from line to line.
  */

@@ -4,13 +4,13 @@ Each item is a place where the form and its instructions do not settle a rule. T
 
 ## 1. Rounding of the rows and line 6
 
-- Source: line 6 says "Combine lines 1 through 5 in column (f)" (irs-8919-form-2025::sec::omb-no-1545-0074::b02). The 1040 instructions say "include cents when adding the amounts and round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01).
+- Source: line 6 says "Combine lines 1 through 5 in column (f)" (irs-8919-form-2025::sec::face-page-1::b03). The 1040 instructions say "include cents when adding the amounts and round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01).
 - Default: each row prints in whole dollars. Line 6 keeps the rows' cents and rounds only the total. This is the rule Form 4137 lines 2 and 3 settled (4137 QUESTIONS.md item 1).
 - Changes dollars: by $1 at most, only when a firm's pay has cents. egwene shows it: rows 7,500 + 31,200 + 9,800 + 4,350 = 52,850 print, and line 6 is 52,851 (52,850.65).
 
 ## 2. Railroad retirement (RRTA) compensation on line 8
 
-- Source: line 8 adds "railroad retirement (RRTA) compensation (subject to the 6.2% rate)", no more than $176,100 (omb-no-1545-0074::b02, line-8::b01).
+- Source: line 8 adds "railroad retirement (RRTA) compensation (subject to the 6.2% rate)", no more than $176,100 (face-page-1::b03, line-8::b01).
 - Default: the engine has no RRTA facts, so line 8 is W-2 boxes 3 and 7 plus Form 4137 line 10.
 - Changes dollars: yes, for a filer with RRTA compensation. That filer is not modeled.
 
@@ -34,7 +34,7 @@ Each item is a place where the form and its instructions do not settle a rule. T
 
 ## 6. Column (e) when no 1099 came
 
-- Source: "Check if Form 1099-MISC and/or 1099-NEC was received" (omb-no-1545-0074::b02).
+- Source: "Check if Form 1099-MISC and/or 1099-NEC was received" (the column (e) heading; face-page-1::b02 holds it with the other column headings run together).
 - Default: the box is checked when the fact says a 1099 came, and left empty otherwise.
 - Changes dollars: no.
 
@@ -52,7 +52,7 @@ Each item is a place where the form and its instructions do not settle a rule. T
 
 ## 9. Who files
 
-- Source: four conditions, all must apply (omb-no-1545-0074::b01).
+- Source: four conditions, all must apply (face-page-1::b01, b02).
 - Default: a firm fact states all four (Cade records it only when they apply). The form files when the firms' pay is more than 0. The explicit decision decisions.scope.must_file_8919 still wins.
 - Changes dollars: no.
 
@@ -64,7 +64,7 @@ Each item is a place where the form and its instructions do not settle a rule. T
 
 ## 11. Rounding of line 8, and of lines 11 to 13 on rounded amounts
 
-- Source: "If you have to add two or more amounts to figure the amount to enter on a line, include cents when adding the amounts and round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01). Line 12 says "Multiply line 6 by 0.0145 (Medicare tax rate)" and line 13 "Add lines 11 and 12" (irs-8919-form-2025::sec::omb-no-1545-0074::b03). The text does not say whether a line multiplies the rounded line it names or the unrounded sum.
+- Source: "If you have to add two or more amounts to figure the amount to enter on a line, include cents when adding the amounts and round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01). Line 12 says "Multiply line 6 by 0.0145 (Medicare tax rate)" and line 13 "Add lines 11 and 12" (irs-8919-form-2025::sec::face-page-1::b03). The text does not say whether a line multiplies the rounded line it names or the unrounded sum.
 - Default: line 8 adds the W-2 amounts with cents and rounds once. Lines 9 to 13 use the rounded amounts on the lines they name; lines 11 and 12 round their products to the nearest dollar. This is the project rule (CLAUDE.md, whole-dollar rounding). The blind fill made the same choice.
 - Changes dollars: by $1 at most. Three firms of $333.33: line 6 = 1,000 (999.99), line 12 = 15 (14.50). With the unrounded sum, line 12 = 14 (14.4999) and line 13 = 76, not 77.
 
@@ -82,9 +82,9 @@ Each item is a place where the form and its instructions do not settle a rule. T
 | Header (name, SSN of the person) | stated rule (form header: a separate form for each spouse) |
 | Lines 1–5, columns (a)–(c), (f) | stated rule (lines-1-through-5::b01, b02) |
 | Lines 1–5, column (d) | stated rule (lines-1-through-5::b03) |
-| Lines 1–5, column (e) | stated rule (omb-no-1545-0074::b02) |
+| Lines 1–5, column (e) | stated rule (face-page-1::b02) |
 | Line 6 | stated rule; the rounding is own reading (item 1) |
-| Lines 8–13 | stated rule (omb-no-1545-0074::b02, b03); RRTA unsupported by fact (item 2); the rounding is own reading (item 11) |
+| Lines 8–13 | stated rule (face-page-1::b03); RRTA unsupported by fact (item 2); the rounding is own reading (item 11) |
 | 1040 line 1g, Schedule 2 line 6 | stated rule (irs-1040-inst-2025 line-1g::b01, line-6::b01) |
 | Form 8959 line 3 and who files | stated rule (irs-8959-inst-2025 line-3::b01, who-must-file::b01) |
 | Schedule SE line 8c | stated rule (catalog label); joint return is own reading (item 10) |

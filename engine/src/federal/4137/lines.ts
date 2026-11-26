@@ -4,12 +4,12 @@ import { atLeast, roundDollars, sum, sumOrBlank } from "../../money.js";
 /*
  * Line 7 (printed on the form): the 2025 maximum wages and tips subject to
  * social security tax (irs-4137-form-2025::sec::what-s-new::b01,
- * irs-4137-form-2025::sec::omb-no-1545-0074::b02).
+ * irs-4137-form-2025::sec::face-page-1::b02).
  */
 export const SOCIAL_SECURITY_WAGE_BASE = 176_100;
-/* Line 11: "Multiply line 10 by 0.062 (social security tax rate)" (omb-no-1545-0074::b02). */
+/* Line 11: "Multiply line 10 by 0.062 (social security tax rate)" (face-page-1::b02). */
 export const SOCIAL_SECURITY_TAX_RATE = 0.062;
-/* Line 12: "Multiply line 6 by 0.0145 (Medicare tax rate)" (omb-no-1545-0074::b02). */
+/* Line 12: "Multiply line 6 by 0.0145 (Medicare tax rate)" (face-page-1::b02). */
 export const MEDICARE_TAX_RATE = 0.0145;
 /* Line 1 prints rows A through E; a sixth employer goes on a statement (line-1::b01). */
 export const LINE_1_ROW_COUNT = 5;
@@ -80,7 +80,7 @@ export interface Form4137Lines {
 }
 
 /*
- * Lines 2 through 6 (omb-no-1545-0074::b01, b02): line 2 adds column (c), line 3
+ * Lines 2 through 6 (face-page-1::b01, b02): line 2 adds column (c), line 3
  * column (d). Each row prints in whole dollars, but the sums keep the rows'
  * cents and round only the total: "include cents when adding the amounts and
  * round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01).

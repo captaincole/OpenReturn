@@ -31,14 +31,14 @@ Each item is a place where the form and its instructions do not settle a rule. I
 
 ## 5. A column for a person who cannot take the credit
 
-- Text: "You cannot take this credit if ... The person(s) who made the qualified contribution ... was a student" (irs-8880-form-2025::sec::omb-no-1545-0074::b01).
+- Text: "You cannot take this credit if ... The person(s) who made the qualified contribution ... was a student" (irs-8880-form-2025::sec::face-page-1::b01).
 - The gap: the form does not say what to print in that person's column.
 - Default: that column is blank. A column with no contribution is blank too.
 - Changes dollars: no.
 
 ## 6. The stops
 
-- Text: line 7 "If zero, stop"; line 9 "If line 9 is zero, stop"; worksheet line 3 "if zero or less, stop; you can't take the credit—don't file this form" (irs-8880-form-2025::sec::omb-no-1545-0074::b02, ::credit-limit-worksheet::b01).
+- Text: line 7 "If zero, stop"; line 9 "If line 9 is zero, stop"; worksheet line 3 "if zero or less, stop; you can't take the credit—don't file this form" (irs-8880-form-2025::sec::face-page-1::b02, ::credit-limit-worksheet::b01).
 - Default: the engine cannot un-file a form. Line 7 prints 0 and lines 8–12 stay blank. Line 9 prints 0 and lines 10–12 stay blank. Worksheet line 3 prints 0 when line 1 less line 2 is zero or less, and lines 11 and 12 stay blank. Schedule 3 line 4 is blank in each case.
 - Changes dollars: no.
 
@@ -51,7 +51,7 @@ Each item is a place where the form and its instructions do not settle a rule. I
 
 ## 8. Line 8 add-backs
 
-- Text: "See Pub. 590-A ... for the amount to enter if you claim any exclusion or deduction for foreign earned income, foreign housing, income from Puerto Rico, or income from American Samoa" (irs-8880-form-2025::sec::omb-no-1545-0074::b03).
+- Text: "See Pub. 590-A ... for the amount to enter if you claim any exclusion or deduction for foreign earned income, foreign housing, income from Puerto Rico, or income from American Samoa" (irs-8880-form-2025::sec::face-page-1::b03).
 - Default: line 8 is Form 1040 line 11a. A Form 2555 makes line 8 unsupported. The engine has no facts for Puerto Rico or American Samoa income.
 - Changes dollars: yes, for those filers only.
 
@@ -63,7 +63,7 @@ Each item is a place where the form and its instructions do not settle a rule. I
 
 ## 10. Line 1 traditional IRA contributions
 
-- Text: "Traditional and Roth IRA contributions ... for 2025. Do not include rollover contributions" (irs-8880-form-2025::sec::omb-no-1545-0074::b01).
+- Text: "Traditional and Roth IRA contributions ... for 2025. Do not include rollover contributions" (irs-8880-form-2025::sec::face-page-1::b01).
 - Default: `retirement.traditional_ira.<owner>.contributions`; without it, the stated Form 8606 line 1 (nondeductible contributions).
 - Changes dollars: no, while the fact follows its own definition.
 

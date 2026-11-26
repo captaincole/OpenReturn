@@ -38,8 +38,9 @@ export interface RefSection {
   charEnd: number;
 }
 
+/** "form_face": text printed on the form itself, not its instructions. */
 export type RefBlockType =
-  "paragraph" | "heading" | "list_item" | "table" | "table_row" | "callout";
+  "paragraph" | "heading" | "list_item" | "table" | "table_row" | "callout" | "form_face";
 
 export interface RefBlock {
   blockId: string;
