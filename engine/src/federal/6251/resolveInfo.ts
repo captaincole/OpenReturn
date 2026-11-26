@@ -15,6 +15,7 @@ import {
 } from "../../resolverInputs.js";
 import { generalBusinessCreditNeedsTmt } from "../3800/resolveInfo.js";
 import { resolve8801Info } from "../8801/resolveInfo.js";
+import { resolve8834Info } from "../8834/resolveInfo.js";
 import { refuelingPersonalPart } from "../8911/resolveInfo.js";
 import { resolveScheduleAInfo } from "../schedule-a/resolveInfo.js";
 import type { Form6251FilingInfo } from "./filingInfo.js";
@@ -30,7 +31,9 @@ import type { Form6251FilingInfo } from "./filingInfo.js";
  * a Form 3921 on file, files the form. A filer who owes AMT for another reason
  * still needs the explicit decision. A filed Form 8801 files the form too
  * (statement 3), and its line 23 reads line 9. So does a Form 8911 with a
- * personal use part (statement 3): its line 8 reads line 9. The resolver cannot
+ * personal use part (statement 3): its line 8 reads line 9. So does a Form 8834
+ * (statement 3): its line 5 reads line 9; the form may file although Form
+ * 8582-CR allows no credit and Form 8834 leaves the return. The resolver cannot
  * see whether line 10 of Form 8911 ends above 0, so the form may file for a
  * personal part that the tax limit leaves at 0 (KNOWN GAP). Form 3800 files it
  * for a general business credit outside the specified credits (statement 2:
@@ -56,6 +59,10 @@ export function resolve6251Info(inputs: ResolverInputs): Form6251FilingInfo {
       {
         rule: "fallback: Form 8911 has a personal use part (the refueling property credit)",
         value: refuelingPersonalPart(inputs),
+      },
+      {
+        rule: "fallback: Form 8834 files (the qualified electric vehicle credit; its line 5 reads line 9)",
+        value: resolve8834Info(inputs).mustFile?.["form-8834"]?.value === true,
       },
       {
         rule: "fallback: Form 3800 has a credit outside the specified credits (its line 6 or 25, and line 14 reads line 9)",

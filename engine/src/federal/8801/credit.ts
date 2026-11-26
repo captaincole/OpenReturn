@@ -13,6 +13,7 @@ import type { Form2441FilingInfo } from "../2441/filingInfo.js";
 import { generalBusinessCreditGap } from "../3800/receivers.js";
 import type { Form3800Info } from "../3800/tax.js";
 import { mortgageCreditGap, type CreditLimitInfo } from "../8396/creditGap.js";
+import { electricVehicleCreditGap } from "../8834/credit.js";
 import { line6cFrom8839 } from "../8839/receivers.js";
 import { nonrefundableCreditGap } from "../8863/credit.js";
 import type { Form8863FilingInfo } from "../8863/filingInfo.js";
@@ -73,7 +74,6 @@ const SCHEDULE_3_CREDITS = [
 const UNCOMPUTED_CREDITS: ReadonlyArray<[formId: string, line: string]> = [
   ["form-5695", "Schedule 3 line 5a (Form 5695 Part I, the residential clean energy credit)"],
   ["form-8859", "Schedule 3 line 6h (Form 8859)"],
-  ["form-8834", "Schedule 3 line 6i (Form 8834)"],
 ];
 
 /*
@@ -96,6 +96,7 @@ function otherCreditsGap(form: Accessor, info: Form8801CreditInfo): string | und
     cleanVehicleCreditGap(form, info),
     mortgageCreditGap(form, info),
     refuelingCreditGap(form, info),
+    electricVehicleCreditGap(form, info),
     generalBusinessCreditGap(form, info),
     line6lGap(info),
   ];
