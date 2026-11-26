@@ -8,6 +8,7 @@ import type { BaseFilingInfo } from "../../../filingInfo.js";
 import { atLeast, numberOrBlank, sum } from "../../../money.js";
 import { unsupported, type Unsupported } from "../../../types.js";
 import { PRIOR_YEAR_AMT_CREDIT_USED, priorYearAmtCreditWaits } from "../3510/creditUsed.js";
+import { passiveCreditsUsedTotal } from "../3801-cr/creditUsed.js";
 import type { OtherStateCreditInput, ScheduleSFilingInfo } from "./filingInfo.js";
 import { scheduleSLines, type ScheduleSLines } from "./lines.js";
 
@@ -55,7 +56,10 @@ export function californiaTaxLiability(
     if (credit > 0 && numberOrBlank(read(OTHER_CREDIT_LINES[0])) === undefined) return undefined;
   }
   if (priorYearAmtCreditWaits(read, info)) return undefined;
-  return atLeast(0, line35 - sum(...OTHER_CREDIT_LINES.map(read)));
+  // FTB 3801-CR's passive credits are on line 43 to 45 too; read from their source, as above.
+  const passive = passiveCreditsUsedTotal(read, info);
+  if (typeof passive !== "number") return passive;
+  return atLeast(0, line35 - sum(...OTHER_CREDIT_LINES.map(read)) - passive);
 }
 
 /*

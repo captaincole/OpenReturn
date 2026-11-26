@@ -46,8 +46,8 @@ export function livedWithSpouseOf(info: PassiveLimitInfo): boolean | undefined {
   return apart === undefined ? undefined : !apart;
 }
 
-/* Lines 1a to 4b: the worksheets' column totals; blank when the column has no row. */
-function partIAmountsOf(entries: PassiveEntries): PartIAmounts {
+/* Lines 1a to 4b: the worksheets' column totals; blank when the column has no row (FTB 3801-CR too). */
+export function partIAmountsOf(entries: PassiveEntries): PartIAmounts {
   const column = (worksheet: Worksheet, pick: "current" | "prior") => {
     const rows = entries.entries.filter((entry) => entry.worksheet === worksheet);
     const amounts = rows.map((entry) => entry[pick]).filter((amount) => amount !== 0);

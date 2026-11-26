@@ -330,6 +330,18 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "while an answer inside it (name, number, credit) is missing",
   ],
   [
+    /^ca_passive_credit\.[^.]+$/,
+    "each fact is one whole California credit from a passive activity (one FTB 3801-CR " +
+      "worksheet row); whether the taxpayer has one is Cade's question. FTB 3801-CR lists the " +
+      "fact again while an answer inside it (code, column, amount, the activity's answers) is missing",
+  ],
+  [
+    /^decisions\.scope\.must_file_schedule_p$/,
+    "override: Schedule P (540) is attached with more than two credits " +
+      "(ca-540-sched-p-inst-2025::sec::b-who-must-file::b01), a count the resolver cannot see " +
+      "before the credits are figured; absent, the resolver's own fallbacks decide",
+  ],
+  [
     /^prior_year\.ca_pte_elective_credit_carryover$/,
     "an answer Cade records only when the user carries a PTE elective tax credit from 2024; " +
       "above 0 it files FTB 3804-CR, which asks for it whenever it files",

@@ -95,9 +95,12 @@ const electionRule =
     return elections.length === 1 ? pick(elections[0]) : undefined;
   };
 
-/* Line 40's first line has room for about 40 characters; the rest goes on the second line, at a space. */
+/*
+ * Line 40's first line has room for about 40 characters; the rest goes on the
+ * second line, at a space. FTB 3801-CR line 20 has the same two lines.
+ */
 const FIRST_LINE_CHARACTERS = 40;
-function splitDescription(text: string): [string, string | undefined] {
+export function splitDescription(text: string): [string, string | undefined] {
   if (text.length <= FIRST_LINE_CHARACTERS) return [text, undefined];
   const space = text.lastIndexOf(" ", FIRST_LINE_CHARACTERS);
   const cut = space > 0 ? space : FIRST_LINE_CHARACTERS;

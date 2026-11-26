@@ -23,6 +23,7 @@ export * from "./kinds/caLumpSumDistribution.js";
 export * from "./kinds/caMiscellaneousDeductions.js";
 export * from "./kinds/caNetOperatingLoss.js";
 export * from "./kinds/caPassiveCarryover.js";
+export * from "./kinds/caPassiveCredit.js";
 export * from "./kinds/caPayments.js";
 export * from "./kinds/capitalLossCarryover.js";
 export * from "./kinds/caPriorYearAmt.js";
