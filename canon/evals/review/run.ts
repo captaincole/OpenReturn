@@ -44,9 +44,12 @@ async function checkAuthority() {
     throw new Error(`labeled blocks missing from corpus.db: ${missing.join(", ")}`);
 }
 
+// A statute step's blocks were retrieved too: a citation to one is valid.
 function retrievedBlocks(steps: GroundStepLog[]): Set<string> {
   const json = JSON.stringify(
-    steps.filter((step) => step.kind === "gather").map((step) => step.output),
+    steps
+      .filter((step) => step.kind === "gather" || step.kind === "statute")
+      .map((step) => step.output),
   );
   return new Set([...json.matchAll(/"blockId":"([^"]+)"/g)].map((match) => match[1]));
 }
@@ -69,6 +72,7 @@ async function evalCase(testCase: ReviewCase, run: number): Promise<ReviewResult
     reason: err instanceof Error ? err.message : String(err),
     citations: [] as { blockId: string }[],
     iterationCount: 0,
+    statuteConsulted: false,
   }));
   const cited = out.citations.map((citation) => citation.blockId);
   const retrieved = retrievedBlocks(steps);
@@ -83,6 +87,7 @@ async function evalCase(testCase: ReviewCase, run: number): Promise<ReviewResult
     cited,
     invalidCitations: cited.filter((id) => !retrieved.has(id)),
     iterations: out.iterationCount,
+    statuteConsulted: out.statuteConsulted,
     latencyMs: Date.now() - started,
     reason: out.reason,
   };

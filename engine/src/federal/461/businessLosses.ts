@@ -6,13 +6,14 @@
  * (irs-8995-inst-2025::sec::determining-your-qualified-business::b02, ::b03).
  */
 
-import { BUSINESS_LOSS_LIMIT_KEYS, businessesOnReturn } from "../../facts/index.js";
+import { BUSINESS_LOSS_LIMIT_KEYS, businessesOnReturn, farmsOnReturn } from "../../facts/index.js";
 import { roundDollars } from "../../money.js";
 import { filingStatusOf, num, type ResolverInputs } from "../../resolverInputs.js";
 import type { Receipt } from "../passThrough/receipts.js";
 import { netProfit } from "../schedule-c/lines.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
 import { line21Amount } from "../schedule-e/lines.js";
+import { farmLosses } from "../schedule-f/totals.js";
 import { k1BusinessLosses, propertyIsBusiness, type RentalAnswer } from "./classify.js";
 import type { BusinessLoss } from "./filingInfo.js";
 
@@ -49,7 +50,13 @@ function line8Loss(inputs: ResolverInputs): BusinessLoss[] {
   return line8 < 0 ? [{ key: BUSINESS_LOSS_LIMIT_KEYS.otherBusinessIncome, loss: 0 - line8 }] : [];
 }
 
-/* Every business loss on Form 461 lines 2, 5 and 8; undefined while one is not known. */
+/* Farms with a loss on Schedule F line 34 (Form 461 line 6); undefined while a line 34 is not known. */
+function scheduleFLosses(inputs: ResolverInputs): BusinessLoss[] | undefined {
+  const joint = filingStatusOf(inputs) === "married_filing_jointly";
+  return farmLosses(farmsOnReturn(inputs.facts, joint).farms);
+}
+
+/* Every business loss on Form 461 lines 2, 5, 6 and 8; undefined while one is not known. */
 export function businessLossesOnReturn(
   inputs: ResolverInputs,
   properties: ReadonlyArray<RentalProperty>,
@@ -57,7 +64,8 @@ export function businessLossesOnReturn(
   rentalAnswer: RentalAnswer,
 ): BusinessLoss[] | undefined {
   const scheduleC = scheduleCLosses(inputs);
+  const scheduleF = scheduleFLosses(inputs);
   const k1s = k1BusinessLosses(k1Receipts, rentalAnswer);
-  if (scheduleC === undefined || k1s === undefined) return undefined;
-  return [...scheduleC, ...rentalLosses(properties), ...k1s, ...line8Loss(inputs)];
+  if (scheduleC === undefined || scheduleF === undefined || k1s === undefined) return undefined;
+  return [...scheduleC, ...scheduleF, ...rentalLosses(properties), ...k1s, ...line8Loss(inputs)];
 }

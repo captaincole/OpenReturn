@@ -19,6 +19,8 @@ export interface AskCitation {
   sectionHeading: string | null;
   pageNum: number;
   quote: string;
+  /** A statute passage only: "26 U.S.C. § 469(g)(1)". */
+  citation?: string;
 }
 
 export interface AskHistoryTurn {
@@ -35,6 +37,28 @@ export const askCitationSchema = z.object({
   sectionHeading: z.string().nullable(),
   pageNum: z.number(),
   quote: z.string(),
+  citation: z.string().optional(),
+});
+
+/* Two texts that disagree, each quoted word for word; Canon picks no winner. */
+const conflictSideSchema = z.object({
+  blockId: z.string(),
+  quote: z.string(),
+  /** A statute block only: "26 U.S.C. § 461(l)(3)(B)". */
+  citation: z.string().optional(),
+});
+export const conflictSchema = z.object({
+  kind: z.enum(["instruction_vs_instruction", "instruction_vs_statute", "statute_vs_statute"]),
+  a: conflictSideSchema,
+  b: conflictSideSchema,
+  note: z.string(),
+});
+export type Conflict = z.infer<typeof conflictSchema>;
+
+const statutePassageSchema = z.object({
+  blockId: z.string(),
+  citation: z.string(),
+  text: z.string(),
 });
 
 export const askResultSchema = z.object({
@@ -42,6 +66,10 @@ export const askResultSchema = z.object({
   coverage: z.enum(["covered", "partial", "not_covered"]),
   citations: z.array(askCitationSchema),
   missingDocuments: z.array(z.string()),
+  // Defaults: a Canon from before the statute sends none of these.
+  statutePassages: z.array(statutePassageSchema).default([]),
+  statuteConsulted: z.boolean().default(false),
+  conflicts: z.array(conflictSchema).default([]),
   log: z.object({ steps: z.array(z.record(z.string(), z.unknown())) }),
 });
 export type AskResult = z.infer<typeof askResultSchema>;
@@ -87,7 +115,7 @@ export const authorityCitationSchema = z.object({
 
 export const groundStepLogSchema = z.object({
   iteration: z.number().int(),
-  kind: z.enum(["gather", "assess", "rule"]),
+  kind: z.enum(["gather", "assess", "rule", "statute"]),
   durationMs: z.number(),
   input: z.unknown(),
   output: z.unknown(),
@@ -101,6 +129,8 @@ export const groundResultSchema = z.object({
   riskTier: z.enum(["low", "medium", "high"]).nullable(),
   iterationCount: z.number().int(),
   whatsMissing: z.string().optional(),
+  conflicts: z.array(conflictSchema).default([]),
+  statuteConsulted: z.boolean().default(false),
   log: z.object({ steps: z.array(groundStepLogSchema) }),
 });
 export type GroundResult = z.infer<typeof groundResultSchema>;

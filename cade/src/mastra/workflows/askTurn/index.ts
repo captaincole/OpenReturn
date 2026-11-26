@@ -75,7 +75,12 @@ const answerStep = createStep({
       coverage: result.coverage,
       citations: result.citations,
       missingDocuments: result.missingDocuments,
-      log: { steps: result.log.steps },
+      // The query log holds the statute round too: no new column. A fake Canon may leave these out.
+      log: {
+        steps: result.log.steps,
+        statuteConsulted: result.statuteConsulted ?? false,
+        conflicts: result.conflicts ?? [],
+      },
       durationMs,
     });
     return { turnId: turn.turnId, status: "completed" as const };

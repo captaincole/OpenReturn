@@ -25,6 +25,19 @@ function rowOf(fact: CaPteElectiveCreditFact): PteCreditRow {
 const complete = (row: PteCreditRow) =>
   row.entityName !== undefined && row.entityId !== undefined && row.credit !== undefined;
 
+/* The electing entities' credits above 0, or not stated yet. A stated credit of 0 is no row. */
+const pteCreditRowsOf = (inputs: ResolverInputs) =>
+  getCaPteElectiveCreditFacts(inputs.facts)
+    .map(rowOf)
+    .filter((row) => row.credit === undefined || row.credit > 0);
+
+/* The fact keys of a PTE elective tax credit on the return: a row, or a 2024 carryover above 0. */
+export function pteCreditFactKeys(inputs: ResolverInputs): string[] {
+  const rows = pteCreditRowsOf(inputs).map((row) => row.factKey);
+  const carryover = (num(inputs, CA_PTE_CREDIT_CARRYOVER_KEY) ?? 0) > 0;
+  return [...rows, ...(carryover ? [CA_PTE_CREDIT_CARRYOVER_KEY] : [])];
+}
+
 /*
  * Who files: a qualified taxpayer claims the credit on this form, attached to
  * Form 540, Form 540NR or Form 541 (ca-3804cr-inst-2025::sec::a-purpose::b01),
@@ -38,9 +51,7 @@ export function resolve3804CRInfo(inputs: ResolverInputs): Form3804CRFilingInfo 
   const filesCalifornia =
     inputs.decisionByKey.get("decisions.scope.must_file_ca_540") === true ||
     inputs.decisionByKey.get("decisions.scope.must_file_540nr") === true;
-  const rows = getCaPteElectiveCreditFacts(inputs.facts)
-    .map(rowOf)
-    .filter((row) => row.credit === undefined || row.credit > 0);
+  const rows = pteCreditRowsOf(inputs);
   const carryover = num(inputs, CA_PTE_CREDIT_CARRYOVER_KEY);
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_3804_cr",

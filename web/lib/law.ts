@@ -47,6 +47,8 @@ export interface LawSection {
 }
 
 const BLOCK_ID_MARK = "::";
+// law.db's documents are "usc-26-<year>"; no IRS or FTB document id starts so.
+const LAW_DOC_PREFIX = "usc-";
 const SECTION_SLUG_PREFIX = "s";
 const PAGE_ROOT = "/library/law";
 const OFFICIAL_SECTION_ROOT = "https://uscode.house.gov/us/usc/t26";
@@ -82,6 +84,9 @@ const isSectionChar = (char: string) => isDigit(char) || isLetter(char) || char 
 /** The section number as a URL holds it: "1400Z–2" → "1400Z-2". */
 export const sectionInUrl = (number: string): string =>
   number.replaceAll("–", "-").replaceAll("—", "-").trim();
+
+/** True for a block of the statute: "usc-26-2025::sec::s469::g-1". */
+export const isLawBlockId = (blockId: string): boolean => blockId.startsWith(LAW_DOC_PREFIX);
 
 /** The element id of a block on its section's page: the end of its id, "g-1". */
 export const blockAnchor = (blockId: string): string =>

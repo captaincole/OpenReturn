@@ -10,13 +10,14 @@ import {
   line2Source,
   line3Source,
   line5Source,
+  line6Source,
   nonbusinessColumns,
   type Info as Form461Info,
 } from "../../../federal/461/figures.js";
 import { sum } from "../../../money.js";
 import { unsupported, type Unsupported } from "../../../types.js";
 import { isUnsupportedResult } from "../3801/context.js";
-import { line3Column, line5Column } from "../schedule-ca/answerLines.js";
+import { line3Column, line5Column, line6Column } from "../schedule-ca/answerLines.js";
 import { scheduleDCaAdjustment } from "../schedule-ca/capitalGain.js";
 import type { ScheduleCaFilingInfo } from "../schedule-ca/filingInfo.js";
 import type { Form3461Figures, Form3461FilingInfo } from "./filingInfo.js";
@@ -84,8 +85,14 @@ function line5(form: Read, info: Info, figures: Form3461Figures): Amount {
   return columns && caAmount(line5Source(form, info), ...columns);
 }
 
-/* Lines 4 and 6: Schedule CA lines 4 and 6 come from Form 4797 and Schedule F, which have no rules. */
+/* Line 4: Schedule CA line 4 comes from Form 4797, which has no rules here. */
 const gapOrBlank = (gap: string | undefined): Amount => (gap ? unsupported(gap) : null);
+
+/* MANUAL EDIT: line 6, Schedule CA line 6 (Schedule 1 line 6 in column A; columns B and C, line6Column). */
+function line6(form: Read, info: Info, figures: Form3461Figures): Amount {
+  if (figures.federal.gaps.line6) return unsupported(figures.federal.gaps.line6);
+  return caAmount(line6Source(form, info), line6Column(info), line6Column(info));
+}
 
 /* Part I, line by line, in the form's order. */
 export function partIReads(form: Read, info: Info): Record<keyof CaPartIAmounts, Amount> {
@@ -99,7 +106,7 @@ export function partIReads(form: Read, info: Info): Record<keyof CaPartIAmounts,
     line3: line3(form, info),
     line4: gapOrBlank(figures?.federal.gaps.line4),
     line5: figures ? line5(form, info, figures) : undefined,
-    line6: gapOrBlank(figures?.federal.gaps.line6),
+    line6: figures ? line6(form, info, figures) : undefined,
     line8: figures?.federal.otherBusinessIncome ?? null,
   };
 }

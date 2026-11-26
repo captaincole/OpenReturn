@@ -64,4 +64,6 @@ export interface Form3514FilingInfo extends BaseFilingInfo {
   caEitcBusiness?: CaEitcBusiness;
   /** A business is on the return: line 18 waits for Schedule 1 line 3. */
   caEitcHasBusiness?: boolean;
+  /** A farm is on the return: line 18 waits for Schedule 1 line 6, and lines 18a–18e are a gap. */
+  caEitcHasFarm?: boolean;
 }

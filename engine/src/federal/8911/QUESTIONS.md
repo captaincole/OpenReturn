@@ -17,7 +17,7 @@ The instructions have no example with numbers. Two IRS publications do (`.scratc
 | Schedule 3 line 6j | Stated rule (irs-1040-inst-2025::sec::line-6j::b01) |
 | Header (name, SSN) | Stated rule |
 
-No field of the form is unsupported in general. These cases are gaps (unsupported with a reason): line 8 when Form 6251 does not file by decision, or when Form 1116 files; lines 5–10 when a credit that line 6b adds is a gap; lines 5–10 when the foreign tax credit is a gap. The business credit on line 3 is figured, but Form 3800 has no rules, so Schedule 3 line 6a is a gap on that return.
+No field of the form is unsupported in general. These cases are gaps (unsupported with a reason): line 8 when Form 6251 does not file by decision, or when Form 1116 files; lines 5–10 when a credit that line 6b adds is a gap; lines 5–10 when the foreign tax credit is a gap. The business credit on line 3 is figured and reaches Form 3800 line 1s, then Schedule 3 line 6a through the Form 3800 limit.
 
 ## Two texts conflict
 
@@ -95,7 +95,7 @@ A blind preparer filled 15 cases from the blank Form 8911 and its instructions. 
 
 ### 14. Form 3800
 
-- The business part reaches Form 3800 Part III line 1s, which has no rules. Not now: Form 3800 is its own form. Schedule 3 line 6a stays a gap on a return with a business part until it has rules.
+- The business part reaches Form 3800 Part III line 1s (`3800/currentCredits.ts`), with the K-1 code AO credits line 2 holds. A K-1 code AO credit with no Form 8911 goes to line 1s directly. Done.
 
 ## Pattern change
 

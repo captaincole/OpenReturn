@@ -1,14 +1,16 @@
 /*
  * Form 540 lines 40, 43 to 45, 47 and 48: the special credits. Line 40 is FTB
  * 3506. Lines 43 to 45 hold the other credits the engine figures: the credit
- * for prior year AMT (FTB 3510), the other state tax credit (Schedule S) and
- * the PTE elective tax credit (FTB 3804-CR). They are unsupported when no such
+ * for prior year AMT (FTB 3510), the passive credits (FTB 3801-CR), the other
+ * state tax credit (Schedule S) and the PTE elective tax credit (FTB 3804-CR).
+ * They are unsupported when no such
  * form files. Line 46 stays unsupported in bindings.ts and reads as blank.
  */
 
 import { atLeast, numberOrBlank, sum, sumOrBlank } from "../../../money.js";
 import { unsupported, type Unsupported } from "../../../types.js";
 import { files3510, priorYearAmtCreditUsed, priorYearAmtCreditWaits } from "../3510/creditUsed.js";
+import { files3801Cr, passiveCreditsUsed } from "../3801-cr/creditUsed.js";
 import { files3804Cr, pteCreditOnReturn } from "../3804-cr/creditUsed.js";
 import { PTE_CREDIT_CODE, PTE_CREDIT_NAME } from "../3804-cr/lines.js";
 import { OTHER_STATE_CREDIT_CODE, OTHER_STATE_CREDIT_NAME } from "../schedule-s/lines.js";
@@ -46,6 +48,9 @@ export const line40ChildDependentCareCredit: Form540Line<"line.40_child_dependen
 
 type OtherCredit = { name: string; code: string; amount: number };
 
+const isGap = (value: unknown): value is Unsupported =>
+  typeof value === "object" && value !== null && "unsupported" in value;
+
 /*
  * The credit for prior year AMT, code 188 (the Credit Table,
  * ca-540-sched-p-inst-2025::sec::credit-table::b01). The Credit Table's name,
@@ -72,8 +77,9 @@ function otherStateCreditUsed(form: Form540Form, info: Form540FilingInfo) {
 /*
  * The other credits taken, each from Schedule P (540) column (b) when it is
  * completed (ca-540-sched-p-inst-2025::sec::how-to-claim-your-credits::b01),
- * in Part III order: line 10 (prior year AMT), line 20 (other state tax),
- * line 21 (PTE elective tax). "The prior year AMT credit must be applied before
+ * in Part III order: line 10 (prior year AMT), lines 16 to 18 (FTB 3801-CR's
+ * passive credits, 3801-cr/creditUsed.ts), line 20 (other state tax), line
+ * 21 (PTE elective tax). "The prior year AMT credit must be applied before
  * any credits that can reduce regular tax below the TMT"
  * (ca-540-sched-p-inst-2025::sec::section-a-instructions::b01), and the PTE
  * credit is applied "after the other state tax credit"
@@ -92,19 +98,19 @@ function otherCredits(
   if (typeof otherState !== "number") return otherState;
   const pte = pteCreditOnReturn(read, info);
   if (typeof pte !== "number") return pte;
+  const passive = passiveCreditsUsed(read, info);
+  if (passive === undefined || isGap(passive)) return passive;
   const priorYearAmt = files3510(info) ? (priorYearAmtCreditUsed(read) ?? 0) : 0;
   return [
     { name: PRIOR_YEAR_AMT_CREDIT_NAME, code: PRIOR_YEAR_AMT_CREDIT_CODE, amount: priorYearAmt },
+    ...passive.map((credit) => ({ name: credit.name, code: credit.code, amount: credit.used })),
     { name: OTHER_STATE_CREDIT_NAME, code: OTHER_STATE_CREDIT_CODE, amount: otherState },
     { name: PTE_CREDIT_NAME, code: PTE_CREDIT_CODE, amount: pte },
   ].filter((credit) => credit.amount > 0);
 }
 
 const filesOtherCreditForm = (info: Form540FilingInfo) =>
-  files3510(info) || filesScheduleS(info) || files3804Cr(info);
-
-const isGap = (value: unknown): value is Unsupported =>
-  typeof value === "object" && value !== null && "unsupported" in value;
+  files3510(info) || filesScheduleS(info) || files3804Cr(info) || files3801Cr(info);
 
 /*
  * "To claim only one or two credits, enter the credit name, code, and amount of

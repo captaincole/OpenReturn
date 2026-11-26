@@ -1,0 +1,573 @@
+{
+  "formId": "form-8379",
+  "fieldCount": 63,
+  "entries": [
+    {
+      "fieldId": "form-8379.0.line.1_tax_year_filing_for",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "8338"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.10_first_spouse_injured",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_9[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.10_first_spouse_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-1NR8Y"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.10_first_spouse_ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.10_second_spouse_injured",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_10[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.10_second_spouse_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "T-FJC5O"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.10_second_spouse_ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.11_refund_in_both_names",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_11[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.12_different_mailing_address_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_12[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.12_different_mailing_address_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_12[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.12_refund_mailing_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "T-1C9WT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.2_filed_joint_return_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.2_filed_joint_return_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.3_overpayment_spouse_debt_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.3_overpayment_spouse_debt_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.4_obligated_past_due_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.4_obligated_past_due_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.5_community_property_resident_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.5_community_property_resident_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.5_community_property_states",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-1S0Y7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.6_made_reported_payments_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.6_made_reported_payments_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.7_had_earned_income_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.7_had_earned_income_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.8_claimed_eic_actc_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_7[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.8_claimed_eic_actc_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.9_claimed_refundable_credit_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_8[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.0.line.9_claimed_refundable_credit_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.13a_income_w2_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn13a[0].f2_1[0]",
+          "text": "8,740"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.13a_income_w2_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn13a[0].f2_2[0]",
+          "text": "9,376"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.13a_income_w2_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn13a[0].f2_3[0]",
+          "text": "7,311"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.13b_all_other_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn13b[0].f2_4[0]",
+          "text": "4,800"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.13b_all_other_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn13b[0].f2_5[0]",
+          "text": "2,584"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.13b_all_other_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn13b[0].f2_6[0]",
+          "text": "8,022"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.14_adjustments_to_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn14[0].f2_7[0]",
+          "text": "8,836"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.14_adjustments_to_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn14[0].f2_8[0]",
+          "text": "9,413"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.14_adjustments_to_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn14[0].f2_9[0]",
+          "text": "7,710"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.15_standard_or_itemized_deductions_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn15[0].f2_10[0]",
+          "text": "3,606"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.15_standard_or_itemized_deductions_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn15[0].f2_11[0]",
+          "text": "4,225"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.15_standard_or_itemized_deductions_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn15[0].f2_12[0]",
+          "text": "2,741"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.16_nonrefundable_credits_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn16[0].f2_13[0]",
+          "text": "5,213"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.16_nonrefundable_credits_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn16[0].f2_14[0]",
+          "text": "4,128"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.16_nonrefundable_credits_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn16[0].f2_15[0]",
+          "text": "9,781"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.17_refundable_credits_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn17[0].f2_16[0]",
+          "text": "3,104"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.17_refundable_credits_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn17[0].f2_17[0]",
+          "text": "8,399"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.17_refundable_credits_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn17[0].f2_18[0]",
+          "text": "4,133"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.18_other_taxes_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn18[0].f2_19[0]",
+          "text": "3,144"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.18_other_taxes_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn18[0].f2_20[0]",
+          "text": "7,949"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.18_other_taxes_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn18[0].f2_21[0]",
+          "text": "4,394"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.19_federal_income_tax_withheld_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn19[0].f2_22[0]",
+          "text": "3,982"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.19_federal_income_tax_withheld_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn19[0].f2_23[0]",
+          "text": "6,541"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.19_federal_income_tax_withheld_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn19[0].f2_24[0]",
+          "text": "8,353"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.20_payments_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn20[0].f2_25[0]",
+          "text": "8,886"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.20_payments_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn20[0].f2_26[0]",
+          "text": "8,515"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.line.20_payments_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn20[0].f2_27[0]",
+          "text": "7,018"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.signing.firm_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_32[0]",
+          "text": "T-F0OSN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.signing.firm_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_34[0]",
+          "text": "T-RJNU9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.signing.firm_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_31[0]",
+          "text": "T-OVD4A"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.signing.firm_phone",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_33[0]",
+          "text": "5551234567"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.signing.injured_spouse_phone",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_28[0]",
+          "text": "5551234567"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.signing.preparer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_29[0]",
+          "text": "T-1AFKV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.signing.preparer_ptin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_30[0]",
+          "text": "T-1OF9W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8379.1.signing.preparer_self_employed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    }
+  ]
+}

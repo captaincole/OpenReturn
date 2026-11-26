@@ -103,6 +103,7 @@ import {
   line32ExemptionCredits,
   line33TaxAfterExemptionCredits,
   line34TaxAmount,
+  line34TaxFromFtb5870A,
   line34TaxFromScheduleG1,
   line35TotalTaxAfterCredits,
 } from "./tax.js";
@@ -197,6 +198,7 @@ export function register(): void {
       "line.32_exemption_credits": line32ExemptionCredits,
       "line.33_tax_after_exemption_credits": line33TaxAfterExemptionCredits,
       "line.34_tax_from_schedule_g1": line34TaxFromScheduleG1,
+      "line.34_tax_from_ftb_5870a": line34TaxFromFtb5870A,
       "line.34_tax_amount": line34TaxAmount,
       "line.35_total_tax_after_credits": line35TotalTaxAfterCredits,
 
@@ -294,8 +296,6 @@ export function register(): void {
         "Static instructions reference label on the form; no computable value — no scenario for QSS filing status with deceased spouse data ingested.",
       "header.claimed_as_dependent":
         "No scenario yet where the taxpayer themselves is claimed as a dependent by another person — no fact or decision models this.",
-      "line.34_tax_from_ftb_5870a":
-        "Checkbox indicating line 34 tax is from FTB 5870A (tax on accumulation distribution of trusts). No FTB 5870A scenario or fact-ingestion path exists yet.",
       "line.46_renters_credit":
         "Nonrefundable Renter's Credit eligibility requires income limits, rent paid, landlord details, and rental address data — no fact ingestion path or scenario built for this yet.",
       "line.73_withholding_592b_593":

@@ -1,10 +1,14 @@
 import {
   ARMED_FORCES_STORAGE_FEES_KEY,
   businessesOnReturn,
+  farmsOnReturn,
   GAMBLING_KEYS,
   getGamblingWinningsFacts,
   getGovernmentPaymentsFacts,
+  getNolCarryoverRows,
+  getSelfEmployedHealthPlanFacts,
   miscIncomeNotForBusiness,
+  NOL_KEYS,
   OTHER_INCOME_KEYS,
   unlinkedMiscIncomeKeys,
 } from "../../facts/index.js";
@@ -19,8 +23,10 @@ import { figuredForm8814, form8814Totals } from "../8814/totals.js";
 import { resolve8853Info } from "../8853/resolveInfo.js";
 import { form8853Reaches, SCHEDULE_1_LINES } from "../8853/results.js";
 import { resolve8889Info } from "../8889/resolveInfo.js";
+import { canceledDebtIncomeOf, canceledDebts } from "../982/resolveInfo.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
+import { farmsTotal } from "../schedule-f/totals.js";
 import { resolveScheduleSEInfo } from "../schedule-se/resolveInfo.js";
 import { earlyWithdrawalPenalty, educatorExpenseDeduction } from "./adjustments.js";
 import { schedule1Answers } from "./answers.js";
@@ -45,6 +51,9 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
   const hasBusiness =
     onReturn.businesses.length + onReturn.spouseKeys.length + onReturn.malformedKeys.length > 0;
   const businessIncome = scheduleCTotal(onReturn);
+  const farms = farmsOnReturn(inputs.facts, jointReturn);
+  const hasFarm = farms.farms.length + farms.malformedKeys.length > 0;
+  const farmTotal = farmsTotal(farms.farms);
   const w2gs = getGamblingWinningsFacts(inputs.facts);
   const winningsNotOnW2G = num(inputs, GAMBLING_KEYS.winningsNotOnW2G);
   const gamblingWinnings =
@@ -84,6 +93,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
   const moving = movingExpenses(inputs);
   // irs-8814-inst-2025::sec::line-12::b01: every Form 8814 line 12 goes on line 8z.
   const form8814Line12 = figuredForm8814(form8814Totals(inputs))?.line12 ?? 0;
+  const canceledDebt = canceledDebtLine8c(inputs);
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_1",
     fallbacks: [
@@ -113,21 +123,43 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
       },
       form8621Fallback(inputs),
       form4797Fallback(inputs),
+      canceledDebt.fallback,
+      // Schedule F line 34 goes on line 6 (irs-1040sf-inst-2025::sec::line-34::b02).
+      {
+        rule: "fallback: a farm fact (Schedule F line 34 on line 6)",
+        value: hasFarm,
+        triggeredByFactKeys: farms.farms.map((farm) => farm.key),
+      },
+      // A self-employed health plan's deduction goes on line 17 (irs-7206-inst-2025::sec::general-instructions::b03).
+      {
+        rule: "fallback: a self-employed health insurance plan (line 17)",
+        value: getSelfEmployedHealthPlanFacts(inputs.facts).length > 0,
+        triggeredByFactKeys: getSelfEmployedHealthPlanFacts(inputs.facts).map((plan) => plan.key),
+      },
       // Form 2555 line 45 goes on line 8d and line 50 on line 24j (line-8d::b01, line-24j::b01).
       {
         rule: "fallback: Form 2555 files (lines 8d and 24j)",
         value: resolve2555Info(inputs).mustFile?.["form-2555"]?.value === true,
       },
+      // A stated NOL carryover goes on line 8a (irs-172-inst-2025::sec::deducting-a-carryforward::b01).
+      nolCarryoverFallback(inputs),
     ],
   });
   return {
     ...answers,
     mustFile: { "schedule-1": resolution },
     missingInputs: {
-      "schedule-1": [...(answers.missingInputs?.["schedule-1"] ?? []), ...studentLoan.missing],
+      "schedule-1": [
+        ...(answers.missingInputs?.["schedule-1"] ?? []),
+        ...studentLoan.missing,
+        ...canceledDebt.missing,
+      ],
     },
     businessIncome,
     hasBusiness,
+    farmIncome: farmTotal?.kind === "amount" ? farmTotal.amount : undefined,
+    farmIncomeGap: farmTotal?.kind === "gap" ? farmTotal.reason : undefined,
+    hasFarm,
     unemploymentCompensation,
     rtaaPayments,
     gamblingWinnings,
@@ -157,6 +189,39 @@ function form4797Fallback(inputs: ResolverInputs) {
     triggeredByFactKeys: files
       ? (info.mustFile?.["form-4797"]?.derivation?.triggeredByFactKeys ?? [])
       : [],
+  };
+}
+
+/*
+ * Line 8a: a stated NOL carryover with an amount files Schedule 1, and so
+ * does an answer that cannot be read, so its gap shows. No answer: nothing.
+ */
+function nolCarryoverFallback(inputs: ResolverInputs) {
+  const rows = getNolCarryoverRows(inputs.facts);
+  return {
+    rule: "fallback: an NOL carryover to 2025 (line 8a)",
+    value: rows === null || (rows ?? []).some((row) => row.carryoverTo2025 > 0),
+    triggeredByFactKeys: rows === undefined ? [] : [NOL_KEYS.carryovers],
+  };
+}
+
+/*
+ * Line 8c: the taxable part of the nonbusiness canceled debts (federal/982).
+ * Schedule 1 files for an amount, while a Form 1099-C or a debt waits for an
+ * answer, or with a gap; it lists the answers line 8c waits for.
+ */
+function canceledDebtLine8c(inputs: ResolverInputs) {
+  const debts = canceledDebts(inputs);
+  const line8c = canceledDebtIncomeOf(debts);
+  const amount = line8c.canceledDebtIncome ?? 0;
+  return {
+    fallback: {
+      rule: `fallback: canceled debt $${amount} on line 8c (or one that waits or is a gap)`,
+      value:
+        amount > 0 || line8c.canceledDebtWaits === true || line8c.canceledDebtGap !== undefined,
+      triggeredByFactKeys: debts.read.debts.map((debt) => debt.key),
+    },
+    missing: [...debts.read.unanswered1099C, ...debts.read.missing],
   };
 }
 

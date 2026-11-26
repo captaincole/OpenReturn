@@ -1,7 +1,9 @@
 /* Form 540 other taxes: lines 61 to 64. */
 
 import { roundDollars, sum, sumOrBlank } from "../../../money.js";
-import type { Form540Line } from "./form540Binding.js";
+import { unsupported, type Unsupported } from "../../../types.js";
+import type { Form540FilingInfo } from "./filingInfo.js";
+import type { Form540Form, Form540Line } from "./form540Binding.js";
 
 /* Line 62: taxable income over this amount is taxed at this rate (2025). */
 const BEHAVIORAL_HEALTH_TAX_FLOOR = 1_000_000;
@@ -24,12 +26,39 @@ export const line61AlternativeMinimumTax: Form540Line<"line.61_alternative_minim
  * MANUAL EDIT: ca-540-inst-2025::sec::line-62-behavioral-health-services-tax::b01:
  * 1% of taxable income over $1,000,000, whole dollars.
  */
-export const line62BehavioralHealthServicesTax: Form540Line<
-  "line.62_behavioral_health_services_tax"
-> = (form) => {
+function currentBehavioralHealthTax(form: Form540Form): number | undefined {
   const taxable = form["line.19_taxable_income"];
   if (typeof taxable !== "number" || taxable <= BEHAVIORAL_HEALTH_TAX_FLOOR) return undefined;
   return roundDollars((taxable - BEHAVIORAL_HEALTH_TAX_FLOOR) * BEHAVIORAL_HEALTH_TAX_RATE);
+}
+
+const files5870A = (info: Form540FilingInfo) => info.mustFile?.["form-5870a"]?.value === true;
+
+/*
+ * FTB 5870A Part III line 6: "Enter the amount from line 6 on Form 540, line
+ * 62 ... You may need to add this figure to the BHST computed for the current
+ * taxable year" (ca-5870a-inst-2025::sec::section-a-2::b01, ::section-b-2::b01).
+ * The amount, the gap, "waits", or undefined when Part III is not completed.
+ */
+function trustBehavioralHealthTax(
+  info: Form540FilingInfo,
+): number | Unsupported | "waits" | undefined {
+  if (!files5870A(info)) return undefined;
+  const carried = info.form5870ABehavioralHealthTax;
+  if (carried === undefined || carried === "waits") return carried;
+  return "gap" in carried ? unsupported(carried.gap) : carried.amount;
+}
+
+/* MANUAL EDIT: line 62: this year's tax plus FTB 5870A Part III; blank while the form's part waits. */
+export const line62BehavioralHealthServicesTax: Form540Line<
+  "line.62_behavioral_health_services_tax"
+> = (form, info) => {
+  const current = currentBehavioralHealthTax(form);
+  const trusts = trustBehavioralHealthTax(info);
+  if (trusts === undefined) return current;
+  if (trusts === "waits") return undefined;
+  if (typeof trusts !== "number") return trusts;
+  return sumOrBlank(current, trusts || undefined);
 };
 
 /*
@@ -61,7 +90,10 @@ export const line64TotalTax: Form540Line<"line.64_total_tax"> = (form, info) => 
   const amtUnknown =
     info.mustFile?.["schedule-p"]?.value === true &&
     form["schedule-p.1.line.26_alternative_minimum_tax"] === undefined;
-  if (earlyTaxUnknown || amtUnknown) return undefined;
+  // MANUAL EDIT: FTB 5870A Part III files with its tax still unknown (a wait or a gap): the same.
+  const trusts = trustBehavioralHealthTax(info);
+  const trustTaxUnknown = trusts === "waits" || typeof trusts === "object";
+  if (earlyTaxUnknown || amtUnknown || trustTaxUnknown) return undefined;
   if (typeof form["line.48_tax_after_credits"] !== "number") return undefined;
   return sum(
     form["line.48_tax_after_credits"],

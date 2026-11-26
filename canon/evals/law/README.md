@@ -6,6 +6,8 @@ A case in `cases.json` has a plain-words `question`, 1 to 3 `queries` that an ag
 
 Each label was checked against the statute text (the USLM XML of Title 26 from uscode.house.gov): the subdivision in `expectPath` was printed and read, and it states the rule the question asks about. No label is from memory.
 
+**Status:** Not reviewed by a person yet: agents wrote and checked these cases. Use the scores for development only.
+
 The Code cases search the statute only (`source: "statute"`). They run a second time on the whole library, and the report counts the statute hits that the regulations push out of the top 8.
 
 ## Regulation cases
