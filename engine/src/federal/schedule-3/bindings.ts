@@ -3,9 +3,11 @@ import { numberOrBlank, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { foreignTaxCredit } from "../1116/credit.js";
+import { blankForZero } from "../3800/cells.js";
 import { line6aFrom3800 } from "../3800/receivers.js";
 import { mortgageCreditGap } from "../8396/creditGap.js";
 import { line6bFrom8801 } from "../8801/credit.js";
+import { line6iFrom8834 } from "../8834/credit.js";
 import { line6cFrom8839 } from "../8839/receivers.js";
 import { LINE_19_ID, nonrefundableCreditGap } from "../8863/credit.js";
 import { creditGap, LINE_12_ID } from "../8880/credit.js";
@@ -88,6 +90,14 @@ export function register(): void {
        */
       "0.line.6f": (form, info) => personalCredit(form, info, "III"),
       "0.line.6m": (form, info) => personalCredit(form, info, "IV"),
+      /*
+       * MANUAL EDIT: Form 8834 line 7 ("Report this amount on Schedule 3 (Form 1040), line 6i";
+       * irs-1040-inst-2025::sec::line-6i::b01); blank for 0. No Form 8834, the old reason.
+       */
+      "0.line.6i": (form, info) => {
+        const received = line6iFrom8834(form, info);
+        return received === undefined ? unsupported(NO_SCENARIO) : blankForZero(received.value);
+      },
       // MANUAL EDIT: Form 8911 line 10 ("here and on Schedule 3 (Form 1040), line 6j"); no 8911, the old reason.
       "0.line.6j": (form, info) => {
         const received = line6jFrom8911(form, info);
@@ -146,7 +156,6 @@ export function register(): void {
       "0.line.5a": "Residential clean energy credit (Form 5695 Part I) is not modeled.",
       "0.line.6e": "Reserved for future use.",
       "0.line.6h": NO_SCENARIO,
-      "0.line.6i": NO_SCENARIO,
       "0.line.6k": NO_SCENARIO,
       "0.line.6z_description": NO_SCENARIO,
       "0.line.6z_amount": NO_SCENARIO,
