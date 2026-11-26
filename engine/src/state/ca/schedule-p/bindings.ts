@@ -441,7 +441,7 @@ export function register(): void {
       "0.line.17_amti_exclusion":
         "Trade or business income excluded by a qualified taxpayer with aggregate gross receipts under $1,000,000 (ca-540-sched-p-inst-2025::sec::g-alternative-minimum-taxable-income-amti-exclusion::b01) — no gross receipts fact.",
       "1.line.20_amt_nol_deduction":
-        "AMT NOL deduction refigured on a second FTB 3805V, at most 90% of line 19 (ca-540-sched-p-inst-2025::sec::step-3-amt-nol-deduction-for-the-current-year::b01) — no NOL carryover facts.",
+        "AMT NOL deduction refigured on a second FTB 3805V, at most 90% of line 19 (ca-540-sched-p-inst-2025::sec::step-3-amt-nol-deduction-for-the-current-year::b01) — no AMT NOL carryover facts (the regular carryovers on FTB 3805V are not the AMT ones).",
       ...partIIICreditRows,
     },
   });

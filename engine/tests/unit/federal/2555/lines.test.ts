@@ -205,12 +205,12 @@ describe("Form 2555 limits", () => {
     expect(housingCarryover(prior, 10_000, 10_000)).toBeUndefined();
   });
 
-  it("line 44 multiplies by the share rounded to four places, not the exact fraction (decision A19)", () => {
+  it("line 44 multiplies by the share rounded to four places, not the exact fraction (decision A29)", () => {
     // $76,180 of $90,000 excluded is 0.8464 (0.846444...); 0.8464 × $15,651 is $13,247.
     expect(line44Amount(76_180, 90_000, 15_651)).toBe(13_247);
   });
 
-  it("line 44's share is line 43, both exclusions, over line 27 (decision A20)", () => {
+  it("line 44's share is line 43, both exclusions, over line 27 (decision A30)", () => {
     // $92,080 excluded under line 42 plus $7,920 under line 36: all $100,000 of line 27.
     expect(line44Amount(100_000, 100_000, 10_600)).toBe(10_600);
   });

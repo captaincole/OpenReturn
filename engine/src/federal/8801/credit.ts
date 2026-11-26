@@ -19,6 +19,7 @@ import type { Form8880FilingInfo } from "../8880/filingInfo.js";
 import { refuelingCreditGap } from "../8911/credit.js";
 import type { Form8911FilingInfo } from "../8911/filingInfo.js";
 import { cleanVehicleCreditGap } from "../8936/credit.js";
+import { line6lGap } from "../8978/receivers.js";
 import type { Form8801FilingInfo } from "./filingInfo.js";
 import { lines24To26, type Lines24To26 } from "./lines.js";
 
@@ -71,7 +72,6 @@ const UNCOMPUTED_CREDITS: ReadonlyArray<[formId: string, line: string]> = [
   ["form-3800", "Schedule 3 line 6a (Form 3800)"],
   ["form-8859", "Schedule 3 line 6h (Form 8859)"],
   ["form-8834", "Schedule 3 line 6i (Form 8834)"],
-  ["form-8978", "Schedule 3 line 6l (Form 8978)"],
 ];
 
 /*
@@ -94,6 +94,7 @@ function otherCreditsGap(form: Accessor, info: Form8801CreditInfo): string | und
     cleanVehicleCreditGap(form, info),
     mortgageCreditGap(form, info),
     refuelingCreditGap(form, info),
+    line6lGap(info),
   ];
   const gap = gaps.find((reason) => reason !== undefined);
   return gap === undefined

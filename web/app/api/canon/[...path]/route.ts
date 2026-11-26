@@ -1,3 +1,4 @@
+import { canonAuthHeaders, canonInternalUrl } from "@/lib/canonServer";
 import { CANON_ROUTES, isProxyRoute } from "@/lib/proxyRoutes";
 import { proxyTarget } from "@/lib/proxyTarget";
 import { getUserSession } from "@/lib/session";
@@ -7,8 +8,6 @@ import { type NextRequest, NextResponse } from "next/server";
  * Corpus data is not user data, but the session gate keeps the instance private.
  * Only the library's routes in CANON_ROUTES pass: Canon also serves MCP and Mastra's own.
  */
-
-const CANON_INTERNAL_URL = process.env.CANON_INTERNAL_URL ?? "http://127.0.0.1:4112";
 
 async function forward(
   request: NextRequest,
@@ -23,17 +22,14 @@ async function forward(
   if (!isProxyRoute(CANON_ROUTES, request.method, path)) {
     return NextResponse.json({ error: "not found" }, { status: 404 });
   }
-  const target = proxyTarget(path, request.nextUrl.search, CANON_INTERNAL_URL);
+  const target = proxyTarget(path, request.nextUrl.search, canonInternalUrl());
   if (!target) {
     return NextResponse.json({ error: "bad path" }, { status: 400 });
   }
 
-  const headers = new Headers();
+  const headers = new Headers(canonAuthHeaders());
   const accept = request.headers.get("accept");
   if (accept) headers.set("accept", accept);
-  if (process.env.CANON_API_TOKEN) {
-    headers.set("authorization", `Bearer ${process.env.CANON_API_TOKEN}`);
-  }
 
   const upstream = await fetch(target, { method: "GET", headers });
 

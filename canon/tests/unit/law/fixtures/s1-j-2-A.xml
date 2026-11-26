@@ -1,0 +1,30 @@
+<section identifier="/us/usc/t26/s1"><num value="1">&#xa7;&#x202f;1.</num><heading> Tax imposed</heading>
+<subsection class="indent2 firstIndent-2" identifier="/us/usc/t26/s1/j"><num value="j" class="bold">(j)</num><heading class="bold"> Modifications for taxable years beginning after 2017</heading>
+<paragraph class="indent3 firstIndent-2" identifier="/us/usc/t26/s1/j/2"><num value="2" class="bold">(2)</num><heading class="bold"> Rate tables</heading><subparagraph class="indent4 firstIndent-2" identifier="/us/usc/t26/s1/j/2/A"><num value="A" class="bold">(A)</num><heading class="bold"> Married individuals filing joint returns and surviving spouses</heading><content><p class="indent2">The following table shall be applied in lieu of the table contained in subsection (a):<table width="50%" xmlns="http://www.w3.org/1999/xhtml">
+<colgroup>
+<col/>
+<col/>
+</colgroup>
+<thead>
+<tr class="header">
+<th><p><b>If taxable income is:</b></p></th><th><p><b>The tax is:</b></p></th></tr>
+</thead>
+<tbody>
+<tr><td><p class="leaders"><span>Not over &#x24;19,050</span></p></td><td><p>10% of taxable income.</p></td></tr>
+<tr><td><p>Over &#x24;19,050 but not over &#x24;77,400</p></td><td><p>&#x24;1,905, plus 12% of the excess over &#x24;19,050.</p></td></tr>
+<tr><td><p>Over &#x24;77,400 but not over &#x24;165,000</p></td><td><p>&#x24;8,907, plus 22% of the excess over &#x24;77,400.</p></td></tr>
+<tr><td><p>Over &#x24;165,000 but not over &#x24;315,000</p></td><td><p>&#x24;28,179, plus 24% of the excess over &#x24;165,000.</p></td></tr>
+<tr><td><p>Over &#x24;315,000 but not over &#x24;400,000</p></td><td><p>&#x24;64,179, plus 32% of the excess over &#x24;315,000.</p></td></tr>
+<tr><td><p>Over &#x24;400,000 but not over &#x24;600,000</p></td><td><p>&#x24;91,379, plus 35% of the excess over &#x24;400,000.</p></td></tr>
+<tr><td><p class="leaders"><span>Over &#x24;600,000</span></p></td><td><p>&#x24;161,379, plus 37% of the excess over &#x24;600,000.</p></td></tr>
+</tbody>
+</table>
+</p>
+</content>
+</subparagraph>
+</paragraph>
+</subsection>
+<sourceCredit>(<ref href="/us/act/1954-08-16/ch736">Aug. 16, 1954, ch. 736</ref>, <ref href="/us/stat/68A/5">68A Stat. 5</ref>; <ref href="/us/pl/88/272/tI/s111">Pub. L. 88&#x2013;272, title I, &#xa7;&#x202f;111</ref>.)</sourceCredit>
+<notes type="uscNote">
+</notes>
+</section>

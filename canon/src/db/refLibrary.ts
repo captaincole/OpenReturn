@@ -1,5 +1,5 @@
 import { asFormat, asNum, asNumOrNull, asStr, asStrOrNull, type SourceFormat } from "./corpusStore";
-import { ensureCorpusSchema, getCorpusDb } from "./libsql";
+import { openLibraryDb, type Library } from "./libsql";
 
 export interface LibraryDocument {
   docId: string;
@@ -13,9 +13,9 @@ export interface LibraryDocument {
   blockCount: number;
 }
 
-export async function listLibrary(): Promise<LibraryDocument[]> {
-  await ensureCorpusSchema();
-  const res = await getCorpusDb().execute(
+export async function listLibrary(library: Library = "corpus"): Promise<LibraryDocument[]> {
+  const db = await openLibraryDb(library);
+  const res = await db.execute(
     `SELECT d.doc_id, d.title, d.publisher, d.tax_year, d.source_url, d.total_pages,
             d.format, d.published,
             (SELECT count(*) FROM ref_blocks b WHERE b.doc_id = d.doc_id) AS block_count
@@ -41,9 +41,12 @@ export interface LibrarySection {
   parent: string | null;
 }
 
-export async function listSections(docId: string): Promise<LibrarySection[]> {
-  await ensureCorpusSchema();
-  const res = await getCorpusDb().execute({
+export async function listSections(
+  docId: string,
+  library: Library = "corpus",
+): Promise<LibrarySection[]> {
+  const db = await openLibraryDb(library);
+  const res = await db.execute({
     sql: `SELECT s.heading_slug, s.heading, p.heading_slug AS parent_slug
           FROM ref_sections s LEFT JOIN ref_sections p ON p.section_id = s.parent_section_id
           WHERE s.doc_id = ? AND s.heading_slug != 'preamble'

@@ -43,6 +43,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "(last year's return is not read, #79); Schedule D files with it",
   ],
   [
+    /^ca_nol\.prior_year_carryovers$/,
+    "a prior-year answer from last year's FTB 3805V Part III, recorded when the taxpayer carries " +
+      "a California NOL or disaster loss over (last year's return is not read, #79); FTB 3805V files with it",
+  ],
+  [
     /^capital_gains\.ca_loss_carryover$/,
     "a prior-year answer Cade records when the California carryover differs from the federal " +
       "one; Schedule D (540) files with it, and asks for it when it files and a federal carryover exists",
@@ -76,8 +81,24 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "(the test, line 44's self-employment answer) is missing",
   ],
   [
+    /^retirement\.qualified_disaster\.[^.]+$/,
+    "each fact is a whole Form 8915-F (one person, one year in which the disasters began); " +
+      "whether the taxpayer had a qualified disaster distribution, income spread from an earlier " +
+      "year or a repayment is Cade's question",
+  ],
+  [
     /^armed_forces_move\.[^.]+$/,
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
+  ],
+  [
+    /^trust_accumulation_distribution\.[^.]+$/,
+    "each fact is a whole trust's Schedule J (Form 1041) Part IV (Form 4970, one copy per " +
+      "trust); whether the taxpayer received an accumulation distribution is Cade's question",
+  ],
+  [
+    /^mortgage_subsidy\.[^.]+\.sale$/,
+    "each fact is a whole sale of a home with a federal mortgage subsidy (Form 8828); whether " +
+      "the taxpayer sold one is Cade's question. The form asks for the issuer's notice of each sale",
   ],
   [
     /^installment_sale\.[^.]+$/,
@@ -312,6 +333,18 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^prior_year\.unallowed_qualified_electric_vehicle_credit$/,
     "Form 8801 line 20, recorded only when a 2024 qualified electric vehicle credit was not " +
       "allowed because of the old section 30(b)(3)(B) limit; absent means none",
+  ],
+  [
+    /^form_8986\.[^.]+$/,
+    "each fact is a whole Form 8986 statement from a partnership, a document; whether one came " +
+      "is Cade's question (Form 8978)",
+  ],
+  [
+    /^form_8978_year\.[^.]+$/,
+    "each fact is one earlier tax year of Form 8978 (the return's totals and the corrected tax); " +
+      "whether an intervening year changed is Cade's question. Form 8978 asks for each first " +
+      "affected year, and lists a year again while an answer inside it (the statement, the " +
+      "penalty, the extension) is missing",
   ],
   [
     /^prior_year\.ca_tax$/,

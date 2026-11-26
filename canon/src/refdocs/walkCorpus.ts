@@ -2,7 +2,7 @@ import { SOURCES_ROOT } from "@openreturn/sources";
 import type { Dirent } from "node:fs";
 import { readdir, readFile } from "node:fs/promises";
 import { basename, join, relative, resolve } from "node:path";
-import type { SourceFormat } from "../db/corpusStore";
+import type { CorpusFormat } from "../db/corpusStore";
 import type { ParserStyle } from "./parse";
 import { isPublishedDate } from "./published";
 
@@ -18,7 +18,7 @@ export interface RefDocSidecar {
   taxYear: number | null;
   sourceUrl: string | null;
   sha256: string;
-  format: SourceFormat;
+  format: CorpusFormat;
   parserStyle: ParserStyle;
   /** null → derived from the source file. */
   published: string | null;

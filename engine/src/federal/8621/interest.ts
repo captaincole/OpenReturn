@@ -57,8 +57,15 @@ function nextQuarterStart(day: Date): Date {
  * and including `to`, grows the balance by the day's rate over the days in its
  * year. A quarter has one rate and lies in one year, so its days compound as
  * one power. Undefined when a day is past the rate table. Cents kept.
+ * `addedRate` (a fraction) raises every day's rate: Form 8978 interest on an
+ * audit adds two percentage points (federal/8978/lines.ts).
  */
-export function compoundedInterest(principal: number, from: Date, to: Date): number | undefined {
+export function compoundedInterest(
+  principal: number,
+  from: Date,
+  to: Date,
+  addedRate = 0,
+): number | undefined {
   let factor = 1;
   let day = addDays(from, 1);
   while (day.getTime() <= to.getTime()) {
@@ -66,7 +73,7 @@ export function compoundedInterest(principal: number, from: Date, to: Date): num
     if (rate === undefined) return undefined;
     const next = nextQuarterStart(day);
     const end = next.getTime() <= to.getTime() ? next : addDays(to, 1);
-    factor *= (1 + rate / daysInYear(day.getUTCFullYear())) ** daysBetween(day, end);
+    factor *= (1 + (rate + addedRate) / daysInYear(day.getUTCFullYear())) ** daysBetween(day, end);
     day = end;
   }
   return principal * (factor - 1);
