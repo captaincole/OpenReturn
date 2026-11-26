@@ -25,7 +25,9 @@ Form 8834 now only claims a qualified electric vehicle credit from a passive act
 
 - **A58, line 5 with the minimum tax foreign tax credit.** Form 8834 line 5 is Form 6251 line 9; Form 6251 leaves its line 8 blank when it owes no minimum tax. The engine takes line 7 less the credit line 8 would hold, as Forms 8801, 8911 and 3800 do. `credit.ts`, `docs/rule-decisions.md` row A58.
 
-## Doubts with no conflicting text
+## Should we do this now
+
+These are doubts with no conflicting text. Each one is done, or says why not.
 
 ### 1. Which column of Form 8582-CR
 
@@ -48,7 +50,7 @@ Form 8834 now only claims a qualified electric vehicle credit from a passive act
 ### 4. A zero line 1
 
 - Source: "Use Form 8834 to claim any qualified electric vehicle passive activity credit allowed for the current tax year" (`purpose-of-form::b01`).
-- Done: when Form 8582-CR allows none, line 1 is 0 and the form leaves the return (`filesOnlyWithAmountOn`). Schedule 3 line 6i is blank. Form 6251 still files: its resolver cannot see line 1 (a known gap, as for Form 8911).
+- Done: when Form 8582-CR allows none, line 1 is 0 and the form leaves the return (`filesOnlyWithAmountOn`). Line 7 is then 0 before the tax limit is read ("Enter the smaller of line 1 or line 6", `face-page-1::b02`), so Schedule 3 line 6i is blank even when lines 2 to 6 have a gap (Form 1116 files, or Form 6251 is turned off). Before the tax-review fix of 2026-11-26, that gap reached line 6i and, through it, Form 3800 line 10b, Form 8801 line 22 and Form 8911 line 6b (unit test "no credit allowed and a gap in the tax limit"). Form 6251 still files: its resolver cannot see line 1 (a known gap, as for Form 8911).
 - Changes dollars: no.
 
 ### 5. Line 2 and Form 8621
@@ -63,6 +65,18 @@ Form 8834 now only claims a qualified electric vehicle credit from a passive act
 - Done: the fact has no election. A vehicle placed in service before 2007 is fully depreciated, and its basis election would not change the form.
 - Changes dollars: no for this form.
 
-## Proposals for a discussion
+### 7. The name on Schedule 3 of a joint return
+
+- Source: Schedule 3 asks for the "Name(s) shown on Form 1040, 1040-SR, or 1040-NR". The ronde render shows only "Ronde Tallowmere" there, while Form 8834, Form 8582-CR and Form 6251 show both spouses (`namesOnReturn`). Schedules 1 and 2 print no name and an SSN with no dashes.
+- Not now: the headers belong to Schedules 1, 2 and 3, not to this form, and a fix there re-locks the golden PDFs of every joint scenario. It goes in its own pull request.
+- Changes dollars: no.
+
+### 8. Rows and copies
+
+- Form 8834 has no rows: line 1 adds every prior year unallowed credit that Form 8582-CR allows, however many facts there are. Nothing repeats past a limit.
+
+## Pattern change
+
+Proposals for a discussion: each one is not made, and the case stays unsupported.
 
 - **A current-year passive Form 3800 credit next to this credit.** Before: line 1 is unsupported. Form 8582-CR shares its allowed credit among all passive credits, and the engine figures Form 3800's current-year credits after its Part II tax lines, whose line 10b subtracts this credit (and Form 8911's line 3 reads its line 6b, which subtracts it too). After: Form 3800 would split its current credits into a step with no tax read (the stated amounts, the caps of lines 1e and 1k) and the research limitation; Form 8582-CR and this form would read the first step.

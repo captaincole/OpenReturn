@@ -212,11 +212,17 @@ export function taxLimitLine(
   return lines === undefined || isGap(lines) ? lines : pick(lines);
 }
 
-/* Line 7: the smaller of line 1 and line 6 (lines.ts). */
+/*
+ * Line 7: the smaller of line 1 and line 6 (lines.ts). A line 1 of 0 gives 0
+ * whatever line 6 is, so a gap in the tax limit does not reach Schedule 3
+ * line 6i when Form 8582-CR allows no credit
+ * (irs-8834-form-2025::sec::face-page-1::b02).
+ */
 export function line7Value(form: Accessor, info: Form8834CreditInfo): Value {
   const line1 = line1Of(form, info);
-  const limit = taxLimitOf(form, info);
   if (isGap(line1)) return line1;
+  if (line1 === 0) return 0;
+  const limit = taxLimitOf(form, info);
   if (isGap(limit)) return limit;
   if (line1 === undefined || limit === undefined) return undefined;
   return line7Of(line1, limit);

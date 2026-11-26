@@ -157,6 +157,18 @@ describe("Form 8834 who files", () => {
     expect(run.files("form-8834")).toBe(false);
     expect(run.value("schedule-3", "0.line.6i")).toBeUndefined();
   });
+
+  it("no credit allowed and a gap in the tax limit: line 7 is 0 and line 6i is blank, not a gap", () => {
+    // "Enter the smaller of line 1 or line 6": a line 1 of 0 gives 0 whatever line 6 is.
+    const run = evaluate(factsWith({ [K1]: withBox1(0) }), [
+      ...base.decisions,
+      decision("decisions.scope.must_file_6251", false),
+    ]);
+    expect(run.files("form-6251")).toBe(false);
+    expect(run.files("form-8834")).toBe(false);
+    expect(isGap(run.field("schedule-3", "0.line.6i"))).toBe(false);
+    expect(run.value("schedule-3", "0.line.6i")).toBeUndefined();
+  });
 });
 
 describe("Form 8834 line 1: what Form 8582-CR allows", () => {
