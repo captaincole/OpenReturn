@@ -45,6 +45,7 @@ export * from "./kinds/educatorExpenses.js";
 export * from "./kinds/elderlyOrDisabledCredit.js";
 export * from "./kinds/employeeBusinessExpenses.js";
 export * from "./kinds/estimatedTax.js";
+export * from "./kinds/farmRental.js";
 export * from "./kinds/foreignCurrency.js";
 export * from "./kinds/foreignEarnedIncome.js";
 export * from "./kinds/foreignFinancialAsset.js";
