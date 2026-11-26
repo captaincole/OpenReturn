@@ -21,6 +21,7 @@ export * from "./kinds/caHealthCoverage.js";
 export * from "./kinds/caLikeKindExchange.js";
 export * from "./kinds/caLumpSumDistribution.js";
 export * from "./kinds/caMiscellaneousDeductions.js";
+export * from "./kinds/canceledDebt.js";
 export * from "./kinds/caNetOperatingLoss.js";
 export * from "./kinds/caPassiveCarryover.js";
 export * from "./kinds/caPayments.js";

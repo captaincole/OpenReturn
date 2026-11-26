@@ -5,6 +5,7 @@ import { defineForm, type FormAccessor, type FormSpec } from "../../../defineFor
 import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../../money.js";
 import { unsupported } from "../../../types.js";
 import { answerLines } from "./answerLines.js";
+import { canceledDebtBindings } from "./canceledDebt.js";
 import {
   LINE_7A_ADDITIONS_GAP,
   LINE_7A_SUBTRACTIONS_GAP,
@@ -144,6 +145,8 @@ export function register(): void {
       ...movingExpenseBindings,
       ...mortgageCreditBindings,
       ...form8853Bindings,
+      // MANUAL EDIT: line 8c columns A and C from Schedule 1 and Form 982 (canceledDebt.ts).
+      ...canceledDebtBindings,
       /*
        * MANUAL EDIT: CA does not conform to HSAs. Employer contributions
        * (W-2 box 12 code W) are CA wages: line 1a col C, carried to line 27.
@@ -647,12 +650,6 @@ export function register(): void {
         "CA requires the federal NOL amount (column A) to be added back in column C because CA computes its own NOL via FTB 3805V. Column A source is unsupported (Schedule 1 not ingested) and FTB 3805V NOL is not modeled.",
       "1.line.b8b_subtractions":
         "CA subtracts California lottery winnings from gambling income. No CA lottery winnings fact category exists, and the column A source (Schedule 1 line 8b) is not ingested. This subtraction requires a scenario with CA lottery income.",
-      "1.line.b8c_federal":
-        "Cancellation of debt income from Schedule 1 line 8c (1099-C). Schedule 1 is not ingested and there is no cancellation_of_debt fact category in the current fact model.",
-      "1.line.b8c_subtractions":
-        "CA may allow a subtraction for mortgage forgiveness debt relief (Cancellation of Debt). No cancellation_of_debt fact category exists and Schedule 1 is not ingested. Requires a scenario with COD income and CA mortgage forgiveness exclusion.",
-      "1.line.b8c_additions":
-        "CA additions for cancellation of debt (e.g. non-federal excluded COD amounts). No cancellation_of_debt fact category exists and Schedule 1 is not ingested.",
       "1.line.b8e_additions":
         "Column C adds an Archer MSA rolled over to an HSA (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b02); no fact splits Form 8853 line 6b between rollovers to an HSA and other amounts.",
       "1.line.b8g_federal":

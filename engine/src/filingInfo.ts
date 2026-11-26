@@ -101,6 +101,7 @@ import { resolve8995AInfo } from "./federal/8995-a/resolveInfo.js";
 import type { Form8995FilingInfo } from "./federal/8995/filingInfo.js";
 import { resolve8995Info } from "./federal/8995/resolveInfo.js";
 import { CREDIT_FORMS_RESOLVERS, type CreditFormsFilingInfo } from "./federal/creditForms.js";
+import { DEBT_FORMS_RESOLVERS } from "./federal/debtForms.js";
 import { FARM_FORMS_RESOLVERS, type FarmFormsFilingInfo } from "./federal/farmForms.js";
 import {
   FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
@@ -307,6 +308,7 @@ export type FilingInfo = BaseFilingInfo &
   Form8938FilingInfo &
   RecaptureFormsFilingInfo &
   FarmFormsFilingInfo &
+  // The debt forms' slots join through Schedule1FilingInfo and ScheduleCaFilingInfo (federal/debtForms.ts).
   FederalFormsWithNoRulesFilingInfo &
   LaterCaliforniaFormsFilingInfo &
   CaliforniaFormsWithNoRulesFilingInfo;
@@ -393,6 +395,7 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve8938Info,
   ...RECAPTURE_FORMS_RESOLVERS,
   ...FARM_FORMS_RESOLVERS,
+  ...DEBT_FORMS_RESOLVERS,
   ...FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
   ...LATER_CALIFORNIA_FORMS_RESOLVERS,
   ...CALIFORNIA_FORMS_WITH_NO_RULES_RESOLVERS,
