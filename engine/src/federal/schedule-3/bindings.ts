@@ -4,6 +4,7 @@ import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { foreignTaxCredit } from "../1116/credit.js";
 import { line6aFrom3800 } from "../3800/receivers.js";
+import { line12From4136 } from "../4136/receivers.js";
 import { mortgageCreditGap } from "../8396/creditGap.js";
 import { line6bFrom8801 } from "../8801/credit.js";
 import { line6cFrom8839 } from "../8839/receivers.js";
@@ -16,6 +17,7 @@ import type { Schedule3FilingInfo } from "./filingInfo.js";
 import type { Schedule3 } from "./types.js";
 
 const NO_SCENARIO = "No scenario uses this credit or payment yet.";
+const LINE_15_WITHOUT_4136 = "Total of lines 9–14, which are not modeled.";
 
 export function register(): void {
   defineForm<Schedule3, Schedule3FilingInfo>("schedule-3", {
@@ -102,6 +104,33 @@ export function register(): void {
         const received = line6lFrom8978(form, info);
         return received === "none" ? unsupported(NO_SCENARIO) : received;
       },
+      /*
+       * MANUAL EDIT: Form 4136 line 17 ("Enter here and on Schedule 3 (Form 1040), line 12",
+       * irs-1040-inst-2025::sec::line-12-3::b01), in whole dollars (federal/4136/receivers.ts).
+       * No Form 4136, the old reason; a Form 4136 gap stays a gap here.
+       */
+      "0.line.12": (_, info) => {
+        const received = line12From4136(info);
+        return received === undefined ? unsupported(NO_SCENARIO) : received.value;
+      },
+      /*
+       * MANUAL EDIT: line 15, "Add lines 9 through 12 and 14". Only line 12 is computed;
+       * lines 9, 10, 11 and 14 are engine gaps that count as 0, as Form 1040 line 32
+       * counts line 31 (federal/4136/QUESTIONS.md). No Form 4136, the old reason.
+       */
+      "0.line.15": (form, info) => {
+        const received = line12From4136(info);
+        if (received === undefined) return unsupported(LINE_15_WITHOUT_4136);
+        const line12 = received.value;
+        if (typeof line12 !== "number") return line12;
+        return sum(
+          form["0.line.9"],
+          form["0.line.10"],
+          form["0.line.11"],
+          line12,
+          form["0.line.14"],
+        );
+      },
       "0.line.5b": (form) => {
         const value = form["form-5695.3.line.32"];
         return typeof value === "number" ? value : undefined;
@@ -155,7 +184,6 @@ export function register(): void {
       "0.line.10": "Extension payment: no estimated or extension payment facts yet.",
       "0.line.11":
         "Excess social security tax withheld (two or more employers): no scenario reaches the wage base yet.",
-      "0.line.12": NO_SCENARIO,
       "0.line.13a": NO_SCENARIO,
       "0.line.13b": NO_SCENARIO,
       "0.line.13c": NO_SCENARIO,
@@ -163,7 +191,6 @@ export function register(): void {
       "0.line.13z_description": NO_SCENARIO,
       "0.line.13z_amount": NO_SCENARIO,
       "0.line.14": "Total of lines 13a–13z, which are not modeled.",
-      "0.line.15": "Total of lines 9–14, which are not modeled.",
     },
   });
 }

@@ -88,6 +88,7 @@ import {
   line28,
   line29,
   line30,
+  line31,
   line32,
   line33,
   line34,
@@ -206,6 +207,7 @@ export function register(): void {
       "line.28": line28,
       "line.29": line29,
       "line.30": line30,
+      "line.31": line31,
       "line.32": line32,
       "line.33": line33,
       "line.34": line34,
@@ -305,8 +307,6 @@ export function register(): void {
         "Clergy/minister checkbox for Schedule SE filing — no clergy occupation scenario or Schedule SE ingestion built yet.",
       "line.28_no_actc_claim":
         "Opt-out checkbox for ACTC claim — no ACTC eligibility or opt-out decision modeled yet; requires taxpayer election fact.",
-      "line.31":
-        "Amount from Schedule 3 line 15 (additional refundable credits/payments) — Schedule 3 not ingested as a separate form catalog yet.",
       "line.35b_routing_number":
         "Bank routing number for direct deposit refund — no banking fact category ingested; taxpayer must enter this manually.",
       "line.35c_checking":

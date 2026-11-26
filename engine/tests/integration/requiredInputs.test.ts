@@ -268,6 +268,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "are not answered",
   ],
   [
+    /^fuel_tax_activity\.[^.]+$/,
+    "a Form 4136 fact is one whole business activity's fuel claims (or the home's kerosene); " +
+      "whether a nontaxable use happened is Cade's question. Form 4136 lists the fact again " +
+      "while the Part I code or equipment it describes is missing",
+  ],
+  [
     /^section_179_recapture\.[^.]+$/,
     "a Form 4797 Part IV fact is the whole recapture of one property; whether business use " +
       "dropped to 50% or less is Cade's question",
