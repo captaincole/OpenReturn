@@ -11,6 +11,7 @@ import type { Form8621FilingInfo } from "../8621/filingInfo.js";
 import type { Form8814FilingInfo } from "../8814/filingInfo.js";
 import type { Form8863FilingInfo } from "../8863/filingInfo.js";
 import type { Form8919FilingInfo } from "../8919/filingInfo.js";
+import type { Form8978FilingInfo } from "../8978/filingInfo.js";
 import type { Receipt } from "../passThrough/receipts.js";
 import type { Schedule8812FilingInfo } from "../schedule-8812/filingInfo.js";
 import type { ScheduleAFilingInfo } from "../schedule-a/filingInfo.js";
@@ -27,7 +28,8 @@ import type { ScheduleSEFilingInfo } from "../schedule-se/filingInfo.js";
  * second Form 8919 (a spouse's) from its filers.
  * Line 1h reads Form 3903's excess reimbursement. Line 1a reads Form 2106's.
  * Lines 3a–3c, 7a, 7b and 16 read Form 8814's totals. Line 16 reads Form 8615
- * and Form 4972's tax. Lines 3b and 16 read Form 8621's totals.
+ * and Form 4972's tax. Lines 3b and 16 read Form 8621's totals. Line 16
+ * reads Form 8978's line 14 total.
  * Line 29 reads Form 8863's figures to tell a gap from "no credit". Lines 17
  * and 18 read Form 1116's slots to tell a gap in the AMT from "no AMT".
  * Line 26 reads the estimated tax payments; lines 35a, 37 and 38 read Form 2210.
@@ -44,6 +46,7 @@ export interface Form1040FilingInfo
     Pick<Form4137FilingInfo, "tipIncomeNotOnLine1a" | "employeeCashTips">,
     Pick<Form8814FilingInfo, "form8814Totals">,
     Pick<Form8621FilingInfo, "form8621Totals">,
+    Pick<Form8978FilingInfo, "form8978">,
     Omit<Form8615FilingInfo, keyof BaseFilingInfo | "useItemizedDeductions">,
     Pick<Form8863FilingInfo, "form8863">,
     Pick<Form8919FilingInfo, "form8919Filers">,

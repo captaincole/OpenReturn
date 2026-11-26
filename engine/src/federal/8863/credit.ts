@@ -7,6 +7,7 @@
 import { numberOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { foreignTaxCreditGap } from "../1116/credit.js";
+import { line6lGap } from "../8978/receivers.js";
 import type { Form8863Figured, Form8863FilingInfo } from "./filingInfo.js";
 import {
   creditLimitLines,
@@ -28,8 +29,6 @@ const SEPARATE_RETURN_GAP =
   "A married filing separately return cannot take an education credit (irs-8863-inst-2025::sec::who-can-claim-an-education-credit::b03); lines 2 and 13 have no amount for it.";
 const MAGI_GAP =
   "Lines 3 and 14 must add back the income excluded on Form 2555 or Form 4563 (irs-8863-inst-2025::sec::line-3::b01, Pub. 970 Worksheet 2-1), and the engine has no rules for those forms.";
-const FORM_8978_GAP =
-  "Credit Limit Worksheet line 5 adds Schedule 3 line 6l (Form 8978), which the engine does not compute.";
 
 const files = (info: Form8863FilingInfo, formId: string) => info.mustFile?.[formId]?.value === true;
 
@@ -82,7 +81,8 @@ export function partIIOf(form: Accessor, info: Form8863FilingInfo): Result<PartI
 function creditsGap(form: Accessor, info: Form8863FilingInfo): string | undefined {
   const foreignTax = foreignTaxCreditGap(form, info);
   if (foreignTax !== undefined) return `Credit Limit Worksheet line 5 adds ${foreignTax}`;
-  return files(info, "form-8978") ? FORM_8978_GAP : undefined;
+  const partnerGap = line6lGap(info);
+  return partnerGap === undefined ? undefined : `Credit Limit Worksheet line 5 adds ${partnerGap}`;
 }
 
 /*

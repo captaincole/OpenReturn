@@ -10,6 +10,7 @@ import { form8621Amount } from "../8621/totals.js";
 import { files8853, form8853Total } from "../8853/results.js";
 import { withLaterForm8919Copies } from "../8919/laterCopies.js";
 import { totalOver } from "../8936/credit.js";
+import { FORM_8978_ADJUSTMENT_TYPE, line17zAdjustment } from "../8978/receivers.js";
 import type { Schedule2FilingInfo } from "./filingInfo.js";
 import type { Schedule2 } from "./types.js";
 
@@ -23,10 +24,9 @@ const OTHER_PARTS_OF_5329 =
   "Form 5329 files by decision, but only its Part I (early distributions) is figured; Parts II–IX have no facts.";
 
 const NO_PFIC = "No PFIC (Form 8621) ingestion or scenario yet.";
-const NO_OTHER_TAXES =
-  "No miscellaneous other-taxes (PWA penalties, Form 8978 adjustments, etc.) scenario yet.";
+const NO_OTHER_TAXES = "No miscellaneous other-taxes (PWA penalties, etc.) scenario yet.";
 const SECTION_1294_DEFERRED_TAX = "1294DT";
-const NO_1294_DEFERRED_TAX = `Form 8621 line 23 is blank on every copy (no section 1294 election ends this year), so "${SECTION_1294_DEFERRED_TAX}" adds nothing here; the other taxes of line 17z (PWA penalties, Form 8978 adjustments, etc.) are not modeled.`;
+const NO_1294_DEFERRED_TAX = `Form 8621 line 23 is blank on every copy (no section 1294 election ends this year), so "${SECTION_1294_DEFERRED_TAX}" adds nothing here; the other taxes of line 17z (PWA penalties, etc.) are not modeled.`;
 
 /*
  * A line that takes a Form 8621 amount. With no fund fact it keeps the reason
@@ -46,6 +46,33 @@ function form8621Line(
   const amount = form8621Amount(totals, amountOf);
   if (amount === undefined) return keepWithout === undefined ? undefined : unsupported(keepWithout);
   return amount;
+}
+
+/*
+ * MANUAL EDIT: line 17z lists each tax with its type: Form 8621 line 23 as
+ * "1294DT" (irs-8621-inst-2025::sec::line-23::b01), and the part of a negative
+ * Form 8978 line 14 that Schedule 3 line 6l could not take, as "Form 8978 ADJ"
+ * (irs-1040-inst-2025::sec::line-17z::b01, ::line-19-2::b01;
+ * federal/8978/receivers.ts). With neither, the line keeps the reason it had.
+ */
+function line17zEntries(
+  form: { readonly [fieldId: string]: unknown },
+  info: Schedule2FilingInfo,
+): Array<[type: string, amount: number]> | Unsupported | undefined {
+  const fund = form8621Line(
+    info,
+    (amounts) => amounts.deferredTaxDue,
+    NO_OTHER_TAXES,
+    NO_1294_DEFERRED_TAX,
+  );
+  const fundEntries: Array<[string, number]> =
+    typeof fund === "number" ? [[SECTION_1294_DEFERRED_TAX, fund]] : [];
+  const adjustment = line17zAdjustment(form, info, typeof fund === "number" ? fund : 0);
+  if (adjustment === undefined) return typeof fund === "number" ? fundEntries : fund;
+  if (typeof adjustment !== "number") return adjustment;
+  const fundGap = info.form8621Totals?.gap;
+  if (fundGap !== undefined) return unsupported(fundGap);
+  return [...fundEntries, [FORM_8978_ADJUSTMENT_TYPE, adjustment]];
 }
 
 /*
@@ -171,21 +198,14 @@ export function register(): void {
         form8621Line(info, (amounts) => amounts.section1291Interest, NO_PFIC),
       "1.line.17q_interest_form8621_line24": (_, info) =>
         form8621Line(info, (amounts) => amounts.deferredTaxInterest, NO_PFIC),
-      "1.line.17z_other_taxes_amount": (_, info) =>
-        form8621Line(
-          info,
-          (amounts) => amounts.deferredTaxDue,
-          NO_OTHER_TAXES,
-          NO_1294_DEFERRED_TAX,
-        ),
-      "1.line.17z_other_taxes_description": (_, info) => {
-        const amount = form8621Line(
-          info,
-          (amounts) => amounts.deferredTaxDue,
-          NO_OTHER_TAXES,
-          NO_1294_DEFERRED_TAX,
-        );
-        return typeof amount === "number" ? SECTION_1294_DEFERRED_TAX : amount;
+      // MANUAL EDIT: line 17z also lists "Form 8978 ADJ" (line17zEntries below).
+      "1.line.17z_other_taxes_amount": (form, info) => {
+        const entries = line17zEntries(form, info);
+        return Array.isArray(entries) ? sum(...entries.map(([, amount]) => amount)) : entries;
+      },
+      "1.line.17z_other_taxes_description": (form, info) => {
+        const entries = line17zEntries(form, info);
+        return Array.isArray(entries) ? entries.map(([type]) => type).join("; ") : entries;
       },
       "1.line.18_total_additional_taxes": (form) =>
         total(

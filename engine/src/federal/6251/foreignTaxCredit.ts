@@ -8,6 +8,7 @@ import { unsupported, type Unsupported } from "../../types.js";
 import { claimsByElection, foreignTaxCredit } from "../1116/credit.js";
 import type { Form1116FilingInfo } from "../1116/filingInfo.js";
 import { isGap } from "../1116/lines.js";
+import { negativeReportingYearTax } from "../8978/receivers.js";
 
 type Accessor = { readonly [fieldId: string]: unknown };
 type Value = number | Unsupported | undefined;
@@ -20,21 +21,25 @@ const AMT_COPY_GAP =
 
 /*
  * Line 10 (irs-6251-inst-2025::sec::line-10::b01–b02): Form 1040 line 16 (less
- * any Form 4972 tax) and Schedule 2 line 1z, minus Schedule 3 line 1. Form 8978
- * and Schedule J are not modeled. A gap in Schedule 3 line 1 is a gap here.
+ * any Form 4972 tax) and Schedule 2 line 1z, minus Schedule 3 line 1, and minus
+ * "any negative amount reported on Form 8978, line 14 (treated as a positive
+ * number)" (federal/8978/receivers.ts). Schedule J is not modeled. A gap in
+ * Schedule 3 line 1 or in Form 8978 is a gap here.
  */
 export function line10Of(form: Accessor, info: Form1116FilingInfo): Value {
   const line16 = numberOrBlank(form["form-1040.line.16"]);
   if (line16 === undefined) return undefined;
   const credit = foreignTaxCredit(form, info);
   if (isGap(credit)) return credit;
+  const partnerReduction = negativeReportingYearTax(info);
+  if (typeof partnerReduction !== "number") return partnerReduction;
   const form4972Tax = info.mustFile?.["form-4972"]?.value === true ? info.form4972Tax : 0;
   const tax = sum(
     line16,
     -sum(form4972Tax),
     form["schedule-2.0.line.1z_total_lines_1a_through_1y"],
   );
-  return atLeast(0, tax - sum(credit));
+  return atLeast(0, tax - sum(credit) - partnerReduction);
 }
 
 /*

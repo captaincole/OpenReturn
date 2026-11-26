@@ -9,6 +9,7 @@ import { numberOrBlank, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { foreignTaxCreditGap } from "../1116/credit.js";
 import { creditGap as retirementCreditGap } from "../8880/credit.js";
+import { line6lGap } from "../8978/receivers.js";
 import type { Form8936FilingInfo } from "./filingInfo.js";
 import { modifiedAgi, taxLimit, totalOf, wholeDollars, type TaxLimitLines } from "./lines.js";
 import {
@@ -117,7 +118,6 @@ export function totalOver(
 
 const OTHER_CREDIT_GAPS: ReadonlyArray<[formId: string, line: string]> = [
   ["form-8863", "Schedule 3 line 3 (Form 8863)"],
-  ["form-8978", "Schedule 3 line 6l (Form 8978)"],
 ];
 
 /*
@@ -132,6 +132,9 @@ function otherCreditsGap(form: Accessor, info: Form8936FilingInfo): string | und
   if (missing) {
     return `Lines 11 and 16 add ${missing[1]}, which the engine does not compute.`;
   }
+  // Schedule 3 line 6l (Form 8978) is figured; a gap there is a gap here.
+  const partnerGap = line6lGap(info);
+  if (partnerGap !== undefined) return `Lines 11 and 16 add ${partnerGap}`;
   return retirementCreditGap(form, info)?.reason;
 }
 

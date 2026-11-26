@@ -896,6 +896,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8978",
     relativeDir: "federal/8978",
     register: registerForm8978,
+    /* One form for each source, the AAR form first, four years to a form (federal/8978/plan.ts). */
+    copies: {
+      count: (info) => Math.max(1, info?.form8978?.copies.length ?? 1),
+      select: (info, index) => info && { ...info, form8978CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-8992",

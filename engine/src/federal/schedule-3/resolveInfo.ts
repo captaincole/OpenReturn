@@ -9,9 +9,17 @@ import { resolve8863Info } from "../8863/resolveInfo.js";
 import { resolve8880Info } from "../8880/resolveInfo.js";
 import { refuelingBusinessCredit, refuelingPersonalPart } from "../8911/resolveInfo.js";
 import { cleanVehicleBusinessCredit, cleanVehicleSchedules } from "../8936/resolveInfo.js";
+import { reportingYearTax } from "../8978/receivers.js";
+import { resolve8978Info } from "../8978/resolveInfo.js";
 import { k1KeysWithRoute } from "../passThrough/receipts.js";
 import { resolveScheduleRInfo } from "../schedule-r/resolveInfo.js";
 import type { Schedule3FilingInfo } from "./filingInfo.js";
+
+/* Line 6l takes a negative Form 8978 line 14 (irs-1040-inst-2025::sec::line-6l::b01). */
+function negativeForm8978(inputs: ResolverInputs): boolean {
+  const total = reportingYearTax(resolve8978Info(inputs));
+  return total.kind === "amount" && total.value < 0;
+}
 
 export function resolveSchedule3Info(inputs: ResolverInputs): Schedule3FilingInfo {
   const form5695 = resolve5695Info(inputs).mustFile?.["form-5695"]?.value === true;
@@ -69,6 +77,10 @@ export function resolveSchedule3Info(inputs: ResolverInputs): Schedule3FilingInf
         rule: "fallback: a Schedule K-1 reports foreign taxes (line 1, Form 1116)",
         value: foreignTaxK1Keys.length > 0,
         triggeredByFactKeys: foreignTaxK1Keys,
+      },
+      {
+        rule: "fallback: Form 8978 line 14 is negative (line 6l)",
+        value: negativeForm8978(inputs),
       },
     ],
   });
