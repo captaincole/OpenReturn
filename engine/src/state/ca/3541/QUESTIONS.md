@@ -96,6 +96,58 @@ other rule is a stated rule or the author's reading.
   through). Line 12b prints 0 ("If you are not a corporation, enter 0").
 - Changes dollars: no.
 
+### 10. A stated carryover past its carryover period
+
+- Source: "the unused credit may be carried over for six years for the
+  original credit, and nine years for the new, program 3.0, soundstage
+  filming, and program 4.0 credit" (`::d-carryover::b01`); "The carryover
+  period for disallowed credit is extended by the number of taxable years the
+  credit was not allowed" (`::important-information::b03`).
+- Default: line 5a is the carryover the taxpayer states. The engine does not
+  test its age: an original credit (code 223) on a certificate issued in 2017
+  carries over to 2023, so a stated 2025 carryover may have expired, unless a
+  year of the $5,000,000 limit extended it. The form has no line for the test.
+  The engine also takes a stated carryover on a certificate issued in 2025,
+  which cannot have one.
+- Changes dollars: yes. An expired carryover would make line 5a, line 11 and
+  line 12a 0 (blind case 3: line 12a 5,000 and line 13 7,000 today).
+
+### 11. The 10% of line 22 that Part IV does not refund
+
+- Source: line 12a "Do not include any refundable program 4.0 credit"
+  (`::part-ii-carryover-computation::b01`); line 13 "Do not include ... amounts
+  included in Part IV" (`::b03`); "Total refundable amount is 90% of the credit
+  amount that exceeds the "tax"" (`::part-iv-program-4-0-refundable-credit-election::b01`).
+- Default: line 13 is line 11 less lines 12a, 12b and 12d, and line 12a is
+  the smaller of the tax left and line 11 less line 12d. The 10% of line 22
+  that line 23 keeps out is neither refunded nor carried over.
+- Changes dollars: yes, the carryover. Blind case 7 (line 22 27,000) would
+  carry 2,700 more if the 10% were carried.
+
+### 12. Line 20 when part of the credit went against sales and use tax
+
+- Source: line 20 "Enter the amount from Part I, line 1, 2, or 4a" (the form);
+  line 21 adds "any amounts entered in Part I, line 10" (`::b02` above).
+- Default: line 20 is the gross amount on line 1 or 2, before line 10 comes
+  off, and line 21 adds line 10 back, as the form says.
+- Changes dollars: yes, under the other reading. Blind case 14 (line 2
+  20,000, line 9 4,000, tax 10,000): line 22 is 6,000 today; with line 20 net
+  of line 10 (16,000) and line 21 still adding line 10, line 22 would be 2,000.
+
+## Second opinions
+
+- Blind fill (2026-11-26, 14 cases from the blank form, the instructions and
+  Schedule P (540)): every dollar amount matched. The one difference is a
+  blank against 0: case 9 (line 22 zero or less) prints line 12d blank, and
+  the blind fill wrote 0 (item 5; the engine default is kept). The blind
+  doubts that change dollars are items 10 to 12.
+- PolicyEngine-US 2.154.1 (commit 0fbed6ddb1): it does not model FTB 3541.
+  Its California nonrefundable credits are the exemption credits, the
+  dependent care credit and the renter's credit only, and it has no
+  business credit or the $5,000,000 limit. Not compared.
+- IRS Direct File: federal only, no California forms. Not compared. The repo
+  names no other reference implementation for this form.
+
 ## Confidence by field group
 
 | Field group | Confidence |
