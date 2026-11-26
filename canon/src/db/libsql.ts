@@ -53,7 +53,7 @@ const LIBRARY_SCHEMA_DDL: string[] = [
            sha256              TEXT NOT NULL,
            total_pages         INTEGER NOT NULL,
            total_chars         INTEGER NOT NULL,
-           -- 'pdf', 'html' (a cleaned publisher page) or 'uslm' (US Code XML); only a pdf has pages
+           -- 'pdf', 'html' (a cleaned publisher page), 'uslm' (US Code XML) or 'ecfr' (CFR XML); only a pdf has pages
            format              TEXT NOT NULL DEFAULT 'pdf',
            -- YYYY-MM-DD the publisher issued the source (sidecar "published"):
            -- when passages disagree, the newer document wins (askAnswerer)

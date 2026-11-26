@@ -1,4 +1,10 @@
-import { parseLawTarget, printsPath, sectionIdOf } from "../../src/law/citation";
+import {
+  type LawSource,
+  parseLawTarget,
+  printsPath,
+  sectionIdOf,
+  sourceOfSection,
+} from "../../src/law/citation";
 import type { LawHit } from "../../src/law/lawSearch";
 
 /*
@@ -10,9 +16,9 @@ export interface LawCase {
   id: string;
   question: string;
   queries: string[];
-  /** Code sections that hold the rule; a hit in any of them counts. */
+  /** Sections that hold the rule, Code ("469") or regulation ("1.469-5T"); a hit in any of them counts. */
   expect: string[];
-  /** The exact subdivision, "469(g)(1)(A)", when one holds the rule. */
+  /** The exact subdivision, "469(g)(1)(A)" or "1.469-5T(a)(1)", when one holds the rule. */
   expectPath?: string;
   source: string;
 }
@@ -26,6 +32,9 @@ export interface CaseScore {
 }
 
 export const TOP_K = 8;
+
+/** The document of each source in law.db: section ids are spelled with it. */
+export type DocIds = Record<LawSource, string>;
 
 /* Each block keeps its best rank over the queries; a tie goes to the earlier query. */
 export function mergeByBestRank(lists: LawHit[][]): LawHit[] {
@@ -41,26 +50,26 @@ export function mergeByBestRank(lists: LawHit[][]): LawHit[] {
     .map((entry) => entry.hit);
 }
 
-export function scoreCase(testCase: LawCase, merged: LawHit[], docId: string): CaseScore {
+export function scoreCase(testCase: LawCase, merged: LawHit[], docIds: DocIds): CaseScore {
   const top = merged.slice(0, TOP_K);
   const sectionHit = top.some((hit) =>
-    testCase.expect.some((section) => inSection(hit, docId, section)),
+    testCase.expect.some((section) => inSection(hit, docIds, section)),
   );
   const pathHit = testCase.expectPath
-    ? top.some((hit) => onPath(hit, docId, testCase.expectPath!))
+    ? top.some((hit) => onPath(hit, docIds, testCase.expectPath!))
     : null;
   return { id: testCase.id, sectionHit, pathHit, top: top.map((hit) => hit.citation) };
 }
 
-const inSection = (hit: LawHit, docId: string, section: string) =>
-  hit.blockId.startsWith(`${sectionIdOf(docId, section)}::`);
+const inSection = (hit: LawHit, docIds: DocIds, section: string) =>
+  hit.blockId.startsWith(`${sectionIdOf(docIds[sourceOfSection(section)], section)}::`);
 
 /* The hit is the subdivision, sits inside it, or is the parent block that prints it. */
-function onPath(hit: LawHit, docId: string, expectPath: string): boolean {
+function onPath(hit: LawHit, docIds: DocIds, expectPath: string): boolean {
   const expected = parseLawTarget(expectPath);
   const got = parseLawTarget(hit.citation);
-  if (expected?.kind !== "citation" || got?.kind !== "citation") return false;
-  if (!inSection(hit, docId, expected.section)) return false;
+  if (!expected || expected.kind === "block" || !got || got.kind === "block") return false;
+  if (!inSection(hit, docIds, expected.section)) return false;
   const shorter = Math.min(expected.path.length, got.path.length);
   const shared = expected.path.slice(0, shorter).every((segment, i) => got.path[i] === segment);
   if (!shared) return false;

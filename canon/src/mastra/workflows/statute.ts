@@ -87,7 +87,8 @@ export async function searchStatute(
   try {
     const lists: LawHit[][] = [];
     for (const query of queries)
-      lists.push(await searchLaw({ query, limit: options.hitsPerQuery }));
+      // The judges' prompts and the conflict check are written for the statute; the regulations come later.
+      lists.push(await searchLaw({ query, limit: options.hitsPerQuery, source: "statute" }));
     const log = queries.map((query, i) => ({
       query,
       hits: lists[i].map((hit) => ({

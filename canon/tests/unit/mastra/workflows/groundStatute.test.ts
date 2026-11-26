@@ -137,6 +137,7 @@ describe("groundDecision and the statute", () => {
     expect(law.search).toHaveBeenCalledWith({
       query: "excess business loss capital assets",
       limit: 6,
+      source: "statute",
     });
     expect(kinds(out.log.steps)).toEqual(["1:gather", "1:assess", "1:rule", "1:statute", "1:rule"]);
     expect(prompts[0]).not.toContain("Statute passages");

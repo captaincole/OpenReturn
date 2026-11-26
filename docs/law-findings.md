@@ -6,7 +6,7 @@ How to read it:
 
 - Each statute passage has its block id (`usc-26-2025::sec::s469::g-1` is section 469(g)(1)). `npm run corpus -- law read "<citation>"` prints it.
 - Each instruction passage has its corpus block id. `npm run corpus -- read <blockId>` prints it.
-- "Row" names a row of `docs/rule-decisions.md`. The library is the Code as of January 2026. It has no regulations, no California law and no statutory notes, so no effective date was checked.
+- "Row" names a row of `docs/rule-decisions.md`. On the day of the check the library held the Code as of January 2026 only: no regulations, no California law and no statutory notes, so no effective date was checked. The regulations were added after it.
 - Checked on 2026-11-25.
 - Deferred on 2026-11-26: no finding on this page changes an engine rule yet. A person decides each one later, and each engine rule stays as its `DECISION` comment says until then.
 

@@ -1,7 +1,8 @@
 import { parseArgs } from "node:util";
 import { storedEmbeddingModel } from "../../src/db/corpusStore";
 import { libraryDbPath } from "../../src/db/libsql";
-import { readLaw, requireLaw } from "../../src/law/lawRead";
+import type { LawSource } from "../../src/law/citation";
+import { CITATION_HINT, readLaw, requireLaw } from "../../src/law/lawRead";
 import { searchLaw, type SearchMode } from "../../src/law/lawSearch";
 import type { Command } from "../lib/cli";
 import { checkLibrary } from "./check";
@@ -16,6 +17,7 @@ async function check(): Promise<void> {
 }
 
 const MODES: SearchMode[] = ["fts", "vector", "hybrid"];
+const SOURCES: LawSource[] = ["statute", "regulations"];
 
 async function search(argv: string[]): Promise<void> {
   const { values, positionals } = parseArgs({
@@ -24,18 +26,23 @@ async function search(argv: string[]): Promise<void> {
       limit: { type: "string", default: "8" },
       mode: { type: "string", default: "hybrid" },
       section: { type: "string" },
+      source: { type: "string" },
     },
     allowPositionals: true,
   });
   const query = positionals.join(" ").trim();
   const mode = MODES.find((known) => known === values.mode);
+  const source = SOURCES.find((known) => known === values.source);
   if (!query || !mode) throw new Error("required: a query string, and --mode fts|vector|hybrid");
+  if (values.source && !source) throw new Error("--source is statute or regulations");
   await requireLaw();
   const limit = Math.max(1, Math.min(Number(values.limit), 25));
-  const hits = await searchLaw({ query, mode, limit, section: values.section });
-  console.log(`query:   "${query}"\nmode:    ${mode}\nresults: ${hits.length}\n`);
+  const hits = await searchLaw({ query, mode, limit, section: values.section, source });
+  console.log(
+    `query:   "${query}"\nmode:    ${mode}\nsource:  ${source ?? "both"}\nresults: ${hits.length}\n`,
+  );
   hits.forEach((hit, index) => {
-    console.log(`${index + 1}. ${hit.citation}  (score ${hit.score.toFixed(4)})`);
+    console.log(`${index + 1}. ${hit.citation}  [${hit.source}] (score ${hit.score.toFixed(4)})`);
     console.log(`   blockId: ${hit.blockId}`);
     console.log(
       `   ${hit.sectionHeading ?? ""}${hit.headings.length ? ` › ${hit.headings.join(" › ")}` : ""}`,
@@ -46,11 +53,11 @@ async function search(argv: string[]): Promise<void> {
 
 async function read(argv: string[]): Promise<void> {
   const citation = argv.join(" ").trim();
-  if (!citation) throw new Error('required: a citation, e.g. 469, "469(g)(1)(A)" or a block id');
+  if (!citation) throw new Error(`required: a citation (${CITATION_HINT})`);
   await requireLaw();
   const reading = await readLaw(citation);
   if (!reading) {
-    console.error(`nothing in the Code at ${citation}`);
+    console.error(`nothing in the law library at ${citation}`);
     process.exit(1);
   }
   console.log(`# ${reading.citation} — ${reading.sectionHeading}`);
@@ -66,19 +73,20 @@ export const lawCheckCommand: Command = {
 
 export const lawSearchCommand: Command = {
   name: "search",
-  summary: "Search the Code (law.db only)",
+  summary: "Search the Code and the regulations (law.db only)",
   usage: '"query"',
   options: [
     { flag: "--mode fts|vector|hybrid", desc: "retrieval mode (default: hybrid)" },
     { flag: "--limit <n>", desc: "max results, 1–25 (default: 8)" },
-    { flag: "--section <n>", desc: 'one Code section only, e.g. "469"' },
+    { flag: "--source statute|regulations", desc: "one source only (default: both)" },
+    { flag: "--section <n>", desc: 'one section only, e.g. "469" or "1.469-5T"' },
   ],
   run: search,
 };
 
 export const lawReadCommand: Command = {
   name: "read",
-  summary: "Print a section or subdivision by citation, in statute order, with block ids",
-  usage: '<citation> (469, "469(g)(1)(A)" or a block id)',
+  summary: "Print a section or subdivision by citation, in order, with block ids",
+  usage: '<citation> (469, "469(g)(1)(A)", 1.469-5T, "1.469-5T(a)(1)" or a block id)',
   run: read,
 };

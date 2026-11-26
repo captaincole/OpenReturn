@@ -1,6 +1,7 @@
 import type { Element } from "domhandler";
 import { citationSegment } from "./lawIds";
-import type { Span, TextSink } from "./textSink";
+import type { TextSink } from "./textSink";
+import { spanOf, type UnitItem, type UnitNode } from "./unitTree";
 import { attr, BODY_TAGS, childElements, firstChild, isUnit } from "./uslmDom";
 import { type Extracted, extractText } from "./uslmText";
 
@@ -10,24 +11,6 @@ import { type Extracted, extractText } from "./uslmText";
  * piece, then its children and continuations in document order. The block
  * step decides later which ranges become blocks.
  */
-
-export interface UnitNode {
-  /** The number as the statute prints it: "g", "1", "A". Empty for the section. */
-  segment: string;
-  /** The segment, with "-dup2" when the statute repeats a number under one parent. */
-  idSegment: string;
-  numText: string;
-  heading: string;
-  /** The chapeau's text; empty when the unit opens with content or nothing. */
-  chapeau: string;
-  lead: Span | null;
-  /** The lead is a number and heading with no text after it: "(1) Fully taxable transaction". */
-  headingOnly: boolean;
-  items: UnitItem[];
-  span: Span;
-}
-
-export type UnitItem = { kind: "unit"; unit: UnitNode } | { kind: "continuation"; span: Span };
 
 interface UnitParts {
   num?: Element;
@@ -143,11 +126,4 @@ function segmentOf(el: Element, index: number): string {
     ? identifier.slice(identifier.lastIndexOf("/") + 1)
     : num && attr(num, "value");
   return citationSegment(raw ?? "") || `n${index + 1}`;
-}
-
-function spanOf(lead: Span | null, items: UnitItem[]): Span | null {
-  const spans = [lead, ...items.map((item) => (item.kind === "unit" ? item.unit.span : item.span))];
-  const present = spans.filter((span): span is Span => span !== null);
-  if (present.length === 0) return null;
-  return { start: present[0].start, end: present[present.length - 1].end };
 }

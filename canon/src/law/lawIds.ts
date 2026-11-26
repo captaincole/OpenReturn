@@ -22,3 +22,22 @@ export const isLawBlockId = (blockId: string): boolean => blockId.startsWith(LAW
 
 export const citationOf = (number: string, path: string[]): string =>
   `26 U.S.C. § ${number}${path.map((segment) => `(${segment})`).join("")}`;
+
+/*
+ * A regulation section in an id: "1.469-5T" → "s1.469-5t". The dot and the
+ * parentheses stay ("1.1031(a)-1"): they tell a regulation from a Code section.
+ */
+export const regSlugOf = (number: string): string =>
+  `s${[...number.toLowerCase()].map((char) => (isRegSlugChar(char) ? char : "-")).join("")}`;
+
+const REG_SLUG_MARKS = new Set([".", "(", ")", "-"]);
+const isRegSlugChar = (char: string) =>
+  (char >= "a" && char <= "z") || (char >= "0" && char <= "9") || REG_SLUG_MARKS.has(char);
+
+/** "26 CFR § 1.469-5T(a)(1)"; a Q&A step reads ", Q&A-1": "26 CFR § 1.408A-4, Q&A-1(b)". */
+export const regCitationOf = (number: string, path: string[]): string =>
+  `26 CFR § ${number}${path.map(regCitationStep).join("")}`;
+
+export const QA_STEP = "Q&A-";
+const regCitationStep = (segment: string) =>
+  segment.startsWith(QA_STEP) ? `, ${segment}` : `(${segment})`;
