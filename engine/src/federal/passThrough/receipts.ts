@@ -174,6 +174,16 @@ export function k1ItemsWithRoute(inputs: ResolverInputs, route: Route): PassThro
   return entitiesOnReturn(inputs).flatMap((entity) => itemsWithRoute(entity, route));
 }
 
+/*
+ * Each K-1 on this return with items for the route, and those items, before the
+ * limits: for an item the loss limits never change (a credit, Form 3800).
+ */
+export function k1EntitiesWithRoute(inputs: ResolverInputs, route: Route): ReceivedItem[] {
+  return entitiesOnReturn(inputs).flatMap((entity) =>
+    itemsWithRoute(entity, route).map((item) => ({ entity, item })),
+  );
+}
+
 /* The K-1s on this return with an amount for the route, before the limits: a must-file answer. */
 export function k1KeysWithRoute(inputs: ResolverInputs, route: Route): string[] {
   return entitiesOnReturn(inputs)

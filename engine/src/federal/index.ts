@@ -13,10 +13,12 @@ import { register as registerForm2210 } from "./2210/bindings.js";
 import { register as registerForm2441 } from "./2441/bindings.js";
 import { register as registerForm2555 } from "./2555/bindings.js";
 import { register as registerForm3800 } from "./3800/bindings.js";
+import { form3800CopyCount, form3800SourceRows } from "./3800/breakdown.js";
 import { register as registerForm3903 } from "./3903/bindings.js";
 import { register as registerForm4136 } from "./4136/bindings.js";
 import { register as registerForm4137 } from "./4137/bindings.js";
 import { register as registerForm4255 } from "./4255/bindings.js";
+import { form4255CopyCount } from "./4255/copies.js";
 import { register as registerForm4562 } from "./4562/bindings.js";
 import { register as registerForm4563 } from "./4563/bindings.js";
 import { register as registerForm461 } from "./461/bindings.js";
@@ -614,6 +616,12 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 3800",
     relativeDir: "federal/3800",
     register: registerForm3800,
+    // More than 15 Part V or 35 Part VI rows: more copies of pages 8 and 9 (3800/breakdown.ts).
+    copies: {
+      count: (info) => form3800CopyCount(form3800SourceRows(info?.form3800Sources)),
+      select: (info, index) => info && { ...info, form3800CopyIndex: index },
+      laterCopyPages: [7, 8],
+    },
   }),
   makeFormSpec({
     formId: "form-3903",
@@ -646,6 +654,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 4255",
     relativeDir: "federal/4255",
     register: registerForm4255,
+    // More than four Part II properties: "attach additional Forms 4255" (4255/copies.ts).
+    copies: {
+      count: (info) => form4255CopyCount(info?.form4255),
+      select: (info, index) => info && { ...info, form4255CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-4563",
@@ -672,6 +685,12 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 4835",
     relativeDir: "federal/4835",
     register: registerForm4835,
+    /* One Form 4835 for each farm rental (federal/4835/farmTotals.ts); pages 2 and 3 are the instructions. */
+    copies: {
+      count: (info) => info?.form4835Copies?.length ?? 1,
+      select: (info, index) => info && { ...info, ...info.form4835Copies?.[index] },
+      laterCopyPages: [0],
+    },
   }),
   makeFormSpec({
     formId: "form-4970",
@@ -744,6 +763,12 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8611",
     relativeDir: "federal/8611",
     register: registerForm8611,
+    // One Form 8611 for each building (federal/8611/resolveInfo.ts); page 3 is instructions.
+    copies: {
+      count: (info) => Math.max(1, info?.form8611Copies?.length ?? 1),
+      select: (info, index) => info && { ...info, form8611CopyIndex: index },
+      laterCopyPages: [0, 1],
+    },
   }),
   makeFormSpec({
     formId: "form-8615",

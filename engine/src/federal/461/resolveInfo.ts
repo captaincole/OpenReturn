@@ -25,7 +25,7 @@ import type { Form461Figures, Form461FilingInfo, Form461LineGaps } from "./filin
 const FORM_4797_GAP =
   "Form 4797 files and has no rules yet, so its line 18b, which Schedule 1 line 4 and Form 461 line 4 carry, is not known.";
 const FORM_4835_GAP =
-  "Form 4835 files, and Schedule E line 40 (farm rental income, part of Form 461 line 5) is not modeled.";
+  "Form 4835 files, and Form 461 does not sort its farm rental (Schedule E line 40, part of Form 461 line 5) into business or nonbusiness amounts (lines 10 and 11).";
 const OVERFLOW_GAP =
   "More than three rental or royalty properties need a second Schedule E, which the engine does not fill: Schedule 1 line 5 (Form 461 line 5) is not known.";
 

@@ -13,7 +13,7 @@ numbers is in the corpus; the published examples are in
    F, line 1c" (irs-pub-225-2025::sec::market-gain::b03). The same block says
    the gain is "$1,200 ($5,200 – $4,000)". Decided: line 1c is line 1a less
    line 1b, as the form says; the engine takes line 1a as stated. Dollars: no.
-   `DECISION` comment above `line1c` in `income.ts`; row A33 in
+   `DECISION` comment above `line1c` in `income.ts`; row A42 in
    `docs/rule-decisions.md`.
 
 ## Should we do this now

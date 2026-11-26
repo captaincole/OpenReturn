@@ -240,28 +240,29 @@ describe("Form 8936 Parts II and V", () => {
     expect(run.value("schedule-3", "0.line.6f")).toBe(7500);
   });
 
-  /* Lines 8 and 21 go to Form 3800, which has no rules: Schedule 3 line 6a names that gap. */
+  /* Lines 8 and 21 go to Form 3800 lines 1y and 1aa; its line 38 is Schedule 3 line 6a. */
   const reasonOf = (result: unknown) => (result as { reason?: string } | undefined)?.reason;
-  const FORM_3800_GAP = /^Form 3800 files/;
 
-  it("a business-use credit files Form 3800, and Schedule 3 line 6a is its gap", () => {
+  it("a business-use credit reaches Form 3800 line 1y, and its line 38 Schedule 3 line 6a", () => {
     const facts = factsWith({ [NEW_KEY]: { ...ELAYNE_NEW_VEHICLE, businessUsePercent: 40 } });
     const run = evaluate(facts);
     expect(run.line("0.line.8_business_investment_use_credit")).toBe(3000);
     expect(run.files("form-3800")).toBe(true);
-    const line6a = run.field("schedule-3", "0.line.6a");
-    expect(isGap(line6a)).toBe(true);
-    expect(reasonOf(line6a)).toMatch(FORM_3800_GAP);
+    expect(run.value("form-3800", "2.part3.1y_form_8936_part_ii_col_e")).toBe(3000);
+    const allowed = run.value("form-3800", "1.line.38_credit_allowed_current_year");
+    expect(typeof allowed).toBe("number");
+    expect(run.value("schedule-3", "0.line.6a")).toBe(allowed);
   });
 
-  it("a commercial vehicle alone files Schedule 3 and Form 3800", () => {
+  it("a commercial vehicle alone files Schedule 3 and Form 3800, on line 1aa", () => {
     const run = evaluate(
       factsWith(noVehicles, [row("other", makeCleanVehicleFactKey("haulwell"), commercial)]),
     );
     expect(run.line("0.line.21_commercial_vehicle_credit_total")).toBe(7500);
     expect(run.files("form-3800")).toBe(true);
     expect(run.files("schedule-3")).toBe(true);
-    expect(reasonOf(run.field("schedule-3", "0.line.6a"))).toMatch(FORM_3800_GAP);
+    expect(run.value("form-3800", "2.part3.1aa_form_8936_part_v_col_e")).toBe(7500);
+    expect(typeof run.value("schedule-3", "0.line.6a")).toBe("number");
   });
 
   it("personal use only: no Form 3800, and line 6a keeps the general reason", () => {

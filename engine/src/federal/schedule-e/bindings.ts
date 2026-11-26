@@ -7,6 +7,7 @@ import type { RentalFactValue, RentalPropertyType } from "../../facts/index.js";
 import { rentalOwnerOf } from "../../facts/index.js";
 import { SSN } from "../../values.js";
 import { namesOnReturn } from "../returnNames.js";
+import { farmRentalBindings } from "./farmRental.js";
 import type { PropertyColumn, ScheduleEFilingInfo } from "./filingInfo.js";
 import { otherExpenseDescription, partIColumnBindings } from "./lines.js";
 import { partIIBindings } from "./partII.js";
@@ -115,6 +116,8 @@ export function register(): void {
       ...totalBindings(),
       // MANUAL EDIT: Parts II and III, lines 27–37, and line 41 (partII.ts, partIII.ts).
       ...partIIBindings(),
+      // MANUAL EDIT: lines 40 and 42, from Form 4835 (farmRental.ts).
+      ...farmRentalBindings(),
       "1.header.name": (_, info) => namesOnReturn(info),
       "1.header.ssn": (_, info) => info.taxpayerSSN,
     },
@@ -123,7 +126,7 @@ export function register(): void {
       "0.header.ssn": (value) => SSN.format(value as Parameters<typeof SSN.format>[0]),
       "1.header.ssn": (value) => SSN.format(value as Parameters<typeof SSN.format>[0]),
     },
-    // MANUAL EDIT: Part IV, lines 40 and 42 (unsupported.ts).
+    // MANUAL EDIT: Part IV (unsupported.ts).
     unsupported: UNSUPPORTED,
   });
 }

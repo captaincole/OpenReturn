@@ -197,8 +197,14 @@ const DEDUCTIONS: BoxTable = [
   coded("12", "ZZ", "other_deduction", "Other deductions", "other"),
 ];
 
-/* Box 13: each credit; the detail names it. */
+/*
+ * Box 13: each credit; the detail names it. A general business credit goes to
+ * Form 3800 (business_credit); code H (Schedule 3 line 13a), the bond credits
+ * (Form 8912) and code ZZ are other credits, which have no route yet.
+ */
 const credit = (code: string, label: string, detail: string) =>
+  coded("13", code, "business_credit", label, detail);
+const otherCredit = (code: string, label: string, detail: string) =>
   coded("13", code, "credit", label, detail);
 
 const BOX_13: BoxTable = [
@@ -221,7 +227,7 @@ const BOX_13: BoxTable = [
   // box-13-credits::b04
   credit("G", "Other rental credits", "other_rental"),
   // box-13-credits::b05
-  credit("H", "Undistributed capital gains credit", "undistributed_capital_gains"),
+  otherCredit("H", "Undistributed capital gains credit", "undistributed_capital_gains"),
   // box-13-credits::b05
   credit("I", "Biofuel producer credit", "biofuel_producer"),
   // box-13-credits::b05
@@ -295,17 +301,17 @@ const BOX_13: BoxTable = [
   // report-on-form-7207-advanced-manufacturing::b04
   credit("AO", "Alternative fuel vehicle refueling property credit", "refueling_property"),
   // report-on-form-7207-advanced-manufacturing::b04
-  credit("AP", "Clean renewable energy bond credit", "clean_renewable_energy_bond"),
+  otherCredit("AP", "Clean renewable energy bond credit", "clean_renewable_energy_bond"),
   // report-on-form-7207-advanced-manufacturing::b04
-  credit("AQ", "New clean renewable energy bond credit", "new_clean_renewable_energy_bond"),
+  otherCredit("AQ", "New clean renewable energy bond credit", "new_clean_renewable_energy_bond"),
   // report-on-form-7207-advanced-manufacturing::b04
-  credit("AR", "Qualified energy conservation bond credit", "energy_conservation_bond"),
+  otherCredit("AR", "Qualified energy conservation bond credit", "energy_conservation_bond"),
   // report-on-form-7207-advanced-manufacturing::b04
-  credit("AS", "Qualified zone academy bond credit", "zone_academy_bond"),
+  otherCredit("AS", "Qualified zone academy bond credit", "zone_academy_bond"),
   // report-on-form-7207-advanced-manufacturing::b04
-  credit("AT", "Qualified school construction bond credit", "school_construction_bond"),
+  otherCredit("AT", "Qualified school construction bond credit", "school_construction_bond"),
   // report-on-form-7207-advanced-manufacturing::b04
-  credit("AU", "Build America bond credit", "build_america_bond"),
+  otherCredit("AU", "Build America bond credit", "build_america_bond"),
   // report-on-form-7207-advanced-manufacturing::b04
   credit("AV", "Credit for employer differential wage payments", "differential_wage"),
   // report-on-form-7207-advanced-manufacturing::b04
@@ -329,7 +335,7 @@ const BOX_13: BoxTable = [
   // report-on-form-7207-advanced-manufacturing::b05
   credit("BC", "Eligible credits from transferor(s) under section 6418", "transferred_credits"),
   // report-on-form-7207-advanced-manufacturing::b06
-  credit("ZZ", "Other credits", "other"),
+  otherCredit("ZZ", "Other credits", "other"),
 ];
 
 /* Box 15: each AMT item; the detail names its Form 6251 use. */
@@ -378,10 +384,20 @@ const BOX_17: BoxTable = [
   info("C", "Qualified rehabilitation expenditures (other than rental real estate)", "qre"),
   // box-17-other-information::b02
   info("D", "Basis of energy property", "energy_property_basis"),
+  // box-17-other-information::b02: Form 8611 line 8, one form for each code
+  coded(
+    "17",
+    "E",
+    "low_income_housing_recapture_42j5",
+    "Recapture of low-income housing credit (section 42(j)(5))",
+  ),
   // box-17-other-information::b02
-  recapture("E", "Recapture of low-income housing credit (section 42(j)(5))", "lih_42j5"),
-  // box-17-other-information::b02
-  recapture("F", "Recapture of low-income housing credit (other)", "lih_other"),
+  coded(
+    "17",
+    "F",
+    "low_income_housing_recapture",
+    "Recapture of low-income housing credit (other)",
+  ),
   // box-17-other-information::b02
   recapture("G", "Recapture of investment credit", "investment_credit"),
   // box-17-other-information::b03

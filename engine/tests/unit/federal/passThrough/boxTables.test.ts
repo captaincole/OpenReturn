@@ -117,12 +117,26 @@ describe("the box tables", () => {
   it("knows a box number only through the tables: the same box means different items", () => {
     expect(rowFor(BOX_TABLES["1120-S"], "1", undefined).type).toBe("ordinary_business_income");
     expect(rowFor(BOX_TABLES["1041"], "1", undefined).type).toBe("interest");
-    expect(rowFor(BOX_TABLES["1120-S"], "13", "A").type).toBe("credit");
+    expect(rowFor(BOX_TABLES["1120-S"], "13", "A").type).toBe("business_credit");
     expect(rowFor(BOX_TABLES["1065"], "13", "A").type).toBe("charitable_contribution");
   });
 
+  it("routes every partnership and S corporation general business credit to Form 3800, and no other credit", () => {
+    const credits = cases.filter(({ row }) => row.type === "business_credit");
+    expect(credits.map(({ form }) => form).filter((form) => form === "1120-S")).toHaveLength(45);
+    expect(credits.map(({ form }) => form).filter((form) => form === "1065")).toHaveLength(45);
+    for (const { form, row } of credits) expect(routeOf(form, row.type)).toBe("form_3800");
+    const other = cases.filter(({ row }) => row.type === "credit");
+    expect(other.every(({ form, row }) => routeOf(form, row.type) === undefined)).toBe(true);
+    expect(rowFor(BOX_TABLES["1065"], "15", "H").type).toBe("credit");
+    expect(rowFor(BOX_TABLES["1065"], "15", "AP").type).toBe("credit");
+    expect(rowFor(BOX_TABLES["1120-S"], "13", "ZZ").type).toBe("credit");
+  });
+
   it("routes an S corporation's, a partnership's and a trust's income, portfolio and basis items", () => {
-    const routedRows = cases.filter(({ form, row }) => routeOf(form, row.type) !== undefined);
+    const routedRows = cases.filter(
+      ({ form, row }) => routeOf(form, row.type) !== undefined && row.type !== "business_credit",
+    );
     expect(routedRows.map(({ name }) => name)).toEqual([
       "1120-S box 1 (ordinary_business_income)",
       "1120-S box 4 (interest)",
@@ -142,6 +156,8 @@ describe("the box tables", () => {
       "1120-S box 16 code C (nondeductible_expenses)",
       "1120-S box 16 code D (distribution)",
       "1120-S box 16 code F (foreign_tax_paid)",
+      "1120-S box 17 code E (low_income_housing_recapture_42j5)",
+      "1120-S box 17 code F (low_income_housing_recapture)",
       "1120-S box 17 code V (section_199a_information)",
       "1120-S box 17 code AC (gross_receipts_448c)",
       "1065 box 1 (ordinary_business_income)",
@@ -173,6 +189,8 @@ describe("the box tables", () => {
       "1065 box 19 code D (distribution)",
       "1065 box 19 code F (distribution)",
       "1065 box 19 code G (distribution)",
+      "1065 box 20 code F (low_income_housing_recapture_42j5)",
+      "1065 box 20 code G (low_income_housing_recapture)",
       "1065 box 20 code Z (section_199a_information)",
       "1065 box 20 code AG (gross_receipts_448c)",
       "1065 box 21 (foreign_tax_paid)",

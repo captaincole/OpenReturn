@@ -10,6 +10,8 @@ import type { Form1116FilingInfo } from "../1116/filingInfo.js";
 import { isGap } from "../1116/lines.js";
 import { dependentCareCreditGap } from "../2441/creditGap.js";
 import type { Form2441FilingInfo } from "../2441/filingInfo.js";
+import { generalBusinessCreditGap } from "../3800/receivers.js";
+import type { Form3800Info } from "../3800/tax.js";
 import { mortgageCreditGap, type CreditLimitInfo } from "../8396/creditGap.js";
 import { line6cFrom8839 } from "../8839/receivers.js";
 import { nonrefundableCreditGap } from "../8863/credit.js";
@@ -28,6 +30,7 @@ type Value = number | Unsupported | undefined;
 
 /* Every slot the credit lines read: this form's, and the gaps of the credits line 22 subtracts. */
 export type Form8801CreditInfo = Form8801FilingInfo &
+  Form3800Info &
   CreditLimitInfo &
   Form8880FilingInfo &
   Form8863FilingInfo &
@@ -69,7 +72,6 @@ const SCHEDULE_3_CREDITS = [
  */
 const UNCOMPUTED_CREDITS: ReadonlyArray<[formId: string, line: string]> = [
   ["form-5695", "Schedule 3 line 5a (Form 5695 Part I, the residential clean energy credit)"],
-  ["form-3800", "Schedule 3 line 6a (Form 3800)"],
   ["form-8859", "Schedule 3 line 6h (Form 8859)"],
   ["form-8834", "Schedule 3 line 6i (Form 8834)"],
 ];
@@ -94,6 +96,7 @@ function otherCreditsGap(form: Accessor, info: Form8801CreditInfo): string | und
     cleanVehicleCreditGap(form, info),
     mortgageCreditGap(form, info),
     refuelingCreditGap(form, info),
+    generalBusinessCreditGap(form, info),
     line6lGap(info),
   ];
   const gap = gaps.find((reason) => reason !== undefined);
