@@ -7,6 +7,14 @@
  * ca-540-sched-p-inst-2025::sec::column-a-through-column-d-instructions::b01,
  * ::section-a1-instructions::b01). Section A1 has no column (d). With no FTB
  * 3507 the row keeps its reason; with line 5 at 0 it is blank.
+ *
+ * With line 3 at 0 the row is blank too. "If the amount is zero or less than
+ * zero, go to question 1": code 162 offsets tax only in Section A1, so "You may
+ * not take the credit this year"; and with nothing lost to the $5,000,000
+ * limit it has no carryover provision, so "You may not take the credit this
+ * year or in future years" (ca-540-sched-p-inst-2025::sec::section-a-instructions::b01).
+ * Columns (a) to (d) are completed only "for each line on which you are
+ * taking a credit" (ca-540-sched-p-inst-2025::sec::to-complete-part-iii::b01).
  */
 
 import type { BindingFn, FormAccessor } from "../../../defineForm.js";
@@ -35,7 +43,7 @@ function row(form: Form): ScheduleARow | undefined {
   const available = numberOrBlank(form[PRISON_LABOR_CREDIT_AVAILABLE]);
   if (available === undefined || available <= 0) return undefined;
   const excess = numberOrBlank(form["1.part3.3_excess_tax_offset_by_credits_col_c"]);
-  return excess === undefined ? undefined : scheduleARow(available, excess);
+  return excess === undefined || excess <= 0 ? undefined : scheduleARow(available, excess);
 }
 
 /*

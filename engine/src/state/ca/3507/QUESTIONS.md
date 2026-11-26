@@ -13,6 +13,7 @@ the form and its instructions (`ca-3507-form-2025`) and Schedule P (540)
 - Done: Text B. The form's arithmetic wins over a sentence that breaks it. The `DECISION` comment is above line 7 in `bindings.ts`; the row is in `docs/rule-decisions.md`.
 - Dollars: no change to this year's tax. Line 7 prints the rest of the credit. In `katerine` it prints $2,733; Text A would print $0.
 - The law library was not installed, so the statute was not read.
+- One more text on the side of Text A: when Schedule P (540) line 3 is 0, question 2 asks "Does the credit have carryover provisions? ... No You may not take the credit this year or in future years" (`ca-540-sched-p-inst-2025::sec::section-a-instructions::b01`). The engine still prints line 7 (the blind fill's case 6: $5,000), by the same decision.
 
 ## Defaults with no conflicting text
 
@@ -62,14 +63,37 @@ the form and its instructions (`ca-3507-form-2025`) and Schedule P (540)
 - Default: code 162 comes first, in Schedule P (540) Part III order. The name is the Credit Table's, "Prison Inmate Labor".
 - Dollars: none.
 
+### 10. Line 2 is figured from the rounded line 1
+
+- Source: line 1 takes whole dollars, and line 2 says "Multiply line 1 by 10% (.10)" (the form).
+- Default: line 2 is 10% of the rounded line 1, then rounded. The blind fill did the same.
+- Dollars: at most $1 (wages of $12,344.50 give $1,235; 10% of the unrounded wages gives $1,234).
+
+### 11. Schedule P (540) line 4 is blank when line 3 is 0
+
+- Source: "If the amount is zero or less than zero, go to question 1 ... Yes You may not take the credit this year. Go to question 2 ... No You may not take the credit this year or in future years" (`ca-540-sched-p-inst-2025::sec::section-a-instructions::b01`), and columns (a) to (d) are completed "for each line on which you are taking a credit" (`ca-540-sched-p-inst-2025::sec::to-complete-part-iii::b01`).
+- Done: the row is blank and FTB 3507 line 6a is 0 (`schedule-p/prisonLaborRow.ts`, `creditUsed.ts`). The blind fill found it (case 6); the first rules printed column (a).
+- Dollars: Schedule P line 4 column (a) blank, not $5,000. No tax changes.
+- Follow-up, not this form: Schedule P (540) line 5 (FTB 3506, also Section A1 only) still prints column (a), with column (b) at 0, when line 3 is 0 (`schedule-p/partIII.ts`). The same text says that row is blank too. Changing it is a change to another form's values, so it is left for its own pull request.
+
+## Second opinions
+
+- PolicyEngine-US 2.154.1 (commit `0fbed6ddb1`, read 2026-11-26): the California variables and parameters (`policyengine_us/variables/gov/states/ca`, `parameters/gov/states/ca`) have no prison inmate labor credit, no FTB 3507, and no $5,000,000 business credit limit. Nothing to compare.
+- IRS Direct File has no California return, so it has no comparison for this form. The repo names no other reference implementation of a California credit.
+
+## Blind fill (2026-11-26)
+
+- 13 cases. 38 values differ only as blank against 0 (lines 1 to 4 with nothing stated, line 6c with no election). One value differed in dollars: Schedule P line 4 column (a) in case 6, fixed (item 11).
+- The blind doubts that change dollars are items 1 (line 7), 6 (line 3 rounding), 10 (line 2 rounding) and 11 (Schedule P line 4).
+
 ## Unsupported
 
-| Case | Why |
-| --- | --- |
-| Line 6a, 6c and 7 for wages or a K-1 credit through a disregarded single member LLC | "the usable credit amount ... is limited to the difference between the taxpayer's regular tax figured with the income of the disregarded entity, and the taxpayer's regular tax figured without" (`::c-limitations::b01`). The engine does not figure the tax twice. |
-| Line 6a on Form 540NR | Form 540NR and Schedule P (540NR) have no credit rules yet. |
-| Line 6a with no Form 540 (a Form 541, 100S, 565 or 568 return) | Those returns are not in the engine. |
-| Line 6a when a decision says Schedule P (540) does not file | Only Schedule P (540) figures the tentative minimum tax that limits the credit (`::c-limitations::b02`). A Section A1 credit attaches the schedule (`ca-540-sched-p-inst-2025::sec::b-who-must-file::b01`), so the engine files it on its own; only an explicit "no" leads here. FTB 3801-CR and FTB 3804-CR, which read `540/creditBalance.ts` without Schedule P, then do not see this credit; Form 540 lines 43 to 48 carry the gap. |
+| Case                                                                                | Why                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Line 6a, 6c and 7 for wages or a K-1 credit through a disregarded single member LLC | "the usable credit amount ... is limited to the difference between the taxpayer's regular tax figured with the income of the disregarded entity, and the taxpayer's regular tax figured without" (`::c-limitations::b01`). The engine does not figure the tax twice.                                                                                                                                                                    |
+| Line 6a on Form 540NR                                                               | Form 540NR and Schedule P (540NR) have no credit rules yet.                                                                                                                                                                                                                                                                                                                                                                             |
+| Line 6a with no Form 540 (a Form 541, 100S, 565 or 568 return)                      | Those returns are not in the engine.                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Line 6a when a decision says Schedule P (540) does not file                         | Only Schedule P (540) figures the tentative minimum tax that limits the credit (`::c-limitations::b02`). A Section A1 credit attaches the schedule (`ca-540-sched-p-inst-2025::sec::b-who-must-file::b01`), so the engine files it on its own; only an explicit "no" leads here. FTB 3801-CR and FTB 3804-CR, which read `540/creditBalance.ts` without Schedule P, then do not see this credit; Form 540 lines 43 to 48 carry the gap. |
 
 ## Proposals for a discussion
 
@@ -77,12 +101,12 @@ the form and its instructions (`ca-3507-form-2025`) and Schedule P (540)
 
 ## Confidence
 
-| Field group | Confidence |
-| --- | --- |
-| Header | stated rule |
-| Lines 1 to 5 | stated rule |
+| Field group                      | Confidence                                                                                |
+| -------------------------------- | ----------------------------------------------------------------------------------------- |
+| Header                           | stated rule                                                                               |
+| Lines 1 to 5                     | stated rule                                                                               |
 | Line 6a, Schedule P (540) line 4 | stated rule (the TMT floor and the column rules); the $5,000,000 limit is own reading (2) |
-| Line 6b | stated rule |
-| Line 6c | stated rule, own reading of the one answer (4) |
-| Line 7 | decided by the author (1) |
-| SMLLC, Form 540NR, other returns | unsupported |
+| Line 6b                          | stated rule                                                                               |
+| Line 6c                          | stated rule, own reading of the one answer (4)                                            |
+| Line 7                           | decided by the author (1)                                                                 |
+| SMLLC, Form 540NR, other returns | unsupported                                                                               |

@@ -57,7 +57,9 @@ export function prisonLaborCreditGap(info: Info): Unsupported | undefined {
  * Line 6a: Schedule P (540) line 4 column (b) (ca-540-sched-p-inst-2025::sec::how-to-claim-your-credits::b01;
  * "This amount may be less than the amount on line 5 if your credit is limited
  * by your tax liability", ca-3507-form-2025::sec::line-6a::b01). Line 5 at 0
- * takes nothing.
+ * takes nothing. With Schedule P (540) line 3 at 0 the row is blank ("You may
+ * not take the credit this year", ca-540-sched-p-inst-2025::sec::section-a-instructions::b01;
+ * schedule-p/prisonLaborRow.ts), and line 6a is 0.
  */
 export function prisonLaborCreditClaimed(
   read: ReadField,
@@ -67,7 +69,10 @@ export function prisonLaborCreditClaimed(
   if (available <= 0) return 0;
   const gap = prisonLaborCreditGap(info);
   if (gap !== undefined) return gap;
-  return numberOrBlank(read(SCHEDULE_P_PRISON_LABOR_CREDIT_USED));
+  const used = numberOrBlank(read(SCHEDULE_P_PRISON_LABOR_CREDIT_USED));
+  if (used !== undefined) return used;
+  const excess = numberOrBlank(read(SCHEDULE_P_EXCESS_TAX));
+  return excess !== undefined && excess <= 0 ? 0 : undefined;
 }
 
 /*
