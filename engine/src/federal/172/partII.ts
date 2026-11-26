@@ -154,6 +154,18 @@ export function itemizedAdjustment(
  * Line 2 is taxable income after the deduction, so only adding back the
  * deduction itself undoes it; the fact holds that amount (Text B).
  *
+ * DECISION (2026-11-26, by the author): line 10 takes no 80%-of-taxable-income
+ * limit for a farming loss carried back to 2023 or 2024.
+ * Text A: "The 80% limitation rule does not apply to a carryback period
+ * before 2021" (irs-172-inst-2025::sec::when-to-use-an-nol::b01), which
+ * implies that it applies to a later carryback year.
+ * Text B, the line 10 caution: "NOLs arising after 2017 and carried forward
+ * to a year after 2020 are subject to the 80%-of-taxable-income limit"
+ * (::line-10-nol-carryover-to-the-subsequent-year::b01, the same words in
+ * ::how-to-carry-an-nol-back-or-forward::b02), and line 10 is "subtract line
+ * 9 from line 1". Part II has no line for the limit, and the form's
+ * arithmetic wins over a sentence that breaks it (Text B).
+ *
  * One column (::part-ii-nol-carryover::b01 and the line instructions). Line 6:
  * "If you entered an amount on line 3 or line 4, you must refigure" the items
  * figured from AGI; else blank. Line 7: "Skip this line if ... You didn't

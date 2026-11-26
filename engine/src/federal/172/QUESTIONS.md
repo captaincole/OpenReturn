@@ -11,6 +11,14 @@ of Part II against its farming loss table (`tests/unit/federal/172/`).
    loss"; the caption and the modified taxable income rule name the capital
    loss deduction. Decided: the deduction (row A44 in
    `docs/rule-decisions.md`, `DECISION` in `partII.ts`).
+2. **The 80% limit in a carryback year.** "The 80% limitation rule does not
+   apply to a carryback period before 2021" (`when-to-use-an-nol::b01`)
+   implies a limit on a farming loss carried back to 2023 or 2024; the line 10
+   caution names only NOLs "carried forward to a year after 2020", and Part II
+   has no line for a limit. Decided: no limit, line 10 is line 1 less line 9
+   (row A45, `DECISION` in `partII.ts`). Raised by the blind fill. Changes
+   dollars: a $25,000 farming loss against $9,000 of 2023 modified taxable
+   income leaves $16,000; with the limit it would leave $17,800.
 
 ## Doubts with no conflicting text
 
@@ -104,6 +112,29 @@ Each is done with the default below.
   loss from 2018 on when an item depends on AGI. After: the engine would
   evaluate the return a second time without line 8a and read taxable income
   from that pass. This changes how forms are evaluated.
+
+## Blind fill
+
+A blind preparer filled 14 cases from the blank form and the instructions
+only. Part I and Part II match the engine in every dollar of line 24 and of
+Part II lines 1, 7, 9 and 10. The one difference is case 7, where line 1 is
+$54,250: the blind fill went on to lines 2 to 23, and the engine stops after
+line 1. The engine follows Step 1 and Step 2 of `nol-steps::b01` ("You may
+have an NOL if a negative amount appears", "If you do not have an NOL, stop
+here"). Every add-back on line 24 is 0 or more, so with line 1 at 0 or more
+there is no NOL (doubts 2 and 10). Line 24 is blank in both.
+
+## Second opinions
+
+- **PolicyEngine-US 2.154.0** (commit `363e9fc5`, 2026-11-25). It does not
+  model Form 172: it has no NOL, no NOL deduction (Schedule 1 line 8a) and no
+  carryback. Its section 461(l) variables (`excess_business_loss`,
+  `limited_business_loss`) stop at Form 461. The one shared constant matches:
+  the capital loss limit of $3,000, $1,500 for married filing separately
+  (`parameters/gov/irs/ald/loss/capital/max.yaml`; Form 172 lines 19 and
+  Schedule D line 21). No lead.
+- **IRS Direct File.** Not compared: no checkout here, and Direct File's scope
+  has no business or farm income, so it has no NOL.
 
 ## Confidence by field group
 
