@@ -15,6 +15,7 @@ import {
   sectionC,
   type TaxInputs,
 } from "../../../../src/federal/3800/lines.js";
+import { separateReturnGap } from "../../../../src/federal/3800/tax.js";
 import { unsupported } from "../../../../src/types.js";
 
 const tax = (line7: number, line14: Cell, extra: Partial<TaxInputs> = {}): TaxInputs => ({
@@ -174,5 +175,17 @@ describe("Part II Section C", () => {
     });
     expect(isGap(partC.line36)).toBe(true);
     expect(isGap(partC.line38)).toBe(true);
+  });
+});
+
+describe("Form 3800 line 13 on a separate return", () => {
+  it("is a gap for married filing separately (irs-3800-inst-2025::sec::line-13::b01)", () => {
+    expect(separateReturnGap("married_filing_separately")).toMatchObject({ unsupported: true });
+  });
+
+  it("is figured for every other filing status", () => {
+    expect(separateReturnGap("single")).toBeUndefined();
+    expect(separateReturnGap("married_filing_jointly")).toBeUndefined();
+    expect(separateReturnGap(undefined)).toBeUndefined();
   });
 });

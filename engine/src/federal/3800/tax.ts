@@ -150,11 +150,25 @@ export function line14Of(form: Accessor, info: Form3800Info): Cell | "waiting" {
   return files(info, "form-1116") ? unsupported(AMT_COPY_GAP) : line7;
 }
 
+const SEPARATE_RETURN_GAP =
+  "Line 13 has a special rule for a married person who files a separate return (section 38(c)(6)), and the instructions do not give its amount, so the engine does not figure the limit in Part II for this filing status.";
+
+/*
+ * Line 13 on a separate return: "See section 38(c)(6) for special rules that
+ * apply to married couples filing separate returns"
+ * (irs-3800-inst-2025::sec::line-13::b01). The library does not hold the
+ * section, so the $25,000 on the form's face would be a guess here.
+ */
+export const separateReturnGap = (status: Form3800Info["filingStatus"]): Unsupported | undefined =>
+  status === "married_filing_separately" ? unsupported(SEPARATE_RETURN_GAP) : undefined;
+
 /* Lines 7, 8, 10a, 10b and 14, or undefined while one waits on the return. */
 export function taxInputsOf(
   form: Accessor,
   info: Form3800Info,
 ): TaxInputs | Unsupported | undefined {
+  const separate = separateReturnGap(info.filingStatus);
+  if (separate) return separate;
   const line7 = line7Of(form, info);
   if (typeof line7 !== "number") return line7;
   const line8 = line8Of(form, info);
