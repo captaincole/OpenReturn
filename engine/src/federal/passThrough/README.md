@@ -72,6 +72,7 @@ layers, and each layer reads only the one before it.
 | 1065 | box 18 code A; codes B, C; box 19 | `form_1040_line_2a`; `partner_basis` | Form 1040 line 2a; the Partner's Basis Worksheet only (box 19 codes other than A are unsupported there) |
 | 1065 | box 20 code Z statement | `qbi` | one more business on Form 8995 or 8995-A, its QBI scaled to the allowed loss |
 | 1065 | box 21 foreign taxes | `schedule_3_line_1` | unsupported there: the credit comes from Schedule K-3 |
+| 1065, 1120-S | box 15 (box 13) general business credits (`business_credit`) | `form_3800` | Form 3800 Part III, the line by the item's detail (`3800/k1Credits.ts`); a credit that needs Form 3468, Form 8864 or the entity's statement is unsupported on its line, and a passive one needs Form 8582-CR. Codes H, AP to AU and ZZ stay `credit`, with no route |
 | 1041 | box 1 interest | `interest_list` | a Schedule B line 1 payer row (the trust's name); Form 1040 line 2b |
 | 1041 | box 2a ordinary dividends | `dividend_list` | a Schedule B line 5 payer row; Form 1040 line 3b |
 | 1041 | box 2b qualified dividends | `qualified_dividends` | Form 1040 line 3a, so the qualified dividends worksheet |
@@ -211,7 +212,7 @@ routed nor reported (`tests/unit/federal/passThrough/boxTables.test.ts`).
   K-1 rental real estate with active participation (Part IV) waits for it too.
 - **The other partnership items**: box 14 (Schedule SE takes Schedule C
   only), box 7 royalties (Schedule E Part I), boxes 10 to 12 (Form 4797 and
-  Form 4562), box 15 credits, box 17 (Form 6251), box 20 codes A and B (Form
+  Form 4562), box 15 codes H, AP to AU and ZZ, box 17 (Form 6251), box 20 codes A and B (Form
   4952), a publicly traded partnership, and a partial sale.
 
 ## What the at-risk step handles

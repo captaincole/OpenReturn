@@ -80,6 +80,8 @@ export const ITEM_TYPES = {
   self_employment_earnings: kind("net earnings (loss) from self-employment", "information"),
   gross_farming_fishing_income: kind("gross farming or fishing income", "information"),
   gross_nonfarm_income: kind("gross nonfarm income", "information"),
+  // A general business credit for Form 3800 Part III; the detail names the credit.
+  business_credit: kind("general business credit", "credit"),
   credit: kind("credit", "credit"),
   credit_recapture: kind("credit recapture", "credit"),
   backup_withholding: kind("backup withholding", "payment"),
