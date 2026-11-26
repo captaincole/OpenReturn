@@ -156,6 +156,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "fell is Cade's question. A K-1 with a recapture asks for its building fact",
   ],
   [
+    /^look_back\.long_term_contracts$/,
+    "the fact is the whole look-back computation (Form 8697); whether a long-term contract was " +
+      "completed or adjusted in 2025 is Cade's question",
+  ],
+  [
     /^trust_accumulation_distribution\.[^.]+$/,
     "each fact is a whole trust's Schedule J (Form 1041) Part IV (Form 4970, one copy per " +
       "trust); whether the taxpayer received an accumulation distribution is Cade's question",
