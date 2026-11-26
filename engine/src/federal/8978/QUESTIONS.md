@@ -17,6 +17,11 @@ Sources: `irs-8978-inst-2025` (Rev. December 2024) and Form 8986 (Rev. December 
 11. **The extended due date.** Interest on a penalty runs from the due date "including any valid extensions" (`line-17::b01`). Default: October 15 of the next year; the weekend rule is not applied, as for Form 8621 (`federal/8621/interest.ts`). Changes dollars by a day or two of interest.
 12. **A statement furnished in another year.** It belongs to that year's return (the reporting year rule, `purpose-of-this-form::b07`). Default: it does not file Form 8978 for 2025 and adds nothing.
 13. **Schedule 3 files only with a negative total.** With a Form 8978 gap the resolver cannot see the total, so Schedule 3 does not file for line 6l (KNOWN GAP); Form 1040 line 16 shows the gap.
+14. **The days that bear interest.** The Form 8978 instructions give no day count. Default: interest accrues from the day after the due date through the end date, each day at its own quarter's rate (`federal/8621/interest.ts`). The Form 2210 penalty worksheet counts days the same way: "Rate Period 1: April 16, 2025–June 30, 2025" (`irs-2210-inst-2025::sec::tax-year-2025::b03`), and its Table 4-1 counts April 15 as day 0 (`::b01`). Changes dollars: the blind fill counted the due date and not the end date, so April 15, 2021 (5% with the audit's 2 points) replaced April 15, 2026 (8%). Line 17 of the blind audit case moved by $1 ($1,211 against $1,212).
+15. **The original due date in a year with a holiday or a postponement.** "From the original due date of your income tax return" (`line-17::b01`); Example 2 counts "from April 15, 2022 (the due date of his 2021 return)" (`example-2-completing-form-8978-and-schedule-a-for::b04`), though that year's date moved to April 18. Default: April 15 of the next year for every year, with no holiday shift and no disaster postponement (the 2019 and 2020 returns). Changes dollars: about $16 in a blind case on a 2020 increase of $2,400 if the May 17, 2021 postponement applied.
+16. **Interest on a penalty goes on line 17.** "Interest on penalties is figured in the same manner as interest on tax" (`line-17::b01`), and the form has one interest line. Default: line 17 holds the interest on the line 13 increase plus the interest on line 15, at the same rate. Changes dollars if the penalty's interest is reported elsewhere ($384 in a blind case on a $1,000 penalty from October 15, 2022).
+17. **Line 18 adds the rounded columns.** "Add line 17, columns (a) through (d)" (the form face). Default: each column rounds once, and line 18 adds the rounded columns. Changes dollars by $1 at most for each form (a blind case: $206 against an unrounded total of $205.48).
+18. **Line 12 is the tax after credits.** "Line 12. Total tax shown on return or as previously adjusted. Enter the amount shown on your original or amended return, or as adjusted by the IRS" (`line-12-total-tax-shown-on-return-or-as-previously::b01`). Default: the partner states the income tax after credits (Form 1040 line 22), because line 13 compares line 12 with line 11, a tax after credits. Changes dollars by the credits when a partner states the tax before credits.
 
 ## Proposals for a discussion
 
@@ -25,6 +30,12 @@ Sources: `irs-8978-inst-2025` (Rev. December 2024) and Form 8986 (Rev. December 
 - **Figure the section 6662 penalty.** Example 2 tests the substantial understatement threshold by hand. Proposal: a rule for the threshold and the 20% rate, with the line 13 increase as the understatement.
 - **A payment date for interest.** Proposal: an answer for the day the tax is paid, and rate quarters past April 2026.
 - **Form 1041 statements.** A trust or estate pass-through partner's statement uses Form 1041 K-1 lines; the engine has no box table for it, so such a statement is a gap.
+
+## Second opinions
+
+- **Blind fill (2026-11-25).** Fifteen cases filled by hand from the blank form and the instructions. Every line matched but one: line 18 of the audit form in the two-statement case ($1,212 against $1,211), from the day count (doubt 14). The engine stays: the Form 2210 worksheet counts the days the engine's way.
+- **PolicyEngine-US 2.154.0** (commit 363e9fc5, 2026-11-25). It does not model Form 8978: its credit-limit parameters say "6l (Form 8978, not modeled)", and it has no underpayment rate or interest rule. Nothing to compare.
+- **IRS Direct File.** Not compared: its scope has no partnership K-1 income, so it has no Form 8978. The repository names no other reference implementation.
 
 ## Unsupported cases (the whole form is a gap)
 
