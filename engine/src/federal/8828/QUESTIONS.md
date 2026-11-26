@@ -22,7 +22,10 @@ has a worked example with numbers. The only numeric examples are in two issuers'
 2. **The table's line at an exact anniversary.** "the line that corresponds to the number of
    full and partial years that you held your home" (`line-16::b01`, `b02`). A sale on the 5th
    anniversary is 5 years; one day later is 6. Changes dollars at the anniversary only (line 16
-   and line 20 move one row).
+   and line 20 move one row). On the 9th anniversary it also decides whether the form files:
+   the engine reads exactly 9 years as row 9 (inside "the first 9 years", `recapture-tax::b01`),
+   so the form files. The blind fill made the same choice (blind case 11: a tax of $2,950, not
+   $0).
 3. **Worksheet line C for a repayment on the closing day.** "Enter the number of years between
    the dates on lines A and B. Round up to the nearest whole year"
    (`holding-period-percentage-worksheet::b01`). Zero years has no row on line D; the engine
@@ -65,6 +68,23 @@ has a worked example with numbers. The only numeric examples are in two issuers'
 14. **Issuer notices that round line 18 another way.** The NJ notice: "1 percent for each $50".
     The form: "Round to the nearest whole percentage". The form's own instructions decide. At most
     1% of line 21.
+15. **Line 18 at exactly half a percent.** "Round to the nearest whole percentage"
+    (`irs-8828-face-2025::sec::face-part-ii::b01`); the instructions have no line 18 text and
+    do not say which way a half goes. The engine rounds a half up (`roundToPlaces`), the same
+    way the IRS rounds 50 cents to the next dollar. Blind case 15: line 17 of $25 is 0.5%, so
+    line 18 is 1% and the tax is $118, not $0. The blind fill made the same choice.
+
+## Second opinions
+
+- **Blind fill (2026-11-25).** A preparer filled 15 cases by hand from the blank form and the
+  instructions only. Every line matched the engine (`lines.ts`), blanks included: no dollar
+  difference and no blank-against-0 difference. The blind doubts that change dollars are
+  doubts 2, 4, 5 and 15 above, and the decided 9-year rule.
+- **PolicyEngine-US 2.154.0 (commit 363e9fc5e4).** It does not model Form 8828: no variable or
+  parameter for the mortgage subsidy recapture, the mortgage credit certificate or Form 8396
+  under `gov/irs`. Nothing to compare.
+- **Other implementations.** The repository names no other reference implementation for this
+  form, so none was compared.
 
 ## Proposals for a discussion
 
