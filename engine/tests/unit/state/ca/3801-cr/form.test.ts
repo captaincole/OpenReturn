@@ -9,10 +9,13 @@ import { describe, expect, it } from "vitest";
 import {
   CA_PTE_CREDIT_CARRYOVER_KEY,
   isCaPassiveCreditFactKey,
+  isW2FactKey,
   makeCaPassiveCreditFactKey,
   makeCaPteElectiveCreditFactKey,
+  makeOtherStateTaxFactKey,
   SPOUSE_KEYS,
   type CaPassiveCreditFactValue,
+  type W2FactValue,
 } from "../../../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../../../src/facts/rows.js";
 import { evaluateScenario } from "../../../../../src/index.js";
@@ -166,19 +169,68 @@ describe("FTB 3801-CR on the kiruna return (net passive income, Schedule P)", ()
   });
 
   it("a credit is never used past the tax: column (b) stops at the balance, column (d) carries the rest", () => {
-    const big = creditFact(kiruna, "big", {
-      creditCode: "183",
-      column: "current",
-      amount: 40000,
-      activity: { name: "Big Rental LLC", rentalRealEstate: true, activelyParticipated: true },
-    });
-    const run = evaluate(kiruna, [...kiruna.facts, big]);
-    const row = (column: string) => run.value("schedule-p", `3.part3.16_${column}`);
-    const available = row("credit_amount_col_a") as number;
-    const used = row("credit_used_col_b") as number;
-    expect(used).toBeLessThanOrEqual(8775);
-    expect(row("credit_carryover_col_d")).toBe(available - used);
-    expect(run.form540("48_tax_after_credits")).toBeGreaterThanOrEqual(0);
+    // Wages of $28,706: taxable income $45,000, Form 540 line 31 $1,235, line 35 $1,082.
+    const smallWages = kiruna.facts.map((fact) =>
+      isW2FactKey(fact.key)
+        ? {
+            ...fact,
+            value: {
+              ...(fact.value as W2FactValue),
+              ...{ box1: 28706, box3: 28706, box5: 28706, box16: 28706 },
+            },
+          }
+        : fact,
+    );
+    const run = evaluate(kiruna, smallWages);
+    // Line 17 is 1,832 (line 6 886 + line 16 946), shared 1,235 / 76 / 521.
+    expect(run.line("1.line.17_passive_activity_credits_allowed")).toBe(1832);
+    const row = (line: number) =>
+      [
+        "credit_amount_col_a",
+        "credit_used_col_b",
+        "tax_balance_col_c",
+        "credit_carryover_col_d",
+      ].map((column) => run.value("schedule-p", `3.part3.${line}_${column}`));
+    expect(run.value("schedule-p", "2.part3.11_tax_balance_col_c")).toBe(1082);
+    expect(row(16)).toEqual([1235, 1082, 0, 153]);
+    expect(row(17)).toEqual([76, 0, 0, 76]);
+    expect(row(18)).toEqual([521, 0, 0, 521]);
+    expect(run.form540("47_total_credits")).toBe(1082);
+    expect(run.form540("48_tax_after_credits")).toBe(0);
+  });
+});
+
+describe("the credits after Section B2 on the kiruna return", () => {
+  const massachusetts: TaxFactRow = {
+    ...creditFact(kiruna, "ma", {}),
+    category: "state_local_tax",
+    key: makeOtherStateTaxFactKey("ma"),
+    value: {
+      state: "MA",
+      items: [{ description: "Wages", californiaAmount: 20000, otherStateAmount: 20000 }],
+      taxPaid: 1000,
+      otherStateAdjustedGrossIncome: 20000,
+    },
+  };
+
+  it("Schedule S line 2 is Form 540 line 48 without the other state tax credit: line 35 less the passive credits", () => {
+    const run = evaluate(kiruna, [...kiruna.facts, massachusetts]);
+    expect(run.value("schedule-s", "0.line.2_california_tax_liability")).toBe(8775 - 2511);
+    // 6,264 × 0.1429 = 895, less than the $1,000 paid.
+    expect(run.value("schedule-s", "0.line.12_other_state_tax_credit")).toBe(895);
+    expect(run.value("schedule-p", "3.part3.20_other_state_tax_credit_used_col_b")).toBe(895);
+    expect(run.form540("45_schedule_p_credits")).toBe(2511 + 895);
+    expect(run.form540("48_tax_after_credits")).toBe(8775 - 2511 - 895);
+  });
+
+  it("Schedule P (540) attaches with more than two credits, with no decision", () => {
+    expect(kiruna.decisions.some((each) => each.decisionKey.endsWith("schedule_p"))).toBe(false);
+    expect(evaluate(kiruna).files("schedule-p")).toBe(true);
+    // Leonin's two passive credits: lines 43 and 44, no Schedule P; a third credit attaches it.
+    expect(evaluate(leonin).files("schedule-p")).toBe(false);
+    const third = { ...massachusetts, userId: leonin.userId };
+    expect(evaluate(leonin, [...leonin.facts, third]).files("schedule-p")).toBe(true);
+    expect(evaluate(kiruna, withoutCredits(kiruna.facts)).files("schedule-p")).toBe(false);
   });
 });
 
@@ -298,7 +350,9 @@ describe("FTB 3801-CR gaps", () => {
 
 describe("no credit facts, nothing changes", () => {
   it("Form 540 lines 43 to 45 and Schedule P (540) lines 16 to 18 keep their reasons", () => {
-    const run = evaluate(kiruna, withoutCredits(kiruna.facts));
+    // Schedule P (540) by decision: without the credits, nothing else attaches it.
+    const decisions = withDecision(kiruna, "decisions.scope.must_file_schedule_p", true);
+    const run = evaluate(kiruna, withoutCredits(kiruna.facts), decisions);
     expect(isGap(run.field("form-540", "line.43_credit_amount"))).toBe(true);
     expect(isGap(run.field("form-540", "line.45_schedule_p_credits"))).toBe(true);
     expect(run.form540("48_tax_after_credits")).toBe(8775);

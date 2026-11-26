@@ -20,6 +20,25 @@ const worksheetOpen = (source: CaPassiveSource) =>
   worksheetOf(source.line, source.activity, false) === undefined;
 
 /*
+ * The California passive credits on the facts, one for each credit code with
+ * an amount above 0 (a code is one credit on Schedule P (540)), with the fact
+ * keys behind them. Schedule P (540) counts them to see whether it attaches.
+ */
+export function caPassiveCreditsClaimed(inputs: ResolverInputs): {
+  codes: string[];
+  factKeys: string[];
+} {
+  const claimed = getCaPassiveCreditFacts(inputs.facts).flatMap((fact) => {
+    const source = caPassiveSourceOf(fact);
+    return source !== undefined && hasCredit(source) ? [{ key: fact.key, code: source.code }] : [];
+  });
+  return {
+    codes: [...new Set(claimed.map((each) => each.code))],
+    factKeys: claimed.map((each) => each.key),
+  };
+}
+
+/*
  * Who files: "Form FTB 3801-CR is filed by individuals ... with any of the
  * following credits from passive activities" (ca-3801cr-inst-2025::sec::c-who-must-file::b01),
  * attached to Form 540 or Form 540NR (the form's heading). The form files on a
