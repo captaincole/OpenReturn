@@ -157,9 +157,11 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "form-3507.0.line.5_total_available_credit": 12000,
       // Line 6a. Credit claimed. Enter the amount of the credit claimed on the current year tax re
       "form-3507.0.line.6a_credit_claimed": 9267,
-      // Line 7. Carryover of the disallowed credit amount to future years. Add lines 6a, 6b, and 6
-      "form-3507.0.line.7_disallowed_credit_carryover": 2733,
-      // Verified zeros: she pays no wages (1, 2), no 2024 credit (4), not a corporation (6b), no election (6c).
+      /*
+       * Verified zeros: she pays no wages (1, 2), no 2024 credit (4), not a corporation (6b), no election (6c),
+       * and no carryover (7): the 2,733 the tax could not use is lost, and the $5,000,000 limit disallowed nothing (decision A68).
+       */
+      "form-3507.0.line.7_disallowed_credit_carryover": 0,
       "form-3507.0.line.1_total_qualifying_wages": 0,
       "form-3507.0.line.2_current_year_credit": 0,
       "form-3507.0.line.4_credit_carryover_prior_year": 0,

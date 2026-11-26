@@ -155,7 +155,7 @@ describe("FTB 3507 who files", () => {
 });
 
 describe("FTB 3507 line 6a and Schedule P (540) line 4", () => {
-  it("katerine: the credit stops at the excess tax and line 7 carries the rest", () => {
+  it("katerine: the credit stops at the excess tax and the rest is lost (line 7 is 0)", () => {
     const run = evaluate(base.facts);
     const excess = run.value("schedule-p", "1.part3.3_excess_tax_offset_by_credits_col_c");
     expect(excess).toBe(9267);
@@ -165,7 +165,8 @@ describe("FTB 3507 line 6a and Schedule P (540) line 4", () => {
     expect(run.line("6a_credit_claimed")).toBe(9267);
     expect(run.line("6b_total_credit_assigned")).toBe(0);
     expect(run.line("6c_credit_elected_refundable")).toBe(0);
-    expect(run.line("7_disallowed_credit_carryover")).toBe(2733);
+    // 12,000 − 9,267 = 2,733 is limited by the tax, not by the $5,000,000 limit: no carryover.
+    expect(run.line("7_disallowed_credit_carryover")).toBe(0);
   });
 
   it("javindhra: the whole credit is used, and Section B starts from TMT plus line 4 (c)", () => {
@@ -248,6 +249,24 @@ describe("FTB 3507 the $5,000,000 business credit limit", () => {
     const run = evaluate(facts([election(false)]));
     expect(run.line("6c_credit_elected_refundable")).toBe(0);
     expect(run.line("7_disallowed_credit_carryover")).toBe(1_000_000);
+  });
+
+  it("a credit above both the limit and the tax carries only the part the limit disallowed", () => {
+    const huge = passThrough("big", { ...K1_CREDIT, credit: 30_000_000 });
+    const run = evaluate(
+      withPrison({ facts: bigWages, rows: [huge], extra: [election(false)] }).filter(
+        (fact) =>
+          !fact.key.startsWith("ca_pte_elective_credit.") &&
+          !fact.key.startsWith("other_state_tax."),
+      ),
+    );
+    const excess = run.value("schedule-p", "1.part3.3_excess_tax_offset_by_credits_col_c");
+    expect(typeof excess).toBe("number");
+    expect(excess as number).toBeGreaterThan(5_000_000);
+    expect(excess as number).toBeLessThan(30_000_000);
+    expect(run.line("6a_credit_claimed")).toBe(5_000_000);
+    // The limit disallowed the excess tax less 5,000,000; the rest of 30,000,000 is lost.
+    expect(run.line("7_disallowed_credit_carryover")).toBe((excess as number) - 5_000_000);
   });
 
   it("does not ask for the election at or under the limit", () => {

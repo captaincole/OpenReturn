@@ -74,9 +74,13 @@ export const disallowedByLimit = (available: number, excessTax: number): number 
 export const line6c = (disallowed: number, electsRefundable: boolean): number =>
   electsRefundable ? disallowed : 0;
 
-/* Line 7: "Add lines 6a, 6b, and 6c, subtract the result from line 5" (the form). */
-export const line7 = (available: number, claimed: number, assigned: number, refundable: number) =>
-  available - claimed - assigned - refundable;
+/*
+ * Line 7: the part the $5,000,000 limit disallowed, less the part elected
+ * refundable on line 6c. The credit the tax could not use does not carry
+ * over (the DECISION above line 7 in bindings.ts), so it is not here.
+ */
+export const line7 = (disallowed: number, refundable: number): number =>
+  atLeast(0, disallowed - refundable);
 
 export interface ScheduleARow {
   /* Column (a): the credit available. */

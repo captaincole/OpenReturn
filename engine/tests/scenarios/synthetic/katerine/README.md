@@ -25,8 +25,9 @@ engine has no California K-1, so this scenario tests the credits alone.
 ## What it covers
 
 - The credit is more than the tax above tentative minimum tax. Schedule P
-  (540) line 4 column (b) stops at line 3, and FTB 3507 line 7 carries the
-  rest (decision A68 in `docs/rule-decisions.md`).
+  (540) line 4 column (b) stops at line 3. The rest is lost: FTB 3507 line 7
+  carries only the part the $5,000,000 limit disallowed, and here that is 0
+  (decision A68 in `docs/rule-decisions.md`).
 - Section B starts from TMT: line 11 is line 2 plus a column (c) of 0.
 - Schedule S line 2 leaves out code 162's credit along with the others.
 - Three other credits: Form 540 line 45 holds them; lines 43 and 44 stay blank.
@@ -40,7 +41,7 @@ engine has no California K-1, so this scenario tests the credits alone.
 | Sch P Part III line 3 | 9,267 | 23,775 − 14,508 |
 | 3507 lines 1 to 5 | 0; 0; 12,000; 0; 12,000 | no wages; K-1; no carryover |
 | Sch P line 4 (a), (b), (c) | 12,000; 9,267; 0 | line 5; smaller of 12,000 and 9,267; 9,267 − 9,267 |
-| 3507 lines 6a, 6b, 6c, 7 | 9,267; 0; 0; 2,733 | Sch P line 4 (b); not a corporation; no election; 12,000 − 9,267 |
+| 3507 lines 6a, 6b, 6c, 7 | 9,267; 0; 0; 0 | Sch P line 4 (b); not a corporation; no election; the limit disallowed nothing (9,267 is under 5,000,000), and the 12,000 − 9,267 = 2,733 the tax could not use does not carry |
 | Sch P line 11 | 14,508 | 14,508 + 0 |
 | Sch S lines 2, 5, 6 | 14,508; 0.1333; 1,934 | 23,775 − 9,267; 40,000 / 300,000; 14,508 × 0.1333 |
 | Sch S lines 11, 12 | 1,800; 1,800 | Utah tax × 1.0000; smaller of 1,934 and 1,800 |

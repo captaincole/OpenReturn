@@ -10,15 +10,16 @@ scenarios.
 
 Each is decided by the author, with a `DECISION` comment and a row in `docs/rule-decisions.md`.
 
-### 1. Line 7 keeps the credit the tax could not use (A68)
+### 1. Line 7 carries only the part the $5,000,000 limit disallowed (A68)
 
-- Text A: "Generally, there is no provision for carryover of any unused Prison Inmate Labor Credit ... However, for taxable years 2024 through 2026, taxpayers are allowed to carryover the amount of credit disallowed due to the $5,000,000 business credit limitation" (`ca-3507-form-2025::sec::credit-limitation::b02`). Schedule P (540): "only the disallowed portion of the credit may be carried over" (`ca-540-sched-p-inst-2025::sec::section-a1-instructions::b01`). The Schedule P (540) face heads the row "A1 Credits that reduce excess tax and have no carryover provisions", and its column (d) is shaded (`ca-540-sched-p-face-2025::sec::face-part-iii::b01`).
-- Text B: line 7, "Credit limited by your tax liability ... can, however, be carried over for future years. Include any such amounts here" (`ca-3507-form-2025::sec::line-7::b01`), and the form's arithmetic, line 5 less lines 6a to 6c.
-- Done: Text B. The form's arithmetic wins over a sentence that breaks it. The `DECISION` comment is above line 7 in `bindings.ts`; the row is in `docs/rule-decisions.md`.
-- Dollars: no change to this year's tax. Line 7 prints the rest of the credit. In `katerine` it prints $2,733; Text A would print $0.
-- The law library was not installed, so the statute was not read.
-- One more text on the side of Text A: when Schedule P (540) line 3 is 0, question 2 asks "Does the credit have carryover provisions? ... No You may not take the credit this year or in future years" (`ca-540-sched-p-inst-2025::sec::section-a-instructions::b01`). The engine still prints line 7 (the blind fill's case 6: $5,000), by the same decision.
-- For a person (tax review, 2026-11-26): the review found that three texts written for this credit, and the Schedule P face, allow only the part the $5,000,000 limit disallowed. The line 7 text reads like the shared wording of every 2024 credit form. If a taxpayer enters the printed line 7 as next year's line 4, the 2026 credit is too high by that amount ($2,733 in `katerine`). A change to Text A changes the `katerine` and `form.test.ts` values for line 7 only.
+- Text A, the texts written for this credit: "Generally, there is no provision for carryover of any unused Prison Inmate Labor Credit to succeeding taxable years, and in no event can taxpayers carry this back and apply it against a prior year's tax. However, for taxable years 2024 through 2026, taxpayers are allowed to carryover the amount of credit disallowed due to the $5,000,000 business credit limitation" (`ca-3507-form-2025::sec::credit-limitation::b02`). The Schedule P (540) face lists the credit under "A1 Credits that reduce excess tax and have no carryover provisions", and its column (d) is shaded (`ca-540-sched-p-face-2025::sec::face-part-iii::b01`). Schedule P (540): "only the disallowed portion of the credit may be carried over" (`ca-540-sched-p-inst-2025::sec::section-a1-instructions::b01`).
+- Text B: line 7, "Credit limited by your tax liability cannot be included in an election for refundable credit. ... They can, however, be carried over for future years. Include any such amounts here" (`ca-3507-form-2025::sec::line-7::b01`), and the form's arithmetic, line 5 less lines 6a to 6c.
+- The law: the lead read R&TC section 17053.6 from a public copy (california.public.law, 2026-11-26); the California code is not in the library. Subdivision (a) allows a credit of "10 percent of the amount of wages paid or incurred during the taxable year" for each prisoner employed in a joint venture program, against the net tax. Subdivision (b) is a yearly list of employers sent to the Franchise Tax Board. The section has no carryover provision.
+- Done (2026-11-26, reversed from Text B): Text A. The statute gives this credit no carryover, the form's own limitation text and Schedule P agree, and the line 7 instruction's general sentence would carry forward a credit the law lets expire. Line 7 is the part the limit disallowed (`disallowedByLimit` in `lines.ts`) less line 6c. The `DECISION` comment is above line 7 in `bindings.ts`; the row is in `docs/rule-decisions.md`.
+- The limit case: the engine has a rule for it. Code 162 is the first credit of Schedule P (540) Part III (item 3), so the part the limit disallowed is line 5, capped at Schedule P line 3, less $5,000,000. No case needs a gap for the limit. Example: a credit of $6,000,000 against $5,500,000 of excess tax uses $5,000,000, carries $500,000 (no FTB 3870 election), and loses the other $500,000.
+- Line 7 prints 0, not blank, when nothing carries, as lines 6b and 6c do (item 5): it is next year's line 4, and a 0 says that nothing carries.
+- Dollars: no change to this year's tax. In `katerine` line 7 is $0, not $2,733: the $2,733 the tax could not use is lost. With Schedule P line 3 at 0 (the blind fill's case 6) line 7 is $0, not $5,000, which agrees with "No You may not take the credit this year or in future years" (`ca-540-sched-p-inst-2025::sec::section-a-instructions::b01`).
+- For a person: a California preparer could still confirm two things. First, that FTB reads the line 7 sentence as the shared wording of the 2024 credit forms and does not allow a tax-limited carryover of this credit. Second, that a carryover from the $5,000,000 limit is "extended by the number of taxable years the credit was not allowed" (`::credit-limitation::b02`); the engine prints the amount and does not track its years.
 
 ## Should we do this now
 
@@ -43,7 +44,7 @@ Each is decided by the author, with a `DECISION` comment and a row in `docs/rule
 ### 5. Lines that print 0
 
 - Line 6b prints 0: "If you are not a corporation, enter -0-" (the form). The engine figures individual returns only.
-- Line 6c prints 0 with no election or nothing disallowed. Line 7 prints 0 when line 5 is used in full. Lines 1 to 4 print 0 when the stated amount is 0.
+- Line 6c prints 0 with no election or nothing disallowed. Line 7 prints 0 when the limit disallowed nothing, or line 6c took it all (item 1). Lines 1 to 4 print 0 when the stated amount is 0.
 - Done. Dollars: none.
 
 ### 6. Line 3 rounds once
@@ -55,7 +56,7 @@ Each is decided by the author, with a `DECISION` comment and a row in `docs/rule
 ### 7. Line 4 is the stated carryover
 
 - Source: "Enter the amount of credit carryover from 2024 on line 4" (`::line-4::b01`).
-- Done: the engine takes last year's line 7 as the taxpayer states it. It does not check that the amount came from the $5,000,000 limit (item 1).
+- Done: the engine takes last year's line 7 as the taxpayer states it. It does not check that the amount came from the $5,000,000 limit, the only carryover the decision in item 1 allows. `javindhra` states $300 to test the arithmetic.
 - Dollars: none this year beyond the stated amount.
 
 ### 8. The header
@@ -128,5 +129,5 @@ Each is decided by the author, with a `DECISION` comment and a row in `docs/rule
 | Line 6a, Schedule P (540) line 4 | stated rule (the TMT floor and the column rules); the $5,000,000 limit is own reading (2) |
 | Line 6b                          | stated rule                                                                               |
 | Line 6c                          | stated rule, own reading of the one answer (4)                                            |
-| Line 7                           | decided by the author (1)                                                                 |
+| Line 7                           | decided by the author (1), with the statute as the lead read it                           |
 | SMLLC, Form 540NR, other returns | unsupported                                                                               |

@@ -12,7 +12,10 @@ against the forms and their instructions, then the engine's output was locked.
   an approved joint venture with the California Department of Corrections.
 - She owns part of Delta Pallet Recovery LP. Its K-1 passes through a $650
   prison inmate labor credit and a $1,500 PTE elective tax credit.
-- Her 2024 FTB 3507 line 7 carried $300 to 2025.
+- Her 2024 FTB 3507 line 7 carried $300 to 2025. The engine takes the
+  carryover as she states it (item 7 of `state/ca/3507/QUESTIONS.md`). Under
+  decision A68 a real carryover comes only from the $5,000,000 limit, so the
+  amount tests line 4's arithmetic, not a likely return.
 - She paid $38,000 of federal and $4,000 of California estimated tax.
 
 ## Documents
@@ -31,8 +34,8 @@ the credits alone.
   whole credit and leaves a balance in column (c).
 - Form 540 lines 43 and 44: code 162, then the PTE elective tax credit. Line 45
   stays blank.
-- The sister scenario `katerine` covers a credit limited by the tax (line 7)
-  and three credits on line 45.
+- The sister scenario `katerine` covers a credit limited by the tax (line 7
+  is 0: that part does not carry) and three credits on line 45.
 
 ## Hand check
 
@@ -47,7 +50,7 @@ the credits alone.
 | 3507 lines 1, 2 | 40,000; 4,000 | joint venture wages; × 10% |
 | 3507 lines 3, 4, 5 | 650; 300; 4,950 | K-1; 2024 line 7; 4,000 + 650 + 300 |
 | Sch P line 4 (a), (b), (c) | 4,950; 4,950; 675 | line 5; smaller of 4,950 and 5,625; 5,625 − 4,950 |
-| 3507 lines 6a, 6b, 6c, 7 | 4,950; 0; 0; 0 | Sch P line 4 (b); not a corporation; no election; 4,950 − 4,950 |
+| 3507 lines 6a, 6b, 6c, 7 | 4,950; 0; 0; 0 | Sch P line 4 (b); not a corporation; no election; the $5,000,000 limit disallowed nothing (4,950 is under it), so nothing carries |
 | Sch P line 11 | 4,461 | 3,786 + 675 |
 | Sch P line 21 (a), (b), (c) | 1,500; 1,500; 2,961 | 3804-CR line 3; smaller of 1,500 and 4,461; 4,461 − 1,500 |
 | 540 lines 43, 44 | 4,950; 1,500 | code 162; code 242 |

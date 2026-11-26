@@ -2,8 +2,8 @@
  * Made-up taxpayer (README.md): a single full-year California resident with
  * three other credits (a pass-through prison inmate labor credit, Utah tax,
  * PTE elective tax). The prison inmate labor credit is more than the tax above
- * tentative minimum tax, so FTB 3507 line 7 carries the rest, and Form 540
- * line 45 takes the three credits. No answer key: the expected values are
+ * tentative minimum tax; the rest is lost, so FTB 3507 line 7 is 0 (decision
+ * A68), and Form 540 line 45 takes the three credits. No answer key: the expected values are
  * hand-checked, locked engine output.
  */
 
@@ -29,7 +29,7 @@ const FORM_IDS = [
 export const katerineScenario: Scenario = {
   name: "katerine",
   description:
-    "Single Sacramento filer with a K-1 prison inmate labor credit above the tax over TMT (FTB 3507 line 7), Utah tax and a PTE elective tax credit: Schedule S line 2 after code 162, Form 540 line 45.",
+    "Single Sacramento filer with a K-1 prison inmate labor credit above the tax over TMT (FTB 3507 line 7 of 0: no carryover), Utah tax and a PTE elective tax credit: Schedule S line 2 after code 162, Form 540 line 45.",
   taxYear: KATERINE_TAX_YEAR,
   userId: KATERINE_USER_ID,
   verification: "unverified",

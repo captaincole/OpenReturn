@@ -107,27 +107,43 @@ describe("FTB 3507 lines 6b, 6c and 7", () => {
     expect(line6c(1_000_000, false)).toBe(0);
   });
 
-  it("line 7 is line 5 less lines 6a, 6b and 6c", () => {
-    expect(line7(12000, 9267, 0, 0)).toBe(2733);
-    expect(line7(6_000_000, 5_000_000, 0, 1_000_000)).toBe(0);
-    // No election: the limited part and the tax-limited part both carry over.
-    const available = 6_000_000;
-    const excess = 5_500_000;
-    const used = creditUsed(available, excess);
-    const elected = line6c(disallowedByLimit(available, excess), false);
-    expect(line7(available, used, 0, elected)).toBe(1_000_000);
+  /* Line 7 from line 5, Schedule P line 3 and the election, as the bindings figure it. */
+  const carryover = (available: number, excess: number, elects: boolean) => {
+    const part = disallowedByLimit(available, excess);
+    return line7(part, line6c(part, elects));
+  };
+
+  it("line 7 is 0 for a credit above the tax with no limitation: that part is lost", () => {
+    // katerine: 12,000 of credit, 9,267 of excess tax; 2,733 does not carry.
+    expect(carryover(12000, 9267, false)).toBe(0);
+    expect(carryover(5000, 0, false)).toBe(0);
   });
 
-  it("lines 6a, 6c and 7 add back to line 5", () => {
+  it("line 7 is 0 for a credit within the tax", () => {
+    expect(carryover(4950, 5625, false)).toBe(0);
+  });
+
+  it("line 7 carries the part the limit disallowed, unless 6c makes it refundable", () => {
+    expect(carryover(6_000_000, 8_000_000, false)).toBe(1_000_000);
+    expect(carryover(6_000_000, 8_000_000, true)).toBe(0);
+    /* Tax room 5,500,000: only the 500,000 the limit disallowed carries; the other 500,000 is limited by the tax and is lost. */
+    expect(carryover(6_000_000, 5_500_000, false)).toBe(500_000);
+    expect(carryover(6_000_000, 5_500_000, true)).toBe(0);
+  });
+
+  it("lines 6a, 6c and 7 never pass line 5; the rest is the part the tax could not use", () => {
     for (const [available, excess, elects] of [
       [6_000_000, 8_000_000, true],
       [6_000_000, 5_500_000, true],
       [6_000_000, 5_500_000, false],
+      [12000, 9267, false],
       [4950, 5625, true],
     ] as const) {
       const used = creditUsed(available, excess);
-      const elected = line6c(disallowedByLimit(available, excess), elects);
-      expect(used + elected + line7(available, used, 0, elected)).toBe(available);
+      const part = disallowedByLimit(available, excess);
+      const elected = line6c(part, elects);
+      const lost = available - Math.min(available, Math.max(0, excess));
+      expect(used + elected + line7(part, elected) + lost).toBe(available);
     }
   });
 });

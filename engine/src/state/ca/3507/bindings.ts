@@ -2,7 +2,9 @@
  * FTB 3507, Prison Inmate Labor Credit. Lines 1 to 5 add the credit from the
  * stated wages, the pass-through credits and last year's carryover (lines.ts).
  * Line 6a is the credit Schedule P (540) line 4 lets the return use
- * (creditUsed.ts); lines 6b, 6c and 7 split the rest.
+ * (creditUsed.ts). Lines 6c and 7 split the part the $5,000,000 limit
+ * disallowed; the credit the tax could not use is lost (the DECISION above
+ * line 7).
  */
 
 import { defineForm, type BindingFn, type FormAccessor } from "../../../defineForm.js";
@@ -53,22 +55,30 @@ function claimed(form: Form, info: Info): number | Unsupported | undefined {
 }
 
 /*
- * Line 6c: with the FTB 3870 election, the part the $5,000,000 limit disallows
- * (lines.ts). Schedule P (540) line 3 is the excess tax the credit may offset.
- * The election is asked only when line 5 is above the limit; below it nothing
- * is disallowed.
+ * The part of line 5 the $5,000,000 limit disallows (lines.ts), or line 6a's
+ * gap; undefined while it waits. Schedule P (540) line 3 is the excess tax the
+ * credit may offset.
  */
-function refundable(form: Form, info: Info): number | Unsupported | undefined {
+function disallowed(form: Form, info: Info): number | Unsupported | undefined {
   const used = claimed(form, info);
   const credit = available(info);
-  if (used === undefined || isGap(used) || credit === undefined) return used;
+  if (isGap(used)) return used;
+  if (used === undefined || credit === undefined) return undefined;
   if (credit <= 0) return 0;
   const excess = numberOrBlank(form[SCHEDULE_P_EXCESS_TAX]);
-  if (excess === undefined) return undefined;
-  const disallowed = disallowedByLimit(credit, excess);
-  if (disallowed <= 0) return 0;
+  return excess === undefined ? undefined : disallowedByLimit(credit, excess);
+}
+
+/*
+ * Line 6c: with the FTB 3870 election, the disallowed part. The election is
+ * asked only when line 5 is above the limit; below it nothing is disallowed.
+ */
+function refundable(form: Form, info: Info): number | Unsupported | undefined {
+  const part = disallowed(form, info);
+  if (typeof part !== "number") return part;
+  if (part <= 0) return 0;
   const elects = info.businessCreditRefundableElection;
-  return elects === undefined ? undefined : line6c(disallowed, elects);
+  return elects === undefined ? undefined : line6c(part, elects);
 }
 
 const lines: Bindings = {
@@ -94,32 +104,46 @@ const lines: Bindings = {
   "0.line.6b_total_credit_assigned": () => ASSIGNED_CREDIT_OF_AN_INDIVIDUAL,
   "0.line.6c_credit_elected_refundable": (form, info) => refundable(form, info),
   /*
-   * DECISION (2026-11-26, by the author): line 7 keeps the credit that the tax
-   * could not use, not only the part the $5,000,000 limit disallowed.
-   * - Text A, the reminder in General Information: "Generally, there is no
-   *   provision for carryover of any unused Prison Inmate Labor Credit ...
-   *   However, for taxable years 2024 through 2026, taxpayers are allowed to
-   *   carryover the amount of credit disallowed due to the $5,000,000 business
-   *   credit limitation" (ca-3507-form-2025::sec::credit-limitation::b02); and
-   *   Schedule P (540): "only the disallowed portion of the credit may be
-   *   carried over" (ca-540-sched-p-inst-2025::sec::section-a1-instructions::b01),
-   *   whose face heads the row "A1 Credits that reduce excess tax and have no
-   *   carryover provisions" (ca-540-sched-p-face-2025::sec::face-part-iii::b01).
-   * - Text B, the line 7 instruction: "Credit limited by your tax liability ...
-   *   can, however, be carried over for future years. Include any such amounts
-   *   here" (ca-3507-form-2025::sec::line-7::b01), and the form: "Add lines 6a,
-   *   6b, and 6c, subtract the result from line 5."
-   * The engine follows Text B: the form's arithmetic wins over a sentence that
-   * breaks it, and the line's own instruction agrees with the arithmetic.
+   * DECISION (2026-11-26, by the author): line 7 holds only the part of the
+   * credit that the $5,000,000 business credit limitation disallowed and that
+   * line 6c does not make refundable. The credit the tax could not use is lost.
+   * - Text A, the texts written for this credit. The form's credit limitation
+   *   text: "Reminder: Generally, there is no provision for carryover of any
+   *   unused Prison Inmate Labor Credit to succeeding taxable years, and in no
+   *   event can taxpayers carry this back and apply it against a prior year's
+   *   tax. However, for taxable years 2024 through 2026, taxpayers are allowed
+   *   to carryover the amount of credit disallowed due to the $5,000,000
+   *   business credit limitation" (ca-3507-form-2025::sec::credit-limitation::b02).
+   *   The Schedule P (540) face lists the credit under "A1 Credits that reduce
+   *   excess tax and have no carryover provisions"
+   *   (ca-540-sched-p-face-2025::sec::face-part-iii::b01), and its instructions
+   *   say "only the disallowed portion of the credit may be carried over"
+   *   (ca-540-sched-p-inst-2025::sec::section-a1-instructions::b01).
+   * - Text B, the line 7 instruction: "Credit limited by your tax liability
+   *   cannot be included in an election for refundable credit. ... They can,
+   *   however, be carried over for future years. Include any such amounts here"
+   *   (ca-3507-form-2025::sec::line-7::b01), and the form: "Add lines 6a, 6b,
+   *   and 6c, subtract the result from line 5."
+   * - The law, as the lead read R&TC section 17053.6 from a public copy
+   *   (california.public.law, 2026-11-26; the California code is not in the
+   *   library): subdivision (a) allows a credit of "10 percent of the amount of
+   *   wages paid or incurred during the taxable year" for each prisoner employed
+   *   in a joint venture program, against the net tax, and subdivision (b) has
+   *   a yearly list of employers sent to the Franchise Tax Board. The section
+   *   has no carryover provision.
+   * The engine follows Text A: the statute gives this credit no carryover, the
+   * form's own limitation text and Schedule P agree, and the line 7
+   * instruction's general sentence would carry forward a credit the law lets
+   * expire. No 2025 tax changes; the made-up taxpayer katerine carries $0 to
+   * 2026, not $2,733. Line 7 prints 0 when nothing carries, as lines 6b and 6c
+   * do: it is next year's line 4, and a 0 says that nothing carries.
    */
   "0.line.7_disallowed_credit_carryover": (form, info) => {
-    const credit = available(info);
-    const used = claimed(form, info);
+    const part = disallowed(form, info);
     const elected = refundable(form, info);
-    if (isGap(used)) return used;
-    if (isGap(elected)) return elected;
-    if (credit === undefined || used === undefined || elected === undefined) return undefined;
-    return line7(credit, used, ASSIGNED_CREDIT_OF_AN_INDIVIDUAL, elected);
+    if (typeof part !== "number") return part;
+    if (typeof elected !== "number") return elected;
+    return line7(part, elected);
   },
 };
 
