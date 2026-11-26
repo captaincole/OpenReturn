@@ -12,7 +12,7 @@ Each is decided by the author, with a `DECISION` comment and a row in `docs/rule
 ## Defaults with no conflicting text
 
 1. **The due date of each return.** Source: "from the due date (not including extensions) of the return for the prior year" (`lines-7-and-8::b01`). The engine uses April 15 after each calendar year, as Form 8621 and Form 8611 do (`federal/8621/interest.ts`). It does not move the date for a weekend (April 18, 2022) or the COVID-19 postponements (July 15, 2020; May 17, 2021). The instructions' own example uses April 15 for every year (`line-11::b03`). Changes dollars: yes, a few days of interest for those years.
-2. **Daily compounding.** Source: "compounded on a daily basis" (`lines-7-and-8::b01`). Each day grows by the period's rate over 365, or 366 in a leap year, as Form 8621 does. Table 1 names the Rev. Proc. 95-17 factor tables, which are not in the corpus. Changes dollars: at most $1 from rounding.
+2. **Daily compounding.** Source: "compounded on a daily basis" (`lines-7-and-8::b01`). Each day grows by the period's rate over 365, or 366 in a leap year, as Form 8621 does. Table 1 names the Rev. Proc. 95-17 factor tables, which are not in the corpus. Table 1 is not consistent on leap years (`line-11::b02`): its 2016 and 2020 rows name 366-day tables (59, 61, 63), but "1/1/24 12/31/24 8% 21 575" names a 365-day table, where Table 2 names "Table 67" for 2024. The engine uses 366 days for 2024. Changes dollars: at most $1 (the blind fill's case 2 is $971 with 365 days, $970 with 366).
 3. **The end date.** Source: "until the earlier of: the due date ... of the return for the filing year, or the date the return for the filing year is filed and any income tax due for that year has been fully paid" (`lines-7-and-8::b01`). The fact may state the filed-and-paid date (`filedAndPaidOn`); without it, April 15, 2026. Changes dollars: yes, less interest for an early return.
 4. **Calendar years only.** The engine prepares calendar-year returns: each column's "Year ended" is month 12, and the filing-year line prints 01/01/2025 and 12/31/2025. A fiscal year has no fact. Changes dollars: no.
 5. **The filing-year column, line 1.** Source: "Enter the filing year listed at the top of this form" (`part-i-regular-method::b01`), and line 1 asks for taxable income "shown on tax return". The engine uses Form 1040 line 15, which never shows a loss; the taxpayer states lines 2 and 4. Changes dollars: no (no line reads the filing-year column).
@@ -32,6 +32,12 @@ Each is decided by the author, with a `DECISION` comment and a row in `docs/rule
 19. **Discounting post-completion adjustments.** Source: `post-completion-adjustments::b01`. The taxpayer states line 2 (Part II line 1) after any discount. Changes dollars: no.
 20. **Interest on the refund later.** Source: "Report the amount on line 9a ... as interest income on your income tax return for the tax year in which it is received" (`line-9a::b01`). That is a 2026 return; nothing on the 2025 return. Changes dollars: no.
 21. **The task's "underpayment rates".** The instructions name the overpayment rate (`applicable-interest-rates::b01`); for an individual the two are the same from 1999, so the engine reads the underpayment table. Changes dollars: no.
+
+## Second opinions
+
+- **A blind fill (2026-11-26).** A preparer filled 14 cases (9 Part I, 5 Part II) by hand from the blank form and the instructions. All 163 lines agree with the engine. The preparer read rows A68 and A69 before settling the 2019 rate, so that agreement is not independent; with Table 1's printed 5%, case 6 line 7a would be $4,769 (engine $4,918). The page number in that row ("15 571") also points at the 6% table ("10/1/22 12/31/22 6% 17 571"), which supports A68.
+- **PolicyEngine-US 2.154.1 (commit 0fbed6ddb1).** It does not model Form 8697, look-back interest or the section 6621 rates. Nothing to compare.
+- **IRS Direct File.** A code search of IRS-Public/direct-file finds no Form 8697 and no look-back interest. Nothing to compare.
 
 ## Proposals for a discussion
 
