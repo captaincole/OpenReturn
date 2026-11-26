@@ -5,6 +5,7 @@ import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../mon
 import { unsupported } from "../../types.js";
 import { socialSecurityTaxable } from "../../worksheets/socialSecurityBenefits.js";
 import { files2555 } from "../2555/results.js";
+import { files4563, form4563Line15Total } from "../4563/results.js";
 import { line1fFrom8839, socialSecurityGapFrom8839 } from "../8839/receivers.js";
 import { line4bWithForm8915F, line5bWithForm8915F } from "../8915-f/receivers.js";
 import { withLaterForm8919Copies } from "../8919/laterCopies.js";
@@ -191,6 +192,13 @@ export function line6b(form: Form, info: Form1040FilingInfo) {
   if (benefits === undefined || !info.filingStatus) return undefined;
   const mfs = info.filingStatus === "married_filing_separately";
   if (mfs && info.livedApartFromSpouseAllYear === undefined) return undefined;
+  /*
+   * MANUAL EDIT: with Form 4563, Pub. 915 Worksheet 1 line 5 adds its line 15
+   * (irs-pub-915-2025::sec::filled-in-worksheet-1-figuring-your-taxable-benefits::b02);
+   * the worksheet is otherwise the one below.
+   */
+  const americanSamoaExcluded = form4563Line15Total(info);
+  if (files4563(info) && americanSamoaExcluded === undefined) return undefined;
   return socialSecurityTaxable({
     benefits,
     otherIncome: sum(
@@ -207,6 +215,7 @@ export function line6b(form: Form, info: Form1040FilingInfo) {
       form["line.5b"],
       form["line.7a"],
       form["line.8"],
+      americanSamoaExcluded,
     ),
     taxExemptInterest: sum(form["line.2a"]),
     adjustments: sum(

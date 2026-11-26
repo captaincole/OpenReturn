@@ -12,6 +12,7 @@ import {
 } from "./facts/index.js";
 import { resolve4137Info } from "./federal/4137/resolveInfo.js";
 import { resolve4255Info } from "./federal/4255/resolveInfo.js";
+import { form8959OrForm4563ReachesSchedule2 } from "./federal/4563/receivers.js";
 import { resolve4797Info } from "./federal/4797/resolveInfo.js";
 import { form4970ReachesSchedule2, resolve4970Info } from "./federal/4970/resolveInfo.js";
 import { scheduleTwoNeededForEarlyDistributions } from "./federal/5329/resolveInfo.js";
@@ -29,7 +30,6 @@ import { resolve8919Info } from "./federal/8919/resolveInfo.js";
 import { cleanVehicleSchedules } from "./federal/8936/resolveInfo.js";
 import { planForm8949Copies, totalsByBox } from "./federal/8949/copyPlan.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
-import { resolve8959Info } from "./federal/8959/resolveInfo.js";
 import type { Form8960FilingInfo } from "./federal/8960/filingInfo.js";
 import { installmentSalesWithoutTradeOrBusinessAnswer } from "./federal/8960/line5b.js";
 import { NIIT_THRESHOLDS, rentalsWithoutTradeOrBusinessAnswer } from "./federal/8960/lines.js";
@@ -440,7 +440,8 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
     resolveScheduleSEInfo(inputs).mustFile?.["schedule-se"]?.value,
     resolve4137Info(inputs).mustFile?.["form-4137"]?.value,
     resolve8919Info(inputs).mustFile?.["form-8919"]?.value,
-    resolve8959Info(inputs).mustFile?.["form-8959"]?.value,
+    // Form 8959, or a Form 4563 gap on line 4 or 11 (federal/4563/receivers.ts), so it shows.
+    form8959OrForm4563ReachesSchedule2(inputs),
     resolve8960Info(inputs).mustFile?.["form-8960"]?.value,
     resolveScheduleHInfo(inputs).mustFile?.["schedule-h"]?.value,
     resolve6251Info(inputs).mustFile?.["form-6251"]?.value,

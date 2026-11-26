@@ -138,7 +138,7 @@ function partIIBindings(): Bindings {
   return {
     "0.line.3_prior_year_form_8839_no": priorBox("credit", false, "II"),
     "0.line.3_prior_year_form_8839_yes": priorBox("credit", true, "II"),
-    // MANUAL EDIT: line 7 (line-7::b01): Form 1040 line 11b; the other additions are gaps (results.ts).
+    // MANUAL EDIT: line 7 (line-7::b01): Form 1040 line 11b plus Form 4563 line 15; Form 2555 is a gap (results.ts).
     "0.line.7_modified_adjusted_gross_income": (form, info) =>
       totalOf(partIIOf(form, info), (part) => part.line7),
     "0.line.8_magi_over_threshold_no": (form, info) =>

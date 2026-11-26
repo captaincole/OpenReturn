@@ -119,6 +119,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "(the test, line 44's self-employment answer) is missing",
   ],
   [
+    /^american_samoa_exclusion\.(taxpayer|spouse)$/,
+    "each fact is a whole person's Form 4563 (Parts I and II); whether the person is a bona " +
+      "fide resident of American Samoa with income to exclude is Cade's question. Form 4563 " +
+      "lists the fact again while an answer inside it (Part I) is missing",
+  ],
+  [
     /^retirement\.qualified_disaster\.[^.]+$/,
     "each fact is a whole Form 8915-F (one person, one year in which the disasters began); " +
       "whether the taxpayer had a qualified disaster distribution, income spread from an earlier " +

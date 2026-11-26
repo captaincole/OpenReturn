@@ -4,6 +4,7 @@ import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.
 import { sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
+import { withForm4563Line15 } from "../4563/results.js";
 import { namesOnReturn } from "../returnNames.js";
 import type { Form8815FilingInfo, Line1Row } from "./filingInfo.js";
 import {
@@ -107,11 +108,14 @@ function line9Of(form: Form, info: Form8815FilingInfo): Line9Worksheet | Unsuppo
     return undefined;
   // An IRA deduction with no gap (line9Gaps.ts): wait for Schedule 1 line 20, never read it as 0.
   if (exclusion.readsIraDeduction && form["schedule-1.1.line.20"] === undefined) return undefined;
-  return line9Worksheet(
+  const worksheet = line9Worksheet(
     sum(form["schedule-b.0.line.2_total_interest"]),
     sum(...OTHER_INCOME.map((id) => form[id])),
     sum(...ADJUSTMENTS.map((id) => form[id])),
   );
+  // "Increase the amount on line 5 of this worksheet by ... Form 4563, line 15" (step-action::b03).
+  const line5 = withForm4563Line15(worksheet.line5, info);
+  return line5 === undefined ? undefined : { ...worksheet, line5 };
 }
 
 const isUnsupported = (value: unknown): value is Unsupported =>

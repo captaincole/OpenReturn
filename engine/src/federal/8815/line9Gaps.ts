@@ -20,7 +20,7 @@ import { needsPub590AWorksheets } from "../schedule-1/pub590a.js";
 export const IRA_CONTRIBUTION_GAP =
   "A traditional IRA contribution by a person covered by a retirement plan, or one Schedule 1 line 20 does not figure: the IRA deduction is figured before this exclusion (irs-8815-form-2025::sec::step-action::b01, step 3; Pub. 590-A), and the engine figures it from Form 1040 line 9, which this exclusion changes.";
 export const FOREIGN_EXCLUSION_GAP =
-  "Form 2555 or Form 4563 files: line 9 adds Form 2555 lines 45 and 50 and Form 4563 line 15 (irs-8815-form-2025::sec::step-action::b03), and neither form has rules yet.";
+  "Form 2555 files: line 9 adds Form 2555 lines 45 and 50 (irs-8815-form-2025::sec::step-action::b03), and the worksheet here does not add them yet.";
 export const ADOPTION_BENEFITS_GAP =
   "Employer adoption benefits (W-2 box 12 code T): line 9 adds back the excluded part (irs-8815-form-2025::sec::step-action::b03), which needs Form 8839, not modeled.";
 export const ROYALTY_INTEREST_GAP =
@@ -57,9 +57,9 @@ function iraDeductionFiguredFirst(inputs: ResolverInputs): boolean {
 export const readsIraDeduction = (inputs: ResolverInputs): boolean =>
   (readTraditionalIraFact(inputs.factByKey, "taxpayer")?.contributions ?? 0) > 0;
 
+/* Form 4563 line 15 is added on the worksheet (bindings.ts); Form 2555 is a gap. */
 const filesForeignExclusionForm = (inputs: ResolverInputs) =>
-  resolve2555Info(inputs).mustFile?.["form-2555"]?.value === true ||
-  inputs.decisionByKey.get("decisions.scope.must_file_4563") === true;
+  resolve2555Info(inputs).mustFile?.["form-2555"]?.value === true;
 
 const ADOPTION_BENEFITS_CODE = "T";
 
