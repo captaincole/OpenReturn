@@ -178,7 +178,8 @@ describe("Part I", () => {
     );
     expect(run.files).toBe(true);
     expect(run.line("0.line.5_community_property_resident_yes")).toBe(true);
-    expect(run.line("0.line.5_community_property_states")).toBe("TX, NM");
+    // "Enter the name(s) of the community property state(s)": names, not codes.
+    expect(run.line("0.line.5_community_property_states")).toBe("Texas, New Mexico");
     expect(run.line("0.line.6_made_reported_payments_yes")).toBe(false);
   });
 

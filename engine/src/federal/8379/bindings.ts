@@ -3,7 +3,7 @@
 import { defineForm, type BindingFn } from "../../defineForm.js";
 import { SSN } from "../../values.js";
 import type { Form8379FilingInfo } from "./filingInfo.js";
-import { FORM_TAX_YEAR, type PartOneLine } from "./lines.js";
+import { COMMUNITY_PROPERTY_STATE_NAMES, FORM_TAX_YEAR, type PartOneLine } from "./lines.js";
 import { partOneBox, partOneOf } from "./partOne.js";
 import { columnsOf, PART_III_LINES, type Columns, type PartThreeLine } from "./partThree.js";
 import {
@@ -86,12 +86,13 @@ export function register(): void {
     bindings: {
       "0.line.1_tax_year_filing_for": () => FORM_TAX_YEAR,
       ...partOneBindings(),
-      // MANUAL EDIT: line 5's states, when line 5 is answered Yes.
+      // MANUAL EDIT: line 5's state names, when line 5 is answered Yes.
       "0.line.5_community_property_states": (form, info) => {
         const filled = partOneOf(form, info);
         if (filled === undefined || "unsupported" in filled) return filled;
         const states = info.form8379?.fact?.communityPropertyStates ?? [];
-        return filled.answers[5] === true ? states.join(", ") : undefined;
+        const names = states.map((state) => COMMUNITY_PROPERTY_STATE_NAMES[state] ?? state);
+        return filled.answers[5] === true ? names.join(", ") : undefined;
       },
       "0.line.10_first_spouse_injured": (_, info) => injuredBox(info, "first"),
       "0.line.10_first_spouse_name": (_, info) => nameShown(info, "first"),

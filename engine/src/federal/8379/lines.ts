@@ -11,6 +11,22 @@ import { atLeast, roundDollars, sum } from "../../money.js";
 export const FORM_TAX_YEAR = "2025";
 
 /*
+ * Line 5: "Enter the name(s) of the community property state(s)" (the form),
+ * from the fact's two-letter codes (irs-8379-inst-2025::sec::line-5::b01).
+ */
+export const COMMUNITY_PROPERTY_STATE_NAMES: Readonly<Record<string, string>> = {
+  AZ: "Arizona",
+  CA: "California",
+  ID: "Idaho",
+  LA: "Louisiana",
+  NV: "Nevada",
+  NM: "New Mexico",
+  TX: "Texas",
+  WA: "Washington",
+  WI: "Wisconsin",
+};
+
+/*
  * Line 15 worksheet line 2: the additional standard deduction for 2025, for
  * each box checked for age or blindness (irs-8379-inst-2025::sec::basic-standard-deduction::b01).
  */
