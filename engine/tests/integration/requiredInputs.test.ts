@@ -48,6 +48,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "a California NOL or disaster loss over (last year's return is not read, #79); FTB 3805V files with it",
   ],
   [
+    /^nol\.carryovers$/,
+    "a prior-year answer from last year's Form 172 or carryover statement, recorded when the " +
+      "taxpayer carries a federal NOL to 2025 (last year's return is not read, #79); Schedule 1 " +
+      "line 8a deducts it",
+  ],
+  [
     /^capital_gains\.ca_loss_carryover$/,
     "a prior-year answer Cade records when the California carryover differs from the federal " +
       "one; Schedule D (540) files with it, and asks for it when it files and a federal carryover exists",

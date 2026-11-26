@@ -107,6 +107,7 @@ import {
   FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
   type FederalFormsWithNoRulesFilingInfo,
 } from "./federal/formsWithNoRules.js";
+import { LOSS_FORMS_RESOLVERS } from "./federal/lossForms.js";
 import type { QbiFilingInfo } from "./federal/qbi/filingInfo.js";
 import { resolveQbiInfo } from "./federal/qbi/resolveInfo.js";
 import {
@@ -394,6 +395,7 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve8938Info,
   ...RECAPTURE_FORMS_RESOLVERS,
   ...FARM_FORMS_RESOLVERS,
+  ...LOSS_FORMS_RESOLVERS,
   ...FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
   ...LATER_CALIFORNIA_FORMS_RESOLVERS,
   ...CALIFORNIA_FORMS_WITH_NO_RULES_RESOLVERS,

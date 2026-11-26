@@ -11,6 +11,7 @@ import { line8p, line8pHold } from "./excessBusinessLoss.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
 import { foreignExclusionHold, line24j, line8d } from "./foreignExclusion.js";
 import { line14, storageFeesOnlyBox } from "./movingExpenses.js";
+import { line8a, line8aHold } from "./nolDeduction.js";
 import { line21 } from "./studentLoanInterest.js";
 import type { Schedule1 } from "./types.js";
 
@@ -65,9 +66,14 @@ export function register(): void {
       // MANUAL EDIT: lines 8d and 24j from Form 2555 (foreignExclusion.ts).
       "0.line.8d": line8d,
       "1.line.24j": line24j,
-      // MANUAL EDIT: lines 8a, 8d and 8s are subtractions (printed in parentheses); line 8p holds it (excessBusinessLoss.ts).
+      // MANUAL EDIT: line 8a, the NOL deduction from the stated carryovers (nolDeduction.ts).
+      "0.line.8a": line8a,
+      // MANUAL EDIT: lines 8a, 8d and 8s are subtractions (printed in parentheses); lines 8a and 8p hold it.
       "0.line.9": (form, info) => {
-        const hold = line8pHold(form, info) ?? foreignExclusionHold(form, info);
+        const hold =
+          line8pHold(form, info) ??
+          foreignExclusionHold(form, info) ??
+          line8aHold(form["0.line.8a"], info);
         if (hold !== undefined) return hold === "waiting" ? undefined : hold;
         return (
           sum(
@@ -125,8 +131,11 @@ export function register(): void {
        * is blank with no farm, line 7 is blank with no 1099-G, and line 9 is a sum.
        */
       "0.line.10": (form, info) => {
-        // MANUAL EDIT: line 9 holds while Form 461 line 16 or Form 2555 waits or is a gap.
-        const hold = line8pHold(form, info) ?? foreignExclusionHold(form, info);
+        // MANUAL EDIT: line 9 holds while Form 461 line 16, Form 2555 or line 8a waits or is a gap.
+        const hold =
+          line8pHold(form, info) ??
+          foreignExclusionHold(form, info) ??
+          line8aHold(form["0.line.8a"], info);
         if (hold !== undefined) return hold === "waiting" ? undefined : hold;
         // MANUAL EDIT: a farm's line 34 gap reaches line 10; a farm whose line 34 waits makes it wait.
         if (info.farmIncomeGap) return unsupported(info.farmIncomeGap);
@@ -212,7 +221,6 @@ export function register(): void {
         "No fact for a repayment of unemployment compensation; Cade says a repayment is not supported.",
       "0.line.7_amount_repaid":
         "No fact for a repayment of unemployment compensation; Cade says a repayment is not supported.",
-      "0.line.8a": "No NOL carryforward scenario yet",
       "0.line.8c": "No 1099-C cancellation-of-debt ingestion yet",
       "0.line.8j": "No hobby (not-for-profit activity) income scenario yet.",
       "0.line.8l": "No personal-property rental income scenario yet.",
