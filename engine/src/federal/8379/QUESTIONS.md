@@ -76,6 +76,25 @@ Two decisions with conflicting texts are in `docs/rule-decisions.md` (A44, line 
 - Default: column (a) is Form 1040 line 1a; column (b) is the injured spouse's W-2 box 1. An excess reimbursement falls in column (c).
 - Dollars: only with a Form 2106 excess reimbursement of the injured spouse.
 
+## 14. Line 3 with a joint federal tax debt
+
+- Source: line 3 asks about past-due debts "owed only by your spouse"; its note reads "If the past-due amount is for a federal tax liability owed by both you and your spouse, you may qualify for innocent spouse relief" (irs-8379-face-2025::sec::face-part-i::b01).
+- Default: the fact's `offsetForOtherSpouseDebt` is false for a federal tax debt of a joint return both spouses filed, so line 3 is No and Part I stops. The blind fill read it this way; the first engine run had answered line 3 Yes and line 4 Yes.
+- Dollars: no. Both paths stop; only the checked box differs.
+
+## 15. Line 15, one-half of an odd basic amount
+
+- Source: "include one-half of your basic standard deduction" (irs-8379-inst-2025::sec::line-15::b01), with "Column (a) must equal columns (b) + (c)" (irs-8379-face-2025::sec::face-part-iii::b01).
+- Default: column (b) is one-half rounded by the IRS rule (50 cents up); column (c) is the rest. A dependent's basic amount of $5,301 gives $2,651 and $2,650. The blind fill chose the same.
+- Dollars: $1 between the columns.
+
+## Second opinions
+
+- PolicyEngine-US 2.154.0 (commit 363e9fc5, 2026-11-25) does not model Form 8379 or any split of a joint return between spouses. Its constants agree with the engine's: the 2025 joint basic standard deduction $31,500 (the base of decision A44), the 2025 additional amount $1,600 for a married filer, the Medicare rate 1.45%, and the 2025 social security wage base $176,100 at 6.2% ($10,918.20).
+- It figures Additional Medicare Tax withholding as 0.9% of wages above $200,000. The engine reads each spouse's W-2 (box 6 less 1.45% of box 5), as Form 8959 lines 19 to 22 do. That is a scope difference: the form reads the W-2.
+- IRS Direct File: no checkout is reachable from this project (issue #140). Not compared.
+- Blind fill (14 cases, `.scratch/blind`): no dollar difference. One Part I difference (item 14) came from the engine run's input, not from a rule.
+
 ## Confidence
 
 | Field group | Confidence |

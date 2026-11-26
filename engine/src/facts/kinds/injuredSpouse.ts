@@ -73,7 +73,10 @@ export interface InjuredSpouseFactValue {
   injuredSpouse: InjuredSpouse;
   /*
    * Line 3: the IRS used, or will use, the joint overpayment for a legally
-   * enforceable past-due debt owed only by the other spouse.
+   * enforceable past-due debt owed only by the other spouse. A federal tax
+   * debt of a joint return both spouses filed is owed by both, so it is false
+   * (the line 3 note sends that case to innocent spouse relief,
+   * irs-8379-face-2025::sec::face-part-i::b01).
    */
   offsetForOtherSpouseDebt: boolean;
   /* Line 4: the injured spouse is legally obligated to pay that debt. */
