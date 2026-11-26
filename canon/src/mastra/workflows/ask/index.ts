@@ -2,11 +2,17 @@ import type { Mastra } from "@mastra/core";
 import { createStep, createWorkflow } from "@mastra/core/workflows";
 import { hybridSearchRefDocs, type SearchHit } from "../../../db/corpusSearch";
 import { corpusFormat } from "../../../db/corpusStore";
+import { parseJurisdictions, type Jurisdiction } from "../../../jurisdiction";
 import { judge } from "../../judge";
 import { askAnswerSchema, type AskAnswerOutput } from "./judges/askAnswerer";
 import { askQueriesSchema } from "./judges/askQueryFormulator";
 import { mergeByRank } from "./mergeHits";
-import { renderAnswerPrompt, renderFormulatePrompt, renderHistory } from "./prompts";
+import {
+  renderAnswerPrompt,
+  renderFormulatePrompt,
+  renderHistory,
+  type PromptContext,
+} from "./prompts";
 import { statuteRound } from "./statute";
 import {
   askInputSchema,
@@ -40,6 +46,8 @@ type StepLog = AskStepLog;
 export interface AnswerQuestionInput {
   question: string;
   history?: AskHistoryTurn[];
+  /** The jurisdictions to search; every one when unset. */
+  jurisdictions?: Jurisdiction[];
   onStage?: (stage: AskStage) => Promise<void> | void;
   /** Steps are pushed as they finish, so a judge that throws keeps the steps that ran. */
   steps?: AskStepLog[];
@@ -47,13 +55,14 @@ export interface AnswerQuestionInput {
 
 async function retrieve(
   queries: string[],
+  jurisdictions: readonly Jurisdiction[],
   max = MAX_PASSAGES,
   skip = new Set<string>(),
 ): Promise<{ passages: Passage[]; log: unknown[] }> {
   const lists: SearchHit[][] = [];
   const log: unknown[] = [];
   for (const query of queries) {
-    const hits = await hybridSearchRefDocs({ query, limit: HITS_PER_QUERY });
+    const hits = await hybridSearchRefDocs({ query, limit: HITS_PER_QUERY, jurisdictions });
     log.push({ query, hits: hits.map((hit) => ({ blockId: hit.blockId, score: hit.score })) });
     lists.push(hits.filter((hit) => !skip.has(hit.blockId)));
   }
@@ -84,13 +93,13 @@ async function timed<T>(
 
 async function answer(
   mastra: Mastra,
-  history: string,
+  context: PromptContext,
   question: string,
   passages: Passage[],
   steps: StepLog[],
   kind: string,
 ): Promise<AskAnswerOutput> {
-  const prompt = renderAnswerPrompt(history, question, passages);
+  const prompt = renderAnswerPrompt(context, question, passages);
   return timed(
     steps,
     kind,
@@ -106,7 +115,7 @@ async function answer(
 async function fillGaps(
   mastra: Mastra,
   input: AnswerQuestionInput,
-  history: string,
+  context: PromptContext,
   passages: Passage[],
   raw: AskAnswerOutput,
   steps: StepLog[],
@@ -123,15 +132,15 @@ async function fillGaps(
     const found = await timed(
       steps,
       "retrieve-gaps",
-      () => retrieve(gaps, MAX_GAP_PASSAGES, skip),
-      (result) => ({ queries: result.log }),
+      () => retrieve(gaps, context.jurisdictions, MAX_GAP_PASSAGES, skip),
+      (result) => ({ jurisdictions: context.jurisdictions, queries: result.log }),
     );
     if (found.passages.length === 0) return { raw, passages };
 
     await input.onStage?.("answering");
     const all = [...passages, ...found.passages];
     return {
-      raw: await answer(mastra, history, input.question, all, steps, "answer-gaps"),
+      raw: await answer(mastra, context, input.question, all, steps, "answer-gaps"),
       passages: all,
     };
   } catch (err) {
@@ -142,7 +151,11 @@ async function fillGaps(
   }
 }
 
-const notCovered = (missingDocuments: string[], steps: StepLog[]): AskResult => ({
+const notCovered = (
+  missingDocuments: string[],
+  jurisdictions: Jurisdiction[],
+  steps: StepLog[],
+): AskResult => ({
   answer: NOT_COVERED_ANSWER,
   coverage: "not_covered",
   citations: [],
@@ -150,6 +163,7 @@ const notCovered = (missingDocuments: string[], steps: StepLog[]): AskResult => 
   statutePassages: [],
   statuteConsulted: false,
   conflicts: [],
+  jurisdictions,
   log: { steps },
 });
 
@@ -157,21 +171,21 @@ const notCovered = (missingDocuments: string[], steps: StepLog[]): AskResult => 
 async function answerRounds(
   mastra: Mastra,
   input: AnswerQuestionInput,
-  history: string,
+  context: PromptContext,
   passages: Passage[],
   steps: StepLog[],
 ) {
-  const first = await answer(mastra, history, input.question, passages, steps, "answer");
-  const afterGaps = await fillGaps(mastra, input, history, passages, first, steps);
+  const first = await answer(mastra, context, input.question, passages, steps, "answer");
+  const afterGaps = await fillGaps(mastra, input, context, passages, first, steps);
   return statuteRound(
     afterGaps,
     {
       onStage: input.onStage,
-      reanswer: (all) => answer(mastra, history, input.question, all, steps, "answer-statute"),
+      reanswer: (all) => answer(mastra, context, input.question, all, steps, "answer-statute"),
       steps,
       warn: (message, err) => mastra.getLogger().warn(message, { err }),
     },
-    { hitsPerQuery: HITS_PER_QUERY, max: MAX_GAP_PASSAGES },
+    { hitsPerQuery: HITS_PER_QUERY, max: MAX_GAP_PASSAGES, jurisdictions: context.jurisdictions },
   );
 }
 
@@ -180,10 +194,11 @@ export async function answerQuestion(
   input: AnswerQuestionInput,
 ): Promise<AskResult> {
   const steps: StepLog[] = input.steps ?? [];
-  const history = renderHistory(input.history ?? []);
+  const jurisdictions = parseJurisdictions(input.jurisdictions);
+  const context: PromptContext = { history: renderHistory(input.history ?? []), jurisdictions };
 
   await input.onStage?.("formulating");
-  const formulatePrompt = renderFormulatePrompt(history, input.question);
+  const formulatePrompt = renderFormulatePrompt(context, input.question);
   const formulated = await timed(
     steps,
     "formulate",
@@ -199,13 +214,13 @@ export async function answerQuestion(
   const { passages } = await timed(
     steps,
     "retrieve",
-    () => retrieve(queries.length > 0 ? queries : [input.question]),
-    (result) => ({ queries: result.log }),
+    () => retrieve(queries.length > 0 ? queries : [input.question], jurisdictions),
+    (result) => ({ jurisdictions, queries: result.log }),
   );
-  if (passages.length === 0) return notCovered(formulated.namedDocuments, steps);
+  if (passages.length === 0) return notCovered(formulated.namedDocuments, jurisdictions, steps);
 
   await input.onStage?.("answering");
-  const final = await answerRounds(mastra, input, history, passages, steps);
+  const final = await answerRounds(mastra, input, context, passages, steps);
 
   const validated = validateAnswer(final.raw, final.passages);
   steps.push({ kind: "validate", durationMs: 0, dropped: validated.dropped });
@@ -217,6 +232,7 @@ export async function answerQuestion(
     statutePassages: final.statutePassages,
     statuteConsulted: final.statuteConsulted,
     conflicts: validated.conflicts,
+    jurisdictions,
     log: { steps },
   };
 }
@@ -239,7 +255,7 @@ const answerStep = createStep({
 export const askWorkflow = createWorkflow({
   id: "ask",
   description:
-    "Ask The Tax Code: answers one question about US federal or California tax from the IRS/FTB reference library, with numbered citations to the passages it relied on. Pass completed earlier turns as history for a follow-up. Says when the library does not cover the question. When the passages conflict, or name a rule of law without stating it, the answer may also search the statute (law.db) once; passages that disagree come back as conflicts, with both quotes.",
+    'Ask The Tax Code: answers one question about US federal or California tax from the IRS/FTB reference library, with numbered citations to the passages it relied on. Pass completed earlier turns as history for a follow-up. Pass jurisdictions to search only some of the library: ["CA"] searches only California, and the federal statute is then not searched. Says when the library does not cover the question. When the passages conflict, or name a rule of law without stating it, the answer may also search the statute (law.db) once; passages that disagree come back as conflicts, with both quotes.',
   inputSchema: askInputSchema,
   outputSchema: askRunResultSchema,
 })
