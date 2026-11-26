@@ -29,6 +29,7 @@ export * from "./kinds/caPassiveCredit.js";
 export * from "./kinds/caPayments.js";
 export * from "./kinds/capitalLossCarryover.js";
 export * from "./kinds/caPriorYearAmt.js";
+export * from "./kinds/caPrisonInmateLabor.js";
 export * from "./kinds/caPteElectiveCredit.js";
 export * from "./kinds/casualty.js";
 export * from "./kinds/caWorkMove.js";

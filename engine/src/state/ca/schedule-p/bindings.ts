@@ -14,6 +14,7 @@ import {
   priorYearAmtCreditRow,
   pteCreditRowBindings,
 } from "./partIII.js";
+import { prisonLaborCreditRow } from "./prisonLaborRow.js";
 import { sectionB2PassiveCreditRows } from "./sectionB2.js";
 import type { ScheduleP } from "./types.js";
 
@@ -397,6 +398,8 @@ export function register(): void {
       ...partI,
       ...partII,
       ...partIII,
+      // The row reads FTB 3507's slots, which the runtime filing info holds.
+      ...(prisonLaborCreditRow as Bindings),
       ...childCareCreditRow,
       ...priorYearAmtCreditRow,
       ...otherStateCreditRow,
