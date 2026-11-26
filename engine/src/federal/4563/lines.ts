@@ -92,6 +92,18 @@ export function hasExcludedIncome(lines: Form4563Lines): boolean {
  * Each part is the whole-dollar amount of its line, as the U.S. side takes
  * Form 1040's lines: the fraction is arithmetic on amounts already rounded
  * (QUESTIONS.md, item 16).
+ *
+ * DECISION (2026-11-26, by the author): the excluded gross income adds each
+ * part rounded to whole dollars. Text A, the Form 1040 instructions: "If you
+ * have to add two or more amounts to figure the amount to enter on a line,
+ * include cents when adding the amounts and round off only the total"
+ * (irs-1040-inst-2025::sec::rounding-off-to-whole::b01). Text B, Pub. 570,
+ * chapter 4 (not in the corpus; irs.gov/publications/p570): the fraction is
+ * "Gross income subject to U.S. income tax / Gross income from all sources
+ * (including excluded territory income)", whose U.S. part is Form 1040's
+ * lines, each already rounded. The engine follows Text B for both parts:
+ * the fraction is not a line, and one rule applied the same way to both
+ * parts keeps them comparable.
  */
 export function excludedGrossIncome(value: AmericanSamoaExclusionFactValue): number {
   const otherGross = (value.otherIncome ?? []).map((item) => atLeast(0, item.amount));

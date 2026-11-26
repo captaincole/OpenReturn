@@ -4,7 +4,7 @@ import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
 import { exclusionTotal, files2555, housingDeductionTotal } from "../2555/results.js";
-import { form4563Line15Total } from "../4563/results.js";
+import { form4563Line15Total, form4563Waits } from "../4563/results.js";
 import type { Schedule1AFilingInfo } from "./filingInfo.js";
 import type { FormSchedule1A } from "./types.js";
 
@@ -87,10 +87,10 @@ export function register(): void {
         ];
         return parts.some((part) => typeof part === "number") ? sum(...parts) : undefined;
       },
-      // Without exclusions, line 3 is Form 1040 line 11b and line 2e stays blank.
-      "0.line.3_modified_agi": (form) => {
+      // Without exclusions, line 3 is Form 1040 line 11b and line 2e stays blank; it waits while Form 4563 waits.
+      "0.line.3_modified_agi": (form, info) => {
         const line1 = form["0.line.1_agi_form_1040"];
-        if (typeof line1 !== "number") return undefined;
+        if (typeof line1 !== "number" || form4563Waits(info)) return undefined;
         return sum(line1, form["0.line.2e_total_excluded_income"]);
       },
       "1.line.31_magi_from_line_3": (form, info) => {

@@ -36,6 +36,7 @@ function filerOf(fact: AmericanSamoaExclusionFact): Form4563Filer {
  * cannot be filed by itself"). A spouse's own form belongs on a joint return
  * only. A fact that is missing an answer files the form and is listed again;
  * a person who is not a resident all year files none. The decision still wins.
+ * A fact with income that files no form is listed, so Form 1040 line 9 is a gap.
  */
 export function resolve4563Info(inputs: ResolverInputs): Form4563FilingInfo {
   const joint = filingStatusOf(inputs) === "married_filing_jointly";
@@ -59,11 +60,17 @@ export function resolve4563Info(inputs: ResolverInputs): Form4563FilingInfo {
   const files = mustFile.value === true;
   const noFact = files && facts.length === 0 && incomplete.length === 0 ? [TAXPAYER_KEY] : [];
   const missing = files ? [...incomplete, ...noFact] : [];
+  const filedKeys = files ? filers.map((filer) => filer.key) : [];
+  const notExcluded = facts
+    .filter((fact) => !filedKeys.includes(fact.key))
+    .filter((fact) => hasExcludedIncome(form4563Lines(fact.value)))
+    .map((fact) => fact.key);
   return {
     mustFile: { "form-4563": mustFile },
     missingInputs: {
       "form-4563": missingInputs(Object.fromEntries(missing.map((key) => [key, undefined]))),
     },
     form4563Filers: files ? filers : undefined,
+    form4563IncomeNotExcluded: notExcluded,
   };
 }

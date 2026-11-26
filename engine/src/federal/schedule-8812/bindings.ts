@@ -5,7 +5,7 @@ import { atLeast, numberOrBlank, roundDollars, stepsOf, sum } from "../../money.
 import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { excludedAmounts, files2555 } from "../2555/results.js";
-import { form4563Line15Total } from "../4563/results.js";
+import { form4563Line15Total, form4563Waits } from "../4563/results.js";
 import { mortgageCreditGap } from "../8396/creditGap.js";
 import { line6cFrom8839 } from "../8839/receivers.js";
 import { form8859Files, homebuyerCreditGap } from "../8859/creditLimit.js";
@@ -74,9 +74,10 @@ export function register(): void {
         if (line2a === undefined && line2b === undefined && line2c === undefined) return undefined;
         return sum(line2a, line2b, line2c);
       },
-      "0.line.3_modified_agi": (form) => {
+      // Waits while Form 4563 waits: its line 15 is added on line 2c.
+      "0.line.3_modified_agi": (form, info) => {
         const line1 = form["0.line.1_form_1040_line_11a"];
-        if (line1 === undefined) return undefined;
+        if (line1 === undefined || form4563Waits(info)) return undefined;
         return sum(line1, form["0.line.2d_total_excluded_income"]);
       },
       "0.line.4_qualifying_children_under_17": (_, info) => info.childTaxCreditCount,

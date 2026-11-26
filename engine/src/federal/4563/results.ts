@@ -49,10 +49,25 @@ export function excludedGrossIncomeTotal(info: Form4563FilingInfo): number {
   return sum(...(settledFilers(info) ?? []).map((filer) => filer.excludedGrossIncome));
 }
 
-/* Some person excludes income: the deductions that are not definitely related are shared. */
+/* The form files and waits for an answer: the lines that read it wait too. */
+export const form4563Waits = (info: Form4563FilingInfo): boolean =>
+  files4563(info) && settledFilers(info) === undefined;
+
+/*
+ * Some person excludes income: the deductions that are not definitely related
+ * are shared. True while the form waits, so a gap shows rather than a full deduction.
+ */
 export function excludesIncome(info: Form4563FilingInfo): boolean {
+  if (form4563Waits(info)) return true;
   return (settledFilers(info) ?? []).some((filer) => hasExcludedIncome(filer.lines));
 }
+
+const INCOME_NOT_EXCLUDED =
+  'A Form 4563 answer fact holds American Samoa income, but this person files no Form 4563 (not a bona fide resident all year, or the decision files none). "If you do not qualify for the exclusion ... Report all your taxable income" (irs-4563-form-2025::sec::omb-no-1545-0074::b03): record each document as its W-2 or 1099 fact and remove the amounts from the Form 4563 fact.';
+
+/* Form 1040 line 9: a gap while a fact holds income that no Form 4563 excludes. */
+export const incomeNotExcludedGap = (info: Form4563FilingInfo): Unsupported | undefined =>
+  (info.form4563IncomeNotExcluded ?? []).length > 0 ? unsupported(INCOME_NOT_EXCLUDED) : undefined;
 
 const NONRESIDENT_ALIEN =
   "A bona fide resident of American Samoa who is not a U.S. citizen or resident is not allowed the standard deduction, and certain other deductions and credits (irs-4563-form-2025::sec::filing-form-1040-or-1040-sr::b02; Pub. 570, chapter 3, Nonresident alien); the engine does not figure that return.";

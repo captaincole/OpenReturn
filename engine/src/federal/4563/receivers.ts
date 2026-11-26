@@ -10,14 +10,14 @@ import { filingStatusOf, type ResolverInputs } from "../../resolverInputs.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { files2555 } from "../2555/results.js";
 import type { Form8959FilingInfo } from "../8959/filingInfo.js";
-import { ADDITIONAL_MEDICARE_THRESHOLDS } from "../8959/lines.js";
+import { ADDITIONAL_MEDICARE_THRESHOLDS, SINGLE_W2_MEDICARE_WAGES_LIMIT } from "../8959/lines.js";
 import { resolve8959Info } from "../8959/resolveInfo.js";
 import type { ScheduleSEFilingInfo } from "../schedule-se/filingInfo.js";
 import { resolveScheduleSEInfo, selfEmploymentIncome } from "../schedule-se/resolveInfo.js";
 import type { Form4563FilingInfo } from "./filingInfo.js";
 import { allowableShare, excludedSelfEmployment, owesSelfEmploymentTax } from "./lines.js";
 import { resolve4563Info } from "./resolveInfo.js";
-import { excludedGrossIncomeTotal, excludesIncome, files4563 } from "./results.js";
+import { excludedGrossIncomeTotal, excludesIncome, files4563, form4563Waits } from "./results.js";
 
 /* Any form's accessor: full field ids ("form-1040.line.1z") resolve from every form. */
 export type ReturnAccessor = { readonly [fieldId: string]: unknown };
@@ -37,7 +37,7 @@ const SELF_EMPLOYMENT_GAP =
 const SELF_EMPLOYMENT_DEDUCTION_GAP =
   "Form 4563 excludes self-employment income next to a Schedule SE: only the part of the deduction based on the income that is not excluded is allowed (Pub. 570, chapter 4, Self-employment tax deduction), and the engine does not figure Schedule SE with the excluded income.";
 const ADDITIONAL_MEDICARE_GAP =
-  "Form 4563 excludes wages from Form W-2AS, whose Medicare wages count on Form 8959 (irs-8959-inst-2025::sec::future-developments::b01), and with them the Medicare wages and self-employment income pass the threshold; the engine does not add excluded wages to Form 8959.";
+  "Form 4563 excludes wages from Form W-2AS, whose Medicare wages count on Form 8959 (irs-8959-inst-2025::sec::future-developments::b01), and with them the Medicare wages and self-employment income pass the threshold, or one W-2AS has more than $200,000 of Medicare wages, so Form 8959 files and its withholding is a payment (irs-8959-inst-2025::sec::who-must-file::b01); the engine does not add excluded wages or their withholding to Form 8959.";
 
 /* Schedule 1 lines whose gross income differs from the amount: business, Form 4797, rental, farm, NOL. */
 const NET_LINES = [
@@ -82,6 +82,7 @@ export function standardDeductionShare(
   full: number | undefined,
 ): Result {
   if (full === undefined || !excludesIncome(info)) return full;
+  if (form4563Waits(info)) return undefined;
   const usGross = usGrossIncome(form, info);
   if (typeof usGross !== "number") return usGross;
   return allowableShare(full, usGross, excludedGrossIncomeTotal(info));
@@ -163,11 +164,21 @@ export function form8959OrForm4563ReachesSchedule2(inputs: ResolverInputs): bool
 /*
  * Schedule 2 line 11: a gap when the excluded Medicare wages (Form W-2AS box
  * 5), the return's W-2 Medicare wages and the self-employment income pass the
- * Form 8959 threshold of the filing status.
+ * Form 8959 threshold of the filing status. Also when one person's W-2AS box 5
+ * is over $200,000: "You must file Form 8959 if ... Your Medicare wages and
+ * tips on any single Form W-2 (box 5) are greater than $200,000"
+ * (irs-8959-inst-2025::sec::who-must-file::b01), and the 0.9% the employer
+ * withheld is a payment on Form 1040 line 25c that the engine does not read.
+ * The gap reaches line 24, so the refund is never figured without it. The
+ * fact holds one box 5 per person: two W-2AS forms count as one (QUESTIONS.md).
  */
 export function additionalMedicareGap(info: Info): Unsupported | undefined {
-  const excluded = sum(...filers(info).map((filer) => filer.answers.wages?.medicareWages));
+  const boxes = filers(info).map((filer) => filer.answers.wages?.medicareWages ?? 0);
+  const excluded = sum(...boxes);
   if (excluded <= 0 || info.filingStatus === undefined) return undefined;
+  if (boxes.some((box) => box > SINGLE_W2_MEDICARE_WAGES_LIMIT)) {
+    return unsupported(ADDITIONAL_MEDICARE_GAP);
+  }
   const threshold = ADDITIONAL_MEDICARE_THRESHOLDS[info.filingStatus];
   const total = sum(excluded, info.w2MedicareWagesTotal, selfEmploymentIncome(info));
   return total > threshold ? unsupported(ADDITIONAL_MEDICARE_GAP) : undefined;

@@ -5,7 +5,7 @@ import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../mon
 import { unsupported } from "../../types.js";
 import { socialSecurityTaxable } from "../../worksheets/socialSecurityBenefits.js";
 import { files2555 } from "../2555/results.js";
-import { files4563, form4563Line15Total } from "../4563/results.js";
+import { files4563, form4563Line15Total, incomeNotExcludedGap } from "../4563/results.js";
 import { line1fFrom8839, socialSecurityGapFrom8839 } from "../8839/receivers.js";
 import { line4bWithForm8915F, line5bWithForm8915F } from "../8915-f/receivers.js";
 import { withLaterForm8919Copies } from "../8919/laterCopies.js";
@@ -264,10 +264,12 @@ export function line8(form: Form) {
 /*
  * MANUAL EDIT: irs-1040-inst-2025::sec::instructions-for-schedule-1::b01. Line 8
  * is Schedule 1 line 10. While Schedule 1 is filed and line 10 is blank, line 9
- * waits: sum() would add 0 and give a total that looks complete.
+ * waits: sum() would add 0 and give a total that looks complete. A gap while a
+ * Form 4563 fact holds income that no Form 4563 excludes (federal/4563/results.ts).
  */
 export const line9 = (form: Form, info: Form1040FilingInfo) =>
-  info.mustFile?.["schedule-1"]?.value === true && form["line.8"] === undefined
+  incomeNotExcludedGap(info) ??
+  (info.mustFile?.["schedule-1"]?.value === true && form["line.8"] === undefined
     ? undefined
     : sum(
         form["line.1z"],
@@ -278,4 +280,4 @@ export const line9 = (form: Form, info: Form1040FilingInfo) =>
         form["line.6b"],
         form["line.7a"],
         form["line.8"],
-      );
+      ));
