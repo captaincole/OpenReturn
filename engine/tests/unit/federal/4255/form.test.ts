@@ -90,6 +90,25 @@ describe("Form 4255 on a return", () => {
     expect(sum(...partII)).toBe(value("form-4255", "2.part1.3_total_col_r"));
   });
 
+  it("Form 4255 alone files Schedule 2 and carries both columns to Form 1040", () => {
+    // A $150,000 W-2: no Form 8959, so Form 4255 is the only Schedule 2 tax.
+    const lowWage = base.facts.map((fact) =>
+      fact.category === "wages"
+        ? {
+            ...fact,
+            value: { ...(fact.value as object), box1: 150000, box3: 150000, box5: 150000 },
+          }
+        : fact,
+    );
+    const { files, value } = evaluate(lowWage);
+    expect(files("form-8959")).toBe(false);
+    expect(files("schedule-2")).toBe(true);
+    expect(value("form-1040", "line.17")).toBe(29400);
+    expect(value("form-1040", "line.23")).toBe(57950);
+    const line22 = value("form-1040", "line.22") as number;
+    expect(value("form-1040", "line.24")).toBe(line22 + 57950);
+  });
+
   it("the explicit decision wins: false keeps it off, true with no fact is a gap", () => {
     const off = evaluate(base.facts, [
       ...base.decisions,
@@ -126,17 +145,20 @@ describe("Form 4255 on a return", () => {
     expect(files("form-4255")).toBe(false);
   });
 
-  it("a fifth property is a gap on the form and on Schedule 2", () => {
+  it("a fifth property adds to Part I and Schedule 2; the first copy's Part II keeps four", () => {
     const extra = base.facts.find(
       (fact) => fact.key === makeCreditRecapturePropertyFactKey("heat-pump"),
     )!;
-    const { field } = evaluate([
+    const { field, value } = evaluate([
       ...base.facts,
       { ...extra, id: "f-fifth", key: makeCreditRecapturePropertyFactKey("fifth") },
     ]);
-    expect(isGap(field("form-4255", "3.part2.20_total_increase_in_tax"))).toBe(true);
-    expect(isGap(field("schedule-2", "1.line.17a_recapture_other_credits_amount"))).toBe(true);
-    expect(isGap(field("schedule-2", "1.line.17z_other_taxes_amount"))).toBe(true);
+    expect(isGap(field("form-4255", "3.part2.20_total_increase_in_tax"))).toBe(false);
+    // The heat pump again: 2,000 more on line 1j, columns (h), (j) and (r).
+    expect(value("form-4255", "3.part2.20_total_increase_in_tax")).toBe(30900);
+    expect(value("form-4255", "0.part1.1j_form_3468_part_vi_col_h")).toBe(29350);
+    expect(value("form-4255", "2.part1.3_total_col_r")).toBe(59950);
+    expect(value("schedule-2", "1.line.17a_recapture_other_credits_amount")).toBe(45750);
   });
 
   it("a penalty alone lists its type on line 17z", () => {

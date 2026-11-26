@@ -11,16 +11,16 @@ export interface Form4255Result {
   total: PartOneRow;
   /* Lines 1z and 2z: the form the credit came from. */
   otherForms: Partial<Record<"1z" | "2z", string>>;
-  /* Part II, properties A to D in the order recorded. */
+  /* Part II, every property in the order recorded; four to a copy (copies.ts). */
   properties: PropertyLines[];
-  /* Part II lines 18–20; undefined with no property. */
-  partTwoTotals?: { line18: number; line19?: number; line20: number };
   partThree?: PartThreeLines;
 }
 
 export interface Form4255FilingInfo extends BaseFilingInfo {
   /* Undefined when the form does not file, has a gap, or waits for a line's fact. */
   form4255?: Form4255Result;
+  /* The copy being printed (copies.ts); undefined is the first. */
+  form4255CopyIndex?: number;
   /* Why every line of the form is unsupported. */
   form4255Gap?: string;
 }

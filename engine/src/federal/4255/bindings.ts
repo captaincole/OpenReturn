@@ -12,8 +12,9 @@ import { unsupported, type Unsupported } from "../../types.js";
 import { ISODate, isoDate, SSN } from "../../values.js";
 import { namesOnReturn } from "../returnNames.js";
 import { cellFieldId, LINE_COLUMNS, TOTAL_COLUMNS, type Column } from "./columns.js";
+import { propertiesOnCopy } from "./copies.js";
 import type { Form4255FilingInfo, Form4255Result } from "./filingInfo.js";
-import { percentText, type PartThreeLines, type PropertyLines } from "./lines.js";
+import { partTwoTotals, percentText, type PartThreeLines, type PropertyLines } from "./lines.js";
 import type { Form4255 } from "./types.js";
 
 type Cell = number | string | undefined;
@@ -22,13 +23,22 @@ type Bindings = NonNullable<
   Parameters<typeof defineForm<Form4255, Form4255FilingInfo>>[1]["bindings"]
 >;
 
-/* A cell of the figured form: unsupported with a gap, blank when the form does not file or waits. */
-const cellOf =
-  (read: (result: Form4255Result) => Cell): AnyBinding =>
+/*
+ * A cell of the figured form, read with the copy's index (copies.ts):
+ * unsupported with a gap, blank when the form does not file or waits.
+ */
+const copyCellOf =
+  (read: (result: Form4255Result, copyIndex: number) => Cell): AnyBinding =>
   (_, info) => {
     if (info.form4255Gap !== undefined) return unsupported(info.form4255Gap);
-    return info.form4255 === undefined ? undefined : read(info.form4255);
+    return info.form4255 === undefined
+      ? undefined
+      : read(info.form4255, info.form4255CopyIndex ?? 0);
   };
+
+/* A cell of Part I or Part III: the first copy only. */
+const cellOf = (read: (result: Form4255Result) => Cell): AnyBinding =>
+  copyCellOf((result, copyIndex) => (copyIndex === 0 ? read(result) : undefined));
 
 /* Part I (lines-1-and-2::b01 to totals-by-type::b01): each line's open cells and line 3. */
 function partOneBindings(): Record<string, AnyBinding> {
@@ -69,20 +79,26 @@ const PART_TWO_ROWS: ReadonlyArray<[string, (lines: PropertyLines) => Cell]> = [
   ["17_irs_registration_number", (lines) => lines.line17],
 ];
 
+/* Part II on one copy: its four properties (copies.ts), and lines 18–20 adding its columns A to D. */
 function partTwoBindings(): Record<string, AnyBinding> {
   const out: Record<string, AnyBinding> = {};
   PROPERTY_LETTERS.forEach((letter, index) => {
     const column = (read: (lines: PropertyLines) => Cell) =>
-      cellOf((result) => {
-        const lines = result.properties[index];
+      copyCellOf((result, copyIndex) => {
+        const lines = propertiesOnCopy(result, copyIndex)[index];
         return lines === undefined ? undefined : read(lines);
       });
     out[`3.part2.section_a_property_${letter}_description`] = column((lines) => lines.description);
     for (const [row, read] of PART_TWO_ROWS) out[`3.part2.${row}_col_${letter}`] = column(read);
   });
-  out["3.part2.18_total_line_9_all_properties"] = cellOf((result) => result.partTwoTotals?.line18);
-  out["3.part2.19_total_line_16_all_properties"] = cellOf((result) => result.partTwoTotals?.line19);
-  out["3.part2.20_total_increase_in_tax"] = cellOf((result) => result.partTwoTotals?.line20);
+  const totals = (read: (lines: ReturnType<typeof partTwoTotals>) => Cell) =>
+    copyCellOf((result, copyIndex) => {
+      const onCopy = propertiesOnCopy(result, copyIndex);
+      return onCopy.length === 0 ? undefined : read(partTwoTotals(onCopy));
+    });
+  out["3.part2.18_total_line_9_all_properties"] = totals((lines) => lines.line18);
+  out["3.part2.19_total_line_16_all_properties"] = totals((lines) => lines.line19);
+  out["3.part2.20_total_increase_in_tax"] = totals((lines) => lines.line20);
   return out;
 }
 
