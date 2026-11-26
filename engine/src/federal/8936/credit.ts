@@ -23,7 +23,7 @@ export type Accessor = { readonly [fieldId: string]: unknown };
 type Value = number | Unsupported | undefined;
 
 const FORM_2555_GAP =
-  "Form 2555 files, and lines 1c and 1d take its lines 45 and 50; Form 2555 has no rules in the engine.";
+  "Form 2555 files, and lines 1c and 1d take its lines 45 and 50, which these lines do not read yet.";
 const FORM_4563_GAP =
   "Form 4563 files, and line 1e takes its line 15; Form 4563 has no rules in the engine.";
 

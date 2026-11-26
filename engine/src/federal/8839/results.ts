@@ -39,7 +39,7 @@ export function socialSecurityWithExclusion(info: Info8839): boolean {
 
 function magiGap(info: Info8839): string | undefined {
   if (files(info, "form-2555")) {
-    return "Modified AGI adds Form 2555 lines 45 and 50 (irs-8839-inst-2025::sec::line-7::b01), and Form 2555 has no rules.";
+    return "Modified AGI adds Form 2555 lines 45 and 50 (irs-8839-inst-2025::sec::line-7::b01), which this line does not add yet.";
   }
   if (files(info, "form-4563")) {
     return "Modified AGI adds Form 4563 line 15 (irs-8839-inst-2025::sec::line-7::b01), and Form 4563 has no rules.";

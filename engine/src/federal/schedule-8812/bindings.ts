@@ -4,6 +4,7 @@ import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.
 import { atLeast, numberOrBlank, roundDollars, stepsOf, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
+import { excludedAmounts, files2555 } from "../2555/results.js";
 import { mortgageCreditGap } from "../8396/creditGap.js";
 import { line6cFrom8839 } from "../8839/receivers.js";
 import type { Schedule8812FilingInfo } from "./filingInfo.js";
@@ -33,6 +34,9 @@ const PHASEOUT_RATE = 0.05;
 
 // MANUAL EDIT: line 16b ($1,700), line 19 ($2,500), line 20 (15%) and line 20 Next ($5,100) are in worksheetB.ts.
 
+const NO_FORM_2555 =
+  "The foreign earned income and housing exclusions (Form 2555) have no fact kind.";
+
 type Form = FormAccessor<Schedule8812>;
 type Bindings = Partial<{
   [K in keyof Schedule8812]: BindingFn<Schedule8812, Schedule8812FilingInfo, K>;
@@ -51,6 +55,13 @@ export function register(): void {
         const line11a = form["form-1040.line.11a"];
         return typeof line11a === "number" ? line11a : undefined;
       },
+      /*
+       * MANUAL EDIT: line 2b, "Enter the amounts from lines 45 and 50 of your
+       * Form 2555" (irs-1040s8-face-2025::sec::face-part-i::b01), every
+       * person's form. Without Form 2555 it keeps the reason it had.
+       */
+      "0.line.2b_form_2555_lines_45_50": (form, info) =>
+        files2555(info) ? excludedAmounts(form, info) : unsupported(NO_FORM_2555),
       // A subtotal stays blank, not "0", when every addend is blank.
       "0.line.2d_total_excluded_income": (form) => {
         const line2a = form["0.line.2a_puerto_rico_income_excluded"];
@@ -180,8 +191,6 @@ export function register(): void {
     unsupported: {
       "0.line.2a_puerto_rico_income_excluded":
         "Income excluded as a bona fide resident of Puerto Rico has no fact kind.",
-      "0.line.2b_form_2555_lines_45_50":
-        "The foreign earned income and housing exclusions (Form 2555) have no fact kind.",
       "0.line.2c_form_4563_line_15":
         "The American Samoa income exclusion (Form 4563) has no fact kind.",
     },
@@ -204,11 +213,13 @@ function line8MoreThanLine11(form: FormAccessor<Schedule8812>): boolean | undefi
 /*
  * MANUAL EDIT: Part II-A (irs-1040s8-inst-2025::sec::part-ii-a-additional-child-tax-credit::b01)
  * opens when line 12 is more than line 14; otherwise the part stays blank. A
- * Form 2555 filer cannot claim it, but Form 2555 has no fact kind (line 2b).
+ * Form 2555 filer cannot claim it: the part stays blank too.
  */
 function partIIABindings(): Bindings {
   return {
-    "1.line.16a_line12_minus_line14": (form) => {
+    "1.line.16a_line12_minus_line14": (form, info) => {
+      // MANUAL EDIT: "If you file Form 2555, you cannot claim the additional child tax credit" (irs-1040s8-face-2025::sec::face-part-i::b03).
+      if (files2555(info)) return undefined;
       const line12 = form["0.line.12_credit_after_phaseout"];
       const line14 = form["0.line.14_child_tax_credit_and_other_dependents"];
       if (line12 === undefined || line14 === undefined) return undefined;

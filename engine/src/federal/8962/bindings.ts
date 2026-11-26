@@ -4,7 +4,12 @@ import { defineForm, type FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum, wholePart } from "../../money.js";
 import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
+import { files2555 } from "../2555/results.js";
 import type { Form8962FilingInfo } from "./filingInfo.js";
+
+const FORM_2555_MAGI =
+  "Form 2555 files: Worksheet 1-1 line 3 adds its lines 45 and 50 to the modified AGI, and the engine does not model the premium tax credit with Form 2555.";
+
 // MANUAL EDIT: isApplicableTaxpayer moved to lines.ts, which binds lines 9–36.
 import { isApplicableTaxpayer, partsFourFiveBindings, partTwoBindings } from "./lines.js";
 import type { Form8962 } from "./types.js";
@@ -85,8 +90,9 @@ export function register(): void {
         const spouse = info.filingStatus === "married_filing_jointly" ? 1 : 0;
         return 1 + spouse + info.dependentCount;
       },
-      // MANUAL EDIT: Worksheet 1-1. Line 3 (Form 2555 lines 45 and 50) is 0: the engine models no Form 2555.
-      "0.line.2a_modified_agi": (form) => {
+      // MANUAL EDIT: Worksheet 1-1. Line 3 (Form 2555 lines 45 and 50) is 0 without Form 2555; with it, a gap.
+      "0.line.2a_modified_agi": (form, info) => {
+        if (files2555(info)) return unsupported(FORM_2555_MAGI);
         const agi = numberOrBlank(form["form-1040.line.11a"]);
         if (agi === undefined) return undefined;
         const benefits = numberOrBlank(form["form-1040.line.6a"]);

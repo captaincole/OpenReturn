@@ -16,11 +16,16 @@ import {
   expenseLimit,
   expensesPaid,
   hasBenefits,
+  lessForeignExclusion,
 } from "./lines.js";
 import type { Form2441 } from "./types.js";
 
 type Bindings = Partial<{ [K in keyof Form2441]: BindingFn<Form2441, Form2441FilingInfo, K> }>;
 type Form = FormAccessor<Form2441>;
+
+/* Lines 18 and 19: earned income without the benefits, less Form 2555 line 43 (line-18::b01). */
+const earnedIncomeLine18 = (form: Form, info: Form2441FilingInfo) =>
+  lessForeignExclusion(earnedIncomeWithoutBenefits(form, info), info);
 
 /* Line 21 (irs-2441-inst-2025::sec::line-21::b01): the most a plan can exclude. */
 const EXCLUSION_LIMIT = 5_000;
@@ -83,7 +88,7 @@ function line19(form: Form, info: Form2441FilingInfo): number | Unsupported | un
     if (unmarried === undefined) return undefined;
     return unmarried ? form["1.line.18_earned_income"] : unsupported(SPOUSE_EARNED_INCOME);
   }
-  const income = earnedIncomeWithoutBenefits(form, info);
+  const income = earnedIncomeLine18(form, info);
   if (income === undefined || "unsupported" in income) return income;
   return income.spouse;
 }
@@ -150,7 +155,7 @@ function exclusionBindings(): Bindings {
   return {
     "1.line.18_earned_income": (form, info) =>
       partIII(info, () => {
-        const income = earnedIncomeWithoutBenefits(form, info);
+        const income = earnedIncomeLine18(form, info);
         if (income === undefined || "unsupported" in income) return income;
         return income.yours;
       }),

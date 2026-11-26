@@ -75,6 +75,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole casualty event (Form 4684); whether one happened is Cade's question",
   ],
   [
+    /^foreign_earned_income\.(taxpayer|spouse)$/,
+    "each fact is a whole person's Form 2555 (Parts I to IX); whether the person claims the " +
+      "exclusion is Cade's question. Form 2555 lists the fact again while an answer inside it " +
+      "(the test, line 44's self-employment answer) is missing",
+  ],
+  [
     /^retirement\.qualified_disaster\.[^.]+$/,
     "each fact is a whole Form 8915-F (one person, one year in which the disasters began); " +
       "whether the taxpayer had a qualified disaster distribution, income spread from an earlier " +

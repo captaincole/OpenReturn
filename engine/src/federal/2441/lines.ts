@@ -2,6 +2,7 @@
 
 import { atLeast, numberOrBlank, roundDollars, stepsOf, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
+import { line43ByOwner } from "../2555/results.js";
 import type { Form2441FilingInfo } from "./filingInfo.js";
 
 /*
@@ -86,8 +87,9 @@ export interface EarnedIncome {
 /*
  * Lines 4 and 5 (irs-2441-inst-2025::sec::lines-4-and-5::b01): Form 1040 line 1z,
  * plus net earnings from self-employment. A statutory employee's Schedule C, an
- * optional SE method, church income, Form 2555 and combat pay are unsupported on
- * the lines this reads.
+ * optional SE method, church income and combat pay are unsupported on the lines
+ * this reads. Form 2441 subtracts Form 2555 line 43 (lessForeignExclusion); FTB
+ * 3506 reads this without it.
  */
 export function earnedIncome(
   form: OtherFormLines,
@@ -106,6 +108,27 @@ export function earnedIncomeWithoutBenefits(
   info: Form2441FilingInfo,
 ): EarnedIncome | Unsupported | undefined {
   return earnedIncomeFrom(form, info, sum(...LINE_1_WITHOUT_BENEFITS.map((id) => form[id])));
+}
+
+/*
+ * MANUAL EDIT: Form 2441's lines 4, 5, 18 and 19 take line 1z "minus any amount
+ * ... Excluded as foreign earned income (including any housing exclusion) on
+ * Form 2555, line 43" (irs-2441-inst-2025::sec::lines-4-and-5::b01, ::line-18::b01),
+ * each person's own form. FTB 3506 does not call this: California taxes the
+ * excluded income (ftb-pub-1031-2025::sec::foreign-tax-credit-or-foreign-earned::b01).
+ */
+export function lessForeignExclusion(
+  income: EarnedIncome | Unsupported | undefined,
+  info: Form2441FilingInfo,
+): EarnedIncome | Unsupported | undefined {
+  if (income === undefined || "unsupported" in income) return income;
+  const excluded = line43ByOwner(info);
+  if (excluded === undefined || "unsupported" in excluded) return excluded;
+  if (info.filingStatus !== "married_filing_jointly") {
+    const yours = income.yours - excluded.taxpayer;
+    return { yours, spouse: yours };
+  }
+  return { yours: income.yours - excluded.taxpayer, spouse: income.spouse - excluded.spouse };
 }
 
 function earnedIncomeFrom(

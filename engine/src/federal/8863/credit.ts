@@ -28,7 +28,7 @@ export const LINE_19_ID = "form-8863.0.line.19_nonrefundable_education_credits";
 const SEPARATE_RETURN_GAP =
   "A married filing separately return cannot take an education credit (irs-8863-inst-2025::sec::who-can-claim-an-education-credit::b03); lines 2 and 13 have no amount for it.";
 const MAGI_GAP =
-  "Lines 3 and 14 must add back the income excluded on Form 2555 or Form 4563 (irs-8863-inst-2025::sec::line-3::b01, Pub. 970 Worksheet 2-1), and the engine has no rules for those forms.";
+  "Lines 3 and 14 must add back the income excluded on Form 2555 or Form 4563 (irs-8863-inst-2025::sec::line-3::b01, Pub. 970 Worksheet 2-1), and these lines do not add it back yet.";
 
 const files = (info: Form8863FilingInfo, formId: string) => info.mustFile?.[formId]?.value === true;
 

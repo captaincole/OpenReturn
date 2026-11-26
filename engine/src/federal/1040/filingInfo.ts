@@ -3,6 +3,7 @@ import type { Money } from "../../money.js";
 import type { Form1116FilingInfo } from "../1116/filingInfo.js";
 import type { Form2106FilingInfo } from "../2106/filingInfo.js";
 import type { Form2210FilingInfo } from "../2210/filingInfo.js";
+import type { Form2555FilingInfo } from "../2555/filingInfo.js";
 import type { Form3903FilingInfo } from "../3903/filingInfo.js";
 import type { Form4137FilingInfo } from "../4137/filingInfo.js";
 import type { Form4972FilingInfo } from "../4972/filingInfo.js";
@@ -35,6 +36,7 @@ import type { ScheduleSEFilingInfo } from "../schedule-se/filingInfo.js";
  * Line 29 reads Form 8863's figures to tell a gap from "no credit". Lines 17
  * and 18 read Form 1116's slots to tell a gap in the AMT from "no AMT".
  * Line 26 reads the estimated tax payments; lines 35a, 37 and 38 read Form 2210.
+ * The main-home box reads Form 2555's qualifying days.
  */
 export interface Form1040FilingInfo
   extends
@@ -55,6 +57,7 @@ export interface Form1040FilingInfo
     Pick<Form8915FFilingInfo, "form8915FReturn">,
     Pick<Form4972FilingInfo, "form4972Tax" | "form4972TaxGap">,
     Pick<Form2210FilingInfo, "estimatedTaxPaid" | "form2210" | "form2210Gap">,
+    Pick<Form2555FilingInfo, "form2555Filers">,
     Form1116FilingInfo {
   /** Social Security with a traditional IRA contribution and a plan: Pub. 590-A figures line 6b (schedule-1/pub590a.ts). */
   pub590aWorksheets?: boolean;

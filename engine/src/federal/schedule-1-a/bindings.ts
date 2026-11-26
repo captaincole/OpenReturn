@@ -2,6 +2,8 @@
 
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
+import { unsupported } from "../../types.js";
+import { exclusionTotal, files2555, housingDeductionTotal } from "../2555/results.js";
 import type { Schedule1AFilingInfo } from "./filingInfo.js";
 import type { FormSchedule1A } from "./types.js";
 
@@ -10,6 +12,10 @@ const SENIOR_AMOUNT = 6000;
 const SENIOR_PHASEOUT_RATE = 0.06;
 const SENIOR_THRESHOLD = 75000;
 const SENIOR_THRESHOLD_MFJ = 150000;
+
+const NO_FORM_2555_LINE_45 =
+  "No Form 2555 foreign earned income exclusion facts or scenario exist yet.";
+const NO_FORM_2555_LINE_50 = "No Form 2555 foreign housing deduction facts or scenario exist yet.";
 
 const NO_TIPS =
   "No fact or decision says which tips are qualified tips (a listed tipped occupation), so Part II never applies.";
@@ -59,6 +65,15 @@ export function register(): void {
         const agi = form["form-1040.line.11b"];
         return typeof agi === "number" ? agi : undefined;
       },
+      /*
+       * MANUAL EDIT: lines 2b and 2c, "Enter the amount from Form 2555, line 45"
+       * and "line 50" (irs-1040s1a-face-2025::sec::face-part-i::b01), every
+       * person's form. Without Form 2555 each keeps the reason it had.
+       */
+      "0.line.2b_form_2555_line_45": (form, info) =>
+        files2555(info) ? exclusionTotal(form, info) : unsupported(NO_FORM_2555_LINE_45),
+      "0.line.2c_form_2555_line_50": (_, info) =>
+        files2555(info) ? housingDeductionTotal(info) : unsupported(NO_FORM_2555_LINE_50),
       // Part I: complete lines 2a–2e only with Puerto Rico, Form 2555 or Form 4563 exclusions.
       "0.line.2e_total_excluded_income": (form) => {
         const parts = [
@@ -131,10 +146,6 @@ export function register(): void {
     unsupported: {
       "0.line.2a_puerto_rico_excluded_income":
         "No fact records Puerto Rico income that a bona fide resident excluded.",
-      "0.line.2b_form_2555_line_45":
-        "No Form 2555 foreign earned income exclusion facts or scenario exist yet.",
-      "0.line.2c_form_2555_line_50":
-        "No Form 2555 foreign housing deduction facts or scenario exist yet.",
       "0.line.2d_form_4563_line_15":
         "No Form 4563 American Samoa income exclusion facts or scenario exist yet.",
       // Parts II–IV: fill each part only if it applies (part-ii::b02, part-iii::b01, part-iv::b01).

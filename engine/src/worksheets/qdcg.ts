@@ -22,7 +22,7 @@ export interface QdcgInputs {
   netLongTermGain: number;
   /** Form 4952 line 4g: qualified dividends and net capital gain elected as investment income. Taxed at ordinary rates. */
   form4952Line4g?: number;
-  /** Form 2555 re-routes lines 1 and 2 through the FEIE worksheet. Not modeled. */
+  /** Unused: with Form 2555, foreignEarnedIncomeTax.ts passes its line 3 as taxableIncome. */
   filingForm2555?: boolean;
   filingStatus: FilingStatus;
   taxYear: number;
@@ -95,7 +95,7 @@ export function computeQdcg(inputs: QdcgInputs): QdcgResult {
   if (elected < 0) {
     throw new Error(`QDCG worksheet: form4952Line4g must be ≥ 0 (got ${elected}).`);
   }
-  // TODO: with Form 2555, swap lines 1 and 2 for the FEIE worksheet outputs.
+  // With Form 2555 the Foreign Earned Income Tax Worksheet calls this worksheet with its own line 3.
   void inputs.filingForm2555;
 
   const { filingStatus, taxYear } = inputs;
