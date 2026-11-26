@@ -105,6 +105,7 @@ const KIND_LABEL: Record<Kind, string> = {
   false_premise: "false premise",
   insufficient: "insufficient info",
   conflict: "texts disagree",
+  law_request: "asks for the law",
 };
 
 function groupTable(models: EvalModel[], results: AskResult[]): string {

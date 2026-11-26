@@ -3,9 +3,9 @@ import type { AskCase } from "./caseKit";
 
 /*
  * Questions where two IRS texts disagree, or an instruction names a rule
- * of law without stating it (docs/rule-decisions.md, rows 2, 6 and 8). The
- * answer should consult the statute and cite the named section; the true
- * answer is the decided row's.
+ * of law without stating it (docs/rule-decisions.md, rows 2, 6 and 8), or
+ * the taxpayer asks for the statute itself. The answer should consult the
+ * statute and cite the named section; the true answer is the decided row's.
  *
  * Not reviewed by a person yet: agents wrote and checked these cases. Use the scores for development only.
  */
@@ -62,5 +62,29 @@ export const STATUTE: AskCase[] = [
       ),
     ],
     statute: { section: "6621" },
+  },
+  {
+    // The taxpayer asks for the law itself: 469(g)(1)(A) frees the loss on a full sale.
+    name: "Shows the statute when asked for it (statute)",
+    tier: 3,
+    kind: "law_request",
+    question:
+      "I sold my entire interest in a rental property that had suspended passive losses. Can I deduct them now? Please show me the statute itself, not only the form instructions.",
+    coverage: ["covered"],
+    authority: [],
+    facts: [anyOf("entire interest")],
+    statute: { section: "469" },
+  },
+  {
+    // 63(f)(2) sets the addition; the instructions print only the inflation-adjusted amounts.
+    name: "Shows the statute for the blind addition (statute)",
+    tier: 3,
+    kind: "law_request",
+    question:
+      "Can you show me the statute on setting the standard deduction addition for blind filers?",
+    coverage: ["covered", "partial"],
+    authority: [],
+    facts: [anyOf("$600")],
+    statute: { section: "63" },
   },
 ];

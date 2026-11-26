@@ -3,8 +3,11 @@ import type { StatuteExpectation } from "../lib/statute";
 
 export type Coverage = "covered" | "partial" | "not_covered";
 export type Tier = 1 | 2 | 3;
-/* conflict: two official texts disagree on the answer (statute.ts); its own row in the report. */
-export type Kind = "standard" | "false_premise" | "insufficient" | "conflict";
+/*
+ * conflict: two official texts disagree on the answer (statute.ts); its own row in the report.
+ * law_request: the taxpayer asks for the statute itself.
+ */
+export type Kind = "standard" | "false_premise" | "insufficient" | "conflict" | "law_request";
 
 export interface AskCase {
   name: string;
@@ -16,7 +19,7 @@ export interface AskCase {
   facts: AnyOf[];
   /* In the lite tier: a case both models answered the same way on every full run. */
   lite?: boolean;
-  /* Two IRS texts disagree: the answer should consult the statute and cite this section. */
+  /* The answer should consult the statute and cite this section. */
   statute?: StatuteExpectation;
 }
 
