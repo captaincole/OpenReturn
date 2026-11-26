@@ -16,6 +16,8 @@ import type { Form2441FilingInfo } from "./federal/2441/filingInfo.js";
 import { resolve2441Info } from "./federal/2441/resolveInfo.js";
 import type { Form2555FilingInfo } from "./federal/2555/filingInfo.js";
 import { resolve2555Info } from "./federal/2555/resolveInfo.js";
+import type { Form3800FilingInfo } from "./federal/3800/filingInfo.js";
+import { resolve3800Info } from "./federal/3800/resolveInfo.js";
 import type { Form3903FilingInfo } from "./federal/3903/filingInfo.js";
 import { resolve3903Info } from "./federal/3903/resolveInfo.js";
 import type { Form4137FilingInfo } from "./federal/4137/filingInfo.js";
@@ -26,8 +28,6 @@ import type { Form461FilingInfo } from "./federal/461/filingInfo.js";
 import { resolve461Info } from "./federal/461/resolveInfo.js";
 import type { Form4684FilingInfo } from "./federal/4684/filingInfo.js";
 import { resolve4684Info } from "./federal/4684/resolveInfo.js";
-import type { Form4835FilingInfo } from "./federal/4835/filingInfo.js";
-import { resolve4835Info } from "./federal/4835/resolveInfo.js";
 import type { Form4952FilingInfo } from "./federal/4952/filingInfo.js";
 import { resolve4952Info } from "./federal/4952/resolveInfo.js";
 import type { Form4970FilingInfo } from "./federal/4970/filingInfo.js";
@@ -64,8 +64,6 @@ import type { Form8814FilingInfo } from "./federal/8814/filingInfo.js";
 import { resolve8814Info } from "./federal/8814/resolveInfo.js";
 import type { Form8815FilingInfo } from "./federal/8815/filingInfo.js";
 import { resolve8815Info } from "./federal/8815/resolveInfo.js";
-import type { Form8828FilingInfo } from "./federal/8828/filingInfo.js";
-import { resolve8828Info } from "./federal/8828/resolveInfo.js";
 import type { Form8829FilingInfo } from "./federal/8829/filingInfo.js";
 import { resolve8829Info } from "./federal/8829/resolveInfo.js";
 import type { Form8839FilingInfo } from "./federal/8839/filingInfo.js";
@@ -104,12 +102,17 @@ import type { Form8995AFilingInfo } from "./federal/8995-a/filingInfo.js";
 import { resolve8995AInfo } from "./federal/8995-a/resolveInfo.js";
 import type { Form8995FilingInfo } from "./federal/8995/filingInfo.js";
 import { resolve8995Info } from "./federal/8995/resolveInfo.js";
+import { FARM_FORMS_RESOLVERS, type FarmFormsFilingInfo } from "./federal/farmForms.js";
 import {
   FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
   type FederalFormsWithNoRulesFilingInfo,
 } from "./federal/formsWithNoRules.js";
 import type { QbiFilingInfo } from "./federal/qbi/filingInfo.js";
 import { resolveQbiInfo } from "./federal/qbi/resolveInfo.js";
+import {
+  RECAPTURE_FORMS_RESOLVERS,
+  type RecaptureFormsFilingInfo,
+} from "./federal/recaptureForms.js";
 import { SALE_FORMS_RESOLVERS, type SaleFormsFilingInfo } from "./federal/saleForms.js";
 import type { Schedule1AFilingInfo } from "./federal/schedule-1-a/filingInfo.js";
 import { resolveSchedule1AInfo } from "./federal/schedule-1-a/resolveInfo.js";
@@ -279,6 +282,7 @@ export type FilingInfo = BaseFilingInfo &
   Form6781FilingInfo &
   Form8978FilingInfo &
   Form8915FFilingInfo &
+  Form3800FilingInfo &
   Form461FilingInfo &
   Form8621FilingInfo &
   SaleFormsFilingInfo &
@@ -302,8 +306,8 @@ export type FilingInfo = BaseFilingInfo &
   Form8888FilingInfo &
   Form8863FilingInfo &
   Form8938FilingInfo &
-  Form8828FilingInfo &
-  Form4835FilingInfo &
+  RecaptureFormsFilingInfo &
+  FarmFormsFilingInfo &
   FederalFormsWithNoRulesFilingInfo &
   LaterCaliforniaFormsFilingInfo &
   CaliforniaFormsWithNoRulesFilingInfo;
@@ -364,6 +368,7 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve6781Info,
   resolve8978Info,
   resolve8915FInfo,
+  resolve3800Info,
   resolve461Info,
   resolve8621Info,
   ...SALE_FORMS_RESOLVERS,
@@ -387,8 +392,8 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve8888Info,
   resolve8863Info,
   resolve8938Info,
-  resolve8828Info,
-  resolve4835Info,
+  ...RECAPTURE_FORMS_RESOLVERS,
+  ...FARM_FORMS_RESOLVERS,
   ...FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
   ...LATER_CALIFORNIA_FORMS_RESOLVERS,
   ...CALIFORNIA_FORMS_WITH_NO_RULES_RESOLVERS,

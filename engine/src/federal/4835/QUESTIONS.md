@@ -1,10 +1,10 @@
 # Form 4835: open questions
 
-Each place where the form and its instructions do not settle a rule, sorted in three groups. The one conflict between two texts is a `DECISION` comment in `lines.ts` and row A33 of `docs/rule-decisions.md`.
+Each place where the form and its instructions do not settle a rule, sorted in three groups. The one conflict between two texts is a `DECISION` comment in `lines.ts` and row A41 of `docs/rule-decisions.md`.
 
 ## Two texts conflict
 
-### Line 10: the base of the 25% limit (row A33)
+### Line 10: the base of the 25% limit (row A41)
 
 - Source: Form 4835 line 10 limits the deduction to "25% of your gross income from farming" (irs-4835-inst-2025::sec::line-10::b01); Pub. 225 defines that income as "the income you derive in the business of farming from the production of crops, fish, fruits, other agricultural products, or livestock" (irs-pub-225-2025::sec::assessment-for-depreciable::b07).
 - Decided: all of line 7, plus the gains from draft, breeding or dairy livestock. See the `DECISION` comment in `lines.ts`.
@@ -124,7 +124,7 @@ Each place where the form and its instructions do not settle a rule, sorted in t
 | Line 6 | Published example (Pub. 225 Table 3-3), no numbers |
 | Line 7 | Stated rule (the form's arithmetic) |
 | Lines 8, 9, 11 to 29 | Stated rule (stated amounts) |
-| Line 10 | Published example with numbers (Pub. 225, $32,000 and $100,000); own reading of the base (row A33); unsupported with other farming |
+| Line 10 | Published example with numbers (Pub. 225, $32,000 and $100,000); own reading of the base (row A41); unsupported with other farming |
 | Lines 30a to 30g | Stated rule (the 263A row); more rows than the form holds is unsupported |
 | Line 31 | Stated rule |
 | Line 32 | Stated rule; unsupported with a prior-year loss or a passive farm rental on Form 8582 |
