@@ -264,13 +264,40 @@ describe("Part III", () => {
     expect(isGap(run.field("1.line.20_payments_col_c"))).toBe(true);
   });
 
-  it("line 19 is a gap when a spouse has excess social security tax", () => {
-    const second: TaxFactRow = row("wages", makeW2FactKey("second-job"), {
-      ...valueOf(BASTIEN_W2),
+  const secondJob = (of: string): TaxFactRow =>
+    row("wages", makeW2FactKey("second-job"), {
+      ...valueOf(of),
       employerName: "Ichetucknee Tubing Co",
+      employerEin: "00-0008381",
       box4: 10000,
     });
-    const run = evaluate(factsWith({}, [second]));
+
+  it("line 19 puts the other spouse's excess social security tax in column (c)", () => {
+    /*
+     * Bastien: 1,364 + 10,000 − 10,918.20 = 445.80 → 446 (Schedule 3 line 11).
+     * Column (a): line 25d 2,600 + 700 + 700 + 400 = 4,400, plus 446.
+     */
+    const run = evaluate(factsWith({}, [secondJob(BASTIEN_W2)]));
+    expect(run.columns("line.19_federal_income_tax_withheld")).toEqual([4846, 2600, 2246]);
+  });
+
+  it("line 19 adds the injured spouse's own excess social security tax in column (b)", () => {
+    /*
+     * Erian: 2,852 + 10,000 − 10,918.20 = 1,933.80 → 1,934; column (b) 2,600 + 2,600 + 1,934.
+     * Column (a): line 25d 2,600 + 2,600 + 700 + 400 = 6,300, plus 1,934.
+     */
+    const run = evaluate(factsWith({}, [secondJob(ERIAN_W2)]));
+    expect(run.columns("line.19_federal_income_tax_withheld")).toEqual([8234, 7134, 1100]);
+  });
+
+  it("line 19 is a gap when a spouse's excess social security tax is one", () => {
+    const railroad = row("wages", makeW2FactKey("second-job"), {
+      ...valueOf(BASTIEN_W2),
+      employerEin: "00-0008381",
+      box4: 0,
+      box14: [{ label: "Tier 1 tax", amount: 10000 }],
+    });
+    const run = evaluate(factsWith({}, [railroad]));
     expect(isGap(run.field("1.line.19_federal_income_tax_withheld_col_b"))).toBe(true);
   });
 

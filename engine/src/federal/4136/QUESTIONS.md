@@ -13,7 +13,7 @@ Each is decided, with a `DECISION` comment in the code and a row in `docs/rule-d
 
 ## Should we do this now
 
-Each doubt below has no conflicting text. Doubts 1 to 4, 6 to 8 and 11 to 13 are done as their defaults say. Doubts 5 and 9 are named gaps or limits, and the reason is in each one. Doubt 10 is done as an unsupported line, because adding the amount is a pattern change (below).
+Each doubt below has no conflicting text. Doubts 1 to 4, 6 to 9 and 11 to 13 are done as their defaults say. Doubt 5 is a named gap, and the reason is in it. Doubt 10 is done as an unsupported line, because adding the amount is a pattern change (below).
 
 1. **Gallon equivalents are rounded to the whole unit.** "10,000 gallons of LPG ÷ 1.353 = 7,391 GGE x $0.109 = $805.62 claim amount" (`irs-4136-inst-2025::sec::line-11::b02`). No rule says to round; the example does. Default: round the equivalents to the whole GGE or DGE, then multiply. Dollars: a few cents at most.
 
@@ -31,7 +31,7 @@ Each doubt below has no conflicting text. Doubts 1 to 4, 6 to 8 and 11 to 13 are
 
 8. **Who may claim.** Each line names its claimant (the ultimate purchaser, a registered ultimate vendor, a registered credit card issuer, the blender). The engine takes the claims as stated and checks only the line's types of use. Personal use, commuting and ride sharing do not qualify (`::specific-instructions::b02`); Cade asks. Dollars: none in the engine.
 
-9. **Schedule 3 line 15 counts its other lines as 0.** Lines 9, 10, 11 and 13a to 14 are engine gaps. Default: line 15 is line 12 plus any of them that holds a number, as Form 1040 line 32 already counts line 31. Form 1040 line 31 takes Form 4136's amount from its slots, not Schedule 3's field: a Schedule 3 read from Form 1040 tripled the evaluation time of every return with a Schedule 3. When another Part II line gets rules, line 31 must add it too. A return with a net premium tax credit or excess social security tax and a fuel credit understates line 15. Dollars: yes, for that return only.
+9. **Schedule 3 line 15 and its other lines.** Done since lines 9, 10 and 11 got rules: line 15 adds lines 9 to 12 (`schedule-3/partTwo.ts`), and Form 1040 line 31 calls the same function. It reads lines 10 to 12 from the filing info and line 9 from Form 8962 only when that form files, not Schedule 3's field: a Schedule 3 read from Form 1040 tripled the evaluation time of every return with a Schedule 3. Lines 13a to 14 have no rules and no facts, so line 14 counts as none.
 
 10. **An accrual-method business.** Pub. 225: "If you use an accrual method, include the amount of credit or refund in gross income for the tax year in which you used the fuels" (`irs-pub-225-2025::sec::including-the-credit-or::b02`). Decided in row A60 (it conflicts with the schedules' "2024" credit): this year's credit is this year's income. The engine does not add it, so Schedule C line 6 or Schedule F line 43 of the linked accrual-method business is unsupported.
 
@@ -41,7 +41,7 @@ Each doubt below has no conflicting text. Doubts 1 to 4, 6 to 8 and 11 to 13 are
 
 13. **A commercial air carrier's kerosene used in foreign trade.** Line 5's claimants: "For lines 5a and 5b, the ultimate purchaser of kerosene used in commercial aviation (other than foreign trade) ... For lines 5c, 5d, and 5e, the ultimate purchaser of kerosene used in noncommercial aviation" (`irs-4136-inst-2025::sec::line-5::b01`). Lines 5c and 5d allow type of use 9 (foreign trade), and line 5e allows only type 9. Read strictly, no line 5 row names a commercial carrier in foreign trade. Default: the engine checks only the type of use (doubt 8), so a claim recorded on line 5c with type 9 prints, as the blind fill also chose (its doubt 6). Cade must confirm that the claimant flies noncommercial aviation, or that the carrier has no other way to get the tax back (a tax-free purchase with its registration). Dollars: yes, the whole 5c and 5e claim ($976 in the blind case of 4,000 gallons).
 
-Doubt 5 is not done now: the engine writes no attached statements on any form. Doubt 9 is not done now: lines 9 to 11 and 13a to 14 of Schedule 3 have no rules yet, and each needs its own form work.
+Doubt 5 is not done now: the engine writes no attached statements on any form.
 
 ## Pattern change
 
