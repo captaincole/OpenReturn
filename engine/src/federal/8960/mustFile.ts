@@ -2,6 +2,7 @@ import {
   CAPITAL_LOSS_CARRYOVER_KEYS,
   GAMBLING_KEYS,
   businessesOnReturn,
+  farmsOnReturn,
   getGamblingWinningsFacts,
   getGovernmentPaymentsFacts,
   getLtcBenefitsFacts,
@@ -39,6 +40,7 @@ import {
 } from "../passThrough/items.js";
 import { k1ItemsWithRoute } from "../passThrough/receipts.js";
 import { netReceipts, tentativeProfit } from "../schedule-c/lines.js";
+import { farmIncomeUpperBound } from "../schedule-f/lines.js";
 
 /* 1040 line 6b: at most 85% of social security benefits is taxable. */
 const MAX_TAXABLE_SOCIAL_SECURITY = 0.85;
@@ -92,6 +94,8 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
     ...businesses.map(({ value }) =>
       atLeast(0, tentativeProfit(value) ?? sum(netReceipts(value), value.otherIncome)),
     ),
+    // MANUAL EDIT: a farm reaches AGI through Schedule 1 line 6.
+    ...farmsOnReturn(inputs.facts, joint).farms.map(({ value }) => farmIncomeUpperBound(value)),
     ...getGamblingWinningsFacts(inputs.facts).map((w2g) => w2g.box1),
     num(inputs, GAMBLING_KEYS.winningsNotOnW2G),
     // Unemployment compensation reaches AGI through Schedule 1 line 7.
@@ -166,6 +170,10 @@ export function investmentSignals(
     getPficFundFacts(inputs.facts).length > 0 ||
     passThroughHasInvestmentIncome(inputs.facts) ||
     (businesses.length > 0 && !scheduleCNonpassive) ||
+    // MANUAL EDIT: a farm without line E "Yes" is passive.
+    farmsOnReturn(inputs.facts, joint).farms.some(
+      ({ value }) => value.materiallyParticipated !== true,
+    ) ||
     investmentSale ||
     hasInvestmentInstallmentSale(inputs.facts) ||
     form8824HasInvestmentIncome(inputs.facts, nonpassiveBusinessKeys);

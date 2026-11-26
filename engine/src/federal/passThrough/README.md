@@ -82,6 +82,7 @@ layers, and each layer reads only the one before it.
 | 1041 | box 14 code I statement | `qbi` | its section 199A dividends on Form 8995 line 6 or 8995-A line 28; QBI from a trust's business is a gap there |
 | 1041 | box 14 code B foreign taxes | `schedule_3_line_1` | one Form 1116 source, passive category (`1116/sources.ts`): the election on Schedule 3 line 1, or Form 1116 with the trustee's statement (the K-1 fact's `foreignIncome`) |
 | 1041 | box 14 code H | `form_8960_line_7` | unsupported on Form 8960 lines 7 and 13 when not 0 |
+| 1120-S, 1065 | box 17 codes E and F, box 20 codes F and G: recapture of the low-income housing credit | `form_8611_line_8` | one Form 8611 for each code, line 8; it asks for the building fact (`federal/8611/resolveInfo.ts`) |
 
 A route whose destination the engine does not fill is still a route: the
 line there is unsupported and names the entity, so the rest of the return

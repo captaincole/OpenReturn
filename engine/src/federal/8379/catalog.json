@@ -1,0 +1,967 @@
+{
+  "form": {
+    "formId": "form-8379",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Injured Spouse Allocation"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8379.0.line.1_tax_year_filing_for",
+      "label": "Line 1 — Enter the tax year for which you are filing this form",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 266.4,
+        "y": 683.968
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8379.0.line.2_filed_joint_return_yes",
+      "label": "Line 2 — Did you (or will you) file a joint return? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 661.97
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.2_filed_joint_return_no",
+      "label": "Line 2 — Did you (or will you) file a joint return? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 649.968
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.3_overpayment_spouse_debt_yes",
+      "label": "Line 3 — Did (or will) the IRS use the joint overpayment to pay any legally enforceable past-due debt(s) owed only by your spouse? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 589.97
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.3_overpayment_spouse_debt_no",
+      "label": "Line 3 — Did (or will) the IRS use the joint overpayment to pay any legally enforceable past-due debt(s) owed only by your spouse? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 577.968
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.4_obligated_past_due_yes",
+      "label": "Line 4 — Are you legally obligated to pay this past-due amount? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 517.97
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.4_obligated_past_due_no",
+      "label": "Line 4 — Are you legally obligated to pay this past-due amount? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 469.968
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.5_community_property_resident_yes",
+      "label": "Line 5 — Were you a resident of a community property state at any time during the tax year entered on line 1? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 445.97
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.5_community_property_states",
+      "label": "Line 5 — Enter the name(s) of the community property state(s)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 309.6,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.5_community_property_resident_no",
+      "label": "Line 5 — Were you a resident of a community property state at any time during the tax year entered on line 1? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 421.969
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.6_made_reported_payments_yes",
+      "label": "Line 6 — Did you make and report payments, such as federal income tax withholding or estimated tax payments? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 397.968
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.6_made_reported_payments_no",
+      "label": "Line 6 — Did you make and report payments, such as federal income tax withholding or estimated tax payments? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[1]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 385.969
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.7_had_earned_income_yes",
+      "label": "Line 7 — Did you have earned income, such as wages, salaries, or self-employment income? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 361.968
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.7_had_earned_income_no",
+      "label": "Line 7 — Did you have earned income, such as wages, salaries, or self-employment income? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_6[1]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 349.969
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.8_claimed_eic_actc_yes",
+      "label": "Line 8 — Did (or will) you claim the earned income credit or additional child tax credit? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 325.968
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.8_claimed_eic_actc_no",
+      "label": "Line 8 — Did (or will) you claim the earned income credit or additional child tax credit? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_7[1]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 313.969
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.9_claimed_refundable_credit_yes",
+      "label": "Line 9 — Did (or will) you claim a refundable tax credit? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 289.968
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.9_claimed_refundable_credit_no",
+      "label": "Line 9 — Did (or will) you claim a refundable tax credit? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_8[1]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 277.969
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.10_first_spouse_injured",
+      "label": "Line 10 — If injured spouse, check here (spouse shown first)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 543.2,
+        "y": 209.657
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.10_first_spouse_name",
+      "label": "Line 10 — First name, initial, and last name shown first on the return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 203.966
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.10_first_spouse_ssn",
+      "label": "Line 10 — Social security number shown first",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 203.966
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8379.0.line.10_second_spouse_injured",
+      "label": "Line 10 — If injured spouse, check here (spouse shown second)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 543.2,
+        "y": 185.656
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.10_second_spouse_name",
+      "label": "Line 10 — First name, initial, and last name shown second on the return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.10_second_spouse_ssn",
+      "label": "Line 10 — Social security number shown second",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 179.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8379.0.line.11_refund_in_both_names",
+      "label": "Line 11 — Check this box only if you want your refund issued in both names",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 543.2,
+        "y": 156.47
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.12_different_mailing_address_yes",
+      "label": "Line 12 — Do you want any injured spouse refund mailed to an address different from the one on your joint return? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 133.469
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.12_different_mailing_address_no",
+      "label": "Line 12 — Do you want any injured spouse refund mailed to an address different from the one on your joint return? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_12[1]",
+      "position": {
+        "page": 0,
+        "x": 540,
+        "y": 133.469
+      }
+    },
+    {
+      "fieldId": "form-8379.0.line.12_refund_mailing_address",
+      "label": "Line 12 — If \"Yes,\" enter the address (number and street; city, town or post office, state, and ZIP code)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 107.966
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.13a_income_w2_col_a",
+      "label": "Line 13a — Income reported on Form(s) W-2: (a) Amount shown on joint return",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn13a[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 683.965
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.13a_income_w2_col_b",
+      "label": "Line 13a — Income reported on Form(s) W-2: (b) Allocated to injured spouse",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn13a[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 683.965
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.13a_income_w2_col_c",
+      "label": "Line 13a — Income reported on Form(s) W-2: (c) Allocated to other spouse",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn13a[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 683.965
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.13b_all_other_income_col_a",
+      "label": "Line 13b — All other income: (a) Amount shown on joint return",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn13b[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 659.964
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.13b_all_other_income_col_b",
+      "label": "Line 13b — All other income: (b) Allocated to injured spouse",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn13b[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 659.964
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.13b_all_other_income_col_c",
+      "label": "Line 13b — All other income: (c) Allocated to other spouse",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn13b[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 659.964
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.14_adjustments_to_income_col_a",
+      "label": "Line 14 — Adjustments to income: (a) Amount shown on joint return",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn14[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 635.963
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.14_adjustments_to_income_col_b",
+      "label": "Line 14 — Adjustments to income: (b) Allocated to injured spouse",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn14[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 635.963
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.14_adjustments_to_income_col_c",
+      "label": "Line 14 — Adjustments to income: (c) Allocated to other spouse",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn14[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 635.963
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.15_standard_or_itemized_deductions_col_a",
+      "label": "Line 15 — Standard deduction or itemized deductions: (a) Amount shown on joint return",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn15[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 611.962
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.15_standard_or_itemized_deductions_col_b",
+      "label": "Line 15 — Standard deduction or itemized deductions: (b) Allocated to injured spouse",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn15[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 611.962
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.15_standard_or_itemized_deductions_col_c",
+      "label": "Line 15 — Standard deduction or itemized deductions: (c) Allocated to other spouse",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn15[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 611.962
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.16_nonrefundable_credits_col_a",
+      "label": "Line 16 — Nonrefundable credits: (a) Amount shown on joint return",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn16[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 587.961
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.16_nonrefundable_credits_col_b",
+      "label": "Line 16 — Nonrefundable credits: (b) Allocated to injured spouse",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn16[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 587.961
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.16_nonrefundable_credits_col_c",
+      "label": "Line 16 — Nonrefundable credits: (c) Allocated to other spouse",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn16[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 587.961
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.17_refundable_credits_col_a",
+      "label": "Line 17 — Refundable credits (do not include any earned income credit): (a) Amount shown on joint return",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn17[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 563.96
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.17_refundable_credits_col_b",
+      "label": "Line 17 — Refundable credits (do not include any earned income credit): (b) Allocated to injured spouse",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn17[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 563.96
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.17_refundable_credits_col_c",
+      "label": "Line 17 — Refundable credits (do not include any earned income credit): (c) Allocated to other spouse",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn17[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 563.96
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.18_other_taxes_col_a",
+      "label": "Line 18 — Other taxes: (a) Amount shown on joint return",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn18[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 539.959
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.18_other_taxes_col_b",
+      "label": "Line 18 — Other taxes: (b) Allocated to injured spouse",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn18[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 539.959
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.18_other_taxes_col_c",
+      "label": "Line 18 — Other taxes: (c) Allocated to other spouse",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn18[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 539.959
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.19_federal_income_tax_withheld_col_a",
+      "label": "Line 19 — Federal income tax withheld: (a) Amount shown on joint return",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn19[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 515.958
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.19_federal_income_tax_withheld_col_b",
+      "label": "Line 19 — Federal income tax withheld: (b) Allocated to injured spouse",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn19[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 515.958
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.19_federal_income_tax_withheld_col_c",
+      "label": "Line 19 — Federal income tax withheld: (c) Allocated to other spouse",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn19[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 515.958
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.20_payments_col_a",
+      "label": "Line 20 — Payments: (a) Amount shown on joint return",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn20[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 491.957
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.20_payments_col_b",
+      "label": "Line 20 — Payments: (b) Allocated to injured spouse",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn20[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 491.957
+      }
+    },
+    {
+      "fieldId": "form-8379.1.line.20_payments_col_c",
+      "label": "Line 20 — Payments: (c) Allocated to other spouse",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Pg2Table[0].BodyRowLn20[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 491.957
+      }
+    },
+    {
+      "fieldId": "form-8379.1.signing.injured_spouse_phone",
+      "label": "Injured spouse's phone number",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "phone",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 419.966
+      }
+    },
+    {
+      "fieldId": "form-8379.1.signing.preparer_self_employed",
+      "label": "Paid preparer: Check if self-employed",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 496.223,
+        "y": 406.969
+      }
+    },
+    {
+      "fieldId": "form-8379.1.signing.preparer_name",
+      "label": "Print/Type preparer's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_29[0]",
+      "position": {
+        "page": 1,
+        "x": 87.4,
+        "y": 395.968
+      }
+    },
+    {
+      "fieldId": "form-8379.1.signing.preparer_ptin",
+      "label": "Paid preparer's PTIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_30[0]",
+      "position": {
+        "page": 1,
+        "x": 518.4,
+        "y": 395.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8379.1.signing.firm_name",
+      "label": "Paid preparer: Firm's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_31[0]",
+      "position": {
+        "page": 1,
+        "x": 144,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8379.1.signing.firm_ein",
+      "label": "Paid preparer: Firm's EIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_34[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 383.969
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8379.1.signing.firm_address",
+      "label": "Paid preparer: Firm's address",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_32[0]",
+      "position": {
+        "page": 1,
+        "x": 144,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-8379.1.signing.firm_phone",
+      "label": "Paid preparer: Phone no.",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "phone",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_33[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 371.97
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8379/blank.pdf",
+    "ingestedAt": "2026-11-26T09:18:33.879Z",
+    "totalFields": 63,
+    "skipped": 0,
+    "catalogEntries": 63
+  }
+}

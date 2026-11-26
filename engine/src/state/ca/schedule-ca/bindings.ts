@@ -25,6 +25,7 @@ import { movingExpenseBindings } from "./movingExpenses.js";
 import { nolDeductionBindings } from "./nolDeduction.js";
 import { otherGainsBindings } from "./otherGains.js";
 import { sectionCBindings } from "./sectionC.js";
+import { trustDistributionBindings } from "./trustDistribution.js";
 import type { ScheduleCa } from "./types.js";
 
 const LINE_1F_WITHOUT_8839 =
@@ -137,6 +138,8 @@ export function register(): void {
       ...otherGainsBindings,
       ...childIncomeBindings,
       ...excessBusinessLossBindings,
+      // MANUAL EDIT: line 8z column C from FTB 5870A or an untaxed trust distribution (trustDistribution.ts).
+      ...trustDistributionBindings,
       ...nolDeductionBindings,
       ...movingExpenseBindings,
       ...mortgageCreditBindings,
@@ -638,12 +641,6 @@ export function register(): void {
         "CA subtraction for state income tax refunds (not taxable in CA) requires knowledge of the taxable refund amount from federal Schedule 1 line 1, which is not ingested as a separate fact or field.",
       "0.line.b2a_additions":
         "CA addition for alimony received under post-2018 or post-2025 agreements requires alimony fact data and divorce agreement date logic not yet ingested or modeled.",
-      "0.line.b6_federal":
-        "Farm income/loss (Sch CA Section B line 6 col A) comes from federal Schedule 1 line 6 (Schedule F); federal Schedule 1 and Schedule F are not ingested forms and we have no farm income fact ingestion path.",
-      "0.line.b6_subtractions":
-        "Farm income CA subtractions (Sch CA Section B line 6 col B) require FTB 3801 passive activity and CA depreciation adjustments for farm activities; no Schedule F or farm fact ingestion path yet.",
-      "0.line.b6_additions":
-        "Farm income CA additions (Sch CA Section B line 6 col C) require FTB 3801 passive activity and CA depreciation adjustments for farm activities; no Schedule F or farm fact ingestion path yet.",
       "1.line.b8a_federal":
         "Federal net operating loss from Schedule 1 line 8a. Schedule 1 is not ingested and there is no NOL fact category in the current fact model.",
       "1.line.b8a_additions":

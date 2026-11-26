@@ -1,4 +1,4 @@
-import { businessesOnReturn } from "../../facts/index.js";
+import { businessesOnReturn, farmsOnReturn } from "../../facts/index.js";
 import { filingStatusOf, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import { figureK1Form6198, k1AtRiskActivity } from "../passThrough/atRisk.js";
 import { passThroughEntitiesOnReturn } from "../passThrough/items.js";
@@ -6,6 +6,8 @@ import { k1sOnForm6198 } from "../passThrough/limits.js";
 import { spousePropertiesOnReturn } from "../rentals/passive.js";
 import { businessNeedsForm6198, figureBusinessForm6198 } from "../schedule-c/atRisk.js";
 import { profitBeforeLossRules } from "../schedule-c/lines.js";
+import { farmNeedsForm6198, figureFarmForm6198 } from "../schedule-f/atRisk.js";
+import { profitBeforeLossRules as farmProfitBeforeLossRules } from "../schedule-f/lines.js";
 import type { Form6198Copy, Form6198FilingInfo } from "./filingInfo.js";
 
 type Filer = { key: string; copy: Form6198Copy };
@@ -47,6 +49,25 @@ function businessFilers(inputs: ResolverInputs, joint: boolean): Filer[] {
   });
 }
 
+/* Each farm with box 36b and a loss before the at-risk rules (schedule-f/atRisk.ts). */
+function farmFilers(inputs: ResolverInputs, joint: boolean): Filer[] {
+  const { farms } = farmsOnReturn(inputs.facts, joint);
+  return farms.flatMap(({ key, value }) => {
+    const beforeAtRisk = farmProfitBeforeLossRules(value);
+    if (beforeAtRisk === undefined || !farmNeedsForm6198(value, beforeAtRisk)) return [];
+    return [
+      {
+        key,
+        copy: {
+          description: value.atRisk?.description ?? value.activity,
+          owner: value.owner ?? "taxpayer",
+          outcome: figureFarmForm6198(value, beforeAtRisk, key),
+        },
+      },
+    ];
+  });
+}
+
 /*
  * Who files (irs-6198-inst-2025::sec::who-must-file::b01; irs-pub-925-2025::sec::at-risk-limits::b01):
  * an activity that had a loss and amounts not at risk, one copy per activity.
@@ -60,7 +81,11 @@ function businessFilers(inputs: ResolverInputs, joint: boolean): Filer[] {
  */
 export function resolve6198Info(inputs: ResolverInputs): Form6198FilingInfo {
   const joint = spousePropertiesOnReturn(filingStatusOf(inputs));
-  const filers = [...k1Filers(inputs, joint), ...businessFilers(inputs, joint)];
+  const filers = [
+    ...k1Filers(inputs, joint),
+    ...businessFilers(inputs, joint),
+    ...farmFilers(inputs, joint),
+  ];
   const waiting = filers.flatMap(({ copy }) =>
     copy.outcome.kind === "waiting" ? copy.outcome.factKeys : [],
   );

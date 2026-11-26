@@ -1,6 +1,7 @@
 import type { RentalFactValue } from "../../facts/index.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Form1040FilingInfo } from "../1040/filingInfo.js";
+import type { Form4835FilingInfo } from "../4835/filingInfo.js";
 import type { PassiveK1Activities } from "../8582/activities.js";
 import type { PassThroughEntity } from "../passThrough/items.js";
 import type { LimitContext } from "../passThrough/limits.js";
@@ -17,9 +18,18 @@ export interface RentalProperty {
   passive?: boolean;
 }
 
-/* Line 22 reads Form 8582's parts; the MFS caution reads living apart (the 1040 resolver fills it). */
+/*
+ * Line 22 reads Form 8582's parts; the MFS caution reads living apart (the 1040
+ * resolver fills it). MANUAL EDIT: lines 40 to 43 read Form 4835's amounts.
+ */
 export interface ScheduleEFilingInfo
-  extends BaseFilingInfo, Pick<Form1040FilingInfo, "livedApartFromSpouseAllYear"> {
+  extends
+    BaseFilingInfo,
+    Pick<Form1040FilingInfo, "livedApartFromSpouseAllYear">,
+    Pick<
+      Form4835FilingInfo,
+      "farmRentalInUse" | "farmRentalNet" | "farmRentalGross" | "farmRentalLine43"
+    > {
   /* Part I columns A–C, in fact order; undefined with no property. */
   rentalProperties?: RentalProperty[];
   /* More properties than Part I's three columns. */

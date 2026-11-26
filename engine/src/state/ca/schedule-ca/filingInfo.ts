@@ -7,11 +7,13 @@ import type { Form2106FilingInfo } from "../../../federal/2106/filingInfo.js";
 import type { Form4797FilingInfo } from "../../../federal/4797/filingInfo.js";
 import type { Form8889FilingInfo } from "../../../federal/8889/filingInfo.js";
 import type { ScheduleAFilingInfo } from "../../../federal/schedule-a/filingInfo.js";
+import type { ScheduleFFilingInfo } from "../../../federal/schedule-f/filingInfo.js";
 import type { BaseFilingInfo } from "../../../filingInfo.js";
 import type { Form3801FilingInfo } from "../3801/filingInfo.js";
 import type { Form3803FilingInfo } from "../3803/filingInfo.js";
 import type { Form3805EFilingInfo } from "../3805e/filingInfo.js";
 import type { Form3913FilingInfo } from "../3913/filingInfo.js";
+import type { Form5870AFilingInfo } from "../5870a/filingInfo.js";
 import type { ScheduleD1FilingInfo } from "../schedule-d-1/filingInfo.js";
 import type { ScheduleDCaFilingInfo } from "../schedule-d-ca/filingInfo.js";
 import type { ScheduleG1FilingInfo } from "../schedule-g-1/filingInfo.js";
@@ -31,6 +33,7 @@ export interface ScheduleCaFilingInfo
     Pick<ScheduleAFilingInfo, "increasedStandardDeduction" | "disasterLossGap">,
     Pick<ScheduleDCaFilingInfo, "scheduleDCaFigures">,
     Pick<Form3803FilingInfo, "childIncomeLine8z">,
+    Pick<ScheduleFFilingInfo, "farms">,
     Pick<
       Form3913FilingInfo,
       | "caMovingWaits"
@@ -46,7 +49,9 @@ export interface ScheduleCaFilingInfo
       "scheduleD1" | "scheduleD1Gap" | "scheduleD1SummaryGap" | "scheduleD1Recapture"
     >,
     // Line 4 columns B and C are a gap while an FTB 3805E amount is bound for Schedule D-1.
-    Pick<Form3805EFilingInfo, "form3805ETotals"> {
+    Pick<Form3805EFilingInfo, "form3805ETotals">,
+    // Line 8z column C takes FTB 5870A Part II line 2 or 4, or an untaxed trust distribution.
+    Pick<Form5870AFilingInfo, "form5870AScheduleCaAddition"> {
   /** Part II line 21: investment fees (misc_deductions.investment_fees), a California-only deduction. */
   caInvestmentFees?: number;
   /** Lines 1a, 3, 15 and 17: a contractor who is an employee for California; undefined when not one. */

@@ -5,7 +5,7 @@
  * receipt: the items, or why they are not known yet.
  */
 
-import { businessesOnReturn, rentalsOnReturn } from "../../facts/index.js";
+import { businessesOnReturn, farmsOnReturn, rentalsOnReturn } from "../../facts/index.js";
 import { roundDollars, sum } from "../../money.js";
 import { filingStatusOf, type ResolverInputs } from "../../resolverInputs.js";
 import { unsupported, type Unsupported } from "../../types.js";
@@ -13,6 +13,7 @@ import { passiveRentalsOf } from "../8582/rentalRows.js";
 import { spousePropertiesOnReturn } from "../rentals/passive.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { netIncomeOrLoss } from "../schedule-e/lines.js";
+import { farmNetProfitAmount } from "../schedule-f/lines.js";
 import type { OtherBusinessLosses } from "./excessBusinessLoss.js";
 import { otherPassiveActivitiesOf } from "./form8582Rows.js";
 import {
@@ -127,12 +128,18 @@ export function otherBusinessLosses(inputs: ResolverInputs): OtherBusinessLosses
   const values = businesses.map((business) => business.value);
   const scheduleC = businesses.map(({ key, value }) => ({ key, net: netProfit(value, values) }));
   const rentals = properties.map(({ key, value }) => ({ key, net: netIncomeOrLoss(value) }));
+  // MANUAL EDIT: each farm's Schedule F line 34 (Form 461 line 6, through Schedule 1 line 6).
+  const farms = farmsOnReturn(inputs.facts, joint).farms.map(({ key, value }) => ({
+    key,
+    net: farmNetProfitAmount(value),
+  }));
   const losses = (amounts: Array<{ net: number | undefined }>) =>
     sum(...amounts.map(({ net }) => Math.max(0, -(net ?? 0))));
   return {
     scheduleCLosses: losses(scheduleC),
     rentalLosses: losses(rentals),
-    unknownKeys: [...scheduleC, ...rentals]
+    farmLosses: losses(farms),
+    unknownKeys: [...scheduleC, ...rentals, ...farms]
       .filter(({ net }) => net === undefined)
       .map(({ key }) => key),
   };

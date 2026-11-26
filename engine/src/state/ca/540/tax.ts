@@ -119,8 +119,21 @@ export const line33TaxAfterExemptionCredits: Form540Line<"line.33_tax_after_exem
 const filesScheduleG1 = (info: Form540FilingInfo) =>
   info.mustFile?.["schedule-g-1"]?.value === true;
 
-const FTB_5870A_GAP =
-  "Line 34 includes the tax from FTB 5870A (tax on accumulation distribution of trusts), which has no rules yet.";
+const files5870A = (info: Form540FilingInfo) => info.mustFile?.["form-5870a"]?.value === true;
+
+/*
+ * FTB 5870A's tax: "Enter the amount from line 26 [Part II: line 14, line 16]
+ * on Form 540, line 34 ... Check the box labeled 'FTB 5870A'"
+ * (ca-5870a-inst-2025::sec::part-i-tax-on-accumulation-distribution::b06,
+ * ::section-a::b04, ::section-b::b04). The amount, the form's gap, or
+ * undefined while it waits or the form does not file.
+ */
+function trustTax(info: Form540FilingInfo): number | Unsupported | undefined {
+  if (!files5870A(info)) return undefined;
+  const carried = info.form5870ATax;
+  if (carried === undefined || carried === "waits") return undefined;
+  return "gap" in carried ? unsupported(carried.gap) : carried.amount;
+}
 
 /*
  * Schedule G-1's tax: line 28, or line 7 when only Part II is used ("Otherwise,
@@ -138,16 +151,26 @@ function scheduleG1Tax(form: Form540Form): number | undefined {
 /*
  * Line 34 (ca-540-inst-2025::sec::line-34-tax-from-schedule-g-1-and-form-ftb-5870a::b01):
  * the tax from Schedule G-1 and from FTB 5870A. Blank when neither files; it
- * waits while Schedule G-1 files and its tax waits.
+ * waits while a form that files has its tax still to come.
  */
 export const line34TaxAmount: Form540Line<"line.34_tax_amount"> = (form, info) => {
-  if (info.mustFile?.["form-5870a"]?.value === true) return unsupported(FTB_5870A_GAP);
-  return filesScheduleG1(info) ? scheduleG1Tax(form) : undefined;
+  const lumpSumTax = filesScheduleG1(info) ? scheduleG1Tax(form) : undefined;
+  if (!files5870A(info)) return lumpSumTax;
+  const trusts = trustTax(info);
+  if (trusts === undefined || isUnsupported(trusts)) return trusts;
+  if (filesScheduleG1(info) && lumpSumTax === undefined) return undefined;
+  return trusts === 0 && lumpSumTax === undefined ? undefined : sum(trusts, lumpSumTax);
 };
 
 /* Line 34's Schedule G-1 box: checked when the schedule's tax is on the line. */
 export const line34TaxFromScheduleG1: Form540Line<"line.34_tax_from_schedule_g1"> = (form, info) =>
   filesScheduleG1(info) && scheduleG1Tax(form) !== undefined ? true : undefined;
+
+/* Line 34's FTB 5870A box: checked when the form's tax above 0 is on the line. */
+export const line34TaxFromFtb5870A: Form540Line<"line.34_tax_from_ftb_5870a"> = (_, info) => {
+  const trusts = trustTax(info);
+  return typeof trusts === "number" && trusts !== 0 ? true : undefined;
+};
 
 /* "Add line 33 and line 34" (the form); waits while Schedule G-1 files and line 34 waits. */
 export const line35TotalTaxAfterCredits: Form540Line<"line.35_total_tax_after_credits"> = (
@@ -158,5 +181,7 @@ export const line35TotalTaxAfterCredits: Form540Line<"line.35_total_tax_after_cr
   if (typeof tax !== "number") return undefined;
   const lumpSumTax = form["line.34_tax_amount"];
   if (filesScheduleG1(info) && typeof lumpSumTax !== "number") return undefined;
+  // MANUAL EDIT: FTB 5870A files with its tax still unknown (a wait or a gap): the total waits too.
+  if (files5870A(info) && typeof trustTax(info) !== "number") return undefined;
   return sum(tax, lumpSumTax);
 };

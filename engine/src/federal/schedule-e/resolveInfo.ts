@@ -5,6 +5,7 @@ import {
   resolveMustFile,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { resolve4835Info } from "../4835/resolveInfo.js";
 import { form8582K1Activities } from "../passThrough/form8582Rows.js";
 import { passThroughEntitiesOnReturn } from "../passThrough/items.js";
 import type { LimitContext } from "../passThrough/limits.js";
@@ -168,7 +169,10 @@ export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInf
   const rentalFiles = properties.length + spouseKeys.length > 0;
   const context = limitContextOf(inputs);
   const k1Keys = k1sOnScheduleE(k1, context);
-  const files = rentalFiles || k1Keys.length + k1.spouseKeys.length > 0;
+  // MANUAL EDIT: Form 4835's net goes on line 40 (irs-4835-inst-2025::sec::face-part-ii::b02).
+  const form4835 = resolve4835Info(inputs).mustFile?.["form-4835"];
+  const farmRental = form4835?.value === true;
+  const files = rentalFiles || farmRental || k1Keys.length + k1.spouseKeys.length > 0;
   const columns = properties.slice(0, PROPERTY_COLUMNS.length);
   const rentalColumns = rentalColumnsOf(inputs);
   /*
@@ -185,9 +189,13 @@ export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInf
             ? []
             : [
                 {
-                  rule: "fallback: a rental real estate or royalty property fact, or a Schedule K-1",
+                  rule: "fallback: a rental real estate or royalty property fact, a Schedule K-1, or Form 4835",
                   value: files,
+                  triggeredByDecisionKeys: farmRental
+                    ? (form4835?.derivation?.triggeredByDecisionKeys ?? [])
+                    : [],
                   triggeredByFactKeys: [
+                    ...(farmRental ? (form4835?.derivation?.triggeredByFactKeys ?? []) : []),
                     ...properties.map((property) => property.key),
                     ...spouseKeys,
                     ...k1Keys,
