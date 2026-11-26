@@ -81,6 +81,33 @@ function line1(form: Form, info: Form8606FilingInfo) {
   return roundDollars(nondeductibleLeftover(line10, holder.ira?.contributions ?? 0, line12));
 }
 
+/*
+ * Without a Form 8915-F fact the engine keeps lines 15b and 25b unfigured, as
+ * before Form 8915-F had rules; lines 15c and 25c read them as zero.
+ */
+const NO_TRADITIONAL_DISASTER =
+  "No Form 8915-F fact records a traditional IRA qualified disaster distribution; line 15c reads this line as zero.";
+const NO_ROTH_DISASTER =
+  "No Form 8915-F fact records a Roth IRA qualified disaster distribution; line 25c reads this line as zero.";
+
+/*
+ * MANUAL EDIT: line 15b. "If all your distributions in 2025 from those IRAs
+ * are qualified disaster distributions, enter the amount from line 15a ... you
+ * will need to multiply the amount on line 15a by a fraction. The numerator of
+ * the fraction is your total qualified disaster distributions, and the
+ * denominator is the amount from Form 8606, line 7"
+ * (irs-8606-inst-2025::sec::line-15b::b01–b02; the example: 30,000 × 22,000/33,000 = 20,000).
+ */
+function line15b(form: Form, info: Form8606FilingInfo) {
+  const qualified = holderOf(info)?.qualifiedDisasterTraditional;
+  if (qualified === undefined) return unsupported(NO_TRADITIONAL_DISASTER);
+  const line7 = form["0.line.7_traditional_ira_distributions"];
+  const line15a = form["1.line.15a_line_7_minus_line_12"];
+  if (line7 === undefined || line15a === undefined) return undefined;
+  if (line7 <= 0) return 0;
+  return roundDollars((line15a * Math.min(qualified, line7)) / line7);
+}
+
 /* MANUAL EDIT: Part III (irs-8606-inst-2025::sec::part-iii-distributions-from-roth-iras::b01), from partIII.ts. */
 function partIIIBindings() {
   const line =
@@ -88,7 +115,7 @@ function partIIIBindings() {
     (_: unknown, info: Form8606FilingInfo) => {
       const holder = holderOf(info);
       if (!holder?.rothDistribution || !holder.roth) return undefined;
-      const figures = partIIIFigures(holder.rothRows, holder.roth);
+      const figures = partIIIFigures(holder.rothRows, holder.roth, holder.qualifiedDisasterRoth);
       // A line 19 of 0: "don't complete Part III" (irs-8606-inst-2025::sec::line-19::b02).
       return figures.line19 === 0 ? undefined : read(figures);
     };
@@ -102,6 +129,13 @@ function partIIIBindings() {
     "1.line.23_line_21_minus_line_22": line((figures) => figures.line23),
     "1.line.24_basis_roth_conversions_rollovers": line((figures) => figures.line24),
     "1.line.25a_line_23_minus_line_24": line((figures) => figures.line25a),
+    "1.line.25b_roth_qualified_disaster_distributions": (
+      form: unknown,
+      info: Form8606FilingInfo,
+    ) =>
+      holderOf(info)?.qualifiedDisasterRoth === undefined
+        ? unsupported(NO_ROTH_DISASTER)
+        : line((figures) => (figures.line23 === 0 ? undefined : figures.line25b))(form, info),
     // Line 23 of zero skips lines 24 and 25; line 25a of zero skips 25b and 25c (the form's text).
     "1.line.25c_taxable_roth_distributions": line((figures) =>
       figures.line23 === 0 || figures.line25a === 0 ? undefined : figures.line25c,
@@ -195,7 +229,8 @@ export function register(): void {
         const line12 = form["0.line.12_nontaxable_distribution_portion"];
         return line7 === undefined || line12 === undefined ? undefined : line7 - line12;
       },
-      // Line 15b and the repayment reduction have no facts; both read as zero.
+      "1.line.15b_qualified_disaster_distributions": line15b,
+      // The repayment reduction has no fact and reads as zero.
       "1.line.15c_taxable_traditional_distributions": (form) => {
         const line15a = form["1.line.15a_line_7_minus_line_12"];
         const line15b = form["1.line.15b_qualified_disaster_distributions"];
@@ -234,10 +269,6 @@ export function register(): void {
       "0.header.foreign_country_name": FILED_ALONE,
       "0.header.foreign_province_state_county": FILED_ALONE,
       "0.header.foreign_postal_code": FILED_ALONE,
-      "1.line.15b_qualified_disaster_distributions":
-        "No fact records qualified disaster distributions (Form 8915-F); line 15c reads this line as zero.",
-      "1.line.25b_roth_qualified_disaster_distributions":
-        "No fact records qualified disaster distributions from a Roth IRA; line 25c reads this line as zero.",
       "1.signing.preparer_self_employed": PREPARER,
       "1.signing.preparer_name": PREPARER,
       "1.signing.preparer_ptin": PREPARER,

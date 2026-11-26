@@ -75,6 +75,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole casualty event (Form 4684); whether one happened is Cade's question",
   ],
   [
+    /^retirement\.qualified_disaster\.[^.]+$/,
+    "each fact is a whole Form 8915-F (one person, one year in which the disasters began); " +
+      "whether the taxpayer had a qualified disaster distribution, income spread from an earlier " +
+      "year or a repayment is Cade's question",
+  ],
+  [
     /^armed_forces_move\.[^.]+$/,
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],

@@ -18,6 +18,7 @@ import {
   resolveMustFile,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { qualifiedDisasterIra } from "../8915-f/figure.js";
 import { iraAnswers } from "../schedule-1/answers.js";
 import { contributionLimit, iraWorksheetGap } from "../schedule-1/iraDeduction.js";
 import { needsPub590AWorksheets } from "../schedule-1/pub590a.js";
@@ -111,6 +112,7 @@ function iraHolder(inputs: ResolverInputs, owner: IraOwner): IraHolder {
   const worksheet = ira
     ? worksheetLine1(inputs, owner, ira, line7)
     : { line1FromWorksheet: false, worksheetWages: 0 };
+  const disaster = qualifiedDisasterIra(inputs, owner);
   return {
     owner,
     ira,
@@ -122,6 +124,8 @@ function iraHolder(inputs: ResolverInputs, owner: IraOwner): IraHolder {
     rothDistribution: rothRows.length > 0,
     rothRows,
     roth: readRothIraFact(inputs.factByKey, owner),
+    qualifiedDisasterTraditional: disaster.traditional,
+    qualifiedDisasterRoth: disaster.roth,
   };
 }
 

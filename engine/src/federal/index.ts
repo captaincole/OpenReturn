@@ -856,6 +856,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8915-F",
     relativeDir: "federal/8915-f",
     register: registerForm8915F,
+    // One Form 8915-F for each person and item B year (8915-f/resolveInfo.ts).
+    copies: {
+      count: (info) => info?.form8915FCopies?.length ?? 1,
+      select: (info, index) => info && { ...info, form8915FCopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-8919",
