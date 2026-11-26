@@ -69,25 +69,43 @@ Each place where the form and its instructions do not settle a rule. Block ids a
 - Default: the form files when a line has an amount in column (h), (q) or (r), or with a gap or a missing line fact. A property held five full years (0%) with nothing else files no form. The explicit decision still files it.
 - Changes dollars: no.
 
+## 12. Line 12 counts from the first day of the month
+
+- Source: line 10, "using the first day of the month in which the property was placed in service" (line-10::b01); line 12 counts the "full years between the date on line 10 and the date on line 11" (the form).
+- Default: line 12 counts from the line 10 date, not the day the property was placed in service. The blind fill read it the same way.
+- Changes dollars: yes, near an anniversary. Placed in service 01/15/2023 and disposed of 01/10/2025: 2 full years from 01/01/2023 (60%), 1 from 01/15/2023 (80%). On a $14,000 line 14, $8,400 against $11,200.
+
+## 13. A penalty column of 0
+
+- Source: the penalty ratios (excessive-payments-eps-excessive-credit::b02) can give $0 to a column, for example (o)(3) with nothing in column (e).
+- Default: a column the split leaves at $0 is blank. The blind fill wrote 0. The totals do not change.
+- Changes dollars: no.
+
 ## Proposals for a discussion
 
 - Worksheets 1 and 2 (lines 8 and 13) replay the general business credits of every year the recapture touches. The engine could figure them if it read earlier years' Forms 3800 (issue #79, last year's return). That is a new layer of earlier-year facts, so the worksheets are stated amounts for now.
 - More than four Part II properties, or more than one hydrogen facility, needs more copies of Form 4255. The engine prints one copy, so such a return is unsupported. A form that repeats is issue #174.
 
+## Second opinions
+
+- **Blind fill (2026-11-25).** 15 cases filled by hand from the blank form and the instructions: Part II Sections B and C, Part III, Worksheet 3, the penalty split, the excessive payment and credit transfer columns, and Schedule 2 lines 1e, 1f, 1y, 17a and 19. No dollar difference. One blank-or-zero difference: column (o)(3) of line 1c with nothing in column (e), blank in the engine and 0 in the blind fill (item 13). The blind fill's dollar doubts are items 3, 6, 7 and 12, and rows A33 and A35.
+- **PolicyEngine-US 2.154.0 (commit 363e9fc5).** It has one variable, `recapture_of_investment_credit`, a bare input with no formula: no recapture percentages, no Part II or Part III lines, no penalties, no elective payment amounts. It adds the amount to the tax after the nonrefundable credits, as Schedule 2 line 17a does with column (r). No constant or formula to compare, and no disagreement.
+- **IRS Direct File.** Not compared: no checkout in reach, and its scope did not include business credits.
+
 ## Confidence by field group
 
-| Field group | Confidence |
-| --- | --- |
-| Header (name, identifying number) | stated rule |
-| Part I columns (a) to (f) | stated rule (stated amounts and the form's arithmetic) |
-| Part I columns (g) to (j), no elective payment | published example with numbers (Examples 1 and 2) |
-| Part I columns (k) and (l) | published example with numbers for (l) (Example 6); own reading for the split (question 1) |
-| Part I columns (m) and (n) | stated rule |
-| Part I columns (o) and (p) | published example with numbers (the penalty ratio); own reading for the rest (A33) |
-| Part I columns (q) to (t) and line 3 | stated rule; own reading for (m)(3) on 1z and 2z (A34) |
-| Part II lines 1 to 9 | stated rule |
-| Part II lines 10 to 16 | published example with numbers (Examples 1 to 4) |
-| Part II line 17 and lines 18 to 20 | stated rule |
-| Part III lines 1 to 9 | stated rule (no example) |
-| Worksheet 3 (column (h) of lines 1g and 1j) | stated rule; own reading for the dates (question 3) |
-| Schedule 2 lines 1d, 1e, 1f, 1y, 17a, 17z, 19 | stated rule; own reading for the amounts the list does not name (A35) |
+| Field group                                    | Confidence                                                                                 |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Header (name, identifying number)              | stated rule                                                                                |
+| Part I columns (a) to (f)                      | stated rule (stated amounts and the form's arithmetic)                                     |
+| Part I columns (g) to (j), no elective payment | published example with numbers (Examples 1 and 2)                                          |
+| Part I columns (k) and (l)                     | published example with numbers for (l) (Example 6); own reading for the split (question 1) |
+| Part I columns (m) and (n)                     | stated rule                                                                                |
+| Part I columns (o) and (p)                     | published example with numbers (the penalty ratio); own reading for the rest (A33)         |
+| Part I columns (q) to (t) and line 3           | stated rule; own reading for (m)(3) on 1z and 2z (A34)                                     |
+| Part II lines 1 to 9                           | stated rule                                                                                |
+| Part II lines 10 to 16                         | published example with numbers (Examples 1 to 4)                                           |
+| Part II line 17 and lines 18 to 20             | stated rule                                                                                |
+| Part III lines 1 to 9                          | stated rule (no example)                                                                   |
+| Worksheet 3 (column (h) of lines 1g and 1j)    | stated rule; own reading for the dates (question 3)                                        |
+| Schedule 2 lines 1d, 1e, 1f, 1y, 17a, 17z, 19  | stated rule; own reading for the amounts the list does not name (A35)                      |
