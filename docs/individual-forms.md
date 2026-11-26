@@ -15,7 +15,7 @@ This page lists each form that an individual income tax return can hold, and wha
 
 Source: [Tax year 2025 accepted forms and schedules for individual tax returns and extensions](https://www.irs.gov/pub/irs-efile/tax-year-2025-accepted-forms-schedules-individual-tax-returns-extensions.xlsx), IRS, dated 2025-11-18.
 
-The list has 225 rows, and 197 are forms and schedules to compute. The engine has 88 of them, and 78 have rules. Of the 43 tier 1 forms, the engine has 43, and 43 have rules.
+The list has 225 rows, and 197 are forms and schedules to compute. The engine has 88 of them, and 82 have rules. Of the 43 tier 1 forms, the engine has 43, and 43 have rules.
 
 | Form | Title | Tier 1 | Engine | Copies |
 | --- | --- | --- | --- | --- |
@@ -70,7 +70,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 3468 | Investment Credit |  | Not in the engine | unbounded |
 | Form 3800 | General Business Credit | Yes | Rules | 1 |
 | Form 3903 | Moving Expenses |  | Rules | 2 |
-| Form 4136 | Credit For Federal Tax Paid On Fuels |  | No rules yet | 1 |
+| Form 4136 | Credit For Federal Tax Paid On Fuels |  | Rules | 1 |
 | Form 4137 | Social Security and Medicare Tax On Unreported Tip Income |  | Rules | 2 |
 | Form 4255 | Recapture of Investment Credit |  | Rules | unbounded |
 | Form 4547 | Trump Account Election(s) |  | Not in the engine | unbounded |
@@ -151,7 +151,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8828 | Recapture of Federal Mortgage Subsidy |  | Rules | 1 |
 | Form 8829 | Expenses for Business Use of Your Home |  | Rules | 32 |
 | Form 8833 | Treaty-Based Return Position Disclosure Under Section 6114 or 7701(b) |  | Not in the engine | unbounded |
-| Form 8834 | Qualified Electric Vehicle Credit |  | No rules yet | unbounded |
+| Form 8834 | Qualified Electric Vehicle Credit |  | Rules | unbounded |
 | Form 8835 | Renewable Electricity, Refined Coal, and Indian Coal Production Credit |  | Not in the engine | unbounded |
 | Form 8838 | Consent to Extend the Time To Assess Tax Under Section 367-Gain Recognition Agreement |  | Not in the engine | unbounded |
 | Form 8838P | Consent To Extend the Time To Assess Tax Pursuant to the Gain Deferral Method (Section 721(c)) |  | Not in the engine | unbounded |
@@ -165,7 +165,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8854 | Initial and Annual Expatriation Information Statement |  | Not in the engine | 2 |
 | Form 8858 | Information Return of U.S. Persons With Respect To Foreign Disregarded Entities |  | Not in the engine | unbounded |
 | Form 8858 Schedule M | Transactions Between Foreign Disregarded Entity of a Foreign Tax Owner and the Filer or Other Related Entities |  | Not in the engine | unbounded |
-| Form 8859 | District of Columbia First-Time Homebuyer Credit |  | No rules yet | 1 |
+| Form 8859 | District of Columbia First-Time Homebuyer Credit |  | Rules | 1 |
 | Form 8862 | Information To Claim Earned Income Credit After Disallowance |  | Not in the engine | 1 |
 | Form 8863 | Education Credits (American Opportunity and Lifetime Learning Credits) |  | Rules | 1 |
 | Form 8864 | Biodiesel and Renewable Diesel Fuels Credit |  | Not in the engine | unbounded |
@@ -194,7 +194,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8908 | Energy Efficient Home Credit |  | Not in the engine | unbounded |
 | Form 8911 | Alternative Fuel Vehicle Refueling Property Credit |  | Rules | unbounded |
 | Form 8911 Schedule A | Alternative Fuel Vehicle Refueling Property |  | Not in the engine | unbounded |
-| Form 8912 | Credit to Holders of Tax Credit Bonds |  | No rules yet | unbounded |
+| Form 8912 | Credit to Holders of Tax Credit Bonds |  | Rules | unbounded |
 | Form 8915F | Qualified Disaster Retirement Plan Distributions and Repayments |  | Rules | 6 |
 | Form 8917 | Tuition and Fees Deduction |  | Not in the engine | 1 |
 | Form 8919 | Uncollected Social Security and Medicare Tax on Wages |  | Rules | 2 |
@@ -249,7 +249,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 
 Source: [Forms you can e-file for individuals (tax year 2025)](https://www.ftb.ca.gov/tax-pros/efile/individual-efile-forms.html), FTB, dated 2026-01-02.
 
-The list has 65 rows, and 62 are forms and schedules to compute. The engine has 38 of them, and 27 have rules. Of the 22 tier 1 forms, the engine has 22, and 18 have rules.
+The list has 65 rows, and 62 are forms and schedules to compute. The engine has 38 of them, and 28 have rules. Of the 22 tier 1 forms, the engine has 22, and 18 have rules.
 
 | Form | Title | Tier 1 | Engine | Copies |
 | --- | --- | --- | --- | --- |
@@ -303,7 +303,7 @@ The list has 65 rows, and 62 are forms and schedules to compute. The engine has 
 | Form 3913 | Moving Expense Deduction |  | Rules | unbounded |
 | Form 4197 | Information on Tax Expenditure Items |  | Not in the engine | unbounded |
 | Form 5805 | Underpayment of Estimated Tax by Individuals and Fiduciaries | Yes | Rules | 1 |
-| Form 5805F | Underpayment of Estimated Tax by Farmers and Fishermen |  | No rules yet | 1 |
+| Form 5805F | Underpayment of Estimated Tax by Farmers and Fishermen |  | Rules | 1 |
 | Form 5870A | Tax on Accumulation Distribution of Trusts |  | Rules | 1 per t/p |
 | Form W-2 | Wage and Tax Statement |  | Not a form: a document | 50 |
 | Schedule CA (540) | California Adjustments – Residents | Yes | Rules | 1 |
