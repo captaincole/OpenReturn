@@ -13,6 +13,7 @@ import { register as registerForm2210 } from "./2210/bindings.js";
 import { register as registerForm2441 } from "./2441/bindings.js";
 import { register as registerForm2555 } from "./2555/bindings.js";
 import { register as registerForm3800 } from "./3800/bindings.js";
+import { form3800CopyCount, form3800SourceRows } from "./3800/breakdown.js";
 import { register as registerForm3903 } from "./3903/bindings.js";
 import { register as registerForm4136 } from "./4136/bindings.js";
 import { register as registerForm4137 } from "./4137/bindings.js";
@@ -605,6 +606,12 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 3800",
     relativeDir: "federal/3800",
     register: registerForm3800,
+    // More than 15 Part V or 35 Part VI rows: more copies of pages 8 and 9 (3800/breakdown.ts).
+    copies: {
+      count: (info) => form3800CopyCount(form3800SourceRows(info?.form3800Sources)),
+      select: (info, index) => info && { ...info, form3800CopyIndex: index },
+      laterCopyPages: [7, 8],
+    },
   }),
   makeFormSpec({
     formId: "form-3903",

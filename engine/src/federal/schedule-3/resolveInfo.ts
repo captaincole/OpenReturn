@@ -1,6 +1,7 @@
 import { resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import { resolve1116Info } from "../1116/resolveInfo.js";
 import { resolve2441Info } from "../2441/resolveInfo.js";
+import { resolve3800Info } from "../3800/resolveInfo.js";
 import { resolve5695Info } from "../5695/resolveInfo.js";
 import { resolve8396Info } from "../8396/resolveInfo.js";
 import { resolve8801Info } from "../8801/resolveInfo.js";
@@ -64,6 +65,10 @@ export function resolveSchedule3Info(inputs: ResolverInputs): Schedule3FilingInf
       {
         rule: "fallback: Form 8911 or a K-1 has a refueling property business credit (line 6a, through Form 3800)",
         value: refuelingBusinessCredit(inputs),
+      },
+      {
+        rule: "fallback: Form 3800 files with a general business credit or carryover (line 6a)",
+        value: resolve3800Info(inputs).mustFile?.["form-3800"]?.value === true,
       },
       {
         rule: "fallback: a Schedule K-1 reports foreign taxes (line 1, Form 1116)",

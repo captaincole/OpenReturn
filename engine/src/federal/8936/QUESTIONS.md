@@ -24,7 +24,7 @@ Each item is a place where the form and the instructions do not settle a rule. T
 
 - Source: "All other filers figuring a separate credit on line 6 also report the above credits on line 7. All others not using line 6 ... can report the above credits directly on Form 3800" (`part-ii-credit-for-business::b01`; line 20 the same, `part-v-credit-for-qualified::b01`).
 - Default: line 7 (20) takes the stated K-1 code AY (AZ) credit only when line 6 (19) prints. Otherwise it is blank and the credit belongs on Form 3800 directly.
-- Changes dollars: no (Form 3800 has no rules; see 6).
+- Changes dollars: no. Form 3800 takes line 8 (21) when it holds a credit, and checks that the K-1s' code AY (AZ) credits match the stated amount; with no line 8, a K-1 code AY credit is a gap there (the modified AGI test needs this form).
 
 ## 5. When to ask the 2024 answers
 
@@ -35,8 +35,8 @@ Each item is a place where the form and the instructions do not settle a rule. T
 ## 6. The business-use credit goes to Form 3800
 
 - Source: line 8 "report this amount on Form 3800, Part III, line 1y"; line 21 "... line 1aa".
-- Default: lines 6–8 and 19–21 are figured. Form 3800 has no rules, so the credit does not reach Schedule 3 line 6a. A business-use vehicle, a commercial vehicle or a K-1 credit makes Form 3800 and Schedule 3 file, and line 6a is then a gap that names Form 3800 (the general business credit is a stated rule, `use-parts-i-ii-and-iii-of-schedule-a-form-8936-to::b01`). Schedule 3 lines 7 and 8 and Form 1040 lines 20–22 still leave the business credit out. The basis reduction for depreciation (Schedule A lines 9, 17, 26) is not applied on Form 4562.
-- Changes dollars: yes, for a return with business use.
+- Default: lines 6–8 and 19–21 are figured. Lines 8 and 21 reach Form 3800 lines 1y and 1aa, and the allowed credit Schedule 3 line 6a (`3800/currentCredits.ts`). The basis reduction for depreciation (Schedule A lines 9, 17, 26) is not applied on Form 4562.
+- Changes dollars: yes, for a return with business use: the basis reduction.
 
 ## 7. A transferred credit that lines 5–7 rule out
 

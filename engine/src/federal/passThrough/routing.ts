@@ -40,6 +40,9 @@ import { applyLossLimits, type LimitContext } from "./limits.js";
  *   source (1116/sources.ts); an S corporation's needs Schedule K-3 (unsupported there);
  * - form_8960_line_7: the beneficiary's net investment income adjustment
  *   (not modeled when not 0: unsupported there);
+ * - form_3800: a general business credit, on its Form 3800 Part III line by the
+ *   item's detail (federal/3800/k1Credits.ts); a credit that needs its source
+ *   form or the entity's statement is unsupported on that line;
  * - no_line: an item the instructions say needs no entry on the return.
  */
 export type Route =
@@ -59,6 +62,7 @@ export type Route =
   | "partner_basis"
   | "schedule_3_line_1"
   | "form_8960_line_7"
+  | "form_3800"
   | "no_line";
 
 /* The comment over each entry is the corpus block that sends the item there. */
@@ -90,6 +94,8 @@ export const ROUTES: Readonly<Record<K1Form, Partial<Record<ItemType, Route>>>> 
     section_199a_information: "qbi",
     // irs-1120sk1-inst-2025::sec::box-17-other-information::b16: used to figure Form 8990, no line of its own.
     gross_receipts_448c: "no_line",
+    // irs-1120sk1-inst-2025::sec::report-on-form-7207-advanced-manufacturing::b03 to ::b05: "Form 3800, Part III, line …"
+    business_credit: "form_3800",
   },
   "1065": {
     // irs-1065k1-inst-2025::sec::income-loss::b01, ::b02: column (h), (k), (g) or (i) by participation
@@ -133,6 +139,8 @@ export const ROUTES: Readonly<Record<K1Form, Partial<Record<ItemType, Route>>>> 
     foreign_tax_paid: "schedule_3_line_1",
     // irs-1065k1-inst-2025::sec::part-xiii::b02, ::b03: the partner's share for the section 448(c) test.
     gross_receipts_448c: "no_line",
+    // irs-1065k1-inst-2025::sec::box-15-credits::b01: "report this credit directly in Form 3800, Part III"
+    business_credit: "form_3800",
   },
   "1041": {
     // irs-1041k1-inst-2025::sec::box-1-interest-income::b01

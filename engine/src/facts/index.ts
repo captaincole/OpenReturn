@@ -47,6 +47,7 @@ export * from "./kinds/foreignFinancialAsset.js";
 export * from "./kinds/foreignTax.js";
 export * from "./kinds/form1099S.js";
 export * from "./kinds/gamblingWinnings.js";
+export * from "./kinds/generalBusinessCredit.js";
 export * from "./kinds/governmentPayments.js";
 export * from "./kinds/headOfHousehold.js";
 export * from "./kinds/homeEnergy.js";
