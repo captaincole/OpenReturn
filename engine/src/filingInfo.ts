@@ -16,8 +16,6 @@ import type { Form2441FilingInfo } from "./federal/2441/filingInfo.js";
 import { resolve2441Info } from "./federal/2441/resolveInfo.js";
 import type { Form2555FilingInfo } from "./federal/2555/filingInfo.js";
 import { resolve2555Info } from "./federal/2555/resolveInfo.js";
-import type { Form3800FilingInfo } from "./federal/3800/filingInfo.js";
-import { resolve3800Info } from "./federal/3800/resolveInfo.js";
 import type { Form3903FilingInfo } from "./federal/3903/filingInfo.js";
 import { resolve3903Info } from "./federal/3903/resolveInfo.js";
 import type { Form4137FilingInfo } from "./federal/4137/filingInfo.js";
@@ -102,6 +100,7 @@ import type { Form8995AFilingInfo } from "./federal/8995-a/filingInfo.js";
 import { resolve8995AInfo } from "./federal/8995-a/resolveInfo.js";
 import type { Form8995FilingInfo } from "./federal/8995/filingInfo.js";
 import { resolve8995Info } from "./federal/8995/resolveInfo.js";
+import { CREDIT_FORMS_RESOLVERS, type CreditFormsFilingInfo } from "./federal/creditForms.js";
 import { FARM_FORMS_RESOLVERS, type FarmFormsFilingInfo } from "./federal/farmForms.js";
 import {
   FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
@@ -282,7 +281,7 @@ export type FilingInfo = BaseFilingInfo &
   Form6781FilingInfo &
   Form8978FilingInfo &
   Form8915FFilingInfo &
-  Form3800FilingInfo &
+  CreditFormsFilingInfo &
   Form461FilingInfo &
   Form8621FilingInfo &
   SaleFormsFilingInfo &
@@ -368,7 +367,7 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve6781Info,
   resolve8978Info,
   resolve8915FInfo,
-  resolve3800Info,
+  ...CREDIT_FORMS_RESOLVERS,
   resolve461Info,
   resolve8621Info,
   ...SALE_FORMS_RESOLVERS,

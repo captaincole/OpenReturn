@@ -5,6 +5,11 @@
  */
 
 import type { Unsupported } from "../../types.js";
+import {
+  allowedForSource,
+  passiveCreditLimitOf,
+  type PassiveCreditLimit,
+} from "../8582-cr/form.js";
 import { allocate, claimOf, tierOfSource, type Source } from "./allocation.js";
 import {
   addCells,
@@ -17,9 +22,9 @@ import {
   type Cell,
 } from "./cells.js";
 import {
+  allowedOf,
   isCarryback,
   makesElection,
-  PASSIVE_GAP,
   signedTransfer,
   type Carryover,
   type CurrentCredit,
@@ -71,12 +76,44 @@ function line11Of(tax: TaxInputs | ReturnType<typeof taxInputsOf>): Cell {
   if (tax === undefined || isGap(tax)) return tax;
   return subtractedAtLeastZero(totalOf(tax.line7, tax.line8), totalOf(tax.line10a, tax.line10b));
 }
-/* The rows of the return, or undefined while a line they read waits. */
-export function form3800RowsOf(form: Accessor, info: Form3800Info): Form3800Rows | undefined {
+/* The rows before the passive activity limit, or undefined while a line they read waits. */
+function rowsBeforeLimitOf(form: Accessor, info: Form3800Info): Form3800Rows | undefined {
   const tax = taxInputsOf(form, info);
   const current = currentCreditsOf(form, info, line11Of(tax));
   if (current === undefined) return undefined;
   return { current, carryovers: info.form3800Sources?.carryovers ?? [] };
+}
+
+/*
+ * Form 8582-CR for the return's passive sources (federal/8582-cr/form.ts), or
+ * undefined while it waits. Its bindings print it from here.
+ */
+export function passiveLimitOfReturn(
+  form: Accessor,
+  info: Form3800Info,
+): PassiveCreditLimit | undefined {
+  const rows = rowsBeforeLimitOf(form, info);
+  if (rows === undefined) return undefined;
+  return passiveCreditLimitOf([...rows.current, ...rows.carryovers], form, info);
+}
+
+/*
+ * The rows of the return, or undefined while a line they read waits. A passive
+ * source carries what Form 8582-CR allows of it ("Use Form 8582-CR ... to
+ * figure the amounts of credits available", irs-3800-inst-2025::sec::part-iv-2::b04);
+ * when Form 8582-CR does not file, it carries nothing and its columns are gaps.
+ */
+export function form3800RowsOf(form: Accessor, info: Form3800Info): Form3800Rows | undefined {
+  const rows = rowsBeforeLimitOf(form, info);
+  if (rows === undefined) return undefined;
+  const sources = [...rows.current, ...rows.carryovers];
+  if (!sources.some((source) => source.passive)) return rows;
+  if (info.mustFile?.["form-8582-cr"]?.value !== true) return rows;
+  const limit = passiveCreditLimitOf(sources, form, info);
+  if (limit === undefined) return undefined;
+  const withAllowed = <T extends CurrentCredit | Carryover>(source: T): T =>
+    source.passive ? { ...source, allowed: allowedForSource(limit, source) } : source;
+  return { current: rows.current.map(withAllowed), carryovers: rows.carryovers.map(withAllowed) };
 }
 
 export interface Form3800Result extends Form3800Rows {
@@ -105,15 +142,23 @@ function inputsOf({ current, carryovers }: Form3800Rows) {
   );
   const line23 = addCells(iii("3").d, iv("3").d);
   const line32 = addCells(iii("4").d, passiveTransfers(current.filter(startsWith("4"))), iv("4").d);
-  const passiveAllowed = (cell: Cell) =>
-    cell === undefined || cell === 0 ? undefined : gap(PASSIVE_GAP);
+  /*
+   * Lines 3, 24 and 33: the passive credits of the tier that Form 8582-CR
+   * allows (line-3::b01, line-24::b01, line-33::b01: "If no credits are
+   * allowed, enter -0-"); blank when the tier has no passive credit.
+   */
+  const passive = [...current, ...carryovers].filter((source) => source.passive);
+  const passiveAllowed = (cell: Cell, tier: Tier) =>
+    cell === undefined || cell === 0
+      ? undefined
+      : addCells(0, ...passive.filter((source) => tierOfSource(source) === tier).map(allowedOf));
   const specified = carryovers.filter(startsWith("4"));
   const zone = carryovers.filter(onLine("3"));
   return {
     partI: {
       line1: addCells(iii("1").e, nonpassiveTransfers(current.filter(startsWith("1")))),
       line2,
-      line3: passiveAllowed(line2),
+      line3: passiveAllowed(line2, "general"),
       line4: nonpassiveCarryovers(general, false),
       line5: nonpassiveCarryovers(general, true),
     },
@@ -125,27 +170,29 @@ function inputsOf({ current, carryovers }: Form3800Rows) {
         nonpassiveCarryovers(zone, true),
       ),
       line23,
-      line24: passiveAllowed(line23),
+      line24: passiveAllowed(line23, "empowerment"),
     },
     sectionC: {
       line30: addCells(iii("4").e, nonpassiveTransfers(current.filter(startsWith("4")))),
       line32,
-      line33: passiveAllowed(line32),
+      line33: passiveAllowed(line32, "specified"),
       line34: nonpassiveCarryovers(specified, false),
       line35: nonpassiveCarryovers(specified, true),
     },
   };
 }
-/* What a source brings to its tier: column (g) of a credit, column (f) of a carryover. */
+/*
+ * What a source brings to its tier: column (g) of a credit, column (f) of a
+ * carryover; a passive source brings what Form 8582-CR allows of it.
+ */
 function claimAmount(source: Source): number {
+  if (source.passive) return valueOf(allowedOf(source));
   if ("originYear" in source) return valueOf(availableOf(source));
   return valueOf(source.amount) + (signedTransfer(source) ?? 0);
 }
 
 function usedOf(rows: Form3800Rows, limits: Record<Tier, Cell>): Map<Source, Cell> {
-  const sources: Source[] = [...rows.carryovers, ...rows.current].filter(
-    (source) => !source.passive,
-  );
+  const sources: Source[] = [...rows.carryovers, ...rows.current];
   const used = new Map<Source, Cell>();
   for (const tier of ["general", "empowerment", "specified"] as const) {
     const claims = sources
@@ -175,9 +222,8 @@ export function form3800Of(form: Accessor, info: Form3800Info): Form3800Result |
   return { ...rows, partI: first, a: lineA, b: lineB, c: lineC, used, election, taxGap };
 }
 
-/* The total of what a set of sources used; a passive source is a gap (Form 8582-CR). */
+/* The total of what a set of sources used. */
 export function usedBy(result: Form3800Result, sources: ReadonlyArray<Source>): Cell {
-  if (sources.some((source) => source.passive)) return gap(PASSIVE_GAP);
   return addCells(...sources.map((source) => result.used.get(source) ?? 0));
 }
 

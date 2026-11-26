@@ -33,6 +33,52 @@ export interface CreditTransfer {
   transferorEin?: string;
 }
 
+/*
+ * Form 8582-CR: the passive activity a passive credit comes from. Its
+ * worksheet (1 to 4) follows from these answers and the credit's line
+ * (irs-8582cr-inst-2025::sec::reporting-credits-from-the-activities::b02, ::b03):
+ * a rehabilitation credit (line 4k) from rental real estate goes on Worksheet 2;
+ * a low-income housing credit (line 4d, Part IV line 2b) on Worksheet 2 before
+ * 1990, else 3; any other credit from rental real estate with active
+ * participation on Worksheet 1; everything else on Worksheet 4.
+ */
+export interface PassiveCreditActivity {
+  /* The activity's name, as the worksheets list it ("Name of Activity"). */
+  name: string;
+  /* A rental real estate activity; false for a trade or business or another rental. */
+  rentalRealEstate: boolean;
+  /*
+   * Rental real estate only: the taxpayer actively participated this year. For
+   * a carryover, in both the year the credit arose and this year
+   * (irs-8582cr-inst-2025::sec::lines-1a-through-1c::b02). Asked for a credit
+   * other than the rehabilitation and low-income housing credits.
+   */
+  activelyParticipated?: boolean;
+  /*
+   * Low-income housing credit only: the property was placed in service before
+   * 1990, or is held through a pass-through entity interest acquired before 1990
+   * (irs-8582cr-inst-2025::sec::lines-2a-through-2c::b01).
+   */
+  before1990?: boolean;
+  /* Held through a publicly traded partnership: figured apart from the form (credits-from-ptps::b02). */
+  publiclyTradedPartnership?: boolean;
+}
+
+/*
+ * Form 8582-CR Part VI: the taxpayer disposed of the entire interest in the
+ * activity in a fully taxable transaction and elects to increase the basis of
+ * the credit property by the unallowed credit that reduced it
+ * (irs-8582cr-inst-2025::sec::line-38::b01). "The amount of the unallowed
+ * credit that may be applied against tax is reduced by the amount of the basis
+ * adjustment."
+ */
+export interface BasisIncreaseElection {
+  /* Line 40. */
+  propertyDescription: string;
+  /* Line 41: the unallowed credit that reduced the basis, the basis adjustment. */
+  amount: number;
+}
+
 export interface GeneralBusinessCreditFactValue {
   /*
    * The source credit form as Part III names it: "8826", "3468 Part II",
@@ -48,6 +94,8 @@ export interface GeneralBusinessCreditFactValue {
    * (d), which needs Form 8582-CR. Otherwise column (e).
    */
   passive: boolean;
+  /* A passive credit's activity, for Form 8582-CR; asked when passive is true. */
+  passiveActivity?: PassiveCreditActivity;
   /* The pass-through entity's EIN, for a credit allocated by one (column (c)). */
   passThroughEin?: string;
   /*
@@ -75,8 +123,17 @@ export interface CreditCarryoverFactValue {
   originYear: number;
   /* The unused credit carried to 2025, in dollars. */
   amount: number;
-  /* Earned in a passive activity (column (d)); otherwise column (f). */
+  /*
+   * Earned in a passive activity (column (d)); otherwise column (f). A passive
+   * carryover is a prior year unallowed credit of Form 8582-CR: last year's
+   * Worksheet 9 column (b), or its line 5 less line 37
+   * (irs-8582cr-inst-2025::sec::prior-year-unallowed-credits::b01).
+   */
   passive: boolean;
+  /* A passive carryover's activity, for Form 8582-CR; asked when passive is true. */
+  passiveActivity?: PassiveCreditActivity;
+  /* Form 8582-CR Part VI, a passive carryover only. */
+  basisIncreaseElection?: BasisIncreaseElection;
   passThroughEin?: string;
   /* The amount was changed or revised from the one reported on the original return (Part I line 4, Part II line 34 boxes). */
   changedFromOriginal?: boolean;
