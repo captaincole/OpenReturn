@@ -8,6 +8,7 @@ import { computeQdcg } from "../../worksheets/qdcg.js";
 import { amtGap } from "../6251/foreignTaxCredit.js";
 import { childTaxOnLine16 } from "../8615/form.js";
 import { form8621Amount, withForm8621 } from "../8621/totals.js";
+import { line16BoxEntry, line16WithForm8978 } from "../8978/receivers.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import { line16WithForm8814, line3a } from "./form8814Lines.js";
 import { qdcgInputsFromReturn, scheduleDWorksheetTax } from "./qdcgInputs.js";
@@ -76,7 +77,8 @@ export const line16FromForm4972 = (_: unknown, info: Form1040FilingInfo) =>
 /*
  * MANUAL EDIT: line 16 also takes "Any tax from Form 8621, line 16e, relating
  * to a section 1291 fund" (irs-1040-inst-2025::sec::line-16::b01), every
- * fund's. With no fund the line is what it was.
+ * fund's, and "Tax from Form 8978, line 14" when it is above 0 (::line-16::b02;
+ * federal/8978/receivers.ts). With neither form the line is what it was.
  */
 function otherLine16Taxes(
   info: Form1040FilingInfo,
@@ -84,7 +86,12 @@ function otherLine16Taxes(
 ): number | Unsupported | undefined {
   const withLumpSum = withForm4972(info, tax);
   if (typeof withLumpSum !== "number") return withLumpSum;
-  return withForm8621(info.form8621Totals, withLumpSum, (amounts) => amounts.section1291Tax);
+  const withFund = withForm8621(
+    info.form8621Totals,
+    withLumpSum,
+    (amounts) => amounts.section1291Tax,
+  );
+  return typeof withFund === "number" ? line16WithForm8978(info, withFund) : withFund;
 }
 
 const OTHER_FORM_BOX =
@@ -93,28 +100,39 @@ const OTHER_FORM_TEXT =
   "Free-text entry for the form number associated with the third checkbox on line 16. Tied to special-form tax scenarios not yet ingested.";
 const SECTION_1291_TAX = "1291TAX";
 
-/* The section 1291 tax on line 16, or why box 3 is not known: the other box 3 taxes are not modeled. */
-function section1291Tax(info: Form1040FilingInfo, without: string): number | Unsupported {
+/*
+ * The box 3 entries on line 16: the section 1291 tax (Form 8621) and the
+ * Form 8978 tax, each with its amount; or why box 3 is not known: the other
+ * box 3 taxes are not modeled.
+ */
+function box3Entries(info: Form1040FilingInfo, without: string): string[] | Unsupported {
   const gap = info.form8621Totals?.gap;
   if (gap !== undefined) return unsupported(gap);
-  return (
-    form8621Amount(info.form8621Totals, (amounts) => amounts.section1291Tax) ?? unsupported(without)
-  );
+  const fund = form8621Amount(info.form8621Totals, (amounts) => amounts.section1291Tax);
+  const partner = line16BoxEntry(info);
+  if (typeof partner === "object") return partner;
+  const entries = [
+    fund === undefined ? undefined : `${SECTION_1291_TAX} ${formatDollars(fund)}`,
+    partner,
+  ].filter((entry): entry is string => entry !== undefined);
+  return entries.length === 0 ? unsupported(without) : entries;
 }
 
 /*
  * MANUAL EDIT: line 16 box 3 for the Form 8621 tax: "Check box 3 and enter the
- * amount of the tax and '1291TAX' in the space next to that box"
- * (irs-1040-inst-2025::sec::line-16::b02).
+ * amount of the tax and '1291TAX' in the space next to that box"; for Form
+ * 8978: "Check box 3 and enter the amount of the liability and 'Form 8978' in
+ * the space next to that box" (irs-1040-inst-2025::sec::line-16::b02). Both
+ * entries share the space.
  */
 export const line16FromOtherForm = (_: unknown, info: Form1040FilingInfo) => {
-  const tax = section1291Tax(info, OTHER_FORM_BOX);
-  return typeof tax === "number" ? true : tax;
+  const entries = box3Entries(info, OTHER_FORM_BOX);
+  return Array.isArray(entries) ? true : entries;
 };
 
 export const line16OtherFormNumber = (_: unknown, info: Form1040FilingInfo) => {
-  const tax = section1291Tax(info, OTHER_FORM_TEXT);
-  return typeof tax === "number" ? `${SECTION_1291_TAX} ${formatDollars(tax)}` : tax;
+  const entries = box3Entries(info, OTHER_FORM_TEXT);
+  return Array.isArray(entries) ? entries.join("; ") : entries;
 };
 
 /*

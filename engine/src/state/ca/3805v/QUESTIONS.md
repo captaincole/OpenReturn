@@ -7,11 +7,11 @@ No published example with numbers exists for this form. The rules come from
 
 Both are decided, in `docs/rule-decisions.md` and in `DECISION` comments.
 
-1. **Line 23, the carryovers added back (row A18).** The line instruction
+1. **Line 23, the carryovers added back (row A21).** The line instruction
    names the whole carryover from the 2024 form; the form's arithmetic and the
    federal Form 172 method add back the deductions taken in 2025. The engine
    adds back the deductions taken (`sectionAReads.ts`).
-2. **The suspension with a disaster loss carryover (row A19).** One sentence
+2. **The suspension with a disaster loss carryover (row A22).** One sentence
    frees every NOL of a taxpayer with a disaster carryover; the disaster rule
    frees only the disaster loss. The engine deducts the disaster row and not
    the others (`figures.ts`).
@@ -131,7 +131,7 @@ below, or the sentence says why not now.
   blank against 0. The engine prints 0 on Part III line 5 or line 6 when no
   row of that kind exists, and 0 on line 23 when no carryover exists; the
   blind fill left them blank. No dollars change. The blind doubts that change
-  dollars are decisions A18 and A19 and items 10 and 11.
+  dollars are decisions A21 and A22 and items 10 and 11.
 - PolicyEngine-US 2.154.0 (commit 363e9fc5): it does not model FTB 3805V or
   a California NOL or disaster loss carryover. It has no federal NOL
   deduction either, so it has no constant or formula to compare. No lead.
@@ -147,12 +147,12 @@ below, or the sentence says why not now.
 | Section A lines 4 to 7, 13, 14 (capital sort) | own reading (items 1, 6) |
 | Section A lines 8 to 12 (nonbusiness sort) | own reading (items 2, 3) |
 | Section A lines 15 to 22, 24, 25 | stated rule (the form's arithmetic) |
-| Section A line 23 | decision A18 |
+| Section A line 23 | decision A21 |
 | Section B | unsupported |
 | Part II lines 1 to 4, 6 | stated rule |
 | Part II line 5 | own reading (item 7); a gap when a refigure is needed |
 | Part III line 1, line 2 columns (a) to (h) | published example with numbers (FTB 3807 Worksheet II, the same columns) and stated rule |
-| Part III suspension | stated rule; decision A19 for disaster rows |
+| Part III suspension | stated rule; decision A22 for disaster rows |
 | Part III line 3 | blank with line 3a at 0 or more (item 13); else unsupported (proposal) |
 | Part III line 4 | own reading (item 6) |
 | Part III lines 5 and 6 | stated rule |

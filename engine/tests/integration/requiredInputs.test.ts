@@ -323,6 +323,18 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "allowed because of the old section 30(b)(3)(B) limit; absent means none",
   ],
   [
+    /^form_8986\.[^.]+$/,
+    "each fact is a whole Form 8986 statement from a partnership, a document; whether one came " +
+      "is Cade's question (Form 8978)",
+  ],
+  [
+    /^form_8978_year\.[^.]+$/,
+    "each fact is one earlier tax year of Form 8978 (the return's totals and the corrected tax); " +
+      "whether an intervening year changed is Cade's question. Form 8978 asks for each first " +
+      "affected year, and lists a year again while an answer inside it (the statement, the " +
+      "penalty, the extension) is missing",
+  ],
+  [
     /^prior_year\.ca_tax$/,
     "KNOWN GAP: decides whether FTB 5805 files. Needed only when the CA balance due is " +
       "$500 or more, which the resolver cannot see before evaluation.",

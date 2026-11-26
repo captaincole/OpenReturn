@@ -44,7 +44,7 @@ carryovers are answers from last year's return. The facts are the only source.
 | 3805V lines 8 to 12 | 5,706 / 2,300 / 2,300 / 3,406 / 0 | standard deduction; interest + dividends |
 | 3805V lines 13 to 17 | 0 / 0 / 0 / 0 / 4,400 | no business capital items; 4,400 + 0 |
 | 3805V lines 18 to 22 | 4,400 / 3,000 / 1,400 / 0 / 3,000 | Schedule D (540) lines 8 and 9; 4,400 − 1,400 |
-| 3805V line 23 | 78,594 | 22,000 + 56,594, the deductions taken (decision A18) |
+| 3805V line 23 | 78,594 | 22,000 + 56,594, the deductions taken (decision A21) |
 | 3805V line 24, 25 | 85,000 / 0 | 3,406 + 0 + 3,000 + 78,594; −3,000 + 85,000 is above 0 |
 | 3805V Part II lines 1 to 6 | (3,000) / 3,000 / 22,000 / 56,594 / 0 / 78,594 | 2,706 − 5,706; added back |
 | 3805V Part III row 1 (2018 DIS) | e 22,000, f 22,000, g 56,594, h 0 | the smaller of (e) and 78,594 |

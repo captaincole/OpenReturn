@@ -7,6 +7,7 @@
 import { numberOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { foreignTaxCreditGap } from "../1116/credit.js";
+import { line6lGap } from "../8978/receivers.js";
 import type { Form8880FilingInfo } from "./filingInfo.js";
 import {
   columnLines,
@@ -31,17 +32,14 @@ const FOREIGN_INCOME_GAP =
 
 /*
  * The Schedule 3 credits worksheet line 2 adds, each with the form the engine
- * does not compute. Lines 1 (Form 1116), 2 (Form 2441), 3 (Form 8863) and 6d
- * (Schedule R) are computed; a gap in line 1 is a gap here.
+ * does not compute. Lines 1 (Form 1116), 2 (Form 2441), 3 (Form 8863), 6d
+ * (Schedule R) and 6l (Form 8978) are computed; a gap in line 1 or 6l is a gap here.
  */
 function creditsGap(form: Accessor, info: Form8880FilingInfo): string | undefined {
-  const files = (formId: string) => info.mustFile?.[formId]?.value === true;
   const foreignTax = foreignTaxCreditGap(form, info);
   if (foreignTax !== undefined) return `Credit Limit Worksheet line 2 adds ${foreignTax}`;
-  if (files("form-8978")) {
-    return "Credit Limit Worksheet line 2 adds Schedule 3 line 6l (Form 8978), which the engine does not compute.";
-  }
-  return undefined;
+  const partnerGap = line6lGap(info);
+  return partnerGap === undefined ? undefined : `Credit Limit Worksheet line 2 adds ${partnerGap}`;
 }
 
 export function columnOf(
