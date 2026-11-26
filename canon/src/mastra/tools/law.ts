@@ -5,18 +5,19 @@ import { LAW_NOT_INSTALLED, readLaw, type LawBlock } from "../../law/lawRead";
 import { searchLaw } from "../../law/lawSearch";
 
 /*
- * The statute (law.db) is a second library, searched only on purpose. Both
- * tools answer { installed: false } when law.db is missing, and never
- * create the file.
+ * The law (law.db: the statute and the Treasury regulations) is a second
+ * library, searched only on purpose. Both tools answer { installed: false }
+ * when law.db is missing, and never create the file.
  */
 
 const WHEN_TO_USE =
-  'This is the statute, the Internal Revenue Code (26 U.S.C.), not the IRS instructions. Search the form instructions first (searchRefDocs). Use this only when two instructions conflict, or when the instructions do not settle the question. Write the query in the statute\'s own terms, which the instructions supply ("disposition of entire interest in passive activity", not "sold my partnership"). A statute passage can itself conflict with another passage or with the instructions: then report both texts, with their citations, and do not pick one.';
+  'This is the law, not the IRS instructions: the statute, the Internal Revenue Code (26 U.S.C.), and the Treasury regulations (26 CFR Parts 1 and 301). Search the form instructions first (searchRefDocs). Use this only when two instructions conflict, or when the instructions do not settle the question. Write the query in the law\'s own terms, which the instructions supply ("disposition of entire interest in passive activity", not "sold my partnership"). The regulations are Treasury\'s rules under the statute and answer many questions the statute leaves to them. The statute is the law: a regulation can be older than a change to the statute it explains. A passage can conflict with another passage or with the instructions: then report both texts, with their citations, and do not pick one.';
 
 const notInstalled = z.object({ installed: z.literal(false), message: z.string() });
 
 const lawHitSchema = z.object({
   blockId: z.string(),
+  source: z.enum(["statute", "regulations"]),
   citation: z.string(),
   sectionHeading: z.string().nullable(),
   headings: z.array(z.string()),
@@ -26,10 +27,17 @@ const lawHitSchema = z.object({
 
 export const searchLawTool = createTool({
   id: "search-law",
-  description: `Search the Internal Revenue Code. ${WHEN_TO_USE} Each hit has its citation ("26 U.S.C. § 469(g)(1)"); read the whole subdivision with readLaw.`,
+  description: `Search the Internal Revenue Code and the Treasury regulations. ${WHEN_TO_USE} Each hit names its source and citation ("26 U.S.C. § 469(h)(2)", "26 CFR § 1.469-5T(a)(1)"); read the whole subdivision with readLaw.`,
   inputSchema: z.object({
-    query: z.string().describe("The rule in the statute's words, taken from the instructions."),
-    section: z.string().optional().describe('Optional: search one Code section only, e.g. "469".'),
+    query: z.string().describe("The rule in the law's words, taken from the instructions."),
+    source: z
+      .enum(["statute", "regulations"])
+      .optional()
+      .describe("Optional: only the statute or only the regulations. Default: both."),
+    section: z
+      .string()
+      .optional()
+      .describe('Optional: search one section only, e.g. "469" or "1.469-5T".'),
     limit: z.number().int().min(1).max(25).optional().describe("Max hits to return (default 8)."),
     mode: z
       .enum(["fts", "vector", "hybrid"])
@@ -60,14 +68,17 @@ const lawBlockSchema = z.object({
 
 export const readLawTool = createTool({
   id: "read-law",
-  description: `Read the Internal Revenue Code by citation: a section ("469"), a subdivision ("469(g)(1)(A)") or a block id from searchLaw. ${WHEN_TO_USE} Returns the blocks in statute order. A long read is cut short with truncated: true and the list of its subdivisions: read one of them instead.`,
+  description: `Read the Internal Revenue Code or a Treasury regulation by citation: a section ("469", "1.469-5T"), a subdivision ("469(g)(1)(A)", "1.469-5T(a)(1)") or a block id from searchLaw. A number with a dot is a regulation. ${WHEN_TO_USE} Returns the blocks in order. A long read is cut short with truncated: true and the list of its subdivisions: read one of them instead.`,
   inputSchema: z.object({
-    citation: z.string().describe('A Code citation, e.g. "469(g)(1)", or a block id.'),
+    citation: z
+      .string()
+      .describe('A citation, e.g. "469(g)(1)" or "26 CFR 1.469-5T(a)", or a block id.'),
   }),
   outputSchema: z.union([
     z.object({
       installed: z.literal(true),
       found: z.boolean(),
+      source: z.enum(["statute", "regulations"]).optional(),
       citation: z.string(),
       sectionHeading: z.string().nullable(),
       blocks: z.array(lawBlockSchema),
@@ -83,7 +94,7 @@ export const readLawTool = createTool({
       err instanceof Error ? err.message : String(err),
     );
     if (reading === null || typeof reading === "string") {
-      const message = reading ?? `nothing in the Code at ${citation}`;
+      const message = reading ?? `nothing in the law library at ${citation}`;
       const empty = { citation, sectionHeading: null, blocks: [], subdivisions: [] };
       return { installed: true as const, found: false, truncated: false, message, ...empty };
     }

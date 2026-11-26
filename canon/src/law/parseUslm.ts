@@ -2,8 +2,10 @@ import * as cheerio from "cheerio";
 import type { Element } from "domhandler";
 import type { ParsedDoc } from "../refdocs/parse";
 import { slugOf } from "./lawIds";
-import { createSink, type TextSink } from "./textSink";
-import { sectionBlocks, type SectionInfo } from "./uslmBlocks";
+import { assertUnique, openRow, type RowState, type SectionRow } from "./lawRows";
+import { createSink } from "./textSink";
+import { sectionBlocks, type SectionInfo } from "./unitBlocks";
+import type { UnitNode } from "./unitTree";
 import {
   attr,
   BODY_TAGS,
@@ -15,7 +17,7 @@ import {
   STRUCTURE_TAGS,
 } from "./uslmDom";
 import { extractText } from "./uslmText";
-import { layoutSection, type UnitNode } from "./uslmUnits";
+import { layoutSection } from "./uslmUnits";
 
 /*
  * Parses the official USLM XML of a US Code title into the rows the other
@@ -23,8 +25,6 @@ import { layoutSection, type UnitNode } from "./uslmUnits";
  * are section rows; the units inside a section are blocks. Notes and source
  * credits are not statute text and stay out. There are no pages: page 1.
  */
-
-type SectionRow = ParsedDoc["sections"][number];
 
 export interface UslmStats {
   structureRows: number;
@@ -48,12 +48,8 @@ interface LaidOutSection {
   root: UnitNode;
 }
 
-interface State {
-  docId: string;
+interface State extends RowState {
   titlePrefix: string;
-  sink: TextSink;
-  sections: SectionRow[];
-  sectionIds: Set<string>;
   laidOut: LaidOutSection[];
   stats: UslmStats;
 }
@@ -142,32 +138,6 @@ function addCodeSection(el: Element, parentId: string | null, state: State): voi
   if (root) state.laidOut.push({ info: sectionInfo(el, row, state), root });
 }
 
-// Writes the row's heading line, so the row's range starts at its heading.
-function openRow(state: State, slug: string, heading: string, parentId: string | null): SectionRow {
-  const start = state.sink.write(heading)?.start ?? state.sink.length();
-  const row: SectionRow = {
-    sectionId: uniqueSectionId(state, `${state.docId}::sec::${slug}`),
-    heading,
-    headingSlug: slug,
-    parentSectionId: parentId,
-    ordinal: state.sections.length,
-    firstPage: 1,
-    charStart: start,
-    charEnd: start,
-  };
-  state.sections.push(row);
-  return row;
-}
-
-// A repeated structure id (two chapters 38, one repealed) gets "-dup2".
-function uniqueSectionId(state: State, sectionId: string): string {
-  let candidate = sectionId;
-  for (let count = 2; state.sectionIds.has(candidate); count++)
-    candidate = `${sectionId}-dup${count}`;
-  state.sectionIds.add(candidate);
-  return candidate;
-}
-
 /** "Subtitle A—Income Taxes"; "§ 469. Passive activity losses and credits limited". */
 function labelOf(el: Element, joint: string): string {
   const num = firstChild(el, "num");
@@ -204,11 +174,4 @@ function sectionInfo(el: Element, row: SectionRow, state: State): SectionInfo {
     number: (num && attr(num, "value")) || pathOf(el, state).replace(/^s/, ""),
     catchline: heading ? extractText([heading]).text : "",
   };
-}
-
-function assertUnique(what: string, ids: string[]): void {
-  const seen = new Set<string>();
-  const repeated = ids.filter((id) => seen.size === seen.add(id).size);
-  if (repeated.length > 0)
-    throw new Error(`USLM: duplicate ${what}: ${[...new Set(repeated)].slice(0, 5).join(", ")}`);
 }

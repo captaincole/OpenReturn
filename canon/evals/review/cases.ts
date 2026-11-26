@@ -6,6 +6,8 @@
  */
 
 import { anyOf, type AnyOf } from "../lib/anyOf";
+import type { StatuteExpectation } from "../lib/statute";
+import { STATUTE_CASES } from "./statuteCases";
 
 type Verdict = "accurate" | "inaccurate" | "needs_more_facts";
 
@@ -24,6 +26,8 @@ export interface ReviewCase {
   authority: AnyOf[];
   /* In the lite tier: two pairs both models judged the same way on every full run. */
   lite?: boolean;
+  /* Two IRS texts disagree: the judge should consult the statute and cite this section. */
+  statute?: StatuteExpectation;
 }
 
 const withValue = (facts: ReviewFact[], key: string, patch: unknown) =>
@@ -221,6 +225,7 @@ export const CASES: ReviewCase[] = [
     },
     authority: mustFileAuthority,
   },
+  ...STATUTE_CASES,
 ];
 
 export const casesFor = (tier: "lite" | "full"): ReviewCase[] =>

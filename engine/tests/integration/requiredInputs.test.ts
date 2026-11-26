@@ -108,6 +108,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "credit was carried forward (last year's return is not read, #79); Form 8912 line 3 takes it",
   ],
   [
+    /^electric_vehicle_credit\.passive_carryover\.[^.]+$/,
+    "each fact is one whole prior year unallowed qualified electric vehicle credit from last " +
+      "year's Form 8582-CR (Form 8834 line 1); whether one exists is Cade's question",
+  ],
+  [
     /^foreign_earned_income\.(taxpayer|spouse)$/,
     "each fact is a whole person's Form 2555 (Parts I to IX); whether the person claims the " +
       "exclusion is Cade's question. Form 2555 lists the fact again while an answer inside it " +
@@ -276,6 +281,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole like-kind exchange or section 1043 sale (Form 8824); whether one " +
       "happened is Cade's question. Form 8824 lists an exchange again while its lines 9 and 10 " +
       "are not answered",
+  ],
+  [
+    /^fuel_tax_activity\.[^.]+$/,
+    "a Form 4136 fact is one whole business activity's fuel claims (or the home's kerosene); " +
+      "whether a nontaxable use happened is Cade's question. Form 4136 lists the fact again " +
+      "while the Part I code or equipment it describes is missing",
   ],
   [
     /^section_179_recapture\.[^.]+$/,

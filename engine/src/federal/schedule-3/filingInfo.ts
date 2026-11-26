@@ -16,7 +16,9 @@ import type { Form8978FilingInfo } from "../8978/filingInfo.js";
  * Lines 6f and 6m read Form 8936's vehicles. Line 1 reads Form 1116's foreign
  * tax, a K-1's included. Line 6b reads Form 8801's 2024 lines. Line 6j reads
  * Form 8911's Schedules A. Line 6a reads Form 3800's sources. Line 6l reads
- * Form 8978's line 14 total. Line 6k reads Form 8912's Parts III and IV.
+ * Form 8978's line 14 total. Line 6i reads Form 8834's passive carryovers
+ * (in Form 3800's, through Form 8582-CR). Line 6k reads Form 8912's Parts III
+ * and IV.
  */
 export type Schedule3FilingInfo = Form3800Info &
   Form8912FilingInfo &

@@ -2,7 +2,7 @@
 
 Yukiri Thornbury is single and lives in Spokane, Washington. Every name, number and amount here is made up. There is no outside source and no answer key: the expected values are the engine's output, checked by hand, then locked (`verification: "unverified"`). The return is federal only: Washington has no income tax.
 
-She has one W-2 and one qualified school construction bond, held all year. No Form 1097-BTC or 1099-INT reports its credit, so she adds the credit as interest herself (rule decision A59). It is her only interest and less than $1,500, so Schedule B does not file: Form 1040 line 2b takes the credit itself. The varilin scenario covers the other branch, with Schedule B.
+She has one W-2 and one qualified school construction bond, held all year. No Form 1097-BTC or 1099-INT reports its credit, so she adds the credit as interest herself (rule decision A64). It is her only interest and less than $1,500, so Schedule B does not file: Form 1040 line 2b takes the credit itself. The varilin scenario covers the other branch, with Schedule B.
 
 Forms checked: Form 8912, Schedule 3, Form 1040. No input document: the bond's facts come from her own records.
 

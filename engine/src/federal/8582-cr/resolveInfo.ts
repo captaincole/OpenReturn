@@ -6,6 +6,7 @@ import {
   type ResolverInputs,
 } from "../../resolverInputs.js";
 import { form3800SourcesOf } from "../3800/sources.js";
+import { electricVehicleCarryoversOf } from "../8834/resolveInfo.js";
 import type { Form8582CRFilingInfo } from "./filingInfo.js";
 import { worksheetOf, type PassiveSource } from "./worksheets.js";
 
@@ -33,8 +34,9 @@ const activityMissing = (source: PassiveSource) =>
  * any of the following credits from passive activities. • General business
  * credits." (irs-8582cr-inst-2025::sec::who-must-file::b01). The credits are
  * Form 3800's passive sources: a stated credit or carryover marked passive, or
- * a K-1 credit of a passive activity. The qualified plug-in electric vehicle
- * credit (Form 8834) is carried forward only and has no fact. The explicit
+ * a K-1 credit of a passive activity. "• Qualified plug-in electric and
+ * electric vehicle credit" is carried forward only: a prior year unallowed
+ * credit stated for Form 8834 (federal/8834/resolveInfo.ts). The explicit
  * decision still wins.
  */
 export function resolve8582CRInfo(inputs: ResolverInputs): Form8582CRFilingInfo {
@@ -42,6 +44,7 @@ export function resolve8582CRInfo(inputs: ResolverInputs): Form8582CRFilingInfo 
   const passive: PassiveSource[] = [
     ...sources.current.map((source) => source.credit),
     ...sources.carryovers,
+    ...electricVehicleCarryoversOf(inputs),
   ].filter(hasPassiveCredit);
   const mustFile = resolveMustFile(inputs.decisionByKey, {
     explicitKey: MUST_FILE_KEY,

@@ -6,9 +6,9 @@ Form 8912 claims the credit for holders of tax credit bonds. Part III lists each
 
 Each is decided by the author, with a `DECISION` comment and a row in `docs/rule-decisions.md`.
 
-- **Line 20 of a pass-through credit** (row A58, `bonds.ts`). The face takes 70% of line 19 for a new CREB or a QECB; the instructions say a pass-through credit goes in column (f) as the credit. The engine takes no second 70%.
-- **Which credits are interest** (row A59, `interest.ts`). The Form 8912 instructions make the whole line 4 interest; the Form 1099-INT and 1097-BTC instructions put each reported credit on a Form 1099-INT already. The engine adds only each held bond's line 20 that no Form 1099-INT reports.
-- **An unused CREB credit: deduct this year or next** (row A60, `credit.ts`). The instructions allow both. The engine always takes next year, so line 12 is figured once.
+- **Line 20 of a pass-through credit** (row A63, `bonds.ts`). The face takes 70% of line 19 for a new CREB or a QECB; the instructions say a pass-through credit goes in column (f) as the credit. The engine takes no second 70%.
+- **Which credits are interest** (row A64, `interest.ts`). The Form 8912 instructions make the whole line 4 interest; the Form 1099-INT and 1097-BTC instructions put each reported credit on a Form 1099-INT already. The engine adds only each held bond's line 20 that no Form 1099-INT reports.
+- **An unused CREB credit: deduct this year or next** (row A65, `credit.ts`). The instructions allow both. The engine always takes next year, so line 12 is figured once.
 
 ## Should we do this now
 
@@ -96,7 +96,7 @@ Each is decided by the author, with a `DECISION` comment and a row in `docs/rule
 ### Proposals for a discussion
 
 - **A K-1 credit route.** Before: a bond credit on a Form 1065 or 1120-S K-1 (box 15) reaches Form 8912 only from a `tax_credit_bond` fact with `source: "pass_through"`, because the box tables have no route for it (`passThrough/partnershipBoxes.ts`). After: a route from the K-1 item to a Form 8912 Part IV reads the credit from the K-1 itself, a change to the pass-through layer.
-- **The unused CREB credit deduction.** Before: a CREB or early QZAB credit that line 12 cannot use is not deducted this year (rule decision A60), and next year's return does not read it. After: a prior-year fact and a deduction line on the return take it in the next year; the instructions do not name the line.
+- **The unused CREB credit deduction.** Before: a CREB or early QZAB credit that line 12 cannot use is not deducted this year (rule decision A65), and next year's return does not read it. After: a prior-year fact and a deduction line on the return take it in the next year; the instructions do not name the line.
 - **Accrued interest at purchase.** Before: a bond bought between credit allowance dates makes its interest row a gap. After: a fact field for the accrued interest paid at purchase closes the gap (`line-20::b02`).
 - **A gap on Form 1040 line 2b.** Before: the Form 1040 interest slot is a dollar amount, so an interest gap leaves line 2b blank while Schedule B shows the gap. After: the slot carries the gap, so line 2b is unsupported too; that is a change to Form 1040.
 

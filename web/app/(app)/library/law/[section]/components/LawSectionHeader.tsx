@@ -2,12 +2,16 @@ import { formatPublished } from "@/lib/format";
 import { officialTextUrl, type LawSection } from "@/lib/law";
 import Link from "next/link";
 
+// eCFR's page is the current text; the library's copy is dated, so the two can differ.
+const CURRENT_TEXT_NOTE =
+  "The official page shows the current text, which can be newer than this dated copy.";
+
 export function LawSectionHeader({ page }: { page: LawSection }) {
   const { section, release } = page;
   return (
     <header className="mb-10 space-y-4">
       <Link href="/library/law" className="text-[12px] text-ink-muted hover:text-ink-primary">
-        ← Statute
+        ← Law
       </Link>
       {section.breadcrumbs.length > 0 && (
         <p className="text-[12px] text-ink-muted">{section.breadcrumbs.join(" › ")}</p>
@@ -30,6 +34,9 @@ export function LawSectionHeader({ page }: { page: LawSection }) {
           Official text ↗
         </a>
       </div>
+      {page.source === "regulations" && (
+        <p className="text-[12px] text-ink-muted">{CURRENT_TEXT_NOTE}</p>
+      )}
     </header>
   );
 }

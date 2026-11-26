@@ -3,8 +3,8 @@ import { openLibraryDb, type Library } from "./libsql";
 
 /** The formats of corpus.db, the instructions library. */
 export type CorpusFormat = "pdf" | "html";
-/** "uslm": the US Code's XML, in law.db; like "html", it has no pages. */
-export type SourceFormat = CorpusFormat | "uslm";
+/** "uslm": the US Code's XML; "ecfr": the regulations' eCFR XML. Both in law.db; like "html", no pages. */
+export type SourceFormat = CorpusFormat | "uslm" | "ecfr";
 
 // Ask and the corpus pipeline read corpus.db only, where a document is a PDF or a page.
 export const corpusFormat = (format: SourceFormat): CorpusFormat =>
@@ -136,7 +136,7 @@ export async function setDocumentPublished(
   });
 }
 
-const FORMATS: readonly SourceFormat[] = ["pdf", "html", "uslm"];
+const FORMATS: readonly SourceFormat[] = ["pdf", "html", "uslm", "ecfr"];
 export const asFormat = (value: unknown): SourceFormat =>
   FORMATS.find((format) => format === value) ?? "pdf";
 

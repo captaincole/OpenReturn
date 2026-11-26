@@ -95,7 +95,7 @@ Form 4970 figures the extra tax on trust income that a trust kept in earlier yea
 ## Proposals for a discussion
 
 - **More than one trust in a year.** Each trust files its own form, and line 13 of each later trust includes the amounts the earlier trusts' forms throw back (`line-13::b01`). The engine evaluates each copy alone, so it makes the forms and line 17l a gap. A fix would chain the copies: each copy's line 13 adds the line 15 amounts of the copies before it for the same years.
-- **Estate and generation-skipping taxes.** Line 28 is "reduce[d] ... proportionately" by section 667(b)(6) (`line-28::b01`). The instructions do not give the formula, and the library does not hold the Code. Line 28 and line 17l are a gap until section 667(b)(6) is in the corpus.
+- **Estate and generation-skipping taxes.** Line 28 is "reduce[d] ... proportionately" by section 667(b)(6) (`line-28::b01`). The instructions do not give the formula. The law library has it: section 667(b)(6)(A) reduces the partial tax by its "pre-death portion" times a fraction of the estate or generation-skipping tax, and section 667(b)(6)(C) defines that portion (`usc-26-2025::sec::s667::b-6-A`, `::b-6-C`). Line 28 and line 17l stay a gap until a rule is written from it.
 - **Foreign trusts.** The tax goes on Form 3520 (`who-must-file::b01`), with Form 4970 as its worksheet. The engine has no Form 3520, so line 17l is a gap for a foreign trust.
 
 ## Second opinions
