@@ -9,7 +9,7 @@ The engine fills Form 3800 for an individual. The instructions publish no exampl
 | Header, item A (always "No" for an individual) | Stated rule |
 | Item B (transfers) | Stated rule |
 | Part I lines 1, 4, 5, 6 | Stated rule |
-| Part I lines 2, 3; Part II lines 23, 24, 32, 33 (passive credits) | Unsupported: Form 8582-CR |
+| Part I lines 2, 3; Part II lines 23, 24, 32, 33 (passive credits) | Stated rule; the allowed credit is Form 8582-CR's (`federal/8582-cr/QUESTIONS.md`) |
 | Part II lines 7 to 17 | Stated rule (line 14: decision A33) |
 | Part II lines 18 to 26 (empowerment zone) | Stated rule |
 | Part II lines 27 to 38 | Stated rule |
@@ -57,7 +57,7 @@ Each item is a default with no conflicting text. Every one is done in the code; 
 
 - Source: "If you have credits that are passive activity credits to you, you must complete Form 8582-CR" (`irs-1065k1-inst-2025::sec::box-15-credits::b01`).
 - Default: a credit from a rental (box 15 codes C to G) is passive. Any other credit is passive when the K-1 holding says the owner did not materially participate; with no answer, Form 3800 waits on the holding fact. A real estate professional's rental credit is not modeled.
-- Changes dollars: yes, for a passive credit (it is a gap, Form 8582-CR).
+- Changes dollars: yes, for a passive credit: Form 8582-CR limits it.
 
 ### 5. The credits of Forms 8911 and 8936 are not passive — done
 
@@ -110,11 +110,11 @@ Each item is a default with no conflicting text. Every one is done in the code; 
 
 Each one is a larger change; the reason it is not done now is in its first sentence.
 
-- **Form 8582-CR.** Not now: it is a form of its own, with its own rules. A passive credit (current or carried) makes column (g), Part I line 3, Part II lines 24 and 33, and so line 38, a gap. Form 8582-CR needs the passive income of each activity (Form 8582 and Schedule E have most of it).
+- **Form 8582-CR.** Done (2026-11-26): Form 8582-CR figures the allowed passive credit of each source (`federal/8582-cr/form.ts`), and Part III column (g), Part IV column (e), Part V column (d)(4), Part VI column (e), Part I line 3 and Part II lines 24 and 33 take it. With `decisions.scope.must_file_8582_cr` false, a passive credit is still a gap.
 - **The elective payment election.** Not now: the net elective payment is a payment on Schedule 3 line 13c, and Schedule 3 lines 13a to 15 have no rules yet. Columns (h) and (j) and Part V columns (h)(1), (i)(2) and (j) are gaps with an election. The proposal: bind line 13c and 14 together, then the election.
 - **A research credit carryover.** Not now: it needs a fact that links a carryover to its source business, a change to the carryover fact kind. It shares the limitation of lines 1c and 4i with the credit of the year, and Part I line 4 then takes only its allowable part. It is a gap now.
 - **A beneficiary's credits (Schedule K-1 (Form 1041) box 13).** Not now: the passive rules for a beneficiary are not issued, as for the losses (`passThrough/passive.ts`). They have no route.
-- **Transfers to an individual.** Not now: a purchased credit is a passive activity credit for most individuals (`transfer-of-eligible-credits-under-section-6418::b03`), so it needs Form 8582-CR first.
+- **Transfers to an individual.** A purchased credit marked passive now goes to Form 8582-CR with its transfer (column (a) of the worksheet is Part V column (d)(1) less (d)(2) plus (d)(3)). Whether a purchase is passive is the fact's answer (`transfer-of-eligible-credits-under-section-6418::b03`).
 
 ## Pattern change
 

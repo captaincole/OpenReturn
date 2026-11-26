@@ -11,6 +11,7 @@ import {
   type CreditCarryoverFact,
   type GeneralBusinessCreditFact,
   type K1ResearchCreditAnswer,
+  type PassiveCreditActivity,
 } from "../../facts/index.js";
 import { roundDollars } from "../../money.js";
 import type { ResolverInputs } from "../../resolverInputs.js";
@@ -62,6 +63,7 @@ function statedSource({ key, value }: GeneralBusinessCreditFact): CreditSource {
       key,
       amount,
       passive: value.passive,
+      activity: value.passive ? value.passiveActivity : undefined,
       ein: value.passThroughEin,
       transfer: value.transfer && {
         ...value.transfer,
@@ -104,6 +106,8 @@ function carryoverOf({ key, value }: CreditCarryoverFact): Carryover {
     originYear: value.originYear,
     amount: reason ? gap(reason) : roundDollars(value.amount),
     passive: value.passive,
+    activity: value.passive ? value.passiveActivity : undefined,
+    basisIncreaseElection: value.passive ? value.basisIncreaseElection : undefined,
     ein: value.passThroughEin,
     changed: value.changedFromOriginal === true,
     recaptured:
@@ -125,6 +129,24 @@ interface K1Found {
   missing: string[];
 }
 
+/*
+ * A passive K-1 credit's activity for Form 8582-CR: the entity, and its rental
+ * real estate when the box is a rental credit. A K-1 low-income housing credit
+ * is taken as placed in service after 1989 through an interest acquired after
+ * 1989 (Worksheet 3): the K-1 does not say, and a current credit from an older
+ * building ended with its 10-year credit period (8582-cr/QUESTIONS.md).
+ */
+function k1Activity({ entity, item }: ReceivedItem): PassiveCreditActivity {
+  const k1 = entity.k1;
+  return {
+    name: entity.name,
+    rentalRealEstate: k1CreditLineOf(item.detail).rental === true,
+    activelyParticipated: entity.holding?.activelyParticipated,
+    before1990: false,
+    publiclyTradedPartnership: k1.form === "1065" && k1.publiclyTraded === true,
+  };
+}
+
 function k1Source(inputs: ResolverInputs, received: ReceivedItem): K1Found {
   const { entity, item } = received;
   const passive = k1Passive(received);
@@ -134,6 +156,7 @@ function k1Source(inputs: ResolverInputs, received: ReceivedItem): K1Found {
     key: entity.key,
     amount: k1CreditAmount(item.detail, item.amount),
     passive: passive ?? false,
+    activity: passive === true ? k1Activity(received) : undefined,
     ein: entity.ein,
   };
   if (item.detail !== RESEARCH_DETAIL) {

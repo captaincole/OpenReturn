@@ -16,8 +16,6 @@ import type { Form2441FilingInfo } from "./federal/2441/filingInfo.js";
 import { resolve2441Info } from "./federal/2441/resolveInfo.js";
 import type { Form2555FilingInfo } from "./federal/2555/filingInfo.js";
 import { resolve2555Info } from "./federal/2555/resolveInfo.js";
-import type { Form3800FilingInfo } from "./federal/3800/filingInfo.js";
-import { resolve3800Info } from "./federal/3800/resolveInfo.js";
 import type { Form3903FilingInfo } from "./federal/3903/filingInfo.js";
 import { resolve3903Info } from "./federal/3903/resolveInfo.js";
 import type { Form4137FilingInfo } from "./federal/4137/filingInfo.js";
@@ -74,6 +72,8 @@ import type { Form8863FilingInfo } from "./federal/8863/filingInfo.js";
 import { resolve8863Info } from "./federal/8863/resolveInfo.js";
 import type { Form8880FilingInfo } from "./federal/8880/filingInfo.js";
 import { resolve8880Info } from "./federal/8880/resolveInfo.js";
+import type { Form8888FilingInfo } from "./federal/8888/filingInfo.js";
+import { resolve8888Info } from "./federal/8888/resolveInfo.js";
 import type { Form8889FilingInfo } from "./federal/8889/filingInfo.js";
 import { resolve8889Info } from "./federal/8889/resolveInfo.js";
 import type { Form8911FilingInfo } from "./federal/8911/filingInfo.js";
@@ -100,18 +100,17 @@ import type { Form8995AFilingInfo } from "./federal/8995-a/filingInfo.js";
 import { resolve8995AInfo } from "./federal/8995-a/resolveInfo.js";
 import type { Form8995FilingInfo } from "./federal/8995/filingInfo.js";
 import { resolve8995Info } from "./federal/8995/resolveInfo.js";
-import { FARM_FORMS_RESOLVERS, type FarmFormsFilingInfo } from "./federal/farmForms.js";
+import { CREDIT_FORMS_RESOLVERS, type CreditFormsFilingInfo } from "./federal/creditForms.js";
 import {
   FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
   type FederalFormsWithNoRulesFilingInfo,
 } from "./federal/formsWithNoRules.js";
+import {
+  LATER_FEDERAL_FORMS_RESOLVERS,
+  type LaterFederalFormsFilingInfo,
+} from "./federal/laterForms.js";
 import type { QbiFilingInfo } from "./federal/qbi/filingInfo.js";
 import { resolveQbiInfo } from "./federal/qbi/resolveInfo.js";
-import {
-  RECAPTURE_FORMS_RESOLVERS,
-  type RecaptureFormsFilingInfo,
-} from "./federal/recaptureForms.js";
-import { REFUND_FORMS_RESOLVERS, type RefundFormsFilingInfo } from "./federal/refundForms.js";
 import { SALE_FORMS_RESOLVERS, type SaleFormsFilingInfo } from "./federal/saleForms.js";
 import type { Schedule1AFilingInfo } from "./federal/schedule-1-a/filingInfo.js";
 import { resolveSchedule1AInfo } from "./federal/schedule-1-a/resolveInfo.js";
@@ -281,7 +280,7 @@ export type FilingInfo = BaseFilingInfo &
   Form6781FilingInfo &
   Form8978FilingInfo &
   Form8915FFilingInfo &
-  Form3800FilingInfo &
+  CreditFormsFilingInfo &
   Form461FilingInfo &
   Form8621FilingInfo &
   SaleFormsFilingInfo &
@@ -302,11 +301,10 @@ export type FilingInfo = BaseFilingInfo &
   Form8396FilingInfo &
   Form8853FilingInfo &
   Form8880FilingInfo &
-  RefundFormsFilingInfo &
+  Form8888FilingInfo &
   Form8863FilingInfo &
   Form8938FilingInfo &
-  RecaptureFormsFilingInfo &
-  FarmFormsFilingInfo &
+  LaterFederalFormsFilingInfo &
   FederalFormsWithNoRulesFilingInfo &
   LaterCaliforniaFormsFilingInfo &
   CaliforniaFormsWithNoRulesFilingInfo;
@@ -367,7 +365,7 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve6781Info,
   resolve8978Info,
   resolve8915FInfo,
-  resolve3800Info,
+  ...CREDIT_FORMS_RESOLVERS,
   resolve461Info,
   resolve8621Info,
   ...SALE_FORMS_RESOLVERS,
@@ -388,20 +386,16 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve8396Info,
   resolve8853Info,
   resolve8880Info,
-  ...REFUND_FORMS_RESOLVERS,
+  resolve8888Info,
   resolve8863Info,
   resolve8938Info,
-  ...RECAPTURE_FORMS_RESOLVERS,
-  ...FARM_FORMS_RESOLVERS,
+  ...LATER_FEDERAL_FORMS_RESOLVERS,
   ...FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
   ...LATER_CALIFORNIA_FORMS_RESOLVERS,
   ...CALIFORNIA_FORMS_WITH_NO_RULES_RESOLVERS,
 ];
 
-export function resolveFilingInfo(opts: {
-  facts: ReadonlyArray<{ key: string; value: unknown; category: string }>;
-  decisions: ReadonlyArray<{ decisionKey: string; decision: unknown }>;
-}): FilingInfo {
+export function resolveFilingInfo(opts: Parameters<typeof makeResolverInputs>[0]): FilingInfo {
   const inputs = makeResolverInputs(opts);
   return mergeInfo(RESOLVERS.map((resolve) => resolve(inputs)));
 }

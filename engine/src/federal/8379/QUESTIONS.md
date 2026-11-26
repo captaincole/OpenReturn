@@ -6,13 +6,13 @@ Form 8379 splits a joint return's items between the spouses, so the IRS can refu
 
 Each is decided by the author, with a `DECISION` comment and a row in `docs/rule-decisions.md`.
 
-### A44. Line 15, the basic standard deduction
+### A52. Line 15, the basic standard deduction
 
 - Source: "include one-half of your basic standard deduction ... 2025 $30,000" (irs-8379-inst-2025::sec::line-15::b01, ::basic-standard-deduction::b01). The 2025 Form 1040 chart gives $33,100 for a joint return with one box checked (irs-1040-inst-2025::sec::single-1::b01), so the basic amount is $31,500.
 - Decision: the joint return's line 12e less $1,600 for each age or blindness box, halved, plus each spouse's own boxes (`lines.ts`). The same rule covers a dependent's basic amount (line 4c of the Standard Deduction Worksheet for Dependents).
 - Dollars: $750 more in each column in `erian` ($15,750, not $15,000).
 
-### A45. Line 17 and Schedule 3 lines 10 and 11
+### A53. Line 17 and Schedule 3 lines 10 and 11
 
 - Source: line 17 names "Part II of Schedule 3" (irs-8379-inst-2025::sec::line-17::b01); line 19 takes Schedule 3 line 11 (::line-19::b01) and line 20 takes Schedule 3 line 10 (::line-20::b01).
 - Decision: lines 10 and 11 go on lines 20 and 19 only (`partThree.ts`). Form 1040 line 30, the refundable adoption credit new for 2025, counts on line 17 and on line 9.
@@ -49,7 +49,7 @@ None. The form adds one fact kind (`refund.injured_spouse`) and reads the joint 
 
 ## Second opinions
 
-- PolicyEngine-US 2.154.0 (commit 363e9fc5, 2026-11-25) does not model Form 8379 or any split of a joint return between spouses. Its constants agree with the engine's: the 2025 joint basic standard deduction $31,500 (the base of decision A44), the 2025 additional amount $1,600 for a married filer, the Medicare rate 1.45%, and the 2025 social security wage base $176,100 at 6.2% ($10,918.20).
+- PolicyEngine-US 2.154.0 (commit 363e9fc5, 2026-11-25) does not model Form 8379 or any split of a joint return between spouses. Its constants agree with the engine's: the 2025 joint basic standard deduction $31,500 (the base of decision A52), the 2025 additional amount $1,600 for a married filer, the Medicare rate 1.45%, and the 2025 social security wage base $176,100 at 6.2% ($10,918.20).
 - It figures Additional Medicare Tax withholding as 0.9% of wages above $200,000. The engine reads each spouse's W-2 (box 6 less 1.45% of box 5), as Form 8959 lines 19 to 22 do. That is a scope difference: the form reads the W-2.
 - IRS Direct File: no checkout is reachable from this project (issue #140). Not compared.
 - Blind fill (14 cases, `.scratch/blind`): no dollar difference. One Part I difference (item 13) came from the engine run's input, not from a rule.
@@ -61,9 +61,9 @@ None. The form adds one fact kind (`refund.injured_spouse`) and reads the joint 
 | Part I lines 2 to 4, 5 | stated rule (the form's routing) |
 | Part I lines 6 to 9 | own reading (items 2 and 3) |
 | Part II lines 10 to 12 | stated rule |
-| Part III column (a) | stated rule (each line names its Form 1040 lines); line 17 decision A45 |
+| Part III column (a) | stated rule (each line names its Form 1040 lines); line 17 decision A53 |
 | Line 13a column (b) | stated rule |
-| Line 15 columns (b), (c), standard deduction | stated rule with decision A44; worksheet amounts printed in the instructions |
+| Line 15 columns (b), (c), standard deduction | stated rule with decision A52; worksheet amounts printed in the instructions |
 | Line 19 column (b) | stated rule; own reading for Form 8959 (item 4) |
 | Lines 13b, 14, 15 itemized, 16, 17, 18, 20 column (b) | stated by the spouses (item 1) |
 | Column (c) | stated rule: (a) less (b) |
