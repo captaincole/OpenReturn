@@ -8,6 +8,7 @@ import { fixtureFileSchema } from "../catalog.js";
 import { makeFormSpec, type FormSpec } from "../formSpec.js";
 import { register as registerForm1040 } from "./1040/bindings.js";
 import { register as registerForm1116 } from "./1116/bindings.js";
+import { register as registerForm172 } from "./172/bindings.js";
 import { register as registerForm2106 } from "./2106/bindings.js";
 import { register as registerForm2210 } from "./2210/bindings.js";
 import { register as registerForm2441 } from "./2441/bindings.js";
@@ -37,7 +38,9 @@ import { register as registerForm6251 } from "./6251/bindings.js";
 import { register as registerForm6252 } from "./6252/bindings.js";
 import { register as registerForm6781 } from "./6781/bindings.js";
 import { register as registerForm7203 } from "./7203/bindings.js";
+import { register as registerForm7206 } from "./7206/bindings.js";
 import { register as registerForm8283 } from "./8283/bindings.js";
+import { register as registerForm8379 } from "./8379/bindings.js";
 import { register as registerForm8396 } from "./8396/bindings.js";
 import { register as registerForm8582CR } from "./8582-cr/bindings.js";
 import { register as registerForm8582 } from "./8582/bindings.js";
@@ -69,6 +72,7 @@ import { register as registerForm8933 } from "./8933/bindings.js";
 import { register as registerForm8936 } from "./8936/bindings.js";
 import { register as registerForm8938 } from "./8938/bindings.js";
 import { register as registerForm8949 } from "./8949/bindings.js";
+import { register as registerForm8958 } from "./8958/bindings.js";
 import { register as registerForm8959 } from "./8959/bindings.js";
 import { register as registerForm8960 } from "./8960/bindings.js";
 import { register as registerForm8962 } from "./8962/bindings.js";
@@ -78,6 +82,7 @@ import { register as registerForm8995AScheduleC } from "./8995-a-schedule-c/bind
 import { register as registerForm8995A } from "./8995-a/bindings.js";
 import { register as registerForm8995 } from "./8995/bindings.js";
 import { register as registerForm965A } from "./965-a/bindings.js";
+import { register as registerForm982 } from "./982/bindings.js";
 import { register as registerSchedule1A } from "./schedule-1-a/bindings.js";
 import { register as registerSchedule1 } from "./schedule-1/bindings.js";
 import { register as registerSchedule2 } from "./schedule-2/bindings.js";
@@ -97,6 +102,7 @@ import { register as registerScheduleSE } from "./schedule-se/bindings.js";
 /* Rollup inlines the JSON at build time; the process does not read it from disk. */
 import form1040CatalogJson from "./1040/catalog.json";
 import form1116CatalogJson from "./1116/catalog.json";
+import form172CatalogJson from "./172/catalog.json";
 import form2106CatalogJson from "./2106/catalog.json";
 import form2210CatalogJson from "./2210/catalog.json";
 import form2441CatalogJson from "./2441/catalog.json";
@@ -123,7 +129,9 @@ import form6251CatalogJson from "./6251/catalog.json";
 import form6252CatalogJson from "./6252/catalog.json";
 import form6781CatalogJson from "./6781/catalog.json";
 import form7203CatalogJson from "./7203/catalog.json";
+import form7206CatalogJson from "./7206/catalog.json";
 import form8283CatalogJson from "./8283/catalog.json";
+import form8379CatalogJson from "./8379/catalog.json";
 import form8396CatalogJson from "./8396/catalog.json";
 import form8582CRCatalogJson from "./8582-cr/catalog.json";
 import form8582CatalogJson from "./8582/catalog.json";
@@ -154,6 +162,7 @@ import form8933CatalogJson from "./8933/catalog.json";
 import form8936CatalogJson from "./8936/catalog.json";
 import form8938CatalogJson from "./8938/catalog.json";
 import form8949CatalogJson from "./8949/catalog.json";
+import form8958CatalogJson from "./8958/catalog.json";
 import form8959CatalogJson from "./8959/catalog.json";
 import form8960CatalogJson from "./8960/catalog.json";
 import form8962CatalogJson from "./8962/catalog.json";
@@ -163,6 +172,7 @@ import form8995AScheduleCCatalogJson from "./8995-a-schedule-c/catalog.json";
 import form8995ACatalogJson from "./8995-a/catalog.json";
 import form8995CatalogJson from "./8995/catalog.json";
 import form965ACatalogJson from "./965-a/catalog.json";
+import form982CatalogJson from "./982/catalog.json";
 import schedule1ACatalogJson from "./schedule-1-a/catalog.json";
 import schedule1CatalogJson from "./schedule-1/catalog.json";
 import schedule2CatalogJson from "./schedule-2/catalog.json";
@@ -264,6 +274,11 @@ export const FEDERAL_CATALOGS = [
   fixtureFileSchema.parse(form7203CatalogJson),
   fixtureFileSchema.parse(form8582CRCatalogJson),
   fixtureFileSchema.parse(form8824CatalogJson),
+  fixtureFileSchema.parse(form982CatalogJson),
+  fixtureFileSchema.parse(form8958CatalogJson),
+  fixtureFileSchema.parse(form8379CatalogJson),
+  fixtureFileSchema.parse(form172CatalogJson),
+  fixtureFileSchema.parse(form7206CatalogJson),
 ];
 
 export const FEDERAL_FORMS: FormSpec[] = [
@@ -990,5 +1005,40 @@ export const FEDERAL_FORMS: FormSpec[] = [
       count: (info) => form8824CopyCount(info?.form8824Totals),
       select: (info, index) => info && { ...info, form8824CopyIndex: index },
     },
+  }),
+  makeFormSpec({
+    formId: "form-982",
+    shortId: "982",
+    displayName: "Form 982",
+    relativeDir: "federal/982",
+    register: registerForm982,
+  }),
+  makeFormSpec({
+    formId: "form-8958",
+    shortId: "8958",
+    displayName: "Form 8958",
+    relativeDir: "federal/8958",
+    register: registerForm8958,
+  }),
+  makeFormSpec({
+    formId: "form-8379",
+    shortId: "8379",
+    displayName: "Form 8379",
+    relativeDir: "federal/8379",
+    register: registerForm8379,
+  }),
+  makeFormSpec({
+    formId: "form-172",
+    shortId: "172",
+    displayName: "Form 172",
+    relativeDir: "federal/172",
+    register: registerForm172,
+  }),
+  makeFormSpec({
+    formId: "form-7206",
+    shortId: "7206",
+    displayName: "Form 7206",
+    relativeDir: "federal/7206",
+    register: registerForm7206,
   }),
 ];

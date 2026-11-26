@@ -1,0 +1,423 @@
+{
+  "form": {
+    "formId": "form-982",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Reduction of Tax Attributes Due to Discharge of Indebtedness (and Section 1082 Basis Adjustment)"
+  },
+  "fields": [
+    {
+      "fieldId": "form-982.0.header.taxpayer_name",
+      "label": "Name shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-982.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 439.2,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-982.0.line.1a_title_11_case",
+      "label": "Line 1a — Discharge of indebtedness in a title 11 case",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 550.4,
+        "y": 637.969
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.1b_insolvency",
+      "label": "Line 1b — Discharge of indebtedness to the extent insolvent (not in a title 11 case)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 550.4,
+        "y": 625.97
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.1c_qualified_farm_indebtedness",
+      "label": "Line 1c — Discharge of qualified farm indebtedness",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 550.4,
+        "y": 613.968
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.1d_qualified_real_property_business",
+      "label": "Line 1d — Discharge of qualified real property business indebtedness",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 550.4,
+        "y": 601.969
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.1e_qualified_principal_residence",
+      "label": "Line 1e — Discharge of qualified principal residence indebtedness",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 550.4,
+        "y": 577.968
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.2_total_discharged_excluded",
+      "label": "Line 2 — Total amount of discharged indebtedness excluded from gross income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.3_elect_real_property_depreciable_yes",
+      "label": "Line 3 — Do you elect to treat all real property described in section 1221(a)(1), relating to property held for sale to customers in the ordinary course of a trade or business, as if it were depreciable property? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 541.968
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.3_elect_real_property_depreciable_no",
+      "label": "Line 3 — Do you elect to treat all real property described in section 1221(a)(1), relating to property held for sale to customers in the ordinary course of a trade or business, as if it were depreciable property? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_7[1]",
+      "position": {
+        "page": 0,
+        "x": 540,
+        "y": 541.968
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.4_real_property_business_basis",
+      "label": "Line 4 — For a discharge of qualified real property business indebtedness applied to reduce the basis of depreciable real property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 467.968
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.5_elect_depreciable_basis_first",
+      "label": "Line 5 — That you elect under section 108(b)(5) to apply first to reduce the basis (under section 1017) of depreciable property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.6_net_operating_loss",
+      "label": "Line 6 — Applied to reduce any net operating loss that occurred in the tax year of the discharge or carried over to the tax year of the discharge",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.7_general_business_credit",
+      "label": "Line 7 — Applied to reduce any general business credit carryover to or from the tax year of the discharge",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 395.968
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.8_minimum_tax_credit",
+      "label": "Line 8 — Applied to reduce any minimum tax credit as of the beginning of the tax year immediately after the tax year of the discharge",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.9_net_capital_loss",
+      "label": "Line 9 — Applied to reduce any net capital loss for the tax year of the discharge, including any capital loss carryovers to the tax year of the discharge",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 347.969
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.10a_property_basis",
+      "label": "Line 10a — Applied to reduce the basis of nondepreciable and depreciable property if not reduced on line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.10b_principal_residence_basis",
+      "label": "Line 10b — Applied to reduce the basis of your principal residence",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.11a_farm_depreciable_property",
+      "label": "Line 11a — For a discharge of qualified farm indebtedness applied to reduce the basis of depreciable property used or held for use in a trade or business or for the production of income if not reduced on line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.11b_farm_land",
+      "label": "Line 11b — For a discharge of qualified farm indebtedness applied to reduce the basis of land used or held for use in a trade or business of farming",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.11c_farm_other_property",
+      "label": "Line 11c — For a discharge of qualified farm indebtedness applied to reduce the basis of other property used or held for use in a trade or business or for the production of income",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.12_passive_activity_carryovers",
+      "label": "Line 12 — Applied to reduce any passive activity loss and credit carryovers from the tax year of the discharge",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 191.97
+      }
+    },
+    {
+      "fieldId": "form-982.0.line.13_foreign_tax_credit",
+      "label": "Line 13 — Applied to reduce any foreign tax credit carryover to or from the tax year of the discharge",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "form-982.0.part3.corporation_amount_excluded",
+      "label": "Part III — Under section 1081(b), the corporation named above has excluded $ from its gross income",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 119.97
+      }
+    },
+    {
+      "fieldId": "form-982.0.part3.tax_year_beginning",
+      "label": "Part III — For the tax year beginning",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 151.2,
+        "y": 107.968
+      }
+    },
+    {
+      "fieldId": "form-982.0.part3.tax_year_ending",
+      "label": "Part III — For the tax year ending",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 388.8,
+        "y": 107.968
+      }
+    },
+    {
+      "fieldId": "form-982.0.part3.state_of_incorporation",
+      "label": "Part III — The corporation is organized under the laws of (State of incorporation)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 50.4,
+        "y": 71.968
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/982/blank.pdf",
+    "ingestedAt": "2026-11-26T09:18:30.486Z",
+    "totalFields": 27,
+    "skipped": 0,
+    "catalogEntries": 27
+  }
+}
