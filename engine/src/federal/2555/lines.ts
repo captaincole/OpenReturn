@@ -36,9 +36,17 @@ export const DAYS_IN_2025 = 365;
  */
 export const RATIO_PLACES = 3;
 /*
- * Line 44: Pub. 54's examples state the share of the expenses as a percentage
- * with two decimals (98.48%, 13.33%, 52.74%, 96.77%), a ratio of four places,
- * and multiply by it (irs-pub-54-2025::sec::how-to-report-deductions::b04–b06).
+ * DECISION (2026-11-25, by the author): line 44 multiplies the related
+ * deductions by the share rounded to four places. Text A, Pub. 54: "multiplying
+ * the deduction by a fraction, the numerator of which is your foreign earned
+ * income exclusion and the denominator of which is your foreign earned income"
+ * (irs-pub-54-2025::sec::how-to-report-deductions::b01), with no rounding.
+ * Text B, Pub. 54's examples: "13.33% (0.1333) x $67,695" is $9,024 (b04),
+ * "52.74% of your business expenses ($90,713)" (b05), "96.77% (0.9677) ×
+ * $51,125" is $49,474 (b06, b07). The engine follows the examples, because
+ * they are the only text that shows the arithmetic and the exact fraction
+ * matches none of them ($9,025, $90,712, $49,476); example 2 cuts 0.98488 to
+ * 0.9848 (b04), and the engine rounds every share the same way.
  */
 export const ALLOCATION_PLACES = 4;
 
@@ -208,11 +216,19 @@ export function partVIILines(line27: number, line36: number | undefined, days: n
 
 /*
  * Line 44: the deductions definitely related to the foreign earned income
- * times the share of it excluded. Pub. 54: "multiplying the deduction by a
- * fraction, the numerator of which is your foreign earned income exclusion and
- * the denominator of which is your foreign earned income"
- * (irs-pub-54-2025::sec::how-to-report-deductions::b01). The exclusion is
- * line 43, both exclusions (line-44::b01: "allocable to the excluded income").
+ * times the share of it excluded.
+ *
+ * DECISION (2026-11-25, by the author): the share is line 43 (both
+ * exclusions) over line 27. Text A, Pub. 54: "a fraction, the numerator of
+ * which is your foreign earned income exclusion and the denominator of which
+ * is your foreign earned income" (irs-pub-54-2025::sec::how-to-report-deductions::b01),
+ * which reads as line 42 alone. Text B, the form's instructions: line 44 takes
+ * the deductions "allocable to the excluded income"
+ * (irs-2555-inst-2025::sec::line-44::b01), prorated "based on the ratio that
+ * your excludable earned income bears to your total foreign earned income"
+ * (irs-2555-inst-2025::sec::part-viii-taxpayers-claiming-the::b01), and the
+ * housing exclusion of line 36 is excluded earned income too. The form's own
+ * instructions decide how the form is filled.
  */
 export function line44Amount(line43: number, line27: number, relatedDeductions: number): number {
   if (relatedDeductions <= 0) return 0;
@@ -230,13 +246,17 @@ export interface PriorYearHousing {
  * (irs-2555-inst-2025::sec::housing-deduction-carryover-worksheet-line-49::b01):
  * line 3 = 2024 line 46 − 2024 line 48 ("If the result is zero, stop; enter
  * -0-"), line 6 = 2025 line 47 − 2025 line 48, line 7 the smaller of 3 and 6.
+ * The form's note: "If line 47 is more than line 48 and you couldn't deduct
+ * all of your 2024 housing deduction ... use the Housing Deduction Carryover
+ * Worksheet ... Otherwise, go to line 50" (irs-2555-face-2025::sec::face-part-ix::b01),
+ * so line 49 is blank with no 2024 amounts or with line 47 not above line 48.
  */
 export function housingCarryover(
   prior: PriorYearHousing | undefined,
   line47: number,
   line48: number,
-): number {
-  if (prior === undefined) return 0;
+): number | undefined {
+  if (prior === undefined || line47 <= line48) return undefined;
   const worksheet3 = roundDollars(prior.line46) - roundDollars(prior.line48);
   if (worksheet3 <= 0) return 0;
   return atLeast(0, Math.min(worksheet3, line47 - line48));
@@ -246,7 +266,7 @@ export interface PartIXLines {
   line46: number;
   line47: number;
   line48: number;
-  line49: number;
+  line49?: number;
   line50: number;
 }
 
@@ -267,5 +287,5 @@ export function partIXLines(inputs: {
   const line47 = inputs.line27 - inputs.line43;
   const line48 = Math.min(line46, line47);
   const line49 = housingCarryover(inputs.prior, line47, line48);
-  return { line46, line47, line48, line49, line50: line48 + line49 };
+  return { line46, line47, line48, line49, line50: line48 + sum(line49) };
 }

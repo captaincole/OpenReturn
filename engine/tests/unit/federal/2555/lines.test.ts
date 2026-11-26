@@ -104,7 +104,7 @@ describe("Pub. 54 Foreign Housing Deduction example (::foreign-housing-deduction
       line46: 9_000,
       line47: 91_000,
       line48: 9_000,
-      line49: 0,
+      line49: undefined,
       line50: 9_000,
     });
   });
@@ -194,7 +194,25 @@ describe("Form 2555 limits", () => {
     expect(housingCarryover({ line46: 5_000, line48: 5_000 }, 40_000, 10_000)).toBe(0);
     expect(housingCarryover({ line46: 12_000, line48: 9_500 }, 41_060, 15_257)).toBe(2_500);
     expect(housingCarryover({ line46: 30_000, line48: 0 }, 12_000, 10_000)).toBe(2_000);
-    expect(housingCarryover(undefined, 12_000, 10_000)).toBe(0);
+    expect(housingCarryover(undefined, 12_000, 10_000)).toBeUndefined();
+  });
+
+  it("line 49 is blank unless line 47 is more than line 48 and 2024 left a deduction (face-part-ix::b01)", () => {
+    const noPrior = partIXLines({ line27: 90_000, line33: 10_670, line36: 0, line43: 76_180 });
+    expect(noPrior?.line49).toBeUndefined();
+    expect(noPrior?.line50).toBe(10_670);
+    const prior = { line46: 30_000, line48: 0 };
+    expect(housingCarryover(prior, 10_000, 10_000)).toBeUndefined();
+  });
+
+  it("line 44 multiplies by the share rounded to four places, not the exact fraction (decision A19)", () => {
+    // $76,180 of $90,000 excluded is 0.8464 (0.846444...); 0.8464 × $15,651 is $13,247.
+    expect(line44Amount(76_180, 90_000, 15_651)).toBe(13_247);
+  });
+
+  it("line 44's share is line 43, both exclusions, over line 27 (decision A20)", () => {
+    // $92,080 excluded under line 42 plus $7,920 under line 36: all $100,000 of line 27.
+    expect(line44Amount(100_000, 100_000, 10_600)).toBe(10_600);
   });
 
   it("line 44 is 0 with no related deduction, and never more than the deductions", () => {
