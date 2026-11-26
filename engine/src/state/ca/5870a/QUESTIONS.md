@@ -8,7 +8,7 @@ FTB 5870A figures California's extra tax on trust income that a trust kept in ea
 
 - Text A: "Except as explained above, use the instructions for federal Form 4970 to compute the partial tax" (`california-does-not-follow-the-federal-rules-for::b01`). Form 4970 line 2 takes out the income kept before the beneficiary was born or reached 21 (`irs-4970-form-2025::sec::line-2::b01`). Schedule J (541) Part I says the same.
 - Text B: line 1 is the total "from Schedule J (541), line 30, column (a)" (`ca-5870a-face-2025::sec::face-part-i::b01`).
-- Decided: Text A. Row A33 of `docs/rule-decisions.md` and the `DECISION` comment in `partI.ts`.
+- Decided: Text A. Row A43 of `docs/rule-decisions.md` and the `DECISION` comment in `partI.ts`.
 - Dollars: $2,307 of partial tax for `cenn`; Text B gives $2,580.
 - Form 4970 line 2 names only the "UNI of a domestic trust", and FTB 5870A also covers foreign trusts (`purpose::b01`). So a foreign trust keeps its years before age 21 and needs no date of birth: `cenn` with a foreign trust gives $2,580.
 

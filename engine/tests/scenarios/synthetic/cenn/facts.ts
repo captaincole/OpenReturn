@@ -68,7 +68,7 @@ const w2: W2FactValue = {
  * The Tallowmere Family Trust, set up by his grandmother (made up). It filed
  * Form 541 and paid the California tax each year it kept income, so the
  * trustee gave Cenn Part IV of Schedule J (541) (Part I). He was under 21 all
- * of 2015 (that year leaves every line, decision A33). In 2018 two other
+ * of 2015 (that year leaves every line, decision A43). In 2018 two other
  * trusts' distributions to him are considered made in the same year
  * (the multiple trust rule: that year's tax leaves line 2).
  */

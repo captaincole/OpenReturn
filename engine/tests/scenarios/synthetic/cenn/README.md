@@ -2,7 +2,7 @@
 
 Cenn Tallowmere is single and lives in Fresno all of 2025. Every name and amount here is made up. There is no outside source and no answer key: the expected values are the engine's output, checked by hand against the form instructions, then locked (`verification: "unverified"`).
 
-He is an irrigation designer with one W-2. His grandmother's Tallowmere Family Trust filed Form 541 and paid California tax on income it kept in five earlier years. In 2025 it paid that income to him, and the trustee gave him Part IV of Schedule J (541). He was under 21 all of 2015, so that year leaves every line (decision A33). In 2018 two other trusts' distributions to him count in the same year, so that year's tax leaves line 2. The 2022 year is under a quarter of the average, so line 9 counts 3 years, not 4. He takes the standard deduction.
+He is an irrigation designer with one W-2. His grandmother's Tallowmere Family Trust filed Form 541 and paid California tax on income it kept in five earlier years. In 2025 it paid that income to him, and the trustee gave him Part IV of Schedule J (541). He was under 21 all of 2015, so that year leaves every line (decision A43). In 2018 two other trusts' distributions to him count in the same year, so that year's tax leaves line 2. The 2022 year is under a quarter of the average, so line 9 counts 3 years, not 4. He takes the standard deduction.
 
 Forms that file: Form 1040, Schedule CA (540), FTB 5870A, Form 540.
 
