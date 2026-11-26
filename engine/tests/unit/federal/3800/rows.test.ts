@@ -163,11 +163,19 @@ describe("one Part III row", () => {
     expect(row.d).toBeUndefined();
   });
 
-  it("puts a passive source in column (d), and column (g) needs Form 8582-CR", () => {
+  it("puts a passive source in column (d), and column (g) is a gap without Form 8582-CR", () => {
     const row = partIIIColumns([credit("4d", 5_000, { passive: true })]);
     expect(row.d).toBe(5_000);
     expect(row.e).toBeUndefined();
     expect(isGap(row.g)).toBe(true);
+  });
+
+  it("column (g) adds column (e) and the passive credit Form 8582-CR allows", () => {
+    const row = partIIIColumns([
+      credit("4d", 5_000, { passive: true, allowed: 3_200 }),
+      credit("4d", 1_000),
+    ]);
+    expect(row).toMatchObject({ d: 5_000, e: 1_000, g: 4_200 });
   });
 
   it("names the pass-through entity that allocated the most in column (c)", () => {
@@ -197,9 +205,18 @@ describe("one Part IV row", () => {
     expect(row).toMatchObject({ a: 2, b: 2023, f: 2_000, h: 100 });
   });
 
-  it("makes column (e) a gap for a passive carryover", () => {
+  it("makes column (e) a gap for a passive carryover without Form 8582-CR", () => {
     const row = partIVColumns([carryover("1h", 2020, 700, { passive: true })]);
     expect(row.d).toBe(700);
     expect(isGap(row.e)).toBe(true);
+  });
+
+  it("column (e) is what Form 8582-CR allows of the passive carryovers", () => {
+    const row = partIVColumns([
+      carryover("1h", 2020, 700, { passive: true, allowed: 250 }),
+      carryover("1h", 2021, 300, { passive: true, allowed: 100 }),
+    ]);
+    expect(row).toMatchObject({ d: 1_000, e: 350 });
+    expect(row.f).toBeUndefined();
   });
 });
