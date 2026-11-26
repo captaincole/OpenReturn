@@ -21,7 +21,8 @@ Run `npm run form-engine -- form-status <form> --json`. It needs a catalog and `
    - The explicit key is `decisions.scope.must_file_<short>`.
    - The fallbacks come from the instructions' "Who must file". Search Canon (`mcp__canon__searchRefDocs`) with the `instructionsDocId` from form-status, and read the section with `npm run corpus -- read <blockId>`. Put the blockId in the comment above the resolver.
    - A fallback reads facts the engine has (`engine/src/facts/kinds/`). If the rule needs an answer the engine does not have, leave that fallback out and say so in the comment.
-3. **`resolveFilingInfo`** in `engine/src/filingInfo.ts`: add the resolver to the list, and the FilingInfo type to the intersection.
+3. **The list of forms with no rules:** add the resolver and the FilingInfo type to the jurisdiction's `formsWithNoRules.ts` (`engine/src/federal/` or `engine/src/state/ca/`). Never add a form to `engine/src/filingInfo.ts`: it is at its 400-line lint limit. When the form gets rules, `write-binding-rules` moves it to a group file that `federal/laterForms.ts` or `state/ca/laterForms.ts` joins.
+   - Give the form's row in `engine/scripts/formLists/<jurisdiction>-<year>.json` its `"short"` (the form's folder name). `npm run coverage` stops on an engine form that no row names.
 4. **`bindings.ts`:** a `register()` function that calls `defineForm<Form<Short>, Form<Short>FilingInfo>("<formId>", { bindings: {} })`. Its header comment: `Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:.`
 5. **The registry:** in the jurisdiction's `index.ts`, import `register` and `catalog.json`, add the catalog to the catalogs list, and add a `makeFormSpec` entry in line with the other forms.
 
