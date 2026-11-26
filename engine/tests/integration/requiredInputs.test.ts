@@ -96,6 +96,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],
   [
+    /^low_income_housing_recapture\.[^.]+$/,
+    "each fact is a whole building's credit recapture (Form 8611); whether the qualified basis " +
+      "fell is Cade's question. A K-1 with a recapture asks for its building fact",
+  ],
+  [
     /^trust_accumulation_distribution\.[^.]+$/,
     "each fact is a whole trust's Schedule J (Form 1041) Part IV (Form 4970, one copy per " +
       "trust); whether the taxpayer received an accumulation distribution is Cade's question",

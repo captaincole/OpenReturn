@@ -65,6 +65,7 @@ export * from "./kinds/isoExercise.js";
 export * from "./kinds/itemizedOther.js";
 export * from "./kinds/k1Holding.js";
 export * from "./kinds/likeKindExchange.js";
+export * from "./kinds/lowIncomeHousingRecapture.js";
 export * from "./kinds/ltcBenefits.js";
 export * from "./kinds/lumpSumDistribution.js";
 export * from "./kinds/marketplaceCoverage.js";
