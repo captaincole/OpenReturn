@@ -207,6 +207,28 @@ describe("Part I on Form 540 (cenn)", () => {
     );
     expect(evaluate(cenn, split).isGap("form-540", LINE_34)).toBe(true);
   });
+
+  /* Form 4970 line 2 leaves out only the "UNI of a domestic trust" (irs-4970-form-2025::sec::line-2::b01). */
+  const foreign = (facts: TaxFactRow[]) =>
+    facts.map((fact) =>
+      isTrust(fact)
+        ? { ...fact, value: { ...(fact.value as object), trustType: "foreign" } }
+        : fact,
+    );
+
+  it("a foreign trust keeps the years before age 21 (2015 stays)", () => {
+    const run = evaluate(cenn, foreign(cenn.facts));
+    const part1 = (id: string) => run.value("form-5870a", `0.part1.${id}`);
+    expect(part1("1_current_distribution_earlier_years")).toBe(43000);
+    expect(part1("10_average_amount_recomputing_tax")).toBe(10985);
+    expect(part1("26_partial_tax_accumulation_distribution")).toBe(2580);
+    expect(run.value("form-540", LINE_34)).toBe(2580);
+  });
+
+  it("a foreign trust: a year in which the beneficiary reached 21 is no gap", () => {
+    const split = bornIn(foreign(cenn.facts), "06/15/1998");
+    expect(evaluate(cenn, split).isGap("form-540", LINE_34)).toBe(false);
+  });
 });
 
 describe("who files", () => {

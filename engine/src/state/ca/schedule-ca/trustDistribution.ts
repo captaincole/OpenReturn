@@ -47,7 +47,8 @@ function line8zColumnC(form: Form, info: Info) {
   if (trust === "waits") return undefined;
   if (isUnsupportedResult(trust)) return trust;
   if (typeof base === "number") return base + trust;
-  if (base === undefined) return undefined;
+  // A figured child's adjustment with no column C part (equal amounts, or a subtraction only) leaves the trust amount.
+  if (base === undefined) return info.childIncomeLine8z?.kind === "figured" ? trust : undefined;
   const alone = info.childIncomeLine8z === undefined && !numberOrBlank(form["1.line.b8z_federal"]);
   return alone ? trust : base;
 }

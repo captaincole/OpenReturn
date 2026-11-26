@@ -210,6 +210,8 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 114. Total amount due. See instructions. Enclose, but do not staple, any payment.
       "form-540.line.114_total_amount_due": 2182,
     },
+    // Line 34: "Check the box labeled 'FTB 5870A'" (ca-5870a-inst-2025::sec::part-i-tax-on-accumulation-distribution::b06).
+    renderedChecked: ["form-540.line.34_tax_from_ftb_5870a"],
   },
 };
 

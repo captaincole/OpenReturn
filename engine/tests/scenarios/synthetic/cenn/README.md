@@ -19,7 +19,7 @@ The earlier years' taxable income, tax and filing status are his answers from hi
 - [Schedule J (541), 2025](https://www.ftb.ca.gov/forms/2025/2025-541-j.pdf), [2024](https://www.ftb.ca.gov/forms/2024/2024-541-j.pdf) and [2023](https://www.ftb.ca.gov/forms/2023/2023-541-j.pdf), Part IV: the same in all three years. Ours has the same fields: the trust's name and FEIN, the beneficiary's name, identifying number and address, lines 26 to 29 with a throwback year each, columns (a) Part II line 13, (b) line 14 and (c) line 16 allocated to the beneficiary, the line 30 totals, and line 31 (nonresident, Yes or No).
 - Changed: ours adds the trust's address under its name (FTB 5870A's header asks for it), a "Beneficiary's copy" title, and a fifth row as an attached schedule. Parts I to III stay off: the trustee keeps them.
 - Line 30 prints the column totals the form defines. They include the 2015 row, which the beneficiary leaves out because of his age; the form does not.
-- Every fact the engine reads from the document is on it: the year and columns (a), (b), (c) of each throwback year.
+- Every fact the engine reads from the document is on it: the year and columns (a), (b), (c) of each throwback year. A column with no amount in the fact stays blank, as on the real form.
 
 ## Inputs
 

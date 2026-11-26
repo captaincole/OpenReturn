@@ -36,8 +36,9 @@ function resultOf(
    * Section 17745 and Part II only" (purpose::b01): the beneficiary's interest
    * names one part.
    */
+  const { beneficiary, trustType } = fact.value;
   return california.beneficiaryInterest === "schedule_j"
-    ? partIResult(inputs, california.throwbackYears, fact.key, fact.value.beneficiary ?? "taxpayer")
+    ? partIResult(inputs, california.throwbackYears, fact.key, beneficiary ?? "taxpayer", trustType)
     : partIIResult(inputs, california, fact.key);
 }
 

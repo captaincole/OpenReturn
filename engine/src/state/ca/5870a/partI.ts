@@ -49,15 +49,18 @@ const GAP_AGE_21_MULTIPLE =
  * The engine follows Text A: a throwback year before age 21 leaves every line,
  * as the counted years of Form 4970 do (decision A20), because the form's own
  * instructions bring in the federal rule and line 1 holds only amounts
- * "considered distributed in earlier taxable years".
+ * "considered distributed in earlier taxable years". The federal rule covers
+ * only the "UNI of a domestic trust" (line-2::b01), and FTB 5870A also takes
+ * "an accumulation distribution made by a foreign trust" (purpose::b01): a
+ * foreign trust keeps every year, so dob is undefined for one.
  */
 function throwbackInputs(
   rows: readonly ThrowbackYearRow[],
-  dob: string,
+  dob: string | undefined,
 ): ThrowbackInput[] | string {
   const inputs: ThrowbackInput[] = [];
   for (const row of rows) {
-    const age = ageTwentyOne(dob, row.year);
+    const age = dob === undefined ? "after" : ageTwentyOne(dob, row.year);
     if (age === "split" || age === undefined) return GAP_AGE_21_YEAR;
     const multipleTrustRule = (row.otherTrustsCounted ?? 0) >= MULTIPLE_TRUST_MINIMUM;
     if (age === "before" && multipleTrustRule) return GAP_AGE_21_MULTIPLE;
@@ -96,9 +99,11 @@ export function partIResult(
   rows: readonly ThrowbackYearRow[] | undefined,
   trustKey: string,
   beneficiary: "taxpayer" | "spouse",
+  trustType: "domestic" | "foreign",
 ): Form5870AResult {
   if (rows === undefined || rows.length === 0) return { kind: "waits", missing: [trustKey] };
-  const born = birthDate(inputs, beneficiary);
+  // The age-21 rule is for a domestic trust only (line-2::b01), so a foreign trust needs no date of birth.
+  const born = trustType === "foreign" ? { dob: undefined } : birthDate(inputs, beneficiary);
   if ("missing" in born) return { kind: "waits", missing: [born.missing] };
   const counted = throwbackInputs(rows, born.dob);
   if (typeof counted === "string") return { kind: "gap", reason: counted };

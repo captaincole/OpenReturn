@@ -105,15 +105,18 @@ function drawColumnHeads(ctx: Ctx, yTop: number): number {
   return yTop + 40;
 }
 
-function drawRow(ctx: Ctx, yPos: number, label: string, amounts: number[]) {
+/* A column the fact does not hold stays blank, as on the trustee's form. */
+function drawRow(ctx: Ctx, yPos: number, label: string, amounts: (number | undefined)[]) {
   drawText(ctx, label, X_LEFT, yPos + 6, { size: 8.5 });
   X_COLUMNS.forEach((xPos, index) => {
     drawBox(ctx, xPos, yPos, COLUMN_W, ROW);
-    drawTextRight(ctx, fmtMoney(amounts[index]), xPos + COLUMN_W - 4, yPos + 6, { size: 9 });
+    const amount = amounts[index];
+    if (amount === undefined) return;
+    drawTextRight(ctx, fmtMoney(amount), xPos + COLUMN_W - 4, yPos + 6, { size: 9 });
   });
 }
 
-const columnsOf = (row: ThrowbackYearRow) => [row.amount, row.taxes, row.taxExemptInterest ?? 0];
+const columnsOf = (row: ThrowbackYearRow) => [row.amount, row.taxes, row.taxExemptInterest];
 
 function drawLines(ctx: Ctx, rows: ThrowbackYearRow[], parties: PartIV541Parties, yTop: number) {
   let yPos = drawColumnHeads(ctx, yTop);
@@ -123,7 +126,7 @@ function drawLines(ctx: Ctx, rows: ThrowbackYearRow[], parties: PartIV541Parties
     yPos += ROW;
   });
   const totals = [0, 1, 2].map((column) =>
-    rows.reduce((acc, row) => acc + columnsOf(row)[column], 0),
+    rows.reduce((acc, row) => acc + (columnsOf(row)[column] ?? 0), 0),
   );
   drawRow(ctx, yPos, "30   Total. Add amounts from line 26 through line 29", totals);
   yPos += ROW + 8;

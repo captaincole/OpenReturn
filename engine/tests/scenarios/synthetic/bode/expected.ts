@@ -108,6 +108,8 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 30. Enter the larger of the amount on line 29 or your standard deduction shown below:
       "schedule-ca.5.page2.total_itemized_30_standard_or_itemized": 5706,
     },
+    // "Identify the type of income reported in the space provided" (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b05).
+    renderedText: { "schedule-ca.1.line.b8z_income_type": "Trust accumulation distribution" },
   },
   "form-5870a": {
     engineFields: {
@@ -264,6 +266,8 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 114. Total amount due. See instructions. Enclose, but do not staple, any payment.
       "form-540.line.114_total_amount_due": 35606,
     },
+    // Line 34: "Check the box labeled 'FTB 5870A'" (ca-5870a-inst-2025::sec::section-a::b04).
+    renderedChecked: ["form-540.line.34_tax_from_ftb_5870a"],
   },
 };
 
