@@ -14,7 +14,8 @@ Each place where the form and its instructions do not settle a rule. Short answe
 
 - Source: "One of the following statements must be true. You were self-employed and had a net profit for the year" (irs-7206-inst-2025::sec::general-instructions::b01).
 - Default: the plan's line 4 prints the loss; line 6 is 0; line 14 is 0. Line 5 leaves the loss out (the form's line 5).
-- Changes dollars: no (no deduction either way).
+- Other reading: line 4 is 0, because a loss is not a "net profit" (irs-7206-face-2025::sec::face-page-1::b01, line 4: "Enter your net profit* and any other earned income**"). The blind fill and PolicyEngine-US (`max_(0, …)` on line 4) both read it so. Then lines 8, 10 and 13 print 0, not the loss. The text does not settle it: line 5 says "Don't include any net losses", line 4 says nothing. The engine keeps the loss.
+- Changes dollars: no (line 14 is 0 either way; only lines 4, 8, 10 and 13 print differently).
 
 ## 3. Line 6 decimal places
 
@@ -49,6 +50,12 @@ Each place where the form and its instructions do not settle a rule. Short answe
 - "Other earned income" on lines 4 and 5 (gains from property the person created): no fact. Lines 4 and 5 take net profit only.
 - Changes dollars: no for the cases the facts cover.
 
+## 8. Line 13 below zero
+
+- Source: line 13 "Subtract line 12 from line 10 or 11, whichever applies"; line 14 "Enter the smaller of line 3 or line 13" (irs-7206-face-2025::sec::face-page-1::b03, ::b04). A Form 2555 amount larger than line 10 makes line 13 negative, and no text says what line 14 does then.
+- Default: line 13 prints the negative amount (the form's arithmetic); line 14 is 0, because a deduction on Schedule 1 line 17 cannot add income. The blind fill reads it the same way.
+- Changes dollars: yes against a literal reading (blind case 12: a literal line 14 is −$2,119; the engine enters $0).
+
 ## Proposals for a discussion
 
 - Partnership plans: Schedule SE needs a route for Schedule K-1 (Form 1065) box 14 code A. Then line 4 is the K-1's box 14 code A of that partnership, and the gap for other plans goes away.
@@ -58,7 +65,15 @@ Each place where the form and its instructions do not settle a rule. Short answe
 
 ## Second opinions
 
-- PolicyEngine-US and IRS Direct File: not compared in this worktree.
+- Blind fill (14 cases, 2026-11-26): every line 14 matches. 21 lines differ only as blank against 0 (lines 1, 2 and 9 with nothing to enter). One case differs in dollars on printed lines: a loss in the plan's business (lines 4, 8, 10, 13: the engine prints −$3,000, the blind fill $0; question 2).
+- PolicyEngine-US 2.154.0 (commit 363e9fc5, `self_employed_health_insurance_earned_income_limit.py`, `self_employed_health_insurance_ald_person.py`, `long_term_care_premium_limit.yaml`), compared 2026-11-26:
+  - Line 2 limits for 2025 ($480, $900, $1,800, $4,810, $6,020; band tops 40, 50, 60, 70): the same.
+  - Lines 3, 5, 7, 11, 14: the same formula (line 5 leaves out losses; line 7 shares Schedule 1 line 15 by line 6; line 14 the smaller of line 3 and the limit).
+  - Line 4 with a loss: PolicyEngine enters 0 (question 2). No dollars change.
+  - Line 6: PolicyEngine keeps the full fraction; the engine keeps 4 places (question 3).
+  - Line 10: PolicyEngine floors each business at 0; the engine floors line 14 (question 8). Same deduction.
+  - Scope differences, not bugs: PolicyEngine adds every Schedule C business into one line 4, gives all of Schedule 1 line 16 to Schedule C, and treats line 12 as already netted in its inputs.
+- IRS Direct File: not compared. The repo names no Direct File checkout, and Direct File did not support Schedule C or this deduction.
 
 ## Confidence by field group
 
