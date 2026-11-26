@@ -35,6 +35,19 @@ Each item is a place where the form and its instructions do not settle a rule. E
 - Default: a stated amount with cents rounds to the nearest dollar (`money.ts`).
 - Changes dollars: at most $1.
 
+## 6. Credits that worksheet line 2 does not list
+
+- Source: the list on worksheet line 2 (`irs-8859-form-2025::sec::tax-liability-limit-worksheet-line-2::b01`) does not name Schedule 3 line 5a (residential clean energy), 6a (general business credit) or 6b (prior-year minimum tax credit).
+- The other forms order those credits after this one. The Form 5695 limit worksheet subtracts "District of Columbia First-Time Homebuyer ... line 6h" (`irs-5695-inst-2025::sec::residential-clean-energy-credit-limit::b02`). Form 3800 line 10b takes Schedule 3 lines 2 to 4, 5a, 5b and 7, and says "Don't include any general business credit claimed on Form 3800, any credit for prior-year minimum tax" (`irs-3800-inst-2025::sec::line-10b::b01`).
+- Default: the list is complete; lines 5a, 6a and 6b stay out of worksheet line 2. The blind fill made the same choice (its case 8).
+- Changes dollars: yes, if the list were read as open (worksheet line 3 would fall by those credits). The texts agree, so this is not a `DECISION`.
+
+## Second opinions
+
+- Blind fill (2026-11-26): 14 cases, filled by hand from the blank form and instructions. Every line and worksheet line matches the engine, with no blank-against-0 difference.
+- PolicyEngine-US 2.154.1 (commit `0fbed6ddb1`, 2026-11-26) does not model Form 8859. Its list of credits after the child tax credit (`parameters/gov/irs/credits/ctc_tax_liability_limit/subsequent_credits.yaml`) names Schedule 3 line 6h as "not modeled". Its Credit Limit Worksheet B test (`ctc_credit_limit_worksheet_b_applies.py`) is a qualifying child and no foreign earned income exclusion, and it drops the "claiming" condition. That matches item 2. It follows section 24(d) where the instructions say "not filing Form 2555"; the engine follows the form and makes that case unsupported (item 4). No constant or formula to compare, so no change.
+- IRS Direct File: the repository names no checkout, and Direct File did not support this credit. Not compared.
+
 ## Confidence by field group
 
 | Fields | Confidence |
