@@ -34,7 +34,7 @@ Each place where the form and its instructions do not settle a rule. Short answe
 ## 5. Injured spouse (Form 8379)
 
 - Source: "You can't have your refund deposited into more than one account if you file Form 8379, Injured Spouse Allocation." (irs-8888-form-2025::sec::general-instructions::b01)
-- Default: the engine has no Form 8379 and no fact for it. The form does not check this rule. Cade must not record two accounts for a filer who files Form 8379.
+- Default: Form 8379 files from the fact `refund.injured_spouse`, and Form 8888 does not check this rule yet. Cade must not record two accounts for a filer who files Form 8379.
 - Changes dollars: no.
 
 ## 6. Account number characters

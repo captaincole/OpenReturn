@@ -368,6 +368,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "credit from 2024; either above 0 files FTB 3510, which then asks for the other",
   ],
   [
+    /^refund\.injured_spouse$/,
+    "the whole injured spouse claim (Form 8379): whether a spouse's refund share is applied " +
+      "to the other spouse's debt is Cade's question. Form 8379 lists the fact again while its " +
+      "share of itemized deductions is missing",
+  ],
+  [
     /^estimated_tax\.payment\.[^.]+$/,
     "each fact is one 2025 estimated tax payment (Form 1040 line 26, Form 2210 line 11); " +
       "whether one was made is Cade's question",
