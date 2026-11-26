@@ -89,20 +89,21 @@ export function hasExcludedIncome(lines: Form4563Lines): boolean {
  * The gross income of the excluded income, for the deduction fraction of
  * Pub. 570, chapter 4: wages, interest, dividends and other income as they
  * are, and the gross income of lines 10 to 13 (facts/kinds/americanSamoaExclusion.ts).
- * Cents kept while adding; the total is rounded.
+ * Each part is the whole-dollar amount of its line, as the U.S. side takes
+ * Form 1040's lines: the fraction is arithmetic on amounts already rounded
+ * (QUESTIONS.md, item 16).
  */
 export function excludedGrossIncome(value: AmericanSamoaExclusionFactValue): number {
-  return roundDollars(
-    sum(
-      value.wages?.amount,
-      value.interest,
-      value.dividends,
-      value.business?.grossIncome,
-      value.capitalGain?.grossIncome,
-      value.rentalAndRoyalties?.grossIncome,
-      value.farm?.grossIncome,
-      ...(value.otherIncome ?? []).map((item) => atLeast(0, item.amount)),
-    ),
+  const otherGross = (value.otherIncome ?? []).map((item) => atLeast(0, item.amount));
+  return sum(
+    roundDollars(value.wages?.amount),
+    roundDollars(value.interest),
+    roundDollars(value.dividends),
+    roundDollars(value.business?.grossIncome),
+    roundDollars(value.capitalGain?.grossIncome),
+    roundDollars(value.rentalAndRoyalties?.grossIncome),
+    roundDollars(value.farm?.grossIncome),
+    roundDollars(sumOrBlank(...otherGross)),
   );
 }
 

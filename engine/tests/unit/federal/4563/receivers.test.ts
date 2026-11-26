@@ -13,6 +13,7 @@ import { americanSamoaIncome } from "../../../scenarios/synthetic/berylla/facts.
 import { birgitteScenario } from "../../../scenarios/synthetic/birgitte/index.js";
 import { isoldeScenario } from "../../../scenarios/synthetic/isolde/index.js";
 import { odessaScenario } from "../../../scenarios/synthetic/odessa/index.js";
+import { wrenScenario } from "../../../scenarios/synthetic/wren/index.js";
 import type { Scenario } from "../../../types.js";
 
 const LINE_15 = 57150;
@@ -63,6 +64,12 @@ const CASES: Array<[string, Scenario, string, string | undefined]> = [
     odessaScenario,
     "form-8815.0.line.9_modified_adjusted_gross_income",
     undefined,
+  ],
+  [
+    "Form 8880 line 8 (irs-pub-590a-2025::sec::retirement-savings::b03)",
+    wrenScenario,
+    "form-8880.0.line.8_adjusted_gross_income",
+    "form-1040.line.11a",
   ],
   [
     "Form 8936 line 2 (line 1e, irs-8936-face-2025::sec::face-part-i::b01)",

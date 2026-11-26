@@ -113,8 +113,25 @@ describe("Part II lines 7 to 15", () => {
   });
 
   it("gross income takes the gross of lines 10 to 13, never a loss", () => {
-    // 1,000.50 + 10.49 + 20 + 900 + 60 + 500 + 700 + 70.60 = 3,261.59, rounded once.
+    // 1,001 + 10 + 20 + 900 + 60 + 500 + 700 + 71: each line's whole-dollar amount.
     expect(excludedGrossIncome(value)).toBe(3262);
+  });
+
+  it("gross income adds the rounded lines, as line 15 does (blind case 4)", () => {
+    const cents: AmericanSamoaExclusionFactValue = {
+      ...PART_I,
+      interest: 1234.49 + 87.5,
+      dividends: 455.5,
+      otherIncome: [
+        { description: "Prize", amount: 100.25 },
+        { description: "Raffle bonus", amount: 49.5 },
+      ],
+    };
+    // 1,322 + 456 + 150, not 1,927.24 rounded to 1,927.
+    expect(excludedGrossIncome(cents)).toBe(1928);
+    expect(form4563Lines(cents).line15).toBe(1928);
+    // 15,750 x 3,000 / 4,928 = 9,588.07.
+    expect(allowableShare(15750, 3000, excludedGrossIncome(cents))).toBe(9588);
   });
 
   it("lines 10 and 13 are the self-employment income", () => {

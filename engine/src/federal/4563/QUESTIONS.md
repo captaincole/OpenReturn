@@ -24,12 +24,14 @@ Form 4563 keeps a bona fide resident of American Samoa's income from there off F
 
 - Text: "Number of days absent" (the form). Pub. 570, chapter 1: a day is a day of presence when "you are physically present in that territory at any time during the day".
 - Default: the full days between the day of leaving and the day of return, and only those in 2025 (the form: "days absent ... during the tax year"). A trip from March 10 to March 24 is 13 days; one from December 20, 2025 to January 3, 2026 is 11.
+- The blind fill (2026-11-26) took column (b) minus column (a), the subtraction the columns set up: 14 days for March 10 to March 24, 1 day for a trip back the next day. The form text (`irs-4563-form-2025::sec::face-part-i::b01`) gives no counting rule, and the corpus has no American Samoa day rule (Pub. 570 is not in it). The engine keeps Pub. 570's definition of a day of presence, so a day spent partly in American Samoa is never a day absent.
 - Dollars: no.
 
 ## 5. More than four absences
 
 - Text: line 6 has four rows; the instructions say nothing more.
-- Default: every line 6 field is unsupported with five or more absences.
+- Default: every line 6 field is unsupported with five or more absences, as Form 2555 lines 14 and 18 are.
+- The blind fill put the first four trips on the rows and the fifth on an attached statement. The engine writes no attached statement; see the proposals below.
 - Dollars: no.
 
 ## 6. A loss on lines 10 to 13
@@ -90,10 +92,37 @@ Form 4563 keeps a bona fide resident of American Samoa's income from there off F
 - Default: excluded wages are not earned income on Schedule 8812 Part II-A, Form 2441 or Schedule EIC. The EIC needs a main home in the United States, which American Samoa is not (Pub. 570, chapter 4).
 - Dollars: possibly, for the additional child tax credit.
 
+## 16. Rounding in the deduction fraction
+
+- Text: "If you have to add two or more amounts to figure the amount to enter on a line, include cents when adding the amounts and round off only the total" (`irs-1040-inst-2025::sec::rounding-off-to-whole::b01`). The fraction's "Gross income from all sources" is not a line, and its U.S. part is Form 1040's lines, each already rounded.
+- Default (changed 2026-11-26 after the blind fill): the excluded gross income adds each Form 4563 line's whole-dollar amount (the gross income of lines 10 to 13 rounded the same way), so both parts of the fraction are rounded line amounts. The engine first kept the cents and rounded once.
+- Dollars: yes, a few dollars. Interest of $1,234.49 + $87.50, dividends of $455.50 and other income of $100.25 + $49.50 against $3,000 of U.S. dividends: $1,928 of excluded gross income and a $9,588 standard deduction; with the cents kept, $1,927 and $9,590.
+
+## 17. Social security benefits in the fraction
+
+- Text: Pub. 570's fraction counts "Gross income". The Form 4563 instructions do not say how a benefit that is partly taxable counts.
+- Default: Form 1040 line 6b, the taxable part, is the U.S. gross income; the untaxed part is not gross income (section 86). The blind fill made the same choice.
+- Dollars: yes, for a person with social security benefits. Counting the full benefit would raise line 12e.
+
+## 18. A capital gain netted with a loss
+
+- Text: Pub. 570, Table 4-1: "Gross income includes gains, but not losses".
+- Default: the fact's capital gain gross income is the gains alone; Cade records it. The blind fill counted $9,000 of gains, not the $6,000 net, and got the engine's amount.
+- Dollars: yes, when the gross income is recorded as the net gain.
+
+## Second opinions
+
+- **PolicyEngine-US 2.154.1** (commit 0fbed6dd, 2026-11-26). It models section 931 income as one input, `specified_possession_income`, which it takes off AGI and adds back in `agi_plus_section_911_931_933_exclusions`. That MAGI feeds the child tax credit, the education credits, the saver's credit, the clean vehicle credits, the SALT cap phase-down and the Schedule 1-A deductions; `student_loan_interest/magi/excluded_alds.yaml` and `social_security/taxability/income/revoked_deductions.yaml` add it back to the student loan interest and social security worksheets.
+- **The lead it gave:** the saver's credit. Form 8880 line 8 read Form 1040 line 11a only. Pub. 590-A says the AGI of the credit must add "any exclusion or deduction claimed for the year for ... Income from American Samoa" (`irs-pub-590a-2025::sec::retirement-savings::b03`). Fixed: line 8 adds Form 4563 line 15, every copy.
+- **Agreed:** every other add-back on its list is a rule here (Schedule 8812 line 2c, Form 8863 lines 3 and 14, Form 8936, Schedule 1-A line 2d, the Pub. 970 and Pub. 915 worksheets) or a named gap (the Schedule A SALT worksheet line 3d). Forms 8839 and 8815 add line 15 here; PolicyEngine does not list them, and their instructions name Form 4563 (`irs-8839-inst-2025::sec::line-7::b01`, `irs-8815-form-2025::sec::step-action::b03`).
+- **Not modeled there:** the share of the standard deduction and of other deductions, line 6 and the days absent, self-employment tax on excluded income. No check of the engine's line 12e is possible.
+- **IRS Direct File:** not reachable from this worktree (no checkout), and Direct File did not serve territory residents.
+
 ## Proposals for a discussion
 
 - **Excluded self-employment income on Schedule SE.** The excluded business would be a Schedule C (and a farm a Schedule F) marked "American Samoa". Schedule 1 lines 3 and 6 would leave it out, Schedule SE would keep it, and Schedule 1 line 15 would take the share Pub. 570 gives. This changes how Schedule C reaches Form 1040.
 - **Shared itemized deductions.** Schedule A lines 1, 5a to 5c, 8a to 8c, 11 and 12 would take their share by gross income (Pub. 570, Itemized Deductions example), and the SALT worksheet line 3d would add Form 4563 line 15.
+- **Attached statements for rows that overflow.** Form 4563 line 6 and Form 2555 lines 14 and 18 would print their first rows and list the rest on a statement the PDF fill appends. This is a new kind of output for every form with rows.
 - **W-2AS as a document.** A W-2AS could be a W-2 fact with a territory mark, so Form 8959 reads boxes 5 and 6 and Form 4563 line 7 reads box 1.
 
 ## Confidence
@@ -107,6 +136,6 @@ Form 4563 keeps a bona fide resident of American Samoa's income from there off F
 | Lines 7 to 14 | stated rule |
 | Line 15 | stated rule (the form's arithmetic) |
 | Form 1040 line 12e share | published example with numbers (Pub. 570, Terry and the Thompsons) |
-| Line 15 on Schedule 1-A, Schedule 8812, Forms 8863, 8839, 8815, 8936 | stated rule |
+| Line 15 on Schedule 1-A, Schedule 8812, Forms 8863, 8839, 8815, 8880, 8936 | stated rule |
 | Line 15 on the Pub. 970 and Pub. 915 worksheets | stated rule |
 | Schedule A, alimony, self-employment and Additional Medicare lines | unsupported |
