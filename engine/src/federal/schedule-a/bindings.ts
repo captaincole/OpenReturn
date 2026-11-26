@@ -5,6 +5,7 @@ import { atLeast, formatDollars, numberOrBlank, roundDollars, sum } from "../../
 import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { standardDeduction } from "../1040/deductions.js";
+import { files2555 } from "../2555/results.js";
 import { describeItem, entityTitle } from "../passThrough/items.js";
 import { receivedAmounts, roundedWithReceived } from "../passThrough/receipts.js";
 import type { ScheduleAFilingInfo } from "./filingInfo.js";
@@ -17,6 +18,8 @@ const NET_QUALIFIED_DISASTER_LOSS = "Net Qualified Disaster Loss";
 const STANDARD_WITH_DISASTER_LOSS = "Standard Deduction Claimed With Qualified Disaster Loss";
 const GAMBLING_LOSSES = "Gambling Losses";
 const IMPAIRMENT_RELATED = "Impairment-Related Work Expenses";
+const SALT_MAGI_WITH_FORM_2555 =
+  "State and local taxes with Form 2555: the 2025 SALT worksheet's modified AGI adds back the excluded foreign income, and the engine does not model that worksheet line.";
 
 type Bindings = FormSpec<ScheduleA, ScheduleAFilingInfo>["bindings"];
 
@@ -154,6 +157,8 @@ export function register(): void {
       "0.line.5e_salt_cap": (form, info) => {
         const line5d = form["0.line.5d_total_state_local_taxes"];
         if (typeof line5d !== "number") return undefined;
+        // MANUAL EDIT: the worksheet's MAGI adds back the section 911 exclusions (Form 2555), not modeled.
+        if (files2555(info)) return unsupported(SALT_MAGI_WITH_FORM_2555);
         const magi = form["form-1040.line.11b"];
         return Math.min(
           line5d,

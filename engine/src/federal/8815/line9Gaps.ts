@@ -12,6 +12,7 @@ import {
   type W2FactValue,
 } from "../../facts/index.js";
 import { factsInCategory, filingStatusOf, type ResolverInputs } from "../../resolverInputs.js";
+import { resolve2555Info } from "../2555/resolveInfo.js";
 import { iraAnswers } from "../schedule-1/answers.js";
 import { iraWorksheetGap } from "../schedule-1/iraDeduction.js";
 import { needsPub590AWorksheets } from "../schedule-1/pub590a.js";
@@ -57,7 +58,7 @@ export const readsIraDeduction = (inputs: ResolverInputs): boolean =>
   (readTraditionalIraFact(inputs.factByKey, "taxpayer")?.contributions ?? 0) > 0;
 
 const filesForeignExclusionForm = (inputs: ResolverInputs) =>
-  inputs.decisionByKey.get("decisions.scope.must_file_2555") === true ||
+  resolve2555Info(inputs).mustFile?.["form-2555"]?.value === true ||
   inputs.decisionByKey.get("decisions.scope.must_file_4563") === true;
 
 const ADOPTION_BENEFITS_CODE = "T";

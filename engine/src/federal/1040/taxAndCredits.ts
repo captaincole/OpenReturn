@@ -9,6 +9,7 @@ import { amtGap } from "../6251/foreignTaxCredit.js";
 import { childTaxOnLine16 } from "../8615/form.js";
 import { form8621Amount, withForm8621 } from "../8621/totals.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
+import { foreignTaxOnLine16 } from "./foreignEarnedIncomeTax.js";
 import { line16WithForm8814, line3a } from "./form8814Lines.js";
 import { qdcgInputsFromReturn, scheduleDWorksheetTax } from "./qdcgInputs.js";
 import type { Form1040 } from "./types.js";
@@ -33,9 +34,14 @@ export function line16(form: Form, info: Form1040FilingInfo) {
       : childTax;
   }
 
+  // MANUAL EDIT: worksheet line 2 = 1040 line 3a as entered (a rounded document sum).
+  const qualifiedDividends = numberOrBlank(line3a(info)) ?? 0;
+  // MANUAL EDIT: with Form 2555, the Foreign Earned Income Tax Worksheet (foreignEarnedIncomeTax.ts).
+  const foreign = foreignTaxOnLine16(form, info, taxable, qualifiedDividends);
+  if (foreign.kind === "waiting") return undefined;
+  if (foreign.kind === "gap") return foreign.gap;
+  if (foreign.kind === "tax") return otherLine16Taxes(info, line16WithForm8814(info, foreign.tax));
   try {
-    // MANUAL EDIT: worksheet line 2 = 1040 line 3a as entered (a rounded document sum).
-    const qualifiedDividends = numberOrBlank(line3a(info)) ?? 0;
     const qdcg = computeQdcg(
       qdcgInputsFromReturn(form, taxable, qualifiedDividends, info.filingStatus),
     );

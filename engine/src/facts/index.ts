@@ -43,6 +43,7 @@ export * from "./kinds/elderlyOrDisabledCredit.js";
 export * from "./kinds/employeeBusinessExpenses.js";
 export * from "./kinds/estimatedTax.js";
 export * from "./kinds/foreignCurrency.js";
+export * from "./kinds/foreignEarnedIncome.js";
 export * from "./kinds/foreignFinancialAsset.js";
 export * from "./kinds/foreignTax.js";
 export * from "./kinds/form1099S.js";

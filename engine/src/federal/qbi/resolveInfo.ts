@@ -8,6 +8,7 @@ import {
 import { sum } from "../../money.js";
 import { factsInCategory, filingStatusOf, num, type ResolverInputs } from "../../resolverInputs.js";
 import type { Unsupported } from "../../types.js";
+import { FOREIGN_BUSINESS_QBI, ownersWithForeignBusiness } from "../2555/resolveInfo.js";
 import { isLossOrDeduction, isPortfolio } from "../passThrough/itemTypes.js";
 import { entityTitle, type PassThroughItem } from "../passThrough/items.js";
 import {
@@ -306,22 +307,40 @@ export function qbiBusinesses(inputs: ResolverInputs): {
   return {
     businesses: withForm4797(inputs, [
       ...qbiRentals(inputs),
-      ...onReturn.map(({ key, value, owner }): QbiBusiness => ({
-        factKey: key,
-        kind: "business",
-        owner,
-        name: value.name ?? value.activity,
-        ein: value.ein,
-        specifiedService: value.specifiedService,
-        netProfit: netProfit(value, onReturnValues),
-        ownersOnlyBusiness: owner === "taxpayer" && taxpayerCount === 1,
-        retirementPlanDeduction: onReturn.length === 1 ? planDeduction : undefined,
-        qbiGap: sharedPlan ? PLAN_DEDUCTION_GAP : undefined,
-        w2WagesPaid: value.w2WagesPaid,
-        qualifiedPropertyUbia: value.qualifiedPropertyUbia,
-      })),
-      ...qbiPassThroughs(inputs),
+      ...withForeignBusinessGap(inputs, [
+        ...onReturn.map(({ key, value, owner }): QbiBusiness => ({
+          factKey: key,
+          kind: "business",
+          owner,
+          name: value.name ?? value.activity,
+          ein: value.ein,
+          specifiedService: value.specifiedService,
+          netProfit: netProfit(value, onReturnValues),
+          ownersOnlyBusiness: owner === "taxpayer" && taxpayerCount === 1,
+          retirementPlanDeduction: onReturn.length === 1 ? planDeduction : undefined,
+          qbiGap: sharedPlan ? PLAN_DEDUCTION_GAP : undefined,
+          w2WagesPaid: value.w2WagesPaid,
+          qualifiedPropertyUbia: value.qualifiedPropertyUbia,
+        })),
+        ...qbiPassThroughs(inputs),
+      ]),
     ]),
     malformedKeys,
   };
+}
+
+/*
+ * MANUAL EDIT: a person whose Form 2555 reports a business or partnership on
+ * line 20a or 20b earned that income abroad, and QBI counts only income
+ * effectively connected with a U.S. trade or business: that owner's
+ * businesses and K-1s are a gap. Without Form 2555 nothing changes.
+ */
+function withForeignBusinessGap(inputs: ResolverInputs, businesses: QbiBusiness[]): QbiBusiness[] {
+  const owners = ownersWithForeignBusiness(inputs);
+  if (owners.size === 0) return businesses;
+  return businesses.map((business) =>
+    owners.has(business.owner)
+      ? { ...business, qbiGap: business.qbiGap ?? FOREIGN_BUSINESS_QBI }
+      : business,
+  );
 }

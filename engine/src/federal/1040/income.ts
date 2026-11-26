@@ -4,6 +4,7 @@ import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported } from "../../types.js";
 import { socialSecurityTaxable } from "../../worksheets/socialSecurityBenefits.js";
+import { files2555 } from "../2555/results.js";
 import { line1fFrom8839, socialSecurityGapFrom8839 } from "../8839/receivers.js";
 import { withLaterForm8919Copies } from "../8919/laterCopies.js";
 import { roundedWithReceived } from "../passThrough/receipts.js";
@@ -15,6 +16,9 @@ import type { Form1040 } from "./types.js";
 import { WITHOUT_8839 } from "./withoutForm8839.js";
 
 type Form = FormAccessor<Form1040>;
+
+const PUB_915_WITH_FORM_2555 =
+  "Social security benefits with Form 2555: the Pub. 915 worksheet adds back the exclusions (irs-1040-inst-2025::sec::use-the-social-security-benefits::b01), and it is not modeled.";
 
 /*
  * MANUAL EDIT: document sums (1a, 2a–3b, 25a) round to the nearest dollar. Line
@@ -165,6 +169,9 @@ export function line6b(form: Form, info: Form1040FilingInfo) {
   // MANUAL EDIT: an adoption benefit exclusion takes the Pub. 915 worksheet (use-the-social-security-benefits::b01).
   const adoptionGap = socialSecurityGapFrom8839(info);
   if (adoptionGap) return adoptionGap;
+  // MANUAL EDIT: so does a Form 2555 ("You file Form 2555, 4563, or 8815 ... use the worksheet in Pub. 915", same block).
+  if (info.socialSecurityBenefits !== undefined && files2555(info))
+    return unsupported(PUB_915_WITH_FORM_2555);
   const benefits = info.socialSecurityBenefits;
   if (benefits === undefined || !info.filingStatus) return undefined;
   const mfs = info.filingStatus === "married_filing_separately";

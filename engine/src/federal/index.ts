@@ -598,6 +598,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 2555",
     relativeDir: "federal/2555",
     register: registerForm2555,
+    // One Form 2555 for each person who claims an exclusion (federal/2555/filingInfo.ts).
+    copies: {
+      count: (info) => info?.form2555Filers?.length ?? 1,
+      select: (info, index) => info && { ...info, form2555CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-3800",

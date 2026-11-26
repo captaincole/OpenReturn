@@ -6,6 +6,7 @@
 import type { BindingFn, FormAccessor } from "../../defineForm.js";
 import { formatDollars, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
+import { files2555 } from "../2555/results.js";
 import { form8621Amount, withForm8621 } from "../8621/totals.js";
 import { figuredForm8814, withForm8814 } from "../8814/totals.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
@@ -17,6 +18,9 @@ import {
   worksheetLine10,
 } from "./iraDeduction.js";
 import type { Schedule1 } from "./types.js";
+
+const IRA_WITH_FORM_2555 =
+  "A traditional IRA deduction with Form 2555: Pub. 590-A takes the excluded income out of compensation and adds it back to the modified AGI, and the engine does not model those worksheets.";
 
 type Bindings = Partial<{ [K in keyof Schedule1]: BindingFn<Schedule1, Schedule1FilingInfo, K> }>;
 
@@ -65,6 +69,8 @@ function line20(form: FormAccessor<Schedule1>, info: Schedule1FilingInfo) {
     pub590aWorksheets: info.pub590aWorksheets === true,
   });
   if (gap) return unsupported(gap);
+  // MANUAL EDIT: "If you claim either of the exclusions, special rules apply in figuring the amount of your IRA deduction" (irs-2555-inst-2025::sec::choosing-the-exclusion-s::b03).
+  if (files2555(info)) return unsupported(IRA_WITH_FORM_2555);
   // Worksheet line 1a: not covered skips lines 2–6, so Form 1040 line 9 (Form 8815 reads line 20) is not read.
   const totalIncome = covered ? form["form-1040.line.9"] : 0;
   if (typeof totalIncome !== "number" || info.iraAge50OrOlder === undefined) return undefined;

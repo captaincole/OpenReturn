@@ -14,6 +14,7 @@
  */
 
 import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
+import { excludedAmounts, files2555 } from "../2555/results.js";
 import { limitContextFrom } from "../passThrough/limits.js";
 import { isPassiveItem, releasedOnDisposition } from "../passThrough/passiveActivity.js";
 import { allowedWithRoute, routeEntities } from "../passThrough/routing.js";
@@ -160,7 +161,11 @@ export function modifiedAgi(form: MagiFields, info: MagiInfo): number | undefine
   const scheduleE = nonpassiveScheduleE(form, info);
   const partII = nonpassivePartII(form, info);
   if (scheduleE === undefined || partII === undefined) return undefined;
+  // MANUAL EDIT: figured without the foreign earned income and housing exclusions and the housing deduction (Pub. 925 MAGI): Form 2555 lines 45 and 50 go back in.
+  const foreign = files2555(info) ? excludedAmounts(form, info) : 0;
+  if (typeof foreign !== "number") return undefined;
   const income = sum(
+    foreign,
     ...FORM_1040_INCOME.map((line) => form[`form-1040.${line}`]),
     interestBeforeExclusion(form, info),
     ...SCHEDULE_1_INCOME.map((line) => form[`schedule-1.${line}`]),

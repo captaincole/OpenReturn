@@ -70,6 +70,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole casualty event (Form 4684); whether one happened is Cade's question",
   ],
   [
+    /^foreign_earned_income\.(taxpayer|spouse)$/,
+    "each fact is a whole person's Form 2555 (Parts I to IX); whether the person claims the " +
+      "exclusion is Cade's question. Form 2555 lists the fact again while an answer inside it " +
+      "(the test, line 44's self-employment answer) is missing",
+  ],
+  [
     /^armed_forces_move\.[^.]+$/,
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],

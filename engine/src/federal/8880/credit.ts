@@ -27,7 +27,7 @@ export const LINE_10_ID = "form-8880.0.line.10_line_7_times_line_9";
 export const LINE_12_ID = "form-8880.0.line.12_retirement_savings_credit";
 
 const FOREIGN_INCOME_GAP =
-  "Line 8 must add back a foreign earned income or housing exclusion (Form 2555), and Form 2555 has no rules in the engine (Pub. 590-A, irs-pub-590a-2025::sec::retirement-savings::b03).";
+  "Line 8 must add back a foreign earned income or housing exclusion (Form 2555), and this line does not add it back yet (Pub. 590-A, irs-pub-590a-2025::sec::retirement-savings::b03).";
 
 /*
  * The Schedule 3 credits worksheet line 2 adds, each with the form the engine
