@@ -21,6 +21,26 @@ const hasClaim = (activity: FuelTaxActivityFact) =>
   (activity.value.claims ?? []).some((claim) => claim.gallons > 0);
 
 /*
+ * The linked businesses and farms on the accrual method: this year's credit is
+ * this year's income of each (the DECISION in receivers.ts), which the engine
+ * does not add: Schedule C line 6 and Schedule F line 43 are unsupported.
+ */
+function accrualBusinessKeys(
+  inputs: ResolverInputs,
+  claiming: readonly FuelTaxActivityFact[],
+): string[] {
+  const keys = claiming
+    .filter((activity) => activity.value.kind === "business")
+    .map((activity) => activity.value.businessKey)
+    .filter((key): key is string => key !== undefined)
+    .filter((key) => {
+      const linked = inputs.factByKey.get(key) as { accountingMethod?: string } | undefined;
+      return linked?.accountingMethod === "accrual";
+    });
+  return [...new Set(keys)];
+}
+
+/*
  * The answers a filed form waits for: the registration number of a claimed
  * line 6, 7, 8, 13 or 15 (irs-4136-inst-2025::sec::information-for-claims-on-lines-6-8::b01),
  * and the Part I code and equipment of the activity that Part I describes
@@ -58,8 +78,12 @@ export function resolve4136Info(inputs: ResolverInputs): Form4136FilingInfo {
       },
     ],
   });
-  const filed = { mustFile: { "form-4136": mustFile } };
-  if (mustFile.value !== true) return filed;
+  if (mustFile.value !== true) return { mustFile: { "form-4136": mustFile } };
+  const accrual = accrualBusinessKeys(inputs, claiming);
+  const filed = {
+    mustFile: { "form-4136": mustFile },
+    ...(accrual.length > 0 ? { form4136AccrualBusinessKeys: accrual } : {}),
+  };
   const registration = getFuelRegistrationNumbers(inputs.facts) ?? {};
   const result = form4136Of(activities, registration, linkedBusiness(inputs));
   if (typeof result === "string") return { ...filed, form4136Gap: result };

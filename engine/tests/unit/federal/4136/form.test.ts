@@ -8,6 +8,7 @@ import { describe, expect, it } from "vitest";
 import {
   FUEL_TAX_REGISTRATION_NUMBERS_KEY,
   isFuelTaxActivityFactKey,
+  makeFarmFactKey,
   makeFuelTaxActivityFactKey,
   type FuelTaxActivityFactValue,
   type FuelTaxClaim,
@@ -17,6 +18,7 @@ import { form4136Bindings } from "../../../../src/federal/4136/bindings.js";
 import catalogJson from "../../../../src/federal/4136/catalog.json";
 import { evaluateScenario, pendingInputs } from "../../../../src/index.js";
 import { decisionRow } from "../../../helpers/fixtureBuilders.js";
+import { edarraScenario as edarra } from "../../../scenarios/synthetic/edarra/index.js";
 import { meilynScenario as base } from "../../../scenarios/synthetic/meilyn/index.js";
 
 const isFuel = (fact: TaxFactRow) =>
@@ -210,6 +212,53 @@ describe("cases the engine does not print", () => {
     expect(run.value("form-4136", "1.line.6a_state_local_government_col_e")).toBe(24);
     expect(run.value("form-4136", LINE_17)).toBeUndefined();
     expect(run.value("schedule-3", "0.line.12")).toBeUndefined();
+  });
+});
+
+describe("the credit in an accrual-method business's income", () => {
+  const businessKey = (template.value as FuelTaxActivityFactValue).businessKey;
+  const meilynBusiness = base.facts.find((fact) => fact.key === businessKey)!;
+
+  it("a cash-method business: Schedule C line 6 is the stated other income", () => {
+    const run = evaluate(base.facts.filter(isFuel));
+    expect(run.value("schedule-c", "0.line.6")).toBe(2150);
+  });
+
+  it("an accrual-method business with a claim: Schedule C line 6 is unsupported", () => {
+    const accrual: TaxFactRow = {
+      ...meilynBusiness,
+      value: { ...(meilynBusiness.value as object), accountingMethod: "accrual" },
+    };
+    const run = evaluateScenario({
+      filing: { id: "form-4136-accrual", taxYear: base.taxYear },
+      facts: [...base.facts.filter((fact) => fact.key !== meilynBusiness.key), accrual],
+      decisions: base.decisions,
+      authEmail: null,
+    });
+    const line6 = run.forms
+      .get("schedule-c")
+      ?.fields.find((field) => field.fieldId === "schedule-c.0.line.6");
+    expect(line6?.result).toMatchObject(UNSUPPORTED);
+  });
+
+  it("an accrual-method farm with a claim: Schedule F line 43 is unsupported; with no claim it is the stated amount", () => {
+    const farmKey = makeFarmFactKey("oak-knoll-nursery");
+    const line43 = (facts: TaxFactRow[]) =>
+      evaluateScenario({
+        filing: { id: "form-4136-farm", taxYear: edarra.taxYear },
+        facts,
+        decisions: edarra.decisions,
+        authEmail: null,
+      })
+        .forms.get("schedule-f")
+        ?.fields.find((field) => field.fieldId === "schedule-f.1.line.43_other_income_accrual")
+        ?.result;
+    const gasoline = { line: "1b" as const, gallons: 1000, actualFuelCost: 3200 };
+    const claim = business("nursery", [gasoline], { businessKey: farmKey });
+    expect(line43([...edarra.facts, { ...claim, userId: edarra.userId }])).toMatchObject(
+      UNSUPPORTED,
+    );
+    expect(line43(edarra.facts)).toMatchObject({ ok: true });
   });
 });
 

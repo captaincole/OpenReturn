@@ -1,8 +1,19 @@
 # Form 4136: doubts and defaults
 
-Form 4136 refunds the federal excise tax paid on fuel used for a nontaxable purpose (a farm, off-highway business use, export, a bus, the home). Each row multiplies gallons by a rate. Line 17 adds the credits and goes to Schedule 3 line 12, a refundable credit. Four decisions with conflicting texts are in `docs/rule-decisions.md` (rows A58 to A61). The doubts below have no conflicting text.
+Form 4136 refunds the federal excise tax paid on fuel used for a nontaxable purpose (a farm, off-highway business use, export, a bus, the home). Each row multiplies gallons by a rate. Line 17 adds the credits and goes to Schedule 3 line 12, a refundable credit.
 
-## Doubts
+## Two texts conflict
+
+Each is decided, with a `DECISION` comment in the code and a row in `docs/rule-decisions.md`.
+
+- **A58, the cents** (`receivers.ts`): Form 4136 keeps its cents boxes; Schedule 3 line 12 takes line 17 to the nearest dollar.
+- **A59, the year the credit is income** (`receivers.ts`): a cash-method business reports it next year, as the schedules say; an accrual-method business reports it this year, as Pub. 225 says, and its other-income line is unsupported (doubt 10).
+- **A60, home kerosene** (`rows.ts`): line 4a's credit goes in column (e), its cost in column (d).
+- **A61, Part I with several activities** (`bindings.ts`): lines C to F describe the activity with the most credit.
+
+## Should we do this now
+
+Each doubt below has no conflicting text. Doubts 1 to 4, 6 to 8 and 11 to 13 are done as their defaults say. Doubts 5 and 9 are named gaps or limits, and the reason is in each one. Doubt 10 is done as an unsupported line, because adding the amount is a pattern change (below).
 
 1. **Gallon equivalents are rounded to the whole unit.** "10,000 gallons of LPG ÷ 1.353 = 7,391 GGE x $0.109 = $805.62 claim amount" (`irs-4136-inst-2025::sec::line-11::b02`). No rule says to round; the example does. Default: round the equivalents to the whole GGE or DGE, then multiply. Dollars: a few cents at most.
 
@@ -22,7 +33,7 @@ Form 4136 refunds the federal excise tax paid on fuel used for a nontaxable purp
 
 9. **Schedule 3 line 15 counts its other lines as 0.** Lines 9, 10, 11 and 13a to 14 are engine gaps. Default: line 15 is line 12 plus any of them that holds a number, as Form 1040 line 32 already counts line 31. Form 1040 line 31 takes Form 4136's amount from its slots, not Schedule 3's field: a Schedule 3 read from Form 1040 tripled the evaluation time of every return with a Schedule 3. When another Part II line gets rules, line 31 must add it too. A return with a net premium tax credit or excess social security tax and a fuel credit understates line 15. Dollars: yes, for that return only.
 
-10. **An accrual-method business.** Pub. 225: "If you use an accrual method, include the amount of credit or refund in gross income for the tax year in which you used the fuels" (`irs-pub-225-2025::sec::including-the-credit-or::b02`). Default (decision A59): the engine adds nothing to this year's income; the business's stated other income must hold it. Dollars: yes, when the stated amount leaves it out.
+10. **An accrual-method business.** Pub. 225: "If you use an accrual method, include the amount of credit or refund in gross income for the tax year in which you used the fuels" (`irs-pub-225-2025::sec::including-the-credit-or::b02`). Decided in row A59 (it conflicts with the schedules' "2024" credit): this year's credit is this year's income. The engine does not add it, so Schedule C line 6 or Schedule F line 43 of the linked accrual-method business is unsupported.
 
 11. **Half a cent rounds up.** Column (e) has a cents box, and the instructions give no rule for a product such as 405 x $.183 = $74.115. Default: column (e) rounds to the cent, half a cent up, as the whole-dollar rule raises 50 cents (`irs-1040-inst-2025::sec::rounding-off-to-whole::b01`). Dollars: one cent on a row. The blind fill made the same choice (its doubt 4).
 
@@ -30,10 +41,14 @@ Form 4136 refunds the federal excise tax paid on fuel used for a nontaxable purp
 
 13. **A commercial air carrier's kerosene used in foreign trade.** Line 5's claimants: "For lines 5a and 5b, the ultimate purchaser of kerosene used in commercial aviation (other than foreign trade) ... For lines 5c, 5d, and 5e, the ultimate purchaser of kerosene used in noncommercial aviation" (`irs-4136-inst-2025::sec::line-5::b01`). Lines 5c and 5d allow type of use 9 (foreign trade), and line 5e allows only type 9. Read strictly, no line 5 row names a commercial carrier in foreign trade. Default: the engine checks only the type of use (doubt 8), so a claim recorded on line 5c with type 9 prints, as the blind fill also chose (its doubt 6). Cade must confirm that the claimant flies noncommercial aviation, or that the carrier has no other way to get the tax back (a tax-free purchase with its registration). Dollars: yes, the whole 5c and 5e claim ($976 in the blind case of 4,000 gallons).
 
-## Proposals for a discussion
+Doubt 5 is not done now: the engine writes no attached statements on any form. Doubt 9 is not done now: lines 9 to 11 and 13a to 14 of Schedule 3 have no rules yet, and each needs its own form work.
 
-- **Schedule A (Form 4136).** Each business activity past the first needs its own Schedule A. The engine has no Schedule A catalog, so line B is unsupported with two or more activities. Proposal: catalog Schedule A and print one copy per activity from the same activity facts.
-- **The credit in the business's income.** For an accrual-method business, Schedule C line 6 or Schedule F line 8 could take this year's credit of the activity that names the business (`businessKey`). That changes two other forms' lines; it waits for a discussion.
+## Pattern change
+
+### Proposals for a discussion
+
+- **Schedule A (Form 4136).** Before: with two or more business activities, line B is unsupported, because the engine has no Schedule A catalog. After: Schedule A is cataloged and prints one copy per activity from the same activity facts, through the copies mechanism.
+- **The credit in the business's income.** Before: Schedule C and Schedule F figure a business's income from its own fact alone (`schedule-c/lines.ts`, `schedule-f/income.ts`), so an accrual-method business with a Form 4136 claim has its other-income line unsupported. After: those lines, and Schedule 1, Schedule SE and the QBI forms that read them, add this year's credit of the activity that names the business (`businessKey`); it waits for a discussion.
 
 ## Second opinions
 

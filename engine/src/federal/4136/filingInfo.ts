@@ -6,4 +6,6 @@ export interface Form4136FilingInfo extends BaseFilingInfo {
   form4136?: Form4136Result;
   /* Why every Part II line, line 17 and Schedule 3 line 12 are unsupported (a claim the engine cannot place). */
   form4136Gap?: string;
+  /* The Schedule C business and Schedule F farm facts on the accrual method that a claiming activity names. */
+  form4136AccrualBusinessKeys?: string[];
 }

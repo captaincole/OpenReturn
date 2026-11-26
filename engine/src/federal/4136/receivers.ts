@@ -28,8 +28,21 @@
  * adds nothing from this Form 4136 to this year's income. Last year's credit is
  * in the business's stated other income (BusinessFactValue.otherIncome,
  * FarmFactValue.otherIncome), which Cade asks for. The year the credit is taxed
- * changes ($110 in the Pub. 225 example); an accrual-method business is in
- * QUESTIONS.md.
+ * changes ($110 in the Pub. 225 example).
+ *
+ * DECISION (2026-11-26, by the author): the same question for a business or
+ * farm on the accrual method. The schedules name last year's credit
+ * (irs-1040sc-inst-2025::sec::line-6::b01; Schedule F line 43: "See Line 8,
+ * earlier", irs-1040sf-inst-2025::sec::line-43::b01). Pub. 225: "If you use an
+ * accrual method, include the amount of credit or refund in gross income for
+ * the tax year in which you used the fuels"; its example reports the 2025
+ * credit of $155 on the 2025 Schedule F
+ * (irs-pub-225-2025::sec::including-the-credit-or::b02). The engine follows
+ * Pub. 225 for the accrual method, a rule written for that group: this year's
+ * credit is this year's income. The engine does not add an amount from another
+ * form to the business's income, so Schedule C line 6 or Schedule F line 43 of
+ * that business is unsupported (accrualCreditGap); a cash-method business
+ * keeps the decision above.
  */
 
 import type { BaseFilingInfo } from "../../filingInfo.js";
@@ -38,6 +51,23 @@ import type { Form4136FilingInfo } from "./filingInfo.js";
 import { schedule3Line12 } from "./lines.js";
 
 type Received = { value: number | Unsupported | undefined } | undefined;
+
+const ACCRUAL_CREDIT_INCOME =
+  "This business uses the accrual method and claims the fuel tax credit on this year's Form 4136: the credit is income of the year the fuel was used (irs-pub-225-2025::sec::including-the-credit-or::b02), and the engine does not add it to this line or to the lines that total it.";
+
+/*
+ * The other-income line of an accrual-method business or farm that a Form 4136
+ * claim names (the DECISION above): the reason it is unsupported, or undefined.
+ */
+export function accrualCreditGap(
+  info: BaseFilingInfo,
+  businessKey: string | undefined,
+): Unsupported | undefined {
+  const keys = (info as Form4136FilingInfo).form4136AccrualBusinessKeys;
+  return businessKey !== undefined && keys?.includes(businessKey)
+    ? unsupported(ACCRUAL_CREDIT_INCOME)
+    : undefined;
+}
 
 /*
  * Schedule 3 line 12: line 17 in whole dollars, or the gap that holds it.
