@@ -1,5 +1,5 @@
 import type { InValue } from "@libsql/client";
-import { ensureCorpusSchema, getCorpusDb } from "./libsql";
+import { openLibraryDb, type Library } from "./libsql";
 
 export type SourceFormat = "pdf" | "html";
 
@@ -77,19 +77,23 @@ interface BatchStmt {
 }
 
 async function batchChunked<T>(
+  library: Library,
   rows: T[],
   chunkSize: number,
   toStmts: (row: T) => BatchStmt[],
 ): Promise<void> {
-  const db = getCorpusDb();
+  const db = await openLibraryDb(library);
   for (let i = 0; i < rows.length; i += chunkSize) {
     await db.batch(rows.slice(i, i + chunkSize).flatMap(toStmts), "write");
   }
 }
 
-export async function getDocument(docId: string): Promise<RefDocument | null> {
-  await ensureCorpusSchema();
-  const res = await getCorpusDb().execute({
+export async function getDocument(
+  docId: string,
+  library: Library = "corpus",
+): Promise<RefDocument | null> {
+  const db = await openLibraryDb(library);
+  const res = await db.execute({
     sql: `SELECT doc_id, title, publisher, tax_year, source_path, source_url,
                  sha256, total_pages, total_chars, canonical_text_path, format, published
           FROM ref_documents WHERE doc_id = ? LIMIT 1`,
@@ -113,9 +117,13 @@ export async function getDocument(docId: string): Promise<RefDocument | null> {
   };
 }
 
-export async function setDocumentPublished(docId: string, published: string | null) {
-  await ensureCorpusSchema();
-  await getCorpusDb().execute({
+export async function setDocumentPublished(
+  docId: string,
+  published: string | null,
+  library: Library = "corpus",
+) {
+  const db = await openLibraryDb(library);
+  await db.execute({
     sql: `UPDATE ref_documents SET published = ? WHERE doc_id = ?`,
     args: [published, docId],
   });
@@ -123,9 +131,8 @@ export async function setDocumentPublished(docId: string, published: string | nu
 
 export const asFormat = (value: unknown): SourceFormat => (value === "html" ? "html" : "pdf");
 
-export async function deleteDocument(docId: string): Promise<void> {
-  await ensureCorpusSchema();
-  const db = getCorpusDb();
+export async function deleteDocument(docId: string, library: Library = "corpus"): Promise<void> {
+  const db = await openLibraryDb(library);
   // The FTS5 mirror has no FK, so the cascade does not reach it.
   await db.execute({ sql: `DELETE FROM ref_blocks_fts WHERE doc_id = ?`, args: [docId] });
   await db.execute({ sql: `DELETE FROM ref_documents WHERE doc_id = ?`, args: [docId] });
@@ -133,18 +140,18 @@ export async function deleteDocument(docId: string): Promise<void> {
 
 export async function setBlockEmbeddings(
   pairs: { blockId: string; embedding: number[] }[],
-  opts: { embeddingModel?: string } = {},
+  opts: { embeddingModel?: string; library?: Library } = {},
 ): Promise<void> {
   if (pairs.length === 0) return;
-  await ensureCorpusSchema();
-  await batchChunked(pairs, 500, (pair) => [
+  const library = opts.library ?? "corpus";
+  await batchChunked(library, pairs, 500, (pair) => [
     {
       sql: `UPDATE ref_blocks SET embedding = vector32(?) WHERE block_id = ?`,
       args: [vectorLiteral(pair.embedding), pair.blockId],
     },
   ]);
   if (opts.embeddingModel) {
-    await setCorpusMeta("embedding_model", opts.embeddingModel);
+    await setLibraryMeta(library, "embedding_model", opts.embeddingModel);
   }
 }
 
@@ -155,8 +162,9 @@ export interface IngestPayload {
   blocks: RefBlock[];
 }
 
-async function insertDocumentRow(doc: RefDocument): Promise<void> {
-  await getCorpusDb().execute({
+async function insertDocumentRow(library: Library, doc: RefDocument): Promise<void> {
+  const db = await openLibraryDb(library);
+  await db.execute({
     sql: `INSERT INTO ref_documents
             (doc_id, title, publisher, tax_year, source_path, source_url,
              sha256, total_pages, total_chars, canonical_text_path, format, published)
@@ -179,13 +187,15 @@ async function insertDocumentRow(doc: RefDocument): Promise<void> {
 }
 
 /* Not atomic across the tree. Call deleteDocument() first to replace a doc. */
-export async function writeDocument(payload: IngestPayload): Promise<void> {
-  await ensureCorpusSchema();
+export async function writeDocument(
+  payload: IngestPayload,
+  library: Library = "corpus",
+): Promise<void> {
   const { document: doc, pages, sections, blocks } = payload;
 
-  await insertDocumentRow(doc);
+  await insertDocumentRow(library, doc);
 
-  await batchChunked(pages, 500, (page) => [
+  await batchChunked(library, pages, 500, (page) => [
     {
       sql: `INSERT INTO ref_pages (doc_id, page_num, char_start, char_end)
             VALUES (?, ?, ?, ?)`,
@@ -193,7 +203,7 @@ export async function writeDocument(payload: IngestPayload): Promise<void> {
     },
   ]);
 
-  await batchChunked(sections, 500, (section) => [
+  await batchChunked(library, sections, 500, (section) => [
     {
       sql: `INSERT INTO ref_sections
               (section_id, doc_id, heading, heading_slug, parent_section_id,
@@ -213,7 +223,7 @@ export async function writeDocument(payload: IngestPayload): Promise<void> {
     },
   ]);
 
-  await batchChunked(blocks, 200, blockInsertStmts);
+  await batchChunked(library, blocks, 200, blockInsertStmts);
 }
 
 function blockInsertStmts(block: RefBlock): BatchStmt[] {
@@ -252,17 +262,16 @@ function blockInsertStmts(block: RefBlock): BatchStmt[] {
   ];
 }
 
-export async function listDocuments(): Promise<{ docId: string; sha256: string }[]> {
-  await ensureCorpusSchema();
-  const res = await getCorpusDb().execute(
-    `SELECT doc_id, sha256 FROM ref_documents ORDER BY doc_id`,
-  );
+export async function listDocuments(
+  library: Library = "corpus",
+): Promise<{ docId: string; sha256: string }[]> {
+  const db = await openLibraryDb(library);
+  const res = await db.execute(`SELECT doc_id, sha256 FROM ref_documents ORDER BY doc_id`);
   return res.rows.map((row) => ({ docId: asStr(row.doc_id), sha256: asStr(row.sha256) }));
 }
 
-export async function tableCounts(): Promise<Record<string, number>> {
-  await ensureCorpusSchema();
-  const db = getCorpusDb();
+export async function tableCounts(library: Library = "corpus"): Promise<Record<string, number>> {
+  const db = await openLibraryDb(library);
   const tables = ["ref_documents", "ref_pages", "ref_sections", "ref_blocks"];
   const out: Record<string, number> = {};
   for (const table of tables) {
@@ -274,9 +283,10 @@ export async function tableCounts(): Promise<Record<string, number>> {
 
 export async function countBlocksByDoc(
   docId: string,
+  library: Library = "corpus",
 ): Promise<{ blocks: number; embedded: number }> {
-  await ensureCorpusSchema();
-  const res = await getCorpusDb().execute({
+  const db = await openLibraryDb(library);
+  const res = await db.execute({
     sql: `SELECT count(*) AS blocks,
                  count(embedding) AS embedded
           FROM ref_blocks WHERE doc_id = ?`,
@@ -290,11 +300,11 @@ export async function countBlocksByDoc(
 
 /** all=true lists every block, for a full re-embed after a model switch. */
 export async function listBlocksWithoutEmbeddings(
-  opts: { all?: boolean } = {},
+  opts: { all?: boolean; library?: Library } = {},
 ): Promise<{ blockId: string; docId: string; contextualizedText: string | null; text: string }[]> {
-  await ensureCorpusSchema();
+  const db = await openLibraryDb(opts.library ?? "corpus");
   const where = opts.all ? "" : "WHERE embedding IS NULL ";
-  const res = await getCorpusDb().execute(
+  const res = await db.execute(
     `SELECT block_id, doc_id, contextualized_text, text
      FROM ref_blocks ${where}ORDER BY block_id`,
   );
@@ -306,24 +316,25 @@ export async function listBlocksWithoutEmbeddings(
   }));
 }
 
-async function getCorpusMeta(key: string): Promise<string | null> {
-  await ensureCorpusSchema();
-  const res = await getCorpusDb().execute({
+// Per library: each file stamps the model that built its own vectors.
+async function getLibraryMeta(library: Library, key: string): Promise<string | null> {
+  const db = await openLibraryDb(library);
+  const res = await db.execute({
     sql: `SELECT value FROM ref_meta WHERE key = ?`,
     args: [key],
   });
   return res.rows.length > 0 ? asStr(res.rows[0].value) : null;
 }
 
-async function setCorpusMeta(key: string, value: string): Promise<void> {
-  await ensureCorpusSchema();
-  await getCorpusDb().execute({
+async function setLibraryMeta(library: Library, key: string, value: string): Promise<void> {
+  const db = await openLibraryDb(library);
+  await db.execute({
     sql: `INSERT INTO ref_meta (key, value) VALUES (?, ?)
           ON CONFLICT(key) DO UPDATE SET value = excluded.value`,
     args: [key, value],
   });
 }
 
-export async function storedEmbeddingModel(): Promise<string | null> {
-  return getCorpusMeta("embedding_model");
+export async function storedEmbeddingModel(library: Library = "corpus"): Promise<string | null> {
+  return getLibraryMeta(library, "embedding_model");
 }

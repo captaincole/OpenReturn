@@ -50,6 +50,8 @@ JUDGE_MODEL=anthropic/claude-haiku-5-5
 
 # Local data files. corpus.db is the library (\`npm run corpus -- fetch\`).
 CORPUS_DB_PATH=${CANON_DATA}/corpus.db
+# law.db (the Internal Revenue Code) is optional and never searched by default.
+LAW_DB_PATH=${CANON_DATA}/law.db
 MASTRA_DB_PATH=${CANON_DATA}/mastra.db
 `,
     { mode: PRIVATE },

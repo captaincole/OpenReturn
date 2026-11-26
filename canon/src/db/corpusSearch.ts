@@ -10,7 +10,7 @@ import {
   type RefBlockType,
   type SourceFormat,
 } from "./corpusStore";
-import { ensureCorpusSchema, getCorpusDb } from "./libsql";
+import { openLibraryDb, type Library } from "./libsql";
 
 export interface SearchHit {
   blockId: string;
@@ -69,9 +69,12 @@ function toFtsMatchQuery(raw: string): string | null {
   return terms.map((term) => `"${term}"`).join(" OR ");
 }
 
-export async function getBlock(blockId: string): Promise<BlockDetail | null> {
-  await ensureCorpusSchema();
-  const res = await getCorpusDb().execute({
+export async function getBlock(
+  blockId: string,
+  library: Library = "corpus",
+): Promise<BlockDetail | null> {
+  const db = await openLibraryDb(library);
+  const res = await db.execute({
     sql: `SELECT b.block_id, b.doc_id, b.section_id, b.page_num, b.block_type,
                  b.text, b.char_start, b.char_end,
                  d.title AS doc_title, d.publisher, d.tax_year,
@@ -142,6 +145,7 @@ function rowToHit(row: MatchRow, score: number): SearchHit {
 
 // bm25 is lower-is-better; the query negates it so fts_rank is higher-is-better.
 async function ftsLeg(
+  library: Library,
   queryText: string,
   filterDocId: InValue,
   matchCount: number,
@@ -149,7 +153,8 @@ async function ftsLeg(
   const ranks = new Map<string, number>();
   const ftsQuery = toFtsMatchQuery(queryText);
   if (!ftsQuery) return ranks;
-  const res = await getCorpusDb().execute({
+  const db = await openLibraryDb(library);
+  const res = await db.execute({
     sql: `SELECT block_id, -bm25(ref_blocks_fts) AS rank
           FROM ref_blocks_fts
           WHERE ref_blocks_fts MATCH ?
@@ -164,12 +169,14 @@ async function ftsLeg(
 
 // Exact brute-force scan on purpose: fast enough at low-thousands of blocks.
 async function vectorLeg(
+  library: Library,
   queryEmbedding: number[],
   filterDocId: InValue,
   matchCount: number,
 ): Promise<Map<string, number>> {
   const distances = new Map<string, number>();
-  const res = await getCorpusDb().execute({
+  const db = await openLibraryDb(library);
+  const res = await db.execute({
     sql: `SELECT block_id, vector_distance_cos(embedding, vector32(?)) AS distance
           FROM ref_blocks
           WHERE embedding IS NOT NULL
@@ -187,22 +194,23 @@ async function callMatch(args: {
   queryEmbedding: number[] | null;
   matchCount: number;
   filterDocId?: string;
+  library: Library;
 }): Promise<MatchRow[]> {
-  await ensureCorpusSchema();
+  const db = await openLibraryDb(args.library);
   const filterDocId: InValue = args.filterDocId ?? null;
 
   const ftsRank = args.queryText
-    ? await ftsLeg(args.queryText, filterDocId, args.matchCount)
+    ? await ftsLeg(args.library, args.queryText, filterDocId, args.matchCount)
     : new Map<string, number>();
   const vecDist = args.queryEmbedding
-    ? await vectorLeg(args.queryEmbedding, filterDocId, args.matchCount)
+    ? await vectorLeg(args.library, args.queryEmbedding, filterDocId, args.matchCount)
     : new Map<string, number>();
 
   const blockIds = [...new Set([...ftsRank.keys(), ...vecDist.keys()])];
   if (blockIds.length === 0) return [];
 
   const placeholders = blockIds.map(() => "?").join(",");
-  const res = await getCorpusDb().execute({
+  const res = await db.execute({
     sql: `SELECT b.block_id, b.doc_id, b.section_id, b.page_num, b.block_type,
                  b.text, b.contextualized_text,
                  d.title AS doc_title, s.heading AS section_heading, d.format, d.published
@@ -237,6 +245,8 @@ export interface SearchOpts {
   query: string;
   docId?: string;
   limit?: number;
+  /** Which library file to search; "corpus" unless named. */
+  library?: Library;
 }
 
 /** FTS-only. New code uses hybridSearchRefDocs. */
@@ -247,6 +257,7 @@ export async function searchRefDocs(opts: SearchOpts): Promise<SearchHit[]> {
     queryEmbedding: null,
     matchCount: limit,
     filterDocId: opts.docId,
+    library: opts.library ?? "corpus",
   });
   return (
     rows
@@ -264,6 +275,8 @@ export interface HybridSearchOpts {
   limit?: number;
   candidatesPerLeg?: number;
   mode?: "fts" | "vector" | "hybrid";
+  /** Which library file to search; "corpus" unless named. */
+  library?: Library;
 }
 
 /*
@@ -275,8 +288,9 @@ export async function hybridSearchRefDocs(opts: HybridSearchOpts): Promise<Searc
   const cands = Math.min(opts.candidatesPerLeg ?? 50, 100);
 
   const mode = opts.mode ?? "hybrid";
+  const library = opts.library ?? "corpus";
   const queryEmbedding =
-    mode === "vector" || mode === "hybrid" ? await embedQueryIfUsable(opts.query) : null;
+    mode === "vector" || mode === "hybrid" ? await embedQueryIfUsable(opts.query, library) : null;
   if (queryEmbedding == null && mode === "vector") return [];
 
   const rows = await callMatch({
@@ -284,6 +298,7 @@ export async function hybridSearchRefDocs(opts: HybridSearchOpts): Promise<Searc
     queryEmbedding: mode === "fts" ? null : queryEmbedding,
     matchCount: cands,
     filterDocId: opts.docId,
+    library,
   });
   if (rows.length === 0) return [];
 
@@ -319,14 +334,14 @@ export function fuseByRank(rows: MatchRow[]): { row: MatchRow; score: number }[]
 }
 
 // Cross-model cosine distances are meaningless, so a model mismatch skips the vector leg.
-async function embedQueryIfUsable(query: string): Promise<number[] | null> {
+async function embedQueryIfUsable(query: string, library: Library): Promise<number[] | null> {
   const { resolveEmbeddings, embedQuery } = await import("../refdocs/embeddings");
   try {
     const embedCfg = resolveEmbeddings();
-    const stored = await storedEmbeddingModel();
+    const stored = await storedEmbeddingModel(library);
     if (stored !== null && stored !== embedCfg.id) {
       console.warn(
-        `[hybridSearchRefDocs] corpus embeddings were built with ${stored} ` +
+        `[hybridSearchRefDocs] ${library} embeddings were built with ${stored} ` +
           `but the active model is ${embedCfg.id} — skipping the vector ` +
           `leg (FTS-only). Run \`npm run corpus -- reembed --all\` to rebuild.`,
       );
