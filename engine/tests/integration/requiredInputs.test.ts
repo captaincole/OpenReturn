@@ -427,8 +427,9 @@ const OPTIONAL: Array<[RegExp, string]> = [
   ],
   [
     /^farmer_or_fisherman\.gross_income_(2024|2025)$/,
-    "the two-thirds gross income test of a farmer or fisherman (FTB 5805F, who files); whether " +
-      "the taxpayer farms or fishes is Cade's question, and one passing year is enough",
+    "the two-thirds gross income test of a farmer or fisherman (FTB 5805F, who files); one " +
+      "passing year is enough, so the other year is not asked; with farm income and no passing " +
+      "year, FTB 5805 lists each year not stated (5805f/mustFile.ts farmerTestWaitingKeys)",
   ],
   [
     /^prior_year\.(ca_lump_sum_tax|ca_no_twelve_month_return)$/,

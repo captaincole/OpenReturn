@@ -6,6 +6,7 @@
 import { describe, expect, it } from "vitest";
 import {
   CA_FARMER_ESTIMATED_TAX_KEYS,
+  CA_PAYMENT_KEYS,
   FARMER_OR_FISHERMAN_KEYS,
   PRIOR_YEAR_KEYS,
 } from "../../../../../src/facts/index.js";
@@ -88,6 +89,16 @@ describe("FTB 5805F on a return", () => {
     expect(value(scenario, LINE_113)).toBe(62);
   });
 
+  it("an explanation longer than the two rows is a gap on row 2; line 113 still takes line 16", () => {
+    const long = "The river flooded the orchard road and closed the bank. ".repeat(5);
+    const scenario = evaluate(
+      factsWith({ [CA_FARMER_ESTIMATED_TAX_KEYS.waiver]: { amount: 20, explanation: long } }),
+    );
+    expect(isGap(scenario, "form-5805f.0.line.16_waiver_explanation_row2")).toBe(true);
+    expect(value(scenario, "form-5805f.0.line.16_waiver_explanation_row1")).toBeDefined();
+    expect(value(scenario, LINE_113)).toBe(42);
+  });
+
   it("with no payment date, line 13 is April 15, 2026: 90 days", () => {
     const scenario = evaluate(
       factsWith({ [CA_FARMER_ESTIMATED_TAX_KEYS.underpaymentPaidOn]: undefined }),
@@ -121,17 +132,32 @@ describe("who files", () => {
     [FARMER_OR_FISHERMAN_KEYS.grossIncome2024]: undefined,
   };
 
-  it("not a farmer: FTB 5805 files instead, and line 113 has no FTB 5805F box", () => {
+  it("farm income and no two-thirds answer: FTB 5805 files and waits on both years", () => {
     const scenario = evaluate(factsWith(noTest));
     expect(files(scenario, FORM)).toBe(false);
     expect(files(scenario, "form-5805")).toBe(true);
     expect(value(scenario, BOX_113)).toBeUndefined();
+    expect(pending(scenario)).toEqual(
+      expect.arrayContaining([
+        FARMER_OR_FISHERMAN_KEYS.grossIncome2024,
+        FARMER_OR_FISHERMAN_KEYS.grossIncome2025,
+      ]),
+    );
   });
 
-  it("one passing year is enough; two failing years are not", () => {
+  it("one passing year is enough; two failing years file FTB 5805 with nothing pending", () => {
     const failing = { totalGrossIncome: 300000, farmingOrFishingGrossIncome: 100000 };
     const oneYear = evaluate(factsWith({ [FARMER_OR_FISHERMAN_KEYS.grossIncome2025]: failing }));
     expect(files(oneYear, FORM)).toBe(true);
+    const oneFailing = evaluate(
+      factsWith({
+        [FARMER_OR_FISHERMAN_KEYS.grossIncome2025]: failing,
+        [FARMER_OR_FISHERMAN_KEYS.grossIncome2024]: undefined,
+      }),
+    );
+    expect(files(oneFailing, FORM)).toBe(false);
+    expect(pending(oneFailing)).toContain(FARMER_OR_FISHERMAN_KEYS.grossIncome2024);
+    expect(pending(oneFailing)).not.toContain(FARMER_OR_FISHERMAN_KEYS.grossIncome2025);
     const neither = evaluate(
       factsWith({
         [FARMER_OR_FISHERMAN_KEYS.grossIncome2025]: failing,
@@ -139,6 +165,8 @@ describe("who files", () => {
       }),
     );
     expect(files(neither, FORM)).toBe(false);
+    expect(files(neither, "form-5805")).toBe(true);
+    expect(pending(neither).filter((key) => key.startsWith("farmer_or_fisherman."))).toEqual([]);
   });
 
   it("the explicit decision wins both ways", () => {
@@ -203,6 +231,33 @@ describe("the answers it waits on", () => {
     expect(pending(scenario)).not.toContain(PRIOR_YEAR_KEYS.caTax);
     expect(value(scenario, "form-5805f.0.line.7_prior_year_tax_after_credits")).toBeUndefined();
     expect(value(scenario, "form-5805f.0.line.10_required_annual_payment")).toBe(7267);
+  });
+});
+
+describe("Form 540 line 114 with an overpayment", () => {
+  const withExtension = (amount: number) => [
+    ...base.facts,
+    {
+      ...base.facts[0]!,
+      id: "f-extension",
+      category: "estimated_payments",
+      key: CA_PAYMENT_KEYS.extensionPayment,
+      value: amount,
+    },
+  ];
+
+  it("a refund larger than the penalty: line 115 nets it, line 114 is blank", () => {
+    const scenario = evaluate(withExtension(9000));
+    expect(value(scenario, LINE_113)).toBe(42);
+    expect(value(scenario, "form-540.line.99_overpaid_tax_available")).toBe(940);
+    expect(value(scenario, "form-540.line.115_refund_or_no_amount_due")).toBe(898);
+    expect(value(scenario, "form-540.line.114_total_amount_due")).toBeUndefined();
+  });
+
+  it("a refund smaller than the penalty: line 114 is the penalty less line 99", () => {
+    const scenario = evaluate(withExtension(8080));
+    expect(value(scenario, "form-540.line.99_overpaid_tax_available")).toBe(20);
+    expect(value(scenario, "form-540.line.114_total_amount_due")).toBe(22);
   });
 });
 

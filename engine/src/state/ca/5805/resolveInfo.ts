@@ -1,6 +1,6 @@
 import { PRIOR_YEAR_KEYS } from "../../../facts/index.js";
 import { missingInputs, resolveMustFile, type ResolverInputs } from "../../../resolverInputs.js";
-import { resolve5805FMustFile } from "../5805f/mustFile.js";
+import { farmerTestWaitingKeys, resolve5805FMustFile } from "../5805f/mustFile.js";
 import type { Form5805FilingInfo } from "./filingInfo.js";
 
 const PRIOR_YEAR_CA_AGI = "prior_year.ca_agi";
@@ -29,8 +29,15 @@ export function resolve5805Info(inputs: ResolverInputs): Form5805FilingInfo {
   const mfs = decisionByKey.get("decisions.scope.filing_status") === "married_filing_separately";
   return {
     mustFile: { "form-5805": resolution },
-    /* Federal AGI stands in for CA AGI. */
-    missingInputs: { "form-5805": missingInputs({ [PRIOR_YEAR_KEYS.federalAgi]: agi }) },
+    /* Federal AGI stands in for CA AGI. With farm income, the farmer test comes first. */
+    missingInputs: {
+      "form-5805": missingInputs({
+        [PRIOR_YEAR_KEYS.federalAgi]: agi,
+        ...(resolution.value === true
+          ? Object.fromEntries(farmerTestWaitingKeys(inputs).map((key) => [key, undefined]))
+          : {}),
+      }),
+    },
     priorYearCaTax,
     priorYearSafeHarborRate: agi === undefined ? undefined : agi > (mfs ? 75000 : 150000) ? 1.1 : 1,
     priorYearAgiSource:

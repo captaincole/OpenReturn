@@ -10,6 +10,7 @@ import { unsupported, type Unsupported } from "../../../types.js";
 import type { Form5805FAnswers, Form5805FFilingInfo } from "./filingInfo.js";
 import {
   dateText,
+  EXPLANATION_ROW_CHARACTERS,
   explanationRows,
   form5805FLines,
   type Form5805FLines,
@@ -24,6 +25,10 @@ type Bindings = Partial<{
 
 const NO_FORM_540 =
   "FTB 5805F is modeled for Form 540 filers only; the Form 540NR and Form 541 lines are not read.";
+
+/* ca-5805f-inst-2025::sec::e-waiver-of-the-penalty::b01: "If you need more space, attach a statement." */
+const LONG_EXPLANATION =
+  "The waiver explanation is longer than the two rows below line 16; the instructions ask for an attached statement, which the engine does not print.";
 
 /* How far the answers reach: each stage needs every answer of the stages before it. */
 const STAGES = ["none", "current", "prior", "partI", "all"] as const;
@@ -129,9 +134,12 @@ export function form5805FBindings(): Bindings {
     "0.line.16_waiver_explanation_row1": fromWaiver(
       (_, explanation) => explanationRows(explanation)[0] || undefined,
     ),
-    "0.line.16_waiver_explanation_row2": fromWaiver(
-      (_, explanation) => explanationRows(explanation)[1],
-    ),
+    "0.line.16_waiver_explanation_row2": fromWaiver((_, explanation) => {
+      const second = explanationRows(explanation)[1];
+      return second !== undefined && second.length > EXPLANATION_ROW_CHARACTERS
+        ? unsupported(LONG_EXPLANATION)
+        : second;
+    }),
   };
 }
 

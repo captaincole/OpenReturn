@@ -8,7 +8,9 @@
  * or fisherman uses this form instead (ca-5805-inst-2025::sec::g-farmers-and-fishermen::b01).
  */
 
-import { getFarmerGrossIncomeFacts } from "../../../facts/index.js";
+import { FARMER_OR_FISHERMAN_KEYS, getFarmerGrossIncomeFacts } from "../../../facts/index.js";
+import { resolve4835Info } from "../../../federal/4835/resolveInfo.js";
+import { resolveScheduleFInfo } from "../../../federal/schedule-f/resolveInfo.js";
 import type { MustFileResolution } from "../../../filingInfo.js";
 import { resolveMustFile, type ResolverInputs } from "../../../resolverInputs.js";
 import { meetsGrossIncomeTest } from "./lines.js";
@@ -23,6 +25,30 @@ export function farmerOrFishermanFactKeys(inputs: ResolverInputs): string[] {
       meetsGrossIncomeTest(value.totalGrossIncome, value.farmingOrFishingGrossIncome),
     )
     .map(({ key }) => key);
+}
+
+/* Schedule F or Form 4835 files: the return has gross income from farming. */
+function farmIncomeOnReturn(inputs: ResolverInputs): boolean {
+  return (
+    resolveScheduleFInfo(inputs).mustFile?.["schedule-f"]?.value === true ||
+    resolve4835Info(inputs).mustFile?.["form-4835"]?.value === true
+  );
+}
+
+/*
+ * The two-thirds answers FTB 5805 waits on: "If you determine that you are not
+ * a farmer or fisherman, do not use this form. Instead, use form FTB 5805"
+ * (ca-5805f-inst-2025::sec::b-qualifications::b01). With farm income on a Form
+ * 540 return and no explicit decision, each year not yet stated waits until a
+ * stated year passes the test or both years fail it.
+ */
+export function farmerTestWaitingKeys(inputs: ResolverInputs): string[] {
+  if (typeof inputs.decisionByKey.get(MUST_FILE_5805F_KEY) === "boolean") return [];
+  if (inputs.decisionByKey.get(MUST_FILE_540_KEY) !== true) return [];
+  if (farmerOrFishermanFactKeys(inputs).length > 0) return [];
+  if (!farmIncomeOnReturn(inputs)) return [];
+  const stated = new Set(getFarmerGrossIncomeFacts(inputs.facts).map(({ key }) => key));
+  return Object.values(FARMER_OR_FISHERMAN_KEYS).filter((key) => !stated.has(key));
 }
 
 export function resolve5805FMustFile(inputs: ResolverInputs): MustFileResolution {

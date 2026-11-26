@@ -130,9 +130,21 @@ export const line113Ftb5805FAttached: Form540Line<"line.112_ftb_5805f_attached">
 /*
  * Line 114: "Add line 111, line 112, and line 113"
  * (ca-540-inst-2025::sec::line-114-total-amount-due::b01). Line 111 adds lines
- * 94, 96, 100 and 110, so the penalty balance (line 96) is in the total.
+ * 94, 96, 100 and 110, so the penalty balance (line 96) is in the total. With
+ * an overpayment on line 99, lines 110, 112 and 113 come out of it first; only
+ * the part above line 99 goes on line 114
+ * (ca-540-inst-2025::sec::line-115-refund-or-no-amount-due::b01).
  */
 export const line114TotalAmountDue: Form540Line<"line.114_total_amount_due"> = (form) => {
+  const overpaid = numberOrBlank(form["line.99_overpaid_tax_available"]) ?? 0;
+  if (overpaid > 0) {
+    const charges = sum(
+      form["line.110_total_contributions"],
+      form["line.112_interest_and_late_penalties"],
+      form["line.113_underpayment_estimated_tax"],
+    );
+    return charges > overpaid ? charges - overpaid : undefined;
+  }
   const due = atLeast(
     0,
     sum(
