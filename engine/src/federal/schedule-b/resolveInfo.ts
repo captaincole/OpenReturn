@@ -87,11 +87,12 @@ function scheduleBDividendPayers(inputs: ResolverInputs, k1Dividends: Receipt) {
 export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInfo {
   const k1Interest = receivedOnReturn(inputs, "interest_list");
   const k1Dividends = receivedOnReturn(inputs, "dividend_list");
+  // A held tax credit bond's credit that no Form 1099-INT reports is interest (federal/8912/interest.ts).
+  const bondInterest = bondCreditInterest(inputs);
   const interestPayers = [
     ...payerAmounts(inputs, isInterestFactKey, (value) => sum(value.box1, value.box3)),
     ...k1PayerRows(k1Interest),
-    // A held tax credit bond's credit that no Form 1099-INT reports is interest (federal/8912/interest.ts).
-    ...bondCreditInterest(inputs),
+    ...bondInterest,
   ];
   const dividendPayers = scheduleBDividendPayers(inputs, k1Dividends);
   // The explicit decision wins; with none, a Form 8938 account fact answers Yes.
@@ -127,6 +128,11 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
         rule: "fallback: Form 8815 files (the savings bond interest exclusion, line 3)",
         value: filesForm8815(bondExclusion),
         triggeredByFactKeys: bondExclusion.resolution.derivation?.triggeredByFactKeys ?? [],
+      },
+      // MANUAL EDIT: a bond's interest the engine cannot figure shows its gap on line 1, not a blank Form 1040 line 2b.
+      {
+        rule: "fallback: a tax credit bond's interest is an engine gap (line 1)",
+        value: bondInterest.some((row) => row.gap !== undefined),
       },
       // The answer may make Part III a "Yes": the form files to ask it.
       {

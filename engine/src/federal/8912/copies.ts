@@ -2,7 +2,7 @@
  * "Complete and attach as many copies of Part III as needed" and "a Part IV
  * for each bond you held or bond credits received from a pass-through entity"
  * (irs-8912-inst-2025::sec::part-iii-bond-credit-s-reported-to-you-on::b01,
- * ::part-iv-bonds-credits-from-bonds-held-by-you::b01). The first copy is the
+ * ::part-iv-bond-credits-from-bonds-held-by-you::b01). The first copy is the
  * whole form; each later copy appends pages 2 and 3 only. Copy n prints Part
  * III rows 20n to 20n + 19 and the nth Part IV.
  */

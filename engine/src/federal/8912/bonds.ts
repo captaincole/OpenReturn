@@ -8,6 +8,7 @@ import {
   getBondTaxCreditStatementFacts,
   getTaxCreditBondFacts,
   type BondTaxCreditStatementFact,
+  type BondTaxCreditStatementValue,
   type TaxCreditBondFact,
   type TaxCreditBondFactValue,
 } from "../../facts/index.js";
@@ -113,7 +114,7 @@ function heldBondLines(bond: TaxCreditBondFactValue): PartIVLines | undefined {
 
 /*
  * A pass-through credit: "complete lines 15a and 15b and enter the credit
- * amount on line 18, column (f)" (irs-8912-inst-2025::sec::part-iv-bonds-credits-from-bonds-held-by-you::b01).
+ * amount on line 18, column (f)" (irs-8912-inst-2025::sec::part-iv-bond-credits-from-bonds-held-by-you::b01).
  *
  * DECISION (2026-11-26, by the author): line 20 takes line 19 as it is for a
  * credit an entity passed through, also for a new CREB or a QECB.
@@ -147,6 +148,18 @@ export function partIVForm(fact: TaxCreditBondFact): PartIVForm {
   };
 }
 
+/*
+ * Whether a Form 1097-BTC came from a pass-through entity. A statement whose
+ * "Form 1097-BTC issuer is" box reads "Issuer of bond or its agent filing
+ * current year Form 1097-BTC for credit being reported" is from the bond's
+ * issuer, so the answer is no; only "An entity or a person that received ...
+ * and is distributing part or all of that credit to others" needs it (Form
+ * 1097-BTC, Rev. April 2025).
+ */
+export function fromPassThrough(value: BondTaxCreditStatementValue): boolean | undefined {
+  return value.filerIsBondIssuer === true ? false : value.fromPassThroughEntity;
+}
+
 /* One pass-through CREB credit before grouping by entity; undefined parts wait. */
 interface CrebEntry {
   entity: string;
@@ -162,10 +175,9 @@ function crebEntries(
   const crebStatements = statements.filter(
     ({ value }) => value.box3BondType === CREB_BOND_TYPE_CODE,
   );
-  if (crebStatements.some(({ value }) => value.fromPassThroughEntity === undefined))
-    return undefined;
+  if (crebStatements.some(({ value }) => fromPassThrough(value) === undefined)) return undefined;
   const fromStatements = crebStatements
-    .filter(({ value }) => value.fromPassThroughEntity === true)
+    .filter(({ value }) => fromPassThrough(value) === true)
     .map(({ value }) => ({
       entity: value.filerTin ?? value.filerName,
       credit: roundDollars(value.box1Total),

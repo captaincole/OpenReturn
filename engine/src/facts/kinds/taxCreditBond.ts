@@ -5,7 +5,7 @@
  *   form. Part III lists each one (irs-8912-inst-2025::sec::part-iii-bond-credit-s-reported-to-you-on::b01).
  * - A bond the taxpayer held (directly or through a nominee), or a bond credit
  *   passed through by an entity, that no Form 1097-BTC reported: one fact per
- *   Part IV (irs-8912-inst-2025::sec::part-iv-bonds-credits-from-bonds-held-by-you::b01).
+ *   Part IV (irs-8912-inst-2025::sec::part-iv-bond-credits-from-bonds-held-by-you::b01).
  * - The carryforward of unused credits from earlier years (line 3), an answer
  *   from last year's return.
  */
@@ -51,7 +51,7 @@ export interface BondTaxCreditStatementBoxes {
  * (irs-8912-inst-2025::sec::line-12::b02).
  */
 export interface BondTaxCreditStatementValue extends BondTaxCreditStatementBoxes {
-  /* True when the filer is a partnership, S corporation, estate, trust, RIC or REIT the taxpayer owns an interest in; a broker or nominee is not. */
+  /* True when the filer is a partnership, S corporation, estate, trust, RIC or REIT the taxpayer owns an interest in; a broker or nominee is not. Not asked when filerIsBondIssuer is true. */
   fromPassThroughEntity?: boolean;
   /* The taxable income for 2025 attributable to the taxpayer's interest in that entity (the formula's numerator). */
   attributableTaxableIncome?: number;

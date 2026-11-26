@@ -158,12 +158,39 @@ describe("Form 8912: missing answers", () => {
     expect(line("0.line.2_bond_credits_part_iv")).toBeUndefined();
   });
 
-  it("a CREB Form 1097-BTC waits for the pass-through answer on line 12, not on line 1", () => {
+  it("a CREB Form 1097-BTC from a distributor waits for the pass-through answer on line 12, not on line 1", () => {
     const { fromPassThroughEntity: _, ...statement } = COOPERATIVE_STATEMENT;
-    const { line, missing } = evaluate(varilin, factsWith(varilin, { [COOPERATIVE]: statement }));
+    const distributed = { ...statement, filerIsBondIssuer: false };
+    const { line, missing } = evaluate(varilin, factsWith(varilin, { [COOPERATIVE]: distributed }));
     expect(missing).toContain(COOPERATIVE);
     expect(line("0.line.1_bond_credits_part_iii")).toBe(2033);
     expect(line("0.line.12_credit_allowed_current_year")).toBeUndefined();
+  });
+
+  it("a CREB Form 1097-BTC from the bond's issuer is not from a pass-through entity: nothing is asked", () => {
+    const { fromPassThroughEntity: _, ...statement } = COOPERATIVE_STATEMENT;
+    expect(statement.filerIsBondIssuer).toBe(true);
+    const { line, missing } = evaluate(varilin, factsWith(varilin, { [COOPERATIVE]: statement }));
+    expect(missing).not.toContain(COOPERATIVE);
+    expect(line("0.line.12_credit_allowed_current_year")).toBe(4432);
+  });
+});
+
+describe("Form 8912: past the printed rows", () => {
+  it("a bond with more than 18 rows makes line 19 a gap; line 20 and Part I add every row", () => {
+    const rows = Array.from({ length: 19 }, (_, index) => ({
+      identifier: `99999QSC${index}`,
+      outstandingAmount: 1000,
+      creditRate: 0.05,
+    }));
+    const { field, line } = evaluate(
+      yukiri as Base,
+      factsWith(yukiri as Base, { [SCHOOL]: { ...SCHOOL_BOND, rows } }),
+    );
+    expect(isGap(field("form-8912", "2.line.19_add_line_18_col_f"))).toBe(true);
+    // Each row: 1,000 x 5% = 50, x 100%; a QSCB takes line 19.
+    expect(line("2.line.20_bond_credit_not_on_1097btc")).toBe(19 * 50);
+    expect(line("0.line.2_bond_credits_part_iv")).toBe(19 * 50);
   });
 });
 
@@ -198,6 +225,7 @@ describe("Form 8912: the lines that receive it", () => {
   it("a CREB credit from a pass-through entity is limited by the line 12 formula", () => {
     const statement: BondTaxCreditStatementValue = {
       ...COOPERATIVE_STATEMENT,
+      filerIsBondIssuer: false,
       fromPassThroughEntity: true,
       attributableTaxableIncome: 2000,
     };
@@ -248,6 +276,16 @@ describe("Form 8912: the lines that receive it", () => {
     expect(isGap(field("schedule-b", "0.line.1_amount_1"))).toBe(true);
     expect(isGap(field("schedule-b", "0.line.2_total_interest"))).toBe(true);
     expect(value("form-1040", "line.2b")).toBeUndefined();
+  });
+
+  it("that gap files Schedule B by itself, so it shows on line 1 and not as a blank line 2b only", () => {
+    const bought = { ...SCHOOL_BOND, acquiredDate: "2025-04-02" };
+    const { field, files } = evaluate(
+      yukiri as Base,
+      factsWith(yukiri as Base, { [SCHOOL]: bought }),
+    );
+    expect(files("schedule-b")).toBe(true);
+    expect(isGap(field("schedule-b", "0.line.1_amount_1"))).toBe(true);
   });
 
   it("a bond bought on a credit allowance date adds its whole credit as interest", () => {

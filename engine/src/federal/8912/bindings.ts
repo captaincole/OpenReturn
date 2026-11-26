@@ -7,6 +7,7 @@
 
 import { defineForm, type BindingFn } from "../../defineForm.js";
 import { roundDollars, roundToPlaces } from "../../money.js";
+import { unsupported } from "../../types.js";
 import { ISODate, isoDate, SSN } from "../../values.js";
 import { namesOnReturn } from "../returnNames.js";
 import {
@@ -86,6 +87,19 @@ const ROW_CELLS: Record<string, (row: PartIVRow) => unknown> = {
   f: (row) => row.f,
 };
 
+/*
+ * Line 19 adds every row, but line 18 prints 18. A bond with more rows would
+ * print a line 19 its rows do not add up to, and the text names no
+ * continuation, so line 19 is a gap; line 20 and Part I still add every row.
+ */
+function line19OnCopy(info: Form8912FilingInfo) {
+  const lines = partIVOnCopy(info)?.lines;
+  if (lines === undefined || lines.rows.length <= PART_IV_ROWS) return lines?.line19;
+  return unsupported(
+    `This bond has ${lines.rows.length} rows of line 18; the form prints ${PART_IV_ROWS}, and the engine prints no continuation statement for the rest.`,
+  );
+}
+
 /* Lines 15a to 20 of this copy's Part IV (irs-8912-inst-2025::sec::line-15a::b01 to line-20::b01). */
 function partIVBindings(): Record<string, Fn> {
   const out: Record<string, Fn> = {
@@ -95,7 +109,7 @@ function partIVBindings(): Record<string, Fn> {
     "2.line.16b_date_bond_matures": (_, info) => printedDate(partIVOnCopy(info)?.maturityDate),
     // Line 17: "If the bond was redeemed, sold, or otherwise disposed of, enter the date."
     "2.line.17_date_bond_disposed": (_, info) => printedDate(partIVOnCopy(info)?.disposedDate),
-    "2.line.19_add_line_18_col_f": (_, info) => partIVOnCopy(info)?.lines?.line19,
+    "2.line.19_add_line_18_col_f": (_, info) => line19OnCopy(info),
     "2.line.20_bond_credit_not_on_1097btc": (_, info) => partIVOnCopy(info)?.lines?.line20,
   };
   for (let slot = 0; slot < PART_IV_ROWS; slot++) {

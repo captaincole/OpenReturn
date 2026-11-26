@@ -7,6 +7,7 @@ import { resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import {
   CREB_BOND_TYPE_CODE,
   claimingBonds,
+  fromPassThrough,
   heldBondWaits,
   partIIIRows,
   partIVForm,
@@ -18,12 +19,14 @@ import type { Form8912FilingInfo } from "./filingInfo.js";
 /*
  * A Form 1097-BTC for a CREB waits for the answer whether it came from a
  * pass-through entity, and then for the taxable income of that interest
- * (the line 12 formula, irs-8912-inst-2025::sec::line-12::b02).
+ * (the line 12 formula, irs-8912-inst-2025::sec::line-12::b02). A statement
+ * from the bond's issuer answers the first question itself (fromPassThrough).
  */
 function statementWaits({ value }: BondTaxCreditStatementFact): boolean {
   if (value.box3BondType !== CREB_BOND_TYPE_CODE) return false;
-  if (value.fromPassThroughEntity === undefined) return true;
-  return value.fromPassThroughEntity && value.attributableTaxableIncome === undefined;
+  const passThrough = fromPassThrough(value);
+  if (passThrough === undefined) return true;
+  return passThrough && value.attributableTaxableIncome === undefined;
 }
 
 /*
