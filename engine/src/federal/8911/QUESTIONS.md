@@ -43,7 +43,7 @@ No field of the form is unsupported in general. These cases are gaps (unsupporte
 
 ### 4. Line 6b credits the engine cannot figure
 
-- Lines 5–10 are unsupported while Form 5695 (line 5a), Form 8859 (6h), Form 8834 (6i) or Form 8978 (6l) files, or while another credit line 6b adds is a gap. The total would leave a credit out.
+- Lines 5–10 are unsupported while Form 5695 (line 5a), Form 8834 (6i) or Form 8978 (6l) files, or while another credit line 6b adds is a gap (Form 8859, line 6h, through its own gap helper). The total would leave a credit out.
 - Not now: each gap closes when that form gets rules. Form 8801 line 22 uses the same list.
 
 ### 5. Section 179 on line 11

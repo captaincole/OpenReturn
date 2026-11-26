@@ -47,8 +47,8 @@ All inputs to lines 1–21 and Part III are 2024 amounts. The taxpayer states th
 
 - Text: subtract "the total of any credits from Form 1040 ... line 19 and Schedule 3 (Form 1040), lines 1 through 6z (not including any credit for prior year minimum tax on line 6b or any credit claimed on Form 8912 ... on line 6k)" (irs-8801-inst-2025::sec::line-22::b01).
 - Default: the engine subtracts every Schedule 3 line it figures. Line 22, and lines 24–26 and Schedule 3 line 6b after it, are unsupported while a credit it subtracts is a gap:
-  - Form 5695 files (line 5a, Part I, is not modeled), or Form 3800, 8859, 8834, 8911 or 8978 files (lines 6a, 6h, 6i, 6j, 6l).
-  - Schedule 3 line 1, 3, 4, 6c, 6f, 6g or 6m is a gap (each form's own gap helper).
+  - Form 5695 files (line 5a, Part I, is not modeled), or Form 8834 files (line 6i).
+  - Schedule 3 line 1, 3, 4, 6a, 6c, 6f, 6g, 6h, 6j, 6l or 6m is a gap (each form's own gap helper).
   - Form 2441 claims the credit but its line 11 (Schedule 3 line 2) is blank above a tax limit (`2441/creditGap.ts`).
 - Lines checked and not gaps: 5b (Form 5695 Part II has no gap of its own; Part I files the form, above), 6d (Schedule R has no gap), Form 1040 line 19 (Schedule 8812 line 14 is a gap only through the adoption credit, above), 6z ("Leave line 6z blank", irs-1040-inst-2025::sec::line-6z::b01).
 - Left: Form 1040 line 16 and Schedule 2 line 1z are added, not subtracted. A gap in line 16 (Form 8615, Form 4972) leaves line 22 blank, not unsupported; the Schedule 2 lines 1d–1y that are unsupported count as 0 in line 1z, as on Form 1040 line 17.

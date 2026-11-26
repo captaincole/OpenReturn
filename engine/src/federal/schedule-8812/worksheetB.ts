@@ -10,8 +10,9 @@
  *
  * Lines 7, 8 and 10 are the same amounts as Schedule 8812 lines 21, 22 and 24:
  * both read the helpers here. Lines are read by full field id, so any form's
- * accessor works. Form 2555 and Puerto Rico residence have no fact: the
- * engine reads both as absent.
+ * accessor works. A caller skips this worksheet when Form 2555 files
+ * (irs-1040s8-inst-2025::sec::line-21::b03). Puerto Rico residence has no
+ * fact: the engine reads it as absent.
  */
 
 import type { FormAccessor } from "../../defineForm.js";

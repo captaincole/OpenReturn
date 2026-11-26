@@ -8,6 +8,7 @@ import { resolve8396Info } from "../8396/resolveInfo.js";
 import { resolve8801Info } from "../8801/resolveInfo.js";
 import { resolve8834Info } from "../8834/resolveInfo.js";
 import { resolve8839Info } from "../8839/resolveInfo.js";
+import { resolve8859Info } from "../8859/resolveInfo.js";
 import { resolve8863Info } from "../8863/resolveInfo.js";
 import { resolve8880Info } from "../8880/resolveInfo.js";
 import { refuelingBusinessCredit, refuelingPersonalPart } from "../8911/resolveInfo.js";
@@ -54,6 +55,14 @@ export function resolveSchedule3Info(inputs: ResolverInputs): Schedule3FilingInf
       { rule: "fallback: Schedule R (line 6d) is required", value: scheduleR },
       { rule: "fallback: Form 8839 Part II (line 6c) applies", value: adoptionCredit },
       { rule: "fallback: Form 8396 (line 6g) is required", value: form8396 },
+      /*
+       * Form 8859 (line 6h). The resolver cannot see the tax limit, so Schedule 3
+       * may file with line 6h at 0 (KNOWN GAP, as for lines 6f, 6m and 6j).
+       */
+      {
+        rule: "fallback: Form 8859 (line 6h) is required",
+        value: resolve8859Info(inputs).mustFile?.["form-8859"]?.value === true,
+      },
       { rule: "fallback: Form 8880 (line 4) is required", value: form8880 },
       { rule: "fallback: Form 8863 (line 3) is required", value: form8863 },
       { rule: "fallback: Form 8801 (line 6b) is required", value: form8801 },

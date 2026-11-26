@@ -406,6 +406,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "credit from 2024; either above 0 files FTB 3510, which then asks for the other",
   ],
   [
+    /^prior_year\.dc_homebuyer_credit_carryforward$/,
+    "an answer Cade records only when the user carries a District of Columbia first-time " +
+      "homebuyer credit from 2024 (the credit ended for homes bought after 2011); above 0 it " +
+      "files Form 8859, which asks for it whenever it files",
+  ],
+  [
     /^refund\.injured_spouse$/,
     "the whole injured spouse claim (Form 8379): whether a spouse's refund share is applied " +
       "to the other spouse's debt is Cade's question. Form 8379 lists the fact again while its " +

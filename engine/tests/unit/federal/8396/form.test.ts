@@ -15,6 +15,7 @@ import {
 import type { AIDecisionRow, TaxFactRow } from "../../../../src/facts/rows.js";
 import { evaluateScenario, pendingInputs } from "../../../../src/index.js";
 import { decisionRow } from "../../../helpers/fixtureBuilders.js";
+import { bairScenario as bair } from "../../../scenarios/synthetic/bair/index.js";
 import { linneaScenario as base } from "../../../scenarios/synthetic/linnea/index.js";
 
 const isCreditFact = (fact: TaxFactRow) =>
@@ -258,6 +259,28 @@ describe("Form 8396 with a qualifying child under 17 (Credit Limit Worksheet B)"
     expect(
       evaluate([...base.facts, child]).value("form-8396", "0.line.7_total_credit_available"),
     ).toBe(3_350);
+  });
+});
+
+/*
+ * Form 2555 turns Credit Limit Worksheet B off ("You are not filing Form
+ * 2555", irs-1040s8-inst-2025::sec::line-21::b03). bair files Form 2555 with
+ * a grandson under 17: line 18 13,474, line 19 700. Worksheet line 2 is line
+ * 19 (700), so line 8 is 12,774 and the whole 3,350 is used; Credit Limit
+ * Worksheet A line 4 is -0-, so Schedule 8812 line 13 stays 13,474.
+ */
+describe("Form 8396 with Form 2555 and a qualifying child", () => {
+  it("worksheet line 2 is Form 1040 line 19, and Schedule 8812 line 13 leaves 6g out", () => {
+    const mortgageFacts = base.facts
+      .filter((fact) => fact.category === "mortgage" || isCreditFact(fact))
+      .map((fact) => ({ ...fact, userId: bair.userId }));
+    const run = evaluate([...bair.facts, ...mortgageFacts], bair.decisions);
+    expect(run.files("form-2555")).toBe(true);
+    expect(run.value("form-8396", "1.line8_worksheet.2_total_other_credits")).toBe(700);
+    expect(run.value("form-8396", LINE_8)).toBe(12_774);
+    expect(run.value("form-8396", LINE_9)).toBe(3_350);
+    expect(run.value("schedule-8812", "0.line.13_credit_limit_worksheet_a")).toBe(13_474);
+    expect(run.value("form-1040", "line.19")).toBe(700);
   });
 });
 

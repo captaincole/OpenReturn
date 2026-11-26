@@ -26,7 +26,8 @@ Each item is a place where the form and its instructions do not settle a rule. E
 
 - Source: "If you are directed to complete Form 8396 by Credit Limit Worksheet B … include the amount from line 14 of Credit Limit Worksheet B instead of … line 19" (`line-8-credit-limit-worksheet::b01`); Worksheet B applies with this credit and Schedule 8812 line 4 above 0 (`irs-1040s8-inst-2025::sec::line-21::b03`).
 - Rule: Worksheet B lines 1 to 14 (`schedule-8812/worksheetB.ts`) give worksheet line 2's first amount. Schedule 8812 line 13 subtracts Schedule 3 line 6g as Credit Limit Worksheet A line 4 (Worksheet B line 15).
-- Gaps: Form 2555 and Puerto Rico residence have no fact, so the engine reads both as absent. Self-employment leaves Worksheet B line 3 unsupported, as it does Schedule 8812 line 18a.
+- Form 2555: "Complete Credit Limit Worksheet B only if ... You are not filing Form 2555" (`irs-1040s8-inst-2025::sec::line-21::b03`). With Form 2555, worksheet line 2 takes Form 1040 line 19, and Schedule 8812 line 13 leaves 6g out (Worksheet A line 4 is -0-).
+- Gaps: Puerto Rico residence has no fact, so the engine reads it as absent. Self-employment leaves Worksheet B line 3 unsupported, as it does Schedule 8812 line 18a.
 - When line 9 is an engine gap (this item, item 5, 8 or 9), Schedule 3 line 6g is unsupported with the same reason. Schedule 8812 line 13 then leaves 6g out, as Schedule 3 leaves out its other unsupported credits, so the child tax credit still prints.
 - Changes dollars: no, except in those gaps.
 

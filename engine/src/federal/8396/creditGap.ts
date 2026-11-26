@@ -9,6 +9,7 @@ import type { FormAccessor } from "../../defineForm.js";
 import { numberOrBlank, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { foreignTaxCreditGap } from "../1116/credit.js";
+import { files2555 } from "../2555/results.js";
 import { cleanVehicleCreditGap } from "../8936/credit.js";
 import type { Form8936FilingInfo } from "../8936/filingInfo.js";
 import type { Form8978FilingInfo } from "../8978/filingInfo.js";
@@ -37,11 +38,12 @@ const UNCOMPUTED_CREDITS: ReadonlyArray<[formId: string, line: string]> = [
  * Worksheet line 2's first amount: Form 1040 line 19, or, with a qualifying
  * child under 17 (Schedule 8812 line 4 above 0), line 14 of Credit Limit
  * Worksheet B (irs-8396-form-2025::sec::line-8-credit-limit-worksheet::b01;
- * irs-1040s8-inst-2025::sec::line-21::b03). Form 2555, which turns Worksheet B
- * off, has no fact.
+ * irs-1040s8-inst-2025::sec::line-21::b03). Form 2555 turns Worksheet B off
+ * ("You are not filing Form 2555", line-21::b03): then it is line 19.
  */
 function childCredit(form: Lines, info: CreditLimitInfo): number | Unsupported | undefined {
-  if (sum(form["schedule-8812.0.line.4_qualifying_children_under_17"]) > 0) {
+  const children = sum(form["schedule-8812.0.line.4_qualifying_children_under_17"]) > 0;
+  if (children && !files2555(info)) {
     return worksheetBLine14(form, info);
   }
   return sum(form["form-1040.line.19"]);

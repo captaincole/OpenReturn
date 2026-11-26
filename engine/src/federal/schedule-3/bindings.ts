@@ -10,6 +10,7 @@ import { mortgageCreditGap } from "../8396/creditGap.js";
 import { line6bFrom8801 } from "../8801/credit.js";
 import { line6iFrom8834 } from "../8834/credit.js";
 import { line6cFrom8839 } from "../8839/receivers.js";
+import { line6hFrom8859 } from "../8859/creditLimit.js";
 import { LINE_19_ID, nonrefundableCreditGap } from "../8863/credit.js";
 import { creditGap, LINE_12_ID } from "../8880/credit.js";
 import { line6jFrom8911 } from "../8911/credit.js";
@@ -64,6 +65,15 @@ export function register(): void {
         const gap = mortgageCreditGap(form, info);
         if (gap !== undefined) return unsupported(gap);
         return numberOrBlank(form["form-8396.0.line.9_current_year_mortgage_interest_credit"]);
+      },
+      /*
+       * MANUAL EDIT: Form 8859 line 3 ("Include this amount on Schedule 3 (Form 1040),
+       * line 6h", irs-8859-form-2025::sec::face-page-1::b01). A Form 8859 gap stays a
+       * gap here; no Form 8859, the old reason.
+       */
+      "0.line.6h": (form, info) => {
+        const received = line6hFrom8859(form, info);
+        return received === undefined ? unsupported(NO_SCENARIO) : received.value;
       },
       /*
        * MANUAL EDIT: Form 8880 line 12 ("here and on Schedule 3 (Form 1040), line 4",
@@ -190,7 +200,6 @@ export function register(): void {
     unsupported: {
       "0.line.5a": "Residential clean energy credit (Form 5695 Part I) is not modeled.",
       "0.line.6e": "Reserved for future use.",
-      "0.line.6h": NO_SCENARIO,
       "0.line.6z_description": NO_SCENARIO,
       "0.line.6z_amount": NO_SCENARIO,
       "0.line.9":

@@ -37,6 +37,7 @@ export * from "./kinds/childUnearnedIncome.js";
 export * from "./kinds/cleanVehicle.js";
 export * from "./kinds/communityProperty.js";
 export * from "./kinds/creditRecapture.js";
+export * from "./kinds/dcHomebuyerCredit.js";
 export * from "./kinds/dependentCare.js";
 export * from "./kinds/dependents.js";
 export * from "./kinds/depreciation.js";
