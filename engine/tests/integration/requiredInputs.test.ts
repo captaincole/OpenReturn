@@ -151,6 +151,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],
   [
+    /^section_965\.(inclusion|other_liability|s_corporation|deferred)\.[^.]+$/,
+    "each fact is one whole line of last year's Form 965-A (Part I with its Part II line, a " +
+      "Part III row or a Part IV row); whether one exists is Cade's question. Form 965-A lists " +
+      "a Part III year's Part I line, and a triggered liability whose amount or election is missing",
+  ],
+  [
     /^low_income_housing_recapture\.[^.]+$/,
     "each fact is a whole building's credit recapture (Form 8611); whether the qualified basis " +
       "fell is Cade's question. A K-1 with a recapture asks for its building fact",
