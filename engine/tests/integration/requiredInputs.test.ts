@@ -401,6 +401,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "while an answer inside it (name, number, credit) is missing",
   ],
   [
+    /^ca_film_credit\.[^.]+$/,
+    "each fact is one whole California Film Commission credit certificate (one FTB 3541); " +
+      "whether the taxpayer has one is Cade's question. FTB 3541 lists the fact again while an " +
+      "answer inside it (number, year, copyright number, source, amounts, owner, price) is missing",
+  ],
+  [
     /^ca_passive_credit\.[^.]+$/,
     "each fact is one whole California credit from a passive activity (one FTB 3801-CR " +
       "worksheet row); whether the taxpayer has one is Cade's question. FTB 3801-CR lists the " +

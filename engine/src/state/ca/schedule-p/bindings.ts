@@ -14,6 +14,7 @@ import {
   priorYearAmtCreditRow,
   pteCreditRowBindings,
 } from "./partIII.js";
+import { sectionA2FilmCreditRows } from "./sectionA2.js";
 import { sectionB2PassiveCreditRows } from "./sectionB2.js";
 import type { ScheduleP } from "./types.js";
 
@@ -403,6 +404,7 @@ export function register(): void {
       ...pteCreditRowBindings,
       // The rows read FTB 3801-CR's slots, which the runtime filing info holds.
       ...(sectionB2PassiveCreditRows as Bindings),
+      ...(sectionA2FilmCreditRows as Bindings),
     },
     unsupported: {
       "0.line.4_home_mortgage_interest":
