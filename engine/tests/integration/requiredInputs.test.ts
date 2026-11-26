@@ -104,6 +104,17 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "year or a repayment is Cade's question",
   ],
   [
+    /^community_property\.item\.[^.]+$/,
+    "each fact is one whole item of Form 8958 (community or separate, the taxpayer's or the " +
+      "spouse's); whether one exists is Cade's question. Form 8958 lists the item again while an " +
+      "answer inside it (basis, owner, the community part) is missing",
+  ],
+  [
+    /^community_property\.spouses_living_apart_rules$/,
+    "an answer Cade records only when the spouses meet the four conditions of Pub. 555 " +
+      "(Spouses living apart all year); absent, community property law applies as usual",
+  ],
+  [
     /^armed_forces_move\.[^.]+$/,
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],

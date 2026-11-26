@@ -32,6 +32,7 @@ export * from "./kinds/caWorkMove.js";
 export * from "./kinds/childInvestmentIncome.js";
 export * from "./kinds/childUnearnedIncome.js";
 export * from "./kinds/cleanVehicle.js";
+export * from "./kinds/communityProperty.js";
 export * from "./kinds/creditRecapture.js";
 export * from "./kinds/dependentCare.js";
 export * from "./kinds/dependents.js";

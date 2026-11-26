@@ -102,6 +102,7 @@ import type { Form8995AFilingInfo } from "./federal/8995-a/filingInfo.js";
 import { resolve8995AInfo } from "./federal/8995-a/resolveInfo.js";
 import type { Form8995FilingInfo } from "./federal/8995/filingInfo.js";
 import { resolve8995Info } from "./federal/8995/resolveInfo.js";
+import * as communityPropertyForms from "./federal/communityPropertyForms.js";
 import { FARM_FORMS_RESOLVERS, type FarmFormsFilingInfo } from "./federal/farmForms.js";
 import {
   FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
@@ -308,6 +309,7 @@ export type FilingInfo = BaseFilingInfo &
   Form8938FilingInfo &
   RecaptureFormsFilingInfo &
   FarmFormsFilingInfo &
+  communityPropertyForms.CommunityPropertyFormsFilingInfo &
   FederalFormsWithNoRulesFilingInfo &
   LaterCaliforniaFormsFilingInfo &
   CaliforniaFormsWithNoRulesFilingInfo;
@@ -394,15 +396,13 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve8938Info,
   ...RECAPTURE_FORMS_RESOLVERS,
   ...FARM_FORMS_RESOLVERS,
+  ...communityPropertyForms.COMMUNITY_PROPERTY_FORMS_RESOLVERS,
   ...FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
   ...LATER_CALIFORNIA_FORMS_RESOLVERS,
   ...CALIFORNIA_FORMS_WITH_NO_RULES_RESOLVERS,
 ];
 
-export function resolveFilingInfo(opts: {
-  facts: ReadonlyArray<{ key: string; value: unknown; category: string }>;
-  decisions: ReadonlyArray<{ decisionKey: string; decision: unknown }>;
-}): FilingInfo {
+export function resolveFilingInfo(opts: Parameters<typeof makeResolverInputs>[0]): FilingInfo {
   const inputs = makeResolverInputs(opts);
   return mergeInfo(RESOLVERS.map((resolve) => resolve(inputs)));
 }
