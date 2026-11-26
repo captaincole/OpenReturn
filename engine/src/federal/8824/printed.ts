@@ -16,6 +16,14 @@
  * each exchange", purpose-of-form::b01). The engine prints one form for each
  * exchange, because the summary route needs an attached statement and the
  * engine writes no statements. No dollar amount changes.
+ *
+ * DECISION (2026-11-25): Part IV has room for one conflict-of-interest sale,
+ * and the instructions do not say what to do with a second one: "Complete
+ * Part IV of Form 8824 only if the cost of the replacement property is more
+ * than the basis of the divested property and you elect to defer the gain"
+ * (irs-8824-inst-2025::sec::section-1043-conflict-of-interest::b02). The other
+ * way is a gap for the second sale. The engine prints each sale in Part IV of
+ * its own form, the same way as the exchanges. No dollar amount changes.
  */
 
 import type { DivestitureForm } from "./divestiture.js";
