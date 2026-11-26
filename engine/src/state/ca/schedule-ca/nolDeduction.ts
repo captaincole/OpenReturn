@@ -1,5 +1,11 @@
 /*
  * MANUAL EDIT: Schedule CA (540) lines that take FTB 3805V's deductions.
+ * - Line 8a: "Enter the amount of the federal NOL included on line 8a, column
+ *   A, as a positive number in column C. Get form FTB 3805V to figure the
+ *   allowable California NOL" (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b01).
+ *   Column A copies Schedule 1 line 8a, which line 9a column A already holds
+ *   in Schedule 1 line 9; column C adds it back, so California AGI never
+ *   takes the federal NOL deduction and line 9b2 takes California's instead.
  * - Line 9b1 column B: "the total amount of disaster loss carryover deduction
  *   from your 2025 form FTB 3805V, Part III, line 2, column (f), as a positive
  *   number" (ca-540-sched-ca-inst-2025::sec::line-9b1-disaster-loss-deduction-from-form-ftb-3805v::b01).
@@ -12,6 +18,7 @@
  */
 
 import type { BindingFn } from "../../../defineForm.js";
+import { numberOrBlank } from "../../../money.js";
 import { isUnsupportedResult } from "../3801/context.js";
 import { carryoverDeductions, type Info as Form3805VInfo } from "../3805v/figures.js";
 import type { PriorYearLines } from "../3805v/partIII.js";
@@ -30,7 +37,15 @@ function deduction(pick: (lines: PriorYearLines) => number) {
   };
 }
 
+/* Schedule 1 line 8a, the federal NOL deduction; blank when it is blank or 0. */
+function federalNol(form: Record<string, unknown>): number | undefined {
+  const amount = numberOrBlank(form["schedule-1.0.line.8a"]);
+  return amount === 0 ? undefined : amount;
+}
+
 export const nolDeductionBindings: Bindings = {
+  "1.line.b8a_federal": (form) => federalNol(form),
+  "1.line.b8a_additions": (form) => federalNol(form),
   "2.line.b9b1_subtractions": deduction((lines) => lines.disasterUsed),
   "2.line.b9b2_subtractions": deduction((lines) => lines.nolUsed),
 };

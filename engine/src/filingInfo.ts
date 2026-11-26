@@ -100,20 +100,17 @@ import type { Form8995AFilingInfo } from "./federal/8995-a/filingInfo.js";
 import { resolve8995AInfo } from "./federal/8995-a/resolveInfo.js";
 import type { Form8995FilingInfo } from "./federal/8995/filingInfo.js";
 import { resolve8995Info } from "./federal/8995/resolveInfo.js";
-import * as communityPropertyForms from "./federal/communityPropertyForms.js";
 import { CREDIT_FORMS_RESOLVERS, type CreditFormsFilingInfo } from "./federal/creditForms.js";
-import { DEBT_FORMS_RESOLVERS } from "./federal/debtForms.js";
-import { FARM_FORMS_RESOLVERS, type FarmFormsFilingInfo } from "./federal/farmForms.js";
 import {
   FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
   type FederalFormsWithNoRulesFilingInfo,
 } from "./federal/formsWithNoRules.js";
+import {
+  LATER_FEDERAL_FORMS_RESOLVERS,
+  type LaterFederalFormsFilingInfo,
+} from "./federal/laterForms.js";
 import type { QbiFilingInfo } from "./federal/qbi/filingInfo.js";
 import { resolveQbiInfo } from "./federal/qbi/resolveInfo.js";
-import {
-  RECAPTURE_FORMS_RESOLVERS,
-  type RecaptureFormsFilingInfo,
-} from "./federal/recaptureForms.js";
 import { SALE_FORMS_RESOLVERS, type SaleFormsFilingInfo } from "./federal/saleForms.js";
 import type { Schedule1AFilingInfo } from "./federal/schedule-1-a/filingInfo.js";
 import { resolveSchedule1AInfo } from "./federal/schedule-1-a/resolveInfo.js";
@@ -307,10 +304,7 @@ export type FilingInfo = BaseFilingInfo &
   Form8888FilingInfo &
   Form8863FilingInfo &
   Form8938FilingInfo &
-  RecaptureFormsFilingInfo &
-  FarmFormsFilingInfo &
-  communityPropertyForms.CommunityPropertyFormsFilingInfo &
-  // The debt forms' slots join through Schedule1FilingInfo and ScheduleCaFilingInfo (federal/debtForms.ts).
+  LaterFederalFormsFilingInfo &
   FederalFormsWithNoRulesFilingInfo &
   LaterCaliforniaFormsFilingInfo &
   CaliforniaFormsWithNoRulesFilingInfo;
@@ -395,10 +389,7 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve8888Info,
   resolve8863Info,
   resolve8938Info,
-  ...RECAPTURE_FORMS_RESOLVERS,
-  ...FARM_FORMS_RESOLVERS,
-  ...DEBT_FORMS_RESOLVERS,
-  ...communityPropertyForms.COMMUNITY_PROPERTY_FORMS_RESOLVERS,
+  ...LATER_FEDERAL_FORMS_RESOLVERS,
   ...FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
   ...LATER_CALIFORNIA_FORMS_RESOLVERS,
   ...CALIFORNIA_FORMS_WITH_NO_RULES_RESOLVERS,

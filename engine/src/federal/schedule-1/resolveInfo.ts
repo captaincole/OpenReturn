@@ -5,7 +5,9 @@ import {
   GAMBLING_KEYS,
   getGamblingWinningsFacts,
   getGovernmentPaymentsFacts,
+  getNolCarryoverRows,
   miscIncomeNotForBusiness,
+  NOL_KEYS,
   OTHER_INCOME_KEYS,
   unlinkedMiscIncomeKeys,
 } from "../../facts/index.js";
@@ -132,6 +134,8 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
         rule: "fallback: Form 2555 files (lines 8d and 24j)",
         value: resolve2555Info(inputs).mustFile?.["form-2555"]?.value === true,
       },
+      // A stated NOL carryover goes on line 8a (irs-172-inst-2025::sec::deducting-a-carryforward::b01).
+      nolCarryoverFallback(inputs),
     ],
   });
   return {
@@ -178,6 +182,19 @@ function form4797Fallback(inputs: ResolverInputs) {
     triggeredByFactKeys: files
       ? (info.mustFile?.["form-4797"]?.derivation?.triggeredByFactKeys ?? [])
       : [],
+  };
+}
+
+/*
+ * Line 8a: a stated NOL carryover with an amount files Schedule 1, and so
+ * does an answer that cannot be read, so its gap shows. No answer: nothing.
+ */
+function nolCarryoverFallback(inputs: ResolverInputs) {
+  const rows = getNolCarryoverRows(inputs.facts);
+  return {
+    rule: "fallback: an NOL carryover to 2025 (line 8a)",
+    value: rows === null || (rows ?? []).some((row) => row.carryoverTo2025 > 0),
+    triggeredByFactKeys: rows === undefined ? [] : [NOL_KEYS.carryovers],
   };
 }
 
