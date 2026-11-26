@@ -15,6 +15,7 @@ import {
 import { form8621Totals } from "../8621/totals.js";
 import { figuredForm8814, form8814Totals } from "../8814/totals.js";
 import { filesForm8815, savingsBondExclusionScope } from "../8815/resolveInfo.js";
+import { bondCreditInterest } from "../8912/interest.js";
 import { foreignAccountsOnReturn, unansweredOtherAssetKeys } from "../8938/resolveInfo.js";
 import { receivedAmounts, receivedOnReturn, type Receipt } from "../passThrough/receipts.js";
 import type { ForeignAccountFacts, PayerAmount, ScheduleBFilingInfo } from "./filingInfo.js";
@@ -89,6 +90,8 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
   const interestPayers = [
     ...payerAmounts(inputs, isInterestFactKey, (value) => sum(value.box1, value.box3)),
     ...k1PayerRows(k1Interest),
+    // A held tax credit bond's credit that no Form 1099-INT reports is interest (federal/8912/interest.ts).
+    ...bondCreditInterest(inputs),
   ];
   const dividendPayers = scheduleBDividendPayers(inputs, k1Dividends);
   // The explicit decision wins; with none, a Form 8938 account fact answers Yes.
