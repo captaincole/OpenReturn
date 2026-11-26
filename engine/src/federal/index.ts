@@ -682,6 +682,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 4563",
     relativeDir: "federal/4563",
     register: registerForm4563,
+    // One Form 4563 for each person who excludes income (federal/4563/filingInfo.ts).
+    copies: {
+      count: (info) => info?.form4563Filers?.length ?? 1,
+      select: (info, index) => info && { ...info, form4563CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-4797",
@@ -811,6 +816,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8697",
     relativeDir: "federal/8697",
     register: registerForm8697,
+    // More than 2 (Part I) or 3 (Part II) prior years: "attach additional Forms 8697" (8697/plan.ts).
+    copies: {
+      count: (info) => info?.form8697?.copyCount ?? 1,
+      select: (info, index) => info && { ...info, form8697CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-8815",

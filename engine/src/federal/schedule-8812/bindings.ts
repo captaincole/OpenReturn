@@ -5,6 +5,7 @@ import { atLeast, numberOrBlank, roundDollars, stepsOf, sum } from "../../money.
 import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { excludedAmounts, files2555 } from "../2555/results.js";
+import { form4563Line15Total, form4563Waits } from "../4563/results.js";
 import { mortgageCreditGap } from "../8396/creditGap.js";
 import { line6cFrom8839 } from "../8839/receivers.js";
 import { form8859Files, homebuyerCreditGap } from "../8859/creditLimit.js";
@@ -63,6 +64,8 @@ export function register(): void {
        */
       "0.line.2b_form_2555_lines_45_50": (form, info) =>
         files2555(info) ? excludedAmounts(form, info) : unsupported(NO_FORM_2555),
+      // MANUAL EDIT: line 2c, "Enter the amount from line 15 of your Form 4563", every person's form; blank without it.
+      "0.line.2c_form_4563_line_15": (_, info) => form4563Line15Total(info),
       // A subtotal stays blank, not "0", when every addend is blank.
       "0.line.2d_total_excluded_income": (form) => {
         const line2a = form["0.line.2a_puerto_rico_income_excluded"];
@@ -71,9 +74,10 @@ export function register(): void {
         if (line2a === undefined && line2b === undefined && line2c === undefined) return undefined;
         return sum(line2a, line2b, line2c);
       },
-      "0.line.3_modified_agi": (form) => {
+      // Waits while Form 4563 waits: its line 15 is added on line 2c.
+      "0.line.3_modified_agi": (form, info) => {
         const line1 = form["0.line.1_form_1040_line_11a"];
-        if (line1 === undefined) return undefined;
+        if (line1 === undefined || form4563Waits(info)) return undefined;
         return sum(line1, form["0.line.2d_total_excluded_income"]);
       },
       "0.line.4_qualifying_children_under_17": (_, info) => info.childTaxCreditCount,
@@ -206,8 +210,6 @@ export function register(): void {
     unsupported: {
       "0.line.2a_puerto_rico_income_excluded":
         "Income excluded as a bona fide resident of Puerto Rico has no fact kind.",
-      "0.line.2c_form_4563_line_15":
-        "The American Samoa income exclusion (Form 4563) has no fact kind.",
     },
 
     // This SSN widget (text, maxLength 11) keeps the dashes; the 1040 comb widget strips them.

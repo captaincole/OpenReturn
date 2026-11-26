@@ -14,6 +14,7 @@ import {
   type ResolverInputs,
 } from "../../resolverInputs.js";
 import { resolve2555Info } from "../2555/resolveInfo.js";
+import { resolve4563Info } from "../4563/resolveInfo.js";
 import { receivedOnReturn } from "../passThrough/receipts.js";
 import type { ForeignTaxInfo, Form1116CategoryInfo, Form1116FilingInfo } from "./filingInfo.js";
 import { electionLimit } from "./lines.js";
@@ -37,11 +38,12 @@ const LOSS_ACCOUNT_GAP =
 const FORM_5471_GAP =
   "Form 5471 files: line 22 may take a section 960(c) increase (irs-1116-inst-2025::sec::line-22::b01), and the engine has no rules for it.";
 
-/* Forms 4563 and 5471 have no rules: only their must-file decision files them. Form 2555 files from its facts too. */
-const decidedToFile = (inputs: ResolverInputs, shortId: string) =>
-  shortId === "2555"
-    ? resolve2555Info(inputs).mustFile?.["form-2555"]?.value === true
-    : inputs.decisionByKey.get(`decisions.scope.must_file_${shortId}`) === true;
+/* Form 5471 has no rules: only its must-file decision files it. Forms 2555 and 4563 file from their facts too. */
+function decidedToFile(inputs: ResolverInputs, shortId: string): boolean {
+  if (shortId === "2555") return resolve2555Info(inputs).mustFile?.["form-2555"]?.value === true;
+  if (shortId === "4563") return resolve4563Info(inputs).mustFile?.["form-4563"]?.value === true;
+  return inputs.decisionByKey.get(`decisions.scope.must_file_${shortId}`) === true;
+}
 
 /*
  * The election (irs-1116-inst-2025::sec::publications-see-pub-514-foreign-tax-credit-for::b01, b02):

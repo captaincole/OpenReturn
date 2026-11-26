@@ -7,6 +7,7 @@
 import { numberOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { foreignTaxCreditGap } from "../1116/credit.js";
+import { withForm4563Line15 } from "../4563/results.js";
 import { line6lGap } from "../8978/receivers.js";
 import type { Form8880FilingInfo } from "./filingInfo.js";
 import {
@@ -58,12 +59,17 @@ export function line7Of(info: Form8880FilingInfo): number | undefined {
   return line7(columnOf(info, "you")?.line6, columnOf(info, "spouse")?.line6);
 }
 
-/* Line 8: Form 1040 line 11a. Blank when line 7 is zero ("stop; you can't take this credit"). */
+/*
+ * Line 8: Form 1040 line 11a, plus "any exclusion or deduction claimed for the
+ * year for ... Income from American Samoa" (irs-pub-590a-2025::sec::retirement-savings::b03):
+ * Form 4563 line 15, every copy. Blank when line 7 is zero ("stop; you can't
+ * take this credit").
+ */
 export function line8Of(form: Accessor, info: Form8880FilingInfo): Value {
   const total = line7Of(info);
   if (total === undefined || total === 0) return undefined;
   if (info.mustFile?.["form-2555"]?.value === true) return unsupported(FOREIGN_INCOME_GAP);
-  return numberOrBlank(form["form-1040.line.11a"]);
+  return withForm4563Line15(numberOrBlank(form["form-1040.line.11a"]), info);
 }
 
 /* Line 9: the digit after "0." from the table; blank while the filing status waits. */

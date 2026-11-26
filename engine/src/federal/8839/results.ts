@@ -6,6 +6,7 @@
 
 import { numberOrBlank, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
+import { withForm4563Line15 } from "../4563/results.js";
 import type { Form8839FilingInfo } from "./filingInfo.js";
 import { creditLimit, nonrefundableCredit, partII, type PartIIResult } from "./lines.js";
 import { line25ModifiedAgi, partIII, type PartIIIResult } from "./partIII.js";
@@ -22,7 +23,7 @@ export const form8839Files = (info: Info8839) => files(info, "form-8839");
 
 /*
  * Lines 7 and 25 add Form 2555 lines 45 and 50 and Form 4563 line 15
- * (irs-8839-inst-2025::sec::line-7::b01), which have no rules. Social security
+ * (irs-8839-inst-2025::sec::line-7::b01); the Form 2555 part is a gap. Social security
  * benefits with an exclusion take the Pub. 915 worksheet for Form 1040 line 6b
  * (irs-1040-inst-2025::sec::use-the-social-security-benefits::b01), which is not modeled.
  */
@@ -41,9 +42,6 @@ function magiGap(info: Info8839): string | undefined {
   if (files(info, "form-2555")) {
     return "Modified AGI adds Form 2555 lines 45 and 50 (irs-8839-inst-2025::sec::line-7::b01), which this line does not add yet.";
   }
-  if (files(info, "form-4563")) {
-    return "Modified AGI adds Form 4563 line 15 (irs-8839-inst-2025::sec::line-7::b01), and Form 4563 has no rules.";
-  }
   return socialSecurityWithExclusion(info) ? SOCIAL_SECURITY_GAP : undefined;
 }
 
@@ -54,7 +52,8 @@ export function partIIOf(form: LineReader, info: Info8839): PartIIResult | Unsup
   if (info.adoptionPartII !== "applies") return undefined;
   const gap = magiGap(info);
   if (gap) return unsupported(gap);
-  const agi = numberOrBlank(form["form-1040.line.11b"]);
+  // Line 7: Form 1040 line 11b plus Form 4563 line 15 (line-7::b01).
+  const agi = withForm4563Line15(numberOrBlank(form["form-1040.line.11b"]), info);
   if (agi === undefined) return undefined;
   const inputs = (info.adoptionChildren ?? []).map(({ line2, line3, line5 }) => ({
     line2,
@@ -131,5 +130,7 @@ export function partIIIOf(
       sum(form["schedule-1.0.line.10"]),
     adjustments: sum(...ADJUSTMENTS.map((line) => form[`schedule-1.1.line.${line}`])),
   });
-  return partIII(inputs, modifiedAgi);
+  // Line 25: the worksheet's line 6 "increase[d] ... by ... Form 4563, line 15" (modified-adjusted-gross-income-magi-worksheet-line-25::b02).
+  const line25 = withForm4563Line15(modifiedAgi, info);
+  return line25 === undefined ? undefined : partIII(inputs, line25);
 }

@@ -5,6 +5,7 @@ import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, formatDollars, numberOrBlank, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
+import { otherTaxesGap } from "../4563/receivers.js";
 import { amtGap } from "../6251/foreignTaxCredit.js";
 import { childTaxOnLine16 } from "../8615/form.js";
 import { form8621Amount, withForm8621 } from "../8621/totals.js";
@@ -177,17 +178,23 @@ export const line22 = (form: Form) =>
     ? undefined
     : atLeast(0, sum(form["line.18"], form["line.21"] === undefined ? 0 : -form["line.21"]));
 
-// MANUAL EDIT: line 23 = Schedule 2 line 21 (other taxes); blank when Schedule 2 is not filed.
-export function line23(form: Form) {
+/*
+ * MANUAL EDIT: line 23 = Schedule 2 line 21 (other taxes); blank when Schedule 2 is not filed.
+ * Form 4563's gaps on Schedule 2 lines 4 and 11 are gaps here (federal/4563/receivers.ts).
+ */
+export function line23(form: Form, info: Form1040FilingInfo) {
+  const gap = otherTaxesGap(info);
+  if (gap) return gap;
   const value = form["schedule-2.1.line.21_total_other_taxes"];
   return typeof value === "number" ? value : undefined;
 }
 
 /*
  * Blank when Schedule H line 9 is Yes: Schedule 2 line 21 is blank then
- * (FUTA tax not modeled), and sum() would count it as 0.
+ * (FUTA tax not modeled), and sum() would count it as 0. A gap with line 23's.
  */
-export const line24 = (form: Form) =>
-  form["line.22"] === undefined || form["schedule-h.0.line.9_yes"] === true
+export const line24 = (form: Form, info: Form1040FilingInfo) =>
+  otherTaxesGap(info) ??
+  (form["line.22"] === undefined || form["schedule-h.0.line.9_yes"] === true
     ? undefined
-    : sum(form["line.22"], form["line.23"]);
+    : sum(form["line.22"], form["line.23"]));

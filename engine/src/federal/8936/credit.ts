@@ -8,6 +8,8 @@
 import { numberOrBlank, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { foreignTaxCreditGap } from "../1116/credit.js";
+import type { Form4563FilingInfo } from "../4563/filingInfo.js";
+import { files4563, form4563Line15Total } from "../4563/results.js";
 import { creditGap as retirementCreditGap } from "../8880/credit.js";
 import { line6lGap } from "../8978/receivers.js";
 import type { Form8936FilingInfo } from "./filingInfo.js";
@@ -24,32 +26,34 @@ type Value = number | Unsupported | undefined;
 
 const FORM_2555_GAP =
   "Form 2555 files, and lines 1c and 1d take its lines 45 and 50, which these lines do not read yet.";
-const FORM_4563_GAP =
-  "Form 4563 files, and line 1e takes its line 15; Form 4563 has no rules in the engine.";
-
 const files = (info: Form8936FilingInfo, formId: string) => info.mustFile?.[formId]?.value === true;
 
-/* Line 1c, 1d or 1e: blank unless the form files; then a gap. */
-export function excludedIncomeGap(info: Form8936FilingInfo, line: "2555" | "4563") {
-  if (line === "2555") return files(info, "form-2555") ? unsupported(FORM_2555_GAP) : undefined;
-  return files(info, "form-4563") ? unsupported(FORM_4563_GAP) : undefined;
+/* Lines 1c and 1d: blank unless Form 2555 files; then a gap. */
+export function excludedIncomeGap(info: Form8936FilingInfo) {
+  return files(info, "form-2555") ? unsupported(FORM_2555_GAP) : undefined;
 }
 
-/* Line 2's gap, when Form 2555 or Form 4563 files. */
+/* Line 2's gap, when Form 2555 files. */
 function partIGap(info: Form8936FilingInfo): string | undefined {
-  if (files(info, "form-2555")) return FORM_2555_GAP;
-  return files(info, "form-4563") ? FORM_4563_GAP : undefined;
+  return files(info, "form-2555") ? FORM_2555_GAP : undefined;
 }
 
-/* Lines 1a and 2: Form 1040 line 11a plus line 1b; undefined while line 11a waits. */
-export function line2Of(form: Accessor, info: Form8936FilingInfo) {
+/*
+ * Lines 1a, 1b, 1e and 2: Form 1040 line 11a, the Puerto Rico answer and Form
+ * 4563 line 15 (every copy; blank without the form). Undefined while line 11a
+ * or Form 4563 waits.
+ */
+export function line2Of(form: Accessor, info: Form8936FilingInfo & Form4563FilingInfo) {
   const agi = numberOrBlank(form["form-1040.line.11a"]);
   if (agi === undefined) return undefined;
+  const form4563Line15 = form4563Line15Total(info);
+  if (files4563(info) && form4563Line15 === undefined) return undefined;
   const puertoRicoExcluded = wholeDollars(info.cleanVehicleAnswers?.puertoRicoExcluded2025);
   return {
     line1a: agi,
     line1b: puertoRicoExcluded,
-    line2: modifiedAgi({ agi, puertoRicoExcluded }),
+    line1e: form4563Line15,
+    line2: modifiedAgi({ agi, puertoRicoExcluded, form4563Line15 }),
   };
 }
 
@@ -68,7 +72,7 @@ export function line4Of(info: Form8936FilingInfo) {
   return { ...parts, line4: modifiedAgi(parts) };
 }
 
-/* Every Schedule A, in the order of the facts. Line 2 is not known while Form 2555 or 4563 files. */
+/* Every Schedule A, in the order of the facts. Line 2 is not known while Form 2555 files. */
 export function scheduleAsOf(form: Accessor, info: Form8936FilingInfo): ScheduleAResult[] {
   const magi: MagiAnswers = {
     status2025: info.filingStatus,
