@@ -17,6 +17,7 @@ Form 982 reports a canceled debt that stays out of income, and the tax attribute
 3. **Line 3 is asked only on the "Any other debt" path.**
    Text: the chart for a nonbusiness debt with no attributes but basis lists lines 1a or 1b, 2 and 10a only (`how-to-complete-the-form::b03`).
    Default: line 3 is blank for that chart and for line 1d or 1e alone. Otherwise Yes with the election, No without it.
+   Other reading: the line 3 instruction says only "To make the election, check the 'Yes' box" (`line-3::b01`), so a blind preparer left No blank when no election was made. The form face asks "Do you elect ...? Yes No" (`irs-982-face-2025::sec::face-part-i::b01`), so the engine answers the question.
    Dollars: no.
 
 4. **The tax attributes are stated, not read from the forms that carry them.**
@@ -48,6 +49,7 @@ Form 982 reports a canceled debt that stays out of income, and the tax attribute
    Text: the cap on "qualified principal residence indebtedness" (`line-1e::b02`).
    Default: each loan's qualified part counts against what is left of the cap, in the order of the facts.
    Dollars: only with more than one loan on the home.
+   Related: Pub. 4681 says to include on line 2 the canceled qualified debt "but not more than the amount of the exclusion limit" (`irs-pub-4681-2025::sec::qualified-principal::b06`), which can read as a cap on the amount excluded, not on the loan. Decision A45 reads the cap as a cap on the loan. For a married-filing-separately short sale of $100,000 on a $450,000 loan, that gives line 2 = $25,000 and Schedule 1 line 8c = $75,000; the other reading excludes all $100,000.
 
 10. **California adds back the whole line 1e amount.**
     Text: "the exclusion of income from discharge of indebtedness from the disposition of your principal residence occurring after December 31, 2017. Enter the amount of discharge on line 8c, column C" (`ca-540-sched-ca-inst-2025::sec::line-8-other-income::b01`).
@@ -63,6 +65,22 @@ Form 982 reports a canceled debt that stays out of income, and the tax attribute
     Text: Part III is the consent of a corporation (`part-iii::b01`).
     Default: blank on every return the engine prints.
     Dollars: no.
+
+13. **A line 5 election above the depreciable basis.**
+    Text: "If the amount of canceled debt excluded from income is more than the total basis in depreciable property, you must use the excess to reduce the other tax attributes" (`irs-pub-4681-2025::sec::bankruptcy-and-insolvency::b10`).
+    Default: line 5 is the smaller of the elected amount and the depreciable basis; the rest goes on to lines 6 to 13. An $8,000 election with $6,000 of basis puts $6,000 on line 5.
+    Dollars: yes, if a preparer enters the whole election on line 5.
+
+14. **Two exclusions on one form share the Part II lines.**
+    Text: Pub. 4681 real property Example 2 reduces the NOL by the $10,000 insolvency exclusion and reports the other $4,000 on line 4 of the same form (`irs-pub-4681-2025::sec::qualified-real-property-2::b05`).
+    Default: each Part II line adds the reductions of every exclusion. Insolvency $4,000 and farm $3,000 against the NOL put $7,000 on line 6.
+    Dollars: yes, on the line, if a preparer reports only one exclusion's reduction.
+
+## Second opinions
+
+- **Blind fill (2026-11-26).** A preparer filled 15 cases by hand from the blank form, the Form 982 instructions and Pub. 4681. Every dollar amount, every line 1 box and Schedule 1 line 8c matched the engine. The only difference is the line 3 "No" box in eight cases, which the preparer left blank (doubt 3); it changes no dollars.
+- **PolicyEngine-US 2.154.0** (commit `363e9fc5`). It does not model Form 982. Its `debt_relief` variable is a bare input that it adds to gross income (`parameters/gov/irs/gross_income/sources.yaml`), with no exclusion and no attribute reduction, so it has no constant or formula to compare.
+- **IRS Direct File** (`IRS-Public/direct-file`, commit `e365f9f4`). Its 36 tax fact files have no Form 1099-C or Form 982 logic, so there is nothing to compare.
 
 ## Confidence by field group
 
