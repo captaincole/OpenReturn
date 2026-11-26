@@ -7,6 +7,7 @@ import { askAnswerSchema, type AskAnswerOutput } from "./judges/askAnswerer";
 import { askQueriesSchema } from "./judges/askQueryFormulator";
 import { mergeByRank } from "./mergeHits";
 import { renderAnswerPrompt, renderFormulatePrompt, renderHistory } from "./prompts";
+import { statuteRound } from "./statute";
 import {
   askInputSchema,
   askRunResultSchema,
@@ -141,6 +142,39 @@ async function fillGaps(
   }
 }
 
+const notCovered = (missingDocuments: string[], steps: StepLog[]): AskResult => ({
+  answer: NOT_COVERED_ANSWER,
+  coverage: "not_covered",
+  citations: [],
+  missingDocuments,
+  statutePassages: [],
+  statuteConsulted: false,
+  conflicts: [],
+  log: { steps },
+});
+
+/* The first answer, then the instruction gap round, then the statute round: each at most once. */
+async function answerRounds(
+  mastra: Mastra,
+  input: AnswerQuestionInput,
+  history: string,
+  passages: Passage[],
+  steps: StepLog[],
+) {
+  const first = await answer(mastra, history, input.question, passages, steps, "answer");
+  const afterGaps = await fillGaps(mastra, input, history, passages, first, steps);
+  return statuteRound(
+    afterGaps,
+    {
+      onStage: input.onStage,
+      reanswer: (all) => answer(mastra, history, input.question, all, steps, "answer-statute"),
+      steps,
+      warn: (message, err) => mastra.getLogger().warn(message, { err }),
+    },
+    { hitsPerQuery: HITS_PER_QUERY, max: MAX_GAP_PASSAGES },
+  );
+}
+
 export async function answerQuestion(
   mastra: Mastra,
   input: AnswerQuestionInput,
@@ -168,19 +202,10 @@ export async function answerQuestion(
     () => retrieve(queries.length > 0 ? queries : [input.question]),
     (result) => ({ queries: result.log }),
   );
-  if (passages.length === 0) {
-    return {
-      answer: NOT_COVERED_ANSWER,
-      coverage: "not_covered",
-      citations: [],
-      missingDocuments: formulated.namedDocuments,
-      log: { steps },
-    };
-  }
+  if (passages.length === 0) return notCovered(formulated.namedDocuments, steps);
 
   await input.onStage?.("answering");
-  const first = await answer(mastra, history, input.question, passages, steps, "answer");
-  const final = await fillGaps(mastra, input, history, passages, first, steps);
+  const final = await answerRounds(mastra, input, history, passages, steps);
 
   const validated = validateAnswer(final.raw, final.passages);
   steps.push({ kind: "validate", durationMs: 0, dropped: validated.dropped });
@@ -189,6 +214,9 @@ export async function answerQuestion(
     coverage: validated.coverage,
     citations: validated.citations,
     missingDocuments: validated.missingDocuments,
+    statutePassages: final.statutePassages,
+    statuteConsulted: final.statuteConsulted,
+    conflicts: validated.conflicts,
     log: { steps },
   };
 }
@@ -211,7 +239,7 @@ const answerStep = createStep({
 export const askWorkflow = createWorkflow({
   id: "ask",
   description:
-    "Ask The Tax Code: answers one question about US federal or California tax from the IRS/FTB reference library, with numbered citations to the passages it relied on. Pass completed earlier turns as history for a follow-up. Says when the library does not cover the question.",
+    "Ask The Tax Code: answers one question about US federal or California tax from the IRS/FTB reference library, with numbered citations to the passages it relied on. Pass completed earlier turns as history for a follow-up. Says when the library does not cover the question. When the passages conflict, or name a rule of law without stating it, the answer may also search the statute (law.db) once; passages that disagree come back as conflicts, with both quotes.",
   inputSchema: askInputSchema,
   outputSchema: askRunResultSchema,
 })

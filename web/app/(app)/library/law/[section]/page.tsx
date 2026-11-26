@@ -10,8 +10,9 @@ import { LawBlocks } from "./components/LawBlocks";
 import { LawSectionHeader } from "./components/LawSectionHeader";
 
 /*
- * One whole Code section, fetched on the server when the page opens. The
- * text arrives with the HTML, so the browser jumps to #g-1 by itself;
+ * One whole section of the Code, or of the regulations ("1.469-5T"),
+ * fetched on the server when the page opens. The text arrives with the
+ * HTML, so the browser jumps to #g-1 by itself;
  * LawAnchor handles a deep link to a subdivision with no block of its own.
  */
 

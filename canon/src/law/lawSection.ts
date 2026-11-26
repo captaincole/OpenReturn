@@ -1,11 +1,12 @@
 import { asStr, getDocument } from "../db/corpusStore";
 import { openLibraryDb } from "../db/libsql";
-import { formatCitation, parseLawTarget, sectionIdOf } from "./citation";
-import { catchlineOf, lawDocId, sectionBlocks } from "./lawRead";
+import { formatCitation, type LawSource, parseLawTarget, sourceOfSection } from "./citation";
+import { catchlineOf, lawDocIdOf, sectionBlocks, sourceOfFormat, targetSectionId } from "./lawRead";
 
 /*
- * One whole Code section for the web app's statute page, and the library's
- * status. Callers check lawInstalled() first: these open law.db.
+ * One whole section, of the Code or of the regulations, for the web app's
+ * law page, and the library's status. Callers check lawInstalled() first:
+ * these open law.db.
  */
 
 export interface LawSectionBlock {
@@ -17,8 +18,9 @@ export interface LawSectionBlock {
 }
 
 export interface LawSectionPage {
+  source: LawSource;
   section: {
-    /** As printed: "469", "1400Z–2". */
+    /** As printed: "469", "1400Z–2", "1.469-5T". */
     number: string;
     citation: string;
     heading: string;
@@ -29,23 +31,30 @@ export interface LawSectionPage {
   blocks: LawSectionBlock[];
 }
 
-export interface LawStatus {
+export interface LawStatusDocument {
   docId: string;
+  source: LawSource;
   title: string;
   published: string | null;
-  /** Code sections with statute text. */
+  /** Sections with text: Code sections, or regulation sections. */
   sections: number;
 }
 
-/** null when the input is not a bare section number, or the Code has no such section. */
+export interface LawStatus {
+  documents: LawStatusDocument[];
+}
+
+/** null when the input is not a bare section number, or the library has no such section. */
 export async function readLawSection(input: string): Promise<LawSectionPage | null> {
   const target = parseLawTarget(input);
-  if (target?.kind !== "citation" || target.path.length > 0) return null;
-  const docId = await lawDocId();
-  const sectionId = sectionIdOf(docId, target.section);
+  if (!target || target.kind === "block" || target.path.length > 0) return null;
+  const sectionId = await targetSectionId(target);
+  const docId = await lawDocIdOf(sourceOfSection(target.section));
+  if (!sectionId || !docId) return null;
   const [section, doc] = await Promise.all([sectionBlocks(sectionId), getDocument(docId, "law")]);
   if (!section || !doc) return null;
   return {
+    source: sourceOfSection(section.number),
     section: {
       number: section.number,
       citation: formatCitation(section.number, []),
@@ -78,19 +87,22 @@ async function breadcrumbsOf(sectionId: string): Promise<string[]> {
   return res.rows.map((row) => asStr(row.heading));
 }
 
-// A Code section's heading starts with "§"; a structure level's ("Subtitle A—…") does not.
+// A section's heading starts with "§"; a structure level's ("Subtitle A—…", "PART 1—…") does not.
 export async function lawStatus(): Promise<LawStatus> {
-  const docId = await lawDocId();
-  const doc = await getDocument(docId, "law");
   const db = await openLibraryDb("law");
-  const count = await db.execute({
-    sql: `SELECT count(*) AS n FROM ref_sections WHERE doc_id = ? AND heading LIKE '§%'`,
-    args: [docId],
-  });
+  const res = await db.execute(
+    `SELECT d.doc_id, d.title, d.published, d.format,
+            (SELECT count(*) FROM ref_sections s WHERE s.doc_id = d.doc_id AND s.heading LIKE '§%') AS n
+     FROM ref_documents d
+     ORDER BY d.format = 'ecfr', d.tax_year DESC, d.doc_id`,
+  );
   return {
-    docId,
-    title: doc?.title ?? docId,
-    published: doc?.published ?? null,
-    sections: Number(count.rows[0]?.n ?? 0),
+    documents: res.rows.map((row) => ({
+      docId: asStr(row.doc_id),
+      source: sourceOfFormat(asStr(row.format)),
+      title: asStr(row.title),
+      published: row.published == null ? null : asStr(row.published),
+      sections: Number(row.n ?? 0),
+    })),
   };
 }

@@ -1,16 +1,24 @@
 import { existsSync } from "node:fs";
+import { parseArgs } from "node:util";
 import { listBlocksWithoutEmbeddings } from "../../src/db/corpusStore";
 import { embedLawBlocks, ingestLaw } from "../../src/law/ingestLaw";
 import { requireLaw } from "../../src/law/lawRead";
-import { walkLaw } from "../../src/law/lawSidecar";
+import { walkLaw, type LawEntry } from "../../src/law/lawSidecar";
 import type { Command } from "../lib/cli";
 import { fetchLibrary, manifestPath, type FetchSpec } from "./fetch";
 
 /* The law commands that write law.db: sync, fetch, reembed. */
 
 async function sync(argv: string[]): Promise<void> {
-  const force = argv.includes("--force");
-  const entries = await walkLaw();
+  const { values } = parseArgs({
+    args: argv,
+    options: {
+      force: { type: "boolean", default: false },
+      doc: { type: "string", multiple: true },
+    },
+  });
+  const force = values.force ?? false;
+  const entries = selected(await walkLaw(), values.doc ?? []);
   console.log(`[law sync] processing ${entries.length} doc(s)`);
   let failed = 0;
   for (const entry of entries) {
@@ -31,6 +39,16 @@ async function sync(argv: string[]): Promise<void> {
     }
   }
   if (failed > 0) process.exit(1);
+}
+
+// `--doc cfr-26-2025` limits the sync; an unknown id is an error, not a silent no-op.
+function selected(entries: LawEntry[], docIds: string[]): LawEntry[] {
+  if (docIds.length === 0) return entries;
+  const known = new Set(entries.map((entry) => entry.sidecar.docId));
+  const unknown = docIds.filter((docId) => !known.has(docId));
+  if (unknown.length > 0)
+    throw new Error(`no law sidecar for ${unknown.join(", ")} (known: ${[...known].join(", ")})`);
+  return entries.filter((entry) => docIds.includes(entry.sidecar.docId));
 }
 
 const LAW_FETCH: FetchSpec = {
@@ -66,8 +84,11 @@ async function reembed(argv: string[]): Promise<void> {
 
 export const lawSyncCommand: Command = {
   name: "sync",
-  summary: "Build law.db from the pinned release zip (sha-checked; skipped when unchanged)",
-  options: [{ flag: "--force", desc: "rebuild even if the sha matches (after a parser change)" }],
+  summary: "Build law.db from each pinned law.meta.json (sha-checked; skipped when unchanged)",
+  options: [
+    { flag: "--force", desc: "rebuild even if the sha matches (after a parser change)" },
+    { flag: "--doc <docId>", desc: "only this document, e.g. cfr-26-2025 (repeatable)" },
+  ],
   run: sync,
 };
 

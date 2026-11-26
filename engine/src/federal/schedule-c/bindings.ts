@@ -5,6 +5,7 @@ import type { BusinessExpenses, BusinessFactValue, BusinessVehicle } from "../..
 import { roundDollars } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
+import { accrualCreditGap } from "../4136/receivers.js";
 import { homeOfficeActualGap, sharedHomeGap } from "../8829/lines.js";
 import { figureBusinessForm6198 } from "./atRisk.js";
 import { line13Depreciation, partVEntries } from "./attachments.js";
@@ -273,7 +274,10 @@ export function register(): void {
       "0.line.2": (_, info) => roundDollars(businessOf(info)?.returnsAndAllowances),
       "0.line.3": (_, info) => partI(info, netReceipts),
       "0.line.5": (_, info) => partI(info, grossProfit),
-      "0.line.6": (_, info) => roundDollars(businessOf(info)?.otherIncome),
+      // MANUAL EDIT: an accrual-method business's own Form 4136 credit is this year's income (federal/4136/receivers.ts).
+      "0.line.6": (_, info) =>
+        accrualCreditGap(info, info.businessKeys?.[info.scheduleCCopyIndex ?? 0]) ??
+        roundDollars(businessOf(info)?.otherIncome),
       "0.line.7": (_, info) => partI(info, grossIncome),
       "0.line.8": (_, info) => expense(info, "advertising"),
       "0.line.9": (_, info) => partII(info, carAndTruckExpenses),

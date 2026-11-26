@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<DIV5 N="1" TYPE="PART" VOLUME="1">
+<HEAD>PART 1&#x2014;INCOME TAXES
+</HEAD>
+<AUTH>
+<HED>Authority:</HED><PSPACE>26 U.S.C. 7805, unless otherwise noted.
+</PSPACE></AUTH>
+<DIV7 N="ECFR0test0group" TYPE="SUBJGRP">
+<HEAD>Test Group</HEAD>
+{{SECTIONS}}
+</DIV7></DIV5>

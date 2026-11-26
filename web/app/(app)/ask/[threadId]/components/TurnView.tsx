@@ -3,6 +3,7 @@
 import type { AskCitation, AskStage, AskTurn } from "@/lib/ask";
 import Link from "next/link";
 import { Fragment, useState } from "react";
+import { ConflictNote } from "./ConflictNote";
 import { ReferenceCard, refAnchorId } from "./ReferenceCard";
 
 const VISIBLE_REFERENCES = 3;
@@ -67,6 +68,7 @@ function CompletedAnswer({ turn }: { turn: AskTurn }) {
           </p>
         ))}
       </div>
+      <ConflictNote conflicts={turn.conflicts ?? []} citations={turn.citations} />
       <CoverageNote turn={turn} />
       {turn.citations.length > 0 && (
         <section aria-label="References" className="space-y-3">

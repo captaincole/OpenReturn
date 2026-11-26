@@ -5,6 +5,7 @@ import { farmOwnerOf, type FarmFactValue } from "../../facts/index.js";
 import { roundDollars } from "../../money.js";
 import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
+import { accrualCreditGap } from "../4136/receivers.js";
 import {
   carAndTruckExpenses,
   conservationDeduction,
@@ -263,7 +264,10 @@ function partIIIBindings(): Bindings {
     "1.line.40c_ccc_loans_forfeited_taxable_accrual": accrualLine(cccForfeitedTaxable),
     "1.line.41_crop_insurance_proceeds_accrual": accrualLine((farm) => dollars(farm.cropInsurance)),
     "1.line.42_custom_hire_income_accrual": accrualLine((farm) => dollars(farm.customHireIncome)),
-    "1.line.43_other_income_accrual": accrualLine((farm) => dollars(farm.otherIncome)),
+    // MANUAL EDIT: the farm's own Form 4136 credit is this year's income on the accrual method (federal/4136/receivers.ts).
+    "1.line.43_other_income_accrual": (_, info) =>
+      accrualCreditGap(info, factKeyOf(info)) ??
+      accrualLine((farm) => dollars(farm.otherIncome))(_, info),
     "1.line.44_total_income_accrual": accrualLine(line44),
     "1.line.45_inventory_beginning_of_year": accrualLine((farm) =>
       dollars(farm.inventory?.beginning),

@@ -41,6 +41,8 @@ A part of more than 8 fields that a scenario needs (a worksheet part, a threshol
    - `unsupported`: replace the binding with an `unsupported` entry and the skeptic's reason.
 4. Write one line for the field: `<fieldId>: bound | unsupported — <blockId>`.
 
+**The statute.** Both subagents have `mcp__canon__searchLaw` and `mcp__canon__readLaw`. They read the statute only when two instructions disagree on the line, or an instruction names a rule without stating it. They search in the statute's words taken from the instructions, never by a section number from memory, and quote only a block id they retrieved. The instructions still decide how the form is filled. When a report names a statute that disagrees with the instructions, the binding follows the instructions, the drafter writes both texts in the form's `QUESTIONS.md`, and you add an entry to `docs/law-findings.md`. When a person decides it, the decision gets a `DECISION` comment and a row in `docs/rule-decisions.md`. If the tools answer `installed: false`, the work goes on without the statute.
+
 ## 3. Commit after each part
 
 After the last field of each part of the form (Part I, Part II, …), or of each page when the form has no parts:

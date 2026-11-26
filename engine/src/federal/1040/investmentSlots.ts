@@ -7,7 +7,9 @@
 
 import { isDividendFactKey, isInterestFactKey } from "../../facts/index.js";
 import { exchangeRateGap, waitsForExchangeRate } from "../../incomeInDollars.js";
+import { sum } from "../../money.js";
 import { factsInCategory, sumInvestmentBox, type ResolverInputs } from "../../resolverInputs.js";
+import { bondCreditInterest } from "../8912/interest.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 
 type Slot<K extends keyof Form1040FilingInfo> = Form1040FilingInfo[K];
@@ -26,7 +28,7 @@ const kindWaits = (inputs: ResolverInputs, isKind: (key: string) => boolean) =>
  * The filter pins each box to 1099-INT: other 1099 sections may reuse low
  * box names. No interest facts: undefined, so the cells stay blank, not "0".
  */
-export function interestSlots(inputs: ResolverInputs): Form1040FilingInfo {
+function documentInterestSlots(inputs: ResolverInputs): Form1040FilingInfo {
   if (factsOfKind(inputs, isInterestFactKey).length === 0 || kindWaits(inputs, isInterestFactKey)) {
     return { taxableInterestTotal: undefined, taxExemptInterestTotal: undefined };
   }
@@ -35,6 +37,24 @@ export function interestSlots(inputs: ResolverInputs): Form1040FilingInfo {
     // Box 3 (US savings bond and Treasury interest) is taxable federally, as on Schedule B line 1.
     taxableInterestTotal: (box("box1") + box("box3")) as Slot<"taxableInterestTotal">,
     taxExemptInterestTotal: box("box8") as Slot<"taxExemptInterestTotal">,
+  };
+}
+
+/*
+ * MANUAL EDIT: a held tax credit bond's credit that no Form 1099-INT reports
+ * is taxable interest too (federal/8912/interest.ts), also when Schedule B does
+ * not file. It waits while a bond does; no bond, the 1099-INT totals as before.
+ */
+export function interestSlots(inputs: ResolverInputs): Form1040FilingInfo {
+  const slots = documentInterestSlots(inputs);
+  const bondInterest = bondCreditInterest(inputs).map((row) => row.amount);
+  if (bondInterest.length === 0 || kindWaits(inputs, isInterestFactKey)) return slots;
+  const waits = bondInterest.some((amount) => amount === undefined);
+  return {
+    ...slots,
+    taxableInterestTotal: waits
+      ? undefined
+      : (sum(slots.taxableInterestTotal, ...bondInterest) as Slot<"taxableInterestTotal">),
   };
 }
 

@@ -39,7 +39,7 @@ export interface ScheduleBFilingInfo
     BaseFilingInfo,
     Pick<Form8814FilingInfo, "form8814Totals">,
     Pick<Form8621FilingInfo, "form8621Totals"> {
-  /** 1099-INT box 1 + box 3, then each K-1's interest (passThroughInterest). */
+  /** 1099-INT box 1 + box 3, then each K-1's interest (passThroughInterest), then each held tax credit bond's credit no 1099-INT reports. */
   interestPayers?: PayerAmount[];
   /** 1099-DIV box 1a, each K-1's dividends, a "Form 8814" row for each Form 8814 line 9, then each PFIC's dividends. */
   dividendPayers?: PayerAmount[];

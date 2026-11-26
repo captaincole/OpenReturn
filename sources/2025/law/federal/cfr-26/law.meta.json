@@ -1,0 +1,20 @@
+{
+  "docId": "cfr-26-2025",
+  "title": "Treasury Regulations (26 CFR Parts 1 and 301), as of 2025-12-31",
+  "publisher": "OFR",
+  "taxYear": 2025,
+  "format": "ecfr",
+  "releasePoint": "2025-12-31",
+  "files": [
+    {
+      "file": "part-1.xml",
+      "sourceUrl": "https://www.ecfr.gov/api/versioner/v1/full/2025-12-31/title-26.xml?part=1",
+      "sha256": "d3ffe20ff78742e85ba9148a4c3b25cbe6fbc1423ac421fcefca37582642d300"
+    },
+    {
+      "file": "part-301.xml",
+      "sourceUrl": "https://www.ecfr.gov/api/versioner/v1/full/2025-12-31/title-26.xml?part=301",
+      "sha256": "1aa016bb279a1b4726d26d192da7016dd792b61ff8707fe13002916cb5f5b5c8"
+    }
+  ]
+}

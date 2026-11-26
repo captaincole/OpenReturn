@@ -67,6 +67,37 @@ describe("askTurn workflow", () => {
     expect(turn?.durationMs).toBeGreaterThanOrEqual(0);
   });
 
+  it("keeps the statute round and the conflicts in the query log, and shows the conflicts", async () => {
+    const conflict = {
+      kind: "instruction_vs_statute" as const,
+      a: { blockId: "irs-pub-225-2025::sec::excess-business-loss::b01", quote: "are included" },
+      b: {
+        blockId: "usc-26-2025::sec::s461::l-3-B",
+        quote: "shall not be taken into account",
+        citation: "26 U.S.C. § 461(l)(3)(B)",
+      },
+      note: "They disagree on capital losses.",
+    };
+    ask = async () => ({
+      ...answered,
+      statuteConsulted: true,
+      conflicts: [conflict],
+      log: { steps: [{ kind: "statute", queries: [] }] },
+    });
+    const { turn } = await runTurn("Does a business capital loss count?");
+    expect(turn?.conflicts).toEqual([conflict]);
+    const db = await import("../../../../src/mastra/db/appDb");
+    const row = await db.getAppDb().execute({
+      sql: "SELECT log_json FROM ask_turns WHERE id = ?",
+      args: [turn!.id],
+    });
+    expect(JSON.parse(String(row.rows[0].log_json))).toEqual({
+      steps: [{ kind: "statute", queries: [] }],
+      statuteConsulted: true,
+      conflicts: [conflict],
+    });
+  });
+
   it("marks the turn failed when Canon's run failed, keeping its log", async () => {
     ask = async () => ({ status: "failed", error: "answer: no output", log: { steps: [] } });
     const { result, turn } = await runTurn("Is it deductible?");

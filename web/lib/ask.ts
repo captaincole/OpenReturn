@@ -1,6 +1,7 @@
 import { agentUrl } from "@/lib/agentBase";
 import { UnauthorizedError } from "@/lib/api";
 import { canonUrl } from "@/lib/canonBase";
+import { statuteHref } from "@/lib/statuteCitations";
 
 /* Types mirror cade/src/mastra/db/askThreads.ts and db/refLibrary.ts. Keep in sync by hand. */
 
@@ -19,6 +20,26 @@ export interface AskCitation {
   sectionHeading: string | null;
   pageNum: number;
   quote: string;
+  /** A statute passage only: "26 U.S.C. § 469(g)(1)". */
+  citation?: string;
+}
+
+export type ConflictKind =
+  "instruction_vs_instruction" | "instruction_vs_statute" | "statute_vs_statute";
+
+export interface ConflictSide {
+  blockId: string;
+  quote: string;
+  /** A statute block only: "26 U.S.C. § 461(l)(3)(B)". */
+  citation?: string;
+}
+
+/* Two texts that disagree; the answer names no winner. */
+export interface AskConflict {
+  kind: ConflictKind;
+  a: ConflictSide;
+  b: ConflictSide;
+  note: string;
 }
 
 export interface AskTurn {
@@ -31,6 +52,7 @@ export interface AskTurn {
   coverage: AskCoverage | null;
   citations: AskCitation[];
   missingDocuments: string[];
+  conflicts: AskConflict[];
   error: string | null;
   createdAt: string;
   completedAt: string | null;
@@ -124,8 +146,10 @@ export function refDocPageUrl(docId: string, anchor?: string): string {
   return anchor ? `${url}#${anchor}` : url;
 }
 
-/* Block ids are `<docId>::sec::<anchor>::bNN`. */
+/* Block ids are `<docId>::sec::<anchor>::bNN`; a statute block opens its section page. */
 export function citationUrl(citation: AskCitation): string {
+  const statute = statuteHref(citation.blockId);
+  if (statute) return statute;
   if (citation.format !== "html") return refDocPdfUrl(citation.docId, citation.pageNum);
   const anchor = citation.blockId.split("::")[2];
   return refDocPageUrl(citation.docId, anchor === "preamble" ? undefined : anchor);
