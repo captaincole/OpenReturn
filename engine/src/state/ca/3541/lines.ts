@@ -32,6 +32,12 @@ export interface FilmProgram {
    * (ca-3541-inst-2025::sec::c-limitations::b01).
    */
   section: FilmCreditSection;
+  /*
+   * "the unused credit may be carried over for six years for the original
+   * credit, and nine years for the new, program 3.0, soundstage filming, and
+   * program 4.0 credit" (ca-3541-inst-2025::sec::d-carryover::b01).
+   */
+  carryoverYears: 6 | 9;
 }
 
 /*
@@ -46,6 +52,7 @@ export const FILM_PROGRAMS: ReadonlyArray<FilmProgram> = [
     code: "223",
     name: "Motion Picture",
     section: "A2",
+    carryoverYears: 6,
   },
   {
     firstCertificate: 5000,
@@ -53,6 +60,7 @@ export const FILM_PROGRAMS: ReadonlyArray<FilmProgram> = [
     code: "237",
     name: "New Motion Picture",
     section: "A2",
+    carryoverYears: 9,
   },
   {
     firstCertificate: 7000,
@@ -60,6 +68,7 @@ export const FILM_PROGRAMS: ReadonlyArray<FilmProgram> = [
     code: "239",
     name: "Program 3.0 Motion Picture",
     section: "B2",
+    carryoverYears: 9,
   },
   {
     firstCertificate: 8000,
@@ -67,6 +76,7 @@ export const FILM_PROGRAMS: ReadonlyArray<FilmProgram> = [
     code: "245",
     name: "Soundstage Filming",
     section: "B2",
+    carryoverYears: 9,
   },
   {
     firstCertificate: 8200,
@@ -74,6 +84,7 @@ export const FILM_PROGRAMS: ReadonlyArray<FilmProgram> = [
     code: "248",
     name: "Program 4.0 Motion Picture",
     section: "B2",
+    carryoverYears: 9,
   },
 ];
 

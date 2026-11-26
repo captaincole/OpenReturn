@@ -5,7 +5,10 @@ California Film Commission's "Program 4.0 Refundability Summary" (July 2023)
 has two examples for Part IV; they are unit tests (`lines.test.ts`). Every
 other rule is a stated rule or the author's reading.
 
-## Two texts conflict (decided by the author)
+## Two texts conflict
+
+Decided by the author; each has a DECISION comment and a row in
+`docs/rule-decisions.md`.
 
 ### 1. The order of the Section B2 credits (A68)
 
@@ -27,15 +30,18 @@ other rule is a stated rule or the author's reading.
 - Default: column (d) also subtracts Part IV line 22.
 - Changes dollars: only the printed carryover. DECISION in `schedule-p/sectionB2.ts`.
 
-## Doubts with no conflicting text
+## Should we do this now
+
+Doubts with no conflicting text. Each says whether it is done, or why not now.
 
 ### 3. Line 11 adds lines 1 to 5a
 
 - Source: "Subtract line 10 from any entry made on line 1, line 2, line 3,
   line 4a, or line 5a" (the form; `::part-i-available-credit::b01`).
 - Default: line 11 is the total of lines 1, 2, 3, 4a and 5a, less line 10,
-  not less than 0. A certificate has one of lines 1 to 4a, plus a carryover.
-- Changes dollars: no, for one certificate a form.
+  not less than 0.
+- Done. It changes no dollars: a certificate passes through once, so one
+  form has either a current-year amount (lines 1 to 4a) or a carryover.
 
 ### 4. Several certificates of one code
 
@@ -46,7 +52,8 @@ other rule is a stated rule or the author's reading.
 - Default: Schedule P (540) has one line per code. Line 12a of each form is
   its share of the code's credit taken, the oldest certificate first (year
   issued, then the order recorded).
-- Changes dollars: no total; it moves the carryover between forms.
+- Done; `moria` has two certificates of code 239. It moves the carryover
+  between forms and changes no total.
 
 ### 5. Line 22 at zero or less
 
@@ -54,7 +61,7 @@ other rule is a stated rule or the author's reading.
   credit" (the form).
 - Default: line 22 prints 0, lines 23 to 26 and 12d stay blank, and the
   election box is not checked.
-- Changes dollars: no.
+- Done. Changes no dollars.
 
 ### 6. The election and the credits after it
 
@@ -65,7 +72,9 @@ other rule is a stated rule or the author's reading.
   and Form 540 line 74 are unsupported. With two program 4.0 certificates and
   an election, Part IV is unsupported: line 21 of each form would take the
   same tax.
-- Changes dollars: not figured.
+- Not now: it needs Schedule P (540) to apply the later credits before
+  program 4.0 only for line 21, a change to Schedule P's order for a rare
+  return.
 
 ### 7. Who may elect
 
@@ -75,7 +84,7 @@ other rule is a stated rule or the author's reading.
   complete this part if you have purchased credits" (the form).
 - Default: a bought credit, or a certificate issued before 2025, has no Part
   IV even when the fact says it elects.
-- Changes dollars: yes, line 74, but the instructions settle it.
+- Done. It changes line 74, but the instructions settle it.
 
 ### 8. Line 25 and the $5,000,000 limit
 
@@ -85,7 +94,8 @@ other rule is a stated rule or the author's reading.
   credits taken plus line 24, the credit and line 25 are unsupported; line 12c
   (the FTB 3870 election) stays blank. Other business credits (FTB 3801-CR's
   research credit) are not counted toward the limit.
-- Changes dollars: only above the limit.
+- Not now: the limit covers every business credit form, so it belongs in one
+  shared module (Pattern change below).
 
 ### 9. Lines an individual leaves blank
 
@@ -94,7 +104,7 @@ other rule is a stated rule or the author's reading.
   affiliates", `::part-i-available-credit::b03`), 7 and Part III ("If you are
   not a corporation, skip Part III"), and 8 (the credit an entity passes
   through). Line 12b prints 0 ("If you are not a corporation, enter 0").
-- Changes dollars: no.
+- Done. Changes no dollars.
 
 ### 10. A stated carryover past its carryover period
 
@@ -103,14 +113,18 @@ other rule is a stated rule or the author's reading.
   filming, and program 4.0 credit" (`::d-carryover::b01`); "The carryover
   period for disallowed credit is extended by the number of taxable years the
   credit was not allowed" (`::important-information::b03`).
-- Default: line 5a is the carryover the taxpayer states. The engine does not
-  test its age: an original credit (code 223) on a certificate issued in 2017
-  carries over to 2023, so a stated 2025 carryover may have expired, unless a
-  year of the $5,000,000 limit extended it. The form has no line for the test.
-  The engine also takes a stated carryover on a certificate issued in 2025,
-  which cannot have one.
-- Changes dollars: yes. An expired carryover would make line 5a, line 11 and
-  line 12a 0 (blind case 3: line 12a 5,000 and line 13 7,000 today).
+- Default (2026-11-26, after the tax review): the period counts from the year
+  the certificate was issued. A carryover stated after it is unsupported on
+  line 5a and from line 10 on, not 0, because an earlier year of the
+  $5,000,000 limit may have extended it and the engine does not track those
+  years. In 2025 only an original credit (code 223) issued before 2019
+  reaches it; the nine-year credits began in 2016 or later. `lyrelle`'s
+  original certificate is now issued in 2020.
+- Done, with two limits left. The instructions do not say whether the period
+  counts from the year issued or the year first claimed; for a 2025 return
+  both give the same answer. A carryover stated on a certificate issued in
+  2025 cannot exist and is not refused: not now, because it is an input
+  error that no text makes a rule of.
 
 ### 11. The 10% of line 22 that Part IV does not refund
 
@@ -121,7 +135,7 @@ other rule is a stated rule or the author's reading.
 - Default: line 13 is line 11 less lines 12a, 12b and 12d, and line 12a is
   the smaller of the tax left and line 11 less line 12d. The 10% of line 22
   that line 23 keeps out is neither refunded nor carried over.
-- Changes dollars: yes, the carryover. Blind case 7 (line 22 27,000) would
+- Done as the form's arithmetic says. Blind case 7 (line 22 27,000) would
   carry 2,700 more if the 10% were carried.
 
 ### 12. Line 20 when part of the credit went against sales and use tax
@@ -130,9 +144,30 @@ other rule is a stated rule or the author's reading.
   line 21 adds "any amounts entered in Part I, line 10" (`::b02` above).
 - Default: line 20 is the gross amount on line 1 or 2, before line 10 comes
   off, and line 21 adds line 10 back, as the form says.
-- Changes dollars: yes, under the other reading. Blind case 14 (line 2
-  20,000, line 9 4,000, tax 10,000): line 22 is 6,000 today; with line 20 net
-  of line 10 (16,000) and line 21 still adding line 10, line 22 would be 2,000.
+- Done as the form says. Blind case 14 (line 2 20,000, line 9 4,000, tax
+  10,000): line 22 is 6,000; with line 20 net of line 10 (16,000) and line 21
+  still adding line 10, line 22 would be 2,000.
+
+## Pattern change
+
+### Proposals for a discussion
+
+- **An input document for the credit.** Before: the credit comes on a CFC
+  Tax Credit Certificate (no official FTB form) or on a California Schedule
+  K-1 (565, 568, 100S, 541) line 15f statement, and the taxpayer states its
+  values as a fact, as for FTB 3801-CR and FTB 3804-CR. After: a person
+  decides what the certificate document looks like, or the California K-1
+  becomes an input document family that Cade reads.
+- **FTB 3551 and the income from a sale or purchase.** Before: a credit sold,
+  or bought below its amount, is unsupported, because the seller reports the
+  sale price as gain and the buyer reports the discount as income
+  (`::important-information::b06`). After: FTB 3551 and a California income
+  line carry those amounts, and lines 3 and 6 compute.
+- **The business credit limitation and FTB 3870.** Before: each credit form
+  checks the $5,000,000 limit on its own credits only (FTB 3801-CR has the
+  same open point, `3801-cr/QUESTIONS.md` item 8). After: one module totals
+  every business credit taken, applies the limit for all credit forms, and
+  fills FTB 3541 lines 12c and 25.
 
 ## Second opinions
 
@@ -153,25 +188,24 @@ other rule is a stated rule or the author's reading.
 | Field group | Confidence |
 | --- | --- |
 | Header, boxes, lines A to C | stated rule |
-| Lines 1 to 3, 5a, 9, 10, 11 | stated rule (line 11: own reading, item 3) |
+| Lines 1 to 3, 5a, 9, 10, 11 | stated rule (line 11: own reading, item 3; line 5a: the period test, item 10) |
 | Lines 4a to 4c, 5b, 7, 8, Part III (14 to 19), 12b, 12c | stated rule (blank or 0 for an individual) |
 | Line 6 | unsupported when a credit is sold (FTB 3551 and the gain are not in the engine) |
 | Line 12a, 13 | stated rule, with the order of A68 and item 4 |
 | Lines 20 to 24 | published example with numbers (CFC Examples 1 and 2) |
 | Lines 25, 26 | stated rule (unsupported above $5,000,000) |
 
-## Proposals for a discussion
+## Rows past the form's limit
 
-- **An input document for the credit.** The credit comes on a CFC Tax Credit
-  Certificate (no official FTB form) or on a California Schedule K-1 (565,
-  568, 100S, 541) line 15f statement. The engine reads neither; the taxpayer
-  states the certificate's values, as for FTB 3801-CR and FTB 3804-CR. A
-  person decides what the certificate document looks like, or whether the
-  California K-1 becomes an input document family.
-- **FTB 3551 and the income from a sale or purchase.** A seller reports the
-  sale price as gain and a buyer reports the discount as income
-  (`::important-information::b06`). Both need FTB 3551 and a California
-  income line; today both cases are unsupported.
-- **The business credit limitation and FTB 3870.** One module could total
-  every business credit taken and apply the $5,000,000 limit for all credit
-  forms (FTB 3801-CR has the same open point, `3801-cr/QUESTIONS.md` item 8).
+- One form per certificate: the engine files a copy for each certificate fact
+  (`lyrelle` has five).
+- Part III has five assignee rows, for corporations only; an individual skips
+  Part III.
+- Schedule P (540) Section A2: the two film codes (223, 237) go on lines 6
+  and 7, so they always fit.
+- Schedule P (540) Section B2: the engine fills lines 16 to 18 for the film
+  and passive credits. A fourth credit is unsupported with its reason
+  (`TOO_MANY_B2_CREDITS`; `form.test.ts`, "a fourth Section B2 credit is a
+  gap"). Line 19 is not filled: not now, because the Section B2 rows are
+  shared with FTB 3801-CR (`3801-cr/creditUsed.ts`) and four such credits on
+  one return are rare.

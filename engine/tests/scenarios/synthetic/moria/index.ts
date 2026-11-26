@@ -26,7 +26,7 @@ const FORM_IDS = [
 export const moriaScenario: Scenario = {
   name: "moria",
   description:
-    "Single Santa Monica cinematographer with a program 3.0 film credit (FTB 3541 lines 2 and 5a) and a Utah tax credit: Form 540 lines 43 and 44 with no Schedule P (540), Schedule S line 2 after the film credit.",
+    "Single Santa Monica cinematographer with two program 3.0 film certificates (FTB 3541 line 2 on one, line 5a on the other) and a Utah tax credit: Form 540 lines 43 and 44 with no Schedule P (540), Schedule S line 2 after the film credit.",
   taxYear: MORIA_TAX_YEAR,
   userId: MORIA_USER_ID,
   verification: "unverified",

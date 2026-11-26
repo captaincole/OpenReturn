@@ -105,15 +105,13 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
     engineFields: {
       // Line 2. Credit received from pass-through entities (Schedule K-1). See instructions.
       "form-3541.0.line.2_credit_from_passthrough_entities": 3000,
-      // Line 5a. Credit carryover from prior year.
-      "form-3541.0.line.5a_credit_carryover_prior_year": 1500,
-      // Line 11. Total available credit. Subtract line 10 from any entry made on line 1, line 2, l
-      "form-3541.0.line.11_total_available_credit": 4500,
-      // Part II, Line 12a. Credit claimed. Enter the amount of the nonrefundable credit claimed on
-      "form-3541.1.line.12a_credit_claimed": 4500,
+      // Line 11. Total available credit. MANUAL EDIT: line 5a is blank here; the carryover is on the 2023 certificate's form.
+      "form-3541.0.line.11_total_available_credit": 3000,
+      // Part II, Line 12a. Credit claimed. MANUAL EDIT: the code's 4,500 taken, the 2023 certificate (1,500) first.
+      "form-3541.1.line.12a_credit_claimed": 3000,
       // MANUAL EDIT: verified zeros. Line 12b: "If you are not a corporation, enter 0".
       "form-3541.1.line.12b_total_credit_assigned": 0,
-      // Line 13: 4,500 − (4,500 + 0).
+      // Line 13: 3,000 − (3,000 + 0).
       "form-3541.1.line.13_credit_carryover_future_years": 0,
     },
   },

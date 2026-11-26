@@ -194,6 +194,36 @@ describe("FTB 3541 gaps", () => {
     expect(isGap(run.field("form-3541", "1.line.12a_credit_claimed"))).toBe(true);
   });
 
+  it("an original carryover past its six years is a gap; within them it is taken", () => {
+    const carryover = {
+      ...PROGRAM_30,
+      certificateNumber: 3127,
+      credit: 0,
+      carryoverFromPriorYear: 1200,
+    };
+    const expired = evaluate(withoutOtherState(withFilm(base, { ...carryover, yearIssued: 2018 })));
+    expect(isGap(expired.field("form-3541", "0.line.5a_credit_carryover_prior_year"))).toBe(true);
+    expect(isGap(expired.field("form-3541", "0.line.11_total_available_credit"))).toBe(true);
+    expect(isGap(expired.field("form-3541", "1.line.12a_credit_claimed"))).toBe(true);
+    const lastYear = evaluate(
+      withoutOtherState(withFilm(base, { ...carryover, yearIssued: 2019 })),
+    );
+    expect(lastYear.line("0.line.5a_credit_carryover_prior_year")).toBe(1200);
+    expect(lastYear.line("0.line.11_total_available_credit")).toBe(1200);
+  });
+
+  it("a new credit's carryover keeps nine years", () => {
+    const newCredit = {
+      ...PROGRAM_30,
+      certificateNumber: 5408,
+      yearIssued: 2016,
+      credit: 0,
+      carryoverFromPriorYear: 1200,
+    };
+    const run = evaluate(withoutOtherState(withFilm(base, newCredit)));
+    expect(run.line("0.line.11_total_available_credit")).toBe(1200);
+  });
+
   it("film credits over $5,000,000 are a gap", () => {
     const run = evaluate(withFilm(base, { ...PROGRAM_30, credit: 5_000_001 }));
     expect(isGap(run.field("form-3541", "1.line.12a_credit_claimed"))).toBe(true);

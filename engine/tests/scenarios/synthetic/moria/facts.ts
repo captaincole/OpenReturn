@@ -1,8 +1,8 @@
 /*
  * Made-up taxpayer (README.md): a single full-year California resident in
- * Santa Monica, a cinematographer with a program 3.0 motion picture credit
- * from a production partnership (this year's share and last year's unused
- * part) and tax paid to Utah on wages. Every name, number and address is
+ * Santa Monica, a cinematographer with program 3.0 motion picture credits
+ * from a production partnership (this year's share of one film and the
+ * unused share of an earlier one) and tax paid to Utah on wages. Every name, number and address is
  * invented. The K-1 statement and the Utah return are not in the engine:
  * their amounts are her answers. Her K-1 income is left out on purpose.
  */
@@ -77,20 +77,34 @@ const utah: OtherStateTaxFactValue = {
   otherStateAdjustedGrossIncome: 30000,
 };
 
-/* Program 3.0 certificate of the partnership: this year's share and last year's unused credit. */
+/*
+ * Two program 3.0 certificates of the partnership, one form each: this
+ * year's share of a 2025 film, and the unused share of a 2023 film. A
+ * certificate passes through once, so one certificate does not have both.
+ */
+const LONG_SHADOW = {
+  name: "Long Shadow Features LP",
+  idType: "fein" as const,
+  idNumber: "000007488",
+  sosFileNumber: "202200617488",
+};
 const certificate: CaFilmCreditFactValue = {
   certificateNumber: 7488,
-  yearIssued: 2024,
+  yearIssued: 2025,
   copyrightRegistrationNumber: "PA0009355840",
   source: "pass_through",
   credit: 3000,
+  carryoverFromPriorYear: 0,
+  owner: LONG_SHADOW,
+};
+const earlierCertificate: CaFilmCreditFactValue = {
+  certificateNumber: 7102,
+  yearIssued: 2023,
+  copyrightRegistrationNumber: "PA0009120417",
+  source: "pass_through",
+  credit: 0,
   carryoverFromPriorYear: 1500,
-  owner: {
-    name: "Long Shadow Features LP",
-    idType: "fein",
-    idNumber: "000007488",
-    sosFileNumber: "202200617488",
-  },
+  owner: LONG_SHADOW,
 };
 
 export const moriaFacts: TaxFactRow[] = [
@@ -118,6 +132,12 @@ export const moriaFacts: TaxFactRow[] = [
     "other",
     makeCaFilmCreditFactKey("long-shadow"),
     certificate,
-    "Verbal, from the Schedule K-1 (565) line 15f statement of Long Shadow Features LP and her filed 2024 FTB 3541 line 13.",
+    "Verbal, from the Schedule K-1 (565) line 15f statement of Long Shadow Features LP.",
+  ),
+  fact(
+    "other",
+    makeCaFilmCreditFactKey("long-shadow-2023"),
+    earlierCertificate,
+    "Verbal, from her filed 2024 FTB 3541 for certificate 7102, line 13.",
   ),
 ];

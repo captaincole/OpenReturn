@@ -85,7 +85,7 @@ const certificates: Array<[string, CaFilmCreditFactValue, string]> = [
     "harbor-light",
     {
       certificateNumber: 3127,
-      yearIssued: 2017,
+      yearIssued: 2020,
       copyrightRegistrationNumber: "PA0002093318",
       source: "pass_through",
       credit: 0,

@@ -11,6 +11,7 @@ import { defineForm, type BindingFn, type FormAccessor } from "../../../defineFo
 import { namesOnReturn } from "../../../federal/returnNames.js";
 import type { Unsupported } from "../../../types.js";
 import {
+  carryoverPastPeriod,
   certificateFigures,
   certificateProgram,
   CREDIT_SOLD,
@@ -117,7 +118,15 @@ const partI: Bindings = {
   "0.line.4a_credit_from_affiliated_corporations": () => undefined,
   "0.line.4b_assignor_name": () => undefined,
   "0.line.4c_assignor_id_number": () => undefined,
-  "0.line.5a_credit_carryover_prior_year": stated((lines) => lines.line5a),
+  "0.line.5a_credit_carryover_prior_year": (form, info) => {
+    const row = rowOf(info);
+    const program = row === undefined ? undefined : certificateProgram(row);
+    const expired =
+      row === undefined || program === undefined || isGap(program)
+        ? undefined
+        : carryoverPastPeriod(row, program);
+    return expired ?? stated((lines) => lines.line5a)(form, info);
+  },
   // Line 5b: "only if you are an entity with affiliates" (ca-3541-inst-2025::sec::part-i-available-credit::b03).
   "0.line.5b_assignable_credit_carryover": () => undefined,
   "0.line.6_credit_sold_to_entities": (_, info) =>
