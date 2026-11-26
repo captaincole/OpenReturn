@@ -72,6 +72,7 @@ import {
 import {
   line71CaIncomeTaxWithheld,
   line72CaEstimatedTaxPayments,
+  line74MotionPictureProductionCredit,
   line75Eitc,
   line76YoungChildTaxCredit,
   line77FosterYouthTaxCredit,
@@ -224,6 +225,7 @@ export function register(): void {
       // Payments, lines 71 to 78 (payments.ts).
       "line.71_ca_income_tax_withheld": line71CaIncomeTaxWithheld,
       "line.72_ca_estimated_tax_payments": line72CaEstimatedTaxPayments,
+      "line.74_motion_picture_production_credit": line74MotionPictureProductionCredit,
       "line.75_eitc": line75Eitc,
       "line.76_young_child_tax_credit": line76YoungChildTaxCredit,
       "line.77_foster_youth_tax_credit": line77FosterYouthTaxCredit,
@@ -302,8 +304,6 @@ export function register(): void {
         "Nonrefundable Renter's Credit eligibility requires income limits, rent paid, landlord details, and rental address data — no fact ingestion path or scenario built for this yet.",
       "line.73_withholding_592b_593":
         "Form 592-B and 593 withholding (partnership/LLC/real estate withholding) requires separate fact ingestion — no ingestion path or scenario built yet.",
-      "line.74_motion_picture_production_credit":
-        "CA Motion Picture and Television Production Credit (FTB 3541) requires allocation/certification data from the California Film Commission — no ingestion path or scenario built yet.",
       "line.98_applied_to_2026_estimated_tax":
         "Taxpayer-elected amount applied to 2026 estimated tax — this is a discretionary user input with no fact or decision key; we'd need an estimated-tax-election intake flow to support it.",
       "line.contrib_400_ca_seniors_special_fund":

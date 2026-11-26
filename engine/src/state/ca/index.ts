@@ -299,6 +299,11 @@ export const CA_FORMS: FormSpec[] = [
     displayName: "FTB 3541",
     relativeDir: "state/ca/3541",
     register: registerForm3541,
+    /* "Report each certificate on a separate form FTB 3541" (ca-3541-inst-2025::sec::specific-line-instructions::b01). */
+    copies: {
+      count: (info) => Math.max(1, info?.filmCertificates?.length ?? 1),
+      select: (info, index) => info && { ...info, form3541CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-3800-ca",

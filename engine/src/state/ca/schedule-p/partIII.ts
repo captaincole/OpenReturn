@@ -233,8 +233,7 @@ export const partIIICreditRows: Unsupported = Object.fromEntries([
     "1.part3.4_prison_inmate_labor_credit_col_b",
     "1.part3.4_prison_inmate_labor_credit_col_c",
   ),
-  ...codedCreditRow(2, 6, "Section A2"),
-  ...codedCreditRow(2, 7, "Section A2"),
+  // Lines 6 and 7 hold FTB 3541's original and new credits (sectionA2.ts).
   ...codedCreditRow(2, 8, "Section A2"),
   ...codedCreditRow(2, 9, "Section A2"),
   ...row(
