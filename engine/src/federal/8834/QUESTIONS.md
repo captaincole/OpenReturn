@@ -2,6 +2,12 @@
 
 Form 8834 now only claims a qualified electric vehicle credit from a passive activity: a credit for a vehicle placed in service before 2007 that an earlier Form 8582-CR did not allow. The engine fills it for an individual. The form and its instructions (Rev. October 2024) publish no example with numbers, and no prior revision with this layout has one. The synthetic couple `ronde` is the scenario; `tests/unit/federal/8834/` holds the limit tests.
 
+## Second opinions
+
+- Blind fill (2026-11-26): a preparer filled 14 cases from the blank form and the 2025 instructions only. All 126 values match the engine (no blank-against-0 differences either). None of the preparer's doubts changes dollars: line 5 follows A58, line 6i left out is item 2, a zero line 1 is item 4, and Form 6251 line 9 below zero is $0 in both fills.
+- PolicyEngine-US 2.154.0 (commit 363e9fc5e4): does not model Form 8834, the section 30 credit or passive activity credits. Its nonrefundable credits share one cap, the income tax before credits, with no tentative minimum tax limit, and `amt_foreign_tax_credit` is a bare input that no formula reads. Nothing to compare.
+- IRS Direct File (commit e365f9f): its fact dictionary (backend/src/main/resources/tax) has no Form 8834, Form 8582-CR or Form 6251 module. Nothing to compare.
+
 ## Confidence by field group
 
 | Field group | Confidence |
