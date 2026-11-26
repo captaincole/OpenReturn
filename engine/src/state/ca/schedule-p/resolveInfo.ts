@@ -10,6 +10,7 @@ import {
   resolveMustFile,
   type ResolverInputs,
 } from "../../../resolverInputs.js";
+import { prisonLaborCreditFactKeys } from "../3507/resolveInfo.js";
 import { claimsCaPriorYearAmtCredit } from "../3510/resolveInfo.js";
 import { filmSectionA2Fallback, moreThanTwoCreditsFallback } from "./creditCount.js";
 import type { SchedulePFilingInfo } from "./filingInfo.js";
@@ -39,6 +40,7 @@ export function resolveSchedulePInfo(inputs: ResolverInputs): SchedulePFilingInf
   );
   const itemizes = inputs.decisionByKey.get("decisions.itemize_vs_standard") === "itemized";
   const files540 = inputs.decisionByKey.get("decisions.scope.must_file_ca_540") === true;
+  const prisonLabor = prisonLaborCreditFactKeys(inputs);
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_p",
     fallbacks: [
@@ -60,6 +62,17 @@ export function resolveSchedulePInfo(inputs: ResolverInputs): SchedulePFilingInf
         rule: "fallback: Form 540 files with a credit for prior year AMT (FTB 3510)",
         value: files540 && claimsCaPriorYearAmtCredit(inputs),
         triggeredByFactKeys: [CA_PRIOR_YEAR_AMT_KEYS.amt, CA_PRIOR_YEAR_AMT_KEYS.creditCarryover],
+        triggeredByDecisionKeys: ["decisions.scope.must_file_ca_540"],
+      },
+      /*
+       * "You have credits that are reported in Part III, Section A1"
+       * (::b-who-must-file::b01 above): the prison inmate labor credit, code
+       * 162, offsets tax in Section A1 (ca-540-sched-p-inst-2025::sec::credit-table::b02).
+       */
+      {
+        rule: "fallback: Form 540 files with a prison inmate labor credit (FTB 3507, Section A1)",
+        value: files540 && prisonLabor.length > 0,
+        triggeredByFactKeys: prisonLabor,
         triggeredByDecisionKeys: ["decisions.scope.must_file_ca_540"],
       },
       moreThanTwoCreditsFallback(inputs, files540),

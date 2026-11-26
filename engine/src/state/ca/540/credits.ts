@@ -1,7 +1,7 @@
 /*
  * Form 540 lines 40, 43 to 45, 47 and 48: the special credits. Line 40 is FTB
- * 3506. Lines 43 to 45 hold the other credits the engine figures: the credit
- * for prior year AMT (FTB 3510), the passive credits (FTB 3801-CR), the other
+ * 3506. Lines 43 to 45 hold the other credits the engine figures: the prison
+ * inmate labor credit (FTB 3507), the credit for prior year AMT (FTB 3510), the passive credits (FTB 3801-CR), the other
  * state tax credit (Schedule S) and the PTE elective tax credit (FTB 3804-CR).
  * They are unsupported when no such
  * form files. Line 46 stays unsupported in bindings.ts and reads as blank.
@@ -9,6 +9,8 @@
 
 import { atLeast, numberOrBlank, sum, sumOrBlank } from "../../../money.js";
 import { unsupported, type Unsupported } from "../../../types.js";
+import { files3507, prisonLaborCreditOnReturn } from "../3507/creditUsed.js";
+import { PRISON_LABOR_CREDIT_CODE, PRISON_LABOR_CREDIT_NAME } from "../3507/lines.js";
 import { files3510, priorYearAmtCreditUsed, priorYearAmtCreditWaits } from "../3510/creditUsed.js";
 import { files3541, filmCreditsUsed } from "../3541/creditUsed.js";
 import { files3801Cr, passiveCreditsUsed } from "../3801-cr/creditUsed.js";
@@ -78,9 +80,10 @@ function otherStateCreditUsed(form: Form540Form, info: Form540FilingInfo) {
 /*
  * The other credits taken, each from Schedule P (540) column (b) when it is
  * completed (ca-540-sched-p-inst-2025::sec::how-to-claim-your-credits::b01),
- * in Part III order: lines 6 and 7 (FTB 3541's original and new credits),
- * line 10 (prior year AMT), lines 16 to 18 (FTB 3541's other film credits,
- * then FTB 3801-CR's passive credits), line 20 (other state tax), line
+ * in Part III order: line 4 (prison inmate labor, FTB 3507), lines 6 and 7
+ * (FTB 3541's original and new credits), line 10 (prior year AMT), lines 16
+ * to 18 (FTB 3541's other film credits, then FTB 3801-CR's passive credits),
+ * line 20 (other state tax), line
  * 21 (PTE elective tax). "The prior year AMT credit must be applied before
  * any credits that can reduce regular tax below the TMT"
  * (ca-540-sched-p-inst-2025::sec::section-a-instructions::b01), and the PTE
@@ -96,6 +99,8 @@ function otherCredits(
 ): OtherCredit[] | Unsupported | undefined {
   const read = (fieldId: string) => form[fieldId];
   if (priorYearAmtCreditWaits(read, info)) return undefined;
+  const prisonLabor = prisonLaborCreditOnReturn(read, info);
+  if (typeof prisonLabor !== "number") return prisonLabor;
   const otherState = otherStateCreditUsed(form, info);
   if (typeof otherState !== "number") return otherState;
   const pte = pteCreditOnReturn(read, info);
@@ -110,6 +115,7 @@ function otherCredits(
       .map(({ program, used }) => ({ name: program.name, code: program.code, amount: used }));
   const priorYearAmt = files3510(info) ? (priorYearAmtCreditUsed(read) ?? 0) : 0;
   return [
+    { name: PRISON_LABOR_CREDIT_NAME, code: PRISON_LABOR_CREDIT_CODE, amount: prisonLabor },
     ...filmIn("A2"),
     { name: PRIOR_YEAR_AMT_CREDIT_NAME, code: PRIOR_YEAR_AMT_CREDIT_CODE, amount: priorYearAmt },
     ...filmIn("B2"),
@@ -120,6 +126,7 @@ function otherCredits(
 }
 
 const filesOtherCreditForm = (info: Form540FilingInfo) =>
+  files3507(info) ||
   files3510(info) ||
   filesScheduleS(info) ||
   files3804Cr(info) ||

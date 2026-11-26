@@ -1,7 +1,8 @@
 /*
- * Schedule P (540) Part III, the credit rows. Each row holds one credit. Line 5
- * (FTB 3506), line 10 (FTB 3510), line 20 (Schedule S) and line 21 (FTB
- * 3804-CR) have facts; every other row is `unsupported` with its reason.
+ * Schedule P (540) Part III, the credit rows. Each row holds one credit. Line 4
+ * (FTB 3507, prisonLaborRow.ts), line 5 (FTB 3506), line 10 (FTB 3510), line
+ * 20 (Schedule S) and line 21 (FTB 3804-CR) have facts; every other row is
+ * `unsupported` with its reason.
  * Lines 1–3, 11, 22 and 25 (the tax balances) are bound in bindings.ts.
  * Rules: ca-540-sched-p-inst-2025::sec::to-complete-part-iii::b01 (a row is
  * completed only for a credit taken) and ::sec::column-a-through-column-d-instructions::b01.
@@ -227,13 +228,10 @@ function codedCreditRow(page: 2 | 3, line: 6 | 7 | 8 | 9 | 16 | 17 | 18 | 19, se
 }
 
 export const partIIICreditRows: Unsupported = Object.fromEntries([
-  ...row(
-    `Section A1 line 4, prison inmate labor credit (FTB 3507) — ${NO_CREDIT_FACTS}.`,
-    "1.part3.4_prison_inmate_labor_credit_col_a",
-    "1.part3.4_prison_inmate_labor_credit_col_b",
-    "1.part3.4_prison_inmate_labor_credit_col_c",
-  ),
-  // Lines 6 and 7 hold FTB 3541's original and new credits (sectionA2.ts).
+  /*
+   * Line 4 holds FTB 3507's credit (prisonLaborRow.ts). Lines 6 and 7 hold
+   * FTB 3541's original and new credits (sectionA2.ts).
+   */
   ...codedCreditRow(2, 8, "Section A2"),
   ...codedCreditRow(2, 9, "Section A2"),
   ...row(

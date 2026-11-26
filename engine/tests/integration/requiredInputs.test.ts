@@ -401,6 +401,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "while an answer inside it (name, number, credit) is missing",
   ],
   [
+    /^ca_prison_inmate_labor_pass_through\.[^.]+$/,
+    "each fact is a whole entity's pass-through prison inmate labor credit (FTB 3507 line 3, " +
+      "one K-1); whether the taxpayer has one is Cade's question. FTB 3507 lists the fact again " +
+      "while an answer inside it (name, number, credit) is missing",
+  ],
+  [
     /^ca_film_credit\.[^.]+$/,
     "each fact is one whole California Film Commission credit certificate (one FTB 3541); " +
       "whether the taxpayer has one is Cade's question. FTB 3541 lists the fact again while an " +
