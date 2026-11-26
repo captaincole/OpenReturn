@@ -3,12 +3,12 @@ import { resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import type { IraHolder } from "../8606/filingInfo.js";
 import { form8606Filers } from "../8606/resolveInfo.js";
 import { isRothOnForm8606 } from "./designations.js";
-import { figureForms, type Form8915FFigure } from "./figure.js";
+import { MUST_FILE_8915_F_KEY, figureForms, type Form8915FFigure } from "./figure.js";
 import type { Form8915FCopy, Form8915FFilingInfo } from "./filingInfo.js";
 import type { FromForm8606Kinds } from "./partIII.js";
 import { earlyDistributionExclusions, returnTotals } from "./returnTotals.js";
 
-const MUST_FILE_KEY = "decisions.scope.must_file_8915_f";
+const MUST_FILE_KEY = MUST_FILE_8915_F_KEY;
 
 /* Item C has six places; the Part I table two (more with a statement); the Part IV table two. */
 const ITEM_C_PLACES = 6;

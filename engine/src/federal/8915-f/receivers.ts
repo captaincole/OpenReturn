@@ -10,9 +10,9 @@ import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import type { Form8915FReturn } from "./filingInfo.js";
+import { form8606Line25b } from "./partIII.js";
 
 const LINE_26 = "form-8915-f.2.line.26_amount_subject_to_tax";
-const LINE_25B = "form-8606.1.line.25b_roth_qualified_disaster_distributions";
 
 type Line = number | Unsupported | undefined;
 
@@ -23,6 +23,10 @@ const isUnsupported = (value: Line): value is Unsupported =>
 function rowsLessTakenPlusIncome(rows: number, taken: number, income: number): number {
   return atLeast(0, rows - roundDollars(taken)) + income;
 }
+
+/* No 1099-R of the kind and no income from the form: the line stays blank, as without the form. */
+const nothingToAdd = (rows: Line, taken: number, income: number) =>
+  rows === undefined && taken === 0 && income === 0;
 
 /*
  * Line 4b. `rows` is line 4b as the 1099-Rs and Form 8606 give it, undefined
@@ -41,9 +45,12 @@ export function line4bWithForm8915F(
   if (rows === undefined && hasRows) return undefined;
   const reads8606 = disaster.partIIIFromForm8606;
   const { takenFromRows, income } = disaster.ira;
-  if (!reads8606) return rowsLessTakenPlusIncome(rows ?? 0, takenFromRows, income);
+  if (!reads8606)
+    return nothingToAdd(rows, takenFromRows, income)
+      ? undefined
+      : rowsLessTakenPlusIncome(rows ?? 0, takenFromRows, income);
   const line26 = numberOrBlank(form[LINE_26]);
-  const line25b = reads8606.roth ? numberOrBlank(form[LINE_25B]) : 0;
+  const line25b = reads8606.roth ? form8606Line25b(form) : 0;
   if (line26 === undefined || line25b === undefined) return undefined;
   return rowsLessTakenPlusIncome((rows ?? 0) - line25b, takenFromRows, income + line26);
 }
@@ -54,5 +61,6 @@ export function line5bWithForm8915F(rows: Line, waits: boolean, disaster: Form89
   if (isUnsupported(rows)) return rows;
   if (rows === undefined && waits) return undefined;
   const { takenFromRows, income } = disaster.pension;
+  if (nothingToAdd(rows, takenFromRows, income)) return undefined;
   return rowsLessTakenPlusIncome(rows ?? 0, takenFromRows, income);
 }

@@ -7,7 +7,7 @@ import type { FormAccessor, FormSpec } from "../../defineForm.js";
 import { numberOrBlank } from "../../money.js";
 import { unsupported } from "../../types.js";
 import type { Form8915FCopy, Form8915FFilingInfo } from "./filingInfo.js";
-import { partIIIOf } from "./partIII.js";
+import { form8606Line25b, partIIIOf } from "./partIII.js";
 import type { PartIIILines, PartIILines, PartIVLines } from "./parts.js";
 import { box, datesText, lineOf, tableCell } from "./printed.js";
 import type { Form8915F } from "./types.js";
@@ -15,7 +15,6 @@ import type { Form8915F } from "./types.js";
 type Bindings = FormSpec<Form8915F, Form8915FFilingInfo>["bindings"];
 
 const LINE_15B = "form-8606.1.line.15b_qualified_disaster_distributions";
-const LINE_25B = "form-8606.1.line.25b_roth_qualified_disaster_distributions";
 
 const partII = <T>(pick: (lines: PartIILines) => T | undefined) =>
   lineOf((copy) => pick(copy.figure.partII));
@@ -45,7 +44,7 @@ function partIIBindings(): Bindings {
 function partIIIFor(form: FormAccessor<Form8915F>, copy: Form8915FCopy): PartIIILines {
   return partIIIOf(copy.figure, copy.onForm8606, {
     line15b: numberOrBlank(form[LINE_15B]),
-    line25b: numberOrBlank(form[LINE_25B]),
+    line25b: form8606Line25b(form),
   });
 }
 

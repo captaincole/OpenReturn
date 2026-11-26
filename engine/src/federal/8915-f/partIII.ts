@@ -5,8 +5,25 @@
  * line 17 is Yes and lines 18 and 19 copy Form 8606 lines 15b and 25b.
  */
 
+import { numberOrBlank } from "../../money.js";
 import type { Form8915FFigure } from "./figure.js";
 import { partIIILines, type PartIIILines } from "./parts.js";
+
+const LINE_23 = "form-8606.1.line.23_line_21_minus_line_22";
+const LINE_25B = "form-8606.1.line.25b_roth_qualified_disaster_distributions";
+
+/*
+ * Form 8606 line 25b as Form 8915-F line 19 and Form 1040 line 4b read it.
+ * Line 19 takes "the amount, if any, from this year's Form 8606, line 25b"
+ * (irs-8915f-face-2025::sec::face-part-iii::b01). A Form 8606 line 23 of 0
+ * skips lines 24 and 25, so line 25b holds nothing and line 19 takes 0.
+ * Undefined while Form 8606 waits.
+ */
+export function form8606Line25b(form: { readonly [fieldId: string]: unknown }) {
+  const line25b = numberOrBlank(form[LINE_25B]);
+  if (line25b !== undefined) return line25b;
+  return numberOrBlank(form[LINE_23]) === 0 ? 0 : undefined;
+}
 
 /* Which IRA kinds of the Part I distributions Form 8606 takes. */
 export interface FromForm8606Kinds {

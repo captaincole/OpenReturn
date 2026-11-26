@@ -7,6 +7,7 @@
 import { describe, expect, it } from "vitest";
 import {
   makeDisasterRetirementFactKey,
+  makeRothIraFactKey,
   type DisasterRetirementFactValue,
   type RetirementDistributionFactValue,
   type RothIraFactValue,
@@ -22,6 +23,7 @@ import {
   TRADITIONAL_IRA_KEY,
 } from "../../../scenarios/synthetic/agelmar/facts.js";
 import { agelmarScenario as base } from "../../../scenarios/synthetic/agelmar/index.js";
+import { SEPTEMBER_IRA_KEY } from "../../../scenarios/synthetic/sorilea/facts.js";
 import { sorileaScenario } from "../../../scenarios/synthetic/sorilea/index.js";
 
 const FORM_KEY = makeDisasterRetirementFactKey("taxpayer-2024");
@@ -257,6 +259,41 @@ describe("Form 8606 with Form 8915-F", () => {
       line25c: 10_000,
     });
     expect(partIIIFigures([row], roth).line25c).toBe(30_000);
+  });
+
+  it("a Roth IRA distribution within the contribution basis: line 19 is 0, line 4b keeps the IRA", () => {
+    // Form 8606 line 23 of 0 skips line 25; line 19 takes "the amount, if any" (face-part-iii::b01).
+    const facts = sorileaScenario.facts.map((fact) =>
+      fact.key === SEPTEMBER_IRA_KEY
+        ? {
+            ...fact,
+            value: { payerName: "Roth IRA", box1: 10_000, box7: "J", box7IraSepSimple: false },
+          }
+        : fact,
+    );
+    const rothFact = {
+      ...facts[0],
+      id: "roth-ira",
+      key: makeRothIraFactKey("taxpayer"),
+      value: { contributionBasis: 20_000, conversionAndRolloverBasis: 0 },
+    };
+    const run = evaluate([...facts, rothFact], sorileaScenario.decisions);
+    expect(run.value("form-8606", "1.line.23_line_21_minus_line_22")).toBe(0);
+    expect(run.value(FORM, "2.line.19_form_8606_line_25b")).toBe(0);
+    expect(run.value(FORM, "2.line.21_taxable_amount_ira")).toBe(0);
+    expect(run.value(FORM, "2.line.26_amount_subject_to_tax")).toBe(0);
+    // Form 8606 line 15c of the February traditional IRA distribution.
+    expect(run.value("form-1040", LINE_4B)).toBe(8_000);
+  });
+
+  it("the decision false: Form 8606 line 15b takes nothing, line 15c and line 4b are whole", () => {
+    const run = evaluate(sorileaScenario.facts, [
+      ...sorileaScenario.decisions,
+      decision("decisions.scope.must_file_8915_f", false),
+    ]);
+    expect(run.files(FORM)).toBe(false);
+    expect(run.value("form-8606", "1.line.15c_taxable_traditional_distributions")).toBe(30_000);
+    expect(run.value("form-1040", LINE_4B)).toBe(30_000);
   });
 });
 

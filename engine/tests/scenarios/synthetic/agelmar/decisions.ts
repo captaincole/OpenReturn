@@ -15,6 +15,7 @@ export const agelmarDecisions: AIDecisionRow[] = [
   dec("decisions.itemize_vs_standard", "standard", "No itemized deductions."),
   dec("decisions.scope.must_file_ca_540", false, "Florida resident all of 2025."),
   dec("decisions.scope.ca_residency", "non_resident", "Lived in Pensacola, FL all of 2025."),
+  dec("decisions.scope.must_file_8606", false, "No nondeductible IRA contributions, ever."),
   dec(
     "decisions.refund.refund_full_overpayment_federal",
     true,

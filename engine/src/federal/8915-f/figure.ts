@@ -283,11 +283,21 @@ export function figureForms(inputs: ResolverInputs): FigureResult[] {
   return facts.map((fact) => figureForm(inputs, rows, fact));
 }
 
-/* Part I column (b) of the person's IRAs: traditional, and the Roth IRAs Form 8606 Part III takes. */
+export const MUST_FILE_8915_F_KEY = "decisions.scope.must_file_8915_f";
+
+/*
+ * Part I column (b) of the person's IRAs: traditional, and the Roth IRAs Form
+ * 8606 Part III takes. With the decision that Form 8915-F does not file, there
+ * are none: the form "must be filed with the relevant original or amended
+ * return" for a distribution to count
+ * (irs-8915f-inst-2025::sec::qualified-disaster-distribution-requirements::b01),
+ * so Form 8606 lines 15b and 25b are 0 (irs-8606-inst-2025::sec::line-15b::b01).
+ */
 export function qualifiedDisasterIra(
   inputs: ResolverInputs,
   owner: IraOwner,
 ): { traditional?: number; roth?: number } {
+  if (inputs.decisionByKey.get(MUST_FILE_8915_F_KEY) === false) return {};
   const figured = figureForms(inputs).flatMap((result) =>
     "figure" in result && result.figure.owner === owner && result.figure.partI
       ? [result.figure.partI]
