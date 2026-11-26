@@ -1,6 +1,7 @@
 import type { Mastra } from "@mastra/core";
 import { createStep, createWorkflow } from "@mastra/core/workflows";
 import { hybridSearchRefDocs, type SearchHit } from "../../../db/corpusSearch";
+import { corpusFormat } from "../../../db/corpusStore";
 import { judge } from "../../judge";
 import { askAnswerSchema, type AskAnswerOutput } from "./judges/askAnswerer";
 import { askQueriesSchema } from "./judges/askQueryFormulator";
@@ -59,7 +60,7 @@ async function retrieve(
     blockId: hit.blockId,
     docId: hit.docId,
     documentTitle: hit.documentTitle,
-    format: hit.format,
+    format: corpusFormat(hit.format),
     published: hit.published,
     sectionHeading: hit.sectionHeading,
     pageNum: hit.pageNum,

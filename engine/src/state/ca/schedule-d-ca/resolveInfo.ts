@@ -15,7 +15,7 @@ import {
 import { form3805ETotalsOf } from "../3805e/resolveInfo.js";
 import { resolveScheduleD1Info } from "../schedule-d-1/resolveInfo.js";
 import type { ScheduleDCaFilingInfo } from "./filingInfo.js";
-import { scheduleDCaFigures, type InstallmentRow } from "./lines.js";
+import { scheduleDCaFigures, type InstallmentRow, type ScheduleDCaFigures } from "./lines.js";
 import { salesWithBases, scheduleDCaMustFile } from "./mustFile.js";
 
 const INSTALLMENT_SALE_GAP =
@@ -42,13 +42,44 @@ function installmentRows(inputs: ResolverInputs): {
   return { rows: [], gap: sendsGain ? INSTALLMENT_SALE_GAP : undefined };
 }
 
+/* The federal capital loss carryover from 2024, short and long term added. */
+export function federalCapitalLossCarryover(inputs: ResolverInputs): number {
+  return sum(...Object.values(CAPITAL_LOSS_CARRYOVER_KEYS).map((key) => num(inputs, key)));
+}
+
+/*
+ * Lines 1 to 9 and 11 from the return's sales, FTB 3805E rows, capital gain
+ * distributions, Schedule D-1 gain and the line 6 carryover given. FTB 3805V
+ * reads them too, also when this schedule does not file.
+ */
+export function californiaCapitalFigures(
+  inputs: ResolverInputs,
+  carryover: number | undefined,
+  carryoverMissing: boolean,
+): ScheduleDCaFigures {
+  const distributions = sumInvestmentBox(inputs, "box2a", isDividendFactKey);
+  const installments = installmentRows(inputs);
+  // California's section 1231 gain (Schedule D-1), figured when Form 4797 files on a Form 540 return.
+  const section1231 = resolveScheduleD1Info(inputs).californiaSection1231Gain;
+  const figures = scheduleDCaFigures({
+    sales: salesWithBases(inputs).map((sale) => sale.sale),
+    installmentRows: installments.rows,
+    capitalGainDistributions: distributions > 0 ? distributions : undefined,
+    californiaCarryover: carryover !== undefined && carryover > 0 ? carryover : undefined,
+    californiaCarryoverMissing: carryoverMissing,
+    filingStatus: filingStatusOf(inputs),
+    section1231Gain: section1231?.gap === undefined ? section1231?.gain : undefined,
+    section1231Waits: section1231?.waits,
+    section1231Gap: section1231?.gap && `Schedule D-1: ${section1231.gap}`,
+  });
+  return { ...figures, gap: figures.gap ?? installments.gap };
+}
+
 /* Schedule D (540): who files (mustFile.ts), line 6's question, and lines 1 to 11. */
 export function resolveScheduleDCaInfo(inputs: ResolverInputs): ScheduleDCaFilingInfo {
   const resolution = scheduleDCaMustFile(inputs);
   const files = resolution.value === true;
-  const federalCarryover = sum(
-    ...Object.values(CAPITAL_LOSS_CARRYOVER_KEYS).map((key) => num(inputs, key)),
-  );
+  const federalCarryover = federalCapitalLossCarryover(inputs);
   const californiaCarryover = num(inputs, CA_CAPITAL_LOSS_CARRYOVER_KEY);
   /* Line 6 (::line-6-…::b01): asked when the federal return carries a loss over and no California amount is stated. */
   const asked =
@@ -61,27 +92,9 @@ export function resolveScheduleDCaInfo(inputs: ResolverInputs): ScheduleDCaFilin
       missingInputs: { "schedule-d-ca": asked },
     };
   }
-  const distributions = sumInvestmentBox(inputs, "box2a", isDividendFactKey);
-  const installments = installmentRows(inputs);
-  // California's section 1231 gain (Schedule D-1), figured when Form 4797 files on a Form 540 return.
-  const section1231 = resolveScheduleD1Info(inputs).californiaSection1231Gain;
-  const figures = scheduleDCaFigures({
-    sales: salesWithBases(inputs).map((sale) => sale.sale),
-    installmentRows: installments.rows,
-    capitalGainDistributions: distributions > 0 ? distributions : undefined,
-    californiaCarryover:
-      californiaCarryover !== undefined && californiaCarryover > 0
-        ? californiaCarryover
-        : undefined,
-    californiaCarryoverMissing: asked.length > 0,
-    filingStatus: filingStatusOf(inputs),
-    section1231Gain: section1231?.gap === undefined ? section1231?.gain : undefined,
-    section1231Waits: section1231?.waits,
-    section1231Gap: section1231?.gap && `Schedule D-1: ${section1231.gap}`,
-  });
   return {
     mustFile: { "schedule-d-ca": resolution },
     missingInputs: { "schedule-d-ca": asked },
-    scheduleDCaFigures: { ...figures, gap: figures.gap ?? installments.gap },
+    scheduleDCaFigures: californiaCapitalFigures(inputs, californiaCarryover, asked.length > 0),
   };
 }

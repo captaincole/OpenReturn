@@ -1,0 +1,354 @@
+[
+  {
+    "id": "passive-entire-interest-sold",
+    "question": "I sold my whole share of a partnership I never worked in. It had losses I could not use in past years. Can I use them now?",
+    "queries": ["disposition of entire interest in passive activity", "loss treated as not from a passive activity fully taxable transaction"],
+    "expect": ["469"],
+    "expectPath": "469(g)(1)(A)",
+    "source": "rule-decisions #1"
+  },
+  {
+    "id": "ebl-capital-loss-excluded",
+    "question": "My business sold some investments at a loss. Does that loss count toward the cap on how much business loss I can take this year?",
+    "queries": ["excess business loss losses from sales or exchanges of capital assets", "aggregate deductions attributable to trades or businesses capital assets not taken into account"],
+    "expect": ["461"],
+    "expectPath": "461(l)(3)(B)(i)",
+    "source": "rule-decisions #2"
+  },
+  {
+    "id": "ebl-capital-gain-cap",
+    "question": "My business had a gain on a sale, but I also lost money on my personal stocks. How much of the business gain counts against the business loss cap?",
+    "queries": ["excess business loss gains from sales or exchanges of capital assets lesser of capital gain net income", "capital gain net income attributable to a trade or business"],
+    "expect": ["461"],
+    "expectPath": "461(l)(3)(B)(ii)",
+    "source": "rule-decisions #3"
+  },
+  {
+    "id": "at-risk-reduced-by-prior-loss",
+    "question": "I deducted a loss from a business last year. Does that lower how much I can deduct from it this year?",
+    "queries": ["amounts at risk in subsequent years reduced by loss allowable as a deduction", "at risk limitation loss allowed prior taxable year"],
+    "expect": ["465"],
+    "expectPath": "465(b)(5)",
+    "source": "rule-decisions #4"
+  },
+  {
+    "id": "estimated-tax-withholding-timing",
+    "question": "Taxes came out of my paychecks all year. For the underpayment penalty, when does that money count as paid?",
+    "queries": ["tax withheld on wages deemed payment of estimated tax equal part on each due date", "income tax withheld deemed payment of estimated tax"],
+    "expect": ["6654"],
+    "expectPath": "6654(g)(1)",
+    "source": "rule-decisions #6"
+  },
+  {
+    "id": "estimated-tax-no-prior-liability",
+    "question": "I owed no tax last year and did not file. Do I owe a penalty for not paying in during this year?",
+    "queries": ["no addition to tax where no tax liability for preceding taxable year", "individual did not have any liability for tax preceding taxable year of 12 months"],
+    "expect": ["6654"],
+    "expectPath": "6654(e)(2)",
+    "source": "rule-decisions #7"
+  },
+  {
+    "id": "underpayment-rate-april-1-15",
+    "question": "Which interest rate applies to an underpayment for the first two weeks of April after the year ends?",
+    "queries": ["federal short-term rate first 15 days of the 4th month following the taxable year", "underpayment rate period during which rate applies estimated tax"],
+    "expect": ["6621"],
+    "expectPath": "6621(b)(2)",
+    "source": "rule-decisions #8"
+  },
+  {
+    "id": "foreign-income-in-dollars",
+    "question": "A bank abroad paid me interest in euros. Which exchange rate turns it into dollars for my return?",
+    "queries": ["functional currency dollar all determinations", "translation into dollars exchange rate foreign currency"],
+    "expect": ["985"],
+    "expectPath": "985(b)(1)(A)",
+    "source": "rule-decisions #9 and #10"
+  },
+  {
+    "id": "minimum-tax-credit-limit",
+    "question": "I have a credit from minimum tax I paid in past years. Does the limit on it use the minimum tax before or after my foreign tax credit?",
+    "queries": ["minimum tax credit limitation regular tax liability over tentative minimum tax", "tentative minimum tax reduced by alternative minimum tax foreign tax credit"],
+    "expect": ["53", "55"],
+    "expectPath": "55(b)(1)(A)",
+    "source": "rule-decisions #12"
+  },
+  {
+    "id": "conflict-of-interest-sale",
+    "question": "I took a federal job and had to sell stock to avoid a conflict of interest. I put the money into a fund. Can I put off the tax on the gain?",
+    "queries": ["sale of property to comply with conflict-of-interest requirements certificate of divestiture", "nonrecognition of gain permitted property purchased within 60-day period"],
+    "expect": ["1043"],
+    "expectPath": "1043(a)",
+    "source": "rule-decisions #14"
+  },
+  {
+    "id": "restricted-stock-early-election",
+    "question": "My startup gave me shares that vest over four years. Can I choose to pay tax on them now, while they are worth little?",
+    "queries": ["property transferred in connection with performance of services election to include in gross income in year of transfer", "substantial risk of forfeiture election within 30 days"],
+    "expect": ["83"],
+    "expectPath": "83(b)",
+    "source": "target user: restricted stock"
+  },
+  {
+    "id": "iso-minimum-tax",
+    "question": "I exercised incentive stock options and kept the shares. Nothing showed up on my W-2. Why might I owe extra tax?",
+    "queries": ["alternative minimum taxable income adjustment incentive stock options", "exercise of incentive stock option minimum tax adjustment basis"],
+    "expect": ["56"],
+    "expectPath": "56(b)(3)",
+    "source": "target user: incentive stock options"
+  },
+  {
+    "id": "amt-exemption-phaseout",
+    "question": "My income is high. Why do I get less of the minimum tax exemption than other people?",
+    "queries": ["phase-out of exemption amount alternative minimum taxable income exceeds", "exemption amount reduced 50 percent alternative minimum taxable income"],
+    "expect": ["55"],
+    "expectPath": "55(d)(2)",
+    "source": "target user: minimum tax exemption"
+  },
+  {
+    "id": "wash-sale",
+    "question": "I sold a stock at a loss and bought the same stock again two weeks later. Can I still deduct the loss?",
+    "queries": ["wash sales loss disallowed substantially identical stock or securities acquired within 30 days", "loss from sale of stock acquired substantially identical within period 30 days before or after"],
+    "expect": ["1091"],
+    "expectPath": "1091(a)",
+    "source": "target user: wash sales"
+  },
+  {
+    "id": "main-home-sale",
+    "question": "We sold the house we lived in for six years at a big gain. How much of the gain is tax free?",
+    "queries": ["exclusion of gain from sale of principal residence owned and used 2 years", "limitation $500,000 joint return principal residence"],
+    "expect": ["121"],
+    "expectPath": "121(b)",
+    "source": "target user: sale of main home"
+  },
+  {
+    "id": "salt-limit-high-income",
+    "question": "I paid a lot of California income tax and property tax. How much can I deduct with my income over half a million?",
+    "queries": ["limitation on individual deductions state and local taxes applicable limitation amount", "applicable limitation amount phasedown modified adjusted gross income threshold amount"],
+    "expect": ["164"],
+    "expectPath": "164(b)(7)(B)",
+    "source": "target user: state and local tax limit"
+  },
+  {
+    "id": "mortgage-interest-limit",
+    "question": "My mortgage is $1.4 million. Can I deduct all the interest on it?",
+    "queries": ["qualified residence interest acquisition indebtedness limitation $750,000", "acquisition indebtedness incurred after December 15, 2017"],
+    "expect": ["163"],
+    "expectPath": "163(h)(3)(F)(i)(II)",
+    "source": "target user: home mortgage interest"
+  },
+  {
+    "id": "charity-cash-limit",
+    "question": "I gave more cash to charity this year than half my income. Can I deduct all of it this year?",
+    "queries": ["increased limitation for cash contributions 60 percent of contribution base", "charitable contribution carryover contribution base"],
+    "expect": ["170"],
+    "expectPath": "170(b)(1)(G)",
+    "source": "target user: charitable percentage limits"
+  },
+  {
+    "id": "charity-written-acknowledgment",
+    "question": "I gave $5,000 to a charity by check. What proof do I need to keep to deduct it?",
+    "queries": ["substantiation contemporaneous written acknowledgment contribution of $250 or more", "donee organization written acknowledgment requirements"],
+    "expect": ["170"],
+    "expectPath": "170(f)(8)(A)",
+    "source": "target user: charitable substantiation"
+  },
+  {
+    "id": "appreciated-stock-gift",
+    "question": "I gave stock I held for years to a donor-advised fund. It went up a lot in value. Is there a limit on what I can deduct?",
+    "queries": ["contributions of capital gain property 30 percent of contribution base", "capital gain property contribution to public charity special limitation"],
+    "expect": ["170"],
+    "expectPath": "170(b)(1)(C)(i)",
+    "source": "target user: gift of appreciated stock"
+  },
+  {
+    "id": "net-investment-income-tax",
+    "question": "Why is there an extra 3.8% tax on my dividends and gains?",
+    "queries": ["net investment income tax modified adjusted gross income over threshold amount", "3.8 percent lesser of net investment income"],
+    "expect": ["1411"],
+    "expectPath": "1411(a)(1)",
+    "source": "target user: net investment income tax"
+  },
+  {
+    "id": "additional-medicare-tax",
+    "question": "My employer took an extra 0.9% out of my pay late in the year. What is that tax?",
+    "queries": ["additional tax 0.9 percent of wages in excess of $200,000", "additional hospital insurance tax wages joint return $250,000"],
+    "expect": ["3101", "1401"],
+    "expectPath": "3101(b)(2)",
+    "source": "target user: additional Medicare tax"
+  },
+  {
+    "id": "qbi-consulting-high-income",
+    "question": "I have a K-1 from my consulting firm. My income is high. Can I take the 20% deduction for business income?",
+    "queries": ["specified service trade or business qualified business income deduction threshold amount", "qualified trade or business other than specified service trade or business taxable income"],
+    "expect": ["199A"],
+    "expectPath": "199A(d)(3)",
+    "source": "target user: qualified business income deduction"
+  },
+  {
+    "id": "capital-loss-carryover",
+    "question": "I lost $40,000 on stocks this year. How much can I deduct, and what happens to the rest?",
+    "queries": ["limitation on capital losses $3,000 excess of losses over gains", "capital loss carryover net capital loss succeeding taxable year"],
+    "expect": ["1211", "1212"],
+    "expectPath": "1211(b)",
+    "source": "target user: capital loss limit and carryover"
+  },
+  {
+    "id": "estimated-tax-safe-harbor-110",
+    "question": "How much must I pay in during the year to avoid a penalty? My income last year was well over $150,000.",
+    "queries": ["required annual payment 110 percent of tax shown on return for preceding taxable year", "limitation on use of preceding year's tax adjusted gross income exceeds $150,000"],
+    "expect": ["6654"],
+    "expectPath": "6654(d)(1)(C)",
+    "source": "target user: estimated tax safe harbors"
+  },
+  {
+    "id": "child-unearned-income",
+    "question": "My 12-year-old has a brokerage account with dividends. Is that taxed at her rate or mine?",
+    "queries": ["certain unearned income of children taxed as if parent's income net unearned income", "allocable parental tax child who has not attained age 18"],
+    "expect": ["1"],
+    "expectPath": "1(g)",
+    "source": "target user: child's unearned income"
+  },
+  {
+    "id": "hsa-nonmedical-withdrawal",
+    "question": "I took money out of my health savings account for something that was not a medical bill. What happens?",
+    "queries": ["health savings account distribution not used for qualified medical expenses additional tax 20 percent", "payment or distribution includible in gross income additional tax"],
+    "expect": ["223"],
+    "expectPath": "223(f)(4)(A)",
+    "source": "target user: health savings accounts"
+  },
+  {
+    "id": "foreign-tax-credit-limit",
+    "question": "I paid more tax to a foreign country than I would owe here on that income. Can I claim all of it as a credit?",
+    "queries": ["limitation foreign tax credit taxable income from sources without the United States", "foreign tax credit shall not exceed proportion of tax"],
+    "expect": ["904"],
+    "expectPath": "904(a)",
+    "source": "target user: foreign tax credit limitation"
+  },
+  {
+    "id": "rental-allowance-phaseout",
+    "question": "I manage my own rental house and it lost money. My income is about $400,000. Can I deduct the loss against my salary?",
+    "queries": ["$25,000 offset for rental real estate activities active participation", "reduced by 50 percent of adjusted gross income exceeds $100,000"],
+    "expect": ["469"],
+    "expectPath": "469(i)(3)(A)",
+    "source": "target user: rental real estate allowance"
+  },
+  {
+    "id": "real-estate-professional",
+    "question": "My spouse works full time managing our rental buildings. Can our rental losses offset my wages?",
+    "queries": ["rental real estate activities of persons in real property business more than 750 hours", "real property trades or businesses taxpayer materially participates one-half of personal services"],
+    "expect": ["469"],
+    "expectPath": "469(c)(7)(B)",
+    "source": "target user: real estate professional"
+  },
+  {
+    "id": "like-kind-deadlines",
+    "question": "I sold a rental and want to buy another one to put off the tax. How long do I have?",
+    "queries": ["exchange of real property of like kind identified within 45 days", "property received after 180 days treated as not like-kind property"],
+    "expect": ["1031"],
+    "expectPath": "1031(a)(3)",
+    "source": "target user: like-kind exchanges"
+  },
+  {
+    "id": "installment-sale",
+    "question": "I sold land and the buyer pays me over five years. Do I pay tax on the whole gain this year?",
+    "queries": ["installment method income from installment sale", "installment sale at least 1 payment received after close of taxable year gross profit total contract price"],
+    "expect": ["453"],
+    "expectPath": "453(a)",
+    "source": "target user: installment sales"
+  },
+  {
+    "id": "rental-depreciation-25-rate",
+    "question": "I sold a rental I had for ten years. Why is part of my gain taxed at 25% and not 15%?",
+    "queries": ["unrecaptured gain depreciation real property 25 percent", "maximum capital gains rate long-term gain from depreciation on real property"],
+    "expect": ["1", "1250"],
+    "expectPath": "1(h)(1)(E)",
+    "source": "target user: depreciation recapture on real property"
+  },
+  {
+    "id": "qualified-dividends-rate",
+    "question": "Why are some of my dividends taxed at a lower rate than others?",
+    "queries": ["qualified dividend income treated as net capital gain", "dividends from domestic corporations and qualified foreign corporations holding period"],
+    "expect": ["1"],
+    "expectPath": "1(h)(11)",
+    "source": "target user: qualified dividends rate"
+  },
+  {
+    "id": "rmd-missed-penalty",
+    "question": "I forgot to take the required yearly withdrawal from my inherited IRA. What is the penalty?",
+    "queries": ["excise tax on amount by which minimum required distribution exceeds amount distributed", "reduction of tax correction window 10 percent"],
+    "expect": ["4974"],
+    "expectPath": "4974(a)",
+    "source": "target user: required minimum distribution excise tax"
+  },
+  {
+    "id": "parent-as-dependent",
+    "question": "My mother lives on her own but I pay most of her bills. Can I claim her as a dependent?",
+    "queries": ["qualifying relative gross income less than exemption amount over one-half of support", "qualifying relative relationship father or mother"],
+    "expect": ["152"],
+    "expectPath": "152(d)(1)",
+    "source": "target user: dependent definition"
+  },
+  {
+    "id": "head-of-household",
+    "question": "I am divorced and my son lives with me most of the year. Can I file with the better single-parent rates?",
+    "queries": ["head of household not married maintains household principal place of abode qualifying child", "head of household over half of the cost of maintaining the household"],
+    "expect": ["2"],
+    "expectPath": "2(b)(1)",
+    "source": "target user: head of household definition"
+  },
+  {
+    "id": "self-employment-tax-wage-base",
+    "question": "My salary is above the Social Security maximum. I also earn consulting fees. Do I owe Social Security tax on the fees?",
+    "queries": ["self-employment income contribution and benefit base minus wages paid", "net earnings from self-employment in excess of contribution and benefit base"],
+    "expect": ["1402", "1401"],
+    "expectPath": "1402(b)(1)",
+    "source": "target user: self-employment tax"
+  },
+  {
+    "id": "home-office",
+    "question": "I run my consulting work from a spare room at home. Can I deduct part of my rent?",
+    "queries": ["business use of home portion of dwelling unit exclusively used on a regular basis principal place of business", "disallowance of deductions dwelling unit used as residence exception"],
+    "expect": ["280A"],
+    "expectPath": "280A(c)(1)",
+    "source": "target user: home office"
+  },
+  {
+    "id": "crypto-exchange-reporting",
+    "question": "Does the crypto exchange I sold coins on have to report my sales to the IRS?",
+    "queries": ["broker returns digital assets effectuating transfers on behalf of another person", "digital asset cryptographically secured distributed ledger specified security"],
+    "expect": ["6045"],
+    "expectPath": "6045(c)(1)(D)",
+    "source": "target user: digital assets reporting"
+  },
+  {
+    "id": "k1-passive-income-offsets-rental",
+    "question": "I get income on a K-1 from a company I invested in but do not run. My rental loses money. Can the K-1 income soak up the rental loss?",
+    "queries": ["passive activity loss aggregate losses from all passive activities exceed aggregate income", "passive activity trade or business taxpayer does not materially participate"],
+    "expect": ["469"],
+    "expectPath": "469(d)(1)",
+    "source": "hard direction: user's example, passive income on a K-1"
+  },
+  {
+    "id": "backdoor-roth-taxed",
+    "question": "I put money I could not deduct into an IRA and moved it to a Roth the next day. I also have an old rollover IRA. Why is most of the move taxed?",
+    "queries": ["all individual retirement plans treated as 1 contract distributions treated as 1 distribution", "qualified rollover contribution Roth IRA amount includible in gross income"],
+    "expect": ["408", "408A"],
+    "expectPath": "408(d)(2)",
+    "source": "hard direction: backdoor Roth conversion"
+  },
+  {
+    "id": "travel-currency-gain",
+    "question": "I changed my leftover euros back to dollars after a trip and got more than I paid. Do I report that?",
+    "queries": ["personal transactions of individuals nonfunctional currency disposed of gain exceeds $200", "foreign currency gain or loss personal transaction of an individual"],
+    "expect": ["988"],
+    "expectPath": "988(e)(2)",
+    "source": "hard direction: foreign currency"
+  },
+  {
+    "id": "mutual-funds-abroad",
+    "question": "I hold mutual funds through my bank in India. A friend said the US taxes them in a strange way. What is the rule?",
+    "queries": ["passive foreign investment company excess distribution allocated ratably holding period", "deferred tax amount excess distribution passive foreign investment company"],
+    "expect": ["1291", "1297"],
+    "expectPath": "1291(a)(1)",
+    "source": "hard direction and target user: passive foreign investment company"
+  }
+]

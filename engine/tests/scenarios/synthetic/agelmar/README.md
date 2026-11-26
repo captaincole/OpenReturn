@@ -29,7 +29,7 @@ Forms that file: Form 1040, Schedule 2, Form 5329, Form 8915-F.
 | 1a, 1b, 1c | one disaster on the 2024 form: 22,000; 8,000 used; 22,000 − 8,000 | 22,000; 8,000; 14,000 |
 | 1d, 1e | one new disaster: 22,000; 14,000 + 22,000 | 22,000; 36,000 |
 | 2 (a), 3 (a), 4 (a) | box 1 of every 1099-R: 15,000 + 12,000; 25,000; none | 27,000; 25,000; 0 |
-| 2 (b), 3 (b) | date order up to 36,000: the 401(k) first, then 21,000 of the IRA (A18) | 15,000; 21,000 |
+| 2 (b), 3 (b) | date order up to 36,000: the 401(k) first, then 21,000 of the IRA (A24) | 15,000; 21,000 |
 | 5a, 5b (a), 5b (b), 6 | 52,000 − 40,000; 40,000; smaller of 40,000 and 36,000 | 12,000; 40,000; 36,000; 36,000 |
 | 7 | 52,000 − 36,000 − 12,000 on line 28 | 4,000 |
 | 8, 9, 10, 11 | line 2 (b); cost 15,000 − 13,800; 13,800; 13,800 ÷ 3 | 15,000; 1,200; 13,800; 4,600 |

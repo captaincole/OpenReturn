@@ -6,10 +6,10 @@ The rules are in `lines.ts`, `parts.ts`, `worksheets.ts`, `periods.ts` and `figu
 
 Each is decided by the author, with a `DECISION` comment and a row in `docs/rule-decisions.md`.
 
-1. **Which named distributions count under the $22,000 limit** (row A18, `lines.ts`): date order, earliest first, on the form's path and on Worksheet 1B.
-2. **What column (b) of lines 2 to 4 holds when everything fits** (row A19, `lines.ts`): only each line's qualified amount, not the whole column (a).
-3. **A disaster with its $22,000 used in earlier years** (row A20, `figure.ts`): it stays in the Part I table on the form's path, so line 1e is 0, line 6 is 0 and line 7 shows the distributions as taxable; it is removed when Worksheet 1B is required (`worksheet-1b::b10`). The tax does not change: the 1099-R is taxable on Form 1040 either way.
-4. **Earlier years' spread income when line 1e is 0** (row A21, `figure.ts`): lines 12 and 23 still bring it in.
+1. **Which named distributions count under the $22,000 limit** (row A24, `lines.ts`): date order, earliest first, on the form's path and on Worksheet 1B.
+2. **What column (b) of lines 2 to 4 holds when everything fits** (row A25, `lines.ts`): only each line's qualified amount, not the whole column (a).
+3. **A disaster with its $22,000 used in earlier years** (row A26, `figure.ts`): it stays in the Part I table on the form's path, so line 1e is 0, line 6 is 0 and line 7 shows the distributions as taxable; it is removed when Worksheet 1B is required (`worksheet-1b::b10`). The tax does not change: the 1099-R is taxable on Form 1040 either way.
+4. **Earlier years' spread income when line 1e is 0** (row A27, `figure.ts`): lines 12 and 23 still bring it in.
 
 ## Should we do this now
 
@@ -60,7 +60,7 @@ Item C has six places, and the Part I and Part IV tables have two rows each. Pas
 | Part I table and dates | stated rule |
 | Lines 1a–1e | published example with numbers |
 | Worksheet 1B (lines 2–5b column (b) with more than one disaster) | published example with numbers |
-| Lines 2–5b, the allocation in date order | stated rule, decided (A18, A19) |
+| Lines 2–5b, the allocation in date order | stated rule, decided (A24, A25) |
 | Lines 6 and 7 | published example with numbers |
 | Line 8, 10, 13, 15 | stated rule |
 | Line 9, line 29 (cost share) | own reading (item 1) |
