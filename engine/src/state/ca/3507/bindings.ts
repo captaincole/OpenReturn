@@ -102,7 +102,9 @@ const lines: Bindings = {
    *   carryover the amount of credit disallowed due to the $5,000,000 business
    *   credit limitation" (ca-3507-form-2025::sec::credit-limitation::b02); and
    *   Schedule P (540): "only the disallowed portion of the credit may be
-   *   carried over" (ca-540-sched-p-inst-2025::sec::section-a1-instructions::b01).
+   *   carried over" (ca-540-sched-p-inst-2025::sec::section-a1-instructions::b01),
+   *   whose face heads the row "A1 Credits that reduce excess tax and have no
+   *   carryover provisions" (ca-540-sched-p-face-2025::sec::face-part-iii::b01).
    * - Text B, the line 7 instruction: "Credit limited by your tax liability ...
    *   can, however, be carried over for future years. Include any such amounts
    *   here" (ca-3507-form-2025::sec::line-7::b01), and the form: "Add lines 6a,
