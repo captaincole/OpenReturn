@@ -13,6 +13,7 @@ export * from "./kinds/businessLossLimit.js";
 export * from "./kinds/businessPropertySale.js";
 export * from "./kinds/caChildUnearnedIncome.js";
 export * from "./kinds/caDependentCare.js";
+export * from "./kinds/caEarlierYearReturn.js";
 export * from "./kinds/caEarnedIncomeCredit.js";
 export * from "./kinds/caEmployeeClassification.js";
 export * from "./kinds/caExcessBusinessLoss.js";

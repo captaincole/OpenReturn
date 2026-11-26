@@ -11,6 +11,7 @@ import type { Form3514FilingInfo } from "../3514/filingInfo.js";
 import type { Form3800CaFilingInfo } from "../3800-ca/filingInfo.js";
 import type { Form3803FilingInfo } from "../3803/filingInfo.js";
 import type { Form3853FilingInfo } from "../3853/filingInfo.js";
+import type { Form5870AFilingInfo } from "../5870a/filingInfo.js";
 import type { ScheduleSFilingInfo } from "../schedule-s/filingInfo.js";
 
 /**
@@ -30,7 +31,8 @@ export interface Form540FilingInfo
     Pick<Form3803FilingInfo, "form3803Totals">,
     Omit<Form3800CaFilingInfo, keyof BaseFilingInfo>,
     Pick<Form3853FilingInfo, "ca3853" | "form3803Children">,
-    Pick<ScheduleSFilingInfo, "otherStateCredits"> {
+    Pick<ScheduleSFilingInfo, "otherStateCredits">,
+    Pick<Form5870AFilingInfo, "form5870ATax" | "form5870ABehavioralHealthTax"> {
   /** "full_year" | "part_year" | "non_resident". */
   caResidencyStatus?: string;
 
