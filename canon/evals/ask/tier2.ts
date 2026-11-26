@@ -42,7 +42,12 @@ export const TIER_2: AskCase[] = [
     question:
       "What annualization amounts does California use for the annualized income installment method on form FTB 5805?",
     coverage: ["covered"],
-    authority: [anyOf("ca-5805-inst-2025::sec::federal-annualized-income-worksheet::b02")],
+    authority: [
+      anyOf(
+        "ca-5805-inst-2025::sec::federal-annualized-income-worksheet::b02",
+        "ca-5805-face-2025::sec::face-part-iii::b03",
+      ),
+    ],
     facts: [anyOf("2.4"), anyOf("1.5")],
   },
   {
