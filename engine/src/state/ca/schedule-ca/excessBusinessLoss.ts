@@ -97,10 +97,15 @@ export const excessBusinessLossBindings: Bindings = {
   /*
    * Line 9a column C: with a line 8p column C amount, the column's rows added (a gap row counts 0, as in column B).
    * MANUAL EDIT: the same with a line 8d column C amount, the federal Form 2555 exclusion (foreignExclusion.ts).
+   * MANUAL EDIT: the same with a line 8a column C amount, the federal NOL deduction added back (nolDeduction.ts).
    */
   "2.line.b9a_additions": (form, info) => {
     const base = childIncomeBindings["2.line.b9a_additions"]!(form, info);
-    const rowAmounts = [form["1.line.b8p_additions"], form["1.line.b8d_additions"]];
+    const rowAmounts = [
+      form["1.line.b8p_additions"],
+      form["1.line.b8d_additions"],
+      form["1.line.b8a_additions"],
+    ];
     if (rowAmounts.every((row) => numberOrBlank(row) === undefined)) return base;
     return sumOrBlank(...OTHER_INCOME_ADDITIONS.map((id) => form[id]));
   },

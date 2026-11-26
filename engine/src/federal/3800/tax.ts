@@ -11,6 +11,7 @@ import { isGap } from "../1116/lines.js";
 import { dependentCareCreditGap } from "../2441/creditGap.js";
 import { amtGap } from "../6251/foreignTaxCredit.js";
 import { mortgageCreditGap } from "../8396/creditGap.js";
+import type { PassiveLimitInfo } from "../8582-cr/filingInfo.js";
 import type { Form8621FilingInfo } from "../8621/filingInfo.js";
 import { form8621Amount } from "../8621/totals.js";
 import { line6cFrom8839 } from "../8839/receivers.js";
@@ -25,11 +26,12 @@ import type { TaxInputs } from "./lines.js";
 
 export type Accessor = { readonly [fieldId: string]: unknown };
 
-/* Every slot Form 3800 reads. */
+/* Every slot Form 3800 reads; the passive credits read Form 8582-CR's (federal/8582-cr/form.ts). */
 export type Form3800Info = Form3800FilingInfo &
   Form8911CreditInfo &
   Form8936FilingInfo &
-  Pick<Form8621FilingInfo, "form8621Totals">;
+  Pick<Form8621FilingInfo, "form8621Totals"> &
+  PassiveLimitInfo;
 
 const files = (info: Form3800Info, formId: string) => info.mustFile?.[formId]?.value === true;
 

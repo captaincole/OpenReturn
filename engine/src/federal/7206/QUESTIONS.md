@@ -8,7 +8,7 @@ Each place where the form and its instructions do not settle a rule. Short answe
 
 - Text A, the Form 1040 worksheet line 2: earned income "minus any deductions on Schedule 1, lines 15 and 16", where earned income for a more-than-2% shareholder "is your Medicare wages (box 5 of Form W-2) from that corporation" (irs-1040-inst-2025::sec::line-17::b04, ::b05).
 - Text B, Form 7206: "If the business is an S corporation, skip to line 11", and line 13 takes line 11 less only line 12 (irs-7206-face-2025::sec::face-page-1::b02, ::b03).
-- Decided: Text B, and Form 7206 files for such a plan. `DECISION` comment in `resolveInfo.ts`; row A44 in `docs/rule-decisions.md`.
+- Decided: Text B, and Form 7206 files for such a plan. `DECISION` comment in `resolveInfo.ts`; row A54 in `docs/rule-decisions.md`.
 - Changes dollars: yes, when the premiums are above the limit ($33,000 of Medicare wages next to $8,337 on line 15: a limit of $33,000, against $24,663 by the worksheet).
 
 ## Should we do this now
