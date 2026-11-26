@@ -143,11 +143,28 @@ function rowToHit(row: MatchRow, score: number): SearchHit {
   };
 }
 
+/* Each leg's filters; a null one is off. */
+interface LegFilter {
+  docId: InValue;
+  /** Keeps blocks whose id starts with this: a law section's blocks start with its section id. */
+  blockIdPrefix: InValue;
+}
+
+const FILTER_SQL = `(? IS NULL OR doc_id = ?)
+            AND (? IS NULL OR substr(block_id, 1, length(?)) = ?)`;
+const filterArgs = (filter: LegFilter): InValue[] => [
+  filter.docId,
+  filter.docId,
+  filter.blockIdPrefix,
+  filter.blockIdPrefix,
+  filter.blockIdPrefix,
+];
+
 // bm25 is lower-is-better; the query negates it so fts_rank is higher-is-better.
 async function ftsLeg(
   library: Library,
   queryText: string,
-  filterDocId: InValue,
+  filter: LegFilter,
   matchCount: number,
 ): Promise<Map<string, number>> {
   const ranks = new Map<string, number>();
@@ -158,10 +175,10 @@ async function ftsLeg(
     sql: `SELECT block_id, -bm25(ref_blocks_fts) AS rank
           FROM ref_blocks_fts
           WHERE ref_blocks_fts MATCH ?
-            AND (? IS NULL OR doc_id = ?)
+            AND ${FILTER_SQL}
           ORDER BY rank DESC
           LIMIT ?`,
-    args: [ftsQuery, filterDocId, filterDocId, matchCount],
+    args: [ftsQuery, ...filterArgs(filter), matchCount],
   });
   for (const row of res.rows) ranks.set(asStr(row.block_id), asNum(row.rank));
   return ranks;
@@ -171,7 +188,7 @@ async function ftsLeg(
 async function vectorLeg(
   library: Library,
   queryEmbedding: number[],
-  filterDocId: InValue,
+  filter: LegFilter,
   matchCount: number,
 ): Promise<Map<string, number>> {
   const distances = new Map<string, number>();
@@ -180,10 +197,10 @@ async function vectorLeg(
     sql: `SELECT block_id, vector_distance_cos(embedding, vector32(?)) AS distance
           FROM ref_blocks
           WHERE embedding IS NOT NULL
-            AND (? IS NULL OR doc_id = ?)
+            AND ${FILTER_SQL}
           ORDER BY distance ASC
           LIMIT ?`,
-    args: [vectorLiteral(queryEmbedding), filterDocId, filterDocId, matchCount],
+    args: [vectorLiteral(queryEmbedding), ...filterArgs(filter), matchCount],
   });
   for (const row of res.rows) distances.set(asStr(row.block_id), asNum(row.distance));
   return distances;
@@ -194,16 +211,17 @@ async function callMatch(args: {
   queryEmbedding: number[] | null;
   matchCount: number;
   filterDocId?: string;
+  blockIdPrefix?: string;
   library: Library;
 }): Promise<MatchRow[]> {
   const db = await openLibraryDb(args.library);
-  const filterDocId: InValue = args.filterDocId ?? null;
+  const filter = { docId: args.filterDocId ?? null, blockIdPrefix: args.blockIdPrefix ?? null };
 
   const ftsRank = args.queryText
-    ? await ftsLeg(args.library, args.queryText, filterDocId, args.matchCount)
+    ? await ftsLeg(args.library, args.queryText, filter, args.matchCount)
     : new Map<string, number>();
   const vecDist = args.queryEmbedding
-    ? await vectorLeg(args.library, args.queryEmbedding, filterDocId, args.matchCount)
+    ? await vectorLeg(args.library, args.queryEmbedding, filter, args.matchCount)
     : new Map<string, number>();
 
   const blockIds = [...new Set([...ftsRank.keys(), ...vecDist.keys()])];
@@ -277,6 +295,8 @@ export interface HybridSearchOpts {
   mode?: "fts" | "vector" | "hybrid";
   /** Which library file to search; "corpus" unless named. */
   library?: Library;
+  /** Only blocks whose id starts with this (one law section: its section id + "::"). */
+  blockIdPrefix?: string;
 }
 
 /*
@@ -298,6 +318,7 @@ export async function hybridSearchRefDocs(opts: HybridSearchOpts): Promise<Searc
     queryEmbedding: mode === "fts" ? null : queryEmbedding,
     matchCount: cands,
     filterDocId: opts.docId,
+    blockIdPrefix: opts.blockIdPrefix,
     library,
   });
   if (rows.length === 0) return [];
@@ -343,7 +364,7 @@ async function embedQueryIfUsable(query: string, library: Library): Promise<numb
       console.warn(
         `[hybridSearchRefDocs] ${library} embeddings were built with ${stored} ` +
           `but the active model is ${embedCfg.id} — skipping the vector ` +
-          `leg (FTS-only). Run \`npm run corpus -- reembed --all\` to rebuild.`,
+          `leg (FTS-only). Run \`npm run corpus -- ${library === "law" ? "law " : ""}reembed --all\` to rebuild.`,
       );
       return null;
     }

@@ -1,4 +1,5 @@
 import type { Element } from "domhandler";
+import { citationSegment } from "./lawIds";
 import type { Span, TextSink } from "./textSink";
 import { attr, BODY_TAGS, childElements, firstChild, isUnit } from "./uslmDom";
 import { type Extracted, extractText } from "./uslmText";
@@ -20,6 +21,8 @@ export interface UnitNode {
   /** The chapeau's text; empty when the unit opens with content or nothing. */
   chapeau: string;
   lead: Span | null;
+  /** The lead is a number and heading with no text after it: "(1) Fully taxable transaction". */
+  headingOnly: boolean;
   items: UnitItem[];
   span: Span;
 }
@@ -68,6 +71,7 @@ function layoutUnit(el: Element, opts: LayoutOpts, sink: TextSink): UnitNode | n
     heading: heading?.text ?? "",
     chapeau: parts.body?.tagName === "chapeau" ? (body?.text ?? "") : "",
     lead,
+    headingOnly: lead !== null && body === null,
     items,
     span,
   };
@@ -140,9 +144,6 @@ function segmentOf(el: Element, index: number): string {
     : num && attr(num, "value");
   return citationSegment(raw ?? "") || `n${index + 1}`;
 }
-
-export const citationSegment = (raw: string): string =>
-  raw.replace(/[–—]/g, "-").replace(/[^A-Za-z0-9-]/g, "");
 
 function spanOf(lead: Span | null, items: UnitItem[]): Span | null {
   const spans = [lead, ...items.map((item) => (item.kind === "unit" ? item.unit.span : item.span))];

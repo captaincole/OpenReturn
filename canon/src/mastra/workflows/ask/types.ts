@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { SourceFormat } from "../../../db/corpusStore";
+import type { CorpusFormat, SourceFormat } from "../../../db/corpusStore";
 
 // Canon is stateless: Cade keeps the threads in app.db and sends `history`.
 export type { SourceFormat };
@@ -12,7 +12,7 @@ export interface AskCitation {
   docId: string;
   documentTitle: string;
   /** Missing on citations saved before HTML documents existed: read it as "pdf". */
-  format?: SourceFormat;
+  format?: CorpusFormat;
   sectionHeading: string | null;
   pageNum: number;
   quote: string;

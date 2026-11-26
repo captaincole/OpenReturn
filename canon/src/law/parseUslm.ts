@@ -1,6 +1,7 @@
 import * as cheerio from "cheerio";
 import type { Element } from "domhandler";
 import type { ParsedDoc } from "../refdocs/parse";
+import { slugOf } from "./lawIds";
 import { createSink, type TextSink } from "./textSink";
 import { sectionBlocks, type SectionInfo } from "./uslmBlocks";
 import {
@@ -184,13 +185,6 @@ function pathOf(el: Element, state: State): string {
     ? identifier.slice(state.titlePrefix.length)
     : identifier;
 }
-
-/** "stA/ch1/schB/ptVI" → "sta-ch1-schb-ptvi"; "s1400Z–2" → "s1400z-2". */
-export const slugOf = (path: string): string =>
-  path
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
 
 const hasStatuteText = (el: Element) =>
   childElements(el).some(

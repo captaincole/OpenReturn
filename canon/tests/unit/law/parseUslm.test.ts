@@ -39,6 +39,14 @@ const blockIdsOf = (slug: string) =>
   parsed.blocks
     .filter((row) => row.sectionId === `${SEC}${slug}`)
     .map((row) => row.blockId.slice(`${SEC}${slug}::`.length));
+// A block may pass the cap by the heading lines run into it.
+const withoutHeadingLines = (row: ReturnType<typeof block>) => {
+  const headings = (row.metadata as { headings: string[] }).headings;
+  const lines = row.text.split("\n");
+  const isHeadingLine = (line: string) => headings.some((heading) => line.endsWith(` ${heading}`));
+  while (lines.length > 1 && isHeadingLine(lines[0])) lines.shift();
+  return lines.join("\n");
+};
 const section = (slug: string) => parsed.sections.find((row) => row.sectionId === `${SEC}${slug}`);
 
 describe("parseUslmTitle: structure rows", () => {
@@ -134,17 +142,32 @@ describe("parseUslmTitle: blocks", () => {
     });
   });
 
-  it("splits a unit just over the cap into its lead, its children and its continuation", () => {
-    const ids = ["k-2-E", "k-2-E-i", "k-2-E-ii", "k-2-E-cont"];
+  it("splits a unit just over the cap into its children and its continuation", () => {
+    const ids = ["k-2-E-i", "k-2-E-ii", "k-2-E-cont"];
     expect(blockIdsOf("s168").filter((id) => id.startsWith("k-2-E"))).toEqual(ids);
     const pieces = ids.map((id) => block(`s168::${id}`));
-    const whole = parsed.canonicalText.slice(pieces[0].charStart, pieces[3].charEnd);
+    const whole = parsed.canonicalText.slice(pieces[0].charStart, pieces[2].charEnd);
     expect(whole.length).toBeGreaterThan(MAX_BLOCK_CHARS);
-    expect(pieces[0].text).toBe("(E) Special rules");
-    expect(pieces[3].text).toBe(
+    expect(pieces[2].text).toBe(
       "such property shall be treated as originally placed in service not earlier than the date of such last sale.",
     );
-    expect(pieces[3].metadata).toMatchObject({ citation: "26 U.S.C. § 168(k)(2)(E)" });
+    expect(pieces[2].metadata).toMatchObject({ citation: "26 U.S.C. § 168(k)(2)(E)" });
+  });
+
+  it("runs a lead that is only a heading into its first child's block", () => {
+    const first = block("s168::k-2-E-i");
+    expect(first.text.startsWith("(E) Special rules\n(i) Acquisition requirements.—")).toBe(true);
+    expect(first.metadata).toMatchObject({ citation: "26 U.S.C. § 168(k)(2)(E)(i)" });
+    expect(block("s1202::b-4").text.split("\n").slice(0, 2)).toEqual([
+      "(b) Per-issuer limitation on taxpayer’s eligible gain",
+      expect.stringMatching(/^\(4\) Applicable dollar limit\.—/),
+    ]);
+  });
+
+  it("keeps a lead with text after its heading as its own block", () => {
+    expect(block("s168::k-2").text).toBe(
+      "(k) Special allowance for certain property\n(2) Qualified property.—For purposes of this subsection—",
+    );
   });
 
   it("splits a leaf over the cap between clauses, never mid-word", () => {
@@ -169,9 +192,8 @@ describe("parseUslmTitle: blocks", () => {
   });
 
   it("gives a repeated number a -dup2 id and leaves out footnote markers", () => {
-    expect(blockIdsOf("s1202")).toEqual(["b", "b-4", "b-4-A", "b-4-B", "b-4-dup2"]);
+    expect(blockIdsOf("s1202")).toEqual(["b-4", "b-4-A", "b-4-B", "b-4-dup2"]);
     expect(block("s1202::b-4-dup2").text.startsWith("(4) Inflation adjustment.—")).toBe(true);
-    expect(block("s1202::b-4").text.startsWith("(4) Applicable dollar limit.—")).toBe(true);
   });
 
   it("writes the header line, then the chapeaus above, then the block", () => {
@@ -193,9 +215,42 @@ describe("parseUslmTitle: blocks", () => {
     expect(new Set(ids).size).toBe(ids.length);
     for (const row of parsed.blocks) {
       expect(row.text).toBe(parsed.canonicalText.slice(row.charStart, row.charEnd));
-      expect(row.text.length).toBeLessThanOrEqual(MAX_BLOCK_CHARS);
+      expect(withoutHeadingLines(row).length).toBeLessThanOrEqual(MAX_BLOCK_CHARS);
       expect(row).toMatchObject({ pageNum: 1, blockType: "paragraph", contextualSummary: null });
     }
+  });
+});
+
+describe("parseUslmTitle: headings with no text", () => {
+  // A made-up section: (a) and (a)(1) carry only headings, and (1) is over the cap.
+  const words = (count: number) => Array.from({ length: count }, () => "word").join(" ");
+  const unit = (tag: string, id: string, num: string, inner: string) =>
+    `<${tag} identifier="/us/usc/t26/s9999/${id}"><num value="${num}">(${num})</num>${inner}</${tag}>`;
+  const leaf = (id: string, num: string) =>
+    unit("subparagraph", id, num, `<content> ${words(140)}.</content>`);
+  const made = unit(
+    "subsection",
+    "a",
+    "a",
+    `<heading> Outer rule</heading>${unit(
+      "paragraph",
+      "a/1",
+      "1",
+      `<heading> Inner rule</heading>${leaf("a/1/A", "A")}${leaf("a/1/B", "B")}`,
+    )}`,
+  );
+  const sectionXml = `<section identifier="/us/usc/t26/s9999"><num value="9999">§ 9999.</num><heading> Made up</heading>${made}</section>`;
+  const blocks = parseUslmTitle(fixture("title.xml").replace("{{PART_I}}", sectionXml), DOC).blocks;
+
+  it("puts every heading-only lead above the first leaf, outermost first, one per line", () => {
+    expect(blocks.map((row) => row.blockId.split("::").at(-1))).toEqual(["a-1-A", "a-1-B"]);
+    expect(blocks[0].text.split("\n").slice(0, 3)).toEqual([
+      "(a) Outer rule",
+      "(1) Inner rule",
+      expect.stringMatching(/^\(A\) word word/),
+    ]);
+    expect(blocks[0].metadata).toMatchObject({ citation: "26 U.S.C. § 9999(a)(1)(A)" });
+    expect(blocks[1].text.startsWith("(B) word")).toBe(true);
   });
 });
 

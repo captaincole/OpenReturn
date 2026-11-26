@@ -1,7 +1,14 @@
 import type { InValue } from "@libsql/client";
 import { openLibraryDb, type Library } from "./libsql";
 
-export type SourceFormat = "pdf" | "html";
+/** The formats of corpus.db, the instructions library. */
+export type CorpusFormat = "pdf" | "html";
+/** "uslm": the US Code's XML, in law.db; like "html", it has no pages. */
+export type SourceFormat = CorpusFormat | "uslm";
+
+// Ask and the corpus pipeline read corpus.db only, where a document is a PDF or a page.
+export const corpusFormat = (format: SourceFormat): CorpusFormat =>
+  format === "html" ? "html" : "pdf";
 
 export interface RefDocument {
   docId: string;
@@ -129,7 +136,9 @@ export async function setDocumentPublished(
   });
 }
 
-export const asFormat = (value: unknown): SourceFormat => (value === "html" ? "html" : "pdf");
+const FORMATS: readonly SourceFormat[] = ["pdf", "html", "uslm"];
+export const asFormat = (value: unknown): SourceFormat =>
+  FORMATS.find((format) => format === value) ?? "pdf";
 
 export async function deleteDocument(docId: string, library: Library = "corpus"): Promise<void> {
   const db = await openLibraryDb(library);

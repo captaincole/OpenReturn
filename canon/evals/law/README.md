@@ -8,4 +8,10 @@ Each label was checked against the statute text (the USLM XML of Title 26 from u
 
 ## Run
 
-The runner comes with the ingest step.
+From the repo root, with law.db installed (`npm run corpus -- law sync`) and Ollama running:
+
+```bash
+npm run evals:law
+```
+
+It runs every case in hybrid, fts and vector modes (no model call) and writes `docs/evals/law.md`.

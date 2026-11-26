@@ -1,5 +1,6 @@
 import { MAX_BLOCK_CHARS } from "../refdocs/chunk";
 import type { ParsedDoc } from "../refdocs/parse";
+import { citationOf } from "./lawIds";
 import { splitStatute } from "./splitStatute";
 import type { Span } from "./textSink";
 import type { UnitNode } from "./uslmUnits";
@@ -7,7 +8,8 @@ import type { UnitNode } from "./uslmUnits";
 /*
  * Turns a section's unit tree into blocks. A unit that fits the cap with its
  * children is one block. A larger unit gives its lead, each child and each
- * continuation their own blocks. The block id is the citation path.
+ * continuation their own blocks; a lead that is only a heading joins the
+ * first block below it. The block id is the citation path.
  */
 
 type Block = ParsedDoc["blocks"][number];
@@ -68,21 +70,32 @@ function planParts(
 ): Plan[] {
   const below = [...ancestors, unit];
   let continuations = 0;
+  const items = unit.items.flatMap((item) => {
+    if (item.kind === "unit")
+      return planUnit(item.unit, below, [...unitPath, item.unit.idSegment], text);
+    continuations += 1;
+    const name = continuations === 1 ? "cont" : `cont${continuations}`;
+    return pieces(item.span, [...unitPath, name], text).map((piece) => ({
+      ...piece,
+      unit,
+      ancestors: below,
+    }));
+  });
+  if (unit.headingOnly && unit.lead && items.length > 0) return prefixLead(unit.lead, items);
   const lead = unit.lead ? pieces(unit.lead, leadPath, text) : [];
   return [
     ...lead.map((piece, index) => ({ ...piece, unit, ancestors: index === 0 ? ancestors : below })),
-    ...unit.items.flatMap((item) => {
-      if (item.kind === "unit")
-        return planUnit(item.unit, below, [...unitPath, item.unit.idSegment], text);
-      continuations += 1;
-      const name = continuations === 1 ? "cont" : `cont${continuations}`;
-      return pieces(item.span, [...unitPath, name], text).map((piece) => ({
-        ...piece,
-        unit,
-        ancestors: below,
-      }));
-    }),
+    ...items,
   ];
+}
+
+/*
+ * A heading with no text is noise as a block of its own. It runs into the
+ * first block below it, as the Code prints it; an outer heading comes first.
+ */
+function prefixLead(lead: Span, items: Plan[]): Plan[] {
+  const [first, ...rest] = items;
+  return [{ ...first, span: { start: lead.start, end: first.span.end } }, ...rest];
 }
 
 // A piece over the cap splits between sentences; the 2nd piece on adds "-p2".
@@ -127,9 +140,6 @@ function blockRow(
 // A continuation or a 2nd piece lists its own unit among its ancestors.
 const chainOf = (plan: Plan) =>
   plan.ancestors.at(-1) === plan.unit ? plan.ancestors : [...plan.ancestors, plan.unit];
-
-export const citationOf = (number: string, path: string[]): string =>
-  `26 U.S.C. § ${number}${path.map((segment) => `(${segment})`).join("")}`;
 
 /*
  * What search indexes: where the block sits, the chapeaus above it (the
