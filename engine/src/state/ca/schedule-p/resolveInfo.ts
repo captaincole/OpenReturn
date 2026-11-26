@@ -11,6 +11,7 @@ import {
   type ResolverInputs,
 } from "../../../resolverInputs.js";
 import { claimsCaPriorYearAmtCredit } from "../3510/resolveInfo.js";
+import { moreThanTwoCreditsFallback } from "./creditCount.js";
 import type { SchedulePFilingInfo } from "./filingInfo.js";
 
 /*
@@ -20,6 +21,8 @@ import type { SchedulePFilingInfo } from "./filingInfo.js";
  * the exemption. The engine completes the schedule when a stated preference
  * exists (the incentive stock option spread, line 10) or the return itemizes (the
  * Part I add-backs then come from Schedule CA): line 26 says whether AMT is owed.
+ * It also attaches with a credit for prior year AMT or more than two credits
+ * (creditCount.ts).
  * A filer with neither has no adjustment the engine knows, so the schedule is not
  * completed; the other preferences (depreciation, passive activities, K-1 items)
  * have no facts yet. The 540 instructions' Box C (CA AGI over the exemption
@@ -59,6 +62,7 @@ export function resolveSchedulePInfo(inputs: ResolverInputs): SchedulePFilingInf
         triggeredByFactKeys: [CA_PRIOR_YEAR_AMT_KEYS.amt, CA_PRIOR_YEAR_AMT_KEYS.creditCarryover],
         triggeredByDecisionKeys: ["decisions.scope.must_file_ca_540"],
       },
+      moreThanTwoCreditsFallback(inputs, files540),
     ],
   });
   const files = resolution.value === true;

@@ -261,9 +261,7 @@ export const partIIICreditRows: Unsupported = Object.fromEntries([
     "2.part3.15_renters_credit_used_col_b",
     "2.part3.15_renters_tax_balance_col_c",
   ),
-  ...codedCreditRow(3, 16, "Section B2"),
-  ...codedCreditRow(3, 17, "Section B2"),
-  ...codedCreditRow(3, 18, "Section B2"),
+  // Lines 16 to 18 hold FTB 3801-CR's passive credits (sectionB2.ts).
   ...codedCreditRow(3, 19, "Section B2"),
   ...row(
     `Section C line 23, solar energy credit carryover — ${NO_CREDIT_FACTS}.`,

@@ -7,14 +7,16 @@
 import type { BaseFilingInfo } from "../../../filingInfo.js";
 import { numberOrBlank } from "../../../money.js";
 import { unsupported, type Unsupported } from "../../../types.js";
-import { files3510, priorYearAmtCreditUsed, priorYearAmtCreditWaits } from "../3510/creditUsed.js";
+import { passiveCreditsUsedTotal } from "../3801-cr/creditUsed.js";
+import type { Form3801CRInfo } from "../3801-cr/filingInfo.js";
+import { creditsBeforeSectionB2 } from "../540/creditBalance.js";
 import type { ScheduleSFilingInfo } from "../schedule-s/filingInfo.js";
 import { filesScheduleS, otherStateCreditTotal } from "../schedule-s/returnAmounts.js";
 import type { Form3804CRFilingInfo } from "./filingInfo.js";
 import { creditClaimed, taxLeftForCredit } from "./lines.js";
 
 type ReadField = (fieldId: string) => unknown;
-type Info = Form3804CRFilingInfo & Pick<ScheduleSFilingInfo, "otherStateCredits">;
+type Info = Form3804CRFilingInfo & Pick<ScheduleSFilingInfo, "otherStateCredits"> & Form3801CRInfo;
 
 export const PTE_CREDIT_AVAILABLE = "form-3804-cr.0.part2.3_total_available_credit";
 export const PTE_CREDIT_CLAIMED = "form-3804-cr.0.part2.4_credit_claimed_current_year";
@@ -46,15 +48,6 @@ export function pteCreditGap(info: Info): Unsupported | undefined {
   return undefined;
 }
 
-/* Form 540 line 40, the child and dependent care credit; undefined while it waits. */
-function childCareCredit(read: ReadField, info: Info): number | undefined {
-  if (!files(info, "form-3506")) return 0;
-  const credit = numberOrBlank(read("form-3506.0.line.12_child_dependent_care_credit"));
-  if (credit === undefined) return undefined;
-  if (credit <= 0) return 0;
-  return numberOrBlank(read("form-540.line.40_child_dependent_care_credit"));
-}
-
 /*
  * DECISION (2026-11-24, by the author, not reviewed by a person): the credit
  * is limited by the tax left, not by tentative minimum tax. Text A, the Form
@@ -75,7 +68,8 @@ function childCareCredit(read: ReadField, info: Info): number | undefined {
  * With no Schedule P (540): Form 540 line 35 less the credits applied before
  * this one, in Schedule P (540) Part III order: line 40 (Section A1), the
  * credit for prior year AMT (Section A2 line 10), the renter's credit (line 46,
- * Section B1) and the other state tax credit (Section B3 line 20). This credit
+ * Section B1), FTB 3801-CR's passive credits (Section B2 lines 16 to 18) and
+ * the other state tax credit (Section B3 line 20). This credit
  * is Section B4 line 21, the last (ca-540-sched-p-inst-2025::sec::credit-table::b01,
  * ::pass-through-entity-pte-elective-tax-credit::b01). It "can reduce regular
  * tax below TMT" (ca-3804cr-inst-2025::sec::general-information::b03), so no
@@ -84,13 +78,13 @@ function childCareCredit(read: ReadField, info: Info): number | undefined {
 export function taxBeforePteCredit(read: ReadField, info: Info): number | Unsupported | undefined {
   const tax = numberOrBlank(read("form-540.line.35_total_tax_after_credits"));
   if (tax === undefined) return undefined;
-  const childCare = childCareCredit(read, info);
-  if (childCare === undefined || priorYearAmtCreditWaits(read, info)) return undefined;
-  const priorYearAmt = files3510(info) ? (priorYearAmtCreditUsed(read) ?? 0) : 0;
+  const before = creditsBeforeSectionB2(read, info);
+  if (before === undefined) return undefined;
   const otherState = filesScheduleS(info) ? otherStateCreditTotal(read, info) : 0;
   if (typeof otherState !== "number") return otherState;
-  const renters = numberOrBlank(read("form-540.line.46_renters_credit")) ?? 0;
-  return taxLeftForCredit(tax, [childCare, priorYearAmt, renters, otherState]);
+  const passive = passiveCreditsUsedTotal(read, info);
+  if (typeof passive !== "number") return passive;
+  return taxLeftForCredit(tax, [...before, passive, otherState]);
 }
 
 /*

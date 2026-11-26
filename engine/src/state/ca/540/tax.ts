@@ -4,6 +4,7 @@ import { lookupCaRateSchedule } from "../../../data/caRateSchedule.js";
 import { lookupTax } from "../../../data/taxTable.js";
 import { atLeast, numberOrBlank, roundDollars, sum } from "../../../money.js";
 import { unsupported, type Unsupported } from "../../../types.js";
+import type { FilingStatus } from "../../../values.js";
 import { caExemptionCreditsAfterLimit } from "../../../worksheets/caAgiLimitation.js";
 import { childTaxOnLine31 } from "../3800-ca/form.js";
 import type { Form540FilingInfo } from "./filingInfo.js";
@@ -23,17 +24,25 @@ export const line31TaxFromTaxTable: Form540Line<"line.31_tax_from_tax_table"> = 
 export const line31TaxFromRateSchedule: Form540Line<"line.31_tax_from_rate_schedule"> = (form) =>
   usesRateSchedule(form["line.19_taxable_income"]);
 
-// MANUAL EDIT: Tax Table ("ca-2025") up to $100,000 of line 19; above it, Tax Rate Schedules X/Y/Z.
+/*
+ * MANUAL EDIT: Tax Table ("ca-2025") up to $100,000 of taxable income; above
+ * it, Tax Rate Schedules X/Y/Z. FTB 3801-CR lines 6 and 15 figure the tax on
+ * other amounts of taxable income with it.
+ */
+export function caTaxOnTaxableIncome(income: number, status: FilingStatus): number | undefined {
+  if (income <= 0) return 0; // the table starts at $1
+  if (usesRateSchedule(income)) {
+    return roundDollars(lookupCaRateSchedule(2025, status, income));
+  }
+  const lookup = lookupTax("ca-2025", income, status);
+  return lookup.ok ? lookup.tax : undefined;
+}
+
 function taxOnTaxableIncome(form: Form540Form, info: Form540FilingInfo): number | undefined {
   if (!info.filingStatus) return undefined;
   const income = form["line.19_taxable_income"];
   if (typeof income !== "number") return undefined;
-  if (income === 0) return 0; // the table starts at $1
-  if (usesRateSchedule(income)) {
-    return roundDollars(lookupCaRateSchedule(2025, info.filingStatus, income));
-  }
-  const lookup = lookupTax("ca-2025", income, info.filingStatus);
-  return lookup.ok ? lookup.tax : undefined;
+  return caTaxOnTaxableIncome(income, info.filingStatus);
 }
 
 /*
