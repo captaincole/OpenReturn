@@ -23,7 +23,28 @@ export const PRIOR_YEAR_KEYS = {
    * Form 2210 line 8 stays blank and line 9 is line 5 (line-19::b03).
    */
   noTwelveMonthReturn: "prior_year.no_twelve_month_return",
+  /*
+   * The 2024 California tax as FTB 5805 line 5 and FTB 5805F line 9 take it:
+   * 2024 Form 540 lines 48, 61 and 62 and any IRC Section 453A interest from
+   * line 63, less the line 34 tax on lump-sum and accumulation distributions
+   * (ca-5805-inst-2025::sec::part-ii-computing-the-required-annual-payment::b01).
+   */
   caTax: "prior_year.ca_tax",
+  /*
+   * FTB 5805F line 8: the 2024 Form 540 line 34 tax on lump-sum distributions
+   * and accumulation distributions of trusts. Recorded only when there was one.
+   */
+  caLumpSumTax: "prior_year.ca_lump_sum_tax",
+  /*
+   * FTB 5805F exception 2: the 2024 Form 540 lines 71 and 73, California tax
+   * withheld (ca-5805f-inst-2025::sec::d-exceptions-to-the-penalty::b01).
+   */
+  caWithholding: "prior_year.ca_withholding",
+  /*
+   * true when there was no 2024 California return, or it covered less than 12
+   * months: FTB 5805F lines 7 to 9 stay blank and line 10 is line 4.
+   */
+  caNoTwelveMonthReturn: "prior_year.ca_no_twelve_month_return",
   caBalancePaidThisYear: "prior_year.ca_balance_paid_this_year",
   /*
    * Form 1116 line 10: unused foreign tax from earlier years that may be carried

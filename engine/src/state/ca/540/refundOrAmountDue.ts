@@ -5,7 +5,7 @@
 
 import { atLeast, numberOrBlank, sum } from "../../../money.js";
 import { isrPenalty } from "../3853/isrPenalty.js";
-import type { Form540Line } from "./form540Binding.js";
+import type { Form540Form, Form540Line } from "./form540Binding.js";
 
 export const line91UseTax: Form540Line<"line.91_use_tax"> = (_, info) => info.useTaxOwed;
 
@@ -96,13 +96,36 @@ export const line111AmountYouOwe: Form540Line<"line.111_amount_you_owe"> = (form
   return owed > 0 ? owed : undefined;
 };
 
-// MANUAL EDIT: FTB 5805 line 13; blank when 5805 is not filed.
+/*
+ * FTB 5805F's penalty: line 16 with a waiver request (its box checked), else
+ * line 15 (ca-5805f-face-2025::sec::face-part-ii::b01,
+ * ca-5805f-inst-2025::sec::e-waiver-of-the-penalty::b01: "Enter the amount, if
+ * any, from line 16"). Undefined when the form owes no penalty or is not filed.
+ */
+function farmerPenalty(form: Form540Form): number | undefined {
+  const waiver = form["form-5805f.0.line.16_waiver_request_checkbox"];
+  if (waiver === undefined) return undefined;
+  const penalty =
+    form[waiver === true ? "form-5805f.0.line.16_waiver_amount" : "form-5805f.0.line.15_penalty"];
+  return typeof penalty === "number" && penalty > 0 ? penalty : undefined;
+}
+
+// MANUAL EDIT: FTB 5805 line 13, or FTB 5805F's penalty; blank when neither is filed.
 export const line113UnderpaymentEstimatedTax: Form540Line<"line.113_underpayment_estimated_tax"> = (
   form,
 ) => {
+  const farmer = farmerPenalty(form);
+  if (farmer !== undefined) return farmer;
   const value = form["form-5805.1.part2.line_13"];
   return typeof value === "number" ? value : undefined;
 };
+
+/*
+ * Line 113's FTB 5805F box: checked whenever the form files, "Even if you do
+ * not owe a penalty" (ca-5805f-inst-2025::sec::f-amended-tax-returns::b01).
+ */
+export const line113Ftb5805FAttached: Form540Line<"line.112_ftb_5805f_attached"> = (_, info) =>
+  info.mustFile?.["form-5805f"]?.value === true ? true : undefined;
 
 /*
  * Line 114: "Add line 111, line 112, and line 113"
