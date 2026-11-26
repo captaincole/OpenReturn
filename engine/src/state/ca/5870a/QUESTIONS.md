@@ -42,6 +42,7 @@ FTB 5870A figures California's extra tax on trust income that a trust kept in ea
 
 - Text: "eliminating the highest and lowest taxable income years" (the form).
 - Default: as Form 4970: a tie drops the first of the tied years in line 11's order.
+- Dollars: the rates change each year, so the choice can move line 21. In the blind case with 2024 and 2023 tied at $60,000, dropping 2024 gives column (a) $207; dropping 2023 gives $112 (the 2024 tax on $69,400 is $3,012). Line 26 was 0 either way in that case.
 
 ### 8. No throwback year left in Part I (no dollars)
 
@@ -50,6 +51,7 @@ FTB 5870A figures California's extra tax on trust income that a trust kept in ea
 ### 9. Rounding (a few dollars)
 
 - Default: lines 7, 8, 10 and 23 of Part I, and Part II lines 2 and 4, round to the nearest dollar (CLAUDE.md). Line 9 compares each year's column (a) amount with the rounded line 8; a year equal to line 8 stays ("is less than").
+- Dollars: line 24 multiplies the rounded line 23. Without that rounding, line 24 moves by $1 (a blind case gave $2,787 rounded and $2,786 not; another gave $852 and $853). A year equal to line 8 that left line 9 would halve line 24 in a two-year case: "If the distribution for each throwback year is more than line 8, then enter the same number" (`part-i-tax-on-accumulation-distribution::b04`) does not name the equal case.
 
 ### 10. Header SSN on a joint return (no dollars)
 
@@ -69,6 +71,12 @@ FTB 5870A figures California's extra tax on trust income that a trust kept in ea
 - A trust fact files FTB 5870A on a Form 540 return when its California answers name Part I ("schedule_j") or Part II ("contingent"). A trust with a federal Schedule J (Form 1041) and no California answers still files, and the form asks for the trust fact again. A noncontingent beneficiary of a trust that did not file Form 541 or pay the tax files no FTB 5870A: the whole amount goes on Schedule CA line 8z column C (`purpose::b02`).
 - A foreign trust follows the same answers: "Report the accumulation distributions from foreign trusts and from certain domestic trusts on form FTB 5870A" (`general-information::b02`).
 - The multiple trust rule: the beneficiary states how many other trusts count in each year, as for Form 4970. The engine does not test the $1,000 rule itself.
+- The multiple trust rule takes a counted year's taxes off line 2 only: "do not include on line 2 the taxes attributable to the current accumulation distribution considered to have been distributed in the same earlier taxable years" (`part-i-tax-on-accumulation-distribution::b03`). Lines 3 and 25 follow from line 2, so those taxes are neither added to the amount nor credited. Dollars: in the blind case with two other trusts in 2018, line 26 is $1,630; keeping the $700 on line 2 gives $987.
+
+### 14. Part II line 7 holds the regular tax only (dollars)
+
+- Text: "Compute the tax (not including any AMT) or BHST on the income on line 6 ... Use Part III to compute the BHST" (`section-a::b03`).
+- Default: line 7 is the regular tax at the year's rates; the Behavioral Health Services Tax is only in Part III, so it is not counted twice. Dollars: a year over $1,000,000 would count 1% of the excess twice if line 7 also held it ($1,200 in the blind case with $1,120,000 of 2024 income).
 
 ## Unsupported
 
@@ -84,6 +92,12 @@ FTB 5870A figures California's extra tax on trust income that a trust kept in ea
 - **The trustee's statement for Part II.** "If you did not receive a Schedule J (541), you must contact the trustee" for the years and the total (`part-ii-tax-on-distributions-of-previously-untaxed-trust-income::b01`). No official form holds it, so the made-up taxpayer `bode` states the two numbers from a letter and no document is generated. A person should decide what that letter looks like before the product reads one.
 - **More than one trust.** Chain the copies: each copy's line 11 adds the line 10 amounts of the copies before it for the same years.
 - **Form 540NR.** Bind line 41 and line 72 when Form 540NR has rules, and refigure a nonresident year's Part I column through it.
+
+## Second opinions
+
+- **Blind fill (2026-11-25).** A preparer filled 14 cases by hand from the blank form, its instructions, the Form 4970 instructions and the FTB tables for 2020 to 2024. Every line matched the engine, with no blank-against-0 difference. The preparer's doubts that change dollars are items 1, 3, 7, 9, 13 and 14 here.
+- **PolicyEngine-US 2.154.0** (commit 363e9fc5, 2026-11-25). It does not model FTB 5870A or the throwback rule. It does hold the California rate schedules from 2021: all 360 thresholds and rates of 2021 to 2024 in `data/caEarlierYearRates.ts` match its `states/ca/tax/income/rates/*.yaml` (single and separate on Schedule X, joint and surviving spouse on Y, head of household on Z). It has no 2020 values, so 2020 is checked only against the FTB page. Each schedule's tax-at-row column follows from its thresholds to the cent. Its mental health services tax (`mental_health_services.yaml`) is 1% over $1,000,000 for every filing status, as Part III here.
+- **IRS Direct File.** It is federal only and does not cover trust distributions. Not compared.
 
 ## Confidence by field group
 
