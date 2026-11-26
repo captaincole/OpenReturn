@@ -74,6 +74,8 @@ import type { Form8889FilingInfo } from "./federal/8889/filingInfo.js";
 import { resolve8889Info } from "./federal/8889/resolveInfo.js";
 import type { Form8911FilingInfo } from "./federal/8911/filingInfo.js";
 import { resolve8911Info } from "./federal/8911/resolveInfo.js";
+import type { Form8915FFilingInfo } from "./federal/8915-f/filingInfo.js";
+import { resolve8915FInfo } from "./federal/8915-f/resolveInfo.js";
 import type { Form8919FilingInfo } from "./federal/8919/filingInfo.js";
 import { resolve8919Info } from "./federal/8919/resolveInfo.js";
 import type { Form8936FilingInfo } from "./federal/8936/filingInfo.js";
@@ -265,6 +267,7 @@ export type FilingInfo = BaseFilingInfo &
   Form8801FilingInfo &
   Form8814FilingInfo &
   Form6781FilingInfo &
+  Form8915FFilingInfo &
   Form461FilingInfo &
   Form8621FilingInfo &
   SaleFormsFilingInfo &
@@ -344,6 +347,7 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve8801Info,
   resolve8814Info,
   resolve6781Info,
+  resolve8915FInfo,
   resolve461Info,
   resolve8621Info,
   ...SALE_FORMS_RESOLVERS,

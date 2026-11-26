@@ -33,6 +33,7 @@ export * from "./kinds/cleanVehicle.js";
 export * from "./kinds/dependentCare.js";
 export * from "./kinds/dependents.js";
 export * from "./kinds/depreciation.js";
+export * from "./kinds/disasterRetirement.js";
 export * from "./kinds/dividends.js";
 export * from "./kinds/earlyDistributionException.js";
 export * from "./kinds/earnedIncomeCredit.js";

@@ -32,6 +32,13 @@ export interface IraHolder {
   /* Part III: the person's code J and T 1099-Rs and their Roth IRA answers. */
   rothRows: RetirementDistributionFactValue[];
   roth?: RothIraFactValue;
+  /*
+   * Form 8915-F Part I column (b) of this person: the traditional IRA amount
+   * (line 15b) and the code J and T Roth IRA amount (line 25b). Undefined with
+   * no Form 8915-F distribution of that kind.
+   */
+  qualifiedDisasterTraditional?: number;
+  qualifiedDisasterRoth?: number;
 }
 
 export interface Form8606FilingInfo extends BaseFilingInfo {
