@@ -15,6 +15,7 @@ import {
   expenseLimit,
   expensesPaid,
   hasBenefits,
+  lessForeignExclusion,
 } from "./lines.js";
 import { SPOUSE_EARNED_INCOME, partIIIBindings } from "./partIII.js";
 import type { Form2441 } from "./types.js";
@@ -154,7 +155,7 @@ function earnedIncomeLine(
   info: Form2441FilingInfo,
   whose: "yours" | "spouse",
 ): number | Unsupported | undefined {
-  const income = earnedIncome(form, info);
+  const income = lessForeignExclusion(earnedIncome(form, info), info);
   if (income === undefined || "unsupported" in income) return income;
   return income[whose];
 }

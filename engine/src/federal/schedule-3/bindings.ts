@@ -11,6 +11,7 @@ import { LINE_19_ID, nonrefundableCreditGap } from "../8863/credit.js";
 import { creditGap, LINE_12_ID } from "../8880/credit.js";
 import { line6jFrom8911 } from "../8911/credit.js";
 import { personalCredit } from "../8936/credit.js";
+import { line6lFrom8978 } from "../8978/receivers.js";
 import type { Schedule3FilingInfo } from "./filingInfo.js";
 import type { Schedule3 } from "./types.js";
 
@@ -92,6 +93,15 @@ export function register(): void {
         const received = line6jFrom8911(form, info);
         return received === undefined ? unsupported(NO_SCENARIO) : received.value;
       },
+      /*
+       * MANUAL EDIT: line 6l, "Enter the amount from Form 8978, line 14" when it is
+       * negative, up to Form 1040 line 18 (irs-1040-inst-2025::sec::line-6l::b01,
+       * ::line-9-3::b01; federal/8978/receivers.ts). No Form 8978, the old reason.
+       */
+      "0.line.6l": (form, info) => {
+        const received = line6lFrom8978(form, info);
+        return received === "none" ? unsupported(NO_SCENARIO) : received;
+      },
       "0.line.5b": (form) => {
         const value = form["form-5695.3.line.32"];
         return typeof value === "number" ? value : undefined;
@@ -138,7 +148,6 @@ export function register(): void {
       "0.line.6h": NO_SCENARIO,
       "0.line.6i": NO_SCENARIO,
       "0.line.6k": NO_SCENARIO,
-      "0.line.6l": NO_SCENARIO,
       "0.line.6z_description": NO_SCENARIO,
       "0.line.6z_amount": NO_SCENARIO,
       "0.line.9":

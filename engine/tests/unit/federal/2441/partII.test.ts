@@ -7,6 +7,7 @@ import type {
   Form2441FilingInfo,
 } from "../../../../src/federal/2441/filingInfo.js";
 import { resolve2441Info } from "../../../../src/federal/2441/resolveInfo.js";
+import type { Form2555Filer } from "../../../../src/federal/2555/person.js";
 import { makeResolverInputs } from "../../../../src/resolverInputs.js";
 
 type Binding = (form: Record<string, unknown>, info: Form2441FilingInfo) => unknown;
@@ -140,6 +141,63 @@ describe("Form 2441 lines 4 and 5 with Schedule SE on a joint return", () => {
       3000 + 20000 - 1413,
       2000,
     ]);
+  });
+});
+
+describe("Form 2441 lines 4 and 5 with Form 2555", () => {
+  /*
+   * irs-2441-inst-2025::sec::lines-4-and-5::b01: line 1z "minus any amount ...
+   * Excluded as foreign earned income (including any housing exclusion) on Form
+   * 2555, line 43", each spouse's own form.
+   */
+  const filer = (owner: "taxpayer" | "spouse", line43: number) =>
+    ({
+      key: `foreign_earned_income.${owner}`,
+      owner,
+      answers: {},
+      usBusinessIncome: [],
+      days: 365,
+      exclusion: { line27: line43, claimsHousing: false, line43, relatedDeductions: 0 },
+    }) as unknown as Form2555Filer;
+  const with2555 = (filers: Form2555Filer[]) =>
+    ({
+      mustFile: { "form-2555": { ok: true, value: true } },
+      form2555Filers: filers,
+    }) as unknown as Partial<Form2441FilingInfo>;
+  const joint: Form2441FilingInfo = {
+    ...BASE,
+    dependentCarePersons: [person(3000), person(3001)],
+    filingStatus: "married_filing_jointly",
+    dependentCareStudentOrDisabledSpouse: false,
+    dependentCareSpouseHasBusiness: false,
+    dependentCareTaxpayerW2Wages: 120000,
+    dependentCareSpouseW2Wages: 40000,
+    dependentCareTaxpayerDisabilityWages: 0,
+    dependentCareSpouseDisabilityWages: 0,
+  };
+  const federal = {
+    ...OTHER_FORMS,
+    "form-1040.line.1a": 160000,
+    "form-1040.line.1z": 160000,
+    "form-1040.line.11a": 40000,
+  };
+
+  it("the taxpayer's excluded wages leave his earned income at 0, and the credit with it", () => {
+    const lines = evaluate({ ...joint, ...with2555([filer("taxpayer", 120000)]) }, federal);
+    expect([lines["0.line.4_earned_income"], lines["0.line.5_spouse_earned_income"]]).toEqual([
+      0, 40000,
+    ]);
+    expect(lines["0.line.6_smallest_of_3_4_5"]).toBe(0);
+  });
+
+  it("a single filer's line 4 is line 1z less line 43", () => {
+    const lines = evaluate({ ...BASE, ...with2555([filer("taxpayer", 3000)]) });
+    expect(lines["0.line.4_earned_income"]).toBe(2000);
+  });
+
+  it("no Form 2555: the wages count in full", () => {
+    const lines = evaluate(joint, federal);
+    expect(lines["0.line.4_earned_income"]).toBe(120000);
   });
 });
 

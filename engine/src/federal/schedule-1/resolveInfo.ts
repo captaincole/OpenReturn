@@ -11,6 +11,7 @@ import {
 import { sum, sumOrBlank } from "../../money.js";
 import { filingStatusOf, num, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import { resolve2106Info } from "../2106/resolveInfo.js";
+import { resolve2555Info } from "../2555/resolveInfo.js";
 import { resolve3903Info } from "../3903/resolveInfo.js";
 import { resolve4797Info } from "../4797/resolveInfo.js";
 import { form8621Totals } from "../8621/totals.js";
@@ -112,6 +113,11 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
       },
       form8621Fallback(inputs),
       form4797Fallback(inputs),
+      // Form 2555 line 45 goes on line 8d and line 50 on line 24j (line-8d::b01, line-24j::b01).
+      {
+        rule: "fallback: Form 2555 files (lines 8d and 24j)",
+        value: resolve2555Info(inputs).mustFile?.["form-2555"]?.value === true,
+      },
     ],
   });
   return {

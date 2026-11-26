@@ -38,6 +38,7 @@ import {
   isDependentFact,
   isDisabilityBeforeMinimumRetirementAgeKey,
   isDividendFact,
+  isEarlierYearReturnFactKey,
   isEnergyInvoiceFact,
   isGamblingWinningsFactKey,
   isGovernmentPaymentsFactKey,
@@ -57,6 +58,7 @@ import {
   isStatedQuantityFact,
   isStudentLoanInterestFactKey,
   isTradeFact,
+  isTrustAccumulationDistributionFactKey,
   isW2Fact,
   makeRothIraFactKey,
   makeTraditionalIraFactKey,
@@ -99,6 +101,9 @@ const DOCUMENT_FACTS = [
   // A K-1 is read whole; an item with no route shows on Schedule E line 41 as not supported.
   (fact: TaxFactRow) => isK1FactKey(fact.key),
   (fact: TaxFactRow) => isK1HoldingFactKey(fact.key),
+  // Form 4970: a trust's Schedule J (Form 1041) Part IV, and the five earlier years it reads.
+  (fact: TaxFactRow) => isTrustAccumulationDistributionFactKey(fact.key),
+  (fact: TaxFactRow) => isEarlierYearReturnFactKey(fact.key),
 ];
 
 /* support.test.ts fails when a resolver reads a key that is missing here. */

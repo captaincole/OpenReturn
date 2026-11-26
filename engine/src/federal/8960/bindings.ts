@@ -3,6 +3,7 @@
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
+import { earnedIncomeExclusionAddBack, files2555 } from "../2555/results.js";
 import { withForm8814 } from "../8814/totals.js";
 import { describeItem, entityTitle } from "../passThrough/items.js";
 import { receivedAmounts } from "../passThrough/receipts.js";
@@ -121,9 +122,17 @@ export function register(): void {
       },
       "0.line.11": (form) => sum(form["0.line.9d"], form["0.line.10"]),
       "0.line.12": (form) => netInvestmentIncome(form["0.line.8"], form["0.line.11"]),
-      // MAGI = AGI; the FEIE/CFC add-backs are not modeled. MANUAL EDIT: nor a K-1's code H adjustment.
-      "0.line.13": (form, info) =>
-        netInvestmentAdjustmentGap(info) ?? sum(form["form-1040.line.11b"]),
+      /*
+       * MAGI = AGI; the CFC add-backs are not modeled. MANUAL EDIT: nor a K-1's code H adjustment.
+       * MANUAL EDIT: MAGI Worksheet line 2(c), the Form 2555 exclusion added back (2555/results.ts).
+       */
+      "0.line.13": (form, info) => {
+        const gap = netInvestmentAdjustmentGap(info);
+        if (gap) return gap;
+        const foreign = files2555(info) ? earnedIncomeExclusionAddBack(form, info) : 0;
+        if (typeof foreign !== "number") return foreign;
+        return sum(form["form-1040.line.11b"], foreign);
+      },
       // MANUAL EDIT: statutory thresholds; not indexed for inflation.
       "0.line.14": (_, info) =>
         info.filingStatus ? NIIT_THRESHOLDS[info.filingStatus] : undefined,

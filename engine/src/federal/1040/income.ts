@@ -4,7 +4,9 @@ import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported } from "../../types.js";
 import { socialSecurityTaxable } from "../../worksheets/socialSecurityBenefits.js";
+import { files2555 } from "../2555/results.js";
 import { line1fFrom8839, socialSecurityGapFrom8839 } from "../8839/receivers.js";
+import { line4bWithForm8915F, line5bWithForm8915F } from "../8915-f/receivers.js";
 import { withLaterForm8919Copies } from "../8919/laterCopies.js";
 import { roundedWithReceived } from "../passThrough/receipts.js";
 import { PUB_590A_GAP } from "../schedule-1/pub590a.js";
@@ -15,6 +17,9 @@ import type { Form1040 } from "./types.js";
 import { WITHOUT_8839 } from "./withoutForm8839.js";
 
 type Form = FormAccessor<Form1040>;
+
+const PUB_915_WITH_FORM_2555 =
+  "Social security benefits with Form 2555: the Pub. 915 worksheet adds back the exclusions (irs-1040-inst-2025::sec::use-the-social-security-benefits::b01), and it is not modeled.";
 
 /*
  * MANUAL EDIT: document sums (1a, 2a–3b, 25a) round to the nearest dollar. Line
@@ -118,9 +123,18 @@ export const line4a = (_: unknown, info: Form1040FilingInfo) =>
 
 /*
  * MANUAL EDIT: line 4b adds the Form 8606 filer's line 18, and line 15c when
- * Part I applies (Part III, line 25c, is not modeled).
+ * Part I applies (Part III, line 25c, is not modeled). With a Form 8915-F,
+ * its line 26 and the IRA part of line 32 replace the 1099-R amounts it
+ * reports (federal/8915-f/receivers.ts).
  */
 export function line4b(form: Form, info: Form1040FilingInfo) {
+  const rows = line4bFromRows(form, info);
+  const disaster = info.form8915FReturn;
+  if (!disaster) return rows;
+  return line4bWithForm8915F(rows, info.iraDistributions !== undefined, form, disaster);
+}
+
+function line4bFromRows(form: Form, info: Form1040FilingInfo) {
   const ira = info.iraDistributions;
   if (ira?.taxable === undefined) return undefined;
   if (ira.form8606Filers === 0) return roundDollars(ira.taxable);
@@ -146,10 +160,15 @@ export const line5a = (_: unknown, info: Form1040FilingInfo) =>
     ? unsupported(info.pensionDistributionsGap)
     : roundDollars(info.pensionDistributions?.gross);
 
-export const line5b = (_: unknown, info: Form1040FilingInfo) =>
-  info.pensionDistributionsGap
-    ? unsupported(info.pensionDistributionsGap)
-    : roundDollars(info.pensionDistributions?.taxable);
+// MANUAL EDIT: with a Form 8915-F, its line 15 and the plan part of line 32 (federal/8915-f/receivers.ts).
+export function line5b(_: unknown, info: Form1040FilingInfo) {
+  if (info.pensionDistributionsGap) return unsupported(info.pensionDistributionsGap);
+  const rows = roundDollars(info.pensionDistributions?.taxable);
+  const disaster = info.form8915FReturn;
+  if (!disaster) return rows;
+  const waits = info.pensionDistributions !== undefined || info.line1hWaits === true;
+  return line5bWithForm8915F(rows, waits, disaster);
+}
 
 export const line5cRollover = (_: unknown, info: Form1040FilingInfo) =>
   info.pensionDistributions?.rollover ? true : undefined;
@@ -165,6 +184,9 @@ export function line6b(form: Form, info: Form1040FilingInfo) {
   // MANUAL EDIT: an adoption benefit exclusion takes the Pub. 915 worksheet (use-the-social-security-benefits::b01).
   const adoptionGap = socialSecurityGapFrom8839(info);
   if (adoptionGap) return adoptionGap;
+  // MANUAL EDIT: so does a Form 2555 ("You file Form 2555, 4563, or 8815 ... use the worksheet in Pub. 915", same block).
+  if (info.socialSecurityBenefits !== undefined && files2555(info))
+    return unsupported(PUB_915_WITH_FORM_2555);
   const benefits = info.socialSecurityBenefits;
   if (benefits === undefined || !info.filingStatus) return undefined;
   const mfs = info.filingStatus === "married_filing_separately";

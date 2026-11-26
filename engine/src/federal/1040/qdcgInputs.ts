@@ -7,7 +7,7 @@
 import { atLeast } from "../../money.js";
 import type { FilingStatus } from "../../values.js";
 import type { QdcgInputs } from "../../worksheets/qdcg.js";
-import { computeScheduleDTax } from "../../worksheets/scheduleDTax.js";
+import { computeScheduleDTax, type ScheduleDTaxResult } from "../../worksheets/scheduleDTax.js";
 
 /** Any form's accessor: full field ids ("schedule-d.0.line.15_…") resolve from every form. */
 type ReturnAccessor = { readonly [fieldId: string]: unknown };
@@ -39,7 +39,7 @@ export function qdcgInputsFromReturn(
     netLongTermGain: netLongTermGain(form),
     // MANUAL EDIT: Form 4952 line 4g leaves the preferential rates (Schedule D Tax Worksheet line 3).
     form4952Line4g: typeof form4952L4g === "number" ? form4952L4g : 0,
-    // TODO: the Foreign Earned Income Tax Worksheet, when Form 2555 lands.
+    // The Foreign Earned Income Tax Worksheet changes taxableIncome itself (foreignEarnedIncomeTax.ts).
     filingForm2555: false,
     filingStatus,
     taxYear: 2025,
@@ -62,6 +62,16 @@ export function scheduleDWorksheetTax(
   qualifiedDividends: number,
   filingStatus: FilingStatus,
 ): number | undefined {
+  return scheduleDWorksheet(form, taxableIncome, qualifiedDividends, filingStatus)?.tax;
+}
+
+/* The whole Schedule D Tax Worksheet, or undefined when the QDCG worksheet applies. */
+export function scheduleDWorksheet(
+  form: ReturnAccessor,
+  taxableIncome: number,
+  qualifiedDividends: number,
+  filingStatus: FilingStatus,
+): ScheduleDTaxResult | undefined {
   const line19 = positiveOrZero(form["schedule-d.1.line.19_unrecaptured_sec1250_gain"]);
   if (line19 === 0) return undefined;
   return computeScheduleDTax({
@@ -74,5 +84,5 @@ export function scheduleDWorksheetTax(
     scheduleDLine18: positiveOrZero(form["schedule-d.1.line.18_rate_gain_worksheet_amount"]),
     scheduleDLine19: line19,
     filingStatus,
-  }).tax;
+  });
 }

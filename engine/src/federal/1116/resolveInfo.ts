@@ -13,6 +13,7 @@ import {
   resolveMustFile,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { resolve2555Info } from "../2555/resolveInfo.js";
 import { receivedOnReturn } from "../passThrough/receipts.js";
 import type { ForeignTaxInfo, Form1116CategoryInfo, Form1116FilingInfo } from "./filingInfo.js";
 import { electionLimit } from "./lines.js";
@@ -30,15 +31,17 @@ const OTHER_CATEGORY_GAP =
 const NO_SOURCE_GAP =
   "Form 1116 files by decision, but no fact holds a foreign tax or foreign-source income (1099-DIV box 7, 1099-INT box 6, a trust K-1's foreign taxes, or a stated foreign tax).";
 const EXCLUDED_INCOME_GAP =
-  "Form 2555 or Form 4563 files: line 12 takes off the taxes on the excluded income (irs-1116-inst-2025::sec::line-12-2::b01, b02), and neither form has rules in the engine.";
+  "Form 2555 or Form 4563 files: line 12 takes off the taxes on the excluded income (irs-1116-inst-2025::sec::line-12-2::b01, b02), and the engine does not figure that part.";
 const LOSS_ACCOUNT_GAP =
   "An earlier year left a foreign or domestic loss account; line 16 recaptures it (irs-1116-inst-2025::sec::line-16::b06–b13), and the engine has no balances to do it.";
 const FORM_5471_GAP =
   "Form 5471 files: line 22 may take a section 960(c) increase (irs-1116-inst-2025::sec::line-22::b01), and the engine has no rules for it.";
 
-/* Forms 2555, 4563 and 5471 have no rules: only their must-file decision files them. */
+/* Forms 4563 and 5471 have no rules: only their must-file decision files them. Form 2555 files from its facts too. */
 const decidedToFile = (inputs: ResolverInputs, shortId: string) =>
-  inputs.decisionByKey.get(`decisions.scope.must_file_${shortId}`) === true;
+  shortId === "2555"
+    ? resolve2555Info(inputs).mustFile?.["form-2555"]?.value === true
+    : inputs.decisionByKey.get(`decisions.scope.must_file_${shortId}`) === true;
 
 /*
  * The election (irs-1116-inst-2025::sec::publications-see-pub-514-foreign-tax-credit-for::b01, b02):

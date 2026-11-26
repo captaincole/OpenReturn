@@ -1,5 +1,6 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Form461FilingInfo } from "../461/filingInfo.js";
+import type { Form8978FilingInfo } from "../8978/filingInfo.js";
 import type { ForeignTaxSource } from "./sources.js";
 
 /* The categories the engine figures a Form 1116 for. */
@@ -41,8 +42,13 @@ export interface ForeignTaxInfo {
   residentOf?: string;
 }
 
-/* Form 461's slots: line 16 reads its line 16 (copies.ts). */
-export interface Form1116FilingInfo extends BaseFilingInfo, Pick<Form461FilingInfo, "form461"> {
+/*
+ * Form 461's slots: line 16 reads its line 16 (copies.ts). Form 8978's: line
+ * 20 is lower by a negative line 14, and so is Form 6251 line 10, which reads
+ * these slots too.
+ */
+export interface Form1116FilingInfo
+  extends BaseFilingInfo, Pick<Form461FilingInfo, "form461">, Pick<Form8978FilingInfo, "form8978"> {
   foreignTax?: ForeignTaxInfo;
   /* The copy being rendered; 0 (the summary copy) when absent. */
   form1116CopyIndex?: number;

@@ -9,6 +9,7 @@ import { answerBindings } from "./answerBindings.js";
 import { line12 } from "./employeeBusinessExpenses.js";
 import { line8p, line8pHold } from "./excessBusinessLoss.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
+import { foreignExclusionHold, line24j, line8d } from "./foreignExclusion.js";
 import { line14, storageFeesOnlyBox } from "./movingExpenses.js";
 import { line21 } from "./studentLoanInterest.js";
 import type { Schedule1 } from "./types.js";
@@ -55,9 +56,12 @@ export function register(): void {
       "0.line.8g": (_, info) => roundDollars(info.alaskaPermanentFundDividends),
       // MANUAL EDIT: line 8p = Form 461 line 16 as a positive amount when below 0 (excessBusinessLoss.ts).
       "0.line.8p": line8p,
+      // MANUAL EDIT: lines 8d and 24j from Form 2555 (foreignExclusion.ts).
+      "0.line.8d": line8d,
+      "1.line.24j": line24j,
       // MANUAL EDIT: lines 8a, 8d and 8s are subtractions (printed in parentheses); line 8p holds it (excessBusinessLoss.ts).
       "0.line.9": (form, info) => {
-        const hold = line8pHold(form, info);
+        const hold = line8pHold(form, info) ?? foreignExclusionHold(form, info);
         if (hold !== undefined) return hold === "waiting" ? undefined : hold;
         return (
           sum(
@@ -115,8 +119,8 @@ export function register(): void {
        * 7 is blank with no 1099-G, and line 9 is a sum.
        */
       "0.line.10": (form, info) => {
-        // MANUAL EDIT: line 9 holds while Form 461 line 16 waits or is a gap (excessBusinessLoss.ts).
-        const hold = line8pHold(form, info);
+        // MANUAL EDIT: line 9 holds while Form 461 line 16 or Form 2555 waits or is a gap.
+        const hold = line8pHold(form, info) ?? foreignExclusionHold(form, info);
         if (hold !== undefined) return hold === "waiting" ? undefined : hold;
         return (info.hasBusiness === true && form["0.line.3"] === undefined) ||
           // MANUAL EDIT: Schedule E filed or still open (an unreadable rental fact), line 41 blank: wait too.
@@ -147,8 +151,11 @@ export function register(): void {
       "1.line.18": (_, info) => roundDollars(info.earlyWithdrawalPenalty),
       // MANUAL EDIT: line 21, the Student Loan Interest Deduction Worksheet (studentLoanInterest.ts).
       "1.line.21": line21,
-      "1.line.25": (form) =>
-        sum(
+      "1.line.25": (form, info) => {
+        // MANUAL EDIT: line 24j holds the total while Form 2555 waits or is a gap.
+        const hold = foreignExclusionHold(form, info);
+        if (hold !== undefined) return hold === "waiting" ? undefined : hold;
+        return sum(
           form["1.line.24a"],
           form["1.line.24b"],
           form["1.line.24c"],
@@ -161,9 +168,13 @@ export function register(): void {
           form["1.line.24j"],
           form["1.line.24k"],
           form["1.line.24z"],
-        ),
-      "1.line.26": (form) =>
-        sum(
+        );
+      },
+      "1.line.26": (form, info) => {
+        // MANUAL EDIT: line 25 holds while Form 2555 waits; line 26 holds with it.
+        const hold = foreignExclusionHold(form, info);
+        if (hold !== undefined) return hold === "waiting" ? undefined : hold;
+        return sum(
           form["1.line.11"],
           form["1.line.12"],
           form["1.line.13"],
@@ -177,7 +188,8 @@ export function register(): void {
           form["1.line.21"],
           form["1.line.23"],
           form["1.line.25"],
-        ),
+        );
+      },
     },
 
     unsupported: {
@@ -194,7 +206,6 @@ export function register(): void {
         "No fact for a repayment of unemployment compensation; Cade says a repayment is not supported.",
       "0.line.8a": "No NOL carryforward scenario yet",
       "0.line.8c": "No 1099-C cancellation-of-debt ingestion yet",
-      "0.line.8d": "No Form 2555 foreign earned income exclusion scenario yet",
       "0.line.8j": "No hobby (not-for-profit activity) income scenario yet.",
       "0.line.8l": "No personal-property rental income scenario yet.",
       "0.line.8m": "No Olympic/Paralympic medal or USOC prize money scenario yet.",
@@ -212,8 +223,6 @@ export function register(): void {
       "1.line.24b": "No personal-property rental scenario (line 8l) yet.",
       "1.line.24c": "No Olympic/Paralympic medal or USOC prize scenario (line 8m) yet.",
       "1.line.24g": "No chaplain 403(b) contribution scenario or facts yet.",
-      "1.line.24j":
-        "Form 2555 (foreign housing deduction) not ingested; no foreign-income scenario yet.",
       "1.line.24k":
         "No Schedule K-1 (Form 1041) ingestion yet for box 11 code A excess deductions.",
       "1.line.24z_type": "No write-in other-adjustment scenario or facts yet.",

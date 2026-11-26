@@ -25,6 +25,7 @@ import { text, type ResolverInputs } from "../../resolverInputs.js";
 import { rowTaxable } from "../1040/rowTaxable.js";
 import { NONQUALIFIED_ROTH_CODES, partIIIFigures } from "../8606/partIII.js";
 import { form8606Filers } from "../8606/resolveInfo.js";
+import { form8915FExclusions } from "../8915-f/resolveInfo.js";
 import type { EarlyDistributionPerson } from "./filingInfo.js";
 import type { EarlyDistributionRow } from "./lines.js";
 
@@ -191,12 +192,14 @@ export function earlyDistributionPerson(
     return { person: { ...blank, gap: amounts, pending: false }, invalidExceptionKeys: [] };
   }
   const over59AndAHalf = over59AndAHalfAllYear(inputs, owner);
+  const disaster = disasterExclusions(inputs, earlyFacts, amounts);
+  const inIncome = disaster.amounts;
   const reads = earlyFacts.map((fact, index) =>
-    exceptionOf(inputs, fact, amounts[index], over59AndAHalf),
+    exceptionOf(inputs, fact, inIncome[index], over59AndAHalf),
   );
   const rows: EarlyDistributionRow[] = earlyFacts
     .map((fact, index) => ({
-      amountInIncome: amounts[index],
+      amountInIncome: inIncome[index],
       simpleIraFirstTwoYears: hasDistributionCode(fact.distribution, [SIMPLE_IRA_CODE]),
       exception: reads[index].exception,
     }))
@@ -204,8 +207,32 @@ export function earlyDistributionPerson(
   const invalidExceptionKeys = reads.flatMap((read) => (read.invalidKey ? [read.invalidKey] : []));
   const pending = roth === "pending" || invalidExceptionKeys.length > 0;
   if (rows.length === 0 && !pending) return { invalidExceptionKeys };
-  const needsForm = rows.some((row) => row.exception || row.simpleIraFirstTwoYears);
+  const needsForm =
+    disaster.reduced || rows.some((row) => row.exception || row.simpleIraFirstTwoYears);
   return { person: { ...blank, rows, pending, needsForm }, invalidExceptionKeys };
+}
+
+/*
+ * Line 1 leaves out "qualified disaster recovery distributions"
+ * (irs-5329-inst-2025::sec::line-1::b01) and the repaid part of a Form 8915-F
+ * Part IV distribution (federal/8915-f/returnTotals.ts). Then the tax is not
+ * owed "on the full amount shown on each Form 1099-R", so the form files
+ * (::who-must-file::b01–b02).
+ */
+function disasterExclusions(
+  inputs: ResolverInputs,
+  earlyFacts: RetirementDistributionFact[],
+  amounts: number[],
+): { amounts: number[]; reduced: boolean } {
+  const excluded = form8915FExclusions(inputs);
+  if (excluded.size === 0) return { amounts, reduced: false };
+  const less = earlyFacts.map((fact, index) =>
+    Math.min(amounts[index], excluded.get(fact.sourceFact.key) ?? 0),
+  );
+  return {
+    amounts: amounts.map((amount, index) => atLeast(0, amount - less[index])),
+    reduced: less.some((amount) => amount > 0),
+  };
 }
 
 /* Every 1099-R fact on the return. */

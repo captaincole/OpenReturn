@@ -160,6 +160,11 @@ export function modifiedAgi(form: MagiFields, info: MagiInfo): number | undefine
   const scheduleE = nonpassiveScheduleE(form, info);
   const partII = nonpassivePartII(form, info);
   if (scheduleE === undefined || partII === undefined) return undefined;
+  /*
+   * MANUAL EDIT: Form 2555 lines 45 and 50 stay subtracted (Schedule 1 lines 8d and 24j):
+   * neither line-6::b01 nor Pub. 925 (rental-activities::b09, ::b10) lists the
+   * foreign exclusions among the items left out.
+   */
   const income = sum(
     ...FORM_1040_INCOME.map((line) => form[`form-1040.${line}`]),
     interestBeforeExclusion(form, info),

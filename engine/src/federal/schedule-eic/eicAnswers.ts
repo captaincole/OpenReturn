@@ -18,6 +18,7 @@ import {
   text,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { resolve2555Info } from "../2555/resolveInfo.js";
 import { noChildEicAge, type EicAnswers } from "./credit.js";
 import { eicMayApply } from "./possible.js";
 import { eicQualifyingChildren } from "./qualifyingChild.js";
@@ -61,6 +62,7 @@ export function resolveEicLineInfo(inputs: ResolverInputs): EicLineInfo {
         ? true
         : answer(inputs, SPOUSE_KEYS.livedApartLastSixMonths),
     legallySeparatedApartAtYearEnd: answer(inputs, SPOUSE_KEYS.legallySeparatedApartAtYearEnd),
+    filesForm2555: resolve2555Info(inputs).mustFile?.["form-2555"]?.value === true,
     selfEmployed: businessesOnReturn(inputs.facts, joint).businesses.length > 0,
     statutoryEmployee: w2s.some((w2) => w2.box13?.statutoryEmployee === true),
     openDependentKeys: open.map((dependent) => dependent.sourceFact.key),

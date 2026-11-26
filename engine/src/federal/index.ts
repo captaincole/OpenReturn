@@ -599,6 +599,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 2555",
     relativeDir: "federal/2555",
     register: registerForm2555,
+    // One Form 2555 for each person who claims an exclusion (federal/2555/filingInfo.ts).
+    copies: {
+      count: (info) => info?.form2555Filers?.length ?? 1,
+      select: (info, index) => info && { ...info, form2555CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-3800",
@@ -782,6 +787,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8828",
     relativeDir: "federal/8828",
     register: registerForm8828,
+    // One Form 8828 for each sold home that files (federal/8828/resolveInfo.ts).
+    copies: {
+      count: (info) => info?.form8828Copies?.length ?? 1,
+      select: (info, index) => info && { ...info, form8828CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-8834",
@@ -858,6 +868,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8915-F",
     relativeDir: "federal/8915-f",
     register: registerForm8915F,
+    // One Form 8915-F for each person and item B year (8915-f/resolveInfo.ts).
+    copies: {
+      count: (info) => info?.form8915FCopies?.length ?? 1,
+      select: (info, index) => info && { ...info, form8915FCopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-8919",
@@ -903,6 +918,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8978",
     relativeDir: "federal/8978",
     register: registerForm8978,
+    /* One form for each source, the AAR form first, four years to a form (federal/8978/plan.ts). */
+    copies: {
+      count: (info) => Math.max(1, info?.form8978?.copies.length ?? 1),
+      select: (info, index) => info && { ...info, form8978CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-8992",

@@ -7,6 +7,7 @@
  * from "still waiting".
  */
 
+import { files2555 } from "../../../federal/2555/results.js";
 import { numberOrBlank } from "../../../money.js";
 import { unsupported } from "../../../types.js";
 import { caEitcTableCredit } from "./eitcTable.js";
@@ -71,10 +72,13 @@ function separatedSpouse(info: Form3514FilingInfo, children: number): Step {
 
 /*
  * Step 1: a, federal AGI under $32,901; b, an SSN or ITIN for each filer; d,
- * the separated-spouse rule; f, a nonresident alien files jointly; g, Form
- * 540NR is not modeled. Question e (Form 2555) has no fact kind.
+ * the separated-spouse rule; e, "Are you filing federal Form 2555, Foreign
+ * Earned Income? Yes Stop here, you cannot take the credit"
+ * (ca-3514-inst-2025::sec::step-1-qualifications-for-all-filers::b02); f, a
+ * nonresident alien files jointly; g, Form 540NR is not modeled.
  */
 function step1(form: Lines, info: Form3514FilingInfo, joint: boolean): Step {
+  if (files2555(info)) return NONE;
   if (info.caFullYearResident === undefined) return WAITING;
   if (!info.caFullYearResident) return gap(PART_YEAR_GAP);
   const agi = numberOrBlank(form["form-1040.line.11b"]);

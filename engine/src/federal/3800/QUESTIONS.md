@@ -10,7 +10,7 @@ The engine fills Form 3800 for an individual. The instructions publish no exampl
 | Item B (transfers) | Stated rule |
 | Part I lines 1, 4, 5, 6 | Stated rule |
 | Part I lines 2, 3; Part II lines 23, 24, 32, 33 (passive credits) | Unsupported: Form 8582-CR |
-| Part II lines 7 to 17 | Stated rule (line 14: decision A18) |
+| Part II lines 7 to 17 | Stated rule (line 14: decision A33) |
 | Part II lines 18 to 26 (empowerment zone) | Stated rule |
 | Part II lines 27 to 38 | Stated rule |
 | Part III columns (a) to (g), every row and total | Stated rule |
@@ -20,16 +20,16 @@ The engine fills Form 3800 for an individual. The instructions publish no exampl
 | Part III lines 1e, 1k (caps) | Stated rule |
 | Part III lines 1s, 1y, 1aa | Stated rule (Forms 8911 and 8936) |
 | Part IV columns (a) to (f), (h) | Stated rule |
-| Part IV columns (g), (i) | Decision A20 and A19; the order inside one year is own reading (item 2) |
+| Part IV columns (g), (i) | Decision A35 and A34; the order inside one year is own reading (item 2) |
 | Part V, Part VI | Stated rule; when a line needs a breakdown is own reading (item 1) |
 
 ## Two texts conflict
 
 Each one is decided by the author, with a `DECISION` comment and a row in `docs/rule-decisions.md`.
 
-- **A18, line 14 (the tentative minimum tax).** Form 3800 reads Form 6251 line 9; Form 6251 leaves its line 8 blank when line 10 is at least line 7. The engine takes line 7 less the credit line 8 would hold, as rows 12 and A14 do. `tax.ts`.
-- **A19, a recaptured carryover (Part IV column (h)).** Line 4 reads column (f); the carryforward "must be reduced if there has been a recapture". The engine uses column (f) less column (h). `rowLines.ts`.
-- **A20, Part IV column (g).** The caption says the amount applied against tax; the instruction says line 7 equals Part II lines 33 to 35. The engine follows the caption, first in, first out. `allocation.ts`.
+- **A33, line 14 (the tentative minimum tax).** Form 3800 reads Form 6251 line 9; Form 6251 leaves its line 8 blank when line 10 is at least line 7. The engine takes line 7 less the credit line 8 would hold, as rows 12 and A14 do. `tax.ts`.
+- **A34, a recaptured carryover (Part IV column (h)).** Line 4 reads column (f); the carryforward "must be reduced if there has been a recapture". The engine uses column (f) less column (h). `rowLines.ts`.
+- **A35, Part IV column (g).** The caption says the amount applied against tax; the instruction says line 7 equals Part II lines 33 to 35. The engine follows the caption, first in, first out. `allocation.ts`.
 
 ## Should we do this now
 
@@ -125,5 +125,5 @@ Each one is a larger change; the reason it is not done now is in its first sente
 
 - **PolicyEngine-US 2.154.0** (commit `363e9fc5`, 2026-11-25). It does not model Form 3800. `general_business_credit` is a bare input with no formula (`variables/gov/irs/credits/general_business/general_business_credit.py`), and it has none of the source credits (Forms 8826, 8820, 5884, 6765, 8882, 8844), no line 13 or line 14 limit, and no carryforward. Its only limit is the cap of all nonrefundable credits at the income tax before credits. There is nothing to compare for the constants ($25,000, 25%, 75%, $5,000, $150,000) or the ordering.
 - **Other projects.** The repository names no other reference implementation that models Form 3800. IRS Direct File (issue #140) is not checked out here, and it does not support business credits.
-- **Blind fill** (2026-11-25, 14 cases): every compared line matches the engine, including blank against 0. Its dollar doubts are decisions A19 and A20 and items 11 and 12.
+- **Blind fill** (2026-11-25, 14 cases): every compared line matches the engine, including blank against 0. Its dollar doubts are decisions A34 and A35 and items 11 and 12.
 - **Second pass** (2026-11-25): every printed value of `renald` on Form 3800, Form 6251, Schedule 3 and Form 1040 was worked again by hand; none differs.

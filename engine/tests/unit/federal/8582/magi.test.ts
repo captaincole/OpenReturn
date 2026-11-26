@@ -8,6 +8,7 @@ import { describe, expect, it } from "vitest";
 import type { FormAccessor } from "../../../../src/defineForm.js";
 import type { RentalFactValue, W2FactValue } from "../../../../src/facts/index.js";
 import type { TaxFactRow } from "../../../../src/facts/rows.js";
+import type { Form2555Filer } from "../../../../src/federal/2555/person.js";
 import type { Form8582FilingInfo } from "../../../../src/federal/8582/filingInfo.js";
 import { modifiedAgi } from "../../../../src/federal/8582/magi.js";
 import type { Form8582 } from "../../../../src/federal/8582/types.js";
@@ -57,6 +58,44 @@ describe("Form 8582 line 6 with a self-rental", () => {
 
   it("leaves out a passive rental's income that is not a self-rental", () => {
     expect(line6(10000, property({ propertyType: "single_family" }))).toBe(120000);
+  });
+});
+
+/*
+ * Line 6 lists no foreign earned income or housing exclusion among the items
+ * left out (irs-8582-inst-2025::sec::line-6::b01), so Form 2555 line 45 stays
+ * subtracted through Schedule 1 line 9.
+ */
+describe("Form 8582 line 6 with Form 2555", () => {
+  const filer = {
+    key: "foreign_earned_income.taxpayer",
+    owner: "taxpayer",
+    answers: {},
+    usBusinessIncome: [],
+    days: 365,
+    exclusion: {
+      line27: 130000,
+      claimsHousing: false,
+      line43: 130000,
+      relatedDeductions: 0,
+      selfEmployment: "none",
+    },
+  } as unknown as Form2555Filer;
+
+  it("keeps the excluded wages out: $10,000 of interest is the whole line", () => {
+    const magi = modifiedAgi(
+      {
+        "form-1040.line.1z": 130000,
+        "form-1040.line.2b": 10000,
+        "schedule-1.0.line.9": -130000,
+      } as unknown as FormAccessor<Form8582>,
+      {
+        filingStatus: "single",
+        mustFile: { "form-2555": { ok: true, value: true } },
+        form2555Filers: [filer],
+      } as unknown as Form8582FilingInfo,
+    );
+    expect(magi).toBe(10000);
   });
 });
 

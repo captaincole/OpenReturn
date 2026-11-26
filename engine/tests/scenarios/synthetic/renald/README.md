@@ -7,7 +7,7 @@ Renald is a structural engineer with one W-2. He works in three partnerships and
 The scenario fills Form 3800 for an individual:
 
 - Part III: a research credit (line 1c) cut by the research credit limitation, two disabled access credits (line 1e) capped at $5,000 together, an empowerment zone credit (line 3), and two specified credits (lines 4b, 4h). Column (c) names the pass-through entity.
-- Part IV: carryovers on lines 1e (two years), 3 and 4b. Two are marked changed from the original return, and one has $200 recaptured (decision A19).
+- Part IV: carryovers on lines 1e (two years), 3 and 4b. Two are marked changed from the original return, and one has $200 recaptured (decision A34).
 - Part II: the tax limit stops the general credits (line 17 is less than line 6). The disabled access credit of the second K-1 carries $1,066 to 2026 (Part V column (k)).
 - Part V: the two line 1e credits. Part VI: the two line 1e carryovers.
 - Form 6251 files for line 14, and Schedule 3 line 6a takes line 38.
@@ -56,7 +56,7 @@ The three K-1s are PDFs in `docs/`, made by `generate-docs.ts` from the existing
 | 3800 line 22, 25, 26 | Part III line 3 (e) 1,500 + Part IV line 3 (f) 700 | 2,200 |
 | 3800 line 27, 28, 29 | 141,485 − 29,121; 28,975 + 2,200; 112,364 − 31,175 | 112,364; 31,175; 81,189 |
 | 3800 line 30 | 2,400 + 1,800 | 4,200 |
-| 3800 line 34 | Part IV 4b (f) 1,200 less (h) 200 (decision A19) | 1,000 |
+| 3800 line 34 | Part IV 4b (f) 1,200 less (h) 200 (decision A34) | 1,000 |
 | 3800 line 36, 37 | 4,200 + 1,000; smaller of 81,189 | 5,200 |
 | 3800 line 38 | 31,175 + 5,200 | 36,375 |
 | 3800 Part IV (g) | line 17 used first by the 2022 and 2023 carryforwards, all of lines 3 and 4b (4b: 1,200 − 200) | 2,000; 700; 1,000 |

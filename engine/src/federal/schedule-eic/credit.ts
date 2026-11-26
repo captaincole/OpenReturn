@@ -89,6 +89,8 @@ export interface EicAnswers {
   livedApartLastSixMonths?: boolean;
   /** MFS: legally separated and apart at the end of 2025 (Step 3, question 5). */
   legallySeparatedApartAtYearEnd?: boolean;
+  /** Step 1, question 3: "Are you filing Form 2555?" Yes: "You can't take the credit." */
+  filesForm2555?: boolean;
 }
 
 /** The return's lines and identity the steps read. */
@@ -131,8 +133,13 @@ const gap = (reason: string): EicOutcome => ({ kind: "unsupported", reason });
 /* Undefined when every answer is in and none stops the credit; else the outcome. */
 type Step = EicOutcome | undefined;
 
-/* Step 1, questions 1, 2 and 4. Form 2555 is not modeled (no fact kind). */
+/*
+ * Step 1, questions 1 to 4. Question 3 (irs-1040-inst-2025::sec::yes-continue-no-stop-9::b01):
+ * "Are you filing Form 2555 (relating to foreign earned income)? Yes. STOP You
+ * can't take the credit."
+ */
 function step1(ret: EicReturn, answers: EicAnswers, joint: boolean): Step {
+  if (answers.filesForm2555 === true) return none(false);
   if (ret.agi === undefined) return WAITING;
   // A dependent still open could add a child: only the largest limit decides then.
   const children = answers.childrenOpen ? 3 : answers.childrenWithSsn;

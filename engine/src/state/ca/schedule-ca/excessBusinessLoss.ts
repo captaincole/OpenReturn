@@ -94,10 +94,14 @@ export const excessBusinessLossBindings: Bindings = {
     if (typeof used !== "number" || used === 0) return base;
     return typeof base === "string" ? `${base}, ${CARRYOVER_LABEL}` : CARRYOVER_LABEL;
   },
-  /* Line 9a column C: with a line 8p column C amount, the column's rows added (a gap row counts 0, as in column B). */
+  /*
+   * Line 9a column C: with a line 8p column C amount, the column's rows added (a gap row counts 0, as in column B).
+   * MANUAL EDIT: the same with a line 8d column C amount, the federal Form 2555 exclusion (foreignExclusion.ts).
+   */
   "2.line.b9a_additions": (form, info) => {
     const base = childIncomeBindings["2.line.b9a_additions"]!(form, info);
-    if (numberOrBlank(form["1.line.b8p_additions"]) === undefined) return base;
+    const rowAmounts = [form["1.line.b8p_additions"], form["1.line.b8d_additions"]];
+    if (rowAmounts.every((row) => numberOrBlank(row) === undefined)) return base;
     return sumOrBlank(...OTHER_INCOME_ADDITIONS.map((id) => form[id]));
   },
 };

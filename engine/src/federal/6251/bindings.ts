@@ -9,6 +9,7 @@ import { SSN, type FilingStatus } from "../../values.js";
 import { computeQdcg, type QdcgBreakdown } from "../../worksheets/qdcg.js";
 import { standardDeduction } from "../1040/deductions.js";
 import { qdcgInputsFromReturn } from "../1040/qdcgInputs.js";
+import { files2555 } from "../2555/results.js";
 import { withForm8814 } from "../8814/totals.js";
 import type { Form6251FilingInfo } from "./filingInfo.js";
 import { line10Of, line11Of, line8Of, line9Of } from "./foreignTaxCredit.js";
@@ -50,6 +51,8 @@ const TWENTY_PERCENT = 0.2;
 const TWENTY_FIVE_PERCENT = 0.25;
 const TAX_YEAR = 2025;
 
+const AMT_FOREIGN_EARNED_INCOME =
+  "Form 2555 files: line 7 comes from the Foreign Earned Income Tax Worksheet in the Instructions for Form 6251, which the engine does not model.";
 const LINE_3_UNSUPPORTED =
   "No fact says whether a deducted mortgage is on a qualified dwelling, and the other line 3 items (pre-1987 depreciation, Form 8990, related adjustments) are not modeled.";
 
@@ -343,6 +346,8 @@ export function register(): void {
         const line6 = numberOrBlank(form["0.line.6_amti_less_exemption"]);
         if (line6 === undefined || info.filingStatus === undefined) return undefined;
         if (line6 === 0) return 0;
+        // MANUAL EDIT: with Form 2555, "use the Foreign Earned Income Tax Worksheet in the Instructions for Form 6251" (irs-2555-inst-2025::sec::figuring-tax-on-income-not-excluded::b01).
+        if (files2555(info)) return unsupported(AMT_FOREIGN_EARNED_INCOME);
         return completesPartIII(form)
           ? form["1.line.40_smaller_line_38_or_39"]
           : amtTaxAtRates(line6, info.filingStatus);

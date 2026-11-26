@@ -311,7 +311,9 @@ describe("Form 8615 cases the engine does not handle", () => {
   it("the child's Form 2555: every line", () => {
     const run = evaluate({}, { "decisions.scope.must_file_2555": true });
     expect(run.field(LINE("1_child_unearned_income"))).toMatchObject(UNSUPPORTED);
-    expect(run.field(LINE_16)).toMatchObject(UNSUPPORTED);
+    // Form 2555 files by the decision with no answers: it asks for them, and line 16 waits.
+    expect(run.pending.pendingFacts).toContain("foreign_earned_income.taxpayer");
+    expect(run.value(LINE_16)).toBeUndefined();
   });
 });
 

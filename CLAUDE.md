@@ -84,7 +84,7 @@ cade/                            # @openreturn/cade — CADE, the AI CPA. Mastra
 └── tsconfig.json                # "paths" aliases @openreturn/engine to source so `mastra dev` bundles it
 web/                             # Next.js 16 (App Router) frontend → deployed to Vercel
 ├── app/                         # /setup, /login, /notice, (app)/{page (home), r/[returnId], r/[returnId]/deductions, ask/[threadId],
-│                                  library, library/[docId], library/graph}, /documents/[id] + /api/* route handlers
+│                                  library, library/[docId], library/graph, library/law, library/law/[section]}, /documents/[id] + /api/* route handlers
 ├── components/                  # AppShell, ChatPane, DeductionReplies, ActivityCard, PlanCard, TopBar, Markdown
 ├── data/                        # form-graph.json: written by `npm run form-graph`, drawn at /library/graph
 ├── lib/                         # session, authMode, localAuth, accessAuth, sessionToken, userStore, serverDb, api, ask, activity, chatSession, deductions, mastraClient, …
@@ -410,6 +410,7 @@ Falls back gracefully to keyword-only (searching always works; semantic quality 
 The tax statute is a second library file, `canon/.data/law.db` (`LAW_DB_PATH`), with the same tables and the same search code as `corpus.db` (`Library` in `canon/src/db/libsql.ts`; every store and search function takes it and defaults to the corpus). Today it holds the Internal Revenue Code (Title 26), one document, `usc-26-2025`, pinned to one dated release of the Code in `sources/2025/law/federal/usc-26/law.meta.json`. Treasury regulations and California's code are not in it yet.
 
 - **Never searched by default.** `searchRefDocs`, Ask and the grounding review read only `corpus.db`. An agent calls `searchLaw` or `readLaw` (Canon's MCP tools, `canon/src/mastra/tools/law.ts`) after it searched the instructions, when two instructions conflict or do not settle the question. The instructions supply the statute's terms for the query.
+- **A person reads one section in the web app** at `/library/law/[section]` (`/library/law/469#g-1-A` opens at a subdivision). The page asks Canon for that section on the server when it opens (`GET /app/law/sections/:section`, `canon/src/mastra/server/routes/law.ts`). Nothing else in the web app loads the law: `/library` shows only a tab that links to it. `lawHref` in `web/lib/law.ts` makes the link from a citation or a block id.
 - **Optional.** `npm run corpus -- law fetch` installs it, and `law sync` builds it. Without it the two tools answer `installed: false`, and nothing creates the file.
 - **A passage is a subdivision of a section, and its id is its citation:** `usc-26-2025::sec::s469::g-1` is section 469(g)(1). `canon/src/law/parseUslm.ts` reads the official XML: a subdivision of at most 1,200 characters is one block, and a larger one splits into its children. A subdivision packed into its parent has no block of its own: `readLaw("469(g)(1)(A)")` returns block `g-1`.
 - **No model call at ingest.** Each block's search text is its citation, the headings above it and the lead text of its parents. The eval (`npm run evals:law`, report in `docs/evals/law.md`) checks that agent-written queries find the right section.

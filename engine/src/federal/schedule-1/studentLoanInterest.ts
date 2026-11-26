@@ -9,6 +9,7 @@ import { STUDENT_LOAN_KEYS, studentLoanInterestForms } from "../../facts/index.j
 import { roundDollars, sum } from "../../money.js";
 import { filingStatusOf, missingInputs, type ResolverInputs } from "../../resolverInputs.js";
 import { unsupported } from "../../types.js";
+import { files2555 } from "../2555/results.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
 import type { Schedule1 } from "./types.js";
 
@@ -20,6 +21,15 @@ const PHASEOUT_START_OTHER = 85000;
 /* Worksheet line 7: divide by $30,000 married filing jointly, else $15,000. */
 const PHASEOUT_RANGE_JOINT = 30000;
 const PHASEOUT_RANGE_OTHER = 15000;
+
+/*
+ * The line 21 instructions send a filer of Form 2555 to Pub. 970, whose MAGI
+ * adds back the exclusions (irs-pub-970-2025::sec::magi-for-the-lifetime::b01
+ * is the same add-back for the education credits); the worksheet here has no
+ * line for them.
+ */
+const PUB_970_WITH_FORM_2555 =
+  "Student loan interest with Form 2555: the deduction's modified AGI adds back the exclusions (Pub. 970), and the 1040 worksheet has no line for them.";
 
 export const BOX_2_CHECKED =
   "A Form 1098-E has box 2 checked: box 1 leaves out loan origination fees or capitalized interest on loans made before September 1, 2004, which Pub. 970 figures; the engine does not.";
@@ -77,6 +87,7 @@ export function line21(form: FormAccessor<Schedule1>, info: Schedule1FilingInfo)
   if (info.filingStatus === "married_filing_separately") return undefined;
   if (info.studentLoanClaimedAsDependent !== false) return undefined;
   if (info.studentLoanBox2Checked) return unsupported(BOX_2_CHECKED);
+  if (files2555(info)) return unsupported(PUB_970_WITH_FORM_2555);
   const totalIncome = form["form-1040.line.9"];
   if (typeof totalIncome !== "number") return undefined;
   const otherAdjustments = sum(
