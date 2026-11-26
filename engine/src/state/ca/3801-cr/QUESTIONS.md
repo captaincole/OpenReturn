@@ -13,26 +13,26 @@ The engine fills FTB 3801-CR for a Form 540 filer from the California passive cr
 | Lines 8 to 16 | Stated rule (the same lines as federal Form 8582-CR) |
 | Line 10 | Stated rule; RDPs are own reading (item 6) |
 | Line 13 | Stated rule |
-| Line 17 | Stated rule; line 7 at zero: decision A46; low-income housing: decision A47 |
-| Worksheets 5 to 9 (the allowed credit of each code) | Stated rule (the federal worksheets); Worksheets 6 and 7 share the low-income housing offset (decision A47) |
+| Line 17 | Stated rule; line 7 at zero: decision A55; low-income housing: decision A56 |
+| Worksheets 5 to 9 (the allowed credit of each code) | Stated rule (the federal worksheets); Worksheets 6 and 7 share the low-income housing offset (decision A56) |
 | Lines 18 to 21 (Part IV) | Stated rule; the lower credit is own reading (item 7) |
-| Form 540 lines 43 to 45, Schedule P (540) lines 16 to 18 | Stated rule; the order is decision A48 |
+| Form 540 lines 43 to 45, Schedule P (540) lines 16 to 18 | Stated rule; the order is decision A57 |
 
 ## Two texts conflict
 
 Each is decided by the author, with a `DECISION` comment and a row in `docs/rule-decisions.md`.
 
-### 1. Line 17 when the tax on net passive income is more than the credits (A46)
+### 1. Line 17 when the tax on net passive income is more than the credits (A55)
 
 - Texts: the face, "Add line 6 and line 16"; the instructions, line 7: "enter the amount from line 5 on line 17" (`ca-3801cr-inst-2025::sec::line-7::b01`).
 - Decided: line 17 is never more than line 5. `lines.ts`.
 
-### 2. A low-income housing credit with nothing to offset (A47)
+### 2. A low-income housing credit with nothing to offset (A56)
 
 - Texts: Important Information says the dollar limit does not apply to the low-income housing credit (`ca-3801cr-inst-2025::sec::rental-real-estate-activities::b01`), and so does R&TC section 17561(d)(1), as the lead read a public copy on 2026-11-26; the form's lines allow lines 2c and 3c only through line 6.
 - Decided: the instructions and the statute. Lines 2c and 3c get the rental real estate offset with no dollar limit: line 17 adds the smaller of line 2c plus line 3c, and line 7 less line 16 (line 2c first). Lines 8 to 16 are unchanged. Worksheets 6 and 7 share the offset. A separate return that lived with the spouse has the credits on Worksheet 4, so it gets none. Schedule P (540) Section B2, or Form 540 lines 43 to 45, still limit the credit by the tax. `lines.ts`, `form.ts`, `creditUsed.ts`. Check the Code itself when it is in the library.
 
-### 3. The order of use in Schedule P (540) Section B2 (A48)
+### 3. The order of use in Schedule P (540) Section B2 (A57)
 
 - Texts: Section B2, limited carryovers first, or any order "if that is to your advantage" (`ca-540-sched-p-inst-2025::sec::section-b2-instructions::b01`); the business credit limitation, the low-income housing credit "after any business credits" (`::how-to-compute-the-limitation::b01`).
 - Decided: research (183), orphan drug (185), low-income housing (172), on every return. `creditUsed.ts`.
@@ -94,7 +94,7 @@ None.
 
 - **PolicyEngine-US 2.154.0** (commit `363e9fc5`, 2026-11-25). It does not model this form. Its California code (`variables/gov/states/ca`, `parameters/gov/states/ca`) has no passive activity credit, no research, orphan drug or low-income housing credit, and no special allowance. Its federal code applies no section 469 limit to credits either (see `federal/8582-cr/QUESTIONS.md`). There is nothing to compare.
 - **Other projects.** The repository names no other reference implementation that models California passive credits. IRS Direct File (issue #140) is federal only, is not checked out here, and does not support passive activities or business credits.
-- **Blind fill** (2026-11-26, 14 cases): no line differs, in dollars or as blank against 0. The blind preparer's dollar doubts are decisions A46 (line 17 when line 6 is more than line 5) and A47 (item 2). Its other doubts change no dollars: line 17 is 0, not blank, when line 6 is an entered 0 and Part II is blank; line 12 rounds to the nearest dollar; a low-income housing credit through a pass-through interest bought before 1990 goes on line 2; an orphan drug carryover goes in column (b).
+- **Blind fill** (2026-11-26, 14 cases): no line differs, in dollars or as blank against 0. The blind preparer's dollar doubts are decisions A55 (line 17 when line 6 is more than line 5) and A56 (item 2). Its other doubts change no dollars: line 17 is 0, not blank, when line 6 is an entered 0 and Part II is blank; line 12 rounds to the nearest dollar; a low-income housing credit through a pass-through interest bought before 1990 goes on line 2; an orphan drug carryover goes in column (b).
 
 ## Proposals for a discussion
 

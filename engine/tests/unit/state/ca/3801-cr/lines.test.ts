@@ -48,7 +48,7 @@ describe("the published example on the California form: Mr. Jones's low-income h
   });
 });
 
-describe("the low-income housing credit's offset with no dollar limit (decision A47)", () => {
+describe("the low-income housing credit's offset with no dollar limit (decision A56)", () => {
   it("a credit on line 2 with no net passive income is allowed in full", () => {
     const lines = form3801CRLines({ line2a: 600, line2b: 1_800 }, inputs());
     expect(lines.line2c).toBe(2_400);
@@ -72,7 +72,7 @@ describe("the low-income housing credit's offset with no dollar limit (decision 
     expect(lines.line17).toBe(70_000);
   });
 
-  it("line 7 of 0 keeps line 5 on line 17 (decision A46)", () => {
+  it("line 7 of 0 keeps line 5 on line 17 (decision A55)", () => {
     const lines = form3801CRLines({ line1a: 500, line3a: 2_000 }, inputs({ line6: 5_000 }));
     expect(lines.line7).toBe(0);
     expect(lines.line17).toBe(2_500);
