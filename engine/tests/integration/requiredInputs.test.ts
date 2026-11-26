@@ -104,6 +104,22 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "year or a repayment is Cade's question",
   ],
   [
+    /^community_property\.item\.[^.]+$/,
+    "each fact is one whole item of Form 8958 (community or separate, the taxpayer's or the " +
+      "spouse's); whether one exists is Cade's question. Form 8958 lists the item again while an " +
+      "answer inside it (basis, owner, the community part) is missing",
+  ],
+  [
+    /^community_property\.spouses_living_apart_rules$/,
+    "an answer Cade records only when the spouses meet the four conditions of Pub. 555 " +
+      "(Spouses living apart all year); absent, community property law applies as usual",
+  ],
+  [
+    /^community_property\.married_during_year$/,
+    "an answer Cade records only for a single or head of household filer who was married " +
+      "during the year; absent, the other person on Form 8958 is a registered domestic partner",
+  ],
+  [
     /^canceled_debt\.[^.]+$/,
     "each fact is a whole canceled debt (Form 982, Schedule 1 line 8c); whether a debt was canceled " +
       "with no Form 1099-C is Cade's question. A Form 1099-C with no debt fact asks for one, and " +
