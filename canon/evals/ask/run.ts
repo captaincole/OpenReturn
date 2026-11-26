@@ -54,6 +54,7 @@ async function evalCase(testCase: AskCase, run: number): Promise<AskResult> {
       answer: "",
       coverage: null,
       citations: [] as { blockId: string }[],
+      statuteConsulted: false,
       error: err instanceof Error ? err.message : String(err),
     }));
   return scoreResult({
@@ -73,6 +74,7 @@ async function evalCase(testCase: AskCase, run: number): Promise<AskResult> {
     answer: result.answer,
     error: result.error,
     latencyMs: Date.now() - started,
+    statuteConsulted: result.statuteConsulted,
   });
 }
 

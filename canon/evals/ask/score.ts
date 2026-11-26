@@ -1,5 +1,6 @@
 // The report rescores saved runs with this, so a label fix needs no model rerun.
 import { hitsAll, type AnyOf } from "../lib/anyOf";
+import { citesSection } from "../lib/statute";
 import { CASES, type AskCase } from "./cases";
 import type { AskResult } from "./report";
 
@@ -30,5 +31,8 @@ export function scoreResult(result: AskResult): AskResult {
       : citedAuthority || result.retrievedAuthority,
     factsOk: testCase.facts.length ? missing.length === 0 : null,
     missingFacts: missing,
+    // Scored apart: neither changes whether the run is correct.
+    statuteOk: testCase.statute ? result.statuteConsulted === true : null,
+    statuteCitedOk: testCase.statute ? citesSection(result.cited, testCase.statute.section) : null,
   };
 }

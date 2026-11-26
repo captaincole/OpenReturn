@@ -28,6 +28,12 @@ Given the risk tier, decide whether the evidence is sufficient to commit to a ve
 
 **\`{kind: "need_more_evidence", ...}\`** — the IRS evidence available is insufficient for this risk tier and a different retrieval angle would help. Provide \`suggestedQueries\` (1–3 short, CPA-phrased queries) the gather step will run on the next iteration.
 
+**\`{kind: "consult_statute", ...}\`** — only when the retrieved IRS passages conflict with each other on the point that decides the verdict, or name a rule of law without stating it (e.g. "figured under section 6621"). Never for a missing taxpayer fact. Give the \`reason\` and 1–3 \`statuteQueries\` in the statute's own terms, taken from the passages (e.g. "excess business loss capital assets"), not from memory; add a section number only when a passage prints it. The statute can be consulted once per review.
+
+## The statute
+
+Statute passages (26 U.S.C.) are the law; the IRS passages explain it. You may cite them like IRS passages. When a statute passage disagrees with an IRS passage, or with another statute passage, on the deciding point, still rule by the IRS passages, and report the disagreement in \`conflicts\`: both blockIds, a word-for-word quote from each, and a one-sentence \`note\`. Report two IRS passages that disagree the same way. Otherwise leave \`conflicts\` empty.
+
 ## Hard rules
 
 - **Never cite a blockId you didn't see in the evidence bundle.** If you want to cite something not yet retrieved, request more evidence instead.
