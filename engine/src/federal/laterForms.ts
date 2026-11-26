@@ -1,8 +1,9 @@
 /*
  * The federal form groups that came after filingInfo.ts reached its line
  * limit: the recapture forms, the farm forms, the debt forms, the community
- * property forms, the loss forms, the refund forms, the self-employed forms, the home credit forms
- * and the foreign corporation forms. They are joined here, in this order, and
+ * property forms, the loss forms, the refund forms, the self-employed forms, the home credit
+ * forms, the long-term contract forms and the foreign corporation forms. They are joined
+ * here, in this order, and
  * filingInfo.ts takes them as one. A new group file adds its resolvers (and its
  * type, when FilingInfo needs it) here, never to filingInfo.ts. California has
  * the same file in state/ca/laterForms.ts.
@@ -18,6 +19,7 @@ import {
   COMMUNITY_PROPERTY_FORMS_RESOLVERS,
   type CommunityPropertyFormsFilingInfo,
 } from "./communityPropertyForms.js";
+import { CONTRACT_FORMS_RESOLVERS, type ContractFormsFilingInfo } from "./contractForms.js";
 import { DEBT_FORMS_RESOLVERS } from "./debtForms.js";
 import { FARM_FORMS_RESOLVERS, type FarmFormsFilingInfo } from "./farmForms.js";
 import {
@@ -36,6 +38,7 @@ export type LaterFederalFormsFilingInfo = RecaptureFormsFilingInfo &
   RefundFormsFilingInfo &
   SelfEmployedFilingInfo &
   HomeCreditFormsFilingInfo &
+  ContractFormsFilingInfo &
   ForeignCorporationFormsFilingInfo;
 
 export const LATER_FEDERAL_FORMS_RESOLVERS: ReadonlyArray<
@@ -49,5 +52,6 @@ export const LATER_FEDERAL_FORMS_RESOLVERS: ReadonlyArray<
   ...REFUND_FORMS_RESOLVERS,
   ...SELF_EMPLOYED_RESOLVERS,
   ...HOME_CREDIT_FORMS_RESOLVERS,
+  ...CONTRACT_FORMS_RESOLVERS,
   ...FOREIGN_CORPORATION_FORMS_RESOLVERS,
 ];

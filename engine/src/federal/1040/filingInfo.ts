@@ -36,6 +36,7 @@ import type { ScheduleSEFilingInfo } from "../schedule-se/filingInfo.js";
  * Line 29 reads Form 8863's figures to tell a gap from "no credit". Lines 17
  * and 18 read Form 1116's slots to tell a gap in the AMT from "no AMT".
  * Line 26 reads the estimated tax payments; lines 35a, 37 and 38 read Form 2210.
+ * Line 31 reads Schedule 3's Part II slots and Form 4136's (schedule-3/partTwo.ts).
  * The main-home box reads Form 2555's qualifying days.
  */
 export interface Form1040FilingInfo

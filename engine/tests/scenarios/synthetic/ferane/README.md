@@ -61,7 +61,7 @@ The year of an installment is 2025 − the line's year + 1 (`irs-965a-inst-2025:
 | Part IV line 1, (i) | 18,500 − 6,000 | 12,500 |
 | Part IV line 2, (g), (i) | transfer in: (g) and (i) only | 7,250 |
 | Part IV Total (i) | 12,500 + 7,250 | 19,750 |
-| Schedule 2 line 20 | Part II Totals (k) (decision A69) | 36,854 |
+| Schedule 2 line 20 | Part II Totals (k) (decision A72) | 36,854 |
 | Schedule 2 line 21 | line 20 is not added | blank |
 | 1040 line 1a, 9, 11a, 11b | W-2 box 1 | 188,000 |
 | 1040 line 12e, 14 | single standard deduction | 15,750 |

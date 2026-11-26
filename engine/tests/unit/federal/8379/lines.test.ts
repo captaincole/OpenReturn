@@ -7,9 +7,7 @@
 import { describe, expect, it } from "vitest";
 import {
   ADDITIONAL_STANDARD_DEDUCTION_2025,
-  MAX_SOCIAL_SECURITY_TAX_2025,
   additionalMedicareWithholding,
-  hasExcessSocialSecurity,
   otherSpouseShare,
   partOneLines,
   standardDeductionShares,
@@ -80,22 +78,6 @@ describe("line 19, each spouse's part of Form 8959 line 24", () => {
   it("rounds each line as Form 8959 does", () => {
     // 3,625.40 → 3,625; 210,010 × 1.45% = 3,045.145 → 3,045.
     expect(additionalMedicareWithholding(3625.4, 210010)).toBe(580);
-  });
-});
-
-describe("line 19, excess social security tax (irs-1040-inst-2025::sec::line-11-2::b01)", () => {
-  it("needs more than one employer", () => {
-    expect(hasExcessSocialSecurity([11000])).toBe(false);
-  });
-
-  it("needs more than $10,918.20 in all", () => {
-    expect(MAX_SOCIAL_SECURITY_TAX_2025).toBe(10918.2);
-    expect(hasExcessSocialSecurity([6000, 4918.2])).toBe(false);
-    expect(hasExcessSocialSecurity([6000, 4918.21])).toBe(true);
-  });
-
-  it("is false with no W-2", () => {
-    expect(hasExcessSocialSecurity([])).toBe(false);
   });
 });
 

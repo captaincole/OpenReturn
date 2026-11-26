@@ -2,9 +2,9 @@ import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { penaltyOnReturn } from "../2210/receivers.js";
-import { line12From4136 } from "../4136/receivers.js";
 import { line30From8839 } from "../8839/receivers.js";
 import { LINE_8_ID, refundableCreditGap } from "../8863/credit.js";
+import { line9From8962, partTwoTotal } from "../schedule-3/partTwo.js";
 import { schedule8812Line18aGap } from "../schedule-8812/earnedIncomeGap.js";
 import { eicOutcome } from "../schedule-eic/outcome.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
@@ -110,19 +110,21 @@ export function line30(form: Form, info: Form1040FilingInfo) {
   return received === undefined ? unsupported(WITHOUT_8839.line30) : received.value;
 }
 
-const LINE_31_WITHOUT_SCHEDULE_3 =
-  "Amount from Schedule 3 line 15 (additional refundable credits/payments) — Schedule 3 not ingested as a separate form catalog yet.";
+const NET_PTC_WITHOUT_SCHEDULE_3 =
+  "Form 8962 line 26 has a net premium tax credit for Schedule 3 line 9, and Schedule 3 is not on the return: its must-file rule cannot see line 26 (decisions.scope.must_file_schedule_3 files it).";
 
 /*
- * MANUAL EDIT: line 31, "Amount from Schedule 3, line 15". Schedule 3 line 15
- * holds an amount only with Form 4136: its line 12, the one Part II line the
- * engine computes. The line reads Form 4136's slots, not Schedule 3's field:
- * a read of Schedule 3 from Form 1040 adds fixpoint passes to every return.
- * Without Form 4136, the old reason.
+ * MANUAL EDIT: line 31, "Amount from Schedule 3, line 15": the total that
+ * Schedule 3 line 15 prints (schedule-3/partTwo.ts), read from the filing
+ * info and Form 8962, not from Schedule 3's field: a read of Schedule 3 from
+ * Form 1040 adds fixpoint passes to every return. Blank without Schedule 3,
+ * unless Form 8962 has a net credit that Schedule 3 line 9 must carry.
  */
-export function line31(_form: Form, info: Form1040FilingInfo) {
-  const received = line12From4136(info);
-  return received === undefined ? unsupported(LINE_31_WITHOUT_SCHEDULE_3) : received.value;
+export function line31(form: Form, info: Form1040FilingInfo) {
+  if (info.mustFile?.["schedule-3"]?.value === true) return partTwoTotal(form, info);
+  return line9From8962(form, info) === undefined
+    ? undefined
+    : unsupported(NET_PTC_WITHOUT_SCHEDULE_3);
 }
 
 /*

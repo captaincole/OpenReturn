@@ -6,8 +6,8 @@ Form 965-A is the yearly report of the section 965 transition tax of 2017 to 202
 
 Both are decided by the author, with a `DECISION` comment and a row in `docs/rule-decisions.md`.
 
-1. **A68: Part I column (j) holds every transfer and adjustment to date.** The Part I text says "current-year" amounts (`irs-965a-inst-2025::sec::lines-1-through-8::b01`); Part II column (j) adds column (j) to the liability (`line-1::b05`), which works only with all of them. The engine follows the arithmetic (`liabilityLines.ts`).
-2. **A69: Schedule 2 line 20 is Part II Totals, column (k).** The Form 965-A instructions name only the 2020 line (`line-1::b05`); the 2025 Schedule 2 line 20 names the form. The engine takes the Totals (`receivers.ts`).
+1. **A71: Part I column (j) holds every transfer and adjustment to date.** The Part I text says "current-year" amounts (`irs-965a-inst-2025::sec::lines-1-through-8::b01`); Part II column (j) adds column (j) to the liability (`line-1::b05`), which works only with all of them. The engine follows the arithmetic (`liabilityLines.ts`).
+2. **A72: Schedule 2 line 20 is Part II Totals, column (k).** The Form 965-A instructions name only the 2020 line (`line-1::b05`); the 2025 Schedule 2 line 20 names the form. The engine takes the Totals (`receivers.ts`).
 
 ## Should we do this now
 
@@ -46,10 +46,10 @@ Each doubt below has no conflicting text. Each is done, or says why not.
 | --- | --- |
 | Header (name, SSN, year) | stated rule |
 | Part I columns (b) to (f), (h), (i), (k) | stated rule |
-| Part I column (j) | own reading (decision A68) |
+| Part I column (j) | own reading (decision A71) |
 | Part II columns (b) to (i), 2025 installment | published example with numbers (`line-1::b02`, `lines-1-through-8::b03`, `b10`) |
 | Part II column (j) | stated rule |
-| Part II column (k), totals, Schedule 2 line 20 | stated rule, with decision A69 |
+| Part II column (k), totals, Schedule 2 line 20 | stated rule, with decision A72 |
 | Part III | stated rule |
 | Part IV columns (a) to (e), (g) to (i) | stated rule |
 | Part IV column (f), a 2025 triggering event | unsupported |

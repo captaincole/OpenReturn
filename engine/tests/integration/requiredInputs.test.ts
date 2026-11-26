@@ -162,6 +162,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "fell is Cade's question. A K-1 with a recapture asks for its building fact",
   ],
   [
+    /^look_back\.long_term_contracts$/,
+    "the fact is the whole look-back computation (Form 8697); whether a long-term contract was " +
+      "completed or adjusted in 2025 is Cade's question",
+  ],
+  [
     /^trust_accumulation_distribution\.[^.]+$/,
     "each fact is a whole trust's Schedule J (Form 1041) Part IV (Form 4970, one copy per " +
       "trust); whether the taxpayer received an accumulation distribution is Cade's question",
@@ -431,6 +436,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
   [
     /^estimated_tax\.prior_year_overpayment_applied$/,
     "recorded only when the 2024 return applied an overpayment to 2025 estimated tax",
+  ],
+  [
+    /^estimated_tax\.extension_payment$/,
+    "an answer Cade records only when the user paid with Form 4868, an extension payment or " +
+      "Form 2350 (Schedule 3 line 10); Schedule 3 files with it",
   ],
   [
     /^estimated_tax_penalty\.withholding_on\.[^.]+$/,
