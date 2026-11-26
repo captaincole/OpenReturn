@@ -15,6 +15,7 @@ import { earlyDistributionTax } from "../5329/lines.js";
 import { amtGap } from "../6251/foreignTaxCredit.js";
 import { recaptureTaxForSchedule2 as lowIncomeHousingRecaptureTax } from "../8611/results.js";
 import { form8621Amount } from "../8621/totals.js";
+import { lookBackInterestForSchedule2 } from "../8697/results.js";
 import { recaptureTaxForSchedule2 } from "../8828/results.js";
 import { files8853, form8853Total } from "../8853/results.js";
 import { withLaterForm8919Copies } from "../8919/laterCopies.js";
@@ -280,6 +281,13 @@ export function register(): void {
        */
       "1.line.17l_tax_accumulation_distribution_trusts": (_, info) =>
         info.form4970TaxGap !== undefined ? unsupported(info.form4970TaxGap) : info.form4970Tax,
+      /*
+       * MANUAL EDIT: line 17n is Form 8697 Part I line 10 or Part II line 11
+       * (irs-8697-inst-2025::sec::filing-instructions::b01; irs-1040-inst-2025::sec::line-17n::b01).
+       * Without Form 8697 it stays unsupported: Form 8866 is not modeled.
+       */
+      "1.line.17n_lookback_interest_section_167g_460b": (_, info) =>
+        lookBackInterestForSchedule2(info),
       "1.line.17p_interest_form8621_line16f_section_1291_fund": (_, info) =>
         form8621Line(info, (amounts) => amounts.section1291Interest, NO_PFIC),
       "1.line.17q_interest_form8621_line24": (_, info) =>
@@ -366,8 +374,6 @@ export function register(): void {
         "No golden parachute scenario yet (W-2 box 12 code K / 1099-NEC box 3 excise not modeled)",
       "1.line.17m_excise_tax_insider_stock_compensation_expatriated_corp":
         "No section 4985 expatriated-corporation insider stock compensation scenario yet.",
-      "1.line.17n_lookback_interest_section_167g_460b":
-        "No Form 8697/8866 look-back interest scenario yet.",
       "1.line.17o_tax_non_effectively_connected_income_nonresident_alien":
         "No dual-status / nonresident alien (Form 1040-NR) scenario yet.",
       "1.line.20_section_965_net_tax_liability_installment":
