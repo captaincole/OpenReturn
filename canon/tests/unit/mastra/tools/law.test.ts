@@ -12,6 +12,7 @@ const lawFile = process.env.LAW_DB_PATH;
 const { writeDocument } = await import("../../../../src/db/corpusStore.js");
 const { lawPayload } = await import("../../../../src/law/ingestLaw.js");
 const { parseUslmTitle } = await import("../../../../src/law/parseUslm.js");
+const { parsedRegulations, REG_ENTRY } = await import("../../law/regFixture.js");
 const { citeRefDocTool, searchRefDocsTool } =
   await import("../../../../src/mastra/tools/refDocs.js");
 const { readLawTool, searchLawTool } = await import("../../../../src/mastra/tools/law.js");
@@ -35,6 +36,7 @@ const SIDECAR = {
   format: "uslm" as const,
   releasePoint: "119-73",
   published: "2026-01-12",
+  files: [],
 };
 
 async function installLaw(): Promise<void> {
@@ -47,6 +49,7 @@ async function installLaw(): Promise<void> {
     zipRelPath: "law.zip",
   };
   await writeDocument(lawPayload(entry, parsed), "law");
+  await writeDocument(lawPayload(REG_ENTRY, parsedRegulations()), "law");
 }
 
 describe("the corpus tools", () => {
@@ -82,6 +85,7 @@ describe("the law tools with law.db", () => {
     const hits = result.results as { blockId: string; citation: string; headings: string[] }[];
     expect(hits.map((hit) => hit.blockId)).toContain("usc-26-2025::sec::s469::g-1");
     expect(hits.find((hit) => hit.blockId.endsWith("::g-1"))).toMatchObject({
+      source: "statute",
       citation: "26 U.S.C. § 469(g)(1)",
       headings: [
         "Dispositions of entire interest in passive activity",
@@ -118,6 +122,50 @@ describe("the law tools with law.db", () => {
     );
     expect(blocks).toEqual(["g", "g-1", "g-2", "g-3"]);
     expect(result.subdivisions).toEqual(["26 U.S.C. § 469(g)"]);
+  });
+
+  it("search both sources by default, or one by name, and name each hit's source", async () => {
+    const both = await call(searchLawTool, { query: "activity", mode: "fts", limit: 25 });
+    const sources = (hits: unknown) =>
+      new Set((hits as { source: string }[]).map((hit) => hit.source));
+    expect(sources(both.results)).toEqual(new Set(["statute", "regulations"]));
+    // The sources take turns, statute first, so the larger regulations cannot crowd the statute out.
+    const order = (both.results as { source: string }[]).slice(0, 4).map((hit) => hit.source);
+    expect(order).toEqual(["statute", "regulations", "statute", "regulations"]);
+    for (const source of ["statute", "regulations"]) {
+      const one = await call(searchLawTool, { query: "activity", mode: "fts", source });
+      expect(sources(one.results)).toEqual(new Set([source]));
+    }
+    const reg = await call(searchLawTool, {
+      query: "more than 500 hours",
+      mode: "fts",
+      section: "1.469-5T",
+    });
+    expect((reg.results as { citation: string }[])[0].citation).toBe("26 CFR § 1.469-5T(a)(1)");
+  });
+
+  it("read a regulation by number, citation or block id", async () => {
+    for (const citation of [
+      "1.469-5T(a)(1)",
+      "26 CFR 1.469-5T(a)(1)",
+      "cfr-26-2025::sec::s1.469-5t::a-1",
+    ]) {
+      const result = await call(readLawTool, { citation });
+      expect(result).toMatchObject({
+        found: true,
+        source: "regulations",
+        citation: "26 CFR § 1.469-5T(a)(1)",
+        sectionHeading: "§ 1.469-5T Material participation (temporary).",
+      });
+      expect((result.blocks as { text: string }[])[0].text).toContain("more than 500 hours");
+    }
+    const qa = await call(readLawTool, { citation: "1.408A-4, Q&A-1(b)" });
+    expect(qa).toMatchObject({ found: true, citation: "26 CFR § 1.408A-4, Q&A-1(b)" });
+    const whole = await call(readLawTool, { citation: "1.469-5T" });
+    expect((whole.subdivisions as string[]).slice(0, 2)).toEqual([
+      "26 CFR § 1.469-5T(a)",
+      "26 CFR § 1.469-5T(b)",
+    ]);
   });
 
   it("say found: false for a citation the Code does not hold", async () => {

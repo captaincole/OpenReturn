@@ -1,0 +1,234 @@
+[
+  {
+    "id": "mp-500-hours",
+    "question": "I worked more than 500 hours in a business I own part of. Does that count as material participation?",
+    "queries": [
+      "individual participates in the activity for more than 500 hours during such year",
+      "materially participating in an activity for the taxable year if and only if"
+    ],
+    "expect": ["1.469-5T"],
+    "expectPath": "1.469-5T(a)(1)",
+    "source": "topic: material participation, test 1"
+  },
+  {
+    "id": "mp-five-of-ten-years",
+    "question": "I ran the business for years but stepped back this year. Do my past years still make me a material participant?",
+    "queries": [
+      "materially participated in the activity for any five taxable years during the ten taxable years that immediately precede the taxable year"
+    ],
+    "expect": ["1.469-5T"],
+    "expectPath": "1.469-5T(a)(5)",
+    "source": "topic: material participation, test 5"
+  },
+  {
+    "id": "mp-facts-and-circumstances-floor",
+    "question": "I put in about 80 hours and was involved all year. Can the facts-and-circumstances test still make me a material participant?",
+    "queries": [
+      "participation less than 100 hours not treated as materially participating under the facts and circumstances test",
+      "regular, continuous, and substantial basis facts and circumstances 100 hours or less"
+    ],
+    "expect": ["1.469-5T"],
+    "expectPath": "1.469-5T(b)(2)(iii)",
+    "source": "topic: material participation, test 7"
+  },
+  {
+    "id": "mp-significant-participation",
+    "question": "I spend a little over 100 hours in each of several businesses. Can those hours add up to material participation?",
+    "queries": [
+      "significant participation activity participates in the activity for more than 100 hours",
+      "aggregate participation in all significant participation activities exceeds 500 hours"
+    ],
+    "expect": ["1.469-5T"],
+    "expectPath": "1.469-5T(c)(2)",
+    "source": "topic: material participation, test 4"
+  },
+  {
+    "id": "rep-spouses-joint-return",
+    "question": "My spouse and I file jointly. Can we add our hours together to be a real estate professional?",
+    "queries": [
+      "spouses filing a joint return are qualifying taxpayers only if one spouse separately satisfies both requirements",
+      "real estate professional qualifying taxpayer joint return spouse hours"
+    ],
+    "expect": ["1.469-9"],
+    "expectPath": "1.469-9(c)(4)",
+    "source": "topic: real estate professional hours"
+  },
+  {
+    "id": "rep-single-activity-election",
+    "question": "I am a real estate professional with several rental houses. Can I treat them all as one activity for the hours test?",
+    "queries": [
+      "election to treat all interests in rental real estate as a single rental real estate activity",
+      "qualifying taxpayer election binding for future years rental real estate"
+    ],
+    "expect": ["1.469-9"],
+    "expectPath": "1.469-9(g)(1)",
+    "source": "topic: real estate professional, aggregation election"
+  },
+  {
+    "id": "grouping-economic-unit",
+    "question": "I own a restaurant and the bakery that supplies it. Can I treat them as one business for the passive loss rules?",
+    "queries": [
+      "trade or business activities treated as a single activity appropriate economic unit for the measurement of gain or loss",
+      "grouping of activities passive activity"
+    ],
+    "expect": ["1.469-4"],
+    "expectPath": "1.469-4(c)(1)",
+    "source": "topic: grouping of activities"
+  },
+  {
+    "id": "rental-25000-offset-qualifying-taxpayer",
+    "question": "I qualify as a real estate professional, but one rental is still passive. Can I use the $25,000 rental loss allowance for it?",
+    "queries": [
+      "$25,000 offset for rental real estate activities of qualifying taxpayers",
+      "qualifying taxpayer passive losses and credits from rental real estate activities allowed"
+    ],
+    "expect": ["1.469-9"],
+    "expectPath": "1.469-9(j)(1)",
+    "source": "topic: $25,000 allowance and active participation"
+  },
+  {
+    "id": "self-rental-recharacterized",
+    "question": "I rent a building I own to my own company, where I work full time. Is the rent passive income?",
+    "queries": [
+      "property rented for use in a trade or business activity in which the taxpayer materially participates net rental activity income not from a passive activity"
+    ],
+    "expect": ["1.469-2"],
+    "expectPath": "1.469-2(f)(6)",
+    "source": "topic: passive activity, self-rental"
+  },
+  {
+    "id": "short-term-rental-seven-days",
+    "question": "Guests stay at my vacation home for a few days at a time. Is that a rental activity under the passive loss rules?",
+    "queries": ["average period of customer use seven days or less not a rental activity"],
+    "expect": ["1.469-1T"],
+    "expectPath": "1.469-1T(e)(3)(ii)(A)",
+    "source": "topic: passive activity, short-term rental"
+  },
+  {
+    "id": "wash-sale-substantially-identical",
+    "question": "I sold a stock at a loss and bought it back two weeks later. Can I deduct the loss?",
+    "queries": [
+      "loss from sale of stock or securities substantially identical stock or securities acquired within 30 days before or after",
+      "61-day period wash sale"
+    ],
+    "expect": ["1.1091-1"],
+    "expectPath": "1.1091-1(a)",
+    "source": "topic: wash sale"
+  },
+  {
+    "id": "like-kind-multiple-properties",
+    "question": "I traded two rental buildings for three others in one exchange. How is my gain worked out?",
+    "queries": [
+      "exchange of multiple properties exchange groups property-by-property comparison like-kind exchange"
+    ],
+    "expect": ["1.1031(j)-1"],
+    "expectPath": "1.1031(j)-1(a)(1)",
+    "source": "topic: like-kind exchange, multiple properties"
+  },
+  {
+    "id": "home-sale-unforeseen-circumstances",
+    "question": "I had to sell my house after one year because of an event I could not have expected. Do I get part of the home sale exclusion?",
+    "queries": [
+      "sale or exchange by reason of unforeseen circumstances event the taxpayer could not reasonably have anticipated",
+      "reduced maximum exclusion principal residence"
+    ],
+    "expect": ["1.121-3"],
+    "expectPath": "1.121-3(e)(1)",
+    "source": "topic: home sale, partial exclusion"
+  },
+  {
+    "id": "section-83b-election-deadline",
+    "question": "My company gave me restricted stock last week. How long do I have to elect to be taxed now?",
+    "queries": [
+      "election to include in gross income in year of transfer filed not later than 30 days after the date the property was transferred"
+    ],
+    "expect": ["1.83-2"],
+    "expectPath": "1.83-2(b)",
+    "source": "topic: section 83(b) election timing"
+  },
+  {
+    "id": "iso-disqualifying-disposition",
+    "question": "I sold incentive stock option shares before the holding period ended. How is that taxed?",
+    "queries": [
+      "disqualifying disposition share of stock acquired by the exercise of a statutory option before the expiration of the applicable holding periods",
+      "disqualifying disposition incentive stock option amount includible in gross income"
+    ],
+    "expect": ["1.421-2", "1.422-1"],
+    "expectPath": "1.421-2(b)(1)",
+    "source": "topic: ISO disqualifying disposition"
+  },
+  {
+    "id": "foreign-currency-spot-rate",
+    "question": "I was paid in euros. Which exchange rate do I use to put it in dollars?",
+    "queries": [
+      "spot rate fair market rate of exchange available to the public for currency under a spot contract",
+      "exchange rates published translate nonfunctional currency"
+    ],
+    "expect": ["1.988-1"],
+    "expectPath": "1.988-1(d)(1)",
+    "source": "topic: foreign currency translation rate for an individual"
+  },
+  {
+    "id": "estimated-tax-prior-year-safe-harbor",
+    "question": "I paid estimated tax equal to last year's tax. Can I still owe a penalty for underpaying?",
+    "queries": [
+      "addition to the tax will not be imposed estimated tax were the tax shown on the return for the preceding taxable year",
+      "exceptions to imposition of the addition to the tax in the case of individuals"
+    ],
+    "expect": ["1.6654-2"],
+    "expectPath": "1.6654-2(a)(1)",
+    "source": "topic: estimated tax"
+  },
+  {
+    "id": "pfic-qef-election-deadline",
+    "question": "I own shares of a foreign fund. When do I have to make the qualified electing fund election?",
+    "queries": [
+      "time for making the qualified electing fund election on or before the due date as extended for filing the shareholder's income tax return",
+      "qualified electing fund election"
+    ],
+    "expect": ["1.1295-1"],
+    "expectPath": "1.1295-1(e)(1)",
+    "source": "topic: passive foreign investment company elections"
+  },
+  {
+    "id": "pfic-mark-to-market-election",
+    "question": "My foreign fund shares trade on an exchange. How and when do I elect to mark them to market?",
+    "queries": [
+      "timing and manner for making the mark to market election marketable stock in a PFIC due date of the return Form 8621"
+    ],
+    "expect": ["1.1296-1"],
+    "expectPath": "1.1296-1(h)(1)(i)",
+    "source": "topic: passive foreign investment company elections"
+  },
+  {
+    "id": "qbi-sstb-health",
+    "question": "I run a physical therapy clinic. Is it a specified service business for the qualified business income deduction?",
+    "queries": [
+      "performance of services in the field of health means the provision of medical services",
+      "specified service trade or business field of health"
+    ],
+    "expect": ["1.199A-5"],
+    "expectPath": "1.199A-5(b)(2)(ii)",
+    "source": "topic: QBI specified service trade or business"
+  },
+  {
+    "id": "niit-rental-real-estate-professional",
+    "question": "I am a real estate professional with rental income. Does the 3.8% net investment income tax apply to it?",
+    "queries": [
+      "treatment of certain real estate professionals safe harbor participates in a rental real estate activity for more than 500 hours net investment income"
+    ],
+    "expect": ["1.1411-4"],
+    "expectPath": "1.1411-4(g)(7)(i)",
+    "source": "topic: net investment income tax and rental real estate"
+  },
+  {
+    "id": "de-minimis-safe-harbor",
+    "question": "I bought several small appliances for my rental. Can I deduct them now instead of depreciating them?",
+    "queries": [
+      "de minimis safe harbor election amount paid for the acquisition or production of a unit of tangible property not capitalize"
+    ],
+    "expect": ["1.263(a)-1"],
+    "expectPath": "1.263(a)-1(f)(1)",
+    "source": "topic: safe harbor de minimis, tangible property"
+  }
+]

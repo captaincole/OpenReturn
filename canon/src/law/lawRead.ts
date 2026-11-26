@@ -5,7 +5,10 @@ import {
   parseLawTarget,
   resolvePath,
   sectionIdOf,
+  sourceOfSection,
   subdivisionsOf,
+  type LawSource,
+  type LawTarget,
   type PathBlock,
 } from "./citation";
 
@@ -25,7 +28,8 @@ export interface LawBlock {
 }
 
 export interface LawReading {
-  /** The citation as resolved: "26 U.S.C. § 469(g)(1)(A)". */
+  source: LawSource;
+  /** The citation as resolved: "26 U.S.C. § 469(g)(1)(A)", "26 CFR § 1.469-5T(a)(1)". */
   citation: string;
   sectionHeading: string;
   blocks: LawBlock[];
@@ -43,15 +47,38 @@ export async function requireLaw(): Promise<void> {
   if (!(await lawInstalled())) throw new LawNotInstalledError();
 }
 
-/* The newest tax year's document; law.db holds one title per release point. */
-export async function lawDocId(): Promise<string> {
+const FORMAT_OF: Record<LawSource, string> = { statute: "uslm", regulations: "ecfr" };
+
+/** "uslm" is the statute, "ecfr" the regulations. */
+export const sourceOfFormat = (format: string): LawSource =>
+  format === FORMAT_OF.regulations ? "regulations" : "statute";
+
+/* The newest tax year's document of one source; law.db holds one per release. */
+export async function lawDocIdOf(source: LawSource): Promise<string | null> {
   const db = await openLibraryDb("law");
-  const res = await db.execute(
-    `SELECT doc_id FROM ref_documents ORDER BY tax_year DESC, doc_id DESC LIMIT 1`,
-  );
+  const res = await db.execute({
+    sql: `SELECT doc_id FROM ref_documents WHERE format = ? ORDER BY tax_year DESC, doc_id DESC LIMIT 1`,
+    args: [FORMAT_OF[source]],
+  });
   const docId = res.rows[0]?.doc_id;
+  return docId == null ? null : asStr(docId);
+}
+
+/** The statute's document id; the eval and older callers read the Code only. */
+export async function lawDocId(): Promise<string> {
+  const docId = await lawDocIdOf("statute");
   if (docId == null) throw new LawNotInstalledError();
-  return asStr(docId);
+  return docId;
+}
+
+export const CITATION_HINT = 'try 469, "469(g)(1)", 1.469-5T, "1.469-5T(a)(1)" or a block id';
+
+export type SectionTarget = Exclude<LawTarget, { kind: "block" }>;
+
+/** The section row of a citation, or null when its library is not in law.db. */
+export async function targetSectionId(target: SectionTarget): Promise<string | null> {
+  const docId = await lawDocIdOf(sourceOfSection(target.section));
+  return docId ? sectionIdOf(docId, target.section) : null;
 }
 
 /** null when the citation names nothing in the library. */
@@ -59,14 +86,17 @@ export async function readLaw(input: string): Promise<LawReading | null> {
   await requireLaw();
   const target = parseLawTarget(input);
   if (!target)
-    throw new Error(`"${input}" is not a Code citation (try 469, "469(g)(1)" or a block id)`);
+    throw new Error(
+      `"${input}" is not a citation of the Code or the regulations (${CITATION_HINT})`,
+    );
   if (target.kind === "block") return readBlockId(target.blockId);
-  const sectionId = sectionIdOf(await lawDocId(), target.section);
-  const section = await sectionBlocks(sectionId);
+  const sectionId = await targetSectionId(target);
+  const section = sectionId ? await sectionBlocks(sectionId) : null;
   if (!section) return null;
   const blocks = resolvePath(section.blocks, target.path);
   if (blocks.length === 0) return null;
   return {
+    source: sourceOfSection(section.number),
     citation: formatCitation(section.number, target.path),
     sectionHeading: section.heading,
     blocks: blocks.map(toLawBlock),
@@ -81,6 +111,7 @@ async function readBlockId(blockId: string): Promise<LawReading | null> {
   if (!section || !block) return null;
   const lawBlock = toLawBlock(block);
   return {
+    source: sourceOfSection(section.number),
     citation: lawBlock.citation,
     sectionHeading: section.heading,
     blocks: [lawBlock],
@@ -94,7 +125,7 @@ export interface StoredBlock extends PathBlock {
 }
 
 export interface StoredSection {
-  /** As printed: "469", "1400Z–2". */
+  /** As printed: "469", "1400Z–2", "1.469-5T". */
   number: string;
   heading: string;
   blocks: StoredBlock[];
@@ -129,16 +160,23 @@ function storedBlock(blockId: string, text: string, metadataJson: unknown): Stor
   };
 }
 
-// The section row's heading is "§ 469. Passive activity losses…"; the number sits between.
-function sectionNumber(heading: string): string {
+/*
+ * The section row's heading is "§ 469. Passive activity losses…" or
+ * "§ 1.469-5T Material participation (temporary).": the number is the word
+ * after "§", without the Code's closing period.
+ */
+function headingParts(heading: string): { number: string; catchline: string } {
   const afterMark = heading.replace(/^§\s*/, "");
-  return afterMark.slice(0, afterMark.indexOf(".")).trim();
+  const space = afterMark.indexOf(" ");
+  const word = space < 0 ? afterMark : afterMark.slice(0, space);
+  const number = word.endsWith(".") ? word.slice(0, -1) : word;
+  return { number, catchline: space < 0 ? "" : afterMark.slice(space + 1).trim() };
 }
 
+const sectionNumber = (heading: string): string => headingParts(heading).number;
+
 /** "§ 469. Passive activity losses and credits limited" → "Passive activity losses and credits limited". */
-export function catchlineOf(heading: string): string {
-  return heading.slice(heading.indexOf(".") + 1).trim();
-}
+export const catchlineOf = (heading: string): string => headingParts(heading).catchline;
 
 const toLawBlock = (block: StoredBlock): LawBlock => ({
   blockId: block.blockId,

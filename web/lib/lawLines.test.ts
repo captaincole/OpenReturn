@@ -97,3 +97,25 @@ describe("lawParts", () => {
     });
   });
 });
+
+// 26 CFR § 1.469-5T(f)(2)(ii), as law.db holds it: the regulations' order is (a)(1)(i)(A), then an italic (1).
+const S1_469_5T_F_2_II = [
+  "(ii) Participation as an investor—",
+  "(A) In general. Work done by an individual in the individual's capacity as an investor…",
+  "(B) Work done in individual's capacity as an investor. For purposes of this paragraph (f)(2)(ii), work done by an individual … includes—",
+  "(1) Studying and reviewing financial statements or reports on operations of the activity;",
+  "(2) Preparing or compiling summaries or analyses of the finances or operations of the activity;",
+  "(3) Monitoring the finances or operations of the activity in a non-managerial capacity.",
+].join("\n");
+
+describe("lawLines: a regulation block", () => {
+  it("indents the regulations' levels with no change to the rule", () => {
+    expect(depths(["f", "2", "ii"], S1_469_5T_F_2_II)).toEqual([2, 3, 3, 4, 4, 4]);
+  });
+
+  it("indents a Q&A's answer below its question", () => {
+    const text =
+      "(b) An amount can be converted by any of three methods—\n(1) An amount distributed…";
+    expect(depths(["Q&A-1", "b"], text)).toEqual([1, 2]);
+  });
+});
