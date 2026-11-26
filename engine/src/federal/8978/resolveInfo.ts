@@ -16,7 +16,13 @@ import { placeStatement, planForms, reportingYearOf, type PlacedStatement } from
  * a pass-through partner. A Form 8986 furnished in another year belongs to
  * that year's return. A statement whose Part II item G date does not read
  * stays on this return, so its gap shows. The explicit decision still wins.
+ * A decision to file with no Form 8986 for 2025 is a gap on every amount line
+ * and on Form 1040 line 16, so the return does not look final without the
+ * statement's amounts (the same as Forms 6252 and 4972 with no fact).
  */
+const NO_STATEMENT =
+  "Form 8978 files by decision, but no Form 8986 furnished in 2025 gives the partner's share of the adjustments.";
+
 export function resolve8978Info(inputs: ResolverInputs): Form8978FilingInfo {
   const statements = getForm8986Facts(inputs.facts).filter((fact) => {
     const year = reportingYearOf(fact);
@@ -33,7 +39,10 @@ export function resolve8978Info(inputs: ResolverInputs): Form8978FilingInfo {
     ],
   });
   const filed = { mustFile: { "form-8978": mustFile } };
-  if (mustFile.value !== true || statements.length === 0) return filed;
+  if (mustFile.value !== true) return filed;
+  if (statements.length === 0) {
+    return { ...filed, form8978: { copies: [], gap: NO_STATEMENT, waitingKeys: [] } };
+  }
   const placed = statements.map(placeStatement);
   const gap = placed.find((each): each is string => typeof each === "string");
   if (gap !== undefined) return { ...filed, form8978: { copies: [], gap, waitingKeys: [] } };

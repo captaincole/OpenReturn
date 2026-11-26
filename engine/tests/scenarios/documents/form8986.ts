@@ -234,9 +234,15 @@ function partIV(
   checkbox(ctx, 388, yPos + 34, partner.generalPartner, "1. General partner or LLC member manager");
   checkbox(ctx, 388, yPos + 44, !partner.generalPartner, "2. Limited partner or other LLC member");
   checkbox(ctx, 388, yPos + 54, true, "3. Domestic partner");
-  yPos += 70;
+  checkbox(ctx, 388, yPos + 64, false, "4. Foreign partner");
+  yPos += 80;
   drawText(ctx, "D  What type of entity is this partner?", X_LEFT, yPos, SMALL);
-  checkbox(ctx, X_LEFT + 150, yPos, true, "1. Individual");
+  // The official form's five boxes, in its order; the partner is always an individual.
+  const ENTITY_TYPES = ["1. Individual", "2. S Corporation", "3. Corporation", "4. Partnership"];
+  ENTITY_TYPES.forEach((label, index) =>
+    checkbox(ctx, X_LEFT + 150 + index * 75, yPos, index === 0, label),
+  );
+  checkbox(ctx, X_LEFT + 450, yPos, false, "5. Other");
   yPos += 16;
   return shares(ctx, fact, yPos);
 }

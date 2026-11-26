@@ -200,6 +200,26 @@ describe("Form 8978 gaps", () => {
     expect(isGap(run.field("form-8978", "0.line.13_increase_decrease_to_tax_col_a"))).toBe(true);
     expect(isGap(run.field("form-1040", "line.16"))).toBe(true);
   });
+
+  it("a decision to file with no Form 8986 is a gap, so Form 1040 line 16 is not final", () => {
+    const decisions = [
+      ...vandeneScenario.decisions,
+      decisionRow({
+        userId: vandeneScenario.userId,
+        taxYear: vandeneScenario.taxYear,
+        key: "decisions.scope.must_file_8978",
+        decision: true,
+        rationale: "test",
+      }),
+    ];
+    const run = evaluate(vandeneScenario, without8978Facts(vandeneScenario), decisions);
+    expect(run.files("form-8978")).toBe(true);
+    expect(
+      isGap(run.field("form-8978", "0.line.14_total_increase_decrease_reporting_year_tax")),
+    ).toBe(true);
+    expect(isGap(run.field("form-1040", "line.16"))).toBe(true);
+    expect(run.value("form-1040", "line.24")).toBeUndefined();
+  });
 });
 
 describe("no Form 8986, nothing changes", () => {

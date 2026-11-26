@@ -18,7 +18,8 @@ const COLUMNS = ["a", "b", "c", "d"] as const;
 /*
  * MANUAL EDIT: the copy being printed (plan.ts; the copies spec in
  * federal/index.ts): the AAR form first, four columns to a form. A gap makes
- * every amount line unsupported; with no Form 8986 for 2025 the form is blank.
+ * every amount line unsupported, a decision to file with no Form 8986 for 2025
+ * included (resolveInfo.ts); with no plan the form is blank.
  */
 function copyLine(
   pick: (copy: Form8978Copy) => Value | undefined,
