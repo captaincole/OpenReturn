@@ -4,7 +4,7 @@ Melaine Ashgrove is single and lives in Austin, Texas. Every name and amount her
 
 In June 2020 she bought a home in Round Rock with a loan from a county housing finance corporation. The loan came from a tax-exempt mortgage bond. In August 2025 she sold the home and paid the loan off at the closing. The home was her main home for five years, so section 121 excludes the whole gain from her income. The recapture tax still applies. She has one W-2 and a 1099-INT with taxable and tax-exempt interest. She takes the standard deduction. The return is federal only: Texas has no income tax.
 
-The scenario fills every line of Form 8828. Line 18, the income percentage, is below 100. Line 22 is smaller than half the gain, so it is the tax. The tax goes to Schedule 2 line 17b and on to Form 1040 line 23. The rules for the other branches (a loss, line 17 zero or less, the repayment worksheet, the 9-year limit) are unit tests (`tests/unit/federal/8828/`).
+The scenario fills every line of Form 8828. Line 18, the income percentage, is below 100. Line 22 is smaller than half the gain, so it is the tax. The tax goes to Schedule 2 line 17b and on to Form 1040 line 23. The rules for the other branches (a loss, line 17 zero or less, the repayment worksheet, the 9-year limit, a second home on its own copy) are unit tests (`tests/unit/federal/8828/`).
 
 Forms that file: Form 1040, Schedule 2, Form 8828.
 

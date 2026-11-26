@@ -18,8 +18,6 @@ import {
   yearsHeld,
 } from "./lines.js";
 
-const ONE_COPY =
-  "The return sold more than one home with a federal mortgage subsidy; each home files its own Form 8828 and the engine prints one copy.";
 const QSML =
   'A qualifying subordinate mortgage loan: line 13 needs "QSML" on the dotted line and an attached worksheet of the gain shared with the lender (irs-8828-inst-2025::sec::line-13::b01), which the engine does not print.';
 const NO_TABLE_ROW =
@@ -84,10 +82,10 @@ function factLines(
   };
 }
 
-/* Schedule 2 files for Form 8828 with a gap, or when a tax above 0 is possible: a gain and lines 19 and 20 above 0. */
-function reachesSchedule2(lines: Form8828FactLines | undefined, gap: string | undefined): boolean {
-  if (gap !== undefined || lines?.gap !== undefined) return true;
+/* Schedule 2 files for a copy with a gap, or when a tax above 0 is possible: a gain and lines 19 and 20 above 0. */
+function reachesSchedule2(lines: Form8828FactLines | undefined): boolean {
   if (lines === undefined) return false;
+  if (lines.gap !== undefined) return true;
   return (lines.gain.line14 ?? 0) > 0 && lines.line19 > 0 && (lines.line20 ?? 0) > 0;
 }
 
@@ -98,6 +96,11 @@ function reachesSchedule2(lines: Form8828FactLines | undefined, gap: string | un
  * gain. A sale fact of a home files the form; the explicit decision still wins.
  * The form asks for the issuer's notice of each sold home: lines 3 to 5, 16, 19
  * and 20 come from it (::specific-instructions::b01).
+ *
+ * One copy for each home that files: "figure the actual recapture tax
+ * separately" for each interest (::special-rules::b02), and the form's Part I
+ * describes one home. When only the explicit decision files it (every sold home
+ * is outside the 9 years), each sold home is a copy.
  */
 export function resolve8828Info(inputs: ResolverInputs): Form8828FilingInfo {
   const sold = getMortgageSubsidyHomes(inputs.facts).filter(isSold);
@@ -114,14 +117,13 @@ export function resolve8828Info(inputs: ResolverInputs): Form8828FilingInfo {
   });
   if (mustFile.value !== true) return { mustFile: { "form-8828": mustFile } };
   const asked = sold.filter((home) => home.notice === undefined).map((home) => home.noticeKey);
-  const gap = sold.length > 1 ? ONE_COPY : undefined;
-  const home = sold.length === 1 ? sold[0] : undefined;
-  const lines = home?.notice ? factLines(home.notice, home.sale) : undefined;
+  const copies = (filing.length > 0 ? filing : sold).map((home) =>
+    home.notice ? factLines(home.notice, home.sale) : undefined,
+  );
   return {
     mustFile: { "form-8828": mustFile },
     missingInputs: { "form-8828": asked },
-    form8828: gap === undefined ? lines : undefined,
-    form8828Gap: gap,
-    form8828ReachesSchedule2: reachesSchedule2(lines, gap),
+    form8828Copies: copies,
+    form8828ReachesSchedule2: copies.some(reachesSchedule2),
   };
 }

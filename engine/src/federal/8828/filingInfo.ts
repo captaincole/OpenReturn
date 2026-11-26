@@ -27,10 +27,14 @@ export interface Form8828FactLines {
 }
 
 export interface Form8828FilingInfo extends BaseFilingInfo {
-  /* The one Form 8828 the engine prints; undefined with no sale, or while the notice waits. */
-  form8828?: Form8828FactLines;
-  /* Why every line of the form is unsupported (more than one home). */
-  form8828Gap?: string;
+  /*
+   * One Form 8828 for each sold home that files, in the order first recorded:
+   * "figure the actual recapture tax separately" for each home. An entry is
+   * undefined while that home's notice waits.
+   */
+  form8828Copies?: ReadonlyArray<Form8828FactLines | undefined>;
+  /* The copy being evaluated (federal/index.ts copies); absent means the first. */
+  form8828CopyIndex?: number;
   /* Schedule 2 files for it: a gap, or a gain and a subsidy that can give a tax above 0. */
   form8828ReachesSchedule2?: boolean;
 }

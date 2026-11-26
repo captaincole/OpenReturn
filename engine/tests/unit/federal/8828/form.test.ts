@@ -164,19 +164,13 @@ describe("Form 8828 lines", () => {
     expect(run.line(LINE_18)).toBe("39");
   });
 
-  it("divides line 19 by the ownership share", () => {
+  it("multiplies line 19 by the ownership share", () => {
     const run = evaluate(home({}, { ownershipShare: 0.5 }));
     expect(run.line("0.line.19_federally_subsidized_amount")).toBe(7375);
   });
 });
 
 describe("Form 8828 cases the engine does not print", () => {
-  it("more than one sold home makes every line and line 17b unsupported", () => {
-    const run = evaluate([...home(), notice("second"), sale("second")]);
-    expect(run.field("form-8828", "0.line.9_sales_price")).toMatchObject(UNSUPPORTED);
-    expect(run.field("schedule-2", LINE_17B)).toMatchObject(UNSUPPORTED);
-  });
-
   it("a QSML gain share makes line 13 on unsupported", () => {
     const run = evaluate(home({}, { qsmlShareOfGain: 20000 }));
     expect(run.line("0.line.12_adjusted_basis")).toBe(262500);

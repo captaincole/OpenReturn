@@ -165,6 +165,17 @@ export function modifiedAgi(agi: number, taxExemptInterest: number, gainIncluded
 /*
  * Line 18: 100 when line 17 is $5,000 or more; otherwise line 17 / $5,000 as a
  * percentage, "Round to the nearest whole percentage" (face-part-ii::b01).
+ *
+ * DECISION (2026-11-25, by the author): line 18 rounds to the nearest whole
+ * percent. Text A, irs-8828-face-2025::sec::face-part-ii::b01: "divide the amount
+ * on line 17 by $5,000 and enter the result as a percentage. Round to the nearest
+ * whole percentage". Text B, an issuer's notice that the line 16 instructions
+ * send the taxpayer to (NJ HMFA, "Notice to Mortgagor of Potential Federal
+ * Recapture Tax on Sale of Home", nj.gov/dca/hmfa/lenders/docs/len_recapture_tax.pdf):
+ * "The "income percentage" is 1 percent for each $50 by which your family's
+ * modified adjusted gross income exceeds the applicable adjusted qualifying
+ * income", which counts only whole $50 steps. The engine follows Text A: a
+ * form's own instructions decide how that form is filled.
  */
 export function incomePercentage(line17: number): number {
   if (line17 >= INCOME_PERCENTAGE_STEP) return FULL_PERCENTAGE;

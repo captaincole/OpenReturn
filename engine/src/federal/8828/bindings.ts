@@ -1,12 +1,12 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
 import { defineForm, type FormAccessor } from "../../defineForm.js";
-import { numberOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { namesOnReturn } from "../returnNames.js";
 import type { Form8828FactLines, Form8828FilingInfo } from "./filingInfo.js";
-import { modifiedAgi, recaptureLines, type RecaptureLines } from "./lines.js";
+import { partIILines, type PartII } from "./partII.js";
+import { agiOf, taxExemptInterestOf } from "./results.js";
 import type { Form8828 } from "./types.js";
 
 type Value = number | string | boolean | undefined;
@@ -15,13 +15,15 @@ type Binding<T extends Value> = (
   info: Form8828FilingInfo,
 ) => T | Unsupported | undefined;
 
-/* The facts' lines for one line of the form: unsupported from its gap's line on, undefined with no sale. */
+/*
+ * This copy's facts for one line of the form: unsupported from its gap's line
+ * on, undefined with no sale or while the notice waits.
+ */
 function factLinesFor(
   line: number,
   info: Form8828FilingInfo,
 ): Form8828FactLines | Unsupported | undefined {
-  if (info.form8828Gap) return unsupported(info.form8828Gap);
-  const lines = info.form8828;
+  const lines = info.form8828Copies?.[info.form8828CopyIndex ?? 0];
   if (lines?.gap && lines.gap.fromLine <= line) return unsupported(lines.gap.reason);
   return lines;
 }
@@ -36,25 +38,13 @@ function lineOf<T extends Value>(line: number, pick: (lines: Form8828FactLines) 
   };
 }
 
-type PartII = RecaptureLines & { line15: number; line16: number };
-
-/*
- * Lines 15 to 23. Blank after a loss on line 13 ("stop here"); blank while
- * Form 1040 line 11 is not figured. Line 15 starts from AGI "as shown on line 11
- * of your Form 1040" and adds the tax-exempt interest of line 2a (line-15::b01).
- */
+/* Lines 15 to 23 (partII.ts): blank after a stop, or while Form 1040 line 11 is not figured. */
 function partIILine<T extends Value>(line: number, pick: (lines: PartII) => T): Binding<T> {
   return (form, info) => {
     const fromFacts = factLinesFor(line, info);
     if (fromFacts === undefined || isGap(fromFacts)) return fromFacts;
-    const { gain, line16, line19, line20, gainIncludedInIncome } = fromFacts;
-    const agi = numberOrBlank(form["form-1040.line.11b"]);
-    if (gain.line14 === undefined || agi === undefined) return undefined;
-    if (line16 === undefined || line20 === undefined) return undefined;
-    const taxExempt = numberOrBlank(form["form-1040.line.2a"]) ?? 0;
-    const line15 = modifiedAgi(agi, taxExempt, gainIncludedInIncome);
-    const lines = recaptureLines({ line14: gain.line14, line15, line16, line19, line20 });
-    return pick({ ...lines, line15, line16 });
+    const lines = partIILines(fromFacts, agiOf(form), taxExemptInterestOf(form));
+    return lines === undefined ? undefined : pick(lines);
   };
 }
 
