@@ -134,8 +134,6 @@ import type { ScheduleHFilingInfo } from "./federal/schedule-h/filingInfo.js";
 import { resolveScheduleHInfo } from "./federal/schedule-h/resolveInfo.js";
 import type { ScheduleRFilingInfo } from "./federal/schedule-r/filingInfo.js";
 import { resolveScheduleRInfo } from "./federal/schedule-r/resolveInfo.js";
-import type { ScheduleSEFilingInfo } from "./federal/schedule-se/filingInfo.js";
-import { resolveScheduleSEInfo } from "./federal/schedule-se/resolveInfo.js";
 import {
   makeResolverInputs,
   resolve540Info,
@@ -242,7 +240,6 @@ export type FilingInfo = BaseFilingInfo &
   ScheduleAFilingInfo &
   ScheduleBFilingInfo &
   ScheduleCFilingInfo &
-  ScheduleSEFilingInfo &
   Form8606FilingInfo &
   Form8889FilingInfo &
   Form8959FilingInfo &
@@ -344,7 +341,6 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolveScheduleAInfo,
   resolveScheduleBInfo,
   resolveScheduleCInfo,
-  resolveScheduleSEInfo,
   resolve6251Info,
   resolveScheduleEInfo,
   resolve8582Info,

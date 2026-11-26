@@ -684,8 +684,6 @@ export function register(): void {
         "No CA-specific addition rules ingested for digital asset ordinary income; no scenario modeled yet.",
       "2.line.b9b3_subtractions":
         "CA-specific NOL deduction from FTB Forms 3805Z, 3807, or 3809 — no ingestion path for these FTB enterprise-zone NOL forms exists yet.",
-      "2.line.c17_federal":
-        "Requires federal Schedule 1 line 17 (self-employed health insurance deduction). Schedule 1 individual lines are not ingested; no self-employment health insurance scenario yet.",
       "2.line.c19a_additions":
         "CA addition for alimony paid (post-2018/post-2025 divorce agreements differ between federal and CA law) requires an alimony scenario; no such scenario or fact ingestion path exists yet.",
       "2.line.c19b_recipient_last_name":

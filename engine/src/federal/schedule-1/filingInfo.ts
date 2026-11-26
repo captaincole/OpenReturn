@@ -5,6 +5,7 @@ import type { Form2106FilingInfo } from "../2106/filingInfo.js";
 import type { Form3903FilingInfo } from "../3903/filingInfo.js";
 import type { Form461FilingInfo } from "../461/filingInfo.js";
 import type { Form4797FilingInfo } from "../4797/filingInfo.js";
+import type { Form7206FilingInfo } from "../7206/filingInfo.js";
 import type { Form8621FilingInfo } from "../8621/filingInfo.js";
 import type { Form8814FilingInfo } from "../8814/filingInfo.js";
 import type { Form982FilingInfo } from "../982/filingInfo.js";
@@ -25,6 +26,7 @@ export interface Schedule1FilingInfo
     Pick<Form8621FilingInfo, "form8621Totals">,
     Pick<Form4797FilingInfo, "form4797" | "form4797Gap" | "form4797SummaryGap">,
     Pick<Form461FilingInfo, "form461">,
+    Pick<Form7206FilingInfo, "form7206Plans" | "form7206Line5" | "form2555Filers">,
     Pick<Form982FilingInfo, "canceledDebtIncome" | "canceledDebtGap" | "canceledDebtWaits"> {
   /** Line 14 with its box: Armed Forces storage fees claimed with no Form 3903, cents kept. */
   armedForcesStorageFees?: number;

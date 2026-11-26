@@ -4,6 +4,7 @@ import { defineForm } from "../../defineForm.js";
 import { roundDollars, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
 import { form4797Files, scheduleOneLine4 } from "../4797/receivers.js";
+import { selfEmployedHealthDeduction } from "../7206/results.js";
 import { files8853, form8853Total } from "../8853/results.js";
 import { answerBindings } from "./answerBindings.js";
 import { canceledDebtHold, line8c } from "./canceledDebt.js";
@@ -171,6 +172,11 @@ export function register(): void {
       // MANUAL EDIT: line 14 and its storage-fees box (movingExpenses.ts).
       "1.line.14": line14,
       "1.line.14_storage_fees_only": storageFeesOnlyBox,
+      /*
+       * MANUAL EDIT: line 17 = Form 7206 line 14 of every plan, or the Form 1040
+       * worksheet's line 3 (irs-1040-inst-2025::sec::line-17::b04; federal/7206/results.ts).
+       */
+      "1.line.17": selfEmployedHealthDeduction,
       // MANUAL EDIT: line 18 = 1099-INT box 2 summed (irs-1040-inst-2025::sec::line-18::b01).
       "1.line.18": (_, info) => roundDollars(info.earlyWithdrawalPenalty),
       // MANUAL EDIT: line 21, the Student Loan Interest Deduction Worksheet (studentLoanInterest.ts).
@@ -240,7 +246,6 @@ export function register(): void {
       "0.line.8u": "No incarcerated-wages scenario yet.",
       "0.line.8v":
         "No ingestion for digital-asset ordinary income (staking, mining, forks) yet; 1099-DA covers only dispositions.",
-      "1.line.17": "No self-employed health insurance scenario yet.",
       "1.line.24b": "No personal-property rental scenario (line 8l) yet.",
       "1.line.24c": "No Olympic/Paralympic medal or USOC prize scenario (line 8m) yet.",
       "1.line.24g": "No chaplain 403(b) contribution scenario or facts yet.",
