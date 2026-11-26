@@ -87,6 +87,41 @@ numbers is in the corpus; the published examples are in
     schedule with the largest net profit (loss)" (ca-3514-inst-2025::sec::worksheet-3::b01).
     The farm fact holds no business name or address. Default: the lines are a
     gap while a farm is on the return. Dollars: no.
+16. **The section 263A amount is already inside lines 10 to 32e.** "If you
+    capitalize your expenses, don't reduce your deductions on lines 10 through
+    32e by the capitalized expenses. Instead, enter the total amount
+    capitalized in parentheses on line 32f" (irs-1040sf-inst-2025::sec::part-ii::b03).
+    So `section263ACapitalized` is a part of the expenses the farmer states on
+    the other lines, not a further expense. Default: line 32f is the amount in
+    parentheses and line 33 subtracts it. Dollars: yes, if a fact states the
+    capitalized costs only on `section263ACapitalized` and not in the line
+    amounts (blind case 15: $2,000 of supplies with $1,500 capitalized gives
+    line 33 $500; a separate $1,500 would give $2,000). Cade must record the
+    full expense on its line and the capitalized part here.
+
+## Second opinions
+
+- **Blind fill (2026-11-25).** 15 cases filled by hand from the blank form,
+  the instructions and Pub. 225: cooperative distributions, the CCC loan
+  election both ways, crop insurance deferral, the mileage rate and a wage
+  credit, the conservation limit (with a breeding livestock gain), both
+  inventory methods of Part III, the at-risk limit, a hedge loss and a
+  section 263A amount. No dollar difference and no blank-or-zero difference on
+  any of the 15 lines checked. The doubts that can change dollars are items
+  3 (line 5c), 12 (line 12's limit) and 16 (the section 263A amount).
+- **PolicyEngine-US 2.154.0 (commit 363e9fc5).** It takes Schedule F line 34
+  as one input (`farm_operations_income`) and has no formula or constant for
+  the lines themselves: no mileage rate, no conservation limit, no CCC loans,
+  no Part III. What it does with line 34 agrees with the engine: Schedule SE
+  takes it at 92.35% with the $400 floor; it is in gross income, qualified
+  business income, the excess business loss limit and EIC earned income (less
+  half of SE tax). It also limits the self-employed health insurance deduction
+  by farm profit; the engine leaves Schedule 1 line 17 unsupported, so this is
+  a scope difference. It does not take Conservation Reserve Program payments
+  off Schedule SE (Schedule SE line 1b); the engine follows the Schedule SE
+  instructions. No disagreement on a constant or a formula.
+- **IRS Direct File.** Not compared: no checkout in reach, and its scope did
+  not include Schedule F.
 
 ## Confidence by field group
 
