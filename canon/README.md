@@ -17,6 +17,8 @@ Canon (`@openreturn/canon`) is OpenReturn's tax attorney. It holds the IRS and F
 | `citeRefDoc` | The exact text and a readable citation for one block |
 | `run_ask` | **Ask The Tax Code**: formulate → retrieve → answer → validate. A "partial" answer names its gaps as searches, and the pipeline searches once more. |
 | `run_ground` | **Ground one decision**: (gather → assess risk → rule) × up to `maxIterations` (default 3). The verdict is `accurate`, `inaccurate` or `needs_more_facts`, with citations. |
+| `searchLaw` | Hybrid search of the tax statute (the Internal Revenue Code), a separate and optional library. For a question the instructions do not settle. |
+| `readLaw` | The text of one section or subdivision of the statute, by citation: `469(g)(1)` |
 
 Both workflows are served as tools with output schemas and answer `{ result: … }`, the run result (`status: ok | failed`) validated against the schema. Both are stateless: the caller keeps the threads, the decisions and the verdicts. Each judge is one model call with its schema as the response format, and no tools. Code checks every citation: a quote that is not word for word in a retrieved block is dropped.
 
