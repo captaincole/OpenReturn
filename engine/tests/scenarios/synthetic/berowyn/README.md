@@ -49,6 +49,6 @@ The car fact names `insolventBefore`; the card does not. Only one insolvent debt
 | 540 line 33 | 5,618 − 153 exemption credit | 5,465 |
 | 540 line 100 | 5,465 − 2,900 withheld | 2,565 |
 
-Line 10a's limit counts her cash (decision A44 in `docs/rule-decisions.md`). Without it the limit would be 19,800, and line 10a would still be 2,900.
+Line 10a's limit counts her cash (decision A46 in `docs/rule-decisions.md`). Without it the limit would be 19,800, and line 10a would still be 2,900.
 
 The 1099-C documents use the generator compared with real examples in `ailil`'s README.

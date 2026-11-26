@@ -6,9 +6,9 @@ Form 982 reports a canceled debt that stays out of income, and the tax attribute
 
 Each is decided by the author, with a `DECISION` comment above the code and a row in `docs/rule-decisions.md`.
 
-- **A44, the line 10a limit counts the money held after the discharge** (`form.ts`). The line 10a sentence names only property basis; the chart, Pub. 4681 and Pub. 225 add the money. The engine counts the money.
-- **A45, the part of a home loan above the $750,000 cap is not qualified** (`partOne.ts`, `principalResidenceExclusion`). The cap against the line 1e example, whose numbers fit the earlier $2 million cap. The engine follows the cap. Pub. 4681 also says to put on line 2 the canceled qualified debt "but not more than the amount of the exclusion limit" (`irs-pub-4681-2025::sec::qualified-principal::b06`), which could read as a cap on the amount excluded. For a married-filing-separately short sale of $100,000 on a $450,000 loan, the engine gives line 2 = $25,000 and Schedule 1 line 8c = $75,000; the other reading excludes all $100,000.
-- **A46, line 1e comes before line 1b** (`partOne.ts`, `splitDebts`). The Form 982 instructions say insolvency does not apply to qualified principal residence debt unless the taxpayer elects it (`irs-982-inst-2025::sec::line-1b::b01`); Pub. 4681 says "Other exclusions must be applied before the qualified principal residence indebtedness exclusion" (`irs-pub-4681-2025::sec::qualified-principal::b04`). The engine follows the form's instructions. 2025 tax is the same; the carryovers to 2026 can differ.
+- **A46, the line 10a limit counts the money held after the discharge** (`form.ts`). The line 10a sentence names only property basis; the chart, Pub. 4681 and Pub. 225 add the money. The engine counts the money.
+- **A47, the part of a home loan above the $750,000 cap is not qualified** (`partOne.ts`, `principalResidenceExclusion`). The cap against the line 1e example, whose numbers fit the earlier $2 million cap. The engine follows the cap. Pub. 4681 also says to put on line 2 the canceled qualified debt "but not more than the amount of the exclusion limit" (`irs-pub-4681-2025::sec::qualified-principal::b06`), which could read as a cap on the amount excluded. For a married-filing-separately short sale of $100,000 on a $450,000 loan, the engine gives line 2 = $25,000 and Schedule 1 line 8c = $75,000; the other reading excludes all $100,000.
+- **A48, line 1e comes before line 1b** (`partOne.ts`, `splitDebts`). The Form 982 instructions say insolvency does not apply to qualified principal residence debt unless the taxpayer elects it (`irs-982-inst-2025::sec::line-1b::b01`); Pub. 4681 says "Other exclusions must be applied before the qualified principal residence indebtedness exclusion" (`irs-pub-4681-2025::sec::qualified-principal::b04`). The engine follows the form's instructions. 2025 tax is the same; the carryovers to 2026 can differ.
 
 ## Should we do this now
 
@@ -67,7 +67,7 @@ Each item has one text and a default. "Now" says whether the engine does it.
    Text: the cap on "qualified principal residence indebtedness" (`line-1e::b02`).
    Default: each loan's qualified part counts against what is left of the cap, in the order of the facts.
    Dollars: only with more than one loan on the home.
-   Now: done, the default; the reading of the cap itself is decision A45.
+   Now: done, the default; the reading of the cap itself is decision A47.
 
 10. **California adds back the whole line 1e amount.**
     Text: "the exclusion of income from discharge of indebtedness from the disposition of your principal residence occurring after December 31, 2017. Enter the amount of discharge on line 8c, column C" (`ca-540-sched-ca-inst-2025::sec::line-8-other-income::b01`).
@@ -127,16 +127,16 @@ Each item has one text and a default. "Now" says whether the engine does it.
 | Field group | Confidence |
 | --- | --- |
 | Header | stated rule |
-| Line 1b, line 2 with insolvency | published example with numbers (instructions, Pub. 4681 Examples 1 to 3); the order with line 1e is decision A46 |
+| Line 1b, line 2 with insolvency | published example with numbers (instructions, Pub. 4681 Examples 1 to 3); the order with line 1e is decision A48 |
 | Line 1c, line 2 farm limit | published example with numbers (Pub. 4681 farm Examples 1 to 3) |
 | Line 1d, line 4 | published example with numbers (Pub. 4681 three examples) |
-| Line 1e, line 10b | published example with numbers (Pub. 4681 Example 3, the foreclosure example); the cap is decision A45 |
+| Line 1e, line 10b | published example with numbers (Pub. 4681 Example 3, the foreclosure example); the cap is decision A47 |
 | Line 1a | stated rule |
 | Line 3 | own reading (item 3) |
 | Line 5 | published example with numbers (Pub. 4681 real property Example 1, Pub. 908 Charlie Jones) |
 | Lines 6 and 9 | published example with numbers (Pub. 4681 real property Example 2, Pub. 908) |
 | Lines 7, 8, 12, 13 | own reading (item 1) |
-| Line 10a | published example with numbers (Pub. 4681 car example); the money is decision A44 |
+| Line 10a | published example with numbers (Pub. 4681 car example); the money is decision A46 |
 | Lines 11a to 11c | stated rule (`line-1c::b02`) |
 | Part III | stated rule (blank) |
 | Schedule 1 line 8c | published example with numbers (Pub. 4681 insolvency Examples 2 and 3, Example 3 under the principal residence); nonrecourse debt is item 15 |

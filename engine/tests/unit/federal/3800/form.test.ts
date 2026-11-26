@@ -158,16 +158,42 @@ describe("K-1 credits", () => {
     expect(run.line("2.part3.1c_form_6765_col_e")).toBeUndefined();
   });
 
-  it("a passive owner's credit goes in column (d), and Form 8582-CR makes the allowed credit a gap", () => {
+  it("a passive owner's credit goes in column (d), and column (g) takes what Form 8582-CR allows", () => {
     const holding = {
       ...(valueOf(makeK1HoldingFactKey(CLINIC_ID)) as object),
       materiallyParticipated: false,
     };
     const run = evaluate(factsWith({ [makeK1HoldingFactKey(CLINIC_ID)]: holding }));
+    // The clinic's $24,000 of box 1 income is passive: line 6 is 35% of it, more than its credits.
+    expect(run.value("form-8582-cr", "0.line.4a_other_passive_credits")).toBe(4_657);
+    expect(run.value("form-8582-cr", "0.line.6_tax_net_passive_income")).toBe(8_400);
+    expect(run.value("form-8582-cr", "1.line.37_passive_activity_credit_allowed")).toBe(4_657);
     expect(run.line("3.part3.4h_form_8941_col_d")).toBe(1_800);
+    expect(run.line("3.part3.4h_form_8941_col_g")).toBe(1_800);
+    expect(run.line("0.line.3_passive_credits_allowed")).toBe(2_857);
+    expect(run.line("1.line.33_specified_passive_credits_allowed")).toBe(1_800);
+    expect(run.value("schedule-3", "0.line.6a")).toBe(run.line(LINE_38));
+  });
+
+  it("a passive credit is a gap when Form 8582-CR is decided out", () => {
+    const holding = {
+      ...(valueOf(makeK1HoldingFactKey(CLINIC_ID)) as object),
+      materiallyParticipated: false,
+    };
+    const decisions = [
+      ...base.decisions,
+      decisionRow({
+        userId: base.userId,
+        taxYear: base.taxYear,
+        key: "decisions.scope.must_file_8582_cr",
+        decision: false,
+        rationale: "test",
+      }),
+    ];
+    const run = evaluate(factsWith({ [makeK1HoldingFactKey(CLINIC_ID)]: holding }), decisions);
+    expect(run.files("form-8582-cr")).toBe(false);
     expect(isGap(run.field("form-3800", "3.part3.4h_form_8941_col_g"))).toBe(true);
     expect(isGap(run.field("form-3800", LINE_38))).toBe(true);
-    expect(isGap(run.field("schedule-3", "0.line.6a"))).toBe(true);
   });
 
   it("a credit that needs Form 3468 keeps a gap on its line, never a dropped credit", () => {

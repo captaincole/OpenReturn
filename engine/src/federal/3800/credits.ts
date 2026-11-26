@@ -4,8 +4,12 @@
  * III to VI is figured from these (rowLines.ts, breakdown.ts).
  */
 
-import type { CreditTransfer } from "../../facts/index.js";
-import type { Cell } from "./cells.js";
+import type {
+  BasisIncreaseElection,
+  CreditTransfer,
+  PassiveCreditActivity,
+} from "../../facts/index.js";
+import { gap, type Cell } from "./cells.js";
 
 export interface CurrentCredit {
   /* The Part III line. */
@@ -15,6 +19,10 @@ export interface CurrentCredit {
   /* Whole dollars before the passive activity limit, or the gap that stops it. */
   amount: Cell;
   passive: boolean;
+  /* A passive credit's activity, for Form 8582-CR; undefined while not stated. */
+  activity?: PassiveCreditActivity;
+  /* A passive credit: the amount Form 8582-CR allows (form.ts sets it). */
+  allowed?: Cell;
   /* The pass-through entity's EIN, for a credit from a K-1. */
   ein?: string;
   transfer?: CreditTransfer;
@@ -28,6 +36,11 @@ export interface Carryover {
   originYear: number;
   amount: Cell;
   passive: boolean;
+  activity?: PassiveCreditActivity;
+  /* Form 8582-CR Part VI: lowers the prior year unallowed credit. */
+  basisIncreaseElection?: BasisIncreaseElection;
+  /* A passive carryover: column (e), the amount Form 8582-CR allows (form.ts sets it). */
+  allowed?: Cell;
   ein?: string;
   changed: boolean;
   /* Column (h), whole dollars; absent means none. */
@@ -54,8 +67,11 @@ export const makesElection = (credit: CurrentCredit) =>
 export const needsPassiveLimit = (credit: CurrentCredit) =>
   credit.passive && (credit.amount !== 0 || credit.transfer !== undefined);
 
+/* What Form 8582-CR allows of a passive source; a source it has not figured is a gap. */
+export const allowedOf = (source: { allowed?: Cell }): Cell => source.allowed ?? gap(PASSIVE_GAP);
+
 export const PASSIVE_GAP =
-  "A passive activity credit is allowed by Form 8582-CR (irs-3800-inst-2025::sec::line-3::b01), which the engine does not figure yet.";
+  "A passive activity credit is allowed by Form 8582-CR (irs-3800-inst-2025::sec::line-3::b01), and Form 8582-CR does not file (decisions.scope.must_file_8582_cr is false).";
 
 export const ELECTIVE_PAYMENT_GAP =
   "The net elective payment amount (column (j)) is a payment on Schedule 3 line 13c, which the engine does not fill yet.";

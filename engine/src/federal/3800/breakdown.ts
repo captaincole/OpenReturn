@@ -11,7 +11,7 @@
 import { figure, gap, type Cell } from "./cells.js";
 import {
   ELECTIVE_PAYMENT_GAP,
-  PASSIVE_GAP,
+  allowedOf,
   makesElection,
   type Carryover,
   type CurrentCredit,
@@ -67,7 +67,7 @@ const transferred = (credit: CurrentCredit, direction: "sold" | "purchased") =>
 /*
  * One Part V row (part-v-3::b01 to ::b04): the passive columns (d)(1) to (d)(4)
  * or the non-passive (e), (f)(1), (f)(2); column (g) adds (d)(4), (e) and
- * (f)(2) and subtracts (f)(1). Column (d)(4) needs Form 8582-CR. Columns
+ * (f)(2) and subtracts (f)(1). Column (d)(4) is what Form 8582-CR allows. Columns
  * (h)(1), (i)(2) and (j) are the elective payment's. `used` is the credit's
  * share of the allowed credit (allocation.ts).
  */
@@ -76,7 +76,7 @@ export function partVRow(credit: CurrentCredit, used: Cell): Record<PartVColumn,
   const own = (cell: Cell) => (passive ? undefined : cell);
   const elective = credit.electivePayment !== undefined ? gap(ELECTIVE_PAYMENT_GAP) : undefined;
   const combined = passive
-    ? gap(PASSIVE_GAP)
+    ? allowedOf(credit)
     : figure(
         (own, bought, sold) => own + bought - sold,
         amountOf(credit),
@@ -94,7 +94,7 @@ export function partVRow(credit: CurrentCredit, used: Cell): Record<PartVColumn,
     d1: passive ? amountOf(credit) : undefined,
     d2: passive ? transferred(credit, "sold") : undefined,
     d3: passive ? transferred(credit, "purchased") : undefined,
-    d4: passive ? gap(PASSIVE_GAP) : undefined,
+    d4: passive ? allowedOf(credit) : undefined,
     e: own(amountOf(credit)),
     f1: own(transferred(credit, "sold")),
     f2: own(transferred(credit, "purchased")),
@@ -115,7 +115,7 @@ export function partVIRow(carryover: Carryover, used: Cell): Record<PartVIColumn
   const passive = carryover.passive;
   const amount = carryover.amount === 0 ? undefined : carryover.amount;
   const columns = {
-    e: passive ? gap(PASSIVE_GAP) : undefined,
+    e: passive ? allowedOf(carryover) : undefined,
     f: passive ? undefined : amount,
     h: carryover.recaptured === 0 ? undefined : carryover.recaptured,
   };
