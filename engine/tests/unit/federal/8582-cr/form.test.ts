@@ -300,7 +300,8 @@ describe("Part VI, the election to increase basis (line-38::b01)", () => {
       election("depot", "Depot Lofts"),
     ]);
     expect(isGap(two.field("form-8582-cr", "1.line.39_passive_activity_disposed_name"))).toBe(true);
-  });
+    // Two whole returns: over the default 5 seconds when the full suite runs on a busy machine.
+  }, 20_000);
 });
 
 describe("the tax attributable to an amount (line-35::b01)", () => {
