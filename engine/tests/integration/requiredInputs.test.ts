@@ -98,6 +98,16 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "and IV); whether one exists is Cade's question",
   ],
   [
+    /^tax_credit_bond\.[^.]+$/,
+    "each fact is one whole bond or pass-through credit of a Form 8912 Part IV; whether one " +
+      "exists is Cade's question, and the form lists a fact whose answers are missing",
+  ],
+  [
+    /^prior_year\.tax_credit_bond_credit_carryforward$/,
+    "a prior-year answer from last year's Form 8912 (line 4 less line 12), recorded when a " +
+      "credit was carried forward (last year's return is not read, #79); Form 8912 line 3 takes it",
+  ],
+  [
     /^electric_vehicle_credit\.passive_carryover\.[^.]+$/,
     "each fact is one whole prior year unallowed qualified electric vehicle credit from last " +
       "year's Form 8582-CR (Form 8834 line 1); whether one exists is Cade's question",

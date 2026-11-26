@@ -13,6 +13,7 @@ import { line6cFrom8839 } from "../8839/receivers.js";
 import { LINE_19_ID, nonrefundableCreditGap } from "../8863/credit.js";
 import { creditGap, LINE_12_ID } from "../8880/credit.js";
 import { line6jFrom8911 } from "../8911/credit.js";
+import { line6kFrom8912 } from "../8912/credit.js";
 import { personalCredit } from "../8936/credit.js";
 import { line6lFrom8978 } from "../8978/receivers.js";
 import type { Schedule3FilingInfo } from "./filingInfo.js";
@@ -114,6 +115,11 @@ export function register(): void {
         const received = line6lFrom8978(form, info);
         return received === "none" ? unsupported(NO_SCENARIO) : received;
       },
+      // MANUAL EDIT: Form 8912 line 12 ("Report this amount on Schedule 3 (Form 1040), line 6k"); no 8912, the old reason.
+      "0.line.6k": (form, info) => {
+        const received = line6kFrom8912(form, info);
+        return received === undefined ? unsupported(NO_SCENARIO) : received.value;
+      },
       /*
        * MANUAL EDIT: Form 4136 line 17 ("Enter here and on Schedule 3 (Form 1040), line 12",
        * irs-1040-inst-2025::sec::line-12-3::b01), in whole dollars (federal/4136/receivers.ts).
@@ -185,7 +191,6 @@ export function register(): void {
       "0.line.5a": "Residential clean energy credit (Form 5695 Part I) is not modeled.",
       "0.line.6e": "Reserved for future use.",
       "0.line.6h": NO_SCENARIO,
-      "0.line.6k": NO_SCENARIO,
       "0.line.6z_description": NO_SCENARIO,
       "0.line.6z_amount": NO_SCENARIO,
       "0.line.9":

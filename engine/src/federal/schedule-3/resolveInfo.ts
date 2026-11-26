@@ -11,6 +11,7 @@ import { resolve8839Info } from "../8839/resolveInfo.js";
 import { resolve8863Info } from "../8863/resolveInfo.js";
 import { resolve8880Info } from "../8880/resolveInfo.js";
 import { refuelingBusinessCredit, refuelingPersonalPart } from "../8911/resolveInfo.js";
+import { resolve8912Info } from "../8912/resolveInfo.js";
 import { cleanVehicleBusinessCredit, cleanVehicleSchedules } from "../8936/resolveInfo.js";
 import { reportingYearTax } from "../8978/receivers.js";
 import { resolve8978Info } from "../8978/resolveInfo.js";
@@ -90,6 +91,14 @@ export function resolveSchedule3Info(inputs: ResolverInputs): Schedule3FilingInf
       {
         rule: "fallback: Form 8978 line 14 is negative (line 6l)",
         value: negativeForm8978(inputs),
+      },
+      /*
+       * Form 8912 line 12 goes on line 6k. The resolver cannot see the tax limit,
+       * so Schedule 3 may file with line 6k blank (KNOWN GAP, as for line 6j).
+       */
+      {
+        rule: "fallback: Form 8912 (line 6k) is required",
+        value: resolve8912Info(inputs).mustFile?.["form-8912"]?.value === true,
       },
       {
         rule: "fallback: Form 4136 (line 12) is required",
