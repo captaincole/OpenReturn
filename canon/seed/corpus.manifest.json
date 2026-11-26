@@ -1,9 +1,9 @@
 {
-  "version": "corpus-v12",
-  "description": "Prebuilt IRS/FTB reference corpus, tax year 2025: 213 documents (160 IRS, 53 FTB; 174 PDFs — form instructions, forms with their instructions and 56 IRS/FTB publications — and 39 FTB web pages), 26,043 passages, FTS5 + embeddinggemma-2 768-dim embeddings, Haiku contextual summaries, each document's source file (ref_document_files; ref_documents.format says pdf or html) and its publication date (ref_documents.published).",
+  "version": "corpus-v13",
+  "description": "Prebuilt IRS/FTB reference corpus, tax year 2025: 316 documents (227 IRS, 89 FTB; 277 PDFs — form instructions, forms with their instructions, the text printed on 103 blank forms and 56 IRS/FTB publications — and 39 FTB web pages), 26,859 passages, FTS5 + embeddinggemma-2 768-dim embeddings, Haiku contextual summaries, each document's source file (ref_document_files; ref_documents.format says pdf or html) and its publication date (ref_documents.published).",
   "file": "corpus.db",
-  "sha256": "1536d05793a8d5a7eb33ab0d63acb81ccb3436a9506c6107dd99ee81f06b8511",
-  "sizeBytes": 389988352,
-  "url": "https://github.com/captaincole/openreturn/releases/download/corpus-v12/corpus.db",
-  "_notes": "GitHub Release asset (corpus-v12 tag). Embeddings are EmbeddingGemma 2 (ollama/embeddinggemma-2, stamped in ref_meta), so clones running Ollama need no reembed. The source files live in the database, not in git; sources keeps their sidecars. corpus-v4 changed the schema (ref_documents.format, ref_document_files.source): replace an older corpus.db with `npm run corpus -- fetch --force`. Everyone downloads the full corpus; per-state packs are a future option if size demands it."
+  "sha256": "7f32f6a832ca93ec6b92fb0e50200607bea98e85f7a16a483e869901b859510f",
+  "sizeBytes": 413437952,
+  "url": "https://github.com/captaincole/openreturn/releases/download/corpus-v13/corpus.db",
+  "_notes": "GitHub Release asset (corpus-v13 tag). Embeddings are EmbeddingGemma 2 (ollama/embeddinggemma-2, stamped in ref_meta), so clones running Ollama need no reembed. The source files live in the database, not in git; sources keeps their sidecars. corpus-v4 changed the schema (ref_documents.format, ref_document_files.source): replace an older corpus.db with `npm run corpus -- fetch --force`. Everyone downloads the full corpus; per-state packs are a future option if size demands it."
 }
