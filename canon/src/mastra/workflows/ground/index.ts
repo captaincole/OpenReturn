@@ -15,8 +15,10 @@ import {
   type GroundStepLog,
   type LoopCarrier,
   type RuleOutput,
+  type SettledRuleOutput,
 } from "./schemas";
-import { validateCitations } from "./validateCitations";
+import { consultStatute, settleAfterStatute } from "./statute";
+import { validateCitations, validateConflicts } from "./validateCitations";
 
 /*
  * Each judge is one model call with the output schema as its response
@@ -76,6 +78,7 @@ async function gather(
     async (): Promise<EvidenceBundle> => ({
       facts: carrier.facts,
       irsBlocks: await retrieveBlocks(queries),
+      statuteBlocks: carrier.evidence?.statuteBlocks ?? [],
       queriesUsed: queries,
       iteration: carrier.iteration,
     }),
@@ -101,7 +104,7 @@ async function assess(
   return { ...carrier, riskAssessment };
 }
 
-function advanceAfterRule(carrier: LoopCarrier, ruleOutput: RuleOutput): LoopCarrier {
+function advanceAfterRule(carrier: LoopCarrier, ruleOutput: SettledRuleOutput): LoopCarrier {
   if (ruleOutput.kind !== "need_more_evidence") return { ...carrier, ruleOutput };
   return {
     ...carrier,
@@ -112,11 +115,13 @@ function advanceAfterRule(carrier: LoopCarrier, ruleOutput: RuleOutput): LoopCar
   };
 }
 
-async function rule(
+/* One rule-judge call. Citations and conflicts may name instruction or statute blocks of this run. */
+async function ruleCall(
   mastra: Mastra,
   carrier: LoopCarrier,
   steps: GroundStepLog[],
-): Promise<LoopCarrier> {
+  note?: string,
+): Promise<RuleOutput> {
   const { ruleOutput } = await timed(
     steps,
     carrier,
@@ -126,23 +131,40 @@ async function rule(
       evidence: carrier.evidence,
       riskAssessment: carrier.riskAssessment,
       prevReasons: carrier.needMoreReasons,
+      ...(note ? { note } : {}),
     },
     async () => {
       const { result } = await judge(
         mastra.getAgent("ruleAgent"),
-        renderRulePrompt(carrier),
+        renderRulePrompt(carrier, note),
         ruleStructuredOutputSchema,
       );
       if (result.kind !== "verdict") return { ruleOutput: result, dropped: undefined };
-      const { citations, dropped } = validateCitations(
-        result.citations,
-        carrier.evidence!.irsBlocks,
-      );
-      return { ruleOutput: { ...result, citations }, dropped };
+      const blocks = [...carrier.evidence!.irsBlocks, ...carrier.evidence!.statuteBlocks];
+      const { citations, dropped } = validateCitations(result.citations, blocks);
+      const checked = validateConflicts(result.conflicts, blocks);
+      return {
+        ruleOutput: { ...result, citations, conflicts: checked.conflicts },
+        dropped,
+        droppedConflicts: checked.dropped,
+      };
     },
     (result) => result,
   );
-  return advanceAfterRule(carrier, ruleOutput);
+  return ruleOutput;
+}
+
+/* A consult_statute gets one statute round and one more call, in the same iteration. */
+async function rule(
+  mastra: Mastra,
+  carrier: LoopCarrier,
+  steps: GroundStepLog[],
+): Promise<LoopCarrier> {
+  const first = await ruleCall(mastra, carrier, steps);
+  if (first.kind !== "consult_statute") return advanceAfterRule(carrier, first);
+  const round = await consultStatute(carrier, first, steps, HITS_PER_QUERY);
+  const second = await ruleCall(mastra, round.carrier, steps, round.note);
+  return advanceAfterRule(round.carrier, settleAfterStatute(second));
 }
 
 function resolve(carrier: LoopCarrier): Omit<GroundResult, "log"> {
@@ -156,6 +178,8 @@ function resolve(carrier: LoopCarrier): Omit<GroundResult, "log"> {
       citations: ruleOutput.citations,
       riskTier,
       iterationCount,
+      conflicts: ruleOutput.conflicts,
+      statuteConsulted: carrier.statuteConsulted,
     };
   }
   const whatsMissing = carrier.needMoreReasons.length
@@ -168,6 +192,8 @@ function resolve(carrier: LoopCarrier): Omit<GroundResult, "log"> {
     riskTier,
     iterationCount,
     whatsMissing,
+    conflicts: [],
+    statuteConsulted: carrier.statuteConsulted,
   };
 }
 
@@ -190,6 +216,7 @@ export async function groundDecision(
     iteration: 1,
     queries: [],
     needMoreReasons: [],
+    statuteConsulted: false,
   };
   for (;;) {
     carrier = await gather(mastra, carrier, steps);
@@ -218,7 +245,7 @@ const groundStep = createStep({
 export const groundWorkflow = createWorkflow({
   id: "ground",
   description:
-    "Grounds one tax decision in the IRS/FTB reference library: the judges retrieve the governing passages, assess the risk, and rule accurate, inaccurate or needs_more_facts with citations. Pass the decision and the facts it cites; maxIterations (default 3) caps the retrieval rounds. The result carries each judge step for the caller's log.",
+    "Grounds one tax decision in the IRS/FTB reference library: the judges retrieve the governing passages, assess the risk, and rule accurate, inaccurate or needs_more_facts with citations. When the passages conflict, or name a rule of law without stating it, the rule judge may consult the statute (law.db) once; passages that disagree come back as conflicts, with both quotes. Pass the decision and the facts it cites; maxIterations (default 3) caps the retrieval rounds. The result carries each judge step for the caller's log.",
   inputSchema: groundInputSchema,
   outputSchema: groundRunResultSchema,
 })

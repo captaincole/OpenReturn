@@ -14,5 +14,11 @@ export const slugOf = (path: string): string =>
 export const citationSegment = (raw: string): string =>
   raw.replace(/[–—]/g, "-").replace(/[^A-Za-z0-9-]/g, "");
 
+// law.db's documents are "usc-26-<year>"; corpus.db has none that start so.
+const LAW_DOC_PREFIX = "usc-";
+
+/** True for a block of the statute: "usc-26-2025::sec::s469::g-1". */
+export const isLawBlockId = (blockId: string): boolean => blockId.startsWith(LAW_DOC_PREFIX);
+
 export const citationOf = (number: string, path: string[]): string =>
   `26 U.S.C. § ${number}${path.map((segment) => `(${segment})`).join("")}`;

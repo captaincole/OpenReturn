@@ -2,6 +2,7 @@
 
 import { citationUrl, type AskCitation } from "@/lib/ask";
 import { cn } from "@/lib/cn";
+import { isLawBlockId } from "@/lib/law";
 import { useState } from "react";
 
 export function refAnchorId(turnId: string, citationNum: number): string {
@@ -23,9 +24,17 @@ export function ReferenceCard({
       ? citation.sectionHeading
       : null;
   const html = citation.format === "html";
-  const where = [section && `§ ${section}`, !html && `p. ${citation.pageNum}`]
-    .filter(Boolean)
-    .join(" · ");
+  // A statute passage shows its citation; the Code has no pages.
+  const statute = isLawBlockId(citation.blockId);
+  const title = statute ? (citation.citation ?? citation.documentTitle) : citation.documentTitle;
+  const where = statute
+    ? citation.documentTitle
+    : [section && `§ ${section}`, !html && `p. ${citation.pageNum}`].filter(Boolean).join(" · ");
+  const linkText = statute
+    ? "Read the statute ↗"
+    : html
+      ? "Read this section ↗"
+      : `Open PDF, p. ${citation.pageNum} ↗`;
 
   return (
     <div
@@ -41,10 +50,10 @@ export function ReferenceCard({
         </span>
         <div className="min-w-0 flex-1">
           <div
-            title={citation.documentTitle}
+            title={title}
             className="line-clamp-2 text-[13px] leading-snug font-medium text-ink-primary"
           >
-            {citation.documentTitle}
+            {title}
           </div>
           <div className="mt-0.5 truncate text-[11px] text-ink-muted">{where}</div>
         </div>
@@ -65,7 +74,7 @@ export function ReferenceCard({
         rel="noopener noreferrer"
         className="mt-2.5 self-start text-[11px] text-accent hover:text-accent-hover"
       >
-        {html ? "Read this section ↗" : `Open PDF, p. ${citation.pageNum} ↗`}
+        {linkText}
       </a>
     </div>
   );

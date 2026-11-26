@@ -1,4 +1,4 @@
-import type { AskCitation, AskCoverage, AskStage } from "../canon/schemas";
+import type { AskCitation, AskCoverage, AskStage, Conflict } from "../canon/schemas";
 import {
   asJson,
   asNum,
@@ -13,7 +13,7 @@ import {
 /* Threads are person-scoped: every read filters by user_id. */
 
 export type AskTurnStatus = "running" | "completed" | "failed";
-export type { AskCitation, AskCoverage, AskStage };
+export type { AskCitation, AskCoverage, AskStage, Conflict };
 
 export interface AskTurn {
   id: string;
@@ -25,6 +25,8 @@ export interface AskTurn {
   coverage: AskCoverage | null;
   citations: AskCitation[];
   missingDocuments: string[];
+  /** Texts the answer found in disagreement, read from the query log (log_json). */
+  conflicts: Conflict[];
   error: string | null;
   createdAt: string;
   completedAt: string | null;
@@ -59,6 +61,7 @@ function rowToTurn(row: Record<string, unknown>): AskTurn {
     coverage: asStrOrNull(row.coverage) as AskCoverage | null,
     citations: (asJson(row.citations_json) as AskCitation[] | null) ?? [],
     missingDocuments: (asJson(row.missing_docs_json) as string[] | null) ?? [],
+    conflicts: (asJson(row.log_json) as { conflicts?: Conflict[] } | null)?.conflicts ?? [],
     error,
     createdAt,
     completedAt: asStrOrNull(row.completed_at),

@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { validateCitations } from "../../../../src/mastra/workflows/ground/validateCitations";
+import {
+  validateCitations,
+  validateConflicts,
+} from "../../../../src/mastra/workflows/ground/validateCitations";
 
 const blocks = [
   {
@@ -32,5 +35,36 @@ describe("validateCitations", () => {
     const out = validateCitations([{ blockId: "b2", quote: "head of household" }], blocks);
     expect(out.citations).toEqual([{ blockId: "b2" }]);
     expect(out.dropped.quotes).toEqual(["head of household"]);
+  });
+});
+
+describe("validateConflicts", () => {
+  it("keeps two sentences of one block that disagree, and drops an unretrieved side", () => {
+    const out = validateConflicts(
+      [
+        {
+          kind: "statute_vs_statute",
+          a: { blockId: "b1", quote: "never married" },
+          b: { blockId: "b1", quote: "see pub 501" },
+          note: "one block",
+        },
+        {
+          kind: "instruction_vs_statute",
+          a: { blockId: "b1", quote: "never married" },
+          b: { blockId: "usc-26-2025::sec::s1::a", quote: "x" },
+          note: "not retrieved",
+        },
+      ],
+      blocks,
+    );
+    expect(out.conflicts).toEqual([
+      {
+        kind: "instruction_vs_instruction",
+        a: { blockId: "b1", quote: "never married" },
+        b: { blockId: "b1", quote: "see pub 501" },
+        note: "one block",
+      },
+    ]);
+    expect(out.dropped).toBe(1);
   });
 });
