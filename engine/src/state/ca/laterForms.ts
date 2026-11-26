@@ -20,6 +20,8 @@ import type { Form3804CRFilingInfo } from "./3804-cr/filingInfo.js";
 import { resolve3804CRInfo } from "./3804-cr/resolveInfo.js";
 import type { Form3805EFilingInfo } from "./3805e/filingInfo.js";
 import { resolve3805EInfo } from "./3805e/resolveInfo.js";
+import type { Form3805VFilingInfo } from "./3805v/filingInfo.js";
+import { resolve3805VInfo } from "./3805v/resolveInfo.js";
 import type { Form3840FilingInfo } from "./3840/filingInfo.js";
 import { resolve3840Info } from "./3840/resolveInfo.js";
 import type { Form3853FilingInfo } from "./3853/filingInfo.js";
@@ -51,7 +53,8 @@ export type LaterCaliforniaFormsFilingInfo = Form540NRFilingInfo &
   Form3804CRFilingInfo &
   ScheduleD1FilingInfo &
   Form3805EFilingInfo &
-  Form3840FilingInfo;
+  Form3840FilingInfo &
+  Form3805VFilingInfo;
 
 export const LATER_CALIFORNIA_FORMS_RESOLVERS: ReadonlyArray<
   (inputs: ResolverInputs) => BaseFilingInfo
@@ -71,4 +74,5 @@ export const LATER_CALIFORNIA_FORMS_RESOLVERS: ReadonlyArray<
   resolveScheduleD1Info,
   resolve3805EInfo,
   resolve3840Info,
+  resolve3805VInfo,
 ];
