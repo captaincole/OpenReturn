@@ -1,0 +1,150 @@
+{
+  "formId": "form-7206",
+  "fieldCount": 16,
+  "entries": [
+    {
+      "fieldId": "form-7206.0.header.taxpayer_id",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7206.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-FE3CE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7206.0.line.1_health_insurance_paid",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "3,106"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7206.0.line.10_net_earned_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "1,503"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7206.0.line.11_s_corp_medicare_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "7,399"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7206.0.line.12_form_2555_exclusion",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "4,553"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7206.0.line.13_earned_income_limit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "8,827"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7206.0.line.14_se_health_insurance_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "3,283"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7206.0.line.2_long_term_care_premiums",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "1,287"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7206.0.line.3_total_premiums",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "9,316"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7206.0.line.4_business_net_profit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "9,838"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7206.0.line.5_total_net_profits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "7,447"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7206.0.line.6_business_profit_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "T-1EBJD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7206.0.line.7_allocated_se_tax_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "8,213"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7206.0.line.8_profit_less_se_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "4,097"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7206.0.line.9_retirement_plan_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "2,048"
+        }
+      ]
+    }
+  ]
+}
