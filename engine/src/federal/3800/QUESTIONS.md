@@ -84,6 +84,24 @@ Three decisions with conflicting texts are rows A18, A19 and A20 of `docs/rule-d
 - Default: Parts V and VI print 15 and 35 rows; the count comes from the resolver's sources, before Forms 8911 and 8936 stand in for K-1 credits. That can only print one extra empty copy.
 - Changes dollars: no.
 
+## 11. Line 13 for an individual: line 12, not line 11
+
+- Source: the face, "Enter 25% (0.25) of the excess, if any, of line 12 (line 11 for corporations) over $25,000" (`irs-3800-face-2025::sec::face-part-ii::b02`). The instructions describe only corporations: "25% of the excess (if any) of net income tax over $25,000" (`irs-3800-inst-2025::sec::line-13::b01`).
+- Default: line 12 for an individual, as the face says. The blind fill read it the same way.
+- Changes dollars: yes, only with an alternative minimum tax. Regular tax $90,000 and AMT $5,000 give line 13 $16,250 from line 12, and $17,500 from line 11.
+
+## 12. A credit above the line 1e or 1k cap
+
+- Source: "don't enter more than $5,000" on line 1e (`line-1e::b01`) and "don't enter more than $150,000" on line 1k (`line-1k::b01`); "the limited amount allowed is allocated pro rata and anything above the limitation is lost" (`limitation-on-certain-credits-reported-in-part-iii::b01`).
+- Default: the cap applies before column (e), so columns (e) and (g) never hold more than the cap. Each source gets its share to the nearest dollar, and the shares add to the cap (two K-1 credits of $4,000 and $3,500: $2,667 and $2,333). The excess is lost: it is not a carryforward. The blind fill agrees.
+- Changes dollars: yes, if a reader carried the excess forward. The text says it is lost.
+
+## Second opinions
+
+- **PolicyEngine-US 2.154.0** (commit `363e9fc5`, 2026-11-25). It does not model Form 3800. `general_business_credit` is a bare input with no formula (`variables/gov/irs/credits/general_business/general_business_credit.py`), and it has none of the source credits (Forms 8826, 8820, 5884, 6765, 8882, 8844), no line 13 or line 14 limit, and no carryforward. Its only limit is the cap of all nonrefundable credits at the income tax before credits. There is nothing to compare for the constants ($25,000, 25%, 75%, $5,000, $150,000) or the ordering.
+- **Other projects.** The repository names no other reference implementation that models Form 3800. IRS Direct File (issue #140) is not checked out here, and it does not support business credits.
+- **Blind fill** (2026-11-25, 14 cases): every compared line matches the engine, including blank against 0. Its dollar doubts are decisions A19 and A20 and items 11 and 12.
+
 ## Proposals for a discussion
 
 - **Form 8582-CR.** A passive credit (current or carried) makes column (g), Part I line 3, Part II lines 24 and 33, and so line 38, a gap. Form 8582-CR needs its own rules and the passive income of each activity (Form 8582 and Schedule E have most of it).
