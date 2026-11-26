@@ -1,15 +1,17 @@
 import { fetchLawStatus } from "@/lib/canonServer";
 import { formatPublished } from "@/lib/format";
 import type { LawStatusDocument } from "@/lib/law";
+import { lawTocHref } from "@/lib/lawToc";
 import { deriveProfile } from "@/lib/profile";
 import { getUserSession } from "@/lib/session";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { HomeTopBar } from "../../HomeTopBar";
 import { LibraryTabs } from "../components/LibraryTabs";
 import { GoToSection } from "./components/GoToSection";
 import { LawNotInstalled } from "./components/LawNotInstalled";
 
-/* Only the status loads here: no section text until a person opens one. */
+/* Only the status loads here: no contents or section text until a person opens one. */
 
 const SOURCE_LABEL: Record<LawStatusDocument["source"], string> = {
   statute: "Statute",
@@ -27,6 +29,12 @@ function Release({ document }: { document: LawStatusDocument }) {
         {document.published ? `Published ${formatPublished(document.published)} · ` : ""}
         {document.sections.toLocaleString()} sections
       </div>
+      <Link
+        href={lawTocHref(document.source)}
+        className="mt-3 inline-block text-[13px] text-accent hover:text-accent-hover"
+      >
+        Browse the contents →
+      </Link>
     </div>
   );
 }

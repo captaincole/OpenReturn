@@ -1,0 +1,9 @@
+{
+  "version": "law-v1",
+  "description": "Prebuilt law library for Canon: the Internal Revenue Code (26 U.S.C., through Public Law 119-73) and the Treasury regulations (26 CFR Parts 1 and 301, eCFR as of 2025-12-31). 6,877 section rows, 129,054 passages, FTS5 + embeddinggemma-2 768-dim embeddings, and each document's source files.",
+  "file": "law.db",
+  "sha256": "0ccbea8b90e8af1148cfa627dab3ab5556efc228da4515b188876b6716d274fb",
+  "sizeBytes": 1013448704,
+  "url": "https://github.com/captaincole/openreturn/releases/download/law-v1/law.db",
+  "_notes": "GitHub Release asset (law-v1 tag). Optional: nothing needs law.db until an agent or a person asks for the law. Embeddings are EmbeddingGemma 2 (ollama/embeddinggemma-2, stamped in ref_meta)."
+}

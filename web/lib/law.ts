@@ -39,8 +39,8 @@ export interface LawSection {
     number: string;
     citation: string;
     heading: string;
-    /** The structure levels above the section, outermost first. */
-    breadcrumbs: string[];
+    /** The structure levels above the section, outermost first; each links to its level. */
+    breadcrumbs: { node: string; heading: string }[];
   };
   release: { title: string; published: string | null };
   blocks: LawBlock[];
