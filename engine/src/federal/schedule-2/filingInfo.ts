@@ -6,10 +6,12 @@ import type { Form4970FilingInfo } from "../4970/filingInfo.js";
 import type { Form5329FilingInfo } from "../5329/filingInfo.js";
 import type { Form8611FilingInfo } from "../8611/filingInfo.js";
 import type { Form8621FilingInfo } from "../8621/filingInfo.js";
+import type { Form8697FilingInfo } from "../8697/filingInfo.js";
 import type { Form8828FilingInfo } from "../8828/filingInfo.js";
 import type { Form8919FilingInfo } from "../8919/filingInfo.js";
 import type { Form8936FilingInfo } from "../8936/filingInfo.js";
 import type { Form8978FilingInfo } from "../8978/filingInfo.js";
+import type { Form965AFilingInfo } from "../965-a/filingInfo.js";
 
 /*
  * Line 5 adds a second Form 4137 (a spouse's) from its filers, and line 6 a
@@ -17,9 +19,11 @@ import type { Form8978FilingInfo } from "../8978/filingInfo.js";
  * Form 5329 Part I for each person, and whether the form files. Lines 1b and
  * 1c read Form 8936's vehicles. Lines 2 and 3 read Form 1116's slots to tell
  * a gap in Form 6251 line 11 from "no AMT". Line 17b adds Form 8828's copies.
- * Line 17l reads Form 4970's partial tax. Line 17z reads Form 8978's line 14 total.
+ * Line 17l reads Form 4970's partial tax. Line 17n reads Form 8697's net
+ * interest owed. Line 17z reads Form 8978's line 14 total.
  * Line 16 adds Form 8611's copies.
- * Lines 1d–1f, 1y, 17a, 17z and 19 read the figured Form 4255.
+ * Lines 1d–1f, 1y, 17a, 17z and 19 read the figured Form 4255. Line 20 reads
+ * Form 965-A's Part II totals.
  */
 export interface Schedule2FilingInfo
   extends
@@ -29,9 +33,11 @@ export interface Schedule2FilingInfo
     Pick<Form4137FilingInfo, "form4137Filers">,
     Pick<Form8919FilingInfo, "form8919Filers">,
     Pick<Form8621FilingInfo, "form8621Totals">,
+    Pick<Form8697FilingInfo, "form8697">,
     Pick<Form8978FilingInfo, "form8978">,
     Pick<Form4970FilingInfo, "form4970Tax" | "form4970TaxGap">,
     Pick<Form8828FilingInfo, "form8828Copies">,
     Pick<Form8611FilingInfo, "form8611Copies">,
     Pick<Form4255FilingInfo, "form4255" | "form4255Gap">,
+    Pick<Form965AFilingInfo, "form965A" | "form965AGap">,
     Pick<Form5329FilingInfo, "earlyDistributionPeople" | "earlyDistributionTaxWithoutForm"> {}

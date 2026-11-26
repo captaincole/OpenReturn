@@ -816,6 +816,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8697",
     relativeDir: "federal/8697",
     register: registerForm8697,
+    // More than 2 (Part I) or 3 (Part II) prior years: "attach additional Forms 8697" (8697/plan.ts).
+    copies: {
+      count: (info) => info?.form8697?.copyCount ?? 1,
+      select: (info, index) => info && { ...info, form8697CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-8815",

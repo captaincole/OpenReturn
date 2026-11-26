@@ -8,7 +8,7 @@ The items are sorted in three groups: two texts that conflict (decided, with a `
 
 ### 10. Student loan interest is not shared
 
-- A DECISION, row A68 of `docs/rule-decisions.md`, in `schedule-1/studentLoanInterest.ts`.
+- A DECISION, row A73 of `docs/rule-decisions.md`, in `schedule-1/studentLoanInterest.ts`.
 
 ### 14. The simple foreign tax credit with Form 4563
 
@@ -18,7 +18,7 @@ The items are sorted in three groups: two texts that conflict (decided, with a `
 
 ### 16. Rounding in the deduction fraction
 
-- A DECISION, row A69 of `docs/rule-decisions.md`, in `4563/lines.ts` (`excludedGrossIncome`).
+- A DECISION, row A74 of `docs/rule-decisions.md`, in `4563/lines.ts` (`excludedGrossIncome`).
 - Text A: "If you have to add two or more amounts to figure the amount to enter on a line, include cents when adding the amounts and round off only the total" (`irs-1040-inst-2025::sec::rounding-off-to-whole::b01`). Text B: the fraction's "Gross income from all sources" is not a line, and its U.S. part is Form 1040's lines, each already rounded.
 - The engine adds each Form 4563 line's whole-dollar amount (the gross income of lines 10 to 13 rounded the same way), so both parts of the fraction are rounded line amounts. The engine first kept the cents and rounded once; the blind fill (2026-11-26) rounded by line.
 - Dollars: a few. Interest of $1,234.49 + $87.50, dividends of $455.50 and other income of $100.25 + $49.50 against $3,000 of U.S. dividends: $1,928 of excluded gross income and a $9,588 standard deduction; with the cents kept, $1,927 and $9,590.

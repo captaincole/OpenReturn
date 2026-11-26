@@ -119,15 +119,17 @@ describe("Form 4136 who files", () => {
 });
 
 describe("No fuel fact: nothing changes", () => {
-  it("Form 4136 does not file; Schedule 3 lines 12 and 15 and Form 1040 line 31 keep their reasons", () => {
+  it("Form 4136 does not file; Schedule 3 line 12 keeps its reason, line 15 and Form 1040 line 31 are blank", () => {
     const run = evaluate(
       [],
       [...base.decisions, decision("decisions.scope.must_file_schedule_3", true)],
     );
     expect(run.files("form-4136")).toBe(false);
     expect(run.field("schedule-3", "0.line.12")).toMatchObject(UNSUPPORTED);
-    expect(run.field("schedule-3", "0.line.15")).toMatchObject(UNSUPPORTED);
-    expect(run.field("form-1040", "line.31")).toMatchObject(UNSUPPORTED);
+    expect(run.field("schedule-3", "0.line.15")).toMatchObject({ ok: false });
+    expect(run.field("schedule-3", "0.line.15")).not.toMatchObject(UNSUPPORTED);
+    expect(run.field("form-1040", "line.31")).not.toMatchObject(UNSUPPORTED);
+    expect(run.value("form-1040", "line.31")).toBeUndefined();
     expect(run.value("form-1040", "line.33")).toBe(16000);
   });
 });

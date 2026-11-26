@@ -1,3 +1,4 @@
+import { ESTIMATED_TAX_KEYS } from "../../facts/index.js";
 import { resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import { resolve1116Info } from "../1116/resolveInfo.js";
 import { resolve2441Info } from "../2441/resolveInfo.js";
@@ -19,6 +20,7 @@ import { resolve8978Info } from "../8978/resolveInfo.js";
 import { k1KeysWithRoute } from "../passThrough/receipts.js";
 import { resolveScheduleRInfo } from "../schedule-r/resolveInfo.js";
 import type { Schedule3FilingInfo } from "./filingInfo.js";
+import { resolveSchedule3PartTwo } from "./resolvePartTwo.js";
 
 /* Line 6l takes a negative Form 8978 line 14 (irs-1040-inst-2025::sec::line-6l::b01). */
 function negativeForm8978(inputs: ResolverInputs): boolean {
@@ -43,6 +45,7 @@ export function resolveSchedule3Info(inputs: ResolverInputs): Schedule3FilingInf
   const form1116 = resolve1116Info(inputs);
   const foreignTaxCredit =
     form1116.mustFile?.["form-1116"]?.value === true || form1116.foreignTax?.election === true;
+  const partTwo = resolveSchedule3PartTwo(inputs);
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_3",
     fallbacks: [
@@ -113,7 +116,19 @@ export function resolveSchedule3Info(inputs: ResolverInputs): Schedule3FilingInf
         rule: "fallback: Form 4136 (line 12) is required",
         value: resolve4136Info(inputs).mustFile?.["form-4136"]?.value === true,
       },
+      {
+        rule: "fallback: a payment with an extension (line 10)",
+        value: partTwo.schedule3ExtensionPayment !== undefined,
+        triggeredByFactKeys: [ESTIMATED_TAX_KEYS.extensionPayment],
+      },
+      /* A gap files the schedule too, so line 15 and Form 1040 line 31 show it. */
+      {
+        rule: "fallback: excess social security tax withheld by two or more employers (line 11)",
+        value:
+          partTwo.schedule3ExcessSocialSecurity !== undefined ||
+          partTwo.schedule3ExcessSocialSecurityGap !== undefined,
+      },
     ],
   });
-  return { mustFile: { "schedule-3": resolution } };
+  return { ...partTwo, mustFile: { "schedule-3": resolution } };
 }

@@ -14,7 +14,7 @@ const { writeDocument } = await import("../../../../src/db/corpusStore.js");
 const { lawPayload } = await import("../../../../src/law/ingestLaw.js");
 const { parseUslmTitle } = await import("../../../../src/law/parseUslm.js");
 const { parsedRegulations, REG_ENTRY } = await import("../../law/regFixture.js");
-const { lawSectionRoute, lawStatusRoute } =
+const { lawSectionRoute, lawStatusRoute, lawTocNodeRoute, lawTocRoute } =
   await import("../../../../src/mastra/server/routes/law.js");
 
 afterAll(() => rmSync(dir, { recursive: true, force: true }));
@@ -22,7 +22,7 @@ afterAll(() => rmSync(dir, { recursive: true, force: true }));
 // Mastra types the handler as a union of route kinds; these two are plain Hono handlers.
 type Handler = (ctx: Context) => Response | Promise<Response>;
 const app = new Hono();
-for (const route of [lawStatusRoute, lawSectionRoute])
+for (const route of [lawStatusRoute, lawSectionRoute, lawTocRoute, lawTocNodeRoute])
   app.get(route.path, (ctx) => (route as unknown as { handler: Handler }).handler(ctx));
 
 const getJson = async (url: string) => {
@@ -64,7 +64,12 @@ async function installLaw(): Promise<void> {
 
 describe("the law routes without law.db", () => {
   it("answer installed: false with both commands, and create no file", async () => {
-    for (const url of ["/app/law/status", "/app/law/sections/469"]) {
+    for (const url of [
+      "/app/law/status",
+      "/app/law/sections/469",
+      "/app/law/toc/statute",
+      "/app/law/toc/statute/sta",
+    ]) {
       const { status, body } = await getJson(url);
       expect(status).toBe(200);
       expect(body.installed).toBe(false);
@@ -113,10 +118,10 @@ describe("the law routes with law.db", () => {
         citation: "26 U.S.C. § 469",
         heading: "Passive activity losses and credits limited",
         breadcrumbs: [
-          "Subtitle A—Income Taxes",
-          "CHAPTER 1—NORMAL TAXES AND SURTAXES",
-          "Subchapter A—Determination of Tax Liability",
-          "PART I—TAX ON INDIVIDUALS",
+          { node: "sta", heading: "Subtitle A—Income Taxes" },
+          { node: "sta-ch1", heading: "CHAPTER 1—NORMAL TAXES AND SURTAXES" },
+          { node: "sta-ch1-scha", heading: "Subchapter A—Determination of Tax Liability" },
+          { node: "sta-ch1-scha-pti", heading: "PART I—TAX ON INDIVIDUALS" },
         ],
       },
       release: { title: SIDECAR.title, published: "2026-01-12" },
@@ -150,7 +155,10 @@ describe("the law routes with law.db", () => {
           number: "1.469-5T",
           citation: "26 CFR § 1.469-5T",
           heading: "Material participation (temporary).",
-          breadcrumbs: ["PART 1—INCOME TAXES", "Test Group"],
+          breadcrumbs: [
+            { node: "pt1", heading: "PART 1—INCOME TAXES" },
+            { node: expect.stringMatching(/^pt1-sg/), heading: "Test Group" },
+          ],
         },
         release: { title: REG_ENTRY.sidecar.title, published: null },
       });
@@ -167,6 +175,86 @@ describe("the law routes with law.db", () => {
       const { status, body } = await getJson(`/app/law/sections/${encodeURIComponent(section)}`);
       expect(status).toBe(404);
       expect(body.error).toContain("The law library has no section");
+    }
+  });
+});
+
+describe("the law contents route", () => {
+  it("returns the top level of the statute, with no node and no levels above", async () => {
+    const { status, body } = await getJson("/app/law/toc/statute");
+    expect(status).toBe(200);
+    expect(body).toEqual({
+      installed: true,
+      source: "statute",
+      docId: "usc-26-2025",
+      release: { title: SIDECAR.title, published: "2026-01-12" },
+      node: null,
+      ancestors: [],
+      children: [{ kind: "group", node: "sta", heading: "Subtitle A—Income Taxes" }],
+    });
+  });
+
+  it("returns one level: its heading, the levels above it, and its sections in order", async () => {
+    const { status, body } = await getJson("/app/law/toc/statute/sta-ch1-scha-pti");
+    expect(status).toBe(200);
+    expect(body).toMatchObject({
+      node: { node: "sta-ch1-scha-pti", heading: "PART I—TAX ON INDIVIDUALS" },
+      ancestors: [
+        { node: "sta", heading: "Subtitle A—Income Taxes" },
+        { node: "sta-ch1", heading: "CHAPTER 1—NORMAL TAXES AND SURTAXES" },
+        { node: "sta-ch1-scha", heading: "Subchapter A—Determination of Tax Liability" },
+      ],
+      children: [
+        {
+          kind: "section",
+          number: "469",
+          citation: "26 U.S.C. § 469",
+          heading: "Passive activity losses and credits limited",
+        },
+        { kind: "section", number: "139H", citation: "26 U.S.C. § 139H" },
+      ],
+    });
+  });
+
+  it("walks the regulations from a part to a subject group to its sections", async () => {
+    const top = await getJson("/app/law/toc/regulations");
+    expect(top.body).toMatchObject({
+      source: "regulations",
+      docId: "cfr-26-2025",
+      node: null,
+      children: [{ kind: "group", node: "pt1", heading: "PART 1—INCOME TAXES" }],
+    });
+    const part = await getJson("/app/law/toc/regulations/pt1");
+    const children = part.body.children as { kind: string; node: string; heading: string }[];
+    const group = children.find((child) => child.heading === "Test Group");
+    expect(group).toMatchObject({ kind: "group", node: expect.stringMatching(/^pt1-sg/) });
+    const { status, body } = await getJson(`/app/law/toc/regulations/${group?.node}`);
+    expect(status).toBe(200);
+    expect(body).toMatchObject({
+      node: { node: group?.node, heading: "Test Group" },
+      ancestors: [{ node: "pt1", heading: "PART 1—INCOME TAXES" }],
+      children: [
+        {
+          kind: "section",
+          number: "1.469-5T",
+          citation: "26 CFR § 1.469-5T",
+          heading: "Material participation (temporary).",
+        },
+        { kind: "section", number: "1.408A-4", citation: "26 CFR § 1.408A-4" },
+      ],
+    });
+  });
+
+  it("answers 404 for an unknown library, an unknown node, or a section", async () => {
+    for (const url of [
+      "/app/law/toc/cases",
+      "/app/law/toc/statute/stz",
+      "/app/law/toc/statute/s469",
+      "/app/law/toc/regulations/sta",
+    ]) {
+      const { status, body } = await getJson(url);
+      expect(status).toBe(404);
+      expect(body.error).toContain("The law library has no");
     }
   });
 });

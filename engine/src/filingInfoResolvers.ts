@@ -35,6 +35,7 @@ import { installmentSalesWithoutTradeOrBusinessAnswer } from "./federal/8960/lin
 import { NIIT_THRESHOLDS, rentalsWithoutTradeOrBusinessAnswer } from "./federal/8960/lines.js";
 import { investmentSignals, magiUpperBound } from "./federal/8960/mustFile.js";
 import { resolve8962Info } from "./federal/8962/resolveInfo.js";
+import { form965AReachesSchedule2 } from "./federal/965-a/receivers.js";
 import {
   k1KeysWithRoute,
   receivedAt,
@@ -461,6 +462,8 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
     form8611ReachesSchedule2(resolve8611Info(inputs)),
     // Form 4255 line 3 columns (q) and (r) (lines 1d–1f, 1y, 17a, 17z, 19).
     resolve4255Info(inputs).mustFile?.["form-4255"]?.value,
+    // Form 965-A Part II Totals, column (k) (line 20), a payment for 2025 or a gap.
+    form965AReachesSchedule2(inputs),
   ];
   const required = feeders.some((value) => value === true);
   const open = !required && feeders.some((value) => value === undefined);
@@ -470,12 +473,10 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
       ? []
       : [
           {
-            rule: "fallback: Schedule SE (line 4), Form 4137 (line 5), Form 8919 (line 6), Form 8959 (line 11), Form 8960 (line 12), Schedule H (line 9), Form 6251 (line 2), Form 8962 (line 1a), or an early distribution tax (line 8) is required, or Form 8853 has an additional tax (lines 17e and 17f), or a clean vehicle credit was transferred (lines 1b, 1c), or Form 4970 has a partial tax (line 17l), or Form 4255 is filed (lines 1d–1f, 1y, 17a, 17z, 19)",
+            rule: "fallback: Schedule SE (line 4), Form 4137 (line 5), Form 8919 (line 6), Form 8959 (line 11), Form 8960 (line 12), Schedule H (line 9), Form 6251 (line 2), Form 8962 (line 1a), or an early distribution tax (line 8) is required, or Form 8853 has an additional tax (lines 17e and 17f), or a clean vehicle credit was transferred (lines 1b, 1c), or Form 4970 has a partial tax (line 17l), or Form 4255 is filed (lines 1d–1f, 1y, 17a, 17z, 19), or Form 965-A has a 2025 installment (line 20)",
             value: required,
           },
         ],
   });
-  return {
-    mustFile: { "schedule-2": resolution },
-  };
+  return { mustFile: { "schedule-2": resolution } };
 }
