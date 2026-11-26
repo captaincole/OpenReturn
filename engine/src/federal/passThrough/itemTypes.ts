@@ -82,6 +82,12 @@ export const ITEM_TYPES = {
   gross_nonfarm_income: kind("gross nonfarm income", "information"),
   credit: kind("credit", "credit"),
   credit_recapture: kind("credit recapture", "credit"),
+  /* Form 8611 line 8: a recapture the entity figured (irs-8611-form-2025::sec::face-page-1::b02). */
+  low_income_housing_recapture_42j5: kind(
+    "recapture of low-income housing credit (section 42(j)(5))",
+    "credit",
+  ),
+  low_income_housing_recapture: kind("recapture of low-income housing credit (other)", "credit"),
   backup_withholding: kind("backup withholding", "payment"),
   estimated_tax_payment: kind("estimated tax payment", "payment"),
   tax_exempt_interest: kind("tax-exempt interest income", "basis"),

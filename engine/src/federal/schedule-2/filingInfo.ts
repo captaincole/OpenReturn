@@ -3,6 +3,7 @@ import type { Form1116FilingInfo } from "../1116/filingInfo.js";
 import type { Form4137FilingInfo } from "../4137/filingInfo.js";
 import type { Form4970FilingInfo } from "../4970/filingInfo.js";
 import type { Form5329FilingInfo } from "../5329/filingInfo.js";
+import type { Form8611FilingInfo } from "../8611/filingInfo.js";
 import type { Form8621FilingInfo } from "../8621/filingInfo.js";
 import type { Form8828FilingInfo } from "../8828/filingInfo.js";
 import type { Form8919FilingInfo } from "../8919/filingInfo.js";
@@ -16,6 +17,7 @@ import type { Form8978FilingInfo } from "../8978/filingInfo.js";
  * 1c read Form 8936's vehicles. Lines 2 and 3 read Form 1116's slots to tell
  * a gap in Form 6251 line 11 from "no AMT". Line 17b adds Form 8828's copies.
  * Line 17l reads Form 4970's partial tax. Line 17z reads Form 8978's line 14 total.
+ * Line 16 adds Form 8611's copies.
  */
 export interface Schedule2FilingInfo
   extends
@@ -28,4 +30,5 @@ export interface Schedule2FilingInfo
     Pick<Form8978FilingInfo, "form8978">,
     Pick<Form4970FilingInfo, "form4970Tax" | "form4970TaxGap">,
     Pick<Form8828FilingInfo, "form8828Copies">,
+    Pick<Form8611FilingInfo, "form8611Copies">,
     Pick<Form5329FilingInfo, "earlyDistributionPeople" | "earlyDistributionTaxWithoutForm"> {}

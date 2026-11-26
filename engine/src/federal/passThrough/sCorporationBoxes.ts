@@ -378,10 +378,20 @@ const BOX_17: BoxTable = [
   info("C", "Qualified rehabilitation expenditures (other than rental real estate)", "qre"),
   // box-17-other-information::b02
   info("D", "Basis of energy property", "energy_property_basis"),
+  // box-17-other-information::b02: Form 8611 line 8, one form for each code
+  coded(
+    "17",
+    "E",
+    "low_income_housing_recapture_42j5",
+    "Recapture of low-income housing credit (section 42(j)(5))",
+  ),
   // box-17-other-information::b02
-  recapture("E", "Recapture of low-income housing credit (section 42(j)(5))", "lih_42j5"),
-  // box-17-other-information::b02
-  recapture("F", "Recapture of low-income housing credit (other)", "lih_other"),
+  coded(
+    "17",
+    "F",
+    "low_income_housing_recapture",
+    "Recapture of low-income housing credit (other)",
+  ),
   // box-17-other-information::b02
   recapture("G", "Recapture of investment credit", "investment_credit"),
   // box-17-other-information::b03
