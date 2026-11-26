@@ -308,6 +308,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "taxed by the special methods); whether the taxpayer makes it is Cade's question",
   ],
   [
+    /^se_health_plan\.[^.]+$/,
+    "each fact is a whole health plan established under a business (Form 7206, Schedule 1 " +
+      "line 17); whether one exists is Cade's question",
+  ],
+  [
     /^foreign_tax\.[^.]+$/,
     "each fact is a whole foreign tax payment no payee statement shows (Form 1116 Parts I and II); " +
       "whether one was paid is Cade's question",

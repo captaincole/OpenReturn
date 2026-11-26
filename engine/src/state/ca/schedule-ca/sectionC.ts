@@ -23,6 +23,11 @@ export const sectionCBindings: Bindings = {
    */
   "2.line.c11_subtractions": (form) => numberOrBlank(form["2.line.c11_federal"]),
   "2.line.c15_federal": (form) => numberOrBlank(form["schedule-1.1.line.15"]),
+  /*
+   * California conforms on line 17 except for a person it treats as an employee
+   * (column B, answerLines.ts) (ca-540-sched-ca-inst-2025::sec::line-11-through-line-25::b02).
+   */
+  "2.line.c17_federal": (form) => numberOrBlank(form["schedule-1.1.line.17"]),
   // California conforms on line 18: no column B or C (ca-540-sched-ca-inst-2025::sec::line-11-through-line-25::b01).
   "2.line.c18_federal": (form) => numberOrBlank(form["schedule-1.1.line.18"]),
   /*

@@ -1,5 +1,6 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import { atLeast, numberOrBlank, sum } from "../../money.js";
+import { healthDeductionOfBusiness } from "../7206/results.js";
 import type { PropertyColumn } from "../schedule-e/filingInfo.js";
 import type { QbiBusiness, QbiFilingInfo } from "./filingInfo.js";
 
@@ -69,7 +70,14 @@ export function taxableIncomeBeforeQbi(
 
 type QbiInfo = Pick<
   QbiFilingInfo,
-  "qbiScheduleSEFiled" | "taxpayerSSN" | "spouseSSN" | "rentalProperties"
+  | "qbiScheduleSEFiled"
+  | "taxpayerSSN"
+  | "spouseSSN"
+  | "rentalProperties"
+  | "mustFile"
+  | "form7206Plans"
+  | "form7206Line5"
+  | "form2555Filers"
 >;
 
 /*
@@ -93,10 +101,11 @@ function selfEmploymentDeduction(
 /*
  * One business's QBI, for Form 8995 line 1(c) and Form 8995-A line 2: Schedule C
  * line 31 plus Form 4797's ordinary gain or loss on its property (qbi/form4797.ts),
- * less the deductible part of SE tax and the self-employed plan deduction
- * (Schedule 1 line 16) attributed to it (qbi/resolveInfo.ts). No fact gives SE
- * health insurance (Schedule 1 line 17 is not modeled). Unrounded; undefined
- * while it waits or when qbiGap says why it is a gap.
+ * less the deductible part of SE tax, the self-employed plan deduction
+ * (Schedule 1 line 16) attributed to it (qbi/resolveInfo.ts), and the
+ * self-employed health insurance deduction of its plans (Form 7206 line 14,
+ * irs-8995a-inst-2025::sec::determining-your-qbi-deduction::b15). Unrounded;
+ * undefined while it waits or when qbiGap says why it is a gap.
  */
 export function businessQbi(
   form: Record<string, unknown>,
@@ -107,12 +116,14 @@ export function businessQbi(
     return undefined;
   }
   const deduction = selfEmploymentDeduction(form, info, business);
-  if (deduction === undefined) return undefined;
+  const healthInsurance = healthDeductionOfBusiness(business.factKey, form, info);
+  if (deduction === undefined || healthInsurance === undefined) return undefined;
   return (
     business.netProfit +
     (business.form4797Ordinary ?? 0) -
     deduction -
-    (business.retirementPlanDeduction ?? 0)
+    (business.retirementPlanDeduction ?? 0) -
+    healthInsurance
   );
 }
 

@@ -5,6 +5,7 @@ import {
   GAMBLING_KEYS,
   getGamblingWinningsFacts,
   getGovernmentPaymentsFacts,
+  getSelfEmployedHealthPlanFacts,
   miscIncomeNotForBusiness,
   OTHER_INCOME_KEYS,
   unlinkedMiscIncomeKeys,
@@ -123,6 +124,12 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
         rule: "fallback: a farm fact (Schedule F line 34 on line 6)",
         value: hasFarm,
         triggeredByFactKeys: farms.farms.map((farm) => farm.key),
+      },
+      // A self-employed health plan's deduction goes on line 17 (irs-7206-inst-2025::sec::general-instructions::b03).
+      {
+        rule: "fallback: a self-employed health insurance plan (line 17)",
+        value: getSelfEmployedHealthPlanFacts(inputs.facts).length > 0,
+        triggeredByFactKeys: getSelfEmployedHealthPlanFacts(inputs.facts).map((plan) => plan.key),
       },
       // Form 2555 line 45 goes on line 8d and line 50 on line 24j (line-8d::b01, line-24j::b01).
       {

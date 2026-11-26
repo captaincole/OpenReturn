@@ -1040,5 +1040,10 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 7206",
     relativeDir: "federal/7206",
     register: registerForm7206,
+    // One Form 7206 for each plan (the form's note).
+    copies: {
+      count: (info) => info?.form7206Plans?.length ?? 1,
+      select: (info, index) => info && { ...info, form7206CopyIndex: index },
+    },
   }),
 ];

@@ -136,8 +136,10 @@ import type { ScheduleHFilingInfo } from "./federal/schedule-h/filingInfo.js";
 import { resolveScheduleHInfo } from "./federal/schedule-h/resolveInfo.js";
 import type { ScheduleRFilingInfo } from "./federal/schedule-r/filingInfo.js";
 import { resolveScheduleRInfo } from "./federal/schedule-r/resolveInfo.js";
-import type { ScheduleSEFilingInfo } from "./federal/schedule-se/filingInfo.js";
-import { resolveScheduleSEInfo } from "./federal/schedule-se/resolveInfo.js";
+import {
+  SELF_EMPLOYED_RESOLVERS,
+  type SelfEmployedFilingInfo,
+} from "./federal/selfEmployedForms.js";
 import {
   makeResolverInputs,
   resolve540Info,
@@ -244,7 +246,6 @@ export type FilingInfo = BaseFilingInfo &
   ScheduleAFilingInfo &
   ScheduleBFilingInfo &
   ScheduleCFilingInfo &
-  ScheduleSEFilingInfo &
   Form8606FilingInfo &
   Form8889FilingInfo &
   Form8959FilingInfo &
@@ -308,6 +309,7 @@ export type FilingInfo = BaseFilingInfo &
   Form8938FilingInfo &
   RecaptureFormsFilingInfo &
   FarmFormsFilingInfo &
+  SelfEmployedFilingInfo &
   FederalFormsWithNoRulesFilingInfo &
   LaterCaliforniaFormsFilingInfo &
   CaliforniaFormsWithNoRulesFilingInfo;
@@ -347,7 +349,6 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolveScheduleAInfo,
   resolveScheduleBInfo,
   resolveScheduleCInfo,
-  resolveScheduleSEInfo,
   resolve6251Info,
   resolveScheduleEInfo,
   resolve8582Info,
@@ -394,6 +395,7 @@ const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve8938Info,
   ...RECAPTURE_FORMS_RESOLVERS,
   ...FARM_FORMS_RESOLVERS,
+  ...SELF_EMPLOYED_RESOLVERS,
   ...FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS,
   ...LATER_CALIFORNIA_FORMS_RESOLVERS,
   ...CALIFORNIA_FORMS_WITH_NO_RULES_RESOLVERS,

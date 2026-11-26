@@ -24,6 +24,7 @@ import { resolveScheduleSEInfo } from "../schedule-se/resolveInfo.js";
 import { farmQbiBusiness, qbiFarms } from "./farms.js";
 import type { QbiBusiness, QbiFilingInfo } from "./filingInfo.js";
 import { withForm4797 } from "./form4797.js";
+import { withHealthPlanGaps } from "./healthInsurance.js";
 
 /* 1099-DIV box 5, cents kept. Undefined with no 1099-DIV. */
 function form1099ReitDividends(inputs: ResolverInputs): number | undefined {
@@ -315,23 +316,26 @@ export function qbiBusinesses(inputs: ResolverInputs): {
   return {
     businesses: withForm4797(inputs, [
       ...qbiRentals(inputs),
-      ...withForeignBusinessGap(inputs, [
-        ...onReturn.map(({ key, value, owner }): QbiBusiness => ({
-          factKey: key,
-          kind: "business",
-          owner,
-          name: value.name ?? value.activity,
-          ein: value.ein,
-          specifiedService: value.specifiedService,
-          netProfit: netProfit(value, onReturnValues),
-          ownersOnlyBusiness: owner === "taxpayer" && taxpayerCount === 1,
-          retirementPlanDeduction: activities === 1 ? planDeduction : undefined,
-          qbiGap: planGap,
-          w2WagesPaid: value.w2WagesPaid,
-          qualifiedPropertyUbia: value.qualifiedPropertyUbia,
-        })),
-        ...farmQbi,
-        ...qbiPassThroughs(inputs),
+      // MANUAL EDIT: a business whose health insurance deduction is a gap (healthInsurance.ts).
+      ...withHealthPlanGaps(inputs, [
+        ...withForeignBusinessGap(inputs, [
+          ...onReturn.map(({ key, value, owner }): QbiBusiness => ({
+            factKey: key,
+            kind: "business",
+            owner,
+            name: value.name ?? value.activity,
+            ein: value.ein,
+            specifiedService: value.specifiedService,
+            netProfit: netProfit(value, onReturnValues),
+            ownersOnlyBusiness: owner === "taxpayer" && taxpayerCount === 1,
+            retirementPlanDeduction: activities === 1 ? planDeduction : undefined,
+            qbiGap: planGap,
+            w2WagesPaid: value.w2WagesPaid,
+            qualifiedPropertyUbia: value.qualifiedPropertyUbia,
+          })),
+          ...farmQbi,
+          ...qbiPassThroughs(inputs),
+        ]),
       ]),
     ]),
     malformedKeys,

@@ -97,6 +97,7 @@ export * from "./kinds/saversCredit.js";
 export * from "./kinds/scheduleK1.js";
 export * from "./kinds/section1256.js";
 export * from "./kinds/section179Recapture.js";
+export * from "./kinds/selfEmployedHealthPlan.js";
 export * from "./kinds/socialSecurity.js";
 export * from "./kinds/spouse.js";
 export * from "./kinds/studentLoanInterest.js";
