@@ -447,6 +447,22 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "penalty, the extension) is missing",
   ],
   [
+    /^farmer_or_fisherman\.gross_income_(2024|2025)$/,
+    "the two-thirds gross income test of a farmer or fisherman (FTB 5805F, who files); one " +
+      "passing year is enough, so the other year is not asked; with farm income and no passing " +
+      "year, FTB 5805 lists each year not stated (5805f/mustFile.ts farmerTestWaitingKeys)",
+  ],
+  [
+    /^prior_year\.(ca_lump_sum_tax|ca_no_twelve_month_return)$/,
+    "FTB 5805F answers Cade records only when the 2024 Form 540 had a line 34 tax (line 8) or " +
+      "there was no 12-month 2024 California return (lines 7 to 9 blank); absent means neither",
+  ],
+  [
+    /^ca_farmer_estimated_tax\.(underpayment_paid_on|waiver)$/,
+    "FTB 5805F answers Cade records only when the underpayment was paid before April 15, 2026 " +
+      "(line 13; absent, April 15) or the taxpayer asks for a waiver (line 16)",
+  ],
+  [
     /^prior_year\.ca_tax$/,
     "KNOWN GAP: decides whether FTB 5805 files. Needed only when the CA balance due is " +
       "$500 or more, which the resolver cannot see before evaluation.",

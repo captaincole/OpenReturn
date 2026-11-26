@@ -80,6 +80,7 @@ import {
 import {
   line100TaxDue,
   line111AmountYouOwe,
+  line113Ftb5805FAttached,
   line113UnderpaymentEstimatedTax,
   line114TotalAmountDue,
   line115RefundOrNoAmountDue,
@@ -240,6 +241,7 @@ export function register(): void {
       "line.99_overpaid_tax_available": line99OverpaidTaxAvailable,
       "line.100_tax_due": line100TaxDue,
       "line.111_amount_you_owe": line111AmountYouOwe,
+      "line.112_ftb_5805f_attached": line113Ftb5805FAttached,
       "line.113_underpayment_estimated_tax": line113UnderpaymentEstimatedTax,
       "line.114_total_amount_due": line114TotalAmountDue,
       "line.115_refund_or_no_amount_due": line115RefundOrNoAmountDue,
@@ -344,8 +346,6 @@ export function register(): void {
         "Interest and penalty calculations require FTB-computed penalty amounts based on filing date, payment history, and underpayment rules — no fact ingestion path or scenario for this yet.",
       "line.112_ftb_5805_attached":
         "FTB 5805 attachment flag depends on underpayment of estimated tax — no scenario or decision models whether this form is attached.",
-      "line.112_ftb_5805f_attached":
-        "FTB 5805F attachment flag depends on underpayment of estimated tax for farmers/fishermen — no scenario or decision models whether this form is attached.",
       "line.116_account_type_checking":
         "Bank account type (checking) is taxpayer-provided direct-deposit preference — no fact ingestion path built for banking details.",
       "line.116_routing_number":
