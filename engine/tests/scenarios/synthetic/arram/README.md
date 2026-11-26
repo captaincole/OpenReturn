@@ -17,7 +17,7 @@ The scenario fills Form 8582-CR in every part but VI:
 
 Simplifications: the credit amounts are stated, as their source forms (Forms 8826, 8844, 3468 and 8586) would figure them; the engine does not have those forms. Last year's unallowed credits are stated answers: the product does not read last year's return yet (#79). Part VI (the basis election) is in the unit tests only, since it needs a sale of the credit property.
 
-Forms that file: Form 1040, Schedules 1, 3 and E, Forms 8582, 8582-CR, 3800 and 6251.
+Forms that file: Form 1040, Schedules 1, 2, 3 and E, Forms 8582, 8582-CR, 3800 and 6251. Schedule 2 prints only 0 on lines 2 and 3: it files with Form 6251, and its rule cannot see that Form 6251 line 11 is 0 (a known gap of the Schedule 2 rule).
 
 ## Inputs
 

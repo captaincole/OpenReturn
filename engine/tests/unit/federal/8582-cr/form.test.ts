@@ -8,6 +8,8 @@ import { describe, expect, it } from "vitest";
 import {
   makeCreditCarryoverFactKey,
   makeGeneralBusinessCreditFactKey,
+  makeRentalFactKey,
+  makeW2FactKey,
   SPOUSE_KEYS,
   type CreditCarryoverFactValue,
   type GeneralBusinessCreditFactValue,
@@ -212,6 +214,49 @@ describe("the gaps", () => {
     );
     expect(isGap(run.field("form-8582-cr", "0.line.10_modified_agi"))).toBe(true);
     expect(isGap(run.field("form-8582-cr", LINE_37))).toBe(true);
+  });
+});
+
+describe("modified AGI with net passive income (line-10::b01, decision A45)", () => {
+  /*
+   * arram with W-2 wages of $100,000 and the duplex at a $10,000 profit (rents
+   * $40,000, expenses $30,000), and $15,000 of Worksheet 1 credits. AGI is
+   * $110,000 and taxable income $94,250, all in the 22% rows of the Tax Table.
+   */
+  const withIncome = (fact: TaxFactRow): TaxFactRow => {
+    const value = fact.value as Record<string, unknown>;
+    if (fact.key === makeW2FactKey("south-plains-regional")) {
+      return { ...fact, value: { ...value, box1: 100_000 } };
+    }
+    if (fact.key === makeRentalFactKey("cedar-lane-duplex")) {
+      return { ...fact, value: { ...value, rentsReceived: 40_000 } };
+    }
+    return fact;
+  };
+  const credit = stated("duplex-empowerment-zone", {
+    sourceForm: "8844",
+    line: "3",
+    amount: 15_000,
+    passive: true,
+    passiveActivity: { name: "Duplex", rentalRealEstate: true, activelyParticipated: true },
+  });
+  // isCredit drops this year's credits and the carryovers (one key prefix).
+  const facts = [...base.facts.filter((fact) => !isCredit(fact)).map(withIncome), credit];
+
+  it("lines 10 to 16 count the $10,000 of Form 8582 line 3 in modified AGI", () => {
+    const run = evaluate(facts);
+    expect(run.value("form-8582", "0.line.3_combined")).toBe(10_000);
+    expect(run.value("form-1040", "line.11a")).toBe(110_000);
+    expect(run.line("0.line.6_tax_net_passive_income")).toBe(2_200);
+    expect(run.line("0.line.7_credits_over_passive_tax")).toBe(12_800);
+    expect(run.line("0.line.10_modified_agi")).toBe(110_000);
+    expect(run.line("0.line.11_threshold_less_magi")).toBe(40_000);
+    expect(run.line("0.line.12_half_of_line_11")).toBe(20_000);
+    expect(run.line("0.line.13_form_8582_line_9")).toBeUndefined();
+    expect(run.line("0.line.15_tax_on_line_14")).toBe(4_400);
+    expect(run.line("0.line.16_smaller_line_8_or_15")).toBe(4_400);
+    expect(run.line(LINE_37)).toBe(6_600);
+    expect(run.value("schedule-3", "0.line.6a")).toBe(6_600);
   });
 });
 

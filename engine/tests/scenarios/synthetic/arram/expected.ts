@@ -329,6 +329,19 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "form-6251.0.line.10_regular_tax_less_credits": 16095,
     },
   },
+  /*
+   * Schedule 2 files because Form 6251 does (Form 3800 line 14 reads it); its
+   * resolver cannot see that Form 6251 line 11 is 0 (filingInfoResolvers.ts,
+   * KNOWN GAP), so lines 2 and 3 print 0.
+   */
+  "schedule-2": {
+    engineFields: {
+      // Line 2 — Alternative minimum tax. Attach Form 6251
+      "schedule-2.0.line.2_alternative_minimum_tax": 0,
+      // Line 3 — Add lines 1z and 2. Enter here and on Form 1040, line 17
+      "schedule-2.0.line.3_total_lines_1z_and_2": 0,
+    },
+  },
   "schedule-3": {
     engineFields: {
       // Line 6a — General business credit. Attach Form 3800

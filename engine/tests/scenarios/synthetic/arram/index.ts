@@ -22,6 +22,7 @@ const FORM_IDS = [
   "form-8582-cr",
   "form-3800",
   "form-6251",
+  "schedule-2",
   "schedule-3",
   "form-1040",
 ];

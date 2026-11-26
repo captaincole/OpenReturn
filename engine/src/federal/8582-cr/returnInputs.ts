@@ -12,7 +12,7 @@ import { unsupported, type Unsupported } from "../../types.js";
 import type { FilingStatus } from "../../values.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
 import { qdcgInputsFromReturn, scheduleDWorksheetTax } from "../1040/qdcgInputs.js";
-import type { Cell } from "../3800/cells.js";
+import { isGap, type Cell } from "../3800/cells.js";
 import { modifiedAgi } from "../8582/magi.js";
 import { magiWithK1Gap } from "../8582/magiGap.js";
 import { releasedOnDisposition } from "../passThrough/passiveActivity.js";
@@ -119,9 +119,34 @@ export function form8582Line9Of(form: Accessor, info: PassiveLimitInfo): Cell | 
   return line9 === 0 ? undefined : line9;
 }
 
-/* Lines 10 and 22: Form 8582's modified AGI, "figured the same way" (line-10::b01 lists the same items). */
+/*
+ * Lines 10 and 22: Form 8582's modified AGI, which leaves out every passive
+ * amount, plus the net passive income of line 6's source (Form 8582 line 3
+ * when it shows income). With no K-1 (a K-1 is a gap here), Form 8582 line 3
+ * adds the passive amounts that AGI counts and Form 8582's MAGI leaves out:
+ * each passive property's Schedule E line 21, and its prior-year loss, which
+ * net passive income allows in full.
+ *
+ * DECISION (2026-11-26, by the author): net passive income counts in modified AGI on lines 10 and 22.
+ * - Form 8582-CR instructions, line 10 (line 22 uses the same amount): "combine
+ *   all the amounts used to figure adjusted gross income, except don't take
+ *   into account: • Any passive activity loss as defined in section 469(d)(1)"
+ *   (irs-8582cr-inst-2025::sec::line-10::b01). With net passive income there
+ *   is no passive activity loss, so the income stays in.
+ * - Pub. 925, the special allowance phaseout: modified AGI is "your adjusted
+ *   gross income figured without the following ... • Passive activity income
+ *   or loss included on Form 8582" (irs-pub-925-2025::sec::rental-activities::b10),
+ *   which Form 8582's own MAGI follows (federal/8582/magi.ts).
+ * The engine follows the Form 8582-CR instruction: a form's own instructions
+ * decide how that form is filled, and Pub. 925 describes the loss allowance
+ * of Form 8582, where MAGI matters only when line 3 is a loss.
+ */
 export function magiOf(form: Accessor, info: PassiveLimitInfo): Cell | Waiting {
   if ((info.passThroughEntities ?? []).length > 0) return unsupported(MAGI_K1_GAP);
   if ((info.adoptionBenefits ?? 0) > 0) return unsupported(ADOPTION_GAP);
-  return modifiedAgi(form, info) ?? "waiting";
+  const withoutPassive = modifiedAgi(form, info);
+  if (withoutPassive === undefined) return "waiting";
+  const netPassiveIncome = netPassiveIncomeOf(form, info);
+  if (netPassiveIncome === "waiting" || isGap(netPassiveIncome)) return netPassiveIncome;
+  return withoutPassive + (netPassiveIncome ?? 0);
 }
