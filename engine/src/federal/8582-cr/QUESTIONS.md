@@ -80,6 +80,18 @@ The engine fills Form 8582-CR for an individual from Form 3800's passive sources
 - Default: Form 8834 has no fact (it is carried forward only, Form 3800 Part IV line 2g); the engine figures an individual's return, not a trust's.
 - Changes dollars: no.
 
+### 10. A section 6418 transfer of a credit that cannot be transferred
+
+- Source: Form 8582-CR takes its credits from Form 3800 Part III line 2, with the passive amounts of column (f) (`irs-3800-inst-2025::sec::line-2::b01`), and a sold credit is a negative amount in column (f) (`transferees-of-eligible-credits-under-section::b05`). The list of credits that may be transferred names sections 30C, 40A, 45, 45Q, 45U, 45V, 45X, 45Y, 45Z, 48, 48C and 48E (`transfer-of-eligible-credits-under-section-6418::b01`); the section 47 rehabilitation credit and the other credits of Worksheets 1 to 3 are not on it.
+- Default: the engine takes a stated transfer as the fact says, whatever the credit; column (a) of the worksheet is the credit less the amount sold. Checking the credit against the list is Form 3800's rule, not this form's.
+- Changes dollars: yes, only for a fact that states a transfer the law does not allow (blind fill case 14: $3,000 on line 2a, or $5,000 if the transfer is void).
+
+### 11. The worksheets' ratios
+
+- Source: Worksheets 5 and 8 divide each credit by the column's total, "The total of all the ratios must equal 1.00", and multiply the line by the ratios (`instructions-for-worksheet-5::b01`, `instructions-for-worksheet-8::b01`). Worksheet 5 is for "credits from more than one activity"; Worksheet 8 takes "column (d) of Worksheets 5, 6, and 7".
+- Default: exact ratios, and whole-dollar shares from running totals, so a column adds to its line exactly. A worksheet with one row still gives its column (d) (the credit less its allowance), so Worksheet 8 has it. Two-decimal ratios can add to 1.01 (blind fill case 11).
+- Changes dollars: at most $1 for each row.
+
 ## Proposals for a discussion
 
 - **Publicly traded partnerships.** Not now: a PTP's credits are figured apart from the form, PTP by PTP, with the tax on each PTP's own net passive income (`computation-of-allowed-passive-activity-credits::b01` to `::b05`), and the engine has no PTP passive income by partnership. The credit is a gap on its Form 3800 line; the form computes the rest. The proposal: a step after this form that reads each PTP's net income from its K-1 and lines 27 and 35.
@@ -89,4 +101,6 @@ The engine fills Form 8582-CR for an individual from Form 3800's passive sources
 ## Second opinions
 
 - **Prior-year instructions (1998, 2005, 2009).** The worked example matches the engine's lines 3a to 37 with the edition's tax figures (`tests/unit/federal/8582-cr/lines.test.ts`).
-- **PolicyEngine-US.** Not checked: it does not model Form 3800 or passive credits (`federal/3800/QUESTIONS.md`, second opinions).
+- **PolicyEngine-US 2.154.0** (commit `363e9fc5`, 2026-11-25). It does not model this form. `general_business_credit` is a bare input with no formula, and no variable or parameter applies section 469 to credits: no passive credit limit, no special allowance in credit equivalents, no $100,000 to $150,000 or $200,000 to $250,000 phaseout. There is nothing to compare.
+- **Other projects.** The repository names no other reference implementation that models passive credits. IRS Direct File (issue #140) is not checked out here, and it does not support passive activities or business credits.
+- **Blind fill** (2026-11-26, 15 cases): no line differs in dollars. Nine lines differ as blank against 0 (lines 18, 28 and 32 when the line they copy is blank; item 4). The blind preparer's dollar doubts are decision A36 and items 3, 6, 10 and 11.
