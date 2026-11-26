@@ -5,6 +5,7 @@
  */
 
 import {
+  CA_EMPLOYEE_CLASSIFICATION_KEYS,
   makeBusinessFactKey,
   makeForeignEarnedIncomeFactKey,
   makeInterestFactKey,
@@ -119,6 +120,20 @@ export const romandaFacts: TaxFactRow[] = [
   idFact("address.zip", ROMANDA.zip),
   idFact("occupation", "Water systems engineer"),
   idFact("phone", "805-555-0157"),
+  idFact("address.county", "San Luis Obispo"),
+  fact(
+    "self_employment",
+    CA_EMPLOYEE_CLASSIFICATION_KEYS.classifiedAsEmployee,
+    false,
+    `${VERBAL}: self-employed for California too.`,
+  ),
+  fact(
+    "health_coverage",
+    "health_coverage.full_year_mec",
+    true,
+    `${VERBAL}: an individual plan all year.`,
+  ),
+  fact("use_tax", "use_tax.owed_amount", 0, `${VERBAL}: no out-of-state purchases.`),
   fact(
     "self_employment",
     makeBusinessFactKey("cassalane-water"),

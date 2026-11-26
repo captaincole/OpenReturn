@@ -1,5 +1,6 @@
 import type { DependentCareProviderFactValue } from "../../facts/index.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";
+import type { Form2555FilingInfo } from "../2555/filingInfo.js";
 import type { QbiFilingInfo } from "../qbi/filingInfo.js";
 import type { Schedule1FilingInfo } from "../schedule-1/filingInfo.js";
 
@@ -28,7 +29,8 @@ export interface Form2441FilingInfo
   extends
     BaseFilingInfo,
     Pick<Schedule1FilingInfo, "hasBusiness">,
-    Pick<QbiFilingInfo, "qbiScheduleSEFiled"> {
+    Pick<QbiFilingInfo, "qbiScheduleSEFiled">,
+    Pick<Form2555FilingInfo, "form2555Filers"> {
   /** Line 1, in the order recorded. */
   dependentCareProviders?: DependentCareProviderFactValue[];
   /** Line 2, in the order recorded. */

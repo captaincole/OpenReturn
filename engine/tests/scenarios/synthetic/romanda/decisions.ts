@@ -13,6 +13,7 @@ export const romandaDecisions: AIDecisionRow[] = [
   dec("decisions.scope.has_digital_assets", false, "No digital asset activity."),
   dec("decisions.scope.has_reportable_sales", false, "No 1099-B or 1099-DA."),
   dec("decisions.itemize_vs_standard", "standard", "No itemized deductions."),
+  dec("decisions.scope.must_file_8606", false, "No nondeductible IRA contributions, ever."),
   dec(
     "decisions.scope.has_foreign_financial_account",
     false,

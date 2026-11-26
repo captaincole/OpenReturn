@@ -43,6 +43,15 @@ const gapOf = (filer: Form2555Filer) => filer.partIVGap ?? filer.exclusionGap;
  * 20b they include "the deductible part of self-employment tax"
  * (irs-2555-inst-2025::sec::line-44::b01), Schedule 1 line 15, when all of
  * Schedule SE is this form's income.
+ *
+ * DECISION (2026-11-25, by the author): line 44 takes the excluded share of the
+ * deductible part of self-employment tax. Text A, the form's instructions:
+ * line 44 holds deductions "such as the deductible part of self-employment
+ * tax, and the expenses claimed on Schedule C" (irs-2555-inst-2025::sec::line-44::b01).
+ * Text B, Pub. 54 example 2: a self-employed person's line 44 is "$66,666
+ * (98.48% (0.9848) × $67,695), business expenses" only
+ * (irs-pub-54-2025::sec::how-to-report-deductions::b04). The engine follows
+ * Text A: a form's own instructions decide how that form is filled.
  */
 export function line44Of(
   filer: Form2555Filer,
@@ -111,6 +120,29 @@ export function housingDeductionTotal(info: Form2555FilingInfo): Result {
     .map((filer) => filer.exclusion?.partIX?.line50)
     .filter((line50): line50 is number => line50 !== undefined);
   return amounts.length === 0 ? undefined : sum(...amounts);
+}
+
+/* Each person's line 43. */
+export interface Line43ByOwner {
+  taxpayer: number;
+  spouse: number;
+}
+
+/*
+ * Line 43 of each person's form, for Form 2441's earned income: 0 without the
+ * form or without an exclusion; the first gap, or undefined while an answer waits.
+ */
+export function line43ByOwner(info: Form2555FilingInfo): Line43ByOwner | Unsupported | undefined {
+  if (!files2555(info)) return { taxpayer: 0, spouse: 0 };
+  const filers = settledFilers(info);
+  if (filers === undefined) return undefined;
+  const totals: Line43ByOwner = { taxpayer: 0, spouse: 0 };
+  for (const filer of filers) {
+    const gap = gapOf(filer);
+    if (gap !== undefined) return unsupported(gap);
+    totals[filer.owner] += filer.exclusion?.line43 ?? 0;
+  }
+  return totals;
 }
 
 /*

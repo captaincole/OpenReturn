@@ -14,6 +14,7 @@ The scenario fills Form 2555 Parts I, III and IV to IX: a partial year, line 44 
 | 1099-R, Morro Bay Retirement Trust | box 1 and 2a $30,000, box 4 $3,000, code 7 |
 | 1099-INT, Los Osos Credit Union | box 1 $2,000 |
 | Form 2555 answers | line 20a $150,000, expenses $20,000; rent 30,000 EUR; 2024 lines 46 and 48: $12,000 and $9,500 |
+| Other answers | county San Luis Obispo; health coverage all year; no use tax; no IRA basis (no Form 8606); self-employed for California too |
 
 ## Hand check
 

@@ -13,11 +13,19 @@ type Bindings = Partial<{ [K in keyof Form1040]: BindingFn<Form1040, Form1040Fil
 type RowBinding = (form: FormAccessor<Form1040>, info: Form1040FilingInfo) => unknown;
 
 /*
- * MANUAL EDIT: this box is on every return, not only nonresident ones.
- * Every modeled scenario is a full-year US resident.
+ * MANUAL EDIT: this box is on every return, not only nonresident ones. "Your
+ * main home can be any location where you regularly live"
+ * (irs-1040-inst-2025::sec::yes-continue-no-stop-11::b01): a Form 2555 whose
+ * qualifying period holds more than half of 2025 (lines 31 and 38) leaves it
+ * blank, as the box covers both spouses on a joint return.
  */
-export const headerMainHomeUsOverHalfYear = (_: unknown, info: Form1040FilingInfo) =>
-  info.homeAddressState ? true : undefined;
+const HALF_OF_2025_DAYS = 182;
+
+export const headerMainHomeUsOverHalfYear = (_: unknown, info: Form1040FilingInfo) => {
+  const abroad = (info.form2555Filers ?? []).some((filer) => filer.days > HALF_OF_2025_DAYS);
+  if (abroad && info.mustFile?.["form-2555"]?.value === true) return undefined;
+  return info.homeAddressState ? true : undefined;
+};
 
 // MANUAL EDIT: mandatory for every filer. Undefined fills neither box, so the gap shows.
 export const headerDigitalAssetsYes = (_: unknown, info: Form1040FilingInfo) =>

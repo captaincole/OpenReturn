@@ -1,8 +1,8 @@
-# bair — a made-up U.S. citizen working in London (synthetic)
+# bair — a made-up U.S. citizen working in Manchester (synthetic)
 
 Bair Halloran is 67 and files as head of household with his grandson, who lives with him. Every name and amount here is made up. There is no outside source and no answer key: the expected values are the engine's output, checked by hand against the form instructions, then locked (`verification: "unverified"`).
 
-His U.S. employer sent him to its London office in March 2023, and he is a bona fide resident of the United Kingdom. His W-2 holds his pay, his allowances and $9,000 earned on two U.S. business trips. He pays his London rent in pounds. He claims the foreign earned income exclusion and the housing exclusion. He also has U.S. interest and dividends. His domicile is Florida, so the return is federal only.
+His U.S. employer sent him to its Manchester office in March 2023, and he is a bona fide resident of the United Kingdom. His W-2 holds his pay, his allowances and $9,000 earned on two U.S. business trips. He pays his Manchester rent in pounds. Manchester is not in the table of Notice 2025-16 (London is, at $67,000), so line 29b is the general limit. His Tampa house stays empty while he is abroad. He claims the foreign earned income exclusion and the housing exclusion. He also has U.S. interest and dividends. His domicile is Florida, so the return is federal only.
 
 The scenario fills Form 2555 Parts I, II and IV to VIII, and the lines that take its results: Schedule 1 line 8d, Form 1040 line 16 by the Foreign Earned Income Tax Worksheet, Schedule 1-A line 2b, Schedule 8812 line 2b and Form 8960 line 13. Part IX stays blank: all his income comes from his employer. The published examples are unit tests (`tests/unit/federal/2555/`).
 
@@ -23,7 +23,7 @@ The scenario fills Form 2555 Parts I, II and IV to VIII, and the lines that take
 | 2555 line 24 | 150,000 + 1,200 + 4,800 + 600 + 59,400 + 1,500 | 217,500 |
 | 2555 line 26, 27 | 217,500 − 1,200 meals excludable | 216,300 |
 | 2555 line 28 | 30,000 GBP ÷ 0.759 (IRS 2025 average) | 39,526 |
-| 2555 line 29b, 30 | full year, location not listed | 39,000 |
+| 2555 line 29b, 30 | full year, location not listed: 30% of 130,000 | 39,000 |
 | 2555 line 32, 33 | $20,800 for 365 days; 39,000 − 20,800 | 20,800; 18,200 |
 | 2555 line 34, 35, 36 | all employer-provided; 1.000; 18,200 × 1.000 | 216,300; 1.000; 18,200 |
 | 2555 line 39, 40 | 365 days | 1.000; 130,000 |

@@ -114,6 +114,15 @@ function testPeriod(
  * the tax home test and either the bona fide residence or physical presence
  * test" (irs-2555-inst-2025::sec::line-31::b01). The period starts no earlier
  * than the first tax home and is cut to 2025. Undefined: a date is not a date.
+ *
+ * DECISION (2026-11-25, by the author): a tax home that moves abroad after the
+ * residence or presence period starts. Text A, the tax home test: "your tax
+ * home must be in a foreign country ... throughout your period of bona fide
+ * residence or physical presence" (irs-2555-inst-2025::sec::who-qualifies::b01),
+ * which read strictly takes away the whole exclusion. Text B, line 31: the
+ * qualifying period is "the period during which you meet the tax home test and
+ * either" test (line-31::b01). The engine follows Text B and counts the days
+ * from the tax home on: the line's own instructions decide how the line is filled.
  */
 export function qualifyingDays(value: ForeignEarnedIncomeFactValue): number | undefined {
   const period = testPeriod(value);

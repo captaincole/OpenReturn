@@ -157,6 +157,12 @@ describe("the lines that take Form 2555's results", () => {
     expect(run.value("schedule-1", "0.line.9")).toBe(-148_200);
   });
 
+  it("the box for a main home in the U.S. stays blank: he lived abroad all year", () => {
+    expect(run.value("form-1040", "header.main_home_us_over_half_year")).toBeUndefined();
+    const withoutForm = evaluate(bair, without2555(bair));
+    expect(withoutForm.value("form-1040", "header.main_home_us_over_half_year")).toBe(true);
+  });
+
   it("Form 1040 line 16 is the Foreign Earned Income Tax Worksheet's line 6", () => {
     expect(run.value("form-1040", "line.16")).toBe(13_474);
   });

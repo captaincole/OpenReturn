@@ -1,5 +1,5 @@
 /*
- * A made-up U.S. citizen on assignment in London (README.md): a W-2 from his
+ * A made-up U.S. citizen on assignment in Manchester (README.md): a W-2 from his
  * U.S. employer, allowances, rent paid in pounds. Form 2555 Parts I, II and IV
  * to VIII with the housing exclusion, the Foreign Earned Income Tax Worksheet
  * on Form 1040 line 16, and the exclusions added back on Schedules 1-A and

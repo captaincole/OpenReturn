@@ -87,17 +87,18 @@ const grandson: DependentFactValue = {
 
 /* Bair's Form 2555 answers: a bona fide resident of the United Kingdom since March 2023. */
 const form2555: ForeignEarnedIncomeFactValue = {
-  foreignAddress: "27 Larchmere Mews, London NW8 9QX, United Kingdom",
+  foreignAddress: "27 Larchmere Mews, Manchester M20 2QX, United Kingdom",
   occupation: "Logistics director",
   employer: {
     name: "Brightwater Freight Systems Inc",
     usAddress: "500 Channelside Quay, Tampa, FL 33602",
-    foreignAddress: "3 Fenwick Yard, London EC2A 4BX, United Kingdom",
+    foreignAddress: "3 Fenwick Yard, Manchester M1 4BX, United Kingdom",
     types: ["us_company"],
   },
   lastYearFiled: 2024,
   citizenship: "United States",
-  taxHomes: [{ location: "London, United Kingdom", established: "03/01/2023" }],
+  // Manchester is not in Notice 2025-16's table, so line 29b is the general limit.
+  taxHomes: [{ location: "Manchester, United Kingdom", established: "03/01/2023" }],
   bonaFideResidence: {
     began: "03/01/2023",
     livingQuarters: ["rented_house"],
@@ -108,10 +109,10 @@ const form2555: ForeignEarnedIncomeFactValue = {
       { arrived: "04/07/2025", left: "04/12/2025", businessDays: 5, businessIncome: 3500 },
       { arrived: "10/13/2025", left: "10/21/2025", businessDays: 7, businessIncome: 5500 },
     ],
-    contractTerms: "Five-year assignment to the London office from March 2023, renewable.",
+    contractTerms: "Five-year assignment to the Manchester office from March 2023, renewable.",
     visaType: "Skilled Worker visa",
     visaLimitedStay: false,
-    usHome: "1220 Bayshore Lantern Drive, Tampa, FL 33606; rented to an unrelated tenant",
+    usHome: "1220 Bayshore Lantern Drive, Tampa, FL 33606; not rented, no occupants",
   },
   wages: 150000,
   noncash: {
@@ -129,7 +130,7 @@ const form2555: ForeignEarnedIncomeFactValue = {
   },
   otherIncome: { description: "Assignment completion bonus", amount: 1500 },
   excludableMealsAndLodging: 1200,
-  // Rent and utilities on the London house, paid in pounds.
+  // Rent and utilities on the Manchester house, paid in pounds.
   housing: { expenses: { amount: 30000, currency: "GBP" } },
 };
 
