@@ -6,6 +6,7 @@ import { unsupported } from "../../types.js";
 import { form4797Files, scheduleOneLine4 } from "../4797/receivers.js";
 import { files8853, form8853Total } from "../8853/results.js";
 import { answerBindings } from "./answerBindings.js";
+import { canceledDebtHold, line8c } from "./canceledDebt.js";
 import { line12 } from "./employeeBusinessExpenses.js";
 import { line8p, line8pHold } from "./excessBusinessLoss.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
@@ -29,6 +30,8 @@ export function register(): void {
       "0.line.7": (_, info) => roundDollars(info.unemploymentCompensation),
       // MANUAL EDIT: line 8b = W-2G box 1. Winnings with no W-2G have no fact and are not included.
       "0.line.8b": (_, info) => roundDollars(info.gamblingWinnings),
+      // MANUAL EDIT: line 8c = the taxable part of the nonbusiness canceled debts, after Form 982 (canceledDebt.ts).
+      "0.line.8c": line8c,
       /*
        * MANUAL EDIT: line 4 = Form 4797 line 18b, its box checked
        * (irs-4797-inst-2025::sec::line-18a::b01; the form's line 18b). Without
@@ -70,9 +73,11 @@ export function register(): void {
       "0.line.8a": line8a,
       // MANUAL EDIT: lines 8a, 8d and 8s are subtractions (printed in parentheses); lines 8a and 8p hold it.
       "0.line.9": (form, info) => {
+        // MANUAL EDIT: line 8c holds line 9 while a canceled debt waits for an answer (canceledDebt.ts).
         const hold =
           line8pHold(form, info) ??
           foreignExclusionHold(form, info) ??
+          canceledDebtHold(info) ??
           line8aHold(form["0.line.8a"], info);
         if (hold !== undefined) return hold === "waiting" ? undefined : hold;
         return (
@@ -131,10 +136,11 @@ export function register(): void {
        * is blank with no farm, line 7 is blank with no 1099-G, and line 9 is a sum.
        */
       "0.line.10": (form, info) => {
-        // MANUAL EDIT: line 9 holds while Form 461 line 16, Form 2555 or line 8a waits or is a gap.
+        // MANUAL EDIT: line 9 holds while Form 461 line 16, Form 2555, a canceled debt or line 8a waits or is a gap.
         const hold =
           line8pHold(form, info) ??
           foreignExclusionHold(form, info) ??
+          canceledDebtHold(info) ??
           line8aHold(form["0.line.8a"], info);
         if (hold !== undefined) return hold === "waiting" ? undefined : hold;
         // MANUAL EDIT: a farm's line 34 gap reaches line 10; a farm whose line 34 waits makes it wait.
@@ -221,7 +227,6 @@ export function register(): void {
         "No fact for a repayment of unemployment compensation; Cade says a repayment is not supported.",
       "0.line.7_amount_repaid":
         "No fact for a repayment of unemployment compensation; Cade says a repayment is not supported.",
-      "0.line.8c": "No 1099-C cancellation-of-debt ingestion yet",
       "0.line.8j": "No hobby (not-for-profit activity) income scenario yet.",
       "0.line.8l": "No personal-property rental income scenario yet.",
       "0.line.8m": "No Olympic/Paralympic medal or USOC prize money scenario yet.",

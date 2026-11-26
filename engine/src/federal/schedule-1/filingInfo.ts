@@ -7,6 +7,7 @@ import type { Form461FilingInfo } from "../461/filingInfo.js";
 import type { Form4797FilingInfo } from "../4797/filingInfo.js";
 import type { Form8621FilingInfo } from "../8621/filingInfo.js";
 import type { Form8814FilingInfo } from "../8814/filingInfo.js";
+import type { Form982FilingInfo } from "../982/filingInfo.js";
 
 /*
  * Line 12 reads Form 2106's totals (federal/2106/resolveInfo.ts). Line 14 reads
@@ -23,7 +24,8 @@ export interface Schedule1FilingInfo
     Pick<Form8814FilingInfo, "form8814Totals">,
     Pick<Form8621FilingInfo, "form8621Totals">,
     Pick<Form4797FilingInfo, "form4797" | "form4797Gap" | "form4797SummaryGap">,
-    Pick<Form461FilingInfo, "form461"> {
+    Pick<Form461FilingInfo, "form461">,
+    Pick<Form982FilingInfo, "canceledDebtIncome" | "canceledDebtGap" | "canceledDebtWaits"> {
   /** Line 14 with its box: Armed Forces storage fees claimed with no Form 3903, cents kept. */
   armedForcesStorageFees?: number;
   /** Line 3: Schedule C line 31 summed over every business; undefined when any line 31 is blank. */

@@ -9,14 +9,14 @@ of Part II against its farming loss table (`tests/unit/federal/172/`).
 
 1. **Part II line 3.** The line instruction names the "net long-term capital
    loss"; the caption and the modified taxable income rule name the capital
-   loss deduction. Decided: the deduction (row A44 in
+   loss deduction. Decided: the deduction (row A50 in
    `docs/rule-decisions.md`, `DECISION` in `partII.ts`).
 2. **The 80% limit in a carryback year.** "The 80% limitation rule does not
    apply to a carryback period before 2021" (`when-to-use-an-nol::b01`)
    implies a limit on a farming loss carried back to 2023 or 2024; the line 10
    caution names only NOLs "carried forward to a year after 2020", and Part II
    has no line for a limit. Decided: no limit, line 10 is line 1 less line 9
-   (row A45, `DECISION` in `partII.ts`). Raised by the blind fill. Changes
+   (row A51, `DECISION` in `partII.ts`). Raised by the blind fill. Changes
    dollars: a $25,000 farming loss against $9,000 of 2023 modified taxable
    income leaves $16,000; with the limit it would leave $17,800.
 
