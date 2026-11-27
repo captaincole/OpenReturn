@@ -25,11 +25,13 @@ The blank PDF is Rev. December 2024; the instructions are Rev. December 2025. Ev
 | Section G lines 49(a) to 49(e), 50 to 56 | Stated rule; the text of 49(d) and 49(e), and 49(a) of a business with no EIN: own reading (item 6) |
 | Column 49(f) | Stated rule: original returns leave it blank |
 | The section 280C reduction on Schedule C | Decision A103 (`reduction.ts`) |
+| Schedule CA line 3 with the section 280C reduction | Unsupported: FTB 3523 (item 10) |
+| Section G past 15 components | Unsupported: the additional sheets (item 9) |
 | Form 3800 line 1c or 4i | Stated rule; one line per source is own reading (item 1) |
 
-## Decided by the author
+## Two texts conflict
 
-- **A103, the Schedule C lines that take the section 280C reduction.** The instructions leave the lines to the taxpayer. The engine reduces line 26, then 22, 20a and 11, each by at most what the business paid in that category. `reduction.ts`.
+- **A103, the Schedule C lines that take the section 280C reduction.** The Form 6765 instructions leave the lines to the taxpayer; the Schedule C instructions name no line for the research credit. The engine reduces line 26, then 22, 20a and 11, each by at most what the business paid in that category. DECISION comment in `reduction.ts`, row A103 in `docs/rule-decisions.md`.
 
 ## Should we do this now
 
@@ -79,10 +81,34 @@ Each item is a default with no conflicting text.
 - Default: line 34 is the amount elected, at most $500,000, and is not also capped at line 28. Line 36 applies the line 28 limit. The blind fill took the same reading (case 13: line 34 is 40,000 with line 28 at 30,000).
 - Changes dollars: line 34 as printed only (40,000 against 30,000 in that case). Line 36, the payroll tax credit, is the same either way.
 
+### 8. QREs with no method — done
+
+- Source: "Section A—Regular Credit. Skip this section and go to Section B if you are electing or previously elected (and are not revoking) the alternative simplified credit" (`irs-6765-face-2025::sec::face-page-1::b01`): every credit is figured on Section A or B.
+- Default: a fact with QREs or energy consortia payments and no method leaves lines 5 to 28 blank, and the form lists `research_credit` in its missing inputs, so Cade asks for the method (`figures.ts` `waitsOnMethod`). A fact with no QREs and no method (the reduced credit election alone) asks nothing.
+- Changes dollars: no; the return waits instead of filing with no credit.
+
+### 9. More than 15 business components in Section G — a named gap
+
+- Source: "If you do not e-file and you have more than 15 business components, report for your 80%/Top 50, attach additional sheets of Section G and provide the sum of the additional sheets in the 'Total from Attachments' line" (`irs-6765-inst-2025::sec::how-to-complete-section-g::b03`).
+- Default: the engine prints the first 15 rows and counts every component in Total and Section F, so the credit is right. It prints no additional sheet, so each "Total from attachments" cell is a gap (`sectionG.ts` `ATTACHMENT_SHEETS_GAP`) and a person attaches the sheets.
+- Not now: Section G is optional for 2025, and printing extra sheets needs a copy of Section G only, which the copies mechanism (a whole form per copy) does not give cleanly.
+- Changes dollars: no.
+
+### 10. California and the section 280C reduction — a named gap
+
+- Source: "California law conforms to federal law, but requires the amount of research expenses to be reduced by the amount of the California credit" (`ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b05`); the federal expenses go in Schedule CA column C, and the California expenses after the California credit in column B (`::b06`).
+- Default: when the federal reduction lowered a Schedule C line, Schedule CA (540) line 3 columns B and C are a gap (`state/ca/schedule-ca/answerLines.ts` `CA_RESEARCH_GAP`). Schedule CA (540NR) reads the same rule.
+- Not now: the California credit is figured on FTB 3523, which the engine does not have (see the proposal below).
+- Changes dollars: yes, California AGI, by the federal credit less the California credit; the gap keeps the return from printing a wrong amount.
+
+## Pattern change
+
+None. The section 280C reduction follows the shape main already has for credits that lower a deduction (`facts/kinds/activitiesOnReturn.ts`, as the work opportunity and tip credits), and the credit reaches Form 3800 as a source of its own (`3800/sources.ts`, as Forms 5884, 8846 and 3468).
+
 ## Proposals for a discussion
 
 - **Form 3800's carryforward after a payroll tax election.** "The unused credit for the current year is determined by reducing the amount on Part I, line 6, and Part II, line 36, by the amount on Form 6765, line 36" (`irs-3800-inst-2025::sec::carryback-and-carryforward-of::b03`). Form 3800's carryforward columns (Part III column (i), Part V column (i)) do not subtract line 36 yet. They print only with a transfer or elective payment election or two sources on one line, and no scenario has both. The change is in `federal/3800` (allocation), so it waits for a person.
-- **California.** A California return gets the federal Schedule C with the section 280C reduction. Whether Schedule CA adds it back (California does not adopt section 174A, and its own research credit has its own rules) is not checked. The engine adds nothing on Schedule CA.
+- **California's research credit (FTB 3523).** Schedule CA line 3 is a gap when the federal 280C reduction applies (item 10). Filling it needs FTB 3523, a new California form with its own rules (California "requires the use of the California tax bracket when determining the elective credit amount", `ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b05`), and a California research fact or answers on this one. Then column B takes the federal reduction less the California credit.
 - **Research in a farm, a rental or a K-1 entity of one's own.** The fact names a Schedule C business only. Research in a Schedule F farm is a gap on line 28.
 - **Capitalized research expenditures.** A taxpayer who elects section 174A(c) amortization reduces the capital account, not the deduction (`item-a-section-280c-election::b01`). The engine has no section 174A amortization, so it always reduces the Schedule C lines.
 

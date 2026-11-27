@@ -245,6 +245,51 @@ describe("Form 6765 Section D", () => {
   });
 });
 
+describe("Form 6765 waits and gaps", () => {
+  it("QREs with no method wait on the fact: line 28 is blank and the form asks (face-page-1::b01)", () => {
+    const run = evaluate(cowin, withResearch(cowin, { method: undefined }));
+    expect(run.line(LINE_28)).toBeUndefined();
+    expect(run.missing("form-6765")).toContain(RESEARCH_CREDIT_KEY);
+    expect(run.value("schedule-c", WAGES)).toBe(1_500_000);
+  });
+
+  it("more than 15 business components: Total from attachments is a gap, the credit still computes (how-to-complete-section-g::b03)", () => {
+    const components = Array.from({ length: 17 }, (_, index) => ({
+      name: `Component ${index + 1}`,
+      type: "product" as const,
+      directResearchWages: 20_000 + 1_000 * index,
+    }));
+    const run = evaluate(cowin, withResearch(cowin, { businessComponents: components }));
+    const attached = "3.line.50_total_from_attachments_direct_research_wages";
+    expect(isGap(run.field("form-6765", attached))).toBe(true);
+    // 17 × 20,000 + 1,000 × (0 + 1 + … + 16) = 476,000.
+    expect(run.line("3.line.50_total_direct_research_wages")).toBe(476_000);
+    expect(typeof run.line(LINE_28)).toBe("number");
+  });
+
+  it("the cowin fact with its method asks nothing", () => {
+    expect(evaluate(cowin, cowin.facts).missing("form-6765")).toEqual([]);
+  });
+
+  const inCalifornia = (facts: TaxFactRow[]) =>
+    evaluate(cowin, facts, [
+      ...cowin.decisions.filter((each) => each.decisionKey !== "decisions.scope.must_file_ca_540"),
+      decision(cowin, "decisions.scope.must_file_ca_540", true),
+    ]);
+  const LINE_3B = "0.line.b3_subtractions";
+
+  it("a California return with the federal 280C reduction makes Schedule CA line 3 a gap (ftb-pub-1001-2025 ::b05)", () => {
+    const run = inCalifornia(cowin.facts);
+    expect(isGap(run.field("schedule-ca", LINE_3B))).toBe(true);
+    expect(isGap(run.field("schedule-ca", "0.line.b3_additions"))).toBe(true);
+  });
+
+  it("with the reduced credit election nothing is reduced, so line 3 is not a research gap", () => {
+    const run = inCalifornia(withResearch(cowin, { reducedCreditElection: true }));
+    expect(isGap(run.field("schedule-ca", LINE_3B))).toBe(false);
+  });
+});
+
 describe("Form 6765 lines an individual leaves blank", () => {
   it("the corporate basic research lines and the estate and trust lines stay blank", () => {
     const run = evaluate(cowin, cowin.facts);

@@ -11,7 +11,7 @@ import { filingStatusOf, resolveMustFile, type ResolverInputs } from "../../reso
 import { unsupported, type Unsupported } from "../../types.js";
 import { RESEARCH_LINES } from "../3800/rows.js";
 import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
-import { researchFiguresOf, type ResearchFigures } from "./figures.js";
+import { researchFiguresOf, waitsOnMethod, type ResearchFigures } from "./figures.js";
 import type { Form6765FilingInfo, Form6765Lines, ResearchBusiness } from "./filingInfo.js";
 import { isFigureGap } from "./lines.js";
 
@@ -118,9 +118,10 @@ export function resolve6765Info(inputs: ResolverInputs): Form6765FilingInfo {
     ],
   });
   const files = mustFile.value === true;
+  const asks = fact === undefined || waitsOnMethod(fact.value);
   return {
     mustFile: { "form-6765": mustFile },
-    missingInputs: { "form-6765": files && fact === undefined ? [RESEARCH_CREDIT_KEY] : [] },
+    missingInputs: { "form-6765": files && asks ? [RESEARCH_CREDIT_KEY] : [] },
     researchCredit: files && fact !== undefined ? form6765LinesOf(inputs, fact) : undefined,
   };
 }

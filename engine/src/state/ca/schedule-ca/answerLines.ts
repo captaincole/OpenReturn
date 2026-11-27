@@ -113,11 +113,24 @@ const wageCreditColumn = (info: ScheduleCaFilingInfo, side: "subtraction" | "add
   side === "subtraction" ? (info.caWorkOpportunityWageCredit ?? 0) : 0;
 
 /*
+ * The federal research credit reduced the Schedule C research expenses
+ * (Form 6765 without the section 280C election). California "requires the
+ * amount of research expenses to be reduced by the amount of the California
+ * credit" (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b05):
+ * the federal expenses go in column C and the California expenses after the
+ * California credit in column B (::b06). The California credit is figured on
+ * FTB 3523, which the engine does not have, so line 3 is a gap.
+ */
+export const CA_RESEARCH_GAP =
+  "The federal research credit (Form 6765 line 28) reduced the Schedule C research expenses, and California reduces them by its own research credit instead (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b05, ::b06); the California credit is figured on form FTB 3523, which the engine does not figure.";
+
+/*
  * Line 3 column B or C: a California employee's profit or loss, plus the FTB
  * 3885A business difference, the Schedule D-1 Part IV difference and, in
  * column B, the wages the federal work opportunity credit took off.
  */
 export function line3Column(info: ScheduleCaFilingInfo, side: "subtraction" | "addition") {
+  if (info.caFederalResearchReduction !== undefined) return unsupported(CA_RESEARCH_GAP);
   const employee =
     side === "subtraction" ? info.caEmployeeAmounts?.netProfit : info.caEmployeeAmounts?.netLoss;
   const depreciation = depreciationColumn(info.businessDepreciationAdjustment, side);

@@ -1,11 +1,11 @@
 /*
  * Form 6765 Section G, lines 49 to 56: one row for each of the first 15
  * business components (qualifiedExpenses.ts sorts them), "Total from
- * attachments" for the rest and "Total". Blank when the fact fills Section F
+ * attachments" for the rest (a gap: ATTACHMENT_SHEETS_GAP) and "Total". Blank when the fact fills Section F
  * without Section G.
  */
 
-import type { Unsupported } from "../../types.js";
+import { unsupported, type Unsupported } from "../../types.js";
 import type { Form6765FilingInfo, Form6765Lines } from "./filingInfo.js";
 import { COMPONENT_ROWS, type ColumnAmounts, type ComponentRow } from "./qualifiedExpenses.js";
 
@@ -48,6 +48,16 @@ const AMOUNT_COLUMNS: Array<{ line: keyof ColumnAmounts; name: string }> = [
   { line: "line56", name: "contract_research" },
 ];
 
+/*
+ * More than 15 business components: "attach additional sheets of Section G and
+ * provide the sum of the additional sheets in the 'Total from Attachments'
+ * line" (irs-6765-inst-2025::sec::how-to-complete-section-g::b03). The engine
+ * figures the sum (and Total and Section F count every component), but it
+ * prints no additional sheet, so the line is a named gap that says so.
+ */
+export const ATTACHMENT_SHEETS_GAP =
+  "More than 15 business components: the components after the 15th go on additional sheets of Section G (irs-6765-inst-2025::sec::how-to-complete-section-g::b03), which the engine does not print; their sum is in Total and in Section F.";
+
 /* Every Section G field and its rule. */
 export function sectionGBindings(): Record<string, Binding> {
   const bindings: Record<string, Binding> = {};
@@ -70,7 +80,7 @@ export function sectionGBindings(): Record<string, Binding> {
   for (const { line, name } of AMOUNT_COLUMNS) {
     const number = line.slice(4);
     bindings[`3.line.${number}_total_from_attachments_${name}`] = (_, info) =>
-      sectionGOf(info)?.attachments?.[line];
+      sectionGOf(info)?.attachments === undefined ? undefined : unsupported(ATTACHMENT_SHEETS_GAP);
     bindings[`3.line.${number}_total_${name}`] = (_, info) => sectionGOf(info)?.total[line];
   }
   return bindings;

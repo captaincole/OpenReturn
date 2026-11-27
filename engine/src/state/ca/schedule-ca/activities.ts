@@ -7,6 +7,7 @@
 import {
   businessesOnReturn,
   CA_EMPLOYEE_CLASSIFICATION_KEYS,
+  researchCreditDeductionReduction,
   workOpportunityLaborReduction,
   workOpportunityWageReduction,
 } from "../../../facts/index.js";
@@ -123,9 +124,11 @@ export function resolveActivityAdjustments(inputs: ResolverInputs) {
   const asked = files540 && hasBusiness;
   const wageCredit = workOpportunityWageReduction(inputs.facts, joint);
   const farmCredit = workOpportunityLaborReduction(inputs.facts, joint);
+  const researchReduction = researchCreditDeductionReduction(inputs.facts, joint);
   return {
     caEmployeeAmounts: amounts,
     caWorkOpportunityWageCredit: wageCredit > 0 ? wageCredit : undefined,
+    caFederalResearchReduction: researchReduction > 0 ? researchReduction : undefined,
     caWorkOpportunityFarmCredit: farmCredit.credit > 0 ? farmCredit : undefined,
     businessDepreciationAdjustment: adjustmentFor(inputs, "business"),
     rentalDepreciationAdjustment: adjustmentFor(inputs, "rental"),

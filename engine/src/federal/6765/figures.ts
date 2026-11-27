@@ -97,11 +97,26 @@ function payrollOf(value: ResearchCreditFactValue): PayrollLines | FigureGap | u
  * either the regular method or making the ASC election"
  * (irs-6765-inst-2025::sec::item-a-section-280c-election::b01).
  */
-export function researchFiguresOf(value: ResearchCreditFactValue): ResearchFigures {
+function sectionsFOf(value: ResearchCreditFactValue) {
   const sectionG = value.businessComponents ? sectionGOf(value.businessComponents) : undefined;
   const sectionF = sectionG ? sectionFFromSectionG(sectionG) : sectionFFromExpenses(value.expenses);
-  const payroll = payrollOf(value);
   const claimed = sum(sectionF.line48, value.energyConsortiaPayments) > 0;
+  return { sectionF, sectionG, claimed };
+}
+
+/*
+ * A credit with QREs or energy consortia payments and no method: Section A or
+ * B figures every credit ("Skip this section and go to Section B if you are
+ * electing ... the alternative simplified credit", irs-6765-face-2025::sec::face-page-1::b01),
+ * so line 28 waits on the fact's method, and the form asks for the fact.
+ */
+export function waitsOnMethod(value: ResearchCreditFactValue): boolean {
+  return value.method === undefined && sectionsFOf(value).claimed;
+}
+
+export function researchFiguresOf(value: ResearchCreditFactValue): ResearchFigures {
+  const { sectionF, sectionG, claimed } = sectionsFOf(value);
+  const payroll = payrollOf(value);
   if (!claimed || value.method === undefined) return { sectionF, sectionG, payroll };
   const { credit, ...sections } = creditSections(value, sum(sectionF.line48));
   const line27 = roundDollars(value.differentialWageCreditPortion);

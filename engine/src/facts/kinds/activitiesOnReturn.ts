@@ -188,6 +188,18 @@ export function researchCreditPlacement(facts: ReadonlyArray<FactRow>, joint: bo
   return researchPlacement(beforeResearch(facts, joint).reduced, facts);
 }
 
+/* The research expenses withResearchCredit takes off the business's Schedule C lines (Schedule CA line 3); 0 with none. */
+export function researchCreditDeductionReduction(
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): number {
+  const placement = researchCreditPlacement(facts, joint);
+  const placed = placement?.placed;
+  return placement !== undefined && placed !== undefined && placed.left === 0
+    ? placement.reduction
+    : 0;
+}
+
 /*
  * statedBusinessesOnReturn, with the return's depreciation scope, its Form 4797
  * Part IV recapture, its wages less the work opportunity credit, its taxes
