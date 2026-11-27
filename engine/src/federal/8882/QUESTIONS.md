@@ -11,13 +11,13 @@ The items are sorted under three headings: two texts conflict (decided, with a D
 - Source: the form (Rev. December 2017): "The credit is 25% ... plus 10% ... limited to $150,000 per tax year" (`irs-8882-form-2025::sec::how-to-figure-the-credit::b01`); the 2025 Form 3800 instructions: "don't enter more than $150,000" (`irs-3800-inst-2025::sec::line-1k::b01`).
 - The statute in the law library is the amended text: 40% (50% for an eligible small business) and $500,000 ($600,000) (`usc-26-2025::sec::s45f::a`, `::b`). Its effective-date note ("amounts paid or incurred after December 31, 2025") is not a block of the library.
 - The IRS page "Employer-provided child care credit: tax year 2025 and earlier" (irs.gov, read 2026-11-27) keeps 25%, 10% and $150,000 "For amounts paid or incurred before January 1, 2026".
-- Decided: 25%, 10%, $150,000 (DECISION in `lines.ts`, docs/rule-decisions.md A103). Changes dollars: yes, if the new rates were applied to 2025.
+- Decided: 25%, 10%, $150,000 (DECISION in `lines.ts`, docs/rule-decisions.md A113). Changes dollars: yes, if the new rates were applied to 2025.
 - For docs/law-findings.md: the statute text and the 2025 instructions differ; the difference is the amendment's date.
 
 ## 5a. Rounding of line 5 with K-1 credits that show cents
 
 - Source: the Form 1040 instructions: "include cents when adding the amounts and round off only the total" (`irs-1040-inst-2025::sec::rounding-off-to-whole::b01`); the Form 3800 instructions break line 1k down "by the EIN of the pass-through entity" in Part V (`irs-3800-inst-2025::sec::part-v-3::b01`), one amount for each.
-- Decided: each K-1 credit rounds, then they add, so line 7 equals Form 3800 line 1k (DECISION in `resolveInfo.ts`, docs/rule-decisions.md A104, the same rule as A96 for Form 8846). Changes dollars: at most $1 for each K-1 with cents.
+- Decided: each K-1 credit rounds, then they add, so line 7 equals Form 3800 line 1k (DECISION in `resolveInfo.ts`, docs/rule-decisions.md A96, the same rule as for Form 8846). Changes dollars: at most $1 for each K-1 with cents.
 - The blind fill read the 1040 sentence: $600.40 and $1,200.40 give line 5 = $1,801, where the engine gives $1,800 (blind case 12). Neither text settles it; a person may decide for both forms at once.
 
 # Should we do this now
@@ -108,7 +108,7 @@ The items are sorted under three headings: two texts conflict (decided, with a D
 | Header | stated rule (the same as Form 8846) |
 | Lines 1, 2 | published example with numbers (CRS IF12379) |
 | Lines 3, 4 | stated rule |
-| Line 5 | stated rule; rounding by decision (A104, as A96) |
+| Line 5 | stated rule; rounding by decision (A96) |
 | Line 6 | stated rule |
 | Line 7 | published example with numbers (the $150,000 limit) |
 | Lines 8, 9 | stated rule (estates and trusts only) |

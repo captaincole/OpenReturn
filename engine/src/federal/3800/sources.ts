@@ -18,7 +18,11 @@ import { roundDollars } from "../../money.js";
 import type { ResolverInputs } from "../../resolverInputs.js";
 import { figuredOnForm3468, form3468CreditSources } from "../3468/credit.js";
 import { workOpportunitySources } from "../5884/sources.js";
+import { lowIncomeHousingSourcesOf } from "../8586/form3800.js";
+import { disabledAccessSourcesOf } from "../8826/form3800.js";
+import { withForm8844 } from "../8844/sources.js";
 import { tipCreditSourcesOf } from "../8846/form3800.js";
+import { smallEmployerPlanSources } from "../8881/sources.js";
 import { childcareCreditSourcesOf } from "../8882/form3800.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
 import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
@@ -202,18 +206,33 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
   ];
   // Line 4f: Form 8846 line 4, the credit on the taxpayer's own tipped employees (8846/form3800.ts).
   const tips = tipCreditSourcesOf(inputs);
-  missing.push(...tips.missing);
   // Line 1k: Form 8882 lines 2 and 4, the credit of the taxpayer's own childcare expenditures (8882/form3800.ts).
   const childcare = childcareCreditSourcesOf(inputs);
-  missing.push(...childcare.missing);
-  const current = [
+  // Line 4d: Form 8586 line 3, the credit of the buildings the taxpayer owns (8586/form3800.ts).
+  const housing = lowIncomeHousingSourcesOf(inputs);
+  // Line 1e: Form 8826 line 6, the credit of the taxpayer's own businesses (8826/form3800.ts).
+  const disabledAccess = disabledAccessSourcesOf(inputs);
+  missing.push(
+    ...tips.missing,
+    ...childcare.missing,
+    ...housing.missing,
+    ...disabledAccess.missing,
+  );
+  // Line 3: Form 8844 line 2, the empowerment zone credit of the taxpayer's own employees (8844/sources.ts).
+  const zone = withForm8844(inputs, [
     ...stated,
     ...tips.sources,
     ...childcare.sources,
+    ...housing.sources,
     ...k1.flatMap((found) => (found.source ? [found.source] : [])),
     ...form3468.sources,
     ...workOpportunity.sources,
-  ];
+    ...disabledAccess.sources,
+  ]);
+  // Lines 1j, 1dd and 1ee: Form 8881 lines 8, 11 and 15 less the K-1s, the taxpayer's own plan (8881/sources.ts).
+  const plan = smallEmployerPlanSources(inputs);
+  missing.push(...zone.missing, ...plan.missing);
+  const current = [...zone.sources, ...plan.sources];
   const carryovers = getCreditCarryoverFacts(inputs.facts).map(carryoverOf);
   return { sources: { current, carryovers }, missing: [...new Set(missing)] };
 }

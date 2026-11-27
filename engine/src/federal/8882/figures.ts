@@ -7,13 +7,18 @@
  * layer can call it.
  */
 
+import type { BusinessCreditReduction } from "../../facts/kinds/activitiesOnReturn.js";
 import { statedBusinessesOnReturn, type BusinessFactValue } from "../../facts/kinds/business.js";
 import {
+  OTHER_EXPENSE,
   readChildcareExpenditureFacts,
   type ChildcareExpenditureFact,
 } from "../../facts/kinds/childcareCredit.js";
+import { empowermentZoneFigures } from "../../facts/kinds/empowermentZone.js";
+import { smallEmployerPlanReductions } from "../../facts/kinds/smallEmployerPlan.js";
 import { workOpportunityCreditByActivity } from "../../facts/kinds/workOpportunity.js";
 import { sum } from "../../money.js";
+import { disabledAccessReductions } from "../8826/figures.js";
 import { tipCreditReductions } from "../8846/figures.js";
 import { line7Shares, ownLines, type ExpenditureLine, type OwnLines } from "./lines.js";
 import { assetGap, deductionGap, placeOf } from "./places.js";
@@ -45,15 +50,29 @@ export const lineOf = (fact: ChildcareExpenditureFact): ExpenditureLine =>
 const NOT_A_BUSINESS = (fact: ChildcareExpenditureFact) =>
   `The childcare expenditure ${fact.key} names ${fact.value.businessKey}, which is not a Schedule C business on this return: the credit lowers the deduction or the basis on the schedule that holds the amount (irs-8882-form-2025::sec::form-8882-rev-12-2017-page-2::b01), and the engine lowers only a Schedule C business's.`;
 
-/* The credits Form 5884 and Form 8846 already take off a business's wages and taxes. */
+/*
+ * What the credits before Form 8882 in BUSINESS_CREDIT_REDUCTIONS
+ * (facts/kinds/activitiesOnReturn.ts) take off a business's expense line:
+ * Forms 5884 and 8844 on wages, Form 8846 on taxes, Forms 8826 and 8881 on the
+ * lines their facts name.
+ */
 function otherCredits(facts: ReadonlyArray<FactRow>, joint: boolean) {
-  const wages = workOpportunityCreditByActivity(facts);
+  const wages = [
+    workOpportunityCreditByActivity(facts),
+    empowermentZoneFigures(facts, joint).creditByEmployer,
+  ];
   const taxes = tipCreditReductions(facts, joint);
-  return (businessKey: string, line: string): number => {
-    if (line === "wages") return wages.get(businessKey) ?? 0;
-    if (line === "taxesAndLicenses") return taxes.get(businessKey) ?? 0;
-    return 0;
-  };
+  const access = disabledAccessReductions(facts, joint);
+  const plan = smallEmployerPlanReductions(facts);
+  return (businessKey: string, line: string): number =>
+    sum(
+      ...(line === "wages" ? wages.map((byBusiness) => byBusiness.get(businessKey)) : []),
+      line === "taxesAndLicenses" ? taxes.get(businessKey) : 0,
+      ...(access.get(businessKey) ?? []).map((each) =>
+        "line" in each && each.line === line ? each.amount : 0,
+      ),
+      plan.get(businessKey)?.[line],
+    );
 }
 
 /* Why the shares cannot come off their places; undefined when they can. */
@@ -116,16 +135,6 @@ export function childcareCreditFigures(
   return { ...base, expenditures, lines };
 }
 
-/* What the credit takes off one business: expense lines, Part V expenses and 2025 assets, by name. */
-export interface ChildcareReductions {
-  expenses: Map<string, number>;
-  otherExpenses: Map<string, number>;
-  assets: Map<string, number>;
-}
-
-const add = (map: Map<string, number>, name: string, amount: number) =>
-  map.set(name, sum(map.get(name), amount));
-
 /*
  * Each business's reductions: "You must reduce: The basis of any qualified
  * childcare facility by the amount of the credit on line 7 allocable to
@@ -138,19 +147,23 @@ const add = (map: Map<string, number>, name: string, amount: number) =>
 export function childcareCreditReductions(
   facts: ReadonlyArray<FactRow>,
   joint: boolean,
-): Map<string, ChildcareReductions> {
-  const out = new Map<string, ChildcareReductions>();
+): Map<string, BusinessCreditReduction[]> {
+  const out = new Map<string, BusinessCreditReduction[]>();
   for (const each of childcareCreditFigures(facts, joint).expenditures) {
-    const reductions = out.get(each.value.businessKey) ?? {
-      expenses: new Map(),
-      otherExpenses: new Map(),
-      assets: new Map(),
-    };
-    const { asset, deductedOn, otherExpense } = each.value;
-    if (asset !== undefined) add(reductions.assets, asset, each.share);
-    else if (otherExpense !== undefined) add(reductions.otherExpenses, otherExpense, each.share);
-    else if (deductedOn !== undefined) add(reductions.expenses, deductedOn, each.share);
-    out.set(each.value.businessKey, reductions);
+    const reduction = reductionOf(each.value, each.share);
+    const { businessKey } = each.value;
+    if (reduction) out.set(businessKey, [...(out.get(businessKey) ?? []), reduction]);
   }
   return out;
+}
+
+/* Where one expenditure's part comes off; property not placed in service in 2025 has none. */
+function reductionOf(
+  { asset, deductedOn, otherExpense }: ChildcareExpenditureFact["value"],
+  amount: number,
+): BusinessCreditReduction | undefined {
+  if (asset !== undefined) return { asset, amount };
+  if (otherExpense !== undefined) return { otherExpense, amount };
+  if (deductedOn === undefined || deductedOn === OTHER_EXPENSE) return undefined;
+  return { line: deductedOn, amount };
 }

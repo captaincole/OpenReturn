@@ -1,0 +1,1302 @@
+{
+  "form": {
+    "formId": "form-8835",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Renewable Electricity Production Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8835.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8835.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 447.4,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8835.0.part1.1_irs_registration_number",
+      "label": "Line 1 — If making an elective payment election or transfer election, enter the IRS-issued registration number for the facility",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 476.8,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.2a_facility_type",
+      "label": "Line 2a — Type (wind, closed-loop biomass, geothermal, solar, open-loop biomass, landfill gas, etc.)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 431.8,
+        "y": 647.968
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.2a_facility_type_continued",
+      "label": "Line 2a — Type (wind, closed-loop biomass, geothermal, solar, open-loop biomass, landfill gas, etc.), continued",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 635.969
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.2b_owner_name",
+      "label": "Line 2b — If different than filer, enter (i) owner's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 240.8,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.2b_owner_tin",
+      "label": "Line 2b — If different than filer, enter (ii) owner's TIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 147.8,
+        "y": 611.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8835.0.part1.3a_facility_address",
+      "label": "Line 3a — Address of the facility (if applicable)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 213.8,
+        "y": 599.969
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.3a_facility_address_continued",
+      "label": "Line 3a — Address of the facility (if applicable), continued",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 587.97
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.3b_latitude_sign",
+      "label": "Line 3b — Coordinates: (i) Latitude, \"+\" (plus) or \"-\" (minus) sign",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 172.8,
+        "y": 569.97
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8835.0.part1.3b_latitude_degrees",
+      "label": "Line 3b — Coordinates: (i) Latitude, whole degrees (before the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 194.4,
+        "y": 569.97
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8835.0.part1.3b_latitude_decimal",
+      "label": "Line 3b — Coordinates: (i) Latitude, decimal digits (after the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 569.97
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-8835.0.part1.3b_longitude_sign",
+      "label": "Line 3b — Coordinates: (ii) Longitude, \"+\" (plus) or \"-\" (minus) sign",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 388.8,
+        "y": 569.97
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8835.0.part1.3b_longitude_degrees",
+      "label": "Line 3b — Coordinates: (ii) Longitude, whole degrees (before the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 569.97
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8835.0.part1.3b_longitude_decimal",
+      "label": "Line 3b — Coordinates: (ii) Longitude, decimal digits (after the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 460.8,
+        "y": 569.97
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-8835.0.part1.4_date_construction_began",
+      "label": "Line 4 — Date construction began (MM/DD/YYYY)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 237.6,
+        "y": 539.968
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8835.0.part1.5_date_placed_in_service",
+      "label": "Line 5 — Date placed in service (MM/DD/YYYY)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 237.6,
+        "y": 527.969
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8835.0.part1.6_biomass_expansion_yes",
+      "label": "Line 6 — Is this facility an expansion of an existing closed-loop biomass or open-loop biomass facility? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 517.97
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.6_biomass_expansion_no",
+      "label": "Line 6 — Is this facility an expansion of an existing closed-loop biomass or open-loop biomass facility? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 517.97
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.8a_output_under_1_megawatt",
+      "label": "Line 8a — Yes, the facility's maximum net output is less than 1 megawatt (as measured in alternating current)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 457.969
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.8b_construction_before_2023_01_29",
+      "label": "Line 8b — Yes, the facility's construction began before January 29, 2023",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 445.97
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.8c_meets_wage_apprenticeship",
+      "label": "Line 8c — Yes, the facility meets the prevailing wage requirements of section 45(b)(7)(A) and the apprenticeship requirements of section 45(b)(8)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[2]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 432.968
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.8d_not_qualified_facility",
+      "label": "Line 8d — No, the facility does not meet the qualified facility requirements",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[3]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 409.97
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.9a_domestic_content_bonus_yes",
+      "label": "Line 9a — Does the facility qualify for the domestic content bonus credit? Yes, and section 45(b)(9)(B) is satisfied (10% bonus)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 385.969
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.9b_domestic_content_bonus_no",
+      "label": "Line 9b — Does the facility qualify for the domestic content bonus credit? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 373.97
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.10a_energy_community_bonus_yes",
+      "label": "Line 10a — Does the facility qualify for an energy community bonus credit? Yes, and section 45(b)(11)(B) is satisfied (10% bonus)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 349.969
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.10b_energy_community_bonus_no",
+      "label": "Line 10b — Does the facility qualify for an energy community bonus credit? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[1]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 337.97
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.10c_energy_community_not_applicable",
+      "label": "Line 10c — Does the facility qualify for an energy community bonus credit? Not applicable",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[2]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 325.968
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.11a_solar_dc_capacity_checkbox",
+      "label": "Line 11a — Nameplate capacity direct current (dc) in kW for: Solar energy property facility (checkbox)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 301.97
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.11a_solar_dc_capacity_kw",
+      "label": "Line 11a — Enter the nameplate capacity direct current (dc) in kW for: Solar energy property facility",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 201.6,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.11b_dc_capacity_not_applicable",
+      "label": "Line 11b — Nameplate capacity direct current (dc): Not applicable",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_6[1]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 289.968
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.12a_solar_ac_capacity_checkbox",
+      "label": "Line 12a — Nameplate capacity, alternating current (ac) in kW for: Solar energy property or facility (checkbox)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 265.97
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.12a_solar_ac_capacity_kw",
+      "label": "Line 12a — Enter the nameplate capacity, alternating current (ac) in kW for: Solar energy property or facility",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 216,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.12b_wind_ac_capacity_checkbox",
+      "label": "Line 12b — Nameplate capacity, alternating current (ac) in kW for: Wind energy property or facility (checkbox)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 253.968
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.12b_wind_ac_capacity_kw",
+      "label": "Line 12b — Enter the nameplate capacity, alternating current (ac) in kW for: Wind energy property or facility",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 216,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.12c_other_ac_capacity_checkbox",
+      "label": "Line 12c — Nameplate capacity, alternating current (ac) in kW for: Other (checkbox)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 241.969
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.12c_other_ac_capacity_kw",
+      "label": "Line 12c — Enter the nameplate capacity, alternating current (ac) in kW for: Other",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 108,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-8835.0.part1.12d_ac_capacity_not_applicable",
+      "label": "Line 12d — Nameplate capacity, alternating current (ac): Not applicable",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 229.97
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1a_wind_kwh_col_a",
+      "label": "Line 1a — Wind: (a) Kilowatt-hours produced and sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1a[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 253,
+        "y": 689.969
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1a_wind_credit_col_c",
+      "label": "Line 1a — Wind: (c) Column (a) × Column (b) (rate $0.006)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1a[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 397,
+        "y": 689.969
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1b_closed_loop_biomass_kwh_col_a",
+      "label": "Line 1b — Closed-loop biomass: (a) Kilowatt-hours produced and sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1b[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 253,
+        "y": 677.97
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1b_closed_loop_biomass_credit_col_c",
+      "label": "Line 1b — Closed-loop biomass: (c) Column (a) × Column (b) (rate $0.006)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1b[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 397,
+        "y": 677.97
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1c_geothermal_kwh_col_a",
+      "label": "Line 1c — Geothermal: (a) Kilowatt-hours produced and sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1c[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 253,
+        "y": 665.971
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1c_geothermal_credit_col_c",
+      "label": "Line 1c — Geothermal: (c) Column (a) × Column (b) (rate $0.006)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1c[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 397,
+        "y": 665.971
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1d_solar_kwh_col_a",
+      "label": "Line 1d — Solar: (a) Kilowatt-hours produced and sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1d[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 253,
+        "y": 653.972
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1d_solar_credit_col_c",
+      "label": "Line 1d — Solar: (c) Column (a) × Column (b) (rate $0.006)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1d[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 397,
+        "y": 653.972
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1e_offshore_wind_facility_kwh_col_a",
+      "label": "Line 1e — Offshore wind facility: (a) Kilowatt-hours produced and sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1e[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 253,
+        "y": 641.973
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1e_offshore_wind_facility_credit_col_c",
+      "label": "Line 1e — Offshore wind facility: (c) Column (a) × Column (b) (rate $0.006)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1e[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 397,
+        "y": 641.973
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1f_open_loop_biomass_kwh_col_a",
+      "label": "Line 1f — Open-loop biomass: (a) Kilowatt-hours produced and sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1f[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 253,
+        "y": 629.974
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1f_open_loop_biomass_credit_col_c",
+      "label": "Line 1f — Open-loop biomass: (c) Column (a) × Column (b) (rate $0.003)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1f[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 397,
+        "y": 629.974
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1g_landfill_gas_kwh_col_a",
+      "label": "Line 1g — Landfill gas: (a) Kilowatt-hours produced and sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1g[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 253,
+        "y": 617.975
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1g_landfill_gas_credit_col_c",
+      "label": "Line 1g — Landfill gas: (c) Column (a) × Column (b) (rate $0.003)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1g[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 397,
+        "y": 617.975
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1h_trash_kwh_col_a",
+      "label": "Line 1h — Trash: (a) Kilowatt-hours produced and sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1h[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 253,
+        "y": 605.976
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1h_trash_credit_col_c",
+      "label": "Line 1h — Trash: (c) Column (a) × Column (b) (rate $0.003)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1h[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 397,
+        "y": 605.976
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1i_hydropower_kwh_col_a",
+      "label": "Line 1i — Hydropower: (a) Kilowatt-hours produced and sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1i[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 253,
+        "y": 593.977
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1i_hydropower_credit_col_c",
+      "label": "Line 1i — Hydropower: (c) Column (a) × Column (b) (rate $0.003)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1i[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 397,
+        "y": 593.977
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1j_marine_hydrokinetic_kwh_col_a",
+      "label": "Line 1j — Marine and hydrokinetic renewables: (a) Kilowatt-hours produced and sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1j[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 253,
+        "y": 581.978
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.1j_marine_hydrokinetic_credit_col_c",
+      "label": "Line 1j — Marine and hydrokinetic renewables: (c) Column (a) × Column (b) (rate $0.003)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1j[0].f2_30[0]",
+      "position": {
+        "page": 1,
+        "x": 397,
+        "y": 581.978
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.2_total_column_c",
+      "label": "Line 2 — Add column (c) of lines 1a through 1j",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_31[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 569.97
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.3_phaseout_adjustment_amount",
+      "label": "Line 3 — Phaseout adjustment (see instructions): dollar amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_32[0]",
+      "position": {
+        "page": 1,
+        "x": 338.4,
+        "y": 557.968
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.3_phaseout_adjustment_factor",
+      "label": "Line 3 — Phaseout adjustment (see instructions): multiplier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_33[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 557.968
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.3_phaseout_adjustment",
+      "label": "Line 3 — Phaseout adjustment",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_34[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 557.968
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.4_credit_before_reduction",
+      "label": "Line 4 — Credit before reduction. Subtract line 3 from line 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_35[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 545.969
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.5a_tax_exempt_bond_ratio",
+      "label": "Line 5a — Divide the sum, for the tax year and all prior tax years, of all proceeds of tax-exempt bonds (section 103) used to finance the qualified facility, by the aggregate amount of additions to the capital account for the qualified facility, as of the close of the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_36[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 461.97
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.5b_line4_times_line5a",
+      "label": "Line 5b — Multiply line 4 by line 5a",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_37[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.5c_line4_times_15_percent",
+      "label": "Line 5c — Multiply line 4 by 15% (0.15)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_38[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 395.968
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.5d_smaller_of_5b_5c",
+      "label": "Line 5d — Enter the smaller of line 5b or line 5c",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_39[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.6_line4_less_line5d",
+      "label": "Line 6 — Subtract line 5d from line 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_40[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 365.969
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.7a_wind_began_2017",
+      "label": "Line 7a — Enter the amount from line 6 applicable to wind facilities, the construction of which began during 2017",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_41[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 335.97
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.7b_line7a_times_20_percent",
+      "label": "Line 7b — For facilities placed in service after 2021, enter -0-; otherwise, multiply line 7a by 20% (0.20)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_42[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 317.97
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.7c_wind_began_2018_2020_2021",
+      "label": "Line 7c — Enter the amount from line 6 applicable to wind facilities, the construction of which began during 2018, 2020, or 2021",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_43[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.7d_line7c_times_40_percent",
+      "label": "Line 7d — For facilities placed in service after 2021, enter -0-; otherwise, multiply line 7c by 40% (0.40)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_44[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 269.968
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.7e_wind_began_2019",
+      "label": "Line 7e — Enter the amount from line 6 applicable to wind facilities, the construction of which began during 2019",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_45[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.7f_line7e_times_60_percent",
+      "label": "Line 7f — For facilities placed in service after 2021, enter -0-; otherwise, multiply line 7e by 60% (0.60)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_46[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 221.969
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.7g_add_7b_7d_7f",
+      "label": "Line 7g — Add lines 7b, 7d, and 7f",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_47[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 209.97
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.8_line6_less_line7g",
+      "label": "Line 8 — Subtract line 7g from line 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_48[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 197.968
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.9_increased_credit_amount",
+      "label": "Line 9 — Increased credit amount for qualified facilities. Did you check a \"Yes\" box in Part I, question 8? If so, multiply the amount in Part II, line 8, by 5.0. If not, enter the amount from Part II, line 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_49[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 173.97
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.10_domestic_content_bonus",
+      "label": "Line 10 — Domestic content bonus credit. If you qualify, multiply the amount on line 9 by 10% (0.10). Otherwise, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_50[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 149.969
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.11_energy_community_bonus",
+      "label": "Line 11 — Energy community bonus credit. If you qualify, multiply the amount on line 9 by 10% (0.10). Otherwise, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_51[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 125.968
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.12_add_lines_9_10_11",
+      "label": "Line 12 — Add lines 9, 10, and 11",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_52[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 113.969
+      }
+    },
+    {
+      "fieldId": "form-8835.1.part2.13_elective_payment_adjusted_credit",
+      "label": "Line 13 — If you are making an elective payment election under section 6417 for a facility whose construction began in calendar year 2024, and the facility does not conform to section 45(b)(10)(B), or meet an exception under section 45(b)(10)(D), multiply line 12 by 90% (0.90). All others, enter the amount from line 12",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_53[0]",
+      "position": {
+        "page": 1,
+        "x": 496.8,
+        "y": 77.969
+      }
+    },
+    {
+      "fieldId": "form-8835.2.part2.14_credit_from_pass_through_entities",
+      "label": "Line 14 — Renewable electricity production credit from partnerships, S corporations, cooperatives, estates, and trusts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_1[0]",
+      "position": {
+        "page": 2,
+        "x": 496.8,
+        "y": 701.968
+      }
+    },
+    {
+      "fieldId": "form-8835.2.part2.15_add_lines_13_14",
+      "label": "Line 15 — Add lines 13 and 14",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_2[0]",
+      "position": {
+        "page": 2,
+        "x": 496.8,
+        "y": 629.968
+      }
+    },
+    {
+      "fieldId": "form-8835.2.part2.16_allocated_to_patrons_beneficiaries",
+      "label": "Line 16 — Amount allocated to patrons of the cooperative or beneficiaries of the estate or trust",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_3[0]",
+      "position": {
+        "page": 2,
+        "x": 496.8,
+        "y": 611.968
+      }
+    },
+    {
+      "fieldId": "form-8835.2.part2.17_cooperative_estate_trust_credit",
+      "label": "Line 17 — Cooperatives, estates, and trusts, subtract line 16 from line 15",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_4[0]",
+      "position": {
+        "page": 2,
+        "x": 496.8,
+        "y": 563.969
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8835/blank.pdf",
+    "ingestedAt": "2026-11-27T15:01:08.428Z",
+    "totalFields": 85,
+    "skipped": 0,
+    "catalogEntries": 85
+  }
+}

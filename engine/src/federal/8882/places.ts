@@ -61,7 +61,7 @@ export function assetGap(placed: Placed, total: number): string | undefined {
 
 /*
  * A deductible expenditure's Schedule C expense: a line that holds at least
- * the credit taken off it, after the credits Forms 5884 and 8846 take off the
+ * the credit taken off it, after the other business credits take off the
  * same line, or one Part V expense with that description.
  */
 export function deductionGap(
