@@ -1,0 +1,2815 @@
+{
+  "form": {
+    "formId": "form-8933-schedule-d",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Recapture Certification"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8933-schedule-d.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 491.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 627.4,
+        "y": 491.998
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_tax_year_col_a",
+      "label": "Line 1 — (a) Current tax year (enter the tax year)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Header[0].ColA[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 165.6,
+        "y": 428.001
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_tax_year_col_b",
+      "label": "Line 1 — (b) 1st previous tax year (enter the tax year)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Header[0].ColB[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 324,
+        "y": 428.001
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_tax_year_col_c",
+      "label": "Line 1 — (c) 2nd previous tax year (enter the tax year)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Header[0].ColC[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 428.001
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_tax_year_col_d",
+      "label": "Line 1 — (d) 3rd previous tax year (enter the tax year)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Header[0].ColD[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 640.8,
+        "y": 428.001
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_a_owner_name_col_a",
+      "label": "Line 1 row A — (i) Owner's name, (a) Current tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowAi[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 123.4,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_a_owner_name_col_b",
+      "label": "Line 1 row A — (i) Owner's name, (b) 1st previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowAi[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 281.8,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_a_owner_name_col_c",
+      "label": "Line 1 row A — (i) Owner's name, (c) 2nd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowAi[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 440.2,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_a_owner_name_col_d",
+      "label": "Line 1 row A — (i) Owner's name, (d) 3rd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowAi[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 598.6,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_a_owner_ein_col_a",
+      "label": "Line 1 row A — (ii) Employer identification number (EIN), (a) Current tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowAii[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 123.4,
+        "y": 372.002
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_a_owner_ein_col_b",
+      "label": "Line 1 row A — (ii) Employer identification number (EIN), (b) 1st previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowAii[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 281.8,
+        "y": 372.002
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_a_owner_ein_col_c",
+      "label": "Line 1 row A — (ii) Employer identification number (EIN), (c) 2nd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowAii[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 440.2,
+        "y": 372.002
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_a_owner_ein_col_d",
+      "label": "Line 1 row A — (ii) Employer identification number (EIN), (d) 3rd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowAii[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 598.6,
+        "y": 372.002
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_a_owner_address_col_a",
+      "label": "Line 1 row A — (iii) Address, (a) Current tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowAiii[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 123.4,
+        "y": 336.002
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_a_owner_address_col_b",
+      "label": "Line 1 row A — (iii) Address, (b) 1st previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowAiii[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 281.8,
+        "y": 336.002
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_a_owner_address_col_c",
+      "label": "Line 1 row A — (iii) Address, (c) 2nd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowAiii[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 440.2,
+        "y": 336.002
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_a_owner_address_col_d",
+      "label": "Line 1 row A — (iii) Address, (d) 3rd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowAiii[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 598.6,
+        "y": 336.002
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_a_operating_interest_pct_col_a",
+      "label": "Line 1 row A — (iv) Operating interest (%), (a) Current tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowAiv[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 123.4,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_a_operating_interest_pct_col_b",
+      "label": "Line 1 row A — (iv) Operating interest (%), (b) 1st previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowAiv[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 281.8,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_a_operating_interest_pct_col_c",
+      "label": "Line 1 row A — (iv) Operating interest (%), (c) 2nd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowAiv[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 440.2,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_a_operating_interest_pct_col_d",
+      "label": "Line 1 row A — (iv) Operating interest (%), (d) 3rd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowAiv[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 598.6,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_b_owner_name_col_a",
+      "label": "Line 1 row B — (i) Owner's name, (a) Current tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowBi[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 123.4,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_b_owner_name_col_b",
+      "label": "Line 1 row B — (i) Owner's name, (b) 1st previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowBi[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 281.8,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_b_owner_name_col_c",
+      "label": "Line 1 row B — (i) Owner's name, (c) 2nd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowBi[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 440.2,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_b_owner_name_col_d",
+      "label": "Line 1 row B — (i) Owner's name, (d) 3rd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowBi[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 598.6,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_b_owner_ein_col_a",
+      "label": "Line 1 row B — (ii) Employer identification number (EIN), (a) Current tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowBii[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 123.4,
+        "y": 288.003
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_b_owner_ein_col_b",
+      "label": "Line 1 row B — (ii) Employer identification number (EIN), (b) 1st previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowBii[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 281.8,
+        "y": 288.003
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_b_owner_ein_col_c",
+      "label": "Line 1 row B — (ii) Employer identification number (EIN), (c) 2nd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowBii[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 440.2,
+        "y": 288.003
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_b_owner_ein_col_d",
+      "label": "Line 1 row B — (ii) Employer identification number (EIN), (d) 3rd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowBii[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 598.6,
+        "y": 288.003
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_b_owner_address_col_a",
+      "label": "Line 1 row B — (iii) Address, (a) Current tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowBiii[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 123.4,
+        "y": 252.003
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_b_owner_address_col_b",
+      "label": "Line 1 row B — (iii) Address, (b) 1st previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowBiii[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 281.8,
+        "y": 252.003
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_b_owner_address_col_c",
+      "label": "Line 1 row B — (iii) Address, (c) 2nd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowBiii[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 440.2,
+        "y": 252.003
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_b_owner_address_col_d",
+      "label": "Line 1 row B — (iii) Address, (d) 3rd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowBiii[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 598.6,
+        "y": 252.003
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_b_operating_interest_pct_col_a",
+      "label": "Line 1 row B — (iv) Operating interest (%), (a) Current tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowBiv[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 123.4,
+        "y": 228.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_b_operating_interest_pct_col_b",
+      "label": "Line 1 row B — (iv) Operating interest (%), (b) 1st previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowBiv[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 281.8,
+        "y": 228.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_b_operating_interest_pct_col_c",
+      "label": "Line 1 row B — (iv) Operating interest (%), (c) 2nd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowBiv[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 440.2,
+        "y": 228.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_b_operating_interest_pct_col_d",
+      "label": "Line 1 row B — (iv) Operating interest (%), (d) 3rd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowBiv[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 598.6,
+        "y": 228.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_c_owner_name_col_a",
+      "label": "Line 1 row C — (i) Owner's name, (a) Current tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowCi[0].f1_39[0]",
+      "position": {
+        "page": 0,
+        "x": 123.4,
+        "y": 216.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_c_owner_name_col_b",
+      "label": "Line 1 row C — (i) Owner's name, (b) 1st previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowCi[0].f1_40[0]",
+      "position": {
+        "page": 0,
+        "x": 281.8,
+        "y": 216.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_c_owner_name_col_c",
+      "label": "Line 1 row C — (i) Owner's name, (c) 2nd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowCi[0].f1_41[0]",
+      "position": {
+        "page": 0,
+        "x": 440.2,
+        "y": 216.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_c_owner_name_col_d",
+      "label": "Line 1 row C — (i) Owner's name, (d) 3rd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowCi[0].f1_42[0]",
+      "position": {
+        "page": 0,
+        "x": 598.6,
+        "y": 216.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_c_owner_ein_col_a",
+      "label": "Line 1 row C — (ii) Employer identification number (EIN), (a) Current tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowCii[0].f1_43[0]",
+      "position": {
+        "page": 0,
+        "x": 123.4,
+        "y": 204.004
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_c_owner_ein_col_b",
+      "label": "Line 1 row C — (ii) Employer identification number (EIN), (b) 1st previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowCii[0].f1_44[0]",
+      "position": {
+        "page": 0,
+        "x": 281.8,
+        "y": 204.004
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_c_owner_ein_col_c",
+      "label": "Line 1 row C — (ii) Employer identification number (EIN), (c) 2nd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowCii[0].f1_45[0]",
+      "position": {
+        "page": 0,
+        "x": 440.2,
+        "y": 204.004
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_c_owner_ein_col_d",
+      "label": "Line 1 row C — (ii) Employer identification number (EIN), (d) 3rd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowCii[0].f1_46[0]",
+      "position": {
+        "page": 0,
+        "x": 598.6,
+        "y": 204.004
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_c_owner_address_col_a",
+      "label": "Line 1 row C — (iii) Address, (a) Current tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowCiii[0].f1_47[0]",
+      "position": {
+        "page": 0,
+        "x": 123.4,
+        "y": 168.004
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_c_owner_address_col_b",
+      "label": "Line 1 row C — (iii) Address, (b) 1st previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowCiii[0].f1_48[0]",
+      "position": {
+        "page": 0,
+        "x": 281.8,
+        "y": 168.004
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_c_owner_address_col_c",
+      "label": "Line 1 row C — (iii) Address, (c) 2nd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowCiii[0].f1_49[0]",
+      "position": {
+        "page": 0,
+        "x": 440.2,
+        "y": 168.004
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_c_owner_address_col_d",
+      "label": "Line 1 row C — (iii) Address, (d) 3rd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowCiii[0].f1_50[0]",
+      "position": {
+        "page": 0,
+        "x": 598.6,
+        "y": 168.004
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_c_operating_interest_pct_col_a",
+      "label": "Line 1 row C — (iv) Operating interest (%), (a) Current tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowCiv[0].f1_51[0]",
+      "position": {
+        "page": 0,
+        "x": 123.4,
+        "y": 144.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_c_operating_interest_pct_col_b",
+      "label": "Line 1 row C — (iv) Operating interest (%), (b) 1st previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowCiv[0].f1_52[0]",
+      "position": {
+        "page": 0,
+        "x": 281.8,
+        "y": 144.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_c_operating_interest_pct_col_c",
+      "label": "Line 1 row C — (iv) Operating interest (%), (c) 2nd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowCiv[0].f1_53[0]",
+      "position": {
+        "page": 0,
+        "x": 440.2,
+        "y": 144.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_c_operating_interest_pct_col_d",
+      "label": "Line 1 row C — (iv) Operating interest (%), (d) 3rd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowCiv[0].f1_54[0]",
+      "position": {
+        "page": 0,
+        "x": 598.6,
+        "y": 144.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_d_owner_name_col_a",
+      "label": "Line 1 row D — (i) Owner's name, (a) Current tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowDi[0].f1_55[0]",
+      "position": {
+        "page": 0,
+        "x": 123.4,
+        "y": 132.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_d_owner_name_col_b",
+      "label": "Line 1 row D — (i) Owner's name, (b) 1st previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowDi[0].f1_56[0]",
+      "position": {
+        "page": 0,
+        "x": 281.8,
+        "y": 132.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_d_owner_name_col_c",
+      "label": "Line 1 row D — (i) Owner's name, (c) 2nd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowDi[0].f1_57[0]",
+      "position": {
+        "page": 0,
+        "x": 440.2,
+        "y": 132.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_d_owner_name_col_d",
+      "label": "Line 1 row D — (i) Owner's name, (d) 3rd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowDi[0].f1_58[0]",
+      "position": {
+        "page": 0,
+        "x": 598.6,
+        "y": 132.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_d_owner_ein_col_a",
+      "label": "Line 1 row D — (ii) Employer identification number (EIN), (a) Current tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowDii[0].f1_59[0]",
+      "position": {
+        "page": 0,
+        "x": 123.4,
+        "y": 120.005
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_d_owner_ein_col_b",
+      "label": "Line 1 row D — (ii) Employer identification number (EIN), (b) 1st previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowDii[0].f1_60[0]",
+      "position": {
+        "page": 0,
+        "x": 281.8,
+        "y": 120.005
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_d_owner_ein_col_c",
+      "label": "Line 1 row D — (ii) Employer identification number (EIN), (c) 2nd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowDii[0].f1_61[0]",
+      "position": {
+        "page": 0,
+        "x": 440.2,
+        "y": 120.005
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_d_owner_ein_col_d",
+      "label": "Line 1 row D — (ii) Employer identification number (EIN), (d) 3rd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowDii[0].f1_62[0]",
+      "position": {
+        "page": 0,
+        "x": 598.6,
+        "y": 120.005
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_d_owner_address_col_a",
+      "label": "Line 1 row D — (iii) Address, (a) Current tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowDiii[0].f1_63[0]",
+      "position": {
+        "page": 0,
+        "x": 123.4,
+        "y": 84.005
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_d_owner_address_col_b",
+      "label": "Line 1 row D — (iii) Address, (b) 1st previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowDiii[0].f1_64[0]",
+      "position": {
+        "page": 0,
+        "x": 281.8,
+        "y": 84.005
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_d_owner_address_col_c",
+      "label": "Line 1 row D — (iii) Address, (c) 2nd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowDiii[0].f1_65[0]",
+      "position": {
+        "page": 0,
+        "x": 440.2,
+        "y": 84.005
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_d_owner_address_col_d",
+      "label": "Line 1 row D — (iii) Address, (d) 3rd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowDiii[0].f1_66[0]",
+      "position": {
+        "page": 0,
+        "x": 598.6,
+        "y": 84.005
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_d_operating_interest_pct_col_a",
+      "label": "Line 1 row D — (iv) Operating interest (%), (a) Current tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowDiv[0].f1_67[0]",
+      "position": {
+        "page": 0,
+        "x": 123.4,
+        "y": 60.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_d_operating_interest_pct_col_b",
+      "label": "Line 1 row D — (iv) Operating interest (%), (b) 1st previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowDiv[0].f1_68[0]",
+      "position": {
+        "page": 0,
+        "x": 281.8,
+        "y": 60.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_d_operating_interest_pct_col_c",
+      "label": "Line 1 row D — (iv) Operating interest (%), (c) 2nd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowDiv[0].f1_69[0]",
+      "position": {
+        "page": 0,
+        "x": 440.2,
+        "y": 60.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.0.part1.1_row_d_operating_interest_pct_col_d",
+      "label": "Line 1 row D — (iv) Operating interest (%), (d) 3rd previous tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowDiv[0].f1_70[0]",
+      "position": {
+        "page": 0,
+        "x": 598.6,
+        "y": 60.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.1.part1.2_project_geological_disposal_site",
+      "label": "Line 2(i) — Check if the project is: Geological disposal site",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 79.2,
+        "y": 518.252
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.1.part1.2_project_eor",
+      "label": "Line 2(ii) — Check if the project is: EOR",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[1]",
+      "position": {
+        "page": 1,
+        "x": 237.6,
+        "y": 518.252
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.1.part1.3_site_name_and_location",
+      "label": "Line 3 — Name and location (county and state)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_01[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 491.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.1.part1.4a_eor_operator_name",
+      "label": "Line 4a — EOR project operator's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_02[0]",
+      "position": {
+        "page": 1,
+        "x": 303.4,
+        "y": 491.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.1.part1.4b_eor_operator_ein",
+      "label": "Line 4b — EOR project operator's EIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+      "position": {
+        "page": 1,
+        "x": 613,
+        "y": 491.998
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.1.part1.5_other_operators_and_purpose",
+      "label": "Line 5 — Other company(ies) identified as the operator of the project for any other purpose(s) and the nature of the purpose",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_04[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.1.part1.6a_irs_registration_numbers",
+      "label": "Line 6a — IRS-issued registration number(s) for the geological disposal site",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_05[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.1.part1.6b_epa_eggrt_id_numbers",
+      "label": "Line 6b — EPA e-GGRT ID number(s), if available",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_06[0]",
+      "position": {
+        "page": 1,
+        "x": 303.4,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.1.part1.7_date_injection_began",
+      "label": "Line 7 — Date (MM/YYYY) on which the injection of captured carbon oxide began",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_07[0]",
+      "position": {
+        "page": 1,
+        "x": 577,
+        "y": 432
+      },
+      "maxLength": 7
+    },
+    {
+      "fieldId": "form-8933-schedule-d.1.part1.8a_previously_certified_project_name",
+      "label": "Line 8a — If the EOR project was previously certified under section 43, state the name of the certified project",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_08[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 407.999
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.1.part1.8b_petroleum_engineer_certification_date",
+      "label": "Line 8b — Date (MM/YYYY) of the petroleum engineer's certification",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_09[0]",
+      "position": {
+        "page": 1,
+        "x": 497.8,
+        "y": 407.999
+      },
+      "maxLength": 7
+    },
+    {
+      "fieldId": "form-8933-schedule-d.1.part1.10_enhanced_natural_gas_recovery_yes",
+      "label": "Line 10 — Is this EOR project an enhanced natural gas recovery project? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 684,
+        "y": 386.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.1.part1.10_enhanced_natural_gas_recovery_no",
+      "label": "Line 10 — Is this EOR project an enhanced natural gas recovery project? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_2[1]",
+      "position": {
+        "page": 1,
+        "x": 727.2,
+        "y": 386.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.1.part2.1_total_metric_tons_stored",
+      "label": "Line 1 — List the total metric tons of qualified carbon oxide securely stored in the geological disposal site or EOR project during the year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.1.part2.2_metric_tons_leaked",
+      "label": "Line 2 — Metric tons of qualified carbon oxide that, during the year, the owner, operator, or regulatory agency determined has leaked from the containment area of the reservoir during the year or previous tax years if not previously accounted for",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 288
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.1.part2.3_leaked_will_migrate_to_atmosphere",
+      "label": "Line 3 — Metric tons of qualified carbon oxide that, during the year, the owner, operator, or regulatory agency determined has leaked from the containment area of the reservoir during the year or previous tax years if not previously accounted for, and will eventually migrate to the atmosphere",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 264.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.1.part2.5_carbon_oxide_subject_to_recapture",
+      "label": "Line 5 — Qualified carbon oxide subject to recapture. Subtract line 1 from line 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 216
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.1.part2.7_regulatory_agencies_notified",
+      "label": "Line 7 — Which regulatory agencies were made aware of the leakage of qualified carbon oxide?",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 415.8,
+        "y": 191.999
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_owner_name_line1_col_d",
+      "label": "Line 9 — (d) Geological disposal site or EOR project: (i) Owner's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColD[0].f3_01[0]",
+      "position": {
+        "page": 2,
+        "x": 283.8,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_owner_name_line1_col_e",
+      "label": "Line 9 — (e) Geological disposal site or EOR project: (i) Owner's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColE[0].f3_04[0]",
+      "position": {
+        "page": 2,
+        "x": 363,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_owner_name_line1_col_f",
+      "label": "Line 9 — (f) Geological disposal site or EOR project: (i) Owner's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColF[0].f3_07[0]",
+      "position": {
+        "page": 2,
+        "x": 442.2,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_owner_name_line1_col_g",
+      "label": "Line 9 — (g) Geological disposal site or EOR project: (i) Owner's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColG[0].f3_10[0]",
+      "position": {
+        "page": 2,
+        "x": 521.4,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_owner_name_line1_col_h",
+      "label": "Line 9 — (h) Geological disposal site or EOR project: (i) Owner's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColH[0].f3_13[0]",
+      "position": {
+        "page": 2,
+        "x": 600.6,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_owner_name_line2_col_d",
+      "label": "Line 9 — (d) Geological disposal site or EOR project: (i) Owner's name (continued)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColD[0].f3_02[0]",
+      "position": {
+        "page": 2,
+        "x": 281.8,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_owner_name_line2_col_e",
+      "label": "Line 9 — (e) Geological disposal site or EOR project: (i) Owner's name (continued)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColE[0].f3_05[0]",
+      "position": {
+        "page": 2,
+        "x": 361,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_owner_name_line2_col_f",
+      "label": "Line 9 — (f) Geological disposal site or EOR project: (i) Owner's name (continued)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColF[0].f3_08[0]",
+      "position": {
+        "page": 2,
+        "x": 440.2,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_owner_name_line2_col_g",
+      "label": "Line 9 — (g) Geological disposal site or EOR project: (i) Owner's name (continued)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColG[0].f3_11[0]",
+      "position": {
+        "page": 2,
+        "x": 519.4,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_owner_name_line2_col_h",
+      "label": "Line 9 — (h) Geological disposal site or EOR project: (i) Owner's name (continued)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColH[0].f3_14[0]",
+      "position": {
+        "page": 2,
+        "x": 598.6,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_owner_ein_col_d",
+      "label": "Line 9 — (d) Geological disposal site or EOR project: (ii) EIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColD[0].f3_03[0]",
+      "position": {
+        "page": 2,
+        "x": 310.8,
+        "y": 444.002
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_owner_ein_col_e",
+      "label": "Line 9 — (e) Geological disposal site or EOR project: (ii) EIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColE[0].f3_06[0]",
+      "position": {
+        "page": 2,
+        "x": 390,
+        "y": 444.002
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_owner_ein_col_f",
+      "label": "Line 9 — (f) Geological disposal site or EOR project: (ii) EIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColF[0].f3_09[0]",
+      "position": {
+        "page": 2,
+        "x": 469.2,
+        "y": 444.002
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_owner_ein_col_g",
+      "label": "Line 9 — (g) Geological disposal site or EOR project: (ii) EIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColG[0].f3_12[0]",
+      "position": {
+        "page": 2,
+        "x": 548.4,
+        "y": 444.002
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_owner_ein_col_h",
+      "label": "Line 9 — (h) Geological disposal site or EOR project: (ii) EIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColH[0].f3_15[0]",
+      "position": {
+        "page": 2,
+        "x": 627.6,
+        "y": 444.002
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_qualified_carbon_oxide_col_d",
+      "label": "Line 9 — (d) Geological disposal site or EOR project: (iii) Check if carbon oxide was qualified carbon oxide",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColD[0].c3_1[0]",
+      "position": {
+        "page": 2,
+        "x": 347.248,
+        "y": 409.999
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_qualified_carbon_oxide_col_e",
+      "label": "Line 9 — (e) Geological disposal site or EOR project: (iii) Check if carbon oxide was qualified carbon oxide",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColE[0].c3_2[0]",
+      "position": {
+        "page": 2,
+        "x": 426.448,
+        "y": 409.999
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_qualified_carbon_oxide_col_f",
+      "label": "Line 9 — (f) Geological disposal site or EOR project: (iii) Check if carbon oxide was qualified carbon oxide",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColF[0].c3_3[0]",
+      "position": {
+        "page": 2,
+        "x": 505.648,
+        "y": 409.999
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_qualified_carbon_oxide_col_g",
+      "label": "Line 9 — (g) Geological disposal site or EOR project: (iii) Check if carbon oxide was qualified carbon oxide",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColG[0].c3_4[0]",
+      "position": {
+        "page": 2,
+        "x": 584.848,
+        "y": 409.999
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9_qualified_carbon_oxide_col_h",
+      "label": "Line 9 — (h) Geological disposal site or EOR project: (iii) Check if carbon oxide was qualified carbon oxide",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Header_ActiveFields[0].ColH[0].c3_5[0]",
+      "position": {
+        "page": 2,
+        "x": 664.048,
+        "y": 409.999
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9a_year_prior_col_a",
+      "label": "Line 9A — 1st previous tax year: (a) Year prior",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9A[0].f3_16[0]",
+      "position": {
+        "page": 2,
+        "x": 94.35,
+        "y": 372.002
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9a_metric_tons_stored_col_b",
+      "label": "Line 9A — 1st previous tax year: (b) Metric tons of stored carbon oxide for the indicated year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9A[0].f3_17[0]",
+      "position": {
+        "page": 2,
+        "x": 122.4,
+        "y": 372.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9a_stored_co_subject_to_recapture_col_c",
+      "label": "Line 9A — 1st previous tax year: (c) Stored carbon oxide subject to recapture",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9A[0].f3_18[0]",
+      "position": {
+        "page": 2,
+        "x": 201.6,
+        "y": 372.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9a_allocation_col_d",
+      "label": "Line 9A — 1st previous tax year: (d) Allocation of stored carbon oxide subject to recapture to geological disposal site or EOR project (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9A[0].f3_19[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 372.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9a_allocation_col_e",
+      "label": "Line 9A — 1st previous tax year: (e) Allocation of stored carbon oxide subject to recapture to geological disposal site or EOR project (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9A[0].f3_20[0]",
+      "position": {
+        "page": 2,
+        "x": 360,
+        "y": 372.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9a_allocation_col_f",
+      "label": "Line 9A — 1st previous tax year: (f) Allocation of stored carbon oxide subject to recapture to geological disposal site or EOR project (f)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9A[0].f3_21[0]",
+      "position": {
+        "page": 2,
+        "x": 439.2,
+        "y": 372.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9a_allocation_col_g",
+      "label": "Line 9A — 1st previous tax year: (g) Allocation of stored carbon oxide subject to recapture to geological disposal site or EOR project (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9A[0].f3_22[0]",
+      "position": {
+        "page": 2,
+        "x": 518.4,
+        "y": 372.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9a_allocation_col_h",
+      "label": "Line 9A — 1st previous tax year: (h) Allocation of stored carbon oxide subject to recapture to geological disposal site or EOR project (h)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9A[0].f3_23[0]",
+      "position": {
+        "page": 2,
+        "x": 597.6,
+        "y": 372.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9a_total_col_i",
+      "label": "Line 9A — 1st previous tax year: (i) Total. Add columns (d) through (h)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9A[0].f3_24[0]",
+      "position": {
+        "page": 2,
+        "x": 676.8,
+        "y": 372.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9b_year_prior_col_a",
+      "label": "Line 9B — 2nd previous tax year: (a) Year prior",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9B[0].f3_25[0]",
+      "position": {
+        "page": 2,
+        "x": 94.35,
+        "y": 336.002
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9b_metric_tons_stored_col_b",
+      "label": "Line 9B — 2nd previous tax year: (b) Metric tons of stored carbon oxide for the indicated year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9B[0].f3_26[0]",
+      "position": {
+        "page": 2,
+        "x": 122.4,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9b_stored_co_subject_to_recapture_col_c",
+      "label": "Line 9B — 2nd previous tax year: (c) Stored carbon oxide subject to recapture",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9B[0].f3_27[0]",
+      "position": {
+        "page": 2,
+        "x": 201.6,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9b_allocation_col_d",
+      "label": "Line 9B — 2nd previous tax year: (d) Allocation of stored carbon oxide subject to recapture to geological disposal site or EOR project (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9B[0].f3_28[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9b_allocation_col_e",
+      "label": "Line 9B — 2nd previous tax year: (e) Allocation of stored carbon oxide subject to recapture to geological disposal site or EOR project (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9B[0].f3_29[0]",
+      "position": {
+        "page": 2,
+        "x": 360,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9b_allocation_col_f",
+      "label": "Line 9B — 2nd previous tax year: (f) Allocation of stored carbon oxide subject to recapture to geological disposal site or EOR project (f)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9B[0].f3_30[0]",
+      "position": {
+        "page": 2,
+        "x": 439.2,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9b_allocation_col_g",
+      "label": "Line 9B — 2nd previous tax year: (g) Allocation of stored carbon oxide subject to recapture to geological disposal site or EOR project (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9B[0].f3_31[0]",
+      "position": {
+        "page": 2,
+        "x": 518.4,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9b_allocation_col_h",
+      "label": "Line 9B — 2nd previous tax year: (h) Allocation of stored carbon oxide subject to recapture to geological disposal site or EOR project (h)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9B[0].f3_32[0]",
+      "position": {
+        "page": 2,
+        "x": 597.6,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9b_total_col_i",
+      "label": "Line 9B — 2nd previous tax year: (i) Total. Add columns (d) through (h)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9B[0].f3_33[0]",
+      "position": {
+        "page": 2,
+        "x": 676.8,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9c_year_prior_col_a",
+      "label": "Line 9C — 3rd previous tax year: (a) Year prior",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9C[0].f3_34[0]",
+      "position": {
+        "page": 2,
+        "x": 94.35,
+        "y": 300.002
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9c_metric_tons_stored_col_b",
+      "label": "Line 9C — 3rd previous tax year: (b) Metric tons of stored carbon oxide for the indicated year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9C[0].f3_35[0]",
+      "position": {
+        "page": 2,
+        "x": 122.4,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9c_stored_co_subject_to_recapture_col_c",
+      "label": "Line 9C — 3rd previous tax year: (c) Stored carbon oxide subject to recapture",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9C[0].f3_36[0]",
+      "position": {
+        "page": 2,
+        "x": 201.6,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9c_allocation_col_d",
+      "label": "Line 9C — 3rd previous tax year: (d) Allocation of stored carbon oxide subject to recapture to geological disposal site or EOR project (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9C[0].f3_37[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9c_allocation_col_e",
+      "label": "Line 9C — 3rd previous tax year: (e) Allocation of stored carbon oxide subject to recapture to geological disposal site or EOR project (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9C[0].f3_38[0]",
+      "position": {
+        "page": 2,
+        "x": 360,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9c_allocation_col_f",
+      "label": "Line 9C — 3rd previous tax year: (f) Allocation of stored carbon oxide subject to recapture to geological disposal site or EOR project (f)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9C[0].f3_39[0]",
+      "position": {
+        "page": 2,
+        "x": 439.2,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9c_allocation_col_g",
+      "label": "Line 9C — 3rd previous tax year: (g) Allocation of stored carbon oxide subject to recapture to geological disposal site or EOR project (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9C[0].f3_40[0]",
+      "position": {
+        "page": 2,
+        "x": 518.4,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9c_allocation_col_h",
+      "label": "Line 9C — 3rd previous tax year: (h) Allocation of stored carbon oxide subject to recapture to geological disposal site or EOR project (h)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9C[0].f3_41[0]",
+      "position": {
+        "page": 2,
+        "x": 597.6,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9c_total_col_i",
+      "label": "Line 9C — 3rd previous tax year: (i) Total. Add columns (d) through (h)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9C[0].f3_42[0]",
+      "position": {
+        "page": 2,
+        "x": 676.8,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9d_total_subject_to_recapture_col_c",
+      "label": "Line 9D — Total. Add lines 9A through 9C: (c) Stored carbon oxide subject to recapture",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9D[0].f3_45[0]",
+      "position": {
+        "page": 2,
+        "x": 201.6,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9d_total_allocation_col_d",
+      "label": "Line 9D — Total. Add lines 9A through 9C: (d) Allocation to geological disposal site or EOR project (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9D[0].f3_46[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9d_total_allocation_col_e",
+      "label": "Line 9D — Total. Add lines 9A through 9C: (e) Allocation to geological disposal site or EOR project (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9D[0].f3_47[0]",
+      "position": {
+        "page": 2,
+        "x": 360,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9d_total_allocation_col_f",
+      "label": "Line 9D — Total. Add lines 9A through 9C: (f) Allocation to geological disposal site or EOR project (f)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9D[0].f3_48[0]",
+      "position": {
+        "page": 2,
+        "x": 439.2,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9d_total_allocation_col_g",
+      "label": "Line 9D — Total. Add lines 9A through 9C: (g) Allocation to geological disposal site or EOR project (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9D[0].f3_49[0]",
+      "position": {
+        "page": 2,
+        "x": 518.4,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9d_total_allocation_col_h",
+      "label": "Line 9D — Total. Add lines 9A through 9C: (h) Allocation to geological disposal site or EOR project (h)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9D[0].f3_50[0]",
+      "position": {
+        "page": 2,
+        "x": 597.6,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9d_total_col_i",
+      "label": "Line 9D — Total. Add lines 9A through 9C: (i) Total. Add columns (d) through (h)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_Line9[0].Row9D[0].f3_51[0]",
+      "position": {
+        "page": 2,
+        "x": 676.8,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.9e_tons_not_subject_to_recapture",
+      "label": "Line 9E — Metric tons of carbon oxide not subject to recapture due to look-back being limited to THREE tax years. Subtract Part II, line 5, from line 9D, column (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_52[0]",
+      "position": {
+        "page": 2,
+        "x": 201.6,
+        "y": 180
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.2.part2.12_allocation_not_pro_rata",
+      "label": "Line 12 — Check here if the allocation of the amounts in column (c) were figured in a manner other than pro rata and attach an explanatory statement",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_6[0]",
+      "position": {
+        "page": 2,
+        "x": 746,
+        "y": 122.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.1_owner_name",
+      "label": "Line 1 — Name (Section 1: information about you, the owner of the EOR project)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_01[0]",
+      "position": {
+        "page": 3,
+        "x": 36,
+        "y": 504
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.2_owner_ein",
+      "label": "Line 2 — EIN (Section 1: information about you, the owner of the EOR project)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_02[0]",
+      "position": {
+        "page": 3,
+        "x": 591.4,
+        "y": 504
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.3_owner_address",
+      "label": "Line 3 — Address (Section 1: information about you, the owner of the EOR project)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_03[0]",
+      "position": {
+        "page": 3,
+        "x": 36,
+        "y": 479.999
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.4_supplier_name",
+      "label": "Line 4 — Name (Section 2: information about suppliers who supplied carbon oxide during any of the three previous tax years)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_04[0]",
+      "position": {
+        "page": 3,
+        "x": 36,
+        "y": 443.999
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.5_supplier_ein",
+      "label": "Line 5 — EIN (Section 2: information about suppliers who supplied carbon oxide during any of the three previous tax years)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_05[0]",
+      "position": {
+        "page": 3,
+        "x": 591.4,
+        "y": 443.999
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.6_capture_facility_name_location",
+      "label": "Line 6 — Name and location of carbon oxide capture facility (if supplier supplied any qualified carbon oxide)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_06[0]",
+      "position": {
+        "page": 3,
+        "x": 36,
+        "y": 407.999
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.7_industrial_facility_type",
+      "label": "Line 7 — Type of industrial facility at which the supplier captured its qualified carbon oxide",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_07[0]",
+      "position": {
+        "page": 3,
+        "x": 404.2,
+        "y": 407.999
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8_supplier_name",
+      "label": "Line 8 — Supplier name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].SupplierName_ReadOrder[0].f4_08[0]",
+      "position": {
+        "page": 3,
+        "x": 356.8,
+        "y": 384.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8a_year_col_a",
+      "label": "Line 8A — 1st previous tax year, column (a) Year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8A[0].f4_09[0]",
+      "position": {
+        "page": 3,
+        "x": 94.35,
+        "y": 239.998
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8a_total_tons_stored_col_b",
+      "label": "Line 8A — 1st previous tax year, column (b) Total metric tons of stored carbon oxide from Part II, line 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8A[0].f4_10[0]",
+      "position": {
+        "page": 3,
+        "x": 122.4,
+        "y": 239.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8a_tons_subject_to_recapture_col_c",
+      "label": "Line 8A — 1st previous tax year, column (c) Total metric tons of stored carbon oxide subject to recapture",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8A[0].f4_11[0]",
+      "position": {
+        "page": 3,
+        "x": 201.6,
+        "y": 239.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8a_your_tons_subject_to_recapture_col_d",
+      "label": "Line 8A — 1st previous tax year, column (d) Your amount of qualified carbon oxide subject to recapture",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8A[0].f4_12[0]",
+      "position": {
+        "page": 3,
+        "x": 280.8,
+        "y": 239.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8a_credit_rate_col_e",
+      "label": "Line 8A — 1st previous tax year, column (e) Rate of carbon oxide sequestration credit for the year ($/MT)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8A[0].f4_13[0]",
+      "position": {
+        "page": 3,
+        "x": 360,
+        "y": 239.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8a_tons_supplier_elected_col_f",
+      "label": "Line 8A — 1st previous tax year, column (f) Metric tons of carbon oxide for which the supplier elected to allow you to claim the carbon oxide sequestration credit (MT)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8A[0].f4_14[0]",
+      "position": {
+        "page": 3,
+        "x": 439.2,
+        "y": 239.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8a_credit_supplier_elected_col_g",
+      "label": "Line 8A — 1st previous tax year, column (g) Amount of carbon oxide sequestration credit for which the supplier elected to allow you to claim the carbon oxide sequestration credit ($). Multiply column (f) by column (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8A[0].f4_15[0]",
+      "position": {
+        "page": 3,
+        "x": 518.4,
+        "y": 239.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8a_tons_supplier_not_elected_col_h",
+      "label": "Line 8A — 1st previous tax year, column (h) Metric tons of carbon oxide for which the supplier didn’t elect to allow you to claim the carbon oxide sequestration credit (MT). Subtract column (f) from column (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8A[0].f4_16[0]",
+      "position": {
+        "page": 3,
+        "x": 597.6,
+        "y": 239.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8a_credit_supplier_not_elected_col_i",
+      "label": "Line 8A — 1st previous tax year, column (i) Amount of carbon oxide sequestration credit for which the supplier didn’t elect to allow you to claim the carbon oxide sequestration credit ($). Multiply column (h) by column (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8A[0].f4_17[0]",
+      "position": {
+        "page": 3,
+        "x": 676.8,
+        "y": 239.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8b_year_col_a",
+      "label": "Line 8B — 2nd previous tax year, column (a) Year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8B[0].f4_18[0]",
+      "position": {
+        "page": 3,
+        "x": 94.35,
+        "y": 203.998
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8b_total_tons_stored_col_b",
+      "label": "Line 8B — 2nd previous tax year, column (b) Total metric tons of stored carbon oxide from Part II, line 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8B[0].f4_19[0]",
+      "position": {
+        "page": 3,
+        "x": 122.4,
+        "y": 203.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8b_tons_subject_to_recapture_col_c",
+      "label": "Line 8B — 2nd previous tax year, column (c) Total metric tons of stored carbon oxide subject to recapture",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8B[0].f4_20[0]",
+      "position": {
+        "page": 3,
+        "x": 201.6,
+        "y": 203.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8b_your_tons_subject_to_recapture_col_d",
+      "label": "Line 8B — 2nd previous tax year, column (d) Your amount of qualified carbon oxide subject to recapture",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8B[0].f4_21[0]",
+      "position": {
+        "page": 3,
+        "x": 280.8,
+        "y": 203.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8b_credit_rate_col_e",
+      "label": "Line 8B — 2nd previous tax year, column (e) Rate of carbon oxide sequestration credit for the year ($/MT)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8B[0].f4_22[0]",
+      "position": {
+        "page": 3,
+        "x": 360,
+        "y": 203.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8b_tons_supplier_elected_col_f",
+      "label": "Line 8B — 2nd previous tax year, column (f) Metric tons of carbon oxide for which the supplier elected to allow you to claim the carbon oxide sequestration credit (MT)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8B[0].f4_23[0]",
+      "position": {
+        "page": 3,
+        "x": 439.2,
+        "y": 203.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8b_credit_supplier_elected_col_g",
+      "label": "Line 8B — 2nd previous tax year, column (g) Amount of carbon oxide sequestration credit for which the supplier elected to allow you to claim the carbon oxide sequestration credit ($). Multiply column (f) by column (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8B[0].f4_24[0]",
+      "position": {
+        "page": 3,
+        "x": 518.4,
+        "y": 203.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8b_tons_supplier_not_elected_col_h",
+      "label": "Line 8B — 2nd previous tax year, column (h) Metric tons of carbon oxide for which the supplier didn’t elect to allow you to claim the carbon oxide sequestration credit (MT). Subtract column (f) from column (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8B[0].f4_25[0]",
+      "position": {
+        "page": 3,
+        "x": 597.6,
+        "y": 203.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8b_credit_supplier_not_elected_col_i",
+      "label": "Line 8B — 2nd previous tax year, column (i) Amount of carbon oxide sequestration credit for which the supplier didn’t elect to allow you to claim the carbon oxide sequestration credit ($). Multiply column (h) by column (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8B[0].f4_26[0]",
+      "position": {
+        "page": 3,
+        "x": 676.8,
+        "y": 203.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8c_year_col_a",
+      "label": "Line 8C — 3rd previous tax year, column (a) Year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8C[0].f4_27[0]",
+      "position": {
+        "page": 3,
+        "x": 94.35,
+        "y": 167.998
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8c_total_tons_stored_col_b",
+      "label": "Line 8C — 3rd previous tax year, column (b) Total metric tons of stored carbon oxide from Part II, line 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8C[0].f4_28[0]",
+      "position": {
+        "page": 3,
+        "x": 122.4,
+        "y": 167.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8c_tons_subject_to_recapture_col_c",
+      "label": "Line 8C — 3rd previous tax year, column (c) Total metric tons of stored carbon oxide subject to recapture",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8C[0].f4_29[0]",
+      "position": {
+        "page": 3,
+        "x": 201.6,
+        "y": 167.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8c_your_tons_subject_to_recapture_col_d",
+      "label": "Line 8C — 3rd previous tax year, column (d) Your amount of qualified carbon oxide subject to recapture",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8C[0].f4_30[0]",
+      "position": {
+        "page": 3,
+        "x": 280.8,
+        "y": 167.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8c_credit_rate_col_e",
+      "label": "Line 8C — 3rd previous tax year, column (e) Rate of carbon oxide sequestration credit for the year ($/MT)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8C[0].f4_31[0]",
+      "position": {
+        "page": 3,
+        "x": 360,
+        "y": 167.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8c_tons_supplier_elected_col_f",
+      "label": "Line 8C — 3rd previous tax year, column (f) Metric tons of carbon oxide for which the supplier elected to allow you to claim the carbon oxide sequestration credit (MT)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8C[0].f4_32[0]",
+      "position": {
+        "page": 3,
+        "x": 439.2,
+        "y": 167.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8c_credit_supplier_elected_col_g",
+      "label": "Line 8C — 3rd previous tax year, column (g) Amount of carbon oxide sequestration credit for which the supplier elected to allow you to claim the carbon oxide sequestration credit ($). Multiply column (f) by column (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8C[0].f4_33[0]",
+      "position": {
+        "page": 3,
+        "x": 518.4,
+        "y": 167.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8c_tons_supplier_not_elected_col_h",
+      "label": "Line 8C — 3rd previous tax year, column (h) Metric tons of carbon oxide for which the supplier didn’t elect to allow you to claim the carbon oxide sequestration credit (MT). Subtract column (f) from column (d)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8C[0].f4_34[0]",
+      "position": {
+        "page": 3,
+        "x": 597.6,
+        "y": 167.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8c_credit_supplier_not_elected_col_i",
+      "label": "Line 8C — 3rd previous tax year, column (i) Amount of carbon oxide sequestration credit for which the supplier didn’t elect to allow you to claim the carbon oxide sequestration credit ($). Multiply column (h) by column (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_Line8[0].Row8C[0].f4_35[0]",
+      "position": {
+        "page": 3,
+        "x": 676.8,
+        "y": 167.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8d_total_tons_elected_col_f",
+      "label": "Line 8D — Total metric tons. Add lines 8A through 8C, column (f)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_36[0]",
+      "position": {
+        "page": 3,
+        "x": 439.2,
+        "y": 156.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8e_credit_you_must_recapture_col_g",
+      "label": "Line 8E — Amount of carbon oxide sequestration credit you must recapture this year for carbon oxide supplied by this supplier. Add lines 8A through 8C, column (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_37[0]",
+      "position": {
+        "page": 3,
+        "x": 518.4,
+        "y": 131.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8f_total_tons_not_elected_col_h",
+      "label": "Line 8F — Total metric tons. Add lines 8A through 8C, column (h)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_38[0]",
+      "position": {
+        "page": 3,
+        "x": 597.6,
+        "y": 120.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-d.3.part3.8g_supplier_must_recapture_col_i",
+      "label": "Line 8G — Amount of carbon oxide sequestration credit the supplier of carbon oxide must recapture this year. Add lines 8A through 8C, column (i)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_39[0]",
+      "position": {
+        "page": 3,
+        "x": 676.8,
+        "y": 95.998
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8933-schedule-d/blank.pdf",
+    "ingestedAt": "2026-11-27T21:08:34.562Z",
+    "totalFields": 183,
+    "skipped": 0,
+    "catalogEntries": 183
+  }
+}

@@ -1021,7 +1021,8 @@
     {
       "name": "Form 8911 Schedule A",
       "title": "Alternative Fuel Vehicle Refueling Property",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8911-schedule-a"
     },
     {
       "name": "Form 8912",
@@ -1066,32 +1067,38 @@
     {
       "name": "Form 8933 Schedule A",
       "title": "Disposal or Enhanced Oil Recovery Owner Certification",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8933-schedule-a"
     },
     {
       "name": "Form 8933 Schedule B",
       "title": "Disposal Operator Certification",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8933-schedule-b"
     },
     {
       "name": "Form 8933 Schedule C",
       "title": "Enhanced Oil Recovery Operator Certification",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8933-schedule-c"
     },
     {
       "name": "Form 8933 Schedule D",
       "title": "Recapture Certification",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8933-schedule-d"
     },
     {
       "name": "Form 8933 Schedule E",
       "title": "Election Certification",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8933-schedule-e"
     },
     {
       "name": "Form 8933 Schedule F",
       "title": "Utilization Certification",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8933-schedule-f"
     },
     {
       "name": "Form 8936",
@@ -1102,7 +1109,8 @@
     {
       "name": "Form 8936 Schedule A",
       "title": "Clean Vehicle Credit Amount",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8936-schedule-a"
     },
     {
       "name": "Form 8938",

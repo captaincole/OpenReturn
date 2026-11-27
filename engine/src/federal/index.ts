@@ -92,13 +92,21 @@ import { register as registerForm8896 } from "./8896/bindings.js";
 import { register as registerForm8900 } from "./8900/bindings.js";
 import { register as registerForm8906 } from "./8906/bindings.js";
 import { register as registerForm8908 } from "./8908/bindings.js";
+import { register as registerForm8911ScheduleA } from "./8911-schedule-a/bindings.js";
 import { register as registerForm8911 } from "./8911/bindings.js";
 import { register as registerForm8912 } from "./8912/bindings.js";
 import { form8912CopyCount } from "./8912/copies.js";
 import { register as registerForm8915F } from "./8915-f/bindings.js";
 import { register as registerForm8919 } from "./8919/bindings.js";
 import { register as registerForm8932 } from "./8932/bindings.js";
+import { register as registerForm8933ScheduleA } from "./8933-schedule-a/bindings.js";
+import { register as registerForm8933ScheduleB } from "./8933-schedule-b/bindings.js";
+import { register as registerForm8933ScheduleC } from "./8933-schedule-c/bindings.js";
+import { register as registerForm8933ScheduleD } from "./8933-schedule-d/bindings.js";
+import { register as registerForm8933ScheduleE } from "./8933-schedule-e/bindings.js";
+import { register as registerForm8933ScheduleF } from "./8933-schedule-f/bindings.js";
 import { register as registerForm8933 } from "./8933/bindings.js";
+import { register as registerForm8936ScheduleA } from "./8936-schedule-a/bindings.js";
 import { register as registerForm8936 } from "./8936/bindings.js";
 import { register as registerForm8938 } from "./8938/bindings.js";
 import { register as registerForm8941 } from "./8941/bindings.js";
@@ -215,12 +223,20 @@ import form8896CatalogJson from "./8896/catalog.json";
 import form8900CatalogJson from "./8900/catalog.json";
 import form8906CatalogJson from "./8906/catalog.json";
 import form8908CatalogJson from "./8908/catalog.json";
+import form8911ScheduleACatalogJson from "./8911-schedule-a/catalog.json";
 import form8911CatalogJson from "./8911/catalog.json";
 import form8912CatalogJson from "./8912/catalog.json";
 import form8915FCatalogJson from "./8915-f/catalog.json";
 import form8919CatalogJson from "./8919/catalog.json";
 import form8932CatalogJson from "./8932/catalog.json";
+import form8933ScheduleACatalogJson from "./8933-schedule-a/catalog.json";
+import form8933ScheduleBCatalogJson from "./8933-schedule-b/catalog.json";
+import form8933ScheduleCCatalogJson from "./8933-schedule-c/catalog.json";
+import form8933ScheduleDCatalogJson from "./8933-schedule-d/catalog.json";
+import form8933ScheduleECatalogJson from "./8933-schedule-e/catalog.json";
+import form8933ScheduleFCatalogJson from "./8933-schedule-f/catalog.json";
 import form8933CatalogJson from "./8933/catalog.json";
+import form8936ScheduleACatalogJson from "./8936-schedule-a/catalog.json";
 import form8936CatalogJson from "./8936/catalog.json";
 import form8938CatalogJson from "./8938/catalog.json";
 import form8941CatalogJson from "./8941/catalog.json";
@@ -376,6 +392,14 @@ export const FEDERAL_CATALOGS = [
   fixtureFileSchema.parse(form8932CatalogJson),
   fixtureFileSchema.parse(form8941CatalogJson),
   fixtureFileSchema.parse(form8994CatalogJson),
+  fixtureFileSchema.parse(form8911ScheduleACatalogJson),
+  fixtureFileSchema.parse(form8936ScheduleACatalogJson),
+  fixtureFileSchema.parse(form8933ScheduleACatalogJson),
+  fixtureFileSchema.parse(form8933ScheduleBCatalogJson),
+  fixtureFileSchema.parse(form8933ScheduleCCatalogJson),
+  fixtureFileSchema.parse(form8933ScheduleDCatalogJson),
+  fixtureFileSchema.parse(form8933ScheduleECatalogJson),
+  fixtureFileSchema.parse(form8933ScheduleFCatalogJson),
 ];
 
 export const FEDERAL_FORMS: FormSpec[] = [
@@ -1403,5 +1427,61 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8994",
     relativeDir: "federal/8994",
     register: registerForm8994,
+  }),
+  makeFormSpec({
+    formId: "form-8911-schedule-a",
+    shortId: "8911-schedule-a",
+    displayName: "Schedule A (Form 8911)",
+    relativeDir: "federal/8911-schedule-a",
+    register: registerForm8911ScheduleA,
+  }),
+  makeFormSpec({
+    formId: "form-8936-schedule-a",
+    shortId: "8936-schedule-a",
+    displayName: "Schedule A (Form 8936)",
+    relativeDir: "federal/8936-schedule-a",
+    register: registerForm8936ScheduleA,
+  }),
+  makeFormSpec({
+    formId: "form-8933-schedule-a",
+    shortId: "8933-schedule-a",
+    displayName: "Schedule A (Form 8933)",
+    relativeDir: "federal/8933-schedule-a",
+    register: registerForm8933ScheduleA,
+  }),
+  makeFormSpec({
+    formId: "form-8933-schedule-b",
+    shortId: "8933-schedule-b",
+    displayName: "Schedule B (Form 8933)",
+    relativeDir: "federal/8933-schedule-b",
+    register: registerForm8933ScheduleB,
+  }),
+  makeFormSpec({
+    formId: "form-8933-schedule-c",
+    shortId: "8933-schedule-c",
+    displayName: "Schedule C (Form 8933)",
+    relativeDir: "federal/8933-schedule-c",
+    register: registerForm8933ScheduleC,
+  }),
+  makeFormSpec({
+    formId: "form-8933-schedule-d",
+    shortId: "8933-schedule-d",
+    displayName: "Schedule D (Form 8933)",
+    relativeDir: "federal/8933-schedule-d",
+    register: registerForm8933ScheduleD,
+  }),
+  makeFormSpec({
+    formId: "form-8933-schedule-e",
+    shortId: "8933-schedule-e",
+    displayName: "Schedule E (Form 8933)",
+    relativeDir: "federal/8933-schedule-e",
+    register: registerForm8933ScheduleE,
+  }),
+  makeFormSpec({
+    formId: "form-8933-schedule-f",
+    shortId: "8933-schedule-f",
+    displayName: "Schedule F (Form 8933)",
+    relativeDir: "federal/8933-schedule-f",
+    register: registerForm8933ScheduleF,
   }),
 ];
