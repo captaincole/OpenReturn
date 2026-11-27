@@ -11,6 +11,8 @@ Form 540NR is the return of a part-year resident or a nonresident (issue #336). 
 5. **Line 36 and line 38 with no total taxable income.** Line 19 is 0: there is nothing to divide. Default: line 36 is 0.0000; line 38 is 1.0000 when line 35 is above 0, else 0.0000. No dollars change: the tax is 0.
 6. **Line 72 and total taxable income.** The text says "If your taxable income or nonresident California source taxable income is more than $1,000,000"; its worksheet starts from line 35 (`::line-72-behavioral-health-services-tax::b01`). Default: the worksheet, so only line 35 over $1,000,000 owes the tax. A part-year resident with line 19 over $1,000,000 and line 35 under it owes none; the worksheet's line 3 would be negative.
 7. **Lines 101, 103 and 125 print 0** when there is no overpayment, as Form 540 lines 97, 99 and 115 do (the same rules).
+8. **Line 37 uses the four-place rate, also when all income is California's.** The form says "Multiply line 35 by line 36" (`ca-540nr-face-2025::sec::face-page-2::b02`), and line 36 is rounded to four places (`ca-540nr-booklet-2025::sec::line-36-ca-tax-rate::b01`). A return with line 35 equal to line 19 can then show line 37 a few dollars away from line 31: in the blind fill's joint case, $208,588 × .0589 = $12,286 against a line 31 of $12,276. No text says to copy line 31 in that case. Default: the form's arithmetic. The blind fill made the same choice.
+9. **Rounding of the four-place ratios.** Decided: row A71 of `docs/rule-decisions.md` (rounded, the half up, for lines 36 and 38 and Schedule CA (540NR) Part IV line 3). The blind fill made the same choice.
 
 ## Field groups
 
@@ -23,6 +25,12 @@ Form 540NR is the return of a part-year resident or a nonresident (issue #336). 
 | Lines 42, 62, 63, 72, 74, 81, 82, 88, 92, 93 | the form's arithmetic | stated rule |
 | Lines 101 to 125 | Form 540's rules on the Form 540NR lines | stated rule |
 | Lines 51 to 55, 61, 83, 84, 102, contributions, 120, 122, direct deposit, signing except email and phone, header extras, line 6 | unsupported, as on Form 540 | unsupported |
+
+## Second opinions
+
+- **Blind fill (2026-11-26).** A preparer filled 14 cases from the blank form and the booklet only: lines 19, 31, 35 to 40 and 72, and Schedule CA (540NR) Part IV lines 3 and 4. All 168 values match the engine; no blank-against-0 differences either.
+- **PolicyEngine-US 2.154.1 (commit 0fbed6dd, 2026-11-26).** It models the California resident tax only: no Form 540NR, no California ratio, no Schedule CA (540NR) column E. So it checks only the constants this form shares with Form 540. They agree: exemption credits $153 and $475; the phase-out start $252,203 (single, separate), $504,411 (joint, surviving spouse), $378,310 (head of household); $6 for each $2,500 ($1,250 separate); the standard deduction $5,706 and $11,412; the 2025 single rate brackets; the 1% tax over $1,000,000. PolicyEngine applies that tax to resident taxable income; Form 540NR line 72 applies it to line 35 (doubt 6), a scope difference, not a lead.
+- No other reference implementation is named in the repository.
 
 ## Proposals for a discussion
 

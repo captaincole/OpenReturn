@@ -13,6 +13,13 @@ Columns A to C and Part III are Schedule CA (540)'s rules on the same lines (`fr
 7. **Part IV line 3 with no total AGI.** Line 27 column D is 0 or less: nothing to divide. Default: 1.0000 when column E is above 0, else 0.0000. The form's floor ("If less than zero, enter -0-") covers a California loss.
 8. **Part I line 1a without the Part I fact.** Default: the return's decision `decisions.scope.ca_residency` checks the taxpayer's box; lines 2 to 8 wait for the fact, which the form asks for. The spouse column is for a joint return only.
 9. **Part I line 2a for a part-year resident.** The form asks for one state of domicile for 2025. The taxpayer states it. No dollars change.
+10. **Part III line 30 for a married/RDP filing separately taxpayer whose spouse itemizes.** "If your filing status is married/RDP filing separately and your spouse itemizes, enter the amount from line 29 (even if the standard deduction is larger)" (`ca-540nr-sched-ca-inst-2025::sec::line-30-amount-from-line-29-or-standard-deduction::b01`). Part III is Schedule CA (540)'s rule, which always takes the larger of line 29 and the standard deduction; no fact says whether the spouse itemizes on the California return. Dollars change for such a taxpayer: line 30, then Part IV line 4 and Form 540NR line 35. The same gap is on Schedule CA (540) line 30 for Form 540, so the fix belongs to both forms in one change. Found by the blind fill, which took the standard deduction because its case did not say.
+11. **Part IV line 3 with a California loss.** The face says "If less than zero, enter -0-"; the instructions say only that it "may not be greater than 1.0000" (`::line-3-deduction-percentage::b01`). Default: the face's floor (doubt 7). Line 35 is 0 either way. The blind fill made the same choice.
+
+## Second opinions
+
+- **Blind fill (2026-11-26).** Part IV lines 3 and 4 match the engine in all 14 cases (see Form 540NR's QUESTIONS.md).
+- **PolicyEngine-US 2.154.1** models no Schedule CA (540NR): it has no column E and no Part IV ratio. Nothing to compare beyond the standard deduction, which agrees ($5,706 and $11,412).
 
 ## Field groups
 
