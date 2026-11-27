@@ -4,11 +4,11 @@ Form 7210 figures the clean hydrogen production credit (section 45V) of one faci
 
 ## Two texts conflict
 
-### Line 11 or line 2a for a K-1 credit (row A110)
+### Line 11 or line 2a for a K-1 credit (row A116)
 
 - Text A: line 11 takes "the total clean hydrogen production credit amount from your distributive share" on the K-1, code Y, and line 12 adds lines 10 and 11 (`irs-7210-inst-2025::sec::line-11::b01`, `irs-7210-face-2025::sec::face-part-iv::b01`).
 - Text B, the same block: a taxpayer who also figures a credit of its own enters the distributive share "as 'Credit From Pass-Through Entities' on Form 7210, Part I, line 2a".
-- Decided: text A. Line 11 of the first Form 7210 takes the K-1 credits; line 2a stays the facility's address. `DECISION` comment in `resolveInfo.ts`; row A110 in `docs/rule-decisions.md`.
+- Decided: text A. Line 11 of the first Form 7210 takes the K-1 credits; line 2a stays the facility's address. `DECISION` comment in `resolveInfo.ts`; row A116 in `docs/rule-decisions.md`.
 - Dollars: none. Form 3800 line 1g is the same either way.
 
 ## Should we do this now
@@ -84,7 +84,7 @@ None. The Form 3800 change for a purchased credit is one rule in `3800/sources.t
 | Column (b) amounts, lines 6a–6d | published table (`applicable-amount::b01`) |
 | Lines 7–10, 12 | stated rule |
 | Lines 8a–8d | stated rule; the ratio prints 6 places (decision A99) |
-| Line 11 | stated rule; first copy only (decision A110) |
+| Line 11 | stated rule; first copy only (decision A116) |
 | Line 5 | stated rule, from stated answers |
 | Part I lines 1–4, 2b | stated rule |
 | Line A(i), A(ii) | stated rule for one process; unsupported for more |
@@ -92,6 +92,6 @@ None. The Form 3800 change for a purchased credit is one rule in `3800/sources.t
 
 ## Second opinions
 
-- **Blind fill** (15 cases, from the blank form and instructions only): one difference, on line 7 of case 3 ($2,354 against $2,353, through lines 9, 10 and 12). It is the rounding of a total of computed rows ("Line 7 adds column (c) with cents" above). Every other line of every case matches, including the band edges (0.45, 2.5, 4.0), the hydrogen above 4.0 left off, the 45Q facility and the ended credit period (no Form 7210), the bond lines and the K-1 credit on line 11 (row A110).
+- **Blind fill** (15 cases, from the blank form and instructions only): one difference, on line 7 of case 3 ($2,354 against $2,353, through lines 9, 10 and 12). It is the rounding of a total of computed rows ("Line 7 adds column (c) with cents" above). Every other line of every case matches, including the band edges (0.45, 2.5, 4.0), the hydrogen above 4.0 left off, the 45Q facility and the ended credit period (no Form 7210), the bond lines and the K-1 credit on line 11 (row A116).
 - **PolicyEngine-US 2.154.1** (commit 0fbed6ddb1): it does not model the clean hydrogen production credit. Its `general_business_credit` is a bare input, so it cannot check Form 7210 or line 1g of Form 3800.
 - **IRS Direct File**: Direct File covers no business credits. Not compared.

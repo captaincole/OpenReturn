@@ -16,7 +16,7 @@ import {
   type KnownWidgets,
 } from "../helpers/assertions.js";
 import { blankPdfPath, catalogPath } from "../helpers/formPaths.js";
-import { readGoldenPdfValues } from "../helpers/goldenPdf.js";
+import { readGoldenPdfValues, type GoldenValue } from "../helpers/goldenPdf.js";
 import { decisionsWithPreparerStyle } from "../helpers/preparer.js";
 import type { RunResult, Scenario, ScenarioForm } from "../types.js";
 
@@ -38,6 +38,29 @@ function getBlankPdf(blankPdfPath: string): Buffer {
   const buf = readFileSync(blankPdfPath);
   blankPdfCache.set(blankPdfPath, buf);
   return buf;
+}
+
+/*
+ * The golden PDF's widgets, less those the blank PDF already fills and the
+ * catalog does not list: the amounts the IRS prints in a fillable box (Form
+ * 8826 lines 2 and 4, $250 and $10,000) are the form's text, not the engine's.
+ */
+async function goldenWidgetsOf(
+  goldenPdfPath: string,
+  blankPdfPath: string,
+  formId: string,
+  catalog: Catalog,
+): Promise<Map<string, GoldenValue>> {
+  const golden = await readGoldenPdfValues(resolve(ENGINE_ROOT, goldenPdfPath));
+  const cataloged = new Set(catalog.getFields(formId).map((field) => field.pdfWidgetName));
+  const blank = await readGoldenPdfValues(blankPdfPath);
+  for (const [widgetName, value] of blank) {
+    const printed = value.kind === "text" && value.value !== "";
+    if (printed && !cataloged.has(widgetName) && golden.get(widgetName)?.value === value.value) {
+      golden.delete(widgetName);
+    }
+  }
+  return golden;
 }
 
 const registeredForms = new Set<string>();
@@ -196,7 +219,7 @@ async function assertForm(
 
   /* The fieldId assertions above trust the catalog's widget mapping; the golden PDF catches mislabels. */
   if (sf.goldenPdfPath) {
-    const golden = await readGoldenPdfValues(resolve(ENGINE_ROOT, sf.goldenPdfPath));
+    const golden = await goldenWidgetsOf(sf.goldenPdfPath, blankPdfPath, sf.formId, catalog);
     assertMatchesGolden(
       rendered,
       golden,

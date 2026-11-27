@@ -18,10 +18,14 @@ import { roundDollars } from "../../money.js";
 import type { ResolverInputs } from "../../resolverInputs.js";
 import { figuredOnForm3468, form3468CreditSources } from "../3468/credit.js";
 import { workOpportunitySources } from "../5884/sources.js";
+import { researchCreditSources } from "../6765/form3800.js";
 import { cleanHydrogenSourcesOf } from "../7210/form3800.js";
 import { lowIncomeHousingSourcesOf } from "../8586/form3800.js";
+import { disabledAccessSourcesOf } from "../8826/form3800.js";
 import { withForm8844 } from "../8844/sources.js";
 import { tipCreditSourcesOf } from "../8846/form3800.js";
+import { smallEmployerPlanSources } from "../8881/sources.js";
+import { childcareCreditSourcesOf } from "../8882/form3800.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
 import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
 import { gap, type Cell } from "./cells.js";
@@ -206,9 +210,22 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
   ];
   // Line 4f: Form 8846 line 4, the credit on the taxpayer's own tipped employees (8846/form3800.ts).
   const tips = tipCreditSourcesOf(inputs);
+  // Line 1k: Form 8882 lines 2 and 4, the credit of the taxpayer's own childcare expenditures (8882/form3800.ts).
+  const childcare = childcareCreditSourcesOf(inputs);
   // Line 4d: Form 8586 line 3, the credit of the buildings the taxpayer owns (8586/form3800.ts).
   const housing = lowIncomeHousingSourcesOf(inputs);
-  missing.push(...tips.missing, ...housing.missing);
+  // Line 1e: Form 8826 line 6, the credit of the taxpayer's own businesses (8826/form3800.ts).
+  const disabledAccess = disabledAccessSourcesOf(inputs);
+  // Line 1c or 4i: Form 6765 line 28, the taxpayer's own research (6765/form3800.ts).
+  const research = researchCreditSources(inputs);
+  missing.push(
+    ...tips.missing,
+    ...childcare.missing,
+    ...housing.missing,
+    ...disabledAccess.missing,
+    ...research.sources.filter(missingResearch).map((source) => source.credit.key),
+    ...research.missing,
+  );
   // Line 1g: Form 7210 line 10, the credit of each clean hydrogen facility the taxpayer owns (7210/form3800.ts).
   const hydrogen = cleanHydrogenSourcesOf(inputs);
   missing.push(...hydrogen.missing);
@@ -216,14 +233,19 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
   const zone = withForm8844(inputs, [
     ...stated,
     ...tips.sources,
+    ...childcare.sources,
     ...housing.sources,
     ...k1.flatMap((found) => (found.source ? [found.source] : [])),
     ...form3468.sources,
     ...workOpportunity.sources,
+    ...research.sources,
+    ...disabledAccess.sources,
     ...hydrogen.sources,
   ]);
-  missing.push(...zone.missing);
-  const current = zone.sources;
+  // Lines 1j, 1dd and 1ee: Form 8881 lines 8, 11 and 15 less the K-1s, the taxpayer's own plan (8881/sources.ts).
+  const plan = smallEmployerPlanSources(inputs);
+  missing.push(...zone.missing, ...plan.missing);
+  const current = [...zone.sources, ...plan.sources];
   const carryovers = getCreditCarryoverFacts(inputs.facts).map(carryoverOf);
   return { sources: { current, carryovers }, missing: [...new Set(missing)] };
 }
