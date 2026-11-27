@@ -11,11 +11,15 @@ import { writeZip } from "./zipWrite";
  * The release zip: on disk next to the sidecar, else the copy in law.db,
  * else the sourceUrl. The sha256 is checked every time. A copy from law.db
  * or the web is written to disk, so the next sync reads it from there.
+ * California's extract has no URL of its own: when it is missing,
+ * missingCaExtract says how to make it.
  */
 export async function ensureLawZip(entry: LawEntry): Promise<Uint8Array> {
   if (existsSync(entry.zipPath)) return fromDisk(entry);
   const stored = await getDocumentSource(entry.sidecar.docId, "law");
-  const zip = stored && sha256(stored) === entry.sidecar.sha256 ? stored : await download(entry);
+  const pinned = stored && sha256(stored) === entry.sidecar.sha256 ? stored : null;
+  const zip =
+    pinned ?? (entry.sidecar.format === "caml" ? missingCaExtract(entry) : await download(entry));
   await mkdir(dirname(entry.zipPath), { recursive: true });
   await writeFile(entry.zipPath, zip);
   return zip;
@@ -24,8 +28,29 @@ export async function ensureLawZip(entry: LawEntry): Promise<Uint8Array> {
 async function fromDisk(entry: LawEntry): Promise<Uint8Array> {
   const local = new Uint8Array(await readFile(entry.zipPath));
   if (sha256(local) === entry.sidecar.sha256) return local;
+  if (entry.sidecar.format === "caml")
+    throw new Error(
+      `${entry.zipRelPath} does not match its sidecar sha256: it was cut from a newer archive. To move to it, set sha256 and releasePoint in the sidecar to what \`law extract-ca\` printed. To keep the pinned text, delete the file and run \`law fetch\`.`,
+    );
   throw new Error(
     `${entry.zipRelPath} does not match its sidecar sha256. Update the sidecar for a new release point, or delete the file to fetch it again.`,
+  );
+}
+
+/*
+ * The Legislature's archive is a rolling file of about 1.3 GB, so the
+ * sidecar pins the extract, not the archive. Without the extract on disk
+ * or in law.db, a person downloads the archive and cuts it again.
+ */
+function missingCaExtract({ sidecar, zipRelPath }: LawEntry): never {
+  throw new Error(
+    [
+      `${zipRelPath} is not on disk, and law.db has no copy with the sidecar's sha256.`,
+      `  Install the prebuilt law.db (\`npm run corpus -- law fetch\`), or make the extract:`,
+      `  1. Download ${sidecar.sourceUrl ?? "the session archive"} (about 1.3 GB) to a folder of its own.`,
+      "  2. Run `npm run corpus -- law extract-ca <path of the zip>`.",
+      `  The extract matches the pin only if the archive still holds the text of ${sidecar.releasePoint}; if not, the command prints the new sha256 and date for the sidecar.`,
+    ].join("\n"),
   );
 }
 

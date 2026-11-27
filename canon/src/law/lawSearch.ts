@@ -1,7 +1,7 @@
 import { hybridSearchRefDocs } from "../db/corpusSearch";
 import { asStr } from "../db/corpusStore";
 import { openLibraryDb } from "../db/libsql";
-import { type LawSource, parseLawTarget, sourceOfSection } from "./citation";
+import { type LawSource, parseLawTarget, sourceOfTarget } from "./citation";
 import { CITATION_HINT, lawDocIdOf, requireLaw, sourceOfFormat, targetSectionId } from "./lawRead";
 
 /*
@@ -21,9 +21,9 @@ export type SearchMode = "fts" | "vector" | "hybrid";
 
 export interface LawSearchOpts {
   query: string;
-  /** Only the statute or only the regulations; both unless named. */
+  /** One source only; the statute and the regulations unless named. */
   source?: LawSource;
-  /** One section, "469", "1400Z-2" or "1.469-5T"; its subdivisions are not a filter. */
+  /** One section, "469", "1400Z-2", "1.469-5T" or "CA 17041"; its subdivisions are not a filter. */
   section?: string;
   limit?: number;
   mode?: SearchMode;
@@ -32,7 +32,7 @@ export interface LawSearchOpts {
 export interface LawHit {
   blockId: string;
   source: LawSource;
-  /** "26 U.S.C. § 469(h)(2)", "26 CFR § 1.469-5T(a)(1)". */
+  /** "26 U.S.C. § 469(h)(2)", "26 CFR § 1.469-5T(a)(1)", "Cal. Rev. & Tax. Code § 17041(a)". */
   citation: string;
   sectionHeading: string | null;
   headings: string[];
@@ -40,14 +40,19 @@ export interface LawHit {
   score: number;
 }
 
-const SOURCES: LawSource[] = ["statute", "regulations"];
+/*
+ * With no source named: the federal law only. California answers only when
+ * it is named (source "california"): a federal question should not get
+ * California hits. docs/evals/law.md has the measurement.
+ */
+export const DEFAULT_SOURCES: readonly LawSource[] = ["statute", "regulations"];
 
 export async function searchLaw(opts: LawSearchOpts): Promise<LawHit[]> {
   await requireLaw();
   const source = opts.section ? sectionSource(opts.section, opts.source) : opts.source;
   if (source) return searchSource(opts, source);
   const lists: LawHit[][] = [];
-  for (const one of SOURCES) lists.push(await searchSource(opts, one));
+  for (const one of DEFAULT_SOURCES) lists.push(await searchSource(opts, one));
   return takeTurns(lists).slice(0, opts.limit ?? DEFAULT_LIMIT);
 }
 
@@ -87,7 +92,10 @@ async function searchSource(opts: LawSearchOpts, source: LawSource): Promise<Law
 
 // A section filter names its own source; naming the other one too is a mistake, not an empty search.
 function sectionSource(section: string, source: LawSource | undefined): LawSource {
-  const own = sourceOfSection(section);
+  const target = parseLawTarget(section);
+  if (!target || target.kind === "block")
+    throw new Error(`"${section}" is not a section number (${CITATION_HINT})`);
+  const own = sourceOfTarget(target);
   if (source && source !== own)
     throw new Error(`"${section}" is a section of the ${own}, not of the ${source}`);
   return own;

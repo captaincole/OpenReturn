@@ -12,7 +12,7 @@ import { z } from "zod";
  */
 const JURISDICTION_TABLE = {
   federal: { name: "federal", publishers: ["IRS", "OLRC", "OFR"] },
-  CA: { name: "California", publishers: ["FTB"] },
+  CA: { name: "California", publishers: ["FTB", "Legislative Counsel of California"] },
 } as const;
 
 export type Jurisdiction = keyof typeof JURISDICTION_TABLE;

@@ -10,10 +10,11 @@ import { isPublishedDate } from "../refdocs/published";
  * the corpus walk never sees it. It pins one release of a law document:
  * the Code as one zip (law.zip next to it), the regulations as one file per
  * CFR part, each pinned by its own sha256 (the files sit next to it, and
- * law.db stores them zipped as one blob). All are gitignored.
+ * law.db stores them zipped as one blob), California's code as one zip cut
+ * from the Legislature's session archive (caExtract.ts). All are gitignored.
  */
 
-export type LawFormat = "uslm" | "ecfr";
+export type LawFormat = "uslm" | "ecfr" | "caml";
 
 /** One downloaded file of a document published in parts. */
 export interface LawSourceFile {
@@ -32,17 +33,20 @@ export interface LawSidecar {
   /** The zip's sha256; for a document in parts, one hash of the parts' hashes (partsSha256). */
   sha256: string;
   format: LawFormat;
-  /** Where the text runs through: an OLRC release point ("119-73") or an eCFR date ("2025-12-31"). */
+  /**
+   * Where the text runs through: an OLRC release point ("119-73"), an eCFR
+   * date ("2025-12-31"), or the date of California's session archive ("2026-11-22").
+   */
   releasePoint: string;
   published: string | null;
-  /** The parts of an "ecfr" document, in order; empty for "uslm". */
+  /** The parts of an "ecfr" document, in order; empty for the others. */
   files: LawSourceFile[];
 }
 
 export interface LawEntry {
   sidecar: LawSidecar;
   sidecarPath: string;
-  /** law.zip next to the sidecar: the Code's release zip, or the parts zipped as law.db stores them. */
+  /** law.zip next to the sidecar: the Code's release zip, California's extract, or the parts zipped as law.db stores them. */
   zipPath: string;
   /** For messages and the stored source_path: relative to sources/. */
   zipRelPath: string;
@@ -82,7 +86,10 @@ async function loadEntry(root: string, sidecarPath: string): Promise<LawEntry> {
 }
 
 const SIDECAR_RULE =
-  'needs docId, title, publisher and releasePoint as text, published as YYYY-MM[-DD], and either format "uslm" with a sha256, or format "ecfr" with files (each file, sourceUrl and sha256)';
+  'needs docId, title, publisher and releasePoint as text, published as YYYY-MM[-DD], and either format "uslm" or "caml" with a sha256, or format "ecfr" with files (each file, sourceUrl and sha256)';
+
+/* One zip, pinned by its sha256: the Code's release, or California's extract. */
+const ONE_ZIP_FORMATS = new Set(["uslm", "caml"]);
 
 const isText = (value: unknown): value is string => typeof value === "string" && value !== "";
 
@@ -109,8 +116,10 @@ export function coerceLawSidecar(value: unknown): LawSidecar | null {
 type Pin = Pick<LawSidecar, "format" | "sha256" | "files">;
 
 function pinOf(record: Record<string, unknown>): Pin | null {
-  if (record.format === "uslm")
-    return isText(record.sha256) ? { format: "uslm", sha256: record.sha256, files: [] } : null;
+  if (ONE_ZIP_FORMATS.has(record.format as string)) {
+    const format = record.format as "uslm" | "caml";
+    return isText(record.sha256) ? { format, sha256: record.sha256, files: [] } : null;
+  }
   if (record.format !== "ecfr" || !Array.isArray(record.files)) return null;
   const files = record.files.map(coerceFile);
   if (files.length === 0 || files.some((file) => file === null)) return null;

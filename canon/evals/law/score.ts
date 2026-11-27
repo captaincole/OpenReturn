@@ -2,8 +2,9 @@ import {
   type LawSource,
   parseLawTarget,
   printsPath,
-  sectionIdOf,
-  sourceOfSection,
+  sectionIdIn,
+  type SectionTarget,
+  sourceOfTarget,
 } from "../../src/law/citation";
 import type { LawHit } from "../../src/law/lawSearch";
 
@@ -16,9 +17,9 @@ export interface LawCase {
   id: string;
   question: string;
   queries: string[];
-  /** Sections that hold the rule, Code ("469") or regulation ("1.469-5T"); a hit in any of them counts. */
+  /** Sections that hold the rule: Code ("469"), regulation ("1.469-5T") or California ("CA 17041"); a hit in any of them counts. */
   expect: string[];
-  /** The exact subdivision, "469(g)(1)(A)" or "1.469-5T(a)(1)", when one holds the rule. */
+  /** The exact subdivision, "469(g)(1)(A)", "1.469-5T(a)(1)" or "CA 17041(i)(1)", when one holds the rule. */
   expectPath?: string;
   source: string;
 }
@@ -61,15 +62,27 @@ export function scoreCase(testCase: LawCase, merged: LawHit[], docIds: DocIds): 
   return { id: testCase.id, sectionHit, pathHit, top: top.map((hit) => hit.citation) };
 }
 
-const inSection = (hit: LawHit, docIds: DocIds, section: string) =>
-  hit.blockId.startsWith(`${sectionIdOf(docIds[sourceOfSection(section)], section)}::`);
+function sectionTarget(citation: string): SectionTarget | null {
+  const target = parseLawTarget(citation);
+  return target && target.kind !== "block" ? target : null;
+}
+
+function inTarget(hit: LawHit, docIds: DocIds, target: SectionTarget): boolean {
+  const source = sourceOfTarget(target);
+  return hit.blockId.startsWith(`${sectionIdIn(docIds[source], source, target.section)}::`);
+}
+
+const inSection = (hit: LawHit, docIds: DocIds, section: string) => {
+  const target = sectionTarget(section);
+  return target !== null && inTarget(hit, docIds, target);
+};
 
 /* The hit is the subdivision, sits inside it, or is the parent block that prints it. */
 function onPath(hit: LawHit, docIds: DocIds, expectPath: string): boolean {
-  const expected = parseLawTarget(expectPath);
-  const got = parseLawTarget(hit.citation);
-  if (!expected || expected.kind === "block" || !got || got.kind === "block") return false;
-  if (!inSection(hit, docIds, expected.section)) return false;
+  const expected = sectionTarget(expectPath);
+  const got = sectionTarget(hit.citation);
+  if (!expected || !got) return false;
+  if (!inTarget(hit, docIds, expected)) return false;
   const shorter = Math.min(expected.path.length, got.path.length);
   const shared = expected.path.slice(0, shorter).every((segment, i) => got.path[i] === segment);
   if (!shared) return false;

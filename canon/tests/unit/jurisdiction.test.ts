@@ -67,7 +67,7 @@ describe("what a search keeps", () => {
   it("filters by publisher only when some jurisdiction is off", () => {
     expect(publisherFilter(undefined)).toBeNull();
     expect(publisherFilter(["federal", "CA"])).toBeNull();
-    expect(publisherFilter(["CA"])).toEqual(["FTB"]);
+    expect(publisherFilter(["CA"])).toEqual(["FTB", "Legislative Counsel of California"]);
     expect(publisherFilter(["federal"])).toContain("IRS");
     expect(publisherFilter(["federal"])).not.toContain("FTB");
   });
