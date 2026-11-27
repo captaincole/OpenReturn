@@ -26,10 +26,26 @@ import type { Form8835FilingInfo } from "./8835/filingInfo.js";
 import { resolve8835Info } from "./8835/resolveInfo.js";
 import type { Form8864FilingInfo } from "./8864/filingInfo.js";
 import { resolve8864Info } from "./8864/resolveInfo.js";
+import type { Form8874FilingInfo } from "./8874/filingInfo.js";
+import { resolve8874Info } from "./8874/resolveInfo.js";
+import type { Form8896FilingInfo } from "./8896/filingInfo.js";
+import { resolve8896Info } from "./8896/resolveInfo.js";
+import type { Form8900FilingInfo } from "./8900/filingInfo.js";
+import { resolve8900Info } from "./8900/resolveInfo.js";
+import type { Form8906FilingInfo } from "./8906/filingInfo.js";
+import { resolve8906Info } from "./8906/resolveInfo.js";
+import type { Form8908FilingInfo } from "./8908/filingInfo.js";
+import { resolve8908Info } from "./8908/resolveInfo.js";
+import type { Form8932FilingInfo } from "./8932/filingInfo.js";
+import { resolve8932Info } from "./8932/resolveInfo.js";
 import type { Form8933FilingInfo } from "./8933/filingInfo.js";
 import { resolve8933Info } from "./8933/resolveInfo.js";
+import type { Form8941FilingInfo } from "./8941/filingInfo.js";
+import { resolve8941Info } from "./8941/resolveInfo.js";
 import type { Form8992FilingInfo } from "./8992/filingInfo.js";
 import { resolve8992Info } from "./8992/resolveInfo.js";
+import type { Form8994FilingInfo } from "./8994/filingInfo.js";
+import { resolve8994Info } from "./8994/resolveInfo.js";
 export type FederalFormsWithNoRulesFilingInfo = Form5471FilingInfo &
   Form8933FilingInfo &
   Form8992FilingInfo &
@@ -41,7 +57,15 @@ export type FederalFormsWithNoRulesFilingInfo = Form5471FilingInfo &
   Form7218FilingInfo &
   Form8820FilingInfo &
   Form8835FilingInfo &
-  Form8864FilingInfo;
+  Form8864FilingInfo &
+  Form8874FilingInfo &
+  Form8896FilingInfo &
+  Form8900FilingInfo &
+  Form8906FilingInfo &
+  Form8908FilingInfo &
+  Form8932FilingInfo &
+  Form8941FilingInfo &
+  Form8994FilingInfo;
 
 export const FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS: ReadonlyArray<
   (inputs: ResolverInputs) => BaseFilingInfo
@@ -58,4 +82,12 @@ export const FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS: ReadonlyArray<
   resolve8820Info,
   resolve8835Info,
   resolve8864Info,
+  resolve8874Info,
+  resolve8896Info,
+  resolve8900Info,
+  resolve8906Info,
+  resolve8908Info,
+  resolve8932Info,
+  resolve8941Info,
+  resolve8994Info,
 ];

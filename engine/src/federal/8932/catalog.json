@@ -1,0 +1,138 @@
+{
+  "form": {
+    "formId": "form-8932",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Credit for Employer Differential Wage Payments"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8932.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8932.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8932.0.line.1_eligible_differential_wage_payments",
+      "label": "Line 1 — Eligible differential wage payments paid during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 671.969
+      }
+    },
+    {
+      "fieldId": "form-8932.0.line.2_line1_times_20_percent",
+      "label": "Line 2 — Multiply line 1 by 20% (0.20)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 647.968
+      }
+    },
+    {
+      "fieldId": "form-8932.0.line.3_credit_from_pass_through_entities",
+      "label": "Line 3 — Credit for employer differential wage payments from partnerships, S corporations, cooperatives, estates, and trusts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-8932.0.line.4_add_lines_2_and_3",
+      "label": "Line 4 — Add lines 2 and 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 587.97
+      }
+    },
+    {
+      "fieldId": "form-8932.0.line.5_amount_allocated_to_patrons_beneficiaries",
+      "label": "Line 5 — Amount allocated to patrons of the cooperative or beneficiaries of the estate or trust",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-8932.0.line.6_cooperatives_estates_trusts_credit",
+      "label": "Line 6 — Cooperatives, estates, and trusts, subtract line 5 from line 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 539.968
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8932/blank.pdf",
+    "ingestedAt": "2026-11-27T21:04:02.341Z",
+    "totalFields": 8,
+    "skipped": 0,
+    "catalogEntries": 8
+  }
+}
