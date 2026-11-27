@@ -70,26 +70,37 @@ export const CELLULOSE_ID = "big-sioux-cellulose-fuels";
 export const CELLULOSE_EIN = "00-0006478";
 
 /*
- * A cellulosic ethanol plant where Lem is a general partner. Its tax year ran
- * from July 1, 2024 to June 30, 2025, so it ends in Lem's 2025 tax year, and
- * its fuel sold from July to December 2024 still earned the credit. Box 15
- * code I: his share of the biofuel producer credit.
+ * A cellulosic ethanol plant, a limited partnership where Lem is a limited
+ * partner: a limited partner's share of ordinary income is not
+ * self-employment income, so the K-1 has no box 14. Its tax year ran from
+ * July 1, 2024 to June 30, 2025, so it ends in Lem's 2025 tax year, and its
+ * fuel sold from July to December 2024 still earned the credit. Box 15 code
+ * I: his share of the biofuel producer credit. Box 20 code Z: the section
+ * 199A statement.
  */
 export const celluloseK1: PartnershipK1FactValue = {
   form: "1065",
-  entityName: "Big Sioux Cellulose Fuels LLC",
+  entityName: "Big Sioux Cellulose Fuels LP",
   entityEin: CELLULOSE_EIN,
   finalK1: false,
   amendedK1: false,
   publiclyTraded: false,
-  partnerType: "general",
+  partnerType: "limited",
   profitPercent: 10,
   lossPercent: 10,
   capitalPercent: 10,
   boxes: [
     { box: "1", amount: 12600 },
     { box: "15", code: "I", amount: 2474 },
+    { box: "20", code: "Z" },
   ],
+  section199A: {
+    businessName: "Big Sioux Cellulose Fuels LP",
+    qualifiedBusinessIncome: 12600,
+    w2Wages: 41000,
+    qualifiedPropertyUbia: 380000,
+    specifiedService: false,
+  },
 };
 
 const holding: K1HoldingFactValue = {

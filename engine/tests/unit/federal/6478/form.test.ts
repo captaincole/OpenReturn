@@ -61,6 +61,7 @@ const k1With = (credit: number | undefined): PartnershipK1FactValue => ({
   boxes: [
     { box: "1", amount: 12600 },
     { box: "15", code: "I", amount: credit },
+    { box: "20", code: "Z" },
   ],
 });
 
@@ -135,6 +136,16 @@ describe("Form 6478: lem", () => {
   });
 });
 
+/* Every other form lem files. */
+const OTHER_FORMS = [
+  "form-1040",
+  "schedule-1",
+  "schedule-3",
+  "schedule-e",
+  "form-8995",
+  "form-3800",
+];
+
 describe("Form 6478: who files", () => {
   it("a K-1 credit alone does not file it with no decision (general-instructions::b01)", () => {
     const run = evaluate(base.facts, withoutDecision);
@@ -147,7 +158,7 @@ describe("Form 6478: who files", () => {
     for (const decisions of [withoutDecision, decidedFalse]) {
       const run = evaluate(base.facts, decisions);
       expect(run.files("form-6478")).toBe(false);
-      for (const formId of ["form-1040", "schedule-1", "schedule-3", "schedule-e", "form-3800"]) {
+      for (const formId of OTHER_FORMS) {
         expect(run.values(formId)).toEqual(filed.values(formId));
       }
     }
@@ -236,10 +247,11 @@ describe("Form 6478: line 3", () => {
 
 describe("Form 6478: no facts, nothing changes", () => {
   it("with no biofuel credit, Form 3800 line 4c stays blank and Form 6478 does not file", () => {
-    const facts = factsWith({ [K1_KEY]: { ...celluloseK1, boxes: [{ box: "1", amount: 12600 }] } });
-    const run = evaluate(facts, withoutDecision);
+    const boxes = celluloseK1.boxes.filter((box) => box.box !== "15");
+    const run = evaluate(factsWith({ [K1_KEY]: { ...celluloseK1, boxes } }), withoutDecision);
     expect(run.files("form-6478")).toBe(false);
     expect(run.value("form-3800", FORM_3800_4C)).toBeUndefined();
-    expect(run.value("form-1040", "line.22")).toBe(13587);
+    // The tax before credits (README hand check), with no credit taken off.
+    expect(run.value("form-1040", "line.22")).toBe(13026);
   });
 });

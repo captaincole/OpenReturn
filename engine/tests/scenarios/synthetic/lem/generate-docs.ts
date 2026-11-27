@@ -14,6 +14,7 @@ const partner = {
   street: LEM.street,
   cityStateZip: `${LEM.city}, ${LEM.state} ${LEM.zip}`,
   entityType: "Individual",
+  domestic: true,
 };
 
 const partnership = { street: "4100 N Cliff Avenue", cityStateZip: "Sioux Falls, SD 57104" };

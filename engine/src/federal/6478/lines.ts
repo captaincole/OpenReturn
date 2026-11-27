@@ -38,9 +38,18 @@ export const ownProductionCanQualify = (taxYearBegins: number): boolean =>
 export const line1ColumnCOf = (gallons: number): number => roundDollars(gallons * RATE_PER_GALLON);
 
 /*
- * Line 3: each pass-through credit in whole dollars, then the sum (the rule of
- * docs/rule-decisions.md row A96: Form 3800 Part V keeps one whole-dollar
- * amount for each entity, so line 4 equals Form 3800 line 4c).
+ * Line 3: each pass-through credit in whole dollars, then the sum.
+ *
+ * DECISION (2026-11-27, by the author): each K-1 rounds before line 3 adds.
+ * Text A, the Form 1040 instructions: "If you have to add two or more amounts
+ * to figure the amount to enter on a line, include cents when adding the
+ * amounts and round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01).
+ * Text B, line 4: "report this amount on the appropriate line of Form 3800"
+ * (irs-6478-face-2025::sec::face-page-1::b01), where an aggregate "from more
+ * than one pass-through entity" is broken down "by the EIN of the pass-through
+ * entity ... in Part V" (irs-3800-inst-2025::sec::part-v-3::b01), one
+ * whole-dollar amount for each K-1. The engine follows text B, as Forms 8846
+ * and 8586 do (docs/rule-decisions.md row A96), so line 4 equals Form 3800 line 4c.
  */
 export const line3Of = (credits: ReadonlyArray<number>): number =>
   sum(...credits.map((credit) => roundDollars(credit)));

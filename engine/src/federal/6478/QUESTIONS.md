@@ -24,19 +24,26 @@ The engine fills Form 6478 (Rev. January 2020) for an individual's 2025 return. 
 - Decided (DECISION comment above `resolve6478Info`; `docs/rule-decisions.md` row A110): the form does not file unless `decisions.scope.must_file_6478` is true. With the decision, line 3 holds the credits.
 - Dollars: none. Form 3800 line 4c takes the same credit either way.
 
+### 9. Line 3 rounding with several K-1 amounts in cents
+
+- Text A: line 3 says "Enter the total biofuel producer credits from" the K-1s (`line-3::b01`), and the Form 1040 rule: "include cents when adding the amounts and round off only the total" (`irs-1040-inst-2025::sec::rounding-off-to-whole::b01`).
+- Text B: Form 3800 Part V lists each pass-through amount "by the EIN of the pass-through entity" (`irs-3800-inst-2025::sec::part-v-3::b01`), one whole-dollar amount for each K-1.
+- Decided (DECISION comment above `line3Of` in `lines.ts`; `docs/rule-decisions.md` row A96, the same rule as Forms 8846 and 8586): each K-1 rounds, then they add. Line 4 then equals Form 3800 line 4c.
+- Blind fill (2026-11-27): the preparer rounded only the total. $600.40 + $1,200.40 gives $1,801 there and $1,800 in the engine; $600.50 + $1,200.50 gives $1,801 there and $1,802 in the engine. At most $1 for each K-1 with cents.
+
 ## Should we do this now
 
 ### 2. The K-1 fact does not hold the entity's tax year
 
 - Source: "You claim the credit for the tax year in which the sale or use occurs" (`general-instructions::b01`); section 40(b)(6)(J)(i), "before January 1, 2025" (`usc-26-2025::sec::s40::b-6-J`).
 - Default: the engine takes a K-1 code I amount as printed. Only a K-1 for a tax year that began in 2024 can hold one. A K-1 for a calendar year 2025 that prints code I is the entity's error, and the engine cannot see it.
-- Not now: the K-1 fact has no tax-year field. Adding one changes the K-1 document fact that every pass-through form reads.
+- Not now: the K-1 fact has no tax-year field. Adding one changes the K-1 document fact that every pass-through form reads (Pattern change, item 2).
 
 ### 3. A trust K-1 box 13 code H
 
 - Source: line 3 lists "Schedule K-1 (Form 1041) ... box 13 (code H)" (`line-3::b01`); "you can report the amount on Form 3800, Part III, line 4c" (`irs-1041k1-inst-2025::sec::note-form-1041-t-allocation-of-estimated-tax-payments-to::b02`).
 - Default: line 3 is a named gap. The pass-through tables keep a trust's box 13 credits as `credit` items with no route, so Form 3800 does not take them (Schedule E line 41 is unsupported then).
-- Not now: routing trust credits to Form 3800 is a change to the pass-through layer for every trust credit, not to this form.
+- Not now: routing trust credits to Form 3800 is a change to the pass-through layer for every trust credit, not to this form (Pattern change, item 3).
 - Blind fill (2026-11-27): the preparer entered the trust's $300 on line 3 and line 4. That is what the text asks; the engine keeps the gap so that Form 6478 line 4 never shows a credit that Form 3800 line 4c drops. The fix is the pass-through change above.
 
 ### 4. A stated Form 3800 line 4c credit with no pass-through entity
@@ -48,11 +55,13 @@ The engine fills Form 6478 (Rev. January 2020) for an individual's 2025 return. 
 
 - Source: line 3 lists "Form 1099-PATR ... box 12, or other notice of credit allocation" (`line-3::b01`).
 - Default: the engine reads no Form 1099-PATR. A cooperative's allocation is a stated Form 3800 line 4c credit with the cooperative's EIN.
+- Not now: a Form 1099-PATR fact is a new input document for every cooperative item, and the stated credit already reaches both forms.
 
 ### 6. The Schedule F instruction names "line 3 of Form 6478"
 
 - Source: Schedule F line 8 other income includes "Any amount included in income from line 3 of Form 6478, Biofuel Producer Credit" (`irs-1040sf-inst-2025::sec::line-8::b01`). The Form 6478 instructions include only line 1 column (c) in income (`line-2::b01`); line 3 is the pass-through credit, which the entity has already counted.
 - Default: nothing is added. The reference is to an older revision's line, and line 2 is blank on a 2025 return, so no dollars change.
+- Not now: no dollars change on a 2025 return.
 
 ### 7. Carryforwards of the credit
 
@@ -63,18 +72,26 @@ The engine fills Form 6478 (Rev. January 2020) for an individual's 2025 return. 
 
 - Source: "You may claim or elect not to claim the biofuel producer credit at any time within 3 years" (`general-instructions::b01`); section 40(f).
 - Default: a decision not to file Form 6478 is not the election. Form 3800 still takes a K-1 credit, and no deduction or income changes, because an individual's 2025 return has no line 2 amount. The engine has no fact for the election; a credit the K-1 prints is claimed.
-
-### 9. Line 3 rounding with several K-1 amounts in cents
-
-- Source: line 3 says "Enter the total biofuel producer credits from" the K-1s (`line-3::b01`). The Form 1040 rule: "include cents when adding the amounts and round off only the total" (`irs-1040-inst-2025::sec::rounding-off-to-whole::b01`). Form 3800 Part V lists each pass-through amount "by the EIN of the pass-through entity" (`irs-3800-inst-2025::sec::part-v-3::b01`).
-- Default: each K-1 rounds, then they add (`docs/rule-decisions.md` row A96, the same rule as Forms 8846 and 8586). Line 4 then equals Form 3800 line 4c.
-- Blind fill (2026-11-27): the preparer rounded only the total. $600.40 + $1,200.40 gives $1,801 there and $1,800 in the engine; $600.50 + $1,200.50 gives $1,801 there and $1,802 in the engine. At most $1 for each K-1 with cents.
+- Not now: the election only drops the credit, which a person does by leaving the K-1 code I amount out; no other line changes.
 
 ### 10. When a cooperative's notice of credit allocation counts
 
 - Source: line 3 lists "Form 1099-PATR ... box 12, or other notice of credit allocation" (`line-3::b01`) and says nothing about the patron's year. "You claim the credit for the tax year in which the sale or use occurs" (`general-instructions::b01`).
 - Default: a stated Form 3800 line 4c credit with the cooperative's EIN counts on the 2025 return, as stated. The engine does not see the cooperative's tax year; a notice for a cooperative year that ended in 2024 belongs on the 2024 return, and the person who states the credit decides that.
 - Blind fill (2026-11-27): the same choice ($505.50 counted).
+- Not now: no text conflicts, and the stated credit already carries the person's choice.
+
+## Pattern change (proposals for a discussion)
+
+### 2. A tax year on the K-1 fact
+
+- Before: the K-1 fact holds the boxes and no tax year, so the engine cannot tell a fiscal-year K-1 (whose code I credit is allowed) from a calendar-2025 K-1 (whose code I credit is the entity's error).
+- After: the K-1 fact holds the entity's tax year beginning and ending, as the K-1 header prints them; Form 6478 line 3 then makes a code I amount from a tax year that begins after 2024 a named gap, and other forms that depend on the entity's year can read it.
+
+### 3. Trust and estate credits to Form 3800
+
+- Before: a Schedule K-1 (Form 1041) box 13 credit is a `credit` item with no route, so Form 3800 does not take it and Schedule E line 41 is unsupported; Form 6478 line 3 is a gap for code H.
+- After: the pass-through routing sends each box 13 credit code to its Form 3800 Part III line, as `3800/k1Credits.ts` does for partnership and S corporation codes; Form 6478 line 3 then adds the trust's code H amount.
 
 ## Second opinions
 
