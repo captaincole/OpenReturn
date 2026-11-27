@@ -578,6 +578,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "KNOWN GAP: decides whether FTB 5805 files. Needed only when the CA balance due is " +
       "$500 or more, which the resolver cannot see before evaluation.",
   ],
+  [
+    /^decisions\.scope\.must_file_6478$/,
+    "a choice: a pass-through biofuel producer credit goes on Form 6478 line 3 or straight to " +
+      "Form 3800 line 4c (K-1 instructions, box 15 code I); without the decision Form 3800 " +
+      "takes the same credit and no other value changes",
+  ],
 ];
 
 const isDocument = (key: string) =>
