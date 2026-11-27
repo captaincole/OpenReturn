@@ -1,20 +1,22 @@
 import { z } from "zod";
 import { lawInstalled } from "../../db/libsql";
-import { statutesOf, type Jurisdiction } from "../../jurisdiction";
+import { resolveJurisdictions, statutesOf, type Jurisdiction } from "../../jurisdiction";
 import type { LawSource } from "../../law/citation";
 import { lawSourceOfId } from "../../law/lawIds";
 import { searchLaw, type LawHit } from "../../law/lawSearch";
 import { mergeByRank } from "./ask/mergeHits";
 
 /*
- * The statute (law.db) is read only on purpose: a judge asks for it after it
+ * The statute (the law files) is read only on purpose: a judge asks for it after it
  * has read the instruction passages, and a run searches it at most once. The
  * search runs here, in code: no judge gets a tool. When two texts disagree,
  * the judge reports both quotes and nothing here picks a winner.
  *
  * The statute is that of each jurisdiction on: the Internal Revenue Code for
  * federal, California's Revenue and Taxation Code for CA. Never the
- * regulations: the judges' prompts are written for a statute.
+ * regulations: the judges' prompts are written for a statute. Each
+ * jurisdiction's law is its own file: a jurisdiction whose file is missing is
+ * not searched, and the log names it in missing.
  */
 
 const MAX_STATUTE_QUERIES = 3;
@@ -56,7 +58,7 @@ export type StatuteSkip = "no_queries" | "not_installed" | "failed";
 
 export const STATUTE_SKIP_WHY: Record<StatuteSkip | "already_consulted", string> = {
   no_queries: "The judge gave no statute queries.",
-  not_installed: "The law library (law.db) is not installed.",
+  not_installed: "The law of the jurisdictions on is not installed.",
   failed: "The statute search failed.",
   already_consulted: "The statute was already consulted in this run.",
 };
@@ -68,8 +70,16 @@ export type StatuteSearch =
       sources: LawSource[];
       blocks: StatuteBlock[];
       log: unknown[];
+      /** Jurisdictions on whose law file is not installed: not searched. */
+      missing: Jurisdiction[];
     }
-  | { status: "skipped"; queries: string[]; skipped: StatuteSkip; error?: string };
+  | {
+      status: "skipped";
+      queries: string[];
+      skipped: StatuteSkip;
+      error?: string;
+      missing?: Jurisdiction[];
+    };
 
 export interface StatuteSearchOptions {
   hitsPerQuery: number;
@@ -130,15 +140,27 @@ const toBlock = (hit: LawHit): StatuteBlock => ({
   text: hit.text,
 });
 
-/* lawInstalled() checks the file first: a search of a missing law.db would create it. */
+/* The jurisdictions on, split by whether their law file is installed. */
+async function lawFilesOf(
+  jurisdictions: readonly Jurisdiction[],
+): Promise<{ on: Jurisdiction[]; missing: Jurisdiction[] }> {
+  const on: Jurisdiction[] = [];
+  const missing: Jurisdiction[] = [];
+  for (const jurisdiction of resolveJurisdictions(jurisdictions))
+    ((await lawInstalled(jurisdiction)) ? on : missing).push(jurisdiction);
+  return { on, missing };
+}
+
+/* lawInstalled() checks the file first: a search of a missing law file would create it. */
 export async function searchStatute(
   raw: string[],
   options: StatuteSearchOptions,
 ): Promise<StatuteSearch> {
   const queries = statuteQueriesOf(raw);
   if (queries.length === 0) return { status: "skipped", queries, skipped: "no_queries" };
-  if (!(await lawInstalled())) return { status: "skipped", queries, skipped: "not_installed" };
-  const sources = statutesOf(options.jurisdictions);
+  const { on, missing } = await lawFilesOf(options.jurisdictions);
+  if (on.length === 0) return { status: "skipped", queries, skipped: "not_installed", missing };
+  const sources = statutesOf(on);
   try {
     const searches: { query: string; source: LawSource; hits: LawHit[] }[] = [];
     for (const query of queries)
@@ -157,21 +179,28 @@ export async function searchStatute(
     const max = options.max ?? queries.length * options.hitsPerQuery;
     const lists = searches.map((search) => search.hits);
     const blocks = mergeByRank(lists, max).map(toBlock);
-    return { status: "searched", queries, sources, blocks, log };
+    return { status: "searched", queries, sources, blocks, log, missing };
   } catch (err) {
     const error = err instanceof Error ? err.message : String(err);
-    return { status: "skipped", queries, skipped: "failed", error };
+    return { status: "skipped", queries, skipped: "failed", error, missing };
   }
 }
 
 /* The query log of one search: what ran, what came back, or why it did not run. */
 export function statuteSearchLog(search: StatuteSearch): Record<string, unknown> {
+  const missing = search.missing?.length ? { missing: search.missing } : {};
   if (search.status === "searched")
-    return { sources: search.sources, queries: search.log, statuteBlocks: search.blocks };
+    return {
+      sources: search.sources,
+      queries: search.log,
+      statuteBlocks: search.blocks,
+      ...missing,
+    };
   return {
     queries: search.queries,
     skipped: search.skipped,
     why: STATUTE_SKIP_WHY[search.skipped],
     ...(search.error ? { error: search.error } : {}),
+    ...missing,
   };
 }

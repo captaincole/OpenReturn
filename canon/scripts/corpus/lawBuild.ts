@@ -1,13 +1,17 @@
-import { existsSync } from "node:fs";
 import { parseArgs } from "node:util";
 import { listBlocksWithoutEmbeddings } from "../../src/db/corpusStore";
+import { lawLibrary } from "../../src/db/libsql";
+import { ALL_JURISDICTIONS, jurisdictionSchema } from "../../src/jurisdiction";
 import { embedLawBlocks, ingestLaw } from "../../src/law/ingestLaw";
 import { requireLaw } from "../../src/law/lawRead";
 import { walkLaw, type LawEntry } from "../../src/law/lawSidecar";
 import type { Command } from "../lib/cli";
-import { fetchLibrary, manifestPath, type FetchSpec } from "./fetch";
+import { lawFetchCli } from "./lawFetch";
 
-/* The law commands that write law.db: sync, fetch, reembed. */
+/*
+ * The law commands that write the law files: sync, fetch, reembed. Each
+ * document goes to the file of its jurisdiction (law/federal.db, law/ca.db).
+ */
 
 async function sync(argv: string[]): Promise<void> {
   const { values } = parseArgs({
@@ -51,40 +55,31 @@ function selected(entries: LawEntry[], docIds: string[]): LawEntry[] {
   return entries.filter((entry) => docIds.includes(entry.sidecar.docId));
 }
 
-const LAW_FETCH: FetchSpec = {
-  library: "law",
-  tag: "[law fetch]",
-  seedEnv: "LAW_SEED_PATH",
-  reembed: "npm run corpus -- law reembed --all",
-  unavailable: (target) =>
-    `[law fetch] ${target} is missing and the law release has no url yet: build it with \`npm run corpus -- law sync\`.`,
-};
-
-async function fetch(argv: string[]): Promise<void> {
-  if (!existsSync(manifestPath("law"))) {
-    console.error(
-      "The prebuilt law.db is not published yet: build it with `npm run corpus -- law sync`.",
-    );
-    process.exit(1);
-  }
-  await fetchLibrary(LAW_FETCH, argv.includes("--force"));
-}
-
-// Chunked like the sync, so a stop keeps the vectors made so far.
+// Chunked like the sync, so a stop keeps the vectors made so far. Each installed file on its own.
 async function reembed(argv: string[]): Promise<void> {
-  await requireLaw();
-  const rows = await listBlocksWithoutEmbeddings({ all: argv.includes("--all"), library: "law" });
-  if (rows.length === 0) {
-    console.log("[law reembed] no NULL-embedding blocks; nothing to do");
-    return;
+  const { values } = parseArgs({
+    args: argv,
+    options: { all: { type: "boolean", default: false }, jurisdiction: { type: "string" } },
+  });
+  const named = values.jurisdiction ? [jurisdictionSchema.parse(values.jurisdiction)] : undefined;
+  let failed = false;
+  for (const jurisdiction of await requireLaw(named ?? ALL_JURISDICTIONS)) {
+    const library = lawLibrary(jurisdiction);
+    const rows = await listBlocksWithoutEmbeddings({ all: values.all, library });
+    if (rows.length === 0) {
+      console.log(`[law reembed] ${jurisdiction}: no NULL-embedding blocks; nothing to do`);
+      continue;
+    }
+    console.log(`[law reembed] ${jurisdiction}: ${rows.length} block(s)`);
+    if ((await embedLawBlocks(library, rows)) < rows.length) failed = true;
   }
-  console.log(`[law reembed] ${rows.length} block(s)`);
-  if ((await embedLawBlocks(rows)) < rows.length) process.exit(1);
+  if (failed) process.exit(1);
 }
 
 export const lawSyncCommand: Command = {
   name: "sync",
-  summary: "Build law.db from each pinned law.meta.json (sha-checked; skipped when unchanged)",
+  summary:
+    "Build each jurisdiction's law file from its pinned law.meta.json (sha-checked; skipped when unchanged)",
   options: [
     { flag: "--force", desc: "rebuild even if the sha matches (after a parser change)" },
     { flag: "--doc <docId>", desc: "only this document, e.g. cfr-26-2025 (repeatable)" },
@@ -94,14 +89,20 @@ export const lawSyncCommand: Command = {
 
 export const lawFetchCommand: Command = {
   name: "fetch",
-  summary: "Install the prebuilt law.db from seed/law.manifest.json",
-  options: [{ flag: "--force", desc: "replace an existing law.db even if its sha differs" }],
-  run: fetch,
+  summary: "Install the prebuilt law files (one per jurisdiction) from seed/law.manifest.json",
+  options: [
+    { flag: "--jurisdiction federal|CA", desc: "install the file of this jurisdiction only" },
+    { flag: "--force", desc: "replace an existing law file even if its sha differs" },
+  ],
+  run: lawFetchCli,
 };
 
 export const lawReembedCommand: Command = {
   name: "reembed",
   summary: "Embed the law blocks that have no vector (or --all after a model change)",
-  options: [{ flag: "--all", desc: "re-embed every block" }],
+  options: [
+    { flag: "--all", desc: "re-embed every block" },
+    { flag: "--jurisdiction federal|CA", desc: "the file of this jurisdiction only" },
+  ],
   run: reembed,
 };
