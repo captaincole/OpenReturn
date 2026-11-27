@@ -28,6 +28,7 @@ import {
 } from "../../../resolverInputs.js";
 import { asFullYearResident } from "../540nr/californiaForms.js";
 import { files540NR } from "../540nr/mustFile.js";
+import { resolveScheduleD540NRInfo } from "../schedule-d-540nr/resolveInfo.js";
 import type { ScheduleCa540NRFilingInfo } from "./filingInfo.js";
 
 const files = (info: BaseFilingInfo, formId: string) => info.mustFile?.[formId]?.value === true;
@@ -61,7 +62,8 @@ function linesAsked(inputs: ResolverInputs): CaStatedAmountLine[] {
     [
       "7a",
       files(resolveScheduleDInfo(inputs), "schedule-d") ||
-        sumInvestmentBox(inputs, "box2a", isDividendFactKey) > 0,
+        sumInvestmentBox(inputs, "box2a", isDividendFactKey) > 0 ||
+        files(resolveScheduleD540NRInfo(inputs), "schedule-d-540nr"),
     ],
     ["b3", files(resolveScheduleCInfo(inputs), "schedule-c")],
     ["b4", files(resolve4797Info(inputs), "form-4797")],

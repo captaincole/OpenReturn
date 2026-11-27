@@ -42,6 +42,15 @@ const EXEMPTION = {
 } as const satisfies Record<FilingStatus, ExemptionRow>;
 const EXEMPTION_PHASE_OUT_RATE = 0.25;
 
+/* Line 22 for an AMTI: the Exemption Worksheet (see line 22 below). */
+function exemptionAt(amti: number, status: FilingStatus): number {
+  const { amount, phaseOutStart, zeroAt } = EXEMPTION[status];
+  if (amti >= zeroAt) return 0;
+  if (amti <= phaseOutStart) return amount;
+  const reduction = roundDollars((amti - phaseOutStart) * EXEMPTION_PHASE_OUT_RATE);
+  return atLeast(0, amount - reduction);
+}
+
 /*
  * Part I line 21, the married/RDP filing separately worksheet
  * (ca-540-sched-p-inst-2025::sec::line-21-alternative-minimum-taxable-income-amti::b01):
@@ -50,6 +59,31 @@ const EXEMPTION_PHASE_OUT_RATE = 0.25;
 const MFS_LINE_21_THRESHOLD = 479188;
 const MFS_LINE_21_RATE = 0.25;
 const MFS_LINE_21_CAP = 61830;
+
+/*
+ * MANUAL EDIT: line 16 adds back the regular NOL deductions, and line 20 takes
+ * away the NOL "refigure[d] ... for AMT purposes" on another FTB 3805V, FTB
+ * 3805Z, FTB 3807 or FTB 3809 "using your AMT income and expense amounts"
+ * (ca-540-sched-p-inst-2025::sec::line-20-amt-net-operating-loss-nol-deduction::b01,
+ * ::step-1-amt-nol-for-prior-year::b01). Line 20 has no facts, so with an
+ * amount on line 16 the AMTI is a gap; read as 0, line 20 would leave the
+ * whole NOL in AMTI and print an AMT that may not exist.
+ */
+const AMT_NOL_NOT_FIGURED = unsupported(
+  "Line 16 adds back an NOL deduction, and line 20 takes away the AMT NOL refigured with AMT income and expense amounts (ca-540-sched-p-inst-2025::sec::step-1-amt-nol-for-prior-year::b01); the engine has no AMT NOL carryover facts, so it does not figure AMTI.",
+);
+
+/*
+ * Line 24 while line 21 is that gap: 0 when line 19 is at most its own line
+ * 22 exemption, else blank. Line 20 only lowers AMTI, and a lower AMTI never
+ * has a smaller exemption, so line 23 is 0 whatever line 20 holds.
+ */
+function tentativeMinimumTaxWithAnyLine20(form: Form, info: SchedulePFilingInfo): 0 | undefined {
+  if (sum(form["0.line.16_nol_deductions"]) <= 0 || !info.filingStatus) return undefined;
+  const line19 = numberOrBlank(form["1.line.19_combine_lines_14_through_18"]);
+  if (line19 === undefined) return undefined;
+  return line19 <= exemptionAt(line19, info.filingStatus) ? 0 : undefined;
+}
 
 /* Part I line 2: "2½% (.025) of federal Form 1040 or 1040-SR, line 11b" (the form). */
 const MEDICAL_AMT_FLOOR_RATE = 0.025;
@@ -85,7 +119,7 @@ const positiveOrBlank = (value: number | undefined): number | undefined =>
  * the CA standard deduction and the CA itemized deductions, so the return
  * itemizes for California when line 18 is above the standard deduction.
  */
-function itemizesForCalifornia(form: Form, info: SchedulePFilingInfo): boolean | undefined {
+export function itemizesForCalifornia(form: Form, info: SchedulePFilingInfo): boolean | undefined {
   const line18 = numberOrBlank(form["form-540.line.18_deductions"]);
   if (line18 === undefined || !info.filingStatus) return undefined;
   const standard = lookupStandardDeduction("state-ca", 2025, info.filingStatus);
@@ -288,6 +322,7 @@ const partI: Bindings = {
   "1.line.21_alternative_minimum_taxable_income": (form, info) => {
     const line19 = numberOrBlank(form["1.line.19_combine_lines_14_through_18"]);
     if (line19 === undefined) return undefined;
+    if (sum(form["0.line.16_nol_deductions"]) > 0) return AMT_NOL_NOT_FIGURED;
     const amti = line19 - sum(form["1.line.20_amt_nol_deduction"]);
     const separate = info.filingStatus === "married_filing_separately";
     if (!separate || amti <= MFS_LINE_21_THRESHOLD) return amti;
@@ -307,11 +342,7 @@ const partII: Bindings = {
   "1.line.22_exemption_amount": (form, info) => {
     const amti = numberOrBlank(form["1.line.21_alternative_minimum_taxable_income"]);
     if (amti === undefined || !info.filingStatus) return undefined;
-    const { amount, phaseOutStart, zeroAt } = EXEMPTION[info.filingStatus];
-    if (amti >= zeroAt) return 0;
-    if (amti <= phaseOutStart) return amount;
-    const reduction = roundDollars((amti - phaseOutStart) * EXEMPTION_PHASE_OUT_RATE);
-    return atLeast(0, amount - reduction);
+    return exemptionAt(amti, info.filingStatus);
   },
   // "Subtract line 22 from line 21. If zero or less, enter -0-" (the form; ca-540-sched-p-inst-2025::sec::line-23::b01).
   "1.line.23_amti_less_exemption": (form) => {
@@ -321,9 +352,9 @@ const partII: Bindings = {
     return atLeast(0, amti - exemption);
   },
   // "Multiply line 23 by 7.0% (.07)" (the form); -0- with line 23 (ca-540-sched-p-inst-2025::sec::line-23::b01).
-  "1.line.24_tentative_minimum_tax": (form) => {
+  "1.line.24_tentative_minimum_tax": (form, info) => {
     const base = numberOrBlank(form["1.line.23_amti_less_exemption"]);
-    if (base === undefined) return undefined;
+    if (base === undefined) return tentativeMinimumTaxWithAnyLine20(form, info);
     return base > 0 ? roundDollars(base * TENTATIVE_MINIMUM_TAX_RATE) : 0;
   },
   // "Regular tax before credits from Form 540, line 31" (the form).
@@ -393,64 +424,71 @@ const partIII: Bindings = {
   },
 };
 
+/* The Part I and Part II lines the engine does not figure, with the reason (Schedule P (540NR) reads them too). */
+export const PART_I_UNSUPPORTED: Partial<Record<keyof ScheduleP, string>> = {
+  "0.line.4_home_mortgage_interest":
+    "Home mortgage interest on proceeds not used to buy, build or improve the home (ca-540-sched-p-inst-2025::sec::line-4-certain-interest-on-a-home-mortgage::b01) — no fact on the use of home-equity loan proceeds.",
+  "0.line.6_property_tax_refund":
+    "Refund of personal or real property taxes deducted in a year after 1986 (ca-540-sched-p-inst-2025::sec::line-6-refund-of-personal-property-taxes-and-real-property-taxes::b01) — no property tax refund fact.",
+  "0.line.8_post_1986_depreciation":
+    "Regular less AMT (ADS) depreciation on Schedule C, E or F property (ca-540-sched-p-inst-2025::sec::property-placed-in-service-after-1998::b02) — no depreciation facts.",
+  "0.line.9_adjusted_gain_loss":
+    "Gain or loss refigured for property with a different AMT basis (ca-540-sched-p-inst-2025::sec::line-9-adjusted-gain-or-loss::b01) — no AMT basis facts.",
+  "0.line.11_passive_activities_adjustment":
+    "AMT passive activity income or loss less the regular amount, from a second FTB 3801 (ca-540-sched-p-inst-2025::sec::line-11-passive-activities-adjustment::b01) — no passive activity facts.",
+  "0.line.12_estate_trust_beneficiaries":
+    "Estate or trust beneficiary's AMT adjustment (the form; no line section) — no Schedule K-1 (541) facts.",
+  "0.line.13a_circulation_expenditures":
+    "Circulation expenditures amortized over three years for AMT (ca-540-sched-p-inst-2025::sec::line-13a-circulation-expenditures::b01) — no circulation expenditure facts.",
+  "0.line.13b_depletion":
+    "Depletion over the property's adjusted basis (ca-540-sched-p-inst-2025::sec::line-13b-depletion::b01) — no depletion facts.",
+  "0.line.13c_installment_sales":
+    "Installment-method income refigured for AMT, and QSBS installment payments (ca-540-sched-p-inst-2025::sec::line-13c-installment-sales::b01) — no installment sale facts.",
+  "0.line.13d_intangible_drilling_costs":
+    "Excess intangible drilling costs from geothermal wells (ca-540-sched-p-inst-2025::sec::line-13d-intangible-drilling-costs-idcs::b01) — no drilling cost facts.",
+  "0.line.13e_long_term_contracts":
+    "Long-term contract income under the percentage-of-completion method (ca-540-sched-p-inst-2025::sec::line-13e-long-term-contracts::b02) — no long-term contract facts.",
+  "0.line.13f_loss_limitations":
+    "At-risk and basis-limited losses refigured for AMT (ca-540-sched-p-inst-2025::sec::line-13f-loss-limitations::b01) — no loss limitation facts.",
+  "0.line.13g_mining_costs":
+    "Mining exploration and development costs amortized over 10 years for AMT (ca-540-sched-p-inst-2025::sec::line-13g-mining-costs::b01) — no mining cost facts.",
+  "0.line.13h_patrons_adjustment":
+    "AMT patronage dividend adjustment reported by a cooperative (ca-540-sched-p-inst-2025::sec::line-13h-patron-s-adjustment::b01) — no cooperative distribution facts.",
+  "0.line.13i_pollution_control_facilities":
+    "Pollution control facility amortization refigured for AMT (ca-540-sched-p-inst-2025::sec::line-13i-pollution-control-facilities::b01) — no pollution control facility facts.",
+  "0.line.13j_research_experimental":
+    "Research and experimental costs amortized over 10 years for AMT (ca-540-sched-p-inst-2025::sec::line-13j-research-and-experimental-costs::b01) — no research cost facts.",
+  "0.line.13k_tax_shelter_farm_activities":
+    "Nonpassive tax shelter farm activity gain or loss refigured for AMT (ca-540-sched-p-inst-2025::sec::line-13k-tax-shelter-farm-activities::b02) — no farm activity facts.",
+  "0.line.13l_related_adjustments":
+    "Income-limited items (IRC 179, SE health insurance, Keogh, …) refigured with AMT income (ca-540-sched-p-inst-2025::sec::line-13l-related-adjustments::b01) — no entry on lines 7 to 13k is modeled.",
+  "0.line.17_amti_exclusion":
+    "Trade or business income excluded by a qualified taxpayer with aggregate gross receipts under $1,000,000 (ca-540-sched-p-inst-2025::sec::g-alternative-minimum-taxable-income-amti-exclusion::b01) — no gross receipts fact.",
+  "1.line.20_amt_nol_deduction":
+    "AMT NOL deduction refigured on a second FTB 3805V, at most 90% of line 19 (ca-540-sched-p-inst-2025::sec::step-3-amt-nol-deduction-for-the-current-year::b01) — no AMT NOL carryover facts (the regular carryovers on FTB 3805V are not the AMT ones).",
+};
+
+/* Every line's method; Schedule P (540NR) runs them too (schedule-p-540nr/fromScheduleP.ts). */
+export const SCHEDULE_P_BINDINGS: Bindings = {
+  ...partI,
+  ...partII,
+  ...partIII,
+  // The row reads FTB 3507's slots, which the runtime filing info holds.
+  ...(prisonLaborCreditRow as Bindings),
+  ...childCareCreditRow,
+  ...priorYearAmtCreditRow,
+  ...otherStateCreditRow,
+  ...pteCreditRowBindings,
+  // The rows read FTB 3801-CR's slots, which the runtime filing info holds.
+  ...(sectionB2PassiveCreditRows as Bindings),
+  ...(sectionA2FilmCreditRows as Bindings),
+};
+
+export const SCHEDULE_P_UNSUPPORTED = { ...PART_I_UNSUPPORTED, ...partIIICreditRows };
+
 export function register(): void {
   defineForm<ScheduleP, SchedulePFilingInfo>("schedule-p", {
-    bindings: {
-      ...partI,
-      ...partII,
-      ...partIII,
-      // The row reads FTB 3507's slots, which the runtime filing info holds.
-      ...(prisonLaborCreditRow as Bindings),
-      ...childCareCreditRow,
-      ...priorYearAmtCreditRow,
-      ...otherStateCreditRow,
-      ...pteCreditRowBindings,
-      // The rows read FTB 3801-CR's slots, which the runtime filing info holds.
-      ...(sectionB2PassiveCreditRows as Bindings),
-      ...(sectionA2FilmCreditRows as Bindings),
-    },
-    unsupported: {
-      "0.line.4_home_mortgage_interest":
-        "Home mortgage interest on proceeds not used to buy, build or improve the home (ca-540-sched-p-inst-2025::sec::line-4-certain-interest-on-a-home-mortgage::b01) — no fact on the use of home-equity loan proceeds.",
-      "0.line.6_property_tax_refund":
-        "Refund of personal or real property taxes deducted in a year after 1986 (ca-540-sched-p-inst-2025::sec::line-6-refund-of-personal-property-taxes-and-real-property-taxes::b01) — no property tax refund fact.",
-      "0.line.8_post_1986_depreciation":
-        "Regular less AMT (ADS) depreciation on Schedule C, E or F property (ca-540-sched-p-inst-2025::sec::property-placed-in-service-after-1998::b02) — no depreciation facts.",
-      "0.line.9_adjusted_gain_loss":
-        "Gain or loss refigured for property with a different AMT basis (ca-540-sched-p-inst-2025::sec::line-9-adjusted-gain-or-loss::b01) — no AMT basis facts.",
-      "0.line.11_passive_activities_adjustment":
-        "AMT passive activity income or loss less the regular amount, from a second FTB 3801 (ca-540-sched-p-inst-2025::sec::line-11-passive-activities-adjustment::b01) — no passive activity facts.",
-      "0.line.12_estate_trust_beneficiaries":
-        "Estate or trust beneficiary's AMT adjustment (the form; no line section) — no Schedule K-1 (541) facts.",
-      "0.line.13a_circulation_expenditures":
-        "Circulation expenditures amortized over three years for AMT (ca-540-sched-p-inst-2025::sec::line-13a-circulation-expenditures::b01) — no circulation expenditure facts.",
-      "0.line.13b_depletion":
-        "Depletion over the property's adjusted basis (ca-540-sched-p-inst-2025::sec::line-13b-depletion::b01) — no depletion facts.",
-      "0.line.13c_installment_sales":
-        "Installment-method income refigured for AMT, and QSBS installment payments (ca-540-sched-p-inst-2025::sec::line-13c-installment-sales::b01) — no installment sale facts.",
-      "0.line.13d_intangible_drilling_costs":
-        "Excess intangible drilling costs from geothermal wells (ca-540-sched-p-inst-2025::sec::line-13d-intangible-drilling-costs-idcs::b01) — no drilling cost facts.",
-      "0.line.13e_long_term_contracts":
-        "Long-term contract income under the percentage-of-completion method (ca-540-sched-p-inst-2025::sec::line-13e-long-term-contracts::b02) — no long-term contract facts.",
-      "0.line.13f_loss_limitations":
-        "At-risk and basis-limited losses refigured for AMT (ca-540-sched-p-inst-2025::sec::line-13f-loss-limitations::b01) — no loss limitation facts.",
-      "0.line.13g_mining_costs":
-        "Mining exploration and development costs amortized over 10 years for AMT (ca-540-sched-p-inst-2025::sec::line-13g-mining-costs::b01) — no mining cost facts.",
-      "0.line.13h_patrons_adjustment":
-        "AMT patronage dividend adjustment reported by a cooperative (ca-540-sched-p-inst-2025::sec::line-13h-patron-s-adjustment::b01) — no cooperative distribution facts.",
-      "0.line.13i_pollution_control_facilities":
-        "Pollution control facility amortization refigured for AMT (ca-540-sched-p-inst-2025::sec::line-13i-pollution-control-facilities::b01) — no pollution control facility facts.",
-      "0.line.13j_research_experimental":
-        "Research and experimental costs amortized over 10 years for AMT (ca-540-sched-p-inst-2025::sec::line-13j-research-and-experimental-costs::b01) — no research cost facts.",
-      "0.line.13k_tax_shelter_farm_activities":
-        "Nonpassive tax shelter farm activity gain or loss refigured for AMT (ca-540-sched-p-inst-2025::sec::line-13k-tax-shelter-farm-activities::b02) — no farm activity facts.",
-      "0.line.13l_related_adjustments":
-        "Income-limited items (IRC 179, SE health insurance, Keogh, …) refigured with AMT income (ca-540-sched-p-inst-2025::sec::line-13l-related-adjustments::b01) — no entry on lines 7 to 13k is modeled.",
-      "0.line.17_amti_exclusion":
-        "Trade or business income excluded by a qualified taxpayer with aggregate gross receipts under $1,000,000 (ca-540-sched-p-inst-2025::sec::g-alternative-minimum-taxable-income-amti-exclusion::b01) — no gross receipts fact.",
-      "1.line.20_amt_nol_deduction":
-        "AMT NOL deduction refigured on a second FTB 3805V, at most 90% of line 19 (ca-540-sched-p-inst-2025::sec::step-3-amt-nol-deduction-for-the-current-year::b01) — no AMT NOL carryover facts (the regular carryovers on FTB 3805V are not the AMT ones).",
-      ...partIIICreditRows,
-    },
+    bindings: SCHEDULE_P_BINDINGS,
+    unsupported: SCHEDULE_P_UNSUPPORTED,
   });
 }

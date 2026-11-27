@@ -83,6 +83,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "(line A, the CCC loan election, line 34's at-risk box, material participation) is missing",
   ],
   [
+    /^work_opportunity_employee\.[^.]+$/,
+    "each fact is a whole targeted group employee the taxpayer claims the work opportunity " +
+      "credit for (Form 5884); whether one exists is Cade's question, as for a business fact. " +
+      "Form 5884 lists the fact again while it is malformed",
+  ],
+  [
     /^casualty\.[^.]+$/,
     "each fact is a whole casualty event (Form 4684); whether one happened is Cade's question",
   ],
@@ -96,6 +102,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^general_business_credit\.(current|carryover)\.[^.]+$/,
     "each fact is one whole credit or carryover from last year's return (Form 3800 Parts III " +
       "and IV); whether one exists is Cade's question",
+  ],
+  [
+    /^investment_credit\.(property|cooperative)\.[^.]+$/,
+    "each fact is one whole Form 3468 property, or one cooperative's unused credits; whether " +
+      "one exists is Cade's question, and Form 3468 lists a property fact whose answers are missing",
   ],
   [
     /^tax_credit_bond\.[^.]+$/,
@@ -123,6 +134,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole person's Form 4563 (Parts I and II); whether the person is a bona " +
       "fide resident of American Samoa with income to exclude is Cade's question. Form 4563 " +
       "lists the fact again while an answer inside it (Part I) is missing",
+  ],
+  [
+    /^treaty_position\.[^.]+$/,
+    "each fact is one whole treaty-based return position (one Form 8833); whether the taxpayer " +
+      "takes one is Cade's question. Form 8833 lists the fact again while an answer inside it " +
+      "(the boxes, lines 1a to 2, 5 and 6) is missing",
   ],
   [
     /^retirement\.qualified_disaster\.[^.]+$/,
@@ -153,8 +170,19 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "Form 982 lists a debt fact again while an answer inside it is missing",
   ],
   [
+    /^empowerment_zone_employee\.[^.]+$/,
+    "each fact is one whole employee of the taxpayer's business or farm who worked in an " +
+      "empowerment zone (Form 8844 line 1); whether one exists is Cade's question",
+  ],
+  [
     /^armed_forces_move\.[^.]+$/,
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
+  ],
+  [
+    /^tip_credit\.[^.]+$/,
+    "each fact is one whole business's payroll tip records (Form 8846 lines 1 to 4); whether a " +
+      "business had tipped employees is Cade's question. Form 8846 lists the fact again while " +
+      "its Medicare-only tips are missing",
   ],
   [
     /^section_965\.(inclusion|other_liability|s_corporation|deferred)\.[^.]+$/,
@@ -171,6 +199,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^look_back\.long_term_contracts$/,
     "the fact is the whole look-back computation (Form 8697); whether a long-term contract was " +
       "completed or adjusted in 2025 is Cade's question",
+  ],
+  [
+    /^farm_income_averaging$/,
+    "the Schedule J election itself (lines 2a to 2c): whether the taxpayer elects to average " +
+      "farming or fishing income is Cade's question. Schedule J lists the fact again when the " +
+      "decision files it without one",
   ],
   [
     /^trust_accumulation_distribution\.[^.]+$/,
@@ -316,6 +350,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "whether a recapture happened is Cade's question. Form 4255 lists a line's fact while a " +
       "property or facility on that line waits for it",
   ],
+  [
+    /^form8332\.revocation\.[^.]+$/,
+    "each fact is one whole Form 8332 Part III revocation the taxpayer gave the other parent; " +
+      "whether one was given is Cade's question. Form 8332 lists the fact again while an answer " +
+      "inside it is missing",
+  ],
   [/^identity\.email$/, "Cade records the login email at doc-gen time"],
   [/^identity\.(spouse\.)?name\.middle_initial$/, "printed when stated; not every name has one"],
   [
@@ -441,6 +481,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "credit from 2024; either above 0 files FTB 3510, which then asks for the other",
   ],
   [
+    /^prior_year\.ca_tta_(hiring_credit_carryover|sales_use_tax_credit_carryover|nol_carryovers)$/,
+    "an answer Cade records only when the user carries a Targeted Tax Area credit or NOL from " +
+      "the 2024 FTB 3809 (the TTA ended in 2012); any one above 0 files FTB 3809, which then " +
+      "asks for the others",
+  ],
+  [
     /^prior_year\.dc_homebuyer_credit_carryforward$/,
     "an answer Cade records only when the user carries a District of Columbia first-time " +
       "homebuyer credit from 2024 (the credit ended for homes bought after 2011); above 0 it " +
@@ -496,7 +542,8 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^farmer_or_fisherman\.gross_income_(2024|2025)$/,
     "the two-thirds gross income test of a farmer or fisherman (FTB 5805F, who files); one " +
       "passing year is enough, so the other year is not asked; with farm income and no passing " +
-      "year, FTB 5805 lists each year not stated (5805f/mustFile.ts farmerTestWaitingKeys)",
+      "year, FTB 5805 lists each year not stated (5805f/mustFile.ts farmerTestWaitingKeys), and " +
+      "so does Form 2210 for Form 2210-F (2210-f/farmerTest.ts)",
   ],
   [
     /^prior_year\.(ca_lump_sum_tax|ca_no_twelve_month_return)$/,
@@ -507,6 +554,18 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^ca_farmer_estimated_tax\.(underpayment_paid_on|waiver)$/,
     "FTB 5805F answers Cade records only when the underpayment was paid before April 15, 2026 " +
       "(line 13; absent, April 15) or the taxpayer asks for a waiver (line 16)",
+  ],
+  [
+    /^(ctc|aotc)\.(denied_in_earlier_year|barred_by_irs)$/,
+    "Form 8862 answers Cade records only when the taxpayer states that the IRS reduced or " +
+      "disallowed the child tax credits or the AOTC in an earlier year, or bars them; absent " +
+      "means neither (federal/8862/QUESTIONS.md, Proposals for a discussion)",
+  ],
+  [
+    /^farmer_estimated_tax\.(underpayment_paid_on|section_1062_net_tax_liability)$/,
+    "Form 2210-F answers Cade records only when the rest of the underpayment was paid before " +
+      "April 15, 2026 by a payment that is not a dated estimated payment (line 14; absent, the " +
+      "dated payments or April 15) or the taxpayer made a section 1062(a) election (line 4)",
   ],
   [
     /^prior_year\.ca_tax$/,

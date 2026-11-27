@@ -69,6 +69,18 @@ export const filingStatusMfj = (_: unknown, info: Form1040FilingInfo) =>
 export const filingStatusQss = (_: unknown, info: Form1040FilingInfo) =>
   info.filingStatus === "qualifying_surviving_spouse";
 
+/*
+ * MANUAL EDIT: the entry space below the filing status boxes. A head of
+ * household's qualifying child who is not a dependent because the taxpayer,
+ * the custodial parent, released the claim on Form 8332: "If the child isn't
+ * claimed as your dependent, enter the child's name"
+ * (irs-1040-inst-2025::sec::head-of-household::b03; federal/8332/headOfHousehold.ts).
+ * Blank otherwise: a qualifying surviving spouse's child, or a child who is not
+ * a dependent for another reason, has no fact (federal/8332/QUESTIONS.md).
+ */
+export const hohQssQualifyingChildName = (_: unknown, info: Form1040FilingInfo) =>
+  info.filingStatus === "head_of_household" ? info.hohChildNotDependentName : undefined;
+
 export const filingStatusMfs = (_: unknown, info: Form1040FilingInfo) =>
   info.filingStatus === "married_filing_separately";
 

@@ -32,6 +32,7 @@ import {
   type ResolverInputs,
 } from "../../resolverInputs.js";
 import { pensionRowsAfterForm4972 } from "../4972/line5.js";
+import { hohChildNotDependent } from "../8332/headOfHousehold.js";
 import { NONQUALIFIED_ROTH_CODES, partIIIFigures } from "../8606/partIII.js";
 import { form8606Filers } from "../8606/resolveInfo.js";
 import { receivedAt, routedOnReturn } from "../passThrough/receipts.js";
@@ -286,6 +287,7 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
   const legallySeparated = factByKey.get(SPOUSE_KEYS.legallySeparatedApartAtYearEnd) as
     boolean | undefined;
   const earnedIncomeCredit = resolveEicLineInfo(inputs);
+  const hohChild = hohChildNotDependent(inputs);
   return {
     pub590aWorksheets: needsPub590AWorksheets(inputs),
     mustFile: { "form-1040": resolution },
@@ -339,8 +341,11 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
         ),
         // Line 27a: asked only while the EIC is possible.
         ...eicQuestions(inputs, earnedIncomeCredit),
+        // The head of household child's name: which child, when a released child is one choice.
+        ...hohChild.question,
       }),
     },
+    hohChildNotDependentName: hohChild.name,
     hasDigitalAssets,
     w2WagesTotal: hasW2(inputs)
       ? (sumW2Box(inputs, "box1") as Form1040FilingInfo["w2WagesTotal"])

@@ -224,8 +224,18 @@ describe("a column B subtraction reaches Form 540NR line 14", () => {
 });
 
 describe("the forms figured for Form 540 only are named gaps", () => {
-  it("line 7a columns B and C name Schedule D (540NR)", () => {
+  it("line 7a columns B and C take Schedule D (540NR): with no California difference, blank", () => {
     const run = evaluate();
+    for (const column of ["subtractions", "additions"]) {
+      expect(run.field(`schedule-ca-540nr.0.line.7a_${column}`)).not.toMatchObject({
+        unsupported: true,
+      });
+    }
+    expect(run.value("schedule-ca-540nr.0.line.7a_total_ca_law")).toBe(12000);
+  });
+
+  it("line 7a columns B and C name Schedule D (540NR) when its decision says no", () => {
+    const run = evaluate({}, { "decisions.scope.must_file_schedule_d_540nr": false });
     expect(run.field("schedule-ca-540nr.0.line.7a_subtractions")).toMatchObject({
       unsupported: true,
       reason: expect.stringContaining("Schedule D (540NR)"),

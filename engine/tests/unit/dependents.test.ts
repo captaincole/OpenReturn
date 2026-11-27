@@ -8,10 +8,15 @@ import { describe, expect, it } from "vitest";
 import {
   ageAtYearEnd,
   dependentCredit,
+  getClaimedDependentFacts,
+  getDependentFacts,
+  isClaimedDependent,
+  isOtherParentsQualifyingChild,
   isQualifyingChildRelationship,
   livedWithTaxpayerOverHalfYear,
   type DependentFactValue,
 } from "../../src/facts/index.js";
+import { isEicQualifyingChild } from "../../src/federal/schedule-eic/qualifyingChild.js";
 
 const niece: DependentFactValue = {
   firstName: "Jessica",
@@ -102,7 +107,87 @@ describe("dependentCredit", () => {
     const apart = { ...niece, monthsLivedWithYou: 2 };
     expect(dependentCredit(apart, 2025)).toBeUndefined();
     expect(dependentCredit({ ...apart, form8332Release: true }, 2025)).toBe("child_tax_credit");
-    expect(dependentCredit({ ...apart, form8332Release: false }, 2025)).toBe("other_dependents");
+  });
+
+  /*
+   * irs-1040-inst-2025::sec::is-your-qualifying-relative::b01: a qualifying
+   * relative is a person "Who wasn't a qualifying child (see Step 1) of any
+   * taxpayer for 2025". With no Form 8332 release, a child who lived here 3
+   * months is the other parent's qualifying child, so no dependent here.
+   */
+  it("a child who lived at home half the year or less with no release is not a dependent", () => {
+    const son = { ...niece, relationship: "Son", monthsLivedWithYou: 3, form8332Release: false };
+    expect(isOtherParentsQualifyingChild(son, 2025)).toBe(true);
+    expect(dependentCredit(son, 2025)).toBe("none");
+    const facts = [{ key: "dependent.a", value: son, category: "dependents" }];
+    expect(getClaimedDependentFacts(facts, 2025)).toEqual([]);
+    expect(isOtherParentsQualifyingChild({ ...son, form8332Release: true }, 2025)).toBe(false);
+    expect(isOtherParentsQualifyingChild({ ...son, monthsLivedWithYou: 7 }, 2025)).toBe(false);
+    expect(isOtherParentsQualifyingChild({ ...son, relationship: "Parent" }, 2025)).toBe(false);
+  });
+
+  /*
+   * The qualifying child age test is under 19, under 24 and a full-time
+   * student, or permanently disabled (irs-1040-inst-2025::sec::who-qualifies-as-your::b02),
+   * not the child tax credit's under 17. So a 17-year-old who lived with the
+   * other parent is still that parent's qualifying child: no credit for other
+   * dependents here without a release.
+   */
+  it("a child of 17 to 23 who lived with the other parent is that parent's qualifying child", () => {
+    const son = { ...niece, relationship: "Son", monthsLivedWithYou: 3, form8332Release: false };
+    const seventeen = { ...son, dob: "03/01/2008" };
+    expect(isOtherParentsQualifyingChild(seventeen, 2025)).toBe(true);
+    expect(dependentCredit(seventeen, 2025)).toBe("none");
+    const facts = [{ key: "dependent.a", value: seventeen, category: "dependents" }];
+    expect(getClaimedDependentFacts(facts, 2025)).toEqual([]);
+    const student = { ...son, dob: "03/01/2004", fullTimeStudent: true };
+    expect(dependentCredit(student, 2025)).toBe("none");
+    const disabled = { ...son, dob: "03/01/1990", permanentlyDisabled: true };
+    expect(dependentCredit(disabled, 2025)).toBe("none");
+    const notStudent = {
+      ...son,
+      dob: "03/01/2004",
+      fullTimeStudent: false,
+      permanentlyDisabled: false,
+    };
+    expect(dependentCredit(notStudent, 2025)).toBe("other_dependents");
+    expect(dependentCredit({ ...seventeen, form8332Release: true }, 2025)).toBe("other_dependents");
+    expect(dependentCredit({ ...seventeen, form8332Release: undefined }, 2025)).toBeUndefined();
+  });
+
+  /*
+   * irs-1040-inst-2025::sec::definitions-and-special-rules::b02: "only the
+   * noncustodial parent can claim the child for purposes of the child tax
+   * credit and credit for other dependents"; ::b03: the custodial parent keeps
+   * head of household, the dependent care credit and the EIC.
+   */
+  it("a child the custodial parent released on Form 8332 earns neither credit on that parent's return", () => {
+    const released = { ...niece, relationship: "Daughter", releasedToNoncustodialParent: true };
+    expect(dependentCredit(released, 2025)).toBe("none");
+    expect(isClaimedDependent(released)).toBe(false);
+    expect(livedWithTaxpayerOverHalfYear(released, 2025)).toBe(true);
+    expect(isEicQualifyingChild({ ...released, livedInUs: true }, ["01/01/1985"], 2025)).toBe(true);
+    expect(dependentCredit({ ...released, releasedToNoncustodialParent: false }, 2025)).toBe(
+      "child_tax_credit",
+    );
+  });
+
+  it("the claimed dependents leave out a released child and keep every other dependent fact", () => {
+    const row = (key: string, value: DependentFactValue) => ({
+      key,
+      value,
+      category: "dependents",
+    });
+    const facts = [
+      row("dependent.a", niece),
+      row("dependent.b", { ...niece, releasedToNoncustodialParent: true }),
+      row("dependent.c", { ...niece, monthsLivedWithYou: 2, form8332Release: true }),
+    ];
+    expect(getDependentFacts(facts).map((fact) => fact.dependentSlug)).toEqual(["a", "b", "c"]);
+    expect(getClaimedDependentFacts(facts, 2025).map((fact) => fact.dependentSlug)).toEqual([
+      "a",
+      "c",
+    ]);
   });
 
   it("waits while the date of birth, the months in the home or the citizenship is unknown", () => {

@@ -1,0 +1,76 @@
+# Schedule P (540NR): open questions
+
+Schedule P (540NR) figures a nonresident's or part-year resident's California minimum tax. Part I and lines 22 to 24 figure the tentative minimum tax on all income, as a resident would. Lines 25 to 45 take California's part of it at the same average rate. Part III limits the credits.
+
+The engine runs Schedule P (540)'s rules for Part I, lines 22 to 24 and Part III (`fromScheduleP.ts`). Lines 25 to 45 are this form's own (`partII.ts`, `lines.ts`). The only published example with numbers is FTB Pub. 1100 Example 43, a unit test.
+
+## Two texts conflict
+
+1. **Rounding of lines 38 and 42.** Decided: row A95 in `docs/rule-decisions.md`, the DECISION comment in `lines.ts`. The form prints four boxes after the point and gives no rule. The engine rounds the half up, the rule Form 540NR lines 36 and 38 follow (decision A78). FTB Pub. 1100 Example 43 rounds too: 8,314 ÷ 235,000 = .035379 prints .0354 (`ftb-pub-1100-2025::sec::california-alternative-minimum-tax::b01`). Changes dollars: yes, a few, against cutting off. Example from the blind check: 24,171 ÷ 420,000 = .05755 exactly prints .0576, line 43 is 342,858 × .0576 = $19,749; cut off at .0575 it would be $19,714, and line 45 $35 less. The blind fill rounded the same way.
+
+## Should we do this now
+
+Each item is a doubt with no conflicting text. Each says what the engine does now, or in one sentence why it waits.
+
+2. **Line 38 floor.** "Divide line 32 by line 37. Do not enter more than 1.0000" (the form) names no floor. A California AMT AGI below 0 gives a ratio of 0 here, as Form 540NR line 38 does. With line 37 at 0 or less, the ratio is 1 for a California amount above 0, else 0. Changes dollars: only with a California loss.
+
+3. **Line 43 floor.** "Multiply line 40 by line 42" (the form). A California AMTI below 0 gives line 43 of 0, not a negative tentative minimum tax. Part III line 2 reads line 43, and a negative amount there would raise line 3. "If line 23 is zero or less, enter -0- on line 23, line 24, and line 43" (`ca-540nr-sched-p-inst-2025::sec::line-23::b01`) is applied as written. Changes dollars: only with a California loss. The blind fill read the arithmetic literally: a single filer with a California AGI loss of $60,000, line 40 of −$60,000 and a rate of .0526 gets line 43 of −$3,156. Part III line 2 then holds −$3,156 and line 3 ("excess tax", line 1 less line 2) holds $3,156 on a return with $0 of tax, where the engine has 0 on both. Line 45 is 0 either way. With a credit in Part III, the literal reading lets the credit use $3,156 of "excess tax" that does not exist. No text sets a floor or forbids one; the engine keeps the floor.
+
+4. **Line 29a.** Line 29a takes the California part of Part I line 7 (`::line-29-adjustments-and-preferences::b01`). Line 34e also takes Part I line 7. The engine figures line 7 only for a return that itemizes, from FTB 3526, as Schedule P (540) does. That amount is an itemized deduction (Schedule CA (540NR) Part III), not Part II income, so it reaches California AMTI through line 34e and the proration on lines 35 to 39. Line 29a is then blank. With FTB 3526 needed on a return that itemizes, lines 7, 14, 29a and 34e carry its gap: FTB 3526 is figured for Form 540 only. A return that takes the standard deduction enters no adjustment: "If you did not itemize deductions and had investment interest expense, do not enter an adjustment" (`::line-7-investment-interest-expense-adjustment::b02`). Its lines 7 and 29a are blank, and line 14 keeps the standard deduction and the ISO spread (fixed after the tax review: line 14 was the gap and line 19 then left both out). Investment interest reported on Schedule E is not modeled (the same gap as Schedule P (540) line 7). Changes dollars: no, for what the engine figures.
+
+5. **Line 29d, the California part of the ISO spread.** The taxpayer states it (`ca_540nr.amt_california_amount.iso_exercise_spread`). The engine never splits it by workdays. A stated 0 leaves the line blank. A stated part above the line 10 spread is taken as stated: no text caps it. Changes dollars: only when the answer is wrong.
+
+6. **Line 26 sign.** "Enter as a positive number" (the form). Column E of lines 9b1 to 9b3 holds the deduction as a negative amount, as column D does. The engine takes the absolute value of the total. Changes dollars: no.
+
+7. **Form 540NR line 71 at zero.** Line 45: "If zero or less, enter -0- here and on Form 540NR, line 71" (the form). The engine prints 0 on line 71 whenever Schedule P (540NR) files. Form 540 line 61 leaves 0 blank (`540/otherTaxes.ts`). Changes dollars: no.
+
+8. **Form 540NR line 71 source.** Line 45 and Part III line 25 both say "on Form 540NR, line 71". Line 25 is line 45 less the Section C credits, so the engine takes line 25. The Section C credits have no facts, so the two are equal today. Changes dollars: no.
+
+9. **Part III without credits.** "Complete Part III only if you have tax credits" (`::how-to-compute-the-limitation::b02`). The engine fills Part III lines 1 to 3, 11, 22 and 25 on every return, as Schedule P (540) does. Changes dollars: no.
+
+10. **Line 10's blank after the name** (`2.part3.10_prior_year_amt_entry`). The form prints a blank after "Credit for prior year alternative minimum tax". The instructions do not say what it holds. Unsupported. Changes dollars: no.
+
+11. **Who files.** The engine files the schedule when Form 540NR files and Schedule P (540) would file on the same answers for a resident (an ISO exercise, itemized deductions, a prior year AMT credit, a Section A1 or A2 credit, more than two credits). "The total of Part I, line 7 through line 13 is negative and you would be liable for AMT without taking those lines into account" (`::b-who-must-file::b01`) has no fact: no negative adjustment is modeled. Changes dollars: no.
+
+12. **Line 23 of 0: lines 25 to 42 are blank.** "If line 23 is zero or less, enter -0- on line 23, line 24, and line 43. Go to line 44" (`::line-23::b01`). The engine leaves lines 25 to 42 blank and prints 0 on line 43 (`partII.ts`, `unlessSkipped`). Before the blind check it filled lines 25 to 40 and printed 0 on lines 41 and 42. The resolver still asks for the California part of an ISO spread (line 29d) on such a return: it runs before line 23 is known. Changes dollars: no (line 43 is 0 either way).
+
+13. **Rows that a real person can fill.** Part III has four Section A2 rows (lines 6 to 9) and four Section B2 rows (lines 16 to 19). On this schedule every credit row is a gap: no credit form files with Form 540NR yet. Past four credits a real return attaches another schedule; the engine does not reach that case. Not now: it waits for the credit forms on Form 540NR (Pattern change below).
+
+## Pattern change
+
+- **Credit forms on Form 540NR.** Before: each credit form (FTB 3506, 3507, 3510, 3541, 3801-CR, 3804-CR, Schedule S) files with Form 540 only, so every Part III credit row here is a named gap. After: each credit form also files with Form 540NR with its nonresident lines, and Part III takes its rows through the same Schedule P (540) functions (Proposals for a discussion).
+
+## Second opinions
+
+- **Blind fill (2026-11-26).** A preparer filled 14 cases from the blank form and the instructions only. Every amount matched the engine except two. Case 5 (line 23 of 0): the blind fill left lines 25 to 42 blank, as the line 23 instruction says; the engine now does too (doubt 12). Case 9 (a California AGI loss): the blind fill printed line 43 of −$3,156 and Part III lines 2 and 3 of −$3,156 and $3,156; the engine keeps its floor of 0 (doubt 3).
+- **PolicyEngine-US 2.154.1 (commit 0fbed6ddb1).** It models Schedule P (540) only (`ca_amt`, `ca_amt_exemption`): no nonresident proration, so lines 25 to 45 have nothing to compare. Its 2025 constants for lines 22 to 24 match Schedule P (540)'s, which this form uses: the exemption ($92,749, $123,667, $61,830), the phase-out start ($347,808, $463,745, $231,868), the zero point ($718,804, $958,413, $479,188), the 25% phase-out rate and the 7% rate. Its line 23 floors at 0, as the engine does.
+- **IRS Direct File.** Federal only; it has no California forms.
+
+## Unsupported field groups
+
+| Fields                                                                 | Why                                                                                                                                                                             |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Part I lines 4, 6, 8, 9, 11, 12, 13a to 13l, 17, 20                    | Schedule P (540)'s reasons: no facts for these adjustments.                                                                                                                     |
+| Line 27, line 29b, 29c, 29e to 29r, line 31                            | The California part of a Part I line the engine does not figure; the Part I reason.                                                                                             |
+| Line 34c                                                               | Copies Part I line 4.                                                                                                                                                           |
+| Part III lines 4 to 10, 16 to 18, 20, 21                               | Each credit form (FTB 3506, 3507, 3510, 3541, 3801-CR, 3804-CR, Schedule S) is figured for Form 540 only: a named gap when the return needs it, else Schedule P (540)'s reason. |
+| Part III lines 8, 9, 12 to 15, 19, 23, 24                              | Schedule P (540)'s reasons: no credit facts.                                                                                                                                    |
+| Part III lines 12 to 14, the credit from Form 540NR and the percentage | No fact asks whether the taxpayer qualifies (as Form 540NR lines 51 to 55).                                                                                                     |
+| Part III line 10, the blank after the name                             | Doubt 10.                                                                                                                                                                       |
+
+## Confidence
+
+| Field group                                                   | Confidence                                                    |
+| ------------------------------------------------------------- | ------------------------------------------------------------- |
+| Lines 32 to 45 (the proration, the rate, California TMT, AMT) | Published example with numbers (FTB Pub. 1100 Example 43)     |
+| Part I, lines 22 to 24                                        | Stated rule (Schedule P (540)'s rules, the same instructions) |
+| Lines 25, 26, 28 to 30, 33, 34a to 34e                        | Stated rule                                                   |
+| Line 29d                                                      | Stated rule, with a stated California amount                  |
+| Line 29a blank                                                | Own reading (doubt 4)                                         |
+| Floors of lines 38 and 43                                     | Own reading (doubts 2 and 3)                                  |
+| Part III lines 1 to 3, 11, 22, 25                             | Stated rule                                                   |
+| Part III credit rows                                          | Unsupported on Form 540NR (gaps)                              |
+
+## Proposals for a discussion
+
+- **Credit forms on Form 540NR.** Every Part III credit row takes a credit form the engine figures for Form 540 only. Several have their own Form 540NR lines (FTB 3506 prorates the credit by the California ratio; Schedule S has a part-year rule). Letting each credit form file with Form 540NR, with its nonresident lines, would fill Part III and Form 540NR lines 50 and 58 to 62. That is a change to each credit form's structure, one form at a time.

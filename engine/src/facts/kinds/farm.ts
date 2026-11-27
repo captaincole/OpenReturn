@@ -10,7 +10,10 @@
  * prints them in Part I (cash) or Part III (accrual).
  */
 
+import { atLeast, sum } from "../../money.js";
 import { isAtRiskAmounts, type AtRiskAmounts } from "./atRisk.js";
+import { empowermentZoneFigures } from "./empowermentZone.js";
+import { workOpportunityCreditByActivity } from "./workOpportunity.js";
 
 type FactRow = { key: string; value: unknown; category: string };
 
@@ -145,7 +148,12 @@ export interface FarmFactValue {
   expenses?: FarmExpenses;
   vehicles?: FarmVehicle[];
   conservation?: FarmConservation;
-  /* Line 22: the credits of Forms 5884, 8844, 8932 and 8994 for the farm's labor. */
+  /*
+   * Line 22: the credits of Forms 5884, 8844, 8932 and 8994 for the farm's
+   * labor that no employee fact figures. farmsOnReturn adds the Form 5884 and
+   * Form 8844 credits of the farm's employee facts (FARM_LABOR_CREDITS); a
+   * credit those facts figure is not stated here.
+   */
   employmentCredits?: number;
   /* Line 15: the Form 8941 credit for the farm's employee health insurance. */
   smallEmployerHealthCredit?: number;
@@ -279,6 +287,45 @@ export function farmOwnerOf(farm: FarmFactValue): FarmOwner {
 }
 
 /*
+ * Schedule F line 22: "Reduce your deduction by the amounts claimed on the
+ * following. • Form 5884, Work Opportunity Credit. • Form 8844, Empowerment
+ * Zone Employment Credit." (irs-1040sf-inst-2025::sec::line-22::b01). The
+ * credits the engine figures from the farm's own employees, by farm key: Form
+ * 5884 line 2 (workOpportunity.ts) and the farm's share of Form 8844 line 2
+ * (empowermentZone.ts). A new credit form adds one entry.
+ */
+const FARM_LABOR_CREDITS: ReadonlyArray<
+  (facts: ReadonlyArray<FactRow>, joint: boolean) => ReadonlyMap<string, number>
+> = [
+  (facts) => workOpportunityCreditByActivity(facts),
+  (facts, joint) => empowermentZoneFigures(facts, joint).creditByEmployer,
+];
+
+/* Each farm's figured labor credits, added. */
+function figuredLaborCredits(facts: ReadonlyArray<FactRow>, joint: boolean) {
+  const credits = FARM_LABOR_CREDITS.map((creditByFarm) => creditByFarm(facts, joint));
+  return (key: string) => sum(...credits.map((byFarm) => byFarm.get(key)));
+}
+
+/*
+ * The figured credits added to the stated employmentCredits, which Schedule F
+ * line 22 takes off labor hired (federal/schedule-f/expenses.ts).
+ */
+function withLaborCredits(
+  farms: Array<{ key: string; value: FarmFactValue }>,
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): Array<{ key: string; value: FarmFactValue }> {
+  const creditOf = figuredLaborCredits(facts, joint);
+  return farms.map((farm) => {
+    const credit = creditOf(farm.key);
+    if (credit === 0) return farm;
+    const employmentCredits = sum(farm.value.employmentCredits, credit);
+    return { ...farm, value: { ...farm.value, employmentCredits } };
+  });
+}
+
+/*
  * The farms on this return. Filing jointly, every farm. On any other status,
  * only the taxpayer's: a spouse's farm is on the spouse's return, and its key
  * is in spouseKeys so a form can wait on it. A malformed fact is listed.
@@ -298,8 +345,37 @@ export function farmsOnReturn(
   const offReturn = (farm: { value: FarmFactValue }) =>
     !joint && farmOwnerOf(farm.value) === "spouse";
   return {
-    farms: farms.filter((farm) => !offReturn(farm)),
+    farms: withLaborCredits(
+      farms.filter((farm) => !offReturn(farm)),
+      facts,
+      joint,
+    ),
     spouseKeys: farms.filter(offReturn).map((farm) => farm.key),
     malformedKeys: rows.filter((row) => !isFarm(row.value)).map((row) => row.key),
+  };
+}
+
+/*
+ * The figured part of the farms' line 22 reductions (Forms 5884 and 8844;
+ * Schedule CA line 6): the farms' figured credits in total, and the labor
+ * hired they took off, at most each farm's stated labor hired, so the two
+ * credits of one farm take no dollar twice.
+ */
+export function figuredLaborCreditReduction(
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): { credit: number; reduction: number } {
+  const creditOf = figuredLaborCredits(facts, joint);
+  const farms = farmsOnReturn(facts, joint).farms.map(({ key, value }) => ({
+    credit: creditOf(key),
+    labor: value.expenses?.laborHired,
+  }));
+  return {
+    credit: sum(...farms.map((farm) => farm.credit)),
+    reduction: sum(
+      ...farms.map(({ credit, labor }) =>
+        labor === undefined ? 0 : Math.min(atLeast(0, labor), credit),
+      ),
+    ),
   };
 }

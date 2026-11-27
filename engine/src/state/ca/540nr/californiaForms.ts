@@ -13,9 +13,11 @@ import type { BaseFilingInfo } from "../../../filingInfo.js";
 import type { ResolverInputs } from "../../../resolverInputs.js";
 import { resolve3461Info } from "../3461/resolveInfo.js";
 import { resolve3506Info } from "../3506/resolveInfo.js";
+import { resolve3507Info } from "../3507/resolveInfo.js";
 import { resolve3510Info } from "../3510/resolveInfo.js";
 import { resolve3514Info } from "../3514/resolveInfo.js";
 import { resolve3526Info } from "../3526/resolveInfo.js";
+import { resolve3541Info } from "../3541/resolveInfo.js";
 import { resolve3800CaInfo } from "../3800-ca/resolveInfo.js";
 import { resolve3801CRInfo } from "../3801-cr/resolveInfo.js";
 import { resolve3801Info } from "../3801/resolveInfo.js";
@@ -31,7 +33,6 @@ import { resolve5805FInfo } from "../5805f/resolveInfo.js";
 import { resolve5870AInfo } from "../5870a/resolveInfo.js";
 import { resolveScheduleD1Info } from "../schedule-d-1/resolveInfo.js";
 import { resolveScheduleG1Info } from "../schedule-g-1/resolveInfo.js";
-import { resolveSchedulePInfo } from "../schedule-p/resolveInfo.js";
 import { resolveScheduleSInfo } from "../schedule-s/resolveInfo.js";
 
 /* A California form that Form 540NR lines take, with the name a gap gives it. */
@@ -47,7 +48,9 @@ export const FORMS_ONLY_WITH_540: ReadonlyArray<FormOnlyWith540> = [
   { formId: "form-3801-cr", name: "FTB 3801-CR", resolve: resolve3801CRInfo },
   { formId: "form-3804-cr", name: "FTB 3804-CR", resolve: resolve3804CRInfo },
   { formId: "schedule-s", name: "Schedule S", resolve: resolveScheduleSInfo },
-  { formId: "schedule-p", name: "Schedule P (540NR)", resolve: resolveSchedulePInfo },
+  // Schedule P (540NR) Part III takes these two credits too (schedule-p-540nr/partIII.ts).
+  { formId: "form-3507", name: "FTB 3507", resolve: resolve3507Info },
+  { formId: "form-3541", name: "FTB 3541", resolve: resolve3541Info },
   { formId: "form-3800-ca", name: "FTB 3800", resolve: resolve3800CaInfo },
   { formId: "form-3803", name: "FTB 3803", resolve: resolve3803Info },
   { formId: "schedule-g-1", name: "Schedule G-1", resolve: resolveScheduleG1Info },

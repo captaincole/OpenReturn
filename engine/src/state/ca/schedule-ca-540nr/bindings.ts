@@ -54,14 +54,27 @@ const TAKES_FORM_540_FORM: Readonly<Record<string, readonly string[]>> = {
 /*
  * Line 7a columns B and C: "If there are differences, use Schedule D (540NR)
  * ... to calculate the amount to enter on line 7a"
- * (ca-540nr-sched-ca-inst-2025::sec::line-7a-capital-gain-or-loss::b01).
- * Schedule D (540NR) has no rules yet: with a capital gain or loss the line is
- * a named gap, as Schedule CA (540) line 7a is without Schedule D (540).
+ * (ca-540nr-sched-ca-inst-2025::sec::line-7a-capital-gain-or-loss::b01): its
+ * line 12a goes in column B and line 12b in column C
+ * (ca-540nr-sched-d-inst-2025::sec::line-12a::b01, ::line-12b::b01). A gap of
+ * the schedule is the column's gap. With a capital gain or loss and no
+ * Schedule D (540NR) (its decision says no), the column is a named gap, as
+ * Schedule CA (540) line 7a is without Schedule D (540).
  */
-const SCHEDULE_D_540NR_GAP =
-  "Line 7a columns B and C come from Schedule D (540NR), California Capital Gain or Loss Adjustment, which the engine does not figure yet.";
-const line7aAdjustment: Bind = (form) =>
-  numberOrBlank(form["0.line.7a_federal"]) ? unsupported(SCHEDULE_D_540NR_GAP) : undefined;
+const NO_SCHEDULE_D_540NR =
+  "Line 7a columns B and C come from Schedule D (540NR), California Capital Gain or Loss Adjustment, which does not file on this return (its decision says no).";
+const line7aAdjustment =
+  (line: "12a" | "12b"): Bind =>
+  (form, info) => {
+    if (info.mustFile?.["schedule-d-540nr"]?.value !== true) {
+      return numberOrBlank(form["0.line.7a_federal"])
+        ? unsupported(NO_SCHEDULE_D_540NR)
+        : undefined;
+    }
+    const gap = info.scheduleD540NRFigures?.gap;
+    if (gap !== undefined) return unsupported(`Schedule D (540NR): ${gap}`);
+    return numberOrBlank(form[`schedule-d-540nr.0.line.${line}`]);
+  };
 
 /* Line 19b: the alimony recipient's SSN, in the form's three boxes (Schedule CA (540)'s line 19b value). */
 const recipientSsnPart =
@@ -75,8 +88,8 @@ const recipientSsnPart =
 
 const OWN: Readonly<Record<string, Bind>> = {
   ...(PART_I_BINDINGS as Record<string, Bind>),
-  "0.line.7a_subtractions": line7aAdjustment,
-  "0.line.7a_additions": line7aAdjustment,
+  "0.line.7a_subtractions": line7aAdjustment("12a"),
+  "0.line.7a_additions": line7aAdjustment("12b"),
   "2.line.c19b_recipient_ssn_first3": recipientSsnPart(0, 3),
   "2.line.c19b_recipient_ssn_middle2": recipientSsnPart(3, 5),
   "2.line.c19b_recipient_ssn_last4": recipientSsnPart(5, 9),

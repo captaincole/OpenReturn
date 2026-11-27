@@ -15,11 +15,12 @@
  * Each is figured from FTB 3805V's Part III (state/ca/3805v/figures.ts), so the
  * schedule and the form cannot disagree. Blank when FTB 3805V does not file or
  * no carryover is used.
- * - Line 9b3 column B: FTB 3805Z's EZ NOL deduction (below).
+ * - Line 9b3 column B: FTB 3805Z's EZ NOL deduction, FTB 3807's LAMBRA NOL
+ *   deduction and FTB 3809's TTA NOL deduction, added (below).
  */
 
 import type { BindingFn } from "../../../defineForm.js";
-import { numberOrBlank } from "../../../money.js";
+import { numberOrBlank, sum } from "../../../money.js";
 import { unsupported } from "../../../types.js";
 import { isUnsupportedResult } from "../3801/context.js";
 import { carryoverDeductions, type Info as Form3805VInfo } from "../3805v/figures.js";
@@ -30,10 +31,17 @@ import {
   nolFiguresOf,
   type Info as Form3805ZInfo,
 } from "../3805z/figures.js";
+import { files3807, lambraNolDeduction, type Info as Form3807Info } from "../3807/figures.js";
+import { files3809, nolDeduction as ttaNolDeductionOf } from "../3809/figures.js";
+import type { Form3809FilingInfo } from "../3809/filingInfo.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
 import type { ScheduleCa } from "./types.js";
 
-type Info = ScheduleCaFilingInfo & Form3805VInfo & Form3805ZInfo;
+type Info = ScheduleCaFilingInfo &
+  Form3805VInfo &
+  Form3805ZInfo &
+  Form3807Info &
+  Form3809FilingInfo;
 type Bindings = Partial<{ [K in keyof ScheduleCa]: BindingFn<ScheduleCa, Info, K> }>;
 
 function deduction(pick: (lines: PriorYearLines) => number) {
@@ -51,24 +59,69 @@ function federalNol(form: Record<string, unknown>): number | undefined {
   return amount === 0 ? undefined : amount;
 }
 
-/* With no FTB 3805Z: main's reason, word for word (FTB 3807 and FTB 3809 have no rules). */
+/* With none of FTB 3805Z, FTB 3807 and FTB 3809: main's reason, word for word. */
 const LINE_9B3_UNSUPPORTED = unsupported(
   "CA-specific NOL deduction from FTB Forms 3805Z, 3807, or 3809 — no ingestion path for these FTB enterprise-zone NOL forms exists yet.",
 );
+const TWO_NOL_DEDUCTIONS = unsupported(
+  "Line 9b3 with an FTB 3805V NOL deduction on line 9b2: FTB 3805V's modified taxable income does not take the LAMBRA NOL deduction off first, and no text sets the order of the two deductions; the engine does not figure both.",
+);
 
 /*
- * Line 9b3 column B: "Enter this amount [FTB 3805Z line 3b] on Schedule CA
- * (540), Part I, Section B, line 9b3, column B" (the FTB 3805Z form face;
+ * FTB 3805Z line 3b: "Enter this amount on Schedule CA (540), Part I, Section
+ * B, line 9b3, column B" (the FTB 3805Z form face;
  * ca-3805z-booklet-2025::sec::form-540-and-form-540nr-filers::b04). Read from
- * FTB 3805Z's Worksheet II (3805z/figures.ts); blank when it deducts nothing.
+ * FTB 3805Z's Worksheet II (3805z/figures.ts); 0 with no FTB 3805Z.
  */
 function enterpriseZoneNolDeduction(form: Record<string, unknown>, info: Info) {
-  if (!files3805Z(info)) return LINE_9B3_UNSUPPORTED;
+  if (!files3805Z(info)) return 0;
   const gap = enterpriseZoneReturnGap(info);
   if (gap !== undefined) return gap;
   const worksheet = nolFiguresOf(form, info);
   if (worksheet === undefined || isUnsupportedResult(worksheet)) return worksheet;
-  return worksheet.totalDeducted > 0 ? worksheet.totalDeducted : undefined;
+  return worksheet.totalDeducted;
+}
+
+/*
+ * FTB 3807 line 3b, the LAMBRA NOL deduction: the same sentence on the FTB
+ * 3807 form face (ca-3807-booklet-2025::sec::instructions-for-worksheet-ii-computation-of-nol-carryover-and-carryover-limitations::b04).
+ * Figured from FTB 3807's Worksheet II (3807/figures.ts); 0 with no FTB 3807.
+ */
+function lambraLine3b(form: Record<string, unknown>, info: Info) {
+  if (!files3807(info)) return 0;
+  const lambra = lambraNolDeduction((fieldId) => form[fieldId], info);
+  if (typeof lambra !== "number" || lambra <= 0) return lambra;
+  return (numberOrBlank(form["2.line.b9b2_subtractions"]) ?? 0) > 0 ? TWO_NOL_DEDUCTIONS : lambra;
+}
+
+/*
+ * FTB 3809 line 3b, the TTA NOL deduction: "Enter this amount on Schedule CA
+ * (540), Part I, Section B, line 9b3, column B" (the form;
+ * ca-3809-booklet-2025::sec::example-2::b02), figured by the same function as
+ * line 3b, so its gap passes through; 0 with no FTB 3809.
+ */
+function ttaLine3b(form: Record<string, unknown>, info: Info) {
+  if (!files3809(info)) return 0;
+  return ttaNolDeductionOf(form, info);
+}
+
+/*
+ * Line 9b3 column B: "Enter in column B the total NOL figured on the following
+ * forms: FTB 3805Z ... line 3b, FTB 3807 ... line 3b, FTB 3809 ... line 3b"
+ * (ca-540-sched-ca-inst-2025::sec::line-9b3-nol-deduction-from-form-ftb-3805z-ftb-3807-or-ftb-3809::b01).
+ * The three deductions add; each is limited by its own zone's income, so
+ * none changes another. Blank when none deducts anything.
+ */
+function line9b3(form: Record<string, unknown>, info: Info) {
+  if (!files3805Z(info) && !files3807(info) && !files3809(info)) return LINE_9B3_UNSUPPORTED;
+  const zone = enterpriseZoneNolDeduction(form, info);
+  if (typeof zone !== "number") return zone;
+  const lambra = lambraLine3b(form, info);
+  if (typeof lambra !== "number") return lambra;
+  const tta = ttaLine3b(form, info);
+  if (typeof tta !== "number") return tta;
+  const total = sum(zone, lambra, tta);
+  return total > 0 ? total : undefined;
 }
 
 export const nolDeductionBindings: Bindings = {
@@ -76,5 +129,5 @@ export const nolDeductionBindings: Bindings = {
   "1.line.b8a_additions": (form) => federalNol(form),
   "2.line.b9b1_subtractions": deduction((lines) => lines.disasterUsed),
   "2.line.b9b2_subtractions": deduction((lines) => lines.nolUsed),
-  "2.line.b9b3_subtractions": enterpriseZoneNolDeduction,
+  "2.line.b9b3_subtractions": line9b3,
 };
