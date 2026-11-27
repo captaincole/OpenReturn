@@ -139,7 +139,7 @@ describe("groundDecision and the jurisdictions", () => {
     const statute = out.log.steps.find((step) => step.kind === "statute");
     expect(statute?.output).toMatchObject({ sources: ["california"] });
     expect(prompts.at(-1)).toContain(
-      `Statute passages (Cal. Rev. & Tax. Code, the law the IRS passages explain; consulted once in this review):\n  [${RESIDENT}] Cal. Rev. & Tax. Code § 17014(a):`,
+      `Statute passages (Cal. Rev. & Tax. Code, the law the passages above explain; consulted once in this review):\n  [${RESIDENT}] Cal. Rev. & Tax. Code § 17014(a):`,
     );
     expect(out.citations).toEqual([
       { blockId: RESIDENT, quote: "other than a temporary or transitory purpose" },
@@ -168,7 +168,7 @@ describe("groundDecision and the jurisdictions", () => {
     expect(out.jurisdictions).toEqual(["federal", "CA"]);
     expect(lawSources()).toEqual(["statute", "california"]);
     expect(prompts.at(-1)).toContain(
-      "Statute passages (26 U.S.C. and Cal. Rev. & Tax. Code, the law the IRS passages explain;",
+      "Statute passages (26 U.S.C. and Cal. Rev. & Tax. Code, the law the passages above explain;",
     );
     const last = prompts.at(-1)!;
     expect(last.indexOf("26 U.S.C. § 7701(b)(1)")).toBeLessThan(last.indexOf("§ 17014(a)"));
@@ -179,7 +179,7 @@ describe("groundDecision and the jurisdictions", () => {
     await groundDecision(fakeMastra(prompts), { decision, jurisdictions: ["federal"] });
     expect(lawSources()).toEqual(["statute"]);
     expect(prompts.at(-1)).toContain(
-      "Statute passages (26 U.S.C., the law the IRS passages explain; consulted once in this review):",
+      "Statute passages (26 U.S.C., the law the passages above explain; consulted once in this review):",
     );
   });
 });
