@@ -1,4 +1,5 @@
 import { z } from "zod";
+import type { LawSource } from "./law/citation";
 
 /*
  * A jurisdiction is a tax authority whose documents the library holds:
@@ -9,11 +10,35 @@ import { z } from "zod";
  * (ref_documents.publisher). This table is the one place that says so: a
  * new state is one row, and a new publisher must get a row
  * (tests/unit/jurisdiction.test.ts reads every sidecar under sources/).
+ *
+ * Each jurisdiction also owns its law sources in law.db: lawSources are
+ * what searchLaw searches for it, and statutes are what the statute round
+ * of Ask and of the grounding review searches (no regulations: the judges'
+ * prompts are written for a statute). Every law sidecar's source must be
+ * in one row (the same test).
  */
 const JURISDICTION_TABLE = {
-  federal: { name: "federal", publishers: ["IRS", "OLRC", "OFR"] },
-  CA: { name: "California", publishers: ["FTB", "Legislative Counsel of California"] },
-} as const;
+  federal: {
+    name: "federal",
+    publishers: ["IRS", "OLRC", "OFR"],
+    lawSources: ["statute", "regulations"],
+    statutes: ["statute"],
+  },
+  CA: {
+    name: "California",
+    publishers: ["FTB", "Legislative Counsel of California"],
+    lawSources: ["california"],
+    statutes: ["california"],
+  },
+} as const satisfies Record<
+  string,
+  {
+    name: string;
+    publishers: readonly string[];
+    lawSources: readonly LawSource[];
+    statutes: readonly LawSource[];
+  }
+>;
 
 export type Jurisdiction = keyof typeof JURISDICTION_TABLE;
 
@@ -67,9 +92,6 @@ export function jurisdictionOfPublisher(publisher: string): Jurisdiction {
   return jurisdiction;
 }
 
-export const includesFederal = (jurisdictions: readonly Jurisdiction[]): boolean =>
-  jurisdictions.includes("federal");
-
 export const coversAll = (jurisdictions: readonly Jurisdiction[]): boolean =>
   KNOWN.every((jurisdiction) => jurisdictions.includes(jurisdiction));
 
@@ -87,4 +109,33 @@ export function searchedLine(jurisdictions: readonly Jurisdiction[]): string | n
   if (coversAll(jurisdictions)) return null;
   const names = jurisdictions.map((jurisdiction) => JURISDICTION_TABLE[jurisdiction].name);
   return `Libraries searched: ${names.join(" and ")} only.`;
+}
+
+/**
+ * The law sources of the jurisdictions on, in table order: "statute",
+ * "regulations", then "california". searchLaw searches each one on its own.
+ */
+export function lawSourcesOf(jurisdictions: readonly Jurisdiction[]): LawSource[] {
+  return resolveJurisdictions(jurisdictions).flatMap((jurisdiction) => [
+    ...JURISDICTION_TABLE[jurisdiction].lawSources,
+  ]);
+}
+
+/** The statutes of the jurisdictions on, federal first: what the statute round searches. */
+export function statutesOf(jurisdictions: readonly Jurisdiction[]): LawSource[] {
+  return resolveJurisdictions(jurisdictions).flatMap((jurisdiction) => [
+    ...JURISDICTION_TABLE[jurisdiction].statutes,
+  ]);
+}
+
+/** The jurisdiction a law source belongs to. An unknown source is an error, never a default. */
+export function jurisdictionOfLawSource(source: string): Jurisdiction {
+  const jurisdiction = KNOWN.find((known) =>
+    (JURISDICTION_TABLE[known].lawSources as readonly string[]).includes(source),
+  );
+  if (!jurisdiction)
+    throw new Error(
+      `Law source "${source}" has no jurisdiction. Add it to JURISDICTION_TABLE in canon/src/jurisdiction.ts.`,
+    );
+  return jurisdiction;
 }

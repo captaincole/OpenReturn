@@ -14,11 +14,28 @@ export const slugOf = (path: string): string =>
 export const citationSegment = (raw: string): string =>
   raw.replace(/[–—]/g, "-").replace(/[^A-Za-z0-9-]/g, "");
 
-// law.db's documents are "usc-26-<year>"; corpus.db has none that start so.
-const LAW_DOC_PREFIX = "usc-";
+/*
+ * The start of each law.db document id: "usc-26-<year>", "cfr-26-<year>",
+ * "ca-rtc-<year>". No corpus.db document id starts so (FTB documents are
+ * "ca-540-inst-2025", hence "ca-rtc-", not "ca-"); a unit test reads every
+ * sidecar. The keys are the law sources (citation.ts).
+ */
+export const LAW_DOC_PREFIXES = {
+  statute: "usc-",
+  regulations: "cfr-",
+  california: "ca-rtc-",
+} as const;
 
-/** True for a block of the statute: "usc-26-2025::sec::s469::g-1". */
-export const isLawBlockId = (blockId: string): boolean => blockId.startsWith(LAW_DOC_PREFIX);
+type LawDocSource = keyof typeof LAW_DOC_PREFIXES;
+
+/** The law source of a law.db block or document id; null for a corpus id. */
+export function lawSourceOfId(id: string): LawDocSource | null {
+  const sources = Object.keys(LAW_DOC_PREFIXES) as LawDocSource[];
+  return sources.find((source) => id.startsWith(LAW_DOC_PREFIXES[source])) ?? null;
+}
+
+/** True for a block of law.db: "usc-26-2025::sec::s469::g-1", "ca-rtc-2025::sec::s17041::a". */
+export const isLawBlockId = (blockId: string): boolean => lawSourceOfId(blockId) !== null;
 
 export const citationOf = (number: string, path: string[]): string =>
   `26 U.S.C. § ${number}${path.map((segment) => `(${segment})`).join("")}`;

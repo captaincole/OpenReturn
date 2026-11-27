@@ -1,9 +1,10 @@
 import { parseArgs } from "node:util";
 import { storedEmbeddingModel } from "../../src/db/corpusStore";
 import { libraryDbPath } from "../../src/db/libsql";
+import { parseJurisdictions } from "../../src/jurisdiction";
 import type { LawSource } from "../../src/law/citation";
 import { CITATION_HINT, readLaw, requireLaw } from "../../src/law/lawRead";
-import { searchLaw, type SearchMode } from "../../src/law/lawSearch";
+import { searchLaw, sourcesToSearch, type SearchMode } from "../../src/law/lawSearch";
 import type { Command } from "../lib/cli";
 import { checkLibrary } from "./check";
 
@@ -27,6 +28,7 @@ async function search(argv: string[]): Promise<void> {
       mode: { type: "string", default: "hybrid" },
       section: { type: "string" },
       source: { type: "string" },
+      jurisdiction: { type: "string" },
     },
     allowPositionals: true,
   });
@@ -35,11 +37,16 @@ async function search(argv: string[]): Promise<void> {
   const source = SOURCES.find((known) => known === values.source);
   if (!query || !mode) throw new Error("required: a query string, and --mode fts|vector|hybrid");
   if (values.source && !source) throw new Error("--source is statute, regulations or california");
+  const jurisdictions = values.jurisdiction
+    ? parseJurisdictions(values.jurisdiction.split(",").map((one) => one.trim()))
+    : undefined;
+  const opts = { mode, section: values.section, source, jurisdictions };
+  const sources = sourcesToSearch(opts);
   await requireLaw();
   const limit = Math.max(1, Math.min(Number(values.limit), 25));
-  const hits = await searchLaw({ query, mode, limit, section: values.section, source });
+  const hits = await searchLaw({ ...opts, query, limit });
   console.log(
-    `query:   "${query}"\nmode:    ${mode}\nsource:  ${source ?? "statute and regulations"}\nresults: ${hits.length}\n`,
+    `query:   "${query}"\nmode:    ${mode}\nsource:  ${sources.join(" and ")}\nresults: ${hits.length}\n`,
   );
   hits.forEach((hit, index) => {
     console.log(`${index + 1}. ${hit.citation}  [${hit.source}] (score ${hit.score.toFixed(4)})`);
@@ -83,6 +90,10 @@ export const lawSearchCommand: Command = {
     {
       flag: "--source statute|regulations|california",
       desc: "one source only (default: the statute and the regulations; California only when named)",
+    },
+    {
+      flag: "--jurisdiction federal|CA|federal,CA",
+      desc: "the law of these jurisdictions: federal is the statute and the regulations, CA is California's code",
     },
     { flag: "--section <n>", desc: 'one section only, e.g. "469", "1.469-5T" or "CA 17041"' },
   ],

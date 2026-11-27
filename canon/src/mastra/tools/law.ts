@@ -1,6 +1,7 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
 import { lawInstalled } from "../../db/libsql";
+import { jurisdictionsInputSchema } from "../../jurisdiction";
 import { LAW_NOT_INSTALLED, readLaw, type LawBlock } from "../../law/lawRead";
 import { searchLaw } from "../../law/lawSearch";
 
@@ -23,7 +24,7 @@ const WHEN_TO_USE =
  * of January 2026.
  */
 const CALIFORNIA =
-  'California: source "california" is the California Revenue and Taxation Code, Division 2, Part 10 (Personal Income Tax, §§ 17001–18181) and Part 10.2 (administration: penalties, estimated tax, withholding, §§ 18401–19802). It is searched only when you name it: a search with no source never returns California. Name California\'s code in a citation: "CA 17041(a)" or "Cal. Rev. & Tax. Code § 17024.5"; a bare number is the Internal Revenue Code. California adopts the Internal Revenue Code as of a fixed date, with its own changes: § 17024.5(a)(1) sets January 1, 2025 for taxable years beginning on or after January 1, 2025, and many sections of Part 10 change or refuse a federal rule. The library\'s federal text is the Code as of January 2026, so a federal rule enacted after California\'s date may not be California law: read the California section that adopts or changes it, and cite both.';
+  'California: source "california" is the California Revenue and Taxation Code, Division 2, Part 10 (Personal Income Tax, §§ 17001–18181) and Part 10.2 (administration: penalties, estimated tax, withholding, §§ 18401–19802). It is searched only when you name it (source "california", or jurisdictions with "CA"): a search with neither never returns California. Name California\'s code in a citation: "CA 17041(a)" or "Cal. Rev. & Tax. Code § 17024.5"; a bare number is the Internal Revenue Code. California adopts the Internal Revenue Code as of a fixed date, with its own changes: § 17024.5(a)(1) sets January 1, 2025 for taxable years beginning on or after January 1, 2025, and many sections of Part 10 change or refuse a federal rule. The library\'s federal text is the Code as of January 2026, so a federal rule enacted after California\'s date may not be California law: read the California section that adopts or changes it, and cite both.';
 
 const notInstalled = z.object({ installed: z.literal(false), message: z.string() });
 
@@ -46,8 +47,11 @@ export const searchLawTool = createTool({
       .enum(SOURCES)
       .optional()
       .describe(
-        'Optional: one source only. Default: the statute and the regulations. "california" is California\'s code, searched only when named.',
+        'Optional: one source only. Default: the sources of jurisdictions, else the statute and the regulations. "california" is California\'s code, searched only when named.',
       ),
+    jurisdictions: jurisdictionsInputSchema.describe(
+      'Optional: the law of these jurisdictions. ["federal"] is the statute and the regulations; ["CA"] is California\'s code; ["federal", "CA"] is all three. Each source is searched on its own, and the hits take turns: statute, regulations, california. With source as well, the source must belong to a jurisdiction in the list. Leave out both for the federal law only: California hits mixed into a federal question push out federal hits, so ask for California on purpose, with ["CA"] or source "california".',
+    ),
     section: z
       .string()
       .optional()

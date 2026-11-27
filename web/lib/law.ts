@@ -59,8 +59,12 @@ export interface LawSectionVersion {
 }
 
 const BLOCK_ID_MARK = "::";
-// law.db's documents are "usc-26-<year>"; no IRS or FTB document id starts so.
-const LAW_DOC_PREFIX = "usc-";
+/*
+ * law.db's documents: "usc-26-<year>", "cfr-26-<year>", "ca-rtc-<year>". No
+ * IRS or FTB document id starts so (FTB ids start "ca-", hence "ca-rtc-").
+ * Keep in sync by hand with LAW_DOC_PREFIXES in canon/src/law/lawIds.ts.
+ */
+const LAW_DOC_PREFIXES = ["usc-", "cfr-", CA_DOC_PREFIX];
 const SECTION_SLUG_PREFIX = "s";
 const PAGE_ROOT = "/library/law";
 const OFFICIAL_SECTION_ROOT = "https://uscode.house.gov/us/usc/t26";
@@ -100,8 +104,9 @@ const isSectionChar = (char: string) => isDigit(char) || isLetter(char) || char 
 export const sectionInUrl = (number: string): string =>
   number.replaceAll("–", "-").replaceAll("—", "-").trim();
 
-/** True for a block of the statute: "usc-26-2025::sec::s469::g-1". */
-export const isLawBlockId = (blockId: string): boolean => blockId.startsWith(LAW_DOC_PREFIX);
+/** True for a block of law.db: "usc-26-2025::sec::s469::g-1", "ca-rtc-2025::sec::s17041::a". */
+export const isLawBlockId = (blockId: string): boolean =>
+  LAW_DOC_PREFIXES.some((prefix) => blockId.startsWith(prefix));
 
 /*
  * The element id of a block on its section's page: the end of its id,
