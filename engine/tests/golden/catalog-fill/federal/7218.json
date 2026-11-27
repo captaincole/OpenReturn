@@ -1,0 +1,1977 @@
+{
+  "formId": "form-7218",
+  "fieldCount": 219,
+  "entries": [
+    {
+      "fieldId": "form-7218.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "T-J5Z1T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-7LCRB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part1.1_facility_registration_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+          "text": "T-VJ0PE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part1.2a_facility_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+          "text": "T-1HHYT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part1.2b_owner_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+          "text": "T-1C3VD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part1.2b_owner_tin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+          "text": "T-1WSTO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part1.2c_facility_address_line1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+          "text": "T-1UIKA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part1.2c_facility_address_line2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+          "text": "T-1Y3JD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part1.2d_latitude_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_11[0]",
+          "text": "TK479K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part1.2d_latitude_degrees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_10[0]",
+          "text": "70"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part1.2d_latitude_sign",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_09[0]",
+          "text": "6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part1.2d_longitude_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_14[0]",
+          "text": "TXY4G4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part1.2d_longitude_degrees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_13[0]",
+          "text": "802"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part1.2d_longitude_sign",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_12[0]",
+          "text": "8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part1.3_date_construction_began",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part1.4_date_placed_in_service",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part1.5a_producer_registration_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "T-16U3P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part1.5b_registration_approval_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part1.6_provisional_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part1.7_prevailing_wage_apprenticeship_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part1.7_prevailing_wage_apprenticeship_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part2.1_amount_from_part3_line25h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "9,750"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part2.2_credit_from_pass_through",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "4,624"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part2.3_add_lines_1_and_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "1,699"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part2.4_allocated_to_patrons_beneficiaries",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "1,363"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.0.part2.5_cooperatives_estates_trusts_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "1,924"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.25_total_of_column_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_193[0]",
+          "text": "6,539"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row1_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_01[0]",
+          "text": "T-14RKG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row1_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_02[0]",
+          "text": "T-1CCEW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row1_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_03[0]",
+          "text": "5789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row1_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_04[0]",
+          "text": "T-17ZWK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row1_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_05[0]",
+          "text": "T-I7LRZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row1_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_06[0]",
+          "text": "7,554"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row1_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_07[0]",
+          "text": "T-1B3LH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row1_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_08[0]",
+          "text": "1,264"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row10_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_73[0]",
+          "text": "T-SE1OV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row10_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_74[0]",
+          "text": "T-10O97"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row10_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_75[0]",
+          "text": "7618"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row10_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_76[0]",
+          "text": "T-EJ9L5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row10_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_77[0]",
+          "text": "T-1PM1C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row10_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_78[0]",
+          "text": "4,146"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row10_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_79[0]",
+          "text": "T-M76DD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row10_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_80[0]",
+          "text": "4,982"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row11_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_81[0]",
+          "text": "T-1MQRQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row11_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_82[0]",
+          "text": "T-SJDCP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row11_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_83[0]",
+          "text": "9231"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row11_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_84[0]",
+          "text": "T-9H8Q7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row11_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_85[0]",
+          "text": "T-126FO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row11_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_86[0]",
+          "text": "7,696"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row11_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_87[0]",
+          "text": "T-14W7N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row11_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_88[0]",
+          "text": "6,708"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row12_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_89[0]",
+          "text": "T-CZ0IV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row12_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_90[0]",
+          "text": "T-13TTO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row12_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_91[0]",
+          "text": "7749"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row12_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_92[0]",
+          "text": "T-9IJGF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row12_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_93[0]",
+          "text": "T-18XJO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row12_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_94[0]",
+          "text": "7,626"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row12_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_95[0]",
+          "text": "T-1QDGN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row12_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_96[0]",
+          "text": "8,456"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row13_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_97[0]",
+          "text": "T-TC4V6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row13_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_98[0]",
+          "text": "T-9ZZKL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row13_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_99[0]",
+          "text": "3534"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row13_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_100[0]",
+          "text": "T-1SNIF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row13_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_101[0]",
+          "text": "T-13JEP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row13_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_102[0]",
+          "text": "1,769"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row13_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_103[0]",
+          "text": "T-2WRJ5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row13_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_104[0]",
+          "text": "8,098"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row14_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_105[0]",
+          "text": "T-1MNUZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row14_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_106[0]",
+          "text": "T-1K8VR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row14_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_107[0]",
+          "text": "6722"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row14_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_108[0]",
+          "text": "T-CZFOS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row14_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_109[0]",
+          "text": "T-14ON3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row14_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_110[0]",
+          "text": "6,806"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row14_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_111[0]",
+          "text": "T-1C27M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row14_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_112[0]",
+          "text": "5,135"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row15_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_113[0]",
+          "text": "T-EV3K2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row15_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_114[0]",
+          "text": "T-N3K66"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row15_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_115[0]",
+          "text": "3296"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row15_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_116[0]",
+          "text": "T-1UZ4H"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row15_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_117[0]",
+          "text": "T-45TH9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row15_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_118[0]",
+          "text": "8,506"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row15_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_119[0]",
+          "text": "T-11QZC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row15_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_120[0]",
+          "text": "7,523"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row16_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_121[0]",
+          "text": "T-GX5U7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row16_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_122[0]",
+          "text": "T-1QVY3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row16_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_123[0]",
+          "text": "8371"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row16_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_124[0]",
+          "text": "T-18VBA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row16_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_125[0]",
+          "text": "T-1FPSI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row16_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_126[0]",
+          "text": "9,701"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row16_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_127[0]",
+          "text": "T-8MZC9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row16_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_128[0]",
+          "text": "9,807"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row17_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_129[0]",
+          "text": "T-1FQIX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row17_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_130[0]",
+          "text": "T-1RWHJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row17_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_131[0]",
+          "text": "6862"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row17_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_132[0]",
+          "text": "T-1DNJ1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row17_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_133[0]",
+          "text": "T-1ATP3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row17_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_134[0]",
+          "text": "1,504"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row17_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_135[0]",
+          "text": "T-1TGMB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row17_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_136[0]",
+          "text": "3,279"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row18_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_137[0]",
+          "text": "T-1GX24"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row18_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_138[0]",
+          "text": "T-1INDB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row18_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_139[0]",
+          "text": "6534"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row18_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_140[0]",
+          "text": "T-1JODS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row18_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_141[0]",
+          "text": "T-1JZ9G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row18_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_142[0]",
+          "text": "5,172"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row18_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_143[0]",
+          "text": "T-1XR14"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row18_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_144[0]",
+          "text": "9,333"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row19_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_145[0]",
+          "text": "T-HCQ6J"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row19_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_146[0]",
+          "text": "T-1XM14"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row19_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_147[0]",
+          "text": "5970"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row19_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_148[0]",
+          "text": "T-1K517"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row19_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_149[0]",
+          "text": "T-ANHME"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row19_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_150[0]",
+          "text": "8,835"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row19_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_151[0]",
+          "text": "T-4I7OF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row19_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_152[0]",
+          "text": "7,962"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row2_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_09[0]",
+          "text": "T-1FUOV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row2_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_10[0]",
+          "text": "T-186DW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row2_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_11[0]",
+          "text": "4755"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row2_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_12[0]",
+          "text": "T-1IX5H"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row2_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_13[0]",
+          "text": "T-YTEED"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row2_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_14[0]",
+          "text": "2,361"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row2_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_15[0]",
+          "text": "T-1TIQZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row2_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_16[0]",
+          "text": "1,849"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row20_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_153[0]",
+          "text": "T-HBXVJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row20_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_154[0]",
+          "text": "T-PIIX5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row20_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_155[0]",
+          "text": "1790"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row20_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_156[0]",
+          "text": "T-1J3XQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row20_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_157[0]",
+          "text": "T-1JW8E"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row20_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_158[0]",
+          "text": "7,394"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row20_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_159[0]",
+          "text": "T-2Q7BF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row20_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_160[0]",
+          "text": "9,406"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row21_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row21[0].f2_161[0]",
+          "text": "T-1S649"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row21_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row21[0].f2_162[0]",
+          "text": "T-G0ESP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row21_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row21[0].f2_163[0]",
+          "text": "3353"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row21_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row21[0].f2_164[0]",
+          "text": "T-1FKYX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row21_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row21[0].f2_165[0]",
+          "text": "T-1YWOW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row21_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row21[0].f2_166[0]",
+          "text": "5,661"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row21_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row21[0].f2_167[0]",
+          "text": "T-JN7HS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row21_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row21[0].f2_168[0]",
+          "text": "9,875"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row22_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row22[0].f2_169[0]",
+          "text": "T-WP6IG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row22_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row22[0].f2_170[0]",
+          "text": "T-1WM7O"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row22_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row22[0].f2_171[0]",
+          "text": "4108"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row22_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row22[0].f2_172[0]",
+          "text": "T-ZJNS9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row22_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row22[0].f2_173[0]",
+          "text": "T-P718J"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row22_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row22[0].f2_174[0]",
+          "text": "5,866"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row22_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row22[0].f2_175[0]",
+          "text": "T-T2J6X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row22_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row22[0].f2_176[0]",
+          "text": "4,316"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row23_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row23[0].f2_177[0]",
+          "text": "T-E2ENY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row23_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row23[0].f2_178[0]",
+          "text": "T-1IEQE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row23_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row23[0].f2_179[0]",
+          "text": "9912"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row23_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row23[0].f2_180[0]",
+          "text": "T-O8D8M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row23_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row23[0].f2_181[0]",
+          "text": "T-KJVP7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row23_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row23[0].f2_182[0]",
+          "text": "3,490"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row23_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row23[0].f2_183[0]",
+          "text": "T-1PCME"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row23_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row23[0].f2_184[0]",
+          "text": "9,182"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row24_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row24[0].f2_185[0]",
+          "text": "T-17ABJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row24_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row24[0].f2_186[0]",
+          "text": "T-1TJWT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row24_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row24[0].f2_187[0]",
+          "text": "4614"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row24_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row24[0].f2_188[0]",
+          "text": "T-24UDV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row24_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row24[0].f2_189[0]",
+          "text": "T-12ZVL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row24_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row24[0].f2_190[0]",
+          "text": "5,846"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row24_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row24[0].f2_191[0]",
+          "text": "T-MN9TP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row24_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row24[0].f2_192[0]",
+          "text": "7,163"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row3_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_17[0]",
+          "text": "T-W406R"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row3_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_18[0]",
+          "text": "T-1RPS6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row3_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_19[0]",
+          "text": "7897"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row3_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_20[0]",
+          "text": "T-IA6SR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row3_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_21[0]",
+          "text": "T-1MAGH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row3_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_22[0]",
+          "text": "2,182"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row3_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_23[0]",
+          "text": "T-AHYPF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row3_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_24[0]",
+          "text": "4,846"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row4_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_25[0]",
+          "text": "T-Z9K61"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row4_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_26[0]",
+          "text": "T-ZGAS0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row4_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_27[0]",
+          "text": "3026"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row4_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_28[0]",
+          "text": "T-UJX4N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row4_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_29[0]",
+          "text": "T-S5CYL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row4_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_30[0]",
+          "text": "1,200"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row4_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_31[0]",
+          "text": "T-XLQD3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row4_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_32[0]",
+          "text": "3,118"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row5_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_33[0]",
+          "text": "T-1PVVB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row5_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_34[0]",
+          "text": "T-CTIMI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row5_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_35[0]",
+          "text": "8214"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row5_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_36[0]",
+          "text": "T-142NM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row5_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_37[0]",
+          "text": "T-I0FSQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row5_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_38[0]",
+          "text": "9,362"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row5_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_39[0]",
+          "text": "T-TER5M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row5_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_40[0]",
+          "text": "8,028"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row6_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_41[0]",
+          "text": "T-1ISQU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row6_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_42[0]",
+          "text": "T-EKWB4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row6_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_43[0]",
+          "text": "0139"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row6_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_44[0]",
+          "text": "T-63X8V"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row6_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_45[0]",
+          "text": "T-13RCN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row6_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_46[0]",
+          "text": "4,708"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row6_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_47[0]",
+          "text": "T-1JGWV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row6_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_48[0]",
+          "text": "5,928"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row7_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_49[0]",
+          "text": "T-1QL27"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row7_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_50[0]",
+          "text": "T-1A6IC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row7_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_51[0]",
+          "text": "4552"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row7_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_52[0]",
+          "text": "T-1H345"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row7_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_53[0]",
+          "text": "T-90YUE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row7_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_54[0]",
+          "text": "8,265"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row7_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_55[0]",
+          "text": "T-18VFI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row7_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_56[0]",
+          "text": "8,934"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row8_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_57[0]",
+          "text": "T-IIJ7E"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row8_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_58[0]",
+          "text": "T-GOVXO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row8_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_59[0]",
+          "text": "0168"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row8_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_60[0]",
+          "text": "T-1RFPR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row8_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_61[0]",
+          "text": "T-1SZH7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row8_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_62[0]",
+          "text": "7,702"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row8_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_63[0]",
+          "text": "T-YTX6K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row8_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_64[0]",
+          "text": "7,105"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row9_col_a_type_of_fuel",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_65[0]",
+          "text": "T-Q9PI7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row9_col_b_type_of_feedstock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_66[0]",
+          "text": "T-123DU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row9_col_c_calendar_year_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_67[0]",
+          "text": "1910"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row9_col_d_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_68[0]",
+          "text": "T-1RPQT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row9_col_e_emissions_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_69[0]",
+          "text": "T-1X7U1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row9_col_f_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_70[0]",
+          "text": "7,642"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row9_col_g_applicable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_71[0]",
+          "text": "T-OGWQX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7218.1.part3.row9_col_h_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_72[0]",
+          "text": "9,919"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,771 @@
+{
+  "formId": "form-8835",
+  "fieldCount": 85,
+  "entries": [
+    {
+      "fieldId": "form-8835.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-1O2DP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-VOJXA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.1_irs_registration_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-ZSL4G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.10a_energy_community_bonus_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.10b_energy_community_bonus_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.10c_energy_community_not_applicable",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.11a_solar_dc_capacity_checkbox",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.11a_solar_dc_capacity_kw",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "T-18UKZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.11b_dc_capacity_not_applicable",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.12a_solar_ac_capacity_checkbox",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.12a_solar_ac_capacity_kw",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "T-NYL9Y"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.12b_wind_ac_capacity_checkbox",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.12b_wind_ac_capacity_kw",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "T-1I55A"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.12c_other_ac_capacity_checkbox",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_9[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.12c_other_ac_capacity_kw",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "T-IC5HJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.12d_ac_capacity_not_applicable",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_10[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.2a_facility_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "T-RKTCQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.2a_facility_type_continued",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "T-18D6C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.2b_owner_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "T-1OT02"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.2b_owner_tin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "T-DOFAS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.3a_facility_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "T-1XLIV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.3a_facility_address_continued",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "T-N56YA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.3b_latitude_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_12[0]",
+          "text": "T19QLL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.3b_latitude_degrees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_11[0]",
+          "text": "34"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.3b_latitude_sign",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_10[0]",
+          "text": "4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.3b_longitude_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_15[0]",
+          "text": "T1413N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.3b_longitude_degrees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_14[0]",
+          "text": "191"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.3b_longitude_sign",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_13[0]",
+          "text": "3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.4_date_construction_began",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.5_date_placed_in_service",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.6_biomass_expansion_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.6_biomass_expansion_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.8a_output_under_1_megawatt",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.8b_construction_before_2023_01_29",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.8c_meets_wage_apprenticeship",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.8d_not_qualified_facility",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[3]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.9a_domestic_content_bonus_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.0.part1.9b_domestic_content_bonus_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.10_domestic_content_bonus",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_50[0]",
+          "text": "6,188"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.11_energy_community_bonus",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_51[0]",
+          "text": "8,515"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.12_add_lines_9_10_11",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_52[0]",
+          "text": "8,534"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.13_elective_payment_adjusted_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_53[0]",
+          "text": "1,884"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1a_wind_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1a[0].f2_3[0]",
+          "text": "9,971"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1a_wind_kwh_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1a[0].f2_1[0]",
+          "text": "7,498"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1b_closed_loop_biomass_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1b[0].f2_6[0]",
+          "text": "9,661"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1b_closed_loop_biomass_kwh_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1b[0].f2_4[0]",
+          "text": "2,692"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1c_geothermal_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1c[0].f2_9[0]",
+          "text": "6,074"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1c_geothermal_kwh_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1c[0].f2_7[0]",
+          "text": "1,981"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1d_solar_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1d[0].f2_12[0]",
+          "text": "1,951"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1d_solar_kwh_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1d[0].f2_10[0]",
+          "text": "4,568"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1e_offshore_wind_facility_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1e[0].f2_15[0]",
+          "text": "9,881"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1e_offshore_wind_facility_kwh_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1e[0].f2_13[0]",
+          "text": "4,329"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1f_open_loop_biomass_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1f[0].f2_18[0]",
+          "text": "8,006"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1f_open_loop_biomass_kwh_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1f[0].f2_16[0]",
+          "text": "2,576"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1g_landfill_gas_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1g[0].f2_21[0]",
+          "text": "7,054"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1g_landfill_gas_kwh_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1g[0].f2_19[0]",
+          "text": "4,479"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1h_trash_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1h[0].f2_24[0]",
+          "text": "7,575"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1h_trash_kwh_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1h[0].f2_22[0]",
+          "text": "5,676"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1i_hydropower_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1i[0].f2_27[0]",
+          "text": "2,099"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1i_hydropower_kwh_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1i[0].f2_25[0]",
+          "text": "6,800"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1j_marine_hydrokinetic_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1j[0].f2_30[0]",
+          "text": "3,722"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.1j_marine_hydrokinetic_kwh_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartII_Lines1a-j[0].Line1j[0].f2_28[0]",
+          "text": "8,657"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.2_total_column_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_31[0]",
+          "text": "6,454"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.3_phaseout_adjustment",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_34[0]",
+          "text": "1,370"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.3_phaseout_adjustment_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_32[0]",
+          "text": "7,978"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.3_phaseout_adjustment_factor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_33[0]",
+          "text": "T-1NJFO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.4_credit_before_reduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_35[0]",
+          "text": "4,357"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.5a_tax_exempt_bond_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_36[0]",
+          "text": "T-UMA4Q"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.5b_line4_times_line5a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_37[0]",
+          "text": "7,052"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.5c_line4_times_15_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_38[0]",
+          "text": "3,241"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.5d_smaller_of_5b_5c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_39[0]",
+          "text": "8,419"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.6_line4_less_line5d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_40[0]",
+          "text": "1,015"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.7a_wind_began_2017",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_41[0]",
+          "text": "8,199"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.7b_line7a_times_20_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_42[0]",
+          "text": "9,903"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.7c_wind_began_2018_2020_2021",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_43[0]",
+          "text": "3,680"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.7d_line7c_times_40_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_44[0]",
+          "text": "1,747"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.7e_wind_began_2019",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_45[0]",
+          "text": "6,902"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.7f_line7e_times_60_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_46[0]",
+          "text": "5,347"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.7g_add_7b_7d_7f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_47[0]",
+          "text": "8,157"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.8_line6_less_line7g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_48[0]",
+          "text": "4,845"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.1.part2.9_increased_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_49[0]",
+          "text": "9,323"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.2.part2.14_credit_from_pass_through_entities",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_1[0]",
+          "text": "1,851"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.2.part2.15_add_lines_13_14",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_2[0]",
+          "text": "4,707"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.2.part2.16_allocated_to_patrons_beneficiaries",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_3[0]",
+          "text": "5,563"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8835.2.part2.17_cooperative_estate_trust_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_4[0]",
+          "text": "2,110"
+        }
+      ]
+    }
+  ]
+}

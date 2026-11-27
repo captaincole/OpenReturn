@@ -1,0 +1,1091 @@
+{
+  "form": {
+    "formId": "form-7213",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Nuclear Power Production Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-7213.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-7213.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 447.4,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.1a_facility_name_line1",
+      "label": "Section 1, line 1a — Name or description of nuclear facility",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 223.2,
+        "y": 641.97
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.1a_facility_name_line2",
+      "label": "Section 1, line 1a — Name or description of nuclear facility (continued)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 629.968
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.1b_i_owner_name",
+      "label": "Section 1, line 1b(i) — If different than filer, enter owner's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 242.8,
+        "y": 611.968
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.1b_ii_owner_tin",
+      "label": "Section 1, line 1b(ii) — If different than filer, enter owner's TIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 149.8,
+        "y": 599.969
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.2a_facility_address_line1",
+      "label": "Section 1, line 2a — Address of facility (if applicable)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 198.8,
+        "y": 581.969
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.2a_facility_address_line2",
+      "label": "Section 1, line 2a — Address of facility (if applicable) (continued)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 569.97
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.2b_i_latitude_sign",
+      "label": "Section 1, line 2b(i) — Latitude: Enter a \"+\" (plus) or \"-\" (minus) sign in the first box",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 180.014,
+        "y": 551.981
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.2b_i_latitude_degrees",
+      "label": "Section 1, line 2b(i) — Latitude: whole degrees (before the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 201.614,
+        "y": 551.981
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.2b_i_latitude_decimal",
+      "label": "Section 1, line 2b(i) — Latitude: decimal digits (after the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 237.614,
+        "y": 551.981
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.2b_ii_longitude_sign",
+      "label": "Section 1, line 2b(ii) — Longitude: Enter a \"+\" (plus) or \"-\" (minus) sign in the first box",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 396,
+        "y": 551.97
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.2b_ii_longitude_degrees",
+      "label": "Section 1, line 2b(ii) — Longitude: whole degrees (before the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 551.97
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.2b_ii_longitude_decimal",
+      "label": "Section 1, line 2b(ii) — Longitude: decimal digits (after the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 468,
+        "y": 551.97
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.3_construction_start_month",
+      "label": "Section 1, line 3 — Construction start date (MM/DD/YYYY): month",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 521.968
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.3_construction_start_day",
+      "label": "Section 1, line 3 — Construction start date (MM/DD/YYYY): day",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 259.2,
+        "y": 521.968
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.3_construction_start_year",
+      "label": "Section 1, line 3 — Construction start date (MM/DD/YYYY): year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 521.968
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.4_placed_in_service_month",
+      "label": "Section 1, line 4 — Date facility was placed in service (MM/DD/YYYY): month",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 273.6,
+        "y": 509.969
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.4_placed_in_service_day",
+      "label": "Section 1, line 4 — Date facility was placed in service (MM/DD/YYYY): day",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 302.4,
+        "y": 509.969
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.4_placed_in_service_year",
+      "label": "Section 1, line 4 — Date facility was placed in service (MM/DD/YYYY): year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 331.2,
+        "y": 509.969
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.5_facility_nameplate_capacity",
+      "label": "Section 1, line 5 — Facility nameplate capacity",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 180,
+        "y": 497.97
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.6_nameplate_capacity_allocated",
+      "label": "Section 1, line 6 — Facility nameplate capacity allocated to you",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 247.8,
+        "y": 485.968
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.7_irs_acceptance_letter_month",
+      "label": "Section 1, line 7 — Date of acceptance letter from the IRS under Notice 2023-24, section 6.05 (MM/DD/YYYY): month",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 439.2,
+        "y": 467.968
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.7_irs_acceptance_letter_day",
+      "label": "Section 1, line 7 — Date of acceptance letter from the IRS under Notice 2023-24, section 6.05 (MM/DD/YYYY): day",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 468,
+        "y": 467.968
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.7_irs_acceptance_letter_year",
+      "label": "Section 1, line 7 — Date of acceptance letter from the IRS under Notice 2023-24, section 6.05 (MM/DD/YYYY): year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 467.968
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.8_owner_of_facility",
+      "label": "Section 1, line 8 — Check one: Owner of facility",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 125.6,
+        "y": 439.969
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.8_eligible_project_partner",
+      "label": "Section 1, line 8 — Check one: Eligible project partner under section 45J(e)(2)(B) (eligible project partners attach section 45J(e) Election Statement)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 226.4,
+        "y": 439.969
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.9_section_761a_election_yes",
+      "label": "Section 1, line 9 — Is the facility owned through an organization that has made a valid section 761(a) election? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 415.968
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.9_section_761a_election_no",
+      "label": "Section 1, line 9 — Is the facility owned through an organization that has made a valid section 761(a) election? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+      "position": {
+        "page": 0,
+        "x": 468,
+        "y": 415.968
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.1_nmcl_allocated_mw",
+      "label": "Section 2, line 1 — Portion of the National Megawatt Capacity Limitation (NMCL) allocated to you (MW)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line1_ReadOrder[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 365.969
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.2_facility_nameplate_capacity_mw",
+      "label": "Section 2, line 2 — Facility nameplate capacity (MW)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_25[1]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 353.97
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.3_nmcl_share_percent",
+      "label": "Section 2, line 3 — Divide line 1 by line 2 (%)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 341.968
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.4_kwh_produced_and_sold",
+      "label": "Section 2, line 4 — Kilowatt hours of electricity produced and sold to unrelated persons during tax year (kWh)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 317.97
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.5a_qualifying_electricity_production_kwh",
+      "label": "Section 2, line 5a — Tentative credit: Qualifying electricity production. Multiply line 3 by line 4 (kWh)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 293.969
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.5b_tentative_credit",
+      "label": "Section 2, line 5b — Tentative credit: Multiply kWh on line 5a by $0.018",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 281.97
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.6a_annual_limitation_mw",
+      "label": "Section 2, line 6a — Annual limitation for credit: Divide line 1 by 1,000 (MW)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 257.969
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.6b_annual_limitation_amount",
+      "label": "Section 2, line 6b — Annual limitation for credit: Multiply line 6a by $125,000,000",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 245.97
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.7_smaller_of_5b_or_6b",
+      "label": "Section 2, line 7 — Smaller of line 5b or 6b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 233.968
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.8_credit_from_pass_through_entities",
+      "label": "Section 2, line 8 — Credit for production from advanced nuclear power facilities from partnerships, S corporations, estates, and trusts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 209.97
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.9_total_lines_7_and_8",
+      "label": "Section 2, line 9 — Total of lines 7 and 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 173.97
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.10_allocated_to_beneficiaries",
+      "label": "Section 2, line 10 — Amount allocated to beneficiaries of the estate or trust",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 161.968
+      }
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.11_estates_trusts_net_credit",
+      "label": "Section 2, line 11 — Estates and trusts, subtract line 10 from line 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 149.969
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.1_irs_registration_number",
+      "label": "Part II, Section 1, Line 1 — If making an elective payment election or transfer election, enter the IRS-issued registration number of the facility",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_01_Section1[0]",
+      "position": {
+        "page": 1,
+        "x": 122.4,
+        "y": 677.97
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.2a_facility_name_description",
+      "label": "Part II, Section 1, Line 2a — Name or description of qualified nuclear power facility",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_02[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.2a_facility_name_description_cont",
+      "label": "Part II, Section 1, Line 2a — Name or description of qualified nuclear power facility (continued)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 647.968
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.2b_i_owner_name",
+      "label": "Part II, Section 1, Line 2b(i) — If different than filer, enter owner's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_04[0]",
+      "position": {
+        "page": 1,
+        "x": 242.8,
+        "y": 629.968
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.2b_ii_owner_tin",
+      "label": "Part II, Section 1, Line 2b(ii) — If different than filer, enter owner's TIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_05[0]",
+      "position": {
+        "page": 1,
+        "x": 149.8,
+        "y": 617.969
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.3a_facility_address",
+      "label": "Part II, Section 1, Line 3a — Address of facility (if applicable)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_06[0]",
+      "position": {
+        "page": 1,
+        "x": 201.6,
+        "y": 599.969
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.3a_facility_address_cont",
+      "label": "Part II, Section 1, Line 3a — Address of facility (if applicable) (continued)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_07[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 587.97
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.3b_i_latitude_sign",
+      "label": "Part II, Section 1, Line 3b(i) — Latitude: Enter a \"+\" (plus) or \"-\" (minus) sign in the first box",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Latitude_CombFields[0].f2_08[0]",
+      "position": {
+        "page": 1,
+        "x": 180,
+        "y": 570.123
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.3b_i_latitude_degrees",
+      "label": "Part II, Section 1, Line 3b(i) — Latitude: whole degrees (before the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Latitude_CombFields[0].f2_09[0]",
+      "position": {
+        "page": 1,
+        "x": 201.6,
+        "y": 570.123
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.3b_i_latitude_decimal",
+      "label": "Part II, Section 1, Line 3b(i) — Latitude: decimal digits (after the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Latitude_CombFields[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 237.6,
+        "y": 570.123
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.3b_ii_longitude_sign",
+      "label": "Part II, Section 1, Line 3b(ii) — Longitude: Enter a \"+\" (plus) or \"-\" (minus) sign in the first box",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Longitude_CombFields[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 569.97
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.3b_ii_longitude_degrees",
+      "label": "Part II, Section 1, Line 3b(ii) — Longitude: whole degrees (before the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Longitude_CombFields[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 417.6,
+        "y": 569.97
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.3b_ii_longitude_decimal",
+      "label": "Part II, Section 1, Line 3b(ii) — Longitude: decimal digits (after the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Longitude_CombFields[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 569.97
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.4_nrc_permit_license_number",
+      "label": "Part II, Section 1, Line 4 — Active construction permit or license number from the Nuclear Regulatory Commission",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 417.6,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.1_kwh_produced_sold",
+      "label": "Part II, Section 2, Line 1 — Kilowatt hours of electricity produced and sold at facility during tax year (kWh)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 503.968
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.3_line1_times_rate",
+      "label": "Part II, Section 2, Line 3 — Multiply line 1 by line 2 ($0.003)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.4_gross_receipts_electricity_sold",
+      "label": "Part II, Section 2, Line 4 — Gross receipts from electricity produced and sold by the facility to unrelated persons during the tax year, including amounts received with respect to the facility from a zero-emission credit (ZEC) program",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line4_ReadOrder[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.5_zec_program_payments",
+      "label": "Part II, Section 2, Line 5 — Amount of payments from ZEC program (if any) included on line 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 431.968
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.6_gross_receipts_after_zec",
+      "label": "Part II, Section 2, Line 6 — If the full amount of the zero-emission nuclear power production credit is used to reduce the ZEC program payments reported on line 5, subtract line 5 from line 4. Otherwise, enter the amount from line 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 395.968
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.7_line1_times_0_025",
+      "label": "Part II, Section 2, Line 7 — Multiply line 1 by $0.025",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.8_line6_minus_line7",
+      "label": "Part II, Section 2, Line 8 — Subtract line 7 from line 6. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.9_smaller_line3_or_16pct_line8",
+      "label": "Part II, Section 2, Line 9 — Enter the smaller of line 3 or 16% (0.16) of line 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 359.968
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.10_line3_minus_line9",
+      "label": "Part II, Section 2, Line 10 — Subtract line 9 from line 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 347.969
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.11_increased_credit_amount",
+      "label": "Part II, Section 2, Line 11 — Increased credit amount for qualified nuclear power facilities. If you meet the prevailing wage requirements, multiply the amount on line 10 by 5.0. Otherwise, enter the amount from line 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.12_credit_from_pass_through",
+      "label": "Part II, Section 2, Line 12 — Credit for production from zero-emission nuclear power facilities from partnerships, S corporations, estates, and trusts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.13_total_lines_11_12",
+      "label": "Part II, Section 2, Line 13 — Total of lines 11 and 12",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_29[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.14_allocated_to_beneficiaries",
+      "label": "Part II, Section 2, Line 14 — Amount allocated to beneficiaries of the estate or trust",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_30[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.15_estate_trust_credit",
+      "label": "Part II, Section 2, Line 15 — Estates and trusts, subtract line 14 from line 13",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_31[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 227.97
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/7213/blank.pdf",
+    "ingestedAt": "2026-11-27T15:01:23.373Z",
+    "totalFields": 70,
+    "skipped": 0,
+    "catalogEntries": 70
+  }
+}

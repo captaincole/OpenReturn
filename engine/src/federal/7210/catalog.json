@@ -1,0 +1,554 @@
+{
+  "form": {
+    "formId": "form-7210",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Clean Hydrogen Production Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-7210.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-7210.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 684
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-7210.0.header.a_i_emissions_value_rate",
+      "label": "A(i) — Enter the facility's emissions value or rate for each hydrogen production process",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 630
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-7210.0.header.a_ii_doe_control_number",
+      "label": "A(ii) — The Department of Energy (DOE) control number, if applicable",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 618.001
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-7210.0.line.1_irs_registration_number",
+      "label": "Line 1 — If making an elective payment election or transfer election, enter the IRS-issued registration number of the facility",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 122.4,
+        "y": 576
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.2_i_owner_name",
+      "label": "Line 2(i) — If different than filer, enter owner's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 242.8,
+        "y": 558
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.2_ii_owner_tin",
+      "label": "Line 2(ii) — If different than filer, enter owner's TIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 149.8,
+        "y": 546.001
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-7210.0.line.2a_facility_address_description",
+      "label": "Line 2a — Address and description of the facility",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 223.2,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.2a_facility_address_description_cont",
+      "label": "Line 2a — Address and description of the facility (continued)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.2b_i_latitude_sign",
+      "label": "Line 2b(i) — Latitude: enter a \"+\" (plus) or \"-\" (minus) sign",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 180,
+        "y": 498.002
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-7210.0.line.2b_i_latitude_degrees",
+      "label": "Line 2b(i) — Latitude: whole degrees",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 201.6,
+        "y": 498.002
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-7210.0.line.2b_i_latitude_decimal",
+      "label": "Line 2b(i) — Latitude: decimal digits",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 237.6,
+        "y": 498.002
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-7210.0.line.2b_ii_longitude_sign",
+      "label": "Line 2b(ii) — Longitude: enter a \"+\" (plus) or \"-\" (minus) sign",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 396,
+        "y": 498.002
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-7210.0.line.2b_ii_longitude_degrees",
+      "label": "Line 2b(ii) — Longitude: whole degrees",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 498.002
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-7210.0.line.2b_ii_longitude_decimal",
+      "label": "Line 2b(ii) — Longitude: decimal digits",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 468,
+        "y": 498.002
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-7210.0.line.3_date_construction_began",
+      "label": "Line 3 — Date construction began (MM/DD/YYYY)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 237.6,
+        "y": 474.001
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-7210.0.line.4_date_placed_in_service",
+      "label": "Line 4 — Date placed in service (MM/DD/YYYY)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 237.6,
+        "y": 462.002
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-7210.0.line.5_increased_credit_eligible",
+      "label": "Line 5 — Check this box if the facility is eligible for the increased credit amount",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 564.8,
+        "y": 448.999
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.6a_less_than_0_45_col_a",
+      "label": "Line 6a — Emissions less than 0.45 kg CO2e per kg: kilograms of qualified clean hydrogen produced (column (a))",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines6a-6d[0].Line6a[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 345.6,
+        "y": 384.001
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.6a_less_than_0_45_col_c",
+      "label": "Line 6a — Emissions less than 0.45: column (a) x column (b) ($0.637)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines6a-6d[0].Line6a[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 384.001
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.6b_0_45_to_1_5_col_a",
+      "label": "Line 6b — Emissions 0.45 to less than 1.5 kg CO2e per kg: kilograms of qualified clean hydrogen produced (column (a))",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines6a-6d[0].Line6b[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 345.6,
+        "y": 372.002
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.6b_0_45_to_1_5_col_c",
+      "label": "Line 6b — Emissions 0.45 to less than 1.5: column (a) x column (b) ($0.213)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines6a-6d[0].Line6b[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 372.002
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.6c_1_5_to_2_5_col_a",
+      "label": "Line 6c — Emissions 1.5 to less than 2.5 kg CO2e per kg: kilograms of qualified clean hydrogen produced (column (a))",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines6a-6d[0].Line6c[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 345.6,
+        "y": 360.003
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.6c_1_5_to_2_5_col_c",
+      "label": "Line 6c — Emissions 1.5 to less than 2.5: column (a) x column (b) ($0.159)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines6a-6d[0].Line6c[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 360.003
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.6d_2_5_to_4_0_col_a",
+      "label": "Line 6d — Emissions 2.5 to not greater than 4.0 kg CO2e per kg: kilograms of qualified clean hydrogen produced (column (a))",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines6a-6d[0].Line6d[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 345.6,
+        "y": 348.004
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.6d_2_5_to_4_0_col_c",
+      "label": "Line 6d — Emissions 2.5 to not greater than 4.0: column (a) x column (b) ($0.127)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines6a-6d[0].Line6d[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 348.004
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.7_credit_before_reduction",
+      "label": "Line 7 — Credit before reduction. Add column (c) of lines 6a through 6d",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.8a_tax_exempt_bond_ratio",
+      "label": "Line 8a — Divide the sum, for the tax year and all prior tax years, of all proceeds of tax-exempt bonds used to finance the qualified facility, by the aggregate additions to the capital account for the qualified facility, as of the close of the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.8b_line_7_times_8a",
+      "label": "Line 8b — Multiply line 7 by line 8a",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 198
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.8c_line_7_times_15_percent",
+      "label": "Line 8c — Multiply line 7 by 15% (0.15)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 186.001
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.8d_smaller_of_8b_8c",
+      "label": "Line 8d — Enter the smaller of line 8b or 8c",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 174.002
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.9_credit_after_bond_reduction",
+      "label": "Line 9 — Subtract line 8d from line 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 162
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.10_increased_credit_amount",
+      "label": "Line 10 — Increased credit amount for qualified clean hydrogen production facilities. If you checked the box on line 5, multiply the amount on line 9 by 5.0. Otherwise, enter the amount from line 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 126
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.11_credit_from_partnerships_s_corps",
+      "label": "Line 11 — Clean hydrogen credit from partnerships and S corporations",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 114.001
+      }
+    },
+    {
+      "fieldId": "form-7210.0.line.12_clean_hydrogen_credit",
+      "label": "Line 12 — Add lines 10 and 11",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 78.001
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/7210/blank.pdf",
+    "ingestedAt": "2026-11-27T15:00:56.799Z",
+    "totalFields": 35,
+    "skipped": 0,
+    "catalogEntries": 35
+  }
+}
