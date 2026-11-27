@@ -4,7 +4,10 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { scheduleK1Form1065Pdf } from "../../documents/scheduleK1Form1065.js";
-import { NELA, NELA_TAX_YEAR, crushK1 } from "./facts.js";
+import { NELA, crushK1 } from "./facts.js";
+
+/* The partnership's tax year runs from October 1, 2024, to September 30, 2025. */
+const FISCAL_YEAR_FORM = 2024;
 
 const docsDir = join(dirname(fileURLToPath(import.meta.url)), "docs");
 
@@ -26,8 +29,10 @@ async function main() {
       partnership: { street: "88 Elevator Spur", cityStateZip: "Plainview, TX 79072" },
       irsCenter: "Ogden, UT",
       partner,
+      fiscalYear: { beginning: "10/01/2024", ending: "09/30/2025" },
     },
-    NELA_TAX_YEAR,
+    // A tax year that begins in 2024 takes the 2024 Schedule K-1; its box 15 code AC is the same credit.
+    FISCAL_YEAR_FORM,
   );
   await writeFile(join(docsDir, NAME), pdf);
   console.log(`✓ ${NAME} (${pdf.length} bytes)`);

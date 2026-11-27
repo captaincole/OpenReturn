@@ -29,14 +29,14 @@ Forms that file: Form 1040, Schedules 1, 2, 3, C, E and SE, Forms 8995-A, 6251, 
 
 ## Documents
 
-The K-1 is a PDF in `docs/`, made by `generate-docs.ts` from the existing Schedule K-1 (Form 1065) generator.
+The K-1 is a PDF in `docs/`, made by `generate-docs.ts` from the existing Schedule K-1 (Form 1065) generator. The partnership's tax year begins on October 1, 2024, so its K-1 is the 2024 form, with the dates in the header's "beginning" and "ending" boxes. The 2024 partner instructions give box 15 code AC the same meaning as the 2025 ones.
 
 ## Hand check
 
 | Line | Rule | Value |
 | --- | --- | --- |
 | 8864 line 7 (c) | 61,480 × $.10 | 6,148 |
-| 8864 line 8 (c) | 74,215 × $.20 = 14,842.80 | 14,843 |
+| 8864 line 8 (c) | 74,215 × $.20 | 14,843 |
 | 8864 line 9 | 6,148 + 14,843 | 20,991 |
 | 8864 line 10 | K-1 code AC | 4,180 |
 | 8864 line 11 | 20,991 + 4,180 | 25,171 |
