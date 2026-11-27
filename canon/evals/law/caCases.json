@@ -1,0 +1,177 @@
+[
+  {
+    "id": "ca-resident-definition",
+    "question": "I live in California most of the year but keep a house in Nevada. Am I a California resident?",
+    "queries": [
+      "resident includes every individual who is in this state for other than a temporary or transitory purpose",
+      "individual domiciled in this state who is outside the state for a temporary or transitory purpose"
+    ],
+    "expect": ["CA 17014"],
+    "expectPath": "CA 17014(a)",
+    "source": "topic: residency definition"
+  },
+  {
+    "id": "ca-employment-contract-546-days",
+    "question": "I took a job abroad for two years. Do I stop being a California resident while I am away?",
+    "queries": [
+      "domiciled individual absent from the state for an uninterrupted period of at least 546 consecutive days under an employment-related contract"
+    ],
+    "expect": ["CA 17014"],
+    "expectPath": "CA 17014(d)",
+    "source": "topic: residency, employment-related contract safe harbor"
+  },
+  {
+    "id": "ca-nonresident-source-income",
+    "question": "I moved out of California. Does California still tax the income I earn in other states?",
+    "queries": [
+      "nonresident taxpayers gross income includes only the gross income from sources within this state"
+    ],
+    "expect": ["CA 17951"],
+    "expectPath": "CA 17951(a)",
+    "source": "topic: nonresident source income"
+  },
+  {
+    "id": "ca-nonresident-tax-rate",
+    "question": "I was a California resident for half the year. How is my California tax computed?",
+    "queries": [
+      "tax on the taxable income of a nonresident or part-year resident calculated by multiplying by a rate equal to the tax on the entire taxable income as if a resident"
+    ],
+    "expect": ["CA 17041"],
+    "expectPath": "CA 17041(b)",
+    "source": "topic: part-year and nonresident tax computation"
+  },
+  {
+    "id": "ca-part-year-taxable-income",
+    "question": "In the year I moved to California, which of my income does California count?",
+    "queries": [
+      "taxable income of a nonresident or part-year resident includes all items of gross income for any part of the taxable year during which the taxpayer was a resident regardless of source"
+    ],
+    "expect": ["CA 17041"],
+    "expectPath": "CA 17041(i)(1)",
+    "source": "topic: part-year and nonresident tax computation"
+  },
+  {
+    "id": "ca-other-state-credit",
+    "question": "I paid Oregon tax on income that California also taxes. Do I get a credit on my California return?",
+    "queries": [
+      "residents allowed a credit against the net tax for net income taxes imposed by and paid to another state on income taxable under this part"
+    ],
+    "expect": ["CA 18001"],
+    "expectPath": "CA 18001(a)",
+    "source": "topic: other state tax credit, residents"
+  },
+  {
+    "id": "ca-nonresident-credit-residence-state",
+    "question": "I am a nonresident, and my home state also taxes the income California taxes. Is there a credit?",
+    "queries": [
+      "nonresidents allowed a credit against the net tax for net income taxes imposed by and paid to the state of residence"
+    ],
+    "expect": ["CA 18002"],
+    "expectPath": "CA 18002(a)",
+    "source": "topic: other state tax credit, nonresidents"
+  },
+  {
+    "id": "ca-conformity-date",
+    "question": "Which version of the federal tax code does California follow for my 2025 return?",
+    "queries": [
+      "Internal Revenue Code means Title 26 of the United States Code including all amendments as enacted on the specified date for the applicable taxable year"
+    ],
+    "expect": ["CA 17024.5"],
+    "expectPath": "CA 17024.5(a)(1)",
+    "source": "topic: conformity to the Internal Revenue Code"
+  },
+  {
+    "id": "ca-standard-deduction",
+    "question": "How much is California's standard deduction?",
+    "queries": ["taxpayer may elect to take a standard deduction"],
+    "expect": ["CA 17073.5"],
+    "expectPath": "CA 17073.5(a)",
+    "source": "topic: standard deduction"
+  },
+  {
+    "id": "ca-dependent-exemption-credit",
+    "question": "Does California give me anything for my children, like the old federal exemption?",
+    "queries": [
+      "credit for personal exemption for each dependent for whom an exemption is allowable"
+    ],
+    "expect": ["CA 17054"],
+    "expectPath": "CA 17054(d)(1)",
+    "source": "topic: personal exemption credits"
+  },
+  {
+    "id": "ca-estimated-tax-penalty",
+    "question": "I did not pay enough California estimated tax during the year. Is there a penalty?",
+    "queries": [
+      "failure by an individual to pay estimated income tax Section 6654 of the Internal Revenue Code applies"
+    ],
+    "expect": ["CA 19136"],
+    "expectPath": "CA 19136(a)",
+    "source": "topic: estimated tax penalty"
+  },
+  {
+    "id": "ca-mental-health-services-tax",
+    "question": "My taxable income is over one million dollars. Does California add an extra tax?",
+    "queries": [
+      "additional tax at the rate of 1 percent on taxable income in excess of one million dollars"
+    ],
+    "expect": ["CA 17043"],
+    "expectPath": "CA 17043(a)",
+    "source": "topic: mental health services tax"
+  },
+  {
+    "id": "ca-capital-gains-ordinary-rates",
+    "question": "Does California tax my long-term capital gains at a lower rate, as the federal return does?",
+    "queries": [
+      "tax imposed upon the entire taxable income of every resident at the following rates",
+      "maximum rate of tax on net capital gain of noncorporate taxpayers shall not apply"
+    ],
+    "expect": ["CA 17041", "CA 17062.5"],
+    "expectPath": "CA 17041(a)",
+    "source": "topic: capital gains have no lower rate (17041 taxes the entire taxable income at one schedule; 17062.5 refuses the minimum tax's capital gain rate)"
+  },
+  {
+    "id": "ca-renters-credit",
+    "question": "I rent my apartment in California. Is there a renter's credit?",
+    "queries": ["credit for a qualified renter against the net tax"],
+    "expect": ["CA 17053.5"],
+    "expectPath": "CA 17053.5(a)(1)",
+    "source": "topic: renters' credit"
+  },
+  {
+    "id": "ca-hsa-nonconformity",
+    "question": "Is my health savings account contribution deductible on my California return?",
+    "queries": [
+      "Section 223 of the Internal Revenue Code relating to health savings accounts shall not apply",
+      "Section 106(d) contributions to health savings accounts shall not apply"
+    ],
+    "expect": ["CA 17215.4", "CA 17131.4"],
+    "source": "topic: health savings account nonconformity"
+  },
+  {
+    "id": "ca-bonus-depreciation",
+    "question": "Can I take bonus depreciation on my California return?",
+    "queries": [
+      "Section 168(k) of the Internal Revenue Code relating to special allowance for certain property shall not apply"
+    ],
+    "expect": ["CA 17250"],
+    "expectPath": "CA 17250(a)(11)",
+    "source": "topic: depreciation nonconformity"
+  },
+  {
+    "id": "ca-net-operating-loss",
+    "question": "Can I carry my business loss forward on my California return the same way as on my federal return?",
+    "queries": [
+      "the deduction provided by Section 172 relating to net operating loss deduction shall be modified"
+    ],
+    "expect": ["CA 17276"],
+    "source": "topic: net operating loss"
+  },
+  {
+    "id": "ca-alternative-minimum-tax",
+    "question": "Does California have its own alternative minimum tax?",
+    "queries": ["tax equal to the excess of the tentative minimum tax over the regular tax"],
+    "expect": ["CA 17062"],
+    "expectPath": "CA 17062(a)",
+    "source": "topic: alternative minimum tax"
+  }
+]

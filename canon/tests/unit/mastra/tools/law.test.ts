@@ -13,6 +13,7 @@ const { writeDocument } = await import("../../../../src/db/corpusStore.js");
 const { lawPayload } = await import("../../../../src/law/ingestLaw.js");
 const { parseUslmTitle } = await import("../../../../src/law/parseUslm.js");
 const { parsedRegulations, REG_ENTRY } = await import("../../law/regFixture.js");
+const { CA_ENTRY, parsedCalifornia } = await import("../../law/caFixture.js");
 const { citeRefDocTool, searchRefDocsTool } =
   await import("../../../../src/mastra/tools/refDocs.js");
 const { readLawTool, searchLawTool } = await import("../../../../src/mastra/tools/law.js");
@@ -50,6 +51,7 @@ async function installLaw(): Promise<void> {
   };
   await writeDocument(lawPayload(entry, parsed), "law");
   await writeDocument(lawPayload(REG_ENTRY, parsedRegulations()), "law");
+  await writeDocument(lawPayload(CA_ENTRY, parsedCalifornia()), "law");
 }
 
 describe("the corpus tools", () => {
@@ -166,6 +168,106 @@ describe("the law tools with law.db", () => {
       "26 CFR § 1.469-5T(a)",
       "26 CFR § 1.469-5T(b)",
     ]);
+  });
+
+  it("search California only when it is named", async () => {
+    const query = "resident temporary or transitory purpose";
+    const federal = await call(searchLawTool, { query, mode: "fts", limit: 25 });
+    expect((federal.results as { source: string }[]).map((hit) => hit.source)).not.toContain(
+      "california",
+    );
+    const california = await call(searchLawTool, { query, mode: "fts", source: "california" });
+    expect((california.results as { blockId: string; citation: string }[])[0]).toMatchObject({
+      blockId: "ca-rtc-2025::sec::s17014::a",
+      citation: "Cal. Rev. & Tax. Code § 17014(a)",
+      source: "california",
+    });
+    const section = await call(searchLawTool, {
+      query: "resident",
+      mode: "fts",
+      section: "CA 17014",
+    });
+    expect(
+      (section.results as { source: string }[]).every((hit) => hit.source === "california"),
+    ).toBe(true);
+  });
+
+  it("search the law of the jurisdictions named, each source on its own, taking turns", async () => {
+    const query = "the";
+    const sourcesOf = async (input: object) => {
+      const result = await call(searchLawTool, { query, mode: "fts", limit: 25, ...input });
+      return (result.results as { source: string }[]).map((hit) => hit.source);
+    };
+    expect(new Set(await sourcesOf({ jurisdictions: ["CA"] }))).toEqual(new Set(["california"]));
+    expect(new Set(await sourcesOf({ jurisdictions: ["federal"] }))).toEqual(
+      new Set(["statute", "regulations"]),
+    );
+    expect(await sourcesOf({ jurisdictions: ["federal"] })).toEqual(await sourcesOf({}));
+    const all = await sourcesOf({ jurisdictions: ["CA", "federal"] });
+    expect(all.slice(0, 6)).toEqual([
+      "statute",
+      "regulations",
+      "california",
+      "statute",
+      "regulations",
+      "california",
+    ]);
+  });
+
+  it("take a source with a list that holds its jurisdiction, and refuse one that does not", async () => {
+    const one = await call(searchLawTool, {
+      query: "resident",
+      mode: "fts",
+      source: "california",
+      jurisdictions: ["federal", "CA"],
+    });
+    expect((one.results as { source: string }[]).every((hit) => hit.source === "california")).toBe(
+      true,
+    );
+    await expect(
+      call(searchLawTool, {
+        query: "resident",
+        source: "california",
+        jurisdictions: ["federal"],
+      }),
+    ).rejects.toThrow(
+      'source "california" is CA law, and jurisdictions ["federal"] does not include "CA"',
+    );
+    await expect(
+      call(searchLawTool, { query: "resident", section: "469", jurisdictions: ["CA"] }),
+    ).rejects.toThrow(/section "469" is in source "statute", which is federal law/);
+  });
+
+  it("refuses an empty or unknown list", async () => {
+    const { searchLaw } = await import("../../../../src/law/lawSearch.js");
+    await expect(searchLaw({ query: "resident", jurisdictions: [] })).rejects.toThrow(
+      /Name at least one jurisdiction/,
+    );
+    await expect(searchLaw({ query: "resident", jurisdictions: ["NY" as never] })).rejects.toThrow(
+      /Unknown jurisdiction "NY"/,
+    );
+  });
+
+  it("read a California citation, and keep a bare number the Code's", async () => {
+    const resident = await call(readLawTool, { citation: "CA 17014(a)(1)" });
+    expect(resident).toMatchObject({
+      found: true,
+      source: "california",
+      citation: "Cal. Rev. & Tax. Code § 17014(a)(1)",
+    });
+    expect((resident.blocks as { blockId: string }[]).map((block) => block.blockId)).toEqual([
+      "ca-rtc-2025::sec::s17014::a",
+    ]);
+    expect(await call(readLawTool, { citation: "17014" })).toMatchObject({ found: false });
+  });
+
+  it("read every version of a California number, each block naming its version", async () => {
+    const result = await call(readLawTool, { citation: "R&TC 17552.3" });
+    const blocks = result.blocks as { blockId: string; headings: string[] }[];
+    expect(blocks.map((block) => block.blockId.split("::")[2])).toEqual(
+      expect.arrayContaining(["s17552.3", "s17552.3-v2"]),
+    );
+    expect(blocks.at(-1)?.headings[0]).toMatch(/^Version 2 of 2: Added by Stats\. 2002, Ch\. 35/);
   });
 
   it("say found: false for a citation the Code does not hold", async () => {

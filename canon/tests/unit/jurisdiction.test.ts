@@ -1,13 +1,17 @@
 import { describe, expect, it } from "vitest";
 import {
   ALL_JURISDICTIONS,
-  includesFederal,
+  jurisdictionOfLawSource,
   jurisdictionOfPublisher,
+  lawSourcesOf,
   parseJurisdictions,
   publisherFilter,
   resolveJurisdictions,
   searchedLine,
+  statutesOf,
 } from "../../src/jurisdiction.js";
+import { LAW_DOC_PREFIXES, lawSourceOfId } from "../../src/law/lawIds.js";
+import { formatOfSource } from "../../src/law/lawRead.js";
 import { walkLaw } from "../../src/law/lawSidecar.js";
 import { walkCorpus } from "../../src/refdocs/walkCorpus.js";
 
@@ -67,19 +71,58 @@ describe("what a search keeps", () => {
   it("filters by publisher only when some jurisdiction is off", () => {
     expect(publisherFilter(undefined)).toBeNull();
     expect(publisherFilter(["federal", "CA"])).toBeNull();
-    expect(publisherFilter(["CA"])).toEqual(["FTB"]);
+    expect(publisherFilter(["CA"])).toEqual(["FTB", "Legislative Counsel of California"]);
     expect(publisherFilter(["federal"])).toContain("IRS");
     expect(publisherFilter(["federal"])).not.toContain("FTB");
-  });
-
-  it("searches the federal statute only when federal is on", () => {
-    expect(includesFederal(["federal", "CA"])).toBe(true);
-    expect(includesFederal(["CA"])).toBe(false);
   });
 
   it("writes a prompt line only when some jurisdiction is off", () => {
     expect(searchedLine(["federal", "CA"])).toBeNull();
     expect(searchedLine(["CA"])).toBe("Libraries searched: California only.");
     expect(searchedLine(["federal"])).toBe("Libraries searched: federal only.");
+  });
+});
+
+describe("the law sources of each jurisdiction", () => {
+  it("searches the federal law for federal and California's code for CA, in a fixed order", () => {
+    expect(lawSourcesOf(["federal"])).toEqual(["statute", "regulations"]);
+    expect(lawSourcesOf(["CA"])).toEqual(["california"]);
+    expect(lawSourcesOf(["CA", "federal"])).toEqual(["statute", "regulations", "california"]);
+  });
+
+  it("gives the statute round each jurisdiction's statute, never the regulations", () => {
+    expect(statutesOf(["federal"])).toEqual(["statute"]);
+    expect(statutesOf(["CA"])).toEqual(["california"]);
+    expect(statutesOf(["CA", "federal"])).toEqual(["statute", "california"]);
+  });
+
+  it("puts each law source in one jurisdiction, and fails loudly for an unknown one", () => {
+    expect(jurisdictionOfLawSource("statute")).toBe("federal");
+    expect(jurisdictionOfLawSource("regulations")).toBe("federal");
+    expect(jurisdictionOfLawSource("california")).toBe("CA");
+    expect(() => jurisdictionOfLawSource("new-york")).toThrow(/has no jurisdiction/);
+  });
+
+  // A new law document must get a source in a jurisdiction: else no list could search it.
+  it("knows the source and jurisdiction of every law sidecar under sources/", async () => {
+    const law = await walkLaw();
+    expect(law.length).toBeGreaterThanOrEqual(3);
+    for (const { sidecar } of law) {
+      const source = lawSourceOfId(sidecar.docId);
+      expect(source, sidecar.docId).not.toBeNull();
+      expect(formatOfSource(source!), sidecar.docId).toBe(sidecar.format);
+      expect(jurisdictionOfLawSource(source!), sidecar.docId).toBe(
+        jurisdictionOfPublisher(sidecar.publisher),
+      );
+    }
+    const sources = new Set(law.map(({ sidecar }) => lawSourceOfId(sidecar.docId)));
+    expect([...sources].sort()).toEqual(Object.keys(LAW_DOC_PREFIXES).sort());
+  });
+
+  // isLawBlockId reads the id's start: no instruction document may share it.
+  it("finds no law source in any corpus document id", async () => {
+    const corpus = await walkCorpus();
+    for (const { sidecar } of corpus.entries)
+      expect(lawSourceOfId(sidecar.docId), sidecar.docId).toBeNull();
   });
 });

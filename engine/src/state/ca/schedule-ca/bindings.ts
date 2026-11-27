@@ -130,644 +130,633 @@ function adjustmentsTotalFederal(form: FormAccessor<ScheduleCa>) {
   );
 }
 
+/*
+ * The rules of every field, exported so that Schedule CA (540NR) runs the
+ * same column A to C rules on its own lines (schedule-ca-540nr/fromScheduleCa.ts).
+ */
+export const SCHEDULE_CA_BINDINGS: Bindings = waitsWithIncreasedStandard({
+  ...sectionCBindings,
+  // MANUAL EDIT: lines 8d and 24j from federal Form 2555 (foreignExclusion.ts).
+  ...foreignExclusionBindings,
+  // MANUAL EDIT: line 4 from Form 4797 and Schedule D-1 (otherGains.ts).
+  ...otherGainsBindings,
+  ...childIncomeBindings,
+  ...excessBusinessLossBindings,
+  // MANUAL EDIT: line 8z column C from FTB 5870A or an untaxed trust distribution (trustDistribution.ts).
+  ...trustDistributionBindings,
+  // MANUAL EDIT: line 8z column C adds back a federal treaty exemption (treatyExemption.ts).
+  ...treatyExemptionBindings,
+  ...nolDeductionBindings,
+  ...movingExpenseBindings,
+  ...mortgageCreditBindings,
+  ...form8853Bindings,
+  // MANUAL EDIT: line 8c columns A and C from Schedule 1 and Form 982 (canceledDebt.ts).
+  ...canceledDebtBindings,
+  /*
+   * MANUAL EDIT: CA does not conform to HSAs. Employer contributions
+   * (W-2 box 12 code W) are CA wages: line 1a col C, carried to line 27.
+   */
+  "0.line.2b_federal": (form) => {
+    const value = form["form-1040.line.2b"];
+    return typeof value === "number" ? value : undefined;
+  },
+  "1.line.b8z_federal": (form) => {
+    const value = form["schedule-1.0.line.8z"];
+    return typeof value === "number" ? value : undefined;
+  },
+  /*
+   * MANUAL EDIT: col A copies federal Schedule 1 line 7. "California excludes
+   * unemployment compensation from taxable income. Enter on line 7, column B
+   * the amount of unemployment compensation shown in column A"
+   * (ca-540-sched-ca-inst-2025::sec::line-7-unemployment-compensation::b01).
+   */
+  "0.line.b7_federal": (form) => numberOrBlank(form["schedule-1.0.line.7"]),
+  "0.line.b7_subtractions": (form) => numberOrBlank(form["0.line.b7_federal"]),
+  // MANUAL EDIT: col A copies federal Schedule 1 line 5; blank when it is blank.
+  "0.line.b5_federal": (form) => numberOrBlank(form["schedule-1.0.line.5"]),
+  "2.line.b9a_federal": (form) => {
+    const value = form["schedule-1.0.line.9"];
+    return typeof value === "number" ? value : undefined;
+  },
+  /*
+   * MANUAL EDIT: column A copies Schedule 1 line 8p, the federal excess
+   * business loss adjustment that line 9a column A already holds
+   * (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b04). Columns B
+   * and C take FTB 3461 (excessBusinessLoss.ts).
+   */
+  "1.line.b8p_federal": (form) => amountIfNonzero(form["schedule-1.0.line.8p"]),
+  // MANUAL EDIT: col A copies Schedule 1 line 8f (income from Form 8889).
+  "1.line.b8f_federal": (form) => amountIfNonzero(form["schedule-1.0.line.8f"]),
+  /*
+   * MANUAL EDIT: HSA distributions not used for qualified medical expenses and
+   * included in federal income are not taxable for California
+   * (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b03): Form 8889 line 16.
+   */
+  "1.line.b8f_subtractions": (form) =>
+    amountIfNonzero(form["form-8889.0.line.16_taxable_hsa_distributions"]),
+  "2.line.b9a_subtractions": (form) =>
+    sumOrBlank(...OTHER_INCOME_SUBTRACTIONS.map((id) => form[id])),
+  /*
+   * MANUAL EDIT: California does not conform to the HSA deduction: "Enter the
+   * amount from line 13, column A, on line 13, column B"
+   * (ca-540-sched-ca-inst-2025::sec::line-11-through-line-25::b01).
+   */
+  "2.line.c13_federal": (form) => amountIfNonzero(form["schedule-1.1.line.13"]),
+  "2.line.c13_subtractions": (form) => numberOrBlank(form["2.line.c13_federal"]),
+  /*
+   * MANUAL EDIT: column A copies the federal amount, Schedule 1 line 14 (Form 3903
+   * line 5). Column C takes FTB 3913 (movingExpenses.ts)
+   * (ca-540-sched-ca-inst-2025::sec::line-11-through-line-25::b01).
+   */
+  "2.line.c14_federal": (form) => amountIfNonzero(form["schedule-1.1.line.14"]),
+  // MANUAL EDIT: line 12 from Schedule 1 line 12 (Form 2106); columns B and C (employeeBusinessExpenses.ts).
+  "2.line.c12_federal": line12Federal,
+  "2.line.c12_subtractions": line12Adjustment,
+  "2.line.c12_additions": line12Adjustment,
+  "3.line.c26_federal": (form) => adjustmentsTotalFederal(form),
+  "3.line.c26_subtractions": (form) => sumOrBlank(...ADJUSTMENT_SUBTRACTIONS.map((id) => form[id])),
+  /*
+   * MANUAL EDIT: plus a contractor's gross income when an employee for California:
+   * "enter the amount reported as gross income of the business ... as wages on
+   * line 1a, column C" (ca-540-sched-ca-inst-2025::sec::a-total-amount-from-federal-form-s-w-2-box-1::b01).
+   */
+  "0.line.1a_additions": (_, info) =>
+    roundDollars(
+      sumOrBlank(info.hsaEmployerContributions, info.caEmployeeAmounts?.grossIncome || undefined),
+    ),
+  // MANUAL EDIT: Sections B and C from the Schedule 1 answers and activities (answerLines.ts).
+  ...answerLines(),
+  "0.line.1z_additions": (form) =>
+    sumOrBlank(
+      form["0.line.1a_additions"],
+      form["0.line.1b_additions"],
+      form["0.line.1c_additions"],
+      form["0.line.1d_additions"],
+      form["0.line.1e_additions"],
+      form["0.line.1f_additions"],
+      form["0.line.1g_additions"],
+      form["0.line.1h_additions"],
+      form["0.line.1i_additions"],
+    ),
+  "2.line.b10_additions": (form) =>
+    sumOrBlank(
+      form["0.line.1z_additions"],
+      form["0.line.2b_additions"],
+      form["0.line.3b_additions"],
+      form["0.line.4b_additions"],
+      form["0.line.5b_additions"],
+      form["0.line.7a_additions"],
+      form["0.line.b2a_additions"],
+      form["0.line.b3_additions"],
+      form["0.line.b4_additions"],
+      form["0.line.b5_additions"],
+      form["0.line.b6_additions"],
+      form["2.line.b9a_additions"],
+    ),
+  /*
+   * MANUAL EDIT: col A copies 1040 lines 4a–6b, blank when the federal line
+   * is blank. CA excludes Social Security: col B takes line 6b.
+   */
+  "0.line.4a_federal": (form) => numberOrBlank(form["form-1040.line.4a"]),
+  "0.line.4b_federal": (form) => numberOrBlank(form["form-1040.line.4b"]),
+  "0.line.5a_federal": (form) => numberOrBlank(form["form-1040.line.5a"]),
+  "0.line.5b_federal": (form) => numberOrBlank(form["form-1040.line.5b"]),
+  "0.line.6a_federal": (form) => numberOrBlank(form["form-1040.line.6a"]),
+  "0.line.6b_federal": (form) => numberOrBlank(form["form-1040.line.6b"]),
+  "0.line.6b_subtractions": (form) => numberOrBlank(form["0.line.6b_federal"]),
+  // MANUAL EDIT: the part of line 5b that Schedule G-1 taxes (lumpSum.ts).
+  "0.line.5b_subtractions": line5bSubtractions,
+  // MANUAL EDIT: the lines before FTB 3805V's (line10.ts), then lines 9b1 to 9b3.
+  "2.line.b10_subtractions": (form) =>
+    sumOrBlank(
+      ...LINE_10_SUBTRACTIONS_BEFORE_NOL.map((id) => form[id]),
+      form["2.line.b9b1_subtractions"],
+      form["2.line.b9b2_subtractions"],
+      form["2.line.b9b3_subtractions"],
+    ),
+  /*
+   * MANUAL EDIT: "Subtract line 26 from line 10 in column B and column C"
+   * (ca-540-sched-ca-inst-2025::sec::line-11-through-line-25::b08). Blank only
+   * when both lines are blank: a column B adjustment alone (the HSA deduction)
+   * makes line 27 negative.
+   */
+  "3.line.c27_subtractions": (form) =>
+    line27Total(form["2.line.b10_subtractions"], form["3.line.c26_subtractions"]),
+  "3.line.c27_additions": (form) =>
+    line27Total(form["2.line.b10_additions"], form["3.line.c26_additions"]),
+  // MANUAL EDIT: no combined-name fact exists; join first + last name.
+  "0.header.name": (_, info) =>
+    info.taxpayerFirstName && info.taxpayerLastName
+      ? `${info.taxpayerFirstName} ${info.taxpayerLastName}`
+      : undefined,
+  "0.header.ssn": (_, info) => info.taxpayerSSN,
+  "0.line.1a_federal": (form) => sum(form["form-1040.line.1a"]),
+  /*
+   * MANUAL EDIT: column A copies federal 1040 line 1f (Form 8839 line 31,
+   * ftb-pub-737-2025::sec::line-1f::b01). Without Form 8839, the old reason.
+   */
+  "0.line.1f_federal": (form, info) =>
+    info.mustFile?.["form-8839"]?.value === true
+      ? numberOrBlank(form["form-1040.line.1f"])
+      : unsupported(LINE_1F_WITHOUT_8839),
+  // Federal 1040 line 1c (Form 4137 line 4 and noncash tips); blank when it is.
+  "0.line.1c_federal": (form) => numberOrBlank(form["form-1040.line.1c"]),
+  // Federal 1040 line 1g, Form 8919 line 6 (ftb-pub-737-2025::sec::line-1g::b01); blank when it is.
+  "0.line.1g_federal": (form) => numberOrBlank(form["form-1040.line.1g"]),
+  "0.line.1z_federal": (form) =>
+    sum(
+      form["0.line.1a_federal"],
+      form["0.line.1b_federal"],
+      form["0.line.1c_federal"],
+      form["0.line.1d_federal"],
+      form["0.line.1e_federal"],
+      form["0.line.1f_federal"],
+      form["0.line.1g_federal"],
+      form["0.line.1h_federal"],
+    ),
+  "0.line.3b_federal": (form) => sum(form["form-1040.line.3b"]),
+  "0.line.7a_federal": (form) => sum(form["form-1040.line.7a"]),
+  "0.line.7a_subtractions": (form, info) =>
+    scheduleDCaAdjustment(form, info, "12a", LINE_7A_SUBTRACTIONS_GAP),
+  "0.line.7a_additions": (form, info) =>
+    scheduleDCaAdjustment(form, info, "12b", LINE_7A_ADDITIONS_GAP),
+  "2.line.b10_federal": (form) =>
+    sum(
+      form["0.line.1z_federal"],
+      form["0.line.2b_federal"],
+      form["0.line.3b_federal"],
+      form["0.line.4b_federal"],
+      form["0.line.5b_federal"],
+      form["0.line.6b_federal"],
+      form["0.line.7a_federal"],
+      form["0.line.b1_federal"],
+      form["0.line.b2a_federal"],
+      form["0.line.b3_federal"],
+      form["0.line.b4_federal"],
+      form["0.line.b5_federal"],
+      form["0.line.b6_federal"],
+      form["0.line.b7_federal"],
+      form["2.line.b9a_federal"],
+    ),
+  // Line 27 col A equals federal AGI (form-1040 line 11b).
+  "3.line.c27_federal": (form) =>
+    sum(
+      form["2.line.b10_federal"],
+      form["3.line.c26_federal"] === undefined ? 0 : -form["3.line.c26_federal"],
+    ),
+  // MANUAL EDIT: col A copies 1040 line 3a (ca-540-sched-ca-inst-2025::sec::section-a-line-1a-through-line-7a-and-section-b-line-1-through-line-9a::b01).
+  "0.line.3a_federal": (form) => numberOrBlank(form["form-1040.line.3a"]),
+  /*
+   * MANUAL EDIT: the Part II box: itemized for California while the federal
+   * return took the standard deduction. Schedule A evaluated (line 17
+   * present) with 1040 line 12e not equal to it, and Form 540 line 18 taking
+   * the itemized total (line 30 = line 29)
+   * (ca-540-sched-ca-inst-2025::sec::part-ii-adjustments-to-federal-itemized-deductions::b01).
+   */
+  "4.page2.itemize_ca_not_federal": (form) => {
+    const scheduleALine17 = numberOrBlank(form["schedule-a.0.line.17_total_itemized_deductions"]);
+    const federalDeduction = numberOrBlank(form["form-1040.line.12e"]);
+    const line29 = form["5.page2.total_itemized_29"];
+    const line30 = form["5.page2.total_itemized_30_standard_or_itemized"];
+    if (scheduleALine17 === undefined || federalDeduction === undefined) return undefined;
+    if (typeof line29 !== "number" || typeof line30 !== "number") return undefined;
+    return federalDeduction !== scheduleALine17 && line30 === line29 ? true : undefined;
+  },
+  /*
+   * MANUAL EDIT: Part II col A, lines 1–16, copies federal Schedule A line
+   * for line (ca-540-sched-ca-inst-2025::sec::line-1-through-line-16::b01).
+   * Blank when Schedule A is not filed.
+   */
+  "4.page2.medical_dental_expenses": (form) =>
+    numberOrBlank(form["schedule-a.0.line.1_medical_dental_expenses"]),
+  "4.page2.medical_agi_line11b": (form) => numberOrBlank(form["schedule-a.0.line.2_agi_from_1040"]),
+  "4.page2.medical_agi_threshold": (form) =>
+    numberOrBlank(form["schedule-a.0.line.3_agi_multiplied"]),
+  "4.page2.medical_line4_federal": (form) =>
+    numberOrBlank(form["schedule-a.0.line.4_net_medical_dental"]),
+  "4.page2.taxes_5a_federal": (form) =>
+    numberOrBlank(form["schedule-a.0.line.5a_state_local_income_or_sales_tax"]),
+  // MANUAL EDIT: CA allows no state/local income or sales tax deduction: col B takes all of col A (ca-540-sched-ca-inst-2025::sec::line-5a-state-and-local-taxes::b01).
+  "4.page2.taxes_5a_subtractions": (form) => numberOrBlank(form["4.page2.taxes_5a_federal"]),
+  "4.page2.taxes_5b_federal": (form) =>
+    numberOrBlank(form["schedule-a.0.line.5b_real_estate_taxes"]),
+  "4.page2.taxes_5c_federal": (form) =>
+    numberOrBlank(form["schedule-a.0.line.5c_personal_property_taxes"]),
+  "4.page2.taxes_5d_federal": (form) =>
+    numberOrBlank(form["schedule-a.0.line.5d_total_state_local_taxes"]),
+  "4.page2.taxes_5e_federal": (form) => numberOrBlank(form["schedule-a.0.line.5e_salt_cap"]),
+  // MANUAL EDIT: the form: "Enter the amount from line 5a, column B in line 5e, column B."
+  "4.page2.taxes_5e_subtractions": (form) => numberOrBlank(form["4.page2.taxes_5a_subtractions"]),
+  /*
+   * MANUAL EDIT: CA does not conform to the federal SALT cap: col C takes the
+   * amount over the cap, only when the cap applied
+   * (ca-540-sched-ca-inst-2025::sec::line-5a-state-and-local-taxes::b01).
+   */
+  "4.page2.taxes_5e_additions": (form) => {
+    const line5d = form["4.page2.taxes_5d_federal"];
+    const line5e = form["4.page2.taxes_5e_federal"];
+    if (typeof line5d !== "number" || typeof line5e !== "number") return undefined;
+    return line5d > line5e ? line5d - line5e : undefined;
+  },
+  "4.page2.taxes_6_type": (form) => text(form["schedule-a.0.line.6_other_taxes_description"]),
+  "4.page2.taxes_6_federal": (form) =>
+    numberOrBlank(form["schedule-a.0.line.6_other_taxes_amount"]),
+  "4.page2.taxes_7_federal": (form) => numberOrBlank(form["schedule-a.0.line.7_total_taxes"]),
+  // Line 7: "Add line 5e and line 6" in each column (the form).
+  "4.page2.taxes_7_subtractions": (form) =>
+    sumOrBlank(form["4.page2.taxes_5e_subtractions"], form["4.page2.taxes_6_subtractions"]),
+  "4.page2.taxes_7_additions": (form) =>
+    sumOrBlank(form["4.page2.taxes_5e_additions"], form["4.page2.taxes_6_additions"]),
+  "4.page2.interest_8a_federal": (form) =>
+    numberOrBlank(form["schedule-a.0.line.8a_mortgage_interest_form1098"]),
+  "4.page2.interest_8b_federal": (form) =>
+    numberOrBlank(form["schedule-a.0.line.8b_mortgage_interest_not_form1098"]),
+  "4.page2.interest_8c_federal": (form) =>
+    numberOrBlank(form["schedule-a.0.line.8c_points_not_form1098"]),
+  "4.page2.interest_8e_federal": (form) =>
+    numberOrBlank(form["schedule-a.0.line.8e_total_mortgage_interest_points"]),
+  "4.page2.interest_9_federal": (form) =>
+    numberOrBlank(form["schedule-a.0.line.9_investment_interest"]),
+  /*
+   * MANUAL EDIT: line 9 col B/C come from FTB 3526 line 10, the difference
+   * between its line 8 (CA deduction) and line 9 (federal Form 4952 line 8):
+   * col C when CA allows more, col B when federal allows more
+   * (ca-540-sched-ca-inst-2025::sec::line-9-investment-interest::b01,
+   * ca-3526-inst-2025::sec::line-10::b01). Blank when FTB 3526 is not filed.
+   */
+  "4.page2.interest_9_subtractions": (form) => {
+    const ca = form["form-3526.0.line.8_investment_interest_deduction"];
+    const fed = form["form-3526.0.line.9_federal_4952_line_8"];
+    if (typeof ca !== "number" || typeof fed !== "number") return undefined;
+    return fed > ca ? numberOrBlank(form["form-3526.0.line.10_california_adjustment"]) : undefined;
+  },
+  "4.page2.interest_9_additions": (form) => {
+    const ca = form["form-3526.0.line.8_investment_interest_deduction"];
+    const fed = form["form-3526.0.line.9_federal_4952_line_8"];
+    if (typeof ca !== "number" || typeof fed !== "number") return undefined;
+    return ca > fed ? numberOrBlank(form["form-3526.0.line.10_california_adjustment"]) : undefined;
+  },
+  "4.page2.interest_10_federal": (form) =>
+    numberOrBlank(form["schedule-a.0.line.10_total_interest"]),
+  // Line 10: "Add line 8e and line 9" in each column (the form).
+  "4.page2.interest_10_subtractions": (form) =>
+    sumOrBlank(form["4.page2.interest_8e_subtractions"], form["4.page2.interest_9_subtractions"]),
+  "4.page2.interest_10_additions": (form) =>
+    sumOrBlank(form["4.page2.interest_8e_additions"], form["4.page2.interest_9_additions"]),
+  "5.page2.charity_11_federal": (form) =>
+    numberOrBlank(form["schedule-a.0.line.11_gifts_cash_check"]),
+  "5.page2.charity_12_federal": (form) =>
+    numberOrBlank(form["schedule-a.0.line.12_gifts_other_than_cash"]),
+  "5.page2.charity_13_federal": (form) =>
+    numberOrBlank(form["schedule-a.0.line.13_gifts_carryover"]),
+  "5.page2.charity_14_federal": (form) => numberOrBlank(form["schedule-a.0.line.14_total_gifts"]),
+  "5.page2.casualty_15_federal": (form) =>
+    numberOrBlank(form["schedule-a.0.line.15_casualty_theft_loss"]),
+  "5.page2.other_deductions_16_federal": (form) =>
+    numberOrBlank(form["schedule-a.0.line.16_other_itemized_deductions_amount"]),
+  // Line 17: "Add lines 4, 7, 10, 14, 15, and 16 in columns A, B, and C" (the form).
+  "5.page2.total_itemized_17_federal": (form) =>
+    sumOrBlank(
+      form["4.page2.medical_line4_federal"],
+      form["4.page2.taxes_7_federal"],
+      form["4.page2.interest_10_federal"],
+      form["5.page2.charity_14_federal"],
+      form["5.page2.casualty_15_federal"],
+      form["5.page2.other_deductions_16_federal"],
+    ),
+  "5.page2.total_itemized_17_subtractions": (form) =>
+    sumOrBlank(
+      form["4.page2.taxes_7_subtractions"],
+      form["4.page2.interest_10_subtractions"],
+      form["5.page2.charity_14_subtractions"],
+      form["5.page2.casualty_15_subtractions"],
+      form["5.page2.other_deductions_16_subtractions"],
+    ),
+  "5.page2.total_itemized_17_additions": (form) =>
+    sumOrBlank(
+      form["4.page2.medical_line4_additions"],
+      form["4.page2.taxes_7_additions"],
+      form["4.page2.interest_10_additions"],
+      form["5.page2.charity_14_additions"],
+      form["5.page2.casualty_15_additions"],
+      form["5.page2.other_deductions_16_additions"],
+    ),
+  // Line 18: "Combine line 17 column A less column B plus column C" (the form).
+  "5.page2.total_itemized_18_combined": (form) => {
+    const colA = form["5.page2.total_itemized_17_federal"];
+    const colB = form["5.page2.total_itemized_17_subtractions"];
+    const colC = form["5.page2.total_itemized_17_additions"];
+    if (colA === undefined && colB === undefined && colC === undefined) return undefined;
+    return sum(colA, colB === undefined ? 0 : -colB, colC);
+  },
+  /*
+   * MANUAL EDIT: lines 22–25, the job-expenses block CA keeps
+   * (ca-540-sched-ca-inst-2025::sec::line-19-through-line-22-job-expenses-and-certain-miscellaneous-deductions::b01).
+   * Lines 23 and 24 fill from federal AGI once Part II is in use, which
+   * needs a completed federal Schedule A
+   * (ca-540-sched-ca-inst-2025::sec::part-ii-adjustments-to-federal-itemized-deductions::b01).
+   * Line 25 is blank until line 22 has a value.
+   */
+  /*
+   * MANUAL EDIT: line 21, "Other Expenses": the amount paid to manage or
+   * protect property held for earning income, with its type beside it
+   * (ca-540-sched-ca-inst-2025::sec::line-21-other-expenses::b01). The
+   * engine knows one kind, the investment fees the taxpayer states; safe
+   * deposit boxes, legal fees and claim-of-right repayments have no fact.
+   */
+  "5.page2.job_expenses_21_amount": (form, info) => {
+    // Part II is in use only with a completed Schedule A (the same gate as line 23).
+    if (form["schedule-a.0.line.17_total_itemized_deductions"] === undefined) return undefined;
+    return info.caInvestmentFees !== undefined && info.caInvestmentFees > 0
+      ? roundDollars(info.caInvestmentFees)
+      : undefined;
+  },
+  "5.page2.job_expenses_21_type": (form) =>
+    form["5.page2.job_expenses_21_amount"] === undefined ? undefined : "Investment fees",
+  "5.page2.job_expenses_22_total": (form) =>
+    sumOrBlank(
+      form["5.page2.job_expenses_19"],
+      form["5.page2.job_expenses_20"],
+      form["5.page2.job_expenses_21_amount"],
+    ),
+  "5.page2.job_expenses_23_agi": (form) => {
+    if (form["schedule-a.0.line.17_total_itemized_deductions"] === undefined) return undefined;
+    return numberOrBlank(form["form-1040.line.11b"]);
+  },
+  "5.page2.job_expenses_24_threshold": (form) => {
+    const agi = form["5.page2.job_expenses_23_agi"];
+    return typeof agi === "number" ? atLeast(0, roundDollars(agi * CA_MISC_FLOOR_RATE)) : undefined;
+  },
+  "5.page2.job_expenses_25_net": (form) => {
+    const line22 = form["5.page2.job_expenses_22_total"];
+    if (typeof line22 !== "number") return undefined;
+    return atLeast(0, line22 - sum(form["5.page2.job_expenses_24_threshold"]));
+  },
+  // Line 26: "Add line 18 and line 25" (the form).
+  "5.page2.total_itemized_26": (form) =>
+    sumOrBlank(form["5.page2.total_itemized_18_combined"], form["5.page2.job_expenses_25_net"]),
+  // Line 28: "Combine line 26 and line 27" (the form). Line 27 may be negative.
+  "5.page2.total_itemized_28": (form) =>
+    sumOrBlank(form["5.page2.total_itemized_26"], form["5.page2.other_adjustments_27_amount"]),
+  /*
+   * MANUAL EDIT: line 28 when federal AGI is at or under the filing-status
+   * threshold, else the Itemized Deductions Worksheet
+   * (ca-540-sched-ca-inst-2025::sec::line-29-california-itemized-deductions::b02).
+   * Form 540 line 13 is federal AGI, form-1040 line 11b.
+   */
+  "5.page2.total_itemized_29": (form, info) => {
+    const line28 = form["5.page2.total_itemized_28"];
+    if (typeof line28 !== "number" || !info.filingStatus) return undefined;
+    const federalAgi = form["form-1040.line.11b"];
+    if (typeof federalAgi !== "number") return undefined;
+    return caItemizedLine29({
+      line28,
+      federalAgi,
+      filingStatus: info.filingStatus,
+      scheduleALine4: form["schedule-a.0.line.4_net_medical_dental"],
+      scheduleALine9: form["schedule-a.0.line.9_investment_interest"],
+      scheduleALine15: form["schedule-a.0.line.15_casualty_theft_loss"],
+      scheduleALine16: form["schedule-a.0.line.16_other_itemized_deductions_amount"],
+    });
+  },
+  // MANUAL EDIT: the larger of the CA standard deduction and line 29. Form 540 line 18 reads this field.
+  "5.page2.total_itemized_30_standard_or_itemized": (form, info) => {
+    if (!info.filingStatus) return undefined;
+    const stdDed = lookupStandardDeduction("state-ca", 2025, info.filingStatus);
+    if (stdDed === undefined) return undefined;
+    const line29 = form["5.page2.total_itemized_29"];
+    return atLeast(stdDed, typeof line29 === "number" ? line29 : 0);
+  },
+});
+
+export const SCHEDULE_CA_UNSUPPORTED: NonNullable<
+  FormSpec<ScheduleCa, ScheduleCaFilingInfo>["unsupported"]
+> = {
+  "0.line.1b_federal":
+    "Household-employee wages not reported on W-2 (federal 1040 line 1b) — no scenario modeled yet.",
+  "0.line.1d_federal":
+    "Medicaid waiver payments not reported on W-2 (federal 1040 line 1d) — no scenario modeled yet.",
+  "0.line.1e_federal":
+    "Taxable dependent care benefits from Form 2441 (federal 1040 line 1e) — no scenario modeled yet.",
+  "0.line.1h_federal": "Other earned income (federal 1040 line 1h) — no scenario modeled yet.",
+  "0.line.1z_subtractions": "Aggregate of line 1 subtractions; all upstream rows are unsupported.",
+  "0.line.2a_federal": "Tax-exempt interest (federal 1040 line 2a) — no scenario modeled yet.",
+  "3.line.c25_additions":
+    "Line 25 col C — aggregates 24a-24z col C; all upstream rows are unsupported.",
+  "0.line.1a_subtractions":
+    "CA-specific subtraction adjustments to W-2 wages (e.g. active-duty military pay exclusions, combat zone exclusions) require specialized facts/scenarios not yet ingested.",
+  "0.line.1b_subtractions":
+    "CA-specific subtraction adjustments to household employee wages not on W-2; no scenario modeled yet.",
+  "0.line.1b_additions":
+    "CA-specific addition adjustments to household employee wages not on W-2; no scenario modeled yet.",
+  "0.line.1c_subtractions":
+    "CA-specific subtraction adjustments to tip income; no scenario modeled yet.",
+  "0.line.1c_additions":
+    "No CA-specific addition scenario for tip income (line 1c). CA generally follows federal treatment; any addition would require FTB Pub 1001 guidance we haven't ingested. No known fact/decision path.",
+  "0.line.1d_subtractions":
+    "No CA-specific subtraction scenario for Medicaid waiver payments. CA may exclude certain nontaxable Medicaid waiver payments per FTB Pub 1001, but no ingestion path or worked example exists yet.",
+  "0.line.1d_additions":
+    "No CA-specific addition scenario for Medicaid waiver payments (line 1d). No known fact/decision path exists yet.",
+  "0.line.1e_subtractions":
+    "No CA-specific subtraction scenario for taxable dependent care benefits (line 1e). CA generally conforms to federal; any adjustment would require Form 2441 CA-equivalent ingestion not yet built.",
+  "0.line.1e_additions":
+    "No CA-specific addition scenario for taxable dependent care benefits (line 1e). No known fact/decision path exists yet.",
+  "0.line.1f_subtractions":
+    "No CA-specific subtraction scenario for employer-provided adoption benefits (line 1f). CA may have different exclusion rules per FTB Pub 1001 but no ingestion path or worked example exists yet.",
+  "0.line.1f_additions":
+    "No CA-specific addition scenario for employer-provided adoption benefits (line 1f). No known fact/decision path exists yet.",
+  "0.line.1g_subtractions":
+    "No CA-specific subtraction scenario for Form 8919 wages has been modeled; no fact ingestion path exists for this adjustment.",
+  "0.line.1g_additions":
+    "No CA-specific addition scenario for Form 8919 wages has been modeled; no fact ingestion path exists for this adjustment.",
+  "0.line.1h_subtractions":
+    "CA subtractions for 'other earned income' (line 1h) depend on taxpayer-specific scenarios (e.g. ridesharing fringe benefits, CQSO exclusion) that have no ingested fact path yet.",
+  "0.line.1i_additions":
+    "Nontaxable combat pay addition applies only to active-duty military taxpayers in designated combat zones; no military/combat-zone fact ingestion scenario has been built yet.",
+  "0.line.2b_subtractions":
+    "CA-specific subtractions to taxable interest (e.g. interest on US obligations exempt in CA) require fact ingestion we haven't built yet — no scenario modeled.",
+  "0.line.2b_additions":
+    "CA-specific additions to taxable interest (e.g. interest on other-state obligations taxable in CA) require fact ingestion we haven't built yet — no scenario modeled.",
+  "0.line.3b_subtractions":
+    "CA-specific subtractions to ordinary dividends (e.g. dividends from children included on parent's federal return but reported on child's CA return) require scenarios we haven't built yet.",
+  "0.line.3b_additions":
+    "CA-specific additions to ordinary dividends (CFC dividends, RIC capital gain distributions, pre-1987 S-corp earnings, etc.) require scenarios we haven't built yet.",
+  "0.line.4b_subtractions":
+    "CA IRA/pension subtraction adjustments (e.g. Tier 2 railroad retirement, three-year rule annuities) require ingestion of RRB-1099-R and specialized pension facts we don't yet model. No worked scenario exists for this.",
+  "0.line.4b_additions":
+    "CA IRA distribution addition adjustments (e.g. pre-1987 annuity rule elections) require specialized pension/annuity facts not yet modeled. No worked scenario exists.",
+  "0.line.5b_additions":
+    "CA pension/annuity addition adjustments (pre-1987 three-year rule elections where CA uses different tax treatment) require specialized pension facts not yet modeled. No worked scenario exists.",
+  "0.line.b1_federal":
+    "Federal Schedule 1 (Form 1040) line 1 (taxable state/local tax refunds) is not exposed as an individual fieldId in the ingested form-1040 catalog — only the Schedule 1 total (line 10) flows into form-1040 line 8. No individual Schedule 1 line facts are ingested yet.",
+  "0.line.b1_subtractions":
+    "CA subtraction for state income tax refunds (not taxable in CA) requires knowledge of the taxable refund amount from federal Schedule 1 line 1, which is not ingested as a separate fact or field.",
+  "0.line.b2a_additions":
+    "CA addition for alimony received under post-2018 or post-2025 agreements requires alimony fact data and divorce agreement date logic not yet ingested or modeled.",
+  "1.line.b8b_subtractions":
+    "CA subtracts California lottery winnings from gambling income. No CA lottery winnings fact category exists, and the column A source (Schedule 1 line 8b) is not ingested. This subtraction requires a scenario with CA lottery income.",
+  "1.line.b8e_additions":
+    "Column C adds an Archer MSA rolled over to an HSA (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b02); no fact splits Form 8853 line 6b between rollovers to an HSA and other amounts.",
+  "1.line.b8g_federal":
+    "Alaska Permanent Fund dividends — niche income type specific to Alaska residents; no fact ingestion path exists.",
+  "1.line.b8j_federal":
+    "Activity not engaged in for profit (hobby) income from federal Schedule 1 line 8j — no fact ingestion path for hobby income exists yet.",
+  "1.line.b8k_additions":
+    "Stock options CA addition adjustment requires stock option / equity compensation fact ingestion — no scenario built yet.",
+  "1.line.b8l_federal":
+    "Rental of personal property income (not a rental business) has no fact ingestion path yet — no scenario built for this income type.",
+  "1.line.b8m_federal":
+    "Olympic and Paralympic medal/USOC prize money income has no fact ingestion path — no athlete scenario built yet.",
+  "1.line.b8n_federal":
+    "IRC §951(a) Subpart F inclusion (CFC income) has no fact ingestion path — no controlled foreign corporation scenario built yet.",
+  "1.line.b8n_subtractions":
+    "IRC §951(a) CA subtraction adjustment requires CFC fact ingestion — no controlled foreign corporation scenario built yet.",
+  "1.line.b8o_federal":
+    "IRC §951A(a) GILTI inclusion has no fact ingestion path — no GILTI/CFC scenario built yet.",
+  "1.line.b8o_subtractions":
+    "IRC §951A(a) GILTI CA subtraction adjustment requires CFC/GILTI fact ingestion — no scenario built yet.",
+  "1.line.b8q_federal":
+    "No fact ingestion path for ABLE account distributions; no scenario modeled yet.",
+  "1.line.b8r_federal":
+    "No fact ingestion path for scholarship/fellowship grants not reported on W-2; no scenario modeled yet.",
+  "1.line.b8s_federal":
+    "No fact ingestion path for nontaxable Medicaid waiver payments included on 1040 line 1a/1d; no scenario modeled yet.",
+  "1.line.b8t_federal":
+    "No fact ingestion path for pensions/annuities from nonqualified deferred compensation or nongovernmental 457 plans; no scenario modeled yet.",
+  "1.line.b8u_federal":
+    "No fact ingestion path for wages earned while incarcerated; no scenario modeled yet.",
+  "1.line.b8v_federal":
+    "No fact ingestion path for digital assets received as ordinary income (forks, staking, mining) not reported elsewhere; no scenario modeled yet.",
+  "1.line.b8v_subtractions":
+    "No CA-specific subtraction rules ingested for digital asset ordinary income; no scenario modeled yet.",
+  "1.line.b8v_additions":
+    "No CA-specific addition rules ingested for digital asset ordinary income; no scenario modeled yet.",
+  "2.line.c19a_additions":
+    "CA addition for alimony paid (post-2018/post-2025 divorce agreements differ between federal and CA law) requires an alimony scenario; no such scenario or fact ingestion path exists yet.",
+  "2.line.c19b_recipient_last_name":
+    "Last name of alimony recipient — requires an alimony-paid scenario with recipient identity facts; no such scenario or fact ingestion path exists yet.",
+  "2.line.c20_subtractions":
+    "CA subtraction adjustment to IRA deduction (line 20 col B) — requires knowledge of CA vs. federal IRA deductibility differences and no fact ingestion path exists yet.",
+  "2.line.c20_additions":
+    "CA addition adjustment to IRA deduction (line 20 col C) — requires knowledge of CA vs. federal IRA deductibility differences and no fact ingestion path exists yet.",
+  "3.line.c24b_federal":
+    "Deductible expenses for personal-property rental (Schedule 1 line 24b) — no personal-property-rental expense fact ingestion path exists yet.",
+  "3.line.c24b_subtractions":
+    "CA subtraction for personal-property rental deductible expenses (line 24b col B) — no personal-property-rental expense fact ingestion path exists yet.",
+  "3.line.c24b_additions":
+    "CA-specific addition for deductible expenses related to personal property rental income (line 8l). No fact ingestion path for personal property rental adjustments exists yet.",
+  "3.line.c24c_federal":
+    "Federal amount for nontaxable Olympic/Paralympic medal value deduction (Schedule 1 line 24c). No ingestion for Olympic prize/medal income scenarios.",
+  "3.line.c24c_subtractions":
+    "CA subtraction for nontaxable Olympic/Paralympic medal value. No ingestion for Olympic prize/medal income scenarios.",
+  "3.line.c24d_subtractions":
+    "CA subtraction for reforestation amortization and expenses. No ingestion for reforestation/forestry business scenarios.",
+  "3.line.c24f_subtractions":
+    "CA subtraction for IRC Section 501(c)(18)(D) pension plan contributions. No ingestion for this niche pension contribution type.",
+  "3.line.c24f_additions":
+    "CA addition for IRC Section 501(c)(18)(D) pension plan contributions. No ingestion for this niche pension contribution type.",
+  "3.line.c24g_federal":
+    "Federal amount for contributions by certain chaplains to IRC Section 403(b) plans (Pub. 517). No ingestion for chaplain/clergy 403(b) scenarios.",
+  "3.line.c24g_subtractions":
+    "Chaplain IRC §403(b) plan contribution subtractions require a chaplain-specific fact we have not yet ingested; no scenario built for this.",
+  "3.line.c24g_additions":
+    "Chaplain IRC §403(b) plan contribution additions require a chaplain-specific fact we have not yet ingested; no scenario built for this.",
+  "3.line.c24k_federal":
+    "Excess deductions of IRC §67(e) expenses from Schedule K-1 (Form 1041) require estate/trust K-1 fact ingestion we have not yet built; no such scenario exists.",
+  "3.line.c24z_income_type":
+    "Free-text description for catch-all 'other adjustments' line 24z; no structured fact ingestion covers arbitrary other adjustments.",
+  "3.line.c24z_federal":
+    "Catch-all 'other adjustments' line 24z amount; no structured fact ingestion covers arbitrary other adjustments.",
+  "3.line.c24z_subtractions":
+    "Line 24z 'Other adjustments' Column B subtractions is a free-form catch-all for miscellaneous CA-specific subtraction adjustments not covered by lines 24a–24k. No fact or decision maps to this; needs scenario-specific ingestion.",
+  "3.line.c24z_additions":
+    "Line 24z 'Other adjustments' Column C additions is a free-form catch-all for miscellaneous CA-specific addition adjustments. No fact or decision maps to this; needs scenario-specific ingestion.",
+  "4.page2.medical_line4_additions":
+    "Line 4 col C takes CA-only medical expenses: self-employed health insurance for CA employees (no fact kind) and HSA-paid expenses over the floor (Form 8889 line 15 exists but is not wired to this line yet).",
+  "4.page2.taxes_6_subtractions":
+    "Line 6 col B (foreign income taxes, generation-skipping transfer tax) needs Schedule A line 6 detail, which has no data path.",
+  "4.page2.taxes_6_additions":
+    "Line 6 col C (foreign property taxes) has no fact kind or decision.",
+  "4.page2.interest_8b_additions":
+    "Line 8b col C needs the federal limit on non-1098 mortgage interest (Pub. 936); not modeled.",
+  "4.page2.interest_8c_additions":
+    "Line 8c col C needs the federal limit on non-1098 points (Pub. 936); not modeled.",
+  "4.page2.interest_8e_subtractions":
+    "Line 8e col B has no column B rows on lines 8a–8c, and the instructions name no subtraction for line 8.",
+  "5.page2.charity_11_subtractions":
+    "Line 11 col B (the CA 50%-of-AGI contribution limit, College Access Tax Credit) needs the contribution limitation worksheet with CA percentages; not modeled.",
+  "5.page2.charity_11_additions": "The instructions name no column C adjustment for line 11.",
+  "5.page2.charity_12_subtractions":
+    "Line 12 col B (the CA 50%-of-AGI contribution limit, conservation easements at 30%) needs the contribution limitation worksheet with CA percentages; not modeled.",
+  "5.page2.charity_12_additions": "The instructions name no column C adjustment for line 12.",
+  "5.page2.charity_13_subtractions":
+    "Line 13 col B (expired CA conservation carryover, pre-2002 appreciated stock) needs a CA carryover history; no fact kind holds it.",
+  "5.page2.charity_13_additions":
+    "Line 13 col C (a CA carryover larger than the federal) needs a CA carryover history; no fact kind holds it.",
+  "5.page2.charity_14_subtractions":
+    "Line 14 col B totals lines 11–13 col B; every upstream row is unsupported.",
+  "5.page2.charity_14_additions":
+    "Line 14 col C totals lines 11–13 col C; every upstream row is unsupported.",
+  "5.page2.casualty_15_subtractions":
+    "Line 15 col B needs a Form 4684 recomputed with CA amounts; no Form 4684 data path exists.",
+  "5.page2.casualty_15_additions":
+    "Line 15 col C needs a Form 4684 recomputed with CA amounts; no Form 4684 data path exists.",
+  "5.page2.other_deductions_16_subtractions":
+    "Line 16 col B (CA lottery losses, federal estate tax, repaid Social Security) needs Schedule A line 16 detail, which has no data path.",
+  "5.page2.other_deductions_16_additions":
+    "Line 16 col C (claim-of-right deduction, Form 2106 recomputed with CA amounts) has no fact kind or decision.",
+  "5.page2.job_expenses_19":
+    "Line 19 needs federal Form 2106 line 10 recomputed with CA amounts; no Form 2106 or unreimbursed-employee-expense fact kind exists.",
+  "5.page2.job_expenses_20": "Line 20 tax preparation fees have no fact kind.",
+  "5.page2.other_adjustments_27_type":
+    "Line 27 other adjustments (adoption cost credit, nontaxable-income expenses, legislator travel, utility-loan interest) have no fact kind or decision.",
+  "5.page2.other_adjustments_27_amount":
+    "Line 27 other adjustments (adoption cost credit, nontaxable-income expenses, legislator travel, utility-loan interest) have no fact kind or decision.",
+};
+
 export function register(): void {
   defineForm<ScheduleCa, ScheduleCaFilingInfo>("schedule-ca", {
-    bindings: waitsWithIncreasedStandard({
-      ...sectionCBindings,
-      // MANUAL EDIT: lines 8d and 24j from federal Form 2555 (foreignExclusion.ts).
-      ...foreignExclusionBindings,
-      // MANUAL EDIT: line 4 from Form 4797 and Schedule D-1 (otherGains.ts).
-      ...otherGainsBindings,
-      ...childIncomeBindings,
-      ...excessBusinessLossBindings,
-      // MANUAL EDIT: line 8z column C from FTB 5870A or an untaxed trust distribution (trustDistribution.ts).
-      ...trustDistributionBindings,
-      // MANUAL EDIT: line 8z column C adds back a federal treaty exemption (treatyExemption.ts).
-      ...treatyExemptionBindings,
-      ...nolDeductionBindings,
-      ...movingExpenseBindings,
-      ...mortgageCreditBindings,
-      ...form8853Bindings,
-      // MANUAL EDIT: line 8c columns A and C from Schedule 1 and Form 982 (canceledDebt.ts).
-      ...canceledDebtBindings,
-      /*
-       * MANUAL EDIT: CA does not conform to HSAs. Employer contributions
-       * (W-2 box 12 code W) are CA wages: line 1a col C, carried to line 27.
-       */
-      "0.line.2b_federal": (form) => {
-        const value = form["form-1040.line.2b"];
-        return typeof value === "number" ? value : undefined;
-      },
-      "1.line.b8z_federal": (form) => {
-        const value = form["schedule-1.0.line.8z"];
-        return typeof value === "number" ? value : undefined;
-      },
-      /*
-       * MANUAL EDIT: col A copies federal Schedule 1 line 7. "California excludes
-       * unemployment compensation from taxable income. Enter on line 7, column B
-       * the amount of unemployment compensation shown in column A"
-       * (ca-540-sched-ca-inst-2025::sec::line-7-unemployment-compensation::b01).
-       */
-      "0.line.b7_federal": (form) => numberOrBlank(form["schedule-1.0.line.7"]),
-      "0.line.b7_subtractions": (form) => numberOrBlank(form["0.line.b7_federal"]),
-      // MANUAL EDIT: col A copies federal Schedule 1 line 5; blank when it is blank.
-      "0.line.b5_federal": (form) => numberOrBlank(form["schedule-1.0.line.5"]),
-      "2.line.b9a_federal": (form) => {
-        const value = form["schedule-1.0.line.9"];
-        return typeof value === "number" ? value : undefined;
-      },
-      /*
-       * MANUAL EDIT: column A copies Schedule 1 line 8p, the federal excess
-       * business loss adjustment that line 9a column A already holds
-       * (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b04). Columns B
-       * and C take FTB 3461 (excessBusinessLoss.ts).
-       */
-      "1.line.b8p_federal": (form) => amountIfNonzero(form["schedule-1.0.line.8p"]),
-      // MANUAL EDIT: col A copies Schedule 1 line 8f (income from Form 8889).
-      "1.line.b8f_federal": (form) => amountIfNonzero(form["schedule-1.0.line.8f"]),
-      /*
-       * MANUAL EDIT: HSA distributions not used for qualified medical expenses and
-       * included in federal income are not taxable for California
-       * (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b03): Form 8889 line 16.
-       */
-      "1.line.b8f_subtractions": (form) =>
-        amountIfNonzero(form["form-8889.0.line.16_taxable_hsa_distributions"]),
-      "2.line.b9a_subtractions": (form) =>
-        sumOrBlank(...OTHER_INCOME_SUBTRACTIONS.map((id) => form[id])),
-      /*
-       * MANUAL EDIT: California does not conform to the HSA deduction: "Enter the
-       * amount from line 13, column A, on line 13, column B"
-       * (ca-540-sched-ca-inst-2025::sec::line-11-through-line-25::b01).
-       */
-      "2.line.c13_federal": (form) => amountIfNonzero(form["schedule-1.1.line.13"]),
-      "2.line.c13_subtractions": (form) => numberOrBlank(form["2.line.c13_federal"]),
-      /*
-       * MANUAL EDIT: column A copies the federal amount, Schedule 1 line 14 (Form 3903
-       * line 5). Column C takes FTB 3913 (movingExpenses.ts)
-       * (ca-540-sched-ca-inst-2025::sec::line-11-through-line-25::b01).
-       */
-      "2.line.c14_federal": (form) => amountIfNonzero(form["schedule-1.1.line.14"]),
-      // MANUAL EDIT: line 12 from Schedule 1 line 12 (Form 2106); columns B and C (employeeBusinessExpenses.ts).
-      "2.line.c12_federal": line12Federal,
-      "2.line.c12_subtractions": line12Adjustment,
-      "2.line.c12_additions": line12Adjustment,
-      "3.line.c26_federal": (form) => adjustmentsTotalFederal(form),
-      "3.line.c26_subtractions": (form) =>
-        sumOrBlank(...ADJUSTMENT_SUBTRACTIONS.map((id) => form[id])),
-      /*
-       * MANUAL EDIT: plus a contractor's gross income when an employee for California:
-       * "enter the amount reported as gross income of the business ... as wages on
-       * line 1a, column C" (ca-540-sched-ca-inst-2025::sec::a-total-amount-from-federal-form-s-w-2-box-1::b01).
-       */
-      "0.line.1a_additions": (_, info) =>
-        roundDollars(
-          sumOrBlank(
-            info.hsaEmployerContributions,
-            info.caEmployeeAmounts?.grossIncome || undefined,
-          ),
-        ),
-      // MANUAL EDIT: Sections B and C from the Schedule 1 answers and activities (answerLines.ts).
-      ...answerLines(),
-      "0.line.1z_additions": (form) =>
-        sumOrBlank(
-          form["0.line.1a_additions"],
-          form["0.line.1b_additions"],
-          form["0.line.1c_additions"],
-          form["0.line.1d_additions"],
-          form["0.line.1e_additions"],
-          form["0.line.1f_additions"],
-          form["0.line.1g_additions"],
-          form["0.line.1h_additions"],
-          form["0.line.1i_additions"],
-        ),
-      "2.line.b10_additions": (form) =>
-        sumOrBlank(
-          form["0.line.1z_additions"],
-          form["0.line.2b_additions"],
-          form["0.line.3b_additions"],
-          form["0.line.4b_additions"],
-          form["0.line.5b_additions"],
-          form["0.line.7a_additions"],
-          form["0.line.b2a_additions"],
-          form["0.line.b3_additions"],
-          form["0.line.b4_additions"],
-          form["0.line.b5_additions"],
-          form["0.line.b6_additions"],
-          form["2.line.b9a_additions"],
-        ),
-      /*
-       * MANUAL EDIT: col A copies 1040 lines 4a–6b, blank when the federal line
-       * is blank. CA excludes Social Security: col B takes line 6b.
-       */
-      "0.line.4a_federal": (form) => numberOrBlank(form["form-1040.line.4a"]),
-      "0.line.4b_federal": (form) => numberOrBlank(form["form-1040.line.4b"]),
-      "0.line.5a_federal": (form) => numberOrBlank(form["form-1040.line.5a"]),
-      "0.line.5b_federal": (form) => numberOrBlank(form["form-1040.line.5b"]),
-      "0.line.6a_federal": (form) => numberOrBlank(form["form-1040.line.6a"]),
-      "0.line.6b_federal": (form) => numberOrBlank(form["form-1040.line.6b"]),
-      "0.line.6b_subtractions": (form) => numberOrBlank(form["0.line.6b_federal"]),
-      // MANUAL EDIT: the part of line 5b that Schedule G-1 taxes (lumpSum.ts).
-      "0.line.5b_subtractions": line5bSubtractions,
-      // MANUAL EDIT: the lines before FTB 3805V's (line10.ts), then lines 9b1 and 9b2.
-      "2.line.b10_subtractions": (form) =>
-        sumOrBlank(
-          ...LINE_10_SUBTRACTIONS_BEFORE_NOL.map((id) => form[id]),
-          form["2.line.b9b1_subtractions"],
-          form["2.line.b9b2_subtractions"],
-        ),
-      /*
-       * MANUAL EDIT: "Subtract line 26 from line 10 in column B and column C"
-       * (ca-540-sched-ca-inst-2025::sec::line-11-through-line-25::b08). Blank only
-       * when both lines are blank: a column B adjustment alone (the HSA deduction)
-       * makes line 27 negative.
-       */
-      "3.line.c27_subtractions": (form) =>
-        line27Total(form["2.line.b10_subtractions"], form["3.line.c26_subtractions"]),
-      "3.line.c27_additions": (form) =>
-        line27Total(form["2.line.b10_additions"], form["3.line.c26_additions"]),
-      // MANUAL EDIT: no combined-name fact exists; join first + last name.
-      "0.header.name": (_, info) =>
-        info.taxpayerFirstName && info.taxpayerLastName
-          ? `${info.taxpayerFirstName} ${info.taxpayerLastName}`
-          : undefined,
-      "0.header.ssn": (_, info) => info.taxpayerSSN,
-      "0.line.1a_federal": (form) => sum(form["form-1040.line.1a"]),
-      /*
-       * MANUAL EDIT: column A copies federal 1040 line 1f (Form 8839 line 31,
-       * ftb-pub-737-2025::sec::line-1f::b01). Without Form 8839, the old reason.
-       */
-      "0.line.1f_federal": (form, info) =>
-        info.mustFile?.["form-8839"]?.value === true
-          ? numberOrBlank(form["form-1040.line.1f"])
-          : unsupported(LINE_1F_WITHOUT_8839),
-      // Federal 1040 line 1c (Form 4137 line 4 and noncash tips); blank when it is.
-      "0.line.1c_federal": (form) => numberOrBlank(form["form-1040.line.1c"]),
-      // Federal 1040 line 1g, Form 8919 line 6 (ftb-pub-737-2025::sec::line-1g::b01); blank when it is.
-      "0.line.1g_federal": (form) => numberOrBlank(form["form-1040.line.1g"]),
-      "0.line.1z_federal": (form) =>
-        sum(
-          form["0.line.1a_federal"],
-          form["0.line.1b_federal"],
-          form["0.line.1c_federal"],
-          form["0.line.1d_federal"],
-          form["0.line.1e_federal"],
-          form["0.line.1f_federal"],
-          form["0.line.1g_federal"],
-          form["0.line.1h_federal"],
-        ),
-      "0.line.3b_federal": (form) => sum(form["form-1040.line.3b"]),
-      "0.line.7a_federal": (form) => sum(form["form-1040.line.7a"]),
-      "0.line.7a_subtractions": (form, info) =>
-        scheduleDCaAdjustment(form, info, "12a", LINE_7A_SUBTRACTIONS_GAP),
-      "0.line.7a_additions": (form, info) =>
-        scheduleDCaAdjustment(form, info, "12b", LINE_7A_ADDITIONS_GAP),
-      "2.line.b10_federal": (form) =>
-        sum(
-          form["0.line.1z_federal"],
-          form["0.line.2b_federal"],
-          form["0.line.3b_federal"],
-          form["0.line.4b_federal"],
-          form["0.line.5b_federal"],
-          form["0.line.6b_federal"],
-          form["0.line.7a_federal"],
-          form["0.line.b1_federal"],
-          form["0.line.b2a_federal"],
-          form["0.line.b3_federal"],
-          form["0.line.b4_federal"],
-          form["0.line.b5_federal"],
-          form["0.line.b6_federal"],
-          form["0.line.b7_federal"],
-          form["2.line.b9a_federal"],
-        ),
-      // Line 27 col A equals federal AGI (form-1040 line 11b).
-      "3.line.c27_federal": (form) =>
-        sum(
-          form["2.line.b10_federal"],
-          form["3.line.c26_federal"] === undefined ? 0 : -form["3.line.c26_federal"],
-        ),
-      // MANUAL EDIT: col A copies 1040 line 3a (ca-540-sched-ca-inst-2025::sec::section-a-line-1a-through-line-7a-and-section-b-line-1-through-line-9a::b01).
-      "0.line.3a_federal": (form) => numberOrBlank(form["form-1040.line.3a"]),
-      /*
-       * MANUAL EDIT: the Part II box: itemized for California while the federal
-       * return took the standard deduction. Schedule A evaluated (line 17
-       * present) with 1040 line 12e not equal to it, and Form 540 line 18 taking
-       * the itemized total (line 30 = line 29)
-       * (ca-540-sched-ca-inst-2025::sec::part-ii-adjustments-to-federal-itemized-deductions::b01).
-       */
-      "4.page2.itemize_ca_not_federal": (form) => {
-        const scheduleALine17 = numberOrBlank(
-          form["schedule-a.0.line.17_total_itemized_deductions"],
-        );
-        const federalDeduction = numberOrBlank(form["form-1040.line.12e"]);
-        const line29 = form["5.page2.total_itemized_29"];
-        const line30 = form["5.page2.total_itemized_30_standard_or_itemized"];
-        if (scheduleALine17 === undefined || federalDeduction === undefined) return undefined;
-        if (typeof line29 !== "number" || typeof line30 !== "number") return undefined;
-        return federalDeduction !== scheduleALine17 && line30 === line29 ? true : undefined;
-      },
-      /*
-       * MANUAL EDIT: Part II col A, lines 1–16, copies federal Schedule A line
-       * for line (ca-540-sched-ca-inst-2025::sec::line-1-through-line-16::b01).
-       * Blank when Schedule A is not filed.
-       */
-      "4.page2.medical_dental_expenses": (form) =>
-        numberOrBlank(form["schedule-a.0.line.1_medical_dental_expenses"]),
-      "4.page2.medical_agi_line11b": (form) =>
-        numberOrBlank(form["schedule-a.0.line.2_agi_from_1040"]),
-      "4.page2.medical_agi_threshold": (form) =>
-        numberOrBlank(form["schedule-a.0.line.3_agi_multiplied"]),
-      "4.page2.medical_line4_federal": (form) =>
-        numberOrBlank(form["schedule-a.0.line.4_net_medical_dental"]),
-      "4.page2.taxes_5a_federal": (form) =>
-        numberOrBlank(form["schedule-a.0.line.5a_state_local_income_or_sales_tax"]),
-      // MANUAL EDIT: CA allows no state/local income or sales tax deduction: col B takes all of col A (ca-540-sched-ca-inst-2025::sec::line-5a-state-and-local-taxes::b01).
-      "4.page2.taxes_5a_subtractions": (form) => numberOrBlank(form["4.page2.taxes_5a_federal"]),
-      "4.page2.taxes_5b_federal": (form) =>
-        numberOrBlank(form["schedule-a.0.line.5b_real_estate_taxes"]),
-      "4.page2.taxes_5c_federal": (form) =>
-        numberOrBlank(form["schedule-a.0.line.5c_personal_property_taxes"]),
-      "4.page2.taxes_5d_federal": (form) =>
-        numberOrBlank(form["schedule-a.0.line.5d_total_state_local_taxes"]),
-      "4.page2.taxes_5e_federal": (form) => numberOrBlank(form["schedule-a.0.line.5e_salt_cap"]),
-      // MANUAL EDIT: the form: "Enter the amount from line 5a, column B in line 5e, column B."
-      "4.page2.taxes_5e_subtractions": (form) =>
-        numberOrBlank(form["4.page2.taxes_5a_subtractions"]),
-      /*
-       * MANUAL EDIT: CA does not conform to the federal SALT cap: col C takes the
-       * amount over the cap, only when the cap applied
-       * (ca-540-sched-ca-inst-2025::sec::line-5a-state-and-local-taxes::b01).
-       */
-      "4.page2.taxes_5e_additions": (form) => {
-        const line5d = form["4.page2.taxes_5d_federal"];
-        const line5e = form["4.page2.taxes_5e_federal"];
-        if (typeof line5d !== "number" || typeof line5e !== "number") return undefined;
-        return line5d > line5e ? line5d - line5e : undefined;
-      },
-      "4.page2.taxes_6_type": (form) => text(form["schedule-a.0.line.6_other_taxes_description"]),
-      "4.page2.taxes_6_federal": (form) =>
-        numberOrBlank(form["schedule-a.0.line.6_other_taxes_amount"]),
-      "4.page2.taxes_7_federal": (form) => numberOrBlank(form["schedule-a.0.line.7_total_taxes"]),
-      // Line 7: "Add line 5e and line 6" in each column (the form).
-      "4.page2.taxes_7_subtractions": (form) =>
-        sumOrBlank(form["4.page2.taxes_5e_subtractions"], form["4.page2.taxes_6_subtractions"]),
-      "4.page2.taxes_7_additions": (form) =>
-        sumOrBlank(form["4.page2.taxes_5e_additions"], form["4.page2.taxes_6_additions"]),
-      "4.page2.interest_8a_federal": (form) =>
-        numberOrBlank(form["schedule-a.0.line.8a_mortgage_interest_form1098"]),
-      "4.page2.interest_8b_federal": (form) =>
-        numberOrBlank(form["schedule-a.0.line.8b_mortgage_interest_not_form1098"]),
-      "4.page2.interest_8c_federal": (form) =>
-        numberOrBlank(form["schedule-a.0.line.8c_points_not_form1098"]),
-      "4.page2.interest_8e_federal": (form) =>
-        numberOrBlank(form["schedule-a.0.line.8e_total_mortgage_interest_points"]),
-      "4.page2.interest_9_federal": (form) =>
-        numberOrBlank(form["schedule-a.0.line.9_investment_interest"]),
-      /*
-       * MANUAL EDIT: line 9 col B/C come from FTB 3526 line 10, the difference
-       * between its line 8 (CA deduction) and line 9 (federal Form 4952 line 8):
-       * col C when CA allows more, col B when federal allows more
-       * (ca-540-sched-ca-inst-2025::sec::line-9-investment-interest::b01,
-       * ca-3526-inst-2025::sec::line-10::b01). Blank when FTB 3526 is not filed.
-       */
-      "4.page2.interest_9_subtractions": (form) => {
-        const ca = form["form-3526.0.line.8_investment_interest_deduction"];
-        const fed = form["form-3526.0.line.9_federal_4952_line_8"];
-        if (typeof ca !== "number" || typeof fed !== "number") return undefined;
-        return fed > ca
-          ? numberOrBlank(form["form-3526.0.line.10_california_adjustment"])
-          : undefined;
-      },
-      "4.page2.interest_9_additions": (form) => {
-        const ca = form["form-3526.0.line.8_investment_interest_deduction"];
-        const fed = form["form-3526.0.line.9_federal_4952_line_8"];
-        if (typeof ca !== "number" || typeof fed !== "number") return undefined;
-        return ca > fed
-          ? numberOrBlank(form["form-3526.0.line.10_california_adjustment"])
-          : undefined;
-      },
-      "4.page2.interest_10_federal": (form) =>
-        numberOrBlank(form["schedule-a.0.line.10_total_interest"]),
-      // Line 10: "Add line 8e and line 9" in each column (the form).
-      "4.page2.interest_10_subtractions": (form) =>
-        sumOrBlank(
-          form["4.page2.interest_8e_subtractions"],
-          form["4.page2.interest_9_subtractions"],
-        ),
-      "4.page2.interest_10_additions": (form) =>
-        sumOrBlank(form["4.page2.interest_8e_additions"], form["4.page2.interest_9_additions"]),
-      "5.page2.charity_11_federal": (form) =>
-        numberOrBlank(form["schedule-a.0.line.11_gifts_cash_check"]),
-      "5.page2.charity_12_federal": (form) =>
-        numberOrBlank(form["schedule-a.0.line.12_gifts_other_than_cash"]),
-      "5.page2.charity_13_federal": (form) =>
-        numberOrBlank(form["schedule-a.0.line.13_gifts_carryover"]),
-      "5.page2.charity_14_federal": (form) =>
-        numberOrBlank(form["schedule-a.0.line.14_total_gifts"]),
-      "5.page2.casualty_15_federal": (form) =>
-        numberOrBlank(form["schedule-a.0.line.15_casualty_theft_loss"]),
-      "5.page2.other_deductions_16_federal": (form) =>
-        numberOrBlank(form["schedule-a.0.line.16_other_itemized_deductions_amount"]),
-      // Line 17: "Add lines 4, 7, 10, 14, 15, and 16 in columns A, B, and C" (the form).
-      "5.page2.total_itemized_17_federal": (form) =>
-        sumOrBlank(
-          form["4.page2.medical_line4_federal"],
-          form["4.page2.taxes_7_federal"],
-          form["4.page2.interest_10_federal"],
-          form["5.page2.charity_14_federal"],
-          form["5.page2.casualty_15_federal"],
-          form["5.page2.other_deductions_16_federal"],
-        ),
-      "5.page2.total_itemized_17_subtractions": (form) =>
-        sumOrBlank(
-          form["4.page2.taxes_7_subtractions"],
-          form["4.page2.interest_10_subtractions"],
-          form["5.page2.charity_14_subtractions"],
-          form["5.page2.casualty_15_subtractions"],
-          form["5.page2.other_deductions_16_subtractions"],
-        ),
-      "5.page2.total_itemized_17_additions": (form) =>
-        sumOrBlank(
-          form["4.page2.medical_line4_additions"],
-          form["4.page2.taxes_7_additions"],
-          form["4.page2.interest_10_additions"],
-          form["5.page2.charity_14_additions"],
-          form["5.page2.casualty_15_additions"],
-          form["5.page2.other_deductions_16_additions"],
-        ),
-      // Line 18: "Combine line 17 column A less column B plus column C" (the form).
-      "5.page2.total_itemized_18_combined": (form) => {
-        const colA = form["5.page2.total_itemized_17_federal"];
-        const colB = form["5.page2.total_itemized_17_subtractions"];
-        const colC = form["5.page2.total_itemized_17_additions"];
-        if (colA === undefined && colB === undefined && colC === undefined) return undefined;
-        return sum(colA, colB === undefined ? 0 : -colB, colC);
-      },
-      /*
-       * MANUAL EDIT: lines 22–25, the job-expenses block CA keeps
-       * (ca-540-sched-ca-inst-2025::sec::line-19-through-line-22-job-expenses-and-certain-miscellaneous-deductions::b01).
-       * Lines 23 and 24 fill from federal AGI once Part II is in use, which
-       * needs a completed federal Schedule A
-       * (ca-540-sched-ca-inst-2025::sec::part-ii-adjustments-to-federal-itemized-deductions::b01).
-       * Line 25 is blank until line 22 has a value.
-       */
-      /*
-       * MANUAL EDIT: line 21, "Other Expenses": the amount paid to manage or
-       * protect property held for earning income, with its type beside it
-       * (ca-540-sched-ca-inst-2025::sec::line-21-other-expenses::b01). The
-       * engine knows one kind, the investment fees the taxpayer states; safe
-       * deposit boxes, legal fees and claim-of-right repayments have no fact.
-       */
-      "5.page2.job_expenses_21_amount": (form, info) => {
-        // Part II is in use only with a completed Schedule A (the same gate as line 23).
-        if (form["schedule-a.0.line.17_total_itemized_deductions"] === undefined) return undefined;
-        return info.caInvestmentFees !== undefined && info.caInvestmentFees > 0
-          ? roundDollars(info.caInvestmentFees)
-          : undefined;
-      },
-      "5.page2.job_expenses_21_type": (form) =>
-        form["5.page2.job_expenses_21_amount"] === undefined ? undefined : "Investment fees",
-      "5.page2.job_expenses_22_total": (form) =>
-        sumOrBlank(
-          form["5.page2.job_expenses_19"],
-          form["5.page2.job_expenses_20"],
-          form["5.page2.job_expenses_21_amount"],
-        ),
-      "5.page2.job_expenses_23_agi": (form) => {
-        if (form["schedule-a.0.line.17_total_itemized_deductions"] === undefined) return undefined;
-        return numberOrBlank(form["form-1040.line.11b"]);
-      },
-      "5.page2.job_expenses_24_threshold": (form) => {
-        const agi = form["5.page2.job_expenses_23_agi"];
-        return typeof agi === "number"
-          ? atLeast(0, roundDollars(agi * CA_MISC_FLOOR_RATE))
-          : undefined;
-      },
-      "5.page2.job_expenses_25_net": (form) => {
-        const line22 = form["5.page2.job_expenses_22_total"];
-        if (typeof line22 !== "number") return undefined;
-        return atLeast(0, line22 - sum(form["5.page2.job_expenses_24_threshold"]));
-      },
-      // Line 26: "Add line 18 and line 25" (the form).
-      "5.page2.total_itemized_26": (form) =>
-        sumOrBlank(form["5.page2.total_itemized_18_combined"], form["5.page2.job_expenses_25_net"]),
-      // Line 28: "Combine line 26 and line 27" (the form). Line 27 may be negative.
-      "5.page2.total_itemized_28": (form) =>
-        sumOrBlank(form["5.page2.total_itemized_26"], form["5.page2.other_adjustments_27_amount"]),
-      /*
-       * MANUAL EDIT: line 28 when federal AGI is at or under the filing-status
-       * threshold, else the Itemized Deductions Worksheet
-       * (ca-540-sched-ca-inst-2025::sec::line-29-california-itemized-deductions::b02).
-       * Form 540 line 13 is federal AGI, form-1040 line 11b.
-       */
-      "5.page2.total_itemized_29": (form, info) => {
-        const line28 = form["5.page2.total_itemized_28"];
-        if (typeof line28 !== "number" || !info.filingStatus) return undefined;
-        const federalAgi = form["form-1040.line.11b"];
-        if (typeof federalAgi !== "number") return undefined;
-        return caItemizedLine29({
-          line28,
-          federalAgi,
-          filingStatus: info.filingStatus,
-          scheduleALine4: form["schedule-a.0.line.4_net_medical_dental"],
-          scheduleALine9: form["schedule-a.0.line.9_investment_interest"],
-          scheduleALine15: form["schedule-a.0.line.15_casualty_theft_loss"],
-          scheduleALine16: form["schedule-a.0.line.16_other_itemized_deductions_amount"],
-        });
-      },
-      // MANUAL EDIT: the larger of the CA standard deduction and line 29. Form 540 line 18 reads this field.
-      "5.page2.total_itemized_30_standard_or_itemized": (form, info) => {
-        if (!info.filingStatus) return undefined;
-        const stdDed = lookupStandardDeduction("state-ca", 2025, info.filingStatus);
-        if (stdDed === undefined) return undefined;
-        const line29 = form["5.page2.total_itemized_29"];
-        return atLeast(stdDed, typeof line29 === "number" ? line29 : 0);
-      },
-    }),
-
-    unsupported: {
-      "0.line.1b_federal":
-        "Household-employee wages not reported on W-2 (federal 1040 line 1b) — no scenario modeled yet.",
-      "0.line.1d_federal":
-        "Medicaid waiver payments not reported on W-2 (federal 1040 line 1d) — no scenario modeled yet.",
-      "0.line.1e_federal":
-        "Taxable dependent care benefits from Form 2441 (federal 1040 line 1e) — no scenario modeled yet.",
-      "0.line.1h_federal": "Other earned income (federal 1040 line 1h) — no scenario modeled yet.",
-      "0.line.1z_subtractions":
-        "Aggregate of line 1 subtractions; all upstream rows are unsupported.",
-      "0.line.2a_federal": "Tax-exempt interest (federal 1040 line 2a) — no scenario modeled yet.",
-      "3.line.c25_additions":
-        "Line 25 col C — aggregates 24a-24z col C; all upstream rows are unsupported.",
-      "0.line.1a_subtractions":
-        "CA-specific subtraction adjustments to W-2 wages (e.g. active-duty military pay exclusions, combat zone exclusions) require specialized facts/scenarios not yet ingested.",
-      "0.line.1b_subtractions":
-        "CA-specific subtraction adjustments to household employee wages not on W-2; no scenario modeled yet.",
-      "0.line.1b_additions":
-        "CA-specific addition adjustments to household employee wages not on W-2; no scenario modeled yet.",
-      "0.line.1c_subtractions":
-        "CA-specific subtraction adjustments to tip income; no scenario modeled yet.",
-      "0.line.1c_additions":
-        "No CA-specific addition scenario for tip income (line 1c). CA generally follows federal treatment; any addition would require FTB Pub 1001 guidance we haven't ingested. No known fact/decision path.",
-      "0.line.1d_subtractions":
-        "No CA-specific subtraction scenario for Medicaid waiver payments. CA may exclude certain nontaxable Medicaid waiver payments per FTB Pub 1001, but no ingestion path or worked example exists yet.",
-      "0.line.1d_additions":
-        "No CA-specific addition scenario for Medicaid waiver payments (line 1d). No known fact/decision path exists yet.",
-      "0.line.1e_subtractions":
-        "No CA-specific subtraction scenario for taxable dependent care benefits (line 1e). CA generally conforms to federal; any adjustment would require Form 2441 CA-equivalent ingestion not yet built.",
-      "0.line.1e_additions":
-        "No CA-specific addition scenario for taxable dependent care benefits (line 1e). No known fact/decision path exists yet.",
-      "0.line.1f_subtractions":
-        "No CA-specific subtraction scenario for employer-provided adoption benefits (line 1f). CA may have different exclusion rules per FTB Pub 1001 but no ingestion path or worked example exists yet.",
-      "0.line.1f_additions":
-        "No CA-specific addition scenario for employer-provided adoption benefits (line 1f). No known fact/decision path exists yet.",
-      "0.line.1g_subtractions":
-        "No CA-specific subtraction scenario for Form 8919 wages has been modeled; no fact ingestion path exists for this adjustment.",
-      "0.line.1g_additions":
-        "No CA-specific addition scenario for Form 8919 wages has been modeled; no fact ingestion path exists for this adjustment.",
-      "0.line.1h_subtractions":
-        "CA subtractions for 'other earned income' (line 1h) depend on taxpayer-specific scenarios (e.g. ridesharing fringe benefits, CQSO exclusion) that have no ingested fact path yet.",
-      "0.line.1i_additions":
-        "Nontaxable combat pay addition applies only to active-duty military taxpayers in designated combat zones; no military/combat-zone fact ingestion scenario has been built yet.",
-      "0.line.2b_subtractions":
-        "CA-specific subtractions to taxable interest (e.g. interest on US obligations exempt in CA) require fact ingestion we haven't built yet — no scenario modeled.",
-      "0.line.2b_additions":
-        "CA-specific additions to taxable interest (e.g. interest on other-state obligations taxable in CA) require fact ingestion we haven't built yet — no scenario modeled.",
-      "0.line.3b_subtractions":
-        "CA-specific subtractions to ordinary dividends (e.g. dividends from children included on parent's federal return but reported on child's CA return) require scenarios we haven't built yet.",
-      "0.line.3b_additions":
-        "CA-specific additions to ordinary dividends (CFC dividends, RIC capital gain distributions, pre-1987 S-corp earnings, etc.) require scenarios we haven't built yet.",
-      "0.line.4b_subtractions":
-        "CA IRA/pension subtraction adjustments (e.g. Tier 2 railroad retirement, three-year rule annuities) require ingestion of RRB-1099-R and specialized pension facts we don't yet model. No worked scenario exists for this.",
-      "0.line.4b_additions":
-        "CA IRA distribution addition adjustments (e.g. pre-1987 annuity rule elections) require specialized pension/annuity facts not yet modeled. No worked scenario exists.",
-      "0.line.5b_additions":
-        "CA pension/annuity addition adjustments (pre-1987 three-year rule elections where CA uses different tax treatment) require specialized pension facts not yet modeled. No worked scenario exists.",
-      "0.line.b1_federal":
-        "Federal Schedule 1 (Form 1040) line 1 (taxable state/local tax refunds) is not exposed as an individual fieldId in the ingested form-1040 catalog — only the Schedule 1 total (line 10) flows into form-1040 line 8. No individual Schedule 1 line facts are ingested yet.",
-      "0.line.b1_subtractions":
-        "CA subtraction for state income tax refunds (not taxable in CA) requires knowledge of the taxable refund amount from federal Schedule 1 line 1, which is not ingested as a separate fact or field.",
-      "0.line.b2a_additions":
-        "CA addition for alimony received under post-2018 or post-2025 agreements requires alimony fact data and divorce agreement date logic not yet ingested or modeled.",
-      "1.line.b8b_subtractions":
-        "CA subtracts California lottery winnings from gambling income. No CA lottery winnings fact category exists, and the column A source (Schedule 1 line 8b) is not ingested. This subtraction requires a scenario with CA lottery income.",
-      "1.line.b8e_additions":
-        "Column C adds an Archer MSA rolled over to an HSA (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b02); no fact splits Form 8853 line 6b between rollovers to an HSA and other amounts.",
-      "1.line.b8g_federal":
-        "Alaska Permanent Fund dividends — niche income type specific to Alaska residents; no fact ingestion path exists.",
-      "1.line.b8j_federal":
-        "Activity not engaged in for profit (hobby) income from federal Schedule 1 line 8j — no fact ingestion path for hobby income exists yet.",
-      "1.line.b8k_additions":
-        "Stock options CA addition adjustment requires stock option / equity compensation fact ingestion — no scenario built yet.",
-      "1.line.b8l_federal":
-        "Rental of personal property income (not a rental business) has no fact ingestion path yet — no scenario built for this income type.",
-      "1.line.b8m_federal":
-        "Olympic and Paralympic medal/USOC prize money income has no fact ingestion path — no athlete scenario built yet.",
-      "1.line.b8n_federal":
-        "IRC §951(a) Subpart F inclusion (CFC income) has no fact ingestion path — no controlled foreign corporation scenario built yet.",
-      "1.line.b8n_subtractions":
-        "IRC §951(a) CA subtraction adjustment requires CFC fact ingestion — no controlled foreign corporation scenario built yet.",
-      "1.line.b8o_federal":
-        "IRC §951A(a) GILTI inclusion has no fact ingestion path — no GILTI/CFC scenario built yet.",
-      "1.line.b8o_subtractions":
-        "IRC §951A(a) GILTI CA subtraction adjustment requires CFC/GILTI fact ingestion — no scenario built yet.",
-      "1.line.b8q_federal":
-        "No fact ingestion path for ABLE account distributions; no scenario modeled yet.",
-      "1.line.b8r_federal":
-        "No fact ingestion path for scholarship/fellowship grants not reported on W-2; no scenario modeled yet.",
-      "1.line.b8s_federal":
-        "No fact ingestion path for nontaxable Medicaid waiver payments included on 1040 line 1a/1d; no scenario modeled yet.",
-      "1.line.b8t_federal":
-        "No fact ingestion path for pensions/annuities from nonqualified deferred compensation or nongovernmental 457 plans; no scenario modeled yet.",
-      "1.line.b8u_federal":
-        "No fact ingestion path for wages earned while incarcerated; no scenario modeled yet.",
-      "1.line.b8v_federal":
-        "No fact ingestion path for digital assets received as ordinary income (forks, staking, mining) not reported elsewhere; no scenario modeled yet.",
-      "1.line.b8v_subtractions":
-        "No CA-specific subtraction rules ingested for digital asset ordinary income; no scenario modeled yet.",
-      "1.line.b8v_additions":
-        "No CA-specific addition rules ingested for digital asset ordinary income; no scenario modeled yet.",
-      "2.line.b9b3_subtractions":
-        "CA-specific NOL deduction from FTB Forms 3805Z, 3807, or 3809 — no ingestion path for these FTB enterprise-zone NOL forms exists yet.",
-      "2.line.c19a_additions":
-        "CA addition for alimony paid (post-2018/post-2025 divorce agreements differ between federal and CA law) requires an alimony scenario; no such scenario or fact ingestion path exists yet.",
-      "2.line.c19b_recipient_last_name":
-        "Last name of alimony recipient — requires an alimony-paid scenario with recipient identity facts; no such scenario or fact ingestion path exists yet.",
-      "2.line.c20_subtractions":
-        "CA subtraction adjustment to IRA deduction (line 20 col B) — requires knowledge of CA vs. federal IRA deductibility differences and no fact ingestion path exists yet.",
-      "2.line.c20_additions":
-        "CA addition adjustment to IRA deduction (line 20 col C) — requires knowledge of CA vs. federal IRA deductibility differences and no fact ingestion path exists yet.",
-      "3.line.c24b_federal":
-        "Deductible expenses for personal-property rental (Schedule 1 line 24b) — no personal-property-rental expense fact ingestion path exists yet.",
-      "3.line.c24b_subtractions":
-        "CA subtraction for personal-property rental deductible expenses (line 24b col B) — no personal-property-rental expense fact ingestion path exists yet.",
-      "3.line.c24b_additions":
-        "CA-specific addition for deductible expenses related to personal property rental income (line 8l). No fact ingestion path for personal property rental adjustments exists yet.",
-      "3.line.c24c_federal":
-        "Federal amount for nontaxable Olympic/Paralympic medal value deduction (Schedule 1 line 24c). No ingestion for Olympic prize/medal income scenarios.",
-      "3.line.c24c_subtractions":
-        "CA subtraction for nontaxable Olympic/Paralympic medal value. No ingestion for Olympic prize/medal income scenarios.",
-      "3.line.c24d_subtractions":
-        "CA subtraction for reforestation amortization and expenses. No ingestion for reforestation/forestry business scenarios.",
-      "3.line.c24f_subtractions":
-        "CA subtraction for IRC Section 501(c)(18)(D) pension plan contributions. No ingestion for this niche pension contribution type.",
-      "3.line.c24f_additions":
-        "CA addition for IRC Section 501(c)(18)(D) pension plan contributions. No ingestion for this niche pension contribution type.",
-      "3.line.c24g_federal":
-        "Federal amount for contributions by certain chaplains to IRC Section 403(b) plans (Pub. 517). No ingestion for chaplain/clergy 403(b) scenarios.",
-      "3.line.c24g_subtractions":
-        "Chaplain IRC §403(b) plan contribution subtractions require a chaplain-specific fact we have not yet ingested; no scenario built for this.",
-      "3.line.c24g_additions":
-        "Chaplain IRC §403(b) plan contribution additions require a chaplain-specific fact we have not yet ingested; no scenario built for this.",
-      "3.line.c24k_federal":
-        "Excess deductions of IRC §67(e) expenses from Schedule K-1 (Form 1041) require estate/trust K-1 fact ingestion we have not yet built; no such scenario exists.",
-      "3.line.c24z_income_type":
-        "Free-text description for catch-all 'other adjustments' line 24z; no structured fact ingestion covers arbitrary other adjustments.",
-      "3.line.c24z_federal":
-        "Catch-all 'other adjustments' line 24z amount; no structured fact ingestion covers arbitrary other adjustments.",
-      "3.line.c24z_subtractions":
-        "Line 24z 'Other adjustments' Column B subtractions is a free-form catch-all for miscellaneous CA-specific subtraction adjustments not covered by lines 24a–24k. No fact or decision maps to this; needs scenario-specific ingestion.",
-      "3.line.c24z_additions":
-        "Line 24z 'Other adjustments' Column C additions is a free-form catch-all for miscellaneous CA-specific addition adjustments. No fact or decision maps to this; needs scenario-specific ingestion.",
-      "4.page2.medical_line4_additions":
-        "Line 4 col C takes CA-only medical expenses: self-employed health insurance for CA employees (no fact kind) and HSA-paid expenses over the floor (Form 8889 line 15 exists but is not wired to this line yet).",
-      "4.page2.taxes_6_subtractions":
-        "Line 6 col B (foreign income taxes, generation-skipping transfer tax) needs Schedule A line 6 detail, which has no data path.",
-      "4.page2.taxes_6_additions":
-        "Line 6 col C (foreign property taxes) has no fact kind or decision.",
-      "4.page2.interest_8b_additions":
-        "Line 8b col C needs the federal limit on non-1098 mortgage interest (Pub. 936); not modeled.",
-      "4.page2.interest_8c_additions":
-        "Line 8c col C needs the federal limit on non-1098 points (Pub. 936); not modeled.",
-      "4.page2.interest_8e_subtractions":
-        "Line 8e col B has no column B rows on lines 8a–8c, and the instructions name no subtraction for line 8.",
-      "5.page2.charity_11_subtractions":
-        "Line 11 col B (the CA 50%-of-AGI contribution limit, College Access Tax Credit) needs the contribution limitation worksheet with CA percentages; not modeled.",
-      "5.page2.charity_11_additions": "The instructions name no column C adjustment for line 11.",
-      "5.page2.charity_12_subtractions":
-        "Line 12 col B (the CA 50%-of-AGI contribution limit, conservation easements at 30%) needs the contribution limitation worksheet with CA percentages; not modeled.",
-      "5.page2.charity_12_additions": "The instructions name no column C adjustment for line 12.",
-      "5.page2.charity_13_subtractions":
-        "Line 13 col B (expired CA conservation carryover, pre-2002 appreciated stock) needs a CA carryover history; no fact kind holds it.",
-      "5.page2.charity_13_additions":
-        "Line 13 col C (a CA carryover larger than the federal) needs a CA carryover history; no fact kind holds it.",
-      "5.page2.charity_14_subtractions":
-        "Line 14 col B totals lines 11–13 col B; every upstream row is unsupported.",
-      "5.page2.charity_14_additions":
-        "Line 14 col C totals lines 11–13 col C; every upstream row is unsupported.",
-      "5.page2.casualty_15_subtractions":
-        "Line 15 col B needs a Form 4684 recomputed with CA amounts; no Form 4684 data path exists.",
-      "5.page2.casualty_15_additions":
-        "Line 15 col C needs a Form 4684 recomputed with CA amounts; no Form 4684 data path exists.",
-      "5.page2.other_deductions_16_subtractions":
-        "Line 16 col B (CA lottery losses, federal estate tax, repaid Social Security) needs Schedule A line 16 detail, which has no data path.",
-      "5.page2.other_deductions_16_additions":
-        "Line 16 col C (claim-of-right deduction, Form 2106 recomputed with CA amounts) has no fact kind or decision.",
-      "5.page2.job_expenses_19":
-        "Line 19 needs federal Form 2106 line 10 recomputed with CA amounts; no Form 2106 or unreimbursed-employee-expense fact kind exists.",
-      "5.page2.job_expenses_20": "Line 20 tax preparation fees have no fact kind.",
-      "5.page2.other_adjustments_27_type":
-        "Line 27 other adjustments (adoption cost credit, nontaxable-income expenses, legislator travel, utility-loan interest) have no fact kind or decision.",
-      "5.page2.other_adjustments_27_amount":
-        "Line 27 other adjustments (adoption cost credit, nontaxable-income expenses, legislator travel, utility-loan interest) have no fact kind or decision.",
-    },
+    bindings: SCHEDULE_CA_BINDINGS,
+    unsupported: SCHEDULE_CA_UNSUPPORTED,
   });
 }

@@ -436,6 +436,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "above 0 it files FTB 3804-CR, which asks for it whenever it files",
   ],
   [
+    /^prior_year\.ca_enterprise_zone_(hiring_credit_carryover|sales_tax_credit_carryover|nol_carryovers)$/,
+    "prior-year answers Cade records only when the user carries an enterprise zone credit or " +
+      "EZ NOL from last year's FTB 3805Z (the zones ended in 2014); any above 0 files FTB 3805Z, " +
+      "which then asks for the others",
+  ],
+  [
     /^prior_year\.ca_amt(_credit_carryover)?$/,
     "an answer Cade records only when the user paid California AMT for 2024 or carries an AMT " +
       "credit from 2024; either above 0 files FTB 3510, which then asks for the other",

@@ -1,0 +1,4083 @@
+{
+  "form": {
+    "formId": "form-6765",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Credit for Increasing Research Activities"
+  },
+  "fields": [
+    {
+      "fieldId": "form-6765.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-6765.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 460.8,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-6765.0.header.a_reduced_credit_280c_yes",
+      "label": "A — Are you electing the reduced credit under section 280C? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 511.2,
+        "y": 673.969
+      }
+    },
+    {
+      "fieldId": "form-6765.0.header.a_reduced_credit_280c_no",
+      "label": "A — Are you electing the reduced credit under section 280C? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 547.2,
+        "y": 673.969
+      }
+    },
+    {
+      "fieldId": "form-6765.0.header.b_controlled_group_yes",
+      "label": "B — Are you a member of a controlled group or business under common control? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 511.2,
+        "y": 661.97
+      }
+    },
+    {
+      "fieldId": "form-6765.0.header.b_controlled_group_no",
+      "label": "B — Are you a member of a controlled group or business under common control? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+      "position": {
+        "page": 0,
+        "x": 547.2,
+        "y": 661.97
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.1_energy_consortia_amounts",
+      "label": "Line 1 — Certain amounts paid or incurred to energy consortia",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 611.968
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.2_basic_research_payments",
+      "label": "Line 2 — Basic research payments to qualified organizations",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 599.969
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.3_qualified_organization_base_amount",
+      "label": "Line 3 — Qualified organization base period amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 587.97
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.4_subtract_3_from_2",
+      "label": "Line 4 — Subtract line 3 from line 2. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 575.968
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.5_total_qres_from_line_48",
+      "label": "Line 5 — Total qualified research expenses (QREs). Enter amount from line 48",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 551.97
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.6_percentage",
+      "label": "Line 6 — Enter fixed-base percentage, but not more than 16% (0.16)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.7_average_annual_gross_receipts",
+      "label": "Line 7 — Enter average annual gross receipts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.8_multiply_7_by_6",
+      "label": "Line 8 — Multiply line 7 by the percentage on line 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.9_subtract_8_from_5",
+      "label": "Line 9 — Subtract line 8 from line 5. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 503.968
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.10_multiply_5_by_50",
+      "label": "Line 10 — Multiply line 5 by 50% (0.50)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.11_smaller_of_9_or_10",
+      "label": "Line 11 — Enter the smaller of line 9 or line 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.12_add_lines",
+      "label": "Line 12 — Add lines 1, 4, and 11",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 467.968
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.13_regular_credit",
+      "label": "Line 13 — If you elect to reduce the credit under section 280C, then multiply line 12 by 15.8% (0.158). If not, multiply line 12 by 20% (0.20)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.14_energy_consortia_amounts",
+      "label": "Line 14 — Certain amounts paid or incurred to energy consortia",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.15_basic_research_payments",
+      "label": "Line 15 — Basic research payments to qualified organizations",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 395.968
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.16_qualified_organization_base_amount",
+      "label": "Line 16 — Qualified organization base period amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.17_subtract_16_from_15",
+      "label": "Line 17 — Subtract line 16 from line 15. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.18_add_lines",
+      "label": "Line 18 — Add lines 14 and 17",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 359.968
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.19_multiply_18_by_20",
+      "label": "Line 19 — Multiply line 18 by 20% (0.20)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 347.969
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.20_total_qres_from_line_48",
+      "label": "Line 20 — Total qualified research expenses (QREs). Enter amount from line 48",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.21_prior_3_years_qres",
+      "label": "Line 21 — Enter your total QREs for the prior 3 tax years",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.22_divide_21_by_6",
+      "label": "Line 22 — Divide line 21 by 6.0",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.23_subtract_22_from_20",
+      "label": "Line 23 — Subtract line 22 from line 20. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 275.969
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.24_multiply_23_by_14",
+      "label": "Line 24 — Multiply line 23 by 14% (0.14). If you skipped lines 22 and 23, multiply line 20 by 6% (0.06)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.25_add_lines",
+      "label": "Line 25 — Add lines 19 and 24",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-6765.0.line.26_alternative_simplified_credit",
+      "label": "Line 26 — If you elect to reduce the credit under section 280C, then multiply line 25 by 79% (0.79). If not, enter the amount from line 25",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.27_form_8932_wage_portion",
+      "label": "Line 27 — Enter the portion of the credit from Form 8932, line 2, that is attributable to wages that were also used to figure the credit on line 13 or line 26 (whichever applies)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_01[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 695.97
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.28_subtract_27_from_13_or_26",
+      "label": "Line 28 — Subtract line 27 from line 13 or line 26 (whichever applies). If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_02[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.29_pass_through_research_credit",
+      "label": "Line 29 — Credit for increasing research activities from partnerships, S corporations, estates, and trusts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 671.969
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.30_total_current_year_credit",
+      "label": "Line 30 — Add lines 28 and 29",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_04[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.31_allocated_to_beneficiaries",
+      "label": "Line 31 — Amount allocated to beneficiaries of the estate or trust",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_05[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.32_subtract_31_from_30",
+      "label": "Line 32 — Estates and trusts, subtract line 31 from line 30",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_06[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.33a_qsb_payroll_tax_election",
+      "label": "Line 33a — Check this box if you are a qualified small business electing the payroll tax credit",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 467.2,
+        "y": 457.969
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.33b_payroll_tax_different_ein",
+      "label": "Line 33b — Check the box if payroll tax is reported on a different EIN",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 467.2,
+        "y": 445.97
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.34_elected_payroll_tax_credit",
+      "label": "Line 34 — Enter the portion of line 28 elected as a payroll tax credit (do not enter more than $500,000)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_07[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.35_gbc_carryforward_current_year",
+      "label": "Line 35 — General business credit carryforward from the current year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_08[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 395.968
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.36_payroll_tax_credit_amount",
+      "label": "Line 36 — Partnerships and S corporations, enter the smaller of line 28 or line 34. All others, enter the smallest of line 28, line 34, or line 35",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_09[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 347.969
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.37_business_components_count",
+      "label": "Line 37 — Enter the number of business components generating the QREs on line 5 or line 20",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.38_officers_wages_in_42",
+      "label": "Line 38 — Enter the amount of officers' wages included on line 42",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.39_acquire_dispose_business_yes",
+      "label": "Line 39 — Did you acquire or dispose of any major portion of a trade or business in the tax year? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 289.968
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.39_acquire_dispose_business_no",
+      "label": "Line 39 — Did you acquire or dispose of any major portion of a trade or business in the tax year? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_3[1]",
+      "position": {
+        "page": 1,
+        "x": 446.4,
+        "y": 289.968
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.40_new_qre_categories_yes",
+      "label": "Line 40 — Did you include any new categories of expenses as current year QREs? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 277.969
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.40_new_qre_categories_no",
+      "label": "Line 40 — Did you include any new categories of expenses as current year QREs? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_4[1]",
+      "position": {
+        "page": 1,
+        "x": 446.4,
+        "y": 277.969
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.41_asc_730_directive_yes",
+      "label": "Line 41 — Did you determine any of the QREs on line 5 or line 20 following the ASC 730 Directive? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 253.968
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.41_asc_730_directive_no",
+      "label": "Line 41 — Did you determine any of the QREs on line 5 or line 20 following the ASC 730 Directive? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_5[1]",
+      "position": {
+        "page": 1,
+        "x": 446.4,
+        "y": 253.968
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.41_appendix_c_line_19_amount",
+      "label": "Line 41 — If \"Yes,\" enter the amount from Appendix C Line 19",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.section_f_a_complete_section_g_yes",
+      "label": "Section F, A — Are you required to complete Section G? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 511.2,
+        "y": 157.97
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.section_f_a_complete_section_g_no",
+      "label": "Section F, A — Are you required to complete Section G? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_6[1]",
+      "position": {
+        "page": 1,
+        "x": 547.2,
+        "y": 157.97
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.42_total_qualified_wages",
+      "label": "Line 42 — Total wages for qualified services for all business components (do not include any wages used in figuring the work opportunity credit)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 131.969
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.43_total_supplies_cost",
+      "label": "Line 43 — Total costs of supplies for all business components",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 119.97
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.44_total_computer_rental_cost",
+      "label": "Line 44 — Total rental or lease cost of computers for all business components",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 107.968
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.45_contract_research_amount",
+      "label": "Line 45 — Total applicable amount of contract research for all business components (do not include basic research payments)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 83.97
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.46_basic_research_payments",
+      "label": "Line 46 — Enter the applicable amount of all basic research payments",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 71.968
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.47_add_lines",
+      "label": "Line 47 — Add line 45 and line 46",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 504.003,
+        "y": 59.969
+      }
+    },
+    {
+      "fieldId": "form-6765.1.line.48_total_qres",
+      "label": "Line 48 — Add lines 42, 43, 44, and 47, then enter line 48 on either line 5 or line 20, whichever is appropriate",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 504.003,
+        "y": 47.97
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_1_col_a_ein",
+      "label": "Line 49(a) — EIN of the controlled group member conducting the research activities on this business component, business component 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row1[0].f3_01[0]",
+      "position": {
+        "page": 2,
+        "x": 57.6,
+        "y": 635.969
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_1_col_b_activity_code",
+      "label": "Line 49(b) — Controlled group member's principal business activity code, business component 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row1[0].f3_02[0]",
+      "position": {
+        "page": 2,
+        "x": 129.6,
+        "y": 635.969
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_1_col_c_name",
+      "label": "Line 49(c) — Business component's name or unique alphanumeric identifier, business component 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row1[0].f3_03[0]",
+      "position": {
+        "page": 2,
+        "x": 278.4,
+        "y": 635.969
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_1_col_d_type",
+      "label": "Line 49(d) — Business component type, business component 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row1[0].f3_04[0]",
+      "position": {
+        "page": 2,
+        "x": 427.95,
+        "y": 635.969
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_2_col_a_ein",
+      "label": "Line 49(a) — EIN of the controlled group member conducting the research activities on this business component, business component 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row2[0].f3_05[0]",
+      "position": {
+        "page": 2,
+        "x": 57.6,
+        "y": 623.97
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_2_col_b_activity_code",
+      "label": "Line 49(b) — Controlled group member's principal business activity code, business component 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row2[0].f3_06[0]",
+      "position": {
+        "page": 2,
+        "x": 129.6,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_2_col_c_name",
+      "label": "Line 49(c) — Business component's name or unique alphanumeric identifier, business component 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row2[0].f3_07[0]",
+      "position": {
+        "page": 2,
+        "x": 278.4,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_2_col_d_type",
+      "label": "Line 49(d) — Business component type, business component 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row2[0].f3_08[0]",
+      "position": {
+        "page": 2,
+        "x": 427.95,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_3_col_a_ein",
+      "label": "Line 49(a) — EIN of the controlled group member conducting the research activities on this business component, business component 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row3[0].f3_09[0]",
+      "position": {
+        "page": 2,
+        "x": 57.6,
+        "y": 611.971
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_3_col_b_activity_code",
+      "label": "Line 49(b) — Controlled group member's principal business activity code, business component 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row3[0].f3_10[0]",
+      "position": {
+        "page": 2,
+        "x": 129.6,
+        "y": 611.971
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_3_col_c_name",
+      "label": "Line 49(c) — Business component's name or unique alphanumeric identifier, business component 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row3[0].f3_11[0]",
+      "position": {
+        "page": 2,
+        "x": 278.4,
+        "y": 611.971
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_3_col_d_type",
+      "label": "Line 49(d) — Business component type, business component 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row3[0].f3_12[0]",
+      "position": {
+        "page": 2,
+        "x": 427.95,
+        "y": 611.971
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_4_col_a_ein",
+      "label": "Line 49(a) — EIN of the controlled group member conducting the research activities on this business component, business component 4",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row4[0].f3_13[0]",
+      "position": {
+        "page": 2,
+        "x": 57.6,
+        "y": 599.972
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_4_col_b_activity_code",
+      "label": "Line 49(b) — Controlled group member's principal business activity code, business component 4",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row4[0].f3_14[0]",
+      "position": {
+        "page": 2,
+        "x": 129.6,
+        "y": 599.972
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_4_col_c_name",
+      "label": "Line 49(c) — Business component's name or unique alphanumeric identifier, business component 4",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row4[0].f3_15[0]",
+      "position": {
+        "page": 2,
+        "x": 278.4,
+        "y": 599.972
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_4_col_d_type",
+      "label": "Line 49(d) — Business component type, business component 4",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row4[0].f3_16[0]",
+      "position": {
+        "page": 2,
+        "x": 427.95,
+        "y": 599.972
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_5_col_a_ein",
+      "label": "Line 49(a) — EIN of the controlled group member conducting the research activities on this business component, business component 5",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row5[0].f3_17[0]",
+      "position": {
+        "page": 2,
+        "x": 57.6,
+        "y": 587.973
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_5_col_b_activity_code",
+      "label": "Line 49(b) — Controlled group member's principal business activity code, business component 5",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row5[0].f3_18[0]",
+      "position": {
+        "page": 2,
+        "x": 129.6,
+        "y": 587.973
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_5_col_c_name",
+      "label": "Line 49(c) — Business component's name or unique alphanumeric identifier, business component 5",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row5[0].f3_19[0]",
+      "position": {
+        "page": 2,
+        "x": 278.4,
+        "y": 587.973
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_5_col_d_type",
+      "label": "Line 49(d) — Business component type, business component 5",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row5[0].f3_20[0]",
+      "position": {
+        "page": 2,
+        "x": 427.95,
+        "y": 587.973
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_6_col_a_ein",
+      "label": "Line 49(a) — EIN of the controlled group member conducting the research activities on this business component, business component 6",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row6[0].f3_21[0]",
+      "position": {
+        "page": 2,
+        "x": 57.6,
+        "y": 575.974
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_6_col_b_activity_code",
+      "label": "Line 49(b) — Controlled group member's principal business activity code, business component 6",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row6[0].f3_22[0]",
+      "position": {
+        "page": 2,
+        "x": 129.6,
+        "y": 575.974
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_6_col_c_name",
+      "label": "Line 49(c) — Business component's name or unique alphanumeric identifier, business component 6",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row6[0].f3_23[0]",
+      "position": {
+        "page": 2,
+        "x": 278.4,
+        "y": 575.974
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_6_col_d_type",
+      "label": "Line 49(d) — Business component type, business component 6",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row6[0].f3_24[0]",
+      "position": {
+        "page": 2,
+        "x": 427.95,
+        "y": 575.974
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_7_col_a_ein",
+      "label": "Line 49(a) — EIN of the controlled group member conducting the research activities on this business component, business component 7",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row7[0].f3_25[0]",
+      "position": {
+        "page": 2,
+        "x": 57.6,
+        "y": 563.975
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_7_col_b_activity_code",
+      "label": "Line 49(b) — Controlled group member's principal business activity code, business component 7",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row7[0].f3_26[0]",
+      "position": {
+        "page": 2,
+        "x": 129.6,
+        "y": 563.975
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_7_col_c_name",
+      "label": "Line 49(c) — Business component's name or unique alphanumeric identifier, business component 7",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row7[0].f3_27[0]",
+      "position": {
+        "page": 2,
+        "x": 278.4,
+        "y": 563.975
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_7_col_d_type",
+      "label": "Line 49(d) — Business component type, business component 7",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row7[0].f3_28[0]",
+      "position": {
+        "page": 2,
+        "x": 427.95,
+        "y": 563.975
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_8_col_a_ein",
+      "label": "Line 49(a) — EIN of the controlled group member conducting the research activities on this business component, business component 8",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row8[0].f3_29[0]",
+      "position": {
+        "page": 2,
+        "x": 57.6,
+        "y": 551.976
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_8_col_b_activity_code",
+      "label": "Line 49(b) — Controlled group member's principal business activity code, business component 8",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row8[0].f3_30[0]",
+      "position": {
+        "page": 2,
+        "x": 129.6,
+        "y": 551.976
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_8_col_c_name",
+      "label": "Line 49(c) — Business component's name or unique alphanumeric identifier, business component 8",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row8[0].f3_31[0]",
+      "position": {
+        "page": 2,
+        "x": 278.4,
+        "y": 551.976
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_8_col_d_type",
+      "label": "Line 49(d) — Business component type, business component 8",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row8[0].f3_32[0]",
+      "position": {
+        "page": 2,
+        "x": 427.95,
+        "y": 551.976
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_9_col_a_ein",
+      "label": "Line 49(a) — EIN of the controlled group member conducting the research activities on this business component, business component 9",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row9[0].f3_33[0]",
+      "position": {
+        "page": 2,
+        "x": 57.6,
+        "y": 539.977
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_9_col_b_activity_code",
+      "label": "Line 49(b) — Controlled group member's principal business activity code, business component 9",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row9[0].f3_34[0]",
+      "position": {
+        "page": 2,
+        "x": 129.6,
+        "y": 539.977
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_9_col_c_name",
+      "label": "Line 49(c) — Business component's name or unique alphanumeric identifier, business component 9",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row9[0].f3_35[0]",
+      "position": {
+        "page": 2,
+        "x": 278.4,
+        "y": 539.977
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_9_col_d_type",
+      "label": "Line 49(d) — Business component type, business component 9",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row9[0].f3_36[0]",
+      "position": {
+        "page": 2,
+        "x": 427.95,
+        "y": 539.977
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_10_col_a_ein",
+      "label": "Line 49(a) — EIN of the controlled group member conducting the research activities on this business component, business component 10",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row10[0].f3_37[0]",
+      "position": {
+        "page": 2,
+        "x": 57.6,
+        "y": 527.978
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_10_col_b_activity_code",
+      "label": "Line 49(b) — Controlled group member's principal business activity code, business component 10",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row10[0].f3_38[0]",
+      "position": {
+        "page": 2,
+        "x": 129.6,
+        "y": 527.978
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_10_col_c_name",
+      "label": "Line 49(c) — Business component's name or unique alphanumeric identifier, business component 10",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row10[0].f3_39[0]",
+      "position": {
+        "page": 2,
+        "x": 278.4,
+        "y": 527.978
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_10_col_d_type",
+      "label": "Line 49(d) — Business component type, business component 10",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row10[0].f3_40[0]",
+      "position": {
+        "page": 2,
+        "x": 427.95,
+        "y": 527.978
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_11_col_a_ein",
+      "label": "Line 49(a) — EIN of the controlled group member conducting the research activities on this business component, business component 11",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row11[0].f3_41[0]",
+      "position": {
+        "page": 2,
+        "x": 57.6,
+        "y": 515.979
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_11_col_b_activity_code",
+      "label": "Line 49(b) — Controlled group member's principal business activity code, business component 11",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row11[0].f3_42[0]",
+      "position": {
+        "page": 2,
+        "x": 129.6,
+        "y": 515.979
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_11_col_c_name",
+      "label": "Line 49(c) — Business component's name or unique alphanumeric identifier, business component 11",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row11[0].f3_43[0]",
+      "position": {
+        "page": 2,
+        "x": 278.4,
+        "y": 515.979
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_11_col_d_type",
+      "label": "Line 49(d) — Business component type, business component 11",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row11[0].f3_444[0]",
+      "position": {
+        "page": 2,
+        "x": 427.95,
+        "y": 515.979
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_12_col_a_ein",
+      "label": "Line 49(a) — EIN of the controlled group member conducting the research activities on this business component, business component 12",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row12[0].f3_45[0]",
+      "position": {
+        "page": 2,
+        "x": 57.6,
+        "y": 503.98
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_12_col_b_activity_code",
+      "label": "Line 49(b) — Controlled group member's principal business activity code, business component 12",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row12[0].f3_46[0]",
+      "position": {
+        "page": 2,
+        "x": 129.6,
+        "y": 503.98
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_12_col_c_name",
+      "label": "Line 49(c) — Business component's name or unique alphanumeric identifier, business component 12",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row12[0].f3_47[0]",
+      "position": {
+        "page": 2,
+        "x": 278.4,
+        "y": 503.98
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_12_col_d_type",
+      "label": "Line 49(d) — Business component type, business component 12",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row12[0].f3_48[0]",
+      "position": {
+        "page": 2,
+        "x": 427.95,
+        "y": 503.98
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_13_col_a_ein",
+      "label": "Line 49(a) — EIN of the controlled group member conducting the research activities on this business component, business component 13",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row13[0].f3_49[0]",
+      "position": {
+        "page": 2,
+        "x": 57.6,
+        "y": 491.981
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_13_col_b_activity_code",
+      "label": "Line 49(b) — Controlled group member's principal business activity code, business component 13",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row13[0].f3_50[0]",
+      "position": {
+        "page": 2,
+        "x": 129.6,
+        "y": 491.981
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_13_col_c_name",
+      "label": "Line 49(c) — Business component's name or unique alphanumeric identifier, business component 13",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row13[0].f3_51[0]",
+      "position": {
+        "page": 2,
+        "x": 278.4,
+        "y": 491.981
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_13_col_d_type",
+      "label": "Line 49(d) — Business component type, business component 13",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row13[0].f3_52[0]",
+      "position": {
+        "page": 2,
+        "x": 427.95,
+        "y": 491.981
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_14_col_a_ein",
+      "label": "Line 49(a) — EIN of the controlled group member conducting the research activities on this business component, business component 14",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row14[0].f3_53[0]",
+      "position": {
+        "page": 2,
+        "x": 57.6,
+        "y": 479.982
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_14_col_b_activity_code",
+      "label": "Line 49(b) — Controlled group member's principal business activity code, business component 14",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row14[0].f3_54[0]",
+      "position": {
+        "page": 2,
+        "x": 129.6,
+        "y": 479.982
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_14_col_c_name",
+      "label": "Line 49(c) — Business component's name or unique alphanumeric identifier, business component 14",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row14[0].f3_55[0]",
+      "position": {
+        "page": 2,
+        "x": 278.4,
+        "y": 479.982
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_14_col_d_type",
+      "label": "Line 49(d) — Business component type, business component 14",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row14[0].f3_56[0]",
+      "position": {
+        "page": 2,
+        "x": 427.95,
+        "y": 479.982
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_15_col_a_ein",
+      "label": "Line 49(a) — EIN of the controlled group member conducting the research activities on this business component, business component 15",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row15[0].f3_57[0]",
+      "position": {
+        "page": 2,
+        "x": 57.6,
+        "y": 467.983
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_15_col_b_activity_code",
+      "label": "Line 49(b) — Controlled group member's principal business activity code, business component 15",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row15[0].f3_58[0]",
+      "position": {
+        "page": 2,
+        "x": 129.6,
+        "y": 467.983
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_15_col_c_name",
+      "label": "Line 49(c) — Business component's name or unique alphanumeric identifier, business component 15",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row15[0].f3_59[0]",
+      "position": {
+        "page": 2,
+        "x": 278.4,
+        "y": 467.983
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_15_col_d_type",
+      "label": "Line 49(d) — Business component type, business component 15",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row15[0].f3_60[0]",
+      "position": {
+        "page": 2,
+        "x": 427.95,
+        "y": 467.983
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_1_col_e_software",
+      "label": "Line 49(e) — Software (if applicable), business component 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row1[0].f3_61[0]",
+      "position": {
+        "page": 2,
+        "x": 58.35,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_1_col_f_information_sought",
+      "label": "Line 49(f) — Describe the information sought to be discovered, business component 1",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row1[0].f3_62[0]",
+      "position": {
+        "page": 2,
+        "x": 317.55,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_2_col_e_software",
+      "label": "Line 49(e) — Software (if applicable), business component 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row2[0].f3_63[0]",
+      "position": {
+        "page": 2,
+        "x": 58.35,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_2_col_f_information_sought",
+      "label": "Line 49(f) — Describe the information sought to be discovered, business component 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row2[0].f3_64[0]",
+      "position": {
+        "page": 2,
+        "x": 317.55,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_3_col_e_software",
+      "label": "Line 49(e) — Software (if applicable), business component 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row3[0].f3_65[0]",
+      "position": {
+        "page": 2,
+        "x": 58.35,
+        "y": 395.971
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_3_col_f_information_sought",
+      "label": "Line 49(f) — Describe the information sought to be discovered, business component 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row3[0].f3_66[0]",
+      "position": {
+        "page": 2,
+        "x": 317.55,
+        "y": 395.971
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_4_col_e_software",
+      "label": "Line 49(e) — Software (if applicable), business component 4",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row4[0].f3_67[0]",
+      "position": {
+        "page": 2,
+        "x": 58.35,
+        "y": 383.972
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_4_col_f_information_sought",
+      "label": "Line 49(f) — Describe the information sought to be discovered, business component 4",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row4[0].f3_68[0]",
+      "position": {
+        "page": 2,
+        "x": 317.55,
+        "y": 383.972
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_5_col_e_software",
+      "label": "Line 49(e) — Software (if applicable), business component 5",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row5[0].f3_69[0]",
+      "position": {
+        "page": 2,
+        "x": 58.35,
+        "y": 371.973
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_5_col_f_information_sought",
+      "label": "Line 49(f) — Describe the information sought to be discovered, business component 5",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row5[0].f3_70[0]",
+      "position": {
+        "page": 2,
+        "x": 317.55,
+        "y": 371.973
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_6_col_e_software",
+      "label": "Line 49(e) — Software (if applicable), business component 6",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row6[0].f3_71[0]",
+      "position": {
+        "page": 2,
+        "x": 58.35,
+        "y": 359.974
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_6_col_f_information_sought",
+      "label": "Line 49(f) — Describe the information sought to be discovered, business component 6",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row6[0].f3_72[0]",
+      "position": {
+        "page": 2,
+        "x": 317.55,
+        "y": 359.974
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_7_col_e_software",
+      "label": "Line 49(e) — Software (if applicable), business component 7",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row7[0].f3_73[0]",
+      "position": {
+        "page": 2,
+        "x": 58.35,
+        "y": 347.975
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_7_col_f_information_sought",
+      "label": "Line 49(f) — Describe the information sought to be discovered, business component 7",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row7[0].f3_74[0]",
+      "position": {
+        "page": 2,
+        "x": 317.55,
+        "y": 347.975
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_8_col_e_software",
+      "label": "Line 49(e) — Software (if applicable), business component 8",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row8[0].f3_75[0]",
+      "position": {
+        "page": 2,
+        "x": 58.35,
+        "y": 335.976
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_8_col_f_information_sought",
+      "label": "Line 49(f) — Describe the information sought to be discovered, business component 8",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row8[0].f3_76[0]",
+      "position": {
+        "page": 2,
+        "x": 317.55,
+        "y": 335.976
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_9_col_e_software",
+      "label": "Line 49(e) — Software (if applicable), business component 9",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row9[0].f3_77[0]",
+      "position": {
+        "page": 2,
+        "x": 58.35,
+        "y": 323.977
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_9_col_f_information_sought",
+      "label": "Line 49(f) — Describe the information sought to be discovered, business component 9",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row9[0].f3_78[0]",
+      "position": {
+        "page": 2,
+        "x": 317.55,
+        "y": 323.977
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_10_col_e_software",
+      "label": "Line 49(e) — Software (if applicable), business component 10",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row10[0].f3_79[0]",
+      "position": {
+        "page": 2,
+        "x": 58.35,
+        "y": 311.978
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_10_col_f_information_sought",
+      "label": "Line 49(f) — Describe the information sought to be discovered, business component 10",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row10[0].f3_80[0]",
+      "position": {
+        "page": 2,
+        "x": 317.55,
+        "y": 311.978
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_11_col_e_software",
+      "label": "Line 49(e) — Software (if applicable), business component 11",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row11[0].f3_81[0]",
+      "position": {
+        "page": 2,
+        "x": 58.35,
+        "y": 299.979
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_11_col_f_information_sought",
+      "label": "Line 49(f) — Describe the information sought to be discovered, business component 11",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row11[0].f3_82[0]",
+      "position": {
+        "page": 2,
+        "x": 317.55,
+        "y": 299.979
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_12_col_e_software",
+      "label": "Line 49(e) — Software (if applicable), business component 12",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row12[0].f3_83[0]",
+      "position": {
+        "page": 2,
+        "x": 58.35,
+        "y": 287.98
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_12_col_f_information_sought",
+      "label": "Line 49(f) — Describe the information sought to be discovered, business component 12",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row12[0].f3_84[0]",
+      "position": {
+        "page": 2,
+        "x": 317.55,
+        "y": 287.98
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_13_col_e_software",
+      "label": "Line 49(e) — Software (if applicable), business component 13",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row13[0].f3_85[0]",
+      "position": {
+        "page": 2,
+        "x": 58.35,
+        "y": 275.981
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_13_col_f_information_sought",
+      "label": "Line 49(f) — Describe the information sought to be discovered, business component 13",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row13[0].f3_86[0]",
+      "position": {
+        "page": 2,
+        "x": 317.55,
+        "y": 275.981
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_14_col_e_software",
+      "label": "Line 49(e) — Software (if applicable), business component 14",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row14[0].f3_87[0]",
+      "position": {
+        "page": 2,
+        "x": 58.35,
+        "y": 263.982
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_14_col_f_information_sought",
+      "label": "Line 49(f) — Describe the information sought to be discovered, business component 14",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row14[0].f3_88[0]",
+      "position": {
+        "page": 2,
+        "x": 317.55,
+        "y": 263.982
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_15_col_e_software",
+      "label": "Line 49(e) — Software (if applicable), business component 15",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row15[0].f3_89[0]",
+      "position": {
+        "page": 2,
+        "x": 58.35,
+        "y": 251.983
+      }
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_15_col_f_information_sought",
+      "label": "Line 49(f) — Describe the information sought to be discovered, business component 15",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row15[0].f3_90[0]",
+      "position": {
+        "page": 2,
+        "x": 317.55,
+        "y": 251.983
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_1_direct_research_wages",
+      "label": "Line 50 — Direct research wages for qualified services, business component 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row1[0].f4_01[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_1_direct_supervision_wages",
+      "label": "Line 51 — Direct supervision wages for qualified services, business component 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row1[0].f4_02[0]",
+      "position": {
+        "page": 3,
+        "x": 203.4,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_1_direct_support_wages",
+      "label": "Line 52 — Direct support wages for qualified services, business component 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row1[0].f4_03[0]",
+      "position": {
+        "page": 3,
+        "x": 327.6,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_1_total_qualified_wages",
+      "label": "Line 53 — Total qualified wages (add line 50, line 51, and line 52), business component 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row1[0].f4_04[0]",
+      "position": {
+        "page": 3,
+        "x": 451.8,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_2_direct_research_wages",
+      "label": "Line 50 — Direct research wages for qualified services, business component 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row2[0].f4_05[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 647.971
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_2_direct_supervision_wages",
+      "label": "Line 51 — Direct supervision wages for qualified services, business component 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row2[0].f4_06[0]",
+      "position": {
+        "page": 3,
+        "x": 203.4,
+        "y": 647.971
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_2_direct_support_wages",
+      "label": "Line 52 — Direct support wages for qualified services, business component 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row2[0].f4_07[0]",
+      "position": {
+        "page": 3,
+        "x": 327.6,
+        "y": 647.971
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_2_total_qualified_wages",
+      "label": "Line 53 — Total qualified wages (add line 50, line 51, and line 52), business component 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row2[0].f4_08[0]",
+      "position": {
+        "page": 3,
+        "x": 451.8,
+        "y": 647.971
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_3_direct_research_wages",
+      "label": "Line 50 — Direct research wages for qualified services, business component 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row3[0].f4_09[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 635.972
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_3_direct_supervision_wages",
+      "label": "Line 51 — Direct supervision wages for qualified services, business component 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row3[0].f4_10[0]",
+      "position": {
+        "page": 3,
+        "x": 203.4,
+        "y": 635.972
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_3_direct_support_wages",
+      "label": "Line 52 — Direct support wages for qualified services, business component 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row3[0].f4_11[0]",
+      "position": {
+        "page": 3,
+        "x": 327.6,
+        "y": 635.972
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_3_total_qualified_wages",
+      "label": "Line 53 — Total qualified wages (add line 50, line 51, and line 52), business component 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row3[0].f4_12[0]",
+      "position": {
+        "page": 3,
+        "x": 451.8,
+        "y": 635.972
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_4_direct_research_wages",
+      "label": "Line 50 — Direct research wages for qualified services, business component 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row4[0].f4_13[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 623.973
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_4_direct_supervision_wages",
+      "label": "Line 51 — Direct supervision wages for qualified services, business component 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row4[0].f4_14[0]",
+      "position": {
+        "page": 3,
+        "x": 203.4,
+        "y": 623.973
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_4_direct_support_wages",
+      "label": "Line 52 — Direct support wages for qualified services, business component 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row4[0].f4_15[0]",
+      "position": {
+        "page": 3,
+        "x": 327.6,
+        "y": 623.973
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_4_total_qualified_wages",
+      "label": "Line 53 — Total qualified wages (add line 50, line 51, and line 52), business component 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row4[0].f4_16[0]",
+      "position": {
+        "page": 3,
+        "x": 451.8,
+        "y": 623.973
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_5_direct_research_wages",
+      "label": "Line 50 — Direct research wages for qualified services, business component 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row5[0].f4_17[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 611.974
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_5_direct_supervision_wages",
+      "label": "Line 51 — Direct supervision wages for qualified services, business component 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row5[0].f4_18[0]",
+      "position": {
+        "page": 3,
+        "x": 203.4,
+        "y": 611.974
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_5_direct_support_wages",
+      "label": "Line 52 — Direct support wages for qualified services, business component 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row5[0].f4_19[0]",
+      "position": {
+        "page": 3,
+        "x": 327.6,
+        "y": 611.974
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_5_total_qualified_wages",
+      "label": "Line 53 — Total qualified wages (add line 50, line 51, and line 52), business component 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row5[0].f4_20[0]",
+      "position": {
+        "page": 3,
+        "x": 451.8,
+        "y": 611.974
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_6_direct_research_wages",
+      "label": "Line 50 — Direct research wages for qualified services, business component 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row6[0].f4_21[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 599.975
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_6_direct_supervision_wages",
+      "label": "Line 51 — Direct supervision wages for qualified services, business component 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row6[0].f4_22[0]",
+      "position": {
+        "page": 3,
+        "x": 203.4,
+        "y": 599.975
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_6_direct_support_wages",
+      "label": "Line 52 — Direct support wages for qualified services, business component 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row6[0].f4_23[0]",
+      "position": {
+        "page": 3,
+        "x": 327.6,
+        "y": 599.975
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_6_total_qualified_wages",
+      "label": "Line 53 — Total qualified wages (add line 50, line 51, and line 52), business component 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row6[0].f4_24[0]",
+      "position": {
+        "page": 3,
+        "x": 451.8,
+        "y": 599.975
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_7_direct_research_wages",
+      "label": "Line 50 — Direct research wages for qualified services, business component 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row7[0].f4_25[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 587.976
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_7_direct_supervision_wages",
+      "label": "Line 51 — Direct supervision wages for qualified services, business component 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row7[0].f4_26[0]",
+      "position": {
+        "page": 3,
+        "x": 203.4,
+        "y": 587.976
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_7_direct_support_wages",
+      "label": "Line 52 — Direct support wages for qualified services, business component 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row7[0].f4_27[0]",
+      "position": {
+        "page": 3,
+        "x": 327.6,
+        "y": 587.976
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_7_total_qualified_wages",
+      "label": "Line 53 — Total qualified wages (add line 50, line 51, and line 52), business component 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row7[0].f4_28[0]",
+      "position": {
+        "page": 3,
+        "x": 451.8,
+        "y": 587.976
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_8_direct_research_wages",
+      "label": "Line 50 — Direct research wages for qualified services, business component 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row8[0].f4_29[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 575.977
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_8_direct_supervision_wages",
+      "label": "Line 51 — Direct supervision wages for qualified services, business component 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row8[0].f4_30[0]",
+      "position": {
+        "page": 3,
+        "x": 203.4,
+        "y": 575.977
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_8_direct_support_wages",
+      "label": "Line 52 — Direct support wages for qualified services, business component 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row8[0].f4_31[0]",
+      "position": {
+        "page": 3,
+        "x": 327.6,
+        "y": 575.977
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_8_total_qualified_wages",
+      "label": "Line 53 — Total qualified wages (add line 50, line 51, and line 52), business component 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row8[0].f4_32[0]",
+      "position": {
+        "page": 3,
+        "x": 451.8,
+        "y": 575.977
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_9_direct_research_wages",
+      "label": "Line 50 — Direct research wages for qualified services, business component 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row9[0].f4_33[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 563.978
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_9_direct_supervision_wages",
+      "label": "Line 51 — Direct supervision wages for qualified services, business component 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row9[0].f4_34[0]",
+      "position": {
+        "page": 3,
+        "x": 203.4,
+        "y": 563.978
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_9_direct_support_wages",
+      "label": "Line 52 — Direct support wages for qualified services, business component 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row9[0].f4_35[0]",
+      "position": {
+        "page": 3,
+        "x": 327.6,
+        "y": 563.978
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_9_total_qualified_wages",
+      "label": "Line 53 — Total qualified wages (add line 50, line 51, and line 52), business component 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row9[0].f4_36[0]",
+      "position": {
+        "page": 3,
+        "x": 451.8,
+        "y": 563.978
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_10_direct_research_wages",
+      "label": "Line 50 — Direct research wages for qualified services, business component 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row10[0].f4_37[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 551.979
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_10_direct_supervision_wages",
+      "label": "Line 51 — Direct supervision wages for qualified services, business component 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row10[0].f4_38[0]",
+      "position": {
+        "page": 3,
+        "x": 203.4,
+        "y": 551.979
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_10_direct_support_wages",
+      "label": "Line 52 — Direct support wages for qualified services, business component 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row10[0].f4_39[0]",
+      "position": {
+        "page": 3,
+        "x": 327.6,
+        "y": 551.979
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_10_total_qualified_wages",
+      "label": "Line 53 — Total qualified wages (add line 50, line 51, and line 52), business component 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row10[0].f4_40[0]",
+      "position": {
+        "page": 3,
+        "x": 451.8,
+        "y": 551.979
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_11_direct_research_wages",
+      "label": "Line 50 — Direct research wages for qualified services, business component 11",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row11[0].f4_41[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 539.98
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_11_direct_supervision_wages",
+      "label": "Line 51 — Direct supervision wages for qualified services, business component 11",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row11[0].f4_42[0]",
+      "position": {
+        "page": 3,
+        "x": 203.4,
+        "y": 539.98
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_11_direct_support_wages",
+      "label": "Line 52 — Direct support wages for qualified services, business component 11",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row11[0].f4_43[0]",
+      "position": {
+        "page": 3,
+        "x": 327.6,
+        "y": 539.98
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_11_total_qualified_wages",
+      "label": "Line 53 — Total qualified wages (add line 50, line 51, and line 52), business component 11",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row11[0].f4_44[0]",
+      "position": {
+        "page": 3,
+        "x": 451.8,
+        "y": 539.98
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_12_direct_research_wages",
+      "label": "Line 50 — Direct research wages for qualified services, business component 12",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row12[0].f4_45[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 527.981
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_12_direct_supervision_wages",
+      "label": "Line 51 — Direct supervision wages for qualified services, business component 12",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row12[0].f4_46[0]",
+      "position": {
+        "page": 3,
+        "x": 203.4,
+        "y": 527.981
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_12_direct_support_wages",
+      "label": "Line 52 — Direct support wages for qualified services, business component 12",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row12[0].f4_47[0]",
+      "position": {
+        "page": 3,
+        "x": 327.6,
+        "y": 527.981
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_12_total_qualified_wages",
+      "label": "Line 53 — Total qualified wages (add line 50, line 51, and line 52), business component 12",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row12[0].f4_48[0]",
+      "position": {
+        "page": 3,
+        "x": 451.8,
+        "y": 527.981
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_13_direct_research_wages",
+      "label": "Line 50 — Direct research wages for qualified services, business component 13",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row13[0].f4_49[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 515.982
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_13_direct_supervision_wages",
+      "label": "Line 51 — Direct supervision wages for qualified services, business component 13",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row13[0].f4_50[0]",
+      "position": {
+        "page": 3,
+        "x": 203.4,
+        "y": 515.982
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_13_direct_support_wages",
+      "label": "Line 52 — Direct support wages for qualified services, business component 13",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row13[0].f4_51[0]",
+      "position": {
+        "page": 3,
+        "x": 327.6,
+        "y": 515.982
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_13_total_qualified_wages",
+      "label": "Line 53 — Total qualified wages (add line 50, line 51, and line 52), business component 13",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row13[0].f4_52[0]",
+      "position": {
+        "page": 3,
+        "x": 451.8,
+        "y": 515.982
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_14_direct_research_wages",
+      "label": "Line 50 — Direct research wages for qualified services, business component 14",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row14[0].f4_53[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 503.983
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_14_direct_supervision_wages",
+      "label": "Line 51 — Direct supervision wages for qualified services, business component 14",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row14[0].f4_54[0]",
+      "position": {
+        "page": 3,
+        "x": 203.4,
+        "y": 503.983
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_14_direct_support_wages",
+      "label": "Line 52 — Direct support wages for qualified services, business component 14",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row14[0].f4_55[0]",
+      "position": {
+        "page": 3,
+        "x": 327.6,
+        "y": 503.983
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_14_total_qualified_wages",
+      "label": "Line 53 — Total qualified wages (add line 50, line 51, and line 52), business component 14",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row14[0].f4_56[0]",
+      "position": {
+        "page": 3,
+        "x": 451.8,
+        "y": 503.983
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_15_direct_research_wages",
+      "label": "Line 50 — Direct research wages for qualified services, business component 15",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row15[0].f4_57[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 491.984
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_15_direct_supervision_wages",
+      "label": "Line 51 — Direct supervision wages for qualified services, business component 15",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row15[0].f4_58[0]",
+      "position": {
+        "page": 3,
+        "x": 203.4,
+        "y": 491.984
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_15_direct_support_wages",
+      "label": "Line 52 — Direct support wages for qualified services, business component 15",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row15[0].f4_59[0]",
+      "position": {
+        "page": 3,
+        "x": 327.6,
+        "y": 491.984
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_15_total_qualified_wages",
+      "label": "Line 53 — Total qualified wages (add line 50, line 51, and line 52), business component 15",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row15[0].f4_60[0]",
+      "position": {
+        "page": 3,
+        "x": 451.8,
+        "y": 491.984
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.50_total_from_attachments_direct_research_wages",
+      "label": "Line 50 — Direct research wages for qualified services, total from attachments",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].RowTotalFromAttachments[0].f4_61[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 467.983
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.51_total_from_attachments_direct_supervision_wages",
+      "label": "Line 51 — Direct supervision wages for qualified services, total from attachments",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].RowTotalFromAttachments[0].f4_62[0]",
+      "position": {
+        "page": 3,
+        "x": 203.4,
+        "y": 467.983
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.52_total_from_attachments_direct_support_wages",
+      "label": "Line 52 — Direct support wages for qualified services, total from attachments",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].RowTotalFromAttachments[0].f4_63[0]",
+      "position": {
+        "page": 3,
+        "x": 327.6,
+        "y": 467.983
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.53_total_from_attachments_total_qualified_wages",
+      "label": "Line 53 — Total qualified wages (add line 50, line 51, and line 52), total from attachments",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].RowTotalFromAttachments[0].f4_64[0]",
+      "position": {
+        "page": 3,
+        "x": 451.8,
+        "y": 467.983
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.50_total_direct_research_wages",
+      "label": "Line 50 — Direct research wages for qualified services, total",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].RowTotal[0].f4_65[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 455.984
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.51_total_direct_supervision_wages",
+      "label": "Line 51 — Direct supervision wages for qualified services, total",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].RowTotal[0].f4_66[0]",
+      "position": {
+        "page": 3,
+        "x": 203.4,
+        "y": 455.984
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.52_total_direct_support_wages",
+      "label": "Line 52 — Direct support wages for qualified services, total",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].RowTotal[0].f4_67[0]",
+      "position": {
+        "page": 3,
+        "x": 327.6,
+        "y": 455.984
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.53_total_total_qualified_wages",
+      "label": "Line 53 — Total qualified wages (add line 50, line 51, and line 52), total",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].RowTotal[0].f4_68[0]",
+      "position": {
+        "page": 3,
+        "x": 451.8,
+        "y": 455.984
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_1_cost_of_supplies",
+      "label": "Line 54 — Cost of supplies, business component 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row1[0].f4_69[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_1_computer_rental_cost",
+      "label": "Line 55 — Rental or lease cost of computers, business component 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row1[0].f4_70[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_1_contract_research",
+      "label": "Line 56 — Applicable amount of contract research expenses, business component 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row1[0].f4_71[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_2_cost_of_supplies",
+      "label": "Line 54 — Cost of supplies, business component 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row2[0].f4_72[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 395.971
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_2_computer_rental_cost",
+      "label": "Line 55 — Rental or lease cost of computers, business component 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row2[0].f4_73[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 395.971
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_2_contract_research",
+      "label": "Line 56 — Applicable amount of contract research expenses, business component 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row2[0].f4_74[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 395.971
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_3_cost_of_supplies",
+      "label": "Line 54 — Cost of supplies, business component 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row3[0].f4_75[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 383.972
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_3_computer_rental_cost",
+      "label": "Line 55 — Rental or lease cost of computers, business component 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row3[0].f4_76[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 383.972
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_3_contract_research",
+      "label": "Line 56 — Applicable amount of contract research expenses, business component 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row3[0].f4_77[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 383.972
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_4_cost_of_supplies",
+      "label": "Line 54 — Cost of supplies, business component 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row4[0].f4_78[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 371.973
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_4_computer_rental_cost",
+      "label": "Line 55 — Rental or lease cost of computers, business component 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row4[0].f4_79[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 371.973
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_4_contract_research",
+      "label": "Line 56 — Applicable amount of contract research expenses, business component 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row4[0].f4_80[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 371.973
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_5_cost_of_supplies",
+      "label": "Line 54 — Cost of supplies, business component 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row5[0].f4_81[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 359.974
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_5_computer_rental_cost",
+      "label": "Line 55 — Rental or lease cost of computers, business component 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row5[0].f4_82[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 359.974
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_5_contract_research",
+      "label": "Line 56 — Applicable amount of contract research expenses, business component 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row5[0].f4_83[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 359.974
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_6_cost_of_supplies",
+      "label": "Line 54 — Cost of supplies, business component 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row6[0].f4_84[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 347.975
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_6_computer_rental_cost",
+      "label": "Line 55 — Rental or lease cost of computers, business component 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row6[0].f4_85[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 347.975
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_6_contract_research",
+      "label": "Line 56 — Applicable amount of contract research expenses, business component 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row6[0].f4_86[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 347.975
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_7_cost_of_supplies",
+      "label": "Line 54 — Cost of supplies, business component 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row7[0].f4_87[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 335.976
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_7_computer_rental_cost",
+      "label": "Line 55 — Rental or lease cost of computers, business component 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row7[0].f4_88[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 335.976
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_7_contract_research",
+      "label": "Line 56 — Applicable amount of contract research expenses, business component 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row7[0].f4_89[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 335.976
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_8_cost_of_supplies",
+      "label": "Line 54 — Cost of supplies, business component 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row8[0].f4_90[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 323.977
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_8_computer_rental_cost",
+      "label": "Line 55 — Rental or lease cost of computers, business component 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row8[0].f4_91[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 323.977
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_8_contract_research",
+      "label": "Line 56 — Applicable amount of contract research expenses, business component 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row8[0].f4_92[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 323.977
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_9_cost_of_supplies",
+      "label": "Line 54 — Cost of supplies, business component 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row9[0].f4_93[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 311.978
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_9_computer_rental_cost",
+      "label": "Line 55 — Rental or lease cost of computers, business component 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row9[0].f4_94[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 311.978
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_9_contract_research",
+      "label": "Line 56 — Applicable amount of contract research expenses, business component 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row9[0].f4_95[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 311.978
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_10_cost_of_supplies",
+      "label": "Line 54 — Cost of supplies, business component 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row10[0].f4_96[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 299.979
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_10_computer_rental_cost",
+      "label": "Line 55 — Rental or lease cost of computers, business component 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row10[0].f4_97[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 299.979
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_10_contract_research",
+      "label": "Line 56 — Applicable amount of contract research expenses, business component 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row10[0].f4_98[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 299.979
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_11_cost_of_supplies",
+      "label": "Line 54 — Cost of supplies, business component 11",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row11[0].f4_99[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 287.98
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_11_computer_rental_cost",
+      "label": "Line 55 — Rental or lease cost of computers, business component 11",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row11[0].f4_100[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 287.98
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_11_contract_research",
+      "label": "Line 56 — Applicable amount of contract research expenses, business component 11",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row11[0].f4_101[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 287.98
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_12_cost_of_supplies",
+      "label": "Line 54 — Cost of supplies, business component 12",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row12[0].f4_102[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 275.981
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_12_computer_rental_cost",
+      "label": "Line 55 — Rental or lease cost of computers, business component 12",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row12[0].f4_103[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 275.981
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_12_contract_research",
+      "label": "Line 56 — Applicable amount of contract research expenses, business component 12",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row12[0].f4_104[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 275.981
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_13_cost_of_supplies",
+      "label": "Line 54 — Cost of supplies, business component 13",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row13[0].f4_105[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 263.982
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_13_computer_rental_cost",
+      "label": "Line 55 — Rental or lease cost of computers, business component 13",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row13[0].f4_106[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 263.982
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_13_contract_research",
+      "label": "Line 56 — Applicable amount of contract research expenses, business component 13",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row13[0].f4_107[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 263.982
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_14_cost_of_supplies",
+      "label": "Line 54 — Cost of supplies, business component 14",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row14[0].f4_108[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 251.983
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_14_computer_rental_cost",
+      "label": "Line 55 — Rental or lease cost of computers, business component 14",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row14[0].f4_109[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 251.983
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_14_contract_research",
+      "label": "Line 56 — Applicable amount of contract research expenses, business component 14",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row14[0].f4_110[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 251.983
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_15_cost_of_supplies",
+      "label": "Line 54 — Cost of supplies, business component 15",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row15[0].f4_111[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 239.984
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_15_computer_rental_cost",
+      "label": "Line 55 — Rental or lease cost of computers, business component 15",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row15[0].f4_112[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 239.984
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_15_contract_research",
+      "label": "Line 56 — Applicable amount of contract research expenses, business component 15",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row15[0].f4_113[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 239.984
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.54_total_from_attachments_cost_of_supplies",
+      "label": "Line 54 — Cost of supplies, total from attachments",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row16[0].f4_114[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 215.983
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.55_total_from_attachments_computer_rental_cost",
+      "label": "Line 55 — Rental or lease cost of computers, total from attachments",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row16[0].f4_115[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 215.983
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.56_total_from_attachments_contract_research",
+      "label": "Line 56 — Applicable amount of contract research expenses, total from attachments",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row16[0].f4_116[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 215.983
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.54_total_cost_of_supplies",
+      "label": "Line 54 — Cost of supplies, total",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row17[0].f4_117[0]",
+      "position": {
+        "page": 3,
+        "x": 79.2,
+        "y": 203.984
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.55_total_computer_rental_cost",
+      "label": "Line 55 — Rental or lease cost of computers, total",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row17[0].f4_118[0]",
+      "position": {
+        "page": 3,
+        "x": 244.8,
+        "y": 203.984
+      }
+    },
+    {
+      "fieldId": "form-6765.3.line.56_total_contract_research",
+      "label": "Line 56 — Applicable amount of contract research expenses, total",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row17[0].f4_119[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 203.984
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/6765/blank.pdf",
+    "ingestedAt": "2026-11-27T01:30:31.842Z",
+    "totalFields": 270,
+    "skipped": 0,
+    "catalogEntries": 270
+  }
+}

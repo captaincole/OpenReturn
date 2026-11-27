@@ -13,13 +13,15 @@ import { embedDocuments, resolveEmbeddings } from "../refdocs/embeddings";
 import type { ParsedDoc } from "../refdocs/parse";
 import type { LawEntry } from "./lawSidecar";
 import { ensureLawParts, ensureLawZip } from "./lawSource";
+import { parseCaExtract } from "./parseCaml";
 import { parseEcfrParts } from "./parseEcfr";
 import { parseUslmTitle } from "./parseUslm";
 import { readZip } from "./unzip";
 
 /*
  * Builds one law document in law.db: source → XML → rows → embeddings. The
- * Code is one USLM zip; the regulations are eCFR XML, one file per part.
+ * Code is one USLM zip; the regulations are eCFR XML, one file per part;
+ * California's code is one extract zip of law tables and CAML XML files.
  * No model writes the context: the parser builds each block's header and
  * the lead text above it, so contextualSummary stays null and there is no
  * Haiku cost.
@@ -87,6 +89,8 @@ async function readSource(entry: LawEntry): Promise<LawSource> {
     return { parsed: parseEcfrParts(xmls, docId), blob: parts.zip };
   }
   const zip = await ensureLawZip(entry);
+  if (entry.sidecar.format === "caml")
+    return { parsed: parseCaExtract(readZip(zip), docId), blob: zip };
   return { parsed: parseUslmTitle(titleXml(zip, entry.zipRelPath), docId), blob: zip };
 }
 

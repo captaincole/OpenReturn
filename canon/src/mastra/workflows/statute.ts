@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { lawInstalled } from "../../db/libsql";
-import { includesFederal, type Jurisdiction } from "../../jurisdiction";
+import { statutesOf, type Jurisdiction } from "../../jurisdiction";
+import type { LawSource } from "../../law/citation";
+import { lawSourceOfId } from "../../law/lawIds";
 import { searchLaw, type LawHit } from "../../law/lawSearch";
 import { mergeByRank } from "./ask/mergeHits";
 
@@ -9,6 +11,10 @@ import { mergeByRank } from "./ask/mergeHits";
  * has read the instruction passages, and a run searches it at most once. The
  * search runs here, in code: no judge gets a tool. When two texts disagree,
  * the judge reports both quotes and nothing here picks a winner.
+ *
+ * The statute is that of each jurisdiction on: the Internal Revenue Code for
+ * federal, California's Revenue and Taxation Code for CA. Never the
+ * regulations: the judges' prompts are written for a statute.
  */
 
 const MAX_STATUTE_QUERIES = 3;
@@ -46,28 +52,71 @@ export const conflictSchema = conflictOutputSchema.extend({
 });
 export type Conflict = z.infer<typeof conflictSchema>;
 
-export type StatuteSkip = "no_queries" | "federal_off" | "not_installed" | "failed";
+export type StatuteSkip = "no_queries" | "not_installed" | "failed";
 
 export const STATUTE_SKIP_WHY: Record<StatuteSkip | "already_consulted", string> = {
   no_queries: "The judge gave no statute queries.",
-  federal_off:
-    "The statute is federal law, and the caller did not turn on the federal jurisdiction.",
   not_installed: "The law library (law.db) is not installed.",
   failed: "The statute search failed.",
   already_consulted: "The statute was already consulted in this run.",
 };
 
 export type StatuteSearch =
-  | { status: "searched"; queries: string[]; blocks: StatuteBlock[]; log: unknown[] }
+  | {
+      status: "searched";
+      queries: string[];
+      sources: LawSource[];
+      blocks: StatuteBlock[];
+      log: unknown[];
+    }
   | { status: "skipped"; queries: string[]; skipped: StatuteSkip; error?: string };
 
 export interface StatuteSearchOptions {
   hitsPerQuery: number;
-  /** Most blocks kept over all queries; all of them when unset. */
+  /** Most blocks kept over all queries and statutes; hitsPerQuery for each query when unset. */
   max?: number;
-  /** The jurisdictions on in this run; the federal statute is searched only when federal is on. */
+  /** The jurisdictions on in this run: the statute of each one is searched. */
   jurisdictions: readonly Jurisdiction[];
 }
+
+/*
+ * How a prompt and a reference card name a statute. A prompt names only the
+ * statutes its passages come from, so a run with the Code alone reads as
+ * it did before California's code was in the library.
+ */
+const STATUTE_NAMES: Record<LawSource, { name: string; short: string; title: string }> = {
+  statute: {
+    name: "the Internal Revenue Code",
+    short: "26 U.S.C.",
+    title: "Internal Revenue Code (26 U.S.C.)",
+  },
+  regulations: {
+    name: "the Treasury regulations",
+    short: "26 CFR",
+    title: "Treasury Regulations (26 CFR)",
+  },
+  california: {
+    name: "California's Revenue and Taxation Code",
+    short: "Cal. Rev. & Tax. Code",
+    title: "California Revenue and Taxation Code",
+  },
+};
+const NAME_ORDER = Object.keys(STATUTE_NAMES) as LawSource[];
+
+const sourceOfBlock = (blockId: string): LawSource => lawSourceOfId(blockId) ?? "statute";
+
+/** "the Internal Revenue Code", or "… and California's Revenue and Taxation Code": the statutes of the blocks. */
+export function statuteNamesOf(blockIds: string[], form: "name" | "short"): string {
+  const present = new Set(blockIds.map(sourceOfBlock));
+  const sources = NAME_ORDER.filter((source) => present.has(source));
+  return (sources.length ? sources : NAME_ORDER.slice(0, 1))
+    .map((source) => STATUTE_NAMES[source][form])
+    .join(" and ");
+}
+
+/** The document title of a statute block: "Internal Revenue Code (26 U.S.C.)". */
+export const statuteTitleOf = (blockId: string): string =>
+  STATUTE_NAMES[sourceOfBlock(blockId)].title;
 
 export const statuteQueriesOf = (raw: string[]): string[] =>
   raw
@@ -88,24 +137,27 @@ export async function searchStatute(
 ): Promise<StatuteSearch> {
   const queries = statuteQueriesOf(raw);
   if (queries.length === 0) return { status: "skipped", queries, skipped: "no_queries" };
-  if (!includesFederal(options.jurisdictions))
-    return { status: "skipped", queries, skipped: "federal_off" };
   if (!(await lawInstalled())) return { status: "skipped", queries, skipped: "not_installed" };
+  const sources = statutesOf(options.jurisdictions);
   try {
-    const lists: LawHit[][] = [];
+    const searches: { query: string; source: LawSource; hits: LawHit[] }[] = [];
     for (const query of queries)
-      // The judges' prompts and the conflict check are written for the statute; the regulations come later.
-      lists.push(await searchLaw({ query, limit: options.hitsPerQuery, source: "statute" }));
-    const log = queries.map((query, i) => ({
+      for (const source of sources)
+        searches.push({
+          query,
+          source,
+          hits: await searchLaw({ query, limit: options.hitsPerQuery, source }),
+        });
+    const log = searches.map(({ query, source, hits }) => ({
       query,
-      hits: lists[i].map((hit) => ({
-        blockId: hit.blockId,
-        citation: hit.citation,
-        score: hit.score,
-      })),
+      source,
+      hits: hits.map((hit) => ({ blockId: hit.blockId, citation: hit.citation, score: hit.score })),
     }));
-    const max = options.max ?? lists.flat().length;
-    return { status: "searched", queries, blocks: mergeByRank(lists, max).map(toBlock), log };
+    // The statutes take turns, federal first, within the budget of one statute.
+    const max = options.max ?? queries.length * options.hitsPerQuery;
+    const lists = searches.map((search) => search.hits);
+    const blocks = mergeByRank(lists, max).map(toBlock);
+    return { status: "searched", queries, sources, blocks, log };
   } catch (err) {
     const error = err instanceof Error ? err.message : String(err);
     return { status: "skipped", queries, skipped: "failed", error };
@@ -114,7 +166,8 @@ export async function searchStatute(
 
 /* The query log of one search: what ran, what came back, or why it did not run. */
 export function statuteSearchLog(search: StatuteSearch): Record<string, unknown> {
-  if (search.status === "searched") return { queries: search.log, statuteBlocks: search.blocks };
+  if (search.status === "searched")
+    return { sources: search.sources, queries: search.log, statuteBlocks: search.blocks };
   return {
     queries: search.queries,
     skipped: search.skipped,
