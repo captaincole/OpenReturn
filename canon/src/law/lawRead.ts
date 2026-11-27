@@ -1,5 +1,13 @@
 import { asStr } from "../db/corpusStore";
-import { lawInstalled, openLibraryDb } from "../db/libsql";
+import { installedLawJurisdictions, lawFileName, lawInstalled, openLibraryDb } from "../db/libsql";
+import {
+  ALL_JURISDICTIONS,
+  coversAll,
+  jurisdictionName,
+  jurisdictionOfLawId,
+  jurisdictionOfLawSource,
+  type Jurisdiction,
+} from "../jurisdiction";
 import {
   citationIn,
   parseLawTarget,
@@ -8,18 +16,32 @@ import {
   sourceOfTarget,
   subdivisionsOf,
   type LawSource,
+  type LawTarget,
   type PathBlock,
   type SectionTarget,
 } from "./citation";
 import { CA_VERSION_MARK } from "./lawIds";
+import { lawLibraryOfId, lawLibraryOfSource } from "./lawLibrary";
 
 /*
- * Reads law.db by citation. Only the law library: nothing here opens
- * corpus.db, and nothing opens law.db before lawInstalled() says it exists.
+ * Reads the law files by citation. Only the law library: nothing here opens
+ * corpus.db, and nothing opens a jurisdiction's law file before
+ * lawInstalled() says it exists.
  */
 
 export const LAW_NOT_INSTALLED =
-  "The law library (law.db) is not installed: run `npm run corpus -- law fetch` for the prebuilt file, or `npm run corpus -- law sync` to build it.";
+  "The law library is not installed: run `npm run corpus -- law fetch` for the prebuilt files, or `npm run corpus -- law sync` to build them.";
+
+/** The message for law files that are missing: all of them, or the named jurisdictions'. */
+export function lawNotInstalledMessage(missing: readonly Jurisdiction[] = ALL_JURISDICTIONS) {
+  if (coversAll(missing)) return LAW_NOT_INSTALLED;
+  const names = missing.map(jurisdictionName).join(" and ");
+  const files = missing.map((jurisdiction) => `law/${lawFileName(jurisdiction)}`).join(", ");
+  const fetches = missing.map(
+    (jurisdiction) => `\`npm run corpus -- law fetch --jurisdiction ${jurisdiction}\``,
+  );
+  return `The ${names} law (${files}) is not installed: run ${fetches.join(" and ")} for the prebuilt file, or \`npm run corpus -- law sync\` to build it.`;
+}
 
 export interface LawBlock {
   blockId: string;
@@ -39,14 +61,30 @@ export interface LawReading {
 }
 
 export class LawNotInstalledError extends Error {
-  constructor() {
-    super(LAW_NOT_INSTALLED);
+  constructor(missing?: readonly Jurisdiction[]) {
+    super(lawNotInstalledMessage(missing));
   }
 }
 
-export async function requireLaw(): Promise<void> {
-  if (!(await lawInstalled())) throw new LawNotInstalledError();
+/** The jurisdictions of these (all unless named) that are installed; throws when none is. */
+export async function requireLaw(
+  jurisdictions: readonly Jurisdiction[] = ALL_JURISDICTIONS,
+): Promise<Jurisdiction[]> {
+  const installed = await installedLawJurisdictions(jurisdictions);
+  if (installed.length === 0) throw new LawNotInstalledError(jurisdictions);
+  return installed;
 }
+
+/** The jurisdiction a citation names, or null when it names no law (a corpus block id, no citation). */
+export function jurisdictionOfCitation(input: string): Jurisdiction | null {
+  const target = parseLawTarget(input);
+  return target ? jurisdictionOfTarget(target) : null;
+}
+
+const jurisdictionOfTarget = (target: LawTarget): Jurisdiction | null =>
+  target.kind === "block"
+    ? jurisdictionOfLawId(target.blockId)
+    : jurisdictionOfLawSource(sourceOfTarget(target));
 
 const FORMAT_OF: Record<LawSource, string> = {
   statute: "uslm",
@@ -54,7 +92,7 @@ const FORMAT_OF: Record<LawSource, string> = {
   california: "caml",
 };
 
-/** The format of a source's document in law.db (a sidecar's format). */
+/** The format of a source's document in its law file (a sidecar's format). */
 export const formatOfSource = (source: LawSource): string => FORMAT_OF[source];
 
 /** "uslm" is the statute, "ecfr" the regulations, "caml" California's code. */
@@ -62,9 +100,13 @@ export const sourceOfFormat = (format: string): LawSource =>
   (Object.keys(FORMAT_OF) as LawSource[]).find((source) => FORMAT_OF[source] === format) ??
   "statute";
 
-/* The newest tax year's document of one source; law.db holds one per release. */
+/*
+ * The newest tax year's document of one source; a law file holds one per
+ * release. null when the source's file is not installed: it is never created.
+ */
 export async function lawDocIdOf(source: LawSource): Promise<string | null> {
-  const db = await openLibraryDb("law");
+  if (!(await lawInstalled(jurisdictionOfLawSource(source)))) return null;
+  const db = await openLibraryDb(lawLibraryOfSource(source));
   const res = await db.execute({
     sql: `SELECT doc_id FROM ref_documents WHERE format = ? ORDER BY tax_year DESC, doc_id DESC LIMIT 1`,
     args: [FORMAT_OF[source]],
@@ -83,7 +125,7 @@ export async function lawDocId(): Promise<string> {
 export const CITATION_HINT =
   'try 469, "469(g)(1)", 1.469-5T, "1.469-5T(a)(1)", California\'s "CA 17041(a)" or a block id';
 
-/** The section row of a citation, or null when its library is not in law.db. */
+/** The section row of a citation, or null when its source is not installed. */
 export async function targetSectionId(target: SectionTarget): Promise<string | null> {
   const source = sourceOfTarget(target);
   const docId = await lawDocIdOf(source);
@@ -96,7 +138,7 @@ export async function targetSectionId(target: SectionTarget): Promise<string | n
  * come. The first version's id has no mark.
  */
 export async function versionSectionIds(sectionId: string): Promise<string[]> {
-  const db = await openLibraryDb("law");
+  const db = await openLibraryDb(lawLibraryOfId(sectionId));
   const res = await db.execute({
     sql: `SELECT section_id FROM ref_sections
           WHERE section_id = ? OR substr(section_id, 1, ?) = ? ORDER BY ordinal`,
@@ -107,10 +149,12 @@ export async function versionSectionIds(sectionId: string): Promise<string[]> {
 
 /** null when the citation names nothing in the library. */
 export async function readLaw(input: string): Promise<LawReading | null> {
-  await requireLaw();
   const target = parseLawTarget(input);
   if (!target)
     throw new Error(`"${input}" is not a citation of the law library (${CITATION_HINT})`);
+  const jurisdiction = jurisdictionOfTarget(target);
+  if (jurisdiction === null) return null;
+  await requireLaw([jurisdiction]);
   if (target.kind === "block") return readBlockId(target.blockId);
   const sectionId = await targetSectionId(target);
   const versions = sectionId ? await versionSections(sectionId) : [];
@@ -166,7 +210,7 @@ export interface StoredSection {
 }
 
 export async function sectionBlocks(sectionId: string): Promise<StoredSection | null> {
-  const db = await openLibraryDb("law");
+  const db = await openLibraryDb(lawLibraryOfId(sectionId));
   const head = await db.execute({
     sql: `SELECT s.heading, d.format FROM ref_sections s JOIN ref_documents d ON d.doc_id = s.doc_id
           WHERE s.section_id = ?`,
