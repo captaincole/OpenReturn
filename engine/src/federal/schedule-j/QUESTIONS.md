@@ -73,6 +73,49 @@ default the engine applies, and whether the default can change a dollar amount.
     (line-5::b01). Default: the fact holds that amount; no separate answer.
     Changes dollars: no.
 
+12. **The "total net capital gain" that caps line 2b.** Source: "The amount
+    you enter on line 2b can't exceed the smaller of your total net capital
+    gain or the net capital gain attributable to your farming or fishing
+    business" (irs-1040sj-inst-2025::sec::line-2b::b01). The instructions do
+    not name a line. Default: the smaller of Schedule D lines 15 and 16 (a loss
+    counts as 0), as the QDCG worksheet's line 3 reads it; with no Schedule D,
+    Form 1040 line 7a. The rest of a stated farm gain stays in line 2a as
+    ordinary income. Changes dollars: yes, when line 16 is below line 15 (a
+    short-term loss elsewhere). The blind fill read it the same way.
+
+13. **Rounding inside a base year's QDCG worksheet.** Source: the 2022 to 2024
+    worksheets in the Schedule J instructions give no rounding rule. Default:
+    each tax line of the worksheet (the 15% part, the 20% part, the rate-schedule
+    tax) is rounded to the nearest dollar and the rounded lines are added, as
+    for every calculated line. Keeping the cents and rounding once can differ by
+    $1 a year. The blind fill kept the cents; the blind cases gave the same
+    dollars both ways. Changes dollars: at most $1 or $2 a year.
+
+## Blind fill (2026-11-26)
+
+A preparer filled 14 cases by hand from the blank form and the instructions,
+without the engine. Every amount matched the engine. The one difference: line
+2c when line 2b holds a net capital gain but the farm has no unrecaptured
+section 1250 gain (cases 2 and 4). The blind fill entered 0; the engine leaves
+the line blank, because the instructions say "if any" (line-2c::b01). No
+dollars change.
+
+## Second opinions
+
+- **PolicyEngine-US 2.154.1 (commit 0fbed6ddb1).** It does not model Schedule
+  J or income averaging (no variable for section 1301, elected farm income or
+  base years). It does hold the earlier years' rates. The engine's 2020 to 2024
+  bracket tops (`data/earlierYearRates.ts`) and the 0% and 15% capital gain
+  ceilings matched PolicyEngine's `gov.irs.income.bracket.thresholds` and
+  `gov.irs.capital_gains.thresholds` for every filing status, the surviving
+  spouse included (25 year and status pairs, no difference). Its
+  `capital_gains_tax` formula stacks the 0%, 15% and 20% bands the same way as
+  the base-year worksheet (`federal/4970/earlierYearTax.ts`), with the same
+  limit to the tax at the regular rates (QDCG worksheet line 25).
+- **IRS Direct File (IRS-Public/direct-file, commit e365f9f).** Its fact
+  dictionary (`backend/src/main/resources/tax`) has no farm or fishing income
+  and no Schedule J. Nothing to compare.
+
 ## Confidence by field group
 
 | Fields | Confidence |
