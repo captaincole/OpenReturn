@@ -13,6 +13,7 @@ import { statedBusinessesOnReturn, type BusinessFactValue } from "./business.js"
 import { placesPersonalProperty, type ScopedDepreciation } from "./depreciation.js";
 import { statedRentalsOnReturn, type RentalFactValue } from "./rental.js";
 import { section179RecaptureByBusiness } from "./section179Recapture.js";
+import { reducedExpenses, smallEmployerPlanReductions } from "./smallEmployerPlan.js";
 import { workOpportunityCreditByActivity } from "./workOpportunity.js";
 
 type FactRow = { key: string; value: unknown; category: string };
@@ -135,16 +136,30 @@ function withTipCredit<T extends { key: string; value: BusinessFactValue }>(
 
 /*
  * statedBusinessesOnReturn, with the return's depreciation scope, its Form 4797
- * Part IV recapture, its wages less the work opportunity credit and its taxes
- * less the Form 8846 credit. The two credits lower different expense lines, so
- * their order does not matter.
+ * Part IV recapture, its wages less the work opportunity credit, its plan costs
+ * less the Form 8881 credits and its taxes less the Form 8846 credit. Each
+ * credit lowers only the expense line it names.
  */
 export function businessesOnReturn(facts: ReadonlyArray<FactRow>, joint: boolean) {
   const result = statedBusinessesOnReturn(facts, joint);
   const shared = activitiesWithPersonalProperty(facts, joint) >= SHARED_TEST_MINIMUM;
   const businesses = withRecapture(marked(result.businesses, shared), facts);
-  const reduced = withWorkOpportunityWages(businesses, facts);
+  const reduced = withPlanCredits(withWorkOpportunityWages(businesses, facts), facts);
   return { ...result, businesses: withTipCredit(reduced, facts, joint) };
+}
+
+/* Form 8881 lines 5 and 6g come off the plan's business: its startup costs line and line 19 (smallEmployerPlan.ts). */
+function withPlanCredits<T extends { key: string; value: BusinessFactValue }>(
+  businesses: T[],
+  facts: ReadonlyArray<FactRow>,
+): T[] {
+  const reductions = smallEmployerPlanReductions(facts);
+  if (reductions.size === 0) return businesses;
+  return businesses.map((business) => {
+    const expenses = reducedExpenses(business.value.expenses, reductions.get(business.key));
+    if (expenses === business.value.expenses) return business;
+    return { ...business, value: { ...business.value, expenses } };
+  });
 }
 
 /* statedRentalsOnReturn, with the return's depreciation scope. */

@@ -12,6 +12,7 @@
 
 import { atLeast, sum } from "../../money.js";
 import { isAtRiskAmounts, type AtRiskAmounts } from "./atRisk.js";
+import { reducedExpenses, smallEmployerPlanReductions } from "./smallEmployerPlan.js";
 import { workOpportunityCreditByActivity } from "./workOpportunity.js";
 
 type FactRow = { key: string; value: unknown; category: string };
@@ -311,12 +312,15 @@ export function farmsOnReturn(
 } {
   const rows = facts.filter((fact) => fact.category === FARM_CATEGORY && isFarmFactKey(fact.key));
   const credits = workOpportunityCreditByActivity(facts);
+  // Form 8881 lines 5 and 6g come off the farm's expense lines (smallEmployerPlan.ts).
+  const planReductions = smallEmployerPlanReductions(facts);
   const farms = rows
     .filter((row) => isFarm(row.value))
-    .map((row) => ({
-      key: row.key,
-      value: withWorkOpportunityCredit(row.value, credits.get(row.key)),
-    }));
+    .map((row) => {
+      const farm = withWorkOpportunityCredit(row.value, credits.get(row.key));
+      const expenses = reducedExpenses(farm.expenses, planReductions.get(row.key));
+      return { key: row.key, value: expenses === farm.expenses ? farm : { ...farm, expenses } };
+    });
   const offReturn = (farm: { value: FarmFactValue }) =>
     !joint && farmOwnerOf(farm.value) === "spouse";
   return {
