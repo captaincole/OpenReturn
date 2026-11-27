@@ -1,0 +1,447 @@
+{
+  "formId": "form-7211",
+  "fieldCount": 49,
+  "entries": [
+    {
+      "fieldId": "form-7211.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-1A06Y"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-1I3QR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.1_irs_registration_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-10RH0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.2a_i_owner_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "T-1639J"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.2a_ii_owner_tin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "T-XKNUB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.2b_facility_address_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "T-ZB9KK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.2b_facility_address_description_cont",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "T-GB3VP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.2c_i_latitude_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_10[0]",
+          "text": "TPRT85"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.2c_i_latitude_degrees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_9[0]",
+          "text": "70"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.2c_i_latitude_sign",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_8[0]",
+          "text": "1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.2c_ii_longitude_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_13[0]",
+          "text": "TV5OAH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.2c_ii_longitude_degrees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_12[0]",
+          "text": "368"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.2c_ii_longitude_sign",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_11[0]",
+          "text": "3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.3_date_construction_began",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.4_date_placed_in_service",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.5_i_per_doe_emissions_value",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.5_ii_per_designated_lca_model",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.6_doe_control_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "T-1UV15"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.7a_alt_amount_under_1_megawatt",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.7b_alt_amount_construction_before_2023",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.7c_alt_amount_wage_apprenticeship",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.7d_alt_amount_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[3]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.8_energy_community_bonus_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.8_energy_community_bonus_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.9_domestic_content_bonus_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part1.9_domestic_content_bonus_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part2.1_applicable_amount_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartII_Lines1-2[0].Line1[0].f1_19[0]",
+          "text": "8,214"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part2.1_calendar_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartII_Lines1-2[0].Line1[0].Ln1_CalendarYear[0].f1_17[0]",
+          "text": "8192"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part2.1_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartII_Lines1-2[0].Line1[0].f1_20[0]",
+          "text": "5,278"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part2.1_kwh_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartII_Lines1-2[0].Line1[0].f1_18[0]",
+          "text": "3,948"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part2.2_applicable_amount_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartII_Lines1-2[0].Line2[0].f1_23[0]",
+          "text": "2,847"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part2.2_calendar_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartII_Lines1-2[0].Line2[0].Ln2_CalendarYear[0].f1_21[0]",
+          "text": "9098"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part2.2_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartII_Lines1-2[0].Line2[0].f1_24[0]",
+          "text": "3,135"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part2.2_kwh_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartII_Lines1-2[0].Line2[0].f1_22[0]",
+          "text": "8,153"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part2.3_total_lines_1c_2c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "5,498"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part2.5a_energy_community_bonus",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+          "text": "9,687"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.0.part2.5b_add_lines_3_5a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+          "text": "5,632"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.1.part2.10_passthrough_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+          "text": "7,951"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.1.part2.11_add_lines_9_10",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+          "text": "1,814"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.1.part2.12_allocated_to_patrons_beneficiaries",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+          "text": "5,493"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.1.part2.13_cooperative_estate_trust_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+          "text": "5,594"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.1.part2.6a_tax_exempt_bond_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+          "text": "T-GDWLO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.1.part2.6b_bond_reduction_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+          "text": "1,713"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.1.part2.6c_bond_reduction_cap",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+          "text": "7,225"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.1.part2.6d_smaller_bond_reduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+          "text": "1,666"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.1.part2.7_credit_after_bond_reduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+          "text": "7,830"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.1.part2.8a_domestic_content_bonus",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+          "text": "3,910"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.1.part2.8b_add_lines_7_8a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+          "text": "8,201"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7211.1.part2.9_elective_payment_phaseout",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+          "text": "2,032"
+        }
+      ]
+    }
+  ]
+}
