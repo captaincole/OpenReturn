@@ -60,6 +60,8 @@ export interface ScheduleCaFilingInfo
   caEmployeeAmounts?: CaEmployeeAmounts;
   /** Line 3 column B: the Schedule C expenses the federal Forms 5884, 8844 and 8826 credits took off, in total; undefined with none. */
   caBusinessCreditAddBack?: number;
+  /** Line 3 columns B and C: the federal research credit (Form 6765 line 28) that reduced the Schedule C research expenses; undefined with none. */
+  caFederalResearchReduction?: number;
   /** Line 6 column B: the farms' Forms 5884 and 8844 credits and the labor hired they took off Schedule F line 22; undefined with none. */
   caFarmLaborCredits?: { credit: number; reduction: number };
   /** Line 3 (businesses) and line 5 (rentals) columns B and C: the FTB 3885A differences. */

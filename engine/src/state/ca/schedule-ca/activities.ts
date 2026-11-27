@@ -9,6 +9,7 @@ import {
   businessesOnReturn,
   CA_EMPLOYEE_CLASSIFICATION_KEYS,
   figuredLaborCreditReduction,
+  researchCreditDeductionReduction,
 } from "../../../facts/index.js";
 import { spousePropertiesOnReturn } from "../../../federal/rentals/passive.js";
 import { sum } from "../../../money.js";
@@ -123,9 +124,11 @@ export function resolveActivityAdjustments(inputs: ResolverInputs) {
   const asked = files540 && hasBusiness;
   const addBack = businessCreditAddBack(inputs.facts, joint);
   const farmCredit = figuredLaborCreditReduction(inputs.facts, joint);
+  const researchReduction = researchCreditDeductionReduction(inputs.facts, joint);
   return {
     caEmployeeAmounts: amounts,
     caBusinessCreditAddBack: addBack > 0 ? addBack : undefined,
+    caFederalResearchReduction: researchReduction > 0 ? researchReduction : undefined,
     caFarmLaborCredits: farmCredit.credit > 0 ? farmCredit : undefined,
     businessDepreciationAdjustment: adjustmentFor(inputs, "business"),
     rentalDepreciationAdjustment: adjustmentFor(inputs, "rental"),

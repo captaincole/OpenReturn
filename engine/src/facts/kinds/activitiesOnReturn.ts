@@ -7,6 +7,9 @@
  * Form 4562 reports the test as a gap (federal/4562/lines.ts).
  */
 
+import { deductionReductionOf } from "../../federal/6765/figures.js";
+import { paidByCategory } from "../../federal/6765/qualifiedExpenses.js";
+import { placeReduction, REDUCTION_ORDER } from "../../federal/6765/reduction.js";
 import { disabledAccessReductions } from "../../federal/8826/figures.js";
 import { tipCreditReductions } from "../../federal/8846/figures.js";
 import { childcareCreditReductions } from "../../federal/8882/figures.js";
@@ -19,6 +22,7 @@ import {
 import { placesPersonalProperty, type ScopedDepreciation } from "./depreciation.js";
 import { empowermentZoneFigures } from "./empowermentZone.js";
 import { statedRentalsOnReturn, type RentalFactValue } from "./rental.js";
+import { readResearchCreditFact } from "./researchCredit.js";
 import { section179RecaptureByBusiness } from "./section179Recapture.js";
 import { smallEmployerPlanReductions } from "./smallEmployerPlan.js";
 import { workOpportunityCreditByActivity } from "./workOpportunity.js";
@@ -92,8 +96,12 @@ export type BusinessCreditReduction =
 type ReductionsByBusiness = ReadonlyMap<string, ReadonlyArray<BusinessCreditReduction>>;
 
 interface CreditReduction {
-  /* Each business's reductions, by fact key. */
-  reductionsOf: (facts: ReadonlyArray<FactRow>, joint: boolean) => ReductionsByBusiness;
+  /* Each business's reductions, by fact key, from the businesses as the credits before it in the list left them. */
+  reductionsOf: (
+    facts: ReadonlyArray<FactRow>,
+    joint: boolean,
+    businesses: ReadonlyArray<Business>,
+  ) => ReductionsByBusiness;
   /* Whether Schedule CA line 3 column B gives back what the credit took off (businessCreditAddBack). */
   californiaAddsBack: boolean;
 }
@@ -184,9 +192,46 @@ const BUSINESS_CREDIT_REDUCTIONS: ReadonlyArray<CreditReduction> = [
    * credit (federal/8882/QUESTIONS.md item 8).
    */
   { reductionsOf: childcareCreditReductions, californiaAddsBack: false },
+  /*
+   * Form 6765 without the reduced credit election: the research expenses the
+   * business deducts go down by line 28, on the lines the credits above left
+   * (federal/6765/reduction.ts), so it is last. California is a named gap on
+   * Schedule CA line 3, not an add-back (CA_RESEARCH_GAP).
+   */
+  { reductionsOf: researchReductions, californiaAddsBack: false },
 ];
 
 type Business = { key: string; value: BusinessFactValue };
+
+/* The research business's expenses less Form 6765 line 28; undefined with no reduction, placed undefined when the business is not on the return. */
+function researchPlacement(businesses: ReadonlyArray<Business>, facts: ReadonlyArray<FactRow>) {
+  const fact = readResearchCreditFact(facts).fact;
+  if (fact === undefined) return undefined;
+  const reduction = deductionReductionOf(fact.value);
+  if (reduction === undefined) return undefined;
+  const { businessKey, expenses, businessComponents } = fact.value;
+  const business = businesses.find((each) => each.key === businessKey);
+  if (business === undefined) return { businessKey, reduction, placed: undefined };
+  const paid = paidByCategory(expenses, businessComponents);
+  const placed = placeReduction(business.value.expenses, reduction, paid);
+  return { businessKey, reduction, placed, before: business.value.expenses };
+}
+
+/* Line 28 on each Schedule C line it uses; none while the reduction does not fit (a gap on line 28). */
+function researchReductions(
+  facts: ReadonlyArray<FactRow>,
+  _joint: boolean,
+  businesses: ReadonlyArray<Business>,
+): ReductionsByBusiness {
+  const placement = researchPlacement(businesses, facts);
+  const placed = placement?.placed;
+  if (placement === undefined || placed === undefined || placed.left > 0) return new Map();
+  const reductions = REDUCTION_ORDER.map(({ line }) => ({
+    line,
+    amount: sum(placement.before?.[line]) - sum(placed.expenses[line]),
+  }));
+  return new Map([[placement.businessKey, reductions.filter((each) => each.amount !== 0)]]);
+}
 
 /* The business less one reduction, never below 0, and the dollars it took; a line it does not state has nothing to lower. */
 function lessOne(value: BusinessFactValue, reduction: BusinessCreditReduction) {
@@ -246,10 +291,11 @@ function withCredits<T extends Business>(
   businesses: T[],
   facts: ReadonlyArray<FactRow>,
   joint: boolean,
+  credits: ReadonlyArray<CreditReduction> = BUSINESS_CREDIT_REDUCTIONS,
 ): { businesses: T[]; addBack: number } {
-  return BUSINESS_CREDIT_REDUCTIONS.reduce(
+  return credits.reduce(
     (state, { reductionsOf, californiaAddsBack }) => {
-      const byBusiness = reductionsOf(facts, joint);
+      const byBusiness = reductionsOf(facts, joint, state.businesses);
       if (byBusiness.size === 0) return state;
       const lowered = state.businesses.map((business) =>
         lessAll(business, byBusiness.get(business.key) ?? []),
@@ -271,6 +317,27 @@ function withCredits<T extends Business>(
  */
 export function businessCreditAddBack(facts: ReadonlyArray<FactRow>, joint: boolean): number {
   return withCredits(statedBusinessesOnReturn(facts, joint).businesses, facts, joint).addBack;
+}
+
+/* Form 6765 line 28's reduction on the research business after the other credits, for the form's gap: undefined with no reduction. */
+export function researchCreditPlacement(facts: ReadonlyArray<FactRow>, joint: boolean) {
+  const others = BUSINESS_CREDIT_REDUCTIONS.filter(
+    (each) => each.reductionsOf !== researchReductions,
+  );
+  const stated = statedBusinessesOnReturn(facts, joint).businesses;
+  return researchPlacement(withCredits(stated, facts, joint, others).businesses, facts);
+}
+
+/* The research expenses line 28 takes off the business's Schedule C lines (Schedule CA line 3 gap); 0 with none. */
+export function researchCreditDeductionReduction(
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): number {
+  const placement = researchCreditPlacement(facts, joint);
+  const placed = placement?.placed;
+  return placement !== undefined && placed !== undefined && placed.left === 0
+    ? placement.reduction
+    : 0;
 }
 
 /*

@@ -18,6 +18,7 @@ import { roundDollars } from "../../money.js";
 import type { ResolverInputs } from "../../resolverInputs.js";
 import { figuredOnForm3468, form3468CreditSources } from "../3468/credit.js";
 import { workOpportunitySources } from "../5884/sources.js";
+import { researchCreditSources } from "../6765/form3800.js";
 import { lowIncomeHousingSourcesOf } from "../8586/form3800.js";
 import { disabledAccessSourcesOf } from "../8826/form3800.js";
 import { withForm8844 } from "../8844/sources.js";
@@ -212,11 +213,15 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
   const housing = lowIncomeHousingSourcesOf(inputs);
   // Line 1e: Form 8826 line 6, the credit of the taxpayer's own businesses (8826/form3800.ts).
   const disabledAccess = disabledAccessSourcesOf(inputs);
+  // Line 1c or 4i: Form 6765 line 28, the taxpayer's own research (6765/form3800.ts).
+  const research = researchCreditSources(inputs);
   missing.push(
     ...tips.missing,
     ...childcare.missing,
     ...housing.missing,
     ...disabledAccess.missing,
+    ...research.sources.filter(missingResearch).map((source) => source.credit.key),
+    ...research.missing,
   );
   // Line 3: Form 8844 line 2, the empowerment zone credit of the taxpayer's own employees (8844/sources.ts).
   const zone = withForm8844(inputs, [
@@ -227,6 +232,7 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
     ...k1.flatMap((found) => (found.source ? [found.source] : [])),
     ...form3468.sources,
     ...workOpportunity.sources,
+    ...research.sources,
     ...disabledAccess.sources,
   ]);
   // Lines 1j, 1dd and 1ee: Form 8881 lines 8, 11 and 15 less the K-1s, the taxpayer's own plan (8881/sources.ts).

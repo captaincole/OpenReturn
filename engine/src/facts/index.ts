@@ -120,6 +120,7 @@ export * from "./kinds/qualifiedElectricVehicleCredit.js";
 export * from "./kinds/refuelingProperty.js";
 export * from "./kinds/refundDeposit.js";
 export * from "./kinds/rental.js";
+export * from "./kinds/researchCredit.js";
 export * from "./kinds/retirementDistribution.js";
 export * from "./kinds/rothIra.js";
 export * from "./kinds/saversCredit.js";
