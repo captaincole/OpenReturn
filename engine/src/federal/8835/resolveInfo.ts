@@ -16,7 +16,7 @@ const MUST_FILE_KEY = "decisions.scope.must_file_8835";
  *
  * DECISION (2026-11-27, by the author): a K-1 credit alone does not file Form
  * 8835. The partnership K-1 instructions offer both: "Report this amount on
- * Form 8835; or Form 3800, Part III, line 1f" (irs-1065k1-inst-2025::sec::box-15-credits::b08).
+ * Form 8835; or Form 3800, Part III, line 1f" (irs-1065k1-inst-2025::sec::box-15-credits::b09).
  * Form 8835's own instructions say such a taxpayer is "not required to
  * complete or file this form" (general-instructions::b01) and "If the only
  * credit allocated to you is the renewable electricity production credit,
