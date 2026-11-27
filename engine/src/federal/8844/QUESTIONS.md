@@ -4,16 +4,16 @@ The engine fills Form 8844 for an individual who employs people in an empowermen
 
 ## Confidence by field group
 
-| Field group | Confidence |
-| --- | --- |
-| Header (name, SSN) | Stated rule |
-| Line 1 (qualification tests, $15,000 limit, work opportunity reduction) | Stated rule |
-| Line 2 (20%) | Stated rule |
-| Line 3 (K-1 and stated pass-through credits) | Stated rule |
-| Line 4 | Stated rule (the form's arithmetic) |
-| Lines 5 and 6 (cooperatives, estates, trusts) | Stated rule: blank on an individual's return |
-| Schedule C line 26, Schedule F line 22 (wage deduction less line 2) | Stated rule; the split among employers is own reading (item 2) |
-| Form 3800 Part III line 3 | Stated rule |
+| Field group                                                             | Confidence                                                     |
+| ----------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Header (name, SSN)                                                      | Stated rule                                                    |
+| Line 1 (qualification tests, $15,000 limit, work opportunity reduction) | Stated rule; the end of the 90 days is own reading (item 9)    |
+| Line 2 (20%)                                                            | Stated rule                                                    |
+| Line 3 (K-1 and stated pass-through credits)                            | Stated rule                                                    |
+| Line 4                                                                  | Stated rule (the form's arithmetic)                            |
+| Lines 5 and 6 (cooperatives, estates, trusts)                           | Stated rule: blank on an individual's return                   |
+| Schedule C line 26, Schedule F line 22 (wage deduction less line 2)     | Stated rule; the split among employers is own reading (item 2) |
+| Form 3800 Part III line 3                                               | Stated rule                                                    |
 
 ## Doubts with no conflicting text
 
@@ -63,6 +63,23 @@ The engine fills Form 8844 for an individual who employs people in an empowermen
 - Source: "The credit is extended to December 31, 2025" (`what-s-new::b01`).
 - Default: 2025 wages count. A 2026 return needs a new check.
 - Changes dollars: not for 2025.
+
+### 9. An employee still employed who has fewer than 90 days at year end
+
+- Source: "Any individual employed by the employer for less than 90 days. For exceptions, see Early termination of employee, later" (`irs-8844-inst-2025::sec::qualified-zone-employees::b01`). "Generally, an individual is not a qualified zone employee unless employed for at least 90 days" (`qualified-zone-employees::b03`). Neither text says whether the 90 days end with the tax year. The law library was not installed, so section 1396 was not read.
+- Default: the answer `employedAtLeast90Days` counts the days by December 31. An employee hired on October 13, 2025, still employed with 80 days at year end, does not count on the 2025 return.
+- Other reading: count her, because her employment passes 90 days in January 2026, before the return is filed. The blind fill took this reading.
+- Changes dollars: yes. Example: $6,000 of her wages is $1,200 more credit, and Schedule C line 26 is $1,200 lower. The default claims less credit; the statute should settle it.
+
+## Blind fill
+
+- 2026-11-27, 15 cases filled by hand from the blank form and the instructions only. Every line matches the engine, blank against 0 included, except case 6 (item 9): the blind fill counted the employee with 80 days at year end, so its lines 1, 2 and 4 are $6,000, $1,200 and $1,200 higher and its Schedule C line 26 is $1,200 lower. The engine keeps its default.
+- The blind fill's other doubts change no dollars: line 2 is 20% of the rounded line 1 (the engine does the same), the split of line 2 between a Schedule C and a Schedule F (item 2; the same dollars in its case), and line 3 blank with no K-1 credit (the engine does the same).
+
+## Second opinions
+
+- **PolicyEngine-US** 2.154.1 (commit 0fbed6ddb1, 2026-11-26): it does not model the empowerment zone employment credit. No variable or parameter under `gov/irs` names it, so nothing was compared.
+- **Other projects.** The repository names no other reference implementation that models Form 8844. IRS Direct File (issue #140) does not support business credits.
 
 ## Proposals for a discussion
 

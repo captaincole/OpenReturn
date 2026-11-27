@@ -45,7 +45,12 @@ export interface EmpowermentZoneEmployeeFactValue {
    * the close of the year (qualified-zone-employees::b01).
    */
   excludedBusiness: boolean;
-  /* Employed by the taxpayer for at least 90 days (qualified-zone-employees::b01). */
+  /*
+   * Employed by the taxpayer for at least 90 days (qualified-zone-employees::b01),
+   * counted by the end of the tax year. An employee hired late in the year who
+   * is still employed and passes 90 days after December 31 answers false: the
+   * default, an open question (federal/8844/QUESTIONS.md item 9).
+   */
   employedAtLeast90Days: boolean;
   /*
    * Ended before 90 days: terminated for misconduct under state unemployment
