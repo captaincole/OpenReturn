@@ -5,8 +5,8 @@
  * on Form 7213 ... or Form 3800, Part III, line 1u" (irs-1065k1-inst-2025::sec::box-15-credits::b02
  * to ::b12; irs-1120sk1-inst-2025::sec::report-on-form-7207-advanced-manufacturing::b03
  * to ::b05, the same lines). A credit whose instructions send it to its source
- * form first (Form 3468, Form 8864), or to the entity's statement, keeps a gap
- * on the line it would reach.
+ * form first (Form 8864, or Form 3468 for code E with no property fact), or to
+ * the entity's statement, keeps a gap on the line it would reach.
  */
 
 import { roundDollars } from "../../money.js";
@@ -21,7 +21,7 @@ interface K1CreditLine {
 }
 
 const FORM_3468 =
-  "The investment credit must be figured on Form 3468 (irs-3800-inst-2025::sec::general-instructions::b01), which the engine does not have.";
+  "The rehabilitation credit is figured on Form 3468 Part VII from the entity's statement (irs-1065k1-inst-2025::sec::box-15-credits::b03): state the building as an investment credit property that names this K-1 (k1Key).";
 const FORM_8864 =
   "The biodiesel, renewable diesel, or sustainable aviation fuels credit is reported on Form 8864 first (irs-1065k1-inst-2025::sec::box-15-credits::b01, ::b09), which the engine does not have.";
 const STATEMENT =
@@ -45,12 +45,13 @@ export const K1_CREDIT_LINES: Readonly<Record<string, K1CreditLine>> = {
   // Line 1c or 4i by the eligible small business answer (box-15-credits::b06).
   [RESEARCH_DETAIL]: { line: "1c" },
   employer_social_security_on_tips: { line: "4f" },
-  unused_coal: { line: "1a", needs: FORM_3468 },
-  unused_advanced_energy: { line: "1d", needs: FORM_3468 },
-  unused_manufacturing: { line: "1o", needs: FORM_3468 },
-  unused_clean_electricity: { line: "1v", needs: FORM_3468 },
-  unused_energy: { line: "4a", needs: FORM_3468 },
-  unused_rehabilitation: { line: "4k", needs: FORM_3468 },
+  // Codes P to U: Form 3468's cooperative lines carry the amount to these lines (3468/copies.ts).
+  unused_coal: { line: "1a" },
+  unused_advanced_energy: { line: "1d" },
+  unused_manufacturing: { line: "1o" },
+  unused_clean_electricity: { line: "1v" },
+  unused_energy: { line: "4a" },
+  unused_rehabilitation: { line: "4k" },
   advanced_manufacturing_production: { line: "1b" },
   clean_electricity_production: { line: "1gg" },
   clean_fuel_production: { line: "1q" },
