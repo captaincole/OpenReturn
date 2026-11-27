@@ -76,7 +76,19 @@ function childBindings(column: number): Record<string, Binding> {
     ...pair("14", "lived_with_you", (row) =>
       line14LivedWithYou(row.livedWithYouOverHalfYear, row.dependent),
     ),
-    // Line 15 (line-15::b01): Schedule 8812 counts only a qualifying child for the CTC.
+    /*
+     * Line 15 (line-15::b01): Schedule 8812 counts only a qualifying child for the CTC.
+     * DECISION (2026-11-26, by the author): a child released by Form 8332 answers
+     * "Yes". Line 15's list says "4. Lived with you for more than half of the year"
+     * (irs-8862-inst-2025::sec::line-15::b01), with no exception; line 14 says
+     * "there are exceptions for ... children of divorced or separated parents. If
+     * you meet one of these exceptions, answer 'Yes' to question 14"
+     * (irs-8862-inst-2025::sec::line-14::b01), and the child "will be treated as
+     * the qualifying child ... of the child's noncustodial parent"
+     * (irs-1040-inst-2025::sec::definitions-and-special-rules::b01). The engine
+     * follows the exception, because a "No" on line 15 denies the credit that
+     * line 14's own exception allows. Rule decision A79.
+     */
     ...pair("15", "qualifying_child", (row) => row.credit === "child_tax_credit"),
     // Line 16 (line-16::b01): a dependent fact is a person claimed as a dependent.
     ...pair("16", "your_dependent", () => true),

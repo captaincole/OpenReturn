@@ -288,6 +288,22 @@ describe("Form 8862 and the child tax credits", () => {
     expect(run.line("2.line.18a_student_1_name")).toBeUndefined();
   });
 
+  it("a child released by Form 8332 answers Yes on lines 14 and 15 (rule decision A79)", () => {
+    const owen = makeDependentFactKey("owen");
+    const run = evaluate(
+      lini,
+      factsWith(lini, {
+        [owen]: { ...valueOf(lini, owen), monthsLivedWithYou: 4, form8332Release: true },
+        [EIC_KEYS.deniedInEarlierYear]: false,
+        [FORM_8862_KEYS.aotcDeniedInEarlierYear]: false,
+      }),
+    );
+    expect(run.line("1.line.12b_ctc_child_2_name")).toBe("Owen Thornbury");
+    expect(run.line("1.line.14_child_2_lived_with_you_yes")).toBe(true);
+    expect(run.line("1.line.15_child_2_qualifying_child_yes")).toBe(true);
+    expect(run.line("1.line.15_child_2_qualifying_child_no")).toBe(false);
+  });
+
   it("line 12d is a gap with a fifth child, who needs a statement", () => {
     const mira = valueOf(lini, makeDependentFactKey("mira"));
     const extra = [1, 2, 3].map((index) =>

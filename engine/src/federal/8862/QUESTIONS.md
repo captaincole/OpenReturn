@@ -1,6 +1,6 @@
 # Form 8862 — open questions
 
-Form 8862 claims the EIC, the child tax credits (CTC, ACTC, ODC) or the AOTC again after the IRS reduced or disallowed one in an earlier year. It has no dollar arithmetic. Each item below is a place where the form and its instructions (`irs-8862-inst-2025`) do not settle a rule. The ban decision is row A78 of `docs/rule-decisions.md`.
+Form 8862 claims the EIC, the child tax credits (CTC, ACTC, ODC) or the AOTC again after the IRS reduced or disallowed one in an earlier year. It has no dollar arithmetic. Each item below is a place where the form and its instructions (`irs-8862-inst-2025`) do not settle a rule. The ban decision is row A78 of `docs/rule-decisions.md`, and line 15 for a released child is row A79.
 
 ## How the engine learns of a denial
 
@@ -22,6 +22,7 @@ Form 8862 claims the EIC, the child tax credits (CTC, ACTC, ODC) or the AOTC aga
 10. **The AOTC under a ban.** "Don't claim the American opportunity credit for 2 years ... or 10 years" (`irs-8863-inst-2025::sec::american-opportunity-credit::b01`). Whether the student's expenses then go to the lifetime learning credit is not said there. Default: Form 8863 is a gap with the reason. Dollars: the whole education credit waits.
 11. **More than four children, four other dependents or three students.** Each asks for an attached statement (form face, lines 12, 13, Part IV). The engine writes no statements. Default: the last column's name (12d, 13d, 18c) is unsupported with the reason. No dollar change.
 12. **Line 14, the kidnapped child exception.** `line-14::b01` names it; no fact records it. Default: only the Form 8332 release counts as an exception. No dollar change: the credit reads the same fact.
+13. **Line 15 for a child released by Form 8332.** Line 15's list says "Lived with you for more than half of the year" with no exception (`line-15::b01`); line 14 allows the divorced-parents exception (`line-14::b01`). Decided as rule decision A79: "Yes", as for line 14. Dollars: a "No" would deny the child's whole child tax credit. The blind fill reached the same answer (blind case 12).
 
 ## Confidence
 
@@ -38,9 +39,19 @@ Form 8862 claims the EIC, the child tax credits (CTC, ACTC, ODC) or the AOTC aga
 | Lines 10a, 10b | stated rule; unsupported for a 2025 death (doubt 8) |
 | Lines 11a, 11b | stated rule; own reading on a joint return (doubt 2) |
 | Lines 12, 13 | stated rule; the fifth person unsupported (doubt 11) |
-| Lines 14–17 | stated rule (`line-14::b01`, `line-15::b01`, `line-16::b01`) |
+| Lines 14–17 | stated rule (`line-14::b01`, `line-15::b01`, `line-16::b01`); line 15 for a released child is rule A79 (doubt 13) |
 | Line 18 | stated rule; the fourth student unsupported (doubt 11) |
 | Lines 19a, 19b | published example (Sharon, Wilbert, `irs-8863-inst-2025::sec::american-opportunity-credit::b02`, `::b03`) |
+
+## Second opinions
+
+- **Blind fill (2026-11-26).** 15 cases filled by hand from the blank form and `irs-8862-inst-2025`. Every line matches the engine. The blind doubts are items 1–4 and 13 above and row A78.
+- **PolicyEngine-US 2.154.1 (commit 0fbed6ddb1).** It has no Form 8862. It models only the AOTC ban (`is_barred_from_american_opportunity_credit_due_to_improper_claims`), and then counts the student's expenses for the lifetime learning credit. The engine makes Form 8863 a gap instead (item 10). The IRS text does not settle it: the ban is a caution above the seven AOTC requirements (`irs-8863-inst-2025::sec::american-opportunity-credit::b01`), and the lifetime learning tip covers only a student who fails those requirements (`::b06`). The engine keeps the gap. The EIC age limits (25 to 64) and the AOTC 4-year count agree with lines 10 and 19b.
+- **IRS Direct File (tax year 2024, commit e365f9f).** It fills Parts I to III; Part IV is out of its scope.
+  - Line 6: Direct File checks "No" for a filer with no qualifying child; the engine leaves it blank (item 3). No dollar change; the engine keeps its reading.
+  - Line 7: Direct File turns months into days (6 → 183, 9 → 273, 12 → 365); the engine prints 365 for 12 months and else asks for the days, as the line asks (item 4). No dollar change from 7 months up.
+  - Lines 14 to 17: Direct File always answers "Yes" for a child counted for the credit, the same as the engine and rule A79.
+  - A ban with no appeal claims no credit, and a later Form 8862 that allowed the credit ends the need for one: both agree with the engine (A78, item 1).
 
 ## Proposals for a discussion
 
