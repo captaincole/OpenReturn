@@ -276,7 +276,7 @@ describe("the limits", () => {
   });
 });
 
-describe("line 7 with two K-1s that show cents (decision A103)", () => {
+describe("line 7 with two K-1s that show cents (decision A96)", () => {
   const SECOND_ID = "truckee-crag";
   const withCents = { ...partnershipK1, boxes: [{ box: "15", code: "K", amount: 300.4 }] };
   const second = { ...withCents, entityName: "Truckee Crag LLC", entityEin: "88-4418827" };

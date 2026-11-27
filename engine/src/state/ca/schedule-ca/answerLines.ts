@@ -103,32 +103,32 @@ function recaptureColumn(info: ScheduleCaFilingInfo, side: "subtraction" | "addi
 }
 
 /*
- * The federal work opportunity credit that reduced the Schedule C wages:
- * "Enter the amount of the federal Work Opportunity Credit that reduced the
- * federal deduction for wages on Schedule CA (540), Part I ... line 3, line 5,
- * or line 6, column B" (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b07);
- * "California has no similar credits." Column B only.
+ * The Schedule C expenses the federal credits took off that California gives
+ * back, all of them in one amount, each dollar once (businessCreditAddBack in
+ * facts/kinds/activitiesOnReturn.ts, whose list marks each credit):
+ * - Form 5884: "Enter the amount of the federal Work Opportunity Credit that
+ *   reduced the federal deduction for wages on Schedule CA (540), Part I ...
+ *   line 3, line 5, or line 6, column B" (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b07);
+ *   "California has no similar credits."
+ * - Form 8844: "The provisions of Section 280C(a) of the Internal Revenue Code
+ *   (relating to rule for employment credits) shall not apply"
+ *   (ca-rtc-2025::sec::s17270::b). The FTB names no Form 8844 adjustment, so
+ *   column B gives those wages back the same way (8844 QUESTIONS.md item 11).
+ * - Form 8826: "California law conforms to this provision, but the maximum
+ *   credit is $125" (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b04):
+ *   no deduction for an amount the California credit (FTB 3548) allows. The
+ *   engine does not file FTB 3548, so no California credit reduces the
+ *   California deduction, and the whole federal reduction comes back
+ *   (federal/8826/QUESTIONS.md).
+ * Column B only.
  */
-const wageCreditColumn = (info: ScheduleCaFilingInfo, side: "subtraction" | "addition") =>
-  side === "subtraction" ? (info.caWorkOpportunityWageCredit ?? 0) : 0;
-
-/*
- * The federal disabled access credit that reduced the Schedule C expenses.
- * "California law conforms to this provision, but the maximum credit is $125"
- * (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b04): no
- * deduction for an amount the California credit (FTB 3548) allows. The engine
- * does not file FTB 3548, so no California credit reduces the California
- * deduction, and the whole federal reduction comes back in column B
- * (federal/8826/QUESTIONS.md).
- */
-const accessCreditColumn = (info: ScheduleCaFilingInfo, side: "subtraction" | "addition") =>
-  side === "subtraction" ? (info.caDisabledAccessCredit ?? 0) : 0;
+const businessCreditColumn = (info: ScheduleCaFilingInfo, side: "subtraction" | "addition") =>
+  side === "subtraction" ? (info.caBusinessCreditAddBack ?? 0) : 0;
 
 /*
  * Line 3 column B or C: a California employee's profit or loss, plus the FTB
  * 3885A business difference, the Schedule D-1 Part IV difference and, in
- * column B, the wages the federal work opportunity credit took off and the
- * expenses the federal disabled access credit took off.
+ * column B, the expenses the federal business credits took off.
  */
 export function line3Column(info: ScheduleCaFilingInfo, side: "subtraction" | "addition") {
   const employee =
@@ -139,11 +139,7 @@ export function line3Column(info: ScheduleCaFilingInfo, side: "subtraction" | "a
   const recapture = recaptureColumn(info, side);
   if (recapture !== undefined && typeof recapture !== "number") return recapture;
   const total =
-    (employee ?? 0) +
-    (depreciation ?? 0) +
-    (recapture ?? 0) +
-    wageCreditColumn(info, side) +
-    accessCreditColumn(info, side);
+    (employee ?? 0) + (depreciation ?? 0) + (recapture ?? 0) + businessCreditColumn(info, side);
   return positive(total);
 }
 
@@ -155,12 +151,13 @@ const FARM_DEPRECIATION_GAP =
  * lists "Employer wage expense for the federal Work Opportunity Credit" and the
  * "Small Employer Health Insurance Credit" among the business deductions that
  * differ (ca-540-sched-ca-inst-2025::sec::business-deductions-related-to::b01).
- * The farm's stated employmentCredits add three credits (Forms 8844, 8932,
- * 8994) and do not say which, so the California amount is not known. The
- * Form 5884 part comes from the employee facts (caWorkOpportunityFarmCredit).
+ * The farm's stated employmentCredits add the credits no employee fact
+ * figures (Forms 5884, 8844, 8932, 8994) and do not say which, so the
+ * California amount is not known. The Form 5884 and Form 8844 parts that the
+ * employee facts figure are known (caFarmLaborCredits).
  */
 const FARM_WAGE_CREDIT_GAP =
-  "A federal wage credit (Forms 8844, 8932, 8994 on Schedule F line 22, or Form 8941 on line 15) reduced the farm's deduction, and California's business deductions differ for the Work Opportunity Credit and the Small Employer Health Insurance Credit (ca-540-sched-ca-inst-2025::sec::business-deductions-related-to::b01); the farm fact does not split those credits by form.";
+  "A stated federal wage credit (Forms 5884, 8844, 8932, 8994 on Schedule F line 22, or Form 8941 on line 15) reduced the farm's deduction, and California's business deductions differ for the Work Opportunity Credit and the Small Employer Health Insurance Credit (ca-540-sched-ca-inst-2025::sec::business-deductions-related-to::b01); the farm fact does not split those credits by form.";
 
 /*
  * Line 6 columns B and C: the adjustments "generally are necessary because of
@@ -169,25 +166,28 @@ const FARM_WAGE_CREDIT_GAP =
  * (ca-540-sched-ca-inst-2025::sec::line-6-farm-income-or-loss::b01). A farm with
  * no depreciation and no federal wage credit has none of these on line 34:
  * blank. With depreciation or a stated wage credit the California amount is
- * not known (a gap). The Form 5884 credit of the farms' own employees goes in
- * column B: "Enter the amount of the federal Work Opportunity Credit that
- * reduced the federal deduction for wages on Schedule CA (540), Part I ...
- * line 3, line 5, or line 6, column B"
- * (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b07). A
- * passive farm, which needs FTB 3801, is already a gap on federal line 34.
+ * not known (a gap). The labor hired that the Form 5884 and Form 8844
+ * credits of the farms' own employees took off goes in column B, once for
+ * both: "Enter the amount of the federal Work Opportunity Credit that reduced
+ * the federal deduction for wages on Schedule CA (540), Part I ... line 3,
+ * line 5, or line 6, column B"
+ * (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b07), and
+ * section 280C(a) does not apply for California (ca-rtc-2025::sec::s17270::b;
+ * line3Column). A passive farm, which needs FTB 3801, is already a gap on
+ * federal line 34.
  */
 export function line6Column(info: ScheduleCaFilingInfo, side: "subtraction" | "addition") {
   const farms = info.farms ?? [];
   if (farms.some((farm) => (farm.value.expenses?.depreciation ?? 0) > 0)) {
     return unsupported(FARM_DEPRECIATION_GAP);
   }
-  const workOpportunity = info.caWorkOpportunityFarmCredit;
+  const figured = info.caFarmLaborCredits;
   const employmentCredits = sum(...farms.map((farm) => farm.value.employmentCredits));
   const otherCredits =
-    employmentCredits > (workOpportunity?.credit ?? 0) ||
+    employmentCredits > (figured?.credit ?? 0) ||
     farms.some((farm) => (farm.value.smallEmployerHealthCredit ?? 0) > 0);
   if (otherCredits) return unsupported(FARM_WAGE_CREDIT_GAP);
-  return side === "subtraction" ? positive(workOpportunity?.reduction) : undefined;
+  return side === "subtraction" ? positive(figured?.reduction) : undefined;
 }
 
 export function answerLines(): Bindings {

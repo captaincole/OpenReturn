@@ -4,8 +4,8 @@ The form (Rev. September 2017) and its instructions publish no example with numb
 
 ## Two texts conflict
 
-1. **The deduction falls by the credit, not by the expenditures.** The Schedule C instructions say "you can't take both a credit (on Form 8826) and a deduction for the same expenditures" (`irs-1040sc-inst-2025::sec::part-v::b03`). Form 8826 says "To the extent of the credit shown on line 6" (`irs-8826-form-2025::sec::line-6::b01`). The engine follows the form. Decided: row A104 of `docs/rule-decisions.md`, comment in `figures.ts`.
-2. **A K-1 rounds before the add on line 7.** The 1040 rule rounds only a total; Form 3800 Part V lists one amount for each pass-through EIN. The engine rounds each K-1, so line 8 equals Form 3800 line 1e. Decided: row A103 of `docs/rule-decisions.md`.
+1. **The deduction falls by the credit, not by the expenditures.** The Schedule C instructions say "you can't take both a credit (on Form 8826) and a deduction for the same expenditures" (`irs-1040sc-inst-2025::sec::part-v::b03`). Form 8826 says "To the extent of the credit shown on line 6" (`irs-8826-form-2025::sec::line-6::b01`). The engine follows the form. Decided: row A110 of `docs/rule-decisions.md`, comment in `figures.ts`.
+2. **A K-1 rounds before the add on line 7.** The 1040 rule rounds only a total; Form 3800 Part V lists one amount for each pass-through EIN. The engine rounds each K-1, so line 8 equals Form 3800 line 1e. Decided: row A96 of `docs/rule-decisions.md`.
 
 ## Should we do this now
 
@@ -41,7 +41,7 @@ None made. The Part V entry of item 9 is a field of this fact kind only.
 ## Second opinions
 
 - **Blind fill** (15 cases, from the blank form and instructions only): one dollar difference, settled for the engine.
-  - Case 13, line 7 ($600 against $601) and line 8 ($975 against $976): two K-1s of $300.40. The blind fill added the cents and rounded the total (the 1040 rule, `irs-1040-inst-2025::sec::rounding-off-to-whole::b01`). The engine rounds each K-1 first, so line 8 equals Form 3800 line 1e, whose Part V lists one amount "by the EIN of the pass-through entity" (`irs-3800-inst-2025::sec::part-v-3::b01`). That is row A103, the same rule as row A96 for Form 8846; kept, with a unit test (item 2).
+  - Case 13, line 7 ($600 against $601) and line 8 ($975 against $976): two K-1s of $300.40. The blind fill added the cents and rounded the total (the 1040 rule, `irs-1040-inst-2025::sec::rounding-off-to-whole::b01`). The engine rounds each K-1 first, so line 8 equals Form 3800 line 1e, whose Part V lists one amount "by the EIN of the pass-through entity" (`irs-3800-inst-2025::sec::part-v-3::b01`). That is row A96, the same rule as for Form 8846; kept, with a unit test (item 2).
   - Case 12 (a K-1 alone, the form filed anyway): lines 1 to 6 blank in the engine, $0 in the blind fill. No dollar change (item 12).
   - Blind doubts with no dollar change match the engine's defaults: a form with a zero credit (cases 2 and 3), line 7 blank with no K-1, the $5,000 limit on lines 6 and 7 together, the half dollar on line 6 rounding up (item 7), and the "or" of the two prior-year tests (item 6).
 - **PolicyEngine-US 2.154.1** (commit 0fbed6ddb1): it does not model Form 8826. `general_business_credit` is a bare input ("General business credit from Form 3800") with no formula, and no variable or parameter names the disabled access credit or section 44. Nothing to compare.
@@ -54,9 +54,9 @@ None made. The Part V entry of item 9 is a field of this fact kind only.
 | Header (name, identifying number) | Stated rule (as every credit form) |
 | Line 1 | Stated rule |
 | Lines 3, 5, 6 (with the printed lines 2 and 4) | Published example with numbers (ADA Tax Incentives Packet, the $10,250 cap) and the form's arithmetic |
-| Line 7 | Stated rule; the rounding is decision A103 |
+| Line 7 | Stated rule; the rounding is decision A96 |
 | Line 8 and its $5,000 limit | Stated rule |
 | Cents boxes | Own reading (item 7) |
 | Who files and the eligible small business test | Stated rule |
-| Schedule C expense line or Part V entry less line 6 | Published example with numbers (the same packet); the amount is decision A104 |
+| Schedule C expense line or Part V entry less line 6 | Published example with numbers (the same packet); the amount is decision A110 |
 | Schedule CA line 3 column B | Own reading (item 10) |

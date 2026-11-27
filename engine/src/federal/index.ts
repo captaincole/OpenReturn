@@ -1192,6 +1192,12 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8609-A",
     relativeDir: "federal/8609-a",
     register: registerForm8609A,
+    // One Form 8609-A for each building (federal/8609-a/resolveInfo.ts).
+    copies: {
+      count: (info) => Math.max(1, info?.form8609ACopies?.length ?? 1),
+      select: (info, index) => info && { ...info, form8609ACopyIndex: index },
+      laterCopyPages: [0],
+    },
   }),
   makeFormSpec({
     formId: "form-8826",

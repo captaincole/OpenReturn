@@ -14,9 +14,9 @@ import {
   statedBusinessesOnReturn,
   type BusinessExpenses,
   type BusinessFactValue,
-  type BusinessOtherExpense,
 } from "./business.js";
 import { placesPersonalProperty, type ScopedDepreciation } from "./depreciation.js";
+import { empowermentZoneFigures } from "./empowermentZone.js";
 import { statedRentalsOnReturn, type RentalFactValue } from "./rental.js";
 import { section179RecaptureByBusiness } from "./section179Recapture.js";
 import { workOpportunityCreditByActivity } from "./workOpportunity.js";
@@ -78,123 +78,157 @@ function withRecapture<T extends { key: string; value: BusinessFactValue }>(
 }
 
 /*
- * Schedule C line 26: "Enter the total salaries and wages for the tax year
- * reduced by the amount of the following credit(s) ... Work Opportunity Credit
- * (Form 5884)" (irs-1040sc-inst-2025::sec::line-26::b01): the stated wages
- * less the credit of the business's own targeted group employees (Form 5884
- * line 2, workOpportunity.ts), never below 0. Stated wages only: a business
- * that states none has nothing to reduce. A credit from a K-1 is not taken off
- * ("Do not reduce your deduction for any portion of a credit that was passed
- * through to you").
+ * One amount a credit takes off one business: a Schedule C expense line, or a
+ * Part V entry by its description (the first entry with it).
  */
-function withWorkOpportunityWages<T extends { key: string; value: BusinessFactValue }>(
-  businesses: T[],
-  facts: ReadonlyArray<FactRow>,
-): T[] {
-  const credits = workOpportunityCreditByActivity(facts);
-  if (credits.size === 0) return businesses;
-  return businesses.map((business) => {
-    const credit = credits.get(business.key);
-    const wages = business.value.expenses?.wages;
-    if (credit === undefined || wages === undefined) return business;
-    const expenses = { ...business.value.expenses, wages: atLeast(0, wages - credit) };
-    return { ...business, value: { ...business.value, expenses } };
-  });
+export type BusinessCreditReduction =
+  { line: keyof BusinessExpenses; amount: number } | { otherExpense: string; amount: number };
+
+type ReductionsByBusiness = ReadonlyMap<string, ReadonlyArray<BusinessCreditReduction>>;
+
+interface CreditReduction {
+  /* Each business's reductions, by fact key. */
+  reductionsOf: (facts: ReadonlyArray<FactRow>, joint: boolean) => ReductionsByBusiness;
+  /* Whether Schedule CA line 3 column B gives back what the credit took off (businessCreditAddBack). */
+  californiaAddsBack: boolean;
 }
 
-/* The wages withWorkOpportunityWages takes off the return's Schedule C businesses, in total (Schedule CA line 3). */
-export function workOpportunityWageReduction(
-  facts: ReadonlyArray<FactRow>,
-  joint: boolean,
-): number {
-  const credits = workOpportunityCreditByActivity(facts);
-  const reductions = statedBusinessesOnReturn(facts, joint).businesses.map(({ key, value }) => {
-    const wages = value.expenses?.wages;
-    return wages === undefined ? 0 : Math.min(atLeast(0, wages), credits.get(key) ?? 0);
-  });
-  return sum(...reductions);
-}
+/* A credit of each business that lowers one fixed expense line. */
+const onLine =
+  (
+    line: keyof BusinessExpenses,
+    creditOf: (facts: ReadonlyArray<FactRow>, joint: boolean) => ReadonlyMap<string, number>,
+  ) =>
+  (facts: ReadonlyArray<FactRow>, joint: boolean): ReductionsByBusiness =>
+    new Map([...creditOf(facts, joint)].map(([key, amount]) => [key, [{ line, amount }]]));
 
 /*
- * Form 8846 line 4 comes off the business's taxes: "Reduce your deduction by
- * the amount shown on Form 8846, line 4" (irs-1040sc-inst-2025::sec::line-23::b01).
- * The stated taxesAndLicenses hold the employer taxes before the credit.
+ * The credits of the taxpayer's own businesses that lower a Schedule C
+ * expense. A new credit form adds one entry. A credit from a K-1 is not here:
+ * "Do not reduce your deduction for any portion of a credit that was passed
+ * through to you from a pass-through entity" (irs-1040sc-inst-2025::sec::line-26::b01).
  */
-function withTipCredit<T extends { key: string; value: BusinessFactValue }>(
-  businesses: T[],
-  facts: ReadonlyArray<FactRow>,
-  joint: boolean,
-): T[] {
-  const reductions = tipCreditReductions(facts, joint);
-  if (reductions.size === 0) return businesses;
-  return businesses.map((business) => {
-    const reduction = reductions.get(business.key);
-    if (reduction === undefined) return business;
-    const expenses = business.value.expenses ?? {};
-    const taxesAndLicenses = (expenses.taxesAndLicenses ?? 0) - reduction;
-    return {
-      ...business,
-      value: { ...business.value, expenses: { ...expenses, taxesAndLicenses } },
-    };
-  });
+const BUSINESS_CREDIT_REDUCTIONS: ReadonlyArray<CreditReduction> = [
+  /*
+   * Line 26: "Enter the total salaries and wages for the tax year reduced by
+   * the amount of the following credit(s) ... Work Opportunity Credit (Form
+   * 5884). Empowerment Zone Employment Credit (Form 8844)" (line-26::b01): Form
+   * 5884 line 2 of the business's targeted group employees (workOpportunity.ts)
+   * and the business's share of Form 8844 line 2 (empowermentZone.ts).
+   * California gives both back (state/ca/schedule-ca/answerLines.ts).
+   */
+  {
+    reductionsOf: onLine("wages", (facts) => workOpportunityCreditByActivity(facts)),
+    californiaAddsBack: true,
+  },
+  {
+    reductionsOf: onLine(
+      "wages",
+      (facts, joint) => empowermentZoneFigures(facts, joint).creditByEmployer,
+    ),
+    californiaAddsBack: true,
+  },
+  /*
+   * Line 23: "Reduce your deduction by the amount shown on Form 8846, line 4"
+   * (irs-1040sc-inst-2025::sec::line-23::b01). The stated taxesAndLicenses hold
+   * the employer taxes before the credit. California's treatment is an open
+   * question (federal/8846/QUESTIONS.md).
+   */
+  { reductionsOf: onLine("taxesAndLicenses", tipCreditReductions), californiaAddsBack: false },
+  /*
+   * Form 8826 line 6 comes off the expense line or the Part V entry that holds
+   * the expenditures: "To the extent of the credit shown on line 6, the
+   * eligible access expenditures may not be claimed as a deduction in figuring
+   * taxable income" (irs-8826-form-2025::sec::line-6::b01). The fact names
+   * the line; its stated amount holds the expenditures before the credit.
+   */
+  { reductionsOf: disabledAccessReductions, californiaAddsBack: true },
+];
+
+type Business = { key: string; value: BusinessFactValue };
+
+/* The business less one reduction, never below 0, and the dollars it took; a line it does not state has nothing to lower. */
+function lessOne(value: BusinessFactValue, reduction: BusinessCreditReduction) {
+  if ("line" in reduction) {
+    const stated = value.expenses?.[reduction.line];
+    if (stated === undefined) return { value, taken: 0 };
+    const lowered = atLeast(0, stated - reduction.amount);
+    const expenses = { ...value.expenses, [reduction.line]: lowered };
+    return { value: { ...value, expenses }, taken: stated - lowered };
+  }
+  const entries = value.otherExpenses ?? [];
+  const at = entries.findIndex((entry) => entry.description === reduction.otherExpense);
+  if (at < 0) return { value, taken: 0 };
+  const lowered = atLeast(0, entries[at].amount - reduction.amount);
+  const otherExpenses = entries.map((entry, index) =>
+    index === at ? { ...entry, amount: lowered } : entry,
+  );
+  return { value: { ...value, otherExpenses }, taken: entries[at].amount - lowered };
 }
 
-/*
- * Form 8826 line 6 comes off the expense line that holds the expenditures:
- * "To the extent of the credit shown on line 6, the eligible access
- * expenditures may not be claimed as a deduction in figuring taxable income"
- * (irs-8826-form-2025::sec::line-6::b01). The fact names the line; its stated
- * amount holds the expenditures before the credit.
- */
-function withDisabledAccessCredit<T extends { key: string; value: BusinessFactValue }>(
-  businesses: T[],
-  facts: ReadonlyArray<FactRow>,
-  joint: boolean,
-): T[] {
-  const reductions = disabledAccessReductions(facts, joint);
-  if (reductions.size === 0) return businesses;
-  return businesses.map((business) => {
-    const lines = reductions.get(business.key);
-    if (lines === undefined) return business;
-    const expenses: BusinessExpenses = { ...business.value.expenses };
-    let otherExpenses = business.value.otherExpenses;
-    for (const { deductedOn, otherExpense, amount } of lines) {
-      if (deductedOn === "capitalized") continue;
-      if (deductedOn === "otherExpenses") {
-        otherExpenses = lessOnOtherExpense(otherExpenses ?? [], otherExpense, amount);
-        continue;
-      }
-      expenses[deductedOn] = atLeast(0, (expenses[deductedOn] ?? 0) - amount);
-    }
-    return { ...business, value: { ...business.value, expenses, otherExpenses } };
-  });
-}
-
-/* The Part V entries with the first one of the description lowered by the amount. */
-function lessOnOtherExpense(
-  entries: BusinessOtherExpense[],
-  description: string | undefined,
-  amount: number,
-): BusinessOtherExpense[] {
-  const at = entries.findIndex((entry) => entry.description === description);
-  return entries.map((entry, index) =>
-    index === at ? { ...entry, amount: atLeast(0, entry.amount - amount) } : entry,
+function lessAll<T extends Business>(
+  business: T,
+  reductions: ReadonlyArray<BusinessCreditReduction>,
+) {
+  return reductions.reduce(
+    (state, reduction) => {
+      if (reduction.amount === 0) return state;
+      const next = lessOne(state.business.value, reduction);
+      return {
+        business: { ...state.business, value: next.value },
+        taken: sum(state.taken, next.taken),
+      };
+    },
+    { business, taken: 0 },
   );
 }
 
 /*
+ * Each business with its stated expenses less the credits that lower them, in
+ * the list's order, and the dollars that the credits California gives back
+ * took off. The credits of one line add, and the line is never below 0, so no
+ * dollar of the line is taken off twice.
+ */
+function withCredits<T extends Business>(
+  businesses: T[],
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): { businesses: T[]; addBack: number } {
+  return BUSINESS_CREDIT_REDUCTIONS.reduce(
+    (state, { reductionsOf, californiaAddsBack }) => {
+      const byBusiness = reductionsOf(facts, joint);
+      if (byBusiness.size === 0) return state;
+      const lowered = state.businesses.map((business) =>
+        lessAll(business, byBusiness.get(business.key) ?? []),
+      );
+      const taken = californiaAddsBack ? sum(...lowered.map((each) => each.taken)) : 0;
+      return {
+        businesses: lowered.map((each) => each.business),
+        addBack: sum(state.addBack, taken),
+      };
+    },
+    { businesses, addBack: 0 },
+  );
+}
+
+/*
+ * The Schedule C expenses the federal credits that California gives back took
+ * off, in total over the return's businesses: what Schedule CA line 3 column B
+ * gives back (state/ca/schedule-ca/answerLines.ts).
+ */
+export function businessCreditAddBack(facts: ReadonlyArray<FactRow>, joint: boolean): number {
+  return withCredits(statedBusinessesOnReturn(facts, joint).businesses, facts, joint).addBack;
+}
+
+/*
  * statedBusinessesOnReturn, with the return's depreciation scope, its Form 4797
- * Part IV recapture, its wages less the work opportunity credit, its taxes
- * less the Form 8846 credit and the expense line of its disabled access
- * expenditures less the Form 8826 credit. Each credit subtracts from a stated
- * amount, so their order does not matter.
+ * Part IV recapture and its expenses less the credits that lower them.
  */
 export function businessesOnReturn(facts: ReadonlyArray<FactRow>, joint: boolean) {
   const result = statedBusinessesOnReturn(facts, joint);
   const shared = activitiesWithPersonalProperty(facts, joint) >= SHARED_TEST_MINIMUM;
   const businesses = withRecapture(marked(result.businesses, shared), facts);
-  const reduced = withTipCredit(withWorkOpportunityWages(businesses, facts), facts, joint);
-  return { ...result, businesses: withDisabledAccessCredit(reduced, facts, joint) };
+  return { ...result, businesses: withCredits(businesses, facts, joint).businesses };
 }
 
 /* statedRentalsOnReturn, with the return's depreciation scope. */

@@ -7,6 +7,7 @@
  * can call it.
  */
 
+import type { BusinessCreditReduction } from "../../facts/kinds/activitiesOnReturn.js";
 import { statedBusinessesOnReturn, type BusinessFactValue } from "../../facts/kinds/business.js";
 import {
   DISABLED_ACCESS_KEYS,
@@ -31,13 +32,6 @@ export interface DisabledAccessOfBusiness {
   otherExpense?: string;
   /* Its whole-dollar part of line 6; undefined while the form waits or has a gap. */
   share?: number;
-}
-
-/* One expense line's reduction: the line, the Part V entry when it is Part V, the dollars. */
-export interface DisabledAccessReduction {
-  deductedOn: DisabledAccessDeductedOn;
-  otherExpense?: string;
-  amount: number;
 }
 
 export interface DisabledAccessFigures {
@@ -187,24 +181,29 @@ export function disabledAccessFigures(
 export function disabledAccessReductions(
   facts: ReadonlyArray<FactRow>,
   joint: boolean,
-): Map<string, DisabledAccessReduction[]> {
+): Map<string, BusinessCreditReduction[]> {
   const figures = disabledAccessFigures(facts, joint);
-  const out = new Map<string, DisabledAccessReduction[]>();
+  const out = new Map<string, BusinessCreditReduction[]>();
   if (figures.lines === undefined) return out;
   for (const line of new Set(figures.credits.map(lineOf))) {
     const onLine = figures.credits.filter((credit) => lineOf(credit) === line);
     const { businessKey, deductedOn, otherExpense } = onLine[0];
     const amount = sum(...onLine.map((credit) => credit.share));
-    out.set(businessKey, [...(out.get(businessKey) ?? []), { deductedOn, otherExpense, amount }]);
+    const reduction = reductionOf(deductedOn, otherExpense, amount);
+    if (reduction) out.set(businessKey, [...(out.get(businessKey) ?? []), reduction]);
   }
   return out;
 }
 
-/* The total the reductions take off the return's Schedule C businesses (Schedule CA line 3). */
-export function disabledAccessReductionTotal(
-  facts: ReadonlyArray<FactRow>,
-  joint: boolean,
-): number {
-  const all = [...disabledAccessReductions(facts, joint).values()];
-  return sum(...all.flat().map((reduction) => reduction.amount));
+/* The reduction of one expense line; capitalized expenditures are a gap, so they have none. */
+function reductionOf(
+  deductedOn: DisabledAccessDeductedOn,
+  otherExpense: string | undefined,
+  amount: number,
+): BusinessCreditReduction | undefined {
+  if (deductedOn === "capitalized") return undefined;
+  if (deductedOn === "otherExpenses") {
+    return otherExpense === undefined ? undefined : { otherExpense, amount };
+  }
+  return { line: deductedOn, amount };
 }
