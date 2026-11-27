@@ -7,7 +7,9 @@
 import { describe, expect, it } from "vitest";
 import {
   FARM_INCOME_AVERAGING_KEY,
+  makeBusinessPropertySaleFactKey,
   makeFarmAveragingBaseYearFactKey,
+  type BusinessPropertySaleFactValue,
   type FarmAveragingBaseYearFactValue,
   type FarmIncomeAveragingFactValue,
 } from "../../../../src/facts/index.js";
@@ -152,6 +154,62 @@ describe("Schedule J lines on the adine return", () => {
     expect(run.isGap("schedule-j", "0.line.8_tax_on_line7_2022")).toBe(true);
     expect(run.isGap("schedule-j", "1.line.23_tax")).toBe(true);
     expect(run.isGap("form-1040", "line.16")).toBe(true);
+  });
+
+  /*
+   * A machine shed bought in 2015 for $40,000 with $9,000 of straight-line
+   * depreciation, sold for $40,000: a $9,000 gain, all unrecaptured section
+   * 1250 gain (Schedule D line 19). Form 1040 line 15 rises by $9,000 to
+   * 142,839; Schedule D lines 15 and 16 to $33,000.
+   */
+  function withShed(netCapitalGain: number) {
+    const election = valueOf(FARM_INCOME_AVERAGING_KEY) as FarmIncomeAveragingFactValue;
+    const sale = base.facts.find(
+      (fact) => fact.key === makeBusinessPropertySaleFactKey("breeding-cows"),
+    )!;
+    const shed: BusinessPropertySaleFactValue = {
+      description: "Machine shed",
+      kind: "section_1250",
+      dateAcquired: "2015-05-01",
+      dateSold: "2025-09-02",
+      grossSalesPrice: 40000,
+      costOrOtherBasis: 40000,
+      depreciationAllowed: 9000,
+    };
+    const shedRow = {
+      ...sale,
+      id: "f-shed",
+      key: makeBusinessPropertySaleFactKey("shed"),
+      value: shed,
+    };
+    const changed = { ...election, netCapitalGain, unrecapturedSection1250Gain: 9000 };
+    return evaluate([...factsWith({ [FARM_INCOME_AVERAGING_KEY]: changed }), shedRow]);
+  }
+
+  it("line 2c with all the gain elected: line 4 is the Tax Table on line 3", () => {
+    const run = withShed(33000);
+    expect(run.value("schedule-d", "1.line.19_unrecaptured_sec1250_gain")).toBe(9000);
+    expect(run.line("0.line.1_taxable_income_2025")).toBe(142839);
+    expect(run.line("0.line.2b_net_capital_gain_included")).toBe(33000);
+    expect(run.line("0.line.2c_unrecaptured_1250_gain")).toBe(9000);
+    expect(run.line("0.line.3_income_less_elected_farm")).toBe(42839);
+    // No gain left in 2025: the Tax Table row 42,800–42,850, 1,192.50 + 12% × (42,825 − 11,925).
+    expect(run.line("0.line.4_tax_on_line3_2025")).toBe(4901);
+  });
+
+  it("line 2c comes off Schedule D line 19 for line 4: the gain left keeps the 0% rate", () => {
+    const run = withShed(24000);
+    expect(run.line("0.line.2b_net_capital_gain_included")).toBe(24000);
+    expect(run.line("0.line.2c_unrecaptured_1250_gain")).toBe(9000);
+    expect(run.line("0.line.3_income_less_elected_farm")).toBe(42839);
+    /*
+     * $9,000 of gain left, none of it section 1250 gain: QDCG, ordinary 33,839 → 3,821
+     * (Tax Table), and 9,000 at 0% (below $48,350). With line 19 left at $9,000 the
+     * Schedule D Tax Worksheet would tax that gain at 25%, limited to the Tax Table on
+     * 42,839: 4,901.
+     */
+    expect(run.line("0.line.4_tax_on_line3_2025")).toBe(3821);
+    expect(run.isGap("schedule-j", "0.line.8_tax_on_line7_2022")).toBe(true);
   });
 
   it("base years from the 2024 Schedule J: its lines 11, 15 and 3, and 12, 16 and 4", () => {
