@@ -26,6 +26,17 @@ export const tipCreditFiguresOf = (inputs: ResolverInputs): TipCreditFigures =>
  * certain employee tips from partnerships and S corporations"
  * (irs-8846-form-2025::sec::face-page-1::b01): each K-1's code N in whole
  * dollars, as Form 3800 takes it (3800/k1Credits.ts). Undefined with none.
+ *
+ * DECISION (2026-11-27, by the author): each K-1 rounds before the add.
+ * Text A, the Form 1040 instructions: "If you have to add two or more amounts
+ * to figure the amount to enter on a line, include cents when adding the
+ * amounts and round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01).
+ * Text B, line 6: "report this amount on Form 3800, Part III, line 4f"
+ * (irs-8846-form-2025::sec::face-page-1::b01), where an aggregate "from more
+ * than one pass-through entity" is broken down "by the EIN of the pass-through
+ * entity ... in Part V" (irs-3800-inst-2025::sec::part-v-3::b01), one whole-dollar
+ * amount for each K-1. The engine follows text B, so line 6 equals Form 3800
+ * line 4f, the sum of its Part V amounts (docs/rule-decisions.md).
  */
 export function k1TipCreditsOf(inputs: ResolverInputs): K1TipCredits | undefined {
   const items = k1EntitiesWithRoute(inputs, "form_3800").filter(

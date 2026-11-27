@@ -7,14 +7,24 @@ import { describe, expect, it } from "vitest";
 import {
   makeBusinessFactKey,
   makeGeneralBusinessCreditFactKey,
+  makeK1HoldingFactKey,
+  makePartnershipK1FactKey,
   makeTipCreditFactKey,
   type BusinessFactValue,
+  type PartnershipK1FactValue,
   type TipCreditFactValue,
 } from "../../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../../src/facts/rows.js";
 import { evaluateScenario } from "../../../../src/index.js";
 import { decisionRow } from "../../../helpers/fixtureBuilders.js";
-import { SALON_ID, SALON_KEY, salon, salonTips } from "../../../scenarios/synthetic/natti/facts.js";
+import {
+  OYSTER_BAR_ID,
+  SALON_ID,
+  SALON_KEY,
+  oysterBarK1,
+  salon,
+  salonTips,
+} from "../../../scenarios/synthetic/natti/facts.js";
 import { nattiScenario as base } from "../../../scenarios/synthetic/natti/index.js";
 
 const TIPS_KEY = makeTipCreditFactKey(SALON_ID);
@@ -227,6 +237,36 @@ describe("Form 3800 column (d) or (e)", () => {
       factsWith({ [SALON_KEY]: { ...salon, materiallyParticipated: undefined } }),
     );
     expect(out.missing("form-3800")).toContain(SALON_KEY);
+  });
+});
+
+describe("line 5 with two K-1s that show cents", () => {
+  it("each K-1 rounds before the add, so line 6 equals Form 3800 line 4f (DECISION in resolveInfo.ts)", () => {
+    const secondId = "redwater-tavern";
+    const first: PartnershipK1FactValue = {
+      ...oysterBarK1,
+      boxes: [
+        { box: "1", amount: 12000 },
+        { box: "15", code: "N", amount: 600.4 },
+      ],
+    };
+    const second: PartnershipK1FactValue = {
+      ...oysterBarK1,
+      entityName: "Redwater Tavern LLC",
+      entityEin: "00-0018846",
+      boxes: [{ box: "15", code: "N", amount: 1200.4 }],
+    };
+    const holding = base.facts.find((fact) => fact.key === makeK1HoldingFactKey(OYSTER_BAR_ID));
+    const out = evaluate(
+      factsWith({ [makePartnershipK1FactKey(OYSTER_BAR_ID)]: first }, [
+        row("k1", makePartnershipK1FactKey(secondId), second),
+        row("k1", makeK1HoldingFactKey(secondId), holding?.value),
+      ]),
+    );
+    // $600 + $1,200, not $1,800.80 rounded to $1,801.
+    expect(out.line(L5)).toBe(1800);
+    expect(out.line(L6)).toBe(12686 + 1800);
+    expect(out.value("form-3800", COL_E)).toBe(12686 + 1800);
   });
 });
 

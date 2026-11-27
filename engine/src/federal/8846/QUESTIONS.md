@@ -12,12 +12,12 @@ The engine fills Form 8846 for an individual: a Schedule C business with tipped 
 | Line 3 | Stated rule |
 | Line 4 box | Stated rule (a stated answer) |
 | Line 4 | Published example with numbers without the box; stated rule with it (no example) |
-| Line 5 | Stated rule; rounding each K-1 is own reading (item 4) |
+| Line 5 | Stated rule; rounding each K-1 is a decision of the author (item 4) |
 | Line 6 | Stated rule |
 | Schedule C line 23 reduction | Stated rule |
 | Form 3800 line 4f | Stated rule; the split into one source per business and per K-1 is own reading (item 5) |
 
-No two texts conflict, so there is no `DECISION` comment.
+One decision has two texts that point different ways: the rounding of line 5 (item 4). It has a `DECISION` comment in `resolveInfo.ts` and row A96 in `docs/rule-decisions.md`.
 
 ## Doubts
 
@@ -42,8 +42,8 @@ No two texts conflict, so there is no `DECISION` comment.
 
 ### 4. Line 5 rounds each K-1
 
-- Source: line 5 is the credit "from partnerships and S corporations" (`face-page-1::b01`), with no rule for the cents.
-- Default: each K-1's code N amount is rounded to the dollar, then added, as Form 3800 rounds each K-1 source (`3800/k1Credits.ts`). Form 3800 line 4f then adds to Form 8846 line 6.
+- Source: line 5 is the credit "from partnerships and S corporations" (`face-page-1::b01`), with no rule for the cents. The Form 1040 instructions: "include cents when adding the amounts and round off only the total" (`irs-1040-inst-2025::sec::rounding-off-to-whole::b01`). Line 6 goes to Form 3800 line 4f, whose aggregate "from more than one pass-through entity" is broken down by each entity's EIN in Part V (`irs-3800-inst-2025::sec::part-v-3::b01`).
+- Decision: each K-1's code N amount is rounded to the dollar, then added, as Form 3800 rounds each K-1 source (`3800/k1Credits.ts`). Form 3800 line 4f then adds to Form 8846 line 6. The blind fill followed the 1040 rule instead: K-1s of $600.40 and $1,200.40 give line 5 of $1,801 (blind) or $1,800 (engine). The statute leaves the rounding to the forms and instructions (`usc-26-2025::sec::s6102::a`).
 - Changes dollars: at most $1 for each K-1 with cents.
 
 ### 5. Form 3800 takes the own credit and each K-1 as separate sources
@@ -74,6 +74,23 @@ No two texts conflict, so there is no `DECISION` comment.
 
 - Default: a credit from a Schedule C business the owner does not materially participate in is a passive activity credit. The engine does not figure a passive Schedule C business (its line 31 stays blank), so the Form 3800 source is a gap. Form 8846 itself still fills.
 - Changes dollars: no; the engine stops.
+
+### 10. A food business and a beauty business on one form
+
+- Source: the rate is set by the employer type: "Food or beverage employers ... $5.15 an hour"; "Beauty service employers ... $7.25 an hour" (`how-the-credit-is-figured::b01`). The instructions do not discuss a taxpayer with both.
+- Default: each business's employee months use its own rate (the tip credit fact's `kind`), and line 2 adds all of them. The blind fill made the same choice.
+- Changes dollars: yes, for an owner of both kinds of business: a month of 120 hours at $300 wages is $570 at $7.25 and $318 at $5.15.
+
+### 11. Cents in line 2 and line 4
+
+- Source: line 2 is figured "for each employee on a monthly basis" (`line-2::b01`); line 4 with the box: "multiply the difference by 0.0765. Then, multiply the tips subject only to the Medicare tax by 0.0145. Enter the sum of these amounts on line 4" (`line-4::b01`).
+- Default: line 2 keeps the cents of each month and rounds only the total; line 4 keeps the cents of both products and rounds the sum once (the 1040 rule, `irs-1040-inst-2025::sec::rounding-off-to-whole::b01`). The blind fill made the same choices.
+- Changes dollars: at most $1 on each line, against a reading that rounds each month or each product.
+
+## Second opinions
+
+- **PolicyEngine-US 2.154.1 (commit 0fbed6ddb1, 2026-11-26).** It has no Form 8846 or section 45B formula: `general_business_credit` is a bare input. Its constants agree with the engine: the 2025 social security wage base of $176,100 (`payroll/social_security/cap.yaml`), the employer rates 6.2% and 1.45% (`payroll/social_security/rate/employer.yaml`, `payroll/medicare/rate/employer.yaml`), which add to line 4's 7.65%. It has no $5.15 or $7.25 rate for this credit. No lead.
+- **IRS Direct File.** Not compared: it files no Schedule C business with employees and no Form 3800, so it has no Form 8846 logic.
 
 ## Proposals for a discussion
 
