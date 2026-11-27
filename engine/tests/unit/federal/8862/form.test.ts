@@ -219,6 +219,11 @@ describe("Form 8862 and the EIC", () => {
     expect(run.line("0.line.8_child_2_death_month")).toBe("11");
     expect(run.line("0.line.8_child_2_death_day")).toBe("20");
     expect(run.line("0.line.7_days_lived_in_us_child_2")).toBe(365);
+    // Schedule EIC face-page-1::b04: a child who died in 2025 enters "12", not the months alive.
+    expect(run.field("schedule-eic", "0.line.6_months_lived_in_us_child_2")).toMatchObject({
+      ok: true,
+      value: 12,
+    });
   });
 
   it("an EIC ban stops the EIC; the form still files for the other credits", () => {
