@@ -18,6 +18,20 @@ Form 7213 claims two credits for electricity a taxpayer's own nuclear facility p
 12. **Estates and trusts.** Lines 10, 11, 14 and 15 are for an estate or trust ("All others, stop here", face). The engine prepares an individual's return, so they stay blank. Line 14's instruction says "Allocate the credit on line 11", while the form's line 14 follows line 13; it does not matter for an individual.
 13. **Prohibited foreign entities.** No 45U credit for a specified foreign entity for tax years beginning after July 4, 2025 (`what-s-new::b01`). The engine does not ask: the rule is for entities, and the engine prepares an individual's return.
 
+## Blind fill
+
+A preparer filled 14 cases by hand from the blank form and the instructions only. The engine and the blind fill agree on cases 1 to 3, 5, 13 and 14, and on the blind preparer's choices for line 2 of a co-owner (row A111), a blank line 5 with no ZEC payments, and the K-1 credits (item 1). Two choices change dollars:
+
+- **Part I line 3 (case 4).** The blind fill multiplies line 4 by the exact ratio 1/3 (line 5b $18,000); the engine multiplies by the printed 33.33% ($17,998). No text sets the precision (item 3). The engine keeps its default, the rule of row A1.
+- **Part II line 7 (cases 6 to 12).** The blind fill uses the printed $0.025. The engine uses $0.026 (row A110). The engine is right: the instructions say "2.5 cents (adjusted for inflation)" (`credit-for-zero-emission-nuclear::b02`), section 45U(c)(1) adjusts it for the calendar year of the sale and rounds to 0.1 cent (`usc-26-2025::sec::s45u::c-1`), and Notice 2025-37 (Internal Revenue Bulletin 2025-30) gives the 2025 factor 1.0242, so 2.5605 cents rounds to 2.6 cents. The IRS page "Section 45U, zero-emission nuclear power production credit reduction amount rate has been updated by the inflation adjustment" says the form's $0.025 is the 2024 rate.
+
+One doubt follows from that page: it gives $0.026 for electricity "sold during the portion of calendar year 2025". A tax year that spans two calendar years would use two rates. The engine uses one rate, because an individual's tax year is the calendar year. **No dollars change** for an individual.
+
+## Second opinions
+
+- **PolicyEngine-US** (version 2.154.2, commit `c1fea42a38`): it does not model either credit. A search of `variables/gov/irs` and `parameters/gov/irs` for "nuclear", "45U" and "45J" finds nothing, so there is nothing to compare.
+- **IRS Direct File**: it handles no business credits, so it has no rule for this form.
+
 ## The statute
 
 The law library was read for row A110 (`usc-26-2025::sec::s45u::c-1`, which supports the $0.026) and row A111 (`usc-26-2025::sec::s45j::b-1`, silent on a co-owner's share). No instruction here disagrees with the statute, so there is no entry for `docs/law-findings.md`.
