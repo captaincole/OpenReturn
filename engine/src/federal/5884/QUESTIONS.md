@@ -24,7 +24,7 @@ No two official texts conflict, so there is no `DECISION` comment and no row in 
 ### 1. Which hours count
 
 - Source: "Qualified first-year wages of employees who worked for you at least 120 hours but fewer than 400 hours" (`irs-5884-face-2025::sec::face-page-1::b01`); "The amount of qualified wages for any employee is zero if: The employee didn't work for you for at least 120 hours" (`irs-5884-inst-2025::sec::qualified-wages::b01`).
-- Default: the fact states the hours the employee worked for the taxpayer, counted to the end of 2025. An employee hired late in 2025 who reaches 400 hours in 2026 is on line 1a this year.
+- Default: the fact states the hours the employee worked for the taxpayer, counted to the end of 2025. An employee hired late in 2025 who reaches 400 hours in 2026 is on line 1a this year. An employee hired in 2024 counts the hours of both years: the form names no period. The blind fill read it the same way (its case 8).
 - Changes dollars: yes, for such an employee (25% against 40%).
 
 ### 2. A wage limit over two tax years
@@ -87,6 +87,19 @@ No two official texts conflict, so there is no `DECISION` comment and no row in 
 ### 11. Rows and copies
 
 - Form 5884 has no rows: each line adds every employee's wages. Nothing repeats past a limit.
+
+### 12. Rounding of lines 1a to 1c
+
+- Source: the form and its instructions give no rounding rule.
+- Default: each line adds its employees' wages with cents and rounds the total once; the credit is that total times the rate, rounded to the nearest dollar (CLAUDE.md, whole-dollar rounding). Line 2 adds the rounded lines. The blind fill used the same method.
+- Changes dollars: $1 at most, against a preparer who multiplies before rounding.
+
+## Second opinions
+
+- **Blind fill (2026-11-27).** A blind preparer filled 14 cases from the blank form and irs-5884-inst-2025 only. Every line of every case matched the engine: no dollar difference and no blank-against-0 difference. Its doubts are items 1, 2, 5 and 12.
+- **PolicyEngine-US 2.154.1** (commit 0fbed6dd). It does not model the work opportunity credit: `general_business_credit` is a bare input with no formula, and no variable or parameter names the targeted groups, the wage limits or the rates. Nothing to compare.
+- **IRS Direct File.** It supports no business with employees and no Form 3800, so it has no Form 5884 logic to compare.
+- **The statute.** The law library (law.db) was not installed, so section 51 was not read.
 
 ## Proposals for a discussion
 
