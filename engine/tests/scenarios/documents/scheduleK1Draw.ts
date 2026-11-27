@@ -103,6 +103,7 @@ export interface K1Header {
   partIIITitle: [string, string];
   finalK1?: boolean;
   amendedK1?: boolean;
+  fiscalYear?: [string, string]; // a tax year that is not the calendar year: beginning, ending
 }
 
 export function drawK1Header(ctx: Ctx, header: K1Header) {
@@ -118,6 +119,8 @@ export function drawK1Header(ctx: Ctx, header: K1Header) {
   drawBox(ctx, X0 + 70, 94, 70, 12);
   drawText(ctx, "ending", X0 + 160, 98, { size: 6.5 });
   drawBox(ctx, X0 + 190, 94, 70, 12);
+  if (header.fiscalYear) drawText(ctx, header.fiscalYear[0], X0 + 74, 97, { size: 7 });
+  if (header.fiscalYear) drawText(ctx, header.fiscalYear[1], X0 + 194, 97, { size: 7 });
   drawText(ctx, header.title[0], X0, 112, { size: 11, bold: true });
   drawText(ctx, header.title[1], X0, 126, { size: 11, bold: true });
   drawTextRight(ctx, "See separate instructions.", X0 + LEFT_W, 130, { size: 6.5, bold: true });
