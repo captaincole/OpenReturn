@@ -18,6 +18,7 @@ import { roundDollars } from "../../money.js";
 import type { ResolverInputs } from "../../resolverInputs.js";
 import { figuredOnForm3468, form3468CreditSources } from "../3468/credit.js";
 import { workOpportunitySources } from "../5884/sources.js";
+import { researchCreditSources } from "../6765/form3800.js";
 import { tipCreditSourcesOf } from "../8846/form3800.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
 import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
@@ -202,12 +203,17 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
   // Line 4f: Form 8846 line 4, the credit on the taxpayer's own tipped employees (8846/form3800.ts).
   const tips = tipCreditSourcesOf(inputs);
   missing.push(...tips.missing);
+  // Line 1c or 4i: Form 6765 line 28, the taxpayer's own research (6765/form3800.ts).
+  const research = researchCreditSources(inputs);
+  missing.push(...research.sources.filter(missingResearch).map((source) => source.credit.key));
+  missing.push(...research.missing);
   const current = [
     ...stated,
     ...tips.sources,
     ...k1.flatMap((found) => (found.source ? [found.source] : [])),
     ...form3468.sources,
     ...workOpportunity.sources,
+    ...research.sources,
   ];
   const carryovers = getCreditCarryoverFacts(inputs.facts).map(carryoverOf);
   return { sources: { current, carryovers }, missing: [...new Set(missing)] };

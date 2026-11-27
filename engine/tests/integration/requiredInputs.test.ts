@@ -180,6 +180,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "its Medicare-only tips are missing",
   ],
   [
+    /^research_credit$/,
+    "the fact is the whole of the taxpayer's own research for Form 6765 (Sections A to G); " +
+      "whether the business did qualified research is Cade's question. Form 6765 asks for it when " +
+      "the decision files the form without one",
+  ],
+  [
     /^section_965\.(inclusion|other_liability|s_corporation|deferred)\.[^.]+$/,
     "each fact is one whole line of last year's Form 965-A (Part I with its Part II line, a " +
       "Part III row or a Part IV row); whether one exists is Cade's question. Form 965-A lists " +

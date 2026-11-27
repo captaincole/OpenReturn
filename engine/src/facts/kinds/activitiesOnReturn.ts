@@ -7,11 +7,15 @@
  * Form 4562 reports the test as a gap (federal/4562/lines.ts).
  */
 
+import { deductionReductionOf } from "../../federal/6765/figures.js";
+import { paidByCategory } from "../../federal/6765/qualifiedExpenses.js";
+import { placeReduction } from "../../federal/6765/reduction.js";
 import { tipCreditReductions } from "../../federal/8846/figures.js";
 import { atLeast, sum } from "../../money.js";
 import { statedBusinessesOnReturn, type BusinessFactValue } from "./business.js";
 import { placesPersonalProperty, type ScopedDepreciation } from "./depreciation.js";
 import { statedRentalsOnReturn, type RentalFactValue } from "./rental.js";
+import { readResearchCreditFact } from "./researchCredit.js";
 import { section179RecaptureByBusiness } from "./section179Recapture.js";
 import { workOpportunityCreditByActivity } from "./workOpportunity.js";
 
@@ -133,18 +137,68 @@ function withTipCredit<T extends { key: string; value: BusinessFactValue }>(
   });
 }
 
+type BusinessOnReturn = { key: string; value: BusinessFactValue };
+
+/* The research business's expenses less Form 6765 line 28; undefined with no reduction, the business when it is not on the return. */
+function researchPlacement(businesses: BusinessOnReturn[], facts: ReadonlyArray<FactRow>) {
+  const fact = readResearchCreditFact(facts).fact;
+  if (fact === undefined) return undefined;
+  const reduction = deductionReductionOf(fact.value);
+  if (reduction === undefined) return undefined;
+  const { businessKey, expenses, businessComponents } = fact.value;
+  const business = businesses.find((each) => each.key === businessKey);
+  if (business === undefined) return { businessKey, reduction, placed: undefined };
+  const paid = paidByCategory(expenses, businessComponents);
+  return {
+    businessKey,
+    reduction,
+    placed: placeReduction(business.value.expenses, reduction, paid),
+  };
+}
+
 /*
- * statedBusinessesOnReturn, with the return's depreciation scope, its Form 4797
- * Part IV recapture, its wages less the work opportunity credit and its taxes
- * less the Form 8846 credit. The two credits lower different expense lines, so
- * their order does not matter.
+ * Form 6765 without the reduced credit election: the research expenses the
+ * business deducts go down by line 28 (federal/6765/reduction.ts). A
+ * reduction that does not fit is a gap on line 28, and the lines stay as stated.
  */
-export function businessesOnReturn(facts: ReadonlyArray<FactRow>, joint: boolean) {
+function withResearchCredit<T extends BusinessOnReturn>(
+  businesses: T[],
+  facts: ReadonlyArray<FactRow>,
+): T[] {
+  const placement = researchPlacement(businesses, facts);
+  const placed = placement?.placed;
+  if (placed === undefined || placed.left > 0) return businesses;
+  return businesses.map((business) =>
+    business.key === placement?.businessKey
+      ? { ...business, value: { ...business.value, expenses: placed.expenses } }
+      : business,
+  );
+}
+
+/* The businesses before the research credit: the scope, the recapture and the work opportunity wages. */
+function beforeResearch(facts: ReadonlyArray<FactRow>, joint: boolean) {
   const result = statedBusinessesOnReturn(facts, joint);
   const shared = activitiesWithPersonalProperty(facts, joint) >= SHARED_TEST_MINIMUM;
   const businesses = withRecapture(marked(result.businesses, shared), facts);
-  const reduced = withWorkOpportunityWages(businesses, facts);
-  return { ...result, businesses: withTipCredit(reduced, facts, joint) };
+  return { result, reduced: withWorkOpportunityWages(businesses, facts) };
+}
+
+/* Form 6765 line 28's reduction on the research business, for the form's gap: undefined with no reduction. */
+export function researchCreditPlacement(facts: ReadonlyArray<FactRow>, joint: boolean) {
+  return researchPlacement(beforeResearch(facts, joint).reduced, facts);
+}
+
+/*
+ * statedBusinessesOnReturn, with the return's depreciation scope, its Form 4797
+ * Part IV recapture, its wages less the work opportunity credit, its taxes
+ * less the Form 8846 credit and its research expenses less the Form 6765
+ * credit. The work opportunity credit comes off the wages first, so the
+ * research credit takes what is left of them.
+ */
+export function businessesOnReturn(facts: ReadonlyArray<FactRow>, joint: boolean) {
+  const { result, reduced } = beforeResearch(facts, joint);
+  const withTips = withTipCredit(reduced, facts, joint);
+  return { ...result, businesses: withResearchCredit(withTips, facts) };
 }
 
 /* statedRentalsOnReturn, with the return's depreciation scope. */
