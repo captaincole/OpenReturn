@@ -89,10 +89,14 @@ export function partIReturnAmounts(form: ReturnAccessor): PartIReturnAmounts | u
   };
 }
 
-/* Why Part I cannot be figured, or undefined. */
-export function partIGap(form: ReturnAccessor, info: Form1040FilingInfo): string | undefined {
+/*
+ * Why Part I cannot be figured, or undefined. Form 2210-F reads the same lines
+ * (its lines 1, 2, 4 and 8 list the same amounts; irs-2210f-inst-2025::sec::line-2::b01,
+ * line-4::b01, line-8::b01), so it reads the same gaps.
+ */
+export function partIGap(form: ReturnAccessor): string | undefined {
   if (LINE_3_UNNAMED_PAYMENTS.some((id) => hasAmount(form, id))) {
-    return "Schedule 3 line 13a, 13c, 13d or 13z has an amount, and the Form 2210 line 3 instructions do not say whether it counts as a refundable credit.";
+    return "Schedule 3 line 13a, 13c, 13d or 13z has an amount, and the Form 2210 line 3 (Form 2210-F line 4) instructions do not say whether it counts as a refundable credit.";
   }
   /*
    * Line 2 includes household employment taxes (irs-2210-inst-2025::sec::line-2::b01),
@@ -100,11 +104,7 @@ export function partIGap(form: ReturnAccessor, info: Form1040FilingInfo): string
    * modeled), so the amount is not known. Form 1040 line 24 is blank then too.
    */
   if (form["schedule-h.0.line.9_yes"] === true) {
-    return "Schedule H line 9 is Yes: the engine does not figure FUTA tax (Schedule H Part II), so the household employment taxes on Form 2210 line 2 (irs-2210-inst-2025::sec::line-2::b01) are not known.";
-  }
-  const farming = ["schedule-f", "form-4835"].some((id) => info.mustFile?.[id]?.value === true);
-  if (farming) {
-    return "Farm income is on the return: a filer whose gross income is at least two-thirds from farming or fishing uses 66 2/3% and Form 2210-F (irs-2210-inst-2025::sec::who-must-pay-the-underpayment::b01), and the engine does not figure that share.";
+    return "Schedule H line 9 is Yes: the engine does not figure FUTA tax (Schedule H Part II), so the household employment taxes on Form 2210 (or Form 2210-F) line 2 (irs-2210-inst-2025::sec::line-2::b01) are not known.";
   }
   return undefined;
 }
