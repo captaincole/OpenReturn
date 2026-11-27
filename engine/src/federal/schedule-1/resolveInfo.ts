@@ -86,6 +86,12 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     answers.whistleblowerAwardFees,
     answers.iraContributions,
   ].some((amount) => (amount ?? 0) > 0);
+  /*
+   * A line 8z item below 0 files the schedule too: a treaty exemption of
+   * income on an information return goes "in parentheses, on Schedule 1
+   * (Form 1040), line 8z" (irs-pub-519-2025::sec::general-rule-for-resident-aliens::b02).
+   */
+  const exemptIncome = (answers.otherIncomeItems ?? []).some((item) => item.amount < 0);
   const educatorExpenses = educatorExpenseDeduction(inputs, jointReturn);
   const savingsPenalty = earlyWithdrawalPenalty(inputs);
   const studentLoan = resolveStudentLoanInterest(inputs);
@@ -115,6 +121,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
           (savingsPenalty ?? 0) > 0 ||
           (studentLoanInterest ?? 0) > 0,
       },
+      { rule: "fallback: a line 8z item below 0 (exempt income)", value: exemptIncome },
       moving.fallback,
       employeeBusinessExpensesFallback(inputs),
       {

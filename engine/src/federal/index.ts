@@ -1105,6 +1105,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8833",
     relativeDir: "federal/8833",
     register: registerForm8833,
+    // One Form 8833 for each treaty-based return position (federal/8833/filingInfo.ts).
+    copies: {
+      count: (info) => Math.max(1, info?.form8833Positions?.length ?? 1),
+      select: (info, index) => info && { ...info, form8833CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-8862",
