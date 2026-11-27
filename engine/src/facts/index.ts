@@ -124,6 +124,7 @@ export * from "./kinds/taxCreditBond.js";
 export * from "./kinds/tips.js";
 export * from "./kinds/trade.js";
 export * from "./kinds/traditionalIra.js";
+export * from "./kinds/treatyPosition.js";
 export * from "./kinds/trustAccumulationDistribution.js";
 export * from "./kinds/uncollectedWages.js";
 export * from "./kinds/wages.js";
