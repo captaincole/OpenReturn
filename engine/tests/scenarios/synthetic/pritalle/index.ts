@@ -14,7 +14,14 @@ import { pritalleExpected } from "./expected.js";
 import { PRITALLE_TAX_YEAR, PRITALLE_USER_ID, pritalleFacts } from "./facts.js";
 
 /* Every form the engine files for these facts, upstreams first. */
-const FORM_IDS = ["form-8949", "schedule-d", "form-1040", "schedule-ca-540nr", "form-540nr"];
+const FORM_IDS = [
+  "form-8949",
+  "schedule-d",
+  "form-1040",
+  "schedule-d-540nr",
+  "schedule-ca-540nr",
+  "form-540nr",
+];
 
 export const pritalleScenario: Scenario = {
   name: "pritalle",

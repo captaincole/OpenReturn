@@ -83,6 +83,24 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "form-1040.line.37": 5377,
     },
   },
+  "schedule-d-540nr": {
+    engineFields: {
+      // Line 1a. (b) Sales price.
+      "schedule-d-540nr.0.line.1a.sales_price": 21500,
+      // Line 1a. (c) Cost or other basis.
+      "schedule-d-540nr.0.line.1a.cost_basis": 9500,
+      // Line 1a. (e) Gain. If (b) is more than (c), subtract (c) from (b).
+      "schedule-d-540nr.0.line.1a.gain": 12000,
+      // Line 4. Total 2025 gains from all sources. Add column (e) amounts of line 1, line 2, and l
+      "schedule-d-540nr.0.line.4": 12000,
+      // Line 8. Net gain or loss. Combine line 4 and line 7. If a loss, go to line 9. If a gain, g
+      "schedule-d-540nr.0.line.8": 12000,
+      // Line 10. Enter the gain or (loss) from federal Form 1040 or 1040-SR, line 7a.
+      "schedule-d-540nr.0.line.10": 12000,
+      // Line 11. Enter the California gain from line 8 or (loss) from line 9.
+      "schedule-d-540nr.0.line.11": 12000,
+    },
+  },
   "schedule-ca-540nr": {
     engineFields: {
       // Line 6 . The number of days I spent in California for any purpose was. Yourself: Enter the

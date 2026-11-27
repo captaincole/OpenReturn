@@ -4,6 +4,7 @@
  */
 
 import { defineForm, type FormAccessor, type FormSpec } from "../../../defineForm.js";
+import { namesOnReturn } from "../../../federal/returnNames.js";
 import { numberOrBlank } from "../../../money.js";
 import { unsupported } from "../../../types.js";
 import { federalCapitalGain, line1Cells } from "../schedule-d-ca/bindings.js";
@@ -57,10 +58,8 @@ const line12 = (pick: "line12a" | "line12b") => (form: Form, info: Info) => {
 };
 
 const BINDINGS: Bindings = {
-  "0.header.name": (_, info) =>
-    info.scheduleD540NRFigures && info.taxpayerFirstName && info.taxpayerLastName
-      ? `${info.taxpayerFirstName} ${info.taxpayerLastName}`
-      : undefined,
+  // "Name(s) as shown on return": both spouses on a joint return.
+  "0.header.name": (_, info) => (info.scheduleD540NRFigures ? namesOnReturn(info) : undefined),
   "0.header.ssn": (_, info) => (info.scheduleD540NRFigures ? info.taxpayerSSN : undefined),
   ...(line1Cells<Info>(ROW_PAGES, (info) => info.scheduleD540NRFigures?.line1) as Bindings),
   "0.line.2.loss": line2,

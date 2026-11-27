@@ -2,7 +2,7 @@
 
 Pritalle Moradin is single. She lived in Sacramento until June 30, 2025, then moved to Austin, Texas for good. Every name and amount here is made up. There is no outside source and no answer key: the expected values are the engine's output, checked by hand against the instructions, then locked (`verification: "unverified"`).
 
-She states that she is a part-year resident (`decisions.scope.ca_residency` = `part_year`). The engine does not test residency. She files Form 540NR and Schedule CA (540NR), not Form 540. She states the California amount of each income line (Schedule CA (540NR) column E): what she received while a resident.
+She states that she is a part-year resident (`decisions.scope.ca_residency` = `part_year`). The engine does not test residency. She files Form 540NR, Schedule CA (540NR) and Schedule D (540NR), not Form 540. Schedule D (540NR) files because she has a capital gain; with no California difference, its lines 12a and 12b are blank. She states the California amount of each income line (Schedule CA (540NR) column E): what she received while a resident.
 
 The scenario covers Schedule CA (540NR) Part I (the move out, the days, the prior residency), Part II columns A, D and E with three lines, Part IV, and Form 540NR lines 7 to 40, 42, 63, 74, 81, 82, 88, 91, 92 and 104 to 124. `rianna` covers a full-year nonresident.
 
@@ -26,7 +26,10 @@ The scenario covers Schedule CA (540NR) Part I (the move out, the days, the prio
 | Sch CA (540NR) line 1a A, D / E | W-2 box 1 / stated | 116,000 / 64,000 |
 | line 2b A, D / E | 1099-INT / stated | 1,400 / 650 |
 | line 7a A, D / E | Schedule D line 16 / stated | 12,000 / 12,000 |
-| line 7a columns B and C | Schedule D (540NR) lines 12a and 12b: no California difference | blank |
+| Sch D (540NR) lines 1a, 4, 8, 11 | 21,500 − 9,500, no California basis difference | 12,000 |
+| Sch D (540NR) line 10 | 1040 line 7a | 12,000 |
+| Sch D (540NR) lines 12a and 12b | line 10 equals line 11 | blank |
+| line 7a columns B and C | Schedule D (540NR) lines 12a and 12b | blank |
 | lines 10 and 27, D / E | 116,000 + 1,400 + 12,000 / 64,000 + 650 + 12,000 | 129,400 / 76,650 |
 | Part III line 30 | standard deduction, single | 5,706 |
 | Part IV line 3 | 76,650 ÷ 129,400 = .59235 | .5923 |

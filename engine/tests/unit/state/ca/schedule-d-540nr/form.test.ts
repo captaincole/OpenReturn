@@ -10,6 +10,7 @@ import {
   CA_CAPITAL_LOSS_CARRYOVER_KEY,
   CA_RESIDENCY_FACT_KEYS,
   SECTION_1231_KEYS,
+  SPOUSE_KEYS,
   caCaliforniaAmountKey,
   makeSection1256StatementFactKey,
 } from "../../../../../src/facts/index.js";
@@ -113,6 +114,20 @@ describe("Schedule D (540NR) on the nildra return", () => {
     expect(run.value(CA, "0.line.7a_additions")).toBeUndefined();
     expect(run.value(CA, "0.line.7a_total_ca_law")).toBe(-3000);
     expect(run.value("form-540nr", "1.line.14_ca_adjustments_subtractions")).toBe(3700);
+  });
+
+  it("names both spouses in the header on a joint return", () => {
+    const spouse = [
+      numberFact("identity", SPOUSE_KEYS.firstName, "Torvald"),
+      numberFact("identity", SPOUSE_KEYS.lastName, "Venhollow"),
+      numberFact("identity", SPOUSE_KEYS.occupation, "Pilot"),
+    ];
+    const joint = evaluate(
+      [...base.facts, ...spouse],
+      [decision("decisions.scope.filing_status", "married_filing_jointly")],
+    );
+    expect(run.value(SD, "0.header.name")).toBe("Nildra Venhollow");
+    expect(joint.value(SD, "0.header.name")).toBe("Nildra Venhollow & Torvald Venhollow");
   });
 
   it("prints line 2 blank: no Schedule K-1 on the return", () => {
