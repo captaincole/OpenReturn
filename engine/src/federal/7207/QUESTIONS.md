@@ -80,21 +80,61 @@ the text, the default the engine applies, and whether it changes dollars.
     elective payment is a gap on Form 3800 line 1b (`credit-transfers::b01`).
 15. **Part III holds 49 vessels.** More need "additional Parts III"; the
     engine prints one, so the total is a gap.
+16. **Cents on Part III, Part IV and line 4a.** Neither the form nor the
+    instructions say how to round a sales price or a cost with cents. The
+    engine rounds each entry to the dollar when it prints it, and the totals
+    (Part III total, Part IV line 74) add the printed entries: "Total costs.
+    Enter here and on Part II, line 6a, column (d)" is arithmetic on lines.
+    Keeping the cents and rounding only the total can differ by $1 on the
+    total (costs of $250,000.25, $410,000 and $90,000.49 give 750,000, not
+    750,001) and by up to 10 cents before column (e) rounds. The blind fill
+    made the same choice.
+17. **Line 6b for a fiscal year.** Item 4 holds for a calendar year. A fiscal
+    year that begins after July 4, 2025 could report metallurgical coal, but
+    a 2025 individual return here is a calendar year, so no input is asked.
+    The blind fill entered coal costs on line 6b with the 2.5% rate; the
+    effective date in `what-s-new::b01` ("For tax years beginning after July
+    4, 2025, metallurgical coal is included as an applicable critical
+    mineral") rules that out for a year that began January 1, 2025.
 
 ## Confidence by field group
 
-| Field group | Confidence |
-| --- | --- |
-| Lines 1a, 1e, 2b, 3a, 5a, column (d) and (e) | published example with numbers |
-| Lines 1b to 1d, 1f, 1g, 2c to 2f, 3b to 3f, 5b, 5c | stated rule (same arithmetic as the examples) |
-| Line 2a and Part III | stated rule (`line-2::b01`) |
-| Line 4a, line 6a and Part IV | stated rule (`line-4-2::b01`, `other-minerals::b01`) |
-| Battery limits on lines 5a to 5c | stated rule; line 5c by decision |
-| Line 6b, lines 8b and 8c | stated rule: blank for a 2025 individual |
-| Line 7 | stated rule (`line-7::b01`); a trust K-1 is unsupported |
-| Line 8a | stated rule (face) |
-| Part I lines 1 to 6 | stated rule |
-| Header | stated rule |
+| Field group                                        | Confidence                                              |
+| -------------------------------------------------- | ------------------------------------------------------- |
+| Lines 1a, 1e, 2b, 3a, 5a, column (d) and (e)       | published example with numbers                          |
+| Lines 1b to 1d, 1f, 1g, 2c to 2f, 3b to 3f, 5b, 5c | stated rule (same arithmetic as the examples)           |
+| Line 2a and Part III                               | stated rule (`line-2::b01`)                             |
+| Line 4a, line 6a and Part IV                       | stated rule (`line-4-2::b01`, `other-minerals::b01`)    |
+| Battery limits on lines 5a to 5c                   | stated rule; line 5c by decision                        |
+| Line 6b, lines 8b and 8c                           | stated rule: blank for a 2025 individual                |
+| Line 7                                             | stated rule (`line-7::b01`); a trust K-1 is unsupported |
+| Line 8a                                            | stated rule (face)                                      |
+| Part I lines 1 to 6                                | stated rule                                             |
+| Header                                             | stated rule                                             |
+
+## Blind fill (2026-11-27)
+
+A preparer filled 14 cases by hand from the blank form and the instructions.
+Three cases differ in dollars; the engine stays as it is in each.
+
+- **Case 9, Part IV line 74.** Blind 740,000, engine 750,000. The entries are
+  250,000 + 410,000 + 90,000 = 750,000; the blind total is an addition slip,
+  and its line 6a and 8a follow from it.
+- **Case 12, line 5c.** Blind 9,600 kWh (no limit for a module with no cells),
+  engine 4,800 kWh (100:1 limit). Decided above (row A110). The statute
+  supports the engine: "the capacity determined under either subparagraph with
+  respect to a battery cell or battery module shall not exceed a
+  capacity-to-power ratio of 100:1" (`usc-26-2025::sec::s45x::b-4`), and the
+  regulation says the same (`cfr-26-2025::sec::s1.45x-3::e-5`).
+- **Case 13, line 6b.** Blind $12,500 of coal credit, engine blank. Item 17.
+
+## Second opinions
+
+- **PolicyEngine-US 2.154.2** (commit `c1fea42a`): it does not model the
+  section 45X credit, Form 7207 or Form 3800, so it has no constant or formula
+  to compare.
+- No other reference implementation that the repository names models Form
+  7207 (IRS Direct File has no business credits).
 
 ## Proposals for a discussion
 
