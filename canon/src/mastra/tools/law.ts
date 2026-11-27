@@ -24,7 +24,7 @@ const WHEN_TO_USE =
  * of January 2026.
  */
 const CALIFORNIA =
-  'California: source "california" is the California Revenue and Taxation Code, Division 2, Part 10 (Personal Income Tax, §§ 17001–18181) and Part 10.2 (administration: penalties, estimated tax, withholding, §§ 18401–19802). It is searched only when you name it (source "california", or jurisdictions with "CA"): a search with neither never returns California. Name California\'s code in a citation: "CA 17041(a)" or "Cal. Rev. & Tax. Code § 17024.5"; a bare number is the Internal Revenue Code. California adopts the Internal Revenue Code as of a fixed date, with its own changes: § 17024.5(a)(1) sets January 1, 2025 for taxable years beginning on or after January 1, 2025, and many sections of Part 10 change or refuse a federal rule. The library\'s federal text is the Code as of January 2026, so a federal rule enacted after California\'s date may not be California law: read the California section that adopts or changes it, and cite both.';
+  'California: source "california" is the California Revenue and Taxation Code, Division 2, Part 10 (Personal Income Tax, §§ 17001–18181) and Part 10.2 (administration: penalties, estimated tax, withholding, §§ 18401–19802), and from Part 11 (Corporation Tax Law) only Chapter 17 (Allocation of Income, §§ 25101–25141: how business income is divided between California and other states, the sales factor of § 25128.7, the sourcing of sales in §§ 25135–25136). The other chapters of Part 11 are not in the library. It is searched only when you name it (source "california", or jurisdictions with "CA"): a search with neither never returns California. Name California\'s code in a citation: "CA 17041(a)" or "Cal. Rev. & Tax. Code § 17024.5"; a bare number is the Internal Revenue Code. California adopts the Internal Revenue Code as of a fixed date, with its own changes: § 17024.5(a)(1) sets January 1, 2025 for taxable years beginning on or after January 1, 2025, and many sections of Part 10 change or refuse a federal rule. The library\'s federal text is the Code as of January 2026, so a federal rule enacted after California\'s date may not be California law: read the California section that adopts or changes it, and cite both.';
 
 const notInstalled = z.object({ installed: z.literal(false), message: z.string() });
 
@@ -40,7 +40,7 @@ const lawHitSchema = z.object({
 
 export const searchLawTool = createTool({
   id: "search-law",
-  description: `Search the Internal Revenue Code and the Treasury regulations, or California's personal income tax law. ${WHEN_TO_USE} ${CALIFORNIA} Each hit names its source and citation ("26 U.S.C. § 469(h)(2)", "26 CFR § 1.469-5T(a)(1)", "Cal. Rev. & Tax. Code § 17041(a)"); read the whole subdivision with readLaw.`,
+  description: `Search the Internal Revenue Code and the Treasury regulations, or California's personal income tax law and its apportionment rules. ${WHEN_TO_USE} ${CALIFORNIA} Each hit names its source and citation ("26 U.S.C. § 469(h)(2)", "26 CFR § 1.469-5T(a)(1)", "Cal. Rev. & Tax. Code § 17041(a)"); read the whole subdivision with readLaw.`,
   inputSchema: z.object({
     query: z.string().describe("The rule in the law's words, taken from the instructions."),
     source: z

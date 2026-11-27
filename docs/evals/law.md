@@ -80,13 +80,13 @@ No misses.
 
 Not reviewed by a person yet: agents wrote and checked these cases. Use the scores for development only.
 
-Questions about California's personal income tax law, in `canon/evals/law/caCases.json`, searched on California's code only (source "california"): searchLaw returns California only when a caller names it. The sections are sections of the Revenue and Taxation Code ("CA 17041").
+Questions about California's personal income tax law and its apportionment rules (Part 11 Chapter 17), in `canon/evals/law/caCases.json`, searched on California's code only (source "california"): searchLaw returns California only when a caller names it. The sections are sections of the Revenue and Taxation Code ("CA 17041").
 
 | Mode | Section hit | Path hit |
 | --- | --- | --- |
-| hybrid | 18/18 (100%) | 15/16 (94%) |
-| fts | 18/18 (100%) | 16/16 (100%) |
-| vector | 18/18 (100%) | 15/16 (94%) |
+| hybrid | 23/23 (100%) | 17/18 (94%) |
+| fts | 23/23 (100%) | 18/18 (100%) |
+| vector | 23/23 (100%) | 17/18 (94%) |
 
 ### Misses
 

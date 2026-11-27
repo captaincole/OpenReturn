@@ -173,5 +173,53 @@
     "expect": ["CA 17062"],
     "expectPath": "CA 17062(a)",
     "source": "topic: alternative minimum tax"
+  },
+  {
+    "id": "ca-services-market-sourcing",
+    "question": "My consulting business is outside California, but some of my clients are in California. When does California count my fees as California sales?",
+    "queries": [
+      "sales from services are in this state to the extent the purchaser of the service received the benefit of the services in this state"
+    ],
+    "expect": ["CA 25136"],
+    "expectPath": "CA 25136(a)",
+    "source": "topic: apportionment, market-based sourcing of sales of services"
+  },
+  {
+    "id": "ca-single-sales-factor",
+    "question": "My business operates in California and in other states. How much of its income does California tax?",
+    "queries": [
+      "business income of an apportioning trade or business shall be apportioned to this state by multiplying the business income by the sales factor"
+    ],
+    "expect": ["CA 25128.7"],
+    "source": "topic: apportionment, single sales factor formula"
+  },
+  {
+    "id": "ca-business-income-definition",
+    "question": "Which income of my business is apportioned between the states, and which is assigned to one state?",
+    "queries": [
+      "business income means income arising from transactions and activity in the regular course of the taxpayer's trade or business",
+      "nonbusiness income means all income other than business income"
+    ],
+    "expect": ["CA 25120"],
+    "expectPath": "CA 25120(a)",
+    "source": "topic: apportionment, business and nonbusiness income"
+  },
+  {
+    "id": "ca-nonbusiness-income-allocation",
+    "question": "My business earned interest and dividends that are not part of its regular operations. Which state taxes them?",
+    "queries": [
+      "nonbusiness income interest and dividends allocable to this state if the taxpayer's commercial domicile is in this state"
+    ],
+    "expect": ["CA 25126", "CA 25123"],
+    "source": "topic: apportionment, allocation of nonbusiness income"
+  },
+  {
+    "id": "ca-combined-report",
+    "question": "I own two companies that run as one business in several states. Can California treat them as one taxpayer?",
+    "queries": [
+      "persons owned or controlled by the same interests filing of a combined report as though the combined entire net income was that of one person"
+    ],
+    "expect": ["CA 25102"],
+    "source": "topic: apportionment, combined report of a unitary business"
   }
 ]
