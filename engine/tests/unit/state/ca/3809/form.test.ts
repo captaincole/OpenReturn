@@ -196,7 +196,8 @@ describe("FTB 3809 branches", () => {
       items: [{ line: "schedule_c", description: "Loss", amount: -8000 }],
     };
     const run = evaluate(withTta({ [CA_TTA_KEYS.businessIncome]: loss }));
-    expect(run.scheduleZ("1_trade_or_business_income")).toBe(-8000);
+    // A negative line 14 is no TTA business income (::located-within-and-outside-the-former-tta-and-california::b02).
+    expect(run.scheduleZ("1_trade_or_business_income")).toBe(0);
     expect(run.scheduleZ("7_tta_business_income_limitation")).toBe(0);
     expect(run.side1("line.1c_total_credit_carryover")).toBe(0);
     expect(run.side1("line.3b_nol_deduction_current_year")).toBe(0);

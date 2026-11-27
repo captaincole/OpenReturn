@@ -24,6 +24,18 @@ Source: `ca-3809-booklet-2025`. Two choices with conflicting texts are decisions
 
 10. **Section B order with the other zone forms.** FTB 3805Z (enterprise zone, also Section B2) and FTB 3807 (Section A2) have no rules yet. When they do, decision A78's general rule decides where code 176 goes next to code 210.
 
+11. **Employee business expenses on Worksheet I, Section B, line 2.** The line says only "Employee business expenses". The Anderson example applies the time share to the Schedule A amount with no 2% floor (`::corporations-and-s-corporations::b02`). Default: the fact holds the amount as stated, and the engine applies the share to it. Changes dollars if the amount should be the part above the floor.
+
+12. **Tax table or rate schedule on Schedule Z line 6a.** "Use the tax table or tax rate schedule in your tax booklet" (`::individuals::b01`). Default: the Form 540 rule, the tax table up to $100,000 and the rate schedule above (`caTaxOnTaxableIncome`). Changes up to a few dollars below $100,000 against a fill that uses the rate schedule for every amount.
+
+13. **A negative Worksheet I, Section B, line 14.** The line 14 instruction sends the amount to Schedule Z only when it "is a positive amount", and "If the amount is negative, you do not have any business income attributable to the former TTA" (`::located-within-and-outside-the-former-tta-and-california::b02`). Default: Schedule Z lines 1, 3 and 5 are 0, as Worksheet II line 7 is. The blind fill found this (case 9: the engine printed -$20,000 on lines 1 and 5); the fix changes no credit, because line 7 is 0 either way.
+
+## Second opinions
+
+- **PolicyEngine-US 2.154.1** (commit 0fbed6ddb1, 2026-11-26), `variables/gov/states/ca` and `parameters/gov/states/ca`: no variable or parameter for the Targeted Tax Area, FTB 3809 or the zone credits. Nothing to compare.
+- **IRS Direct File**: federal only; it has no California form. Nothing to compare.
+- **Blind fill** (14 cases, from the blank form and the booklet): one dollar difference (item 13, fixed). Every other difference is blank against 0 on a line with no carryover.
+
 ## Proposals for a discussion
 
 1. **More than one TTA business.** "Attach a separate form FTB 3809 for each business you operate or invest in" (`::how-to-claim-deductions-and-credit-carryovers::b01`). The engine holds one business: the facts are single keys. A second business needs repeating copies of the form (issue #174) and one credit line that adds the copies.
@@ -41,7 +53,7 @@ Source: `ca-3809-booklet-2025`. Two choices with conflicting texts are decisions
 | Header, items A to D | stated rule |
 | Items E to H | stated rule (own reading: from the fact, item 8) |
 | Line 2 (Worksheet I, Section A) | published example with numbers (`::corporations-filing-a-combined-report::b03`) |
-| Schedule Z line 1, 3 (Worksheet I, Section B) | published example with numbers (`::corporations-and-s-corporations::b02`, `::part-ii-pass-through-income-or-loss::b02`) |
+| Schedule Z line 1, 3 (Worksheet I, Section B) | published example with numbers (`::corporations-and-s-corporations::b02`, `::part-ii-pass-through-income-or-loss::b02`); never below 0 (item 13) |
 | Schedule Z line 2, column (c) of lines 8B and 9B | stated rule (blank for an individual) |
 | Schedule Z line 4, lines 3a to 3c (Worksheet II) | published example with numbers (`::example-2::b01`) |
 | Schedule Z lines 5 to 7 | stated rule; line 6a own reading (item 6) |

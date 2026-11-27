@@ -146,7 +146,11 @@ export interface ScheduleZPartI {
 /*
  * Schedule Z, Part I, for an individual. Line 1 and line 3 are Worksheet I,
  * Section B, line 14 ("Individuals: Enter the amount ... on this line and on
- * line 3 (skip line 2)", the form). Line 4 is the TTA NOL deduction; line 5,
+ * line 3 (skip line 2)", the form). Line 14 goes there only when it "is a
+ * positive amount"; "If the amount is negative, you do not have any business
+ * income attributable to the former TTA"
+ * (ca-3809-booklet-2025::sec::located-within-and-outside-the-former-tta-and-california::b02),
+ * so lines 1 and 3 are never below 0, as Worksheet II line 7 is not. Line 4 is the TTA NOL deduction; line 5,
  * line 3 less line 4. Line 6a: "Compute the tax as if the former TTA taxable
  * income represented all of your taxable income"
  * (ca-3809-booklet-2025::sec::part-i-computation-of-credit-limitations::b02), with
@@ -160,12 +164,12 @@ export function scheduleZPartI(
   form540Line35: number,
   taxOn: (taxableIncome: number) => number,
 ): ScheduleZPartI {
-  const line3 = businessIncome;
+  const line3 = atLeast(0, businessIncome);
   const line5 = line3 - nolDeduction;
   const line6a = line5 > 0 ? taxOn(line5) : 0;
   const line6b = atLeast(0, form540Line35);
   return {
-    line1: businessIncome,
+    line1: line3,
     line3,
     line4: nolDeduction,
     line5,

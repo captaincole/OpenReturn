@@ -176,6 +176,14 @@ describe("Schedule Z", () => {
     expect(scheduleZPartI(-5000, 0, 9000, flat(0.05)).line6a).toBe(0);
   });
 
+  it("a negative line 14 is no TTA business income: lines 1, 3 and 5 are 0", () => {
+    const lines = scheduleZPartI(-20000, 0, 6000, flat(0.05));
+    expect(lines.line1).toBe(0);
+    expect(lines.line3).toBe(0);
+    expect(lines.line5).toBe(0);
+    expect(lines.line7).toBe(0);
+  });
+
   it("the two credits together never pass line 7", () => {
     for (const [hiring, sales, limit] of [
       [300, 9000, 7000],
