@@ -11,6 +11,16 @@ income is his furniture shop (Schedule C, material participation): gross
 receipts 610,000, expenses 288,000, net profit 322,000. The shop is in a
 historic mill he owns.
 
+- The shop is a small business taxpayer that keeps no inventory: it treats
+  its wood and hardware as nonincidental supplies (line 22), as the
+  Schedule C instructions allow (`irs-1040sc-inst-2025::sec::part-iii::b01`,
+  `::b02`). So Part III (cost of goods sold) is empty.
+- The depreciation, 41,000, is a stated line 13 amount. A real return would
+  also file Form 4562 for the array placed in service in 2025, with the
+  array's basis cut by half the energy credit. The engine does not link the
+  two (Form 3468 `QUESTIONS.md`, "basis reductions"), so this scenario leaves
+  Form 4562 out.
+
 - In 2025 he put a 60 kW dc (50 kW ac) rooftop solar array in service. It is
   under 1 MW, so the 30% rate and the 10% bonuses apply. It has a 45 kW
   low-income community allocation, and a city loan from tax-exempt bonds paid
