@@ -1,20 +1,28 @@
 import { parseArgs } from "node:util";
 import { storedEmbeddingModel } from "../../src/db/corpusStore";
-import { libraryDbPath } from "../../src/db/libsql";
-import { parseJurisdictions } from "../../src/jurisdiction";
+import { lawLibrary, libraryDbPath } from "../../src/db/libsql";
+import { ALL_JURISDICTIONS, parseJurisdictions } from "../../src/jurisdiction";
 import type { LawSource } from "../../src/law/citation";
-import { CITATION_HINT, readLaw, requireLaw } from "../../src/law/lawRead";
-import { searchLaw, sourcesToSearch, type SearchMode } from "../../src/law/lawSearch";
+import { CITATION_HINT, lawNotInstalledMessage, readLaw, requireLaw } from "../../src/law/lawRead";
+import { lawCoverage, searchLaw, sourcesToSearch, type SearchMode } from "../../src/law/lawSearch";
 import type { Command } from "../lib/cli";
 import { checkLibrary } from "./check";
 
-/* The law commands that only read law.db: check, search, read. */
+/* The law commands that only read the law files: check, search, read. */
 
+// Each jurisdiction's file: its path, then its counts, or "not installed".
 async function check(): Promise<void> {
-  await requireLaw();
-  console.log(`law.db: ${libraryDbPath("law")}`);
-  console.log(`embedding model: ${(await storedEmbeddingModel("law")) ?? "(none)"}`);
-  await checkLibrary("law");
+  const installed = await requireLaw();
+  for (const jurisdiction of ALL_JURISDICTIONS) {
+    const library = lawLibrary(jurisdiction);
+    console.log(`\n${jurisdiction}: ${libraryDbPath(library)}`);
+    if (!installed.includes(jurisdiction)) {
+      console.log("  not installed");
+      continue;
+    }
+    console.log(`embedding model: ${(await storedEmbeddingModel(library)) ?? "(none)"}`);
+    await checkLibrary(library);
+  }
 }
 
 const MODES: SearchMode[] = ["fts", "vector", "hybrid"];
@@ -42,12 +50,13 @@ async function search(argv: string[]): Promise<void> {
     : undefined;
   const opts = { mode, section: values.section, source, jurisdictions };
   const sources = sourcesToSearch(opts);
-  await requireLaw();
+  const { missing } = await lawCoverage(sources);
   const limit = Math.max(1, Math.min(Number(values.limit), 25));
   const hits = await searchLaw({ ...opts, query, limit });
   console.log(
     `query:   "${query}"\nmode:    ${mode}\nsource:  ${sources.join(" and ")}\nresults: ${hits.length}\n`,
   );
+  if (missing.length > 0) console.log(`not searched: ${lawNotInstalledMessage(missing)}\n`);
   hits.forEach((hit, index) => {
     console.log(`${index + 1}. ${hit.citation}  [${hit.source}] (score ${hit.score.toFixed(4)})`);
     console.log(`   blockId: ${hit.blockId}`);
@@ -61,7 +70,6 @@ async function search(argv: string[]): Promise<void> {
 async function read(argv: string[]): Promise<void> {
   const citation = argv.join(" ").trim();
   if (!citation) throw new Error(`required: a citation (${CITATION_HINT})`);
-  await requireLaw();
   const reading = await readLaw(citation);
   if (!reading) {
     console.error(`nothing in the law library at ${citation}`);
@@ -76,13 +84,13 @@ async function read(argv: string[]): Promise<void> {
 
 export const lawCheckCommand: Command = {
   name: "check",
-  summary: "law.db row counts and embedding coverage",
+  summary: "Each law file: row counts and embedding coverage",
   run: check,
 };
 
 export const lawSearchCommand: Command = {
   name: "search",
-  summary: "Search the Code and the regulations, or California's code (law.db only)",
+  summary: "Search the Code and the regulations, or California's code (the law files only)",
   usage: '"query"',
   options: [
     { flag: "--mode fts|vector|hybrid", desc: "retrieval mode (default: hybrid)" },

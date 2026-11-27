@@ -84,15 +84,14 @@ Questions about California's franchise and income tax laws, in `canon/evals/law/
 
 | Mode | Section hit | Path hit |
 | --- | --- | --- |
-| hybrid | 26/28 (93%) | 21/23 (91%) |
+| hybrid | 27/28 (96%) | 22/23 (96%) |
 | fts | 27/28 (96%) | 22/23 (96%) |
 | vector | 27/28 (96%) | 20/23 (87%) |
 
 ### Misses
 
-#### hybrid (2)
+#### hybrid (1)
 
-- `ca-s-corporation-entity-tax` missed section CA 23802. Top 3: Cal. Rev. & Tax. Code § 23151(b); Cal. Rev. & Tax. Code § 23151(e); Cal. Rev. & Tax. Code § 23151(d)
 - `ca-pass-through-elective-tax` missed section CA 19902. Top 3: Cal. Rev. & Tax. Code § 19910(c); Cal. Rev. & Tax. Code § 17052.11(b)(1); Cal. Rev. & Tax. Code § 19900(c)
 
 #### fts (1)
@@ -107,7 +106,7 @@ Questions about California's franchise and income tax laws, in `canon/evals/law/
 
 ## Run it
 
-From the repo root, with law.db installed (`npm run corpus -- law sync`) and Ollama running:
+From the repo root, with the law files installed (`npm run corpus -- law fetch`, or `law sync`) and Ollama running:
 
 ```bash
 npm run evals:law

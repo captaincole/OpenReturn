@@ -73,7 +73,7 @@ async function run(argv: string[]): Promise<void> {
   console.log(
     `  the sidecar pins ${entry.sidecar.sha256.slice(0, 12)}… (${entry.sidecar.releasePoint}): this archive holds newer text, or the scope (caScope.ts) changed.\n` +
       `  To move to it, set "sha256" and "releasePoint" in ${entry.sidecarPath} to the values above, then run law sync.\n` +
-      `  To keep the pinned text, delete ${entry.zipRelPath}: law sync then reads law.db's copy.`,
+      `  To keep the pinned text, delete ${entry.zipRelPath}: law sync then reads ca.db's copy.`,
   );
 }
 

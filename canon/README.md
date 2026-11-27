@@ -24,6 +24,8 @@ Canon (`@openreturn/canon`) is OpenReturn's tax attorney. It holds the IRS and F
 
 The law takes the same list. Each jurisdiction owns its law sources in the same table: federal is the statute and the regulations, CA is California's code. `searchLaw` with `jurisdictions` searches each source of the jurisdictions on, and the hits take turns (statute, regulations, california). With `source`, it searches one source; a source outside the list is an input error. With neither, it searches the federal law only. The statute round of `run_ask` and `run_ground` searches the statute of each jurisdiction on, never the regulations: the Internal Revenue Code for federal, California's code for CA, both with no list (federal first, in the round's usual number of hits).
 
+The law is optional, and each jurisdiction has its own file in `canon/.data/law/` (`LAW_DB_DIR`): `federal.db` and `ca.db`. `npm run corpus -- law fetch` installs them (`--jurisdiction CA` installs one). A jurisdiction whose file is missing is not searched: `searchLaw` names it in `missing`, and answers `installed: false` when no file it needs is installed.
+
 Both workflows are served as tools with output schemas and answer `{ result: … }`, the run result (`status: ok | failed`) validated against the schema. Both are stateless: the caller keeps the threads, the decisions and the verdicts. Each judge is one model call with its schema as the response format, and no tools. Code checks every citation: a quote that is not word for word in a retrieved block is dropped.
 
 In the web app, Ask The Tax Code shows Canon's answers:

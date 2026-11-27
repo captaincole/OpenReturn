@@ -142,7 +142,7 @@ export function renderReport(input: ReportInput): string {
     ...californiaLines(input.caCases, input.caRuns),
     "## Run it",
     "",
-    "From the repo root, with law.db installed (`npm run corpus -- law sync`) and Ollama running:",
+    "From the repo root, with the law files installed (`npm run corpus -- law fetch`, or `law sync`) and Ollama running:",
     "",
     "```bash",
     "npm run evals:law",

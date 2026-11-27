@@ -3,20 +3,21 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { getDocumentSource } from "../db/corpusFiles";
 import { fetchBytes, sha256 } from "../refdocs/fetchSource";
+import { lawLibraryOfId } from "./lawLibrary";
 import type { LawEntry, LawSourceFile } from "./lawSidecar";
 import { readZip } from "./unzip";
 import { writeZip } from "./zipWrite";
 
 /*
- * The release zip: on disk next to the sidecar, else the copy in law.db,
- * else the sourceUrl. The sha256 is checked every time. A copy from law.db
+ * The release zip: on disk next to the sidecar, else the copy in the law
+ * file, else the sourceUrl. The sha256 is checked every time. A copy from the law file
  * or the web is written to disk, so the next sync reads it from there.
  * California's extract has no URL of its own: when it is missing,
  * missingCaExtract says how to make it.
  */
 export async function ensureLawZip(entry: LawEntry): Promise<Uint8Array> {
   if (existsSync(entry.zipPath)) return fromDisk(entry);
-  const stored = await getDocumentSource(entry.sidecar.docId, "law");
+  const stored = await getDocumentSource(entry.sidecar.docId, lawLibraryOfId(entry.sidecar.docId));
   const pinned = stored && sha256(stored) === entry.sidecar.sha256 ? stored : null;
   const zip =
     pinned ?? (entry.sidecar.format === "caml" ? missingCaExtract(entry) : await download(entry));
@@ -40,13 +41,13 @@ async function fromDisk(entry: LawEntry): Promise<Uint8Array> {
 /*
  * The Legislature's archive is a rolling file of about 1.3 GB, so the
  * sidecar pins the extract, not the archive. Without the extract on disk
- * or in law.db, a person downloads the archive and cuts it again.
+ * or in ca.db, a person downloads the archive and cuts it again.
  */
 function missingCaExtract({ sidecar, zipRelPath }: LawEntry): never {
   throw new Error(
     [
-      `${zipRelPath} is not on disk, and law.db has no copy with the sidecar's sha256.`,
-      `  Install the prebuilt law.db (\`npm run corpus -- law fetch\`), or make the extract:`,
+      `${zipRelPath} is not on disk, and ca.db has no copy with the sidecar's sha256.`,
+      `  Install the prebuilt ca.db (\`npm run corpus -- law fetch --jurisdiction CA\`), or make the extract:`,
       `  1. Download ${sidecar.sourceUrl ?? "the session archive"} (about 1.3 GB) to a folder of its own.`,
       "  2. Run `npm run corpus -- law extract-ca <path of the zip>`.",
       `  The extract matches the pin only if the archive still holds the text of ${sidecar.releasePoint}; if not, the command prints the new sha256 and date for the sidecar.`,
@@ -56,7 +57,9 @@ function missingCaExtract({ sidecar, zipRelPath }: LawEntry): never {
 
 async function download({ sidecar, zipRelPath }: LawEntry): Promise<Uint8Array> {
   if (!sidecar.sourceUrl)
-    throw new Error(`${zipRelPath} is not on disk or in law.db, and its sidecar has no sourceUrl`);
+    throw new Error(
+      `${zipRelPath} is not on disk or in its law file, and its sidecar has no sourceUrl`,
+    );
   console.log(`  downloading ${sidecar.sourceUrl}`);
   const zip = await fetchBytes(sidecar.sourceUrl);
   const got = sha256(zip);
@@ -67,7 +70,7 @@ async function download({ sidecar, zipRelPath }: LawEntry): Promise<Uint8Array> 
   return zip;
 }
 
-/** The parts of a document published in several files, in sidecar order, and the zip law.db stores. */
+/** The parts of a document published in several files, in sidecar order, and the zip the law file stores. */
 export interface LawParts {
   files: Array<{ file: string; data: Uint8Array }>;
   zip: Uint8Array;
@@ -77,12 +80,12 @@ export interface LawParts {
 const PART_FETCH_HEADERS = { "user-agent": "research-client" };
 
 /*
- * Each part: on disk next to the sidecar, else in the zip law.db stores,
- * else its sourceUrl. Each one's sha256 is checked; a part from law.db or
+ * Each part: on disk next to the sidecar, else in the zip the law file stores,
+ * else its sourceUrl. Each one's sha256 is checked; a part from the law file or
  * the web is written to disk.
  */
 export async function ensureLawParts(entry: LawEntry): Promise<LawParts> {
-  const stored = await getDocumentSource(entry.sidecar.docId, "law");
+  const stored = await getDocumentSource(entry.sidecar.docId, lawLibraryOfId(entry.sidecar.docId));
   const inStore = new Map((stored ? readZip(stored) : []).map((file) => [file.name, file.data]));
   const files = [];
   for (const part of entry.sidecar.files) {

@@ -9,8 +9,10 @@ import {
   type IngestPayload,
   type RefBlock,
 } from "../db/corpusStore";
+import type { LawLibrary } from "../db/libsql";
 import { embedDocuments, resolveEmbeddings } from "../refdocs/embeddings";
 import type { ParsedDoc } from "../refdocs/parse";
+import { lawLibraryOfId } from "./lawLibrary";
 import type { LawEntry } from "./lawSidecar";
 import { ensureLawParts, ensureLawZip } from "./lawSource";
 import { parseCaExtract } from "./parseCaml";
@@ -19,7 +21,8 @@ import { parseUslmTitle } from "./parseUslm";
 import { readZip } from "./unzip";
 
 /*
- * Builds one law document in law.db: source → XML → rows → embeddings. The
+ * Builds one law document in its jurisdiction's law file (federal.db,
+ * ca.db): source → XML → rows → embeddings. The
  * Code is one USLM zip; the regulations are eCFR XML, one file per part;
  * California's code is one extract zip of law tables and CAML XML files.
  * No model writes the context: the parser builds each block's header and
@@ -35,7 +38,7 @@ export interface ParsedLaw extends ParsedDoc {
 
 interface LawSource {
   parsed: ParsedLaw;
-  /** The blob law.db stores. */
+  /** The blob the law file stores. */
   blob: Uint8Array;
 }
 
@@ -56,7 +59,8 @@ export async function ingestLaw(
   opts: { force?: boolean } = {},
 ): Promise<LawIngestResult> {
   const { docId, sha256 } = entry.sidecar;
-  const existing = await getDocument(docId, "law");
+  const library = lawLibraryOfId(docId);
+  const existing = await getDocument(docId, library);
   if (existing?.sha256 === sha256 && !opts.force) {
     console.log(`  ${docId}: sha unchanged (${sha256.slice(0, 12)}…), skipping ingest`);
     return { docId, skipped: true, replaced: false, sections: -1, blocks: -1, embedded: -1 };
@@ -64,13 +68,13 @@ export async function ingestLaw(
   const { parsed, blob } = await readSource(entry);
   console.log(`  parsed ${parsed.sections.length} sections, ${parsed.blocks.length} blocks`);
   console.log(`  ${JSON.stringify(parsed.stats)}`);
-  if (existing) await deleteDocument(docId, "law");
+  if (existing) await deleteDocument(docId, library);
   const payload = lawPayload(entry, parsed);
   // Rows first: an embedding failure leaves them for `law reembed`.
   await writeFile(canonicalTextPath(entry), parsed.canonicalText, "utf8");
-  await writeDocument(payload, "law");
-  await setDocumentSource(docId, blob, "law");
-  const embedded = await embedLawBlocks(payload.blocks);
+  await writeDocument(payload, library);
+  await setDocumentSource(docId, blob, library);
+  const embedded = await embedLawBlocks(library, payload.blocks);
   return {
     docId,
     skipped: false,
@@ -136,7 +140,7 @@ export function lawPayload(entry: LawEntry, parsed: ParsedLaw): IngestPayload {
 /* Fails soft, as the corpus pipeline does: returns how many blocks got a vector. */
 type EmbedInput = Pick<RefBlock, "blockId" | "text" | "contextualizedText">;
 
-export async function embedLawBlocks(blocks: EmbedInput[]): Promise<number> {
+export async function embedLawBlocks(library: LawLibrary, blocks: EmbedInput[]): Promise<number> {
   let done = 0;
   try {
     const cfg = resolveEmbeddings();
@@ -149,7 +153,7 @@ export async function embedLawBlocks(blocks: EmbedInput[]): Promise<number> {
       );
       await setBlockEmbeddings(
         chunk.map((block, index) => ({ blockId: block.blockId, embedding: vectors[index] })),
-        { embeddingModel: cfg.id, library: "law" },
+        { embeddingModel: cfg.id, library },
       );
       done += chunk.length;
       console.log(`  embedded ${done}/${blocks.length} blocks (${cfg.id})`);
