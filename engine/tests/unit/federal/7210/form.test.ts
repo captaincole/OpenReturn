@@ -212,6 +212,29 @@ describe("the waits and the gaps", () => {
     const run = evaluate(factsWith({ [FACILITY_KEY]: undefined }, [stated]));
     expect(isGap(run.field("form-3800", LINE_1G))).toBe(true);
   });
+
+  it("a purchased clean hydrogen credit is stated on line 1g: column (f) holds it, no gap", () => {
+    const bought = row("other", makeGeneralBusinessCreditFactKey("bought-hydrogen"), {
+      sourceForm: "7210",
+      line: "1g",
+      amount: 20_000,
+      passive: false,
+      transfer: {
+        direction: "purchased",
+        amount: 20_000,
+        registrationNumber: "H2R-9999999",
+        transferorEin: "00-0099999",
+      },
+    });
+    const facts = factsWith(
+      { [FACILITY_KEY]: undefined, [makePartnershipK1FactKey(PARTNERS_ID)]: undefined },
+      [bought],
+    );
+    const run = evaluate(facts);
+    expect(run.value("form-3800", "2.part3.1g_form_7210_col_f")).toBe(20_000);
+    expect(isGap(run.field("form-3800", "2.part3.1g_form_7210_col_g"))).toBe(false);
+    expect(isGap(run.field("schedule-3", "0.line.6a"))).toBe(false);
+  });
 });
 
 describe("no facts, nothing changes", () => {

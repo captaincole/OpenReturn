@@ -48,7 +48,9 @@ function statedGap(value: GeneralBusinessCreditFact["value"]): string | undefine
   if (row.source !== value.sourceForm) {
     return `Part III line ${value.line} takes Form ${row.source}, not Form ${value.sourceForm}.`;
   }
-  const engineForm = ENGINE_FORM_LINES[value.line];
+  /* A purchased credit has no source form of the buyer's: the seller "earned and reported the credit on the appropriate source credit form" (transferees-of-eligible-credits-under-section::b01). */
+  const engineForm =
+    value.transfer?.direction === "purchased" ? undefined : ENGINE_FORM_LINES[value.line];
   if (engineForm)
     return `Line ${value.line} comes from ${engineForm}, which the engine figures: state that form's inputs (the property, vehicle or tips) instead.`;
   if (value.transfer && !TRANSFER_LINES.includes(value.line)) {

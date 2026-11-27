@@ -30,7 +30,7 @@ The facility's answers are stated from its records: no information return report
 
 ## Documents
 
-The K-1 is a PDF in `docs/`, made by `generate-docs.ts` from the existing Schedule K-1 (Form 1065) generator.
+The K-1 is a PDF in `docs/`, made by `generate-docs.ts` from the existing Schedule K-1 (Form 1065) generator. A real K-1 of a general partner would also show box 14 code A (self-employment earnings). The engine has no route for that code yet: it makes Schedule E line 32 unsupported. So the K-1 leaves it off, and Schedule SE takes only Schedule C.
 
 ## Hand check
 

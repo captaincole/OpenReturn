@@ -115,7 +115,12 @@ export const facility: CleanHydrogenFacilityFactValue = {
 export const PARTNERS_ID = "gulf-coast-hydrogen-partners";
 export const PARTNERS_EIN = "00-0017210";
 
-/* A hydrogen fueling partnership Rand runs with two partners: box 15 code Y is its credit. */
+/*
+ * A hydrogen fueling partnership Rand runs with two partners: box 15 code Y is
+ * its credit. A general partner's K-1 would also show box 14 code A
+ * (self-employment earnings); the engine has no route for that code yet, so
+ * the K-1 leaves it off and Schedule SE takes only Schedule C (README.md).
+ */
 export const partnersK1: PartnershipK1FactValue = {
   form: "1065",
   entityName: "Gulf Coast Hydrogen Partners LP",
