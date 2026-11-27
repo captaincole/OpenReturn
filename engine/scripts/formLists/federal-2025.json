@@ -294,7 +294,8 @@
     {
       "name": "Form 3468",
       "title": "Investment Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3468"
     },
     {
       "name": "Form 3800",
@@ -503,7 +504,8 @@
     {
       "name": "Form 5884",
       "title": "Work Opportunity Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "5884"
     },
     {
       "name": "Form 6198",
@@ -534,7 +536,8 @@
     {
       "name": "Form 6765",
       "title": "Credit for Increasing Research Activities",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "6765"
     },
     {
       "name": "Form 6781",
@@ -658,7 +661,8 @@
     {
       "name": "Form 8586",
       "title": "Low-Income Housing Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8586"
     },
     {
       "name": "Form 8594",
@@ -675,7 +679,8 @@
     {
       "name": "Form 8609A",
       "title": "Annual Statement for Low-Income Housing Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8609-a"
     },
     {
       "name": "Form 8611",
@@ -752,7 +757,8 @@
     {
       "name": "Form 8826",
       "title": "Disabled Access Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8826"
     },
     {
       "name": "Form 8828",
@@ -810,7 +816,8 @@
     {
       "name": "Form 8844",
       "title": "Empowerment Zone and Renewal Community Employment Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8844"
     },
     {
       "name": "Form 8845",
@@ -820,7 +827,8 @@
     {
       "name": "Form 8846",
       "title": "Credit for Employer Social Security and Medicare Taxes Paid on Certain Employee Tips",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8846"
     },
     {
       "name": "Form 8853",
@@ -938,12 +946,14 @@
     {
       "name": "Form 8881",
       "title": "Credit for Small Employer Pension Plan Startup Costs",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8881"
     },
     {
       "name": "Form 8882",
       "title": "Credit for Employer-Provided Childcare Facilities and Services",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8882"
     },
     {
       "name": "Form 8883",

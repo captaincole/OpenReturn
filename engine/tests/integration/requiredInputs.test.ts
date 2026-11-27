@@ -125,6 +125,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "lists the fact again while an answer inside it (Part I) is missing",
   ],
   [
+    /^treaty_position\.[^.]+$/,
+    "each fact is one whole treaty-based return position (one Form 8833); whether the taxpayer " +
+      "takes one is Cade's question. Form 8833 lists the fact again while an answer inside it " +
+      "(the boxes, lines 1a to 2, 5 and 6) is missing",
+  ],
+  [
     /^retirement\.qualified_disaster\.[^.]+$/,
     "each fact is a whole Form 8915-F (one person, one year in which the disasters began); " +
       "whether the taxpayer had a qualified disaster distribution, income spread from an earlier " +
@@ -428,6 +434,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^prior_year\.ca_pte_elective_credit_carryover$/,
     "an answer Cade records only when the user carries a PTE elective tax credit from 2024; " +
       "above 0 it files FTB 3804-CR, which asks for it whenever it files",
+  ],
+  [
+    /^prior_year\.ca_enterprise_zone_(hiring_credit_carryover|sales_tax_credit_carryover|nol_carryovers)$/,
+    "prior-year answers Cade records only when the user carries an enterprise zone credit or " +
+      "EZ NOL from last year's FTB 3805Z (the zones ended in 2014); any above 0 files FTB 3805Z, " +
+      "which then asks for the others",
   ],
   [
     /^prior_year\.ca_amt(_credit_carryover)?$/,

@@ -1,12 +1,13 @@
 import { LAW_NOT_INSTALLED, LawNotInstalledError } from "../../src/law/lawRead";
 import type { Command } from "../lib/cli";
 import { lawFetchCommand, lawReembedCommand, lawSyncCommand } from "./lawBuild";
+import { lawExtractCaCommand } from "./lawExtract";
 import { lawCheckCommand, lawReadCommand, lawSearchCommand } from "./lawInspect";
 
 /*
  * `corpus law <subcommand>`: the same jobs as the corpus commands, on
- * law.db (the Internal Revenue Code and the Treasury regulations). The
- * plain commands never touch it.
+ * law.db (the Internal Revenue Code, the Treasury regulations and
+ * California's personal income tax law). The plain commands never touch it.
  */
 
 const SUBCOMMANDS: Command[] = [
@@ -16,6 +17,7 @@ const SUBCOMMANDS: Command[] = [
   lawSearchCommand,
   lawReadCommand,
   lawReembedCommand,
+  lawExtractCaCommand,
 ];
 
 async function run(argv: string[]): Promise<void> {
@@ -51,7 +53,7 @@ const usageOf = (command: Command) =>
 export const lawCommand: Command = {
   name: "law",
   summary:
-    "The law library (law.db: the Internal Revenue Code and the regulations): sync, fetch, check, search, read, reembed",
+    "The law library (law.db: the Internal Revenue Code, the regulations, California's code): sync, fetch, check, search, read, reembed, extract-ca",
   usage: "<command>",
   options: SUBCOMMANDS.map((command) => ({ flag: usageOf(command), desc: command.summary })),
   run,

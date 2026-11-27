@@ -1,0 +1,393 @@
+{
+  "formId": "form-8609-a",
+  "fieldCount": 43,
+  "entries": [
+    {
+      "fieldId": "form-8609-a.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "f1_02(0)",
+          "text": "T-4K07D"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "f1_01(0)",
+          "text": "T-LZTS8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.1_eligible_basis_building",
+      "widgets": [
+        {
+          "widgetName": "f1_04(0)",
+          "text": "2,438"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.1_eligible_basis_building_cents",
+      "widgets": [
+        {
+          "widgetName": "f1_05(0)",
+          "text": "419"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.10_multiply_7_or_8_by_9",
+      "widgets": [
+        {
+          "widgetName": "f1_21(0)",
+          "text": "8,767"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.10_multiply_7_or_8_by_9_cents",
+      "widgets": [
+        {
+          "widgetName": "f1_22(0)",
+          "text": "007"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.11_section_42f3b_modification",
+      "widgets": [
+        {
+          "widgetName": "f1_23(0)",
+          "text": "9,589"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.11_section_42f3b_modification_cents",
+      "widgets": [
+        {
+          "widgetName": "f1_24(0)",
+          "text": "154"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.12_add_lines",
+      "widgets": [
+        {
+          "widgetName": "f1_25(0)",
+          "text": "6,981"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.12_add_lines_cents",
+      "widgets": [
+        {
+          "widgetName": "f1_26(0)",
+          "text": "936"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.13_credit_before_line_14_reduction",
+      "widgets": [
+        {
+          "widgetName": "f1_27(0)",
+          "text": "4,936"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.13_credit_before_line_14_reduction_cents",
+      "widgets": [
+        {
+          "widgetName": "f1_28(0)",
+          "text": "397"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.14_disallowed_credit_federal_grants",
+      "widgets": [
+        {
+          "widgetName": "f1_29(0)",
+          "text": "6,591"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.14_disallowed_credit_federal_grants_cents",
+      "widgets": [
+        {
+          "widgetName": "f1_30(0)",
+          "text": "101"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.15_credit_allowed_for_building",
+      "widgets": [
+        {
+          "widgetName": "f1_31(0)",
+          "text": "5,436"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.15_credit_allowed_for_building_cents",
+      "widgets": [
+        {
+          "widgetName": "f1_32(0)",
+          "text": "870"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.16_proportionate_share_of_credit",
+      "widgets": [
+        {
+          "widgetName": "f1_33(0)",
+          "text": "5,320"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.16_proportionate_share_of_credit_cents",
+      "widgets": [
+        {
+          "widgetName": "f1_35(0)",
+          "text": "214"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.17_deferred_first_year_credit_adjustments",
+      "widgets": [
+        {
+          "widgetName": "f1_36(0)",
+          "text": "7,351"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.17_deferred_first_year_credit_adjustments_cents",
+      "widgets": [
+        {
+          "widgetName": "f1_37(0)",
+          "text": "007"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.18_taxpayers_credit",
+      "widgets": [
+        {
+          "widgetName": "f1_38(0)",
+          "text": "5,177"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.18_taxpayers_credit_cents",
+      "widgets": [
+        {
+          "widgetName": "f1_39(0)",
+          "text": "555"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.2_low_income_portion",
+      "widgets": [
+        {
+          "widgetName": "f1_06(0)",
+          "text": "T-1XWWV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.2_low_income_portion_decimal",
+      "widgets": [
+        {
+          "widgetName": "f1_07(0)",
+          "text": "T-1LCC0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.3_qualified_basis_building",
+      "widgets": [
+        {
+          "widgetName": "f1_08(0)",
+          "text": "8,435"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.3_qualified_basis_building_cents",
+      "widgets": [
+        {
+          "widgetName": "f1_09(0)",
+          "text": "845"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.4_part_year_adjustment_disposition",
+      "widgets": [
+        {
+          "widgetName": "f1_10(0)",
+          "text": "3,682"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.4_part_year_adjustment_disposition_cents",
+      "widgets": [
+        {
+          "widgetName": "f1_11(0)",
+          "text": "550"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.5_percentage",
+      "widgets": [
+        {
+          "widgetName": "f1_12(0)",
+          "text": "T-1WOSZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.5_percentage_decimal",
+      "widgets": [
+        {
+          "widgetName": "f1_13(0)",
+          "text": "T-VNX3C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.6_multiply_3_or_4_by_5",
+      "widgets": [
+        {
+          "widgetName": "f1_14(0)",
+          "text": "5,598"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.7_additions_to_qualified_basis",
+      "widgets": [
+        {
+          "widgetName": "f1_15(0)",
+          "text": "8,705"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.7_additions_to_qualified_basis_cents",
+      "widgets": [
+        {
+          "widgetName": "f1_16(0)",
+          "text": "112"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.8_part_year_adjustment_disposition",
+      "widgets": [
+        {
+          "widgetName": "f1_17(0)",
+          "text": "9,139"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.8_part_year_adjustment_disposition_cents",
+      "widgets": [
+        {
+          "widgetName": "f1_18(0)",
+          "text": "623"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.9_percentage",
+      "widgets": [
+        {
+          "widgetName": "f1_19(0)",
+          "text": "T-FVEI7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.9_percentage_decimal",
+      "widgets": [
+        {
+          "widgetName": "f1_20(0)",
+          "text": "T-1C4QE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.a_building_identification_number",
+      "widgets": [
+        {
+          "widgetName": "f1_03(0)",
+          "text": "T-IQGVG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.b_new_or_existing_building",
+      "widgets": [
+        {
+          "widgetName": "c1_01(0)",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.b_rehabilitation_expenditures",
+      "widgets": [
+        {
+          "widgetName": "c1_01a(0)",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.c_original_form_8609_in_records",
+      "widgets": [
+        {
+          "widgetName": "c1_03(0)",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.d_qualified_low_income_project",
+      "widgets": [
+        {
+          "widgetName": "c1_05(0)",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8609-a.0.line.e_decrease_in_qualified_basis",
+      "widgets": [
+        {
+          "widgetName": "c1_07(0)",
+          "checked": true
+        }
+      ]
+    }
+  ]
+}

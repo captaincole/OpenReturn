@@ -1,0 +1,327 @@
+{
+  "form": {
+    "formId": "form-8882",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Credit for Employer-Provided Childcare Facilities and Services"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8882.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 671.966
+      }
+    },
+    {
+      "fieldId": "form-8882.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t2[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 671.966
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8882.0.line.1_qualified_childcare_facility_expenditures_dollars",
+      "label": "Line 1 — Qualified childcare facility expenditures paid or incurred (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t3[0]",
+      "position": {
+        "page": 0,
+        "x": 374.4,
+        "y": 647.968
+      }
+    },
+    {
+      "fieldId": "form-8882.0.line.1_qualified_childcare_facility_expenditures_cents",
+      "label": "Line 1 — Qualified childcare facility expenditures paid or incurred (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t4[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 647.968
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8882.0.line.2_multiply_1_by_25_percent_dollars",
+      "label": "Line 2 — Enter 25% (0.25) of line 1 (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t5[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-8882.0.line.2_multiply_1_by_25_percent_cents",
+      "label": "Line 2 — Enter 25% (0.25) of line 1 (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t6[0]",
+      "position": {
+        "page": 0,
+        "x": 554.4,
+        "y": 623.97
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8882.0.line.3_resource_referral_expenditures_dollars",
+      "label": "Line 3 — Qualified childcare resource and referral expenditures paid or incurred (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t7[0]",
+      "position": {
+        "page": 0,
+        "x": 374.4,
+        "y": 599.966
+      }
+    },
+    {
+      "fieldId": "form-8882.0.line.3_resource_referral_expenditures_cents",
+      "label": "Line 3 — Qualified childcare resource and referral expenditures paid or incurred (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t8[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 599.966
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8882.0.line.4_multiply_3_by_10_percent_dollars",
+      "label": "Line 4 — Enter 10% (0.10) of line 3 (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t9[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 575.968
+      }
+    },
+    {
+      "fieldId": "form-8882.0.line.4_multiply_3_by_10_percent_cents",
+      "label": "Line 4 — Enter 10% (0.10) of line 3 (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t10[0]",
+      "position": {
+        "page": 0,
+        "x": 554.4,
+        "y": 575.968
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8882.0.line.5_credit_from_pass_through_entities_dollars",
+      "label": "Line 5 — Credit for employer-provided childcare facilities and services from partnerships, S corporations, estates, and trusts (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t11[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-8882.0.line.5_credit_from_pass_through_entities_cents",
+      "label": "Line 5 — Credit for employer-provided childcare facilities and services from partnerships, S corporations, estates, and trusts (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t12[0]",
+      "position": {
+        "page": 0,
+        "x": 554.4,
+        "y": 539.968
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8882.0.line.6_add_lines_dollars",
+      "label": "Line 6 — Add lines 2, 4, and 5 (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t13[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-8882.0.line.6_add_lines_cents",
+      "label": "Line 6 — Add lines 2, 4, and 5 (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t14[0]",
+      "position": {
+        "page": 0,
+        "x": 554.4,
+        "y": 515.97
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8882.0.line.7_smaller_of_6_or_150000_dollars",
+      "label": "Line 7 — Enter the smaller of line 6 or $150,000 (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t15[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 467.968
+      }
+    },
+    {
+      "fieldId": "form-8882.0.line.7_smaller_of_6_or_150000_cents",
+      "label": "Line 7 — Enter the smaller of line 6 or $150,000 (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t16[0]",
+      "position": {
+        "page": 0,
+        "x": 554.4,
+        "y": 467.968
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8882.0.line.8_allocated_to_beneficiaries_dollars",
+      "label": "Line 8 — Amount allocated to beneficiaries of the estate or trust (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t17[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-8882.0.line.8_allocated_to_beneficiaries_cents",
+      "label": "Line 8 — Amount allocated to beneficiaries of the estate or trust (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t18[0]",
+      "position": {
+        "page": 0,
+        "x": 554.4,
+        "y": 443.97
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8882.0.line.9_subtract_8_from_7_dollars",
+      "label": "Line 9 — Estates and trusts. Subtract line 8 from line 7 (dollars)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t19[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-8882.0.line.9_subtract_8_from_7_cents",
+      "label": "Line 9 — Estates and trusts. Subtract line 8 from line 7 (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].p1-t20[0]",
+      "position": {
+        "page": 0,
+        "x": 554.4,
+        "y": 419.969
+      },
+      "maxLength": 3
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8882/blank.pdf",
+    "ingestedAt": "2026-11-27T01:31:12.748Z",
+    "totalFields": 20,
+    "skipped": 0,
+    "catalogEntries": 20
+  }
+}

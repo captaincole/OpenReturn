@@ -10,7 +10,7 @@ it changes dollars.
 Each item has a `DECISION (2026-11-26, by the author)` comment in `lines.ts`
 and a row in `docs/rule-decisions.md`.
 
-1. **The decimal of line 7 (row A78).** The form face: "Multiply line 6 by
+1. **The decimal of line 7 (row A85).** The form face: "Multiply line 6 by
    66 2/3% (0.667)" (`irs-2210f-face-2025::sec::face-part-ii::b01`). Pub. 225:
    "66 2/3% (0.6667)"
    (`irs-pub-225-2025::sec::special-rules-for-qualified::b01`,
@@ -21,7 +21,7 @@ and a row in `docs/rule-decisions.md`.
      percent" (`usc-26-2025::sec::s6654::i-1`), the exact fraction. Both
      decimals round it up. For `docs/law-findings.md`.
 
-2. **A part of line 13 paid before the rest (row A80).** The form has one
+2. **A part of line 13 paid before the rest (row A87).** The form has one
    date: "Enter the date the amount on line 13 was paid or April 15, 2026,
    whichever is earlier" (`irs-2210f-face-2025::sec::face-part-iii::b01`).
    Form 2210's instructions: "If more than one payment was required to fully
@@ -38,7 +38,7 @@ and a row in `docs/rule-decisions.md`.
      (`usc-26-2025::sec::s6654::b`, (b)(2)(B)). It disagrees with the engine's
      reading of the form. For `docs/law-findings.md`.
 
-3. **No 2024 tax, and no 2024 return (row A79).** The exceptions: "You had no
+3. **No 2024 tax, and no 2024 return (row A86).** The exceptions: "You had no
    tax liability for 2024 ... and your 2024 return was (or would have been had
    you been required to file) for a full 12 months"
    (`irs-2210f-inst-2025::sec::exceptions-to-the-penalty::b01`). Line 10: "If
@@ -185,10 +185,10 @@ after it, Form 2210 waits for the two-thirds answer and a farmer files Form
   - Case 6, lines 14 to 16 ($90 against no penalty): the inputs differ, not the
     rule. The blind fill read "neither spouse had to file" as no 2024 tax; the
     engine was given "no 12-month return". With a 2024 tax of 0 the engine
-    owes nothing too (conflict 3, row A79).
+    owes nothing too (conflict 3, row A86).
   - Case 12, line 16 ($147 against $110): the blind fill made a separate count
     for each part, from Form 2210's worksheet. The form's line 16 has one
-    count; the engine keeps it (conflict 2, row A80).
+    count; the engine keeps it (conflict 2, row A87).
   - Blind doubts with no dollar change (box A with no penalty, box B with a
     blank line 10, rounding the penalty before the waiver, 0 against blank on
     lines 4 and 8) match the engine's defaults.
@@ -208,8 +208,8 @@ after it, Form 2210 waits for the two-thirds answer and a farmer files Form
 | Header (name, SSN) | stated rule |
 | Box A, box B | stated rule |
 | Lines 1, 2, 3, 4, 6, 8, 9 | stated rule (lists shared with Form 2210) |
-| Line 7 | stated rule; decimal decided (row A78) |
+| Line 7 | stated rule; decimal decided (row A85) |
 | Lines 10, 11, 12, 13 | stated rule |
-| Line 14 | stated rule; partial payments decided (row A80) |
+| Line 14 | stated rule; partial payments decided (row A87) |
 | Lines 15, 16 | stated rule; no published example |
 | The two-thirds test | published example with numbers (Pub. 225 examples 1 and 2) |

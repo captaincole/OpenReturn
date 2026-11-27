@@ -1,0 +1,692 @@
+{
+  "form": {
+    "formId": "form-8609-a",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Annual Statement for Low-Income Housing Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8609-a.0.header.name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_01(0)",
+      "position": {
+        "page": 0,
+        "x": 0.39,
+        "y": 650.7
+      }
+    },
+    {
+      "fieldId": "form-8609-a.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_02(0)",
+      "position": {
+        "page": 0,
+        "x": 305.08,
+        "y": 650.7
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-8609-a.0.line.a_building_identification_number",
+      "label": "Line A — Building identification number (BIN)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_03(0)",
+      "position": {
+        "page": 0,
+        "x": 180.75,
+        "y": 615.16
+      }
+    },
+    {
+      "fieldId": "form-8609-a.0.line.b_new_or_existing_building",
+      "label": "Line B — This Form 8609-A is for a newly constructed or existing building",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "c1_01(0)",
+      "position": {
+        "page": 0,
+        "x": 370.93,
+        "y": 601.55
+      }
+    },
+    {
+      "fieldId": "form-8609-a.0.line.b_rehabilitation_expenditures",
+      "label": "Line B — This Form 8609-A is for section 42(e) rehabilitation expenditures",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "c1_01a(0)",
+      "position": {
+        "page": 0,
+        "x": 190.45,
+        "y": 590.07
+      }
+    },
+    {
+      "fieldId": "form-8609-a.0.line.c_original_form_8609_in_records",
+      "label": "Line C — Do you have in your records the original Form 8609 (or a copy thereof) signed and issued by the housing credit agency for the building in A?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "c1_03(0)",
+      "position": {
+        "page": 0,
+        "x": 487.03,
+        "y": 566.35
+      }
+    },
+    {
+      "fieldId": "form-8609-a.0.line.d_qualified_low_income_project",
+      "label": "Line D — Did the building in A qualify as a part of a qualified low-income housing project and meet the requirements of section 42 as of the end of the tax year for which this form is being filed?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "c1_05(0)",
+      "position": {
+        "page": 0,
+        "x": 487.03,
+        "y": 530.2
+      }
+    },
+    {
+      "fieldId": "form-8609-a.0.line.e_decrease_in_qualified_basis",
+      "label": "Line E — Was there a decrease in the qualified basis of the building in A for the tax year for which this form is being filed?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "c1_07(0)",
+      "position": {
+        "page": 0,
+        "x": 487.03,
+        "y": 494.05
+      }
+    },
+    {
+      "fieldId": "form-8609-a.0.line.1_eligible_basis_building",
+      "label": "Line 1 — Eligible basis of building",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_04(0)",
+      "position": {
+        "page": 0,
+        "x": 444.03,
+        "y": 445.85
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-8609-a.0.line.1_eligible_basis_building_cents",
+      "label": "Line 1 — Eligible basis of building (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_05(0)",
+      "position": {
+        "page": 0,
+        "x": 507.3,
+        "y": 445.85
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8609-a.0.line.2_low_income_portion",
+      "label": "Line 2 — Low-income portion (smaller of unit fraction or floor space fraction) (whole number, left of the decimal point)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_06(0)",
+      "position": {
+        "page": 0,
+        "x": 444.03,
+        "y": 421.75
+      }
+    },
+    {
+      "fieldId": "form-8609-a.0.line.2_low_income_portion_decimal",
+      "label": "Line 2 — Low-income portion (smaller of unit fraction or floor space fraction) (decimal places, right of the decimal point)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_07(0)",
+      "position": {
+        "page": 0,
+        "x": 487.02,
+        "y": 421.75
+      }
+    },
+    {
+      "fieldId": "form-8609-a.0.line.3_qualified_basis_building",
+      "label": "Line 3 — Qualified basis of low-income building. Multiply line 1 by line 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_08(0)",
+      "position": {
+        "page": 0,
+        "x": 444.03,
+        "y": 409.7
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-8609-a.0.line.3_qualified_basis_building_cents",
+      "label": "Line 3 — Qualified basis of low-income building. Multiply line 1 by line 2 (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_09(0)",
+      "position": {
+        "page": 0,
+        "x": 507.3,
+        "y": 409.7
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8609-a.0.line.4_part_year_adjustment_disposition",
+      "label": "Line 4 — Part-year adjustment for disposition or acquisition during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_10(0)",
+      "position": {
+        "page": 0,
+        "x": 444.03,
+        "y": 397.65
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-8609-a.0.line.4_part_year_adjustment_disposition_cents",
+      "label": "Line 4 — Part-year adjustment for disposition or acquisition during the tax year (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_11(0)",
+      "position": {
+        "page": 0,
+        "x": 507.3,
+        "y": 397.65
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8609-a.0.line.5_percentage",
+      "label": "Line 5 — Credit percentage (whole number, left of the decimal point)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_12(0)",
+      "position": {
+        "page": 0,
+        "x": 444.03,
+        "y": 385.6
+      }
+    },
+    {
+      "fieldId": "form-8609-a.0.line.5_percentage_decimal",
+      "label": "Line 5 — Credit percentage (decimal places, right of the decimal point)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_13(0)",
+      "position": {
+        "page": 0,
+        "x": 487.02,
+        "y": 385.6
+      }
+    },
+    {
+      "fieldId": "form-8609-a.0.line.6_multiply_3_or_4_by_5",
+      "label": "Line 6 — Multiply line 3 or line 4 by the percentage on line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_14(0)",
+      "position": {
+        "page": 0,
+        "x": 444.03,
+        "y": 373.55
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-8609-a.0.line.7_additions_to_qualified_basis",
+      "label": "Line 7 — Additions to qualified basis, if any",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_15(0)",
+      "position": {
+        "page": 0,
+        "x": 444.03,
+        "y": 361.5
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-8609-a.0.line.7_additions_to_qualified_basis_cents",
+      "label": "Line 7 — Additions to qualified basis, if any (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_16(0)",
+      "position": {
+        "page": 0,
+        "x": 507.3,
+        "y": 361.5
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8609-a.0.line.8_part_year_adjustment_disposition",
+      "label": "Line 8 — Part-year adjustment for disposition or acquisition during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_17(0)",
+      "position": {
+        "page": 0,
+        "x": 444.03,
+        "y": 349.45
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-8609-a.0.line.8_part_year_adjustment_disposition_cents",
+      "label": "Line 8 — Part-year adjustment for disposition or acquisition during the tax year (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_18(0)",
+      "position": {
+        "page": 0,
+        "x": 507.3,
+        "y": 349.45
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8609-a.0.line.9_percentage",
+      "label": "Line 9 — Credit percentage. Enter one-third of the percentage on line 5 (whole number, left of the decimal point)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_19(0)",
+      "position": {
+        "page": 0,
+        "x": 444.03,
+        "y": 337.4
+      }
+    },
+    {
+      "fieldId": "form-8609-a.0.line.9_percentage_decimal",
+      "label": "Line 9 — Credit percentage. Enter one-third of the percentage on line 5 (decimal places, right of the decimal point)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_20(0)",
+      "position": {
+        "page": 0,
+        "x": 487.02,
+        "y": 337.4
+      }
+    },
+    {
+      "fieldId": "form-8609-a.0.line.10_multiply_7_or_8_by_9",
+      "label": "Line 10 — Multiply line 7 or line 8 by the percentage on line 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_21(0)",
+      "position": {
+        "page": 0,
+        "x": 444.03,
+        "y": 325.35
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-8609-a.0.line.10_multiply_7_or_8_by_9_cents",
+      "label": "Line 10 — Multiply line 7 or line 8 by the percentage on line 9 (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_22(0)",
+      "position": {
+        "page": 0,
+        "x": 507.3,
+        "y": 325.35
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8609-a.0.line.11_section_42f3b_modification",
+      "label": "Line 11 — Section 42(f)(3)(B) modification",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_23(0)",
+      "position": {
+        "page": 0,
+        "x": 444.03,
+        "y": 313.3
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-8609-a.0.line.11_section_42f3b_modification_cents",
+      "label": "Line 11 — Section 42(f)(3)(B) modification (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_24(0)",
+      "position": {
+        "page": 0,
+        "x": 507.3,
+        "y": 313.3
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8609-a.0.line.12_add_lines",
+      "label": "Line 12 — Add lines 10 and 11",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_25(0)",
+      "position": {
+        "page": 0,
+        "x": 444.03,
+        "y": 301.25
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-8609-a.0.line.12_add_lines_cents",
+      "label": "Line 12 — Add lines 10 and 11 (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_26(0)",
+      "position": {
+        "page": 0,
+        "x": 507.3,
+        "y": 301.25
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8609-a.0.line.13_credit_before_line_14_reduction",
+      "label": "Line 13 — Credit for building before line 14 reduction. Subtract line 12 from line 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_27(0)",
+      "position": {
+        "page": 0,
+        "x": 444.03,
+        "y": 289.2
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-8609-a.0.line.13_credit_before_line_14_reduction_cents",
+      "label": "Line 13 — Credit for building before line 14 reduction. Subtract line 12 from line 6 (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_28(0)",
+      "position": {
+        "page": 0,
+        "x": 507.3,
+        "y": 289.2
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8609-a.0.line.14_disallowed_credit_federal_grants",
+      "label": "Line 14 — Disallowed credit due to federal grants",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_29(0)",
+      "position": {
+        "page": 0,
+        "x": 444.03,
+        "y": 277.15
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-8609-a.0.line.14_disallowed_credit_federal_grants_cents",
+      "label": "Line 14 — Disallowed credit due to federal grants (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_30(0)",
+      "position": {
+        "page": 0,
+        "x": 507.3,
+        "y": 277.15
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8609-a.0.line.15_credit_allowed_for_building",
+      "label": "Line 15 — Credit allowed for building for tax year. Subtract line 14 from line 13, but do not enter more than the amount shown on Form 8609, Part I, line 1b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_31(0)",
+      "position": {
+        "page": 0,
+        "x": 444.03,
+        "y": 253.05
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-8609-a.0.line.15_credit_allowed_for_building_cents",
+      "label": "Line 15 — Credit allowed for building for tax year. Subtract line 14 from line 13, but do not enter more than the amount shown on Form 8609, Part I, line 1b (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_32(0)",
+      "position": {
+        "page": 0,
+        "x": 507.3,
+        "y": 253.05
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8609-a.0.line.16_proportionate_share_of_credit",
+      "label": "Line 16 — Taxpayer's proportionate share of credit for the year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_33(0)",
+      "position": {
+        "page": 0,
+        "x": 444.03,
+        "y": 241
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-8609-a.0.line.16_proportionate_share_of_credit_cents",
+      "label": "Line 16 — Taxpayer's proportionate share of credit for the year (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_35(0)",
+      "position": {
+        "page": 0,
+        "x": 507.3,
+        "y": 241
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8609-a.0.line.17_deferred_first_year_credit_adjustments",
+      "label": "Line 17 — Adjustments for deferred first-year credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_36(0)",
+      "position": {
+        "page": 0,
+        "x": 444.03,
+        "y": 228.95
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-8609-a.0.line.17_deferred_first_year_credit_adjustments_cents",
+      "label": "Line 17 — Adjustments for deferred first-year credit (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_37(0)",
+      "position": {
+        "page": 0,
+        "x": 507.3,
+        "y": 228.95
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8609-a.0.line.18_taxpayers_credit",
+      "label": "Line 18 — Taxpayer's credit. Combine lines 16 and 17",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_38(0)",
+      "position": {
+        "page": 0,
+        "x": 444.03,
+        "y": 216.9
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-8609-a.0.line.18_taxpayers_credit_cents",
+      "label": "Line 18 — Taxpayer's credit. Combine lines 16 and 17 (cents)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "f1_39(0)",
+      "position": {
+        "page": 0,
+        "x": 507.3,
+        "y": 216.9
+      },
+      "maxLength": 3
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8609-a/blank.pdf",
+    "ingestedAt": "2026-11-27T01:30:43.677Z",
+    "totalFields": 43,
+    "skipped": 0,
+    "catalogEntries": 43
+  }
+}

@@ -1,7 +1,8 @@
 /*
  * Form 540 lines 40, 43 to 45, 47 and 48: the special credits. Line 40 is FTB
  * 3506. Lines 43 to 45 hold the other credits the engine figures: the prison
- * inmate labor credit (FTB 3507), the credit for prior year AMT (FTB 3510), the passive credits (FTB 3801-CR), the other
+ * inmate labor credit (FTB 3507), the credit for prior year AMT (FTB 3510), the passive credits (FTB 3801-CR),
+ * the enterprise zone credit (FTB 3805Z), the LAMBRA credit (FTB 3807), the other
  * state tax credit (Schedule S) and the PTE elective tax credit (FTB 3804-CR).
  * They are unsupported when no such
  * form files. Line 46 stays unsupported in bindings.ts and reads as blank.
@@ -16,6 +17,10 @@ import { files3541, filmCreditsUsed } from "../3541/creditUsed.js";
 import { files3801Cr, passiveCreditsUsed } from "../3801-cr/creditUsed.js";
 import { files3804Cr, pteCreditOnReturn } from "../3804-cr/creditUsed.js";
 import { PTE_CREDIT_CODE, PTE_CREDIT_NAME } from "../3804-cr/lines.js";
+import { enterpriseZoneCreditUsed, files3805Z } from "../3805z/creditUsed.js";
+import { ENTERPRISE_ZONE_CREDIT_CODE, ENTERPRISE_ZONE_CREDIT_NAME } from "../3805z/lines.js";
+import { files3807, lambraCreditOnReturn } from "../3807/creditUsed.js";
+import { LAMBRA_CREDIT_CODE, LAMBRA_CREDIT_NAME } from "../3807/lines.js";
 import { OTHER_STATE_CREDIT_CODE, OTHER_STATE_CREDIT_NAME } from "../schedule-s/lines.js";
 import { filesScheduleS, otherStateCreditTotal } from "../schedule-s/returnAmounts.js";
 import type { Form540FilingInfo } from "./filingInfo.js";
@@ -81,10 +86,16 @@ function otherStateCreditUsed(form: Form540Form, info: Form540FilingInfo) {
  * The other credits taken, each from Schedule P (540) column (b) when it is
  * completed (ca-540-sched-p-inst-2025::sec::how-to-claim-your-credits::b01),
  * in Part III order: line 4 (prison inmate labor, FTB 3507), lines 6 and 7
- * (FTB 3541's original and new credits), line 10 (prior year AMT), lines 16
- * to 18 (FTB 3541's other film credits, then FTB 3801-CR's passive credits),
- * line 20 (other state tax), line
- * 21 (PTE elective tax). "The prior year AMT credit must be applied before
+ * (FTB 3541's original and new credits), the next Section A2 line (the LAMBRA
+ * credit, FTB 3807), line 10 (prior year AMT), lines 16 to 18 (FTB 3541's
+ * other film credits, FTB 3805Z's enterprise zone credit, then FTB 3801-CR's
+ * passive credits), line 20 (other state tax), line
+ * 21 (PTE elective tax). The LAMBRA credit (198) offsets tax in Section A2 and
+ * the enterprise zone credit (176) in Section B2
+ * (ca-540-sched-p-inst-2025::sec::credit-table::b06), and "If your credits are
+ * taken in more than one section, complete each section before going to the
+ * next section" (::to-complete-part-iii::b01): the enterprise zone credit takes
+ * the tax the LAMBRA credit leaves. "The prior year AMT credit must be applied before
  * any credits that can reduce regular tax below the TMT"
  * (ca-540-sched-p-inst-2025::sec::section-a-instructions::b01), and the PTE
  * credit is applied "after the other state tax credit"
@@ -109,6 +120,10 @@ function otherCredits(
   if (passive === undefined || isGap(passive)) return passive;
   const film = filmCreditsUsed(read, info);
   if (film === undefined || isGap(film)) return film;
+  const lambra = lambraCreditOnReturn(read, info);
+  if (typeof lambra !== "number") return lambra;
+  const enterpriseZone = enterpriseZoneCreditUsed(read, info);
+  if (typeof enterpriseZone !== "number") return enterpriseZone;
   const filmIn = (section: string) =>
     film
       .filter((credit) => credit.program.section === section)
@@ -117,8 +132,14 @@ function otherCredits(
   return [
     { name: PRISON_LABOR_CREDIT_NAME, code: PRISON_LABOR_CREDIT_CODE, amount: prisonLabor },
     ...filmIn("A2"),
+    { name: LAMBRA_CREDIT_NAME, code: LAMBRA_CREDIT_CODE, amount: lambra },
     { name: PRIOR_YEAR_AMT_CREDIT_NAME, code: PRIOR_YEAR_AMT_CREDIT_CODE, amount: priorYearAmt },
     ...filmIn("B2"),
+    {
+      name: ENTERPRISE_ZONE_CREDIT_NAME,
+      code: ENTERPRISE_ZONE_CREDIT_CODE,
+      amount: enterpriseZone,
+    },
     ...passive.map((credit) => ({ name: credit.name, code: credit.code, amount: credit.used })),
     { name: OTHER_STATE_CREDIT_NAME, code: OTHER_STATE_CREDIT_CODE, amount: otherState },
     { name: PTE_CREDIT_NAME, code: PTE_CREDIT_CODE, amount: pte },
@@ -131,7 +152,9 @@ const filesOtherCreditForm = (info: Form540FilingInfo) =>
   filesScheduleS(info) ||
   files3804Cr(info) ||
   files3801Cr(info) ||
-  files3541(info);
+  files3541(info) ||
+  files3805Z(info) ||
+  files3807(info);
 
 /*
  * "To claim only one or two credits, enter the credit name, code, and amount of

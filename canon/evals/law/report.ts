@@ -53,6 +53,8 @@ export interface ReportInput {
   crowding: CrowdingRun[];
   regCases: LawCase[];
   regRuns: ModeRun[];
+  caCases: LawCase[];
+  caRuns: ModeRun[];
   date: string;
 }
 
@@ -61,9 +63,9 @@ const listOrNone = (ids: string[]) =>
 
 function crowdingLines(crowding: CrowdingRun[]): string[] {
   return [
-    "## The Code cases on the whole library",
+    "## The Code cases with no source",
     "",
-    `The same Code cases with no source filter, so the regulations compete for the top ${TOP_K}. **Crowded out** counts the statute hits of the statute-only top ${TOP_K} that are not in the whole library's top ${TOP_K}, over all cases.`,
+    `The same Code cases with no source filter (searchLaw's default: the statute and the regulations), so the regulations compete for the top ${TOP_K}. **Crowded out** counts the statute hits of the statute-only top ${TOP_K} that are not in the default search's top ${TOP_K}, over all cases.`,
     "",
     table(
       ["Mode", "Statute hits", "Crowded out", "Regulation hits", "Section lost", "Path lost"],
@@ -86,13 +88,29 @@ function regulationLines(regCases: LawCase[], regRuns: ModeRun[]): string[] {
     "",
     UNREVIEWED,
     "",
-    `Questions the statute leaves to the regulations, in \`canon/evals/law/regCases.json\`, searched on the whole library (searchLaw's default). A hit counts as above; the sections are regulation sections.`,
+    `Questions the statute leaves to the regulations, in \`canon/evals/law/regCases.json\`, searched with no source (searchLaw's default: the statute and the regulations). A hit counts as above; the sections are regulation sections.`,
     "",
     summary(regRuns),
     "",
     "### Misses",
     "",
     ...regRuns.flatMap((run) => [...missLines(regCases, run, "####"), ""]),
+  ];
+}
+
+function californiaLines(caCases: LawCase[], caRuns: ModeRun[]): string[] {
+  return [
+    "## California cases",
+    "",
+    UNREVIEWED,
+    "",
+    'Questions about California\'s personal income tax law, in `canon/evals/law/caCases.json`, searched on California\'s code only (source "california"): searchLaw returns California only when a caller names it. The sections are sections of the Revenue and Taxation Code ("CA 17041").',
+    "",
+    summary(caRuns),
+    "",
+    "### Misses",
+    "",
+    ...caRuns.flatMap((run) => [...missLines(caCases, run, "####"), ""]),
   ];
 }
 
@@ -105,7 +123,7 @@ export function renderReport(input: ReportInput): string {
     "",
     "_Not reviewed by a person yet: agents wrote and checked these cases. Use the scores for development only._",
     "",
-    `Each case runs its queries (the statute's words, as an agent writes them after it read the IRS instructions) through the law search, ${TOP_K} hits per query, and merges the hits by best rank. No model call: the vector leg embeds the queries with the local Ollama model. The cases are in \`canon/evals/law/cases.json\`. The Code cases search the statute only (source "statute"); the sections below run them on the whole library, and run the regulation cases.`,
+    `Each case runs its queries (the statute's words, as an agent writes them after it read the IRS instructions) through the law search, ${TOP_K} hits per query, and merges the hits by best rank. No model call: the vector leg embeds the queries with the local Ollama model. The cases are in \`canon/evals/law/cases.json\`. The Code cases search the statute only (source "statute"); the sections below run them with no source, and run the regulation and California cases.`,
     "",
     `- **Section hit:** one of the top ${TOP_K} merged hits is in a section the case expects.`,
     `- **Path hit:** for a case with \`expectPath\`, one of the top ${TOP_K} hits is that subdivision, is inside it, or is the parent block that prints it.`,
@@ -121,6 +139,7 @@ export function renderReport(input: ReportInput): string {
     ...runs.flatMap((run) => [...missLines(cases, run), ""]),
     ...crowdingLines(input.crowding),
     ...regulationLines(input.regCases, input.regRuns),
+    ...californiaLines(input.caCases, input.caRuns),
     "## Run it",
     "",
     "From the repo root, with law.db installed (`npm run corpus -- law sync`) and Ollama running:",

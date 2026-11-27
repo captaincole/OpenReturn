@@ -67,6 +67,7 @@ import {
 } from "./resolverInputs.js";
 import type { Form540FilingInfo } from "./state/ca/540/filingInfo.js";
 import { californiaWithholdingOtherForms } from "./state/ca/540/withholding.js";
+import { form540MustFile } from "./state/ca/540nr/mustFile.js";
 import { resolveActivityAdjustments } from "./state/ca/schedule-ca/activities.js";
 import type { ScheduleCaFilingInfo } from "./state/ca/schedule-ca/filingInfo.js";
 import { phone, ssn } from "./values.js";
@@ -133,9 +134,8 @@ const spouseInputs = (inputs: ResolverInputs) => ({
 
 export function resolve540Info(inputs: ResolverInputs): Form540FilingInfo {
   const { decisionByKey, factByKey } = inputs;
-  const resolution = resolveMustFile(decisionByKey, {
-    explicitKey: "decisions.scope.must_file_ca_540",
-  });
+  // A return that files Form 540NR does not file Form 540 (state/ca/540nr/mustFile.ts).
+  const resolution = form540MustFile(inputs);
   const useTaxOwed = num(inputs, "use_tax.owed_amount");
   const useTaxZeroReason = decisionByKey.get("decisions.scope.use_tax_zero_reason");
   return {

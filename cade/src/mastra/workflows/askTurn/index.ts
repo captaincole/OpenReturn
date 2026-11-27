@@ -1,6 +1,7 @@
 import { createStep, createWorkflow } from "@mastra/core/workflows";
 import { z } from "zod";
 import { askCanon } from "../../canon/client";
+import { ALL_JURISDICTIONS, jurisdictionSchema } from "../../canon/jurisdictions";
 import type { AskHistoryTurn } from "../../canon/schemas";
 import {
   completeAskTurn,
@@ -24,6 +25,8 @@ const historyTurnSchema = z.object({ question: z.string(), answer: z.string() })
 const loadedTurnSchema = askTurnInputSchema.extend({
   question: z.string(),
   history: z.array(historyTurnSchema),
+  /** The jurisdictions the turn asks Canon to search (stored with the turn by the route). */
+  jurisdictions: z.array(jurisdictionSchema).min(1),
   /** Epoch ms when the run started: the turn's duration counts from here. */
   started: z.number(),
 });
@@ -54,6 +57,7 @@ const loadStep = createStep({
       ...inputData,
       question: turn.question,
       history: history(earlier),
+      jurisdictions: turn.jurisdictions,
       started: Date.now(),
     };
   },
@@ -64,7 +68,11 @@ const answerStep = createStep({
   inputSchema: loadedTurnSchema,
   outputSchema: askTurnOutputSchema,
   execute: async ({ inputData: turn }) => {
-    const result = await askCanon({ question: turn.question, history: turn.history });
+    const result = await askCanon({
+      question: turn.question,
+      history: turn.history,
+      jurisdictions: turn.jurisdictions,
+    });
     const durationMs = Date.now() - turn.started;
     if (result.status === "failed") {
       await failAskTurn(turn.turnId, `The answer failed: ${result.error}`, result.log, durationMs);
@@ -75,11 +83,16 @@ const answerStep = createStep({
       coverage: result.coverage,
       citations: result.citations,
       missingDocuments: result.missingDocuments,
-      // The query log holds the statute round too: no new column. A fake Canon may leave these out.
+      /*
+       * The query log holds the statute round and the jurisdictions searched too: no new column.
+       * A fake Canon may leave the statute fields out. A Canon from before the list sends no
+       * jurisdictions: it ignored the list and searched all of them.
+       */
       log: {
         steps: result.log.steps,
         statuteConsulted: result.statuteConsulted ?? false,
         conflicts: result.conflicts ?? [],
+        jurisdictions: result.jurisdictions ?? ALL_JURISDICTIONS,
       },
       durationMs,
     });
