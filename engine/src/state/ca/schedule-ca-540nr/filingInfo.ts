@@ -7,11 +7,14 @@
 import type { CaResidencyFactValue, CaStatedAmountLine } from "../../../facts/index.js";
 import type { Form540NRFilingInfo } from "../540nr/filingInfo.js";
 import type { ScheduleCaFilingInfo } from "../schedule-ca/filingInfo.js";
+import type { ScheduleD540NRFilingInfo } from "../schedule-d-540nr/filingInfo.js";
 
 export interface ScheduleCa540NRFilingInfo
   extends
     ScheduleCaFilingInfo,
-    Pick<Form540NRFilingInfo, "formsNeededOnly540" | "caResidencyStatus"> {
+    Pick<Form540NRFilingInfo, "formsNeededOnly540" | "caResidencyStatus">,
+    // Line 7a columns B and C: Schedule D (540NR) lines 12a and 12b, and its gap.
+    Pick<ScheduleD540NRFilingInfo, "scheduleD540NRFigures"> {
   /* Part I: each person's stated residency answers (facts/kinds/caResidency.ts). */
   caResidencyTaxpayer?: CaResidencyFactValue;
   caResidencySpouse?: CaResidencyFactValue;
