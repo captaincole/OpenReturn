@@ -8,6 +8,7 @@
 import { describe, expect, it } from "vitest";
 import {
   CA_ENTERPRISE_ZONE_KEYS,
+  makeCaFilmCreditFactKey,
   type CaEnterpriseZoneBusinessFactValue,
 } from "../../../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../../../src/facts/rows.js";
@@ -191,6 +192,36 @@ describe("Schedule P (540) and the credits after it", () => {
     expect(run.value(ezField("0.line.1a_hiring_credit_carryover"))).toBe(7_971);
     expect(run.value("schedule-s.0.line.2_california_tax_liability")).toBe(24_729 - 7_971);
     expect(run.value("form-540.line.45_schedule_p_credits")).toBe(7_971 + 1_800 + 4_000);
+  });
+});
+
+describe("FTB 3541 Part IV with an enterprise zone credit", () => {
+  /* A 2025 program 4.0 credit that elects refund; the EZ credit comes after it in Section B2. */
+  const program40 = row("other", makeCaFilmCreditFactKey("program-40"), {
+    certificateNumber: 8300,
+    yearIssued: 2025,
+    copyrightRegistrationNumber: "PA0000000001",
+    source: "generated",
+    credit: 40_000,
+    carryoverFromPriorYear: 0,
+    refundableElection: true,
+  });
+  const line21 = "form-3541.1.line.21_ca_income_tax_liability";
+
+  it("a credit carryover makes line 21 a gap: the engine does not reorder the credits", () => {
+    const run = evaluate([...base.facts, program40]);
+    expect(run.files("form-3541")).toBe(true);
+    expect(run.reason(line21)).toMatch(/enterprise zone, passive/);
+  });
+
+  it("an EZ NOL alone takes no credit, so line 21 is figured", () => {
+    let facts = withEz(CA_ENTERPRISE_ZONE_KEYS.hiringCreditCarryover, 0);
+    facts = withEz(CA_ENTERPRISE_ZONE_KEYS.salesTaxCreditCarryover, 0, facts);
+    const run = evaluate([...facts, program40]);
+    expect(run.files("form-3805z")).toBe(true);
+    const tax = run.value("form-540.line.35_total_tax_after_credits");
+    expect(typeof tax).toBe("number");
+    expect(run.value(line21)).toBe(tax);
   });
 });
 

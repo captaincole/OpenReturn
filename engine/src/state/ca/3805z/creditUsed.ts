@@ -141,6 +141,20 @@ export function enterpriseZoneSectionB2Credits(
 }
 
 /*
+ * DECISION (2026-11-26, by the author): the enterprise zone credit takes the
+ * tax left after the credits of Schedule P (540) Sections A1, A2 and B1 (the
+ * child and dependent care credit, the credit for prior year AMT, the
+ * renter's credit), not before them.
+ * - FTB 3805Z booklet: "Business credits should be applied against 'net tax'
+ *   before other credits" (ca-3805z-booklet-2025::sec::general-information::b02).
+ * - Schedule P (540): "If your credits are taken in more than one section,
+ *   complete each section before going to the next section"
+ *   (ca-540-sched-p-inst-2025::sec::to-complete-part-iii::b01), and Section B2
+ *   comes after Sections A1, A2 and B1.
+ * The engine follows Schedule P, the form that orders the credits: the
+ * booklet's sentence sits in its paragraph on the $5,000,000 business credit
+ * limit, and FTB 3507 reads it the same way (3507/QUESTIONS.md, item 3).
+ *
  * The credit taken. With Schedule P (540), column (b) of its line
  * (ca-540-sched-p-inst-2025::sec::how-to-claim-your-credits::b01). Without
  * it, the credit up to the tax left after the credits before Section B2 and
