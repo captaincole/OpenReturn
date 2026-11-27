@@ -9,12 +9,12 @@ rules and their edges.
 Each is decided by the author, with a `DECISION` comment and a row in
 `docs/rule-decisions.md`.
 
-1. **Line 6c's third-year amount (row A103).** "subject to a $1,000 limit per
+1. **Line 6c's third-year amount (row A111).** "subject to a $1,000 limit per
    employee after taking into account the percentage that applies on Line 6g"
    against "do not include contributions of more than $1,334 per employee"
    (`irs-8881-inst-2025::sec::line-6c::b01`). The engine uses the printed
    $1,334. `lines.ts`, `LINE_6C_CAP_BY_PLAN_YEAR`.
-2. **Who line 6a counts (row A104).** Line 6a has no pay test
+2. **Who line 6a counts (row A112).** Line 6a has no pay test
    (`::line-6a::b01`); the eligible employer test counts employees paid at
    least $5,000 (`::section-2-small-employer-contributions::b01`). The engine
    uses the $5,000 count for line 6a and the Part III limit.
@@ -111,7 +111,7 @@ not include contributions of more than $1,334 per employee"
 Statute: "The amount determined under paragraph (1) ... with respect to any
 employee of the employer shall not exceed $1,000"
 (`usc-26-2025::sec::s45e::f-2-A`). The engine follows the instructions
-(decision A103).
+(decision A111).
 
 ## Second opinions
 
@@ -120,7 +120,7 @@ employee of the employer shall not exceed $1,000"
   the blind fill 0) with no employee at or under $1,000 (item 8). The blind
   doubts that could change dollars (no credit outside the credit years, the
   $1,334 third-year amount, rounding, wages of exactly $105,000, line 12's
-  window) match the engine's defaults (items 11 to 13, decision A103).
+  window) match the engine's defaults (items 11 to 13, decision A111).
 - **PolicyEngine-US 2.154.1** (commit 0fbed6ddb1): `variables/gov/irs` and
   `parameters/gov/irs` have no section 45E, Form 8881, startup cost,
   auto-enrollment or military spouse variable. `general_business_credit` is
@@ -146,7 +146,7 @@ employee of the employer shall not exceed $1,000"
 | --- | --- |
 | Header (name, SSN) | stated rule |
 | Section 1, lines A to 5 | stated rule (form and instructions) |
-| Section 2, lines 6a to 6g | stated rule; decisions A103 and A104 |
+| Section 2, lines 6a to 6g | stated rule; decisions A111 and A112 |
 | Lines 7, 10 and 14 (K-1 codes AE, AF, AG) | stated rule |
 | Totals, lines 8, 11 and 15 | stated rule |
 | Part II, line 9 | stated rule |

@@ -1,0 +1,888 @@
+{
+  "formId": "form-8820",
+  "fieldCount": 98,
+  "entries": [
+    {
+      "fieldId": "form-8820.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-SAJS2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-11TSG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.0.line.1_qualified_clinical_testing_expenses_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "937"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.0.line.1_qualified_clinical_testing_expenses_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "2,550"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.0.line.2a_credit_amount_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "041"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.0.line.2a_credit_amount_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "1,144"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.0.line.2a_elect_reduced_credit_280c_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.0.line.2a_elect_reduced_credit_280c_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.0.line.2b_form_8932_wages_portion_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "022"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.0.line.2b_form_8932_wages_portion_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "9,291"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.0.line.2c_subtract_2b_from_2a_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "917"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.0.line.2c_subtract_2b_from_2a_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "7,263"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.0.line.3_pass_through_orphan_drug_credit_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "354"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.0.line.3_pass_through_orphan_drug_credit_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "7,593"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.0.line.4_add_lines_2c_and_3_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "568"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.0.line.4_add_lines_2c_and_3_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "3,179"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.0.line.5_allocated_to_beneficiaries_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "734"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.0.line.5_allocated_to_beneficiaries_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "5,469"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.0.line.6_estates_trusts_subtract_5_from_4_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "452"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.0.line.6_estates_trusts_subtract_5_from_4_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "2,968"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7a_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7a[0].f2_3[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7a_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7a[0].f2_2[0]",
+          "text": "T-BFNEP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7a_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7a[0].f2_1[0]",
+          "text": "T-1B1B7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7b_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7b[0].f2_6[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7b_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7b[0].f2_5[0]",
+          "text": "T-3ROVD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7b_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7b[0].f2_4[0]",
+          "text": "T-OJ5P4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7c_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7c[0].f2_9[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7c_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7c[0].f2_8[0]",
+          "text": "T-1WZC1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7c_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7c[0].f2_7[0]",
+          "text": "T-12RS6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7d_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7d[0].f2_12[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7d_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7d[0].f2_11[0]",
+          "text": "T-18QIF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7d_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7d[0].f2_10[0]",
+          "text": "T-2QDJ5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7e_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7e[0].f2_15[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7e_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7e[0].f2_14[0]",
+          "text": "T-O7G28"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7e_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7e[0].f2_13[0]",
+          "text": "T-K77B7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7f_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7f[0].f2_18[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7f_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7f[0].f2_17[0]",
+          "text": "T-1HT5W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7f_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7f[0].f2_16[0]",
+          "text": "T-13SGZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7g_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7g[0].f2_21[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7g_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7g[0].f2_20[0]",
+          "text": "T-OHSSV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7g_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7g[0].f2_19[0]",
+          "text": "T-AR5YG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7h_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7h[0].f2_24[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7h_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7h[0].f2_23[0]",
+          "text": "T-15IM6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7h_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7h[0].f2_22[0]",
+          "text": "T-K4GXW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7i_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7i[0].f2_27[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7i_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7i[0].f2_26[0]",
+          "text": "T-YONOM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7i_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7i[0].f2_25[0]",
+          "text": "T-1CNND"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7j_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7j[0].f2_30[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7j_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7j[0].f2_29[0]",
+          "text": "T-123ON"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7j_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7j[0].f2_28[0]",
+          "text": "T-1GISU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7k_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7k[0].f2_33[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7k_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7k[0].f2_32[0]",
+          "text": "T-TDUG7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7k_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7k[0].f2_31[0]",
+          "text": "T-1PBNP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7l_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7l[0].f2_36[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7l_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7l[0].f2_35[0]",
+          "text": "T-JLPOE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7l_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7l[0].f2_34[0]",
+          "text": "T-1AYKS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7m_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7m[0].f2_39[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7m_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7m[0].f2_38[0]",
+          "text": "T-18Z37"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7m_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7m[0].f2_37[0]",
+          "text": "T-YF356"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7n_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7n[0].f2_42[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7n_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7n[0].f2_41[0]",
+          "text": "T-BLQ91"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7n_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7n[0].f2_40[0]",
+          "text": "T-17X57"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7o_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7o[0].f2_45[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7o_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7o[0].f2_44[0]",
+          "text": "T-18VF6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7o_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7o[0].f2_43[0]",
+          "text": "T-IBP4W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7p_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7p[0].f2_48[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7p_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7p[0].f2_47[0]",
+          "text": "T-1CFI6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7p_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7p[0].f2_46[0]",
+          "text": "T-1EVZ1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7q_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7q[0].f2_51[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7q_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7q[0].f2_50[0]",
+          "text": "T-VT8YN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7q_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7q[0].f2_49[0]",
+          "text": "T-WSBKM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7r_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7r[0].f2_54[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7r_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7r[0].f2_53[0]",
+          "text": "T-FSLTB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7r_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7r[0].f2_52[0]",
+          "text": "T-1W8RD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7s_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7s[0].f2_57[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7s_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7s[0].f2_56[0]",
+          "text": "T-JKHBZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7s_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7s[0].f2_55[0]",
+          "text": "T-1UHIU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7t_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7t[0].f2_60[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7t_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7t[0].f2_59[0]",
+          "text": "T-19BON"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7t_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7t[0].f2_58[0]",
+          "text": "T-14W5M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7u_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7u[0].f2_63[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7u_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7u[0].f2_62[0]",
+          "text": "T-1S3SB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7u_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7u[0].f2_61[0]",
+          "text": "T-J687E"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7v_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7v[0].f2_66[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7v_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7v[0].f2_65[0]",
+          "text": "T-AJT1Q"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7v_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7v[0].f2_64[0]",
+          "text": "T-I1SXT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7w_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7w[0].f2_69[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7w_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7w[0].f2_68[0]",
+          "text": "T-1NJMV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7w_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7w[0].f2_67[0]",
+          "text": "T-CQ2V5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7x_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7x[0].f2_72[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7x_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7x[0].f2_71[0]",
+          "text": "T-1MGM1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7x_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7x[0].f2_70[0]",
+          "text": "T-1MS0X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7y_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7y[0].f2_75[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7y_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7y[0].f2_74[0]",
+          "text": "T-1LTMW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7y_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7y[0].f2_73[0]",
+          "text": "T-1JRDO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7z_date_drug_designated_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7z[0].f2_78[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7z_designation_application_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7z[0].f2_77[0]",
+          "text": "T-1DRWR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8820.1.line.7z_orphan_drug_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Row7z[0].f2_76[0]",
+          "text": "T-SFIZG"
+        }
+      ]
+    }
+  ]
+}

@@ -10,7 +10,7 @@ Categories in this bucket today:
 - Dependent relationships (the claim of relationship itself; e.g., "this person is my child")
 - Mailing address (where the IRS sends paper correspondence)
 
-**Default rule.** Trust the user's word. Tier \`low\` regardless of dollar consequence. A definitional IRS passage (e.g., "you are single if …") is sufficient grounding — don't demand corroborating facts that don't exist for the category.
+**Default rule.** Trust the user's word. Tier \`low\` regardless of dollar consequence. A definitional IRS or FTB passage (e.g., "you are single if …") is sufficient grounding — don't demand corroborating facts that don't exist for the category.
 
 **Override — contradicting evidence elsewhere in the return raises the tier.**
 - Filing status "single" with a fact like \`identity.spouse_name\` populated → \`high\`. Real contradiction.

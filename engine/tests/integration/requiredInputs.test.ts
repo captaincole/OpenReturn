@@ -176,8 +176,19 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "Form 982 lists a debt fact again while an answer inside it is missing",
   ],
   [
+    /^empowerment_zone_employee\.[^.]+$/,
+    "each fact is one whole employee of the taxpayer's business or farm who worked in an " +
+      "empowerment zone (Form 8844 line 1); whether one exists is Cade's question",
+  ],
+  [
     /^armed_forces_move\.[^.]+$/,
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
+  ],
+  [
+    /^disabled_access\.[^.]+$/,
+    "each fact is one group of a business's eligible access expenditures (Form 8826 line 1); " +
+      "whether a business paid any is Cade's question. Form 8826 lists the fact again while it " +
+      "is malformed, and asks the prior-year answers once one exists",
   ],
   [
     /^tip_credit\.[^.]+$/,
@@ -195,6 +206,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^low_income_housing_recapture\.[^.]+$/,
     "each fact is a whole building's credit recapture (Form 8611); whether the qualified basis " +
       "fell is Cade's question. A K-1 with a recapture asks for its building fact",
+  ],
+  [
+    /^low_income_housing_building\.[^.]+$/,
+    "each fact is a whole building a taxpayer owns directly (Form 8609-A, one for each building); " +
+      "whether one exists is Cade's question. A building fact missing an answer its year needs " +
+      "is listed again",
   ],
   [
     /^look_back\.long_term_contracts$/,
