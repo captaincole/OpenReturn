@@ -1,9 +1,21 @@
 {
-  "version": "law-v2",
-  "description": "Prebuilt law library for Canon: the Internal Revenue Code (26 U.S.C., through Public Law 119-73), the Treasury regulations (26 CFR Parts 1 and 301, eCFR as of 2025-12-31) and California's Revenue and Taxation Code (Division 2, Parts 10 and 10.2, Personal Income Tax, as of 2026-11-22). 8,009 section rows, 134,206 passages, FTS5 + embeddinggemma-2 768-dim embeddings, and each document's source files.",
-  "file": "law.db",
-  "sha256": "305eae2e2c6a98e053928057c18fb9b086549b6986740d9a05d1e127ad9c4c5b",
-  "sizeBytes": 1047478272,
-  "url": "https://github.com/captaincole/openreturn/releases/download/law-v2/law.db",
-  "_notes": "GitHub Release asset (law-v2 tag). Optional: nothing needs law.db until an agent or a person asks for the law. Embeddings are EmbeddingGemma 2 (ollama/embeddinggemma-2, stamped in ref_meta)."
+  "version": "law-v3",
+  "description": "Prebuilt law library for Canon, one file per jurisdiction. law-federal.db: the Internal Revenue Code (26 U.S.C., through Public Law 119-73) and the Treasury regulations (26 CFR Parts 1 and 301, eCFR as of 2025-12-31). law-ca.db: California's Revenue and Taxation Code (Division 2: the franchise and income tax laws, as of 2026-11-22). FTS5 + embeddinggemma-2 768-dim embeddings, and each document's source files.",
+  "files": [
+    {
+      "jurisdiction": "federal",
+      "file": "law-federal.db",
+      "sha256": "83b408ed32138c9148011a2f4a302f57bb4581b71030a5a150151087eafecd02",
+      "sizeBytes": 905826304,
+      "url": "https://github.com/captaincole/openreturn/releases/download/law-v3/law-federal.db"
+    },
+    {
+      "jurisdiction": "CA",
+      "file": "law-ca.db",
+      "sha256": "ffddcb98a3351b8f0634b34c19482118a51448494736717008ec8d61cfeeccc7",
+      "sizeBytes": 56733696,
+      "url": "https://github.com/captaincole/openreturn/releases/download/law-v3/law-ca.db"
+    }
+  ],
+  "_notes": "GitHub Release assets (law-v3 tag), one per jurisdiction: `law fetch` installs each to canon/.data/law/<jurisdiction>.db (federal.db, ca.db), and `law fetch --jurisdiction CA` installs one. A new state is one more entry; a state can be published again without the federal file. Optional: nothing needs the law until an agent or a person asks for it. Embeddings are EmbeddingGemma 2 (ollama/embeddinggemma-2, stamped in each file's ref_meta)."
 }

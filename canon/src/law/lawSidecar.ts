@@ -10,7 +10,7 @@ import { isPublishedDate } from "../refdocs/published";
  * the corpus walk never sees it. It pins one release of a law document:
  * the Code as one zip (law.zip next to it), the regulations as one file per
  * CFR part, each pinned by its own sha256 (the files sit next to it, and
- * law.db stores them zipped as one blob), California's code as one zip cut
+ * the law file stores them zipped as one blob), California's code as one zip cut
  * from the Legislature's session archive (caExtract.ts). All are gitignored.
  */
 
@@ -46,7 +46,7 @@ export interface LawSidecar {
 export interface LawEntry {
   sidecar: LawSidecar;
   sidecarPath: string;
-  /** law.zip next to the sidecar: the Code's release zip, California's extract, or the parts zipped as law.db stores them. */
+  /** law.zip next to the sidecar: the Code's release zip, California's extract, or the parts zipped as the law file stores them. */
   zipPath: string;
   /** For messages and the stored source_path: relative to sources/. */
   zipRelPath: string;

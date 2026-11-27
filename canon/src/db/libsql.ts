@@ -1,27 +1,50 @@
 import { createClient, type Client } from "@libsql/client";
 import "dotenv/config";
 import { existsSync, mkdirSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { ALL_JURISDICTIONS, type Jurisdiction } from "../jurisdiction";
 
 /*
- * Two library files with the same tables: corpus.db (IRS/FTB instructions and
- * publications) and law.db (the Internal Revenue Code, an optional download).
- * Set CORPUS_DB_PATH / LAW_DB_PATH so `mastra dev` and the CLIs agree on one
- * file: the module-relative default resolves differently inside Mastra's bundle.
+ * The library files, all with the same tables: corpus.db (IRS/FTB
+ * instructions and publications), and one law file per jurisdiction
+ * (optional downloads): law/federal.db holds the Internal Revenue Code and
+ * the Treasury regulations, law/ca.db California's code. A new state is one
+ * more file. Set CORPUS_DB_PATH / LAW_DB_DIR so `mastra dev` and the CLIs
+ * agree on the files: the module-relative default resolves differently
+ * inside Mastra's bundle.
  */
-export type Library = "corpus" | "law";
+export type LawLibrary = `law:${Jurisdiction}`;
+export type Library = "corpus" | LawLibrary;
+
+const LAW_MARK = "law:";
+
+/** The law file of one jurisdiction: "law:federal", "law:CA". */
+export const lawLibrary = (jurisdiction: Jurisdiction): LawLibrary => `${LAW_MARK}${jurisdiction}`;
+
+export const isLawLibrary = (library: Library): library is LawLibrary => library !== "corpus";
+
+export const jurisdictionOfLibrary = (library: LawLibrary): Jurisdiction =>
+  library.slice(LAW_MARK.length) as Jurisdiction;
 
 const MODULE_DIR = dirname(fileURLToPath(import.meta.url));
-const DEFAULT_DB_PATHS: Record<Library, string> = {
-  corpus: resolve(MODULE_DIR, "../../.data/corpus.db"),
-  law: resolve(MODULE_DIR, "../../.data/law.db"),
-};
-const DB_PATH_ENV: Record<Library, string> = { corpus: "CORPUS_DB_PATH", law: "LAW_DB_PATH" };
+const DEFAULT_CORPUS_PATH = resolve(MODULE_DIR, "../../.data/corpus.db");
+const DEFAULT_LAW_DIR = resolve(MODULE_DIR, "../../.data/law");
+
+/** The folder of the law files. */
+export function lawDbDir(): string {
+  const fromEnv = process.env.LAW_DB_DIR;
+  return fromEnv ? resolve(fromEnv) : DEFAULT_LAW_DIR;
+}
+
+/** "federal.db", "ca.db": the jurisdiction code in lower case. */
+export const lawFileName = (jurisdiction: Jurisdiction): string =>
+  `${jurisdiction.toLowerCase()}.db`;
 
 export function libraryDbPath(library: Library): string {
-  const fromEnv = process.env[DB_PATH_ENV[library]];
-  return fromEnv ? resolve(fromEnv) : DEFAULT_DB_PATHS[library];
+  if (isLawLibrary(library)) return join(lawDbDir(), lawFileName(jurisdictionOfLibrary(library)));
+  const fromEnv = process.env.CORPUS_DB_PATH;
+  return fromEnv ? resolve(fromEnv) : DEFAULT_CORPUS_PATH;
 }
 
 export const corpusDbPath = (): string => libraryDbPath("corpus");
@@ -176,8 +199,23 @@ async function documentCount(db: Client): Promise<number> {
   return Number(count.rows[0]?.n ?? 0);
 }
 
-/* Checks the file first: opening a missing law.db would create an empty one. */
-export async function lawInstalled(): Promise<boolean> {
-  if (!existsSync(libraryDbPath("law"))) return false;
-  return (await documentCount(await openLibraryDb("law"))) > 0;
+/*
+ * Checks the file first: opening a missing law file would create an empty
+ * one. With a jurisdiction, that jurisdiction's file; with none, any of them.
+ */
+export async function lawInstalled(jurisdiction?: Jurisdiction): Promise<boolean> {
+  if (jurisdiction === undefined) return (await installedLawJurisdictions()).length > 0;
+  if (!existsSync(libraryDbPath(lawLibrary(jurisdiction)))) return false;
+  return (await documentCount(await openLibraryDb(lawLibrary(jurisdiction)))) > 0;
+}
+
+/** The jurisdictions of these (all unless named) whose law file holds a document, in table order. */
+export async function installedLawJurisdictions(
+  of: readonly Jurisdiction[] = ALL_JURISDICTIONS,
+): Promise<Jurisdiction[]> {
+  const installed: Jurisdiction[] = [];
+  for (const jurisdiction of ALL_JURISDICTIONS)
+    if (of.includes(jurisdiction) && (await lawInstalled(jurisdiction)))
+      installed.push(jurisdiction);
+  return installed;
 }

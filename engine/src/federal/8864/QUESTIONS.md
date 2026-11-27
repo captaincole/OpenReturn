@@ -6,8 +6,8 @@ Form 8864 (Rev. December 2025) for an individual. A 2025 return claims only the 
 
 Each is decided by the author, with a `DECISION` comment and a row in `docs/rule-decisions.md`.
 
-1. **Which amount is income, and where (A110).** Form 8864 says to include line 9 in income, "under 'other income'" (`irs-8864-face-2025::sec::face-page-1::b01`; `irs-8864-inst-2025::sec::line-9::b01`). Schedule C line 6 names "line 11 of Form 8864" (`irs-1040sc-inst-2025::sec::line-6::b01`), and Schedule F line 8 names line 10 (`irs-1040sf-inst-2025::sec::line-8::b01`). The engine includes line 9, on Schedule C line 6 of the business that made the fuel. `DECISION` in `receivers.ts`.
-2. **Who files with a K-1 credit only (A111).** Form 8864: a taxpayer whose only source is a pass-through entity is not required to file it (`general-instructions::b01`). The partner's K-1 instructions list Form 8864 as an exception that must be filed (`irs-1065k1-inst-2025::sec::box-15-credits::b01`). The engine follows Form 8864's own instructions: the credit goes to Form 3800 line 1l or 1ff directly. `DECISION` in `resolveInfo.ts`.
+1. **Which amount is income, and where (A117).** Form 8864 says to include line 9 in income, "under 'other income'" (`irs-8864-face-2025::sec::face-page-1::b01`; `irs-8864-inst-2025::sec::line-9::b01`). Schedule C line 6 names "line 11 of Form 8864" (`irs-1040sc-inst-2025::sec::line-6::b01`), and Schedule F line 8 names line 10 (`irs-1040sf-inst-2025::sec::line-8::b01`). The engine includes line 9, on Schedule C line 6 of the business that made the fuel. `DECISION` in `receivers.ts`.
+2. **Who files with a K-1 credit only (A118).** Form 8864: a taxpayer whose only source is a pass-through entity is not required to file it (`general-instructions::b01`). The partner's K-1 instructions list Form 8864 as an exception that must be filed (`irs-1065k1-inst-2025::sec::box-15-credits::b01`). The engine follows Form 8864's own instructions: the credit goes to Form 3800 line 1l or 1ff directly. `DECISION` in `resolveInfo.ts`.
 
 ## Should we do this now
 
@@ -54,5 +54,5 @@ Each is a doubt with no conflicting text: a default, done now, or one sentence o
 | Line 11 | stated rule |
 | Lines 12 and 13 (blank for an individual) | stated rule |
 | Limits (15 million, 60 million, registration) | stated rule; more than one source is own reading |
-| Schedule C line 6, Form 6251 line 3 | own reading (decision A110, item 6) |
+| Schedule C line 6, Form 6251 line 3 | own reading (decision A117, item 6) |
 | Form 3800 lines 1l and 1ff | stated rule |

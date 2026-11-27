@@ -89,6 +89,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "Form 5884 lists the fact again while it is malformed",
   ],
   [
+    /^small_employer_plan\.[^.]+$/,
+    "each fact is the whole retirement plan of the taxpayer's own business or farm that claims " +
+      "the Form 8881 credits; whether one exists is Cade's question, as for a business fact. " +
+      "Form 8881 lists the fact again while it is malformed",
+  ],
+  [
     /^casualty\.[^.]+$/,
     "each fact is a whole casualty event (Form 4684); whether one happened is Cade's question",
   ],
@@ -179,10 +185,28 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],
   [
+    /^disabled_access\.[^.]+$/,
+    "each fact is one group of a business's eligible access expenditures (Form 8826 line 1); " +
+      "whether a business paid any is Cade's question. Form 8826 lists the fact again while it " +
+      "is malformed, and asks the prior-year answers once one exists",
+  ],
+  [
     /^tip_credit\.[^.]+$/,
     "each fact is one whole business's payroll tip records (Form 8846 lines 1 to 4); whether a " +
       "business had tipped employees is Cade's question. Form 8846 lists the fact again while " +
       "its Medicare-only tips are missing",
+  ],
+  [
+    /^research_credit$/,
+    "the fact is the whole of the taxpayer's own research for Form 6765 (Sections A to G); " +
+      "whether the business did qualified research is Cade's question. Form 6765 asks for it when " +
+      "the decision files the form without one",
+  ],
+  [
+    /^childcare_expenditure\.[^.]+$/,
+    "each fact is one whole childcare expenditure the business claims the credit for (Form " +
+      "8882 lines 1 and 3); whether one exists is Cade's question. Form 8882 lists the fact " +
+      "again while it is malformed",
   ],
   [
     /^agri_biodiesel\.[^.]+$/,

@@ -7,10 +7,11 @@ import type { Library } from "../../../src/db/libsql.js";
 
 const dir = mkdtempSync(path.join(tmpdir(), "canon-libraries-test-"));
 process.env.CORPUS_DB_PATH = path.join(dir, "corpus.db");
-process.env.LAW_DB_PATH = path.join(dir, "law.db");
+process.env.LAW_DB_DIR = path.join(dir, "law");
 
 // Imported after the env is set, so every library resolves to the temp folder.
-const { lawInstalled, libraryDbPath } = await import("../../../src/db/libsql.js");
+const { lawInstalled, libraryDbPath, installedLawJurisdictions } =
+  await import("../../../src/db/libsql.js");
 const { writeDocument } = await import("../../../src/db/corpusStore.js");
 const { getBlock, hybridSearchRefDocs, searchRefDocs } =
   await import("../../../src/db/corpusSearch.js");
@@ -70,29 +71,40 @@ const ftsDocIds = async (query: string, library?: Library) =>
   (await hybridSearchRefDocs({ query, mode: "fts", library })).map((hit) => hit.docId);
 
 describe("library files", () => {
-  it("reports the law library missing without creating its file", async () => {
+  it("names one law file per jurisdiction, the code in lower case", () => {
+    expect(libraryDbPath("law:federal")).toBe(path.join(dir, "law", "federal.db"));
+    expect(libraryDbPath("law:CA")).toBe(path.join(dir, "law", "ca.db"));
+  });
+
+  it("reports the law library missing without creating a file", async () => {
     expect(await lawInstalled()).toBe(false);
-    expect(existsSync(libraryDbPath("law"))).toBe(false);
+    expect(await lawInstalled("CA")).toBe(false);
+    expect(existsSync(path.join(dir, "law"))).toBe(false);
   });
 
   it("keeps each library's blocks in its own file", async () => {
     await writeDocument(payload("irs-pub-test", "instructions"));
-    await writeDocument(payload("usc-26-test", "statute"), "law");
+    await writeDocument(payload("usc-26-test", "statute"), "law:federal");
 
-    expect(await ftsDocIds("statute", "law")).toEqual(["usc-26-test"]);
+    expect(await ftsDocIds("statute", "law:federal")).toEqual(["usc-26-test"]);
     expect(await ftsDocIds("statute")).toEqual([]);
     expect(await ftsDocIds("instructions")).toEqual(["irs-pub-test"]);
-    expect(await ftsDocIds("instructions", "law")).toEqual([]);
+    expect(await ftsDocIds("instructions", "law:federal")).toEqual([]);
 
-    const lawHits = await searchRefDocs({ query: "statute", library: "law" });
+    const lawHits = await searchRefDocs({ query: "statute", library: "law:federal" });
     expect(lawHits.map((hit) => hit.docId)).toEqual(["usc-26-test"]);
     expect(await searchRefDocs({ query: "statute" })).toEqual([]);
     expect(await getBlock("usc-26-test::sec::preamble::b01")).toBeNull();
-    expect((await getBlock("usc-26-test::sec::preamble::b01", "law"))?.docId).toBe("usc-26-test");
+    const block = await getBlock("usc-26-test::sec::preamble::b01", "law:federal");
+    expect(block?.docId).toBe("usc-26-test");
   });
 
-  it("reports the law library installed once it holds a document", async () => {
-    expect(existsSync(libraryDbPath("law"))).toBe(true);
+  it("reports each jurisdiction installed once its file holds a document", async () => {
+    expect(existsSync(libraryDbPath("law:federal"))).toBe(true);
     expect(await lawInstalled()).toBe(true);
+    expect(await lawInstalled("federal")).toBe(true);
+    expect(await lawInstalled("CA")).toBe(false);
+    expect(await installedLawJurisdictions()).toEqual(["federal"]);
+    expect(existsSync(libraryDbPath("law:CA"))).toBe(false);
   });
 });
