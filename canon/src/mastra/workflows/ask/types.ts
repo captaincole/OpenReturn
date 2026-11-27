@@ -1,5 +1,6 @@
 import { z } from "zod";
 import type { CorpusFormat, SourceFormat } from "../../../db/corpusStore";
+import { jurisdictionSchema, jurisdictionsInputSchema } from "../../../jurisdiction";
 import { conflictSchema, statuteBlockSchema } from "../statute";
 
 // Canon is stateless: Cade keeps the threads in app.db and sends `history`.
@@ -44,6 +45,7 @@ export const askInputSchema = z.object({
     .array(z.object({ question: z.string(), answer: z.string() }))
     .default([])
     .describe("Completed earlier turns of the same conversation, oldest first."),
+  jurisdictions: jurisdictionsInputSchema,
 });
 
 export const askResultSchema = z.object({
@@ -56,6 +58,8 @@ export const askResultSchema = z.object({
   statuteConsulted: z.boolean().default(false),
   // Passages that disagree, with both quotes; nothing picks a winner.
   conflicts: z.array(conflictSchema).default([]),
+  // The jurisdictions searched: every one when the input named none.
+  jurisdictions: z.array(jurisdictionSchema),
   log: z.object({ steps: z.array(z.record(z.string(), z.unknown())) }),
 });
 
