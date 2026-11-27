@@ -41,6 +41,7 @@ export * from "./kinds/caResidency.js";
 export * from "./kinds/casualty.js";
 export * from "./kinds/caTargetedTaxArea.js";
 export * from "./kinds/caWorkMove.js";
+export * from "./kinds/childcareCredit.js";
 export * from "./kinds/childInvestmentIncome.js";
 export * from "./kinds/childUnearnedIncome.js";
 export * from "./kinds/cleanVehicle.js";
