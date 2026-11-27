@@ -45,17 +45,22 @@ function wagesAboveDeduction(inputs: ResolverInputs, figures: EmpowermentZoneFig
   });
 }
 
-/* Lines 1 and 2 and the employers' shares, or the gap that stops them. */
-export function form8844FiguresOf(inputs: ResolverInputs): Form8844Figures {
+const zoneFiguresOf = (inputs: ResolverInputs) => {
   const status = filingStatusOf(inputs);
-  const figures = empowermentZoneFigures(
+  return empowermentZoneFigures(
     inputs.facts,
     status === undefined || status === "married_filing_jointly",
   );
+};
+
+/* Lines 1 and 2 and the employers' shares, the gap that stops them, or blank while an answer waits. */
+export function form8844FiguresOf(inputs: ResolverInputs): Form8844Figures {
+  const figures = zoneFiguresOf(inputs);
   let gap: Unsupported | undefined;
   if (figures.unknownEmployerKeys.length > 0) gap = unsupported(UNKNOWN_EMPLOYER_GAP);
   else if (wagesAboveDeduction(inputs, figures)) gap = unsupported(WAGES_ABOVE_DEDUCTION_GAP);
   if (gap) return { line1: gap, line2: gap, employers: [] };
+  if (figures.waitingKeys.length > 0) return { employers: [] };
   return { line1: figures.line1, line2: figures.line2, employers: employersOf(inputs, figures) };
 }
 
@@ -72,7 +77,9 @@ export function form8844FiguresOf(inputs: ResolverInputs): Form8844Figures {
 export function resolve8844Info(inputs: ResolverInputs): Form8844FilingInfo {
   const figures = form8844FiguresOf(inputs);
   const employeeKeys = getEmpowermentZoneEmployeeFacts(inputs.facts).map((each) => each.key);
+  // A blank line 1 waits on an answer (the missing inputs), so the form files to ask it.
   const claims = typeof figures.line1 !== "number" || figures.line1 > 0;
+  const waiting = figures.line1 === undefined ? zoneFiguresOf(inputs).waitingKeys : [];
   const mustFile = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_8844",
     fallbacks: [
@@ -83,6 +90,12 @@ export function resolve8844Info(inputs: ResolverInputs): Form8844FilingInfo {
       },
     ],
   });
-  const filed = { mustFile: { "form-8844": mustFile }, missingInputs: { "form-8844": [] } };
-  return mustFile.value === true ? { ...filed, form8844: figures } : filed;
+  if (mustFile.value !== true) {
+    return { mustFile: { "form-8844": mustFile }, missingInputs: { "form-8844": [] } };
+  }
+  return {
+    mustFile: { "form-8844": mustFile },
+    missingInputs: { "form-8844": waiting },
+    form8844: figures,
+  };
 }

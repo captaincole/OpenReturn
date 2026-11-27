@@ -96,7 +96,7 @@ export const EMPLOYEES: Record<string, EmpowermentZoneEmployeeFactValue> = {
   "hector-pena": employee({ name: "Hector Pena", livesAndWorksInZone: false, zoneWages: 14500 }),
 };
 
-/* Form 3800 Part III line 4b: the work opportunity credit, which the engine does not figure (Form 5884). */
+/* Form 3800 Part III line 4b: the work opportunity credit, stated as its Form 5884 total (no Form 5884 employee facts here). */
 const workOpportunity: GeneralBusinessCreditFactValue = {
   sourceForm: "5884",
   line: "4b",

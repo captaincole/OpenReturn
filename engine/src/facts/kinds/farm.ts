@@ -10,9 +10,10 @@
  * prints them in Part I (cash) or Part III (accrual).
  */
 
-import { sum } from "../../money.js";
+import { atLeast, sum } from "../../money.js";
 import { isAtRiskAmounts, type AtRiskAmounts } from "./atRisk.js";
 import { empowermentZoneFigures } from "./empowermentZone.js";
+import { workOpportunityCreditByActivity } from "./workOpportunity.js";
 
 type FactRow = { key: string; value: unknown; category: string };
 
@@ -149,8 +150,9 @@ export interface FarmFactValue {
   conservation?: FarmConservation;
   /*
    * Line 22: the credits of Forms 5884, 8844, 8932 and 8994 for the farm's
-   * labor. Not the Form 8844 credit of an empowerment zone employee fact:
-   * farmsOnReturn adds that one (empowermentZone.ts).
+   * labor that no employee fact figures. farmsOnReturn adds the Form 5884 and
+   * Form 8844 credits of the farm's employee facts (FARM_LABOR_CREDITS); a
+   * credit those facts figure is not stated here.
    */
   employmentCredits?: number;
   /* Line 15: the Form 8941 credit for the farm's employee health insurance. */
@@ -285,20 +287,39 @@ export function farmOwnerOf(farm: FarmFactValue): FarmOwner {
 }
 
 /*
- * Line 22: labor hired reduced by "Form 8844, Empowerment Zone Employment
- * Credit" (irs-1040sf-inst-2025::sec::line-22::b01), the farm's share of Form
- * 8844 line 2, added to the credits the farm states.
+ * Schedule F line 22: "Reduce your deduction by the amounts claimed on the
+ * following. • Form 5884, Work Opportunity Credit. • Form 8844, Empowerment
+ * Zone Employment Credit." (irs-1040sf-inst-2025::sec::line-22::b01). The
+ * credits the engine figures from the farm's own employees, by farm key: Form
+ * 5884 line 2 (workOpportunity.ts) and the farm's share of Form 8844 line 2
+ * (empowermentZone.ts). A new credit form adds one entry.
  */
-function withZoneCredit(
+const FARM_LABOR_CREDITS: ReadonlyArray<
+  (facts: ReadonlyArray<FactRow>, joint: boolean) => ReadonlyMap<string, number>
+> = [
+  (facts) => workOpportunityCreditByActivity(facts),
+  (facts, joint) => empowermentZoneFigures(facts, joint).creditByEmployer,
+];
+
+/* Each farm's figured labor credits, added. */
+function figuredLaborCredits(facts: ReadonlyArray<FactRow>, joint: boolean) {
+  const credits = FARM_LABOR_CREDITS.map((creditByFarm) => creditByFarm(facts, joint));
+  return (key: string) => sum(...credits.map((byFarm) => byFarm.get(key)));
+}
+
+/*
+ * The figured credits added to the stated employmentCredits, which Schedule F
+ * line 22 takes off labor hired (federal/schedule-f/expenses.ts).
+ */
+function withLaborCredits(
   farms: Array<{ key: string; value: FarmFactValue }>,
   facts: ReadonlyArray<FactRow>,
   joint: boolean,
 ): Array<{ key: string; value: FarmFactValue }> {
-  const credits = empowermentZoneFigures(facts, joint).creditByEmployer;
-  if (credits.size === 0) return farms;
+  const creditOf = figuredLaborCredits(facts, joint);
   return farms.map((farm) => {
-    const credit = credits.get(farm.key);
-    if (credit === undefined || credit === 0) return farm;
+    const credit = creditOf(farm.key);
+    if (credit === 0) return farm;
     const employmentCredits = sum(farm.value.employmentCredits, credit);
     return { ...farm, value: { ...farm.value, employmentCredits } };
   });
@@ -324,12 +345,37 @@ export function farmsOnReturn(
   const offReturn = (farm: { value: FarmFactValue }) =>
     !joint && farmOwnerOf(farm.value) === "spouse";
   return {
-    farms: withZoneCredit(
+    farms: withLaborCredits(
       farms.filter((farm) => !offReturn(farm)),
       facts,
       joint,
     ),
     spouseKeys: farms.filter(offReturn).map((farm) => farm.key),
     malformedKeys: rows.filter((row) => !isFarm(row.value)).map((row) => row.key),
+  };
+}
+
+/*
+ * The figured part of the farms' line 22 reductions (Forms 5884 and 8844;
+ * Schedule CA line 6): the farms' figured credits in total, and the labor
+ * hired they took off, at most each farm's stated labor hired, so the two
+ * credits of one farm take no dollar twice.
+ */
+export function figuredLaborCreditReduction(
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): { credit: number; reduction: number } {
+  const creditOf = figuredLaborCredits(facts, joint);
+  const farms = farmsOnReturn(facts, joint).farms.map(({ key, value }) => ({
+    credit: creditOf(key),
+    labor: value.expenses?.laborHired,
+  }));
+  return {
+    credit: sum(...farms.map((farm) => farm.credit)),
+    reduction: sum(
+      ...farms.map(({ credit, labor }) =>
+        labor === undefined ? 0 : Math.min(atLeast(0, labor), credit),
+      ),
+    ),
   };
 }

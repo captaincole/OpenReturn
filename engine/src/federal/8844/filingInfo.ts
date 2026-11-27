@@ -13,8 +13,9 @@ export interface Form8844Employer {
 }
 
 export interface Form8844Figures {
-  line1: number | Unsupported;
-  line2: number | Unsupported;
+  /* Undefined while an employee's work opportunity credit wages wait (the form's missingInputs). */
+  line1?: number | Unsupported;
+  line2?: number | Unsupported;
   employers: Form8844Employer[];
 }
 

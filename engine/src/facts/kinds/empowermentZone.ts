@@ -14,7 +14,14 @@
  * S corporation is not stated here: the K-1 fact holds it.
  */
 
-import { countedWagesOf, creditByEmployer, line1Of, line2Of } from "../../federal/8844/lines.js";
+import {
+  countedWagesOf,
+  creditByEmployer,
+  isQualifiedZoneEmployee,
+  line1Of,
+  line2Of,
+} from "../../federal/8844/lines.js";
+import { workOpportunityCreditByActivity } from "./workOpportunity.js";
 
 type FactRow = { key: string; value: unknown; category: string };
 
@@ -68,7 +75,9 @@ export interface EmpowermentZoneEmployeeFactValue {
   /*
    * Wages of this employee used for the work opportunity credit (Form 5884),
    * counted within zoneWages. The engine takes them out of the zone wages and
-   * lowers the $15,000 limit by them (federal/8844/lines.ts). Absent: none.
+   * lowers the $15,000 limit by them (federal/8844/lines.ts). Absent: none,
+   * unless the employer's own employees figure a Form 5884 credit: then the
+   * answer waits (waitingKeys), 0 when the person is not one of them.
    */
   workOpportunityCreditWages?: number;
 }
@@ -122,10 +131,33 @@ export interface EmpowermentZoneFigures {
   employees: EmpowermentZoneEmployeeFact[];
   /* Employees whose employerKey names no business or farm fact: an engine gap on Form 8844. */
   unknownEmployerKeys: string[];
+  /* Employees whose work opportunity credit wages wait (waitingOnWorkOpportunity). */
+  waitingKeys: string[];
   line1: number;
   line2: number;
-  /* Line 2 split among the businesses and farms that paid the wages, by fact key. */
+  /* Line 2 split among the businesses and farms that paid the wages, by fact key; empty while an answer waits. */
   creditByEmployer: Map<string, number>;
+}
+
+/*
+ * The qualified employees whose workOpportunityCreditWages is not stated while
+ * their employer's own employees figure a Form 5884 credit (workOpportunity.ts).
+ * "The $15,000 amount for any employee is reduced by the amount of wages ...
+ * that are used in figuring the work opportunity credit (Form 5884)"
+ * (irs-8844-inst-2025::sec::specific-instructions::b01). The two facts do not
+ * name each other, and a name is not a match, so the answer is asked of each
+ * such employee rather than read as none.
+ */
+function waitingOnWorkOpportunity(
+  facts: ReadonlyArray<FactRow>,
+  employees: EmpowermentZoneEmployeeFact[],
+): string[] {
+  const credits = workOpportunityCreditByActivity(facts);
+  return employees
+    .filter(({ value }) => (credits.get(value.employerKey) ?? 0) > 0)
+    .filter(({ value }) => value.workOpportunityCreditWages === undefined)
+    .filter(({ value }) => isQualifiedZoneEmployee(value))
+    .map((employee) => employee.key);
 }
 
 /* Form 8844 lines 1 and 2 for this return, from the employees whose employer is on it. */
@@ -137,6 +169,7 @@ export function empowermentZoneFigures(
   const placeOf = (fact: EmpowermentZoneEmployeeFact) =>
     employerPlace(facts, fact.value.employerKey, joint);
   const employees = all.filter((fact) => placeOf(fact) === "on_return");
+  const waitingKeys = waitingOnWorkOpportunity(facts, employees);
   const wagesByEmployer = new Map<string, number>();
   for (const employee of employees) {
     const key = employee.value.employerKey;
@@ -147,8 +180,9 @@ export function empowermentZoneFigures(
   return {
     employees,
     unknownEmployerKeys: all.filter((fact) => placeOf(fact) === "unknown").map((fact) => fact.key),
+    waitingKeys,
     line1,
     line2,
-    creditByEmployer: creditByEmployer(line2, wagesByEmployer),
+    creditByEmployer: waitingKeys.length > 0 ? new Map() : creditByEmployer(line2, wagesByEmployer),
   };
 }

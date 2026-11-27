@@ -28,6 +28,8 @@ function line3Of(info: Form8844FilingInfo): Cell {
 /* MANUAL EDIT: line 4, "Add lines 2 and 3"; an individual stops here (face, line 4). */
 function line4(info: Form8844FilingInfo): Cell {
   const line2 = info.form8844?.line2;
+  // Line 2 waits on an employee's work opportunity credit wages, so line 4 waits too.
+  if (info.form8844 !== undefined && line2 === undefined) return undefined;
   const line3 = line3Of(info);
   if (typeof line2 === "number" && typeof line3 !== "object") return line4Of(line2, line3 ?? 0);
   return addCells(line2, line3);

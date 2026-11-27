@@ -11,6 +11,7 @@
 import type { ResolverInputs } from "../../resolverInputs.js";
 import { gap } from "../3800/cells.js";
 import type { CreditSource } from "../3800/filingInfo.js";
+import type { Form8844Figures } from "./filingInfo.js";
 import { resolve8844Info } from "./resolveInfo.js";
 
 const LINE = "3";
@@ -22,15 +23,29 @@ const STATED_OWN_GAP =
 export const isPassThroughZoneCredit = (source: CreditSource) =>
   source.credit.line === LINE && (source.fromK1 !== undefined || source.credit.ein !== undefined);
 
-/* The Form 3800 sources with Form 8844 line 2 added, when Form 8844 files. */
-export function withForm8844(inputs: ResolverInputs, current: CreditSource[]): CreditSource[] {
-  const figures = resolve8844Info(inputs).form8844;
-  if (figures === undefined) return current;
+/*
+ * The Form 3800 sources with Form 8844 line 2 added, when Form 8844 files, and
+ * the answers line 2 waits on (no source while it waits).
+ */
+export function withForm8844(
+  inputs: ResolverInputs,
+  current: CreditSource[],
+): { sources: CreditSource[]; missing: string[] } {
+  const info = resolve8844Info(inputs);
+  const figures = info.form8844;
+  if (figures === undefined) return { sources: current, missing: [] };
   const kept = current.map((source) =>
     source.credit.line === LINE && !isPassThroughZoneCredit(source)
       ? { ...source, credit: { ...source.credit, amount: gap(STATED_OWN_GAP) } }
       : source,
   );
+  const missing = [...(info.missingInputs?.["form-8844"] ?? [])];
+  if (figures.line2 === undefined) return { sources: kept, missing };
+  return { sources: ownSources(kept, figures), missing };
+}
+
+/* Line 2 as one source for each business or farm that paid the wages, or the gap that stops it. */
+function ownSources(kept: CreditSource[], figures: Form8844Figures): CreditSource[] {
   if (typeof figures.line2 !== "number") {
     const credit = { line: LINE, key: "form-8844", amount: figures.line2, passive: false };
     return [...kept, { credit }];
