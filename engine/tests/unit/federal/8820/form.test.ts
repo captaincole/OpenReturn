@@ -9,8 +9,10 @@ import { describe, expect, it } from "vitest";
 import {
   ORPHAN_DRUG_CREDIT_KEY,
   makeGeneralBusinessCreditFactKey,
+  makeK1HoldingFactKey,
   makePartnershipK1FactKey,
   type OrphanDrugCreditFactValue,
+  type PartnershipK1FactValue,
 } from "../../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../../src/facts/rows.js";
 import { evaluateScenario } from "../../../../src/index.js";
@@ -202,10 +204,11 @@ describe("no facts, nothing changes", () => {
 });
 
 describe("who files", () => {
-  const withoutOwn = factsWith(jon, {
+  const withoutOwnChanges = {
     [ORPHAN_DRUG_CREDIT_KEY]: undefined,
     [makeGeneralBusinessCreditFactKey("form-8932")]: undefined,
-  });
+  };
+  const withoutOwn = factsWith(jon, withoutOwnChanges);
 
   it("a K-1 credit alone does not file it; Form 3800 line 1h takes the K-1 (purpose-of-form::b01)", () => {
     const out = evaluate(jon, withoutOwn);
@@ -223,6 +226,35 @@ describe("who files", () => {
     expect(out.line(YES)).toBeUndefined();
     expect(out.line(L3)).toBe(4250);
     expect(out.line(L4)).toBe(4250);
+  });
+
+  it("line 3 rounds each K-1 before the add, so line 4 equals Form 3800 line 1h (DECISION in resolveInfo.ts)", () => {
+    const key = makePartnershipK1FactKey(PARTNERSHIP_ID);
+    const second = "second-rare-partners";
+    const k1 = jon.facts.find((fact) => fact.key === key)!.value as PartnershipK1FactValue;
+    const zOnly = (amount: number) => [{ box: "15", code: "Z", amount }];
+    const facts = factsWith(jon, { ...withoutOwnChanges, [key]: { ...k1, boxes: zOnly(3000.4) } }, [
+      row(jon, "k1", makePartnershipK1FactKey(second), {
+        ...k1,
+        entityName: "Second Rare Partners LP",
+        entityEin: "00-0008821",
+        boxes: zOnly(1200.4),
+      }),
+      row(jon, "k1", makeK1HoldingFactKey(second), {
+        owner: "taxpayer",
+        materiallyParticipated: true,
+        allInvestmentAtRisk: true,
+        partnershipBasisAtStart: 60000,
+      }),
+    ]);
+    const out = evaluate(jon, facts, [
+      ...jon.decisions,
+      decision(jon, "decisions.scope.must_file_8820", true),
+    ]);
+    // $3,000.40 and $1,200.40 give $3,000 + $1,200, not $4,200.80 rounded to $4,201.
+    expect(out.line(L3)).toBe(4200);
+    expect(out.line(L4)).toBe(4200);
+    expect(out.value("form-3800", COL_E)).toBe(4200);
   });
 
   it("the decision false with the credit claimed is a gap on line 1h, never a lost deduction alone", () => {

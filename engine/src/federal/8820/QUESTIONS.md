@@ -6,7 +6,7 @@ Form 8820 (Rev. September 2018) is the current form for 2025; its instructions a
 
 1. **The deduction goes down by line 2a, not line 2c.** The instructions: "reduce your otherwise allowable deduction ... by the amount of the credit on this line" (`irs-8820-form-2025::sec::line-2a::b02`, line 2a). The engine follows them (`lines.ts`). Dollars change only when line 2b holds an amount: with line 2a $50,000 and line 2b $900, the engine reduces the deduction by $50,000, and the statute's reading by $49,100. No scenario has both (jon has line 2b but elects the reduced credit). **For `docs/law-findings.md`:** section 280C(b)(1) disallows the part "equal to the amount of the credit allowable for the taxable year under section 45C" (`usc-26-2025::sec::s280c::b-1`), and section 45P(c) reduces the credit otherwise allowable by the Form 8932 credit on the same wages (`usc-26-2025::sec::s45p::c`). Read together, the statute points to line 2c.
 2. **Which Schedule C lines give up the reduction** (`reduction.ts`). The instructions leave the lines to the taxpayer ("Identify the lines of your return ... on which the reductions were made", `line-2a::b02`). The engine takes it from line 26 (wages), line 22 (supplies), line 20a (computer rental) and line 11 (contract testing), in that order, each line by at most the clinical expenses of its kind. This is the order the research credit's Section F uses on branch `form-6765`.
-3. **Line 3 rounds each K-1 before the add**, the rule of Form 8846 line 5 (A96), so line 4 equals Form 3800 line 1h.
+3. **Line 3 rounds each K-1 before the add**, the rule of Form 8846 line 5 (A96), so line 4 equals Form 3800 line 1h. The blind fill (2026-11-27) took the Form 1040 rule instead: K-1s of $3,000.40 and $1,200.40 give $4,201 there and $4,200 in the engine. The engine keeps A112: one rule for every credit form that sends K-1 credits to Form 3800 (unit test in `tests/unit/federal/8820/form.test.ts`).
 
 ## Doubts with no conflicting text (no dollars change on a covered return)
 
@@ -21,7 +21,9 @@ Form 8820 (Rev. September 2018) is the current form for 2025; its instructions a
 12. **Part II holds 26 drugs.** "Attach as many Part II pages as needed" (`part-ii::b01`). With more than 26, every Part II cell is a gap; Part I still computes.
 13. **The decision `decisions.scope.must_file_8820` = false with a claimed credit.** The Schedule C reduction reads the fact, not the decision, so Form 3800 line 1h is a gap until the two agree (as Form 8846 does). With the election, nothing is reduced and there is no gap.
 14. **A passive Schedule C business** (line G "No"): the credit is a passive activity credit, and the engine does not figure a passive Schedule C business. Form 3800 line 1h is a gap. Form 8820's own lines still compute.
-15. **California.** FTB Pub. 1001: "Enter the amount of the federal Orphan Drug Credit that reduced the federal deduction for qualified clinical testing expenses on Schedule CA (540), Part I ... line 3 ... column B" (`ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b08`). The engine adds the reduction on every Schedule C line it lowered to the column B amount of the work opportunity credit (`wageCreditReduction`). Schedule CA (540NR) runs the same rule. California's own orphan drug credit is repealed; its carryover (FTB 3801-CR code 185, `ca-3801cr-inst-2025::sec::c-who-must-file::b01`) is a separate fact that this form does not touch.
+15. **Computer rental** (from the blind fill). The Form 8820 instructions count "amounts ... that would be described as qualified research expenses under section 41" (`irs-8820-form-2025::sec::purpose-of-form::b01`). Form 6765 adds conditions for computer rental: "The computers must be located off your premises, and you must not be the operator or primary user of the computers" (`irs-6765-inst-2025::sec::section-g-columns-50-56::b03`). The fact holds qualified amounts only, so the taxpayer (and Cade) apply the conditions. A rental that fails them changes line 1 by its full amount. Default: no change; Cade's skill should ask about the conditions.
+16. **Contract testing paid to a university** (from the blind fill). Form 6765 takes 100% only for energy research by a university and 65% for other contract research (`irs-6765-inst-2025::sec::section-g-columns-50-56::b04`). Form 8820 says "100% (instead of 65% or 75%) of contract research expenses are treated as clinical testing expenses" (`purpose-of-form::b01`), with no exception for the payee. The engine and the blind fill both take 100%; the Form 8820 text settles it.
+17. **California.** FTB Pub. 1001: "Enter the amount of the federal Orphan Drug Credit that reduced the federal deduction for qualified clinical testing expenses on Schedule CA (540), Part I ... line 3 ... column B" (`ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b08`). The engine adds the reduction on every Schedule C line it lowered to the column B amount of the work opportunity credit (`wageCreditReduction`). Schedule CA (540NR) runs the same rule. California's own orphan drug credit is repealed; its carryover (FTB 3801-CR code 185, `ca-3801cr-inst-2025::sec::c-who-must-file::b01`) is a separate fact that this form does not touch.
 
 ## How Form 8820 must connect to Form 6765 (branch `form-6765`, not on this branch)
 
@@ -33,18 +35,27 @@ Form 8820 (Rev. September 2018) is the current form for 2025; its instructions a
 
 - **One placement module for both research credits.** `federal/8820/reduction.ts` and the branch's `federal/6765/reduction.ts` have the same order and the same rule. After the merge, one shared function (for example `federal/researchReductions.ts`) can place both credits, Form 8820 first, on the stated lines, and give each its gap. This changes how two forms reduce Schedule C, so a person decides.
 
+## Blind fill (2026-11-27)
+
+A blind preparer filled 14 cases from the form and its instructions only. Every line matched the engine except case 9 (two K-1s with cents, no own testing): line 3 and line 4 were $4,201 against the engine's $4,200 (decision 3 above), and line 2c was 0 against the engine's blank (blank against 0 only; "Figure any orphan drug credit from your own trade or business on lines 1 and 2a", `specific-instructions::b01`).
+
+## Second opinions
+
+- **PolicyEngine-US 2.154.1** (commit 0fbed6ddb1): it does not model the orphan drug credit. No variable or parameter names section 45C, section 280C(b) or clinical testing, and `general_business_credit` is a bare input with no formula. Nothing to compare.
+- **IRS Direct File**: no checkout is available here, and it does not cover business credits. Not compared.
+
 ## Confidence by field group
 
-| Field group | Confidence |
-| --- | --- |
-| Header (name, SSN) | stated rule |
-| Line 1 (expenses, contract testing at 100%) | stated rule |
-| Line 2a boxes and amount (25% / 19.75%) | stated rule (form arithmetic) |
-| Line 2b (Form 8932 portion) | stated rule; asked only with an own Form 8932 credit (own reading) |
-| Line 2c, line 4 | stated rule (form arithmetic) |
-| Line 3 (K-1 code Z) | stated rule; rounding by DECISION |
-| Lines 5 and 6 (estates and trusts) | stated rule: blank for an individual |
-| Part II (26 rows × name, number, date) | stated rule; more than 26 unsupported |
-| Schedule C reduction (lines 11, 20a, 22, 26) | stated rule; which lines by DECISION |
-| Form 3800 line 1h | stated rule |
-| Schedule CA line 3 column B | stated rule (FTB Pub. 1001) |
+| Field group                                  | Confidence                                                         |
+| -------------------------------------------- | ------------------------------------------------------------------ |
+| Header (name, SSN)                           | stated rule                                                        |
+| Line 1 (expenses, contract testing at 100%)  | stated rule                                                        |
+| Line 2a boxes and amount (25% / 19.75%)      | stated rule (form arithmetic)                                      |
+| Line 2b (Form 8932 portion)                  | stated rule; asked only with an own Form 8932 credit (own reading) |
+| Line 2c, line 4                              | stated rule (form arithmetic)                                      |
+| Line 3 (K-1 code Z)                          | stated rule; rounding by DECISION                                  |
+| Lines 5 and 6 (estates and trusts)           | stated rule: blank for an individual                               |
+| Part II (26 rows × name, number, date)       | stated rule; more than 26 unsupported                              |
+| Schedule C reduction (lines 11, 20a, 22, 26) | stated rule; which lines by DECISION                               |
+| Form 3800 line 1h                            | stated rule                                                        |
+| Schedule CA line 3 column B                  | stated rule (FTB Pub. 1001)                                        |
