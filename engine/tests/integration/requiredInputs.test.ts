@@ -173,6 +173,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "completed or adjusted in 2025 is Cade's question",
   ],
   [
+    /^farm_income_averaging$/,
+    "the Schedule J election itself (lines 2a to 2c): whether the taxpayer elects to average " +
+      "farming or fishing income is Cade's question. Schedule J lists the fact again when the " +
+      "decision files it without one",
+  ],
+  [
     /^trust_accumulation_distribution\.[^.]+$/,
     "each fact is a whole trust's Schedule J (Form 1041) Part IV (Form 4970, one copy per " +
       "trust); whether the taxpayer received an accumulation distribution is Cade's question",

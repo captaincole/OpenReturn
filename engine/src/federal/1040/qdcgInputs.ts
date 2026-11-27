@@ -26,17 +26,31 @@ export function netLongTermGain(form: ReturnAccessor): number {
   return typeof l7a === "number" ? atLeast(0, l7a) : 0;
 }
 
+/*
+ * The capital gain that Schedule J line 2b (and line 2c) moves to the base
+ * years: its line 4 figures the 2025 tax on line 3 with the return's net
+ * capital gain (and unrecaptured section 1250 gain) less these
+ * (federal/schedule-j/QUESTIONS.md question 2). Zero for every other tax.
+ */
+export interface GainLeftOut {
+  netCapitalGain: number;
+  unrecapturedSection1250Gain: number;
+}
+
+export const NO_GAIN_LEFT_OUT: GainLeftOut = { netCapitalGain: 0, unrecapturedSection1250Gain: 0 };
+
 export function qdcgInputsFromReturn(
   form: ReturnAccessor,
   taxableIncome: number,
   qualifiedDividends: number,
   filingStatus: FilingStatus,
+  left: GainLeftOut = NO_GAIN_LEFT_OUT,
 ): QdcgInputs {
   const form4952L4g = form["form-4952.0.line.4g_elected_investment_income"];
   return {
     taxableIncome,
     qualifiedDividends,
-    netLongTermGain: netLongTermGain(form),
+    netLongTermGain: atLeast(0, netLongTermGain(form) - left.netCapitalGain),
     // MANUAL EDIT: Form 4952 line 4g leaves the preferential rates (Schedule D Tax Worksheet line 3).
     form4952Line4g: typeof form4952L4g === "number" ? form4952L4g : 0,
     // The Foreign Earned Income Tax Worksheet changes taxableIncome itself (foreignEarnedIncomeTax.ts).
@@ -61,26 +75,36 @@ export function scheduleDWorksheetTax(
   taxableIncome: number,
   qualifiedDividends: number,
   filingStatus: FilingStatus,
+  left: GainLeftOut = NO_GAIN_LEFT_OUT,
 ): number | undefined {
-  return scheduleDWorksheet(form, taxableIncome, qualifiedDividends, filingStatus)?.tax;
+  return scheduleDWorksheet(form, taxableIncome, qualifiedDividends, filingStatus, left)?.tax;
 }
 
-/* The whole Schedule D Tax Worksheet, or undefined when the QDCG worksheet applies. */
+/*
+ * The whole Schedule D Tax Worksheet, or undefined when the QDCG worksheet
+ * applies. Schedule J's capital gain comes off Schedule D lines 15, 16 and 19.
+ */
 export function scheduleDWorksheet(
   form: ReturnAccessor,
   taxableIncome: number,
   qualifiedDividends: number,
   filingStatus: FilingStatus,
+  left: GainLeftOut = NO_GAIN_LEFT_OUT,
 ): ScheduleDTaxResult | undefined {
-  const line19 = positiveOrZero(form["schedule-d.1.line.19_unrecaptured_sec1250_gain"]);
+  const line19 = atLeast(
+    0,
+    positiveOrZero(form["schedule-d.1.line.19_unrecaptured_sec1250_gain"]) -
+      left.unrecapturedSection1250Gain,
+  );
   if (line19 === 0) return undefined;
+  const lessGain = (value: unknown) => atLeast(0, positiveOrZero(value) - left.netCapitalGain);
   return computeScheduleDTax({
     taxableIncome,
     qualifiedDividends,
     form4952Line4g: positiveOrZero(form["form-4952.0.line.4g_elected_investment_income"]),
     form4952Line4e: positiveOrZero(form["form-4952.0.line.4e_smaller_net_gain_or_capital_gain"]),
-    scheduleDLine15: positiveOrZero(form["schedule-d.0.line.15_net_long_term_gain_loss"]),
-    scheduleDLine16: positiveOrZero(form["schedule-d.1.line.16_combined_gain_loss"]),
+    scheduleDLine15: lessGain(form["schedule-d.0.line.15_net_long_term_gain_loss"]),
+    scheduleDLine16: lessGain(form["schedule-d.1.line.16_combined_gain_loss"]),
     scheduleDLine18: positiveOrZero(form["schedule-d.1.line.18_rate_gain_worksheet_amount"]),
     scheduleDLine19: line19,
     filingStatus,
