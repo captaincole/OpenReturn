@@ -15,6 +15,7 @@ import {
 } from "../../facts/index.js";
 import { roundDollars } from "../../money.js";
 import type { ResolverInputs } from "../../resolverInputs.js";
+import { tipCreditSourcesOf } from "../8846/form3800.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
 import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
 import { gap, type Cell } from "./cells.js";
@@ -43,7 +44,7 @@ function statedGap(value: GeneralBusinessCreditFact["value"]): string | undefine
   }
   const engineForm = ENGINE_FORM_LINES[value.line];
   if (engineForm)
-    return `Line ${value.line} comes from ${engineForm}, which the engine figures: state the property or vehicle instead.`;
+    return `Line ${value.line} comes from ${engineForm}, which the engine figures: state that form's inputs (the property, vehicle or tips) instead.`;
   if (value.transfer && !TRANSFER_LINES.includes(value.line)) {
     return `The credit of line ${value.line} cannot be transferred under section 6418 (column (f) is shaded).`;
   }
@@ -188,7 +189,13 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
     ...stated.filter(missingResearch).map((source) => source.credit.key),
     ...k1.flatMap((found) => found.missing),
   ];
-  const current = [...stated, ...k1.flatMap((found) => (found.source ? [found.source] : []))];
+  const tips = tipCreditSourcesOf(inputs);
+  missing.push(...tips.missing);
+  const current = [
+    ...stated,
+    ...tips.sources,
+    ...k1.flatMap((found) => (found.source ? [found.source] : [])),
+  ];
   const carryovers = getCreditCarryoverFacts(inputs.facts).map(carryoverOf);
   return { sources: { current, carryovers }, missing: [...new Set(missing)] };
 }
