@@ -1,6 +1,7 @@
 import { agentUrl } from "@/lib/agentBase";
 import { UnauthorizedError } from "@/lib/api";
 import { canonUrl } from "@/lib/canonBase";
+import type { Jurisdiction } from "@/lib/jurisdictions";
 import { statuteHref } from "@/lib/statuteCitations";
 
 /* Types mirror cade/src/mastra/db/askThreads.ts and db/refLibrary.ts. Keep in sync by hand. */
@@ -53,6 +54,8 @@ export interface AskTurn {
   citations: AskCitation[];
   missingDocuments: string[];
   conflicts: AskConflict[];
+  /** The libraries searched (asked for, while the turn runs). */
+  jurisdictions: Jurisdiction[];
   error: string | null;
   createdAt: string;
   completedAt: string | null;
@@ -110,20 +113,31 @@ async function readJson<T>(res: Response, what: string): Promise<T> {
   return res.json() as Promise<T>;
 }
 
-function postQuestion(path: string, question: string): Promise<StartedTurn> {
+function postQuestion(
+  path: string,
+  question: string,
+  jurisdictions: readonly Jurisdiction[],
+): Promise<StartedTurn> {
   return fetch(agentUrl(path), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ question }),
+    body: JSON.stringify({ question, jurisdictions }),
   }).then((res) => readJson<StartedTurn>(res, "Ask"));
 }
 
-export function askNewQuestion(question: string): Promise<StartedTurn> {
-  return postQuestion("/app/ask", question);
+export function askNewQuestion(
+  question: string,
+  jurisdictions: readonly Jurisdiction[],
+): Promise<StartedTurn> {
+  return postQuestion("/app/ask", question, jurisdictions);
 }
 
-export function askFollowUp(threadId: string, question: string): Promise<StartedTurn> {
-  return postQuestion(`/app/ask/${threadId}/turns`, question);
+export function askFollowUp(
+  threadId: string,
+  question: string,
+  jurisdictions: readonly Jurisdiction[],
+): Promise<StartedTurn> {
+  return postQuestion(`/app/ask/${threadId}/turns`, question, jurisdictions);
 }
 
 export async function fetchAskThread(threadId: string): Promise<AskThread> {

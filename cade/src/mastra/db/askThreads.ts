@@ -1,3 +1,4 @@
+import { ALL_JURISDICTIONS, storedJurisdictions, type Jurisdiction } from "../canon/jurisdictions";
 import type { AskCitation, AskCoverage, AskStage, Conflict } from "../canon/schemas";
 import {
   asJson,
@@ -10,7 +11,12 @@ import {
   nowIso,
 } from "./appDb";
 
-/* Threads are person-scoped: every read filters by user_id. */
+/*
+ * Threads are person-scoped: every read filters by user_id.
+ * log_json is the query log. It also holds the turn's jurisdictions: the list
+ * asked for while the turn runs, the list Canon searched once it is done. A
+ * row from before the list reads as every jurisdiction.
+ */
 
 export type AskTurnStatus = "running" | "completed" | "failed";
 export type { AskCitation, AskCoverage, AskStage, Conflict };
@@ -27,6 +33,8 @@ export interface AskTurn {
   missingDocuments: string[];
   /** Texts the answer found in disagreement, read from the query log (log_json). */
   conflicts: Conflict[];
+  /** The jurisdictions searched (asked for, while the turn runs). */
+  jurisdictions: Jurisdiction[];
   error: string | null;
   createdAt: string;
   completedAt: string | null;
@@ -43,7 +51,10 @@ export interface AskThread {
 /* A turn 'running' this long lost its background run (reload or crash): report it failed. */
 const STALE_RUNNING_MS = 10 * 60 * 1000;
 
+type StoredLog = { conflicts?: Conflict[]; jurisdictions?: unknown } | null;
+
 function rowToTurn(row: Record<string, unknown>): AskTurn {
+  const log = asJson(row.log_json) as StoredLog;
   const createdAt = asStr(row.created_at);
   let status = asStr(row.status) as AskTurnStatus;
   let error = asStrOrNull(row.error);
@@ -61,7 +72,8 @@ function rowToTurn(row: Record<string, unknown>): AskTurn {
     coverage: asStrOrNull(row.coverage) as AskCoverage | null,
     citations: (asJson(row.citations_json) as AskCitation[] | null) ?? [],
     missingDocuments: (asJson(row.missing_docs_json) as string[] | null) ?? [],
-    conflicts: (asJson(row.log_json) as { conflicts?: Conflict[] } | null)?.conflicts ?? [],
+    conflicts: log?.conflicts ?? [],
+    jurisdictions: storedJurisdictions(log?.jurisdictions),
     error,
     createdAt,
     completedAt: asStrOrNull(row.completed_at),
@@ -69,9 +81,14 @@ function rowToTurn(row: Record<string, unknown>): AskTurn {
   };
 }
 
+/* A running turn's query log: only the jurisdictions asked for. */
+const askedLog = (jurisdictions: readonly Jurisdiction[]): string =>
+  JSON.stringify({ jurisdictions });
+
 export async function createAskThread(
   userId: string,
   question: string,
+  jurisdictions: readonly Jurisdiction[],
 ): Promise<{ threadId: string; turnId: string }> {
   await ensureAppSchema();
   const threadId = crypto.randomUUID();
@@ -84,9 +101,10 @@ export async function createAskThread(
         args: [threadId, userId, question, now],
       },
       {
-        sql: `INSERT INTO ask_turns (id, thread_id, user_id, turn_index, question, status, created_at)
-              VALUES (?, ?, ?, 0, ?, 'running', ?)`,
-        args: [turnId, threadId, userId, question, now],
+        sql: `INSERT INTO ask_turns
+                (id, thread_id, user_id, turn_index, question, status, log_json, created_at)
+              VALUES (?, ?, ?, 0, ?, 'running', ?, ?)`,
+        args: [turnId, threadId, userId, question, askedLog(jurisdictions), now],
       },
     ],
     "write",
@@ -96,20 +114,26 @@ export async function createAskThread(
 
 export type AddTurnResult = { turnId: string } | { error: "not_found" | "busy" };
 
-/* Refuses while a turn is running: each turn reads the earlier answers as context. */
+/*
+ * Refuses while a turn is running: each turn reads the earlier answers as context.
+ * With no list, the turn searches what the thread's last turn searched.
+ */
 export async function addAskTurn(
   userId: string,
   threadId: string,
   question: string,
+  jurisdictions?: readonly Jurisdiction[],
 ): Promise<AddTurnResult> {
   const thread = await getAskThread(userId, threadId);
   if (!thread) return { error: "not_found" };
   if (thread.turns.some((turn) => turn.status === "running")) return { error: "busy" };
   const turnId = crypto.randomUUID();
+  const asked = jurisdictions ?? thread.turns.at(-1)?.jurisdictions ?? ALL_JURISDICTIONS;
   await getAppDb().execute({
-    sql: `INSERT INTO ask_turns (id, thread_id, user_id, turn_index, question, status, created_at)
-          VALUES (?, ?, ?, ?, ?, 'running', ?)`,
-    args: [turnId, threadId, userId, thread.turns.length, question, nowIso()],
+    sql: `INSERT INTO ask_turns
+            (id, thread_id, user_id, turn_index, question, status, log_json, created_at)
+          VALUES (?, ?, ?, ?, ?, 'running', ?, ?)`,
+    args: [turnId, threadId, userId, thread.turns.length, question, askedLog(asked), nowIso()],
   });
   return { turnId };
 }
@@ -143,6 +167,13 @@ export async function setAskTurnStage(turnId: string, stage: AskStage): Promise<
   });
 }
 
+/*
+ * The new log replaces the old one key by key (JSON merge patch), so the
+ * jurisdictions asked for stay when the new log names none: a failed run, the
+ * workflow's onError, a Canon from before the list.
+ */
+const MERGED_LOG = "json_patch(coalesce(log_json, '{}'), ?)";
+
 export interface CompleteAskTurnArgs {
   answer: string;
   coverage: AskCoverage | null;
@@ -157,7 +188,7 @@ export async function completeAskTurn(turnId: string, args: CompleteAskTurnArgs)
   await getAppDb().execute({
     sql: `UPDATE ask_turns
           SET status = 'completed', answer = ?, coverage = ?, citations_json = ?,
-              missing_docs_json = ?, log_json = ?, completed_at = ?, duration_ms = ?
+              missing_docs_json = ?, log_json = ${MERGED_LOG}, completed_at = ?, duration_ms = ?
           WHERE id = ?`,
     args: [
       args.answer,
@@ -181,7 +212,8 @@ export async function failAskTurn(
   await ensureAppSchema();
   await getAppDb().execute({
     sql: `UPDATE ask_turns
-          SET status = 'failed', error = ?, log_json = ?, completed_at = ?, duration_ms = ?
+          SET status = 'failed', error = ?, log_json = ${MERGED_LOG}, completed_at = ?,
+              duration_ms = ?
           WHERE id = ?`,
     args: [error, JSON.stringify(log), nowIso(), durationMs, turnId],
   });
