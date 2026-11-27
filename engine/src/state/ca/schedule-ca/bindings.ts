@@ -26,6 +26,7 @@ import { movingExpenseBindings } from "./movingExpenses.js";
 import { nolDeductionBindings } from "./nolDeduction.js";
 import { otherGainsBindings } from "./otherGains.js";
 import { sectionCBindings } from "./sectionC.js";
+import { treatyExemptionBindings } from "./treatyExemption.js";
 import { trustDistributionBindings } from "./trustDistribution.js";
 import type { ScheduleCa } from "./types.js";
 
@@ -143,6 +144,8 @@ export const SCHEDULE_CA_BINDINGS: Bindings = waitsWithIncreasedStandard({
   ...excessBusinessLossBindings,
   // MANUAL EDIT: line 8z column C from FTB 5870A or an untaxed trust distribution (trustDistribution.ts).
   ...trustDistributionBindings,
+  // MANUAL EDIT: line 8z column C adds back a federal treaty exemption (treatyExemption.ts).
+  ...treatyExemptionBindings,
   ...nolDeductionBindings,
   ...movingExpenseBindings,
   ...mortgageCreditBindings,

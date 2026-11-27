@@ -165,9 +165,10 @@ function formInputs(
 export function form2210Outcome(form: ReturnAccessor, info: Form2210Info): Form2210Outcome {
   if (!filesForm2210(info)) return { kind: "not_filed" };
   if (info.form2210Gap) return { kind: "gap", reason: info.form2210Gap };
-  const gap = partIGap(form, info);
+  const gap = partIGap(form);
   if (gap) return { kind: "gap", reason: gap };
-  if (!info.form2210) return { kind: "waiting" };
+  /* Farm income and no answer yet to the two-thirds test: Form 2210 or Form 2210-F (resolveInfo.ts). */
+  if (!info.form2210 || info.form2210.farmerTestWaits) return { kind: "waiting" };
   const inputs = formInputs(form, info, info.form2210);
   if (inputs === "waiting") return { kind: "waiting" };
   if ("unsupported" in inputs) {

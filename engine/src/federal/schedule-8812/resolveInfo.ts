@@ -1,8 +1,10 @@
 import {
+  FORM_8862_KEYS,
   dependentCredit,
   getDependentFacts,
   isW2FactKey,
   livedWithTaxpayerOverHalfYear,
+  type DependentCredit,
   type DependentFactValue,
   type W2FactValue,
 } from "../../facts/index.js";
@@ -16,7 +18,21 @@ const COMBAT_PAY_CODE = "Q";
 /* Resolvers see no tax year; the 1040 pins its age rules to 2025 the same way (born before 1/2/1961). */
 const TAX_YEAR = 2025;
 
-function dependentRow(factKey: string, dependent: DependentFactValue): DependentRow {
+/*
+ * A ban (irs-1040s8-inst-2025::sec::improper-claims::b01): "you will not be
+ * allowed to claim any of these credits for 2 years" (10 for fraud), so no
+ * dependent's row (7) box is checked. An undecided credit stays undecided.
+ */
+function creditOf(dependent: DependentFactValue, barred: boolean): DependentCredit | undefined {
+  const credit = dependentCredit(dependent, TAX_YEAR);
+  return barred && credit !== undefined ? "none" : credit;
+}
+
+function dependentRow(
+  factKey: string,
+  dependent: DependentFactValue,
+  barred: boolean,
+): DependentRow {
   const livedWithYouOverHalfYear = livedWithTaxpayerOverHalfYear(dependent, TAX_YEAR);
   return {
     factKey,
@@ -26,7 +42,7 @@ function dependentRow(factKey: string, dependent: DependentFactValue): Dependent
       livedWithYouOverHalfYear === undefined || dependent.livedInUs === undefined
         ? undefined
         : livedWithYouOverHalfYear && dependent.livedInUs,
-    credit: dependentCredit(dependent, TAX_YEAR),
+    credit: creditOf(dependent, barred),
   };
 }
 
@@ -40,8 +56,9 @@ function dependentRow(factKey: string, dependent: DependentFactValue): Dependent
  * missing, so they reach the pending facts: a blocked must-file would hide them.
  */
 export function resolveSchedule8812Info(inputs: ResolverInputs): Schedule8812FilingInfo {
+  const barred = inputs.factByKey.get(FORM_8862_KEYS.ctcBarredByIrs) === true;
   const dependents = getDependentFacts(inputs.facts).map((fact) =>
-    dependentRow(fact.sourceFact.key, fact.dependent),
+    dependentRow(fact.sourceFact.key, fact.dependent, barred),
   );
   const undecided = dependents.filter((row) => row.credit === undefined);
   const childTaxCreditCount = dependents.filter((row) => row.credit === "child_tax_credit").length;

@@ -125,6 +125,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "lists the fact again while an answer inside it (Part I) is missing",
   ],
   [
+    /^treaty_position\.[^.]+$/,
+    "each fact is one whole treaty-based return position (one Form 8833); whether the taxpayer " +
+      "takes one is Cade's question. Form 8833 lists the fact again while an answer inside it " +
+      "(the boxes, lines 1a to 2, 5 and 6) is missing",
+  ],
+  [
     /^retirement\.qualified_disaster\.[^.]+$/,
     "each fact is a whole Form 8915-F (one person, one year in which the disasters began); " +
       "whether the taxpayer had a qualified disaster distribution, income spread from an earlier " +
@@ -502,7 +508,8 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^farmer_or_fisherman\.gross_income_(2024|2025)$/,
     "the two-thirds gross income test of a farmer or fisherman (FTB 5805F, who files); one " +
       "passing year is enough, so the other year is not asked; with farm income and no passing " +
-      "year, FTB 5805 lists each year not stated (5805f/mustFile.ts farmerTestWaitingKeys)",
+      "year, FTB 5805 lists each year not stated (5805f/mustFile.ts farmerTestWaitingKeys), and " +
+      "so does Form 2210 for Form 2210-F (2210-f/farmerTest.ts)",
   ],
   [
     /^prior_year\.(ca_lump_sum_tax|ca_no_twelve_month_return)$/,
@@ -513,6 +520,18 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^ca_farmer_estimated_tax\.(underpayment_paid_on|waiver)$/,
     "FTB 5805F answers Cade records only when the underpayment was paid before April 15, 2026 " +
       "(line 13; absent, April 15) or the taxpayer asks for a waiver (line 16)",
+  ],
+  [
+    /^(ctc|aotc)\.(denied_in_earlier_year|barred_by_irs)$/,
+    "Form 8862 answers Cade records only when the taxpayer states that the IRS reduced or " +
+      "disallowed the child tax credits or the AOTC in an earlier year, or bars them; absent " +
+      "means neither (federal/8862/QUESTIONS.md, Proposals for a discussion)",
+  ],
+  [
+    /^farmer_estimated_tax\.(underpayment_paid_on|section_1062_net_tax_liability)$/,
+    "Form 2210-F answers Cade records only when the rest of the underpayment was paid before " +
+      "April 15, 2026 by a payment that is not a dated estimated payment (line 14; absent, the " +
+      "dated payments or April 15) or the taxpayer made a section 1062(a) election (line 4)",
   ],
   [
     /^prior_year\.ca_tax$/,

@@ -3,7 +3,6 @@
 import { describe, expect, it } from "vitest";
 import eicTable2025 from "../../../../src/data/eic-table-2025.json" with { type: "json" };
 import {
-  FORM_8862_GAP,
   MARRIED_HOH_GAP,
   SELF_ONLY_EIC_GAP,
   earnedIncomeCredit,
@@ -175,16 +174,29 @@ describe("earnedIncomeCredit", () => {
     });
   });
 
-  it("stops over the investment income limit, and on an IRS ban; an earlier denial (Form 8862) is unsupported", () => {
+  it("stops over the investment income limit, and on an IRS ban", () => {
     expect(earnedIncomeCredit({ ...HOH, investmentIncome: 11_951 }, ANSWERED)).toEqual({
       kind: "none",
       checkLine27c: false,
     });
     expect(earnedIncomeCredit(HOH, { ...ANSWERED, barredByIrs: true }).kind).toBe("none");
-    expect(earnedIncomeCredit(HOH, { ...ANSWERED, deniedInEarlierYear: true })).toEqual({
-      kind: "unsupported",
-      reason: FORM_8862_GAP,
+  });
+
+  it("after an earlier denial, waits for Form 8862 Part II, then credits, or is a gap on a conflict", () => {
+    const denied = { ...ANSWERED, deniedInEarlierYear: true };
+    expect(earnedIncomeCredit(HOH, denied)).toEqual(WAITING_OUTCOME);
+    expect(earnedIncomeCredit(HOH, { ...denied, form8862: { kind: "waiting" } })).toEqual(
+      WAITING_OUTCOME,
+    );
+    expect(earnedIncomeCredit(HOH, { ...denied, form8862: { kind: "complete" } })).toEqual({
+      kind: "credit",
+      amount: 2_678,
     });
+    expect(
+      earnedIncomeCredit(HOH, { ...denied, form8862: { kind: "conflict", reason: "days" } }),
+    ).toEqual({ kind: "unsupported", reason: "days" });
+    // A stop that needs no answer still stops: over the AGI limit, no Form 8862 is needed.
+    expect(earnedIncomeCredit({ ...HOH, agi: 400_000 }, denied).kind).toBe("none");
   });
 
   it("does not model the EIC without a qualifying child when no child has a valid SSN", () => {

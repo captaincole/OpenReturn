@@ -38,6 +38,21 @@ export interface DependentFactValue {
    */
   daysLivedWithYou?: number;
   /*
+   * Form 8862 line 7: the days of the year the child lived with the taxpayer in
+   * the United States, temporary absences counted as time lived there
+   * (irs-8862-inst-2025::sec::line-7::b02). Asked only when Form 8862 claims the
+   * EIC for the child and the months do not settle it (not 12 months, and not
+   * born or died during the year).
+   */
+  daysLivedWithYouInUs?: number;
+  /*
+   * MM/DD/YYYY: the date the person died, when that was during the tax year.
+   * Absent: alive at the end of the year. The half-year test then counts to
+   * that date (1040 instructions, Definitions and Special Rules), and Form 8862
+   * line 8 prints its month and day.
+   */
+  dateOfDeath?: string;
+  /*
    * A child who lived with the taxpayer half the year or less: true when the
    * custodial parent released the claim on Form 8332 (1040 instructions,
    * children of divorced or separated parents), which gives this parent the
@@ -152,14 +167,19 @@ function monthsFrom(date: { month: number; year: number }, taxYear: number): num
   return date.year === taxYear ? 12 - date.month + 1 : 12;
 }
 
+/* The months of the tax year after a death in it; 0 without one. */
+function monthsAfterDeath(dateOfDeath: string | undefined, taxYear: number): number {
+  const died = parseDob(dateOfDeath);
+  return died?.year === taxYear ? 12 - died.month : 0;
+}
+
 /*
  * Row (5)(a) of the Dependents table: lived with the taxpayer more than half the
- * year. A child born during the year counts the months it was alive, and a
- * child adopted or placed during the year counts the months since the placement
- * (1040 instructions, Definitions and Special Rules: the home was the person's
- * home for more than half the time the person was alive, or since the person
- * was adopted or placed). A death during the year has no fact yet. Undefined
- * while an answer is missing.
+ * year. A child born or who died during the year counts the months it was
+ * alive, and a child adopted or placed during the year counts the months since
+ * the placement (1040 instructions, Definitions and Special Rules: the home was
+ * the person's home for more than half the time the person was alive, or since
+ * the person was adopted or placed). Undefined while an answer is missing.
  */
 export function livedWithTaxpayerOverHalfYear(
   dependent: DependentFactValue,
@@ -168,10 +188,9 @@ export function livedWithTaxpayerOverHalfYear(
   const born = parseDob(dependent.dob);
   if (born === undefined || dependent.monthsLivedWithYou === undefined) return undefined;
   const placed = parseDob(dependent.placedWithYou);
-  const monthsInScope = Math.min(
-    monthsFrom(born, taxYear),
-    placed === undefined ? 12 : monthsFrom(placed, taxYear),
-  );
+  const monthsInScope =
+    Math.min(monthsFrom(born, taxYear), placed === undefined ? 12 : monthsFrom(placed, taxYear)) -
+    monthsAfterDeath(dependent.dateOfDeath, taxYear);
   return dependent.monthsLivedWithYou > monthsInScope / 2;
 }
 
