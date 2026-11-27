@@ -27,6 +27,28 @@ it changes dollars.
    - The statute counts each part on its own: the period runs "with respect to
      any portion of the underpayment, the date on which such portion is paid"
      (`usc-26-2025::sec::s6654::b`, (b)(2)(B)). For `docs/law-findings.md`.
+   - Form 2210's worksheet does the same: "If more than one payment was
+     required to fully satisfy an underpayment amount, make a separate
+     computation for each payment" (`irs-2210-inst-2025::sec::line-4::b01`).
+     That text is for Form 2210, and the Form 2210-F instructions are silent,
+     so the form's own line 16 arithmetic stands. The blind fill raised it (its
+     case 12): line 13 $9,008, $3,000 paid February 5 and the rest April 10.
+     The engine: $147 (one count of 85 days). A count for each part: $110.
+     Unit test: "a part paid early" in `tests/unit/federal/2210-f/lines.test.ts`.
+
+3. **No 2024 tax, and no 2024 return (row A79 of `docs/rule-decisions.md`).**
+   The exceptions: "You had no tax liability for 2024 ... and your 2024 return
+   was (or would have been had you been required to file) for a full 12
+   months" (`irs-2210f-inst-2025::sec::exceptions-to-the-penalty::b01`). Line
+   10: "If you didn't file a return for 2024 ... enter the amount from line 7 on
+   line 11. However, see Exceptions to the Penalty, earlier" (`line-10::b02`).
+   The engine applies the exception through line 10, as Form 2210 does (row
+   7): a recorded 2024 tax of 0 gives no penalty, and
+   `prior_year.no_twelve_month_return` figures one from line 7. Changes
+   dollars: yes, the whole penalty. The blind fill (its case 6, "neither spouse
+   had to file") took the exception and owed nothing; the engine was given "no
+   12-month return" and figured $90. With a 2024 tax of 0 it also owes nothing.
+   The engine has no fact for full-year citizenship or residence.
 
 ## Defaults with no conflicting text
 
@@ -97,6 +119,65 @@ it changes dollars.
     The engine does not add up gross income from the return: Pub. 225 and Pub.
     505 count items the forms do not separate (crop shares, livestock gains,
     crew pay). Changes dollars: no, given the stated facts.
+
+13. **Lines 3 and 9 do not stop the arithmetic.** They say "you don't owe a
+    penalty; don't file Form 2210-F" but not "stop"; line 6, the note at line
+    11 and line 13 say "stop" (`irs-2210f-face-2025::sec::face-part-ii::b01`).
+    The exceptions say "complete lines 1 through 9"
+    (`exceptions-to-the-penalty::b01`). So lines 4 and 6 fill after a line 3
+    under $1,000 (line 6 then stops), and lines 10 to 13 fill after a line 9
+    under $1,000, with no Part III. The form leaves the return either way.
+    Changes dollars: no. (Changed after the blind fill, its cases 3, 4 and 10.)
+
+14. **A federally declared disaster.** "Don't file Form 2210-F if your
+    underpayment was due to a federally declared disaster"; the IRS applies
+    the relief itself (`waiver-of-penalty::b03`). The engine has no fact for
+    it: a waiver request with a reason figures the penalty less the amount
+    asked, as for any casualty. Changes dollars: yes, for a filer in a covered
+    area, whose whole penalty the IRS waives. Cade should not record a waiver
+    request for such a disaster.
+
+15. **The 2024 overpayment applied to 2025.** The Form 2210-F instructions do
+    not name it. The engine counts
+    `estimated_tax.prior_year_overpayment_applied` on line 12 as paid by
+    January 15, 2026. Pub. 505: "If you timely file your 2024 return, treat
+    the credit as a payment made on April 15, 2025"
+    (`irs-pub-505-2025::sec::credit-an-overpayment::b01`). The engine does not
+    check that the 2024 return was filed on time. The blind fill agrees (its
+    case 13). Changes dollars: yes, when there is one.
+
+16. **The March 2 exception needs both steps.** "You file your return and pay
+    the tax due by March 2, 2026" (`exceptions-to-the-penalty::b01`). The
+    engine asks one yes-or-no answer
+    (`farmer_estimated_tax.filed_and_paid_by_march_2`) and does not infer it
+    from the day the tax was paid. Changes dollars: yes, the whole penalty,
+    when Cade records the answer wrongly.
+
+## Second opinions
+
+- **Blind fill** (15 cases, from the blank form and instructions only): four
+  differences after the first run, all settled.
+  - Cases 3 and 10, lines 4 and 6, and case 4, lines 10 and 11: the engine
+    stopped at lines 3 and 9; the form says "stop" only at line 6, the line 11
+    note and line 13. The engine now fills them (item 13). No dollars change.
+  - Case 6, lines 14 to 16 ($90 against no penalty): the inputs differ, not the
+    rule. The blind fill read "neither spouse had to file" as no 2024 tax; the
+    engine was given "no 12-month return". With a 2024 tax of 0 the engine
+    owes nothing too (conflict 3, row A79).
+  - Case 12, line 16 ($147 against $110): the blind fill made a separate count
+    for each part, from Form 2210's worksheet. The form's line 16 has one
+    count; the engine keeps it (conflict 2).
+  - Blind doubts with no dollar change (box A with no penalty, box B with a
+    blank line 10, rounding the penalty before the waiver, 0 against blank on
+    lines 4 and 8) match the engine's defaults.
+- **PolicyEngine-US 2.154.1** (commit 0fbed6ddb1, 2026-11-26): a search of
+  `variables/gov/irs` and `parameters/gov/irs` finds no 2210, 2210-F,
+  underpayment, farmer or fisher variable. It does not model the estimated tax
+  penalty, so the 66 2/3% share, the $1,000 floors, the January 15 due date and
+  the 7% rate were not compared.
+- **IRS Direct File** (IRS-Public/direct-file, commit e365f9f): its fact
+  dictionary (`backend/src/main/resources/tax`) has no Form 2210 or 2210-F,
+  underpayment, farmer or estimated tax penalty fact. Nothing to compare.
 
 ## Confidence by field group
 

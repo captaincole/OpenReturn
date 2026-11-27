@@ -111,6 +111,7 @@ export interface PartIILines {
   line11?: number;
   line12?: number;
   line13?: number;
+  /* The first reason in line order that no penalty is owed. */
   stop?: StopReason;
 }
 
@@ -121,32 +122,63 @@ export interface Form2210FLines extends PartIILines {
   penalty?: PenaltyLines;
 }
 
-/* Lines 1 to 13 with line 2's other taxes as given; the lines after a stop are blank. */
+/*
+ * Lines 1 to 13 with line 2's other taxes as given. `stop` is the first reason,
+ * in line order, that no penalty is owed. A line is blank only after a line
+ * that says "stop" (line 6, the note at line 11, line 13). Lines 3 and 9 say
+ * only "you don't owe a penalty; don't file Form 2210-F", and the instructions
+ * say "To determine whether the total tax is less than $1,000, complete lines 1
+ * through 9" (irs-2210f-inst-2025::sec::exceptions-to-the-penalty::b01), so the
+ * arithmetic goes on after them (QUESTIONS.md).
+ */
 export function partIILines(inputs: Form2210FInputs, otherTaxes: number): PartIILines {
   const line1 = roundDollars(inputs.taxAfterCredits);
   const line2 = roundDollars(otherTaxes);
   const line3 = line1 + line2;
-  const top = { line1, line2, line3 };
-  if (line3 < NO_PENALTY_BELOW) return { ...top, stop: "line_3_under_limit" };
   const section1062 = SECTION_1062_SHARE * (inputs.section1062NetTaxLiability ?? 0);
   const line4 = roundDollars(sum(inputs.refundableCredits, section1062));
   const line6 = line3 - line4;
-  if (line6 < NO_PENALTY_BELOW) return { ...top, line4, line6, stop: "line_6_under_limit" };
+  const top = { line1, line2, line3, line4, line6 };
+  if (line3 < NO_PENALTY_BELOW || line6 < NO_PENALTY_BELOW) {
+    return { ...top, stop: line3 < NO_PENALTY_BELOW ? "line_3_under_limit" : "line_6_under_limit" };
+  }
   const line7 = roundDollars(line6 * CURRENT_YEAR_SHARE);
   const line8 = roundDollars(inputs.withholding);
   const line9 = line6 - line8;
-  const middle = { ...top, line4, line6, line7, line8, line9 };
-  if (line9 < NO_PENALTY_BELOW) return { ...middle, stop: "line_9_under_limit" };
-  /* Line 10: "If you didn't file a return for 2024 ... enter the amount from line 7 on line 11" (line-10::b02). */
-  const line10 = inputs.priorYearTax === undefined ? undefined : roundDollars(inputs.priorYearTax);
+  const line9Stop: StopReason | undefined =
+    line9 < NO_PENALTY_BELOW ? "line_9_under_limit" : undefined;
+  const line10 = line10Amount(inputs.priorYearTax);
   const line11 = line10 === undefined ? line7 : Math.min(line7, line10);
+  const middle = { ...top, line7, line8, line9, line10, line11 };
   if (line8 >= line11) {
-    return { ...middle, line10, line11, stop: "withholding_covers_required_payment" };
+    return { ...middle, stop: line9Stop ?? "withholding_covers_required_payment" };
   }
   const line12 = roundDollars(inputs.paymentsByDueDate) + line8;
   const line13 = atLeast(0, line11 - line12);
-  const all = { ...middle, line10, line11, line12, line13 };
-  return line13 > 0 ? all : { ...all, stop: "no_underpayment" };
+  const all = { ...middle, line12, line13 };
+  const stop = line9Stop ?? (line13 > 0 ? undefined : "no_underpayment");
+  return stop === undefined ? all : { ...all, stop };
+}
+
+/*
+ * Line 10: "If you didn't file a return for 2024 ... don't complete line 10.
+ * Instead, enter the amount from line 7 on line 11" (line-10::b02).
+ *
+ * DECISION (2026-11-26, by the author): a farmer who had no tax for 2024 and
+ * did not file. The exceptions: "You won't have to pay the penalty or file
+ * this form if ... You had no tax liability for 2024, you were a U.S. citizen
+ * or resident alien for the entire year ..., and your 2024 return was (or
+ * would have been had you been required to file) for a full 12 months"
+ * (irs-2210f-inst-2025::sec::exceptions-to-the-penalty::b01). Line 10: "If you
+ * didn't file a return for 2024 ... enter the amount from line 7 on line 11.
+ * However, see Exceptions to the Penalty, earlier" (irs-2210f-inst-2025::sec::line-10::b02).
+ * The engine applies the exception through line 10, as Form 2210 does (row 7
+ * of docs/rule-decisions.md): a stated 2024 tax of 0 makes line 11 zero and no
+ * penalty follows; "no 12-month return" (undefined) figures one from line 7.
+ * One rule for both penalty forms, and Cade asks for the 2024 tax.
+ */
+function line10Amount(priorYearTax: number | undefined): number | undefined {
+  return priorYearTax === undefined ? undefined : roundDollars(priorYearTax);
 }
 
 /*

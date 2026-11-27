@@ -12,7 +12,6 @@ import {
   form2210FLines,
   line14Day,
   line2OtherTaxes,
-  NO_PENALTY_BELOW,
   PENALTY_END,
   type Form2210FInputs,
 } from "../../../../src/federal/2210-f/lines.js";
@@ -105,11 +104,12 @@ describe("Form 2210-F Part II", () => {
 });
 
 describe("Form 2210-F stops", () => {
-  it("line 3 under $1,000: no penalty, the form does not file", () => {
-    const result = lines({ taxAfterCredits: 600, otherTaxes: 399 });
-    expect(result.line3).toBe(NO_PENALTY_BELOW - 1);
+  it("line 3 under $1,000: no penalty, the form does not file; lines 4 and 6 still fill, line 6 stops", () => {
+    // Line 3 says only "don't file"; line 6 says "stop" (face-part-ii::b01).
+    const result = lines({ taxAfterCredits: 450, otherTaxes: 530, refundableCredits: 0 });
+    expect(result).toMatchObject({ line3: 980, line4: 0, line6: 980 });
     expect(result.stop).toBe("line_3_under_limit");
-    expect(result.line4).toBeUndefined();
+    expect(result.line7).toBeUndefined();
     expect(result).toMatchObject({ boxA: false, boxB: false });
   });
 
@@ -129,11 +129,52 @@ describe("Form 2210-F stops", () => {
     );
   });
 
-  it("line 9 under $1,000 stops, and box B stays clear", () => {
+  it("line 9 under $1,000 owes no penalty, and box B stays clear", () => {
     const result = lines({ withholding: 24501, jointReturn2025: true, priorYearTax: 100 });
     expect(result.line9).toBe(999);
     expect(result.stop).toBe("line_9_under_limit");
     expect(result.boxB).toBe(false);
+    expect(result.penalty).toBeUndefined();
+  });
+
+  it("line 9 under $1,000 does not say stop: lines 10 and 11 fill, then the line 11 note stops", () => {
+    // Blind case 4: line 9 is $800; line 8 ($24,800) is above line 11 ($17,075).
+    const result = lines({
+      taxAfterCredits: 20000,
+      otherTaxes: 6000,
+      refundableCredits: 400,
+      incomeTaxWithheld: 24800,
+      withholding: 24800,
+      priorYearTax: 25000,
+    });
+    expect(result).toMatchObject({ line9: 800, line10: 25000, line11: 17075 });
+    expect(result.stop).toBe("line_9_under_limit");
+    expect(result.line12).toBeUndefined();
+  });
+
+  it("line 9 under $1,000 with line 8 below line 11: lines 12 and 13 fill, still no penalty", () => {
+    const result = lines({
+      taxAfterCredits: 1500,
+      otherTaxes: 0,
+      refundableCredits: 0,
+      withholding: 600,
+    });
+    expect(result).toMatchObject({ line9: 900, line11: 1001, line12: 8600, line13: 0 });
+    expect(result.stop).toBe("line_9_under_limit");
+    expect(result.penalty).toBeUndefined();
+  });
+
+  it("line 9 under $1,000 with an underpayment on line 13 still figures no Part III", () => {
+    const result = lines({
+      taxAfterCredits: 1500,
+      otherTaxes: 0,
+      refundableCredits: 0,
+      withholding: 600,
+      paymentsByDueDate: 0,
+    });
+    expect(result).toMatchObject({ line12: 600, line13: 401, stop: "line_9_under_limit" });
+    expect(result.penalty).toBeUndefined();
+    expect(result).toMatchObject({ boxA: false, boxB: false });
   });
 
   it("line 8 at or above line 11 stops before line 12", () => {
@@ -225,6 +266,26 @@ describe("line 14 from the payments after January 15", () => {
     expect(line14Day(5000, [{ day: feb, amount: 6000 }], undefined)).toBe(feb);
   });
 
+  it("a part paid early: one computation from the day line 13 is paid in full (face-part-iii::b01)", () => {
+    // Blind case 12: line 13 is $9,008; $3,000 paid February 5, the rest April 10.
+    const penalty = form2210FLines({
+      ...BASE,
+      taxAfterCredits: 14000,
+      otherTaxes: 10000,
+      refundableCredits: 0,
+      incomeTaxWithheld: 2000,
+      withholding: 2000,
+      priorYearTax: 20000,
+      paymentsByDueDate: 5000,
+      latePayments: [{ day: day("2026-02-05"), amount: 3000 }],
+      underpaymentPaidOn: day("2026-04-10"),
+      jointReturn2025: true,
+    }).penalty;
+    expect(penalty?.line15).toBe(85);
+    // 9,008 × 85 / 365 × 0.07 = 146.84; not a separate count for each part ($110).
+    expect(penalty?.line16).toBe(147);
+  });
+
   it("payments that do not cover line 13: the stated day of the rest, or April 15", () => {
     expect(line14Day(5000, [{ day: feb, amount: 2000 }], undefined)).toBe(PENALTY_END);
     expect(line14Day(5000, [{ day: feb, amount: 2000 }], mar)).toBe(mar);
@@ -268,6 +329,10 @@ describe("line 2 and household employment taxes (line-2::b01)", () => {
       withholding: 0,
     };
     expect(line2OtherTaxes(inputs)).toBe(0);
-    expect(form2210FLines(inputs).stop).toBe("line_3_under_limit");
+    expect(form2210FLines(inputs)).toMatchObject({
+      stop: "line_3_under_limit",
+      line3: 500,
+      line6: 0,
+    });
   });
 });
