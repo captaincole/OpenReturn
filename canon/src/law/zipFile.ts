@@ -5,7 +5,7 @@ import { inflateRawSync } from "node:zlib";
  * Reads named files out of a large zip on disk, without loading the whole
  * archive. California's session archive is over 1 GB with about 200,000
  * files, so it needs ZIP64 (more than 65,535 entries). unzip.ts stays the
- * reader for the small zips that law.db stores. Stored or deflated
+ * reader for the small zips that the law files store. Stored or deflated
  * entries only; encrypted ones are refused.
  */
 
