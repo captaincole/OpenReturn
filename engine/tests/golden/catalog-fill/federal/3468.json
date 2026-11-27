@@ -1,0 +1,2751 @@
+{
+  "formId": "form-3468",
+  "fieldCount": 305,
+  "entries": [
+    {
+      "fieldId": "form-3468.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-KQJWU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-15085"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.1_irs_registration_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-1CNZZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.10a_energy_community_yes_10_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.10b_energy_community_yes_2_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_7[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.10c_energy_community_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_7[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.11a_low_income_community",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.11b_indian_land",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_8[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.11c_low_income_residential_building",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_8[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.11d_low_income_economic_benefit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_8[3]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.11e_48e_control_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "T-1I02G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.11f_pass_through_entity_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "T-1A37R"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.11g_low_income_communities_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_8[4]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.2a_i_emissions_value_or_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "T-9W42J"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.2a_ii_doe_control_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "T-1FF25"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.2b_i_emissions_value_received",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.2b_ii_designated_lca_model",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.2b_iii_doe_control_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "T-GRKS4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.3a_property_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "T-1WJUL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.3b_i_owner_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "T-C53QI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.3b_ii_owner_tin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "T-1XVFS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.3c_facility_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "T-CU5H5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.3d_i_latitude_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_13[0]",
+          "text": "TWKPTX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.3d_i_latitude_degrees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_12[0]",
+          "text": "30"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.3d_i_latitude_sign",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_11[0]",
+          "text": "6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.3d_ii_longitude_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_16[0]",
+          "text": "T18JZP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.3d_ii_longitude_degrees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_15[0]",
+          "text": "976"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.3d_ii_longitude_sign",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_14[0]",
+          "text": "5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.3e_qualified_interconnection_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.4_date_construction_began",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.5_date_placed_in_service",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.6_expansion_existing_facility_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.6_expansion_existing_facility_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.7a_net_output_under_1mw_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.7b_net_output_under_1mw_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.7c_net_output_not_applicable",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.8a_prevailing_wage_yes_48c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.8b_prevailing_wage_yes_48_48e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.8c_prevailing_wage_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.8d_prevailing_wage_not_applicable",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[3]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.9a_domestic_content_yes_10_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.9b_domestic_content_yes_2_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.0.part1.9c_domestic_content_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.12a_i_solar_nameplate_capacity_dc",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+          "text": "T-LZ3U1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.12a_ii_solar_nameplate_capacity_ac",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+          "text": "T-1UJHJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.12a_iii_solar_tracking_device",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.12a_solar",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.12b_wind",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.12b_wind_nameplate_capacity",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+          "text": "T-D7U91"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.12c_i_other_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+          "text": "T-35XT4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.12c_ii_other_nameplate_capacity",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+          "text": "T-1IVZ1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.12c_iii_kilowatt_type_ac",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.12c_iii_kilowatt_type_dc",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.12c_other",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.12d_energy_storage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.12d_i_power_capacity_rating",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+          "text": "T-6DVXG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.12d_ii_energy_storage_capacity",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+          "text": "T-181YN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.12d_iii_thermal_storage_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_7[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.12d_iii_thermal_storage_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.12e_not_applicable",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.13_lessee_section_48d_election_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_9[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.13_lessee_section_48d_election_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_9[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.13a_lessor_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+          "text": "T-5NB36"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.13b_lessor_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+          "text": "T-1S042"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.13c_property_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+          "text": "T-KM41B"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.13d_amount_treated_as_acquired",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+          "text": "9,237"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part1.13e_income_inclusion_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+          "text": "2,602"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part2.1a_qualified_investment_igcc_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line1a_ReadOrder[0].f2_13[0]",
+          "text": "6,832"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part2.1b_multiply_1a_by_20_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+          "text": "9,763"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part2.2a_qualified_investment_advanced_coal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line2a_ReadOrder[0].f2_15[0]",
+          "text": "4,115"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part2.2b_multiply_2a_by_15_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+          "text": "7,879"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part2.3a_qualified_investment_advanced_coal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line3a_ReadOrder[0].f2_17[0]",
+          "text": "4,914"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part2.3b_multiply_3a_by_30_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+          "text": "6,930"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part2.4a_qualified_investment_gasification_sequestration",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line4a_ReadOrder[0].f2_19[0]",
+          "text": "1,106"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part2.4b_multiply_4a_by_30_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+          "text": "3,245"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part2.5a_qualified_investment_other_gasification",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line5a_ReadOrder[0].f2_21[0]",
+          "text": "9,826"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part2.5b_multiply_5a_by_20_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+          "text": "5,951"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part2.6_cooperatives_unused_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+          "text": "6,202"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.1.part2.7_total_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+          "text": "6,525"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.25a_basis_hydrogen_45v_b2a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].Line25a_ReadOrder[0].f11_1[0]",
+          "text": "1,434"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.25b_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].f11_2[0]",
+          "text": "T-1NIHR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.25c_multiply_25a_by_25b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].f11_3[0]",
+          "text": "2,033"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.25d_basis_hydrogen_45v_b2b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].Line25d_ReadOrder[0].f11_4[0]",
+          "text": "8,896"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.25e_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].f11_5[0]",
+          "text": "T-T1LNB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.25f_multiply_25d_by_25e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].f11_6[0]",
+          "text": "8,165"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.25g_basis_hydrogen_45v_b2c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].Line25g_ReadOrder[0].f11_7[0]",
+          "text": "3,419"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.25h_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].f11_8[0]",
+          "text": "T-J2MI4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.25i_multiply_25g_by_25h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].f11_9[0]",
+          "text": "4,074"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.25j_basis_hydrogen_45v_b2d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].Line25j_ReadOrder[0].f11_10[0]",
+          "text": "9,265"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.25k_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].f11_11[0]",
+          "text": "T-1I2G2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.25l_multiply_25j_by_25k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].f11_12[0]",
+          "text": "9,565"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.26_total_clean_hydrogen",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].f11_13[0]",
+          "text": "4,121"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.27_total_energy_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].Line27_ReadOrder[0].f11_14[0]",
+          "text": "5,362"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.28a_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].f11_17[0]",
+          "text": "T-1T2SF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.28b_multiply_27_by_28a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].f11_18[0]",
+          "text": "7,056"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.28c_multiply_27_by_15_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].f11_19[0]",
+          "text": "2,547"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.28d_smaller_of_28b_or_28c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].f11_20[0]",
+          "text": "6,448"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.28e_subtract_28d_from_27",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].f11_21[0]",
+          "text": "8,937"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.29_credit_after_bond_reduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].f11_22[0]",
+          "text": "1,598"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.30_elective_payment_reduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].f11_23[0]",
+          "text": "5,845"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.31_cooperatives_unused_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].f11_24[0]",
+          "text": "7,798"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.10.part6.32_total_energy_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page11[0].f11_25[0]",
+          "text": "3,562"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.11.part7.1a_prior_170h_deduction_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page12[0].c12_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.11.part7.1a_prior_170h_deduction_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page12[0].c12_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.11.part7.1b_prior_nps_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page12[0].f12_1[0]",
+          "text": "T-H34N3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.11.part7.1c_section_47d5_election",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page12[0].c12_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.11.part7.1d_measuring_period_beginning_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page12[0].f12_2[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.11.part7.1d_measuring_period_end_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page12[0].f12_3[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.11.part7.1e_basis_building",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page12[0].f12_4[0]",
+          "text": "7,687"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.11.part7.1f_qre_during_measuring_period",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page12[0].f12_5[0]",
+          "text": "4,263"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.11.part7.1g_qualified_rehabilitation_expenditures",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page12[0].f12_6[0]",
+          "text": "8,119"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.11.part7.1j_multiply_1g_by_4_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page12[0].f12_9[0]",
+          "text": "1,910"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.11.part7.1k_i_nps_project_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page12[0].f12_10[0]",
+          "text": "T-LWOE9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.11.part7.1k_ii_pass_through_entity_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page12[0].f12_11[0]",
+          "text": "T-D181N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.11.part7.1k_iii_nps_certification_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page12[0].f12_12[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.11.part7.1m_date_30_months_after_claim",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page12[0].f12_13[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.11.part7.2_cooperatives_unused_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page12[0].f12_14[0]",
+          "text": "8,169"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.11.part7.3_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page12[0].f12_15[0]",
+          "text": "1,961"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part3.1a_qualified_investment_energy_project",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Line1a_Part3_ReadOrder[0].f3_1[0]",
+          "text": "5,356"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part3.1b_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_2[0]",
+          "text": "T-DM2FY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part3.1c_multiply_1a_by_1b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_3[0]",
+          "text": "2,753"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part3.1d_allocation_control_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_4[0]",
+          "text": "T-15SM9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part3.1e_energy_community_tract_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part3.1e_energy_community_tract_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part3.1f_pass_through_entity_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_5[0]",
+          "text": "T-OP3RI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part3.2_cooperatives_unused_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_6[0]",
+          "text": "6,791"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part3.3_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_7[0]",
+          "text": "6,542"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part4.1a_semiconductor_equipment_facility",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Line1a_Part4_ReadOrder[0].c3_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part4.1a_semiconductor_manufacturing_facility",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Line1a_Part4_ReadOrder[0].c3_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part4.1b_basis_advanced_manufacturing_facility",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_8[0]",
+          "text": "5,487"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part4.1c_multiply_1b_by_25_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_9[0]",
+          "text": "3,350"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part4.2_cooperatives_unused_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_10[0]",
+          "text": "7,736"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part4.3_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_11[0]",
+          "text": "3,572"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part5.1a_basis_qualified_facility",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Line1a_Part5_ReadOrder[0].f3_12[0]",
+          "text": "2,950"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part5.1b_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_13[0]",
+          "text": "T-12F1S"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part5.1c_multiply_1a_by_1b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_14[0]",
+          "text": "2,928"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part5.1d_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Line1d_ReadOrder[0].f3_15[0]",
+          "text": "T-WT1YC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part5.1e_multiply_1a_by_1d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_16[0]",
+          "text": "5,219"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part5.1f_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Line1f_ReadOnly[0].f3_17[0]",
+          "text": "T-10RPR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part5.1g_multiply_1a_by_1f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_18[0]",
+          "text": "6,439"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part5.1h_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Line1h_ReadOnly[0].f3_19[0]",
+          "text": "T-GYVF6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part5.1i_allocated_capacity_limitation_kw",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_20[0]",
+          "text": "T-1IDSX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part5.1j_multiply_1a_by_1h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_21[0]",
+          "text": "2,687"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part5.1k_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_22[0]",
+          "text": "T-L0QV0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part5.1l_multiply_1h_by_1k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_23[0]",
+          "text": "T-XKR2P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part5.1m_multiply_1a_by_1l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_24[0]",
+          "text": "5,368"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part5.1n_low_income_bonus_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_25[0]",
+          "text": "3,553"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.2.part5.2_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_26[0]",
+          "text": "2,664"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.3.part5.10_cooperatives_unused_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_25[0]",
+          "text": "4,608"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.3.part5.11_total_clean_electricity_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_26[0]",
+          "text": "2,546"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.3.part5.3a_basis_energy_storage_technology",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Line3a_ReadOrder[0].f4_1[0]",
+          "text": "9,843"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.3.part5.3b_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_2[0]",
+          "text": "T-1A8YV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.3.part5.3c_multiply_3a_by_3b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_3[0]",
+          "text": "7,725"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.3.part5.3d_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Line3d_ReadOrder[0].f4_4[0]",
+          "text": "T-10MYX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.3.part5.3e_multiply_3a_by_3d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_5[0]",
+          "text": "8,216"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.3.part5.3f_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Line3f_ReadOrder[0].f4_6[0]",
+          "text": "T-JZ1XB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.3.part5.3g_multiply_3a_by_3f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_7[0]",
+          "text": "5,931"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.3.part5.4_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_15[0]",
+          "text": "2,541"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.3.part5.5_total_part5_lines_2_and_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_16[0]",
+          "text": "2,699"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.3.part5.6a_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_17[0]",
+          "text": "T-1VIVX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.3.part5.6b_multiply_5_by_6a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_18[0]",
+          "text": "8,177"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.3.part5.6c_multiply_5_by_15_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_19[0]",
+          "text": "7,993"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.3.part5.6d_smaller_of_6b_or_6c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_20[0]",
+          "text": "6,664"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.3.part5.6e_subtract_6d_from_5",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_21[0]",
+          "text": "6,794"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.3.part5.7_credit_after_financing_reduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_22[0]",
+          "text": "9,952"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.3.part5.8_credit_after_elective_payment_phaseout",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_23[0]",
+          "text": "6,618"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.1a_basis_geothermal_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].Line1a_ReadOrder[0].f5_1[0]",
+          "text": "3,721"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.1b_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_2[0]",
+          "text": "T-1FDL2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.1c_multiply_1a_by_1b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_3[0]",
+          "text": "6,367"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.1d_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].Line1d_ReadOrder[0].f5_4[0]",
+          "text": "T-AJHYB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.1e_multiply_1a_by_1d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_5[0]",
+          "text": "5,367"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.1f_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].Line1f_ReadOrder[0].f5_6[0]",
+          "text": "T-QTF3L"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.1g_multiply_1a_by_1f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_7[0]",
+          "text": "2,112"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.2_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_8[0]",
+          "text": "4,398"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.3a_basis_solar_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].Line3a_ReadOrder[0].f5_9[0]",
+          "text": "5,461"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.3b_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_10[0]",
+          "text": "T-W7MDT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.3c_multiply_3a_by_3b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_11[0]",
+          "text": "4,970"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.3d_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_12[0]",
+          "text": "T-L23OK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.3e_allocated_capacity_limitation_kw",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_13[0]",
+          "text": "T-1MOFG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.3f_multiply_3a_by_3d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_14[0]",
+          "text": "1,793"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.3g_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_15[0]",
+          "text": "T-13IUD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.3h_multiply_3d_by_3g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_16[0]",
+          "text": "T-14INA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.3i_multiply_3a_by_3h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_17[0]",
+          "text": "9,401"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.3j_low_income_bonus_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_18[0]",
+          "text": "7,514"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.3k_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].Line3k_ReadOrder[0].f5_19[0]",
+          "text": "T-1HDUT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.3l_multiply_3a_by_3k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_20[0]",
+          "text": "7,024"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.3m_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].Line3m_ReadOrder[0].f5_21[0]",
+          "text": "T-KD166"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.3n_multiply_3a_by_3m",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_22[0]",
+          "text": "5,583"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.4.part6.4_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_23[0]",
+          "text": "8,951"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.5a_basis_fuel_cell_pre_2008",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].Line5a_ReadOrder[0].f6_1[0]",
+          "text": "2,019"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.5b_multiply_5a_by_30_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_2[0]",
+          "text": "7,738"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.5c_kw_capacity_line_5a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_3[0]",
+          "text": "T-1V8SM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.5d_multiply_5c_by_1000_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_4[0]",
+          "text": "1,787"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.5e_smaller_of_5b_or_5d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_5[0]",
+          "text": "3,583"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.5f_basis_fuel_cell_post_2008",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].Line5f_ReadOrder[0].f6_6[0]",
+          "text": "7,424"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.5g_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_7[0]",
+          "text": "T-1X8ZS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.5h_multiply_5f_by_5g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_8[0]",
+          "text": "8,572"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.5i_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_9[0]",
+          "text": "T-8KFBP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.5j_multiply_5f_by_5i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_10[0]",
+          "text": "5,244"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.5l_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].Line5l_ReadOrder[0].f6_12[0]",
+          "text": "T-9BOZ6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.5m_multiply_5f_by_5l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_13[0]",
+          "text": "1,559"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.5n_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_14[0]",
+          "text": "6,552"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.5o_kw_capacity_line_5f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_15[0]",
+          "text": "T-7541Q"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.5p_multiply_5o_by_3000_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_16[0]",
+          "text": "3,570"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.5q_smaller_of_5n_or_5p",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_17[0]",
+          "text": "1,736"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.6_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_18[0]",
+          "text": "9,901"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.7a_basis_microturbine_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].Line7a_ReadOrder[0].f6_19[0]",
+          "text": "9,408"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.7b_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_20[0]",
+          "text": "T-YYDI9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.7c_multiply_7a_by_7b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_21[0]",
+          "text": "3,507"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.7d_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_22[0]",
+          "text": "T-2YZ7P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.7e_multiply_7a_by_7d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_23[0]",
+          "text": "2,508"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.7g_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].Line7g_ReadOrder[0].f6_25[0]",
+          "text": "T-1QK2C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.7h_multiply_7a_by_7g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_26[0]",
+          "text": "7,317"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.7i_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_27[0]",
+          "text": "3,194"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.7j_kw_capacity_line_7a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].Line7j_ReadOrder[0].f6_28[0]",
+          "text": "T-IECVQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.7l_multiply_7j_by_200_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_30[0]",
+          "text": "4,495"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.5.part6.8_smaller_of_7i_or_7l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page6[0].f6_31[0]",
+          "text": "8,955"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.10_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].f7_11[0]",
+          "text": "7,879"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.11d_basis_small_wind_energy",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].Line11d_ReadOrder[0].f7_15[0]",
+          "text": "1,430"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.11e_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].f7_16[0]",
+          "text": "T-1N2J0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.11f_multiply_11d_by_11e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].f7_17[0]",
+          "text": "4,108"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.11g_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].Line11g_ReadOrder[0].f7_18[0]",
+          "text": "T-1HHPV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.11h_allocated_capacity_limitation_kw",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].f7_19[0]",
+          "text": "T-F4668"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.11i_multiply_11d_by_11g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].f7_20[0]",
+          "text": "4,661"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.11j_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].f7_21[0]",
+          "text": "T-L7MD9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.11k_multiply_11g_by_11j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].f7_22[0]",
+          "text": "T-84D7I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.11l_multiply_11d_by_11k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].f7_23[0]",
+          "text": "1,623"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.11m_low_income_bonus_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].f7_24[0]",
+          "text": "3,098"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.11n_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].Line11n_ReadOrder[0].f7_25[0]",
+          "text": "T-1WZ2N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.11o_multiply_11d_by_11n",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].f7_26[0]",
+          "text": "4,533"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.11p_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].Line11p_ReadOrder[0].f7_27[0]",
+          "text": "T-1YBO0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.11q_multiply_11d_by_11p",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].f7_28[0]",
+          "text": "1,174"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.12_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].f7_29[0]",
+          "text": "8,328"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.9a_basis_combined_heat_power",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].Line9a_ReadOrder[0].f7_1[0]",
+          "text": "6,774"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.9b_capacity_ratio_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].f7_3[0]",
+          "text": "T-4PG1K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.9b_capacity_ratio_whole",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].f7_2[0]",
+          "text": "T-1MXXE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.9c_multiply_9a_by_9b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].f7_4[0]",
+          "text": "9,850"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.9d_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].f7_5[0]",
+          "text": "T-FHPTZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.9e_multiply_9c_by_9d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].f7_6[0]",
+          "text": "7,351"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.9f_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].Line9f_ReadOrder[0].f7_7[0]",
+          "text": "T-1YET8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.9g_multiply_9c_by_9f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].f7_8[0]",
+          "text": "5,525"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.9h_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].Line9h_ReadOrder[0].f7_9[0]",
+          "text": "T-48O2R"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.6.part6.9i_multiply_9c_by_9h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page7[0].f7_10[0]",
+          "text": "7,869"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.7.part6.13a_basis_waste_energy_recovery",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page8[0].Line13a_ReadOrder[0].f8_1[0]",
+          "text": "7,330"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.7.part6.13b_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page8[0].f8_2[0]",
+          "text": "T-LZZPT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.7.part6.13c_multiply_13a_by_13b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page8[0].f8_3[0]",
+          "text": "4,418"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.7.part6.13d_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page8[0].Line13d_ReadOrder[0].f8_4[0]",
+          "text": "T-S1Y2S"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.7.part6.13e_multiply_13a_by_13d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page8[0].f8_5[0]",
+          "text": "4,319"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.7.part6.13f_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page8[0].Line13f_ReadOrder[0].f8_6[0]",
+          "text": "T-1D192"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.7.part6.13g_multiply_13a_by_13f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page8[0].f8_7[0]",
+          "text": "3,519"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.7.part6.14_total_waste_energy_recovery",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page8[0].f8_8[0]",
+          "text": "5,963"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.7.part6.15a_basis_geothermal_heat_pump",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page8[0].Line15a_ReadOrder[0].f8_9[0]",
+          "text": "7,508"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.7.part6.15b_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page8[0].f8_10[0]",
+          "text": "T-1TFNK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.7.part6.15c_multiply_15a_by_15b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page8[0].f8_11[0]",
+          "text": "3,894"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.7.part6.15d_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page8[0].Line15d_ReadOrder[0].f8_12[0]",
+          "text": "T-KLADT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.7.part6.15e_multiply_15a_by_15d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page8[0].f8_13[0]",
+          "text": "2,728"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.7.part6.15f_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page8[0].Line15f_ReadOrder[0].f8_14[0]",
+          "text": "T-16BHB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.7.part6.15g_multiply_15a_by_15f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page8[0].f8_15[0]",
+          "text": "9,019"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.7.part6.16_total_geothermal_heat_pump",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page8[0].f8_16[0]",
+          "text": "6,088"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.17a_basis_energy_storage_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].Line17a_ReadOrder[0].f9_1[0]",
+          "text": "7,531"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.17b_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].f9_2[0]",
+          "text": "T-CB6CD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.17c_multiply_17a_by_17b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].f9_3[0]",
+          "text": "8,735"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.17d_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].f9_4[0]",
+          "text": "T-197O0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.17e_allocated_capacity_limitation_kw",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].f9_5[0]",
+          "text": "T-AQT5P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.17f_multiply_17a_by_17d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].f9_6[0]",
+          "text": "7,888"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.17g_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].f9_7[0]",
+          "text": "T-8RRRL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.17h_multiply_17d_by_17g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].f9_8[0]",
+          "text": "T-X77F1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.17i_multiply_17a_by_17h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].f9_9[0]",
+          "text": "8,341"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.17j_low_income_bonus_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].f9_10[0]",
+          "text": "8,344"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.17k_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].Line17k_ReadOrder[0].f9_11[0]",
+          "text": "T-JJ80J"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.17l_multiply_17a_by_17k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].f9_12[0]",
+          "text": "6,426"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.17m_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].Line17m_ReadOrder[0].f9_13[0]",
+          "text": "T-TBB45"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.17n_multiply_17a_by_17m",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].f9_14[0]",
+          "text": "7,176"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.18_total_energy_storage_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].f9_15[0]",
+          "text": "8,744"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.19a_basis_biogas_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].Line19a_ReadOrder[0].f9_16[0]",
+          "text": "3,310"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.19b_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].f9_17[0]",
+          "text": "T-GBPT1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.19c_multiply_19a_by_19b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].f9_18[0]",
+          "text": "6,430"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.19d_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].Line19d_ReadOrder[0].f9_19[0]",
+          "text": "T-QTZ5T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.19e_multiply_19a_by_19d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].f9_20[0]",
+          "text": "4,832"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.19f_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].Line19f_ReadOrder[0].f9_21[0]",
+          "text": "T-1TTLL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.19g_multiply_19a_by_19f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].f9_22[0]",
+          "text": "2,987"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.8.part6.20_total_biogas_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page9[0].f9_23[0]",
+          "text": "9,155"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.21a_basis_microgrid_controllers",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].Line21a_ReadOrder[0].f10_1[0]",
+          "text": "5,206"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.21b_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].f10_2[0]",
+          "text": "T-1V1N7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.21c_multiply_21a_by_21b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].f10_3[0]",
+          "text": "2,734"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.21d_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].Line21d_ReadOrder[0].f10_4[0]",
+          "text": "T-K3WKT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.21e_multiply_21a_by_21d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].f10_5[0]",
+          "text": "8,078"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.21f_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].Line21f_ReadOrder[0].f10_6[0]",
+          "text": "T-1V8PG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.21g_multiply_21a_by_21f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].f10_7[0]",
+          "text": "4,756"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.22_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].f10_8[0]",
+          "text": "2,828"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.23a_basis_qualified_facility_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].Line23a_ReadOrder[0].f10_9[0]",
+          "text": "8,721"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.23b_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].f10_10[0]",
+          "text": "T-14RUW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.23c_multiply_23a_by_23b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].f10_11[0]",
+          "text": "2,144"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.23d_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].f10_12[0]",
+          "text": "T-1N7ZB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.23e_allocated_capacity_limitation_kw",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].f10_13[0]",
+          "text": "T-176AU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.23f_multiply_23a_by_23d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].f10_14[0]",
+          "text": "3,027"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.23g_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].f10_15[0]",
+          "text": "T-1GOO5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.23h_multiply_23d_by_23g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].f10_16[0]",
+          "text": "T-HSWHV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.23i_multiply_23a_by_23h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].f10_17[0]",
+          "text": "8,987"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.23j_low_income_bonus_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].f10_18[0]",
+          "text": "1,198"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.23k_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].Line23k_ReadOrder[0].f10_19[0]",
+          "text": "T-ZQHUY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.23l_multiply_23a_by_23k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].f10_20[0]",
+          "text": "9,237"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.23m_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].Line23m_ReadOrder[0].f10_21[0]",
+          "text": "T-K3L2Y"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.23n_multiply_23a_by_23m",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].f10_22[0]",
+          "text": "2,023"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3468.9.part6.24_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page10[0].f10_23[0]",
+          "text": "2,912"
+        }
+      ]
+    }
+  ]
+}

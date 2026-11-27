@@ -1,0 +1,132 @@
+{
+  "formId": "form-8826",
+  "fieldCount": 14,
+  "entries": [
+    {
+      "fieldId": "form-8826.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-1FK4B"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8826.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-1XJ3R"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8826.0.line.1_total_eligible_access_expenditures_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "189"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8826.0.line.1_total_eligible_access_expenditures_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "6,020"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8826.0.line.3_subtract_2_from_1_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "345"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8826.0.line.3_subtract_2_from_1_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "9,711"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8826.0.line.5_smaller_of_3_or_4_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "675"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8826.0.line.5_smaller_of_3_or_4_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "6,837"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8826.0.line.6_multiply_5_by_50_percent_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "499"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8826.0.line.6_multiply_5_by_50_percent_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "5,975"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8826.0.line.7_credit_from_partnerships_s_corporations_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "742"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8826.0.line.7_credit_from_partnerships_s_corporations_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "9,928"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8826.0.line.8_total_disabled_access_credit_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "985"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8826.0.line.8_total_disabled_access_credit_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "3,710"
+        }
+      ]
+    }
+  ]
+}

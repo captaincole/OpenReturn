@@ -1,0 +1,4607 @@
+{
+  "form": {
+    "formId": "form-3468",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Investment Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3468.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-3468.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 461.8,
+        "y": 684
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-3468.0.part1.1_irs_registration_number",
+      "label": "Line 1 — If making an elective payment election or transfer election, enter the IRS-issued registration number for the facility",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 648
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3468.0.part1.2a_i_emissions_value_or_rate",
+      "label": "Line 2a(i) — Enter the facility's emissions value or rate (kg of CO2e per kg of qualified clean hydrogen)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.2a_ii_doe_control_number",
+      "label": "Line 2a(ii) — Enter the Department of Energy (DOE) control number, if applicable",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 428.2,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.2b_i_emissions_value_received",
+      "label": "Line 2b(i) — Provisional emissions rate (PER): An emissions value was received from the DOE",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 80.2,
+        "y": 602.001
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.2b_ii_designated_lca_model",
+      "label": "Line 2b(ii) — Provisional emissions rate (PER): A designated lifecycle analysis (LCA) model was used to determine an emissions value",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 80.2,
+        "y": 590.002
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.2b_iii_doe_control_number",
+      "label": "Line 2b(iii) — Enter the DOE control number, if applicable",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 261.8,
+        "y": 576
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.3a_property_type",
+      "label": "Line 3a — Type (solar, clean hydrogen, rehabilitation, etc.)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 261.8,
+        "y": 564.001
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.3b_i_owner_name",
+      "label": "Line 3b(i) — If different from filer, enter owner's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 145.2,
+        "y": 540
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.3b_ii_owner_tin",
+      "label": "Line 3b(ii) — If different from filer, enter owner's TIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 137.2,
+        "y": 528.001
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-3468.0.part1.3c_facility_address",
+      "label": "Line 3c — Address of the facility (if applicable)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 491.998
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-3468.0.part1.3d_i_latitude_sign",
+      "label": "Line 3d(i) — Latitude: Enter a \"+\" (plus) or \"-\" (minus) sign in the first box",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 179.901,
+        "y": 474.001
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3468.0.part1.3d_i_latitude_degrees",
+      "label": "Line 3d(i) — Latitude: whole degrees (before the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 201.501,
+        "y": 474.001
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3468.0.part1.3d_i_latitude_decimal",
+      "label": "Line 3d(i) — Latitude: decimal digits (after the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 237.501,
+        "y": 474.001
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-3468.0.part1.3d_ii_longitude_sign",
+      "label": "Line 3d(ii) — Longitude: Enter a \"+\" (plus) or \"-\" (minus) sign in the first box",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 474.001
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3468.0.part1.3d_ii_longitude_degrees",
+      "label": "Line 3d(ii) — Longitude: whole degrees (before the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 474.001
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-3468.0.part1.3d_ii_longitude_decimal",
+      "label": "Line 3d(ii) — Longitude: decimal digits (after the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 475.2,
+        "y": 474.001
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-3468.0.part1.3e_qualified_interconnection_property",
+      "label": "Line 3e — Check this box if the property includes qualified interconnection property under section 48(a)(8) or 48E(b)(1)(B)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 566,
+        "y": 452
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.4_date_construction_began",
+      "label": "Line 4 — Date construction began (MM/DD/YYYY)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 234.8,
+        "y": 438.001
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3468.0.part1.5_date_placed_in_service",
+      "label": "Line 5 — Date placed in service (MM/DD/YYYY)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 225.8,
+        "y": 426.002
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3468.0.part1.6_expansion_existing_facility_yes",
+      "label": "Line 6 — Is the facility an expansion of an existing facility? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 416
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.6_expansion_existing_facility_no",
+      "label": "Line 6 — Is the facility an expansion of an existing facility? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+      "position": {
+        "page": 0,
+        "x": 547.2,
+        "y": 416
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.7a_net_output_under_1mw_yes",
+      "label": "Line 7a — Does the property, facility, or project produce a net output of less than 1 megawatt (MW) alternating current (ac), or equivalent thermal energy? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 380
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.7b_net_output_under_1mw_no",
+      "label": "Line 7b — Does the property, facility, or project produce a net output of less than 1 megawatt (MW) alternating current (ac), or equivalent thermal energy? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 368.001
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.7c_net_output_not_applicable",
+      "label": "Line 7c — Not applicable; the facility doesn't produce electricity",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[2]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 356.002
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.8a_prevailing_wage_yes_48c",
+      "label": "Line 8a — Prevailing wage and apprenticeship requirements: Yes, and sections 48C(e)(5) and (6) apply, and it was declared as provided per Notice 2023-18",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 332.001
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.8b_prevailing_wage_yes_48_48e",
+      "label": "Line 8b — Prevailing wage and apprenticeship requirements: Yes, and either (i) section 48(a)(9)(B)(ii), 48E(a)(2)(A)(ii)(II), or 48E(a)(2)(B)(ii)(II) applies if construction began before January 29, 2023; or (ii) sections 48(a)(10) and (11), or 48E(d)(3) and (4) apply",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[1]",
+      "position": {
+        "page": 0,
+        "x": 65.7,
+        "y": 320.002
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.8c_prevailing_wage_no",
+      "label": "Line 8c — Prevailing wage and apprenticeship requirements: No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[2]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 296.501
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.8d_prevailing_wage_not_applicable",
+      "label": "Line 8d — Prevailing wage and apprenticeship requirements: Not applicable",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[3]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 284.002
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.9a_domestic_content_yes_10_percent",
+      "label": "Line 9a — Domestic content bonus credit: Yes, and section 48(a)(9)(B), 48E(a)(2)(A)(ii), or 48E(a)(2)(B)(ii) is satisfied (10% bonus)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 260.001
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.9b_domestic_content_yes_2_percent",
+      "label": "Line 9b — Domestic content bonus credit: Yes, and section 48(a)(9)(B), 48E(a)(2)(A)(ii), or 48E(a)(2)(B)(ii) is not satisfied (2% bonus)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_6[1]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 248.002
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.9c_domestic_content_no",
+      "label": "Line 9c — Domestic content bonus credit: No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_6[2]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 236
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.10a_energy_community_yes_10_percent",
+      "label": "Line 10a — Energy community bonus credit: Yes, and section 48(a)(9)(B), 48E(a)(2)(A)(ii), or 48E(a)(2)(B)(ii) is satisfied (10% bonus)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 212.002
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.10b_energy_community_yes_2_percent",
+      "label": "Line 10b — Energy community bonus credit: Yes, and section 48(a)(9)(B), 48E(a)(2)(A)(ii), or 48E(a)(2)(B)(ii) is not satisfied (2% bonus)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_7[1]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 200
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.10c_energy_community_no",
+      "label": "Line 10c — Energy community bonus credit: No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_7[2]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 188.001
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.11a_low_income_community",
+      "label": "Line 11a — Low-income communities bonus credit: Yes, and the facility is located in a low-income community per section 45D(e) (10% bonus)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 152.001
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.11b_indian_land",
+      "label": "Line 11b — Low-income communities bonus credit: Yes, and the facility is located on Indian land per section 2601(2) of P.L. 102-486 (10% bonus)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_8[1]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 140.002
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.11c_low_income_residential_building",
+      "label": "Line 11c — Low-income communities bonus credit: Yes, and the facility is part of a qualified low-income residential building project facility per section 48(e)(2)(B) or 48E(h)(2)(B) (20% bonus)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_8[2]",
+      "position": {
+        "page": 0,
+        "x": 65.7,
+        "y": 128
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.11d_low_income_economic_benefit",
+      "label": "Line 11d — Low-income communities bonus credit: Yes, and the facility is part of a qualified low-income economic benefit project facility per section 48(e)(2)(C) or 48E(h)(2)(C) (20% bonus)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_8[3]",
+      "position": {
+        "page": 0,
+        "x": 65.7,
+        "y": 104.002
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.11e_48e_control_number",
+      "label": "Line 11e — If \"Yes\" to line 11a, 11b, 11c, or 11d, enter your 48(e) or 48E(h) Control Number",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 390.8,
+        "y": 78.001
+      }
+    },
+    {
+      "fieldId": "form-3468.0.part1.11f_pass_through_entity_ein",
+      "label": "Line 11f — Enter the originating pass-through entity's employer identification number (EIN) (if applicable)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 444.8,
+        "y": 66.002
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3468.0.part1.11g_low_income_communities_no",
+      "label": "Line 11g — Low-income communities bonus credit: No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_8[4]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 56
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.12a_solar",
+      "label": "Line 12a — Solar",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 710.001
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.12a_i_solar_nameplate_capacity_dc",
+      "label": "Line 12a(i) — Solar nameplate capacity, kilowatt (kW) direct current (dc)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 165.6,
+        "y": 696.002
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.12a_ii_solar_nameplate_capacity_ac",
+      "label": "Line 12a(ii) — Solar nameplate capacity, kW ac",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 165.6,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.12a_iii_solar_tracking_device",
+      "label": "Line 12a(iii) — Check here if the solar energy property or facility includes a solar tracking device",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 565.999,
+        "y": 674.001
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.12b_wind",
+      "label": "Line 12b — Wind",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 662.002
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.12b_wind_nameplate_capacity",
+      "label": "Line 12b — Wind nameplate capacity, kW ac",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 187.2,
+        "y": 660.002
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.12c_other",
+      "label": "Line 12c — Other",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 650
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.12c_i_other_type",
+      "label": "Line 12c(i) — Other: type",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 106.2,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.12c_ii_other_nameplate_capacity",
+      "label": "Line 12c(ii) — Other: nameplate capacity, kW",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 165.6,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.12c_iii_kilowatt_type_ac",
+      "label": "Line 12c(iii) — Kilowatt type: ac",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 151.2,
+        "y": 614.25
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.12c_iii_kilowatt_type_dc",
+      "label": "Line 12c(iii) — Kilowatt type: dc",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_5[1]",
+      "position": {
+        "page": 1,
+        "x": 194.4,
+        "y": 614.25
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.12d_energy_storage",
+      "label": "Line 12d — Energy storage",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 602.001
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.12d_i_power_capacity_rating",
+      "label": "Line 12d(i) — Energy storage: power capacity rating, kW",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 172.8,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.12d_ii_energy_storage_capacity",
+      "label": "Line 12d(ii) — Energy storage capacity, kilowatt-hours (kWh)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 180,
+        "y": 576
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.12d_iii_thermal_storage_yes",
+      "label": "Line 12d(iii) — Is the energy storage installed in connection with the solar or wind facility a thermal storage? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 566.001
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.12d_iii_thermal_storage_no",
+      "label": "Line 12d(iii) — Is the energy storage installed in connection with the solar or wind facility a thermal storage? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_7[1]",
+      "position": {
+        "page": 1,
+        "x": 547.2,
+        "y": 566.001
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.12e_not_applicable",
+      "label": "Line 12e — Not applicable",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 554.002
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.13_lessee_section_48d_election_yes",
+      "label": "Line 13 — Are you claiming the investment credit as a lessee based on a section 48(d) (as in effect on November 4, 1990) election? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 530.001
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.13_lessee_section_48d_election_no",
+      "label": "Line 13 — Are you claiming the investment credit as a lessee based on a section 48(d) (as in effect on November 4, 1990) election? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_9[1]",
+      "position": {
+        "page": 1,
+        "x": 547.2,
+        "y": 530.001
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.13a_lessor_name",
+      "label": "Line 13a — Name of lessor",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 132.8,
+        "y": 492.001
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.13b_lessor_address",
+      "label": "Line 13b — Address of lessor",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 141.8,
+        "y": 480.002
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.13c_property_description",
+      "label": "Line 13c — Description of property",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 163.8,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.13d_amount_treated_as_acquired",
+      "label": "Line 13d — Amount for which you were treated as having acquired the property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part1.13e_income_inclusion_amount",
+      "label": "Line 13e — Income inclusion amount reported for tax year under Regulations section 1.50-1",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part2.1a_qualified_investment_igcc_property",
+      "label": "Line 1a — Enter the qualified investment in integrated gasification combined cycle property placed in service during the tax year for projects described in section 48A(d)(3)(B)(i)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line1a_ReadOrder[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 384.001
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part2.1b_multiply_1a_by_20_percent",
+      "label": "Line 1b — Multiply line 1a by 20% (0.20)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 372.002
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part2.2a_qualified_investment_advanced_coal",
+      "label": "Line 2a — Enter the qualified investment in advanced coal-based generation technology property placed in service during the tax year for projects described in section 48A(d)(3)(B)(ii)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line2a_ReadOrder[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part2.2b_multiply_2a_by_15_percent",
+      "label": "Line 2b — Multiply line 2a by 15% (0.15)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part2.3a_qualified_investment_advanced_coal",
+      "label": "Line 3a — Enter the qualified investment in advanced coal-based generation technology property placed in service during the tax year for projects described in section 48A(d)(3)(B)(iii)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line3a_ReadOrder[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 264.002
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part2.3b_multiply_3a_by_30_percent",
+      "label": "Line 3b — Multiply line 3a by 30% (0.30)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 252
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part2.4a_qualified_investment_gasification_sequestration",
+      "label": "Line 4a — Enter the qualified investment in qualified gasification property placed in service during the tax year for which credits were allocated or reallocated after October 3, 2008, and that includes equipment that separates and sequesters at least 75% of the project's carbon dioxide emissions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line4a_ReadOrder[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 168.001
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part2.4b_multiply_4a_by_30_percent",
+      "label": "Line 4b — Multiply line 4a by 30% (0.30)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 156.002
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part2.5a_qualified_investment_other_gasification",
+      "label": "Line 5a — Enter the qualified investment in property other than in line 4a above placed in service during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line5a_ReadOrder[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 132.001
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part2.5b_multiply_5a_by_20_percent",
+      "label": "Line 5b — Multiply line 5a by 20% (0.20)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 120.002
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part2.6_cooperatives_unused_credit",
+      "label": "Line 6 — Enter the applicable unused investment credit from cooperatives",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 96.001
+      }
+    },
+    {
+      "fieldId": "form-3468.1.part2.7_total_add_lines",
+      "label": "Line 7 — Add lines 1b, 2b, 3b, 4b, 5b, and 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 84.002
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part3.1a_qualified_investment_energy_project",
+      "label": "Line 1a — Enter the qualified investment in advanced energy project property placed in service during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Line1a_Part3_ReadOrder[0].f3_1[0]",
+      "position": {
+        "page": 2,
+        "x": 316.8,
+        "y": 696.002
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part3.1b_percentage",
+      "label": "Line 1b — If you checked the box in Part I, line 8a, and it’s consistent with your section 48C application per Notice 2023-18, enter 30%. If you checked the box in Part I, line 8c, enter 6%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_2[0]",
+      "position": {
+        "page": 2,
+        "x": 316.8,
+        "y": 660.002
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part3.1c_multiply_1a_by_1b",
+      "label": "Line 1c — Multiply line 1a by line 1b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_3[0]",
+      "position": {
+        "page": 2,
+        "x": 410.4,
+        "y": 648
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part3.1d_allocation_control_number",
+      "label": "Line 1d — Enter your section 48C Allocation control number",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_4[0]",
+      "position": {
+        "page": 2,
+        "x": 267.8,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part3.1e_energy_community_tract_yes",
+      "label": "Line 1e — Is the facility in a section 48C energy community census tract? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_1[0]",
+      "position": {
+        "page": 2,
+        "x": 316.8,
+        "y": 626.002
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part3.1e_energy_community_tract_no",
+      "label": "Line 1e — Is the facility in a section 48C energy community census tract? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_1[1]",
+      "position": {
+        "page": 2,
+        "x": 356.8,
+        "y": 626.002
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part3.1f_pass_through_entity_ein",
+      "label": "Line 1f — Enter the originating pass-through entity’s EIN (if applicable)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_5[0]",
+      "position": {
+        "page": 2,
+        "x": 311.8,
+        "y": 612
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3468.2.part3.2_cooperatives_unused_credit",
+      "label": "Line 2 — Enter the applicable unused investment credit from cooperatives",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_6[0]",
+      "position": {
+        "page": 2,
+        "x": 410.4,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part3.3_add_lines",
+      "label": "Line 3 — Add lines 1c and 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_7[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part4.1a_semiconductor_manufacturing_facility",
+      "label": "Line 1a — Check the box that applies to your advanced manufacturing investment project: Semiconductor manufacturing facility",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Line1a_Part4_ReadOrder[0].c3_2[0]",
+      "position": {
+        "page": 2,
+        "x": 65.8,
+        "y": 542
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part4.1a_semiconductor_equipment_facility",
+      "label": "Line 1a — Check the box that applies to your advanced manufacturing investment project: Semiconductor equipment manufacturing facility",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Line1a_Part4_ReadOrder[0].c3_2[1]",
+      "position": {
+        "page": 2,
+        "x": 65.8,
+        "y": 529.501
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part4.1b_basis_advanced_manufacturing_facility",
+      "label": "Line 1b — Enter the basis of the qualified investment for the tax year with respect to any advanced manufacturing facility",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_8[0]",
+      "position": {
+        "page": 2,
+        "x": 316.8,
+        "y": 504
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part4.1c_multiply_1b_by_25_percent",
+      "label": "Line 1c — Multiply line 1b by 25% (0.25) (35% (0.35) for property placed in service after 2025)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_9[0]",
+      "position": {
+        "page": 2,
+        "x": 410.4,
+        "y": 492.001
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part4.2_cooperatives_unused_credit",
+      "label": "Line 2 — Enter the applicable unused investment credit from cooperatives",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_10[0]",
+      "position": {
+        "page": 2,
+        "x": 410.4,
+        "y": 480.002
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part4.3_add_lines",
+      "label": "Line 3 — Add lines 1c and 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_11[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part5.1a_basis_qualified_facility",
+      "label": "Line 1a — Enter the basis of the qualified investment for any qualified facility described in section 48E(b)(1) placed in service during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Line1a_Part5_ReadOrder[0].f3_12[0]",
+      "position": {
+        "page": 2,
+        "x": 316.8,
+        "y": 384.001
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part5.1b_percentage",
+      "label": "Line 1b — If you checked Part I, line 7a or 8b, enter 30%. Otherwise, enter 6%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_13[0]",
+      "position": {
+        "page": 2,
+        "x": 316.8,
+        "y": 348.001
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part5.1c_multiply_1a_by_1b",
+      "label": "Line 1c — Multiply line 1a by line 1b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_14[0]",
+      "position": {
+        "page": 2,
+        "x": 410.4,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part5.1d_percentage",
+      "label": "Line 1d — If you checked Part I, line 9a, enter 10%. If you checked Part I, line 9b, enter 2%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Line1d_ReadOrder[0].f3_15[0]",
+      "position": {
+        "page": 2,
+        "x": 316.8,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part5.1e_multiply_1a_by_1d",
+      "label": "Line 1e — Multiply line 1a by line 1d",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_16[0]",
+      "position": {
+        "page": 2,
+        "x": 410.4,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part5.1f_percentage",
+      "label": "Line 1f — If you checked Part I, line 10a, enter 10%. If you checked Part I, line 10b, enter 2%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Line1f_ReadOnly[0].f3_17[0]",
+      "position": {
+        "page": 2,
+        "x": 316.8,
+        "y": 276.001
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part5.1g_multiply_1a_by_1f",
+      "label": "Line 1g — Multiply line 1a by line 1f",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_18[0]",
+      "position": {
+        "page": 2,
+        "x": 410.4,
+        "y": 264.002
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part5.1h_percentage",
+      "label": "Line 1h — If you checked the box in Part I, line 11a or 11b, enter 10%. If you checked the box in Part I, line 11c or 11d, enter 20%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Line1h_ReadOnly[0].f3_19[0]",
+      "position": {
+        "page": 2,
+        "x": 316.8,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part5.1i_allocated_capacity_limitation_kw",
+      "label": "Line 1i — Enter the amount of capacity limitation you were allocated in the allocation letter (kW)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_20[0]",
+      "position": {
+        "page": 2,
+        "x": 316.8,
+        "y": 168.001
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part5.1j_multiply_1a_by_1h",
+      "label": "Line 1j — If the entry on Part I, line 12a(i), 12b, or 12c(ii), equals the entry on line 1i, multiply line 1a by line 1h",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_21[0]",
+      "position": {
+        "page": 2,
+        "x": 316.8,
+        "y": 132.001
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part5.1k_ratio",
+      "label": "Line 1k — If the entry on Part I, line 12a(i), 12b, or 12c(ii), is more than the entry on line 1i, divide line 1i by Part I, line 12a(i), 12b, or 12c(ii)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_22[0]",
+      "position": {
+        "page": 2,
+        "x": 316.8,
+        "y": 96.001
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part5.1l_multiply_1h_by_1k",
+      "label": "Line 1l — Multiply line 1h by line 1k",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_23[0]",
+      "position": {
+        "page": 2,
+        "x": 316.8,
+        "y": 84.002
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part5.1m_multiply_1a_by_1l",
+      "label": "Line 1m — Multiply line 1a by line 1l",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_24[0]",
+      "position": {
+        "page": 2,
+        "x": 316.8,
+        "y": 72
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part5.1n_low_income_bonus_amount",
+      "label": "Line 1n — If Part I, line 12a(i), 12b, or 12c(ii), is more than the entry on line 1i, enter the amount from line 1m. Otherwise, enter the amount from line 1j",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_25[0]",
+      "position": {
+        "page": 2,
+        "x": 410.4,
+        "y": 48.002
+      }
+    },
+    {
+      "fieldId": "form-3468.2.part5.2_add_lines",
+      "label": "Line 2 — Add lines 1c, 1e, 1g, and 1n",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_26[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 36
+      }
+    },
+    {
+      "fieldId": "form-3468.3.part5.3a_basis_energy_storage_technology",
+      "label": "Line 3a — Enter the basis of the qualified investment for any energy storage technology described in section 48E(c) placed in service during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Line3a_ReadOrder[0].f4_1[0]",
+      "position": {
+        "page": 3,
+        "x": 316.8,
+        "y": 660.002
+      }
+    },
+    {
+      "fieldId": "form-3468.3.part5.3b_percentage",
+      "label": "Line 3b — If you checked Part I, line 7a or 8b, enter 30%. Otherwise, enter 6%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_2[0]",
+      "position": {
+        "page": 3,
+        "x": 316.8,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "form-3468.3.part5.3c_multiply_3a_by_3b",
+      "label": "Line 3c — Multiply line 3a by line 3b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_3[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "form-3468.3.part5.3d_percentage",
+      "label": "Line 3d — If you checked Part I, line 9a, enter 10%. If you checked Part I, line 9b, enter 2%. Otherwise, go to line 3f",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Line3d_ReadOrder[0].f4_4[0]",
+      "position": {
+        "page": 3,
+        "x": 316.8,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "form-3468.3.part5.3e_multiply_3a_by_3d",
+      "label": "Line 3e — Multiply line 3a by line 3d",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_5[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "form-3468.3.part5.3f_percentage",
+      "label": "Line 3f — If you checked Part I, line 10a, enter 10%. If you checked Part I, line 10b, enter 2%. Otherwise, go to line 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Line3f_ReadOrder[0].f4_6[0]",
+      "position": {
+        "page": 3,
+        "x": 316.8,
+        "y": 564.001
+      }
+    },
+    {
+      "fieldId": "form-3468.3.part5.3g_multiply_3a_by_3f",
+      "label": "Line 3g — Multiply line 3a by line 3f",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_7[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 552.002
+      }
+    },
+    {
+      "fieldId": "form-3468.3.part5.4_add_lines",
+      "label": "Line 4 — Add lines 3c, 3e, and 3g",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_15[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-3468.3.part5.5_total_part5_lines_2_and_4",
+      "label": "Line 5 — Add Part V, lines 2 and 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_16[0]",
+      "position": {
+        "page": 3,
+        "x": 316.8,
+        "y": 420.001
+      }
+    },
+    {
+      "fieldId": "form-3468.3.part5.6a_ratio",
+      "label": "Line 6a — Divide the sum, for the tax year and all prior tax years, of all proceeds of subsidized energy financing or private activity bonds used to finance the qualified facility or qualified storage technology, as of the close of the tax year, by the aggregate amount of additions to the capital account for the qualified facility, for the tax year and all prior tax years, as of the close of the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_17[0]",
+      "position": {
+        "page": 3,
+        "x": 316.8,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-3468.3.part5.6b_multiply_5_by_6a",
+      "label": "Line 6b — Multiply line 5 by line 6a",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_18[0]",
+      "position": {
+        "page": 3,
+        "x": 316.8,
+        "y": 264.002
+      }
+    },
+    {
+      "fieldId": "form-3468.3.part5.6c_multiply_5_by_15_percent",
+      "label": "Line 6c — Multiply line 5 by 15% (0.15)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_19[0]",
+      "position": {
+        "page": 3,
+        "x": 316.8,
+        "y": 252
+      }
+    },
+    {
+      "fieldId": "form-3468.3.part5.6d_smaller_of_6b_or_6c",
+      "label": "Line 6d — Enter the smaller of line 6b or 6c",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_20[0]",
+      "position": {
+        "page": 3,
+        "x": 316.8,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "form-3468.3.part5.6e_subtract_6d_from_5",
+      "label": "Line 6e — Subtract line 6d from line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_21[0]",
+      "position": {
+        "page": 3,
+        "x": 316.8,
+        "y": 228.002
+      }
+    },
+    {
+      "fieldId": "form-3468.3.part5.7_credit_after_financing_reduction",
+      "label": "Line 7 — If proceeds of subsidized energy financing or private activity bonds were used to finance your facility, enter the amount from line 6e. Otherwise, enter the amount from line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_22[0]",
+      "position": {
+        "page": 3,
+        "x": 316.8,
+        "y": 186.001
+      }
+    },
+    {
+      "fieldId": "form-3468.3.part5.8_credit_after_elective_payment_phaseout",
+      "label": "Line 8 — If you are making an elective payment election under section 6417 and the facility doesn't meet the rules of section 45Y(g)(12)(B)(i), doesn't have a maximum net output of less than 1 MW (as measured in ac), or meet an exception under section 45Y(g)(12)(D), and construction began in 2024, 2025, or after 2025, multiply line 7 by line A (90%), B (85%), or C (0%). All others, enter the amount from line 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_23[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 84.002
+      }
+    },
+    {
+      "fieldId": "form-3468.3.part5.10_cooperatives_unused_credit",
+      "label": "Line 10 — Enter the applicable unused investment credit from cooperatives",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_25[0]",
+      "position": {
+        "page": 3,
+        "x": 410.4,
+        "y": 60.001
+      }
+    },
+    {
+      "fieldId": "form-3468.3.part5.11_total_clean_electricity_credit",
+      "label": "Line 11 — Add lines 8 and 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_26[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 48.002
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.1a_basis_geothermal_property",
+      "label": "Line 1a — Enter the basis of property using geothermal energy placed in service during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].Line1a_ReadOrder[0].f5_1[0]",
+      "position": {
+        "page": 4,
+        "x": 316.8,
+        "y": 696.002
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.1b_percentage",
+      "label": "Line 1b — Applicable energy percentage (%)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].f5_2[0]",
+      "position": {
+        "page": 4,
+        "x": 316.8,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.1c_multiply_1a_by_1b",
+      "label": "Line 1c — Multiply line 1a by line 1b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].f5_3[0]",
+      "position": {
+        "page": 4,
+        "x": 410.4,
+        "y": 672.001
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.1d_percentage",
+      "label": "Line 1d — If you checked the box in Part I, line 9a, enter 10%. If you checked the box in Part I, line 9b, enter 2% (%)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].Line1d_ReadOrder[0].f5_4[0]",
+      "position": {
+        "page": 4,
+        "x": 316.8,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.1e_multiply_1a_by_1d",
+      "label": "Line 1e — Multiply line 1a by line 1d",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].f5_5[0]",
+      "position": {
+        "page": 4,
+        "x": 410.4,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.1f_percentage",
+      "label": "Line 1f — If you checked the box in Part I, line 10a, enter 10%. If you checked the box in Part I, line 10b, enter 2% (%)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].Line1f_ReadOrder[0].f5_6[0]",
+      "position": {
+        "page": 4,
+        "x": 316.8,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.1g_multiply_1a_by_1f",
+      "label": "Line 1g — Multiply line 1a by line 1f",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].f5_7[0]",
+      "position": {
+        "page": 4,
+        "x": 410.4,
+        "y": 576
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.2_add_lines",
+      "label": "Line 2 — Add lines 1c, 1e, and 1g",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].f5_8[0]",
+      "position": {
+        "page": 4,
+        "x": 504,
+        "y": 564.001
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.3a_basis_solar_property",
+      "label": "Line 3a — Enter the basis of property using solar illumination (including electrochromic glass) or either solar energy property or solar facility placed in service during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].Line3a_ReadOrder[0].f5_9[0]",
+      "position": {
+        "page": 4,
+        "x": 316.8,
+        "y": 504
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.3b_percentage",
+      "label": "Line 3b — Applicable energy percentage (%)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].f5_10[0]",
+      "position": {
+        "page": 4,
+        "x": 316.8,
+        "y": 492.001
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.3c_multiply_3a_by_3b",
+      "label": "Line 3c — Multiply line 3a by line 3b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].f5_11[0]",
+      "position": {
+        "page": 4,
+        "x": 410.4,
+        "y": 480.002
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.3d_percentage",
+      "label": "Line 3d — If you checked the box in Part I, line 11a or 11b, enter 10%. If you checked the box in Part I, line 11c or 11d, enter 20% (%)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].f5_12[0]",
+      "position": {
+        "page": 4,
+        "x": 316.8,
+        "y": 354.002
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.3e_allocated_capacity_limitation_kw",
+      "label": "Line 3e — Enter the amount of capacity limitation you were allocated in the allocation letter (kW dc)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].f5_13[0]",
+      "position": {
+        "page": 4,
+        "x": 316.8,
+        "y": 330.001
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.3f_multiply_3a_by_3d",
+      "label": "Line 3f — If the entry on Part I, line 12a(i), equals the entry on line 3e, multiply line 3a by line 3d",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].f5_14[0]",
+      "position": {
+        "page": 4,
+        "x": 316.8,
+        "y": 294.001
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.3g_ratio",
+      "label": "Line 3g — If the entry on Part I, line 12a(i), is more than the entry on line 3e, divide line 3e by Part I, line 12a(i)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].f5_15[0]",
+      "position": {
+        "page": 4,
+        "x": 316.8,
+        "y": 270
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.3h_multiply_3d_by_3g",
+      "label": "Line 3h — Multiply line 3d by line 3g",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].f5_16[0]",
+      "position": {
+        "page": 4,
+        "x": 316.8,
+        "y": 258.001
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.3i_multiply_3a_by_3h",
+      "label": "Line 3i — Multiply line 3a by line 3h",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].f5_17[0]",
+      "position": {
+        "page": 4,
+        "x": 316.8,
+        "y": 246.002
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.3j_low_income_bonus_amount",
+      "label": "Line 3j — If Part I, line 12a(i), is more than the entry on line 3e, enter the amount from line 3i. Otherwise, enter the amount from line 3f",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].f5_18[0]",
+      "position": {
+        "page": 4,
+        "x": 410.4,
+        "y": 222.001
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.3k_percentage",
+      "label": "Line 3k — If you checked the box in Part I, line 9a, enter 10%. If you checked the box in Part I, line 9b, enter 2% (%)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].Line3k_ReadOrder[0].f5_19[0]",
+      "position": {
+        "page": 4,
+        "x": 316.8,
+        "y": 186.001
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.3l_multiply_3a_by_3k",
+      "label": "Line 3l — Multiply line 3a by line 3k",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].f5_20[0]",
+      "position": {
+        "page": 4,
+        "x": 410.4,
+        "y": 174.002
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.3m_percentage",
+      "label": "Line 3m — If you checked the box in Part I, line 10a, enter 10%. If you checked the box in Part I, line 10b, enter 2% (%)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].Line3m_ReadOrder[0].f5_21[0]",
+      "position": {
+        "page": 4,
+        "x": 316.8,
+        "y": 138.002
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.3n_multiply_3a_by_3m",
+      "label": "Line 3n — Multiply line 3a by line 3m",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].f5_22[0]",
+      "position": {
+        "page": 4,
+        "x": 410.4,
+        "y": 126
+      }
+    },
+    {
+      "fieldId": "form-3468.4.part6.4_add_lines",
+      "label": "Line 4 — Add lines 3c, 3j, 3l, and 3n",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page5[0].f5_23[0]",
+      "position": {
+        "page": 4,
+        "x": 504,
+        "y": 114.001
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.5a_basis_fuel_cell_pre_2008",
+      "label": "Line 5a — Enter the basis of property using qualified fuel cell property placed in service during the tax year that was acquired after 2005 and before October 4, 2008, and the basis attributable to construction, reconstruction, or erection by the taxpayer after 2005 and before October 4, 2008",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].Line5a_ReadOrder[0].f6_1[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 654.001
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.5b_multiply_5a_by_30_percent",
+      "label": "Line 5b — Multiply line 5a by 30% (0.30)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_2[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 642.002
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.5c_kw_capacity_line_5a",
+      "label": "Line 5c — Enter the applicable kW capacity of property on line 5a",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_3[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 618.001
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.5d_multiply_5c_by_1000_dollars",
+      "label": "Line 5d — Multiply line 5c by $1,000",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_4[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 606.002
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.5e_smaller_of_5b_or_5d",
+      "label": "Line 5e — Enter the smaller of line 5b or 5d",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_5[0]",
+      "position": {
+        "page": 5,
+        "x": 410.4,
+        "y": 594
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.5f_basis_fuel_cell_post_2008",
+      "label": "Line 5f — Enter the basis of property using qualified fuel cell property placed in service during the tax year that is attributable to periods after October 3, 2008",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].Line5f_ReadOrder[0].f6_6[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 558
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.5g_percentage",
+      "label": "Line 5g — If you checked the box in Part I, line 7a or 8b, enter 30%. Otherwise, enter 6%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_7[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 534.002
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.5h_multiply_5f_by_5g",
+      "label": "Line 5h — Multiply line 5f by line 5g",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_8[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 522
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.5i_percentage",
+      "label": "Line 5i — If you checked the box in Part I, line 9a, enter 10%. If you checked the box in Part I, line 9b, enter 2%. Otherwise, go to line 5l",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_9[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 486
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.5j_multiply_5f_by_5i",
+      "label": "Line 5j — Multiply line 5f by line 5i",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_10[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 474.001
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.5l_percentage",
+      "label": "Line 5l — If you checked the box in Part I, line 10a, enter 10%. If you checked the box in Part I, line 10b, enter 2%. Otherwise, go to line 5n",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].Line5l_ReadOrder[0].f6_12[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 426.002
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.5m_multiply_5f_by_5l",
+      "label": "Line 5m — Multiply line 5f by line 5l",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_13[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 414
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.5n_add_lines",
+      "label": "Line 5n — Add lines 5h, 5j, and 5m",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_14[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 402.001
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.5o_kw_capacity_line_5f",
+      "label": "Line 5o — Enter the applicable kW capacity of property on line 5f",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_15[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 378
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.5p_multiply_5o_by_3000_dollars",
+      "label": "Line 5p — Multiply line 5o by $3,000",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_16[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 366.001
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.5q_smaller_of_5n_or_5p",
+      "label": "Line 5q — Enter the smaller of line 5n or 5p",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_17[0]",
+      "position": {
+        "page": 5,
+        "x": 410.4,
+        "y": 354.002
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.6_add_lines",
+      "label": "Line 6 — Add lines 5e and 5q",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_18[0]",
+      "position": {
+        "page": 5,
+        "x": 504,
+        "y": 342
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.7a_basis_microturbine_property",
+      "label": "Line 7a — Enter the basis of property using microturbine property placed in service during the tax year that was acquired after 2005, and the basis attributable to construction, reconstruction, or erection by the taxpayer after 2005",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].Line7a_ReadOrder[0].f6_19[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 282.002
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.7b_percentage",
+      "label": "Line 7b — If you checked the box in Part I, line 7a or 8b, enter 10%. Otherwise, enter 2%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_20[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 258.001
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.7c_multiply_7a_by_7b",
+      "label": "Line 7c — Multiply line 7a by line 7b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_21[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 246.002
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.7d_percentage",
+      "label": "Line 7d — If you checked the box in Part I, line 9a, enter 10%. If you checked the box in Part I, line 9b, enter 2%. Otherwise, go to line 7g",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_22[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 210.002
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.7e_multiply_7a_by_7d",
+      "label": "Line 7e — Multiply line 7a by line 7d",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_23[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 198
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.7g_percentage",
+      "label": "Line 7g — If you checked the box in Part I, line 10a, enter 10%. If you checked the box in Part I, line 10b, enter 2%. Otherwise, go to line 7i",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].Line7g_ReadOrder[0].f6_25[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 150.001
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.7h_multiply_7a_by_7g",
+      "label": "Line 7h — Multiply line 7a by line 7g",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_26[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 138.002
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.7i_add_lines",
+      "label": "Line 7i — Add lines 7c, 7e, and 7h",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_27[0]",
+      "position": {
+        "page": 5,
+        "x": 410.4,
+        "y": 126
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.7j_kw_capacity_line_7a",
+      "label": "Line 7j — Enter the applicable kW capacity of property on line 7a",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].Line7j_ReadOrder[0].f6_28[0]",
+      "position": {
+        "page": 5,
+        "x": 316.8,
+        "y": 102.002
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.7l_multiply_7j_by_200_dollars",
+      "label": "Line 7l — Multiply line 7j by $200",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_30[0]",
+      "position": {
+        "page": 5,
+        "x": 410.4,
+        "y": 78.001
+      }
+    },
+    {
+      "fieldId": "form-3468.5.part6.8_smaller_of_7i_or_7l",
+      "label": "Line 8 — Enter the smaller of line 7i or 7l",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page6[0].f6_31[0]",
+      "position": {
+        "page": 5,
+        "x": 504,
+        "y": 66.002
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.9a_basis_combined_heat_power",
+      "label": "Line 9a — Enter the basis of property using combined heat and power system placed in service during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].Line9a_ReadOrder[0].f7_1[0]",
+      "position": {
+        "page": 6,
+        "x": 316.8,
+        "y": 672.001
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.9b_capacity_ratio_whole",
+      "label": "Line 9b — If the electrical capacity of the property is measured in MW, divide 15 by the MW capacity (enter 1.0 if the capacity is 15 MW or less); if measured in horsepower, divide 20,000 by the horsepower (enter 1.0 if the capacity is 20,000 horsepower or less) (digit before the decimal point)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].f7_2[0]",
+      "position": {
+        "page": 6,
+        "x": 316.8,
+        "y": 618.001
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.9b_capacity_ratio_decimal",
+      "label": "Line 9b — If the electrical capacity of the property is measured in MW, divide 15 by the MW capacity (enter 1.0 if the capacity is 15 MW or less); if measured in horsepower, divide 20,000 by the horsepower (enter 1.0 if the capacity is 20,000 horsepower or less) (digits after the decimal point)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].f7_3[0]",
+      "position": {
+        "page": 6,
+        "x": 360,
+        "y": 618.001
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.9c_multiply_9a_by_9b",
+      "label": "Line 9c — Multiply line 9a by line 9b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].f7_4[0]",
+      "position": {
+        "page": 6,
+        "x": 316.8,
+        "y": 606.002
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.9d_percentage",
+      "label": "Line 9d — If you checked the box in Part I, line 7a or 8b, enter 30%. Otherwise, enter 6%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].f7_5[0]",
+      "position": {
+        "page": 6,
+        "x": 316.8,
+        "y": 582.001
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.9e_multiply_9c_by_9d",
+      "label": "Line 9e — Multiply line 9c by line 9d",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].f7_6[0]",
+      "position": {
+        "page": 6,
+        "x": 410.4,
+        "y": 570.002
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.9f_percentage",
+      "label": "Line 9f — If you checked the box in Part I, line 9a, enter 10%. If you checked the box in Part I, line 9b, enter 2%. Otherwise, go to line 9h",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].Line9f_ReadOrder[0].f7_7[0]",
+      "position": {
+        "page": 6,
+        "x": 316.8,
+        "y": 534.002
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.9g_multiply_9c_by_9f",
+      "label": "Line 9g — Multiply line 9c by line 9f",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].f7_8[0]",
+      "position": {
+        "page": 6,
+        "x": 410.4,
+        "y": 522
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.9h_percentage",
+      "label": "Line 9h — If you checked the box in Part I, line 10a, enter 10%. If you checked the box in Part I, line 10b, enter 2%. Otherwise, go to line 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].Line9h_ReadOrder[0].f7_9[0]",
+      "position": {
+        "page": 6,
+        "x": 316.8,
+        "y": 486
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.9i_multiply_9c_by_9h",
+      "label": "Line 9i — Multiply line 9c by line 9h",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].f7_10[0]",
+      "position": {
+        "page": 6,
+        "x": 410.4,
+        "y": 474.001
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.10_add_lines",
+      "label": "Line 10 — Add lines 9e, 9g, and 9i",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].f7_11[0]",
+      "position": {
+        "page": 6,
+        "x": 504,
+        "y": 462.002
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.11d_basis_small_wind_energy",
+      "label": "Line 11d — Enter the basis of property using small wind energy property placed in service during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].Line11d_ReadOrder[0].f7_15[0]",
+      "position": {
+        "page": 6,
+        "x": 316.8,
+        "y": 390.002
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.11e_percentage",
+      "label": "Line 11e — If you checked the box in Part I, line 7a or 8b, enter 30%. Otherwise, enter 6%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].f7_16[0]",
+      "position": {
+        "page": 6,
+        "x": 316.8,
+        "y": 366.001
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.11f_multiply_11d_by_11e",
+      "label": "Line 11f — Multiply line 11d by line 11e",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].f7_17[0]",
+      "position": {
+        "page": 6,
+        "x": 410.4,
+        "y": 354.002
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.11g_percentage",
+      "label": "Line 11g — If you checked the box in Part I, line 11a or 11b, enter 10%. If you checked the box in Part I, line 11c or 11d, enter 20%. However, if you checked the box in Part I, line 11g; or Part I, line 12b, is 5 MW ac or more, you don't qualify for the bonus credit; enter 0%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].Line11g_ReadOrder[0].f7_18[0]",
+      "position": {
+        "page": 6,
+        "x": 316.8,
+        "y": 276.001
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.11h_allocated_capacity_limitation_kw",
+      "label": "Line 11h — Enter the amount of capacity limitation you were allocated in the allocation letter (kW)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].f7_19[0]",
+      "position": {
+        "page": 6,
+        "x": 316.8,
+        "y": 252
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.11i_multiply_11d_by_11g",
+      "label": "Line 11i — If the entry on Part I, line 12b, equals the entry on line 11h, multiply line 11d by line 11g and go to line 11m. Otherwise, continue to line 11j",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].f7_20[0]",
+      "position": {
+        "page": 6,
+        "x": 316.8,
+        "y": 216
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.11j_ratio",
+      "label": "Line 11j — If the entry on Part I, line 12b, is more than the entry on line 11h, divide line 11h by Part I, line 12b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].f7_21[0]",
+      "position": {
+        "page": 6,
+        "x": 316.8,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.11k_multiply_11g_by_11j",
+      "label": "Line 11k — Multiply line 11g by line 11j",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].f7_22[0]",
+      "position": {
+        "page": 6,
+        "x": 316.8,
+        "y": 180
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.11l_multiply_11d_by_11k",
+      "label": "Line 11l — Multiply line 11d by line 11k",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].f7_23[0]",
+      "position": {
+        "page": 6,
+        "x": 316.8,
+        "y": 168.001
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.11m_low_income_bonus_amount",
+      "label": "Line 11m — If Part I, line 12b, is more than the entry on line 11h, enter the amount from line 11l. Otherwise, enter the amount from line 11i",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].f7_24[0]",
+      "position": {
+        "page": 6,
+        "x": 410.4,
+        "y": 144
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.11n_percentage",
+      "label": "Line 11n — If you checked the box in Part I, line 9a, enter 10%. If you checked the box in Part I, line 9b, enter 2%. Otherwise, go to line 11p",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].Line11n_ReadOrder[0].f7_25[0]",
+      "position": {
+        "page": 6,
+        "x": 316.8,
+        "y": 108
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.11o_multiply_11d_by_11n",
+      "label": "Line 11o — Multiply line 11d by line 11n",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].f7_26[0]",
+      "position": {
+        "page": 6,
+        "x": 410.4,
+        "y": 96.001
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.11p_percentage",
+      "label": "Line 11p — If you checked the box in Part I, line 10a, enter 10%. If you checked the box in Part I, line 10b, enter 2%. Otherwise, go to line 12",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].Line11p_ReadOrder[0].f7_27[0]",
+      "position": {
+        "page": 6,
+        "x": 316.8,
+        "y": 60.001
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.11q_multiply_11d_by_11p",
+      "label": "Line 11q — Multiply line 11d by line 11p",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].f7_28[0]",
+      "position": {
+        "page": 6,
+        "x": 410.4,
+        "y": 48.002
+      }
+    },
+    {
+      "fieldId": "form-3468.6.part6.12_add_lines",
+      "label": "Line 12 — Add lines 11f, 11m, 11o, and 11q",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page7[0].f7_29[0]",
+      "position": {
+        "page": 6,
+        "x": 504,
+        "y": 36
+      }
+    },
+    {
+      "fieldId": "form-3468.7.part6.13a_basis_waste_energy_recovery",
+      "label": "Line 13a — Enter the basis of property using waste energy recovery placed in service during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page8[0].Line13a_ReadOrder[0].f8_1[0]",
+      "position": {
+        "page": 7,
+        "x": 316.8,
+        "y": 696.002
+      }
+    },
+    {
+      "fieldId": "form-3468.7.part6.13b_percentage",
+      "label": "Line 13b — If you checked the box in Part I, line 7a or 8b, enter 30%. Otherwise, enter 6%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page8[0].f8_2[0]",
+      "position": {
+        "page": 7,
+        "x": 316.8,
+        "y": 672.001
+      }
+    },
+    {
+      "fieldId": "form-3468.7.part6.13c_multiply_13a_by_13b",
+      "label": "Line 13c — Multiply line 13a by line 13b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page8[0].f8_3[0]",
+      "position": {
+        "page": 7,
+        "x": 410.4,
+        "y": 660.002
+      }
+    },
+    {
+      "fieldId": "form-3468.7.part6.13d_percentage",
+      "label": "Line 13d — If you checked the box in Part I, line 9a, enter 10%. If you checked the box in Part I, line 9b, enter 2%. Otherwise, go to line 13f",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page8[0].Line13d_ReadOrder[0].f8_4[0]",
+      "position": {
+        "page": 7,
+        "x": 316.8,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "form-3468.7.part6.13e_multiply_13a_by_13d",
+      "label": "Line 13e — Multiply line 13a by line 13d",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page8[0].f8_5[0]",
+      "position": {
+        "page": 7,
+        "x": 410.4,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "form-3468.7.part6.13f_percentage",
+      "label": "Line 13f — If you checked the box in Part I, line 10a, enter 10%. If you checked the box in Part I, line 10b, enter 2%. Otherwise, go to line 14",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page8[0].Line13f_ReadOrder[0].f8_6[0]",
+      "position": {
+        "page": 7,
+        "x": 316.8,
+        "y": 576
+      }
+    },
+    {
+      "fieldId": "form-3468.7.part6.13g_multiply_13a_by_13f",
+      "label": "Line 13g — Multiply line 13a by line 13f",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page8[0].f8_7[0]",
+      "position": {
+        "page": 7,
+        "x": 410.4,
+        "y": 564.001
+      }
+    },
+    {
+      "fieldId": "form-3468.7.part6.14_total_waste_energy_recovery",
+      "label": "Line 14 — Add lines 13c, 13e, and 13g",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page8[0].f8_8[0]",
+      "position": {
+        "page": 7,
+        "x": 504,
+        "y": 552.002
+      }
+    },
+    {
+      "fieldId": "form-3468.7.part6.15a_basis_geothermal_heat_pump",
+      "label": "Line 15a — Enter the basis of property using geothermal heat pump systems placed in service during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page8[0].Line15a_ReadOrder[0].f8_9[0]",
+      "position": {
+        "page": 7,
+        "x": 316.8,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "form-3468.7.part6.15b_percentage",
+      "label": "Line 15b — If you checked the box in Part I, line 7a or 8b, enter 30%. Otherwise, enter 6%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page8[0].f8_10[0]",
+      "position": {
+        "page": 7,
+        "x": 316.8,
+        "y": 492.001
+      }
+    },
+    {
+      "fieldId": "form-3468.7.part6.15c_multiply_15a_by_15b",
+      "label": "Line 15c — Multiply line 15a by line 15b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page8[0].f8_11[0]",
+      "position": {
+        "page": 7,
+        "x": 410.4,
+        "y": 480.002
+      }
+    },
+    {
+      "fieldId": "form-3468.7.part6.15d_percentage",
+      "label": "Line 15d — If you checked the box in Part I, line 9a, enter 10%. If you checked the box in Part I, line 9b, enter 2%. Otherwise, go to line 15f",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page8[0].Line15d_ReadOrder[0].f8_12[0]",
+      "position": {
+        "page": 7,
+        "x": 316.8,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-3468.7.part6.15e_multiply_15a_by_15d",
+      "label": "Line 15e — Multiply line 15a by line 15d",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page8[0].f8_13[0]",
+      "position": {
+        "page": 7,
+        "x": 410.4,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "form-3468.7.part6.15f_percentage",
+      "label": "Line 15f — If you checked the box in Part I, line 10a, enter 10%. If you checked the box in Part I, line 10b, enter 2%. Otherwise, go to line 16",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page8[0].Line15f_ReadOrder[0].f8_14[0]",
+      "position": {
+        "page": 7,
+        "x": 316.8,
+        "y": 396
+      }
+    },
+    {
+      "fieldId": "form-3468.7.part6.15g_multiply_15a_by_15f",
+      "label": "Line 15g — Multiply line 15a by line 15f",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page8[0].f8_15[0]",
+      "position": {
+        "page": 7,
+        "x": 410.4,
+        "y": 384.001
+      }
+    },
+    {
+      "fieldId": "form-3468.7.part6.16_total_geothermal_heat_pump",
+      "label": "Line 16 — Add lines 15c, 15e, and 15g",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page8[0].f8_16[0]",
+      "position": {
+        "page": 7,
+        "x": 504,
+        "y": 372.002
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.17a_basis_energy_storage_property",
+      "label": "Line 17a — Enter the basis of property using energy storage technology placed in service during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].Line17a_ReadOrder[0].f9_1[0]",
+      "position": {
+        "page": 8,
+        "x": 316.8,
+        "y": 696.002
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.17b_percentage",
+      "label": "Line 17b — If you checked the box in Part I, line 7a or 8b, enter 30%. Otherwise, enter 6%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].f9_2[0]",
+      "position": {
+        "page": 8,
+        "x": 316.8,
+        "y": 672.001
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.17c_multiply_17a_by_17b",
+      "label": "Line 17c — Multiply line 17a by line 17b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].f9_3[0]",
+      "position": {
+        "page": 8,
+        "x": 410.4,
+        "y": 660.002
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.17d_percentage",
+      "label": "Line 17d — If you checked the box in Part I, line 11a or 11b, enter 10%. If you checked the box in Part I, line 11c or 11d, enter 20%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].f9_4[0]",
+      "position": {
+        "page": 8,
+        "x": 316.8,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.17e_allocated_capacity_limitation_kw",
+      "label": "Line 17e — Enter the amount of capacity limitation you were allocated in the allocation letter for the solar or wind energy property in connection with the energy storage technology (kW)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].f9_5[0]",
+      "position": {
+        "page": 8,
+        "x": 316.8,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.17f_multiply_17a_by_17d",
+      "label": "Line 17f — If the relevant entry on Part I, line 12a(i) or 12b, equals the entry on line 17e, multiply line 17a by line 17d and go to line 17j",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].f9_6[0]",
+      "position": {
+        "page": 8,
+        "x": 316.8,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.17g_ratio",
+      "label": "Line 17g — If the relevant entry on Part I, line 12a(i) or 12b, is more than the entry on line 17e, divide line 17e by Part I, line 12a(i) or 12b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].f9_7[0]",
+      "position": {
+        "page": 8,
+        "x": 316.8,
+        "y": 396
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.17h_multiply_17d_by_17g",
+      "label": "Line 17h — Multiply line 17d by line 17g",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].f9_8[0]",
+      "position": {
+        "page": 8,
+        "x": 316.8,
+        "y": 384.001
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.17i_multiply_17a_by_17h",
+      "label": "Line 17i — Multiply line 17a by line 17h",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].f9_9[0]",
+      "position": {
+        "page": 8,
+        "x": 316.8,
+        "y": 372.002
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.17j_low_income_bonus_amount",
+      "label": "Line 17j — If the entry for the solar or wind energy property in connection with the energy storage technology on Part I, line 12a(i) or 12b, is more than the entry on line 17e, enter the amount from line 17i. Otherwise, enter the amount from line 17f",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].f9_10[0]",
+      "position": {
+        "page": 8,
+        "x": 410.4,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.17k_percentage",
+      "label": "Line 17k — If you checked the box in Part I, line 9a, enter 10%. If you checked the box in Part I, line 9b, enter 2%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].Line17k_ReadOrder[0].f9_11[0]",
+      "position": {
+        "page": 8,
+        "x": 316.8,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.17l_multiply_17a_by_17k",
+      "label": "Line 17l — Multiply line 17a by line 17k",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].f9_12[0]",
+      "position": {
+        "page": 8,
+        "x": 410.4,
+        "y": 288
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.17m_percentage",
+      "label": "Line 17m — If you checked the box in Part I, line 10a, enter 10%. If you checked the box in Part I, line 10b, enter 2%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].Line17m_ReadOrder[0].f9_13[0]",
+      "position": {
+        "page": 8,
+        "x": 316.8,
+        "y": 252
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.17n_multiply_17a_by_17m",
+      "label": "Line 17n — Multiply line 17a by line 17m",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].f9_14[0]",
+      "position": {
+        "page": 8,
+        "x": 410.4,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.18_total_energy_storage_credit",
+      "label": "Line 18 — Add lines 17c, 17j, 17l, and 17n",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].f9_15[0]",
+      "position": {
+        "page": 8,
+        "x": 504,
+        "y": 228.002
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.19a_basis_biogas_property",
+      "label": "Line 19a — Enter the basis of property using biogas placed in service during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].Line19a_ReadOrder[0].f9_16[0]",
+      "position": {
+        "page": 8,
+        "x": 316.8,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.19b_percentage",
+      "label": "Line 19b — If you checked the box in Part I, line 7a or 8b, enter 30%. Otherwise, enter 6%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].f9_17[0]",
+      "position": {
+        "page": 8,
+        "x": 316.8,
+        "y": 168.001
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.19c_multiply_19a_by_19b",
+      "label": "Line 19c — Multiply line 19a by line 19b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].f9_18[0]",
+      "position": {
+        "page": 8,
+        "x": 410.4,
+        "y": 156.002
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.19d_percentage",
+      "label": "Line 19d — If you checked the box in Part I, line 9a, enter 10%. If you checked the box in Part I, line 9b, enter 2%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].Line19d_ReadOrder[0].f9_19[0]",
+      "position": {
+        "page": 8,
+        "x": 316.8,
+        "y": 120.002
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.19e_multiply_19a_by_19d",
+      "label": "Line 19e — Multiply line 19a by line 19d",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].f9_20[0]",
+      "position": {
+        "page": 8,
+        "x": 410.4,
+        "y": 108
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.19f_percentage",
+      "label": "Line 19f — If you checked the box in Part I, line 10a, enter 10%. If you checked the box in Part I, line 10b, enter 2%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].Line19f_ReadOrder[0].f9_21[0]",
+      "position": {
+        "page": 8,
+        "x": 316.8,
+        "y": 72
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.19g_multiply_19a_by_19f",
+      "label": "Line 19g — Multiply line 19a by line 19f",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].f9_22[0]",
+      "position": {
+        "page": 8,
+        "x": 410.4,
+        "y": 60.001
+      }
+    },
+    {
+      "fieldId": "form-3468.8.part6.20_total_biogas_credit",
+      "label": "Line 20 — Add lines 19c, 19e, and 19g",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page9[0].f9_23[0]",
+      "position": {
+        "page": 8,
+        "x": 504,
+        "y": 48.002
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.21a_basis_microgrid_controllers",
+      "label": "Line 21a — Enter the basis of property using microgrid controllers placed in service during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].Line21a_ReadOrder[0].f10_1[0]",
+      "position": {
+        "page": 9,
+        "x": 316.8,
+        "y": 696.002
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.21b_percentage",
+      "label": "Line 21b — If you checked the box in Part I, line 7a or 8b, enter 30%. Otherwise, enter 6%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].f10_2[0]",
+      "position": {
+        "page": 9,
+        "x": 316.8,
+        "y": 672.001
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.21c_multiply_21a_by_21b",
+      "label": "Line 21c — Multiply line 21a by line 21b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].f10_3[0]",
+      "position": {
+        "page": 9,
+        "x": 410.4,
+        "y": 660.002
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.21d_percentage",
+      "label": "Line 21d — If you checked the box in Part I, line 9a, enter 10%. If you checked the box in Part I, line 9b, enter 2%. Otherwise, go to line 21f",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].Line21d_ReadOrder[0].f10_4[0]",
+      "position": {
+        "page": 9,
+        "x": 316.8,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.21e_multiply_21a_by_21d",
+      "label": "Line 21e — Multiply line 21a by line 21d",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].f10_5[0]",
+      "position": {
+        "page": 9,
+        "x": 410.4,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.21f_percentage",
+      "label": "Line 21f — If you checked the box in Part I, line 10a, enter 10%. If you checked the box in Part I, line 10b, enter 2%. Otherwise, go to line 22",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].Line21f_ReadOrder[0].f10_6[0]",
+      "position": {
+        "page": 9,
+        "x": 316.8,
+        "y": 576
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.21g_multiply_21a_by_21f",
+      "label": "Line 21g — Multiply line 21a by line 21f",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].f10_7[0]",
+      "position": {
+        "page": 9,
+        "x": 410.4,
+        "y": 564.001
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.22_add_lines",
+      "label": "Line 22 — Add lines 21c, 21e, and 21g",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].f10_8[0]",
+      "position": {
+        "page": 9,
+        "x": 504,
+        "y": 552.002
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.23a_basis_qualified_facility_property",
+      "label": "Line 23a — Enter the basis of property using investment credit facility property placed in service during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].Line23a_ReadOrder[0].f10_9[0]",
+      "position": {
+        "page": 9,
+        "x": 316.8,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.23b_percentage",
+      "label": "Line 23b — If you checked the box in Part I, line 7a or 8b, enter 30%. Otherwise, enter 6%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].f10_10[0]",
+      "position": {
+        "page": 9,
+        "x": 316.8,
+        "y": 492.001
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.23c_multiply_23a_by_23b",
+      "label": "Line 23c — Multiply line 23a by line 23b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].f10_11[0]",
+      "position": {
+        "page": 9,
+        "x": 410.4,
+        "y": 480.002
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.23d_percentage",
+      "label": "Line 23d — If you checked the box in Part I, line 11a or 11b, enter 10%. If you checked the box in Part I, line 11c or 11d, enter 20%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].f10_12[0]",
+      "position": {
+        "page": 9,
+        "x": 316.8,
+        "y": 366.001
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.23e_allocated_capacity_limitation_kw",
+      "label": "Line 23e — Enter the amount of capacity limitation you were allocated in the allocation letter (kW)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].f10_13[0]",
+      "position": {
+        "page": 9,
+        "x": 316.8,
+        "y": 342
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.23f_multiply_23a_by_23d",
+      "label": "Line 23f — If the entry on Part I, line 12b, equals the entry on line 23e, multiply line 23a by line 23d and go to line 23j. Otherwise, continue to line 23g",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].f10_14[0]",
+      "position": {
+        "page": 9,
+        "x": 316.8,
+        "y": 306
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.23g_ratio",
+      "label": "Line 23g — If the entry on Part I, line 12b, is more than the entry on line 23e, divide line 23e by Part I, line 12b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].f10_15[0]",
+      "position": {
+        "page": 9,
+        "x": 316.8,
+        "y": 282.002
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.23h_multiply_23d_by_23g",
+      "label": "Line 23h — Multiply line 23d by line 23g",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].f10_16[0]",
+      "position": {
+        "page": 9,
+        "x": 316.8,
+        "y": 270
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.23i_multiply_23a_by_23h",
+      "label": "Line 23i — Multiply line 23a by line 23h",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].f10_17[0]",
+      "position": {
+        "page": 9,
+        "x": 316.8,
+        "y": 258.001
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.23j_low_income_bonus_amount",
+      "label": "Line 23j — If Part I, line 12b, is more than the entry on line 23e, enter the amount from line 23i. Otherwise, enter the amount from line 23f",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].f10_18[0]",
+      "position": {
+        "page": 9,
+        "x": 410.4,
+        "y": 234
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.23k_percentage",
+      "label": "Line 23k — If you checked the box in Part I, line 9a, enter 10%. If you checked the box in Part I, line 9b, enter 2%. Otherwise, go to line 23m",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].Line23k_ReadOrder[0].f10_19[0]",
+      "position": {
+        "page": 9,
+        "x": 316.8,
+        "y": 198
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.23l_multiply_23a_by_23k",
+      "label": "Line 23l — Multiply line 23a by line 23k",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].f10_20[0]",
+      "position": {
+        "page": 9,
+        "x": 410.4,
+        "y": 186.001
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.23m_percentage",
+      "label": "Line 23m — If you checked the box in Part I, line 10a, enter 10%. If you checked the box in Part I, line 10b, enter 2%. Otherwise, go to line 24",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].Line23m_ReadOrder[0].f10_21[0]",
+      "position": {
+        "page": 9,
+        "x": 316.8,
+        "y": 150.001
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.23n_multiply_23a_by_23m",
+      "label": "Line 23n — Multiply line 23a by line 23m",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].f10_22[0]",
+      "position": {
+        "page": 9,
+        "x": 410.4,
+        "y": 138.002
+      }
+    },
+    {
+      "fieldId": "form-3468.9.part6.24_add_lines",
+      "label": "Line 24 — Add lines 23c, 23j, 23l, and 23n",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page10[0].f10_23[0]",
+      "position": {
+        "page": 9,
+        "x": 504,
+        "y": 126
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.25a_basis_hydrogen_45v_b2a",
+      "label": "Line 25a — Enter the basis of property placed in service during the tax year for the facility that is designed and reasonably expected to produce qualified clean hydrogen per section 45V(b)(2)(A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].Line25a_ReadOrder[0].f11_1[0]",
+      "position": {
+        "page": 10,
+        "x": 316.8,
+        "y": 648
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.25b_percentage",
+      "label": "Line 25b — If you checked the box in Part I, line 8b, enter 6%. If you checked the box in Part I, line 8c, enter 1.2%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].f11_2[0]",
+      "position": {
+        "page": 10,
+        "x": 316.8,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.25c_multiply_25a_by_25b",
+      "label": "Line 25c — Multiply line 25a by line 25b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].f11_3[0]",
+      "position": {
+        "page": 10,
+        "x": 410.4,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.25d_basis_hydrogen_45v_b2b",
+      "label": "Line 25d — Enter the basis of property placed in service during the tax year for the facility that is designed and reasonably expected to produce qualified clean hydrogen per section 45V(b)(2)(B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].Line25d_ReadOrder[0].f11_4[0]",
+      "position": {
+        "page": 10,
+        "x": 316.8,
+        "y": 570.002
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.25e_percentage",
+      "label": "Line 25e — If you checked the box in Part I, line 8b, enter 7.5%. If you checked the box in Part I, line 8c, enter 1.5%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].f11_5[0]",
+      "position": {
+        "page": 10,
+        "x": 316.8,
+        "y": 546.001
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.25f_multiply_25d_by_25e",
+      "label": "Line 25f — Multiply line 25d by line 25e",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].f11_6[0]",
+      "position": {
+        "page": 10,
+        "x": 410.4,
+        "y": 534.002
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.25g_basis_hydrogen_45v_b2c",
+      "label": "Line 25g — Enter the basis of property placed in service during the tax year for the facility that is designed and reasonably expected to produce qualified clean hydrogen per section 45V(b)(2)(C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].Line25g_ReadOrder[0].f11_7[0]",
+      "position": {
+        "page": 10,
+        "x": 316.8,
+        "y": 492.001
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.25h_percentage",
+      "label": "Line 25h — If you checked the box in Part I, line 8b, enter 10%. If you checked the box in Part I, line 8c, enter 2%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].f11_8[0]",
+      "position": {
+        "page": 10,
+        "x": 316.8,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.25i_multiply_25g_by_25h",
+      "label": "Line 25i — Multiply line 25g by line 25h",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].f11_9[0]",
+      "position": {
+        "page": 10,
+        "x": 410.4,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.25j_basis_hydrogen_45v_b2d",
+      "label": "Line 25j — Enter the basis of property placed in service during the tax year for the facility that is designed and reasonably expected to produce qualified clean hydrogen per section 45V(b)(2)(D)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].Line25j_ReadOrder[0].f11_10[0]",
+      "position": {
+        "page": 10,
+        "x": 316.8,
+        "y": 414
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.25k_percentage",
+      "label": "Line 25k — If you checked the box in Part I, line 8b, enter 30%. If you checked the box in Part I, line 8c, enter 6%",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].f11_11[0]",
+      "position": {
+        "page": 10,
+        "x": 316.8,
+        "y": 390.002
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.25l_multiply_25j_by_25k",
+      "label": "Line 25l — Multiply line 25j by line 25k",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].f11_12[0]",
+      "position": {
+        "page": 10,
+        "x": 410.4,
+        "y": 378
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.26_total_clean_hydrogen",
+      "label": "Line 26 — Add lines 25c, 25f, 25i, and 25l",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].f11_13[0]",
+      "position": {
+        "page": 10,
+        "x": 504,
+        "y": 366.001
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.27_total_energy_credit",
+      "label": "Line 27 — Add Part VI, lines 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, and 26",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].Line27_ReadOrder[0].f11_14[0]",
+      "position": {
+        "page": 10,
+        "x": 316.8,
+        "y": 330.001
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.28a_ratio",
+      "label": "Line 28a — Divide the sum, for the tax year and all prior tax years, of all proceeds of tax-exempt bonds (within the meaning of section 103) used to finance the qualified facility, as of the close of the tax year, by the aggregate amount of additions to the capital account for the qualified facility, for the tax year and all prior tax years, as of the close of the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].f11_17[0]",
+      "position": {
+        "page": 10,
+        "x": 316.8,
+        "y": 252
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.28b_multiply_27_by_28a",
+      "label": "Line 28b — Multiply line 27 by line 28a",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].f11_18[0]",
+      "position": {
+        "page": 10,
+        "x": 316.8,
+        "y": 216
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.28c_multiply_27_by_15_percent",
+      "label": "Line 28c — Multiply line 27 by 15% (0.15)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].f11_19[0]",
+      "position": {
+        "page": 10,
+        "x": 316.8,
+        "y": 204.001
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.28d_smaller_of_28b_or_28c",
+      "label": "Line 28d — Enter the smaller of line 28b or 28c",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].f11_20[0]",
+      "position": {
+        "page": 10,
+        "x": 316.8,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.28e_subtract_28d_from_27",
+      "label": "Line 28e — Subtract line 28d from line 27",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].f11_21[0]",
+      "position": {
+        "page": 10,
+        "x": 316.8,
+        "y": 180
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.29_credit_after_bond_reduction",
+      "label": "Line 29 — If proceeds of tax-exempt bonds were used to finance your facility, enter the amount from line 28e. Otherwise, enter the amount from line 27",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].f11_22[0]",
+      "position": {
+        "page": 10,
+        "x": 410.4,
+        "y": 156.002
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.30_elective_payment_reduction",
+      "label": "Line 30 — If you are making an elective payment election under section 6417 for a facility whose construction began in calendar year 2024, and the facility doesn't meet the rules of section 48(a)(12)(B), doesn't have a maximum net output of less than 1 MW (as measured in ac), or meet an exception under section 45(b)(10)(D), multiply line 29 by 90% (0.90). All others, enter the amount from line 29",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].f11_23[0]",
+      "position": {
+        "page": 10,
+        "x": 410.4,
+        "y": 102.002
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.31_cooperatives_unused_credit",
+      "label": "Line 31 — Enter the applicable unused investment credit from cooperatives",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].f11_24[0]",
+      "position": {
+        "page": 10,
+        "x": 410.4,
+        "y": 90
+      }
+    },
+    {
+      "fieldId": "form-3468.10.part6.32_total_energy_credit",
+      "label": "Line 32 — Add lines 30 and 31",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page11[0].f11_25[0]",
+      "position": {
+        "page": 10,
+        "x": 504,
+        "y": 78.001
+      }
+    },
+    {
+      "fieldId": "form-3468.11.part7.1a_prior_170h_deduction_yes",
+      "label": "Line 1a — Was there a prior section 170(h) deduction on this property? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page12[0].c12_1[0]",
+      "position": {
+        "page": 11,
+        "x": 324,
+        "y": 722
+      }
+    },
+    {
+      "fieldId": "form-3468.11.part7.1a_prior_170h_deduction_no",
+      "label": "Line 1a — Was there a prior section 170(h) deduction on this property? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page12[0].c12_1[1]",
+      "position": {
+        "page": 11,
+        "x": 367.2,
+        "y": 722
+      }
+    },
+    {
+      "fieldId": "form-3468.11.part7.1b_prior_nps_number",
+      "label": "Line 1b — If \"Yes\" to line 1a, then provide the prior NPS number",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page12[0].f12_1[0]",
+      "position": {
+        "page": 11,
+        "x": 286,
+        "y": 708.001
+      }
+    },
+    {
+      "fieldId": "form-3468.11.part7.1c_section_47d5_election",
+      "label": "Line 1c — Check this box if you are electing under section 47(d)(5) to take your qualified rehabilitation expenditures into account for the tax year in which paid (or, for self-rehabilitated property, when capitalized)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page12[0].c12_2[0]",
+      "position": {
+        "page": 11,
+        "x": 566,
+        "y": 675.501
+      }
+    },
+    {
+      "fieldId": "form-3468.11.part7.1d_measuring_period_beginning_date",
+      "label": "Line 1d — Enter the dates for the 24- or 60-month measuring period: Beginning date",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page12[0].f12_2[0]",
+      "position": {
+        "page": 11,
+        "x": 131.8,
+        "y": 648
+      }
+    },
+    {
+      "fieldId": "form-3468.11.part7.1d_measuring_period_end_date",
+      "label": "Line 1d — Enter the dates for the 24- or 60-month measuring period: End date",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page12[0].f12_3[0]",
+      "position": {
+        "page": 11,
+        "x": 131.8,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "form-3468.11.part7.1e_basis_building",
+      "label": "Line 1e — Enter the adjusted basis of the building as of the beginning date above (or the first day of your holding period, if later)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page12[0].f12_4[0]",
+      "position": {
+        "page": 11,
+        "x": 504,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "form-3468.11.part7.1f_qre_during_measuring_period",
+      "label": "Line 1f — Enter the amount of the qualified rehabilitation expenditures incurred, or treated as incurred, during the period on line 1d above",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page12[0].f12_5[0]",
+      "position": {
+        "page": 11,
+        "x": 504,
+        "y": 590
+      }
+    },
+    {
+      "fieldId": "form-3468.11.part7.1g_qualified_rehabilitation_expenditures",
+      "label": "Line 1g — Enter the amount of qualified rehabilitation expenditures",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page12[0].f12_6[0]",
+      "position": {
+        "page": 11,
+        "x": 316.8,
+        "y": 576
+      }
+    },
+    {
+      "fieldId": "form-3468.11.part7.1j_multiply_1g_by_4_percent",
+      "label": "Line 1j — For certified historic structures with expenditures paid or incurred, multiply line 1g by 4% (0.04)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page12[0].f12_9[0]",
+      "position": {
+        "page": 11,
+        "x": 410.4,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-3468.11.part7.1k_i_nps_project_number",
+      "label": "Line 1k(i) — If you completed line 1j, enter the assigned NPS project number",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page12[0].f12_10[0]",
+      "position": {
+        "page": 11,
+        "x": 223.2,
+        "y": 480.002
+      }
+    },
+    {
+      "fieldId": "form-3468.11.part7.1k_ii_pass_through_entity_ein",
+      "label": "Line 1k(ii) — The originating pass-through entity's EIN (if applicable)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page12[0].f12_11[0]",
+      "position": {
+        "page": 11,
+        "x": 304.2,
+        "y": 468
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3468.11.part7.1k_iii_nps_certification_date",
+      "label": "Line 1k(iii) — The date the NPS approved the Request for Certification of Completed Work",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page12[0].f12_12[0]",
+      "position": {
+        "page": 11,
+        "x": 108,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-3468.11.part7.1m_date_30_months_after_claim",
+      "label": "Line 1m — If you have not received an approved certification of completed work, enter the date that is 30 months after the date that the original rehabilitation credit was claimed for the property",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page12[0].f12_13[0]",
+      "position": {
+        "page": 11,
+        "x": 187.2,
+        "y": 396
+      }
+    },
+    {
+      "fieldId": "form-3468.11.part7.2_cooperatives_unused_credit",
+      "label": "Line 2 — Enter the applicable unused investment credit from cooperatives",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page12[0].f12_14[0]",
+      "position": {
+        "page": 11,
+        "x": 410.4,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-3468.11.part7.3_add_lines",
+      "label": "Line 3 — Add lines 1j and 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page12[0].f12_15[0]",
+      "position": {
+        "page": 11,
+        "x": 504,
+        "y": 324
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/3468/blank.pdf",
+    "ingestedAt": "2026-11-27T01:30:19.955Z",
+    "totalFields": 305,
+    "skipped": 0,
+    "catalogEntries": 305
+  }
+}

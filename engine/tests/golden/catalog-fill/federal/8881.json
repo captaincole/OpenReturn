@@ -1,0 +1,267 @@
+{
+  "formId": "form-8881",
+  "fieldCount": 29,
+  "entries": [
+    {
+      "fieldId": "form-8881.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-6GBPM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-PWVUQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.1_qualified_startup_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "6,895"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.10_auto_enrollment_from_partnerships_s_corps",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "4,066"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.11_total_auto_enrollment_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "1,645"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.12_military_spouse_employees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "1,102"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.12_multiply_military_spouses_by_200",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+          "text": "4,034"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.13_military_spouse_contributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+          "text": "8,984"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.14_military_spouse_from_partnerships_s_corps",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+          "text": "5,400"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.15_total_military_spouse_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+          "text": "8,352"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.2_startup_costs_by_employer_size",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "3,824"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.3_eligible_employees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "9,624"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.3_multiply_eligible_employees_by_250",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "9,316"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.4_greater_of_500_or_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "3,075"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.5_smaller_of_2_or_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "3,172"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.6a_preceding_year_employees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "6,228"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.6b_employer_contributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "6,279"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.6c_contributions_over_1000",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "8,121"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.6d_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "4,985"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.6e_1_subtract_50_from_6a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "8,882"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.6e_2_multiply_6e_1_by_2_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "T-1HK3P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.6e_3_multiply_6e_2_by_6d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "3,385"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.6e_4_subtract_6e_3_from_6d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "3,229"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.6f_contributions_after_phaseout",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "2,362"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.6g_applicable_percentage_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "5,867"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.7_credit_from_partnerships_s_corps",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "2,770"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.8_total_part_i_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "4,353"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.9_auto_enrollment_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "6,312"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8881.0.line.a_qualifying_employees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "9,248"
+        }
+      ]
+    }
+  ]
+}
