@@ -44,6 +44,8 @@ import type { ScheduleCa540NRFilingInfo } from "./schedule-ca-540nr/filingInfo.j
 import { resolveScheduleCa540NRInfo } from "./schedule-ca-540nr/resolveInfo.js";
 import type { ScheduleD1FilingInfo } from "./schedule-d-1/filingInfo.js";
 import { resolveScheduleD1Info } from "./schedule-d-1/resolveInfo.js";
+import type { ScheduleD540NRFilingInfo } from "./schedule-d-540nr/filingInfo.js";
+import { resolveScheduleD540NRInfo } from "./schedule-d-540nr/resolveInfo.js";
 import type { ScheduleG1FilingInfo } from "./schedule-g-1/filingInfo.js";
 import { resolveScheduleG1Info } from "./schedule-g-1/resolveInfo.js";
 import type { ScheduleSFilingInfo } from "./schedule-s/filingInfo.js";
@@ -51,6 +53,7 @@ import { resolveScheduleSInfo } from "./schedule-s/resolveInfo.js";
 
 export type LaterCaliforniaFormsFilingInfo = Form540NRFilingInfo &
   ScheduleCa540NRFilingInfo &
+  ScheduleD540NRFilingInfo &
   ScheduleSFilingInfo &
   Form3801FilingInfo &
   Form3510FilingInfo &
@@ -76,6 +79,7 @@ export const LATER_CALIFORNIA_FORMS_RESOLVERS: ReadonlyArray<
 > = [
   resolve540NRInfo,
   resolveScheduleCa540NRInfo,
+  resolveScheduleD540NRInfo,
   resolveScheduleSInfo,
   resolve3801Info,
   resolve3510Info,

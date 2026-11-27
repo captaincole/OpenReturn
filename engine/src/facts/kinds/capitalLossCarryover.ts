@@ -18,6 +18,9 @@ export const CAPITAL_LOSS_CARRYOVER_KEYS = {
  * form has one carryover line. Cade records it only when it differs from the
  * federal carryover, or when Schedule D (540) files for another difference
  * (ca-540-sched-d-inst-2025::sec::line-6-california-capital-loss-carryover-from-2024::b01).
+ * On a Form 540NR return it is Schedule D (540NR) line 6: the carryover
+ * "as if you had been a resident for all prior years"
+ * (ca-540nr-sched-d-inst-2025::sec::line-6-california-capital-loss-carryover-from-2024::b01).
  * It is not in CAPITAL_LOSS_CARRYOVER_KEYS: it does not file the federal Schedule D.
  */
 export const CA_CAPITAL_LOSS_CARRYOVER_KEY = "capital_gains.ca_loss_carryover";

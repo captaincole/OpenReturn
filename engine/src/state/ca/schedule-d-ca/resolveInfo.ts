@@ -13,6 +13,7 @@ import {
   type ResolverInputs,
 } from "../../../resolverInputs.js";
 import { form3805ETotalsOf } from "../3805e/resolveInfo.js";
+import type { CaliforniaSection1231Gain } from "../schedule-d-1/filingInfo.js";
 import { resolveScheduleD1Info } from "../schedule-d-1/resolveInfo.js";
 import type { ScheduleDCaFilingInfo } from "./filingInfo.js";
 import { scheduleDCaFigures, type InstallmentRow, type ScheduleDCaFigures } from "./lines.js";
@@ -57,10 +58,23 @@ export function californiaCapitalFigures(
   carryover: number | undefined,
   carryoverMissing: boolean,
 ): ScheduleDCaFigures {
-  const distributions = sumInvestmentBox(inputs, "box2a", isDividendFactKey);
-  const installments = installmentRows(inputs);
   // California's section 1231 gain (Schedule D-1), figured when Form 4797 files on a Form 540 return.
   const section1231 = resolveScheduleD1Info(inputs).californiaSection1231Gain;
+  return capitalFiguresWith(inputs, carryover, carryoverMissing, section1231);
+}
+
+/*
+ * The same lines with the Schedule D-1 gain given. Schedule D (540NR) gives
+ * the gain a full-year resident would have (schedule-d-540nr/resolveInfo.ts).
+ */
+export function capitalFiguresWith(
+  inputs: ResolverInputs,
+  carryover: number | undefined,
+  carryoverMissing: boolean,
+  section1231: CaliforniaSection1231Gain | undefined,
+): ScheduleDCaFigures {
+  const distributions = sumInvestmentBox(inputs, "box2a", isDividendFactKey);
+  const installments = installmentRows(inputs);
   const figures = scheduleDCaFigures({
     sales: salesWithBases(inputs).map((sale) => sale.sale),
     installmentRows: installments.rows,

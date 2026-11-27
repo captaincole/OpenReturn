@@ -26,7 +26,7 @@ The scenario covers Schedule CA (540NR) Part I (the move out, the days, the prio
 | Sch CA (540NR) line 1a A, D / E | W-2 box 1 / stated | 116,000 / 64,000 |
 | line 2b A, D / E | 1099-INT / stated | 1,400 / 650 |
 | line 7a A, D / E | Schedule D line 16 / stated | 12,000 / 12,000 |
-| line 7a columns B and C | Schedule D (540NR) has no rules: a gap; column D counts it as 0 | gap |
+| line 7a columns B and C | Schedule D (540NR) lines 12a and 12b: no California difference | blank |
 | lines 10 and 27, D / E | 116,000 + 1,400 + 12,000 / 64,000 + 650 + 12,000 | 129,400 / 76,650 |
 | Part III line 30 | standard deduction, single | 5,706 |
 | Part IV line 3 | 76,650 ÷ 129,400 = .59235 | .5923 |
