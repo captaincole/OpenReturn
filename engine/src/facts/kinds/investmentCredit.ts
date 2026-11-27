@@ -92,7 +92,7 @@ export interface InvestmentCreditFacility {
 
 /* The cumulative financing the credit reduction divides: Part V line 6a, Part VI line 28a. */
 export interface CreditFinancing {
-  /* Proceeds of tax-exempt (section 103) obligations, this year and all prior years (rule-decisions A101). */
+  /* Proceeds of tax-exempt (section 103) obligations, this year and all prior years (rule-decisions A102). */
   proceeds: number;
   /* Additions to the facility's capital account, this year and all prior years. */
   capitalAccountAdditions: number;

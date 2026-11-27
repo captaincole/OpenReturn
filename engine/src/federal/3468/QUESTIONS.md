@@ -10,19 +10,19 @@ Each is decided, with a `DECISION` comment in the code and a row in
 `docs/rule-decisions.md`. The statute column of each row was read with the
 law library; none of them disagrees with the engine's choice.
 
-- **A96. A facility smaller than its low-income allocation** takes the whole
+- **A97. A facility smaller than its low-income allocation** takes the whole
   bonus on line 1j (Part VI lines 3f, 11i, 17f, 23f the same). The form's
   words fill neither line 1j nor 1k; the instructions make the allocation a
   cap only. `lines.ts`.
-- **A97. No bonus on a 0% base rate.** A property whose construction began
+- **A98. No bonus on a 0% base rate.** A property whose construction began
   too late has no credit, so its domestic content and energy community lines
   stay blank. `energySections.ts`.
-- **A98. The ratio lines keep every digit** and print 6 places. `lines.ts`.
-- **A99. Part III checks line 7c**, as its own line instruction says, though
+- **A99. The ratio lines keep every digit** and print 6 places. `lines.ts`.
+- **A100. Part III checks line 7c**, as its own line instruction says, though
   the table does not name line 7. `partI.ts`.
-- **A100. Line 11f prints the originating entity's EIN** for an owner too.
+- **A101. Line 11f prints the originating entity's EIN** for an owner too.
   `partI.ts`.
-- **A101. Part V line 6a counts only tax-exempt financing**, as the
+- **A102. Part V line 6a counts only tax-exempt financing**, as the
   instructions and section 45(b)(3) say. `parts.ts`.
 
 ## Should we do this now
@@ -129,9 +129,9 @@ law library; none of them disagrees with the engine's choice.
     times "A fraction" (`section-c-totals-credit-reduction-for::b01`,
     `section-n-totals-and-credit-reduction-for::b01`), and section 45(b)(3)
     says the same. The engine now keeps every digit and prints 6 places, for
-    every ratio line (row A98, changed).
+    every ratio line (row A99, changed).
   - Blind doubts that change dollars: line 7 against the nameplate (item 15),
-    line 9b with 7a (item 16), the line 6a numerator (row A101). Doubts
+    line 9b with 7a (item 16), the line 6a numerator (row A102). Doubts
     with no dollar change (one Part I for two sections, item 17; 0 against
     blank for a building that is not substantially rehabilitated, item 4; the
     earlier-year building, item 3; the heat pump's 6% from the form, the
@@ -153,10 +153,10 @@ law library; none of them disagrees with the engine's choice.
 | Part II, lines 1a to 7 | published example with numbers (basis reduction); the form's rates |
 | Part III, lines 1a to 3 | stated rule |
 | Part IV, lines 1a to 3 | stated rule (25% before 2026, 35% after) |
-| Part V, sections A to C | stated rule; line 1j for a smaller capacity: own reading (A96); line 8: own reading (item 1) |
-| Part VI, sections A to M | stated rule; the rate tables; no bonus at 0%: own reading (A97) |
+| Part V, sections A to C | stated rule; line 1j for a smaller capacity: own reading (A97); line 8: own reading (item 1) |
+| Part VI, sections A to M | stated rule; the rate tables; no bonus at 0%: own reading (A98) |
 | Part VI, section N | stated rule; line 30: own reading (item 1) |
 | Part VII, lines 1a to 3 | stated rule; line 1j at 0: own reading (items 3 and 4) |
 | Cooperative lines (II 6, III 2, IV 2, V 10, VI 31, VII 2) | stated rule (K-1 codes P to U, stated cooperative facts) |
-| Ratio lines | own reading (A98) |
+| Ratio lines | own reading (A99) |
 | Line 1j and 3 with the 47(d)(5) election before service | unsupported (item 5) |

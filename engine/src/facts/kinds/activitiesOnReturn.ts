@@ -7,11 +7,13 @@
  * Form 4562 reports the test as a gap (federal/4562/lines.ts).
  */
 
-import { sum } from "../../money.js";
+import { tipCreditReductions } from "../../federal/8846/figures.js";
+import { atLeast, sum } from "../../money.js";
 import { statedBusinessesOnReturn, type BusinessFactValue } from "./business.js";
 import { placesPersonalProperty, type ScopedDepreciation } from "./depreciation.js";
 import { statedRentalsOnReturn, type RentalFactValue } from "./rental.js";
 import { section179RecaptureByBusiness } from "./section179Recapture.js";
+import { workOpportunityCreditByActivity } from "./workOpportunity.js";
 
 type FactRow = { key: string; value: unknown; category: string };
 type Activity = { key: string; value: BusinessFactValue | RentalFactValue };
@@ -69,11 +71,80 @@ function withRecapture<T extends { key: string; value: BusinessFactValue }>(
   });
 }
 
-/* statedBusinessesOnReturn, with the return's depreciation scope and its Form 4797 Part IV recapture. */
+/*
+ * Schedule C line 26: "Enter the total salaries and wages for the tax year
+ * reduced by the amount of the following credit(s) ... Work Opportunity Credit
+ * (Form 5884)" (irs-1040sc-inst-2025::sec::line-26::b01): the stated wages
+ * less the credit of the business's own targeted group employees (Form 5884
+ * line 2, workOpportunity.ts), never below 0. Stated wages only: a business
+ * that states none has nothing to reduce. A credit from a K-1 is not taken off
+ * ("Do not reduce your deduction for any portion of a credit that was passed
+ * through to you").
+ */
+function withWorkOpportunityWages<T extends { key: string; value: BusinessFactValue }>(
+  businesses: T[],
+  facts: ReadonlyArray<FactRow>,
+): T[] {
+  const credits = workOpportunityCreditByActivity(facts);
+  if (credits.size === 0) return businesses;
+  return businesses.map((business) => {
+    const credit = credits.get(business.key);
+    const wages = business.value.expenses?.wages;
+    if (credit === undefined || wages === undefined) return business;
+    const expenses = { ...business.value.expenses, wages: atLeast(0, wages - credit) };
+    return { ...business, value: { ...business.value, expenses } };
+  });
+}
+
+/* The wages withWorkOpportunityWages takes off the return's Schedule C businesses, in total (Schedule CA line 3). */
+export function workOpportunityWageReduction(
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): number {
+  const credits = workOpportunityCreditByActivity(facts);
+  const reductions = statedBusinessesOnReturn(facts, joint).businesses.map(({ key, value }) => {
+    const wages = value.expenses?.wages;
+    return wages === undefined ? 0 : Math.min(atLeast(0, wages), credits.get(key) ?? 0);
+  });
+  return sum(...reductions);
+}
+
+/*
+ * Form 8846 line 4 comes off the business's taxes: "Reduce your deduction by
+ * the amount shown on Form 8846, line 4" (irs-1040sc-inst-2025::sec::line-23::b01).
+ * The stated taxesAndLicenses hold the employer taxes before the credit.
+ */
+function withTipCredit<T extends { key: string; value: BusinessFactValue }>(
+  businesses: T[],
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): T[] {
+  const reductions = tipCreditReductions(facts, joint);
+  if (reductions.size === 0) return businesses;
+  return businesses.map((business) => {
+    const reduction = reductions.get(business.key);
+    if (reduction === undefined) return business;
+    const expenses = business.value.expenses ?? {};
+    const taxesAndLicenses = (expenses.taxesAndLicenses ?? 0) - reduction;
+    return {
+      ...business,
+      value: { ...business.value, expenses: { ...expenses, taxesAndLicenses } },
+    };
+  });
+}
+
+/*
+ * statedBusinessesOnReturn, with the return's depreciation scope, its Form 4797
+ * Part IV recapture, its wages less the work opportunity credit and its taxes
+ * less the Form 8846 credit. The two credits lower different expense lines, so
+ * their order does not matter.
+ */
 export function businessesOnReturn(facts: ReadonlyArray<FactRow>, joint: boolean) {
   const result = statedBusinessesOnReturn(facts, joint);
   const shared = activitiesWithPersonalProperty(facts, joint) >= SHARED_TEST_MINIMUM;
-  return { ...result, businesses: withRecapture(marked(result.businesses, shared), facts) };
+  const businesses = withRecapture(marked(result.businesses, shared), facts);
+  const reduced = withWorkOpportunityWages(businesses, facts);
+  return { ...result, businesses: withTipCredit(reduced, facts, joint) };
 }
 
 /* statedRentalsOnReturn, with the return's depreciation scope. */

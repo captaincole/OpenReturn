@@ -73,7 +73,7 @@ describe("shared rates and ratios", () => {
     expect(financingLines(10_000, 0, 0).reduced).toBe(10_000);
   });
 
-  it("a ratio keeps every digit and prints 6 places (rule-decisions A98)", () => {
+  it("a ratio keeps every digit and prints 6 places (rule-decisions A99)", () => {
     // Blind case 10: $25,000 of financing over $600,000 of additions, on $192,000 of credit.
     const financing = financingLines(192_000, 25_000, 600_000);
     expect(financing).toMatchObject({ byRatio: 8_000, reduction: 8_000, reduced: 184_000 });
