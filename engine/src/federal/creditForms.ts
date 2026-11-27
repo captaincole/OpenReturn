@@ -2,9 +2,10 @@
  * The business credit forms: Form 3800; Form 8582-CR, which limits a credit
  * from a passive activity before Form 3800 takes it; Form 8834, whose passive
  * credit Form 8582-CR limits too; Form 4136, the refundable credit for federal
- * tax paid on fuels used in a business; and Form 8912, the credit for holders
- * of tax credit bonds; and Form 8846, the credit for employer social security
- * and Medicare taxes on tips. They are joined here, in this order, and filingInfo.ts
+ * tax paid on fuels used in a business; Form 8912, the credit for holders
+ * of tax credit bonds; Form 8846, the credit for employer social security
+ * and Medicare taxes on tips; and Form 5884, the work opportunity credit for the
+ * taxpayer's own employees. They are joined here, in this order, and filingInfo.ts
  * takes them as one, so that file stays under its line limit. A new credit
  * form adds its type and resolver here, not to filingInfo.ts.
  */
@@ -15,6 +16,8 @@ import type { Form3800FilingInfo } from "./3800/filingInfo.js";
 import { resolve3800Info } from "./3800/resolveInfo.js";
 import type { Form4136FilingInfo } from "./4136/filingInfo.js";
 import { resolve4136Info } from "./4136/resolveInfo.js";
+import type { Form5884FilingInfo } from "./5884/filingInfo.js";
+import { resolve5884Info } from "./5884/resolveInfo.js";
 import type { Form8582CRFilingInfo } from "./8582-cr/filingInfo.js";
 import { resolve8582CRInfo } from "./8582-cr/resolveInfo.js";
 import type { Form8834FilingInfo } from "./8834/filingInfo.js";
@@ -29,7 +32,8 @@ export type CreditFormsFilingInfo = Form3800FilingInfo &
   Form8834FilingInfo &
   Form4136FilingInfo &
   Form8912FilingInfo &
-  Form8846FilingInfo;
+  Form8846FilingInfo &
+  Form5884FilingInfo;
 
 export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve3800Info,
@@ -38,4 +42,5 @@ export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => B
   resolve4136Info,
   resolve8912Info,
   resolve8846Info,
+  resolve5884Info,
 ];

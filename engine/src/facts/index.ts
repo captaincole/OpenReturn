@@ -135,4 +135,5 @@ export * from "./kinds/treatyPosition.js";
 export * from "./kinds/trustAccumulationDistribution.js";
 export * from "./kinds/uncollectedWages.js";
 export * from "./kinds/wages.js";
+export * from "./kinds/workOpportunity.js";
 export * from "./rows.js";

@@ -10,7 +10,9 @@
  * prints them in Part I (cash) or Part III (accrual).
  */
 
+import { atLeast, sum } from "../../money.js";
 import { isAtRiskAmounts, type AtRiskAmounts } from "./atRisk.js";
+import { workOpportunityCreditByActivity } from "./workOpportunity.js";
 
 type FactRow = { key: string; value: unknown; category: string };
 
@@ -145,7 +147,11 @@ export interface FarmFactValue {
   expenses?: FarmExpenses;
   vehicles?: FarmVehicle[];
   conservation?: FarmConservation;
-  /* Line 22: the credits of Forms 5884, 8844, 8932 and 8994 for the farm's labor. */
+  /*
+   * Line 22: the credits of Forms 8844, 8932 and 8994 for the farm's labor.
+   * farmsOnReturn adds the Form 5884 credit of the farm's work opportunity
+   * employee facts (workOpportunity.ts); a farm with such facts does not state it here.
+   */
   employmentCredits?: number;
   /* Line 15: the Form 8941 credit for the farm's employee health insurance. */
   smallEmployerHealthCredit?: number;
@@ -279,6 +285,18 @@ export function farmOwnerOf(farm: FarmFactValue): FarmOwner {
 }
 
 /*
+ * Schedule F line 22: "Reduce your deduction by the amounts claimed on the
+ * following. • Form 5884, Work Opportunity Credit." (irs-1040sf-inst-2025::sec::line-22::b01).
+ * The credit of the farm's own targeted group employees (workOpportunity.ts) is
+ * added to the stated employmentCredits, which hold the other three credits.
+ */
+function withWorkOpportunityCredit(value: unknown, credit: number | undefined): FarmFactValue {
+  const farm = value as FarmFactValue;
+  if (credit === undefined || credit === 0) return farm;
+  return { ...farm, employmentCredits: (farm.employmentCredits ?? 0) + credit };
+}
+
+/*
  * The farms on this return. Filing jointly, every farm. On any other status,
  * only the taxpayer's: a spouse's farm is on the spouse's return, and its key
  * is in spouseKeys so a form can wait on it. A malformed fact is listed.
@@ -292,14 +310,42 @@ export function farmsOnReturn(
   malformedKeys: string[];
 } {
   const rows = facts.filter((fact) => fact.category === FARM_CATEGORY && isFarmFactKey(fact.key));
+  const credits = workOpportunityCreditByActivity(facts);
   const farms = rows
     .filter((row) => isFarm(row.value))
-    .map((row) => ({ key: row.key, value: row.value as FarmFactValue }));
+    .map((row) => ({
+      key: row.key,
+      value: withWorkOpportunityCredit(row.value, credits.get(row.key)),
+    }));
   const offReturn = (farm: { value: FarmFactValue }) =>
     !joint && farmOwnerOf(farm.value) === "spouse";
   return {
     farms: farms.filter((farm) => !offReturn(farm)),
     spouseKeys: farms.filter(offReturn).map((farm) => farm.key),
     malformedKeys: rows.filter((row) => !isFarm(row.value)).map((row) => row.key),
+  };
+}
+
+/*
+ * The Form 5884 part of the farms' line 22 reductions (Schedule CA line 6):
+ * the farms' credit in total, and the labor hired it took off, at most each
+ * farm's stated labor hired.
+ */
+export function workOpportunityLaborReduction(
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): { credit: number; reduction: number } {
+  const credits = workOpportunityCreditByActivity(facts);
+  const farms = farmsOnReturn(facts, joint).farms.map(({ key, value }) => ({
+    credit: credits.get(key) ?? 0,
+    labor: value.expenses?.laborHired,
+  }));
+  return {
+    credit: sum(...farms.map((farm) => farm.credit)),
+    reduction: sum(
+      ...farms.map(({ credit, labor }) =>
+        labor === undefined ? 0 : Math.min(atLeast(0, labor), credit),
+      ),
+    ),
   };
 }

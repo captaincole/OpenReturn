@@ -83,6 +83,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "(line A, the CCC loan election, line 34's at-risk box, material participation) is missing",
   ],
   [
+    /^work_opportunity_employee\.[^.]+$/,
+    "each fact is a whole targeted group employee the taxpayer claims the work opportunity " +
+      "credit for (Form 5884); whether one exists is Cade's question, as for a business fact. " +
+      "Form 5884 lists the fact again while it is malformed",
+  ],
+  [
     /^casualty\.[^.]+$/,
     "each fact is a whole casualty event (Form 4684); whether one happened is Cade's question",
   ],
