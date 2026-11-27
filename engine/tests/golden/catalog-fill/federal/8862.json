@@ -1,0 +1,987 @@
+{
+  "formId": "form-8862",
+  "fieldCount": 109,
+  "entries": [
+    {
+      "fieldId": "form-8862.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-1WDS8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.1_tax_year_filing_form",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line1_CombField[0].f1_03[0]",
+          "text": "3534"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.2_claiming_aotc",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Checkbox3_ReadOrder[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.2_claiming_ctc_actc_odc",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Checkbox2_ReadOrder[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.2_claiming_eic",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Checkbox1_ReadOrder[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.3_eic_only_income_misreported_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.3_eic_only_income_misreported_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.4_qualifying_child_of_another_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.4_qualifying_child_of_another_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.5a_child_1_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+          "text": "T-HYI7H"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.5b_child_2_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+          "text": "T-1XXKX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.5c_child_3_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+          "text": "T-1MUVS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.6_schedule_eic_qualifying_child_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.6_schedule_eic_qualifying_child_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.7_days_lived_in_us_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Child1_CombField[0].f1_07[0]",
+          "text": "592"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.7_days_lived_in_us_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Child2_CombField[0].f1_08[0]",
+          "text": "932"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.7_days_lived_in_us_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Child3_CombField[0].f1_09[0]",
+          "text": "137"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_1_birth_day",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Child1_Birth_Ln8[0].f1_11[0]",
+          "text": "16"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_1_birth_month",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Child1_Birth_Ln8[0].f1_10[0]",
+          "text": "63"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_1_death_day",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Child1_Death_Ln8[0].f1_13[0]",
+          "text": "54"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_1_death_month",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Child1_Death_Ln8[0].f1_12[0]",
+          "text": "47"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_2_birth_day",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Child2_Birth_Ln8[0].f1_15[0]",
+          "text": "65"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_2_birth_month",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Child2_Birth_Ln8[0].f1_14[0]",
+          "text": "09"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_2_death_day",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Child2_Death_Ln8[0].f1_17[0]",
+          "text": "42"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_2_death_month",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Child2_Death_Ln8[0].f1_16[0]",
+          "text": "99"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_3_birth_day",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Child3_Birth_Ln8[0].f1_19[0]",
+          "text": "06"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_3_birth_month",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Child3_Birth_Ln8[0].f1_18[0]",
+          "text": "58"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_3_death_day",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Child3_Death_Ln8[0].f1_21[0]",
+          "text": "09"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_3_death_month",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Child3_Death_Ln8[0].f1_20[0]",
+          "text": "34"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.10a_your_age_year_end",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+          "text": "68"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.10b_spouse_age_year_end",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_04[0]",
+          "text": "768"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.11a_you_claimed_as_dependent_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.11a_you_claimed_as_dependent_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.11b_spouse_claimed_as_dependent_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.11b_spouse_claimed_as_dependent_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.12a_ctc_child_1_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_05[0]",
+          "text": "T-104AN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.12b_ctc_child_2_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_06[0]",
+          "text": "T-XGKNX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.12c_ctc_child_3_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_07[0]",
+          "text": "T-1U34D"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.12d_ctc_child_4_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_08[0]",
+          "text": "T-T54J4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.13a_odc_dependent_1_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_09[0]",
+          "text": "T-1VT6M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.13b_odc_dependent_2_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+          "text": "T-H5Q5D"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.13c_odc_dependent_3_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+          "text": "T-190I2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.13d_odc_dependent_4_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+          "text": "T-14ACO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.14_child_1_lived_with_you_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.14_child_1_lived_with_you_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.14_child_2_lived_with_you_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.14_child_2_lived_with_you_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.14_child_3_lived_with_you_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.14_child_3_lived_with_you_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.14_child_4_lived_with_you_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.14_child_4_lived_with_you_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.15_child_1_qualifying_child_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_7[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.15_child_1_qualifying_child_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.15_child_2_qualifying_child_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_8[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.15_child_2_qualifying_child_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.15_child_3_qualifying_child_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_9[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.15_child_3_qualifying_child_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_9[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.15_child_4_qualifying_child_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_10[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.15_child_4_qualifying_child_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_10[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.16_child_1_your_dependent_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_11[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.16_child_1_your_dependent_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_11[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.16_child_2_your_dependent_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_12[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.16_child_2_your_dependent_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_12[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.16_child_3_your_dependent_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_13[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.16_child_3_your_dependent_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_13[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.16_child_4_your_dependent_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_14[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.16_child_4_your_dependent_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_14[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.16_other_dependent_1_your_dependent_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_15[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.16_other_dependent_1_your_dependent_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_15[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.16_other_dependent_2_your_dependent_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_16[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.16_other_dependent_2_your_dependent_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_16[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.16_other_dependent_3_your_dependent_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_17[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.16_other_dependent_3_your_dependent_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_17[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.16_other_dependent_4_your_dependent_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_18[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.16_other_dependent_4_your_dependent_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_18[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.17_child_1_us_citizen_resident_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_19[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.17_child_1_us_citizen_resident_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_19[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.17_child_2_us_citizen_resident_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_20[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.17_child_2_us_citizen_resident_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_20[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.17_child_3_us_citizen_resident_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_21[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.17_child_3_us_citizen_resident_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_21[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.17_child_4_us_citizen_resident_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_22[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.17_child_4_us_citizen_resident_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_22[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.17_other_dependent_1_us_citizen_resident_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_23[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.17_other_dependent_1_us_citizen_resident_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_23[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.17_other_dependent_2_us_citizen_resident_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_24[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.17_other_dependent_2_us_citizen_resident_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_24[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.17_other_dependent_3_us_citizen_resident_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_25[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.17_other_dependent_3_us_citizen_resident_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_25[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.17_other_dependent_4_us_citizen_resident_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_26[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.17_other_dependent_4_us_citizen_resident_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_26[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.9a_days_main_home_us",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Ln9a_CombField[0].f2_01[0]",
+          "text": "675"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.1.line.9b_spouse_days_main_home_us",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Ln9b_CombField[0].f2_02[0]",
+          "text": "524"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.2.line.18a_student_1_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_01[0]",
+          "text": "T-1B0SL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.2.line.18b_student_2_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_02[0]",
+          "text": "T-16Y9H"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.2.line.18c_student_3_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_03[0]",
+          "text": "T-1ABK0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.2.line.19a_student_1_eligible_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.2.line.19a_student_1_eligible_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.2.line.19a_student_2_eligible_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.2.line.19a_student_2_eligible_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.2.line.19a_student_3_eligible_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.2.line.19a_student_3_eligible_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.2.line.19b_student_1_prior_four_years_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.2.line.19b_student_1_prior_four_years_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.2.line.19b_student_2_prior_four_years_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.2.line.19b_student_2_prior_four_years_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.2.line.19b_student_3_prior_four_years_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8862.2.line.19b_student_3_prior_four_years_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_6[0]",
+          "checked": true
+        }
+      ]
+    }
+  ]
+}

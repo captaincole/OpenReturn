@@ -1,0 +1,1673 @@
+{
+  "form": {
+    "formId": "form-8862",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Information To Claim Certain Credits After Disallowance"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8862.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-8862.0.header.ssn",
+      "label": "Your social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 454.6,
+        "y": 684
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8862.0.line.1_tax_year_filing_form",
+      "label": "Line 1 — Enter the tax year for which you are filing this form (for example, 2025)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line1_CombField[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 524.8,
+        "y": 612
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8862.0.line.2_claiming_eic",
+      "label": "Line 2 — Earned Income Credit (Complete Part II)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Checkbox1_ReadOrder[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 110.4,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-8862.0.line.2_claiming_ctc_actc_odc",
+      "label": "Line 2 — Child Tax Credit/Additional Child Tax Credit/Credit for Other Dependents (Complete Part III)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Checkbox2_ReadOrder[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 290.4,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-8862.0.line.2_claiming_aotc",
+      "label": "Line 2 — American Opportunity Tax Credit (Complete Part IV)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Checkbox3_ReadOrder[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 492,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-8862.0.line.3_eic_only_income_misreported_yes",
+      "label": "Line 3 — If the only reason your EIC was reduced or disallowed was because you incorrectly reported your earned income or investment income, check “Yes.” Otherwise, check “No.” (Yes)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 481.002
+      }
+    },
+    {
+      "fieldId": "form-8862.0.line.3_eic_only_income_misreported_no",
+      "label": "Line 3 — If the only reason your EIC was reduced or disallowed was because you incorrectly reported your earned income or investment income, check “Yes.” Otherwise, check “No.” (No)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+      "position": {
+        "page": 0,
+        "x": 547.2,
+        "y": 481.002
+      }
+    },
+    {
+      "fieldId": "form-8862.0.line.4_qualifying_child_of_another_yes",
+      "label": "Line 4 — Could you (or your spouse if filing jointly) be claimed as a qualifying child of another taxpayer for the year entered on line 1? (Yes)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 421.001
+      }
+    },
+    {
+      "fieldId": "form-8862.0.line.4_qualifying_child_of_another_no",
+      "label": "Line 4 — Could you (or your spouse if filing jointly) be claimed as a qualifying child of another taxpayer for the year entered on line 1? (No)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[1]",
+      "position": {
+        "page": 0,
+        "x": 547.2,
+        "y": 421.001
+      }
+    },
+    {
+      "fieldId": "form-8862.0.line.5a_child_1_name",
+      "label": "Line 5a — Child 1 name (as listed on Schedule EIC)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 99.8,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8862.0.line.5b_child_2_name",
+      "label": "Line 5b — Child 2 name (as listed on Schedule EIC)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 366.2,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8862.0.line.5c_child_3_name",
+      "label": "Line 5c — Child 3 name (as listed on Schedule EIC)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 99.8,
+        "y": 276.001
+      }
+    },
+    {
+      "fieldId": "form-8862.0.line.6_schedule_eic_qualifying_child_yes",
+      "label": "Line 6 — Does your completed Schedule EIC for the year entered on line 1 show that you had a qualifying child for the EIC? (Yes)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 241.001
+      }
+    },
+    {
+      "fieldId": "form-8862.0.line.6_schedule_eic_qualifying_child_no",
+      "label": "Line 6 — Does your completed Schedule EIC for the year entered on line 1 show that you had a qualifying child for the EIC? (No)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_6[1]",
+      "position": {
+        "page": 0,
+        "x": 547.2,
+        "y": 241.001
+      }
+    },
+    {
+      "fieldId": "form-8862.0.line.7_days_lived_in_us_child_1",
+      "label": "Line 7 — Enter the number of days each child lived with you in the United States during the year entered on line 1: Child 1",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Child1_CombField[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 98.8,
+        "y": 192.002
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8862.0.line.7_days_lived_in_us_child_2",
+      "label": "Line 7 — Enter the number of days each child lived with you in the United States during the year entered on line 1: Child 2",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Child2_CombField[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 214,
+        "y": 192.002
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8862.0.line.7_days_lived_in_us_child_3",
+      "label": "Line 7 — Enter the number of days each child lived with you in the United States during the year entered on line 1: Child 3",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Child3_CombField[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 329.2,
+        "y": 192.002
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_1_birth_month",
+      "label": "Line 8 — Child 1 date of birth (MM/DD): month",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Child1_Birth_Ln8[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 188.8,
+        "y": 120.002
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_1_birth_day",
+      "label": "Line 8 — Child 1 date of birth (MM/DD): day",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Child1_Birth_Ln8[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 226,
+        "y": 120.002
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_1_death_month",
+      "label": "Line 8 — Child 1 date of death (MM/DD): month",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Child1_Death_Ln8[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 426.4,
+        "y": 120.002
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_1_death_day",
+      "label": "Line 8 — Child 1 date of death (MM/DD): day",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Child1_Death_Ln8[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 463.6,
+        "y": 120.002
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_2_birth_month",
+      "label": "Line 8 — Child 2 date of birth (MM/DD): month",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Child2_Birth_Ln8[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 188.8,
+        "y": 108
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_2_birth_day",
+      "label": "Line 8 — Child 2 date of birth (MM/DD): day",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Child2_Birth_Ln8[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 226,
+        "y": 108
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_2_death_month",
+      "label": "Line 8 — Child 2 date of death (MM/DD): month",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Child2_Death_Ln8[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 426.4,
+        "y": 108
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_2_death_day",
+      "label": "Line 8 — Child 2 date of death (MM/DD): day",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Child2_Death_Ln8[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 463.6,
+        "y": 108
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_3_birth_month",
+      "label": "Line 8 — Child 3 date of birth (MM/DD): month",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Child3_Birth_Ln8[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 188.8,
+        "y": 96.001
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_3_birth_day",
+      "label": "Line 8 — Child 3 date of birth (MM/DD): day",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Child3_Birth_Ln8[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 226,
+        "y": 96.001
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_3_death_month",
+      "label": "Line 8 — Child 3 date of death (MM/DD): month",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Child3_Death_Ln8[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 426.4,
+        "y": 96.001
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8862.0.line.8_child_3_death_day",
+      "label": "Line 8 — Child 3 date of death (MM/DD): day",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Child3_Death_Ln8[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 463.6,
+        "y": 96.001
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8862.1.line.9a_days_main_home_us",
+      "label": "Line 9a — Enter the number of days during the year entered on line 1 that your main home was in the United States",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Ln9a_CombField[0].f2_01[0]",
+      "position": {
+        "page": 1,
+        "x": 532.8,
+        "y": 720
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8862.1.line.9b_spouse_days_main_home_us",
+      "label": "Line 9b — If married filing jointly, enter the number of days during the year entered on line 1 that your spouse's main home was in the United States",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Ln9b_CombField[0].f2_02[0]",
+      "position": {
+        "page": 1,
+        "x": 532.8,
+        "y": 696.002
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8862.1.line.10a_your_age_year_end",
+      "label": "Line 10a — Enter your age at the end of the year on line 1",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+      "position": {
+        "page": 1,
+        "x": 532.8,
+        "y": 648
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8862.1.line.10b_spouse_age_year_end",
+      "label": "Line 10b — Enter your spouse's age at the end of the year on line 1",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_04[0]",
+      "position": {
+        "page": 1,
+        "x": 532.8,
+        "y": 636.001
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8862.1.line.11a_you_claimed_as_dependent_yes",
+      "label": "Line 11a — Can you be claimed as a dependent on another taxpayer's return? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 577
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.11a_you_claimed_as_dependent_no",
+      "label": "Line 11a — Can you be claimed as a dependent on another taxpayer's return? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[1]",
+      "position": {
+        "page": 1,
+        "x": 547.2,
+        "y": 577
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.11b_spouse_claimed_as_dependent_yes",
+      "label": "Line 11b — Can your spouse (if filing jointly) be claimed as a dependent on another taxpayer's return? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 565.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.11b_spouse_claimed_as_dependent_no",
+      "label": "Line 11b — Can your spouse (if filing jointly) be claimed as a dependent on another taxpayer's return? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_2[1]",
+      "position": {
+        "page": 1,
+        "x": 547.2,
+        "y": 565.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.12a_ctc_child_1_name",
+      "label": "Line 12a — Name of child 1 for whom you are claiming the CTC/ACTC",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_05[0]",
+      "position": {
+        "page": 1,
+        "x": 99.8,
+        "y": 480.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.12b_ctc_child_2_name",
+      "label": "Line 12b — Name of child 2 for whom you are claiming the CTC/ACTC",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_06[0]",
+      "position": {
+        "page": 1,
+        "x": 366.2,
+        "y": 480.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.12c_ctc_child_3_name",
+      "label": "Line 12c — Name of child 3 for whom you are claiming the CTC/ACTC",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_07[0]",
+      "position": {
+        "page": 1,
+        "x": 99.8,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.12d_ctc_child_4_name",
+      "label": "Line 12d — Name of child 4 for whom you are claiming the CTC/ACTC",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_08[0]",
+      "position": {
+        "page": 1,
+        "x": 366.2,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.13a_odc_dependent_1_name",
+      "label": "Line 13a — Name of other dependent 1 for whom you are claiming the credit for other dependents (ODC)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_09[0]",
+      "position": {
+        "page": 1,
+        "x": 148.8,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.13b_odc_dependent_2_name",
+      "label": "Line 13b — Name of other dependent 2 for whom you are claiming the credit for other dependents (ODC)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 415.2,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.13c_odc_dependent_3_name",
+      "label": "Line 13c — Name of other dependent 3 for whom you are claiming the credit for other dependents (ODC)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 148.8,
+        "y": 384.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.13d_odc_dependent_4_name",
+      "label": "Line 13d — Name of other dependent 4 for whom you are claiming the credit for other dependents (ODC)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 415.2,
+        "y": 384.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.14_child_1_lived_with_you_yes",
+      "label": "Line 14 — Child 1: Did the child live with you for more than half of the year or meet an exception described in the instructions? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 100.8,
+        "y": 337.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.14_child_1_lived_with_you_no",
+      "label": "Line 14 — Child 1: Did the child live with you for more than half of the year or meet an exception described in the instructions? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_3[1]",
+      "position": {
+        "page": 1,
+        "x": 136.8,
+        "y": 337.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.14_child_2_lived_with_you_yes",
+      "label": "Line 14 — Child 2: Did the child live with you for more than half of the year or meet an exception described in the instructions? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 230.4,
+        "y": 337.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.14_child_2_lived_with_you_no",
+      "label": "Line 14 — Child 2: Did the child live with you for more than half of the year or meet an exception described in the instructions? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_4[1]",
+      "position": {
+        "page": 1,
+        "x": 266.4,
+        "y": 337.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.14_child_3_lived_with_you_yes",
+      "label": "Line 14 — Child 3: Did the child live with you for more than half of the year or meet an exception described in the instructions? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 337.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.14_child_3_lived_with_you_no",
+      "label": "Line 14 — Child 3: Did the child live with you for more than half of the year or meet an exception described in the instructions? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_5[1]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 337.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.14_child_4_lived_with_you_yes",
+      "label": "Line 14 — Child 4: Did the child live with you for more than half of the year or meet an exception described in the instructions? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 337.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.14_child_4_lived_with_you_no",
+      "label": "Line 14 — Child 4: Did the child live with you for more than half of the year or meet an exception described in the instructions? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_6[1]",
+      "position": {
+        "page": 1,
+        "x": 525.6,
+        "y": 337.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.15_child_1_qualifying_child_yes",
+      "label": "Line 15 — Child 1: Did the child meet the requirements to be a qualifying child for the CTC/ACTC? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 100.8,
+        "y": 301.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.15_child_1_qualifying_child_no",
+      "label": "Line 15 — Child 1: Did the child meet the requirements to be a qualifying child for the CTC/ACTC? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_7[1]",
+      "position": {
+        "page": 1,
+        "x": 136.8,
+        "y": 301.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.15_child_2_qualifying_child_yes",
+      "label": "Line 15 — Child 2: Did the child meet the requirements to be a qualifying child for the CTC/ACTC? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 230.4,
+        "y": 301.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.15_child_2_qualifying_child_no",
+      "label": "Line 15 — Child 2: Did the child meet the requirements to be a qualifying child for the CTC/ACTC? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_8[1]",
+      "position": {
+        "page": 1,
+        "x": 266.4,
+        "y": 301.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.15_child_3_qualifying_child_yes",
+      "label": "Line 15 — Child 3: Did the child meet the requirements to be a qualifying child for the CTC/ACTC? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 301.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.15_child_3_qualifying_child_no",
+      "label": "Line 15 — Child 3: Did the child meet the requirements to be a qualifying child for the CTC/ACTC? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_9[1]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 301.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.15_child_4_qualifying_child_yes",
+      "label": "Line 15 — Child 4: Did the child meet the requirements to be a qualifying child for the CTC/ACTC? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 301.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.15_child_4_qualifying_child_no",
+      "label": "Line 15 — Child 4: Did the child meet the requirements to be a qualifying child for the CTC/ACTC? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_10[1]",
+      "position": {
+        "page": 1,
+        "x": 525.6,
+        "y": 301.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.16_child_1_your_dependent_yes",
+      "label": "Line 16 — Child 1: Is that person your dependent? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 100.8,
+        "y": 265.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.16_child_1_your_dependent_no",
+      "label": "Line 16 — Child 1: Is that person your dependent? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_11[1]",
+      "position": {
+        "page": 1,
+        "x": 136.8,
+        "y": 265.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.16_child_2_your_dependent_yes",
+      "label": "Line 16 — Child 2: Is that person your dependent? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 230.4,
+        "y": 265.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.16_child_2_your_dependent_no",
+      "label": "Line 16 — Child 2: Is that person your dependent? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_12[1]",
+      "position": {
+        "page": 1,
+        "x": 266.4,
+        "y": 265.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.16_child_3_your_dependent_yes",
+      "label": "Line 16 — Child 3: Is that person your dependent? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 265.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.16_child_3_your_dependent_no",
+      "label": "Line 16 — Child 3: Is that person your dependent? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_13[1]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 265.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.16_child_4_your_dependent_yes",
+      "label": "Line 16 — Child 4: Is that person your dependent? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 265.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.16_child_4_your_dependent_no",
+      "label": "Line 16 — Child 4: Is that person your dependent? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_14[1]",
+      "position": {
+        "page": 1,
+        "x": 525.6,
+        "y": 265.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.16_other_dependent_1_your_dependent_yes",
+      "label": "Line 16 — Other dependent 1: Is that person your dependent? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 165.6,
+        "y": 241.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.16_other_dependent_1_your_dependent_no",
+      "label": "Line 16 — Other dependent 1: Is that person your dependent? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_15[1]",
+      "position": {
+        "page": 1,
+        "x": 201.6,
+        "y": 241.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.16_other_dependent_2_your_dependent_yes",
+      "label": "Line 16 — Other dependent 2: Is that person your dependent? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 241.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.16_other_dependent_2_your_dependent_no",
+      "label": "Line 16 — Other dependent 2: Is that person your dependent? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_16[1]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 241.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.16_other_dependent_3_your_dependent_yes",
+      "label": "Line 16 — Other dependent 3: Is that person your dependent? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 165.6,
+        "y": 229.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.16_other_dependent_3_your_dependent_no",
+      "label": "Line 16 — Other dependent 3: Is that person your dependent? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_17[1]",
+      "position": {
+        "page": 1,
+        "x": 201.6,
+        "y": 229.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.16_other_dependent_4_your_dependent_yes",
+      "label": "Line 16 — Other dependent 4: Is that person your dependent? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 229.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.16_other_dependent_4_your_dependent_no",
+      "label": "Line 16 — Other dependent 4: Is that person your dependent? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_18[1]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 229.002
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.17_child_1_us_citizen_resident_yes",
+      "label": "Line 17 — Child 1: Is that person a citizen, national, or resident of the United States? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 100.8,
+        "y": 169.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.17_child_1_us_citizen_resident_no",
+      "label": "Line 17 — Child 1: Is that person a citizen, national, or resident of the United States? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_19[1]",
+      "position": {
+        "page": 1,
+        "x": 136.8,
+        "y": 169.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.17_child_2_us_citizen_resident_yes",
+      "label": "Line 17 — Child 2: Is that person a citizen, national, or resident of the United States? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 230.4,
+        "y": 169.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.17_child_2_us_citizen_resident_no",
+      "label": "Line 17 — Child 2: Is that person a citizen, national, or resident of the United States? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_20[1]",
+      "position": {
+        "page": 1,
+        "x": 266.4,
+        "y": 169.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.17_child_3_us_citizen_resident_yes",
+      "label": "Line 17 — Child 3: Is that person a citizen, national, or resident of the United States? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 169.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.17_child_3_us_citizen_resident_no",
+      "label": "Line 17 — Child 3: Is that person a citizen, national, or resident of the United States? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_21[1]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 169.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.17_child_4_us_citizen_resident_yes",
+      "label": "Line 17 — Child 4: Is that person a citizen, national, or resident of the United States? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 169.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.17_child_4_us_citizen_resident_no",
+      "label": "Line 17 — Child 4: Is that person a citizen, national, or resident of the United States? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_22[1]",
+      "position": {
+        "page": 1,
+        "x": 525.6,
+        "y": 169.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.17_other_dependent_1_us_citizen_resident_yes",
+      "label": "Line 17 — Other dependent 1: Is that person a citizen, national, or resident of the United States? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 165.6,
+        "y": 145
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.17_other_dependent_1_us_citizen_resident_no",
+      "label": "Line 17 — Other dependent 1: Is that person a citizen, national, or resident of the United States? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_23[1]",
+      "position": {
+        "page": 1,
+        "x": 201.6,
+        "y": 145
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.17_other_dependent_2_us_citizen_resident_yes",
+      "label": "Line 17 — Other dependent 2: Is that person a citizen, national, or resident of the United States? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 145
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.17_other_dependent_2_us_citizen_resident_no",
+      "label": "Line 17 — Other dependent 2: Is that person a citizen, national, or resident of the United States? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_24[1]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 145
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.17_other_dependent_3_us_citizen_resident_yes",
+      "label": "Line 17 — Other dependent 3: Is that person a citizen, national, or resident of the United States? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 165.6,
+        "y": 133.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.17_other_dependent_3_us_citizen_resident_no",
+      "label": "Line 17 — Other dependent 3: Is that person a citizen, national, or resident of the United States? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_25[1]",
+      "position": {
+        "page": 1,
+        "x": 201.6,
+        "y": 133.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.17_other_dependent_4_us_citizen_resident_yes",
+      "label": "Line 17 — Other dependent 4: Is that person a citizen, national, or resident of the United States? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 133.001
+      }
+    },
+    {
+      "fieldId": "form-8862.1.line.17_other_dependent_4_us_citizen_resident_no",
+      "label": "Line 17 — Other dependent 4: Is that person a citizen, national, or resident of the United States? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_26[1]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 133.001
+      }
+    },
+    {
+      "fieldId": "form-8862.2.line.18a_student_1_name",
+      "label": "Line 18a — Student 1 name as listed on Form 8863",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_01[0]",
+      "position": {
+        "page": 2,
+        "x": 110.8,
+        "y": 672.001
+      }
+    },
+    {
+      "fieldId": "form-8862.2.line.18b_student_2_name",
+      "label": "Line 18b — Student 2 name as listed on Form 8863",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_02[0]",
+      "position": {
+        "page": 2,
+        "x": 377.2,
+        "y": 672.001
+      }
+    },
+    {
+      "fieldId": "form-8862.2.line.18c_student_3_name",
+      "label": "Line 18c — Student 3 name as listed on Form 8863",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_03[0]",
+      "position": {
+        "page": 2,
+        "x": 110.8,
+        "y": 648
+      }
+    },
+    {
+      "fieldId": "form-8862.2.line.19a_student_1_eligible_yes",
+      "label": "Line 19a — Did the student meet the requirements to be an eligible student for purposes of the AOTC for the year entered on line 1? Student 1: Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_1[0]",
+      "position": {
+        "page": 2,
+        "x": 115.2,
+        "y": 589.002
+      }
+    },
+    {
+      "fieldId": "form-8862.2.line.19a_student_1_eligible_no",
+      "label": "Line 19a — Did the student meet the requirements to be an eligible student for purposes of the AOTC for the year entered on line 1? Student 1: No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_1[1]",
+      "position": {
+        "page": 2,
+        "x": 151.2,
+        "y": 589.002
+      }
+    },
+    {
+      "fieldId": "form-8862.2.line.19a_student_2_eligible_yes",
+      "label": "Line 19a — Did the student meet the requirements to be an eligible student for purposes of the AOTC for the year entered on line 1? Student 2: Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_2[0]",
+      "position": {
+        "page": 2,
+        "x": 273.6,
+        "y": 589.002
+      }
+    },
+    {
+      "fieldId": "form-8862.2.line.19a_student_2_eligible_no",
+      "label": "Line 19a — Did the student meet the requirements to be an eligible student for purposes of the AOTC for the year entered on line 1? Student 2: No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_2[1]",
+      "position": {
+        "page": 2,
+        "x": 309.6,
+        "y": 589.002
+      }
+    },
+    {
+      "fieldId": "form-8862.2.line.19a_student_3_eligible_yes",
+      "label": "Line 19a — Did the student meet the requirements to be an eligible student for purposes of the AOTC for the year entered on line 1? Student 3: Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_3[0]",
+      "position": {
+        "page": 2,
+        "x": 432,
+        "y": 589.002
+      }
+    },
+    {
+      "fieldId": "form-8862.2.line.19a_student_3_eligible_no",
+      "label": "Line 19a — Did the student meet the requirements to be an eligible student for purposes of the AOTC for the year entered on line 1? Student 3: No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_3[1]",
+      "position": {
+        "page": 2,
+        "x": 468,
+        "y": 589.002
+      }
+    },
+    {
+      "fieldId": "form-8862.2.line.19b_student_1_prior_four_years_yes",
+      "label": "Line 19b — Has the Hope Scholarship Credit or AOTC been claimed for the student for any 4 tax years before the year entered on line 1? Student 1: Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_4[0]",
+      "position": {
+        "page": 2,
+        "x": 115.2,
+        "y": 541
+      }
+    },
+    {
+      "fieldId": "form-8862.2.line.19b_student_1_prior_four_years_no",
+      "label": "Line 19b — Has the Hope Scholarship Credit or AOTC been claimed for the student for any 4 tax years before the year entered on line 1? Student 1: No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_4[1]",
+      "position": {
+        "page": 2,
+        "x": 151.2,
+        "y": 541
+      }
+    },
+    {
+      "fieldId": "form-8862.2.line.19b_student_2_prior_four_years_yes",
+      "label": "Line 19b — Has the Hope Scholarship Credit or AOTC been claimed for the student for any 4 tax years before the year entered on line 1? Student 2: Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_5[0]",
+      "position": {
+        "page": 2,
+        "x": 273.6,
+        "y": 541
+      }
+    },
+    {
+      "fieldId": "form-8862.2.line.19b_student_2_prior_four_years_no",
+      "label": "Line 19b — Has the Hope Scholarship Credit or AOTC been claimed for the student for any 4 tax years before the year entered on line 1? Student 2: No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_5[1]",
+      "position": {
+        "page": 2,
+        "x": 309.6,
+        "y": 541
+      }
+    },
+    {
+      "fieldId": "form-8862.2.line.19b_student_3_prior_four_years_yes",
+      "label": "Line 19b — Has the Hope Scholarship Credit or AOTC been claimed for the student for any 4 tax years before the year entered on line 1? Student 3: Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_6[0]",
+      "position": {
+        "page": 2,
+        "x": 432,
+        "y": 541
+      }
+    },
+    {
+      "fieldId": "form-8862.2.line.19b_student_3_prior_four_years_no",
+      "label": "Line 19b — Has the Hope Scholarship Credit or AOTC been claimed for the student for any 4 tax years before the year entered on line 1? Student 3: No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_6[1]",
+      "position": {
+        "page": 2,
+        "x": 468,
+        "y": 541
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8862/blank.pdf",
+    "ingestedAt": "2026-11-26T23:59:19.451Z",
+    "totalFields": 109,
+    "skipped": 0,
+    "catalogEntries": 109
+  }
+}
