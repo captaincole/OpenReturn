@@ -26,10 +26,10 @@ The contingent payment rules for installment sales are in 26 CFR Part 15a, which
 
 ## Run
 
-From the repo root, with law.db installed (`npm run corpus -- law sync`) and Ollama running:
+From the repo root, with the law files installed (`npm run corpus -- law fetch`, or `law sync`) and Ollama running:
 
 ```bash
 npm run evals:law
 ```
 
-It runs every case in hybrid, fts and vector modes (no model call) and writes `docs/evals/law.md`. It needs all three documents in law.db.
+It runs every case in hybrid, fts and vector modes (no model call) and writes `docs/evals/law.md`. It needs all three documents: `federal.db` (the Code, the regulations) and `ca.db` (California's code).

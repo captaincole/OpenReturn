@@ -20,7 +20,7 @@ import { writeZip } from "./zipWrite";
 /*
  * Cuts the part of California's session archive that the library uses: one
  * code, one division, some parts, each whole or by chapters (caScope.ts).
- * The archive is a rolling file of about 1.3 GB, so law.db stores this
+ * The archive is a rolling file of about 1.3 GB, so ca.db stores this
  * extract instead. It keeps each table row as printed, each section's XML
  * file, and the scope it was cut with. One change makes it repeatable:
  * a section's XML file is named by the row's id ("lob/RTC17041.20252212.xml"),

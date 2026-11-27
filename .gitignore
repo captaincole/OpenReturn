@@ -42,6 +42,6 @@ sources/**/publication.pdf
 sources/**/instructions.html
 sources/**/publication.html
 sources/**/*.canonical.txt
-# The law library's source files: law.db stores them (`npm run corpus -- law sync`).
+# The law library's source files: the law files store them (`npm run corpus -- law sync`).
 sources/**/law.zip
 sources/**/law/**/*.xml

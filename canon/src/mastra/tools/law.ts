@@ -2,14 +2,20 @@ import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
 import { lawInstalled } from "../../db/libsql";
 import { jurisdictionsInputSchema } from "../../jurisdiction";
-import { LAW_NOT_INSTALLED, readLaw, type LawBlock } from "../../law/lawRead";
-import { searchLaw } from "../../law/lawSearch";
+import {
+  jurisdictionOfCitation,
+  lawNotInstalledMessage,
+  readLaw,
+  type LawBlock,
+} from "../../law/lawRead";
+import { lawCoverage, searchLaw, sourcesToSearch } from "../../law/lawSearch";
 
 /*
- * The law (law.db: the statute, the Treasury regulations and California's
- * personal income tax law) is a second library, searched only on purpose.
- * Both tools answer { installed: false } when law.db is missing, and never
- * create the file.
+ * The law (the statute, the Treasury regulations and California's tax law,
+ * one file per jurisdiction) is a second library, searched only on purpose.
+ * Both tools answer { installed: false } when no file they need is
+ * installed, and never create a file. A search that needs several
+ * jurisdictions searches the installed ones and names the others in missing.
  */
 
 const SOURCES = ["statute", "regulations", "california"] as const;
@@ -63,13 +69,27 @@ export const searchLawTool = createTool({
       .describe("Retrieval mode. Default 'hybrid'. Override only for evals or debugging."),
   }),
   outputSchema: z.union([
-    z.object({ installed: z.literal(true), query: z.string(), results: z.array(lawHitSchema) }),
+    z.object({
+      installed: z.literal(true),
+      query: z.string(),
+      results: z.array(lawHitSchema),
+      missing: z
+        .array(z.string())
+        .optional()
+        .describe(
+          "Jurisdictions asked for whose law is not installed; their law was not searched.",
+        ),
+      message: z.string().optional(),
+    }),
     notInstalled,
   ]),
   execute: async (input) => {
-    if (!(await lawInstalled())) return { installed: false as const, message: LAW_NOT_INSTALLED };
+    const { installed, missing } = await lawCoverage(sourcesToSearch(input));
+    const message = lawNotInstalledMessage(missing);
+    if (installed.length === 0) return { installed: false as const, message };
     const results = await searchLaw(input);
-    return { installed: true as const, query: input.query, results };
+    if (missing.length === 0) return { installed: true as const, query: input.query, results };
+    return { installed: true as const, query: input.query, results, missing, message };
   },
 });
 
@@ -109,7 +129,10 @@ export const readLawTool = createTool({
     notInstalled,
   ]),
   execute: async ({ citation }) => {
-    if (!(await lawInstalled())) return { installed: false as const, message: LAW_NOT_INSTALLED };
+    const jurisdiction = jurisdictionOfCitation(citation);
+    const missing = jurisdiction ? [jurisdiction] : undefined;
+    if (!(await lawInstalled(jurisdiction ?? undefined)))
+      return { installed: false as const, message: lawNotInstalledMessage(missing) };
     const reading = await readLaw(citation).catch((err: unknown) =>
       err instanceof Error ? err.message : String(err),
     );

@@ -12,7 +12,7 @@ import type { AskResult } from "../../../../src/mastra/workflows/ask/types";
  */
 
 const dir = mkdtempSync(path.join(tmpdir(), "canon-ask-statute-test-"));
-process.env.LAW_DB_PATH = path.join(dir, "law.db");
+process.env.LAW_DB_DIR = path.join(dir, "law");
 afterAll(() => rmSync(dir, { recursive: true, force: true }));
 
 const LAW = "usc-26-2025::sec::s461::l-3-B";
@@ -37,8 +37,8 @@ vi.mock("../../../../src/db/libsql", async (importOriginal) => {
   const actual = await importOriginal<typeof import("../../../../src/db/libsql")>();
   return {
     ...actual,
-    lawInstalled: () =>
-      law.installed === "real" ? actual.lawInstalled() : Promise.resolve(law.installed),
+    lawInstalled: (...args: Parameters<typeof actual.lawInstalled>) =>
+      law.installed === "real" ? actual.lawInstalled(...args) : Promise.resolve(law.installed),
   };
 });
 vi.mock("../../../../src/db/corpusSearch", () => ({
@@ -161,14 +161,15 @@ describe("answerQuestion and the statute", () => {
     ]);
   });
 
-  it("skips the search when law.db is not installed, logs why, and creates no file", async () => {
+  it("skips the search when no law file is installed, logs why, and creates no file", async () => {
     law.installed = "real";
     const { result, kinds, steps } = await run(fakeMastra([askStatute]));
     expect(law.search).not.toHaveBeenCalled();
-    expect(existsSync(process.env.LAW_DB_PATH!)).toBe(false);
+    expect(existsSync(process.env.LAW_DB_DIR!)).toBe(false);
     expect(kinds).toEqual(["formulate", "retrieve", "answer", "statute", "validate"]);
     expect(steps.find((step) => step.kind === "statute")).toMatchObject({
       skipped: "not_installed",
+      missing: expect.arrayContaining(["federal"]),
     });
     expect(result.statuteConsulted).toBe(false);
   });

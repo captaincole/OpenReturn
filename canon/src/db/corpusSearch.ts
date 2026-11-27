@@ -11,7 +11,7 @@ import {
   type RefBlockType,
   type SourceFormat,
 } from "./corpusStore";
-import { openLibraryDb, type Library } from "./libsql";
+import { isLawLibrary, jurisdictionOfLibrary, openLibraryDb, type Library } from "./libsql";
 
 export interface SearchHit {
   blockId: string;
@@ -389,6 +389,11 @@ export function fuseByRank(rows: MatchRow[]): { row: MatchRow; score: number }[]
     .sort((left, right) => right.score - left.score);
 }
 
+const reembedCommand = (library: Library): string =>
+  isLawLibrary(library)
+    ? `law reembed --jurisdiction ${jurisdictionOfLibrary(library)} --all`
+    : "reembed --all";
+
 // Cross-model cosine distances are meaningless, so a model mismatch skips the vector leg.
 async function embedQueryIfUsable(query: string, library: Library): Promise<number[] | null> {
   const { resolveEmbeddings, embedQuery } = await import("../refdocs/embeddings");
@@ -399,7 +404,7 @@ async function embedQueryIfUsable(query: string, library: Library): Promise<numb
       console.warn(
         `[hybridSearchRefDocs] ${library} embeddings were built with ${stored} ` +
           `but the active model is ${embedCfg.id} — skipping the vector ` +
-          `leg (FTS-only). Run \`npm run corpus -- ${library === "law" ? "law " : ""}reembed --all\` to rebuild.`,
+          `leg (FTS-only). Run \`npm run corpus -- ${reembedCommand(library)}\` to rebuild.`,
       );
       return null;
     }
