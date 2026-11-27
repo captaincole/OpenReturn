@@ -125,7 +125,29 @@ export function getClaimedDependentFacts(
 }
 
 /*
- * A child under 17 by relationship who lived with the taxpayer half the year
+ * The age test of a qualifying child (1040 instructions, Who Qualifies as Your
+ * Dependent, Step 1, irs-1040-inst-2025::sec::who-qualifies-as-your::b02):
+ * "Under age 19 at the end of 2025", or "Under age 24 at the end of 2025, a
+ * full-time student", or "Any age and permanently and totally disabled".
+ * "Younger than you" is not checked: this fact holds no filer's date of birth.
+ * Undefined while the student or disability answer the test needs is missing.
+ */
+export function passesQualifyingChildAgeTest(
+  dependent: DependentFactValue,
+  taxYear: number,
+): boolean | undefined {
+  if (dependent.permanentlyDisabled === true) return true;
+  const age = ageAtYearEnd(dependent.dob, taxYear);
+  if (age === undefined) return undefined;
+  if (age < 19) return true;
+  if (age < 24 && dependent.fullTimeStudent === true) return true;
+  if (age < 24 && dependent.fullTimeStudent === undefined) return undefined;
+  return dependent.permanentlyDisabled === undefined ? undefined : false;
+}
+
+/*
+ * A child by relationship and by the qualifying child age test (not only the
+ * child tax credit's under 17) who lived with the taxpayer half the year
  * or less, with no Form 8332 release (form8332Release false), is not this
  * taxpayer's dependent. The child fails the residency test of a qualifying
  * child, and a qualifying relative is a person "Who wasn't a qualifying child
@@ -141,11 +163,9 @@ export function isOtherParentsQualifyingChild(
   dependent: DependentFactValue,
   taxYear: number,
 ): boolean {
-  const age = ageAtYearEnd(dependent.dob, taxYear);
   return (
     dependent.form8332Release === false &&
-    age !== undefined &&
-    age < 17 &&
+    passesQualifyingChildAgeTest(dependent, taxYear) === true &&
     isQualifyingChildRelationship(dependent.relationship) &&
     livedWithTaxpayerOverHalfYear(dependent, taxYear) === false
   );
@@ -282,7 +302,10 @@ export function dependentCredit(
   const citizenOrResident = dependent.usCitizenOrResident;
   const hasTin = dependent.ssn !== undefined || dependent.tin !== undefined;
   const childByRelationship = age < 17 && isQualifyingChildRelationship(dependent.relationship);
-  if (childByRelationship && !livedOverHalfYear && dependent.form8332Release === undefined) {
+  const otherParentsChildByAge =
+    isQualifyingChildRelationship(dependent.relationship) &&
+    passesQualifyingChildAgeTest(dependent, taxYear) !== false;
+  if (otherParentsChildByAge && !livedOverHalfYear && dependent.form8332Release === undefined) {
     return undefined;
   }
   const qualifyingChild =

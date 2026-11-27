@@ -215,6 +215,39 @@ describe("what the release moves", () => {
     ]);
   });
 
+  /*
+   * ca-540-inst-2025::sec::line-10-dependent-exemptions::b01: "The persons you
+   * list as dependents must be the same persons you listed as dependents on
+   * your federal income tax return." Ellorien as a California resident.
+   */
+  it("Form 540 line 10 lists the same dependents: the released child leaves it", () => {
+    const california = [
+      ...ellorienDecisions.filter(
+        (each) =>
+          each.decisionKey !== "decisions.scope.must_file_ca_540" &&
+          each.decisionKey !== "decisions.scope.ca_residency",
+      ),
+      decision("decisions.scope.must_file_ca_540", true),
+      decision("decisions.scope.ca_residency", "full_year"),
+    ];
+    const run = evaluate(ellorienFacts, california);
+    expect(run.files("form-540")).toBe(true);
+    expect(run.value("form-540", "dependents.dep1_first_name")).toBe("Tobin");
+    expect(run.value("form-540", "dependents.dep2_first_name")).toBe("Senna");
+    expect(run.value("form-540", "dependents.dep3_first_name")).toBeUndefined();
+    expect(run.value("form-540", "line.10_dependent_exemption_count")).toBe(2);
+    expect(run.value("form-540", "line.10_dependent_exemption_amount")).toBe(950);
+    const noRelease = evaluate(
+      withDependent(ellorienFacts, TOBIN_KEY, { ...TOBIN, form8332Release: false }),
+      california,
+    );
+    expect(noRelease.value("form-540", "line.10_dependent_exemption_count")).toBe(1);
+    expect(noRelease.value("form-540", "line.10_dependent_exemption_amount")).toBe(475);
+    const unreleased = evaluate(noForm8332Facts, california);
+    expect(unreleased.value("form-540", "line.10_dependent_exemption_count")).toBe(3);
+    expect(unreleased.value("form-540", "line.10_dependent_exemption_amount")).toBe(1425);
+  });
+
   it("Form 8962's tax family leaves the released child out", () => {
     expect(evaluate(ellorienFacts).info.dependentCount).toBe(2);
     expect(evaluate(noForm8332Facts).info.dependentCount).toBe(3);

@@ -127,6 +127,35 @@ describe("dependentCredit", () => {
   });
 
   /*
+   * The qualifying child age test is under 19, under 24 and a full-time
+   * student, or permanently disabled (irs-1040-inst-2025::sec::who-qualifies-as-your::b02),
+   * not the child tax credit's under 17. So a 17-year-old who lived with the
+   * other parent is still that parent's qualifying child: no credit for other
+   * dependents here without a release.
+   */
+  it("a child of 17 to 23 who lived with the other parent is that parent's qualifying child", () => {
+    const son = { ...niece, relationship: "Son", monthsLivedWithYou: 3, form8332Release: false };
+    const seventeen = { ...son, dob: "03/01/2008" };
+    expect(isOtherParentsQualifyingChild(seventeen, 2025)).toBe(true);
+    expect(dependentCredit(seventeen, 2025)).toBe("none");
+    const facts = [{ key: "dependent.a", value: seventeen, category: "dependents" }];
+    expect(getClaimedDependentFacts(facts, 2025)).toEqual([]);
+    const student = { ...son, dob: "03/01/2004", fullTimeStudent: true };
+    expect(dependentCredit(student, 2025)).toBe("none");
+    const disabled = { ...son, dob: "03/01/1990", permanentlyDisabled: true };
+    expect(dependentCredit(disabled, 2025)).toBe("none");
+    const notStudent = {
+      ...son,
+      dob: "03/01/2004",
+      fullTimeStudent: false,
+      permanentlyDisabled: false,
+    };
+    expect(dependentCredit(notStudent, 2025)).toBe("other_dependents");
+    expect(dependentCredit({ ...seventeen, form8332Release: true }, 2025)).toBe("other_dependents");
+    expect(dependentCredit({ ...seventeen, form8332Release: undefined }, 2025)).toBeUndefined();
+  });
+
+  /*
    * irs-1040-inst-2025::sec::definitions-and-special-rules::b02: "only the
    * noncustodial parent can claim the child for purposes of the child tax
    * credit and credit for other dependents"; ::b03: the custodial parent keeps
