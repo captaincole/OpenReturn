@@ -27,8 +27,17 @@ export interface DisabledAccessOfBusiness {
   businessKey: string;
   business: BusinessFactValue;
   deductedOn: DisabledAccessDeductedOn;
+  /* The Part V entry's description, when deductedOn is "otherExpenses". */
+  otherExpense?: string;
   /* Its whole-dollar part of line 6; undefined while the form waits or has a gap. */
   share?: number;
+}
+
+/* One expense line's reduction: the line, the Part V entry when it is Part V, the dollars. */
+export interface DisabledAccessReduction {
+  deductedOn: DisabledAccessDeductedOn;
+  otherExpense?: string;
+  amount: number;
 }
 
 export interface DisabledAccessFigures {
@@ -68,23 +77,39 @@ function factGap(fact: DisabledAccessFact, business: BusinessFactValue | undefin
   return undefined;
 }
 
+/* The first Part V entry of the business with the fact's description. */
+export function namedOtherExpense(business: BusinessFactValue, description: string | undefined) {
+  return (business.otherExpenses ?? []).find((entry) => entry.description === description);
+}
+
 /* The stated amount of the expense line that holds the expenditures. */
 function statedExpense(credit: DisabledAccessOfBusiness): number {
   if (credit.deductedOn === "capitalized") return 0;
+  if (credit.deductedOn === "otherExpenses") {
+    return namedOtherExpense(credit.business, credit.otherExpense)?.amount ?? 0;
+  }
   return credit.business.expenses?.[credit.deductedOn] ?? 0;
 }
 
+/* The expense line a credit comes off, as one name: the line, and the Part V entry. */
+const lineOf = (credit: DisabledAccessOfBusiness) =>
+  credit.deductedOn === "otherExpenses"
+    ? `${credit.businessKey}|otherExpenses|${credit.otherExpense}`
+    : `${credit.businessKey}|${credit.deductedOn}`;
+
+const lineName = (credit: DisabledAccessOfBusiness) =>
+  credit.deductedOn === "otherExpenses"
+    ? `other expense "${credit.otherExpense}"`
+    : credit.deductedOn;
+
 /* Why the parts of line 6 cannot come off their expense lines; undefined when they can. */
 function expenseGap(credits: DisabledAccessOfBusiness[]): string | undefined {
-  const lines = [...new Set(credits.map((credit) => `${credit.businessKey}|${credit.deductedOn}`))];
-  for (const line of lines) {
-    const onLine = credits.filter(
-      (credit) => `${credit.businessKey}|${credit.deductedOn}` === line,
-    );
+  for (const line of new Set(credits.map(lineOf))) {
+    const onLine = credits.filter((credit) => lineOf(credit) === line);
     const reduction = sum(...onLine.map((credit) => credit.share));
     const stated = roundDollars(statedExpense(onLine[0]));
     if (reduction > stated) {
-      return `The disabled access credit of ${onLine[0].businessKey} ($${reduction}) is more than its stated ${onLine[0].deductedOn} ($${stated}), the expense line that holds the expenditures the credit reduces (irs-8826-form-2025::sec::line-6::b01).`;
+      return `The disabled access credit of ${onLine[0].businessKey} ($${reduction}) is more than its stated ${lineName(onLine[0])} ($${stated}), the expense line that holds the expenditures the credit reduces (irs-8826-form-2025::sec::line-6::b01).`;
     }
   }
   return undefined;
@@ -121,8 +146,8 @@ export function disabledAccessFigures(
   const credits = onReturn.flatMap((fact) => {
     const business = businessOf(fact);
     if (business === undefined) return [];
-    const { businessKey, deductedOn } = fact.value;
-    return [{ key: fact.key, businessKey, business, deductedOn }];
+    const { businessKey, deductedOn, otherExpense } = fact.value;
+    return [{ key: fact.key, businessKey, business, deductedOn, otherExpense }];
   });
   const { eligible, missing } = eligibilityOf(facts);
   const known = { ...base, credits, eligible, missing };
@@ -162,14 +187,15 @@ export function disabledAccessFigures(
 export function disabledAccessReductions(
   facts: ReadonlyArray<FactRow>,
   joint: boolean,
-): Map<string, Map<DisabledAccessDeductedOn, number>> {
+): Map<string, DisabledAccessReduction[]> {
   const figures = disabledAccessFigures(facts, joint);
-  const out = new Map<string, Map<DisabledAccessDeductedOn, number>>();
+  const out = new Map<string, DisabledAccessReduction[]>();
   if (figures.lines === undefined) return out;
-  for (const credit of figures.credits) {
-    const lines = out.get(credit.businessKey) ?? new Map<DisabledAccessDeductedOn, number>();
-    lines.set(credit.deductedOn, sum(lines.get(credit.deductedOn), credit.share));
-    out.set(credit.businessKey, lines);
+  for (const line of new Set(figures.credits.map(lineOf))) {
+    const onLine = figures.credits.filter((credit) => lineOf(credit) === line);
+    const { businessKey, deductedOn, otherExpense } = onLine[0];
+    const amount = sum(...onLine.map((credit) => credit.share));
+    out.set(businessKey, [...(out.get(businessKey) ?? []), { deductedOn, otherExpense, amount }]);
   }
   return out;
 }
@@ -180,5 +206,5 @@ export function disabledAccessReductionTotal(
   joint: boolean,
 ): number {
   const all = [...disabledAccessReductions(facts, joint).values()];
-  return sum(...all.flatMap((lines) => [...lines.values()]));
+  return sum(...all.flat().map((reduction) => reduction.amount));
 }

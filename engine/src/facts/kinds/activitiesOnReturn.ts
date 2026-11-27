@@ -14,6 +14,7 @@ import {
   statedBusinessesOnReturn,
   type BusinessExpenses,
   type BusinessFactValue,
+  type BusinessOtherExpense,
 } from "./business.js";
 import { placesPersonalProperty, type ScopedDepreciation } from "./depreciation.js";
 import { statedRentalsOnReturn, type RentalFactValue } from "./rental.js";
@@ -156,12 +157,29 @@ function withDisabledAccessCredit<T extends { key: string; value: BusinessFactVa
     const lines = reductions.get(business.key);
     if (lines === undefined) return business;
     const expenses: BusinessExpenses = { ...business.value.expenses };
-    for (const [line, reduction] of lines) {
-      if (line === "capitalized") continue;
-      expenses[line] = atLeast(0, (expenses[line] ?? 0) - reduction);
+    let otherExpenses = business.value.otherExpenses;
+    for (const { deductedOn, otherExpense, amount } of lines) {
+      if (deductedOn === "capitalized") continue;
+      if (deductedOn === "otherExpenses") {
+        otherExpenses = lessOnOtherExpense(otherExpenses ?? [], otherExpense, amount);
+        continue;
+      }
+      expenses[deductedOn] = atLeast(0, (expenses[deductedOn] ?? 0) - amount);
     }
-    return { ...business, value: { ...business.value, expenses } };
+    return { ...business, value: { ...business.value, expenses, otherExpenses } };
   });
+}
+
+/* The Part V entries with the first one of the description lowered by the amount. */
+function lessOnOtherExpense(
+  entries: BusinessOtherExpense[],
+  description: string | undefined,
+  amount: number,
+): BusinessOtherExpense[] {
+  const at = entries.findIndex((entry) => entry.description === description);
+  return entries.map((entry, index) =>
+    index === at ? { ...entry, amount: atLeast(0, entry.amount - amount) } : entry,
+  );
 }
 
 /*

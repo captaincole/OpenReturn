@@ -23,13 +23,15 @@ type FactRow = { key: string; value: unknown; category: string };
 
 /*
  * Where the business deducts the expenditures: a Schedule C expense line
- * (BusinessExpenses), or "capitalized" when they were added to the basis of
- * property. Depreciation and depletion are allowances, not payments, so an
- * expenditure is never stated as one of them: capitalized property's
- * depreciation is the "capitalized" case.
+ * (BusinessExpenses), "otherExpenses" for one Part V entry (line 48, where the
+ * Schedule C instructions put the deduction for removing barriers,
+ * irs-1040sc-inst-2025::sec::part-v::b03), or "capitalized" when they were
+ * added to the basis of property. Depreciation and depletion are allowances,
+ * not payments, so an expenditure is never stated as one of them:
+ * capitalized property's depreciation is the "capitalized" case.
  */
 export type DisabledAccessDeductedOn =
-  Exclude<keyof BusinessExpenses, "depreciation" | "depletion"> | "capitalized";
+  Exclude<keyof BusinessExpenses, "depreciation" | "depletion"> | "otherExpenses" | "capitalized";
 
 export interface DisabledAccessFactValue {
   /* The Schedule C business (`business.<id>`) that paid or incurred the expenditures and deducts them. */
@@ -44,6 +46,13 @@ export interface DisabledAccessFactValue {
   expenditures: number;
   /* The expense line of Schedule C that holds the expenditures, before the credit. */
   deductedOn: DisabledAccessDeductedOn;
+  /*
+   * With deductedOn "otherExpenses" only, and then required: the description
+   * of the business fact's Part V entry that holds the expenditures, as stated
+   * there ("Barrier removal"). The first entry with that description takes
+   * the reduction.
+   */
+  otherExpense?: string;
   /*
    * A member of a controlled group of corporations or of businesses under
    * common control figures the credit on the group's expenditures and enters
@@ -111,8 +120,15 @@ const DEDUCTED_ON: ReadonlyArray<DisabledAccessDeductedOn> = [
   "utilities",
   "wages",
   "energyEfficientBuildings",
+  "otherExpenses",
   "capitalized",
 ];
+
+/* A Part V entry is named exactly when the line is Part V. */
+const namesItsOtherExpense = (fact: Record<string, unknown>) =>
+  fact.deductedOn === "otherExpenses"
+    ? typeof fact.otherExpense === "string" && fact.otherExpense !== ""
+    : fact.otherExpense === undefined;
 
 function isDisabledAccess(value: unknown): value is DisabledAccessFactValue {
   if (typeof value !== "object" || value === null) return false;
@@ -121,6 +137,7 @@ function isDisabledAccess(value: unknown): value is DisabledAccessFactValue {
     typeof fact.businessKey === "string" &&
     isAmount(fact.expenditures) &&
     DEDUCTED_ON.includes(fact.deductedOn as DisabledAccessDeductedOn) &&
+    namesItsOtherExpense(fact) &&
     (fact.memberOfControlledGroup === undefined ||
       typeof fact.memberOfControlledGroup === "boolean")
   );

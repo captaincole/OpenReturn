@@ -12,6 +12,7 @@ import {
   makeGeneralBusinessCreditFactKey,
   makeK1HoldingFactKey,
   makePartnershipK1FactKey,
+  type BusinessFactValue,
   type DisabledAccessFactValue,
 } from "../../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../../src/facts/rows.js";
@@ -316,6 +317,45 @@ describe("who files", () => {
   });
 });
 
+describe("expenditures deducted in Part V (other expenses)", () => {
+  /*
+   * The Schedule C instructions list the deduction for removing barriers in
+   * Part V (irs-1040sc-inst-2025::sec::part-v::b03). The ramp's $7,400 moves
+   * from repairs to a Part V entry; its part of line 6 is still 3,593
+   * (4,200 × 7,400 / 8,650), and it comes off that entry: 7,400 − 3,593.
+   */
+  const inPartV: BusinessFactValue = {
+    ...gym,
+    expenses: { ...gym.expenses, repairs: 15900 - 7400 },
+    otherExpenses: [
+      { description: "Climbing wall inspection", amount: 900 },
+      { description: "Barrier removal", amount: 7400 },
+    ],
+  };
+  const barrier = { deductedOn: "otherExpenses" as const, otherExpense: "Barrier removal" };
+
+  it("the part of line 6 comes off the named entry, and lines 27b and 48 fall with it", () => {
+    const out = evaluate(factsWith({ ...ramp(barrier), [GYM_KEY]: inPartV }));
+    expect(out.line(L6)).toBe(4200);
+    expect(out.value("schedule-c", REPAIRS)).toBe(8500);
+    expect(out.value("schedule-c", CONTRACT_LABOR)).toBe(4600 - 607);
+    expect(out.value("schedule-c", "1.line.48")).toBe(900 + 7400 - 3593);
+    expect(out.value("schedule-c", "0.line.27b")).toBe(900 + 7400 - 3593);
+    expect(out.value("schedule-c", "1.line.48_amount_1")).toBe(900);
+    expect(out.value("schedule-c", "1.line.48_amount_2")).toBe(7400 - 3593);
+  });
+
+  it("a Part V fact with no entry named is asked again", () => {
+    const out = evaluate(factsWith(ramp({ deductedOn: "otherExpenses" })));
+    expect(out.missing("form-8826")).toContain(RAMP_KEY);
+  });
+
+  it("an entry named on a line that is not Part V is asked again", () => {
+    const out = evaluate(factsWith(ramp({ otherExpense: "Barrier removal" })));
+    expect(out.missing("form-8826")).toContain(RAMP_KEY);
+  });
+});
+
 describe("gaps", () => {
   it("expenditures that name no business on the return", () => {
     const out = evaluate(factsWith(ramp({ businessKey: makeBusinessFactKey("elsewhere") })));
@@ -351,6 +391,16 @@ describe("gaps", () => {
     expect(out.line(L6)).toBe(5000);
     expect(out.value("schedule-c", "0.line.8")).toBe(6200 - 4706);
     expect(out.value("schedule-c", CONTRACT_LABOR)).toBe(4600 - 294);
+  });
+
+  it("a part of line 6 above the named Part V entry, or a Part V entry the business does not list", () => {
+    const barrier = { deductedOn: "otherExpenses" as const, otherExpense: "Barrier removal" };
+    const small = { ...gym, otherExpenses: [{ description: "Barrier removal", amount: 1000 }] };
+    const above = evaluate(factsWith({ ...ramp(barrier), [GYM_KEY]: small }));
+    expect(isGap(above.field("form-8826", L6))).toBe(true);
+    expect(above.value("schedule-c", "1.line.48")).toBe(1000);
+    const unlisted = evaluate(factsWith(ramp(barrier)));
+    expect(isGap(unlisted.field("form-8826", L6))).toBe(true);
   });
 
   it("a stated Form 3800 line 1e credit with no entity is a gap: Form 8826 figures it", () => {
