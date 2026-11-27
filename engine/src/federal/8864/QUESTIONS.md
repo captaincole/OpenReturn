@@ -19,11 +19,19 @@ The two decisions where texts conflict are in `docs/rule-decisions.md` (A110, A1
 11. **K-1 from an estate, a trust or a cooperative.** A K-1 (Form 1041) box 13 code O has no route in the engine (`passThrough/trustBoxes.ts`), and Form 1099-PATR is not read. Default: such a credit is a stated Form 3800 line 1l or 1ff credit with the entity's EIN, and line 10 adds it. A stated line 1l credit with no EIN next to a production fact is a gap, so the taxpayer's own credit is not counted twice.
 12. **California.** California has no instruction on this federal credit income. The engine adds nothing to Schedule CA; California starts from federal AGI, so the income stays in. Not checked against California law.
 13. **Statute not read.** The law library is not installed in this worktree, so no statute was read for doubts 1, 2 or the decisions.
+14. **Line 9 adds the rounded lines 7 and 8.** Form 1040: "include cents when adding the amounts and round off only the total" (`irs-1040-inst-2025::sec::rounding-off-to-whole::b01`). The form: "9 Add lines 7 and 8" (`irs-8864-face-2025::sec::face-page-1::b01`), and lines 7(c) and 8(c) are whole-dollar lines of their own. Default: line 9 adds the two lines as entered, the repository rule for a line that is arithmetic on other lines (CLAUDE.md, rounding). The blind fill chose the same. Changes dollars: at most $1 (5 and 3 gallons give $1 + $1 = $2, against $1.10 → $1 with cents).
+15. **Line 10 with no statement.** The entity "must tell you the number of gallons for which it claimed the credit and its productive capacity" (`line-10::b01`), but the K-1 says "If no statement is attached, report this amount on Form 8864, line 10" (`irs-1065k1-inst-2025::sec::box-15-credits::b09`). Default: a K-1 with no statement is the whole code AC amount on line 10, and one source alone never fails the partner-level limits (doubt 2). Changes dollars: only when the partner has other agri-biodiesel and the sources together pass a limit, which is a named gap when the K-1 states its gallons.
 
 ## Proposals for a discussion
 
 - **Routing K-1 (Form 1041) credits.** A trust K-1 box 13 credit, code O among them, has no route and makes Schedule E line 41 unsupported. A route for trust credits to Form 3800 would let line 10 read them as it reads partnership K-1s.
 - **Schedule C Part III.** Schedule C does not model cost of goods sold. A producer that sells its agri-biodiesel keeps inventory, so lines 5 to 31 of its Schedule C stay blank, and the return stops there. The `nela` scenario uses fuel burned in the producer's own trucks for that reason.
+
+## Second opinions
+
+- Blind fill (2026-11-27): a preparer filled 14 cases from the blank form and the December 2025 instructions only. All 126 values match the engine, with no blank-against-0 differences either. The preparer's doubts that change dollars are doubts 2, 5, 14 and 15.
+- PolicyEngine-US 2.154.1 (commit 0fbed6ddb1): does not model Form 8864. Its only trace is the bare input `general_business_credit` (Form 3800), with no formula; it has no biodiesel, renewable diesel or SAF rate, no 15-million or 60-million gallon limit, and no rule for the credit in income. Nothing to compare.
+- IRS Direct File (commit e365f9f): its fact dictionary (backend/src/main/resources/tax) has no Form 8864, no Form 3800 and no Schedule C. Nothing to compare.
 
 ## Confidence
 
