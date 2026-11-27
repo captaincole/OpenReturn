@@ -180,6 +180,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "its Medicare-only tips are missing",
   ],
   [
+    /^childcare_expenditure\.[^.]+$/,
+    "each fact is one whole childcare expenditure the business claims the credit for (Form " +
+      "8882 lines 1 and 3); whether one exists is Cade's question. Form 8882 lists the fact " +
+      "again while it is malformed",
+  ],
+  [
     /^section_965\.(inclusion|other_liability|s_corporation|deferred)\.[^.]+$/,
     "each fact is one whole line of last year's Form 965-A (Part I with its Part II line, a " +
       "Part III row or a Part IV row); whether one exists is Cade's question. Form 965-A lists " +

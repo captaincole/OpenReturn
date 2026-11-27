@@ -19,6 +19,7 @@ import type { ResolverInputs } from "../../resolverInputs.js";
 import { figuredOnForm3468, form3468CreditSources } from "../3468/credit.js";
 import { workOpportunitySources } from "../5884/sources.js";
 import { tipCreditSourcesOf } from "../8846/form3800.js";
+import { childcareCreditSourcesOf } from "../8882/form3800.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
 import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
 import { gap, type Cell } from "./cells.js";
@@ -202,9 +203,13 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
   // Line 4f: Form 8846 line 4, the credit on the taxpayer's own tipped employees (8846/form3800.ts).
   const tips = tipCreditSourcesOf(inputs);
   missing.push(...tips.missing);
+  // Line 1k: Form 8882 lines 2 and 4, the credit of the taxpayer's own childcare expenditures (8882/form3800.ts).
+  const childcare = childcareCreditSourcesOf(inputs);
+  missing.push(...childcare.missing);
   const current = [
     ...stated,
     ...tips.sources,
+    ...childcare.sources,
     ...k1.flatMap((found) => (found.source ? [found.source] : [])),
     ...form3468.sources,
     ...workOpportunity.sources,

@@ -8,8 +8,13 @@
  */
 
 import { tipCreditReductions } from "../../federal/8846/figures.js";
+import { childcareCreditReductions } from "../../federal/8882/figures.js";
 import { atLeast, sum } from "../../money.js";
-import { statedBusinessesOnReturn, type BusinessFactValue } from "./business.js";
+import {
+  statedBusinessesOnReturn,
+  type BusinessExpenses,
+  type BusinessFactValue,
+} from "./business.js";
 import { placesPersonalProperty, type ScopedDepreciation } from "./depreciation.js";
 import { statedRentalsOnReturn, type RentalFactValue } from "./rental.js";
 import { section179RecaptureByBusiness } from "./section179Recapture.js";
@@ -133,18 +138,62 @@ function withTipCredit<T extends { key: string; value: BusinessFactValue }>(
   });
 }
 
+/* Each named amount less its reduction; the reductions were checked against the amounts (federal/8882/places.ts). */
+function lessEach(amounts: BusinessExpenses, reductions: Map<string, number>): BusinessExpenses {
+  const out: Record<string, number | undefined> = { ...amounts };
+  for (const [name, reduction] of reductions) {
+    if (reduction !== 0) out[name] = sum(out[name]) - reduction;
+  }
+  return out as BusinessExpenses;
+}
+
+/*
+ * Form 8882 line 7 comes off where the business has the expenditures: "You
+ * must reduce: The basis of any qualified childcare facility by the amount of
+ * the credit on line 7 allocable to capital expenditures ... Any otherwise
+ * allowable deductions used to figure the credit by the amount of the credit
+ * on line 7 allocable to those deductions" (irs-8882-form-2025::sec::form-8882-rev-12-2017-page-2::b01):
+ * a Schedule C expense line, a Part V expense, or the cost of a 2025 asset,
+ * which is its basis for depreciation on Form 4562 (column (c),
+ * irs-4562-inst-2025::sec::section-b::b08).
+ */
+function withChildcareCredit<T extends { key: string; value: BusinessFactValue }>(
+  businesses: T[],
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): T[] {
+  const all = childcareCreditReductions(facts, joint);
+  if (all.size === 0) return businesses;
+  return businesses.map((business) => {
+    const reductions = all.get(business.key);
+    if (reductions === undefined) return business;
+    const { value } = business;
+    const otherExpenses = value.otherExpenses?.map((each) => ({
+      ...each,
+      amount: each.amount - (reductions.otherExpenses.get(each.description) ?? 0),
+    }));
+    const assets = value.depreciation?.assets?.map((each) => ({
+      ...each,
+      cost: each.cost - (reductions.assets.get(each.description) ?? 0),
+    }));
+    const depreciation = value.depreciation && { ...value.depreciation, assets };
+    const expenses = lessEach(value.expenses ?? {}, reductions.expenses);
+    return { ...business, value: { ...value, expenses, otherExpenses, depreciation } };
+  });
+}
+
 /*
  * statedBusinessesOnReturn, with the return's depreciation scope, its Form 4797
- * Part IV recapture, its wages less the work opportunity credit and its taxes
- * less the Form 8846 credit. The two credits lower different expense lines, so
- * their order does not matter.
+ * Part IV recapture, its wages less the work opportunity credit, its taxes
+ * less the Form 8846 credit and its childcare expenditures less the Form 8882
+ * credit. Each credit takes off a fixed amount, so their order does not matter.
  */
 export function businessesOnReturn(facts: ReadonlyArray<FactRow>, joint: boolean) {
   const result = statedBusinessesOnReturn(facts, joint);
   const shared = activitiesWithPersonalProperty(facts, joint) >= SHARED_TEST_MINIMUM;
   const businesses = withRecapture(marked(result.businesses, shared), facts);
-  const reduced = withWorkOpportunityWages(businesses, facts);
-  return { ...result, businesses: withTipCredit(reduced, facts, joint) };
+  const reduced = withTipCredit(withWorkOpportunityWages(businesses, facts), facts, joint);
+  return { ...result, businesses: withChildcareCredit(reduced, facts, joint) };
 }
 
 /* statedRentalsOnReturn, with the return's depreciation scope. */
