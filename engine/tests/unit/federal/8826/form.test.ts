@@ -10,6 +10,7 @@ import {
   makeBusinessFactKey,
   makeDisabledAccessFactKey,
   makeGeneralBusinessCreditFactKey,
+  makeK1HoldingFactKey,
   makePartnershipK1FactKey,
   type DisabledAccessFactValue,
 } from "../../../../src/facts/index.js";
@@ -21,6 +22,7 @@ import {
   GYM_KEY,
   PARTNERSHIP_ID,
   gym,
+  partnershipK1,
 } from "../../../scenarios/synthetic/elam/facts.js";
 import { elamScenario as base } from "../../../scenarios/synthetic/elam/index.js";
 import { RESTROOM_KEY } from "../../../scenarios/synthetic/flann/facts.js";
@@ -270,6 +272,30 @@ describe("the limits", () => {
     expect(out.line(L8)).toBe(5_000);
     expect(out.value("schedule-c", REPAIRS)).toBe(15900 - 5000);
     expect(out.value("form-3800", COL_E)).toBe(5_000);
+  });
+});
+
+describe("line 7 with two K-1s that show cents (decision A103)", () => {
+  const SECOND_ID = "truckee-crag";
+  const withCents = { ...partnershipK1, boxes: [{ box: "15", code: "K", amount: 300.4 }] };
+  const second = { ...withCents, entityName: "Truckee Crag LLC", entityEin: "88-4418827" };
+  const holding = {
+    owner: "taxpayer",
+    materiallyParticipated: true,
+    allInvestmentAtRisk: true,
+    partnershipBasisAtStart: 30000,
+  };
+
+  it("each K-1 rounds before the add: $300.40 and $300.40 give $600, as Form 3800 line 1e", () => {
+    const out = evaluate(
+      factsWith({ [K1_KEY]: withCents }, [
+        row("k1", makePartnershipK1FactKey(SECOND_ID), second),
+        row("k1", makeK1HoldingFactKey(SECOND_ID), holding),
+      ]),
+    );
+    expect(out.line(L7)).toBe(600);
+    expect(out.line(L8)).toBe(4800);
+    expect(out.value("form-3800", COL_E)).toBe(4800);
   });
 });
 

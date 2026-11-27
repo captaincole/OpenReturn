@@ -26,6 +26,15 @@ The form (Rev. September 2017) and its instructions publish no example with numb
 - **A stated Form 3800 line 1e credit with no entity, next to the expenditure facts.** The engine cannot tell whether they are the same credit.
 - **A K-1 code K with no amount.** The entity's statement gives it.
 
+## Second opinions
+
+- **Blind fill** (15 cases, from the blank form and instructions only): one dollar difference, settled for the engine.
+  - Case 13, line 7 ($600 against $601) and line 8 ($975 against $976): two K-1s of $300.40. The blind fill added the cents and rounded the total (the 1040 rule, `irs-1040-inst-2025::sec::rounding-off-to-whole::b01`). The engine rounds each K-1 first, so line 8 equals Form 3800 line 1e, whose Part V lists one amount "by the EIN of the pass-through entity" (`irs-3800-inst-2025::sec::part-v-3::b01`). That is row A103, the same rule as row A96 for Form 8846; kept, with a unit test (item 8).
+  - Case 12 (a K-1 alone, the form filed anyway): lines 1 to 6 blank in the engine, $0 in the blind fill. No dollar change (item 11).
+  - Blind doubts with no dollar change match the engine's defaults: a form with a zero credit (cases 2 and 3), line 7 blank with no K-1, the $5,000 limit on lines 6 and 7 together, the half dollar on line 6 rounding up (item 5), and the "or" of the two prior-year tests (item 4).
+- **PolicyEngine-US 2.154.1** (commit 0fbed6ddb1): it does not model Form 8826. `general_business_credit` is a bare input ("General business credit from Form 3800") with no formula, and no variable or parameter names the disabled access credit or section 44. Nothing to compare.
+- **Other projects:** the repository names no other reference implementation of business credits.
+
 ## Proposals for a discussion
 
 - **Farms and rentals.** Schedule F and Schedule E could take the reduction the same way, on the expense line the fact names (`facts/kinds/activitiesOnReturn.ts` has a `rentalsOnReturn` and farm facts of their own). Today such a fact is a gap.
