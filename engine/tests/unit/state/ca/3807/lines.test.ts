@@ -100,13 +100,21 @@ describe("Worksheet I, Section A edges", () => {
     expect(WHOLLY_WITHIN_LAMBRA).toBe(1);
   });
 
-  it("keeps four places, the half up", () => {
-    // (1/3 + 1/2) / 2 = 0.416666… → 0.4167
+  it("cuts each factor and the average to four places, as the booklet prints 66.66%", () => {
+    // 100/300 = 0.3333…, 100/200 = 0.5; (0.3333 + 0.5) / 2 = 0.41665 → 0.4166
     const share = averageApportionment([
       { california: 300, lambra: 100 },
       { california: 200, lambra: 100 },
     ]);
-    expect(share).toBe(0.4167);
+    expect(share).toBe(0.4166);
+    expect(lambraBusinessIncome([apportioned(100_000, share)])).toBe(41_660);
+  });
+
+  it("cuts a factor whose float product falls just under the place", () => {
+    // 29/100 × 10,000 is 2,899.9999999999995 in floats: still 0.29
+    expect(averageApportionment([{ california: 100, lambra: 29 }])).toBe(0.29);
+    // 2/3 = 0.6666… → 0.6666, not 0.6667
+    expect(averageApportionment([{ california: 3, lambra: 2 }])).toBe(0.6666);
   });
 });
 

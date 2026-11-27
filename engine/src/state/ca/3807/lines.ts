@@ -6,7 +6,7 @@
  * The booklet's examples with numbers are unit tests (.scratch evidence).
  */
 
-import { atLeast, roundDollars, roundToPlaces, sum } from "../../../money.js";
+import { atLeast, roundDollars, sum, wholePart } from "../../../money.js";
 
 /* "Use credit code 198 to claim the LAMBRA hiring credit and sales or use tax credit carryover" (ca-3807-booklet-2025::sec::schedule-z-computation-of-credit-carryover-limitations::b05). */
 export const LAMBRA_CREDIT_CODE = "198";
@@ -30,12 +30,22 @@ export const BUSINESS_CREDIT_LIMIT = 5_000_000;
 export const WHOLLY_WITHIN_LAMBRA = 1;
 
 /*
- * The places the average apportionment percentage keeps. The booklet's
- * combined report example prints 73.33% and multiplies $250,000 by it to get
- * $183,325 (ca-3807-booklet-2025::sec::corporations-filing-a-combined-report::b03),
- * so the percentage keeps two decimals of a percent: four places (QUESTIONS.md).
+ * The places each factor and the average apportionment percentage keep. The
+ * booklet's combined report example prints 800,000 ÷ 1,200,000 as 66.66%, the
+ * average as 73.33%, and multiplies $250,000 by it to get $183,325
+ * (ca-3807-booklet-2025::sec::corporations-filing-a-combined-report::b03): two
+ * decimals of a percent, four places, with the digits after them dropped
+ * (66.666…% is 66.66%, not 66.67%). QUESTIONS.md item 5.
  */
 export const PERCENTAGE_PLACES = 4;
+
+/* The small tolerance absorbs float error only (0.29 × 10,000 is 2,899.9999999999995). */
+const FLOAT_TOLERANCE = 1e-9;
+const PERCENTAGE_SCALE = 10 ** PERCENTAGE_PLACES;
+
+/* A percentage of Section A cut to four places, as the booklet's example prints it. */
+const toFourPlaces = (share: number): number =>
+  wholePart(share * PERCENTAGE_SCALE + FLOAT_TOLERANCE) / PERCENTAGE_SCALE;
 
 /* One factor of Section A: the California total (column (a)) and the LAMBRA total (column (b)). */
 export interface Factor {
@@ -49,15 +59,16 @@ export interface Factor {
  * (a)". "Factors with zero balances in the totals of column (a) will not be
  * included": with no payroll the line divides by one
  * (ca-3807-booklet-2025::sec::payroll-factor-2::b03). A factor is never above
- * 1. With no factor at all the share is 0.
+ * 1. With no factor at all the share is 0. Each column (c) percentage and
+ * the average keep four places (PERCENTAGE_PLACES).
  */
 export function averageApportionment(factors: readonly Factor[]): number {
   const counted = factors.filter((factor) => factor.california > 0);
   if (counted.length === 0) return 0;
   const shares = counted.map((factor) =>
-    Math.min(1, atLeast(0, factor.lambra) / factor.california),
+    toFourPlaces(Math.min(1, atLeast(0, factor.lambra) / factor.california)),
   );
-  return roundToPlaces(sum(...shares) / counted.length, PERCENTAGE_PLACES);
+  return toFourPlaces(sum(...shares) / counted.length);
 }
 
 /* One row of Worksheet I, Section B: column (a) times column (b), with cents. */
@@ -183,7 +194,26 @@ export function scheduleZPartI(
  * credits limited by line 7, the hiring credit first (line 9A column (e) is
  * line 8A column (e) less what line 8B column (e) used). Each credit is "never
  * greater than col. (d) or col. (e)" (the form), so the pair is the smaller of
- * line 7 and the two carryovers (QUESTIONS.md).
+ * line 7 and the two carryovers.
+ *
+ * DECISION (2026-11-26, by the author): Schedule P (540) column (a) holds the
+ * LAMBRA credit after the Schedule Z line 7 limit, not the whole carryover.
+ * - Schedule P (540): column (a) is "the amount of credit available to offset
+ *   tax", column (b) "the smaller of the amount in column (a) or the amount in
+ *   column (c) from the previous line", and column (d) the carryover, column
+ *   (a) less column (b) (ca-540-sched-p-inst-2025::sec::column-a-through-column-d-instructions::b01).
+ * - FTB 3807: "The amount of credit carryover you can claim on your California
+ *   tax return is limited by the amount of tax attributable to LAMBRA business
+ *   income" (ca-3807-booklet-2025::sec::schedule-z-computation-of-credit-carryover-limitations::b01),
+ *   and line 9B column (g) "includes both the Schedule P ... limitation and the
+ *   limitation based on LAMBRA business income"
+ *   (::part-ii-limitation-of-credits-for-corporations-individuals-estates-and-trusts::b04),
+ *   which Schedule P column (d) equals only when column (a) is the whole carryover.
+ * The engine follows the column arithmetic: with the whole carryover in column
+ * (a), column (b) could pass line 7 and use credit the LAMBRA limit forbids.
+ * Schedule P column (d) then holds only the part Schedule P limits; FTB 3807
+ * line 9B column (g) holds the whole carryover. FTB 3801-CR's passive credits
+ * enter Schedule P the same way, after their own limit.
  */
 export const creditOffered = (line7: number, hiring: number, salesUse: number): number =>
   Math.min(atLeast(0, line7), atLeast(0, hiring) + atLeast(0, salesUse));

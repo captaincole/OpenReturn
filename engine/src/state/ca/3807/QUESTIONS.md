@@ -13,12 +13,20 @@ leave open, what the engine does, and whether it changes dollars.
    cannot be greater than the amount on line 8A, column (e) or the amount
    computed on line 8B, column (d)"
    (`ca-3807-booklet-2025::sec::part-ii-limitation-of-credits-for-corporations-individuals-estates-and-trusts::b01`).
-   Default: column (a) is the credit already limited by line 7, so column (b)
-   never passes line 7. Column (d) then carries only the part Schedule P
+   Decided (row A80 in `docs/rule-decisions.md`, the DECISION comment in
+   `lines.ts`): column (a) is the credit already limited by line 7, so column
+   (b) never passes line 7. Column (d) then carries only the part Schedule P
    limits; FTB 3807 line 9B column (g) carries all of it ("This carryover
    includes both the Schedule P ... limitation and the limitation based on
    LAMBRA business income", `::b04`). Dollars: no tax changes; only Schedule
-   P column (d).
+   P columns (a) and (d). The blind fill put the whole carryover in column
+   (a) and line 1c in column (b); that breaks column (b), "the smaller of the
+   amount in column (a) or the amount in column (c) from the previous line"
+   (`ca-540-sched-p-inst-2025::sec::column-a-through-column-d-instructions::b01`),
+   whenever the tax over TMT is above line 7 (blind case 10: $3,000 against
+   line 7 $1,535). With line 7 at 0 (a loss, or an NOL that takes all the
+   LAMBRA income) the engine writes no Schedule P row; the blind fill wrote
+   one with column (b) 0.
 2. **One Schedule P line for both credits.** Both credits use code 198
    (`ca-540-sched-p-inst-2025::sec::credit-table::b06`), and "Do not enter the
    same credit code or name on more than one line within a section"
@@ -37,12 +45,19 @@ leave open, what the engine does, and whether it changes dollars.
    you do not have any business income attributable to the former LAMBRA and
    you cannot utilize any LAMBRA NOL carryover or credit carryover(s)"
    (`::located-within-and-outside-the-former-lambra-and-california::b03`).
-   Default: Schedule Z line 1 is 0 and every credit carries forward. Dollars:
-   none.
+   Default: Schedule Z line 1 is 0 and every credit carries forward. The
+   line 14 instruction enters the amount on line 1 only when it "is a
+   positive amount" (`::b02`). The blind fill entered the loss (−$30,000) on
+   lines 1 and 5, as the form face reads alone. Dollars: none; line 6a and
+   every credit are the same.
 5. **Decimal places of line 2.** No text sets them. The combined report
-   example prints 73.33% and gets $183,325 from $250,000
-   (`::corporations-filing-a-combined-report::b03`). Default: four places, the
-   half up, from the unrounded factors. Dollars: under $1 for each $10,000.
+   example prints 800,000 ÷ 1,200,000 as 66.66%, the average as 73.33%, and
+   gets $183,325 from $250,000 (`::corporations-filing-a-combined-report::b03`).
+   Default: each factor and the average are cut to four places (66.666…% is
+   66.66%), as the example prints them. The blind fill found this; the
+   engine first rounded the average of the exact factors half up (0.4167,
+   not 0.4166, for factors 1/3 and 1/2). Dollars: under $1 for each $10,000
+   of income ($10 on $100,000 in the blind case, with the same tax).
 6. **Carryover periods are not checked.** A credit "remaining for carryover to
    taxable years beginning on or after January 1, 2014, shall be carried over
    only to the succeeding 10 taxable years"
@@ -74,6 +89,26 @@ leave open, what the engine does, and whether it changes dollars.
     credit then. Dollars: only with that contrary decision.
 11. **Two NOL deductions.** With an FTB 3805V NOL deduction on Schedule CA
     line 9b2, line 9b3 is unsupported: no text orders the two deductions.
+
+12. **Booklet NOL dates.** `::what-s-new::b02` and
+    `::part-iii-net-operating-loss-nol-carryover-and-deduction::b03` read "on
+    or after January 1, 2025, and before January 1, 2025"; `::general-information::b04`
+    has the 2024 dates. No LAMBRA NOL arises after 2013, so no dollars change.
+
+## Second opinions
+
+- **PolicyEngine-US 2.154.1** (commit `0fbed6dd`, sparse checkout of
+  `variables/gov/states/ca` and `parameters/gov/states/ca`, 2026-11-26): no
+  LAMBRA, enterprise zone or other California business credit carryover is
+  modeled (the California credits are the dependent care, renter, earned
+  income, foster youth and young child credits). Nothing to compare.
+- **IRS Direct File**: federal only, with no California logic. Nothing to
+  compare.
+- **The blind fill** (14 cases, 2026-11-26): it matched the engine on every
+  line of FTB 3807 and Schedule Z except line 2 in one case (item 5, the
+  engine changed) and lines 1 and 5 with a loss (item 4, the engine kept 0).
+  Schedule P columns (a) and (d) differ by decision A80 (item 1). Its 0
+  against blank differences (Schedule Z line 4 with no NOL) change no dollars.
 
 ## Proposals for a discussion
 
