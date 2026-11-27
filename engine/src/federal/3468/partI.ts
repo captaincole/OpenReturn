@@ -25,11 +25,11 @@ const COORDINATE_PLACES = 6;
 const usDate = (date: string) => ISODate.usSlash(isoDate(date));
 
 /* The comb boxes of line 3d: 2 for the latitude's degrees, 3 for the longitude's, 6 after the point. */
-const LATITUDE_DIGITS = 2;
-const LONGITUDE_DIGITS = 3;
+export const LATITUDE_DIGITS = 2;
+export const LONGITUDE_DIGITS = 3;
 
-/* Line 3d: the sign box, the whole degrees filling their boxes, and the digits after the point. */
-function coordinate(prefix: string, degrees: number, wholeDigits: number): Lines {
+/* Line 3d: the sign box, the whole degrees filling their boxes, and the digits after the point (Form 8835 line 3b prints the same boxes). */
+export function coordinate(prefix: string, degrees: number, wholeDigits: number): Lines {
   const size = roundToPlaces(Math.abs(degrees), COORDINATE_PLACES);
   const [, decimal] = String(size).split(".");
   return {
