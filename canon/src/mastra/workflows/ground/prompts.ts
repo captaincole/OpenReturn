@@ -28,7 +28,7 @@ export async function formulateQueries(
     `  rationale: ${decision.rationale}`,
     `  supportingFactKeys: ${decision.supportingFactKeys.join(", ") || "(none)"}`,
     ``,
-    `Emit 1–2 search queries that would surface the IRS guidance governing this kind of decision.`,
+    `Emit 1–2 search queries that would surface the IRS or FTB guidance governing this kind of decision.`,
   ].join("\n");
 
   // Anthropic rejects `maxItems`, so the prompt and the slice cap the count.
@@ -48,7 +48,7 @@ export function renderAssessPrompt(carrier: LoopCarrier): string {
     `Supporting facts (from tax_facts):`,
     factLines(carrier.evidence!.facts),
     ``,
-    `Retrieved IRS passages (top hits across ${carrier.evidence!.queriesUsed.length} query/queries):`,
+    `Retrieved IRS and FTB passages (top hits across ${carrier.evidence!.queriesUsed.length} query/queries):`,
     blockLines(carrier.evidence!.irsBlocks),
     ``,
     `Assess the risk tier of this decision per your instructions.`,
@@ -73,7 +73,7 @@ export function renderRulePrompt(carrier: LoopCarrier, note?: string): string {
     `Supporting facts (from tax_facts):`,
     factLines(evidence.facts),
     ``,
-    `Retrieved IRS passages (this iteration: ${carrier.iteration}, queries: ${evidence.queriesUsed.join(" | ")}):`,
+    `Retrieved IRS and FTB passages (this iteration: ${carrier.iteration}, queries: ${evidence.queriesUsed.join(" | ")}):`,
     blockLines(evidence.irsBlocks),
     ``,
     statuteSection(evidence.statuteBlocks),
@@ -113,11 +113,11 @@ function statuteSection(blocks: EvidenceBundle["statuteBlocks"]): string {
     blocks.map((block) => block.blockId),
     "short",
   );
-  return `Statute passages (${names}, the law the IRS passages explain; consulted once in this review):\n${lines.join("\n")}\n`;
+  return `Statute passages (${names}, the law the passages above explain; consulted once in this review):\n${lines.join("\n")}\n`;
 }
 
 function blockLines(blocks: EvidenceBundle["irsBlocks"]): string {
-  if (!blocks.length) return "  (no IRS passages retrieved)";
+  if (!blocks.length) return "  (no passages retrieved)";
   return blocks
     .map(
       (block) =>
