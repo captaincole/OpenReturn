@@ -15,6 +15,8 @@ None.
 5. **Other federal Schedule D sources.** Form 6781, 8824, 8621, 8814, 4684 and a Form 6252 capital asset sale send federal Schedule D (so line 10) an amount that line 1 has no California amount for on a 540NR return. Each is a gap on lines 4 to 12b and on Schedule CA (540NR) line 7a columns B and C (`sources.ts`). Schedule D (540) carries FTB 3805E and Schedule D-1 rows, and omits the others silently; not changed here.
 6. **Line 1 with more than 22 sales.** As on Schedule D (540): every row is unsupported, and the totals add every sale.
 7. **Header name on a joint return.** As on Schedule D (540): the taxpayer's name only. Changes no dollars.
+8. **Line 8 is exactly 0.** Line 8 covers only "If the amount on line 4 is more than the amount on line 7" and "If the amount on line 7 is more than the amount on line 4" (`::line-8-net-gain-or-loss::b01`). Default: the form's arithmetic. Line 8 and line 11 are 0, line 9 is blank, and lines 12a and 12b compare line 10 with 0. A blank line 11 would drop the adjustment (gain $2,000 less carryover $2,000, federal $2,000: line 12a $2,000).
+9. **Federal Form 1040 line 7a is blank.** Line 12a says "Compare the amounts entered on line 10 and line 11" (`::line-12a::b01`). Default: line 10 is 0 when the federal line is blank, so the comparison runs. A blank line 10 would drop the adjustment (a carryover of $6,500 alone: line 11 ($3,000), line 12a $3,000).
 
 ## Field groups
 
@@ -27,6 +29,12 @@ None.
 | Line 10 | federal Form 1040 line 7a | stated rule |
 | Lines 12a and 12b | line 10 against line 11 | published example with numbers (the four examples under lines 12a and 12b) |
 | Schedule CA (540NR) line 7a columns B and C | lines 12a and 12b | stated rule |
+
+## Second opinions
+
+- **PolicyEngine-US 2.154.1** (commit `0fbed6dd`, 2026-11-26). It does not model this form. Its California AGI (`variables/gov/states/ca/tax/income/ca_agi.py`) is federal AGI plus a list of additions, less a list of subtractions; neither list has a capital gain difference, and it has no Form 540NR. Its federal loss limit (`parameters/gov/irs/capital_gains/loss_limit.yaml`) is $3,000, or $1,500 married filing separately, the same as line 9 (`::line-9::b01`). No difference.
+- **Other projects.** The TaxCalcBench California cases are full-year resident Form 540 returns. IRS Direct File (issue #140) is federal only. Nothing else in the repository models this form.
+- **Blind fill** (2026-11-26, 14 cases): no line differs, in dollars or as blank against 0. Its dollar doubts are doubts 8 and 9 above; the engine and the blind preparer chose the same. Its other doubts change no dollars: an empty total is blank, both lines 12a and 12b are blank when line 10 equals line 11, a loss on line 8 is negative, and married filing jointly and head of household take the $3,000 limit.
 
 ## Proposals for a discussion
 
