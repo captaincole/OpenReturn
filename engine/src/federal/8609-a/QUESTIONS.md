@@ -8,7 +8,7 @@ Form 8586 has no rules yet. Its line 3 takes "the total credit for attached Form
 
 ## Decided, with conflicting texts (docs/rule-decisions.md)
 
-1. **Decimals: 4 places, rounded** (row A96, `lines.ts`). Each decimal is "carried out to at least four places" (`line-2::b01`). Changes dollars by under $1 a line.
+1. **Decimals: 4 places, rounded** (row A96, `lines.ts`). Each decimal is "carried out to at least four places" (`line-2::b01`). Changes a few dollars a line. In the blind cases, exact fractions would give $3,000 on line 10, not $2,993 (two-thirds of 4% on $225,000 of additions). They would also give $37,500 on line 6, not $37,494 (a first-year line 2 of 5/24 on a $2,000,000 building).
 2. **The 11th year** (row A97, `copies.ts`). Lines 1, 2, 3 and 5 print, 4 and 6 to 15 are blank, line 16 is 0, lines 17 and 18 hold the deferred credit. Changes dollars: the whole year's credit.
 3. **Line 17's factor** (row A98, `copies.ts`). The example uses 1.0000 − .1250 (`line-17::b01`); the engine uses the first year's close portion less its modified percentage. Changes dollars when the building was not all low-income at the close of its first year.
    - **For docs/law-findings.md:** the example disagrees with the statute. Text A: "If this is the 11th year, enter 0.8750 times the eligible basis of the building (line 1) times the credit percentage (line 5). The factor 0.8750 is 1.0000 minus 0.1250" (`irs-8609a-inst-2025::sec::line-17::b01`). Text B: "Any reduction by reason of subparagraph (A) in the credit allowable (without regard to subparagraph (A)) for the 1st taxable year of the credit period shall be allowable under subsection (a) for the 1st taxable year following the credit period" (`usc-26-2025::sec::s42::f-2`). The credit "without regard to subparagraph (A)" uses the fraction at the close of the year (`usc-26-2025::sec::s42::c-1-A`), .5000 in the example, not 1.0000.
@@ -42,6 +42,13 @@ Form 8586 has no rules yet. Its line 3 takes "the total credit for attached Form
 ## Rendering: items C, D and E print only "Yes"
 
 The PDF has one checkbox field for each of items C, D and E (`c1_03`, `c1_05`, `c1_07`) with two widgets: "Yes" (on state `Yes`, x 487) and "No" (on state `no`, x 508). The catalog has one boolean row for each field, so `true` checks "Yes" and `false` leaves both boxes empty. A rebuild with `catalog-form-fields` gives the same rows: the extractor reads one field, not its widgets. The engine's values are right (`false` is "No"); only the printed form lacks the mark. Item B's two boxes (`c1_01`, `c1_01a`) are separate fields and print correctly.
+
+## Second opinions
+
+- **Blind fill** (2026-11-27, 15 cases): a preparer filled Part II by hand from the blank form and the instructions. No dollar difference. Case 2 (the 11th year) has five blank-or-zero differences: lines 4, 6, 13, 14 and 15 are blank in the engine and 0 in the blind fill (item 2, row A97). The blind fill's dollar doubts are rows A96 to A99 and items 8, 9, 13 and 15.
+- **PolicyEngine-US 2.154.1** (commit `0fbed6dd`, 2026-11-26). It does not model the low-income housing credit: no Form 8609-A or 8586 lines, no section 42 parameters. `general_business_credit` is a bare input with no formula (`variables/gov/irs/credits/general_business/general_business_credit.py`). Nothing to compare.
+- **Other projects.** The repository names no other reference implementation that models Form 8609-A. IRS Direct File (issue #140) is not checked out here, and it does not support business credits.
+- **Catalog against the blank PDF** (2026-11-27). Items C, D and E are each one checkbox field with two widgets (`Yes` at x 487, `no` at x 508); the catalog has one boolean row for each. Item B's two boxes are separate fields with one widget each. The catalog matches what the extractor reads, so it is not rebuilt (see "Rendering" above).
 
 ## Proposals for a discussion
 
