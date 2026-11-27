@@ -54,6 +54,9 @@ const FORMAT_OF: Record<LawSource, string> = {
   california: "caml",
 };
 
+/** The format of a source's document in law.db (a sidecar's format). */
+export const formatOfSource = (source: LawSource): string => FORMAT_OF[source];
+
 /** "uslm" is the statute, "ecfr" the regulations, "caml" California's code. */
 export const sourceOfFormat = (format: string): LawSource =>
   (Object.keys(FORMAT_OF) as LawSource[]).find((source) => FORMAT_OF[source] === format) ??

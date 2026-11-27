@@ -92,7 +92,7 @@ California's source is the Legislature's session archive (`sourceUrl`, about 1.3
 | `law fetch` | install the prebuilt law.db (`canon/seed/law.manifest.json`) |
 | `law sync [--force] [--doc <docId>]` | build it from the sidecars: no model call, only local embedding (about 17 minutes for the Code, about 1 hour 40 minutes for the regulations). `--doc` limits it to one document |
 | `law check` | row counts and embedding coverage |
-| `law search "q" [--mode …] [--limit n] [--source statute\|regulations\|california]` | search the law; with no `--source` the statute and the regulations take turns in the results, and California is left out |
+| `law search "q" [--mode …] [--limit n] [--source statute\|regulations\|california] [--jurisdiction federal\|CA\|federal,CA]` | search the law; `--jurisdiction` searches the sources of each jurisdiction named (federal: the statute and the regulations; CA: California's code), taking turns; with neither flag the statute and the regulations take turns in the results, and California is left out |
 | `law read <citation>` | print a section or subdivision with block ids: `469`, `"469(g)(1)(A)"`, a regulation `"1.469-5T(a)(1)"`, California's `"CA 17041(a)"`, or a block id |
 | `law extract-ca <zip>` | cut California's extract out of the Legislature's session archive into `law.zip` next to its sidecar |
 | `law reembed [--all]` | embed the blocks that have no vector; `--all` after a model switch |

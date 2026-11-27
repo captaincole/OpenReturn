@@ -192,6 +192,62 @@ describe("the law tools with law.db", () => {
     ).toBe(true);
   });
 
+  it("search the law of the jurisdictions named, each source on its own, taking turns", async () => {
+    const query = "the";
+    const sourcesOf = async (input: object) => {
+      const result = await call(searchLawTool, { query, mode: "fts", limit: 25, ...input });
+      return (result.results as { source: string }[]).map((hit) => hit.source);
+    };
+    expect(new Set(await sourcesOf({ jurisdictions: ["CA"] }))).toEqual(new Set(["california"]));
+    expect(new Set(await sourcesOf({ jurisdictions: ["federal"] }))).toEqual(
+      new Set(["statute", "regulations"]),
+    );
+    expect(await sourcesOf({ jurisdictions: ["federal"] })).toEqual(await sourcesOf({}));
+    const all = await sourcesOf({ jurisdictions: ["CA", "federal"] });
+    expect(all.slice(0, 6)).toEqual([
+      "statute",
+      "regulations",
+      "california",
+      "statute",
+      "regulations",
+      "california",
+    ]);
+  });
+
+  it("take a source with a list that holds its jurisdiction, and refuse one that does not", async () => {
+    const one = await call(searchLawTool, {
+      query: "resident",
+      mode: "fts",
+      source: "california",
+      jurisdictions: ["federal", "CA"],
+    });
+    expect((one.results as { source: string }[]).every((hit) => hit.source === "california")).toBe(
+      true,
+    );
+    await expect(
+      call(searchLawTool, {
+        query: "resident",
+        source: "california",
+        jurisdictions: ["federal"],
+      }),
+    ).rejects.toThrow(
+      'source "california" is CA law, and jurisdictions ["federal"] does not include "CA"',
+    );
+    await expect(
+      call(searchLawTool, { query: "resident", section: "469", jurisdictions: ["CA"] }),
+    ).rejects.toThrow(/section "469" is in source "statute", which is federal law/);
+  });
+
+  it("refuses an empty or unknown list", async () => {
+    const { searchLaw } = await import("../../../../src/law/lawSearch.js");
+    await expect(searchLaw({ query: "resident", jurisdictions: [] })).rejects.toThrow(
+      /Name at least one jurisdiction/,
+    );
+    await expect(searchLaw({ query: "resident", jurisdictions: ["NY" as never] })).rejects.toThrow(
+      /Unknown jurisdiction "NY"/,
+    );
+  });
+
   it("read a California citation, and keep a bare number the Code's", async () => {
     const resident = await call(readLawTool, { citation: "CA 17014(a)(1)" });
     expect(resident).toMatchObject({

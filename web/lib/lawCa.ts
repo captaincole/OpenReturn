@@ -7,8 +7,8 @@
 
 const BLOCK_ID_MARK = "::";
 const SECTION_SLUG_PREFIX = "s";
-/** law.db's California documents are "ca-rtc-<year>". */
-export const CA_DOC_PREFIX = "ca-";
+/** law.db's California documents are "ca-rtc-<year>"; FTB documents are "ca-540-inst-2025". */
+export const CA_DOC_PREFIX = "ca-rtc-";
 const CA_PAGE_PREFIX = "CA-";
 const VERSION_MARK = "-v";
 const NUMBER_DOT = ".";

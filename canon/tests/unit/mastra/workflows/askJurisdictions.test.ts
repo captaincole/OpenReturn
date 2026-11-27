@@ -19,7 +19,31 @@ const fakes = vi.hoisted(() => ({
       score: 1,
     },
   ]),
-  lawSearch: vi.fn(async () => []),
+  lawSearch: vi.fn(async ({ source }: { source?: string }) =>
+    source === "california"
+      ? [
+          {
+            blockId: "ca-rtc-2025::sec::s17073.5::a",
+            source: "california",
+            citation: "Cal. Rev. & Tax. Code § 17073.5(a)",
+            sectionHeading: "§ 17073.5",
+            headings: [],
+            text: "The standard deduction shall be an amount set by this section.",
+            score: 1,
+          },
+        ]
+      : [
+          {
+            blockId: "usc-26-2025::sec::s63::c-1",
+            source: "statute",
+            citation: "26 U.S.C. § 63(c)(1)",
+            sectionHeading: "§ 63",
+            headings: [],
+            text: "The term standard deduction means the sum of the basic standard deduction.",
+            score: 1,
+          },
+        ],
+  ),
 }));
 
 vi.mock("../../../../src/db/corpusSearch", () => ({ hybridSearchRefDocs: fakes.refSearch }));
@@ -53,8 +77,10 @@ const partial = {
 };
 const settled = { ...partial, coverage: "covered", gaps: [] };
 
-function fakeMastra(prompts: { formulate: string[]; answer: string[] }): Mastra {
-  const answers = [partial, settled, settled];
+function fakeMastra(
+  prompts: { formulate: string[]; answer: string[] },
+  answers: object[] = [partial, settled, settled],
+): Mastra {
   const agents: Record<string, (prompt: string) => Promise<unknown>> = {
     askQueryFormulator: async (prompt) => {
       prompts.formulate.push(prompt);
@@ -71,10 +97,10 @@ function fakeMastra(prompts: { formulate: string[]; answer: string[] }): Mastra 
   } as unknown as Mastra;
 }
 
-async function run(jurisdictions?: ("federal" | "CA")[]) {
+async function run(jurisdictions?: ("federal" | "CA")[], answers?: object[]) {
   const prompts = { formulate: [] as string[], answer: [] as string[] };
   const steps: AskStepLog[] = [];
-  const result = await answerQuestion(fakeMastra(prompts), {
+  const result = await answerQuestion(fakeMastra(prompts, answers), {
     question: "What is the standard deduction?",
     jurisdictions,
     steps,
@@ -84,6 +110,10 @@ async function run(jurisdictions?: ("federal" | "CA")[]) {
   );
   return { result, steps, prompts, searched };
 }
+
+// The source of each law search, in call order: the statute round runs once.
+const lawSources = () =>
+  fakes.lawSearch.mock.calls.map(([opts]) => (opts as { source?: string }).source);
 
 describe("answerQuestion and the jurisdictions", () => {
   it("searches California only for ['CA'], in the first round and the gap round", async () => {
@@ -96,14 +126,66 @@ describe("answerQuestion and the jurisdictions", () => {
     });
   });
 
-  it("skips the federal statute for ['CA'] and logs why", async () => {
-    const { result, steps } = await run(["CA"]);
-    expect(fakes.lawSearch).not.toHaveBeenCalled();
-    expect(result.statuteConsulted).toBe(false);
+  it("searches California's code for ['CA'], once, and never the federal law", async () => {
+    const { result, steps, prompts } = await run(["CA"]);
+    expect(lawSources()).toEqual(["california"]);
+    expect(result.statuteConsulted).toBe(true);
+    expect(result.statutePassages.map((passage) => passage.blockId)).toEqual([
+      "ca-rtc-2025::sec::s17073.5::a",
+    ]);
     expect(steps.find((step) => step.kind === "statute")).toMatchObject({
-      skipped: "federal_off",
-      why: expect.stringContaining("federal"),
+      sources: ["california"],
     });
+    const last = prompts.answer.at(-1)!;
+    expect(last).toContain(
+      "Statute passages (California's Revenue and Taxation Code, the law the passages above explain):",
+    );
+    expect(last).toContain("[3] Cal. Rev. & Tax. Code § 17073.5(a)");
+    expect(last).not.toContain("Internal Revenue Code");
+  });
+
+  it("cites a California passage with its citation and California's title, and checks its quote", async () => {
+    const reply = {
+      ...settled,
+      answer: "It is listed [1]. California sets it [3].",
+      citations: [
+        { passage: 1, quote: "is listed here" },
+        { passage: 3, quote: "set by this section" },
+      ],
+      conflicts: [
+        {
+          kind: "statute_vs_statute",
+          a: { passage: 1, quote: "is listed here" },
+          b: { passage: 3, quote: "set by this section" },
+          note: "n",
+        },
+        {
+          kind: "instruction_vs_statute",
+          a: { passage: 1, quote: "is listed here" },
+          b: { passage: 3, quote: "not in the passage" },
+          note: "misquote",
+        },
+      ],
+    };
+    const { result } = await run(["CA"], [partial, settled, reply]);
+    expect(result.citations[1]).toMatchObject({
+      blockId: "ca-rtc-2025::sec::s17073.5::a",
+      documentTitle: "California Revenue and Taxation Code",
+      citation: "Cal. Rev. & Tax. Code § 17073.5(a)",
+      quote: "set by this section",
+    });
+    expect(result.conflicts).toEqual([
+      {
+        kind: "instruction_vs_statute",
+        a: { blockId: "ca-540-inst-2025::sec::q1::b01", quote: "is listed here" },
+        b: {
+          blockId: "ca-rtc-2025::sec::s17073.5::a",
+          quote: "set by this section",
+          citation: "Cal. Rev. & Tax. Code § 17073.5(a)",
+        },
+        note: "n",
+      },
+    ]);
   });
 
   it("tells both judges which libraries were searched, in one line", async () => {
@@ -120,16 +202,27 @@ describe("answerQuestion and the jurisdictions", () => {
       ["federal", "CA"],
     ]);
     expect(result.jurisdictions).toEqual(["federal", "CA"]);
-    expect(fakes.lawSearch).toHaveBeenCalledTimes(1);
+    expect(lawSources()).toEqual(["statute", "california"]);
+    expect(result.statutePassages.map((passage) => passage.blockId)).toEqual([
+      "usc-26-2025::sec::s63::c-1",
+      "ca-rtc-2025::sec::s17073.5::a",
+    ]);
+    expect(prompts.answer.at(-1)).toContain(
+      "Statute passages (the Internal Revenue Code and California's Revenue and Taxation Code, the law the passages above explain):",
+    );
     expect([...prompts.formulate, ...prompts.answer].join("\n")).not.toContain(
       "Libraries searched",
     );
   });
 
-  it("searches the statute for ['federal']", async () => {
-    const { result } = await run(["federal"]);
-    expect(fakes.lawSearch).toHaveBeenCalledTimes(1);
+  it("searches the Code alone for ['federal'], with the header as before", async () => {
+    const { result, prompts } = await run(["federal"]);
+    expect(lawSources()).toEqual(["statute"]);
     expect(result.jurisdictions).toEqual(["federal"]);
+    expect(result.citations).toHaveLength(1);
+    expect(prompts.answer.at(-1)).toContain(
+      "Statute passages (the Internal Revenue Code, the law the passages above explain):",
+    );
   });
 
   it("refuses a bad list before any judge runs", async () => {
