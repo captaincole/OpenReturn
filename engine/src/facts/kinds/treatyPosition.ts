@@ -11,7 +11,8 @@
  *
  * Every answer is stated. The engine does not decide whether a treaty applies,
  * whether reporting is waived, or what the position is worth: the amount the
- * position changes is recorded where it lands (a Schedule 1 line 8z item, a
+ * position changes is recorded where it lands (a Schedule 1 line 8z item
+ * marked treatyExempt, a
  * Form 1116 foreign tax), never here. No document holds these answers.
  */
 

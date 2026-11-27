@@ -109,6 +109,7 @@ export const irellaFacts: TaxFactRow[] = [
       {
         description: "Exempt income, People's Republic of China, Article 20(c)",
         amount: -IRELLA_EXEMPT_WAGES,
+        treatyExempt: true,
       },
     ],
     `${VERBAL}: the treaty exemption, in parentheses on Schedule 1 line 8z (Pub. 519, chapter 9).`,

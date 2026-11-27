@@ -22,7 +22,7 @@ The Form 8833 instructions waive reporting for "income derived by ... students" 
 | Input | Values |
 | --- | --- |
 | W-2, Prairie Crest State University | box 1 $31,400, box 2 $1,620; boxes 3 to 6 blank (student exception) |
-| Schedule 1 line 8z item | Exempt income, People's Republic of China, Article 20(c): −$5,000 |
+| Schedule 1 line 8z item | Exempt income, People's Republic of China, Article 20(c): −$5,000, marked as a treaty exemption (`treatyExempt`) |
 | Treaty position | China, 20(c); Code sections 61 and 7701(b); payor the university; not specifically required; the explanation |
 
 ## Hand check

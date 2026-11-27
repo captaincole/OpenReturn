@@ -283,5 +283,15 @@ describe("Form 8833 changes nothing else", () => {
     const exempt = evaluate(base.facts);
     expect(exempt.files("schedule-1")).toBe(true);
     expect(exempt.value("line.8", "form-1040")).toBe(-5000);
+    // An item below 0 with no treaty mark is still an entry on line 8z.
+    const unmarked = evaluate(
+      base.facts.map((fact) =>
+        fact.key === OTHER_INCOME_KEYS.otherItems
+          ? { ...fact, value: [{ description: "Excluded payments", amount: -5000 }] }
+          : fact,
+      ),
+    );
+    expect(unmarked.files("schedule-1")).toBe(true);
+    expect(unmarked.value("line.8", "form-1040")).toBe(-5000);
   });
 });

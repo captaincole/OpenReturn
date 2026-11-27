@@ -4,11 +4,16 @@
  * line 8z, enter that amount on Schedule CA (540), Part I ... line 8z, column C
  * as a positive number" (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-12::b04).
  * The base is the synthetic irella return moved to California: $31,400 of
- * wages and a $5,000 treaty exemption (-5,000 on Schedule 1 line 8z).
+ * wages and a $5,000 treaty exemption (-5,000 on Schedule 1 line 8z, marked
+ * treatyExempt). An item below 0 with no mark is not added back.
  */
 
 import { beforeEach, describe, expect, it } from "vitest";
-import { OTHER_INCOME_KEYS } from "../../../../../src/facts/index.js";
+import {
+  OTHER_INCOME_KEYS,
+  readOtherIncomeItems,
+  type OtherIncomeItem,
+} from "../../../../../src/facts/index.js";
 import type { TaxFactRow } from "../../../../../src/facts/rows.js";
 import { evaluateScenario } from "../../../../../src/index.js";
 import { treatyExemptionAddBack } from "../../../../../src/state/ca/schedule-ca/treatyExemption.js";
@@ -49,7 +54,7 @@ const californiaFacts = base.facts.map((row) =>
     : row,
 );
 
-const withLine8z = (items: Array<{ description: string; amount: number }>): TaxFactRow[] =>
+const withLine8z = (items: OtherIncomeItem[]): TaxFactRow[] =>
   californiaFacts.map((row) =>
     row.key === OTHER_INCOME_KEYS.otherItems ? { ...row, value: items } : row,
   );
@@ -86,13 +91,50 @@ describe("Schedule CA (540) line 8z column C: a treaty exemption", () => {
   it("another line 8z item next to the exemption: column C is a gap", () => {
     const { read } = fields(
       withLine8z([
-        { description: "Exempt income, treaty", amount: -5000 },
+        { description: "Exempt income, treaty", amount: -5000, treatyExempt: true },
         { description: "Prize from a contest", amount: 700 },
       ]),
     );
     const columnC = read("schedule-ca", "1.line.b8z_additions");
     expect(columnC).toMatchObject({ ok: false, unsupported: true });
     expect(JSON.stringify(columnC)).toContain("treaty exemption");
+  });
+
+  it("an unmarked item below 0 is not added back: column C and line 9a column C are gaps", () => {
+    const unmarked = [{ description: "Excluded payments", amount: -5000 }];
+    expect(treatyExemptionAddBack({ otherIncomeItems: unmarked })).toBe(undefined);
+    const { read } = fields(withLine8z(unmarked));
+    expect(read("schedule-ca", "1.line.b8z_federal")).toMatchObject({ ok: true, value: -5000 });
+    for (const fieldId of ["1.line.b8z_additions", "2.line.b9a_additions"]) {
+      const gap = read("schedule-ca", fieldId);
+      expect(gap).toMatchObject({ ok: false, unsupported: true });
+      expect(JSON.stringify(gap)).toContain("not marked as a treaty exemption");
+    }
+    expect(read("form-540", "line.16_ca_adjustments_additions")).not.toMatchObject({
+      ok: true,
+      value: 5000,
+    });
+  });
+
+  it("a marked item next to an unmarked item below 0: column C is a gap", () => {
+    const items = [
+      { description: "Exempt income, treaty", amount: -5000, treatyExempt: true as const },
+      { description: "Excluded payments", amount: -800 },
+    ];
+    expect(treatyExemptionAddBack({ otherIncomeItems: items })).toBe(5000);
+    const columnC = fields(withLine8z(items)).read("schedule-ca", "1.line.b8z_additions");
+    expect(columnC).toMatchObject({ ok: false, unsupported: true });
+    expect(JSON.stringify(columnC)).toContain("not marked as a treaty exemption");
+  });
+
+  it("a marked item above 0: column C is a gap, not an add-back", () => {
+    const items = [
+      { description: "Exempt income, treaty", amount: 5000, treatyExempt: true as const },
+    ];
+    expect(treatyExemptionAddBack({ otherIncomeItems: items })).toBe(undefined);
+    const columnC = fields(withLine8z(items)).read("schedule-ca", "1.line.b8z_additions");
+    expect(columnC).toMatchObject({ ok: false, unsupported: true });
+    expect(JSON.stringify(columnC)).toContain("amount above 0");
   });
 
   it("no item below 0: the add-back is absent and column C keeps its earlier rule", () => {
@@ -108,14 +150,35 @@ describe("Schedule CA (540) line 8z column C: a treaty exemption", () => {
     expect(JSON.stringify(read("schedule-ca", "1.line.b8z_additions"))).not.toContain("treaty");
   });
 
-  it("two exempt items add up as one positive amount", () => {
+  it("two marked exempt items add up as one positive amount", () => {
     expect(
       treatyExemptionAddBack({
         otherIncomeItems: [
-          { description: "a", amount: -5000 },
-          { description: "b", amount: -1200.4 },
+          { description: "a", amount: -5000, treatyExempt: true },
+          { description: "b", amount: -1200.4, treatyExempt: true },
         ],
       }),
     ).toBe(6200);
+  });
+});
+
+describe("readOtherIncomeItems: the treaty exemption mark", () => {
+  it("keeps a true mark, drops a false mark, and refuses any other value", () => {
+    expect(
+      readOtherIncomeItems([
+        { description: "a", amount: -5000, treatyExempt: true },
+        { description: "b", amount: 700, treatyExempt: false },
+        { description: "c", amount: 90 },
+      ]),
+    ).toEqual([
+      { description: "a", amount: -5000, treatyExempt: true },
+      { description: "b", amount: 700 },
+      { description: "c", amount: 90 },
+    ]);
+    for (const mark of ["yes", 1, null]) {
+      expect(readOtherIncomeItems([{ description: "a", amount: -5000, treatyExempt: mark }])).toBe(
+        undefined,
+      );
+    }
   });
 });

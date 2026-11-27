@@ -72,18 +72,21 @@ Every item below is a default or an own reading. Items 1 to 9 change no dollar a
 - Text: "If a tax treaty exemption is claimed on federal Schedule 1 (Form 1040), Additional Income and Adjustments to Income, line 8z, enter that amount on Schedule CA (540), Part I or Schedule CA (540NR), Part II, line 8z, column C as a positive number, unless that amount is specifically exempted for California purposes" (`ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-12::b04`).
 - Before the fix: this branch files Schedule 1 for a line 8z item below 0, so the exemption lowered federal AGI and then California AGI. Schedule CA line 8z column C stayed at its catch-all gap, and Form 540 line 16 read 0. A California resident with $31,400 of wages and a $5,000 exemption got Form 540 line 17 = $26,400.
 - Now: `state/ca/schedule-ca/treatyExemption.ts` puts the exempt amount in line 8z column C, and line 9a column C adds the rows. The same return gives line 16 = $5,000, line 17 = $31,400 and line 19 = $25,694 (`tests/unit/state/ca/schedule-ca/treatyExemption.test.ts`).
-- Own reading: a treaty exemption is a Schedule 1 line 8z item below 0. Pub. 519 enters exempt income there "in parentheses", and Cade's skill records line 8z items as "other taxable income", so the engine expects no other item below 0. A non-treaty item below 0 would be added back in California too. The fact holds no flag that names the item a treaty exemption.
+- Own reading: a treaty exemption is a Schedule 1 line 8z item with the mark `treatyExempt: true` (`facts/kinds/otherIncome.ts`), entered below 0 as Pub. 519 says ("in parentheses"). The sign alone is not the meaning: another excluded amount can sit on line 8z below 0 too, and its California rule is its own question. Reading the sign would add such an item back in California with no warning.
+- An unmarked item below 0: line 8z column C, and line 9a column C through it, are a gap with a reason. Before this branch the same item met the catch-all gap of column C, so no return loses an amount it had.
+- A marked item above 0: a gap too, since an exemption is entered below 0 and the add-back cannot come from it. A marked item of 0 changes no line and is left out.
 - Not modeled: the exception for an amount "specifically exempted for California purposes". With another line 8z item next to the exemption, column C is a gap with its own reason. Schedule CA (540NR) has no rules yet, so a part-year or nonresident return does not add the exemption back.
+- Cade does not set the mark yet: until it does, a treaty exemption that Cade records is an unmarked item, and California's column C is a gap.
 
 ## Pattern change
 
-None. Before: a negative line 8z item did not file Schedule 1 on its own. After: it does; this applies the existing Schedule 1 rule to one more input, and no other form or fact kind changes shape.
+None. Before: a negative line 8z item did not file Schedule 1 on its own. After: it does; this applies the existing Schedule 1 rule to one more input. The line 8z item gains one optional field, `treatyExempt`; an item without it reads as before, and no other form or fact kind changes shape.
 
 ## What a treaty position changes on Form 1040 today
 
 Nothing, through this form. No binding reads a treaty position fact. The amount a position changes is recorded where it lands:
 
-- An exempt amount reported on an information return: a Schedule 1 line 8z item below 0 (Pub. 519, `irs-pub-519-2025::sec::general-rule-for-resident-aliens::b02`). Before this branch a negative item alone did not file Schedule 1; it does now (`schedule-1/resolveInfo.ts`). The PDF prints it as "-5,000", the engine's form for every amount below 0, not in parentheses. California adds it back on Schedule CA (540) line 8z column C (item 10).
+- An exempt amount reported on an information return: a Schedule 1 line 8z item below 0, marked `treatyExempt` (Pub. 519, `irs-pub-519-2025::sec::general-rule-for-resident-aliens::b02`). Before this branch a negative item alone did not file Schedule 1; it does now (`schedule-1/resolveInfo.ts`). The PDF prints it as "-5,000", the engine's form for every amount below 0, not in parentheses. California adds it back on Schedule CA (540) line 8z column C (item 10).
 - Exempt income not on any information return: left off the return (Pub. 519's example, `general-rule-for-resident-aliens::b03`).
 - A reduced treaty rate on Form 1040 line 16 ("Tax from attached statement", `general-rule-for-resident-aliens::b02`): no fact kind; not supported.
 - A foreign tax credit under a treaty: a stated foreign tax on Form 1116. Income re-sourced by treaty (the `treaty_resourced` category, Form 1116 box f and line 30) is a whole-form gap in Form 1116.
