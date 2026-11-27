@@ -196,6 +196,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "fell is Cade's question. A K-1 with a recapture asks for its building fact",
   ],
   [
+    /^low_income_housing_building\.[^.]+$/,
+    "each fact is a whole building a taxpayer owns directly (Form 8609-A, one for each building); " +
+      "whether one exists is Cade's question. A building fact missing an answer its year needs " +
+      "is listed again",
+  ],
+  [
     /^look_back\.long_term_contracts$/,
     "the fact is the whole look-back computation (Form 8697); whether a long-term contract was " +
       "completed or adjusted in 2025 is Cade's question",
