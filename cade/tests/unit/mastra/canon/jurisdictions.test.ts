@@ -13,9 +13,13 @@ import {
 
 /*
  * Canon's table, read as text: Cade never imports Canon's code (boundary.test.ts).
- * Each row of JURISDICTION_TABLE is one line, `  CA: { name: "California", … },`.
+ * Each row of JURISDICTION_TABLE starts with its key, `  CA: {`, on one line or several.
  */
 const CANON_FILE = resolve(__dirname, "../../../../../canon/src/jurisdiction.ts");
+
+/* A row starts at the table's own indent, `  CA: {`; its fields are indented deeper. */
+const isRowStart = (line: string): boolean =>
+  line.startsWith("  ") && !line.startsWith("   ") && line.includes(": {");
 
 function canonJurisdictions(): string[] {
   const lines = readFileSync(CANON_FILE, "utf8").split("\n");
@@ -23,7 +27,7 @@ function canonJurisdictions(): string[] {
   const end = lines.findIndex((line, i) => i > start && line.startsWith("} as const;"));
   return lines
     .slice(start + 1, end)
-    .filter((line) => line.includes("{ name:"))
+    .filter(isRowStart)
     .map((line) => line.split(":")[0].trim());
 }
 
