@@ -4,8 +4,10 @@
  * The credits counted here are the Part III credits the engine takes from
  * facts other than the credit for prior year AMT, which attaches the schedule
  * by itself (Section A2): each California passive credit code (FTB 3801-CR),
- * the other state tax credit (Schedule S, one code for every state) and the
- * PTE elective tax credit (FTB 3804-CR). A credit counts when its facts hold
+ * the other state tax credit (Schedule S, one code for every state), the
+ * PTE elective tax credit (FTB 3804-CR), the enterprise zone credit
+ * carryovers (FTB 3805Z, one code for both) and the TTA credit carryovers (FTB
+ * 3809, one code for both). A credit counts when its facts hold
  * an amount above 0; a passive credit that FTB 3801-CR then allows at 0 still
  * attaches the schedule, which the instructions say to complete in any case.
  */
@@ -16,6 +18,7 @@ import { caFilmCreditCodesClaimed } from "../3541/resolveInfo.js";
 import { caPassiveCreditsClaimed } from "../3801-cr/resolveInfo.js";
 import { pteCreditFactKeys } from "../3804-cr/resolveInfo.js";
 import { enterpriseZoneCreditKeys } from "../3805z/resolveInfo.js";
+import { ttaCreditFactKeys } from "../3809/resolveInfo.js";
 import { otherStateCreditInputs } from "../schedule-s/resolveInfo.js";
 
 export function moreThanTwoCreditsFallback(inputs: ResolverInputs, files540: boolean) {
@@ -26,14 +29,17 @@ export function moreThanTwoCreditsFallback(inputs: ResolverInputs, files540: boo
   const film = caFilmCreditCodesClaimed(inputs);
   // FTB 3805Z's two carryovers are one credit, code 176.
   const enterpriseZone = enterpriseZoneCreditKeys(inputs);
+  // FTB 3809's two carryovers share code 210: one credit.
+  const tta = ttaCreditFactKeys(inputs);
   const count =
     passive.codes.length +
     (otherState.length > 0 ? 1 : 0) +
     (pte.length > 0 ? 1 : 0) +
     film.codes.length +
-    (enterpriseZone.length > 0 ? 1 : 0);
+    (enterpriseZone.length > 0 ? 1 : 0) +
+    (tta.length > 0 ? 1 : 0);
   return {
-    rule: `fallback: Form 540 files (${files540}) with ${count} credit(s) from FTB 3801-CR, Schedule S, FTB 3804-CR, FTB 3541 and FTB 3805Z, more than two`,
+    rule: `fallback: Form 540 files (${files540}) with ${count} credit(s) from FTB 3801-CR, Schedule S, FTB 3804-CR, FTB 3541, FTB 3805Z and FTB 3809, more than two`,
     value: files540 && count > 2,
     triggeredByFactKeys: [
       ...passive.factKeys,
@@ -41,6 +47,7 @@ export function moreThanTwoCreditsFallback(inputs: ResolverInputs, files540: boo
       ...pte,
       ...film.factKeys,
       ...enterpriseZone,
+      ...tta,
     ],
     triggeredByDecisionKeys: ["decisions.scope.must_file_ca_540"],
   };
