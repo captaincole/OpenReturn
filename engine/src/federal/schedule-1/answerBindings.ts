@@ -7,6 +7,7 @@ import type { BindingFn, FormAccessor } from "../../defineForm.js";
 import { formatDollars, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { files2555 } from "../2555/results.js";
+import { alimonyGap } from "../4563/receivers.js";
 import { form8621Amount, withForm8621 } from "../8621/totals.js";
 import { figuredForm8814, withForm8814 } from "../8814/totals.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
@@ -167,11 +168,14 @@ export function answerBindings(): Bindings {
       return items.map((item) => `${item.description} ${formatDollars(item.amount)}`).join(", ");
     },
     "1.line.16": (_, info) => roundDollars(info.selfEmployedPlanDeduction),
-    // irs-1040-inst-2025::sec::lines-19a-19b-and-19c::b01: only under an agreement made before 2019.
+    /*
+     * irs-1040-inst-2025::sec::lines-19a-19b-and-19c::b01: only under an agreement made before 2019.
+     * MANUAL EDIT: with Form 4563 alimony paid is shared by gross income, a gap (federal/4563/receivers.ts).
+     */
     "1.line.19a": (_, info) =>
       info.alimonyPaid === undefined || !info.alimonyPaidDeductible
         ? undefined
-        : roundDollars(info.alimonyPaid),
+        : (alimonyGap(info) ?? roundDollars(info.alimonyPaid)),
     "1.line.19b": (form, info) =>
       typeof form["1.line.19a"] === "number" ? info.alimonyRecipientSsn : undefined,
     "1.line.19c": (form, info) =>

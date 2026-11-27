@@ -7,6 +7,7 @@
 import { numberOrBlank } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { foreignTaxCreditGap } from "../1116/credit.js";
+import { withForm4563Line15 } from "../4563/results.js";
 import { line6lGap } from "../8978/receivers.js";
 import type { Form8863Figured, Form8863FilingInfo } from "./filingInfo.js";
 import {
@@ -28,7 +29,7 @@ export const LINE_19_ID = "form-8863.0.line.19_nonrefundable_education_credits";
 const SEPARATE_RETURN_GAP =
   "A married filing separately return cannot take an education credit (irs-8863-inst-2025::sec::who-can-claim-an-education-credit::b03); lines 2 and 13 have no amount for it.";
 const MAGI_GAP =
-  "Lines 3 and 14 must add back the income excluded on Form 2555 or Form 4563 (irs-8863-inst-2025::sec::line-3::b01, Pub. 970 Worksheet 2-1), and these lines do not add it back yet.";
+  "Lines 3 and 14 must add back the income excluded on Form 2555 (irs-8863-inst-2025::sec::line-3::b01, Pub. 970 Worksheet 2-1), and these lines do not add it back yet.";
 
 const files = (info: Form8863FilingInfo, formId: string) => info.mustFile?.[formId]?.value === true;
 
@@ -42,10 +43,14 @@ function returnOf(info: Form8863FilingInfo): Result<{ figured: Form8863Figured; 
   return { figured, joint: info.filingStatus === "married_filing_jointly" };
 }
 
-/* Lines 3 and 14: Form 1040 line 11b; a gap with Form 2555 or 4563. */
+/*
+ * Lines 3 and 14: Form 1040 line 11b, plus Form 4563 line 15 ("if you're
+ * filing ... Form 4563 ... you must include on line 3 the amount of income
+ * you excluded", irs-8863-inst-2025::sec::line-3::b01, line-14::b01); a gap with Form 2555.
+ */
 function magiOf(form: Accessor, info: Form8863FilingInfo): Result<number> {
-  if (files(info, "form-2555") || files(info, "form-4563")) return unsupported(MAGI_GAP);
-  return numberOrBlank(form["form-1040.line.11b"]);
+  if (files(info, "form-2555")) return unsupported(MAGI_GAP);
+  return withForm4563Line15(numberOrBlank(form["form-1040.line.11b"]), info);
 }
 
 const isGap = (value: unknown): value is Unsupported =>

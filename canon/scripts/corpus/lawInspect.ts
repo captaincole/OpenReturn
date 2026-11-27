@@ -17,7 +17,7 @@ async function check(): Promise<void> {
 }
 
 const MODES: SearchMode[] = ["fts", "vector", "hybrid"];
-const SOURCES: LawSource[] = ["statute", "regulations"];
+const SOURCES: LawSource[] = ["statute", "regulations", "california"];
 
 async function search(argv: string[]): Promise<void> {
   const { values, positionals } = parseArgs({
@@ -34,12 +34,12 @@ async function search(argv: string[]): Promise<void> {
   const mode = MODES.find((known) => known === values.mode);
   const source = SOURCES.find((known) => known === values.source);
   if (!query || !mode) throw new Error("required: a query string, and --mode fts|vector|hybrid");
-  if (values.source && !source) throw new Error("--source is statute or regulations");
+  if (values.source && !source) throw new Error("--source is statute, regulations or california");
   await requireLaw();
   const limit = Math.max(1, Math.min(Number(values.limit), 25));
   const hits = await searchLaw({ query, mode, limit, section: values.section, source });
   console.log(
-    `query:   "${query}"\nmode:    ${mode}\nsource:  ${source ?? "both"}\nresults: ${hits.length}\n`,
+    `query:   "${query}"\nmode:    ${mode}\nsource:  ${source ?? "statute and regulations"}\nresults: ${hits.length}\n`,
   );
   hits.forEach((hit, index) => {
     console.log(`${index + 1}. ${hit.citation}  [${hit.source}] (score ${hit.score.toFixed(4)})`);
@@ -61,8 +61,10 @@ async function read(argv: string[]): Promise<void> {
     process.exit(1);
   }
   console.log(`# ${reading.citation} — ${reading.sectionHeading}`);
-  for (const block of reading.blocks)
-    console.log(`\n[${block.blockId}] ${block.citation}\n${block.text}`);
+  for (const block of reading.blocks) {
+    const headings = block.headings.length ? `\n  ${block.headings.join(" › ")}` : "";
+    console.log(`\n[${block.blockId}] ${block.citation}${headings}\n${block.text}`);
+  }
 }
 
 export const lawCheckCommand: Command = {
@@ -73,13 +75,16 @@ export const lawCheckCommand: Command = {
 
 export const lawSearchCommand: Command = {
   name: "search",
-  summary: "Search the Code and the regulations (law.db only)",
+  summary: "Search the Code and the regulations, or California's code (law.db only)",
   usage: '"query"',
   options: [
     { flag: "--mode fts|vector|hybrid", desc: "retrieval mode (default: hybrid)" },
     { flag: "--limit <n>", desc: "max results, 1–25 (default: 8)" },
-    { flag: "--source statute|regulations", desc: "one source only (default: both)" },
-    { flag: "--section <n>", desc: 'one section only, e.g. "469" or "1.469-5T"' },
+    {
+      flag: "--source statute|regulations|california",
+      desc: "one source only (default: the statute and the regulations; California only when named)",
+    },
+    { flag: "--section <n>", desc: 'one section only, e.g. "469", "1.469-5T" or "CA 17041"' },
   ],
   run: search,
 };
@@ -87,6 +92,7 @@ export const lawSearchCommand: Command = {
 export const lawReadCommand: Command = {
   name: "read",
   summary: "Print a section or subdivision by citation, in order, with block ids",
-  usage: '<citation> (469, "469(g)(1)(A)", 1.469-5T, "1.469-5T(a)(1)" or a block id)',
+  usage:
+    '<citation> (469, "469(g)(1)(A)", 1.469-5T, "1.469-5T(a)(1)", "CA 17041(a)" or a block id)',
   run: read,
 };

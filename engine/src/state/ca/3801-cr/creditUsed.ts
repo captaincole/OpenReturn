@@ -21,6 +21,7 @@ import { allocate } from "../../../federal/8582-cr/allocation.js";
 import type { BaseFilingInfo } from "../../../filingInfo.js";
 import { numberOrBlank, sum } from "../../../money.js";
 import { unsupported, type Unsupported } from "../../../types.js";
+import { filmCreditsUsedTotal, filmSectionB2Credits } from "../3541/creditUsed.js";
 import { taxBeforeSectionB2 } from "../540/creditBalance.js";
 import type { Form3801CRInfo } from "./filingInfo.js";
 import { caPassiveEntriesOf } from "./form.js";
@@ -50,6 +51,11 @@ export const LINE_17 = "form-3801-cr.1.line.17_passive_activity_credits_allowed"
 
 /* Schedule P (540) Section B2 rows the passive credits fill, one code each. */
 export const SECTION_B2_LINES = [16, 17, 18] as const;
+
+/* Schedule P (540) has lines 16 to 18 for these credits; line 19 is not modeled. */
+export const TOO_MANY_B2_CREDITS = unsupported(
+  "The motion picture credits (FTB 3541) and the passive credits need more than the three Section B2 lines 16 to 18 the engine fills.",
+);
 
 const PUBLICLY_TRADED_GAP = unsupported(
   "A California credit from a publicly traded partnership is allowed by the PTP steps outside FTB 3801-CR (ca-3801cr-inst-2025::sec::computation-of-passive-activity-credits-allowed-for-ptps::b01, ::step-1::b01, ::step-2::b01), which the engine does not figure.",
@@ -129,15 +135,22 @@ export function passiveCreditsUsed(
   const credits = passiveCreditsAllowed(read, info);
   if (credits === undefined || isGap(credits)) return credits;
   if (credits.length === 0) return [];
+  // FTB 3541's Section B2 credits come first (3541/creditUsed.ts).
+  const film = filmSectionB2Credits(info);
+  if (film === undefined || isGap(film)) return film;
+  if (film.length + credits.length > SECTION_B2_LINES.length) return TOO_MANY_B2_CREDITS;
   if (filesScheduleP(info)) {
     const used = credits.map((_, index) =>
-      numberOrBlank(read(sectionB2UsedField(SECTION_B2_LINES[index]))),
+      numberOrBlank(read(sectionB2UsedField(SECTION_B2_LINES[film.length + index]))),
     );
     if (used.some((amount) => amount === undefined)) return undefined;
     return credits.map((credit, index) => ({ ...credit, used: used[index] as number }));
   }
-  let balance = taxBeforeSectionB2(read, info);
-  if (balance === undefined) return undefined;
+  const filmUsed = filmCreditsUsedTotal(read, info);
+  if (typeof filmUsed !== "number") return filmUsed;
+  const before = taxBeforeSectionB2(read, info);
+  if (before === undefined) return undefined;
+  let balance = before - filmUsed;
   return credits.map((credit) => {
     const used = Math.min(credit.allowed, balance as number);
     balance = (balance as number) - used;

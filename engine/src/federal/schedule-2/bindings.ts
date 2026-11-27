@@ -11,6 +11,7 @@ import {
   form4255ForSchedule2,
   schedule2Line,
 } from "../4255/schedule2.js";
+import { additionalMedicareGap, otherTaxesGap, selfEmploymentTaxGap } from "../4563/receivers.js";
 import { earlyDistributionTax } from "../5329/lines.js";
 import { amtGap } from "../6251/foreignTaxCredit.js";
 import { recaptureTaxForSchedule2 as lowIncomeHousingRecaptureTax } from "../8611/results.js";
@@ -21,6 +22,7 @@ import { files8853, form8853Total } from "../8853/results.js";
 import { withLaterForm8919Copies } from "../8919/laterCopies.js";
 import { totalOver } from "../8936/credit.js";
 import { FORM_8978_ADJUSTMENT_TYPE, line17zAdjustment } from "../8978/receivers.js";
+import { line20From965A } from "../965-a/receivers.js";
 import type { Schedule2FilingInfo } from "./filingInfo.js";
 import type { Schedule2 } from "./types.js";
 
@@ -35,6 +37,8 @@ const OTHER_PARTS_OF_5329 =
 
 const NO_PFIC = "No PFIC (Form 8621) ingestion or scenario yet.";
 const NO_OTHER_RECAPTURE = "No credit-recapture scenario (Forms 8874/8882) yet";
+const NO_SECTION_965 =
+  "No section 965 / Form 965-A scenario yet; the deferred installment amount is informational and is not added into line 21.";
 const NO_OTHER_TAXES = "No miscellaneous other-taxes (PWA penalties, etc.) scenario yet.";
 const SECTION_1294_DEFERRED_TAX = "1294DT";
 const NO_1294_DEFERRED_TAX = `Form 8621 line 23 is blank on every copy (no section 1294 election ends this year), so "${SECTION_1294_DEFERRED_TAX}" adds nothing here; the other taxes of line 17z (PWA penalties, etc.) are not modeled.`;
@@ -190,8 +194,12 @@ export function register(): void {
           form["0.line.1z_total_lines_1a_through_1y"],
           form["0.line.2_alternative_minimum_tax"],
         ),
-      // MANUAL EDIT: irs-1040-inst-2025::sec::line-4-3::b01: Schedule SE line 12.
-      "0.line.4_self_employment_tax": (form) => total(form["schedule-se.0.line.12"]),
+      /*
+       * MANUAL EDIT: irs-1040-inst-2025::sec::line-4-3::b01: Schedule SE line 12.
+       * A gap when Form 4563 excludes self-employment income (federal/4563/receivers.ts).
+       */
+      "0.line.4_self_employment_tax": (form, info) =>
+        selfEmploymentTaxGap(info) ?? total(form["schedule-se.0.line.12"]),
       /*
        * MANUAL EDIT: irs-1040-inst-2025::sec::line-5-2::b01: "the total of any taxes
        * from Form 4137", line 13 of each spouse's form. Blank when no Form 4137 files.
@@ -220,7 +228,9 @@ export function register(): void {
       // Schedule H Part II (FUTA) is not modeled, so a line 9 Yes leaves this blank.
       "0.line.9_household_employment_taxes": (form) =>
         form["schedule-h.0.line.9_no"] === true ? total(form["schedule-h.0.line.8"]) : undefined,
-      "0.line.11_additional_medicare_tax": (form) =>
+      // MANUAL EDIT: a gap when Form 4563's W-2AS Medicare wages pass the threshold (federal/4563/receivers.ts).
+      "0.line.11_additional_medicare_tax": (form, info) =>
+        additionalMedicareGap(info) ??
         total(form["form-8959.0.line.18_total_additional_medicare_tax"]),
       "0.line.12_net_investment_income_tax": (form) => total(form["form-8960.0.line.17"]),
       "0.line.8_additional_tax_iras_tax_favored_accounts": (_, info) => line8(info),
@@ -326,10 +336,19 @@ export function register(): void {
        * Blank when Schedule H line 9 is Yes: without the FUTA tax the total
        * would understate the tax. Line 10 has no field in the inventory.
        */
-      "1.line.21_total_other_taxes": (form) =>
+      /*
+       * MANUAL EDIT: line 20 = Form 965-A Part II Totals, column (k), the installments paid
+       * for 2025 (federal/965-a/receivers.ts). Not part of line 21. No Form 965-A: the old reason.
+       */
+      "1.line.20_section_965_net_tax_liability_installment": (_, info) => {
+        const received = line20From965A(info);
+        return received === "none" ? unsupported(NO_SECTION_965) : received;
+      },
+      "1.line.21_total_other_taxes": (form, info) =>
         form["schedule-h.0.line.9_yes"] === true
           ? undefined
-          : total(
+          : (otherTaxesGap(info) ??
+            total(
               form["0.line.4_self_employment_tax"],
               form["0.line.7_total_additional_ss_medicare_tax"],
               form["0.line.8_additional_tax_iras_tax_favored_accounts"],
@@ -342,7 +361,7 @@ export function register(): void {
               form["0.line.16_recapture_low_income_housing_credit"],
               form["1.line.18_total_additional_taxes"],
               form["1.line.19_recapture_net_epe_form4255_line1d"],
-            ),
+            )),
     },
 
     unsupported: {
@@ -376,8 +395,6 @@ export function register(): void {
         "No section 4985 expatriated-corporation insider stock compensation scenario yet.",
       "1.line.17o_tax_non_effectively_connected_income_nonresident_alien":
         "No dual-status / nonresident alien (Form 1040-NR) scenario yet.",
-      "1.line.20_section_965_net_tax_liability_installment":
-        "No section 965 / Form 965-A scenario yet; the deferred installment amount is informational and is not added into line 21.",
     },
   });
 }

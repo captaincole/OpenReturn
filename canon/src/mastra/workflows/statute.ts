@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { lawInstalled } from "../../db/libsql";
+import { includesFederal, type Jurisdiction } from "../../jurisdiction";
 import { searchLaw, type LawHit } from "../../law/lawSearch";
 import { mergeByRank } from "./ask/mergeHits";
 
@@ -45,10 +46,12 @@ export const conflictSchema = conflictOutputSchema.extend({
 });
 export type Conflict = z.infer<typeof conflictSchema>;
 
-export type StatuteSkip = "no_queries" | "not_installed" | "failed";
+export type StatuteSkip = "no_queries" | "federal_off" | "not_installed" | "failed";
 
 export const STATUTE_SKIP_WHY: Record<StatuteSkip | "already_consulted", string> = {
   no_queries: "The judge gave no statute queries.",
+  federal_off:
+    "The statute is federal law, and the caller did not turn on the federal jurisdiction.",
   not_installed: "The law library (law.db) is not installed.",
   failed: "The statute search failed.",
   already_consulted: "The statute was already consulted in this run.",
@@ -62,6 +65,8 @@ export interface StatuteSearchOptions {
   hitsPerQuery: number;
   /** Most blocks kept over all queries; all of them when unset. */
   max?: number;
+  /** The jurisdictions on in this run; the federal statute is searched only when federal is on. */
+  jurisdictions: readonly Jurisdiction[];
 }
 
 export const statuteQueriesOf = (raw: string[]): string[] =>
@@ -83,6 +88,8 @@ export async function searchStatute(
 ): Promise<StatuteSearch> {
   const queries = statuteQueriesOf(raw);
   if (queries.length === 0) return { status: "skipped", queries, skipped: "no_queries" };
+  if (!includesFederal(options.jurisdictions))
+    return { status: "skipped", queries, skipped: "federal_off" };
   if (!(await lawInstalled())) return { status: "skipped", queries, skipped: "not_installed" };
   try {
     const lists: LawHit[][] = [];

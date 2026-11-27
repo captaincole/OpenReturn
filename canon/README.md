@@ -17,8 +17,10 @@ Canon (`@openreturn/canon`) is OpenReturn's tax attorney. It holds the IRS and F
 | `citeRefDoc` | The exact text and a readable citation for one block |
 | `run_ask` | **Ask The Tax Code**: formulate → retrieve → answer → validate. A "partial" answer names its gaps as searches, and the pipeline searches once more. |
 | `run_ground` | **Ground one decision**: (gather → assess risk → rule) × up to `maxIterations` (default 3). The verdict is `accurate`, `inaccurate` or `needs_more_facts`, with citations. |
-| `searchLaw` | Hybrid search of the law (the Internal Revenue Code and the Treasury regulations), a separate and optional library. For a question the instructions do not settle. |
-| `readLaw` | The text of one section or subdivision, by citation: `469(g)(1)`, or `1.469-5T(a)(1)` for a regulation |
+| `searchLaw` | Hybrid search of the law (the Internal Revenue Code and the Treasury regulations; California's personal income tax law only with `source: "california"`), a separate and optional library. For a question the instructions do not settle. |
+| `readLaw` | The text of one section or subdivision, by citation: `469(g)(1)`, `1.469-5T(a)(1)` for a regulation, `CA 17041(a)` for California |
+
+`searchRefDocs`, `run_ask` and `run_ground` take an optional `jurisdictions` list: `["federal"]`, `["CA"]` or both. A document's jurisdiction comes from its publisher (`canon/src/jurisdiction.ts`: IRS is federal, FTB is California). With no list, every jurisdiction is searched. With `["CA"]`, the workflows also skip the federal statute. The result names the jurisdictions searched.
 
 Both workflows are served as tools with output schemas and answer `{ result: … }`, the run result (`status: ok | failed`) validated against the schema. Both are stateless: the caller keeps the threads, the decisions and the verdicts. Each judge is one model call with its schema as the response format, and no tools. Code checks every citation: a quote that is not word for word in a retrieved block is dropped.
 
@@ -65,7 +67,7 @@ MCP clients connect to `http://localhost:4112/api/mcp/canon/mcp` (streamable HTT
 | `npm run corpus -- status` | Compare the sidecars in `sources/` with `corpus.db` |
 | `npm run corpus -- sync` | Ingest new or changed documents (skips the rest by sha256) |
 | `npm run corpus -- add-html <url> --dir …` | Fetch and clean an FTB web page into `sources/` |
-| `npm run corpus -- search "query"` | Run the production search (`--mode fts`, `vector` or `hybrid`) |
+| `npm run corpus -- search "query"` | Run the production search (`--mode fts`, `vector` or `hybrid`; `--jurisdiction CA` or `federal,CA`) |
 | `npm run corpus -- outline <docId>` | List a document's sections with first page and size |
 | `npm run corpus -- read <blockId>` | Print a search hit's whole section with block ids (or `<docId> <section> [--through <section>]`) |
 | `npm run corpus -- reembed [--all]` | Embed the blocks again, for example after a model change |

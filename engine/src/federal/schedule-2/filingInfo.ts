@@ -11,6 +11,7 @@ import type { Form8828FilingInfo } from "../8828/filingInfo.js";
 import type { Form8919FilingInfo } from "../8919/filingInfo.js";
 import type { Form8936FilingInfo } from "../8936/filingInfo.js";
 import type { Form8978FilingInfo } from "../8978/filingInfo.js";
+import type { Form965AFilingInfo } from "../965-a/filingInfo.js";
 
 /*
  * Line 5 adds a second Form 4137 (a spouse's) from its filers, and line 6 a
@@ -21,7 +22,8 @@ import type { Form8978FilingInfo } from "../8978/filingInfo.js";
  * Line 17l reads Form 4970's partial tax. Line 17n reads Form 8697's net
  * interest owed. Line 17z reads Form 8978's line 14 total.
  * Line 16 adds Form 8611's copies.
- * Lines 1d–1f, 1y, 17a, 17z and 19 read the figured Form 4255.
+ * Lines 1d–1f, 1y, 17a, 17z and 19 read the figured Form 4255. Line 20 reads
+ * Form 965-A's Part II totals.
  */
 export interface Schedule2FilingInfo
   extends
@@ -37,4 +39,5 @@ export interface Schedule2FilingInfo
     Pick<Form8828FilingInfo, "form8828Copies">,
     Pick<Form8611FilingInfo, "form8611Copies">,
     Pick<Form4255FilingInfo, "form4255" | "form4255Gap">,
+    Pick<Form965AFilingInfo, "form965A" | "form965AGap">,
     Pick<Form5329FilingInfo, "earlyDistributionPeople" | "earlyDistributionTaxWithoutForm"> {}
