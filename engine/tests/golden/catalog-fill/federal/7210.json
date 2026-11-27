@@ -1,0 +1,321 @@
+{
+  "formId": "form-7210",
+  "fieldCount": 35,
+  "entries": [
+    {
+      "fieldId": "form-7210.0.header.a_i_emissions_value_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-KXL7B"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.header.a_ii_doe_control_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "T-QI4EQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-5WDPV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-1PIJC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.1_irs_registration_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "T-1PAGZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.10_increased_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_36[0]",
+          "text": "7,543"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.11_credit_from_partnerships_s_corps",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_37[0]",
+          "text": "3,865"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.12_clean_hydrogen_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_38[0]",
+          "text": "4,848"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.2_i_owner_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "T-1SBNK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.2_ii_owner_tin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "T-IV2Z5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.2a_facility_address_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "T-1AIZQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.2a_facility_address_description_cont",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "T-6I8CT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.2b_i_latitude_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_12[0]",
+          "text": "T1I8R2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.2b_i_latitude_degrees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_11[0]",
+          "text": "15"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.2b_i_latitude_sign",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_10[0]",
+          "text": "3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.2b_ii_longitude_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_15[0]",
+          "text": "T49ACL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.2b_ii_longitude_degrees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_14[0]",
+          "text": "185"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.2b_ii_longitude_sign",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_13[0]",
+          "text": "6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.3_date_construction_began",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.4_date_placed_in_service",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.5_increased_credit_eligible",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.6a_less_than_0_45_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines6a-6d[0].Line6a[0].f1_18[0]",
+          "text": "9,948"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.6a_less_than_0_45_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines6a-6d[0].Line6a[0].f1_20[0]",
+          "text": "1,210"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.6b_0_45_to_1_5_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines6a-6d[0].Line6b[0].f1_21[0]",
+          "text": "9,970"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.6b_0_45_to_1_5_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines6a-6d[0].Line6b[0].f1_23[0]",
+          "text": "1,751"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.6c_1_5_to_2_5_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines6a-6d[0].Line6c[0].f1_24[0]",
+          "text": "8,827"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.6c_1_5_to_2_5_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines6a-6d[0].Line6c[0].f1_26[0]",
+          "text": "6,266"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.6d_2_5_to_4_0_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines6a-6d[0].Line6d[0].f1_27[0]",
+          "text": "3,175"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.6d_2_5_to_4_0_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines6a-6d[0].Line6d[0].f1_29[0]",
+          "text": "5,846"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.7_credit_before_reduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+          "text": "9,150"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.8a_tax_exempt_bond_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+          "text": "T-1070A"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.8b_line_7_times_8a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+          "text": "3,201"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.8c_line_7_times_15_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+          "text": "3,244"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.8d_smaller_of_8b_8c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+          "text": "2,242"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7210.0.line.9_credit_after_bond_reduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_35[0]",
+          "text": "1,433"
+        }
+      ]
+    }
+  ]
+}

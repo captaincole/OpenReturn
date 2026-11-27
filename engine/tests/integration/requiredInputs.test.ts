@@ -89,6 +89,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "Form 5884 lists the fact again while it is malformed",
   ],
   [
+    /^small_employer_plan\.[^.]+$/,
+    "each fact is the whole retirement plan of the taxpayer's own business or farm that claims " +
+      "the Form 8881 credits; whether one exists is Cade's question, as for a business fact. " +
+      "Form 8881 lists the fact again while it is malformed",
+  ],
+  [
     /^casualty\.[^.]+$/,
     "each fact is a whole casualty event (Form 4684); whether one happened is Cade's question",
   ],
@@ -170,8 +176,19 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "Form 982 lists a debt fact again while an answer inside it is missing",
   ],
   [
+    /^empowerment_zone_employee\.[^.]+$/,
+    "each fact is one whole employee of the taxpayer's business or farm who worked in an " +
+      "empowerment zone (Form 8844 line 1); whether one exists is Cade's question",
+  ],
+  [
     /^armed_forces_move\.[^.]+$/,
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
+  ],
+  [
+    /^disabled_access\.[^.]+$/,
+    "each fact is one group of a business's eligible access expenditures (Form 8826 line 1); " +
+      "whether a business paid any is Cade's question. Form 8826 lists the fact again while it " +
+      "is malformed, and asks the prior-year answers once one exists",
   ],
   [
     /^tip_credit\.[^.]+$/,
@@ -186,6 +203,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "the decision files the form without one",
   ],
   [
+    /^childcare_expenditure\.[^.]+$/,
+    "each fact is one whole childcare expenditure the business claims the credit for (Form " +
+      "8882 lines 1 and 3); whether one exists is Cade's question. Form 8882 lists the fact " +
+      "again while it is malformed",
+  ],
+  [
     /^section_965\.(inclusion|other_liability|s_corporation|deferred)\.[^.]+$/,
     "each fact is one whole line of last year's Form 965-A (Part I with its Part II line, a " +
       "Part III row or a Part IV row); whether one exists is Cade's question. Form 965-A lists " +
@@ -195,6 +218,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^low_income_housing_recapture\.[^.]+$/,
     "each fact is a whole building's credit recapture (Form 8611); whether the qualified basis " +
       "fell is Cade's question. A K-1 with a recapture asks for its building fact",
+  ],
+  [
+    /^low_income_housing_building\.[^.]+$/,
+    "each fact is a whole building a taxpayer owns directly (Form 8609-A, one for each building); " +
+      "whether one exists is Cade's question. A building fact missing an answer its year needs " +
+      "is listed again",
   ],
   [
     /^look_back\.long_term_contracts$/,

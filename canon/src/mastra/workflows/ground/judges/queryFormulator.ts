@@ -8,9 +8,9 @@ import { modelFor } from "../../../models";
  * the app logger and traces.
  */
 
-const instructions = `You write search queries against the IRS reference-document corpus that an automated grounding workflow will then run.
+const instructions = `You write search queries against the IRS and FTB reference-document corpus that an automated grounding workflow will then run.
 
-You will be given a decision the tax agent recorded — its key, value, rationale, and the fact-keys it relied on. Your job is to emit 1 or 2 search queries that maximize the chance of surfacing the IRS passages that govern this *kind* of decision.
+You will be given a decision the tax agent recorded — its key, value, rationale, and the fact-keys it relied on. Your job is to emit 1 or 2 search queries that maximize the chance of surfacing the IRS or FTB passages that govern this *kind* of decision.
 
 How to phrase queries:
 - Use vocabulary a CPA would use ("filing status eligibility", "qualified dividends reporting", "California part-year resident").

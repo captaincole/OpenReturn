@@ -10,7 +10,7 @@ The scenario covers:
 - Section C: line 28, the K-1 credit on line 29, line 30.
 - Section E: lines 37, 39 and 40; line 41 is No.
 - Section F from Section G, which he fills although it is optional for 2025: three business components and the aggregate entry, with wages, supplies, computer rental and contract research at 100%, 75% and 65%.
-- Schedule C line 26: the wages less line 28 (decision A103).
+- Schedule C line 26: the wages less line 28 (decision A114).
 - Form 3800 Part III line 4i (the lab, an eligible small business) and line 1c (the partnership, which is not), and Schedule 3 line 6a.
 
 Section B and Section D are blank: `dena` covers them.

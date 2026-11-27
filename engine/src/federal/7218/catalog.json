@@ -1,0 +1,3337 @@
+{
+  "form": {
+    "formId": "form-7218",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Clean Fuel Production Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-7218.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 671.966
+      }
+    },
+    {
+      "fieldId": "form-7218.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 447.4,
+        "y": 671.966
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-7218.0.part1.1_facility_registration_number",
+      "label": "Line 1 — If making an elective payment election or transfer election, enter the IRS-issued registration number for the facility",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 599.969
+      }
+    },
+    {
+      "fieldId": "form-7218.0.part1.2a_facility_description",
+      "label": "Line 2a — Description of facility",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 154.8,
+        "y": 575.968
+      }
+    },
+    {
+      "fieldId": "form-7218.0.part1.2b_owner_name",
+      "label": "Line 2b — If different than filer, enter (i) owner's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 242.8,
+        "y": 551.97
+      }
+    },
+    {
+      "fieldId": "form-7218.0.part1.2b_owner_tin",
+      "label": "Line 2b — If different than filer, enter (ii) owner's TIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 497.4,
+        "y": 551.97
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-7218.0.part1.2c_facility_address_line1",
+      "label": "Line 2c — Address of the facility (if applicable)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 213.8,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-7218.0.part1.2c_facility_address_line2",
+      "label": "Line 2c — Address of the facility (if applicable), second line",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-7218.0.part1.2d_latitude_sign",
+      "label": "Line 2d — Coordinates: (i) Latitude, sign (enter a \"+\" (plus) or \"-\" (minus) sign in the first box)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 180,
+        "y": 491.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-7218.0.part1.2d_latitude_degrees",
+      "label": "Line 2d — Coordinates: (i) Latitude, whole degrees (before the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 201.6,
+        "y": 491.969
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-7218.0.part1.2d_latitude_decimal",
+      "label": "Line 2d — Coordinates: (i) Latitude, decimal digits (after the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 237.6,
+        "y": 491.969
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-7218.0.part1.2d_longitude_sign",
+      "label": "Line 2d — Coordinates: (ii) Longitude, sign (enter a \"+\" (plus) or \"-\" (minus) sign in the first box)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 491.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-7218.0.part1.2d_longitude_degrees",
+      "label": "Line 2d — Coordinates: (ii) Longitude, whole degrees (before the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 491.969
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-7218.0.part1.2d_longitude_decimal",
+      "label": "Line 2d — Coordinates: (ii) Longitude, decimal digits (after the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 475.2,
+        "y": 491.969
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-7218.0.part1.3_date_construction_began",
+      "label": "Line 3 — Date construction began (MM/DD/YYYY)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 234.8,
+        "y": 455.969
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-7218.0.part1.4_date_placed_in_service",
+      "label": "Line 4 — Date placed in service (MM/DD/YYYY)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 224.8,
+        "y": 431.968
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-7218.0.part1.5a_producer_registration_number",
+      "label": "Line 5a — Enter the producer registration number",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 226.8,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-7218.0.part1.5b_registration_approval_date",
+      "label": "Line 5b — Date of registration approval for activity letter \"CA\" and/or \"CN\"",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 326.8,
+        "y": 383.969
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-7218.0.part1.6_provisional_emissions_rate",
+      "label": "Line 6 — Check this box if you are using provisional emissions rate(s) (PER) to determine your amount of credit",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 563.6,
+        "y": 361.968
+      }
+    },
+    {
+      "fieldId": "form-7218.0.part1.7_prevailing_wage_apprenticeship_yes",
+      "label": "Line 7a — Does the facility satisfy IRC 45Z(f)(6) prevailing wage requirements and IRC 45Z(f)(7) apprenticeship requirements? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 325.968
+      }
+    },
+    {
+      "fieldId": "form-7218.0.part1.7_prevailing_wage_apprenticeship_no",
+      "label": "Line 7b — Does the facility satisfy IRC 45Z(f)(6) prevailing wage requirements and IRC 45Z(f)(7) apprenticeship requirements? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 313.969
+      }
+    },
+    {
+      "fieldId": "form-7218.0.part2.1_amount_from_part3_line25h",
+      "label": "Line 1 — Enter the amount from Part III, line 25(h)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "form-7218.0.part2.2_credit_from_pass_through",
+      "label": "Line 2 — Clean fuel production credit from partnerships, S corporations, cooperatives, estates, and trusts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-7218.0.part2.3_add_lines_1_and_2",
+      "label": "Line 3 — Add lines 1 and 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 191.97
+      }
+    },
+    {
+      "fieldId": "form-7218.0.part2.4_allocated_to_patrons_beneficiaries",
+      "label": "Line 4 — Amount allocated to patrons of the cooperative or beneficiaries of the estate or trust",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "form-7218.0.part2.5_cooperatives_estates_trusts_credit",
+      "label": "Line 5 — Cooperatives, estates, and trusts, subtract line 4 from line 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 131.969
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row1_col_a_type_of_fuel",
+      "label": "Row 1 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_01[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row1_col_b_type_of_feedstock",
+      "label": "Row 1 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_02[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row1_col_c_calendar_year_sold",
+      "label": "Row 1 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_03[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 456.001
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row1_col_d_emissions_rate",
+      "label": "Row 1 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_04[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row1_col_e_emissions_factor",
+      "label": "Row 1 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_05[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row1_col_f_gallons",
+      "label": "Row 1 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_06[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row1_col_g_applicable_amount",
+      "label": "Row 1 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_07[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row1_col_h_credit_amount",
+      "label": "Row 1 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_08[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row2_col_a_type_of_fuel",
+      "label": "Row 2 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_09[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row2_col_b_type_of_feedstock",
+      "label": "Row 2 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row2_col_c_calendar_year_sold",
+      "label": "Row 2 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 444.002
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row2_col_d_emissions_rate",
+      "label": "Row 2 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row2_col_e_emissions_factor",
+      "label": "Row 2 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row2_col_f_gallons",
+      "label": "Row 2 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row2_col_g_applicable_amount",
+      "label": "Row 2 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row2_col_h_credit_amount",
+      "label": "Row 2 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row3_col_a_type_of_fuel",
+      "label": "Row 3 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row3_col_b_type_of_feedstock",
+      "label": "Row 3 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row3_col_c_calendar_year_sold",
+      "label": "Row 3 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 432.003
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row3_col_d_emissions_rate",
+      "label": "Row 3 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row3_col_e_emissions_factor",
+      "label": "Row 3 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row3_col_f_gallons",
+      "label": "Row 3 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row3_col_g_applicable_amount",
+      "label": "Row 3 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row3_col_h_credit_amount",
+      "label": "Row 3 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row4_col_a_type_of_fuel",
+      "label": "Row 4 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row4_col_b_type_of_feedstock",
+      "label": "Row 4 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row4_col_c_calendar_year_sold",
+      "label": "Row 4 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 420.004
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row4_col_d_emissions_rate",
+      "label": "Row 4 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row4_col_e_emissions_factor",
+      "label": "Row 4 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_29[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row4_col_f_gallons",
+      "label": "Row 4 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_30[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row4_col_g_applicable_amount",
+      "label": "Row 4 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_31[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row4_col_h_credit_amount",
+      "label": "Row 4 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_32[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row5_col_a_type_of_fuel",
+      "label": "Row 5 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_33[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 408.005
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row5_col_b_type_of_feedstock",
+      "label": "Row 5 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_34[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 408.005
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row5_col_c_calendar_year_sold",
+      "label": "Row 5 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_35[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 408.005
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row5_col_d_emissions_rate",
+      "label": "Row 5 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_36[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 408.005
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row5_col_e_emissions_factor",
+      "label": "Row 5 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_37[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 408.005
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row5_col_f_gallons",
+      "label": "Row 5 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_38[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 408.005
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row5_col_g_applicable_amount",
+      "label": "Row 5 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_39[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 408.005
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row5_col_h_credit_amount",
+      "label": "Row 5 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_40[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 408.005
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row6_col_a_type_of_fuel",
+      "label": "Row 6 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_41[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 396.006
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row6_col_b_type_of_feedstock",
+      "label": "Row 6 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_42[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 396.006
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row6_col_c_calendar_year_sold",
+      "label": "Row 6 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_43[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 396.006
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row6_col_d_emissions_rate",
+      "label": "Row 6 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_44[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 396.006
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row6_col_e_emissions_factor",
+      "label": "Row 6 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_45[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 396.006
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row6_col_f_gallons",
+      "label": "Row 6 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_46[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 396.006
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row6_col_g_applicable_amount",
+      "label": "Row 6 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_47[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 396.006
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row6_col_h_credit_amount",
+      "label": "Row 6 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_48[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 396.006
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row7_col_a_type_of_fuel",
+      "label": "Row 7 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_49[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 384.007
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row7_col_b_type_of_feedstock",
+      "label": "Row 7 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_50[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 384.007
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row7_col_c_calendar_year_sold",
+      "label": "Row 7 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_51[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 384.007
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row7_col_d_emissions_rate",
+      "label": "Row 7 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_52[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 384.007
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row7_col_e_emissions_factor",
+      "label": "Row 7 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_53[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 384.007
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row7_col_f_gallons",
+      "label": "Row 7 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_54[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 384.007
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row7_col_g_applicable_amount",
+      "label": "Row 7 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_55[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 384.007
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row7_col_h_credit_amount",
+      "label": "Row 7 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_56[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 384.007
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row8_col_a_type_of_fuel",
+      "label": "Row 8 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_57[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 372.008
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row8_col_b_type_of_feedstock",
+      "label": "Row 8 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_58[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 372.008
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row8_col_c_calendar_year_sold",
+      "label": "Row 8 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_59[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 372.008
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row8_col_d_emissions_rate",
+      "label": "Row 8 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_60[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 372.008
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row8_col_e_emissions_factor",
+      "label": "Row 8 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_61[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 372.008
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row8_col_f_gallons",
+      "label": "Row 8 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_62[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 372.008
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row8_col_g_applicable_amount",
+      "label": "Row 8 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_63[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 372.008
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row8_col_h_credit_amount",
+      "label": "Row 8 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_64[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 372.008
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row9_col_a_type_of_fuel",
+      "label": "Row 9 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_65[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 360.009
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row9_col_b_type_of_feedstock",
+      "label": "Row 9 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_66[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 360.009
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row9_col_c_calendar_year_sold",
+      "label": "Row 9 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_67[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 360.009
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row9_col_d_emissions_rate",
+      "label": "Row 9 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_68[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 360.009
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row9_col_e_emissions_factor",
+      "label": "Row 9 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_69[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 360.009
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row9_col_f_gallons",
+      "label": "Row 9 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_70[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 360.009
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row9_col_g_applicable_amount",
+      "label": "Row 9 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_71[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 360.009
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row9_col_h_credit_amount",
+      "label": "Row 9 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_72[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 360.009
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row10_col_a_type_of_fuel",
+      "label": "Row 10 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_73[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 348.01
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row10_col_b_type_of_feedstock",
+      "label": "Row 10 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_74[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 348.01
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row10_col_c_calendar_year_sold",
+      "label": "Row 10 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_75[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 348.01
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row10_col_d_emissions_rate",
+      "label": "Row 10 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_76[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 348.01
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row10_col_e_emissions_factor",
+      "label": "Row 10 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_77[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 348.01
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row10_col_f_gallons",
+      "label": "Row 10 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_78[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 348.01
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row10_col_g_applicable_amount",
+      "label": "Row 10 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_79[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 348.01
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row10_col_h_credit_amount",
+      "label": "Row 10 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_80[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 348.01
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row11_col_a_type_of_fuel",
+      "label": "Row 11 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_81[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 336.011
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row11_col_b_type_of_feedstock",
+      "label": "Row 11 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_82[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 336.011
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row11_col_c_calendar_year_sold",
+      "label": "Row 11 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_83[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 336.011
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row11_col_d_emissions_rate",
+      "label": "Row 11 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_84[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 336.011
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row11_col_e_emissions_factor",
+      "label": "Row 11 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_85[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 336.011
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row11_col_f_gallons",
+      "label": "Row 11 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_86[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 336.011
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row11_col_g_applicable_amount",
+      "label": "Row 11 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_87[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 336.011
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row11_col_h_credit_amount",
+      "label": "Row 11 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_88[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 336.011
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row12_col_a_type_of_fuel",
+      "label": "Row 12 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_89[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 324.012
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row12_col_b_type_of_feedstock",
+      "label": "Row 12 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_90[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 324.012
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row12_col_c_calendar_year_sold",
+      "label": "Row 12 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_91[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 324.012
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row12_col_d_emissions_rate",
+      "label": "Row 12 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_92[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 324.012
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row12_col_e_emissions_factor",
+      "label": "Row 12 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_93[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 324.012
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row12_col_f_gallons",
+      "label": "Row 12 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_94[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 324.012
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row12_col_g_applicable_amount",
+      "label": "Row 12 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_95[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 324.012
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row12_col_h_credit_amount",
+      "label": "Row 12 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_96[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 324.012
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row13_col_a_type_of_fuel",
+      "label": "Row 13 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_97[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 312.013
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row13_col_b_type_of_feedstock",
+      "label": "Row 13 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_98[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 312.013
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row13_col_c_calendar_year_sold",
+      "label": "Row 13 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_99[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 312.013
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row13_col_d_emissions_rate",
+      "label": "Row 13 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_100[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 312.013
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row13_col_e_emissions_factor",
+      "label": "Row 13 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_101[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 312.013
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row13_col_f_gallons",
+      "label": "Row 13 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_102[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 312.013
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row13_col_g_applicable_amount",
+      "label": "Row 13 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_103[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 312.013
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row13_col_h_credit_amount",
+      "label": "Row 13 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_104[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 312.013
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row14_col_a_type_of_fuel",
+      "label": "Row 14 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_105[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 300.014
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row14_col_b_type_of_feedstock",
+      "label": "Row 14 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_106[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 300.014
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row14_col_c_calendar_year_sold",
+      "label": "Row 14 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_107[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 300.014
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row14_col_d_emissions_rate",
+      "label": "Row 14 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_108[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 300.014
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row14_col_e_emissions_factor",
+      "label": "Row 14 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_109[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 300.014
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row14_col_f_gallons",
+      "label": "Row 14 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_110[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 300.014
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row14_col_g_applicable_amount",
+      "label": "Row 14 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_111[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 300.014
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row14_col_h_credit_amount",
+      "label": "Row 14 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_112[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 300.014
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row15_col_a_type_of_fuel",
+      "label": "Row 15 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_113[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 288.015
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row15_col_b_type_of_feedstock",
+      "label": "Row 15 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_114[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 288.015
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row15_col_c_calendar_year_sold",
+      "label": "Row 15 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_115[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 288.015
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row15_col_d_emissions_rate",
+      "label": "Row 15 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_116[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 288.015
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row15_col_e_emissions_factor",
+      "label": "Row 15 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_117[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 288.015
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row15_col_f_gallons",
+      "label": "Row 15 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_118[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 288.015
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row15_col_g_applicable_amount",
+      "label": "Row 15 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_119[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 288.015
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row15_col_h_credit_amount",
+      "label": "Row 15 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_120[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 288.015
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row16_col_a_type_of_fuel",
+      "label": "Row 16 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_121[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 276.016
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row16_col_b_type_of_feedstock",
+      "label": "Row 16 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_122[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 276.016
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row16_col_c_calendar_year_sold",
+      "label": "Row 16 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_123[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 276.016
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row16_col_d_emissions_rate",
+      "label": "Row 16 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_124[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 276.016
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row16_col_e_emissions_factor",
+      "label": "Row 16 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_125[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 276.016
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row16_col_f_gallons",
+      "label": "Row 16 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_126[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 276.016
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row16_col_g_applicable_amount",
+      "label": "Row 16 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_127[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 276.016
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row16_col_h_credit_amount",
+      "label": "Row 16 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_128[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 276.016
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row17_col_a_type_of_fuel",
+      "label": "Row 17 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_129[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 264.017
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row17_col_b_type_of_feedstock",
+      "label": "Row 17 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_130[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 264.017
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row17_col_c_calendar_year_sold",
+      "label": "Row 17 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_131[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 264.017
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row17_col_d_emissions_rate",
+      "label": "Row 17 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_132[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 264.017
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row17_col_e_emissions_factor",
+      "label": "Row 17 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_133[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 264.017
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row17_col_f_gallons",
+      "label": "Row 17 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_134[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 264.017
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row17_col_g_applicable_amount",
+      "label": "Row 17 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_135[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 264.017
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row17_col_h_credit_amount",
+      "label": "Row 17 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_136[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 264.017
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row18_col_a_type_of_fuel",
+      "label": "Row 18 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_137[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 252.018
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row18_col_b_type_of_feedstock",
+      "label": "Row 18 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_138[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 252.018
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row18_col_c_calendar_year_sold",
+      "label": "Row 18 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_139[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 252.018
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row18_col_d_emissions_rate",
+      "label": "Row 18 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_140[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 252.018
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row18_col_e_emissions_factor",
+      "label": "Row 18 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_141[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 252.018
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row18_col_f_gallons",
+      "label": "Row 18 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_142[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 252.018
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row18_col_g_applicable_amount",
+      "label": "Row 18 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_143[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 252.018
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row18_col_h_credit_amount",
+      "label": "Row 18 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_144[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 252.018
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row19_col_a_type_of_fuel",
+      "label": "Row 19 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_145[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 240.019
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row19_col_b_type_of_feedstock",
+      "label": "Row 19 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_146[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 240.019
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row19_col_c_calendar_year_sold",
+      "label": "Row 19 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_147[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 240.019
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row19_col_d_emissions_rate",
+      "label": "Row 19 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_148[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 240.019
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row19_col_e_emissions_factor",
+      "label": "Row 19 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_149[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 240.019
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row19_col_f_gallons",
+      "label": "Row 19 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_150[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 240.019
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row19_col_g_applicable_amount",
+      "label": "Row 19 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_151[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 240.019
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row19_col_h_credit_amount",
+      "label": "Row 19 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_152[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 240.019
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row20_col_a_type_of_fuel",
+      "label": "Row 20 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_153[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 228.02
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row20_col_b_type_of_feedstock",
+      "label": "Row 20 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_154[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 228.02
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row20_col_c_calendar_year_sold",
+      "label": "Row 20 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_155[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 228.02
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row20_col_d_emissions_rate",
+      "label": "Row 20 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_156[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 228.02
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row20_col_e_emissions_factor",
+      "label": "Row 20 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_157[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 228.02
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row20_col_f_gallons",
+      "label": "Row 20 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_158[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 228.02
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row20_col_g_applicable_amount",
+      "label": "Row 20 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_159[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 228.02
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row20_col_h_credit_amount",
+      "label": "Row 20 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_160[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 228.02
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row21_col_a_type_of_fuel",
+      "label": "Row 21 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row21[0].f2_161[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 216.021
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row21_col_b_type_of_feedstock",
+      "label": "Row 21 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row21[0].f2_162[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 216.021
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row21_col_c_calendar_year_sold",
+      "label": "Row 21 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row21[0].f2_163[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 216.021
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row21_col_d_emissions_rate",
+      "label": "Row 21 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row21[0].f2_164[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 216.021
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row21_col_e_emissions_factor",
+      "label": "Row 21 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row21[0].f2_165[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 216.021
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row21_col_f_gallons",
+      "label": "Row 21 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row21[0].f2_166[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 216.021
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row21_col_g_applicable_amount",
+      "label": "Row 21 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row21[0].f2_167[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 216.021
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row21_col_h_credit_amount",
+      "label": "Row 21 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row21[0].f2_168[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 216.021
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row22_col_a_type_of_fuel",
+      "label": "Row 22 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row22[0].f2_169[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 204.022
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row22_col_b_type_of_feedstock",
+      "label": "Row 22 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row22[0].f2_170[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 204.022
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row22_col_c_calendar_year_sold",
+      "label": "Row 22 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row22[0].f2_171[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 204.022
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row22_col_d_emissions_rate",
+      "label": "Row 22 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row22[0].f2_172[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 204.022
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row22_col_e_emissions_factor",
+      "label": "Row 22 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row22[0].f2_173[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 204.022
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row22_col_f_gallons",
+      "label": "Row 22 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row22[0].f2_174[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 204.022
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row22_col_g_applicable_amount",
+      "label": "Row 22 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row22[0].f2_175[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 204.022
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row22_col_h_credit_amount",
+      "label": "Row 22 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row22[0].f2_176[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 204.022
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row23_col_a_type_of_fuel",
+      "label": "Row 23 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row23[0].f2_177[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 192.023
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row23_col_b_type_of_feedstock",
+      "label": "Row 23 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row23[0].f2_178[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 192.023
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row23_col_c_calendar_year_sold",
+      "label": "Row 23 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row23[0].f2_179[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 192.023
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row23_col_d_emissions_rate",
+      "label": "Row 23 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row23[0].f2_180[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 192.023
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row23_col_e_emissions_factor",
+      "label": "Row 23 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row23[0].f2_181[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 192.023
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row23_col_f_gallons",
+      "label": "Row 23 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row23[0].f2_182[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 192.023
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row23_col_g_applicable_amount",
+      "label": "Row 23 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row23[0].f2_183[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 192.023
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row23_col_h_credit_amount",
+      "label": "Row 23 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row23[0].f2_184[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 192.023
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row24_col_a_type_of_fuel",
+      "label": "Row 24 — (a) Type of fuel",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row24[0].f2_185[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 180.024
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row24_col_b_type_of_feedstock",
+      "label": "Row 24 — (b) Type of feedstock",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row24[0].f2_186[0]",
+      "position": {
+        "page": 1,
+        "x": 166.6,
+        "y": 180.024
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row24_col_c_calendar_year_sold",
+      "label": "Row 24 — (c) Calendar year sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row24[0].f2_187[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 180.024
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-7218.1.part3.row24_col_d_emissions_rate",
+      "label": "Row 24 — (d) Emissions rate or PER value in kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row24[0].f2_188[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 180.024
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row24_col_e_emissions_factor",
+      "label": "Row 24 — (e) Subtract (d) from 50 kg of CO2e per mmBTU and divide the result by 50 kg of CO2e per mmBTU",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row24[0].f2_189[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 180.024
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row24_col_f_gallons",
+      "label": "Row 24 — (f) Gallons or gallon equivalents",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row24[0].f2_190[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 180.024
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row24_col_g_applicable_amount",
+      "label": "Row 24 — (g) Inflation-adjusted applicable amount for fuel sold",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row24[0].f2_191[0]",
+      "position": {
+        "page": 1,
+        "x": 576,
+        "y": 180.024
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.row24_col_h_credit_amount",
+      "label": "Row 24 — (h) Multiply columns (e) x (f) x (g)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row24[0].f2_192[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 180.024
+      }
+    },
+    {
+      "fieldId": "form-7218.1.part3.25_total_of_column_h",
+      "label": "Line 25 — Total of column (h)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_193[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 156.002
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/7218/blank.pdf",
+    "ingestedAt": "2026-11-27T15:04:12.544Z",
+    "totalFields": 219,
+    "skipped": 0,
+    "catalogEntries": 219
+  }
+}

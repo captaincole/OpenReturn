@@ -1,0 +1,114 @@
+{
+  "formId": "form-8864",
+  "fieldCount": 12,
+  "entries": [
+    {
+      "fieldId": "form-8864.0.header.a_transfer_election_registration_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-1D619"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8864.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-1ADGH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8864.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-ZA9B6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8864.0.line.10_credit_from_pass_through_entities",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+          "text": "9,233"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8864.0.line.11_add_lines_9_10",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+          "text": "8,113"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8864.0.line.12_allocated_to_patrons_beneficiaries",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+          "text": "1,576"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8864.0.line.13_cooperative_estate_trust_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+          "text": "4,828"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8864.0.line.7_agri_biodiesel_before_july_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines1-7[0].Line7[0].f1_22[0]",
+          "text": "6,969"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8864.0.line.7_agri_biodiesel_before_july_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines1-7[0].Line7[0].f1_24[0]",
+          "text": "9,180"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8864.0.line.8_agri_biodiesel_after_june_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines1-7[0].Line8[0].f1_25[0]",
+          "text": "9,751"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8864.0.line.8_agri_biodiesel_after_june_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines1-7[0].Line8[0].f1_27[0]",
+          "text": "2,534"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8864.0.line.9_total_agri_biodiesel_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+          "text": "5,383"
+        }
+      ]
+    }
+  ]
+}

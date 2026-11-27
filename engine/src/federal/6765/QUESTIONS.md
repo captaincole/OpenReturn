@@ -24,14 +24,14 @@ The blank PDF is Rev. December 2024; the instructions are Rev. December 2025. Ev
 | Section F lines 42 to 48 | Stated rule |
 | Section G lines 49(a) to 49(e), 50 to 56 | Stated rule; the text of 49(d) and 49(e), and 49(a) of a business with no EIN: own reading (item 6) |
 | Column 49(f) | Stated rule: original returns leave it blank |
-| The section 280C reduction on Schedule C | Decision A103 (`reduction.ts`) |
+| The section 280C reduction on Schedule C | Decision A114 (`reduction.ts`) |
 | Schedule CA line 3 with the section 280C reduction | Unsupported: FTB 3523 (item 10) |
 | Section G past 15 components | Unsupported: the additional sheets (item 9) |
 | Form 3800 line 1c or 4i | Stated rule; one line per source is own reading (item 1) |
 
 ## Two texts conflict
 
-- **A103, the Schedule C lines that take the section 280C reduction.** The Form 6765 instructions leave the lines to the taxpayer; the Schedule C instructions name no line for the research credit. The engine reduces line 26, then 22, 20a and 11, each by at most what the business paid in that category. DECISION comment in `reduction.ts`, row A103 in `docs/rule-decisions.md`.
+- **A114, the Schedule C lines that take the section 280C reduction.** The Form 6765 instructions leave the lines to the taxpayer; the Schedule C instructions name no line for the research credit. The engine reduces line 26, then 22, 20a and 11, each by at most what the business paid in that category. DECISION comment in `reduction.ts`, row A103 in `docs/rule-decisions.md`.
 
 ## Should we do this now
 
