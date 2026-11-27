@@ -104,7 +104,7 @@ function californiaLines(caCases: LawCase[], caRuns: ModeRun[]): string[] {
     "",
     UNREVIEWED,
     "",
-    'Questions about California\'s personal income tax law and its apportionment rules (Part 11 Chapter 17), in `canon/evals/law/caCases.json`, searched on California\'s code only (source "california"): searchLaw returns California only when a caller names it. The sections are sections of the Revenue and Taxation Code ("CA 17041").',
+    'Questions about California\'s franchise and income tax laws, in `canon/evals/law/caCases.json`, searched on California\'s code only (source "california"): searchLaw returns California only when a caller names it. The sections are sections of the Revenue and Taxation Code ("CA 17041").',
     "",
     summary(caRuns),
     "",

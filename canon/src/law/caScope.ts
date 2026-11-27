@@ -20,16 +20,28 @@ export interface CaScope {
 }
 
 /*
- * Revenue and Taxation Code, Division 2: the personal income tax (Part 10)
- * and its administration (Part 10.2), whole. From the Corporation Tax Law
- * (Part 11), only Chapter 17, Allocation of Income: a nonresident's business
- * income is apportioned by its rules. The rest of Part 11 stays out: its
- * corporate versions of the personal rules would compete with them in search.
+ * Revenue and Taxation Code, Division 2: every part of the franchise and
+ * income tax laws, whole. The personal income tax (Part 10), its
+ * administration (Part 10.2), the earned income credit notices (10.3), the
+ * elective tax of a pass-through entity (10.4, 10.4.1), the Taxpayers' Bill
+ * of Rights (10.7), Part 10.8, the Corporation Tax Law (Part 11) and the
+ * health coverage penalty (Part 32). The other parts of the division (sales,
+ * fuel, property tax programs) are not income tax law and stay out.
  */
 export const CA_LIBRARY_SCOPE: CaScope = {
   code: "RTC",
   division: "2.",
-  parts: [{ part: "10." }, { part: "10.2." }, { part: "11.", chapters: ["17."] }],
+  parts: [
+    { part: "10." },
+    { part: "10.2." },
+    { part: "10.3." },
+    { part: "10.4." },
+    { part: "10.4.1." },
+    { part: "10.7." },
+    { part: "10.8." },
+    { part: "11." },
+    { part: "32." },
+  ],
 };
 
 /** The file in the extract that holds its scope. */

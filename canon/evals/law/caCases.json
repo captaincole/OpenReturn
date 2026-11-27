@@ -221,5 +221,55 @@
     ],
     "expect": ["CA 25102"],
     "source": "topic: apportionment, combined report of a unitary business"
+  },
+  {
+    "id": "ca-s-corporation-federal-election",
+    "question": "My company is an S corporation for federal tax. Is it an S corporation for California too?",
+    "queries": [
+      "corporation that has in effect a valid federal S corporation election shall be an S corporation for California purposes"
+    ],
+    "expect": ["CA 23801"],
+    "expectPath": "CA 23801(a)",
+    "source": "topic: S corporations, the federal election carries over"
+  },
+  {
+    "id": "ca-s-corporation-entity-tax",
+    "question": "Does California tax an S corporation itself, or only its shareholders?",
+    "queries": [
+      "S corporations continue to be subject to the franchise tax at a rate of 1 1/2 percent"
+    ],
+    "expect": ["CA 23802"],
+    "expectPath": "CA 23802(b)",
+    "source": "topic: S corporations, the 1.5 percent entity tax"
+  },
+  {
+    "id": "ca-pass-through-elective-tax",
+    "question": "My partnership wants to pay California tax for its partners. Which entities can elect that?",
+    "queries": [
+      "qualified entity taxed as a partnership or S corporation may elect to pay an elective tax"
+    ],
+    "expect": ["CA 19902"],
+    "expectPath": "CA 19902(a)",
+    "source": "topic: elective tax of a pass-through entity, who qualifies"
+  },
+  {
+    "id": "ca-health-coverage-penalty",
+    "question": "I had no health insurance for part of the year. Does California charge a penalty?",
+    "queries": [
+      "penalty imposed on a responsible individual for failure to enroll in and maintain minimum essential coverage"
+    ],
+    "expect": ["CA 61010"],
+    "expectPath": "CA 61010(a)",
+    "source": "topic: Individual Shared Responsibility Penalty"
+  },
+  {
+    "id": "ca-health-coverage-penalty-amount",
+    "question": "How does California compute the penalty for months with no health coverage?",
+    "queries": [
+      "amount of the Individual Shared Responsibility Penalty monthly penalty amount one-twelfth"
+    ],
+    "expect": ["CA 61015"],
+    "expectPath": "CA 61015(a)",
+    "source": "topic: Individual Shared Responsibility Penalty, the amount"
   }
 ]

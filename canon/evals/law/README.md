@@ -1,6 +1,6 @@
 # Law search eval
 
-Checks that a search of the law library finds the section that holds a rule: the Internal Revenue Code (Title 26), the Treasury regulations (26 CFR Parts 1 and 301), and California's Revenue and Taxation Code (Division 2, Parts 10 and 10.2, and Part 11 Chapter 17).
+Checks that a search of the law library finds the section that holds a rule: the Internal Revenue Code (Title 26), the Treasury regulations (26 CFR Parts 1 and 301), and California's Revenue and Taxation Code (Division 2, the franchise and income tax laws: Parts 10 to 10.4.1, 10.7, 10.8, 11 and 32).
 
 A case in `cases.json` has a plain-words `question`, 1 to 3 `queries` that an agent writes after it read the IRS instructions (the statute's terms, never a section number), and `expect`: the sections where the rule is. A hit in any of them counts. `expectPath` names the exact subdivision when one holds the rule. `source` says where the case came from: a row of `docs/rule-decisions.md`, a topic of the target user's return, or a "hard direction" case whose question uses words far from the statute's.
 

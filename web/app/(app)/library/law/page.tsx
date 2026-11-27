@@ -55,9 +55,8 @@ export default async function LawPage() {
             <h1 className="font-serif text-4xl text-ink-primary">Reference Library</h1>
             <p className="mt-2.5 max-w-2xl text-[15px] text-ink-secondary">
               The law is a separate library: the statute, the Internal Revenue Code, the Treasury
-              regulations under it, and California&apos;s personal income tax law with its
-              apportionment rules. Canon reads it only when the instructions do not settle a
-              question.
+              regulations under it, and California&apos;s franchise and income tax laws. Canon reads
+              it only when the instructions do not settle a question.
             </p>
           </header>
           <LibraryTabs active="law" />
