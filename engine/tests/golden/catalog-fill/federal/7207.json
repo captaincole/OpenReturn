@@ -1,0 +1,3966 @@
+{
+  "formId": "form-7207",
+  "fieldCount": 440,
+  "entries": [
+    {
+      "fieldId": "form-7207.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-17EMU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-8EMVT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part1.1_facility_registration_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-V0XQW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part1.2_facility_placed_in_service_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part1.3a_facility_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "T-1TP7R"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part1.3b_owner_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "T-WLL87"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part1.3b_owner_tin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "T-ENTPK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part1.4_latitude_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_10[0]",
+          "text": "T1VH0Q"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part1.4_latitude_degrees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_9[0]",
+          "text": "90"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part1.4_latitude_sign",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_8[0]",
+          "text": "8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part1.4_longitude_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_13[0]",
+          "text": "TB7KYV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part1.4_longitude_degrees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_12[0]",
+          "text": "713"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part1.4_longitude_sign",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_11[0]",
+          "text": "7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part1.5_section_45x_a3b_election_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part1.5_section_45x_a3b_election_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part1.6_section_48c_facility_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part1.6_section_48c_facility_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.1a_thin_film_pv_cell_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1a[0].f1_16[0]",
+          "text": "7,708"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.1a_thin_film_pv_cell_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1a[0].f1_17[0]",
+          "text": "2,865"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.1b_photovoltaic_wafer_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1b[0].f1_20[0]",
+          "text": "8,216"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.1b_photovoltaic_wafer_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1b[0].f1_21[0]",
+          "text": "5,894"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.1c_solar_grade_polysilicon_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1c[0].f1_24[0]",
+          "text": "5,922"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.1c_solar_grade_polysilicon_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1c[0].f1_25[0]",
+          "text": "1,800"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.1d_polymeric_backsheet_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1d[0].f1_28[0]",
+          "text": "8,381"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.1d_polymeric_backsheet_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1d[0].f1_29[0]",
+          "text": "3,333"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.1e_solar_module_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1e[0].f1_32[0]",
+          "text": "1,194"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.1e_solar_module_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1e[0].f1_33[0]",
+          "text": "3,649"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.1f_torque_tube_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1f[0].f1_36[0]",
+          "text": "6,857"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.1f_torque_tube_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1f[0].f1_37[0]",
+          "text": "7,986"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.1g_structural_fastener_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1g[0].f1_40[0]",
+          "text": "8,095"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.1g_structural_fastener_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1g[0].f1_41[0]",
+          "text": "9,011"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.2a_offshore_wind_vessel_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2a[0].f1_44[0]",
+          "text": "2,832"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.2a_offshore_wind_vessel_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2a[0].f1_45[0]",
+          "text": "5,148"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.2b_blade_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2b[0].f1_48[0]",
+          "text": "4,902"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.2b_blade_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2b[0].f1_49[0]",
+          "text": "7,510"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.2c_nacelle_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2c[0].f1_52[0]",
+          "text": "9,325"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.2c_nacelle_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2c[0].f1_53[0]",
+          "text": "6,857"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.2d_tower_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2d[0].f1_56[0]",
+          "text": "8,556"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.2d_tower_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2d[0].f1_57[0]",
+          "text": "5,406"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.2e_fixed_platform_foundation_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2e[0].f1_60[0]",
+          "text": "8,798"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.2e_fixed_platform_foundation_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2e[0].f1_61[0]",
+          "text": "2,305"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.2f_floating_platform_foundation_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2f[0].f1_64[0]",
+          "text": "3,003"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.0.part2.2f_floating_platform_foundation_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2f[0].f1_65[0]",
+          "text": "3,206"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.3a_central_inverter_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line3[0].Line3a[0].f2_03[0]",
+          "text": "6,769"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.3a_central_inverter_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line3[0].Line3a[0].f2_04[0]",
+          "text": "7,831"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.3b_utility_inverter_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line3[0].Line3b[0].f2_07[0]",
+          "text": "6,898"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.3b_utility_inverter_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line3[0].Line3b[0].f2_08[0]",
+          "text": "7,469"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.3c_commercial_inverter_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line3[0].Line3c[0].f2_11[0]",
+          "text": "4,764"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.3c_commercial_inverter_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line3[0].Line3c[0].f2_12[0]",
+          "text": "7,577"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.3d_residential_inverter_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line3[0].Line3d[0].f2_15[0]",
+          "text": "8,676"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.3d_residential_inverter_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line3[0].Line3d[0].f2_16[0]",
+          "text": "8,111"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.3e_microinverter_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line3[0].Line3e[0].f2_19[0]",
+          "text": "3,372"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.3e_microinverter_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line3[0].Line3e[0].f2_20[0]",
+          "text": "2,006"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.3f_distributed_wind_inverter_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line3[0].Line3f[0].f2_23[0]",
+          "text": "1,482"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.3f_distributed_wind_inverter_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line3[0].Line3f[0].f2_24[0]",
+          "text": "5,857"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.4a_electrode_active_materials_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4a[0].f2_27[0]",
+          "text": "9,662"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.4a_electrode_active_materials_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4a[0].f2_28[0]",
+          "text": "2,950"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.5a_battery_cell_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5a[0].f2_31[0]",
+          "text": "7,262"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.5a_battery_cell_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5a[0].f2_32[0]",
+          "text": "5,569"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.5b_battery_module_with_cells_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5b[0].f2_35[0]",
+          "text": "4,758"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.5b_battery_module_with_cells_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5b[0].f2_36[0]",
+          "text": "2,168"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.5c_battery_module_without_cells_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5c[0].f2_39[0]",
+          "text": "6,733"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.5c_battery_module_without_cells_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5c[0].f2_40[0]",
+          "text": "6,753"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.6a_applicable_critical_minerals_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6a[0].f2_43[0]",
+          "text": "6,723"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.6a_applicable_critical_minerals_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6a[0].f2_44[0]",
+          "text": "4,305"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.6b_metallurgical_coal_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6b[0].f2_47[0]",
+          "text": "7,979"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.6b_metallurgical_coal_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6b[0].f2_48[0]",
+          "text": "1,061"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.7_credit_from_other_entities",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_49[0]",
+          "text": "7,511"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.8a_total_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_50[0]",
+          "text": "4,089"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.8b_allocated_to_beneficiaries",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_51[0]",
+          "text": "6,426"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.1.line.8c_estate_trust_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_52[0]",
+          "text": "5,361"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row1_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row1[0].c3_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row1_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row1[0].c3_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row1_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row1[0].f3_04[0]",
+          "text": "8,912"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row1_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row1[0].f3_01[0]",
+          "text": "T-1KHGP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row1_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row1[0].f3_03[0]",
+          "text": "T-10EYQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row1_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row1[0].f3_02[0]",
+          "text": "T-1J4AY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row10_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row10[0].c3_10[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row10_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row10[0].c3_10[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row10_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row10[0].f3_36[0]",
+          "text": "8,592"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row10_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row10[0].f3_33[0]",
+          "text": "T-EDLE5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row10_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row10[0].f3_35[0]",
+          "text": "T-1F2Q0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row10_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row10[0].f3_34[0]",
+          "text": "T-DRJC0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row11_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row11[0].c3_11[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row11_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row11[0].c3_11[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row11_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row11[0].f3_40[0]",
+          "text": "6,253"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row11_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row11[0].f3_37[0]",
+          "text": "T-1OQMY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row11_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row11[0].f3_39[0]",
+          "text": "T-16RW2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row11_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row11[0].f3_38[0]",
+          "text": "T-181BG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row12_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row12[0].c3_12[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row12_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row12[0].c3_12[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row12_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row12[0].f3_44[0]",
+          "text": "1,651"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row12_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row12[0].f3_41[0]",
+          "text": "T-RGGCE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row12_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row12[0].f3_43[0]",
+          "text": "T-1W9X3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row12_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row12[0].f3_42[0]",
+          "text": "T-CTMMA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row13_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row13[0].c3_13[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row13_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row13[0].c3_13[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row13_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row13[0].f3_48[0]",
+          "text": "2,483"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row13_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row13[0].f3_45[0]",
+          "text": "T-1NNO5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row13_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row13[0].f3_47[0]",
+          "text": "T-1ICH7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row13_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row13[0].f3_46[0]",
+          "text": "T-F688T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row14_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row14[0].c3_14[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row14_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row14[0].c3_14[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row14_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row14[0].f3_52[0]",
+          "text": "1,664"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row14_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row14[0].f3_49[0]",
+          "text": "T-K07RS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row14_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row14[0].f3_51[0]",
+          "text": "T-1FEXU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row14_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row14[0].f3_50[0]",
+          "text": "T-3VE6R"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row15_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row15[0].c3_15[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row15_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row15[0].c3_15[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row15_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row15[0].f3_56[0]",
+          "text": "7,959"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row15_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row15[0].f3_53[0]",
+          "text": "T-7GHZC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row15_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row15[0].f3_55[0]",
+          "text": "T-6QRD3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row15_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row15[0].f3_54[0]",
+          "text": "T-1BHWA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row16_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row16[0].c3_16[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row16_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row16[0].c3_16[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row16_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row16[0].f3_60[0]",
+          "text": "1,701"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row16_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row16[0].f3_57[0]",
+          "text": "T-B4MHV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row16_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row16[0].f3_59[0]",
+          "text": "T-2FCPL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row16_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row16[0].f3_58[0]",
+          "text": "T-1K4ML"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row17_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row17[0].c3_17[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row17_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row17[0].c3_17[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row17_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row17[0].f3_64[0]",
+          "text": "1,860"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row17_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row17[0].f3_61[0]",
+          "text": "T-G8OYK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row17_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row17[0].f3_63[0]",
+          "text": "T-12SHK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row17_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row17[0].f3_62[0]",
+          "text": "T-1ZRJT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row18_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row18[0].c3_18[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row18_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row18[0].c3_18[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row18_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row18[0].f3_68[0]",
+          "text": "3,766"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row18_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row18[0].f3_65[0]",
+          "text": "T-11ZET"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row18_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row18[0].f3_67[0]",
+          "text": "T-KZX9W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row18_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row18[0].f3_66[0]",
+          "text": "T-1FOBS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row19_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row19[0].c3_19[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row19_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row19[0].c3_19[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row19_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row19[0].f3_72[0]",
+          "text": "8,519"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row19_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row19[0].f3_69[0]",
+          "text": "T-1MS0O"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row19_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row19[0].f3_71[0]",
+          "text": "T-1DFDW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row19_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row19[0].f3_70[0]",
+          "text": "T-IWGC1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row2_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row2[0].c3_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row2_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row2[0].c3_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row2_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row2[0].f3_08[0]",
+          "text": "1,373"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row2_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row2[0].f3_05[0]",
+          "text": "T-QVX9K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row2_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row2[0].f3_07[0]",
+          "text": "T-16N9X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row2_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row2[0].f3_06[0]",
+          "text": "T-1KTYR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row20_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row20[0].c3_20[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row20_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row20[0].c3_20[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row20_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row20[0].f3_76[0]",
+          "text": "5,704"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row20_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row20[0].f3_73[0]",
+          "text": "T-54QDS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row20_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row20[0].f3_75[0]",
+          "text": "T-1PMHK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row20_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row20[0].f3_74[0]",
+          "text": "T-DGDOC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row21_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row21[0].c3_21[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row21_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row21[0].c3_21[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row21_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row21[0].f3_80[0]",
+          "text": "2,482"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row21_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row21[0].f3_77[0]",
+          "text": "T-VNELQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row21_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row21[0].f3_79[0]",
+          "text": "T-188J1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row21_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row21[0].f3_78[0]",
+          "text": "T-160PZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row22_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row22[0].c3_22[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row22_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row22[0].c3_22[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row22_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row22[0].f3_84[0]",
+          "text": "1,762"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row22_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row22[0].f3_81[0]",
+          "text": "T-118CS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row22_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row22[0].f3_83[0]",
+          "text": "T-1XZ12"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row22_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row22[0].f3_82[0]",
+          "text": "T-XWJ6F"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row23_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row23[0].c3_23[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row23_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row23[0].c3_23[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row23_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row23[0].f3_88[0]",
+          "text": "4,417"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row23_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row23[0].f3_85[0]",
+          "text": "T-1B7MA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row23_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row23[0].f3_87[0]",
+          "text": "T-15RUG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row23_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row23[0].f3_86[0]",
+          "text": "T-86Z1V"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row24_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row24[0].c3_24[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row24_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row24[0].c3_24[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row24_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row24[0].f3_92[0]",
+          "text": "3,332"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row24_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row24[0].f3_89[0]",
+          "text": "T-VT7TN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row24_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row24[0].f3_91[0]",
+          "text": "T-OJWDO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row24_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row24[0].f3_90[0]",
+          "text": "T-1SHXE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row25_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row25[0].c3_25[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row25_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row25[0].c3_25[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row25_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row25[0].f3_96[0]",
+          "text": "3,803"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row25_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row25[0].f3_93[0]",
+          "text": "T-1ROHZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row25_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row25[0].f3_95[0]",
+          "text": "T-MGDYQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row25_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row25[0].f3_94[0]",
+          "text": "T-5EV1X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row26_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row26[0].c3_26[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row26_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row26[0].c3_26[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row26_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row26[0].f3_100[0]",
+          "text": "5,743"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row26_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row26[0].f3_97[0]",
+          "text": "T-S9NSV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row26_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row26[0].f3_99[0]",
+          "text": "T-DH0ML"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row26_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row26[0].f3_98[0]",
+          "text": "T-1SHKQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row27_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row27[0].c3_27[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row27_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row27[0].c3_27[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row27_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row27[0].f3_104[0]",
+          "text": "6,775"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row27_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row27[0].f3_101[0]",
+          "text": "T-4D82P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row27_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row27[0].f3_103[0]",
+          "text": "T-M6ON0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row27_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row27[0].f3_102[0]",
+          "text": "T-1Q0TM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row28_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row28[0].c3_28[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row28_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row28[0].c3_28[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row28_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row28[0].f3_108[0]",
+          "text": "6,543"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row28_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row28[0].f3_105[0]",
+          "text": "T-U946I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row28_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row28[0].f3_107[0]",
+          "text": "T-1JVN5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row28_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row28[0].f3_106[0]",
+          "text": "T-3GQ4I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row29_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row29[0].c3_29[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row29_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row29[0].c3_29[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row29_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row29[0].f3_112[0]",
+          "text": "2,351"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row29_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row29[0].f3_109[0]",
+          "text": "T-1D5QS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row29_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row29[0].f3_111[0]",
+          "text": "T-HO3KG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row29_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row29[0].f3_110[0]",
+          "text": "T-V06MC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row3_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row3[0].c3_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row3_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row3[0].c3_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row3_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row3[0].f3_08[0]",
+          "text": "7,530"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row3_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row3[0].f3_05[0]",
+          "text": "T-135W7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row3_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row3[0].f3_07[0]",
+          "text": "T-E43FQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row3_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row3[0].f3_06[0]",
+          "text": "T-XCP5D"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row30_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row30[0].c3_30[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row30_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row30[0].c3_30[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row30_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row30[0].f3_116[0]",
+          "text": "6,922"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row30_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row30[0].f3_113[0]",
+          "text": "T-OXOZ7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row30_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row30[0].f3_115[0]",
+          "text": "T-9IARI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row30_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row30[0].f3_114[0]",
+          "text": "T-TK1N6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row31_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row31[0].c3_31[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row31_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row31[0].c3_31[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row31_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row31[0].f3_120[0]",
+          "text": "5,032"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row31_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row31[0].f3_117[0]",
+          "text": "T-1T8C0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row31_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row31[0].f3_119[0]",
+          "text": "T-1UM2U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row31_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row31[0].f3_118[0]",
+          "text": "T-1OCXZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row32_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row32[0].c3_32[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row32_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row32[0].c3_32[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row32_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row32[0].f3_124[0]",
+          "text": "2,417"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row32_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row32[0].f3_121[0]",
+          "text": "T-145U1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row32_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row32[0].f3_123[0]",
+          "text": "T-HENO7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row32_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row32[0].f3_122[0]",
+          "text": "T-XDW14"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row33_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row33[0].c3_33[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row33_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row33[0].c3_33[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row33_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row33[0].f3_128[0]",
+          "text": "3,794"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row33_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row33[0].f3_125[0]",
+          "text": "T-1QO27"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row33_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row33[0].f3_127[0]",
+          "text": "T-1TRFZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row33_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row33[0].f3_126[0]",
+          "text": "T-E9YGE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row34_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row34[0].c3_34[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row34_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row34[0].c3_34[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row34_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row34[0].f3_132[0]",
+          "text": "2,086"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row34_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row34[0].f3_129[0]",
+          "text": "T-LZ7B2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row34_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row34[0].f3_131[0]",
+          "text": "T-1OHUX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row34_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row34[0].f3_130[0]",
+          "text": "T-1126T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row35_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row35[0].c3_35[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row35_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row35[0].c3_35[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row35_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row35[0].f3_136[0]",
+          "text": "3,591"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row35_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row35[0].f3_133[0]",
+          "text": "T-LUSRN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row35_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row35[0].f3_135[0]",
+          "text": "T-NOYXN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row35_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row35[0].f3_134[0]",
+          "text": "T-Z7RDM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row36_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row36[0].c3_36[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row36_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row36[0].c3_36[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row36_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row36[0].f3_140[0]",
+          "text": "1,121"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row36_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row36[0].f3_137[0]",
+          "text": "T-WK2P0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row36_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row36[0].f3_139[0]",
+          "text": "T-1TJKB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row36_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row36[0].f3_138[0]",
+          "text": "T-L2WCB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row37_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row37[0].c3_37[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row37_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row37[0].c3_37[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row37_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row37[0].f3_144[0]",
+          "text": "2,908"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row37_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row37[0].f3_141[0]",
+          "text": "T-EZS7O"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row37_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row37[0].f3_143[0]",
+          "text": "T-YIXDI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row37_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row37[0].f3_142[0]",
+          "text": "T-T45QK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row38_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row38[0].c3_38[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row38_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row38[0].c3_38[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row38_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row38[0].f3_148[0]",
+          "text": "1,990"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row38_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row38[0].f3_145[0]",
+          "text": "T-1UB4E"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row38_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row38[0].f3_147[0]",
+          "text": "T-17JVK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row38_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row38[0].f3_146[0]",
+          "text": "T-R5N0U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row39_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row39[0].c3_39[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row39_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row39[0].c3_39[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row39_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row39[0].f3_152[0]",
+          "text": "6,354"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row39_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row39[0].f3_149[0]",
+          "text": "T-1M10Y"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row39_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row39[0].f3_151[0]",
+          "text": "T-FBAOQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row39_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row39[0].f3_150[0]",
+          "text": "T-1NWCY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row4_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row4[0].c3_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row4_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row4[0].c3_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row4_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row4[0].f3_12[0]",
+          "text": "8,758"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row4_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row4[0].f3_09[0]",
+          "text": "T-EQQ7I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row4_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row4[0].f3_11[0]",
+          "text": "T-1ILYB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row4_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row4[0].f3_10[0]",
+          "text": "T-5X9OP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row40_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row40[0].c3_40[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row40_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row40[0].c3_40[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row40_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row40[0].f3_156[0]",
+          "text": "4,652"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row40_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row40[0].f3_153[0]",
+          "text": "T-W7Y72"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row40_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row40[0].f3_155[0]",
+          "text": "T-UZF8W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row40_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row40[0].f3_154[0]",
+          "text": "T-JSU1S"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row41_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row41[0].c3_41[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row41_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row41[0].c3_41[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row41_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row41[0].f3_160[0]",
+          "text": "1,173"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row41_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row41[0].f3_157[0]",
+          "text": "T-4337M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row41_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row41[0].f3_159[0]",
+          "text": "T-P5JVA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row41_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row41[0].f3_158[0]",
+          "text": "T-MTRJT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row42_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row42[0].c3_42[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row42_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row42[0].c3_42[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row42_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row42[0].f3_164[0]",
+          "text": "3,341"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row42_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row42[0].f3_161[0]",
+          "text": "T-17X2D"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row42_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row42[0].f3_163[0]",
+          "text": "T-1LBBM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row42_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row42[0].f3_162[0]",
+          "text": "T-1HNJ6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row43_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row43[0].c3_43[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row43_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row43[0].c3_43[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row43_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row43[0].f3_168[0]",
+          "text": "3,219"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row43_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row43[0].f3_165[0]",
+          "text": "T-41OP8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row43_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row43[0].f3_167[0]",
+          "text": "T-1II1P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row43_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row43[0].f3_166[0]",
+          "text": "T-32FR2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row44_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row44[0].c3_44[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row44_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row44[0].c3_44[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row44_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row44[0].f3_172[0]",
+          "text": "2,173"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row44_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row44[0].f3_169[0]",
+          "text": "T-IY7TI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row44_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row44[0].f3_171[0]",
+          "text": "T-KZNNQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row44_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row44[0].f3_170[0]",
+          "text": "T-TLDB1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row45_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row45[0].c3_45[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row45_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row45[0].c3_45[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row45_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row45[0].f3_176[0]",
+          "text": "9,436"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row45_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row45[0].f3_173[0]",
+          "text": "T-1O7WS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row45_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row45[0].f3_175[0]",
+          "text": "T-18077"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row45_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row45[0].f3_174[0]",
+          "text": "T-81IML"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row46_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row46[0].c3_46[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row46_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row46[0].c3_46[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row46_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row46[0].f3_180[0]",
+          "text": "4,786"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row46_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row46[0].f3_177[0]",
+          "text": "T-142YJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row46_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row46[0].f3_179[0]",
+          "text": "T-1MNR8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row46_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row46[0].f3_178[0]",
+          "text": "T-7JDBV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row47_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row47[0].c3_47[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row47_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row47[0].c3_47[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row47_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row47[0].f3_184[0]",
+          "text": "6,328"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row47_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row47[0].f3_181[0]",
+          "text": "T-1572X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row47_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row47[0].f3_183[0]",
+          "text": "T-FDKLX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row47_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row47[0].f3_182[0]",
+          "text": "T-14DXF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row48_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row48[0].c3_48[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row48_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row48[0].c3_48[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row48_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row48[0].f3_188[0]",
+          "text": "6,301"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row48_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row48[0].f3_185[0]",
+          "text": "T-1C4AN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row48_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row48[0].f3_187[0]",
+          "text": "T-1HRWR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row48_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row48[0].f3_186[0]",
+          "text": "T-FEU3H"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row49_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row49[0].c3_49[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row49_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row49[0].c3_49[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row49_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row49[0].f3_192[0]",
+          "text": "9,750"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row49_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row49[0].f3_189[0]",
+          "text": "T-14K6U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row49_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row49[0].f3_191[0]",
+          "text": "T-RVSVG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row49_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row49[0].f3_190[0]",
+          "text": "T-18UKP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row5_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row5[0].c3_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row5_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row5[0].c3_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row5_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row5[0].f3_16[0]",
+          "text": "3,879"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row5_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row5[0].f3_13[0]",
+          "text": "T-1IAGU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row5_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row5[0].f3_15[0]",
+          "text": "T-1AF6R"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row5_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row5[0].f3_14[0]",
+          "text": "T-193TF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row6_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row6[0].c3_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row6_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row6[0].c3_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row6_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row6[0].f3_20[0]",
+          "text": "1,170"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row6_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row6[0].f3_17[0]",
+          "text": "T-17LHZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row6_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row6[0].f3_19[0]",
+          "text": "T-19V0R"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row6_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row6[0].f3_18[0]",
+          "text": "T-1RB9N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row7_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row7[0].c3_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row7_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row7[0].c3_7[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row7_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row7[0].f3_24[0]",
+          "text": "9,369"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row7_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row7[0].f3_21[0]",
+          "text": "T-1HMB3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row7_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row7[0].f3_23[0]",
+          "text": "T-1ALLX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row7_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row7[0].f3_22[0]",
+          "text": "T-FUYSH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row8_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row8[0].c3_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row8_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row8[0].c3_8[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row8_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row8[0].f3_28[0]",
+          "text": "1,013"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row8_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row8[0].f3_25[0]",
+          "text": "T-JZRDV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row8_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row8[0].f3_27[0]",
+          "text": "T-M8ILI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row8_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row8[0].f3_26[0]",
+          "text": "T-1IZAD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row9_new",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row9[0].c3_9[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row9_retrofitted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row9[0].c3_9[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row9_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row9[0].f3_32[0]",
+          "text": "6,771"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row9_vessel_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row9[0].f3_29[0]",
+          "text": "T-WTWLB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row9_vessel_official_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row9[0].f3_31[0]",
+          "text": "T-5DHHS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.row9_vessel_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartIII[0].Row9[0].f3_30[0]",
+          "text": "T-78DYZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.2.part3.total_sales_prices",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_193[0]",
+          "text": "3,611"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.1_aluminum_from_bauxite_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_01[0]",
+          "text": "5,169"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.10_cerium_oxide_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_10[0]",
+          "text": "8,392"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.11_cerium_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_11[0]",
+          "text": "9,088"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.12_cesium_formate_carbonate_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_12[0]",
+          "text": "7,765"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.13_cesium_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_13[0]",
+          "text": "9,427"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.14_chromium_ferrochromium_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_14[0]",
+          "text": "5,518"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.15_chromium_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_15[0]",
+          "text": "2,867"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.16_cobalt_sulfate_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_16[0]",
+          "text": "8,433"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.17_cobalt_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_17[0]",
+          "text": "8,576"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.18_dysprosium_iron_alloy_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_18[0]",
+          "text": "3,462"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.19_dysprosium_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_19[0]",
+          "text": "2,238"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.2_aluminum_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_02[0]",
+          "text": "6,399"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.20_erbium_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_20[0]",
+          "text": "5,713"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.21_europium_oxide_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_21[0]",
+          "text": "7,110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.22_europium_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_22[0]",
+          "text": "3,755"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.23_fluorspar_calcium_fluoride_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_23[0]",
+          "text": "3,623"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.24_fluorspar_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_24[0]",
+          "text": "4,910"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.25_gadolinium_oxide_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_25[0]",
+          "text": "8,268"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.26_gadolinium_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_26[0]",
+          "text": "8,799"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.27_gallium_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_27[0]",
+          "text": "7,660"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.28_germanium_tetrachloride_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_28[0]",
+          "text": "2,571"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.29_germanium_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_29[0]",
+          "text": "1,133"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.3_antimony_trisulfide_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_03[0]",
+          "text": "1,381"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.30_graphite_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_30[0]",
+          "text": "4,213"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.31_hafnium_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_31[0]",
+          "text": "1,459"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.32_holmium_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_32[0]",
+          "text": "7,169"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.33_indium_tin_oxide_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_33[0]",
+          "text": "1,379"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.34_indium_oxide_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_34[0]",
+          "text": "5,739"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.35_indium_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_35[0]",
+          "text": "5,804"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.36_iridium_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_36[0]",
+          "text": "1,857"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.37_lanthanum_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_37[0]",
+          "text": "7,677"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.38_lithium_carbonate_hydroxide_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_38[0]",
+          "text": "8,229"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.39_lithium_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_39[0]",
+          "text": "8,358"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.4_antimony_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_04[0]",
+          "text": "6,942"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.40_lutetium_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_40[0]",
+          "text": "3,735"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.41_magnesium_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_41[0]",
+          "text": "4,545"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.42_manganese_sulphate_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_42[0]",
+          "text": "4,733"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.43_manganese_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_43[0]",
+          "text": "4,717"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.44_neodymium_praseodymium_oxide_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_44[0]",
+          "text": "3,696"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.45_neodymium_oxide_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_45[0]",
+          "text": "1,816"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.46_neodymium_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_46[0]",
+          "text": "4,060"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.47_nickel_sulphate_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_47[0]",
+          "text": "9,697"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.48_nickel_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_48[0]",
+          "text": "6,505"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.49_niobium_ferronibium_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_49[0]",
+          "text": "6,374"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.5_arsenic_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_05[0]",
+          "text": "3,560"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.50_niobium_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_50[0]",
+          "text": "9,215"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.6_barite_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_06[0]",
+          "text": "4,460"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.7_beryllium_master_alloy_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_07[0]",
+          "text": "8,802"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.8_beryllium_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_08[0]",
+          "text": "6,198"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.3.part4.9_bismuth_purified_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_09[0]",
+          "text": "9,054"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.51_palladium_purified_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_01[0]",
+          "text": "2,974"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.52_platinum_purified_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_02[0]",
+          "text": "3,417"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.53_praseodymium_purified_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_03[0]",
+          "text": "2,783"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.54_rhodium_purified_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_04[0]",
+          "text": "9,569"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.55_rubidium_purified_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_05[0]",
+          "text": "1,846"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.56_ruthenium_purified_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_06[0]",
+          "text": "6,270"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.57_samarium_purified_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_07[0]",
+          "text": "8,921"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.58_scandium_purified_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_08[0]",
+          "text": "4,541"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.59_tantalum_purified_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_09[0]",
+          "text": "3,565"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.60_tellurium_cadmium_telluride_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_10[0]",
+          "text": "7,196"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.61_tellurium_purified_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_11[0]",
+          "text": "3,534"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.62_terbium_purified_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_12[0]",
+          "text": "6,710"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.63_thulium_purified_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_13[0]",
+          "text": "2,840"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.64_tin_low_alpha_purity_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_14[0]",
+          "text": "2,598"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.65_tin_low_alpha_emission_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_15[0]",
+          "text": "1,969"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.66_titanium_purified_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_16[0]",
+          "text": "1,784"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.67_tungsten_converted_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_17[0]",
+          "text": "6,326"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.68_vanadium_converted_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_18[0]",
+          "text": "7,155"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.69_ytterbium_purified_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_19[0]",
+          "text": "9,496"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.70_yttrium_oxide_purified_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_20[0]",
+          "text": "1,594"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.71_yttrium_purified_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_21[0]",
+          "text": "1,483"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.72_zinc_purified_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_22[0]",
+          "text": "4,100"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.73_zirconium_purified_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_23[0]",
+          "text": "8,547"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7207.4.part4.74_total_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_24[0]",
+          "text": "7,050"
+        }
+      ]
+    }
+  ]
+}
