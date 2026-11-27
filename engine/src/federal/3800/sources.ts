@@ -19,6 +19,7 @@ import type { ResolverInputs } from "../../resolverInputs.js";
 import { figuredOnForm3468, form3468CreditSources } from "../3468/credit.js";
 import { workOpportunitySources } from "../5884/sources.js";
 import { lowIncomeHousingSourcesOf } from "../8586/form3800.js";
+import { disabledAccessSourcesOf } from "../8826/form3800.js";
 import { withForm8844 } from "../8844/sources.js";
 import { tipCreditSourcesOf } from "../8846/form3800.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
@@ -205,7 +206,9 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
   const tips = tipCreditSourcesOf(inputs);
   // Line 4d: Form 8586 line 3, the credit of the buildings the taxpayer owns (8586/form3800.ts).
   const housing = lowIncomeHousingSourcesOf(inputs);
-  missing.push(...tips.missing, ...housing.missing);
+  // Line 1e: Form 8826 line 6, the credit of the taxpayer's own businesses (8826/form3800.ts).
+  const disabledAccess = disabledAccessSourcesOf(inputs);
+  missing.push(...tips.missing, ...housing.missing, ...disabledAccess.missing);
   // Line 3: Form 8844 line 2, the empowerment zone credit of the taxpayer's own employees (8844/sources.ts).
   const zone = withForm8844(inputs, [
     ...stated,
@@ -214,6 +217,7 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
     ...k1.flatMap((found) => (found.source ? [found.source] : [])),
     ...form3468.sources,
     ...workOpportunity.sources,
+    ...disabledAccess.sources,
   ]);
   missing.push(...zone.missing);
   const current = zone.sources;

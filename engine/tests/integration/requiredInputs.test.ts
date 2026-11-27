@@ -179,6 +179,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],
   [
+    /^disabled_access\.[^.]+$/,
+    "each fact is one group of a business's eligible access expenditures (Form 8826 line 1); " +
+      "whether a business paid any is Cade's question. Form 8826 lists the fact again while it " +
+      "is malformed, and asks the prior-year answers once one exists",
+  ],
+  [
     /^tip_credit\.[^.]+$/,
     "each fact is one whole business's payroll tip records (Form 8846 lines 1 to 4); whether a " +
       "business had tipped employees is Cade's question. Form 8846 lists the fact again while " +

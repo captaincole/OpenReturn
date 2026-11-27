@@ -12,8 +12,11 @@
 
 import { describe, expect, it } from "vitest";
 import {
+  DISABLED_ACCESS_KEYS,
+  makeDisabledAccessFactKey,
   makeEmpowermentZoneEmployeeFactKey,
   makeWorkOpportunityEmployeeFactKey,
+  type DisabledAccessFactValue,
   type EmpowermentZoneEmployeeFactValue,
 } from "../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../src/facts/rows.js";
@@ -183,6 +186,66 @@ describe("a business with the work opportunity, empowerment zone and tip credits
     const run = evaluate(california.facts, california.decisions);
     expect(run.value("schedule-c", "0.line.26")).toBe(442060);
     expect(run.value("schedule-ca", "0.line.b3_subtractions")).toBe(9940);
+  });
+});
+
+/*
+ * The salon also pays a sign-language interpreter $4,250 for its deaf clients,
+ * in its wages: eligible access expenditures (Form 8826 line 1). Its 2024
+ * gross receipts were $950,000, so it is an eligible small business.
+ * - Form 8826: line 1 $4,250; line 3 $4,250 − $250 = $4,000; line 5 $4,000
+ *   (under $10,000); line 6 50% = $2,000.
+ * - Schedule C line 26: $452,000 − $4,000 − $5,940 − $2,000 = $440,060, three
+ *   credits on one line, each dollar once.
+ * - Schedule CA line 3 column B: $4,000 + $5,940 + $2,000 = $11,940.
+ */
+const interpreter = row(natti, "self_employment", makeDisabledAccessFactKey("interpreter"), {
+  businessKey: SALON_KEY,
+  expenditures: 4250,
+  deductedOn: "wages",
+} satisfies DisabledAccessFactValue);
+const receipts = row(natti, "self_employment", DISABLED_ACCESS_KEYS.priorYearGrossReceipts, 950000);
+const ALL_FOUR = [...ALL_THREE, interpreter, receipts];
+
+describe("a business with the work opportunity, zone, tip and disabled access credits", () => {
+  const { value } = evaluate(ALL_FOUR);
+
+  it("figures the disabled access credit and its Form 3800 row", () => {
+    expect(value("form-8826", "0.line.6_multiply_5_by_50_percent_dollars")).toBe(2000);
+    expect(value("form-3800", "2.part3.1e_form_8826_col_g")).toBe(2000);
+    expect(value("form-3800", "3.part3.4b_form_5884_col_g")).toBe(4000);
+    expect(value("form-3800", "3.part3.3_form_8844_col_g")).toBe(5940);
+  });
+
+  it("line 26 is the wages less the three credits on it; line 23 is unchanged", () => {
+    expect(value("schedule-c", "0.line.26")).toBe(440060);
+    expect(value("schedule-c", "0.line.23")).toBe(43514);
+  });
+
+  it("California gives the three credits back once, on Schedule CA line 3 column B", () => {
+    const california = inCalifornia(natti, ALL_FOUR);
+    const run = evaluate(california.facts, california.decisions);
+    expect(run.value("schedule-ca", "0.line.b3_subtractions")).toBe(11940);
+  });
+});
+
+/*
+ * Two credits on one small line: the interpreter's $4,250 is the business's
+ * only wages, and the Form 5884 employees ($4,000 of credit) are on them too.
+ * Line 26 is $4,250 − $4,000 − $2,000, not below 0: $0. California gives back
+ * only the $4,250 taken off.
+ */
+describe("credits larger than the line they lower", () => {
+  const small = { ...salon, expenses: { ...salon.expenses, wages: 4250 } };
+  const facts = ALL_FOUR.filter((each) => !zoneOfTheSalon.includes(each)).map((each) =>
+    each.key === SALON_KEY ? { ...each, value: small } : each,
+  );
+
+  it("the line does not go below 0, and no dollar is given back twice", () => {
+    expect(evaluate(facts).value("schedule-c", "0.line.26")).toBe(0);
+    const california = inCalifornia(natti, facts);
+    const run = evaluate(california.facts, california.decisions);
+    expect(run.value("schedule-ca", "0.line.b3_subtractions")).toBe(4250);
   });
 });
 

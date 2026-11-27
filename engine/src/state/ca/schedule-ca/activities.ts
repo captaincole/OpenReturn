@@ -5,10 +5,10 @@
  */
 
 import {
+  businessCreditAddBack,
   businessesOnReturn,
   CA_EMPLOYEE_CLASSIFICATION_KEYS,
   figuredLaborCreditReduction,
-  wageCreditReduction,
 } from "../../../facts/index.js";
 import { spousePropertiesOnReturn } from "../../../federal/rentals/passive.js";
 import { sum } from "../../../money.js";
@@ -121,11 +121,11 @@ export function resolveActivityAdjustments(inputs: ResolverInputs) {
         }
       : undefined;
   const asked = files540 && hasBusiness;
-  const wageCredit = wageCreditReduction(inputs.facts, joint);
+  const addBack = businessCreditAddBack(inputs.facts, joint);
   const farmCredit = figuredLaborCreditReduction(inputs.facts, joint);
   return {
     caEmployeeAmounts: amounts,
-    caWageCreditAddBack: wageCredit > 0 ? wageCredit : undefined,
+    caBusinessCreditAddBack: addBack > 0 ? addBack : undefined,
     caFarmLaborCredits: farmCredit.credit > 0 ? farmCredit : undefined,
     businessDepreciationAdjustment: adjustmentFor(inputs, "business"),
     rentalDepreciationAdjustment: adjustmentFor(inputs, "rental"),

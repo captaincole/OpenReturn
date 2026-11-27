@@ -7,9 +7,14 @@
  * Form 4562 reports the test as a gap (federal/4562/lines.ts).
  */
 
+import { disabledAccessReductions } from "../../federal/8826/figures.js";
 import { tipCreditReductions } from "../../federal/8846/figures.js";
 import { atLeast, sum } from "../../money.js";
-import { statedBusinessesOnReturn, type BusinessFactValue } from "./business.js";
+import {
+  statedBusinessesOnReturn,
+  type BusinessExpenses,
+  type BusinessFactValue,
+} from "./business.js";
 import { placesPersonalProperty, type ScopedDepreciation } from "./depreciation.js";
 import { empowermentZoneFigures } from "./empowermentZone.js";
 import { statedRentalsOnReturn, type RentalFactValue } from "./rental.js";
@@ -72,18 +77,35 @@ function withRecapture<T extends { key: string; value: BusinessFactValue }>(
   });
 }
 
-type ReducedLine = "wages" | "taxesAndLicenses";
+/*
+ * One amount a credit takes off one business: a Schedule C expense line, or a
+ * Part V entry by its description (the first entry with it).
+ */
+export type BusinessCreditReduction =
+  { line: keyof BusinessExpenses; amount: number } | { otherExpense: string; amount: number };
+
+type ReductionsByBusiness = ReadonlyMap<string, ReadonlyArray<BusinessCreditReduction>>;
 
 interface CreditReduction {
-  line: ReducedLine;
-  /* Each business's credit, by fact key. */
-  creditByBusiness: (facts: ReadonlyArray<FactRow>, joint: boolean) => ReadonlyMap<string, number>;
+  /* Each business's reductions, by fact key. */
+  reductionsOf: (facts: ReadonlyArray<FactRow>, joint: boolean) => ReductionsByBusiness;
+  /* Whether Schedule CA line 3 column B gives back what the credit took off (businessCreditAddBack). */
+  californiaAddsBack: boolean;
 }
 
+/* A credit of each business that lowers one fixed expense line. */
+const onLine =
+  (
+    line: keyof BusinessExpenses,
+    creditOf: (facts: ReadonlyArray<FactRow>, joint: boolean) => ReadonlyMap<string, number>,
+  ) =>
+  (facts: ReadonlyArray<FactRow>, joint: boolean): ReductionsByBusiness =>
+    new Map([...creditOf(facts, joint)].map(([key, amount]) => [key, [{ line, amount }]]));
+
 /*
- * The credits of the taxpayer's own employees that lower a Schedule C expense
- * line. A new credit form adds one entry. A credit from a K-1 is not here: "Do
- * not reduce your deduction for any portion of a credit that was passed
+ * The credits of the taxpayer's own businesses that lower a Schedule C
+ * expense. A new credit form adds one entry. A credit from a K-1 is not here:
+ * "Do not reduce your deduction for any portion of a credit that was passed
  * through to you from a pass-through entity" (irs-1040sc-inst-2025::sec::line-26::b01).
  */
 const BUSINESS_CREDIT_REDUCTIONS: ReadonlyArray<CreditReduction> = [
@@ -93,77 +115,120 @@ const BUSINESS_CREDIT_REDUCTIONS: ReadonlyArray<CreditReduction> = [
    * 5884). Empowerment Zone Employment Credit (Form 8844)" (line-26::b01): Form
    * 5884 line 2 of the business's targeted group employees (workOpportunity.ts)
    * and the business's share of Form 8844 line 2 (empowermentZone.ts).
+   * California gives both back (state/ca/schedule-ca/answerLines.ts).
    */
-  { line: "wages", creditByBusiness: (facts) => workOpportunityCreditByActivity(facts) },
   {
-    line: "wages",
-    creditByBusiness: (facts, joint) => empowermentZoneFigures(facts, joint).creditByEmployer,
+    reductionsOf: onLine("wages", (facts) => workOpportunityCreditByActivity(facts)),
+    californiaAddsBack: true,
+  },
+  {
+    reductionsOf: onLine(
+      "wages",
+      (facts, joint) => empowermentZoneFigures(facts, joint).creditByEmployer,
+    ),
+    californiaAddsBack: true,
   },
   /*
    * Line 23: "Reduce your deduction by the amount shown on Form 8846, line 4"
    * (irs-1040sc-inst-2025::sec::line-23::b01). The stated taxesAndLicenses hold
-   * the employer taxes before the credit.
+   * the employer taxes before the credit. California's treatment is an open
+   * question (federal/8846/QUESTIONS.md).
    */
-  { line: "taxesAndLicenses", creditByBusiness: tipCreditReductions },
+  { reductionsOf: onLine("taxesAndLicenses", tipCreditReductions), californiaAddsBack: false },
+  /*
+   * Form 8826 line 6 comes off the expense line or the Part V entry that holds
+   * the expenditures: "To the extent of the credit shown on line 6, the
+   * eligible access expenditures may not be claimed as a deduction in figuring
+   * taxable income" (irs-8826-form-2025::sec::line-6::b01). The fact names
+   * the line; its stated amount holds the expenditures before the credit.
+   */
+  { reductionsOf: disabledAccessReductions, californiaAddsBack: true },
 ];
 
-/*
- * Each business with its stated lines less the credits that lower them. The
- * credits of one line add, and the line is never below 0, so no dollar of the
- * line is taken off twice. A line the business does not state stays blank.
- */
-function withCredits<T extends { key: string; value: BusinessFactValue }>(
-  businesses: T[],
-  facts: ReadonlyArray<FactRow>,
-  joint: boolean,
-): T[] {
-  const reductions = BUSINESS_CREDIT_REDUCTIONS.map(({ line, creditByBusiness }) => ({
-    line,
-    credits: creditByBusiness(facts, joint),
-  }));
-  if (reductions.every(({ credits }) => credits.size === 0)) return businesses;
-  const creditOf = (key: string, line: ReducedLine) =>
-    sum(...reductions.filter((each) => each.line === line).map((each) => each.credits.get(key)));
-  return businesses.map((business) => {
-    const expenses = business.value.expenses;
-    const reduced = (["wages", "taxesAndLicenses"] as const).flatMap((line) => {
-      const stated = expenses?.[line];
-      const credit = creditOf(business.key, line);
-      return stated === undefined || credit === 0
-        ? []
-        : [[line, atLeast(0, stated - credit)] as const];
-    });
-    if (reduced.length === 0) return business;
-    const lowered = { ...expenses, ...Object.fromEntries(reduced) };
-    return { ...business, value: { ...business.value, expenses: lowered } };
-  });
+type Business = { key: string; value: BusinessFactValue };
+
+/* The business less one reduction, never below 0, and the dollars it took; a line it does not state has nothing to lower. */
+function lessOne(value: BusinessFactValue, reduction: BusinessCreditReduction) {
+  if ("line" in reduction) {
+    const stated = value.expenses?.[reduction.line];
+    if (stated === undefined) return { value, taken: 0 };
+    const lowered = atLeast(0, stated - reduction.amount);
+    const expenses = { ...value.expenses, [reduction.line]: lowered };
+    return { value: { ...value, expenses }, taken: stated - lowered };
+  }
+  const entries = value.otherExpenses ?? [];
+  const at = entries.findIndex((entry) => entry.description === reduction.otherExpense);
+  if (at < 0) return { value, taken: 0 };
+  const lowered = atLeast(0, entries[at].amount - reduction.amount);
+  const otherExpenses = entries.map((entry, index) =>
+    index === at ? { ...entry, amount: lowered } : entry,
+  );
+  return { value: { ...value, otherExpenses }, taken: entries[at].amount - lowered };
 }
 
-/*
- * The Schedule C wages the work opportunity and empowerment zone credits take
- * off, in total over the return's businesses: what Schedule CA line 3 column B
- * gives back (state/ca/schedule-ca/answerLines.ts).
- */
-export function wageCreditReduction(facts: ReadonlyArray<FactRow>, joint: boolean): number {
-  const stated = statedBusinessesOnReturn(facts, joint).businesses;
-  const reduced = withCredits(stated, facts, joint);
-  return sum(
-    ...stated.map(
-      (business, index) =>
-        sum(business.value.expenses?.wages) - sum(reduced[index].value.expenses?.wages),
-    ),
+function lessAll<T extends Business>(
+  business: T,
+  reductions: ReadonlyArray<BusinessCreditReduction>,
+) {
+  return reductions.reduce(
+    (state, reduction) => {
+      if (reduction.amount === 0) return state;
+      const next = lessOne(state.business.value, reduction);
+      return {
+        business: { ...state.business, value: next.value },
+        taken: sum(state.taken, next.taken),
+      };
+    },
+    { business, taken: 0 },
   );
 }
 
 /*
+ * Each business with its stated expenses less the credits that lower them, in
+ * the list's order, and the dollars that the credits California gives back
+ * took off. The credits of one line add, and the line is never below 0, so no
+ * dollar of the line is taken off twice.
+ */
+function withCredits<T extends Business>(
+  businesses: T[],
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): { businesses: T[]; addBack: number } {
+  return BUSINESS_CREDIT_REDUCTIONS.reduce(
+    (state, { reductionsOf, californiaAddsBack }) => {
+      const byBusiness = reductionsOf(facts, joint);
+      if (byBusiness.size === 0) return state;
+      const lowered = state.businesses.map((business) =>
+        lessAll(business, byBusiness.get(business.key) ?? []),
+      );
+      const taken = californiaAddsBack ? sum(...lowered.map((each) => each.taken)) : 0;
+      return {
+        businesses: lowered.map((each) => each.business),
+        addBack: sum(state.addBack, taken),
+      };
+    },
+    { businesses, addBack: 0 },
+  );
+}
+
+/*
+ * The Schedule C expenses the federal credits that California gives back took
+ * off, in total over the return's businesses: what Schedule CA line 3 column B
+ * gives back (state/ca/schedule-ca/answerLines.ts).
+ */
+export function businessCreditAddBack(facts: ReadonlyArray<FactRow>, joint: boolean): number {
+  return withCredits(statedBusinessesOnReturn(facts, joint).businesses, facts, joint).addBack;
+}
+
+/*
  * statedBusinessesOnReturn, with the return's depreciation scope, its Form 4797
- * Part IV recapture and its expense lines less the credits that lower them.
+ * Part IV recapture and its expenses less the credits that lower them.
  */
 export function businessesOnReturn(facts: ReadonlyArray<FactRow>, joint: boolean) {
   const result = statedBusinessesOnReturn(facts, joint);
   const shared = activitiesWithPersonalProperty(facts, joint) >= SHARED_TEST_MINIMUM;
   const businesses = withRecapture(marked(result.businesses, shared), facts);
-  return { ...result, businesses: withCredits(businesses, facts, joint) };
+  return { ...result, businesses: withCredits(businesses, facts, joint).businesses };
 }
 
 /* statedRentalsOnReturn, with the return's depreciation scope. */

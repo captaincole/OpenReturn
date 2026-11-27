@@ -7,9 +7,9 @@
  * and Medicare taxes on tips; Form 5884, the work opportunity credit for the
  * taxpayer's own employees; Form 8844, the empowerment zone employment
  * credit, which adds a source to Form 3800 Part III line 3; Form 8609-A, the
- * low-income housing credit of each building an owner holds directly; and Form
+ * low-income housing credit of each building an owner holds directly; Form
  * 8586, which totals the Forms 8609-A and the K-1 low-income housing credits
- * for Form 3800. They are joined
+ * for Form 3800; and Form 8826, the disabled access credit. They are joined
  * here, in this order, and filingInfo.ts takes them as one, so that file stays
  * under its line limit. A new credit form adds its type and resolver here, not
  * to filingInfo.ts.
@@ -29,6 +29,8 @@ import type { Form8586FilingInfo } from "./8586/filingInfo.js";
 import { resolve8586Info } from "./8586/resolveInfo.js";
 import type { Form8609AFilingInfo } from "./8609-a/filingInfo.js";
 import { resolve8609AInfo } from "./8609-a/resolveInfo.js";
+import type { Form8826FilingInfo } from "./8826/filingInfo.js";
+import { resolve8826Info } from "./8826/resolveInfo.js";
 import type { Form8834FilingInfo } from "./8834/filingInfo.js";
 import { resolve8834Info } from "./8834/resolveInfo.js";
 import type { Form8844FilingInfo } from "./8844/filingInfo.js";
@@ -47,7 +49,8 @@ export type CreditFormsFilingInfo = Form3800FilingInfo &
   Form5884FilingInfo &
   Form8844FilingInfo &
   Form8609AFilingInfo &
-  Form8586FilingInfo;
+  Form8586FilingInfo &
+  Form8826FilingInfo;
 
 export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve3800Info,
@@ -60,4 +63,5 @@ export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => B
   resolve8844Info,
   resolve8609AInfo,
   resolve8586Info,
+  resolve8826Info,
 ];
