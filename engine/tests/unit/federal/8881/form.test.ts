@@ -110,11 +110,39 @@ describe("Form 8881 who files", () => {
     expect(run.value("form-3800", ROW_1EE)).toBe(90);
   });
 
-  it("the decision turns it off: only the K-1 credits reach Form 3800", () => {
+  it("the decision turns it off; while the plan fact still lowers Schedule C, line 1j is a gap", () => {
     const off = [...gill.decisions, decision(gill, "decisions.scope.must_file_8881", false)];
     const run = evaluate(gill, gill.facts, off);
     expect(run.files("form-8881")).toBe(false);
+    // Schedule C line 17 and 19 are still reduced from the fact: the credit and the deduction would both be lost.
+    expect(run.value("schedule-c", LEGAL)).toBe(26_500 - 1_900);
+    expect(isGap(run.field("form-3800", ROW_1J))).toBe(true);
+  });
+
+  it("the decision with a plan fact that lowers no deduction: only the K-1 credits reach Form 3800", () => {
+    const off = [...gill.decisions, decision(gill, "decisions.scope.must_file_8881", false)];
+    const partII: SmallEmployerPlanFactValue = {
+      name: gillPlan.name,
+      activityKey: CATERING_KEY,
+      autoEnrollmentCreditYear: 2,
+    };
+    const run = evaluate(gill, withPlan(gill, GILL_PLAN_KEY, partII), off);
+    expect(run.files("form-8881")).toBe(false);
     expect(run.value("form-3800", ROW_1J)).toBe(640);
+    expect(run.value("form-3800", ROW_1DD)).toBe(100);
+  });
+
+  it("an owner-only plan (no non-highly compensated employee) gets no startup credit and keeps its deduction", () => {
+    const ownerOnly: SmallEmployerPlanFactValue = {
+      name: gillPlan.name,
+      activityKey: CATERING_KEY,
+      startupCosts: { ...gillPlan.startupCosts!, eligibleNonHighlyCompensated: 0 },
+    };
+    const facts = withPlan(gill, GILL_PLAN_KEY, ownerOnly).filter((fact) => !isK1(fact));
+    const run = evaluate(gill, facts);
+    expect(run.files("form-8881")).toBe(false);
+    expect(run.value("schedule-c", LEGAL)).toBe(26_500);
+    expect(run.value("form-3800", ROW_1J)).toBeUndefined();
   });
 
   it("a plan past every credit period leaves the return, and no deduction is reduced", () => {

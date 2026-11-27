@@ -80,10 +80,21 @@ export interface Section1Lines {
   line5: number;
 }
 
-/* Lines A to 5; undefined outside the 3 credit years or for an employer with more than 100 employees. */
+/*
+ * Lines A to 5; undefined outside the 3 credit years, for an employer with
+ * more than 100 employees, or for a plan with no non-highly compensated
+ * employee on line 3. Such a plan is not an eligible employer plan: it needs
+ * "at least one employee eligible to participate who is not a highly
+ * compensated employee" (section-1-small-employer-pension-plan::b02), so an
+ * owner-only plan gets no startup costs credit, not line 4's $500.
+ */
 export function section1Of(input: StartupCostsInput): Section1Lines | undefined {
   const lineA = input.employeesBeforeFirstCreditYear;
-  if (!inPeriod(input.creditYear, STARTUP_CREDIT_YEARS) || lineA > SMALL_EMPLOYER_LIMIT) {
+  if (
+    !inPeriod(input.creditYear, STARTUP_CREDIT_YEARS) ||
+    lineA > SMALL_EMPLOYER_LIMIT ||
+    input.eligibleNonHighlyCompensated < 1
+  ) {
     return undefined;
   }
   const line1 = roundDollars(input.qualifiedCosts);

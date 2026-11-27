@@ -57,6 +57,15 @@ describe("Section 1, the startup costs credit (lines A to 5)", () => {
     expect(section1Of(startup({ employeesBeforeFirstCreditYear: 101 }))).toBeUndefined();
   });
 
+  it("a plan with no non-highly compensated employee (an owner-only plan) is not eligible: no $500", () => {
+    const ownerOnly = startup({
+      employeesBeforeFirstCreditYear: 0,
+      qualifiedCosts: 2_000,
+      eligibleNonHighlyCompensated: 0,
+    });
+    expect(section1Of(ownerOnly)).toBeUndefined();
+  });
+
   it("line 4 is at least $500 and at most $5,000", () => {
     expect(section1Of(startup({ eligibleNonHighlyCompensated: 1 }))?.line4).toBe(500);
     expect(section1Of(startup({ eligibleNonHighlyCompensated: 2 }))?.line4).toBe(500);

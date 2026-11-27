@@ -1,7 +1,7 @@
 /*
  * A made-up single filer in Texas (README.md): a catering company (Schedule C)
  * with 58 employees and a 401(k) plan in its third year, and a Schedule K-1
- * (Form 1065) with box 15 codes AE, AF and AG. Every line of Form 8881, the
+ * (Form 1120-S) with box 13 codes AE, AF and AG. Every line of Form 8881, the
  * reductions on Schedule C lines 17 and 19, Form 3800 lines 1j, 1dd and 1ee,
  * and Schedule 3 line 6a. Federal only.
  * UNVERIFIED: no answer key; the expected values are engine output checked by
