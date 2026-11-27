@@ -2,6 +2,7 @@ import {
   searchStatute,
   statuteQueriesOf,
   statuteSearchLog,
+  statuteTitleOf,
   type StatuteBlock,
   type StatuteSearchOptions,
 } from "../statute";
@@ -16,14 +17,13 @@ import type { Passage } from "./validate";
  * stands.
  */
 
-const LAW_TITLE = "Internal Revenue Code (26 U.S.C.)";
 const BLOCK_ID_MARK = "::";
 
 // The statute has no pages, like a web page: citations show its citation instead.
 const toPassage = (block: StatuteBlock): Passage => ({
   blockId: block.blockId,
   docId: block.blockId.split(BLOCK_ID_MARK)[0],
-  documentTitle: LAW_TITLE,
+  documentTitle: statuteTitleOf(block.blockId),
   format: "html",
   published: null,
   sectionHeading: null,

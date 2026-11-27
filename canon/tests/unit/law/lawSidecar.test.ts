@@ -6,7 +6,11 @@ import { walkCorpus } from "../../../src/refdocs/walkCorpus.js";
 describe("the law sidecars", () => {
   it("pins Title 26 at release point 119-73", async () => {
     const entries = await walkLaw();
-    expect(entries.map((item) => item.sidecar.docId)).toEqual(["cfr-26-2025", "usc-26-2025"]);
+    expect(entries.map((item) => item.sidecar.docId)).toEqual([
+      "cfr-26-2025",
+      "usc-26-2025",
+      "ca-rtc-2025",
+    ]);
     const entry = entries[1];
     expect(entry.sidecar).toMatchObject({
       docId: "usc-26-2025",
@@ -34,17 +38,34 @@ describe("the law sidecars", () => {
     expect(entry.sidecar.sha256).toBe(partsSha256(entry.sidecar.files));
   });
 
+  it("pins California's extract by its sha256, with the archive and its date", async () => {
+    const entry = (await walkLaw())[2];
+    expect(entry.sidecar).toMatchObject({
+      docId: "ca-rtc-2025",
+      taxYear: 2025,
+      format: "caml",
+      releasePoint: "2026-11-22",
+      sourceUrl: "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+      files: [],
+    });
+    expect(entry.sidecar.sha256).toMatch(/^[0-9a-f]{64}$/);
+    expect(entry.zipRelPath).toBe("2025/law/state/ca/rtc/law.zip");
+  });
+
   it("is not a corpus document, and the corpus walk does not flag its folder", async () => {
     const walk = await walkCorpus();
     const docIds = walk.entries.map((entry) => entry.sidecar.docId);
     expect(docIds).not.toContain("usc-26-2025");
     expect(docIds).not.toContain("cfr-26-2025");
+    expect(docIds).not.toContain("ca-rtc-2025");
     expect(walk.unconfigured.filter((item) => item.sourceRelPath.includes("/law/"))).toEqual([]);
   });
 
   it("refuses a sidecar with another format or no release point", () => {
     const good = { docId: "d", title: "t", publisher: "OLRC", sha256: "s", releasePoint: "119-73" };
     expect(coerceLawSidecar({ ...good, format: "uslm" })).not.toBeNull();
+    expect(coerceLawSidecar({ ...good, format: "caml" })?.format).toBe("caml");
+    expect(coerceLawSidecar({ ...good, format: "caml", sha256: undefined })).toBeNull();
     expect(coerceLawSidecar({ ...good, format: "pdf" })).toBeNull();
     expect(coerceLawSidecar({ ...good, format: "uslm", releasePoint: undefined })).toBeNull();
     expect(coerceLawSidecar({ ...good, format: "uslm", published: "Jan 2026" })).toBeNull();

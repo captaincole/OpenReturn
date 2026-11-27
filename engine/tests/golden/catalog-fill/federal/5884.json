@@ -1,0 +1,123 @@
+{
+  "formId": "form-5884",
+  "fieldCount": 13,
+  "entries": [
+    {
+      "fieldId": "form-5884.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-1UND9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5884.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-IDJGX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5884.0.line.1a_first_year_wages_120_hours",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "6,529"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5884.0.line.1a_multiply_wages_by_25_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "5,327"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5884.0.line.1b_first_year_wages_400_hours",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "9,378"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5884.0.line.1b_multiply_wages_by_40_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "9,246"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5884.0.line.1c_multiply_wages_by_50_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "7,571"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5884.0.line.1c_second_year_wages_ltfa",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "9,993"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5884.0.line.2_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "1,793"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5884.0.line.3_pass_through_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "4,269"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5884.0.line.4_total_work_opportunity_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "2,540"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5884.0.line.5_allocated_to_patrons_beneficiaries",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "4,313"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5884.0.line.6_subtract_5_from_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "3,748"
+        }
+      ]
+    }
+  ]
+}

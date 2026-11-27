@@ -5,7 +5,8 @@
  * 2, FTB 3801-CR and FTB 3804-CR read it here. `read` takes a full field id.
  *
  * In Section B2 the TTA credit comes after FTB 3541's motion picture credits
- * and before FTB 3801-CR's passive credits (the DECISION below, decision A78).
+ * and FTB 3805Z's enterprise zone credit, and before FTB 3801-CR's passive
+ * credits (the DECISIONs below, decisions A85 and A87).
  */
 
 import { isGap } from "../../../federal/3800/cells.js";
@@ -18,6 +19,8 @@ import {
   SECTION_B2_FIRST_LINE,
 } from "../3541/creditUsed.js";
 import type { Form3541FilingInfo } from "../3541/filingInfo.js";
+import { enterpriseZoneCreditUsed, enterpriseZoneSectionB2Count } from "../3805z/creditUsed.js";
+import type { Info as Form3805ZInfo } from "../3805z/figures.js";
 import { taxBeforeSectionB2 } from "../540/creditBalance.js";
 import {
   creditCarryovers,
@@ -37,7 +40,7 @@ import {
 } from "./lines.js";
 
 type ReadField = (fieldId: string) => unknown;
-type Info = FiguresInfo & Form3541FilingInfo;
+type Info = FiguresInfo & Form3541FilingInfo & Form3805ZInfo;
 
 export { files3809, TTA_CREDIT_CODE, TTA_CREDIT_NAME };
 
@@ -67,7 +70,7 @@ const SALES_CREDIT_PAST_ITS_PERIOD = unsupported(
   "A TTA sales or use tax credit carries over only 10 years from 2014 (ca-3809-booklet-2025::sec::targeted-tax-area-tta-credits-carryover-period::b01), so it reaches 2025 only when an earlier year's $5,000,000 limitation extended its period (::general-information::b03); the engine has no fact for that extension.",
 );
 const TOO_MANY_B2_CREDITS = unsupported(
-  "FTB 3541's Section B2 credits and the TTA credit need more than the three Section B2 lines 16 to 18 the engine fills.",
+  "The motion picture credits (FTB 3541) and the enterprise zone credit (FTB 3805Z) fill Schedule P (540) lines 16 to 18, so the TTA credit needs line 19, which the engine does not fill.",
 );
 
 /* A case the credit lines do not handle, or undefined. */
@@ -113,11 +116,32 @@ export function ttaCreditAvailable(read: ReadField, info: Info): number | Unsupp
  * (ca-3809-booklet-2025::sec::carryover::b01), so both texts put it before the
  * passive credits; the film credits stay first (decision A75), and the
  * taxpayer does not pick the order.
+ *
+ * DECISION (2026-11-26, by the author): the TTA credit (code 210) takes the
+ * Section B2 line after FTB 3805Z's enterprise zone credit (code 176), so it
+ * takes the tax the enterprise zone credit leaves.
+ * - FTB 3805Z: "The portion of any EZ sales or use tax credit or hiring credit
+ *   remaining for carryover to taxable years beginning on or after January 1,
+ *   2014, shall be carried over only to the succeeding 10 taxable years"
+ *   (ca-3805z-booklet-2025::sec::ez-credits-carryover-period::b01).
+ * - FTB 3809: "The portion of any TTA sales or use tax credit or hiring credit
+ *   remaining for carryover to taxable years beginning on or after January 1,
+ *   2014, shall be carried over only to the succeeding 10 taxable years"
+ *   (ca-3809-booklet-2025::sec::targeted-tax-area-tta-credits-carryover-period::b01).
+ * Section B2's rule, limited carryovers first
+ * (ca-540-sched-p-inst-2025::sec::section-b2-instructions::b01), does not pick
+ * one: both carryovers are limited to the same 10 years. The engine keeps the
+ * enterprise zone credit on its line (decision A79) and puts the TTA credit
+ * on the next one, the order of the codes in the Credit Table
+ * (::credit-table::b06, ::b08). One order for every return; it changes
+ * dollars only when the tax left cannot cover both.
  */
-export function ttaScheduleLine(info: Info): number | Unsupported | undefined {
+export function ttaScheduleLine(read: ReadField, info: Info): number | Unsupported | undefined {
   const film = filmSectionB2Credits(info);
   if (film === undefined || isGap(film)) return film;
-  const line = SECTION_B2_FIRST_LINE + film.length;
+  const enterpriseZone = enterpriseZoneSectionB2Count(read, info);
+  if (enterpriseZone === undefined || isGap(enterpriseZone)) return enterpriseZone;
+  const line = SECTION_B2_FIRST_LINE + film.length + enterpriseZone;
   return line > SECTION_B2_LAST_LINE ? TOO_MANY_B2_CREDITS : line;
 }
 
@@ -129,7 +153,7 @@ export function ttaSectionB2Credit(
   const available = ttaCreditAvailable(read, info);
   if (typeof available !== "number") return available;
   if (available <= 0) return null;
-  const line = ttaScheduleLine(info);
+  const line = ttaScheduleLine(read, info);
   if (typeof line !== "number") return line;
   return { code: TTA_CREDIT_CODE, name: TTA_CREDIT_NAME, allowed: available };
 }
@@ -149,15 +173,16 @@ export function ttaSectionB2RowCount(
  * Section B2 line column (b) (ca-540-sched-p-inst-2025::sec::how-to-claim-your-credits::b01;
  * line 8A column (f) is "the amount of credit carryover that is used on
  * Schedule P", ca-3809-booklet-2025::sec::part-ii-limitation-of-credits-for-corporations-individuals-estates-and-trusts::b01).
- * Without it, column (a) up to the tax left after the credits before it: the
- * same column (b) rule (::column-a-through-column-d-instructions::b01). A
- * Section B2 credit can reduce the tax below TMT. 0 with no FTB 3809.
+ * Without it, column (a) up to the tax left after the credits before it (the
+ * film credits, then the enterprise zone credit): the same column (b) rule
+ * (::column-a-through-column-d-instructions::b01). A Section B2 credit can
+ * reduce the tax below TMT. 0 with no FTB 3809.
  */
 export function ttaCreditUsed(read: ReadField, info: Info): number | Unsupported | undefined {
   const available = ttaCreditAvailable(read, info);
   if (typeof available !== "number" || available <= 0) return available;
   if (files(info, "schedule-p")) {
-    const line = ttaScheduleLine(info);
+    const line = ttaScheduleLine(read, info);
     if (typeof line !== "number") return line;
     return numberOrBlank(read(`schedule-p.3.part3.${line}_credit_used_col_b`));
   }
@@ -165,5 +190,7 @@ export function ttaCreditUsed(read: ReadField, info: Info): number | Unsupported
   if (before === undefined) return undefined;
   const film = filmCreditsUsedTotal(read, info);
   if (typeof film !== "number") return film;
-  return Math.min(available, atLeast(0, before - film));
+  const enterpriseZone = enterpriseZoneCreditUsed(read, info);
+  if (typeof enterpriseZone !== "number") return enterpriseZone;
+  return Math.min(available, atLeast(0, before - film - enterpriseZone));
 }

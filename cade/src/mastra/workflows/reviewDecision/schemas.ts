@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { jurisdictionSchema } from "../../canon/jurisdictions";
 import {
   authorityCitationSchema,
   groundInputSchema,
@@ -16,6 +17,8 @@ export const reviewCarrierSchema = reviewInputSchema.extend({
   decisionKey: z.string(),
   decision: groundInputSchema.shape.decision,
   facts: groundInputSchema.shape.facts,
+  /** The jurisdictions to search, from the decision key (jurisdictions.ts). */
+  jurisdictions: z.array(jurisdictionSchema).min(1),
   ground: groundResultSchema.optional(),
 });
 export type ReviewCarrier = z.infer<typeof reviewCarrierSchema>;
@@ -37,6 +40,8 @@ export const reviewDecisionOutputSchema = z.object({
   finalVerdict: reviewVerdictSchema,
   reason: z.string(),
   citations: z.array(authorityCitationSchema),
+  /* The jurisdictions Canon searched. Unset when the review did not finish. */
+  jurisdictions: z.array(jurisdictionSchema).optional(),
   /* openQuestionId: needs_more_facts and inaccurate only. whatsMissing: needs_more_facts only. */
   openQuestionId: z.string().optional(),
   whatsMissing: z.string().optional(),

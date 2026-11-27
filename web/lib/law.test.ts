@@ -33,6 +33,17 @@ describe("lawHref", () => {
     expect(lawHref("1031")).toBe("/library/law/1031");
   });
 
+  it("turns a California citation or block id into its page, which names the code", () => {
+    expect(lawHref("CA 17041(a)(1)")).toBe("/library/law/CA-17041#a-1");
+    expect(lawHref("Cal. Rev. & Tax. Code § 17024.5(a)(1)")).toBe("/library/law/CA-17024.5#a-1");
+    expect(lawHref("R&TC 19136")).toBe("/library/law/CA-19136");
+    expect(lawHref("ca-rtc-2025::sec::s17014::d-2")).toBe("/library/law/CA-17014#d-2");
+    expect(lawHref("ca-rtc-2025::sec::s17058-v2::a-1")).toBe("/library/law/CA-17058#v2-a-1");
+    expect(lawHref("ca-rtc-2025::sec::s17058-v2")).toBe("/library/law/CA-17058#v2");
+    expect(lawHref("CA passive")).toBeNull();
+    expect(lawHref("17024.5")).toBe("/library/law/17024.5");
+  });
+
   it("answers null for anything else", () => {
     expect(lawHref("passive activity")).toBeNull();
     expect(lawHref("469(g")).toBeNull();
@@ -53,6 +64,8 @@ describe("the section helpers", () => {
   it("take the element id from the end of a block id", () => {
     expect(blockAnchor("usc-26-2025::sec::s469::g-1")).toBe("g-1");
     expect(blockAnchor("usc-26-2025::sec::s1202::b-4-dup2")).toBe("b-4-dup2");
+    expect(blockAnchor("ca-rtc-2025::sec::s17058::a-1")).toBe("a-1");
+    expect(blockAnchor("ca-rtc-2025::sec::s17058-v2::a-1")).toBe("v2-a-1");
   });
 
   it("link the official text of one section", () => {
@@ -60,6 +73,9 @@ describe("the section helpers", () => {
     expect(officialTextUrl("1400Z–2")).toBe("https://uscode.house.gov/us/usc/t26/s1400Z-2/");
     expect(officialTextUrl("1.469-5T")).toBe(
       "https://www.ecfr.gov/current/title-26/section-1.469-5T",
+    );
+    expect(officialTextUrl("17024.5", "california")).toBe(
+      "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=RTC&sectionNum=17024.5.",
     );
   });
 });

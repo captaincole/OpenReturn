@@ -229,10 +229,9 @@ function codedCreditRow(page: 2 | 3, line: 6 | 7 | 8 | 9 | 16 | 17 | 18 | 19, se
 
 export const partIIICreditRows: Unsupported = Object.fromEntries([
   /*
-   * Line 4 holds FTB 3507's credit (prisonLaborRow.ts). Lines 6 and 7 hold
-   * FTB 3541's original and new credits (sectionA2.ts).
+   * Line 4 holds FTB 3507's credit (prisonLaborRow.ts). Lines 6 to 8 hold
+   * FTB 3541's original and new credits, then FTB 3807's (sectionA2.ts).
    */
-  ...codedCreditRow(2, 8, "Section A2"),
   ...codedCreditRow(2, 9, "Section A2"),
   ...row(
     `Section B1 line 12, joint custody head of household credit — ${NO_CREDIT_FACTS}.`,

@@ -106,7 +106,8 @@
     {
       "name": "Form 1040 Schedule J",
       "title": "Income Averaging for Farmers and Fishermen",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "schedule-j"
     },
     {
       "name": "Form 1040 Schedule LEP",
@@ -258,7 +259,8 @@
     {
       "name": "Form 2210F",
       "title": "Underpayment of Estimated Tax By Farmers and Fishermen",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "2210-f"
     },
     {
       "name": "Form 2350",
@@ -292,7 +294,8 @@
     {
       "name": "Form 3468",
       "title": "Investment Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3468"
     },
     {
       "name": "Form 3800",
@@ -501,7 +504,8 @@
     {
       "name": "Form 5884",
       "title": "Work Opportunity Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "5884"
     },
     {
       "name": "Form 6198",
@@ -532,7 +536,8 @@
     {
       "name": "Form 6765",
       "title": "Credit for Increasing Research Activities",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "6765"
     },
     {
       "name": "Form 6781",
@@ -624,7 +629,8 @@
     {
       "name": "Form 8332",
       "title": "Release/Revocation of Release of Claim to Exemption for Child by Custodial Parent",
-      "maxPerReturn": "100"
+      "maxPerReturn": "100",
+      "short": "8332"
     },
     {
       "name": "Form 8379",
@@ -655,7 +661,8 @@
     {
       "name": "Form 8586",
       "title": "Low-Income Housing Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8586"
     },
     {
       "name": "Form 8594",
@@ -672,7 +679,8 @@
     {
       "name": "Form 8609A",
       "title": "Annual Statement for Low-Income Housing Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8609-a"
     },
     {
       "name": "Form 8611",
@@ -749,7 +757,8 @@
     {
       "name": "Form 8826",
       "title": "Disabled Access Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8826"
     },
     {
       "name": "Form 8828",
@@ -766,7 +775,8 @@
     {
       "name": "Form 8833",
       "title": "Treaty-Based Return Position Disclosure Under Section 6114 or 7701(b)",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8833"
     },
     {
       "name": "Form 8834",
@@ -806,7 +816,8 @@
     {
       "name": "Form 8844",
       "title": "Empowerment Zone and Renewal Community Employment Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8844"
     },
     {
       "name": "Form 8845",
@@ -816,7 +827,8 @@
     {
       "name": "Form 8846",
       "title": "Credit for Employer Social Security and Medicare Taxes Paid on Certain Employee Tips",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8846"
     },
     {
       "name": "Form 8853",
@@ -848,7 +860,8 @@
     {
       "name": "Form 8862",
       "title": "Information To Claim Earned Income Credit After Disallowance",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "8862"
     },
     {
       "name": "Form 8863",
@@ -933,12 +946,14 @@
     {
       "name": "Form 8881",
       "title": "Credit for Small Employer Pension Plan Startup Costs",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8881"
     },
     {
       "name": "Form 8882",
       "title": "Credit for Employer-Provided Childcare Facilities and Services",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8882"
     },
     {
       "name": "Form 8883",

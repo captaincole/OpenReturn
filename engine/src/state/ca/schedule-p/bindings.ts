@@ -42,6 +42,15 @@ const EXEMPTION = {
 } as const satisfies Record<FilingStatus, ExemptionRow>;
 const EXEMPTION_PHASE_OUT_RATE = 0.25;
 
+/* Line 22 for an AMTI: the Exemption Worksheet (see line 22 below). */
+function exemptionAt(amti: number, status: FilingStatus): number {
+  const { amount, phaseOutStart, zeroAt } = EXEMPTION[status];
+  if (amti >= zeroAt) return 0;
+  if (amti <= phaseOutStart) return amount;
+  const reduction = roundDollars((amti - phaseOutStart) * EXEMPTION_PHASE_OUT_RATE);
+  return atLeast(0, amount - reduction);
+}
+
 /*
  * Part I line 21, the married/RDP filing separately worksheet
  * (ca-540-sched-p-inst-2025::sec::line-21-alternative-minimum-taxable-income-amti::b01):
@@ -63,6 +72,18 @@ const MFS_LINE_21_CAP = 61830;
 const AMT_NOL_NOT_FIGURED = unsupported(
   "Line 16 adds back an NOL deduction, and line 20 takes away the AMT NOL refigured with AMT income and expense amounts (ca-540-sched-p-inst-2025::sec::step-1-amt-nol-for-prior-year::b01); the engine has no AMT NOL carryover facts, so it does not figure AMTI.",
 );
+
+/*
+ * Line 24 while line 21 is that gap: 0 when line 19 is at most its own line
+ * 22 exemption, else blank. Line 20 only lowers AMTI, and a lower AMTI never
+ * has a smaller exemption, so line 23 is 0 whatever line 20 holds.
+ */
+function tentativeMinimumTaxWithAnyLine20(form: Form, info: SchedulePFilingInfo): 0 | undefined {
+  if (sum(form["0.line.16_nol_deductions"]) <= 0 || !info.filingStatus) return undefined;
+  const line19 = numberOrBlank(form["1.line.19_combine_lines_14_through_18"]);
+  if (line19 === undefined) return undefined;
+  return line19 <= exemptionAt(line19, info.filingStatus) ? 0 : undefined;
+}
 
 /* Part I line 2: "2½% (.025) of federal Form 1040 or 1040-SR, line 11b" (the form). */
 const MEDICAL_AMT_FLOOR_RATE = 0.025;
@@ -321,11 +342,7 @@ const partII: Bindings = {
   "1.line.22_exemption_amount": (form, info) => {
     const amti = numberOrBlank(form["1.line.21_alternative_minimum_taxable_income"]);
     if (amti === undefined || !info.filingStatus) return undefined;
-    const { amount, phaseOutStart, zeroAt } = EXEMPTION[info.filingStatus];
-    if (amti >= zeroAt) return 0;
-    if (amti <= phaseOutStart) return amount;
-    const reduction = roundDollars((amti - phaseOutStart) * EXEMPTION_PHASE_OUT_RATE);
-    return atLeast(0, amount - reduction);
+    return exemptionAt(amti, info.filingStatus);
   },
   // "Subtract line 22 from line 21. If zero or less, enter -0-" (the form; ca-540-sched-p-inst-2025::sec::line-23::b01).
   "1.line.23_amti_less_exemption": (form) => {
@@ -335,9 +352,9 @@ const partII: Bindings = {
     return atLeast(0, amti - exemption);
   },
   // "Multiply line 23 by 7.0% (.07)" (the form); -0- with line 23 (ca-540-sched-p-inst-2025::sec::line-23::b01).
-  "1.line.24_tentative_minimum_tax": (form) => {
+  "1.line.24_tentative_minimum_tax": (form, info) => {
     const base = numberOrBlank(form["1.line.23_amti_less_exemption"]);
-    if (base === undefined) return undefined;
+    if (base === undefined) return tentativeMinimumTaxWithAnyLine20(form, info);
     return base > 0 ? roundDollars(base * TENTATIVE_MINIMUM_TAX_RATE) : 0;
   },
   // "Regular tax before credits from Form 540, line 31" (the form).

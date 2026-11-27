@@ -1,6 +1,7 @@
 import type { Agent } from "@mastra/core/agent";
 import { z } from "zod";
 import { judge } from "../../judge";
+import { statuteNamesOf } from "../statute";
 import type { EvidenceBundle, LoopCarrier } from "./schemas";
 
 export function decisionSummary(carrier: LoopCarrier) {
@@ -108,7 +109,11 @@ function statuteSection(blocks: EvidenceBundle["statuteBlocks"]): string {
     const clipped = text.length > STATUTE_CHARS ? `${text.slice(0, STATUTE_CHARS)}…` : text;
     return `  [${block.blockId}] ${block.citation}: ${clipped}`;
   });
-  return `Statute passages (26 U.S.C., the law the IRS passages explain; consulted once in this review):\n${lines.join("\n")}\n`;
+  const names = statuteNamesOf(
+    blocks.map((block) => block.blockId),
+    "short",
+  );
+  return `Statute passages (${names}, the law the IRS passages explain; consulted once in this review):\n${lines.join("\n")}\n`;
 }
 
 function blockLines(blocks: EvidenceBundle["irsBlocks"]): string {

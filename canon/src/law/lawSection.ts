@@ -1,13 +1,23 @@
 import { asStr, getDocument } from "../db/corpusStore";
 import { openLibraryDb } from "../db/libsql";
-import { formatCitation, type LawSource, parseLawTarget, sourceOfSection } from "./citation";
-import { catchlineOf, lawDocIdOf, sectionBlocks, sourceOfFormat, targetSectionId } from "./lawRead";
+import { versionOfSectionId } from "./caCitation";
+import { citationIn, type LawSource, parseLawTarget, sourceOfTarget } from "./citation";
+import {
+  catchlineOf,
+  lawDocIdOf,
+  sectionBlocks,
+  sourceOfFormat,
+  type StoredSection,
+  targetSectionId,
+  versionSectionIds,
+} from "./lawRead";
 import { ancestorsOf, type LawTocEntry } from "./lawToc";
 
 /*
- * One whole section, of the Code or of the regulations, for the web app's
- * law page, and the library's status. Callers check lawInstalled() first:
- * these open law.db.
+ * One whole section, of the Code, the regulations or California's code,
+ * for the web app's law page, and the library's status. A California
+ * number with several versions shows them all, in order, each under its
+ * own heading. Callers check lawInstalled() first: these open law.db.
  */
 
 export interface LawSectionBlock {
@@ -30,6 +40,15 @@ export interface LawSectionPage {
   };
   release: { title: string; published: string | null };
   blocks: LawSectionBlock[];
+  /** A number with several versions: each one's heading and first block. Empty for one version. */
+  versions: LawSectionVersion[];
+}
+
+export interface LawSectionVersion {
+  version: number;
+  /** "Version 2 of 2. (Amended by Stats. 2026, … Operative January 1, 2027, …)". */
+  heading: string;
+  firstBlockId: string;
 }
 
 export interface LawStatusDocument {
@@ -49,37 +68,60 @@ export interface LawStatus {
 export async function readLawSection(input: string): Promise<LawSectionPage | null> {
   const target = parseLawTarget(input);
   if (!target || target.kind === "block" || target.path.length > 0) return null;
+  const source = sourceOfTarget(target);
   const sectionId = await targetSectionId(target);
-  const docId = await lawDocIdOf(sourceOfSection(target.section));
+  const docId = await lawDocIdOf(source);
   if (!sectionId || !docId) return null;
-  const [section, doc] = await Promise.all([sectionBlocks(sectionId), getDocument(docId, "law")]);
-  if (!section || !doc) return null;
+  const ids = await versionSectionIds(sectionId);
+  const [doc, ...found] = await Promise.all([getDocument(docId, "law"), ...ids.map(sectionBlocks)]);
+  const sections = found.filter((section): section is StoredSection => section !== null);
+  if (!doc || sections.length === 0) return null;
+  const [first] = sections;
   return {
-    source: sourceOfSection(section.number),
+    source,
     section: {
-      number: section.number,
-      citation: formatCitation(section.number, []),
-      heading: catchlineOf(section.heading),
-      breadcrumbs: await ancestorsOf(sectionId),
+      number: first.number,
+      citation: citationIn(source, first.number, []),
+      heading: catchlineOf(first.heading),
+      breadcrumbs: await ancestorsOf(ids[0]),
     },
     release: { title: doc.title, published: doc.published },
-    blocks: section.blocks.map(({ blockId, path, citation, text }) => ({
-      blockId,
-      path,
-      citation,
-      text,
-    })),
+    blocks: sections.flatMap((section) =>
+      section.blocks.map(({ blockId, path, citation, text }) => ({
+        blockId,
+        path,
+        citation,
+        text,
+      })),
+    ),
+    versions:
+      sections.length > 1 ? sections.flatMap((section, i) => versionOf(section, ids[i])) : [],
   };
 }
 
-// A section's heading starts with "§"; a structure level's ("Subtitle A—…", "PART 1—…") does not.
+function versionOf(section: StoredSection, sectionId: string): LawSectionVersion[] {
+  const first = section.blocks[0];
+  if (!first) return [];
+  return [
+    {
+      version: versionOfSectionId(sectionId),
+      heading: catchlineOf(section.heading),
+      firstBlockId: first.blockId,
+    },
+  ];
+}
+
+/*
+ * A section's heading starts with "§"; a structure level's ("Subtitle A—…",
+ * "PART 1—…") does not. The statute first, then the regulations, then California.
+ */
 export async function lawStatus(): Promise<LawStatus> {
   const db = await openLibraryDb("law");
   const res = await db.execute(
     `SELECT d.doc_id, d.title, d.published, d.format,
             (SELECT count(*) FROM ref_sections s WHERE s.doc_id = d.doc_id AND s.heading LIKE '§%') AS n
      FROM ref_documents d
-     ORDER BY d.format = 'ecfr', d.tax_year DESC, d.doc_id`,
+     ORDER BY CASE d.format WHEN 'uslm' THEN 0 WHEN 'ecfr' THEN 1 ELSE 2 END, d.tax_year DESC, d.doc_id`,
   );
   return {
     documents: res.rows.map((row) => ({

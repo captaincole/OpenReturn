@@ -15,7 +15,7 @@ This page lists each form that an individual income tax return can hold, and wha
 
 Source: [Tax year 2025 accepted forms and schedules for individual tax returns and extensions](https://www.irs.gov/pub/irs-efile/tax-year-2025-accepted-forms-schedules-individual-tax-returns-extensions.xlsx), IRS, dated 2025-11-18.
 
-The list has 225 rows, and 197 are forms and schedules to compute. The engine has 88 of them, and 82 have rules. Of the 43 tier 1 forms, the engine has 43, and 43 have rules.
+The list has 225 rows, and 197 are forms and schedules to compute. The engine has 88 of them, and 85 have rules. Of the 43 tier 1 forms, the engine has 43, and 43 have rules.
 
 | Form | Title | Tier 1 | Engine | Copies |
 | --- | --- | --- | --- | --- |
@@ -75,7 +75,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 4255 | Recapture of Investment Credit |  | Rules | unbounded |
 | Form 4547 | Trump Account Election(s) |  | Not in the engine | unbounded |
 | Form 4562 | Depreciation and Amortization (Including Information on Listed Property) | Yes | Rules | unbounded |
-| Form 4563 | Exclusion of Income for Bona Fide Residents of American Samoa |  | No rules yet | 2 |
+| Form 4563 | Exclusion of Income for Bona Fide Residents of American Samoa |  | Rules | 2 |
 | Form 461 | Limitation on Business Losses | Yes | Rules | 1 |
 | Form 4684 | Casualties and Thefts |  | Rules | unbounded |
 | Form 4797 | Sales of Business Property | Yes | Rules | unbounded |
@@ -139,7 +139,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8615 | Tax for Certain Children Who Have Unearned Income |  | Rules | 1 |
 | Form 8621 | Return By Shareholder of a Passive Foreign Investment Company or Qualified Electing Fund | Yes | Rules | unbounded |
 | Form 8689 | Allocation of Individual Income Tax to the U.S. Virgin Islands |  | Not in the engine | 1 |
-| Form 8697 | Interest Computation Under the Look-Back Method for Completed Long-Term Contracts |  | No rules yet | unbounded |
+| Form 8697 | Interest Computation Under the Look-Back Method for Completed Long-Term Contracts |  | Rules | unbounded |
 | Form 8801 | Credit for Prior Year Minimum Tax-Individuals, Estates, and Trusts | Yes | Rules | 1 |
 | Form 8805 | Foreign Partner's Information Statement of Section 1446 Withholding tax |  | Not a form: a document |  |
 | Form 8814 | Parents' Election to Report Child's Interest and Dividends | Yes | Rules | 10 |
@@ -233,7 +233,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 9000 | Alternative Media Preference |  | Not in the engine | 2 |
 | Form 9465 | Installment Agreement Request |  | Not a form: another return or a request | 1 |
 | Form 926 | Return by a U.S. Transferor of Property to a Foreign Corporation |  | Not in the engine | unbounded |
-| Form 965A | Individual Report of Net 965 Tax Liability |  | No rules yet | 1 |
+| Form 965A | Individual Report of Net 965 Tax Liability |  | Rules | 1 |
 | Form 970 | Application to Use LIFO Inventory Method |  | Not in the engine | unbounded |
 | Form 982 | Reduction of Tax Attributes Due to Discharge of Indebtedness (and Section 1082 Basis Adjustment) |  | Rules | 1 |
 | Form RRB1042S | Statement for Nonresident Alien Recipients of Payments by the Railroad Retirement Board |  | Not a form: a document | unbounded |
@@ -249,7 +249,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 
 Source: [Forms you can e-file for individuals (tax year 2025)](https://www.ftb.ca.gov/tax-pros/efile/individual-efile-forms.html), FTB, dated 2026-01-02.
 
-The list has 65 rows, and 62 are forms and schedules to compute. The engine has 38 of them, and 28 have rules. Of the 22 tier 1 forms, the engine has 22, and 18 have rules.
+The list has 65 rows, and 62 are forms and schedules to compute. The engine has 38 of them, and 30 have rules. Of the 22 tier 1 forms, the engine has 22, and 18 have rules.
 
 | Form | Title | Tier 1 | Engine | Copies |
 | --- | --- | --- | --- | --- |
@@ -262,7 +262,7 @@ The list has 65 rows, and 62 are forms and schedules to compute. The engine has 
 | Form 3503 | Natural Heritage Preservation Credit |  | Not in the engine | unbounded |
 | Form 3504 | Enrolled Tribal Member Certification |  | Not in the engine | 2 |
 | Form 3506 | Child and Dependent Care Expenses Credit |  | Rules | 1 |
-| Form 3507 | Prison Inmate Labor Credit |  | No rules yet | 1 |
+| Form 3507 | Prison Inmate Labor Credit |  | Rules | 1 |
 | Form 3510 | Credit for Prior Year Alternative Minimum Tax – Individuals/Fiduciaries | Yes | Rules | 1 |
 | Form 3514 | California Earned Income Tax Credit |  | Rules | 1 |
 | Form 3521 | Low-Income Housing Credit |  | Not in the engine | 1 |
@@ -271,7 +271,7 @@ The list has 65 rows, and 62 are forms and schedules to compute. The engine has 
 | Form 3531 | California Competes Tax Credit |  | Not in the engine | unbounded |
 | Form 3532 | Head of Household Filing Status Schedule |  | Rules | 1 |
 | Form 3540 | Credit Carryover and Recapture Summary |  | Not in the engine | 1 |
-| Form 3541 | California Motion Picture and Television Production Credit |  | No rules yet | unbounded |
+| Form 3541 | California Motion Picture and Television Production Credit |  | Rules | unbounded |
 | Form 3547 | Donated Agricultural Products Transportation Credit |  | Not in the engine | 1 |
 | Form 3548 | Disabled Access Credit for Eligible Small Businesses |  | Not in the engine | unbounded |
 | Form 3554 | New Employment Credit |  | Not in the engine | unbounded |

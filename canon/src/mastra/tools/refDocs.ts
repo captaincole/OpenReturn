@@ -1,6 +1,11 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
 import { getBlock, hybridSearchRefDocs } from "../../db/corpusSearch";
+import {
+  jurisdictionSchema,
+  jurisdictionsInputSchema,
+  resolveJurisdictions,
+} from "../../jurisdiction";
 
 const searchHitSchema = z.object({
   blockId: z.string(),
@@ -37,9 +42,12 @@ export const searchRefDocsTool = createTool({
       .describe(
         "Retrieval mode. Default 'hybrid' (FTS + vector), degrading to FTS-only when the local embedding model is unavailable. Override only for evals/debugging.",
       ),
+    jurisdictions: jurisdictionsInputSchema,
   }),
   outputSchema: z.object({
     query: z.string(),
+    // The jurisdictions searched: every one when the input named none.
+    jurisdictions: z.array(jurisdictionSchema),
     results: z.array(searchHitSchema),
   }),
   execute: async (input) => {
@@ -48,8 +56,13 @@ export const searchRefDocsTool = createTool({
       docId: input.docId,
       limit: input.limit,
       mode: input.mode,
+      jurisdictions: input.jurisdictions,
     });
-    return { query: input.query, results };
+    return {
+      query: input.query,
+      jurisdictions: resolveJurisdictions(input.jurisdictions),
+      results,
+    };
   },
 });
 

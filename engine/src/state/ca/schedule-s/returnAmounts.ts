@@ -11,6 +11,8 @@ import { prisonLaborCreditOnReturn } from "../3507/creditUsed.js";
 import { PRIOR_YEAR_AMT_CREDIT_USED, priorYearAmtCreditWaits } from "../3510/creditUsed.js";
 import { filmCreditsUsedTotal } from "../3541/creditUsed.js";
 import { passiveCreditsUsedTotal } from "../3801-cr/creditUsed.js";
+import { enterpriseZoneCreditUsed } from "../3805z/creditUsed.js";
+import { lambraCreditOnReturn } from "../3807/creditUsed.js";
 import { ttaCreditUsed } from "../3809/creditUsed.js";
 import type { OtherStateCreditInput, ScheduleSFilingInfo } from "./filingInfo.js";
 import { scheduleSLines, type ScheduleSLines } from "./lines.js";
@@ -64,15 +66,26 @@ export function californiaTaxLiability(
   if (typeof passive !== "number") return passive;
   const prisonLabor = prisonLaborCreditOnReturn(read, info);
   if (typeof prisonLabor !== "number") return prisonLabor;
-  // FTB 3541's and FTB 3809's credits are on lines 43 to 45 too; read from their source.
+  // FTB 3541's credits are on lines 43 to 45 too; read from their source.
   const film = filmCreditsUsedTotal(read, info);
   if (typeof film !== "number") return film;
+  // FTB 3805Z's enterprise zone, FTB 3807's LAMBRA and FTB 3809's TTA credits are on lines 43 to 45 too.
+  const enterpriseZone = enterpriseZoneCreditUsed(read, info);
+  if (typeof enterpriseZone !== "number") return enterpriseZone;
+  const lambra = lambraCreditOnReturn(read, info);
+  if (typeof lambra !== "number") return lambra;
   const tta = ttaCreditUsed(read, info);
   if (typeof tta !== "number") return tta;
-  return atLeast(
-    0,
-    line35 - sum(...OTHER_CREDIT_LINES.map(read)) - passive - prisonLabor - film - tta,
+  const otherCredits = sum(
+    ...OTHER_CREDIT_LINES.map(read),
+    passive,
+    prisonLabor,
+    film,
+    enterpriseZone,
+    lambra,
+    tta,
   );
+  return atLeast(0, line35 - otherCredits);
 }
 
 /*

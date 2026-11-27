@@ -10,6 +10,7 @@ import { unsupported, type Unsupported } from "../../../types.js";
 import { filmCreditsUsedTotal } from "../3541/creditUsed.js";
 import { passiveCreditsUsedTotal } from "../3801-cr/creditUsed.js";
 import type { Form3801CRInfo } from "../3801-cr/filingInfo.js";
+import { enterpriseZoneCreditUsed } from "../3805z/creditUsed.js";
 import { ttaCreditUsed } from "../3809/creditUsed.js";
 import { creditsBeforeSectionB2 } from "../540/creditBalance.js";
 import type { ScheduleSFilingInfo } from "../schedule-s/filingInfo.js";
@@ -89,10 +90,12 @@ export function taxBeforePteCredit(read: ReadField, info: Info): number | Unsupp
   // FTB 3541's credits: Section A2 lines 6 and 7 and Section B2 before the passive credits.
   const film = filmCreditsUsedTotal(read, info);
   if (typeof film !== "number") return film;
-  // FTB 3809's TTA credit: Section B2 after the film credits.
+  // FTB 3805Z's enterprise zone credit, then FTB 3809's TTA credit: Section B2 after the film credits.
+  const enterpriseZone = enterpriseZoneCreditUsed(read, info);
+  if (typeof enterpriseZone !== "number") return enterpriseZone;
   const tta = ttaCreditUsed(read, info);
   if (typeof tta !== "number") return tta;
-  return taxLeftForCredit(tax, [...before, film, tta, passive, otherState]);
+  return taxLeftForCredit(tax, [...before, film, enterpriseZone, tta, passive, otherState]);
 }
 
 /*

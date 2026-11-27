@@ -201,7 +201,7 @@ export function scheduleZPartI(
  *   income" (ca-3809-booklet-2025::sec::part-ii-limitation-of-credits-for-corporations-individuals-estates-and-trusts::b01, ::b02).
  * Only the limited amount can offset tax, and the credit's own form keeps the
  * full carryover (lines 8B and 9B column (g)), so Schedule P column (a) takes
- * the limited amount and column (b) never passes Schedule Z line 7 (decision A79).
+ * the limited amount and column (b) never passes Schedule Z line 7 (decision A86).
  */
 export const creditAvailableToOffsetTax = (
   hiringCarryover: number,
