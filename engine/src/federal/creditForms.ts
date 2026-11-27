@@ -3,7 +3,8 @@
  * from a passive activity before Form 3800 takes it; Form 8834, whose passive
  * credit Form 8582-CR limits too; Form 4136, the refundable credit for federal
  * tax paid on fuels used in a business; Form 8912, the credit for holders
- * of tax credit bonds; and Form 5884, the work opportunity credit for the
+ * of tax credit bonds; Form 8846, the credit for employer social security
+ * and Medicare taxes on tips; and Form 5884, the work opportunity credit for the
  * taxpayer's own employees. They are joined here, in this order, and filingInfo.ts
  * takes them as one, so that file stays under its line limit. A new credit
  * form adds its type and resolver here, not to filingInfo.ts.
@@ -21,6 +22,8 @@ import type { Form8582CRFilingInfo } from "./8582-cr/filingInfo.js";
 import { resolve8582CRInfo } from "./8582-cr/resolveInfo.js";
 import type { Form8834FilingInfo } from "./8834/filingInfo.js";
 import { resolve8834Info } from "./8834/resolveInfo.js";
+import type { Form8846FilingInfo } from "./8846/filingInfo.js";
+import { resolve8846Info } from "./8846/resolveInfo.js";
 import type { Form8912FilingInfo } from "./8912/filingInfo.js";
 import { resolve8912Info } from "./8912/resolveInfo.js";
 
@@ -29,6 +32,7 @@ export type CreditFormsFilingInfo = Form3800FilingInfo &
   Form8834FilingInfo &
   Form4136FilingInfo &
   Form8912FilingInfo &
+  Form8846FilingInfo &
   Form5884FilingInfo;
 
 export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
@@ -37,5 +41,6 @@ export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => B
   resolve8834Info,
   resolve4136Info,
   resolve8912Info,
+  resolve8846Info,
   resolve5884Info,
 ];

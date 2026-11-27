@@ -16,6 +16,7 @@ import {
 import { roundDollars } from "../../money.js";
 import type { ResolverInputs } from "../../resolverInputs.js";
 import { workOpportunitySources } from "../5884/sources.js";
+import { tipCreditSourcesOf } from "../8846/form3800.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
 import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
 import { gap, type Cell } from "./cells.js";
@@ -44,7 +45,7 @@ function statedGap(value: GeneralBusinessCreditFact["value"]): string | undefine
   }
   const engineForm = ENGINE_FORM_LINES[value.line];
   if (engineForm)
-    return `Line ${value.line} comes from ${engineForm}, which the engine figures: state the property or vehicle instead.`;
+    return `Line ${value.line} comes from ${engineForm}, which the engine figures: state that form's inputs (the property, vehicle or tips) instead.`;
   if (value.transfer && !TRANSFER_LINES.includes(value.line)) {
     return `The credit of line ${value.line} cannot be transferred under section 6418 (column (f) is shaded).`;
   }
@@ -192,8 +193,12 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
     ...k1.flatMap((found) => found.missing),
     ...workOpportunity.missing,
   ];
+  // Line 4f: Form 8846 line 4, the credit on the taxpayer's own tipped employees (8846/form3800.ts).
+  const tips = tipCreditSourcesOf(inputs);
+  missing.push(...tips.missing);
   const current = [
     ...stated,
+    ...tips.sources,
     ...k1.flatMap((found) => (found.source ? [found.source] : [])),
     ...workOpportunity.sources,
   ];

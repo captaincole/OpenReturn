@@ -127,6 +127,7 @@ export * from "./kinds/socialSecurity.js";
 export * from "./kinds/spouse.js";
 export * from "./kinds/studentLoanInterest.js";
 export * from "./kinds/taxCreditBond.js";
+export * from "./kinds/tipCredit.js";
 export * from "./kinds/tips.js";
 export * from "./kinds/trade.js";
 export * from "./kinds/traditionalIra.js";

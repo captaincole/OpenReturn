@@ -7,6 +7,7 @@
  * Form 4562 reports the test as a gap (federal/4562/lines.ts).
  */
 
+import { tipCreditReductions } from "../../federal/8846/figures.js";
 import { atLeast, sum } from "../../money.js";
 import { statedBusinessesOnReturn, type BusinessFactValue } from "./business.js";
 import { placesPersonalProperty, type ScopedDepreciation } from "./depreciation.js";
@@ -109,14 +110,41 @@ export function workOpportunityWageReduction(
 }
 
 /*
+ * Form 8846 line 4 comes off the business's taxes: "Reduce your deduction by
+ * the amount shown on Form 8846, line 4" (irs-1040sc-inst-2025::sec::line-23::b01).
+ * The stated taxesAndLicenses hold the employer taxes before the credit.
+ */
+function withTipCredit<T extends { key: string; value: BusinessFactValue }>(
+  businesses: T[],
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): T[] {
+  const reductions = tipCreditReductions(facts, joint);
+  if (reductions.size === 0) return businesses;
+  return businesses.map((business) => {
+    const reduction = reductions.get(business.key);
+    if (reduction === undefined) return business;
+    const expenses = business.value.expenses ?? {};
+    const taxesAndLicenses = (expenses.taxesAndLicenses ?? 0) - reduction;
+    return {
+      ...business,
+      value: { ...business.value, expenses: { ...expenses, taxesAndLicenses } },
+    };
+  });
+}
+
+/*
  * statedBusinessesOnReturn, with the return's depreciation scope, its Form 4797
- * Part IV recapture and its wages less the work opportunity credit.
+ * Part IV recapture, its wages less the work opportunity credit and its taxes
+ * less the Form 8846 credit. The two credits lower different expense lines, so
+ * their order does not matter.
  */
 export function businessesOnReturn(facts: ReadonlyArray<FactRow>, joint: boolean) {
   const result = statedBusinessesOnReturn(facts, joint);
   const shared = activitiesWithPersonalProperty(facts, joint) >= SHARED_TEST_MINIMUM;
   const businesses = withRecapture(marked(result.businesses, shared), facts);
-  return { ...result, businesses: withWorkOpportunityWages(businesses, facts) };
+  const reduced = withWorkOpportunityWages(businesses, facts);
+  return { ...result, businesses: withTipCredit(reduced, facts, joint) };
 }
 
 /* statedRentalsOnReturn, with the return's depreciation scope. */

@@ -169,6 +169,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],
   [
+    /^tip_credit\.[^.]+$/,
+    "each fact is one whole business's payroll tip records (Form 8846 lines 1 to 4); whether a " +
+      "business had tipped employees is Cade's question. Form 8846 lists the fact again while " +
+      "its Medicare-only tips are missing",
+  ],
+  [
     /^section_965\.(inclusion|other_liability|s_corporation|deferred)\.[^.]+$/,
     "each fact is one whole line of last year's Form 965-A (Part I with its Part II line, a " +
       "Part III row or a Part IV row); whether one exists is Cade's question. Form 965-A lists " +
