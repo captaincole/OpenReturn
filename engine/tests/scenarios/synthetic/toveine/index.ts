@@ -1,10 +1,10 @@
 /*
  * Made-up taxpayer (README.md): a single full-year California resident whose
  * machine shop sits partly in the former Tulare County Targeted Tax Area. FTB
- * 3809 limits her TTA hiring and sales or use tax credit carryovers by the tax
- * on her TTA business income; Schedule P (540) Section B2 takes them after
- * the prison inmate labor credit, and before the PTE elective tax credit, so
- * Form 540 line 45 holds the three. No answer key: the expected values are
+ * 3809 limits her TTA hiring credit carryover by the tax on her TTA business
+ * income; Schedule P (540) Section B2 takes it after the prison inmate labor
+ * credit, and before the PTE elective tax credit, so Form 540 line 45 holds
+ * the three. Her sales or use tax credit ran out after its 10 years. No answer key: the expected values are
  * hand-checked, locked engine output.
  */
 
@@ -34,7 +34,7 @@ const FORM_IDS = [
 export const toveineScenario: Scenario = {
   name: "toveine",
   description:
-    "Single Porterville machine shop owner with TTA credit carryovers (FTB 3809): Schedule Z limits them by the tax on TTA business income, Schedule P (540) Section B2 line 16 takes them, Form 540 line 45 with the prison inmate labor and PTE elective tax credits.",
+    "Single Porterville machine shop owner with a TTA hiring credit carryover (FTB 3809): Schedule Z limits it by the tax on TTA business income, Schedule P (540) Section B2 line 16 takes it, Form 540 line 45 with the prison inmate labor and PTE elective tax credits.",
   taxYear: TOVEINE_TAX_YEAR,
   userId: TOVEINE_USER_ID,
   verification: "unverified",

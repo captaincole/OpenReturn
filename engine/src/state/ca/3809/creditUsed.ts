@@ -52,6 +52,20 @@ const DISREGARDED_ENTITY = unsupported(
 const OVER_BUSINESS_CREDIT_LIMIT = unsupported(
   "Form 540 line 35 is above $5,000,000, so the business credit limitation and the FTB 3870 election (ca-3809-booklet-2025::sec::general-information::b02, ::line-1d-credit-amount-to-be-elected-as-refundable-in-future-years::b01) can apply to the TTA credit; the engine does not figure them.",
 );
+/*
+ * The sales or use tax credit arose only for property bought and placed in
+ * service by 2012 (ca-3809-booklet-2025::sec::line-1b-sales-or-use-tax-credit-carryover::b01),
+ * and the part "remaining for carryover to taxable years beginning on or after
+ * January 1, 2014, shall be carried over only to the succeeding 10 taxable
+ * years" (::targeted-tax-area-tta-credits-carryover-period::b01), so it has
+ * run out before 2025. Only the $5,000,000 limitation of an earlier year can
+ * extend it ("The carryover period for disallowed credit is extended by the
+ * number of taxable years the credit was not allowed", ::general-information::b03),
+ * and the engine has no fact for that. A stated carryover above 0 is a gap.
+ */
+const SALES_CREDIT_PAST_ITS_PERIOD = unsupported(
+  "A TTA sales or use tax credit carries over only 10 years from 2014 (ca-3809-booklet-2025::sec::targeted-tax-area-tta-credits-carryover-period::b01), so it reaches 2025 only when an earlier year's $5,000,000 limitation extended its period (::general-information::b03); the engine has no fact for that extension.",
+);
 const TOO_MANY_B2_CREDITS = unsupported(
   "FTB 3541's Section B2 credits and the TTA credit need more than the three Section B2 lines 16 to 18 the engine fills.",
 );
@@ -60,6 +74,7 @@ const TOO_MANY_B2_CREDITS = unsupported(
 export function ttaCreditGap(info: Form3809FilingInfo): Unsupported | undefined {
   const gap = returnGap(info);
   if (gap !== undefined) return gap;
+  if ((info.tta?.salesCarryover ?? 0) > 0) return SALES_CREDIT_PAST_ITS_PERIOD;
   return info.tta?.business?.throughDisregardedEntity === true ? DISREGARDED_ENTITY : undefined;
 }
 

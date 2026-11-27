@@ -277,9 +277,9 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line H. Total asset value of the business.
       "form-3809.0.header.h_total_asset_value": 660000,
       // Part I, Line 1a. Hiring credit carryover from Schedule Z, line 8A, column (f) or line 10,
-      "form-3809.0.line.1a_hiring_credit_carryover": 4000,
+      "form-3809.0.line.1a_hiring_credit_carryover": 11851,
       // Line 1b. Sales or use tax credit carryover from Schedule Z, line 9A, column (f) or line 11
-      "form-3809.0.line.1b_sales_use_tax_credit_carryover": 7851,
+      "form-3809.0.line.1b_sales_use_tax_credit_carryover": 0,
       // Line 1c. Add line 1a and line 1b.
       "form-3809.0.line.1c_total_credit_carryover": 11851,
       // Part I, Line 1. Trade or business income. Individuals: Enter the amount from Worksheet I,
@@ -297,28 +297,23 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Part II, Line 8A. Hiring credit carryover, (e) Limitation based on T T A business income.
       "form-3809.1.line.8a_hiring_credit_carryover_col_e": 11851,
       // Line 8A. Hiring credit carryover, (f) Credit carryover used on Schedule P can never be gre
-      "form-3809.1.line.8a_hiring_credit_carryover_col_f": 4000,
+      "form-3809.1.line.8a_hiring_credit_carryover_col_f": 11851,
       // Line 8B. Hiring credit carryover, (b) Total prior year carryover.
-      "form-3809.1.line.8b_hiring_credit_carryover_col_b": 4000,
+      "form-3809.1.line.8b_hiring_credit_carryover_col_b": 16000,
       // Line 8B. Hiring credit carryover, (d) Total credit column (b) minus column (c).
-      "form-3809.1.line.8b_hiring_credit_carryover_col_d": 4000,
+      "form-3809.1.line.8b_hiring_credit_carryover_col_d": 16000,
       // Line 8B. Hiring credit carryover, (e) Limitation based on T T A business income.
-      "form-3809.1.line.8b_hiring_credit_carryover_col_e": 4000,
-      // Line 9A. Sales or use tax credit carryover, (e) Limitation based on T T A business income.
-      "form-3809.1.line.9a_sales_use_tax_credit_carryover_col_e": 7851,
-      // Line 9A. Sales or use tax credit carryover, (f) Credit carryover used on Schedule P can ne
-      "form-3809.1.line.9a_sales_use_tax_credit_carryover_col_f": 7851,
-      // Line 9B. Sales or use tax credit carryover, (b) Total prior year carryover.
-      "form-3809.1.line.9b_sales_use_tax_credit_carryover_col_b": 16000,
-      // Line 9B. Sales or use tax credit carryover, (d) Total credit column (b) minus column (c).
-      "form-3809.1.line.9b_sales_use_tax_credit_carryover_col_d": 16000,
-      // Line 9B. Sales or use tax credit carryover, (e) Limitation based on T T A business income.
-      "form-3809.1.line.9b_sales_use_tax_credit_carryover_col_e": 7851,
-      // Line 9B. Sales or use tax credit carryover, (g) Total credit carryover column (d) minus co
-      "form-3809.1.line.9b_sales_use_tax_credit_carryover_col_g": 8149,
-      // Verified zeros: no TTA NOL, and the hiring credit is used in full.
+      "form-3809.1.line.8b_hiring_credit_carryover_col_e": 11851,
+      // Line 8B. Hiring credit carryover, (g) Total credit carryover column (d) minus column (e).
+      "form-3809.1.line.8b_hiring_credit_carryover_col_g": 4149,
+      // Verified zeros: no TTA NOL; line 7 is used up by the hiring credit; no sales or use tax credit.
       "form-3809.1.line.4_tta_nol_deduction": 0,
-      "form-3809.1.line.8b_hiring_credit_carryover_col_g": 0,
+      "form-3809.1.line.9a_sales_use_tax_credit_carryover_col_e": 0,
+      "form-3809.1.line.9a_sales_use_tax_credit_carryover_col_f": 0,
+      "form-3809.1.line.9b_sales_use_tax_credit_carryover_col_b": 0,
+      "form-3809.1.line.9b_sales_use_tax_credit_carryover_col_d": 0,
+      "form-3809.1.line.9b_sales_use_tax_credit_carryover_col_e": 0,
+      "form-3809.1.line.9b_sales_use_tax_credit_carryover_col_g": 0,
     },
     renderedText: {
       "form-3809.0.header.sic_code": "3599",

@@ -51,6 +51,19 @@ const MFS_LINE_21_THRESHOLD = 479188;
 const MFS_LINE_21_RATE = 0.25;
 const MFS_LINE_21_CAP = 61830;
 
+/*
+ * MANUAL EDIT: line 16 adds back the regular NOL deductions, and line 20 takes
+ * away the NOL "refigure[d] ... for AMT purposes" on another FTB 3805V, FTB
+ * 3805Z, FTB 3807 or FTB 3809 "using your AMT income and expense amounts"
+ * (ca-540-sched-p-inst-2025::sec::line-20-amt-net-operating-loss-nol-deduction::b01,
+ * ::step-1-amt-nol-for-prior-year::b01). Line 20 has no facts, so with an
+ * amount on line 16 the AMTI is a gap; read as 0, line 20 would leave the
+ * whole NOL in AMTI and print an AMT that may not exist.
+ */
+const AMT_NOL_NOT_FIGURED = unsupported(
+  "Line 16 adds back an NOL deduction, and line 20 takes away the AMT NOL refigured with AMT income and expense amounts (ca-540-sched-p-inst-2025::sec::step-1-amt-nol-for-prior-year::b01); the engine has no AMT NOL carryover facts, so it does not figure AMTI.",
+);
+
 /* Part I line 2: "2½% (.025) of federal Form 1040 or 1040-SR, line 11b" (the form). */
 const MEDICAL_AMT_FLOOR_RATE = 0.025;
 /* Part II line 24: "Multiply line 23 by 7.0% (.07)" (the form). */
@@ -288,6 +301,7 @@ const partI: Bindings = {
   "1.line.21_alternative_minimum_taxable_income": (form, info) => {
     const line19 = numberOrBlank(form["1.line.19_combine_lines_14_through_18"]);
     if (line19 === undefined) return undefined;
+    if (sum(form["0.line.16_nol_deductions"]) > 0) return AMT_NOL_NOT_FIGURED;
     const amti = line19 - sum(form["1.line.20_amt_nol_deduction"]);
     const separate = info.filingStatus === "married_filing_separately";
     if (!separate || amti <= MFS_LINE_21_THRESHOLD) return amti;

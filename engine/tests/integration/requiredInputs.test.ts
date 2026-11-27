@@ -435,6 +435,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "credit from 2024; either above 0 files FTB 3510, which then asks for the other",
   ],
   [
+    /^prior_year\.ca_tta_(hiring_credit_carryover|sales_use_tax_credit_carryover|nol_carryovers)$/,
+    "an answer Cade records only when the user carries a Targeted Tax Area credit or NOL from " +
+      "the 2024 FTB 3809 (the TTA ended in 2012); any one above 0 files FTB 3809, which then " +
+      "asks for the others",
+  ],
+  [
     /^prior_year\.dc_homebuyer_credit_carryforward$/,
     "an answer Cade records only when the user carries a District of Columbia first-time " +
       "homebuyer credit from 2024 (the credit ended for homes bought after 2011); above 0 it " +

@@ -109,7 +109,12 @@ describe("FTB 3809 who files", () => {
       [CA_TTA_KEYS.salesUseTaxCreditCarryover]: 700,
       [CA_TTA_KEYS.nolCarryovers]: none,
     });
-    expect(evaluate(sales).side1("line.1b_sales_use_tax_credit_carryover")).toBe(700);
+    const salesRun = evaluate(sales);
+    expect(salesRun.files("form-3809")).toBe(true);
+    // Its 10 years from 2014 have run out (::targeted-tax-area-tta-credits-carryover-period::b01): a gap.
+    expect(isGap(salesRun.field("form-3809", "0.line.1b_sales_use_tax_credit_carryover"))).toBe(
+      true,
+    );
     const nol = withTta({ [CA_TTA_KEYS.hiringCreditCarryover]: 0 });
     const run = evaluate(nol);
     expect(run.files("form-3809")).toBe(true);
@@ -244,6 +249,33 @@ describe("FTB 3809 gaps", () => {
       /FTB 3805V/,
     );
     expect(isGap(run.field("schedule-ca", NINE_B_THREE))).toBe(true);
+  });
+
+  it("a sales or use tax credit carryover is past its 10 years: a gap that reaches Form 540", () => {
+    const run = evaluate(withTta({ [CA_TTA_KEYS.salesUseTaxCreditCarryover]: 16000 }));
+    const line1b = run.field("form-3809", "0.line.1b_sales_use_tax_credit_carryover");
+    expect(reasonOf(line1b)).toMatch(/10 years from 2014/);
+    expect(isGap(run.field("form-3809", "0.line.1a_hiring_credit_carryover"))).toBe(true);
+    expect(isGap(run.field("form-540", "line.43_credit_amount"))).toBe(true);
+    // Schedule Z Part I, the limit, and the NOL deduction do not depend on it.
+    expect(run.scheduleZ("7_tta_business_income_limitation")).toBe(12435);
+    expect(run.side1("line.3b_nol_deduction_current_year")).toBe(23000);
+  });
+
+  it("a TTA NOL on Schedule P line 16 makes AMTI a gap: line 20 is not refigured", () => {
+    const run = evaluate(base.facts, withDecision("decisions.scope.must_file_schedule_p", true));
+    expect(run.value("schedule-p", "0.line.16_nol_deductions")).toBe(23000);
+    const line21 = run.field("schedule-p", "1.line.21_alternative_minimum_taxable_income");
+    expect(reasonOf(line21)).toMatch(/AMT NOL/);
+    expect(run.form540("61_alternative_minimum_tax")).toBeUndefined();
+    expect(run.form540("64_total_tax")).toBeUndefined();
+    // With no TTA NOL, AMTI is figured as before.
+    const noNol = evaluate(
+      withTta({ [CA_TTA_KEYS.nolCarryovers]: { rows: [] } }),
+      withDecision("decisions.scope.must_file_schedule_p", true),
+    );
+    const amti = noNol.value("schedule-p", "1.line.21_alternative_minimum_taxable_income");
+    expect(typeof amti).toBe("number");
   });
 
   it("more than three Section B2 credits is a gap", () => {

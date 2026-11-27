@@ -2,8 +2,8 @@
  * A made-up taxpayer (README.md): every name, number and address is invented.
  * Toveine Arandell runs a machine shop in Porterville, inside the former
  * Tulare County Targeted Tax Area, with a second job site outside it. She
- * carries a TTA hiring credit and a TTA sales or use tax credit from last
- * year's FTB 3809, and she owns parts of two LLCs: one passes through a prison
+ * carries a TTA hiring credit from last year's FTB 3809 (her sales or use tax
+ * credit ran out after its 10 years), and she owns parts of two LLCs: one passes through a prison
  * inmate labor credit, the other a PTE elective tax credit. No input
  * documents: the facts are her shop's books, last year's FTB 3809, the K-1
  * statements as she reads them and her answers. The K-1 income is left out:
@@ -183,14 +183,14 @@ export const toveineFacts: TaxFactRow[] = [
   fact(
     "other",
     CA_TTA_KEYS.hiringCreditCarryover,
-    4000,
-    `${LAST_3809}, Schedule Z line 8B column (g).`,
+    16000,
+    `${LAST_3809}, Schedule Z line 8B column (g): wages of 2016 and 2017 for two employees hired in 2012.`,
   ),
   fact(
     "other",
     CA_TTA_KEYS.salesUseTaxCreditCarryover,
-    16000,
-    `${LAST_3809}, Schedule Z line 9B column (g).`,
+    0,
+    `${LAST_3809}, Schedule Z line 9B column (g): none; her 2012 sales or use tax credit ran out after 2023.`,
   ),
   fact("other", CA_TTA_KEYS.nolCarryovers, noNol, `${LAST_3809}: no TTA NOL carryover.`),
   fact(
