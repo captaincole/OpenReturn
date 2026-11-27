@@ -10,6 +10,7 @@ import {
   workOpportunityLaborReduction,
   workOpportunityWageReduction,
 } from "../../../facts/index.js";
+import { disabledAccessReductionTotal } from "../../../federal/8826/figures.js";
 import { spousePropertiesOnReturn } from "../../../federal/rentals/passive.js";
 import { sum } from "../../../money.js";
 import {
@@ -123,9 +124,11 @@ export function resolveActivityAdjustments(inputs: ResolverInputs) {
   const asked = files540 && hasBusiness;
   const wageCredit = workOpportunityWageReduction(inputs.facts, joint);
   const farmCredit = workOpportunityLaborReduction(inputs.facts, joint);
+  const accessCredit = disabledAccessReductionTotal(inputs.facts, joint);
   return {
     caEmployeeAmounts: amounts,
     caWorkOpportunityWageCredit: wageCredit > 0 ? wageCredit : undefined,
+    caDisabledAccessCredit: accessCredit > 0 ? accessCredit : undefined,
     caWorkOpportunityFarmCredit: farmCredit.credit > 0 ? farmCredit : undefined,
     businessDepreciationAdjustment: adjustmentFor(inputs, "business"),
     rentalDepreciationAdjustment: adjustmentFor(inputs, "rental"),

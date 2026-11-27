@@ -60,6 +60,8 @@ export interface ScheduleCaFilingInfo
   caEmployeeAmounts?: CaEmployeeAmounts;
   /** Line 3 column B: the federal work opportunity credit that reduced the Schedule C wages; undefined with none. */
   caWorkOpportunityWageCredit?: number;
+  /** Line 3 column B: the federal disabled access credit (Form 8826 line 6) that reduced the Schedule C expenses; undefined with none. */
+  caDisabledAccessCredit?: number;
   /** Line 6 column B: the farms' Form 5884 credit and the labor hired it took off Schedule F line 22; undefined with none. */
   caWorkOpportunityFarmCredit?: { credit: number; reduction: number };
   /** Line 3 (businesses) and line 5 (rentals) columns B and C: the FTB 3885A differences. */

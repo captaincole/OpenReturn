@@ -7,9 +7,14 @@
  * Form 4562 reports the test as a gap (federal/4562/lines.ts).
  */
 
+import { disabledAccessReductions } from "../../federal/8826/figures.js";
 import { tipCreditReductions } from "../../federal/8846/figures.js";
 import { atLeast, sum } from "../../money.js";
-import { statedBusinessesOnReturn, type BusinessFactValue } from "./business.js";
+import {
+  statedBusinessesOnReturn,
+  type BusinessExpenses,
+  type BusinessFactValue,
+} from "./business.js";
 import { placesPersonalProperty, type ScopedDepreciation } from "./depreciation.js";
 import { statedRentalsOnReturn, type RentalFactValue } from "./rental.js";
 import { section179RecaptureByBusiness } from "./section179Recapture.js";
@@ -134,17 +139,44 @@ function withTipCredit<T extends { key: string; value: BusinessFactValue }>(
 }
 
 /*
+ * Form 8826 line 6 comes off the expense line that holds the expenditures:
+ * "To the extent of the credit shown on line 6, the eligible access
+ * expenditures may not be claimed as a deduction in figuring taxable income"
+ * (irs-8826-form-2025::sec::line-6::b01). The fact names the line; its stated
+ * amount holds the expenditures before the credit.
+ */
+function withDisabledAccessCredit<T extends { key: string; value: BusinessFactValue }>(
+  businesses: T[],
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): T[] {
+  const reductions = disabledAccessReductions(facts, joint);
+  if (reductions.size === 0) return businesses;
+  return businesses.map((business) => {
+    const lines = reductions.get(business.key);
+    if (lines === undefined) return business;
+    const expenses: BusinessExpenses = { ...business.value.expenses };
+    for (const [line, reduction] of lines) {
+      if (line === "capitalized") continue;
+      expenses[line] = atLeast(0, (expenses[line] ?? 0) - reduction);
+    }
+    return { ...business, value: { ...business.value, expenses } };
+  });
+}
+
+/*
  * statedBusinessesOnReturn, with the return's depreciation scope, its Form 4797
- * Part IV recapture, its wages less the work opportunity credit and its taxes
- * less the Form 8846 credit. The two credits lower different expense lines, so
- * their order does not matter.
+ * Part IV recapture, its wages less the work opportunity credit, its taxes
+ * less the Form 8846 credit and the expense line of its disabled access
+ * expenditures less the Form 8826 credit. Each credit subtracts from a stated
+ * amount, so their order does not matter.
  */
 export function businessesOnReturn(facts: ReadonlyArray<FactRow>, joint: boolean) {
   const result = statedBusinessesOnReturn(facts, joint);
   const shared = activitiesWithPersonalProperty(facts, joint) >= SHARED_TEST_MINIMUM;
   const businesses = withRecapture(marked(result.businesses, shared), facts);
-  const reduced = withWorkOpportunityWages(businesses, facts);
-  return { ...result, businesses: withTipCredit(reduced, facts, joint) };
+  const reduced = withTipCredit(withWorkOpportunityWages(businesses, facts), facts, joint);
+  return { ...result, businesses: withDisabledAccessCredit(reduced, facts, joint) };
 }
 
 /* statedRentalsOnReturn, with the return's depreciation scope. */
