@@ -9,6 +9,7 @@ import { describe, expect, it } from "vitest";
 import {
   CA_RESIDENCY_FACT_KEYS,
   caCaliforniaAmountKey,
+  makeGovernmentPaymentsFactKey,
   makeInterestFactKey,
   makeW2FactKey,
 } from "../../../../../src/facts/index.js";
@@ -19,7 +20,6 @@ import { alexScenario } from "../../../../scenarios/alex/index.js";
 import { pritalleScenario as base } from "../../../../scenarios/synthetic/pritalle/index.js";
 
 const categoryOf = (key: string) => (key.startsWith("ca_540nr.") ? "state_local_tax" : "other");
-
 /* The base return with facts replaced by key (undefined drops one) and decisions replaced (undefined drops one). */
 function evaluate(facts: Record<string, unknown> = {}, decisions: Record<string, unknown> = {}) {
   const template = base.facts[0]!;
@@ -89,17 +89,25 @@ describe("who files", () => {
     expect(run.pending.pendingDecisions).toContain("decisions.scope.must_file_540nr");
   });
 
-  it("a nonresident with no stated California amount does not file Form 540NR", () => {
+  const noStatedAmounts = {
+    [caCaliforniaAmountKey("1a")]: undefined,
+    [caCaliforniaAmountKey("2b")]: undefined,
+    [caCaliforniaAmountKey("7a")]: undefined,
+  };
+  const nonresidentUndecided = {
+    "decisions.scope.must_file_540nr": undefined,
+    "decisions.scope.ca_residency": "non_resident",
+  };
+
+  it("a nonresident whose W-2 shows California wages is asked, with no stated amount", () => {
+    const run = evaluate(noStatedAmounts, nonresidentUndecided);
+    expect(run.pending.pendingDecisions).toContain("decisions.scope.must_file_540nr");
+  });
+
+  it("a nonresident with no stated California amount and no California W-2 does not file Form 540NR", () => {
     const run = evaluate(
-      {
-        [caCaliforniaAmountKey("1a")]: undefined,
-        [caCaliforniaAmountKey("2b")]: undefined,
-        [caCaliforniaAmountKey("7a")]: undefined,
-      },
-      {
-        "decisions.scope.must_file_540nr": undefined,
-        "decisions.scope.ca_residency": "non_resident",
-      },
+      { ...noStatedAmounts, [W2_KEY]: { ...W2, box15: "OR", box17: 0 } },
+      nonresidentUndecided,
     );
     expect(run.files("form-540nr")).toBe(false);
   });
@@ -169,6 +177,49 @@ describe("column E is a stated answer", () => {
     });
     expect(run.value("schedule-ca-540nr.3.line.c26_ca_amounts")).toBe(120);
     expect(run.value("schedule-ca-540nr.3.line.c27_ca_amounts")).toBe(76650 - 120);
+  });
+});
+
+/*
+ * Unemployment of $8,000 (1099-G box 1) is federal income that California does
+ * not tax: Schedule CA (540NR) line 7, column B. Line 10 adds every column B
+ * line (ca-540nr-sched-ca-inst-2025::sec::line-10-total-2::b01), and Form 540NR
+ * line 14 takes line 27 column B
+ * (ca-540nr-booklet-2025::sec::line-14-california-adjustments-subtractions::b01).
+ * Federal AGI 137,400 − 8,000 = 129,400 on line 17.
+ */
+describe("a column B subtraction reaches Form 540NR line 14", () => {
+  const unemployment = {
+    [makeGovernmentPaymentsFactKey("state-edd", "1")]: { payerName: "State EDD", box1: 8000 },
+  };
+
+  it("line 10 and line 27 column B hold it, and line 14 takes it", () => {
+    const run = evaluate(unemployment);
+    expect(run.value("schedule-ca-540nr.1.line.b7_subtractions")).toBe(8000);
+    expect(run.value("schedule-ca-540nr.2.line.b10_subtractions")).toBe(8000);
+    expect(run.value("schedule-ca-540nr.3.line.c27_subtractions")).toBe(8000);
+    expect(run.value("schedule-ca-540nr.3.line.c27_total_ca_law")).toBe(129400);
+    expect(run.value("form-540nr.1.line.13_federal_agi")).toBe(137400);
+    expect(run.value("form-540nr.1.line.14_ca_adjustments_subtractions")).toBe(8000);
+    expect(run.value("form-540nr.1.line.17_agi_all_sources")).toBe(129400);
+    expect(run.value("form-540nr.1.line.19_total_taxable_income")).toBe(123694);
+  });
+
+  /*
+   * Column E is unchanged (unemployment has no column E), so California AGI
+   * stays 76,650 and the ratio rises: 76,650 / 129,400 = .5923 (Part IV
+   * line 3). Tax on 123,694 from the rate schedule is 7,942; 7,942 / 123,694
+   * = .0642 (line 36).
+   */
+  it("the ratios and the tax follow the lower AGI", () => {
+    const run = evaluate(unemployment);
+    expect(run.value("schedule-ca-540nr.4.part4.3_deduction_percentage_decimal_digits")).toBe(
+      "5923",
+    );
+    expect(run.value("form-540nr.1.line.31_tax_amount")).toBe(7942);
+    expect(run.value("form-540nr.1.line.36_ca_tax_rate_decimal_digits")).toBe("0642");
+    expect(run.value("form-540nr.1.line.35_ca_taxable_income")).toBe(73270);
+    expect(run.value("form-540nr.2.line.74_total_tax")).toBe(4613);
   });
 });
 

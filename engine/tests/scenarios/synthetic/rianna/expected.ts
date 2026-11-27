@@ -155,13 +155,27 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "schedule-ca-540nr.4.part4.1_california_agi": 45010,
       // Line 2 . Enter your deductions from line 30 .
       "schedule-ca-540nr.4.part4.2_deductions_from_line_30": 5706,
+      // Line 3 . Divide line 1 by line 27, column D: 45,010 / 158,310 = .2843
+      "schedule-ca-540nr.4.part4.3_deduction_percentage_whole_digit": 0,
       // Line 4 . California Itemized/Standard Deductions. Multiply line 2 by the percentage on lin
       "schedule-ca-540nr.4.part4.4_california_deductions_prorated": 1622,
       // Line 5 . California Taxable Income. Subtract line 4 from line 1 . Transfer this amount to
       "schedule-ca-540nr.4.part4.5_california_taxable_income": 43388,
     },
+    renderedText: {
+      // Part IV line 3: 45,010 / 158,310 = .2843
+      "schedule-ca-540nr.4.part4.3_deduction_percentage_decimal_digits": "2843",
+    },
   },
   "form-540nr": {
+    renderedText: {
+      // Line 36. CA tax rate: line 31 / line 19 = 10,631 / 152,604 = .0697
+      "form-540nr.1.line.36_ca_tax_rate_whole_digit": "0",
+      "form-540nr.1.line.36_ca_tax_rate_decimal_digits": "0697",
+      // Line 38. Exemption credit percentage: line 35 / line 19 = 43,388 / 152,604 = .2843
+      "form-540nr.1.line.38_exemption_credit_percentage_whole_digit": "0",
+      "form-540nr.1.line.38_exemption_credit_percentage_decimal_digits": "2843",
+    },
     engineFields: {
       // Exemptions. Line 7. Personal: If you checked box 1, 3, or 4 above, enter 1 in the box. If
       "form-540nr.0.line.7_personal_exemption_count": 1,
@@ -173,6 +187,10 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "form-540nr.1.line.12_state_wages": 29600,
       // Line 13. Enter federal adjusted gross income (A G I) from federal Form 1040, 1040-S R, or
       "form-540nr.1.line.13_federal_agi": 158310,
+      // Line 14. California adjustments, subtractions (Schedule CA (540NR) line 27 column B): none
+      "form-540nr.1.line.14_ca_adjustments_subtractions": 0,
+      // Line 16. California adjustments, additions (line 27 column C): none
+      "form-540nr.1.line.16_ca_adjustments_additions": 0,
       // Line 15. Subtract line 14 from line 13. If less than zero, enter the result in parentheses
       "form-540nr.1.line.15_agi_before_additions": 158310,
       // Line 17. Adjusted gross income from all sources. Combine line 15 and line 16.
@@ -189,7 +207,12 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "form-540nr.1.line.35_ca_taxable_income": 43388,
       // Line 37. California Tax Before Exemption Credits. Multiply line 35 by line 36.
       "form-540nr.1.line.37_ca_tax_before_exemption_credits": 3024,
-      // Line 39. California Prorated Exemption Credits. Multiply line 11 by line 38. If the amount
+      /*
+       * Line 39. California Prorated Exemption Credits. Multiply line 11 by line 38.
+       * 153 × .2843 = 43.4979. roundDollars snaps to cents first (43.50), so it prints 44; the
+       * whole-dollar rule on the exact product gives 43. A money.ts pattern question
+       * (state/ca/540nr/QUESTIONS.md, "Pattern change"); locked as the engine prints it.
+       */
       "form-540nr.1.line.39_ca_prorated_exemption_credits": 44,
       // Line 40. California Regular Tax Before Credits. Subtract line 39 from line 37. If less tha
       "form-540nr.1.line.40_ca_regular_tax_before_credits": 2980,

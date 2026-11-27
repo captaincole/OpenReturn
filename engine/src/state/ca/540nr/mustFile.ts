@@ -9,17 +9,35 @@
 import {
   CA_RESIDENCY,
   CA_RESIDENCY_DECISION_KEY,
+  isW2FactKey,
   readCaCaliforniaAmounts,
+  type W2FactValue,
 } from "../../../facts/index.js";
 import type { MustFileResolution } from "../../../filingInfo.js";
+import { sum } from "../../../money.js";
 import { resolveMustFile, type ResolverInputs } from "../../../resolverInputs.js";
 
 export const MUST_FILE_540NR_KEY = "decisions.scope.must_file_540nr";
 const FORM_540_KEY = "decisions.scope.must_file_ca_540";
 
-/* A nonresident who states a California amount above 0 has California-source income. */
-function statesCaliforniaIncome(inputs: ResolverInputs): boolean {
-  return Object.values(readCaCaliforniaAmounts(inputs.facts)).some((amount) => amount > 0);
+/* A W-2 whose state boxes name California with wages or withholding (boxes 15 to 17). */
+function showsCaliforniaWages(w2: W2FactValue): boolean {
+  return w2.box15?.trim().toUpperCase() === "CA" && (sum(w2.box16) > 0 || sum(w2.box17) > 0);
+}
+
+/*
+ * A nonresident has California-source income in sight when a stated
+ * California amount is above 0 or a W-2 shows California wages: "Nonresidents
+ * of California who received California sourced income in 2025 ... file Form
+ * 540NR" (ca-540nr-booklet-2025::sec::how-nonresidents-and-part-year-residents-are-taxed::b01).
+ * The W-2 matters because column E is asked only once Form 540NR files.
+ */
+function hasCaliforniaIncome(inputs: ResolverInputs): boolean {
+  const stated = Object.values(readCaCaliforniaAmounts(inputs.facts)).some((amount) => amount > 0);
+  const w2s = inputs.facts
+    .filter((fact) => isW2FactKey(fact.key))
+    .map((fact) => fact.value as W2FactValue);
+  return stated || w2s.some(showsCaliforniaWages);
 }
 
 /*
@@ -50,7 +68,7 @@ export function form540NRMustFile(inputs: ResolverInputs): MustFileResolution {
   }
   const asks =
     residency === CA_RESIDENCY.partYear ||
-    (residency === CA_RESIDENCY.nonresident && statesCaliforniaIncome(inputs));
+    (residency === CA_RESIDENCY.nonresident && hasCaliforniaIncome(inputs));
   if (asks) return { decisionKey: MUST_FILE_540NR_KEY, value: undefined, derivation: undefined };
   return {
     decisionKey: MUST_FILE_540NR_KEY,
