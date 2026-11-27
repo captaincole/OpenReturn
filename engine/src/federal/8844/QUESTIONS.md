@@ -21,7 +21,7 @@ The engine fills Form 8844 for an individual who employs people in an empowermen
 ### 9. An employee still employed who has fewer than 90 days at year end
 
 - Source: "Any individual employed by the employer for less than 90 days. For exceptions, see Early termination of employee, later" (`irs-8844-inst-2025::sec::qualified-zone-employees::b01`). "Generally, an individual is not a qualified zone employee unless employed for at least 90 days" (`qualified-zone-employees::b03`). Section 1396(d)(2)(C) has the same words (`usc-26-2025::sec::s1396::d-2`), and 26 CFR 1.1396-1 does not discuss the 90 days. No text says whether the count ends with the tax year.
-- Decided (DECISION comment above `isQualifiedZoneEmployee` in `lines.ts`; `docs/rule-decisions.md` row A97): the answer `employedAtLeast90Days` counts the days by December 31. An employee hired on October 13, 2025, still employed with 80 days at year end, does not count on the 2025 return.
+- Decided (DECISION comment above `isQualifiedZoneEmployee` in `lines.ts`; `docs/rule-decisions.md` row A103): the answer `employedAtLeast90Days` counts the days by December 31. An employee hired on October 13, 2025, still employed with 80 days at year end, does not count on the 2025 return.
 - Other reading: count her, because her employment passes 90 days in January 2026, before the return is filed. The blind fill took this reading.
 - Dollars: $6,000 of her wages is $1,200 of credit, and Schedule C line 26 moves by $1,200. The decision claims less.
 

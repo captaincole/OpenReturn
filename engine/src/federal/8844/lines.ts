@@ -34,7 +34,7 @@ export const CREDIT_RATE = 0.2;
  * employed counts once the 90 days pass. The engine counts the days by
  * December 31 (the fact's employedAtLeast90Days): the credit year's answer is
  * known when the year closes, and the default claims less. QUESTIONS.md
- * item 9; docs/rule-decisions.md row A97.
+ * item 9; docs/rule-decisions.md row A103.
  */
 export function isQualifiedZoneEmployee(employee: EmpowermentZoneEmployeeFactValue): boolean {
   const ninetyDays = employee.employedAtLeast90Days || employee.earlyTermination !== undefined;
