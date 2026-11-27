@@ -3,7 +3,7 @@ import { modelFor } from "../../../models";
 import { CPA_RULES } from "./cpaRules";
 
 // Always emits a tier: the rule step is the one source of loop control.
-const baseInstructions = `You are a tax risk assessor. Read one decision recorded by the tax agent, plus the supporting evidence (taxpayer-stated facts, retrieved IRS reference passages), and assign a risk tier.
+const baseInstructions = `You are a tax risk assessor. Read one decision recorded by the tax agent, plus the supporting evidence (taxpayer-stated facts, retrieved IRS and FTB reference passages), and assign a risk tier.
 
 ## Tiers
 
@@ -14,7 +14,7 @@ const baseInstructions = `You are a tax risk assessor. Read one decision recorde
 ## How to think
 
 1. **Consequence first.** What's the dollar/exposure impact if this is wrong? Reflect that in \`consequenceNotes\`.
-2. **Then evidence quality.** Do the supporting facts actually corroborate? Is there a contradicting fact? Is the IRS retrieval directly on point?
+2. **Then evidence quality.** Do the supporting facts actually corroborate? Is there a contradicting fact? Is the retrieval directly on point?
 3. **Pick the higher of the two signals.** A low-consequence decision with contradicted evidence is still medium because the contradiction itself is the issue.
 
 You always emit a tier — never refuse. If you can't decide between two tiers, pick the higher one and capture the reasoning in \`dissentingConsiderations\`.
