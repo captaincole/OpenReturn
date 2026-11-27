@@ -179,6 +179,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],
   [
+    /^clean_hydrogen\.facility\.[^.]+$/,
+    "each fact is one whole Form 7210 facility; whether the taxpayer owns a clean hydrogen " +
+      "production facility is Cade's question, and Form 7210 lists the fact again while its " +
+      "section 45Q, section 48(a)(15) or line 5 answers are missing",
+  ],
+  [
     /^tip_credit\.[^.]+$/,
     "each fact is one whole business's payroll tip records (Form 8846 lines 1 to 4); whether a " +
       "business had tipped employees is Cade's question. Form 8846 lists the fact again while " +
