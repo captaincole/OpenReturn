@@ -3,7 +3,7 @@
  * fisherman if at least two-thirds of your 2024 or 2025 gross income is from
  * farming or fishing" (ca-5805f-inst-2025::sec::b-qualifications::b01; the
  * federal rule is the same, irs-pub-505-2025::sec::farming-and-fishing::b01).
- * One fact per year, category self_employment. The taxpayer states both
+ * FTB 5805F and Form 2210-F both read it. One fact per year, category self_employment. The taxpayer states both
  * amounts, figured as Pub. 505 and Pub. 225 say:
  *
  * - Gross income from all sources is the total of the income (not loss)
@@ -51,4 +51,28 @@ export function getFarmerGrossIncomeFacts(facts: ReadonlyArray<FactRow>): Farmer
   return facts
     .filter((row) => keys.includes(row.key) && isFarmerGrossIncome(row.value))
     .map((row) => ({ key: row.key, value: row.value as FarmerGrossIncomeFactValue }));
+}
+
+/* "At least two-thirds" (ca-5805f-inst-2025::sec::b-qualifications::b01; irs-2210f-inst-2025::sec::general-instructions::b01). */
+const FARMING_SHARE_NUMERATOR = 2;
+const FARMING_SHARE_DENOMINATOR = 3;
+
+/* At least two-thirds of the year's gross income is from farming or fishing. */
+export function meetsFarmerGrossIncomeTest(
+  totalGrossIncome: number,
+  farmingOrFishing: number,
+): boolean {
+  return (
+    totalGrossIncome > 0 &&
+    farmingOrFishing * FARMING_SHARE_DENOMINATOR >= totalGrossIncome * FARMING_SHARE_NUMERATOR
+  );
+}
+
+/* The year facts (2024 or 2025) that pass the two-thirds test. */
+export function passingFarmerYearKeys(facts: ReadonlyArray<FactRow>): string[] {
+  return getFarmerGrossIncomeFacts(facts)
+    .filter(({ value }) =>
+      meetsFarmerGrossIncomeTest(value.totalGrossIncome, value.farmingOrFishingGrossIncome),
+    )
+    .map(({ key }) => key);
 }

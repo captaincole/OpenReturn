@@ -93,9 +93,8 @@ The Part III columns are not a limit (item 17).
 ## 13. Farmers and fishers (kind 2)
 
 - Source: "If at least two-thirds of your gross income for 2024 or 2025 is from farming and fishing, substitute 66 2/3% for 90%" and Form 2210-F (who-must-pay-the-underpayment::b01, exceptions-to-the-penalty::b02).
-- Default: the form is unsupported when Schedule F or Form 4835 files; the engine does not figure the two-thirds share.
-- Changes dollars: not applicable (unsupported).
-- Not now: it is a separate form (Form 2210-F) with its own catalog.
+- Done: a farmer or fisher files Form 2210-F, not Form 2210 (`2210-f/farmerTest.ts`). The two-thirds test reads the `farmer_or_fisherman.gross_income_<year>` facts. A passing year, or the explicit Form 2210-F decision, takes Form 2210 off the return, even over its own decision. With Schedule F or Form 4835 on the return and no passing year, Form 2210 waits for each year not yet stated. When both years fail, Form 2210 figures the penalty as for anyone else.
+- Changes dollars: no; the form was unsupported with farm income before.
 
 ## 14. Smaller defaults (kind 2)
 
