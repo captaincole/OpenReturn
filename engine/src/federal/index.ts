@@ -1282,6 +1282,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 7210",
     relativeDir: "federal/7210",
     register: registerForm7210,
+    // One Form 7210 for each clean hydrogen facility (7210/resolveInfo.ts).
+    copies: {
+      count: (info) => info?.form7210Copies?.length ?? 1,
+      select: (info, index) => info && { ...info, form7210CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-7211",

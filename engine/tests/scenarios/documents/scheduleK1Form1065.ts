@@ -34,6 +34,8 @@ export interface PartnershipK1Parties {
   /* Item C. */
   irsCenter: string;
   partner: K1Owner;
+  /* A fiscal-year partnership's tax year; the K-1 is then the form of the year it begins. */
+  fiscalYear?: { beginning: string; ending: string };
 }
 
 const one = (box: string, label: string) => ({ box, label, rows: 1 });
@@ -322,6 +324,7 @@ export async function scheduleK1Form1065Pdf(
     ],
     finalK1: value.finalK1,
     amendedK1: value.amendedK1,
+    fiscalYear: parties.fiscalYear,
   });
   drawLeftStack(
     ctx,

@@ -7,6 +7,7 @@ import { unsupported, type Unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { accrualCreditGap } from "../4136/receivers.js";
 import { homeOfficeActualGap, sharedHomeGap } from "../8829/lines.js";
+import { biodieselIncomeGap } from "../8864/receivers.js";
 import { figureBusinessForm6198 } from "./atRisk.js";
 import { line13Depreciation, partVEntries } from "./attachments.js";
 import type { ScheduleCFilingInfo } from "./filingInfo.js";
@@ -274,9 +275,13 @@ export function register(): void {
       "0.line.2": (_, info) => roundDollars(businessOf(info)?.returnsAndAllowances),
       "0.line.3": (_, info) => partI(info, netReceipts),
       "0.line.5": (_, info) => partI(info, grossProfit),
-      // MANUAL EDIT: an accrual-method business's own Form 4136 credit is this year's income (federal/4136/receivers.ts).
+      /*
+       * MANUAL EDIT: an accrual-method business's own Form 4136 credit is this year's income (federal/4136/receivers.ts).
+       * MANUAL EDIT: so is Form 8864 line 9, added to the stated other income (federal/8864/receivers.ts).
+       */
       "0.line.6": (_, info) =>
         accrualCreditGap(info, info.businessKeys?.[info.scheduleCCopyIndex ?? 0]) ??
+        biodieselIncomeGap(info, info.businessKeys?.[info.scheduleCCopyIndex ?? 0]) ??
         roundDollars(businessOf(info)?.otherIncome),
       "0.line.7": (_, info) => partI(info, grossIncome),
       "0.line.8": (_, info) => expense(info, "advertising"),
