@@ -5,17 +5,17 @@
     {
       "jurisdiction": "federal",
       "file": "law-federal.db",
-      "sha256": "PLACEHOLDER: fill in at publish",
-      "sizeBytes": 0,
+      "sha256": "83b408ed32138c9148011a2f4a302f57bb4581b71030a5a150151087eafecd02",
+      "sizeBytes": 905826304,
       "url": "https://github.com/captaincole/openreturn/releases/download/law-v3/law-federal.db"
     },
     {
       "jurisdiction": "CA",
       "file": "law-ca.db",
-      "sha256": "PLACEHOLDER: fill in at publish",
-      "sizeBytes": 0,
+      "sha256": "ffddcb98a3351b8f0634b34c19482118a51448494736717008ec8d61cfeeccc7",
+      "sizeBytes": 56733696,
       "url": "https://github.com/captaincole/openreturn/releases/download/law-v3/law-ca.db"
     }
   ],
-  "_notes": "GitHub Release assets (law-v3 tag), one per jurisdiction: `law fetch` installs each to canon/.data/law/<jurisdiction>.db (federal.db, ca.db), and `law fetch --jurisdiction CA` installs one. A file whose sha256 is not filled in is not downloaded. A new state is one more entry; a state can be published again without the federal file. Optional: nothing needs the law until an agent or a person asks for it. Embeddings are EmbeddingGemma 2 (ollama/embeddinggemma-2, stamped in each file's ref_meta)."
+  "_notes": "GitHub Release assets (law-v3 tag), one per jurisdiction: `law fetch` installs each to canon/.data/law/<jurisdiction>.db (federal.db, ca.db), and `law fetch --jurisdiction CA` installs one. A new state is one more entry; a state can be published again without the federal file. Optional: nothing needs the law until an agent or a person asks for it. Embeddings are EmbeddingGemma 2 (ollama/embeddinggemma-2, stamped in each file's ref_meta)."
 }
