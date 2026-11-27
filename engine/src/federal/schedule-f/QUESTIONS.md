@@ -111,7 +111,9 @@ numbers is in the corpus; the published examples are in
     federal Work Opportunity Credit" and the "Small Employer Health Insurance
     Credit" (::business-deductions-related-to::b01). Default: blank when no
     farm deducts depreciation or states a wage credit (`employmentCredits`,
-    `smallEmployerHealthCredit`); a gap when one does. Dollars: yes, if another
+    `smallEmployerHealthCredit`); a gap when one does. The Form 5884 credit of
+    the farm's own employee facts is column B, from FTB Publication 1001
+    (federal/5884/QUESTIONS.md item 4). Dollars: yes, if another
     California difference applies (none is modeled). Done for the credits;
     not now for depreciation (P2 and FTB 3885F).
 16. **FTB 3514 lines 18a to 18e with a farm.** "use the information from the

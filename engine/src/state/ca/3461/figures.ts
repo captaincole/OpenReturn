@@ -91,7 +91,11 @@ const gapOrBlank = (gap: string | undefined): Amount => (gap ? unsupported(gap) 
 /* MANUAL EDIT: line 6, Schedule CA line 6 (Schedule 1 line 6 in column A; columns B and C, line6Column). */
 function line6(form: Read, info: Info, figures: Form3461Figures): Amount {
   if (figures.federal.gaps.line6) return unsupported(figures.federal.gaps.line6);
-  return caAmount(line6Source(form, info), line6Column(info), line6Column(info));
+  return caAmount(
+    line6Source(form, info),
+    line6Column(info, "subtraction"),
+    line6Column(info, "addition"),
+  );
 }
 
 /* Part I, line by line, in the form's order. */

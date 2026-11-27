@@ -248,6 +248,59 @@ describe("the gaps and waits", () => {
   });
 });
 
+/* The base's decisions with each named decision's value replaced, and any decision it lacks added. */
+const deciding = (base: Scenario, values: Record<string, unknown>) => [
+  ...base.decisions.filter((each) => !(each.decisionKey in values)),
+  ...Object.entries(values).map(([key, value]) => decision(base, key, value)),
+];
+
+const CA_RESIDENT = {
+  "decisions.scope.must_file_ca_540": true,
+  "decisions.scope.ca_residency": "full_year",
+};
+const CA_LINE_6_B = "0.line.b6_subtractions";
+const CA_LINE_6_C = "0.line.b6_additions";
+
+describe("California adds the credit back (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b07)", () => {
+  it("a California farm: Schedule CA line 6 column B is the credit that came off line 22", () => {
+    const run = evaluate(byar, byar.facts, deciding(byar, CA_RESIDENT));
+    expect(run.value("schedule-f", LABOR)).toBe(128_000 - 17_618);
+    expect(run.value("schedule-ca", CA_LINE_6_B)).toBe(17_618);
+    expect(run.value("schedule-ca", CA_LINE_6_C)).toBeUndefined();
+  });
+
+  it("with no employee facts, line 6 columns B and C stay blank", () => {
+    const facts = byar.facts.filter((fact) => !isEmployee(fact));
+    const run = evaluate(byar, facts, deciding(byar, CA_RESIDENT));
+    expect(run.files("schedule-ca")).toBe(true);
+    for (const id of [CA_LINE_6_B, CA_LINE_6_C]) {
+      expect(run.value("schedule-ca", id)).toBeUndefined();
+      expect(isGap(run.field("schedule-ca", id))).toBe(false);
+    }
+  });
+
+  it("a stated employment credit next to it is still a gap: the farm fact does not name its form", () => {
+    const facts = replaced(byar.facts, PECANS_KEY, { ...pecans, employmentCredits: 900 });
+    const run = evaluate(byar, facts, deciding(byar, CA_RESIDENT));
+    expect(isGap(run.field("schedule-ca", CA_LINE_6_B))).toBe(true);
+    expect(isGap(run.field("schedule-ca", CA_LINE_6_C))).toBe(true);
+  });
+
+  it("a part-year resident: Schedule CA (540NR) line 3 column B, and column D less it", () => {
+    const decisions = deciding(daved, {
+      "decisions.scope.must_file_ca_540": false,
+      "decisions.scope.must_file_540nr": true,
+      "decisions.scope.ca_residency": "part_year",
+    });
+    const run = evaluate(daved, daved.facts, decisions);
+    const line3 = (column: string) => run.value("schedule-ca-540nr", `1.line.b3_${column}`);
+    expect(run.files("schedule-ca-540nr")).toBe(true);
+    expect(line3("subtractions")).toBe(4_000);
+    expect(line3("additions")).toBeUndefined();
+    expect(line3("total_ca_law")).toBe((line3("federal") as number) - 4_000);
+  });
+});
+
 describe("the K-1 does not change the deduction", () => {
   it("without the K-1, line 3 is blank and Schedule F line 22 is the same", () => {
     const run = evaluate(

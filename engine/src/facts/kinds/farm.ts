@@ -10,6 +10,7 @@
  * prints them in Part I (cash) or Part III (accrual).
  */
 
+import { atLeast, sum } from "../../money.js";
 import { isAtRiskAmounts, type AtRiskAmounts } from "./atRisk.js";
 import { workOpportunityCreditByActivity } from "./workOpportunity.js";
 
@@ -322,5 +323,29 @@ export function farmsOnReturn(
     farms: farms.filter((farm) => !offReturn(farm)),
     spouseKeys: farms.filter(offReturn).map((farm) => farm.key),
     malformedKeys: rows.filter((row) => !isFarm(row.value)).map((row) => row.key),
+  };
+}
+
+/*
+ * The Form 5884 part of the farms' line 22 reductions (Schedule CA line 6):
+ * the farms' credit in total, and the labor hired it took off, at most each
+ * farm's stated labor hired.
+ */
+export function workOpportunityLaborReduction(
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): { credit: number; reduction: number } {
+  const credits = workOpportunityCreditByActivity(facts);
+  const farms = farmsOnReturn(facts, joint).farms.map(({ key, value }) => ({
+    credit: credits.get(key) ?? 0,
+    labor: value.expenses?.laborHired,
+  }));
+  return {
+    credit: sum(...farms.map((farm) => farm.credit)),
+    reduction: sum(
+      ...farms.map(({ credit, labor }) =>
+        labor === undefined ? 0 : Math.min(atLeast(0, labor), credit),
+      ),
+    ),
   };
 }
