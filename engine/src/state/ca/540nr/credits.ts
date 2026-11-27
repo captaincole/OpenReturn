@@ -20,11 +20,20 @@ export const line50ChildDependentCareCredit: Form540NRLine<
 /*
  * Lines 58 to 60: the other special credits, by name and code, or Schedule P
  * (540NR) for more than two (ca-540nr-booklet-2025::sec::part-ii::b02). The
- * credit forms the engine has (FTB 3510, FTB 3801-CR, FTB 3804-CR, Schedule S)
- * file with Form 540 only; the others have no facts. As on Form 540 lines 43
- * to 45, the lines are a gap: a blank could hide a credit.
+ * credit forms the engine has (FTB 3507, FTB 3510, FTB 3541, FTB 3801-CR, FTB
+ * 3804-CR, Schedule S) file with Form 540 only; the others have no facts. As
+ * on Form 540 lines 43 to 45, the lines are a gap: a blank could hide a
+ * credit. Schedule P (540NR) has rules, but each of its credit rows takes one
+ * of these forms (schedule-p-540nr/partIII.ts), so line 60 stays a gap.
  */
-const OTHER_CREDIT_FORMS = ["form-3510", "form-3801-cr", "form-3804-cr", "schedule-s"];
+const OTHER_CREDIT_FORMS = [
+  "form-3507",
+  "form-3510",
+  "form-3541",
+  "form-3801-cr",
+  "form-3804-cr",
+  "schedule-s",
+];
 const OTHER_CREDITS_GAP =
   "Lines 58 to 60 take the other special credits of the Credit Chart; the engine figures none of them on Form 540NR yet.";
 
@@ -45,13 +54,13 @@ export const line59CreditCode: Form540NRLine<"2.line.59_credit_code"> = (_, info
 export const line59CreditAmount: Form540NRLine<"2.line.59_credit_amount"> = (_, info) =>
   otherCreditsGap(info);
 export const line60SchedulePCredits: Form540NRLine<"2.line.60_schedule_p_credits"> = (_, info) =>
-  gapFor(info, "schedule-p", ...OTHER_CREDIT_FORMS) ?? unsupported(OTHER_CREDITS_GAP);
+  gapFor(info, ...OTHER_CREDIT_FORMS) ?? unsupported(OTHER_CREDITS_GAP);
 
 /*
  * The credit forms a credit line takes. With one of them needed the credits
  * are not known, so lines 62 and 63 carry its gap.
  */
-const CREDIT_FORMS = ["form-3506", "schedule-p", ...OTHER_CREDIT_FORMS];
+const CREDIT_FORMS = ["form-3506", ...OTHER_CREDIT_FORMS];
 
 const CREDIT_LINES = [
   "1.line.50_child_dependent_care_credit",
