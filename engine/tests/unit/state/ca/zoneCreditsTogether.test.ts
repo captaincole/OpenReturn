@@ -18,7 +18,7 @@
  * The second return adds FTB 3809's TTA credit (code 210): toveine's machine
  * shop and TTA hiring credit carryover with zarya's 2009 TTA NOL. The TTA
  * credit takes the Section B2 line after the enterprise zone credit and the
- * tax that credit leaves (the DECISION in 3809/creditUsed.ts, decision A87).
+ * tax that credit leaves (the DECISION in 3809/creditUsed.ts, decision A92).
  */
 
 import { describe, expect, it } from "vitest";

@@ -6,7 +6,7 @@
  *
  * In Section B2 the TTA credit comes after FTB 3541's motion picture credits
  * and FTB 3805Z's enterprise zone credit, and before FTB 3801-CR's passive
- * credits (the DECISIONs below, decisions A85 and A87).
+ * credits (the DECISIONs below, decisions A90 and A92).
  */
 
 import { isGap } from "../../../federal/3800/cells.js";
