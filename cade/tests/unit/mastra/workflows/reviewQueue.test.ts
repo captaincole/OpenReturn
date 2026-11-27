@@ -45,20 +45,33 @@ const okRun = {
   },
 };
 
-async function seedDecision(within = scope): Promise<string> {
+async function seedDecision(
+  within = scope,
+  decisionKey = "decisions.scope.must_file_federal",
+): Promise<string> {
   const id = crypto.randomUUID();
   await decisions.recordDecision(within, {
     id,
     userId,
     filingId: within.filingId,
     taxYear: YEAR,
-    decisionKey: "decisions.scope.must_file_federal",
+    decisionKey,
     decision: true,
     rationale: "income over the threshold",
     supportingFactKeys: [],
     confidence: "high",
   });
   return id;
+}
+
+async function stepOutput(decisionId: string, kind: string): Promise<Record<string, unknown>> {
+  const res = await db.getAppDb().execute({
+    sql: `SELECT s.output_json FROM review_run_steps s
+          JOIN ai_decisions d ON d.latest_review_run_id = s.run_id
+          WHERE d.id = ? AND s.step_kind = ?`,
+    args: [decisionId, kind],
+  });
+  return JSON.parse(String(res.rows[0].output_json)) as Record<string, unknown>;
 }
 
 async function stepKinds(decisionId: string): Promise<string[]> {
@@ -150,6 +163,74 @@ describe("reviewDecision", () => {
       "26 U.S.C. § 461(l)(3)(B) (usc-26-2025::sec::s461::l-3-B)",
     );
     expect(questions[0].context).toContain("“Form 8949 are included”");
+  });
+
+  it("asks Canon for the decision's jurisdictions and stores the ones it searched", async () => {
+    const seen: unknown[] = [];
+    ground = async (input) => {
+      const { jurisdictions } = input as { jurisdictions?: string[] };
+      seen.push(jurisdictions);
+      return { ...okRun, jurisdictions };
+    };
+    const california = await seedDecision(scope, "decisions.scope.ca_residency");
+    const federal = await seedDecision(scope, "decisions.scope.must_file_federal");
+    const both = await seedDecision(scope, "decisions.scope.filing_status");
+    for (const id of [california, federal, both]) await review.reviewDecision(scope, id);
+    expect(seen).toEqual([["CA"], ["federal"], ["federal", "CA"]]);
+    expect(await stepOutput(california, "init")).toMatchObject({
+      jurisdictions: ["CA"],
+      jurisdictionRule: "table",
+    });
+    expect(await stepOutput(california, "finalize")).toMatchObject({ jurisdictions: ["CA"] });
+  });
+
+  it("stores every jurisdiction as searched when Canon sends no list", async () => {
+    ground = async () => okRun;
+    const id = await seedDecision(scope, "decisions.scope.ca_residency");
+    const out = await review.reviewDecision(scope, id);
+    expect(out.jurisdictions).toEqual(["federal", "CA"]);
+  });
+
+  it("names the FTB instructions and California's code in a California conflict", async () => {
+    const own = { userId, filingId: crypto.randomUUID() };
+    await filings.createOwnerFiling({ ...own, taxYear: YEAR });
+    const instruction = { blockId: "ca-540-inst-2025::sec::line-91::b01", quote: "use tax" };
+    const code = {
+      blockId: "ca-rtc-2025::sec::s6202::a",
+      quote: "every retailer",
+      citation: "Cal. Rev. & Tax. Code § 6202(a)",
+    };
+    const note = "They disagree.";
+    ground = async () => ({
+      ...okRun,
+      jurisdictions: ["CA"],
+      conflicts: [
+        { kind: "instruction_vs_statute", a: code, b: instruction, note },
+        { kind: "instruction_vs_instruction", a: instruction, b: instruction, note },
+      ],
+    });
+    await review.reviewDecision(
+      own,
+      await seedDecision(own, "decisions.scope.use_tax_zero_reason"),
+    );
+    const [question] = await taxFacts.listOpenQuestions(own);
+    expect(question.question).toBe(
+      "Decide which text to follow for decision `decisions.scope.use_tax_zero_reason`: official texts disagree.",
+    );
+    expect(question.context).toContain("The review followed the FTB instructions until");
+
+    const single = { userId, filingId: crypto.randomUUID() };
+    await filings.createOwnerFiling({ ...single, taxYear: YEAR });
+    ground = async () => ({
+      ...okRun,
+      conflicts: [{ kind: "instruction_vs_statute", a: code, b: instruction, note }],
+    });
+    await review.reviewDecision(
+      single,
+      await seedDecision(single, "decisions.scope.use_tax_zero_reason"),
+    );
+    const [one] = await taxFacts.listOpenQuestions(single);
+    expect(one.question).toContain(": the FTB instructions and California's code disagree.");
   });
 
   it("passes CANON_GROUND_MAX_ITERATIONS to Canon, and nothing when unset", async () => {

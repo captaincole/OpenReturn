@@ -39,8 +39,8 @@ const answered = {
   log: { steps: [{ kind: "answer" }] },
 };
 
-async function runTurn(question: string) {
-  const { threadId, turnId } = await threads.createAskThread(userId, question);
+async function runTurn(question: string, jurisdictions: ("federal" | "CA")[] = ["federal", "CA"]) {
+  const { threadId, turnId } = await threads.createAskThread(userId, question, jurisdictions);
   const run = await askTurnWorkflow.createRun({ resourceId: userId });
   const result = await run.start({ inputData: { userId, threadId, turnId } });
   const thread = await threads.getAskThread(userId, threadId);
@@ -95,7 +95,30 @@ describe("askTurn workflow", () => {
       steps: [{ kind: "statute", queries: [] }],
       statuteConsulted: true,
       conflicts: [conflict],
+      jurisdictions: ["federal", "CA"],
     });
+  });
+
+  it("asks Canon for the turn's jurisdictions and stores the ones it searched", async () => {
+    const seen: unknown[] = [];
+    ask = async (input) => {
+      seen.push((input as { jurisdictions?: unknown }).jurisdictions);
+      return { ...answered, jurisdictions: ["CA"] };
+    };
+    const { turn } = await runTurn("Is it deductible in California?", ["CA"]);
+    expect(seen).toEqual([["CA"]]);
+    expect(turn?.jurisdictions).toEqual(["CA"]);
+  });
+
+  it("keeps the jurisdictions asked for when the run fails", async () => {
+    ask = async () => ({ status: "failed", error: "answer: no output", log: { steps: [] } });
+    const failed = await runTurn("Is it deductible?", ["CA"]);
+    expect(failed.turn).toMatchObject({ status: "failed", jurisdictions: ["CA"] });
+    ask = async () => {
+      throw new client.CanonUnreachableError("down");
+    };
+    const thrown = await runTurn("Is it deductible?", ["federal"]);
+    expect(thrown.turn).toMatchObject({ status: "failed", jurisdictions: ["federal"] });
   });
 
   it("marks the turn failed when Canon's run failed, keeping its log", async () => {
