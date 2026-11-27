@@ -531,7 +531,8 @@
     {
       "name": "Form 6478",
       "title": "Biofuel Producer Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "6478"
     },
     {
       "name": "Form 6765",
@@ -572,22 +573,26 @@
     {
       "name": "Form 7207",
       "title": "Advanced Manufacturing Production Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "7207"
     },
     {
       "name": "Form 7210",
       "title": "Clean Hydrogen Production Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "7210"
     },
     {
       "name": "Form 7211",
       "title": "Clean Electricity Production Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "7211"
     },
     {
       "name": "Form 7213",
       "title": "Nuclear Power Production Credit",
-      "maxPerReturn": "3"
+      "maxPerReturn": "3",
+      "short": "7213"
     },
     {
       "name": "Form 7217",
@@ -597,7 +602,8 @@
     {
       "name": "Form 7218",
       "title": "Clean Fuel Production Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "7218"
     },
     {
       "name": "Form 8082",
@@ -740,7 +746,8 @@
     {
       "name": "Form 8820",
       "title": "Orphan Drug Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8820"
     },
     {
       "name": "Form 8824",
@@ -787,7 +794,8 @@
     {
       "name": "Form 8835",
       "title": "Renewable Electricity, Refined Coal, and Indian Coal Production Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8835"
     },
     {
       "name": "Form 8838",
@@ -872,7 +880,8 @@
     {
       "name": "Form 8864",
       "title": "Biodiesel and Renewable Diesel Fuels Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8864"
     },
     {
       "name": "Form 8865",

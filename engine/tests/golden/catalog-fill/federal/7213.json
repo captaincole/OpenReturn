@@ -1,0 +1,636 @@
+{
+  "formId": "form-7213",
+  "fieldCount": 70,
+  "entries": [
+    {
+      "fieldId": "form-7213.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "T-15CIP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-10ZA0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.1a_facility_name_line1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+          "text": "T-U04V1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.1a_facility_name_line2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+          "text": "T-1PFQA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.1b_i_owner_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+          "text": "T-FLTPC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.1b_ii_owner_tin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+          "text": "T-1U99P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.2a_facility_address_line1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+          "text": "T-11PH5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.2a_facility_address_line2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+          "text": "T-5BXQR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.2b_i_latitude_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_11[0]",
+          "text": "T1IGTL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.2b_i_latitude_degrees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_10[0]",
+          "text": "69"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.2b_i_latitude_sign",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_09[0]",
+          "text": "4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.2b_ii_longitude_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_14[0]",
+          "text": "T11MTM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.2b_ii_longitude_degrees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_13[0]",
+          "text": "950"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.2b_ii_longitude_sign",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_12[0]",
+          "text": "8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.3_construction_start_day",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "48"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.3_construction_start_month",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "21"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.3_construction_start_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "6030"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.4_placed_in_service_day",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "19"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.4_placed_in_service_month",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "90"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.4_placed_in_service_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "6732"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.5_facility_nameplate_capacity",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "T-O20XY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.6_nameplate_capacity_allocated",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "T-187YS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.7_irs_acceptance_letter_day",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "22"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.7_irs_acceptance_letter_month",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "24"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.7_irs_acceptance_letter_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "4635"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.8_eligible_project_partner",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.8_owner_of_facility",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.9_section_761a_election_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec1.9_section_761a_election_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.1_nmcl_allocated_mw",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line1_ReadOrder[0].f1_24[0]",
+          "text": "4,455"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.10_allocated_to_beneficiaries",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_35[0]",
+          "text": "4,363"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.11_estates_trusts_net_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_36[0]",
+          "text": "6,093"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.2_facility_nameplate_capacity_mw",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[1]",
+          "text": "1,807"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.3_nmcl_share_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+          "text": "T-1H50O"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.4_kwh_produced_and_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+          "text": "5,153"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.5a_qualifying_electricity_production_kwh",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+          "text": "3,307"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.5b_tentative_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+          "text": "9,386"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.6a_annual_limitation_mw",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+          "text": "6,203"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.6b_annual_limitation_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+          "text": "7,485"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.7_smaller_of_5b_or_6b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+          "text": "6,517"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.8_credit_from_pass_through_entities",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+          "text": "5,358"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.0.part1_sec2.9_total_lines_7_and_8",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+          "text": "6,780"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.1_irs_registration_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_01_Section1[0]",
+          "text": "T-WFOEL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.2a_facility_name_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_02[0]",
+          "text": "T-1D42M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.2a_facility_name_description_cont",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+          "text": "T-1SQJN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.2b_i_owner_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_04[0]",
+          "text": "T-L34M0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.2b_ii_owner_tin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_05[0]",
+          "text": "T-16ZAS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.3a_facility_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_06[0]",
+          "text": "T-1OMXV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.3a_facility_address_cont",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_07[0]",
+          "text": "T-DYP1Q"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.3b_i_latitude_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Latitude_CombFields[0].f2_10[0]",
+          "text": "T12GWL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.3b_i_latitude_degrees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Latitude_CombFields[0].f2_09[0]",
+          "text": "59"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.3b_i_latitude_sign",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Latitude_CombFields[0].f2_08[0]",
+          "text": "1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.3b_ii_longitude_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Longitude_CombFields[0].f2_13[0]",
+          "text": "TRFPIQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.3b_ii_longitude_degrees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Longitude_CombFields[0].f2_12[0]",
+          "text": "780"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.3b_ii_longitude_sign",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Longitude_CombFields[0].f2_11[0]",
+          "text": "2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec1.4_nrc_permit_license_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+          "text": "T-1U09C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.1_kwh_produced_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+          "text": "7,994"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.10_line3_minus_line9",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_26[0]",
+          "text": "1,241"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.11_increased_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_27[0]",
+          "text": "1,757"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.12_credit_from_pass_through",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_28[0]",
+          "text": "9,782"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.13_total_lines_11_12",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_29[0]",
+          "text": "6,444"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.14_allocated_to_beneficiaries",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_30[0]",
+          "text": "4,843"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.15_estate_trust_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_31[0]",
+          "text": "5,719"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.3_line1_times_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+          "text": "7,070"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.4_gross_receipts_electricity_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line4_ReadOrder[0].f2_20[0]",
+          "text": "2,257"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.5_zec_program_payments",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+          "text": "9,690"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.6_gross_receipts_after_zec",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+          "text": "5,753"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.7_line1_times_0_025",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+          "text": "4,394"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.8_line6_minus_line7",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+          "text": "4,374"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-7213.1.part2_sec2.9_smaller_line3_or_16pct_line8",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+          "text": "1,347"
+        }
+      ]
+    }
+  ]
+}

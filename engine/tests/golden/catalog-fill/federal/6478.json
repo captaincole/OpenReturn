@@ -1,0 +1,96 @@
+{
+  "formId": "form-6478",
+  "fieldCount": 10,
+  "entries": [
+    {
+      "fieldId": "form-6478.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-1L6J2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6478.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-ZWQ59"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6478.0.line.1_second_generation_biofuel_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Page1_Table[0].BodyRow[0].f1_3[0]",
+          "text": "8,928"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6478.0.line.1_second_generation_biofuel_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Page1_Table[0].BodyRow[0].f1_5[0]",
+          "text": "7,864"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6478.0.line.2_amount_from_line_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "4,927"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6478.0.line.2_irs_registration_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "T-1SNMV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6478.0.line.3_credit_from_pass_throughs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "9,069"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6478.0.line.4_add_lines_2_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "4,351"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6478.0.line.5_allocated_to_patrons_beneficiaries",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "8,690"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6478.0.line.6_subtract_line_5_from_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "8,175"
+        }
+      ]
+    }
+  ]
+}
