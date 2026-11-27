@@ -80,6 +80,15 @@ function rowOf(row: CaLambraIncomeRow, apportionment: number | undefined) {
   return percentage === undefined ? undefined : { line: row.line, amount: row.amount, percentage };
 }
 
+/*
+ * The rows wait on an answer: they are not stated, or a wage, employee
+ * business expense or pass-through row has no column (b) share of its own
+ * (::part-i-individual-income-and-expense-items::b01, ::part-ii-pass-through-income-or-loss::b02).
+ */
+const rowsWait = (rows: CaLambraIncomeRow[] | undefined) =>
+  rows === undefined ||
+  rows.some((row) => !TRADE_LINES.has(row.line) && share(row.percentage) === undefined);
+
 /* Worksheet I, Section B line 14; undefined while the rows, a share or Section A waits. */
 function businessIncomeOf(
   rows: CaLambraIncomeRow[] | undefined,
@@ -184,7 +193,7 @@ export function resolve3807Info(inputs: ResolverInputs): Form3807FilingInfo {
         ...(business === undefined || !businessComplete(business, rows)
           ? [CA_LAMBRA_KEYS.business]
           : []),
-        ...(rows === undefined ? [CA_LAMBRA_KEYS.businessIncome] : []),
+        ...(rowsWait(rows) ? [CA_LAMBRA_KEYS.businessIncome] : []),
         ...CARRYOVER_KEYS.filter((key) => num(inputs, key) === undefined),
         ...(nols === undefined ? [CA_LAMBRA_KEYS.nolCarryovers] : []),
       ],

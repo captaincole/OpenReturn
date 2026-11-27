@@ -7,7 +7,11 @@
  */
 
 import { describe, expect, it } from "vitest";
-import { CA_LAMBRA_KEYS, type CaLambraBusinessFactValue } from "../../../../../src/facts/index.js";
+import {
+  CA_LAMBRA_KEYS,
+  makeCaFilmCreditFactKey,
+  type CaLambraBusinessFactValue,
+} from "../../../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../../../src/facts/rows.js";
 import { evaluateScenario } from "../../../../../src/index.js";
 import { decisionRow } from "../../../../helpers/fixtureBuilders.js";
@@ -135,6 +139,15 @@ describe("FTB 3807 who files", () => {
     ]);
   });
 
+  it("asks for the income rows when a wage row has no share of time in the former LAMBRA", () => {
+    const wages = [{ line: "wages", description: "employer", amount: 100_000 }];
+    const run = evaluate(withLambra({ [CA_LAMBRA_KEYS.businessIncome]: wages }));
+    expect(run.missing).toEqual([CA_LAMBRA_KEYS.businessIncome]);
+    expect(run.form("1.line.1_trade_or_business_income")).toBeUndefined();
+    const shared = [{ ...wages[0], percentage: 0.5 }];
+    expect(evaluate(withLambra({ [CA_LAMBRA_KEYS.businessIncome]: shared })).missing).toEqual([]);
+  });
+
   it("follows the explicit decision", () => {
     const run = evaluate(base.facts, withDecision("decisions.scope.must_file_3807", false));
     expect(run.files("form-3807")).toBe(false);
@@ -221,6 +234,51 @@ describe("FTB 3807 credits through Schedule P (540)", () => {
     expect(run.form540("43_credit_code")).toBe("198");
     // Schedule S line 2 leaves the LAMBRA credit out of the tax, as it does every other credit.
     expect(run.value("schedule-s", "0.line.2_california_tax_liability")).toBe(11_312 - 6_095);
+  });
+
+  it("takes the line after FTB 3541's original and new credits in Section A2", () => {
+    const film = (slug: string, certificateNumber: number, yearIssued: number): TaxFactRow => ({
+      ...row(makeCaFilmCreditFactKey(slug), {
+        certificateNumber,
+        yearIssued,
+        copyrightRegistrationNumber: "PA0000000001",
+        source: "pass_through",
+        credit: 0,
+        carryoverFromPriorYear: 1_000,
+        owner: { name: "Test Features LP", idType: "fein", idNumber: "000000001" },
+      }),
+      id: `f-${slug}`,
+    });
+    const line = (run: ReturnType<typeof evaluate>, number: number, id: string) =>
+      run.value("schedule-p", `2.part3.${number}_${id}`);
+    // Original credit (223) only: code 198 on line 7, limited by line 6 column (c).
+    const one = evaluate([...base.facts, film("original", 3127, 2019)]);
+    expect([line(one, 6, "credit_code"), line(one, 6, "tax_balance_col_c")]).toEqual([
+      "223",
+      5_095,
+    ]);
+    expect([
+      line(one, 7, "credit_code"),
+      line(one, 7, "credit_amount_col_a"),
+      line(one, 7, "credit_used_col_b"),
+      line(one, 7, "credit_carryover_col_d"),
+    ]).toEqual(["198", 7_971, 5_095, 2_876]);
+    expect(one.form("0.line.1c_total_credit_carryover")).toBe(5_095);
+    // Original (223) and new (237): code 198 on line 8, limited by line 7 column (c).
+    const both = evaluate([...base.facts, film("original", 3127, 2019), film("new", 5408, 2016)]);
+    expect([line(both, 7, "credit_code"), line(both, 7, "tax_balance_col_c")]).toEqual([
+      "237",
+      4_095,
+    ]);
+    expect([
+      line(both, 8, "credit_code"),
+      line(both, 8, "credit_amount_col_a"),
+      line(both, 8, "credit_used_col_b"),
+      line(both, 8, "tax_balance_col_c"),
+      line(both, 8, "credit_carryover_col_d"),
+    ]).toEqual(["198", 7_971, 4_095, 0, 3_876]);
+    expect(both.form("0.line.1c_total_credit_carryover")).toBe(4_095);
+    expect(both.form("1.line.9b_sales_use_tax_credit_carryover_col_g")).toBeGreaterThan(0);
   });
 
   it("never uses more than line 7, nor more than the carryovers", () => {

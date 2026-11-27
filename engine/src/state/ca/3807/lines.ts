@@ -35,7 +35,7 @@ export const WHOLLY_WITHIN_LAMBRA = 1;
  * average as 73.33%, and multiplies $250,000 by it to get $183,325
  * (ca-3807-booklet-2025::sec::corporations-filing-a-combined-report::b03): two
  * decimals of a percent, four places, with the digits after them dropped
- * (66.666…% is 66.66%, not 66.67%). QUESTIONS.md item 5.
+ * (66.666…% is 66.66%, not 66.67%). QUESTIONS.md item 7.
  */
 export const PERCENTAGE_PLACES = 4;
 
