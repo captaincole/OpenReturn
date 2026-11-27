@@ -262,6 +262,21 @@ describe("Form 7218 on Form 3800 Part III line 1q", () => {
     expect(isGap(source?.credit.amount)).toBe(true);
   });
 
+  it("a sale above the facility's line 3 is a gap (usc-26-2025::sec::s6418::a)", () => {
+    const transfer = { direction: "sold" as const, amount: 10081, registrationNumber: "R-1" };
+    const source = (amount: number) => {
+      const facts = factsWith({
+        [DIGESTER_KEY]: { ...digester, transfer: { ...transfer, amount } },
+      });
+      const inputs = makeResolverInputs({ facts, decisions: base.decisions });
+      return resolve3800Info(inputs).form3800Sources?.current.find(
+        (each) => each.credit.key === DIGESTER_KEY,
+      );
+    };
+    expect(isGap(source(10081)?.credit.amount)).toBe(true);
+    expect(source(10080)?.credit.amount).toBe(10080);
+  });
+
   it("a second facility fact key is its own copy and its own source", () => {
     const extra = row("other", makeCleanFuelFacilityFactKey("third"), digester);
     const inputs = makeResolverInputs({ facts: factsWith({}, [extra]), decisions: base.decisions });

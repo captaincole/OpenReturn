@@ -53,7 +53,7 @@ export function applicableAmountOf(saf: boolean, meetsWageRules: boolean): numbe
  * nearest multiple of 0.1" (irs-7218-inst-2025::sec::part-iii-clean-aviation-and::b01).
  * The zero floor on the rate is for fuel produced after 2025 only
  * (emissions-factor::b01), so a 2025 rate below zero gives a factor above 1
- * (QUESTIONS.md item 3).
+ * (QUESTIONS.md item 2).
  */
 export function emissionsFactorOf(emissionsRate: number): number {
   const factor = (BASELINE_EMISSIONS_RATE - emissionsRate) / BASELINE_EMISSIONS_RATE;
