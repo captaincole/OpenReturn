@@ -4,7 +4,7 @@ Columns A to C and Part III are Schedule CA (540)'s rules on the same lines (`fr
 
 ## Two texts conflict
 
-None. The ratio of Part IV line 3 is Form 540NR's decision A71 (`../540nr/QUESTIONS.md`).
+None. The ratio of Part IV line 3 is Form 540NR's decision A78 (`../540nr/QUESTIONS.md`).
 
 ## Should we do this now
 

@@ -4,7 +4,7 @@ Form 540NR is the return of a part-year resident or a nonresident (issue #336). 
 
 ## Two texts conflict
 
-1. **Rounding of the four-place ratios.** Decided: row A71 of `docs/rule-decisions.md` and the `DECISION` comment in `lines.ts` (rounded, the half up, for lines 36 and 38 and Schedule CA (540NR) Part IV line 3). The blind fill made the same choice.
+1. **Rounding of the four-place ratios.** Decided: row A78 of `docs/rule-decisions.md` and the `DECISION` comment in `lines.ts` (rounded, the half up, for lines 36 and 38 and Schedule CA (540NR) Part IV line 3). The blind fill made the same choice.
 
 ## Should we do this now
 
