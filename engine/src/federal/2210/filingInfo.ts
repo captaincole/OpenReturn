@@ -18,6 +18,8 @@ export interface Form2210Answers {
   annualizedPeriods?: AnnualizedPeriodFactValue[];
   /* Some periods are stated and some are not: the form waits for the rest. */
   annualizedPeriodsIncomplete: boolean;
+  /* Farm income is on the return and the two-thirds test is not answered (2210-f/farmerTest.ts). */
+  farmerTestWaits: boolean;
 }
 
 export interface Form2210FilingInfo extends BaseFilingInfo {

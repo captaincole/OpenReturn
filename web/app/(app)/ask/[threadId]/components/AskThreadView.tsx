@@ -3,6 +3,7 @@
 import { UnauthorizedError } from "@/lib/api";
 import { fetchAskThread, type AskThread } from "@/lib/ask";
 import { signOut } from "@/lib/auth";
+import { ALL_JURISDICTIONS } from "@/lib/jurisdictions";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -82,6 +83,7 @@ export function AskThreadView({ threadId }: { threadId: string }) {
       <AskComposer
         threadId={thread.id}
         disabled={running}
+        initialJurisdictions={thread.turns.at(-1)?.jurisdictions ?? ALL_JURISDICTIONS}
         onFollowUp={() => setPollTick((tick) => tick + 1)}
       />
     </div>

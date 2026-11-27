@@ -51,6 +51,7 @@ import {
   headerSsn,
   headerState,
   headerZip,
+  hohQssQualifyingChildName,
   moreThanFourDependents,
 } from "./header.js";
 import {
@@ -138,6 +139,7 @@ export function register(): void {
       "header.filing_status_hoh": filingStatusHoh,
       "header.filing_status_mfj": filingStatusMfj,
       "header.filing_status_qss": filingStatusQss,
+      "header.hoh_qss_qualifying_child_name": hohQssQualifyingChildName,
       "header.filing_status_mfs": filingStatusMfs,
       "header.mfs_spouse_full_name": headerMfsSpouseFullName,
       "header.digital_assets_yes": headerDigitalAssetsYes,
@@ -267,8 +269,6 @@ export function register(): void {
         "No fact or decision models the taxpayer's voluntary Presidential Election Campaign Fund $3 designation; no intake question captures this.",
       "header.presidential_campaign_spouse":
         "No fact or decision models the spouse's voluntary Presidential Election Campaign Fund $3 designation; no MFJ/spouse scenario ingested.",
-      "header.hoh_qss_qualifying_child_name":
-        "No dependent/qualifying-child ingestion scenario yet — this field is only filled when the HOH/QSS qualifying person is a child who is NOT the taxpayer's dependent, requiring dependent relationship data we haven't modeled.",
       "header.nonresident_alien_spouse_checkbox":
         "No nonresident/dual-status alien spouse scenario modeled yet — requires a specific MFJ+NRA-spouse fact we haven't ingested.",
       "header.nonresident_alien_spouse_name":

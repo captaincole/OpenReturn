@@ -1,5 +1,6 @@
 import { MCPClient } from "@mastra/mcp";
 import type { z } from "zod";
+import type { Jurisdiction } from "./jurisdictions";
 import {
   askRunResultSchema,
   groundRunResultSchema,
@@ -143,6 +144,8 @@ export async function callCanon<S extends z.ZodType>(
 export async function askCanon(input: {
   question: string;
   history: AskHistoryTurn[];
+  /** The jurisdictions to search; Canon searches all of them when unset. */
+  jurisdictions?: Jurisdiction[];
 }): Promise<AskRunResult> {
   return callCanon("run_ask", input, askRunResultSchema);
 }

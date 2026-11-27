@@ -35,9 +35,11 @@ export const HIGH_AGI_SEPARATE = 500_000;
 export const PENALTY_RATE = 0.07;
 export const DAYS_IN_YEAR = 365;
 
-/* The gross income test: "at least two-thirds" (ca-5805f-inst-2025::sec::b-qualifications::b01). */
-const FARMING_SHARE_NUMERATOR = 2;
-const FARMING_SHARE_DENOMINATOR = 3;
+/*
+ * The gross income test: "at least two-thirds" (ca-5805f-inst-2025::sec::b-qualifications::b01).
+ * Form 2210-F reads the same test, so it lives with the fact kind.
+ */
+export { meetsFarmerGrossIncomeTest as meetsGrossIncomeTest } from "../../../facts/index.js";
 
 function knownDay(date: string): DayNumber {
   const day = dayNumber(date);
@@ -49,14 +51,6 @@ function knownDay(date: string): DayNumber {
 export const DUE_DATE = knownDay("2026-01-15");
 /* Line 13: "the date ... the amount on line 12 was paid or April 15, 2026, whichever is earlier." */
 export const PENALTY_END = knownDay("2026-04-15");
-
-/* At least two-thirds of the year's gross income is from farming or fishing. */
-export function meetsGrossIncomeTest(totalGrossIncome: number, farmingOrFishing: number): boolean {
-  return (
-    totalGrossIncome > 0 &&
-    farmingOrFishing * FARMING_SHARE_DENOMINATOR >= totalGrossIncome * FARMING_SHARE_NUMERATOR
-  );
-}
 
 /* The 2024 return, when the taxpayer filed one for 12 months. */
 export interface PriorYearInputs {

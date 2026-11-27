@@ -19,6 +19,7 @@ import type { Schedule8812FilingInfo } from "../schedule-8812/filingInfo.js";
 import type { ScheduleAFilingInfo } from "../schedule-a/filingInfo.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
 import type { EicLineSlot } from "../schedule-eic/eicAnswers.js";
+import type { ScheduleJFilingInfo } from "../schedule-j/filingInfo.js";
 import type { ScheduleSEFilingInfo } from "../schedule-se/filingInfo.js";
 
 /*
@@ -32,7 +33,7 @@ import type { ScheduleSEFilingInfo } from "../schedule-se/filingInfo.js";
  * Lines 4b and 5b read Form 8915-F's totals.
  * Lines 3a–3c, 7a, 7b and 16 read Form 8814's totals. Line 16 reads Form 8615
  * and Form 4972's tax. Lines 3b and 16 read Form 8621's totals. Line 16
- * reads Form 8978's line 14 total.
+ * reads Form 8978's line 14 total, and Schedule J's answers (its line 23).
  * Line 29 reads Form 8863's figures to tell a gap from "no credit". Lines 17
  * and 18 read Form 1116's slots to tell a gap in the AMT from "no AMT".
  * Line 26 reads the estimated tax payments; lines 35a, 37 and 38 read Form 2210.
@@ -59,6 +60,7 @@ export interface Form1040FilingInfo
     Pick<Form4972FilingInfo, "form4972Tax" | "form4972TaxGap">,
     Pick<Form2210FilingInfo, "estimatedTaxPaid" | "form2210" | "form2210Gap">,
     Pick<Form2555FilingInfo, "form2555Filers">,
+    Pick<ScheduleJFilingInfo, "scheduleJ">,
     Form1116FilingInfo {
   /** Social Security with a traditional IRA contribution and a plan: Pub. 590-A figures line 6b (schedule-1/pub590a.ts). */
   pub590aWorksheets?: boolean;
@@ -111,6 +113,8 @@ export interface Form1040FilingInfo
   /** Federal only. Form 540 has its own: a taxpayer can choose per jurisdiction. */
   refundFullOverpaymentFederal?: boolean;
   useItemizedDeductions?: boolean;
+  /** HOH: the qualifying child released on Form 8332, who is not a dependent (federal/8332/headOfHousehold.ts). */
+  hohChildNotDependentName?: string;
 }
 
 /** `taxable` is undefined when a 1099-R needs the Simplified Method or Form 8606 (not modeled). */

@@ -28,6 +28,14 @@ export const LINE_19_ID = "form-8863.0.line.19_nonrefundable_education_credits";
 
 const SEPARATE_RETURN_GAP =
   "A married filing separately return cannot take an education credit (irs-8863-inst-2025::sec::who-can-claim-an-education-credit::b03); lines 2 and 13 have no amount for it.";
+/*
+ * irs-8863-inst-2025::sec::american-opportunity-credit::b01: "Don't claim the
+ * American opportunity credit for 2 years ... or 10 years" after a final
+ * determination. Whether the student's expenses then go to the lifetime
+ * learning credit is not settled there (federal/8862/QUESTIONS.md).
+ */
+const AOTC_BAN_GAP =
+  "An IRS ban bars the American opportunity credit this year (irs-8863-inst-2025::sec::american-opportunity-credit::b01); moving the student's expenses to the lifetime learning credit is not modeled.";
 const MAGI_GAP =
   "Lines 3 and 14 must add back the income excluded on Form 2555 (irs-8863-inst-2025::sec::line-3::b01, Pub. 970 Worksheet 2-1), and these lines do not add it back yet.";
 
@@ -40,6 +48,7 @@ function returnOf(info: Form8863FilingInfo): Result<{ figured: Form8863Figured; 
     return undefined;
   }
   if (info.filingStatus === "married_filing_separately") return unsupported(SEPARATE_RETURN_GAP);
+  if (figured.aotcBarred === true && figured.americanOpportunity) return unsupported(AOTC_BAN_GAP);
   return { figured, joint: info.filingStatus === "married_filing_jointly" };
 }
 
