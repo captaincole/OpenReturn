@@ -316,6 +316,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "whether a recapture happened is Cade's question. Form 4255 lists a line's fact while a " +
       "property or facility on that line waits for it",
   ],
+  [
+    /^form8332\.revocation\.[^.]+$/,
+    "each fact is one whole Form 8332 Part III revocation the taxpayer gave the other parent; " +
+      "whether one was given is Cade's question. Form 8332 lists the fact again while an answer " +
+      "inside it is missing",
+  ],
   [/^identity\.email$/, "Cade records the login email at doc-gen time"],
   [/^identity\.(spouse\.)?name\.middle_initial$/, "printed when stated; not every name has one"],
   [

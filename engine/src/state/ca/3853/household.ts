@@ -11,6 +11,7 @@ import {
   CA_HEALTH_COVERAGE_KEYS,
   SPOUSE_KEYS,
   getCaUnclaimedCoverageFacts,
+  getClaimedDependentFacts,
   getDependentFacts,
   isDividendFactKey,
   isInterestFactKey,
@@ -94,7 +95,8 @@ function filers(inputs: ResolverInputs): Ca3853Member[] {
 
 /* Every member, in the order of Parts I and III. */
 export function householdMembers(inputs: ResolverInputs): Ca3853Member[] {
-  const dependents = getDependentFacts(inputs.facts).map(({ dependentSlug, dependent }) =>
+  // A child released to the other parent on Form 8332 is not claimed, so not a member here.
+  const dependents = getClaimedDependentFacts(inputs.facts).map(({ dependentSlug, dependent }) =>
     member(
       inputs,
       {
@@ -214,7 +216,7 @@ function grossIncomeAsked(
   if (!extras || status === undefined || !THRESHOLD_STATUSES.has(status) || over65 === undefined) {
     return false;
   }
-  const dependents = getDependentFacts(inputs.facts).length;
+  const dependents = getClaimedDependentFacts(inputs.facts).length;
   const thresholds = filingThresholds(status as ThresholdStatus, over65, dependents);
   return thresholds !== undefined && sumW2Box(inputs, "box16") <= thresholds.grossIncome;
 }
@@ -231,7 +233,7 @@ export function resolveHousehold(inputs: ResolverInputs): Ca3853Household {
     salaryReductionPremiums: num(inputs, CA_HEALTH_COVERAGE_KEYS.salaryReductionPremiums),
     usObligationInterest: sumInvestmentBox(inputs, "box3", isInterestFactKey),
     people65OrOlder: over65,
-    dependentsClaimed: getDependentFacts(inputs.facts).length,
+    dependentsClaimed: getClaimedDependentFacts(inputs.facts).length,
   };
 }
 

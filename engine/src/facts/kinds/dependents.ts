@@ -2,7 +2,11 @@
  * One fact per dependent the taxpayer claims (the 1040 Dependents table, Schedule
  * 8812 lines 4 and 6, CA 540 line 10). Recording the fact means the person is
  * claimed as a dependent: the Who Qualifies steps (1040 instructions) are Cade's
- * conversation, not the engine's.
+ * conversation, not the engine's. One exception: a child whose custodial parent
+ * (this taxpayer) released the claim on Form 8332 (releasedToNoncustodialParent)
+ * is recorded too, because the child still counts for head of household, the
+ * earned income credit and the dependent care credit; that child is not claimed
+ * (getClaimedDependentFacts leaves it out).
  */
 
 import type { TaxFactRow } from "../rows.js";
@@ -44,6 +48,20 @@ export interface DependentFactValue {
    * child tax credit.
    */
   form8332Release?: boolean;
+  /*
+   * A child who lived with the taxpayer more than half the year: true when the
+   * taxpayer, as the custodial parent, released the claim for 2025 to the other
+   * parent (signed Form 8332 Part I or II, or a pre-1985 decree lets the other
+   * parent claim the child). "If conditions (1) through (4) apply, only the
+   * noncustodial parent can claim the child for purposes of the child tax
+   * credit and credit for other dependents" (irs-1040-inst-2025::sec::
+   * definitions-and-special-rules::b02), and "The custodial parent ... can
+   * claim the child for the earned income credit and these other benefits"
+   * (::b03). So the child is not on this return's Dependents table and earns
+   * neither credit, but stays a qualifying child for head of household, the
+   * earned income credit and the dependent care credit. Absent: no release.
+   */
+  releasedToNoncustodialParent?: boolean;
 }
 
 export interface DependentFact {
@@ -77,9 +95,24 @@ export function parseDependentFact(fact: FactRow): DependentFact | null {
   };
 }
 
-/* Every dependent fact, in the order recorded. */
+/* Every dependent fact, in the order recorded: a released child too (the qualifying-child tests read them all). */
 export function getDependentFacts(facts: ReadonlyArray<FactRow>): DependentFact[] {
   return facts.map(parseDependentFact).filter((fact): fact is DependentFact => fact !== null);
+}
+
+/* A child the taxpayer released to the other parent is not the taxpayer's dependent. */
+export function isClaimedDependent(dependent: DependentFactValue): boolean {
+  return dependent.releasedToNoncustodialParent !== true;
+}
+
+/*
+ * The dependents the return claims, in the order recorded: every dependent fact
+ * but a child released to the noncustodial parent ("The dependents you claim are
+ * those you list by name and SSN in the Dependents section",
+ * irs-1040-inst-2025::sec::head-of-household::b03).
+ */
+export function getClaimedDependentFacts(facts: ReadonlyArray<FactRow>): DependentFact[] {
+  return getDependentFacts(facts).filter((fact) => isClaimedDependent(fact.dependent));
 }
 
 /*
@@ -188,12 +221,15 @@ export type DependentCredit = "child_tax_credit" | "other_dependents" | "none";
  * birth, the months in the home, the citizenship, or the Form 8332 release for a
  * child who lived with the taxpayer half the year or less): the engine then waits
  * and asks, never assumes. The taxpayer's own SSN must also be valid for
- * employment; a taxpayer with only an ITIN has no fact yet.
+ * employment; a taxpayer with only an ITIN has no fact yet. A child the
+ * taxpayer released to the noncustodial parent earns neither credit here: only
+ * the noncustodial parent claims them (irs-1040-inst-2025::sec::definitions-and-special-rules::b02).
  */
 export function dependentCredit(
   dependent: DependentFactValue,
   taxYear: number,
 ): DependentCredit | undefined {
+  if (!isClaimedDependent(dependent)) return "none";
   const age = ageAtYearEnd(dependent.dob, taxYear);
   const livedOverHalfYear = livedWithTaxpayerOverHalfYear(dependent, taxYear);
   if (

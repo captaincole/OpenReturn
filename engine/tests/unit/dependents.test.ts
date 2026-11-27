@@ -8,10 +8,14 @@ import { describe, expect, it } from "vitest";
 import {
   ageAtYearEnd,
   dependentCredit,
+  getClaimedDependentFacts,
+  getDependentFacts,
+  isClaimedDependent,
   isQualifyingChildRelationship,
   livedWithTaxpayerOverHalfYear,
   type DependentFactValue,
 } from "../../src/facts/index.js";
+import { isEicQualifyingChild } from "../../src/federal/schedule-eic/qualifyingChild.js";
 
 const niece: DependentFactValue = {
   firstName: "Jessica",
@@ -103,6 +107,38 @@ describe("dependentCredit", () => {
     expect(dependentCredit(apart, 2025)).toBeUndefined();
     expect(dependentCredit({ ...apart, form8332Release: true }, 2025)).toBe("child_tax_credit");
     expect(dependentCredit({ ...apart, form8332Release: false }, 2025)).toBe("other_dependents");
+  });
+
+  /*
+   * irs-1040-inst-2025::sec::definitions-and-special-rules::b02: "only the
+   * noncustodial parent can claim the child for purposes of the child tax
+   * credit and credit for other dependents"; ::b03: the custodial parent keeps
+   * head of household, the dependent care credit and the EIC.
+   */
+  it("a child the custodial parent released on Form 8332 earns neither credit on that parent's return", () => {
+    const released = { ...niece, relationship: "Daughter", releasedToNoncustodialParent: true };
+    expect(dependentCredit(released, 2025)).toBe("none");
+    expect(isClaimedDependent(released)).toBe(false);
+    expect(livedWithTaxpayerOverHalfYear(released, 2025)).toBe(true);
+    expect(isEicQualifyingChild({ ...released, livedInUs: true }, ["01/01/1985"], 2025)).toBe(true);
+    expect(dependentCredit({ ...released, releasedToNoncustodialParent: false }, 2025)).toBe(
+      "child_tax_credit",
+    );
+  });
+
+  it("the claimed dependents leave out a released child and keep every other dependent fact", () => {
+    const row = (key: string, value: DependentFactValue) => ({
+      key,
+      value,
+      category: "dependents",
+    });
+    const facts = [
+      row("dependent.a", niece),
+      row("dependent.b", { ...niece, releasedToNoncustodialParent: true }),
+      row("dependent.c", { ...niece, monthsLivedWithYou: 2, form8332Release: true }),
+    ];
+    expect(getDependentFacts(facts).map((fact) => fact.dependentSlug)).toEqual(["a", "b", "c"]);
+    expect(getClaimedDependentFacts(facts).map((fact) => fact.dependentSlug)).toEqual(["a", "c"]);
   });
 
   it("waits while the date of birth, the months in the home or the citizenship is unknown", () => {

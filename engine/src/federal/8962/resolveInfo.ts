@@ -1,7 +1,7 @@
 import {
   MARKETPLACE_MONTHS,
   PREMIUM_TAX_CREDIT_KEYS,
-  getDependentFacts,
+  getClaimedDependentFacts,
   getMarketplaceCoverageFacts,
   rowShowsCoverage,
   type MarketplaceCoverageAmounts,
@@ -83,6 +83,7 @@ export function resolve8962Info(inputs: ResolverInputs): Form8962FilingInfo {
     marketplaceMonthlyTotals: statements.length > 0 ? monthly : undefined,
     marketplaceMonthlyStatementCounts: statements.length > 0 ? monthlyCounts : undefined,
     marketplaceSameEveryMonth: statements.length > 0 ? statements.every(sameEveryMonth) : undefined,
-    dependentCount: getDependentFacts(inputs.facts).length,
+    // Line 1, the tax family: a child released to the other parent on Form 8332 is not claimed.
+    dependentCount: getClaimedDependentFacts(inputs.facts).length,
   };
 }
