@@ -172,6 +172,17 @@ export function cleanElectricityLines(
   }
   const line5 = sum(...amounts);
   let line7 = line5;
+  /*
+   * DECISION (2026-11-27, by the author): the line 6a numerator is the
+   * proceeds of tax-exempt obligations only, the amount the financing fact states.
+   * - The form: "all proceeds of subsidized energy financing or private activity
+   *   bonds used to finance the qualified facility" (irs-3468-face-2025::sec::face-part-v-2::b02).
+   * - The instructions: "proceeds of an issue of any obligations the interest
+   *   on which is exempt from tax under section 103"
+   *   (irs-3468-inst-2025::sec::section-c-totals-credit-reduction-for::b01).
+   * The form's instructions decide how its line is filled, and section 48E(d)(2)
+   * applies the rule of section 45(b)(3), whose numerator is the same.
+   */
   if (investment.financing !== undefined) {
     const { proceeds, capitalAccountAdditions } = investment.financing;
     const reduced = financingLines(line5, proceeds, capitalAccountAdditions);

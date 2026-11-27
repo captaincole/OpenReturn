@@ -30,17 +30,26 @@ export const LOW_INCOME_CAPACITY_LIMIT_KW = 5_000;
 /* Lines 6c and 28c: "Multiply line 5 by 15% (0.15)" (face-part-v-2::b02, face-part-vi-7::b03). */
 export const FINANCING_REDUCTION_CAP = 0.15;
 /*
- * DECISION (2026-11-27, by the author): the ratio lines keep 4 decimal places,
- * and the lines that multiply by them use the printed ratio.
- * - Line 1k: "divide line 1i by Part I, line 12a(i), 12b, or 12c(ii)"
- *   (irs-3468-face-2025::sec::face-part-v::b02); lines 3g, 6a, 9b, 11j, 17g,
- *   23g and 28a say the same, with no number of places.
- * - Line 1l: "Multiply line 1h by line 1k"; lines 6b and 28b multiply by 6a
- *   and 28a: the form multiplies by the line as entered.
- * The engine applies one rule the same way every time, as Form 6252's line 19
- * does (docs/rule-decisions.md row A1).
+ * DECISION (2026-11-27, by the author): the ratio lines keep every digit in
+ * the arithmetic, and print 6 decimal places.
+ * - The form: line 1k "divide line 1i by Part I, line 12a(i), 12b, or 12c(ii)"
+ *   (irs-3468-face-2025::sec::face-part-v::b02); line 6a "Divide. Sum ... of
+ *   all proceeds ... Aggregate amount of additions to the capital account"
+ *   (::face-part-v-2::b02); lines 3g, 9b, 11j, 17g, 23g and 28a the same. No
+ *   line gives a number of places, and the next line multiplies by it.
+ * - The instructions: the credit "will be reduced by the amount that is the
+ *   product of the amount of the credit ... and the lesser of ... 15%, or A
+ *   fraction" (irs-3468-inst-2025::sec::section-c-totals-credit-reduction-for::b01,
+ *   ::section-n-totals-and-credit-reduction-for::b01); the low-income increase
+ *   "bears the same ratio" as the allocation to the capacity
+ *   (::filers-completing-part-v::b03). Section 45(b)(3) says "a fraction" too.
+ * The texts define the amount by the fraction itself and the form has no
+ * rounding rule, so no digit is dropped, as row A9 decides for FTB 3800; the
+ * printed ratio has 6 places, so the line after it agrees with it to the dollar.
  */
-export const RATIO_PLACES = 4;
+export const RATIO_PLACES = 6;
+/* A percentage line prints 4 places of the percent: the ratio's 6 places. */
+const PERCENT_PLACES = RATIO_PLACES - 2;
 const PERCENT = 100;
 
 /* The dates the 2025 rate tables turn on (irs-3468-inst-2025::sec::line-1b-4::b01, ::beginning-of-construction::b01). */
@@ -57,19 +66,19 @@ export type Waiting = typeof WAITING;
 /* A rate as the box under "%" prints it: 0.3 → "30", 0.075 → "7.5", 0.012 → "1.2". */
 export function percentText(rate: number | undefined): string | undefined {
   if (rate === undefined) return undefined;
-  return String(roundToPlaces(rate * PERCENT, RATIO_PLACES));
+  return String(roundToPlaces(rate * PERCENT, PERCENT_PLACES));
 }
 
-/* A ratio printed with its 4 places dropped of trailing zeros: 0.5 → "0.5". */
+/* A ratio printed with 6 places, trailing zeros dropped: 0.5 → "0.5", 1/24 → "0.041667". */
+export const printedRatio = (ratio: number): number => roundToPlaces(ratio, RATIO_PLACES);
 export const ratioText = (ratio: number | undefined): string | undefined =>
-  ratio === undefined ? undefined : String(ratio);
+  ratio === undefined ? undefined : String(printedRatio(ratio));
 
 /* "Multiply line … by line …": whole dollars. */
 export const times = (amount: number, rate: number): number => roundDollars(amount * rate);
 
-/* "Divide …": the ratio, 4 places (QUESTIONS.md). */
-export const ratioOf = (numerator: number, denominator: number): number =>
-  roundToPlaces(numerator / denominator, RATIO_PLACES);
+/* "Divide …": the fraction, every digit kept (the DECISION above). */
+export const ratioOf = (numerator: number, denominator: number): number => numerator / denominator;
 
 /*
  * Line 7a or 8b checked: the increased credit amount, for "a maximum net output
@@ -159,7 +168,7 @@ export function lowIncomeLines(
     return { rate, allocatedKw, equal, bonus: equal };
   }
   const ratio = ratioOf(allocatedKw, capacityKw);
-  const ratioRate = roundToPlaces(rate * ratio, RATIO_PLACES + 2);
+  const ratioRate = rate * ratio;
   const ratioAmount = times(basis, ratioRate);
   return { rate, allocatedKw, ratio, ratioRate, ratioAmount, bonus: ratioAmount };
 }

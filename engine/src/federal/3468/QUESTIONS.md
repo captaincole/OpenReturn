@@ -3,7 +3,7 @@
 The rules follow the 2025 form (`irs-3468-face-2025`) and its instructions
 (`irs-3468-inst-2025`). The instructions publish one example with numbers:
 the Part II basis reduction (`part-ii-qualifying-advanced-coal::b02`). The
-decisions with two conflicting texts are rows A96 to A100 of
+decisions with two conflicting texts are rows A96 to A101 of
 `docs/rule-decisions.md`, each with a `DECISION` comment in the code.
 
 ## Doubts with no conflicting text
@@ -55,6 +55,50 @@ decisions with two conflicting texts are rows A96 to A100 of
     `part-vii-rehabilitation-credit-under::b01`). The business's depreciation
     is a stated answer; the engine does not lower it. Dollars: yes, on Form 4562.
 14. **Recapture** (`recapture-of-credit::b01` to `::b05`) is Form 4255's.
+15. **Line 7 is the filer's answer, not the property's nameplate.** The
+    1 MW test is for the whole energy project, "a project consisting of one or
+    more energy properties" (`filers-completing-part-v-or-vi::b02`; Part I
+    lines 7 and 8, `part-vi-energy-credit-under-section::b08`). The engine reads the stated
+    line 7 box and never derives it from a 350 kW ac nameplate on line 12.
+    Dollars: yes, 6% against 30% (blind case 3: $36,000 against $180,000 on
+    line 3c).
+16. **Line 9b with line 7a.** Line 9b is for a facility where "48E(a)(2)(A)(ii)
+    ... is not satisfied (2% bonus)", and box 7a satisfies that clause
+    (`filers-completing-part-v-or-vi::b01`). The engine takes the checked box
+    and prints 2% (line 1d: "If you checked Part I, line 9b, enter 2%"); it
+    does not cross-check the two answers. Dollars: yes, 2% against 10% of the
+    basis (blind case 10: $10,000 against $50,000 on line 1e).
+17. **One Part I for two properties.** "Complete a separate Form 3468 ... for
+    each facility or property" (`general-instructions::b01`), but Part V's
+    Sections A and B (a facility and its storage) share one copy and one
+    Part I. Both sections read the same answers. Dollars: only when the
+    facility and the storage would answer lines 7 to 11 differently.
+
+## Second opinions
+
+- **Blind fill** (15 cases, from the blank form and instructions only): one
+  difference after the first run, settled.
+  - Case 10, Part V lines 6b to 11 ($8,006 against $8,000 on line 6b): the
+    engine rounded the line 6a ratio to 4 places (0.0417); the blind fill kept
+    the exact fraction. The instructions define the reduction as the credit
+    times "A fraction" (`section-c-totals-credit-reduction-for::b01`,
+    `section-n-totals-and-credit-reduction-for::b01`), and section 45(b)(3)
+    says the same. The engine now keeps every digit and prints 6 places, for
+    every ratio line (row A98, changed).
+  - Blind doubts that change dollars: line 7 against the nameplate (item 15),
+    line 9b with 7a (item 16), the line 6a numerator (row A101, new). Doubts
+    with no dollar change (one Part I for two sections, item 17; 0 against
+    blank for a building that is not substantially rehabilitated, item 4; the
+    earlier-year building, item 3; the heat pump's 6% from the form, the
+    fuel cell's construction date) match the engine's defaults.
+- **PolicyEngine-US 2.154.1** (commit 0fbed6ddb1): `general_business_credit`
+  is a bare input ("General business credit from Form 3800") with no
+  formula; `variables/gov/irs` and `parameters/gov/irs` have no section 47,
+  48, 48C, 48D or 48E variable and no Form 3468 rate. Only
+  `recapture_of_investment_credit` (an input) names the credit. Nothing to
+  compare.
+- **IRS Direct File** (named in issue #140): no checkout in the repository;
+  not compared.
 
 ## Proposals for a discussion
 

@@ -13,6 +13,7 @@ import {
   LAST_DAY_FIRST_RATE_2025,
   MICROTURBINE_BASE_RATE,
   MICROTURBINE_INCREASED_RATE,
+  printedRatio,
   ratioOf,
   times,
 } from "./lines.js";
@@ -194,7 +195,7 @@ export function chpRatio(
 
 /* Line 9b in its two boxes: the digit before the point and the digits after it. */
 export function ratioParts(ratio: number): { whole: string; decimal: string } {
-  const [whole, decimal] = String(ratio).split(".");
+  const [whole, decimal] = String(printedRatio(ratio)).split(".");
   return { whole: whole ?? "0", decimal: decimal ?? "0" };
 }
 

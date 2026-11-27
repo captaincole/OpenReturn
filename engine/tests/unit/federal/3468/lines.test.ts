@@ -11,6 +11,7 @@ import {
   lowIncomeLines,
   lowIncomeRate,
   percentText,
+  ratioText,
   WAITING,
 } from "../../../../src/federal/3468/lines.js";
 import {
@@ -45,12 +46,10 @@ describe("shared rates and ratios", () => {
     expect(lowIncomeLines(100_000, 0.1, 50, 50)).toMatchObject({ equal: 10_000, bonus: 10_000 });
     expect(lowIncomeLines(100_000, 0.1, 40, 50)).toMatchObject({ equal: 10_000, bonus: 10_000 });
     const over = lowIncomeLines(100_000, 0.2, 80, 60);
-    expect(over).toMatchObject({
-      ratio: 0.75,
-      ratioRate: 0.15,
-      ratioAmount: 15_000,
-      bonus: 15_000,
-    });
+    expect(over).toMatchObject({ ratio: 0.75, ratioAmount: 15_000, bonus: 15_000 });
+    if (over === WAITING) throw new Error("waiting");
+    expect(over.ratioRate).toBeCloseTo(0.15, 12);
+    expect(percentText(over.ratioRate)).toBe("15");
     expect(lowIncomeLines(100_000, 0, undefined, undefined)).toEqual({ rate: 0, bonus: 0 });
     expect(lowIncomeLines(100_000, 0.1, undefined, 50)).toBe(WAITING);
   });
@@ -72,6 +71,19 @@ describe("shared rates and ratios", () => {
       reduced: 8_500,
     });
     expect(financingLines(10_000, 0, 0).reduced).toBe(10_000);
+  });
+
+  it("a ratio keeps every digit and prints 6 places (rule-decisions A98)", () => {
+    // Blind case 10: $25,000 of financing over $600,000 of additions, on $192,000 of credit.
+    const financing = financingLines(192_000, 25_000, 600_000);
+    expect(financing).toMatchObject({ byRatio: 8_000, reduction: 8_000, reduced: 184_000 });
+    expect(ratioText(financing.ratio)).toBe("0.041667");
+    // A 1/3 allocation at 10% on $1,000,000: $33,333, not $33,330 from 0.3333.
+    const third = lowIncomeLines(1_000_000, 0.1, 3, 1);
+    expect(third).toMatchObject({ ratioAmount: 33_333, bonus: 33_333 });
+    if (third === WAITING) throw new Error("waiting");
+    expect(ratioText(third.ratio)).toBe("0.333333");
+    expect(percentText(third.ratioRate)).toBe("3.3333");
   });
 });
 
