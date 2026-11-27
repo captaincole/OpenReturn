@@ -19,7 +19,7 @@ const SKIP_LINE_4_BORN_AFTER = 2006;
 const STUDENT_AGE_LIMIT = 24;
 // Line 6: "more than half of 2025 but less than 7 months, enter “7.”"
 const MONTHS_OVER_HALF_YEAR = 7;
-// Line 6: a child born in 2025 enters "12"; "Do not enter more than 12 months."
+// Line 6: a child born or who died in 2025 enters "12"; "Do not enter more than 12 months."
 const MONTHS_FULL_YEAR = 12;
 
 type Bindings = Partial<{
@@ -31,7 +31,7 @@ type ChildRule = (child: DependentFactValue, info: ScheduleEICFilingInfo) => unk
 /*
  * MANUAL EDIT: line 2 prints the SSN. For the self-only EIC (no listed child has
  * an SSN), page 2: "If Child 1 has an ITIN, an ATIN, … enter it on line 2.
- * Otherwise, leave line 2 blank." "Died" (born and died in 2025) has no fact yet.
+ * Otherwise, leave line 2 blank." "Died" (born and died in 2025 with no SSN) is not printed yet.
  */
 function childTin(child: DependentFactValue) {
   const raw = child.ssn ?? child.tin;
@@ -87,7 +87,11 @@ function line6(child: DependentFactValue): number | undefined {
   const months = child.monthsLivedWithYou;
   if (months === undefined || child.livedInUs !== true) return undefined;
   if (livedWithTaxpayerOverHalfYear(child, TAX_YEAR) !== true) return undefined;
-  if (birthYear(child.dob) === String(TAX_YEAR)) return MONTHS_FULL_YEAR;
+  // face-page-1::b04: "If the child was born or died in 2025 ... enter “12.”"
+  const year = String(TAX_YEAR);
+  if (birthYear(child.dob) === year || birthYear(child.dateOfDeath) === year) {
+    return MONTHS_FULL_YEAR;
+  }
   return Math.min(Math.max(months, MONTHS_OVER_HALF_YEAR), MONTHS_FULL_YEAR);
 }
 

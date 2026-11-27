@@ -41,29 +41,40 @@ const CELLS: Record<string, Cell> = {
   gain: unlessGap((row) => row.gain),
 };
 
+/* One line 1 cell: the row's value, blank past the last row. */
+type Line1Cell<Info> = (form: unknown, info: Info) => string | number | Unsupported | undefined;
+
 /*
  * MANUAL EDIT: line 1 (ca-540-sched-d-inst-2025::sec::line-1::b01), one row per
  * sale in the order of the federal return. More than 22 sales: every row is
- * unsupported (MORE_ROWS_GAP); the totals still add every sale.
+ * unsupported (MORE_ROWS_GAP); the totals still add every sale. Schedule D
+ * (540NR) has the same rows on one page (ca-540nr-sched-d-inst-2025::sec::line-1::b01).
  */
-function line1Bindings(): Bindings {
-  const out: Record<string, BindingFn<ScheduleDCa, ScheduleDCaFilingInfo, keyof ScheduleDCa>> = {};
-  const letters = ROW_PAGES.flatMap(([group, page]) =>
-    [...group].map((letter) => ({ letter, page })),
-  );
+export function line1Cells<Info>(
+  pages: ReadonlyArray<[letters: string, page: number]>,
+  rowsOf: (info: Info) => Line1Row[] | undefined,
+): Record<string, Line1Cell<Info>> {
+  const out: Record<string, Line1Cell<Info>> = {};
+  const letters = pages.flatMap(([group, page]) => [...group].map((letter) => ({ letter, page })));
   letters.forEach(({ letter, page }, index) => {
     for (const [column, read] of Object.entries(CELLS)) {
       out[`${page}.line.1${letter}.${column}`] = (_, info) => {
-        const rows = info.scheduleDCaFigures?.line1;
+        const rows = rowsOf(info);
         if (rows === undefined) return undefined;
         if (rows.length > LINE_1_ROWS) return unsupported(MORE_ROWS_GAP);
         const row = rows[index];
-        return row === undefined ? undefined : (read(row) as never);
+        return row === undefined ? undefined : read(row);
       };
     }
   });
-  return out as Bindings;
+  return out;
 }
+
+const line1Bindings = (): Bindings =>
+  line1Cells<ScheduleDCaFilingInfo>(
+    ROW_PAGES,
+    (info) => info.scheduleDCaFigures?.line1,
+  ) as Bindings;
 
 /* A total line: blank while the form does not file, unsupported with a sale's gap. */
 const total =
@@ -89,6 +100,14 @@ function federalLine7a(
   info: ScheduleDCaFilingInfo,
 ): number | undefined {
   if (info.scheduleDCaFigures === undefined) return undefined;
+  return federalCapitalGain(form, info);
+}
+
+/* Federal Form 1040 line 7a, 0 with no federal Schedule D and no capital gain distributions. Schedule D (540NR) line 10 too. */
+export function federalCapitalGain(
+  form: Readonly<Record<string, unknown>>,
+  info: Pick<ScheduleDCaFilingInfo, "mustFile" | "capitalGainDistributionsNoScheduleD">,
+): number | undefined {
   const federalHasCapitalGains =
     info.mustFile?.["schedule-d"]?.value === true ||
     info.capitalGainDistributionsNoScheduleD !== undefined;

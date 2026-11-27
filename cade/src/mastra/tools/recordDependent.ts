@@ -70,6 +70,19 @@ export const recordDependent = createTool({
       .describe(
         "Days the person lived with the user in 2025 (FTB 3532 line 5). A user who was married or an RDP during the year counts half the days the spouse also lived there",
       ),
+    daysLivedWithYouInUs: z
+      .number()
+      .int()
+      .min(0)
+      .max(366)
+      .optional()
+      .describe(
+        "Form 8862 line 7: days of 2025 the child lived with the user in the United States, temporary absences counted as time there",
+      ),
+    dateOfDeath: z
+      .string()
+      .optional()
+      .describe("MM/DD/YYYY: the date the person died, when that was during 2025"),
     form8332Release: z
       .boolean()
       .optional()

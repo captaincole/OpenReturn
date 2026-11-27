@@ -1128,6 +1128,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8332",
     relativeDir: "federal/8332",
     register: registerForm8332,
+    // One Form 8332 for each child (irs-8332-form-2025::sec::form-8332-rev-december-2025::b01).
+    copies: {
+      count: (info) => Math.max(1, info?.form8332Copies?.length ?? 0),
+      select: (info, index) => info && { ...info, form8332CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-8833",
@@ -1135,6 +1140,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8833",
     relativeDir: "federal/8833",
     register: registerForm8833,
+    // One Form 8833 for each treaty-based return position (federal/8833/filingInfo.ts).
+    copies: {
+      count: (info) => Math.max(1, info?.form8833Positions?.length ?? 1),
+      select: (info, index) => info && { ...info, form8833CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-8862",

@@ -6,7 +6,7 @@ The engine runs Schedule P (540)'s rules for Part I, lines 22 to 24 and Part III
 
 ## Two texts conflict
 
-1. **Rounding of lines 38 and 42.** Decided: row A79 in `docs/rule-decisions.md`, the DECISION comment in `lines.ts`. The form prints four boxes after the point and gives no rule. The engine rounds the half up, the rule Form 540NR lines 36 and 38 follow (decision A78). FTB Pub. 1100 Example 43 rounds too: 8,314 ÷ 235,000 = .035379 prints .0354 (`ftb-pub-1100-2025::sec::california-alternative-minimum-tax::b01`). Changes dollars: yes, a few, against cutting off. Example from the blind check: 24,171 ÷ 420,000 = .05755 exactly prints .0576, line 43 is 342,858 × .0576 = $19,749; cut off at .0575 it would be $19,714, and line 45 $35 less. The blind fill rounded the same way.
+1. **Rounding of lines 38 and 42.** Decided: row A95 in `docs/rule-decisions.md`, the DECISION comment in `lines.ts`. The form prints four boxes after the point and gives no rule. The engine rounds the half up, the rule Form 540NR lines 36 and 38 follow (decision A78). FTB Pub. 1100 Example 43 rounds too: 8,314 ÷ 235,000 = .035379 prints .0354 (`ftb-pub-1100-2025::sec::california-alternative-minimum-tax::b01`). Changes dollars: yes, a few, against cutting off. Example from the blind check: 24,171 ÷ 420,000 = .05755 exactly prints .0576, line 43 is 342,858 × .0576 = $19,749; cut off at .0575 it would be $19,714, and line 45 $35 less. The blind fill rounded the same way.
 
 ## Should we do this now
 

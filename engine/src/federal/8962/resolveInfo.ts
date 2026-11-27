@@ -1,7 +1,7 @@
 import {
   MARKETPLACE_MONTHS,
   PREMIUM_TAX_CREDIT_KEYS,
-  getDependentFacts,
+  getClaimedDependentFacts,
   getMarketplaceCoverageFacts,
   rowShowsCoverage,
   type MarketplaceCoverageAmounts,
@@ -17,6 +17,9 @@ import {
 import type { Form8962FilingInfo } from "./filingInfo.js";
 
 const COLUMNS = ["enrollmentPremium", "slcspPremium", "advancePayment"] as const;
+
+/* Resolvers see no tax year; the dependent tests read 2025 the way Schedule 8812's resolver does. */
+const TAX_YEAR = 2025;
 
 /* Each column added over the rows; a column blank in every row stays blank. */
 function addRows(
@@ -83,6 +86,7 @@ export function resolve8962Info(inputs: ResolverInputs): Form8962FilingInfo {
     marketplaceMonthlyTotals: statements.length > 0 ? monthly : undefined,
     marketplaceMonthlyStatementCounts: statements.length > 0 ? monthlyCounts : undefined,
     marketplaceSameEveryMonth: statements.length > 0 ? statements.every(sameEveryMonth) : undefined,
-    dependentCount: getDependentFacts(inputs.facts).length,
+    // Line 1, the tax family: a child released to the other parent on Form 8332 is not claimed.
+    dependentCount: getClaimedDependentFacts(inputs.facts, TAX_YEAR).length,
   };
 }

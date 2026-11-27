@@ -22,6 +22,8 @@ import type { BaseFilingInfo } from "../../../filingInfo.js";
 import { numberOrBlank, sum } from "../../../money.js";
 import { unsupported, type Unsupported } from "../../../types.js";
 import { filmCreditsUsedTotal, filmSectionB2Credits } from "../3541/creditUsed.js";
+import { enterpriseZoneCreditUsed, enterpriseZoneSectionB2Count } from "../3805z/creditUsed.js";
+import { ttaCreditUsed, ttaSectionB2RowCount } from "../3809/creditUsed.js";
 import { taxBeforeSectionB2 } from "../540/creditBalance.js";
 import type { Form3801CRInfo } from "./filingInfo.js";
 import { caPassiveEntriesOf } from "./form.js";
@@ -135,22 +137,40 @@ export function passiveCreditsUsed(
   const credits = passiveCreditsAllowed(read, info);
   if (credits === undefined || isGap(credits)) return credits;
   if (credits.length === 0) return [];
-  // FTB 3541's Section B2 credits come first (3541/creditUsed.ts).
+  // FTB 3541's Section B2 credits first, then FTB 3805Z's, then FTB 3809's (each creditUsed.ts).
   const film = filmSectionB2Credits(info);
   if (film === undefined || isGap(film)) return film;
-  if (film.length + credits.length > SECTION_B2_LINES.length) return TOO_MANY_B2_CREDITS;
+  const enterpriseZone = enterpriseZoneSectionB2Count(read, info);
+  if (enterpriseZone === undefined || isGap(enterpriseZone)) return enterpriseZone;
+  const tta = ttaSectionB2RowCount(read, info);
+  if (tta === undefined || isGap(tta)) return tta;
+  const before = film.length + enterpriseZone + tta;
+  if (before + credits.length > SECTION_B2_LINES.length) return TOO_MANY_B2_CREDITS;
   if (filesScheduleP(info)) {
     const used = credits.map((_, index) =>
-      numberOrBlank(read(sectionB2UsedField(SECTION_B2_LINES[film.length + index]))),
+      numberOrBlank(read(sectionB2UsedField(SECTION_B2_LINES[before + index]))),
     );
     if (used.some((amount) => amount === undefined)) return undefined;
     return credits.map((credit, index) => ({ ...credit, used: used[index] as number }));
   }
+  return usedUpToTaxLeft(read, info, credits);
+}
+
+/* Without Schedule P (540): each credit in turn up to the tax left after the credits before it. */
+function usedUpToTaxLeft(
+  read: ReadField,
+  info: Form3801CRInfo,
+  credits: PassiveCreditTaken[],
+): PassiveCreditUsed[] | Unsupported | undefined {
   const filmUsed = filmCreditsUsedTotal(read, info);
   if (typeof filmUsed !== "number") return filmUsed;
+  const enterpriseZoneUsed = enterpriseZoneCreditUsed(read, info);
+  if (typeof enterpriseZoneUsed !== "number") return enterpriseZoneUsed;
+  const ttaUsed = ttaCreditUsed(read, info);
+  if (typeof ttaUsed !== "number") return ttaUsed;
   const before = taxBeforeSectionB2(read, info);
   if (before === undefined) return undefined;
-  let balance = before - filmUsed;
+  let balance = before - filmUsed - enterpriseZoneUsed - ttaUsed;
   return credits.map((credit) => {
     const used = Math.min(credit.allowed, balance as number);
     balance = (balance as number) - used;

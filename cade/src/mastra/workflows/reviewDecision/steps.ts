@@ -1,5 +1,6 @@
 import { createStep } from "@mastra/core/workflows";
 import { CanonToolError, groundCanon } from "../../canon/client";
+import { ALL_JURISDICTIONS } from "../../canon/jurisdictions";
 import { getDecisionById, setDecisionVerdict } from "../../db/aiDecisions";
 import {
   completeReviewRun,
@@ -9,6 +10,7 @@ import {
 } from "../../db/reviewRuns";
 import { listFactsByKeys, noteQuestion } from "../../db/taxFacts";
 import { noteConflictQuestion } from "./conflictQuestion";
+import { decisionJurisdictions } from "./jurisdictions";
 import {
   reviewCarrierSchema,
   reviewDecisionOutputSchema,
@@ -29,16 +31,15 @@ export const initStep = createStep({
     const scope = { userId, filingId };
 
     const decision = await getDecisionById(scope, inputData.decisionId);
-    if (!decision) {
-      throw new Error(`init: no ai_decision with id ${inputData.decisionId}`);
-    }
+    if (!decision) throw new Error(`init: no ai_decision with id ${inputData.decisionId}`);
 
     const reviewRunId = crypto.randomUUID();
     await insertReviewRun(scope, { id: reviewRunId, decisionId: decision.id, userId, filingId });
     await setDecisionLatestRunId(scope, decision.id, reviewRunId);
 
     const facts = await listFactsByKeys(scope, decision.taxYear, decision.supportingFactKeys);
-
+    /* Code picks the libraries from the decision key; the model never names one. */
+    const searched = decisionJurisdictions(decision.decisionKey, decision.taxYear);
     const carrier: ReviewCarrier = {
       ...inputData,
       reviewRunId,
@@ -58,6 +59,7 @@ export const initStep = createStep({
         value: fact.value,
         sourceNote: fact.sourceNote,
       })),
+      jurisdictions: searched.jurisdictions,
     };
 
     await recordReviewStep(scope, {
@@ -68,7 +70,13 @@ export const initStep = createStep({
       iteration: 0, // init runs before the first iteration
       stepKind: "init",
       input: inputData,
-      output: { decision: carrier.decision, facts: carrier.facts },
+      /* The step log keeps the jurisdictions asked for and the rule that chose them: no new column. */
+      output: {
+        decision: carrier.decision,
+        facts: carrier.facts,
+        jurisdictions: searched.jurisdictions,
+        jurisdictionRule: searched.rule,
+      },
       durationMs: Date.now() - t0,
     });
 
@@ -96,6 +104,7 @@ export const groundStep = createStep({
       decision: carrier.decision,
       facts: carrier.facts,
       maxIterations: groundMaxIterations(),
+      jurisdictions: carrier.jurisdictions,
     });
     for (const step of run.log.steps) {
       await recordReviewStep(scope, {
@@ -186,6 +195,8 @@ export const finalizeStep = createStep({
       finalVerdict: ground.verdict,
       reason: ground.reason,
       citations: ground.citations,
+      // A Canon from before the list sends none: it ignored the list and searched all of them.
+      jurisdictions: ground.jurisdictions ?? [...ALL_JURISDICTIONS],
       ...(openQuestionId ? { openQuestionId } : {}),
       ...(conflictQuestionId ? { conflictQuestionId } : {}),
       ...(ground.whatsMissing ? { whatsMissing: ground.whatsMissing } : {}),

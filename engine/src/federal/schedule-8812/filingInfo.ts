@@ -31,7 +31,7 @@ export interface Schedule8812FilingInfo
     Pick<Form8396FilingInfo, "mortgageCreditCertificate"> {
   /** Schedule E's resolver fills it (Pub. 596 Worksheet 1). */
   rentalProperties?: RentalProperty[];
-  /** Every dependent claimed on the return, in the order recorded. */
+  /** Every dependent claimed on the return, in the order recorded (not a child released on Form 8332). */
   dependents?: DependentRow[];
   /** Line 4: dependents whose row (7) "Child tax credit" box is checked. */
   childTaxCreditCount?: number;

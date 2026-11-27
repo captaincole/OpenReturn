@@ -1,6 +1,8 @@
 /*
  * Schedule P (540) Part III, Section B2 lines 16 to 18: FTB 3541's program
- * 3.0, soundstage filming and program 4.0 credits (codes 239, 245, 248), then
+ * 3.0, soundstage filming and program 4.0 credits (codes 239, 245, 248), FTB
+ * 3805Z's enterprise zone credit carryovers (code 176), FTB 3809's TTA credit
+ * carryovers (code 210), then
  * the California passive credits that FTB 3801-CR allows, one code a line ("Do not enter the same
  * credit code or name on more than one line within a section",
  * ca-540-sched-p-inst-2025::sec::to-complete-part-iii::b01). The low-income
@@ -27,10 +29,18 @@ import {
 } from "../3801-cr/creditUsed.js";
 import type { Form3801CRInfo } from "../3801-cr/filingInfo.js";
 import { scheduleCreditRow, type CreditRow } from "../3804-cr/lines.js";
+import { enterpriseZoneSectionB2Credits } from "../3805z/creditUsed.js";
+import type { Info as Form3805ZInfo } from "../3805z/figures.js";
+import { ttaSectionB2Credit } from "../3809/creditUsed.js";
+import type { Form3809FilingInfo } from "../3809/filingInfo.js";
 import type { SchedulePFilingInfo } from "./filingInfo.js";
 import type { ScheduleP } from "./types.js";
 
-type Info = SchedulePFilingInfo & Form3801CRInfo & Form3541FilingInfo;
+type Info = SchedulePFilingInfo &
+  Form3801CRInfo &
+  Form3541FilingInfo &
+  Form3805ZInfo &
+  Form3809FilingInfo;
 type Bindings = Partial<{ [K in keyof ScheduleP]: BindingFn<ScheduleP, Info, K> }>;
 type Form = FormAccessor<ScheduleP>;
 type SectionB2Line = (typeof SECTION_B2_LINES)[number];
@@ -60,20 +70,31 @@ type SectionB2Credit = Pick<PassiveCreditTaken, "name" | "allowed"> & { code: st
 
 /*
  * The credits of lines 16 to 18 in order: FTB 3541's motion picture credits
- * first, then FTB 3801-CR's passive credits (3541/creditUsed.ts, decision A75).
+ * first, then FTB 3805Z's enterprise zone credit, then FTB 3809's TTA credit,
+ * then FTB 3801-CR's passive credits (3541/creditUsed.ts, decision A75;
+ * 3805z/creditUsed.ts; 3809/creditUsed.ts).
  */
 function sectionB2Credits(form: Form, info: Info): SectionB2Credit[] | Unsupported | undefined {
-  const passive = passiveCreditsAllowed((fieldId) => form[fieldId], info);
+  const read = (fieldId: string) => form[fieldId];
+  const passive = passiveCreditsAllowed(read, info);
   if (passive === undefined || isGap(passive)) return passive;
   const film = filmSectionB2Credits(info);
   if (film === undefined || isGap(film)) return film;
-  if (film.length + passive.length > SECTION_B2_LINES.length) return TOO_MANY_B2_CREDITS;
+  const enterpriseZone = enterpriseZoneSectionB2Credits(read, info);
+  if (enterpriseZone === undefined || isGap(enterpriseZone)) return enterpriseZone;
+  const tta = ttaSectionB2Credit(read, info);
+  if (tta === undefined || isGap(tta)) return tta;
+  const ttaRows = tta === null ? [] : [tta];
+  const count = film.length + enterpriseZone.length + ttaRows.length + passive.length;
+  if (count > SECTION_B2_LINES.length) return TOO_MANY_B2_CREDITS;
   return [
     ...film.map(({ program, available }) => ({
       code: program.code,
       name: program.name,
       allowed: available,
     })),
+    ...enterpriseZone.map(({ code, name, allowed }) => ({ code, name, allowed })),
+    ...ttaRows,
     ...passive,
   ];
 }
