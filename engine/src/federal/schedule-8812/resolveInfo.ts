@@ -1,7 +1,7 @@
 import {
   FORM_8862_KEYS,
   dependentCredit,
-  getDependentFacts,
+  getClaimedDependentFacts,
   isW2FactKey,
   livedWithTaxpayerOverHalfYear,
   type DependentCredit,
@@ -54,10 +54,15 @@ function dependentRow(
  * answer is decided here once; the 1040 reads it from the rows. While a
  * dependent's answers are not all in, the schedule files and lists them as
  * missing, so they reach the pending facts: a blocked must-file would hide them.
+ * A child the taxpayer released to the noncustodial parent on Form 8332 is not
+ * a row: "only the noncustodial parent can claim the child for purposes of the
+ * child tax credit and credit for other dependents"
+ * (irs-1040-inst-2025::sec::definitions-and-special-rules::b02), and the 1040
+ * Dependents table and Form 540 line 10 read these rows.
  */
 export function resolveSchedule8812Info(inputs: ResolverInputs): Schedule8812FilingInfo {
   const barred = inputs.factByKey.get(FORM_8862_KEYS.ctcBarredByIrs) === true;
-  const dependents = getDependentFacts(inputs.facts).map((fact) =>
+  const dependents = getClaimedDependentFacts(inputs.facts, TAX_YEAR).map((fact) =>
     dependentRow(fact.sourceFact.key, fact.dependent, barred),
   );
   const undecided = dependents.filter((row) => row.credit === undefined);

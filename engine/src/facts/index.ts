@@ -70,6 +70,7 @@ export * from "./kinds/foreignEarnedIncome.js";
 export * from "./kinds/foreignFinancialAsset.js";
 export * from "./kinds/foreignTax.js";
 export * from "./kinds/form1099S.js";
+export * from "./kinds/form8332.js";
 export * from "./kinds/fuelTaxCredit.js";
 export * from "./kinds/gamblingWinnings.js";
 export * from "./kinds/generalBusinessCredit.js";
