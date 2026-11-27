@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { jurisdictionSchema, jurisdictionsInputSchema } from "../../../jurisdiction";
 import { conflictOutputSchema, conflictSchema, statuteBlockSchema } from "../statute";
 
 // Canon is stateless: the caller (Cade) owns the filing and stores the verdict.
@@ -37,6 +38,7 @@ export const groundInputSchema = z.object({
     .max(MAX_ITERATIONS_CAP)
     .default(DEFAULT_MAX_ITERATIONS)
     .describe("How many gather → assess → rule rounds the judges may take before they must rule."),
+  jurisdictions: jurisdictionsInputSchema,
 });
 export type GroundInput = z.input<typeof groundInputSchema>;
 
@@ -145,6 +147,8 @@ export const loopCarrierSchema = z.object({
   decision: groundDecisionSchema,
   facts: z.array(taxFactSnapshotSchema),
   maxIterations: z.number().int().min(1).max(MAX_ITERATIONS_CAP),
+  // Every retrieval of the run searches these, and the statute round their statutes.
+  jurisdictions: z.array(jurisdictionSchema),
 
   // Can pass maxIterations by one, to stop the loop; the reported count clamps back.
   iteration: z.number().int().min(1),
@@ -179,6 +183,8 @@ export const groundResultSchema = z.object({
   // Passages that disagree, with both quotes. The verdict still follows the instructions.
   conflicts: z.array(conflictSchema).default([]),
   statuteConsulted: z.boolean().default(false),
+  // The jurisdictions searched: every one when the input named none.
+  jurisdictions: z.array(jurisdictionSchema),
   log: z.object({ steps: z.array(groundStepLogSchema) }),
 });
 export type GroundResult = z.infer<typeof groundResultSchema>;

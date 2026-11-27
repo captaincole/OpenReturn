@@ -147,7 +147,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "schedule-p.3.part3.21_pte_elective_tax_credit_used_col_b": 4000,
       // Line 21 . Column C. Tax balance that may be offset by credits.
       "schedule-p.3.part3.21_pte_elective_tax_tax_balance_col_c": 10958,
-      // Column (a) is the credit up to FTB 3805Z line 7, so nothing is left for column (d) (decision A79).
+      // Column (a) is the credit up to FTB 3805Z line 7, so nothing is left for column (d) (decision A80).
       "schedule-p.3.part3.16_credit_carryover_col_d": 0,
     },
     renderedText: {

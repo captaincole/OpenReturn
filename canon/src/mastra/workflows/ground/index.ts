@@ -1,6 +1,7 @@
 import type { Mastra } from "@mastra/core";
 import { createStep, createWorkflow } from "@mastra/core/workflows";
 import { hybridSearchRefDocs } from "../../../db/corpusSearch";
+import { resolveJurisdictions, type Jurisdiction } from "../../../jurisdiction";
 import { judge } from "../../judge";
 import { decisionSummary, formulateQueries, renderAssessPrompt, renderRulePrompt } from "./prompts";
 import {
@@ -28,10 +29,13 @@ import { validateCitations, validateConflicts } from "./validateCitations";
 
 const HITS_PER_QUERY = 6;
 
-async function retrieveBlocks(queries: string[]): Promise<EvidenceBundle["irsBlocks"]> {
+async function retrieveBlocks(
+  queries: string[],
+  jurisdictions: Jurisdiction[],
+): Promise<EvidenceBundle["irsBlocks"]> {
   const blockMap = new Map<string, { docId: string; text: string; score: number }>();
   for (const query of queries) {
-    const hits = await hybridSearchRefDocs({ query: query, limit: HITS_PER_QUERY });
+    const hits = await hybridSearchRefDocs({ query, limit: HITS_PER_QUERY, jurisdictions });
     for (const hit of hits) {
       const prev = blockMap.get(hit.blockId);
       if (prev && prev.score >= hit.score) continue;
@@ -74,10 +78,15 @@ async function gather(
     steps,
     carrier,
     "gather",
-    { decisionKey: carrier.decision.decisionKey, iteration: carrier.iteration, queries },
+    {
+      decisionKey: carrier.decision.decisionKey,
+      iteration: carrier.iteration,
+      jurisdictions: carrier.jurisdictions,
+      queries,
+    },
     async (): Promise<EvidenceBundle> => ({
       facts: carrier.facts,
-      irsBlocks: await retrieveBlocks(queries),
+      irsBlocks: await retrieveBlocks(queries, carrier.jurisdictions),
       statuteBlocks: carrier.evidence?.statuteBlocks ?? [],
       queriesUsed: queries,
       iteration: carrier.iteration,
@@ -180,6 +189,7 @@ function resolve(carrier: LoopCarrier): Omit<GroundResult, "log"> {
       iterationCount,
       conflicts: ruleOutput.conflicts,
       statuteConsulted: carrier.statuteConsulted,
+      jurisdictions: carrier.jurisdictions,
     };
   }
   const whatsMissing = carrier.needMoreReasons.length
@@ -194,6 +204,7 @@ function resolve(carrier: LoopCarrier): Omit<GroundResult, "log"> {
     whatsMissing,
     conflicts: [],
     statuteConsulted: carrier.statuteConsulted,
+    jurisdictions: carrier.jurisdictions,
   };
 }
 
@@ -213,6 +224,7 @@ export async function groundDecision(
     decision: input.decision,
     facts: input.facts,
     maxIterations: input.maxIterations,
+    jurisdictions: resolveJurisdictions(input.jurisdictions),
     iteration: 1,
     queries: [],
     needMoreReasons: [],
@@ -245,7 +257,7 @@ const groundStep = createStep({
 export const groundWorkflow = createWorkflow({
   id: "ground",
   description:
-    "Grounds one tax decision in the IRS/FTB reference library: the judges retrieve the governing passages, assess the risk, and rule accurate, inaccurate or needs_more_facts with citations. When the passages conflict, or name a rule of law without stating it, the rule judge may consult the statute (law.db) once; passages that disagree come back as conflicts, with both quotes. Pass the decision and the facts it cites; maxIterations (default 3) caps the retrieval rounds. The result carries each judge step for the caller's log.",
+    "Grounds one tax decision in the IRS/FTB reference library: the judges retrieve the governing passages, assess the risk, and rule accurate, inaccurate or needs_more_facts with citations. When the passages conflict, or name a rule of law without stating it, the rule judge may consult the statute (law.db) once; passages that disagree come back as conflicts, with both quotes. Pass the decision and the facts it cites; maxIterations (default 3) caps the retrieval rounds. Pass jurisdictions to search only some of the library: [\"CA\"] searches only California, and a statute search then reads California's code, not the Internal Revenue Code. The result carries each judge step for the caller's log.",
   inputSchema: groundInputSchema,
   outputSchema: groundRunResultSchema,
 })

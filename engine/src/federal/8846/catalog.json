@@ -1,0 +1,153 @@
+{
+  "form": {
+    "formId": "form-8846",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Credit for Employer Social Security and Medicare Taxes Paid on Certain Employee Tips"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8846.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-8846.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 460.8,
+        "y": 684
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8846.0.line.1_tips_received_by_employees",
+      "label": "Line 1 — Tips received by employees for services on which you paid or incurred employer social security and Medicare taxes during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "form-8846.0.line.2_tips_not_subject_to_credit",
+      "label": "Line 2 — Tips not subject to the credit provisions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "form-8846.0.line.3_subtract_2_from_1",
+      "label": "Line 3 — Creditable tips. Subtract line 2 from line 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 564.001
+      }
+    },
+    {
+      "fieldId": "form-8846.0.line.4_wages_exceeded_limit_check",
+      "label": "Line 4 — If you had any tipped employees whose wages (including tips) exceeded $176,100, see instructions and check here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line4_ReadOrder[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 467.2,
+        "y": 530.001
+      }
+    },
+    {
+      "fieldId": "form-8846.0.line.4_multiply_3_by_7_65_percent",
+      "label": "Line 4 — Multiply line 3 by 7.65% (0.0765)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-8846.0.line.5_credit_from_partnerships_s_corps",
+      "label": "Line 5 — Credit for employer social security and Medicare taxes paid on certain employee tips from partnerships and S corporations",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 492.001
+      }
+    },
+    {
+      "fieldId": "form-8846.0.line.6_add_lines",
+      "label": "Line 6 — Add lines 4 and 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 456.001
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8846/blank.pdf",
+    "ingestedAt": "2026-11-27T01:31:01.591Z",
+    "totalFields": 9,
+    "skipped": 0,
+    "catalogEntries": 9
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "formId": "form-8586",
+  "fieldCount": 14,
+  "entries": [
+    {
+      "fieldId": "form-8586.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-11KBA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8586.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-1DU8I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8586.0.line.1_forms_8609a_attached",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "9,555"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8586.0.line.2_i_decreased_basis_bin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "T-Q47EO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8586.0.line.2_ii_decreased_basis_bin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "T-19JV9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8586.0.line.2_iii_decreased_basis_bin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "T-1DGZ4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8586.0.line.2_iv_decreased_basis_bin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "T-X1ILF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8586.0.line.2_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8586.0.line.2_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8586.0.line.3_current_year_credit_8609a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "2,754"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8586.0.line.4_credit_from_pass_through",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "1,618"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8586.0.line.5_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "8,188"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8586.0.line.6_allocated_to_beneficiaries",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "1,899"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8586.0.line.7_subtract_6_from_5",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "4,927"
+        }
+      ]
+    }
+  ]
+}

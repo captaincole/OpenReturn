@@ -1,0 +1,320 @@
+{
+  "form": {
+    "formId": "form-2210-f",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Underpayment of Estimated Tax by Farmers and Fishers"
+  },
+  "fields": [
+    {
+      "fieldId": "form-2210-f.0.header.taxpayer_name",
+      "label": "Name(s) shown on tax return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-2210-f.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 460.8,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-2210-f.0.line.box_a_waiver_request",
+      "label": "Box A — You request a waiver",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 66.2,
+        "y": 613.468
+      }
+    },
+    {
+      "fieldId": "form-2210-f.0.line.box_b_joint_return_one_year",
+      "label": "Box B — You filed or are filing a joint return for either 2024 or 2025, but not for both years, and line 10 below is smaller than line 7 below",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 66.2,
+        "y": 590.47
+      }
+    },
+    {
+      "fieldId": "form-2210-f.0.line.1_tax_after_credits",
+      "label": "Line 1 — Enter your 2025 tax after credits from Form 1040, 1040-SR, or 1040-NR, line 22; or Form 1041, Schedule G, line 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-2210-f.0.line.2_other_taxes",
+      "label": "Line 2 — Other taxes, including self-employment tax and, if applicable, Additional Medicare Tax and/or Net Investment Income Tax",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-2210-f.0.line.3_add_lines_1_2",
+      "label": "Line 3 — Add lines 1 and 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 503.968
+      }
+    },
+    {
+      "fieldId": "form-2210-f.0.line.4_refundable_credits",
+      "label": "Line 4 — Refundable credits",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-2210-f.0.line.6_current_year_tax",
+      "label": "Line 6 — Current year tax. Subtract line 4 from line 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 455.969
+      }
+    },
+    {
+      "fieldId": "form-2210-f.0.line.7_two_thirds_current_tax",
+      "label": "Line 7 — Multiply line 6 by 66 2/3% (0.667)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-2210-f.0.line.8_withholding_taxes",
+      "label": "Line 8 — Withholding taxes. Don't include any estimated tax payments on this line",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 431.968
+      }
+    },
+    {
+      "fieldId": "form-2210-f.0.line.9_tax_less_withholding",
+      "label": "Line 9 — Subtract line 8 from line 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-2210-f.0.line.10_prior_year_tax",
+      "label": "Line 10 — Enter the tax shown on your 2024 tax return",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 395.968
+      }
+    },
+    {
+      "fieldId": "form-2210-f.0.line.11_required_annual_payment",
+      "label": "Line 11 — Required annual payment. Enter the smaller of line 7 or line 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-2210-f.0.line.12_estimated_payments_withholding",
+      "label": "Line 12 — Enter the estimated tax payments you made by January 15, 2026, and any federal income tax and excess social security or tier 1 railroad retirement tax withheld during 2025",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 335.97
+      }
+    },
+    {
+      "fieldId": "form-2210-f.0.line.13_underpayment",
+      "label": "Line 13 — Underpayment. Subtract line 12 from line 11",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-2210-f.0.line.14_payment_date_month",
+      "label": "Line 14 — Enter the date the amount on line 13 was paid or April 15, 2026, whichever is earlier (month)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 275.969
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-2210-f.0.line.14_payment_date_day",
+      "label": "Line 14 — Enter the date the amount on line 13 was paid or April 15, 2026, whichever is earlier (day)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 532.8,
+        "y": 275.969
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-2210-f.0.line.15_days_from_jan_15",
+      "label": "Line 15 — Number of days from January 15, 2026, to the date on line 14",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-2210-f.0.line.16_penalty",
+      "label": "Line 16 — Penalty. Underpayment on line 13 × (Number of days on line 15 ÷ 365) × 0.07",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 203.969
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/2210-f/blank.pdf",
+    "ingestedAt": "2026-11-26T23:59:00.587Z",
+    "totalFields": 20,
+    "skipped": 0,
+    "catalogEntries": 20
+  }
+}

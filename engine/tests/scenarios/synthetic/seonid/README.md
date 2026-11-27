@@ -30,7 +30,7 @@ her answers. The W-2 has no PDF. The S corporation had no income for 2025.
 - The hiring credit is more than line 7: line 9A column (e) is 0 and the sales
   or use tax credit carries in full.
 - Three other credits attach Schedule P (540). Line 16 takes code 176, its
-  column (a) up to FTB 3805Z line 7 (decision A79 in `docs/rule-decisions.md`).
+  column (a) up to FTB 3805Z line 7 (decision A80 in `docs/rule-decisions.md`).
 - Schedule S line 2 and FTB 3804-CR leave out the enterprise zone credit as
   they do the other credits. Form 540 line 45 holds all three.
 

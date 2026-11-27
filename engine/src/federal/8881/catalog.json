@@ -1,0 +1,453 @@
+{
+  "form": {
+    "formId": "form-8881",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Credit for Small Employer Pension Plan Startup Costs, Auto-Enrollment, and Military Spouse Participation"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8881.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8881.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 468,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8881.0.line.a_qualifying_employees",
+      "label": "Line A — Enter the number of qualifying employees",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 309.6,
+        "y": 647.968
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.1_qualified_startup_costs",
+      "label": "Line 1 — Qualified startup costs incurred during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 635.969
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.2_startup_costs_by_employer_size",
+      "label": "Line 2 — Employers with 1–50 employees enter the amount from line 1. Employers with 51–100 employees enter 50% (0.50) of line 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 611.968
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.3_eligible_employees",
+      "label": "Line 3 — Enter the number of employees eligible to participate in the pension plan",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 587.97
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.3_multiply_eligible_employees_by_250",
+      "label": "Line 3 — Number of eligible employees x $250",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 587.97
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.4_greater_of_500_or_3",
+      "label": "Line 4 — Enter the greater of $500 or the amount from line 3 (Do not enter more than $5,000)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 575.968
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.5_smaller_of_2_or_4",
+      "label": "Line 5 — Enter the smaller of line 2 or line 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.6a_preceding_year_employees",
+      "label": "Line 6a — Enter the number of employees from the preceding tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.6b_employer_contributions",
+      "label": "Line 6b — Enter employer contributions made to the plan, but don't include (i) elective deferrals, (ii) contributions made to employees whose wages paid to the employee were in excess of $105,000, and (iii) any amount of contributions to an employee to whom you made contributions of more than $1,000",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.6c_contributions_over_1000",
+      "label": "Line 6c — For employees for whom you made matching and nonelective contributions of more than $1,000 (and who are not disqualified because they meet 6b(ii) above), the amount determined per the instructions. If you do not make these types of contributions, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 455.969
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.6d_add_lines",
+      "label": "Line 6d — Add lines 6b and 6c",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.6e_1_subtract_50_from_6a",
+      "label": "Line 6e(1) — Subtract 50 (50.0) from the number of employees entered on line 6a",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.6e_2_multiply_6e_1_by_2_percent",
+      "label": "Line 6e(2) — Multiply line 6e(1) by 2% (0.02)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 395.968
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.6e_3_multiply_6e_2_by_6d",
+      "label": "Line 6e(3) — Multiply line 6e(2) by line 6d",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.6e_4_subtract_6e_3_from_6d",
+      "label": "Line 6e(4) — Subtract line 6e(3) from line 6d",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.6f_contributions_after_phaseout",
+      "label": "Line 6f — If you did NOT complete line 6e, enter the amount from line 6d. If you completed line 6e, enter the amount from line 6e(4)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 347.969
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.6g_applicable_percentage_amount",
+      "label": "Line 6g — Applicable percentages: first or second year of the plan, enter the amount from line 6f; third year, multiply line 6f by 75% (0.75); fourth year, multiply line 6f by 50% (0.50); fifth year, multiply line 6f by 25% (0.25)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 335.97
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.7_credit_from_partnerships_s_corps",
+      "label": "Line 7 — Small employer pension plan startup costs credit and small employer contributions credit from partnerships and S corporations",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.8_total_part_i_credits",
+      "label": "Line 8 — Add lines 5, 6g, and 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.9_auto_enrollment_credit",
+      "label": "Line 9 — Enter $500 if an auto-enrollment option is provided for retirement savings",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 203.969
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.10_auto_enrollment_from_partnerships_s_corps",
+      "label": "Line 10 — Small employer auto-enrollment credit from partnerships and S corporations",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 191.97
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.11_total_auto_enrollment_credit",
+      "label": "Line 11 — Add lines 9 and 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.12_military_spouse_employees",
+      "label": "Line 12 — Enter the number of military spouse employees participating in an eligible plan",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 119.97
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.12_multiply_military_spouses_by_200",
+      "label": "Line 12 — Number of military spouse employees x $200",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 119.97
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.13_military_spouse_contributions",
+      "label": "Line 13 — Amount of contributions paid by employer for each eligible military spouse employee. Do not enter more than $300 per employee",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 95.969
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.14_military_spouse_from_partnerships_s_corps",
+      "label": "Line 14 — Small employer military spouse participation credit from partnerships and S corporations",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 83.97
+      }
+    },
+    {
+      "fieldId": "form-8881.0.line.15_total_military_spouse_credit",
+      "label": "Line 15 — Add lines 12, 13, and 14",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 59.969
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8881/blank.pdf",
+    "ingestedAt": "2026-11-27T01:31:07.056Z",
+    "totalFields": 29,
+    "skipped": 0,
+    "catalogEntries": 29
+  }
+}

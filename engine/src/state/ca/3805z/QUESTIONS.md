@@ -11,15 +11,15 @@ numbers are unit tests (`tests/unit/state/ca/3805z/lines.test.ts`).
 Each is decided by the author, with a `DECISION` comment in the code and a row
 in `docs/rule-decisions.md`.
 
-1. **The order in Schedule P (540) Section B2** (row A78,
+1. **The order in Schedule P (540) Section B2** (row A79,
    `creditUsed.ts`). The zone credit comes after FTB 3541's film credits and
    before FTB 3801-CR's passive credits: a credit with a 10-year carryover
    before the research credit's unlimited one, low-income housing last.
 2. **Schedule P (540) column (a) holds the credit up to Schedule Z line 7**
-   (row A79, `creditUsed.ts`). The carryover to 2026 is on FTB 3805Z lines 8B
+   (row A80, `creditUsed.ts`). The carryover to 2026 is on FTB 3805Z lines 8B
    and 9B column (g); Schedule P column (d) shows only what the tax left could
    not take.
-3. **Business credits "before other credits"** (row A80, `creditUsed.ts`).
+3. **Business credits "before other credits"** (row A81, `creditUsed.ts`).
    The booklet: "Business credits should be applied against 'net tax' before
    other credits" (`ca-3805z-booklet-2025::sec::general-information::b02`).
    Schedule P (540): "complete each section before going to the next section"
