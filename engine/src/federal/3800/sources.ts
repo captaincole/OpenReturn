@@ -18,6 +18,7 @@ import { roundDollars } from "../../money.js";
 import type { ResolverInputs } from "../../resolverInputs.js";
 import { figuredOnForm3468, form3468CreditSources } from "../3468/credit.js";
 import { workOpportunitySources } from "../5884/sources.js";
+import { form7207CreditSources } from "../7207/form3800.js";
 import { lowIncomeHousingSourcesOf } from "../8586/form3800.js";
 import { withForm8844 } from "../8844/sources.js";
 import { tipCreditSourcesOf } from "../8846/form3800.js";
@@ -206,11 +207,14 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
   // Line 4d: Form 8586 line 3, the credit of the buildings the taxpayer owns (8586/form3800.ts).
   const housing = lowIncomeHousingSourcesOf(inputs);
   missing.push(...tips.missing, ...housing.missing);
+  // Line 1b: Form 7207 line 8a, the credit of each facility the taxpayer operates (7207/form3800.ts).
+  const manufacturing = form7207CreditSources(inputs);
   // Line 3: Form 8844 line 2, the empowerment zone credit of the taxpayer's own employees (8844/sources.ts).
   const zone = withForm8844(inputs, [
     ...stated,
     ...tips.sources,
     ...housing.sources,
+    ...manufacturing,
     ...k1.flatMap((found) => (found.source ? [found.source] : [])),
     ...form3468.sources,
     ...workOpportunity.sources,
