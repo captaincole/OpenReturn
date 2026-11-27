@@ -7,6 +7,7 @@
 import type { BaseFilingInfo } from "../../../filingInfo.js";
 import { sum } from "../../../money.js";
 import { unsupported, type Unsupported } from "../../../types.js";
+import type { Form3805ZFilingInfo } from "../3805z/filingInfo.js";
 import { certificateFigures } from "./certificate.js";
 import { files3541, filmCreditsUsedTotal, taxBeforeProgram40 } from "./creditUsed.js";
 import type { FilmCertificate, Form3541FilingInfo } from "./filingInfo.js";
@@ -50,7 +51,7 @@ const TWO_PROGRAM_40_CERTIFICATES = unsupported(
   "With two program 4.0 certificates and an election, line 21 of each form would subtract the same tax; the instructions do not say how the tax is shared between them.",
 );
 const CREDIT_AFTER_PROGRAM_40 = unsupported(
-  "Line 21 takes the tax left after every other nonrefundable credit, and Schedule P (540) applies the passive, other state or PTE credit after program 4.0; the engine does not reorder the credits for the election.",
+  "Line 21 takes the tax left after every other nonrefundable credit, and Schedule P (540) applies the enterprise zone, passive, other state or PTE credit after program 4.0; the engine does not reorder the credits for the election.",
 );
 const NO_PROGRAM_40_LEFT = unsupported(
   "The program 4.0 credit left after line 10 is 0, so the tax left for it is not figured.",
@@ -62,6 +63,20 @@ const OVER_BUSINESS_CREDIT_LIMIT = unsupported(
 /* The credit forms whose credits Schedule P (540) applies after Section B2. */
 const LATER_CREDIT_FORMS = ["form-3801-cr", "schedule-s", "form-3804-cr"];
 
+/*
+ * FTB 3805Z's enterprise zone credit also comes after program 4.0 in Section
+ * B2 (3805z/creditUsed.ts). The form also files for an EZ NOL alone, which
+ * takes no credit, so only a stated credit carryover above 0 counts.
+ */
+function claimsEnterpriseZoneCredit(info: BaseFilingInfo & Partial<Form3805ZFilingInfo>): boolean {
+  if (!files(info, "form-3805z")) return false;
+  const zone = info.enterpriseZone;
+  return (zone?.hiringCarryover ?? 0) + (zone?.salesTaxCarryover ?? 0) > 0;
+}
+
+const appliesCreditAfterProgram40 = (info: Info) =>
+  LATER_CREDIT_FORMS.some((formId) => files(info, formId)) || claimsEnterpriseZoneCredit(info);
+
 /* Part IV of the certificate at `index`: null when it does not elect; a gap; undefined while it waits. */
 export function partIVOf(
   read: ReadField,
@@ -72,7 +87,7 @@ export function partIVOf(
   const row = rows[index];
   if (row === undefined || !electsRefund(row)) return null;
   if (rows.filter(isProgram40).length > 1) return TWO_PROGRAM_40_CERTIFICATES;
-  if (LATER_CREDIT_FORMS.some((formId) => files(info, formId))) return CREDIT_AFTER_PROGRAM_40;
+  if (appliesCreditAfterProgram40(info)) return CREDIT_AFTER_PROGRAM_40;
   const figures = certificateFigures(row);
   if (figures === undefined || "unsupported" in figures) return figures;
   if (figures.partI.line11 <= 0) return NO_PROGRAM_40_LEFT;

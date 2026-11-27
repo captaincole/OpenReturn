@@ -14,7 +14,14 @@ export interface LawTocEntry {
 
 export type LawTocChild =
   | ({ kind: "group" } & LawTocEntry)
-  | { kind: "section"; number: string; citation: string; heading: string };
+  | {
+      kind: "section";
+      number: string;
+      citation: string;
+      heading: string;
+      /** 2 and up for a later version of a California number; it opens at that version's heading. */
+      version?: number;
+    };
 
 export interface LawToc {
   installed: true;
@@ -29,12 +36,13 @@ export interface LawToc {
 }
 
 const TOC_ROOT = "/library/law/toc";
-const SOURCES: readonly LawSource[] = ["statute", "regulations"];
+const SOURCES: readonly LawSource[] = ["statute", "regulations", "california"];
 
 /** The name of each library's top level, as the first crumb shows it. */
 export const LAW_SOURCE_TITLE: Record<LawSource, string> = {
   statute: "Internal Revenue Code",
   regulations: "Treasury Regulations",
+  california: "California Revenue and Taxation Code",
 };
 
 export const isLawSource = (raw: string): raw is LawSource => SOURCES.includes(raw as LawSource);

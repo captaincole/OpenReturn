@@ -9,7 +9,6 @@ import {
   type TradeFactValue,
 } from "../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../src/facts/rows";
-import { FORM_8862_GAP } from "../../src/federal/schedule-eic/credit.js";
 import { decisionRow } from "../helpers/fixtureBuilders.js";
 import { tcbUs002Scenario as base } from "../scenarios/tcb-us-002/index.js";
 
@@ -177,13 +176,16 @@ describe("Schedule 8812 line 24", () => {
     expect(result.schedule8812("1.line.27_additional_child_tax_credit")).toBeUndefined();
   });
 
-  it("is unsupported with the EIC when an earlier denial needs Form 8862", () => {
+  it("waits with the EIC while Form 8862 Part II waits after an earlier denial", () => {
     const result = evaluate({ nephews: 3, eic: "denied_before" });
-    const gap = { ok: false, unsupported: true, reason: FORM_8862_GAP };
-    expect(result.form1040Result("line.27a")).toEqual(gap);
-    expect(result.form1040Result("line.27c_no_eic_claim")).toEqual(gap);
-    expect(result.schedule8812Result("1.line.24_eic_and_schedule_3_line_11")).toEqual(gap);
-    // The lines after it read a blank line 24 and wait; nothing is asked for them.
+    for (const line of ["line.27a", "line.27c_no_eic_claim"]) {
+      expect(result.form1040Result(line)?.ok).toBe(false);
+      expect(result.form1040Result(line)).not.toHaveProperty("unsupported", true);
+    }
+    const line24 = result.schedule8812Result("1.line.24_eic_and_schedule_3_line_11");
+    expect(line24?.ok).toBe(false);
+    expect(line24).not.toHaveProperty("unsupported", true);
+    // The lines after it read a blank line 24 and wait.
     const line27 = result.schedule8812Result("1.line.27_additional_child_tax_credit");
     expect(line27?.ok).toBe(false);
     expect(line27).not.toHaveProperty("unsupported", true);

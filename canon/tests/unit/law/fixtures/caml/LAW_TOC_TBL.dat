@@ -1,0 +1,8 @@
+`RTC`	`2.`	NULL	NULL	NULL	NULL	`DIVISION 2. OTHER TAXES [6001. - 61050.]`	`Y`	`LEG_ESI`	2026-10-03 01:00:36	207	1	3	`3`	`N`	` Heading of Division 2 amended by Stats. 1968, Ch. 279. `	`1968`	`279`	NULL
+`RTC`	`2.`	NULL	`10.`	NULL	NULL	`PART 10. PERSONAL INCOME TAX [17001. - 18181.]`	`Y`	`LEG_ESI`	2026-10-03 01:00:36	574	2	20	`3.20`	`N`	` Part 10 added by Stats. 1943, Ch. 659. `	`1943`	`659`	NULL
+`RTC`	`2.`	NULL	`10.`	`1.`	NULL	`CHAPTER 1. General Provisions and Definitions [17001. - 17039.6.]`	`Y`	`LEG_ESI`	2026-10-03 01:00:36	575	3	1	`3.20.1`	`Y`	` Chapter 1 repealed and added by Stats. 1955, Ch. 939. `	`1955`	`939`	NULL
+`RTC`	`2.`	NULL	`10.`	`2.`	NULL	`CHAPTER 2. Imposition of Tax [17041. - 17061.]`	`Y`	`LEG_ESI`	2026-10-03 01:00:36	576	3	2	`3.20.2`	`Y`	` Chapter 2 repealed and added by Stats. 1955, Ch. 939. `	`1955`	`939`	NULL
+`RTC`	`2.`	NULL	`10.`	`2.6.`	NULL	`CHAPTER 2.6. Special Tax Credit [ - ]`	`Y`	`LEG_ESI`	2026-10-03 01:00:36	578	3	4	`3.20.4`	`N`	` Chapter 2.6 added by Stats. 1971, 1st Ex. Sess., Ch. 1. `	`1971`	`1`	NULL
+`RTC`	`2.`	NULL	`10.`	`3.`	NULL	`CHAPTER 3. Computation of Taxable Income [17071. - 17307.]`	`Y`	`LEG_ESI`	2026-10-03 01:00:36	579	3	5	`3.20.5`	`N`	` Chapter 3 repealed and added by Stats. 1955, Ch. 939. `	`1955`	`939`	NULL
+`RTC`	`2.`	NULL	`10.`	`3.`	`6.`	`ARTICLE 6. Deductions [17201. - 17299.9.]`	`Y`	`LEG_ESI`	2026-10-03 01:00:36	583	4	4	`3.20.5.4`	`Y`	` Article 6 repealed and added by Stats. 1983, Ch. 488, Sec. 29. `	`1983`	`488`	`29`
+`RTC`	`2.`	NULL	`10.`	`6.`	NULL	`CHAPTER 6. Accounting Periods and Methods of Accounting [17551. - 17570.]`	`Y`	`LEG_ESI`	2026-10-03 01:00:36	587	3	8	`3.20.8`	`Y`	` Chapter 6 repealed and added by Stats. 1983, Ch. 488, Sec. 38. `	`1983`	`488`	`38`

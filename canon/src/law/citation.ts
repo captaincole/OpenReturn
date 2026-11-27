@@ -1,20 +1,35 @@
-import { citationOf, citationSegment, QA_STEP, regCitationOf, regSlugOf, slugOf } from "./lawIds";
+import { splitCaCitation } from "./caCitation";
+import {
+  caCitationOf,
+  caSlugOf,
+  citationOf,
+  citationSegment,
+  QA_STEP,
+  regCitationOf,
+  regSlugOf,
+  slugOf,
+} from "./lawIds";
 
 /*
  * Citations as people write them, and the blocks they name. A Code
  * citation: "469", "§ 469(g)(1)(A)", "26 U.S.C. 1400Z-2(a)". A regulation:
  * "1.469-5T", "26 CFR 1.469-5T(a)(1)", "Treas. Reg. § 1.1031(a)-1(b)",
  * "1.408A-4, Q&A-1(b)". The dot tells them apart: a Code section number
- * never has one. Pure: the database read is in lawRead.ts.
+ * never has one. California's code must be named ("CA 17041(a)",
+ * caCitation.ts). Pure: the database read is in lawRead.ts.
  */
 
 export type LawTarget =
   | { kind: "block"; blockId: string }
   | { kind: "citation"; section: string; path: string[] }
-  | { kind: "regulation"; section: string; path: string[] };
+  | { kind: "regulation"; section: string; path: string[] }
+  | { kind: "california"; section: string; path: string[] };
 
-/** Which library a law document is: the statute (the Code) or the regulations. */
-export type LawSource = "statute" | "regulations";
+/**
+ * Which library a law document is: the statute (the Code), the
+ * regulations, or California's Revenue and Taxation Code.
+ */
+export type LawSource = "statute" | "regulations" | "california";
 
 /** One block of a Code section, as the resolver needs it. */
 export interface PathBlock {
@@ -52,12 +67,19 @@ const isSectionChar = (char: string) => isDigit(char) || isLetter(char) || char 
 export function parseLawTarget(input: string): LawTarget | null {
   const raw = input.trim();
   if (raw.includes(BLOCK_ID_MARK)) return { kind: "block", blockId: raw };
+  const california = splitCaCitation(raw);
+  if (california !== undefined) return californiaTarget(california);
   const rest = dropLeadingWords(raw.replace(/[–—]/g, "-"));
   const head = takeWhile(rest, isSectionChar);
   if (!head || !isDigit(head[0])) return null;
   if (rest[head.length] === REG_DOT) return regulationTarget(rest);
   const path = parseSegments(rest.slice(head.length));
   return path ? { kind: "citation", section: head, path } : null;
+}
+
+function californiaTarget(split: { section: string; rest: string } | null): LawTarget | null {
+  const path = split ? parseSegments(split.rest) : null;
+  return split && path ? { kind: "california", section: split.section, path } : null;
 }
 
 /** "1.1031(a)-1(b)": the section number runs through "(a)-1"; the path is "(b)". */
@@ -147,6 +169,30 @@ export const sectionIdOf = (docId: string, section: string): string =>
 export const formatCitation = (section: string, path: string[]): string =>
   isRegulationNumber(section) ? regCitationOf(section, path) : citationOf(section, path);
 
+/** A citation that names a section, of any source. */
+export type SectionTarget = Exclude<LawTarget, { kind: "block" }>;
+
+const SOURCE_OF_KIND: Record<SectionTarget["kind"], LawSource> = {
+  citation: "statute",
+  regulation: "regulations",
+  california: "california",
+};
+
+export const sourceOfTarget = (target: SectionTarget): LawSource => SOURCE_OF_KIND[target.kind];
+
+/** The section row's id of a section number in one source's document. */
+export function sectionIdIn(docId: string, source: LawSource, section: string): string {
+  if (source === "california") return `${docId}::sec::${caSlugOf(section)}`;
+  if (source === "regulations") return `${docId}::sec::${regSlugOf(section)}`;
+  return `${docId}::sec::${slugOf(`s${section}`)}`;
+}
+
+/** The citation of a path in one source's section: the Code's, a regulation's, California's. */
+export function citationIn(source: LawSource, section: string, path: string[]): string {
+  if (source === "california") return caCitationOf(section, path);
+  return source === "regulations" ? regCitationOf(section, path) : citationOf(section, path);
+}
+
 const startsWith = (path: string[], prefix: string[]) =>
   prefix.every((segment, index) => path[index] === segment);
 
@@ -202,10 +248,15 @@ function numberedAt(text: string, label: string, from: number): number {
 }
 
 /** The next level down that the blocks hold: for 401, "401(a)", "401(b)", … */
-export function subdivisionsOf(section: string, path: string[], blocks: PathBlock[]): string[] {
+export function subdivisionsOf(
+  section: string,
+  path: string[],
+  blocks: PathBlock[],
+  source: LawSource = sourceOfSection(section),
+): string[] {
   const below = blocks
     .filter((block) => block.path.length > path.length && startsWith(block.path, path))
     .map((block) => block.path.slice(0, path.length + 1));
   const unique = [...new Map(below.map((sub) => [sub.join("/"), sub])).values()];
-  return unique.map((sub) => formatCitation(section, sub));
+  return unique.map((sub) => citationIn(source, section, sub));
 }

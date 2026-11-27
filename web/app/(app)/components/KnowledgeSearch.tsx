@@ -1,11 +1,14 @@
 "use client";
 
+import { ALL_JURISDICTIONS, type Jurisdiction } from "@/lib/jurisdictions";
 import Link from "next/link";
 import { useState } from "react";
+import { JurisdictionSwitches } from "../ask/JurisdictionSwitches";
 import { useAskSubmit } from "../ask/useAskSubmit";
 
 export function KnowledgeSearch() {
   const [question, setQuestion] = useState("");
+  const [jurisdictions, setJurisdictions] = useState<Jurisdiction[]>([...ALL_JURISDICTIONS]);
   const { busy, error, submit } = useAskSubmit();
 
   return (
@@ -13,7 +16,7 @@ export function KnowledgeSearch() {
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          void submit(question);
+          void submit(question, jurisdictions);
         }}
         className="card flex items-center gap-3 px-5 py-4 transition-colors focus-within:border-accent/60"
       >
@@ -34,6 +37,12 @@ export function KnowledgeSearch() {
           {busy ? "Asking…" : "Ask"}
         </button>
       </form>
+      <JurisdictionSwitches
+        value={jurisdictions}
+        onChange={setJurisdictions}
+        disabled={busy}
+        className="mt-2 px-1"
+      />
       {error && <p className="mt-2 px-1 text-[12px] text-danger">{error}</p>}
       <p className="mt-2 flex flex-wrap items-baseline justify-between gap-2 px-1 text-[12px] text-ink-muted">
         <span>Answers come from IRS and FTB publications, with a citation for each one.</span>

@@ -1,7 +1,9 @@
 "use client";
 
 import { cn } from "@/lib/cn";
+import type { Jurisdiction } from "@/lib/jurisdictions";
 import { useState } from "react";
+import { JurisdictionSwitches } from "../../JurisdictionSwitches";
 import { useAskSubmit } from "../../useAskSubmit";
 
 type Mode = "follow_up" | "new";
@@ -11,22 +13,26 @@ const MODES: { mode: Mode; label: string; placeholder: string }[] = [
   { mode: "new", label: "Ask a different question", placeholder: "Ask a new question…" },
 ];
 
+/* The switches start as the thread's last turn searched; AskThreadView remounts this per thread. */
 export function AskComposer({
   threadId,
   disabled,
+  initialJurisdictions,
   onFollowUp,
 }: {
   threadId: string;
   disabled: boolean;
+  initialJurisdictions: readonly Jurisdiction[];
   onFollowUp: () => void;
 }) {
   const [mode, setMode] = useState<Mode>("follow_up");
+  const [jurisdictions, setJurisdictions] = useState<Jurisdiction[]>([...initialJurisdictions]);
   const [question, setQuestion] = useState("");
   const { busy, error, submit } = useAskSubmit(onFollowUp);
   const locked = disabled || busy;
 
   async function send() {
-    const sent = await submit(question, mode === "follow_up" ? threadId : undefined);
+    const sent = await submit(question, jurisdictions, mode === "follow_up" ? threadId : undefined);
     if (sent && mode === "follow_up") setQuestion("");
   }
 
@@ -42,7 +48,7 @@ export function AskComposer({
         }}
         className="card space-y-2.5 px-4 py-3 shadow-lg shadow-black/40 focus-within:border-accent/60 light:shadow-black/10"
       >
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap items-center gap-1.5">
           {MODES.map((option) => (
             <button
               key={option.mode}
@@ -58,6 +64,12 @@ export function AskComposer({
               {option.label}
             </button>
           ))}
+          <JurisdictionSwitches
+            value={jurisdictions}
+            onChange={setJurisdictions}
+            disabled={locked}
+            className="sm:ml-auto"
+          />
         </div>
         <div className="flex items-end gap-3">
           <textarea

@@ -28,6 +28,8 @@ export interface SectionInfo {
    * statute keeps its rule (the section's text never packs with what follows).
    */
   packFlat?: boolean;
+  /** Headings every block of the section carries before its units' ones: a version's dates. */
+  headings?: string[];
 }
 
 interface Plan {
@@ -141,7 +143,7 @@ function blockRow(
     metadata: {
       citation,
       path,
-      headings: chain.map((unit) => unit.heading).filter(Boolean),
+      headings: [...(info.headings ?? []), ...chain.map((unit) => unit.heading).filter(Boolean)],
       refs,
     },
     contextualSummary: null,

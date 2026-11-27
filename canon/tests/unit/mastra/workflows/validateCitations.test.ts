@@ -68,3 +68,74 @@ describe("validateConflicts", () => {
     expect(out.dropped).toBe(1);
   });
 });
+
+describe("a California statute passage", () => {
+  const CA = "ca-rtc-2025::sec::s17014::a";
+  const FTB = "ca-540-inst-2025::sec::residency::b01";
+  const USC = "usc-26-2025::sec::s7701::b-1";
+  const law = [
+    { blockId: FTB, text: "You are a resident if you live in California." },
+    {
+      blockId: CA,
+      citation: "Cal. Rev. & Tax. Code § 17014(a)",
+      text: "Every individual who is in this state for other than a temporary or transitory purpose.",
+    },
+    {
+      blockId: USC,
+      citation: "26 U.S.C. § 7701(b)(1)",
+      text: "An alien individual shall be treated as a resident.",
+    },
+  ];
+
+  it("keeps a word-for-word quote and drops one that is not", () => {
+    const out = validateCitations(
+      [
+        { blockId: CA, quote: "other than a temporary or  transitory purpose" },
+        { blockId: CA, quote: "for a temporary purpose" },
+      ],
+      law,
+    );
+    expect(out.citations).toEqual([
+      { blockId: CA, quote: "other than a temporary or  transitory purpose" },
+      { blockId: CA },
+    ]);
+    expect(out.dropped.quotes).toEqual(["for a temporary purpose"]);
+  });
+
+  it("is a statute side of a conflict, with its citation; an FTB block is an instruction", () => {
+    const side = (blockId: string, quote: string) => ({ blockId, quote });
+    const out = validateConflicts(
+      [
+        {
+          kind: "instruction_vs_instruction",
+          a: side(FTB, "live in California"),
+          b: side(CA, "temporary or transitory purpose"),
+          note: "ftb and ca",
+        },
+        {
+          kind: "instruction_vs_statute",
+          a: side(USC, "treated as a resident"),
+          b: side(CA, "temporary or transitory purpose"),
+          note: "two statutes",
+        },
+        {
+          kind: "instruction_vs_statute",
+          a: side(FTB, "live in California"),
+          b: side(CA, "permanent purpose"),
+          note: "a misquote",
+        },
+      ],
+      law,
+    );
+    expect(out.conflicts.map((conflict) => conflict.kind)).toEqual([
+      "instruction_vs_statute",
+      "statute_vs_statute",
+    ]);
+    expect(out.conflicts[0].b).toEqual({
+      blockId: CA,
+      quote: "temporary or transitory purpose",
+      citation: "Cal. Rev. & Tax. Code § 17014(a)",
+    });
+    expect(out.dropped).toBe(1);
+  });
+});

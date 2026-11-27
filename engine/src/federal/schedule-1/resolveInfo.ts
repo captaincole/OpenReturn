@@ -86,6 +86,14 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     answers.whistleblowerAwardFees,
     answers.iraContributions,
   ].some((amount) => (amount ?? 0) > 0);
+  /*
+   * A line 8z item below 0 files the schedule too: it is an entry on line 8z,
+   * whatever it is. A treaty exemption is one such item, "in parentheses, on
+   * Schedule 1 (Form 1040), line 8z" (irs-pub-519-2025::sec::general-rule-for-resident-aliens::b02),
+   * but the sign does not make an item one: the treatyExempt mark does
+   * (facts/kinds/otherIncome.ts).
+   */
+  const negativeLine8zItem = (answers.otherIncomeItems ?? []).some((item) => item.amount < 0);
   const educatorExpenses = educatorExpenseDeduction(inputs, jointReturn);
   const savingsPenalty = earlyWithdrawalPenalty(inputs);
   const studentLoan = resolveStudentLoanInterest(inputs);
@@ -115,6 +123,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
           (savingsPenalty ?? 0) > 0 ||
           (studentLoanInterest ?? 0) > 0,
       },
+      { rule: "fallback: a line 8z item below 0", value: negativeLine8zItem },
       moving.fallback,
       employeeBusinessExpensesFallback(inputs),
       {
