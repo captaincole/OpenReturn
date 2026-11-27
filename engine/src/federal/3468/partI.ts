@@ -24,7 +24,7 @@ const COORDINATE_PLACES = 6;
 
 export const usDate = (date: string) => ISODate.usSlash(isoDate(date));
 
-/* The comb boxes of line 3d: 2 for the latitude's degrees, 3 for the longitude's, 6 after the point. */
+/* The comb boxes of line 3d: 2 for the latitude's degrees, 3 for the longitude's, 6 after the point. Form 7210 line 2b has the same boxes. */
 export const LATITUDE_DIGITS = 2;
 export const LONGITUDE_DIGITS = 3;
 

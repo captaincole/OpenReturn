@@ -114,12 +114,20 @@ function recaptureColumn(info: ScheduleCaFilingInfo, side: "subtraction" | "addi
  *   (relating to rule for employment credits) shall not apply"
  *   (ca-rtc-2025::sec::s17270::b). The FTB names no Form 8844 adjustment, so
  *   column B gives those wages back the same way (8844 QUESTIONS.md item 11).
+ *   The stated Forms 8932 and 8994 the same way: section 280C(a) is the rule
+ *   that takes their credits off wages, for "sections 45A(a), 45P(a),
+ *   45S(a)(1)(A), 51(a), and 1396(a)" (usc-26-2025::sec::s280c::a).
  * - Form 8826: "California law conforms to this provision, but the maximum
  *   credit is $125" (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b04):
  *   no deduction for an amount the California credit (FTB 3548) allows. The
  *   engine does not file FTB 3548, so no California credit reduces the
  *   California deduction, and the whole federal reduction comes back
  *   (federal/8826/QUESTIONS.md).
+ * - Form 8820: "Enter the amount of the federal Orphan Drug Credit that
+ *   reduced the federal deduction for qualified clinical testing expenses on
+ *   Schedule CA (540), Part I ... line 3, line 5, or line 6, column B"
+ *   (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b08), on
+ *   whichever Schedule C lines it lowered.
  * Column B only.
  */
 const businessCreditColumn = (info: ScheduleCaFilingInfo, side: "subtraction" | "addition") =>

@@ -101,6 +101,12 @@ Each item is a default with no conflicting text.
 - Not now: the California credit is figured on FTB 3523, which the engine does not have (see the proposal below).
 - Changes dollars: yes, California AGI, by the federal credit less the California credit; the gap keeps the return from printing a wrong amount.
 
+### 11. Form 8820 on the same business — a named gap when the expenses overlap
+
+- Source: "Qualified clinical testing expenses used to figure the orphan drug credit cannot also be used to figure the credit for increasing research activities" (`irs-8820-form-2025::sec::coordination-with-the::b01`; section 45C(c)(1)).
+- Default: Form 8820's reduction comes before this form's in the list of credits that lower a deduction, and line 28 is placed on what it left, so no dollar leaves a Schedule C line twice. When a line that holds one kind of both (wages, supplies, computer rental, contract research) is less than the clinical testing and research amounts together, the facts cannot tell which dollars are in both: line 28 is a gap and Schedule C takes no research reduction (`federal/8820/coordination.ts`; 8820 QUESTIONS.md, "Form 8820 next to Form 6765").
+- Changes dollars: yes, the credit, when the research expenses hold clinical testing expenses; the gap keeps the return from claiming them twice.
+
 ## Pattern change
 
 None. The section 280C reduction follows the shape main already has for credits that lower a deduction (`facts/kinds/activitiesOnReturn.ts`, as the work opportunity and tip credits), and the credit reaches Form 3800 as a source of its own (`3800/sources.ts`, as Forms 5884, 8846 and 3468).

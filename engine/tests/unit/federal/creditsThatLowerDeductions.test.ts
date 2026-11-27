@@ -2,10 +2,11 @@
  * Credits on one business: the work opportunity credit (Form 5884) and the
  * empowerment zone employment credit (Form 8844) lower Schedule C line 26,
  * wages, and the tip credit (Form 8846) lowers line 23, taxes. The disabled
- * access (Form 8826), retirement plan (Form 8881), childcare (Form 8882) and
- * research (Form 6765) credits lower the lines their facts hold. On a farm the
- * two wage credits lower Schedule F line 22, labor hired. Each form was written
- * without the others; this test holds them together. The salon is the
+ * access (Form 8826), retirement plan (Form 8881), childcare (Form 8882),
+ * orphan drug (Form 8820) and research (Form 6765) credits lower the lines
+ * their facts hold. On a farm the two wage credits lower Schedule F line 22,
+ * labor hired. Each form was written without the others; this test holds them
+ * together. The salon is the
  * synthetic natti scenario's; the certified employees are the synthetic daved
  * scenario's, moved to the salon; the zone employees are the synthetic jaret
  * scenario's, moved to the salon. The farm is the synthetic byar scenario's,
@@ -35,6 +36,8 @@ import { decisionRow } from "../../helpers/fixtureBuilders.js";
 import { pecans, PECANS_KEY } from "../../scenarios/synthetic/byar/facts.js";
 import { byarScenario as byar } from "../../scenarios/synthetic/byar/index.js";
 import { EMPLOYEES } from "../../scenarios/synthetic/daved/facts.js";
+import { TRIALS_KEY } from "../../scenarios/synthetic/eward/facts.js";
+import { ewardScenario as eward } from "../../scenarios/synthetic/eward/index.js";
 import { EMPLOYEES as ZONE_EMPLOYEES } from "../../scenarios/synthetic/jaret/facts.js";
 import { EMPLOYEES as ZONE_HANDS } from "../../scenarios/synthetic/marin/facts.js";
 import { salon, SALON_KEY } from "../../scenarios/synthetic/natti/facts.js";
@@ -389,6 +392,99 @@ describe("the same business with the reduced research credit election", () => {
     const california = inCalifornia(natti, elected);
     const run = evaluate(california.facts, california.decisions);
     expect(run.value("schedule-ca", "0.line.b3_subtractions")).toBe(11940);
+  });
+});
+
+/*
+ * Form 8820 and Form 6765 on one business: the synthetic eward scenario's
+ * trials business, which also states research. Its Schedule C has wages
+ * $140,000, supplies $30,000, machinery rent $12,000 and contract labor
+ * $260,000.
+ * - Form 8820 (eward's fact): clinical wages $20,000, supplies $10,000,
+ *   computer rental $6,000, contract testing $164,000.40; line 1 $200,000;
+ *   line 2a 25% = $50,000, no election. The reduction takes all $20,000 of
+ *   the clinical wages off line 26, $10,000 off line 22, $6,000 off line 20a
+ *   and the other $14,000 off line 11.
+ * - Form 6765, the alternative simplified credit with no election: research
+ *   wages $1,000 and supplies $15,000, other dollars than the clinical
+ *   testing. Line 48 $16,000; line 21 ($9,000 × 3) ÷ 6 = $4,500; line 22
+ *   $11,500; line 24 14% = $1,610; line 28 $1,610. The reduction is placed on
+ *   what Form 8820 left: line 26 gives at most the $1,000 of research wages,
+ *   and line 22 the other $610.
+ * - Each line holds both amounts of its kind: wages $20,000 + $1,000 ≤
+ *   $140,000, supplies $10,000 + $15,000 ≤ $30,000.
+ * Schedule C: line 26 $140,000 − $20,000 − $1,000 = $119,000; line 22 $30,000
+ * − $10,000 − $610 = $19,390; line 20a $12,000 − $6,000 = $6,000; line 11
+ * $260,000 − $14,000 = $246,000. The two credits take $51,610 in all, each
+ * dollar once. California gives back the $50,000 of Form 8820; the research
+ * reduction is Form 6765's named gap on Schedule CA line 3.
+ */
+const trialsResearch = (expenses: ResearchCreditFactValue["expenses"]) =>
+  row(eward, "self_employment", RESEARCH_CREDIT_KEY, {
+    businessKey: TRIALS_KEY,
+    reducedCreditElection: false,
+    controlledGroup: false,
+    method: "alternative_simplified",
+    expenses,
+    businessComponentCount: 1,
+    grossReceiptsPriorYears: [800000, 850000, 880000],
+    priorThreeYearsQres: [9000, 9000, 9000],
+    acquiredOrDisposed: false,
+    newExpenseCategories: false,
+    attributableTaxableIncome: 100000,
+  } satisfies ResearchCreditFactValue);
+
+describe("a business with the orphan drug and research credits on the same lines", () => {
+  const facts = [...eward.facts, trialsResearch({ wages: 1000, supplies: 15000 })];
+  const { value } = evaluate(facts, eward.decisions);
+
+  it("figures both credits", () => {
+    expect(value("form-8820", "0.line.2a_credit_amount_dollars")).toBe(50000);
+    expect(value("form-6765", "0.line.24_multiply_23_by_14")).toBe(1610);
+    expect(value("form-6765", "1.line.28_subtract_27_from_13_or_26")).toBe(1610);
+  });
+
+  it("Form 6765 takes only what Form 8820 left, so no dollar leaves a line twice", () => {
+    expect(value("schedule-c", "0.line.26")).toBe(119000);
+    expect(value("schedule-c", "0.line.22")).toBe(19390);
+    expect(value("schedule-c", "0.line.20a")).toBe(6000);
+    expect(value("schedule-c", "0.line.11")).toBe(246000);
+    const stated = 140000 + 30000 + 12000 + 260000;
+    expect(stated - (119000 + 19390 + 6000 + 246000)).toBe(50000 + 1610);
+  });
+
+  it("California gives back the orphan drug reduction only", () => {
+    expect(businessCreditAddBack(facts, false)).toBe(50000);
+  });
+});
+
+/*
+ * The same business with $125,000 of research wages: with the $20,000 of
+ * clinical wages that is $145,000, more than the $140,000 on line 26. Some
+ * wages are in both credits, and the facts cannot tell which, so Form 6765
+ * line 28 is a gap and Schedule C keeps only Form 8820's reduction: line 26
+ * $140,000 − $20,000 = $120,000, line 22 $30,000 − $10,000 = $20,000.
+ */
+describe("research expenses that overlap the clinical testing expenses", () => {
+  const facts = [...eward.facts, trialsResearch({ wages: 125000, supplies: 15000 })];
+  const run = evaluateScenario({
+    filing: { id: "credits-that-lower-deductions-test", taxYear: eward.taxYear },
+    facts,
+    decisions: eward.decisions,
+    authEmail: null,
+  });
+  const result = (formId: string, id: string) =>
+    run.forms.get(formId)?.fields.find((each) => each.fieldId === `${formId}.${id}`)?.result;
+
+  it("Form 6765 line 28 is a gap that names the coordination rule", () => {
+    const line28 = result("form-6765", "1.line.28_subtract_27_from_13_or_26");
+    expect(line28?.ok).toBe(false);
+    expect(JSON.stringify(line28)).toContain("coordination-with-the::b01");
+  });
+
+  it("Schedule C keeps the orphan drug reduction and takes no research reduction", () => {
+    expect(result("schedule-c", "0.line.26")).toMatchObject({ ok: true, value: 120000 });
+    expect(result("schedule-c", "0.line.22")).toMatchObject({ ok: true, value: 20000 });
   });
 });
 
