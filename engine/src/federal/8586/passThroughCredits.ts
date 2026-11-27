@@ -14,8 +14,16 @@
  * - Any other notice of the credit: a stated Form 3800 line 4d credit that
  *   names its pass-through entity (passThroughEin), as Form 5884 line 3 does.
  *
- * Each K-1 is rounded to whole dollars before the add, as Form 3800 rounds each
- * K-1 source, so line 4 equals the K-1 rows of Form 3800 line 4d (row A96).
+ * DECISION (2026-11-27, by the author): each K-1 rounds before line 4 adds.
+ * Text A, the Form 1040 instructions: "If you have to add two or more amounts
+ * to figure the amount to enter on a line, include cents when adding the
+ * amounts and round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01).
+ * Text B, line 5: "report this amount on Form 3800, Part III, line 4d"
+ * (irs-8586-form-2025::sec::face-page-1::b01), where an aggregate "from more
+ * than one pass-through entity" is broken down "by the EIN of the pass-through
+ * entity ... in Part V" (irs-3800-inst-2025::sec::part-v-3::b01), one whole-dollar
+ * amount for each K-1. The engine follows text B, as Form 8846 line 5 does
+ * (row A96), so line 4 equals the K-1 rows of Form 3800 line 4d.
  */
 
 import { getGeneralBusinessCreditFacts } from "../../facts/index.js";

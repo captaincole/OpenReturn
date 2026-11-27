@@ -8,7 +8,9 @@
 import { describe, expect, it } from "vitest";
 import {
   makeGeneralBusinessCreditFactKey,
+  makeK1HoldingFactKey,
   makeLowIncomeHousingBuildingFactKey,
+  makePartnershipK1FactKey,
   makeTrustK1FactKey,
   RENTAL_KEYS,
   type GeneralBusinessCreditFactValue,
@@ -18,7 +20,7 @@ import {
 import type { AIDecisionRow, TaxFactRow } from "../../../../src/facts/rows.js";
 import { evaluateScenario } from "../../../../src/index.js";
 import { decisionRow } from "../../../helpers/fixtureBuilders.js";
-import { juniperK1, SAGEBRUSH } from "../../../scenarios/synthetic/alar/facts.js";
+import { JUNIPER_ID, juniperK1, SAGEBRUSH } from "../../../scenarios/synthetic/alar/facts.js";
 import { alarScenario as alar } from "../../../scenarios/synthetic/alar/index.js";
 
 const BUILDING_KEY = makeLowIncomeHousingBuildingFactKey("sagebrush-terrace");
@@ -177,6 +179,31 @@ describe("Form 8586 line 4: credits from pass-through entities", () => {
     expect(run.line(LINE_4)).toBe(5_550);
     expect(run.line(LINE_5)).toBe(70_350);
     expect(run.value("form-3800", ROW_4D)).toBe(70_350);
+  });
+
+  it("two K-1s with cents round each, then add, as Form 3800 Part V lists them (row A96)", () => {
+    const withCents = { ...juniperK1, boxes: [{ box: "15", code: "D", amount: 1_200.4 }] };
+    const second = {
+      ...juniperK1,
+      entityName: "Basalt Housing Partners LP",
+      entityEin: "00-0008590",
+      boxes: [{ box: "15", code: "D", amount: 600.4 }],
+    };
+    const holding = row("k1", makeK1HoldingFactKey("basalt-housing"), {
+      owner: "taxpayer",
+      materiallyParticipated: false,
+      allInvestmentAtRisk: true,
+      partnershipBasisAtStart: 60_000,
+    });
+    const facts = [
+      ...replaced(alar.facts, makePartnershipK1FactKey(JUNIPER_ID), withCents),
+      row("k1", makePartnershipK1FactKey("basalt-housing"), second),
+      holding,
+    ];
+    const run = evaluate(facts);
+    expect(run.line(LINE_4)).toBe(1_800);
+    expect(run.line(LINE_5)).toBe(66_600);
+    expect(run.value("form-3800", ROW_4D)).toBe(66_600);
   });
 
   it("a stated line 4d credit with no entity next to a Form 8609-A is a gap: the same credit twice", () => {

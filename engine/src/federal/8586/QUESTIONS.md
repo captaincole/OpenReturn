@@ -18,7 +18,7 @@ Doubts with no conflicting text.
 7. **A real estate professional's building.** A rental real estate activity of a real estate professional who materially participated in it is not passive (`activities-that-aren-t-passive::b01`, item 2). Not now: the engine does not ask for material participation in one building. Form 3800 line 4d is unsupported for that owner. Changes dollars for that owner.
 8. **Each Form 8609-A is its own activity.** The instructions do not group buildings. Done: one activity for each building, named with its BIN. Changes dollars by at most $1 a row (Form 8582-CR's pro rata shares; Form 3800 Part V).
 9. **A stated line 4d credit next to a Form 8609-A.** A Form 3800 line 4d credit stated with no pass-through entity may be the same credit Form 8609-A figures. Done: line 4d is unsupported, as Form 5884 does for line 4b. A stated line 4d credit that names its entity adds to line 4, as Form 5884 line 3 takes other notices.
-10. **Each K-1 rounds before line 4 adds.** As row A96 for Form 8846: Form 3800 rounds each K-1 source, so line 4 equals the K-1 rows of Form 3800 line 4d. At most $1 a K-1.
+10. **Each K-1 rounds before line 4 adds.** The Form 1040 rule keeps the cents and rounds only the total (`irs-1040-inst-2025::sec::rounding-off-to-whole::b01`); Form 3800 Part V lists one amount for each pass-through entity (`irs-3800-inst-2025::sec::part-v-3::b01`). Done: the `DECISION` in `passThroughCredits.ts`, row A96 (the same rule as Form 8846). The blind fill took the Form 1040 rule: two K-1s of $1,200.40 and $600.40 give $1,801 there and $1,800 in the engine. At most $1 a K-1.
 11. **Lines 6 and 7 are for estates and trusts.** "All others, stop here" (`face-page-1::b01`). Done: blank on an individual's return. No dollars.
 12. **The decision `decisions.scope.must_file_8586` false.** Done: Form 8586 leaves the return and the buildings' credit does not reach Form 3800. The taxpayer chose not to claim it. Changes dollars: the whole credit.
 
@@ -26,6 +26,12 @@ Doubts with no conflicting text.
 
 - **An estate's or trust's K-1 credit (box 13 code C).** "Report this amount on Form 8586, line 4" (`irs-1041k1-inst-2025::sec::note-form-1041-t-allocation-of-estimated-tax-payments-to::b01`). The trust box table makes code C a credit with no route (`passThrough/trustBoxes.ts`, `routing.ts`), so Schedule E line 41 is unsupported, and line 4 is unsupported too. The instructions do not say whether a beneficiary's share is a passive activity credit for Form 8582-CR: the rules for an estate or trust "haven't yet been issued" (`irs-8582cr-inst-2025::sec::material-participation::b06`). Proposal: route code C as a `business_credit` to Form 3800 line 4d, with a person's decision on its passive status. It changes the trust box table, so it waits.
 - **Material participation in a building, for a real estate professional** (item 7). It needs a new answer on the building fact; a person decides whether the building fact or a separate fact holds it.
+
+## Second opinions
+
+- **A blind fill** (2026-11-27): 13 cases filled by hand from the blank form and its instructions only. Every line matches the engine but one: case 8, two K-1s with cents, where line 4 is $1,801 by hand and $1,800 in the engine (item 10). The blind preparer also filed Form 8586 for a building with a credit of 0 (item 2), counted a $0 Form 8609-A on line 1, and left line 4 blank with no K-1, as the engine does.
+- **PolicyEngine-US** 2.154.1 (commit 0fbed6ddb1): it does not model the low-income housing credit. Its `general_business_credit` is a bare input with no formula, so there is nothing to compare.
+- **IRS Direct File**: no checkout here, so not compared. Its scope had no business credits, so it is not expected to have Form 8586 logic.
 
 ## For docs/law-findings.md
 
