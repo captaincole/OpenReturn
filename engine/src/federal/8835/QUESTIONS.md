@@ -29,6 +29,9 @@ Each is decided by the author, with a `DECISION` comment and a row in `docs/rule
 18. **A trust K-1 code J.** The fiduciary's statement splits the credit (`irs-1041k1-inst-2025::sec::note-form-1041-t-allocation-of-estimated-tax-payments-to::b02`); the trust box table has no route. Line 14 is unsupported. Form 1099-PATR box 12 and a K-1 stated by hand enter as a stated Form 3800 credit from "8835 Part II" with the entity's EIN.
 19. **Lines 16 and 17 are blank.** They are for cooperatives, estates and trusts (`face-part-ii-2::b01`, `line-16::b01`). No dollars.
 20. **The rates of a fiscal year.** "If you have sales in 2025 and 2026 ... make separate calculations" (`part-ii-renewable-electricity-production::b01`). The engine has calendar year filers only. No dollars.
+21. **The energy community bonus for a facility placed in service during 2022.** The instructions give the bonus no date (`increased-credit-in-energy-communities::b01`, `line-10::b01`); only the domestic content bonus says "placed in service after 2022" (`domestic-content::b01`). The general date is "placed in service after 2021" (`qualified-facilities::b01`). Done: a 2022 facility in an energy community takes line 11 (the blind fill agreed). The blind preparer recalled that the IRA effective date and Notice 2023-29 may limit the bonus to facilities placed in service after 2022. Neither the notice nor the statutory notes are in the library, so this is not checked. Changes dollars: 10% of line 9 for a 2022 facility ($4,500 on a $45,000 line 9). A person should read Notice 2023-29.
+22. **The line 1e rate of an offshore wind facility placed in service before 2022.** The form preprints $0.006 on line 1e, with "See instructions for rates to use for facilities placed in service before 2022" (`face-part-ii::b03`). The instructions give 3.0 cents for "wind" (`how-to-figure-the-credit::b02`), and an offshore facility uses wind. Done: 3.0 cents. Changes dollars only for such a facility (the blind fill agreed).
+23. **Lines 7b, 7d, 7f and 7g for a facility with no wind amount.** Each of 7b, 7d and 7f says "For facilities placed in service after 2021, enter -0-" (`face-part-ii::b02`). Done: the three lines and line 7g are blank when line 7a, 7c or 7e has no amount; when a wind amount is on one of them, its reduction line and line 7g print 0 or the product. The blind fill printed 0 on all of them for a facility placed in service after 2021, and 0 on line 7g always. Blank against 0 only; no dollars.
 
 ## Statute and instructions
 
@@ -36,18 +39,24 @@ The statute agrees with the line 7 percentages (`usc-26-2025::sec::s45::b-5`) an
 
 ## Confidence by field group
 
-| Field group | Confidence |
-| --- | --- |
-| Header, Part I lines 1 to 5 | stated rule |
-| Part I line 6, 8 to 12 | stated rule; line 8 more than one box is own reading (item 4) |
-| Part II line 1 rates | stated rule (the 2025 rates) |
-| Lines 2 to 4 | stated rule |
-| Lines 5a to 6 | stated rule; before August 17, 2022 unsupported (item 11) |
-| Lines 7a to 8 | stated rule |
-| Lines 9 to 13 | stated rule; line 11 before 2022 own reading (item 1) |
-| Line 14 | stated rule; trust K-1 unsupported (item 18) |
+| Field group                     | Confidence                                                        |
+| ------------------------------- | ----------------------------------------------------------------- |
+| Header, Part I lines 1 to 5     | stated rule                                                       |
+| Part I line 6, 8 to 12          | stated rule; line 8 more than one box is own reading (item 4)     |
+| Part II line 1 rates            | stated rule (the 2025 rates)                                      |
+| Lines 2 to 4                    | stated rule                                                       |
+| Lines 5a to 6                   | stated rule; before August 17, 2022 unsupported (item 11)         |
+| Lines 7a to 8                   | stated rule                                                       |
+| Lines 9 to 13                   | stated rule; line 11 before 2023 own reading (items 1 and 21)     |
+| Line 14                         | stated rule; trust K-1 unsupported (item 18)                      |
 | Line 15 and the Form 3800 split | stated rule; the split by kilowatt-hours is own reading (item 10) |
-| Lines 16 and 17 | stated rule (blank for an individual) |
+| Lines 16 and 17                 | stated rule (blank for an individual)                             |
+
+## Second opinions
+
+- **Blind fill (2026-11-27).** A second preparer filled 14 cases from the blank form and the instructions only. Every dollar amount matched the engine, including the Form 3800 lines 4e and 1f split. The only differences were blank against 0 on lines 7b, 7d, 7f and 7g (item 23). The preparer's doubts are items 1, 5, 7, 10, 11, 21 and 22.
+- **PolicyEngine-US 2.154.2 (commit c1fea42a38).** It does not model the section 45 credit or Form 8835: its `gov/irs` variables and parameters have no renewable electricity production credit. Nothing to compare.
+- **Other projects.** The repository names no other implementation of this form. IRS Direct File covers no business credits.
 
 ## Proposals for a discussion
 
