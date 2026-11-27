@@ -1,9 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { evaluateScenario } from "../../src";
-import { EIC_KEYS, makeBusinessFactKey, makeDependentFactKey } from "../../src/facts/index.js";
+import {
+  EIC_KEYS,
+  FORM_8862_KEYS,
+  makeBusinessFactKey,
+  makeDependentFactKey,
+} from "../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../src/facts/rows";
 import { SELF_EMPLOYED_EARNED_INCOME } from "../../src/federal/schedule-8812/earnedIncomeGap.js";
-import { FORM_8862_GAP } from "../../src/federal/schedule-eic/credit.js";
 import { decisionRow } from "../helpers/fixtureBuilders.js";
 import { tcbUs002Scenario as base } from "../scenarios/tcb-us-002/index.js";
 
@@ -111,15 +115,24 @@ describe("Form 1040 line 32", () => {
   });
 
   it("is unsupported with the EIC; lines 33–35a wait", () => {
-    const result = evaluate(
-      base.facts.map((fact) =>
-        fact.key === EIC_KEYS.deniedInEarlierYear ? { ...fact, value: true } : fact,
-      ),
-    );
-    expect(result.form1040Result("line.32")).toEqual({
-      ok: false,
-      unsupported: true,
-      reason: FORM_8862_GAP,
+    // An earlier denial, and Form 8862 line 7 (150 days) disagrees with the nephew's 11 months.
+    const denied = base.facts.map((fact): TaxFactRow => {
+      if (fact.key === EIC_KEYS.deniedInEarlierYear) return { ...fact, value: true };
+      if (fact.key !== NEPHEW_KEY) return fact;
+      const nephew = fact.value as Record<string, unknown>;
+      return { ...fact, value: { ...nephew, monthsLivedWithYou: 11, daysLivedWithYouInUs: 150 } };
+    });
+    const line3: TaxFactRow = {
+      ...base.facts[0]!,
+      id: "f-line-3",
+      category: "other",
+      key: FORM_8862_KEYS.eicOnlyIncomeMisreported,
+      value: false,
+    };
+    const result = evaluate([...denied, line3]);
+    expect(result.form1040Result("line.32")).toMatchObject({ ok: false, unsupported: true });
+    expect(result.form1040Result("line.27a")).toMatchObject({
+      reason: expect.stringContaining("Form 8862 line 7"),
     });
     const line33 = result.form1040Result("line.33");
     expect(line33?.ok).toBe(false);

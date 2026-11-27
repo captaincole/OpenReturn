@@ -58,6 +58,8 @@ export interface Form8863Figured {
   refund: RefundOutcome;
   /* A Form 1098-T that no student fact names: the student's answers are missing, so the totals wait. */
   studentsMissing: boolean;
+  /* An IRS notice bars the AOTC this year (FORM_8862_KEYS.aotcBarredByIrs). */
+  aotcBarred?: boolean;
 }
 
 /*

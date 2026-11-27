@@ -1,5 +1,7 @@
+import { EIC_KEYS, FORM_8862_KEYS } from "@openreturn/engine/facts";
 import { describe, expect, it } from "vitest";
 import { topicSkills } from "../../../../src/mastra/skills";
+import { creditQuestionsSkill } from "../../../../src/mastra/skills/creditQuestions";
 import { ingestTools } from "../../../../src/mastra/tools/ingestTools";
 
 const toolIdsOf = (tools: Record<string, { id: string }>) =>
@@ -30,6 +32,21 @@ describe("topic skills", () => {
         expect(topic.skill.instructions, topic.skill.name).toContain(`"${id}"`);
       }
     }
+  });
+
+  /*
+   * The engine waits for each EIC and Form 8862 answer; a key the skill does
+   * not name is a question Cade cannot ask. The denial question names Form
+   * 8862's exception (a credit since allowed again on a Form 8862).
+   */
+  it("names every EIC and Form 8862 answer in the credit questions", () => {
+    const eicKeys = [
+      ...Object.values(EIC_KEYS),
+      ...Object.values(FORM_8862_KEYS).filter((key) => key.startsWith("eic.")),
+    ];
+    const missing = eicKeys.filter((key) => !creditQuestionsSkill.skill.instructions.includes(key));
+    expect(missing).toEqual([]);
+    expect(creditQuestionsSkill.skill.instructions).toContain("not allowed again since");
   });
 
   it("gives each skill its own name", () => {

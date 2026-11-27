@@ -516,6 +516,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "(line 13; absent, April 15) or the taxpayer asks for a waiver (line 16)",
   ],
   [
+    /^(ctc|aotc)\.(denied_in_earlier_year|barred_by_irs)$/,
+    "Form 8862 answers Cade records only when the taxpayer states that the IRS reduced or " +
+      "disallowed the child tax credits or the AOTC in an earlier year, or bars them; absent " +
+      "means neither (federal/8862/QUESTIONS.md, Proposals for a discussion)",
+  ],
+  [
     /^farmer_estimated_tax\.(underpayment_paid_on|section_1062_net_tax_liability)$/,
     "Form 2210-F answers Cade records only when the rest of the underpayment was paid before " +
       "April 15, 2026 by a payment that is not a dated estimated payment (line 14; absent, the " +

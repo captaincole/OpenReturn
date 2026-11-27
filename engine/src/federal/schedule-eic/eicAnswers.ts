@@ -20,6 +20,7 @@ import {
   type ResolverInputs,
 } from "../../resolverInputs.js";
 import { resolve2555Info } from "../2555/resolveInfo.js";
+import { form8862EicPart } from "../8862/eicPart.js";
 import { noChildEicAge, type EicAnswers } from "./credit.js";
 import { eicMayApply } from "./possible.js";
 import { eicQualifyingChildren } from "./qualifyingChild.js";
@@ -57,6 +58,7 @@ export function resolveEicLineInfo(inputs: ResolverInputs): EicLineInfo {
     claimableAsDependent: answer(inputs, EIC_KEYS.claimableAsDependent),
     deniedInEarlierYear: answer(inputs, EIC_KEYS.deniedInEarlierYear),
     barredByIrs: answer(inputs, EIC_KEYS.barredByIrs),
+    form8862: form8862EicPart(inputs).check,
     // Living apart all year covers the last 6 months; the 1040 then skips that question.
     livedApartLastSixMonths:
       answer(inputs, SPOUSE_KEYS.livedApartAllYear) === true
