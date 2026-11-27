@@ -191,6 +191,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "is malformed, and asks the prior-year answers once one exists",
   ],
   [
+    /^clean_hydrogen\.facility\.[^.]+$/,
+    "each fact is one whole Form 7210 facility; whether the taxpayer owns a clean hydrogen " +
+      "production facility is Cade's question, and Form 7210 lists the fact again while its " +
+      "section 45Q, section 48(a)(15) or line 5 answers are missing",
+  ],
+  [
     /^tip_credit\.[^.]+$/,
     "each fact is one whole business's payroll tip records (Form 8846 lines 1 to 4); whether a " +
       "business had tipped employees is Cade's question. Form 8846 lists the fact again while " +
@@ -607,6 +613,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^prior_year\.ca_tax$/,
     "KNOWN GAP: decides whether FTB 5805 files. Needed only when the CA balance due is " +
       "$500 or more, which the resolver cannot see before evaluation.",
+  ],
+  [
+    /^decisions\.scope\.must_file_6478$/,
+    "a choice: a pass-through biofuel producer credit goes on Form 6478 line 3 or straight to " +
+      "Form 3800 line 4c (K-1 instructions, box 15 code I); without the decision Form 3800 " +
+      "takes the same credit and no other value changes",
   ],
 ];
 
