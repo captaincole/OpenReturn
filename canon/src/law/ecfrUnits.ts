@@ -1,4 +1,4 @@
-import { kindsOf, rankOf, type Designator, type Kind } from "./ecfrDesignators";
+import { CFR_SCHEME, type Designator, type Kind, type OutlineScheme } from "./ecfrDesignators";
 import type { Entry } from "./ecfrEntries";
 import type { Piece, QaParagraph } from "./ecfrLead";
 import { choosePlacement, place, type Level } from "./ecfrLevels";
@@ -53,11 +53,17 @@ interface Layout {
   upcoming: Piece[];
   nextNumber: number;
   before: string;
+  /** How the body of law numbers its levels: the regulations', or California's. */
+  scheme: OutlineScheme;
 }
 
 const UNPLACED_CLIP = 100;
 
-export function layoutRegSection(entries: Entry[], sink: TextSink): SectionLayout {
+export function layoutRegSection(
+  entries: Entry[],
+  sink: TextSink,
+  scheme: OutlineScheme = CFR_SCHEME,
+): SectionLayout {
   const root = draft("", "", "", "", null);
   const layout: Layout = {
     sink,
@@ -71,6 +77,7 @@ export function layoutRegSection(entries: Entry[], sink: TextSink): SectionLayou
     upcoming: entries.flatMap(numberedPieces),
     nextNumber: 0,
     before: "",
+    scheme,
   };
   entries.forEach((entry, index) => addEntry(layout, entry, index + 1));
   return { root: finish(root), unplaced: layout.unplaced };
@@ -115,7 +122,8 @@ function addPieces(layout: Layout, pieces: Piece[], ordinal: number): void {
   let restating = true;
   for (let i = 0; i < pieces.length; i++) {
     const piece = pieces[i];
-    restating = restating && !piece.text && restates(layout.outline[i], piece.designator!);
+    restating =
+      restating && !piece.text && restates(layout.outline[i], piece.designator!, layout.scheme);
     if (restating) {
       layout.nextNumber += 1;
       continue;
@@ -128,10 +136,10 @@ function addPieces(layout: Layout, pieces: Piece[], ordinal: number): void {
 }
 
 /** "(g)" in "(g)(1)(iii)" when (g) is the open level at that depth. */
-const restates = (level: Level | undefined, designator: Designator) =>
+const restates = (level: Level | undefined, designator: Designator, scheme: OutlineScheme) =>
   level !== undefined &&
   level.last === designator.token &&
-  kindsOf(designator).includes(level.kind);
+  scheme.kindsOf(designator).includes(level.kind);
 
 // The section's own text before any number is its lead; the rest belongs to the deepest open unit.
 function addText(layout: Layout, text: string, example: boolean): void {
@@ -152,7 +160,13 @@ function addPiece(layout: Layout, piece: Piece): boolean {
   const designator = piece.designator!;
   layout.nextNumber += 1;
   const upcoming = layout.upcoming.slice(layout.nextNumber).map((next) => next.designator!);
-  const placement = choosePlacement(layout.outline, designator, upcoming, layout.before);
+  const placement = choosePlacement(
+    layout.outline,
+    designator,
+    upcoming,
+    layout.before,
+    layout.scheme,
+  );
   if (!placement) return false;
   layout.outline = place(layout.outline, placement, designator.token);
   layout.open = layout.open.slice(0, placement.depth);
@@ -232,13 +246,14 @@ function materialize(layout: Layout, depth: number): Draft {
  * kind, at or above the piece; each number after it goes one level down.
  */
 function applyRange(layout: Layout, depth: number, end: Designator[]): void {
-  const kinds = kindsOf(end[0]);
+  const { scheme } = layout;
+  const kinds = scheme.kindsOf(end[0]);
   let at = depth;
   while (at >= 0 && !kinds.includes(layout.outline[at].kind)) at--;
   if (at < 0) return;
   const levels: Level[] = [{ kind: layout.outline[at].kind, last: end[0].token }];
   for (const next of end.slice(1)) {
-    const kind = deeperKind(next, levels[levels.length - 1].kind);
+    const kind = deeperKind(next, levels[levels.length - 1].kind, scheme);
     if (!kind) break;
     levels.push({ kind, last: next.token });
   }
@@ -246,8 +261,8 @@ function applyRange(layout: Layout, depth: number, end: Designator[]): void {
   layout.open = [...layout.open.slice(0, at), ...levels.map(() => null)];
 }
 
-const deeperKind = (designator: Designator, above: Kind): Kind | undefined =>
-  kindsOf(designator).find((kind) => rankOf(kind) > rankOf(above));
+const deeperKind = (designator: Designator, above: Kind, scheme: OutlineScheme) =>
+  scheme.kindsOf(designator).find((kind) => scheme.rankOf(kind) > scheme.rankOf(above));
 
 function uniqueSegment(parent: Draft, segment: string, idBase = segment): string {
   const count = parent.items.filter(

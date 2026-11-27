@@ -45,7 +45,10 @@ export async function consultStatute(
     log({ skipped: "already_consulted", why: STATUTE_SKIP_WHY.already_consulted });
     return { carrier, note: STATUTE_ALREADY_CONSULTED };
   }
-  const search = await searchStatute(ask.statuteQueries, { hitsPerQuery });
+  const search = await searchStatute(ask.statuteQueries, {
+    hitsPerQuery,
+    jurisdictions: carrier.jurisdictions,
+  });
   log(statuteSearchLog(search));
   if (search.status === "skipped") return { carrier, note: STATUTE_NOT_AVAILABLE };
   return {

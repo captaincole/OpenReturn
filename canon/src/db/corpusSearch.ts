@@ -1,4 +1,5 @@
 import type { InValue, Row } from "@libsql/client";
+import { parseJurisdictions, publisherFilter, type Jurisdiction } from "../jurisdiction";
 import {
   asFormat,
   asNum,
@@ -143,22 +144,44 @@ function rowToHit(row: MatchRow, score: number): SearchHit {
   };
 }
 
-/* Each leg's filters; a null one is off. */
+/*
+ * Each leg's filters; a null one is off. Each leg applies them before its
+ * top-N, so a filtered search still gets a full list of the blocks it keeps.
+ */
 interface LegFilter {
   docId: InValue;
   /** Keeps blocks whose id starts with this: a law section's blocks start with its section id. */
   blockIdPrefix: InValue;
+  /** Keeps blocks of these publishers' documents, as a JSON array (the jurisdictions on). */
+  publishers: InValue;
 }
 
 const FILTER_SQL = `(? IS NULL OR doc_id = ?)
-            AND (? IS NULL OR substr(block_id, 1, length(?)) = ?)`;
+            AND (? IS NULL OR substr(block_id, 1, length(?)) = ?)
+            AND (? IS NULL OR doc_id IN (SELECT doc_id FROM ref_documents
+                   WHERE publisher IN (SELECT value FROM json_each(?))))`;
 const filterArgs = (filter: LegFilter): InValue[] => [
   filter.docId,
   filter.docId,
   filter.blockIdPrefix,
   filter.blockIdPrefix,
   filter.blockIdPrefix,
+  filter.publishers,
+  filter.publishers,
 ];
+
+function legFilter(args: {
+  filterDocId?: string;
+  blockIdPrefix?: string;
+  jurisdictions?: readonly Jurisdiction[];
+}): LegFilter {
+  const publishers = publisherFilter(args.jurisdictions);
+  return {
+    docId: args.filterDocId ?? null,
+    blockIdPrefix: args.blockIdPrefix ?? null,
+    publishers: publishers === null ? null : JSON.stringify(publishers),
+  };
+}
 
 // bm25 is lower-is-better; the query negates it so fts_rank is higher-is-better.
 async function ftsLeg(
@@ -212,10 +235,11 @@ async function callMatch(args: {
   matchCount: number;
   filterDocId?: string;
   blockIdPrefix?: string;
+  jurisdictions?: readonly Jurisdiction[];
   library: Library;
 }): Promise<MatchRow[]> {
   const db = await openLibraryDb(args.library);
-  const filter = { docId: args.filterDocId ?? null, blockIdPrefix: args.blockIdPrefix ?? null };
+  const filter = legFilter(args);
 
   const ftsRank = args.queryText
     ? await ftsLeg(args.library, args.queryText, filter, args.matchCount)
@@ -265,7 +289,13 @@ export interface SearchOpts {
   limit?: number;
   /** Which library file to search; "corpus" unless named. */
   library?: Library;
+  /** Only these jurisdictions' documents; every jurisdiction when unset. */
+  jurisdictions?: readonly Jurisdiction[];
 }
+
+/* An empty list or an unknown value throws here, not as a search with no hits. */
+const checkedJurisdictions = (named?: readonly Jurisdiction[]): Jurisdiction[] | undefined =>
+  named === undefined ? undefined : parseJurisdictions(named);
 
 /** FTS-only. New code uses hybridSearchRefDocs. */
 export async function searchRefDocs(opts: SearchOpts): Promise<SearchHit[]> {
@@ -275,6 +305,7 @@ export async function searchRefDocs(opts: SearchOpts): Promise<SearchHit[]> {
     queryEmbedding: null,
     matchCount: limit,
     filterDocId: opts.docId,
+    jurisdictions: checkedJurisdictions(opts.jurisdictions),
     library: opts.library ?? "corpus",
   });
   return (
@@ -297,6 +328,8 @@ export interface HybridSearchOpts {
   library?: Library;
   /** Only blocks whose id starts with this (one law section: its section id + "::"). */
   blockIdPrefix?: string;
+  /** Only these jurisdictions' documents; every jurisdiction when unset. */
+  jurisdictions?: readonly Jurisdiction[];
 }
 
 /*
@@ -306,6 +339,7 @@ export interface HybridSearchOpts {
 export async function hybridSearchRefDocs(opts: HybridSearchOpts): Promise<SearchHit[]> {
   const limit = Math.min(opts.limit ?? 8, 25);
   const cands = Math.min(opts.candidatesPerLeg ?? 50, 100);
+  const jurisdictions = checkedJurisdictions(opts.jurisdictions);
 
   const mode = opts.mode ?? "hybrid";
   const library = opts.library ?? "corpus";
@@ -319,6 +353,7 @@ export async function hybridSearchRefDocs(opts: HybridSearchOpts): Promise<Searc
     matchCount: cands,
     filterDocId: opts.docId,
     blockIdPrefix: opts.blockIdPrefix,
+    jurisdictions,
     library,
   });
   if (rows.length === 0) return [];

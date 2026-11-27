@@ -9,7 +9,7 @@ leave open, what the engine does, and whether it changes dollars.
 Each is decided by the author, with a `DECISION` comment and a row in
 `docs/rule-decisions.md`.
 
-1. **Schedule P (540) column (a) for code 198 (row A80, `lines.ts`).**
+1. **Schedule P (540) column (a) for code 198 (row A84, `lines.ts`).**
    Schedule P column (a) is "the amount of credit available to offset tax"
    (`ca-540-sched-p-inst-2025::sec::column-a-through-column-d-instructions::b01`).
    FTB 3807 line 8A column (f) is the credit "used on Schedule P ... The amount
@@ -28,7 +28,7 @@ Each is decided by the author, with a `DECISION` comment and a row in
    line 7 $1,535). With line 7 at 0 (a loss, or an NOL that takes all the
    LAMBRA income) the engine writes no Schedule P row; the blind fill wrote
    one with column (b) 0.
-2. **The order inside Schedule P (540) Section A2 (row A78, `creditUsed.ts`).**
+2. **The order inside Schedule P (540) Section A2 (row A82, `creditUsed.ts`).**
    Section A2 sets no order ("complete column (a) through column (d) for each
    credit in each section", `ca-540-sched-p-inst-2025::sec::section-a2-instructions::b01`),
    and Section B2's rule (limited carryovers first, `::section-b2-instructions::b01`)
@@ -36,7 +36,7 @@ Each is decided by the author, with a `DECISION` comment and a row in
    credits keep lines 6 and 7; code 198 takes the next line. A unit test
    (`form.test.ts`) locks code 198 on line 7 (with code 223) and on line 8
    (with 223 and 237). Dollars: only when the tax over TMT cannot cover all.
-3. **Line 8B column (b) (row A79, `bindings.ts`).** The instruction reads the
+3. **Line 8B column (b) (row A83, `bindings.ts`).** The instruction reads the
    hiring carryover from last year's line 9B column (g) (`::b01`); the form's
    line 9B is the sales or use tax credit (`::b03`). The engine reads last
    year's line 8B column (g). Dollars: none in the engine.
@@ -135,7 +135,7 @@ path (`540/credits.ts`) the same way FTB 3541's credits do.
 - **The blind fill** (14 cases, 2026-11-26): it matched the engine on every
   line of FTB 3807 and Schedule Z except line 2 in one case (item 7, the
   engine changed) and lines 1 and 5 with a loss (item 6, the engine kept 0).
-  Schedule P columns (a) and (d) differ by decision A80 (item 1). Its 0
+  Schedule P columns (a) and (d) differ by decision A84 (item 1). Its 0
   against blank differences (Schedule Z line 4 with no NOL) change no dollars.
 
 ## Proposals for a discussion

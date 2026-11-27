@@ -4,7 +4,7 @@ import { lawHref } from "@/lib/law";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-/* A section number, or a full citation such as 469(g)(1) or 1.469-5T(a), opens that section's page. */
+/* A section number, or a full citation such as 469(g)(1), 1.469-5T(a) or CA 17041(a), opens that section's page. */
 export function GoToSection() {
   const router = useRouter();
   const [value, setValue] = useState("");
@@ -14,7 +14,9 @@ export function GoToSection() {
     event.preventDefault();
     const href = lawHref(value);
     if (!href) {
-      setProblem("Type a section number, such as 469, 199A or the regulation 1.469-5T.");
+      setProblem(
+        "Type a section number, such as 469, 199A, the regulation 1.469-5T or California's CA 17041.",
+      );
       return;
     }
     router.push(href);
@@ -33,7 +35,7 @@ export function GoToSection() {
             setValue(event.target.value);
             setProblem(null);
           }}
-          placeholder="469 or 1.469-5T"
+          placeholder="469, 1.469-5T or CA 17041"
           autoComplete="off"
           spellCheck={false}
           className="input-base max-w-xs font-mono"

@@ -83,15 +83,18 @@ Cost: ~$0.50 Haiku contextualization per doc; embeddings are local and free (Emb
 
 ## The law library (`law.db`)
 
-The law is a second file, `canon/.data/law.db` (`LAW_DB_PATH`). The plain `corpus` commands never read it. It holds two documents, each with a sidecar under `sources/2025/law/federal/`: the Internal Revenue Code (`usc-26/law.meta.json`, one zip named by `sourceUrl` and `sha256`) and the Treasury regulations, 26 CFR Parts 1 and 301 (`cfr-26/law.meta.json`, `"format": "ecfr"`, with a `files` entry of `sourceUrl` and `sha256` for each part, from the eCFR's dated API).
+The law is a second file, `canon/.data/law.db` (`LAW_DB_PATH`). The plain `corpus` commands never read it. It holds three documents, each with a sidecar under `sources/2025/law/`: the Internal Revenue Code (`federal/usc-26/law.meta.json`, one zip named by `sourceUrl` and `sha256`), the Treasury regulations, 26 CFR Parts 1 and 301 (`federal/cfr-26/law.meta.json`, `"format": "ecfr"`, with a `files` entry of `sourceUrl` and `sha256` for each part, from the eCFR's dated API), and California's Revenue and Taxation Code, Division 2, Parts 10 and 10.2 (`state/ca/rtc/law.meta.json`, `"format": "caml"`).
+
+California's source is the Legislature's session archive (`sourceUrl`, about 1.3 GB), a rolling file. The sidecar pins a small extract of it (`law.zip` next to the sidecar, about 1 MB, gitignored): `sha256` is the extract's, `releasePoint` the archive's date, `archiveSha256` the archive the extract came from (for the record only). `law sync` reads the extract from disk, else from law.db. With neither, download the archive to a folder of its own and run `law extract-ca <zip>`: it writes the extract and prints its sha256 and date. A different sha256 means the archive holds newer text; to move to it, copy the printed values into the sidecar. A California citation names its code (`CA 17041(a)`, `R&TC 17041`); a bare number is the Internal Revenue Code.
 
 | subcommand | use |
 |---|---|
 | `law fetch` | install the prebuilt law.db (`canon/seed/law.manifest.json`) |
 | `law sync [--force] [--doc <docId>]` | build it from the sidecars: no model call, only local embedding (about 17 minutes for the Code, about 1 hour 40 minutes for the regulations). `--doc` limits it to one document |
 | `law check` | row counts and embedding coverage |
-| `law search "q" [--mode …] [--limit n] [--source statute\|regulations]` | search the law; with no `--source` the two documents take turns in the results |
-| `law read <citation>` | print a section or subdivision with block ids: `469`, `"469(g)(1)(A)"`, a regulation `"1.469-5T(a)(1)"`, or a block id |
+| `law search "q" [--mode …] [--limit n] [--source statute\|regulations\|california] [--jurisdiction federal\|CA\|federal,CA]` | search the law; `--jurisdiction` searches the sources of each jurisdiction named (federal: the statute and the regulations; CA: California's code), taking turns; with neither flag the statute and the regulations take turns in the results, and California is left out |
+| `law read <citation>` | print a section or subdivision with block ids: `469`, `"469(g)(1)(A)"`, a regulation `"1.469-5T(a)(1)"`, California's `"CA 17041(a)"`, or a block id |
+| `law extract-ca <zip>` | cut California's extract out of the Legislature's session archive into `law.zip` next to its sidecar |
 | `law reembed [--all]` | embed the blocks that have no vector; `--all` after a model switch |
 
 To move to a newer release, change `sourceUrl`, `sha256` and `releasePoint` (and `published` for the Code) in the sidecar, then run `law sync`. Do not read `law.db` (a search, an eval) while `law sync` or `law reembed` writes it: the write stops with SQLITE_BUSY, and `law reembed` then finishes the vectors. After a change to the parser (`canon/src/law/`), run `law sync --force` and `npm run evals:law`.

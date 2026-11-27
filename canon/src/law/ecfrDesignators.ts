@@ -5,7 +5,7 @@
  * is a letter after (h) and the first roman numeral. Pure: no XML here.
  */
 
-export type Kind =
+export type CfrKind =
   | "lowerLetter"
   | "number"
   | "lowerRoman"
@@ -14,6 +14,21 @@ export type Kind =
   | "italicNumber"
   | "italicRoman";
 
+/** A level of an outline; each scheme names its own (CFR's above, California's in caDesignators.ts). */
+export type Kind = string;
+
+/*
+ * How one body of law numbers its paragraphs: the levels a number can be
+ * at, their order, the first number of each and the number after another.
+ * ecfrLevels.ts places numbers on an outline with any scheme.
+ */
+export interface OutlineScheme {
+  kindsOf(designator: Designator): Kind[];
+  rankOf(kind: Kind): number;
+  isFirstOf(kind: Kind, token: string): boolean;
+  follows(kind: Kind, last: string, token: string): boolean;
+}
+
 export interface Designator {
   /** In citation form, as the text prints it: "a", "1", "ii", "A". */
   token: string;
@@ -21,7 +36,7 @@ export interface Designator {
 }
 
 /** The standard order; an italic letter (older rules) sits where an upper-case letter does. */
-const RANK: Record<Kind, number> = {
+const RANK: Record<CfrKind, number> = {
   lowerLetter: 0,
   number: 1,
   lowerRoman: 2,
@@ -31,7 +46,7 @@ const RANK: Record<Kind, number> = {
   italicRoman: 5,
 };
 
-const FIRST: Record<Kind, string> = {
+const FIRST: Record<CfrKind, string> = {
   lowerLetter: "a",
   number: "1",
   lowerRoman: "i",
@@ -65,7 +80,7 @@ const isUpper = (char: string) => char >= "A" && char <= "Z";
 const allOf = (text: string, test: (char: string) => boolean) =>
   text.length > 0 && [...text].every(test);
 
-export const rankOf = (kind: Kind): number => RANK[kind];
+export const rankOf = (kind: Kind): number => RANK[kind as CfrKind];
 
 /** "a", "z", "aa", "bb": one letter, or one letter repeated (the list goes on past z). */
 const isLetterRun = (text: string) => [...text].every((char) => char === text[0]);
@@ -103,20 +118,23 @@ export function isDesignatorToken(token: string): boolean {
 }
 
 /** The levels a number can be at; "i" can be two. */
-export function kindsOf({ token, italic }: Designator): Kind[] {
+export function kindsOf({ token, italic }: Designator): CfrKind[] {
   if (allOf(token, isDigit)) return [italic ? "italicNumber" : "number"];
   if (allOf(token, isUpper)) return isLetterRun(token) ? ["upperLetter"] : [];
-  const kinds: Kind[] = [];
+  const kinds: CfrKind[] = [];
   if (isLetterRun(token)) kinds.push(italic ? "italicLetter" : "lowerLetter");
   if (romanValue(token) > 0) kinds.push(italic ? "italicRoman" : "lowerRoman");
   return kinds;
 }
 
-export const isFirstOf = (kind: Kind, token: string): boolean => FIRST[kind] === token;
+export const isFirstOf = (kind: Kind, token: string): boolean => FIRST[kind as CfrKind] === token;
 
 /** A number that opens a level: (1), (i), (A), or an italic (1), (i), (a). */
 export const opensLevel = (designator: Designator): boolean =>
   kindsOf(designator).some((kind) => isFirstOf(kind, designator.token));
+
+/** The Code of Federal Regulations' numbering. */
+export const CFR_SCHEME: OutlineScheme = { kindsOf, rankOf, isFirstOf, follows };
 
 /** "h" → "i", "z" → "aa", "aa" → "bb". */
 function nextLetterRun(last: string): string {

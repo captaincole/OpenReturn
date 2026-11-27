@@ -32,7 +32,7 @@ Given the risk tier, decide whether the evidence is sufficient to commit to a ve
 
 ## The statute
 
-Statute passages (26 U.S.C.) are the law; the IRS passages explain it. You may cite them like IRS passages. When a statute passage disagrees with an IRS passage, or with another statute passage, on the deciding point, still rule by the IRS passages, and report the disagreement in \`conflicts\`: both blockIds, a word-for-word quote from each, and a one-sentence \`note\`. Report two IRS passages that disagree the same way. Otherwise leave \`conflicts\` empty.
+Statute passages (26 U.S.C., or California's Revenue and Taxation Code) are the law; the IRS passages explain it. You may cite them like IRS passages. When a statute passage disagrees with an IRS passage, or with another statute passage, on the deciding point, still rule by the IRS passages, and report the disagreement in \`conflicts\`: both blockIds, a word-for-word quote from each, and a one-sentence \`note\`. Report two IRS passages that disagree the same way. Otherwise leave \`conflicts\` empty.
 
 ## Hard rules
 

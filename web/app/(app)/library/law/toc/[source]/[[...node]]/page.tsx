@@ -1,6 +1,6 @@
 import { fetchLawToc } from "@/lib/canonServer";
 import { formatPublished } from "@/lib/format";
-import { lawHref, lawSectionHref } from "@/lib/law";
+import { lawSectionHref, sectionPageOf, versionAnchor } from "@/lib/law";
 import { isLawSource, LAW_SOURCE_TITLE, lawTocHref, type LawToc } from "@/lib/lawToc";
 import { deriveProfile } from "@/lib/profile";
 import { getUserSession } from "@/lib/session";
@@ -38,12 +38,19 @@ function TocHeader({ toc }: { toc: LawToc }) {
 
 const ROW = "block py-2.5 text-[14px] hover:text-accent";
 
+// A later version of a California number opens its section's page at that version.
+const sectionHref = (toc: LawToc, number: string, version = 1) =>
+  lawSectionHref(
+    sectionPageOf(toc.source, number),
+    version > 1 ? versionAnchor(version) : undefined,
+  );
+
 function TocChildren({ toc }: { toc: LawToc }) {
   if (toc.children.length === 0)
     return <p className="text-[14px] text-ink-muted">This level has no entries.</p>;
   return (
     <ul className="card divide-y divide-border-subtle px-5">
-      {toc.children.map((child) =>
+      {toc.children.map((child, index) =>
         child.kind === "group" ? (
           <li key={child.node}>
             <Link href={lawTocHref(toc.source, child.node)} className={`${ROW} text-ink-primary`}>
@@ -51,9 +58,9 @@ function TocChildren({ toc }: { toc: LawToc }) {
             </Link>
           </li>
         ) : (
-          <li key={child.number}>
+          <li key={`${child.number}-${index}`}>
             <Link
-              href={lawHref(child.number) ?? lawSectionHref(child.number)}
+              href={sectionHref(toc, child.number, child.version)}
               className={`${ROW} text-ink-secondary`}
             >
               <span className="font-medium text-ink-primary">§ {child.number}</span> {child.heading}

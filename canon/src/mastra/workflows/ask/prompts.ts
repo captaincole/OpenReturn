@@ -1,4 +1,6 @@
+import { searchedLine, type Jurisdiction } from "../../../jurisdiction";
 import { formatPublished } from "../../../refdocs/published";
+import { statuteNamesOf } from "../statute";
 import type { AskHistoryTurn } from "./types";
 import type { Passage } from "./validate";
 
@@ -15,8 +17,20 @@ export function renderHistory(earlier: AskHistoryTurn[]): string {
   return `Earlier in this conversation:\n\n${pairs.join("\n\n")}\n\n`;
 }
 
-export function renderFormulatePrompt(history: string, question: string): string {
-  return `${history}Question: ${question}\n\nWrite the search queries.`;
+/* What the judges know of a turn before the passages: earlier turns, and the jurisdictions searched. */
+export interface PromptContext {
+  history: string;
+  jurisdictions: readonly Jurisdiction[];
+}
+
+// One line, and only when not every jurisdiction is on: the prompts stay the same for a search of all.
+function searched(context: PromptContext): string {
+  const line = searchedLine(context.jurisdictions);
+  return line ? `${line}\n\n` : "";
+}
+
+export function renderFormulatePrompt(context: PromptContext, question: string): string {
+  return `${context.history}${searched(context)}Question: ${question}\n\nWrite the search queries.`;
 }
 
 // The date lets the answerer prefer the newer of two passages that disagree.
@@ -31,17 +45,26 @@ function renderPassage(passage: Passage, passageNum: number): string {
 }
 
 /* Statute passages come last, in their own block; their numbers follow the others. */
-export function renderAnswerPrompt(history: string, question: string, passages: Passage[]): string {
+export function renderAnswerPrompt(
+  context: PromptContext,
+  question: string,
+  passages: Passage[],
+): string {
   const numbered = passages.map((passage, i) => ({ passage, passageNum: i + 1 }));
   const statute = numbered.filter(({ passage }) => passage.citation);
+  const names = statuteNamesOf(
+    statute.map(({ passage }) => passage.blockId),
+    "name",
+  );
   return [
-    history,
+    context.history,
+    searched(context),
     `Passages:\n\n${numbered
       .filter(({ passage }) => !passage.citation)
       .map(({ passage, passageNum }) => renderPassage(passage, passageNum))
       .join("\n\n")}`,
     statute.length
-      ? `\n\nStatute passages (the Internal Revenue Code, the law the passages above explain):\n\n${statute
+      ? `\n\nStatute passages (${names}, the law the passages above explain):\n\n${statute
           .map(
             ({ passage, passageNum }) =>
               `[${passageNum}] ${passage.citation}\n${passage.text.trim()}`,

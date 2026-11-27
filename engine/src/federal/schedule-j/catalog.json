@@ -1,0 +1,423 @@
+{
+  "form": {
+    "formId": "schedule-j",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Income Averaging for Individuals With Income From Farming or Fishing"
+  },
+  "fields": [
+    {
+      "fieldId": "schedule-j.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "schedule-j.0.header.ssn",
+      "label": "Social security number (SSN)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 469,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "schedule-j.0.line.1_taxable_income_2025",
+      "label": "Line 1 — Enter the taxable income from your 2025 Form 1040, 1040-SR, or 1040-NR, line 15",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "schedule-j.0.line.2a_elected_farm_income",
+      "label": "Line 2a — Enter your elected farm income. Do not enter more than the amount on line 1",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 635.969
+      }
+    },
+    {
+      "fieldId": "schedule-j.0.line.2b_net_capital_gain_included",
+      "label": "Line 2b — Capital gain included on line 2a: excess, if any, of net long-term capital gain over net short-term capital loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 599.969
+      }
+    },
+    {
+      "fieldId": "schedule-j.0.line.2c_unrecaptured_1250_gain",
+      "label": "Line 2c — Capital gain included on line 2a: unrecaptured section 1250 gain",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 575.968
+      }
+    },
+    {
+      "fieldId": "schedule-j.0.line.3_income_less_elected_farm",
+      "label": "Line 3 — Subtract line 2a from line 1",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 551.97
+      }
+    },
+    {
+      "fieldId": "schedule-j.0.line.4_tax_on_line3_2025",
+      "label": "Line 4 — Figure the tax on the amount on line 3 using the 2025 tax rates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "schedule-j.0.line.5_base_year_income_2022",
+      "label": "Line 5 — If you used Schedule J to figure your tax for 2024, enter the amount from your 2024 Schedule J, line 11; for 2023 but not 2024, your 2023 Schedule J, line 15; for 2022 but not 2023 or 2024, your 2022 Schedule J, line 3. Otherwise, enter the taxable income from your 2022 Form 1040, 1040-SR, or 1040-NR, line 15",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 455.969
+      }
+    },
+    {
+      "fieldId": "schedule-j.0.line.6_one_third_farm_income",
+      "label": "Line 6 — Divide the amount on line 2a by 3.0",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "schedule-j.0.line.7_combined_income_2022",
+      "label": "Line 7 — Combine lines 5 and 6. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "schedule-j.0.line.8_tax_on_line7_2022",
+      "label": "Line 8 — Figure the tax on the amount on line 7 using the 2022 tax rates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 359.968
+      }
+    },
+    {
+      "fieldId": "schedule-j.0.line.9_base_year_income_2023",
+      "label": "Line 9 — If you used Schedule J to figure your tax for 2024, enter the amount from your 2024 Schedule J, line 15; for 2023 but not 2024, your 2023 Schedule J, line 3. Otherwise, enter the taxable income from your 2023 Form 1040, 1040-SR, or 1040-NR, line 15",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "schedule-j.0.line.10_amount_from_line6",
+      "label": "Line 10 — Enter the amount from line 6",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "schedule-j.0.line.11_combined_income_2023",
+      "label": "Line 11 — Combine lines 9 and 10. If less than zero, enter as a negative amount",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "schedule-j.0.line.12_tax_on_line11_2023",
+      "label": "Line 12 — Figure the tax on the amount on line 11 using the 2023 tax rates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "schedule-j.0.line.13_base_year_income_2024",
+      "label": "Line 13 — If you used Schedule J to figure your tax for 2024, enter the amount from your 2024 Schedule J, line 3. Otherwise, enter the taxable income from your 2024 Form 1040, 1040-SR, or 1040-NR, line 15",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "schedule-j.0.line.14_amount_from_line6",
+      "label": "Line 14 — Enter the amount from line 6",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 143.968
+      }
+    },
+    {
+      "fieldId": "schedule-j.0.line.15_combined_income_2024",
+      "label": "Line 15 — Combine lines 13 and 14. If less than zero, enter as a negative amount",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 119.97
+      }
+    },
+    {
+      "fieldId": "schedule-j.0.line.16_tax_on_line15_2024",
+      "label": "Line 16 — Figure the tax on the amount on line 15 using the 2024 tax rates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 95.969
+      }
+    },
+    {
+      "fieldId": "schedule-j.0.line.17_total_base_year_tax",
+      "label": "Line 17 — Add lines 4, 8, 12, and 16",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 71.968
+      }
+    },
+    {
+      "fieldId": "schedule-j.1.line.18_amount_from_line_17",
+      "label": "Line 18 — Amount from line 17",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 719.968
+      }
+    },
+    {
+      "fieldId": "schedule-j.1.line.19_base_year_2022_tax",
+      "label": "Line 19 — If you used Schedule J to figure your tax for: 2024, enter the amount from your 2024 Schedule J, line 12; 2023 but not 2024, enter the amount from your 2023 Schedule J, line 16; 2022 but not 2023 or 2024, enter the amount from your 2022 Schedule J, line 4. Otherwise, enter the tax from your 2022 Form 1040, 1040-SR, or 1040-NR, line 16",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "schedule-j.1.line.20_base_year_2023_tax",
+      "label": "Line 20 — If you used Schedule J to figure your tax for: 2024, enter the amount from your 2024 Schedule J, line 16; 2023 but not 2024, enter the amount from your 2023 Schedule J, line 4. Otherwise, enter the tax from your 2023 Form 1040, 1040-SR, or 1040-NR, line 16",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "schedule-j.1.line.21_base_year_2024_tax",
+      "label": "Line 21 — If you used Schedule J to figure your tax for 2024, enter the amount from your 2024 Schedule J, line 4. Otherwise, enter the tax from your 2024 Form 1040, 1040-SR, or 1040-NR, line 16 (only tax imposed by section 1 of the Internal Revenue Code)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 503.968
+      }
+    },
+    {
+      "fieldId": "schedule-j.1.line.22_add_lines_19_through_21",
+      "label": "Line 22 — Add lines 19 through 21",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 455.969
+      }
+    },
+    {
+      "fieldId": "schedule-j.1.line.23_tax",
+      "label": "Line 23 — Tax. Subtract line 22 from line 18",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 419.969
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/schedule-j/blank.pdf",
+    "ingestedAt": "2026-11-26T23:58:42.357Z",
+    "totalFields": 27,
+    "skipped": 0,
+    "catalogEntries": 27
+  }
+}

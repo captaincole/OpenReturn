@@ -116,6 +116,9 @@ function fakeMastra(ruleReplies: Reply[], prompts: string[] = []): Mastra {
   return { getAgent: (id: string) => ({ name: id, generate: agents[id] }) } as unknown as Mastra;
 }
 
+// With no list, one statute round searches two statutes: the Code, then California's code.
+const ONE_ROUND = 2;
+
 const kinds = (steps: GroundStepLog[]) => steps.map((step) => `${step.iteration}:${step.kind}`);
 
 describe("groundDecision and the statute", () => {
@@ -133,12 +136,16 @@ describe("groundDecision and the statute", () => {
       citations: [{ blockId: LAW, quote: "shall not be taken into account" }],
     });
     const out = await groundDecision(fakeMastra([consult, verdict], prompts), { decision });
-    expect(law.search).toHaveBeenCalledTimes(1);
-    expect(law.search).toHaveBeenCalledWith({
-      query: "excess business loss capital assets",
-      limit: 6,
-      source: "statute",
-    });
+    expect(law.search).toHaveBeenCalledTimes(ONE_ROUND);
+    for (const [nth, source] of [
+      [1, "statute"],
+      [2, "california"],
+    ] as const)
+      expect(law.search).toHaveBeenNthCalledWith(nth, {
+        query: "excess business loss capital assets",
+        limit: 6,
+        source,
+      });
     expect(kinds(out.log.steps)).toEqual(["1:gather", "1:assess", "1:rule", "1:statute", "1:rule"]);
     expect(prompts[0]).not.toContain("Statute passages");
     expect(prompts[1]).toContain(`[${LAW}] 26 U.S.C. § 461(l)(3)(B):`);
@@ -152,7 +159,7 @@ describe("groundDecision and the statute", () => {
       decision,
       maxIterations: 1,
     });
-    expect(law.search).toHaveBeenCalledTimes(1);
+    expect(law.search).toHaveBeenCalledTimes(ONE_ROUND);
     expect(out.verdict).toBe("needs_more_facts");
     expect(out.whatsMissing).toBe("Pub 225 and Form 461 differ");
   });
@@ -164,7 +171,7 @@ describe("groundDecision and the statute", () => {
     });
     const replies = [consult, needMore, consult, verdictWith({})];
     const out = await groundDecision(fakeMastra(replies, prompts), { decision });
-    expect(law.search).toHaveBeenCalledTimes(1);
+    expect(law.search).toHaveBeenCalledTimes(ONE_ROUND);
     const statute = out.log.steps.filter((step) => step.kind === "statute");
     expect(statute.map((step) => (step.output as { skipped?: string }).skipped)).toEqual([
       undefined,
