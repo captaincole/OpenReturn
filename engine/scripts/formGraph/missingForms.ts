@@ -31,9 +31,6 @@ const federal = (name: string, section: Section, about: string): MissingForm => 
 /* The engine has every tier 1 form (scripts/formLists), and no blank field names a California form that it lacks. */
 export const MISSING_FORMS: MissingForm[] = [
   /* Named by a field of a form that has no rules yet. Most are the sources of the general business credit (Form 3800). */
-  federal("Schedule J", "tax", "Income averaging for farmers and fishermen"),
-  federal("Form 3468", "credits", "Investment credit"),
-  federal("Form 5884", "credits", "Work opportunity credit"),
   federal(
     "Form 5884-A",
     "credits",
@@ -41,26 +38,16 @@ export const MISSING_FORMS: MissingForm[] = [
   ),
   federal("Form 5884-B", "credits", "New hire retention credit"),
   federal("Form 6478", "credits", "Biofuel producer credit"),
-  federal("Form 6765", "credits", "Credit for increasing research activities"),
   federal("Form 7205", "credits", "Energy efficient commercial buildings deduction"),
   federal("Form 7207", "credits", "Advanced manufacturing production credit"),
   federal("Form 7210", "credits", "Clean hydrogen production credit"),
   federal("Form 7211", "credits", "Clean electricity production credit"),
   federal("Form 7213", "credits", "Nuclear power production credit"),
   federal("Form 7218", "credits", "Clean fuel production credit"),
-  federal("Form 8586", "credits", "Low-income housing credit"),
-  federal("Form 8609-A", "credits", "Annual statement for the low-income housing credit"),
   federal("Form 8820", "credits", "Orphan drug credit"),
-  federal("Form 8826", "credits", "Disabled access credit"),
   federal("Form 8830", "credits", "Enhanced oil recovery credit"),
   federal("Form 8835", "credits", "Renewable electricity production credit"),
-  federal("Form 8844", "credits", "Empowerment zone employment credit"),
   federal("Form 8845", "credits", "Indian employment credit"),
-  federal(
-    "Form 8846",
-    "credits",
-    "Credit for employer social security and Medicare taxes paid on certain employee tips",
-  ),
   federal(
     "Form 8847",
     "credits",
@@ -73,12 +60,6 @@ export const MISSING_FORMS: MissingForm[] = [
     "Biodiesel, renewable diesel, or sustainable aviation fuels credit",
   ),
   federal("Form 8874", "credits", "New markets credit"),
-  federal(
-    "Form 8881",
-    "credits",
-    "Credit for small employer pension plan startup costs and auto-enrollment",
-  ),
-  federal("Form 8882", "credits", "Credit for employer-provided childcare facilities and services"),
   federal("Form 8884", "credits", "New York Liberty Zone business employee credit"),
   federal("Form 8896", "credits", "Low sulfur diesel fuel production credit"),
   federal("Form 8900", "credits", "Qualified railroad track maintenance credit"),

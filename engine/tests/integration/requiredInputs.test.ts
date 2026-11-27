@@ -83,6 +83,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "(line A, the CCC loan election, line 34's at-risk box, material participation) is missing",
   ],
   [
+    /^work_opportunity_employee\.[^.]+$/,
+    "each fact is a whole targeted group employee the taxpayer claims the work opportunity " +
+      "credit for (Form 5884); whether one exists is Cade's question, as for a business fact. " +
+      "Form 5884 lists the fact again while it is malformed",
+  ],
+  [
     /^casualty\.[^.]+$/,
     "each fact is a whole casualty event (Form 4684); whether one happened is Cade's question",
   ],
@@ -161,6 +167,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
   [
     /^armed_forces_move\.[^.]+$/,
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
+  ],
+  [
+    /^tip_credit\.[^.]+$/,
+    "each fact is one whole business's payroll tip records (Form 8846 lines 1 to 4); whether a " +
+      "business had tipped employees is Cade's question. Form 8846 lists the fact again while " +
+      "its Medicare-only tips are missing",
   ],
   [
     /^section_965\.(inclusion|other_liability|s_corporation|deferred)\.[^.]+$/,
