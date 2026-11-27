@@ -61,4 +61,6 @@ export interface ScheduleCaFilingInfo
   /** Line 3 (businesses) and line 5 (rentals) columns B and C: the FTB 3885A differences. */
   businessDepreciationAdjustment?: DepreciationAdjustment;
   rentalDepreciationAdjustment?: DepreciationAdjustment;
+  /** Line 3 column B: the Schedule C wages the federal Form 8844 credit took off (section 280C(a)). */
+  businessZoneCreditSubtraction?: number;
 }

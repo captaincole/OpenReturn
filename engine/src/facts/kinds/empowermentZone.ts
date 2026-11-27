@@ -65,7 +65,11 @@ export interface EmpowermentZoneEmployeeFactValue {
    * (qualified-zone-employees::b03, ::b04), before the $15,000 limit.
    */
   zoneWages: number;
-  /* Wages of this employee used for the work opportunity credit (Form 5884). Absent: none. */
+  /*
+   * Wages of this employee used for the work opportunity credit (Form 5884),
+   * counted within zoneWages. The engine takes them out of the zone wages and
+   * lowers the $15,000 limit by them (federal/8844/lines.ts). Absent: none.
+   */
   workOpportunityCreditWages?: number;
 }
 

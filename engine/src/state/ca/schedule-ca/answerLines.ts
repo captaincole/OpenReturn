@@ -103,8 +103,23 @@ function recaptureColumn(info: ScheduleCaFilingInfo, side: "subtraction" | "addi
 }
 
 /*
+ * The federal Form 8844 credit lowered the Schedule C wages, and "The
+ * provisions of Section 280C(a) of the Internal Revenue Code (relating to rule
+ * for employment credits) shall not apply" (ca-rtc-2025::sec::s17270::b). The
+ * FTB names no Form 8844 adjustment; the line 3 adjustments come from "the
+ * difference between California and federal law relating to ... special
+ * credits", and Pub. 1001 puts the same reduction for the Work Opportunity
+ * Credit in column B (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b07).
+ * So column B gives the wages back (8844 QUESTIONS.md item 11).
+ */
+function zoneCreditSubtraction(info: ScheduleCaFilingInfo, side: "subtraction" | "addition") {
+  return side === "subtraction" ? (info.businessZoneCreditSubtraction ?? 0) : 0;
+}
+
+/*
  * Line 3 column B or C: a California employee's profit or loss, plus the FTB
- * 3885A business difference and the Schedule D-1 Part IV difference.
+ * 3885A business difference, the Schedule D-1 Part IV difference and the
+ * Form 8844 wages given back.
  */
 export function line3Column(info: ScheduleCaFilingInfo, side: "subtraction" | "addition") {
   const employee =
@@ -114,7 +129,8 @@ export function line3Column(info: ScheduleCaFilingInfo, side: "subtraction" | "a
   if (info.businessDepreciationAdjustment?.waits) return undefined;
   const recapture = recaptureColumn(info, side);
   if (recapture !== undefined && typeof recapture !== "number") return recapture;
-  const total = (employee ?? 0) + (depreciation ?? 0) + (recapture ?? 0);
+  const zoneCredit = zoneCreditSubtraction(info, side);
+  const total = (employee ?? 0) + (depreciation ?? 0) + (recapture ?? 0) + zoneCredit;
   return positive(total);
 }
 

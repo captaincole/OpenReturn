@@ -93,6 +93,21 @@ function withZoneCredit<T extends { key: string; value: BusinessFactValue }>(
   });
 }
 
+/*
+ * The Schedule C wages that withZoneCredit takes off, added over the return's
+ * businesses: what Schedule CA line 3 gives back, because California does not
+ * apply section 280C(a) (state/ca/schedule-ca/answerLines.ts).
+ */
+export function zoneCreditWageReduction(facts: ReadonlyArray<FactRow>, joint: boolean): number {
+  const credits = empowermentZoneFigures(facts, joint).creditByEmployer;
+  if (credits.size === 0) return 0;
+  const reductions = statedBusinessesOnReturn(facts, joint).businesses.map((business) => {
+    const wages = sum(business.value.expenses?.wages);
+    return wages - atLeast(0, wages - (credits.get(business.key) ?? 0));
+  });
+  return sum(...reductions);
+}
+
 /* statedBusinessesOnReturn, with the return's depreciation scope, its Form 4797 Part IV recapture and its Form 8844 credit. */
 export function businessesOnReturn(facts: ReadonlyArray<FactRow>, joint: boolean) {
   const result = statedBusinessesOnReturn(facts, joint);

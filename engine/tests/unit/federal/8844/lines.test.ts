@@ -82,8 +82,17 @@ describe("the $15,000 limit (specific-instructions::b01)", () => {
     expect(countedWagesOf(employee({ zoneWages: 21000, workOpportunityCreditWages: 6000 }))).toBe(
       9000,
     );
-    expect(countedWagesOf(employee({ zoneWages: 4000, workOpportunityCreditWages: 6000 }))).toBe(
-      4000,
+    expect(countedWagesOf(employee({ zoneWages: 4000, workOpportunityCreditWages: 6000 }))).toBe(0);
+  });
+
+  it("leaves the work opportunity credit wages out of the zone wages (usc-26-2025::sec::s1396::c)", () => {
+    // Under the lowered limit, the zone wages less the work opportunity wages: 9,800.50 − 6,000.
+    expect(countedWagesOf(employee({ zoneWages: 9800.5, workOpportunityCreditWages: 6000 }))).toBe(
+      3800.5,
+    );
+    // Above it, the limit decides: min(21,000 − 6,000, 15,000 − 6,000) = 9,000.
+    expect(countedWagesOf(employee({ zoneWages: 21000, workOpportunityCreditWages: 6000 }))).toBe(
+      9000,
     );
   });
 

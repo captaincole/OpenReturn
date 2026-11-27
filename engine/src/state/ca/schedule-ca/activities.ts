@@ -4,7 +4,11 @@
  * FTB 3885A depreciation and amortization differences (state/ca/3885a).
  */
 
-import { businessesOnReturn, CA_EMPLOYEE_CLASSIFICATION_KEYS } from "../../../facts/index.js";
+import {
+  businessesOnReturn,
+  CA_EMPLOYEE_CLASSIFICATION_KEYS,
+  zoneCreditWageReduction,
+} from "../../../facts/index.js";
 import { spousePropertiesOnReturn } from "../../../federal/rentals/passive.js";
 import { sum } from "../../../money.js";
 import {
@@ -119,6 +123,7 @@ export function resolveActivityAdjustments(inputs: ResolverInputs) {
   return {
     caEmployeeAmounts: amounts,
     businessDepreciationAdjustment: adjustmentFor(inputs, "business"),
+    businessZoneCreditSubtraction: zoneCreditWageReduction(inputs.facts, joint),
     rentalDepreciationAdjustment: adjustmentFor(inputs, "rental"),
     activityMissingInputs: asked
       ? missingInputs({

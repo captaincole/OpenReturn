@@ -22,6 +22,19 @@ export const CREDIT_RATE = 0.2;
  * a 5% owner, a relative or dependent, or employed at an excluded business,
  * and was employed at least 90 days, unless terminated earlier for misconduct
  * or a disability.
+ *
+ * DECISION (2026-11-27, by the author): when do the 90 days end for an
+ * employee who is still employed at year end? Text A: "Any individual
+ * employed by the employer for less than 90 days" is not a qualified zone
+ * employee (irs-8844-inst-2025::sec::qualified-zone-employees::b01; the same
+ * words in usc-26-2025::sec::s1396::d-2, paragraph (C)), with no end date.
+ * Text B: "Generally, an individual is not a qualified zone employee unless
+ * employed for at least 90 days" (qualified-zone-employees::b03), and the
+ * only exceptions are early terminations, which suggests a person still
+ * employed counts once the 90 days pass. The engine counts the days by
+ * December 31 (the fact's employedAtLeast90Days): the credit year's answer is
+ * known when the year closes, and the default claims less. QUESTIONS.md
+ * item 9; docs/rule-decisions.md row A96.
  */
 export function isQualifiedZoneEmployee(employee: EmpowermentZoneEmployeeFactValue): boolean {
   const ninetyDays = employee.employedAtLeast90Days || employee.earlyTermination !== undefined;
@@ -43,10 +56,21 @@ export function wageLimitOf(workOpportunityCreditWages: number | undefined): num
   return atLeast(0, WAGE_LIMIT_PER_EMPLOYEE - sum(workOpportunityCreditWages));
 }
 
-/* The wages of one employee that line 1 takes, with cents: 0 for an employee who does not qualify. */
+/*
+ * The wages of one employee that line 1 takes, with cents: 0 for an employee
+ * who does not qualify. The work opportunity credit wages also leave the zone
+ * wages: "The term 'qualified zone wages' shall not include wages taken into
+ * account in determining the credit under section 51" (usc-26-2025::sec::s1396::c,
+ * paragraph (3)(A)). The instructions state only the lower limit; the statute
+ * adds the exclusion, which they do not contradict (QUESTIONS.md item 10).
+ * The fact's zoneWages includes them: the default is that the work opportunity
+ * wages were paid while the person was a zone employee.
+ */
 export function countedWagesOf(employee: EmpowermentZoneEmployeeFactValue): number {
   if (!isQualifiedZoneEmployee(employee)) return 0;
-  return Math.min(atLeast(0, employee.zoneWages), wageLimitOf(employee.workOpportunityCreditWages));
+  const workOpportunity = sum(employee.workOpportunityCreditWages);
+  const zoneWages = atLeast(0, atLeast(0, employee.zoneWages) - workOpportunity);
+  return Math.min(zoneWages, wageLimitOf(employee.workOpportunityCreditWages));
 }
 
 /* Line 1: the total of the employees' counted wages, rounded once (whole-dollar rule). */

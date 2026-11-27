@@ -265,6 +265,31 @@ describe("the wage deduction goes down by line 2 (line-2::b01)", () => {
   });
 });
 
+describe("California gives the wages back (ca-rtc-2025::sec::s17270::b)", () => {
+  const CA_KEYS = ["decisions.scope.must_file_ca_540", "decisions.scope.ca_residency"];
+  const californiaDecisions = [
+    ...base.decisions.filter((each) => !CA_KEYS.includes(each.decisionKey)),
+    decision("decisions.scope.must_file_ca_540", true),
+    decision("decisions.scope.ca_residency", "full_year"),
+  ];
+  const inCalifornia = (facts: TaxFactRow[]) =>
+    facts.map((fact) => (fact.key === "identity.address.state" ? { ...fact, value: "CA" } : fact));
+  const B3 = "0.line.b3_subtractions";
+
+  it("Schedule CA line 3 column B is the Schedule C wages the federal credit took off", () => {
+    const run = evaluate(inCalifornia(base.facts), californiaDecisions);
+    expect(run.value("schedule-c", "0.line.26")).toBe(98000 - 5640);
+    expect(run.value("schedule-ca", B3)).toBe(5640);
+    expect(run.value("form-540", "line.14_ca_adjustments_subtractions")).toBe(5640);
+    expect(run.value("form-540", "line.15_ca_agi_before_additions")).toBe(117224);
+  });
+
+  it("is blank without the employee facts", () => {
+    const run = evaluate(inCalifornia(withoutEmployees(base)), californiaDecisions);
+    expect(run.value("schedule-ca", B3)).toBeUndefined();
+  });
+});
+
 describe("no Form 8844 facts, nothing changes", () => {
   it("Schedule C line 26 is the stated wages", () => {
     expect(evaluate(withoutEmployees(base)).value("schedule-c", "0.line.26")).toBe(98000);
