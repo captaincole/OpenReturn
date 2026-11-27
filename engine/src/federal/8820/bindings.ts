@@ -11,6 +11,7 @@ import type { OrphanDrug } from "../../facts/kinds/orphanDrugCredit.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { ISODate, SSN, isoDate } from "../../values.js";
 import { namesOnReturn } from "../returnNames.js";
+import { PART_II_ROW_LETTERS, drugsOnCopy } from "./copies.js";
 import type { Form8820Figures, Form8820FilingInfo } from "./filingInfo.js";
 import { line4Of, type CreditLines } from "./lines.js";
 import type { Form8820 } from "./types.js";
@@ -103,29 +104,21 @@ function electionBox(info: Form8820FilingInfo, box: boolean): boolean | undefine
   return elected === undefined ? undefined : elected === box;
 }
 
-/* Part II rows 7a to 7z: one form has 26. */
-const ROW_LETTERS = "abcdefghijklmnopqrstuvwxyz";
-const PART_II_ROWS = ROW_LETTERS.length;
-
 /*
- * "Attach as many Part II pages as needed to show all orphan drugs"
- * (irs-8820-form-2025::sec::part-ii::b01): the engine prints one page.
+ * Part II: "the generic name of the orphan drug, the Designation application
+ * number, and the date the drug was designated" (part-ii::b01), 26 drugs a
+ * page; each further 26 go on another copy's page 2 (copies.ts).
  */
-const MORE_DRUGS_GAP = `The return lists more than ${PART_II_ROWS} orphan drugs, which need an extra Part II page (irs-8820-form-2025::sec::part-ii::b01), and the engine prints one.`;
-
-/* Part II: "the generic name of the orphan drug, the Designation application number, and the date the drug was designated" (part-ii::b01). */
 function drugCell(index: number, pick: (drug: OrphanDrug) => string): Binding {
   return (_, info) => {
-    const drugs = info.form8820?.drugs ?? [];
-    if (drugs.length > PART_II_ROWS) return unsupported(MORE_DRUGS_GAP);
-    const drug = drugs[index];
+    const drug = drugsOnCopy(info)[index];
     return drug === undefined ? undefined : pick(drug);
   };
 }
 
 function partIIBindings(): Record<string, Binding> {
   const out: Record<string, Binding> = {};
-  [...ROW_LETTERS].forEach((letter, index) => {
+  [...PART_II_ROW_LETTERS].forEach((letter, index) => {
     const row = `1.line.7${letter}`;
     out[`${row}_orphan_drug_name_col_b`] = drugCell(index, (drug) => drug.name);
     out[`${row}_designation_application_number_col_c`] = drugCell(

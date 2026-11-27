@@ -14,6 +14,7 @@ import { atLeast, sum } from "../../money.js";
 import { statedBusinessesOnReturn, type BusinessFactValue } from "./business.js";
 import { placesPersonalProperty, type ScopedDepreciation } from "./depreciation.js";
 import { empowermentZoneFigures } from "./empowermentZone.js";
+import { statedWageCreditsByBusiness } from "./generalBusinessCredit.js";
 import { statedRentalsOnReturn, type RentalFactValue } from "./rental.js";
 import { section179RecaptureByBusiness } from "./section179Recapture.js";
 import { workOpportunityCreditByActivity } from "./workOpportunity.js";
@@ -111,6 +112,11 @@ const BUSINESS_CREDIT_REDUCTIONS: ReadonlyArray<CreditReduction> = [
     creditByBusiness: (facts, joint) => empowermentZoneFigures(facts, joint).creditByEmployer,
   },
   /*
+   * The same line's Form 8932 and Form 8994: the engine takes these credits as
+   * stated, each naming the business that paid the wages (generalBusinessCredit.ts).
+   */
+  { line: "wages", creditByBusiness: (facts) => statedWageCreditsByBusiness(facts) },
+  /*
    * Line 23: "Reduce your deduction by the amount shown on Form 8846, line 4"
    * (irs-1040sc-inst-2025::sec::line-23::b01). The stated taxesAndLicenses hold
    * the employer taxes before the credit.
@@ -161,7 +167,8 @@ function withCredits<T extends { key: string; value: BusinessFactValue }>(
  * The Schedule C expenses the federal credits take off that California gives
  * back, in total over the return's businesses: what Schedule CA line 3 column
  * B adds (state/ca/schedule-ca/answerLines.ts). These are the wages of the work
- * opportunity and empowerment zone credits, and every line the orphan drug
+ * opportunity, empowerment zone and stated Form 8932 and 8994 credits (all
+ * under section 280C(a), which California does not apply), and every line the orphan drug
  * credit lowers (wages, supplies, machinery rent, contract labor). Form 8846's
  * line 23 reduction is not given back.
  */

@@ -9,6 +9,8 @@ import {
   GENERAL_BUSINESS_CREDIT_KEYS,
   getCreditCarryoverFacts,
   getGeneralBusinessCreditFacts,
+  isBusinessFactKey,
+  isOwnStatedWageCredit,
   type CreditCarryoverFact,
   type GeneralBusinessCreditFact,
   type K1ResearchCreditAnswer,
@@ -51,6 +53,12 @@ function statedGap(value: GeneralBusinessCreditFact["value"]): string | undefine
   const engineForm = ENGINE_FORM_LINES[value.line];
   if (engineForm)
     return `Line ${value.line} comes from ${engineForm}, which the engine figures: state that form's inputs (the property, vehicle or tips) instead.`;
+  if (
+    isOwnStatedWageCredit(value) &&
+    (value.businessKey === undefined || !isBusinessFactKey(value.businessKey))
+  ) {
+    return `A Form ${value.sourceForm} credit of the taxpayer's own employees also lowers the wages deduction of the business that paid them (irs-1040sc-inst-2025::sec::line-26::b01): the engine lowers it only for a Schedule C business the credit names (businessKey).`;
+  }
   if (value.transfer && !TRANSFER_LINES.includes(value.line)) {
     return `The credit of line ${value.line} cannot be transferred under section 6418 (column (f) is shaded).`;
   }

@@ -23,4 +23,6 @@ export interface Form8820Figures {
 export interface Form8820FilingInfo extends BaseFilingInfo {
   /* Undefined while Form 8820 does not file. */
   form8820?: Form8820Figures;
+  /* The copy being filled: 0 for the form, 1 and up for each extra Part II page (copies.ts). */
+  form8820CopyIndex?: number;
 }

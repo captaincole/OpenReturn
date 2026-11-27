@@ -84,7 +84,7 @@ export const lab: BusinessFactValue = {
 
 /*
  * The practice's orphan drug credit. Jon elects the reduced credit, so the
- * Schedule C expenses stay whole. Two study coordinators are reservists whose
+ * credit lowers no Schedule C expense. Two study coordinators are reservists whose
  * differential wage payments give a Form 8932 credit; $900 of it is on wages
  * also in line 1.
  */
@@ -117,12 +117,16 @@ export const orphanDrugCredit: OrphanDrugCreditFactValue = {
   differentialWageCreditOnSameWages: 900,
 };
 
-/* Form 8932 line 2, the employer differential wage credit, which the engine takes as stated. */
+/*
+ * Form 8932 line 2, the employer differential wage credit, which the engine
+ * takes as stated. It lowers the practice's Schedule C wages (line 26).
+ */
 export const differentialWageCredit: GeneralBusinessCreditFactValue = {
   sourceForm: "8932",
   line: "1w",
   amount: 2400,
   passive: false,
+  businessKey: LAB_KEY,
 };
 
 export const PARTNERSHIP_ID = "halvorn-rare-therapeutics";

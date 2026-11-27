@@ -112,7 +112,10 @@ function recaptureColumn(info: ScheduleCaFilingInfo, side: "subtraction" | "addi
  * 280C(a) of the Internal Revenue Code (relating to rule for employment
  * credits) shall not apply" (ca-rtc-2025::sec::s17270::b). The FTB names no
  * Form 8844 adjustment, so column B gives those wages back the same way (8844
- * QUESTIONS.md item 11). Form 8820: "Enter the amount of the federal Orphan
+ * QUESTIONS.md item 11). The stated Forms 8932 and 8994 the same way: section
+ * 280C(a) is the rule that takes their credits off wages, for "sections 45A(a),
+ * 45P(a), 45S(a)(1)(A), 51(a), and 1396(a)" (usc-26-2025::sec::s280c::a).
+ * Form 8820: "Enter the amount of the federal Orphan
  * Drug Credit that reduced the federal deduction for qualified clinical
  * testing expenses on Schedule CA (540), Part I ... line 3, line 5, or line 6,
  * column B" (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b08),

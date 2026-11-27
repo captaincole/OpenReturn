@@ -19,6 +19,8 @@
  * from a K-1 needs one answer of its own (GENERAL_BUSINESS_CREDIT_KEYS.k1Research).
  */
 
+import { roundDollars, sum } from "../../money.js";
+
 type FactRow = { key: string; value: unknown; category: string };
 
 /* A section 6418 transfer of part of the credit (Part III column (f), Part V columns (d)(2), (d)(3), (f)(1), (f)(2)). */
@@ -98,6 +100,12 @@ export interface GeneralBusinessCreditFactValue {
   passiveActivity?: PassiveCreditActivity;
   /* The pass-through entity's EIN, for a credit allocated by one (column (c)). */
   passThroughEin?: string;
+  /*
+   * A Form 8932 or Form 8994 credit of the taxpayer's own employees only: the
+   * fact key of the Schedule C business that paid the wages. Its line 26 goes
+   * down by the credit (statedWageCreditsByBusiness).
+   */
+  businessKey?: string;
   /*
    * Research credit only (lines 1c and 4i): the taxable income attributable to
    * the sole proprietorship or the interest that generates the credit
@@ -185,6 +193,34 @@ export function getGeneralBusinessCreditFacts(
   return facts
     .filter((row) => row.category === CREDIT_CATEGORY && isGeneralBusinessCreditFactKey(row.key))
     .map((row) => ({ key: row.key, value: row.value as GeneralBusinessCreditFactValue }));
+}
+
+/*
+ * The stated credits that lower Schedule C wages: "Enter the total salaries
+ * and wages for the tax year reduced by the amount of the following credit(s)
+ * ... Credit for Employer Differential Wage Payments (Form 8932). Employer
+ * Credit for Paid Family and Medical Leave (Form 8994). Do not reduce your
+ * deduction for any portion of a credit that was passed through to you from a
+ * pass-through entity" (irs-1040sc-inst-2025::sec::line-26::b01).
+ */
+export const STATED_WAGE_CREDIT_FORMS: ReadonlyArray<string> = ["8932", "8994"];
+
+/* A stated Form 8932 or 8994 credit of the taxpayer's own employees (no pass-through EIN). */
+export const isOwnStatedWageCredit = (value: GeneralBusinessCreditFactValue): boolean =>
+  STATED_WAGE_CREDIT_FORMS.includes(value.sourceForm) && value.passThroughEin === undefined;
+
+/*
+ * Each Schedule C business's own stated wage credits, rounded as Form 3800
+ * prints them, by the business fact key. A credit that names no business is
+ * a gap on its Form 3800 line (3800/sources.ts), not a reduction here.
+ */
+export function statedWageCreditsByBusiness(facts: ReadonlyArray<FactRow>): Map<string, number> {
+  const out = new Map<string, number>();
+  for (const { value } of getGeneralBusinessCreditFacts(facts)) {
+    if (!isOwnStatedWageCredit(value) || value.businessKey === undefined) continue;
+    out.set(value.businessKey, sum(out.get(value.businessKey), roundDollars(value.amount)));
+  }
+  return out;
 }
 
 /* Every carryover fact, in the order recorded: the order of the Part VI rows. */

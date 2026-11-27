@@ -15,6 +15,7 @@ import {
   type PartnershipK1FactValue,
 } from "../../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../../src/facts/rows.js";
+import { drugsOnCopy, form8820CopyCount } from "../../../../src/federal/8820/copies.js";
 import { evaluateScenario } from "../../../../src/index.js";
 import { decisionRow } from "../../../helpers/fixtureBuilders.js";
 import {
@@ -135,8 +136,8 @@ describe("the jon return: the election, line 2b and a K-1", () => {
     expect(out.line(L6)).toBeUndefined();
   });
 
-  it("the election keeps the Schedule C expenses whole", () => {
-    expect(out.value("schedule-c", WAGES)).toBe(lab.expenses!.wages);
+  it("the election lowers no Schedule C expense; the Form 8932 credit lowers the wages (line-26::b01)", () => {
+    expect(out.value("schedule-c", WAGES)).toBe(lab.expenses!.wages! - 2400);
     expect(out.value("schedule-c", SUPPLIES)).toBe(lab.expenses!.supplies);
   });
 
@@ -350,12 +351,19 @@ describe("gaps", () => {
     expect(out.value("schedule-c", WAGES)).toBe(trials.expenses!.wages);
   });
 
-  it("more than 26 drugs need a second Part II page", () => {
+  it("more than 26 drugs: page 2 of the form holds the first 26, a second copy the rest (part-ii::b01)", () => {
     const drug = ewardCredit.drugs[0]!;
-    const drugs = Array.from({ length: 27 }, () => drug);
+    const drugs = Array.from({ length: 27 }, (_, index) => ({ ...drug, name: `drug-${index}` }));
     const out = evaluate(eward, factsWith(eward, credit(eward, { drugs })));
-    expect(isGap(out.field("form-8820", "1.line.7a_orphan_drug_name_col_b"))).toBe(true);
+    expect(out.line("1.line.7a_orphan_drug_name_col_b")).toBe("drug-0");
+    expect(out.line("1.line.7z_orphan_drug_name_col_b")).toBe("drug-25");
     expect(out.line(L4)).toBe(50000);
+    const info = { form8820: { ownCredit: true, drugs } };
+    expect(form8820CopyCount(info)).toBe(2);
+    expect(form8820CopyCount({ form8820: { ownCredit: true, drugs: drugs.slice(0, 26) } })).toBe(1);
+    expect(drugsOnCopy({ ...info, form8820CopyIndex: 1 }).map((each) => each.name)).toEqual([
+      "drug-26",
+    ]);
   });
 
   it("a business the owner does not materially participate in: a passive credit gap on line 1h", () => {

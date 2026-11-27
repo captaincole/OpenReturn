@@ -2,7 +2,7 @@
 
 Jon Tervale is single and lives in Bellevue, Washington. Every name and amount here is made up. There is no outside source and no answer key: the expected values are the engine's output, checked by hand against the form and its instructions, then locked (`verification: "unverified"`).
 
-Jon runs a clinical research practice (Schedule C). It pays for human clinical testing of three drugs that the FDA designated for rare diseases. He elects the reduced credit under section 280C, so his Schedule C expenses stay whole. Two study coordinators are reservists: the practice has a Form 8932 credit of $2,400, and $900 of it is on wages that are also in line 1. Jon is also a general partner in a drug development partnership. Its Schedule K-1 (Form 1065) reports business income in box 1 and an orphan drug credit in box 15 code Z. He takes the standard deduction and paid four estimated tax payments. The return is federal only: Washington has no income tax.
+Jon runs a clinical research practice (Schedule C). It pays for human clinical testing of three drugs that the FDA designated for rare diseases. He elects the reduced credit under section 280C, so the orphan drug credit lowers no Schedule C expense. Two study coordinators are reservists: the practice has a Form 8932 credit of $2,400, and $900 of it is on wages that are also in line 1. The Form 8932 credit lowers the practice's Schedule C wages (line 26). Jon is also a general partner in a drug development partnership. Its Schedule K-1 (Form 1065) reports business income in box 1 and an orphan drug credit in box 15 code Z. He takes the standard deduction and paid four estimated tax payments. The return is federal only: Washington has no income tax.
 
 The scenario fills Form 8820 lines 1 to 4 and Part II:
 
@@ -42,20 +42,24 @@ The K-1 is a PDF in `docs/`, made by `generate-docs.ts` from the existing Schedu
 | 8820 line 2c | 33,486 − 900 | 32,586 |
 | 8820 line 3 | K-1 code Z | 4,250 |
 | 8820 line 4 | 32,586 + 4,250 | 36,836 |
-| Schedule C line 26, 22 | the election: no reduction | 190,000; 46,000 |
-| Schedule C line 31 | 820,000 − 450,000 | 370,000 |
-| Schedule SE line 12, 13 | 176,100 × 12.4% + 341,695 × 2.9% = 21,836 + 9,909; half | 31,745; 15,873 |
-| 1040 line 9, 11a | 370,000 + 25,000; less 15,873 | 395,000; 379,127 |
-| 1040 line 13a | 20% of (370,000 − 15,873) = 70,825.40 | 70,825 |
-| 1040 line 15 | 379,127 − 15,750 − 70,825 | 292,552 |
-| 1040 line 16 | 57,231 + 35% × (292,552 − 250,525) | 71,940 |
+| Schedule C line 26 | 190,000 less the Form 8932 credit 2,400 (the election: no orphan drug reduction) | 187,600 |
+| Schedule C line 22 | the election: no reduction | 46,000 |
+| Schedule C line 31 | 820,000 − 447,600 | 372,400 |
+| Schedule SE line 4a | 372,400 × 92.35% = 343,911.40 | 343,911 |
+| Schedule SE line 12, 13 | 176,100 × 12.4% + 343,911 × 2.9% = 21,836 + 9,973; half of 31,809 = 15,904.50 | 31,809; 15,905 |
+| 1040 line 9, 11a | 372,400 + 25,000; less 15,905 | 397,400; 381,495 |
+| 1040 line 13a | 20% of (372,400 − 15,905) = 71,299 | 71,299 |
+| 1040 line 15 | 381,495 − 15,750 − 71,299 | 294,446 |
+| 1040 line 16 | 57,231 + 35% × (294,446 − 250,525) = 72,603.35 | 72,603 |
+| Form 6251 line 4, 6, 7 | 294,446 + 15,750; less 88,100; × 26% = 57,744.96 | 310,196; 222,096; 57,745 |
 | Form 3800 line 1h (e) | Form 8820 line 4 | 36,836 |
 | Form 3800 line 1w (e) | stated | 2,400 |
-| Form 3800 line 14 | Form 6251 tentative minimum tax | 57,253 |
-| Form 3800 line 16, 17, 38 | 71,940 − 57,253 | 14,687 |
-| Schedule 3 line 6a, 8; 1040 line 20 | Form 3800 line 38 | 14,687 |
-| 1040 line 22 | 71,940 − 14,687 | 57,253 |
-| 1040 line 23 | SE tax 31,745 + Additional Medicare Tax 1,275 | 33,020 |
-| 1040 line 24, 33, 37 | 57,253 + 33,020; payments 60,000; owed | 90,273; 60,000; 30,273 |
+| Form 3800 line 13 | 25% × (72,603 − 25,000) = 11,900.75 | 11,901 |
+| Form 3800 line 14 | Form 6251 tentative minimum tax | 57,745 |
+| Form 3800 line 16, 17, 38 | 72,603 − 57,745 | 14,858 |
+| Schedule 3 line 6a, 8; 1040 line 20 | Form 3800 line 38 | 14,858 |
+| 1040 line 22 | 72,603 − 14,858 | 57,745 |
+| 1040 line 23 | SE tax 31,809 + Additional Medicare Tax 0.9% × (343,911 − 200,000) = 1,295 | 33,104 |
+| 1040 line 24, 33, 37 | 57,745 + 33,104; payments 60,000; owed | 90,849; 60,000; 30,849 |
 
-Form 3800 carries $22,149 of the practice's line 1h credit forward (Part V column (k)).
+Form 3800 applies the K-1's $4,250 first, then $10,608 of the practice's line 1h credit, and carries $21,978 forward (Part V line 2 column (k)).
