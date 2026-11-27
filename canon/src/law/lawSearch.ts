@@ -1,17 +1,23 @@
 import { hybridSearchRefDocs } from "../db/corpusSearch";
 import { asStr } from "../db/corpusStore";
 import { openLibraryDb } from "../db/libsql";
-import { type LawSource, parseLawTarget, sourceOfTarget } from "./citation";
+import {
+  jurisdictionOfLawSource,
+  lawSourcesOf,
+  parseJurisdictions,
+  type Jurisdiction,
+} from "../jurisdiction";
+import { parseLawTarget, sourceOfTarget, type LawSource } from "./citation";
 import { CITATION_HINT, lawDocIdOf, requireLaw, sourceOfFormat, targetSectionId } from "./lawRead";
 
 /*
- * Hybrid search of law.db only: the statute and the regulations, or one of
- * them. The corpus search is the same code with library "law"; this adds
+ * Hybrid search of law.db only: the statute, the regulations, California's
+ * code, or some of them. The corpus search is the same code with library "law"; this adds
  * each hit's source and the citation and headings from its block's
  * metadata, which the corpus hit shape does not carry.
  *
- * With no source named, each source is searched on its own and the hits
- * are taken in turn, statute first. The regulations hold four times the
+ * With several sources, each one is searched on its own and the hits are
+ * taken in turn: statute, regulations, california. The regulations hold four times the
  * statute's passages: one ranking over both pushed 57% of the statute's
  * hits out of the top 8 and lost two statute sections of the eval's 44
  * cases (docs/evals/law.md); taking turns lost none.
@@ -23,6 +29,8 @@ export interface LawSearchOpts {
   query: string;
   /** One source only; the statute and the regulations unless named. */
   source?: LawSource;
+  /** The sources of these jurisdictions (jurisdiction.ts); with source, a check on it. */
+  jurisdictions?: readonly Jurisdiction[];
   /** One section, "469", "1400Z-2", "1.469-5T" or "CA 17041"; its subdivisions are not a filter. */
   section?: string;
   limit?: number;
@@ -41,19 +49,42 @@ export interface LawHit {
 }
 
 /*
- * With no source named: the federal law only. California answers only when
- * it is named (source "california"): a federal question should not get
- * California hits. docs/evals/law.md has the measurement.
+ * With no source and no jurisdictions named: the federal law only.
+ * California answers only when it is named (source "california", or
+ * jurisdictions with "CA"): a federal question should not get California
+ * hits. docs/evals/law.md has the measurement.
  */
 export const DEFAULT_SOURCES: readonly LawSource[] = ["statute", "regulations"];
 
 export async function searchLaw(opts: LawSearchOpts): Promise<LawHit[]> {
+  const sources = sourcesToSearch(opts);
   await requireLaw();
-  const source = opts.section ? sectionSource(opts.section, opts.source) : opts.source;
-  if (source) return searchSource(opts, source);
+  if (sources.length === 1) return searchSource(opts, sources[0]);
   const lists: LawHit[][] = [];
-  for (const one of DEFAULT_SOURCES) lists.push(await searchSource(opts, one));
+  for (const one of sources) lists.push(await searchSource(opts, one));
   return takeTurns(lists).slice(0, opts.limit ?? DEFAULT_LIMIT);
+}
+
+/* The sources a search reads. Input errors are thrown before law.db opens. */
+export function sourcesToSearch(opts: Omit<LawSearchOpts, "query">): LawSource[] {
+  const jurisdictions =
+    opts.jurisdictions === undefined ? undefined : parseJurisdictions(opts.jurisdictions);
+  const source = opts.section ? sectionSource(opts.section, opts.source) : opts.source;
+  if (!source) return jurisdictions ? lawSourcesOf(jurisdictions) : [...DEFAULT_SOURCES];
+  if (jurisdictions) requireSourceOn(source, jurisdictions, opts.section);
+  return [source];
+}
+
+// A source (or a section's own source) outside the named jurisdictions is a mistake, not an empty search.
+function requireSourceOn(source: LawSource, on: Jurisdiction[], section?: string): void {
+  const owner = jurisdictionOfLawSource(source);
+  if (on.includes(owner)) return;
+  const what = section
+    ? `section "${section}" is in source "${source}", which`
+    : `source "${source}"`;
+  throw new Error(
+    `${what} is ${owner} law, and jurisdictions ${JSON.stringify(on)} does not include "${owner}". Add "${owner}" to jurisdictions, or leave out source.`,
+  );
 }
 
 const DEFAULT_LIMIT = 8;

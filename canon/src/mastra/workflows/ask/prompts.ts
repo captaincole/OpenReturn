@@ -1,5 +1,6 @@
 import { searchedLine, type Jurisdiction } from "../../../jurisdiction";
 import { formatPublished } from "../../../refdocs/published";
+import { statuteNamesOf } from "../statute";
 import type { AskHistoryTurn } from "./types";
 import type { Passage } from "./validate";
 
@@ -51,6 +52,10 @@ export function renderAnswerPrompt(
 ): string {
   const numbered = passages.map((passage, i) => ({ passage, passageNum: i + 1 }));
   const statute = numbered.filter(({ passage }) => passage.citation);
+  const names = statuteNamesOf(
+    statute.map(({ passage }) => passage.blockId),
+    "name",
+  );
   return [
     context.history,
     searched(context),
@@ -59,7 +64,7 @@ export function renderAnswerPrompt(
       .map(({ passage, passageNum }) => renderPassage(passage, passageNum))
       .join("\n\n")}`,
     statute.length
-      ? `\n\nStatute passages (the Internal Revenue Code, the law the passages above explain):\n\n${statute
+      ? `\n\nStatute passages (${names}, the law the passages above explain):\n\n${statute
           .map(
             ({ passage, passageNum }) =>
               `[${passageNum}] ${passage.citation}\n${passage.text.trim()}`,
