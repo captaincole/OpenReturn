@@ -6,7 +6,6 @@
  * 2555, line 16 is what it was.
  */
 
-import type { FormAccessor } from "../../defineForm.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import type { FilingStatus } from "../../values.js";
 import {
@@ -15,10 +14,15 @@ import {
 } from "../../worksheets/foreignEarnedIncomeTax.js";
 import { excludedAmounts, files2555 } from "../2555/results.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
-import { qdcgInputsFromReturn, scheduleDWorksheet } from "./qdcgInputs.js";
-import type { Form1040 } from "./types.js";
+import {
+  NO_GAIN_LEFT_OUT,
+  qdcgInputsFromReturn,
+  scheduleDWorksheet,
+  type GainLeftOut,
+} from "./qdcgInputs.js";
 
-type Form = FormAccessor<Form1040>;
+/* Any form's accessor: every read is by full field id, so Schedule J line 4 can call it too. */
+type Form = { readonly [fieldId: string]: unknown };
 
 export type ForeignTax =
   | { kind: "none" }
@@ -51,8 +55,9 @@ function scheduleDLine4(
   line3: number,
   qualifiedDividends: number,
   status: FilingStatus,
+  left: GainLeftOut,
 ): ForeignTax | undefined {
-  const worksheet = scheduleDWorksheet(form, line3, qualifiedDividends, status);
+  const worksheet = scheduleDWorksheet(form, line3, qualifiedDividends, status, left);
   if (worksheet === undefined) return undefined;
   if ((worksheet.breakdown.line10 ?? 0) - taxable > 0) {
     return { kind: "gap", gap: unsupported(SCHEDULE_D_EXCESS) };
@@ -60,12 +65,16 @@ function scheduleDLine4(
   return { kind: "tax", tax: worksheet.tax };
 }
 
-/* The worksheet's line 6, the tax on line 16 before the other line 16 taxes. */
+/*
+ * The worksheet's line 6, the tax on line 16 before the other line 16 taxes.
+ * Schedule J line 4 figures it on its line 3, with its capital gain left out.
+ */
 export function foreignTaxOnLine16(
   form: Form,
   info: Form1040FilingInfo,
   taxable: number,
   qualifiedDividends: number,
+  left: GainLeftOut = NO_GAIN_LEFT_OUT,
 ): ForeignTax {
   // "If Form 1040 or 1040-SR, line 15, is zero, don't complete this worksheet."
   if (!files2555(info) || taxable === 0 || !info.filingStatus) return NONE;
@@ -75,10 +84,11 @@ export function foreignTaxOnLine16(
   const disallowed = line2b(info);
   if (typeof disallowed === "object") return { kind: "gap", gap: disallowed };
   const excluded = { line2a, line2b: disallowed };
-  const qdcg = qdcgInputsFromReturn(form, taxable, qualifiedDividends, info.filingStatus);
+  const qdcg = qdcgInputsFromReturn(form, taxable, qualifiedDividends, info.filingStatus, left);
   const lines = foreignEarnedIncomeTax(qdcg, excluded);
   const line3 = foreignWorksheetLine3(taxable, line2a, disallowed);
-  const bySchedule = scheduleDLine4(form, taxable, line3, qualifiedDividends, info.filingStatus);
+  const status = info.filingStatus;
+  const bySchedule = scheduleDLine4(form, taxable, line3, qualifiedDividends, status, left);
   if (bySchedule === undefined) return { kind: "tax", tax: lines.line6 };
   if (bySchedule.kind !== "tax") return bySchedule;
   return { kind: "tax", tax: Math.max(0, bySchedule.tax - lines.line5) };

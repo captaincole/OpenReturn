@@ -9,6 +9,7 @@ import { claimsByElection, foreignTaxCredit } from "../1116/credit.js";
 import type { Form1116FilingInfo } from "../1116/filingInfo.js";
 import { isGap } from "../1116/lines.js";
 import { negativeReportingYearTax } from "../8978/receivers.js";
+import { scheduleJRefigure } from "../schedule-j/form.js";
 
 type Accessor = { readonly [fieldId: string]: unknown };
 type Value = number | Unsupported | undefined;
@@ -23,12 +24,16 @@ const AMT_COPY_GAP =
  * Line 10 (irs-6251-inst-2025::sec::line-10::b01–b02): Form 1040 line 16 (less
  * any Form 4972 tax) and Schedule 2 line 1z, minus Schedule 3 line 1, and minus
  * "any negative amount reported on Form 8978, line 14 (treated as a positive
- * number)" (federal/8978/receivers.ts). Schedule J is not modeled. A gap in
- * Schedule 3 line 1 or in Form 8978 is a gap here.
+ * number)" (federal/8978/receivers.ts). With Schedule J, line 16 is refigured
+ * "without using Schedule J" (::line-10::b02; schedule-j/form.ts). A gap in
+ * Schedule 3 line 1, in Form 8978 or in that refigured tax is a gap here.
  */
 export function line10Of(form: Accessor, info: Form1116FilingInfo): Value {
-  const line16 = numberOrBlank(form["form-1040.line.16"]);
-  if (line16 === undefined) return undefined;
+  const reported = numberOrBlank(form["form-1040.line.16"]);
+  if (reported === undefined) return undefined;
+  const refigure = scheduleJRefigure(form, info);
+  if (refigure === undefined || typeof refigure === "object") return refigure;
+  const line16 = reported + refigure;
   const credit = foreignTaxCredit(form, info);
   if (isGap(credit)) return credit;
   const partnerReduction = negativeReportingYearTax(info);

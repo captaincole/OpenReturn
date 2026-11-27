@@ -1,62 +1,38 @@
 /* Form 1040 Tax and Credits: lines 16 to 24. */
 
-import { lookupTax } from "../../data/taxTable.js";
 import type { FormAccessor } from "../../defineForm.js";
-import { atLeast, formatDollars, numberOrBlank, sum } from "../../money.js";
+import { atLeast, formatDollars, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
-import { computeQdcg } from "../../worksheets/qdcg.js";
 import { otherTaxesGap } from "../4563/receivers.js";
 import { amtGap } from "../6251/foreignTaxCredit.js";
-import { childTaxOnLine16 } from "../8615/form.js";
 import { form8621Amount, withForm8621 } from "../8621/totals.js";
 import { line16BoxEntry, line16WithForm8978 } from "../8978/receivers.js";
+import { filesScheduleJ, scheduleJTax } from "../schedule-j/form.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
-import { foreignTaxOnLine16 } from "./foreignEarnedIncomeTax.js";
-import { line16WithForm8814, line3a } from "./form8814Lines.js";
-import { qdcgInputsFromReturn, scheduleDWorksheetTax } from "./qdcgInputs.js";
+import { line16WithForm8814 } from "./form8814Lines.js";
+import { taxWithoutScheduleJ } from "./taxOnIncome.js";
 import type { Form1040 } from "./types.js";
 
 type Form = FormAccessor<Form1040>;
 
 /*
  * MANUAL EDIT: line 16 uses the QDCG worksheet, or the Schedule D Tax
- * Worksheet when Schedule D line 19 has an amount (qdcgInputs.ts). With no
- * preferential income the QDCG worksheet gives the tax-table answer.
- * A child who files Form 8615 enters its line 18 instead
- * (irs-8615-inst-2025::sec::line-18::b01).
+ * Worksheet when Schedule D line 19 has an amount, or the Foreign Earned
+ * Income Tax Worksheet with Form 2555 (taxOnIncome.ts). With no preferential
+ * income the QDCG worksheet gives the tax-table answer. A child who files
+ * Form 8615 enters its line 18 instead (irs-8615-inst-2025::sec::line-18::b01).
+ * With Schedule J, the tax on taxable income is its line 23 ("Also include
+ * this amount on Form 1040 ... line 16", irs-1040sj-face-2025, line 23).
  */
 export function line16(form: Form, info: Form1040FilingInfo) {
   if (!info.filingStatus) return undefined;
   const taxable = form["line.15"];
   if (typeof taxable !== "number") return undefined;
-  const childTax = childTaxOnLine16(form, info);
-  if (childTax !== "regular") {
-    return typeof childTax === "number"
-      ? otherLine16Taxes(info, line16WithForm8814(info, childTax))
-      : childTax;
-  }
-
-  // MANUAL EDIT: worksheet line 2 = 1040 line 3a as entered (a rounded document sum).
-  const qualifiedDividends = numberOrBlank(line3a(info)) ?? 0;
-  // MANUAL EDIT: with Form 2555, the Foreign Earned Income Tax Worksheet (foreignEarnedIncomeTax.ts).
-  const foreign = foreignTaxOnLine16(form, info, taxable, qualifiedDividends);
-  if (foreign.kind === "waiting") return undefined;
-  if (foreign.kind === "gap") return foreign.gap;
-  if (foreign.kind === "tax") return otherLine16Taxes(info, line16WithForm8814(info, foreign.tax));
-  try {
-    const qdcg = computeQdcg(
-      qdcgInputsFromReturn(form, taxable, qualifiedDividends, info.filingStatus),
-    );
-    // MANUAL EDIT: the Schedule D Tax Worksheet when Schedule D line 19 has an amount (qdcgInputs.ts).
-    const tax =
-      scheduleDWorksheetTax(form, taxable, qualifiedDividends, info.filingStatus) ?? qdcg.tax;
-    // Box 1 (Form 8814), then box 2 (Form 4972) and box 3 (Form 8621), each once.
-    return otherLine16Taxes(info, line16WithForm8814(info, tax));
-  } catch {
-    // Unknown filing status or missing table data: use the plain tax table.
-    const lookup = lookupTax("federal-2025", taxable, info.filingStatus);
-    return otherLine16Taxes(info, line16WithForm8814(info, lookup.ok ? lookup.tax : undefined));
-  }
+  const tax = filesScheduleJ(info)
+    ? scheduleJTax(form, info)
+    : taxWithoutScheduleJ(form, info, taxable);
+  // Box 1 (Form 8814), then box 2 (Form 4972) and box 3 (Form 8621), each once.
+  return typeof tax === "number" ? otherLine16Taxes(info, line16WithForm8814(info, tax)) : tax;
 }
 
 const form4972Files = (info: Form1040FilingInfo) => info.mustFile?.["form-4972"]?.value === true;
