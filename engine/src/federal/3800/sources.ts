@@ -21,6 +21,8 @@ import { workOpportunitySources } from "../5884/sources.js";
 import { lowIncomeHousingSourcesOf } from "../8586/form3800.js";
 import { withForm8844 } from "../8844/sources.js";
 import { tipCreditSourcesOf } from "../8846/form3800.js";
+import { biodieselCreditSourcesOf } from "../8864/form3800.js";
+import { isBiodieselK1Credit } from "../8864/k1.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
 import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
 import { gap, type Cell } from "./cells.js";
@@ -191,6 +193,7 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
   const stated = getGeneralBusinessCreditFacts(inputs.facts).map(statedSource);
   const k1 = k1EntitiesWithRoute(inputs, "form_3800")
     .filter((received) => !figuredOnForm3468(inputs, received))
+    .filter((received) => !isBiodieselK1Credit(received))
     .map((received) => k1Source(inputs, received));
   const form3468 = form3468CreditSources(inputs);
   // Line 4b: Form 5884 line 2, the credit of the taxpayer's own employees (5884/sources.ts).
@@ -205,12 +208,15 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
   const tips = tipCreditSourcesOf(inputs);
   // Line 4d: Form 8586 line 3, the credit of the buildings the taxpayer owns (8586/form3800.ts).
   const housing = lowIncomeHousingSourcesOf(inputs);
-  missing.push(...tips.missing, ...housing.missing);
+  // Lines 1l and 1ff: Form 8864 line 11, the taxpayer's own production and each K-1 code AC (8864/form3800.ts).
+  const biodiesel = biodieselCreditSourcesOf(inputs);
+  missing.push(...tips.missing, ...housing.missing, ...biodiesel.missing);
   // Line 3: Form 8844 line 2, the empowerment zone credit of the taxpayer's own employees (8844/sources.ts).
   const zone = withForm8844(inputs, [
     ...stated,
     ...tips.sources,
     ...housing.sources,
+    ...biodiesel.sources,
     ...k1.flatMap((found) => (found.source ? [found.source] : [])),
     ...form3468.sources,
     ...workOpportunity.sources,

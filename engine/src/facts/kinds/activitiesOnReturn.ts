@@ -8,6 +8,7 @@
  */
 
 import { tipCreditReductions } from "../../federal/8846/figures.js";
+import { agriBiodieselIncomeByBusiness } from "../../federal/8864/figures.js";
 import { atLeast, sum } from "../../money.js";
 import { statedBusinessesOnReturn, type BusinessFactValue } from "./business.js";
 import { placesPersonalProperty, type ScopedDepreciation } from "./depreciation.js";
@@ -59,15 +60,19 @@ const BUSINESS_PREFIX = "business.";
 function withRecapture<T extends { key: string; value: BusinessFactValue }>(
   businesses: T[],
   facts: ReadonlyArray<FactRow>,
+  joint: boolean,
 ): T[] {
   const recapture = section179RecaptureByBusiness(facts);
-  if (recapture.size === 0) return businesses;
+  // Form 8864 line 9, the agri-biodiesel credit, is the producing business's other income too (federal/8864/figures.ts).
+  const biodiesel = agriBiodieselIncomeByBusiness(facts, joint);
+  if (recapture.size === 0 && biodiesel.size === 0) return businesses;
   return businesses.map((business) => {
     const amount = recapture.get(business.key.slice(BUSINESS_PREFIX.length));
-    if (amount === undefined) return business;
+    const credit = biodiesel.get(business.key);
+    if (amount === undefined && credit === undefined) return business;
     return {
       ...business,
-      value: { ...business.value, otherIncome: sum(business.value.otherIncome, amount) },
+      value: { ...business.value, otherIncome: sum(business.value.otherIncome, amount, credit) },
     };
   });
 }
@@ -162,7 +167,7 @@ export function wageCreditReduction(facts: ReadonlyArray<FactRow>, joint: boolea
 export function businessesOnReturn(facts: ReadonlyArray<FactRow>, joint: boolean) {
   const result = statedBusinessesOnReturn(facts, joint);
   const shared = activitiesWithPersonalProperty(facts, joint) >= SHARED_TEST_MINIMUM;
-  const businesses = withRecapture(marked(result.businesses, shared), facts);
+  const businesses = withRecapture(marked(result.businesses, shared), facts, joint);
   return { ...result, businesses: withCredits(businesses, facts, joint) };
 }
 
