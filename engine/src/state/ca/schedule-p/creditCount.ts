@@ -15,6 +15,7 @@ import { FILM_PROGRAMS } from "../3541/lines.js";
 import { caFilmCreditCodesClaimed } from "../3541/resolveInfo.js";
 import { caPassiveCreditsClaimed } from "../3801-cr/resolveInfo.js";
 import { pteCreditFactKeys } from "../3804-cr/resolveInfo.js";
+import { enterpriseZoneCreditKeys } from "../3805z/resolveInfo.js";
 import { otherStateCreditInputs } from "../schedule-s/resolveInfo.js";
 
 export function moreThanTwoCreditsFallback(inputs: ResolverInputs, files540: boolean) {
@@ -23,15 +24,24 @@ export function moreThanTwoCreditsFallback(inputs: ResolverInputs, files540: boo
   const pte = pteCreditFactKeys(inputs);
   // Each FTB 3541 credit code is one credit: the certificates of a code share one line.
   const film = caFilmCreditCodesClaimed(inputs);
+  // FTB 3805Z's two carryovers are one credit, code 176.
+  const enterpriseZone = enterpriseZoneCreditKeys(inputs);
   const count =
     passive.codes.length +
     (otherState.length > 0 ? 1 : 0) +
     (pte.length > 0 ? 1 : 0) +
-    film.codes.length;
+    film.codes.length +
+    (enterpriseZone.length > 0 ? 1 : 0);
   return {
-    rule: `fallback: Form 540 files (${files540}) with ${count} credit(s) from FTB 3801-CR, Schedule S, FTB 3804-CR and FTB 3541, more than two`,
+    rule: `fallback: Form 540 files (${files540}) with ${count} credit(s) from FTB 3801-CR, Schedule S, FTB 3804-CR, FTB 3541 and FTB 3805Z, more than two`,
     value: files540 && count > 2,
-    triggeredByFactKeys: [...passive.factKeys, ...otherState, ...pte, ...film.factKeys],
+    triggeredByFactKeys: [
+      ...passive.factKeys,
+      ...otherState,
+      ...pte,
+      ...film.factKeys,
+      ...enterpriseZone,
+    ],
     triggeredByDecisionKeys: ["decisions.scope.must_file_ca_540"],
   };
 }

@@ -11,6 +11,7 @@ import { prisonLaborCreditOnReturn } from "../3507/creditUsed.js";
 import { PRIOR_YEAR_AMT_CREDIT_USED, priorYearAmtCreditWaits } from "../3510/creditUsed.js";
 import { filmCreditsUsedTotal } from "../3541/creditUsed.js";
 import { passiveCreditsUsedTotal } from "../3801-cr/creditUsed.js";
+import { enterpriseZoneCreditUsed } from "../3805z/creditUsed.js";
 import type { OtherStateCreditInput, ScheduleSFilingInfo } from "./filingInfo.js";
 import { scheduleSLines, type ScheduleSLines } from "./lines.js";
 
@@ -66,7 +67,17 @@ export function californiaTaxLiability(
   // FTB 3541's credits are on lines 43 to 45 too; read from their source.
   const film = filmCreditsUsedTotal(read, info);
   if (typeof film !== "number") return film;
-  return atLeast(0, line35 - sum(...OTHER_CREDIT_LINES.map(read)) - passive - prisonLabor - film);
+  // FTB 3805Z's enterprise zone credit is on lines 43 to 45 too; read from its source.
+  const enterpriseZone = enterpriseZoneCreditUsed(read, info);
+  if (typeof enterpriseZone !== "number") return enterpriseZone;
+  const otherCredits = sum(
+    ...OTHER_CREDIT_LINES.map(read),
+    passive,
+    prisonLabor,
+    film,
+    enterpriseZone,
+  );
+  return atLeast(0, line35 - otherCredits);
 }
 
 /*
