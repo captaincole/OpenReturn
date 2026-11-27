@@ -19,6 +19,20 @@ import { filedForm7213Copies } from "./resolveInfo.js";
 
 /* Part III lines 1cc (Form 7213 Part I) and 1u (Part II) (3800/rows.ts). */
 export const ADVANCED_NUCLEAR_LINE = "1cc";
+/*
+ * DECISION (2026-11-27, by the author): the zero-emission nuclear power
+ * production credit goes on Form 3800, Part III, line 1u, also when a K-1 is
+ * its only source (3800/k1Credits.ts uses the same line). The Form 7213
+ * instructions for line 12: "If the only credit allocated to you is the
+ * zero-emission nuclear power production credit, do not report the credit on
+ * Form 7213. Instead, report the credit directly on Form 3800, Part III, line
+ * 1x" (irs-7213-inst-2025::sec::line-12::b01). The form face, line 13: "report
+ * this amount on Form 3800, Part III, line 1u" (irs-7213-face-2025::sec::face-part-ii::b02),
+ * and the K-1 instructions send box 15 code A to "Form 3800, Part III, line 1u"
+ * (irs-1065k1-inst-2025::sec::box-15-credits::b02). The engine follows line 1u:
+ * Form 3800's own line 1u is "Form 7213, Part II" and its line 1x is Form 8933,
+ * so "1x" is a misprint. docs/rule-decisions.md, "Decided by the author".
+ */
 export const ZERO_EMISSION_LINE = "1u";
 
 const STATED_TWICE_GAP = (line: string) =>
