@@ -147,12 +147,24 @@ describe("who files", () => {
     expect(out.value("form-3800", COL_E)).toBe(2350);
   });
 
-  it("the decision false wins over a fact", () => {
+  it("the decision false with a claimed fact: no form, and line 4f is a gap, never the deduction and the credit both lost", () => {
     const out = evaluate(base.facts, [
       ...base.decisions,
       decision("decisions.scope.must_file_8846", false),
     ]);
     expect(out.files("form-8846")).toBe(false);
+    expect(out.files("form-3800")).toBe(true);
+    expect(isGap(out.field("form-3800", COL_E))).toBe(true);
+    expect(isGap(out.field("form-3800", COL_G))).toBe(true);
+  });
+
+  it("the decision false with no own credit: Form 3800 takes only the K-1", () => {
+    const out = evaluate(factsWith(tips({ electNotToClaim: true })), [
+      ...base.decisions,
+      decision("decisions.scope.must_file_8846", false),
+    ]);
+    expect(out.files("form-8846")).toBe(false);
+    expect(out.value("schedule-c", LINE_23)).toBe(56200);
     expect(out.value("form-3800", COL_E)).toBe(2350);
   });
 });

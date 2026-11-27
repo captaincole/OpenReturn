@@ -41,6 +41,25 @@ function gapSource(key: string, reason: string): CreditSource {
 }
 
 /*
+ * The decision decisions.scope.must_file_8846 = false takes Form 8846 off the
+ * return, but Schedule C line 23 is reduced from the tip credit fact alone
+ * (facts/kinds/activitiesOnReturn.ts reads no decision). "Reduce the income
+ * tax deduction ... by the amount on line 4" (irs-8846-form-2025::sec::line-4::b01):
+ * with no form, nothing is claimed and nothing reduces the deduction. Until
+ * the two agree, line 4f is a gap, so the return never loses the deduction
+ * and the credit together.
+ */
+const DECISION_CONFLICT_GAP = (key: string) =>
+  `The decision decisions.scope.must_file_8846 is false, but the tip credit fact ${key} claims the credit, and Schedule C line 23 is reduced by it (irs-8846-form-2025::sec::line-4::b01). To elect not to claim the credit, record electNotToClaim on the fact (irs-8846-form-2025::sec::purpose-of-form::b01); to claim it, remove the decision.`;
+
+function conflictSources(inputs: ResolverInputs): CreditSource[] {
+  const figures = tipCreditFiguresOf(inputs);
+  if (figures.lines === undefined) return [];
+  const reduced = figures.credits.filter((credit) => (credit.share ?? 0) > 0);
+  return reduced.map((credit) => gapSource(credit.key, DECISION_CONFLICT_GAP(credit.key)));
+}
+
+/*
  * The line 4f sources of the taxpayer's own businesses while Form 8846 files,
  * and the answers they wait on: line 4 itself, or a business's line G
  * (materially participated), which decides column (d) or (e).
@@ -50,7 +69,7 @@ export function tipCreditSourcesOf(inputs: ResolverInputs): {
   missing: string[];
 } {
   if (resolve8846Info(inputs).mustFile?.["form-8846"]?.value !== true) {
-    return { sources: [], missing: [] };
+    return { sources: conflictSources(inputs), missing: [] };
   }
   const figures = tipCreditFiguresOf(inputs);
   const first = figures.factKeys[0];
