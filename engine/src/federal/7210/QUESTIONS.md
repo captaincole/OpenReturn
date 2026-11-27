@@ -12,8 +12,21 @@ Form 7210 figures the clean hydrogen production credit (section 45V) of one faci
 ## Line 7 adds column (c) with cents
 
 - Text: "Add column (c) of lines 6a through 6d" (`irs-7210-inst-2025::sec::line-7::b01`).
-- Default: each row prints rounded; line 7 adds the rows with their cents and rounds once, the rule for a total of computed rows in `CLAUDE.md` (Form 4562 line 44).
+- Default: each row prints rounded; line 7 adds the rows with their cents and rounds once, the rule for a total of computed rows in `CLAUDE.md` (Form 4562 line 44). The Form 1040 rule says the same: "If you have to add two or more amounts to figure the amount to enter on a line, include cents when adding the amounts and round off only the total" (`irs-1040-inst-2025::sec::rounding-off-to-whole::b01`).
+- Other reading: line 7 adds the whole-dollar column (c) entries as printed. The blind fill chose it (case 3: $786 + $473 + $530 + $564 = $2,353, against the engine's $2,354 from $2,353.9975).
 - Dollars: at most $2 on line 7 with four rows (then times 5 on line 10). The `rand` scenario has none.
+
+## Two processes in one emissions row
+
+- Text: "Only one emissions rate should be used to calculate the credit for each hydrogen production process" (`irs-7210-inst-2025::sec::line-7::b01`). The form has one row for each emissions band, not for each process.
+- Default: processes in the same band add their kilograms in column (a), and column (c) is the total kilograms times column (b), rounded once.
+- Dollars: at most $1 for each extra process, against rounding each process before the add. The blind fill made the same choice (case 2).
+
+## Construction that began on January 29, 2023
+
+- Text: "A facility the construction of which begins prior to January 29, 2023" (`irs-7210-inst-2025::sec::increased-credit-amount-for-qualified-clean::b01`); "The apprenticeship requirements only apply to facilities for which construction began on or after January 29, 2023" (`irs-7210-inst-2025::sec::line-5::b02`).
+- Default: January 29, 2023 is not "prior to", so that facility needs the apprenticeship answer too (`facility.ts`, `APPRENTICESHIP_START`).
+- Dollars: yes, the times-5 increase. The texts agree; the blind fill made the same choice (case 7).
 
 ## A facility with no 2025 credit files no Form 7210
 
@@ -64,3 +77,9 @@ Form 7210 figures the clean hydrogen production credit (section 45V) of one faci
 | Part I lines 1–4, 2b | stated rule |
 | Line A(i), A(ii) | stated rule for one process; unsupported for more |
 | Who files, no-credit facilities | own reading of the stated rules |
+
+## Second opinions
+
+- **Blind fill** (15 cases, from the blank form and instructions only): one difference, on line 7 of case 3 ($2,354 against $2,353, through lines 9, 10 and 12). It is the rounding of a total of computed rows ("Line 7 adds column (c) with cents" above). The instructions give no rounding rule for line 7; the engine keeps the repository's rule and the Form 1040 rule. Every other line of every case matches, including the band edges (0.45, 2.5, 4.0), the hydrogen above 4.0 left off, the 45Q facility and the ended credit period (no Form 7210), the bond lines and the K-1 credit on line 11 (row A110).
+- **PolicyEngine-US 2.154.1** (commit 0fbed6ddb1): it does not model the clean hydrogen production credit. A search of `variables/gov/irs` and `parameters/gov/irs` for "hydrogen" and "45V" finds nothing. Its `general_business_credit` is a bare input, so it cannot check Form 7210 or line 1g of Form 3800.
+- **IRS Direct File**: the repository names no checkout, and Direct File covers no business credits. Not compared.
