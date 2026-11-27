@@ -10,16 +10,16 @@ Each claim has one of three marks:
 
 ## The layers
 
-| Layer | Who writes it | In Canon | Where |
-| --- | --- | --- | --- |
-| Statute: Revenue and Taxation Code, Division 2 | The Legislature | Yes | `canon/.data/law/ca.db`, document `ca-rtc-2025` |
-| Federal regulations, where California adopts the federal rule | The Treasury | Yes | `canon/.data/law/federal.db`, document `cfr-26-2025` |
-| California regulations: Code of Regulations, Title 18, Division 3 | The Franchise Tax Board | No, deferred | Issue #383 |
-| Form instructions and publications | The Franchise Tax Board | Yes | `corpus.db` |
-| Legal Rulings, Notices, Technical Advice Memoranda | The Franchise Tax Board | No, deferred | Issue #393 |
-| Appeal decisions | The Office of Tax Appeals; the Board of Equalization before 2018 | No, deferred | Issue #393 |
-| Audit manuals | The Franchise Tax Board | No, deferred | Issue #393 |
-| Paid research services (Spidell, CCH, Thomson Reuters) | Private publishers | No | Their text is not ours to use |
+| Layer                                                             | Who writes it                                                    | In Canon     | Where                                                |
+| ----------------------------------------------------------------- | ---------------------------------------------------------------- | ------------ | ---------------------------------------------------- |
+| Statute: Revenue and Taxation Code, Division 2                    | The Legislature                                                  | Yes          | `canon/.data/law/ca.db`, document `ca-rtc-2025`      |
+| Federal regulations, where California adopts the federal rule     | The Treasury                                                     | Yes          | `canon/.data/law/federal.db`, document `cfr-26-2025` |
+| California regulations: Code of Regulations, Title 18, Division 3 | The Franchise Tax Board                                          | No, deferred | Issue #383                                           |
+| Form instructions and publications                                | The Franchise Tax Board                                          | Yes          | `corpus.db`                                          |
+| Legal Rulings, Notices, Technical Advice Memoranda                | The Franchise Tax Board                                          | No, deferred | Issue #393                                           |
+| Appeal decisions                                                  | The Office of Tax Appeals; the Board of Equalization before 2018 | No, deferred | Issue #393                                           |
+| Audit manuals                                                     | The Franchise Tax Board                                          | No, deferred | Issue #393                                           |
+| Paid research services (Spidell, CCH, Thomson Reuters)            | Private publishers                                               | No           | Their text is not ours to use                        |
 
 The rows from "Legal Rulings" down are **not checked**.
 
@@ -58,12 +58,12 @@ Two live sections were read in full on Cornell: § 17014 (about 1,800 words) and
 
 ## Where the regulations can be read
 
-| Source | Complete and current | Access |
-| --- | --- | --- |
-| Official site, `govt.westlaw.com/calregs` (Thomson Reuters, for the Office of Administrative Law) | Yes, updated weekly | One section per page. Opens in a browser. Refuses automated requests. Its terms of use were not read. |
-| Cornell Legal Information Institute, `law.cornell.edu/regulations/california/title-18/division-3` | Full text with history notes. Updated quarterly; the page shows no date. | Loads for an automated request. No bulk file. |
-| Franchise Tax Board website | Not confirmed | Refuses automated requests. |
-| Internet Archive scan | From 2008 | Too old. |
+| Source                                                                                            | Complete and current                                                     | Access                                                                                                |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| Official site, `govt.westlaw.com/calregs` (Thomson Reuters, for the Office of Administrative Law) | Yes, updated weekly                                                      | One section per page. Opens in a browser. Refuses automated requests. Its terms of use were not read. |
+| Cornell Legal Information Institute, `law.cornell.edu/regulations/california/title-18/division-3` | Full text with history notes. Updated quarterly; the page shows no date. | Loads for an automated request. No bulk file.                                                         |
+| Franchise Tax Board website                                                                       | Not confirmed                                                            | Refuses automated requests.                                                                           |
+| Internet Archive scan                                                                             | From 2008                                                                | Too old.                                                                                              |
 
 Rights:
 
