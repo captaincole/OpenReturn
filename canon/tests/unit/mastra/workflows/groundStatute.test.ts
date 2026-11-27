@@ -11,7 +11,7 @@ import type { GroundInput, GroundStepLog } from "../../../../src/mastra/workflow
  */
 
 const dir = mkdtempSync(path.join(tmpdir(), "canon-ground-statute-test-"));
-process.env.LAW_DB_PATH = path.join(dir, "law.db");
+process.env.LAW_DB_DIR = path.join(dir, "law");
 afterAll(() => rmSync(dir, { recursive: true, force: true }));
 
 const law = vi.hoisted(() => ({
@@ -33,8 +33,8 @@ vi.mock("../../../../src/db/libsql", async (importOriginal) => {
   const actual = await importOriginal<typeof import("../../../../src/db/libsql")>();
   return {
     ...actual,
-    lawInstalled: () =>
-      law.installed === "real" ? actual.lawInstalled() : Promise.resolve(law.installed),
+    lawInstalled: (...args: Parameters<typeof actual.lawInstalled>) =>
+      law.installed === "real" ? actual.lawInstalled(...args) : Promise.resolve(law.installed),
   };
 });
 vi.mock("../../../../src/db/corpusSearch", () => ({
@@ -181,14 +181,14 @@ describe("groundDecision and the statute", () => {
     expect(prompts[3]).toContain(`[${LAW}]`);
   });
 
-  it("skips the search when law.db is not installed, and creates no file", async () => {
+  it("skips the search when no law file is installed, and creates no file", async () => {
     law.installed = "real";
     const prompts: string[] = [];
     const out = await groundDecision(fakeMastra([consult, verdictWith({})], prompts), { decision });
     expect(law.search).not.toHaveBeenCalled();
-    expect(existsSync(process.env.LAW_DB_PATH!)).toBe(false);
+    expect(existsSync(process.env.LAW_DB_DIR!)).toBe(false);
     const statute = out.log.steps.find((step) => step.kind === "statute")!;
-    expect(statute.output).toMatchObject({ skipped: "not_installed" });
+    expect(statute.output).toMatchObject({ skipped: "not_installed", missing: ["federal", "CA"] });
     expect(prompts[1]).toContain("The statute is not available in this review.");
     expect(out.statuteConsulted).toBe(false);
   });

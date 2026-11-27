@@ -5,7 +5,7 @@ import { openLibraryDb, type Library } from "./libsql";
 export type CorpusFormat = "pdf" | "html";
 /**
  * "uslm": the US Code's XML; "ecfr": the regulations' eCFR XML; "caml":
- * California's code (law tables and CAML XML). All in law.db; like "html", no pages.
+ * California's code (law tables and CAML XML). All in the law files; like "html", no pages.
  */
 export type SourceFormat = CorpusFormat | "uslm" | "ecfr" | "caml";
 

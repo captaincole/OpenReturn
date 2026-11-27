@@ -2,14 +2,16 @@ import { asStr, getDocument } from "../db/corpusStore";
 import { openLibraryDb } from "../db/libsql";
 import { versionOfSectionId } from "./caCitation";
 import { citationIn, type LawSource } from "./citation";
+import { lawLibraryOfId, lawLibraryOfSource } from "./lawLibrary";
 import { catchlineOf, lawDocIdOf, sectionNumber } from "./lawRead";
 
 /*
  * The table of contents of the law: one level of the tree at a time, for the
  * web app's law pages. A node is a structure level (a subtitle, a chapter, a
  * part, a subject group), named by its section id without "<docId>::sec::":
- * "sta-ch1-sche-ptii-sptc", "pt1-sgecfr504ddca54174c57". Callers check
- * lawInstalled() first: these open law.db.
+ * "sta-ch1-sche-ptii-sptc", "pt1-sgecfr504ddca54174c57". lawDocIdOf()
+ * returns null for a source whose law file is not installed, so a missing
+ * file is never opened.
  */
 
 /** A structure level: its node and its heading as printed. */
@@ -56,7 +58,7 @@ export const isSectionHeading = (heading: string): boolean => heading.startsWith
 /** null when the library has no such document, or no structure level with that node. */
 export async function readLawToc(source: LawSource, node?: string): Promise<LawToc | null> {
   const docId = await lawDocIdOf(source);
-  const doc = docId ? await getDocument(docId, "law") : null;
+  const doc = docId ? await getDocument(docId, lawLibraryOfSource(source)) : null;
   if (!docId || !doc) return null;
   const sectionId = node ? sectionIdOfNode(docId, node) : null;
   const entry = sectionId ? await structureEntry(docId, sectionId) : null;
@@ -72,7 +74,7 @@ export async function readLawToc(source: LawSource, node?: string): Promise<LawT
 }
 
 async function structureEntry(docId: string, sectionId: string): Promise<LawTocEntry | null> {
-  const db = await openLibraryDb("law");
+  const db = await openLibraryDb(lawLibraryOfId(docId));
   const res = await db.execute({
     sql: `SELECT heading FROM ref_sections WHERE section_id = ? AND doc_id = ?`,
     args: [sectionId, docId],
@@ -87,7 +89,7 @@ async function childrenOf(
   docId: string,
   sectionId: string | null,
 ): Promise<LawTocChild[]> {
-  const db = await openLibraryDb("law");
+  const db = await openLibraryDb(lawLibraryOfId(docId));
   const res = await db.execute({
     sql: `SELECT section_id, heading FROM ref_sections
           WHERE doc_id = ? AND parent_section_id IS ? ORDER BY ordinal`,
@@ -110,7 +112,7 @@ function tocChild(source: LawSource, sectionId: string, heading: string): LawToc
 
 /** The structure levels above a row, outermost first; the row itself is not one. */
 export async function ancestorsOf(sectionId: string): Promise<LawTocEntry[]> {
-  const db = await openLibraryDb("law");
+  const db = await openLibraryDb(lawLibraryOfId(sectionId));
   const res = await db.execute({
     sql: `WITH RECURSIVE up(section_id, heading, parent_section_id, depth) AS (
             SELECT section_id, heading, parent_section_id, 0 FROM ref_sections WHERE section_id = ?

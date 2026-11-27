@@ -21,14 +21,14 @@ The engine fills Form 6478 (Rev. January 2020) for an individual's 2025 return. 
 
 - Text A: "All other taxpayers aren't required to complete or file this form if their only source for this credit is a partnership, S corporation, cooperative, estate, or trust. Instead, they can report this credit directly on the appropriate line of Form 3800" (`irs-6478-inst-2025::sec::general-instructions::b01`). The K-1 code I: "Report this amount on Form 6478, Biofuel Producer Credit, line 3; or Form 3800, Part III, line 4c" (`irs-1065k1-inst-2025::sec::box-15-credits::b05`).
 - Text B: "All other taxpayers: Report the above credits directly on the appropriate line of Form 3800; and Don't file Form 6478" (`irs-6478-inst-2025::sec::line-3::b01`).
-- Decided (DECISION comment above `resolve6478Info`; `docs/rule-decisions.md` row A110): the form does not file unless `decisions.scope.must_file_6478` is true. With the decision, line 3 holds the credits.
+- Decided (DECISION comment above `resolve6478Info`; `docs/rule-decisions.md` row A115): the form does not file unless `decisions.scope.must_file_6478` is true. With the decision, line 3 holds the credits.
 - Dollars: none. Form 3800 line 4c takes the same credit either way.
 
 ### 9. Line 3 rounding with several K-1 amounts in cents
 
 - Text A: line 3 says "Enter the total biofuel producer credits from" the K-1s (`line-3::b01`), and the Form 1040 rule: "include cents when adding the amounts and round off only the total" (`irs-1040-inst-2025::sec::rounding-off-to-whole::b01`).
 - Text B: Form 3800 Part V lists each pass-through amount "by the EIN of the pass-through entity" (`irs-3800-inst-2025::sec::part-v-3::b01`), one whole-dollar amount for each K-1.
-- Decided (DECISION comment above `line3Of` in `lines.ts`; `docs/rule-decisions.md` row A96, the same rule as Forms 8846 and 8586): each K-1 rounds, then they add. Line 4 then equals Form 3800 line 4c.
+- Decided (DECISION comment above `line3Of` in `lines.ts`; `docs/rule-decisions.md` row A96, the same rule as Forms 8846, 8586, 8826 and 8882): each K-1 rounds, then they add. Line 4 then equals Form 3800 line 4c.
 - Blind fill (2026-11-27): the preparer rounded only the total. $600.40 + $1,200.40 gives $1,801 there and $1,800 in the engine; $600.50 + $1,200.50 gives $1,801 there and $1,802 in the engine. At most $1 for each K-1 with cents.
 
 ## Should we do this now

@@ -1,5 +1,6 @@
 import { z } from "zod";
 import type { LawSource } from "./law/citation";
+import { lawSourceOfId } from "./law/lawIds";
 
 /*
  * A jurisdiction is a tax authority whose documents the library holds:
@@ -11,7 +12,8 @@ import type { LawSource } from "./law/citation";
  * new state is one row, and a new publisher must get a row
  * (tests/unit/jurisdiction.test.ts reads every sidecar under sources/).
  *
- * Each jurisdiction also owns its law sources in law.db: lawSources are
+ * Each jurisdiction also owns its law sources, in its own law file
+ * (canon/.data/law/<jurisdiction>.db, the code in lower case): lawSources are
  * what searchLaw searches for it, and statutes are what the statute round
  * of Ask and of the grounding review searches (no regulations: the judges'
  * prompts are written for a statute). Every law sidecar's source must be
@@ -92,6 +94,10 @@ export function jurisdictionOfPublisher(publisher: string): Jurisdiction {
   return jurisdiction;
 }
 
+/** "federal", "California": how a message names a jurisdiction. */
+export const jurisdictionName = (jurisdiction: Jurisdiction): string =>
+  JURISDICTION_TABLE[jurisdiction].name;
+
 export const coversAll = (jurisdictions: readonly Jurisdiction[]): boolean =>
   KNOWN.every((jurisdiction) => jurisdictions.includes(jurisdiction));
 
@@ -138,4 +144,10 @@ export function jurisdictionOfLawSource(source: string): Jurisdiction {
       `Law source "${source}" has no jurisdiction. Add it to JURISDICTION_TABLE in canon/src/jurisdiction.ts.`,
     );
   return jurisdiction;
+}
+
+/** The jurisdiction of a law document or block id ("usc-26-2025::…" is federal); null for a corpus id. */
+export function jurisdictionOfLawId(id: string): Jurisdiction | null {
+  const source = lawSourceOfId(id);
+  return source === null ? null : jurisdictionOfLawSource(source);
 }

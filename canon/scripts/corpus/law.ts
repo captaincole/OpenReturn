@@ -1,13 +1,15 @@
-import { LAW_NOT_INSTALLED, LawNotInstalledError } from "../../src/law/lawRead";
+import { LawNotInstalledError } from "../../src/law/lawRead";
 import type { Command } from "../lib/cli";
 import { lawFetchCommand, lawReembedCommand, lawSyncCommand } from "./lawBuild";
 import { lawExtractCaCommand } from "./lawExtract";
 import { lawCheckCommand, lawReadCommand, lawSearchCommand } from "./lawInspect";
+import { lawSplitCommand } from "./lawSplit";
 
 /*
- * `corpus law <subcommand>`: the same jobs as the corpus commands, on
- * law.db (the Internal Revenue Code, the Treasury regulations and
- * California's personal income tax law). The plain commands never touch it.
+ * `corpus law <subcommand>`: the same jobs as the corpus commands, on the
+ * law files, one per jurisdiction (law/federal.db: the Internal Revenue Code
+ * and the Treasury regulations; law/ca.db: California's tax law). The plain
+ * commands never touch them.
  */
 
 const SUBCOMMANDS: Command[] = [
@@ -18,6 +20,7 @@ const SUBCOMMANDS: Command[] = [
   lawReadCommand,
   lawReembedCommand,
   lawExtractCaCommand,
+  lawSplitCommand,
 ];
 
 async function run(argv: string[]): Promise<void> {
@@ -32,7 +35,7 @@ async function run(argv: string[]): Promise<void> {
     await sub.run(rest);
   } catch (err) {
     if (!(err instanceof LawNotInstalledError)) throw err;
-    console.error(LAW_NOT_INSTALLED);
+    console.error(err.message);
     process.exit(1);
   }
 }
@@ -53,7 +56,7 @@ const usageOf = (command: Command) =>
 export const lawCommand: Command = {
   name: "law",
   summary:
-    "The law library (law.db: the Internal Revenue Code, the regulations, California's code): sync, fetch, check, search, read, reembed, extract-ca",
+    "The law library (one file per jurisdiction: the Internal Revenue Code and the regulations, California's code): sync, fetch, check, search, read, reembed, extract-ca, split",
   usage: "<command>",
   options: SUBCOMMANDS.map((command) => ({ flag: usageOf(command), desc: command.summary })),
   run,

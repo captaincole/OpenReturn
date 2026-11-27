@@ -80,7 +80,7 @@ async function docIdsOf(): Promise<DocIds> {
   ]);
   if (!statute || !regulations || !california)
     throw new Error(
-      "law.db needs the Code, the regulations and California's code: run `npm run corpus -- law sync`",
+      "the law files need the Code, the regulations and California's code: run `npm run corpus -- law fetch` or `npm run corpus -- law sync`",
     );
   return { statute, regulations, california };
 }

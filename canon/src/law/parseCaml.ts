@@ -1,6 +1,7 @@
 import type { ParsedDoc } from "../refdocs/parse";
 import { CA_SCHEME } from "./caDesignators";
-import { lobFileOf } from "./caExtract";
+import { levelOf, lobFileOf } from "./caExtract";
+import { chaptersTaken, partialNote, readScopeFile, SCOPE_FILE, type CaScope } from "./caScope";
 import { caLevelSlug, caTree, withoutRange, type CaNode, type CaSection } from "./caTree";
 import { camlEntries } from "./camlEntries";
 import { layoutRegSection, type Unplaced } from "./ecfrUnits";
@@ -21,6 +22,8 @@ import { squash } from "./uslmText";
  * a row for each, "s17058" and "s17058-v2", and each version's history
  * note is in its heading. California sections have no catchline: a block's
  * search text starts with the headings of the levels above the section.
+ * A part the extract takes by chapters says so in its heading:
+ * "PART 11. CORPORATION TAX LAW (only Chapter 17 is in the library)".
  */
 
 export interface CaStats {
@@ -47,6 +50,8 @@ export interface ParsedCaml extends ParsedDoc {
 interface State extends RowState {
   laidOut: Array<{ info: SectionInfo; root: UnitNode }>;
   lobs: Map<string, string>;
+  /** The extract's scope; null for an extract with no scope file (every part whole). */
+  scope: CaScope | null;
   stats: CaStats;
 }
 
@@ -87,6 +92,7 @@ function newState(docId: string, lobs: Map<string, string>): State {
     sectionIds: new Set(),
     laidOut: [],
     lobs,
+    scope: readScopeFile(lobs.get(SCOPE_FILE)),
     stats: {
       structureRows: 0,
       emptyLevels: 0,
@@ -108,12 +114,19 @@ function walk(node: CaNode, parentId: string | null, above: CaNode[], state: Sta
   }
   const path = [...above, node];
   const slug = slugOf(path.map(caLevelSlug).join("/"));
-  const row = openRow(state, slug, withoutRange(node.heading), parentId);
+  const row = openRow(state, slug, levelHeading(node, state.scope), parentId);
   state.stats.structureRows += 1;
   if (node.sections.length > 0 && node.children.length > 0) state.stats.mixedLevels += 1;
   for (const section of node.sections) addSection(section, row.sectionId, path, state);
   for (const child of node.children) walk(child, row.sectionId, path, state);
   row.charEnd = state.sink.length();
+}
+
+/** The level's heading without its range; a part taken by chapters names them. */
+function levelHeading(node: CaNode, scope: CaScope | null): string {
+  const heading = withoutRange(node.heading);
+  const chapters = levelOf(node.row) === "part" ? chaptersTaken(scope, node.row.part ?? "") : null;
+  return chapters ? `${heading} (${partialNote(chapters)})` : heading;
 }
 
 function addSection(section: CaSection, parentId: string, levels: CaNode[], state: State): void {

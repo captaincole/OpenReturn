@@ -103,26 +103,47 @@ function recaptureColumn(info: ScheduleCaFilingInfo, side: "subtraction" | "addi
 }
 
 /*
- * The Schedule C wages the federal wage credits took off, both credits in one
- * amount (facts/kinds/activitiesOnReturn.ts, wageCreditReduction). Form 5884:
- * "Enter the amount of the federal Work Opportunity Credit that reduced the
- * federal deduction for wages on Schedule CA (540), Part I ... line 3, line 5,
- * or line 6, column B" (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b07);
- * "California has no similar credits." Form 8844: "The provisions of Section
- * 280C(a) of the Internal Revenue Code (relating to rule for employment
- * credits) shall not apply" (ca-rtc-2025::sec::s17270::b). The FTB names no
- * Form 8844 adjustment, so column B gives those wages back the same way (8844
- * QUESTIONS.md item 11). Column B only.
+ * The Schedule C expenses the federal credits took off that California gives
+ * back, all of them in one amount, each dollar once (businessCreditAddBack in
+ * facts/kinds/activitiesOnReturn.ts, whose list marks each credit):
+ * - Form 5884: "Enter the amount of the federal Work Opportunity Credit that
+ *   reduced the federal deduction for wages on Schedule CA (540), Part I ...
+ *   line 3, line 5, or line 6, column B" (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b07);
+ *   "California has no similar credits."
+ * - Form 8844: "The provisions of Section 280C(a) of the Internal Revenue Code
+ *   (relating to rule for employment credits) shall not apply"
+ *   (ca-rtc-2025::sec::s17270::b). The FTB names no Form 8844 adjustment, so
+ *   column B gives those wages back the same way (8844 QUESTIONS.md item 11).
+ * - Form 8826: "California law conforms to this provision, but the maximum
+ *   credit is $125" (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b04):
+ *   no deduction for an amount the California credit (FTB 3548) allows. The
+ *   engine does not file FTB 3548, so no California credit reduces the
+ *   California deduction, and the whole federal reduction comes back
+ *   (federal/8826/QUESTIONS.md).
+ * Column B only.
  */
-const wageCreditColumn = (info: ScheduleCaFilingInfo, side: "subtraction" | "addition") =>
-  side === "subtraction" ? (info.caWageCreditAddBack ?? 0) : 0;
+const businessCreditColumn = (info: ScheduleCaFilingInfo, side: "subtraction" | "addition") =>
+  side === "subtraction" ? (info.caBusinessCreditAddBack ?? 0) : 0;
+
+/*
+ * The federal research credit reduced the Schedule C research expenses
+ * (Form 6765 without the section 280C election). California "requires the
+ * amount of research expenses to be reduced by the amount of the California
+ * credit" (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b05):
+ * the federal expenses go in column C and the California expenses after the
+ * California credit in column B (::b06). The California credit is figured on
+ * FTB 3523, which the engine does not have, so line 3 is a gap.
+ */
+export const CA_RESEARCH_GAP =
+  "The federal research credit (Form 6765 line 28) reduced the Schedule C research expenses, and California reduces them by its own research credit instead (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b05, ::b06); the California credit is figured on form FTB 3523, which the engine does not figure.";
 
 /*
  * Line 3 column B or C: a California employee's profit or loss, plus the FTB
  * 3885A business difference, the Schedule D-1 Part IV difference and, in
- * column B, the wages the federal wage credits took off.
+ * column B, the expenses the federal business credits took off.
  */
 export function line3Column(info: ScheduleCaFilingInfo, side: "subtraction" | "addition") {
+  if (info.caFederalResearchReduction !== undefined) return unsupported(CA_RESEARCH_GAP);
   const employee =
     side === "subtraction" ? info.caEmployeeAmounts?.netProfit : info.caEmployeeAmounts?.netLoss;
   const depreciation = depreciationColumn(info.businessDepreciationAdjustment, side);
@@ -131,7 +152,7 @@ export function line3Column(info: ScheduleCaFilingInfo, side: "subtraction" | "a
   const recapture = recaptureColumn(info, side);
   if (recapture !== undefined && typeof recapture !== "number") return recapture;
   const total =
-    (employee ?? 0) + (depreciation ?? 0) + (recapture ?? 0) + wageCreditColumn(info, side);
+    (employee ?? 0) + (depreciation ?? 0) + (recapture ?? 0) + businessCreditColumn(info, side);
   return positive(total);
 }
 
