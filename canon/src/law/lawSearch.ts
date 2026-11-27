@@ -1,6 +1,6 @@
 import { hybridSearchRefDocs } from "../db/corpusSearch";
 import { asStr } from "../db/corpusStore";
-import { openLibraryDb } from "../db/libsql";
+import { installedLawJurisdictions, openLibraryDb, type LawLibrary } from "../db/libsql";
 import {
   jurisdictionOfLawSource,
   lawSourcesOf,
@@ -8,11 +8,18 @@ import {
   type Jurisdiction,
 } from "../jurisdiction";
 import { parseLawTarget, sourceOfTarget, type LawSource } from "./citation";
-import { CITATION_HINT, lawDocIdOf, requireLaw, sourceOfFormat, targetSectionId } from "./lawRead";
+import { lawLibraryOfSource } from "./lawLibrary";
+import {
+  CITATION_HINT,
+  LawNotInstalledError,
+  lawDocIdOf,
+  sourceOfFormat,
+  targetSectionId,
+} from "./lawRead";
 
 /*
- * Hybrid search of law.db only: the statute, the regulations, California's
- * code, or some of them. The corpus search is the same code with library "law"; this adds
+ * Hybrid search of the law files only: the statute, the regulations, California's
+ * code, or some of them. The corpus search is the same code with a law library; this adds
  * each hit's source and the citation and headings from its block's
  * metadata, which the corpus hit shape does not carry.
  *
@@ -56,16 +63,39 @@ export interface LawHit {
  */
 export const DEFAULT_SOURCES: readonly LawSource[] = ["statute", "regulations"];
 
+/*
+ * A source whose jurisdiction's file is missing is skipped (lawCoverage
+ * names it); when every one is missing, the search throws LawNotInstalledError.
+ */
 export async function searchLaw(opts: LawSearchOpts): Promise<LawHit[]> {
-  const sources = sourcesToSearch(opts);
-  await requireLaw();
+  const wanted = sourcesToSearch(opts);
+  const { installed, missing } = await lawCoverage(wanted);
+  const sources = wanted.filter((source) => installed.includes(jurisdictionOfLawSource(source)));
+  if (sources.length === 0) throw new LawNotInstalledError(missing);
   if (sources.length === 1) return searchSource(opts, sources[0]);
   const lists: LawHit[][] = [];
   for (const one of sources) lists.push(await searchSource(opts, one));
   return takeTurns(lists).slice(0, opts.limit ?? DEFAULT_LIMIT);
 }
 
-/* The sources a search reads. Input errors are thrown before law.db opens. */
+export interface LawCoverage {
+  /** The jurisdictions of the sources whose law file is installed. */
+  installed: Jurisdiction[];
+  /** The others: their sources are not searched. */
+  missing: Jurisdiction[];
+}
+
+/** Which jurisdictions of these sources have their law file installed. Opens no missing file. */
+export async function lawCoverage(sources: readonly LawSource[]): Promise<LawCoverage> {
+  const wanted = [...new Set(sources.map(jurisdictionOfLawSource))];
+  const installed = await installedLawJurisdictions(wanted);
+  return {
+    installed,
+    missing: wanted.filter((jurisdiction) => !installed.includes(jurisdiction)),
+  };
+}
+
+/* The sources a search reads. Input errors are thrown before a law file opens. */
 export function sourcesToSearch(opts: Omit<LawSearchOpts, "query">): LawSource[] {
   const jurisdictions =
     opts.jurisdictions === undefined ? undefined : parseJurisdictions(opts.jurisdictions);
@@ -101,15 +131,19 @@ function takeTurns(lists: LawHit[][]): LawHit[] {
 async function searchSource(opts: LawSearchOpts, source: LawSource): Promise<LawHit[]> {
   const docId = await lawDocIdOf(source);
   if (docId === null) return [];
+  const library = lawLibraryOfSource(source);
   const hits = await hybridSearchRefDocs({
     query: opts.query,
     limit: opts.limit,
     mode: opts.mode,
-    library: "law",
+    library,
     docId,
     blockIdPrefix: opts.section ? await sectionPrefix(opts.section) : undefined,
   });
-  const metadata = await blockMetadata(hits.map((hit) => hit.blockId));
+  const metadata = await blockMetadata(
+    library,
+    hits.map((hit) => hit.blockId),
+  );
   return hits.map((hit) => ({
     blockId: hit.blockId,
     source: sourceOfFormat(hit.format),
@@ -145,9 +179,12 @@ interface HitMetadata {
   headings?: string[];
 }
 
-async function blockMetadata(blockIds: string[]): Promise<Map<string, HitMetadata>> {
+async function blockMetadata(
+  library: LawLibrary,
+  blockIds: string[],
+): Promise<Map<string, HitMetadata>> {
   if (blockIds.length === 0) return new Map();
-  const db = await openLibraryDb("law");
+  const db = await openLibraryDb(library);
   const res = await db.execute({
     sql: `SELECT block_id, metadata_json FROM ref_blocks
           WHERE block_id IN (${blockIds.map(() => "?").join(",")})`,
