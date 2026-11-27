@@ -58,7 +58,7 @@ export interface ScheduleCaFilingInfo
   caInvestmentFees?: number;
   /** Lines 1a, 3, 15 and 17: a contractor who is an employee for California; undefined when not one. */
   caEmployeeAmounts?: CaEmployeeAmounts;
-  /** Line 3 column B: the Schedule C wages the federal Forms 5884 and 8844 credits took off, in total; undefined with none. */
+  /** Line 3 column B: the Schedule C wages the federal Forms 5884 and 8844 credits took off, and the expenses the Form 8820 credit took off, in total; undefined with none. */
   caWageCreditAddBack?: number;
   /** Line 6 column B: the farms' Forms 5884 and 8844 credits and the labor hired they took off Schedule F line 22; undefined with none. */
   caFarmLaborCredits?: { credit: number; reduction: number };

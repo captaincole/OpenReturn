@@ -1,0 +1,129 @@
+/*
+ * Form 8820 from the orphan drug credit fact (facts/kinds/orphanDrugCredit.ts):
+ * lines 1 to 2c, Part II, and the part of line 2a that each Schedule C line of
+ * the business gives up (reduction.ts). The reduction lowers the business's
+ * expenses wherever the business is read (facts/kinds/activitiesOnReturn.ts),
+ * and line 2c is the business's Form 3800 line 1h source (form3800.ts). This
+ * file reads only facts, so the facts layer can call it.
+ */
+
+import { statedBusinessesOnReturn, type BusinessFactValue } from "../../facts/kinds/business.js";
+import { getGeneralBusinessCreditFacts } from "../../facts/kinds/generalBusinessCredit.js";
+import {
+  readOrphanDrugCreditFact,
+  type OrphanDrugCreditFact,
+} from "../../facts/kinds/orphanDrugCredit.js";
+import { roundDollars, sum } from "../../money.js";
+import { creditLines, deductionReductionOf, type CreditLines } from "./lines.js";
+import { placeReduction, type PlacedReduction, type ReducedExpenseLine } from "./reduction.js";
+
+type FactRow = { key: string; value: unknown; category: string };
+
+export interface OrphanDrugFigures {
+  /* The fact, when its business is on this return. */
+  fact?: OrphanDrugCreditFact;
+  business?: BusinessFactValue;
+  /* The fact's shape is wrong: Cade records it again. */
+  malformed: boolean;
+  /* Lines 1 to 2c; undefined while an answer is missing or a gap stops them. */
+  lines?: CreditLines;
+  /* The deduction the credit takes off, by Schedule C line; undefined with the election or no credit. */
+  reduction?: PlacedReduction;
+  /* Why the engine cannot figure the credit or its reduction. */
+  gap?: string;
+  /* Fact keys still waiting on an answer. */
+  missing: string[];
+}
+
+/* Form 3800 Part III line 1w takes Form 8932 (3800/rows.ts). */
+const FORM_8932 = "8932";
+
+/* The return's own Form 8932 credit (a stated credit no pass-through entity allocated); undefined with none. */
+function ownDifferentialWageCredit(facts: ReadonlyArray<FactRow>): number | undefined {
+  const own = getGeneralBusinessCreditFacts(facts).filter(
+    ({ value }) => value.sourceForm === FORM_8932 && value.passThroughEin === undefined,
+  );
+  return own.length === 0 ? undefined : sum(...own.map(({ value }) => value.amount));
+}
+
+/* Why line 2b cannot be placed; undefined when it can. */
+function line2bGap(fact: OrphanDrugCreditFact, credit8932: number | undefined): string | undefined {
+  const stated = fact.value.differentialWageCreditOnSameWages;
+  if (stated === undefined || stated === 0) return undefined;
+  if (credit8932 === undefined) {
+    return "Line 2b is the part of the Form 8932 credit on wages also used for line 2a (irs-8820-form-2025::sec::line-2b::b01), and the return states no Form 8932 credit of its own.";
+  }
+  if (roundDollars(stated) > roundDollars(credit8932)) {
+    return `Line 2b ($${roundDollars(stated)}) is more than the Form 8932 credit the return states ($${roundDollars(credit8932)}), of which it is a part (irs-8820-form-2025::sec::line-2b::b01).`;
+  }
+  return undefined;
+}
+
+/* The answers the fact still waits on: Part II, and line 2b when the return has a Form 8932 credit on wages. */
+function missingOf(fact: OrphanDrugCreditFact, credit8932: number | undefined): string[] {
+  const { value } = fact;
+  const hasExpenses = sum(...Object.values(value.expenses)) > 0;
+  const needsDrugs = hasExpenses && value.drugs.length === 0;
+  const needs2b =
+    credit8932 !== undefined &&
+    (value.expenses.wages ?? 0) > 0 &&
+    value.differentialWageCreditOnSameWages === undefined;
+  return needsDrugs || needs2b ? [fact.key] : [];
+}
+
+const placementGap = (left: number) =>
+  `The Schedule C lines that hold the clinical testing expenses (wages, supplies, machinery rent, contract labor) cannot take $${roundDollars(left)} of the line 2a reduction: each line gives up at most its stated amount and the expenses of its kind (irs-8820-form-2025::sec::line-2a::b02; reduction.ts). Capitalized expenses reduce the capital account instead, which the engine does not figure.`;
+
+/* The figures of the return. A fact for a spouse's business on a separate return is not on this return, like the business. */
+export function orphanDrugFigures(
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): OrphanDrugFigures {
+  const { fact, malformed } = readOrphanDrugCreditFact(facts);
+  if (fact === undefined) return { malformed, missing: [] };
+  const { businesses, spouseKeys } = statedBusinessesOnReturn(facts, joint);
+  if (spouseKeys.includes(fact.value.businessKey)) return { malformed, missing: [] };
+  const business = businesses.find((each) => each.key === fact.value.businessKey)?.value;
+  const base = { fact, business, malformed, missing: [] as string[] };
+  if (business === undefined) {
+    return {
+      ...base,
+      gap: `The orphan drug credit names ${fact.value.businessKey}, which is not a Schedule C business on this return: the credit reduces that business's deduction for the expenses (irs-8820-form-2025::sec::line-2a::b02).`,
+    };
+  }
+  const credit8932 = ownDifferentialWageCredit(facts);
+  const gap = line2bGap(fact, credit8932);
+  if (gap !== undefined) return { ...base, gap };
+  const missing = missingOf(fact, credit8932);
+  if (missing.length > 0) return { ...base, missing };
+  const elected = fact.value.reducedCreditElection;
+  const lines = creditLines(
+    fact.value.expenses,
+    elected,
+    fact.value.differentialWageCreditOnSameWages,
+  );
+  const amount = deductionReductionOf(lines, elected);
+  if (amount === 0) return { ...base, lines };
+  const reduction = placeReduction(business.expenses, amount, fact.value.expenses);
+  if (reduction.left > 0) return { ...base, gap: placementGap(reduction.left) };
+  return { ...base, lines, reduction };
+}
+
+/*
+ * One Schedule C line's part of the reduction, by business key: what
+ * BUSINESS_CREDIT_REDUCTIONS (facts/kinds/activitiesOnReturn.ts) takes off.
+ * Empty while the form waits, has a gap or the election is made.
+ */
+export function orphanDrugReductionOn(
+  line: ReducedExpenseLine,
+): (facts: ReadonlyArray<FactRow>, joint: boolean) => Map<string, number> {
+  return (facts, joint) => {
+    const figures = orphanDrugFigures(facts, joint);
+    const amount = figures.reduction?.byLine[line];
+    const out = new Map<string, number>();
+    if (figures.fact !== undefined && amount !== undefined) {
+      out.set(figures.fact.value.businessKey, amount);
+    }
+    return out;
+  };
+}

@@ -112,7 +112,11 @@ function recaptureColumn(info: ScheduleCaFilingInfo, side: "subtraction" | "addi
  * 280C(a) of the Internal Revenue Code (relating to rule for employment
  * credits) shall not apply" (ca-rtc-2025::sec::s17270::b). The FTB names no
  * Form 8844 adjustment, so column B gives those wages back the same way (8844
- * QUESTIONS.md item 11). Column B only.
+ * QUESTIONS.md item 11). Form 8820: "Enter the amount of the federal Orphan
+ * Drug Credit that reduced the federal deduction for qualified clinical
+ * testing expenses on Schedule CA (540), Part I ... line 3, line 5, or line 6,
+ * column B" (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b08),
+ * on whichever Schedule C lines it lowered. Column B only.
  */
 const wageCreditColumn = (info: ScheduleCaFilingInfo, side: "subtraction" | "addition") =>
   side === "subtraction" ? (info.caWageCreditAddBack ?? 0) : 0;

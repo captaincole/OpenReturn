@@ -7,6 +7,8 @@
  * Form 4562 reports the test as a gap (federal/4562/lines.ts).
  */
 
+import { orphanDrugReductionOn } from "../../federal/8820/figures.js";
+import { REDUCTION_ORDER, type ReducedExpenseLine } from "../../federal/8820/reduction.js";
 import { tipCreditReductions } from "../../federal/8846/figures.js";
 import { atLeast, sum } from "../../money.js";
 import { statedBusinessesOnReturn, type BusinessFactValue } from "./business.js";
@@ -72,7 +74,16 @@ function withRecapture<T extends { key: string; value: BusinessFactValue }>(
   });
 }
 
-type ReducedLine = "wages" | "taxesAndLicenses";
+type ReducedLine = "taxesAndLicenses" | ReducedExpenseLine;
+
+/* The lines a credit can lower, in the order of BusinessExpenses. */
+const REDUCED_LINES: ReadonlyArray<ReducedLine> = [
+  "contractLabor",
+  "rentVehiclesMachinery",
+  "supplies",
+  "taxesAndLicenses",
+  "wages",
+];
 
 interface CreditReduction {
   line: ReducedLine;
@@ -105,6 +116,13 @@ const BUSINESS_CREDIT_REDUCTIONS: ReadonlyArray<CreditReduction> = [
    * the employer taxes before the credit.
    */
   { line: "taxesAndLicenses", creditByBusiness: tipCreditReductions },
+  /*
+   * Form 8820 without the reduced credit election: "reduce your otherwise
+   * allowable deduction for qualified clinical testing expenses by the amount
+   * of the credit" (irs-8820-form-2025::sec::line-2a::b02), placed on the
+   * lines that hold the expenses (federal/8820/reduction.ts).
+   */
+  ...REDUCTION_ORDER.map(({ line }) => ({ line, creditByBusiness: orphanDrugReductionOn(line) })),
 ];
 
 /*
@@ -126,7 +144,7 @@ function withCredits<T extends { key: string; value: BusinessFactValue }>(
     sum(...reductions.filter((each) => each.line === line).map((each) => each.credits.get(key)));
   return businesses.map((business) => {
     const expenses = business.value.expenses;
-    const reduced = (["wages", "taxesAndLicenses"] as const).flatMap((line) => {
+    const reduced = REDUCED_LINES.flatMap((line) => {
       const stated = expenses?.[line];
       const credit = creditOf(business.key, line);
       return stated === undefined || credit === 0
@@ -140,19 +158,26 @@ function withCredits<T extends { key: string; value: BusinessFactValue }>(
 }
 
 /*
- * The Schedule C wages the work opportunity and empowerment zone credits take
- * off, in total over the return's businesses: what Schedule CA line 3 column B
- * gives back (state/ca/schedule-ca/answerLines.ts).
+ * The Schedule C expenses the federal credits take off that California gives
+ * back, in total over the return's businesses: what Schedule CA line 3 column
+ * B adds (state/ca/schedule-ca/answerLines.ts). These are the wages of the work
+ * opportunity and empowerment zone credits, and every line the orphan drug
+ * credit lowers (wages, supplies, machinery rent, contract labor). Form 8846's
+ * line 23 reduction is not given back.
  */
+const GIVEN_BACK_LINES = REDUCED_LINES.filter((line) => line !== "taxesAndLicenses");
+
 export function wageCreditReduction(facts: ReadonlyArray<FactRow>, joint: boolean): number {
   const stated = statedBusinessesOnReturn(facts, joint).businesses;
   const reduced = withCredits(stated, facts, joint);
-  return sum(
-    ...stated.map(
-      (business, index) =>
-        sum(business.value.expenses?.wages) - sum(reduced[index].value.expenses?.wages),
-    ),
-  );
+  const lowered = (line: ReducedLine) =>
+    sum(
+      ...stated.map(
+        (business, index) =>
+          sum(business.value.expenses?.[line]) - sum(reduced[index].value.expenses?.[line]),
+      ),
+    );
+  return sum(...GIVEN_BACK_LINES.map(lowered));
 }
 
 /*

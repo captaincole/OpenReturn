@@ -185,6 +185,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "its Medicare-only tips are missing",
   ],
   [
+    /^orphan_drug_credit$/,
+    "the fact is the whole orphan drug credit of the taxpayer's own business (Form 8820 lines 1 " +
+      "to 2b and Part II); whether the business paid for clinical testing of an orphan drug is " +
+      "Cade's question. Form 8820 lists the fact again while Part II or line 2b is missing",
+  ],
+  [
     /^section_965\.(inclusion|other_liability|s_corporation|deferred)\.[^.]+$/,
     "each fact is one whole line of last year's Form 965-A (Part I with its Part II line, a " +
       "Part III row or a Part IV row); whether one exists is Cade's question. Form 965-A lists " +
