@@ -1,0 +1,87 @@
+{
+  "formId": "form-8846",
+  "fieldCount": 9,
+  "entries": [
+    {
+      "fieldId": "form-8846.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-1LZFH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8846.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-13VAZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8846.0.line.1_tips_received_by_employees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "9,297"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8846.0.line.2_tips_not_subject_to_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "2,609"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8846.0.line.3_subtract_2_from_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "7,695"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8846.0.line.4_multiply_3_by_7_65_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "7,827"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8846.0.line.4_wages_exceeded_limit_check",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line4_ReadOrder[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8846.0.line.5_credit_from_partnerships_s_corps",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "5,200"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8846.0.line.6_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "7,126"
+        }
+      ]
+    }
+  ]
+}

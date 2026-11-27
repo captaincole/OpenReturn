@@ -1,0 +1,186 @@
+{
+  "formId": "form-8882",
+  "fieldCount": 20,
+  "entries": [
+    {
+      "fieldId": "form-8882.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t2[0]",
+          "text": "T-1KTE5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8882.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t1[0]",
+          "text": "T-14E8C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8882.0.line.1_qualified_childcare_facility_expenditures_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t4[0]",
+          "text": "965"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8882.0.line.1_qualified_childcare_facility_expenditures_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t3[0]",
+          "text": "9,227"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8882.0.line.2_multiply_1_by_25_percent_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t6[0]",
+          "text": "848"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8882.0.line.2_multiply_1_by_25_percent_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t5[0]",
+          "text": "4,765"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8882.0.line.3_resource_referral_expenditures_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t8[0]",
+          "text": "710"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8882.0.line.3_resource_referral_expenditures_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t7[0]",
+          "text": "2,255"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8882.0.line.4_multiply_3_by_10_percent_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t10[0]",
+          "text": "758"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8882.0.line.4_multiply_3_by_10_percent_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t9[0]",
+          "text": "2,255"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8882.0.line.5_credit_from_pass_through_entities_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t12[0]",
+          "text": "992"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8882.0.line.5_credit_from_pass_through_entities_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t11[0]",
+          "text": "1,842"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8882.0.line.6_add_lines_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t14[0]",
+          "text": "105"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8882.0.line.6_add_lines_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t13[0]",
+          "text": "4,976"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8882.0.line.7_smaller_of_6_or_150000_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t16[0]",
+          "text": "019"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8882.0.line.7_smaller_of_6_or_150000_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t15[0]",
+          "text": "1,841"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8882.0.line.8_allocated_to_beneficiaries_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t18[0]",
+          "text": "191"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8882.0.line.8_allocated_to_beneficiaries_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t17[0]",
+          "text": "6,562"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8882.0.line.9_subtract_8_from_7_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t20[0]",
+          "text": "702"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8882.0.line.9_subtract_8_from_7_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].p1-t19[0]",
+          "text": "4,485"
+        }
+      ]
+    }
+  ]
+}
