@@ -3,6 +3,7 @@
 import { defineForm } from "../../defineForm.js";
 import { roundDollars, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
+import { selfEmploymentDeductionGap } from "../4563/receivers.js";
 import { form4797Files, scheduleOneLine4 } from "../4797/receivers.js";
 import { selfEmployedHealthDeduction } from "../7206/results.js";
 import { files8853, form8853Total } from "../8853/results.js";
@@ -56,10 +57,15 @@ export function register(): void {
         const line41 = form["schedule-e.1.line.41_total_income_or_loss"];
         return typeof line41 === "number" ? line41 : undefined;
       },
-      // MANUAL EDIT: line 15 = Schedule SE line 13; blank when Schedule SE is not filed.
-      "1.line.15": (form) => {
+      /*
+       * MANUAL EDIT: line 15 = Schedule SE line 13; blank when Schedule SE is not filed.
+       * A gap when Form 4563 excludes self-employment income next to it (federal/4563/receivers.ts).
+       */
+      "1.line.15": (form, info) => {
         const line13 = form["schedule-se.0.line.13"];
-        return typeof line13 === "number" ? line13 : undefined;
+        return (
+          selfEmploymentDeductionGap(info) ?? (typeof line13 === "number" ? line13 : undefined)
+        );
       },
       // MANUAL EDIT: lines 2a, 2b, 8h, 8i, 8k, 8z, 16, 19a–20 and 24a–24i from the answers (answerBindings.ts).
       ...answerBindings(),

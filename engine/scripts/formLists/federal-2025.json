@@ -106,7 +106,8 @@
     {
       "name": "Form 1040 Schedule J",
       "title": "Income Averaging for Farmers and Fishermen",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "schedule-j"
     },
     {
       "name": "Form 1040 Schedule LEP",
@@ -258,7 +259,8 @@
     {
       "name": "Form 2210F",
       "title": "Underpayment of Estimated Tax By Farmers and Fishermen",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "2210-f"
     },
     {
       "name": "Form 2350",
@@ -624,7 +626,8 @@
     {
       "name": "Form 8332",
       "title": "Release/Revocation of Release of Claim to Exemption for Child by Custodial Parent",
-      "maxPerReturn": "100"
+      "maxPerReturn": "100",
+      "short": "8332"
     },
     {
       "name": "Form 8379",
@@ -766,7 +769,8 @@
     {
       "name": "Form 8833",
       "title": "Treaty-Based Return Position Disclosure Under Section 6114 or 7701(b)",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "8833"
     },
     {
       "name": "Form 8834",
@@ -848,7 +852,8 @@
     {
       "name": "Form 8862",
       "title": "Information To Claim Earned Income Credit After Disallowance",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "8862"
     },
     {
       "name": "Form 8863",

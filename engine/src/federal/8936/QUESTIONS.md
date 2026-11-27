@@ -88,7 +88,8 @@ The blind doubts that change a dollar amount, and what settles each:
 | --- | --- |
 | Header (name, SSN) | stated rule |
 | Part I lines 1a, 1b, 2, 3a–3e, 4, 5 | stated rule; the change-in-status rule has a published example (`lines-1a-and-3a::b03`) |
-| Lines 1c, 1d, 1e | unsupported while Form 2555 or 4563 files (no rules); blank otherwise |
+| Lines 1c, 1d | unsupported while Form 2555 files; blank otherwise |
+| Line 1e | Form 4563 line 15, every copy; blank without the form |
 | Part II lines 6, 8 | stated rule (line 10's partial-year rule has a published example, `line-10::b02`); line 6 at 0 is own reading (3) |
 | Lines 7, 20 | own reading (4) |
 | Part III lines 9–13 | stated rule; "6I" is own reading (2) |

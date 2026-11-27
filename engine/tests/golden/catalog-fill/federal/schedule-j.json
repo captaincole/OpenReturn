@@ -1,0 +1,249 @@
+{
+  "formId": "schedule-j",
+  "fieldCount": 27,
+  "entries": [
+    {
+      "fieldId": "schedule-j.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-1B8I1"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.line.1_taxable_income_2025",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "2,261"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.line.10_amount_from_line6",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "1,249"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.line.11_combined_income_2023",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "9,695"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.line.12_tax_on_line11_2023",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "3,956"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.line.13_base_year_income_2024",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "5,493"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.line.14_amount_from_line6",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "4,480"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.line.15_combined_income_2024",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "5,738"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.line.16_tax_on_line15_2024",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "7,357"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.line.17_total_base_year_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "1,996"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.line.2a_elected_farm_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "1,085"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.line.2b_net_capital_gain_included",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "5,228"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.line.2c_unrecaptured_1250_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "2,956"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.line.3_income_less_elected_farm",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "5,836"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.line.4_tax_on_line3_2025",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "7,702"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.line.5_base_year_income_2022",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "1,549"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.line.6_one_third_farm_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "7,882"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.line.7_combined_income_2022",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "7,387"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.line.8_tax_on_line7_2022",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "6,232"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.0.line.9_base_year_income_2023",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "3,839"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.1.line.18_amount_from_line_17",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+          "text": "9,434"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.1.line.19_base_year_2022_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+          "text": "1,073"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.1.line.20_base_year_2023_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+          "text": "8,628"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.1.line.21_base_year_2024_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+          "text": "5,940"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.1.line.22_add_lines_19_through_21",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+          "text": "9,178"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-j.1.line.23_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+          "text": "5,476"
+        }
+      ]
+    }
+  ]
+}

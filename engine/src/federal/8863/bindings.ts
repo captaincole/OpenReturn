@@ -65,7 +65,7 @@ const partIBindings: Record<string, Fn> = {
       ? info.form8863.line1
       : undefined,
   "0.line.2_filing_status_limit": statusLimit("I"),
-  // MANUAL EDIT: line-3::b01: Form 1040 line 11b; Form 2555 or 4563 is a gap (credit.ts).
+  // MANUAL EDIT: line-3::b01: Form 1040 line 11b plus Form 4563 line 15; Form 2555 is a gap (credit.ts).
   "0.line.3_modified_agi": partI((lines) => lines.magi),
   // MANUAL EDIT: zero or less prints 0 and stops the part.
   "0.line.4_limit_minus_agi": partI((lines) => lines.room),

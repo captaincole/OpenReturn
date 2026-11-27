@@ -1,0 +1,375 @@
+{
+  "formId": "form-8833",
+  "fieldCount": 41,
+  "entries": [
+    {
+      "fieldId": "form-8833.0.header.address_country_of_residence",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "T-3I1K5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.header.address_united_states",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "T-LMW1X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.header.disclosing_under_section_6114",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].BulletedList1[0].Bullet1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.header.dual_resident_disclosing_under_7701b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].BulletedList1[0].Bullet2[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.header.reference_id_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-1NTWK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-1Q34G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.header.us_citizen_or_resident",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.header.us_taxpayer_id_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.1a_treaty_country",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines1-2_ReadOrder[0].f1_6[0]",
+          "text": "T-DWEVG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.1b_treaty_articles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines1-2_ReadOrder[0].f1_7[0]",
+          "text": "T-3SU2S"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.2_code_provisions_overruled",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "T-MYWN8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.3_us_payor_name_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "T-12S1I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.4_limitation_on_benefits_provisions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "T-13C42"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.5_6114_1b_subsections",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "T-UG8QD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.5_reporting_required_6114_1b_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.5_reporting_required_6114_1b_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "T-C0XI2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_10",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "T-GV0SP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_11",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "T-QYFN2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_12",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "T-M5DT2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_13",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "T-YQU1N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_14",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "T-HHSZN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_15",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+          "text": "T-1PRH6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_16",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+          "text": "T-1T36J"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_17",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+          "text": "T-1LD3I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_18",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+          "text": "T-CBQB8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_19",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+          "text": "T-1AHVF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "T-1UHPN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_20",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+          "text": "T-1PJH8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_21",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+          "text": "T-DEHEG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_22",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+          "text": "T-EVGMC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_23",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+          "text": "T-UQ2Z8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_24",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_35[0]",
+          "text": "T-4MSYF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_25",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_36[0]",
+          "text": "T-YRXDC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "T-15N2Q"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "T-15JQL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_5",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "T-DIAVD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_6",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "T-1B1E6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_7",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "T-CX7M9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_8",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "T-ZPQB7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8833.0.line.6_treaty_position_explanation_row_9",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "T-1T4YW"
+        }
+      ]
+    }
+  ]
+}

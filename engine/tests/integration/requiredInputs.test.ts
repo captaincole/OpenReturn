@@ -119,6 +119,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "(the test, line 44's self-employment answer) is missing",
   ],
   [
+    /^american_samoa_exclusion\.(taxpayer|spouse)$/,
+    "each fact is a whole person's Form 4563 (Parts I and II); whether the person is a bona " +
+      "fide resident of American Samoa with income to exclude is Cade's question. Form 4563 " +
+      "lists the fact again while an answer inside it (Part I) is missing",
+  ],
+  [
     /^retirement\.qualified_disaster\.[^.]+$/,
     "each fact is a whole Form 8915-F (one person, one year in which the disasters began); " +
       "whether the taxpayer had a qualified disaster distribution, income spread from an earlier " +
@@ -149,6 +155,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
   [
     /^armed_forces_move\.[^.]+$/,
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
+  ],
+  [
+    /^section_965\.(inclusion|other_liability|s_corporation|deferred)\.[^.]+$/,
+    "each fact is one whole line of last year's Form 965-A (Part I with its Part II line, a " +
+      "Part III row or a Part IV row); whether one exists is Cade's question. Form 965-A lists " +
+      "a Part III year's Part I line, and a triggered liability whose amount or election is missing",
   ],
   [
     /^low_income_housing_recapture\.[^.]+$/,
@@ -387,6 +399,18 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole electing entity's PTE elective tax credit (FTB 3804-CR Part I, one " +
       "row); whether the taxpayer has one is Cade's question. FTB 3804-CR lists the fact again " +
       "while an answer inside it (name, number, credit) is missing",
+  ],
+  [
+    /^ca_prison_inmate_labor_pass_through\.[^.]+$/,
+    "each fact is a whole entity's pass-through prison inmate labor credit (FTB 3507 line 3, " +
+      "one K-1); whether the taxpayer has one is Cade's question. FTB 3507 lists the fact again " +
+      "while an answer inside it (name, number, credit) is missing",
+  ],
+  [
+    /^ca_film_credit\.[^.]+$/,
+    "each fact is one whole California Film Commission credit certificate (one FTB 3541); " +
+      "whether the taxpayer has one is Cade's question. FTB 3541 lists the fact again while an " +
+      "answer inside it (number, year, copyright number, source, amounts, owner, price) is missing",
   ],
   [
     /^ca_passive_credit\.[^.]+$/,
