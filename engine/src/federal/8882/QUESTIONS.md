@@ -31,6 +31,12 @@ Form 8882 gives an employer a credit for childcare it provides to employees: 25%
 - Source: "For credits entered on line 5, only the pass-through entity is required to make this reduction" (page-2::b01).
 - Default: with line 5 above 0 and line 6 over $150,000, the own share of line 7 is less than lines 2 and 4. The facts layer lowers the deductions before it can read the K-1s, so Form 3800 line 1k is a gap (`form3800.ts`). Lines 1 to 7 print. Changes dollars: the gap only.
 
+## 5a. Rounding of line 5 with K-1 credits that show cents
+
+- Source: the Form 1040 instructions: "include cents when adding the amounts and round off only the total" (`irs-1040-inst-2025::sec::rounding-off-to-whole::b01`); the Form 3800 instructions break line 1k down "by the EIN of the pass-through entity" in Part V (`irs-3800-inst-2025::sec::part-v-3::b01`), one amount for each.
+- Default: each K-1 credit rounds, then they add, so line 7 equals Form 3800 line 1k (DECISION in `resolveInfo.ts`, docs/rule-decisions.md A104, the same rule as A96 for Form 8846). Changes dollars: at most $1 for each K-1 with cents.
+- The blind fill read the 1040 sentence: $600.40 and $1,200.40 give line 5 = $1,801, where the engine gives $1,800 (blind case 12). Neither text settles it; a person may decide for both forms at once.
+
 ## 6. Where the reduction is taken
 
 - Source: page-2::b01, and Form 4562 column (c): "subtract any credits ... Credit for employer-provided childcare facilities and services" (`irs-4562-inst-2025::sec::section-b::b08`, `::b09`).
@@ -65,6 +71,12 @@ Form 8882 gives an employer a credit for childcare it provides to employees: 25%
 - **California (item 8).** Add the reductions to Schedule CA line 3 column B and the FTB 3885A basis, if a person agrees California allows the full deduction.
 - **A farm (item 9).** Take the share off a Schedule F expense line, the same way as Schedule C.
 
+## Second opinions
+
+- **Blind fill (2026-11-27).** 14 cases filled by hand from the blank form and the instructions. All lines agree except case 12, line 5 to 7 ($1 on the rounding of two K-1 credits with cents; item 5a). The engine keeps its decision.
+- **PolicyEngine-US 2.154.1** (commit 0fbed6dd, 2026-11-26). It does not model this credit: `general_business_credit` is a bare input with no formula and no section 45F parameters. Nothing to compare.
+- **IRS Direct File.** It has no business credits; Form 8882 is out of its scope. Nothing to compare.
+
 ## Confidence by field group
 
 | Field group | Confidence |
@@ -72,7 +84,7 @@ Form 8882 gives an employer a credit for childcare it provides to employees: 25%
 | Header | stated rule (the same as Form 8846) |
 | Lines 1, 2 | published example with numbers (CRS IF12379) |
 | Lines 3, 4 | stated rule |
-| Line 5 | stated rule; rounding by decision (A96) |
+| Line 5 | stated rule; rounding by decision (A104, as A96) |
 | Line 6 | stated rule |
 | Line 7 | published example with numbers (the $150,000 limit) |
 | Lines 8, 9 | stated rule (estates and trusts only) |
