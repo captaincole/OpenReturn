@@ -61,6 +61,7 @@ export * from "./kinds/educationSavingsBonds.js";
 export * from "./kinds/educatorExpenses.js";
 export * from "./kinds/elderlyOrDisabledCredit.js";
 export * from "./kinds/employeeBusinessExpenses.js";
+export * from "./kinds/empowermentZone.js";
 export * from "./kinds/estimatedTax.js";
 export * from "./kinds/farm.js";
 export * from "./kinds/farmerEstimatedTax.js";

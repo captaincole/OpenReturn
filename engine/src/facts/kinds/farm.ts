@@ -10,7 +10,9 @@
  * prints them in Part I (cash) or Part III (accrual).
  */
 
+import { sum } from "../../money.js";
 import { isAtRiskAmounts, type AtRiskAmounts } from "./atRisk.js";
+import { empowermentZoneFigures } from "./empowermentZone.js";
 
 type FactRow = { key: string; value: unknown; category: string };
 
@@ -145,7 +147,11 @@ export interface FarmFactValue {
   expenses?: FarmExpenses;
   vehicles?: FarmVehicle[];
   conservation?: FarmConservation;
-  /* Line 22: the credits of Forms 5884, 8844, 8932 and 8994 for the farm's labor. */
+  /*
+   * Line 22: the credits of Forms 5884, 8844, 8932 and 8994 for the farm's
+   * labor. Not the Form 8844 credit of an empowerment zone employee fact:
+   * farmsOnReturn adds that one (empowermentZone.ts).
+   */
   employmentCredits?: number;
   /* Line 15: the Form 8941 credit for the farm's employee health insurance. */
   smallEmployerHealthCredit?: number;
@@ -279,6 +285,26 @@ export function farmOwnerOf(farm: FarmFactValue): FarmOwner {
 }
 
 /*
+ * Line 22: labor hired reduced by "Form 8844, Empowerment Zone Employment
+ * Credit" (irs-1040sf-inst-2025::sec::line-22::b01), the farm's share of Form
+ * 8844 line 2, added to the credits the farm states.
+ */
+function withZoneCredit(
+  farms: Array<{ key: string; value: FarmFactValue }>,
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): Array<{ key: string; value: FarmFactValue }> {
+  const credits = empowermentZoneFigures(facts, joint).creditByEmployer;
+  if (credits.size === 0) return farms;
+  return farms.map((farm) => {
+    const credit = credits.get(farm.key);
+    if (credit === undefined || credit === 0) return farm;
+    const employmentCredits = sum(farm.value.employmentCredits, credit);
+    return { ...farm, value: { ...farm.value, employmentCredits } };
+  });
+}
+
+/*
  * The farms on this return. Filing jointly, every farm. On any other status,
  * only the taxpayer's: a spouse's farm is on the spouse's return, and its key
  * is in spouseKeys so a form can wait on it. A malformed fact is listed.
@@ -298,7 +324,11 @@ export function farmsOnReturn(
   const offReturn = (farm: { value: FarmFactValue }) =>
     !joint && farmOwnerOf(farm.value) === "spouse";
   return {
-    farms: farms.filter((farm) => !offReturn(farm)),
+    farms: withZoneCredit(
+      farms.filter((farm) => !offReturn(farm)),
+      facts,
+      joint,
+    ),
     spouseKeys: farms.filter(offReturn).map((farm) => farm.key),
     malformedKeys: rows.filter((row) => !isFarm(row.value)).map((row) => row.key),
   };

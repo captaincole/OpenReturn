@@ -7,9 +7,10 @@
  * Form 4562 reports the test as a gap (federal/4562/lines.ts).
  */
 
-import { sum } from "../../money.js";
+import { atLeast, sum } from "../../money.js";
 import { statedBusinessesOnReturn, type BusinessFactValue } from "./business.js";
 import { placesPersonalProperty, type ScopedDepreciation } from "./depreciation.js";
+import { empowermentZoneFigures } from "./empowermentZone.js";
 import { statedRentalsOnReturn, type RentalFactValue } from "./rental.js";
 import { section179RecaptureByBusiness } from "./section179Recapture.js";
 
@@ -69,11 +70,35 @@ function withRecapture<T extends { key: string; value: BusinessFactValue }>(
   });
 }
 
-/* statedBusinessesOnReturn, with the return's depreciation scope and its Form 4797 Part IV recapture. */
+/*
+ * Schedule C line 26: "the total salaries and wages for the tax year reduced
+ * by the amount of the following credit(s) ... Empowerment Zone Employment
+ * Credit (Form 8844)" (irs-1040sc-inst-2025::sec::line-26::b01), the business's
+ * share of Form 8844 line 2. Not a credit from a pass-through entity ("Do not
+ * reduce your deduction for any portion of a credit that was passed through").
+ */
+function withZoneCredit<T extends { key: string; value: BusinessFactValue }>(
+  businesses: T[],
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): T[] {
+  const credits = empowermentZoneFigures(facts, joint).creditByEmployer;
+  if (credits.size === 0) return businesses;
+  return businesses.map((business) => {
+    const credit = credits.get(business.key);
+    const expenses = business.value.expenses;
+    if (credit === undefined || credit === 0) return business;
+    const wages = atLeast(0, sum(expenses?.wages) - credit);
+    return { ...business, value: { ...business.value, expenses: { ...expenses, wages } } };
+  });
+}
+
+/* statedBusinessesOnReturn, with the return's depreciation scope, its Form 4797 Part IV recapture and its Form 8844 credit. */
 export function businessesOnReturn(facts: ReadonlyArray<FactRow>, joint: boolean) {
   const result = statedBusinessesOnReturn(facts, joint);
   const shared = activitiesWithPersonalProperty(facts, joint) >= SHARED_TEST_MINIMUM;
-  return { ...result, businesses: withRecapture(marked(result.businesses, shared), facts) };
+  const businesses = withRecapture(marked(result.businesses, shared), facts);
+  return { ...result, businesses: withZoneCredit(businesses, facts, joint) };
 }
 
 /* statedRentalsOnReturn, with the return's depreciation scope. */

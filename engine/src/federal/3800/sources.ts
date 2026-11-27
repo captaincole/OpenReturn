@@ -15,6 +15,7 @@ import {
 } from "../../facts/index.js";
 import { roundDollars } from "../../money.js";
 import type { ResolverInputs } from "../../resolverInputs.js";
+import { withForm8844 } from "../8844/sources.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
 import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
 import { gap, type Cell } from "./cells.js";
@@ -188,7 +189,10 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
     ...stated.filter(missingResearch).map((source) => source.credit.key),
     ...k1.flatMap((found) => found.missing),
   ];
-  const current = [...stated, ...k1.flatMap((found) => (found.source ? [found.source] : []))];
+  const current = withForm8844(inputs, [
+    ...stated,
+    ...k1.flatMap((found) => (found.source ? [found.source] : [])),
+  ]);
   const carryovers = getCreditCarryoverFacts(inputs.facts).map(carryoverOf);
   return { sources: { current, carryovers }, missing: [...new Set(missing)] };
 }
