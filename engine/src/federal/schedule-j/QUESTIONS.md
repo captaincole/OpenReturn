@@ -15,12 +15,12 @@ question number.
    net capital gain; lines 8, 12 and 16 give a third of line 2b to each base
    year (line-8::b01). Decided: the 2025 worksheet takes line 2b off the net
    capital gain (and line 2c off Schedule D line 19). DECISION in `form.ts`,
-   row A78. Changes dollars: yes, much (adine: $3,821 against $983).
+   row A93. Changes dollars: yes, much (adine: $3,821 against $983).
 
 - **Question 14. Lines 11 and 15 against the instructions' example.** Source: the face,
    "Combine lines 9 and 10. If less than zero, enter as a negative amount"; the
    example enters −$6,200 for −12,400 + 6,000 (line-3-2::b02). Decided: the
-   form's arithmetic, −$6,400. DECISION in `lines.ts`, row A79. Changes
+   form's arithmetic, −$6,400. DECISION in `lines.ts`, row A94. Changes
    dollars: not in 2025; $200 of base income carried to a 2026 Schedule J.
 
 ## Should we do this now

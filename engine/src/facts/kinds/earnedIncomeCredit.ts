@@ -21,7 +21,10 @@ export const EIC_KEYS = {
   claimableAsDependent: "eic.claimable_as_dependent",
   /*
    * Form 8862: the EIC was denied or reduced in a year after 1996 for a reason
-   * other than a math or clerical error. The return then needs Form 8862.
+   * other than a math or clerical error, and was not allowed again since on a
+   * return with Form 8862 (irs-8862-inst-2025::sec::general-instructions::b02:
+   * a credit allowed again and not denied since needs no Form 8862). The
+   * return then needs Form 8862.
    */
   deniedInEarlierYear: "eic.denied_in_earlier_year",
   /* An IRS notice bars the credit this year (the 2- or 10-year ban for reckless or fraudulent claims). */

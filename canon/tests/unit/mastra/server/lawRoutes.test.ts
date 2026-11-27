@@ -14,6 +14,7 @@ const { writeDocument } = await import("../../../../src/db/corpusStore.js");
 const { lawPayload } = await import("../../../../src/law/ingestLaw.js");
 const { parseUslmTitle } = await import("../../../../src/law/parseUslm.js");
 const { parsedRegulations, REG_ENTRY } = await import("../../law/regFixture.js");
+const { CA_ENTRY, parsedCalifornia } = await import("../../law/caFixture.js");
 const { lawSectionRoute, lawStatusRoute, lawTocNodeRoute, lawTocRoute } =
   await import("../../../../src/mastra/server/routes/law.js");
 
@@ -60,6 +61,7 @@ async function installLaw(): Promise<void> {
   };
   await writeDocument(lawPayload(entry, parsed), "law");
   await writeDocument(lawPayload(REG_ENTRY, parsedRegulations()), "law");
+  await writeDocument(lawPayload(CA_ENTRY, parsedCalifornia()), "law");
 }
 
 describe("the law routes without law.db", () => {
@@ -101,6 +103,13 @@ describe("the law routes with law.db", () => {
             title: REG_ENTRY.sidecar.title,
             published: null,
             sections: 2,
+          },
+          {
+            docId: "ca-rtc-2025",
+            source: "california",
+            title: CA_ENTRY.sidecar.title,
+            published: "2026-11-22",
+            sections: 7,
           },
         ],
       },
@@ -168,6 +177,30 @@ describe("the law routes with law.db", () => {
         citation: "26 CFR § 1.469-5T(a)(1)",
       });
     }
+  });
+
+  it("return a California section by its page name, and every version of a number", async () => {
+    const { status, body } = await getJson("/app/law/sections/CA-17014");
+    expect(status).toBe(200);
+    expect(body).toMatchObject({
+      source: "california",
+      section: {
+        number: "17014",
+        citation: "Cal. Rev. & Tax. Code § 17014",
+        breadcrumbs: [
+          { node: "div2", heading: "DIVISION 2. OTHER TAXES" },
+          { node: "div2-pt10", heading: "PART 10. PERSONAL INCOME TAX" },
+          { node: "div2-pt10-ch1", heading: "CHAPTER 1. General Provisions and Definitions" },
+        ],
+      },
+      versions: [],
+    });
+    const versions = await getJson(`/app/law/sections/${encodeURIComponent("CA-17552.3")}`);
+    expect(versions.body.versions).toEqual([
+      expect.objectContaining({ version: 1, firstBlockId: "ca-rtc-2025::sec::s17552.3::a" }),
+      expect.objectContaining({ version: 2, firstBlockId: "ca-rtc-2025::sec::s17552.3-v2::a" }),
+    ]);
+    expect((await getJson("/app/law/sections/17552.3")).status).toBe(404);
   });
 
   it("answer 404 with a plain message for a section the library does not hold", async () => {
@@ -243,6 +276,20 @@ describe("the law contents route", () => {
         { kind: "section", number: "1.408A-4", citation: "26 CFR § 1.408A-4" },
       ],
     });
+  });
+
+  it("walks California's code from its division to an article, each version a row", async () => {
+    const top = await getJson("/app/law/toc/california");
+    expect(top.body).toMatchObject({
+      source: "california",
+      docId: "ca-rtc-2025",
+      children: [{ kind: "group", node: "div2", heading: "DIVISION 2. OTHER TAXES" }],
+    });
+    const chapter = await getJson("/app/law/toc/california/div2-pt10-ch6");
+    expect(chapter.body.children).toEqual([
+      expect.objectContaining({ kind: "section", number: "17552.3", version: 1 }),
+      expect.objectContaining({ kind: "section", number: "17552.3", version: 2 }),
+    ]);
   });
 
   it("answers 404 for an unknown library, an unknown node, or a section", async () => {

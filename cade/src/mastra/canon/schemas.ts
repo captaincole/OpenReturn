@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { jurisdictionSchema } from "./jurisdictions";
 
 /*
  * Cade's copy of Canon's MCP contract, so an unexpected change on Canon's side
@@ -70,6 +71,8 @@ export const askResultSchema = z.object({
   statutePassages: z.array(statutePassageSchema).default([]),
   statuteConsulted: z.boolean().default(false),
   conflicts: z.array(conflictSchema).default([]),
+  // The jurisdictions searched. Optional: a Canon from before the list sends none.
+  jurisdictions: z.array(jurisdictionSchema).optional(),
   log: z.object({ steps: z.array(z.record(z.string(), z.unknown())) }),
 });
 export type AskResult = z.infer<typeof askResultSchema>;
@@ -105,6 +108,8 @@ export const groundInputSchema = z.object({
   decision: groundDecisionSchema,
   facts: z.array(taxFactSnapshotSchema),
   maxIterations: z.number().int().optional(),
+  /** The jurisdictions to search; Canon searches all of them when unset. */
+  jurisdictions: z.array(jurisdictionSchema).min(1).optional(),
 });
 export type GroundInput = z.infer<typeof groundInputSchema>;
 
@@ -131,6 +136,8 @@ export const groundResultSchema = z.object({
   whatsMissing: z.string().optional(),
   conflicts: z.array(conflictSchema).default([]),
   statuteConsulted: z.boolean().default(false),
+  // The jurisdictions searched. Optional: a Canon from before the list sends none.
+  jurisdictions: z.array(jurisdictionSchema).optional(),
   log: z.object({ steps: z.array(groundStepLogSchema) }),
 });
 export type GroundResult = z.infer<typeof groundResultSchema>;

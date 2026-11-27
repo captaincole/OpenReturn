@@ -124,7 +124,9 @@ describe("answerQuestion and the statute", () => {
       statuteQueries: ["asks again"],
     });
     const { result, kinds } = await run(fakeMastra([askStatute, second], prompts));
-    expect(law.search).toHaveBeenCalledTimes(1);
+    // One round, with no list: the Code, then California's code.
+    const calls = law.search.mock.calls as unknown as [{ source?: string }][];
+    expect(calls.map(([opts]) => opts.source)).toEqual(["statute", "california"]);
     expect(kinds).toEqual([
       "formulate",
       "retrieve",

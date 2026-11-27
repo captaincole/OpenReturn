@@ -113,6 +113,8 @@ export interface Form1040FilingInfo
   /** Federal only. Form 540 has its own: a taxpayer can choose per jurisdiction. */
   refundFullOverpaymentFederal?: boolean;
   useItemizedDeductions?: boolean;
+  /** HOH: the qualifying child released on Form 8332, who is not a dependent (federal/8332/headOfHousehold.ts). */
+  hohChildNotDependentName?: string;
 }
 
 /** `taxable` is undefined when a 1099-R needs the Simplified Method or Form 8606 (not modeled). */

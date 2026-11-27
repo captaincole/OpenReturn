@@ -1,10 +1,11 @@
-import { blockAnchor, type LawBlock } from "@/lib/law";
+import { blockAnchor, versionAnchor, type LawBlock, type LawSectionVersion } from "@/lib/law";
 import { lawLines, lawParts, type LawLine, type LawPart } from "@/lib/lawLines";
 
 /*
  * The section's text, one element per block, id = the block's anchor
  * ("g-1"). Text is verbatim; each line is indented by its level, and the
- * leading numbers are set in bold.
+ * leading numbers are set in bold. A California number with several
+ * versions shows each one under its own heading (id "v2").
  */
 
 const INDENT_REM = 1.5;
@@ -50,12 +51,33 @@ function Block({ block }: { block: LawBlock }) {
   );
 }
 
-export function LawBlocks({ blocks }: { blocks: LawBlock[] }) {
+function VersionHeading({ version }: { version: LawSectionVersion }) {
+  return (
+    <h2 id={versionAnchor(version.version)} className="mt-8 font-serif text-lg text-ink-primary">
+      {version.heading}
+    </h2>
+  );
+}
+
+export function LawBlocks({
+  blocks,
+  versions = [],
+}: {
+  blocks: LawBlock[];
+  versions?: LawSectionVersion[];
+}) {
+  const startsVersion = new Map(versions.map((version) => [version.firstBlockId, version]));
   return (
     <article className="ref-doc law-text">
-      {blocks.map((block) => (
-        <Block key={block.blockId} block={block} />
-      ))}
+      {blocks.map((block) => {
+        const version = startsVersion.get(block.blockId);
+        return (
+          <div key={block.blockId}>
+            {version && <VersionHeading version={version} />}
+            <Block block={block} />
+          </div>
+        );
+      })}
     </article>
   );
 }

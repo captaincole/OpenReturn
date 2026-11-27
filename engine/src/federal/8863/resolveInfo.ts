@@ -1,5 +1,6 @@
 import {
   EDUCATION_CREDIT_KEYS,
+  FORM_8862_KEYS,
   form1098TStudentSlug,
   getEducationCreditStudentFacts,
   getForm1098TFactKeys,
@@ -77,6 +78,7 @@ function figure(
     americanOpportunity,
     refund,
     studentsMissing: unnamed.length > 0,
+    aotcBarred: inputs.factByKey.get(FORM_8862_KEYS.aotcBarredByIrs) === true,
   };
   return { figured, required: requiredAnswers(students, unnamed, refund, answers) };
 }

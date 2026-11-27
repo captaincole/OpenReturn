@@ -10,8 +10,8 @@ import { LawBlocks } from "./components/LawBlocks";
 import { LawSectionHeader } from "./components/LawSectionHeader";
 
 /*
- * One whole section of the Code, or of the regulations ("1.469-5T"),
- * fetched on the server when the page opens. The text arrives with the
+ * One whole section of the Code, of the regulations ("1.469-5T") or of
+ * California's code ("CA-17041"), fetched on the server when the page opens. The text arrives with the
  * HTML, so the browser jumps to #g-1 by itself;
  * LawAnchor handles a deep link to a subdivision with no block of its own.
  */
@@ -33,7 +33,7 @@ async function SectionBody({ section }: { section: string }) {
   return (
     <>
       <LawSectionHeader page={page} />
-      <LawBlocks blocks={page.blocks} />
+      <LawBlocks blocks={page.blocks} versions={page.versions} />
       <LawAnchor ids={page.blocks.map((block) => blockAnchor(block.blockId))} />
     </>
   );

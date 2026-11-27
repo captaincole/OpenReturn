@@ -147,7 +147,7 @@ export const loopCarrierSchema = z.object({
   decision: groundDecisionSchema,
   facts: z.array(taxFactSnapshotSchema),
   maxIterations: z.number().int().min(1).max(MAX_ITERATIONS_CAP),
-  // Every retrieval of the run searches these; the statute only when federal is on.
+  // Every retrieval of the run searches these, and the statute round their statutes.
   jurisdictions: z.array(jurisdictionSchema),
 
   // Can pass maxIterations by one, to stop the loop; the reported count clamps back.

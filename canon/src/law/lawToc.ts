@@ -1,6 +1,7 @@
 import { asStr, getDocument } from "../db/corpusStore";
 import { openLibraryDb } from "../db/libsql";
-import { formatCitation, type LawSource } from "./citation";
+import { versionOfSectionId } from "./caCitation";
+import { citationIn, type LawSource } from "./citation";
 import { catchlineOf, lawDocIdOf, sectionNumber } from "./lawRead";
 
 /*
@@ -19,7 +20,14 @@ export interface LawTocEntry {
 
 export type LawTocChild =
   | ({ kind: "group" } & LawTocEntry)
-  | { kind: "section"; number: string; citation: string; heading: string };
+  | {
+      kind: "section";
+      number: string;
+      citation: string;
+      heading: string;
+      /** 1, or 2 and up for a later version of a California number ("s17058-v2"). */
+      version: number;
+    };
 
 export interface LawToc {
   source: LawSource;
@@ -33,7 +41,7 @@ export interface LawToc {
   children: LawTocChild[];
 }
 
-const SOURCES: readonly LawSource[] = ["statute", "regulations"];
+const SOURCES: readonly LawSource[] = ["statute", "regulations", "california"];
 export const isLawSource = (raw: string): raw is LawSource => SOURCES.includes(raw as LawSource);
 
 const SECTION_ID_MARK = "::sec::";
@@ -59,7 +67,7 @@ export async function readLawToc(source: LawSource, node?: string): Promise<LawT
     release: { title: doc.title, published: doc.published },
     node: entry,
     ancestors: sectionId ? await ancestorsOf(sectionId) : [],
-    children: await childrenOf(docId, sectionId),
+    children: await childrenOf(source, docId, sectionId),
   };
 }
 
@@ -74,24 +82,29 @@ async function structureEntry(docId: string, sectionId: string): Promise<LawTocE
 }
 
 // "parent_section_id IS ?" matches NULL too, so the top level is the same query.
-async function childrenOf(docId: string, sectionId: string | null): Promise<LawTocChild[]> {
+async function childrenOf(
+  source: LawSource,
+  docId: string,
+  sectionId: string | null,
+): Promise<LawTocChild[]> {
   const db = await openLibraryDb("law");
   const res = await db.execute({
     sql: `SELECT section_id, heading FROM ref_sections
           WHERE doc_id = ? AND parent_section_id IS ? ORDER BY ordinal`,
     args: [docId, sectionId],
   });
-  return res.rows.map((row) => tocChild(asStr(row.section_id), asStr(row.heading)));
+  return res.rows.map((row) => tocChild(source, asStr(row.section_id), asStr(row.heading)));
 }
 
-function tocChild(sectionId: string, heading: string): LawTocChild {
+function tocChild(source: LawSource, sectionId: string, heading: string): LawTocChild {
   if (!isSectionHeading(heading)) return { kind: "group", node: nodeOf(sectionId), heading };
   const number = sectionNumber(heading);
   return {
     kind: "section",
     number,
-    citation: formatCitation(number, []),
+    citation: citationIn(source, number, []),
     heading: catchlineOf(heading),
+    version: source === "california" ? versionOfSectionId(sectionId) : 1,
   };
 }
 

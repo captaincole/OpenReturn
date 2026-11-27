@@ -3,9 +3,11 @@
  *
  * Runs every case's queries through the law search in each mode and writes
  * docs/evals/law.md. The Code cases run on the statute only (source
- * "statute"), then again on the whole library, to count the statute hits
+ * "statute"), then again with no source, to count the statute hits
  * the regulations push out of the top 8. The regulation cases run on the
- * whole library, as searchLaw does by default. No model call: hybrid and
+ * statute and the regulations, as searchLaw does by default. The
+ * California cases run on California's code only (source "california"),
+ * the only way searchLaw returns it. No model call: hybrid and
  * vector modes embed the queries with the local Ollama model, fts mode
  * needs nothing.
  */
@@ -42,7 +44,7 @@ interface ModeResult {
   crowding: CrowdingRun | null;
 }
 
-/** One mode over the cases; with `crowd`, also on the whole library, to compare. */
+/** One mode over the cases; with `crowd`, also with no source, to compare. */
 async function runMode(
   cases: LawCase[],
   mode: SearchMode,
@@ -71,27 +73,32 @@ async function runMode(
 }
 
 async function docIdsOf(): Promise<DocIds> {
-  const [statute, regulations] = await Promise.all([
+  const [statute, regulations, california] = await Promise.all([
     lawDocIdOf("statute"),
     lawDocIdOf("regulations"),
+    lawDocIdOf("california"),
   ]);
-  if (!statute || !regulations)
+  if (!statute || !regulations || !california)
     throw new Error(
-      "law.db needs both the Code and the regulations: run `npm run corpus -- law sync`",
+      "law.db needs the Code, the regulations and California's code: run `npm run corpus -- law sync`",
     );
-  return { statute, regulations };
+  return { statute, regulations, california };
 }
 
 async function main(): Promise<void> {
   await requireLaw();
   const cases = loadCases("cases.json");
   const regCases = loadCases("regCases.json");
+  const caCases = loadCases("caCases.json");
   const docIds = await docIdsOf();
   const statute: ModeResult[] = [];
   const regulations: ModeRun[] = [];
+  const california: ModeRun[] = [];
   for (const mode of MODES) {
     statute.push(await runMode(cases, mode, docIds, { source: "statute", crowd: true }));
     regulations.push((await runMode(regCases, mode, docIds, { crowd: false })).run);
+    const caOnly = { source: "california" as const, crowd: false };
+    california.push((await runMode(caCases, mode, docIds, caOnly)).run);
   }
   const report = renderReport({
     cases,
@@ -99,6 +106,8 @@ async function main(): Promise<void> {
     crowding: statute.flatMap((result) => (result.crowding ? [result.crowding] : [])),
     regCases,
     regRuns: regulations,
+    caCases,
+    caRuns: california,
     date: new Date().toLocaleDateString("en-CA"),
   });
   writeFileSync(REPORT, report);

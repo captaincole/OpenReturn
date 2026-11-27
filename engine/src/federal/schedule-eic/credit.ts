@@ -9,6 +9,7 @@
 
 import eicTable2025 from "../../data/eic-table-2025.json" with { type: "json" };
 import type { FilingStatus } from "../../values.js";
+import type { Form8862EicCheck } from "../8862/eicPart.js";
 import { eicIncomeLimit } from "./limits.js";
 import { isYoungerThan } from "./qualifyingChild.js";
 
@@ -23,9 +24,6 @@ const AGI_SECOND_LOOKUP = { other: [10_620, 23_350], joint: [17_730, 30_470] } a
 const NO_CHILD_BORN_AFTER = "12/31/1960";
 const NO_CHILD_BORN_BEFORE = "01/02/2001";
 
-// Definitions and Special Rules, "Form 8862, who must file" (irs-1040-inst-2025::sec::definitions-and-special-rules-2::b04).
-export const FORM_8862_GAP =
-  "An EIC reduced or disallowed in an earlier year needs Form 8862, which the engine does not prepare.";
 export const SELF_ONLY_EIC_GAP =
   "The self-only EIC for a filer whose qualifying children have no valid SSN (Pub. 596) is not modeled.";
 // Step 4, question 1 (irs-1040-inst-2025::sec::filers-without-a-qualifying::b01).
@@ -85,6 +83,8 @@ export interface EicAnswers {
   claimableAsDependent?: boolean;
   deniedInEarlierYear?: boolean;
   barredByIrs?: boolean;
+  /** What Form 8862 Part II still needs once an earlier denial is stated (federal/8862/eicPart.ts). */
+  form8862?: Form8862EicCheck;
   /** MFS: lived apart from the spouse for the last 6 months, or all year (Step 3, question 4: "No"). */
   livedApartLastSixMonths?: boolean;
   /** MFS: legally separated and apart at the end of 2025 (Step 3, question 5). */
@@ -235,13 +235,23 @@ function step4(ret: EicReturn, answers: EicAnswers, joint: boolean): Step {
   return answers.claimableAsDependent ? none(false) : undefined;
 }
 
-/* Form 8862 (Definitions and Special Rules): a ban stops the credit; an earlier denial needs the form. */
+/*
+ * "Form 8862, who must file" (irs-1040-inst-2025::sec::definitions-and-special-rules-2::b04):
+ * a ban stops the credit ("don't file Form 8862 or take the credit"). After an
+ * earlier denial the credit goes on only with a completed Form 8862 ("you
+ * claim the EIC without attaching a completed Form 8862, your claim will be
+ * automatically denied", irs-pub-596-2025::sec::form-8862::b04): it waits for
+ * Part II's answers, and is a gap when they disagree with the EIC's own.
+ */
 function earlierDenial(answers: EicAnswers): Step {
   if (answers.barredByIrs === undefined || answers.deniedInEarlierYear === undefined) {
     return WAITING;
   }
   if (answers.barredByIrs) return none(false);
-  return answers.deniedInEarlierYear ? gap(FORM_8862_GAP) : undefined;
+  if (!answers.deniedInEarlierYear) return undefined;
+  const check = answers.form8862;
+  if (check === undefined || check.kind === "waiting") return WAITING;
+  return check.kind === "conflict" ? gap(check.reason) : undefined;
 }
 
 /* Step 5, question 3 or Worksheet B line 5, then Worksheet A or B. */

@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { askRunResultSchema, groundRunResultSchema } from "../../../../src/mastra/canon/schemas";
+import {
+  askRunResultSchema,
+  groundInputSchema,
+  groundRunResultSchema,
+} from "../../../../src/mastra/canon/schemas";
 
 // Cade's copy of Canon's contract must let the statute fields through, and read an older Canon.
 
@@ -76,5 +80,34 @@ describe("Canon result schemas", () => {
     expect(out).toMatchObject({ statutePassages, statuteConsulted: true, conflicts: [conflict] });
     if (out.status !== "ok") throw new Error("expected ok");
     expect(out.citations[0].citation).toBe("26 U.S.C. § 461(l)(3)(B)");
+  });
+
+  it("read the jurisdictions searched, and parse a Canon that sends none", () => {
+    expect(groundRunResultSchema.parse({ ...ground, jurisdictions: ["CA"] })).toMatchObject({
+      jurisdictions: ["CA"],
+    });
+    expect(askRunResultSchema.parse({ ...ask, jurisdictions: ["federal", "CA"] })).toMatchObject({
+      jurisdictions: ["federal", "CA"],
+    });
+    expect(groundRunResultSchema.parse(ground)).not.toHaveProperty("jurisdictions");
+    expect(() => askRunResultSchema.parse({ ...ask, jurisdictions: ["NY"] })).toThrow();
+  });
+
+  it("send no empty or unknown jurisdiction list to run_ground", () => {
+    const input = { decision: {}, facts: [] };
+    const decision = {
+      taxYear: 2025,
+      decisionKey: "decisions.scope.ca_residency",
+      decision: "full_year",
+      rationale: "r",
+      confidence: "high",
+      dissentingConsiderations: null,
+      supportingFactKeys: [],
+    };
+    expect(groundInputSchema.parse({ ...input, decision, jurisdictions: ["CA"] })).toMatchObject({
+      jurisdictions: ["CA"],
+    });
+    expect(() => groundInputSchema.parse({ ...input, decision, jurisdictions: [] })).toThrow();
+    expect(() => groundInputSchema.parse({ ...input, decision, jurisdictions: ["NY"] })).toThrow();
   });
 });

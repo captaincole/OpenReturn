@@ -1,0 +1,138 @@
+{
+  "form": {
+    "formId": "form-8844",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Empowerment Zone Employment Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8844.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8844.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8844.0.line.1_qualified_empowerment_zone_wages",
+      "label": "Line 1 — Enter the total qualified empowerment zone wages paid or incurred during the current year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-8844.0.line.2_multiply_1_by_20_percent",
+      "label": "Line 2 — Multiply line 1 by 20% (0.20)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-8844.0.line.3_credit_from_pass_through_entities",
+      "label": "Line 3 — Empowerment zone employment credit from partnerships, S corporations, cooperatives, estates, and trusts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 587.97
+      }
+    },
+    {
+      "fieldId": "form-8844.0.line.4_add_lines",
+      "label": "Line 4 — Add lines 2 and 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-8844.0.line.5_allocated_to_patrons_beneficiaries",
+      "label": "Line 5 — Amount allocated to patrons of the cooperative or beneficiaries of the estate or trust",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 503.968
+      }
+    },
+    {
+      "fieldId": "form-8844.0.line.6_subtract_5_from_4",
+      "label": "Line 6 — Cooperatives, estates, and trusts, subtract line 5 from line 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 467.968
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8844/blank.pdf",
+    "ingestedAt": "2026-11-27T01:30:55.326Z",
+    "totalFields": 8,
+    "skipped": 0,
+    "catalogEntries": 8
+  }
+}

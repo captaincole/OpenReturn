@@ -255,7 +255,7 @@ const answerStep = createStep({
 export const askWorkflow = createWorkflow({
   id: "ask",
   description:
-    'Ask The Tax Code: answers one question about US federal or California tax from the IRS/FTB reference library, with numbered citations to the passages it relied on. Pass completed earlier turns as history for a follow-up. Pass jurisdictions to search only some of the library: ["CA"] searches only California, and the federal statute is then not searched. Says when the library does not cover the question. When the passages conflict, or name a rule of law without stating it, the answer may also search the statute (law.db) once; passages that disagree come back as conflicts, with both quotes.',
+    'Ask The Tax Code: answers one question about US federal or California tax from the IRS/FTB reference library, with numbered citations to the passages it relied on. Pass completed earlier turns as history for a follow-up. Pass jurisdictions to search only some of the library: ["CA"] searches only California, and a statute search then reads California\'s code, not the Internal Revenue Code. Says when the library does not cover the question. When the passages conflict, or name a rule of law without stating it, the answer may also search the statute (law.db) once; passages that disagree come back as conflicts, with both quotes.',
   inputSchema: askInputSchema,
   outputSchema: askRunResultSchema,
 })
