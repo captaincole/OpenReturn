@@ -58,6 +58,8 @@ export interface ScheduleCaFilingInfo
   caInvestmentFees?: number;
   /** Lines 1a, 3, 15 and 17: a contractor who is an employee for California; undefined when not one. */
   caEmployeeAmounts?: CaEmployeeAmounts;
+  /** Line 3 column B: the federal work opportunity credit that reduced the Schedule C wages; undefined with none. */
+  caWorkOpportunityWageCredit?: number;
   /** Line 3 (businesses) and line 5 (rentals) columns B and C: the FTB 3885A differences. */
   businessDepreciationAdjustment?: DepreciationAdjustment;
   rentalDepreciationAdjustment?: DepreciationAdjustment;

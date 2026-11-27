@@ -15,6 +15,7 @@ import {
 } from "../../facts/index.js";
 import { roundDollars } from "../../money.js";
 import type { ResolverInputs } from "../../resolverInputs.js";
+import { workOpportunitySources } from "../5884/sources.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
 import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
 import { gap, type Cell } from "./cells.js";
@@ -184,11 +185,18 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
 } {
   const stated = getGeneralBusinessCreditFacts(inputs.facts).map(statedSource);
   const k1 = k1EntitiesWithRoute(inputs, "form_3800").map((received) => k1Source(inputs, received));
+  // Line 4b: Form 5884 line 2, the credit of the taxpayer's own employees (5884/sources.ts).
+  const workOpportunity = workOpportunitySources(inputs);
   const missing = [
     ...stated.filter(missingResearch).map((source) => source.credit.key),
     ...k1.flatMap((found) => found.missing),
+    ...workOpportunity.missing,
   ];
-  const current = [...stated, ...k1.flatMap((found) => (found.source ? [found.source] : []))];
+  const current = [
+    ...stated,
+    ...k1.flatMap((found) => (found.source ? [found.source] : [])),
+    ...workOpportunity.sources,
+  ];
   const carryovers = getCreditCarryoverFacts(inputs.facts).map(carryoverOf);
   return { sources: { current, carryovers }, missing: [...new Set(missing)] };
 }

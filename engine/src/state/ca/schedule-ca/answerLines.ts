@@ -103,8 +103,19 @@ function recaptureColumn(info: ScheduleCaFilingInfo, side: "subtraction" | "addi
 }
 
 /*
+ * The federal work opportunity credit that reduced the Schedule C wages:
+ * "Enter the amount of the federal Work Opportunity Credit that reduced the
+ * federal deduction for wages on Schedule CA (540), Part I ... line 3, line 5,
+ * or line 6, column B" (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b07);
+ * "California has no similar credits." Column B only.
+ */
+const wageCreditColumn = (info: ScheduleCaFilingInfo, side: "subtraction" | "addition") =>
+  side === "subtraction" ? (info.caWorkOpportunityWageCredit ?? 0) : 0;
+
+/*
  * Line 3 column B or C: a California employee's profit or loss, plus the FTB
- * 3885A business difference and the Schedule D-1 Part IV difference.
+ * 3885A business difference, the Schedule D-1 Part IV difference and, in
+ * column B, the wages the federal work opportunity credit took off.
  */
 export function line3Column(info: ScheduleCaFilingInfo, side: "subtraction" | "addition") {
   const employee =
@@ -114,7 +125,8 @@ export function line3Column(info: ScheduleCaFilingInfo, side: "subtraction" | "a
   if (info.businessDepreciationAdjustment?.waits) return undefined;
   const recapture = recaptureColumn(info, side);
   if (recapture !== undefined && typeof recapture !== "number") return recapture;
-  const total = (employee ?? 0) + (depreciation ?? 0) + (recapture ?? 0);
+  const total =
+    (employee ?? 0) + (depreciation ?? 0) + (recapture ?? 0) + wageCreditColumn(info, side);
   return positive(total);
 }
 
