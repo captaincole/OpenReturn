@@ -4,7 +4,7 @@ Ewin Coldbrook is single and lives in Spokane, Washington. Every name and amount
 
 Ewin has one W-2. On June 10, 2025 he bought a 60% interest in Larkspur Commons, a 40-unit low-income housing building. He held no interest before. The building's credit period began in 2021, so 2025 is year 5. More units are low-income now than at the close of 2021, so line 3 is more than Form 8609 line 8a (additions to qualified basis). The agency's allocation covers them: line 3 is within Form 8609 line 3a, the maximum qualified basis it allocated ("You may claim a credit for an addition to qualified basis only if the credit amounts have been allocated by the housing credit agency to cover these additions", `irs-8609a-inst-2025::sec::line-6::b02`). The count did not change from the end of 2024, so the Line 11 Worksheet enters 0. A $50,000 federal grant received in 2024 never reduced the eligible basis; a high-cost area raised the basis to 130%. He takes the standard deduction. The return is federal only: Washington has no income tax.
 
-Forms that file: Form 1040, Form 8609-A. The credit on line 18 goes to Form 8586 line 3, and on to Form 3800. Form 8586 has no rules yet, so the credit does not reach Form 1040 in this scenario. Line 17 is blank: it is for the 11th year (the `haral` scenario). Item E is "No", and the form prints no mark for a "No" (`engine/src/federal/8609-a/QUESTIONS.md`).
+Forms that file: Form 1040, Schedule 3, Forms 8609-A, 8586, 3800 and 8582-CR. The credit on line 18 goes to Form 8586 line 3 and Form 3800 line 4d. Ewin is not a real estate professional, so the building's credit is passive. He has no passive income, so Form 8582-CR allows the tax on $25,000 (Part IV, no income limit for a building placed in service after 1989), and carries the rest to 2026. The values after Form 8586 were checked by hand and re-locked on 2026-11-27. Line 17 is blank: it is for the 11th year (the `haral` scenario). Item E is "No", and the form prints no mark for a "No" (`engine/src/federal/8609-a/QUESTIONS.md`).
 
 ## Inputs
 
@@ -44,8 +44,16 @@ Forms that file: Form 1040, Form 8609-A. The credit on line 18 goes to Form 8586
 | 1040 line 12e | single standard deduction | 15,750 |
 | 1040 line 15 | 185,000 − 15,750 | 169,250 |
 | 1040 line 16 | 17,651 + 24% × (169,250 − 103,350) | 33,467 |
+| 8586 line 1, 2 | one Form 8609-A; item E "No" | 1; No |
+| 8586 line 3, 5 | Form 8609-A line 18; line 4 blank | 26,042 |
+| 8582-CR line 3a, 5, 7, 34 | Worksheet 3; no passive income (line 6 is 0) | 26,042 |
+| 8582-CR line 35, 37 | tax on 169,250 less tax on 144,250: 25,000 × 24% | 6,000 |
+| 3800 line 4d (d), (g) | passive credit; allowed by Form 8582-CR | 26,042; 6,000 |
+| 3800 line 13, 27 | 25% × (33,467 − 25,000) = 2,116.75; 33,467 − 2,117 | 2,117; 31,350 |
+| 3800 line 38, Schedule 3 line 6a, 8, 1040 line 20 | the smaller of 6,000 and 31,350 | 6,000 |
+| 1040 line 22, 24 | 33,467 − 6,000 | 27,467 |
 | 1040 line 25a, 33 | W-2 box 2 | 36,000 |
-| 1040 line 34, 35a | 36,000 − 33,467 | 2,533 |
+| 1040 line 34, 35a | 36,000 − 27,467 | 8,533 |
 
 ## Compared with real examples
 

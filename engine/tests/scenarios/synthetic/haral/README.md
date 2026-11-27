@@ -6,7 +6,7 @@ Haral has one W-2. He owns Marrow Court, a 30-unit building, by himself. Its sec
 
 This scenario is the other branch of `ewin`: in the 11th year the engine leaves lines 4 and 6 to 15 blank (the `DECISION` in `engine/src/federal/8609-a/copies.ts`), so one taxpayer cannot show line 17 and lines 4 to 15 together.
 
-Forms that file: Form 1040, Form 8609-A. The credit goes to Form 8586, which has no rules yet.
+Forms that file: Form 1040, Schedule 3, Forms 8609-A, 8586, 3800 and 8582-CR. The credit goes to Form 8586 line 3 and Form 3800 line 4d. Haral is not a real estate professional, so the credit is passive; with no passive income, Form 8582-CR allows the tax on $25,000 and carries the rest to 2026. The values after Form 8586 were checked by hand and re-locked on 2026-11-27.
 
 ## Inputs
 
@@ -34,7 +34,15 @@ Forms that file: Form 1040, Form 8609-A. The credit goes to Form 8586, which has
 | 1040 line 1a, 9, 11a | W-2 box 1 | 168,000 |
 | 1040 line 15 | 168,000 − 15,750 | 152,250 |
 | 1040 line 16 | 17,651 + 24% × (152,250 − 103,350) | 29,387 |
-| 1040 line 34, 35a | 31,000 − 29,387 | 1,613 |
+| 8586 line 1, 2 | one Form 8609-A; item E "No" | 1; No |
+| 8586 line 3, 5 | Form 8609-A line 18; line 4 blank | 56,700 |
+| 8582-CR line 3a, 5, 7, 34 | Worksheet 3; no passive income | 56,700 |
+| 8582-CR line 35, 37 | tax on 152,250 less tax on 127,250: 25,000 × 24% | 6,000 |
+| 3800 line 13, 27 | 25% × (29,387 − 25,000) = 1,096.75; 29,387 − 1,097 | 1,097; 28,290 |
+| 3800 line 4d (d), (g); line 38 | passive credit; allowed | 56,700; 6,000; 6,000 |
+| Schedule 3 line 6a, 8, 1040 line 20 | Form 3800 line 38 | 6,000 |
+| 1040 line 22, 24 | 29,387 − 6,000 | 23,387 |
+| 1040 line 34, 35a | 31,000 − 23,387 | 7,613 |
 
 The instructions' own example factor for line 17 (1.0000 − .1250) would give 1,200,000 × .6250 × .0900 = 67,500 here. The engine follows the "deferred balance" rule instead (the `DECISION` in `copies.ts`; `docs/rule-decisions.md`).
 

@@ -5,10 +5,12 @@
  * tax paid on fuels used in a business; Form 8912, the credit for holders
  * of tax credit bonds; Form 8846, the credit for employer social security
  * and Medicare taxes on tips; Form 5884, the work opportunity credit for the
- * taxpayer's own employees; and Form 8609-A, the low-income housing credit of each
- * building an owner holds directly. They are joined here, in this order, and filingInfo.ts
- * takes them as one, so that file stays under its line limit. A new credit
- * form adds its type and resolver here, not to filingInfo.ts.
+ * taxpayer's own employees; Form 8609-A, the low-income housing credit of each
+ * building an owner holds directly; and Form 8586, which totals the Forms
+ * 8609-A and the K-1 low-income housing credits for Form 3800. They are joined
+ * here, in this order, and filingInfo.ts takes them as one, so that file stays
+ * under its line limit. A new credit form adds its type and resolver here, not
+ * to filingInfo.ts.
  */
 
 import type { BaseFilingInfo } from "../filingInfo.js";
@@ -21,6 +23,8 @@ import type { Form5884FilingInfo } from "./5884/filingInfo.js";
 import { resolve5884Info } from "./5884/resolveInfo.js";
 import type { Form8582CRFilingInfo } from "./8582-cr/filingInfo.js";
 import { resolve8582CRInfo } from "./8582-cr/resolveInfo.js";
+import type { Form8586FilingInfo } from "./8586/filingInfo.js";
+import { resolve8586Info } from "./8586/resolveInfo.js";
 import type { Form8609AFilingInfo } from "./8609-a/filingInfo.js";
 import { resolve8609AInfo } from "./8609-a/resolveInfo.js";
 import type { Form8834FilingInfo } from "./8834/filingInfo.js";
@@ -37,7 +41,8 @@ export type CreditFormsFilingInfo = Form3800FilingInfo &
   Form8912FilingInfo &
   Form8846FilingInfo &
   Form5884FilingInfo &
-  Form8609AFilingInfo;
+  Form8609AFilingInfo &
+  Form8586FilingInfo;
 
 export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve3800Info,
@@ -48,4 +53,5 @@ export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => B
   resolve8846Info,
   resolve5884Info,
   resolve8609AInfo,
+  resolve8586Info,
 ];

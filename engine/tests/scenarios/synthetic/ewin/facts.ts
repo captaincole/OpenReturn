@@ -8,6 +8,7 @@
 import {
   makeLowIncomeHousingBuildingFactKey,
   makeW2FactKey,
+  RENTAL_KEYS,
   type LowIncomeFractions,
   type LowIncomeHousingBuildingFactValue,
   type W2FactValue,
@@ -128,5 +129,12 @@ export const ewinFacts: TaxFactRow[] = [
     makeLowIncomeHousingBuildingFactKey("larkspur-commons"),
     LARKSPUR,
     "Form 8609 for Larkspur Commons (docs/01-form-8609-larkspur-commons.pdf); the 2024 Form 8609-A from the seller; Ewin's purchase papers, rent roll and grant records.",
+  ),
+  // A full-time physician: not a real estate professional, so the building's credit is passive (Form 8582-CR).
+  fact(
+    "rental",
+    RENTAL_KEYS.realEstateProfessional,
+    false,
+    "Verbal: he works full time as a physician.",
   ),
 ];

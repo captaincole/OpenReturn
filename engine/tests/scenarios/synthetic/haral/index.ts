@@ -2,9 +2,10 @@
  * A made-up single filer in Florida (README.md): the sole owner of a
  * low-income housing building whose rehabilitation is in the 11th year of its
  * credit. Form 8609-A item B's rehabilitation box and the deferred first-year
- * credit (lines 16 to 18). Federal only. The credit goes to Form 8586, which
- * has no rules yet. UNVERIFIED: no answer key; the expected values are engine
- * output checked by hand, so a failure means "the engine changed".
+ * credit (lines 16 to 18). Federal only. The credit goes to Form 8586 line 3,
+ * Form 3800 line 4d and Form 8582-CR, which allows the tax on $25,000.
+ * UNVERIFIED: no answer key; the expected values are engine output checked by
+ * hand, so a failure means "the engine changed".
  */
 
 import { lockedGoldenPath } from "../../../helpers/scenarioPdfName.js";
@@ -13,7 +14,14 @@ import { haralDecisions } from "./decisions.js";
 import { haralExpected } from "./expected.js";
 import { HARAL_TAX_YEAR, HARAL_USER_ID, haralFacts } from "./facts.js";
 
-const FORM_IDS = ["form-8609-a", "form-1040"];
+const FORM_IDS = [
+  "form-8609-a",
+  "form-8586",
+  "form-8582-cr",
+  "form-3800",
+  "schedule-3",
+  "form-1040",
+];
 
 export const haralScenario: Scenario = {
   name: "haral",

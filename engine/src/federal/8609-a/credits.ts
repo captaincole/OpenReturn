@@ -3,8 +3,8 @@
  * figured on Form 8609-A for each building ... Enter on line 3 the total credit
  * for attached Form(s) 8609-A" (irs-8586-form-2025::sec::line-3::b01), and line
  * 2 asks for the BINs of the buildings whose qualified basis decreased
- * (::face-page-1::b01). Form 8586's own rules are not written yet; it reads
- * form8609ABuildingCredits.
+ * (::face-page-1::b01). Form 8586 reads form8609ABuildingCredits
+ * (federal/8586/resolveInfo.ts).
  */
 
 import { unsupported, type Unsupported } from "../../types.js";

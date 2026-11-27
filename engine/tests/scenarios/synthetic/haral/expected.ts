@@ -67,20 +67,73 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "form-1040.line.16": 29387,
       // Line 18 — Add lines 16 and 17
       "form-1040.line.18": 29387,
-      // Line 22 — Subtract line 21 from line 18. If zero or less, enter -0-
-      "form-1040.line.22": 29387,
+      // Line 20 — Schedule 3 line 8: the low-income housing credit Form 8582-CR allows (re-locked by hand with Form 8586)
+      "form-1040.line.20": 6000,
+      // Line 21 — Add lines 19 and 20
+      "form-1040.line.21": 6000,
+      // Line 22 — 29,387 − 6,000 (re-locked by hand with Form 8586)
+      "form-1040.line.22": 23387,
       // Line 24 — Add lines 22 and 23. Total tax
-      "form-1040.line.24": 29387,
+      "form-1040.line.24": 23387,
       // Line 25a — Federal income tax withheld from Form(s) W-2
       "form-1040.line.25a": 31000,
       // Line 25d — Add lines 25a through 25c
       "form-1040.line.25d": 31000,
       // Line 33 — Add lines 25d, 26, and 32. Total payments
       "form-1040.line.33": 31000,
-      // Line 34 — If line 33 is more than line 24, the amount you overpaid
-      "form-1040.line.34": 1613,
+      // Line 34 — 31,000 − 23,387 (re-locked by hand with Form 8586)
+      "form-1040.line.34": 7613,
       // Line 35a — Amount of line 34 you want refunded to you
-      "form-1040.line.35a": 1613,
+      "form-1040.line.35a": 7613,
+    },
+  },
+  // Added by hand with Form 8586's rules (README.md, hand check).
+  "form-8586": {
+    engineFields: {
+      // Line 1 — one Form 8609-A (the rehabilitation allocation)
+      "form-8586.0.line.1_forms_8609a_attached": 1,
+      // Line 3 — Form 8609-A line 18, the deferred first-year credit
+      "form-8586.0.line.3_current_year_credit_8609a": 56700,
+      // Line 5 — line 3 plus line 4 (blank)
+      "form-8586.0.line.5_add_lines": 56700,
+    },
+    renderedChecked: ["form-8586.0.line.2_no"],
+    renderedBlank: [
+      "form-8586.0.line.2_yes",
+      "form-8586.0.line.4_credit_from_pass_through",
+      "form-8586.0.line.6_allocated_to_beneficiaries",
+      "form-8586.0.line.7_subtract_6_from_5",
+    ],
+  },
+  "form-8582-cr": {
+    engineFields: {
+      // Worksheet 3: placed in service after 1989
+      "form-8582-cr.0.line.3a_low_income_post_1989_credits": 56700,
+      "form-8582-cr.0.line.5_total_passive_credits": 56700,
+      "form-8582-cr.0.line.7_credits_over_passive_tax": 56700,
+      "form-8582-cr.1.line.34_smaller_of_3c_or_33": 56700,
+      // Line 35 — tax on 152,250 less tax on 127,250: 25,000 × 24%
+      "form-8582-cr.1.line.35_tax_remaining_special_allowance": 6000,
+      "form-8582-cr.1.line.37_passive_activity_credit_allowed": 6000,
+    },
+  },
+  "form-3800": {
+    engineFields: {
+      "form-3800.0.line.7_regular_tax_before_credits": 29387,
+      // Line 13 — 25% of (29,387 − 25,000) = 1,096.75
+      "form-3800.0.line.13_25_percent_of_excess": 1097,
+      "form-3800.1.line.27_subtract_line_13_from_11": 28290,
+      "form-3800.1.line.32_specified_passive_activity_credits": 56700,
+      "form-3800.1.line.33_specified_passive_credits_allowed": 6000,
+      "form-3800.1.line.38_credit_allowed_current_year": 6000,
+      "form-3800.3.part3.4d_form_8586_col_d": 56700,
+      "form-3800.3.part3.4d_form_8586_col_g": 6000,
+    },
+  },
+  "schedule-3": {
+    engineFields: {
+      "schedule-3.0.line.6a": 6000,
+      "schedule-3.0.line.8": 6000,
     },
   },
 };

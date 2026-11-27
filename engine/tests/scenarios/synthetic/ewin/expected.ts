@@ -88,20 +88,90 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "form-1040.line.16": 33467,
       // Line 18 — Add lines 16 and 17
       "form-1040.line.18": 33467,
-      // Line 22 — Subtract line 21 from line 18. If zero or less, enter -0-
-      "form-1040.line.22": 33467,
+      // Line 20 — Schedule 3 line 8: the low-income housing credit Form 8582-CR allows (re-locked by hand with Form 8586)
+      "form-1040.line.20": 6000,
+      // Line 21 — Add lines 19 and 20
+      "form-1040.line.21": 6000,
+      // Line 22 — 33,467 − 6,000 (re-locked by hand with Form 8586)
+      "form-1040.line.22": 27467,
       // Line 24 — Add lines 22 and 23. Total tax
-      "form-1040.line.24": 33467,
+      "form-1040.line.24": 27467,
       // Line 25a — Federal income tax withheld from Form(s) W-2
       "form-1040.line.25a": 36000,
       // Line 25d — Add lines 25a through 25c
       "form-1040.line.25d": 36000,
       // Line 33 — Add lines 25d, 26, and 32. Total payments
       "form-1040.line.33": 36000,
-      // Line 34 — If line 33 is more than line 24, the amount you overpaid
-      "form-1040.line.34": 2533,
+      // Line 34 — 36,000 − 27,467 (re-locked by hand with Form 8586)
+      "form-1040.line.34": 8533,
       // Line 35a — Amount of line 34 you want refunded to you
-      "form-1040.line.35a": 2533,
+      "form-1040.line.35a": 8533,
+    },
+  },
+  // Added by hand with Form 8586's rules (README.md, hand check).
+  "form-8586": {
+    engineFields: {
+      // Line 1 — one Form 8609-A
+      "form-8586.0.line.1_forms_8609a_attached": 1,
+      // Line 3 — Form 8609-A line 18
+      "form-8586.0.line.3_current_year_credit_8609a": 26042,
+      // Line 5 — line 3 plus line 4 (blank)
+      "form-8586.0.line.5_add_lines": 26042,
+    },
+    renderedChecked: [
+      // Line 2 — No: item E is "No"
+      "form-8586.0.line.2_no",
+    ],
+    renderedBlank: [
+      "form-8586.0.line.2_yes",
+      "form-8586.0.line.2_i_decreased_basis_bin",
+      // Line 4 — no K-1 credit; lines 6 and 7 are for estates and trusts
+      "form-8586.0.line.4_credit_from_pass_through",
+      "form-8586.0.line.6_allocated_to_beneficiaries",
+      "form-8586.0.line.7_subtract_6_from_5",
+    ],
+  },
+  "form-8582-cr": {
+    engineFields: {
+      // Worksheet 3: a building placed in service after 1989
+      "form-8582-cr.0.line.3a_low_income_post_1989_credits": 26042,
+      "form-8582-cr.0.line.3c_low_income_post_1989_total": 26042,
+      "form-8582-cr.0.line.5_total_passive_credits": 26042,
+      // Line 6 — no net passive income
+      "form-8582-cr.0.line.6_tax_net_passive_income": 0,
+      "form-8582-cr.0.line.7_credits_over_passive_tax": 26042,
+      "form-8582-cr.1.line.31_line_19_or_7_minus_16": 26042,
+      "form-8582-cr.1.line.32_amount_from_line_30": 0,
+      "form-8582-cr.1.line.33_line_31_minus_line_32": 26042,
+      "form-8582-cr.1.line.34_smaller_of_3c_or_33": 26042,
+      // Line 35 — tax on 169,250 less tax on 144,250: 25,000 × 24%
+      "form-8582-cr.1.line.35_tax_remaining_special_allowance": 6000,
+      "form-8582-cr.1.line.36_smaller_of_34_or_35": 6000,
+      "form-8582-cr.1.line.37_passive_activity_credit_allowed": 6000,
+    },
+  },
+  "form-3800": {
+    engineFields: {
+      "form-3800.0.line.7_regular_tax_before_credits": 33467,
+      "form-3800.0.line.11_net_income_tax": 33467,
+      // Line 13 — 25% of (33,467 − 25,000) = 2,116.75
+      "form-3800.0.line.13_25_percent_of_excess": 2117,
+      "form-3800.1.line.27_subtract_line_13_from_11": 31350,
+      "form-3800.1.line.32_specified_passive_activity_credits": 26042,
+      "form-3800.1.line.33_specified_passive_credits_allowed": 6000,
+      "form-3800.1.line.37_specified_credits_allowed": 6000,
+      "form-3800.1.line.38_credit_allowed_current_year": 6000,
+      // Line 4d — column (d) passive before the limit, column (g) allowed
+      "form-3800.3.part3.4d_form_8586_col_d": 26042,
+      "form-3800.3.part3.4d_form_8586_col_g": 6000,
+      "form-3800.3.part3.6_add_lines_2_3_5_col_g": 6000,
+    },
+  },
+  "schedule-3": {
+    engineFields: {
+      // Line 6a — Form 3800 line 38
+      "schedule-3.0.line.6a": 6000,
+      "schedule-3.0.line.8": 6000,
     },
   },
 };

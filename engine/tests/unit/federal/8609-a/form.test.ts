@@ -332,11 +332,22 @@ describe("gaps and waits", () => {
 });
 
 describe("no building fact, nothing changes", () => {
-  it("Form 1040 is the same with and without the building", () => {
+  // The credit reaches Form 1040 through Form 8586, Form 3800 and Schedule 3 (federal/8586/form3800.ts).
+  const CREDIT_LINES = ["20", "21", "22", "24", "34", "35a"].map(
+    (line) => `form-1040.line.${line}`,
+  );
+
+  it("Form 1040 is the same with and without the building, except the lines the credit reaches", () => {
     const withBuilding = evaluate(base.facts).result.forms.get("form-1040")!;
     const without = evaluate(otherFacts).result.forms.get("form-1040")!;
-    expect(withBuilding.fields.map((field) => field.result)).toEqual(
-      without.fields.map((field) => field.result),
-    );
+    const kept = (form: typeof without) =>
+      form.fields
+        .filter((field) => !CREDIT_LINES.includes(field.fieldId))
+        .map((field) => field.result);
+    expect(kept(withBuilding)).toEqual(kept(without));
+    const line20 = (form: typeof without) =>
+      form.fields.find((field) => field.fieldId === "form-1040.line.20")?.result;
+    expect(line20(withBuilding)).toMatchObject({ ok: true, value: 6_000 });
+    expect(line20(without)).not.toMatchObject({ ok: true, value: 6_000 });
   });
 });

@@ -8,6 +8,7 @@
 import {
   makeLowIncomeHousingBuildingFactKey,
   makeW2FactKey,
+  RENTAL_KEYS,
   type LowIncomeHousingBuildingFactValue,
   type W2FactValue,
 } from "../../../../src/facts/index.js";
@@ -113,5 +114,12 @@ export const haralFacts: TaxFactRow[] = [
     makeLowIncomeHousingBuildingFactKey("marrow-court-rehab"),
     MARROW_COURT,
     "Form 8609 for the Marrow Court rehabilitation (docs/01-form-8609-marrow-court.pdf); Haral's 2015 Form 8609-A; the 2025 rent roll.",
+  ),
+  // A full-time engineer: not a real estate professional, so the building's credit is passive (Form 8582-CR).
+  fact(
+    "rental",
+    RENTAL_KEYS.realEstateProfessional,
+    false,
+    "Verbal: he works full time as an engineer.",
   ),
 ];

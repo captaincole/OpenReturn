@@ -4,7 +4,7 @@ Form 8609-A figures one year's low-income housing credit for one building. Sourc
 
 ## For Form 8586
 
-Form 8586 has no rules yet. Its line 3 takes "the total credit for attached Form(s) 8609-A" (`irs-8586-form-2025::sec::line-3::b01`), and its line 2 asks for the BINs of the buildings whose qualified basis decreased. `form8609ABuildingCredits(info)` in `credits.ts` returns one entry for each Form 8609-A: the BIN, item E, and line 18 (0 when Part II has no credit; undefined while the copy waits; unsupported when a line up to 18 is). Form 8586 line 1 is the number of entries.
+Form 8586 has its rules (`engine/src/federal/8586/`, its own `QUESTIONS.md`). Its line 3 takes "the total credit for attached Form(s) 8609-A" (`irs-8586-form-2025::sec::line-3::b01`), and its line 2 asks for the BINs of the buildings whose qualified basis decreased. `form8609ABuildingCredits(info)` in `credits.ts` returns one entry for each Form 8609-A: the BIN, item E, and line 18 (0 when Part II has no credit; undefined while the copy waits; unsupported when a line up to 18 is). Form 8586 line 1 is the number of entries.
 
 ## Two texts conflict
 
