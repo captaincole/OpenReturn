@@ -7,8 +7,8 @@
 import {
   businessesOnReturn,
   CA_EMPLOYEE_CLASSIFICATION_KEYS,
-  workOpportunityLaborReduction,
-  workOpportunityWageReduction,
+  figuredLaborCreditReduction,
+  wageCreditReduction,
 } from "../../../facts/index.js";
 import { spousePropertiesOnReturn } from "../../../federal/rentals/passive.js";
 import { sum } from "../../../money.js";
@@ -121,12 +121,12 @@ export function resolveActivityAdjustments(inputs: ResolverInputs) {
         }
       : undefined;
   const asked = files540 && hasBusiness;
-  const wageCredit = workOpportunityWageReduction(inputs.facts, joint);
-  const farmCredit = workOpportunityLaborReduction(inputs.facts, joint);
+  const wageCredit = wageCreditReduction(inputs.facts, joint);
+  const farmCredit = figuredLaborCreditReduction(inputs.facts, joint);
   return {
     caEmployeeAmounts: amounts,
-    caWorkOpportunityWageCredit: wageCredit > 0 ? wageCredit : undefined,
-    caWorkOpportunityFarmCredit: farmCredit.credit > 0 ? farmCredit : undefined,
+    caWageCreditAddBack: wageCredit > 0 ? wageCredit : undefined,
+    caFarmLaborCredits: farmCredit.credit > 0 ? farmCredit : undefined,
     businessDepreciationAdjustment: adjustmentFor(inputs, "business"),
     rentalDepreciationAdjustment: adjustmentFor(inputs, "rental"),
     activityMissingInputs: asked

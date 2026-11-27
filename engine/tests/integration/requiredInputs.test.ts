@@ -170,6 +170,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "Form 982 lists a debt fact again while an answer inside it is missing",
   ],
   [
+    /^empowerment_zone_employee\.[^.]+$/,
+    "each fact is one whole employee of the taxpayer's business or farm who worked in an " +
+      "empowerment zone (Form 8844 line 1); whether one exists is Cade's question",
+  ],
+  [
     /^armed_forces_move\.[^.]+$/,
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],
