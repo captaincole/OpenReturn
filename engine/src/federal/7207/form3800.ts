@@ -4,7 +4,9 @@
  * line 8a). Each facility's line 8a is one source. The separate form's line 7
  * is not: Form 3800 takes each K-1 credit as its own K-1 source (3800/sources.ts,
  * with the entity's EIN), and a stated credit that names its entity is
- * already a stated source, so nothing is counted twice.
+ * already a stated source, so nothing is counted twice. A stated line 1b
+ * credit that names no entity may be the facility's own credit again, so the
+ * facility's source is a gap then, as Form 8586 and Form 5884 do.
  *
  * A transfer (section 6418) or an elective payment (section 6417(d)(1)(D))
  * reaches Form 3800 as Form 3468's do (3468/credit.ts): the transfer's stated
@@ -13,6 +15,7 @@
  */
 
 import {
+  getGeneralBusinessCreditFacts,
   readAdvancedManufacturingFacilityFacts,
   type AdvancedManufacturingFacilityFactValue,
 } from "../../facts/index.js";
@@ -31,6 +34,15 @@ const TRANSFER_ABOVE_CREDIT_GAP =
 const PURCHASED_GAP =
   "A purchased credit is a transferee's credit, reported on Form 3800 (irs-7207-inst-2025::sec::line-7::b02, Transferees of Eligible Credits), not on the facility's Form 7207.";
 
+const STATED_TWICE_GAP =
+  "An advanced manufacturing production credit is stated as a Form 3800 line 1b amount with no pass-through entity, and Form 7207 figures one from the facility facts: the engine cannot tell whether they are the same credit.";
+
+/* A stated line 1b credit that names no pass-through entity, which a facility's credit may repeat. */
+const statedOwnCredit = (inputs: ResolverInputs) =>
+  getGeneralBusinessCreditFacts(inputs.facts).some(
+    ({ value }) => value.line === FORM_3800_LINE && value.passThroughEin === undefined,
+  );
+
 /* Why the facility's elections cannot reach Form 3800 as stated; undefined when they can. */
 function electionGap(value: AdvancedManufacturingFacilityFactValue, credit: number) {
   const { transfer, electivePayment } = value;
@@ -46,12 +58,13 @@ export function form7207CreditSources(inputs: ResolverInputs): CreditSource[] {
   const copies = filedForm7207Copies(inputs);
   if (copies.length === 0) return [];
   const { facilities } = readAdvancedManufacturingFacilityFacts(inputs.facts);
+  const statedTwice = statedOwnCredit(inputs);
   return facilities.flatMap(({ key, value }) => {
     const copy = copies.find((each) => each.key === key);
     if (copy?.total === undefined) return [];
     const { passive, passiveActivity, transfer, electivePayment } = value;
     const credit = typeof copy.total === "number" ? copy.total : 0;
-    const gap = electionGap(value, credit);
+    const gap = statedTwice && credit > 0 ? STATED_TWICE_GAP : electionGap(value, credit);
     const source: CreditSource = {
       credit: {
         line: FORM_3800_LINE,

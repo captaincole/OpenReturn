@@ -35,6 +35,15 @@ export const PART_II_ROWS: ReadonlyArray<ComponentRow> = [
   // irs-7207-inst-2025::sec::line-1-2::b01 to ::b03
   capacity("1a", "0.part2.1a_thin_film_pv_cell", 0.04, "pv_cell"),
   units("1b", "0.part2.1b_photovoltaic_wafer", 12, "photovoltaic_wafer"),
+  /*
+   * DECISION (2026-11-27, by the author): line 1c is solar grade polysilicon
+   * and line 1d is polymeric backsheet. The form face prints "c Solar grade
+   * polysilicon ... Kilogram $ 3.00" and "d Polymeric backsheet ... Square
+   * meter $ 0.40" (irs-7207-face-2025, Part II line 1); the instructions say
+   * "Line 1c. Polymeric backsheet" and "Line 1d. Solar grade polysilicon"
+   * (irs-7207-inst-2025::sec::line-1-2::b01). The engine follows the face,
+   * because the face's units and rates are the statute's (45X(b)(1)(C), (D)).
+   */
   units("1c", "0.part2.1c_solar_grade_polysilicon", 3, "solar_grade_polysilicon"),
   units("1d", "0.part2.1d_polymeric_backsheet", 0.4, "polymeric_backsheet"),
   capacity("1e", "0.part2.1e_solar_module", 0.07, "solar_module"),

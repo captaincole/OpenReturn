@@ -24,6 +24,7 @@ import {
   isFacility,
   isGap,
   row,
+  withPlant,
 } from "./fixtures.js";
 
 const WORKS = makePartnershipK1FactKey(WORKS_ID);
@@ -120,6 +121,29 @@ describe("who files Form 7207", () => {
     expect(evaluate(facts).missing("form-7207")).toContain(
       "advanced_manufacturing_facility.broken",
     );
+  });
+
+  it("a malformed facility fact alone still files the form, and the form waits for it", () => {
+    const { passive: _dropped, ...broken } = PLANT;
+    const facts = withPlant(broken as unknown as typeof PLANT);
+    const run = evaluate(facts);
+    expect(run.files("form-7207")).toBe(true);
+    expect(run.missing("form-7207")).toEqual([PLANT_KEY]);
+    expect(run.value("form-7207", "1.line.8a_total_credit")).toBeUndefined();
+  });
+});
+
+describe("a stated line 1b credit with no entity next to a facility", () => {
+  it("is not counted twice: Form 3800 line 1b is a gap", () => {
+    const stated = row("other", "general_business_credit.current.amp-own", {
+      sourceForm: "7207",
+      line: "1b",
+      amount: 203_365,
+      passive: false,
+    });
+    const run = evaluate([...bran.facts, stated]);
+    expect(run.value("form-7207", "1.line.8a_total_credit")).toBe(203_365);
+    expect(isGap(run.field("form-3800", "2.part3.1b_form_7207_col_e"))).toBe(true);
   });
 });
 

@@ -10,17 +10,21 @@ import type { Form7207FilingInfo } from "./filingInfo.js";
  * it on. A partner, shareholder or beneficiary whose only source is a K-1
  * "don't need to file Form 7207" and reports the credit on Form 3800 Part III
  * line 1b (line-7::b01), so a K-1 alone does not; with a facility, the K-1
- * credits go on a separate Form 7207 (copies.ts). The explicit decision still wins.
+ * credits go on a separate Form 7207 (copies.ts). A malformed facility fact
+ * counts too: the facility is stated, so the form waits for the whole fact.
+ * The explicit decision still wins.
  */
 export function form7207MustFile(inputs: ResolverInputs, copies: Form7207Copy[]) {
   const facilities = copies.filter((copy) => copy.key !== PASS_THROUGH_COPY);
+  const { malformedKeys } = readAdvancedManufacturingFacilityFacts(inputs.facts);
+  const stated = [...facilities.map((copy) => copy.key), ...malformedKeys];
   return resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_7207",
     fallbacks: [
       {
-        rule: `fallback: ${facilities.length} advanced manufacturing facilit(ies) stated`,
-        value: facilities.length > 0,
-        triggeredByFactKeys: facilities.map((copy) => copy.key),
+        rule: `fallback: ${stated.length} advanced manufacturing facilit(ies) stated`,
+        value: stated.length > 0,
+        triggeredByFactKeys: stated,
       },
     ],
   });
