@@ -5,9 +5,19 @@
  * to b04). Pure functions on whole dollars; the bindings (partII.ts) read the
  * lines and call them.
  *
- * The two four-place ratios (line 38, line 42) round the half up, the rule
- * Form 540NR lines 36 and 38 follow (540nr/lines.ts, decision A78): one rule
- * for every four-box ratio of the return (QUESTIONS.md).
+ * DECISION (2026-11-26, by the author): the two four-place ratios, line 38
+ * and line 42, round to four places with the half up. Text A, the form: "38
+ * AMT Itemized Deduction Percentage. Divide line 32 by line 37. Do not enter
+ * more than 1.0000 38 ___ . ___ ___ ___ ___" and "42 California AMT Rate.
+ * Divide line 41 by amount from Part I, line 21 42 ___ . ___ ___ ___ ___"
+ * (ca-540nr-sched-p-face-2025::sec::face-part-ii::b03): four boxes and no
+ * rule, so the other digits could be cut off. Text B: FTB Pub. 1100 Example
+ * 43 rounds the same rate, 8,314 ÷ 235,000 = .035379 to ".0354"
+ * (ftb-pub-1100-2025::sec::california-alternative-minimum-tax::b01), and the
+ * Form 540NR booklet: "the FTB rounds the tax rate to four digits after the
+ * decimal" (ca-540nr-booklet-2025::sec::line-36-ca-tax-rate::b01, decision
+ * A78). The engine follows Text B: one rule for every four-box ratio of the
+ * same return, the one the FTB's own example of this line applies.
  */
 
 import { atLeast, sum } from "../../../money.js";

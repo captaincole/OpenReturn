@@ -152,6 +152,11 @@ describe("the California part of the ISO spread (line 29d)", () => {
     expect(run.value(SP("1.line.29d_iso_cqso"))).toBeUndefined();
     expect(run.value(SP("1.line.32_california_amt_agi"))).toBe(268250);
     expect(run.value(SP("1.line.45_alternative_minimum_tax"))).toBe(0);
+    // Part III line 3: "Subtract line 2 from line 1": regular tax above the TMT.
+    const line1 = run.value(SP("2.part3.1_tax_from_form_540nr_line_42")) as number;
+    const line2 = run.value(SP("2.part3.2_tentative_minimum_tax")) as number;
+    expect(line1).toBeGreaterThan(line2);
+    expect(run.value(SP("2.part3.3_excess_tax_offset_by_credits_col_c"))).toBe(line1 - line2);
   });
 
   it("shares sold in the year of exercise: line 10 and line 29d are gaps", () => {
@@ -204,6 +209,23 @@ describe("the non-itemizer path", () => {
     expect(run.value(SP("1.line.40_california_amti"))).toBe(
       run.value(SP("1.line.32_california_amt_agi")),
     );
+  });
+
+  it("investment interest enters no adjustment: line 14 keeps the standard deduction and the ISO spread", () => {
+    // "If you did not itemize deductions and had investment interest expense, do not enter an adjustment" (::line-7…::b02).
+    const run = evaluate(
+      { ...standard, [INVESTMENT_INTEREST_KEYS.expensePaid]: 4000 },
+      standardDecisions,
+    );
+    expect(run.reason(SP("0.line.7_investment_interest_adjustment"))).not.toContain("FTB 3526");
+    expect(run.value(SP("0.line.7_investment_interest_adjustment"))).toBeUndefined();
+    expect(run.value(SP("0.line.14_total_adjustments_preferences"))).toBe(205706);
+    expect(run.value(SP("0.line.21_alternative_minimum_taxable_income"))).toBe(481000);
+    expect(run.value(SP("1.line.24_total_tentative_minimum_tax"))).toBe(29508);
+    expect(run.reason(SP("1.line.29a_investment_interest_expense"))).not.toContain("FTB 3526");
+    expect(run.value(SP("1.line.45_alternative_minimum_tax"))).toBe(7653);
+    expect(run.value(NR("2.line.71_alternative_minimum_tax"))).toBe(7653);
+    expect(run.value(NR("2.line.74_total_tax"))).toBe(28627);
   });
 });
 

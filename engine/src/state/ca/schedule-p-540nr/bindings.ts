@@ -22,7 +22,7 @@ import {
   type Bind,
   type SchedulePMethod,
 } from "./fromScheduleP.js";
-import { PART_II_BINDINGS } from "./partII.js";
+import { PART_II_BINDINGS, ftb3526Gap } from "./partII.js";
 import { PART_III_BINDINGS, PART_III_UNSUPPORTED, creditFormsOf } from "./partIII.js";
 import type { ScheduleP540NR } from "./types.js";
 
@@ -30,7 +30,7 @@ type Spec = FormSpec<ScheduleP540NR, ScheduleP540NRFilingInfo>;
 
 const FORM_PREFIX = "schedule-p-540nr.";
 
-/* Part I lines that read FTB 3526 (line 7, and line 14, which adds it). */
+/* Part I lines that read FTB 3526 (line 7, and line 14, which adds it), for a return that itemizes. */
 const READS_FTB_3526: readonly string[] = [
   "0.line.7_investment_interest_adjustment",
   "0.line.14_total_adjustments_preferences",
@@ -89,14 +89,19 @@ function scheduleP540Rule(field: string): Rule | undefined {
   return reason === undefined ? undefined : { unsupported: reason };
 }
 
-/* A rule, with the gap of the Form 540-only forms the field takes first. */
-function withGap(rule: Rule, forms: readonly string[]): Rule {
-  if (forms.length === 0) return rule;
+/* A rule, with the gap of a Form 540-only form the field takes first. */
+function withGap(rule: Rule, gap: Bind): Rule {
   return {
     bind: (form, info) =>
-      gapFor(info, ...forms) ??
-      ("bind" in rule ? rule.bind(form, info) : unsupported(rule.unsupported)),
+      gap(form, info) ?? ("bind" in rule ? rule.bind(form, info) : unsupported(rule.unsupported)),
   };
+}
+
+/* The gap a field takes first: FTB 3526 for an itemizer (partII.ts), or its credit forms. */
+function gapOf(field: string): Bind | undefined {
+  if (READS_FTB_3526.includes(field)) return ftb3526Gap;
+  const forms = creditFormsOf(field);
+  return forms.length === 0 ? undefined : (_, info) => gapFor(info, ...forms);
 }
 
 function ruleOf(field: string): Rule {
@@ -106,8 +111,8 @@ function ruleOf(field: string): Rule {
   if (reason !== undefined) return { unsupported: reason };
   const rule = californiaPartRule(field) ?? scheduleP540Rule(field);
   if (rule === undefined) throw new Error(`Schedule P (540NR) ${field} has no rule.`);
-  const forms = READS_FTB_3526.includes(field) ? ["form-3526"] : creditFormsOf(field);
-  return withGap(rule, forms);
+  const gap = gapOf(field);
+  return gap === undefined ? rule : withGap(rule, gap);
 }
 
 function specOf(): Pick<Spec, "bindings" | "unsupported"> {

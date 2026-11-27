@@ -465,12 +465,20 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       "schedule-p-540nr.2.part3.1_tax_from_form_540nr_line_42": 19569,
       // Line 2. Enter the tentative minimum tax from Side 2, Part II, line 43.
       "schedule-p-540nr.2.part3.2_tentative_minimum_tax": 27475,
+      // Line 3. Subtract line 2 from line 1. If zero or less, enter 0.
+      "schedule-p-540nr.2.part3.3_excess_tax_offset_by_credits_col_c": 0,
       // Section B, Line 11. If Part III, line 3 is zero, enter the amount from line 1. If line 3 i
       "schedule-p-540nr.2.part3.11_tax_balance_col_c": 19569,
       // Section C, Line 22. Enter your alternative minimum tax from Side 2, Part II, line 45, (c)
       "schedule-p-540nr.2.part3.22_alternative_minimum_tax_col_c": 7829,
       // Line 25. Adjusted A M T. Enter the balance from line 24, column (c) here and on Form 540NR
       "schedule-p-540nr.2.part3.25_adjusted_amt_col_c": 7829,
+    },
+    renderedText: {
+      // Line 38. AMT itemized deduction percentage: line 32 / line 37 = 468,250 / 481,000 = .9735
+      "schedule-p-540nr.1.line.38_amt_itemized_deduction_percentage": "0.9735",
+      // Line 42. California AMT rate: line 41 / Part I line 21 = 28,240 / 466,500 = .0605
+      "schedule-p-540nr.1.line.42_california_amt_rate": "0.0605",
     },
   },
 };

@@ -88,6 +88,16 @@ export const LINE_29_ITEMS = [
 ] as const;
 
 /*
+ * The FTB 3526 gap of Part I lines 7 and 14 and of lines 29a and 34e: FTB 3526
+ * is figured for Form 540 only. It counts only for a return that itemizes: "If
+ * you did not itemize deductions and had investment interest expense, do not
+ * enter an adjustment"
+ * (ca-540nr-sched-p-inst-2025::sec::line-7-investment-interest-expense-adjustment::b02).
+ */
+export const ftb3526Gap = (form: Form, info: Info) =>
+  itemizes(form, info) === false ? undefined : gapFor(info, "form-3526");
+
+/*
  * Line 29a: the California part of Part I line 7. The engine figures line 7
  * only for a return that itemizes, and only from FTB 3526 (Schedule P (540)
  * line 7), which it figures for Form 540 only: with FTB 3526 needed the line
@@ -95,7 +105,7 @@ export const LINE_29_ITEMS = [
  * itemizer's line 7 reaches California AMTI through line 34e and the
  * proration of lines 35 to 39 (QUESTIONS.md).
  */
-const line29a: Bind = (_, info) => gapFor(info, "form-3526");
+const line29a: Bind = ftb3526Gap;
 
 /*
  * Line 29d: "Enter on line 29a through line 29r the amounts that relate to
@@ -151,9 +161,9 @@ const line33: Bind = whenItemized((form) =>
 
 /* Lines 34a to 34e copy Part I lines 2, 3, 4, 5 and 7 (the form), gaps included. */
 const copyOfPartI =
-  (field: keyof ScheduleP540NR, gapForms: readonly string[] = []): Bind =>
+  (field: keyof ScheduleP540NR, gap?: Bind): Bind =>
   (form, info) =>
-    whenItemized((each) => numberOrBlank(each[field]) ?? gapFor(info, ...gapForms))(form, info);
+    whenItemized((each) => numberOrBlank(each[field]) ?? gap?.(each, info))(form, info);
 
 const PART_I_4_REASON =
   "Part I line 4 is not figured: no fact on the use of home-equity loan proceeds (Schedule P (540) line 4).";
@@ -294,7 +304,7 @@ const LINES_25_TO_42: Readonly<Record<string, Bind>> = {
   ),
   "1.line.34e_investment_interest_adjustment": copyOfPartI(
     "0.line.7_investment_interest_adjustment",
-    ["form-3526"],
+    ftb3526Gap,
   ),
   "1.line.34_itemized_deductions_part1_total": line34,
   "1.line.35_total_amt_itemized_deductions": line35,
