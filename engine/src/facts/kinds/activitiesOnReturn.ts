@@ -19,6 +19,7 @@ import { placesPersonalProperty, type ScopedDepreciation } from "./depreciation.
 import { empowermentZoneFigures } from "./empowermentZone.js";
 import { statedRentalsOnReturn, type RentalFactValue } from "./rental.js";
 import { section179RecaptureByBusiness } from "./section179Recapture.js";
+import { smallEmployerPlanReductions } from "./smallEmployerPlan.js";
 import { workOpportunityCreditByActivity } from "./workOpportunity.js";
 
 type FactRow = { key: string; value: unknown; category: string };
@@ -102,6 +103,20 @@ const onLine =
   (facts: ReadonlyArray<FactRow>, joint: boolean): ReductionsByBusiness =>
     new Map([...creditOf(facts, joint)].map(([key, amount]) => [key, [{ line, amount }]]));
 
+/* Credits of each business that lower the expense lines they name. */
+const byLine = (
+  reductions: ReadonlyMap<string, Readonly<Record<string, number>>>,
+): ReductionsByBusiness =>
+  new Map(
+    [...reductions].map(([key, lines]) => [
+      key,
+      Object.entries(lines).map(([line, amount]) => ({
+        line: line as keyof BusinessExpenses,
+        amount,
+      })),
+    ]),
+  );
+
 /*
  * The credits of the taxpayer's own businesses that lower a Schedule C
  * expense. A new credit form adds one entry. A credit from a K-1 is not here:
@@ -143,6 +158,16 @@ const BUSINESS_CREDIT_REDUCTIONS: ReadonlyArray<CreditReduction> = [
    * the line; its stated amount holds the expenditures before the credit.
    */
   { reductionsOf: disabledAccessReductions, californiaAddsBack: true },
+  /*
+   * Form 8881 lines 5 and 6g come off the plan's business: the startup costs
+   * line the fact names and line 19 (smallEmployerPlan.ts). No California text
+   * names this credit, so California starts from the reduced amounts
+   * (federal/8881/QUESTIONS.md item 2).
+   */
+  {
+    reductionsOf: (facts) => byLine(smallEmployerPlanReductions(facts)),
+    californiaAddsBack: false,
+  },
 ];
 
 type Business = { key: string; value: BusinessFactValue };

@@ -22,6 +22,7 @@ import { lowIncomeHousingSourcesOf } from "../8586/form3800.js";
 import { disabledAccessSourcesOf } from "../8826/form3800.js";
 import { withForm8844 } from "../8844/sources.js";
 import { tipCreditSourcesOf } from "../8846/form3800.js";
+import { smallEmployerPlanSources } from "../8881/sources.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
 import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
 import { gap, type Cell } from "./cells.js";
@@ -219,8 +220,10 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
     ...workOpportunity.sources,
     ...disabledAccess.sources,
   ]);
-  missing.push(...zone.missing);
-  const current = zone.sources;
+  // Lines 1j, 1dd and 1ee: Form 8881 lines 8, 11 and 15 less the K-1s, the taxpayer's own plan (8881/sources.ts).
+  const plan = smallEmployerPlanSources(inputs);
+  missing.push(...zone.missing, ...plan.missing);
+  const current = [...zone.sources, ...plan.sources];
   const carryovers = getCreditCarryoverFacts(inputs.facts).map(carryoverOf);
   return { sources: { current, carryovers }, missing: [...new Set(missing)] };
 }

@@ -89,6 +89,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "Form 5884 lists the fact again while it is malformed",
   ],
   [
+    /^small_employer_plan\.[^.]+$/,
+    "each fact is the whole retirement plan of the taxpayer's own business or farm that claims " +
+      "the Form 8881 credits; whether one exists is Cade's question, as for a business fact. " +
+      "Form 8881 lists the fact again while it is malformed",
+  ],
+  [
     /^casualty\.[^.]+$/,
     "each fact is a whole casualty event (Form 4684); whether one happened is Cade's question",
   ],
