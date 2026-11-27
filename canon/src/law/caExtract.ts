@@ -1,3 +1,4 @@
+import { SCOPE_FILE, scopeFileText, type CaPartScope, type CaScope } from "./caScope";
 import {
   CODES_TABLE,
   isUnder,
@@ -18,28 +19,15 @@ import { writeZip } from "./zipWrite";
 
 /*
  * Cuts the part of California's session archive that the library uses: one
- * code, one division, some parts. The archive is a rolling file of about
- * 1.3 GB, so law.db stores this extract instead. It keeps each table row
- * as printed, and each section's XML file. One change makes it repeatable:
+ * code, one division, some parts, each whole or by chapters (caScope.ts).
+ * The archive is a rolling file of about 1.3 GB, so ca.db stores this
+ * extract instead. It keeps each table row as printed, each section's XML
+ * file, and the scope it was cut with. One change makes it repeatable:
  * a section's XML file is named by the row's id ("lob/RTC17041.20252212.xml"),
  * not by its place in the archive, and the row's file field names it so.
  * Rows and files are in a fixed order, and the zip has fixed dates, so the
  * same law makes the same bytes.
  */
-
-export interface CaScope {
-  code: string;
-  division: string;
-  /** The parts to keep, as the tables print them: "10.", "10.2.". */
-  parts: string[];
-}
-
-/** California's personal income tax: Revenue and Taxation Code, Division 2, Parts 10 and 10.2. */
-export const RTC_PERSONAL_INCOME_TAX: CaScope = {
-  code: "RTC",
-  division: "2.",
-  parts: ["10.", "10.2."],
-};
 
 export interface CaExtract {
   zip: Uint8Array;
@@ -82,6 +70,7 @@ export function extractCalifornia(archive: ZipFile, scope: CaScope): CaExtract {
       name: SECTION_TABLE,
       data: bytesOf(joinLines(sections.map(({ line, row }) => renamedLob(line, row.id ?? "")))),
     },
+    { name: SCOPE_FILE, data: bytesOf(scopeFileText(scope)) },
   ];
   const entries = [...tables, ...lobs.sort((left, right) => compareText(left.name, right.name))];
   const zip = writeZip(entries);
@@ -110,25 +99,47 @@ function codeLines(table: string, code: string): string {
   return joinLines(lines);
 }
 
-/** The division's row and every row in the kept parts, in the code's order. */
+/** The division's row, each kept part's row, and every row in the kept parts or chapters, in the code's order. */
 function keptTocLines(table: string, scope: CaScope): string[] {
   const rows = tableLines(table)
     .map((line) => ({ line, row: parseRow(line, TOC_COLUMNS) }))
     .filter(({ row }) => row.law_code === scope.code && row.division === scope.division);
   const division = rows.find(({ row }) => isLevel(row, "division"));
-  const parts = scope.parts.map((part) => {
-    const found = rows.find(({ row }) => isLevel(row, "part") && row.part === part);
-    if (!found) throw new Error(`pubinfo: ${scope.code} has no part ${part} in its contents`);
-    return found.row.node_treepath ?? "";
-  });
   if (!division) throw new Error(`pubinfo: ${scope.code} has no division ${scope.division}`);
-  const kept = rows.filter(
-    ({ row }) =>
-      row === division.row || parts.some((part) => isUnder(row.node_treepath ?? "", part)),
-  );
-  return kept
+  const kept = scope.parts.map((part) => keptPaths(rows, scope.code, part));
+  const levels = new Set(kept.map(({ level }) => level));
+  const trees = kept.flatMap(({ trees }) => trees);
+  return rows
+    .filter(
+      ({ row }) =>
+        row === division.row ||
+        levels.has(row.node_treepath ?? "") ||
+        trees.some((tree) => isUnder(row.node_treepath ?? "", tree)),
+    )
     .sort((left, right) => Number(left.row.node_sequence) - Number(right.row.node_sequence))
     .map(({ line }) => line);
+}
+
+type ScopedRow = { line: string; row: TocRow };
+
+/** A part's own row, and the trees to keep under it: the whole part, or each chapter named. */
+function keptPaths(rows: ScopedRow[], code: string, scope: CaPartScope) {
+  const pathOf = (level: Level, matches: (row: TocRow) => boolean, name: string) => {
+    const found = rows.find(({ row }) => isLevel(row, level) && matches(row));
+    if (!found) throw new Error(`pubinfo: ${code} has no ${name} in its contents`);
+    return found.row.node_treepath ?? "";
+  };
+  const level = pathOf("part", (row) => row.part === scope.part, `part ${scope.part}`);
+  const chapters = scope.chapters ?? [];
+  if (chapters.length === 0) return { level, trees: [level] };
+  const trees = chapters.map((chapter) =>
+    pathOf(
+      "chapter",
+      (row) => row.part === scope.part && row.chapter === chapter,
+      `chapter ${chapter} in part ${scope.part}`,
+    ),
+  );
+  return { level, trees };
 }
 
 const LEVELS = ["division", "title", "part", "chapter", "article"] as const;
