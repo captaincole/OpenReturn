@@ -20,25 +20,33 @@ Form 8332 has no amounts. The custodial parent signs it to let the other parent 
 
 8. **E-file.** "If you are filing your return electronically, you must file Form 8332 with Form 8453" (noncustodial-parent::b01). The engine prints no Form 8453. No dollars change.
 
-9. **A child who lived with the taxpayer half the year or less, with no release.** The engine already gives this child the credit for other dependents (`dependentCredit`, `form8332Release: false`). Under the special rule (definitions-and-special-rules::b02) such a child is usually the other parent's qualifying child, not this taxpayer's dependent at all. This is the existing rule, unchanged here. It can change $500.
+9. **A child who lived with the taxpayer half the year or less, with no release.** Fixed after the blind fill (case 3). The engine gave this child the credit for other dependents. A qualifying relative is a person "Who wasn't a qualifying child (see Step 1) of any taxpayer for 2025" (irs-1040-inst-2025::sec::is-your-qualifying-relative::b01), and only the release moves the claim to the noncustodial parent (definitions-and-special-rules::b01, ::b02). So a child under 17 by relationship who lived here half the year or less with `form8332Release: false` is not a dependent now (`isOtherParentsQualifyingChild`): no Dependents row, no Schedule 8812 line 6, no Form 540 line 10. The same block has an exception the engine cannot see: "a person isn't a taxpayer if the person isn't required to file a U.S. income tax return and either doesn't file such a return or files only to get a refund". Default: the person the child lived with is a taxpayer. It can change $500 (and California's $475 dependent exemption credit).
 
 10. **The years as printed.** "Write the specific future year(s) or 'all future years'" (part-ii::b01). The engine prints "2026", "2026 and 2027", "2026 through 2028" (the instructions' "2023 through 2027", part-iii::b01) and "all future years". No dollars change.
 
 11. **California.** Form 540 line 10 and FTB 3853 read the claimed dependents too, so a released child leaves them. California follows the federal dependent. It can change the $475 dependent exemption credit.
 
+12. **A stepchild on a joint return.** The release names the "noncustodial parent" (irs-8332-form-2025::sec::special-rule-for-children-of::b01). On a joint return the child's parent may be the spouse, and the taxpayer is a stepparent. The engine files the copy with the spouse as the noncustodial parent (`parent: "spouse"`) and gives the child tax credit; the blind fill (case 13) read it the same way. A reading that refused the claim would change $2,200.
+
 ## Confidence by field group
 
-| Field group | Confidence |
-| --- | --- |
-| Header (noncustodial parent's name and SSN) | stated rule (custodial-parent-and::b01) |
-| Part I (child, year, custodial parent's SSN) | stated rule (part-i::b01); the default year is own reading |
-| Part II (child, future years, SSN) | stated rule (part-ii::b01); the printed text of the years is own reading |
-| Part III (child, revoked years, SSN) | published example (part-iii::b01, years only, no dollars) |
-| Who files, one copy for each child | stated rule (form-8332-rev-december-2025::b01, part-i…::b02 and ::b03) |
+| Field group                                         | Confidence                                                                                                              |
+| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Header (noncustodial parent's name and SSN)         | stated rule (custodial-parent-and::b01)                                                                                 |
+| Part I (child, year, custodial parent's SSN)        | stated rule (part-i::b01); the default year is own reading                                                              |
+| Part II (child, future years, SSN)                  | stated rule (part-ii::b01); the printed text of the years is own reading                                                |
+| Part III (child, revoked years, SSN)                | published example (part-iii::b01, years only, no dollars)                                                               |
+| Who files, one copy for each child                  | stated rule (form-8332-rev-december-2025::b01, part-i…::b02 and ::b03)                                                  |
 | Child tax credit moves, HOH/EIC/dependent care stay | stated rule (irs-1040-inst-2025 definitions-and-special-rules::b02, ::b03; irs-2441-inst-2025 qualifying-person-s::b03) |
-| 1040 HOH child's name | stated rule (head-of-household::b03); the choice with no named person is own reading |
+| 1040 HOH child's name                               | stated rule (head-of-household::b03); the choice with no named person is own reading                                    |
 
 No field is unsupported. A copy is a gap only when its facts disagree (a release that does not name 2025, or the spouse named as a parent on a return that is not joint).
+
+## Second opinions
+
+- **Blind fill (2026-11-26), 14 cases.** One difference, case 3 (no release, child lived here 3 months): the engine gave the credit for other dependents and listed the child; the blind fill did neither. The blind fill was right (doubt 9); the engine is fixed and all 14 cases now agree.
+- **PolicyEngine-US 2.154.1 (commit 0fbed6ddb1).** It does not model Form 8332: "The model has no input for an IRC 152(e) release" (`credits/cdcc/cdcc_eligible.py`), and who is a dependent is a bare input (`is_tax_unit_dependent`). Its child tax credit tests match the engine's: under 17 and an SSN for the child (`ctc_qualifying_child_ignoring_filer_identification`). Its dependent care rule agrees that a custodial parent's child under 13 qualifies "even when the noncustodial parent claims the dependent" (IRC 21(e)(5)). Its EIC qualifying child is drawn from the tax unit's dependents (`is_eitc_qualifying_child`), so it cannot show a released child who stays the custodial parent's EIC child: a scope difference, not a lead. No constant or formula differs.
+- **IRS Direct File.** The repo names no checkout of it; not compared.
 
 ## Proposals for a discussion
 

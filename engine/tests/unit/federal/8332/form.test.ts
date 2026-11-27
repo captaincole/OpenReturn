@@ -197,6 +197,9 @@ describe("what the release moves", () => {
       withDependent(ellorienFacts, TOBIN_KEY, { ...TOBIN, form8332Release: false }),
     );
     expect(noRelease.value("schedule-8812", "0.line.4_qualifying_children_under_17")).toBe(1);
+    // Without the release Tobin is the other parent's qualifying child: no dependent here, no ODC.
+    expect(noRelease.info.dependents?.some((each) => each.factKey === TOBIN_KEY)).toBe(false);
+    expect(noRelease.value("schedule-8812", "0.line.6_other_dependents")).toBe(0);
     expect(noRelease.info.form8332Copies?.map((copy) => copy.kind)).toEqual(["revocation"]);
   });
 

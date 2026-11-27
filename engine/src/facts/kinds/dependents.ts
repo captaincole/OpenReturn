@@ -6,7 +6,9 @@
  * (this taxpayer) released the claim on Form 8332 (releasedToNoncustodialParent)
  * is recorded too, because the child still counts for head of household, the
  * earned income credit and the dependent care credit; that child is not claimed
- * (getClaimedDependentFacts leaves it out).
+ * (getClaimedDependentFacts leaves it out). A second exception: a child who lived
+ * with the taxpayer half the year or less with no Form 8332 release is the other
+ * parent's qualifying child, so getClaimedDependentFacts leaves that child out too.
  */
 
 import type { TaxFactRow } from "../rows.js";
@@ -107,12 +109,46 @@ export function isClaimedDependent(dependent: DependentFactValue): boolean {
 
 /*
  * The dependents the return claims, in the order recorded: every dependent fact
- * but a child released to the noncustodial parent ("The dependents you claim are
- * those you list by name and SSN in the Dependents section",
+ * but a child released to the noncustodial parent and a child who is the other
+ * parent's qualifying child ("The dependents you claim are those you list by
+ * name and SSN in the Dependents section",
  * irs-1040-inst-2025::sec::head-of-household::b03).
  */
-export function getClaimedDependentFacts(facts: ReadonlyArray<FactRow>): DependentFact[] {
-  return getDependentFacts(facts).filter((fact) => isClaimedDependent(fact.dependent));
+export function getClaimedDependentFacts(
+  facts: ReadonlyArray<FactRow>,
+  taxYear: number,
+): DependentFact[] {
+  return getDependentFacts(facts).filter(
+    (fact) =>
+      isClaimedDependent(fact.dependent) && !isOtherParentsQualifyingChild(fact.dependent, taxYear),
+  );
+}
+
+/*
+ * A child under 17 by relationship who lived with the taxpayer half the year
+ * or less, with no Form 8332 release (form8332Release false), is not this
+ * taxpayer's dependent. The child fails the residency test of a qualifying
+ * child, and a qualifying relative is a person "Who wasn't a qualifying child
+ * (see Step 1) of any taxpayer for 2025"
+ * (irs-1040-inst-2025::sec::is-your-qualifying-relative::b01): the child is the
+ * qualifying child of the parent the child lived with. Only the release moves
+ * the claim: "A child will be treated as the qualifying child or qualifying
+ * relative of the child's noncustodial parent (defined later) if all of the
+ * following conditions apply" (irs-1040-inst-2025::sec::definitions-and-special-rules::b01),
+ * condition 4 being the signed Form 8332 (::b02).
+ */
+export function isOtherParentsQualifyingChild(
+  dependent: DependentFactValue,
+  taxYear: number,
+): boolean {
+  const age = ageAtYearEnd(dependent.dob, taxYear);
+  return (
+    dependent.form8332Release === false &&
+    age !== undefined &&
+    age < 17 &&
+    isQualifyingChildRelationship(dependent.relationship) &&
+    livedWithTaxpayerOverHalfYear(dependent, taxYear) === false
+  );
 }
 
 /*
@@ -224,12 +260,16 @@ export type DependentCredit = "child_tax_credit" | "other_dependents" | "none";
  * employment; a taxpayer with only an ITIN has no fact yet. A child the
  * taxpayer released to the noncustodial parent earns neither credit here: only
  * the noncustodial parent claims them (irs-1040-inst-2025::sec::definitions-and-special-rules::b02).
+ * Nor does a child who lived here half the year or less with no release
+ * (isOtherParentsQualifyingChild): that child is no dependent of this taxpayer.
  */
 export function dependentCredit(
   dependent: DependentFactValue,
   taxYear: number,
 ): DependentCredit | undefined {
-  if (!isClaimedDependent(dependent)) return "none";
+  if (!isClaimedDependent(dependent) || isOtherParentsQualifyingChild(dependent, taxYear)) {
+    return "none";
+  }
   const age = ageAtYearEnd(dependent.dob, taxYear);
   const livedOverHalfYear = livedWithTaxpayerOverHalfYear(dependent, taxYear);
   if (

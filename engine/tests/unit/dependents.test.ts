@@ -11,6 +11,7 @@ import {
   getClaimedDependentFacts,
   getDependentFacts,
   isClaimedDependent,
+  isOtherParentsQualifyingChild,
   isQualifyingChildRelationship,
   livedWithTaxpayerOverHalfYear,
   type DependentFactValue,
@@ -106,7 +107,23 @@ describe("dependentCredit", () => {
     const apart = { ...niece, monthsLivedWithYou: 2 };
     expect(dependentCredit(apart, 2025)).toBeUndefined();
     expect(dependentCredit({ ...apart, form8332Release: true }, 2025)).toBe("child_tax_credit");
-    expect(dependentCredit({ ...apart, form8332Release: false }, 2025)).toBe("other_dependents");
+  });
+
+  /*
+   * irs-1040-inst-2025::sec::is-your-qualifying-relative::b01: a qualifying
+   * relative is a person "Who wasn't a qualifying child (see Step 1) of any
+   * taxpayer for 2025". With no Form 8332 release, a child who lived here 3
+   * months is the other parent's qualifying child, so no dependent here.
+   */
+  it("a child who lived at home half the year or less with no release is not a dependent", () => {
+    const son = { ...niece, relationship: "Son", monthsLivedWithYou: 3, form8332Release: false };
+    expect(isOtherParentsQualifyingChild(son, 2025)).toBe(true);
+    expect(dependentCredit(son, 2025)).toBe("none");
+    const facts = [{ key: "dependent.a", value: son, category: "dependents" }];
+    expect(getClaimedDependentFacts(facts, 2025)).toEqual([]);
+    expect(isOtherParentsQualifyingChild({ ...son, form8332Release: true }, 2025)).toBe(false);
+    expect(isOtherParentsQualifyingChild({ ...son, monthsLivedWithYou: 7 }, 2025)).toBe(false);
+    expect(isOtherParentsQualifyingChild({ ...son, relationship: "Parent" }, 2025)).toBe(false);
   });
 
   /*
@@ -138,7 +155,10 @@ describe("dependentCredit", () => {
       row("dependent.c", { ...niece, monthsLivedWithYou: 2, form8332Release: true }),
     ];
     expect(getDependentFacts(facts).map((fact) => fact.dependentSlug)).toEqual(["a", "b", "c"]);
-    expect(getClaimedDependentFacts(facts).map((fact) => fact.dependentSlug)).toEqual(["a", "c"]);
+    expect(getClaimedDependentFacts(facts, 2025).map((fact) => fact.dependentSlug)).toEqual([
+      "a",
+      "c",
+    ]);
   });
 
   it("waits while the date of birth, the months in the home or the citizenship is unknown", () => {

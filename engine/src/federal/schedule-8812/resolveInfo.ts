@@ -45,7 +45,7 @@ function dependentRow(factKey: string, dependent: DependentFactValue): Dependent
  * Dependents table and Form 540 line 10 read these rows.
  */
 export function resolveSchedule8812Info(inputs: ResolverInputs): Schedule8812FilingInfo {
-  const dependents = getClaimedDependentFacts(inputs.facts).map((fact) =>
+  const dependents = getClaimedDependentFacts(inputs.facts, TAX_YEAR).map((fact) =>
     dependentRow(fact.sourceFact.key, fact.dependent),
   );
   const undecided = dependents.filter((row) => row.credit === undefined);
