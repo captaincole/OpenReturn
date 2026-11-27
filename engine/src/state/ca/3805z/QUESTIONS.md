@@ -61,6 +61,44 @@ numbers are unit tests (`tests/unit/state/ca/3805z/lines.test.ts`).
 11. **The NOL deduction for AMT.** "use Schedule P ... to compute the NOL for
     alternative minimum tax purposes" (`::alternative-minimum-tax::b01`).
     Schedule P (540) line 20 stays unsupported, as it is for FTB 3805V.
+12. **The hiring credit takes the tax left first.** Both carryovers share
+    one Schedule P (540) line (code 176), and each row's column (f) is the
+    credit "used on Schedule P ... column (b)"
+    (`::part-ii-limitation-of-credits-for-corporations-individuals-estates-and-trusts::b01`,
+    `::b03`). Line 9A column (e) is line 7 less line 8B column (e), so the
+    form's order puts the hiring row first. Default: the tax left caps 8A(f)
+    plus 9A(f) together, hiring first. Dollars: only the split of the
+    carryover between 8B(g) and 9B(g), never the credit used.
+13. **Schedule Z line 1 holds a loss.** Section B line 14: "If the amount is
+    negative, you do not have any business income attributable to the former
+    EZ" (`::part-iii-taxpayer-s-trade-or-business::b04`), with no word on what
+    line 1 shows. The form face says to enter Section B line 14 column (c).
+    Default: the loss prints on lines 1, 3 and 5; line 6a is then $0.
+    Dollars: lines 1 and 5 only; line 7 and Part II do not change.
+14. **Line 8B column (b) names line 9B.** The booklet says line 8B column
+    (b) takes "prior year's Schedule Z, Part II, line 9B, column (g)"
+    (`::part-ii-limitation-of-credits-for-corporations-individuals-estates-and-trusts::b01`),
+    the same words as line 9B column (b). Default: the hiring carryover is
+    last year's line 8B column (g), the row of the same credit. Dollars: no,
+    when the stated carryover is right.
+
+## Second opinions
+
+- PolicyEngine-US 2.154.1 (commit `0fbed6ddb1`, read 2026-11-26): the
+  California variables and parameters (`policyengine_us/variables/gov/states/ca`,
+  `parameters/gov/states/ca`) have no enterprise zone credit, no FTB 3805Z and
+  no California NOL. Nothing to compare.
+- IRS Direct File has no California return, so it has no comparison for this
+  form. The repo names no other reference implementation of a California
+  credit.
+
+## Blind fill (2026-11-26)
+
+- 14 cases. 40 values differ only as blank against 0: Schedule Z line 4 and
+  Side 1 lines 3a to 3c with no EZ NOL (blind blank, engine 0). No value
+  differs in dollars.
+- The blind doubts that change dollars are items 1 (four places), 12 (the
+  carryover split) and 13 (a loss on line 1).
 
 ## Proposals for a discussion
 
