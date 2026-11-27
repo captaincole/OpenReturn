@@ -35,8 +35,8 @@ Not yet. The table shows how far the form engine is.
 <!-- solved-table:start -->
 |  | Federal 2025 | California 2025 |
 | --- | --- | --- |
-| Forms with rules | **43%** (85 of 197) | **48%** (30 of 62) |
-| Fields computed | **83%** (7,998 of 9,583) | **66%** (2,707 of 4,075) |
+| Forms with rules | **46%** (90 of 197) | **60%** (37 of 62) |
+| Fields computed | **78%** (8,207 of 10,516) | **87%** (3,529 of 4,075) |
 <!-- solved-table:end -->
 
 - **Forms with rules:** the forms that the engine computes, against the list of forms that the IRS or the FTB accepts with an individual return.
@@ -125,8 +125,8 @@ The form engine computes the return. The table shows how much of each form it ha
 <!-- coverage-table:start -->
 | Jurisdiction | Forms | Fields supported | Tested |
 | --- | --- | --- | --- |
-| Federal 2025 | 88 | **83%** (7,998 of 9,583) | 79.4% |
-| California 2025 | 38 | **66%** (2,707 of 4,075) | 79.0% |
+| Federal 2025 | 103 | **78%** (8,207 of 10,516) | 79.5% |
+| California 2025 | 38 | **87%** (3,529 of 4,075) | 79.6% |
 <!-- coverage-table:end -->
 
 - **Fields supported:** the share of the form fields that the engine computes. It leaves each other field blank and says so.
@@ -142,11 +142,11 @@ The IRS and the FTB each publish the list of forms that they accept with an indi
 | Forms | Federal 2025 | California 2025 |
 | --- | --- | --- |
 | Forms and schedules for an individual return | 197 | 62 |
-| In the engine | 88 | 38 |
-| With rules | 85 | 30 |
+| In the engine | 103 | 38 |
+| With rules | 90 | 37 |
 | Tier 1 forms | 43 | 22 |
 | Tier 1 in the engine | 43 | 22 |
-| Tier 1 with rules | 43 | 18 |
+| Tier 1 with rules | 43 | 22 |
 
 Cade reads 27 kinds of input document, such as Form W-2 and Form 1099-B.
 <!-- form-list-table:end -->
