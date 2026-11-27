@@ -38,6 +38,11 @@ export function yearOfCompliancePeriod(firstCreditYear: number): number {
   return TAX_YEAR - firstCreditYear + 1;
 }
 
+/* Form 8609 line 3a when it limits line 3 (line-3-2::b01). */
+function maximumQualifiedBasis(value: LowIncomeHousingBuildingFactValue) {
+  return value.limitedToMaximumQualifiedBasis ? value.form8609.maximumQualifiedBasis : undefined;
+}
+
 /* Lines 1 to 3, or undefined while the first year's month-end counts are missing. */
 function basisLines(value: LowIncomeHousingBuildingFactValue, year: number) {
   const line1 = value.form8609.eligibleBasis;
@@ -47,10 +52,7 @@ function basisLines(value: LowIncomeHousingBuildingFactValue, year: number) {
     year === 1 && months !== undefined
       ? averagePortion(months.map(lowIncomePortion))
       : lowIncomePortion(value.yearEnd);
-  const maximum = value.limitedToMaximumQualifiedBasis
-    ? value.form8609.maximumQualifiedBasis
-    : undefined;
-  return { line1, line2, line3: qualifiedBasis(line1, line2, maximum) };
+  return { line1, line2, line3: qualifiedBasis(line1, line2, maximumQualifiedBasis(value)) };
 }
 
 /*
@@ -88,6 +90,8 @@ function imputedZero(value: LowIncomeHousingBuildingFactValue): boolean | undefi
  * = 0.3750 in the example). Reason: that is the part of the first year's credit
  * the modified percentage deferred (section 42(f)(2)(B)); the factor 1.0000
  * gives more back than was deferred unless the building was all low-income.
+ * When line 3 is limited to Form 8609 line 3a (::line-3-2::b01), both
+ * first-year bases are limited to it as well.
  */
 function eleventhYear(
   key: string,
@@ -106,10 +110,15 @@ function eleventhYear(
     interestChangeIn2025(ownership) !== undefined;
   if (partOwner) return { partII, gap: { fromLine: LINE_17, reason: DEFERRED_CREDIT_PART_OWNER } };
   if (value.firstYear === undefined) return { partII: {}, waitingOn: [key] };
-  const line17 = deferredFirstYearCredit(basis.line1 ?? 0, line5, {
-    modifiedPortion: tenThousandthsOf(value.firstYear.modifiedPortion),
-    yearEndPortion: tenThousandthsOf(value.firstYear.yearEndPortion),
-  });
+  const line17 = deferredFirstYearCredit(
+    basis.line1 ?? 0,
+    line5,
+    {
+      modifiedPortion: tenThousandthsOf(value.firstYear.modifiedPortion),
+      yearEndPortion: tenThousandthsOf(value.firstYear.yearEndPortion),
+    },
+    maximumQualifiedBasis(value),
+  );
   return { partII: { ...partII, line17, line18: line17 } };
 }
 

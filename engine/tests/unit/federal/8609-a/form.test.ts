@@ -224,6 +224,17 @@ describe("the years of the compliance period", () => {
     expect(line(FIELD[6])).toBeUndefined();
   });
 
+  it("year 11 with line 3 limited to line 3a: line 17 gives back only the deferred balance", () => {
+    /* 1,300,000 × .9000 = 1,170,000, limited to 1,080,000; 1,300,000 × .3750 = 487,500; (1,080,000 − 487,500) × .09 = 53,325, not 1,300,000 × .5250 × .09 = 61,425. */
+    const form8609 = { ...MARROW.form8609, eligibleBasis: 1300000 };
+    const { line } = evaluate([
+      ...otherFacts,
+      building("m", { form8609, limitedToMaximumQualifiedBasis: true }, MARROW),
+    ]);
+    expect(line(FIELD[3])).toBe(1080000);
+    expect(line(FIELD[17])).toBe(53325);
+  });
+
   it("year 11 for part of the building: line 17 is unsupported", () => {
     const { gap, line } = evaluate([
       ...otherFacts,
@@ -288,6 +299,25 @@ describe("gaps and waits", () => {
     const { line, credits } = evaluate([...otherFacts, building("a", { increase: undefined })]);
     expect(line(FIELD[7])).toBeUndefined();
     expect(credits[0].credit).toBeUndefined();
+  });
+
+  it("additions above line 3a for a part-year owner are unsupported from line 7 (line-6::b02)", () => {
+    // The agency sized line 3a for the original basis only: $1,750,000 × 4% = line 1b $70,000.
+    const form8609 = {
+      ...LARKSPUR.form8609,
+      maximumCreditAmount: 70000,
+      maximumQualifiedBasis: 1750000,
+    };
+    const partYear = evaluate([...otherFacts, building("a", { form8609 })]);
+    expect(partYear.line(FIELD[6])).toBe(46318);
+    expect(partYear.gap(FIELD[7])).toBe(true);
+    expect(partYear.gap(FIELD[18])).toBe(true);
+    // A whole-year owner is held to the allocation by line 15's limit.
+    const wholeYear = evaluate([
+      ...otherFacts,
+      building("a", { form8609, ownership: { share: 1 } }),
+    ]);
+    expect(wholeYear.line(FIELD[15])).toBe(70000);
   });
 
   it("an interest change in a year of acquisition is unsupported on line 16", () => {

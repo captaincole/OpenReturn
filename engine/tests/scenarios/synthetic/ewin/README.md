@@ -2,7 +2,7 @@
 
 Ewin Coldbrook is single and lives in Spokane, Washington. Every name and amount here is made up. There is no outside source and no answer key: the expected values are the engine's output, checked by hand against the form instructions, then locked (`verification: "unverified"`).
 
-Ewin has one W-2. On June 10, 2025 he bought a 60% interest in Larkspur Commons, a 40-unit low-income housing building. He held no interest before. The building's credit period began in 2021, so 2025 is year 5. More units are low-income now than at the close of 2021, so line 3 is more than Form 8609 line 8a (additions to qualified basis). The count did not change from the end of 2024, so the Line 11 Worksheet enters 0. A $50,000 federal grant received in 2024 never reduced the eligible basis; a high-cost area raised the basis to 130%. He takes the standard deduction. The return is federal only: Washington has no income tax.
+Ewin has one W-2. On June 10, 2025 he bought a 60% interest in Larkspur Commons, a 40-unit low-income housing building. He held no interest before. The building's credit period began in 2021, so 2025 is year 5. More units are low-income now than at the close of 2021, so line 3 is more than Form 8609 line 8a (additions to qualified basis). The agency's allocation covers them: line 3 is within Form 8609 line 3a, the maximum qualified basis it allocated ("You may claim a credit for an addition to qualified basis only if the credit amounts have been allocated by the housing credit agency to cover these additions", `irs-8609a-inst-2025::sec::line-6::b02`). The count did not change from the end of 2024, so the Line 11 Worksheet enters 0. A $50,000 federal grant received in 2024 never reduced the eligible basis; a high-cost area raised the basis to 130%. He takes the standard deduction. The return is federal only: Washington has no income tax.
 
 Forms that file: Form 1040, Form 8609-A. The credit on line 18 goes to Form 8586 line 3, and on to Form 3800. Form 8586 has no rules yet, so the credit does not reach Form 1040 in this scenario. Line 17 is blank: it is for the 11th year (the `haral` scenario). Item E is "No", and the form prints no mark for a "No" (`engine/src/federal/8609-a/QUESTIONS.md`).
 
@@ -11,7 +11,7 @@ Forms that file: Form 1040, Form 8609-A. The credit on line 18 goes to Form 8586
 | Input | Amounts |
 | --- | --- |
 | W-2, Inland Basin Medical Group | box 1 $185,000, box 2 $36,000 |
-| Form 8609, Larkspur Commons (made by `generate-docs.ts`) | BIN WA-21-00377; line 1b $70,000; line 2 4%; line 3a $1,750,000; line 3b 130%; line 7 $2,500,000; line 8a $1,750,000; first credit year 2021 |
+| Form 8609, Larkspur Commons (made by `generate-docs.ts`) | BIN WA-21-00377; line 1b $79,000; line 2 4%; line 3a $1,975,000; line 3b 130%; line 7 $2,500,000; line 8a $1,750,000; first credit year 2021 |
 | Building at the end of 2025 (and of 2024) | 32 of 40 units, 28,440 of 36,000 square feet low-income |
 | Ownership | 60%, bought June 10, 2025 |
 | Federal grants not in the basis | $50,000 |
@@ -37,7 +37,7 @@ Forms that file: Form 1040, Form 8609-A. The credit on line 18 goes to Form 8586
 | 12 | 1,755 + 0 | 1,755 |
 | 13 | 46,318 − 1,755 | 44,563 |
 | 14 | step 1: 50,000 × 1.3000 = 65,000 / 2,500,000 = .0260; step 2: 44,563 × .0260 = 1,158.6 | 1,159 |
-| 15 | 44,563 − 1,159 = 43,404, not more than 70,000 | 43,404 |
+| 15 | 44,563 − 1,159 = 43,404, not more than 79,000 | 43,404 |
 | 16 | 43,404 × 60% = 26,042.4 | 26,042 |
 | 18 | 26,042 + line 17 (blank) | 26,042 |
 | 1040 line 1a, 9, 11a | W-2 box 1 | 185,000 |

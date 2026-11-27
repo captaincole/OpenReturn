@@ -28,9 +28,17 @@ export interface Built {
   gap?: { fromLine: number; reason: string };
 }
 
+const LINE_7 = 7;
 const LINE_11 = 11;
 const LINE_16 = 16;
 
+/*
+ * A whole-year owner's credit is held to the allocation by line 15's limit
+ * (Form 8609 line 1b). A part-year owner's lines 4 and 8 already count the days
+ * owned, so that limit, a whole year's credit, does not hold them to it.
+ */
+export const ADDITIONS_PART_YEAR =
+  "Additions to qualified basis above Form 8609 line 3a for an owner who held the building for part of the year: \"You may claim a credit for an addition to qualified basis only if the credit amounts have been allocated by the housing credit agency to cover these additions\" (irs-8609a-inst-2025::sec::line-6::b02), and line 15's limit (Form 8609 line 1b) is a whole year's credit; the instructions do not say how to hold a part-year credit to the allocation.";
 export const WORKSHEET_PART_YEAR =
   "The Line 11 Worksheet for an owner who held the building for part of the year: the worksheet figures a whole year's modification, and the instructions do not say whether it is prorated like lines 4 and 8 (irs-8609a-inst-2025::sec::line-11::b01; ::line-8::b01).";
 export const SHARE_CHANGE_PART_YEAR =
@@ -152,6 +160,8 @@ export function creditYearLines(
     });
     return { ...tail, partII: tail.waitingOn ? {} : { ...head, ...tail.partII } };
   }
+  if (days !== undefined && basis.line3 > value.form8609.maximumQualifiedBasis)
+    return { partII: head, gap: { fromLine: LINE_7, reason: ADDITIONS_PART_YEAR } };
   const added = additionLines(value, year, basis, { line5, line7: additions, days });
   if (added === undefined) return { partII: {}, waitingOn: [key] };
   if (added.gap) return { partII: { ...head, ...added.lines }, gap: added.gap };

@@ -155,6 +155,12 @@ describe("published examples", () => {
       deferredFirstYearCredit(line1, 900, { modifiedPortion: 1250, yearEndPortion: 5000 }),
     ).toBe(33750);
   });
+
+  it("line 17 limits both first-year bases to Form 8609 line 3a (line-3-2::b01)", () => {
+    const firstYear = { modifiedPortion: 3750, yearEndPortion: 9000 };
+    expect(deferredFirstYearCredit(1300000, 900, firstYear, 1080000)).toBe(53325);
+    expect(deferredFirstYearCredit(1300000, 900, firstYear)).toBe(61425);
+  });
 });
 
 describe("limits", () => {

@@ -70,17 +70,21 @@ const LARKSPUR_COUNT: LowIncomeFractions = {
  * Larkspur Commons (made up), a 40-unit building placed in service in 2021 and
  * partly financed with tax-exempt bonds; 2021 is the first credit year, so 2025
  * is year 5. Ewin bought a 60% interest from the developer on June 10, 2025;
- * he owned none of it before. Units added after the first year make line 3
- * larger than Form 8609 line 8a, but 2025 is not the first year of that
+ * he owned none of it before. The agency allocated a maximum qualified basis
+ * (line 3a, $1,975,000 = $2,500,000 × .7900) for the low-income share the owner
+ * planned, but the building was only .7000 low-income at the close of 2021
+ * (line 8a, $1,750,000); line 1b is $1,975,000 × 4% = $79,000. Units added after the first year make
+ * line 3 larger than Form 8609 line 8a, within line 3a, so the allocation
+ * covers the additions (irs-8609a-inst-2025::sec::line-6::b02). 2025 is not the first year of that
  * increase (the end of 2024 had the same count). A federal grant of $50,000
  * received in 2024 never reduced the eligible basis.
  */
 export const LARKSPUR: LowIncomeHousingBuildingFactValue = {
   form8609: {
     buildingIdentificationNumber: "WA-21-00377",
-    maximumCreditAmount: 70000,
+    maximumCreditAmount: 79000,
     creditPercentage: 0.04,
-    maximumQualifiedBasis: 1750000,
+    maximumQualifiedBasis: 1975000,
     highCostBasisPercentage: 1.3,
     eligibleBasis: 2500000,
     originalQualifiedBasis: 1750000,

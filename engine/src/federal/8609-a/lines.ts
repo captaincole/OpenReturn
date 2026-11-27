@@ -194,17 +194,27 @@ export function creditAllowed(line13: number, line14: number, maximumCreditAmoun
 
 /*
  * Line 17 in the 11th year: the deferred balance of the first year's credit, the
- * eligible basis times the part of the first year's close portion that the
- * modified percentage left out, times line 5 (line-17::b01; see the DECISION in
- * copies.ts).
+ * first year's qualified basis at its close less the qualified basis its modified
+ * percentage gave, times line 5 (line-17::b01; see the DECISION in copies.ts).
+ * Both bases are limited to Form 8609 line 3a when line 3 is (line-3-2::b01):
+ * the first year's credit, with or without the modified percentage, never used
+ * more than line 3a.
  */
 export function deferredFirstYearCredit(
   line1: number,
   line5: number,
   firstYear: { modifiedPortion: number; yearEndPortion: number },
+  maximumQualifiedBasis?: number,
 ): number {
-  const deferredPortion = Math.max(0, firstYear.yearEndPortion - firstYear.modifiedPortion);
-  return roundDollars((line1 * deferredPortion * line5) / (TEN_THOUSANDTHS * TEN_THOUSANDTHS));
+  const basisAt = (portion: number) => {
+    const basis = (line1 * portion) / TEN_THOUSANDTHS;
+    return maximumQualifiedBasis === undefined ? basis : Math.min(basis, maximumQualifiedBasis);
+  };
+  const deferredBasis = Math.max(
+    0,
+    basisAt(firstYear.yearEndPortion) - basisAt(firstYear.modifiedPortion),
+  );
+  return roundDollars((deferredBasis * line5) / TEN_THOUSANDTHS);
 }
 
 /* A decimal in ten-thousandths as the form prints it around its point: "", "1250"; "1", "0000". */
