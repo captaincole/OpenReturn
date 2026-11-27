@@ -104,6 +104,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "and IV); whether one exists is Cade's question",
   ],
   [
+    /^investment_credit\.(property|cooperative)\.[^.]+$/,
+    "each fact is one whole Form 3468 property, or one cooperative's unused credits; whether " +
+      "one exists is Cade's question, and Form 3468 lists a property fact whose answers are missing",
+  ],
+  [
     /^tax_credit_bond\.[^.]+$/,
     "each fact is one whole bond or pass-through credit of a Form 8912 Part IV; whether one " +
       "exists is Cade's question, and the form lists a fact whose answers are missing",
@@ -163,6 +168,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole canceled debt (Form 982, Schedule 1 line 8c); whether a debt was canceled " +
       "with no Form 1099-C is Cade's question. A Form 1099-C with no debt fact asks for one, and " +
       "Form 982 lists a debt fact again while an answer inside it is missing",
+  ],
+  [
+    /^empowerment_zone_employee\.[^.]+$/,
+    "each fact is one whole employee of the taxpayer's business or farm who worked in an " +
+      "empowerment zone (Form 8844 line 1); whether one exists is Cade's question",
   ],
   [
     /^armed_forces_move\.[^.]+$/,

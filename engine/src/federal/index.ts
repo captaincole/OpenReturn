@@ -1159,6 +1159,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 3468",
     relativeDir: "federal/3468",
     register: registerForm3468,
+    // One Form 3468 for each property, and one for the cooperatives (3468/copies.ts).
+    copies: {
+      count: (info) => info?.form3468Copies?.length ?? 1,
+      select: (info, index) => info && { ...info, form3468CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-5884",

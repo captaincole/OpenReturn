@@ -105,7 +105,7 @@ describe("Form 8586 who files", () => {
     expect(run.value("schedule-3", "0.line.6a")).toBe(7_356);
   });
 
-  it("a K-1 credit alone does not file it: the credit goes directly on Form 3800 (purpose-of-form::b01, row A102)", () => {
+  it("a K-1 credit alone does not file it: the credit goes directly on Form 3800 (purpose-of-form::b01, row A109)", () => {
     const run = evaluate(alar.facts.filter((fact) => !isBuilding(fact)));
     expect(run.files("form-8586")).toBe(false);
     expect(run.value("form-3800", ROW_4D)).toBe(4_350);

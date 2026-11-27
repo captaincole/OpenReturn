@@ -1,7 +1,8 @@
 /*
  * The resolver's side of Form 3800: every credit and carryover the return
- * states, and every K-1 general business credit, as sources (filingInfo.ts),
- * with the answers they still wait on.
+ * states, every K-1 general business credit and every Form 3468 credit
+ * (3468/credit.ts), as sources (filingInfo.ts), with the answers they still
+ * wait on.
  */
 
 import {
@@ -15,8 +16,10 @@ import {
 } from "../../facts/index.js";
 import { roundDollars } from "../../money.js";
 import type { ResolverInputs } from "../../resolverInputs.js";
+import { figuredOnForm3468, form3468CreditSources } from "../3468/credit.js";
 import { workOpportunitySources } from "../5884/sources.js";
 import { lowIncomeHousingSourcesOf } from "../8586/form3800.js";
+import { withForm8844 } from "../8844/sources.js";
 import { tipCreditSourcesOf } from "../8846/form3800.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
 import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
@@ -186,12 +189,16 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
   missing: string[];
 } {
   const stated = getGeneralBusinessCreditFacts(inputs.facts).map(statedSource);
-  const k1 = k1EntitiesWithRoute(inputs, "form_3800").map((received) => k1Source(inputs, received));
+  const k1 = k1EntitiesWithRoute(inputs, "form_3800")
+    .filter((received) => !figuredOnForm3468(inputs, received))
+    .map((received) => k1Source(inputs, received));
+  const form3468 = form3468CreditSources(inputs);
   // Line 4b: Form 5884 line 2, the credit of the taxpayer's own employees (5884/sources.ts).
   const workOpportunity = workOpportunitySources(inputs);
   const missing = [
     ...stated.filter(missingResearch).map((source) => source.credit.key),
     ...k1.flatMap((found) => found.missing),
+    ...form3468.missing,
     ...workOpportunity.missing,
   ];
   // Line 4f: Form 8846 line 4, the credit on the taxpayer's own tipped employees (8846/form3800.ts).
@@ -199,13 +206,17 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
   // Line 4d: Form 8586 line 3, the credit of the buildings the taxpayer owns (8586/form3800.ts).
   const housing = lowIncomeHousingSourcesOf(inputs);
   missing.push(...tips.missing, ...housing.missing);
-  const current = [
+  // Line 3: Form 8844 line 2, the empowerment zone credit of the taxpayer's own employees (8844/sources.ts).
+  const zone = withForm8844(inputs, [
     ...stated,
     ...tips.sources,
     ...housing.sources,
     ...k1.flatMap((found) => (found.source ? [found.source] : [])),
+    ...form3468.sources,
     ...workOpportunity.sources,
-  ];
+  ]);
+  missing.push(...zone.missing);
+  const current = zone.sources;
   const carryovers = getCreditCarryoverFacts(inputs.facts).map(carryoverOf);
   return { sources: { current, carryovers }, missing: [...new Set(missing)] };
 }

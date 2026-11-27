@@ -196,11 +196,20 @@ describe("K-1 credits", () => {
     expect(isGap(run.field("form-3800", LINE_38))).toBe(true);
   });
 
-  it("a credit that needs Form 3468 keeps a gap on its line, never a dropped credit", () => {
+  it("rehabilitation expenditures (code E) with no Form 3468 property keep a gap on line 4k, never a dropped credit", () => {
+    const k1 = { ...worksK1, boxes: [...worksK1.boxes, { box: "15", code: "E", amount: 900 }] };
+    const run = evaluate(factsWith({ [WORKS]: k1 }));
+    expect(isGap(run.field("form-3800", "3.part3.4k_form_3468_part_vii_col_d"))).toBe(true);
+    expect(isGap(run.field("form-3800", LINE_38))).toBe(true);
+  });
+
+  it("an unused energy credit from cooperatives (code T) reaches line 4a through Form 3468 line 31", () => {
     const k1 = { ...worksK1, boxes: [...worksK1.boxes, { box: "15", code: "T", amount: 900 }] };
     const run = evaluate(factsWith({ [WORKS]: k1 }));
-    expect(isGap(run.field("form-3800", "3.part3.4a_form_3468_part_vi_col_e"))).toBe(true);
-    expect(isGap(run.field("form-3800", LINE_38))).toBe(true);
+    expect(run.files("form-3468")).toBe(true);
+    expect(run.value("form-3468", "10.part6.31_cooperatives_unused_credit")).toBe(900);
+    expect(run.value("form-3468", "10.part6.32_total_energy_credit")).toBe(900);
+    expect(run.line("3.part3.4a_form_3468_part_vi_col_e")).toBe(900);
   });
 
   it("a new clean vehicle credit from a K-1 with no Form 8936 is a gap (the modified AGI test)", () => {

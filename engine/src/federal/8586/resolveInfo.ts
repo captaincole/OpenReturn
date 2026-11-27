@@ -39,7 +39,7 @@ export function buildingsOnForm8586(
  * form" and "can report this credit directly on Form 3800" (irs-8586-form-2025::sec::purpose-of-form::b01).
  * The engine follows Form 8586's instructions, a form's own instructions decide
  * how it is filed, and the K-1 credit reaches Form 3800 line 4d either way
- * (docs/rule-decisions.md row A102). The explicit decision still wins.
+ * (docs/rule-decisions.md row A109). The explicit decision still wins.
  */
 export function resolve8586Info(inputs: ResolverInputs): Form8586FilingInfo {
   const buildings = buildingsOnForm8586(inputs);

@@ -6,7 +6,7 @@ Form 8586 totals the low-income housing credit: line 3 adds line 18 of each Form
 
 Each is decided by the author, with a `DECISION` comment and a row in `docs/rule-decisions.md`.
 
-1. **A K-1 credit alone does not file Form 8586** (row A102, `resolveInfo.ts`). The Form 8609-A instructions tell a partner to "file only Form 8586"; Form 8586's own instructions say such a taxpayer is "not required to complete or file this form" (`purpose-of-form::b01`). The engine follows Form 8586. No dollars: the K-1 credit reaches Form 3800 line 4d either way.
+1. **A K-1 credit alone does not file Form 8586** (row A109, `resolveInfo.ts`). The Form 8609-A instructions tell a partner to "file only Form 8586"; Form 8586's own instructions say such a taxpayer is "not required to complete or file this form" (`purpose-of-form::b01`). The engine follows Form 8586. No dollars: the K-1 credit reaches Form 3800 line 4d either way.
 2. **Each K-1 rounds before line 4 adds** (row A96, `passThroughCredits.ts`). The Form 1040 rule keeps the cents and rounds only the total (`irs-1040-inst-2025::sec::rounding-off-to-whole::b01`); Form 3800 Part V lists one amount for each pass-through entity (`irs-3800-inst-2025::sec::part-v-3::b01`). The engine follows Form 3800, the same rule as Form 8846, so line 4 equals the K-1 rows of Form 3800 line 4d. The blind fill took the Form 1040 rule: two K-1s of $1,200.40 and $600.40 give $1,801 there and $1,800 in the engine. At most $1 a K-1.
 
 ## Should we do this now
