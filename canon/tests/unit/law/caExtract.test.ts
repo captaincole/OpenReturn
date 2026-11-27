@@ -2,13 +2,15 @@ import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { afterAll, describe, expect, it } from "vitest";
-import { type CaScope, extractCalifornia } from "../../../src/law/caExtract.js";
+import { extractCalifornia } from "../../../src/law/caExtract.js";
+import { type CaScope, SCOPE_FILE } from "../../../src/law/caScope.js";
 import {
   SECTION_COLUMNS,
   SECTION_TABLE,
   tableLines,
   withField,
 } from "../../../src/law/caTables.js";
+import { parseCaExtract } from "../../../src/law/parseCaml.js";
 import { readZip, type ZipEntry } from "../../../src/law/unzip.js";
 import { openZipFile } from "../../../src/law/zipFile.js";
 import { writeZip } from "../../../src/law/zipWrite.js";
@@ -95,13 +97,15 @@ describe("openZipFile", () => {
 });
 
 // The fixtures hold Part 10 only.
-const PART_10: CaScope = { code: "RTC", division: "2.", parts: ["10."] };
+const PART_10: CaScope = { code: "RTC", division: "2.", parts: [{ part: "10." }] };
+// Part 10 by chapters: Chapter 1 (17001, 17014) and Chapter 2 (17041, 17054).
+const CHAPTERS_1_2: CaScope = { ...PART_10, parts: [{ part: "10.", chapters: ["1.", "2."] }] };
 
 describe("extractCalifornia", () => {
-  const extractOf = (name: string) => {
+  const extractOf = (name: string, scope: CaScope = PART_10) => {
     const archive = openZipFile(writeArchive(name));
     try {
-      return extractCalifornia(archive, PART_10);
+      return extractCalifornia(archive, scope);
     } finally {
       archive.close();
     }
@@ -120,17 +124,55 @@ describe("extractCalifornia", () => {
     const sections = text(files.find((file) => file.name === SECTION_TABLE)!.data);
     expect(sections).not.toContain("`PEN`");
     expect(sections).toContain("\tlob/RTC17014.199412434.xml\t");
-    expect(extract.stats).toMatchObject({ sections: 7, files: 11 });
+    expect(extract.stats).toMatchObject({ sections: 7, files: 12 });
+  });
+
+  it("stores the scope it was cut with", () => {
+    const files = readZip(extractOf("scope.zip", CHAPTERS_1_2).zip);
+    const scope = text(files.find((file) => file.name === SCOPE_FILE)!.data);
+    expect(JSON.parse(scope)).toEqual(CHAPTERS_1_2);
+  });
+
+  it("takes only the chapters named for a part taken by chapters", () => {
+    const extract = extractOf("chapters.zip", CHAPTERS_1_2);
+    const names = readZip(extract.zip).map((file) => file.name);
+    expect(names.filter((name) => name.startsWith("lob/"))).toEqual([
+      "lob/RTC17001.1955939.xml",
+      "lob/RTC17014.199412434.xml",
+      "lob/RTC17041.2010145.xml",
+      "lob/RTC17054.2020991.xml",
+    ]);
+    // The division, the part, and the two chapters: no row of Chapters 2.6, 3 or 6.
+    expect(extract.stats).toMatchObject({ tocRows: 4, sections: 4 });
+  });
+
+  it("names the part taken by chapters in its heading; a whole part stays as printed", () => {
+    const headingsOf = (scope: CaScope, name: string) =>
+      parseCaExtract(readZip(extractOf(name, scope).zip), "ca-rtc-2025").sections.map(
+        (row) => row.heading,
+      );
+    expect(headingsOf(CHAPTERS_1_2, "partial.zip")).toContain(
+      "PART 10. PERSONAL INCOME TAX (only Chapters 1 and 2 are in the library)",
+    );
+    expect(headingsOf(PART_10, "whole.zip")).toContain("PART 10. PERSONAL INCOME TAX");
+  });
+
+  it("names a chapter it cannot find", () => {
+    const archive = openZipFile(writeArchive("missing-chapter.zip"));
+    const scope = { ...PART_10, parts: [{ part: "10.", chapters: ["17."] }] };
+    expect(() => extractCalifornia(archive, scope)).toThrow(/no chapter 17\. in part 10\./);
+    archive.close();
   });
 
   it("names the part it cannot find", () => {
     const archive = openZipFile(writeArchive("missing-part.zip"));
-    const scope = { ...PART_10, parts: ["10.2."] };
+    const scope = { ...PART_10, parts: [{ part: "10.2." }] };
     expect(() => extractCalifornia(archive, scope)).toThrow(/no part 10\.2\./);
     archive.close();
   });
 
   it("makes the same bytes from the same rows", () => {
     expect(extractOf("a.zip").zip).toEqual(extractOf("b.zip").zip);
+    expect(extractOf("c.zip", CHAPTERS_1_2).zip).toEqual(extractOf("d.zip", CHAPTERS_1_2).zip);
   });
 });

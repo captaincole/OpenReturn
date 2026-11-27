@@ -2,14 +2,20 @@ import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
 import { lawInstalled } from "../../db/libsql";
 import { jurisdictionsInputSchema } from "../../jurisdiction";
-import { LAW_NOT_INSTALLED, readLaw, type LawBlock } from "../../law/lawRead";
-import { searchLaw } from "../../law/lawSearch";
+import {
+  jurisdictionOfCitation,
+  lawNotInstalledMessage,
+  readLaw,
+  type LawBlock,
+} from "../../law/lawRead";
+import { lawCoverage, searchLaw, sourcesToSearch } from "../../law/lawSearch";
 
 /*
- * The law (law.db: the statute, the Treasury regulations and California's
- * personal income tax law) is a second library, searched only on purpose.
- * Both tools answer { installed: false } when law.db is missing, and never
- * create the file.
+ * The law (the statute, the Treasury regulations and California's tax law,
+ * one file per jurisdiction) is a second library, searched only on purpose.
+ * Both tools answer { installed: false } when no file they need is
+ * installed, and never create a file. A search that needs several
+ * jurisdictions searches the installed ones and names the others in missing.
  */
 
 const SOURCES = ["statute", "regulations", "california"] as const;
@@ -24,7 +30,7 @@ const WHEN_TO_USE =
  * of January 2026.
  */
 const CALIFORNIA =
-  'California: source "california" is the California Revenue and Taxation Code, Division 2, Part 10 (Personal Income Tax, §§ 17001–18181) and Part 10.2 (administration: penalties, estimated tax, withholding, §§ 18401–19802). It is searched only when you name it (source "california", or jurisdictions with "CA"): a search with neither never returns California. Name California\'s code in a citation: "CA 17041(a)" or "Cal. Rev. & Tax. Code § 17024.5"; a bare number is the Internal Revenue Code. California adopts the Internal Revenue Code as of a fixed date, with its own changes: § 17024.5(a)(1) sets January 1, 2025 for taxable years beginning on or after January 1, 2025, and many sections of Part 10 change or refuse a federal rule. The library\'s federal text is the Code as of January 2026, so a federal rule enacted after California\'s date may not be California law: read the California section that adopts or changes it, and cite both.';
+  'California: source "california" is the California Revenue and Taxation Code, Division 2, Part 10 (Personal Income Tax, §§ 17001–18181) and Part 10.2 (administration: penalties, estimated tax, withholding, §§ 18401–19802), Part 11 (Corporation Tax Law, §§ 23001–25141), and the smaller parts of the franchise and income tax laws: the elective tax of a pass-through entity (Part 10.4, §§ 19900–19907), the Taxpayers\' Bill of Rights (Part 10.7, §§ 21001–21028) and the health coverage penalty (Part 32, §§ 61000–61050). Part 11 is the law for corporations: many of its sections repeat a Part 10 rule for a corporation, so for an individual\'s rule cite the Part 10 section. An individual reads Part 11 where Part 10 sends them: Chapter 17 (Allocation of Income, §§ 25101–25141: how business income is divided between California and other states, the sales factor of § 25128.7, the sourcing of sales in §§ 25135–25136) and Chapter 4.5 (S corporations, from § 23800). It is searched only when you name it (source "california", or jurisdictions with "CA"): a search with neither never returns California. Name California\'s code in a citation: "CA 17041(a)" or "Cal. Rev. & Tax. Code § 17024.5"; a bare number is the Internal Revenue Code. California adopts the Internal Revenue Code as of a fixed date, with its own changes: § 17024.5(a)(1) sets January 1, 2025 for taxable years beginning on or after January 1, 2025, and many sections of Part 10 change or refuse a federal rule. The library\'s federal text is the Code as of January 2026, so a federal rule enacted after California\'s date may not be California law: read the California section that adopts or changes it, and cite both.';
 
 const notInstalled = z.object({ installed: z.literal(false), message: z.string() });
 
@@ -40,7 +46,7 @@ const lawHitSchema = z.object({
 
 export const searchLawTool = createTool({
   id: "search-law",
-  description: `Search the Internal Revenue Code and the Treasury regulations, or California's personal income tax law. ${WHEN_TO_USE} ${CALIFORNIA} Each hit names its source and citation ("26 U.S.C. § 469(h)(2)", "26 CFR § 1.469-5T(a)(1)", "Cal. Rev. & Tax. Code § 17041(a)"); read the whole subdivision with readLaw.`,
+  description: `Search the Internal Revenue Code and the Treasury regulations, or California's personal income tax law and its apportionment rules. ${WHEN_TO_USE} ${CALIFORNIA} Each hit names its source and citation ("26 U.S.C. § 469(h)(2)", "26 CFR § 1.469-5T(a)(1)", "Cal. Rev. & Tax. Code § 17041(a)"); read the whole subdivision with readLaw.`,
   inputSchema: z.object({
     query: z.string().describe("The rule in the law's words, taken from the instructions."),
     source: z
@@ -63,13 +69,27 @@ export const searchLawTool = createTool({
       .describe("Retrieval mode. Default 'hybrid'. Override only for evals or debugging."),
   }),
   outputSchema: z.union([
-    z.object({ installed: z.literal(true), query: z.string(), results: z.array(lawHitSchema) }),
+    z.object({
+      installed: z.literal(true),
+      query: z.string(),
+      results: z.array(lawHitSchema),
+      missing: z
+        .array(z.string())
+        .optional()
+        .describe(
+          "Jurisdictions asked for whose law is not installed; their law was not searched.",
+        ),
+      message: z.string().optional(),
+    }),
     notInstalled,
   ]),
   execute: async (input) => {
-    if (!(await lawInstalled())) return { installed: false as const, message: LAW_NOT_INSTALLED };
+    const { installed, missing } = await lawCoverage(sourcesToSearch(input));
+    const message = lawNotInstalledMessage(missing);
+    if (installed.length === 0) return { installed: false as const, message };
     const results = await searchLaw(input);
-    return { installed: true as const, query: input.query, results };
+    if (missing.length === 0) return { installed: true as const, query: input.query, results };
+    return { installed: true as const, query: input.query, results, missing, message };
   },
 });
 
@@ -109,7 +129,10 @@ export const readLawTool = createTool({
     notInstalled,
   ]),
   execute: async ({ citation }) => {
-    if (!(await lawInstalled())) return { installed: false as const, message: LAW_NOT_INSTALLED };
+    const jurisdiction = jurisdictionOfCitation(citation);
+    const missing = jurisdiction ? [jurisdiction] : undefined;
+    if (!(await lawInstalled(jurisdiction ?? undefined)))
+      return { installed: false as const, message: lawNotInstalledMessage(missing) };
     const reading = await readLaw(citation).catch((err: unknown) =>
       err instanceof Error ? err.message : String(err),
     );

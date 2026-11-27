@@ -7,7 +7,7 @@ Eward runs a business (Schedule C) that pays for the clinical testing of one orp
 The scenario shows the branch that `jon` does not:
 
 - Form 8820 line 2a checks "No" and takes 25% of line 1.
-- Line 2a comes off Schedule C line 26 (wages), line 22 (supplies), line 20a (computer rental) and line 11 (contract testing), each by at most the clinical expenses of its kind (docs/rule-decisions.md A111).
+- Line 2a comes off Schedule C line 26 (wages), line 22 (supplies), line 20a (computer rental) and line 11 (contract testing), each by at most the clinical expenses of its kind (docs/rule-decisions.md A120).
 - Form 3800 line 1h takes line 2c, and Schedule 3 line 6a the allowed credit.
 - Schedule CA (540) line 3 column B adds the $50,000 back (FTB Pub. 1001), so Form 540 line 14 is $50,000.
 

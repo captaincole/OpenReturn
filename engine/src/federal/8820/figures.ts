@@ -2,11 +2,14 @@
  * Form 8820 from the orphan drug credit fact (facts/kinds/orphanDrugCredit.ts):
  * lines 1 to 2c, Part II, and the part of line 2a that each Schedule C line of
  * the business gives up (reduction.ts). The reduction lowers the business's
- * expenses wherever the business is read (facts/kinds/activitiesOnReturn.ts),
- * and line 2c is the business's Form 3800 line 1h source (form3800.ts). This
- * file reads only facts, so the facts layer can call it.
+ * expenses wherever the business is read: it is one entry of the list of
+ * credits that lower a deduction (facts/kinds/activitiesOnReturn.ts), placed
+ * on the lines as the credits before it left them. Line 2c is the business's
+ * Form 3800 line 1h source (form3800.ts). This file reads only facts, so the
+ * facts layer can call it.
  */
 
+import type { BusinessCreditReduction } from "../../facts/kinds/activitiesOnReturn.js";
 import { statedBusinessesOnReturn, type BusinessFactValue } from "../../facts/kinds/business.js";
 import { getGeneralBusinessCreditFacts } from "../../facts/kinds/generalBusinessCredit.js";
 import {
@@ -18,6 +21,7 @@ import { creditLines, deductionReductionOf, type CreditLines } from "./lines.js"
 import { placeReduction, type PlacedReduction, type ReducedExpenseLine } from "./reduction.js";
 
 type FactRow = { key: string; value: unknown; category: string };
+type Business = { key: string; value: BusinessFactValue };
 
 export interface OrphanDrugFigures {
   /* The fact, when its business is on this return. */
@@ -72,12 +76,18 @@ function missingOf(fact: OrphanDrugCreditFact, credit8932: number | undefined): 
 }
 
 const placementGap = (left: number) =>
-  `The Schedule C lines that hold the clinical testing expenses (wages, supplies, machinery rent, contract labor) cannot take $${roundDollars(left)} of the line 2a reduction: each line gives up at most its stated amount and the expenses of its kind (irs-8820-form-2025::sec::line-2a::b02; reduction.ts). Capitalized expenses reduce the capital account instead, which the engine does not figure.`;
+  `The Schedule C lines that hold the clinical testing expenses (wages, supplies, machinery rent, contract labor) cannot take $${roundDollars(left)} of the line 2a reduction: each line gives up at most what the credits before this one left of it and the expenses of its kind (irs-8820-form-2025::sec::line-2a::b02; reduction.ts). Capitalized expenses reduce the capital account instead, which the engine does not figure.`;
 
-/* The figures of the return. A fact for a spouse's business on a separate return is not on this return, like the business. */
+/*
+ * The figures of the return. A fact for a spouse's business on a separate
+ * return is not on this return, like the business. The reduction is placed on
+ * the business as placedOn holds it (the credits before Form 8820 applied);
+ * without it, on the stated business.
+ */
 export function orphanDrugFigures(
   facts: ReadonlyArray<FactRow>,
   joint: boolean,
+  placedOn?: ReadonlyArray<Business>,
 ): OrphanDrugFigures {
   const { fact, malformed } = readOrphanDrugCreditFact(facts);
   if (fact === undefined) return { malformed, missing: [] };
@@ -104,26 +114,26 @@ export function orphanDrugFigures(
   );
   const amount = deductionReductionOf(lines, elected);
   if (amount === 0) return { ...base, lines };
-  const reduction = placeReduction(business.expenses, amount, fact.value.expenses);
+  const lowered = placedOn?.find((each) => each.key === fact.value.businessKey)?.value ?? business;
+  const reduction = placeReduction(lowered.expenses, amount, fact.value.expenses);
   if (reduction.left > 0) return { ...base, gap: placementGap(reduction.left) };
   return { ...base, lines, reduction };
 }
 
 /*
- * One Schedule C line's part of the reduction, by business key: what
- * BUSINESS_CREDIT_REDUCTIONS (facts/kinds/activitiesOnReturn.ts) takes off.
- * Empty while the form waits, has a gap or the election is made.
+ * The reduction on each Schedule C line of the business, as one entry of the
+ * credits that lower a deduction (facts/kinds/activitiesOnReturn.ts), placed
+ * on the business as the credits before it left it. Empty while the form
+ * waits, has a gap or the election is made.
  */
-export function orphanDrugReductionOn(
-  line: ReducedExpenseLine,
-): (facts: ReadonlyArray<FactRow>, joint: boolean) => Map<string, number> {
-  return (facts, joint) => {
-    const figures = orphanDrugFigures(facts, joint);
-    const amount = figures.reduction?.byLine[line];
-    const out = new Map<string, number>();
-    if (figures.fact !== undefined && amount !== undefined) {
-      out.set(figures.fact.value.businessKey, amount);
-    }
-    return out;
-  };
+export function orphanDrugReductions(
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+  businesses: ReadonlyArray<Business>,
+): Map<string, BusinessCreditReduction[]> {
+  const figures = orphanDrugFigures(facts, joint, businesses);
+  if (figures.fact === undefined || figures.reduction === undefined) return new Map();
+  const byLine = Object.entries(figures.reduction.byLine) as Array<[ReducedExpenseLine, number]>;
+  const reductions = byLine.map(([line, amount]) => ({ line, amount }));
+  return new Map([[figures.fact.value.businessKey, reductions]]);
 }

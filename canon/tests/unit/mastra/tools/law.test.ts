@@ -5,8 +5,8 @@ import { afterAll, describe, expect, it } from "vitest";
 
 const dir = mkdtempSync(path.join(tmpdir(), "canon-law-tools-test-"));
 process.env.CORPUS_DB_PATH = path.join(dir, "corpus.db");
-process.env.LAW_DB_PATH = path.join(dir, "law.db");
-const lawFile = process.env.LAW_DB_PATH;
+process.env.LAW_DB_DIR = path.join(dir, "law");
+const lawDir = process.env.LAW_DB_DIR;
 
 // Imported after the env is set, so both libraries resolve to the temp folder.
 const { writeDocument } = await import("../../../../src/db/corpusStore.js");
@@ -49,16 +49,16 @@ async function installLaw(): Promise<void> {
     zipPath: "law.zip",
     zipRelPath: "law.zip",
   };
-  await writeDocument(lawPayload(entry, parsed), "law");
-  await writeDocument(lawPayload(REG_ENTRY, parsedRegulations()), "law");
-  await writeDocument(lawPayload(CA_ENTRY, parsedCalifornia()), "law");
+  await writeDocument(lawPayload(entry, parsed), "law:federal");
+  await writeDocument(lawPayload(REG_ENTRY, parsedRegulations()), "law:federal");
+  await writeDocument(lawPayload(CA_ENTRY, parsedCalifornia()), "law:CA");
 }
 
 describe("the corpus tools", () => {
   it("never open law.db", async () => {
     await call(searchRefDocsTool, { query: "passive activity", mode: "fts" });
     await call(citeRefDocTool, { blockId: "usc-26-2025::sec::s469::g-1" });
-    expect(existsSync(lawFile)).toBe(false);
+    expect(existsSync(lawDir)).toBe(false);
   });
 });
 
@@ -72,7 +72,7 @@ describe("the law tools without law.db", () => {
       expect(result.message).toContain("npm run corpus -- law fetch");
       expect(result.message).toContain("npm run corpus -- law sync");
     }
-    expect(existsSync(lawFile)).toBe(false);
+    expect(existsSync(lawDir)).toBe(false);
   });
 });
 

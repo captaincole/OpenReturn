@@ -1,8 +1,9 @@
+import { orphanDrugCreditFigures } from "../../facts/kinds/activitiesOnReturn.js";
 import { ORPHAN_DRUG_CREDIT_KEY } from "../../facts/kinds/orphanDrugCredit.js";
 import { roundDollars, sum } from "../../money.js";
 import { filingStatusOf, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
-import { orphanDrugFigures, type OrphanDrugFigures } from "./figures.js";
+import type { OrphanDrugFigures } from "./figures.js";
 import type { Form8820FilingInfo, K1OrphanDrugCredits } from "./filingInfo.js";
 
 const MUST_FILE_KEY = "decisions.scope.must_file_8820";
@@ -19,9 +20,9 @@ const isJointForBusinesses = (inputs: ResolverInputs) => {
   return status === undefined || status === "married_filing_jointly";
 };
 
-/* The return's own figures; every resolver that reads them calls this one function. */
+/* The return's own figures, placed after the credits before Form 8820; every resolver that reads them calls this one function. */
 export const orphanDrugFiguresOf = (inputs: ResolverInputs): OrphanDrugFigures =>
-  orphanDrugFigures(inputs.facts, isJointForBusinesses(inputs));
+  orphanDrugCreditFigures(inputs.facts, isJointForBusinesses(inputs));
 
 /*
  * Line 3: "Orphan drug credit from partnerships, S corporations, estates, or

@@ -10,10 +10,10 @@
 import { describe, expect, it } from "vitest";
 import {
   ORPHAN_DRUG_CREDIT_KEY,
+  businessCreditAddBack,
   businessesOnReturn,
   makeBusinessFactKey,
   makeGeneralBusinessCreditFactKey,
-  wageCreditReduction,
   type GeneralBusinessCreditFactValue,
 } from "../../src/facts/index.js";
 import type { TaxFactRow } from "../../src/facts/rows.js";
@@ -70,7 +70,7 @@ describe("Schedule C line 26 less the stated wage credits", () => {
   });
 
   it("California gives the wages back: section 280C(a) does not apply (ca-rtc-2025::sec::s17270::b)", () => {
-    expect(wageCreditReduction([shop, credit({ businessKey: SHOP_KEY })], false)).toBe(2400);
+    expect(businessCreditAddBack([shop, credit({ businessKey: SHOP_KEY })], false)).toBe(2400);
   });
 });
 
