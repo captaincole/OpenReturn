@@ -74,6 +74,48 @@ A112 of `docs/rule-decisions.md`.
 - **The bond ratio** keeps every digit and prints 6 places, Form 3468's
   decision (`3468/lines.ts`), since the two forms state the same fraction. No
   dollar change beyond the rounding of line 6b.
+- **Where the lines round.** The form does not say. The engine rounds each
+  dollar line to the nearest dollar (lines 1(c), 5a, 6b, 6c, 8a), and each
+  later line uses the rounded amounts, as Form 3468 does. Changes dollars by
+  $1 at most: in the `tad` case line 5a is $3,853.50, printed $3,854. The blind
+  fill rounded at the same points.
+- **The two boundaries of line 7.** Box 7b says construction "began before
+  January 29, 2023" (`irs-7211-inst-2025::sec::applicable-amount::b01`), so a
+  start on January 29, 2023 takes the base amount. Box 7a says "less than 1
+  megawatt", so 1 MW exactly takes the base amount; the fact holds the answer
+  as a yes or no. Changes dollars (the base amount is one fifth of the
+  alternative), but the text is plain; the blind fill read both the same way.
+
+## Statute read (2026-11-27)
+
+The law library was read for the three decisions (rows A110 to A112). The
+statute agrees with the form each time, so nothing goes to
+`docs/law-findings.md`.
+
+- Line 5a: "the applicable amount ... shall be increased by an amount equal to
+  10 percent of the amount otherwise in effect" (`usc-26-2025::sec::s45y::g-7`).
+- Line 8a: "increased by an amount equal to 10 percent of the amount so
+  determined (as determined without application of paragraph (7))"
+  (`usc-26-2025::sec::s45y::g-11-A`; the regulation says the same,
+  `cfr-26-2025::sec::s1.45y-1::b-5`). That is the form's 0.0909091 on line 7.
+- Lines 6a to 6d: "Rules similar to the rules of section 45(b)(3) shall
+  apply" (`usc-26-2025::sec::s45y::g-8`), "the lesser of 15 percent or a
+  fraction" of bond proceeds over capital account additions, "for the taxable
+  year and all prior taxable years" (`usc-26-2025::sec::s45::b-3`).
+
+## Second opinions
+
+- **PolicyEngine-US 2.154.1** (commit 0fbed6dd, 2026-11-26): it does not
+  model section 45Y. Its IRS variables and parameters have no clean
+  electricity, energy community, domestic content or prevailing wage terms,
+  so it cannot check a constant or a line here.
+- **Other projects:** the repository names no other reference implementation.
+  IRS Direct File does not cover business credits.
+- **Blind fill** (14 cases, from the blank form and the instructions only):
+  every line matched the engine, with no difference in dollars or in blank
+  against 0. The blind preparer took the 2025 amounts from Form 8835's section
+  45 rate, as the notice was not in the corpus; the notice's factor (1.9971)
+  gives the same 0.6 and 3 cents.
 
 ## Confidence
 
