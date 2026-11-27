@@ -204,6 +204,20 @@ export function line2OtherTaxes(inputs: Form2210FInputs): number {
  * on the day the payments after January 15 add up to it: first the dated
  * estimated tax payments in date order, then the stated day of the rest, else
  * April 15, 2026. A part paid earlier does not shorten the count (QUESTIONS.md).
+ *
+ * DECISION (2026-11-26, by the author): a part of line 13 paid before the rest.
+ * The Form 2210-F face has one date and one count: "Enter the date the amount
+ * on line 13 was paid or April 15, 2026, whichever is earlier" and "Underpayment
+ * on line 13 × Number of days on line 15 / 365 × 0.07"
+ * (irs-2210f-face-2025::sec::face-part-iii::b01); its instructions say nothing
+ * more. The Form 2210 instructions: "If more than one payment was required to
+ * fully satisfy an underpayment amount, make a separate computation for each
+ * payment" (irs-2210-inst-2025::sec::line-4::b01). The engine follows the Form
+ * 2210-F face, the day the whole of line 13 is paid: a form's own text decides
+ * how that form is filled, and the Form 2210 sentence is for Form 2210's
+ * worksheet. The statute counts each portion on its own
+ * (usc-26-2025::sec::s6654::b, (b)(2)(B)); QUESTIONS.md names it for
+ * docs/law-findings.md.
  */
 export function line14Day(
   line13: number,
