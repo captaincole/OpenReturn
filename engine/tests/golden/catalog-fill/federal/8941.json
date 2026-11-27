@@ -1,0 +1,258 @@
+{
+  "formId": "form-8941",
+  "fieldCount": 28,
+  "entries": [
+    {
+      "fieldId": "form-8941.0.header.a_marketplace_identifier",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-MQMZ8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.header.a_shop_marketplace_premiums_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.header.a_shop_marketplace_premiums_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.header.b_employment_tax_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "T-1A155"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.header.c_prior_credit_claimed_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.header.c_prior_credit_claimed_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-CTSTU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-1E6G0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.1_number_of_employees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "8,915"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.10_state_subsidies_and_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "6,911"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.11_subtract_10_from_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "7,303"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.12_smaller_of_9_or_11",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "3,138"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.13_employees_with_premiums_paid",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "1,127"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.14_ftes_for_line_13_employees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "5,936"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.15_credit_from_pass_through_entities",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "5,049"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.16_add_lines_12_and_15",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "4,072"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.17_allocated_to_patrons_or_beneficiaries",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "6,045"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.18_subtract_17_from_16",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "6,922"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.19_payroll_taxes_paid",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "7,561"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.2_full_time_equivalent_employees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "4,903"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.20_smaller_of_16_or_19",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "3,203"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.3_average_annual_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "1,370"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.4_premiums_paid_qualifying_arrangement",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "4,760"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.5_premiums_at_average_premium",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "1,930"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.6_smaller_of_4_or_5",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "3,712"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.7_multiply_6_by_applicable_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "6,745"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.8_fte_phaseout_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "7,378"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8941.0.line.9_wage_phaseout_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "5,419"
+        }
+      ]
+    }
+  ]
+}

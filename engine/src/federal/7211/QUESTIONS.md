@@ -2,26 +2,26 @@
 
 The form and its instructions (Rev. December 2025) leave these points open.
 Each says the source text, the default the engine applies, and whether it
-changes dollars. The decisions with two conflicting texts are rows A110 to
-A112 of `docs/rule-decisions.md`.
+changes dollars. The decisions with two conflicting texts are rows A122 to
+A124 of `docs/rule-decisions.md`.
 
 ## Two texts conflict
 
 Each is decided by the author, with a `DECISION` comment in `lines.ts` and a
 row in `docs/rule-decisions.md`.
 
-- **Line 5a, what the energy community bonus multiplies (row A110).** The
+- **Line 5a, what the energy community bonus multiplies (row A122).** The
   instructions: "multiply the amount on Part II, line 5a, by 10% (0.10)"
   (`irs-7211-inst-2025::sec::line-5a::b01`). The form: "multiply the amount on
   line 3 by 10% (0.10)" (`irs-7211-face-2025::sec::face-part-ii::b01`). The
   engine takes line 3: line 5a cannot be figured from itself. No dollar change.
-- **Column (b), cents or dollars (row A111).** The instructions put the
+- **Column (b), cents or dollars (row A123).** The instructions put the
   amount in cents in column (b)
   (`irs-7211-inst-2025::sec::part-ii-clean-electricity-production::b01`); the
   form's column (c) is "Column (a) x Column (b)" in dollars
   (`irs-7211-face-2025::sec::face-part-ii::b01`). The engine prints $0.03 and
   $0.006. No dollar change.
-- **Line 8a after the energy community bonus (row A112).** The instructions:
+- **Line 8a after the energy community bonus (row A124).** The instructions:
   "An additional bonus credit equal to 10% of the amount"
   (`irs-7211-inst-2025::sec::increased-credit-in-energy::b03`). The form:
   "multiply the amount on line 7 by 0.0909091"
@@ -131,7 +131,7 @@ and Form 3468's bond arithmetic as they are.
 
 ## Statute read (2026-11-27)
 
-The law library was read for the three decisions (rows A110 to A112). The
+The law library was read for the three decisions (rows A122 to A124). The
 statute agrees with the form each time, so nothing goes to
 `docs/law-findings.md`.
 
@@ -170,7 +170,7 @@ statute agrees with the form each time, so nothing goes to
 | Line 1 column (b), the 2025 amounts | Published numbers (90 FR 41477) |
 | Lines 1(a), 1(c), 3, 5a, 5b | Stated rule (form arithmetic) |
 | Lines 6a to 7 | Stated rule, Form 3468's arithmetic |
-| Lines 8a, 8b | Stated rule (form arithmetic, row A112) |
+| Lines 8a, 8b | Stated rule (form arithmetic, row A124) |
 | Line 9 | Own reading: line 8b for an individual; elective payment unsupported |
 | Line 2 | Own reading: blank for a calendar-year return |
 | Lines 10, 11 | Stated rule; a trust's code E unsupported |

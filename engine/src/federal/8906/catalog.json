@@ -1,0 +1,108 @@
+{
+  "form": {
+    "formId": "form-8906",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Distilled Spirits Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8906.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8906.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 468,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8906.0.line.1_total_cases_distilled_spirits",
+      "label": "Line 1 — Total number of cases of distilled spirits",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 671.969
+      }
+    },
+    {
+      "fieldId": "form-8906.0.line.3_cases_times_cost",
+      "label": "Line 3 — Multiply line 1 by line 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 647.968
+      }
+    },
+    {
+      "fieldId": "form-8906.0.line.4_credit_from_partnerships_s_corps",
+      "label": "Line 4 — Distilled spirits credit from partnerships and S corporations",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 635.969
+      }
+    },
+    {
+      "fieldId": "form-8906.0.line.5_distilled_spirits_credit",
+      "label": "Line 5 — Add lines 3 and 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 611.968
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8906/blank.pdf",
+    "ingestedAt": "2026-11-27T21:03:53.271Z",
+    "totalFields": 6,
+    "skipped": 0,
+    "catalogEntries": 6
+  }
+}
