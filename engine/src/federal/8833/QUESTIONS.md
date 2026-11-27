@@ -72,6 +72,12 @@ Nothing, through this form. No binding reads a treaty position fact. The amount 
 - A reduced treaty rate on Form 1040 line 16 ("Tax from attached statement", `general-rule-for-resident-aliens::b02`): no fact kind; not supported.
 - A foreign tax credit under a treaty: a stated foreign tax on Form 1116. Income re-sourced by treaty (the `treaty_resourced` category, Form 1116 box f and line 30) is a whole-form gap in Form 1116.
 
+## Second opinions
+
+- **Blind fill (2026-11-26).** A preparer filled 14 cases from the blank form and its instructions only. The engine and the blind fill agree on every key of every case: copies, header, lines 1a to 5, and the rows line 6 uses (including 25 rows that fit, 26 that do not, a 200-character word over 3 rows, and a line break). The only textual difference is case 9 row 1, where the blind fill describes the first 55 characters instead of quoting them. No case has a dollar amount.
+- **PolicyEngine-US 2.154.1 (commit 0fbed6ddb1).** It does not model Form 8833, section 6114 or any treaty benefit: no variable or parameter under `gov/irs` names a treaty. Nothing to compare.
+- **Other projects.** The repository names no other reference implementation for this form (no IRS Direct File checkout). Not compared.
+
 ## Proposals for a discussion
 
 - **A treaty rate statement.** Before: a reduced treaty rate has no place in the engine. After: a statement fact with the treaty country, the article and the income, a computed tax at the treaty rate, and Form 1040 line 16 box 3. This is a new kind of attached statement, so a person decides it.
