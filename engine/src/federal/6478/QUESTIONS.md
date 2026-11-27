@@ -37,6 +37,7 @@ The engine fills Form 6478 (Rev. January 2020) for an individual's 2025 return. 
 - Source: line 3 lists "Schedule K-1 (Form 1041) ... box 13 (code H)" (`line-3::b01`); "you can report the amount on Form 3800, Part III, line 4c" (`irs-1041k1-inst-2025::sec::note-form-1041-t-allocation-of-estimated-tax-payments-to::b02`).
 - Default: line 3 is a named gap. The pass-through tables keep a trust's box 13 credits as `credit` items with no route, so Form 3800 does not take them (Schedule E line 41 is unsupported then).
 - Not now: routing trust credits to Form 3800 is a change to the pass-through layer for every trust credit, not to this form.
+- Blind fill (2026-11-27): the preparer entered the trust's $300 on line 3 and line 4. That is what the text asks; the engine keeps the gap so that Form 6478 line 4 never shows a credit that Form 3800 line 4c drops. The fix is the pass-through change above.
 
 ### 4. A stated Form 3800 line 4c credit with no pass-through entity
 
@@ -62,3 +63,20 @@ The engine fills Form 6478 (Rev. January 2020) for an individual's 2025 return. 
 
 - Source: "You may claim or elect not to claim the biofuel producer credit at any time within 3 years" (`general-instructions::b01`); section 40(f).
 - Default: a decision not to file Form 6478 is not the election. Form 3800 still takes a K-1 credit, and no deduction or income changes, because an individual's 2025 return has no line 2 amount. The engine has no fact for the election; a credit the K-1 prints is claimed.
+
+### 9. Line 3 rounding with several K-1 amounts in cents
+
+- Source: line 3 says "Enter the total biofuel producer credits from" the K-1s (`line-3::b01`). The Form 1040 rule: "include cents when adding the amounts and round off only the total" (`irs-1040-inst-2025::sec::rounding-off-to-whole::b01`). Form 3800 Part V lists each pass-through amount "by the EIN of the pass-through entity" (`irs-3800-inst-2025::sec::part-v-3::b01`).
+- Default: each K-1 rounds, then they add (`docs/rule-decisions.md` row A96, the same rule as Forms 8846 and 8586). Line 4 then equals Form 3800 line 4c.
+- Blind fill (2026-11-27): the preparer rounded only the total. $600.40 + $1,200.40 gives $1,801 there and $1,800 in the engine; $600.50 + $1,200.50 gives $1,801 there and $1,802 in the engine. At most $1 for each K-1 with cents.
+
+### 10. When a cooperative's notice of credit allocation counts
+
+- Source: line 3 lists "Form 1099-PATR ... box 12, or other notice of credit allocation" (`line-3::b01`) and says nothing about the patron's year. "You claim the credit for the tax year in which the sale or use occurs" (`general-instructions::b01`).
+- Default: a stated Form 3800 line 4c credit with the cooperative's EIN counts on the 2025 return, as stated. The engine does not see the cooperative's tax year; a notice for a cooperative year that ended in 2024 belongs on the 2024 return, and the person who states the credit decides that.
+- Blind fill (2026-11-27): the same choice ($505.50 counted).
+
+## Second opinions
+
+- PolicyEngine-US 2.154.1 (commit 0fbed6ddb1, 2026-11-26): it does not model Form 6478. `general_business_credit` is a bare input ("General business credit from Form 3800") with no formula and no biofuel parameter, so it has no constant or formula to compare.
+- IRS Direct File: the repo has no checkout of its tax logic (issue #140 is open), so it was not compared.
