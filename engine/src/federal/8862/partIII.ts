@@ -87,7 +87,7 @@ function childBindings(column: number): Record<string, Binding> {
      * the qualifying child ... of the child's noncustodial parent"
      * (irs-1040-inst-2025::sec::definitions-and-special-rules::b01). The engine
      * follows the exception, because a "No" on line 15 denies the credit that
-     * line 14's own exception allows. Rule decision A79.
+     * line 14's own exception allows. Rule decision A89.
      */
     ...pair("15", "qualifying_child", (row) => row.credit === "child_tax_credit"),
     // Line 16 (line-16::b01): a dependent fact is a person claimed as a dependent.

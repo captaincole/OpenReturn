@@ -293,7 +293,7 @@ describe("Form 8862 and the child tax credits", () => {
     expect(run.line("2.line.18a_student_1_name")).toBeUndefined();
   });
 
-  it("a child released by Form 8332 answers Yes on lines 14 and 15 (rule decision A79)", () => {
+  it("a child released by Form 8332 answers Yes on lines 14 and 15 (rule decision A89)", () => {
     const owen = makeDependentFactKey("owen");
     const run = evaluate(
       lini,

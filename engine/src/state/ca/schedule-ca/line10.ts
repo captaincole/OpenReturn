@@ -4,6 +4,9 @@
  * (the form). These are the lines before the FTB 3805V deductions (lines 9b1
  * and 9b2). FTB 3805V reads them to find California AGI before its own
  * deductions: reading line 10 itself would wait on the deductions it figures.
+ * Section B line 2a (alimony) has no column B on either schedule, so the list
+ * names no field for it: Schedule CA (540NR) reads each name from its own
+ * catalog, and a name with no field there is an error.
  */
 export const LINE_10_SUBTRACTIONS_BEFORE_NOL = [
   "0.line.1z_subtractions",
@@ -13,7 +16,6 @@ export const LINE_10_SUBTRACTIONS_BEFORE_NOL = [
   "0.line.5b_subtractions",
   "0.line.6b_subtractions",
   "0.line.7a_subtractions",
-  "0.line.b2a_subtractions",
   "0.line.b3_subtractions",
   "0.line.b4_subtractions",
   "0.line.b5_subtractions",

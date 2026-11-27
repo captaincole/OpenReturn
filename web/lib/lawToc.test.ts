@@ -12,9 +12,10 @@ describe("lawTocHref", () => {
 });
 
 describe("isLawSource", () => {
-  it("accepts only the two libraries", () => {
+  it("accepts only the three libraries", () => {
     expect(isLawSource("statute")).toBe(true);
     expect(isLawSource("regulations")).toBe(true);
+    expect(isLawSource("california")).toBe(true);
     expect(isLawSource("cases")).toBe(false);
     expect(isLawSource("")).toBe(false);
   });
@@ -35,5 +36,11 @@ describe("lawCrumbs", () => {
     expect(lawCrumbs("regulations", [])).toEqual([
       { href: "/library/law/toc/regulations", label: "Treasury Regulations" },
     ]);
+    expect(lawCrumbs("california", [{ node: "div2", heading: "DIVISION 2. OTHER TAXES" }])).toEqual(
+      [
+        { href: "/library/law/toc/california", label: "California Revenue and Taxation Code" },
+        { href: "/library/law/toc/california/div2", label: "DIVISION 2. OTHER TAXES" },
+      ],
+    );
   });
 });

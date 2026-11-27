@@ -1,9 +1,13 @@
+import { CA_DOC_PREFIX, caPageOf, caSplit, caTargetOf, caVersionOf } from "./lawCa";
+
 /*
- * The law (Canon's law.db: the Code and the Treasury regulations) as the
- * web app reads it. Keep the types in sync by hand with
- * canon/src/mastra/server/routes/law.ts and canon/src/law/lawSection.ts:
- * the web app shares no source with Canon. A section number with a dot
- * ("1.469-5T") is a regulation; a Code section number never has one.
+ * The law (Canon's law.db: the Code, the Treasury regulations and
+ * California's code) as the web app reads it. Keep the types in sync by
+ * hand with canon/src/mastra/server/routes/law.ts and
+ * canon/src/law/lawSection.ts: the web app shares no source with Canon. A
+ * section number with a dot ("1.469-5T") is a regulation; a Code section
+ * number never has one. A California section names its code: its page is
+ * "CA-17024.5" (lawCa.ts).
  */
 
 export interface LawNotInstalled {
@@ -11,7 +15,7 @@ export interface LawNotInstalled {
   message: string;
 }
 
-export type LawSource = "statute" | "regulations";
+export type LawSource = "statute" | "regulations" | "california";
 
 export interface LawStatusDocument {
   docId: string;
@@ -44,16 +48,31 @@ export interface LawSection {
   };
   release: { title: string; published: string | null };
   blocks: LawBlock[];
+  /** A California number with several versions: each one's heading and first block. */
+  versions?: LawSectionVersion[];
+}
+
+export interface LawSectionVersion {
+  version: number;
+  heading: string;
+  firstBlockId: string;
 }
 
 const BLOCK_ID_MARK = "::";
-// law.db's documents are "usc-26-<year>"; no IRS or FTB document id starts so.
-const LAW_DOC_PREFIX = "usc-";
+/*
+ * law.db's documents: "usc-26-<year>", "cfr-26-<year>", "ca-rtc-<year>". No
+ * IRS or FTB document id starts so (FTB ids start "ca-", hence "ca-rtc-").
+ * Keep in sync by hand with LAW_DOC_PREFIXES in canon/src/law/lawIds.ts.
+ */
+const LAW_DOC_PREFIXES = ["usc-", "cfr-", CA_DOC_PREFIX];
 const SECTION_SLUG_PREFIX = "s";
 const PAGE_ROOT = "/library/law";
 const OFFICIAL_SECTION_ROOT = "https://uscode.house.gov/us/usc/t26";
 /** eCFR's page of one section: the current text, which can be newer than the dated copy we hold. */
 const OFFICIAL_REG_ROOT = "https://www.ecfr.gov/current/title-26/section-";
+/** leginfo's page of one section of the Revenue and Taxation Code; the number ends with a period. */
+const OFFICIAL_CA_ROOT =
+  "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=RTC&sectionNum=";
 const REG_DOT = ".";
 const QA_STEP = "Q&A-";
 const QA_ID = "qa";
@@ -85,23 +104,43 @@ const isSectionChar = (char: string) => isDigit(char) || isLetter(char) || char 
 export const sectionInUrl = (number: string): string =>
   number.replaceAll("–", "-").replaceAll("—", "-").trim();
 
-/** True for a block of the statute: "usc-26-2025::sec::s469::g-1". */
-export const isLawBlockId = (blockId: string): boolean => blockId.startsWith(LAW_DOC_PREFIX);
+/** True for a block of law.db: "usc-26-2025::sec::s469::g-1", "ca-rtc-2025::sec::s17041::a". */
+export const isLawBlockId = (blockId: string): boolean =>
+  LAW_DOC_PREFIXES.some((prefix) => blockId.startsWith(prefix));
 
-/** The element id of a block on its section's page: the end of its id, "g-1". */
-export const blockAnchor = (blockId: string): string =>
-  blockId.slice(blockId.lastIndexOf(BLOCK_ID_MARK) + BLOCK_ID_MARK.length);
+/*
+ * The element id of a block on its section's page: the end of its id,
+ * "g-1". A later version of a California number shares the page, so its
+ * ids start with the version: "v2-a-1".
+ */
+export function blockAnchor(blockId: string): string {
+  const tail = blockId.slice(blockId.lastIndexOf(BLOCK_ID_MARK) + BLOCK_ID_MARK.length);
+  const version = caVersionOf(blockId);
+  return version > 1 ? `${versionAnchor(version)}-${tail}` : tail;
+}
+
+/** The element id of a version's heading on its section's page: "v2". */
+export const versionAnchor = (version: number): string => `v${version}`;
 
 export const lawSectionHref = (section: string, anchor?: string): string =>
   `${PAGE_ROOT}/${encodeURIComponent(sectionInUrl(section))}${anchor ? `#${anchor}` : ""}`;
 
 export const isRegulation = (number: string): boolean => number.includes(REG_DOT);
 
-/** The official page for one section: the Law Revision Counsel's for the Code, eCFR's for a regulation. */
-export const officialTextUrl = (number: string): string =>
-  isRegulation(number)
+/** The page of a section of one source: "469", "1.469-5T", "CA-17024.5". */
+export const sectionPageOf = (source: LawSource, number: string): string =>
+  source === "california" ? caPageOf(number) : sectionInUrl(number);
+
+/**
+ * The official page for one section: the Law Revision Counsel's for the
+ * Code, eCFR's for a regulation, leginfo's for California's code.
+ */
+export function officialTextUrl(number: string, source?: LawSource): string {
+  if (source === "california") return `${OFFICIAL_CA_ROOT}${encodeURIComponent(number)}.`;
+  return isRegulation(number)
     ? `${OFFICIAL_REG_ROOT}${sectionInUrl(number)}`
     : `${OFFICIAL_SECTION_ROOT}/s${sectionInUrl(number)}/`;
+}
 
 /*
  * "usc-26-2025::sec::s469::g-1" → section "469", anchor "g-1". The slug is
@@ -110,6 +149,7 @@ export const officialTextUrl = (number: string): string =>
  * "1.1031(a)-1"); Canon finds a section in either case.
  */
 function fromBlockId(blockId: string): { section: string; anchor?: string } | null {
+  if (blockId.startsWith(CA_DOC_PREFIX)) return caTargetOf(blockId, blockAnchor);
   const [, kind, slug, anchor] = blockId.split(BLOCK_ID_MARK);
   if (kind !== "sec" || !slug?.startsWith(SECTION_SLUG_PREFIX)) return null;
   const section = slug.slice(SECTION_SLUG_PREFIX.length);
@@ -197,6 +237,8 @@ function qaAnchor(text: string): { step: string | null; rest: string } {
 
 /** "26 U.S.C. § 469(g)(1)(A)" → section "469", anchor "g-1-A"; "26 CFR § 1.469-5T(a)" → "1.469-5T", "a". */
 function fromCitation(citation: string): { section: string; anchor?: string } | null {
+  const california = caCitationOf(citation);
+  if (california !== undefined) return california;
   const rest = dropLeadingWords(sectionInUrl(citation));
   const head = takeSectionChars(rest, 0);
   const end = rest[head] === REG_DOT ? regulationEnd(rest, head) : head;
@@ -209,6 +251,18 @@ function fromCitation(citation: string): { section: string; anchor?: string } | 
   if (!segments) return null;
   const steps = qa.step ? [qa.step, ...segments] : segments;
   return { section, anchor: steps.length > 0 ? steps.join("-") : undefined };
+}
+
+/** "CA 17041(a)(1)" → page "CA-17041", anchor "a-1"; undefined when the text names no California code. */
+function caCitationOf(citation: string): { section: string; anchor?: string } | null | undefined {
+  const split = caSplit(citation);
+  if (split === undefined) return undefined;
+  const segments = split ? parenSegments(split.rest) : null;
+  if (!split || !segments) return null;
+  return {
+    section: caPageOf(split.section),
+    anchor: segments.length > 0 ? segments.join("-") : undefined,
+  };
 }
 
 /*

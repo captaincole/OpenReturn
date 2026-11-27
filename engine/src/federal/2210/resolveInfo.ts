@@ -9,6 +9,7 @@ import {
   type AnnualizedPeriodFactValue,
   type DatedAmountFact,
 } from "../../facts/index.js";
+import type { MustFileResolution } from "../../filingInfo.js";
 import { roundDollars, sum } from "../../money.js";
 import {
   filingStatusOf,
@@ -18,6 +19,7 @@ import {
   type MustFileFallback,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { farmerTest, MUST_FILE_2210F_KEY, type FarmerTest } from "../2210-f/farmerTest.js";
 import { countedDay, dayNumber, OVERPAYMENT_APPLIED_DAY } from "./dates.js";
 import type { Form2210Answers, Form2210FilingInfo } from "./filingInfo.js";
 import type { DatedPayment } from "./penaltyWorksheet.js";
@@ -80,7 +82,11 @@ function mustFileFallbacks(inputs: ResolverInputs): MustFileFallback[] {
   ];
 }
 
-function answers(inputs: ResolverInputs, payments: DatedPayment[]): Form2210Answers | undefined {
+function answers(
+  inputs: ResolverInputs,
+  payments: DatedPayment[],
+  farmer: FarmerTest,
+): Form2210Answers | undefined {
   const withholdingFacts = getDatedWithholdingFacts(inputs.facts);
   const datedWithholding = datedPayments(withholdingFacts);
   if (withholdingFacts.length > 0 && datedWithholding === undefined) return undefined;
@@ -100,15 +106,42 @@ function answers(inputs: ResolverInputs, payments: DatedPayment[]): Form2210Answ
     datedWithholding: withholdingFacts.length > 0 ? datedWithholding : undefined,
     annualizedPeriods: periods.complete ? periods.values : undefined,
     annualizedPeriodsIncomplete: periods.stated.length > 0 && !periods.complete,
+    farmerTestWaits: farmer.waitingKeys.length > 0,
+  };
+}
+
+const MUST_FILE_2210_KEY = "decisions.scope.must_file_2210";
+
+/*
+ * A farmer or fisher files Form 2210-F, not Form 2210: "If you meet test 1 but
+ * not test 2, use Form 2210-F ... If you don't meet test 1, use Form 2210"
+ * (irs-2210-inst-2025::sec::exceptions-to-the-penalty::b02–b03). The farmer
+ * test wins over this form's own decision, so the two never both file.
+ */
+function farmerFilesForm2210F(farmer: FarmerTest): MustFileResolution {
+  return {
+    decisionKey: MUST_FILE_2210_KEY,
+    value: false,
+    derivation: {
+      decidedBy: "engine",
+      rule: "a farmer or fisher (two-thirds of 2024 or 2025 gross income from farming or fishing) uses Form 2210-F, not Form 2210",
+      triggeredByFactKeys: farmer.passingKeys,
+      triggeredByDecisionKeys: farmer.byDecision ? [MUST_FILE_2210F_KEY] : [],
+    },
   };
 }
 
 /* The answers the form waits on once it files. */
-function required(inputs: ResolverInputs, form: Form2210Answers | undefined): string[] {
+function required(
+  inputs: ResolverInputs,
+  form: Form2210Answers | undefined,
+  farmer: FarmerTest,
+): string[] {
   if (!form) return [];
   const periods = annualizedPeriods(inputs);
   const asked: Record<string, unknown> = {
     [PRIOR_YEAR_KEYS.filedJointReturn]: form.jointReturn2024,
+    ...Object.fromEntries(farmer.waitingKeys.map((key) => [key, undefined])),
   };
   if (!form.noTwelveMonthReturn) {
     asked[PRIOR_YEAR_KEYS.federalTax] = form.priorYearTax;
@@ -127,10 +160,13 @@ export function resolve2210Info(inputs: ResolverInputs): Form2210FilingInfo {
   const paid = sum(overpayment, ...paymentFacts.map((fact) => fact.value.amount));
   const estimatedTaxPaid =
     paymentFacts.length > 0 || overpayment !== undefined ? roundDollars(paid) : undefined;
-  const mustFile = resolveMustFile(inputs.decisionByKey, {
-    explicitKey: "decisions.scope.must_file_2210",
-    fallbacks: mustFileFallbacks(inputs),
-  });
+  const farmer = farmerTest(inputs);
+  const mustFile = farmer.isFarmer
+    ? farmerFilesForm2210F(farmer)
+    : resolveMustFile(inputs.decisionByKey, {
+        explicitKey: MUST_FILE_2210_KEY,
+        fallbacks: mustFileFallbacks(inputs),
+      });
   const dated = datedPayments(paymentFacts);
   const payments = dated && [
     ...(overpayment === undefined
@@ -138,10 +174,10 @@ export function resolve2210Info(inputs: ResolverInputs): Form2210FilingInfo {
       : [{ day: OVERPAYMENT_APPLIED_DAY, amount: roundDollars(overpayment) }]),
     ...dated,
   ];
-  const form = mustFile.value === true && payments ? answers(inputs, payments) : undefined;
+  const form = mustFile.value === true && payments ? answers(inputs, payments, farmer) : undefined;
   return {
     mustFile: { "form-2210": mustFile },
-    missingInputs: { "form-2210": required(inputs, form) },
+    missingInputs: { "form-2210": required(inputs, form, farmer) },
     estimatedTaxPaid,
     form2210: form,
     form2210Gap: mustFile.value === true && form === undefined ? BAD_DATE : undefined,

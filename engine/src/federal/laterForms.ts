@@ -3,7 +3,8 @@
  * limit: the recapture forms, the farm forms, the debt forms, the community
  * property forms, the loss forms, the refund forms, the self-employed forms, the home credit
  * forms, the long-term contract forms, the foreign corporation forms, the territory
- * forms and the forms for a credit disallowed earlier. They are joined here, in this order, and
+ * forms, the treaty forms and the forms for a credit disallowed earlier. They are
+ * joined here, in this order, and
  * filingInfo.ts takes them as one. A new group file adds its resolvers (and its
  * type, when FilingInfo needs it) here, never to filingInfo.ts. California has
  * the same file in state/ca/laterForms.ts.
@@ -36,6 +37,7 @@ import { RECAPTURE_FORMS_RESOLVERS, type RecaptureFormsFilingInfo } from "./reca
 import { REFUND_FORMS_RESOLVERS, type RefundFormsFilingInfo } from "./refundForms.js";
 import { SELF_EMPLOYED_RESOLVERS, type SelfEmployedFilingInfo } from "./selfEmployedForms.js";
 import { TERRITORY_FORMS_RESOLVERS, type TerritoryFormsFilingInfo } from "./territoryForms.js";
+import { TREATY_FORMS_RESOLVERS, type TreatyFormsFilingInfo } from "./treatyForms.js";
 
 export type LaterFederalFormsFilingInfo = RecaptureFormsFilingInfo &
   FarmFormsFilingInfo &
@@ -46,6 +48,7 @@ export type LaterFederalFormsFilingInfo = RecaptureFormsFilingInfo &
   ContractFormsFilingInfo &
   ForeignCorporationFormsFilingInfo &
   TerritoryFormsFilingInfo &
+  TreatyFormsFilingInfo &
   DisallowedCreditFormsFilingInfo;
 
 export const LATER_FEDERAL_FORMS_RESOLVERS: ReadonlyArray<
@@ -62,5 +65,6 @@ export const LATER_FEDERAL_FORMS_RESOLVERS: ReadonlyArray<
   ...CONTRACT_FORMS_RESOLVERS,
   ...FOREIGN_CORPORATION_FORMS_RESOLVERS,
   ...TERRITORY_FORMS_RESOLVERS,
+  ...TREATY_FORMS_RESOLVERS,
   ...DISALLOWED_CREDIT_FORMS_RESOLVERS,
 ];

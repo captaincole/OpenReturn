@@ -34,10 +34,15 @@ export const ESTIMATED_TAX_KEYS = {
    * Form 2210 Part II box A or B: "entire" or "part", recorded only when the
    * taxpayer asks for a waiver (retired after age 62 or disabled in 2024 or
    * 2025, or a casualty, disaster or other unusual circumstance;
-   * irs-2210-inst-2025::sec::waiver-of-penalty::b01).
+   * irs-2210-inst-2025::sec::waiver-of-penalty::b01). A farmer or fisher's
+   * request is Form 2210-F box A, either way
+   * (irs-2210f-inst-2025::sec::waiver-of-penalty::b01).
    */
   waiverRequest: "estimated_tax_penalty.waiver_request",
-  /* Box B: the part of the penalty to waive, a number (the dotted line next to line 19). */
+  /*
+   * Box B: the part of the penalty to waive, a number (the dotted line next to
+   * line 19; on Form 2210-F, the dotted line next to line 16).
+   */
   waiverAmount: "estimated_tax_penalty.waiver_amount",
 } as const;
 

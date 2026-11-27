@@ -3,9 +3,12 @@ import { officialTextUrl, type LawSection } from "@/lib/law";
 import Link from "next/link";
 import { LawCrumbs } from "../../components/LawCrumbs";
 
-// eCFR's page is the current text; the library's copy is dated, so the two can differ.
+// eCFR's and leginfo's pages are the current text; the library's copy is dated, so the two can differ.
 const CURRENT_TEXT_NOTE =
   "The official page shows the current text, which can be newer than this dated copy.";
+// California adopts the Code as of a fixed date (§ 17024.5); the library's Code is newer.
+const CONFORMITY_NOTE =
+  "California follows the Internal Revenue Code as of a fixed date, with its own changes (§ 17024.5). A federal rule enacted after that date may not apply in California.";
 
 export function LawSectionHeader({ page }: { page: LawSection }) {
   const { section, release } = page;
@@ -25,7 +28,7 @@ export function LawSectionHeader({ page }: { page: LawSection }) {
           {release.published ? `, published ${formatPublished(release.published)}` : ""}
         </span>
         <a
-          href={officialTextUrl(section.number)}
+          href={officialTextUrl(section.number, page.source)}
           target="_blank"
           rel="noopener noreferrer"
           className="text-accent hover:text-accent-hover"
@@ -33,8 +36,11 @@ export function LawSectionHeader({ page }: { page: LawSection }) {
           Official text ↗
         </a>
       </div>
-      {page.source === "regulations" && (
+      {page.source !== "statute" && (
         <p className="text-[12px] text-ink-muted">{CURRENT_TEXT_NOTE}</p>
+      )}
+      {page.source === "california" && (
+        <p className="text-[12px] text-ink-muted">{CONFORMITY_NOTE}</p>
       )}
     </header>
   );

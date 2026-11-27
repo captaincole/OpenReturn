@@ -1,0 +1,2436 @@
+{
+  "formId": "form-6765",
+  "fieldCount": 270,
+  "entries": [
+    {
+      "fieldId": "form-6765.0.header.a_reduced_credit_280c_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.header.a_reduced_credit_280c_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.header.b_controlled_group_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.header.b_controlled_group_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "T-IZUBN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-GWIGR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.1_energy_consortia_amounts",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+          "text": "1,930"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.10_multiply_5_by_50",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "9,679"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.11_smaller_of_9_or_10",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "2,693"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.12_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "2,898"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.13_regular_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "2,064"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.14_energy_consortia_amounts",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "3,871"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.15_basic_research_payments",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "7,214"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.16_qualified_organization_base_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "8,342"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.17_subtract_16_from_15",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "3,001"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.18_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "6,096"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.19_multiply_18_by_20",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "9,839"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.2_basic_research_payments",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+          "text": "6,420"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.20_total_qres_from_line_48",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "4,136"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.21_prior_3_years_qres",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "5,209"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.22_divide_21_by_6",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "2,990"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.23_subtract_22_from_20",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "7,839"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.24_multiply_23_by_14",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+          "text": "7,146"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.25_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+          "text": "8,819"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.26_alternative_simplified_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+          "text": "6,670"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.3_qualified_organization_base_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+          "text": "3,336"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.4_subtract_3_from_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+          "text": "1,672"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.5_total_qres_from_line_48",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+          "text": "9,740"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.6_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+          "text": "T-OTVT3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.7_average_annual_gross_receipts",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+          "text": "3,572"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.8_multiply_7_by_6",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "9,904"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.0.line.9_subtract_8_from_5",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "6,825"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.27_form_8932_wage_portion",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_01[0]",
+          "text": "6,563"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.28_subtract_27_from_13_or_26",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_02[0]",
+          "text": "6,723"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.29_pass_through_research_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+          "text": "6,398"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.30_total_current_year_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_04[0]",
+          "text": "9,569"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.31_allocated_to_beneficiaries",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_05[0]",
+          "text": "4,403"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.32_subtract_31_from_30",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_06[0]",
+          "text": "7,600"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.33a_qsb_payroll_tax_election",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.33b_payroll_tax_different_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.34_elected_payroll_tax_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_07[0]",
+          "text": "8,341"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.35_gbc_carryforward_current_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_08[0]",
+          "text": "6,531"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.36_payroll_tax_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_09[0]",
+          "text": "5,340"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.37_business_components_count",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+          "text": "4,344"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.38_officers_wages_in_42",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+          "text": "5,978"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.39_acquire_dispose_business_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.39_acquire_dispose_business_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.40_new_qre_categories_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.40_new_qre_categories_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.41_appendix_c_line_19_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+          "text": "5,149"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.41_asc_730_directive_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.41_asc_730_directive_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.42_total_qualified_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+          "text": "2,733"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.43_total_supplies_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+          "text": "1,922"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.44_total_computer_rental_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+          "text": "4,618"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.45_contract_research_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+          "text": "7,969"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.46_basic_research_payments",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+          "text": "8,513"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.47_add_lines",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+          "text": "3,164"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.48_total_qres",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+          "text": "6,817"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.section_f_a_complete_section_g_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.1.line.section_f_a_complete_section_g_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_1_col_a_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row1[0].f3_01[0]",
+          "text": "T-3COGM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_1_col_b_activity_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row1[0].f3_02[0]",
+          "text": "T-19UGX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_1_col_c_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row1[0].f3_03[0]",
+          "text": "T-1T2PW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_1_col_d_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row1[0].f3_04[0]",
+          "text": "T-1NEJ3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_1_col_e_software",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row1[0].f3_61[0]",
+          "text": "T-LCQZE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_1_col_f_information_sought",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row1[0].f3_62[0]",
+          "text": "T-T7D0O"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_10_col_a_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row10[0].f3_37[0]",
+          "text": "T-1K7PI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_10_col_b_activity_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row10[0].f3_38[0]",
+          "text": "T-LD1T5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_10_col_c_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row10[0].f3_39[0]",
+          "text": "T-165MB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_10_col_d_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row10[0].f3_40[0]",
+          "text": "T-V4BN4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_10_col_e_software",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row10[0].f3_79[0]",
+          "text": "T-12Q5O"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_10_col_f_information_sought",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row10[0].f3_80[0]",
+          "text": "T-VRWZV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_11_col_a_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row11[0].f3_41[0]",
+          "text": "T-10BIQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_11_col_b_activity_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row11[0].f3_42[0]",
+          "text": "T-1I0O4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_11_col_c_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row11[0].f3_43[0]",
+          "text": "T-4KU3P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_11_col_d_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row11[0].f3_444[0]",
+          "text": "T-1A76T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_11_col_e_software",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row11[0].f3_81[0]",
+          "text": "T-3XBJH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_11_col_f_information_sought",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row11[0].f3_82[0]",
+          "text": "T-WG1SX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_12_col_a_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row12[0].f3_45[0]",
+          "text": "T-PRHHZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_12_col_b_activity_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row12[0].f3_46[0]",
+          "text": "T-FYZ7H"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_12_col_c_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row12[0].f3_47[0]",
+          "text": "T-1TRIE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_12_col_d_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row12[0].f3_48[0]",
+          "text": "T-1SFTU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_12_col_e_software",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row12[0].f3_83[0]",
+          "text": "T-1M30G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_12_col_f_information_sought",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row12[0].f3_84[0]",
+          "text": "T-U75I8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_13_col_a_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row13[0].f3_49[0]",
+          "text": "T-F6XL8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_13_col_b_activity_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row13[0].f3_50[0]",
+          "text": "T-1L379"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_13_col_c_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row13[0].f3_51[0]",
+          "text": "T-DVWQY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_13_col_d_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row13[0].f3_52[0]",
+          "text": "T-AX8RY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_13_col_e_software",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row13[0].f3_85[0]",
+          "text": "T-YAA3K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_13_col_f_information_sought",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row13[0].f3_86[0]",
+          "text": "T-1AAMF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_14_col_a_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row14[0].f3_53[0]",
+          "text": "T-UGK0N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_14_col_b_activity_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row14[0].f3_54[0]",
+          "text": "T-J585O"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_14_col_c_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row14[0].f3_55[0]",
+          "text": "T-2COMK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_14_col_d_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row14[0].f3_56[0]",
+          "text": "T-891GN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_14_col_e_software",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row14[0].f3_87[0]",
+          "text": "T-UZ4NV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_14_col_f_information_sought",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row14[0].f3_88[0]",
+          "text": "T-1EUV1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_15_col_a_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row15[0].f3_57[0]",
+          "text": "T-19MOT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_15_col_b_activity_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row15[0].f3_58[0]",
+          "text": "T-F4Z4K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_15_col_c_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row15[0].f3_59[0]",
+          "text": "T-2ZWT9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_15_col_d_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row15[0].f3_60[0]",
+          "text": "T-1K9C6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_15_col_e_software",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row15[0].f3_89[0]",
+          "text": "T-HBIZJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_15_col_f_information_sought",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row15[0].f3_90[0]",
+          "text": "T-11W86"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_2_col_a_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row2[0].f3_05[0]",
+          "text": "T-1A0JI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_2_col_b_activity_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row2[0].f3_06[0]",
+          "text": "T-1H3T6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_2_col_c_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row2[0].f3_07[0]",
+          "text": "T-1X8L1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_2_col_d_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row2[0].f3_08[0]",
+          "text": "T-OV3LR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_2_col_e_software",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row2[0].f3_63[0]",
+          "text": "T-R5Z8W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_2_col_f_information_sought",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row2[0].f3_64[0]",
+          "text": "T-1PUBZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_3_col_a_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row3[0].f3_09[0]",
+          "text": "T-L6R9O"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_3_col_b_activity_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row3[0].f3_10[0]",
+          "text": "T-ATRWC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_3_col_c_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row3[0].f3_11[0]",
+          "text": "T-IRKRY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_3_col_d_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row3[0].f3_12[0]",
+          "text": "T-1GUAU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_3_col_e_software",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row3[0].f3_65[0]",
+          "text": "T-LSATI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_3_col_f_information_sought",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row3[0].f3_66[0]",
+          "text": "T-1K88A"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_4_col_a_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row4[0].f3_13[0]",
+          "text": "T-FGHMF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_4_col_b_activity_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row4[0].f3_14[0]",
+          "text": "T-19MNN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_4_col_c_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row4[0].f3_15[0]",
+          "text": "T-SLXJT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_4_col_d_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row4[0].f3_16[0]",
+          "text": "T-VE335"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_4_col_e_software",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row4[0].f3_67[0]",
+          "text": "T-9N6MY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_4_col_f_information_sought",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row4[0].f3_68[0]",
+          "text": "T-B7ZBB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_5_col_a_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row5[0].f3_17[0]",
+          "text": "T-1AX73"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_5_col_b_activity_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row5[0].f3_18[0]",
+          "text": "T-6WTCI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_5_col_c_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row5[0].f3_19[0]",
+          "text": "T-6NP5U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_5_col_d_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row5[0].f3_20[0]",
+          "text": "T-IBVMI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_5_col_e_software",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row5[0].f3_69[0]",
+          "text": "T-1BX4H"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_5_col_f_information_sought",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row5[0].f3_70[0]",
+          "text": "T-1641G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_6_col_a_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row6[0].f3_21[0]",
+          "text": "T-1D7WG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_6_col_b_activity_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row6[0].f3_22[0]",
+          "text": "T-1FDYL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_6_col_c_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row6[0].f3_23[0]",
+          "text": "T-4STE1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_6_col_d_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row6[0].f3_24[0]",
+          "text": "T-Y72KV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_6_col_e_software",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row6[0].f3_71[0]",
+          "text": "T-ESNPL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_6_col_f_information_sought",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row6[0].f3_72[0]",
+          "text": "T-VYUH5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_7_col_a_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row7[0].f3_25[0]",
+          "text": "T-1JV73"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_7_col_b_activity_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row7[0].f3_26[0]",
+          "text": "T-1LEW8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_7_col_c_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row7[0].f3_27[0]",
+          "text": "T-MC2WR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_7_col_d_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row7[0].f3_28[0]",
+          "text": "T-1YMSZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_7_col_e_software",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row7[0].f3_73[0]",
+          "text": "T-1OL8S"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_7_col_f_information_sought",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row7[0].f3_74[0]",
+          "text": "T-1B9IJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_8_col_a_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row8[0].f3_29[0]",
+          "text": "T-1XO0M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_8_col_b_activity_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row8[0].f3_30[0]",
+          "text": "T-BOEUI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_8_col_c_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row8[0].f3_31[0]",
+          "text": "T-5UO8E"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_8_col_d_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row8[0].f3_32[0]",
+          "text": "T-183IU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_8_col_e_software",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row8[0].f3_75[0]",
+          "text": "T-14MFH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_8_col_f_information_sought",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row8[0].f3_76[0]",
+          "text": "T-1VJ3T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_9_col_a_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row9[0].f3_33[0]",
+          "text": "T-1GQE3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_9_col_b_activity_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row9[0].f3_34[0]",
+          "text": "T-17Z0F"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_9_col_c_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row9[0].f3_35[0]",
+          "text": "T-GAC5E"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_9_col_d_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartI[0].Row9[0].f3_36[0]",
+          "text": "T-3M8D5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_9_col_e_software",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row9[0].f3_77[0]",
+          "text": "T-F7FFG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.2.line.49_row_9_col_f_information_sought",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_PartII[0].Row9[0].f3_78[0]",
+          "text": "T-E5H39"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_1_direct_research_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row1[0].f4_01[0]",
+          "text": "5,510"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_10_direct_research_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row10[0].f4_37[0]",
+          "text": "6,310"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_11_direct_research_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row11[0].f4_41[0]",
+          "text": "4,810"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_12_direct_research_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row12[0].f4_45[0]",
+          "text": "5,411"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_13_direct_research_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row13[0].f4_49[0]",
+          "text": "4,748"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_14_direct_research_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row14[0].f4_53[0]",
+          "text": "6,372"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_15_direct_research_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row15[0].f4_57[0]",
+          "text": "2,460"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_2_direct_research_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row2[0].f4_05[0]",
+          "text": "3,641"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_3_direct_research_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row3[0].f4_09[0]",
+          "text": "7,844"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_4_direct_research_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row4[0].f4_13[0]",
+          "text": "5,845"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_5_direct_research_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row5[0].f4_17[0]",
+          "text": "4,025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_6_direct_research_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row6[0].f4_21[0]",
+          "text": "9,183"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_7_direct_research_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row7[0].f4_25[0]",
+          "text": "9,256"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_8_direct_research_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row8[0].f4_29[0]",
+          "text": "5,602"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.50_row_9_direct_research_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row9[0].f4_33[0]",
+          "text": "8,092"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.50_total_direct_research_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].RowTotal[0].f4_65[0]",
+          "text": "9,807"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.50_total_from_attachments_direct_research_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].RowTotalFromAttachments[0].f4_61[0]",
+          "text": "7,226"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_1_direct_supervision_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row1[0].f4_02[0]",
+          "text": "5,229"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_10_direct_supervision_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row10[0].f4_38[0]",
+          "text": "4,745"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_11_direct_supervision_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row11[0].f4_42[0]",
+          "text": "1,437"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_12_direct_supervision_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row12[0].f4_46[0]",
+          "text": "3,597"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_13_direct_supervision_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row13[0].f4_50[0]",
+          "text": "4,261"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_14_direct_supervision_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row14[0].f4_54[0]",
+          "text": "7,495"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_15_direct_supervision_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row15[0].f4_58[0]",
+          "text": "9,168"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_2_direct_supervision_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row2[0].f4_06[0]",
+          "text": "1,622"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_3_direct_supervision_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row3[0].f4_10[0]",
+          "text": "9,975"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_4_direct_supervision_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row4[0].f4_14[0]",
+          "text": "3,339"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_5_direct_supervision_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row5[0].f4_18[0]",
+          "text": "5,114"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_6_direct_supervision_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row6[0].f4_22[0]",
+          "text": "2,503"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_7_direct_supervision_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row7[0].f4_26[0]",
+          "text": "7,063"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_8_direct_supervision_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row8[0].f4_30[0]",
+          "text": "2,593"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.51_row_9_direct_supervision_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row9[0].f4_34[0]",
+          "text": "3,682"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.51_total_direct_supervision_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].RowTotal[0].f4_66[0]",
+          "text": "1,631"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.51_total_from_attachments_direct_supervision_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].RowTotalFromAttachments[0].f4_62[0]",
+          "text": "3,773"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_1_direct_support_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row1[0].f4_03[0]",
+          "text": "9,397"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_10_direct_support_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row10[0].f4_39[0]",
+          "text": "2,431"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_11_direct_support_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row11[0].f4_43[0]",
+          "text": "5,741"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_12_direct_support_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row12[0].f4_47[0]",
+          "text": "5,804"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_13_direct_support_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row13[0].f4_51[0]",
+          "text": "9,007"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_14_direct_support_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row14[0].f4_55[0]",
+          "text": "3,057"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_15_direct_support_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row15[0].f4_59[0]",
+          "text": "5,980"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_2_direct_support_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row2[0].f4_07[0]",
+          "text": "6,949"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_3_direct_support_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row3[0].f4_11[0]",
+          "text": "3,113"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_4_direct_support_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row4[0].f4_15[0]",
+          "text": "9,309"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_5_direct_support_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row5[0].f4_19[0]",
+          "text": "3,021"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_6_direct_support_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row6[0].f4_23[0]",
+          "text": "8,399"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_7_direct_support_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row7[0].f4_27[0]",
+          "text": "2,102"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_8_direct_support_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row8[0].f4_31[0]",
+          "text": "1,861"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.52_row_9_direct_support_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row9[0].f4_35[0]",
+          "text": "8,905"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.52_total_direct_support_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].RowTotal[0].f4_67[0]",
+          "text": "7,355"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.52_total_from_attachments_direct_support_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].RowTotalFromAttachments[0].f4_63[0]",
+          "text": "9,512"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_1_total_qualified_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row1[0].f4_04[0]",
+          "text": "7,004"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_10_total_qualified_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row10[0].f4_40[0]",
+          "text": "6,431"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_11_total_qualified_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row11[0].f4_44[0]",
+          "text": "6,374"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_12_total_qualified_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row12[0].f4_48[0]",
+          "text": "2,861"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_13_total_qualified_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row13[0].f4_52[0]",
+          "text": "8,396"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_14_total_qualified_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row14[0].f4_56[0]",
+          "text": "5,119"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_15_total_qualified_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row15[0].f4_60[0]",
+          "text": "6,451"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_2_total_qualified_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row2[0].f4_08[0]",
+          "text": "7,430"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_3_total_qualified_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row3[0].f4_12[0]",
+          "text": "9,077"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_4_total_qualified_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row4[0].f4_16[0]",
+          "text": "4,120"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_5_total_qualified_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row5[0].f4_20[0]",
+          "text": "3,948"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_6_total_qualified_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row6[0].f4_24[0]",
+          "text": "4,687"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_7_total_qualified_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row7[0].f4_28[0]",
+          "text": "4,758"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_8_total_qualified_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row8[0].f4_32[0]",
+          "text": "7,424"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.53_row_9_total_qualified_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].Row9[0].f4_36[0]",
+          "text": "8,453"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.53_total_from_attachments_total_qualified_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].RowTotalFromAttachments[0].f4_64[0]",
+          "text": "6,144"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.53_total_total_qualified_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIII[0].RowTotal[0].f4_68[0]",
+          "text": "9,602"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_1_cost_of_supplies",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row1[0].f4_69[0]",
+          "text": "6,061"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_10_cost_of_supplies",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row10[0].f4_96[0]",
+          "text": "7,077"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_11_cost_of_supplies",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row11[0].f4_99[0]",
+          "text": "7,432"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_12_cost_of_supplies",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row12[0].f4_102[0]",
+          "text": "1,017"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_13_cost_of_supplies",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row13[0].f4_105[0]",
+          "text": "6,439"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_14_cost_of_supplies",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row14[0].f4_108[0]",
+          "text": "3,747"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_15_cost_of_supplies",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row15[0].f4_111[0]",
+          "text": "6,841"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_2_cost_of_supplies",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row2[0].f4_72[0]",
+          "text": "5,856"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_3_cost_of_supplies",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row3[0].f4_75[0]",
+          "text": "3,945"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_4_cost_of_supplies",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row4[0].f4_78[0]",
+          "text": "6,244"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_5_cost_of_supplies",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row5[0].f4_81[0]",
+          "text": "5,237"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_6_cost_of_supplies",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row6[0].f4_84[0]",
+          "text": "2,678"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_7_cost_of_supplies",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row7[0].f4_87[0]",
+          "text": "8,158"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_8_cost_of_supplies",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row8[0].f4_90[0]",
+          "text": "5,881"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.54_row_9_cost_of_supplies",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row9[0].f4_93[0]",
+          "text": "8,514"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.54_total_cost_of_supplies",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row17[0].f4_117[0]",
+          "text": "7,122"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.54_total_from_attachments_cost_of_supplies",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row16[0].f4_114[0]",
+          "text": "3,372"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_1_computer_rental_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row1[0].f4_70[0]",
+          "text": "6,138"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_10_computer_rental_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row10[0].f4_97[0]",
+          "text": "2,555"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_11_computer_rental_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row11[0].f4_100[0]",
+          "text": "5,158"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_12_computer_rental_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row12[0].f4_103[0]",
+          "text": "8,096"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_13_computer_rental_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row13[0].f4_106[0]",
+          "text": "2,579"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_14_computer_rental_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row14[0].f4_109[0]",
+          "text": "9,540"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_15_computer_rental_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row15[0].f4_112[0]",
+          "text": "2,208"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_2_computer_rental_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row2[0].f4_73[0]",
+          "text": "3,745"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_3_computer_rental_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row3[0].f4_76[0]",
+          "text": "1,909"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_4_computer_rental_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row4[0].f4_79[0]",
+          "text": "3,266"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_5_computer_rental_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row5[0].f4_82[0]",
+          "text": "7,612"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_6_computer_rental_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row6[0].f4_85[0]",
+          "text": "7,057"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_7_computer_rental_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row7[0].f4_88[0]",
+          "text": "1,716"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_8_computer_rental_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row8[0].f4_91[0]",
+          "text": "1,966"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.55_row_9_computer_rental_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row9[0].f4_94[0]",
+          "text": "7,083"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.55_total_computer_rental_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row17[0].f4_118[0]",
+          "text": "1,020"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.55_total_from_attachments_computer_rental_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row16[0].f4_115[0]",
+          "text": "1,555"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_1_contract_research",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row1[0].f4_71[0]",
+          "text": "8,989"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_10_contract_research",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row10[0].f4_98[0]",
+          "text": "2,822"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_11_contract_research",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row11[0].f4_101[0]",
+          "text": "7,207"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_12_contract_research",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row12[0].f4_104[0]",
+          "text": "4,963"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_13_contract_research",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row13[0].f4_107[0]",
+          "text": "9,204"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_14_contract_research",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row14[0].f4_110[0]",
+          "text": "6,860"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_15_contract_research",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row15[0].f4_113[0]",
+          "text": "2,398"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_2_contract_research",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row2[0].f4_74[0]",
+          "text": "6,867"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_3_contract_research",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row3[0].f4_77[0]",
+          "text": "3,858"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_4_contract_research",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row4[0].f4_80[0]",
+          "text": "4,436"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_5_contract_research",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row5[0].f4_83[0]",
+          "text": "5,625"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_6_contract_research",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row6[0].f4_86[0]",
+          "text": "6,177"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_7_contract_research",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row7[0].f4_89[0]",
+          "text": "7,075"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_8_contract_research",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row8[0].f4_92[0]",
+          "text": "2,104"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.56_row_9_contract_research",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row9[0].f4_95[0]",
+          "text": "3,818"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.56_total_contract_research",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row17[0].f4_119[0]",
+          "text": "6,742"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6765.3.line.56_total_from_attachments_contract_research",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_PartIV[0].Row16[0].f4_116[0]",
+          "text": "6,524"
+        }
+      ]
+    }
+  ]
+}

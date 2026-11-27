@@ -257,7 +257,7 @@ const groundStep = createStep({
 export const groundWorkflow = createWorkflow({
   id: "ground",
   description:
-    'Grounds one tax decision in the IRS/FTB reference library: the judges retrieve the governing passages, assess the risk, and rule accurate, inaccurate or needs_more_facts with citations. When the passages conflict, or name a rule of law without stating it, the rule judge may consult the statute (law.db) once; passages that disagree come back as conflicts, with both quotes. Pass the decision and the facts it cites; maxIterations (default 3) caps the retrieval rounds. Pass jurisdictions to search only some of the library: ["CA"] searches only California, and the federal statute is then not searched. The result carries each judge step for the caller\'s log.',
+    "Grounds one tax decision in the IRS/FTB reference library: the judges retrieve the governing passages, assess the risk, and rule accurate, inaccurate or needs_more_facts with citations. When the passages conflict, or name a rule of law without stating it, the rule judge may consult the statute (law.db) once; passages that disagree come back as conflicts, with both quotes. Pass the decision and the facts it cites; maxIterations (default 3) caps the retrieval rounds. Pass jurisdictions to search only some of the library: [\"CA\"] searches only California, and a statute search then reads California's code, not the Internal Revenue Code. The result carries each judge step for the caller's log.",
   inputSchema: groundInputSchema,
   outputSchema: groundRunResultSchema,
 })
