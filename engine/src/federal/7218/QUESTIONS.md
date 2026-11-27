@@ -6,7 +6,8 @@ Form 7218 figures the section 45Z clean fuel production credit, one form for eac
 
 - Column (f): "Enter the number of gallons or gallon equivalents of fuel sold in the calendar year" (`irs-7218-inst-2025::sec::part-iii-clean-aviation-and::b03`).
 - Line 5b: no credit "for any transportation fuel produced and sold by the taxpayer before June 30, 2025" with a letter of that date (`line-5b::b01`).
-- Default: column (f) holds only the gallons produced on or after the letter. The fact states the gallons made before it (`gallonsProducedBeforeRegistration`), asked when the letter is dated after January 1, 2025. A letter dated after 2025 leaves 0 gallons.
+- Default: column (f) holds only the gallons produced on or after the letter. The fact states the gallons made before it (`gallonsProducedBeforeRegistration`), asked when the letter is dated after January 1, 2025. A sale with no gallons produced after the letter takes no row, the same as the other sales that earn no credit. A facility with no row files no Form 7218: "File a separate Form 7218 for each qualified facility for which you claim the section 45Z credit" (`how-to-claim-the-credit::b02`). So a letter dated after 2025 files no form for that facility (blind case 8, fixed 2026-11-27: the engine printed a row of 0 gallons and line 25 of 0).
+- Gallons produced on the date of the letter count: the example allows fuel "produced and sold on or after June 30, 2025" (`line-5b::b01`). The fact states the gallons made before the letter, so this is the taxpayer's count.
 - Changes dollars: yes.
 
 ## 2. Where the credit is rounded
@@ -65,20 +66,27 @@ Form 7218 figures the section 45Z clean fuel production credit, one form for eac
 
 - Column (c) prints 2025: the return's calendar year.
 - Column (a) prints the fuel and "(SAF)" or "(non-SAF)" ("Enter the type of fuel and if it's non-SAF or SAF", `part-iii-clean-aviation-and::b01`).
-- A fuel above 50 kg of CO2e per mmBTU is not transportation fuel (`transportation-fuel::b01`) and takes no row. A SAF row without its unrelated party certification (`sustainable-aviation-fuel-saf::b01`) takes no row.
+- A fuel above 50 kg of CO2e per mmBTU is not transportation fuel (`transportation-fuel::b01`) and takes no row. A SAF row without its unrelated party certification (`sustainable-aviation-fuel-saf::b01`) takes no row. Another reading would claim the uncertified SAF as non-SAF fuel at $1.06 or $0.21 a gallon; no text found allows it, so the engine gives it no credit. Changes dollars: yes, for uncertified SAF.
+- Column (e) at a halfway value: "Divide the result by 50 kilograms of CO2e, then round to the nearest multiple of 0.1" (`part-iii-clean-aviation-and::b01`). The text does not say how 0.05 rounds. The engine rounds half up (a rate of 47.5 gives 0.1), the same as whole dollars and cents. Half to even would give 0.0. Changes dollars: yes, the whole row (blind case 11: $10,600 against $0). The blind fill chose the same.
 - More than 24 rows for one facility: line 25 is a gap. The instructions do not say where more rows go.
 - Lines 4 and 5 are for cooperatives, estates and trusts: blank on an individual's return.
 - The facility fact states passive or not, like a Form 3468 property, not through the Schedule C business.
 
+## Second opinions
+
+- Blind fill (2026-11-27): 14 cases filled by hand from the blank form and the instructions. One difference: case 8, a registration letter dated after 2025. The engine printed a row of 0 gallons and line 25 of 0; the blind fill filed no form. No credit dollars differed. The instructions decide for the blind fill (item 1), and the engine now files no form for such a facility. Every other case matched to the cent.
+- PolicyEngine-US 2.154.2 (commit c1fea42a): it does not model section 45Z or Form 7218 (no variable or parameter names the credit), so nothing was compared.
+- No other reference implementation that the repository names models this credit (IRS Direct File has no business credits).
+
 ## Confidence
 
-| Field group | Confidence |
-| --- | --- |
-| Column (g), the applicable amounts | Published example with numbers (`applicable-amount::b02`) |
-| Column (e), the emissions factor | Stated rule; matches CRS IF12502 Table 1 |
-| Column (h), line 25, Part II lines 1 and 3 | Stated rule |
-| Column (f), the registration rule | Own reading (item 1, decided) |
-| Part II line 2, the pass-through form | Stated rule |
-| Part I lines 1 to 7, columns (a) to (d) | Stated rule (printed from the facts) |
-| Lines 4 and 5 | Stated rule (blank for an individual) |
-| A rate below zero | Own reading (item 3) |
+| Field group                                | Confidence                                                |
+| ------------------------------------------ | --------------------------------------------------------- |
+| Column (g), the applicable amounts         | Published example with numbers (`applicable-amount::b02`) |
+| Column (e), the emissions factor           | Stated rule; matches CRS IF12502 Table 1                  |
+| Column (h), line 25, Part II lines 1 and 3 | Stated rule                                               |
+| Column (f), the registration rule          | Own reading (item 1, decided)                             |
+| Part II line 2, the pass-through form      | Stated rule                                               |
+| Part I lines 1 to 7, columns (a) to (d)    | Stated rule (printed from the facts)                      |
+| Lines 4 and 5                              | Stated rule (blank for an individual)                     |
+| A rate below zero                          | Own reading (item 3)                                      |

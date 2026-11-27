@@ -2,8 +2,9 @@
  * Part III, one row for each sale of a facility (irs-7218-inst-2025::sec::part-iii-clean-aviation-and::b01
  * to ::b03): the same arithmetic on every row, (e) × (f) × (g) in column (h),
  * and line 25 the total. A sale that earns no credit takes no row: a fuel
- * above 50 kg of CO2e per mmBTU is not transportation fuel, and SAF without
- * its unrelated party certification gets no credit.
+ * above 50 kg of CO2e per mmBTU is not transportation fuel, a fuel produced
+ * before the registration letter gets no credit, and SAF without its
+ * unrelated party certification gets no credit.
  */
 
 import type { CleanFuelFacilityFactValue, CleanFuelSale } from "../../facts/index.js";
@@ -31,11 +32,27 @@ interface PartIIIRow {
   provisional: boolean;
 }
 
-/* A sale earns a row: transportation fuel, and SAF with its certification (undefined while it waits). */
-export function earnsRow(sale: CleanFuelSale): boolean | undefined {
+/*
+ * A sale earns a row: transportation fuel, some of it produced while the
+ * taxpayer was registered ("No clean fuel production credit can be claimed
+ * for any transportation fuel unless the taxpayer is registered ... at the
+ * time of production", irs-7218-inst-2025::sec::line-5b::b01), and SAF with
+ * its certification (undefined while it waits).
+ */
+export function earnsRow(sale: CleanFuelSale, approvalDate: string): boolean | undefined {
   if (!isTransportationFuel(sale.emissionsRate)) return false;
+  if (qualifiedGallonsOf(sale, approvalDate) === 0) return false;
   return certifiedOf(sale);
 }
+
+/*
+ * The facility claims a credit: a sale earns a row, or waits on an answer.
+ * "File a separate Form 7218 for each qualified facility for which you claim
+ * the section 45Z credit" (irs-7218-inst-2025::sec::how-to-claim-the-credit::b02),
+ * so a facility with no creditable fuel files no Form 7218.
+ */
+export const claimsCredit = (facility: CleanFuelFacilityFactValue) =>
+  facility.sales.some((sale) => earnsRow(sale, facility.registration.approvalDate) !== false);
 
 /* Column (a): "Enter the type of fuel and if it's non-SAF or SAF" (part-iii-clean-aviation-and::b01). */
 const fuelText = (sale: CleanFuelSale) =>
@@ -73,8 +90,9 @@ export interface PartIIIResult {
 
 /* The rows of one facility and line 25. */
 export function partIIIOf(facility: CleanFuelFacilityFactValue): PartIIIResult {
-  const waiting = facility.sales.some((sale) => earnsRow(sale) === undefined);
-  const printed = facility.sales.filter((sale) => earnsRow(sale) === true);
+  const approvalDate = facility.registration.approvalDate;
+  const waiting = facility.sales.some((sale) => earnsRow(sale, approvalDate) === undefined);
+  const printed = facility.sales.filter((sale) => earnsRow(sale, approvalDate) === true);
   const rows = printed
     .slice(0, PART_III_ROWS)
     .map((sale, index) => rowOf(sale, facility, index + 1));

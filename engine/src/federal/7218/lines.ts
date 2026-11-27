@@ -83,8 +83,9 @@ const BEFORE_REGISTRATION_GAP =
  * claim the section 45Z credit for any transportation fuel produced and sold
  * by the taxpayer before June 30, 2025" (irs-7218-inst-2025::sec::line-5b::b01).
  * A letter dated on or before January 1, 2025 covers every gallon produced
- * after 2024; one dated after 2025 covers none of the year's; one between
- * needs the gallons produced before it (undefined: the row waits).
+ * after 2024; one dated after 2025 covers none of the year's (0: the sale
+ * takes no row, partIII.ts); one between needs the gallons produced before
+ * it (undefined: the row waits).
  *
  * DECISION (2026-11-27, by the author): which gallons does column (f) hold?
  * Text A: "Enter the number of gallons or gallon equivalents of fuel sold in

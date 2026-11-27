@@ -163,6 +163,22 @@ describe("Form 7218 lines of a facility", () => {
     expect(cells["1.part3.row5_col_a_type_of_fuel"]).toBeUndefined();
   });
 
+  it("a fuel produced wholly before the registration letter takes no row (line-5b::b01)", () => {
+    const [first, second] = biorefinery.sales;
+    const sales = [{ ...first!, gallonsProducedBeforeRegistration: first!.gallons }, second!];
+    const cells = cellsOf(factsWith({ [BIOREFINERY_KEY]: withSales(sales) }), BIOREFINERY_KEY);
+    expect(cells["1.part3.row1_col_b_type_of_feedstock"]).toBe("Soybean oil");
+    expect(cells["1.part3.row2_col_a_type_of_fuel"]).toBeUndefined();
+  });
+
+  it("a letter dated after 2025 leaves no row, and the facility files no Form 7218 (how-to-claim-the-credit::b02)", () => {
+    const late = { ...biorefinery, registration: { number: "CN-1", approvalDate: "2026-02-01" } };
+    const copies = info(factsWith({ [BIOREFINERY_KEY]: late })).form7218Copies ?? [];
+    expect(copies.map((copy) => copy.key)).toEqual([DIGESTER_KEY, PASS_THROUGH_COPY]);
+    const alone = withoutK1(factsWith({ [BIOREFINERY_KEY]: late, [DIGESTER_KEY]: undefined }));
+    expect(evaluate(alone).files("form-7218")).toBe(false);
+  });
+
   it("line 7 No takes the base amount; a sold transfer prints its registration number on line 1", () => {
     const cells = cellsOf(base.facts, DIGESTER_KEY);
     expect(cells["1.part3.row1_col_g_applicable_amount"]).toBe("0.21");

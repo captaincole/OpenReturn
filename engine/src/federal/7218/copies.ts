@@ -27,7 +27,7 @@ import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
 import { PART_II_FIELDS, type Cells } from "./cells.js";
 import { line3Of } from "./lines.js";
 import { partIOf, passThroughPartI } from "./partI.js";
-import { partIIIOf } from "./partIII.js";
+import { claimsCredit, partIIIOf } from "./partIII.js";
 
 /* The Form 3800 Part III line of the credit (irs-7218-face-2025::sec::face-part-ii::b01, line 3). */
 export const FORM_3800_LINE = "1q";
@@ -44,9 +44,15 @@ export interface Form7218Copy {
   waiting: boolean;
 }
 
-/* A qualified facility: no section 45V, 45Q or 48(a)(15) credit for it this year (qualified-facility::b01). */
+/*
+ * A qualified facility: no section 45V, 45Q or 48(a)(15) credit for it this
+ * year (qualified-facility::b01). Only one with a credit to claim files
+ * (claimsCredit, partIII.ts).
+ */
 export const qualifiedFacilities = (inputs: ResolverInputs): CleanFuelFacilityFact[] =>
-  getCleanFuelFacilityFacts(inputs.facts).filter((fact) => !fact.value.otherFacilityCreditAllowed);
+  getCleanFuelFacilityFacts(inputs.facts).filter(
+    (fact) => !fact.value.otherFacilityCreditAllowed && claimsCredit(fact.value),
+  );
 
 /* One facility's Form 7218: Part I, Part III, and Part II lines 1 and 3 (line 2 is on the separate form). */
 export function facilityCopy(fact: CleanFuelFacilityFact): Form7218Copy {
