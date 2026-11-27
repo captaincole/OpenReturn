@@ -503,6 +503,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "(line 13; absent, April 15) or the taxpayer asks for a waiver (line 16)",
   ],
   [
+    /^(ctc|aotc)\.(denied_in_earlier_year|barred_by_irs)$/,
+    "Form 8862 answers Cade records only when the taxpayer states that the IRS reduced or " +
+      "disallowed the child tax credits or the AOTC in an earlier year, or bars them; absent " +
+      "means neither (federal/8862/QUESTIONS.md, Proposals for a discussion)",
+  ],
+  [
     /^prior_year\.ca_tax$/,
     "KNOWN GAP: decides whether FTB 5805 files. Needed only when the CA balance due is " +
       "$500 or more, which the resolver cannot see before evaluation.",
