@@ -12,7 +12,7 @@ The blank PDF is Rev. December 2024; the instructions are Rev. December 2025. Ev
 | Section A lines 1, 5 to 13 | Stated rule; line 6's start-up years: stated rule |
 | Lines 2 to 4, 15 to 17, 46 (basic research payments) | Stated rule: a corporation's only, blank |
 | Section B lines 14, 18 to 26 | Stated rule |
-| Line 7 with fewer than 4 years | Own reading (item 3) |
+| Line 7 with fewer than 4 years | Stated rule in the regulation (item 3) |
 | Line 13 or 26 for a controlled group member | Unsupported: the group credit attachment |
 | Lines 27 to 30 | Stated rule; line 27 is a stated answer |
 | Lines 31, 32 (estates and trusts) | Stated rule: blank |
@@ -51,6 +51,8 @@ Each item is a default with no conflicting text.
 
 - Source: "Enter the average annual gross receipts ... for the 4 tax years preceding the tax year" (`line-7::b01`). For the eligible small business test: "If your business wasn't in existence for the entire 3-year period, base your average annual gross receipts on the period your business existed" (`eligible-small-business-for-purposes-of::b01`).
 - Default: both average the years the fact states (at most 4 for line 7, the last 3 for the test). The gross receipts of section 41(c)(7) and of section 448(c) are taken as the same amounts.
+- The regulation agrees for line 7: "If ... the taxpayer has been in existence for at least one previous taxable year, but has not been in existence for four taxable years preceding the taxable year, then the average annual gross receipts ... shall be the average annual gross receipts for the number of taxable years preceding the credit year for which the taxpayer has been in existence" (`cfr-26-2025::sec::s1.41-3::a`). The blind fill took the same reading (case 3: 600,000, not 300,000).
+- Not covered: a business with no preceding year. The same paragraph makes its line 7 zero, but the fact asks for at least one year, so such a business cannot be stated yet.
 - Changes dollars: yes, for a business younger than 4 years that uses Section A.
 
 ### 4. Line 35 reads Form 3800 after the research limitation — done
@@ -71,9 +73,21 @@ Each item is a default with no conflicting text.
 - Default: 49(d) prints "Product", "Process" or "All Others"; 49(e) prints the letter and short name ("C. Non-IUS"). Column 49(a) prints the business's EIN, blank when it has none; 49(b) prints Schedule C line B. The aggregate entry prints only 49(c) and columns 50 to 56, last. Each cell adds with cents and rounds once.
 - Changes dollars: no.
 
+### 7. Line 34 when the election is more than line 28
+
+- Source: the face asks for "the portion of line 28 elected as a payroll tax credit (do not enter more than $500,000)" (`irs-6765-face-2025::sec::face-page-2::b02`), and the instructions say "Enter the portion of your research credit, figured on line 28, that you are claiming as a payroll tax credit. Don't enter more than $500,000" (`irs-6765-inst-2025::sec::line-34::b01`). Line 36 takes "the smallest of line 28, line 34, or line 35" (`face-page-2::b03`). The statute's portion is the least of "(A) the amount specified in the election ... (B) the credit determined under subsection (a)" (`usc-26-2025::sec::s41::h-2`).
+- Default: line 34 is the amount elected, at most $500,000, and is not also capped at line 28. Line 36 applies the line 28 limit. The blind fill took the same reading (case 13: line 34 is 40,000 with line 28 at 30,000).
+- Changes dollars: line 34 as printed only (40,000 against 30,000 in that case). Line 36, the payroll tax credit, is the same either way.
+
 ## Proposals for a discussion
 
 - **Form 3800's carryforward after a payroll tax election.** "The unused credit for the current year is determined by reducing the amount on Part I, line 6, and Part II, line 36, by the amount on Form 6765, line 36" (`irs-3800-inst-2025::sec::carryback-and-carryforward-of::b03`). Form 3800's carryforward columns (Part III column (i), Part V column (i)) do not subtract line 36 yet. They print only with a transfer or elective payment election or two sources on one line, and no scenario has both. The change is in `federal/3800` (allocation), so it waits for a person.
 - **California.** A California return gets the federal Schedule C with the section 280C reduction. Whether Schedule CA adds it back (California does not adopt section 174A, and its own research credit has its own rules) is not checked. The engine adds nothing on Schedule CA.
 - **Research in a farm, a rental or a K-1 entity of one's own.** The fact names a Schedule C business only. Research in a Schedule F farm is a gap on line 28.
 - **Capitalized research expenditures.** A taxpayer who elects section 174A(c) amortization reduces the capital account, not the deduction (`item-a-section-280c-election::b01`). The engine has no section 174A amortization, so it always reduces the Schedule C lines.
+
+## Second opinions
+
+- **Blind fill** (14 cases, 91 lines: Sections A, B, D and F, the section 280C election, line 27). Every line matched the engine, with no blank-against-0 differences. Its two doubts that touch an amount are items 3 and 7.
+- **PolicyEngine-US 2.154.1** (commit `0fbed6dd`, 2026-11-26). It does not model Form 6765: `general_business_credit` (`variables/gov/irs/credits/general_business/`) is a bare input with no formula, and nothing in its IRS variables or parameters names section 41, the research credit or the payroll tax election. No constant or formula to compare. No lead.
+- **IRS Direct File.** Not compared: no checkout here, and Direct File's scope has no business income, so it has no research credit.
