@@ -62,6 +62,18 @@ conflicting text.
 11. **Rounding.** Line 1 and the contribution sums keep cents and round once;
     line 6e(3), line 6g and line 2 round to the dollar (CLAUDE.md). Line
     6e(2) prints two places ("0.16"). Dollars: at most $1.
+12. **Wages of exactly $105,000.** Line 6b leaves out "contributions made to
+    employees whose wages paid to the employee were in excess of $105,000"
+    (`::section-2-small-employer-contributions::b02`). Default: wages of
+    exactly $105,000 count; only more is left out. Dollars: yes, the
+    employee's contribution, if "in excess of" were read as "at least".
+13. **Line 12's three-year window.** Line 12 counts military spouses who
+    "have not participated in the plan at any time prior to the 2 tax years
+    preceding the tax year" (`::line-12::b01`). Default: in 2025 a spouse who
+    began in 2023, 2024 or 2025 counts, and one who began in 2022 does not;
+    line 13 leaves out that spouse's contributions too (`::line-13::b01`).
+    Dollars: yes, $200 plus up to $300 a spouse, if the window were read
+    another way.
 
 ## The statute and the instructions
 
@@ -72,6 +84,21 @@ Statute: "The amount determined under paragraph (1) ... with respect to any
 employee of the employer shall not exceed $1,000"
 (`usc-26-2025::sec::s45e::f-2-A`). The engine follows the instructions
 (decision A103).
+
+## Second opinions
+
+- **Blind fill** (15 cases, from the blank form and instructions only): no
+  dollar difference. One blank against 0: case 8, line 6b (the engine blank,
+  the blind fill 0) with no employee at or under $1,000 (item 8). The blind
+  doubts that could change dollars (no credit outside the credit years, the
+  $1,334 third-year amount, rounding, wages of exactly $105,000, line 12's
+  window) match the engine's defaults (items 11 to 13, decision A103).
+- **PolicyEngine-US 2.154.1** (commit 0fbed6ddb1): `variables/gov/irs` and
+  `parameters/gov/irs` have no section 45E, Form 8881, startup cost,
+  auto-enrollment or military spouse variable. `general_business_credit` is
+  a bare input with no formula. Nothing to compare.
+- **IRS Direct File** (IRS-Public/direct-file, commit e365f9f): its tree has
+  no Form 8881, section 45E, Form 3800 or Schedule C file. Nothing to compare.
 
 ## Proposals for a discussion
 
