@@ -12,10 +12,11 @@
  * for Form 3800; Form 8826, the disabled access credit; Form 8881, the
  * credits for the retirement plan of the taxpayer's own business or farm;
  * Form 8882, the credit for employer-provided childcare facilities and
- * services; and Form 6765, the credit for increasing research activities. They are joined
- * here, in this order, and filingInfo.ts takes them as one, so that file stays
- * under its line limit. A new credit form adds its type and resolver here, not
- * to filingInfo.ts.
+ * services; Form 6765, the credit for increasing research activities; and
+ * Form 6478, the biofuel producer credit a pass-through entity allocates from
+ * a tax year that began in 2024. They are joined here, in this order, and
+ * filingInfo.ts takes them as one, so that file stays under its line limit. A
+ * new credit form adds its type and resolver here, not to filingInfo.ts.
  */
 
 import type { BaseFilingInfo } from "../filingInfo.js";
@@ -26,6 +27,8 @@ import type { Form4136FilingInfo } from "./4136/filingInfo.js";
 import { resolve4136Info } from "./4136/resolveInfo.js";
 import type { Form5884FilingInfo } from "./5884/filingInfo.js";
 import { resolve5884Info } from "./5884/resolveInfo.js";
+import type { Form6478FilingInfo } from "./6478/filingInfo.js";
+import { resolve6478Info } from "./6478/resolveInfo.js";
 import type { Form6765FilingInfo } from "./6765/filingInfo.js";
 import { resolve6765Info } from "./6765/resolveInfo.js";
 import type { Form8582CRFilingInfo } from "./8582-cr/filingInfo.js";
@@ -62,7 +65,8 @@ export type CreditFormsFilingInfo = Form3800FilingInfo &
   Form8826FilingInfo &
   Form8881FilingInfo &
   Form8882FilingInfo &
-  Form6765FilingInfo;
+  Form6765FilingInfo &
+  Form6478FilingInfo;
 
 export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve3800Info,
@@ -79,4 +83,5 @@ export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => B
   resolve8881Info,
   resolve8882Info,
   resolve6765Info,
+  resolve6478Info,
 ];

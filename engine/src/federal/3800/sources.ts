@@ -18,6 +18,7 @@ import { roundDollars } from "../../money.js";
 import type { ResolverInputs } from "../../resolverInputs.js";
 import { figuredOnForm3468, form3468CreditSources } from "../3468/credit.js";
 import { workOpportunitySources } from "../5884/sources.js";
+import { statedOwnBiofuelGap } from "../6478/form3800.js";
 import { researchCreditSources } from "../6765/form3800.js";
 import { lowIncomeHousingSourcesOf } from "../8586/form3800.js";
 import { disabledAccessSourcesOf } from "../8826/form3800.js";
@@ -54,6 +55,9 @@ function statedGap(value: GeneralBusinessCreditFact["value"]): string | undefine
   const engineForm = ENGINE_FORM_LINES[value.line];
   if (engineForm)
     return `Line ${value.line} comes from ${engineForm}, which the engine figures: state that form's inputs (the property, vehicle or tips) instead.`;
+  // Line 4c: no 2025 biofuel producer credit of the taxpayer's own production (6478/form3800.ts).
+  const ownBiofuel = statedOwnBiofuelGap(value);
+  if (ownBiofuel) return ownBiofuel;
   if (value.transfer && !TRANSFER_LINES.includes(value.line)) {
     return `The credit of line ${value.line} cannot be transferred under section 6418 (column (f) is shaded).`;
   }
