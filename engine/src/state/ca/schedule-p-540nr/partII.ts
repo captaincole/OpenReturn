@@ -239,8 +239,23 @@ const line42: Bind = (form) => {
   return rate === undefined ? undefined : ratioText(rate);
 };
 
+/*
+ * "If line 23 is zero or less, enter -0- on line 23, line 24, and line 43. Go
+ * to line 44" (ca-540nr-sched-p-inst-2025::sec::line-23::b01): with no
+ * tentative minimum tax on total AMTI, lines 25 to 42 are skipped (blank).
+ */
+const noTotalTmt = (form: Form) => {
+  const line23 = numberOrBlank(form["1.line.23_amti_less_exemption"]);
+  return line23 !== undefined && line23 <= 0;
+};
+const unlessSkipped =
+  (bind: Bind): Bind =>
+  (form, info) =>
+    noTotalTmt(form) ? undefined : bind(form, info);
+
 // Line 43: "Multiply line 40 by line 42"; -0- when line 23 is (::line-23::b01).
 const line43: Bind = (form) => {
+  if (noTotalTmt(form)) return 0;
   const rate = line42Rate(form);
   const caAmti = numberOrBlank(form["1.line.40_california_amti"]);
   const line23 = numberOrBlank(form["1.line.23_amti_less_exemption"]);
@@ -261,7 +276,7 @@ const line45: Bind = (form) => {
     : alternativeMinimumTax(tmt, regular);
 };
 
-export const PART_II_BINDINGS: Readonly<Record<string, Bind>> = {
+const LINES_25_TO_42: Readonly<Record<string, Bind>> = {
   "1.line.25_california_agi": line25,
   "1.line.26_nol_adjustment": line26,
   "1.line.28_combine_lines_25_through_27": line28,
@@ -290,6 +305,12 @@ export const PART_II_BINDINGS: Readonly<Record<string, Bind>> = {
   "1.line.40_california_amti": line40,
   "1.line.41_total_tmt": line41,
   "1.line.42_california_amt_rate": line42,
+};
+
+export const PART_II_BINDINGS: Readonly<Record<string, Bind>> = {
+  ...Object.fromEntries(
+    Object.entries(LINES_25_TO_42).map(([field, bind]) => [field, unlessSkipped(bind)]),
+  ),
   "1.line.43_california_tmt": line43,
   "1.line.44_regular_tax": line44,
   "1.line.45_alternative_minimum_tax": line45,
