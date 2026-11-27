@@ -22,6 +22,7 @@ import type { BaseFilingInfo } from "../../../filingInfo.js";
 import { numberOrBlank, sum } from "../../../money.js";
 import { unsupported, type Unsupported } from "../../../types.js";
 import { filmCreditsUsedTotal, filmSectionB2Credits } from "../3541/creditUsed.js";
+import { ttaCreditUsed, ttaSectionB2RowCount } from "../3809/creditUsed.js";
 import { taxBeforeSectionB2 } from "../540/creditBalance.js";
 import type { Form3801CRInfo } from "./filingInfo.js";
 import { caPassiveEntriesOf } from "./form.js";
@@ -135,22 +136,27 @@ export function passiveCreditsUsed(
   const credits = passiveCreditsAllowed(read, info);
   if (credits === undefined || isGap(credits)) return credits;
   if (credits.length === 0) return [];
-  // FTB 3541's Section B2 credits come first (3541/creditUsed.ts).
+  // FTB 3541's Section B2 credits come first (3541/creditUsed.ts), then FTB 3809's (3809/creditUsed.ts).
   const film = filmSectionB2Credits(info);
   if (film === undefined || isGap(film)) return film;
-  if (film.length + credits.length > SECTION_B2_LINES.length) return TOO_MANY_B2_CREDITS;
+  const tta = ttaSectionB2RowCount(read, info);
+  if (tta === undefined || isGap(tta)) return tta;
+  const before = film.length + tta;
+  if (before + credits.length > SECTION_B2_LINES.length) return TOO_MANY_B2_CREDITS;
   if (filesScheduleP(info)) {
     const used = credits.map((_, index) =>
-      numberOrBlank(read(sectionB2UsedField(SECTION_B2_LINES[film.length + index]))),
+      numberOrBlank(read(sectionB2UsedField(SECTION_B2_LINES[before + index]))),
     );
     if (used.some((amount) => amount === undefined)) return undefined;
     return credits.map((credit, index) => ({ ...credit, used: used[index] as number }));
   }
   const filmUsed = filmCreditsUsedTotal(read, info);
   if (typeof filmUsed !== "number") return filmUsed;
-  const before = taxBeforeSectionB2(read, info);
-  if (before === undefined) return undefined;
-  let balance = before - filmUsed;
+  const ttaUsed = ttaCreditUsed(read, info);
+  if (typeof ttaUsed !== "number") return ttaUsed;
+  const taxLeft = taxBeforeSectionB2(read, info);
+  if (taxLeft === undefined) return undefined;
+  let balance = taxLeft - filmUsed - ttaUsed;
   return credits.map((credit) => {
     const used = Math.min(credit.allowed, balance as number);
     balance = (balance as number) - used;
