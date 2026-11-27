@@ -85,6 +85,7 @@ export * from "./kinds/hsaDistribution.js";
 export * from "./kinds/injuredSpouse.js";
 export * from "./kinds/installmentSale.js";
 export * from "./kinds/interest.js";
+export * from "./kinds/investmentCredit.js";
 export * from "./kinds/investmentInterest.js";
 export * from "./kinds/isoExercise.js";
 export * from "./kinds/itemizedOther.js";

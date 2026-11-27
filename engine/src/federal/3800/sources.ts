@@ -1,7 +1,8 @@
 /*
  * The resolver's side of Form 3800: every credit and carryover the return
- * states, and every K-1 general business credit, as sources (filingInfo.ts),
- * with the answers they still wait on.
+ * states, every K-1 general business credit and every Form 3468 credit
+ * (3468/credit.ts), as sources (filingInfo.ts), with the answers they still
+ * wait on.
  */
 
 import {
@@ -15,6 +16,7 @@ import {
 } from "../../facts/index.js";
 import { roundDollars } from "../../money.js";
 import type { ResolverInputs } from "../../resolverInputs.js";
+import { figuredOnForm3468, form3468CreditSources } from "../3468/credit.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
 import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
 import { gap, type Cell } from "./cells.js";
@@ -183,12 +185,20 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
   missing: string[];
 } {
   const stated = getGeneralBusinessCreditFacts(inputs.facts).map(statedSource);
-  const k1 = k1EntitiesWithRoute(inputs, "form_3800").map((received) => k1Source(inputs, received));
+  const k1 = k1EntitiesWithRoute(inputs, "form_3800")
+    .filter((received) => !figuredOnForm3468(inputs, received))
+    .map((received) => k1Source(inputs, received));
+  const form3468 = form3468CreditSources(inputs);
   const missing = [
     ...stated.filter(missingResearch).map((source) => source.credit.key),
     ...k1.flatMap((found) => found.missing),
+    ...form3468.missing,
   ];
-  const current = [...stated, ...k1.flatMap((found) => (found.source ? [found.source] : []))];
+  const current = [
+    ...stated,
+    ...k1.flatMap((found) => (found.source ? [found.source] : [])),
+    ...form3468.sources,
+  ];
   const carryovers = getCreditCarryoverFacts(inputs.facts).map(carryoverOf);
   return { sources: { current, carryovers }, missing: [...new Set(missing)] };
 }

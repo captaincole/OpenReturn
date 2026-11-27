@@ -98,6 +98,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "and IV); whether one exists is Cade's question",
   ],
   [
+    /^investment_credit\.(property|cooperative)\.[^.]+$/,
+    "each fact is one whole Form 3468 property, or one cooperative's unused credits; whether " +
+      "one exists is Cade's question, and Form 3468 lists a property fact whose answers are missing",
+  ],
+  [
     /^tax_credit_bond\.[^.]+$/,
     "each fact is one whole bond or pass-through credit of a Form 8912 Part IV; whether one " +
       "exists is Cade's question, and the form lists a fact whose answers are missing",
