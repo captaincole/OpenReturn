@@ -1323,6 +1323,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 7207",
     relativeDir: "federal/7207",
     register: registerForm7207,
+    // One Form 7207 for each facility, and one for the pass-through credits (7207/copies.ts).
+    copies: {
+      count: (info) => info?.form7207Copies?.length ?? 1,
+      select: (info, index) => info && { ...info, form7207CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-7210",

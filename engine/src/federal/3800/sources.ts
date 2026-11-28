@@ -22,6 +22,7 @@ import { figuredOnForm3468, form3468CreditSources } from "../3468/credit.js";
 import { workOpportunitySources } from "../5884/sources.js";
 import { statedOwnBiofuelGap } from "../6478/form3800.js";
 import { researchCreditSources } from "../6765/form3800.js";
+import { form7207CreditSources } from "../7207/form3800.js";
 import { cleanHydrogenSourcesOf } from "../7210/form3800.js";
 import { cleanElectricitySources } from "../7211/form3800.js";
 import { nuclearProductionSources } from "../7213/form3800.js";
@@ -227,6 +228,7 @@ const missingResearch = (source: CreditSource) =>
  * - Line 1q: Form 7218 line 3 of each clean fuel facility the taxpayer owns;
  *   next to one, a stated line 1q credit with no entity is a gap (7218/form3800.ts),
  *   so this returns the stated sources too, in their own place.
+ * - Line 1b: Form 7207 line 8a of each facility the taxpayer operates (7207/form3800.ts).
  */
 function laterFormSources(
   inputs: ResolverInputs,
@@ -241,6 +243,7 @@ function laterFormSources(
     renewableElectricitySourcesOf(inputs),
     nuclearProductionSources(inputs),
     cleanFuel,
+    { sources: form7207CreditSources(inputs), missing: [] },
   ];
   return {
     stated: cleanFuel.stated,
