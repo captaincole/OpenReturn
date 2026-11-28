@@ -174,6 +174,20 @@ describe("Form 8932: who files and what it waits on", () => {
     expect(result.value("form-3800", ROW_1W)).toBe(1_840);
   });
 
+  it("keeps the K-1 credit on line 3 under a final order (rule-decisions A123)", () => {
+    const result = evaluate(
+      basel,
+      replaced(basel.facts, DIFFERENTIAL_WAGE_CREDIT_KEYS.underReemploymentOrder, true),
+      [...basel.decisions, decision(basel, "decisions.scope.must_file_8932", true)],
+    );
+    expect(result.files("form-8932")).toBe(true);
+    expect(result.line(LINE_1)).toBeUndefined();
+    expect(result.line(LINE_2)).toBeUndefined();
+    expect(result.line(LINE_3)).toBe(1_840);
+    expect(result.line(LINE_4)).toBe(1_840);
+    expect(result.value("schedule-c", WAGES)).toBe(214_000);
+  });
+
   it("asks again for a malformed employee fact", () => {
     const key = makeDifferentialWageEmployeeFactKey("joran-velde");
     const result = evaluate(basel, replaced(basel.facts, key, { name: "Joran Velde" }));
@@ -210,6 +224,26 @@ describe("Form 8932: the stated credit it replaces", () => {
     expect(result.line(LINE_3)).toBe(2_140);
     expect(result.line(LINE_4)).toBe(7_830);
     expect(result.value("form-3800", ROW_1W)).toBe(7_830);
+  });
+
+  it("rounds each pass-through credit before the add (rule-decisions A122)", () => {
+    const notice = (slug: string, ein: string) =>
+      row(basel, "other", makeGeneralBusinessCreditFactKey(slug), {
+        sourceForm: "8932",
+        line: "1w",
+        amount: 480.4,
+        passive: false,
+        passThroughEin: ein,
+      } satisfies GeneralBusinessCreditFactValue);
+    const result = evaluate(basel, [
+      ...basel.facts,
+      notice("form-8932-a", "00-0004801"),
+      notice("form-8932-b", "00-0004802"),
+    ]);
+    // 1,840 + 480 + 480, not 1,840 + 961: line 4 matches Form 3800 line 1w.
+    expect(result.line(LINE_3)).toBe(2_800);
+    expect(result.line(LINE_4)).toBe(8_490);
+    expect(result.value("form-3800", ROW_1W)).toBe(8_490);
   });
 
   it("checks Form 8820 line 2b against the figured credit of the same business", () => {

@@ -43,9 +43,18 @@ const wagesGap = (name: string, part: number) =>
  * (irs-1065k1-inst-2025::sec::box-15-credits::b11; QUESTIONS.md). The
  * partnership and S corporation boxes come from the K-1 facts; any other
  * notice is a stated Form 3800 line 1w credit that names its pass-through
- * entity (passThroughEin). Each rounds before the add, the rule of Form 8846
- * line 5 and Form 8820 line 3 (docs/rule-decisions.md A96), so line 4 equals
- * Form 3800 line 1w. Blank with none.
+ * entity (passThroughEin). Blank with none.
+ *
+ * DECISION (2026-11-27, by the author): each K-1 or notice rounds before the
+ * add, the rule of Form 8846 line 5 and Form 8820 line 3 (docs/rule-decisions.md
+ * A96, A122). Text A, the Form 1040 instructions: "include cents when adding
+ * the amounts and round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01).
+ * Text B, line 4: "All others, stop here and report this amount on Form 3800,
+ * Part III, line 1w" (irs-8932-form-2025::sec::face-page-1::b01), where an
+ * aggregate "from more than one pass-through entity" is broken down "by the
+ * EIN of the pass-through entity ... in Part V" (irs-3800-inst-2025::sec::part-v-3::b01),
+ * one whole-dollar amount for each K-1. The engine follows text B, so line 4
+ * equals Form 3800 line 1w.
  */
 export function passThroughCredits(inputs: ResolverInputs): number | Unsupported | undefined {
   const k1 = k1EntitiesWithRoute(inputs, "form_3800").filter(
@@ -101,6 +110,18 @@ export function form8932LinesOf(inputs: ResolverInputs): Form8932Lines {
  * will be allowed" (disallowance-for-failure-to-comply-with::b01), so the
  * form does not file. The form leaves the return when line 4 is 0
  * (filesOnlyWithAmountOn, bindings.ts). The explicit decision still wins.
+ *
+ * DECISION (2026-11-27, by the author): a final order against the taxpayer
+ * disallows only the credit on the taxpayer's own employees (lines 1 and 2);
+ * a K-1 credit stays on Form 3800 line 1w (docs/rule-decisions.md A123).
+ * Text A: "No credit will be allowed to a taxpayer for: Any tax year in which
+ * the taxpayer is under a final order ..." (disallowance-for-failure-to-comply-with::b01),
+ * which can read as every credit the taxpayer receives. Text B: "Partnerships,
+ * S corporations, cooperatives, estates, and trusts must file this form to
+ * claim the credit" (purpose-of-form::b01), and the statute figures the credit
+ * on "the qualified employees of the taxpayer" (usc-26-2025::sec::s45p::a), so
+ * the entity is the employer whose compliance the order tests. The engine
+ * follows text B, because the entity that paid the wages is not under the order.
  */
 export function resolve8932Info(inputs: ResolverInputs): Form8932FilingInfo {
   const { employees, unplacedKeys, malformedKeys } = employeesOnReturn(inputs);
