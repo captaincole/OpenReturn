@@ -11,10 +11,11 @@
   },
   "scripts": {
     "test": "tsx tests/golden/runAll.ts",
+    "test:pdf": "tsx tests/golden/runAll.ts --pdf",
     "test:unit": "vitest run tests/unit",
     "test:unit:watch": "vitest tests/unit",
     "test:integration": "vitest run tests/integration",
-    "coverage": "c8 tsx tests/golden/runAll.ts && tsx scripts/coverage/cli.ts",
+    "coverage": "c8 tsx tests/golden/runAll.ts --pdf && tsx scripts/coverage/cli.ts",
     "form-graph": "tsx scripts/formGraph/cli.ts",
     "typecheck": "tsc --noEmit -p ."
   },

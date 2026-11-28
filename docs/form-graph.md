@@ -19,25 +19,25 @@ A form also depends on another form when both use the same input (Schedule D and
 
 ## Summary
 
-The golden suite ran 159 scenarios.
+The golden suite ran 180 scenarios.
 
 | Form | Jurisdiction | Tier 1 | Scenarios | Fields | Verified | Locked | Not run | Unsupported | Reads forms | Feeds forms |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Form 8949 | Federal 2025 | Yes | 17 | 200 | 121 | 2 | 31 | 46 | 0 | 0 |
 | Schedule D | Federal 2025 | Yes | 38 | 53 | 26 | 10 | 2 | 15 | 2 | 16 |
-| Form 1040 | Federal 2025 | Yes | 159 | 199 | 108 | 21 | 10 | 60 | 23 | 67 |
+| Form 1040 | Federal 2025 | Yes | 180 | 199 | 108 | 21 | 10 | 60 | 23 | 67 |
 | Schedule A | Federal 2025 | Yes | 16 | 32 | 27 | 0 | 3 | 2 | 4 | 11 |
 | Schedule B | Federal 2025 | Yes | 33 | 72 | 13 | 11 | 48 | 0 | 1 | 4 |
-| Form 4562 | Federal 2025 | Yes | 1 | 240 | 19 | 0 | 69 | 152 | 0 | 0 |
+| Form 4562 | Federal 2025 | Yes | 2 | 240 | 19 | 3 | 66 | 152 | 0 | 0 |
 | Form 8829 | Federal 2025 |  | 1 | 58 | 23 | 0 | 28 | 7 | 0 | 0 |
-| Schedule C | Federal 2025 | Yes | 34 | 105 | 58 | 7 | 22 | 18 | 0 | 4 |
-| Schedule SE | Federal 2025 | Yes | 36 | 25 | 14 | 3 | 1 | 7 | 2 | 15 |
+| Schedule C | Federal 2025 | Yes | 48 | 105 | 58 | 9 | 20 | 18 | 0 | 4 |
+| Schedule SE | Federal 2025 | Yes | 53 | 25 | 14 | 3 | 1 | 7 | 2 | 15 |
 | Form 8582 | Federal 2025 | Yes | 9 | 198 | 31 | 36 | 106 | 25 | 4 | 7 |
-| Schedule E | Federal 2025 | Yes | 27 | 176 | 40 | 58 | 72 | 6 | 1 | 15 |
-| Schedule 1 | Federal 2025 | Yes | 83 | 72 | 35 | 13 | 1 | 23 | 5 | 31 |
+| Schedule E | Federal 2025 | Yes | 39 | 176 | 40 | 58 | 72 | 6 | 1 | 15 |
+| Schedule 1 | Federal 2025 | Yes | 102 | 72 | 35 | 13 | 1 | 23 | 5 | 31 |
 | Schedule 1-A | Federal 2025 | Yes | 11 | 54 | 13 | 4 | 0 | 37 | 2 | 4 |
-| Schedule 2 | Federal 2025 | Yes | 85 | 62 | 11 | 34 | 2 | 15 | 10 | 16 |
-| Schedule 3 | Federal 2025 | Yes | 30 | 37 | 6 | 19 | 1 | 11 | 20 | 20 |
+| Schedule 2 | Federal 2025 | Yes | 103 | 62 | 11 | 34 | 2 | 15 | 10 | 16 |
+| Schedule 3 | Federal 2025 | Yes | 51 | 37 | 6 | 19 | 1 | 11 | 20 | 20 |
 | Form 2441 | Federal 2025 | Yes | 3 | 72 | 53 | 8 | 11 | 0 | 4 | 3 |
 | Schedule R | Federal 2025 |  | 2 | 27 | 18 | 0 | 9 | 0 | 2 | 1 |
 | Schedule H | Federal 2025 | Yes | 1 | 72 | 0 | 15 | 4 | 53 | 0 | 4 |
@@ -46,11 +46,11 @@ The golden suite ran 159 scenarios.
 | Form 8889 | Federal 2025 | Yes | 3 | 27 | 18 | 0 | 2 | 7 | 0 | 4 |
 | Form 4952 | Federal 2025 | Yes | 5 | 17 | 17 | 0 | 0 | 0 | 3 | 12 |
 | Schedule 8812 | Federal 2025 | Yes | 25 | 40 | 35 | 3 | 1 | 1 | 7 | 6 |
-| Form 8959 | Federal 2025 | Yes | 35 | 26 | 19 | 1 | 4 | 2 | 3 | 4 |
+| Form 8959 | Federal 2025 | Yes | 44 | 26 | 19 | 1 | 4 | 2 | 3 | 4 |
 | Form 8960 | Federal 2025 | Yes | 28 | 38 | 20 | 3 | 1 | 14 | 5 | 1 |
-| Form 8995-A | Federal 2025 | Yes | 13 | 94 | 54 | 0 | 27 | 13 | 5 | 1 |
-| Form 8995 | Federal 2025 | Yes | 35 | 33 | 26 | 2 | 4 | 1 | 5 | 1 |
-| Form 6251 | Federal 2025 | Yes | 10 | 62 | 38 | 0 | 8 | 16 | 6 | 9 |
+| Form 8995-A | Federal 2025 | Yes | 23 | 94 | 54 | 0 | 27 | 13 | 5 | 1 |
+| Form 8995 | Federal 2025 | Yes | 43 | 33 | 26 | 2 | 4 | 1 | 5 | 1 |
+| Form 6251 | Federal 2025 | Yes | 22 | 62 | 38 | 1 | 7 | 16 | 6 | 9 |
 | Schedule C (Form 8995-A) | Federal 2025 |  | 2 | 19 | 13 | 0 | 5 | 1 | 4 | 1 |
 | Form 8962 | Federal 2025 |  | 1 | 141 | 20 | 0 | 121 | 0 | 1 | 3 |
 | Form 4684 | Federal 2025 |  | 1 | 162 | 23 | 0 | 39 | 100 | 1 | 1 |
@@ -60,12 +60,12 @@ The golden suite ran 159 scenarios.
 | Form 2210 | Federal 2025 | Yes | 2 | 167 | 0 | 166 | 1 | 0 | 8 | 0 |
 | Form 8801 | Federal 2025 | Yes | 1 | 57 | 0 | 56 | 1 | 0 | 4 | 0 |
 | Form 8814 | Federal 2025 | Yes | 3 | 24 | 0 | 23 | 1 | 0 | 0 | 0 |
-| Schedule F | Federal 2025 |  | 7 | 89 | 0 | 89 | 0 | 0 | 0 | 0 |
+| Schedule F | Federal 2025 |  | 10 | 89 | 0 | 89 | 0 | 0 | 0 | 0 |
 | Form 461 | Federal 2025 | Yes | 5 | 16 | 0 | 15 | 1 | 0 | 3 | 4 |
 | Form 965-A | Federal 2025 |  | 1 | 391 | 0 | 118 | 273 | 0 | 0 | 0 |
 | Form 2106 | Federal 2025 |  | 2 | 82 | 0 | 65 | 17 | 0 | 0 | 0 |
 | Form 2555 | Federal 2025 |  | 2 | 160 | 0 | 95 | 65 | 0 | 1 | 0 |
-| Form 3800 | Federal 2025 | Yes | 3 | 1635 | 0 | 148 | 1487 | 0 | 9 | 0 |
+| Form 3800 | Federal 2025 | Yes | 24 | 1635 | 0 | 243 | 1392 | 0 | 9 | 1 |
 | Form 3903 | Federal 2025 |  | 2 | 10 | 0 | 10 | 0 | 0 | 0 | 0 |
 | Form 4136 | Federal 2025 |  | 2 | 276 | 0 | 276 | 0 | 0 | 0 | 0 |
 | Form 4137 | Federal 2025 |  | 1 | 33 | 0 | 25 | 8 | 0 | 0 | 3 |
@@ -104,7 +104,7 @@ The golden suite ran 159 scenarios.
 | Form 8992 | Federal 2025 |  | 0 | 14 | 0 | 0 | 0 | 14 | 0 | 0 |
 | Form 6781 | Federal 2025 | Yes | 1 | 71 | 0 | 13 | 6 | 52 | 0 | 1 |
 | Form 7203 | Federal 2025 | Yes | 5 | 187 | 0 | 38 | 77 | 72 | 0 | 0 |
-| Form 8582-CR | Federal 2025 | Yes | 3 | 52 | 0 | 48 | 4 | 0 | 8 | 0 |
+| Form 8582-CR | Federal 2025 | Yes | 6 | 52 | 0 | 48 | 4 | 0 | 8 | 0 |
 | Form 8824 | Federal 2025 | Yes | 3 | 63 | 0 | 49 | 14 | 0 | 0 | 0 |
 | Form 982 | Federal 2025 |  | 2 | 27 | 0 | 18 | 9 | 0 | 0 | 0 |
 | Form 8958 | Federal 2025 |  | 1 | 202 | 0 | 118 | 84 | 0 | 0 | 0 |
@@ -116,23 +116,48 @@ The golden suite ran 159 scenarios.
 | Form 8332 | Federal 2025 |  | 1 | 11 | 0 | 8 | 3 | 0 | 0 | 0 |
 | Form 8833 | Federal 2025 |  | 1 | 41 | 0 | 20 | 21 | 0 | 0 | 0 |
 | Form 8862 | Federal 2025 |  | 2 | 109 | 0 | 56 | 53 | 0 | 3 | 0 |
-| Form 3468 | Federal 2025 |  | 0 | 305 | 0 | 0 | 0 | 305 | 0 | 0 |
-| Form 5884 | Federal 2025 |  | 0 | 13 | 0 | 0 | 0 | 13 | 0 | 0 |
-| Form 6765 | Federal 2025 |  | 0 | 270 | 0 | 0 | 0 | 270 | 0 | 0 |
-| Form 8586 | Federal 2025 |  | 0 | 14 | 0 | 0 | 0 | 14 | 0 | 0 |
-| Form 8609-A | Federal 2025 |  | 0 | 43 | 0 | 0 | 0 | 43 | 0 | 0 |
-| Form 8826 | Federal 2025 |  | 0 | 14 | 0 | 0 | 0 | 14 | 0 | 0 |
-| Form 8844 | Federal 2025 |  | 0 | 8 | 0 | 0 | 0 | 8 | 0 | 0 |
-| Form 8846 | Federal 2025 |  | 0 | 9 | 0 | 0 | 0 | 9 | 0 | 0 |
-| Form 8881 | Federal 2025 |  | 0 | 29 | 0 | 0 | 0 | 29 | 0 | 0 |
-| Form 8882 | Federal 2025 |  | 0 | 20 | 0 | 0 | 0 | 20 | 0 | 0 |
+| Form 3468 | Federal 2025 |  | 1 | 305 | 0 | 46 | 259 | 0 | 0 | 0 |
+| Form 5884 | Federal 2025 |  | 2 | 13 | 0 | 11 | 2 | 0 | 0 | 0 |
+| Form 6765 | Federal 2025 |  | 2 | 270 | 0 | 92 | 178 | 0 | 1 | 0 |
+| Form 8586 | Federal 2025 |  | 3 | 14 | 0 | 9 | 5 | 0 | 0 | 0 |
+| Form 8609-A | Federal 2025 |  | 3 | 43 | 0 | 43 | 0 | 0 | 0 | 0 |
+| Form 8826 | Federal 2025 |  | 2 | 14 | 0 | 14 | 0 | 0 | 0 | 0 |
+| Form 8844 | Federal 2025 |  | 2 | 8 | 0 | 6 | 2 | 0 | 0 | 0 |
+| Form 8846 | Federal 2025 |  | 1 | 9 | 0 | 9 | 0 | 0 | 0 | 0 |
+| Form 8881 | Federal 2025 |  | 2 | 29 | 0 | 29 | 0 | 0 | 0 | 0 |
+| Form 8882 | Federal 2025 |  | 1 | 20 | 0 | 16 | 4 | 0 | 0 | 0 |
+| Form 6478 | Federal 2025 |  | 1 | 10 | 0 | 4 | 6 | 0 | 0 | 0 |
+| Form 7207 | Federal 2025 |  | 0 | 440 | 0 | 0 | 0 | 440 | 0 | 0 |
+| Form 7210 | Federal 2025 |  | 1 | 35 | 0 | 33 | 2 | 0 | 0 | 0 |
+| Form 7211 | Federal 2025 |  | 0 | 49 | 0 | 0 | 0 | 49 | 0 | 0 |
+| Form 7213 | Federal 2025 |  | 0 | 70 | 0 | 0 | 0 | 70 | 0 | 0 |
+| Form 7218 | Federal 2025 |  | 0 | 219 | 0 | 0 | 0 | 219 | 0 | 0 |
+| Form 8820 | Federal 2025 |  | 2 | 98 | 0 | 25 | 73 | 0 | 0 | 0 |
+| Form 8835 | Federal 2025 |  | 0 | 85 | 0 | 0 | 0 | 85 | 0 | 0 |
+| Form 8864 | Federal 2025 |  | 1 | 12 | 0 | 10 | 2 | 0 | 0 | 0 |
+| Form 8874 | Federal 2025 |  | 0 | 40 | 0 | 0 | 0 | 40 | 0 | 0 |
+| Form 8896 | Federal 2025 |  | 0 | 12 | 0 | 0 | 0 | 12 | 0 | 0 |
+| Form 8900 | Federal 2025 |  | 0 | 12 | 0 | 0 | 0 | 12 | 0 | 0 |
+| Form 8906 | Federal 2025 |  | 0 | 6 | 0 | 0 | 0 | 6 | 0 | 0 |
+| Form 8908 | Federal 2025 |  | 0 | 256 | 0 | 0 | 0 | 256 | 0 | 0 |
+| Form 8932 | Federal 2025 |  | 0 | 8 | 0 | 0 | 0 | 8 | 0 | 0 |
+| Form 8941 | Federal 2025 |  | 0 | 28 | 0 | 0 | 0 | 28 | 0 | 0 |
+| Form 8994 | Federal 2025 |  | 0 | 13 | 0 | 0 | 0 | 13 | 0 | 0 |
+| Schedule A (Form 8911) | Federal 2025 |  | 0 | 33 | 0 | 0 | 0 | 33 | 0 | 0 |
+| Schedule A (Form 8936) | Federal 2025 |  | 0 | 64 | 0 | 0 | 0 | 64 | 0 | 0 |
+| Schedule A (Form 8933) | Federal 2025 |  | 0 | 22 | 0 | 0 | 0 | 22 | 0 | 0 |
+| Schedule B (Form 8933) | Federal 2025 |  | 0 | 111 | 0 | 0 | 0 | 111 | 0 | 0 |
+| Schedule C (Form 8933) | Federal 2025 |  | 0 | 122 | 0 | 0 | 0 | 122 | 0 | 0 |
+| Schedule D (Form 8933) | Federal 2025 |  | 0 | 183 | 0 | 0 | 0 | 183 | 0 | 0 |
+| Schedule E (Form 8933) | Federal 2025 |  | 0 | 44 | 0 | 0 | 0 | 44 | 0 | 0 |
+| Schedule F (Form 8933) | Federal 2025 |  | 0 | 147 | 0 | 0 | 0 | 147 | 0 | 0 |
 | Schedule D (540) | California 2025 | Yes | 5 | 125 | 0 | 25 | 100 | 0 | 1 | 1 |
 | FTB 3885A | California 2025 | Yes | 3 | 65 | 14 | 1 | 50 | 0 | 0 | 0 |
-| Schedule CA (540) | California 2025 | Yes | 56 | 253 | 98 | 31 | 31 | 93 | 10 | 6 |
+| Schedule CA (540) | California 2025 | Yes | 59 | 253 | 98 | 31 | 31 | 93 | 10 | 6 |
 | FTB 3526 | California 2025 | Yes | 2 | 17 | 17 | 0 | 0 | 0 | 5 | 4 |
 | FTB 3805P | California 2025 | Yes | 2 | 27 | 11 | 0 | 8 | 8 | 0 | 1 |
 | FTB 3514 | California 2025 |  | 4 | 94 | 51 | 0 | 43 | 0 | 2 | 0 |
-| Form 540 | California 2025 | Yes | 60 | 169 | 80 | 18 | 6 | 65 | 13 | 17 |
+| Form 540 | California 2025 | Yes | 63 | 169 | 80 | 18 | 6 | 65 | 13 | 17 |
 | Schedule P (540) | California 2025 | Yes | 14 | 131 | 21 | 46 | 12 | 52 | 8 | 9 |
 | FTB 5805 | California 2025 | Yes | 1 | 111 | 55 | 0 | 0 | 56 | 1 | 1 |
 | FTB 3532 | California 2025 |  | 2 | 16 | 10 | 0 | 6 | 0 | 0 | 0 |
@@ -198,16 +223,16 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.1b_adjustments` | Line 1b — Adjustments to gain or loss from Form(s) 8949, Part I, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box A or Box G checked | unsupported | 4333 | none |
-| `0.line.2_adjustments` | Line 2 — Adjustments to gain or loss from Form(s) 8949, Part I, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box B or Box H checked | unsupported | 4333 | none |
-| `0.line.3_proceeds` | Line 3 — Proceeds (sales price) — Totals for all transactions reported on Form(s) 8949 with Box C or Box I checked | locked | 4333 | none |
-| `0.line.3_cost` | Line 3 — Cost (or other basis) — Totals for all transactions reported on Form(s) 8949 with Box C or Box I checked | locked | 4333 | none |
-| `0.line.3_adjustments` | Line 3 — Adjustments to gain or loss from Form(s) 8949, Part I, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box C or Box I checked | unsupported | 4333 | none |
-| `0.line.8b_adjustments` | Line 8b — Adjustments to gain or loss from Form(s) 8949, Part II, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box D or Box J checked | unsupported | 4333 | none |
-| `0.line.9_adjustments` | Line 9 — Adjustments to gain or loss from Form(s) 8949, Part II, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box E or Box K checked | unsupported | 4333 | none |
-| `0.line.10_proceeds` | Line 10 — Proceeds (sales price) — Totals for all transactions reported on Form(s) 8949 with Box F or Box L checked | locked | 4333 | none |
-| `0.line.10_cost` | Line 10 — Cost (or other basis) — Totals for all transactions reported on Form(s) 8949 with Box F or Box L checked | locked | 4333 | none |
-| `0.line.10_adjustments` | Line 10 — Adjustments to gain or loss from Form(s) 8949, Part II, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box F or Box L checked | unsupported | 4333 | none |
+| `0.line.1b_adjustments` | Line 1b — Adjustments to gain or loss from Form(s) 8949, Part I, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box A or Box G checked | unsupported | 4335 | none |
+| `0.line.2_adjustments` | Line 2 — Adjustments to gain or loss from Form(s) 8949, Part I, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box B or Box H checked | unsupported | 4335 | none |
+| `0.line.3_proceeds` | Line 3 — Proceeds (sales price) — Totals for all transactions reported on Form(s) 8949 with Box C or Box I checked | locked | 4335 | none |
+| `0.line.3_cost` | Line 3 — Cost (or other basis) — Totals for all transactions reported on Form(s) 8949 with Box C or Box I checked | locked | 4335 | none |
+| `0.line.3_adjustments` | Line 3 — Adjustments to gain or loss from Form(s) 8949, Part I, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box C or Box I checked | unsupported | 4335 | none |
+| `0.line.8b_adjustments` | Line 8b — Adjustments to gain or loss from Form(s) 8949, Part II, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box D or Box J checked | unsupported | 4335 | none |
+| `0.line.9_adjustments` | Line 9 — Adjustments to gain or loss from Form(s) 8949, Part II, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box E or Box K checked | unsupported | 4335 | none |
+| `0.line.10_proceeds` | Line 10 — Proceeds (sales price) — Totals for all transactions reported on Form(s) 8949 with Box F or Box L checked | locked | 4335 | none |
+| `0.line.10_cost` | Line 10 — Cost (or other basis) — Totals for all transactions reported on Form(s) 8949 with Box F or Box L checked | locked | 4335 | none |
+| `0.line.10_adjustments` | Line 10 — Adjustments to gain or loss from Form(s) 8949, Part II, line 2, column (g) — Totals for all transactions reported on Form(s) 8949 with Box F or Box L checked | unsupported | 4335 | none |
 
 17 more not checked, each of which feeds fewer fields.
 
@@ -219,11 +244,11 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `line.1c` | Line 1c — Tip income not reported on line 1a | locked | 4303 | Form 2441, FTB 3506, Form 8839, Schedule CA (540), Schedule CA (540NR) |
-| `line.1g` | Line 1g — Wages from Form 8919, line 6 | locked | 4303 | Form 2441, FTB 3506, Form 8839, Schedule CA (540), Schedule CA (540NR) |
-| `line.1b` | Line 1b — Household employee wages not reported on Form(s) W-2 | unsupported | 4295 | Form 2441, FTB 3506, Form 8839 |
-| `line.1d` | Line 1d — Medicaid waiver payments not reported on Form(s) W-2 | unsupported | 4295 | Form 2441, FTB 3506, Form 8839 |
-| `line.1f` | Line 1f — Employer-provided adoption benefits from Form 8839, line 31 | locked | 4294 | Form 2441, FTB 3506, Schedule CA (540) |
+| `line.1c` | Line 1c — Tip income not reported on line 1a | locked | 4305 | Form 2441, FTB 3506, Form 8839, Schedule CA (540), Schedule CA (540NR) |
+| `line.1g` | Line 1g — Wages from Form 8919, line 6 | locked | 4305 | Form 2441, FTB 3506, Form 8839, Schedule CA (540), Schedule CA (540NR) |
+| `line.1b` | Line 1b — Household employee wages not reported on Form(s) W-2 | unsupported | 4297 | Form 2441, FTB 3506, Form 8839 |
+| `line.1d` | Line 1d — Medicaid waiver payments not reported on Form(s) W-2 | unsupported | 4297 | Form 2441, FTB 3506, Form 8839 |
+| `line.1f` | Line 1f — Employer-provided adoption benefits from Form 8839, line 31 | locked | 4296 | Form 2441, FTB 3506, Schedule CA (540) |
 | `line.29` | Line 29 — American opportunity credit from Form 8863, line 8 | locked | 250 | Form 2210, Form 2210-F, Form 8379 |
 | `line.30` | Line 30 — Refundable adoption credit from Form 8839, line 13 | locked | 250 | Form 2210, Form 2210-F, Form 8379 |
 | `line.31` | Line 31 — Amount from Schedule 3, line 15 | locked | 66 | none |
@@ -240,9 +265,9 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.8b_mortgage_interest_not_form1098` | Line 8b — Home mortgage interest not reported to you on Form 1098 | not run | 3345 | Schedule CA (540), Schedule CA (540NR) |
-| `0.line.8c_points_not_form1098` | Line 8c — Points not reported to you on Form 1098 | not run | 3345 | Schedule CA (540), Schedule CA (540NR) |
-| `0.line.15_casualty_theft_loss` | Line 15 — Casualty and theft loss(es) from a federally declared disaster. Attach Form 4684. | not run | 3339 | Form 172, Schedule CA (540), Schedule CA (540NR) |
+| `0.line.8b_mortgage_interest_not_form1098` | Line 8b — Home mortgage interest not reported to you on Form 1098 | not run | 3347 | Schedule CA (540), Schedule CA (540NR) |
+| `0.line.8c_points_not_form1098` | Line 8c — Points not reported to you on Form 1098 | not run | 3347 | Schedule CA (540), Schedule CA (540NR) |
+| `0.line.15_casualty_theft_loss` | Line 15 — Casualty and theft loss(es) from a federally declared disaster. Attach Form 4684. | not run | 3341 | Form 172, Schedule CA (540), Schedule CA (540NR) |
 
 2 more not checked, each of which feeds fewer fields.
 
@@ -254,7 +279,7 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.3_excludable_savings_bond_interest` | Line 3 — Excludable interest on series EE and I U.S. savings bonds issued after 1989. Attach Form 8815 | locked | 4294 | Form 4952 |
+| `0.line.3_excludable_savings_bond_interest` | Line 3 — Excludable interest on series EE and I U.S. savings bonds issued after 1989. Attach Form 8815 | locked | 4296 | Form 4952 |
 
 58 more not checked, each of which feeds fewer fields.
 
@@ -290,12 +315,12 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.1a` | Line 1a — Net farm profit or (loss) from Schedule F, line 34, and farm partnerships, Schedule K-1 (Form 1065), box 14, code A | locked | 4357 | none |
-| `0.line.1b` | Line 1b — If you received social security retirement or disability benefits, enter the amount of Conservation Reserve Program payments included on Schedule F, line 4b, or listed on Schedule K-1 (Form 1065), box 20, code AQ | locked | 4357 | none |
-| `0.line.4b` | Line 4b — If you elect one or both of the optional methods, enter the total of lines 15 and 17 here | unsupported | 4355 | Form 1040, Schedule EIC |
-| `0.line.5b` | Line 5b — Multiply line 5a by 92.35% (0.9235). If less than $100, enter -0- | unsupported | 4349 | none |
-| `0.line.8b` | Line 8b — Unreported tips subject to social security tax from Form 4137, line 10 | not run | 4341 | none |
-| `0.line.8c` | Line 8c — Wages subject to social security tax from Form 8919, line 10 | locked | 4341 | none |
+| `0.line.1a` | Line 1a — Net farm profit or (loss) from Schedule F, line 34, and farm partnerships, Schedule K-1 (Form 1065), box 14, code A | locked | 4359 | none |
+| `0.line.1b` | Line 1b — If you received social security retirement or disability benefits, enter the amount of Conservation Reserve Program payments included on Schedule F, line 4b, or listed on Schedule K-1 (Form 1065), box 20, code AQ | locked | 4359 | none |
+| `0.line.4b` | Line 4b — If you elect one or both of the optional methods, enter the total of lines 15 and 17 here | unsupported | 4357 | Form 1040, Schedule EIC |
+| `0.line.5b` | Line 5b — Multiply line 5a by 92.35% (0.9235). If less than $100, enter -0- | unsupported | 4351 | none |
+| `0.line.8b` | Line 8b — Unreported tips subject to social security tax from Form 4137, line 10 | not run | 4343 | none |
+| `0.line.8c` | Line 8c — Wages subject to social security tax from Form 8919, line 10 | locked | 4343 | none |
 | `0.line.5a` | Line 5a — Enter your church employee income from Form W-2 | unsupported | 315 | Form 1040, Schedule EIC |
 
 4 more not checked, each of which feeds fewer fields.
@@ -308,16 +333,16 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.1a_rental_net_income` | Line 1a — Rental real estate activities with active participation: activities with net income (enter the amount from Part IV, column (a)) | locked | 4300 | none |
-| `0.line.1b_rental_net_loss` | Line 1b — Rental real estate activities with active participation: activities with net loss (enter the amount from Part IV, column (b)) | locked | 4300 | none |
-| `0.line.1c_rental_prior_unallowed` | Line 1c — Rental real estate activities with active participation: prior years' unallowed losses (enter the amount from Part IV, column (c)) | locked | 4300 | none |
-| `0.line.2c_other_prior_unallowed` | Line 2c — All other passive activities: prior years' unallowed losses (enter the amount from Part V, column (c)) | locked | 4300 | none |
-| `0.line.1d_rental_combined` | Line 1d — Combine lines 1a, 1b, and 1c | locked | 4299 | Form 3800, Form 8582-CR, Schedule 3, Schedule E |
-| `0.line.4_smaller_loss_1d_or_3` | Line 4 — Enter the smaller of the loss on line 1d or the loss on line 3 | locked | 4295 | none |
-| `0.line.5_allowance_threshold` | Line 5 — Enter $150,000. If married filing separately, see instructions | locked | 4295 | none |
-| `0.line.6_modified_agi` | Line 6 — Enter modified adjusted gross income, but not less than zero | locked | 4294 | none |
-| `0.line.7_line5_minus_line6` | Line 7 — Subtract line 6 from line 5 | locked | 4294 | none |
-| `0.line.8_half_of_line7` | Line 8 — Multiply line 7 by 50% (0.50). Do not enter more than $25,000 | locked | 4294 | none |
+| `0.line.1a_rental_net_income` | Line 1a — Rental real estate activities with active participation: activities with net income (enter the amount from Part IV, column (a)) | locked | 4302 | none |
+| `0.line.1b_rental_net_loss` | Line 1b — Rental real estate activities with active participation: activities with net loss (enter the amount from Part IV, column (b)) | locked | 4302 | none |
+| `0.line.1c_rental_prior_unallowed` | Line 1c — Rental real estate activities with active participation: prior years' unallowed losses (enter the amount from Part IV, column (c)) | locked | 4302 | none |
+| `0.line.2c_other_prior_unallowed` | Line 2c — All other passive activities: prior years' unallowed losses (enter the amount from Part V, column (c)) | locked | 4302 | none |
+| `0.line.1d_rental_combined` | Line 1d — Combine lines 1a, 1b, and 1c | locked | 4301 | Form 3800, Form 8582-CR, Schedule 3, Schedule E |
+| `0.line.4_smaller_loss_1d_or_3` | Line 4 — Enter the smaller of the loss on line 1d or the loss on line 3 | locked | 4297 | none |
+| `0.line.5_allowance_threshold` | Line 5 — Enter $150,000. If married filing separately, see instructions | locked | 4297 | none |
+| `0.line.6_modified_agi` | Line 6 — Enter modified adjusted gross income, but not less than zero | locked | 4296 | none |
+| `0.line.7_line5_minus_line6` | Line 7 — Subtract line 6 from line 5 | locked | 4296 | none |
+| `0.line.8_half_of_line7` | Line 8 — Multiply line 7 by 50% (0.50). Do not enter more than $25,000 | locked | 4296 | none |
 
 157 more not checked, each of which feeds fewer fields.
 
@@ -329,16 +354,16 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `1.line.28_row_a_col_g_passive_loss_allowed` | Line 28 row A — (g) Passive loss allowed (attach Form 8582 if required) | locked | 4298 | none |
-| `1.line.28_row_a_col_h_passive_income` | Line 28 row A — (h) Passive income from Schedule K-1 | locked | 4298 | none |
-| `1.line.28_row_a_col_i_nonpassive_loss_allowed` | Line 28 row A — (i) Nonpassive loss allowed (see Schedule K-1) | locked | 4298 | none |
-| `1.line.28_row_a_col_j_section_179_deduction` | Line 28 row A — (j) Section 179 expense deduction from Form 4562 | not run | 4298 | none |
-| `1.line.28_row_a_col_k_nonpassive_income` | Line 28 row A — (k) Nonpassive income from Schedule K-1 | locked | 4298 | none |
-| `1.line.28_row_b_col_g_passive_loss_allowed` | Line 28 row B — (g) Passive loss allowed (attach Form 8582 if required) | locked | 4298 | none |
-| `1.line.28_row_b_col_h_passive_income` | Line 28 row B — (h) Passive income from Schedule K-1 | locked | 4298 | none |
-| `1.line.28_row_b_col_i_nonpassive_loss_allowed` | Line 28 row B — (i) Nonpassive loss allowed (see Schedule K-1) | locked | 4298 | none |
-| `1.line.28_row_b_col_j_section_179_deduction` | Line 28 row B — (j) Section 179 expense deduction from Form 4562 | not run | 4298 | none |
-| `1.line.28_row_b_col_k_nonpassive_income` | Line 28 row B — (k) Nonpassive income from Schedule K-1 | locked | 4298 | none |
+| `1.line.28_row_a_col_g_passive_loss_allowed` | Line 28 row A — (g) Passive loss allowed (attach Form 8582 if required) | locked | 4300 | none |
+| `1.line.28_row_a_col_h_passive_income` | Line 28 row A — (h) Passive income from Schedule K-1 | locked | 4300 | none |
+| `1.line.28_row_a_col_i_nonpassive_loss_allowed` | Line 28 row A — (i) Nonpassive loss allowed (see Schedule K-1) | locked | 4300 | none |
+| `1.line.28_row_a_col_j_section_179_deduction` | Line 28 row A — (j) Section 179 expense deduction from Form 4562 | not run | 4300 | none |
+| `1.line.28_row_a_col_k_nonpassive_income` | Line 28 row A — (k) Nonpassive income from Schedule K-1 | locked | 4300 | none |
+| `1.line.28_row_b_col_g_passive_loss_allowed` | Line 28 row B — (g) Passive loss allowed (attach Form 8582 if required) | locked | 4300 | none |
+| `1.line.28_row_b_col_h_passive_income` | Line 28 row B — (h) Passive income from Schedule K-1 | locked | 4300 | none |
+| `1.line.28_row_b_col_i_nonpassive_loss_allowed` | Line 28 row B — (i) Nonpassive loss allowed (see Schedule K-1) | locked | 4300 | none |
+| `1.line.28_row_b_col_j_section_179_deduction` | Line 28 row B — (j) Section 179 expense deduction from Form 4562 | not run | 4300 | none |
+| `1.line.28_row_b_col_k_nonpassive_income` | Line 28 row B — (k) Nonpassive income from Schedule K-1 | locked | 4300 | none |
 
 126 more not checked, each of which feeds fewer fields.
 
@@ -350,16 +375,16 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `1.line.12` | Line 12 — Certain business expenses of reservists, performing artists, and fee-basis government officials (attach Form 2106) | locked | 4306 | Form 1040, Form 3800, FTB 3801, FTB 3801-CR, Form 8582, Form 8582-CR, Form 8815, Form 8839, Schedule 3, Schedule CA (540), Schedule CA (540NR) |
-| `0.line.6` | Line 6 — Farm income or (loss). Attach Schedule F | locked | 4305 | Form 1040, Form 1116, Form 172, Form 2441, FTB 3461, FTB 3514, Form 3800, FTB 3800, FTB 3801, FTB 3801-CR, Form 4563, Form 461, Form 540, Form 8582, Form 8582-CR, Form 8615, Form 8815, Form 8960, Schedule 3, Schedule CA (540), Schedule CA (540NR) |
-| `1.line.24j` | Line 24j — Housing deduction from Form 2555 | locked | 4303 | Schedule CA (540) |
-| `0.line.8a` | Line 8a — Net operating loss | locked | 4299 | Form 1040, Form 172, Form 4563, Form 8615, Schedule CA (540), Schedule CA (540NR) |
-| `0.line.8c` | Line 8c — Cancellation of debt | locked | 4299 | Form 1116, Form 172, Schedule 3, Schedule CA (540), Schedule CA (540NR) |
-| `1.line.14` | Line 14 — Moving expenses for members of the Armed Forces (attach Form 3903) | locked | 4299 | Form 1040, Form 3800, FTB 3801, FTB 3801-CR, Form 8582, Form 8582-CR, Form 8815, Form 8839, Schedule 3, Schedule CA (540), Schedule CA (540NR) |
-| `1.line.17` | Line 17 — Self-employed health insurance deduction | locked | 4299 | Form 1040, Form 3800, FTB 3801, FTB 3801-CR, Form 8582, Form 8582-CR, Form 8815, Form 8839, Schedule 3, Schedule CA (540), Schedule CA (540NR) |
-| `1.line.24b` | Line 24b — Deductible expenses related to income reported on line 8l from the rental of personal property engaged in for profit | unsupported | 4299 | FTB 3514, Form 540 |
-| `1.line.24c` | Line 24c — Nontaxable amount of the value of Olympic and Paralympic medals and USOC prize money reported on line 8m | unsupported | 4299 | none |
-| `1.line.24g` | Line 24g — Contributions by certain chaplains to section 403(b) plans | unsupported | 4299 | none |
+| `1.line.12` | Line 12 — Certain business expenses of reservists, performing artists, and fee-basis government officials (attach Form 2106) | locked | 4308 | Form 1040, Form 3800, FTB 3801, FTB 3801-CR, Form 8582, Form 8582-CR, Form 8815, Form 8839, Schedule 3, Schedule CA (540), Schedule CA (540NR) |
+| `0.line.6` | Line 6 — Farm income or (loss). Attach Schedule F | locked | 4307 | Form 1040, Form 1116, Form 172, Form 2441, FTB 3461, FTB 3514, Form 3800, FTB 3800, FTB 3801, FTB 3801-CR, Form 4563, Form 461, Form 540, Form 8582, Form 8582-CR, Form 8615, Form 8815, Form 8960, Schedule 3, Schedule CA (540), Schedule CA (540NR) |
+| `1.line.24j` | Line 24j — Housing deduction from Form 2555 | locked | 4305 | Schedule CA (540) |
+| `0.line.8a` | Line 8a — Net operating loss | locked | 4301 | Form 1040, Form 172, Form 4563, Form 8615, Schedule CA (540), Schedule CA (540NR) |
+| `0.line.8c` | Line 8c — Cancellation of debt | locked | 4301 | Form 1116, Form 172, Schedule 3, Schedule CA (540), Schedule CA (540NR) |
+| `1.line.14` | Line 14 — Moving expenses for members of the Armed Forces (attach Form 3903) | locked | 4301 | Form 1040, Form 3800, FTB 3801, FTB 3801-CR, Form 8582, Form 8582-CR, Form 8815, Form 8839, Schedule 3, Schedule CA (540), Schedule CA (540NR) |
+| `1.line.17` | Line 17 — Self-employed health insurance deduction | locked | 4301 | Form 1040, Form 3800, FTB 3801, FTB 3801-CR, Form 8582, Form 8582-CR, Form 8815, Form 8839, Schedule 3, Schedule CA (540), Schedule CA (540NR) |
+| `1.line.24b` | Line 24b — Deductible expenses related to income reported on line 8l from the rental of personal property engaged in for profit | unsupported | 4301 | FTB 3514, Form 540 |
+| `1.line.24c` | Line 24c — Nontaxable amount of the value of Olympic and Paralympic medals and USOC prize money reported on line 8m | unsupported | 4301 | none |
+| `1.line.24g` | Line 24g — Contributions by certain chaplains to section 403(b) plans | unsupported | 4301 | none |
 
 27 more not checked, each of which feeds fewer fields.
 
@@ -371,14 +396,14 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.2a_puerto_rico_excluded_income` | Line 2a — Enter any income from Puerto Rico that you excluded | unsupported | 2438 | none |
-| `0.line.2b_form_2555_line_45` | Line 2b — Enter the amount from Form 2555, line 45 | locked | 2438 | none |
-| `0.line.2c_form_2555_line_50` | Line 2c — Enter the amount from Form 2555, line 50 | locked | 2438 | none |
-| `0.line.2d_form_4563_line_15` | Line 2d — Enter the amount from Form 4563, line 15 | locked | 2438 | none |
-| `0.line.2e_total_excluded_income` | Line 2e — Add lines 2a, 2b, 2c, and 2d | locked | 2437 | none |
-| `0.line.13_qualified_tips_deduction` | Line 13 — Qualified tips deduction. Subtract line 12 from line 7. If zero or less, enter -0- | unsupported | 2429 | none |
-| `0.line.21_qualified_overtime_deduction` | Line 21 — Qualified overtime compensation deduction. Subtract line 20 from line 15. If zero or less, enter -0- | unsupported | 2429 | none |
-| `1.line.30_car_loan_interest_deduction` | Line 30 — Qualified passenger vehicle loan interest deduction. Subtract line 29 from line 24. If zero or less, enter -0- | unsupported | 2429 | Form 1116, Schedule 3 |
+| `0.line.2a_puerto_rico_excluded_income` | Line 2a — Enter any income from Puerto Rico that you excluded | unsupported | 2440 | none |
+| `0.line.2b_form_2555_line_45` | Line 2b — Enter the amount from Form 2555, line 45 | locked | 2440 | none |
+| `0.line.2c_form_2555_line_50` | Line 2c — Enter the amount from Form 2555, line 50 | locked | 2440 | none |
+| `0.line.2d_form_4563_line_15` | Line 2d — Enter the amount from Form 4563, line 15 | locked | 2440 | none |
+| `0.line.2e_total_excluded_income` | Line 2e — Add lines 2a, 2b, 2c, and 2d | locked | 2439 | none |
+| `0.line.13_qualified_tips_deduction` | Line 13 — Qualified tips deduction. Subtract line 12 from line 7. If zero or less, enter -0- | unsupported | 2431 | none |
+| `0.line.21_qualified_overtime_deduction` | Line 21 — Qualified overtime compensation deduction. Subtract line 20 from line 15. If zero or less, enter -0- | unsupported | 2431 | none |
+| `1.line.30_car_loan_interest_deduction` | Line 30 — Qualified passenger vehicle loan interest deduction. Subtract line 29 from line 24. If zero or less, enter -0- | unsupported | 2431 | Form 1116, Schedule 3 |
 
 33 more not checked, each of which feeds fewer fields.
 
@@ -390,12 +415,12 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.1b_new_clean_vehicle_credit_repayment` | Line 1b — Repayment of new clean vehicle credit(s) transferred to a registered dealer from Schedule A (Form 8936), Part II. Attach Form 8936 and Schedule A (Form 8936) | locked | 2238 | none |
-| `0.line.1c_previously_owned_clean_vehicle_credit_repayment` | Line 1c — Repayment of previously owned clean vehicle credit(s) transferred to a registered dealer from Schedule A (Form 8936), Part IV. Attach Form 8936 and Schedule A (Form 8936) | locked | 2238 | none |
-| `0.line.1d_recapture_net_epe_form4255` | Line 1d — Recapture of net EPE from Form 4255, line 2a, column (l) | locked | 2238 | none |
-| `0.line.1e_excessive_payments_epe_amount` | Line 1e — Excessive payments (EPs) on gross EPE from Form 4255, amount | locked | 2238 | none |
-| `0.line.1f_20pct_ep_amount` | Line 1f — 20% EP from Form 4255, amount | locked | 2238 | none |
-| `0.line.1y_other_additions_amount` | Line 1y — Other additions to tax (see instructions), amount | locked | 2238 | none |
+| `0.line.1b_new_clean_vehicle_credit_repayment` | Line 1b — Repayment of new clean vehicle credit(s) transferred to a registered dealer from Schedule A (Form 8936), Part II. Attach Form 8936 and Schedule A (Form 8936) | locked | 2240 | none |
+| `0.line.1c_previously_owned_clean_vehicle_credit_repayment` | Line 1c — Repayment of previously owned clean vehicle credit(s) transferred to a registered dealer from Schedule A (Form 8936), Part IV. Attach Form 8936 and Schedule A (Form 8936) | locked | 2240 | none |
+| `0.line.1d_recapture_net_epe_form4255` | Line 1d — Recapture of net EPE from Form 4255, line 2a, column (l) | locked | 2240 | none |
+| `0.line.1e_excessive_payments_epe_amount` | Line 1e — Excessive payments (EPs) on gross EPE from Form 4255, amount | locked | 2240 | none |
+| `0.line.1f_20pct_ep_amount` | Line 1f — 20% EP from Form 4255, amount | locked | 2240 | none |
+| `0.line.1y_other_additions_amount` | Line 1y — Other additions to tax (see instructions), amount | locked | 2240 | none |
 | `0.line.5_ss_medicare_tax_unreported_tips` | Line 5 — Social security and Medicare tax on unreported tip income. Attach Form 4137 | locked | 317 | Schedule 8812 |
 | `0.line.6_uncollected_ss_medicare_tax_wages` | Line 6 — Uncollected social security and Medicare tax on wages. Attach Form 8919 | locked | 317 | Schedule 8812 |
 | `0.line.13_uncollected_ss_medicare_rrta_tax_w2` | Line 13 — Uncollected social security and Medicare or RRTA tax on tips or group-term life insurance from Form W-2, box 12 | unsupported | 316 | Schedule 8812 |
@@ -411,16 +436,16 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.1` | Line 1 — Foreign tax credit. Attach Form 1116 if required | locked | 2099 | Form 2441, Form 5695, Form 8396, Form 8801, Form 8839, Form 8859, Form 8863, Form 8880, Form 8912, Form 8936, Schedule 8812, Schedule R |
-| `0.line.6l` | Line 6l — Amount on Form 8978, line 14 | locked | 2099 | Form 2441, Form 3800, Form 5695, Form 8396, Form 8582-CR, Form 8801, Form 8834, Form 8839, Form 8859, Form 8863, Form 8880, Form 8911, Form 8912, Form 8936, Schedule 8812, Schedule R |
-| `0.line.3` | Line 3 — Education credits from Form 8863, line 19 | locked | 2091 | Form 3800, Form 5695, Form 8396, Form 8582-CR, Form 8801, Form 8834, Form 8839, Form 8859, Form 8880, Form 8911, Form 8912, Form 8936, Schedule 8812 |
-| `0.line.4` | Line 4 — Retirement savings contributions credit. Attach Form 8880 | locked | 2085 | Form 3800, Form 5695, Form 8396, Form 8582-CR, Form 8801, Form 8834, Form 8839, Form 8859, Form 8911, Form 8912, Form 8936, Schedule 8812 |
-| `0.line.5b` | Line 5b — Energy efficient home improvement credit from Form 5695, line 32 | locked | 2082 | Form 3800, Form 8582-CR, Form 8801, Form 8834, Form 8839, Form 8859, Form 8911, Form 8912, Form 8936, Schedule 8812 |
-| `0.line.6m` | Line 6m — Credit for previously owned clean vehicles. Attach Form 8936 | locked | 2077 | Form 3800, Form 8396, Form 8582-CR, Form 8801, Form 8834, Form 8839, Form 8859, Form 8911, Form 8912, Form 8936, Schedule 8812 |
-| `0.line.5a` | Line 5a — Residential clean energy credit from Form 5695, line 15 | unsupported | 2072 | Form 3800, Form 8582-CR, Form 8801, Form 8834, Form 8911, Form 8912, Schedule 8812 |
-| `0.line.6f` | Line 6f — Clean vehicle credit. Attach Form 8936 | locked | 2072 | Form 3800, Form 8396, Form 8582-CR, Form 8801, Form 8834, Form 8839, Form 8859, Form 8911, Form 8912, Schedule 8812 |
-| `0.line.6c` | Line 6c — Adoption credit. Attach Form 8839 | locked | 2071 | Form 3800, Form 8582-CR, Form 8801, Form 8834, Form 8859, Form 8911, Form 8912, Schedule 8812 |
-| `0.line.6g` | Line 6g — Mortgage interest credit. Attach Form 8396 | locked | 2071 | Form 3800, Form 8582-CR, Form 8801, Form 8834, Form 8839, Form 8859, Form 8911, Form 8912, Schedule 8812 |
+| `0.line.1` | Line 1 — Foreign tax credit. Attach Form 1116 if required | locked | 2101 | Form 2441, Form 5695, Form 8396, Form 8801, Form 8839, Form 8859, Form 8863, Form 8880, Form 8912, Form 8936, Schedule 8812, Schedule R |
+| `0.line.6l` | Line 6l — Amount on Form 8978, line 14 | locked | 2101 | Form 2441, Form 3800, Form 5695, Form 8396, Form 8582-CR, Form 8801, Form 8834, Form 8839, Form 8859, Form 8863, Form 8880, Form 8911, Form 8912, Form 8936, Schedule 8812, Schedule R |
+| `0.line.3` | Line 3 — Education credits from Form 8863, line 19 | locked | 2093 | Form 3800, Form 5695, Form 8396, Form 8582-CR, Form 8801, Form 8834, Form 8839, Form 8859, Form 8880, Form 8911, Form 8912, Form 8936, Schedule 8812 |
+| `0.line.4` | Line 4 — Retirement savings contributions credit. Attach Form 8880 | locked | 2087 | Form 3800, Form 5695, Form 8396, Form 8582-CR, Form 8801, Form 8834, Form 8839, Form 8859, Form 8911, Form 8912, Form 8936, Schedule 8812 |
+| `0.line.5b` | Line 5b — Energy efficient home improvement credit from Form 5695, line 32 | locked | 2084 | Form 3800, Form 8582-CR, Form 8801, Form 8834, Form 8839, Form 8859, Form 8911, Form 8912, Form 8936, Schedule 8812 |
+| `0.line.6m` | Line 6m — Credit for previously owned clean vehicles. Attach Form 8936 | locked | 2079 | Form 3800, Form 8396, Form 8582-CR, Form 8801, Form 8834, Form 8839, Form 8859, Form 8911, Form 8912, Form 8936, Schedule 8812 |
+| `0.line.5a` | Line 5a — Residential clean energy credit from Form 5695, line 15 | unsupported | 2074 | Form 3800, Form 8582-CR, Form 8801, Form 8834, Form 8911, Form 8912, Schedule 8812 |
+| `0.line.6f` | Line 6f — Clean vehicle credit. Attach Form 8936 | locked | 2074 | Form 3800, Form 8396, Form 8582-CR, Form 8801, Form 8834, Form 8839, Form 8859, Form 8911, Form 8912, Schedule 8812 |
+| `0.line.6c` | Line 6c — Adoption credit. Attach Form 8839 | locked | 2073 | Form 3800, Form 8582-CR, Form 8801, Form 8834, Form 8859, Form 8911, Form 8912, Schedule 8812 |
+| `0.line.6g` | Line 6g — Mortgage interest credit. Attach Form 8396 | locked | 2073 | Form 3800, Form 8582-CR, Form 8801, Form 8834, Form 8839, Form 8859, Form 8911, Form 8912, Schedule 8812 |
 
 21 more not checked, each of which feeds fewer fields.
 
@@ -432,8 +457,8 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `1.line.30_line_2_col_d_total` | Line 30 — Complete line 2 on page 1 of this form. Don't include in column (d) any benefits shown on line 28 above. Then, add the amounts in column (d) and enter the total here | locked | 2281 | none |
-| `1.line.31_smaller_line_29_30` | Line 31 — Enter the smaller of line 29 or 30 | locked | 2280 | FTB 3506 |
+| `1.line.30_line_2_col_d_total` | Line 30 — Complete line 2 on page 1 of this form. Don't include in column (d) any benefits shown on line 28 above. Then, add the amounts in column (d) and enter the total here | locked | 2283 | none |
+| `1.line.31_smaller_line_29_30` | Line 31 — Enter the smaller of line 29 or 30 | locked | 2282 | FTB 3506 |
 
 17 more not checked, each of which feeds fewer fields.
 
@@ -445,7 +470,7 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `1.line.13b_nontaxable_pensions` | Line 13b — Nontaxable veterans’ pensions and any other pension, annuity, or disability benefit that is excluded from income under any other provision of law | not run | 2100 | none |
+| `1.line.13b_nontaxable_pensions` | Line 13b — Nontaxable veterans’ pensions and any other pension, annuity, or disability benefit that is excluded from income under any other provision of law | not run | 2102 | none |
 
 8 more not checked, each of which feeds fewer fields.
 
@@ -478,16 +503,16 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `1.line.19d` | Line 19d — Cost of the two next most expensive doors | locked | 2091 | none |
-| `1.line.19e` | Line 19e — Cost of all other qualifying exterior doors (enter -0- if none) | locked | 2091 | none |
-| `1.line.19a` | Line 19a — Cost of the most expensive exterior door bought | locked | 2090 | none |
-| `1.line.19f` | Line 19f — Add lines 19d and 19e | locked | 2090 | none |
-| `1.line.20a` | Line 20a — Cost of the four most expensive windows/skylights | locked | 2090 | none |
-| `1.line.20b` | Line 20b — Cost of all other exterior windows and skylights (enter -0- if none) | not run | 2090 | none |
-| `2.line.22a` | Line 22a — Cost of most expensive central air conditioner | locked | 2090 | none |
-| `2.line.22b` | Line 22b — Cost of all other central air conditioners | locked | 2090 | none |
-| `2.line.23a` | Line 23a — Cost of most expensive natural gas, propane, or oil water heater | not run | 2090 | none |
-| `2.line.23b` | Line 23b — Cost of all other natural gas, propane, or oil water heaters | not run | 2090 | none |
+| `1.line.19d` | Line 19d — Cost of the two next most expensive doors | locked | 2093 | none |
+| `1.line.19e` | Line 19e — Cost of all other qualifying exterior doors (enter -0- if none) | locked | 2093 | none |
+| `1.line.19a` | Line 19a — Cost of the most expensive exterior door bought | locked | 2092 | none |
+| `1.line.19f` | Line 19f — Add lines 19d and 19e | locked | 2092 | none |
+| `1.line.20a` | Line 20a — Cost of the four most expensive windows/skylights | locked | 2092 | none |
+| `1.line.20b` | Line 20b — Cost of all other exterior windows and skylights (enter -0- if none) | not run | 2092 | none |
+| `2.line.22a` | Line 22a — Cost of most expensive central air conditioner | locked | 2092 | none |
+| `2.line.22b` | Line 22b — Cost of all other central air conditioners | locked | 2092 | none |
+| `2.line.23a` | Line 23a — Cost of most expensive natural gas, propane, or oil water heater | not run | 2092 | none |
+| `2.line.23b` | Line 23b — Cost of all other natural gas, propane, or oil water heaters | not run | 2092 | none |
 
 157 more not checked, each of which feeds fewer fields.
 
@@ -499,8 +524,8 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `1.line.15b_qualified_disaster_distributions` | Line 15b — Enter the amount on line 15a attributable to qualified disaster distributions, if any, from 2025 Form(s) 8915-F | locked | 4315 | Form 8915-F |
-| `1.line.25b_roth_qualified_disaster_distributions` | Line 25b — Enter the amount on line 25a attributable to qualified disaster distributions, if any, from 2025 Form(s) 8915-F | not run | 4314 | Form 8915-F |
+| `1.line.15b_qualified_disaster_distributions` | Line 15b — Enter the amount on line 15a attributable to qualified disaster distributions, if any, from 2025 Form(s) 8915-F | locked | 4317 | Form 8915-F |
+| `1.line.25b_roth_qualified_disaster_distributions` | Line 25b — Enter the amount on line 25a attributable to qualified disaster distributions, if any, from 2025 Form(s) 8915-F | not run | 4316 | Form 8915-F |
 
 17 more not checked, each of which feeds fewer fields.
 
@@ -512,11 +537,11 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.4_archer_msa_contributions` | Line 4 — Amount contributed to Archer MSAs for 2025 from Form 8853 | not run | 4307 | none |
-| `0.line.7_additional_contribution_age_55` | Line 7 — Additional contribution amount if age 55 or older | unsupported | 4305 | none |
-| `0.line.10_qualified_hsa_funding_distributions` | Line 10 — Qualified HSA funding distributions | unsupported | 4305 | none |
-| `0.line.18_last_month_rule` | Line 18 — Last-month rule | unsupported | 4299 | none |
-| `0.line.19_qualified_hsa_funding_distribution` | Line 19 — Qualified HSA funding distribution | unsupported | 4299 | none |
+| `0.line.4_archer_msa_contributions` | Line 4 — Amount contributed to Archer MSAs for 2025 from Form 8853 | not run | 4309 | none |
+| `0.line.7_additional_contribution_age_55` | Line 7 — Additional contribution amount if age 55 or older | unsupported | 4307 | none |
+| `0.line.10_qualified_hsa_funding_distributions` | Line 10 — Qualified HSA funding distributions | unsupported | 4307 | none |
+| `0.line.18_last_month_rule` | Line 18 — Last-month rule | unsupported | 4301 | none |
+| `0.line.19_qualified_hsa_funding_distribution` | Line 19 — Qualified HSA funding distribution | unsupported | 4301 | none |
 | `0.line.17b_additional_20pct_tax` | Line 17b — Additional 20% tax | unsupported | 255 | Schedule 2 |
 | `0.line.21_additional_tax_10pct` | Line 21 — Additional tax. Multiply line 20 by 10% (0.10) | unsupported | 255 | Schedule 2 |
 
@@ -536,10 +561,10 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.2a_puerto_rico_income_excluded` | Line 2a — Enter income from Puerto Rico that you excluded | unsupported | 2079 | none |
-| `0.line.2b_form_2555_lines_45_50` | Line 2b — Enter the amounts from lines 45 and 50 of your Form 2555 | locked | 2079 | none |
-| `0.line.2c_form_4563_line_15` | Line 2c — Enter the amount from line 15 of your Form 4563 | locked | 2079 | none |
-| `0.line.2d_total_excluded_income` | Line 2d — Add lines 2a through 2c | locked | 2078 | none |
+| `0.line.2a_puerto_rico_income_excluded` | Line 2a — Enter income from Puerto Rico that you excluded | unsupported | 2081 | none |
+| `0.line.2b_form_2555_lines_45_50` | Line 2b — Enter the amounts from lines 45 and 50 of your Form 2555 | locked | 2081 | none |
+| `0.line.2c_form_4563_line_15` | Line 2c — Enter the amount from line 15 of your Form 4563 | locked | 2081 | none |
+| `0.line.2d_total_excluded_income` | Line 2d — Add lines 2a through 2c | locked | 2080 | none |
 
 1 more not checked, each of which feeds fewer fields.
 
@@ -585,10 +610,10 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.14_a` | Line 14 — Patron reduction. Enter the amount from Schedule D (Form 8995-A), line 6, if any (Column A) | unsupported | 2337 | none |
-| `0.line.14_b` | Line 14 — Patron reduction. Enter the amount from Schedule D (Form 8995-A), line 6, if any (Column B) | unsupported | 2337 | none |
-| `1.line.29` | Line 29 — Qualified REIT dividends and PTP (loss) carryforward from prior years | unsupported | 2336 | none |
-| `1.line.38` | Line 38 — DPAD under section 199A(g) allocated from an agricultural or horticultural cooperative. Don't enter more than line 33 minus line 37 | unsupported | 2332 | none |
+| `0.line.14_a` | Line 14 — Patron reduction. Enter the amount from Schedule D (Form 8995-A), line 6, if any (Column A) | unsupported | 2339 | none |
+| `0.line.14_b` | Line 14 — Patron reduction. Enter the amount from Schedule D (Form 8995-A), line 6, if any (Column B) | unsupported | 2339 | none |
+| `1.line.29` | Line 29 — Qualified REIT dividends and PTP (loss) carryforward from prior years | unsupported | 2338 | none |
+| `1.line.38` | Line 38 — DPAD under section 199A(g) allocated from an agricultural or horticultural cooperative. Don't enter more than line 33 minus line 37 | unsupported | 2334 | none |
 | `0.line.2_c` | Line 2 — Qualified business income from the trade, business, or aggregation (Column C) | not run | 17 | none |
 | `0.line.4_c` | Line 4 — Allocable share of W-2 wages from the trade, business, or aggregation (Column C) | not run | 11 | none |
 | `0.line.7_c` | Line 7 — Allocable share of the unadjusted basis immediately after acquisition (UBIA) of all qualified property (Column C) | not run | 10 | none |
@@ -606,8 +631,8 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.3` | Line 3 — Qualified business net (loss) carryforward from the prior year | locked | 2336 | none |
-| `0.line.7` | Line 7 — Qualified REIT dividends and qualified PTP (loss) carryforward from the prior year | unsupported | 2336 | none |
+| `0.line.3` | Line 3 — Qualified business net (loss) carryforward from the prior year | locked | 2338 | none |
+| `0.line.7` | Line 7 — Qualified REIT dividends and qualified PTP (loss) carryforward from the prior year | unsupported | 2338 | none |
 
 5 more not checked, each of which feeds fewer fields.
 
@@ -619,16 +644,16 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.2g_private_activity_bond_interest` | Line 2g — Interest from specified private activity bonds exempt from the regular tax | not run | 2147 | none |
-| `0.line.2b_tax_refund` | Line 2b — Tax refund from Schedule 1 (Form 1040), line 1 or line 8z | unsupported | 2146 | none |
-| `0.line.2c_investment_interest_expense` | Line 2c — Investment interest expense (difference between regular tax and AMT) | not run | 2146 | none |
-| `0.line.2d_depletion` | Line 2d — Depletion (difference between regular tax and AMT) | unsupported | 2146 | none |
-| `0.line.2e_net_operating_loss_deduction` | Line 2e — Net operating loss deduction from Schedule 1 (Form 1040), line 8a. Enter as a positive amount | unsupported | 2146 | none |
-| `0.line.2f_alternative_tax_nol_deduction` | Line 2f — Alternative tax net operating loss deduction | unsupported | 2146 | none |
-| `0.line.2h_qualified_small_business_stock` | Line 2h — Qualified small business stock | unsupported | 2146 | none |
-| `0.line.2j_estates_and_trusts` | Line 2j — Estates and trusts (amount from Schedule K-1 (Form 1041), box 12, code A) | unsupported | 2146 | none |
-| `0.line.2k_disposition_of_property` | Line 2k — Disposition of property (difference between AMT and regular tax gain or loss) | unsupported | 2146 | none |
-| `0.line.2l_post_1986_depreciation` | Line 2l — Depreciation on assets placed in service after 1986 (difference between regular tax and AMT) | unsupported | 2146 | none |
+| `0.line.2g_private_activity_bond_interest` | Line 2g — Interest from specified private activity bonds exempt from the regular tax | not run | 2149 | none |
+| `0.line.2b_tax_refund` | Line 2b — Tax refund from Schedule 1 (Form 1040), line 1 or line 8z | unsupported | 2148 | none |
+| `0.line.2c_investment_interest_expense` | Line 2c — Investment interest expense (difference between regular tax and AMT) | not run | 2148 | none |
+| `0.line.2d_depletion` | Line 2d — Depletion (difference between regular tax and AMT) | unsupported | 2148 | none |
+| `0.line.2e_net_operating_loss_deduction` | Line 2e — Net operating loss deduction from Schedule 1 (Form 1040), line 8a. Enter as a positive amount | unsupported | 2148 | none |
+| `0.line.2f_alternative_tax_nol_deduction` | Line 2f — Alternative tax net operating loss deduction | unsupported | 2148 | none |
+| `0.line.2h_qualified_small_business_stock` | Line 2h — Qualified small business stock | unsupported | 2148 | none |
+| `0.line.2j_estates_and_trusts` | Line 2j — Estates and trusts (amount from Schedule K-1 (Form 1041), box 12, code A) | unsupported | 2148 | none |
+| `0.line.2k_disposition_of_property` | Line 2k — Disposition of property (difference between AMT and regular tax gain or loss) | unsupported | 2148 | none |
+| `0.line.2l_post_1986_depreciation` | Line 2l — Depreciation on assets placed in service after 1986 (difference between regular tax and AMT) | unsupported | 2148 | none |
 
 14 more not checked, each of which feeds fewer fields.
 
@@ -737,7 +762,7 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.16_excess_business_loss` | Line 16 — Add lines 14 and 15 | locked | 4294 | Form 1116, Form 8995-A, Schedule C (Form 8995-A), Schedule 1 |
+| `0.line.16_excess_business_loss` | Line 16 — Add lines 14 and 15 | locked | 4296 | Form 1116, Form 8995-A, Schedule C (Form 8995-A), Schedule 1 |
 
 15 more not checked, each of which feeds fewer fields.
 
@@ -768,10 +793,19 @@ For each form: the fields that are not verified and that other fields read, by t
 ### Form 3800
 
 - Reads: Form 1040, Form 4952, Form 6251, Form 8582, Form 8936, Schedule 1, Schedule 2, Schedule 3, Schedule D
-- Feeds: none
+- Feeds: Form 6765
 - Fields: 0 of 1635 verified, 1635 not checked
 
-1635 more not checked, each of which feeds fewer fields.
+| Field | Label | State | Feeds | Read by forms |
+| --- | --- | --- | --- | --- |
+| `0.line.5_carrybacks_from_2026` | Line 5 — Enter the portion of Part IV, line 6, column (f), that is from carrybacks from 2026 | not run | 2 | Form 6765 |
+| `0.line.6_total_credits_not_allowed_tmt` | Line 6 — Add lines 1, 3, 4, and 5 | locked | 2 | Form 6765 |
+| `1.line.25_add_lines_22_and_24` | Line 25 — Add lines 22 and 24 | locked | 2 | Form 6765 |
+| `1.line.35_specified_credit_carryback` | Line 35 — Carryback of business credit from 2026 | not run | 2 | Form 6765 |
+| `1.line.36_add_lines_30_33_34_35` | Line 36 — Add lines 30, 33, 34, and 35 | locked | 2 | Form 6765 |
+| `1.line.38_credit_allowed_current_year` | Line 38 — Credit allowed for the current year. Add lines 28 and 37 | locked | 2 | Form 6765 |
+
+1629 more not checked, each of which feeds fewer fields.
 
 ### Form 3903
 
@@ -890,7 +924,7 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.9_current_year_mortgage_interest_credit` | Line 9 — Current-year mortgage interest credit. Enter the smaller of line 7 or line 8 | locked | 2071 | Schedule 3 |
+| `0.line.9_current_year_mortgage_interest_credit` | Line 9 — Current-year mortgage interest credit. Enter the smaller of line 7 or line 8 | locked | 2073 | Schedule 3 |
 
 25 more not checked, each of which feeds fewer fields.
 
@@ -934,7 +968,7 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.14_excludable_bond_interest` | Line 14 — Excludable savings bond interest. Subtract line 13 from line 8 | locked | 4294 | Schedule B |
+| `0.line.14_excludable_bond_interest` | Line 14 — Excludable savings bond interest. Subtract line 13 from line 8 | locked | 4296 | Schedule B |
 
 38 more not checked, each of which feeds fewer fields.
 
@@ -986,7 +1020,7 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.19_nonrefundable_education_credits` | Line 19 — Nonrefundable education credits. Enter the amount from line 7 of the Credit Limit Worksheet | locked | 2092 | Schedule 3 |
+| `0.line.19_nonrefundable_education_credits` | Line 19 — Nonrefundable education credits. Enter the amount from line 7 of the Credit Limit Worksheet | locked | 2094 | Schedule 3 |
 | `0.line.8_refundable_american_opportunity_credit` | Line 8 — Refundable American opportunity credit. Multiply line 7 by 40% (0.40) | locked | 251 | Form 1040 |
 | `0.line.7_tentative_american_opportunity_credit` | Line 7 — Multiply line 1 by line 6 | locked | 16 | Form 8862 |
 
@@ -1000,7 +1034,7 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.12_retirement_savings_credit` | Line 12 — Credit for qualified retirement savings contributions. Enter the smaller of line 10 or line 11 | locked | 2086 | Schedule 3 |
+| `0.line.12_retirement_savings_credit` | Line 12 — Credit for qualified retirement savings contributions. Enter the smaller of line 10 or line 11 | locked | 2088 | Schedule 3 |
 
 22 more not checked, each of which feeds fewer fields.
 
@@ -1040,7 +1074,7 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `2.line.26_amount_subject_to_tax` | Line 26 — Amount subject to tax. Subtract line 25 from line 24. If zero or less, enter -0- | locked | 4300 | Form 1040 |
+| `2.line.26_amount_subject_to_tax` | Line 26 — Amount subject to tax. Subtract line 25 from line 24. If zero or less, enter -0- | locked | 4302 | Form 1040 |
 
 94 more not checked, each of which feeds fewer fields.
 
@@ -1052,8 +1086,8 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.10_wages_subject_social_security_tax` | Line 10 — Wages subject to social security tax. Enter the smaller of line 6 or line 9 | locked | 4342 | Schedule SE |
-| `0.line.6_total_wages` | Line 6 — Total wages. Combine lines 1 through 5 in column (f) | locked | 4314 | Form 1040, Form 8959 |
+| `0.line.10_wages_subject_social_security_tax` | Line 10 — Wages subject to social security tax. Enter the smaller of line 6 or line 9 | locked | 4344 | Schedule SE |
+| `0.line.6_total_wages` | Line 6 — Total wages. Combine lines 1 through 5 in column (f) | locked | 4316 | Form 1040, Form 8959 |
 | `0.line.13_total_uncollected_tax` | Line 13 — Add lines 11 and 12 | locked | 318 | Schedule 2 |
 
 36 more not checked, each of which feeds fewer fields.
@@ -1119,8 +1153,8 @@ For each form: the fields that are not verified and that other fields read, by t
 
 | Field | Label | State | Feeds | Read by forms |
 | --- | --- | --- | --- | --- |
-| `0.line.8_short_term_capital_gain_loss` | Line 8 — Short-term capital gain or (loss). Multiply line 7 by 40% (0.40) | locked | 4333 | Schedule D |
-| `0.line.9_long_term_capital_gain_loss` | Line 9 — Long-term capital gain or (loss). Multiply line 7 by 60% (0.60) | locked | 4333 | Schedule D |
+| `0.line.8_short_term_capital_gain_loss` | Line 8 — Short-term capital gain or (loss). Multiply line 7 by 40% (0.40) | locked | 4335 | Schedule D |
+| `0.line.9_long_term_capital_gain_loss` | Line 9 — Long-term capital gain or (loss). Multiply line 7 by 60% (0.60) | locked | 4335 | Schedule D |
 
 69 more not checked, each of which feeds fewer fields.
 
@@ -1252,7 +1286,7 @@ For each form: the fields that are not verified and that other fields read, by t
 
 ### Form 6765
 
-- Reads: none
+- Reads: Form 3800
 - Feeds: none
 - Fields: 0 of 270 verified, 270 not checked
 
@@ -1313,6 +1347,206 @@ For each form: the fields that are not verified and that other fields read, by t
 - Fields: 0 of 20 verified, 20 not checked
 
 20 more not checked, each of which feeds fewer fields.
+
+### Form 6478
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 10 verified, 10 not checked
+
+10 more not checked, each of which feeds fewer fields.
+
+### Form 7207
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 440 verified, 440 not checked
+
+440 more not checked, each of which feeds fewer fields.
+
+### Form 7210
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 35 verified, 35 not checked
+
+35 more not checked, each of which feeds fewer fields.
+
+### Form 7211
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 49 verified, 49 not checked
+
+49 more not checked, each of which feeds fewer fields.
+
+### Form 7213
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 70 verified, 70 not checked
+
+70 more not checked, each of which feeds fewer fields.
+
+### Form 7218
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 219 verified, 219 not checked
+
+219 more not checked, each of which feeds fewer fields.
+
+### Form 8820
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 98 verified, 98 not checked
+
+98 more not checked, each of which feeds fewer fields.
+
+### Form 8835
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 85 verified, 85 not checked
+
+85 more not checked, each of which feeds fewer fields.
+
+### Form 8864
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 12 verified, 12 not checked
+
+12 more not checked, each of which feeds fewer fields.
+
+### Form 8874
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 40 verified, 40 not checked
+
+40 more not checked, each of which feeds fewer fields.
+
+### Form 8896
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 12 verified, 12 not checked
+
+12 more not checked, each of which feeds fewer fields.
+
+### Form 8900
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 12 verified, 12 not checked
+
+12 more not checked, each of which feeds fewer fields.
+
+### Form 8906
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 6 verified, 6 not checked
+
+6 more not checked, each of which feeds fewer fields.
+
+### Form 8908
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 256 verified, 256 not checked
+
+256 more not checked, each of which feeds fewer fields.
+
+### Form 8932
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 8 verified, 8 not checked
+
+8 more not checked, each of which feeds fewer fields.
+
+### Form 8941
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 28 verified, 28 not checked
+
+28 more not checked, each of which feeds fewer fields.
+
+### Form 8994
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 13 verified, 13 not checked
+
+13 more not checked, each of which feeds fewer fields.
+
+### Schedule A (Form 8911)
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 33 verified, 33 not checked
+
+33 more not checked, each of which feeds fewer fields.
+
+### Schedule A (Form 8936)
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 64 verified, 64 not checked
+
+64 more not checked, each of which feeds fewer fields.
+
+### Schedule A (Form 8933)
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 22 verified, 22 not checked
+
+22 more not checked, each of which feeds fewer fields.
+
+### Schedule B (Form 8933)
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 111 verified, 111 not checked
+
+111 more not checked, each of which feeds fewer fields.
+
+### Schedule C (Form 8933)
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 122 verified, 122 not checked
+
+122 more not checked, each of which feeds fewer fields.
+
+### Schedule D (Form 8933)
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 183 verified, 183 not checked
+
+183 more not checked, each of which feeds fewer fields.
+
+### Schedule E (Form 8933)
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 44 verified, 44 not checked
+
+44 more not checked, each of which feeds fewer fields.
+
+### Schedule F (Form 8933)
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 147 verified, 147 not checked
+
+147 more not checked, each of which feeds fewer fields.
 
 ### Schedule D (540)
 
@@ -1780,9 +2014,7 @@ For each form: the fields that are not verified and that other fields read, by t
 
 A blank field names the form that it waits for, in its label or its reason. Each form here is on the list in `engine/scripts/formGraph/missingForms.ts`: a form that a blank field names, or a tier 1 form. A tier 1 form is one that our target user needs; [Forms for an individual return](individual-forms.md) has the full list. **Fields that wait** is the count of blank fields that name the form. **Fields they feed** is the count of other fields that read those blank fields, directly or through other fields. The About column is a short description, not the form's official title.
 
-| Form | About | Jurisdiction | Tier 1 | Fields that wait | Fields they feed | Forms that wait |
-| --- | --- | --- | --- | --- | --- | --- |
-| Form 8932 | Credit for employer differential wage payments | Federal 2025 |  | 1 | 0 | Form 6765 |
+No blank field names a form that the engine lacks.
 
 ### Names not classified
 
