@@ -1,0 +1,177 @@
+{
+  "formId": "form-3548",
+  "fieldCount": 19,
+  "entries": [
+    {
+      "fieldId": "form-3548.0.header.facility_address",
+      "widgets": [
+        {
+          "widgetName": "Address of facility (number and street)",
+          "text": "T-1HEMF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3548.0.header.facility_city",
+      "widgets": [
+        {
+          "widgetName": "City",
+          "text": "T-TYGRR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3548.0.header.facility_state",
+      "widgets": [
+        {
+          "widgetName": "2 letter state abbreviation",
+          "text": "00"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3548.0.header.facility_zip",
+      "widgets": [
+        {
+          "widgetName": "ZIP code, maximum 9 digits",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3548.0.header.id_number",
+      "widgets": [
+        {
+          "widgetName": "S S N or I T I N, CA Corporation number, F E I N (12 digits)",
+          "text": "T-1DG3H"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3548.0.header.id_number_type",
+      "widgets": [
+        {
+          "widgetName": "Select Entity type",
+          "text": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N)."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3548.0.header.name_on_return",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on your California tax return",
+          "text": "T-10QBA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3548.0.header.sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "California Secretary of State file number (12 digits)",
+          "text": "T-1KCEV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3548.0.line.1_eligible_access_expenditures",
+      "widgets": [
+        {
+          "widgetName": "Line 1. Eligible access expenditures. See instructions",
+          "text": "9,887"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3548.0.line.10_credit_carryover_future_years",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Credit carryover available for future years. Add lines 9a, 9b, and 9c, subtract the result from line 8",
+          "text": "7,860"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3548.0.line.3_smaller_of_line_1_or_2",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Enter the smaller of line 1 or line 2",
+          "text": "2,024"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3548.0.line.4_current_year_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Current year credit. Multiply line 3 by 50% (.50)",
+          "text": "3,698"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3548.0.line.5_pass_through_credit_k1",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Pass-through Disabled Access Credit(s) from Schedule K-1 (100S, 541, 565, or 568). See instructions",
+          "text": "9,797"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3548.0.line.6_total_current_year_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Total current year Disabled Access Credit. Add line 4 and line 5, but do not enter more than $125",
+          "text": "8,051"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3548.0.line.7_credit_carryover_prior_year",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Credit carryover from prior year",
+          "text": "7,302"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3548.0.line.8_total_available_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Total available Disabled Access Credit. Add line 6 and line 7",
+          "text": "1,534"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3548.0.line.9a_credit_claimed",
+      "widgets": [
+        {
+          "widgetName": "Line 9a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. See instructions. (Do not include any assigned credit claimed on form FTB 3544, Part B)",
+          "text": "8,263"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3548.0.line.9b_total_credit_assigned",
+      "widgets": [
+        {
+          "widgetName": "Line 9b. Total credit assigned. Enter the total amount from form FTB 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions",
+          "text": "8,380"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3548.0.line.9c_credit_elected_refundable",
+      "widgets": [
+        {
+          "widgetName": "Line 9c. Credit amount to be elected as refundable in future years. See instructions",
+          "text": "4,674"
+        }
+      ]
+    }
+  ]
+}

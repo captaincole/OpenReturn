@@ -83,7 +83,12 @@ function buildSource(args: Args, catalog: CatalogFile): string {
   for (const field of fields) {
     const key = shortKey(field.fieldId, form.formId);
     const ty = tsType(field);
-    const label = field.label ? `  ${field.label.replace(/\*\//g, "*\\/")}` : "";
+    // A PDF tooltip can hold line breaks; the doc comment keeps one line.
+    const oneLine = (field.label ?? "")
+      .split("\n")
+      .map((part) => part.trim())
+      .join(" ");
+    const label = oneLine ? `  ${oneLine.replace(/\*\//g, "*\\/")}` : "";
     if (label) {
       lines.push(`  /**${label} */`);
     }

@@ -1,0 +1,1873 @@
+{
+  "form": {
+    "formId": "form-3814",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "New Donated Fresh Fruits or Vegetables Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3814.0.header.id_number_type",
+      "label": "Type of identification number: SSN or ITIN, CA Corporation no., or FEIN",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Select Entity type",
+      "position": {
+        "page": 0,
+        "x": 373.816,
+        "y": 699.453
+      },
+      "options": [
+        {
+          "value": "ssn_or_itin",
+          "radioOption": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N).",
+          "label": "SSN or ITIN"
+        },
+        {
+          "value": "ca_corporation_number",
+          "radioOption": "California Corporation number.",
+          "label": "CA Corporation no."
+        },
+        {
+          "value": "fein",
+          "radioOption": "Federal Employer Identification Number (F E I N).",
+          "label": "FEIN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.header.id_number",
+      "label": "S S N or I T I N, CA Corporation number, F E I N (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "S S N or I T I N, CA Corporation number, F E I N (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 371.514,
+        "y": 685.147
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.header.name_on_return",
+      "label": "Name(s) as shown on your California tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on your California tax return",
+      "position": {
+        "page": 0,
+        "x": 35.9857,
+        "y": 661.533
+      }
+    },
+    {
+      "fieldId": "form-3814.0.header.sos_file_number",
+      "label": "C A Secretary of State (S O S) file number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "C A Secretary of State (S O S) file number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 371.514,
+        "y": 661.543
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row1_donation_date_col_a",
+      "label": "Part I, Line 1a. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Line 1a. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 596.426
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row1_product_type_col_b",
+      "label": "Line 1a. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1a. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 596.426
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row1_quantity_donated_col_c",
+      "label": "Line 1a. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1a. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 596.426
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row1_county_location_col_d",
+      "label": "Line 1a. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1a. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 596.426
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row1_qualified_value_col_e",
+      "label": "Line 1a. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1a. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 596.426
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row2_donation_date_col_a",
+      "label": "Line 1b. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1b. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 578.439
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row2_product_type_col_b",
+      "label": "Line 1b. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1b. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 578.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row2_quantity_donated_col_c",
+      "label": "Line 1b. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1b. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 578.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row2_county_location_col_d",
+      "label": "Line 1b. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1b. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 578.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row2_qualified_value_col_e",
+      "label": "Line 1b. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1b. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 578.439
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row3_donation_date_col_a",
+      "label": "Line 1c. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1c. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 560.439
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row3_product_type_col_b",
+      "label": "Line 1c. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1c. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 560.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row3_quantity_donated_col_c",
+      "label": "Line 1c. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1c. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 560.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row3_county_location_col_d",
+      "label": "Line 1c. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1c. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 560.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row3_qualified_value_col_e",
+      "label": "Line 1c. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1c. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 560.439
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row4_donation_date_col_a",
+      "label": "Line 1d. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1d. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 542.449
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row4_product_type_col_b",
+      "label": "Line 1d. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1d. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 542.449
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row4_quantity_donated_col_c",
+      "label": "Line 1d. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1d. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 542.449
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row4_county_location_col_d",
+      "label": "Line 1d. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1d. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 542.449
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row4_qualified_value_col_e",
+      "label": "Line 1d. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1d. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 542.449
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row5_donation_date_col_a",
+      "label": "Line 1e. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1e. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 524.449
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row5_product_type_col_b",
+      "label": "Line 1e. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1e. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 524.449
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row5_quantity_donated_col_c",
+      "label": "Line 1e. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1e. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 524.449
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row5_county_location_col_d",
+      "label": "Line 1e. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1e. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 524.449
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row5_qualified_value_col_e",
+      "label": "Line 1e. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1e. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 524.449
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row6_donation_date_col_a",
+      "label": "Line 1f. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1f. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 506.439
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row6_product_type_col_b",
+      "label": "Line 1f. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1f. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 506.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row6_quantity_donated_col_c",
+      "label": "Line 1f. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1f. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 506.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row6_county_location_col_d",
+      "label": "Line 1f. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1f. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 506.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row6_qualified_value_col_e",
+      "label": "Line 1f. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1f. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 506.439
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row7_donation_date_col_a",
+      "label": "Line 1g. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1g. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 488.449
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row7_product_type_col_b",
+      "label": "Line 1g. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1g. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 488.449
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row7_quantity_donated_col_c",
+      "label": "Line 1g. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1g. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 488.449
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row7_county_location_col_d",
+      "label": "Line 1g. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1g. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 488.449
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row7_qualified_value_col_e",
+      "label": "Line 1g. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1g. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 488.449
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row8_donation_date_col_a",
+      "label": "Line 1h. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1h. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 470.439
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row8_product_type_col_b",
+      "label": "Line 1h. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1h. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 470.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row8_quantity_donated_col_c",
+      "label": "Line 1h. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1h. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 470.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row8_county_location_col_d",
+      "label": "Line 1h. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1h. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 470.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row8_qualified_value_col_e",
+      "label": "Line 1h. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1h. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 470.439
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row9_donation_date_col_a",
+      "label": "Line 1i. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1i. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 452.428
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row9_product_type_col_b",
+      "label": "Line 1i. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1i. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 452.428
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row9_quantity_donated_col_c",
+      "label": "Line 1i. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1i. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 452.428
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row9_county_location_col_d",
+      "label": "Line 1i. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1i. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 452.428
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row9_qualified_value_col_e",
+      "label": "Line 1i. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1i. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 452.428
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row10_donation_date_col_a",
+      "label": "Line 1j. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1j. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 434.439
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row10_product_type_col_b",
+      "label": "Line 1j. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1j. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 434.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row10_quantity_donated_col_c",
+      "label": "Line 1j. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1j. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 434.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row10_county_location_col_d",
+      "label": "Line 1j. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1j. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 434.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row10_qualified_value_col_e",
+      "label": "Line 1j. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1j. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 434.439
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row11_donation_date_col_a",
+      "label": "Line 1k. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1k. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 416.449
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row11_product_type_col_b",
+      "label": "Line 1k. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1k. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 416.449
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row11_quantity_donated_col_c",
+      "label": "Line 1k. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1k. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 416.449
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row11_county_location_col_d",
+      "label": "Line 1k. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1k. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 416.449
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row11_qualified_value_col_e",
+      "label": "Line 1k. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1k. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 416.449
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row12_donation_date_col_a",
+      "label": "Line 1l. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1l. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 398.439
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row12_product_type_col_b",
+      "label": "Line 1l. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1l. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 398.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row12_quantity_donated_col_c",
+      "label": "Line 1l. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1l. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 398.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row12_county_location_col_d",
+      "label": "Line 1l. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1l. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 398.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row12_qualified_value_col_e",
+      "label": "Line 1l. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1l. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 398.439
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row13_donation_date_col_a",
+      "label": "Line 1m. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1m. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 380.428
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row13_product_type_col_b",
+      "label": "Line 1m. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1m. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 380.428
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row13_quantity_donated_col_c",
+      "label": "Line 1m. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1m. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 380.428
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row13_county_location_col_d",
+      "label": "Line 1m. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1m. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 380.428
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row13_qualified_value_col_e",
+      "label": "Line 1m. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1m. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 380.428
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row14_donation_date_col_a",
+      "label": "Line 1n. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1n. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 362.439
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row14_product_type_col_b",
+      "label": "Line 1n. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1n. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 362.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row14_quantity_donated_col_c",
+      "label": "Line 1n. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1n. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 362.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row14_county_location_col_d",
+      "label": "Line 1n. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1n. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 362.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row14_qualified_value_col_e",
+      "label": "Line 1n. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1n. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 362.439
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row15_donation_date_col_a",
+      "label": "Line 1o. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1o. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 344.439
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row15_product_type_col_b",
+      "label": "Line 1o. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1o. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 344.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row15_quantity_donated_col_c",
+      "label": "Line 1o. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1o. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 344.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row15_county_location_col_d",
+      "label": "Line 1o. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1o. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 344.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row15_qualified_value_col_e",
+      "label": "Line 1o. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1o. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 344.439
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row16_donation_date_col_a",
+      "label": "Line 1p. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1p. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 326.439
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row16_product_type_col_b",
+      "label": "Line 1p. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1p. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 326.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row16_quantity_donated_col_c",
+      "label": "Line 1p. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1p. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 326.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row16_county_location_col_d",
+      "label": "Line 1p. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1p. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 326.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row16_qualified_value_col_e",
+      "label": "Line 1p. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1p. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 326.439
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row17_donation_date_col_a",
+      "label": "Line 1q. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1q. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 308.439
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row17_product_type_col_b",
+      "label": "Line 1q. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1q. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 308.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row17_quantity_donated_col_c",
+      "label": "Line 1q. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1q. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 308.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row17_county_location_col_d",
+      "label": "Line 1q. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1q. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 308.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row17_qualified_value_col_e",
+      "label": "Line 1q. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1q. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 308.439
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row18_donation_date_col_a",
+      "label": "Line 1r. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1r. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 290.428
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row18_product_type_col_b",
+      "label": "Line 1r. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1r. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 290.428
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row18_quantity_donated_col_c",
+      "label": "Line 1r. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1r. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 290.428
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row18_county_location_col_d",
+      "label": "Line 1r. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1r. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 290.428
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row18_qualified_value_col_e",
+      "label": "Line 1r. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1r. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 290.428
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row19_donation_date_col_a",
+      "label": "Line 1s. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1s. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 272.439
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row19_product_type_col_b",
+      "label": "Line 1s. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1s. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 272.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row19_quantity_donated_col_c",
+      "label": "Line 1s. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1s. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 272.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row19_county_location_col_d",
+      "label": "Line 1s. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1s. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 272.439
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row19_qualified_value_col_e",
+      "label": "Line 1s. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1s. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 272.439
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row20_donation_date_col_a",
+      "label": "Line 1t. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1t. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 254.428
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row20_product_type_col_b",
+      "label": "Line 1t. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1t. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 254.428
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row20_quantity_donated_col_c",
+      "label": "Line 1t. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1t. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 254.428
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row20_county_location_col_d",
+      "label": "Line 1t. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1t. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 254.428
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row20_qualified_value_col_e",
+      "label": "Line 1t. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1t. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 254.428
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.row21_donation_date_col_a",
+      "label": "Line 1u. (a) Date of donation (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1u. (a) Date of donation (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 65.4654,
+        "y": 236.428
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3814.0.part1.row21_product_type_col_b",
+      "label": "Line 1u. (b) Type of donated product.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1u. (b) Type of donated product",
+      "position": {
+        "page": 0,
+        "x": 144.849,
+        "y": 236.428
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row21_quantity_donated_col_c",
+      "label": "Line 1u. (c) Quantity donated.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1u. (c) Quantity donated",
+      "position": {
+        "page": 0,
+        "x": 306.009,
+        "y": 236.428
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row21_county_location_col_d",
+      "label": "Line 1u. (d) Location by county.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1u. (d) Location by county",
+      "position": {
+        "page": 0,
+        "x": 381.79,
+        "y": 236.428
+      }
+    },
+    {
+      "fieldId": "form-3814.0.part1.row21_qualified_value_col_e",
+      "label": "Line 1u. (e) Qualified value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1u. (e) Qualified value",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 236.428
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part1.2_total_qualified_value",
+      "label": "Line 2. Total qualified value. Add the amounts in column (e). Enter total here and on Part II, line 1.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Total qualified value. Add the amounts in column (e). Enter total here and on Part II, line 1",
+      "position": {
+        "page": 0,
+        "x": 497.253,
+        "y": 218.694
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part2.1_qualified_donation_value",
+      "label": "Part II, Line 1. Qualified value of donated fresh fruits, vegetables, or other qualified donation items. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, Line 1. Qualified value of donated fresh fruits, vegetables, or other qualified donation items. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.52,
+        "y": 191.011
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part2.2_credit_at_15_percent",
+      "label": "Line 2. Multiply line 1 by 15% (.15).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Multiply line 1 by 15% (.15)",
+      "position": {
+        "page": 0,
+        "x": 485.52,
+        "y": 179.012
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part2.3_pass_through_credit",
+      "label": "Line 3. Credit received from pass-through entities. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Credit received from pass-through entities. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.52,
+        "y": 167.013
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part2.4_credit_carryover_prior_year",
+      "label": "Line 4. Credit carryover from prior year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Credit carryover from prior year",
+      "position": {
+        "page": 0,
+        "x": 485.52,
+        "y": 154.994
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part2.5_total_available_credit",
+      "label": "Line 5. Total available credit. Add line 2, line 3, and line 4.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Total available credit. Add line 2, line 3, and line 4",
+      "position": {
+        "page": 0,
+        "x": 485.52,
+        "y": 143.023
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part2.6a_credit_claimed",
+      "label": "Line 6a. Enter the amount of the credit claimed on the current year tax return. See instructions. Do not include any assigned credit claimed on form F T B 3544, Part B.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6a. Enter the amount of the credit claimed on the current year tax return. See instructions. Do not include any assigned credit claimed on form F T B 3544, Part B",
+      "position": {
+        "page": 0,
+        "x": 485.52,
+        "y": 119.012
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part2.6b_total_credit_assigned",
+      "label": "Line 6b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.52,
+        "y": 95.0126
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part2.6c_credit_elected_refundable",
+      "label": "Line 6c. Credit amount to be elected as refundable in future years. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6c. Credit amount to be elected as refundable in future years. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.52,
+        "y": 82.9992
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3814.0.part2.7_credit_carryover_future_years",
+      "label": "Line 7. Credit carryover available for future years. Add lines 6a, 6b, and 6c, subtract the result from line 5",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Credit carryover available for future years. Add lines 6a, 6b, and 6c, subtract the result from line 5",
+      "position": {
+        "page": 0,
+        "x": 485.52,
+        "y": 71.0217
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3814/blank.pdf",
+    "ingestedAt": "2026-11-28T04:33:24.563Z",
+    "totalFields": 119,
+    "skipped": 0,
+    "catalogEntries": 119
+  }
+}

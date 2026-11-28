@@ -1,0 +1,541 @@
+{
+  "form": {
+    "formId": "form-3872",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "California Disaster Relief Request for Postponement of Tax Deadlines"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3872.0.header.names_on_return",
+      "label": "Name(s) as shown on your state tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on your state tax return",
+      "position": {
+        "page": 0,
+        "x": 35.985,
+        "y": 694.003
+      }
+    },
+    {
+      "fieldId": "form-3872.0.header.ca_corporation_number",
+      "label": "California corporation number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "California corporation number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 432.72,
+        "y": 694.003
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3872.0.header.ssn",
+      "label": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 35.9911,
+        "y": 669.998
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3872.0.header.spouse_ssn",
+      "label": "Spouse's/R D P's S S N or I T I N (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Spouse's/R D P's S S N or I T I N (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 238.242,
+        "y": 669.998
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3872.0.header.fein",
+      "label": "Federal Employer Identification Number (F E I N) (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Federal Employer Identification Number (F E I N) (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 432.713,
+        "y": 669.998
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3872.0.header.additional_information",
+      "label": "Additional information. See instructions.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Additional information. See instructions",
+      "position": {
+        "page": 0,
+        "x": 36.0034,
+        "y": 646.002
+      }
+    },
+    {
+      "fieldId": "form-3872.0.header.ca_sos_file_number",
+      "label": "California Secretary of State file number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "California Secretary of State file number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 432.723,
+        "y": 646.002
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3872.0.header.street_address",
+      "label": "Street address (suite/room number).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Street address (suite/room number)",
+      "position": {
+        "page": 0,
+        "x": 35.9911,
+        "y": 622
+      }
+    },
+    {
+      "fieldId": "form-3872.0.header.private_mailbox",
+      "label": "PMB number.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "PMB number",
+      "position": {
+        "page": 0,
+        "x": 432.723,
+        "y": 621.99
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-3872.0.header.city",
+      "label": "City (If you have a foreign address, see instructions.).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "City (If you have a foreign address, see instructions.)",
+      "position": {
+        "page": 0,
+        "x": 36.0034,
+        "y": 598.009
+      }
+    },
+    {
+      "fieldId": "form-3872.0.header.state",
+      "label": "2 letter state abbreviation.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "2 letter state abbreviation",
+      "position": {
+        "page": 0,
+        "x": 403.322,
+        "y": 598.009
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3872.0.header.zip",
+      "label": "ZIP code, maximum 9 digits.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "ZIP code, maximum 9 digits",
+      "position": {
+        "page": 0,
+        "x": 432.723,
+        "y": 598.009
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3872.0.header.foreign_country_name",
+      "label": "Foreign country name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Foreign country name",
+      "position": {
+        "page": 0,
+        "x": 35.9952,
+        "y": 574.358
+      }
+    },
+    {
+      "fieldId": "form-3872.0.header.foreign_province_state_county",
+      "label": "Foreign province/2 letter state abbreviation/county.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Foreign province/2 letter state abbreviation/county",
+      "position": {
+        "page": 0,
+        "x": 258.829,
+        "y": 574.358
+      }
+    },
+    {
+      "fieldId": "form-3872.0.header.foreign_postal_code",
+      "label": "Foreign postal code.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Foreign postal code",
+      "position": {
+        "page": 0,
+        "x": 432.733,
+        "y": 574.358
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3872.0.part1.1_disaster_name_fema_number",
+      "label": "Part I, Line 1. Disaster name and/or Federal Emergency Management Agency (F E M A) number.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Line 1. Disaster name and/or Federal Emergency Management Agency (F E M A) number",
+      "position": {
+        "page": 0,
+        "x": 216.049,
+        "y": 523.075
+      }
+    },
+    {
+      "fieldId": "form-3872.0.part1.2_date_of_disaster",
+      "label": "Line 2. Date of disaster (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Date of disaster (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 216.064,
+        "y": 497.071
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3872.0.part1.3_location_of_disaster",
+      "label": "Line 3. Location of the disaster (address, city, county, 2 letter state abbreviation, and ZIP code, maximum 9 digits).",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Location of the disaster (address, city, county, 2 letter state abbreviation, and ZIP code, maximum 9 digits)",
+      "position": {
+        "page": 0,
+        "x": 216.051,
+        "y": 461.066
+      }
+    },
+    {
+      "fieldId": "form-3872.0.part2.1a_fema_approval_letter",
+      "label": "Part II, Line 1. Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above. See instructions. Check all that apply: F E M A assistance approval letter.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Part II Line 1 Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above See instructions Check all that apply F E M A assistance approval letter",
+      "position": {
+        "page": 0,
+        "x": 61.971,
+        "y": 388.86
+      }
+    },
+    {
+      "fieldId": "form-3872.0.part2.1e_sba_loan_award_letter",
+      "label": "Part II, Line 1. Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above. See instructions. Check all that apply: Small Business Administration disaster loan program award letter.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Part II Line 1 Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above See instructions Check all that apply Small Business Administration disaster loan program award letter",
+      "position": {
+        "page": 0,
+        "x": 321.145,
+        "y": 388.877
+      }
+    },
+    {
+      "fieldId": "form-3872.0.part2.1b_insurance_claim",
+      "label": "Part II, Line 1. Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above. See instructions. Check all that apply: Insurance claim.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Part II Line 1 Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above See instructions Check all that apply: Insurance claim",
+      "position": {
+        "page": 0,
+        "x": 61.971,
+        "y": 366.705
+      }
+    },
+    {
+      "fieldId": "form-3872.0.part2.1f_law_enforcement_report",
+      "label": "Part II, Line 1. Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above. See instructions. Check all that apply: Law enforcement report.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Part II Line 1 Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above See instructions Check all that apply Law enforcement report",
+      "position": {
+        "page": 0,
+        "x": 321.145,
+        "y": 366.714
+      }
+    },
+    {
+      "fieldId": "form-3872.0.part2.1c_relief_assistance_verification",
+      "label": "Part II, Line 1. Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above. See instructions. Check all that apply: Disaster relief assistance verification.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Part II Line 1 Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above See instructions Check all that apply Disaster relief assistance verification",
+      "position": {
+        "page": 0,
+        "x": 61.971,
+        "y": 344.566
+      }
+    },
+    {
+      "fieldId": "form-3872.0.part2.1g_other_documentation",
+      "label": "Part II, Line 1. Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above. See instructions. Check all that apply: Other (provide explanation below).",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Part II Line 1 Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above See instructions Check all that apply Other (provide explanation below)",
+      "position": {
+        "page": 0,
+        "x": 321.145,
+        "y": 344.558
+      }
+    },
+    {
+      "fieldId": "form-3872.0.part2.1d_records_in_disaster_area",
+      "label": "Part II, Line 1. Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above. See instructions. Check all that apply: Evidence that records were maintained in the disaster area.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Part II Line 1 Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above See instructions Check all that apply Evidence that records were maintained in the disaster area",
+      "position": {
+        "page": 0,
+        "x": 61.971,
+        "y": 322.394
+      }
+    },
+    {
+      "fieldId": "form-3872.0.part2.2_relief_entitlement_explanation",
+      "label": "Line 2. Explain why you are entitled to relief under Revenue and Taxation Code Section 18572.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Explain why you are entitled to relief under Revenue and Taxation Code Section 18572",
+      "position": {
+        "page": 0,
+        "x": 50.1432,
+        "y": 259.092
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-3872.0.signing.taxpayer_date_signed",
+      "label": "Your signature Date (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Your signature Date (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 396.62,
+        "y": 138.099
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3872.0.signing.taxpayer_phone",
+      "label": "Your Telephone.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "phone",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Your Telephone",
+      "position": {
+        "page": 0,
+        "x": 470.532,
+        "y": 138.099
+      }
+    },
+    {
+      "fieldId": "form-3872.0.signing.spouse_date_signed",
+      "label": "Spouse's/RDP's signature (if filing jointly, both must sign) Date (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Spouse's/RDP's signature (if filing jointly, both must sign) Date (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 396.628,
+        "y": 114.219
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3872.0.signing.spouse_phone",
+      "label": "Spouse's/RDP's Telephone.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "phone",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Spouse's/RDP's Telephone",
+      "position": {
+        "page": 0,
+        "x": 470.526,
+        "y": 114.219
+      }
+    },
+    {
+      "fieldId": "form-3872.0.signing.representative_title",
+      "label": "Title.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Title",
+      "position": {
+        "page": 0,
+        "x": 340.11,
+        "y": 90.231
+      }
+    },
+    {
+      "fieldId": "form-3872.0.signing.representative_date_signed",
+      "label": "Signature of owner, officer, or representative Date (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Signature of owner, officer, or representative Date (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 470.526,
+        "y": 90.231
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3872.0.signing.firm_name",
+      "label": "Firm's name.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Firm's name",
+      "position": {
+        "page": 0,
+        "x": 105.112,
+        "y": 66.2179
+      }
+    },
+    {
+      "fieldId": "form-3872.0.signing.firm_address",
+      "label": "Firm's address.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Firm's address",
+      "position": {
+        "page": 0,
+        "x": 340.113,
+        "y": 66.2179
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3872/blank.pdf",
+    "ingestedAt": "2026-11-28T04:34:41.193Z",
+    "totalFields": 34,
+    "skipped": 0,
+    "catalogEntries": 34
+  }
+}

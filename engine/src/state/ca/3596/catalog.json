@@ -1,0 +1,587 @@
+{
+  "form": {
+    "formId": "form-3596",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "Paid Preparer's Due Diligence Checklist for California Earned Income Tax Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3596.0.header.taxpayer_name",
+      "label": "Name(s) as shown on tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on tax return",
+      "position": {
+        "page": 0,
+        "x": 36.4998,
+        "y": 679.07
+      }
+    },
+    {
+      "fieldId": "form-3596.0.header.taxpayer_ssn",
+      "label": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 466.981,
+        "y": 679.07
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3596.0.line.1a_preparer_name",
+      "label": "Part I, Line 1a. Preparer's name.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Line 1a. Preparer's name",
+      "position": {
+        "page": 0,
+        "x": 468.491,
+        "y": 637.492
+      }
+    },
+    {
+      "fieldId": "form-3596.0.line.1b_preparer_ptin",
+      "label": "Line 1b. Preparer's P T I N (9 digits).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1b. Preparer's P T I N (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 468.491,
+        "y": 612.48
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3596.0.line.1c_preparer_license_type",
+      "label": "Line 1c — Preparer's license, registration, or enrollment type. Check one box",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 1c. Preparer's license, registration, or enrollment type. Check one box",
+      "position": {
+        "page": 0,
+        "x": 61.7956,
+        "y": 569.245
+      },
+      "options": [
+        {
+          "value": "cpa",
+          "radioOption": "C P A.",
+          "label": "CPA"
+        },
+        {
+          "value": "ea",
+          "radioOption": "E A.",
+          "label": "EA"
+        },
+        {
+          "value": "attorney",
+          "radioOption": "Attorney.",
+          "label": "Attorney"
+        },
+        {
+          "value": "ctec",
+          "radioOption": "C T E C.",
+          "label": "CTEC"
+        },
+        {
+          "value": "other",
+          "radioOption": "Other.",
+          "label": "Other (specify)"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.1c_preparer_license_type_other",
+      "label": "Other (specify).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Other (specify)",
+      "position": {
+        "page": 0,
+        "x": 294.491,
+        "y": 567.48
+      }
+    },
+    {
+      "fieldId": "form-3596.0.line.1c_preparer_license_state",
+      "label": "Line 1c. If C P A, Attorney, or Other, enter license, registration, or enrollment state.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1c. If C P A, Attorney, or Other, enter license, registration, or enrollment state",
+      "position": {
+        "page": 0,
+        "x": 468.491,
+        "y": 544.501
+      }
+    },
+    {
+      "fieldId": "form-3596.0.line.1d_preparer_license_number",
+      "label": "Line 1d. Preparer's license, registration, or enrollment number.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1d. Preparer's license, registration, or enrollment number",
+      "position": {
+        "page": 0,
+        "x": 468.491,
+        "y": 522.48
+      }
+    },
+    {
+      "fieldId": "form-3596.0.line.2_completed_ftb_3514",
+      "label": "Line 2 — Did you complete form FTB 3514, California Earned Income Tax Credit, based on current information provided by the taxpayer or reasonably obtained by you?",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 2. Did you complete form F T B 3514, California Earned Income Tax Credit, based on current information provided by the taxpayer or reasonably obtained by you?",
+      "position": {
+        "page": 0,
+        "x": 504.758,
+        "y": 490.221
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.3_completed_eitc_worksheet",
+      "label": "Line 3 — Did you complete the California Earned Income Tax Credit Worksheet found in the form FTB 3514 instructions, or your own worksheet that provides the same information as the form FTB 3514 worksheet?",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 3. Did you complete the California Earned Income Tax Credit Worksheet found in the form F T B 3514 instructions, or your own worksheet that provides the same information as the form F T B 3514 worksheet?",
+      "position": {
+        "page": 0,
+        "x": 504.784,
+        "y": 457.197
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.4_satisfied_knowledge_requirement",
+      "label": "Line 4 — Did you satisfy the knowledge requirement?",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 4. Did you satisfy the knowledge requirement? To meet the knowledge requirement, you must do both of the following: Interview the taxpayer, ask questions, and contemporaneously document the taxpayer's responses to determine that the taxpayer is eligible to claim the California Earned Income Tax Credit (E I T C). Review information to determine that the taxpayer is eligible to claim the credit and for what amount",
+      "position": {
+        "page": 0,
+        "x": 504.782,
+        "y": 401.214
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.5_information_appeared_incorrect",
+      "label": "Line 5 — Did any information provided by the taxpayer, a third party, or reasonably known to you, in connection with preparing form FTB 3514, appear to be incorrect, incomplete, or inconsistent?",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 5. Did any information provided by the taxpayer, a third party, or reasonably known to you, in connection with preparing form F T B 3514, appear to be incorrect, incomplete, or inconsistent? (If \"Yes,\" answer questions 5a and 5b. If \"No,\" go to question 6.)",
+      "position": {
+        "page": 0,
+        "x": 504.758,
+        "y": 358.223
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.5a_made_reasonable_inquiries",
+      "label": "Line 5a — Did you make reasonable inquiries to determine the correct, complete, and consistent information?",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 5a. Did you make reasonable inquiries to determine the correct, complete, and consistent information?",
+      "position": {
+        "page": 0,
+        "x": 504.758,
+        "y": 339.202
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.5b_documented_inquiries",
+      "label": "Line 5b — Did you contemporaneously document your inquiries?",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 5b. Did you contemporaneously document your inquiries? (Documentation should include the questions you asked, whom you asked, when you asked, the information that was provided, and the impact the information had on your preparation of form F T B 3514)",
+      "position": {
+        "page": 0,
+        "x": 504.758,
+        "y": 294.223
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.6_satisfied_record_retention",
+      "label": "Line 6 — Did you satisfy the record retention requirement?",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 6. Did you satisfy the record retention requirement? To meet the record retention requirement, you must keep a copy of your documentation referenced in question 5b, a copy of this form, a copy of applicable worksheets, a record of how, when, and from whom the information used to prepare form F T B 3514 and worksheet(s) was obtained, and a copy of any document(s) provided by the taxpayer that you relied on to determine eligibility for or to figure the amount for the credit",
+      "position": {
+        "page": 0,
+        "x": 504.758,
+        "y": 225.234
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.6_documents_relied_on_1",
+      "label": "Line 6. List those documents provided by the taxpayer, if any, that you relied on (1).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. List those documents provided by the taxpayer, if any, that you relied on (1)",
+      "position": {
+        "page": 0,
+        "x": 57,
+        "y": 191.568
+      }
+    },
+    {
+      "fieldId": "form-3596.0.line.6_documents_relied_on_2",
+      "label": "Line 6. List those documents provided by the taxpayer, if any, that you relied on (2).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. List those documents provided by the taxpayer, if any, that you relied on (2)",
+      "position": {
+        "page": 0,
+        "x": 57,
+        "y": 176.55
+      }
+    },
+    {
+      "fieldId": "form-3596.0.line.6_documents_relied_on_3",
+      "label": "Line 6. List those documents provided by the taxpayer, if any, that you relied on (3).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. List those documents provided by the taxpayer, if any, that you relied on (3)",
+      "position": {
+        "page": 0,
+        "x": 57,
+        "y": 161.568
+      }
+    },
+    {
+      "fieldId": "form-3596.0.line.6_documents_relied_on_4",
+      "label": "Line 6. List those documents provided by the taxpayer, if any, that you relied on (4).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. List those documents provided by the taxpayer, if any, that you relied on (4)",
+      "position": {
+        "page": 0,
+        "x": 57,
+        "y": 146.558
+      }
+    },
+    {
+      "fieldId": "form-3596.0.line.7_asked_for_substantiation",
+      "label": "Line 7 — Did you ask the taxpayer whether he/she could provide documentation to substantiate eligibility for and the amount of the EITC claimed on the return if his/her return is selected for audit?",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 7. Did you ask the taxpayer whether he/she could provide documentation to substantiate eligibility for and the amount of the E I T C claimed on the return if his/her return is selected for audit?",
+      "position": {
+        "page": 0,
+        "x": 504.79,
+        "y": 114.236
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.8_asked_self_employment_questions",
+      "label": "Line 8 — If the taxpayer is reporting self-employment income, did you ask questions to prepare a complete and correct federal Form 1040, Form 1040-SR, Schedule C, Schedule F, or Schedule SE?",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 8. If the taxpayer is reporting self-employment income, did you ask questions to prepare a complete and correct federal Form 1040, Form 1040-S R, Schedule C, Schedule F, or Schedule S E?",
+      "position": {
+        "page": 0,
+        "x": 504.77,
+        "y": 81.2008
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        },
+        {
+          "value": "not_applicable",
+          "radioOption": "N/A.",
+          "label": "N/A"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.1.line.9a_eligible_for_children_claimed",
+      "label": "Line 9a — Have you determined that the taxpayer is eligible to claim the EITC for the number of qualifying children claimed, or is eligible to claim the EITC without a qualifying child?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Part II, Line 9a. Have you determined that the taxpayer is eligible to claim the E I T C for the number of qualifying children claimed, or is eligible to claim the E I T C without a qualifying child? (If the taxpayer is claiming the E I T C and does not have a qualifying child, skip questions 9b and 9c and go to Part III)",
+      "position": {
+        "page": 1,
+        "x": 504.712,
+        "y": 671.28
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.1.line.9b_asked_child_residency",
+      "label": "Line 9b — Did you ask the taxpayer if the child lived with the taxpayer for over half of the year, even if the taxpayer has supported the child the entire year?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 9b. Did you ask the taxpayer if the child lived with the taxpayer for over half of the year, even if the taxpayer has supported the child the entire year?",
+      "position": {
+        "page": 1,
+        "x": 504.72,
+        "y": 638.3
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.1.line.9c_explained_tiebreaker_rules",
+      "label": "Line 9c — Did you explain to the taxpayer the rules about claiming the EITC when a child is the qualifying child of more than one person (tiebreaker rules)?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 9c. Did you explain to the taxpayer the rules about claiming the E I T C when a child is the qualifying child of more than one person (tiebreaker rules)?",
+      "position": {
+        "page": 1,
+        "x": 504.769,
+        "y": 605.301
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        },
+        {
+          "value": "not_applicable",
+          "radioOption": "N/A.",
+          "label": "N/A"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.1.line.10_certify_answers_true",
+      "label": "Line 10 — Do you certify that all of the answers on form FTB 3596 are, to the best of your knowledge, true, correct, and complete?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Part III, Line 10. Do you certify that all of the answers on form F T B 3596 are, to the best of your knowledge, true, correct, and complete?",
+      "position": {
+        "page": 1,
+        "x": 504.788,
+        "y": 355.282
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3596/blank.pdf",
+    "ingestedAt": "2026-11-28T04:31:50.597Z",
+    "totalFields": 25,
+    "skipped": 0,
+    "catalogEntries": 25
+  }
+}

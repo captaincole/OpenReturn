@@ -106,6 +106,20 @@ export const NOT_RETURN_FORMS: string[] = [
   "Form 8827",
   "Form 8915-E",
   "Schedule I",
+  /* Named by Form 540 2EZ and Schedule R (California). */
+  "Form 1040-SR",
+  "Form 1099-INT",
+  "Form 565",
+  "Form 568",
+  "Schedule K",
+  "FTB 2424",
+  /* The sub-schedules printed inside Schedule R (California), not forms of their own. */
+  "Schedule R-1",
+  "Schedule R-2",
+  "Schedule R-3",
+  "Schedule R-4",
+  "Schedule R-5",
+  "Schedule R-6",
 ];
 
 const FORM_WORDS = ["Form", "Schedule", "FTB"];
