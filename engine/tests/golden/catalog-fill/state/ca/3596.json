@@ -1,0 +1,231 @@
+{
+  "formId": "form-3596",
+  "fieldCount": 25,
+  "entries": [
+    {
+      "fieldId": "form-3596.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on tax return",
+          "text": "T-11KYY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.header.taxpayer_ssn",
+      "widgets": [
+        {
+          "widgetName": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits)",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.1a_preparer_name",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line 1a. Preparer's name",
+          "text": "T-1T3UX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.1b_preparer_ptin",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. Preparer's P T I N (9 digits)",
+          "text": "T-Z80B1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.1c_preparer_license_state",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. If C P A, Attorney, or Other, enter license, registration, or enrollment state",
+          "text": "T-2OC7P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.1c_preparer_license_type",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. Preparer's license, registration, or enrollment type. Check one box",
+          "text": "C P A."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.1c_preparer_license_type_other",
+      "widgets": [
+        {
+          "widgetName": "Other (specify)",
+          "text": "T-DGDMM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.1d_preparer_license_number",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. Preparer's license, registration, or enrollment number",
+          "text": "T-1A5KS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.2_completed_ftb_3514",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Did you complete form F T B 3514, California Earned Income Tax Credit, based on current information provided by the taxpayer or reasonably obtained by you?",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.3_completed_eitc_worksheet",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Did you complete the California Earned Income Tax Credit Worksheet found in the form F T B 3514 instructions, or your own worksheet that provides the same information as the form F T B 3514 worksheet?",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.4_satisfied_knowledge_requirement",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Did you satisfy the knowledge requirement? To meet the knowledge requirement, you must do both of the following: Interview the taxpayer, ask questions, and contemporaneously document the taxpayer's responses to determine that the taxpayer is eligible to claim the California Earned Income Tax Credit (E I T C). Review information to determine that the taxpayer is eligible to claim the credit and for what amount",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.5_information_appeared_incorrect",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Did any information provided by the taxpayer, a third party, or reasonably known to you, in connection with preparing form F T B 3514, appear to be incorrect, incomplete, or inconsistent? (If \"Yes,\" answer questions 5a and 5b. If \"No,\" go to question 6.)",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.5a_made_reasonable_inquiries",
+      "widgets": [
+        {
+          "widgetName": "Line 5a. Did you make reasonable inquiries to determine the correct, complete, and consistent information?",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.5b_documented_inquiries",
+      "widgets": [
+        {
+          "widgetName": "Line 5b. Did you contemporaneously document your inquiries? (Documentation should include the questions you asked, whom you asked, when you asked, the information that was provided, and the impact the information had on your preparation of form F T B 3514)",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.6_documents_relied_on_1",
+      "widgets": [
+        {
+          "widgetName": "Line 6. List those documents provided by the taxpayer, if any, that you relied on (1)",
+          "text": "T-1QGHD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.6_documents_relied_on_2",
+      "widgets": [
+        {
+          "widgetName": "Line 6. List those documents provided by the taxpayer, if any, that you relied on (2)",
+          "text": "T-119M1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.6_documents_relied_on_3",
+      "widgets": [
+        {
+          "widgetName": "Line 6. List those documents provided by the taxpayer, if any, that you relied on (3)",
+          "text": "T-IZT6F"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.6_documents_relied_on_4",
+      "widgets": [
+        {
+          "widgetName": "Line 6. List those documents provided by the taxpayer, if any, that you relied on (4)",
+          "text": "T-1TG8B"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.6_satisfied_record_retention",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Did you satisfy the record retention requirement? To meet the record retention requirement, you must keep a copy of your documentation referenced in question 5b, a copy of this form, a copy of applicable worksheets, a record of how, when, and from whom the information used to prepare form F T B 3514 and worksheet(s) was obtained, and a copy of any document(s) provided by the taxpayer that you relied on to determine eligibility for or to figure the amount for the credit",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.7_asked_for_substantiation",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Did you ask the taxpayer whether he/she could provide documentation to substantiate eligibility for and the amount of the E I T C claimed on the return if his/her return is selected for audit?",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.0.line.8_asked_self_employment_questions",
+      "widgets": [
+        {
+          "widgetName": "Line 8. If the taxpayer is reporting self-employment income, did you ask questions to prepare a complete and correct federal Form 1040, Form 1040-S R, Schedule C, Schedule F, or Schedule S E?",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.1.line.10_certify_answers_true",
+      "widgets": [
+        {
+          "widgetName": "Part III, Line 10. Do you certify that all of the answers on form F T B 3596 are, to the best of your knowledge, true, correct, and complete?",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.1.line.9a_eligible_for_children_claimed",
+      "widgets": [
+        {
+          "widgetName": "Part II, Line 9a. Have you determined that the taxpayer is eligible to claim the E I T C for the number of qualifying children claimed, or is eligible to claim the E I T C without a qualifying child? (If the taxpayer is claiming the E I T C and does not have a qualifying child, skip questions 9b and 9c and go to Part III)",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.1.line.9b_asked_child_residency",
+      "widgets": [
+        {
+          "widgetName": "Line 9b. Did you ask the taxpayer if the child lived with the taxpayer for over half of the year, even if the taxpayer has supported the child the entire year?",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3596.1.line.9c_explained_tiebreaker_rules",
+      "widgets": [
+        {
+          "widgetName": "Line 9c. Did you explain to the taxpayer the rules about claiming the E I T C when a child is the qualifying child of more than one person (tiebreaker rules)?",
+          "text": "Yes."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,717 @@
+{
+  "form": {
+    "formId": "form-3554",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "New Employment Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3554.0.header.id_number_type",
+      "label": "Type of identification number: SSN or ITIN, CA Corporation no., or FEIN",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Select Entity type (1)",
+      "position": {
+        "page": 0,
+        "x": 412.473,
+        "y": 695.177
+      },
+      "options": [
+        {
+          "value": "ssn_or_itin",
+          "radioOption": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N).",
+          "label": "SSN or ITIN"
+        },
+        {
+          "value": "ca_corporation_number",
+          "radioOption": "California Corporation number.",
+          "label": "CA Corporation no."
+        },
+        {
+          "value": "fein",
+          "radioOption": "Federal Employer Identification Number (F E I N).",
+          "label": "FEIN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.header.id_number",
+      "label": "S S N or I T I N, C A Corporation number, F E I N (12 digits) (1).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "S S N or I T I N, C A Corporation number, F E I N (12 digits) (1)",
+      "position": {
+        "page": 0,
+        "x": 409.1,
+        "y": 680.16
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.header.name_on_return",
+      "label": "Name(s) as shown on your California tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on your California tax return",
+      "position": {
+        "page": 0,
+        "x": 37.08,
+        "y": 656.16
+      }
+    },
+    {
+      "fieldId": "form-3554.0.header.sos_file_number",
+      "label": "California Secretary of State (S O S) file number (12 digits) (1).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "California Secretary of State (S O S) file number (12 digits) (1)",
+      "position": {
+        "page": 0,
+        "x": 409.107,
+        "y": 656.16
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.header.generating_id_number_type",
+      "label": "Type of identification number of the taxpayer generating the credit: SSN or ITIN, CA Corporation no., or FEIN",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Select Entity type (2)",
+      "position": {
+        "page": 0,
+        "x": 412.453,
+        "y": 646.278
+      },
+      "options": [
+        {
+          "value": "ssn_or_itin",
+          "radioOption": "S S N or I T I N.",
+          "label": "SSN or ITIN"
+        },
+        {
+          "value": "ca_corporation_number",
+          "radioOption": "C A Corporation number.",
+          "label": "CA Corporation no."
+        },
+        {
+          "value": "fein",
+          "radioOption": "F E I N.",
+          "label": "FEIN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.header.generating_id_number",
+      "label": "S S N or I T I N, C A Corporation number, F E I N (12 digits) (2).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "S S N or I T I N, C A Corporation number, F E I N (12 digits) (2)",
+      "position": {
+        "page": 0,
+        "x": 409.1,
+        "y": 631.3
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.header.generating_taxpayer_name",
+      "label": "Name of taxpayer generating the credit. See instructions.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name of taxpayer generating the credit. See instructions",
+      "position": {
+        "page": 0,
+        "x": 37.08,
+        "y": 607.56
+      }
+    },
+    {
+      "fieldId": "form-3554.0.header.generating_sos_file_number",
+      "label": "California Secretary of State (S O S) file number (12 digits) (2).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "California Secretary of State (S O S) file number (12 digits) (2)",
+      "position": {
+        "page": 0,
+        "x": 409.08,
+        "y": 607.55
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.header.a_tentative_credit_reservation",
+      "label": "Line A — Did the taxpayer receive a tentative credit reservation for all claimed employees? If no, stop.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line A. Did the taxpayer receive a tentative credit reservation for all claimed employees? If no, stop. See instructions",
+      "position": {
+        "page": 0,
+        "x": 505.043,
+        "y": 596.643
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.header.b_semiconductor_airplane_lithium_business",
+      "label": "Line B — Check \"Yes\" if the taxpayer is engaged in semiconductor manufacturing or semiconductor research and development (NAICS code that begins with 3344), electric airplane manufacturing (NAICS code that begins with 3364), or lithium production or manufacturing of lithium batteries (NAICS code 212390, 325180, or 335910). All other businesses, check \"No.\"",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line B. Check \"Yes,\" if the taxpayer is engaged in: Semiconductor manufacturing or semiconductor research and development with a N A I C S code that begins with 3344. Electric airplane manufacturing with a N A I C S Code that begins with 3364. Lithium production or manufacturing of lithium batteries and the N A I C S code of the business is 212390, 325180, or 335910. All other businesses, check \"No.\" See instructions",
+      "position": {
+        "page": 0,
+        "x": 505.064,
+        "y": 542.63
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.header.c_principal_business_activity_code",
+      "label": "Line C. Principal Business Activity (P B A) code of the business.See instructions.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line C. Principal Business Activity (P B A) code of the business.See instructions",
+      "position": {
+        "page": 0,
+        "x": 486.781,
+        "y": 531
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-3554.0.line.section_a_base_year",
+      "label": "Part I, Section A, Enter your base year.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Section A, Enter your base year",
+      "position": {
+        "page": 0,
+        "x": 168.36,
+        "y": 498.168
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-3554.0.line.1_base_full_year_employees",
+      "label": "Line 1. Number of full-time hourly and salaried employees that were employed for the entire taxable year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. Number of full-time hourly and salaried employees that were employed for the entire taxable year",
+      "position": {
+        "page": 0,
+        "x": 486,
+        "y": 462.84
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.2_base_part_year_hourly_employees",
+      "label": "Line 2. Number of full-time hourly employees that were employed for less than 52 weeks during the taxable year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Number of full-time hourly employees that were employed for less than 52 weeks during the taxable year",
+      "position": {
+        "page": 0,
+        "x": 486,
+        "y": 452.839
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.3_base_hourly_hours_worked",
+      "label": "Line 3. Total number of hours worked by employees in line 2 (not to exceed 2,000 hours per employee).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Total number of hours worked by employees in line 2 (not to exceed 2,000 hours per employee)",
+      "position": {
+        "page": 0,
+        "x": 486,
+        "y": 442.824
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.4_base_hourly_equivalents",
+      "label": "Line 4. Divide line 3 by 2000. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Divide line 3 by 2000. See instructions",
+      "position": {
+        "page": 0,
+        "x": 486.002,
+        "y": 433.039
+      }
+    },
+    {
+      "fieldId": "form-3554.0.line.5_base_part_year_salaried_employees",
+      "label": "Line 5. Number of full-time salaried employees that were employed for less than 52 weeks during the taxable year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Number of full-time salaried employees that were employed for less than 52 weeks during the taxable year",
+      "position": {
+        "page": 0,
+        "x": 486.066,
+        "y": 423.068
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.6_base_salaried_weeks_worked",
+      "label": "Line 6. Total number of weeks worked by employees in line 5.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Total number of weeks worked by employees in line 5",
+      "position": {
+        "page": 0,
+        "x": 485.997,
+        "y": 413.047
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.7_base_salaried_equivalents",
+      "label": "Line 7. Divide line 6 by 52. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Divide line 6 by 52. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.995,
+        "y": 403.039
+      }
+    },
+    {
+      "fieldId": "form-3554.0.line.8_base_year_full_time_equivalents",
+      "label": "Line 8. Base year annual full-time equivalents. Add lines 1, 4 and 7. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Base year annual full-time equivalents. Add lines 1, 4 and 7. See instructions",
+      "position": {
+        "page": 0,
+        "x": 486.173,
+        "y": 393.03
+      }
+    },
+    {
+      "fieldId": "form-3554.0.line.9_current_full_year_employees",
+      "label": "Section B, Line 9. Number of full-time hourly and salaried employees that were employed for the entire taxable year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Section B, Line 9. Number of full-time hourly and salaried employees that were employed for the entire taxable year",
+      "position": {
+        "page": 0,
+        "x": 486,
+        "y": 348.919
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.10_current_part_year_hourly_employees",
+      "label": "Line 10. Number of full-time hourly employees that were employed for less than 52 weeks during the taxable year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Number of full-time hourly employees that were employed for less than 52 weeks during the taxable year",
+      "position": {
+        "page": 0,
+        "x": 486,
+        "y": 338.921
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.11_current_hourly_hours_worked",
+      "label": "Line 11. Total number of hours worked by employees in line 10 (not to exceed 2,000 hours per employee).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. Total number of hours worked by employees in line 10 (not to exceed 2,000 hours per employee)",
+      "position": {
+        "page": 0,
+        "x": 486,
+        "y": 328.92
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.12_current_hourly_equivalents",
+      "label": "Line 12. Divide line 11 by 2000. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. Divide line 11 by 2000. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.991,
+        "y": 318.119
+      }
+    },
+    {
+      "fieldId": "form-3554.0.line.13_current_part_year_salaried_employees",
+      "label": "Line 13. Number of full-time salaried employees that were employed for less than 52 weeks during the taxable year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Number of full-time salaried employees that were employed for less than 52 weeks during the taxable year",
+      "position": {
+        "page": 0,
+        "x": 486,
+        "y": 308.117
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.14_current_salaried_weeks_worked",
+      "label": "Line 14. Total number of weeks worked by employees in line 13.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. Total number of weeks worked by employees in line 13",
+      "position": {
+        "page": 0,
+        "x": 486,
+        "y": 298.255
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.15_current_salaried_equivalents",
+      "label": "Line 15. Divide line 14 by 52. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Divide line 14 by 52. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.98,
+        "y": 288.102
+      }
+    },
+    {
+      "fieldId": "form-3554.0.line.16_current_year_full_time_equivalents",
+      "label": "Line 16. Current year annual full-time equivalents. Add lines 9, 12 and 15. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. Current year annual full-time equivalents. Add lines 9, 12 and 15. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.98,
+        "y": 278.11
+      }
+    },
+    {
+      "fieldId": "form-3554.0.line.17_net_increase_full_time_employees",
+      "label": "Part II, Line 17. Net increase in full-time employees. Subtract line 8 from line 16. If the amount on line 17 is zero or less, stop, you do not qualify.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, Line 17. Net increase in full-time employees. Subtract line 8 from line 16. If the amount on line 17 is zero or less, stop, you do not qualify",
+      "position": {
+        "page": 0,
+        "x": 485.99,
+        "y": 239.915
+      }
+    },
+    {
+      "fieldId": "form-3554.0.line.18_total_qualified_full_time_employees",
+      "label": "Line 18. Total qualified full-time employees. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. Total qualified full-time employees. See instructions",
+      "position": {
+        "page": 0,
+        "x": 486,
+        "y": 230.095
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.19_applicable_percentage",
+      "label": "Line 19. Applicable percentage. Divide line 17 by line 18 (not to exceed 1.0000).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. Applicable percentage. Divide line 17 by line 18 (not to exceed 1.0000)",
+      "position": {
+        "page": 0,
+        "x": 486.001,
+        "y": 219.926
+      }
+    },
+    {
+      "fieldId": "form-3554.0.line.20_tentative_credit",
+      "label": "Line 20. Tentative credit.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. Tentative credit",
+      "position": {
+        "page": 0,
+        "x": 345.266,
+        "y": 208.272
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.21_credit_generated",
+      "label": "Line 21. Credit generated. Multiply line 20 by line 19.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 21. Credit generated. Multiply line 20 by line 19",
+      "position": {
+        "page": 0,
+        "x": 486.001,
+        "y": 198.449
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.22_pass_through_credit_k1",
+      "label": "Line 22. Pass-through new employment credit(s) from Schedule K-1 (100S, 541, 565, or 568).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22. Pass-through new employment credit(s) from Schedule K-1 (100S, 541, 565, or 568)",
+      "position": {
+        "page": 0,
+        "x": 486.001,
+        "y": 188.488
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.23_credit_carryover_prior_year",
+      "label": "Line 23. Credit carryover from prior year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. Credit carryover from prior year",
+      "position": {
+        "page": 0,
+        "x": 486.156,
+        "y": 178.496
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.24_total_available_credit",
+      "label": "Line 24. Total available new employment credit. Add line 21, line 22, and line 23.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Total available new employment credit. Add line 21, line 22, and line 23",
+      "position": {
+        "page": 0,
+        "x": 485.991,
+        "y": 168.494
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.25a_credit_claimed",
+      "label": "Line 25a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. (Do not include any assigned credit claimed on form F T B 3544, Part B).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. (Do not include any assigned credit claimed on form F T B 3544, Part B)",
+      "position": {
+        "page": 0,
+        "x": 485.998,
+        "y": 147.436
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.25b_total_credit_assigned",
+      "label": "Line 25b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0",
+      "position": {
+        "page": 0,
+        "x": 486.155,
+        "y": 125.458
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.25c_credit_elected_refundable",
+      "label": "Line 25c. Credit amount to be elected as refundable in future years. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25c. Credit amount to be elected as refundable in future years. See instructions",
+      "position": {
+        "page": 0,
+        "x": 486.018,
+        "y": 115.377
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.26_credit_carryover_future_years",
+      "label": "Line 26. Credit carryover available for future years . Add lines 25a, 25b, and 25c, subtract the result from line 24.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 26. Credit carryover available for future years . Add lines 25a, 25b, and 25c, subtract the result from line 24",
+      "position": {
+        "page": 0,
+        "x": 486.001,
+        "y": 104.271
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3554.0.line.27_credit_recapture",
+      "label": "Part III, Line 27. Credit recapture. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part III, Line 27. Credit recapture. See instructions",
+      "position": {
+        "page": 0,
+        "x": 486.001,
+        "y": 77.0418
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3554/blank.pdf",
+    "ingestedAt": "2026-11-28T04:32:30.081Z",
+    "totalFields": 41,
+    "skipped": 0,
+    "catalogEntries": 41
+  }
+}

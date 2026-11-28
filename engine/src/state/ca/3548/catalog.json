@@ -1,0 +1,334 @@
+{
+  "form": {
+    "formId": "form-3548",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "Disabled Access Credit for Eligible Small Businesses"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3548.0.header.id_number_type",
+      "label": "Type of identification number: SSN or ITIN, CA Corporation number, or FEIN",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Select Entity type",
+      "position": {
+        "page": 0,
+        "x": 424.496,
+        "y": 698.829
+      },
+      "options": [
+        {
+          "value": "ssn_or_itin",
+          "radioOption": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N).",
+          "label": "SSN or ITIN"
+        },
+        {
+          "value": "ca_corporation_number",
+          "radioOption": "California Corporation number.",
+          "label": "CA Corporation number"
+        },
+        {
+          "value": "fein",
+          "radioOption": "Federal Employer Identification Number (F E I N).",
+          "label": "FEIN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3548.0.header.name_on_return",
+      "label": "Name(s) as shown on your California tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on your California tax return",
+      "position": {
+        "page": 0,
+        "x": 35.9836,
+        "y": 677.801
+      }
+    },
+    {
+      "fieldId": "form-3548.0.header.id_number",
+      "label": "S S N or I T I N, CA Corporation number, F E I N (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "S S N or I T I N, CA Corporation number, F E I N (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 422.26,
+        "y": 677.801
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3548.0.header.facility_address",
+      "label": "Address of facility (number and street).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Address of facility (number and street)",
+      "position": {
+        "page": 0,
+        "x": 35.9939,
+        "y": 647.801
+      }
+    },
+    {
+      "fieldId": "form-3548.0.header.sos_file_number",
+      "label": "California Secretary of State file number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "California Secretary of State file number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 422.247,
+        "y": 647.801
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3548.0.header.facility_city",
+      "label": "City.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "City",
+      "position": {
+        "page": 0,
+        "x": 35.9939,
+        "y": 617.801
+      }
+    },
+    {
+      "fieldId": "form-3548.0.header.facility_state",
+      "label": "2 letter state abbreviation.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "2 letter state abbreviation",
+      "position": {
+        "page": 0,
+        "x": 422.267,
+        "y": 617.801
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3548.0.header.facility_zip",
+      "label": "ZIP code, maximum 9 digits.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "ZIP code, maximum 9 digits",
+      "position": {
+        "page": 0,
+        "x": 451.427,
+        "y": 617.801
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3548.0.line.1_eligible_access_expenditures",
+      "label": "Line 1. Eligible access expenditures. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. Eligible access expenditures. See instructions",
+      "position": {
+        "page": 0,
+        "x": 444.004,
+        "y": 603.199
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3548.0.line.3_smaller_of_line_1_or_2",
+      "label": "Line 3. Enter the smaller of line 1 or line 2.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Enter the smaller of line 1 or line 2",
+      "position": {
+        "page": 0,
+        "x": 444.004,
+        "y": 579.199
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3548.0.line.4_current_year_credit",
+      "label": "Line 4. Current year credit. Multiply line 3 by 50% (.50).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Current year credit. Multiply line 3 by 50% (.50)",
+      "position": {
+        "page": 0,
+        "x": 444.004,
+        "y": 567.205
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3548.0.line.5_pass_through_credit_k1",
+      "label": "Line 5. Pass-through Disabled Access Credit(s) from Schedule K-1 (100S, 541, 565, or 568). See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Pass-through Disabled Access Credit(s) from Schedule K-1 (100S, 541, 565, or 568). See instructions",
+      "position": {
+        "page": 0,
+        "x": 444.004,
+        "y": 555.189
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3548.0.line.6_total_current_year_credit",
+      "label": "Line 6. Total current year Disabled Access Credit. Add line 4 and line 5, but do not enter more than $125.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Total current year Disabled Access Credit. Add line 4 and line 5, but do not enter more than $125",
+      "position": {
+        "page": 0,
+        "x": 444.004,
+        "y": 543.189
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3548.0.line.7_credit_carryover_prior_year",
+      "label": "Line 7. Credit carryover from prior year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Credit carryover from prior year",
+      "position": {
+        "page": 0,
+        "x": 444.004,
+        "y": 531.199
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3548.0.line.8_total_available_credit",
+      "label": "Line 8. Total available Disabled Access Credit. Add line 6 and line 7.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Total available Disabled Access Credit. Add line 6 and line 7",
+      "position": {
+        "page": 0,
+        "x": 444.004,
+        "y": 519.199
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3548.0.line.9a_credit_claimed",
+      "label": "Line 9a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. See instructions. (Do not include any assigned credit claimed on form FTB 3544, Part B).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. See instructions. (Do not include any assigned credit claimed on form FTB 3544, Part B)",
+      "position": {
+        "page": 0,
+        "x": 444.004,
+        "y": 495.199
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3548.0.line.9b_total_credit_assigned",
+      "label": "Line 9b. Total credit assigned. Enter the total amount from form FTB 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9b. Total credit assigned. Enter the total amount from form FTB 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions",
+      "position": {
+        "page": 0,
+        "x": 443.994,
+        "y": 471.189
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3548.0.line.9c_credit_elected_refundable",
+      "label": "Line 9c. Credit amount to be elected as refundable in future years. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9c. Credit amount to be elected as refundable in future years. See instructions",
+      "position": {
+        "page": 0,
+        "x": 443.994,
+        "y": 459.209
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3548.0.line.10_credit_carryover_future_years",
+      "label": "Line 10. Credit carryover available for future years. Add lines 9a, 9b, and 9c, subtract the result from line 8.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Credit carryover available for future years. Add lines 9a, 9b, and 9c, subtract the result from line 8",
+      "position": {
+        "page": 0,
+        "x": 444.004,
+        "y": 447.199
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3548/blank.pdf",
+    "ingestedAt": "2026-11-28T04:29:56.274Z",
+    "totalFields": 19,
+    "skipped": 0,
+    "catalogEntries": 19
+  }
+}

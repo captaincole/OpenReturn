@@ -1,0 +1,256 @@
+{
+  "form": {
+    "formId": "form-3547",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "Donated Agricultural Products Transportation Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3547.0.header.id_number_type",
+      "label": "Type of identification number: SSN or ITIN, CA Corporation no., or FEIN",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Select Entity type",
+      "position": {
+        "page": 0,
+        "x": 416.782,
+        "y": 697.442
+      },
+      "options": [
+        {
+          "value": "ssn_or_itin",
+          "radioOption": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N).",
+          "label": "SSN or ITIN"
+        },
+        {
+          "value": "ca_corporation_number",
+          "radioOption": "California Corporation number.",
+          "label": "CA Corporation no."
+        },
+        {
+          "value": "fein",
+          "radioOption": "Federal Employer Identification Number (F E I N).",
+          "label": "FEIN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3547.0.header.id_number",
+      "label": "S S N or I T I N, C A Corporation number, F E I N (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "S S N or I T I N, C A Corporation number, F E I N (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 414.599,
+        "y": 683.53
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3547.0.header.name_on_return",
+      "label": "Name(s) as shown on your California tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on your California tax return",
+      "position": {
+        "page": 0,
+        "x": 35.9782,
+        "y": 659.091
+      }
+    },
+    {
+      "fieldId": "form-3547.0.header.sos_file_number",
+      "label": "California Secretary of State file number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "California Secretary of State file number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 414.596,
+        "y": 659.091
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3547.0.line.1_eligible_transportation_costs",
+      "label": "Line 1. Eligible transportation costs. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. Eligible transportation costs. See instructions",
+      "position": {
+        "page": 0,
+        "x": 439.189,
+        "y": 641.791
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3547.0.line.2_current_year_credit",
+      "label": "Line 2. Current year credit. Multiply line 1 by 50% (.50).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Current year credit. Multiply line 1 by 50% (.50)",
+      "position": {
+        "page": 0,
+        "x": 439.189,
+        "y": 623.77
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3547.0.line.3_pass_through_credit_k1",
+      "label": "Line 3. Pass-through Donated Agricultural Products Transportation Credit(s) from Schedule K-1 (100S, 541, 565, or 568). See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Pass-through Donated Agricultural Products Transportation Credit(s) from Schedule K-1 (100S, 541, 565, or 568). See instructions",
+      "position": {
+        "page": 0,
+        "x": 439.189,
+        "y": 594.086
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3547.0.line.4_total_current_year_credit",
+      "label": "Line 4. Total current year Donated Agricultural Products Transportation Credit. Add line 2 and line 3.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Total current year Donated Agricultural Products Transportation Credit. Add line 2 and line 3",
+      "position": {
+        "page": 0,
+        "x": 439.189,
+        "y": 576.396
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3547.0.line.5_credit_carryover_prior_year",
+      "label": "Line 5. Credit carryover from a prior year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Credit carryover from a prior year",
+      "position": {
+        "page": 0,
+        "x": 439.189,
+        "y": 558.37
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3547.0.line.6_total_available_credit",
+      "label": "Line 6. Total available Donated Agricultural Products Transportation Credit. Add line 4 and line 5.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Total available Donated Agricultural Products Transportation Credit. Add line 4 and line 5",
+      "position": {
+        "page": 0,
+        "x": 439.189,
+        "y": 540.391
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3547.0.line.7a_credit_claimed",
+      "label": "Line 7a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. See instructions. (Do not include any assigned credit claimed on form FTB 3544, Part B).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. See instructions. (Do not include any assigned credit claimed on form FTB 3544, Part B)",
+      "position": {
+        "page": 0,
+        "x": 439.189,
+        "y": 510.382
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3547.0.line.7b_total_credit_assigned",
+      "label": "Line 7b. Total credit assigned. Enter the total amount from form FTB 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7b. Total credit assigned. Enter the total amount from form FTB 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions",
+      "position": {
+        "page": 0,
+        "x": 439.189,
+        "y": 486.372
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3547.0.line.7c_credit_elected_refundable",
+      "label": "Line 7c. Credit amount to be elected as refundable in future years. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7c. Credit amount to be elected as refundable in future years. See instructions",
+      "position": {
+        "page": 0,
+        "x": 439.189,
+        "y": 468.391
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3547.0.line.8_credit_carryover_future_years",
+      "label": "Line 8. Credit carryover available for future years. Add lines 7a, 7b, and line 7c, subtract the result from line 6.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Credit carryover available for future years. Add lines 7a, 7b, and line 7c, subtract the result from line 6",
+      "position": {
+        "page": 0,
+        "x": 439.189,
+        "y": 450.391
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3547/blank.pdf",
+    "ingestedAt": "2026-11-28T04:29:45.915Z",
+    "totalFields": 14,
+    "skipped": 0,
+    "catalogEntries": 14
+  }
+}

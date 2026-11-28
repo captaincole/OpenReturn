@@ -127,32 +127,38 @@
     {
       "name": "Form 3547",
       "title": "Donated Agricultural Products Transportation Credit",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "3547"
     },
     {
       "name": "Form 3548",
       "title": "Disabled Access Credit for Eligible Small Businesses",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3548"
     },
     {
       "name": "Form 3554",
       "title": "New Employment Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3554"
     },
     {
       "name": "Form 3568",
       "title": "Alternative Identifying Information for the Dependent Exemption Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3568"
     },
     {
       "name": "Form 3592",
       "title": "College Access Tax Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3592"
     },
     {
       "name": "Form 3596",
       "title": "Paid Preparer’s Due Diligence Checklist for California Earned Income Tax Credit",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "3596"
     },
     {
       "name": "Form 3800",

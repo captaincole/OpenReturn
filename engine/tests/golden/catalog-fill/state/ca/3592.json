@@ -1,0 +1,168 @@
+{
+  "formId": "form-3592",
+  "fieldCount": 18,
+  "entries": [
+    {
+      "fieldId": "form-3592.0.header.credit_owner_id_number",
+      "widgets": [
+        {
+          "widgetName": "credit owner, S S N or I T I N, C A Corporation number, F E I N (12 digits)",
+          "text": "T-16QMF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3592.0.header.credit_owner_id_number_type",
+      "widgets": [
+        {
+          "widgetName": "credit owner, Select entity type",
+          "text": "C A Corporation number"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3592.0.header.credit_owner_name",
+      "widgets": [
+        {
+          "widgetName": "Name of credit owner",
+          "text": "T-1QQIC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3592.0.header.credit_owner_sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "credit owner, California Secretary of State file number (12 digits)",
+          "text": "T-11R2M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3592.0.header.id_number",
+      "widgets": [
+        {
+          "widgetName": "S S N or I T I N, C A Corporation number, F E I N (12 digits)",
+          "text": "T-OTHK6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3592.0.header.id_number_type",
+      "widgets": [
+        {
+          "widgetName": "Select entity type",
+          "text": "S S N or I T I N."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3592.0.header.name_on_return",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on your California tax return",
+          "text": "T-ZY7DE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3592.0.header.sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "California Secretary of State file number (12 digits)",
+          "text": "T-V5IOJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3592.0.line.1a_credit_issued_by_cefa",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. Credit amount issued by California Educational Facilities Authority (C E F A). See instructions",
+          "text": "2,372"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3592.0.line.1b_credit_certificate_number",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. Credit certificate number",
+          "text": "T-1VI58"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3592.0.line.2_pass_through_credit_k1",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Pass-through College Access Tax Credit from Schedule K-1 (100S, 541, 565, or 568). See instructions",
+          "text": "2,474"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3592.0.line.3_total_current_year_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Total current year credit. Add line 1a and line 2",
+          "text": "8,626"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3592.0.line.4_credit_carryover_prior_year",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Credit carryover from prior year(s)",
+          "text": "8,050"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3592.0.line.5_total_available_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Total available College Access Tax Credit. Add line 3 and line 4",
+          "text": "6,944"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3592.0.line.6a_credit_claimed",
+      "widgets": [
+        {
+          "widgetName": "Line 6a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. See instructions. (Do not include any assigned credit claimed on form F T B 3544, Part B)",
+          "text": "5,938"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3592.0.line.6b_total_credit_assigned",
+      "widgets": [
+        {
+          "widgetName": "Line 6b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions",
+          "text": "3,954"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3592.0.line.6c_credit_elected_refundable",
+      "widgets": [
+        {
+          "widgetName": "Line 6c. Credit amount to be elected as refundable in future years. See instructions",
+          "text": "4,176"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3592.0.line.7_credit_carryover_future_years",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Credit carryover available for future years. Add lines 6a, 6b, and 6c, subtract the result from line 5",
+          "text": "6,229"
+        }
+      ]
+    }
+  ]
+}

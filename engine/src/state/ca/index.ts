@@ -19,6 +19,12 @@ import { register as registerForm3531 } from "./3531/bindings.js";
 import { register as registerForm3532 } from "./3532/bindings.js";
 import { register as registerForm3540 } from "./3540/bindings.js";
 import { register as registerForm3541 } from "./3541/bindings.js";
+import { register as registerForm3547 } from "./3547/bindings.js";
+import { register as registerForm3548 } from "./3548/bindings.js";
+import { register as registerForm3554 } from "./3554/bindings.js";
+import { register as registerForm3568 } from "./3568/bindings.js";
+import { register as registerForm3592 } from "./3592/bindings.js";
+import { register as registerForm3596 } from "./3596/bindings.js";
 import { register as registerForm3800Ca } from "./3800-ca/bindings.js";
 import { register as registerForm3801CR } from "./3801-cr/bindings.js";
 import { register as registerForm3801 } from "./3801/bindings.js";
@@ -66,6 +72,12 @@ import form3531CatalogJson from "./3531/catalog.json";
 import form3532CatalogJson from "./3532/catalog.json";
 import form3540CatalogJson from "./3540/catalog.json";
 import form3541CatalogJson from "./3541/catalog.json";
+import form3547CatalogJson from "./3547/catalog.json";
+import form3548CatalogJson from "./3548/catalog.json";
+import form3554CatalogJson from "./3554/catalog.json";
+import form3568CatalogJson from "./3568/catalog.json";
+import form3592CatalogJson from "./3592/catalog.json";
+import form3596CatalogJson from "./3596/catalog.json";
 import form3800CaCatalogJson from "./3800-ca/catalog.json";
 import form3801CRCatalogJson from "./3801-cr/catalog.json";
 import form3801CatalogJson from "./3801/catalog.json";
@@ -142,6 +154,12 @@ export const CA_CATALOGS = [
   fixtureFileSchema.parse(form3523CatalogJson),
   fixtureFileSchema.parse(form3531CatalogJson),
   fixtureFileSchema.parse(form3540CatalogJson),
+  fixtureFileSchema.parse(form3547CatalogJson),
+  fixtureFileSchema.parse(form3548CatalogJson),
+  fixtureFileSchema.parse(form3554CatalogJson),
+  fixtureFileSchema.parse(form3568CatalogJson),
+  fixtureFileSchema.parse(form3592CatalogJson),
+  fixtureFileSchema.parse(form3596CatalogJson),
 ];
 
 export const CA_FORMS: FormSpec[] = [
@@ -496,5 +514,47 @@ export const CA_FORMS: FormSpec[] = [
     displayName: "FTB 3540",
     relativeDir: "state/ca/3540",
     register: registerForm3540,
+  }),
+  makeFormSpec({
+    formId: "form-3547",
+    shortId: "3547",
+    displayName: "FTB 3547",
+    relativeDir: "state/ca/3547",
+    register: registerForm3547,
+  }),
+  makeFormSpec({
+    formId: "form-3548",
+    shortId: "3548",
+    displayName: "FTB 3548",
+    relativeDir: "state/ca/3548",
+    register: registerForm3548,
+  }),
+  makeFormSpec({
+    formId: "form-3554",
+    shortId: "3554",
+    displayName: "FTB 3554",
+    relativeDir: "state/ca/3554",
+    register: registerForm3554,
+  }),
+  makeFormSpec({
+    formId: "form-3568",
+    shortId: "3568",
+    displayName: "FTB 3568",
+    relativeDir: "state/ca/3568",
+    register: registerForm3568,
+  }),
+  makeFormSpec({
+    formId: "form-3592",
+    shortId: "3592",
+    displayName: "FTB 3592",
+    relativeDir: "state/ca/3592",
+    register: registerForm3592,
+  }),
+  makeFormSpec({
+    formId: "form-3596",
+    shortId: "3596",
+    displayName: "FTB 3596",
+    relativeDir: "state/ca/3596",
+    register: registerForm3596,
   }),
 ];
