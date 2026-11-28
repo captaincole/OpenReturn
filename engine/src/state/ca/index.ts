@@ -6,12 +6,18 @@
 import { fixtureFileSchema } from "../../catalog.js";
 import { makeFormSpec, type FormSpec } from "../../formSpec.js";
 import { register as registerForm3461 } from "./3461/bindings.js";
+import { register as registerForm3503 } from "./3503/bindings.js";
+import { register as registerForm3504 } from "./3504/bindings.js";
 import { register as registerForm3506 } from "./3506/bindings.js";
 import { register as registerForm3507 } from "./3507/bindings.js";
 import { register as registerForm3510 } from "./3510/bindings.js";
 import { register as registerForm3514 } from "./3514/bindings.js";
+import { register as registerForm3521 } from "./3521/bindings.js";
+import { register as registerForm3523 } from "./3523/bindings.js";
 import { register as registerForm3526 } from "./3526/bindings.js";
+import { register as registerForm3531 } from "./3531/bindings.js";
 import { register as registerForm3532 } from "./3532/bindings.js";
+import { register as registerForm3540 } from "./3540/bindings.js";
 import { register as registerForm3541 } from "./3541/bindings.js";
 import { register as registerForm3800Ca } from "./3800-ca/bindings.js";
 import { register as registerForm3801CR } from "./3801-cr/bindings.js";
@@ -47,12 +53,18 @@ import { register as registerScheduleS } from "./schedule-s/bindings.js";
 import { register as registerScheduleX } from "./schedule-x/bindings.js";
 
 import form3461CatalogJson from "./3461/catalog.json";
+import form3503CatalogJson from "./3503/catalog.json";
+import form3504CatalogJson from "./3504/catalog.json";
 import form3506CatalogJson from "./3506/catalog.json";
 import form3507CatalogJson from "./3507/catalog.json";
 import form3510CatalogJson from "./3510/catalog.json";
 import form3514CatalogJson from "./3514/catalog.json";
+import form3521CatalogJson from "./3521/catalog.json";
+import form3523CatalogJson from "./3523/catalog.json";
 import form3526CatalogJson from "./3526/catalog.json";
+import form3531CatalogJson from "./3531/catalog.json";
 import form3532CatalogJson from "./3532/catalog.json";
+import form3540CatalogJson from "./3540/catalog.json";
 import form3541CatalogJson from "./3541/catalog.json";
 import form3800CaCatalogJson from "./3800-ca/catalog.json";
 import form3801CRCatalogJson from "./3801-cr/catalog.json";
@@ -124,6 +136,12 @@ export const CA_CATALOGS = [
   fixtureFileSchema.parse(scheduleD1CatalogJson),
   fixtureFileSchema.parse(scheduleD540NRCatalogJson),
   fixtureFileSchema.parse(scheduleP540NRCatalogJson),
+  fixtureFileSchema.parse(form3503CatalogJson),
+  fixtureFileSchema.parse(form3504CatalogJson),
+  fixtureFileSchema.parse(form3521CatalogJson),
+  fixtureFileSchema.parse(form3523CatalogJson),
+  fixtureFileSchema.parse(form3531CatalogJson),
+  fixtureFileSchema.parse(form3540CatalogJson),
 ];
 
 export const CA_FORMS: FormSpec[] = [
@@ -436,5 +454,47 @@ export const CA_FORMS: FormSpec[] = [
     displayName: "Schedule P (540NR)",
     relativeDir: "state/ca/schedule-p-540nr",
     register: registerScheduleP540NR,
+  }),
+  makeFormSpec({
+    formId: "form-3503",
+    shortId: "3503",
+    displayName: "FTB 3503",
+    relativeDir: "state/ca/3503",
+    register: registerForm3503,
+  }),
+  makeFormSpec({
+    formId: "form-3504",
+    shortId: "3504",
+    displayName: "FTB 3504",
+    relativeDir: "state/ca/3504",
+    register: registerForm3504,
+  }),
+  makeFormSpec({
+    formId: "form-3521",
+    shortId: "3521",
+    displayName: "FTB 3521",
+    relativeDir: "state/ca/3521",
+    register: registerForm3521,
+  }),
+  makeFormSpec({
+    formId: "form-3523",
+    shortId: "3523",
+    displayName: "FTB 3523",
+    relativeDir: "state/ca/3523",
+    register: registerForm3523,
+  }),
+  makeFormSpec({
+    formId: "form-3531",
+    shortId: "3531",
+    displayName: "FTB 3531",
+    relativeDir: "state/ca/3531",
+    register: registerForm3531,
+  }),
+  makeFormSpec({
+    formId: "form-3540",
+    shortId: "3540",
+    displayName: "FTB 3540",
+    relativeDir: "state/ca/3540",
+    register: registerForm3540,
   }),
 ];

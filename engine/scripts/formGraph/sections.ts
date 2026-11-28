@@ -70,6 +70,7 @@ const FORM_SECTIONS: Record<Exclude<Section, "other">, string[]> = {
     "form-172",
     "form-8958",
     "form-8833",
+    "form-3504",
   ],
   deductions: [
     "schedule-a",
@@ -185,6 +186,11 @@ const FORM_SECTIONS: Record<Exclude<Section, "other">, string[]> = {
     "form-8933-schedule-d",
     "form-8933-schedule-e",
     "form-8933-schedule-f",
+    "form-3540",
+    "form-3531",
+    "form-3523",
+    "form-3521",
+    "form-3503",
   ],
   /* Payments and penalties. */
   payments: ["form-5805", "form-2210", "form-2210-f", "form-8888", "form-5805f", "form-8379"],

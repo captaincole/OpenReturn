@@ -1,0 +1,411 @@
+{
+  "formId": "form-3540",
+  "fieldCount": 45,
+  "entries": [
+    {
+      "fieldId": "form-3540.0.header.id_number",
+      "widgets": [
+        {
+          "widgetName": "S S N or I T I N, CA Corporation number, F E I N (12 digits)",
+          "text": "T-FGXXG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.header.id_number_type",
+      "widgets": [
+        {
+          "widgetName": "Select Entity type",
+          "text": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N)."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.header.name_on_return",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on your California tax return",
+          "text": "T-1ROC6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.header.sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "California Secretary of State file number (12 digits)",
+          "text": "T-182J4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1a_carryover_from_prior_years_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (c) Credit carryover available from prior years",
+          "text": "4,066"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1a_carryover_to_future_years_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (g) Credit carryover to future years",
+          "text": "8,735"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1a_carryover_used_this_year_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (d) Credit carryover used this year",
+          "text": "9,117"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1a_credit_assigned_this_year_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (e) Total credit assigned this year",
+          "text": "7,566"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1a_credit_code_col_a",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line 1a. (a) Code",
+          "text": "T-107E5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1a_elected_refundable_future_years_col_f",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (f) Credit amount to be elected as refundable in future years",
+          "text": "5,674"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1a_repealed_credit_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (b) Name of repealed credit",
+          "text": "T-1MBAA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1b_carryover_from_prior_years_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (c) Credit carryover available from prior years",
+          "text": "9,960"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1b_carryover_to_future_years_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (g) Credit carryover to future years",
+          "text": "8,119"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1b_carryover_used_this_year_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (d) Credit carryover used this year",
+          "text": "9,714"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1b_credit_assigned_this_year_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (e) Total credit assigned this year",
+          "text": "3,946"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1b_credit_code_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (a) Code",
+          "text": "T-15T7X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1b_elected_refundable_future_years_col_f",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (f) Credit amount to be elected as refundable in future years",
+          "text": "9,039"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1b_repealed_credit_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (b) Name of repealed credit",
+          "text": "T-JGLJQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1c_carryover_from_prior_years_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (c) Credit carryover available from prior years",
+          "text": "7,840"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1c_carryover_to_future_years_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (g) Credit carryover to future years",
+          "text": "1,084"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1c_carryover_used_this_year_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (d) Credit carryover used this year",
+          "text": "6,069"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1c_credit_assigned_this_year_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (e) Total credit assigned this year",
+          "text": "6,501"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1c_credit_code_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (a) Code",
+          "text": "T-IVI28"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1c_elected_refundable_future_years_col_f",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (f) Credit amount to be elected as refundable in future years",
+          "text": "4,236"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1c_repealed_credit_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (b) Name of repealed credit",
+          "text": "T-H91UJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1d_carryover_from_prior_years_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (c) Credit carryover available from prior years",
+          "text": "1,308"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1d_carryover_to_future_years_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (g) Credit carryover to future years",
+          "text": "6,938"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1d_carryover_used_this_year_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (d) Credit carryover used this year",
+          "text": "7,851"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1d_credit_assigned_this_year_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (e) Total credit assigned this year",
+          "text": "1,515"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1d_credit_code_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (a) Code",
+          "text": "T-1V095"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1d_elected_refundable_future_years_col_f",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (f) Credit amount to be elected as refundable in future years",
+          "text": "6,493"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1d_repealed_credit_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (b) Name of repealed credit",
+          "text": "T-133W0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1e_carryover_from_prior_years_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (c) Credit carryover available from prior years",
+          "text": "9,932"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1e_carryover_to_future_years_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (g) Credit carryover to future years",
+          "text": "4,665"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1e_carryover_used_this_year_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (d) Credit carryover used this year",
+          "text": "7,890"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1e_credit_assigned_this_year_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (e) Total credit assigned this year",
+          "text": "9,906"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1e_credit_code_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (a) Code",
+          "text": "T-1UELZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1e_elected_refundable_future_years_col_f",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (f) Credit amount to be elected as refundable in future years",
+          "text": "1,231"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.1e_repealed_credit_name_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (b) Name of repealed credit",
+          "text": "T-1430A"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.2a_fwhc_proration_percentage_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 2a. Code 207 Farmworker Housing Credit (F W H C), (b) Proration percentage (Enter 6 digits including decimal)",
+          "text": "TEDWQ2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.2a_fwhc_recapture_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 2a. Code 207 Farmworker Housing Credit (F W H C), (c) Credit recapture amount column (a) multiplied by column (b)",
+          "text": "9,881"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.2a_fwhc_total_claimed_col_a",
+      "widgets": [
+        {
+          "widgetName": "Part II, Line 2a. Code 207 Farmworker Housing Credit (F W H C), (a)Total credit claimed for all years",
+          "text": "6,279"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.2b_environmental_proration_percentage_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 2b. Code 218 Environmental Tax Credit, (b)Proration percentage (Enter 6 digits including decimal)",
+          "text": "TYTPM1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.2b_environmental_recapture_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 2b. Code 218 Environmental Tax Credit, (c) Credit recapture amount column (a) multiplied by column (b)",
+          "text": "6,821"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3540.0.line.2b_environmental_total_claimed_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 2b. Code 218 Environmental Tax Credit, (a) Total credit claimed for all years",
+          "text": "9,807"
+        }
+      ]
+    }
+  ]
+}

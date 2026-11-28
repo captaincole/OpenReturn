@@ -47,12 +47,14 @@
     {
       "name": "Form 3503",
       "title": "Natural Heritage Preservation Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3503"
     },
     {
       "name": "Form 3504",
       "title": "Enrolled Tribal Member Certification",
-      "maxPerReturn": "2"
+      "maxPerReturn": "2",
+      "short": "3504"
     },
     {
       "name": "Form 3506",
@@ -82,12 +84,14 @@
     {
       "name": "Form 3521",
       "title": "Low-Income Housing Credit",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "3521"
     },
     {
       "name": "Form 3523",
       "title": "Research Credit",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "3523"
     },
     {
       "name": "Form 3526",
@@ -99,7 +103,8 @@
     {
       "name": "Form 3531",
       "title": "California Competes Tax Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3531"
     },
     {
       "name": "Form 3532",
@@ -110,7 +115,8 @@
     {
       "name": "Form 3540",
       "title": "Credit Carryover and Recapture Summary",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "3540"
     },
     {
       "name": "Form 3541",

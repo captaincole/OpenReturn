@@ -1,0 +1,537 @@
+{
+  "formId": "form-3531",
+  "fieldCount": 59,
+  "entries": [
+    {
+      "fieldId": "form-3531.0.header.credit_owner_id_number",
+      "widgets": [
+        {
+          "widgetName": "Credit owner, C A Corporation number, F E I N (12 digits)",
+          "text": "T-1TKK7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.header.credit_owner_id_type",
+      "widgets": [
+        {
+          "widgetName": "Credit owner, Select entity type",
+          "text": "C A Corporation number."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.header.credit_owner_name",
+      "widgets": [
+        {
+          "widgetName": "Name of credit owner. See instructions",
+          "text": "T-9I1XL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.header.credit_owner_sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "Credit owner, California Secretary of State file number (12 digits)",
+          "text": "T-UMM9Z"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.header.id_number",
+      "widgets": [
+        {
+          "widgetName": "S S N or I T I N, CA Corporation number, F E I N (12 digits)",
+          "text": "T-3NA2P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.header.id_number_type",
+      "widgets": [
+        {
+          "widgetName": "Select entity type",
+          "text": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N)."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.header.name_on_return",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on your California tax return",
+          "text": "T-F45AD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.header.sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "California Secretary of State file number (12 digits)",
+          "text": "T-D25A8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.10a_credit_recapture",
+      "widgets": [
+        {
+          "widgetName": "Part III, Line 10a. Credit recapture. See instructions",
+          "text": "1,215"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.10b_previously_used_recaptured_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 10b. Amount of previously used recaptured credit. See instructions",
+          "text": "4,016"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row1_agreement_number_col_a",
+      "widgets": [
+        {
+          "widgetName": "Part IV, Line 11. (a) Agreement number (1)",
+          "text": "T-1156Z"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row1_credit_available_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (c) Credit amount available for use (1)",
+          "text": "7,840"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row1_credit_carryover_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (e) Credit carryover (1)",
+          "text": "4,342"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row1_credit_claimed_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (d) Credit claimed (1)",
+          "text": "3,050"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row1_year_credit_earned_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (b) Year credit earned (1)",
+          "text": "2753"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row2_agreement_number_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (a) Agreement number (2)",
+          "text": "T-17MYE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row2_credit_available_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (c) Credit amount available for use (2)",
+          "text": "2,374"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row2_credit_carryover_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (e) Credit carryover (2)",
+          "text": "7,968"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row2_credit_claimed_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (d) Credit claimed (2)",
+          "text": "3,604"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row2_year_credit_earned_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (b) Year credit earned (2)",
+          "text": "3555"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row3_agreement_number_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (a) Agreement number (3)",
+          "text": "T-O92YT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row3_credit_available_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (c) Credit amount available for use (3)",
+          "text": "3,974"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row3_credit_carryover_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (e) Credit carryover (3)",
+          "text": "5,384"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row3_credit_claimed_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (d) Credit claimed (3)",
+          "text": "1,579"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row3_year_credit_earned_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (b) Year credit earned (3)",
+          "text": "4257"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row4_agreement_number_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (a) Agreement number (4)",
+          "text": "T-1G51L"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row4_credit_available_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (c) Credit amount available for use (4)",
+          "text": "9,888"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row4_credit_carryover_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (e) Credit carryover (4)",
+          "text": "3,103"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row4_credit_claimed_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (d) Credit claimed (4)",
+          "text": "4,515"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row4_year_credit_earned_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (b) Year credit earned (4)",
+          "text": "6447"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row5_agreement_number_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (a) Agreement number (5)",
+          "text": "T-U6YRN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row5_credit_available_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (c) Credit amount available for use (5)",
+          "text": "1,331"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row5_credit_carryover_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (e) Credit carryover (5)",
+          "text": "4,528"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row5_credit_claimed_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (d) Credit claimed (5)",
+          "text": "9,712"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row5_year_credit_earned_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (b) Year credit earned (5)",
+          "text": "5509"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row6_agreement_number_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (a) Agreement number (6)",
+          "text": "T-1KLDN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row6_credit_available_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (c) Credit amount available for use (6)",
+          "text": "3,708"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row6_credit_carryover_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (e) Credit carryover (6)",
+          "text": "7,805"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row6_credit_claimed_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (d) Credit claimed (6)",
+          "text": "4,234"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_row6_year_credit_earned_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 11. (b) Year credit earned (6)",
+          "text": "7545"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.11_total_credit_claimed_col_d",
+      "widgets": [
+        {
+          "widgetName": "Total credit claimed",
+          "text": "3,263"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.1a_agreement_number",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line 1a. Agreement number",
+          "text": "T-PQRAB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.1a_credit_earned",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. Credit earned",
+          "text": "8,053"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.1a_milestones_more_than_one_year",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. Does the credit earned in line 1a include the achievement of milestones from more than one year?",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.1b_agreement_number",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. Agreement number",
+          "text": "T-GGA8K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.1b_credit_earned",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. Credit earned",
+          "text": "8,347"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.1b_milestones_more_than_one_year",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. Does the credit earned in line 1b include the achievement of milestones from more than one year?",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.2_total_credit_earned",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Total credit earned in 2025. Add line 1a and line 1b",
+          "text": "2,520"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.3_credit_amount_from_part1",
+      "widgets": [
+        {
+          "widgetName": "Part II, Line 3. Credit amount from Part I, line 2",
+          "text": "8,654"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.4a_pass_through_credit_k1",
+      "widgets": [
+        {
+          "widgetName": "Line 4a. Pass-through California Competes Tax Credit from Schedule K-1 (100S, 541, 565, or 568). See instructions",
+          "text": "4,415"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.4b_pass_through_agreement_number",
+      "widgets": [
+        {
+          "widgetName": "Line 4b. Agreement number for the pass-through California Competes Tax Credit",
+          "text": "T-6PATJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.5a_current_year_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 5a. Current year credit. Add line 3 and line 4a. See instructions",
+          "text": "9,680"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.5b_s_corporation_one_third",
+      "widgets": [
+        {
+          "widgetName": "Line 5b. S Corporations enter one-third of the amount of line 5a. See instructions",
+          "text": "8,348"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.6_credit_carryover_prior_year",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Credit carryover from prior year(s). See instructions",
+          "text": "3,590"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.7_total_available_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Total available California Competes Tax Credit. Add line 5a and line 6. S corporations, see instructions",
+          "text": "1,064"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.8a_credit_claimed",
+      "widgets": [
+        {
+          "widgetName": "Line 8a. Credit claimed. Enter the amount of the credit claimed from Part IV, line 11, column (d) on this form. See instructions. (Do not include any assigned credit claimed on form F T B 3544, Part B.)",
+          "text": "6,812"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.8b_total_credit_assigned",
+      "widgets": [
+        {
+          "widgetName": "Line 8b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions",
+          "text": "6,040"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.8c_credit_elected_refundable",
+      "widgets": [
+        {
+          "widgetName": "Line 8c. Credit amount to be elected as refundable in future years. See instructions",
+          "text": "6,631"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3531.0.line.9_credit_carryover_future_years",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Credit carryover available for future years. Add lines 8a, 8b, and 8c, subtract the result from line 7",
+          "text": "3,512"
+        }
+      ]
+    }
+  ]
+}
