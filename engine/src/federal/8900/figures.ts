@@ -58,7 +58,7 @@ const CAPITALIZED_TOO_MUCH = (capitalized: number, line1: number) =>
   `The capitalized expenditures ($${capitalized}) are more than line 1 ($${line1}), of which they are a part (irs-8900-inst-2025::sec::adjustments-to-basis::b01).`;
 
 const SEVERAL_ASSETS =
-  "The expenditures are capitalized in more than one asset, and the instructions do not say how the credit is split among them: each asset's reduction is only limited to the amount capitalized for it (irs-8900-inst-2025::sec::adjustments-to-basis::b01).";
+  "The expenditures are capitalized in more than one asset: the reduction is allocated among them in proportion to the unadjusted basis of each asset (cfr-26-2025::sec::s1.45g-1::e-2-p2), and the engine does not split it.";
 
 const AMORTIZED = (name: string) =>
   `The expenditures are capitalized in the intangible asset "${name}", whose basis the credit lowers (irs-8900-inst-2025::sec::adjustments-to-basis::b01); the engine lowers only the cost of an asset placed in service in 2025.`;

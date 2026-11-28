@@ -105,7 +105,12 @@ export function trackLines(
  * intangible asset, if applicable. The reduction is limited to the amount of
  * QRTME capitalized for the asset" (irs-8900-inst-2025::sec::adjustments-to-basis::b01).
  * The credit is line 5, the taxpayer's own: the entity reduces the basis for
- * a K-1 credit (line 6).
+ * a K-1 credit (line 6). The regulation names that amount: "the RTMC allowable
+ * (as determined under paragraph (c) of this section)", lines 1 to 5
+ * (cfr-26-2025::sec::s1.45g-1::e-2), and its Example 1 takes the whole credit
+ * off the capitalized amount although most of the expenditures are deducted
+ * (cfr-26-2025::sec::s1.45g-1::e-3-ex1-p2). Section 45G(e)(3) reads "the
+ * credit so allowed" (QUESTIONS.md, "Two texts conflict", B).
  */
 export const basisReductionOf = (line5: number, capitalized: number): number =>
   smallerOf(line5, roundDollars(capitalized));
