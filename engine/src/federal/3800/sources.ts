@@ -23,6 +23,7 @@ import { workOpportunitySources } from "../5884/sources.js";
 import { statedOwnBiofuelGap } from "../6478/form3800.js";
 import { researchCreditSources } from "../6765/form3800.js";
 import { cleanHydrogenSourcesOf } from "../7210/form3800.js";
+import { cleanElectricitySources } from "../7211/form3800.js";
 import { lowIncomeHousingSourcesOf } from "../8586/form3800.js";
 import { orphanDrugCreditSourcesOf } from "../8820/form3800.js";
 import { disabledAccessSourcesOf } from "../8826/form3800.js";
@@ -214,12 +215,15 @@ const missingResearch = (source: CreditSource) =>
  * - Lines 1l and 1ff: Form 8864 line 11, the taxpayer's own production and each
  *   K-1 code AC (8864/form3800.ts).
  * - Line 1h: Form 8820 line 2c, the taxpayer's own clinical testing (8820/form3800.ts).
+ * - Line 1gg: Form 7211 line 11 of each clean electricity facility the
+ *   taxpayer owns (7211/form3800.ts).
  */
 function laterFormSources(inputs: ResolverInputs): { sources: CreditSource[]; missing: string[] } {
   const forms = [
     cleanHydrogenSourcesOf(inputs),
     biodieselCreditSourcesOf(inputs),
     orphanDrugCreditSourcesOf(inputs),
+    cleanElectricitySources(inputs),
   ];
   return {
     sources: forms.flatMap((form) => form.sources),
