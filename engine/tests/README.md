@@ -10,13 +10,13 @@ are in `cade/tests/`; the corpus tests are in `canon/tests/`.
 | --- | --- | --- |
 | `unit/` | One module, its own small inputs. The same folders as `src/` and `scripts/`. | `npm run test:unit` |
 | `integration/` | The whole engine over every scenario. The required-inputs check removes an answer that 20 or more scenarios share from a sample of 10 of them (`helpers/sharedAnswers.ts`). | `npm run test:integration` |
-| `integration/requiredInputs` in full | The same check with every answer removed from every scenario. Minutes, so it does not run before a commit: it must pass before a pull request merges. | `npm run test:inputs` |
+| `integration/requiredInputs` in full | The same check with every answer removed from every scenario. Minutes, so it does not run before a commit: it runs on GitHub for each pull request. | `npm run test:inputs` |
 | `golden/` | Every scenario against its locked values. | `npm test` |
-| `golden/` with `--pdf` | The same, and each form filled and compared with the scenario's golden PDF, and the catalog-fill check of each form. Minutes, so it does not run before a commit: it must pass before a pull request merges. | `npm run test:pdf` |
+| `golden/` with `--pdf` | The same, and each form filled and compared with the scenario's golden PDF, and the catalog-fill check of each form. Minutes, so it does not run before a commit: it runs on GitHub for each pull request. | `npm run test:pdf` |
 | `scenarios/` | The scenario data. Each folder with an `index.ts` is a scenario; `scenarios/index.ts` finds them. `scenarios/synthetic/` holds the taxpayers we made up with no outside source (its README). | — |
 | `helpers/` | Shared assertion, fixture, and golden-PDF code. | — |
 
-The pre-commit hook runs all three. All are offline: no network, no AI.
+The pre-commit hook runs the scenario values and the unit tests. Every pull request runs all of them on GitHub (`.github/workflows/gates.yml`), as parallel jobs, and merges only when the `all gates` check is green. All are offline: no network, no AI.
 
 **Where a new test goes.** A rule, worksheet, or table test goes in
 `unit/`, next to the same path as its module. Give it small inputs of its

@@ -1,14 +1,14 @@
-# Pre-commit gate, fastest first:
+# Pre-commit gate, a quick check that the change broke nothing large:
 #   1. format:check — Prettier, verify only (run `npm run format` to fix)
 #   2. lint         — eslint, one rule: multi-line comments are starred blocks
-#   3. test             — golden suite, values only: engine/tests/golden/runAll.ts
-#   4. test:unit        — vitest, engine/tests/unit + canon, cade and web unit tests
-#   5. test:integration — vitest, engine/tests/integration + cade/tests/integration
+#   3. test         — golden suite, values only: engine/tests/golden/runAll.ts
+#   4. test:unit    — vitest, engine/tests/unit + canon, cade and web unit tests
 #
-# The hook runs a sample of the required-inputs check; `npm run test:inputs`
-# is the full run and must pass before a pull request merges.
-# The hook fills no PDF. `npm run test:pdf` fills each scenario's forms and
-# runs the catalog-fill checks; it must pass before a pull request merges.
+# The slow tests do not run here. The integration tests, the full
+# required-inputs check and the PDF fill run on GitHub for each pull request
+# (.github/workflows/gates.yml), side by side, and a pull request merges only
+# when its "all gates" check is green. Run one locally when you need it:
+# `npm run test:integration`, `npm run test:inputs`, `npm run test:pdf`.
 #
 # Skip with --no-verify if you're committing a deliberate scenario update
 # in two stages (expected.ts before fact-fix, or vice versa). Don't make
@@ -18,4 +18,3 @@ npm run format:check
 npm run lint
 npm test
 npm run test:unit
-npm run test:integration
