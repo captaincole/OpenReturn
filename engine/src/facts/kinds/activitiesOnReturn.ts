@@ -16,6 +16,7 @@ import { disabledAccessReductions } from "../../federal/8826/figures.js";
 import { tipCreditReductions } from "../../federal/8846/figures.js";
 import { agriBiodieselIncomeByBusiness } from "../../federal/8864/figures.js";
 import { childcareCreditReductions } from "../../federal/8882/figures.js";
+import { trackMaintenanceReductions } from "../../federal/8900/figures.js";
 import { healthCreditReductions } from "../../federal/8941/figures.js";
 import { atLeast, sum } from "../../money.js";
 import {
@@ -208,6 +209,15 @@ const BUSINESS_CREDIT_REDUCTIONS: ReadonlyArray<CreditReduction> = [
    * credit (federal/8882/QUESTIONS.md item 8).
    */
   { reductionsOf: childcareCreditReductions, californiaAddsBack: false },
+  /*
+   * Form 8900 line 5 comes off the cost of the 2025 asset that holds the
+   * capitalized expenditures: "Use the amount of RTMC to reduce the basis of
+   * a qualifying railroad structure (including railroad track) asset ... The
+   * reduction is limited to the amount of QRTME capitalized for the asset"
+   * (irs-8900-inst-2025::sec::adjustments-to-basis::b01). No deduction goes
+   * down. California has no such credit (federal/8900/QUESTIONS.md item 7).
+   */
+  { reductionsOf: trackMaintenanceReductions, californiaAddsBack: false },
   /*
    * Form 8820 without the reduced credit election: "reduce your otherwise
    * allowable deduction for qualified clinical testing expenses by the amount

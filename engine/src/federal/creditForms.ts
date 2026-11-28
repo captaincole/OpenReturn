@@ -24,7 +24,9 @@
  * fuel production credit of each fuel facility, which adds a source to Form
  * 3800 Part III line 1q; Form 7207, the advanced manufacturing production
  * credit of each facility, which adds a source to Form 3800 Part III line 1b;
- * and Form 8941, the credit for small employer health insurance premiums.
+ * Form 8874, the new markets credit of each qualified equity investment;
+ * Form 8900, the railroad track maintenance credit; and Form 8941, the credit
+ * for small employer health insurance premiums.
  * They are joined here, in this order, and filingInfo.ts takes them as one, so
  * that file stays under its line limit. A new credit form adds its type and
  * resolver here, not to filingInfo.ts.
@@ -72,10 +74,14 @@ import type { Form8846FilingInfo } from "./8846/filingInfo.js";
 import { resolve8846Info } from "./8846/resolveInfo.js";
 import type { Form8864FilingInfo } from "./8864/filingInfo.js";
 import { resolve8864Info } from "./8864/resolveInfo.js";
+import type { Form8874FilingInfo } from "./8874/filingInfo.js";
+import { resolve8874Info } from "./8874/resolveInfo.js";
 import type { Form8881FilingInfo } from "./8881/filingInfo.js";
 import { resolve8881Info } from "./8881/resolveInfo.js";
 import type { Form8882FilingInfo } from "./8882/filingInfo.js";
 import { resolve8882Info } from "./8882/resolveInfo.js";
+import type { Form8900FilingInfo } from "./8900/filingInfo.js";
+import { resolve8900Info } from "./8900/resolveInfo.js";
 import type { Form8912FilingInfo } from "./8912/filingInfo.js";
 import { resolve8912Info } from "./8912/resolveInfo.js";
 import type { Form8941FilingInfo } from "./8941/filingInfo.js";
@@ -104,6 +110,8 @@ export type CreditFormsFilingInfo = Form3800FilingInfo &
   Form7213FilingInfo &
   Form7218FilingInfo &
   Form7207FilingInfo &
+  Form8874FilingInfo &
+  Form8900FilingInfo &
   Form8941FilingInfo;
 
 export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
@@ -130,5 +138,7 @@ export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => B
   resolve7213Info,
   resolve7218Info,
   resolve7207Info,
+  resolve8874Info,
+  resolve8900Info,
   resolve8941Info,
 ];
