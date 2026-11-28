@@ -36,7 +36,7 @@ Start one `form-labeler` per page that needs labels, all at once: each writes it
 
 ## 5. Check and commit
 
-1. A form the engine has: run `npm -w @openreturn/engine run typecheck` and `npm test`. If the catalog-fill check fails, a widget moved. From `engine/`, run `npx tsx tests/golden/catalogFill.ts --form-id=<formId> --update`, read the PDF whose path it prints, and check that each value is in its box.
+1. A form the engine has: run `npm -w @openreturn/engine run typecheck` and `npm run test:pdf` (it fills the PDFs; `npm test` alone checks values only). If the catalog-fill check fails, a widget moved. From `engine/`, run `npx tsx tests/golden/catalogFill.ts --form-id=<formId> --update`, read the PDF whose path it prints, and check that each value is in its box.
 2. A new form: the catalog-fill golden comes in `register-form`, after the form is registered.
 3. Commit with the subject `<Form>: catalog`. In the body, list the fields added and the widgets skipped, with reasons.
 

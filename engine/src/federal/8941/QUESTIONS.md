@@ -29,13 +29,13 @@ No field is unsupported. Lines 17 to 20 are blank because an individual is not a
 ### 3. The phaseout ratios keep every digit
 
 - Source: Worksheet 5 line 4 and Worksheet 6 line 5: "Enter the result as a decimal (rounded to at least 3 places)" (`irs-8941-inst-2025::sec::worksheet-5-information-needed-to::b01`, `worksheet-6-information-needed-to::b01`). The regulation's example: "The credit reduction for FTEs in excess of 10 is $6,400 ($48,000 × 2/15)" (26 CFR 1.45R-3(c)(3), Example 2; the regulations are not in the corpus).
-- Decision: every digit kept. The worksheet allows more than 3 places, and only the exact fraction gives the example's $6,400 (0.133 gives $6,384). `DECISION` comment in `lines.ts`; row A122 in `docs/rule-decisions.md`.
+- Decision: every digit kept. The worksheet allows more than 3 places, and only the exact fraction gives the example's $6,400 (0.133 gives $6,384). `DECISION` comment in `lines.ts`; row A135 in `docs/rule-decisions.md`.
 - Changes dollars: yes, a few dollars. jaim's line 8 is $22,610; at 3 places it is $22,619.
 
 ### 6. Line 15 rounds each K-1
 
 - Source: line 15 takes the K-1 credits (`irs-8941-inst-2025::sec::line-15::b01`), with no rule for cents. The Form 1040 instructions round "only the total" (`irs-1040-inst-2025::sec::rounding-off-to-whole::b01`). Form 3800 Part V lists each pass-through entity's whole-dollar amount (`irs-3800-inst-2025::sec::part-v-3::b01`).
-- Decision: each K-1 rounds, then adds, as Forms 8846 (A96) and 8820 (A121) do. `DECISION` comment in `resolveInfo.ts`; row A123.
+- Decision: each K-1 rounds, then adds, as Forms 8846 (A96) and 8820 (A121) do. `DECISION` comment in `resolveInfo.ts`; row A136.
 - Changes dollars: at most $1 for each K-1 with cents.
 
 ## Should we do this now
@@ -131,7 +131,7 @@ No field is unsupported. Lines 17 to 20 are blank because an individual is not a
 ## Second opinions
 
 - **PolicyEngine-US 2.154.2** (commit c1fea42a, 2026-11-27): it does not model the section 45R credit. No variable or parameter under `gov/irs` names Form 8941, the small employer health credit or SHOP premiums. Nothing to compare.
-- **Blind fill** (the same 14 cases from the blank form and the instructions, by hand): every line agreed except two groups. (1) The phaseout ratios: the blind fill used exactly 3 places, the engine every digit (item 3, decision A122); both readings fit "rounded to at least 3 places", and the regulation's example uses the exact fraction. The law library was not installed, so 26 CFR 1.45R-3 was not read again. (2) A state subsidy paid to the insurer: the blind fill was right (item 12, fixed).
+- **Blind fill** (the same 14 cases from the blank form and the instructions, by hand): every line agreed except two groups. (1) The phaseout ratios: the blind fill used exactly 3 places, the engine every digit (item 3, decision A135); both readings fit "rounded to at least 3 places", and the regulation's example uses the exact fraction. The law library was not installed, so 26 CFR 1.45R-3 was not read again. (2) A state subsidy paid to the insurer: the blind fill was right (item 12, fixed).
 - No other reference implementation in reach models Form 8941. IRS Direct File does not take a Schedule C business with employees.
 
 ## Proposals for a discussion

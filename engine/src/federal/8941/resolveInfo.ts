@@ -33,7 +33,7 @@ export function healthCreditFiguresOf(inputs: ResolverInputs): HealthCreditFigur
  * as Form 3800 takes it (3800/k1Credits.ts). Undefined with none.
  *
  * DECISION (2026-11-27, by the author): each K-1 rounds before the add, the
- * rule of Form 8846 line 5 and Form 8820 line 3 (docs/rule-decisions.md A123, as A96 and A121).
+ * rule of Form 8846 line 5 and Form 8820 line 3 (docs/rule-decisions.md A136, as A96 and A121).
  * Text A, the Form 1040 instructions: "include cents when adding the amounts
  * and round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01).
  * Text B, line 16: "All others, stop here and report this amount on Form 3800,

@@ -124,7 +124,7 @@ export function adjustedAveragePremium(
  * Text B, the regulation's example: "The credit reduction for FTEs in excess of
  * 10 is $6,400 ($48,000 × 2/15)" (26 CFR 1.45R-3(c)(3), Example 2), the exact
  * fraction; 3 places (0.133) give $6,384. The engine keeps every digit, which
- * Text A allows and Text B shows (docs/rule-decisions.md A122).
+ * Text A allows and Text B shows (docs/rule-decisions.md A135).
  */
 export function ftePhaseout(line7: number, line2: number): number {
   if (line2 <= FTE_PHASEOUT_START) return line7;

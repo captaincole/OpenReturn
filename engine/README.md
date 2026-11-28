@@ -35,7 +35,8 @@ DEDUCTION_ITEMS, the FormField and deductions types), `@openreturn/engine/facts`
 `@openreturn/engine/paths`, and `@openreturn/engine/scenarios` (test fixtures).
 A deep import does not resolve.
 
-Commands, from the repo root: `npm test` (golden), `npm run test:unit`,
+Commands, from the repo root: `npm test` (golden, values only), `npm run test:pdf` (golden with the
+filled PDFs; before a pull request merges), `npm run test:unit`,
 `npm run test:integration`, `npm run typecheck`. From this folder:
 `npx tsx scripts/renderScenario.ts --scenario=<name>`.
 

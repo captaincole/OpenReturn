@@ -8,17 +8,21 @@ import { describe, expect, it } from "vitest";
 import {
   makeAgriBiodieselFactKey,
   makeBusinessFactKey,
+  makeCleanFuelFacilityFactKey,
   makeGeneralBusinessCreditFactKey,
   makeK1BiodieselCreditKey,
   makeK1HoldingFactKey,
   type AgriBiodieselProductionFactValue,
   type BusinessFactValue,
+  type CleanFuelFacilityFactValue,
   type K1BiodieselCreditAnswer,
   type PartnershipK1FactValue,
 } from "../../../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../../../src/facts/rows.js";
+import { TWO_CREDITS_GAP } from "../../../../src/federal/8864/figures.js";
 import { evaluateScenario } from "../../../../src/index.js";
 import { decisionRow } from "../../../helpers/fixtureBuilders.js";
+import { biorefinery } from "../../../scenarios/synthetic/abell/facts.js";
 import {
   CRUSH_ID,
   CRUSH_K1_KEY,
@@ -345,5 +349,42 @@ describe("missing answers", () => {
     const out = evaluate(factsWith({ [ANSWER_KEY]: { safCredit: 0 } }));
     expect(out.value("form-3800", DIESEL_E)).toBe(20991 + 4180);
     expect(out.value("form-3800", SAF_E)).toBeUndefined();
+  });
+});
+
+describe("one gallon, two credits (line-7::b01, irs-7218-inst-2025::sec::emissions-factor::b05)", () => {
+  const facility = (value: Partial<CleanFuelFacilityFactValue>) =>
+    row("other", makeCleanFuelFacilityFactKey("hereford-biorefinery"), {
+      ...biorefinery,
+      ...value,
+    });
+  const gapReason = (result: unknown) => (result as { reason?: string } | undefined)?.reason;
+
+  it("line 7 gallons and a Form 7218 facility that sold biodiesel before July: lines 7 to 9 are a gap", () => {
+    const out = evaluate(factsWith({}, [facility({})]));
+    expect(isGap(out.field("form-8864", L7C))).toBe(true);
+    expect(gapReason(out.field("form-8864", L7C))).toBe(TWO_CREDITS_GAP);
+    expect(isGap(out.field("form-8864", L9))).toBe(true);
+    expect(isGap(out.field("form-8864", L11))).toBe(true);
+    expect(isGap(out.field("schedule-c", SCHEDULE_C_6))).toBe(true);
+    expect(isGap(out.field("form-3800", DIESEL_E))).toBe(true);
+  });
+
+  it("a facility placed in service after June 30, 2025: no gap", () => {
+    const out = evaluate(factsWith({}, [facility({ placedInService: "2025-07-01" })]));
+    expect(out.line(L9)).toBe(20991);
+  });
+
+  it("no line 7 gallons: no gap", () => {
+    const out = evaluate(factsWith(production({ gallonsBeforeJuly: 0 }), [facility({})]));
+    expect(out.line(L9)).toBe(14843);
+  });
+
+  it("a facility with no biodiesel sale: no gap", () => {
+    const sales = biorefinery.sales.filter(
+      (sale) => !sale.fuelType.toLowerCase().includes("biodiesel"),
+    );
+    const out = evaluate(factsWith({}, [facility({ sales })]));
+    expect(out.line(L9)).toBe(20991);
   });
 });

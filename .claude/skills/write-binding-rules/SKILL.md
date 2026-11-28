@@ -47,7 +47,7 @@ A part of more than 8 fields that a scenario needs (a worksheet part, a threshol
 
 After the last field of each part of the form (Part I, Part II, …), or of each page when the form has no parts:
 
-1. Run `npm -w @openreturn/engine run typecheck`, `npm test`, `npm -w @openreturn/engine run test:unit` and `npm -w @openreturn/engine run test:integration`.
+1. Run `npm -w @openreturn/engine run typecheck`, `npm test`, `npm run test:pdf`, `npm -w @openreturn/engine run test:unit` and `npm -w @openreturn/engine run test:integration`.
 2. A golden failure means a scenario's value changed. Do not edit `expected.ts` to match the engine. Find the binding that caused it and send it back to a drafter with the failure. If you think the expected value is wrong, stop and ask the user.
 3. Commit with the subject `<Form>: <lines>` (for example `Form 8959: lines 20–22`). List each new `unsupported` field and its reason in the body.
 

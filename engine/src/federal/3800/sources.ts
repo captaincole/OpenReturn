@@ -22,10 +22,15 @@ import { figuredOnForm3468, form3468CreditSources } from "../3468/credit.js";
 import { workOpportunitySources } from "../5884/sources.js";
 import { statedOwnBiofuelGap } from "../6478/form3800.js";
 import { researchCreditSources } from "../6765/form3800.js";
+import { form7207CreditSources } from "../7207/form3800.js";
 import { cleanHydrogenSourcesOf } from "../7210/form3800.js";
+import { cleanElectricitySources } from "../7211/form3800.js";
+import { nuclearProductionSources } from "../7213/form3800.js";
+import { withForm7218 } from "../7218/form3800.js";
 import { lowIncomeHousingSourcesOf } from "../8586/form3800.js";
 import { orphanDrugCreditSourcesOf } from "../8820/form3800.js";
 import { disabledAccessSourcesOf } from "../8826/form3800.js";
+import { renewableElectricitySourcesOf } from "../8835/form3800.js";
 import { withForm8844 } from "../8844/sources.js";
 import { tipCreditSourcesOf } from "../8846/form3800.js";
 import { biodieselCreditSourcesOf } from "../8864/form3800.js";
@@ -215,16 +220,36 @@ const missingResearch = (source: CreditSource) =>
  * - Lines 1l and 1ff: Form 8864 line 11, the taxpayer's own production and each
  *   K-1 code AC (8864/form3800.ts).
  * - Line 1h: Form 8820 line 2c, the taxpayer's own clinical testing (8820/form3800.ts).
+ * - Line 1gg: Form 7211 line 11 of each clean electricity facility the
+ *   taxpayer owns (7211/form3800.ts).
+ * - Lines 4e and 1f: Form 8835 line 15 of each renewable electricity facility
+ *   the taxpayer owns (8835/form3800.ts).
+ * - Lines 1cc and 1u: Form 7213 Part I line 9 and Part II line 13 of each
+ *   nuclear facility the taxpayer owns (7213/form3800.ts).
+ * - Line 1q: Form 7218 line 3 of each clean fuel facility the taxpayer owns;
+ *   next to one, a stated line 1q credit with no entity is a gap (7218/form3800.ts),
+ *   so this returns the stated sources too, in their own place.
+ * - Line 1b: Form 7207 line 8a of each facility the taxpayer operates (7207/form3800.ts).
  * - Line 4h: Form 8941 line 12, the premiums of the taxpayer's own employees (8941/form3800.ts).
  */
-function laterFormSources(inputs: ResolverInputs): { sources: CreditSource[]; missing: string[] } {
+function laterFormSources(
+  inputs: ResolverInputs,
+  stated: CreditSource[],
+): { stated: CreditSource[]; sources: CreditSource[]; missing: string[] } {
+  const cleanFuel = withForm7218(inputs, stated);
   const forms = [
     cleanHydrogenSourcesOf(inputs),
     biodieselCreditSourcesOf(inputs),
     orphanDrugCreditSourcesOf(inputs),
+    cleanElectricitySources(inputs),
+    renewableElectricitySourcesOf(inputs),
+    nuclearProductionSources(inputs),
+    cleanFuel,
+    { sources: form7207CreditSources(inputs), missing: [] },
     smallEmployerHealthSourcesOf(inputs),
   ];
   return {
+    stated: cleanFuel.stated,
     sources: forms.flatMap((form) => form.sources),
     missing: forms.flatMap((form) => form.missing),
   };
@@ -266,11 +291,11 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
     ...research.sources.filter(missingResearch).map((source) => source.credit.key),
     ...research.missing,
   );
-  const later = laterFormSources(inputs);
+  const later = laterFormSources(inputs, stated);
   missing.push(...later.missing);
   // Line 3: Form 8844 line 2, the empowerment zone credit of the taxpayer's own employees (8844/sources.ts).
   const zone = withForm8844(inputs, [
-    ...stated,
+    ...later.stated,
     ...tips.sources,
     ...childcare.sources,
     ...housing.sources,
