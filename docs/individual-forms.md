@@ -15,7 +15,7 @@ This page lists each form that an individual income tax return can hold, and wha
 
 Source: [Tax year 2025 accepted forms and schedules for individual tax returns and extensions](https://www.irs.gov/pub/irs-efile/tax-year-2025-accepted-forms-schedules-individual-tax-returns-extensions.xlsx), IRS, dated 2025-11-18.
 
-The list has 225 rows, and 197 are forms and schedules to compute. The engine has 128 of them, and 104 have rules. Of the 43 tier 1 forms, the engine has 43, and 43 have rules.
+The list has 225 rows, and 197 are forms and schedules to compute. The engine has 128 of them, and 109 have rules. Of the 43 tier 1 forms, the engine has 43, and 43 have rules.
 
 | Form | Title | Tier 1 | Engine | Copies |
 | --- | --- | --- | --- | --- |
@@ -115,12 +115,12 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 7204 | Consent To Extend the Time To Assess Tax Related to Contested Foreign Income Taxes- Provisional Foreign Tax Credit Agreement |  | Not in the engine | unbounded |
 | Form 7205 | Energy Efficient Commercial Buildings Deduction |  | Not in the engine | unbounded |
 | Form 7206 | Self-Employed Health Insurance Deduction |  | Rules | unbounded |
-| Form 7207 | Advanced Manufacturing Production Credit |  | No rules yet | unbounded |
+| Form 7207 | Advanced Manufacturing Production Credit |  | Rules | unbounded |
 | Form 7210 | Clean Hydrogen Production Credit |  | Rules | unbounded |
-| Form 7211 | Clean Electricity Production Credit |  | No rules yet | unbounded |
-| Form 7213 | Nuclear Power Production Credit |  | No rules yet | 3 |
+| Form 7211 | Clean Electricity Production Credit |  | Rules | unbounded |
+| Form 7213 | Nuclear Power Production Credit |  | Rules | 3 |
 | Form 7217 | Partner's Report of Property Distributed by a Partnership |  | Not in the engine | unbounded |
-| Form 7218 | Clean Fuel Production Credit |  | No rules yet | unbounded |
+| Form 7218 | Clean Fuel Production Credit |  | Rules | unbounded |
 | Form 8082 | Notice of Inconsistent Treatment or Administrative Adjustment Request (AAR) |  | Not in the engine | unbounded |
 | Form 8275 | Disclosure Statement |  | Not in the engine | 2 |
 | Form 8275R | Regulation Disclosure Statement |  | Not in the engine | 2 |
@@ -152,7 +152,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8829 | Expenses for Business Use of Your Home |  | Rules | 32 |
 | Form 8833 | Treaty-Based Return Position Disclosure Under Section 6114 or 7701(b) |  | Rules | unbounded |
 | Form 8834 | Qualified Electric Vehicle Credit |  | Rules | unbounded |
-| Form 8835 | Renewable Electricity, Refined Coal, and Indian Coal Production Credit |  | No rules yet | unbounded |
+| Form 8835 | Renewable Electricity, Refined Coal, and Indian Coal Production Credit |  | Rules | unbounded |
 | Form 8838 | Consent to Extend the Time To Assess Tax Under Section 367-Gain Recognition Agreement |  | Not in the engine | unbounded |
 | Form 8838P | Consent To Extend the Time To Assess Tax Pursuant to the Gain Deferral Method (Section 721(c)) |  | Not in the engine | unbounded |
 | Form 8839 | Qualified Adoption Expenses |  | Rules | 1 |
