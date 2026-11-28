@@ -35,6 +35,7 @@ import { withForm8844 } from "../8844/sources.js";
 import { tipCreditSourcesOf } from "../8846/form3800.js";
 import { biodieselCreditSourcesOf } from "../8864/form3800.js";
 import { isBiodieselK1Credit } from "../8864/k1.js";
+import { newMarketsCreditSourcesOf } from "../8874/form3800.js";
 import { smallEmployerPlanSources } from "../8881/sources.js";
 import { childcareCreditSourcesOf } from "../8882/form3800.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
@@ -229,6 +230,7 @@ const missingResearch = (source: CreditSource) =>
  *   next to one, a stated line 1q credit with no entity is a gap (7218/form3800.ts),
  *   so this returns the stated sources too, in their own place.
  * - Line 1b: Form 7207 line 8a of each facility the taxpayer operates (7207/form3800.ts).
+ * - Line 1i: Form 8874 line 1, the qualified equity investments held directly (8874/form3800.ts).
  */
 function laterFormSources(
   inputs: ResolverInputs,
@@ -244,6 +246,7 @@ function laterFormSources(
     nuclearProductionSources(inputs),
     cleanFuel,
     { sources: form7207CreditSources(inputs), missing: [] },
+    newMarketsCreditSourcesOf(inputs),
   ];
   return {
     stated: cleanFuel.stated,
