@@ -1,3 +1,4 @@
+import { readdirSync } from "node:fs";
 import { beforeEach, describe, expect, it } from "vitest";
 import { evaluateScenario, pendingInputs } from "../../src";
 import { isK1FactKey } from "../../src/facts";
@@ -7,6 +8,12 @@ import { loadScenarios } from "../scenarios/index";
 import type { Scenario } from "../types";
 
 /*
+ * The check evaluates a whole return once for each answer of each scenario, so
+ * it is the slowest test of the engine. This file holds the cases and the list
+ * of optional inputs. The files requiredInputs.part<n>.test.ts each run one
+ * share of the scenarios, because vitest runs files side by side and the tests
+ * of one file one after another.
+ *
  * On a failure, add a missingInputs entry in the form's resolver, or list the
  * input here with the reason it is optional.
  * Document facts are skipped: the scope decisions cover whether they exist.
@@ -686,48 +693,65 @@ function unreported(base: Outcome, dropped: Outcome): string[] {
     .map((id) => `${id}: ${base.values.get(id)} → ${dropped.values.get(id)}`);
 }
 
-const SCENARIOS = await loadScenarios();
+/* The number of requiredInputs.part<n>.test.ts files. */
+export const PARTS = 4;
+
+const ALL_SCENARIOS = await loadScenarios();
+
+/* Scenario i goes to part i mod PARTS, so each part gets old and new scenarios alike. */
+const scenariosOfPart = (part: number): Scenario[] =>
+  ALL_SCENARIOS.filter((_, index) => index % PARTS === part - 1);
 
 /*
  * Each case runs synchronously and vitest chains them with microtasks, so the
  * file can hold the worker's event loop past its 60-second RPC timeout on a
  * busy machine. Yield to the event loop before each case.
  */
-beforeEach(() => new Promise<void>((resolve) => setImmediate(resolve)));
+export function registerRequiredInputsPart(part: number): void {
+  beforeEach(() => new Promise<void>((resolve) => setImmediate(resolve)));
 
-describe.each(SCENARIOS)("required inputs: $name", (scenario) => {
-  const decisions = decisionsWithPreparerStyle(scenario);
-  /*
-   * Evaluated on first use inside a test, not while the suite is collected:
-   * one long synchronous collection of every scenario holds the worker past
-   * vitest's RPC timeout on a busy machine.
-   */
-  let baseOutcome: Outcome | undefined;
-  const base = (): Outcome => (baseOutcome ??= evaluate(scenario, scenario.facts, decisions));
-  const answers = [
-    ...decisions.map((decision) => ({
-      key: decision.decisionKey,
-      drop: () =>
-        evaluate(
-          scenario,
-          scenario.facts,
-          decisions.filter((other) => other !== decision),
-        ),
-    })),
-    ...scenario.facts
-      .filter((fact) => !isDocument(fact.key))
-      .map((fact) => ({
-        key: fact.key,
+  describe.each(scenariosOfPart(part))("required inputs: $name", (scenario) => {
+    const decisions = decisionsWithPreparerStyle(scenario);
+    /*
+     * Evaluated on first use inside a test, not while the suite is collected:
+     * one long synchronous collection of every scenario holds the worker past
+     * vitest's RPC timeout on a busy machine.
+     */
+    let baseOutcome: Outcome | undefined;
+    const base = (): Outcome => (baseOutcome ??= evaluate(scenario, scenario.facts, decisions));
+    const answers = [
+      ...decisions.map((decision) => ({
+        key: decision.decisionKey,
         drop: () =>
           evaluate(
             scenario,
-            scenario.facts.filter((other) => other !== fact),
-            decisions,
+            scenario.facts,
+            decisions.filter((other) => other !== decision),
           ),
       })),
-  ].filter((input) => !isOptional(input.key));
+      ...scenario.facts
+        .filter((fact) => !isDocument(fact.key))
+        .map((fact) => ({
+          key: fact.key,
+          drop: () =>
+            evaluate(
+              scenario,
+              scenario.facts.filter((other) => other !== fact),
+              decisions,
+            ),
+        })),
+    ].filter((input) => !isOptional(input.key));
 
-  it.each(answers)("missing $key is reported", ({ drop }) => {
-    expect(unreported(base(), drop()).slice(0, 3)).toEqual([]);
+    it.each(answers)("missing $key is reported", ({ drop }) => {
+      expect(unreported(base(), drop()).slice(0, 3)).toEqual([]);
+    });
   });
+}
+
+it("has one requiredInputs.part<n>.test.ts file for each part, so no scenario is left out", () => {
+  const files = readdirSync(import.meta.dirname).filter(
+    (name) => name.startsWith("requiredInputs.part") && name.endsWith(".test.ts"),
+  );
+  const expected = Array.from({ length: PARTS }, (_, i) => `requiredInputs.part${i + 1}.test.ts`);
+  expect(files.sort()).toEqual(expected);
 });
