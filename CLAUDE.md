@@ -126,6 +126,8 @@ npm test             # engine golden suite, values only: each scenario's lines a
                      # positional filters work (npm test -- alex)
 npm run test:pdf     # the same suite with the PDFs: fills each scenario's forms and compares them with its golden PDFs,
                      # and runs the catalog-fill check of each form; minutes; must pass before a pull request merges
+npm run test:inputs  # the full required-inputs check: removes every answer from every scenario and checks that the engine
+                     # reports it; minutes; must pass before a pull request merges (the commit hook runs a sample of it)
 npm run test:unit    # engine + canon + agent unit tests, then the web app's (web/lib/*.test.ts); test:integration likewise, without web
 npm run typecheck    # tsc over engine + builder + canon + agent
 npm run coverage     # golden suite under c8; rewrites docs/coverage.md (fields supported, branches, lines, by form)
@@ -231,7 +233,7 @@ TypeScript enforces both. Adding a field without declaring them is a compile err
 A binding (a form's `bindings.ts`) computes one field. It returns one of three results:
 
 - **A value**: the line's amount, text or box.
-- **`undefined`**: the line is blank. Either nothing applies to this taxpayer, or the line waits for an answer. A line that waits has the answer's key in the form's `missingInputs` (the form's resolver lists it), so Cade asks for it. A line never waits with nothing to ask: `engine/tests/integration/requiredInputs.test.ts` fails when a form reads an answer that it does not list.
+- **`undefined`**: the line is blank. Either nothing applies to this taxpayer, or the line waits for an answer. A line that waits has the answer's key in the form's `missingInputs` (the form's resolver lists it), so Cade asks for it. A line never waits with nothing to ask: `engine/tests/integration/requiredInputs.test.ts` fails when a form reads an answer that it does not list. Its everyday run removes an answer that 20 or more scenarios share from a fixed sample of 10 of them (`engine/tests/helpers/sharedAnswers.ts`); `npm run test:inputs` is the full run.
 - **`unsupported(reason)`** (from `engine/src/types.ts`): the engine does not handle this case. The reason is one sentence that says what is missing. Use it for one case of a line the engine otherwise computes; a field the engine never computes is an entry in the form's `unsupported` list.
 
 Do not use `undefined` for an engine gap: a blank line looks like "nothing applies", and the return prints without it.
@@ -491,7 +493,7 @@ Most readers open a PR on a phone and do not open the diff. The description must
    - `Risk: routine` or `Risk: high — <what could break and for whom>`; add `Complex: <why>` when the reader needs more than a glance, and `Pattern change: <old → new>` when the PR changes how we do something. A pattern change also updates this file.
 3. **What changed**: one bullet per idea, in the order a reader would ask. Name a file only when the reader has to go there.
 4. **Example outcome** when a user or operator sees something different: the real screen text, log line or command output.
-5. **Verified**: what ran and what did not. Say "not run" out loud. A pull request that changes `engine/` or `sources/` merges only after `npm run test:pdf` passes on its head with `main` merged in: the commit hook runs the scenarios for their values only, so this is the one place where the filled PDFs are checked.
+5. **Verified**: what ran and what did not. Say "not run" out loud. A pull request that changes `engine/` or `sources/` merges only after `npm run test:pdf` and `npm run test:inputs` pass on its head with `main` merged in. The commit hook runs the scenarios for their values only, so `test:pdf` is the one place where the filled PDFs are checked. The hook also removes an answer that many scenarios share from a sample of them only, so `test:inputs` is the one place where every answer of every scenario is removed.
 6. **PDFs to review** when the PR adds or changes a PDF: one link for each file to its page on the PR's branch, `https://github.com/captaincole/OpenReturn/blob/<branch>/<path>`. GitHub's diff does not show a PDF; the file's page does. Put the files a person must read first (a made input document, the filled return of a new form), then the other filled returns, then blank forms. `git diff --name-only --diff-filter=AM origin/main...HEAD -- '*.pdf'` lists the files. After a push that changes the list, update it.
 7. **Refs**: the issue, the PRs it builds on, the doc that recommends the change.
 

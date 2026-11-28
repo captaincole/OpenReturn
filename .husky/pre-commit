@@ -5,6 +5,8 @@
 #   4. test:unit        — vitest, engine/tests/unit + canon, cade and web unit tests
 #   5. test:integration — vitest, engine/tests/integration + cade/tests/integration
 #
+# The hook runs a sample of the required-inputs check; `npm run test:inputs`
+# is the full run and must pass before a pull request merges.
 # The hook fills no PDF. `npm run test:pdf` fills each scenario's forms and
 # runs the catalog-fill checks; it must pass before a pull request merges.
 #
