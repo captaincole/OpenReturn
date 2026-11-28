@@ -120,6 +120,7 @@ export * from "./kinds/pficFund.js";
 export * from "./kinds/priorYear.js";
 export * from "./kinds/priorYearMinimumTax.js";
 export * from "./kinds/qualifiedElectricVehicleCredit.js";
+export * from "./kinds/railroadTrackMaintenance.js";
 export * from "./kinds/refuelingProperty.js";
 export * from "./kinds/refundDeposit.js";
 export * from "./kinds/rental.js";
