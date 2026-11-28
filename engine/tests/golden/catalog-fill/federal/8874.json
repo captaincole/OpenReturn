@@ -1,0 +1,366 @@
+{
+  "formId": "form-8874",
+  "fieldCount": 40,
+  "entries": [
+    {
+      "fieldId": "form-8874.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "T-REK7E"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-1NKYP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row1_cde_ein_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row1[0].f1_04[0]",
+          "text": "T-1EDVS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row1_cde_name_address_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row1[0].f1_03[0]",
+          "text": "T-34J0Q"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row1_credit_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row1[0].f1_08[0]",
+          "text": "1,663"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row1_credit_rate_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row1[0].f1_07[0]",
+          "text": "T-X95MO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row1_equity_investment_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row1[0].f1_06[0]",
+          "text": "1,308"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row1_initial_investment_date_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row1[0].f1_05[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row2_cde_ein_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row2[0].f1_10[0]",
+          "text": "T-1I4VC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row2_cde_name_address_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row2[0].f1_09[0]",
+          "text": "T-6P2ZM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row2_credit_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row2[0].f1_14[0]",
+          "text": "9,372"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row2_credit_rate_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row2[0].f1_13[0]",
+          "text": "T-JUEEO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row2_equity_investment_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row2[0].f1_12[0]",
+          "text": "1,829"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row2_initial_investment_date_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row2[0].f1_11[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row3_cde_ein_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row3[0].f1_16[0]",
+          "text": "T-PREB3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row3_cde_name_address_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row3[0].f1_15[0]",
+          "text": "T-11766"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row3_credit_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row3[0].f1_20[0]",
+          "text": "6,021"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row3_credit_rate_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row3[0].f1_19[0]",
+          "text": "T-1CY7X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row3_equity_investment_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row3[0].f1_18[0]",
+          "text": "8,283"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row3_initial_investment_date_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row3[0].f1_17[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row4_cde_ein_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row4[0].f1_22[0]",
+          "text": "T-15MHA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row4_cde_name_address_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row4[0].f1_21[0]",
+          "text": "T-QSERB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row4_credit_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row4[0].f1_26[0]",
+          "text": "2,615"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row4_credit_rate_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row4[0].f1_25[0]",
+          "text": "T-WGC7B"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row4_equity_investment_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row4[0].f1_24[0]",
+          "text": "5,449"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row4_initial_investment_date_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row4[0].f1_23[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row5_cde_ein_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row5[0].f1_28[0]",
+          "text": "T-16TO3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row5_cde_name_address_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row5[0].f1_27[0]",
+          "text": "T-17CIX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row5_credit_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row5[0].f1_32[0]",
+          "text": "3,978"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row5_credit_rate_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row5[0].f1_31[0]",
+          "text": "T-1L8LE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row5_equity_investment_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row5[0].f1_30[0]",
+          "text": "7,562"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row5_initial_investment_date_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row5[0].f1_29[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row6_cde_ein_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row6[0].f1_34[0]",
+          "text": "T-1D9ET"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row6_cde_name_address_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row6[0].f1_33[0]",
+          "text": "T-YTX77"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row6_credit_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row6[0].f1_38[0]",
+          "text": "2,485"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row6_credit_rate_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row6[0].f1_37[0]",
+          "text": "T-ECWSU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row6_equity_investment_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row6[0].f1_36[0]",
+          "text": "8,574"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.1_row6_initial_investment_date_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row6[0].f1_35[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.2_credit_from_pass_through_entities",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_39[0]",
+          "text": "7,677"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8874.0.line.3_add_lines_1_and_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_40[0]",
+          "text": "1,194"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1691 @@
+{
+  "form": {
+    "formId": "form-8933-schedule-b",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Disposal Operator Certification"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8933-schedule-b.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 491.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 627.4,
+        "y": 491.998
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_a_disposal_site_owner",
+      "label": "Line 1 row A — (i) Disposal site owner",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 50.4,
+        "y": 420.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_a_owner_address",
+      "label": "Line 1 row A — (ii) Address",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 274.6,
+        "y": 420.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_a_owner_ein",
+      "label": "Line 1 row A — (iii) Employer identification number (EIN)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 612.75,
+        "y": 420.001
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_a_operating_interest_pct",
+      "label": "Line 1 row A — (iv) Operating interest (%)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 691.95,
+        "y": 420.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_b_disposal_site_owner",
+      "label": "Line 1 row B — (i) Disposal site owner",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row2[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 50.4,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_b_owner_address",
+      "label": "Line 1 row B — (ii) Address",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row2[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 274.6,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_b_owner_ein",
+      "label": "Line 1 row B — (iii) Employer identification number (EIN)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row2[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 612.75,
+        "y": 408.002
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_b_operating_interest_pct",
+      "label": "Line 1 row B — (iv) Operating interest (%)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row2[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 691.95,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_c_disposal_site_owner",
+      "label": "Line 1 row C — (i) Disposal site owner",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row3[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 50.4,
+        "y": 396.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_c_owner_address",
+      "label": "Line 1 row C — (ii) Address",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row3[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 274.6,
+        "y": 396.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_c_owner_ein",
+      "label": "Line 1 row C — (iii) Employer identification number (EIN)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row3[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 612.75,
+        "y": 396.003
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_c_operating_interest_pct",
+      "label": "Line 1 row C — (iv) Operating interest (%)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row3[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 691.95,
+        "y": 396.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_d_disposal_site_owner",
+      "label": "Line 1 row D — (i) Disposal site owner",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row4[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 50.4,
+        "y": 384.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_d_owner_address",
+      "label": "Line 1 row D — (ii) Address",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row4[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 274.6,
+        "y": 384.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_d_owner_ein",
+      "label": "Line 1 row D — (iii) Employer identification number (EIN)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row4[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 612.75,
+        "y": 384.004
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_d_operating_interest_pct",
+      "label": "Line 1 row D — (iv) Operating interest (%)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row4[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 691.95,
+        "y": 384.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.2_disposal_site_name_location",
+      "label": "Line 2 — Name and location (county and state, or offshore tract) of the geological disposal site",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 347.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.3_site_operator_name_ein",
+      "label": "Line 3 — Name and EIN of the operator of the site",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 397,
+        "y": 347.998
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.4_other_operator_companies_purpose",
+      "label": "Line 4 — Other company(ies) identified as the operator of the project for any other purpose(s) and the nature of the purpose",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.5a_irs_registration_numbers",
+      "label": "Line 5a — IRS-issued registration number(s) for the geological disposal facility",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 288
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.5b_epa_eggrt_id_numbers",
+      "label": "Line 5b — Geological disposal site's EPA e-GGRT ID number(s), if available",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 303.4,
+        "y": 288
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.6_injection_start_date",
+      "label": "Line 6 — Date (MM/YYYY) on which the injection of captured qualified carbon oxide began",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 569.8,
+        "y": 288
+      },
+      "maxLength": 7
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.7_figures_consistent_with_epa_mrv",
+      "label": "Line 7 — Check here to declare that all figures of stored carbon oxide on this schedule are for carbon oxide consistent with figures reported to the EPA pursuant to the applicable MRV plan and subpart RR of the EPA's Greenhouse Gas Reporting Program",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 746,
+        "y": 266.502
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_a_carbon_oxide_supplier",
+      "label": "Line 9 row A — (i) Qualified carbon oxide supplier",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1[0].Row1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 50.4,
+        "y": 144
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_a_supplier_ein",
+      "label": "Line 9 row A — (ii) EIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1[0].Row1[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 180.75,
+        "y": 144
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_a_capture_facility_name_location",
+      "label": "Line 9 row A — (iii) Name and location of capture facility (county and state)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1[0].Row1[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 253,
+        "y": 144
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_a_irs_registration_number",
+      "label": "Line 9 row A — (iv) IRS-issued registration number",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1[0].Row1[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 461.55,
+        "y": 144
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_a_epa_eggrt_id",
+      "label": "Line 9 row A — (v) EPA's e-GGRT ID (if any)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1[0].Row1[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 583.95,
+        "y": 144
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_a_supplied_nonqualified_carbon_oxide",
+      "label": "Line 9 row A — (vi) Check if supplier supplied any nonqualified carbon oxide from any source",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1[0].Row1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 726.8,
+        "y": 146
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_b_carbon_oxide_supplier",
+      "label": "Line 9 row B — (i) Qualified carbon oxide supplier",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1[0].Row2[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 50.4,
+        "y": 132.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_b_supplier_ein",
+      "label": "Line 9 row B — (ii) EIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1[0].Row2[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 180.75,
+        "y": 132.001
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_b_capture_facility_name_location",
+      "label": "Line 9 row B — (iii) Name and location of capture facility (county and state)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1[0].Row2[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 253,
+        "y": 132.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_b_irs_registration_number",
+      "label": "Line 9 row B — (iv) IRS-issued registration number",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1[0].Row2[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 461.55,
+        "y": 132.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_b_epa_eggrt_id",
+      "label": "Line 9 row B — (v) EPA's e-GGRT ID (if any)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1[0].Row2[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 583.95,
+        "y": 132.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_b_supplied_nonqualified_carbon_oxide",
+      "label": "Line 9 row B — (vi) Check if supplier supplied any nonqualified carbon oxide from any source",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1[0].Row2[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 726.8,
+        "y": 134.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_c_carbon_oxide_supplier",
+      "label": "Line 9 row C — (i) Qualified carbon oxide supplier",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1[0].Row3[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 50.4,
+        "y": 120.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_c_supplier_ein",
+      "label": "Line 9 row C — (ii) EIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1[0].Row3[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 180.75,
+        "y": 120.002
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_c_capture_facility_name_location",
+      "label": "Line 9 row C — (iii) Name and location of capture facility (county and state)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1[0].Row3[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 253,
+        "y": 120.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_c_irs_registration_number",
+      "label": "Line 9 row C — (iv) IRS-issued registration number",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1[0].Row3[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 461.55,
+        "y": 120.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_c_epa_eggrt_id",
+      "label": "Line 9 row C — (v) EPA's e-GGRT ID (if any)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1[0].Row3[0].f1_39[0]",
+      "position": {
+        "page": 0,
+        "x": 583.95,
+        "y": 120.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_c_supplied_nonqualified_carbon_oxide",
+      "label": "Line 9 row C — (vi) Check if supplier supplied any nonqualified carbon oxide from any source",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1[0].Row3[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 726.8,
+        "y": 122.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_supplier_i",
+      "label": "Line 10 — Qualified carbon oxide supplier (i)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_01[0]",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 510
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_supplier_ii",
+      "label": "Line 10 — Qualified carbon oxide supplier (ii)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_02[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 510
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_supplier_iii",
+      "label": "Line 10 — Qualified carbon oxide supplier (iii)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+      "position": {
+        "page": 1,
+        "x": 590.4,
+        "y": 510
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_disposal_site_owner_col_a",
+      "label": "Line 10 — Row A — (a) Geological disposal site owner",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowA[0].f2_04[0]",
+      "position": {
+        "page": 1,
+        "x": 50.4,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_supplier_i_delivered_col_b",
+      "label": "Line 10 — Row A — Supplier (i) — (b) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowA[0].f2_05[0]",
+      "position": {
+        "page": 1,
+        "x": 194.4,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_supplier_i_stored_col_c",
+      "label": "Line 10 — Row A — Supplier (i) — (c) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowA[0].f2_06[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_supplier_ii_delivered_col_d",
+      "label": "Line 10 — Row A — Supplier (ii) — (d) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowA[0].f2_07[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_supplier_ii_stored_col_e",
+      "label": "Line 10 — Row A — Supplier (ii) — (e) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowA[0].f2_08[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_supplier_iii_delivered_col_f",
+      "label": "Line 10 — Row A — Supplier (iii) — (f) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowA[0].f2_09[0]",
+      "position": {
+        "page": 1,
+        "x": 568.8,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_supplier_iii_stored_col_g",
+      "label": "Line 10 — Row A — Supplier (iii) — (g) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowA[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_disposal_site_owner_col_a",
+      "label": "Line 10 — Row B — (a) Geological disposal site owner",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowB[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 50.4,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_supplier_i_delivered_col_b",
+      "label": "Line 10 — Row B — Supplier (i) — (b) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowB[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 194.4,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_supplier_i_stored_col_c",
+      "label": "Line 10 — Row B — Supplier (i) — (c) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowB[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_supplier_ii_delivered_col_d",
+      "label": "Line 10 — Row B — Supplier (ii) — (d) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowB[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_supplier_ii_stored_col_e",
+      "label": "Line 10 — Row B — Supplier (ii) — (e) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowB[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_supplier_iii_delivered_col_f",
+      "label": "Line 10 — Row B — Supplier (iii) — (f) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowB[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 568.8,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_supplier_iii_stored_col_g",
+      "label": "Line 10 — Row B — Supplier (iii) — (g) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowB[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_disposal_site_owner_col_a",
+      "label": "Line 10 — Row C — (a) Geological disposal site owner",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowC[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 50.4,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_supplier_i_delivered_col_b",
+      "label": "Line 10 — Row C — Supplier (i) — (b) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowC[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 194.4,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_supplier_i_stored_col_c",
+      "label": "Line 10 — Row C — Supplier (i) — (c) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowC[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_supplier_ii_delivered_col_d",
+      "label": "Line 10 — Row C — Supplier (ii) — (d) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowC[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_supplier_ii_stored_col_e",
+      "label": "Line 10 — Row C — Supplier (ii) — (e) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowC[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_supplier_iii_delivered_col_f",
+      "label": "Line 10 — Row C — Supplier (iii) — (f) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowC[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 568.8,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_supplier_iii_stored_col_g",
+      "label": "Line 10 — Row C — Supplier (iii) — (g) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowC[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_disposal_site_owner_col_a",
+      "label": "Line 10 — Row D — (a) Geological disposal site owner",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowD[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 50.4,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_supplier_i_delivered_col_b",
+      "label": "Line 10 — Row D — Supplier (i) — (b) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowD[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 194.4,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_supplier_i_stored_col_c",
+      "label": "Line 10 — Row D — Supplier (i) — (c) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowD[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_supplier_ii_delivered_col_d",
+      "label": "Line 10 — Row D — Supplier (ii) — (d) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowD[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_supplier_ii_stored_col_e",
+      "label": "Line 10 — Row D — Supplier (ii) — (e) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowD[0].f2_29[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_supplier_iii_delivered_col_f",
+      "label": "Line 10 — Row D — Supplier (iii) — (f) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowD[0].f2_30[0]",
+      "position": {
+        "page": 1,
+        "x": 568.8,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_supplier_iii_stored_col_g",
+      "label": "Line 10 — Row D — Supplier (iii) — (g) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowD[0].f2_31[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_supplier_i_delivered_col_b",
+      "label": "Line 10 — Total — Supplier (i) — (b) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowTotal[0].f2_32[0]",
+      "position": {
+        "page": 1,
+        "x": 194.4,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_supplier_i_stored_col_c",
+      "label": "Line 10 — Total — Supplier (i) — (c) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowTotal[0].f2_33[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_supplier_ii_delivered_col_d",
+      "label": "Line 10 — Total — Supplier (ii) — (d) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowTotal[0].f2_34[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_supplier_ii_stored_col_e",
+      "label": "Line 10 — Total — Supplier (ii) — (e) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowTotal[0].f2_35[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_supplier_iii_delivered_col_f",
+      "label": "Line 10 — Total — Supplier (iii) — (f) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowTotal[0].f2_36[0]",
+      "position": {
+        "page": 1,
+        "x": 568.8,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_supplier_iii_stored_col_g",
+      "label": "Line 10 — Total — Supplier (iii) — (g) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowTotal[0].f2_37[0]",
+      "position": {
+        "page": 1,
+        "x": 662.4,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_qualified_delivered_col_h",
+      "label": "Line 10 — Row A — (iv) Total qualified carbon oxide from all suppliers — (h) Metric tons delivered (add columns (b), (d), and (f))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowA[0].f2_38[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 348.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_qualified_stored_col_i",
+      "label": "Line 10 — Row A — (iv) Total qualified carbon oxide from all suppliers — (i) Metric tons stored (add columns (c), (e), and (g))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowA[0].f2_39[0]",
+      "position": {
+        "page": 1,
+        "x": 180,
+        "y": 348.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_nonqualified_delivered_col_j",
+      "label": "Line 10 — Row A — (v) All other suppliers of nonqualified carbon oxide — (j) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowA[0].f2_40[0]",
+      "position": {
+        "page": 1,
+        "x": 295.2,
+        "y": 348.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_nonqualified_stored_col_k",
+      "label": "Line 10 — Row A — (v) All other suppliers of nonqualified carbon oxide — (k) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowA[0].f2_41[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 348.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_all_suppliers_delivered_col_l",
+      "label": "Line 10 — Row A — (vi) Total metric tons for all carbon oxide suppliers — (l) Metric tons delivered (add columns (h) and (j))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowA[0].f2_42[0]",
+      "position": {
+        "page": 1,
+        "x": 525.6,
+        "y": 348.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_all_suppliers_stored_col_m",
+      "label": "Line 10 — Row A — (vi) Total metric tons for all carbon oxide suppliers — (m) Metric tons stored (add columns (i) and (k))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowA[0].f2_43[0]",
+      "position": {
+        "page": 1,
+        "x": 640.8,
+        "y": 348.001
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_qualified_delivered_col_h",
+      "label": "Line 10 — Row B — (iv) Total qualified carbon oxide from all suppliers — (h) Metric tons delivered (add columns (b), (d), and (f))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowB[0].f2_44[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_qualified_stored_col_i",
+      "label": "Line 10 — Row B — (iv) Total qualified carbon oxide from all suppliers — (i) Metric tons stored (add columns (c), (e), and (g))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowB[0].f2_45[0]",
+      "position": {
+        "page": 1,
+        "x": 180,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_nonqualified_delivered_col_j",
+      "label": "Line 10 — Row B — (v) All other suppliers of nonqualified carbon oxide — (j) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowB[0].f2_46[0]",
+      "position": {
+        "page": 1,
+        "x": 295.2,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_nonqualified_stored_col_k",
+      "label": "Line 10 — Row B — (v) All other suppliers of nonqualified carbon oxide — (k) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowB[0].f2_47[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_all_suppliers_delivered_col_l",
+      "label": "Line 10 — Row B — (vi) Total metric tons for all carbon oxide suppliers — (l) Metric tons delivered (add columns (h) and (j))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowB[0].f2_48[0]",
+      "position": {
+        "page": 1,
+        "x": 525.6,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_all_suppliers_stored_col_m",
+      "label": "Line 10 — Row B — (vi) Total metric tons for all carbon oxide suppliers — (m) Metric tons stored (add columns (i) and (k))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowB[0].f2_49[0]",
+      "position": {
+        "page": 1,
+        "x": 640.8,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_qualified_delivered_col_h",
+      "label": "Line 10 — Row C — (iv) Total qualified carbon oxide from all suppliers — (h) Metric tons delivered (add columns (b), (d), and (f))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowC[0].f2_50[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 324.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_qualified_stored_col_i",
+      "label": "Line 10 — Row C — (iv) Total qualified carbon oxide from all suppliers — (i) Metric tons stored (add columns (c), (e), and (g))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowC[0].f2_51[0]",
+      "position": {
+        "page": 1,
+        "x": 180,
+        "y": 324.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_nonqualified_delivered_col_j",
+      "label": "Line 10 — Row C — (v) All other suppliers of nonqualified carbon oxide — (j) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowC[0].f2_52[0]",
+      "position": {
+        "page": 1,
+        "x": 295.2,
+        "y": 324.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_nonqualified_stored_col_k",
+      "label": "Line 10 — Row C — (v) All other suppliers of nonqualified carbon oxide — (k) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowC[0].f2_53[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 324.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_all_suppliers_delivered_col_l",
+      "label": "Line 10 — Row C — (vi) Total metric tons for all carbon oxide suppliers — (l) Metric tons delivered (add columns (h) and (j))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowC[0].f2_54[0]",
+      "position": {
+        "page": 1,
+        "x": 525.6,
+        "y": 324.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_all_suppliers_stored_col_m",
+      "label": "Line 10 — Row C — (vi) Total metric tons for all carbon oxide suppliers — (m) Metric tons stored (add columns (i) and (k))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowC[0].f2_55[0]",
+      "position": {
+        "page": 1,
+        "x": 640.8,
+        "y": 324.003
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_qualified_delivered_col_h",
+      "label": "Line 10 — Row D — (iv) Total qualified carbon oxide from all suppliers — (h) Metric tons delivered (add columns (b), (d), and (f))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowD[0].f2_56[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 312.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_qualified_stored_col_i",
+      "label": "Line 10 — Row D — (iv) Total qualified carbon oxide from all suppliers — (i) Metric tons stored (add columns (c), (e), and (g))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowD[0].f2_57[0]",
+      "position": {
+        "page": 1,
+        "x": 180,
+        "y": 312.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_nonqualified_delivered_col_j",
+      "label": "Line 10 — Row D — (v) All other suppliers of nonqualified carbon oxide — (j) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowD[0].f2_58[0]",
+      "position": {
+        "page": 1,
+        "x": 295.2,
+        "y": 312.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_nonqualified_stored_col_k",
+      "label": "Line 10 — Row D — (v) All other suppliers of nonqualified carbon oxide — (k) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowD[0].f2_59[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 312.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_all_suppliers_delivered_col_l",
+      "label": "Line 10 — Row D — (vi) Total metric tons for all carbon oxide suppliers — (l) Metric tons delivered (add columns (h) and (j))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowD[0].f2_60[0]",
+      "position": {
+        "page": 1,
+        "x": 525.6,
+        "y": 312.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_all_suppliers_stored_col_m",
+      "label": "Line 10 — Row D — (vi) Total metric tons for all carbon oxide suppliers — (m) Metric tons stored (add columns (i) and (k))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowD[0].f2_61[0]",
+      "position": {
+        "page": 1,
+        "x": 640.8,
+        "y": 312.004
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_qualified_delivered_col_h",
+      "label": "Line 10 — Total — (iv) Total qualified carbon oxide from all suppliers — (h) Metric tons delivered (add columns (b), (d), and (f))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowTotal[0].f2_62[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 300.005
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_qualified_stored_col_i",
+      "label": "Line 10 — Total — (iv) Total qualified carbon oxide from all suppliers — (i) Metric tons stored (add columns (c), (e), and (g))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowTotal[0].f2_63[0]",
+      "position": {
+        "page": 1,
+        "x": 180,
+        "y": 300.005
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_nonqualified_delivered_col_j",
+      "label": "Line 10 — Total — (v) All other suppliers of nonqualified carbon oxide — (j) Metric tons delivered",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowTotal[0].f2_64[0]",
+      "position": {
+        "page": 1,
+        "x": 295.2,
+        "y": 300.005
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_nonqualified_stored_col_k",
+      "label": "Line 10 — Total — (v) All other suppliers of nonqualified carbon oxide — (k) Metric tons stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowTotal[0].f2_65[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 300.005
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_all_suppliers_delivered_col_l",
+      "label": "Line 10 — Total — (vi) Total metric tons for all carbon oxide suppliers — (l) Metric tons delivered (add columns (h) and (j))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowTotal[0].f2_66[0]",
+      "position": {
+        "page": 1,
+        "x": 525.6,
+        "y": 300.005
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_all_suppliers_stored_col_m",
+      "label": "Line 10 — Total — (vi) Total metric tons for all carbon oxide suppliers — (m) Metric tons stored (add columns (i) and (k))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowTotal[0].f2_67[0]",
+      "position": {
+        "page": 1,
+        "x": 640.8,
+        "y": 300.005
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.11_attest_conforms_epa_filings",
+      "label": "Line 11 — Check here to attest that all information provided on line 10 conforms to all applicable EPA filings",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 746,
+        "y": 278.501
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8933-schedule-b/blank.pdf",
+    "ingestedAt": "2026-11-27T21:06:01.519Z",
+    "totalFields": 111,
+    "skipped": 0,
+    "catalogEntries": 111
+  }
+}

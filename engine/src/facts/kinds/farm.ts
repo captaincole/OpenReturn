@@ -13,6 +13,7 @@
 import { atLeast, sum } from "../../money.js";
 import { isAtRiskAmounts, type AtRiskAmounts } from "./atRisk.js";
 import { empowermentZoneFigures } from "./empowermentZone.js";
+import { reducedExpenses, smallEmployerPlanReductions } from "./smallEmployerPlan.js";
 import { workOpportunityCreditByActivity } from "./workOpportunity.js";
 
 type FactRow = { key: string; value: unknown; category: string };
@@ -326,6 +327,25 @@ function withLaborCredits(
 }
 
 /*
+ * Form 8881 lines 5 and 6g come off the farm's other expense lines: the
+ * startup costs line the fact names and line 23 (smallEmployerPlan.ts). They
+ * are not labor hired, so they are not in FARM_LABOR_CREDITS.
+ */
+function withPlanCredits(
+  farms: Array<{ key: string; value: FarmFactValue }>,
+  facts: ReadonlyArray<FactRow>,
+): Array<{ key: string; value: FarmFactValue }> {
+  const reductions = smallEmployerPlanReductions(facts);
+  if (reductions.size === 0) return farms;
+  return farms.map((farm) => {
+    const expenses = reducedExpenses(farm.value.expenses, reductions.get(farm.key));
+    return expenses === farm.value.expenses
+      ? farm
+      : { ...farm, value: { ...farm.value, expenses } };
+  });
+}
+
+/*
  * The farms on this return. Filing jointly, every farm. On any other status,
  * only the taxpayer's: a spouse's farm is on the spouse's return, and its key
  * is in spouseKeys so a form can wait on it. A malformed fact is listed.
@@ -344,12 +364,13 @@ export function farmsOnReturn(
     .map((row) => ({ key: row.key, value: row.value as FarmFactValue }));
   const offReturn = (farm: { value: FarmFactValue }) =>
     !joint && farmOwnerOf(farm.value) === "spouse";
+  const onReturn = withLaborCredits(
+    farms.filter((farm) => !offReturn(farm)),
+    facts,
+    joint,
+  );
   return {
-    farms: withLaborCredits(
-      farms.filter((farm) => !offReturn(farm)),
-      facts,
-      joint,
-    ),
+    farms: withPlanCredits(onReturn, facts),
     spouseKeys: farms.filter(offReturn).map((farm) => farm.key),
     malformedKeys: rows.filter((row) => !isFarm(row.value)).map((row) => row.key),
   };

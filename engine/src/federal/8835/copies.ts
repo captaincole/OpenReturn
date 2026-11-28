@@ -19,6 +19,10 @@ import type { ResolverInputs } from "../../resolverInputs.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { isGap, type Cell } from "../3800/cells.js";
 import {
+  BOTH_PRODUCTION_CREDITS_GAP,
+  renewableFacilityOnForm7211,
+} from "../electricityFacilities.js";
+import {
   eligibilityGap,
   fourYearPeriodIn2025,
   isBiomass,
@@ -193,7 +197,8 @@ export function facilityCopy(
   const partI = withPrefix("0.part1.", partILines(value));
   const reason =
     eligibilityGap(value.constructionBegan, value.placedInService) ??
-    (electedInvestmentCredit(inputs, value) ? SAME_FACILITY_GAP : undefined);
+    (electedInvestmentCredit(inputs, value) ? SAME_FACILITY_GAP : undefined) ??
+    (renewableFacilityOnForm7211(inputs, value) ? BOTH_PRODUCTION_CREDITS_GAP : undefined);
   if (reason !== undefined) {
     const gap = unsupported(reason);
     const lines = Object.fromEntries(GAP_LINES.map((line) => [line, gap]));

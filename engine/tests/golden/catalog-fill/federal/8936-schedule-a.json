@@ -1,0 +1,582 @@
+{
+  "formId": "form-8936-schedule-a",
+  "fieldCount": 64,
+  "entries": [
+    {
+      "fieldId": "form-8936-schedule-a.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-ITCE5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-1XAII"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.1a_vehicle_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "3976"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.1b_vehicle_make",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "T-1H7TP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.1c_vehicle_model",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "T-ETT1I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.2_vehicle_identification_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line2_Comb[0].f1_6[0]",
+          "text": "T-1OODI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.3_date_placed_in_service",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.4a_transferred_amount_seller_report",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "9,077"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.4a_transferred_credit_to_dealer_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.4a_transferred_credit_to_dealer_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.4b_directed_by_line_8_or_13",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.5_new_clean_vehicle_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.5_new_clean_vehicle_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.6_previously_owned_vehicle_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.6_previously_owned_vehicle_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.7_qualified_commercial_vehicle_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.7_qualified_commercial_vehicle_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.8a_resold_within_30_days_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.8a_resold_within_30_days_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.8b_individual_income_tax_return_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_7[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.8b_individual_income_tax_return_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.8c_2025_magi_over_limit_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_8[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.8c_2025_magi_over_limit_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.8d_2024_magi_over_limit_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_9[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.8d_2024_magi_over_limit_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_9[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.10_business_investment_use_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+          "text": "T-NGF2L"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.11_business_use_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+          "text": "2,877"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.12_personal_use_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+          "text": "9,583"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13a_resold_within_30_days_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13a_resold_within_30_days_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13b_2025_magi_over_limit_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13b_2025_magi_over_limit_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13c_2024_magi_over_limit_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13c_2024_magi_over_limit_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13d_prior_used_credit_3_years_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13d_prior_used_credit_3_years_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13e_sales_price_over_25000_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_7[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13e_sales_price_over_25000_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13f_acquired_for_use_not_resale_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_8[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13f_acquired_for_use_not_resale_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13g_claimed_as_dependent_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_9[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13g_claimed_as_dependent_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_9[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.14_vehicle_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+          "text": "2,118"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.15_sales_price_times_30_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+          "text": "9,162"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.17_previously_owned_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+          "text": "7,871"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.8e_acquired_for_use_not_resale_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.8e_acquired_for_use_not_resale_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.9_tentative_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+          "text": "9,468"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.18a_commercial_registration_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_1[0]",
+          "text": "T-LUFN4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.18b_subject_to_depreciation_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.18b_subject_to_depreciation_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.18c_acquired_for_use_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.18c_acquired_for_use_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.18d_powered_by_gas_diesel_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.18d_powered_by_gas_diesel_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.18e_gross_vehicle_weight_rating",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_2[0]",
+          "text": "1,397"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.19_commercial_vehicle_cost_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_3[0]",
+          "text": "1,122"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.20_section_179_expense_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_4[0]",
+          "text": "2,987"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.21_basis_less_section_179",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_5[0]",
+          "text": "8,929"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.22_basis_times_credit_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_6[0]",
+          "text": "9,567"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.23_incremental_cost_vehicle",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_7[0]",
+          "text": "3,457"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.24_smaller_line_22_23",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_8[0]",
+          "text": "4,847"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.25_commercial_maximum_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_9[0]",
+          "text": "4,958"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.26_commercial_clean_vehicle_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_10[0]",
+          "text": "4,741"
+        }
+      ]
+    }
+  ]
+}

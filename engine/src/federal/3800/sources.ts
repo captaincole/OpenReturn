@@ -9,6 +9,8 @@ import {
   GENERAL_BUSINESS_CREDIT_KEYS,
   getCreditCarryoverFacts,
   getGeneralBusinessCreditFacts,
+  isBusinessFactKey,
+  isOwnStatedWageCredit,
   type CreditCarryoverFact,
   type GeneralBusinessCreditFact,
   type K1ResearchCreditAnswer,
@@ -18,10 +20,20 @@ import { roundDollars } from "../../money.js";
 import type { ResolverInputs } from "../../resolverInputs.js";
 import { figuredOnForm3468, form3468CreditSources } from "../3468/credit.js";
 import { workOpportunitySources } from "../5884/sources.js";
+import { statedOwnBiofuelGap } from "../6478/form3800.js";
+import { researchCreditSources } from "../6765/form3800.js";
+import { cleanHydrogenSourcesOf } from "../7210/form3800.js";
+import { cleanElectricitySources } from "../7211/form3800.js";
 import { lowIncomeHousingSourcesOf } from "../8586/form3800.js";
+import { orphanDrugCreditSourcesOf } from "../8820/form3800.js";
+import { disabledAccessSourcesOf } from "../8826/form3800.js";
 import { renewableElectricitySourcesOf } from "../8835/form3800.js";
 import { withForm8844 } from "../8844/sources.js";
 import { tipCreditSourcesOf } from "../8846/form3800.js";
+import { biodieselCreditSourcesOf } from "../8864/form3800.js";
+import { isBiodieselK1Credit } from "../8864/k1.js";
+import { smallEmployerPlanSources } from "../8881/sources.js";
+import { childcareCreditSourcesOf } from "../8882/form3800.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
 import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
 import { gap, type Cell } from "./cells.js";
@@ -48,9 +60,20 @@ function statedGap(value: GeneralBusinessCreditFact["value"]): string | undefine
   if (row.source !== value.sourceForm) {
     return `Part III line ${value.line} takes Form ${row.source}, not Form ${value.sourceForm}.`;
   }
-  const engineForm = ENGINE_FORM_LINES[value.line];
+  /* A purchased credit has no source form of the buyer's: the seller "earned and reported the credit on the appropriate source credit form" (transferees-of-eligible-credits-under-section::b01). */
+  const engineForm =
+    value.transfer?.direction === "purchased" ? undefined : ENGINE_FORM_LINES[value.line];
   if (engineForm)
     return `Line ${value.line} comes from ${engineForm}, which the engine figures: state that form's inputs (the property, vehicle or tips) instead.`;
+  // Line 4c: no 2025 biofuel producer credit of the taxpayer's own production (6478/form3800.ts).
+  const ownBiofuel = statedOwnBiofuelGap(value);
+  if (ownBiofuel) return ownBiofuel;
+  if (
+    isOwnStatedWageCredit(value) &&
+    (value.businessKey === undefined || !isBusinessFactKey(value.businessKey))
+  ) {
+    return `A Form ${value.sourceForm} credit of the taxpayer's own employees also lowers the wages deduction of the business that paid them (irs-1040sc-inst-2025::sec::line-26::b01): the engine lowers it only for a Schedule C business the credit names (businessKey).`;
+  }
   if (value.transfer && !TRANSFER_LINES.includes(value.line)) {
     return `The credit of line ${value.line} cannot be transferred under section 6418 (column (f) is shaded).`;
   }
@@ -185,6 +208,33 @@ const missingResearch = (source: CreditSource) =>
   source.attributableTaxableIncome === undefined;
 
 /* Every source of the return and the answers they wait on (fact keys). */
+/*
+ * The sources of the forms added after the ones above, in the order they were
+ * added, so the order of the others stays as it was:
+ * - Line 1g: Form 7210 line 10, the credit of each clean hydrogen facility the
+ *   taxpayer owns (7210/form3800.ts).
+ * - Lines 1l and 1ff: Form 8864 line 11, the taxpayer's own production and each
+ *   K-1 code AC (8864/form3800.ts).
+ * - Line 1h: Form 8820 line 2c, the taxpayer's own clinical testing (8820/form3800.ts).
+ * - Line 1gg: Form 7211 line 11 of each clean electricity facility the
+ *   taxpayer owns (7211/form3800.ts).
+ * - Lines 4e and 1f: Form 8835 line 15 of each renewable electricity facility
+ *   the taxpayer owns (8835/form3800.ts).
+ */
+function laterFormSources(inputs: ResolverInputs): { sources: CreditSource[]; missing: string[] } {
+  const forms = [
+    cleanHydrogenSourcesOf(inputs),
+    biodieselCreditSourcesOf(inputs),
+    orphanDrugCreditSourcesOf(inputs),
+    cleanElectricitySources(inputs),
+    renewableElectricitySourcesOf(inputs),
+  ];
+  return {
+    sources: forms.flatMap((form) => form.sources),
+    missing: forms.flatMap((form) => form.missing),
+  };
+}
+
 export function form3800SourcesOf(inputs: ResolverInputs): {
   sources: Form3800Sources;
   missing: string[];
@@ -192,6 +242,7 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
   const stated = getGeneralBusinessCreditFacts(inputs.facts).map(statedSource);
   const k1 = k1EntitiesWithRoute(inputs, "form_3800")
     .filter((received) => !figuredOnForm3468(inputs, received))
+    .filter((received) => !isBiodieselK1Credit(received))
     .map((received) => k1Source(inputs, received));
   const form3468 = form3468CreditSources(inputs);
   // Line 4b: Form 5884 line 2, the credit of the taxpayer's own employees (5884/sources.ts).
@@ -204,24 +255,41 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
   ];
   // Line 4f: Form 8846 line 4, the credit on the taxpayer's own tipped employees (8846/form3800.ts).
   const tips = tipCreditSourcesOf(inputs);
+  // Line 1k: Form 8882 lines 2 and 4, the credit of the taxpayer's own childcare expenditures (8882/form3800.ts).
+  const childcare = childcareCreditSourcesOf(inputs);
   // Line 4d: Form 8586 line 3, the credit of the buildings the taxpayer owns (8586/form3800.ts).
   const housing = lowIncomeHousingSourcesOf(inputs);
-  missing.push(...tips.missing, ...housing.missing);
-  // Lines 4e and 1f: Form 8835 line 15, the credit of each facility the taxpayer owns (8835/form3800.ts).
-  const electricity = renewableElectricitySourcesOf(inputs);
-  missing.push(...electricity.missing);
+  // Line 1e: Form 8826 line 6, the credit of the taxpayer's own businesses (8826/form3800.ts).
+  const disabledAccess = disabledAccessSourcesOf(inputs);
+  // Line 1c or 4i: Form 6765 line 28, the taxpayer's own research (6765/form3800.ts).
+  const research = researchCreditSources(inputs);
+  missing.push(
+    ...tips.missing,
+    ...childcare.missing,
+    ...housing.missing,
+    ...disabledAccess.missing,
+    ...research.sources.filter(missingResearch).map((source) => source.credit.key),
+    ...research.missing,
+  );
+  const later = laterFormSources(inputs);
+  missing.push(...later.missing);
   // Line 3: Form 8844 line 2, the empowerment zone credit of the taxpayer's own employees (8844/sources.ts).
   const zone = withForm8844(inputs, [
     ...stated,
     ...tips.sources,
+    ...childcare.sources,
     ...housing.sources,
-    ...electricity.sources,
     ...k1.flatMap((found) => (found.source ? [found.source] : [])),
     ...form3468.sources,
     ...workOpportunity.sources,
+    ...research.sources,
+    ...disabledAccess.sources,
+    ...later.sources,
   ]);
-  missing.push(...zone.missing);
-  const current = zone.sources;
+  // Lines 1j, 1dd and 1ee: Form 8881 lines 8, 11 and 15 less the K-1s, the taxpayer's own plan (8881/sources.ts).
+  const plan = smallEmployerPlanSources(inputs);
+  missing.push(...zone.missing, ...plan.missing);
+  const current = [...zone.sources, ...plan.sources];
   const carryovers = getCreditCarryoverFacts(inputs.facts).map(carryoverOf);
   return { sources: { current, carryovers }, missing: [...new Set(missing)] };
 }
