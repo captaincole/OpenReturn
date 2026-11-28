@@ -8,13 +8,13 @@ the text, the default the engine applies, and whether it changes dollars.
 Each is decided by the author, with a `DECISION` comment and a row in
 `docs/rule-decisions.md`.
 
-- **The 100:1 battery limit on line 5c (row A110).** The instructions name the
+- **The 100:1 battery limit on line 5c (row A131).** The instructions name the
   limit for "a battery module using battery cells" (`line-5-2::b02`). The face
   prints "(limitations apply; see instructions)" for lines 5a to 5c, and the
   regulation applies it to both module kinds (`cfr-26-2025::sec::s1.45x-3::e-5`).
   The engine caps all three rows. Dollars: only for a module with no cells
   whose capacity is more than 100 times its maximum discharge. `lines.ts`.
-- **Lines 1c and 1d (row A111).** The face prints line 1c as solar grade
+- **Lines 1c and 1d (row A132).** The face prints line 1c as solar grade
   polysilicon ($3 per kilogram) and line 1d as polymeric backsheet ($0.40 per
   square meter). The instructions list "Line 1c. Polymeric backsheet" and
   "Line 1d. Solar grade polysilicon" (`line-1-2::b01`). The engine follows
@@ -143,7 +143,7 @@ Three cases differ in dollars; the engine stays as it is in each.
   250,000 + 410,000 + 90,000 = 750,000; the blind total is an addition slip,
   and its line 6a and 8a follow from it.
 - **Case 12, line 5c.** Blind 9,600 kWh (no limit for a module with no cells),
-  engine 4,800 kWh (100:1 limit). Decided above (row A110). The statute
+  engine 4,800 kWh (100:1 limit). Decided above (row A131). The statute
   supports the engine: "the capacity determined under either subparagraph with
   respect to a battery cell or battery module shall not exceed a
   capacity-to-power ratio of 100:1" (`usc-26-2025::sec::s45x::b-4`), and the
