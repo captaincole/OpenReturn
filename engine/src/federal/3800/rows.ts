@@ -179,8 +179,9 @@ export const ELECTIVE_PAYMENT_LINES: ReadonlyArray<string> = [
 /* The research credit lines (irs-3800-inst-2025::sec::lines-1c-and-4i::b01). */
 export const RESEARCH_LINES: ReadonlyArray<string> = ["1c", "4i"];
 
-/* Lines the engine figures from a source form it has: Form 8911 line 3, Form 8936 lines 8 and 21, Form 8846 line 4. */
+/* Lines the engine figures from a source form it has: Form 8911 line 3, Form 8936 lines 8 and 21, Form 8846 line 4, Form 7210 line 10. */
 export const ENGINE_FORM_LINES: Readonly<Record<string, string>> = {
+  "1g": "Form 7210",
   "1s": "Form 8911",
   "1y": "Form 8936",
   "1aa": "Form 8936",

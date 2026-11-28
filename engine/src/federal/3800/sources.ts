@@ -20,6 +20,7 @@ import { figuredOnForm3468, form3468CreditSources } from "../3468/credit.js";
 import { workOpportunitySources } from "../5884/sources.js";
 import { statedOwnBiofuelGap } from "../6478/form3800.js";
 import { researchCreditSources } from "../6765/form3800.js";
+import { cleanHydrogenSourcesOf } from "../7210/form3800.js";
 import { lowIncomeHousingSourcesOf } from "../8586/form3800.js";
 import { disabledAccessSourcesOf } from "../8826/form3800.js";
 import { withForm8844 } from "../8844/sources.js";
@@ -52,7 +53,9 @@ function statedGap(value: GeneralBusinessCreditFact["value"]): string | undefine
   if (row.source !== value.sourceForm) {
     return `Part III line ${value.line} takes Form ${row.source}, not Form ${value.sourceForm}.`;
   }
-  const engineForm = ENGINE_FORM_LINES[value.line];
+  /* A purchased credit has no source form of the buyer's: the seller "earned and reported the credit on the appropriate source credit form" (transferees-of-eligible-credits-under-section::b01). */
+  const engineForm =
+    value.transfer?.direction === "purchased" ? undefined : ENGINE_FORM_LINES[value.line];
   if (engineForm)
     return `Line ${value.line} comes from ${engineForm}, which the engine figures: state that form's inputs (the property, vehicle or tips) instead.`;
   // Line 4c: no 2025 biofuel producer credit of the taxpayer's own production (6478/form3800.ts).
@@ -227,6 +230,9 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
     ...research.sources.filter(missingResearch).map((source) => source.credit.key),
     ...research.missing,
   );
+  // Line 1g: Form 7210 line 10, the credit of each clean hydrogen facility the taxpayer owns (7210/form3800.ts).
+  const hydrogen = cleanHydrogenSourcesOf(inputs);
+  missing.push(...hydrogen.missing);
   // Line 3: Form 8844 line 2, the empowerment zone credit of the taxpayer's own employees (8844/sources.ts).
   const zone = withForm8844(inputs, [
     ...stated,
@@ -238,6 +244,7 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
     ...workOpportunity.sources,
     ...research.sources,
     ...disabledAccess.sources,
+    ...hydrogen.sources,
   ]);
   // Lines 1j, 1dd and 1ee: Form 8881 lines 8, 11 and 15 less the K-1s, the taxpayer's own plan (8881/sources.ts).
   const plan = smallEmployerPlanSources(inputs);
