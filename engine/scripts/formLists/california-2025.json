@@ -229,7 +229,8 @@
     {
       "name": "Form 3808",
       "title": "Manufacturing Enhancement Area Credit Summary (MEA)",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3808"
     },
     {
       "name": "Form 3809",
@@ -240,27 +241,32 @@
     {
       "name": "Form 3814",
       "title": "New Donated Fresh Fruits or Vegetables Credit",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "3814"
     },
     {
       "name": "Form 3820",
       "title": "High-Road Cannabis Tax Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3820"
     },
     {
       "name": "Form 3821",
       "title": "Cannabis Equity Tax Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3821"
     },
     {
       "name": "Form 3831",
       "title": "Homeless Hiring Tax Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3831"
     },
     {
       "name": "Form 3835",
       "title": "State Historic Rehabilitation Tax Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3835"
     },
     {
       "name": "Form 3840",
