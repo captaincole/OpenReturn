@@ -35,6 +35,12 @@ The reduction matters only when the investment is sold. A sale goes on Form 8949
 - **Recapture on Schedule 2 line 17a.** A Form 8874-B fact on the investment (the event date, and the credits claimed in each earlier year) would let the engine figure the recapture amount of section 45D(g) and put it on Schedule 2 line 17a with "NMCR". That adds a family of input documents (Form 8874-B), so it waits for a person.
 - **Basis of a sold investment.** A trade fact could name its investment fact (`newMarketsInvestmentKey`), and the engine would lower the basis by the credits of the credit allowance dates held, from boxes 10a to 10g of Form 8874-A, as Form 8949 column (g). That changes how a trade's basis is read, so it waits for a person.
 
+## Second opinions
+
+- **Blind fill (2026-11-27).** A preparer filled 14 cases from the blank form and its instructions only. Every line 1 rate and credit, line 2 and line 3 matches the engine, blank lines included. The preparer's dollar doubts are items 1, 2 and 7 above and decision A122 (line 2 rounding). On item 2 the preparer made the same choice: a sale on the credit allowance date keeps that date's credit.
+- **PolicyEngine-US 2.154.2 (commit c1fea42a38).** It does not model the new markets credit. `general_business_credit` is a bare input with no formula, so it has no constant or formula to compare.
+- **Other projects.** The repository names no other reference implementation for this form.
+
 ## Confidence by field group
 
 | Field group | Confidence |
