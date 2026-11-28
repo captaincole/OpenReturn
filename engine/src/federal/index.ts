@@ -66,6 +66,7 @@ import { register as registerForm8801 } from "./8801/bindings.js";
 import { register as registerForm8814 } from "./8814/bindings.js";
 import { register as registerForm8815 } from "./8815/bindings.js";
 import { register as registerForm8820 } from "./8820/bindings.js";
+import { form8820CopyCount } from "./8820/copies.js";
 import { register as registerForm8824 } from "./8824/bindings.js";
 import { form8824CopyCount } from "./8824/printed.js";
 import { register as registerForm8826 } from "./8826/bindings.js";
@@ -1329,6 +1330,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 7210",
     relativeDir: "federal/7210",
     register: registerForm7210,
+    // One Form 7210 for each clean hydrogen facility (7210/resolveInfo.ts).
+    copies: {
+      count: (info) => info?.form7210Copies?.length ?? 1,
+      select: (info, index) => info && { ...info, form7210CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-7211",
@@ -1357,6 +1363,12 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8820",
     relativeDir: "federal/8820",
     register: registerForm8820,
+    /* "Attach as many Part II pages as needed": one page 2 per 26 drugs; page 1 prints once (8820/copies.ts). */
+    copies: {
+      count: (info) => form8820CopyCount(info),
+      select: (info, index) => info && { ...info, form8820CopyIndex: index },
+      laterCopyPages: [1],
+    },
   }),
   makeFormSpec({
     formId: "form-8835",

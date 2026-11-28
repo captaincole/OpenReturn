@@ -10,8 +10,11 @@
 import { deductionReductionOf } from "../../federal/6765/figures.js";
 import { paidByCategory } from "../../federal/6765/qualifiedExpenses.js";
 import { placeReduction, REDUCTION_ORDER } from "../../federal/6765/reduction.js";
+import { clinicalAndResearchOverlapGap } from "../../federal/8820/coordination.js";
+import { orphanDrugFigures, orphanDrugReductions } from "../../federal/8820/figures.js";
 import { disabledAccessReductions } from "../../federal/8826/figures.js";
 import { tipCreditReductions } from "../../federal/8846/figures.js";
+import { agriBiodieselIncomeByBusiness } from "../../federal/8864/figures.js";
 import { childcareCreditReductions } from "../../federal/8882/figures.js";
 import { atLeast, sum } from "../../money.js";
 import {
@@ -21,6 +24,7 @@ import {
 } from "./business.js";
 import { placesPersonalProperty, type ScopedDepreciation } from "./depreciation.js";
 import { empowermentZoneFigures } from "./empowermentZone.js";
+import { statedWageCreditsByBusiness } from "./generalBusinessCredit.js";
 import { statedRentalsOnReturn, type RentalFactValue } from "./rental.js";
 import { readResearchCreditFact } from "./researchCredit.js";
 import { section179RecaptureByBusiness } from "./section179Recapture.js";
@@ -70,15 +74,19 @@ const BUSINESS_PREFIX = "business.";
 function withRecapture<T extends { key: string; value: BusinessFactValue }>(
   businesses: T[],
   facts: ReadonlyArray<FactRow>,
+  joint: boolean,
 ): T[] {
   const recapture = section179RecaptureByBusiness(facts);
-  if (recapture.size === 0) return businesses;
+  // Form 8864 line 9, the agri-biodiesel credit, is the producing business's other income too (federal/8864/figures.ts).
+  const biodiesel = agriBiodieselIncomeByBusiness(facts, joint);
+  if (recapture.size === 0 && biodiesel.size === 0) return businesses;
   return businesses.map((business) => {
     const amount = recapture.get(business.key.slice(BUSINESS_PREFIX.length));
-    if (amount === undefined) return business;
+    const credit = biodiesel.get(business.key);
+    if (amount === undefined && credit === undefined) return business;
     return {
       ...business,
-      value: { ...business.value, otherIncome: sum(business.value.otherIncome, amount) },
+      value: { ...business.value, otherIncome: sum(business.value.otherIncome, amount, credit) },
     };
   });
 }
@@ -156,6 +164,13 @@ const BUSINESS_CREDIT_REDUCTIONS: ReadonlyArray<CreditReduction> = [
     californiaAddsBack: true,
   },
   /*
+   * The same line's Form 8932 and Form 8994: the engine takes these credits as
+   * stated, each naming the business that paid the wages (generalBusinessCredit.ts).
+   * Section 280C(a) takes them off, and California does not apply it
+   * (ca-rtc-2025::sec::s17270::b; federal/8820/QUESTIONS.md item 19).
+   */
+  { reductionsOf: onLine("wages", statedWageCreditsByBusiness), californiaAddsBack: true },
+  /*
    * Line 23: "Reduce your deduction by the amount shown on Form 8846, line 4"
    * (irs-1040sc-inst-2025::sec::line-23::b01). The stated taxesAndLicenses hold
    * the employer taxes before the credit. California's treatment is an open
@@ -193,9 +208,17 @@ const BUSINESS_CREDIT_REDUCTIONS: ReadonlyArray<CreditReduction> = [
    */
   { reductionsOf: childcareCreditReductions, californiaAddsBack: false },
   /*
+   * Form 8820 without the reduced credit election: "reduce your otherwise
+   * allowable deduction for qualified clinical testing expenses by the amount
+   * of the credit" (irs-8820-form-2025::sec::line-2a::b02), on the lines that
+   * hold the expenses as the credits above left them (federal/8820/reduction.ts).
+   * California gives it back (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b08).
+   */
+  { reductionsOf: orphanDrugReductions, californiaAddsBack: true },
+  /*
    * Form 6765 without the reduced credit election: the research expenses the
    * business deducts go down by line 28, on the lines the credits above left
-   * (federal/6765/reduction.ts), so it is last. California is a named gap on
+   * (federal/6765/reduction.ts), Form 8820's among them, so it is last. California is a named gap on
    * Schedule CA line 3, not an add-back (CA_RESEARCH_GAP).
    */
   { reductionsOf: researchReductions, californiaAddsBack: false },
@@ -203,15 +226,24 @@ const BUSINESS_CREDIT_REDUCTIONS: ReadonlyArray<CreditReduction> = [
 
 type Business = { key: string; value: BusinessFactValue };
 
-/* The research business's expenses less Form 6765 line 28; undefined with no reduction, placed undefined when the business is not on the return. */
-function researchPlacement(businesses: ReadonlyArray<Business>, facts: ReadonlyArray<FactRow>) {
+/*
+ * The research business's expenses less Form 6765 line 28; undefined with no
+ * reduction, placed undefined when the business is not on the return or its
+ * clinical testing may be in the research expenses (federal/8820/coordination.ts).
+ */
+function researchPlacement(
+  businesses: ReadonlyArray<Business>,
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+) {
   const fact = readResearchCreditFact(facts).fact;
   if (fact === undefined) return undefined;
   const reduction = deductionReductionOf(fact.value);
   if (reduction === undefined) return undefined;
   const { businessKey, expenses, businessComponents } = fact.value;
   const business = businesses.find((each) => each.key === businessKey);
-  if (business === undefined) return { businessKey, reduction, placed: undefined };
+  if (business === undefined || clinicalAndResearchOverlapGap(facts, joint) !== undefined)
+    return { businessKey, reduction, placed: undefined };
   const paid = paidByCategory(expenses, businessComponents);
   const placed = placeReduction(business.value.expenses, reduction, paid);
   return { businessKey, reduction, placed, before: business.value.expenses };
@@ -220,10 +252,10 @@ function researchPlacement(businesses: ReadonlyArray<Business>, facts: ReadonlyA
 /* Line 28 on each Schedule C line it uses; none while the reduction does not fit (a gap on line 28). */
 function researchReductions(
   facts: ReadonlyArray<FactRow>,
-  _joint: boolean,
+  joint: boolean,
   businesses: ReadonlyArray<Business>,
 ): ReductionsByBusiness {
-  const placement = researchPlacement(businesses, facts);
+  const placement = researchPlacement(businesses, facts, joint);
   const placed = placement?.placed;
   if (placement === undefined || placed === undefined || placed.left > 0) return new Map();
   const reductions = REDUCTION_ORDER.map(({ line }) => ({
@@ -319,13 +351,26 @@ export function businessCreditAddBack(facts: ReadonlyArray<FactRow>, joint: bool
   return withCredits(statedBusinessesOnReturn(facts, joint).businesses, facts, joint).addBack;
 }
 
+/* The stated businesses as the credits before the one of reductionsOf in the list leave them. */
+function businessesBefore(
+  reductionsOf: CreditReduction["reductionsOf"],
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+) {
+  const at = BUSINESS_CREDIT_REDUCTIONS.findIndex((each) => each.reductionsOf === reductionsOf);
+  const before = BUSINESS_CREDIT_REDUCTIONS.slice(0, at);
+  return withCredits(statedBusinessesOnReturn(facts, joint).businesses, facts, joint, before)
+    .businesses;
+}
+
 /* Form 6765 line 28's reduction on the research business after the other credits, for the form's gap: undefined with no reduction. */
 export function researchCreditPlacement(facts: ReadonlyArray<FactRow>, joint: boolean) {
-  const others = BUSINESS_CREDIT_REDUCTIONS.filter(
-    (each) => each.reductionsOf !== researchReductions,
-  );
-  const stated = statedBusinessesOnReturn(facts, joint).businesses;
-  return researchPlacement(withCredits(stated, facts, joint, others).businesses, facts);
+  return researchPlacement(businessesBefore(researchReductions, facts, joint), facts, joint);
+}
+
+/* Form 8820's figures, its reduction placed on the business as the credits before it left it. */
+export function orphanDrugCreditFigures(facts: ReadonlyArray<FactRow>, joint: boolean) {
+  return orphanDrugFigures(facts, joint, businessesBefore(orphanDrugReductions, facts, joint));
 }
 
 /* The research expenses line 28 takes off the business's Schedule C lines (Schedule CA line 3 gap); 0 with none. */
@@ -347,7 +392,7 @@ export function researchCreditDeductionReduction(
 export function businessesOnReturn(facts: ReadonlyArray<FactRow>, joint: boolean) {
   const result = statedBusinessesOnReturn(facts, joint);
   const shared = activitiesWithPersonalProperty(facts, joint) >= SHARED_TEST_MINIMUM;
-  const businesses = withRecapture(marked(result.businesses, shared), facts);
+  const businesses = withRecapture(marked(result.businesses, shared), facts, joint);
   return { ...result, businesses: withCredits(businesses, facts, joint).businesses };
 }
 
