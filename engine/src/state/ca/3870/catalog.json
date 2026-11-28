@@ -1,0 +1,588 @@
+{
+  "form": {
+    "formId": "form-3870",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "Election for Refundable Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3870.0.header.id_number_type",
+      "label": "Type of identification number: SSN or ITIN, CA Corporation no., or FEIN",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Select Entity type",
+      "position": {
+        "page": 0,
+        "x": 411.164,
+        "y": 698.554
+      },
+      "options": [
+        {
+          "value": "ssn_or_itin",
+          "radioOption": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N).",
+          "label": "SSN or ITIN"
+        },
+        {
+          "value": "ca_corporation_number",
+          "radioOption": "California Corporation number.",
+          "label": "CA Corporation no."
+        },
+        {
+          "value": "fein",
+          "radioOption": "Federal Employer Identification Number (F E I N).",
+          "label": "FEIN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.header.id_number",
+      "label": "S S N or I T I N, C A Corporation number, F E I N (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "S S N or I T I N, C A Corporation number, F E I N (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 408.85,
+        "y": 684.12
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3870.0.header.name_on_return",
+      "label": "Name(s) as shown on your California tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on your California tax return",
+      "position": {
+        "page": 0,
+        "x": 35.988,
+        "y": 660.506
+      }
+    },
+    {
+      "fieldId": "form-3870.0.header.sos_file_number",
+      "label": "California Secretary of State (S O S) file number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "California Secretary of State (S O S) file number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 408.857,
+        "y": 660.491
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3870.0.line.1a_credit_name_col_a",
+      "label": "Line 1a. (a) Credit name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1a. (a) Credit name",
+      "position": {
+        "page": 0,
+        "x": 57.527,
+        "y": 583.903
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1a_credit_code_col_b",
+      "label": "Line 1a. (b) Credit code.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1a. (b) Credit code",
+      "position": {
+        "page": 0,
+        "x": 282.132,
+        "y": 583.894
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1a_refundable_credit_amount_col_c",
+      "label": "Line 1a. (c) Credit amount to be elected as a refundable credit.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1a. (c) Credit amount to be elected as a refundable credit",
+      "position": {
+        "page": 0,
+        "x": 373.324,
+        "y": 583.9
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3870.0.line.1b_credit_name_col_a",
+      "label": "Line 1b. (a) Credit name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1b. (a) Credit name",
+      "position": {
+        "page": 0,
+        "x": 57.527,
+        "y": 568.91
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1b_credit_code_col_b",
+      "label": "Line 1b. (b) Credit code.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1b. (b) Credit code",
+      "position": {
+        "page": 0,
+        "x": 282.117,
+        "y": 568.921
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1b_refundable_credit_amount_col_c",
+      "label": "Line 1b. (c) Credit amount to be elected as a refundable credit.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1b. (c) Credit amount to be elected as a refundable credit",
+      "position": {
+        "page": 0,
+        "x": 373.314,
+        "y": 568.936
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3870.0.line.1c_credit_name_col_a",
+      "label": "Line 1c. (a) Credit name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1c. (a) Credit name",
+      "position": {
+        "page": 0,
+        "x": 57.5223,
+        "y": 553.923
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1c_credit_code_col_b",
+      "label": "Line 1c. (b) Credit code.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1c. (b) Credit code",
+      "position": {
+        "page": 0,
+        "x": 282.129,
+        "y": 553.887
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1c_refundable_credit_amount_col_c",
+      "label": "Line 1c. (c) Credit amount to be elected as a refundable credit.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1c. (c) Credit amount to be elected as a refundable credit",
+      "position": {
+        "page": 0,
+        "x": 373.327,
+        "y": 553.926
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3870.0.line.1d_credit_name_col_a",
+      "label": "Line 1d. (a) Credit name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1d. (a) Credit name",
+      "position": {
+        "page": 0,
+        "x": 57.527,
+        "y": 538.923
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1d_credit_code_col_b",
+      "label": "Line 1d. (b) Credit code.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1d. (b) Credit code",
+      "position": {
+        "page": 0,
+        "x": 282.128,
+        "y": 538.91
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1d_refundable_credit_amount_col_c",
+      "label": "Line 1d. (c) Credit amount to be elected as a refundable credit.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1d. (c) Credit amount to be elected as a refundable credit",
+      "position": {
+        "page": 0,
+        "x": 373.314,
+        "y": 538.867
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3870.0.line.1e_credit_name_col_a",
+      "label": "Line 1e. (a) Credit name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1e. (a) Credit name",
+      "position": {
+        "page": 0,
+        "x": 57.5252,
+        "y": 523.926
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1e_credit_code_col_b",
+      "label": "Line 1e. (b) Credit code.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1e. (b) Credit code",
+      "position": {
+        "page": 0,
+        "x": 282.118,
+        "y": 523.913
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1e_refundable_credit_amount_col_c",
+      "label": "Line 1e. (c) Credit amount to be elected as a refundable credit.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1e. (c) Credit amount to be elected as a refundable credit",
+      "position": {
+        "page": 0,
+        "x": 373.314,
+        "y": 523.897
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3870.0.line.1f_credit_name_col_a",
+      "label": "Line 1f. (a) Credit name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1f. (a) Credit name",
+      "position": {
+        "page": 0,
+        "x": 57.5165,
+        "y": 508.903
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1f_credit_code_col_b",
+      "label": "Line 1f. (b) Credit code.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1f. (b) Credit code",
+      "position": {
+        "page": 0,
+        "x": 282.114,
+        "y": 508.896
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1f_refundable_credit_amount_col_c",
+      "label": "Line 1f. (c) Credit amount to be elected as a refundable credit.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1f. (c) Credit amount to be elected as a refundable credit",
+      "position": {
+        "page": 0,
+        "x": 373.312,
+        "y": 508.897
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3870.0.line.1g_credit_name_col_a",
+      "label": "Line 1g. (a) Credit name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1g. (a) Credit name",
+      "position": {
+        "page": 0,
+        "x": 57.5268,
+        "y": 493.92
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1g_credit_code_col_b",
+      "label": "Line 1g. (b) Credit code.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1g. (b) Credit code",
+      "position": {
+        "page": 0,
+        "x": 282.119,
+        "y": 493.924
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1g_refundable_credit_amount_col_c",
+      "label": "Line 1g. (c) Credit amount to be elected as a refundable credit.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1g. (c) Credit amount to be elected as a refundable credit",
+      "position": {
+        "page": 0,
+        "x": 373.292,
+        "y": 493.902
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3870.0.line.1h_credit_name_col_a",
+      "label": "Line 1h. (a) Credit name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1h. (a) Credit name",
+      "position": {
+        "page": 0,
+        "x": 57.5323,
+        "y": 478.923
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1h_credit_code_col_b",
+      "label": "Line 1h. (b) Credit code.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1h. (b) Credit code",
+      "position": {
+        "page": 0,
+        "x": 282.122,
+        "y": 478.89
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1h_refundable_credit_amount_col_c",
+      "label": "Line 1h. (c) Credit amount to be elected as a refundable credit.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1h. (c) Credit amount to be elected as a refundable credit",
+      "position": {
+        "page": 0,
+        "x": 373.316,
+        "y": 478.913
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3870.0.line.1i_credit_name_col_a",
+      "label": "Line 1i. (a) Credit name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1i. (a) Credit name",
+      "position": {
+        "page": 0,
+        "x": 57.5268,
+        "y": 463.913
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1i_credit_code_col_b",
+      "label": "Line 1i. (b) Credit code.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1i. (b) Credit code",
+      "position": {
+        "page": 0,
+        "x": 282.131,
+        "y": 463.913
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1i_refundable_credit_amount_col_c",
+      "label": "Line 1i. (c) Credit amount to be elected as a refundable credit.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1i. (c) Credit amount to be elected as a refundable credit",
+      "position": {
+        "page": 0,
+        "x": 373.302,
+        "y": 463.904
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3870.0.line.1j_credit_name_col_a",
+      "label": "Line 1j. (a) Credit name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1j. (a) Credit name",
+      "position": {
+        "page": 0,
+        "x": 57.5147,
+        "y": 448.926
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1j_credit_code_col_b",
+      "label": "Line 1j. (b) Credit code.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1j. (b) Credit code",
+      "position": {
+        "page": 0,
+        "x": 282.131,
+        "y": 448.916
+      }
+    },
+    {
+      "fieldId": "form-3870.0.line.1j_refundable_credit_amount_col_c",
+      "label": "Line 1j. (c) Credit amount to be elected as a refundable credit.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1j. (c) Credit amount to be elected as a refundable credit",
+      "position": {
+        "page": 0,
+        "x": 373.312,
+        "y": 448.894
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3870.0.line.2_election_refundable_credit_amount",
+      "label": "Line 2. Election for refundable credit amount. Enter the total of line 1, column (c) See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Election for refundable credit amount. Enter the total of line 1, column (c) See instructions",
+      "position": {
+        "page": 0,
+        "x": 373.309,
+        "y": 422.504
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3870.0.line.3_annual_refundable_credit_amount",
+      "label": "Line 3. Annual refundable credit amount. Multiply line 2 by 20% (.20) See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Annual refundable credit amount. Multiply line 2 by 20% (.20) See instructions",
+      "position": {
+        "page": 0,
+        "x": 450.712,
+        "y": 407.623
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3870/blank.pdf",
+    "ingestedAt": "2026-11-28T04:34:05.375Z",
+    "totalFields": 36,
+    "skipped": 0,
+    "catalogEntries": 36
+  }
+}

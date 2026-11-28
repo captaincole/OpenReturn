@@ -70,6 +70,7 @@ const FORM_SECTIONS: Record<Exclude<Section, "other">, string[]> = {
     "form-172",
     "form-8958",
     "form-8833",
+    "schedule-r-ca",
     "form-3504",
   ],
   deductions: [
@@ -186,6 +187,8 @@ const FORM_SECTIONS: Record<Exclude<Section, "other">, string[]> = {
     "form-8933-schedule-d",
     "form-8933-schedule-e",
     "form-8933-schedule-f",
+    "form-4197",
+    "form-3870",
     "form-3835",
     "form-3831",
     "form-3821",
@@ -205,7 +208,15 @@ const FORM_SECTIONS: Record<Exclude<Section, "other">, string[]> = {
     "form-3503",
   ],
   /* Payments and penalties. */
-  payments: ["form-5805", "form-2210", "form-2210-f", "form-8888", "form-5805f", "form-8379"],
+  payments: [
+    "form-5805",
+    "form-2210",
+    "form-2210-f",
+    "form-8888",
+    "form-5805f",
+    "form-8379",
+    "form-3872",
+  ],
 };
 
 export interface SectionPlace {

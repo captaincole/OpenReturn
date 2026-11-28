@@ -16,7 +16,8 @@
     {
       "name": "Form 540 2EZ",
       "title": "California Resident Income Tax Return",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "540-2ez"
     },
     {
       "name": "Form 540NR",
@@ -284,12 +285,14 @@
     {
       "name": "Form 3870",
       "title": "Election for Refundable Credit",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "3870"
     },
     {
       "name": "Form 3872",
       "title": "California Disaster Relief Request for Postponement of Tax Deadlines",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3872"
     },
     {
       "name": "Form 3885A",
@@ -307,7 +310,8 @@
     {
       "name": "Form 4197",
       "title": "Information on Tax Expenditure Items",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "4197"
     },
     {
       "name": "Form 5805",
@@ -392,7 +396,8 @@
     {
       "name": "Schedule R",
       "title": "Apportionment and Allocation of Income",
-      "maxPerReturn": "1 per t/p"
+      "maxPerReturn": "1 per t/p",
+      "short": "schedule-r-ca"
     },
     {
       "name": "Schedule S",

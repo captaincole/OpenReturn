@@ -1,0 +1,312 @@
+{
+  "formId": "form-3872",
+  "fieldCount": 34,
+  "entries": [
+    {
+      "fieldId": "form-3872.0.header.additional_information",
+      "widgets": [
+        {
+          "widgetName": "Additional information. See instructions",
+          "text": "T-19M6N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.header.ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "California corporation number (12 digits)",
+          "text": "T-ZIIXD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.header.ca_sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "California Secretary of State file number (12 digits)",
+          "text": "T-1SATE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.header.city",
+      "widgets": [
+        {
+          "widgetName": "City (If you have a foreign address, see instructions.)",
+          "text": "T-5CBFS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.header.fein",
+      "widgets": [
+        {
+          "widgetName": "Federal Employer Identification Number (F E I N) (9 digits)",
+          "text": "T-1GBJH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.header.foreign_country_name",
+      "widgets": [
+        {
+          "widgetName": "Foreign country name",
+          "text": "T-1M8YA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.header.foreign_postal_code",
+      "widgets": [
+        {
+          "widgetName": "Foreign postal code",
+          "text": "T-6IJ6W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.header.foreign_province_state_county",
+      "widgets": [
+        {
+          "widgetName": "Foreign province/2 letter state abbreviation/county",
+          "text": "T-1OG6H"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.header.names_on_return",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on your state tax return",
+          "text": "T-1911X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.header.private_mailbox",
+      "widgets": [
+        {
+          "widgetName": "PMB number",
+          "text": "TQ1QVA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.header.spouse_ssn",
+      "widgets": [
+        {
+          "widgetName": "Spouse's/R D P's S S N or I T I N (9 digits)",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits)",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.header.state",
+      "widgets": [
+        {
+          "widgetName": "2 letter state abbreviation",
+          "text": "06"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.header.street_address",
+      "widgets": [
+        {
+          "widgetName": "Street address (suite/room number)",
+          "text": "T-8WDSK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.header.zip",
+      "widgets": [
+        {
+          "widgetName": "ZIP code, maximum 9 digits",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.part1.1_disaster_name_fema_number",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line 1. Disaster name and/or Federal Emergency Management Agency (F E M A) number",
+          "text": "T-1G8Q7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.part1.2_date_of_disaster",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Date of disaster (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.part1.3_location_of_disaster",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Location of the disaster (address, city, county, 2 letter state abbreviation, and ZIP code, maximum 9 digits)",
+          "text": "T-10NSH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.part2.1a_fema_approval_letter",
+      "widgets": [
+        {
+          "widgetName": "Part II Line 1 Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above See instructions Check all that apply F E M A assistance approval letter",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.part2.1b_insurance_claim",
+      "widgets": [
+        {
+          "widgetName": "Part II Line 1 Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above See instructions Check all that apply: Insurance claim",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.part2.1c_relief_assistance_verification",
+      "widgets": [
+        {
+          "widgetName": "Part II Line 1 Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above See instructions Check all that apply Disaster relief assistance verification",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.part2.1d_records_in_disaster_area",
+      "widgets": [
+        {
+          "widgetName": "Part II Line 1 Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above See instructions Check all that apply Evidence that records were maintained in the disaster area",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.part2.1e_sba_loan_award_letter",
+      "widgets": [
+        {
+          "widgetName": "Part II Line 1 Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above See instructions Check all that apply Small Business Administration disaster loan program award letter",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.part2.1f_law_enforcement_report",
+      "widgets": [
+        {
+          "widgetName": "Part II Line 1 Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above See instructions Check all that apply Law enforcement report",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.part2.1g_other_documentation",
+      "widgets": [
+        {
+          "widgetName": "Part II Line 1 Check the box for the supporting documentation that will be provided to the Franchise Tax Board upon request for the disaster listed above See instructions Check all that apply Other (provide explanation below)",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.part2.2_relief_entitlement_explanation",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Explain why you are entitled to relief under Revenue and Taxation Code Section 18572",
+          "text": "T-1C1WF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.signing.firm_address",
+      "widgets": [
+        {
+          "widgetName": "Firm's address",
+          "text": "T-1OKW7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.signing.firm_name",
+      "widgets": [
+        {
+          "widgetName": "Firm's name",
+          "text": "T-1QV60"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.signing.representative_date_signed",
+      "widgets": [
+        {
+          "widgetName": "Signature of owner, officer, or representative Date (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.signing.representative_title",
+      "widgets": [
+        {
+          "widgetName": "Title",
+          "text": "T-1NF4X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.signing.spouse_date_signed",
+      "widgets": [
+        {
+          "widgetName": "Spouse's/RDP's signature (if filing jointly, both must sign) Date (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.signing.spouse_phone",
+      "widgets": [
+        {
+          "widgetName": "Spouse's/RDP's Telephone",
+          "text": "555-123-4567"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.signing.taxpayer_date_signed",
+      "widgets": [
+        {
+          "widgetName": "Your signature Date (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3872.0.signing.taxpayer_phone",
+      "widgets": [
+        {
+          "widgetName": "Your Telephone",
+          "text": "555-123-4567"
+        }
+      ]
+    }
+  ]
+}
