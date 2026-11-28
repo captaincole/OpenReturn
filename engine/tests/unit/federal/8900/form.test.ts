@@ -160,7 +160,7 @@ describe("line 6 with two K-1s that show cents", () => {
     ),
   );
 
-  it("rounds each K-1, then adds: $1,200 + $800, not $2,001 (docs/rule-decisions.md A122)", () => {
+  it("rounds each K-1, then adds: $1,200 + $800, not $2,001 (docs/rule-decisions.md A134)", () => {
     expect(out.line(L6)).toBe(2_000);
     expect(out.line(L7)).toBe(163_625 + 2_000);
     expect(out.value("form-3800", COL_E)).toBe(163_625 + 2_000);

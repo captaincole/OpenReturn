@@ -122,7 +122,10 @@ npm run dev:web      # next only
 npm run build:all    # builds the three services for a production run (canon, cade, web)
 npm run start:all    # runs the built services on the same three ports; see "Production run" below
 
-npm test             # engine golden suite; positional filters work (npm test -- alex)
+npm test             # engine golden suite, values only: each scenario's lines against its expected values, in seconds;
+                     # positional filters work (npm test -- alex)
+npm run test:pdf     # the same suite with the PDFs: fills each scenario's forms and compares them with its golden PDFs,
+                     # and runs the catalog-fill check of each form; minutes; must pass before a pull request merges
 npm run test:unit    # engine + canon + agent unit tests, then the web app's (web/lib/*.test.ts); test:integration likewise, without web
 npm run typecheck    # tsc over engine + builder + canon + agent
 npm run coverage     # golden suite under c8; rewrites docs/coverage.md (fields supported, branches, lines, by form)
@@ -488,7 +491,7 @@ Most readers open a PR on a phone and do not open the diff. The description must
    - `Risk: routine` or `Risk: high — <what could break and for whom>`; add `Complex: <why>` when the reader needs more than a glance, and `Pattern change: <old → new>` when the PR changes how we do something. A pattern change also updates this file.
 3. **What changed**: one bullet per idea, in the order a reader would ask. Name a file only when the reader has to go there.
 4. **Example outcome** when a user or operator sees something different: the real screen text, log line or command output.
-5. **Verified**: what ran and what did not. Say "not run" out loud.
+5. **Verified**: what ran and what did not. Say "not run" out loud. A pull request that changes `engine/` or `sources/` merges only after `npm run test:pdf` passes on its head with `main` merged in: the commit hook runs the scenarios for their values only, so this is the one place where the filled PDFs are checked.
 6. **PDFs to review** when the PR adds or changes a PDF: one link for each file to its page on the PR's branch, `https://github.com/captaincole/OpenReturn/blob/<branch>/<path>`. GitHub's diff does not show a PDF; the file's page does. Put the files a person must read first (a made input document, the filled return of a new form), then the other filled returns, then blank forms. `git diff --name-only --diff-filter=AM origin/main...HEAD -- '*.pdf'` lists the files. After a push that changes the list, update it.
 7. **Refs**: the issue, the PRs it builds on, the doc that recommends the change.
 

@@ -4,11 +4,11 @@ Form and instructions: Rev. December 2023, for tax years from 2023 (`irs-8900-in
 
 ## Two texts conflict
 
-### A. The K-1 credits on line 6 round one by one (decision A122)
+### A. The K-1 credits on line 6 round one by one (decision A134)
 
 - Text A, the Form 1040 instructions: "include cents when adding the amounts and round off only the total" (`irs-1040-inst-2025::sec::rounding-off-to-whole::b01`).
 - Text B: line 7 goes to "Form 3800, Part III, line 4g" (`irs-8900-face-2025::sec::face-page-1::b02`), broken down "by the EIN of the pass-through entity ... in Part V" (`irs-3800-inst-2025::sec::part-v-3::b01`), one whole-dollar amount for each K-1.
-- Decided: text B, as A96, so line 7 equals Form 3800 line 4g (`resolveInfo.ts`, `docs/rule-decisions.md` A122). The blind fill (below) read text A; `form.test.ts` pins text B.
+- Decided: text B, as A96, so line 7 equals Form 3800 line 4g (`resolveInfo.ts`, `docs/rule-decisions.md` A134). The blind fill (below) read text A; `form.test.ts` pins text B.
 - Dollars: at most $1 for each K-1 with cents. None in `nieda`.
 
 ### B. The credit "allowed" or "allowable" lowers the basis (item 5; for `docs/law-findings.md`)
@@ -65,7 +65,7 @@ A preparer filled 14 cases from the blank form and the instructions only. Every 
 | Lines 1 and 2 | stated rule; section 45G(a) agrees |
 | Lines 3a to 3d | stated rule; decimals are my own reading (item 2) |
 | Lines 4 and 5 | stated rule; the group share is my own reading of lines 1 to 4 (item 4) |
-| Line 6 | stated rule; rounding each K-1 is a decision (A122) |
+| Line 6 | stated rule; rounding each K-1 is a decision (A134) |
 | Line 7 | stated rule |
 | Basis reduction (Form 4562) | stated rule; the regulation's Example 1 settles the amount; the statute's "allowed" is a law finding |
 | No published example with numbers for any line | — |

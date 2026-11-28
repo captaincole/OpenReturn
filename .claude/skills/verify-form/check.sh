@@ -10,4 +10,5 @@ step npm run -s lint
 step npm run -s test:unit
 step npm run -s test:integration
 step npm test
+step npm run -s test:pdf
 step npm run -s form-engine -- form-status "$form"
