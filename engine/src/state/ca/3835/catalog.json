@@ -1,0 +1,334 @@
+{
+  "form": {
+    "formId": "form-3835",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "State Historic Rehabilitation Tax Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3835.0.header.id_number_type",
+      "label": "Type of identification number: SSN or ITIN, CA Corporation no., or FEIN",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Select entity type",
+      "position": {
+        "page": 0,
+        "x": 412.016,
+        "y": 694.703
+      },
+      "options": [
+        {
+          "value": "ssn_or_itin",
+          "radioOption": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N).",
+          "label": "SSN or ITIN"
+        },
+        {
+          "value": "ca_corporation_number",
+          "radioOption": "California Corporation number.",
+          "label": "CA Corporation no."
+        },
+        {
+          "value": "fein",
+          "radioOption": " Federal Employer Identification Number (F E I N).",
+          "label": "FEIN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3835.0.header.id_number",
+      "label": "S S N or I T I N, C A Corporation number, F E I N (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "S S N or I T I N, C A Corporation number, F E I N (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 408.728,
+        "y": 680.456
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3835.0.header.name_on_return",
+      "label": "Name(s) as shown on your California tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on your California tax return",
+      "position": {
+        "page": 0,
+        "x": 36.0053,
+        "y": 656.433
+      }
+    },
+    {
+      "fieldId": "form-3835.0.header.sos_file_number",
+      "label": "California Secretary of State (S O S) file number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "California Secretary of State (S O S) file number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 408.728,
+        "y": 656.433
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3835.0.header.generating_taxpayer_id_number_type",
+      "label": "Taxpayer generating the credit: type of identification number: SSN or ITIN, CA Corporation no., or FEIN",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "taxpayer generating the credit, Select entity type",
+      "position": {
+        "page": 0,
+        "x": 412.024,
+        "y": 646.261
+      },
+      "options": [
+        {
+          "value": "ssn_or_itin",
+          "radioOption": "S S N or I T I N.",
+          "label": "SSN or ITIN"
+        },
+        {
+          "value": "ca_corporation_number",
+          "radioOption": "CA Corporation number.",
+          "label": "CA Corporation no."
+        },
+        {
+          "value": "fein",
+          "radioOption": "F E I N.",
+          "label": "FEIN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3835.0.header.generating_taxpayer_id_number",
+      "label": "taxpayer generating the credit, S S N or I T I N, C A Corporation number, F E I N (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "taxpayer generating the credit, S S N or I T I N, C A Corporation number, F E I N (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 408.728,
+        "y": 631.952
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3835.0.header.generating_taxpayer_name",
+      "label": "Name of taxpayer generating the credit. See instructions.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name of taxpayer generating the credit. See instructions",
+      "position": {
+        "page": 0,
+        "x": 35.9748,
+        "y": 607.934
+      }
+    },
+    {
+      "fieldId": "form-3835.0.header.generating_taxpayer_sos_file_number",
+      "label": "taxpayer generating the credit, California Secretary of State (S O S) file number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "taxpayer generating the credit, California Secretary of State (S O S) file number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 408.728,
+        "y": 607.934
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3835.0.header.allocation_confirmation_number",
+      "label": "Tax Credit Allocation Confirmation Number.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Tax Credit Allocation Confirmation Number",
+      "position": {
+        "page": 0,
+        "x": 35.9902,
+        "y": 584.657
+      }
+    },
+    {
+      "fieldId": "form-3835.0.line.1_ctcac_allocated_credit",
+      "label": "Part I, Line 1. Enter the tax credit amount allocated from the California Tax Credit Allocation Committee (C T C A C).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Line 1. Enter the tax credit amount allocated from the California Tax Credit Allocation Committee (C T C A C)",
+      "position": {
+        "page": 0,
+        "x": 475.78,
+        "y": 551.749
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3835.0.line.2_pass_through_credit_k1",
+      "label": "Line 2. Pass through credit from Schedule K-1 (100S, 541, 565 or 568). See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Pass through credit from Schedule K-1 (100S, 541, 565 or 568). See instructions",
+      "position": {
+        "page": 0,
+        "x": 475.78,
+        "y": 533.762
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3835.0.line.3_credit_carryover_prior_year",
+      "label": "Line 3. Credit carryover from prior year(s). See Instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Credit carryover from prior year(s). See Instructions",
+      "position": {
+        "page": 0,
+        "x": 475.78,
+        "y": 515.756
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3835.0.line.4_total_available_credit",
+      "label": "Line 4. Total available credit. Add lines 1 through line 3.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Total available credit. Add lines 1 through line 3",
+      "position": {
+        "page": 0,
+        "x": 475.78,
+        "y": 497.752
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3835.0.line.5a_credit_claimed",
+      "label": "Line 5a. Credit Claimed. Enter the amount of the credit claimed on the current year tax return. See instructions. (Do not include any assigned credit claimed on form F T B 3544, Part B).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5a. Credit Claimed. Enter the amount of the credit claimed on the current year tax return. See instructions. (Do not include any assigned credit claimed on form F T B 3544, Part B)",
+      "position": {
+        "page": 0,
+        "x": 475.78,
+        "y": 470.747
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3835.0.line.5b_total_credit_assigned",
+      "label": "Line 5b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions",
+      "position": {
+        "page": 0,
+        "x": 475.78,
+        "y": 443.749
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3835.0.line.5c_credit_elected_refundable",
+      "label": "Line 5c. Credit amount to be elected as refundable in future years. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5c. Credit amount to be elected as refundable in future years. See instructions",
+      "position": {
+        "page": 0,
+        "x": 475.78,
+        "y": 425.766
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3835.0.line.6_credit_carryover_future_years",
+      "label": "Line 6. Credit carryover available for future years. Add line 5a, 5b, and 5c subtract the result from line 4.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Credit carryover available for future years. Add line 5a, 5b, and 5c subtract the result from line 4",
+      "position": {
+        "page": 0,
+        "x": 475.78,
+        "y": 407.748
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3835.0.line.7_credit_recapture",
+      "label": "Part II, Line 7. Credit recapture. See Instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, Line 7. Credit recapture. See Instructions",
+      "position": {
+        "page": 0,
+        "x": 475.78,
+        "y": 368.747
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3835/blank.pdf",
+    "ingestedAt": "2026-11-28T04:33:51.161Z",
+    "totalFields": 18,
+    "skipped": 0,
+    "catalogEntries": 18
+  }
+}

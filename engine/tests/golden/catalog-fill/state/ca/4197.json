@@ -1,0 +1,537 @@
+{
+  "formId": "form-4197",
+  "fieldCount": 59,
+  "entries": [
+    {
+      "fieldId": "form-4197.0.header.id_number",
+      "widgets": [
+        {
+          "widgetName": "S S N or I T I N, C A corporation number, F E I N (12 digits)",
+          "text": "T-1A8KJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.header.id_number_type",
+      "widgets": [
+        {
+          "widgetName": "Select Entity type",
+          "text": "S S N or I T I N."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.header.name_on_return",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on your California tax return",
+          "text": "T-7YNUH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.header.sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "California Secretary of State (S O S ) file number (12 digits)",
+          "text": "T-1E8TK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.1_credits_claimed_used_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (d) Credits claimed/used this year",
+          "text": "2,542"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.1_credits_generated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Credits generated this year",
+          "text": "5,258"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.1_deductions_claimed_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Deductions claimed this year",
+          "text": "7,414"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.1_exclusions_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (e) Exclusions",
+          "text": "6,114"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.1_expenditure_code_col_a",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line 1. (a) Code",
+          "text": "T-5CPNM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.1_other_amount_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (g) Other",
+          "text": "5,777"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.2_credits_claimed_used_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (d) Credits claimed/used this year",
+          "text": "9,098"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.2_credits_generated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (c) Credits generated this year",
+          "text": "6,887"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.2_deductions_claimed_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (b) Deductions claimed this year",
+          "text": "9,152"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.2_exclusions_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (e) Exclusions",
+          "text": "7,214"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.2_expenditure_code_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (a) Code",
+          "text": "T-4V4K7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.2_other_amount_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (g) Other",
+          "text": "1,044"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.3_credits_claimed_used_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 3. (d) Credits claimed/used this year",
+          "text": "3,122"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.3_credits_generated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 3. (c) Credits generated this year",
+          "text": "6,541"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.3_deductions_claimed_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 3. (b) Deductions claimed this year",
+          "text": "8,927"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.3_exclusions_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 3. (e) Exclusions",
+          "text": "9,314"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.3_expenditure_code_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 3. (a) Code",
+          "text": "T-PBGN6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.3_other_amount_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 3. (g) Other",
+          "text": "5,747"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.4_credits_claimed_used_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (d) Credits claimed/used this year",
+          "text": "6,481"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.4_credits_generated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (c) Credits generated this year",
+          "text": "9,118"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.4_deductions_claimed_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (b) Deductions claimed this year",
+          "text": "9,361"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.4_exclusions_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (e) Exclusions",
+          "text": "6,281"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.4_expenditure_code_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (a) Code",
+          "text": "T-10E4B"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.4_other_amount_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (g) Other",
+          "text": "6,359"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.5_credits_claimed_used_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 5. (d) Credits claimed/used this year",
+          "text": "9,766"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.5_credits_generated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 5. (c) Credits generated this year",
+          "text": "7,712"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.5_deductions_claimed_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 5. (b) Deductions claimed this year",
+          "text": "2,956"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.5_exclusions_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 5. (e) Exclusions",
+          "text": "8,295"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.5_expenditure_code_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 5. (a) Code",
+          "text": "T-1LEW6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part1.5_other_amount_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 5. (g) Other",
+          "text": "5,896"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.1_credits_claimed_used_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (e) Credits claimed/used this year",
+          "text": "2,147"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.1_credits_from_pte_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (d) Credits from P T E",
+          "text": "9,471"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.1_deductions_claimed_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Deductions claimed this year",
+          "text": "3,151"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.1_deductions_from_pte_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Deductions from P T E",
+          "text": "6,020"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.1_pte_code_col_a",
+      "widgets": [
+        {
+          "widgetName": "Part II, Line 1. (a) P T E code",
+          "text": "T-I2BMI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.2_credits_claimed_used_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (e) Credits claimed/used this year",
+          "text": "6,800"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.2_credits_from_pte_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (d) Credits from P T E",
+          "text": "5,952"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.2_deductions_claimed_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (c) Deductions claimed this year",
+          "text": "1,243"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.2_deductions_from_pte_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (b) Deductions from P T E",
+          "text": "8,617"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.2_pte_code_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (a) P T E code",
+          "text": "T-QRTT8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.3_credits_claimed_used_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 3. (e) Credits claimed/used this year",
+          "text": "7,333"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.3_credits_from_pte_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 3. (d) Credits from P T E",
+          "text": "7,119"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.3_deductions_claimed_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 3. (c) Deductions claimed this year",
+          "text": "6,359"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.3_deductions_from_pte_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 3. (b) Deductions from P T E",
+          "text": "6,306"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.3_pte_code_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 3. (a) P T E code",
+          "text": "T-ZLF66"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.4_credits_claimed_used_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (e) Credits claimed/used this year",
+          "text": "5,763"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.4_credits_from_pte_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (d) Credits from P T E",
+          "text": "9,933"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.4_deductions_claimed_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (c) Deductions claimed this year",
+          "text": "2,195"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.4_deductions_from_pte_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (b) Deductions from P T E",
+          "text": "6,642"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.4_pte_code_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (a) P T E code",
+          "text": "T-GFMZ3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.5_credits_claimed_used_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 5. (e) Credits claimed/used this year",
+          "text": "5,149"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.5_credits_from_pte_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 5. (d) Credits from P T E",
+          "text": "1,517"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.5_deductions_claimed_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 5. (c) Deductions claimed this year",
+          "text": "1,950"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.5_deductions_from_pte_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 5. (b) Deductions from P T E",
+          "text": "9,288"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.part2.5_pte_code_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 5. (a) P T E code",
+          "text": "T-GHE84"
+        }
+      ]
+    }
+  ]
+}

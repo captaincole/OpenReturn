@@ -1,0 +1,403 @@
+{
+  "form": {
+    "formId": "form-3820",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "High-Road Cannabis Tax Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3820.0.header.id_number_type",
+      "label": "Type of identification number: SSN or ITIN, CA Corporation no., or FEIN",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Select Entity type",
+      "position": {
+        "page": 0,
+        "x": 404.229,
+        "y": 697.815
+      },
+      "options": [
+        {
+          "value": "ssn_or_itin",
+          "radioOption": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N).",
+          "label": "SSN or ITIN"
+        },
+        {
+          "value": "ca_corporation_number",
+          "radioOption": "California Corporation number.",
+          "label": "CA Corporation no."
+        },
+        {
+          "value": "fein",
+          "radioOption": "Federal Employer Identification Number (F E I N).",
+          "label": "FEIN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3820.0.header.id_number",
+      "label": "S S N or I T I N, CA Corporation number, F E I N (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "S S N or I T I N, CA Corporation number, F E I N (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 401.532,
+        "y": 684.263
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3820.0.header.name_on_return",
+      "label": "Name(s) as shown on your California tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on your California tax return",
+      "position": {
+        "page": 0,
+        "x": 35.9928,
+        "y": 660.508
+      }
+    },
+    {
+      "fieldId": "form-3820.0.header.sos_file_number",
+      "label": "California Secretary of State (S O S) file number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "California Secretary of State (S O S) file number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 401.532,
+        "y": 660.508
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3820.0.line.a_business_name_on_license",
+      "label": "Part I, Line A. Business name as it appears on the license issued by the California Department of Cannabis Control (D C C).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Line A. Business name as it appears on the license issued by the California Department of Cannabis Control (D C C)",
+      "position": {
+        "page": 0,
+        "x": 65.9986,
+        "y": 573.274
+      }
+    },
+    {
+      "fieldId": "form-3820.0.line.b_license_type",
+      "label": "Line B — License type (check only one box)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line B. License type (check only one box)",
+      "position": {
+        "page": 0,
+        "x": 355.05,
+        "y": 555.007
+      },
+      "options": [
+        {
+          "value": "type_10_retailer",
+          "radioOption": "Type-10 (retailer).",
+          "label": "Type-10 (retailer)"
+        },
+        {
+          "value": "type_12_microbusiness",
+          "radioOption": "Type-12 (micro-business).",
+          "label": "Type-12 (micro-business)"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3820.0.line.c_license_number",
+      "label": "Line C. License number.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line C. License number",
+      "position": {
+        "page": 0,
+        "x": 354,
+        "y": 535.268
+      }
+    },
+    {
+      "fieldId": "form-3820.0.line.d_obtained_tentative_credit_reservation",
+      "label": "Line D — Did the business obtain a tentative credit reservation (TCR) from the Franchise Tax Board?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line D. Did the business obtain a tentative credit reservation (T C R) from the Franchise Tax Board?",
+      "position": {
+        "page": 0,
+        "x": 355.057,
+        "y": 510.832
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3820.0.line.e_tcr_confirmation_number",
+      "label": "Line E. T C R confirmation number.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line E. T C R confirmation number",
+      "position": {
+        "page": 0,
+        "x": 354,
+        "y": 493.376
+      }
+    },
+    {
+      "fieldId": "form-3820.0.line.1_qualified_employment_compensation_expenditures",
+      "label": "Part II, Line 1. Total qualified employment compensation expenditures. Enter the total amounts from Worksheet I, line 1, column (k).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, Line 1. Total qualified employment compensation expenditures. Enter the total amounts from Worksheet I, line 1, column (k)",
+      "position": {
+        "page": 0,
+        "x": 436.804,
+        "y": 399.968
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3820.0.line.2_safety_related_expenditures",
+      "label": "Line 2. Safety-related equipment, training, and services expenditures.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Safety-related equipment, training, and services expenditures",
+      "position": {
+        "page": 0,
+        "x": 436.804,
+        "y": 380.96
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3820.0.line.3_workforce_development_training_expenditures",
+      "label": "Line 3. Workforce development and employee safety training expenditures.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Workforce development and employee safety training expenditures",
+      "position": {
+        "page": 0,
+        "x": 436.804,
+        "y": 361.945
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3820.0.line.4_total_qualified_expenditures",
+      "label": "Line 4. Total qualified expenditures. Add line 1 through line 3.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Total qualified expenditures. Add line 1 through line 3",
+      "position": {
+        "page": 0,
+        "x": 436.804,
+        "y": 342.958
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3820.0.line.5_line_4_times_25_percent",
+      "label": "Line 5. Multiply line 4 by 25%.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Multiply line 4 by 25%",
+      "position": {
+        "page": 0,
+        "x": 436.804,
+        "y": 323.96
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3820.0.line.6_credit_amount",
+      "label": "Line 6. Credit amount. Enter the smaller of line 5 or $250,000.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Credit amount. Enter the smaller of line 5 or $250,000",
+      "position": {
+        "page": 0,
+        "x": 436.804,
+        "y": 304.945
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3820.0.line.7_pass_through_credit",
+      "label": "Line 7. Pass-through credit from Schedule K-1 (100S, 541, 565, or 568).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Pass-through credit from Schedule K-1 (100S, 541, 565, or 568)",
+      "position": {
+        "page": 0,
+        "x": 436.804,
+        "y": 285.961
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3820.0.line.8_prior_year_carryover",
+      "label": "Line 8. Credit carryover from prior year(s).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Credit carryover from prior year(s)",
+      "position": {
+        "page": 0,
+        "x": 436.804,
+        "y": 266.942
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3820.0.line.9_total_available_credit",
+      "label": "Line 9. Total available credit. Add line 6 through line 8.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Total available credit. Add line 6 through line 8",
+      "position": {
+        "page": 0,
+        "x": 436.804,
+        "y": 247.948
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3820.0.line.10a_credit_claimed",
+      "label": "Line 10a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. (Do not include any assigned credit claimed on form F T B 3544, Part B.).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. (Do not include any assigned credit claimed on form F T B 3544, Part B.)",
+      "position": {
+        "page": 0,
+        "x": 436.804,
+        "y": 216.961
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3820.0.line.10b_total_credit_assigned",
+      "label": "Line 10b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0",
+      "position": {
+        "page": 0,
+        "x": 436.804,
+        "y": 185.958
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3820.0.line.10c_credit_elected_refundable_future",
+      "label": "Line 10c. Credit amount to be elected as refundable in future years. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10c. Credit amount to be elected as refundable in future years. See instructions",
+      "position": {
+        "page": 0,
+        "x": 436.804,
+        "y": 166.957
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3820.0.line.11_carryover_to_future_years",
+      "label": "Line 11. Credit carryover available for future years. Add lines 10a, 10b, and 10c, subtract the result from line 9.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. Credit carryover available for future years. Add lines 10a, 10b, and 10c, subtract the result from line 9",
+      "position": {
+        "page": 0,
+        "x": 436.804,
+        "y": 135.94
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3820/blank.pdf",
+    "ingestedAt": "2026-11-28T04:32:42.934Z",
+    "totalFields": 22,
+    "skipped": 0,
+    "catalogEntries": 22
+  }
+}

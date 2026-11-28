@@ -1,0 +1,393 @@
+{
+  "formId": "form-3504",
+  "fieldCount": 43,
+  "entries": [
+    {
+      "fieldId": "form-3504.0.header.first_name",
+      "widgets": [
+        {
+          "widgetName": "Your first name",
+          "text": "T-VIDS0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.header.last_name",
+      "widgets": [
+        {
+          "widgetName": "Last name",
+          "text": "T-10VHJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.header.mailing_address",
+      "widgets": [
+        {
+          "widgetName": "Mailing address",
+          "text": "T-1LZY2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.header.mailing_city",
+      "widgets": [
+        {
+          "widgetName": "Mailing address, City",
+          "text": "T-100GH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.header.mailing_state",
+      "widgets": [
+        {
+          "widgetName": "Mailing address, 2 letter state abbreviation",
+          "text": "21"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.header.mailing_zip",
+      "widgets": [
+        {
+          "widgetName": "Mailing address, ZIP code, maximum 9 digits",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.header.middle_initial",
+      "widgets": [
+        {
+          "widgetName": "Initial",
+          "text": "1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.header.physical_address",
+      "widgets": [
+        {
+          "widgetName": "Physical address (not a P O box)",
+          "text": "T-1V2RU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.header.physical_city",
+      "widgets": [
+        {
+          "widgetName": "Physical address, City",
+          "text": "T-EO2S1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.header.physical_state",
+      "widgets": [
+        {
+          "widgetName": "Physical address, 2 letter state abbreviation",
+          "text": "45"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.header.physical_zip",
+      "widgets": [
+        {
+          "widgetName": "Physical address, ZIP code, maximum 9 digits",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "S S N (9 digits)",
+          "text": "123-45-6789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.1_enrolled_tribe_name",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line 1. Indian tribe of which you are an enrolled member",
+          "text": "T-CNPXM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.1_tribal_enrollment_number",
+      "widgets": [
+        {
+          "widgetName": "Line 1. Your tribal enrollment number",
+          "text": "T-14PKK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.2_row1_reservation_resided",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Reservation(s) on which you resided during the tax year (1)",
+          "text": "T-OVFH4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.2_row1_residency_dates",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Dates of residency (mm/dd/yyyy) (1)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.2_row2_reservation_resided",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Reservation(s) on which you resided during the tax year (2)",
+          "text": "T-1KVRU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.2_row2_residency_dates",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Dates of residency (mm/dd/yyyy) (2)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.3_verifier_print_name",
+      "widgets": [
+        {
+          "widgetName": "Part II, Print name",
+          "text": "T-OZPLF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.3_verifier_signature_date",
+      "widgets": [
+        {
+          "widgetName": "Part II, Signature date (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.3_verifier_title",
+      "widgets": [
+        {
+          "widgetName": "Title",
+          "text": "T-1351F"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.4_row1_exempt_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (d) Amount qualifying as exempt income (1)",
+          "text": "6,017"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.4_row1_exempt_income_source_col_a",
+      "widgets": [
+        {
+          "widgetName": "Part III, Line 4. (a) Employer's name or source of exempt income (1)",
+          "text": "T-1WDK0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.4_row1_income_type_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (c) Income type (wages, per capita income, et cetera) (1)",
+          "text": "T-K0A7P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.4_row1_work_address_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (b) Physical address of where you worked (if applicable) (1)",
+          "text": "T-1LON1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.4_row2_exempt_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (d) Amount qualifying as exempt income (2)",
+          "text": "3,014"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.4_row2_exempt_income_source_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (a) Employer's name or source of exempt income (2)",
+          "text": "T-L4Q5U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.4_row2_income_type_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (c) Income type (wages, per capita income, et cetera) (2)",
+          "text": "T-R3W1W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.4_row2_work_address_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (b) Physical address of where you worked (if applicable) (2)",
+          "text": "T-14M5W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.4_row3_exempt_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (d) Amount qualifying as exempt income (3)",
+          "text": "2,104"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.4_row3_exempt_income_source_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (a) Employer's name or source of exempt income (3)",
+          "text": "T-TYOVI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.4_row3_income_type_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (c) Income type (wages, per capita income, et cetera) (3)",
+          "text": "T-1NY7M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.4_row3_work_address_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (b) Physical address of where you worked (if applicable) (3)",
+          "text": "T-8DGVL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.5_property1_dates_resided",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Property 1, Dates you resided in property (if applicable) (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.5_property1_physical_address",
+      "widgets": [
+        {
+          "widgetName": "Part IV, Line 5. Property 1, Physical address",
+          "text": "T-WEB47"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.5_property1_property_usage",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Property 1, Property usage (personal, rental, vacation, et cetera)",
+          "text": "T-1AWJ8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.5_property1_who_resided",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Property 1, Who resided in this property?",
+          "text": "T-1KLUH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.5_property2_dates_resided",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Property 2, Dates you resided in property (if applicable) (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.5_property2_physical_address",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Property 2, Physical address",
+          "text": "T-1G0B1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.5_property2_property_usage",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Property 2, Property usage (personal, rental, vacation, et cetera)",
+          "text": "T-FR92C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.line.5_property2_who_resided",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Property 2, Who resided in this property?",
+          "text": "T-6ONAV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.signing.print_name",
+      "widgets": [
+        {
+          "widgetName": "Print name",
+          "text": "T-GRRVX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3504.0.signing.signature_date",
+      "widgets": [
+        {
+          "widgetName": "Signature date (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3642 @@
+{
+  "formId": "schedule-r-ca",
+  "fieldCount": 404,
+  "entries": [
+    {
+      "fieldId": "schedule-r-ca.0.header.fiscal_year_begin_date",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1010",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.header.fiscal_year_end_date",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1011",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1012",
+          "text": "T-1ENDQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.header.taxpayer_id_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1013",
+          "text": "T-C6TA3"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.10_nonunitary_partnership_business_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1025",
+          "text": "1,487"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.11_separate_trade_business_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1026",
+          "text": "1,751"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.12_deferred_business_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1027",
+          "text": "8,471"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.13_separately_apportioned_capital_gain",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1028",
+          "text": "1,207"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.14_total_separately_apportionable_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1029",
+          "text": "2,656"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.15_business_income_subject_to_apportionment",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1030",
+          "text": "9,211"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.16_interest_offset",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1031",
+          "text": "3,753"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.17_business_income_for_apportionment",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1032",
+          "text": "1,514"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.18a_apportionment_percentage_decimal",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1034",
+          "text": "0132"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.18a_apportionment_percentage_whole",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1033",
+          "text": "245"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.18b_business_income_apportioned_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1035",
+          "text": "7,401"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.19a_ca_dividends",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1036",
+          "text": "4,666"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.19b_ca_interest",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1037",
+          "text": "9,546"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.1a_net_income_after_state_adjustments",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1014",
+          "text": "5,687"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.1b_foreign_investment_interest_offset",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1015",
+          "text": "3,500"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.1c_total_net_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1016",
+          "text": "1,886"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.2_nonbusiness_dividends",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1017",
+          "text": "9,010"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.20_ca_rental_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1038",
+          "text": "7,214"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.21_ca_royalties",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1039",
+          "text": "7,409"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.22_ca_sale_of_assets",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1040",
+          "text": "8,559"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.23_ca_partnership_interest_sale",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1041",
+          "text": "5,996"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.24_ca_miscellaneous_nonbusiness_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1042",
+          "text": "5,354"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.25_total_ca_nonbusiness_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1043",
+          "text": "5,815"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.26_ca_interest_offset",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1044",
+          "text": "9,879"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.27_net_ca_nonbusiness_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1045",
+          "text": "3,733"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.3_nonbusiness_interest",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1018",
+          "text": "9,038"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.4_nonbusiness_rental_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1019",
+          "text": "3,052"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.5_nonbusiness_royalties",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1020",
+          "text": "8,660"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.6_nonbusiness_sale_of_assets",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1021",
+          "text": "7,941"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.7_nonbusiness_partnership_interest_sale",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1022",
+          "text": "8,678"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.8_miscellaneous_nonbusiness_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1023",
+          "text": "8,513"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.0.line.9_total_nonbusiness_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1024",
+          "text": "2,375"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.1.header.name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1001",
+          "text": "T-18KBM"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.1.header.taxpayer_id_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1002",
+          "text": "T-X2U8G"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.1.line.28_nonunitary_partnership_llc_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 2001",
+          "text": "9,423"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.1.line.29_separate_trade_business_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 2002",
+          "text": "8,769"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.1.line.30_deferred_prior_year_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 2003",
+          "text": "3,192"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.1.line.31_total_separately_apportioned_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 2004",
+          "text": "6,070"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.1.line.32a_involuntary_conversion_gain",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 2005",
+          "text": "6,756"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.1.line.32b_net_section_1231_gain",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 2005A",
+          "text": "4,163"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.1.line.32c_nonrecapture_1231_loss_prior",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 2005B",
+          "text": "9,347"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.1.line.32d_section_1231_recapture_or_loss",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 2005C",
+          "text": "3,775"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.1.line.32e_net_ordinary_gain",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 2005D",
+          "text": "6,400"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.1.line.32f_capital_asset_sale_gain",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 2005E",
+          "text": "8,722"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.1.line.32g_prior_capital_loss_carryover",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 2005F",
+          "text": "8,520"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.1.line.32h_net_capital_gain",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 2005G",
+          "text": "4,131"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.1.line.32i_total_gain_loss_netting",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 2005H",
+          "text": "9,605"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.1.line.33_net_income_before_contributions",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 2007",
+          "text": "9,183"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.1.line.34_contributions_adjustment",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 2008",
+          "text": "8,254"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.1.line.35_net_income_california_purposes",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 2009",
+          "text": "8,369"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.header.taxpayer_id",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1004",
+          "text": "T-VQMI3"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 1003",
+          "text": "T-137EG"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_a_1_sales_gross_receipts_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3001",
+          "text": "2,658"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_a_1_total_sales_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3015",
+          "text": "1,511"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_a_1_total_sales_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3016",
+          "text": "7,350"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_a_1a_i_shipped_from_outside_ca_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3003",
+          "text": "5,532"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_a_1a_ii_shipped_from_within_ca_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3004",
+          "text": "9,108"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_a_1a_sales_to_ca_purchasers_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3002",
+          "text": "9,724"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_a_1b_i_us_government_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3006",
+          "text": "2,029"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_a_1b_ii_purchasers_not_taxable_state_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3007",
+          "text": "3,896"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_a_1b_sales_shipped_from_ca_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3005",
+          "text": "5,831"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_a_1c_i_sales_from_services_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3009",
+          "text": "3,173"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_a_1c_ii_income_from_intangibles_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3010",
+          "text": "4,081"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_a_1c_iii_rental_leasing_licensing_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3011",
+          "text": "6,497"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_a_1c_iv_other_gross_receipts_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3012",
+          "text": "7,359"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_a_1c_total_other_gross_receipts_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3008",
+          "text": "7,823"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_a_1d_partnership_llc_sales_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3013",
+          "text": "1,976"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_a_1d_partnership_llc_sales_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3014",
+          "text": "1,721"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_a_2_apportionment_percentage_col_c_decimal",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3018",
+          "text": "3207"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_a_2_apportionment_percentage_col_c_whole",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3017",
+          "text": "717"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_1_property_buildings_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3021",
+          "text": "1,593"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_1_property_buildings_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3022",
+          "text": "9,618"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_1_property_furniture_fixtures_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3035",
+          "text": "9,994"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_1_property_furniture_fixtures_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3036",
+          "text": "4,861"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_1_property_inventory_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3019",
+          "text": "7,991"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_1_property_inventory_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3020",
+          "text": "6,830"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_1_property_land_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3037",
+          "text": "7,891"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_1_property_land_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3038",
+          "text": "7,238"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_1_property_machinery_equipment_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3023",
+          "text": "1,081"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_1_property_machinery_equipment_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3024",
+          "text": "8,359"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_1_property_other_tangible_assets_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3039",
+          "text": "8,502"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_1_property_other_tangible_assets_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3040",
+          "text": "6,264"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_1_property_rented_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3041",
+          "text": "9,860"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_1_property_rented_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3042",
+          "text": "6,991"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_1_total_property_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3043",
+          "text": "7,068"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_1_total_property_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3044",
+          "text": "1,245"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_1_total_property_col_c_decimal",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3046",
+          "text": "5600"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_1_total_property_col_c_whole",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3045",
+          "text": "273"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_2_total_payroll_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3047",
+          "text": "2,601"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_2_total_payroll_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3048",
+          "text": "5,779"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_2_total_payroll_col_c_decimal",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3050",
+          "text": "6377"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_2_total_payroll_col_c_whole",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3049",
+          "text": "450"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_3_sales_gross_receipts_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3051",
+          "text": "9,023"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_3_total_sales_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3058",
+          "text": "8,966"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_3_total_sales_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3059",
+          "text": "5,298"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_3_total_sales_col_c_decimal",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3061",
+          "text": "6162"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_3_total_sales_col_c_whole",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3060",
+          "text": "590"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_3a_i_shipped_from_outside_ca_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3052",
+          "text": "2,826"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_3a_ii_shipped_from_within_ca_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3053",
+          "text": "5,946"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_3b_i_us_government_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3054",
+          "text": "8,231"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_3b_ii_purchasers_not_taxable_state_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3055",
+          "text": "9,816"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_3c_total_other_gross_receipts_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3056",
+          "text": "7,650"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_3c_total_other_gross_receipts_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3057",
+          "text": "7,190"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_4_total_percent_col_c_decimal",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3063",
+          "text": "0339"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_4_total_percent_col_c_whole",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3062",
+          "text": "668"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_5_apportionment_percentage_col_c_decimal",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3065",
+          "text": "5691"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.2.r1.part_b_5_apportionment_percentage_col_c_whole",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 3064",
+          "text": "219"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.1_california_business_activities",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4001",
+          "text": "T-BVTUH"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.2_joint_ventures_continued",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4003",
+          "text": "T-1TXM7"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.2_joint_ventures_partnerships_llcs",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4002",
+          "text": "T-TF6OB"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.3_us_government_sales_explanation",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4005",
+          "text": "T-1I6PJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.3_us_government_sales_included",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4004 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.4_sales_to_untaxed_states_included",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4006 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.4_untaxed_states_explanation",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4007",
+          "text": "T-N35W6"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.5a_reasonable_approximation_description",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4009",
+          "text": "T-136GL"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.5a_reasonable_approximation_used",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4008 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.5b_approximation_method_changed",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4010 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.5b_new_method_description",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4011",
+          "text": "T-11497"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.6_consistency_explanation",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4013",
+          "text": "T-I8OFQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.6_items_treated_consistently",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4012 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.7_apportionment_method_changed",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4014 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.7_method_change_explanation",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4015",
+          "text": "T-10HQB"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.7_method_change_explanation_continued",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4016",
+          "text": "T-XUVNI"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.8_california_destination_sales_included",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4017 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.8_immune_sales_explanation",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4018",
+          "text": "T-UZDWB"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.8_immune_sales_explanation_continued",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4019",
+          "text": "T-2DJ5Y"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.9_ultimate_destination_explanation",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4021",
+          "text": "T-1ASB7"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r2.9_ultimate_destination_sales_included",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4020 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r3.1_income_from_rents_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4022",
+          "text": "6,079"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r3.1_income_from_rents_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4023",
+          "text": "6,472"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r3.1_income_from_rents_col_c",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4024",
+          "text": "4,780"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r3.2_rental_deductions_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4025",
+          "text": "3,334"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r3.2_rental_deductions_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4026",
+          "text": "2,976"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r3.2_rental_deductions_col_c",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4027",
+          "text": "5,720"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r3.3_net_rental_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4028",
+          "text": "5,364"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r3.3_net_rental_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4029",
+          "text": "1,961"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r3.3_net_rental_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4030",
+          "text": "8,856"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.1_row1_intangible_gain_outside_ca_col_c",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4034",
+          "text": "1,604"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.1_row1_intangible_gain_within_ca_col_d",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4035",
+          "text": "5,446"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.1_row1_property_description",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4031",
+          "text": "T-EJ6SW"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.1_row1_tangible_gain_outside_ca_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4032",
+          "text": "5,074"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.1_row1_tangible_gain_within_ca_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4033",
+          "text": "6,899"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.1_row1_total_gain_col_e",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4036",
+          "text": "8,583"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.1_row2_intangible_gain_outside_ca_col_c",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4040",
+          "text": "3,951"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.1_row2_intangible_gain_within_ca_col_d",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4041",
+          "text": "6,970"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.1_row2_property_description",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4037",
+          "text": "T-9OE9O"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.1_row2_tangible_gain_outside_ca_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4038",
+          "text": "8,187"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.1_row2_tangible_gain_within_ca_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4039",
+          "text": "8,718"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.1_row2_total_gain_col_e",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4042",
+          "text": "5,198"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.1_row3_intangible_gain_outside_ca_col_c",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4046",
+          "text": "4,439"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.1_row3_intangible_gain_within_ca_col_d",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4047",
+          "text": "4,719"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.1_row3_property_description",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4043",
+          "text": "T-15CR3"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.1_row3_tangible_gain_outside_ca_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4044",
+          "text": "8,808"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.1_row3_tangible_gain_within_ca_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4045",
+          "text": "1,936"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.1_row3_total_gain_col_e",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4048",
+          "text": "4,846"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.2_total_gain_col_e",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4053",
+          "text": "9,885"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.2_total_intangible_gain_outside_ca_col_c",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4051",
+          "text": "8,634"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.2_total_intangible_gain_within_ca_col_d",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4052",
+          "text": "1,768"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.2_total_tangible_gain_outside_ca_col_a",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4049",
+          "text": "4,023"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.3.r4.2_total_tangible_gain_within_ca_col_b",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 4050",
+          "text": "4,832"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r5.1_total_interest_expense_deducted",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5001",
+          "text": "9,119"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r5.10_net_dividend_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5010",
+          "text": "5,772"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r5.11_business_dividend_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5011",
+          "text": "2,631"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r5.12_deducted_business_dividends",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5012",
+          "text": "4,187"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r5.13_net_business_dividend_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5013",
+          "text": "3,920"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r5.14_net_nonbusiness_dividend_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5014",
+          "text": "1,243"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r5.15_total_nonbusiness_interest_dividends",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5015",
+          "text": "5,403"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r5.16_interest_offset",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5016",
+          "text": "8,882"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r5.2_waters_edge_interest_offset",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5002",
+          "text": "4,486"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r5.3_interest_expense_balance",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5003",
+          "text": "7,556"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r5.4_total_interest_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5004",
+          "text": "2,139"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r5.5_nonbusiness_interest_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5005",
+          "text": "4,183"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r5.6_business_interest_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5006",
+          "text": "1,360"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r5.7_excess_interest_expense",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5007",
+          "text": "8,142"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r5.8_total_dividend_income",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5008",
+          "text": "6,791"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r5.9_deducted_dividends",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5009",
+          "text": "6,868"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r6.1_total_contributions_paid",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5017",
+          "text": "8,454"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r6.10_apportioned_contributions_deducted",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5026",
+          "text": "1,359"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r6.11_total_lines_7_through_10",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5027",
+          "text": "6,306"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r6.12_ten_percent_of_line_11",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5028",
+          "text": "1,055"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r6.13_amount_from_line_10",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5029",
+          "text": "3,919"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r6.14a_allowable_contributions_lesser",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5030",
+          "text": "8,090"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r6.14b_allowable_contributions_prorated",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5031",
+          "text": "9,306"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r6.15_contributions_adjustment",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5032",
+          "text": "6,296"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r6.2_net_income_after_state_adjustments",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5018",
+          "text": "1,114"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r6.3_deductible_dividends_other_adjustments",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5019",
+          "text": "8,123"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r6.4_contributions_deducted",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5020",
+          "text": "3,696"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r6.5_total_lines_2_through_4",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5021",
+          "text": "2,286"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r6.6_ten_percent_of_line_5",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5022",
+          "text": "4,692"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r6.7_net_income_before_contributions",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5023",
+          "text": "7,278"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r6.8_apportioned_business_dividends_deductible",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5024",
+          "text": "9,788"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.4.r6.9_nonbusiness_dividends_deductible",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 5025",
+          "text": "6,402"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.header.key_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6002",
+          "text": "T-1I5PT"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.header.key_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6001",
+          "text": "T-1A1EC"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row1_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6007",
+          "text": "T-1I501"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row1_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6004 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row1_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6005 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row1_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6006 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row1_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6003",
+          "text": "T-ETQP2"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row1_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6008",
+          "text": "T-12JWL"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row1_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6009",
+          "text": "6,205"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row10_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6070",
+          "text": "T-9KNYD"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row10_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6067",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row10_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6068",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row10_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6069",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row10_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6066",
+          "text": "T-F223T"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row10_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6071",
+          "text": "T-1U5QF"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row10_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6072",
+          "text": "6,209"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row11_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6077",
+          "text": "T-1L1D0"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row11_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6074",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row11_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6075",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row11_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6076",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row11_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6073",
+          "text": "T-PBZO8"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row11_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6078",
+          "text": "T-BKJD5"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row11_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6079",
+          "text": "2,821"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row12_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6084",
+          "text": "T-15C6M"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row12_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6081",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row12_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6082",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row12_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6083",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row12_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6080",
+          "text": "T-1VUZV"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row12_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6085",
+          "text": "T-13ATB"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row12_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6086",
+          "text": "6,031"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row13_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6091",
+          "text": "T-ZX7PQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row13_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6088",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row13_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6089",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row13_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6090",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row13_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6087",
+          "text": "T-UDY1F"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row13_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6092",
+          "text": "T-GX8H3"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row13_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6093",
+          "text": "8,316"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row14_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6098",
+          "text": "T-9UDZS"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row14_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6095",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row14_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6096",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row14_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6097",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row14_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6094",
+          "text": "T-1KKTU"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row14_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6099",
+          "text": "T-QKQ6D"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row14_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6100",
+          "text": "7,901"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row15_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6105",
+          "text": "T-1B5TB"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row15_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6102",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row15_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6103",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row15_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6104",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row15_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6101",
+          "text": "T-1NLRD"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row15_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6106",
+          "text": "T-LJW6I"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row15_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6107",
+          "text": "3,337"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row16_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6112",
+          "text": "T-1MCZW"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row16_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6109",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row16_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6010 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row16_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6011",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row16_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6108",
+          "text": "T-PO26N"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row16_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6113",
+          "text": "T-1LZ74"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row16_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6114",
+          "text": "5,230"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row17_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6119",
+          "text": "T-1RNSB"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row17_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6116",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row17_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6017 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row17_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6118",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row17_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6115",
+          "text": "T-118RY"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row17_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6120",
+          "text": "T-1MA6I"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row17_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6121",
+          "text": "6,296"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row18_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6126",
+          "text": "T-O3QB8"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row18_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6123",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row18_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6024 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row18_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6125 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row18_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6122",
+          "text": "T-15EX5"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row18_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6127",
+          "text": "T-1XWTR"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row18_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6128",
+          "text": "2,540"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row19_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6133",
+          "text": "T-BL80S"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row19_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6130",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row19_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6031 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row19_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6132",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row19_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6129",
+          "text": "T-YXV45"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row19_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6134",
+          "text": "T-1YCOG"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row19_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6135",
+          "text": "1,250"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row2_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6014",
+          "text": "T-1CEZZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row2_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6011 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row2_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6012 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row2_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6013 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row2_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6010",
+          "text": "T-V6NW8"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row2_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6015",
+          "text": "T-1PUI3"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row2_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6016",
+          "text": "8,213"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row20_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6140",
+          "text": "T-GBQCJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row20_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6137",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row20_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6038 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row20_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6139",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row20_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6136",
+          "text": "T-QBGBA"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row20_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6141",
+          "text": "T-B81ZE"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row20_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6142",
+          "text": "3,358"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row21_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6147",
+          "text": "T-OHAT7"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row21_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6144",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row21_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6045 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row21_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6146",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row21_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6143",
+          "text": "T-1MQZF"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row21_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6148",
+          "text": "T-QLFD6"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row21_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6149",
+          "text": "8,338"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row3_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6021",
+          "text": "T-1DE2Y"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row3_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6018 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row3_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6019",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row3_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6020",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row3_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6017",
+          "text": "T-8J8G0"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row3_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6022",
+          "text": "T-1WCTF"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row3_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6023",
+          "text": "2,148"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row4_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6028",
+          "text": "T-1GA3I"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row4_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6025",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row4_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6026",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row4_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6027",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row4_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6024",
+          "text": "T-9HX4R"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row4_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6029",
+          "text": "T-1TZVG"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row4_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6030",
+          "text": "1,906"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row5_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6035",
+          "text": "T-1Q9M0"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row5_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6032",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row5_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6033",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row5_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6034",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row5_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6031",
+          "text": "T-XN9WG"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row5_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6036",
+          "text": "T-OEUD9"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row5_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6037",
+          "text": "5,821"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row6_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6042",
+          "text": "T-1C43T"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row6_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6039",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row6_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6040",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row6_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6041",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row6_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6038",
+          "text": "T-1COY0"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row6_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6043",
+          "text": "T-1TQII"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row6_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6044",
+          "text": "2,008"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row7_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6049",
+          "text": "T-EN8ED"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row7_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6046",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row7_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6047",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row7_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6048",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row7_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6045",
+          "text": "T-A7KIY"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row7_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6050",
+          "text": "T-31ZH4"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row7_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6051",
+          "text": "1,343"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row8_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6056",
+          "text": "T-1MITI"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row8_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6053",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row8_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6054",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row8_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6055",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row8_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6052",
+          "text": "T-1VE5P"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row8_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6057",
+          "text": "T-1F8MV"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row8_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6058",
+          "text": "2,978"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row9_ca_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6063",
+          "text": "T-1NGB8"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row9_col_a_qualified_in_ca",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6060",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row9_col_b_ca_source_not_qualified",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6061",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row9_col_c_new_electing_member",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6062",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row9_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6059",
+          "text": "T-9D8I1"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row9_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6064",
+          "text": "T-1HKLW"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.row9_total_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6065",
+          "text": "3,235"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.5.r7.total_group_self_assessed_tax",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 6150",
+          "text": "1,223"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row1_acquired",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7021 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row1_ca_corp_or_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7018",
+          "text": "T-1OTKS"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row1_date",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7023",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row1_different_fiscal_year",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7020 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row1_disposed",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7022 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row1_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7017",
+          "text": "T-16GTM"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row1_unitary",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7019 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row2_acquired",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7028 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row2_ca_corp_or_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7025",
+          "text": "T-TW17A"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row2_date",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7030",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row2_different_fiscal_year",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7027 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row2_disposed",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7029 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row2_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7024",
+          "text": "T-BF1YU"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row2_unitary",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7026 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row3_acquired",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7035 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row3_ca_corp_or_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7032",
+          "text": "T-O03I2"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row3_date",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7037",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row3_different_fiscal_year",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7034 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row3_disposed",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7036 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row3_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7031",
+          "text": "T-10RST"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row3_unitary",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7033 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row4_acquired",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7042 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row4_ca_corp_or_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7039",
+          "text": "T-150XD"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row4_date",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7044",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row4_different_fiscal_year",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7041 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row4_disposed",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7043 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row4_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7038",
+          "text": "T-107I3"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row4_unitary",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7040 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row5_acquired",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7049 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row5_ca_corp_or_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7046",
+          "text": "T-U1VE0"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row5_date",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7051",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row5_different_fiscal_year",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7048 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row5_disposed",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7050 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row5_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7045",
+          "text": "T-HBR2O"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row5_unitary",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7047 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row6_acquired",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7056 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row6_ca_corp_or_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7053",
+          "text": "T-2UI0U"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row6_date",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7058",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row6_different_fiscal_year",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7055 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row6_disposed",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7057 cb",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row6_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7052",
+          "text": "T-1US2U"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.affiliates_row6_unitary",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7054 rb",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.sec_b_row1_ca_corp_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7002",
+          "text": "T-1FWK6"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.sec_b_row1_effective_date",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7004",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.sec_b_row1_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7003",
+          "text": "T-19EAC"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.sec_b_row1_taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7001",
+          "text": "T-GMXOM"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.sec_b_row2_ca_corp_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7006",
+          "text": "T-165ZX"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.sec_b_row2_effective_date",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7008",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.sec_b_row2_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7007",
+          "text": "T-1QIH6"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.sec_b_row2_taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7005",
+          "text": "T-1CDB6"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.sec_b_row3_ca_corp_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7010",
+          "text": "T-FQG29"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.sec_b_row3_effective_date",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7012",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.sec_b_row3_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7011",
+          "text": "T-1JKCQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.sec_b_row3_taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7009",
+          "text": "T-93E05"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.sec_b_row4_ca_corp_number",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7014",
+          "text": "T-EI0VL"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.sec_b_row4_effective_date",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7016",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.sec_b_row4_fein",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7015",
+          "text": "T-QPEZ6"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-r-ca.6.r7.sec_b_row4_taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "Schedule R form 7013",
+          "text": "T-RL08W"
+        }
+      ]
+    }
+  ]
+}

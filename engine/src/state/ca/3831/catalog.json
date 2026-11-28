@@ -1,0 +1,1266 @@
+{
+  "form": {
+    "formId": "form-3831",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "Homeless Hiring Tax Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3831.0.header.id_number_type",
+      "label": "Type of identification number: SSN or ITIN, CA Corporation no., or FEIN",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Select entity type",
+      "position": {
+        "page": 0,
+        "x": 411.996,
+        "y": 694.729
+      },
+      "options": [
+        {
+          "value": "ssn_or_itin",
+          "radioOption": "S S N or I T I N.",
+          "label": "SSN or ITIN"
+        },
+        {
+          "value": "ca_corporation_number",
+          "radioOption": "C A Corporation number.",
+          "label": "CA Corporation no."
+        },
+        {
+          "value": "fein",
+          "radioOption": "F E I N.",
+          "label": "FEIN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.0.header.id_number",
+      "label": "S S N or I T I N, C A Corporation number, F E I N (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "S S N or I T I N, C A Corporation number, F E I N (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 408.843,
+        "y": 680.448
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.0.header.name_on_return",
+      "label": "Name(s) as shown on your California tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on your California tax return",
+      "position": {
+        "page": 0,
+        "x": 35.9959,
+        "y": 656.441
+      }
+    },
+    {
+      "fieldId": "form-3831.0.header.sos_file_number",
+      "label": "California Secretary of State (S O S) file number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "California Secretary of State (S O S) file number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 408.717,
+        "y": 656.451
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.0.header.generating_taxpayer_id_number_type",
+      "label": "Taxpayer generating the credit, type of identification number: SSN or ITIN, CA Corporation no., or FEIN",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Taxpayer, Select entity type",
+      "position": {
+        "page": 0,
+        "x": 411.983,
+        "y": 646.221
+      },
+      "options": [
+        {
+          "value": "ssn_or_itin",
+          "radioOption": "S S N or I T I N.",
+          "label": "SSN or ITIN"
+        },
+        {
+          "value": "ca_corporation_number",
+          "radioOption": "C A Corporation number.",
+          "label": "CA Corporation no."
+        },
+        {
+          "value": "fein",
+          "radioOption": "F E I N.",
+          "label": "FEIN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.0.header.generating_taxpayer_id_number",
+      "label": "Taxpayer, S S N or I T I N, C A Corporation number, F E I N (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Taxpayer, S S N or I T I N, C A Corporation number, F E I N (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 408.707,
+        "y": 631.92
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.0.header.generating_taxpayer_name",
+      "label": "Name of taxpayer generating the credit. See instructions.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name of taxpayer generating the credit. See instructions",
+      "position": {
+        "page": 0,
+        "x": 36.0004,
+        "y": 608.191
+      }
+    },
+    {
+      "fieldId": "form-3831.0.header.generating_taxpayer_sos_file_number",
+      "label": "Taxpayer, California Secretary of State (S O S) file number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Taxpayer, California Secretary of State (S O S) file number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 408.707,
+        "y": 608.191
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.0.header.a_tentative_credit_reservation",
+      "label": "Line A — Did the business receive a tentative credit reservation for each claimed eligible individual?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line A. Did the business receive a tentative credit reservation for each claimed eligible individual?",
+      "position": {
+        "page": 0,
+        "x": 54.4363,
+        "y": 584.106
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.0.line.1_credit_from_worksheet_1",
+      "label": "Part I, Line 1. Enter the credit amount from Worksheet 1. This credit amount is limited to $30,000. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Line 1. Enter the credit amount from Worksheet 1. This credit amount is limited to $30,000. See instructions",
+      "position": {
+        "page": 0,
+        "x": 477.483,
+        "y": 546.934
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.0.line.2_pass_through_credit_k1",
+      "label": "Line 2. Pass-through credit from Schedule K-1 (100S, 541, 565 or 568). See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Pass-through credit from Schedule K-1 (100S, 541, 565 or 568). See instructions",
+      "position": {
+        "page": 0,
+        "x": 477.483,
+        "y": 528.924
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.0.line.3_credit_carryover_prior_year",
+      "label": "Line 3. Credit carryover from prior year(s). See Instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Credit carryover from prior year(s). See Instructions",
+      "position": {
+        "page": 0,
+        "x": 477.483,
+        "y": 510.92
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.0.line.4_total_available_credit",
+      "label": "Line 4. Total available credit. Add line 1 through line 3.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Total available credit. Add line 1 through line 3",
+      "position": {
+        "page": 0,
+        "x": 477.483,
+        "y": 492.913
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.0.line.5a_credit_claimed",
+      "label": "Line 5a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. See instructions. (Do not include any assigned credit claimed on form F T B 3544, Part B.).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. See instructions. (Do not include any assigned credit claimed on form F T B 3544, Part B.)",
+      "position": {
+        "page": 0,
+        "x": 477.483,
+        "y": 465.218
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.0.line.5b_total_credit_assigned",
+      "label": "Line 5b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions",
+      "position": {
+        "page": 0,
+        "x": 477.483,
+        "y": 437.384
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.0.line.5c_credit_elected_refundable",
+      "label": "Line 5c. Credit amount to be elected as refundable in future years. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5c. Credit amount to be elected as refundable in future years. See instructions",
+      "position": {
+        "page": 0,
+        "x": 477.483,
+        "y": 419.371
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.0.line.6_credit_carryover_future_years",
+      "label": "Line 6. Credit carryover available for future years. Add lines 5a, 5b, and 5c, subtract the result from line 4.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Credit carryover available for future years. Add lines 5a, 5b, and 5c, subtract the result from line 4",
+      "position": {
+        "page": 0,
+        "x": 477.483,
+        "y": 401.374
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row1_eligible_individual_col_a",
+      "label": "Worksheet 1, Line 1. (a) Eligible Individual (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Worksheet 1, Line 1. (a) Eligible Individual (1)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 322.957
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row1_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (1)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 322.957
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row1_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (1)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 322.957
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row2_eligible_individual_col_a",
+      "label": "Line 1. (a) Eligible Individual (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (a) Eligible Individual (2)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 309.934
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row2_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (2)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 309.934
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row2_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (2)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 309.934
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row3_eligible_individual_col_a",
+      "label": "Line 1. (a) Eligible Individual (3).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (a) Eligible Individual (3)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 296.957
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row3_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (3).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (3)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 296.957
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row3_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (3).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (3)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 296.957
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row4_eligible_individual_col_a",
+      "label": "Line 1. (a) Eligible Individual (4).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (a) Eligible Individual (4)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 283.964
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row4_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (4).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (4)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 283.964
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row4_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (4).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (4)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 283.964
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row5_eligible_individual_col_a",
+      "label": "Line 1. (a) Eligible Individual (5).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (a) Eligible Individual (5)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 270.94
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row5_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (5).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (5)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 270.94
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row5_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (5).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (5)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 270.94
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row6_eligible_individual_col_a",
+      "label": "Line 1. (a) Eligible Individual (6).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (a) Eligible Individual (6)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 257.963
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row6_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (6).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (6)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 257.963
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row6_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (6).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (6)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 257.963
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row7_eligible_individual_col_a",
+      "label": "Line 1. (a) Eligible Individual (7).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (a) Eligible Individual (7)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 244.958
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row7_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (7).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (7)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 244.958
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row7_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (7).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (7)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 244.958
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row8_eligible_individual_col_a",
+      "label": "Line 1. (a) Eligible Individual (8).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (a) Eligible Individual (8)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 231.967
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row8_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (8).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (8)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 231.967
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row8_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (8).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (8)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 231.967
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row9_eligible_individual_col_a",
+      "label": "Line 1. (a) Eligible Individual (9).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (a) Eligible Individual (9)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 218.954
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row9_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (9).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (9)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 218.954
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row9_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (9).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (9)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 218.954
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row10_eligible_individual_col_a",
+      "label": "Line 1. (a) Eligible Individual (10).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (a) Eligible Individual (10)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 205.947
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row10_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (10).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (10)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 205.947
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row10_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (10).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (10)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 205.947
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row11_eligible_individual_col_a",
+      "label": "Line 1. (a) Eligible Individual (11).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (a) Eligible Individual (11)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 192.933
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row11_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (11).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (11)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 192.933
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row11_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (11).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (11)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 192.933
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row12_eligible_individual_col_a",
+      "label": "Line 1. (a) Eligible Individual (12).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (a) Eligible Individual (12)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 179.95
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row12_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (12).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (12)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 179.95
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row12_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (12).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (12)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 179.95
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row13_eligible_individual_col_a",
+      "label": "Line 1. (a) Eligible Individual (13).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (a) Eligible Individual (13)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 166.954
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row13_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (13).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (13)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 166.954
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row13_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (13).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (13)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 166.954
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row14_eligible_individual_col_a",
+      "label": "Line 1. (a) Eligible Individual (14).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (a) Eligible Individual (14)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 153.94
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row14_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (14).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (14)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 153.94
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row14_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (14).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (14)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 153.94
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row15_eligible_individual_col_a",
+      "label": "Line 1. (a) Eligible Individual (15).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (a) Eligible Individual (15)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 140.947
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row15_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (15).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (15)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 140.947
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row15_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (15).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (15)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 140.947
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row16_eligible_individual_col_a",
+      "label": "Line 1. (a) Eligible Individual (16).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (a) Eligible Individual (16)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 127.961
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row16_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (16).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (16)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 127.961
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row16_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (16).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (16)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 127.961
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row17_eligible_individual_col_a",
+      "label": "Line 1. (a) Eligible Individual (17).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (a) Eligible Individual (17)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 114.947
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row17_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (17).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (17)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 114.947
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row17_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (17).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (17)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 114.947
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row18_eligible_individual_col_a",
+      "label": "Line 1. (a) Eligible Individual (18).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (a) Eligible Individual (18)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 101.953
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row18_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (18).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (18)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 101.953
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row18_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (18).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (18)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 101.953
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row19_eligible_individual_col_a",
+      "label": "Line 1. (a) Eligible Individual (19).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (a) Eligible Individual (19)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 88.9572
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row19_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (19).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (19)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 88.9572
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row19_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (19).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (19)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 88.9572
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row20_eligible_individual_col_a",
+      "label": "Line 1. (a) Eligible Individual (20).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (a) Eligible Individual (20)",
+      "position": {
+        "page": 2,
+        "x": 53.9857,
+        "y": 75.9535
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row20_hours_worked_col_b",
+      "label": "Line 1. (b) Actual Hours Worked (in the taxable year) (20).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (20)",
+      "position": {
+        "page": 2,
+        "x": 227.846,
+        "y": 75.9535
+      }
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row20_credit_amount_col_c",
+      "label": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (20).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (20)",
+      "position": {
+        "page": 2,
+        "x": 401.66,
+        "y": 75.9535
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.2_total_hhtc",
+      "label": "Line 2. Total H H T C. Add the amounts in column (c). Enter the smaller of the sum or $30,000 here and on form F T B 3831, Part I, line 1.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Total H H T C. Add the amounts in column (c). Enter the smaller of the sum or $30,000 here and on form F T B 3831, Part I, line 1",
+      "position": {
+        "page": 2,
+        "x": 401.683,
+        "y": 54.339
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3831/blank.pdf",
+    "ingestedAt": "2026-11-28T04:33:37.662Z",
+    "totalFields": 78,
+    "skipped": 0,
+    "catalogEntries": 78
+  }
+}
