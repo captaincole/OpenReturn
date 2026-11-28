@@ -1,13 +1,13 @@
 /*
  * Credits on one business: the work opportunity credit (Form 5884) and the
  * empowerment zone employment credit (Form 8844) lower Schedule C line 26,
- * wages, and the tip credit (Form 8846) lowers line 23, taxes. The disabled
- * access (Form 8826), retirement plan (Form 8881), childcare (Form 8882),
- * orphan drug (Form 8820) and research (Form 6765) credits lower the lines
- * their facts hold. On a farm the two wage credits lower Schedule F line 22,
- * labor hired. Each form was written without the others; this test holds them
- * together. The salon is the
- * synthetic natti scenario's; the certified employees are the synthetic daved
+ * wages, as the differential wage credit (Form 8932) does, and the tip
+ * credit (Form 8846) lowers line 23, taxes. The disabled access (Form 8826),
+ * retirement plan (Form 8881), childcare (Form 8882), orphan drug (Form 8820)
+ * and research (Form 6765) credits lower the lines their facts hold. On a
+ * farm the two wage credits lower Schedule F line 22, labor hired. Each form
+ * was written without the others; this test holds them together. The salon is
+ * the synthetic natti scenario's; the certified employees are the synthetic daved
  * scenario's, moved to the salon; the zone employees are the synthetic jaret
  * scenario's, moved to the salon. The farm is the synthetic byar scenario's,
  * with the synthetic marin scenario's zone hands.
@@ -16,14 +16,18 @@
 import { describe, expect, it } from "vitest";
 import {
   businessCreditAddBack,
+  DIFFERENTIAL_WAGE_CREDIT_KEYS,
   DISABLED_ACCESS_KEYS,
   makeChildcareExpenditureFactKey,
+  makeDifferentialWageEmployeeFactKey,
   makeDisabledAccessFactKey,
   makeEmpowermentZoneEmployeeFactKey,
   makeSmallEmployerPlanFactKey,
   makeWorkOpportunityEmployeeFactKey,
+  ORPHAN_DRUG_CREDIT_KEY,
   RESEARCH_CREDIT_KEY,
   type ChildcareExpenditureFactValue,
+  type DifferentialWageEmployeeFactValue,
   type DisabledAccessFactValue,
   type EmpowermentZoneEmployeeFactValue,
   type ResearchCreditFactValue,
@@ -36,7 +40,7 @@ import { decisionRow } from "../../helpers/fixtureBuilders.js";
 import { pecans, PECANS_KEY } from "../../scenarios/synthetic/byar/facts.js";
 import { byarScenario as byar } from "../../scenarios/synthetic/byar/index.js";
 import { EMPLOYEES } from "../../scenarios/synthetic/daved/facts.js";
-import { TRIALS_KEY } from "../../scenarios/synthetic/eward/facts.js";
+import { orphanDrugCredit, TRIALS_KEY } from "../../scenarios/synthetic/eward/facts.js";
 import { ewardScenario as eward } from "../../scenarios/synthetic/eward/index.js";
 import { EMPLOYEES as ZONE_EMPLOYEES } from "../../scenarios/synthetic/jaret/facts.js";
 import { EMPLOYEES as ZONE_HANDS } from "../../scenarios/synthetic/marin/facts.js";
@@ -485,6 +489,86 @@ describe("research expenses that overlap the clinical testing expenses", () => {
   it("Schedule C keeps the orphan drug reduction and takes no research reduction", () => {
     expect(result("schedule-c", "0.line.26")).toMatchObject({ ok: true, value: 120000 });
     expect(result("schedule-c", "0.line.22")).toMatchObject({ ok: true, value: 20000 });
+  });
+});
+
+/*
+ * Forms 5884, 8932 and 8820 on one business: the synthetic eward scenario's
+ * trials business (Schedule C wages $140,000), with the synthetic daved
+ * scenario's certified employees moved to it and one employee on active duty.
+ * - Form 5884 (daved's employees): line 1a $6,400 × 25% = $1,600, line 1b
+ *   $6,000 × 40% = $2,400; line 2 $4,000.
+ * - Form 8932, figured from the employee fact: $15,000 of differential wage
+ *   payments to a qualified employee; line 1 $15,000, line 2 20% = $3,000.
+ * - Form 8820 (eward's fact): line 1 $200,000, line 2a 25% = $50,000; line
+ *   2b, the part of the Form 8932 credit on the clinical wages, $1,000; line
+ *   2c $49,000. The deduction goes down by line 2a, $20,000 of it off the
+ *   clinical wages.
+ * Schedule C line 26: $140,000 − $4,000 − $3,000 − $20,000 = $113,000, each
+ * credit once. California gives back all three: $4,000 + $3,000 + $50,000 =
+ * $57,000. Line 2b is checked against the same $3,000 the wages lost: a line
+ * 2b of $3,500 is more than it, a gap, and Form 8820's reduction waits with it
+ * (line 26 $133,000).
+ */
+const onActiveDuty = row(
+  eward,
+  "self_employment",
+  makeDifferentialWageEmployeeFactKey("ines-okafor"),
+  {
+    name: "Ines Okafor",
+    activityKey: TRIALS_KEY,
+    differentialWagePayments: 15000,
+    employedPrior91Days: true,
+  } satisfies DifferentialWageEmployeeFactValue,
+);
+const noReemploymentOrder = row(
+  eward,
+  "self_employment",
+  DIFFERENTIAL_WAGE_CREDIT_KEYS.underReemploymentOrder,
+  false,
+);
+const certifiedAtTrials = Object.entries(EMPLOYEES).map(([slug, value]) =>
+  row(eward, "self_employment", makeWorkOpportunityEmployeeFactKey(slug), {
+    ...value,
+    activityKey: TRIALS_KEY,
+  }),
+);
+const trialsWithWageCredits = (line2b: number) => [
+  ...eward.facts.filter((fact) => fact.key !== ORPHAN_DRUG_CREDIT_KEY),
+  row(eward, "self_employment", ORPHAN_DRUG_CREDIT_KEY, {
+    ...orphanDrugCredit,
+    differentialWageCreditOnSameWages: line2b,
+  }),
+  ...certifiedAtTrials,
+  onActiveDuty,
+  noReemploymentOrder,
+];
+
+describe("a business with the work opportunity, differential wage and orphan drug credits", () => {
+  const facts = trialsWithWageCredits(1000);
+  const { value } = evaluate(facts, eward.decisions);
+
+  it("figures the three credits", () => {
+    expect(value("form-5884", "0.line.2_add_lines")).toBe(4000);
+    expect(value("form-8932", "0.line.1_eligible_differential_wage_payments")).toBe(15000);
+    expect(value("form-8932", "0.line.2_line1_times_20_percent")).toBe(3000);
+    expect(value("form-8820", "0.line.2a_credit_amount_dollars")).toBe(50000);
+    expect(value("form-8820", "0.line.2b_form_8932_wages_portion_dollars")).toBe(1000);
+    expect(value("form-8820", "0.line.2c_subtract_2b_from_2a_dollars")).toBe(49000);
+  });
+
+  it("each credit lowers the wages once", () => {
+    expect(value("schedule-c", "0.line.26")).toBe(140000 - 4000 - 3000 - 20000);
+  });
+
+  it("California gives back all three reductions", () => {
+    expect(businessCreditAddBack(facts, false)).toBe(4000 + 3000 + 50000);
+  });
+
+  it("checks line 2b against the figured Form 8932 credit", () => {
+    const more = evaluate(trialsWithWageCredits(3500), eward.decisions);
+    expect(more.value("form-8820", "0.line.2b_form_8932_wages_portion_dollars")).toBeUndefined();
+    expect(more.value("schedule-c", "0.line.26")).toBe(140000 - 4000 - 3000);
   });
 });
 

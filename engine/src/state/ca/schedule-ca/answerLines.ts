@@ -128,6 +128,10 @@ function recaptureColumn(info: ScheduleCaFilingInfo, side: "subtraction" | "addi
  *   Schedule CA (540), Part I ... line 3, line 5, or line 6, column B"
  *   (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b08), on
  *   whichever Schedule C lines it lowered.
+ * - Form 8941: "For California purposes, the full amount of insurance is
+ *   deductible" (ftb-pub-1001-2025::sec::small-employer-health::b01): line 3,
+ *   column B, "the amount taken as a federal credit"
+ *   (::enter-on-schedule-ca-540-part-i-or-10::b01), Schedule C line 14's reduction.
  * Column B only.
  */
 const businessCreditColumn = (info: ScheduleCaFilingInfo, side: "subtraction" | "addition") =>

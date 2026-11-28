@@ -58,7 +58,7 @@ export interface ScheduleCaFilingInfo
   caInvestmentFees?: number;
   /** Lines 1a, 3, 15 and 17: a contractor who is an employee for California; undefined when not one. */
   caEmployeeAmounts?: CaEmployeeAmounts;
-  /** Line 3 column B: the Schedule C expenses the federal Forms 5884, 8844, 8932, 8994, 8826 and 8820 credits took off, in total; undefined with none. */
+  /** Line 3 column B: the Schedule C expenses the federal Forms 5884, 8844, 8932, 8994, 8826, 8820 and 8941 credits took off, in total; undefined with none. */
   caBusinessCreditAddBack?: number;
   /** Line 3 columns B and C: the federal research credit (Form 6765 line 28) that reduced the Schedule C research expenses; undefined with none. */
   caFederalResearchReduction?: number;

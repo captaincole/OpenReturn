@@ -10,6 +10,7 @@
  * prints them in Part I (cash) or Part III (accrual).
  */
 
+import { healthCreditReductions } from "../../federal/8941/figures.js";
 import { atLeast, sum } from "../../money.js";
 import { isAtRiskAmounts, type AtRiskAmounts } from "./atRisk.js";
 import { differentialWageCreditByActivity } from "./differentialWage.js";
@@ -157,7 +158,7 @@ export interface FarmFactValue {
    * (FARM_LABOR_CREDITS); a credit those facts figure is not stated here.
    */
   employmentCredits?: number;
-  /* Line 15: the Form 8941 credit for the farm's employee health insurance. */
+  /* Line 15: the Form 8941 credit for the farm's employee health insurance; farmsOnReturn sets it from the small employer health credit fact that names the farm (withHealthCredit). */
   smallEmployerHealthCredit?: number;
   /* The farm placed property in service in 2025, elected section 179 or began amortization: Form 4562. */
   newDepreciableProperty?: boolean;
@@ -350,11 +351,35 @@ function withPlanCredits(
 }
 
 /*
- * The farms on this return. Filing jointly, every farm. On any other status,
- * only the taxpayer's: a spouse's farm is on the spouse's return, and its key
- * is in spouseKeys so a form can wait on it. A malformed fact is listed.
+ * Schedule F line 15: "You must reduce your line 15 deduction by the amount of
+ * any credit for small employer health insurance premiums determined on Form
+ * 8941" (irs-1040sf-inst-2025::sec::line-15::b01). Form 8941 line 12 of the
+ * farm the fact names (federal/8941/figures.ts) becomes the farm's
+ * smallEmployerHealthCredit, which Schedule F line 15 takes off
+ * (federal/schedule-f/expenses.ts). A farm that also states one is a gap on
+ * Form 8941, so no credit is taken off twice.
  */
-export function farmsOnReturn(
+function withHealthCredit(
+  farms: Array<{ key: string; value: FarmFactValue }>,
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): Array<{ key: string; value: FarmFactValue }> {
+  const credits = healthCreditReductions(facts, joint, "farm", farms);
+  if (credits.size === 0) return farms;
+  return farms.map((farm) => {
+    const credit = credits.get(farm.key);
+    if (credit === undefined) return farm;
+    return { ...farm, value: { ...farm.value, smallEmployerHealthCredit: credit } };
+  });
+}
+
+/*
+ * The farms on this return as stated, before any credit. Filing jointly,
+ * every farm. On any other status, only the taxpayer's: a spouse's farm is on
+ * the spouse's return, and its key is in spouseKeys so a form can wait on it.
+ * A malformed fact is listed.
+ */
+export function statedFarmsOnReturn(
   facts: ReadonlyArray<FactRow>,
   joint: boolean,
 ): {
@@ -368,16 +393,26 @@ export function farmsOnReturn(
     .map((row) => ({ key: row.key, value: row.value as FarmFactValue }));
   const offReturn = (farm: { value: FarmFactValue }) =>
     !joint && farmOwnerOf(farm.value) === "spouse";
-  const onReturn = withLaborCredits(
-    farms.filter((farm) => !offReturn(farm)),
-    facts,
-    joint,
-  );
   return {
-    farms: withPlanCredits(onReturn, facts),
+    farms: farms.filter((farm) => !offReturn(farm)),
     spouseKeys: farms.filter(offReturn).map((farm) => farm.key),
     malformedKeys: rows.filter((row) => !isFarm(row.value)).map((row) => row.key),
   };
+}
+
+/* The farms on this return (statedFarmsOnReturn), with the credits that lower their expenses. */
+export function farmsOnReturn(
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): {
+  farms: Array<{ key: string; value: FarmFactValue }>;
+  spouseKeys: string[];
+  malformedKeys: string[];
+} {
+  const stated = statedFarmsOnReturn(facts, joint);
+  const withHealth = withHealthCredit(stated.farms, facts, joint);
+  const onReturn = withLaborCredits(withHealth, facts, joint);
+  return { ...stated, farms: withPlanCredits(onReturn, facts) };
 }
 
 /*

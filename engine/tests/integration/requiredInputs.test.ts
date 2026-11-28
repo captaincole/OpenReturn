@@ -154,6 +154,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "exists is Cade's question, and the form lists a fact whose answers are missing",
   ],
   [
+    /^new_markets_investment\.[^.]+$/,
+    "each fact is one whole qualified equity investment (its Form 8874-A and the holder's " +
+      "answers); whether one exists is Cade's question, and Form 8874 lists a fact whose " +
+      "answers are missing",
+  ],
+  [
     /^prior_year\.tax_credit_bond_credit_carryforward$/,
     "a prior-year answer from last year's Form 8912 (line 4 less line 12), recorded when a " +
       "credit was carried forward (last year's return is not read, #79); Form 8912 line 3 takes it",
@@ -265,6 +271,18 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "the fact is the whole orphan drug credit of the taxpayer's own business (Form 8820 lines 1 " +
       "to 2b and Part II); whether the business paid for clinical testing of an orphan drug is " +
       "Cade's question. Form 8820 lists the fact again while Part II or line 2b is missing",
+  ],
+  [
+    /^railroad_track_maintenance$/,
+    "the fact is the whole railroad track maintenance credit of the taxpayer's own business " +
+      "(Form 8900 lines 1 to 5); whether the business paid for track maintenance or assigned " +
+      "miles is Cade's question. Form 8900 lists the fact again while it is malformed or line 3a is missing",
+  ],
+  [
+    /^small_employer_health_credit$/,
+    "the fact is the whole Form 8941 of the taxpayer's own employees (lines A to C and " +
+      "Worksheets 1 to 4); whether the business paid health insurance premiums for its " +
+      "employees is Cade's question. Form 8941 lists the fact again while it is malformed",
   ],
   [
     /^section_965\.(inclusion|other_liability|s_corporation|deferred)\.[^.]+$/,

@@ -16,6 +16,8 @@ import { disabledAccessReductions } from "../../federal/8826/figures.js";
 import { tipCreditReductions } from "../../federal/8846/figures.js";
 import { agriBiodieselIncomeByBusiness } from "../../federal/8864/figures.js";
 import { childcareCreditReductions } from "../../federal/8882/figures.js";
+import { trackMaintenanceReductions } from "../../federal/8900/figures.js";
+import { healthCreditReductions } from "../../federal/8941/figures.js";
 import { atLeast, sum } from "../../money.js";
 import {
   statedBusinessesOnReturn,
@@ -210,6 +212,15 @@ const BUSINESS_CREDIT_REDUCTIONS: ReadonlyArray<CreditReduction> = [
    */
   { reductionsOf: childcareCreditReductions, californiaAddsBack: false },
   /*
+   * Form 8900 line 5 comes off the cost of the 2025 asset that holds the
+   * capitalized expenditures: "Use the amount of RTMC to reduce the basis of
+   * a qualifying railroad structure (including railroad track) asset ... The
+   * reduction is limited to the amount of QRTME capitalized for the asset"
+   * (irs-8900-inst-2025::sec::adjustments-to-basis::b01). No deduction goes
+   * down. California has no such credit (federal/8900/QUESTIONS.md item 7).
+   */
+  { reductionsOf: trackMaintenanceReductions, californiaAddsBack: false },
+  /*
    * Form 8820 without the reduced credit election: "reduce your otherwise
    * allowable deduction for qualified clinical testing expenses by the amount
    * of the credit" (irs-8820-form-2025::sec::line-2a::b02), on the lines that
@@ -217,6 +228,21 @@ const BUSINESS_CREDIT_REDUCTIONS: ReadonlyArray<CreditReduction> = [
    * California gives it back (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b08).
    */
   { reductionsOf: orphanDrugReductions, californiaAddsBack: true },
+  /*
+   * Line 14: "You must reduce your line 14 deduction by the amount of any
+   * credit for small employer health insurance premiums determined on Form
+   * 8941" (irs-1040sc-inst-2025::sec::line-14::b01): Form 8941 line 12 of the
+   * business the fact names (federal/8941/figures.ts). California gives it
+   * back: "For California purposes, the full amount of insurance is deductible"
+   * (ftb-pub-1001-2025::sec::small-employer-health::b01), on line 3 column B
+   * (::enter-on-schedule-ca-540-part-i-or-10::b01).
+   */
+  {
+    reductionsOf: onLine("employeeBenefitPrograms", (facts, joint) =>
+      healthCreditReductions(facts, joint, "business"),
+    ),
+    californiaAddsBack: true,
+  },
   /*
    * Form 6765 without the reduced credit election: the research expenses the
    * business deducts go down by line 28, on the lines the credits above left
