@@ -36,7 +36,11 @@ const investmentOf = ({ key, value }: NewMarketsInvestmentFact): NewMarketsInves
   passive: value.passive,
 });
 
-/* The investments with a row on line 1: a credit allowance date in 2025 while held and qualified. */
+/*
+ * The investments with a row on line 1: a credit allowance date in 2025 while
+ * held and qualified, or a 2025 recapture event within the 7 years from issue
+ * (lines.ts, rowOf).
+ */
 export const investmentsWithRow = (inputs: ResolverInputs): NewMarketsInvestmentFact[] =>
   newMarketsFactsOf(inputs).filter((fact) => rowOf(investmentOf(fact)) !== undefined);
 

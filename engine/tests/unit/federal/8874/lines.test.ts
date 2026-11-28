@@ -128,6 +128,29 @@ describe("rowOf: an investment held on its 2025 credit allowance date", () => {
     expect(isGap(row?.credit)).toBe(true);
   });
 
+  it("keeps a 2025 recapture event after the seventh date but within 7 years of issue, as a gap", () => {
+    // Issued 2018-09-01: the seventh credit allowance date is 2024-09-01, and the 7 years run to 2025-09-01.
+    const row = rowOf(investment({ investmentDate: "2018-09-01", recaptureEventOn: "2025-03-01" }));
+    expect(row?.amount).toBe(100000);
+    expect(row?.ratePercent).toBeUndefined();
+    expect(isGap(row?.credit)).toBe(true);
+    const lines = form8874LinesOf(
+      [investment({ investmentDate: "2018-09-01", recaptureEventOn: "2025-03-01" })],
+      undefined,
+    );
+    expect(isGap(lines.line3)).toBe(true);
+  });
+
+  it("has no row for a 2025 event on or after the seventh anniversary of issue", () => {
+    expect(
+      rowOf(investment({ investmentDate: "2018-09-01", recaptureEventOn: "2025-09-01" })),
+    ).toBeUndefined();
+    expect(
+      rowOf(investment({ investmentDate: "2017-06-01", recaptureEventOn: "2025-03-01" })),
+    ).toBeUndefined();
+    expect(rowOf(investment({ investmentDate: "2018-09-01" }))).toBeUndefined();
+  });
+
   it("has no row before the first date or after the seventh", () => {
     expect(rowOf(investment({ investmentDate: "2018-07-01" }))).toBeUndefined();
     expect(rowOf(investment({ investmentDate: "2026-01-02" }))).toBeUndefined();

@@ -43,6 +43,11 @@ const MORE_ROWS_GAP = (count: number) =>
  */
 const RECAPTURE_GAP = (cde: string) =>
   `The investment in ${cde} had a recapture event in 2025 (Form 8874-B). The credit recapture amount goes on Schedule 2 line 17a ("NMCR"), figured from the credits of earlier years with interest under section 45D(g) and Regulations section 1.45D-1(e) (irs-8874-form-2025::sec::recapture-of-the-credit::b01); the engine does not figure it.`;
+const RECAPTURE_ONLY_GAP = (cde: string) =>
+  `${RECAPTURE_GAP(cde)} Its seventh credit allowance date was before 2025, so it has no credit this year; the row is listed only to carry this gap.`;
+
+/* "at any time within 7 years from the date of the original issuance" (recapture-of-the-credit::b01). */
+export const RECAPTURE_YEARS = 7;
 
 const yearOf = (date: string) => Number(date.slice(0, 4));
 const monthDayOf = (date: string) => date.slice(5);
@@ -69,6 +74,16 @@ export function creditAllowanceDateIn(investmentDate: string, taxYear = TAX_YEAR
   const monthDay = monthDayOf(investmentDate);
   const day = monthDay === LEAP_DAY && !isLeapYear(taxYear) ? DAY_BEFORE_LEAP_DAY : monthDay;
   return `${taxYear}-${day}`;
+}
+
+/*
+ * True when a recapture event falls within the 7 years from the original
+ * issue: on or after the investment date and before its seventh anniversary,
+ * which is one year after the seventh credit allowance date.
+ */
+export function inRecapturePeriod(investmentDate: string, eventDate: string): boolean {
+  const end = creditAllowanceDateIn(investmentDate, yearOf(investmentDate) + RECAPTURE_YEARS);
+  return eventDate >= investmentDate && eventDate < end;
 }
 
 /* Column (e): 5 for credit years 1 to 3, 6 for years 4 to 7 (specific-instructions::b01). */
@@ -136,28 +151,39 @@ const nameAndAddressOf = (investment: NewMarketsInvestment) =>
  * - A recapture event before the tax year: the investment stopped being a
  *   qualified equity investment then (recapture-of-the-credit::b01). One in the
  *   tax year keeps its row, with the gap of the recapture amount.
+ * - A recapture event in the tax year after the seventh credit allowance date,
+ *   but within the 7 years from the original issue, still owes the recapture
+ *   amount in the year it occurs (recapture-of-the-credit::b01). The investment
+ *   gets a row with no rate and the gap, so the amount is not dropped
+ *   (QUESTIONS.md, item 4).
  */
 export function rowOf(investment: NewMarketsInvestment, taxYear = TAX_YEAR): Line1Row | undefined {
   const { investmentDate, disposedOn, recaptureEventOn } = investment;
-  if (!hasCreditAllowanceDateIn(investmentDate, taxYear)) return undefined;
   if (disposedOn !== undefined && yearOf(disposedOn) < taxYear) return undefined;
   if (recaptureEventOn !== undefined && yearOf(recaptureEventOn) < taxYear) return undefined;
+  const dated = hasCreditAllowanceDateIn(investmentDate, taxYear);
+  const recapturedInYear = recaptureEventOn !== undefined && yearOf(recaptureEventOn) === taxYear;
+  const recaptureOnly =
+    !dated && recapturedInYear && inRecapturePeriod(investmentDate, recaptureEventOn);
+  if (!dated && !recaptureOnly) return undefined;
   const amount = roundDollars(investment.amount);
-  const ratePercent = ratePercentOf(creditYearOf(investmentDate, taxYear));
   const columns = {
     key: investment.key,
     nameAndAddress: nameAndAddressOf(investment),
     ein: investment.cdeEin,
     investmentDate,
     amount,
-    ratePercent,
   };
-  if (recaptureEventOn !== undefined && yearOf(recaptureEventOn) === taxYear) {
-    return { ...columns, credit: unsupported(RECAPTURE_GAP(investment.cdeName)) };
+  if (recaptureOnly) {
+    return { ...columns, credit: unsupported(RECAPTURE_ONLY_GAP(investment.cdeName)) };
+  }
+  const ratePercent = ratePercentOf(creditYearOf(investmentDate, taxYear));
+  if (recapturedInYear) {
+    return { ...columns, ratePercent, credit: unsupported(RECAPTURE_GAP(investment.cdeName)) };
   }
   const allowanceDate = creditAllowanceDateIn(investmentDate, taxYear);
   if (disposedOn !== undefined && disposedOn < allowanceDate) return undefined;
-  return { ...columns, credit: creditOf(amount, ratePercent) };
+  return { ...columns, ratePercent, credit: creditOf(amount, ratePercent) };
 }
 
 /* Line 1's printed rows: six investments, or five and the "See attached" row with its gap. */

@@ -185,6 +185,20 @@ describe("gaps", () => {
     expect(isGap(out.field("form-3800", COL_G))).toBe(true);
   });
 
+  it("a 2025 recapture event within 7 years of issue, after the seventh date, is not dropped", () => {
+    // Harbor Light was issued 2018-05-05: its 7 years run to 2025-05-05.
+    const harborKey = makeNewMarketsInvestmentFactKey("harbor-light");
+    const harbor = withInvestment(harborKey, { recaptureEventOn: "2025-03-01" }).filter(
+      (fact) => !isInvestment(fact) || fact.key === harborKey,
+    );
+    const out = evaluate(harbor);
+    expect(out.files("form-8874")).toBe(true);
+    expect(out.line("0.line.1_row1_credit_rate_col_e")).toBeUndefined();
+    expect(isGap(out.field("form-8874", "0.line.1_row1_credit_col_f"))).toBe(true);
+    expect(isGap(out.field("form-8874", L3))).toBe(true);
+    expect(isGap(out.field("form-3800", COL_G))).toBe(true);
+  });
+
   it("a seventh investment with a 2025 date goes on an attached statement, a gap", () => {
     const seventh = row(
       "other",

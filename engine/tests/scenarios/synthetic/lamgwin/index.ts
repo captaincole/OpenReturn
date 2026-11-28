@@ -1,7 +1,7 @@
 /*
  * A made-up single filer in Texas (README.md): six qualified equity
  * investments in community development entities with a 2025 credit allowance
- * date (credit years 1 to 5 and 7), a seventh sold before its 2025 date, and a
+ * date (credit years 1 to 5 and 7), a seventh whose credit period ended in 2024, and a
  * K-1 new markets credit. Form 8874 lines 1 to 3, Form 3800 line 1i. Federal
  * only. UNVERIFIED: no answer key; the expected values are engine output
  * checked by hand, so a failure means "the engine changed".
@@ -28,7 +28,7 @@ const FORM_IDS = [
 export const lamgwinScenario: Scenario = {
   name: "lamgwin",
   description:
-    "Single TX filer with six qualified equity investments in community development entities (credit years 1 to 7, 5% and 6%), one sold before its credit allowance date, and a K-1 new markets credit (Form 8874 lines 1–3, Form 3800 line 1i).",
+    "Single TX filer with six qualified equity investments in community development entities (credit years 1 to 7, 5% and 6%), one whose credit period ended in 2024, and a K-1 new markets credit (Form 8874 lines 1–3, Form 3800 line 1i).",
   verification: "unverified",
   taxYear: LAMGWIN_TAX_YEAR,
   userId: LAMGWIN_USER_ID,
