@@ -22,7 +22,7 @@ Documents: `docs/01-schedule-k1-llano-isotope-partners.pdf` (made by `generate-d
 | Line | Rule | Value |
 | --- | --- | --- |
 | 7213 (copy 1) Part I line 1 | the facility limitation in the letter | 0.4 MW |
-| Part I line 2 | the share's nameplate capacity (rule-decisions A111) | 0.5 MW |
+| Part I line 2 | the share's nameplate capacity (rule-decisions A128) | 0.5 MW |
 | Part I line 3 | 0.4 ÷ 0.5 | 80% |
 | Part I line 4 | the share's kWh sold | 4,000,000 |
 | Part I line 5a | 80% × 4,000,000 | 3,200,000 kWh |
@@ -33,7 +33,7 @@ Documents: `docs/01-schedule-k1-llano-isotope-partners.pdf` (made by `generate-d
 | 7213 (copy 2) Part II line 1 | kWh sold | 6,000,000 |
 | Part II line 3 | 6,000,000 × $0.003 | 18,000 |
 | Part II lines 4, 5, 6 | receipts; ZEC payments; line 4 (the credit does not reduce the ZEC payments) | 210,000; 30,000; 210,000 |
-| Part II line 7 | 6,000,000 × $0.026 (rule-decisions A110) | 156,000 |
+| Part II line 7 | 6,000,000 × $0.026 (rule-decisions A127) | 156,000 |
 | Part II line 8 | 210,000 − 156,000 | 54,000 |
 | Part II line 9 | the smaller of 18,000 and 16% × 54,000 | 8,640 |
 | Part II line 10 | 18,000 − 8,640 | 9,360 |
@@ -51,4 +51,4 @@ Documents: `docs/01-schedule-k1-llano-isotope-partners.pdf` (made by `generate-d
 | Form 1040 line 24 | 123,987 + 7,064 (SE tax 4,017, Additional Medicare Tax 3,047) | 131,051 |
 | Form 1040 line 37 | 131,051 − 121,750 | 9,301 |
 
-The rest of the 1cc and 1u credits ($59,955) carries forward: Form 3800 allows the 1cc credit first, in the order of use.
+The rest of the 1cc and 1u credits ($59,955) carries forward: Form 3800 allows the 1cc credit first, in the order of use. Part V lists each line's K-1 row before the facility's row, as for every form added after Form 8820 (`3800/sources.ts`), and uses the limit in that order: line 3 (the 1cc K-1) takes $3,000 and line 4 (the facility) $28,845, so the facility carries $21,155 forward, and lines 1 and 2 (1u) carry $2,000 and $36,800.

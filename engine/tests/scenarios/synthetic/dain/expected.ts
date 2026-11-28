@@ -236,41 +236,43 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
       // Line 6 — Add lines 2, 3, and 5: (i) Amount of column (g) applied against tax in Part II
       "form-3800.3.part3.6_add_lines_2_3_5_col_i": 31845,
       // Part V, line 1, column (e) — Not subject to the limit: credits other than transfer electio
-      "form-3800.7.part5.1_breakdown_col_e": 46800,
-      // Part V, line 1, column (f)(1) — Not subject to the limit: transfer election credits sold
-      "form-3800.7.part5.1_breakdown_col_f1": 10000,
+      "form-3800.7.part5.1_breakdown_col_e": 2000,
       // Part V, line 2, column (e) — Not subject to the limit: credits other than transfer electio
-      "form-3800.7.part5.2_breakdown_col_e": 2000,
+      "form-3800.7.part5.2_breakdown_col_e": 46800,
+      // Part V, line 2, column (f)(1) — Not subject to the limit: transfer election credits sold
+      "form-3800.7.part5.2_breakdown_col_f1": 10000,
       // Part V, line 3, column (e) — Not subject to the limit: credits other than transfer electio
-      "form-3800.7.part5.3_breakdown_col_e": 50000,
+      "form-3800.7.part5.3_breakdown_col_e": 3000,
       // Part V, line 4, column (e) — Not subject to the limit: credits other than transfer electio
-      "form-3800.7.part5.4_breakdown_col_e": 3000,
+      "form-3800.7.part5.4_breakdown_col_e": 50000,
       // Line 1 — (g) Combine columns (d)(4), (e), (f)(1), and (f)(2)
-      "form-3800.7.part5.1_breakdown_col_g": 36800,
+      "form-3800.7.part5.1_breakdown_col_g": 2000,
       // Line 1 — (h)(2) Subtract column (h)(1) from column (g) (credit excluding EPE)
-      "form-3800.7.part5.1_breakdown_col_h2": 36800,
+      "form-3800.7.part5.1_breakdown_col_h2": 2000,
       // Line 1 — (k) Carryforward to 2026. Subtract column (i)(1) from column (h)(2)
-      "form-3800.7.part5.1_breakdown_col_k": 36800,
+      "form-3800.7.part5.1_breakdown_col_k": 2000,
       // Line 2 — (g) Combine columns (d)(4), (e), (f)(1), and (f)(2)
-      "form-3800.7.part5.2_breakdown_col_g": 2000,
+      "form-3800.7.part5.2_breakdown_col_g": 36800,
       // Line 2 — (h)(2) Subtract column (h)(1) from column (g) (credit excluding EPE)
-      "form-3800.7.part5.2_breakdown_col_h2": 2000,
+      "form-3800.7.part5.2_breakdown_col_h2": 36800,
       // Line 2 — (k) Carryforward to 2026. Subtract column (i)(1) from column (h)(2)
-      "form-3800.7.part5.2_breakdown_col_k": 2000,
+      "form-3800.7.part5.2_breakdown_col_k": 36800,
       // Line 3 — (g) Combine columns (d)(4), (e), (f)(1), and (f)(2)
-      "form-3800.7.part5.3_breakdown_col_g": 50000,
+      "form-3800.7.part5.3_breakdown_col_g": 3000,
       // Line 3 — (h)(2) Subtract column (h)(1) from column (g) (credit excluding EPE)
-      "form-3800.7.part5.3_breakdown_col_h2": 50000,
+      "form-3800.7.part5.3_breakdown_col_h2": 3000,
       // Line 3 — (i)(1) Amount of column (h)(2) applied against tax in Part II
-      "form-3800.7.part5.3_breakdown_col_i1": 31845,
+      "form-3800.7.part5.3_breakdown_col_i1": 3000,
       // Line 3 — (k) Carryforward to 2026. Subtract column (i)(1) from column (h)(2)
-      "form-3800.7.part5.3_breakdown_col_k": 18155,
+      "form-3800.7.part5.3_breakdown_col_k": 0,
       // Line 4 — (g) Combine columns (d)(4), (e), (f)(1), and (f)(2)
-      "form-3800.7.part5.4_breakdown_col_g": 3000,
+      "form-3800.7.part5.4_breakdown_col_g": 50000,
       // Line 4 — (h)(2) Subtract column (h)(1) from column (g) (credit excluding EPE)
-      "form-3800.7.part5.4_breakdown_col_h2": 3000,
+      "form-3800.7.part5.4_breakdown_col_h2": 50000,
+      // Line 4 — (i)(1) Amount of column (h)(2) applied against tax in Part II
+      "form-3800.7.part5.4_breakdown_col_i1": 28845,
       // Line 4 — (k) Carryforward to 2026. Subtract column (i)(1) from column (h)(2)
-      "form-3800.7.part5.4_breakdown_col_k": 3000,
+      "form-3800.7.part5.4_breakdown_col_k": 21155,
     },
   },
   "schedule-2": {

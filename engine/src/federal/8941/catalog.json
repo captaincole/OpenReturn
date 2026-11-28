@@ -1,0 +1,439 @@
+{
+  "form": {
+    "formId": "form-8941",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Credit for Small Employer Health Insurance Premiums"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8941.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8941.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 460.8,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8941.0.header.a_shop_marketplace_premiums_yes",
+      "label": "A — Did you pay premiums during your tax year for employee health insurance coverage you provided through a Small Business Health Options Program (SHOP) Marketplace (or do you qualify for an exception to this requirement)? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 66.799,
+        "y": 649.968
+      }
+    },
+    {
+      "fieldId": "form-8941.0.header.a_marketplace_identifier",
+      "label": "A — Yes. Enter Marketplace Identifier (if any)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 244.8,
+        "y": 647.968
+      }
+    },
+    {
+      "fieldId": "form-8941.0.header.a_shop_marketplace_premiums_no",
+      "label": "A — Did you pay premiums during your tax year for employee health insurance coverage you provided through a Small Business Health Options Program (SHOP) Marketplace (or do you qualify for an exception to this requirement)? No. Stop. Do not file Form 8941",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 66.799,
+        "y": 637.969
+      }
+    },
+    {
+      "fieldId": "form-8941.0.header.b_employment_tax_ein",
+      "label": "B — Enter the employer identification number (EIN) used to report employment taxes for individuals included on line 1 if different from the identifying number listed above",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 266.4,
+        "y": 599.969
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8941.0.header.c_prior_credit_claimed_yes",
+      "label": "C — Does a tax return you (or any predecessor) filed for a tax year beginning after 2013 and before 2024 include a Form 8941 with line A checked \"Yes\" and line 12 showing a positive amount? Yes. Stop. Do not file Form 8941",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 66.799,
+        "y": 565.969
+      }
+    },
+    {
+      "fieldId": "form-8941.0.header.c_prior_credit_claimed_no",
+      "label": "C — Does a tax return you (or any predecessor) filed for a tax year beginning after 2013 and before 2024 include a Form 8941 with line A checked \"Yes\" and line 12 showing a positive amount? No. Go to line 1",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+      "position": {
+        "page": 0,
+        "x": 66.799,
+        "y": 542.968
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.1_number_of_employees",
+      "label": "Line 1 — Enter the number of individuals you employed during the tax year who are considered employees for purposes of this credit (total from Worksheet 1, column (a))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 503.968
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.2_full_time_equivalent_employees",
+      "label": "Line 2 — Enter the number of full-time equivalent employees (FTEs) you had for the tax year (from Worksheet 2, line 3)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.3_average_annual_wages",
+      "label": "Line 3 — Average annual wages you paid for the tax year (from Worksheet 3, line 3). This amount must be a multiple of $1,000",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 455.969
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.4_premiums_paid_qualifying_arrangement",
+      "label": "Line 4 — Premiums you paid during the tax year for employees included on line 1 for health insurance coverage under a qualifying arrangement (total from Worksheet 4, column (b))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 431.968
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.5_premiums_at_average_premium",
+      "label": "Line 5 — Premiums you would have entered on line 4 if the total premium for each employee equaled the average premium for the small group market in which the employee enrolls in health insurance coverage (total from Worksheet 4, column (c))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 395.968
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.6_smaller_of_4_or_5",
+      "label": "Line 6 — Enter the smaller of line 4 or line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.7_multiply_6_by_applicable_percentage",
+      "label": "Line 7 — Multiply line 6 by the applicable percentage: tax-exempt small employers, 35% (0.35); all other small employers, 50% (0.50)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 347.969
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.8_fte_phaseout_amount",
+      "label": "Line 8 — If line 2 is 10 or less, enter the amount from line 7. Otherwise, enter the amount from Worksheet 5, line 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.9_wage_phaseout_amount",
+      "label": "Line 9 — If line 3 is $33,000 or less, enter the amount from line 8. Otherwise, enter the amount from Worksheet 6, line 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.10_state_subsidies_and_credits",
+      "label": "Line 10 — Enter the total amount of any state premium subsidies paid and any state tax credits available to you for premiums included on line 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 275.969
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.11_subtract_10_from_4",
+      "label": "Line 11 — Subtract line 10 from line 4. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.12_smaller_of_9_or_11",
+      "label": "Line 12 — Enter the smaller of line 9 or line 11",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.13_employees_with_premiums_paid",
+      "label": "Line 13 — If line 12 is zero, skip lines 13 and 14 and go to line 15. Otherwise, enter the number of employees included on line 1 for whom you paid premiums during the tax year for health insurance coverage under a qualifying arrangement (total from Worksheet 4, column (a))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.14_ftes_for_line_13_employees",
+      "label": "Line 14 — Enter the number of FTEs you would have entered on line 2 if you only included employees included on line 13 (from Worksheet 7, line 3)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 191.97
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.15_credit_from_pass_through_entities",
+      "label": "Line 15 — Credit for small employer health insurance premiums from partnerships, S corporations, cooperatives, estates, and trusts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.16_add_lines_12_and_15",
+      "label": "Line 16 — Add lines 12 and 15",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 131.969
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.17_allocated_to_patrons_or_beneficiaries",
+      "label": "Line 17 — Amount allocated to patrons of the cooperative or beneficiaries of the estate or trust",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 119.97
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.18_subtract_17_from_16",
+      "label": "Line 18 — Cooperatives, estates, and trusts, subtract line 17 from line 16",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 95.969
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.19_payroll_taxes_paid",
+      "label": "Line 19 — Enter the amount you paid in 2025 for taxes considered payroll taxes for purposes of this credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 71.968
+      }
+    },
+    {
+      "fieldId": "form-8941.0.line.20_smaller_of_16_or_19",
+      "label": "Line 20 — Tax-exempt small employers, enter the smaller of line 16 or line 19",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 47.97
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8941/blank.pdf",
+    "ingestedAt": "2026-11-27T21:04:10.853Z",
+    "totalFields": 28,
+    "skipped": 0,
+    "catalogEntries": 28
+  }
+}

@@ -1,12 +1,12 @@
 # Form 7213 — open questions
 
-Form 7213 claims two credits for electricity a taxpayer's own nuclear facility produces and sells: Part I for an advanced facility (section 45J), Part II for an older facility (section 45U). The instructions publish no example with numbers. The engine follows the lines. Three choices that conflict with a text are decided in the code and in `docs/rule-decisions.md` (rows A110, A111 and A112). The items keep their numbers, because the code and the tests cite them.
+Form 7213 claims two credits for electricity a taxpayer's own nuclear facility produces and sells: Part I for an advanced facility (section 45J), Part II for an older facility (section 45U). The instructions publish no example with numbers. The engine follows the lines. Three choices that conflict with a text are decided in the code and in `docs/rule-decisions.md` (rows A127, A128 and A129). The items keep their numbers, because the code and the tests cite them.
 
 ## Two texts conflict
 
-- **Part II line 7, the 2025 rate (row A110).** The form face prints "$0.025"; the instructions say "2.5 cents (adjusted for inflation)", and the IRS gives $0.026 for 2025. The engine uses $0.026 (`lines.ts`). See "Blind fill" below.
-- **Part I line 2, a co-owner's capacity (row A111).** The face's words name the whole facility; the instructions treat each owner's undivided share as a separate facility. The engine uses the share, Section 1 line 6 (`copies.ts`).
-- **2. Line 12 names the wrong Form 3800 line (row A112).** "Instead, report the credit directly on Form 3800, Part III, line 1x" (`irs-7213-inst-2025::sec::line-12::b01`). Line 1x of Form 3800 is Form 8933. The form face and the K-1 instructions name line 1u. The engine uses line 1u (`form3800.ts`, `3800/k1Credits.ts`). **No dollars change.**
+- **Part II line 7, the 2025 rate (row A127).** The form face prints "$0.025"; the instructions say "2.5 cents (adjusted for inflation)", and the IRS gives $0.026 for 2025. The engine uses $0.026 (`lines.ts`). See "Blind fill" below.
+- **Part I line 2, a co-owner's capacity (row A128).** The face's words name the whole facility; the instructions treat each owner's undivided share as a separate facility. The engine uses the share, Section 1 line 6 (`copies.ts`).
+- **2. Line 12 names the wrong Form 3800 line (row A129).** "Instead, report the credit directly on Form 3800, Part III, line 1x" (`irs-7213-inst-2025::sec::line-12::b01`). Line 1x of Form 3800 is Form 8933. The form face and the K-1 instructions name line 1u. The engine uses line 1u (`form3800.ts`, `3800/k1Credits.ts`). **No dollars change.**
 
 ## Should we do this now
 
@@ -24,7 +24,7 @@ Form 7213 claims two credits for electricity a taxpayer's own nuclear facility p
 13. **Prohibited foreign entities.** Not now: the rule is for entities. No 45U credit for a specified foreign entity for tax years beginning after July 4, 2025 (`who-must-file::b02`). The engine prepares an individual's return and does not ask.
 14. **Form 7220 for the increased credit on line 11.** Not now: Form 7220 is its own form, and the engine has no rules for it. "You must complete Forms 7213 and 7220 and attach both forms to your timely filed return (including extensions) to claim the increased credit amount" (`line-11::b01`). The facility fact states the prevailing wage answer, as Form 8911 does for its line 13. **Changes dollars** only when the answer is wrong: line 11 is 5 times line 10.
 15. **Part I line 3 above 100%.** Not now: only a wrong fact reaches it. Line 3 divides the IRS allocation by the share's capacity, and the IRS does not allocate more than the capacity (Notice 2023-24). The engine does not cap the ratio, so a fact with a larger allocation prints a ratio above 100%, and line 6b still limits the credit.
-16. **A tax year that spans two calendar years.** Not now: an individual's tax year is the calendar year. The IRS page for row A110 gives $0.026 for electricity "sold during the portion of calendar year 2025", so a fiscal year would use two rates on line 7. The engine uses one rate. **No dollars change** for an individual.
+16. **A tax year that spans two calendar years.** Not now: an individual's tax year is the calendar year. The IRS page for row A127 gives $0.026 for electricity "sold during the portion of calendar year 2025", so a fiscal year would use two rates on line 7. The engine uses one rate. **No dollars change** for an individual.
 
 ## Pattern change
 
@@ -32,10 +32,10 @@ None. The form uses the copies mechanism (`federal/index.ts`), the Form 3800 sou
 
 ## Blind fill
 
-A preparer filled 14 cases by hand from the blank form and the instructions only. The engine and the blind fill agree on cases 1 to 3, 5, 13 and 14, and on the blind preparer's choices for line 2 of a co-owner (row A111), a blank line 5 with no ZEC payments, and the K-1 credits (item 1). Two choices change dollars:
+A preparer filled 14 cases by hand from the blank form and the instructions only. The engine and the blind fill agree on cases 1 to 3, 5, 13 and 14, and on the blind preparer's choices for line 2 of a co-owner (row A128), a blank line 5 with no ZEC payments, and the K-1 credits (item 1). Two choices change dollars:
 
 - **Part I line 3 (case 4).** The blind fill multiplies line 4 by the exact ratio 1/3 (line 5b $18,000); the engine multiplies by the printed 33.33% ($17,998). No text sets the precision (item 3). The engine keeps its default, the rule of row A1.
-- **Part II line 7 (cases 6 to 12).** The blind fill uses the printed $0.025. The engine uses $0.026 (row A110). The engine is right: the instructions say "2.5 cents (adjusted for inflation)" (`credit-for-zero-emission-nuclear::b02`), section 45U(c)(1) adjusts it for the calendar year of the sale and rounds to 0.1 cent (`usc-26-2025::sec::s45u::c-1`), and Notice 2025-37 (Internal Revenue Bulletin 2025-30) gives the 2025 factor 1.0242, so 2.5605 cents rounds to 2.6 cents. The IRS page "Section 45U, zero-emission nuclear power production credit reduction amount rate has been updated by the inflation adjustment" says the form's $0.025 is the 2024 rate.
+- **Part II line 7 (cases 6 to 12).** The blind fill uses the printed $0.025. The engine uses $0.026 (row A127). The engine is right: the instructions say "2.5 cents (adjusted for inflation)" (`credit-for-zero-emission-nuclear::b02`), section 45U(c)(1) adjusts it for the calendar year of the sale and rounds to 0.1 cent (`usc-26-2025::sec::s45u::c-1`), and Notice 2025-37 (Internal Revenue Bulletin 2025-30) gives the 2025 factor 1.0242, so 2.5605 cents rounds to 2.6 cents. The IRS page "Section 45U, zero-emission nuclear power production credit reduction amount rate has been updated by the inflation adjustment" says the form's $0.025 is the 2024 rate.
 
 ## Second opinions
 
@@ -44,7 +44,7 @@ A preparer filled 14 cases by hand from the blank form and the instructions only
 
 ## The statute
 
-The law library was read for row A110 (`usc-26-2025::sec::s45u::c-1`, which supports the $0.026), row A111 (`usc-26-2025::sec::s45j::b-1`, silent on a co-owner's share) and line 11 (`usc-26-2025::sec::s45u::d-1`: the credit "multiplied by 5" when the prevailing wage requirements are met, as the form). No instruction here disagrees with the statute, so there is no entry for `docs/law-findings.md`.
+The law library was read for row A127 (`usc-26-2025::sec::s45u::c-1`, which supports the $0.026), row A128 (`usc-26-2025::sec::s45j::b-1`, silent on a co-owner's share) and line 11 (`usc-26-2025::sec::s45u::d-1`: the credit "multiplied by 5" when the prevailing wage requirements are met, as the form). No instruction here disagrees with the statute, so there is no entry for `docs/law-findings.md`.
 
 ## Confidence
 
@@ -53,15 +53,15 @@ The law library was read for row A110 (`usc-26-2025::sec::s45u::c-1`, which supp
 | Header (name, SSN) | stated rule |
 | Part I Section 1 (lines 1a to 9) | stated rule |
 | Part I Section 2 lines 1, 4 to 7 | stated rule (the form's arithmetic) |
-| Part I Section 2 line 2 | own reading (DECISION, row A111) |
+| Part I Section 2 line 2 | own reading (DECISION, row A128) |
 | Part I Section 2 line 3 | own reading (rounding, item 3) |
 | Part I lines 8 and 9 | stated rule (the pass-through copy, item 1) |
 | Part I lines 10 and 11 | stated rule: blank for an individual |
 | Part I Section 2 for an eligible project partner | unsupported (item 8) |
 | Part II Section 1 (lines 1 to 4) | stated rule |
 | Part II lines 1, 3 to 6, 8 to 11 | stated rule (the form's arithmetic) |
-| Part II line 7 | own reading (DECISION, row A110) |
-| Part II lines 12 and 13 | stated rule (the pass-through copy, item 1; Form 3800 line 1u, row A112) |
+| Part II line 7 | own reading (DECISION, row A127) |
+| Part II lines 12 and 13 | stated rule (the pass-through copy, item 1; Form 3800 line 1u, row A129) |
 | Part II lines 14 and 15 | stated rule: blank for an individual |
 | Part II for a late facility or an elective payment | unsupported (items 9, 10) |
 

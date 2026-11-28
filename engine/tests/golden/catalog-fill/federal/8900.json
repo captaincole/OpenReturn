@@ -1,0 +1,114 @@
+{
+  "formId": "form-8900",
+  "fieldCount": 12,
+  "entries": [
+    {
+      "fieldId": "form-8900.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-1IFS0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8900.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-91RJM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8900.0.line.1_track_maintenance_expenditures",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "8,454"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8900.0.line.2_forty_percent_of_line1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "5,121"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8900.0.line.3a_miles_owned_or_leased",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "8,136"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8900.0.line.3b_miles_assigned_to_others",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "3,836"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8900.0.line.3c_miles_assigned_to_you",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "5,747"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8900.0.line.3d_total_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "5,074"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8900.0.line.4_miles_times_3500",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "1,520"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8900.0.line.5_smaller_of_line2_or_line4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "6,613"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8900.0.line.6_credit_from_partnerships_s_corps",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "9,765"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8900.0.line.7_total_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "3,434"
+        }
+      ]
+    }
+  ]
+}

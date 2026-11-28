@@ -1,0 +1,681 @@
+{
+  "form": {
+    "formId": "form-8933-schedule-e",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Election Certification"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8933-schedule-e.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 447.4,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.1_electing_taxpayer_name",
+      "label": "Line 1 — Name (electing taxpayer's information from Form 8933)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 635.966
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.2_electing_taxpayer_tin",
+      "label": "Line 2 — Taxpayer identification number (TIN)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 411.4,
+        "y": 635.966
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.3_electing_taxpayer_address",
+      "label": "Line 3 — Address",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 611.968
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.4_capture_facility_location",
+      "label": "Line 4 — Location of capture facility",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 587.967
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.6_industrial_facility_type",
+      "label": "Line 6 — Type of industrial facility",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 563.966
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.5_capture_equipment_placed_in_service_date",
+      "label": "Line 5 — Placed-in-service date of carbon capture equipment",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 411.4,
+        "y": 563.969
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.7a_capture_facility_irs_registration_number",
+      "label": "Line 7a — IRS-issued registration number for each facility where carbon oxide was captured",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.7b_capture_facility_epa_eggrt_id",
+      "label": "Line 7b — EPA e-GGRT ID number(s), if available, of each facility where carbon oxide was captured",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 310.6,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.8_credit_claimant_name",
+      "label": "Line 8 — Name (credit claimant)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 479.967
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.9_credit_claimant_tin",
+      "label": "Line 9 — TIN (credit claimant)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 411.4,
+        "y": 479.967
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.10_credit_claimant_address",
+      "label": "Line 10 — Address (credit claimant)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 455.966
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.11_claimant_not_subcontractor_yes",
+      "label": "Line 11 — Do you attest that the credit claimant isn't a subcontractor? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 511.2,
+        "y": 433.968
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.11_claimant_not_subcontractor_no",
+      "label": "Line 11 — Do you attest that the credit claimant isn't a subcontractor? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 551.2,
+        "y": 433.968
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.12a_disposed_geological_not_eor",
+      "label": "Line 12a — Credit claimant disposed of qualified carbon oxide in secure geological storage and didn't use it as a tertiary injectant in a qualified enhanced oil or natural gas recovery project, nor utilized it in a way described in section 45Q(f)(5)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 65.2,
+        "y": 409.97
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.12b_disposed_geological_used_eor",
+      "label": "Line 12b — Credit claimant disposed of qualified carbon oxide in secure geological storage and used it as a tertiary injectant in a qualified enhanced oil or natural gas recovery project",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+      "position": {
+        "page": 0,
+        "x": 65.2,
+        "y": 385.969
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.12c_utilized_45q_f_5",
+      "label": "Line 12c — Credit claimant utilized qualified carbon oxide in a way described in section 45Q(f)(5)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[2]",
+      "position": {
+        "page": 0,
+        "x": 65.2,
+        "y": 362.218
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.13_disposal_site_location",
+      "label": "Line 13 — Location of disposal site if box 12a or 12b was checked",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 335.967
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.14a_disposal_site_irs_registration_number",
+      "label": "Line 14a — IRS-issued registration number for each disposal site if box 12a or 12b was checked",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 299.967
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.14b_disposal_site_epa_eggrt_id",
+      "label": "Line 14b — EPA e-GGRT ID number(s), if available, of each disposal site if box 12a or 12b was checked",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 310.6,
+        "y": 299.967
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.15a_pre2023_equipment_geological_not_eor",
+      "label": "Line 15a — Qualified carbon oxide captured using carbon capture equipment originally placed in service at a facility on or after February 9, 2018, and before 2023, disposed of in secure geological storage, and not used as a tertiary injectant in a qualified enhanced oil or natural gas recovery project, nor utilized in a way described in section 45Q(f)(5)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 65.2,
+        "y": 277.969
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.15b_pre2023_equipment_geological_eor",
+      "label": "Line 15b — Qualified carbon oxide captured using carbon capture equipment originally placed in service at a facility on or after February 9, 2018, and before 2023, disposed of in secure geological storage, and used as a tertiary injectant in a qualified enhanced oil or natural gas recovery project",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+      "position": {
+        "page": 0,
+        "x": 65.2,
+        "y": 241.969
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.15c_pre2023_equipment_utilized",
+      "label": "Line 15c — Qualified carbon oxide captured using carbon capture equipment originally placed in service at a facility on or after February 9, 2018, and before 2023, and utilized as described in section 45Q(f)(5)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[2]",
+      "position": {
+        "page": 0,
+        "x": 65.2,
+        "y": 206.219
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.15d_post2022_equipment_geological_not_eor",
+      "label": "Line 15d — Qualified carbon oxide captured using carbon capture equipment or a direct air capture (DAC) facility originally placed in service after 2022, during the 12-year period beginning on the date the equipment was originally placed in service, disposed of in secure geological storage, and not used as a tertiary injectant in a qualified enhanced oil or natural gas recovery project, nor utilized as described in section 45Q(f)(5)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[3]",
+      "position": {
+        "page": 0,
+        "x": 65.2,
+        "y": 181.968
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.15e_post2022_equipment_geological_eor",
+      "label": "Line 15e — Qualified carbon oxide captured using carbon capture equipment or a DAC facility originally placed in service after 2022, during the 12-year period beginning on the date the equipment was originally placed in service, disposed of in secure geological storage, and used as a tertiary injectant in a qualified enhanced oil or natural gas recovery project",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[4]",
+      "position": {
+        "page": 0,
+        "x": 65.2,
+        "y": 133.969
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.15f_post2022_equipment_utilized",
+      "label": "Line 15f — Qualified carbon oxide captured using carbon capture equipment or a DAC facility originally placed in service after 2022, during the 12-year period beginning on the date the equipment was originally placed in service, and utilized as described in section 45Q(f)(5)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[5]",
+      "position": {
+        "page": 0,
+        "x": 65.2,
+        "y": 98.219
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.16_elect_pre_2018_credit_rates",
+      "label": "Line 16 — If box 15a, 15b, or 15c was checked, check here if you elect to claim the credit rates for equipment placed in service prior to February 9, 2018",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 65.2,
+        "y": 62.219
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part1.17a_rate_old_equipment_no_eor",
+      "label": "Line 17a — $28.43 ($20 plus inflation for old equipment), for tax year beginning in 2025",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 65.2,
+        "y": 686.218
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part1.17b_rate_old_equipment_eor",
+      "label": "Line 17b — $14.21 ($10 plus inflation for old equipment), for tax year beginning in 2025",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[1]",
+      "position": {
+        "page": 1,
+        "x": 65.2,
+        "y": 662.22
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part1.17c_rate_new_equipment_no_eor",
+      "label": "Line 17c — $46.96 for new equipment and qualified carbon oxide disposed of in secure storage and not used in EOR",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[2]",
+      "position": {
+        "page": 1,
+        "x": 65.2,
+        "y": 638.219
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part1.17d_rate_new_equipment_eor",
+      "label": "Line 17d — $32.54 for new equipment and qualified carbon oxide disposed of in secure storage and used in EOR or utilized in a manner described in section 45Q(f)(5)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[3]",
+      "position": {
+        "page": 1,
+        "x": 65.2,
+        "y": 613.968
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part1.17e_rate_post_2022_no_eor",
+      "label": "Line 17e — $17 for equipment placed in service after 2022 and qualified carbon oxide disposed of in secure storage and not used in EOR",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[4]",
+      "position": {
+        "page": 1,
+        "x": 65.2,
+        "y": 590.22
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part1.17f_rate_post_2022_eor",
+      "label": "Line 17f — $12 for equipment placed in service after 2022 and qualified carbon oxide disposed of in secure storage and used in EOR or utilized in a manner described in section 45Q(f)(5)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[5]",
+      "position": {
+        "page": 1,
+        "x": 65.2,
+        "y": 565.969
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part1.17g_rate_dac_no_eor",
+      "label": "Line 17g — $36 for DAC equipment placed in service after 2022 and qualified carbon oxide disposed of in secure storage and not used in EOR",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[6]",
+      "position": {
+        "page": 1,
+        "x": 65.2,
+        "y": 541.968
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part1.17h_rate_dac_eor",
+      "label": "Line 17h — $26 for DAC equipment placed in service after 2022 and qualified carbon oxide disposed of in secure storage and used in EOR or utilized in a manner described in section 45Q(f)(5)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[7]",
+      "position": {
+        "page": 1,
+        "x": 65.2,
+        "y": 517.97
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part2.1_tons_secure_storage_no_eor",
+      "label": "Line 1 — If Part I, box 12a, was checked, metric tons of qualified carbon oxide captured by the electing taxpayer and disposed of in secure geological storage by the credit claimant and not used as a tertiary injectant in a qualified enhanced oil or natural gas recovery project, nor utilized in a way described in section 45Q(f)(5)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_01[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 431.968
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part2.2_tons_secure_storage_eor",
+      "label": "Line 2 — If Part I, box 12b, was checked, metric tons of qualified carbon oxide captured by the electing taxpayer and disposed of in secure geological storage by the credit claimant and used as a tertiary injectant in a qualified enhanced oil or natural gas recovery project",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_02[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part2.3_tons_utilized_lca",
+      "label": "Line 3 — If Part I, box 12c, was checked, metric tons of the electing taxpayer's qualified carbon oxide, expressed as carbon dioxide equivalent, utilized in the credit claimant's facility, and determined by an LCA",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part2.4_tons_allowed_to_claimant",
+      "label": "Line 4 — Metric tons of qualified carbon oxide listed on line 1, 2, or 3, allowed by the electing taxpayer to be claimed by the credit claimant",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_04[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 275.969
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part2.5_credit_rate",
+      "label": "Line 5 — Credit rate from Part I, line 17",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_05[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part2.6_credit_allowed_to_claimant",
+      "label": "Line 6 — Carbon oxide sequestration credit allowed by the electing taxpayer to be claimed by the credit claimant. Multiply line 4 by line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_06[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part2.7_tons_not_allowed_to_claimant",
+      "label": "Line 7 — Metric tons of qualified carbon oxide not allowed by the electing taxpayer to be claimed by the credit claimant. Subtract line 4 from amount listed on line 1, 2, or 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_07[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part2.8_credit_retained_by_electing_taxpayer",
+      "label": "Line 8 — Multiply line 7 by line 5. Carbon oxide sequestration credit retained by the electing taxpayer",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_08[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 155.97
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8933-schedule-e/blank.pdf",
+    "ingestedAt": "2026-11-27T21:08:45.447Z",
+    "totalFields": 44,
+    "skipped": 0,
+    "catalogEntries": 44
+  }
+}
