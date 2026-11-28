@@ -10,7 +10,8 @@ are in `cade/tests/`; the corpus tests are in `canon/tests/`.
 | --- | --- | --- |
 | `unit/` | One module, its own small inputs. The same folders as `src/` and `scripts/`. | `npm run test:unit` |
 | `integration/` | The whole engine over every scenario. | `npm run test:integration` |
-| `golden/` | Every scenario and catalog, against locked values and PDFs. | `npm test` |
+| `golden/` | Every scenario against its locked values. | `npm test` |
+| `golden/` with `--pdf` | The same, and each form filled and compared with the scenario's golden PDF, and the catalog-fill check of each form. Minutes, so it does not run before a commit: it must pass before a pull request merges. | `npm run test:pdf` |
 | `scenarios/` | The scenario data. Each folder with an `index.ts` is a scenario; `scenarios/index.ts` finds them. `scenarios/synthetic/` holds the taxpayers we made up with no outside source (its README). | — |
 | `helpers/` | Shared assertion, fixture, and golden-PDF code. | — |
 
@@ -25,8 +26,8 @@ in `integration/`.
 ## Golden suite
 
 `golden/runAll.ts` prints one summary table. Positional args filter by
-check name: `npm test -- alex`, `npm test -- catalog-fill`,
-`npm test -- form-540`.
+check name: `npm test -- alex`, `npm run test:pdf -- catalog-fill`,
+`npm run test:pdf -- form-540`.
 
 - **Scenario goldens** (`scenarios/<name>/`) — each scenario bundles
   facts + decisions + per-form expected line values.

@@ -1,6 +1,9 @@
 /*
- * Positional args filter by check name (case-insensitive substring): npm test -- alex catalog-fill
+ * Positional args filter by check name (case-insensitive substring): npm test -- alex
  * --list prints each scenario and what it covers, and runs nothing.
+ * --pdf also fills the PDFs: each scenario's forms against its golden PDFs, and
+ * the catalog-fill check of each form (npm run test:pdf -- alex catalog-fill).
+ * Without it only the engine's values are checked, which takes seconds.
  */
 
 import { loadScenarios } from "../scenarios/index.js";
@@ -30,7 +33,10 @@ async function main() {
   const matches = (name: string) =>
     filters.length === 0 || filters.some((filter) => name.toLowerCase().includes(filter));
 
-  const catalogs = CATALOGS.filter((catalog) => matches(`catalog-fill:${catalog.formId}`));
+  const pdf = process.argv.includes("--pdf");
+  const catalogs = pdf
+    ? CATALOGS.filter((catalog) => matches(`catalog-fill:${catalog.formId}`))
+    : [];
   /* A skipped scenario runs only when a filter names it. */
   const scenarios = SCENARIOS.filter((scenario) =>
     scenario.skip
@@ -40,6 +46,7 @@ async function main() {
 
   if (catalogs.length + scenarios.length === 0) {
     console.error(`No checks match filter(s): ${filters.join(", ")}`);
+    if (!pdf) console.error("The catalog-fill checks run only with --pdf (npm run test:pdf).");
     console.error(
       `Available: ${[
         ...SCENARIOS.map((scenario) => scenario.name),
@@ -57,7 +64,9 @@ async function main() {
   );
 
   console.log(
-    `Running ${scenarios.length} scenario(s) + ${catalogs.length} catalog-fill check(s)\n`,
+    pdf
+      ? `Running ${scenarios.length} scenario(s) with their PDFs + ${catalogs.length} catalog-fill check(s)\n`
+      : `Running ${scenarios.length} scenario(s), engine values only (npm run test:pdf fills the PDFs)\n`,
   );
   const t0 = Date.now();
   const results: RunResult[] = [];
@@ -93,7 +102,7 @@ async function main() {
    * registry (e.g. SSN.format on 540 page 2), and those break the synthetic values.
    */
   for (const catalog of catalogs) record(await runCatalogFillCheck(catalog.formId));
-  for (const scenario of scenarios) record(await runScenario(scenario));
+  for (const scenario of scenarios) record(await runScenario(scenario, { pdf }));
 
   const totalMs = Date.now() - t0;
   const passed = results.filter((result) => result.passed).length;

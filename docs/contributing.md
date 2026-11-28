@@ -60,7 +60,7 @@ The embedding model is configurable via `EMBEDDINGS_MODEL` / `EMBEDDINGS_MODEL_U
 A scenario is one taxpayer: their documents as facts, their choices as
 decisions, and the expected value of every line on their return. They
 live in `engine/tests/scenarios/<name>/` (`facts.ts`, `decisions.ts`,
-`expected.ts`, `index.ts`). `npm test` runs all of them before every commit.
+`expected.ts`, `index.ts`). `npm test` checks the values of all of them before every commit; `npm run test:pdf` also fills and compares their PDFs, and must pass before a pull request merges.
 
 **Every new field or document we support needs a scenario that uses it.**
 The steps, with a diagram of the tests that check each one, are in
