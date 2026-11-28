@@ -125,7 +125,7 @@ export const healthCredit: SmallEmployerHealthCreditFactValue = {
   employees,
   // Travis County, Texas (irs-8941-inst-2025::sec::line-19::b67).
   averagePremium: { employeeOnly: 8_000, family: 21_482 },
-  // A made-up state premium subsidy the insurer received for the company's plans.
+  /* A made-up state premium subsidy paid to the company: out of line 4, in line 10 (irs-8941-inst-2025::sec::employer-premiums-paid::b01). */
   stateSubsidiesAndCredits: 1_200,
 };
 

@@ -2,7 +2,7 @@
 
 Jaim Tavren is single and lives in Austin, Texas. Every name and amount here is made up. There is no outside source and no answer key: the expected values are the engine's output, checked by hand against the form and its instructions, then locked (`verification: "unverified"`).
 
-Jaim owns a landscaping company (Schedule C) with fourteen employees. Eight of them are enrolled in SHOP health plans, and the company pays 60% of each plan's premium. Both plans cost more than the Travis County average premium. One employee worked over 2,080 hours, and one was a seasonal summer hand. A made-up state subsidy paid the insurer $1,200. Jaim is also a general partner in a plant nursery. Its Schedule K-1 (Form 1065) reports business income in box 1 and the same credit in box 15 code BA. The return is federal only: Texas has no income tax.
+Jaim owns a landscaping company (Schedule C) with fourteen employees. Eight of them are enrolled in SHOP health plans, and the company pays 60% of each plan's premium. Both plans cost more than the Travis County average premium. One employee worked over 2,080 hours, and one was a seasonal summer hand. A made-up state subsidy paid the company $1,200 (a subsidy paid to the insurer would also count in line 4). Jaim is also a general partner in a plant nursery. Its Schedule K-1 (Form 1065) reports business income in box 1 and the same credit in box 15 code BA. The return is federal only: Texas has no income tax.
 
 The scenario fills every line of Form 8941 that an individual fills:
 

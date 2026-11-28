@@ -225,6 +225,41 @@ describe("gaps and answers", () => {
     expect(out.missing("form-3800")).toContain(COMPANY_KEY);
   });
 
+  it("a state subsidy paid to the insurer is in line 4 and in line 10 (employer-premiums-paid::b01, state-premium-subsidy-and-tax::b01)", () => {
+    /* Two part-time employees, 900 hours each: the employer pays $2,500 of a $5,000 premium for each, the state pays the insurer $400 for each. */
+    const partTime = (name: string) => ({
+      name,
+      hoursOfService: 900,
+      wages: 12_000,
+      coverage: [
+        {
+          tier: "employee_only" as const,
+          employerPremiumsPaid: 2_500,
+          stateSubsidyPaidToInsurer: 400,
+          annualPremium: 5_000,
+        },
+      ],
+    });
+    const out = evaluate(
+      jaim,
+      factsWith(
+        jaim,
+        credit({
+          employees: [partTime("Ada"), partTime("Bo")],
+          averagePremium: { employeeOnly: 6_000, family: 18_000 },
+          stateSubsidiesAndCredits: 0,
+        }),
+      ),
+    );
+    expect(out.line(LINES.l2)).toBe(1);
+    expect(out.line("0.line.4_premiums_paid_qualifying_arrangement")).toBe(5_800);
+    // Column (c): 2,900 x 6,000 / 5,000 = 3,480 for each employee.
+    expect(out.line("0.line.5_premiums_at_average_premium")).toBe(6_960);
+    expect(out.line("0.line.10_state_subsidies_and_credits")).toBe(800);
+    expect(out.line("0.line.11_subtract_10_from_4")).toBe(5_000);
+    expect(out.line(LINES.l12)).toBe(2_900);
+  });
+
   it("25 FTEs: line 3 is skipped, line 12 is 0, lines 13 and 14 are skipped, and no deduction is lowered", () => {
     const many = Array.from({ length: 25 }, (_, index) => ({
       name: `Crew ${index + 1}`,

@@ -33,8 +33,17 @@ export type HealthCoverageTier = "employee_only" | "family";
 /* One plan an employee is enrolled in under the qualifying arrangement. */
 export interface EmployeeHealthCoverage {
   tier: HealthCoverageTier;
-  /* Worksheet 4 column (b): what the employer paid for it in the tax year, not the employee's salary reductions (employer-premiums-paid::b02). */
+  /* Worksheet 4 column (b): what the employer paid for it in the tax year, not the employee's salary reductions (employer-premiums-paid::b02), and not a state subsidy paid to the insurer (the next field). */
   employerPremiumsPaid: number;
+  /*
+   * A state premium subsidy paid directly to the insurer for this plan in the
+   * tax year: "treat the subsidy amount as an amount you paid for employee
+   * health insurance coverage" (irs-8941-inst-2025::sec::employer-premiums-paid::b01),
+   * so it is in column (b), and it is also in line 10 (state-premium-subsidy-and-tax::b01).
+   * Absent or 0 with none. A subsidy paid to the employer, or a state tax
+   * credit, is in stateSubsidiesAndCredits only.
+   */
+  stateSubsidyPaidToInsurer?: number;
   /* The plan's total premium for a full year of this coverage (employer and employee parts), the rate column (c) scales (column-a-enrolled-individuals::b03, ::b04). */
   annualPremium: number;
 }
@@ -71,7 +80,7 @@ export interface SmallEmployerHealthCreditFactValue {
    * from the tables at the end of the instructions (column-a-enrolled-individuals::b02, ::b03).
    */
   averagePremium: { employeeOnly: number; family: number };
-  /* Line 10: state premium subsidies paid and state tax credits available for the premiums of line 4; 0 with none. */
+  /* Line 10: state premium subsidies paid to the employer and state tax credits available for the premiums of line 4; 0 with none. The engine adds each plan's stateSubsidyPaidToInsurer to line 10, so it is not stated here again. */
   stateSubsidiesAndCredits: number;
 }
 
@@ -96,6 +105,7 @@ function isCoverage(value: unknown): boolean {
   return (
     (value.tier === "employee_only" || value.tier === "family") &&
     isAmount(value.employerPremiumsPaid) &&
+    (value.stateSubsidyPaidToInsurer === undefined || isAmount(value.stateSubsidyPaidToInsurer)) &&
     isNumber(value.annualPremium) &&
     value.annualPremium > 0
   );

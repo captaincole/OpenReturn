@@ -17,6 +17,7 @@ import { statedBusinessesOnReturn } from "../../facts/kinds/business.js";
 import type { FarmFactValue } from "../../facts/kinds/farm.js";
 import {
   readSmallEmployerHealthCreditFact,
+  type EmployeeHealthCoverage,
   type HealthCreditEmployee,
   type SmallEmployerHealthCreditFact,
   type SmallEmployerHealthCreditFactValue,
@@ -59,6 +60,27 @@ export interface HealthCreditFigures {
   gap?: string;
 }
 
+/*
+ * Worksheet 4 column (b) of one plan: what the employer paid, plus a state
+ * subsidy paid to the insurer, which counts "as an amount you paid for employee
+ * health insurance coverage" (irs-8941-inst-2025::sec::employer-premiums-paid::b01).
+ */
+const columnB = (plan: EmployeeHealthCoverage): number =>
+  sum(plan.employerPremiumsPaid, plan.stateSubsidyPaidToInsurer);
+
+/*
+ * Line 10: the stated subsidies and credits plus every subsidy paid to the
+ * insurer. "Net premium payments are employer premiums paid ... minus ... any
+ * state premium subsidies paid either to you or directly to your insurance
+ * provider" (irs-8941-inst-2025::sec::state-premium-subsidy-and-tax::b01).
+ */
+function line10Amount(value: SmallEmployerHealthCreditFactValue): number {
+  const toInsurer = value.employees.flatMap((employee) =>
+    (employee.coverage ?? []).map((plan) => plan.stateSubsidyPaidToInsurer),
+  );
+  return sum(value.stateSubsidiesAndCredits, ...toInsurer);
+}
+
 /* Worksheets 1 and 4 for one employee (lines.ts). */
 function worksheetRow(
   employee: HealthCreditEmployee,
@@ -76,10 +98,10 @@ function worksheetRow(
   return {
     ...row,
     premiums: {
-      employerPremiumsPaid: sum(...coverage.map((plan) => plan.employerPremiumsPaid)),
+      employerPremiumsPaid: sum(...coverage.map(columnB)),
       adjustedAveragePremium: sum(
         ...coverage.map((plan) =>
-          adjustedAveragePremium(plan.employerPremiumsPaid, average(plan.tier), plan.annualPremium),
+          adjustedAveragePremium(columnB(plan), average(plan.tier), plan.annualPremium),
         ),
       ),
     },
@@ -151,7 +173,7 @@ export function healthCreditFigures(
   if ((found.statedFarmCredit ?? 0) > 0)
     return { ...base, gap: STATED_FARM_CREDIT(value.activityKey) };
   const rows = value.employees.map((employee) => worksheetRow(employee, value.averagePremium));
-  const lines = creditLines(rows, value.stateSubsidiesAndCredits);
+  const lines = creditLines(rows, line10Amount(value));
   const gap = deductionGap(found.activity, lines.line12);
   return gap === undefined ? { ...base, lines } : { ...base, gap };
 }

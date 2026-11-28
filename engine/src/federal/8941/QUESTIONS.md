@@ -99,6 +99,25 @@ No field is unsupported. Lines 17 to 20 are blank because an individual is not a
 - Default: Schedule CA line 3 column B gives back the Schedule C reduction. The text names no line for a farm, so Schedule CA line 6 stays the gap it already is for a farm's Form 8941 credit (`state/ca/schedule-ca/answerLines.ts`).
 - Changes dollars: no for a Schedule C business.
 
+### 12. A state subsidy paid to the insurer is in line 4
+
+- Source: "if a state pays a premium subsidy directly to your insurance provider, treat the subsidy amount as an amount you paid for employee health insurance coverage" (`employer-premiums-paid::b01`); net premium payments subtract "any state premium subsidies paid either to you or directly to your insurance provider" (`state-premium-subsidy-and-tax::b01`).
+- Default: each plan states `stateSubsidyPaidToInsurer`. The engine adds it to Worksheet 4 column (b), so line 4 and the column (c) share include it, and adds it to line 10. A subsidy paid to the employer and a state tax credit are only in `stateSubsidiesAndCredits` (line 10).
+- Found by the blind fill: the engine first left the insurer's subsidy out of line 4. Two employees, $2,500 paid each and $800 to the insurer: line 4 is $5,800 (was $5,000), line 12 is $2,900 (was $2,500).
+- Status: done.
+
+### 13. Worksheets 5 and 6 round the reduction, not the result
+
+- Source: Worksheet 5 line 5 "Multiply line 1 by line 4" and line 6 "Subtract line 5 from line 1"; Worksheet 6 lines 6 and 7 the same (`worksheet-5-information-needed-to::b01`, `worksheet-6-information-needed-to::b01`). No text says where cents drop.
+- Default: the reduction (line 5, line 6) rounds to the dollar, and line 8 or 9 is whole dollars less a whole reduction. Worksheet 6 line 1 takes line 8 as entered. The blind fill kept cents and rounded only the result.
+- Changes dollars: at most $1, only when the reduction ends in exactly 50 cents. No blind case differed.
+
+## Second opinions
+
+- **PolicyEngine-US 2.154.2** (commit c1fea42a, 2026-11-27): it does not model the section 45R credit. No variable or parameter under `gov/irs` names Form 8941, the small employer health credit or SHOP premiums. Nothing to compare.
+- **Blind fill** (the same 14 cases from the blank form and the instructions, by hand): every line agreed except two groups. (1) The phaseout ratios: the blind fill used exactly 3 places, the engine every digit (item 3, decision A122); both readings fit "rounded to at least 3 places", and the regulation's example uses the exact fraction. The law library was not installed, so 26 CFR 1.45R-3 was not read again. (2) A state subsidy paid to the insurer: the blind fill was right (item 12, fixed).
+- No other reference implementation in reach models Form 8941. IRS Direct File does not take a Schedule C business with employees.
+
 ## Proposals for a discussion
 
 - **Two Forms 8941 for spouses.** Two spouses with separate businesses that are not one employer "can file two Forms 8941 with a jointly filed Form 1040" (`eligible-small-employers::b04`). The fact is one per return. The change: a fact per employer group, and form copies as Form 8820 has.
