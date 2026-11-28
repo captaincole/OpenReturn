@@ -19,25 +19,25 @@ A form also depends on another form when both use the same input (Schedule D and
 
 ## Summary
 
-The golden suite ran 180 scenarios.
+The golden suite ran 185 scenarios.
 
 | Form | Jurisdiction | Tier 1 | Scenarios | Fields | Verified | Locked | Not run | Unsupported | Reads forms | Feeds forms |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Form 8949 | Federal 2025 | Yes | 17 | 200 | 121 | 2 | 31 | 46 | 0 | 0 |
 | Schedule D | Federal 2025 | Yes | 38 | 53 | 26 | 10 | 2 | 15 | 2 | 16 |
-| Form 1040 | Federal 2025 | Yes | 180 | 199 | 108 | 21 | 10 | 60 | 23 | 67 |
+| Form 1040 | Federal 2025 | Yes | 185 | 199 | 108 | 21 | 10 | 60 | 23 | 67 |
 | Schedule A | Federal 2025 | Yes | 16 | 32 | 27 | 0 | 3 | 2 | 4 | 11 |
 | Schedule B | Federal 2025 | Yes | 33 | 72 | 13 | 11 | 48 | 0 | 1 | 4 |
 | Form 4562 | Federal 2025 | Yes | 2 | 240 | 19 | 3 | 66 | 152 | 0 | 0 |
 | Form 8829 | Federal 2025 |  | 1 | 58 | 23 | 0 | 28 | 7 | 0 | 0 |
-| Schedule C | Federal 2025 | Yes | 48 | 105 | 58 | 9 | 20 | 18 | 0 | 4 |
-| Schedule SE | Federal 2025 | Yes | 53 | 25 | 14 | 3 | 1 | 7 | 2 | 15 |
+| Schedule C | Federal 2025 | Yes | 53 | 105 | 58 | 9 | 20 | 18 | 0 | 4 |
+| Schedule SE | Federal 2025 | Yes | 58 | 25 | 14 | 3 | 1 | 7 | 2 | 15 |
 | Form 8582 | Federal 2025 | Yes | 9 | 198 | 31 | 36 | 106 | 25 | 4 | 7 |
-| Schedule E | Federal 2025 | Yes | 39 | 176 | 40 | 58 | 72 | 6 | 1 | 15 |
-| Schedule 1 | Federal 2025 | Yes | 102 | 72 | 35 | 13 | 1 | 23 | 5 | 31 |
+| Schedule E | Federal 2025 | Yes | 41 | 176 | 40 | 58 | 72 | 6 | 1 | 15 |
+| Schedule 1 | Federal 2025 | Yes | 107 | 72 | 35 | 13 | 1 | 23 | 5 | 31 |
 | Schedule 1-A | Federal 2025 | Yes | 11 | 54 | 13 | 4 | 0 | 37 | 2 | 4 |
-| Schedule 2 | Federal 2025 | Yes | 103 | 62 | 11 | 34 | 2 | 15 | 10 | 16 |
-| Schedule 3 | Federal 2025 | Yes | 51 | 37 | 6 | 19 | 1 | 11 | 20 | 20 |
+| Schedule 2 | Federal 2025 | Yes | 108 | 62 | 11 | 34 | 2 | 15 | 10 | 16 |
+| Schedule 3 | Federal 2025 | Yes | 56 | 37 | 6 | 19 | 1 | 11 | 20 | 20 |
 | Form 2441 | Federal 2025 | Yes | 3 | 72 | 53 | 8 | 11 | 0 | 4 | 3 |
 | Schedule R | Federal 2025 |  | 2 | 27 | 18 | 0 | 9 | 0 | 2 | 1 |
 | Schedule H | Federal 2025 | Yes | 1 | 72 | 0 | 15 | 4 | 53 | 0 | 4 |
@@ -46,11 +46,11 @@ The golden suite ran 180 scenarios.
 | Form 8889 | Federal 2025 | Yes | 3 | 27 | 18 | 0 | 2 | 7 | 0 | 4 |
 | Form 4952 | Federal 2025 | Yes | 5 | 17 | 17 | 0 | 0 | 0 | 3 | 12 |
 | Schedule 8812 | Federal 2025 | Yes | 25 | 40 | 35 | 3 | 1 | 1 | 7 | 6 |
-| Form 8959 | Federal 2025 | Yes | 44 | 26 | 19 | 1 | 4 | 2 | 3 | 4 |
+| Form 8959 | Federal 2025 | Yes | 48 | 26 | 19 | 1 | 4 | 2 | 3 | 4 |
 | Form 8960 | Federal 2025 | Yes | 28 | 38 | 20 | 3 | 1 | 14 | 5 | 1 |
-| Form 8995-A | Federal 2025 | Yes | 23 | 94 | 54 | 0 | 27 | 13 | 5 | 1 |
+| Form 8995-A | Federal 2025 | Yes | 28 | 94 | 54 | 0 | 27 | 13 | 5 | 1 |
 | Form 8995 | Federal 2025 | Yes | 43 | 33 | 26 | 2 | 4 | 1 | 5 | 1 |
-| Form 6251 | Federal 2025 | Yes | 22 | 62 | 38 | 1 | 7 | 16 | 6 | 9 |
+| Form 6251 | Federal 2025 | Yes | 27 | 62 | 38 | 1 | 7 | 16 | 6 | 9 |
 | Schedule C (Form 8995-A) | Federal 2025 |  | 2 | 19 | 13 | 0 | 5 | 1 | 4 | 1 |
 | Form 8962 | Federal 2025 |  | 1 | 141 | 20 | 0 | 121 | 0 | 1 | 3 |
 | Form 4684 | Federal 2025 |  | 1 | 162 | 23 | 0 | 39 | 100 | 1 | 1 |
@@ -65,7 +65,7 @@ The golden suite ran 180 scenarios.
 | Form 965-A | Federal 2025 |  | 1 | 391 | 0 | 118 | 273 | 0 | 0 | 0 |
 | Form 2106 | Federal 2025 |  | 2 | 82 | 0 | 65 | 17 | 0 | 0 | 0 |
 | Form 2555 | Federal 2025 |  | 2 | 160 | 0 | 95 | 65 | 0 | 1 | 0 |
-| Form 3800 | Federal 2025 | Yes | 24 | 1635 | 0 | 243 | 1392 | 0 | 9 | 1 |
+| Form 3800 | Federal 2025 | Yes | 29 | 1635 | 0 | 275 | 1360 | 0 | 9 | 1 |
 | Form 3903 | Federal 2025 |  | 2 | 10 | 0 | 10 | 0 | 0 | 0 | 0 |
 | Form 4136 | Federal 2025 |  | 2 | 276 | 0 | 276 | 0 | 0 | 0 | 0 |
 | Form 4137 | Federal 2025 |  | 1 | 33 | 0 | 25 | 8 | 0 | 0 | 3 |
@@ -127,13 +127,13 @@ The golden suite ran 180 scenarios.
 | Form 8881 | Federal 2025 |  | 2 | 29 | 0 | 29 | 0 | 0 | 0 | 0 |
 | Form 8882 | Federal 2025 |  | 1 | 20 | 0 | 16 | 4 | 0 | 0 | 0 |
 | Form 6478 | Federal 2025 |  | 1 | 10 | 0 | 4 | 6 | 0 | 0 | 0 |
-| Form 7207 | Federal 2025 |  | 0 | 440 | 0 | 0 | 0 | 440 | 0 | 0 |
+| Form 7207 | Federal 2025 |  | 1 | 440 | 0 | 77 | 363 | 0 | 0 | 0 |
 | Form 7210 | Federal 2025 |  | 1 | 35 | 0 | 33 | 2 | 0 | 0 | 0 |
-| Form 7211 | Federal 2025 |  | 0 | 49 | 0 | 0 | 0 | 49 | 0 | 0 |
-| Form 7213 | Federal 2025 |  | 0 | 70 | 0 | 0 | 0 | 70 | 0 | 0 |
-| Form 7218 | Federal 2025 |  | 0 | 219 | 0 | 0 | 0 | 219 | 0 | 0 |
+| Form 7211 | Federal 2025 |  | 1 | 49 | 0 | 31 | 18 | 0 | 0 | 0 |
+| Form 7213 | Federal 2025 |  | 1 | 70 | 0 | 35 | 35 | 0 | 0 | 0 |
+| Form 7218 | Federal 2025 |  | 1 | 219 | 0 | 52 | 167 | 0 | 0 | 0 |
 | Form 8820 | Federal 2025 |  | 2 | 98 | 0 | 25 | 73 | 0 | 0 | 0 |
-| Form 8835 | Federal 2025 |  | 0 | 85 | 0 | 0 | 0 | 85 | 0 | 0 |
+| Form 8835 | Federal 2025 |  | 1 | 85 | 0 | 36 | 49 | 0 | 0 | 0 |
 | Form 8864 | Federal 2025 |  | 1 | 12 | 0 | 10 | 2 | 0 | 0 | 0 |
 | Form 8874 | Federal 2025 |  | 0 | 40 | 0 | 0 | 0 | 40 | 0 | 0 |
 | Form 8896 | Federal 2025 |  | 0 | 12 | 0 | 0 | 0 | 12 | 0 | 0 |
