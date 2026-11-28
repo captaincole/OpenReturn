@@ -1,0 +1,132 @@
+{
+  "formId": "form-3547",
+  "fieldCount": 14,
+  "entries": [
+    {
+      "fieldId": "form-3547.0.header.id_number",
+      "widgets": [
+        {
+          "widgetName": "S S N or I T I N, C A Corporation number, F E I N (12 digits)",
+          "text": "T-1WDS0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3547.0.header.id_number_type",
+      "widgets": [
+        {
+          "widgetName": "Select Entity type",
+          "text": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N)."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3547.0.header.name_on_return",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on your California tax return",
+          "text": "T-1BPW0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3547.0.header.sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "California Secretary of State file number (12 digits)",
+          "text": "T-1EMQD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3547.0.line.1_eligible_transportation_costs",
+      "widgets": [
+        {
+          "widgetName": "Line 1. Eligible transportation costs. See instructions",
+          "text": "9,854"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3547.0.line.2_current_year_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Current year credit. Multiply line 1 by 50% (.50)",
+          "text": "8,117"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3547.0.line.3_pass_through_credit_k1",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Pass-through Donated Agricultural Products Transportation Credit(s) from Schedule K-1 (100S, 541, 565, or 568). See instructions",
+          "text": "4,568"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3547.0.line.4_total_current_year_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Total current year Donated Agricultural Products Transportation Credit. Add line 2 and line 3",
+          "text": "7,788"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3547.0.line.5_credit_carryover_prior_year",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Credit carryover from a prior year",
+          "text": "6,128"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3547.0.line.6_total_available_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Total available Donated Agricultural Products Transportation Credit. Add line 4 and line 5",
+          "text": "9,272"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3547.0.line.7a_credit_claimed",
+      "widgets": [
+        {
+          "widgetName": "Line 7a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. See instructions. (Do not include any assigned credit claimed on form FTB 3544, Part B)",
+          "text": "5,754"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3547.0.line.7b_total_credit_assigned",
+      "widgets": [
+        {
+          "widgetName": "Line 7b. Total credit assigned. Enter the total amount from form FTB 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions",
+          "text": "7,137"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3547.0.line.7c_credit_elected_refundable",
+      "widgets": [
+        {
+          "widgetName": "Line 7c. Credit amount to be elected as refundable in future years. See instructions",
+          "text": "1,431"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3547.0.line.8_credit_carryover_future_years",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Credit carryover available for future years. Add lines 7a, 7b, and line 7c, subtract the result from line 6",
+          "text": "8,046"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,375 @@
+{
+  "formId": "form-3554",
+  "fieldCount": 41,
+  "entries": [
+    {
+      "fieldId": "form-3554.0.header.a_tentative_credit_reservation",
+      "widgets": [
+        {
+          "widgetName": "Line A. Did the taxpayer receive a tentative credit reservation for all claimed employees? If no, stop. See instructions",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.header.b_semiconductor_airplane_lithium_business",
+      "widgets": [
+        {
+          "widgetName": "Line B. Check \"Yes,\" if the taxpayer is engaged in: Semiconductor manufacturing or semiconductor research and development with a N A I C S code that begins with 3344. Electric airplane manufacturing with a N A I C S Code that begins with 3364. Lithium production or manufacturing of lithium batteries and the N A I C S code of the business is 212390, 325180, or 335910. All other businesses, check \"No.\" See instructions",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.header.c_principal_business_activity_code",
+      "widgets": [
+        {
+          "widgetName": "Line C. Principal Business Activity (P B A) code of the business.See instructions",
+          "text": "TI38S3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.header.generating_id_number",
+      "widgets": [
+        {
+          "widgetName": "S S N or I T I N, C A Corporation number, F E I N (12 digits) (2)",
+          "text": "T-VAP6A"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.header.generating_id_number_type",
+      "widgets": [
+        {
+          "widgetName": "Select Entity type (2)",
+          "text": "S S N or I T I N."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.header.generating_sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "California Secretary of State (S O S) file number (12 digits) (2)",
+          "text": "T-1NIEU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.header.generating_taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "Name of taxpayer generating the credit. See instructions",
+          "text": "T-1H0YG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.header.id_number",
+      "widgets": [
+        {
+          "widgetName": "S S N or I T I N, C A Corporation number, F E I N (12 digits) (1)",
+          "text": "T-1JBS9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.header.id_number_type",
+      "widgets": [
+        {
+          "widgetName": "Select Entity type (1)",
+          "text": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N)."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.header.name_on_return",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on your California tax return",
+          "text": "T-1ICF8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.header.sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "California Secretary of State (S O S) file number (12 digits) (1)",
+          "text": "T-16GFQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.1_base_full_year_employees",
+      "widgets": [
+        {
+          "widgetName": "Line 1. Number of full-time hourly and salaried employees that were employed for the entire taxable year",
+          "text": "3,886"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.10_current_part_year_hourly_employees",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Number of full-time hourly employees that were employed for less than 52 weeks during the taxable year",
+          "text": "6,590"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.11_current_hourly_hours_worked",
+      "widgets": [
+        {
+          "widgetName": "Line 11. Total number of hours worked by employees in line 10 (not to exceed 2,000 hours per employee)",
+          "text": "8,947"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.12_current_hourly_equivalents",
+      "widgets": [
+        {
+          "widgetName": "Line 12. Divide line 11 by 2000. See instructions",
+          "text": "7,215"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.13_current_part_year_salaried_employees",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Number of full-time salaried employees that were employed for less than 52 weeks during the taxable year",
+          "text": "6,908"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.14_current_salaried_weeks_worked",
+      "widgets": [
+        {
+          "widgetName": "Line 14. Total number of weeks worked by employees in line 13",
+          "text": "5,811"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.15_current_salaried_equivalents",
+      "widgets": [
+        {
+          "widgetName": "Line 15. Divide line 14 by 52. See instructions",
+          "text": "8,845"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.16_current_year_full_time_equivalents",
+      "widgets": [
+        {
+          "widgetName": "Line 16. Current year annual full-time equivalents. Add lines 9, 12 and 15. See instructions",
+          "text": "3,722"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.17_net_increase_full_time_employees",
+      "widgets": [
+        {
+          "widgetName": "Part II, Line 17. Net increase in full-time employees. Subtract line 8 from line 16. If the amount on line 17 is zero or less, stop, you do not qualify",
+          "text": "9,288"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.18_total_qualified_full_time_employees",
+      "widgets": [
+        {
+          "widgetName": "Line 18. Total qualified full-time employees. See instructions",
+          "text": "6,996"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.19_applicable_percentage",
+      "widgets": [
+        {
+          "widgetName": "Line 19. Applicable percentage. Divide line 17 by line 18 (not to exceed 1.0000)",
+          "text": "5,042"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.2_base_part_year_hourly_employees",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Number of full-time hourly employees that were employed for less than 52 weeks during the taxable year",
+          "text": "8,648"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.20_tentative_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 20. Tentative credit",
+          "text": "5,341"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.21_credit_generated",
+      "widgets": [
+        {
+          "widgetName": "Line 21. Credit generated. Multiply line 20 by line 19",
+          "text": "3,912"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.22_pass_through_credit_k1",
+      "widgets": [
+        {
+          "widgetName": "Line 22. Pass-through new employment credit(s) from Schedule K-1 (100S, 541, 565, or 568)",
+          "text": "9,679"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.23_credit_carryover_prior_year",
+      "widgets": [
+        {
+          "widgetName": "Line 23. Credit carryover from prior year",
+          "text": "1,056"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.24_total_available_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 24. Total available new employment credit. Add line 21, line 22, and line 23",
+          "text": "7,873"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.25a_credit_claimed",
+      "widgets": [
+        {
+          "widgetName": "Line 25a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. (Do not include any assigned credit claimed on form F T B 3544, Part B)",
+          "text": "9,315"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.25b_total_credit_assigned",
+      "widgets": [
+        {
+          "widgetName": "Line 25b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0",
+          "text": "8,488"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.25c_credit_elected_refundable",
+      "widgets": [
+        {
+          "widgetName": "Line 25c. Credit amount to be elected as refundable in future years. See instructions",
+          "text": "6,381"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.26_credit_carryover_future_years",
+      "widgets": [
+        {
+          "widgetName": "Line 26. Credit carryover available for future years . Add lines 25a, 25b, and 25c, subtract the result from line 24",
+          "text": "9,230"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.27_credit_recapture",
+      "widgets": [
+        {
+          "widgetName": "Part III, Line 27. Credit recapture. See instructions",
+          "text": "1,886"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.3_base_hourly_hours_worked",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Total number of hours worked by employees in line 2 (not to exceed 2,000 hours per employee)",
+          "text": "7,411"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.4_base_hourly_equivalents",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Divide line 3 by 2000. See instructions",
+          "text": "8,162"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.5_base_part_year_salaried_employees",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Number of full-time salaried employees that were employed for less than 52 weeks during the taxable year",
+          "text": "5,222"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.6_base_salaried_weeks_worked",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Total number of weeks worked by employees in line 5",
+          "text": "7,009"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.7_base_salaried_equivalents",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Divide line 6 by 52. See instructions",
+          "text": "5,171"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.8_base_year_full_time_equivalents",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Base year annual full-time equivalents. Add lines 1, 4 and 7. See instructions",
+          "text": "7,153"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.9_current_full_year_employees",
+      "widgets": [
+        {
+          "widgetName": "Section B, Line 9. Number of full-time hourly and salaried employees that were employed for the entire taxable year",
+          "text": "2,394"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3554.0.line.section_a_base_year",
+      "widgets": [
+        {
+          "widgetName": "Part I, Section A, Enter your base year",
+          "text": "2974"
+        }
+      ]
+    }
+  ]
+}

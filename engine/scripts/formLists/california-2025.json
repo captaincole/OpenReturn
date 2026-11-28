@@ -16,7 +16,8 @@
     {
       "name": "Form 540 2EZ",
       "title": "California Resident Income Tax Return",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "540-2ez"
     },
     {
       "name": "Form 540NR",
@@ -47,12 +48,14 @@
     {
       "name": "Form 3503",
       "title": "Natural Heritage Preservation Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3503"
     },
     {
       "name": "Form 3504",
       "title": "Enrolled Tribal Member Certification",
-      "maxPerReturn": "2"
+      "maxPerReturn": "2",
+      "short": "3504"
     },
     {
       "name": "Form 3506",
@@ -82,12 +85,14 @@
     {
       "name": "Form 3521",
       "title": "Low-Income Housing Credit",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "3521"
     },
     {
       "name": "Form 3523",
       "title": "Research Credit",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "3523"
     },
     {
       "name": "Form 3526",
@@ -99,7 +104,8 @@
     {
       "name": "Form 3531",
       "title": "California Competes Tax Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3531"
     },
     {
       "name": "Form 3532",
@@ -110,7 +116,8 @@
     {
       "name": "Form 3540",
       "title": "Credit Carryover and Recapture Summary",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "3540"
     },
     {
       "name": "Form 3541",
@@ -121,32 +128,38 @@
     {
       "name": "Form 3547",
       "title": "Donated Agricultural Products Transportation Credit",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "3547"
     },
     {
       "name": "Form 3548",
       "title": "Disabled Access Credit for Eligible Small Businesses",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3548"
     },
     {
       "name": "Form 3554",
       "title": "New Employment Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3554"
     },
     {
       "name": "Form 3568",
       "title": "Alternative Identifying Information for the Dependent Exemption Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3568"
     },
     {
       "name": "Form 3592",
       "title": "College Access Tax Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3592"
     },
     {
       "name": "Form 3596",
       "title": "Paid Preparer’s Due Diligence Checklist for California Earned Income Tax Credit",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "3596"
     },
     {
       "name": "Form 3800",
@@ -217,7 +230,8 @@
     {
       "name": "Form 3808",
       "title": "Manufacturing Enhancement Area Credit Summary (MEA)",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3808"
     },
     {
       "name": "Form 3809",
@@ -228,27 +242,32 @@
     {
       "name": "Form 3814",
       "title": "New Donated Fresh Fruits or Vegetables Credit",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "3814"
     },
     {
       "name": "Form 3820",
       "title": "High-Road Cannabis Tax Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3820"
     },
     {
       "name": "Form 3821",
       "title": "Cannabis Equity Tax Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3821"
     },
     {
       "name": "Form 3831",
       "title": "Homeless Hiring Tax Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3831"
     },
     {
       "name": "Form 3835",
       "title": "State Historic Rehabilitation Tax Credit",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3835"
     },
     {
       "name": "Form 3840",
@@ -266,12 +285,14 @@
     {
       "name": "Form 3870",
       "title": "Election for Refundable Credit",
-      "maxPerReturn": "1"
+      "maxPerReturn": "1",
+      "short": "3870"
     },
     {
       "name": "Form 3872",
       "title": "California Disaster Relief Request for Postponement of Tax Deadlines",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "3872"
     },
     {
       "name": "Form 3885A",
@@ -289,7 +310,8 @@
     {
       "name": "Form 4197",
       "title": "Information on Tax Expenditure Items",
-      "maxPerReturn": "unbounded"
+      "maxPerReturn": "unbounded",
+      "short": "4197"
     },
     {
       "name": "Form 5805",
@@ -374,7 +396,8 @@
     {
       "name": "Schedule R",
       "title": "Apportionment and Allocation of Income",
-      "maxPerReturn": "1 per t/p"
+      "maxPerReturn": "1 per t/p",
+      "short": "schedule-r-ca"
     },
     {
       "name": "Schedule S",

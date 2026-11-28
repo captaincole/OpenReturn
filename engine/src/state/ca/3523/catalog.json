@@ -1,0 +1,1784 @@
+{
+  "form": {
+    "formId": "form-3523",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "Research Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3523.0.header.id_number_type",
+      "label": "Type of identification number: SSN or ITIN, CA Corporation no., or FEIN",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Select Entity type",
+      "position": {
+        "page": 0,
+        "x": 411.566,
+        "y": 697.819
+      },
+      "options": [
+        {
+          "value": "ssn_or_itin",
+          "radioOption": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N).",
+          "label": "SSN or ITIN"
+        },
+        {
+          "value": "ca_corporation_number",
+          "radioOption": "California Corporation number.",
+          "label": "CA Corporation no."
+        },
+        {
+          "value": "fein",
+          "radioOption": "Federal Employer Identification Number (F E I N).",
+          "label": "FEIN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3523.0.header.id_number",
+      "label": "S S N or I T I N, C A Corporation number, F E I N (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "S S N or I T I N, C A Corporation number, F E I N (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 408.856,
+        "y": 684.253
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.0.header.name_on_return",
+      "label": "Name(s) as shown on your California tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on your California tax return",
+      "position": {
+        "page": 0,
+        "x": 35.9796,
+        "y": 660.505
+      }
+    },
+    {
+      "fieldId": "form-3523.0.header.sos_file_number",
+      "label": "California Secretary of State file number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "California Secretary of State file number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 408.866,
+        "y": 660.505
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.0.line.1_basic_research_payments",
+      "label": "Part I, Section A, Line 1. Basic research payments paid or incurred during the taxable year. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Section A, Line 1. Basic research payments paid or incurred during the taxable year. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.989,
+        "y": 590.058
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.0.line.2_base_period_amount",
+      "label": "Line 2. Base period amount. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Base period amount. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.988,
+        "y": 566.072
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.0.line.3_excess_basic_research_payments",
+      "label": "Line 3. Subtract line 2 from line 1. If less than zero, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Subtract line 2 from line 1. If less than zero, enter 0",
+      "position": {
+        "page": 0,
+        "x": 485.981,
+        "y": 542.065
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.0.line.4_basic_research_credit",
+      "label": "Line 4. Multiply line 3 by 24% (.24).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Multiply line 3 by 24% (.24)",
+      "position": {
+        "page": 0,
+        "x": 485.989,
+        "y": 518.058
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.0.line.5_wages_qualified_services",
+      "label": "Line 5. Wages for qualified services. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Wages for qualified services. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.995,
+        "y": 470.056
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.0.line.6_cost_of_supplies",
+      "label": "Line 6. Cost of supplies. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Cost of supplies. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.984,
+        "y": 446.066
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.0.line.7_computer_rental_lease_costs",
+      "label": "Line 7. Rental or lease costs of computers. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Rental or lease costs of computers. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.991,
+        "y": 422.063
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.0.line.8_contract_research_expenses",
+      "label": "Line 8. Enter the applicable percentage of contract research expenses. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Enter the applicable percentage of contract research expenses. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.991,
+        "y": 398.052
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.0.line.9_total_qualified_research_expenses",
+      "label": "Line 9. Total qualified research expenses. Add line 5 through line 8.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Total qualified research expenses. Add line 5 through line 8",
+      "position": {
+        "page": 0,
+        "x": 485.983,
+        "y": 374.063
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.0.line.10_fixed_base_percentage",
+      "label": "Line 10. Enter fixed-base percentage, but not more than 16% (.16). See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Enter fixed-base percentage, but not more than 16% (.16). See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.986,
+        "y": 350.045
+      }
+    },
+    {
+      "fieldId": "form-3523.0.line.11_average_annual_gross_receipts",
+      "label": "Line 11. Enter average annual gross receipts. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. Enter average annual gross receipts. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.992,
+        "y": 326.061
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.0.line.12_base_amount",
+      "label": "Line 12. Base amount. Multiply line 11 by the percentage on line 10.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. Base amount. Multiply line 11 by the percentage on line 10",
+      "position": {
+        "page": 0,
+        "x": 485.992,
+        "y": 302.059
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.0.line.13_qre_over_base_amount",
+      "label": "Line 13. Subtract line 12 from line 9. If zero or less, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Subtract line 12 from line 9. If zero or less, enter 0",
+      "position": {
+        "page": 0,
+        "x": 485.984,
+        "y": 278.059
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.0.line.14_half_of_qre",
+      "label": "Line 14. Multiply line 9 by 50% (.50). See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. Multiply line 9 by 50% (.50). See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.992,
+        "y": 254.064
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.0.line.15_smaller_of_13_or_14",
+      "label": "Line 15. Enter the smaller of line 13 or line 14.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Enter the smaller of line 13 or line 14",
+      "position": {
+        "page": 0,
+        "x": 485.982,
+        "y": 230.049
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.0.line.16_incremental_qre_credit",
+      "label": "Line 16. Multiply line 15 by 15% (.15).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. Multiply line 15 by 15% (.15)",
+      "position": {
+        "page": 0,
+        "x": 485.992,
+        "y": 206.067
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.0.line.17a_regular_credit",
+      "label": "17a. Regular credit. Add line 4 and line 16. If you do not elect the reduced credit under I R C Section 280C(c), enter the result here, and see instructions for the schedule to attach.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "17a. Regular credit. Add line 4 and line 16. If you do not elect the reduced credit under I R C Section 280C(c), enter the result here, and see instructions for the schedule to attach",
+      "position": {
+        "page": 0,
+        "x": 485.987,
+        "y": 170.06
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.0.line.17b_reduced_regular_credit_280c",
+      "label": "Line 17b. Reduced regular credit under I R C Section 280C(c). Multiply line 17a by the applicable percentage below: 87.7% (.877) for individuals, estates, and trusts. 91.16% (.9116) for corporations. 98.5% (.985) for S corporations. Enter the reduced credit amount. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17b. Reduced regular credit under I R C Section 280C(c). Multiply line 17a by the applicable percentage below: 87.7% (.877) for individuals, estates, and trusts. 91.16% (.9116) for corporations. 98.5% (.985) for S corporations. Enter the reduced credit amount. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.989,
+        "y": 110.051
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.18_basic_research_payments",
+      "label": "Section B, Line 18. Basic research payments paid or incurred during the taxable year. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Section B, Line 18. Basic research payments paid or incurred during the taxable year. See instructions",
+      "position": {
+        "page": 1,
+        "x": 485.98,
+        "y": 686.24
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.19_base_period_amount",
+      "label": "Line 19. Base period amount. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. Base period amount. See instructions",
+      "position": {
+        "page": 1,
+        "x": 485.98,
+        "y": 674.26
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.20_net_basic_research_payments",
+      "label": "Line 20. Subtract line 19 from line 18. If less than zero, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. Subtract line 19 from line 18. If less than zero, enter 0",
+      "position": {
+        "page": 1,
+        "x": 485.98,
+        "y": 662.25
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.21_basic_research_credit_24pct",
+      "label": "Line 21. Multiply line 20 by 24% (.24).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 21. Multiply line 20 by 24% (.24)",
+      "position": {
+        "page": 1,
+        "x": 485.98,
+        "y": 650.243
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.22_wages_qualified_services",
+      "label": "Line 22. Wages for qualified services. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22. Wages for qualified services. See instructions",
+      "position": {
+        "page": 1,
+        "x": 486,
+        "y": 602.25
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.23_cost_of_supplies",
+      "label": "Line 23. Cost of supplies. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. Cost of supplies. See instructions",
+      "position": {
+        "page": 1,
+        "x": 486,
+        "y": 590.264
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.24_computer_rental_lease_costs",
+      "label": "Line 24. Rental or lease costs of computers. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Rental or lease costs of computers. See instructions",
+      "position": {
+        "page": 1,
+        "x": 486,
+        "y": 578.247
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.25_contract_research_expenses",
+      "label": "Line 25. Enter the applicable percentage of contract research expenses. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25. Enter the applicable percentage of contract research expenses. See instructions",
+      "position": {
+        "page": 1,
+        "x": 486,
+        "y": 566.26
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.26_total_qualified_research_expenses",
+      "label": "Line 26. Total qualified research expenses. Add line 22 through line 25.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 26. Total qualified research expenses. Add line 22 through line 25",
+      "position": {
+        "page": 1,
+        "x": 486,
+        "y": 554.26
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.27_prior_3_years_qre",
+      "label": "Line 27. Enter the total qualified research expenses for the prior 3 taxable years. If there are no Q R E s in any 1 of those years, skip lines 28 and 29. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 27. Enter the total qualified research expenses for the prior 3 taxable years. If there are no Q R E s in any 1 of those years, skip lines 28 and 29. See instructions",
+      "position": {
+        "page": 1,
+        "x": 486,
+        "y": 530.257
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.28_prior_qre_divided_by_6",
+      "label": "Line 28. Divide line 27 by 6.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 28. Divide line 27 by 6",
+      "position": {
+        "page": 1,
+        "x": 486,
+        "y": 518.257
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.29_excess_qre_over_base",
+      "label": "Line 29. Subtract line 28 from line 26. If zero or less, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 29. Subtract line 28 from line 26. If zero or less, enter 0",
+      "position": {
+        "page": 1,
+        "x": 486,
+        "y": 506.264
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.30_qre_credit_3pct",
+      "label": "Line 30. Multiply line 29 by 3% (.03) If you skipped lines 28 and 29, multiply line 26 by 1.3% (0.013).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 30. Multiply line 29 by 3% (.03) If you skipped lines 28 and 29, multiply line 26 by 1.3% (0.013)",
+      "position": {
+        "page": 1,
+        "x": 486,
+        "y": 494.242
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.31a_alternative_simplified_credit",
+      "label": "Line 31a. Alternative simplified credit. Add lines 21 and 30. If you do not elect the reduced credit under I R C Section 280C(c), enter the result here, and see instructions for the schedule that must be attached.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 31a. Alternative simplified credit. Add lines 21 and 30. If you do not elect the reduced credit under I R C Section 280C(c), enter the result here, and see instructions for the schedule that must be attached",
+      "position": {
+        "page": 1,
+        "x": 485.98,
+        "y": 470.246
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.31b_reduced_alternative_simplified_credit",
+      "label": "Line 31b. Reduced alternative incremental credit under I R C Section 280C(c). Multiply line 31a by the applicable percentage below: 87.7% (.877) for individuals, estates, and trusts. 91.16% (.9116) for corporations. 98.5% (.985) for S corporations. Enter the reduced credit amount. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 31b. Reduced alternative incremental credit under I R C Section 280C(c). Multiply line 31a by the applicable percentage below: 87.7% (.877) for individuals, estates, and trusts. 91.16% (.9116) for corporations. 98.5% (.985) for S corporations. Enter the reduced credit amount. See instructions",
+      "position": {
+        "page": 1,
+        "x": 485.988,
+        "y": 410.254
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.32_pass_through_research_credits",
+      "label": "Section C, Line 32. Pass-through research credit(s) from S corporations, estates, trusts, partnerships, and L L Cs. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Section C, Line 32. Pass-through research credit(s) from S corporations, estates, trusts, partnerships, and L L Cs. See instructions",
+      "position": {
+        "page": 1,
+        "x": 485.978,
+        "y": 377.244
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.33_current_year_research_credit",
+      "label": "Line 33. Current year research credit. If you did not elect the reduced credit under I R C Section 280C(c), add line 17a or line 31a to line 32 and enter the result here. If you elected the reduced credit under I R C Section 280C(c), add line 17b or line 31b to line 32 and enter the result here.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 33. Current year research credit. If you did not elect the reduced credit under I R C Section 280C(c), add line 17a or line 31a to line 32 and enter the result here. If you elected the reduced credit under I R C Section 280C(c), add line 17b or line 31b to line 32 and enter the result here",
+      "position": {
+        "page": 1,
+        "x": 485.988,
+        "y": 341.254
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.34_passive_activity_credit",
+      "label": "Line 34. Enter the amount of credit on line 33 that is from passive activities. If none of the amount on line 33 is from passive activities, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 34. Enter the amount of credit on line 33 that is from passive activities. If none of the amount on line 33 is from passive activities, enter 0",
+      "position": {
+        "page": 1,
+        "x": 485.988,
+        "y": 317.25
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.35_non_passive_credit",
+      "label": "Line 35. Subtract line 34 from line 33.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 35. Subtract line 34 from line 33",
+      "position": {
+        "page": 1,
+        "x": 485.988,
+        "y": 305.24
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.36_allowable_passive_credit",
+      "label": "Line 36. Enter the allowable credit from passive activities. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 36. Enter the allowable credit from passive activities. See instructions",
+      "position": {
+        "page": 1,
+        "x": 485.988,
+        "y": 293.268
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.37_non_passive_carryover_prior_year",
+      "label": "Line 37. Non-passive activity credit carryover from prior year. (Do not include credits received through assignment.) See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 37. Non-passive activity credit carryover from prior year. (Do not include credits received through assignment.) See instructions",
+      "position": {
+        "page": 1,
+        "x": 485.988,
+        "y": 269.244
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.38_total_research_credit",
+      "label": "Line 38. Total. Add line 35 through line 37.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 38. Total. Add line 35 through line 37",
+      "position": {
+        "page": 1,
+        "x": 485.988,
+        "y": 257.244
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.39_credit_claimed",
+      "label": "Part II, Line 39. Credit claimed. Enter the amount of the credit claimed on the current year tax return. See instructions. (Do not include any assigned credit claimed on form F T B 3544, Part B.).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, Line 39. Credit claimed. Enter the amount of the credit claimed on the current year tax return. See instructions. (Do not include any assigned credit claimed on form F T B 3544, Part B.)",
+      "position": {
+        "page": 1,
+        "x": 485.998,
+        "y": 212.264
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.40_total_credit_assigned",
+      "label": "Line 40. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 40. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions",
+      "position": {
+        "page": 1,
+        "x": 485.998,
+        "y": 185.248
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.41_credit_elected_refundable",
+      "label": "Line 41. Credit amount to be elected as refundable in future years. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 41. Credit amount to be elected as refundable in future years. See instructions",
+      "position": {
+        "page": 1,
+        "x": 485.998,
+        "y": 170.253
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.1.line.42_credit_carryover_future_years",
+      "label": "Line 42. Credit carryover available for use or assignment for future years. Subtract lines 39, 40, and 41 from line 38.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 42. Credit carryover available for use or assignment for future years. Subtract lines 39, 40, and 41 from line 38",
+      "position": {
+        "page": 1,
+        "x": 485.998,
+        "y": 155.253
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row1_corporation_col_a",
+      "label": "Part III, Line 1(a). Corporation.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part III, Line 1(a). Corporation",
+      "position": {
+        "page": 2,
+        "x": 54.8495,
+        "y": 626.03
+      }
+    },
+    {
+      "fieldId": "form-3523.2.part3.row1_corporation_id_col_b",
+      "label": "Line 1(b). Corporation number, F E I N, or S O S number (12 digits).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1(b). Corporation number, F E I N, or S O S number (12 digits)",
+      "position": {
+        "page": 2,
+        "x": 191.828,
+        "y": 626.03
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row1_credit_generated_col_c",
+      "label": "Line 1(c). Amount of credit generated in current year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1(c). Amount of credit generated in current year",
+      "position": {
+        "page": 2,
+        "x": 287.859,
+        "y": 626.03
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row1_prior_year_carryover_col_d",
+      "label": "Line 1(d). Amount of generated credit carryover from prior years.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1(d). Amount of generated credit carryover from prior years",
+      "position": {
+        "page": 2,
+        "x": 383.835,
+        "y": 626.03
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row1_total_available_credit_col_e",
+      "label": "Line 1(e). Total of generated credit and credit carryover from prior years column (c) + column (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1(e). Total of generated credit and credit carryover from prior years column (c) + column (d)",
+      "position": {
+        "page": 2,
+        "x": 479.842,
+        "y": 626.03
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row2_corporation_col_a",
+      "label": "Line 2(a). Corporation.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(a). Corporation",
+      "position": {
+        "page": 2,
+        "x": 54.8495,
+        "y": 611.931
+      }
+    },
+    {
+      "fieldId": "form-3523.2.part3.row2_corporation_id_col_b",
+      "label": "Line 2(b). Corporation number, F E I N, or S O S number (12 digits).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(b). Corporation number, F E I N, or S O S number (12 digits)",
+      "position": {
+        "page": 2,
+        "x": 191.828,
+        "y": 611.931
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row2_credit_generated_col_c",
+      "label": "Line 2(c). Amount of credit generated in current year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(c). Amount of credit generated in current year",
+      "position": {
+        "page": 2,
+        "x": 287.859,
+        "y": 611.931
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row2_prior_year_carryover_col_d",
+      "label": "Line 2(d). Amount of generated credit carryover from prior years.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(d). Amount of generated credit carryover from prior years",
+      "position": {
+        "page": 2,
+        "x": 383.835,
+        "y": 611.931
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row2_total_available_credit_col_e",
+      "label": "Line 2(e). Total of generated credit and credit carryover from prior years column (c) + column (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(e). Total of generated credit and credit carryover from prior years column (c) + column (d)",
+      "position": {
+        "page": 2,
+        "x": 479.842,
+        "y": 611.931
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row3_corporation_col_a",
+      "label": "Line 3(a). Corporation.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3(a). Corporation",
+      "position": {
+        "page": 2,
+        "x": 54.8495,
+        "y": 597.833
+      }
+    },
+    {
+      "fieldId": "form-3523.2.part3.row3_corporation_id_col_b",
+      "label": "Line 3(b). Corporation number, F E I N, or S O S number (12 digits).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3(b). Corporation number, F E I N, or S O S number (12 digits)",
+      "position": {
+        "page": 2,
+        "x": 191.828,
+        "y": 597.833
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row3_credit_generated_col_c",
+      "label": "Line 3(c). Amount of credit generated in current year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3(c). Amount of credit generated in current year",
+      "position": {
+        "page": 2,
+        "x": 287.859,
+        "y": 597.833
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row3_prior_year_carryover_col_d",
+      "label": "Line 3(d). Amount of generated credit carryover from prior years.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3(d). Amount of generated credit carryover from prior years",
+      "position": {
+        "page": 2,
+        "x": 383.835,
+        "y": 597.833
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row3_total_available_credit_col_e",
+      "label": "Line 3(e). Total of generated credit and credit carryover from prior years column (c) + column (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3(e). Total of generated credit and credit carryover from prior years column (c) + column (d)",
+      "position": {
+        "page": 2,
+        "x": 479.842,
+        "y": 597.833
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row4_corporation_col_a",
+      "label": "Line 4(a). Corporation.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4(a). Corporation",
+      "position": {
+        "page": 2,
+        "x": 54.8495,
+        "y": 583.731
+      }
+    },
+    {
+      "fieldId": "form-3523.2.part3.row4_corporation_id_col_b",
+      "label": "Line 4(b). Corporation number, F E I N, or S O S number (12 digits).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4(b). Corporation number, F E I N, or S O S number (12 digits)",
+      "position": {
+        "page": 2,
+        "x": 191.828,
+        "y": 583.731
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row4_credit_generated_col_c",
+      "label": "Line 4(c). Amount of credit generated in current year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4(c). Amount of credit generated in current year",
+      "position": {
+        "page": 2,
+        "x": 287.859,
+        "y": 583.731
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row4_prior_year_carryover_col_d",
+      "label": "Line 4(d). Amount of generated credit carryover from prior years.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4(d). Amount of generated credit carryover from prior years",
+      "position": {
+        "page": 2,
+        "x": 383.835,
+        "y": 583.731
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row4_total_available_credit_col_e",
+      "label": "Line 4(e). Total of generated credit and credit carryover from prior years column (c) + column (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4(e). Total of generated credit and credit carryover from prior years column (c) + column (d)",
+      "position": {
+        "page": 2,
+        "x": 479.842,
+        "y": 583.731
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row5_corporation_col_a",
+      "label": "Line 5(a). Corporation.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5(a). Corporation",
+      "position": {
+        "page": 2,
+        "x": 54.8495,
+        "y": 569.633
+      }
+    },
+    {
+      "fieldId": "form-3523.2.part3.row5_corporation_id_col_b",
+      "label": "Line 5(b). Corporation number, F E I N, or S O S number (12 digits).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5(b). Corporation number, F E I N, or S O S number (12 digits)",
+      "position": {
+        "page": 2,
+        "x": 191.828,
+        "y": 569.633
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row5_credit_generated_col_c",
+      "label": "Line 5(c). Amount of credit generated in current year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5(c). Amount of credit generated in current year",
+      "position": {
+        "page": 2,
+        "x": 287.859,
+        "y": 569.633
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row5_prior_year_carryover_col_d",
+      "label": "Line 5(d). Amount of generated credit carryover from prior years.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5(d). Amount of generated credit carryover from prior years",
+      "position": {
+        "page": 2,
+        "x": 383.835,
+        "y": 569.633
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row5_total_available_credit_col_e",
+      "label": "Line 5(e). Total of generated credit and credit carryover from prior years column (c) + column (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5(e). Total of generated credit and credit carryover from prior years column (c) + column (d)",
+      "position": {
+        "page": 2,
+        "x": 479.842,
+        "y": 569.633
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row6_corporation_col_a",
+      "label": "Line 6(a). Corporation.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6(a). Corporation",
+      "position": {
+        "page": 2,
+        "x": 54.8495,
+        "y": 555.521
+      }
+    },
+    {
+      "fieldId": "form-3523.2.part3.row6_corporation_id_col_b",
+      "label": "Line 6(b). Corporation number, F E I N, or S O S number (12 digits).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6(b). Corporation number, F E I N, or S O S number (12 digits)",
+      "position": {
+        "page": 2,
+        "x": 191.828,
+        "y": 555.521
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row6_credit_generated_col_c",
+      "label": "Line 6(c). Amount of credit generated in current year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6(c). Amount of credit generated in current year",
+      "position": {
+        "page": 2,
+        "x": 287.859,
+        "y": 555.521
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row6_prior_year_carryover_col_d",
+      "label": "Line 6(d). Amount of generated credit carryover from prior years.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6(d). Amount of generated credit carryover from prior years",
+      "position": {
+        "page": 2,
+        "x": 383.835,
+        "y": 555.521
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row6_total_available_credit_col_e",
+      "label": "Line 6(e). Total of generated credit and credit carryover from prior years column (c) + column (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6(e). Total of generated credit and credit carryover from prior years column (c) + column (d)",
+      "position": {
+        "page": 2,
+        "x": 479.842,
+        "y": 555.521
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row7_corporation_col_a",
+      "label": "Line 7(a). Corporation.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7(a). Corporation",
+      "position": {
+        "page": 2,
+        "x": 54.8495,
+        "y": 541.42
+      }
+    },
+    {
+      "fieldId": "form-3523.2.part3.row7_corporation_id_col_b",
+      "label": "Line 7(b). Corporation number, F E I N, or S O S number (12 digits).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7(b). Corporation number, F E I N, or S O S number (12 digits)",
+      "position": {
+        "page": 2,
+        "x": 191.828,
+        "y": 541.42
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row7_credit_generated_col_c",
+      "label": "Line 7(c). Amount of credit generated in current year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7(c). Amount of credit generated in current year",
+      "position": {
+        "page": 2,
+        "x": 287.859,
+        "y": 541.931
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row7_prior_year_carryover_col_d",
+      "label": "Line 7(d). Amount of generated credit carryover from prior years.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7(d). Amount of generated credit carryover from prior years",
+      "position": {
+        "page": 2,
+        "x": 383.835,
+        "y": 541.942
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row7_total_available_credit_col_e",
+      "label": "Line 7(e). Total of generated credit and credit carryover from prior years column (c) + column (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7(e). Total of generated credit and credit carryover from prior years column (c) + column (d)",
+      "position": {
+        "page": 2,
+        "x": 479.842,
+        "y": 541.931
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.total_credit_generated_col_c",
+      "label": "Total (c). Amount of credit generated in current year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Total (c). Amount of credit generated in current year",
+      "position": {
+        "page": 2,
+        "x": 288.363,
+        "y": 527.832
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.total_prior_year_carryover_col_d",
+      "label": "Total (d). Amount of generated credit carryover from prior years.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Total (d). Amount of generated credit carryover from prior years",
+      "position": {
+        "page": 2,
+        "x": 384.347,
+        "y": 527.801
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.total_available_credit_col_e",
+      "label": "Total (e). Total of generated credit and credit carryover from prior years column (c) + column (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Total (e). Total of generated credit and credit carryover from prior years column (c) + column (d)",
+      "position": {
+        "page": 2,
+        "x": 480.333,
+        "y": 527.801
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row1_credit_claimed_col_f",
+      "label": "Line 1(f). Amount of credit from column (e) claimed in current year return. (Do not include any assigned credit claimed on form F T B 3544, Part B.).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1(f). Amount of credit from column (e) claimed in current year return. (Do not include any assigned credit claimed on form F T B 3544, Part B.)",
+      "position": {
+        "page": 2,
+        "x": 54.8564,
+        "y": 438.469
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row1_credit_assigned_3544_col_g",
+      "label": "Line 1(g). Amount of research credit assigned and to be reported on form F T B 3544, Part A.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1(g). Amount of research credit assigned and to be reported on form F T B 3544, Part A",
+      "position": {
+        "page": 2,
+        "x": 191.842,
+        "y": 438.469
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row1_carryover_future_years_col_h",
+      "label": "Line 1(h). Generated credit carryover for future years column (e) minus [column (f) plus column (g)].",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1(h). Generated credit carryover for future years column (e) minus [column (f) plus column (g)]",
+      "position": {
+        "page": 2,
+        "x": 287.835,
+        "y": 438.469
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row2_credit_claimed_col_f",
+      "label": "Line 2(f). Amount of credit from column (e) claimed in current year return. (Do not include any assigned credit claimed on form F T B 3544, Part B.).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(f). Amount of credit from column (e) claimed in current year return. (Do not include any assigned credit claimed on form F T B 3544, Part B.)",
+      "position": {
+        "page": 2,
+        "x": 54.8564,
+        "y": 424.365
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row2_credit_assigned_3544_col_g",
+      "label": "Line 2(g). Amount of research credit assigned and to be reported on form F T B 3544, Part A.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(g). Amount of research credit assigned and to be reported on form F T B 3544, Part A",
+      "position": {
+        "page": 2,
+        "x": 191.842,
+        "y": 424.365
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row2_carryover_future_years_col_h",
+      "label": "Line 2(h). Generated credit carryover for future years column (e) minus [column (f) plus column (g)].",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2(h). Generated credit carryover for future years column (e) minus [column (f) plus column (g)]",
+      "position": {
+        "page": 2,
+        "x": 287.835,
+        "y": 424.365
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row3_credit_claimed_col_f",
+      "label": "Line 3(f). Amount of credit from column (e) claimed in current year return. (Do not include any assigned credit claimed on form F T B 3544, Part B.).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3(f). Amount of credit from column (e) claimed in current year return. (Do not include any assigned credit claimed on form F T B 3544, Part B.)",
+      "position": {
+        "page": 2,
+        "x": 54.8564,
+        "y": 410.263
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row3_credit_assigned_3544_col_g",
+      "label": "Line 3(g). Amount of research credit assigned and to be reported on form F T B 3544, Part A.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3(g). Amount of research credit assigned and to be reported on form F T B 3544, Part A",
+      "position": {
+        "page": 2,
+        "x": 191.842,
+        "y": 410.263
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row3_carryover_future_years_col_h",
+      "label": "Line 3(h). Generated credit carryover for future years column (e) minus [column (f) plus column (g)].",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3(h). Generated credit carryover for future years column (e) minus [column (f) plus column (g)]",
+      "position": {
+        "page": 2,
+        "x": 287.835,
+        "y": 410.263
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row4_credit_claimed_col_f",
+      "label": "Line 4(f). Amount of credit from column (e) claimed in current year return. (Do not include any assigned credit claimed on form F T B 3544, Part B.).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4(f). Amount of credit from column (e) claimed in current year return. (Do not include any assigned credit claimed on form F T B 3544, Part B.)",
+      "position": {
+        "page": 2,
+        "x": 54.8564,
+        "y": 396.165
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row4_credit_assigned_3544_col_g",
+      "label": "Line 4(g). Amount of research credit assigned and to be reported on form F T B 3544, Part A.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4(g). Amount of research credit assigned and to be reported on form F T B 3544, Part A",
+      "position": {
+        "page": 2,
+        "x": 191.842,
+        "y": 396.165
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row4_carryover_future_years_col_h",
+      "label": "Line 4(h). Generated credit carryover for future years column (e) minus [column (f) plus column (g)].",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4(h). Generated credit carryover for future years column (e) minus [column (f) plus column (g)]",
+      "position": {
+        "page": 2,
+        "x": 287.835,
+        "y": 396.165
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row5_credit_claimed_col_f",
+      "label": "Line 5(f). Amount of credit from column (e) claimed in current year return. (Do not include any assigned credit claimed on form F T B 3544, Part B.).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5(f). Amount of credit from column (e) claimed in current year return. (Do not include any assigned credit claimed on form F T B 3544, Part B.)",
+      "position": {
+        "page": 2,
+        "x": 54.8564,
+        "y": 382.063
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row5_credit_assigned_3544_col_g",
+      "label": "Line 5(g). Amount of research credit assigned and to be reported on form F T B 3544, Part A.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5(g). Amount of research credit assigned and to be reported on form F T B 3544, Part A",
+      "position": {
+        "page": 2,
+        "x": 191.842,
+        "y": 382.063
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row5_carryover_future_years_col_h",
+      "label": "Line 5(h). Generated credit carryover for future years column (e) minus [column (f) plus column (g)].",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5(h). Generated credit carryover for future years column (e) minus [column (f) plus column (g)]",
+      "position": {
+        "page": 2,
+        "x": 287.835,
+        "y": 382.063
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row6_credit_claimed_col_f",
+      "label": "Line 6(f). Amount of credit from column (e) claimed in current year return. (Do not include any assigned credit claimed on form F T B 3544, Part B.).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6(f). Amount of credit from column (e) claimed in current year return. (Do not include any assigned credit claimed on form F T B 3544, Part B.)",
+      "position": {
+        "page": 2,
+        "x": 54.8564,
+        "y": 367.965
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row6_credit_assigned_3544_col_g",
+      "label": "Line 6(g). Amount of research credit assigned and to be reported on form F T B 3544, Part A.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6(g). Amount of research credit assigned and to be reported on form F T B 3544, Part A",
+      "position": {
+        "page": 2,
+        "x": 191.842,
+        "y": 367.965
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row6_carryover_future_years_col_h",
+      "label": "Line 6(h). Generated credit carryover for future years column (e) minus [column (f) plus column (g)].",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6(h). Generated credit carryover for future years column (e) minus [column (f) plus column (g)]",
+      "position": {
+        "page": 2,
+        "x": 287.835,
+        "y": 367.965
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row7_credit_claimed_col_f",
+      "label": "Line 7(f). Amount of credit from column (e) claimed in current year return. (Do not include any assigned credit claimed on form F T B 3544, Part B.).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7(f). Amount of credit from column (e) claimed in current year return. (Do not include any assigned credit claimed on form F T B 3544, Part B.)",
+      "position": {
+        "page": 2,
+        "x": 54.8564,
+        "y": 354.356
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row7_credit_assigned_3544_col_g",
+      "label": "Line 7(g). Amount of research credit assigned and to be reported on form F T B 3544, Part A.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7(g). Amount of research credit assigned and to be reported on form F T B 3544, Part A",
+      "position": {
+        "page": 2,
+        "x": 191.842,
+        "y": 354.356
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.row7_carryover_future_years_col_h",
+      "label": "Line 7(h). Generated credit carryover for future years column (e) minus [column (f) plus column (g)].",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7(h). Generated credit carryover for future years column (e) minus [column (f) plus column (g)]",
+      "position": {
+        "page": 2,
+        "x": 287.835,
+        "y": 354.356
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.total_credit_claimed_col_f",
+      "label": "Total (f). Amount of credit from column (e) claimed in current year return. (Do not include any assigned credit claimed on form F T B 3544, Part B.).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Total (f). Amount of credit from column (e) claimed in current year return. (Do not include any assigned credit claimed on form F T B 3544, Part B.)",
+      "position": {
+        "page": 2,
+        "x": 55.3491,
+        "y": 340.254
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.total_credit_assigned_3544_col_g",
+      "label": "Total (g). Amount of research credit assigned and to be reported on form F T B 3544, Part A.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Total (g). Amount of research credit assigned and to be reported on form F T B 3544, Part A",
+      "position": {
+        "page": 2,
+        "x": 192.324,
+        "y": 340.257
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3523.2.part3.total_carryover_future_years_col_h",
+      "label": "Total (h). Generated credit carryover for future years column (e) minus [column (f) plus column (g)].",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Total (h). Generated credit carryover for future years column (e) minus [column (f) plus column (g)]",
+      "position": {
+        "page": 2,
+        "x": 288.336,
+        "y": 340.262
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3523/blank.pdf",
+    "ingestedAt": "2026-11-28T04:30:19.564Z",
+    "totalFields": 110,
+    "skipped": 0,
+    "catalogEntries": 110
+  }
+}

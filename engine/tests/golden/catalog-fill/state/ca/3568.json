@@ -1,0 +1,420 @@
+{
+  "formId": "form-3568",
+  "fieldCount": 46,
+  "entries": [
+    {
+      "fieldId": "form-3568.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "Your S S N or I T I N (9 digits)",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.header.taxable_year",
+      "widgets": [
+        {
+          "widgetName": "TAXABLE YEAR (yyyy)",
+          "text": "2593"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on tax return",
+          "text": "T-ED8EO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.1_dependent_relationship",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line 1. Dependent's relationship to you",
+          "text": "T-1NJM2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.2a_resident_mexico_or_canada",
+      "widgets": [
+        {
+          "widgetName": "Line 2a. Was the dependent a resident of Mexico or Canada for the taxable year that you are requesting to claim the dependent exemption credit? (If yes, go to question 2b. If no, stop here, you do not qualify to use this form, and you must use a federal I T I N or S S N when claiming the dependent exemption credit.)",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.2b_eligible_for_itin_or_ssn",
+      "widgets": [
+        {
+          "widgetName": "Line 2b. Is the dependent eligible to receive or renew a federal I T I N or S S N? (If no, go to Part II. If yes, stop here, you do not qualify to use this form, and you must use an I T I N or S S N when claiming the dependent exemption credit.)",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_birth_city",
+      "widgets": [
+        {
+          "widgetName": "Line 3. City (optional)",
+          "text": "T-1VLHS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_birth_province",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Province (optional)",
+          "text": "T-UZ9EK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_birth_state",
+      "widgets": [
+        {
+          "widgetName": "Line 3. 2 letter state abbreviation (optional)",
+          "text": "55"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_country_of_birth",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Country of birth",
+          "text": "T-1MXBC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_date_of_birth",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Date of birth (DOB) (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_first_name",
+      "widgets": [
+        {
+          "widgetName": "Part II, Line 3. First name",
+          "text": "T-1SZK8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_last_name",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Last name",
+          "text": "T-76ZN2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_middle_name",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Middle name",
+          "text": "T-1L9B4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_sex",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Check the box",
+          "text": "Male."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_suffix",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Suffix",
+          "text": "5661"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.4_birth_first_name",
+      "widgets": [
+        {
+          "widgetName": "Line 4. First name",
+          "text": "T-CQN5K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.4_birth_last_name",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Last name",
+          "text": "T-D4UX7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.4_birth_middle_name",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Middle name",
+          "text": "T-1IL4J"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.4_birth_suffix",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Suffix",
+          "text": "9925"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.5_us_mailing_apartment",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Apartment number/ Suite number",
+          "text": "T-7GT27"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.5_us_mailing_city",
+      "widgets": [
+        {
+          "widgetName": "Line 5. City",
+          "text": "T-11V0V"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.5_us_mailing_private_mailbox",
+      "widgets": [
+        {
+          "widgetName": "Line 5. P M B/private mailbox",
+          "text": "T1WNHG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.5_us_mailing_state",
+      "widgets": [
+        {
+          "widgetName": "Line 5. 2 letter state abbreviation",
+          "text": "92"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.5_us_mailing_street",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Street address (number and street) or P O box",
+          "text": "T-1NRC3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.5_us_mailing_zip",
+      "widgets": [
+        {
+          "widgetName": "Line 5. ZIP code, maximum 9 digits",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.6_foreign_apartment",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Apartment number/ Suite number",
+          "text": "T-O5BQW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.6_foreign_city",
+      "widgets": [
+        {
+          "widgetName": "Line 6. City",
+          "text": "T-D0PGL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.6_foreign_country_name",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Foreign country name. Enter only Mexico or Canada",
+          "text": "T-1RL6Z"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.6_foreign_postal_code",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Foreign postal code",
+          "text": "T-1PQS3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.6_foreign_province_state_county",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Foreign province/state/county",
+          "text": "T-15VKD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.6_foreign_street",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Street address (number and street)",
+          "text": "T-FO54K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.7_countries_of_citizenship",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Country(ies) of citizenship",
+          "text": "T-KEH7W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.7_foreign_tax_id_number",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Foreign tax I.D. number",
+          "text": "T-XH4EX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.7_id_document_birth_certificate",
+      "widgets": [
+        {
+          "widgetName": "Line 7 Identification document(s) submitted (see instructions): Birth certificate",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.7_id_document_drivers_license",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Identification document(s) submitted (see instructions): Driver's license/state I.D",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.7_id_document_expiration_date",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Expiration date (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.7_id_document_issued_by",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Issued by",
+          "text": "T-1H1B5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.7_id_document_number",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Identification number on document(s)",
+          "text": "T-W5V6L"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.7_id_document_other",
+      "widgets": [
+        {
+          "widgetName": "Line 7 Identification document(s) submitted (see instructions): Other",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.7_id_document_passport",
+      "widgets": [
+        {
+          "widgetName": "Line 7  Identification document(s) submitted (see instructions): Passport",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.7_id_document_uscis",
+      "widgets": [
+        {
+          "widgetName": "Line 7 Identification document(s) submitted (see instructions): U S C I S documentation",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.7_school_or_company_city",
+      "widgets": [
+        {
+          "widgetName": "Line 7. City",
+          "text": "T-146O4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.7_school_or_company_name",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Name of school/college/university/company",
+          "text": "T-1M5I3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.7_school_or_company_state",
+      "widgets": [
+        {
+          "widgetName": "Line 7. 2 letter state abbreviation",
+          "text": "17"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.signing.date_signed",
+      "widgets": [
+        {
+          "widgetName": "Signature date (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    }
+  ]
+}

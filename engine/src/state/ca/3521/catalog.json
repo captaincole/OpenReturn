@@ -1,0 +1,938 @@
+{
+  "form": {
+    "formId": "form-3521",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "Low-Income Housing Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3521.0.header.id_number_type",
+      "label": "Type of identification number: SSN or ITIN, CA Corporation no., or FEIN",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Select Entity type",
+      "position": {
+        "page": 0,
+        "x": 423.45,
+        "y": 699.832
+      },
+      "options": [
+        {
+          "value": "ssn_or_itin",
+          "radioOption": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N).",
+          "label": "SSN or ITIN"
+        },
+        {
+          "value": "ca_corporation_number",
+          "radioOption": "California Corporation number.",
+          "label": "CA Corporation no."
+        },
+        {
+          "value": "fein",
+          "radioOption": "Federal Employer Identification Number (F E I N).",
+          "label": "FEIN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.header.name_on_return",
+      "label": "Name(s) as shown on your California tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on your California tax return",
+      "position": {
+        "page": 0,
+        "x": 36.0141,
+        "y": 684.85
+      }
+    },
+    {
+      "fieldId": "form-3521.0.header.id_number",
+      "label": "S S N or I T I N, C A Corporation number, F E I N (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "S S N or I T I N, C A Corporation number, F E I N (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 419.604,
+        "y": 684.85
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.header.building_identification_number",
+      "label": "Building identification number (B I N). If more than one building, attach a list of all BINs for this credit.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Building identification number (B I N). If more than one building, attach a list of all BINs for this credit",
+      "position": {
+        "page": 0,
+        "x": 35.9671,
+        "y": 660.861
+      }
+    },
+    {
+      "fieldId": "form-3521.0.header.sos_file_number",
+      "label": "California Secretary of State (S O S) file number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "California Secretary of State (S O S) file number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 419.604,
+        "y": 660.861
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.1_eligible_basis_decreased",
+      "label": "Line 1 — Has the eligible basis of any project or building decreased since you received form CTCAC 3521A from the California Tax Credit Allocation Committee?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Part I, Line 1. Has the eligible basis of any project or building decreased since you received form C T C A C 3521A from the California Tax Credit Allocation Committee? If \"Yes,\" complete Part III before continuing. See General Information C",
+      "position": {
+        "page": 0,
+        "x": 50.9216,
+        "y": 625.623
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.2_current_year_credit",
+      "label": "Line 2. Current year credit. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Current year credit. See instructions",
+      "position": {
+        "page": 0,
+        "x": 444.022,
+        "y": 612.656
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.3_corporation_entity_name_col_a",
+      "label": "Line 3. Corporation, (a) Name of entity passing through the credit.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Corporation, (a) Name of entity passing through the credit",
+      "position": {
+        "page": 0,
+        "x": 181.004,
+        "y": 525.147
+      }
+    },
+    {
+      "fieldId": "form-3521.0.line.3_corporation_id_number_col_b",
+      "label": "Line 3. Corporation, (b) Identification numbers - California corporation, F E I N (12 digits), etcetera.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Corporation, (b) Identification numbers - California corporation, F E I N (12 digits), etcetera",
+      "position": {
+        "page": 0,
+        "x": 295.004,
+        "y": 525.147
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.3_corporation_bin_col_c",
+      "label": "Line 3. Corporation, (c) B I N.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Corporation, (c) B I N",
+      "position": {
+        "page": 0,
+        "x": 389.515,
+        "y": 525.202
+      }
+    },
+    {
+      "fieldId": "form-3521.0.line.3_corporation_credit_amount_col_d",
+      "label": "Line 3. Corporation, (d) Total amount of affiliated corporation or pass-through credit(s).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Corporation, (d) Total amount of affiliated corporation or pass-through credit(s)",
+      "position": {
+        "page": 0,
+        "x": 473.752,
+        "y": 525.147
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.3_s_corporation_entity_name_col_a",
+      "label": "Line 3. S corporation shareholder, (a) Name of entity passing through the credit.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. S corporation shareholder, (a) Name of entity passing through the credit",
+      "position": {
+        "page": 0,
+        "x": 181.004,
+        "y": 502.43
+      }
+    },
+    {
+      "fieldId": "form-3521.0.line.3_s_corporation_id_number_col_b",
+      "label": "Line 3. S corporation shareholder, (b) Identification numbers - California corporation, F E I N (12 digits), etcetera.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. S corporation shareholder, (b) Identification numbers - California corporation, F E I N (12 digits), etcetera",
+      "position": {
+        "page": 0,
+        "x": 295.004,
+        "y": 502.43
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.3_s_corporation_bin_col_c",
+      "label": "Line 3. S corporation shareholder, (c) B I N.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. S corporation shareholder, (c) B I N",
+      "position": {
+        "page": 0,
+        "x": 389.372,
+        "y": 502.43
+      }
+    },
+    {
+      "fieldId": "form-3521.0.line.3_s_corporation_credit_amount_col_d",
+      "label": "Line 3. S corporation shareholder, (d) Total amount of affiliated corporation or pass-through credit(s).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. S corporation shareholder, (d) Total amount of affiliated corporation or pass-through credit(s)",
+      "position": {
+        "page": 0,
+        "x": 473.752,
+        "y": 502.43
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.3_beneficiary_entity_name_col_a",
+      "label": "Line 3. Beneficiary, (a) Name of entity passing through the credit.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Beneficiary, (a) Name of entity passing through the credit",
+      "position": {
+        "page": 0,
+        "x": 181.004,
+        "y": 479.681
+      }
+    },
+    {
+      "fieldId": "form-3521.0.line.3_beneficiary_id_number_col_b",
+      "label": "Line 3. Beneficiary, (b) Identification numbers - California corporation, F E I N (12 digits), etcetera.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Beneficiary, (b) Identification numbers - California corporation, F E I N (12 digits), etcetera",
+      "position": {
+        "page": 0,
+        "x": 295.004,
+        "y": 479.681
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.3_beneficiary_bin_col_c",
+      "label": "Line 3. Beneficiary, (c) B I N.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Beneficiary, (c) B I N",
+      "position": {
+        "page": 0,
+        "x": 389.372,
+        "y": 479.681
+      }
+    },
+    {
+      "fieldId": "form-3521.0.line.3_beneficiary_credit_amount_col_d",
+      "label": "Line 3. Beneficiary, (d) Total amount of affiliated corporation or pass-through credit(s).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Beneficiary, (d) Total amount of affiliated corporation or pass-through credit(s)",
+      "position": {
+        "page": 0,
+        "x": 473.752,
+        "y": 479.681
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.3_partner_entity_name_col_a",
+      "label": "Line 3. Partner or L L C member, (a) Name of entity passing through the credit.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Partner or L L C member, (a) Name of entity passing through the credit",
+      "position": {
+        "page": 0,
+        "x": 181.004,
+        "y": 456.94
+      }
+    },
+    {
+      "fieldId": "form-3521.0.line.3_partner_id_number_col_b",
+      "label": "Line 3. Partner or L L C member, (b) Identification numbers - California corporation, F E I N (12 digits), etcetera.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Partner or L L C member, (b) Identification numbers - California corporation, F E I N (12 digits), etcetera",
+      "position": {
+        "page": 0,
+        "x": 295.004,
+        "y": 456.94
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.3_partner_bin_col_c",
+      "label": "Line 3. Partner or L L C member, (c) B I N.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Partner or L L C member, (c) B I N",
+      "position": {
+        "page": 0,
+        "x": 389.372,
+        "y": 456.94
+      }
+    },
+    {
+      "fieldId": "form-3521.0.line.3_partner_credit_amount_col_d",
+      "label": "Line 3. Partner or L L C member, (d) Total amount of affiliated corporation or pass-through credit(s).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Partner or L L C member, (d) Total amount of affiliated corporation or pass-through credit(s)",
+      "position": {
+        "page": 0,
+        "x": 473.752,
+        "y": 456.94
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.3_total_pass_through_credit",
+      "label": "Line 3. Total pass-through low-income housing credit. Add the amounts in column (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Total pass-through low-income housing credit. Add the amounts in column (d)",
+      "position": {
+        "page": 0,
+        "x": 443.983,
+        "y": 431.43
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.4_current_year_housing_credit",
+      "label": "Line 4. Current year low-income housing credit. Add line 2 and line 3.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Current year low-income housing credit. Add line 2 and line 3",
+      "position": {
+        "page": 0,
+        "x": 443.983,
+        "y": 407.43
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.5_credit_from_passive_activities",
+      "label": "Line 5. Enter the amount of low-income housing credit on line 4 that is from passive activities. If none of the amount on line 4 is from passive activities, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Enter the amount of low-income housing credit on line 4 that is from passive activities. If none of the amount on line 4 is from passive activities, enter 0",
+      "position": {
+        "page": 0,
+        "x": 443.983,
+        "y": 371.43
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.6_line_4_minus_line_5",
+      "label": "Line 6. Subtract line 5 from line 4.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Subtract line 5 from line 4",
+      "position": {
+        "page": 0,
+        "x": 443.983,
+        "y": 347.444
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.7_allowable_passive_credit",
+      "label": "Line 7. Enter the allowable low-income housing credit from passive activities. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Enter the allowable low-income housing credit from passive activities. See instructions",
+      "position": {
+        "page": 0,
+        "x": 443.983,
+        "y": 323.43
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.8_credit_carryover_prior_year",
+      "label": "Line 8. Low-income housing credit carryover from prior year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Low-income housing credit carryover from prior year",
+      "position": {
+        "page": 0,
+        "x": 443.983,
+        "y": 299.416
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.9_add_lines_6_through_8",
+      "label": "Line 9. Add line 6 through line 8.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Add line 6 through line 8",
+      "position": {
+        "page": 0,
+        "x": 443.983,
+        "y": 275.427
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.10_row1_corporation_name",
+      "label": "Line 10. Corporation name (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Corporation name (1)",
+      "position": {
+        "page": 0,
+        "x": 51.4853,
+        "y": 196.43
+      }
+    },
+    {
+      "fieldId": "form-3521.0.line.10_row1_corporation_number",
+      "label": "Line 10. California corporation number (12 digits) (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. California corporation number (12 digits) (1)",
+      "position": {
+        "page": 0,
+        "x": 324.852,
+        "y": 196.43
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.10_row1_credit_allocated",
+      "label": "Line 10. Amount of credit allocated (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Amount of credit allocated (1)",
+      "position": {
+        "page": 0,
+        "x": 450.872,
+        "y": 196.43
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.10_row2_corporation_name",
+      "label": "Line 10. Corporation name (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Corporation name (2)",
+      "position": {
+        "page": 0,
+        "x": 51.4853,
+        "y": 172.44
+      }
+    },
+    {
+      "fieldId": "form-3521.0.line.10_row2_corporation_number",
+      "label": "Line 10. California corporation number (12 digits) (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. California corporation number (12 digits) (2)",
+      "position": {
+        "page": 0,
+        "x": 324.852,
+        "y": 172.44
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.10_row2_credit_allocated",
+      "label": "Line 10. Amount of credit allocated (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Amount of credit allocated (2)",
+      "position": {
+        "page": 0,
+        "x": 450.872,
+        "y": 172.44
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.10_total_credit_allocated",
+      "label": "Line 10. Total amount of low-income housing credit allocated. If you are not a corporation, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Total amount of low-income housing credit allocated. If you are not a corporation, enter 0",
+      "position": {
+        "page": 0,
+        "x": 443.987,
+        "y": 147.93
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.0.line.11_total_available_credit",
+      "label": "Line 11. Total available low-income housing credit. Subtract line 10 from line 9.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. Total available low-income housing credit. Subtract line 10 from line 9",
+      "position": {
+        "page": 0,
+        "x": 443.987,
+        "y": 123.931
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.1.line.12a_credit_claimed",
+      "label": "Part II, Line 12a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, Line 12a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. See instructions",
+      "position": {
+        "page": 1,
+        "x": 443.99,
+        "y": 682.55
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.1.line.12b_total_credit_assigned",
+      "label": "Line 12b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions",
+      "position": {
+        "page": 1,
+        "x": 443.99,
+        "y": 637.529
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.1.line.13_credit_carryover_future_years",
+      "label": "Line 13. Credit carryover available for future years. Add line 12a and line 12b, subtract the result from line 11.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Credit carryover available for future years. Add line 12a and line 12b, subtract the result from line 11",
+      "position": {
+        "page": 1,
+        "x": 443.99,
+        "y": 616.519
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.1.line.14_date_placed_in_service_col_a",
+      "label": "Part III, Line 14. Date building was placed in service (month/year), (a) Building 1.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part III, Line 14. Date building was placed in service (month/year), (a) Building 1",
+      "position": {
+        "page": 1,
+        "x": 296.695,
+        "y": 546.541
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3521.1.line.14_date_placed_in_service_col_b",
+      "label": "Line 14. Date building was placed in service (month/year), (b) Building 2.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. Date building was placed in service (month/year), (b) Building 2",
+      "position": {
+        "page": 1,
+        "x": 389.796,
+        "y": 546.541
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3521.1.line.15_building_identification_number_col_a",
+      "label": "Line 15. B I N, (a) Building 1.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. B I N, (a) Building 1",
+      "position": {
+        "page": 1,
+        "x": 296.695,
+        "y": 522.531
+      }
+    },
+    {
+      "fieldId": "form-3521.1.line.15_building_identification_number_col_b",
+      "label": "Line 15. B I N, (b) Building 2.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. B I N, (b) Building 2",
+      "position": {
+        "page": 1,
+        "x": 389.796,
+        "y": 522.531
+      }
+    },
+    {
+      "fieldId": "form-3521.1.line.16_eligible_basis_col_a",
+      "label": "Line 16. Eligible basis of building. See General Information C, (a) Building 1.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. Eligible basis of building. See General Information C, (a) Building 1",
+      "position": {
+        "page": 1,
+        "x": 296.695,
+        "y": 498.544
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.1.line.16_eligible_basis_col_b",
+      "label": "Line 16. Eligible basis of building. See General Information C, (b) Building 2.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. Eligible basis of building. See General Information C, (b) Building 2",
+      "position": {
+        "page": 1,
+        "x": 389.796,
+        "y": 498.544
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.1.line.16_eligible_basis_col_c",
+      "label": "Line 16. Eligible basis of building. See General Information C, (c) Total.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. Eligible basis of building. See General Information C, (c) Total",
+      "position": {
+        "page": 1,
+        "x": 483.895,
+        "y": 498.544
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.1.line.17_low_income_portion_col_a",
+      "label": "Line 17. Low-income portion (lesser of unit percentage or floor-space percentage). See instructions, (a) Building 1.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. Low-income portion (lesser of unit percentage or floor-space percentage). See instructions, (a) Building 1",
+      "position": {
+        "page": 1,
+        "x": 296.695,
+        "y": 462.524
+      }
+    },
+    {
+      "fieldId": "form-3521.1.line.17_low_income_portion_col_b",
+      "label": "Line 17. Low-income portion (lesser of unit percentage or floor-space percentage). See instructions, (b) Building 2.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. Low-income portion (lesser of unit percentage or floor-space percentage). See instructions, (b) Building 2",
+      "position": {
+        "page": 1,
+        "x": 389.796,
+        "y": 462.524
+      }
+    },
+    {
+      "fieldId": "form-3521.1.line.18_qualified_basis_col_a",
+      "label": "Line 18. Qualified basis of low-income building. Multiply line 16 by line 17, (a) Building 1.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. Qualified basis of low-income building. Multiply line 16 by line 17, (a) Building 1",
+      "position": {
+        "page": 1,
+        "x": 296.695,
+        "y": 426.524
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.1.line.18_qualified_basis_col_b",
+      "label": "Line 18. Qualified basis of low-income building. Multiply line 16 by line 17, (b) Building 2.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. Qualified basis of low-income building. Multiply line 16 by line 17, (b) Building 2",
+      "position": {
+        "page": 1,
+        "x": 389.796,
+        "y": 426.524
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.1.line.19_applicable_percentage_col_a",
+      "label": "Line 19. Applicable percentage. See General Information B, (a) Building 1.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. Applicable percentage. See General Information B, (a) Building 1",
+      "position": {
+        "page": 1,
+        "x": 296.695,
+        "y": 402.521
+      }
+    },
+    {
+      "fieldId": "form-3521.1.line.19_applicable_percentage_col_b",
+      "label": "Line 19. Applicable percentage. See General Information B, (b) Building 2.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. Applicable percentage. See General Information B, (b) Building 2",
+      "position": {
+        "page": 1,
+        "x": 389.796,
+        "y": 402.521
+      }
+    },
+    {
+      "fieldId": "form-3521.1.line.20_qualified_basis_times_percentage_col_a",
+      "label": "Line 20. Multiply line 18 by line 19. See Specific Line Instructions for Part I, line 2, (a) Building 1.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. Multiply line 18 by line 19. See Specific Line Instructions for Part I, line 2, (a) Building 1",
+      "position": {
+        "page": 1,
+        "x": 296.695,
+        "y": 366.537
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.1.line.20_qualified_basis_times_percentage_col_b",
+      "label": "Line 20. Multiply line 18 by line 19. See Specific Line Instructions for Part I, line 2, (b) Building 2.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. Multiply line 18 by line 19. See Specific Line Instructions for Part I, line 2, (b) Building 2",
+      "position": {
+        "page": 1,
+        "x": 389.796,
+        "y": 366.537
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3521.1.line.20_qualified_basis_times_percentage_col_c",
+      "label": "Line 20. Multiply line 18 by line 19. See Specific Line Instructions for Part I, line 2, (c) Total.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. Multiply line 18 by line 19. See Specific Line Instructions for Part I, line 2, (c) Total",
+      "position": {
+        "page": 1,
+        "x": 483.895,
+        "y": 366.537
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3521/blank.pdf",
+    "ingestedAt": "2026-11-28T04:29:08.393Z",
+    "totalFields": 57,
+    "skipped": 0,
+    "catalogEntries": 57
+  }
+}

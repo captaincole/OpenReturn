@@ -1,0 +1,757 @@
+{
+  "form": {
+    "formId": "form-3568",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "Alternative Identifying Information for the Dependent Exemption Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3568.0.header.taxable_year",
+      "label": "TAXABLE YEAR (yyyy).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "TAXABLE YEAR (yyyy)",
+      "position": {
+        "page": 0,
+        "x": 37.4194,
+        "y": 727.208
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-3568.0.header.taxpayer_name",
+      "label": "Name(s) as shown on tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on tax return",
+      "position": {
+        "page": 0,
+        "x": 36.1556,
+        "y": 682.294
+      }
+    },
+    {
+      "fieldId": "form-3568.0.header.ssn",
+      "label": "Your S S N or I T I N (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Your S S N or I T I N (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 408.905,
+        "y": 682.3
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3568.0.line.1_dependent_relationship",
+      "label": "Part I, Line 1. Dependent's relationship to you.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Line 1. Dependent's relationship to you",
+      "position": {
+        "page": 0,
+        "x": 491.239,
+        "y": 657.633
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.2a_resident_mexico_or_canada",
+      "label": "Line 2a — Was the dependent a resident of Mexico or Canada for the taxable year that you are requesting to claim the dependent exemption credit?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 2a. Was the dependent a resident of Mexico or Canada for the taxable year that you are requesting to claim the dependent exemption credit? (If yes, go to question 2b. If no, stop here, you do not qualify to use this form, and you must use a federal I T I N or S S N when claiming the dependent exemption credit.)",
+      "position": {
+        "page": 0,
+        "x": 489.967,
+        "y": 622.618
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.2b_eligible_for_itin_or_ssn",
+      "label": "Line 2b — Is the dependent eligible to receive or renew a federal ITIN or SSN?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 2b. Is the dependent eligible to receive or renew a federal I T I N or S S N? (If no, go to Part II. If yes, stop here, you do not qualify to use this form, and you must use an I T I N or S S N when claiming the dependent exemption credit.)",
+      "position": {
+        "page": 0,
+        "x": 489.966,
+        "y": 597.643
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes.",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No.",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_first_name",
+      "label": "Part II, Line 3. First name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, Line 3. First name",
+      "position": {
+        "page": 0,
+        "x": 46.7641,
+        "y": 546.12
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_middle_name",
+      "label": "Line 3. Middle name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Middle name",
+      "position": {
+        "page": 0,
+        "x": 220.838,
+        "y": 546.12
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_last_name",
+      "label": "Line 3. Last name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Last name",
+      "position": {
+        "page": 0,
+        "x": 352.033,
+        "y": 546.12
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_suffix",
+      "label": "Line 3. Suffix.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Suffix",
+      "position": {
+        "page": 0,
+        "x": 519.109,
+        "y": 546.12
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_date_of_birth",
+      "label": "Line 3. Date of birth (DOB) (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Date of birth (DOB) (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 47.972,
+        "y": 522.12
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_sex",
+      "label": "Line 3 — Identifiable information. Check the box: Male or Female",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Line 3. Check the box",
+      "position": {
+        "page": 0,
+        "x": 279.581,
+        "y": 524.578
+      },
+      "options": [
+        {
+          "value": "male",
+          "radioOption": "Male.",
+          "label": "Male"
+        },
+        {
+          "value": "female",
+          "radioOption": "Female.",
+          "label": "Female"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_country_of_birth",
+      "label": "Line 3. Country of birth.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Country of birth",
+      "position": {
+        "page": 0,
+        "x": 48.9083,
+        "y": 498.501
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_birth_city",
+      "label": "Line 3. City (optional).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. City (optional)",
+      "position": {
+        "page": 0,
+        "x": 222.939,
+        "y": 498.501
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_birth_state",
+      "label": "Line 3. 2 letter state abbreviation (optional).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. 2 letter state abbreviation (optional)",
+      "position": {
+        "page": 0,
+        "x": 352.982,
+        "y": 498.501
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3568.0.line.3_dependent_birth_province",
+      "label": "Line 3. Province (optional).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Province (optional)",
+      "position": {
+        "page": 0,
+        "x": 479.621,
+        "y": 498.501
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.4_birth_first_name",
+      "label": "Line 4. First name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. First name",
+      "position": {
+        "page": 0,
+        "x": 46.9612,
+        "y": 462.501
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.4_birth_middle_name",
+      "label": "Line 4. Middle name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Middle name",
+      "position": {
+        "page": 0,
+        "x": 220.487,
+        "y": 462.501
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.4_birth_last_name",
+      "label": "Line 4. Last name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Last name",
+      "position": {
+        "page": 0,
+        "x": 352.361,
+        "y": 462.501
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.4_birth_suffix",
+      "label": "Line 4. Suffix.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Suffix",
+      "position": {
+        "page": 0,
+        "x": 519.284,
+        "y": 462.501
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-3568.0.line.5_us_mailing_street",
+      "label": "Line 5. Street address (number and street) or P O box.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Street address (number and street) or P O box",
+      "position": {
+        "page": 0,
+        "x": 47.9648,
+        "y": 426.112
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.5_us_mailing_apartment",
+      "label": "Line 5. Apartment number/ Suite number.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Apartment number/ Suite number",
+      "position": {
+        "page": 0,
+        "x": 423.674,
+        "y": 426.112
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.5_us_mailing_private_mailbox",
+      "label": "Line 5. P M B/private mailbox.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. P M B/private mailbox",
+      "position": {
+        "page": 0,
+        "x": 519.208,
+        "y": 426.112
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-3568.0.line.5_us_mailing_city",
+      "label": "Line 5. City.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. City",
+      "position": {
+        "page": 0,
+        "x": 47.1674,
+        "y": 402.476
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.5_us_mailing_state",
+      "label": "Line 5. 2 letter state abbreviation.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. 2 letter state abbreviation",
+      "position": {
+        "page": 0,
+        "x": 479.674,
+        "y": 402.493
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3568.0.line.5_us_mailing_zip",
+      "label": "Line 5. ZIP code, maximum 9 digits.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. ZIP code, maximum 9 digits",
+      "position": {
+        "page": 0,
+        "x": 518.992,
+        "y": 402.476
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3568.0.line.6_foreign_street",
+      "label": "Line 6. Street address (number and street).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Street address (number and street)",
+      "position": {
+        "page": 0,
+        "x": 47.5279,
+        "y": 366.128
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.6_foreign_apartment",
+      "label": "Line 6. Apartment number/ Suite number.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Apartment number/ Suite number",
+      "position": {
+        "page": 0,
+        "x": 423.666,
+        "y": 366.112
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.6_foreign_city",
+      "label": "Line 6. City.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. City",
+      "position": {
+        "page": 0,
+        "x": 46.958,
+        "y": 342.105
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.6_foreign_country_name",
+      "label": "Line 6. Foreign country name. Enter only Mexico or Canada.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Foreign country name. Enter only Mexico or Canada",
+      "position": {
+        "page": 0,
+        "x": 46.4102,
+        "y": 318.604
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.6_foreign_province_state_county",
+      "label": "Line 6. Foreign province/state/county.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Foreign province/state/county",
+      "position": {
+        "page": 0,
+        "x": 221.911,
+        "y": 318.58
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.6_foreign_postal_code",
+      "label": "Line 6. Foreign postal code.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Foreign postal code",
+      "position": {
+        "page": 0,
+        "x": 423.439,
+        "y": 318.588
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3568.0.line.7_countries_of_citizenship",
+      "label": "Line 7. Country(ies) of citizenship.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Country(ies) of citizenship",
+      "position": {
+        "page": 0,
+        "x": 48.2636,
+        "y": 279.215
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.7_foreign_tax_id_number",
+      "label": "Line 7. Foreign tax I.D. number.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Foreign tax I.D. number",
+      "position": {
+        "page": 0,
+        "x": 323.682,
+        "y": 279.207
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.7_id_document_passport",
+      "label": "Line 7. Identification document(s) submitted (see instructions): Passport.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Line 7  Identification document(s) submitted (see instructions): Passport",
+      "position": {
+        "page": 0,
+        "x": 66.9249,
+        "y": 242.834
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.7_id_document_drivers_license",
+      "label": "Line 7. Identification document(s) submitted (see instructions): Driver's license/state I.D.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Line 7. Identification document(s) submitted (see instructions): Driver's license/state I.D",
+      "position": {
+        "page": 0,
+        "x": 142.916,
+        "y": 242.834
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.7_id_document_birth_certificate",
+      "label": "Line 7. Identification document(s) submitted (see instructions): Birth certificate.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Line 7 Identification document(s) submitted (see instructions): Birth certificate",
+      "position": {
+        "page": 0,
+        "x": 276.105,
+        "y": 242.834
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.7_id_document_uscis",
+      "label": "Line 7. Identification document(s) submitted (see instructions): U S C I S documentation.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Line 7 Identification document(s) submitted (see instructions): U S C I S documentation",
+      "position": {
+        "page": 0,
+        "x": 374.327,
+        "y": 242.834
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.7_id_document_other",
+      "label": "Line 7. Identification document(s) submitted (see instructions): Other.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Line 7 Identification document(s) submitted (see instructions): Other",
+      "position": {
+        "page": 0,
+        "x": 497.075,
+        "y": 242.834
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.7_id_document_issued_by",
+      "label": "Line 7. Issued by.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Issued by",
+      "position": {
+        "page": 0,
+        "x": 47.1907,
+        "y": 211.023
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.7_id_document_number",
+      "label": "Line 7. Identification number on document(s).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Identification number on document(s)",
+      "position": {
+        "page": 0,
+        "x": 214.154,
+        "y": 211.023
+      },
+      "maxLength": 16
+    },
+    {
+      "fieldId": "form-3568.0.line.7_id_document_expiration_date",
+      "label": "Line 7. Expiration date (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Expiration date (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 424.42,
+        "y": 211.023
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3568.0.line.7_school_or_company_name",
+      "label": "Line 7. Name of school/college/university/company.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Name of school/college/university/company",
+      "position": {
+        "page": 0,
+        "x": 49.8747,
+        "y": 184.099
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.7_school_or_company_city",
+      "label": "Line 7. City.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. City",
+      "position": {
+        "page": 0,
+        "x": 323.539,
+        "y": 184.101
+      }
+    },
+    {
+      "fieldId": "form-3568.0.line.7_school_or_company_state",
+      "label": "Line 7. 2 letter state abbreviation.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. 2 letter state abbreviation",
+      "position": {
+        "page": 0,
+        "x": 547.419,
+        "y": 184.093
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3568.0.signing.date_signed",
+      "label": "Signature date (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Signature date (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 409.917,
+        "y": 102.232
+      },
+      "maxLength": 10
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3568/blank.pdf",
+    "ingestedAt": "2026-11-28T04:31:25.330Z",
+    "totalFields": 46,
+    "skipped": 0,
+    "catalogEntries": 46
+  }
+}
